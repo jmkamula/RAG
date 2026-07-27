@@ -416,6 +416,136 @@ h1 { font-size: 1.8em; margin: 0 0 8px; letter-spacing: -0.02em; }
   padding: 10px 4px;
 }
 
+/* ── Cross-framework bridges panel ──────────────────────────────────── */
+.bridges-panel {
+  border: 2px solid #4a90a4;
+  background: #eaf5f9;
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 0 auto 32px;
+  max-width: 1000px;
+}
+.bridges-panel .consensus-title { color: #2c5866; }
+.bridges-dir {
+  margin: 8px 0;
+}
+.bridges-dir-label {
+  font-size: 0.72em;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.bridge-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 6px 10px;
+  margin: 4px 0;
+  background: #fff;
+  border-radius: 4px;
+  border-left: 3px solid #4a90a4;
+  font-size: 0.85em;
+}
+.edge-type {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.72em;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: #d4e8ef;
+  color: #2c5866;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  min-width: 100px;
+  text-align: center;
+}
+.bridge-target {
+  font-family: var(--mono);
+  font-weight: 600;
+  color: var(--fg);
+}
+.bridge-std {
+  font-size: 0.72em;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+.bridge-rationale {
+  color: #444;
+  font-style: italic;
+  font-size: 0.85em;
+  flex: 1;
+  min-width: 200px;
+}
+
+/* ── Signal weights cheatsheet ──────────────────────────────────────── */
+.weights-block {
+  background: #f5f5f7;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin: 32px auto;
+  max-width: 1000px;
+}
+.weights-title {
+  font-size: 0.9em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #333;
+  margin: 0 0 12px;
+}
+.weights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.weight-stack h4 {
+  font-size: 0.8em;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 8px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 4px;
+}
+.weight-row {
+  display: grid;
+  grid-template-columns: 120px 60px 1fr;
+  gap: 8px;
+  align-items: baseline;
+  padding: 4px 0;
+  font-size: 0.85em;
+}
+.weight-name {
+  font-family: var(--mono);
+  font-weight: 600;
+  color: var(--fg);
+}
+.weight-val {
+  font-family: var(--mono);
+  font-weight: 700;
+  text-align: right;
+}
+.weight-val.pos { color: #0f7b3a; }
+.weight-val.neg { color: #b0303f; }
+.weight-val.dyn { color: #7a5cbe; }
+.weight-note {
+  color: var(--muted);
+  font-size: 0.82em;
+  font-style: italic;
+}
+.thresh-row {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+  font-size: 0.82em;
+  color: #555;
+  font-family: var(--mono);
+}
+
 /* ── Footer ─────────────────────────────────────────────────────────── */
 .footer {
   margin-top: 60px;
@@ -482,6 +612,42 @@ def _chat_artifacts(control_ref: str) -> dict:
     ]
 
     return {'intent_phrases': intents, 'topic_phrases': topics}
+
+
+def _bridge_edges(driver, control_ref: str, standard_id: str) -> dict:
+    """Query Neo4j for cross-framework bridge edges involving this control.
+    Returns edges grouped by direction (outbound / inbound) and type."""
+    with driver.session() as s:
+        rows = s.run("""
+            MATCH (a:RequirementNode {ref: $r, standard_id: $s})
+                  -[e:DEMONSTRATES|IMPLEMENTS|SUPPORTS|ENABLES|GOVERNANCE|BLOCKS_WHEN]-(b:RequirementNode)
+            RETURN type(e) AS edge,
+                   startNode(e).ref AS src_ref, startNode(e).standard_id AS src_std,
+                   endNode(e).ref   AS tgt_ref, endNode(e).standard_id   AS tgt_std,
+                   e.rationale AS rationale
+            ORDER BY edge, tgt_ref
+        """, r=control_ref, s=standard_id).data()
+
+    outbound: list[dict] = []
+    inbound: list[dict] = []
+    seen: set = set()
+    for row in rows:
+        # Direction relative to our control
+        is_outbound = (row['src_ref'] == control_ref and row['src_std'] == standard_id)
+        other_ref = row['tgt_ref'] if is_outbound else row['src_ref']
+        other_std = row['tgt_std'] if is_outbound else row['src_std']
+        key = (row['edge'], is_outbound, other_ref, other_std)
+        if key in seen:
+            continue
+        seen.add(key)
+        entry = {
+            'edge':       row['edge'],
+            'other_ref':  other_ref,
+            'other_std':  other_std,
+            'rationale':  row.get('rationale') or '',
+        }
+        (outbound if is_outbound else inbound).append(entry)
+    return {'outbound': outbound, 'inbound': inbound}
 
 
 def _intake_artifacts(control_ref: str, leaf_ids: list[str]) -> dict:
@@ -831,6 +997,111 @@ def render(control_ref: str, standard_id: str, out_path: str) -> None:
       </div>
     '''
 
+    # ── Cross-framework bridges panel ─────────────────────────────────
+    # Re-open driver briefly for the bridge query. Cheap enough.
+    _drv = GraphDatabase.driver(
+        os.getenv("NEO4J_URI"),
+        auth=(os.getenv("NEO4J_USER"), os.getenv("NEO4J_PASSWORD")),
+    )
+    try:
+        bridges = _bridge_edges(_drv, control_ref, standard_id)
+    finally:
+        _drv.close()
+
+    def render_bridge_dir(entries, label):
+        if not entries:
+            return ""
+        rows = []
+        for b in entries:
+            std_short = (b['other_std'] or '').split(':')[0]
+            rat = b.get('rationale') or ''
+            rows.append(
+                f'<div class="bridge-row">'
+                f'<span class="edge-type">{esc(b["edge"])}</span>'
+                f'<span class="bridge-target">{esc(b["other_ref"])}</span>'
+                f'<span class="bridge-std">({esc(std_short)})</span>'
+                f'<span class="bridge-rationale">{esc(rat[:180])}</span>'
+                f'</div>'
+            )
+        return f'''
+        <div class="bridges-dir">
+          <div class="bridges-dir-label">{esc(label)} ({len(entries)})</div>
+          {"".join(rows)}
+        </div>
+        '''
+
+    def render_bridges_panel():
+        n_out = len(bridges['outbound'])
+        n_in  = len(bridges['inbound'])
+        if n_out == 0 and n_in == 0:
+            return ""
+        return f'''
+        <div class="bridges-panel">
+          <div class="consensus-title">🔗 Cross-framework bridges — role-model edges</div>
+          <div class="consensus-sub">Neo4j curated edges (Ship 40 framework role model + Ship 15 rationale
+            text). Drives DEMONSTRATES posture propagation and cross-framework citation footers in chat.</div>
+          {render_bridge_dir(bridges['outbound'], f'Outbound from {control_ref}')}
+          {render_bridge_dir(bridges['inbound'],  f'Inbound to {control_ref}')}
+        </div>
+        '''
+
+    bridges_html = render_bridges_panel()
+
+    # ── Signal weights cheatsheet ─────────────────────────────────────
+    def render_weights():
+        chat_weights = [
+            ("explicit_ref",   "1.00", "pos", "Signal B — user typed the ref"),
+            ("curated_lexicon","1.00", "pos", "Signal C — CLEAR_INTENT_PHRASES + DOCUMENT_TOPIC_MAP"),
+            ("retrieval",      "≈0.35-0.70", "dyn", "Signal A — Chroma cosine"),
+            ("framework_hint", "0.20", "pos", "Signal F — 'GDPR' / 'ISO 27001' in query"),
+            ("posture_boost",  "0.15", "pos", "Signal D — NC/OFI relevance boost"),
+            ("session_context","0.10", "pos", "Signal G — deictic follow-up carrying refs"),
+            ("graph_tightness","±0.05-0.10", "dyn", "Signal E — family clustering modifier"),
+        ]
+        intake_weights = [
+            ("explicit_ref",   "1.00", "pos", "doc verbatim cites the ref"),
+            ("doc_mappings",   "0.60", "pos", "curator-authored filename → leaf map"),
+            ("fingerprint",    "0.50", "pos", "Ship 28/29 exact-token-set catalog"),
+            ("must_semantic",  "0.30", "pos", "Chroma embedding top-K on MUST text"),
+            ("bm25",           "0.25", "pos", "Ship 43 lexical relevance (rank_bm25)"),
+            ("per_protocol",   "0.10", "pos", "per-standard Chroma retrieval"),
+            ("semantic_fit",   "±0.30","dyn", "post-fingerprint cosine gate (pass / fail)"),
+            ("content_shape",  "-0.50","neg", "sentence looks like a field/header"),
+            ("evidence_uniq",  "-0.50","neg", "cross-candidate anti-multi-attribution"),
+        ]
+        def rows_html(weights):
+            return "".join(
+                f'<div class="weight-row">'
+                f'<span class="weight-name">{esc(n)}</span>'
+                f'<span class="weight-val {sign}">{esc(v)}</span>'
+                f'<span class="weight-note">{esc(note)}</span>'
+                f'</div>'
+                for (n, v, sign, note) in weights
+            )
+        return f'''
+        <div class="weights-block">
+          <div class="weights-title">Signal weights cheatsheet</div>
+          <div class="weights-grid">
+            <div class="weight-stack">
+              <h4>💬 Chat consensus (7 signals)</h4>
+              {rows_html(chat_weights)}
+              <div class="thresh-row">
+                accept: score ≥ 0.75 AND ≥ 2 corroborators · else LLM gatekeeper decides
+              </div>
+            </div>
+            <div class="weight-stack">
+              <h4>📄 Intake consensus (9 signals)</h4>
+              {rows_html(intake_weights)}
+              <div class="thresh-row">
+                accept_floor 0.75 · arbiter_floor 0.40 · min_corroborators 2
+              </div>
+            </div>
+          </div>
+        </div>
+        '''
+
+    weights_html = render_weights()
+
     doc = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -852,6 +1123,7 @@ def render(control_ref: str, standard_id: str, out_path: str) -> None:
   <div class="legend-item"><span class="legend-swatch" style="background:#fffbe6;border-color:#e0b74c"></span> Fingerprint token-set (extraction keyword catalog)</div>
   <div class="legend-item"><span class="legend-swatch" style="background:#f4f0fa;border-color:#7a5cbe"></span> Chat consensus artifact</div>
   <div class="legend-item"><span class="legend-swatch" style="background:#fdf5eb;border-color:#cc7a1a"></span> Intake consensus artifact</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:#eaf5f9;border-color:#4a90a4"></span> Cross-framework bridge</div>
 </div>
 
 <div class="tree">
@@ -867,9 +1139,13 @@ def render(control_ref: str, standard_id: str, out_path: str) -> None:
 
   {consensus_row_html}
 
+  {bridges_html}
+
   <div class="leaves">
     {leaves_html}
   </div>
+
+  {weights_html}
 </div>
 
 <div class="footer">
