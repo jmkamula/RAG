@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>A.5.15 — Access control</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root {
+  --fg: #1a1a1a;
+  --muted: #666;
+  --accent: #1c76fc;
+  --accent-soft: #eaf2ff;
+  --leaf-fill: #f0f7ea;
+  --leaf-border: #6aa84f;
+  --must-fill: #fff;
+  --must-border: #b0b0b0;
+  --should-fill: #fafafa;
+  --should-border: #d0d0d0;
+  --should-fg: #555;
+  --border: #d0d0d0;
+  --line: #999;
+  --code-bg: #f5f5f7;
+  --mono: "SF Mono", Menlo, "Cascadia Code", monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--fg);
+  margin: 0;
+  padding: 24px 32px;
+  background: #fafafa;
+}
+h1 { font-size: 1.8em; margin: 0 0 8px; letter-spacing: -0.02em; }
+.subtitle { color: var(--muted); font-size: 0.85em; margin-bottom: 24px; }
+.legend {
+  display: flex;
+  gap: 20px;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 16px 0 32px;
+  padding: 10px 14px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.legend-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1.5px solid;
+}
+
+/* ── Control (root) ─────────────────────────────────────────────────── */
+.tree { padding: 20px 0; }
+.control-node {
+  background: var(--accent);
+  color: #fff;
+  padding: 16px 22px;
+  border-radius: 8px;
+  margin: 0 auto 40px;
+  max-width: 480px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(28, 118, 252, 0.15);
+}
+.control-node .ref {
+  font-family: var(--mono);
+  font-size: 1.3em;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.control-node .title {
+  font-size: 1.05em;
+  font-weight: 600;
+  margin-top: 4px;
+}
+.control-node .std {
+  font-size: 0.8em;
+  opacity: 0.85;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+.control-node .obligation {
+  font-size: 0.85em;
+  font-weight: 400;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.25);
+  text-align: left;
+  color: rgba(255,255,255,0.95);
+  font-style: italic;
+}
+.control-node .spec {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.72em;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.15);
+  margin-top: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── Connecting line control → leaves ───────────────────────────────── */
+.control-to-leaves {
+  position: relative;
+  height: 30px;
+  margin-top: -20px;
+}
+.control-to-leaves::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--line);
+}
+
+/* ── Leaves row ─────────────────────────────────────────────────────── */
+.leaves {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 8px;
+}
+.leaf {
+  background: var(--leaf-fill);
+  border: 2px solid var(--leaf-border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  position: relative;
+}
+.leaf::before {
+  /* connecting bar from control */
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  width: 2px;
+  height: 10px;
+  background: var(--line);
+}
+.leaf-header {
+  border-bottom: 1px dashed var(--leaf-border);
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+.leaf-id {
+  font-family: var(--mono);
+  font-size: 0.72em;
+  color: #4a7f37;
+  word-break: break-all;
+}
+.leaf-title {
+  font-weight: 600;
+  font-size: 1em;
+  color: #2c5820;
+  margin-top: 3px;
+}
+.leaf-meta {
+  font-size: 0.72em;
+  color: var(--muted);
+  margin-top: 4px;
+  font-family: var(--mono);
+}
+
+/* ── MUSTs + SHOULDs ────────────────────────────────────────────────── */
+.checklist-group {
+  margin-top: 10px;
+}
+.group-label {
+  font-size: 0.7em;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.ci {
+  padding: 6px 10px;
+  margin: 4px 0;
+  border-radius: 3px;
+  font-size: 0.85em;
+  line-height: 1.35;
+}
+.ci-must {
+  background: var(--must-fill);
+  border-left: 3px solid var(--must-border);
+}
+.ci-should {
+  background: var(--should-fill);
+  border-left: 3px dashed var(--should-border);
+  color: var(--should-fg);
+}
+.ci-id {
+  font-family: var(--mono);
+  font-size: 0.75em;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 2px;
+}
+.ci-text { display: block; }
+
+/* ── Fingerprints ───────────────────────────────────────────────────── */
+.fp-block {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--leaf-border);
+}
+.fp-group-label {
+  font-size: 0.7em;
+  color: #7a5e00;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.fp-must {
+  margin: 4px 0 8px;
+  padding: 6px 10px;
+  background: #fffbe6;
+  border-left: 3px solid #e0b74c;
+  border-radius: 3px;
+  font-size: 0.82em;
+}
+.fp-must-id {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  color: #7a5e00;
+  display: block;
+  margin-bottom: 4px;
+}
+.fp-sets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.fp-tokens {
+  display: inline-flex;
+  gap: 3px;
+  padding: 2px 6px;
+  background: #fff;
+  border: 1px solid #e0b74c;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 0.75em;
+  color: #5c4200;
+}
+.fp-token {
+  padding: 0 2px;
+}
+.fp-token + .fp-token::before {
+  content: "+";
+  color: #b58a20;
+  margin-right: 3px;
+}
+.fp-empty {
+  font-size: 0.75em;
+  color: var(--muted);
+  font-style: italic;
+  padding: 4px 10px;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────── */
+.footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.82em;
+  text-align: center;
+}
+code {
+  background: var(--code-bg);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 0.85em;
+}
+a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<h1>A.5.15 — Access control</h1>
+<p class="subtitle">ISO 27001:2022 · curation-graph view · 4 leaves · 20 MUSTs · 8 SHOULDs</p>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--accent);border-color:var(--accent)"></span> Control (RequirementNode)</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--leaf-fill);border-color:var(--leaf-border)"></span> Leaf (EvidenceRequirement)</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--must-fill);border-color:var(--must-border);border-style:solid"></span> MUST (mandatory)</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--should-fill);border-color:var(--should-border);border-style:dashed"></span> SHOULD (recommended)</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:#fffbe6;border-color:#e0b74c"></span> Fingerprint token-set (extraction keyword catalog)</div>
+</div>
+
+<div class="tree">
+  <div class="control-node">
+    <div class="ref">A.5.15</div>
+    <div class="title">Access control</div>
+    <div class="std">ISO 27001:2022</div>
+    <div class="obligation">To ensure authorized access and to prevent unauthorized access to information and other associated assets. Owners of information and other associated assets should determine information security and business requirements related to access control. A topic-specific policy on access control should be defined which takes account of these requirements and should be communicated to all relevant…</div>
+    <div class="spec">Spec op=ALL · requires ALL 4 leaves</div>
+  </div>
+
+  <div class="control-to-leaves"></div>
+
+  <div class="leaves">
+    
+        <div class="leaf">
+          <div class="leaf-header">
+            <div class="leaf-id">req:A.5.15:access_control_policy</div>
+            <div class="leaf-title">Access Control Policy</div>
+            <div class="leaf-meta">type=policy · freshness=none</div>
+          </div>
+          <div class="checklist-group">
+            <div class="group-label">MUSTs (7)</div>
+            <div class="ci ci-must"><span class="ci-id">item:A.5.15:authorisation</span><span class="ci-text">Authorisation rules — who can authorise access at which level (cross-link to A.5.18 procedure)</span></div>
+<div class="ci ci-must"><span class="ci-id">item:A.5.15:least_privilege</span><span class="ci-text">Principle of least privilege stated</span></div>
+<div class="ci ci-must"><span class="ci-id">item:A.5.15:logical_rules</span><span class="ci-text">Logical access rules (systems, applications, network segments)</span></div>
+<div class="ci ci-must"><span class="ci-id">item:A.5.15:need_to_know</span><span class="ci-text">Principle of need-to-know stated</span></div>
+<div class="ci ci-must"><span class="ci-id">item:A.5.15:physical_rules</span><span class="ci-text">Physical access rules (premises, server rooms, restricted areas)</span></div>
+<div class="ci ci-must"><span class="ci-id">item:A.5.15:rbac</span><span class="ci-text">Role-based access control as the default model with stated exceptions (attribute-based, individual grants)</span></div>
+<div class="ci ci-must"><span class="ci-id">item:A.5.15:segregation_link</span><span class="ci-text">Cross-link to A.5.3 segregation of duties — access decisions respect documented separation</span></div>
+          </div>
+          <div class="checklist-group">
+            <div class="group-label">SHOULDs (3)</div>
+            <div class="ci ci-should"><span class="ci-id">item:A.5.15:emergency_access</span><span class="ci-text">Emergency / break-glass access provisions (with mandatory after-the-fact justification)</span></div>
+<div class="ci ci-should"><span class="ci-id">item:A.5.15:review_cadence</span><span class="ci-text">Periodic access review cadence stated (typically quarterly for privileged, annual otherwise — link to A.5.18)</span></div>
+<div class="ci ci-should"><span class="ci-id">item:A.5.15:third_party</span><span class="ci-text">Third-party / contractor access rules referenced (link to A.5.19 supplier relationships)</span></div>
+          </div>
+          
+          <div class="fp-block">
+            <div class="fp-group-label">FINGERPRINTS (7/10 MUSTs+SHOULDs covered)</div>
+            <div class="fp-must"><span class="fp-must-id">item:A.5.15:authorisation</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">authorisation</span><span class="fp-token">rules</span></span><span class="fp-tokens"><span class="fp-token">A.5.18</span></span><span class="fp-tokens"><span class="fp-token">who</span><span class="fp-token">authorises</span><span class="fp-token">access</span></span><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">authority</span><span class="fp-token">rules</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:least_privilege</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">least</span><span class="fp-token">privilege</span><span class="fp-token">principle</span></span><span class="fp-tokens"><span class="fp-token">minimum</span><span class="fp-token">privilege</span></span><span class="fp-tokens"><span class="fp-token">least</span><span class="fp-token">privilege</span><span class="fp-token">access</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:logical_rules</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">logical</span><span class="fp-token">access</span><span class="fp-token">rules</span></span><span class="fp-tokens"><span class="fp-token">system</span><span class="fp-token">access</span><span class="fp-token">rules</span></span><span class="fp-tokens"><span class="fp-token">application</span><span class="fp-token">access</span><span class="fp-token">rules</span></span><span class="fp-tokens"><span class="fp-token">network</span><span class="fp-token">segment</span><span class="fp-token">access</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:need_to_know</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">need</span><span class="fp-token">to</span><span class="fp-token">know</span><span class="fp-token">principle</span></span><span class="fp-tokens"><span class="fp-token">need</span><span class="fp-token">to</span><span class="fp-token">know</span><span class="fp-token">basis</span></span><span class="fp-tokens"><span class="fp-token">need</span><span class="fp-token">to</span><span class="fp-token">know</span><span class="fp-token">access</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:physical_rules</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">physical</span><span class="fp-token">access</span><span class="fp-token">rules</span></span><span class="fp-tokens"><span class="fp-token">premises</span><span class="fp-token">access</span><span class="fp-token">rules</span></span><span class="fp-tokens"><span class="fp-token">server</span><span class="fp-token">room</span><span class="fp-token">access</span></span><span class="fp-tokens"><span class="fp-token">restricted</span><span class="fp-token">area</span><span class="fp-token">access</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:rbac</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">role</span><span class="fp-token">based</span><span class="fp-token">access</span><span class="fp-token">control</span></span><span class="fp-tokens"><span class="fp-token">rbac</span><span class="fp-token">default</span></span><span class="fp-tokens"><span class="fp-token">abac</span><span class="fp-token">exception</span></span><span class="fp-tokens"><span class="fp-token">attribute</span><span class="fp-token">based</span><span class="fp-token">access</span><span class="fp-token">exception</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:segregation_link</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">A.5.3</span></span><span class="fp-tokens"><span class="fp-token">segregation</span><span class="fp-token">of</span><span class="fp-token">duties</span></span><span class="fp-tokens"><span class="fp-token">sod</span><span class="fp-token">principle</span></span><span class="fp-tokens"><span class="fp-token">separation</span><span class="fp-token">of</span><span class="fp-token">duties</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:emergency_access</span><span class="fp-empty">no fingerprint entry</span></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:review_cadence</span><span class="fp-empty">no fingerprint entry</span></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:third_party</span><span class="fp-empty">no fingerprint entry</span></div>
+          </div>
+        
+        </div>
+        
+
+        <div class="leaf">
+          <div class="leaf-header">
+            <div class="leaf-id">req:A.5.15:communication_record</div>
+            <div class="leaf-title">Access Control Policy Communication Record</div>
+            <div class="leaf-meta">type=communication_record · freshness=none</div>
+          </div>
+          <div class="checklist-group">
+            <div class="group-label">MUSTs (5)</div>
+            <div class="ci ci-must"><span class="ci-id">item:A.5.15:comm_audience</span><span class="ci-text">Audience reached (decision-makers — managers, system owners, IT admins — plus all access-holders)</span></div>
+<div class="ci ci-must"><span class="ci-id">item:A.5.15:comm_channel</span><span class="ci-text">Channel used (manager briefing, IT admin training, intranet publication)</span></div>
+<div class="ci ci-must"><span class="ci-id">item:A.5.15:comm_date</span><span class="ci-text">Date of publication/communication</span></div>
+<div class="ci ci-must"><span class="ci-id">item:A.5.15:comm_decision_makers</span><span class="ci-text">Decision-maker awareness specifically captured (manager training, system-owner briefing)</span></div>
+<div class="ci ci-must"><span class="ci-id">item:A.5.15:comm_onboarding</span><span class="ci-text">Onboarding coverage — new managers and admins receive the policy as part of role induction</span></div>
+          </div>
+          <div class="checklist-group">
+            <div class="group-label">SHOULDs (2)</div>
+            <div class="ci ci-should"><span class="ci-id">item:A.5.15:comm_a518_link</span><span class="ci-text">Tie-in with A.5.18 provisioning training — decision-makers know both the rules and the workflow</span></div>
+<div class="ci ci-should"><span class="ci-id">item:A.5.15:comm_refresh</span><span class="ci-text">Periodic refresher referenced (annual at minimum)</span></div>
+          </div>
+          
+          <div class="fp-block">
+            <div class="fp-group-label">FINGERPRINTS (5/7 MUSTs+SHOULDs covered)</div>
+            <div class="fp-must"><span class="fp-must-id">item:A.5.15:comm_audience</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">audience</span></span><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">distributed</span><span class="fp-token">to</span></span><span class="fp-tokens"><span class="fp-token">managers</span><span class="fp-token">system</span><span class="fp-token">owners</span><span class="fp-token">audience</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:comm_channel</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">manager</span><span class="fp-token">briefing</span></span><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">admin</span><span class="fp-token">training</span></span><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">intranet</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:comm_date</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">control</span><span class="fp-token">policy</span><span class="fp-token">communicated</span><span class="fp-token">True</span></span><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">published</span><span class="fp-token">True</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:comm_decision_makers</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">manager</span><span class="fp-token">training</span><span class="fp-token">access</span></span><span class="fp-tokens"><span class="fp-token">system</span><span class="fp-token">owner</span><span class="fp-token">briefing</span><span class="fp-token">access</span></span><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">decision</span><span class="fp-token">maker</span><span class="fp-token">awareness</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:comm_onboarding</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">new</span><span class="fp-token">manager</span><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">induction</span></span><span class="fp-tokens"><span class="fp-token">admin</span><span class="fp-token">induction</span><span class="fp-token">access</span><span class="fp-token">policy</span></span><span class="fp-tokens"><span class="fp-token">role</span><span class="fp-token">induction</span><span class="fp-token">access</span><span class="fp-token">policy</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:comm_a518_link</span><span class="fp-empty">no fingerprint entry</span></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:comm_refresh</span><span class="fp-empty">no fingerprint entry</span></div>
+          </div>
+        
+        </div>
+        
+
+        <div class="leaf">
+          <div class="leaf-header">
+            <div class="leaf-id">req:A.5.15:management_approval</div>
+            <div class="leaf-title">Management Approval of the Access Control Policy</div>
+            <div class="leaf-meta">type=approval · freshness=none</div>
+          </div>
+          <div class="checklist-group">
+            <div class="group-label">MUSTs (3)</div>
+            <div class="ci ci-must"><span class="ci-id">item:A.5.15:approval_date</span><span class="ci-text">Approval date recorded</span></div>
+<div class="ci ci-must"><span class="ci-id">item:A.5.15:approval_signatory</span><span class="ci-text">Signatory at appropriate management level (typically CISO with IT / business endorsement)</span></div>
+<div class="ci ci-must"><span class="ci-id">item:A.5.15:approval_target</span><span class="ci-text">Reference to the specific version of the access control policy being approved</span></div>
+          </div>
+          <div class="checklist-group">
+            <div class="group-label">SHOULDs (1)</div>
+            <div class="ci ci-should"><span class="ci-id">item:A.5.15:approval_authority</span><span class="ci-text">Statement of the signatory&#x27;s authority (delegation chain if not top-management)</span></div>
+          </div>
+          
+          <div class="fp-block">
+            <div class="fp-group-label">FINGERPRINTS (3/4 MUSTs+SHOULDs covered)</div>
+            <div class="fp-must"><span class="fp-must-id">item:A.5.15:approval_date</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">approved</span><span class="fp-token">True</span></span><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">signed</span><span class="fp-token">True</span></span><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">approval</span><span class="fp-token">date</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:approval_signatory</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">signed</span><span class="fp-token">by</span><span class="fp-token">ciso</span></span><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">approved</span><span class="fp-token">by</span></span><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">signatory</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:approval_target</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">version</span><span class="fp-token">approved</span></span><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">version</span><span class="fp-token">ref</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:approval_authority</span><span class="fp-empty">no fingerprint entry</span></div>
+          </div>
+        
+        </div>
+        
+
+        <div class="leaf">
+          <div class="leaf-header">
+            <div class="leaf-id">req:A.5.15:periodic_review</div>
+            <div class="leaf-title">Periodic Access Control Policy Review</div>
+            <div class="leaf-meta">type=review_record · freshness=365d</div>
+          </div>
+          <div class="checklist-group">
+            <div class="group-label">MUSTs (5)</div>
+            <div class="ci ci-must"><span class="ci-id">item:A.5.15:review_a518_link</span><span class="ci-text">A.5.18 provisioning procedure cross-checked for alignment with policy changes</span></div>
+<div class="ci ci-must"><span class="ci-id">item:A.5.15:review_date</span><span class="ci-text">Review date within the planned interval</span></div>
+<div class="ci ci-must"><span class="ci-id">item:A.5.15:review_estate</span><span class="ci-text">Estate-alignment check — new systems / cloud services added since last review reflected in policy</span></div>
+<div class="ci ci-must"><span class="ci-id">item:A.5.15:review_outcome</span><span class="ci-text">Outcome captured (no change / amended / re-issued) with rationale per amendment</span></div>
+<div class="ci ci-must"><span class="ci-id">item:A.5.15:review_reviewer</span><span class="ci-text">Reviewer identity and role (typically CISO with IT and identity-management input)</span></div>
+          </div>
+          <div class="checklist-group">
+            <div class="group-label">SHOULDs (2)</div>
+            <div class="ci ci-should"><span class="ci-id">item:A.5.15:review_next_date</span><span class="ci-text">Next planned review date stated</span></div>
+<div class="ci ci-should"><span class="ci-id">item:A.5.15:review_triggers</span><span class="ci-text">Ad-hoc triggers listed (M&amp;A, new identity provider, major SaaS adoption, access-related incident)</span></div>
+          </div>
+          
+          <div class="fp-block">
+            <div class="fp-group-label">FINGERPRINTS (5/7 MUSTs+SHOULDs covered)</div>
+            <div class="fp-must"><span class="fp-must-id">item:A.5.15:review_a518_link</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">A.5.18</span></span><span class="fp-tokens"><span class="fp-token">provisioning</span><span class="fp-token">alignment</span></span><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">provisioning</span><span class="fp-token">link</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:review_date</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">control</span><span class="fp-token">policy</span><span class="fp-token">review</span><span class="fp-token">date</span></span><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">reviewed</span><span class="fp-token">True</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:review_estate</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">estate</span><span class="fp-token">check</span></span><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">new</span><span class="fp-token">system</span><span class="fp-token">added</span></span><span class="fp-tokens"><span class="fp-token">new</span><span class="fp-token">cloud</span><span class="fp-token">service</span><span class="fp-token">access</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:review_outcome</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token"></span><span class="fp-token">change</span></span><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">amended</span></span><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">re</span><span class="fp-token">issued</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:review_reviewer</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">reviewed</span><span class="fp-token">by</span></span><span class="fp-tokens"><span class="fp-token">ciso</span><span class="fp-token">access</span><span class="fp-token">policy</span><span class="fp-token">review</span></span><span class="fp-tokens"><span class="fp-token">identity</span><span class="fp-token">management</span><span class="fp-token">input</span><span class="fp-token">review</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:review_next_date</span><span class="fp-empty">no fingerprint entry</span></div><div class="fp-must"><span class="fp-must-id">item:A.5.15:review_triggers</span><span class="fp-empty">no fingerprint entry</span></div>
+          </div>
+        
+        </div>
+        
+  </div>
+</div>
+
+<div class="footer">
+Generated from Neo4j curation graph · <a href="architecture_brief.html">architecture brief</a> · <a href="demo_walkthrough.html">demo walkthrough</a>
+</div>
+
+</body>
+</html>
