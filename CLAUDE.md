@@ -366,6 +366,20 @@ curl -s -X POST http://localhost:8080/api/v1/chat \
   | python3 -m json.tool
 ```
 
+## Operational playbook — troubleshooting deployments
+
+For debugging any deployment (this VM or a customer install), read
+[[CLAUDE_DEPLOY_GUIDE.md]] at the repo root. It's the AI-first ops
+playbook: symptom → verify → fix triples, structured pointers to
+every diagnostic surface, common ops queries, and the codebase
+orientation index. Companion documents:
+
+- `scripts/ops/diagnose.sh` — one-command diagnostic bundle
+- `docs/error_catalog.html` — stable `ARION-*` error codes
+- `GET /api/v1/admin/deployment/status` — live status (admin:status scope)
+
+Shipped in Ship 48'. See [[ship-48-prime-a-deployment-diagnostics-design-2026-07-28]].
+
 ## Key Files
 
 ### Backend / pipeline
