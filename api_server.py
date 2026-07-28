@@ -154,6 +154,8 @@ class _PrePingPool:
 async def lifespan(app: FastAPI):
     """Initialise shared resources once at startup."""
     logger.info("ArionComply API starting up...")
+    # Ship 48'.c — capture boot time for /admin/deployment/status uptime.
+    app.state.started_at = time.time()
 
     # ── Postgres connection pool ──────────────────────────────────────────────
     try:
@@ -3185,6 +3187,29 @@ _WRITE_KEYWORDS = (
     " CREATE ", " MERGE ", " DELETE ", " SET ", " REMOVE ",
     " DROP ", " DETACH ", " LOAD CSV", " CALL APOC.PERIODIC",
 )
+
+
+# ─── Ship 48'.c — deployment status ─────────────────────────────────
+#
+# Read-only endpoint returning non-sensitive metadata for support +
+# Claude Code operator sessions. Complements scripts/ops/diagnose.sh
+# (offline bundle). Scoped to `admin:status`.
+#
+# Privacy: no tenant names, user emails, evidence text, or raw API
+# keys. Only counts, versions, health flags, framework identifiers.
+
+@app.get("/api/v1/admin/deployment/status", tags=["admin"])
+async def admin_deployment_status(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_scope("admin:status")),
+):
+    """Live deployment status: version, uptime, service health,
+    aggregate DB/graph/vector counts, tenant + framework summary,
+    feature flags. Companion to scripts/ops/diagnose.sh."""
+    from rag.admin.deployment_status import collect
+    pool       = request.app.state.pg_pool
+    started_at = getattr(request.app.state, "started_at", 0.0)
+    return collect(pool, started_at)
 
 
 @app.get("/api/v1/admin/intake/unmatched-patterns", tags=["admin"])
