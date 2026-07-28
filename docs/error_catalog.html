@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ArionComply — Error Catalog</title>
+<style>
+:root { --bg:#fafafa; --fg:#1a1a1a; --muted:#666; --card:#fff; --border:#e5e5e5;
+        --accent:#0f766e; --warn:#c2410c; --danger:#b91c1c; --ok:#15803d;
+        --code:#f5f5f4; --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; margin:0;
+       background:var(--bg); color:var(--fg); line-height:1.55; }
+header { background:var(--card); border-bottom:1px solid var(--border); padding:24px 32px; }
+h1 { margin:0 0 4px; font-size:24px; }
+.subtitle { color:var(--muted); font-size:14px; }
+main { max-width:1200px; margin:0 auto; padding:24px 32px; }
+.legend { display:flex; gap:16px; margin:8px 0 32px; flex-wrap:wrap; font-size:13px; }
+.chip { display:inline-block; padding:2px 8px; border-radius:4px; font-family:var(--mono);
+        font-size:12px; font-weight:600; }
+.chip.install { background:#eff6ff; color:#1e40af; }
+.chip.boot    { background:#fef3c7; color:#92400e; }
+.chip.runtime { background:#fce7f3; color:#9d174d; }
+.chip.tenant  { background:#dcfce7; color:#166534; }
+section { background:var(--card); border:1px solid var(--border); border-radius:8px;
+          margin-bottom:16px; overflow:hidden; }
+h2 { font-size:16px; margin:0; padding:12px 16px; background:#f9fafb;
+     border-bottom:1px solid var(--border); }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th, td { padding:10px 14px; text-align:left; vertical-align:top;
+         border-bottom:1px solid #f0f0f0; }
+th { background:#fafafa; font-weight:600; color:var(--muted); font-size:11px;
+     text-transform:uppercase; letter-spacing:0.05em; }
+tr:last-child td { border-bottom:0; }
+code { font-family:var(--mono); background:var(--code); padding:1px 5px;
+       border-radius:3px; font-size:12px; }
+td.code-cell { font-family:var(--mono); font-weight:600; white-space:nowrap; }
+td.symptom { max-width:260px; }
+td.cause { max-width:220px; color:var(--muted); }
+td.verify code, td.fix code { display:block; margin:2px 0; }
+.footer { color:var(--muted); font-size:12px; margin-top:32px; }
+.nav { display:flex; gap:16px; font-size:13px; margin-top:8px; }
+.nav a { color:var(--accent); text-decoration:none; }
+.nav a:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<header>
+  <h1>ArionComply — error catalog</h1>
+  <div class="subtitle">Stable error codes with symptom → verification → fix mappings. Use with <code>scripts/ops/diagnose.sh</code> bundle output.</div>
+  <div class="nav">
+    <a href="./poc_install_guide.html">Install guide</a>
+    <a href="./demo_walkthrough.html">Demo walkthrough</a>
+    <a href="./architecture_brief.html">Architecture brief</a>
+  </div>
+</header>
+<main>
+<div class="legend">
+  <span><span class="chip install">ARION-INSTALL-*</span> install.sh time failures</span>
+  <span><span class="chip boot">ARION-BOOT-*</span> API startup / lifespan failures</span>
+  <span><span class="chip runtime">ARION-RUNTIME-*</span> post-boot operational failures</span>
+  <span><span class="chip tenant">ARION-TENANT-*</span> tenant provisioning failures</span>
+</div>
+
+<section>
+<h2>ARION-INSTALL-* — install.sh time</h2>
+<table>
+<thead><tr><th>Code</th><th>Symptom</th><th>Cause</th><th>Verify</th><th>Fix</th></tr></thead>
+<tbody>
+
+<tr><td class="code-cell">ARION-INSTALL-001</td>
+<td class="symptom">install.sh fails at &quot;System packages&quot; step with dpkg lock error</td>
+<td class="cause">apt is held by another process (unattended-upgrades, package manager)</td>
+<td class="verify"><code>sudo lsof /var/lib/dpkg/lock-frontend</code></td>
+<td class="fix"><code>sudo systemctl stop unattended-upgrades</code> or wait then re-run installer (idempotent)</td></tr>
+
+<tr><td class="code-cell">ARION-INSTALL-002</td>
+<td class="symptom">psql fails with &quot;role &quot;arioncomply&quot; does not exist&quot; during schema apply</td>
+<td class="cause">postgres_preamble.sql did not run or transaction rolled back</td>
+<td class="verify"><code>sudo -u postgres psql -c "\du" | grep arion</code></td>
+<td class="fix"><code>sudo -u postgres psql -f deploy/postgres_preamble.sql</code> with password vars set, then re-run install.sh</td></tr>
+
+<tr><td class="code-cell">ARION-INSTALL-003</td>
+<td class="symptom">install.sh reports &quot;pip install&quot; failure on <code>psycopg2</code> or <code>chromadb</code></td>
+<td class="cause">Missing build tools (libpq-dev / build-essential)</td>
+<td class="verify"><code>dpkg -l | grep -E 'libpq-dev|build-essential'</code></td>
+<td class="fix"><code>sudo apt-get install -y libpq-dev build-essential python3-dev</code>, then re-run install.sh</td></tr>
+
+<tr><td class="code-cell">ARION-INSTALL-004</td>
+<td class="symptom">Schema apply fails with &quot;syntax error at or near :&quot; inside a DO block</td>
+<td class="cause">psql <code>:'var'</code> interpolation used inside <code>DO $$ ... $$</code> — not supported</td>
+<td class="verify">Look for <code>DO $$ ...</code> with <code>:'</code> inside body in your modified SQL</td>
+<td class="fix">Refactor to <code>SELECT format('SQL WITH %L', :'var') \gexec</code> pattern (see deploy/postgres_preamble.sql for canonical shape)</td></tr>
+
+<tr><td class="code-cell">ARION-INSTALL-005</td>
+<td class="symptom">Neo4j graph load fails with <code>ClientError</code> or connection refused</td>
+<td class="cause">Neo4j service still warming up (~30s cold start)</td>
+<td class="verify"><code>curl -sf http://localhost:7474</code></td>
+<td class="fix">Wait 30s then <code>PYTHONPATH=. python3 enrichment/documents/load_to_neo4j.py</code></td></tr>
+
+<tr><td class="code-cell">ARION-INSTALL-006</td>
+<td class="symptom">requirements.txt install fails with AppleInternal path errors</td>
+<td class="cause">requirements.txt was <code>pip freeze</code>'d on macOS with system-vendored packages</td>
+<td class="verify"><code>grep AppleInternal deploy/requirements.txt</code></td>
+<td class="fix">Regenerate on target OS: <code>pip freeze | grep -Ev 'python-apt|ubuntu-drivers'</code> — Ship 47 rule</td></tr>
+
+<tr><td class="code-cell">ARION-INSTALL-007</td>
+<td class="symptom">Chroma reindex fails with OOM or takes &gt;15 min on first install</td>
+<td class="cause">Cold-cache embedding compute; ~5385 MUST items + ~1000 corpus docs</td>
+<td class="verify"><code>free -h</code> (expect &gt;=4GB free); watch <code>/tmp/arioncomply-chroma.log</code></td>
+<td class="fix">Ensure 4GB+ RAM free before install; reindex is one-shot — retry with <code>PYTHONPATH=. python3 scripts/reindex_all.py</code></td></tr>
+
+</tbody>
+</table>
+</section>
+
+<section>
+<h2>ARION-BOOT-* — API startup / lifespan</h2>
+<table>
+<thead><tr><th>Code</th><th>Symptom</th><th>Cause</th><th>Verify</th><th>Fix</th></tr></thead>
+<tbody>
+
+<tr><td class="code-cell">ARION-BOOT-001</td>
+<td class="symptom">API service fails to start; systemd shows <code>activating (auto-restart)</code> loop</td>
+<td class="cause">.env unreadable by service user OR missing required var</td>
+<td class="verify"><code>sudo -u arioncomply cat /data/arioncomply/.env | head</code> then <code>journalctl -u arioncomply-api -n 50</code></td>
+<td class="fix"><code>chmod 640 /data/arioncomply/.env &amp;&amp; chown arioncomply:arioncomply /data/arioncomply/.env</code></td></tr>
+
+<tr><td class="code-cell">ARION-BOOT-002</td>
+<td class="symptom">API 500 on first chat with &quot;RAG pipeline failed&quot; or Chroma connection refused</td>
+<td class="cause">Chroma service not running on :8000</td>
+<td class="verify"><code>lsof -i :8000</code> or <code>ss -tlnp | grep :8000</code></td>
+<td class="fix"><code>sudo systemctl start arioncomply-chroma &amp;&amp; sudo systemctl enable arioncomply-chroma</code></td></tr>
+
+<tr><td class="code-cell">ARION-BOOT-003</td>
+<td class="symptom">API startup logs &quot;LangGraph checkpointer connection failed&quot;</td>
+<td class="cause">SESSIONS_DATABASE_URL misconfigured or arioncomply_sessions DB missing</td>
+<td class="verify"><code>psql "$SESSIONS_DATABASE_URL" -c '\dt'</code></td>
+<td class="fix">Ensure sessions DB exists + checkpoints tables present; apply <code>db/baseline/schema_sessions_baseline.sql</code></td></tr>
+
+<tr><td class="code-cell">ARION-BOOT-004</td>
+<td class="symptom">API refuses to bind :8080 — &quot;Address already in use&quot;</td>
+<td class="cause">Another API process already bound (leftover manual start)</td>
+<td class="verify"><code>lsof -i :8080</code></td>
+<td class="fix"><code>kill $(lsof -ti:8080) &amp;&amp; sudo systemctl start arioncomply-api</code></td></tr>
+
+<tr><td class="code-cell">ARION-BOOT-005</td>
+<td class="symptom">Import error on startup: <code>ModuleNotFoundError: rag.intake</code> or similar</td>
+<td class="cause">PYTHONPATH not set in service Environment (Ship 47 systemd shape)</td>
+<td class="verify"><code>systemctl cat arioncomply-api | grep PYTHONPATH</code></td>
+<td class="fix">Add <code>Environment=PYTHONPATH=/data/arioncomply</code> to the unit; <code>systemctl daemon-reload</code></td></tr>
+
+</tbody>
+</table>
+</section>
+
+<section>
+<h2>ARION-RUNTIME-* — post-boot operations</h2>
+<table>
+<thead><tr><th>Code</th><th>Symptom</th><th>Cause</th><th>Verify</th><th>Fix</th></tr></thead>
+<tbody>
+
+<tr><td class="code-cell">ARION-RUNTIME-001</td>
+<td class="symptom">Chat returns 401 with correct-looking API key</td>
+<td class="cause">Key not in api_keys OR is_active=false OR expired</td>
+<td class="verify">Check tenants.txt in diag bundle for api_keys row matching key prefix</td>
+<td class="fix">Provision a fresh key: <code>PYTHONPATH=. python3 scripts/dev/create_tenant.py --add-key-to &lt;tenant-uuid&gt;</code></td></tr>
+
+<tr><td class="code-cell">ARION-RUNTIME-002</td>
+<td class="symptom">Dashboard shows all controls as &quot;Not assessed&quot;</td>
+<td class="cause">Fresh tenant with no posture_controls rows yet</td>
+<td class="verify">In diag bundle <code>tenants.txt</code>: posture counts row shows 0 or missing tenant</td>
+<td class="fix">Upload evidence documents via /ui/arioncomply.html → Documents; OR seed via <code>scripts/dev/create_tenant.py</code></td></tr>
+
+<tr><td class="code-cell">ARION-RUNTIME-003</td>
+<td class="symptom">Upload succeeds but no findings appear in Stage-1 queue</td>
+<td class="cause">Doc format not recognized OR extractor timed out OR consensus rejected all candidates</td>
+<td class="verify">Check journal-api.txt for &quot;extraction_status=failed&quot; and evidence_group_id log lines</td>
+<td class="fix">Re-extract: <code>curl -X POST /api/v1/admin/uploads/&lt;id&gt;/reextract</code>; check <code>intake_trace_log</code> for drop reason</td></tr>
+
+<tr><td class="code-cell">ARION-RUNTIME-004</td>
+<td class="symptom">Chat shows &quot;[DRAFT]&quot; label on every posture even after Stage-1 approval</td>
+<td class="cause">confirmation_status not being propagated (Ship 30'.b was the cross-tenant fix)</td>
+<td class="verify"><code>psql -c "SELECT ref, finding, confirmation_status FROM posture_controls WHERE tenant_id=... LIMIT 5;"</code></td>
+<td class="fix">Ensure posture_loader SELECT includes confirmation_status column (Ship 30'.b); check <code>rag/posture_loader.py:load_posture</code></td></tr>
+
+<tr><td class="code-cell">ARION-RUNTIME-005</td>
+<td class="symptom">Chat latency &gt;30s on first query of a session</td>
+<td class="cause">Cold posture cache + Chroma warmup + LLM cold start</td>
+<td class="verify">Second query same session should be &lt;5s; check journal-api.txt for &quot;posture_cache_miss=true&quot; on first turn</td>
+<td class="fix">Expected on cold cache. Warm the cache before demo with a throwaway query. Long-term: Ship 45 posture warm-up arc</td></tr>
+
+<tr><td class="code-cell">ARION-RUNTIME-006</td>
+<td class="symptom">Bridge footer missing from cross-framework answers</td>
+<td class="cause">xfw_nodes_list empty in resolver output; likely Neo4j bridge edges not loaded</td>
+<td class="verify">In diag bundle <code>neo4j.txt</code>: check IMPLEMENTS / SUPPORTS / DEMONSTRATES edge counts &gt; 0</td>
+<td class="fix"><code>PYTHONPATH=. python3 enrichment/documents/load_to_neo4j.py</code> to reload bridges</td></tr>
+
+<tr><td class="code-cell">ARION-RUNTIME-007</td>
+<td class="symptom">Sweep timer skipping ticks — <code>sweep_log</code> has gaps</td>
+<td class="cause">Timer disabled, or unit failure</td>
+<td class="verify"><code>systemctl list-timers arioncomply-sweep.timer --all</code></td>
+<td class="fix"><code>sudo systemctl enable --now arioncomply-sweep.timer</code>; check <code>systemctl status arioncomply-sweep.service</code></td></tr>
+
+<tr><td class="code-cell">ARION-RUNTIME-008</td>
+<td class="symptom">OTel traces not showing in Jaeger UI</td>
+<td class="cause">OTEL_ENABLED=0 or Jaeger service down</td>
+<td class="verify">In diag bundle <code>env.redacted.txt</code>: OTEL_ENABLED value; <code>curl -sf http://localhost:16686</code></td>
+<td class="fix">Set <code>OTEL_ENABLED=1</code> in .env; <code>sudo systemctl restart arioncomply-api arioncomply-jaeger</code></td></tr>
+
+<tr><td class="code-cell">ARION-RUNTIME-009</td>
+<td class="symptom">Chat deep-link from dashboard opens dashboard landing instead of specific control</td>
+<td class="cause">SPA hash-route handler not applying (Ship 46 fix)</td>
+<td class="verify">Browser URL should be like <code>/ui/arioncomply.html#dashboard?ref=A.5.15</code></td>
+<td class="fix">Hard-reload; check <code>_applyHashRoute()</code> in static/arioncomply.html is present (post-46'.c)</td></tr>
+
+<tr><td class="code-cell">ARION-RUNTIME-010</td>
+<td class="symptom">Session chat lost when navigating between UI modes</td>
+<td class="cause">localStorage persistence not active or Cache-Control missing on SPA HTML</td>
+<td class="verify">Chrome DevTools → Application → Local Storage: <code>_arion_chat_history</code> should be present</td>
+<td class="fix">Verify <code>Cache-Control: no-cache</code> on /ui/arioncomply.html response (Ship 46'.d)</td></tr>
+
+</tbody>
+</table>
+</section>
+
+<section>
+<h2>ARION-TENANT-* — tenant provisioning</h2>
+<table>
+<thead><tr><th>Code</th><th>Symptom</th><th>Cause</th><th>Verify</th><th>Fix</th></tr></thead>
+<tbody>
+
+<tr><td class="code-cell">ARION-TENANT-001</td>
+<td class="symptom"><code>create_tenant.py</code> fails with &quot;new row violates row-level security policy&quot;</td>
+<td class="cause">Script connected as arioncomply_app (RLS-scoped) instead of arioncomply owner</td>
+<td class="verify">Confirm DATABASE_URL in <code>_admin_dsn()</code> uses <code>arioncomply</code> user, not <code>arioncomply_app</code></td>
+<td class="fix">Ship 47'.d added <code>_admin_dsn()</code> — verify import path uses it for tenants INSERT</td></tr>
+
+<tr><td class="code-cell">ARION-TENANT-002</td>
+<td class="symptom">Tenant created but posture_controls empty</td>
+<td class="cause">Framework enrolment step didn't fire or workbook_importer skipped</td>
+<td class="verify"><code>psql -c "SELECT * FROM tenant_framework_enrolment WHERE tenant_id=&lt;uuid&gt;;"</code></td>
+<td class="fix">Re-run <code>create_tenant.py</code> with <code>--enrol-framework ISO27001:2022</code>; consider workbook seed path</td></tr>
+
+<tr><td class="code-cell">ARION-TENANT-003</td>
+<td class="symptom">API key created but rejected on first curl request</td>
+<td class="cause">Raw key printed does not match hashed value (script bug OR keyboard truncation)</td>
+<td class="verify">In diag bundle <code>tenants.txt</code>: api_keys row shows <code>is_active=true</code> and matching prefix</td>
+<td class="fix">Provision a fresh key via <code>create_tenant.py --add-key-to &lt;tenant-uuid&gt;</code>; copy carefully</td></tr>
+
+<tr><td class="code-cell">ARION-TENANT-004</td>
+<td class="symptom">create_tenant.py runs, exits 0, but tenant row missing from DB</td>
+<td class="cause">DRY_RUN=1 env var set or --dry-run flag passed inadvertently</td>
+<td class="verify">Check invocation for <code>--dry-run</code> or shell env; script prints &quot;[dry-run]&quot; prefix when active</td>
+<td class="fix">Re-run without --dry-run; also check for --tenant-id collision if you specified one</td></tr>
+
+</tbody>
+</table>
+</section>
+
+<div class="footer">
+  <strong>Adding a new code</strong>: pick the next N in the appropriate prefix, add a row here + entry in <code>CLAUDE_DEPLOY_GUIDE.md</code>. Codes are stable — never re-used after retirement. Mark retired codes with <code>[RETIRED]</code> in the Symptom cell.
+</div>
+</main>
+</body>
+</html>
