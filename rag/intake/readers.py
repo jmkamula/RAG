@@ -338,6 +338,12 @@ def _read_docx(file_path: str, file_name: str) -> ParsedDocument:
         if md_text:
             md_text = _strip_base64_images(md_text)
             md_text = _strip_word_anchor_tags(md_text)
+            # Ship 50'.a — restore templated fast-path for ArionComply-
+            # rendered docx uploads. When the ◆ label + attribution
+            # signature is present, rewrite the markdown to include
+            # `<<MUST item:X:Y>>` markers + edit zones so the extractor's
+            # templated path fires. No-op on non-Arion docs.
+            md_text = _reconstruct_arion_markers(md_text, file_name)
     except Exception as e:
         logger.warning(f"mammoth markdown conversion failed for {file_name}: {e}")
 
@@ -497,6 +503,154 @@ def _strip_word_anchor_tags(md: str) -> str:
     # Collapse runs of 2+ spaces (only) — don't touch newline structure.
     scrubbed = _re.sub(r"[ \t]{2,}", " ", scrubbed)
     return scrubbed
+
+
+# ─── ArionComply template round-trip repair (Ship 50'.a) ─────────────
+#
+# `rag/templates/docx_renderer.py` transforms `<<MUST item:X:Y>>` markers
+# into human-friendly `◆ Required element — <slug>` labels. Beautiful for
+# fill-in, but the machine-readable form is lost — on re-upload the
+# templated fast-path (`_extract_templated`) can't find markers and
+# consensus falls through, matching template scaffolding to random
+# controls (Ship 50'.a diagnosis on customer's A_5_1_management_approval).
+#
+# This block detects an ArionComply-rendered docx from its attribution
+# line + ◆ markers, parses the control_ref from the attribution, and
+# reconstructs `<<MUST item:CTRL:slug>>` + `<!-- EDIT-ZONE-START/END -->`
+# markers so the fast-path fires exactly as if the customer had uploaded
+# the source .md.
+#
+# Attribution line (Quote-styled) in the rendered docx:
+#     "Generated 2026-07-29 · A.5.1 · ISO/IEC 27001:2022"
+# Mammoth escapes '.' and '-' in markdown output ('A\.5\.1', '2026\-07\-29').
+# Allow either escaped or plain form in both the date and the ref.
+_ARION_ATTRIBUTION_RE = _re.compile(
+    r"Generated\s+\d{4}\\?-\d{2}\\?-\d{2}\s*·\s*([A-Za-z0-9.\\]+?)\s*·",
+)
+# ◆ Required/Recommended labels — mammoth wraps them in markdown bold
+# markers `__...__` since the docx renderer applied Bold to the run.
+# Optional surrounding `__` (bold), optional wrapping asterisks, spaces.
+_ARION_MUST_LABEL_RE   = _re.compile(
+    r"^\s*(?:__|\*\*)?\s*◆\s*Required element\s*—\s*(.+?)\s*(?:__|\*\*)?\s*$",
+    _re.MULTILINE,
+)
+_ARION_SHOULD_LABEL_RE = _re.compile(
+    r"^\s*(?:__|\*\*)?\s*◆\s*Recommended addition\s*—\s*(.+?)\s*(?:__|\*\*)?\s*$",
+    _re.MULTILINE,
+)
+# Standalone "Why:" citation line rendered from `_Why: ..._` in the .md.
+# Mammoth emits italics as `*...*` — allow optional wrappers.
+_ARION_WHY_LABEL_RE = _re.compile(
+    r"^\s*\*?Why:\s.+?\*?\s*$", _re.MULTILINE,
+)
+# "[ Click to enter your evidence here ]" placeholder.
+_ARION_CLICK_PLACEHOLDER_RE = _re.compile(
+    r"^\s*\[\s*Click to enter your evidence here\s*\]\s*$", _re.MULTILINE,
+)
+
+
+def _detect_arion_control_ref(md_text: str, file_name: str = "") -> str:
+    """Return the control_ref for an ArionComply-rendered docx, or ''.
+
+    Primary source: attribution line 'Generated <date> · <control_ref> · <std>'.
+    Fallback: filename shape 'A_5_1_<slug>.docx' → 'A.5.1'.
+    """
+    m = _ARION_ATTRIBUTION_RE.search(md_text)
+    if m:
+        # Unescape mammoth's `A\.5\.1` → `A.5.1`.
+        return m.group(1).replace("\\", "")
+    # Filename fallback — strip extension + slug suffix, convert _ → .
+    if file_name:
+        stem = _re.sub(r"\.\w+$", "", file_name)
+        # Split into "A_5_1" (control) + "management_approval" (slug).
+        # Convention: uppercase-letter start + underscore-separated
+        # number groups is the control part.
+        parts = stem.split("_")
+        ref_parts: list[str] = []
+        for i, p in enumerate(parts):
+            if i == 0 and _re.match(r"^[A-Z]$", p):  # 'A' / 'B'
+                ref_parts.append(p)
+            elif p.isdigit():
+                ref_parts.append(p)
+            else:
+                break
+        if len(ref_parts) >= 2:
+            return ".".join(ref_parts)
+    return ""
+
+
+def _slug_from_humanized(label: str) -> str:
+    """Reverse `_humanize_item_slug` (docx_renderer.py) so 'approval signatory'
+    → 'approval_signatory'. Preserves case-safe conversion — the docx
+    renderer only replaces `_` with space, so this is exactly the inverse."""
+    return label.strip().replace(" ", "_")
+
+
+def _reconstruct_arion_markers(md_text: str, file_name: str) -> str:
+    """When mammoth markdown looks like an ArionComply-rendered docx,
+    rewrite it so the templated fast-path can bind evidence per-MUST.
+
+    Detection: ATTRIBUTION line present AND ≥1 ◆ label. Neither alone
+    fires — the ◆ pattern could appear in a doc that just happens to
+    use that character; the attribution line is our signature.
+
+    Rewrite: each `◆ Required element — <slug>` line is replaced by
+    `<<MUST item:CTRL:slug>>`, and an `<!-- EDIT-ZONE-START -->` /
+    `<!-- EDIT-ZONE-END -->` bracket is inserted around the paragraphs
+    that follow until the next marker or heading. `Why:` citation lines
+    + `[ Click to enter... ]` placeholders are dropped (moved outside
+    the edit zone so they don't count as evidence).
+    """
+    control_ref = _detect_arion_control_ref(md_text, file_name)
+    if not control_ref:
+        return md_text
+    has_marker = bool(
+        _ARION_MUST_LABEL_RE.search(md_text)
+        or _ARION_SHOULD_LABEL_RE.search(md_text)
+    )
+    if not has_marker:
+        return md_text
+
+    # Strip Why lines + click placeholders from the whole doc (they carry
+    # no tenant evidence and their content is fingerprint noise).
+    md = _ARION_WHY_LABEL_RE.sub("", md_text)
+    md = _ARION_CLICK_PLACEHOLDER_RE.sub("", md)
+
+    # Split into lines and walk. For each ◆ label line: emit a
+    # `<<MUST/SHOULD item:CTRL:slug>>` on its own line + open an edit
+    # zone. Close the zone at the next ◆ label OR the next '## ' heading
+    # OR the end of the section separator line (─── run).
+    lines = md.split("\n")
+    out: list[str] = []
+    open_zone: str | None = None  # the item_id currently open
+    for raw in lines:
+        line = raw
+        must_m = _ARION_MUST_LABEL_RE.match(line)
+        should_m = _ARION_SHOULD_LABEL_RE.match(line)
+        if must_m or should_m:
+            # Close any prior zone
+            if open_zone:
+                out.append(f"<!-- EDIT-ZONE-END {open_zone} -->")
+                open_zone = None
+            slug = _slug_from_humanized((must_m or should_m).group(1))
+            kind = "MUST" if must_m else "SHOULD"
+            item_id = f"item:{control_ref}:{slug}"
+            out.append(f"<<{kind} {item_id}>>")
+            out.append(f"<!-- EDIT-ZONE-START {item_id} -->")
+            open_zone = item_id
+            continue
+        # Section boundaries close the open zone
+        stripped = line.strip()
+        is_heading = stripped.startswith("#")
+        is_hr      = bool(_re.fullmatch(r"[-─]{3,}", stripped))
+        if open_zone and (is_heading or is_hr):
+            out.append(f"<!-- EDIT-ZONE-END {open_zone} -->")
+            open_zone = None
+        out.append(line)
+    if open_zone:
+        out.append(f"<!-- EDIT-ZONE-END {open_zone} -->")
+
+    return "\n".join(out)
 
 
 _TABLE_SEPARATOR_RE = _re.compile(

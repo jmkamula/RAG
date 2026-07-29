@@ -2124,6 +2124,25 @@ _HTML_ANCHOR_TAG_RE = re.compile(
     re.IGNORECASE,
 )
 
+# ArionComply template scaffolding — Ship 50'.a L1. Defensive filter
+# for docx-rendered template uploads where L2 marker reconstruction
+# in the reader didn't fully fire (customer renamed the file AND edited
+# out the attribution line, etc.). If any of these patterns matches at
+# start of the candidate line, the line is template chrome — never
+# tenant evidence. Combined pattern (leading optional bold-wrap or
+# italics from mammoth) for cheap per-candidate check.
+_ARION_SCAFFOLD_RE = re.compile(
+    r"^\s*(?:"
+    r"(?:__|\*\*)?◆\s*(?:Required element|Recommended addition)\b"     # ◆ marker labels
+    r"|(?:__|\*\*)?Advisory template\.?"                                # disclaimer
+    r"|Generated\s+\d{4}\\?-\d{2}\\?-\d{2}\s*·"                        # attribution line
+    r"|\*?Why:\s"                                                       # citation line
+    r"|\[\s*Click to enter your evidence here\s*\]"                    # placeholder
+    r"|[▽△]\s*(?:Enter your evidence for|End of)\s"                    # edit-zone rails
+    r")",
+    re.IGNORECASE,
+)
+
 
 # MUST-id suffix prefixes that indicate "register field / scope note"
 # semantics — where a RoPA-style table field IS legitimately the
@@ -2208,6 +2227,14 @@ def _looks_like_field_or_header(quote, must_id=None):
         body = _HTML_ANCHOR_TAG_RE.sub("", body).strip()
         if body and not _SENTENCE_END_RE.search(body) and len(body) <= 80:
             return (True, "bare_heading")
+
+    # ArionComply template scaffolding — Ship 50'.a L1. Fires when the
+    # customer uploads a docx-rendered template but L2 marker detection
+    # in the reader didn't fully reconstruct (renamed file + removed
+    # attribution, etc.). These lines are OUR OWN template chrome; they
+    # can never be tenant evidence for any MUST.
+    if _ARION_SCAFFOLD_RE.match(stripped):
+        return (True, "arion_scaffold")
 
     return (False, "prose")
 
