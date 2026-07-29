@@ -746,6 +746,32 @@ def render_template(
             "", body, count=1, flags=re.MULTILINE,
         )
 
+        # Ship 50'.b — insert a "How to use this template" section
+        # right after the disclaimer + attribution. Answers the three
+        # questions a first-time filler-in has: "what is this?", "how
+        # do I fill it in?", "what happens when I upload it?".
+        #
+        # Generic content (no per-template curator work needed). The
+        # bullet about ◆ markers is load-bearing — customers who edit
+        # them out break the round-trip binding (Ship 50'.a L2).
+        how_to_use = (
+            f"## How to use this template\n\n"
+            f"**What this is.** A starter draft for **{control_ref}** "
+            f"({std_label}), pre-filled with anything we already know "
+            f"about your setup. It's a guided form — not a legal "
+            f"artefact — so use what's useful and change what isn't.\n\n"
+            f"**How to fill it in.** Each section below asks one "
+            f"question. Type your answer in the space under the "
+            f"◆ marker. If a question doesn't apply, delete the whole "
+            f"section — we'll record it as N/A for your tenant.\n\n"
+            f"**Leave the ◆ markers alone.** They're how we recognise "
+            f"your evidence on re-upload and bind it to the right "
+            f"requirement. Editing the ◆ line breaks that binding.\n\n"
+            f"**When you're done.** Save and upload the file back "
+            f"through the Documents tab. We'll extract your answers "
+            f"per requirement automatically — no manual tagging.\n\n"
+            f"---\n\n"
+        )
         preamble = (
             f"# {leaf_title} — drafted for {tenant_name}\n\n"
             f"> **Advisory template.** A starting draft to help your "
@@ -756,6 +782,7 @@ def render_template(
             f"> _Generated {gen_date} · "
             f"{control_ref} · {std_label}_\n\n"
             f"---\n\n"
+            f"{how_to_use}"
         )
         provenance = (
             f"<!-- Rendered for {tenant_name} on {gen_date} — "
