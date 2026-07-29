@@ -2110,6 +2110,20 @@ _SENTENCE_END_RE = re.compile(r"[.!?][\s\"'\)\]]*$")
 # Bullet-marker start with no sentence terminator = list-item fragment.
 _BULLET_START_RE = re.compile(r"^\s*[-*•·]\s+")
 
+# Markdown H1-H6 heading marker at start of line.
+_MD_HEADING_RE = re.compile(r"^\s*#{1,6}\s+")
+
+# Word-generated HTML anchor tags that leak through the docx reader:
+#   <a id="_Toc1922344359"></a>   — table-of-contents anchors
+#   <a id="_Ref12345"></a>        — cross-reference targets
+#   <a id="_Hlk67890"></a>        — Highlight-Key (comment/track-changes)
+#   <a name="_Toc..."></a>        — legacy name= form
+# All hidden in the source but stored verbatim by mammoth/python-docx.
+_HTML_ANCHOR_TAG_RE = re.compile(
+    r'<a\s+(?:id|name)="_(?:Toc|Ref|Hlk|Bkmk|Anchor)[^"]*"[^>]*>\s*</a>',
+    re.IGNORECASE,
+)
+
 
 # MUST-id suffix prefixes that indicate "register field / scope note"
 # semantics — where a RoPA-style table field IS legitimately the
@@ -2180,6 +2194,20 @@ def _looks_like_field_or_header(quote, must_id=None):
             and not _SENTENCE_END_RE.search(stripped)
             and len(stripped) < 100):
         return (True, "bullet_fragment")
+
+    # Bare markdown heading — Ship 49'.a. The docx reader captures
+    # section titles verbatim; when Word inserted hidden TOC/Ref anchor
+    # tags on the heading line, the excerpt looks like:
+    #   '# <a id="_Toc1922344359"></a><a id="_Toc236212919"></a>SCOPE'
+    # After stripping the heading marker + anchor tags, what's left is
+    # a short title with no sentence structure — not evidence for
+    # anything. Universal drop; heading-only content never satisfies
+    # a MUST regardless of prefix.
+    if _MD_HEADING_RE.match(stripped):
+        body = _MD_HEADING_RE.sub("", stripped, count=1)
+        body = _HTML_ANCHOR_TAG_RE.sub("", body).strip()
+        if body and not _SENTENCE_END_RE.search(body) and len(body) <= 80:
+            return (True, "bare_heading")
 
     return (False, "prose")
 

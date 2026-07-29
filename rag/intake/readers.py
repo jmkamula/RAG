@@ -337,6 +337,7 @@ def _read_docx(file_path: str, file_name: str) -> ParsedDocument:
         # present; downstream OCR (future work) can pick up content.
         if md_text:
             md_text = _strip_base64_images(md_text)
+            md_text = _strip_word_anchor_tags(md_text)
     except Exception as e:
         logger.warning(f"mammoth markdown conversion failed for {file_name}: {e}")
 
@@ -469,6 +470,33 @@ def _strip_base64_images(md: str) -> str:
             return f"![image: {alt}]"
         return "![image]"
     return _BASE64_IMG_RE.sub(_replace, md)
+
+
+# Word-inserted hidden anchor tags — Ship 49'.a.
+# Word wraps every heading with `<a id="_Toc..."></a>` (table-of-contents
+# targets), `<a id="_Ref..."></a>` (cross-reference targets), and
+# `<a id="_Hlk..."></a>` (highlight/comment keys). Mammoth passes them
+# through to the markdown stream verbatim. When section headings become
+# extractor evidence (Ship 32 multi-attribution), the excerpt reads as
+# HTML noise to the reviewer: `# <a id="_Toc..."></a>SCOPE`.
+#
+# Scrub at read time so downstream stored excerpts are clean. Complements
+# the display-side scrubDocxNoise() in static/arioncomply.html — that one
+# handles legacy stored data; this prevents future data from being noisy.
+_WORD_ANCHOR_TAG_RE = _re.compile(
+    r'<a\s+(?:id|name)="_(?:Toc|Ref|Hlk|Bkmk|Anchor)[^"]*"[^>]*>\s*</a>',
+    _re.IGNORECASE,
+)
+
+
+def _strip_word_anchor_tags(md: str) -> str:
+    """Remove Word-inserted hidden `<a id="_Toc..."></a>` anchor tags
+    from a markdown stream. Collapses whitespace runs left behind by
+    the removal. Preserves everything else verbatim."""
+    scrubbed = _WORD_ANCHOR_TAG_RE.sub("", md)
+    # Collapse runs of 2+ spaces (only) — don't touch newline structure.
+    scrubbed = _re.sub(r"[ \t]{2,}", " ", scrubbed)
+    return scrubbed
 
 
 _TABLE_SEPARATOR_RE = _re.compile(
