@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ArionComply — Azure Dry-Run Playbook</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root {
+  --fg: #1a1a1a; --muted: #666; --accent: #0f766e; --accent-soft: #ecfdf5;
+  --border: #e2e2e2; --code-bg: #f5f5f7; --step-fill: #f7fbf9;
+  --warn: #b45309; --warn-bg: #fffbeb;
+  --danger: #b91c1c; --danger-bg: #fef2f2;
+  --ok: #15803d; --ok-bg: #f0fdf4;
+  --mono: "SF Mono", Menlo, "Cascadia Code", monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+body { font-family: var(--sans); font-size: 15.5px; line-height: 1.55;
+       color: var(--fg); max-width: 960px; margin: 32px auto; padding: 0 24px; }
+h1 { font-size: 2em; margin: 0 0 4px; letter-spacing: -0.02em; }
+h2 { font-size: 1.35em; margin: 2em 0 0.5em; padding-bottom: 0.3em;
+     border-bottom: 2px solid var(--border); }
+h3 { font-size: 1.05em; margin: 1.4em 0 0.4em; }
+.hero { padding: 20px 24px; background: var(--accent-soft); border-radius: 8px;
+        margin: 20px 0 28px; border-left: 4px solid var(--accent); }
+.hero .subtitle { color: var(--muted); font-size: 0.85em; margin-top: 6px;
+                  text-transform: uppercase; letter-spacing: 0.06em; }
+.step { background: var(--step-fill); border: 1px solid var(--border);
+        border-left: 3px solid var(--accent); border-radius: 4px;
+        padding: 14px 18px; margin: 14px 0; }
+.step h3 { margin: 0 0 6px; color: var(--accent); font-weight: 600; }
+.callout { padding: 12px 16px; margin: 12px 0; border-radius: 5px;
+           border-left: 3px solid var(--warn); background: var(--warn-bg); }
+.callout.info { border-left-color: var(--accent); background: var(--accent-soft); }
+.callout.danger { border-left-color: var(--danger); background: var(--danger-bg); }
+.callout.ok { border-left-color: var(--ok); background: var(--ok-bg); }
+.callout strong { color: var(--warn); }
+.callout.info strong { color: var(--accent); }
+.callout.danger strong { color: var(--danger); }
+.callout.ok strong { color: var(--ok); }
+code, .mono { font-family: var(--mono); font-size: 0.88em; }
+code { background: var(--code-bg); padding: 1px 5px; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 14px 16px; border-radius: 6px;
+      overflow-x: auto; font-family: var(--mono); font-size: 0.85em;
+      line-height: 1.5; margin: 8px 0; }
+pre code { background: none; padding: 0; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 0.92em; }
+th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--border); }
+th { background: #fafafa; font-weight: 600; color: var(--muted); }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 3px;
+         font-size: 0.75em; font-weight: 600; letter-spacing: 0.03em; }
+.badge.step { background: var(--accent); color: white; }
+.badge.time { background: #e5e5e5; color: #555; margin-left: 6px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.two-col .step { margin: 0; }
+ul.slim { padding-left: 20px; margin: 6px 0; }
+ul.slim li { margin: 3px 0; }
+.footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border);
+          color: var(--muted); font-size: 0.85em; }
+.nav { display: flex; gap: 16px; font-size: 0.9em; margin-top: 10px; }
+.nav a { color: var(--accent); text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Azure Dry-Run Playbook</h1>
+  <div>Provision a fresh Ubuntu VM in Azure, install ArionComply end-to-end via Ship 47's <code>install.sh</code>, then validate Ship 48's diagnostic UX by breaking things deliberately.</div>
+  <div class="subtitle">2026-07-28 · Ship 48'.f · dry-run before real POC</div>
+  <div class="nav">
+    <a href="./poc_install_guide.html">POC install guide</a>
+    <a href="./error_catalog.html">Error catalog</a>
+    <a href="./architecture_brief.html">Architecture brief</a>
+  </div>
+</div>
+
+<h2>What this playbook covers</h2>
+<p>Two phases:</p>
+<ul class="slim">
+  <li><strong>Phase 1</strong> — provision + install (~1h). Fresh Azure VM → running ArionComply, one tenant, one chat, one upload. Green-light for real POC customer.</li>
+  <li><strong>Phase 2</strong> — Ship 48 UX validation (~1h). Deliberately break 4 things, run <code>diagnose.sh</code> against each, paste the bundle into a fresh Claude Code session with <code>CLAUDE_DEPLOY_GUIDE.md</code>, verify the diagnosis lands in seconds.</li>
+</ul>
+
+<div class="callout info">
+  <strong>Two windows recommended</strong> — Azure portal in one, this playbook + terminal in another. When the VM is up, you'll be pasting commands via SSH.
+</div>
+
+<h2>Phase 1 · Provision + install</h2>
+
+<div class="step">
+  <span class="badge step">STEP 1</span><span class="badge time">~5 min</span>
+  <h3>Create the VM in Azure portal</h3>
+  <p>Portal → Virtual machines → Create → Azure virtual machine.</p>
+  <table>
+    <tr><th>Field</th><th>Value</th></tr>
+    <tr><td>Subscription / Resource group</td><td>your choice; new RG called <code>arion-dryrun</code> keeps cleanup easy</td></tr>
+    <tr><td>Region</td><td>same region as this VM (minimize egress + latency)</td></tr>
+    <tr><td>Image</td><td><strong>Ubuntu Server 22.04 LTS – x64 Gen2</strong> ← important, not 24.04</td></tr>
+    <tr><td>Size</td><td><strong>Standard D4s v3</strong> (4 vCPU / 16 GB) — or D4as v5 (AMD, similar price)</td></tr>
+    <tr><td>Authentication type</td><td>SSH public key. Paste your <code>~/.ssh/id_ed25519.pub</code> content.</td></tr>
+    <tr><td>Username</td><td><code>arionlabs</code> (matches this VM's convention)</td></tr>
+    <tr><td>Public inbound ports</td><td><strong>None</strong> initially — we open specific ports next</td></tr>
+    <tr><td>OS disk</td><td>Premium SSD, 64 GB (default is fine)</td></tr>
+    <tr><td>Data disk</td><td>none needed for dry run</td></tr>
+  </table>
+</div>
+
+<div class="step">
+  <span class="badge step">STEP 2</span><span class="badge time">~2 min</span>
+  <h3>NSG rules — allow SSH + API from your IP only</h3>
+  <p>After creation, the VM has an auto-created NSG called <code>&lt;vmname&gt;-nsg</code>. Edit inbound rules:</p>
+  <table>
+    <tr><th>Rule</th><th>Priority</th><th>Source</th><th>Port</th><th>Action</th></tr>
+    <tr><td>SSH</td><td>1000</td><td><em>Your public IP/32</em></td><td>22</td><td>Allow</td></tr>
+    <tr><td>ArionComply API</td><td>1010</td><td><em>Your public IP/32</em></td><td>8080</td><td>Allow</td></tr>
+    <tr><td>Docs (optional)</td><td>1020</td><td><em>Your public IP/32</em></td><td>8001</td><td>Allow</td></tr>
+    <tr><td>Deny all inbound</td><td>4096</td><td>Any</td><td>Any</td><td>Deny (default)</td></tr>
+  </table>
+  <p>Find your public IP: <code>curl ifconfig.me</code> from your laptop. Never allow <code>Any → 8080</code> — POC has no auth beyond API keys.</p>
+</div>
+
+<div class="step">
+  <span class="badge step">STEP 3</span><span class="badge time">~1 min</span>
+  <h3>SSH in + verify OS</h3>
+<pre><code>ssh arionlabs@&lt;vm-public-ip&gt;
+uname -a
+cat /etc/os-release  # confirm 22.04 LTS
+df -h /             # ~60GB free expected
+free -h             # ~15GB total RAM
+</code></pre>
+</div>
+
+<div class="step">
+  <span class="badge step">STEP 4</span><span class="badge time">~2 min</span>
+  <h3>Clone the repo</h3>
+<pre><code>sudo mkdir -p /data && sudo chown arionlabs:arionlabs /data
+git clone https://github.com/jmkamula/RAG.git /data/arioncomply
+cd /data/arioncomply
+git log -1 --oneline   # confirm HEAD is 3b58b83 or newer (Ship 48 closed)
+</code></pre>
+  <div class="callout info">
+    <strong>Private repo?</strong> If GitHub asks for credentials, add a deploy key or use a fine-scoped PAT. HTTPS clone with a PAT is fastest for a one-shot dry run.
+  </div>
+</div>
+
+<div class="step">
+  <span class="badge step">STEP 5</span><span class="badge time">~15 min</span>
+  <h3>Run install.sh</h3>
+  <p>You'll be prompted for 4 passwords — pick memorable ones for the dry run (rotate before real POC).</p>
+<pre><code>bash deploy/install.sh
+</code></pre>
+  <p>Prompts, in order:</p>
+  <ul class="slim">
+    <li><strong>Postgres owner (arioncomply)</strong> — has RLS bypass</li>
+    <li><strong>Postgres app (arioncomply_app)</strong> — RLS-scoped, used by API pool</li>
+    <li><strong>Neo4j (neo4j user)</strong> — graph DB</li>
+    <li><strong>OpenAI API key</strong> — <em>use a scoped throwaway key</em> — set a $20 monthly cap in the OpenAI dashboard before pasting</li>
+  </ul>
+  <div class="callout">
+    <strong>Timing</strong> — most stages take &lt;30s each. The two slow ones are (a) apt package install (~2 min), (b) Chroma reindex on first API startup (~5-8 min). If install.sh exits before Chroma finishes, that's expected; watch <code>/tmp/arioncomply-chroma.log</code> for "reindex complete".
+  </div>
+</div>
+
+<div class="step">
+  <span class="badge step">STEP 6</span><span class="badge time">~2 min</span>
+  <h3>Verify services running</h3>
+<pre><code>sudo systemctl status arioncomply-api arioncomply-chroma --no-pager | head -30
+sudo systemctl list-timers 'arioncomply-*' --no-pager
+ss -tlnp | grep -E ':(8080|8000|7474|7687) '
+</code></pre>
+  <p>Expected: 3 services active (api, chroma, sweep.timer), 4 ports listening.</p>
+</div>
+
+<div class="step">
+  <span class="badge step">STEP 7</span><span class="badge time">~2 min</span>
+  <h3>Provision the first tenant</h3>
+<pre><code>cd /data/arioncomply
+PYTHONPATH=. python3 scripts/dev/create_tenant.py \
+    --name "Dry Run Tenant" --industry technology --admin-email you@example.com
+</code></pre>
+  <p>Copy the printed API key into a scratch note — it's hashed at rest, printed once.</p>
+</div>
+
+<div class="step">
+  <span class="badge step">STEP 8</span><span class="badge time">~5 min</span>
+  <h3>Smoke-test end-to-end</h3>
+<pre><code># A. deployment status endpoint (Ship 48)
+curl -sf -H "X-API-Key: $KEY" \
+  http://127.0.0.1:8080/api/v1/admin/deployment/status | python3 -m json.tool
+
+# B. one chat turn
+curl -sf -H "X-API-Key: $KEY" -H "Content-Type: application/json" \
+  -X POST http://127.0.0.1:8080/api/v1/chat \
+  -d '{"question": "what are our NC findings?"}' | python3 -m json.tool
+
+# C. SPA in browser — through SSH tunnel (safer than exposing 8080)
+# Run on your LAPTOP, not the VM:
+ssh -L 8080:127.0.0.1:8080 arionlabs@&lt;vm-public-ip&gt;
+# Then open http://127.0.0.1:8080/ui/arioncomply.html in your browser
+</code></pre>
+  <p>Grant the tenant's key <code>admin:status</code> scope so the endpoint works:</p>
+<pre><code>psql "$DATABASE_URL" -c "UPDATE api_keys SET scopes = array_append(scopes, 'admin:status') WHERE 'chat' = ANY(scopes);"
+</code></pre>
+</div>
+
+<div class="callout ok">
+  <strong>Phase 1 green criteria</strong>
+  <ul class="slim">
+    <li>3 systemd units active</li>
+    <li>Ports 8080 / 8000 / 7474 / 7687 listening</li>
+    <li>Deployment status endpoint returns valid JSON with all 4 services healthy</li>
+    <li>Chat endpoint returns an answer (may be "no evidence yet" — that's OK)</li>
+    <li>SPA loads at <code>http://127.0.0.1:8080/ui/arioncomply.html</code></li>
+  </ul>
+</div>
+
+<h2>Phase 2 · Ship 48 UX validation</h2>
+<p>Four break/diagnose scenarios. For each: break the thing, run <code>diagnose.sh</code>, paste the tarball + <code>CLAUDE_DEPLOY_GUIDE.md</code> into a fresh Claude Code session, see if the diagnosis lands.</p>
+
+<div class="callout info">
+  <strong>Fresh Claude Code session per scenario</strong> — this is the honest test. Don't reuse a session; each break should be diagnosed by a Claude that has never seen this VM before.
+</div>
+
+<div class="step">
+  <span class="badge step">SCENARIO 1</span><span class="badge time">~10 min</span>
+  <h3>Chroma down — ARION-BOOT-002</h3>
+  <p><strong>Break</strong>:</p>
+<pre><code>sudo systemctl stop arioncomply-chroma
+curl -sf -H "X-API-Key: $KEY" -X POST http://127.0.0.1:8080/api/v1/chat \
+  -H "Content-Type: application/json" -d '{"question":"hi"}' -w "%{http_code}\n"
+# Expect: 500
+</code></pre>
+  <p><strong>Diagnose</strong>:</p>
+<pre><code>bash scripts/ops/diagnose.sh
+ls -la /tmp/arion-diag-*.tar.gz
+</code></pre>
+  <p><strong>Validate</strong>: paste the tarball + <code>CLAUDE_DEPLOY_GUIDE.md</code> into a fresh Claude Code session with: <em>"Customer says chat is 500ing. Here's the diagnostic bundle. What's wrong?"</em></p>
+  <p><strong>Expected Claude diagnosis</strong>: services.txt shows arioncomply-chroma inactive; port 8000 not listening; journal-api.txt shows connection refused on 8000; matches <code>ARION-BOOT-002</code>; fix is <code>sudo systemctl start arioncomply-chroma</code>.</p>
+  <p><strong>Restore</strong>: <code>sudo systemctl start arioncomply-chroma</code></p>
+</div>
+
+<div class="step">
+  <span class="badge step">SCENARIO 2</span><span class="badge time">~15 min</span>
+  <h3>Missing PYTHONPATH — ARION-BOOT-005</h3>
+  <p><strong>Break</strong>:</p>
+<pre><code># Remove PYTHONPATH from the systemd unit
+sudo systemctl edit arioncomply-api  # opens editor
+# Add these lines:
+#    [Service]
+#    Environment=
+# The empty Environment= wipes previous settings; save + exit
+sudo systemctl daemon-reload
+sudo systemctl restart arioncomply-api
+sleep 3
+sudo systemctl status arioncomply-api --no-pager | head -10
+# Expect: failed / activating (auto-restart)
+</code></pre>
+  <p><strong>Diagnose</strong> + <strong>validate</strong> — same pattern as Scenario 1.</p>
+  <p><strong>Expected diagnosis</strong>: journal-api.txt shows <code>ModuleNotFoundError: No module named 'rag'</code>; matches <code>ARION-BOOT-005</code>; fix is <code>systemctl edit arioncomply-api</code> to add <code>Environment=PYTHONPATH=/data/arioncomply</code>.</p>
+  <p><strong>Restore</strong>: <code>sudo systemctl revert arioncomply-api && sudo systemctl daemon-reload && sudo systemctl start arioncomply-api</code></p>
+</div>
+
+<div class="step">
+  <span class="badge step">SCENARIO 3</span><span class="badge time">~10 min</span>
+  <h3>Fresh tenant, no evidence — ARION-RUNTIME-002</h3>
+  <p><strong>Break</strong>: this isn't a bug — it's a fresh-tenant state. Test whether Claude Code diagnoses it correctly.</p>
+<pre><code>PYTHONPATH=. python3 scripts/dev/create_tenant.py \
+    --name "Empty Tenant" --industry retail --admin-email empty@example.com
+# Copy the new key, then:
+curl -sf -H "X-API-Key: $NEW_KEY" http://127.0.0.1:8080/api/v1/posture/dashboard | python3 -m json.tool | head -30
+# Expect: all controls Not assessed
+</code></pre>
+  <p><strong>Diagnose</strong>: run <code>diagnose.sh</code>, tell Claude <em>"tenant sees empty dashboard, is this broken or normal?"</em></p>
+  <p><strong>Expected diagnosis</strong>: tenants.txt shows the new tenant with 0 posture_controls rows; matches <code>ARION-RUNTIME-002</code>; not a bug — expected fresh-tenant behavior; fix is upload evidence or seed via <code>create_tenant.py</code>.</p>
+  <p>This scenario tests whether the catalog + playbook <em>distinguishes bugs from expected states</em>. If Claude misdiagnoses this as broken, we need to sharpen the language in <code>ARION-RUNTIME-002</code>.</p>
+</div>
+
+<div class="step">
+  <span class="badge step">SCENARIO 4</span><span class="badge time">~15 min</span>
+  <h3>Bogus OpenAI key — no ARION code yet</h3>
+  <p><strong>Break</strong>:</p>
+<pre><code>sudo sed -i 's/^OPENAI_API_KEY=.*/OPENAI_API_KEY=sk-bogus-key-fail/' /data/arioncomply/.env
+sudo systemctl restart arioncomply-api
+sleep 3
+curl -sf -H "X-API-Key: $KEY" -X POST http://127.0.0.1:8080/api/v1/chat \
+  -H "Content-Type: application/json" -d '{"question":"any NCs?"}' -w "%{http_code}\n"
+# Expect: 500
+</code></pre>
+  <p><strong>Diagnose</strong>: as before.</p>
+  <p><strong>Expected diagnosis</strong>: <em>this is the interesting one</em>. There's no explicit ARION code for LLM auth failures yet — the diagnostic bundle should show journal-api.txt with OpenAI 401s. Claude should recognize the pattern from context and recommend checking OPENAI_API_KEY, but it won't have a stable code to point at.</p>
+  <p><strong>Follow-up</strong>: if Claude diagnoses cleanly without an ARION code, add <code>ARION-RUNTIME-011</code> or similar to <code>docs/error_catalog.html</code> so future sessions have a stable identifier. <em>This is Ship 48's "codify one code per real incident" rule in action.</em></p>
+  <p><strong>Restore</strong>: put the real OPENAI_API_KEY back + restart the API.</p>
+</div>
+
+<h2>Success criteria</h2>
+
+<div class="callout ok">
+  <strong>Phase 1 green</strong> if every checkbox from the Phase 1 green criteria (above) is met.
+</div>
+
+<div class="callout ok">
+  <strong>Phase 2 green</strong> if:
+  <ul class="slim">
+    <li>Each of 4 scenarios: Claude Code diagnoses the issue from bundle + playbook alone (no VM-specific knowledge required)</li>
+    <li>Time-to-diagnosis is under 30 seconds per scenario (Claude reads bundle → identifies code → returns fix)</li>
+    <li>Fix commands from Claude actually resolve the issue when pasted</li>
+    <li>The one gap (Scenario 4, missing ARION code) surfaces a real Ship 49 improvement</li>
+  </ul>
+</div>
+
+<h2>Cost + cleanup</h2>
+<ul class="slim">
+  <li><strong>Idle cost</strong>: D4s v3 in East US ≈ $140/mo pay-as-you-go. Stop the VM when done to $0 compute; disks cost ~$10/mo.</li>
+  <li><strong>Full teardown</strong>: delete the resource group. Everything goes.</li>
+  <li><strong>OpenAI cap</strong>: revoke the throwaway key in OpenAI dashboard after dry run. Zero further spend.</li>
+</ul>
+
+<h2>Things to note during the dry run</h2>
+<p>Take notes on these as you go — they feed into Ship 49+ improvements:</p>
+<ul class="slim">
+  <li>How long each phase actually took (compare to estimates above)</li>
+  <li>Any prompt in <code>install.sh</code> that was ambiguous or asked for the wrong thing</li>
+  <li>Any error message during install that didn't match an ARION code</li>
+  <li>Anything about the Ship 48 diagnose UX that felt like it needed more or less content</li>
+  <li>Whether <code>CLAUDE_DEPLOY_GUIDE.md</code> was actually helpful to a cold Claude session</li>
+</ul>
+
+<div class="footer">
+  <p>Companion documents:
+    <a href="./poc_install_guide.html">POC install guide</a> ·
+    <a href="./error_catalog.html">Error catalog</a> ·
+    <a href="./architecture_brief.html">Architecture brief</a> ·
+    <a href="./demo_walkthrough.html">Demo walkthrough</a>
+  </p>
+  <p>Written 2026-07-28 for the pre-POC dry run. Update after the real dry run based on what surprised us.</p>
+</div>
+
+</body>
+</html>
