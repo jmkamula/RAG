@@ -3450,6 +3450,23 @@ function humanizeSlug(s) {
   return String(s).replace(/_/g, ' ');
 }
 
+// Strip Word-generated TOC anchor tags + other structural noise that
+// leaks into stored excerpts. Word inserts hidden <a id="_Toc..."></a>
+// on every heading; the docx reader captures them verbatim. Rendering
+// these to the reviewer looks like garbled HTML. Applied on display
+// only — stored data preserved for audit provenance.
+//   input:  '# <a id="_Toc1922344359"></a><a id="_Toc236212919"></a>SCOPE'
+//   output: '# SCOPE'
+function scrubDocxNoise(s) {
+  if (!s) return '';
+  return String(s)
+    .replace(/<a\s+(?:id|name)="_Toc[^"]*"\s*>\s*<\/a>/gi, '')
+    .replace(/<a\s+(?:id|name)="_Ref[^"]*"\s*>\s*<\/a>/gi, '')
+    .replace(/<a\s+(?:id|name)="_Hlk[^"]*"\s*>\s*<\/a>/gi, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
 // Turn an engine reason string into the same tenant-friendly form
 // _prettify_reason() emits server-side (rag/arion_graph.py). Handles
 // the shapes the engine composes:
@@ -4004,15 +4021,22 @@ async function selectStage1(c, ev) {
       return;
     }
     const esc = s => (s||'').replace(/</g,'&lt;');
-    // Gloss explains the two raw enum labels (status + confidence) so the
-    // user doesn't have to guess what "partial / medium" means.
-    let h = `<div style="font-size:10px;color:#9C9A8E;margin-bottom:6px;line-height:1.4">
-      <strong>Evidence</strong> = how well the document covers this control
-      (missing / partial / present). <strong>Confidence</strong> = our
-      certainty in that assessment (low / medium / high). One source can
-      cover several parts of a control — the same column may appear under
-      more than one artifact heading, and the heading explains which
-      requirement it's satisfying there.
+    // Column-explainer moved to an info-icon tooltip so the reviewer's
+    // eye lands on the finding first, not on definitions. Was inline
+    // prose that customers read as part of the finding itself.
+    const _s1TooltipText =
+      'Evidence: how well the document covers this control ' +
+      '(missing / partial / present). Confidence: our certainty ' +
+      'in that assessment (low / medium / high). One source can ' +
+      "cover several parts of a control; the label above each " +
+      'section says which requirement is being satisfied there.';
+    let h = `<div style="display:flex;align-items:center;gap:6px;
+                          margin-bottom:8px;font-size:11px;color:#9C9A8E">
+      <span>Findings from this document, grouped by source and requirement.</span>
+      <span title="${esc(_s1TooltipText)}"
+            style="cursor:help;color:#9C9A8E;font-size:12px">
+        <i class="ti ti-info-circle"></i>
+      </span>
     </div>`;
 
     // Group findings by source → leaf. Two-level grouping reveals the
@@ -4053,12 +4077,12 @@ async function selectStage1(c, ev) {
         </div>`;
       for (const leafKey of Object.keys(grouped[source])) {
         const grp = grouped[source][leafKey];
-        // Small right-side ref hint. The full leaf_id (req:X:Y) is a
-        // system identifier — surface just the control ref so reviewers
-        // see 'A.5.15' not 'req:A.5.15:access_control_policy'.
+        // Small right-side ref hint — but only when the ref differs from
+        // the control we're already on (xfw case). Otherwise the panel
+        // header + this tag both say 'A.5.8' side by side.
         const parts = grp.leaf_id ? String(grp.leaf_id).split(':') : [];
         const shortRef = parts.length >= 2 ? parts[1] : '';
-        const refTag = shortRef
+        const refTag = (shortRef && shortRef !== c.control_ref)
           ? `<span style="color:#9C9A8E;font-size:10px;font-weight:400">
                ${esc(shortRef)}
              </span>`
@@ -4087,22 +4111,29 @@ async function selectStage1(c, ev) {
           }
           const mustText = f.must_text
             ? esc(f.must_text)
-            : esc(f.excerpt || '(no excerpt)');
-          const mustId = f.checklist_item_id
-            ? `<code style="font-size:10px;color:#9C9A8E;background:#fff;
-                            padding:1px 4px;border-radius:3px;margin-left:4px">
-                 ${esc(f.checklist_item_id.split(':').slice(-1)[0])}
-               </code>`
+            : esc(scrubDocxNoise(f.excerpt) || '(no excerpt)');
+          // MUST slug (checklist_item_id) preserved as data attribute for
+          // audit provenance; NOT displayed. The MUST description above
+          // is already human-readable — the slug next to it just reads
+          // as noise in the sentence (e.g., 'reg_project_id' sitting at
+          // the end of 'Each in-scope project captured with a unique
+          // identifier').
+          const mustIdAttr = f.checklist_item_id
+            ? ` data-must-id="${esc(f.checklist_item_id)}"`
             : '';
+          // Excerpt shown as source line when there's no column_name.
+          // Scrub Word TOC anchors so '<a id="_TocXXX"></a>' etc. don't
+          // surface as HTML noise.
           const sourceLine = f.column_name
             ? `col <code style="background:#fff;padding:1px 4px;border-radius:3px">
                  ${esc(f.column_name)}
                </code>`
-            : (f.must_text ? esc(f.excerpt) : '');
-          h += `<div style="margin:0 0 6px 14px;padding:6px 8px;background:#FAF8F2;
-                              border-radius:5px;border:1px solid #E8E5DA">
+            : (f.must_text ? esc(scrubDocxNoise(f.excerpt)) : '');
+          h += `<div${mustIdAttr} style="margin:0 0 6px 14px;padding:6px 8px;
+                              background:#FAF8F2;border-radius:5px;
+                              border:1px solid #E8E5DA">
             <div style="font-size:11px;color:#3A382E;line-height:1.4;margin-bottom:4px">
-              ${mustText}${mustId}
+              ${mustText}
             </div>
             <div style="display:flex;gap:6px;align-items:center;font-size:10px">
               ${statusPill(f.status)}
@@ -4117,7 +4148,10 @@ async function selectStage1(c, ev) {
     }
     gap.innerHTML = h;
     const ids = d.findings.map(f => f.finding_id);
-    document.getElementById('dp-meta').textContent = `${ids.length} finding ID(s) will be approved together`;
+    document.getElementById('dp-meta').textContent =
+      ids.length === 1
+        ? 'Approve 1 finding on this control'
+        : `Approve ${ids.length} findings on this control`;
   } catch(e) {
     document.getElementById('dp-gap').textContent = `Error: ${e.message}`;
   }
