@@ -96,7 +96,7 @@ ul.slim li { margin: 3px 0; }
     <tr><th>Field</th><th>Value</th></tr>
     <tr><td>Subscription / Resource group</td><td>your choice; new RG called <code>arion-dryrun</code> keeps cleanup easy</td></tr>
     <tr><td>Region</td><td>same region as this VM (minimize egress + latency)</td></tr>
-    <tr><td>Image</td><td><strong>Ubuntu Server 22.04 LTS – x64 Gen2</strong> ← important, not 24.04</td></tr>
+    <tr><td>Image</td><td><strong>Ubuntu Server 24.04 LTS – x64 Gen2</strong> (matches the demo VM; PostgreSQL 16 + the schema baseline was dumped from 24.04). 22.04 also works if you have a corporate reason to prefer it.</td></tr>
     <tr><td>Size</td><td><strong>Standard D4s v3</strong> (4 vCPU / 16 GB) — or D4as v5 (AMD, similar price)</td></tr>
     <tr><td>Authentication type</td><td>SSH public key. Paste your <code>~/.ssh/id_ed25519.pub</code> content.</td></tr>
     <tr><td>Username</td><td><code>arionlabs</code> (matches this VM's convention)</td></tr>
@@ -125,7 +125,7 @@ ul.slim li { margin: 3px 0; }
   <h3>SSH in + verify OS</h3>
 <pre><code>ssh arionlabs@&lt;vm-public-ip&gt;
 uname -a
-cat /etc/os-release  # confirm 22.04 LTS
+cat /etc/os-release  # confirm 24.04 LTS (or 22.04 if you chose that)
 df -h /             # ~60GB free expected
 free -h             # ~15GB total RAM
 </code></pre>
