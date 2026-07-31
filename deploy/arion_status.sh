@@ -163,6 +163,25 @@ systemd_state() {
     done
 }
 
+git_state() {
+    # Emit "sha branch dirty" (space-separated) for the ArionComply checkout.
+    # dirty = "clean" or "dirty" depending on `git status --porcelain`.
+    # Prints "unknown unknown unknown" if not a git checkout.
+    if ! command -v git >/dev/null 2>&1 || [[ ! -d "$ARION_ROOT/.git" ]]; then
+        echo "unknown unknown unknown"
+        return
+    fi
+    local sha branch dirty
+    sha=$(git -C "$ARION_ROOT" rev-parse --short=8 HEAD 2>/dev/null || echo unknown)
+    branch=$(git -C "$ARION_ROOT" rev-parse --abbrev-ref HEAD 2>/dev/null || echo unknown)
+    if [[ -z "$(git -C "$ARION_ROOT" status --porcelain 2>/dev/null)" ]]; then
+        dirty="clean"
+    else
+        dirty="dirty"
+    fi
+    printf '%s %s %s\n' "$sha" "$branch" "$dirty"
+}
+
 # ── Execute probes ───────────────────────────────────────────────────
 
 PG_OUT="$(pg_check)"; PG_RC=$?
@@ -176,12 +195,19 @@ API_RC=1; api_check && API_RC=0
 DOCS_RC=1
 curl -sf --max-time 2 "http://127.0.0.1:8001/" >/dev/null 2>&1 && DOCS_RC=0
 
+# Git state — SHA + branch + dirty flag. Handy for status reports so
+# operators (and Claude Code) can pin observations to a specific ref.
+read -r GIT_SHA GIT_BRANCH GIT_DIRTY < <(git_state)
+
 # ── Output ───────────────────────────────────────────────────────────
 
 if [[ "$JSON_MODE" -eq 1 ]]; then
     # Emit JSON (single line) for Claude Code / scripts.
     printf '{'
     printf '"env_loaded":%s,' "$env_loaded"
+    printf '"git":{"sha":"%s","branch":"%s","dirty":%s},' \
+        "$GIT_SHA" "$GIT_BRANCH" \
+        "$([[ "$GIT_DIRTY" == "dirty" ]] && echo true || echo false)"
     printf '"postgres":{"ok":%s,"size_mb":%s,"posture_controls":%s},' \
         "$([[ $PG_RC -eq 0 ]] && echo true || echo false)" "$PG_SIZE" "$PG_COUNT"
     printf '"neo4j":{"ok":%s,"nodes":%s},' \
@@ -213,6 +239,16 @@ else
         echo -e "${GREEN}✓ .env loaded${RESET}          ($ENV_FILE)"
     else
         echo -e "${YELLOW}△ .env not found${RESET}      ($ENV_FILE)"
+    fi
+    # Git ref — helps pin any observation to a specific commit.
+    if [[ "$GIT_SHA" != "unknown" ]]; then
+        if [[ "$GIT_DIRTY" == "dirty" ]]; then
+            echo -e "${YELLOW}◆ Codebase${RESET}            ${GIT_SHA} ${DIM}(${GIT_BRANCH}, dirty)${RESET}"
+        else
+            echo -e "${GREEN}◆ Codebase${RESET}            ${GIT_SHA} ${DIM}(${GIT_BRANCH})${RESET}"
+        fi
+    else
+        echo -e "${YELLOW}◆ Codebase${RESET}            not a git checkout"
     fi
     echo ""
     echo -e "${DIM}Checking services...${RESET}"
