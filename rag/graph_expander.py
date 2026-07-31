@@ -21,6 +21,16 @@ Connection:
 Offline mode: if Neo4j is unavailable, falls back to
   vector-result-only expansion (no graph traversal).
   Useful for development / CI without a live Neo4j instance.
+
+Neo4j property-name convention (do not "fix" this):
+  RequirementNode  — canonical ref lives in `ref`         (e.g. 'A.5.15')
+  EvidenceRequirement + ChecklistItem — use `control_ref` (same shape)
+  FulfilmentSpec   — identified by `id` only, no ref field
+
+Cypher filters below deliberately use `n.ref` on RequirementNode.
+`n.control_ref` on that label returns zero rows silently — the
+property is not populated. Confirmed 2026-07-31 during the Ship 51'.c
+audit (see docs/memory/ship_51_prime_c_closed_2026_07_31.md).
 """
 from __future__ import annotations
 
