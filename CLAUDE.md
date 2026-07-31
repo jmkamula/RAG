@@ -372,7 +372,13 @@ For debugging any deployment (this VM or a customer install), read
 [[CLAUDE_DEPLOY_GUIDE.md]] at the repo root. It's the AI-first ops
 playbook: symptom → verify → fix triples, structured pointers to
 every diagnostic surface, common ops queries, and the codebase
-orientation index. Companion documents:
+orientation index.
+
+**If you are running the pre-POC dry-run** on a fresh Azure VM (or
+similar fresh install), read [[CLAUDE_DRYRUN.md]] first — it's the
+mission brief with phase-by-phase steps, state file convention,
+report spec, safety guardrails, and escalation criteria. Purpose-built
+for autonomous end-to-end execution. Companion documents:
 
 - `scripts/ops/diagnose.sh` — one-command diagnostic bundle
 - `docs/error_catalog.html` — stable `ARION-*` error codes
