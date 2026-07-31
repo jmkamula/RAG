@@ -844,6 +844,42 @@ class DocumentPipeline:
                 posture_skipped  = summary.get("posture_skipped", 0),
             )
 
+            # ── Stage 4.7: engine kick — Ship 51'.b ──────────────────────────
+            # Auto-approved findings (fingerprint / templated / workbook) never
+            # go through Stage-1 approval, so the engine kick that lives in
+            # rag/posture/stage1_review_chat.py never fires for these paths.
+            # Result: dashboard + chat see stale posture_controls even after a
+            # successful upload — the engine's stored assertions only refresh
+            # on the next Stage-1 batch, a chat query that triggers load_posture,
+            # or the 30-min sweep.
+            #
+            # Kick load_posture at the tail of the pipeline (after Stage 4 write
+            # + Stage 4.5 xfw proposer + Stage 4.6 workbook discovery). Runs on
+            # its own connection to avoid entangling with the (already-closed)
+            # write path. Best-effort — any failure is logged, the upload
+            # remains successful. Same discipline as stage1_engine_kick_after_batch.
+            if not self.dry_run and findings:
+                try:
+                    from rag.posture_loader import load_posture
+                    _eng_conn = psycopg2.connect(self.db_url)
+                    try:
+                        with _eng_conn.cursor() as _cur:
+                            _cur.execute(
+                                "SELECT set_config('app.tenant_id', %s, TRUE)",
+                                (tenant_id,),
+                            )
+                        load_posture(_eng_conn, tenant_id)
+                    finally:
+                        _eng_conn.close()
+                    logger.info(
+                        f"Stage 4.7: engine kicked for tenant {tenant_id[:8]}"
+                    )
+                except Exception as _eng_err:
+                    logger.warning(
+                        f"Stage 4.7: engine kick failed (upload succeeded): "
+                        f"{type(_eng_err).__name__}: {_eng_err}"
+                    )
+
             duration_ms = int((time.time() - t_start) * 1000)
 
             # ── Complete trace row ────────────────────────────────────────────
