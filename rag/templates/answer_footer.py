@@ -43,7 +43,16 @@ _RELEVANT_QUESTION_TYPES = {
     "implementation",
     "gap_analysis",
     "posture_check",
-    "document_inventory",
+    # document_inventory intentionally excluded (Ship 51'.a). For broad
+    # doc-inventory queries ("what documents do we have"), the LLM
+    # enumerates missing controls as a remediation guide; _extract_refs
+    # then scans that text and returns 15-20 refs; templates_block used
+    # to fire N starter cards for controls that had nothing to do with
+    # the user's document question. document_content stays because
+    # asking what a specific document should contain (e.g. "what should
+    # our access policy include?") is a legitimate template-download
+    # surface. Broad remediation-guide UX belongs in the Get Started
+    # mode + dashboard drill-in, not stapled to chat doc answers.
     "document_content",
 }
 
