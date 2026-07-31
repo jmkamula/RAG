@@ -90,6 +90,15 @@ bash deploy/install.sh --yes 2>&1 | tee /tmp/install.log
 - Two-attempt rule (see Section 7).
 
 **P1.4 — Verify services**
+
+Preferred (single command, machine-parseable):
+```bash
+bash deploy/arion_status.sh --json | python3 -m json.tool
+```
+- Expect: every `"ok": true` in the JSON, all 5 systemd units `"active"`, exit code 0.
+- The script probes Postgres + Neo4j + Chroma + API + docs + systemd unit states in one pass. Use its exit code to gate proceeding: `if bash deploy/arion_status.sh --json >/dev/null; then continue; else stop; fi`.
+
+Also acceptable (individual probes, for reference / when you want the detail):
 ```bash
 sudo systemctl status arioncomply-api arioncomply-chroma --no-pager | head -30
 sudo systemctl list-timers 'arioncomply-*' --no-pager
@@ -374,6 +383,7 @@ If RED: the state file + report tell the human where you stopped and what they n
 - `docs/poc_install_guide.html` — general install runbook
 - `docs/error_catalog.html` — stable `ARION-*` error codes
 - `scripts/ops/diagnose.sh` — diagnostic bundle generator
+- `deploy/arion_status.sh` — service status probe (`--json` for parseable output; exit code gates proceed/stop). Use this at the top of each phase to confirm state.
 - `deploy/install.sh` — the one-command installer (supports `--yes`)
 - `scripts/dev/create_tenant.py` — tenant provisioning
 
