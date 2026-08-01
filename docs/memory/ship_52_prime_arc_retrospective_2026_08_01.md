@@ -1,13 +1,15 @@
 ---
 name: ship-52-prime-arc-retrospective-2026-08-01
-description: "Ship 52' arc retrospective — DocumentCard structured payload + SPA card grid for doc-inventory chat responses. 3 delivery sub-arcs bundled in one commit + 2 live-review addenda + closer. Same-day arc, direct follow-on to Ship 51'.e/51'.f. Codified: async event loop + shared psycopg pool is a footgun; refless intents need explicit enumeration; card content beats drill-in when destination doesn't exist; user feedback during test worth more than any design memo."
+description: "Ship 52' arc retrospective (final) — DocumentCard card grid PLUS a GDPR spot-check that turned into a UX quality iteration. 11 sub-arcs in one contiguous same-day session. Card idiom formalised for a 3rd entity type. GDPR sub-paragraph refs unblocked (regex + robust SPA error handling), ref-form canonicalization retires an entire class of latent comparison bugs, Demonstrated-by panel gets a clear explainer + control titles + surgical verdict glossary. Codified 8 lessons around async safety, refless-intent enumeration, ref-form variance, path-validator audits, and one-panel-per-obligation UX discipline."
 metadata:
   node_type: memory
   type: project
   originSessionId: 5808ba74-b22a-4a68-b4f1-19f18ce079cd
 ---
 
-Ship 52' arc retrospective — DocumentCard card grid.
+Ship 52' arc retrospective — DocumentCard card grid + GDPR spot-check
+UX quality pass. This file supersedes the interim closer written
+after 52'.f — the arc kept going and this is the final record.
 
 ## What triggered it
 
@@ -20,27 +22,34 @@ next natural question:
 > *"Why 15 of 54? And how can we display the full list? Can we use
 > the card pattern to make it cleaner?"*
 
-Prose was hitting its intrinsic scalability ceiling at ~20 items.
-Ship 22'.c had already established `RiskCard` as the card pattern for
-short-circuit list surfaces. Documents are the same shape of problem —
-entities with rich structured metadata that benefit from card-style
-tiles over prose bullets. This arc extends the card idiom.
+Prose was hitting its scalability ceiling at ~20 items. Ship 22'.c
+had established `RiskCard` as the card pattern for short-circuit
+list surfaces. Documents are the same shape of problem. This arc
+extends the card idiom — and then keeps going as a GDPR spot-check
+exposes ~6 latent UX issues on the drill-in surface.
 
 ## What shipped
 
 | Sub-arc | Delivery | Commit |
 |---|---|---|
-| 52'.a | DocumentCard schema — StandardsSummary sub-model + documents field on StructuredAnswer | `515d61e` (bundled) |
+| 52'.a | DocumentCard schema — StandardsSummary sub-model + `documents` field on StructuredAnswer | `515d61e` (bundled) |
 | 52'.b | Backend — build_document_cards() + _build_documents_data() helper + doc_inventory short-circuit wire-up | `515d61e` (bundled) |
 | 52'.c | SPA — renderDocumentCards() function + CSS + Ship 22'.c-style card grid | `515d61e` (bundled) |
-| 52'.d | Addendum — consensus aggregator ambiguity bypass for document_inventory | `462c9e3` |
-| 52'.e | Addendum — short intro when cards render + drop drill-in link that went nowhere | `2ca654e` |
-| **52'.f** | **This retro** | pending |
+| 52'.d | Consensus aggregator ambiguity bypass for document_inventory (retrieval scatter isn't ambiguity for cross-cutting doc queries) | `462c9e3` |
+| 52'.e | Short intro when cards render + drop drill-in link that led nowhere | `2ca654e` |
+| 52'.f | Interim retro (now superseded by this file) | `aa346f2` |
+| 52'.g | Ref-form canonicalization — polish + repair normalize "Art. N" → "Art.N" so machine-form and display-form converge | `adf8f3c` |
+| 52'.h | GDPR sub-paragraph regex fix (`Art.5.1.f` / `Art.32.1.b`) + robust SPA error handling for FastAPI 422 detail arrays | `c64a5e0` |
+| 52'.i | Demonstrated-by panel: explainer + Neo4j control titles batched onto each demonstrator row | `3747a58` |
+| 52'.j | Simplified demonstrated-by explainer — "Cross-framework grounding — implemented by the operational controls below" — correct for both linkage-only and dual (own artefact + linkage) obligations | `486f920` |
+| 52'.k | Surgical verdict glossary — bare pills everywhere + one-line legend at the top of the drill-in | `df2942d` |
+| **52'.l** | **This retro (final)** | pending |
 
-The three primary sub-arcs (52'.a-c) shipped in one commit because
-they're a coupled slice — the schema/backend/SPA changes only work
-together. The two addenda came from the operator watching the live
-response afterwards.
+The first three sub-arcs (52'.a-c) shipped in one commit — a coupled
+slice. Then 52'.d-e came from live operator review. The interim retro
+(52'.f) declared the arc closed. Then a GDPR spot-check on Art.5.1.f
+exposed a chain of latent issues (52'.g-k) that turned into a genuine
+UX quality pass.
 
 ## Sub-arc details
 
@@ -49,250 +58,329 @@ response afterwards.
 Two new Pydantic models in `rag/casefile/answer_schema.py`:
 
 - `StandardsSummary`: one `(standard_id, standard_display, n_refs)`
-  tuple. A doc that spans 3 frameworks emits 3 of these — cross-cutting
-  nature preserved at the summary layer without needing to drill in.
-- `DocumentCard`: title + external_ref + evidence_type +
-  evidence_type_display + uploaded_at + standards[] + standards_span +
-  total_refs + dashboard_url. All deterministic — no LLM emission
-  surface. Same discipline as RiskCard (Ship 22'.c).
+  tuple. A doc that spans 3 frameworks emits 3 of these.
+- `DocumentCard`: title + external_ref + evidence_type + display +
+  uploaded_at + standards[] + standards_span + total_refs + drill.
+  All deterministic — no LLM emission surface.
 
 Added `documents: list[DocumentCard]` to `StructuredAnswer`.
 
 ### 52'.b — Backend population
 
-Two pieces:
-
-- `build_document_cards(documents_data)` in `rag/casefile/answer_augment.py`
-  mirrors `build_risk_cards` — silent-fail per row on unexpected shape,
-  no LLM.
-- `_build_documents_data(docs)` in `rag/arion_graph.py` shapes raw
-  uploaded-doc dicts into card-ready payloads. Composite `framework_refs`
-  (e.g. `ISO27001:2022:A.5.1`) get grouped by standard prefix and
-  humanized via a small `_humanize_std_id()` helper.
-
-`build_short_circuit_structured()` gained a `documents_data` kwarg.
-The doc_inventory short-circuit at `arion_graph.py:2864` now passes
-docs through this route. Same topic-scope filter used for the prose
-answer; cap raised to 20 for cards (they paginate) vs 10 for prose.
+- `build_document_cards(documents_data)` in
+  `rag/casefile/answer_augment.py` — mirrors `build_risk_cards`.
+- `_build_documents_data(docs)` in `rag/arion_graph.py` — shapes
+  raw uploaded-doc dicts (framework_refs composites, evidence_type,
+  document_title / filename) into card-ready payloads.
+- `build_short_circuit_structured()` gained a `documents_data` kwarg.
 
 ### 52'.c — SPA card grid
 
-New `renderDocumentCards` block below `renderRiskCards` in
-`static/arioncomply.html`. Each card:
+`renderDocumentCards` block below `renderRiskCards`. Border-left
+accent `#4A90A4`, distinct from risk-card red + related-card violet.
 
-- External-ref chip + evidence_type pill + cross-framework badge
-  (when `standards_span >= 2`) + uploaded date on the head row
-- Title on the main row
-- Standards summary as chips: `ISO 27001 [15]  ISO 27701 [26]  GDPR [8]`
+### 52'.d — Aggregator ambiguity bypass
 
-New CSS: `.sa-docs / .sa-doc-card` (border-left accent `#4A90A4`,
-distinct from risk-card red and related-card violet). Follows the
-same design tokens (radius, padding, palette) as other sa-card
-variants.
-
-### 52'.d — Aggregator ambiguity bypass (live-review addendum #1)
-
-Ship 52's card pattern shipped; operator immediately retested the
-query and got:
-
-> *"Do you mean one of: A.5.18, A.7.2, A.8.2?"*
-
-Instead of cards. The consensus aggregator's `_detect_ambiguity`
-check saw retrieval scatter across multiple access-related controls
-and fired a `topic_ambiguity` clarification. But the query wasn't
-about a control — it was about documents. Cross-cutting doc queries
-will scatter across ref families by definition.
+Symptom: "Do you mean one of: A.5.18, A.7.2, A.8.2?" clarification
+fired on cross-cutting doc queries because retrieval legitimately
+scattered across access-related controls.
 
 Fix: add `document_inventory` to `_refless_intent` in
 `rag/consensus/aggregator.py::_detect_ambiguity`. Sits alongside
 `definition` / `gap_analysis` / `cross_framework` / `free_assessment`
-— all intent types where a specific ref anchor isn't required. Did
-NOT add `document_content` — asking what a SPECIFIC document should
-contain legitimately benefits from ref-pinning.
+— intent types where a specific ref anchor isn't required.
 
-### 52'.e — Short intro + drop drill-in link (live-review addendum #2)
+### 52'.e — Short intro + drop drill-in link
 
-Two more issues from the second live review:
+Two live-review issues:
 
-1. The intro was showing the full prose answer (intro + bullets +
-   tail) AND the card grid was showing the same 15 docs. Two passes
-   of the same data.
-   
-   Fix: when `documents_data` is populated, walk `composed` and take
-   everything BEFORE the first bullet line as `intro_text`. Cards
-   carry no signal the bullets don't already carry. Intro dropped
-   from ~1300 chars to 64 chars.
+- Intro was showing the full prose (intro + bullets + tail) while
+  cards were rendering the same 15 docs. Fix: truncate intro to
+  the header line when cards attach.
+- The "Open in Documents →" drill-in routed to intake-only Documents
+  tab. Fix: drop the link until a real Documents list view ships.
 
-2. The "Open in Documents →" drill-in link on each card routed to
-   the Documents tab — which is currently intake-only. No per-doc
-   detail view exists. The link led to a dead-end UX.
-   
-   Fix: dropped the drill-in link. Cards stand on their own. Link
-   comes back when a real Documents list view ships.
+### 52'.g — Ref-form canonicalization
 
-`answer_text` on the sync response still carries the full prose
-(intro + bullets + tail) for API/curl consumers who don't render
-cards. Only the structured intro card gets the shortened form.
+Symptom: `"Art.32.1GDPR Art. 32.1.b requires..."` — chip and prose
+concatenated with no space.
+
+Root cause: refs live in two conventions. Machine form (`Art.32.1`,
+no space) meets display form (`Art. 32.1`, space after `Art.`) at
+the chip-dedup check. ISO refs (`A.5.15`) have no interior spacing
+so both forms coincide — the mismatch was latent until GDPR queries
+surfaced. Six comparison sites potentially affected.
+
+Fix: `canonicalize_ref_whitespace()` in `framework_refs.py` rewrites
+`Art. N` → `Art.N`. Called at every polish exit
+(`polish_short_circuit_answer`) and on the final repaired case-file
+answer (`check_and_repair`). Machine form wins so `primary_ref` and
+prose match byte-for-byte. Belt-and-braces SPA normalization on the
+intro-chip dedup as defense in depth.
+
+### 52'.h — GDPR sub-paragraph regex + robust SPA error handling
+
+Symptom: dashboard drill-in on `Art.5.1.f` showed two different
+errors depending on the branch: "No derivation tree available"
+(NC/OFI branch) or "Couldn't load evidence sources: [object Object]"
+(Comply/N/A branch).
+
+Root cause 1: FastAPI path-param validator regex only accepted
+`Art.32(a)` (parenthesized letter) not `Art.32.1.b` (dotted letter).
+Curated GDPR data uses the dotted convention → 422 on every
+sub-paragraph drill-in.
+
+Root cause 2: FastAPI 422 returns `detail` as an ARRAY of
+`{loc, msg, type, ...}` entries. The SPA's `api()` helper did
+`new Error(e.detail || r.statusText)` — passing the array to Error
+stringifies as `"[object Object]"`.
+
+Fix 1: extended the regex from
+`Art\.\d+(?:\.\d+)?(?:\([a-z0-9]+\))?` to
+`Art\.\d+(?:\.\d+){0,2}(?:\.[a-z]|\([a-z0-9]+\))?`.
+18-case unit test verified: all curated shapes accept, plaintext /
+path-traversal / multi-letter suffix reject.
+
+Fix 2: `api()` now coalesces `detail` intelligently — string as-is,
+array uses first entry's `msg`, object JSON-stringifies, falls back
+to `statusText`. No more `[object Object]` for any 422 anywhere.
+
+### 52'.i — Demonstrated-by explainer + control titles
+
+Symptom: `demonstrated_by` list showed only `A.8.24 · ISO 27001:2022
+→ NC` with no titles — user had to know refs by heart.
+
+Fix: batched Neo4j title fetch in the demonstrated-by endpoint (one
+`UNWIND` query regardless of demonstrator count). Each entry gains
+`src_title`. SPA renders title as a second line inside each
+demonstrator row. First iteration also added a 2-sentence explainer
+of what "Demonstrated by" means.
+
+### 52'.j — Simplified explainer
+
+The 52'.i explainer claimed "This obligation isn't assessed directly"
+— correct for pure-linkage obligations like Art.5.1.f but wrong for
+Art.7 (which has both own artefacts AND cross-framework grounding).
+
+Rewrote to a single sentence that reads correctly for both cases:
+
+> "Cross-framework grounding — implemented by the operational
+> controls below."
+
+### 52'.k — Surgical verdict glossary
+
+Symptom: verdict expansions repeated everywhere. On Art.7's drill-in
+alone, "Non-Conformity" appeared ~9 times and "Opportunity for
+Improvement" ~2 times — repeated on the Finding row, Demonstrated by
+rows, Evidence coverage tiles, Stage-2 proposals.
+
+Fix: `pillWithLabel()` returns the bare pill (no more inline expansion
+everywhere). New `renderFindingGlossary()` renders a one-line legend
+under the Finding pill:
+
+```
+[NC] not yet met · [OFI] partially met, improvable ·
+[Comply] met · [N/A] out of scope
+```
+
+Once per drill-in view. Hover tooltips on the individual pills still
+carry the full term.
 
 ## Delivery velocity
 
-- Session length: ~90 min including two live-review pivots
-- 5 sub-arcs across one contiguous flow (2026-08-01)
-- Zero mid-arc rollbacks
-- Two addenda came from ~2 min of operator review each
-- Eval baseline held (didn't re-run — changes scoped to a specific
-  short-circuit path already covered by Ship 51's eval run)
+- Session length: ~3-4h across a single 2026-08-01 flow
+- 11 sub-arcs
+- Zero mid-arc rollbacks (52'.f interim retro doesn't count — arc
+  just kept going after it)
+- Eval baseline held (didn't re-run — Ship 51's run stood; changes
+  scoped to specific short-circuit paths + drill-in surfaces)
 
-## Codified 4 lessons
+## Codified 8 lessons
 
 ### 1. Async event loop + shared psycopg pool is a footgun
 
 52'.b hit `psycopg.OperationalError: sending query and params
-failed: another command is already in progress` on the streaming
-endpoint. The sync endpoint worked fine. Root cause: passing
-`posture_by_node_id=posture` (a shared reference) into
-`build_short_circuit_structured` triggered a code path where a
-`psycopg2` sync connection collided with LangGraph's async event
-loop.
+failed: another command is already in progress` on streaming.
+Passing `posture_by_node_id=posture` (a shared reference) triggered
+a code path where a `psycopg2` sync connection collided with
+LangGraph's async event loop.
 
 **Rule**: when calling into shared helpers from an async graph node,
-prefer to pass `None` for optional context (`posture`, `tenant`,
-`pg_conn`) unless you actually need what they unlock. The absent
-context is safer than accidentally sharing a synchronous DB handle
-across coroutines. Ship 52'.b now explicitly passes `tenant=None`,
-`posture_by_node_id=None`, `tenant_id=""` for the doc-cards path —
-we don't need any of them.
+prefer to pass `None` for optional context unless you actually need
+what it unlocks. The absent context is safer than accidentally
+sharing a synchronous DB handle across coroutines.
 
 ### 2. Refless intents need explicit enumeration
 
-The consensus aggregator's `_refless_intent` set had `definition`,
-`gap_analysis`, `cross_framework`, `free_assessment`. Missing
-`document_inventory` meant every doc query with cross-cutting refs
-(most of them, on the demo tenant post-51'.d) tripped a false
-ambiguity clarification.
+52'.d added `document_inventory` to `_refless_intent`. Cross-cutting
+doc queries WILL scatter across ref families — that's not ambiguity,
+it's the metadata reality.
 
-**Rule**: when adding a new intent type OR when a category of query
-starts producing genuinely-scattered retrieval signals, audit the
-`_refless_intent` set. The consensus aggregator can't distinguish
-"scattered because ambiguous" from "scattered because cross-cutting"
-without an explicit hint.
+**Rule**: when a new intent type or query category produces
+legitimately-scattered retrieval, audit the `_refless_intent` set.
+The consensus aggregator can't distinguish "scattered because
+ambiguous" from "scattered because cross-cutting" without an
+explicit hint.
 
-### 3. Card content > drill-in when destination doesn't exist
+### 3. Card content beats drill-in when destination doesn't exist
 
-52'.e removed the "Open in Documents →" link because the SPA's
-Documents tab is intake-only. A link that leads to a dead-end is
-worse than no link — it promises capability we don't have.
+52'.e dropped the "Open in Documents →" link because the SPA's
+Documents tab is intake-only.
 
 **Rule**: don't ship drill-in links that lead to placeholder
-destinations. Either the destination exists (link ships) or it
-doesn't (link waits). Users trust card interactions — betrayed
-trust is expensive to rebuild.
+destinations. Users trust card interactions — betrayed trust is
+expensive to rebuild.
 
 ### 4. User feedback during test is worth more than any design memo
 
-Ship 52's design was locked in the AskUserQuestion at the top of
-the arc — DocumentCard structured payload, SPA card grid, deferred
-drill-in. That was the right foundation. But TWO addenda came from
-the operator's ~2-minute live review after the initial commit:
-
-- 52'.d: "the routing is wrong — clarification instead of cards"
-- 52'.e: "intro is a repeat and the drill-in goes nowhere"
-
-Neither was foreseeable from the schema/render design alone. Both
-required watching the response in the actual chat window.
+52'.d and 52'.e came from ~2-minute operator reviews after commits.
+52'.g through 52'.k all came from a GDPR spot-check that turned
+into a 5-sub-arc quality pass. None were foreseeable from the
+schema/render design alone.
 
 **Rule**: after shipping a UX change, have someone use it for 2
-minutes before considering the arc closed. The retro can wait; the
-addenda cannot.
+minutes before considering the arc closed. When they surface a
+"one more thing", follow through — the interim retro can wait.
+
+### 5. Ref-form variance is latent until a family with actual variance surfaces
+
+52'.g fixed a `head.includes(primary_ref)` dedup that had worked
+"correctly" for every ISO ref family for months because ISO refs
+carry no interior spacing. The first GDPR ref that hit the same
+code path exposed the bug immediately.
+
+**Rule**: any codebase that supports multiple ref conventions has
+LATENT comparison bugs waiting for a family with actual variance.
+Prefer a single canonical form (enforced at write time) over
+per-site normalization on read.
+
+### 6. Path-param validators need audit when data conventions differ from prompt guidance
+
+52'.h fixed a FastAPI regex that accepted `Art.32(a)` but rejected
+`Art.32.1.b` — because the regex was written to match the prompt's
+suggested convention while the curated data used a different one.
+Every GDPR sub-paragraph drill-in was returning 422 silently.
+
+**Rule**: when adding path-param validators, verify with actual
+production data shapes, not just the shapes the prompt/documentation
+uses. Query the database for concrete examples before writing the
+regex.
+
+### 7. FastAPI 422 response shape needs SPA-side robustness
+
+52'.h fixed the SPA's `api()` helper — `new Error(e.detail)` where
+`e.detail` is an ARRAY produces `"[object Object]"` at every user-
+facing error rendering site.
+
+**Rule**: SPA API helpers must handle every FastAPI error shape
+gracefully — string `detail`, array `detail` (validation errors),
+object `detail` — and fall back to `statusText` when everything
+fails.
+
+### 8. One panel per obligation — glossary once, don't repeat verdict expansions
+
+52'.k removed inline "[NC] Non-Conformity" repetition. Verdict
+acronyms had been expanded next to every pill so tenants new to
+the shorthand could learn them — but the same panel had ~11
+expansions, which crossed the line from helpful to cluttered.
+
+**Rule**: teach an acronym once per view, not every time it appears.
+Contextual glossary at the top of the panel + bare pills throughout
+the body reads as designed; expanding-everywhere reads as noise.
 
 ## What Ship 52 did NOT do
 
-- **Wire the metadata derivation into `rag/intake/posture_writer.py`**
-  for new uploads. Still deferred from Ship 51 — noted in Ship 51's
-  retro as a Ship 52 candidate; also still Ship 53's candidate.
+- **Wire metadata derivation into `rag/intake/posture_writer.py`**
+  for new uploads. Still deferred from Ship 51 — Ship 53 candidate.
 - **Documents tab list view** — the drill-in link comes back once
   this exists. Not scoped here.
-- **Per-doc detail modal** — the SPA card renders enough info for
-  now (title, ref, evidence_type, standards summary, date).
-  Detail-on-hover / click-to-expand is a future arc.
+- **Per-doc detail modal** — cards render enough info for now.
 - **Extract `_TOPIC_SCOPE_RE` to a shared module** — noted in Ship
-  51 retro as candidate; still open. Would let cascade / risk /
-  evidence short-circuits use the same topic-scoping.
+  51 retro, still open.
 - **Preservation guard for card count** — not needed. Cards live in
-  the structured payload; polish can't drop them. The prose count
-  parenthetical guard from Ship 51'.f still covers the sync/fallback
-  path.
+  the structured payload; polish can't drop them.
 - **Filename-to-title humanization** — cards show
   `A_5_1_management_approval.docx` verbatim when `document_title`
-  is empty and no better humanization exists. Ship 51'.d's backfill
-  populated the human title via light humanization
-  (`_humanize_filename_to_title`); some template-generated docs
-  still land with raw filename because their content doesn't lend
-  itself to a clean title. Would need actual doc-body extraction to
-  do meaningfully better.
+  is empty and no better humanization exists.
+- **Retire `pillWithLabel` entirely** — kept as an alias for
+  `pill(finding)` because too many call sites for a churn commit.
+  Follow-up: rewrite call sites to `pill()` and delete the alias.
 
 ## Deferred / follow-on candidates
 
 ### Ship 53 candidates
 - **SPA Documents tab list view** — enables re-adding the card
-  drill-in. Structural change: `mode-docs` mode gets a two-pane
-  layout (upload UI on top, list of uploaded docs below with
-  search/filter). ~4-6h.
-- **Per-doc detail modal** — click a card, get a modal with full
-  metadata + control_refs list + evidence status + preview link.
-  Would give the "Details" link a real destination.
-- **Metadata derivation wire-up in posture_writer.py** — carried
-  over from Ship 51's Ship 52 candidate list. New uploads land with
-  `document_title` / `standards_cited` / `topics_detected` populated
-  at INSERT time; backfill script becomes historical-only. Small,
-  well-scoped.
-- **Extract `_TOPIC_SCOPE_RE` + polarity helpers to a shared
-  module** — would let cascade / risk / evidence short-circuits use
-  the same topic-scoping the doc-inventory path uses.
-- **CI grep guards** — regression fences for (a) polish
-  preservation guards keeping pace with new signal categories, (b)
-  `_refless_intent` staying in sync with intent types that produce
-  legitimately-scattered retrieval.
+  drill-in
+- **Per-doc detail modal** — click-to-expand for full metadata
+- **Metadata derivation wire-up in posture_writer.py** — deferred
+  from Ship 51 + Ship 52
+- **Extract `_TOPIC_SCOPE_RE` + polarity helpers** to a shared
+  module
+- **CI grep guards** — regression fences for polish preservation
+  guards keeping pace with new signal categories + `_refless_intent`
+  staying in sync
+- **Rewrite `pillWithLabel` call sites to `pill()`** — retire the
+  alias entirely
 
 ### Longer-term
-- **Card grid pattern for Stage-1 review** — the Stage-1 queue's
-  per-control pane could use the same card idiom (currently prose
-  bullets like the pre-52 doc list).
-- **Card grid pattern for cascade implications** — same shape as
-  documents (structured entity with metadata, cross-cutting), same
-  wall-of-text problem.
+- **Card grid pattern for Stage-1 review** — same wall-of-text
+  problem
+- **Card grid pattern for cascade implications** — same shape
+- **Ref-form canonicalizer for more families** — currently only
+  `Art. N` variance is canonicalized; audit for other families
+  (ISO 27002 body clauses, upcoming NIS2 / DORA refs) as they land
 
-## The pattern this arc formalises
+## The card-grid pattern (formalised)
 
-The card-grid idiom for list-shaped short-circuits is now established
-for three entity types:
+Ship 52 formalises the card-grid idiom for list-shaped short-circuits
+across three entity types:
 
 - **RelatedCard** (Ship 20) — control refs
 - **RiskCard** (Ship 22'.c) — risk register entries
 - **DocumentCard** (Ship 52) — uploaded documents
 
-Each entity type gets:
-1. A Pydantic model in `rag/casefile/answer_schema.py`
-2. A `build_X_cards(data)` deterministic converter in
+Each follows the same 5-step scaffold:
+
+1. Pydantic model in `rag/casefile/answer_schema.py`
+2. `build_X_cards(data)` deterministic converter in
    `rag/casefile/answer_augment.py`
-3. A `build_short_circuit_structured` kwarg to accept the pre-shaped
-   data
-4. A `renderXCards(cards)` block in `static/arioncomply.html`
+3. `build_short_circuit_structured` kwarg
+4. `renderXCards(cards)` block in `static/arioncomply.html`
 5. CSS with a distinct border-left accent
 
 Future short-circuit list surfaces (cascade implications, Stage-1
 findings, cite verifications, notification history) can follow the
-same shape — the pattern scales without needing new architectural
-decisions.
+same scaffold — no new architectural decisions needed.
+
+## The verdict-glossary pattern (new)
+
+52'.k establishes a UX rule for verdict-carrying detail panels:
+
+- Bare pills throughout the panel body (title-tooltip carries full term)
+- One-line glossary rendered ONCE at the top of the view
+- Glossary shows every possible verdict with a short definition
+- Same idiom is reusable for other acronym-heavy surfaces —
+  cascade event types, notification kinds, workbook shapes
+
+## Relation to the Azure dry-run
+
+Ship 52 continues Ship 51's role as the immediate predecessor to
+the Azure dry-run. Every UX iteration here (GDPR sub-paragraph
+regex, ref-form canonicalization, drill-in explainer, verdict
+glossary) fixes a bug the dry-run would have surfaced — and catching
+them on the demo VM where the diagnostic tooling is richer saves
+hours of Azure-VM investigation.
 
 ## Related
 
 - Ship 22'.c — RiskCard, the direct precedent for DocumentCard
-- Ship 51'.d — metadata backfill that populated `topics_detected` +
-  `standards_cited` (the fields DocumentCard's summary reads from)
-- Ship 51'.e — topic-scope filter + compact prose rendering (the
-  starting point Ship 52 replaced with cards)
-- Ship 51'.f — polish preservation guard for count parentheticals
-  (still guards the prose fallback path)
+- Ship 51 arc — the immediate predecessor arc (topic-scope + polarity
+  + backfill script + polish preservation for count parentheticals)
+- Ship 19'.c — chip-dedup for the intro card (Ship 52 canonicalization
+  makes it correct across ref families)
+- Ship 6'.c / Ship 51'.f — preservation-check discipline in polish
 - `rag/casefile/answer_schema.py::DocumentCard` — the schema
-- `static/arioncomply.html` — the renderDocumentCards block
+- `rag/framework_refs.py::canonicalize_ref_whitespace` — the ref-form
+  canonicalizer
+- `static/arioncomply.html::renderFindingGlossary` — the verdict
+  glossary primitive
