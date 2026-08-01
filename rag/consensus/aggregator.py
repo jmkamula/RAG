@@ -121,8 +121,15 @@ def _detect_ambiguity(
 
     # Skip ambiguity check for intent types that don't need a specific
     # ref anchor. Signal C (curated_lexicon) is the authority on this.
+    # Ship 52 addendum — document_inventory added: queries like
+    # "what documents have we uploaded regarding access security"
+    # legitimately span multiple ref families (docs cross-cut A.5.18,
+    # A.7.2, A.8.2 all at once); the answer is about DOCUMENTS not
+    # controls, so ref-ambiguity is a wrong signal. The dry-run
+    # exposed this via a session where retrieval scattered enough to
+    # tip the ambiguity threshold on a valid doc query.
     _refless_intent = {"definition", "gap_analysis", "cross_framework",
-                       "free_assessment"}
+                       "free_assessment", "document_inventory"}
     for sig in signals:
         if (sig.fired and sig.name == "curated_lexicon"
                 and sig.question_type in _refless_intent):
