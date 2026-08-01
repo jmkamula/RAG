@@ -1585,6 +1585,30 @@ def _count_bullets(text: str) -> int:
     )
 
 
+# Ship 51'.f — count-parenthetical preservation. Deterministic
+# list-shaped answers signal completeness with "(N total)" or
+# "(N of M total)" or "(N of M)" in the intro. The polish LLM
+# strips these ~30% of the time because they read as "meta" prose;
+# they are load-bearing for the tenant — the count tells them how
+# much of the list they're seeing. Guard falls back to the
+# deterministic answer if any count parenthetical dropped.
+_COUNT_PAREN_RE = re.compile(
+    r"\(\s*\d+\s+(?:of\s+\d+(?:\s+total)?|total)\s*\)",
+    re.IGNORECASE,
+)
+
+
+def _count_parens(text: str) -> set[str]:
+    """Extract normalised count-parenthetical strings from `text`.
+    Whitespace normalised so `( 5 total )` and `(5 total)` match."""
+    if not text:
+        return set()
+    return {
+        re.sub(r"\s+", " ", m).strip().lower()
+        for m in _COUNT_PAREN_RE.findall(text)
+    }
+
+
 # Post-polish jargon scrub. The LLM sometimes reintroduces the raw
 # evidence_type / role slug form ('review_record', 'revocation_record')
 # — or the raw engine-reason phrasing ('N/M children satisfied',
@@ -1696,6 +1720,21 @@ def polish_short_circuit_answer(
             "polish_short_circuit_answer: LLM dropped bullets "
             "(deterministic=%d, composed=%d) — falling back",
             det_bullets, _count_bullets(composed or ""),
+        )
+        return deterministic_answer
+
+    # Count-parenthetical preservation — Ship 51'.f. List answers use
+    # "(N total)" / "(N of M total)" in their intro to tell the tenant
+    # how much of the list they're seeing. Polish rewrites often strip
+    # these as "meta" — they are load-bearing.
+    det_counts     = _count_parens(deterministic_answer)
+    composed_counts = _count_parens(composed or "")
+    missing_counts = det_counts - composed_counts
+    if missing_counts:
+        (get_logger() or _NullLogger()).warning(
+            "polish_short_circuit_answer: LLM dropped count parentheticals %s "
+            "— falling back to deterministic text",
+            sorted(missing_counts),
         )
         return deterministic_answer
 
