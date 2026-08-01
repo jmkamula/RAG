@@ -117,6 +117,9 @@ _PRICING_USD_PER_M = {
     "gpt-4o":                   {"in":  2.50, "out": 10.00},
     "gpt-4o-mini":              {"in":  0.15, "out":  0.60},
     "gpt-4-turbo":              {"in": 10.00, "out": 30.00},
+    "gpt-4.1":                  {"in":  2.00, "out":  8.00},
+    "gpt-4.1-mini":             {"in":  0.40, "out":  1.60},
+    "gpt-4.1-nano":             {"in":  0.10, "out":  0.40},
     "text-embedding-3-small":   {"in":  0.02, "out":  0.00},
     "text-embedding-3-large":   {"in":  0.13, "out":  0.00},
 

@@ -12,35 +12,48 @@ model migrations are one edit per role instead of a global grep.
 Roles + rationale (from Ship 5'.a audit):
 
   MODEL_CHAT_ANSWER    — long-form compliance answer prose.
-                          Heavy reasoning + citations. Currently
-                          gpt-4o. Used by rag/llm_answer.py compose.
+                          Heavy reasoning + citations. gpt-4.1
+                          (Ship 53', 2026-08-01 — moved off gpt-4o
+                          because gpt-4o-mini via LOCAL_LLM_MODEL
+                          override ignored rule-10 guidance citation
+                          directive). Used by rag/llm_answer.py.
 
   MODEL_CHAT_VERIFY    — small JSON verdict on an answer's
-                          groundedness. gpt-4o-mini. Used by
-                          rag/llm_answer.py verify+correct.
+                          groundedness. gpt-4.1-mini (Ship 53',
+                          upgraded from gpt-4o-mini for stronger
+                          instruction-following on multi-rule
+                          prompts). Used by rag/llm_answer.py
+                          verify+correct.
 
   MODEL_CLASSIFIER     — small structured intent decision.
-                          gpt-4o-mini. Used by rag/classifier.py.
+                          gpt-4.1-mini (Ship 53'). Used by
+                          rag/classifier.py.
 
   MODEL_CONSENSUS_GK   — bounded arbiter in the Ship 1 consensus
-                          layer. gpt-4o-mini. Used by
+                          layer. gpt-4.1-mini (Ship 53'). Used by
                           rag/consensus/gatekeeper.py. Overridable
                           via GATEKEEPER_MODEL env for A/B tests.
 
   MODEL_EXTRACTOR      — long-form structured extraction from
                           documents (JSON out). claude-sonnet-4-6.
-                          Used by rag/intake/extractor.py pass1+
-                          pass2 and rag/intake/critic_verifier.py.
+                          Deliberate Ship 5' choice — extraction
+                          quality is compliance-load-bearing and
+                          Sonnet was picked over gpt-4o. Any
+                          migration off Claude needs an extraction
+                          quality bake-off first. Used by
+                          rag/intake/extractor.py pass1+pass2 and
+                          rag/intake/critic_verifier.py.
 
   MODEL_ENRICHER       — small structured JSON enrichment
                           (doc_type / topic_tokens / scope).
-                          claude-haiku-4-5-20251001. Used by
-                          rag/intake/enricher.py.
+                          claude-haiku-4-5-20251001. Same
+                          deliberate-Anthropic-choice caveat as
+                          EXTRACTOR. Used by rag/intake/enricher.py.
 
   MODEL_ENRICHMENT_T2  — offline enrichment JSON generation for
                           RequirementNode metadata (business_
-                          description, query_keywords). Currently
-                          gpt-4o-mini. Used by
+                          description, query_keywords). gpt-4.1-mini
+                          (Ship 53'). Used by
                           enrichment/tier2_generator.py.
 
 ## Env overrides
@@ -72,17 +85,19 @@ def _model(role: str, default: str) -> str:
 
 
 # ── Chat pipeline ─────────────────────────────────────────────────────
-MODEL_CHAT_ANSWER    = _model("MODEL_CHAT_ANSWER",    "gpt-4o")
-MODEL_CHAT_VERIFY    = _model("MODEL_CHAT_VERIFY",    "gpt-4o-mini")
-MODEL_CLASSIFIER     = _model("MODEL_CLASSIFIER",     "gpt-4o-mini")
-MODEL_CONSENSUS_GK   = _model("GATEKEEPER_MODEL",     "gpt-4o-mini")  # existing env name for A/B
+MODEL_CHAT_ANSWER    = _model("MODEL_CHAT_ANSWER",    "gpt-4.1")
+MODEL_CHAT_VERIFY    = _model("MODEL_CHAT_VERIFY",    "gpt-4.1-mini")
+MODEL_CLASSIFIER     = _model("MODEL_CLASSIFIER",     "gpt-4.1-mini")
+MODEL_CONSENSUS_GK   = _model("GATEKEEPER_MODEL",     "gpt-4.1-mini")  # existing env name for A/B
 
 # ── Intake pipeline ───────────────────────────────────────────────────
+# Deliberate Anthropic choice from Ship 5' — do not migrate off Claude
+# without an extraction quality bake-off. See module docstring.
 MODEL_EXTRACTOR      = _model("MODEL_EXTRACTOR",      "claude-sonnet-4-6")
 MODEL_ENRICHER       = _model("MODEL_ENRICHER",       "claude-haiku-4-5-20251001")
 
 # ── Offline enrichment ────────────────────────────────────────────────
-MODEL_ENRICHMENT_T2  = _model("MODEL_ENRICHMENT_T2",  "gpt-4o-mini")
+MODEL_ENRICHMENT_T2  = _model("MODEL_ENRICHMENT_T2",  "gpt-4.1-mini")
 
 
 def all_models() -> dict:
