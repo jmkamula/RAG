@@ -239,10 +239,14 @@ def _render_obligations(
         meta = getattr(n, "metadata", {}) or {}
         obligation = meta.get("obligation_text") or ""
         bd = meta.get("business_description") or ""
+        doc_fallback = (getattr(n, "document", "") or "")
+        text_src = "obligation" if obligation else (
+            "bd" if bd else ("document" if doc_fallback else "title")
+        )
         text = (
             obligation
             or bd
-            or (getattr(n, "document", "") or "")
+            or doc_fallback
             or getattr(n, "title", "")
         )
         text = " ".join((text or "").split())
@@ -252,58 +256,151 @@ def _render_obligations(
             text = text[: max_chars_each - 1] + "…"
         lines.append(f"- {n.ref}: {text}")
 
-        # Ship 13'.d — surface guidance authority as a compact hint.
-        # If business_description carries an ISO 27003/27005 paragraph
-        # (marker `Per ISO 2700`), extract the first sentence and
-        # append as a `  → guidance:` line so the LLM sees the
-        # authority attribution at chat time. Non-load-bearing —
-        # skipped when obligation_text is empty (would double-cite BD).
+        # Ship 13'.d/e + Ship 53 addendum — surface guidance authority
+        # as an attribution the LLM can cite when grounding remediation
+        # actions.
+        #
+        # Two cases:
+        #  (a) `obligation` was present AND bd distinct → emit the ISO
+        #      27002/3/4/5 paraphrase as a `→ guidance (ISO ...):`
+        #      continuation line.
+        #  (b) `obligation` was empty (text came from bd or document) →
+        #      the paraphrase IS the main text; append a `← source:`
+        #      tag inferred from the ref pattern so the LLM knows
+        #      which standard to cite. Applies whether the paraphrase
+        #      came from bd (context_assembler parsed it) or from
+        #      n.document (Chroma raw text passthrough — the common
+        #      runtime path since context_assembler's parser doesn't
+        #      always fire on graph-expander nodes).
+        _std_id = getattr(n, "standard_id", "") or ""
         if obligation and bd:
-            hint = _extract_guidance_hint(bd)
-            if hint:
-                lines.append(f"  → guidance: {hint}")
+            _hint, _source = _extract_guidance_hint(bd, ref=n.ref, standard_id=_std_id)
+            if _hint:
+                if _source:
+                    lines.append(f"  → guidance ({_source}): {_hint}")
+                else:
+                    lines.append(f"  → guidance: {_hint}")
+        elif text_src in ("bd", "document"):
+            # Infer source from ref+standard even without bd on metadata.
+            _inferred_source = _infer_guidance_standard(n.ref, _std_id)
+            if _inferred_source:
+                lines.append(f"  ← source: {_inferred_source} implementation guidance")
 
     if not lines:
         return ""
     return "OBLIGATIONS:\n" + "\n".join(lines)
 
 
-def _extract_guidance_hint(business_description: str, max_chars: int = 220) -> str:
-    """Ship 13'.d/'.e: return a compact one-sentence guidance hint if
-    the `business_description` carries a `Per ISO 27003:2017` /
-    `Per ISO 27004:2016` / `Per ISO 27005:2022` paragraph. Returns
-    "" if no marker is present. Trimmed to `max_chars` on a word
-    boundary.
+def _infer_guidance_standard(ref: str, standard_id: str) -> str:
+    """Ship 53 — return the ISO 2700x implementation-guidance standard
+    for a given ref+standard. Used when the case-file node's main text
+    is a 27002-shaped paraphrase (either bd or Chroma document
+    fallback) but no explicit marker is present.
 
-    When multiple markers are present (e.g. a leaf enriched by both
-    27003 and 27005), the first-appearing paragraph wins — the
-    order in `business_description` was set by the curation arc's
-    ordering (27005 first via Ship 13'.b, then 27003 via 13'.c,
-    then 27004 via 13'.e where applicable)."""
-    markers = (
-        "Per ISO 27003:2017",
-        "Per ISO 27004:2016",
-        "Per ISO 27005:2022",
-    )
-    # Find the EARLIEST-appearing marker so the hint reflects the
-    # first authoritative attribution the reader would encounter.
+    Mapping:
+      ISO 27001 Annex A (A.5.x-A.8.x) → ISO 27002:2022
+      ISO 27001 ISMS body (4.x-10.x)   → ISO 27003:2017
+      ISO 27701 A.7.x / B.8.x          → ISO 27002:2022 shape (PIMS)
+
+    Returns "" when no mapping applies (e.g., GDPR articles, ISO body
+    clauses whose guidance is fine-tuned elsewhere)."""
+    if not ref:
+        return ""
+    if standard_id == "ISO27001:2022":
+        if ref.startswith("A."):
+            return "ISO 27002:2022"
+        if re.match(r"^\d+\.", ref):
+            return "ISO 27003:2017"
+    elif standard_id == "ISO27701:2019":
+        return "ISO 27002:2022"
+    return ""
+
+
+def _extract_guidance_hint(
+    business_description: str,
+    max_chars:            int = 220,
+    ref:                  str = "",
+    standard_id:          str = "",
+) -> tuple[str, str]:
+    """Extract a compact one-sentence guidance hint from `business_description`
+    + return the source-standard attribution the digest should surface.
+
+    Returns `(hint, source)` where `source` is one of:
+      - "ISO 27002:2022" — Annex A implementation guidance
+      - "ISO 27003:2017" — ISMS implementation guidance (clauses 4-10)
+      - "ISO 27004:2016" — measurement / monitoring guidance
+      - "ISO 27005:2022" — risk-management guidance
+      - "" — no substantive guidance to surface
+
+    Attribution logic (Ship 53 addendum):
+      1. If a curated `Per ISO 2700x:YYYY` marker exists, use it as
+         authoritative — that beats any ref-based inference.
+      2. Otherwise, if the business_description is substantive (>150
+         chars distinct from any curated marker paragraphs), fall
+         back to inferring the guidance standard from the ref pattern:
+           A.5.x-A.8.x on ISO27001  →  ISO 27002:2022 (Annex A)
+           4.x-10.x on ISO27001     →  ISO 27003:2017 (ISMS body)
+           A.7.x.x / B.8.x.x on ISO27701 → ISO 27002:2022 shape (PIMS)
+      3. Trim to `max_chars` on a word boundary.
+
+    Before this change, only 12/93 Annex A controls surfaced a
+    guidance hint (those with curated markers). The other 81 had
+    27002 paraphrases in business_description that never reached
+    the LLM. This function now emits for all of them."""
+    if not business_description:
+        return ("", "")
+
+    # 1. Curated marker — highest authority.
+    markers = {
+        "Per ISO 27002:2022": "ISO 27002:2022",
+        "Per ISO 27003:2017": "ISO 27003:2017",
+        "Per ISO 27004:2016": "ISO 27004:2016",
+        "Per ISO 27005:2022": "ISO 27005:2022",
+    }
     best_idx: int | None = None
-    for marker in markers:
+    best_marker_source: str = ""
+    for marker, source in markers.items():
         idx = business_description.find(marker)
         if idx >= 0 and (best_idx is None or idx < best_idx):
             best_idx = idx
-    if best_idx is None:
-        return ""
-    tail = business_description[best_idx:]
-    # First sentence ends at ". " OR ".\n" OR paragraph end.
-    # Curation paragraphs join with "\n\n" so post-period whitespace
-    # may be a newline rather than a space.
-    m = re.search(r"\.\s", tail)
-    sentence = tail if m is None else tail[: m.start() + 1]
-    sentence = " ".join(sentence.split())
-    if len(sentence) > max_chars:
-        sentence = sentence[: max_chars - 1].rsplit(" ", 1)[0] + "…"
-    return sentence
+            best_marker_source = source
+
+    if best_idx is not None:
+        tail = business_description[best_idx:]
+        m = re.search(r"\.\s", tail)
+        sentence = tail if m is None else tail[: m.start() + 1]
+        sentence = " ".join(sentence.split())
+        if len(sentence) > max_chars:
+            sentence = sentence[: max_chars - 1].rsplit(" ", 1)[0] + "…"
+        return (sentence, best_marker_source)
+
+    # 2. Unmarked — infer from ref pattern.
+    if len(business_description.strip()) < 150:
+        return ("", "")   # too thin to bother
+
+    source = ""
+    if standard_id == "ISO27001:2022":
+        if ref.startswith("A."):
+            source = "ISO 27002:2022"        # Annex A implementation guidance
+        elif re.match(r"^\d+\.", ref):
+            source = "ISO 27003:2017"        # ISMS body implementation guidance
+    elif standard_id == "ISO27701:2019":
+        # PIMS shares 27002 shape for its implementation guidance.
+        source = "ISO 27002:2022"
+
+    if not source:
+        return ("", "")
+
+    # Unmarked content is a multi-sentence paraphrase; the useful
+    # "how to remediate" material is often in the 2nd-3rd sentences
+    # (e.g. "A topic-specific policy on access control should be
+    # defined and communicated to all interested parties" comes
+    # AFTER the intro "To ensure authorized access..."). Take up to
+    # max_chars of the full paraphrase — trim on a word boundary.
+    text = " ".join(business_description.split())
+    if len(text) > max_chars:
+        text = text[: max_chars - 1].rsplit(" ", 1)[0] + "…"
+    return (text, source)
 
 
 def _render_demonstrated_by(cf: CaseFile, max_items: int = 8) -> str:
@@ -841,6 +938,28 @@ Output rules (absolute):
    RoPA, DSAR, DSR, DPA, PIMS, SoA), spell out the full phrase:
    "OFI (Opportunity for Improvement)" — the acronym alone is
    insufficient for a definition answer.
+10. REMEDIATION queries ("how do I remediate X", "how do we
+    improve X", "what to do about X"): ground each recommendation
+    in the guidance authority attached to the cited control. Two
+    markers in the digest carry that authority:
+      - `→ guidance (ISO ...):` continuation line (curated
+        paraphrase, present when obligation text and BD are both
+        available)
+      - `← source: ISO ...:YYYY implementation guidance` tag line
+        (present when the main obligation text IS the ISO 27002
+        paraphrase itself — the tag names which standard it comes
+        from)
+    Either marker means: cite the ISO standard explicitly in your
+    answer. Example: "ISO 27002:2022 §5.15 recommends defining a
+    topic-specific access control policy communicated to all
+    relevant teams — start with the periodic review, which is your
+    biggest gap...". Prioritise by BIGGEST GAP first: leaves with
+    fewer of their required items present come before near-complete
+    leaves. Name the specific missing MUSTs from the POSTURE
+    section rather than saying "the documentation" or "the policy"
+    generically. Use plain business language over ISO phrasing
+    where possible ("relevant teams" over "interested parties",
+    "policy for this topic" over "topic-specific policy").
 
 Be direct and actionable. State what's missing and what to do.
 End when the actionable content ends — do not append closing
