@@ -312,4 +312,13 @@ def check_and_repair(
     try: _span_cm.__exit__(None, None, None)
     except Exception: pass
 
+    # Ship 52 addendum — ref-form canonicalization on the final repaired
+    # answer. Normalizes "Art. N" → "Art.N" so machine-form primary_ref
+    # and LLM/preservation-footer prose match byte-for-byte at every
+    # downstream comparison site. Fixes the "Art.32.1GDPR Art. 32.1.b"
+    # class of intro-chip duplication surfaced during Ship 52's GDPR
+    # spot-check. See rag/framework_refs.canonicalize_ref_whitespace.
+    from rag.framework_refs import canonicalize_ref_whitespace
+    text = canonicalize_ref_whitespace(text)
+
     return RepairResult(text=text, events=events, footers_added=list(footers))

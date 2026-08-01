@@ -165,6 +165,38 @@ def extract_ref_candidates(text: str) -> list[str]:
     return _REF_TOKEN_RE.findall(text)
 
 
+# Ship 52 addendum — ref-form canonicalizer.
+# Refs live in two conventions across the codebase:
+#   Machine form  — `Art.32`, `Art.32.1.b`     (primary_ref, id_types)
+#   Display form  — `GDPR Art. 32`, `Art. 32.1.b` (LLM prose, prompts)
+# The variance is the space after "Art.". ISO 27001 refs (`A.5.15`)
+# have no interior spacing so the two forms accidentally coincide,
+# which is why the mismatch stayed latent until GDPR queries surfaced.
+# Any comparison / dedup / extract site that mixed the two forms
+# would silently miss its target — see the intro-chip dedup case
+# ("Art.32.1GDPR Art. 32.1.b requires...") reported during Ship 52's
+# GDPR spot-check.
+#
+# Canonicalize toward MACHINE form (no space) so `primary_ref` and
+# prose match byte-for-byte. Call this at every polish exit + on the
+# final repaired case-file answer. Belt-and-braces normalization also
+# applied at SPA dedup sites so future short-circuits skipping polish
+# are still safe.
+import re as _re_canon
+_ART_SPACE_RE = _re_canon.compile(r"\bArt\.\s+(\d)")
+
+
+def canonicalize_ref_whitespace(text: str) -> str:
+    """Rewrite ref-form variance to canonical machine form.
+      "GDPR Art. 32"      → "GDPR Art.32"
+      "Art. 32.1.b"       → "Art.32.1.b"
+      "A.5.15"            → "A.5.15"       (unchanged; no variance)
+    Idempotent — running it twice is a no-op. Safe on empty / None."""
+    if not text:
+        return text
+    return _ART_SPACE_RE.sub(r"Art.\1", text)
+
+
 def _populate_valid_refs(standards: frozenset, neo_driver) -> set[str]:
     """Fetch the full set of RequirementNode.ref values for these
     standards from Neo4j. Called once per unique standards frozenset.

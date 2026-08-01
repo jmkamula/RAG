@@ -1807,7 +1807,16 @@ def polish_short_circuit_answer(
     # Jargon scrub: substitute raw `_role` slugs the LLM sometimes echoes
     # ('review_record', 'revocation_record') back to natural language.
     # Locked in by eval case #200.
-    return _scrub_jargon_slugs(composed)
+    composed = _scrub_jargon_slugs(composed)
+
+    # Ship 52 addendum — ref-form canonicalization.
+    # Normalize "Art. N" → "Art.N" so machine-form primary_ref and
+    # LLM-emitted display form match byte-for-byte at every downstream
+    # comparison / dedup site. Fixes the "Art.32.1GDPR Art. 32.1.b"
+    # intro-chip duplication reported during Ship 52's GDPR spot-check.
+    # Idempotent + safe on empty; see framework_refs.canonicalize_ref_whitespace.
+    from rag.framework_refs import canonicalize_ref_whitespace
+    return canonicalize_ref_whitespace(composed)
 
 
 from vector.retriever      import VectorRetriever
