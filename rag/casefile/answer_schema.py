@@ -241,6 +241,19 @@ Card content rules:
    guidance path by standard number. When the query itself names
    an ISO standard (e.g. "what does ISO 27004 say about..."), the
    intro MUST echo that standard's name back.
+
+   EDPB / WP29 GDPR guidance (Ship 53'.f, 2026-08-01) — when the
+   EDPB GUIDANCE section appears in the digest, remediation
+   `action[]` cards MUST cite the source doc verbatim (e.g.,
+   "EDPB 07/2020", "EDPB 9/2022", "WP29 wp248 rev.01") in the
+   card body. Do NOT paraphrase attribution ("per EU guidance",
+   "as recommended by data protection authorities") — auditors +
+   DPOs need the specific doc reference. The EDPB GUIDANCE section
+   already gives you the attribution in bracket form
+   `[EDPB 07/2020] Art.28` — copy that source_doc string verbatim
+   into the action body. Multiple EDPB docs cited across cards is
+   fine; each card cites the specific doc that supports its
+   recommendation.
 8. LISTING queries — when the user asks "what must X contain",
    "what are the required items", "list the required elements",
    "what should X include": enumerate EVERY item from the

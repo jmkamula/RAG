@@ -683,6 +683,177 @@ def _render_scope(cf: CaseFile) -> str:
     return f"SCOPE: {' + '.join(labels)}"
 
 
+# ── EDPB / WP29 guidance grounding (Ship 53'.f) ────────────────────────
+#
+# For any cited GDPR ref, fetch 2-3 EDPB / WP29 guidance chunks from
+# the edpb_guidelines Chroma collection. Attributes each chunk to the
+# specific EDPB doc (e.g., "EDPB 07/2020") so the LLM can cite the
+# authoritative source in remediation cards — same auditor-defensible
+# grounding pattern as ISO 27002 for A.5.x-A.8.x, but for GDPR.
+#
+# Fires only when at least one cited ref is a GDPR article. Total
+# added text is capped to keep the digest token-budget-friendly.
+
+_EDPB_COLLECTION_NAME = "edpb_guidelines"
+_EDPB_MAX_CHUNKS_PER_REF = 2
+_EDPB_MAX_CHARS_PER_CHUNK = 500
+_EDPB_TOTAL_CHAR_CAP = 2500
+
+# Module-level Chroma client cache. Lazily initialised on first use.
+_edpb_collection = None
+
+
+def _get_edpb_collection():
+    """Lazy-init handle to the edpb_guidelines Chroma collection.
+
+    Uses VectorIndexer.get_collection so the returned handle carries
+    the correct 3072-dim OpenAI embedding function (matching how
+    the collection was indexed). A bare
+    `chromadb.HttpClient().get_collection()` would default to the
+    onnx 384-dim embedder and every query would raise a dimension-
+    mismatch error.
+
+    Cached at module scope so repeated digest builds within one
+    process share the client. Returns None if the collection is not
+    available (fresh install, indexing not yet run) — the digest
+    falls through gracefully with no EDPB section.
+    """
+    global _edpb_collection
+    if _edpb_collection is not None:
+        return _edpb_collection
+    try:
+        from vector.indexer import VectorIndexer
+        from rag.embedding_config import EMBED_MODEL_STANDARD
+        indexer = VectorIndexer(
+            provider="openai",
+            embedding_model=EMBED_MODEL_STANDARD,
+        )
+        _edpb_collection = indexer.get_collection(_EDPB_COLLECTION_NAME)
+        return _edpb_collection
+    except Exception as e:
+        logger.debug("EDPB collection unavailable: %s", e)
+        _edpb_collection = None
+        return None
+
+
+def _fetch_edpb_chunks_for_ref(ref: str, query_hint: str = "") -> list[dict]:
+    """Return up to _EDPB_MAX_CHUNKS_PER_REF guidance chunks whose
+    metadata `interprets_articles` includes the given GDPR ref.
+
+    Strategy: semantic search on `edpb_guidelines` with the ref plus
+    a topic hint (the article's own title / obligation text), then
+    post-filter results by metadata to keep only chunks that actually
+    interpret this article.
+
+    Ship 53'.f note: EDPB docs rarely mention the article number
+    verbatim in prose ("Art.35" appears in a wp248 chunk maybe once
+    per page vs. "DPIA" every paragraph), so the ref alone is a
+    weak semantic signal. We overfetch (n_results large enough to
+    survive post-filter) and rely on the caller enriching
+    `query_hint` with the article title.
+
+    Returns empty list if the collection isn't available or no
+    matching chunks exist.
+    """
+    coll = _get_edpb_collection()
+    if coll is None:
+        return []
+
+    query_text = f"{ref} {query_hint}".strip() if query_hint else ref
+    try:
+        # Overfetch so post-filter has enough population — EDPB semantic
+        # relevance and metadata-filter relevance are often disjoint.
+        results = coll.query(
+            query_texts=[query_text],
+            n_results=30,
+            include=["documents", "metadatas"],
+        )
+    except Exception as e:
+        logger.debug("EDPB query failed for %s: %s", ref, e)
+        return []
+
+    matches: list[dict] = []
+    docs_row = (results.get("documents") or [[]])[0]
+    metas_row = (results.get("metadatas") or [[]])[0]
+    for doc, meta in zip(docs_row, metas_row):
+        if not meta:
+            continue
+        # `interprets_articles` is stored as comma-joined string.
+        interprets = (meta.get("interprets_articles") or "").split(",")
+        interprets = [x.strip() for x in interprets if x.strip()]
+        if ref not in interprets:
+            continue
+        matches.append({
+            "source_doc":    meta.get("source_doc", "EDPB"),
+            "section_title": (meta.get("section_title") or "")[:80],
+            "text":          doc or "",
+        })
+        if len(matches) >= _EDPB_MAX_CHUNKS_PER_REF:
+            break
+    return matches
+
+
+def _render_edpb_guidance(cf: CaseFile) -> str:
+    """Render the EDPB GUIDANCE: section for any cited GDPR refs.
+
+    Ship 53'.f — closes the "GDPR shallowness" gap. Previously the
+    LLM cited only the article verbatim + training-data-drafted
+    remediation. Now it sees 2-3 EDPB guidance snippets attributed
+    to specific documents (EDPB 07/2020, WP29 wp248 rev.01, etc.)
+    so the remediation cards can name the authoritative source the
+    same way ISO 27001 answers cite ISO 27002.
+
+    Only fires when at least one cited ref is a GDPR article. Total
+    output capped at _EDPB_TOTAL_CHAR_CAP to keep the digest token-
+    friendly.
+    """
+    cited_refs = cf.cited_refs or []
+    gdpr_refs = [r for r in cited_refs if r.startswith("Art.")]
+    if not gdpr_refs:
+        return ""
+
+    # Build a per-ref topic hint from the CaseFile's own nodes.
+    # EDPB docs use topical language ("DPIA", "controller-processor",
+    # "supplementary measures") rather than article numbers verbatim,
+    # so the semantic query needs the article's *subject matter* to
+    # rank correctly. Fall back to cf.query if no node title is found.
+    ref_to_title: dict[str, str] = {}
+    for n in cf.all_nodes():
+        if n.ref in gdpr_refs and n.ref not in ref_to_title:
+            title = (getattr(n, "title", "") or "").strip()
+            if title:
+                ref_to_title[n.ref] = title
+
+    tenant_query_hint = (cf.query or "")[:150]
+
+    lines: list[str] = []
+    total_chars = 0
+    for ref in gdpr_refs:
+        title = ref_to_title.get(ref, "")
+        query_hint = f"{title} {tenant_query_hint}".strip() if title else tenant_query_hint
+        chunks = _fetch_edpb_chunks_for_ref(ref, query_hint=query_hint)
+        for ch in chunks:
+            text = ch["text"].strip()
+            if len(text) > _EDPB_MAX_CHARS_PER_CHUNK:
+                text = text[: _EDPB_MAX_CHARS_PER_CHUNK - 1] + "…"
+            # Attribution: [EDPB 07/2020] Art.28 — section title
+            #   text
+            heading = f"[{ch['source_doc']}] {ref}"
+            if ch["section_title"]:
+                heading += f" — {ch['section_title']}"
+            line = f"{heading}\n  {text}"
+            if total_chars + len(line) > _EDPB_TOTAL_CHAR_CAP:
+                break
+            lines.append(line)
+            total_chars += len(line)
+        if total_chars >= _EDPB_TOTAL_CHAR_CAP:
+            break
+
+    if not lines:
+        return ""
+    return "EDPB GUIDANCE (authoritative implementation guidance — cite the source doc verbatim in remediation actions):\n" + "\n\n".join(lines)
+
+
 # ── Deictic hint (from rank_and_answer's prior_turn_block logic) ─────
 
 _DEICTIC_RE = re.compile(
@@ -849,6 +1020,7 @@ def build_prompt_digest(
             max_chars_each=plan.obligation_chars,
         ))
 
+    _add(_render_edpb_guidance(cf))  # Ship 53'.f — GDPR consulting grounding
     _add(_render_documents(cf, max_items=document_limit))
     _add(_render_risks(cf))        # Ship 14'.e — POSTURE_RISK section
     _add(_render_session(cf))
