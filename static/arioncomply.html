@@ -176,6 +176,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sa-risks{display:flex;flex-direction:column;gap:6px;margin-top:10px;max-width:85%}
 .sa-risk-card{border-left:3px solid #D9534F}
 .sa-risk-score{font-size:11px;font-weight:700;background:#EEECE2;color:#5C5A4F;padding:2px 7px;border-radius:5px}
+/* Ship 52'.c — document cards */
+.sa-docs{display:flex;flex-direction:column;gap:6px;margin-top:10px;max-width:85%}
+.sa-doc-card{border-left:3px solid #4A90A4}
+.sa-doc-count{font-size:11px;color:#7B7970;font-weight:400;margin-left:4px}
+.sa-doc-date{font-size:11px;color:#7B7970;margin-left:auto}
+.sa-doc-span{font-size:10px;background:#EDE6F5;color:#534AB7;padding:2px 6px;border-radius:5px;font-weight:600;letter-spacing:0.2px}
+.sa-doc-stds{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px;margin-bottom:2px}
+.sa-doc-std{display:inline-block;background:#F0F4F5;color:#3A5A6B;padding:2px 8px;border-radius:5px;font-size:11px;font-weight:500}
+.sa-doc-std em{font-style:normal;font-weight:700;color:#4A90A4;margin-left:3px}
 /* Ship 25'.b — overflow tail on capped role sections */
 .sa-overflow{font-size:11px;color:#7B7970;padding:6px 8px 2px 8px;font-style:italic}
 .sa-overflow a{color:#534AB7;text-decoration:none;font-weight:500;font-style:normal}
@@ -5790,6 +5799,50 @@ function renderStructuredAnswer(s) {
     });
     html += `</div>`;
   }
+
+  // ── Document cards (Ship 52'.c) ──────────────────────────────
+  // Rendered below Related + Risks when structured.documents is non-empty.
+  // Replaces the prose-list dump for doc_inventory positive-polarity
+  // answers (Ship 51'.e). One card per uploaded document with title,
+  // external_ref chip, evidence_type pill, standards-span chips, drill-in.
+  // Data shape: rag/casefile/answer_schema.py:DocumentCard.
+  const docs = s.documents || [];
+  if (docs.length) {
+    html += `<div class="sa-docs">
+      <div class="sa-related-header">Documents <span class="sa-doc-count">(${docs.length})</span></div>`;
+    docs.forEach(dc => {
+      const title = esc(dc.title || '?');
+      const ext   = dc.external_ref ? `<span class="ref-tag">${esc(dc.external_ref)}</span>` : '';
+      const evLabel = dc.evidence_type_display || dc.evidence_type || '';
+      const evPill  = evLabel ? `<span class="sa-still-item">${esc(evLabel)}</span>` : '';
+      const when    = dc.uploaded_at ? `<span class="sa-doc-date">${esc(dc.uploaded_at)}</span>` : '';
+      // Standards summary — one chip per standard with the ref count.
+      const stds = (dc.standards || []).map(st =>
+        `<span class="sa-doc-std">${esc(st.standard_display)} <em>${st.n_refs|0}</em></span>`
+      ).join(' ');
+      const stdsRow = stds ? `<div class="sa-doc-stds">${stds}</div>` : '';
+      const drillHref = dc.dashboard_url || '/#documents';
+      const spanNote = (dc.standards_span || 0) >= 2
+        ? `<span class="sa-doc-span" title="Cross-framework document">cross-framework</span>`
+        : '';
+      html += `<div class="sa-card sa-doc-card" data-focus-entity="${attr(dc.external_ref||dc.title)}">
+        <div class="sa-related-head">
+          ${ext}
+          ${evPill}
+          ${spanNote}
+          ${when}
+        </div>
+        <div class="sa-related-title">${title}</div>
+        ${stdsRow}
+        <a class="sa-related-drill" href="${attr(drillHref)}"
+           onclick="setMode('documents');return true;">
+          Open in Documents →
+        </a>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
   return html;
 }
 

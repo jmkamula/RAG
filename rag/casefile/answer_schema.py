@@ -93,17 +93,58 @@ class RiskCard(BaseModel):
     dashboard_url:     Optional[str] = None           # /#risks?risk_id=<uuid>
 
 
+class StandardsSummary(BaseModel):
+    """One (standard, ref_count) tuple for the DocumentCard summary strip.
+
+    A doc that assessed against 15 ISO 27001 refs + 26 ISO 27701 refs
+    + 8 GDPR articles carries three of these — the cross-cutting
+    nature is preserved at the summary layer, no drill-in needed to
+    see it. Ship 52'.a. `standard_display` is the tenant-facing label
+    ("ISO 27001") — the composite id lives in `standard_id`."""
+    standard_id:      str    # "ISO27001:2022"
+    standard_display: str    # "ISO 27001"
+    n_refs:           int    # count of composite control_refs on this doc for this standard
+
+
+class DocumentCard(BaseModel):
+    """Ship 52'.a — one uploaded-document card.
+
+    Replaces the 5-line-per-doc prose bullets from Ship 51'.e with a
+    structured card the SPA can render as a clickable tile. Fully
+    deterministic — every field comes from client_documents +
+    posture_writer's control_refs population + Ship 51'.d's
+    metadata backfill. No LLM emission surface.
+
+    Populated by `_build_documents_data()` in rag/arion_graph.py and
+    passed to `build_short_circuit_structured()` via `documents_data`.
+    """
+    title:                 str                # document_title or filename
+    external_ref:          Optional[str] = None   # "DOC003" / "CD-ARN-0069" or None
+    evidence_type:         str = ""              # raw slug — "policy" / "procedure"
+    evidence_type_display: str = ""              # humanized — "Policy document"
+    uploaded_at:           Optional[str] = None   # ISO date "2026-07-31"
+    standards:             list[StandardsSummary] = Field(default_factory=list)
+    standards_span:        int = 0                # number of distinct standards (1 = focused, 3 = cross-cutting)
+    total_refs:            int = 0                # sum of n_refs across all standards
+    dashboard_url:         Optional[str] = None   # /#documents?doc_id=<uuid>
+
+
 class StructuredAnswer(BaseModel):
     """Full structured chat response."""
     intro:   IntroCard
     actions: list[ActionCard] = Field(default_factory=list)
     related: list[RelatedCard] = Field(default_factory=list)
     risks:   list[RiskCard]   = Field(default_factory=list)   # Ship 22'.c
+    documents: list[DocumentCard] = Field(default_factory=list)  # Ship 52'.a
     # Ship 25'.b — per-role overflow signal for capped sections.
     # Shape: `{role: {"shown": int, "total": int}}` for roles where
     # the total exceeded the per-section cap (default 8). Frontend +
     # prose render an `_Showing N of M — open dashboard →_` tail.
     # Empty dict when no section overflowed.
+    #
+    # Ship 52'.a extends this convention with a `documents` bucket:
+    # `{"documents": {"shown": 10, "total": 15}}` when the doc list
+    # was capped in the topic-scope path.
     overflow_counts: dict = Field(default_factory=dict)
 
 

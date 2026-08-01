@@ -427,6 +427,7 @@ def build_short_circuit_structured(
     pg_conn = None,
     tenant_id: str = "",
     risks_data: list = None,
+    documents_data: list = None,   # Ship 52'.b
 ) -> StructuredAnswer:
     """Family B/C helper — intro + related cards for short-circuits.
 
@@ -533,6 +534,13 @@ def build_short_circuit_structured(
     # (typically the risk short-circuit at arion_graph.py:2454).
     if risks_data:
         skeleton.risks = build_risk_cards(risks_data)
+
+    # Ship 52'.b — attach document cards when the caller supplied
+    # them (doc_inventory short-circuit at arion_graph.py:2637).
+    # Same shape as `risks_data` — a list of pre-shaped dicts;
+    # build_document_cards converts each into a DocumentCard.
+    if documents_data:
+        skeleton.documents = build_document_cards(documents_data)
 
     try:
         _sc_span.set_attribute("arion.answer.n_related_cards",
@@ -1313,6 +1321,58 @@ def build_risk_cards(risks_data) -> list[RiskCard]:
             linked_controls     = linked_refs,
             dashboard_url       = dash_url,
         ))
+    return out
+
+
+def build_document_cards(documents_data) -> list["DocumentCard"]:
+    """Ship 52'.b — deterministic conversion of pre-shaped document
+    dicts into DocumentCard[].
+
+    Each `documents_data` entry is a dict produced by the doc_inventory
+    short-circuit's `_build_documents_data()` helper (in
+    rag/arion_graph.py). Fields expected:
+
+      title, external_ref, evidence_type, evidence_type_display,
+      uploaded_at, standards (list of {standard_id, standard_display,
+      n_refs}), standards_span, total_refs, dashboard_url
+
+    Silent-fail per row on unexpected shape — the doc list should
+    survive a single bad row without breaking the whole card render.
+    """
+    from rag.casefile.answer_schema import DocumentCard, StandardsSummary
+    out: list["DocumentCard"] = []
+    for entry in (documents_data or []):
+        if not isinstance(entry, dict):
+            continue
+        title = (entry.get("title") or "").strip()
+        if not title:
+            continue
+        try:
+            standards = [
+                StandardsSummary(
+                    standard_id      = s.get("standard_id") or "",
+                    standard_display = s.get("standard_display") or "",
+                    n_refs           = int(s.get("n_refs") or 0),
+                )
+                for s in (entry.get("standards") or [])
+                if isinstance(s, dict)
+            ]
+            out.append(DocumentCard(
+                title                 = title,
+                external_ref          = entry.get("external_ref") or None,
+                evidence_type         = entry.get("evidence_type") or "",
+                evidence_type_display = entry.get("evidence_type_display") or "",
+                uploaded_at           = entry.get("uploaded_at") or None,
+                standards             = standards,
+                standards_span        = int(entry.get("standards_span") or len(standards)),
+                total_refs            = int(entry.get("total_refs") or
+                                            sum(s.n_refs for s in standards)),
+                dashboard_url         = entry.get("dashboard_url") or None,
+            ))
+        except Exception:
+            # Silent-fail per row — the doc list should survive a
+            # single bad row without breaking the whole card render.
+            continue
     return out
 
 

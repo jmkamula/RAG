@@ -713,6 +713,72 @@ def _humanize_std_id(std_id: str) -> str:
     return std_id
 
 
+def _build_documents_data(docs: list) -> list[dict]:
+    """Ship 52'.b — shape uploaded-doc dicts into card-ready payloads
+    for build_document_cards(). Deterministic — no LLM involvement.
+
+    Each entry produced has:
+      title, external_ref, evidence_type, evidence_type_display,
+      uploaded_at, standards ([{standard_id, standard_display, n_refs}, ...]),
+      standards_span, total_refs, dashboard_url
+
+    `docs` is the SAME shape `_compact_doc_line` consumes — the list
+    returned by `_filter_docs_by_topic` (topic-scoped) or the raw
+    `uploaded` list (broad query)."""
+    from collections import Counter
+    out: list[dict] = []
+    for d in docs:
+        title = d.get("document_title") or d.get("filename") or "?"
+        # Standards summary from framework_refs (composite strings).
+        refs = d.get("framework_refs") or []
+        std_counts: Counter[str] = Counter()
+        for r in refs:
+            parts = str(r).split(":")
+            std = f"{parts[0]}:{parts[1]}" if len(parts) >= 3 else parts[0]
+            std_counts[std] += 1
+        standards = [
+            {
+                "standard_id":      s,
+                "standard_display": _humanize_std_id(s),
+                "n_refs":           n,
+            }
+            for s, n in std_counts.most_common()
+        ]
+        evidence_type = d.get("doc_type") or d.get("evidence_type") or ""
+        # Humanized evidence_type — mirrors the humanizeSource() SPA
+        # helper on the client side. Keeps chat + dashboard vocabulary
+        # aligned.
+        evidence_type_display = (
+            evidence_type.replace("_", " ").capitalize() if evidence_type else ""
+        )
+        # Dashboard drill-in — SPA route to the Documents tab with the
+        # doc_id anchor (SPA handles the deep-link).
+        doc_id = str(d.get("id") or d.get("document_id") or "").strip()
+        dash_url = (
+            f"/#documents?doc_id={doc_id}" if doc_id else "/#documents"
+        )
+        when = d.get("uploaded_at")
+        # Normalise datetime → ISO date string. Accept either the
+        # already-string form (from Postgres text serialisation) or
+        # a datetime object.
+        if hasattr(when, "isoformat"):
+            uploaded_iso = when.isoformat()[:10]
+        else:
+            uploaded_iso = (str(when)[:10] if when else None)
+        out.append({
+            "title":                 title,
+            "external_ref":          d.get("external_ref") or d.get("platform_ref") or None,
+            "evidence_type":         evidence_type,
+            "evidence_type_display": evidence_type_display,
+            "uploaded_at":           uploaded_iso,
+            "standards":             standards,
+            "standards_span":        len(standards),
+            "total_refs":            sum(s["n_refs"] for s in standards),
+            "dashboard_url":         dash_url,
+        })
+    return out
+
+
 def _compact_doc_line(d: dict) -> str:
     """Render a single uploaded-doc entry as one line. Replaces the
     per-standard full-ref list with a count-per-standard summary — a
@@ -2817,11 +2883,53 @@ def make_retrieve_node(
                 # have the LLM access to prior-turn context.
                 # See [[conversational-context-routing-followup]].
                 last_entity = _resolve_upload_entity(state["query"], _uploaded, _alerts)
+
+                # Ship 52'.b — DocumentCard structured payload.
+                # Replicate the topic-scope filter used by the text
+                # answer, but cap at 20 (cards paginate client-side)
+                # instead of the prose cap of 10/15. When polarity is
+                # not "positive" or the query targeted a specific doc,
+                # skip cards — those answer shapes don't benefit from
+                # a card grid.
+                _cards_docs: list[dict] = []
+                if _uploaded and _detect_upload_polarity(state["query"]) == "positive":
+                    _topic = _extract_topic_scope(state["query"])
+                    if _topic:
+                        _card_source = _filter_docs_by_topic(_uploaded, _topic)
+                    else:
+                        _card_source = _uploaded
+                    # Cap at 20 — cards scroll, so a slightly larger
+                    # cap than prose (10/15) is fine but not
+                    # unbounded (SPA rendering budget).
+                    _cards_docs = _build_documents_data(_card_source[:20])
+
                 # Wave 2 migration. Upload inventory question — answers
                 # "do we have doc X?"; no cited_refs so templates auto-
                 # skip anyway. Being explicit for clarity.
-                # Ship 20'.b — Family A intro-only structured payload.
-                from rag.casefile.answer_augment import build_intro_only_structured
+                # Ship 20'.b — Family A intro-only structured payload
+                # (extended Ship 52'.b with document cards).
+                from rag.casefile.answer_augment import (
+                    build_intro_only_structured, build_short_circuit_structured,
+                )
+                if _cards_docs:
+                    # Cards path — intentionally passes NO extra_refs
+                    # and NO posture_by_node_id. Docs live in their
+                    # own bucket; RelatedCard's posture augment path
+                    # (which opens a psycopg connection) is skipped
+                    # entirely so we don't collide with the LangGraph
+                    # async event loop's shared psycopg pool.
+                    answer_structured = build_short_circuit_structured(
+                        intro_text     = composed,
+                        primary_ref    = None,
+                        extra_refs     = [],
+                        tenant         = None,
+                        posture_by_node_id = None,
+                        tenant_id      = "",
+                        documents_data = _cards_docs,
+                    ).model_dump()
+                else:
+                    answer_structured = build_intro_only_structured(composed).model_dump()
+
                 return build_answer_envelope(
                     state             = state,
                     answer_text       = composed,
@@ -2831,7 +2939,7 @@ def make_retrieve_node(
                     last_entity       = last_entity,
                     attach_templates  = False,
                     attach_advisory   = False,
-                    answer_structured = build_intro_only_structured(composed).model_dump(),
+                    answer_structured = answer_structured,
                 )
 
         # ── Resolver: dispatch to per-taxonomy data sources ──────────────
