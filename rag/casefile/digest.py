@@ -292,18 +292,26 @@ def _render_obligations(
 
 
 def _infer_guidance_standard(ref: str, standard_id: str) -> str:
-    """Ship 53 — return the ISO 2700x implementation-guidance standard
-    for a given ref+standard. Used when the case-file node's main text
-    is a 27002-shaped paraphrase (either bd or Chroma document
-    fallback) but no explicit marker is present.
+    """Ship 53' — return the authoritative implementation-guidance
+    standard for a given ref+standard.
 
     Mapping:
-      ISO 27001 Annex A (A.5.x-A.8.x) → ISO 27002:2022
-      ISO 27001 ISMS body (4.x-10.x)   → ISO 27003:2017
-      ISO 27701 A.7.x / B.8.x          → ISO 27002:2022 shape (PIMS)
+      ISO 27001 Annex A (A.5.x-A.8.x)  → ISO 27002:2022
+      ISO 27001 ISMS body (4.x-10.x)    → ISO 27003:2017
+      ISO 27701 A.7.x / B.8.x           → ISO 27701:2019 itself
 
-    Returns "" when no mapping applies (e.g., GDPR articles, ISO body
-    clauses whose guidance is fine-tuned elsewhere)."""
+    ISO 27701 is self-contained: unlike 27001→27002, the 27701 standard
+    includes its own implementation guidance inline under each control
+    clause (that's where the BD text comes from). Citing ISO 27002 for
+    a PIMS control is factually wrong — auditors would flag it —
+    because 27002 does not cover PIMS controllers or processors.
+    Ship 53'.d fix. Supplementary standards (27018 for cloud
+    processors, 29134 for DPIA methodology) are candidates for a
+    post-MVP grounding-corpus expansion; not needed for the honest
+    baseline.
+
+    Returns "" when no mapping applies (e.g., GDPR articles, ISO
+    body clauses whose guidance is fine-tuned elsewhere)."""
     if not ref:
         return ""
     if standard_id == "ISO27001:2022":
@@ -312,7 +320,7 @@ def _infer_guidance_standard(ref: str, standard_id: str) -> str:
         if re.match(r"^\d+\.", ref):
             return "ISO 27003:2017"
     elif standard_id == "ISO27701:2019":
-        return "ISO 27002:2022"
+        return "ISO 27701:2019"
     return ""
 
 
