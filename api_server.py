@@ -3115,10 +3115,40 @@ async def dashboard_control_demonstrated_by(
     node_id = f"{standard_id}:{control_ref}"
     rec     = posture.get(node_id) or {}
 
+    # Ship 52 addendum — enrich each demonstrator with its Neo4j
+    # title so the SPA drill-in can render "A.8.24 · Use of
+    # cryptography" instead of "A.8.24" alone. Batched to one Cypher
+    # round-trip per drill-in regardless of how many demonstrators
+    # the obligation has. Best-effort — a Neo4j failure leaves titles
+    # empty and the UI degrades to ref-only.
+    demonstrated = list(rec.get("demonstrated_by") or [])
+    if demonstrated:
+        try:
+            from rag.posture_loader import _build_engine_neo4j_driver
+            neo_drv = _build_engine_neo4j_driver()
+        except Exception:
+            neo_drv = None
+        if neo_drv is not None:
+            ids = [d.get("src_id") for d in demonstrated if d.get("src_id")]
+            titles: dict[str, str] = {}
+            try:
+                with neo_drv.session() as s:
+                    for row in s.run(
+                        "UNWIND $ids AS nid "
+                        "MATCH (n) WHERE n.id = nid "
+                        "RETURN n.id AS id, n.title AS title",
+                        ids=ids,
+                    ):
+                        titles[row["id"]] = row["title"] or ""
+            except Exception:
+                titles = {}
+            for d in demonstrated:
+                d["src_title"] = titles.get(d.get("src_id"), "")
+
     return {
         "control_ref":         control_ref,
         "standard_id":         standard_id,
-        "demonstrated_by":     rec.get("demonstrated_by"),
+        "demonstrated_by":     demonstrated or None,
         "propagated_finding":  rec.get("propagated_finding"),
         "current_finding":     rec.get("finding"),
         "materialised":        rec.get("source") == "demonstrates_propagation",

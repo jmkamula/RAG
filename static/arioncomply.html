@@ -5129,6 +5129,12 @@ function renderDemonstratedByPanel(dm) {
     ${dm.materialised
       ? `<span style="margin-left:6px;font-size:10px;color:#7C7A6E;font-style:italic">(auto-inferred: no direct assessment)</span>`
       : ''}
+  </div>
+  <div style="font-size:11px;color:#5C5A4F;margin-bottom:8px;line-height:1.5">
+    This obligation isn't assessed directly — its posture is inferred
+    from the controls below. Their combined finding propagates up:
+    an OFI or worse on any propagates here, so improving the weakest
+    of these lifts this obligation too.
   </div>`;
 
   // Table of contributing sources with their current findings + rationale
@@ -5137,17 +5143,19 @@ function renderDemonstratedByPanel(dm) {
     const srcRef = srcParts.slice(2).join(':') || it.src_id || '?';
     const stdShort = humanizeStandardId(it.src_std || '');
     const pill = pillWithLabel(it.finding || '—');
+    const title = esc(it.src_title || '');
     const drill = `<a href="#dashboard?control=${encodeURIComponent(srcRef)}"
                      style="color:#534AB7;text-decoration:none;font-size:11px;margin-left:4px"
                      title="Open this control in the dashboard">→</a>`;
     return `<div style="padding:6px 10px;background:#fff;border:1px solid #E8E5DA;border-radius:5px;margin-top:4px;font-size:11px;line-height:1.5">
-      <div style="display:flex;align-items:center;gap:6px">
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
         <span style="font-family:monospace;font-weight:600;color:#3A382E">${esc(srcRef)}</span>
         <span style="color:#7C7A6E">·</span>
         <span style="color:#5C5A4F">${esc(stdShort)}</span>
         ${drill}
         <span style="margin-left:auto">${pill}</span>
       </div>
+      ${title ? `<div style="font-size:11px;color:#3A382E;margin-top:2px">${title}</div>` : ''}
     </div>`;
   }).join('');
 
