@@ -646,6 +646,105 @@ _NEGATIVE_UPLOAD_MARKERS = (
 )
 
 
+# Ship 51'.e — topic-scoping helpers for "regarding X" / "about X" /
+# "for X" narrowing of uploaded-doc queries. Without this, a query
+# like "what documents have we uploaded regarding access security?"
+# fell through to the whole-inventory branch and dumped all 54 docs.
+_TOPIC_SCOPE_RE = re.compile(
+    r"\b(?:regarding|about|for|related\s+to|relating\s+to|on|around|"
+    r"concerning|touching\s+on)\s+([^?.!,]+?)(?:\?|$|\.|,)",
+    re.IGNORECASE,
+)
+
+
+def _extract_topic_scope(query: str) -> list[str]:
+    """Extract topic tokens from 'regarding X' / 'about X' scoping.
+    Returns significant tokens (len ≥ 4, non-stopword). Empty list when
+    no scope pattern matches or the extracted phrase is too generic."""
+    m = _TOPIC_SCOPE_RE.search(query)
+    if not m:
+        return []
+    phrase = m.group(1).lower().strip()
+    tokens = [t for t in re.split(r"[\W_]+", phrase) if t]
+    return [t for t in tokens if len(t) >= 4 and t not in _STOP_WORDS]
+
+
+def _filter_docs_by_topic(uploaded: list, topic_tokens: list[str]) -> list:
+    """Rank uploaded docs by overlap of `topic_tokens` against a combined
+    haystack of filename + document_title + topics_detected + standards.
+    Uses `topics_detected` populated by scripts/backfill_client_documents_metadata.py
+    (Ship 51'.d). Ranked by overlap count; ties broken by original order
+    (which is upload_at DESC per _uploaded_documents_query)."""
+    if not topic_tokens:
+        return []
+    tt_set = {t.lower() for t in topic_tokens}
+    ranked = []
+    for i, d in enumerate(uploaded):
+        haystack_parts = [
+            (d.get("filename") or "").lower(),
+            (d.get("document_title") or "").lower(),
+        ]
+        for t in (d.get("topics_detected") or []):
+            haystack_parts.append(str(t).lower())
+        # Split combined haystack into tokens
+        haystack = " ".join(haystack_parts)
+        h_tokens = set(re.split(r"[\W_]+", haystack))
+        overlap = len(tt_set & h_tokens)
+        if overlap > 0:
+            # Negative index for stable ordering by upload date within ties
+            ranked.append((-overlap, i, d))
+    ranked.sort()
+    return [d for _, _, d in ranked]
+
+
+def _humanize_std_id(std_id: str) -> str:
+    """Compact standard label for the doc-line summary. Matches the
+    convention used across tenant-facing surfaces (rag/output/gateway
+    handles the general case; this is the small-set version for the
+    hot render path)."""
+    if not std_id:
+        return ""
+    if std_id.startswith("ISO27001"):
+        return "ISO 27001"
+    if std_id.startswith("ISO27701"):
+        return "ISO 27701"
+    if std_id.startswith("GDPR"):
+        return "GDPR"
+    return std_id
+
+
+def _compact_doc_line(d: dict) -> str:
+    """Render a single uploaded-doc entry as one line. Replaces the
+    per-standard full-ref list with a count-per-standard summary — a
+    doc covering 60 refs across 3 standards becomes '· covers ISO 27001
+    (16) + ISO 27701 (26) + GDPR (8)' instead of listing every ref.
+    Ship 51'.e; motivated by 5-line-per-doc dumps that overwhelmed the
+    user during dry-run testing."""
+    from collections import Counter
+
+    title    = d.get("document_title") or d.get("filename") or "?"
+    ref      = d.get("external_ref") or d.get("platform_ref") or ""
+    ref_s    = f" ({ref})" if ref else ""
+    doc_type = d.get("doc_type") or d.get("evidence_type") or ""
+    type_s   = f" — {doc_type.replace('_', ' ')}" if doc_type else ""
+    when     = d.get("uploaded_at")
+    when_s   = f", uploaded {when[:10]}" if when else ""
+
+    refs = d.get("framework_refs") or []
+    std_summary = ""
+    if refs:
+        std_counts: Counter[str] = Counter()
+        for r in refs:
+            parts = str(r).split(":")
+            std = f"{parts[0]}:{parts[1]}" if len(parts) >= 3 else parts[0]
+            std_counts[std] += 1
+        readable = " + ".join(
+            f"{_humanize_std_id(s)} ({n})" for s, n in std_counts.most_common()
+        )
+        std_summary = f" · covers {readable}"
+    return f"  • {title}{ref_s}{type_s}{when_s}{std_summary}"
+
+
 def _detect_upload_polarity(query: str) -> str:
     """
     Classify an upload-status query as 'positive' (user wants list of
@@ -868,7 +967,12 @@ def _answer_upload_status(
                 f"uploaded to the platform.{ctl_s}"
             )
 
-        # No specific doc named — answer about the whole inventory
+        # No specific doc named. Two paths:
+        #   a) query has a topic scope ("regarding X" / "about X") →
+        #      filter uploaded docs by topic overlap + return that list
+        #   b) broad "list our documents" → whole inventory
+        # Ship 51'.e — was previously always (b); topic-scoped queries
+        # returned the whole 54-doc dump.
         if not uploaded:
             # Ship 51'.d — dev-CLI hint removed; tenant-facing text points
             # at the SPA's Documents tab instead of `tools/doc_uploader.py`.
@@ -878,20 +982,34 @@ def _answer_upload_status(
                 "files haven't been delivered — open the Documents tab to "
                 "upload them."
             )
+
+        topic_tokens = _extract_topic_scope(query)
+        if topic_tokens:
+            scoped = _filter_docs_by_topic(uploaded, topic_tokens)
+            if scoped:
+                topic_label = " ".join(topic_tokens)
+                lines = [
+                    f"Uploaded documents relating to {topic_label} "
+                    f"({len(scoped)} of {len(uploaded)} total):"
+                ]
+                for d in scoped[:10]:
+                    lines.append(_compact_doc_line(d))
+                if len(scoped) > 10:
+                    lines.append(f"  … and {len(scoped) - 10} more")
+                return "\n".join(lines)
+            # Topic specified but nothing matched.
+            return (
+                f"No uploaded documents match \"{' '.join(topic_tokens)}\". "
+                f"{len(uploaded)} documents are on the platform in total — "
+                f"try a broader query, e.g. \"what documents have we uploaded\"."
+            )
+
+        # Broad query — whole inventory, compact rendering.
         lines = [f"Uploaded documents ({len(uploaded)} total):"]
-        for d in uploaded[:20]:
-            title    = d.get("document_title") or d.get("filename") or "?"
-            ref      = d.get("external_ref") or d.get("platform_ref") or ""
-            ref_s    = f" ({ref})" if ref else ""
-            doc_type = d.get("doc_type") or ""
-            type_s   = f" — {doc_type}" if doc_type else ""
-            when     = d.get("uploaded_at")
-            when_s   = f", uploaded {when[:10]}" if when else ""
-            framework_clause = _render_framework_refs(d.get("framework_refs"))
-            asses_s  = f"; assessed against {framework_clause}" if framework_clause else ""
-            lines.append(f"  • {title}{ref_s}{type_s}{when_s}{asses_s}")
-        if len(uploaded) > 20:
-            lines.append(f"  … and {len(uploaded) - 20} more")
+        for d in uploaded[:15]:
+            lines.append(_compact_doc_line(d))
+        if len(uploaded) > 15:
+            lines.append(f"  … and {len(uploaded) - 15} more")
         return "\n".join(lines)
 
     # ── Negative or ambiguous: report missing/registered from alerts ───
