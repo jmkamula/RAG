@@ -2918,8 +2918,21 @@ def make_retrieve_node(
                     # (which opens a psycopg connection) is skipped
                     # entirely so we don't collide with the LangGraph
                     # async event loop's shared psycopg pool.
+                    #
+                    # Ship 52 addendum — truncate intro_text to the
+                    # header line only (drop the bullet list). Cards
+                    # carry the same information visually; showing the
+                    # bullets in the intro would duplicate what the
+                    # card grid already renders.
+                    _intro_lines: list[str] = []
+                    for _line in (composed or "").splitlines():
+                        _stripped = _line.strip()
+                        if _stripped.startswith("•") or _stripped.startswith("…"):
+                            break
+                        _intro_lines.append(_line)
+                    _intro_short = "\n".join(_intro_lines).rstrip() or composed
                     answer_structured = build_short_circuit_structured(
-                        intro_text     = composed,
+                        intro_text     = _intro_short,
                         primary_ref    = None,
                         extra_refs     = [],
                         tenant         = None,

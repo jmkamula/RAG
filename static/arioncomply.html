@@ -5825,6 +5825,11 @@ function renderStructuredAnswer(s) {
       const spanNote = (dc.standards_span || 0) >= 2
         ? `<span class="sa-doc-span" title="Cross-framework document">cross-framework</span>`
         : '';
+      // Ship 52 addendum — drill-in link removed. The Documents tab
+      // is currently intake-only; a per-doc detail view is a future
+      // arc. Cards stand on their own (title + ref + evidence_type +
+      // date + standards summary). Add the link back once we have a
+      // real destination.
       html += `<div class="sa-card sa-doc-card" data-focus-entity="${attr(dc.external_ref||dc.title)}">
         <div class="sa-related-head">
           ${ext}
@@ -5834,10 +5839,6 @@ function renderStructuredAnswer(s) {
         </div>
         <div class="sa-related-title">${title}</div>
         ${stdsRow}
-        <a class="sa-related-drill" href="${attr(drillHref)}"
-           onclick="setMode('documents');return true;">
-          Open in Documents →
-        </a>
       </div>`;
     });
     html += `</div>`;
