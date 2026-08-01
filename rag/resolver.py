@@ -359,11 +359,17 @@ def _merge_doc_inv(gr: GraphResult, doc_inv) -> None:
 
 
 _POSITIVE_UPLOAD_MARKERS = (
+    # First-person plural + singular. Kept in sync with the fuller set
+    # in rag/arion_graph.py:_POSITIVE_UPLOAD_MARKERS — natural pronoun
+    # switching between "we" (org perspective) and "I" (operator).
     "have we uploaded", "we have uploaded", "we uploaded",
+    "have i uploaded", "i have uploaded", "i uploaded",
+    "did we upload", "did i upload",
     "documents uploaded", "uploaded documents",
     "what is uploaded", "what's uploaded", "what are uploaded",
     "show uploaded", "list uploaded", "list of uploaded",
     "which documents have we uploaded",
+    "which documents have i uploaded",
 )
 _NEGATIVE_UPLOAD_MARKERS = (
     "not uploaded", "haven't been uploaded", "have not been uploaded",
@@ -528,8 +534,10 @@ def _build_document_status_answer(query: str, alerts: list) -> Optional[str]:
             lines.append(f"{len(info)} additional doc(s) registered but not uploaded.")
     if not lines:
         return None
-    lines.append("")
-    lines.append("Upload: python3 tools/doc_uploader.py --dir /path/to/docs --live")
+    # Ship 51'.d — dev-CLI hint removed from tenant-facing answers.
+    # `python3 tools/doc_uploader.py --dir /path/to/docs --live` was
+    # leaking into chat responses; tenants have no shell access. The
+    # SPA already has a "Documents" tab for uploads.
     return "\n".join(lines)
 
 

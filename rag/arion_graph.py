@@ -70,8 +70,11 @@ import re
 _UPLOAD_VERB = r'(?:uploaded|submitted|delivered|provided|shared|sent\s+in)'
 
 _UPLOAD_STATUS_PATTERNS = [
-    re.compile(rf'\bhave\s+we\s+{_UPLOAD_VERB}\b', re.IGNORECASE),
-    re.compile(rf'\bdid\s+we\s+{_UPLOAD_VERB}\b', re.IGNORECASE),
+    # First-person plural OR singular ("have we uploaded" / "have I uploaded")
+    # — users switch pronouns naturally depending on whether they're speaking
+    # about the organisation or themselves as its operator.
+    re.compile(rf'\bhave\s+(?:we|i)\s+{_UPLOAD_VERB}\b', re.IGNORECASE),
+    re.compile(rf'\bdid\s+(?:we|i)\s+{_UPLOAD_VERB}\b', re.IGNORECASE),
     re.compile(rf'\b(?:is|are)\s+(?:our|the)\s+[\w\s]{{2,40}}(?:policy|procedure|plan|playbook|document)s?\s+(?:{_UPLOAD_VERB}|in\s+the\s+system|on\s+the\s+platform)\b', re.IGNORECASE),
     re.compile(rf'\bwhich\s+documents?\s+(?:have\s+(?:not|yet)\s+been|are\s+(?:not|still)?)\s+{_UPLOAD_VERB}\b', re.IGNORECASE),
     re.compile(r'\bshow\s+(?:me\s+)?(?:missing|unuploaded)\s+documents?\b', re.IGNORECASE),
@@ -626,6 +629,12 @@ _POSITIVE_UPLOAD_MARKERS = (
     "have we provided", "we provided",
     "have we shared", "we shared",
     "have we sent", "we sent",
+    # first-person singular — the operator asking on their own behalf
+    "have i uploaded", "i have uploaded", "i uploaded",
+    "did i upload", "have i submitted", "i submitted",
+    "did i submit", "have i delivered", "i delivered",
+    "have i provided", "i provided", "have i shared", "i shared",
+    "have i sent", "i sent",
 )
 
 _NEGATIVE_UPLOAD_MARKERS = (
@@ -861,11 +870,13 @@ def _answer_upload_status(
 
         # No specific doc named — answer about the whole inventory
         if not uploaded:
+            # Ship 51'.d — dev-CLI hint removed; tenant-facing text points
+            # at the SPA's Documents tab instead of `tools/doc_uploader.py`.
             return (
                 "No documents have been uploaded to the platform yet. "
-                "Registered documents are tracked in our checklist but their "
-                "files haven't been delivered — use the upload endpoint or "
-                "tools/doc_uploader.py to upload them."
+                "Registered documents are tracked in our checklist but the "
+                "files haven't been delivered — open the Documents tab to "
+                "upload them."
             )
         lines = [f"Uploaded documents ({len(uploaded)} total):"]
         for d in uploaded[:20]:
