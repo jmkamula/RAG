@@ -3545,7 +3545,13 @@ async function selectHeatCell(c, ev) {
   // Reset canonical summary first so the previous selection's title /
   // description doesn't leak while we fetch the new one.
   populateCanonicalSummary(null);
-  document.getElementById('dp-finding').innerHTML = pillWithLabel(c.finding);
+  // Ship 52 addendum — Finding pill + one-line glossary. The glossary
+  // sits directly under the pill so tenants who don't yet know the
+  // NC/OFI/Comply/N/A shorthand can see all four definitions at a
+  // glance, rather than seeing the acronym expanded inline on every
+  // pill that appears further down the panel.
+  document.getElementById('dp-finding').innerHTML =
+    pill(c.finding) + renderFindingGlossary();
 
   // Fetch canonical title + obligation_text for this control (async).
   // Best-effort: panel still renders if Neo4j is unreachable.
@@ -3888,14 +3894,36 @@ function pill(finding) {
   return `<span class="pill ${m[finding]||'p-na'}"${tip}>${finding}</span>`;
 }
 
-// Detail-panel version: compact pill + the expanded acronym inline
-// so a tenant reading the panel doesn't need to hover to learn what
-// NC/OFI/Comply/N/A mean. Skips the inline label for '—' / null.
+// Ship 52 addendum — pillWithLabel now returns the bare pill. The
+// prior "[NC] Non-Conformity" inline expansion cluttered every
+// drill-in panel where verdicts repeated (Demonstrated by rows,
+// Stage-2 proposals, etc.). The acronyms are still explained — see
+// renderFindingGlossary() below for the one-line legend row rendered
+// once per drill-in view. Hover tooltips on pill() still carry the
+// full term for anyone who wants it inline.
 function pillWithLabel(finding) {
-  const p = pill(finding);
-  const longName = _FINDING_LONG[finding];
-  if (!longName) return p;
-  return p + ` <span style="font-size:11px;color:#5C5A4F;margin-left:6px">${longName}</span>`;
+  return pill(finding);
+}
+
+// One-line legend used at the top of the detail drill-in. Renders
+// the four verdict acronyms with a short definition each — surgical
+// glossary that replaces the repeated "[NC] Non-Conformity" inline
+// expansions further down the panel. Kept compact enough to sit
+// under the Finding pill without pushing content down.
+function renderFindingGlossary() {
+  const items = [
+    ['NC',     'p-nc',     'not yet met'],
+    ['OFI',    'p-ofi',    'partially met, improvable'],
+    ['Comply', 'p-comply', 'met'],
+    ['N/A',    'p-na',     'out of scope'],
+  ];
+  const chips = items.map(([label, cls, defn]) =>
+    `<span class="pill ${cls}" style="font-size:9px;padding:1px 5px">${label}</span>` +
+    `<span style="color:#7C7A6E;margin-left:3px">${defn}</span>`
+  ).join(`<span style="color:#C8C5B8;margin:0 8px">·</span>`);
+  return `<div style="font-size:10px;color:#5C5A4F;margin-top:4px;padding:4px 0;border-top:1px dashed #E8E5DA">
+    ${chips}
+  </div>`;
 }
 
 // Status pill covers finding-status enums (present/partial/missing).
