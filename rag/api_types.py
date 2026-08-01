@@ -79,12 +79,24 @@ RiskIdParam      = Annotated[str, Path(pattern=_UUID_PATTERN, description="Risk 
 
 # ── Composite / regex-validated params ────────────────────────────────
 
-# Bare control refs: "A.5.18" (Annex A), "Art.32" (GDPR),
-# "9.2" (ISMS body clause), "A.7.2.4" (ISO 27701).
+# Bare control refs:
+#   "A.5.18" (Annex A), "A.7.2.4" (ISO 27701), "B.8.5.6" (ISO 27701)
+#   "Art.32" (GDPR bare article), "Art.32.1" (with paragraph),
+#   "Art.32.1.b" / "Art.5.1.f" (dotted sub-paragraph letter — the
+#     convention curated posture data uses)
+#   "Art.32(a)" / "Art.32.1(b)" (parenthesized alternative form —
+#     kept for prior compatibility)
+#   "9.2" / "6.1.2" (ISMS body clause)
+#
+# Ship 52 addendum — extended the Art. branch to allow the dotted
+# `.<letter>` suffix. The prior regex only recognised parenthesized
+# `(<letter>)` and rejected the curated `Art.5.1.f` / `Art.32.1.b`
+# shapes with HTTP 422, breaking dashboard drill-in on any GDPR
+# sub-paragraph control. Trailing letter is optional either way.
 _CONTROL_REF_PATTERN = (
     r"^(?:"
         r"[AB]\.\d+(?:\.\d+){0,3}"
-        r"|Art\.\d+(?:\.\d+)?(?:\([a-z0-9]+\))?"
+        r"|Art\.\d+(?:\.\d+){0,2}(?:\.[a-z]|\([a-z0-9]+\))?"
         r"|\d+\.\d+(?:\.\d+){0,2}"
     r")$"
 )
