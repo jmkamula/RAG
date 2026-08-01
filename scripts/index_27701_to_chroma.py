@@ -26,6 +26,7 @@ load_dotenv(str(Path(__file__).parent.parent / ".env"))
 
 from vector.indexer import VectorIndexer, COL_27701, COL_ALL
 from models.requirement_node import RequirementNode, NodeType, ObligationType
+from rag.embedding_config import EMBED_MODEL_STANDARD
 
 
 def fetch_27701_nodes(driver) -> list[RequirementNode]:
@@ -75,10 +76,15 @@ def main():
     print("Indexing into ChromaDB…")
 
     provider = "openai" if os.getenv("OPENAI_API_KEY") else "fallback"
+    # Ship 53' (2026-08-01): use the shared EMBED_MODEL_STANDARD so this
+    # collection stays consistent with the Ship 5'.b consolidation onto
+    # text-embedding-3-large across all Chroma collections. Passing the
+    # old text-embedding-3-small would create a 1536-dim collection that
+    # can't be queried by the 3072-dim runtime retriever.
     indexer = VectorIndexer(
         persist_dir     = str(Path(__file__).parent.parent / "chroma_db"),
         provider        = provider,
-        embedding_model = "text-embedding-3-small" if provider == "openai" else None,
+        embedding_model = EMBED_MODEL_STANDARD if provider == "openai" else None,
     )
 
     # Idempotent upsert into COL_27701 (add-only; no reset)
