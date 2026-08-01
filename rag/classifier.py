@@ -689,6 +689,18 @@ CLEAR_INTENT_PHRASES = [
      "definition", []),
     (re.compile(r'\bwhat\s+(?:is|are)\s+(?:ISO\s*27001|ISO\s*27002|GDPR|the\s+ISMS)\b', re.IGNORECASE),
      "definition", []),
+    # Ship 53'.h (2026-08-01) — "what does ISO 2700X [say|recommend|require|...]"
+    # queries. Ship 13'.d/e locked these to `definition` (eval cases #222-224).
+    # Post-Ship-53' model migration to gpt-4.1-mini classifier reclassified them
+    # as `implementation` / `document_content` — arguably more literal, but drifts
+    # from the assertion. Curator-tier pattern re-anchors them at signal weight
+    # 1.00, per Ship 1 consensus architecture. Also covers 27017/27018/27019/
+    # 27552/27701/27799 for future-proofing across the ISO 2700x family.
+    (re.compile(
+        r'\bwhat\s+does\s+ISO\s*27\d{3}\s+'
+        r'(?:say|state|recommend|require|specify|provide|prescribe|mandate)\b',
+        re.IGNORECASE),
+     "definition", []),
     (re.compile(r'\bexplain\s+(?:what\s+)?(?:NC|OFI|ISMS|DPIA|DPA|a\s+control|an\s+article)\b', re.IGNORECASE),
      "definition", []),
 
