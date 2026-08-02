@@ -3196,6 +3196,39 @@ def _control_ref_from_leaf_id(leaf_id: str) -> str:
     return parts[1] if len(parts) >= 2 else ""
 
 
+# Regexes for scrubbing gap-description text on the topics-side detail.
+# The topics view is workflow-focused (not per-source evidence audit),
+# so bracket-form debug/routing prefixes and markdown-escape artifacts
+# that the dashboard drill-in tolerates should not surface here.
+_TOPIC_TEXT_BRIDGE_RE     = _re.compile(r"\[Bridge:[^\]]*\]\s*", _re.IGNORECASE)
+_TOPIC_TEXT_LEAFSCAN_RE   = _re.compile(r"\[leaf-scan back-bind from finding [^\]]*\]\s*", _re.IGNORECASE)
+
+
+def _scrub_topic_gap_text(text: str) -> str:
+    """Clean gap-description text for the topics workflow drill-in.
+
+    The dashboard drill-in tolerates internal bracket-form prefixes
+    (bridge annotations, leaf-scan back-bind tags, extractor debug
+    markers) because it's an evidence-forensics surface. The topics
+    view is workflow-focused — bracket noise dilutes the "what needs
+    to be done" signal. Strip:
+      - `[Bridge: ...]` cross-framework grounding prefixes
+      - `[leaf-scan back-bind from finding <uuid>]` extractor tags
+      - Markdown-escape artifacts (`\\-`, `\\.`, `\\(` — same as the
+        Ship 7'.d strip_markdown_escapes transform)
+    Also collapses excessive whitespace introduced by the strips.
+    """
+    if not text:
+        return ""
+    out = _TOPIC_TEXT_BRIDGE_RE.sub("", text)
+    out = _TOPIC_TEXT_LEAFSCAN_RE.sub("", out)
+    # Markdown-escape artifacts
+    out = out.replace(r"\-", "-").replace(r"\.", ".").replace(r"\(", "(").replace(r"\)", ")")
+    # Whitespace collapse
+    out = _re.sub(r"\s+", " ", out).strip()
+    return out
+
+
 @app.get("/api/v1/advisory/topics", tags=["posture"])
 async def advisory_topics_list(
     request:  Request,
@@ -3385,7 +3418,7 @@ async def advisory_topic_detail(
                 "role_note":          role_note,
                 "framework_role":     _classify_framework_role(leaf_id),
                 "finding":            finding,
-                "gap_excerpt":        gap_excerpt or "",
+                "gap_excerpt":        _scrub_topic_gap_text(gap_excerpt or ""),
                 "template_available": bool(template_available),
             })
 

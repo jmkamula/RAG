@@ -178,6 +178,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .topic-leaf-gap{font-size:11px;color:#5F5E5A;margin-top:5px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .topic-leaf-note{font-size:11px;color:#8A887E;font-style:italic;margin-top:4px;line-height:1.5}
 
+/* Ship 54'.b addendum — inline expansion detail panel */
+.topic-leaf-chevron{color:#B4B2A9;font-size:14px;transition:transform .18s ease;margin-left:4px}
+.topic-leaf-chevron.rotated{transform:rotate(180deg);color:#3C3489}
+.topic-leaf.expanded{background:#FCFBF8;border-color:#D0CBEA}
+.topic-leaf-detail{display:none;padding:12px 0 4px;border-top:1px solid #EEECE2;margin-top:10px}
+.topic-leaf-detail[data-expanded="true"]{display:block}
+.topic-leaf-section{margin-bottom:12px}
+.topic-leaf-section-lbl{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#8A887E;font-weight:600;margin-bottom:5px;display:flex;align-items:center;gap:5px}
+.topic-leaf-section-lbl i{font-size:13px;color:#3C3489}
+.topic-leaf-section-body{font-size:12px;color:#3D3B32;line-height:1.6;white-space:pre-wrap}
+.topic-leaf-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;padding-top:10px;border-top:1px dashed #EEECE2}
+.topic-leaf-btn{background:#fff;border:1px solid #e5e4df;color:#3D3B32;padding:6px 10px;border-radius:5px;font-size:11px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:5px;text-decoration:none;transition:all .1s ease;font-family:inherit}
+.topic-leaf-btn:hover{border-color:#3C3489;color:#3C3489;background:#FCFBF8}
+.topic-leaf-btn i{font-size:14px}
+.topic-leaf-btn-primary{background:#3C3489;color:#fff;border-color:#3C3489}
+.topic-leaf-btn-primary:hover{background:#2D2666;border-color:#2D2666;color:#fff}
+.topic-leaf-btn-muted{color:#8A887E;border-color:#EEECE2}
+.topic-leaf-btn-muted:hover{color:#5F5E5A;border-color:#D0CBEA;background:#FCFBF8}
+/* Suppress the inline gap-excerpt shown in the row head when expanded —
+   the detail panel carries the full status body */
+.topic-leaf.expanded .topic-leaf-gap{display:none}
+
 /* ── Chat panel ── */
 .chat-wrap{display:flex;flex-direction:column;height:100%}
 .chat-messages{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:14px}
@@ -3430,8 +3452,15 @@ function renderTopicDetail(d) {
     `<span class="topic-frchip ${c.cls}" title="${c.hint}">${c.label}: ${c.n}</span>`
   ).join('');
 
-  // Leaves — grouped visually by role but ordered by workflow_order
-  const leafRows = (d.leaves || []).map(l => {
+  // Leaves — ordered by workflow_order; click to expand inline.
+  // Ship 54'.b addendum — the earlier "click routes to dashboard drill-in"
+  // pattern surfaced too much noise for a workflow view (12+ evidence rows
+  // per leaf with bracket-form debug tags). Topics is workflow-focused; the
+  // dashboard remains the evidence-forensics surface. Clicking a leaf here
+  // toggles a compact inline detail with the curator context, the clean
+  // status, template downloads, chat CTA, and an escape hatch to the
+  // dashboard for users who want the full evidence view.
+  const leafRows = (d.leaves || []).map((l, idx) => {
     const findingCls = _FINDING_CLASS[l.finding] || 'f-NotAssessed';
     const findingText = l.finding || 'not assessed';
     const roleTag = _ROLE_LABEL[l.role] || l.role || '';
@@ -3441,23 +3470,68 @@ function renderTopicDetail(d) {
       : '';
     const displayTitle = l.leaf_title
       || (l.control_title ? `${l.control_title} — ${l.leaf_type}` : l.leaf_type);
-    const roleNote = l.role_note
-      ? `<div class="topic-leaf-note">${escapeHtml(l.role_note)}</div>`
-      : '';
+    const rowId = `topic-leaf-${idx}`;
+    // Encode payload for the expand handler as data-attributes — keeps the
+    // onclick lightweight and avoids escaping headaches on long role_notes.
+    const leafId = escapeHtml(l.leaf_id);
+    const ctrl = escapeHtml(l.control_ref);
     return `
-      <div class="topic-leaf" onclick="_openControlDetailAndDashboard('${escapeHtml(l.control_ref)}')">
+      <div class="topic-leaf" id="${rowId}" data-leaf-id="${leafId}" data-ctrl="${ctrl}"
+           onclick="toggleTopicLeafDetail('${rowId}')">
         <div class="topic-leaf-ord">${l.workflow_order || 0}</div>
         <div class="topic-leaf-body">
           <div class="topic-leaf-head">
-            <span class="topic-leaf-ref">${escapeHtml(l.control_ref)}</span>
+            <span class="topic-leaf-ref">${ctrl}</span>
             ${frTag ? `<span class="topic-leaf-fr topic-frchip-${frTag}">${frTag}</span>` : ''}
             <span class="topic-leaf-title">${escapeHtml(displayTitle)}</span>
             ${templateBadge}
             <span class="topic-leaf-role">${escapeHtml(roleTag)}</span>
             <span class="topic-vp ${findingCls}" style="margin-left:auto">${findingText}</span>
+            <i class="ti ti-chevron-down topic-leaf-chevron" aria-hidden="true"></i>
           </div>
-          ${l.gap_excerpt ? `<div class="topic-leaf-gap">${escapeHtml(l.gap_excerpt)}</div>` : ''}
-          ${roleNote}
+          <div class="topic-leaf-detail" data-expanded="false">
+            ${l.role_note ? `
+              <div class="topic-leaf-section">
+                <div class="topic-leaf-section-lbl"><i class="ti ti-notes" aria-hidden="true"></i> Role in this workflow</div>
+                <div class="topic-leaf-section-body">${escapeHtml(l.role_note)}</div>
+              </div>
+            ` : ''}
+            ${l.gap_excerpt ? `
+              <div class="topic-leaf-section">
+                <div class="topic-leaf-section-lbl"><i class="ti ti-alert-circle" aria-hidden="true"></i> Current status: ${escapeHtml(findingText)}</div>
+                <div class="topic-leaf-section-body">${escapeHtml(l.gap_excerpt)}</div>
+              </div>
+            ` : ''}
+            <div class="topic-leaf-actions">
+              ${l.template_available ? `
+                <a class="topic-leaf-btn" href="/api/v1/templates/${encodeURIComponent(l.leaf_id)}/download?format=md"
+                   onclick="event.stopPropagation()" download
+                   title="Download the markdown scaffold with your tenant profile substituted">
+                  <i class="ti ti-file-download" aria-hidden="true"></i> Markdown
+                </a>
+                <a class="topic-leaf-btn" href="/api/v1/templates/${encodeURIComponent(l.leaf_id)}/download?format=docx"
+                   onclick="event.stopPropagation()" download
+                   title="Download the Word document scaffold">
+                  <i class="ti ti-file-download" aria-hidden="true"></i> Word
+                </a>
+                <a class="topic-leaf-btn" href="/api/v1/templates/${encodeURIComponent(l.leaf_id)}/download?format=xlsx"
+                   onclick="event.stopPropagation()" download
+                   title="Download the Excel workbook (for tabular templates)">
+                  <i class="ti ti-file-download" aria-hidden="true"></i> Excel
+                </a>
+              ` : ''}
+              <button class="topic-leaf-btn topic-leaf-btn-primary"
+                      onclick="event.stopPropagation();askAboutTopicLeaf('${ctrl}')"
+                      title="Open chat with a remediation question for this control">
+                <i class="ti ti-message-2" aria-hidden="true"></i> Ask AI
+              </button>
+              <button class="topic-leaf-btn topic-leaf-btn-muted"
+                      onclick="event.stopPropagation();openTopicLeafInDashboard('${ctrl}')"
+                      title="Open the dashboard drill-in for full evidence sources">
+                <i class="ti ti-external-link" aria-hidden="true"></i> Full detail
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     `;
@@ -3496,12 +3570,47 @@ function renderTopicDetail(d) {
   `;
 }
 
-// Deep-link into dashboard control detail from a topic leaf click
-function _openControlDetailAndDashboard(ref) {
+// Ship 54'.b addendum — inline expansion in the topics view.
+// Toggles the .topic-leaf-detail panel visibility per leaf.
+// Rewritten from the earlier redirect-to-dashboard pattern.
+function toggleTopicLeafDetail(rowId) {
+  const row = document.getElementById(rowId);
+  if (!row) return;
+  const detail = row.querySelector('.topic-leaf-detail');
+  const chevron = row.querySelector('.topic-leaf-chevron');
+  if (!detail) return;
+  const wasExpanded = detail.getAttribute('data-expanded') === 'true';
+  const next = !wasExpanded;
+  detail.setAttribute('data-expanded', String(next));
+  row.classList.toggle('expanded', next);
+  if (chevron) chevron.classList.toggle('rotated', next);
+}
+
+// Explicit escape hatch — user chose "Full detail" button in the
+// expanded panel. Routes to dashboard mode + opens the drill-in.
+function openTopicLeafInDashboard(ref) {
   if (!ref) return;
   setMode('dashboard');
-  // Small delay so dashboard body is visible before opening drill-in
   setTimeout(() => _openControlDetail(ref), 50);
+}
+
+// Ask AI CTA — routes to chat with a remediation question for the
+// specific control. Uses the same query pattern the Ship 53' arc
+// verified across ISO 27001 / ISO 27701 / GDPR remediation surfaces.
+function askAboutTopicLeaf(ref) {
+  if (!ref) return;
+  setMode('chat');
+  const input = document.getElementById('chat-input');
+  const q = `how do I remediate ${ref}?`;
+  if (input) {
+    input.value = q;
+  }
+  // Prefer sendChat if available (existing chat send pipeline). The
+  // chat mode's own hydration handles focusing the input; we just
+  // seed the query.
+  setTimeout(() => {
+    if (typeof sendChat === 'function') sendChat();
+  }, 100);
 }
 
 async function loadDashboard() {
