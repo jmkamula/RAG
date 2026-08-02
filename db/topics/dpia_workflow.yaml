@@ -42,7 +42,7 @@ leaves:
     role: review_record
     workflow_order: 4
 
-  # ISO 27001 mirror — DPbD is prerequisite to DPIA (design → assessment)
+  # DPbD is prerequisite to DPIA (design → assessment)
   - leaf_id: req:Art.25:dpbd_procedure
     role: supporting_prerequisite
     workflow_order: 0
@@ -50,3 +50,29 @@ leaves:
       Data Protection by Design procedure. DPIAs assess processing
       operations against this design discipline — DPbD failures are
       often what a DPIA surfaces.
+
+  # ISO 27701 extension layer — CRITICAL for DPIA. The PIMS
+  # extension has A.7.2.5 (Privacy Impact Assessment) as the
+  # direct methodological mirror of GDPR Art.35.
+  - leaf_id: req:A.7.2.5:pia_procedure
+    role: supporting_iso_mirror
+    workflow_order: 5
+    role_note: |
+      ISO 27701 extension. Privacy Impact Assessment procedure —
+      the PIMS discipline that integrates DPIA methodology into
+      the ISMS. Auditors expect PIA + DPIA integrated when both
+      27701 and GDPR are in scope.
+
+  - leaf_id: req:A.7.2.5:pia_register
+    role: supporting_iso_mirror
+    workflow_order: 6
+
+  # ISO 27001 program layer — risk assessment methodology grounds
+  # DPIA in the operational risk framework.
+  - leaf_id: req:8.2:assessment_trigger_procedure
+    role: supporting_iso_mirror
+    workflow_order: 7
+    role_note: |
+      ISO 27001 program layer. DPIA triggers plug into the same
+      operational-risk-assessment discipline. Shared discipline
+      reduces double-work.

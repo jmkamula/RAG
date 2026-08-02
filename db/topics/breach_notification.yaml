@@ -57,3 +57,15 @@ leaves:
     role_note: |
       Staff-side event reporting — if events aren't reported
       internally, the 72h clock starts too late.
+
+  # ISO 27701 controller extension — third-party notification of
+  # rectification/erasure/restriction (Art.19) shares infrastructure
+  # with breach notification: same "who did we tell, when, what".
+  - leaf_id: req:A.7.3.7:third_party_notification_procedure
+    role: supporting_iso_mirror
+    workflow_order: 6
+    role_note: |
+      ISO 27701 controller extension. Third-party notification
+      procedure — shared discipline with breach notification.
+      Downstream processors + joint controllers need to be told
+      about both breaches AND rectification/erasure changes.

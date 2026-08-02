@@ -44,3 +44,41 @@ leaves:
   - leaf_id: req:Art.30:ropa_annual_review
     role: review_record
     workflow_order: 3
+
+  # ISO 27001 program layer — PII protection policy is the
+  # foundational program that RoPA describes the operations of.
+  - leaf_id: req:A.5.34:privacy_and_pii_protection_policy
+    role: supporting_iso_mirror
+    workflow_order: 4
+    role_note: |
+      ISO 27001 program layer. The PII protection policy defines
+      the RoPA's scope + governance. Auditors look for the RoPA
+      being coherent with this policy.
+
+  # ISO 27701 controller extension — the PIMS transfer register
+  # is the same shape as the Art.30 records but scoped to
+  # cross-jurisdiction PII movement.
+  - leaf_id: req:A.7.5.1:transfer_basis_procedure
+    role: supporting_iso_mirror
+    workflow_order: 5
+    role_note: |
+      ISO 27701 controller extension. Basis for PII transfer
+      between jurisdictions — mandated Art.30(1)(e) content:
+      transfers to third countries + safeguards.
+
+  - leaf_id: req:A.7.5.3:transfer_records_procedure
+    role: supporting_iso_mirror
+    workflow_order: 6
+    role_note: |
+      ISO 27701 controller extension. Records of PII transfer —
+      the operational record that backs Art.30(1)(e) claims.
+
+  # ISO 27701 processor extension — processor's own RoPA
+  # (mirrors Art.30(2)).
+  - leaf_id: req:B.8.2.6:processor_ropa_register
+    role: supporting_iso_mirror
+    workflow_order: 7
+    role_note: |
+      ISO 27701 processor extension. Processor-side RoPA covering
+      Art.30(2). When the tenant is a processor as well as a
+      controller, both registers exist alongside.
