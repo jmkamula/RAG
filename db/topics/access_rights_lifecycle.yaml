@@ -1,0 +1,76 @@
+slug: access_rights_lifecycle
+title: "Access Rights Lifecycle"
+description: |
+  Identity + credential + access-rights management as an integrated
+  workflow — A.5.15 (access control policy), A.5.16 (identity),
+  A.5.17 (authentication information), A.5.18 (access rights).
+  Covers the joiner-mover-leaver traffic that drives most audit
+  findings on identity governance.
+primary_framework: ISO27001:2022
+display_order: 55
+auditor_expects: |
+  Auditors sample identities and trace: creation (A.5.16), initial
+  credential issuance (A.5.17), access grants (A.5.18) — then look
+  for revocation on role change or leaver events. The bidirectional
+  A.5.16↔A.5.18 pair (identity disable + credential revocation) is
+  a common finding when only one side fires.
+
+leaves:
+  # Access control umbrella
+  - leaf_id: req:A.5.15:access_control_policy
+    role: primary_policy
+    workflow_order: 1
+    role_note: |
+      The over-arching access-control policy — sets principles
+      (least privilege, need-to-know, segregation) that A.5.16-18
+      operational procedures implement.
+
+  - leaf_id: req:A.5.15:management_approval
+    role: evidence
+    workflow_order: 2
+
+  # Identity
+  - leaf_id: req:A.5.16:identity_management_procedure
+    role: primary_procedure
+    workflow_order: 3
+
+  - leaf_id: req:A.5.16:identity_register
+    role: primary_register
+    workflow_order: 4
+
+  - leaf_id: req:A.5.16:identity_revocation_record
+    role: evidence
+    workflow_order: 5
+
+  # Authentication information (credentials)
+  - leaf_id: req:A.5.17:authentication_information_procedure
+    role: primary_procedure
+    workflow_order: 6
+
+  - leaf_id: req:A.5.17:credential_register
+    role: primary_register
+    workflow_order: 7
+
+  - leaf_id: req:A.5.17:credential_revocation_record
+    role: evidence
+    workflow_order: 8
+
+  # Access rights
+  - leaf_id: req:A.5.18:access_rights_procedure
+    role: primary_procedure
+    workflow_order: 9
+
+  - leaf_id: req:A.5.18:access_rights_register
+    role: primary_register
+    workflow_order: 10
+
+  - leaf_id: req:A.5.18:access_rights_review
+    role: review_record
+    workflow_order: 11
+    role_note: |
+      Periodic access reviews (typically quarterly for privileged,
+      semi-annual for standard). Auditor first-look for A.5.18.
+
+  - leaf_id: req:A.5.18:access_revocation_record
+    role: evidence
+    workflow_order: 12

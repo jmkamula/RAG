@@ -1,0 +1,46 @@
+slug: records_of_processing
+title: "Records of Processing Activities (RoPA)"
+description: |
+  GDPR Art.30 records of processing — the always-current inventory
+  of processing operations that a supervisory authority can demand
+  on 24-hour notice. Requires the controller-facing register (30.1)
+  and, for processors, the processor-facing register (30.2).
+primary_framework: GDPR:2016/679
+display_order: 60
+auditor_expects: |
+  The RoPA is the FIRST document a supervisory authority requests
+  in almost any investigation. Auditors check: (1) it exists in
+  writing (30.4); (2) it covers all Art.30(1) mandatory fields per
+  processing activity; (3) it's kept current (annual review at
+  minimum); (4) data-flow mapping is coherent — where PII actually
+  lives ties to entries in the RoPA.
+
+leaves:
+  - leaf_id: req:Art.30:records_of_processing
+    role: primary_register
+    workflow_order: 2
+    role_note: |
+      The RoPA itself. Auditor first-look artefact. Common
+      failures: missing Art.30(1)(f) retention periods, missing
+      Art.30(1)(g) technical + organisational measures reference,
+      stale (last updated > 12 months ago).
+
+  - leaf_id: req:Art.30:ropa_maintenance_procedure
+    role: primary_procedure
+    workflow_order: 1
+    role_note: |
+      When to update the RoPA — new processing operation, purpose
+      change, transfer route change, retention-period change,
+      third-party engagement.
+
+  - leaf_id: req:Art.30:data_flow_inventory
+    role: supporting_prerequisite
+    workflow_order: 0
+    role_note: |
+      Where does each PII category actually live — systems,
+      backups, third parties. Prerequisite for a complete RoPA;
+      auditors triangulate the RoPA against this inventory.
+
+  - leaf_id: req:Art.30:ropa_annual_review
+    role: review_record
+    workflow_order: 3

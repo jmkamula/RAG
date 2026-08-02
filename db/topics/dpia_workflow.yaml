@@ -1,0 +1,52 @@
+slug: dpia_workflow
+title: "Data Protection Impact Assessment (DPIA)"
+description: |
+  The DPIA workflow for high-risk processing operations under
+  GDPR Art.35 — screening (is a DPIA needed?), assessment
+  (structured analysis per Art.35(7)), consultation (DPO +
+  potentially SA under Art.36), and remediation (residual risk
+  acceptance or process redesign).
+primary_framework: GDPR:2016/679
+display_order: 35
+auditor_expects: |
+  A supervisory authority reviewing DPIA maturity looks for: (1)
+  a documented screening trigger (systematic monitoring, large-
+  scale special categories, public spaces, etc.); (2) a formal
+  methodology aligned with WP29 wp248 rev.01; (3) evidence the
+  DPO was consulted (Art.35(2)); (4) the register of DPIAs
+  performed with linkage to the operations they cover.
+
+leaves:
+  - leaf_id: req:Art.35:dpia_procedure
+    role: primary_procedure
+    workflow_order: 2
+    role_note: |
+      The DPIA methodology — aligned with WP29 wp248 rev.01 (still
+      the definitive DPIA reference).
+
+  - leaf_id: req:Art.35:applicable_scope
+    role: primary_procedure
+    workflow_order: 1
+    role_note: |
+      Screening criteria — which processing operations trigger a
+      mandatory DPIA. Load-bearing for the whole workflow.
+
+  - leaf_id: req:Art.35:dpia_register
+    role: primary_register
+    workflow_order: 3
+    role_note: |
+      One row per DPIA — subject processing operation, decision,
+      residual risk level, next review date.
+
+  - leaf_id: req:Art.35:dpia_program_review
+    role: review_record
+    workflow_order: 4
+
+  # ISO 27001 mirror — DPbD is prerequisite to DPIA (design → assessment)
+  - leaf_id: req:Art.25:dpbd_procedure
+    role: supporting_prerequisite
+    workflow_order: 0
+    role_note: |
+      Data Protection by Design procedure. DPIAs assess processing
+      operations against this design discipline — DPbD failures are
+      often what a DPIA surfaces.

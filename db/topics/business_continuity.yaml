@@ -1,0 +1,54 @@
+slug: business_continuity
+title: "Business Continuity & ICT Readiness"
+description: |
+  Continuity of information security during disruption (A.5.29) +
+  ICT readiness for business continuity (A.5.30) + backup /
+  restore verification (A.8.13). The BCM lane in the ISMS.
+primary_framework: ISO27001:2022
+display_order: 50
+auditor_expects: |
+  Continuity claims are only credible when tested. Auditors look
+  for: (1) the plan itself; (2) evidence of at least annual
+  activation tests with named participants + outcomes; (3) recent
+  restore-test records (A.8.13) — not just "we take backups";
+  (4) integration with the incident-response bundle so activation
+  triggers are documented.
+
+leaves:
+  # A.5.29 — continuity during disruption
+  - leaf_id: req:A.5.29:information_security_during_disruption
+    role: primary_procedure
+    workflow_order: 1
+
+  - leaf_id: req:A.5.29:plan_activation_record
+    role: evidence
+    workflow_order: 2
+    role_note: |
+      Record of real activations OR scheduled tests. Auditor
+      first-look artefact for A.5.29.
+
+  - leaf_id: req:A.5.29:disruption_scenario_register
+    role: primary_register
+    workflow_order: 3
+
+  # A.5.30 — ICT readiness (natural pair with A.5.29)
+  - leaf_id: req:A.5.30:ict_readiness_for_business_continuity
+    role: primary_procedure
+    workflow_order: 4
+
+  - leaf_id: req:A.5.30:ict_recovery_record
+    role: evidence
+    workflow_order: 5
+
+  # A.8.13 — backups
+  - leaf_id: req:A.8.13:backup_procedure
+    role: primary_procedure
+    workflow_order: 6
+
+  - leaf_id: req:A.8.13:restore_test_register
+    role: log
+    workflow_order: 7
+    role_note: |
+      Auditors specifically look for restore tests, not backup
+      completion — untested backups fail on the "does it actually
+      recover?" question.

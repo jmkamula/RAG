@@ -1,0 +1,70 @@
+slug: continual_improvement
+title: "Continual Improvement (NC, Audit, Management Review)"
+description: |
+  The management-system feedback loop mandated by ISO 27001 clauses
+  9.1 (monitoring/measurement), 9.2 (internal audit), 9.3 (management
+  review), 10.1 (continual improvement), 10.2 (nonconformity +
+  corrective action). The clauses that make the ISMS a system, not
+  a one-off certification.
+primary_framework: ISO27001:2022
+display_order: 70
+auditor_expects: |
+  Auditors trace the loop: monitoring finds something (9.1) or an
+  event exposes it (10.2), corrective action is planned + tracked
+  (10.2 register), internal audit verifies the fix (9.2), and
+  management review takes the summary + drives strategic
+  improvement (9.3 → 10.1). Broken loops are the most common
+  finding on Stage-2 audits.
+
+leaves:
+  # Monitoring layer (9.1)
+  - leaf_id: req:9.1:monitoring_measurement_procedure
+    role: primary_procedure
+    workflow_order: 1
+
+  - leaf_id: req:9.1:measurement_record
+    role: log
+    workflow_order: 2
+
+  # Internal audit (9.2)
+  - leaf_id: req:9.2:internal_audit_programme
+    role: primary_procedure
+    workflow_order: 3
+
+  - leaf_id: req:9.2:audit_execution_record
+    role: evidence
+    workflow_order: 4
+
+  # Management review (9.3)
+  - leaf_id: req:9.3:management_review_procedure
+    role: primary_procedure
+    workflow_order: 5
+
+  - leaf_id: req:9.3:management_review
+    role: evidence
+    workflow_order: 6
+    role_note: |
+      The management review minutes / record. Load-bearing —
+      absence of this record is a certification-blocking finding.
+
+  # Continual improvement (10.1)
+  - leaf_id: req:10.1:continual_improvement_procedure
+    role: primary_procedure
+    workflow_order: 7
+
+  - leaf_id: req:10.1:improvement_action_register
+    role: primary_register
+    workflow_order: 8
+
+  # Nonconformity + corrective action (10.2)
+  - leaf_id: req:10.2:nonconformity_corrective_action
+    role: primary_procedure
+    workflow_order: 9
+
+  - leaf_id: req:10.2:nonconformity_register
+    role: primary_register
+    workflow_order: 10
+    role_note: |
+      The NC register — one row per NC (from audit, incident,
+      management review, complaint). Auditors sample and trace to
+      closure evidence.

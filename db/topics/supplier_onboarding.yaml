@@ -1,0 +1,71 @@
+slug: supplier_onboarding
+title: "Supplier / Processor Onboarding"
+description: |
+  End-to-end vendor onboarding covering ISO 27001 A.5.19-A.5.23
+  (supplier security requirements + agreements + supply-chain
+  management) + GDPR Art.28 (processor obligations). The bundle
+  a procurement team runs on every new vendor.
+primary_framework: multi
+display_order: 40
+auditor_expects: |
+  Auditors sample suppliers and ask: show me the agreement (A.5.20
+  + Art.28), show me the risk assessment (A.5.19), show me the
+  ongoing review record (A.5.22), and — for processors — show me
+  the DPA (Art.28) with the Art.28(3) mandatory clauses.
+
+leaves:
+  # Onboarding gate
+  - leaf_id: req:A.5.19:supplier_risk_procedure
+    role: primary_procedure
+    workflow_order: 1
+    role_note: |
+      Pre-onboarding due diligence: what security assessment does
+      each supplier category get before contract signature.
+
+  - leaf_id: req:A.5.19:supplier_register
+    role: primary_register
+    workflow_order: 2
+
+  # Contract layer
+  - leaf_id: req:A.5.20:supplier_agreement_security_template
+    role: form
+    workflow_order: 3
+    role_note: |
+      Master security addendum bolted onto every supplier
+      agreement. Reduces per-supplier drafting to filling blanks.
+
+  - leaf_id: req:A.5.20:coverage_register
+    role: log
+    workflow_order: 4
+
+  # GDPR processor lane
+  - leaf_id: req:Art.28:data_processing_agreement
+    role: form
+    workflow_order: 5
+    role_note: |
+      DPA template with Art.28(3) mandatory content — subject
+      matter, duration, nature/purpose, types of PII, obligations.
+      EDPB 07/2020 has the authoritative content list.
+
+  - leaf_id: req:Art.28:processor_register
+    role: primary_register
+    workflow_order: 6
+
+  # Ongoing review
+  - leaf_id: req:A.5.22:supplier_review_record
+    role: review_record
+    workflow_order: 7
+
+  - leaf_id: req:A.5.22:review_schedule_register
+    role: log
+    workflow_order: 8
+
+  # Supply chain (A.5.21 — often overlooked)
+  - leaf_id: req:A.5.21:ict_supply_chain_procedure
+    role: supporting_prerequisite
+    workflow_order: 9
+
+  # Offboarding
+  - leaf_id: req:A.5.19:offboarding_record
+    role: evidence
+    workflow_order: 10

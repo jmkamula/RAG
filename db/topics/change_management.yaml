@@ -1,0 +1,36 @@
+slug: change_management
+title: "Change Management"
+description: |
+  ISMS change control (clause 6.3) + operational change management
+  (A.8.32) — the discipline that prevents the "we made a security-
+  relevant change and never assessed impact" finding.
+primary_framework: ISO27001:2022
+display_order: 65
+auditor_expects: |
+  Auditors trace a sample of changes end-to-end: (1) the change
+  request (CRF); (2) the impact assessment referencing risk +
+  affected controls; (3) approval by an authorised party; (4)
+  post-implementation review + any rollback / incident linkage.
+
+leaves:
+  # ISMS-level change (6.3)
+  - leaf_id: req:6.3:isms_change_planning
+    role: primary_procedure
+    workflow_order: 1
+
+  - leaf_id: req:6.3:isms_change_register
+    role: primary_register
+    workflow_order: 2
+
+  # Operational change (A.8.32)
+  - leaf_id: req:A.8.32:change_management_procedure
+    role: primary_procedure
+    workflow_order: 3
+
+  - leaf_id: req:A.8.32:change_register
+    role: primary_register
+    workflow_order: 4
+
+  - leaf_id: req:A.8.32:change_program_review
+    role: review_record
+    workflow_order: 5

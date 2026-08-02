@@ -1,0 +1,59 @@
+slug: breach_notification
+title: "Personal Data Breach Notification"
+description: |
+  The 72-hour supervisory-authority notification workflow under
+  GDPR Art.33 and the affected-subject notification under Art.34.
+  Distinct from the general incident-response bundle — this is the
+  regulatory-clock lane that triggers only when personal data is
+  involved.
+primary_framework: GDPR:2016/679
+display_order: 25
+auditor_expects: |
+  Supervisory authority questions on a breach investigation: (1)
+  when did you become aware; (2) show me the risk-assessment
+  decision (why notification was / was not required); (3) show me
+  the notification letter and receipt; (4) show me the internal
+  breach register including breaches you did NOT notify (Art.33.5
+  requires all breaches on record).
+
+leaves:
+  - leaf_id: req:Art.33:notification_procedure
+    role: primary_procedure
+    workflow_order: 1
+    role_note: |
+      The decision workflow: is this a personal data breach?
+      Notification required? Which SA(s)? Timeline gates.
+
+  - leaf_id: req:Art.33:breach_notification
+    role: form
+    workflow_order: 2
+    role_note: |
+      The SA notification letter template with Art.33(3) required
+      content (nature, categories, likely consequences, measures).
+
+  - leaf_id: req:Art.33:applicable_scope
+    role: supporting_prerequisite
+    workflow_order: 3
+    role_note: |
+      Which SAs are competent for your establishments — critical
+      for the "notify without undue delay" 72h clock.
+
+  - leaf_id: req:Art.33:breach_program_review
+    role: review_record
+    workflow_order: 4
+
+  # Cross-links into incident response family
+  - leaf_id: req:A.5.26:incident_register
+    role: supporting_iso_mirror
+    workflow_order: 5
+    role_note: |
+      The same register captures both incidents and breaches;
+      breach notification is triggered from this record when
+      Art.33 applies.
+
+  - leaf_id: req:A.6.8:event_reporting_procedure
+    role: supporting_prerequisite
+    workflow_order: 0
+    role_note: |
+      Staff-side event reporting — if events aren't reported
+      internally, the 72h clock starts too late.

@@ -1,0 +1,75 @@
+slug: dsr_management
+title: "Subject Access & Data Subject Rights"
+description: |
+  How your organisation receives, verifies, and responds to data
+  subject requests under GDPR Chapter III — access (Art.15),
+  rectification (Art.16), and erasure (Art.17). A DPO should be
+  able to answer a customer's "how do you handle my rights request?"
+  with this bundle alone.
+primary_framework: GDPR:2016/679
+display_order: 10
+auditor_expects: |
+  A supervisory authority spot-check asks: (1) show me the DSR
+  policy signed by top management; (2) show me the procedure staff
+  follow; (3) show me last month's DSR register with response
+  timelines; (4) show me one closed DSR file with the response
+  letter and identity-verification record. This bundle covers all
+  four. Missing any one is a common Art.15 finding.
+
+leaves:
+  # Art.15 (right of access) is the anchor + carries most of the workflow
+  - leaf_id: req:Art.15:dsar_handling_procedure
+    role: primary_procedure
+    workflow_order: 2
+    role_note: |
+      The core "how staff process a DSAR" — receive, verify identity,
+      scope, retrieve, redact, respond within 1 month.
+
+  - leaf_id: req:Art.15:dsar_register
+    role: primary_register
+    workflow_order: 3
+    role_note: |
+      One row per DSR received. Auditor first-look artefact —
+      completeness + response-timeline compliance visible at a glance.
+
+  - leaf_id: req:Art.15:dsar_response
+    role: form
+    workflow_order: 4
+    role_note: |
+      The letter template used to reply to the subject. Ensures
+      Art.15 required content (confirmation, categories, retention,
+      third-country transfers, safeguards, rights, source, automated
+      decisions) is preserved.
+
+  - leaf_id: req:Art.15:dsar_process_review
+    role: review_record
+    workflow_order: 5
+    role_note: |
+      Periodic (quarterly / annual) review of DSR handling —
+      volume, response-time compliance, missed-deadline root causes.
+
+  # Art.16 (rectification) mirrors the shape
+  - leaf_id: req:Art.16:rectification_procedure
+    role: supporting_cross_framework
+    workflow_order: 6
+    role_note: |
+      Rectification requests use a subset of the same lifecycle but
+      have different data-integrity implications (downstream
+      propagation to processors under Art.19).
+
+  # Art.17 (erasure)
+  - leaf_id: req:Art.17:erasure_procedure
+    role: supporting_cross_framework
+    workflow_order: 7
+    role_note: |
+      Erasure is the highest-friction DSR type — coordination with
+      backups, processors, and Art.17(3) exceptions is needed.
+
+  # ISO 27001 mirror — the PII protection policy underpins DSR retrieval
+  - leaf_id: req:A.5.34:privacy_and_pii_protection_policy
+    role: supporting_iso_mirror
+    workflow_order: 1
+    role_note: |
+      Ensures the underlying PII protection policy exists so the
+      DSR workflow can locate the right data (prerequisite for a
+      DSR search to be complete).
