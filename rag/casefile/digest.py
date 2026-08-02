@@ -198,6 +198,42 @@ def _render_xfw_bridges(cf: CaseFile) -> str:
     return "XFW BRIDGES:\n" + "\n".join(lines)
 
 
+def _rank_obligation_refs(cf: CaseFile, limit: int = 5) -> list[str]:
+    """Return the top-N refs that _render_obligations would surface.
+
+    Ship 53'.j — kept in lockstep with _render_obligations' iteration
+    (cited refs first, then remaining nodes by insertion order). Used
+    by preservation.py::_required_refs so any ref the LLM sees in the
+    OBLIGATIONS section is a preservation target — dropping any of
+    them is exactly the class of stochastic loss the repair pass
+    exists to catch.
+
+    Case #222 in the Ship 53'.i eval surfaced this: definition query
+    "what does ISO 27005 recommend for risk assessment methodology?"
+    had cited_refs=[] and the top-3 posture (10.1 / 10.2 / 4.1 all NC
+    0/4) didn't include 6.1.2 (OFI 2/4), but 6.1.2 was in OBLIGATIONS
+    with the `→ guidance: ISO 27005` marker. LLM cited it correctly
+    ~99% of the time; the 1% miss was invisible to preservation.
+    """
+    primary = cf.all_nodes()
+    if not primary:
+        return []
+    cited = set(cf.cited_refs)
+    ordered: list[str] = []
+    seen: set[str] = set()
+    for n in primary:
+        if n.ref in cited and n.ref not in seen:
+            ordered.append(n.ref)
+            seen.add(n.ref)
+    for n in primary:
+        if n.ref not in seen:
+            ordered.append(n.ref)
+            seen.add(n.ref)
+        if len(ordered) >= limit:
+            break
+    return ordered[:limit]
+
+
 def _render_obligations(
     cf: CaseFile,
     max_items: int = 5,

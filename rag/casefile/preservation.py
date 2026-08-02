@@ -38,7 +38,7 @@ from dataclasses import dataclass, field
 from typing import Optional
 
 from rag.casefile.types import CaseFile
-from rag.casefile.digest import _rank_posture_refs, _verdict_tag
+from rag.casefile.digest import _rank_posture_refs, _rank_obligation_refs, _verdict_tag
 
 
 # Top-N of ranked posture that go into required_refs (in addition
@@ -191,19 +191,27 @@ def _has_data_in_casefile(cf: CaseFile, ref: str) -> bool:
 def _required_refs(cf: CaseFile) -> set[str]:
     """Refs the answer must mention.
 
-    Two feeders:
+    Three feeders:
       1. cf.cited_refs — refs the query or classifier locked in.
          Filter to those we actually have data for (avoid demanding
          mention of an off-scope ref the resolver couldn't surface).
-      2. Top-N of _rank_posture_refs — the highest-priority posture
+      2. Top-N of _rank_posture_refs — the highest-priority POSTURE
          entries in the digest. If the LLM was shown these, they
          should appear in the answer.
+      3. Ship 53'.j — top-N of _rank_obligation_refs — refs surfaced
+         in the OBLIGATIONS section. Especially load-bearing on
+         definition queries with `→ guidance: ISO 27005` markers
+         where the underlying clause (e.g. 6.1.2) may not appear in
+         cited_refs or top-3 posture but IS in the OBLIGATIONS text
+         the LLM was shown. Case #222 exposed this drop mode.
     """
     out: set[str] = set()
     for r in cf.cited_refs:
         if r and _has_data_in_casefile(cf, r):
             out.add(r)
     for r in _rank_posture_refs(cf, limit=_REQUIRED_TOP_N):
+        out.add(r)
+    for r in _rank_obligation_refs(cf, limit=_REQUIRED_TOP_N + 2):
         out.add(r)
     return out
 
