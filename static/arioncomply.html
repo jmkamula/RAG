@@ -200,6 +200,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
    the detail panel carries the full status body */
 .topic-leaf.expanded .topic-leaf-gap{display:none}
 
+/* Ship 54'.b addendum 2 — 5-section detail body */
+.topic-leaf-detail-body{padding:0}
+.topic-leaf-loading{padding:16px 4px;color:#8A887E;font-size:12px;display:flex;align-items:center;gap:8px}
+.topic-leaf-loading i{color:#3C3489}
+.topic-leaf-gap-body{margin-top:6px;font-size:12px;color:#5F5E5A;line-height:1.6;white-space:pre-wrap}
+/* MUST checklist */
+.topic-must-list{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.topic-must-row{display:flex;gap:10px;padding:8px 10px;border:1px solid #EEECE2;border-radius:6px;background:#FCFBF8;align-items:flex-start}
+.topic-must-row i{font-size:16px;flex-shrink:0;margin-top:1px}
+.topic-must-row.muststate-present{border-color:#CDE3B4;background:#F4FAE9}
+.topic-must-row.muststate-present i{color:#3B6D11}
+.topic-must-row.muststate-partial{border-color:#F5D89A;background:#FDF6E7}
+.topic-must-row.muststate-partial i{color:#854F0B}
+.topic-must-row.muststate-missing{border-color:#EDCFCB;background:#FDF3F2}
+.topic-must-row.muststate-missing i{color:#9C2E2E}
+.topic-must-body{flex:1;min-width:0}
+.topic-must-text{font-size:12px;color:#3D3B32;line-height:1.5}
+.topic-must-source{font-size:11px;color:#5F5E5A;margin-top:3px;font-style:italic}
+.muststate-missing .topic-must-source{color:#8A887E;font-style:normal}
+/* Remediation list */
+.topic-remediation-list{margin:6px 0 0;padding-left:22px;list-style:disc}
+.topic-remediation-list li{font-size:12px;color:#3D3B32;line-height:1.6;margin-bottom:4px}
+
 /* ── Chat panel ── */
 .chat-wrap{display:flex;flex-direction:column;height:100%}
 .chat-messages{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:14px}
@@ -3453,13 +3476,20 @@ function renderTopicDetail(d) {
   ).join('');
 
   // Leaves — ordered by workflow_order; click to expand inline.
-  // Ship 54'.b addendum — the earlier "click routes to dashboard drill-in"
-  // pattern surfaced too much noise for a workflow view (12+ evidence rows
-  // per leaf with bracket-form debug tags). Topics is workflow-focused; the
-  // dashboard remains the evidence-forensics surface. Clicking a leaf here
-  // toggles a compact inline detail with the curator context, the clean
-  // status, template downloads, chat CTA, and an escape hatch to the
-  // dashboard for users who want the full evidence view.
+  // Ship 54'.b addendum 2 — inline expansion + lazy-fetch per-leaf
+  // detail via /api/v1/advisory/leaf/{leaf_id}/detail. Detail panel
+  // renders 5 sections: role_note + status + MUST checklist +
+  // remediation + actions. Leaf-scoped equivalent of the dashboard
+  // control drill-in, minus the bracket noise and confidence weights.
+  //
+  // Build a template-availability map for use by _renderTopicLeafDetailBody
+  // (which is called after lazy-fetch and doesn't otherwise know which
+  // leaves carry a scaffold).
+  window._TOPIC_LEAF_HAS_TEMPLATE_MAP = {};
+  (d.leaves || []).forEach(l => {
+    window._TOPIC_LEAF_HAS_TEMPLATE_MAP[l.leaf_id] = !!l.template_available;
+  });
+
   const leafRows = (d.leaves || []).map((l, idx) => {
     const findingCls = _FINDING_CLASS[l.finding] || 'f-NotAssessed';
     const findingText = l.finding || 'not assessed';
@@ -3471,12 +3501,16 @@ function renderTopicDetail(d) {
     const displayTitle = l.leaf_title
       || (l.control_title ? `${l.control_title} — ${l.leaf_type}` : l.leaf_type);
     const rowId = `topic-leaf-${idx}`;
-    // Encode payload for the expand handler as data-attributes — keeps the
-    // onclick lightweight and avoids escaping headaches on long role_notes.
+    // Encode payload as data-attributes so the expand handler can lazy-
+    // fetch. Long role_notes stored on the element instead of onclick args.
     const leafId = escapeHtml(l.leaf_id);
     const ctrl = escapeHtml(l.control_ref);
+    const roleNoteAttr = l.role_note ? escapeHtml(l.role_note) : '';
     return `
-      <div class="topic-leaf" id="${rowId}" data-leaf-id="${leafId}" data-ctrl="${ctrl}"
+      <div class="topic-leaf" id="${rowId}"
+           data-leaf-id="${leafId}"
+           data-ctrl="${ctrl}"
+           data-role-note="${roleNoteAttr}"
            onclick="toggleTopicLeafDetail('${rowId}')">
         <div class="topic-leaf-ord">${l.workflow_order || 0}</div>
         <div class="topic-leaf-body">
@@ -3490,46 +3524,8 @@ function renderTopicDetail(d) {
             <i class="ti ti-chevron-down topic-leaf-chevron" aria-hidden="true"></i>
           </div>
           <div class="topic-leaf-detail" data-expanded="false">
-            ${l.role_note ? `
-              <div class="topic-leaf-section">
-                <div class="topic-leaf-section-lbl"><i class="ti ti-notes" aria-hidden="true"></i> Role in this workflow</div>
-                <div class="topic-leaf-section-body">${escapeHtml(l.role_note)}</div>
-              </div>
-            ` : ''}
-            ${l.gap_excerpt ? `
-              <div class="topic-leaf-section">
-                <div class="topic-leaf-section-lbl"><i class="ti ti-alert-circle" aria-hidden="true"></i> Current status: ${escapeHtml(findingText)}</div>
-                <div class="topic-leaf-section-body">${escapeHtml(l.gap_excerpt)}</div>
-              </div>
-            ` : ''}
-            <div class="topic-leaf-actions">
-              ${l.template_available ? `
-                <a class="topic-leaf-btn" href="/api/v1/templates/${encodeURIComponent(l.leaf_id)}/download?format=md"
-                   onclick="event.stopPropagation()" download
-                   title="Download the markdown scaffold with your tenant profile substituted">
-                  <i class="ti ti-file-download" aria-hidden="true"></i> Markdown
-                </a>
-                <a class="topic-leaf-btn" href="/api/v1/templates/${encodeURIComponent(l.leaf_id)}/download?format=docx"
-                   onclick="event.stopPropagation()" download
-                   title="Download the Word document scaffold">
-                  <i class="ti ti-file-download" aria-hidden="true"></i> Word
-                </a>
-                <a class="topic-leaf-btn" href="/api/v1/templates/${encodeURIComponent(l.leaf_id)}/download?format=xlsx"
-                   onclick="event.stopPropagation()" download
-                   title="Download the Excel workbook (for tabular templates)">
-                  <i class="ti ti-file-download" aria-hidden="true"></i> Excel
-                </a>
-              ` : ''}
-              <button class="topic-leaf-btn topic-leaf-btn-primary"
-                      onclick="event.stopPropagation();askAboutTopicLeaf('${ctrl}')"
-                      title="Open chat with a remediation question for this control">
-                <i class="ti ti-message-2" aria-hidden="true"></i> Ask AI
-              </button>
-              <button class="topic-leaf-btn topic-leaf-btn-muted"
-                      onclick="event.stopPropagation();openTopicLeafInDashboard('${ctrl}')"
-                      title="Open the dashboard drill-in for full evidence sources">
-                <i class="ti ti-external-link" aria-hidden="true"></i> Full detail
-              </button>
+            <div class="topic-leaf-detail-body">
+              <!-- Populated by lazy-fetch on first expand — see toggleTopicLeafDetail -->
             </div>
           </div>
         </div>
@@ -3570,10 +3566,12 @@ function renderTopicDetail(d) {
   `;
 }
 
-// Ship 54'.b addendum — inline expansion in the topics view.
-// Toggles the .topic-leaf-detail panel visibility per leaf.
-// Rewritten from the earlier redirect-to-dashboard pattern.
-function toggleTopicLeafDetail(rowId) {
+// Ship 54'.b addendum 2 — inline expansion in the topics view with
+// lazy-fetched leaf-scoped detail. Toggles the .topic-leaf-detail
+// panel + on first-open fetches /api/v1/advisory/leaf/{leaf_id}/detail
+// and renders the 5-section shape (status + MUST checklist +
+// remediation + actions).
+async function toggleTopicLeafDetail(rowId) {
   const row = document.getElementById(rowId);
   if (!row) return;
   const detail = row.querySelector('.topic-leaf-detail');
@@ -3584,6 +3582,155 @@ function toggleTopicLeafDetail(rowId) {
   detail.setAttribute('data-expanded', String(next));
   row.classList.toggle('expanded', next);
   if (chevron) chevron.classList.toggle('rotated', next);
+
+  // Lazy-fetch detail on first open — cache on the row to avoid
+  // re-fetching on collapse/re-expand.
+  if (next && !row.dataset.detailLoaded) {
+    const leafId = row.dataset.leafId;
+    const detailBody = detail.querySelector('.topic-leaf-detail-body');
+    if (!detailBody || !leafId) return;
+    detailBody.innerHTML = '<div class="topic-leaf-loading"><i class="ti ti-loader-2"></i> Loading leaf detail…</div>';
+    try {
+      const d = await api(`/api/v1/advisory/leaf/${encodeURIComponent(leafId)}/detail`);
+      row.dataset.detailLoaded = '1';
+      detailBody.innerHTML = _renderTopicLeafDetailBody(d, row.dataset.roleNote || '');
+    } catch (e) {
+      detailBody.innerHTML = '<div class="topic-leaf-loading"><i class="ti ti-alert-triangle"></i> Couldn\'t load detail — try Full detail instead.</div>';
+    }
+  }
+}
+
+// Render the detail-panel content. Called after lazy-fetch resolves.
+function _renderTopicLeafDetailBody(d, roleNote) {
+  const findingCls = _FINDING_CLASS[d.finding] || 'f-NotAssessed';
+  const findingText = d.finding || 'not assessed';
+  const ctrl = escapeHtml(d.control_ref || '');
+  const leafId = escapeHtml(d.leaf_id || '');
+
+  // Section 1 — Why this matters in this bundle (from curator role_note)
+  const roleSection = roleNote ? `
+    <div class="topic-leaf-section">
+      <div class="topic-leaf-section-lbl"><i class="ti ti-notes" aria-hidden="true"></i> Why this matters in this bundle</div>
+      <div class="topic-leaf-section-body">${escapeHtml(roleNote)}</div>
+    </div>
+  ` : '';
+
+  // Section 2 — Current status
+  const statusLine = (d.n_total > 0)
+    ? `<strong>${findingText}</strong> — ${d.n_have} of ${d.n_total} required items present`
+    : `<strong>${findingText}</strong>`;
+  const gapLine = d.gap_description
+    ? `<div class="topic-leaf-gap-body">${escapeHtml(d.gap_description)}</div>`
+    : '';
+  const statusSection = `
+    <div class="topic-leaf-section">
+      <div class="topic-leaf-section-lbl"><i class="ti ti-alert-circle" aria-hidden="true"></i> Current status</div>
+      <div class="topic-leaf-section-body">
+        <span class="topic-vp ${findingCls}">${findingText}</span>
+        <span style="margin-left:8px">${statusLine}</span>
+        ${gapLine}
+      </div>
+    </div>
+  `;
+
+  // Section 3 — MUST checklist (what's covered / what's missing)
+  const musts = d.must_items || [];
+  let mustSection = '';
+  if (musts.length) {
+    const mustRows = musts.map(m => {
+      const state = m.satisfied_state || (m.satisfied ? 'present' : 'missing');
+      const icon = state === 'present' ? 'ti-circle-check'
+                 : state === 'partial' ? 'ti-circle-half-2'
+                 : 'ti-circle-x';
+      const cls  = state === 'present' ? 'muststate-present'
+                 : state === 'partial' ? 'muststate-partial'
+                 : 'muststate-missing';
+      const sources = m.sources && m.sources.length
+        ? m.sources.slice(0, 2).map(s => escapeHtml(s.document_title)).join(', ')
+          + (m.sources.length > 2 ? ` (+${m.sources.length - 2} more)` : '')
+        : (state === 'missing' ? 'Not documented' : '');
+      return `
+        <div class="topic-must-row ${cls}">
+          <i class="ti ${icon}" aria-hidden="true"></i>
+          <div class="topic-must-body">
+            <div class="topic-must-text">${escapeHtml(m.text || m.id || '')}</div>
+            ${sources ? `<div class="topic-must-source">${sources}</div>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+    mustSection = `
+      <div class="topic-leaf-section">
+        <div class="topic-leaf-section-lbl"><i class="ti ti-list-check" aria-hidden="true"></i> What's covered / what's missing</div>
+        <div class="topic-must-list">${mustRows}</div>
+      </div>
+    `;
+  }
+
+  // Section 4 — How to close this gap
+  const acts = d.remediation_actions || [];
+  let remediation = '';
+  if (acts.length) {
+    const actRows = acts.map(a => `
+      <li>${escapeHtml(a.action || '')}</li>
+    `).join('');
+    remediation = `
+      <div class="topic-leaf-section">
+        <div class="topic-leaf-section-lbl"><i class="ti ti-target-arrow" aria-hidden="true"></i> How to close this gap</div>
+        <ul class="topic-remediation-list">${actRows}</ul>
+        <div class="topic-leaf-action-hint" style="margin-top:6px">
+          These are the items the fulfilment engine detected as missing. For consultant-grade guidance with authoritative source citations, use "Ask AI" below.
+        </div>
+      </div>
+    `;
+  }
+
+  // Section 5 — Actions
+  const templatesRow = window._TOPIC_LEAF_HAS_TEMPLATE_MAP && window._TOPIC_LEAF_HAS_TEMPLATE_MAP[d.leaf_id] ? `
+    <div class="topic-leaf-action-block">
+      <div class="topic-leaf-action-label">Draft the document from a starter template</div>
+      <div class="topic-leaf-action-row">
+        <a class="topic-leaf-btn" href="/api/v1/templates/${encodeURIComponent(d.leaf_id)}/download?format=md" download onclick="event.stopPropagation()">
+          <i class="ti ti-markdown" aria-hidden="true"></i> Markdown
+        </a>
+        <a class="topic-leaf-btn" href="/api/v1/templates/${encodeURIComponent(d.leaf_id)}/download?format=docx" download onclick="event.stopPropagation()">
+          <i class="ti ti-file-type-doc" aria-hidden="true"></i> Word
+        </a>
+        <a class="topic-leaf-btn" href="/api/v1/templates/${encodeURIComponent(d.leaf_id)}/download?format=xlsx" download onclick="event.stopPropagation()">
+          <i class="ti ti-file-type-xls" aria-hidden="true"></i> Excel
+        </a>
+      </div>
+    </div>
+  ` : '';
+
+  return `
+    ${roleSection}
+    ${statusSection}
+    ${mustSection}
+    ${remediation}
+    <div class="topic-leaf-section">
+      <div class="topic-leaf-section-lbl"><i class="ti ti-checklist" aria-hidden="true"></i> Actions</div>
+      ${templatesRow}
+      <div class="topic-leaf-action-block">
+        <div class="topic-leaf-action-label">Ask AI for consultant-grade guidance</div>
+        <div class="topic-leaf-action-row">
+          <button class="topic-leaf-btn topic-leaf-btn-primary"
+                  onclick="event.stopPropagation();askAboutTopicLeaf('${ctrl}')">
+            <i class="ti ti-message-2" aria-hidden="true"></i> Ask about ${ctrl}
+          </button>
+        </div>
+      </div>
+      <div class="topic-leaf-action-block topic-leaf-action-escape">
+        <div class="topic-leaf-action-label">Full evidence audit view</div>
+        <div class="topic-leaf-action-row">
+          <button class="topic-leaf-btn topic-leaf-btn-muted"
+                  onclick="event.stopPropagation();openTopicLeafInDashboard('${ctrl}')">
+            <i class="ti ti-external-link" aria-hidden="true"></i> Open in Dashboard
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 // Explicit escape hatch — user chose "Full detail" button in the

@@ -3448,6 +3448,185 @@ async def advisory_topic_detail(
         pool.putconn(conn)
 
 
+@app.get("/api/v1/advisory/leaf/{leaf_id:path}/detail", tags=["posture"])
+async def advisory_leaf_detail(
+    leaf_id:  str,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_scope("posture")),
+):
+    """Leaf-scoped detail for the topics workflow drill-in.
+
+    Returns the 5-section shape expected by the topics view:
+      - status (finding + gap description, scrubbed)
+      - must checklist (per-MUST satisfied/missing + source names)
+      - remediation actions (derived from missing MUSTs)
+      - metadata (control_ref, standard_id, titles)
+
+    Different from the dashboard drill-in (which is control-scoped).
+    Same substance, leaf-scoped, cleaned.
+    """
+    # Validate leaf_id shape defensively — matches enrichment loader validation
+    if not _re.match(r"^req:[A-Za-z0-9.]+:[a-z0-9_]+$", leaf_id or ""):
+        raise HTTPException(status_code=400, detail="invalid leaf_id shape")
+
+    ctrl_ref = _control_ref_from_leaf_id(leaf_id)
+    if not ctrl_ref:
+        raise HTTPException(status_code=400, detail="could not extract control_ref")
+
+    standard_id = _infer_standard_from_ref(ctrl_ref)
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+
+        # ── Posture (verdict + gap) ────────────────────────────────
+        with conn.cursor() as cur:
+            cur.execute("""
+                SELECT finding, gap_description
+                  FROM posture_controls
+                 WHERE tenant_id   = %s::uuid
+                   AND control_ref = %s
+                   AND standard_id = %s
+                   AND is_active   = TRUE
+                 LIMIT 1
+            """, [key_info.tenant_id, ctrl_ref, standard_id])
+            row = cur.fetchone()
+        finding = row[0] if row else None
+        gap_description = _scrub_topic_gap_text(row[1] if row else "") if row else ""
+
+        # ── MUST checklist (via existing advisory builder + leaf filter) ──
+        must_items: list[dict] = []
+        n_have = 0
+        n_total = 0
+        try:
+            from rag.posture.advisory import build_per_must_advisory_data
+            adv = build_per_must_advisory_data(
+                pg_conn     = conn,
+                tenant_id   = key_info.tenant_id,
+                control_ref = ctrl_ref,
+                standard_id = standard_id,
+            )
+        except Exception as _e:
+            logger.debug("advisory build failed for leaf %s: %s", leaf_id, _e)
+            adv = None
+
+        if adv and adv.get("leaves"):
+            # Filter to our specific leaf
+            for lf in adv["leaves"]:
+                if lf.get("leaf_id") != leaf_id:
+                    continue
+                for item in lf.get("must_items") or []:
+                    must_items.append({
+                        "id":         item.get("id"),
+                        "text":       item.get("text") or "",
+                        "satisfied":  bool(item.get("satisfied")),
+                        "sources":    [],   # filled below
+                    })
+                n_have  = lf.get("n_have", 0)
+                n_total = lf.get("n_total", 0)
+                break
+
+        # ── Source names per MUST via document_findings ─────────────
+        if must_items:
+            must_ids = [m["id"] for m in must_items if m["id"]]
+            source_map: dict[str, list[dict]] = {}
+            if must_ids:
+                with conn.cursor() as cur:
+                    cur.execute("""
+                        SELECT df.checklist_item_id,
+                               COALESCE(cd.document_title, cd.filename,
+                                        'Unknown document') AS doc_title,
+                               df.status
+                          FROM document_findings df
+                          LEFT JOIN client_documents cd
+                            ON cd.id = df.document_id
+                         WHERE df.tenant_id         = %s::uuid
+                           AND df.is_active         = TRUE
+                           AND df.control_ref       = %s
+                           AND df.checklist_item_id = ANY(%s)
+                         ORDER BY df.checklist_item_id, cd.document_title
+                    """, [key_info.tenant_id, ctrl_ref, must_ids])
+                    for (mid, title, status) in cur.fetchall():
+                        source_map.setdefault(mid, []).append({
+                            "document_title": title,
+                            "status":         status,
+                        })
+            for m in must_items:
+                srcs = source_map.get(m["id"], [])
+                # Dedup by document_title
+                seen = set()
+                unique = []
+                for s in srcs:
+                    if s["document_title"] in seen:
+                        continue
+                    seen.add(s["document_title"])
+                    unique.append(s)
+                m["sources"] = unique
+                # Refine satisfied — if the advisory said satisfied but there
+                # are partial-status sources only, mark partial for UI
+                has_present = any(s["status"] == "present" for s in unique)
+                has_partial = any(s["status"] == "partial" for s in unique)
+                if m["satisfied"] and not has_present and has_partial:
+                    m["satisfied_state"] = "partial"
+                elif m["satisfied"]:
+                    m["satisfied_state"] = "present"
+                else:
+                    m["satisfied_state"] = "missing"
+
+        # ── Remediation actions ─────────────────────────────────────
+        # Derived from missing MUSTs — each missing item's text IS the
+        # "what to add" action. Simple, deterministic, cheap. For deeper
+        # guidance the user hits Ask AI which routes to the Ship 53'
+        # consultant-grade chat pipeline.
+        remediation_actions = [
+            {"must_id": m["id"], "action": m["text"]}
+            for m in must_items
+            if not m["satisfied"] and m["text"]
+        ][:8]
+
+        # ── Neo4j titles (best-effort) ──────────────────────────────
+        leaf_title = ""
+        control_title = ""
+        try:
+            from rag.posture_loader import _build_engine_neo4j_driver
+            neo_drv = _build_engine_neo4j_driver()
+            if neo_drv is not None:
+                with neo_drv.session() as s:
+                    r = s.run(
+                        "OPTIONAL MATCH (er:EvidenceRequirement {id: $lid}) "
+                        "OPTIONAL MATCH (n:RequirementNode {ref: $ref}) "
+                        "RETURN er.title AS leaf_t, n.title AS ctrl_t LIMIT 1",
+                        lid=leaf_id, ref=ctrl_ref,
+                    ).single()
+                    if r:
+                        leaf_title    = r["leaf_t"] or ""
+                        control_title = r["ctrl_t"] or ""
+        except Exception:
+            pass
+
+        parts = leaf_id.split(":")
+        leaf_type = parts[2] if len(parts) >= 3 else ""
+
+        return {
+            "leaf_id":             leaf_id,
+            "control_ref":         ctrl_ref,
+            "standard_id":         standard_id,
+            "leaf_type":           leaf_type,
+            "leaf_title":          leaf_title,
+            "control_title":       control_title,
+            "finding":             finding,
+            "gap_description":     gap_description,
+            "n_have":              n_have,
+            "n_total":             n_total,
+            "must_items":          must_items,
+            "remediation_actions": remediation_actions,
+            "trace_id":            request.state.trace_id,
+        }
+    finally:
+        pool.putconn(conn)
+
+
 @app.get("/api/v1/posture/{control_ref}", tags=["posture"])
 async def posture_control(
     control_ref: ControlRefParam,
