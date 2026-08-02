@@ -1968,6 +1968,47 @@ def make_classify_node(
         # Runs before the legacy LLM classifier. When consensus reaches
         # a confident verdict, the LLM classifier is skipped entirely.
         # See docs / commit 8c40985 for design.
+        # Ship 54'.c — topic-bundle pre-intercept.
+        # Workflow-shape queries ("how do I set up DSR?", "walk me
+        # through incident response") route to a bundle-shaped
+        # response BEFORE consensus fires. Otherwise consensus
+        # resolves them to implementation/definition with high
+        # confidence and the topic-bundle short-circuit never runs.
+        # Requires BOTH a trigger verb AND a topic keyword to avoid
+        # false positives on bare topic mentions.
+        try:
+            from rag.topic_matcher import detect_topic_slug, has_topic_trigger
+            _tslug = detect_topic_slug(query)
+            if _tslug and has_topic_trigger(query):
+                if logger:
+                    logger.log_call(
+                        step="topic_bundle_pre_intercept", model="", system="",
+                        user=query[:200], response=f"slug={_tslug}",
+                        latency_ms=0,
+                    )
+                # Emit a minimal intent dict — the retrieve() answer
+                # node's TOPIC_BUNDLE short-circuit does the assembly.
+                return {
+                    "intent_type":       "topic_bundle",
+                    "resolved_refs":     [],
+                    "active_refs":       [],
+                    "clarif_count":      state.get("clarif_count", 0),
+                    "confidence":        1.0,
+                    "needs_obligation":  False,
+                    "needs_posture":     True,
+                    "needs_documentation": False,
+                    "detected_events":   [],
+                    "document_topic_ref": None,
+                    "topic_slug":        _tslug,
+                }
+        except Exception as _tb_e:
+            # Pre-intercept must never break the classify node.
+            if logger:
+                logger.log_call(
+                    step="topic_bundle_intercept_error", model="", system="",
+                    user=str(_tb_e)[:200], response="", latency_ms=0,
+                )
+
         from rag.consensus import (
             run_consensus, intent_dict_from_consensus,
         )
@@ -2226,6 +2267,142 @@ def _answer_scope_na(query: str, posture: dict) -> str:
     )
 
 
+def _build_topic_bundle_answer(state: dict, tenant) -> Optional[dict]:
+    """Ship 54'.c — deterministic assembly of the topic-bundle answer.
+
+    Called from the retrieve() short-circuit when qtype = TOPIC_BUNDLE.
+    Detects the topic slug from the query (via rag.topic_matcher),
+    loads bundle + leaves from Postgres, composes prose + a compact
+    workflow list + a deep-link prompt to the SPA Topics view.
+
+    Returns a fully-shaped `build_answer_envelope(...)` result, or
+    None if no matching topic slug is found (caller falls through).
+    """
+    from rag.topic_matcher import detect_topic_slug
+    query = state.get("query", "") or ""
+    slug = detect_topic_slug(query)
+    if not slug:
+        return None
+
+    import psycopg2
+    tenant_id = str(getattr(tenant, "tenant_id", "") or "")
+    if not tenant_id:
+        return None
+
+    pg = psycopg2.connect(
+        host     = os.getenv("POSTGRES_HOST", "127.0.0.1"),
+        dbname   = "arioncomply_compliance",
+        user     = "arioncomply_app",
+        password = os.getenv("POSTGRES_PASSWORD"),
+    )
+    try:
+        with pg.cursor() as cur:
+            cur.execute(
+                "SELECT set_config('app.tenant_id', %s, TRUE)",
+                [tenant_id],
+            )
+            cur.execute("""
+                SELECT title, description, primary_framework, auditor_expects
+                  FROM topics WHERE slug = %s
+            """, [slug])
+            row = cur.fetchone()
+            if not row:
+                return None
+            title, description, primary_framework, auditor_expects = row
+
+            cur.execute("""
+                SELECT tl.leaf_id, tl.role, tl.workflow_order, pc.finding
+                  FROM topic_leaves tl
+                  LEFT JOIN posture_controls pc
+                    ON  pc.tenant_id   = %s::uuid
+                    AND pc.control_ref = split_part(tl.leaf_id, ':', 2)
+                    AND pc.is_active   = TRUE
+                 WHERE tl.topic_slug = %s
+                 ORDER BY tl.workflow_order, tl.leaf_id
+            """, [tenant_id, slug])
+            leaves = cur.fetchall()
+    finally:
+        pg.close()
+
+    # Verdict roll-up
+    counts = {"NC": 0, "OFI": 0, "Comply": 0, "N/A": 0, "unassessed": 0}
+    for _lid, _role, _wo, finding in leaves:
+        counts[finding or "unassessed"] = counts.get(finding or "unassessed", 0) + 1
+
+    # Framework label
+    fw_label = {
+        "GDPR:2016/679":  "GDPR",
+        "ISO27001:2022":  "ISO 27001",
+        "ISO27701:2019":  "ISO 27701",
+        "multi":          "cross-framework",
+    }.get(primary_framework, primary_framework)
+
+    # Compose prose
+    total = len(leaves)
+    nc = counts.get("NC", 0)
+    ofi = counts.get("OFI", 0)
+    comply = counts.get("Comply", 0)
+    unass = counts.get("unassessed", 0)
+    lines: list[str] = []
+
+    lines.append(
+        f"**{title}** ({fw_label}) covers {total} items in your compliance "
+        f"workflow. Current status: **{comply} Comply / {ofi} OFI / {nc} NC**"
+        + (f" / {unass} unassessed" if unass else "")
+        + "."
+    )
+    lines.append("")
+
+    # Compress description (already curator-authored 2-3 sentences)
+    _desc = (description or "").strip()
+    if _desc:
+        lines.append(_desc)
+        lines.append("")
+
+    lines.append("**Workflow (ordered):**")
+    lines.append("")
+    for _lid, _role, _wo, finding in leaves:
+        _ctrl = _lid.split(":")[1] if ":" in _lid else _lid
+        _lt   = _lid.split(":")[-1] if ":" in _lid else _lid
+        _find = finding or "unassessed"
+        # Compact one-liner per leaf
+        lines.append(f"- `{_ctrl}` — {_lt.replace('_', ' ')} — **[{_find}]**")
+    lines.append("")
+
+    if auditor_expects:
+        lines.append("**What auditors expect for this bundle:**")
+        lines.append("")
+        lines.append(auditor_expects.strip())
+        lines.append("")
+
+    # Deep-link prompt
+    lines.append(
+        f"Open the full workflow view in the **Topics** tab for the "
+        f"per-item drill-in (MUST checklist, remediation actions, template downloads)."
+    )
+
+    answer_text = "\n".join(lines)
+
+    # Cited refs — extract control_refs from the leaves so the
+    # framework_scope_guard doesn't strip them + so the chat rendering
+    # can show them as chips.
+    cited = sorted({
+        (_lid.split(":")[1] if ":" in _lid else _lid)
+        for _lid, _role, _wo, _find in leaves
+    })
+
+    return build_answer_envelope(
+        state          = state,
+        answer_text    = answer_text,
+        cited_refs     = cited,
+        answer_source  = "postgres",
+        question_type  = "topic_bundle",
+        tenant         = tenant,
+        attach_templates = False,
+        attach_advisory  = False,
+    )
+
+
 def build_answer_envelope(
     *,
     answer_text:      str,
@@ -2411,6 +2588,7 @@ def make_retrieve_node(
             "free_assessment":    QuestionType.FREE_ASSESSMENT,
             "document_inventory": QuestionType.DOCUMENT_INVENTORY,
             "document_content":   QuestionType.DOCUMENT_CONTENT,
+            "topic_bundle":       QuestionType.TOPIC_BUNDLE,
             "unknown":            QuestionType.UNKNOWN,
         }
         qtype = qtype_map.get(state["intent_type"], QuestionType.UNKNOWN)
@@ -2451,6 +2629,26 @@ def make_retrieve_node(
             detected_events    = detected_events,
             document_topic_ref = doc_topic,
         )
+
+        # ── Ship 54'.c — Topic-bundle short-circuit ───────────────────────
+        # Triggered when the classifier resolved a workflow-shape query
+        # (e.g., "how do I set up DSR?") to a topic slug. Loads the
+        # topic bundle via the same shape as GET /api/v1/advisory/
+        # topics/{slug} + composes a workflow-oriented answer with the
+        # ordered leaves + deep-link prompt to the SPA Topics view.
+        # No LLM call — deterministic assembly from posture data.
+        if qtype == QuestionType.TOPIC_BUNDLE:
+            try:
+                _topic_ans = _build_topic_bundle_answer(
+                    state, tenant,
+                )
+                if _topic_ans is not None:
+                    return _topic_ans
+            except Exception as _tb_exc:
+                (get_logger() or _NullLogger()).warning(
+                    "topic_bundle short-circuit failed: %s", _tb_exc,
+                )
+                # Fall through to normal pipeline.
 
         # ── Acknowledge-gap short-circuit ─────────────────────────────────
         # Recognises "acknowledge the A.5.1 review record gap because X" and

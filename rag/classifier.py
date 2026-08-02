@@ -37,6 +37,7 @@ class QuestionType(Enum):
     DOCUMENT_INVENTORY = "document_inventory"   # what documents do we need?
     DOCUMENT_CONTENT   = "document_content"     # what must a document contain?
     POSTURE_RISK       = "posture_risk"         # Ship 14'.e — top risks, overdue reviews, residuals
+    TOPIC_BUNDLE       = "topic_bundle"         # Ship 54'.c — how do I set up DSR / incident response / etc.
     UNKNOWN            = "unknown"              # could not classify
 
 class IntakeState(Enum):
@@ -76,6 +77,9 @@ class SessionContext:
     active_cluster:   str | None          # current topic cluster label
     # Vocabulary the user has used (builds during session)
     user_vocabulary:  list[str] = field(default_factory=list)
+    # Ship 54'.c — resolved topic slug for TOPIC_BUNDLE intents.
+    # None for all other question types.
+    topic_slug:       str | None = None
 
     def update_refs(self, refs: list[str]) -> None:
         """Update active refs after each query — keep last 5."""
@@ -1091,6 +1095,32 @@ class QueryClassifier:
         or high-confidence practitioner phrases.
         If found, skip the full intake and build a minimal session.
         """
+        # ── Ship 54'.c — topic-bundle intent ─────────────────────────
+        # Match "how do I set up DSR?", "walk me through incident
+        # response", "what's involved in consent management?", etc.
+        # Requires BOTH a workflow-shape trigger verb AND a topic
+        # keyword to avoid over-routing single-word matches like
+        # "consent" to a bundle when the user meant a control.
+        from rag.topic_matcher import detect_topic_slug, has_topic_trigger
+        _topic_slug = detect_topic_slug(user_input)
+        if _topic_slug and has_topic_trigger(user_input):
+            _session = SessionContext(
+                tenant_profile = self.tenant,
+                standards      = self.tenant.applicable_standards,
+                role           = None,
+                intent_type    = QuestionType.TOPIC_BUNDLE,
+                active_refs    = [],
+                active_cluster = _topic_slug,
+                topic_slug     = _topic_slug,
+            )
+            return IntakeResult(
+                state         = IntakeState.CLEAR,
+                session       = _session,
+                clusters      = [],
+                clarification = None,
+                raw_input     = user_input,
+            )
+
         # Check high-confidence practitioner phrases first
         for pattern, qtype_str, primary_refs in CLEAR_INTENT_PHRASES:
             if pattern.search(user_input):
@@ -1103,6 +1133,7 @@ class QueryClassifier:
                     "document_content":   QuestionType.DOCUMENT_CONTENT,
                     "document_inventory": QuestionType.DOCUMENT_INVENTORY,
                     "cross_framework":    QuestionType.CROSS_FRAMEWORK,
+                    "topic_bundle":       QuestionType.TOPIC_BUNDLE,
                 }
                 qtype = qtype_map.get(qtype_str, QuestionType.GAP_ANALYSIS)
                 # Phrase match captures the intent; explicit refs in the
@@ -1717,6 +1748,7 @@ class QueryClassifier:
                     "document_content":   QuestionType.DOCUMENT_CONTENT,
                     "document_inventory": QuestionType.DOCUMENT_INVENTORY,
                     "cross_framework":    QuestionType.CROSS_FRAMEWORK,
+                    "topic_bundle":       QuestionType.TOPIC_BUNDLE,
                 }
                 qtype = qtype_map.get(qtype_str, QuestionType.GAP_ANALYSIS)
                 needs_posture = qtype in (
