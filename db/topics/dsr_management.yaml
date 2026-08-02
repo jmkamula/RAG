@@ -96,3 +96,20 @@ leaves:
     role_note: |
       ISO 27701 extension. Right to object handling — mirrors
       GDPR Art.21 in the PIMS layer.
+
+  # Ship 54'.a addendum — master request handling layer
+  - leaf_id: req:A.7.3.9:request_handling_procedure
+    role: supporting_iso_mirror
+    workflow_order: 11
+    role_note: |
+      ISO 27701 extension. Master request handling procedure —
+      the umbrella that integrates access, correction, erasure,
+      objection, portability, and restriction handling into one
+      operational workflow. Auditor-defensible integration layer.
+
+  - leaf_id: req:A.7.3.9:master_request_register
+    role: primary_register
+    workflow_order: 12
+    role_note: |
+      Unified DSR register spanning all rights types — often
+      preferred by auditors over per-rights-type registers.

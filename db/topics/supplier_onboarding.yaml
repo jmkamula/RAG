@@ -98,3 +98,22 @@ leaves:
       ISO 27701 processor extension. Processor RoPA per GDPR
       Art.30(2). Distinct from the controller RoPA — mirrors
       records_of_processing bundle from the processor side.
+
+  # Ship 54'.a addendum — controller-side PIMS anchors for
+  # processor engagement + joint-controller arrangements
+  - leaf_id: req:A.7.2.6:processor_contract_procedure
+    role: supporting_iso_mirror
+    workflow_order: 14
+    role_note: |
+      ISO 27701 controller extension. Contracts with PII
+      processors — the controller-side operational discipline
+      that produces the DPA required by GDPR Art.28.
+
+  - leaf_id: req:A.7.2.7:joint_controller_procedure
+    role: supporting_iso_mirror
+    workflow_order: 15
+    role_note: |
+      ISO 27701 controller extension. Joint PII controller
+      arrangements — where responsibility is shared, GDPR Art.26
+      requires a transparent arrangement documented under this
+      procedure.

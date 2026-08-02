@@ -1,0 +1,98 @@
+slug: pii_lifecycle
+title: "PII Lifecycle (Privacy Engineering)"
+description: |
+  The proactive privacy discipline — data minimization, retention,
+  deletion, temporary-file handling, and secure transmission
+  across the PII lifecycle. Distinct from DSR (which is reactive)
+  and from consent (which is upstream). Covers GDPR Art.5.1(c-e)
+  storage limitation + data minimization via ISO 27701 A.7.4
+  controller controls.
+primary_framework: ISO27701:2019
+display_order: 47
+auditor_expects: |
+  This is the "systems + engineering" side of privacy. Auditors
+  look for: (1) documented retention schedules per data category
+  with enforcement mechanisms; (2) evidence of active minimization
+  (fields collected only when needed); (3) end-of-processing
+  deletion records — not just "policy says we delete"; (4)
+  temp-file discipline (A.7.4.6) — often absent on immature ISMS.
+
+leaves:
+  # ISO 27701 controller extensions — the operational anchor set
+  - leaf_id: req:A.7.4.1:collection_limitation_procedure
+    role: primary_procedure
+    workflow_order: 1
+    role_note: |
+      Limit collection — the "least PII" discipline at ingest.
+
+  - leaf_id: req:A.7.4.2:processing_limitation_procedure
+    role: primary_procedure
+    workflow_order: 2
+
+  - leaf_id: req:A.7.4.3:accuracy_procedure
+    role: supporting_iso_mirror
+    workflow_order: 3
+    role_note: |
+      Accuracy + quality — Art.5.1(d) accuracy principle
+      operationalized.
+
+  - leaf_id: req:A.7.4.4:minimization_procedure
+    role: primary_procedure
+    workflow_order: 4
+    role_note: |
+      Minimization objectives — Art.5.1(c) data minimization
+      operationalized with measurable targets.
+
+  - leaf_id: req:A.7.4.5:end_of_processing_procedure
+    role: primary_procedure
+    workflow_order: 5
+    role_note: |
+      De-identification + deletion at end of processing.
+      Auditor-critical — evidence that data actually leaves when
+      processing purpose ends.
+
+  - leaf_id: req:A.7.4.6:temp_files_procedure
+    role: supporting_iso_mirror
+    workflow_order: 6
+    role_note: |
+      Temporary files — filesystem journals, roll-back files,
+      application temp files. Frequently overlooked class of PII
+      persistence.
+
+  - leaf_id: req:A.7.4.7:retention_procedure
+    role: primary_procedure
+    workflow_order: 7
+    role_note: |
+      Retention procedure + schedule register. Foundational — the
+      other lifecycle controls execute against this schedule.
+
+  - leaf_id: req:A.7.4.7:retention_schedule_register
+    role: primary_register
+    workflow_order: 8
+
+  - leaf_id: req:A.7.4.8:disposal_procedure
+    role: primary_procedure
+    workflow_order: 9
+
+  - leaf_id: req:A.7.4.9:transmission_controls_procedure
+    role: supporting_iso_mirror
+    workflow_order: 10
+    role_note: |
+      PII transmission controls — encryption + segmentation in
+      motion. Companion to A.8.24 use of cryptography.
+
+  # ISO 27001 program layer — foundational disciplines
+  - leaf_id: req:A.8.10:information_deletion_procedure
+    role: supporting_iso_mirror
+    workflow_order: 0
+    role_note: |
+      ISO 27001 program layer. Information deletion procedure —
+      the general (non-PII-specific) deletion discipline that
+      A.7.4.5 + A.7.4.8 refine for PII.
+
+  - leaf_id: req:A.5.13:information_labelling_procedure
+    role: supporting_iso_mirror
+    workflow_order: 11
+    role_note: |
+      ISO 27001 program layer. Labelling drives lifecycle
+      automation — retention rules operate on labels.

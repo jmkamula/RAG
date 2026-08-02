@@ -1,0 +1,101 @@
+slug: data_transfers_disclosures
+title: "Cross-Border Transfers & Third-Party Disclosures"
+description: |
+  Cross-jurisdiction PII movement and disclosures to third parties.
+  Distinct from RoPA (which is inventory) and supplier onboarding
+  (which is procurement). This bundle handles the ongoing operational
+  discipline of Art.44-49 transfers + third-party disclosure logging,
+  from both the controller (A.7.5) and processor (B.8.5) angles.
+primary_framework: ISO27701:2019
+display_order: 42
+auditor_expects: |
+  Post-Schrems II, transfers are the most-scrutinized area of GDPR
+  compliance. Auditors expect: (1) a transfer register mapping each
+  transfer to its Art.46 mechanism (SCCs, BCRs, adequacy decision,
+  derogation); (2) evidence of Transfer Impact Assessments per
+  EDPB Recommendations 01/2020; (3) records of legally-binding
+  disclosure requests (B.8.5.5) with the decision + timeline; (4)
+  clean processor / subprocessor engagement records (B.8.5.6-8).
+
+leaves:
+  # GDPR obligations
+  - leaf_id: req:Art.44:transfer_principle_procedure
+    role: primary_procedure
+    workflow_order: 1
+    role_note: |
+      General principle — every transfer must ensure the same
+      level of protection as in the EU. Umbrella obligation.
+
+  - leaf_id: req:Art.46:appropriate_safeguards_procedure
+    role: primary_procedure
+    workflow_order: 2
+    role_note: |
+      Appropriate safeguards route — SCCs, BCRs, codes of conduct.
+      Post-Schrems II supplementary measures required per EDPB
+      Recommendations 01/2020.
+
+  - leaf_id: req:Art.45:adequacy_procedure
+    role: supporting_prerequisite
+    workflow_order: 3
+
+  - leaf_id: req:Art.49:derogations_procedure
+    role: supporting_prerequisite
+    workflow_order: 4
+    role_note: |
+      Derogations — strict-construction path per EDPB 02/2018.
+      Only usable when Art.45/46 routes aren't available.
+
+  # ISO 27701 controller extensions
+  - leaf_id: req:A.7.5.1:transfer_basis_procedure
+    role: primary_procedure
+    workflow_order: 5
+
+  - leaf_id: req:A.7.5.2:destinations_procedure
+    role: primary_procedure
+    workflow_order: 6
+
+  - leaf_id: req:A.7.5.2:transfer_destinations_register
+    role: primary_register
+    workflow_order: 7
+
+  - leaf_id: req:A.7.5.3:transfer_records_procedure
+    role: supporting_iso_mirror
+    workflow_order: 8
+
+  - leaf_id: req:A.7.5.3:transfer_event_log
+    role: log
+    workflow_order: 9
+
+  - leaf_id: req:A.7.5.4:disclosure_records_procedure
+    role: supporting_iso_mirror
+    workflow_order: 10
+
+  # ISO 27701 processor extensions — critical for legally-binding
+  # disclosure requests (law enforcement, court orders, etc.)
+  - leaf_id: req:B.8.5.4:notification_procedure
+    role: supporting_iso_mirror
+    workflow_order: 11
+    role_note: |
+      ISO 27701 processor extension. Notification of PII disclosure
+      requests — the "we got a subpoena" workflow. Timing + customer
+      notification obligations are load-bearing.
+
+  - leaf_id: req:B.8.5.5:disclosure_decision_procedure
+    role: supporting_iso_mirror
+    workflow_order: 12
+    role_note: |
+      ISO 27701 processor extension. Legally-binding disclosures —
+      the decision-making + logging discipline for compelled
+      disclosures.
+
+  - leaf_id: req:B.8.5.6:subcontractor_disclosure_procedure
+    role: supporting_iso_mirror
+    workflow_order: 13
+
+  # ISO 27001 program layer
+  - leaf_id: req:A.5.14:information_transfer_policy
+    role: supporting_iso_mirror
+    workflow_order: 0
+    role_note: |
+      ISO 27001 program layer. Information transfer policy — the
+      overarching non-PII-specific policy that this bundle refines.

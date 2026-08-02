@@ -1,0 +1,109 @@
+slug: processor_operations
+title: "Processor Operations (Serving Customer Controllers)"
+description: |
+  When the tenant IS a processor (typical for cloud SaaS), this
+  bundle covers the operational discipline of serving customer
+  controllers — customer agreements, purpose adherence, infringing
+  instruction handling, and support for the customer's own data
+  subject request obligations. Distinct from `supplier_onboarding`
+  (which is the tenant as controller buying services).
+primary_framework: ISO27701:2019
+display_order: 43
+auditor_expects: |
+  A customer controller auditing their processor asks: (1) show
+  me our customer agreement + the mandatory Art.28(3) content;
+  (2) show me how you refuse or flag an infringing instruction
+  (B.8.2.4 — auditor tests processor's judgment); (3) show me
+  your processor RoPA (Art.30(2)); (4) show me evidence you
+  support our DSR obligations (B.8.3.1); (5) show me the end-of-
+  service data return / disposal path (B.8.4.2).
+
+leaves:
+  # GDPR obligations (from processor side)
+  - leaf_id: req:Art.28:data_processing_agreement
+    role: primary_procedure
+    workflow_order: 1
+    role_note: |
+      GDPR obligation. The customer contract — Art.28(3) content
+      requirements viewed from the processor side.
+
+  - leaf_id: req:Art.28:processor_register
+    role: primary_register
+    workflow_order: 2
+
+  # ISO 27701 processor extensions — the anchor set
+  - leaf_id: req:B.8.2.1:customer_agreement_procedure
+    role: primary_procedure
+    workflow_order: 3
+    role_note: |
+      ISO 27701 processor extension. The customer agreement
+      lifecycle from the processor's operational side.
+
+  - leaf_id: req:B.8.2.2:purpose_limitation_procedure
+    role: primary_procedure
+    workflow_order: 4
+    role_note: |
+      Processor may only process on documented instructions —
+      cannot add purposes beyond what the customer instructed.
+
+  - leaf_id: req:B.8.2.4:infringing_instruction_procedure
+    role: primary_procedure
+    workflow_order: 5
+    role_note: |
+      Processor must refuse (or flag) instructions that infringe
+      applicable law. B.8.2.4 is the mechanism.
+
+  - leaf_id: req:B.8.2.5:customer_information_procedure
+    role: primary_procedure
+    workflow_order: 6
+
+  - leaf_id: req:B.8.2.5:customer_audit_register
+    role: primary_register
+    workflow_order: 7
+    role_note: |
+      Records of customer audits + processor's audit-support
+      responses.
+
+  - leaf_id: req:B.8.2.6:ropa_maintenance_procedure
+    role: primary_procedure
+    workflow_order: 8
+
+  - leaf_id: req:B.8.2.6:processor_ropa_register
+    role: primary_register
+    workflow_order: 9
+    role_note: |
+      Processor RoPA — mandated by Art.30(2). Distinct from the
+      controller RoPA.
+
+  # Supporting DSR fulfilment for the customer
+  - leaf_id: req:B.8.3.1:principal_obligations_support_procedure
+    role: supporting_iso_mirror
+    workflow_order: 10
+    role_note: |
+      Processor must assist the customer controller in fulfilling
+      the controller's Art.15-22 obligations. Load-bearing for
+      cloud SaaS.
+
+  # Data lifecycle from processor side
+  - leaf_id: req:B.8.4.1:temp_files_procedure
+    role: supporting_iso_mirror
+    workflow_order: 11
+
+  - leaf_id: req:B.8.4.2:return_transfer_disposal_procedure
+    role: primary_procedure
+    workflow_order: 12
+    role_note: |
+      End-of-service data return, transfer, or disposal. The
+      exit ramp — often overlooked until a customer terminates.
+
+  - leaf_id: req:B.8.4.3:transmission_procedure
+    role: supporting_iso_mirror
+    workflow_order: 13
+
+  # ISO 27001 program layer
+  - leaf_id: req:A.5.34:privacy_and_pii_protection_policy
+    role: supporting_iso_mirror
+    workflow_order: 0
+    role_note: |
+      ISO 27001 program layer. The tenant's PII protection policy
+      declares processor-mode commitments to customer controllers.
