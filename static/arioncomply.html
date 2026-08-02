@@ -119,6 +119,65 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .btn-page:disabled{opacity:0.4;cursor:not-allowed}
 .btn-page:not(:disabled):hover{background:#f8f7f4}
 
+/* ── Ship 54'.b — Topics view ── */
+#topics-wrap{padding:0;max-width:1200px;margin:0 auto}
+.topics-header{padding:20px 24px 12px}
+.topics-header .btn-back{background:none;border:1px solid #e5e4df;padding:5px 10px;border-radius:5px;cursor:pointer;font-size:11px;color:#3C3489;display:inline-flex;align-items:center;gap:4px;margin-bottom:14px}
+.topics-header .btn-back:hover{background:#EEEDFE}
+.topics-grid{padding:8px 24px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+.topic-card{background:#fff;border:1px solid #e5e4df;border-radius:10px;padding:16px;cursor:pointer;transition:all .12s ease;display:flex;flex-direction:column;gap:10px}
+.topic-card:hover{border-color:#3C3489;box-shadow:0 2px 8px rgba(60,52,137,.08);transform:translateY(-1px)}
+.topic-card-head{display:flex;align-items:center;gap:8px}
+.topic-card-head i{color:#3C3489;font-size:18px}
+.topic-card-title{font-weight:600;color:#3D3B32;font-size:14px;flex:1;line-height:1.3}
+.topic-fwtag{font-size:10px;background:#EEEDFE;color:#3C3489;padding:2px 7px;border-radius:5px;font-weight:500;letter-spacing:.02em}
+.topic-card-desc{font-size:12px;color:#5F5E5A;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.topic-card-stats{display:flex;align-items:center;gap:10px;font-size:11px;color:#5F5E5A}
+.topic-count{font-weight:500;color:#3D3B32}
+.topic-chips{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+.topic-frchip{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:500;letter-spacing:.02em}
+.topic-frchip-P{background:#EAF3DE;color:#3B6D11}
+.topic-frchip-E{background:#EEEDFE;color:#3C3489}
+.topic-frchip-O{background:#FAEEDA;color:#854F0B}
+.topic-card-verdicts{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
+.topic-vp{font-size:10px;padding:2px 7px;border-radius:5px;font-weight:500}
+.topic-vp.f-NC{background:#FADEDE;color:#9C2E2E}
+.topic-vp.f-OFI{background:#FAEEDA;color:#854F0B}
+.topic-vp.f-Comply{background:#EAF3DE;color:#3B6D11}
+.topic-vp.f-NA{background:#F0EDE3;color:#5F5E5A}
+.topic-vp.f-NotAssessed{background:#EEECE2;color:#8A887E}
+/* Detail view */
+.topic-detail-title{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.topic-detail-title i{color:#3C3489;font-size:22px}
+.topic-detail-desc{font-size:13px;color:#5F5E5A;line-height:1.6;margin:6px 0 16px;white-space:pre-wrap}
+.topic-progress-wrap{margin:12px 0 16px}
+.topic-progress-label{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#5F5E5A;margin-bottom:5px}
+.topic-progress{display:flex;height:10px;border-radius:5px;overflow:hidden;background:#EEECE2;border:1px solid #e5e4df}
+.topic-seg{height:100%;transition:flex .3s ease}
+.f-NC-bg{background:#D9534F}
+.f-OFI-bg{background:#EF9F27}
+.f-Comply-bg{background:#7FB36F}
+.f-NA-bg{background:#C9C7BC}
+.f-NotAssessed-bg{background:#DCD9CB}
+.topic-auditor-box{background:#F8F6EE;border:1px solid #E7E3D0;border-radius:8px;padding:12px 14px;margin:12px 0}
+.topic-auditor-title{font-weight:600;font-size:12px;color:#3D3B32;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.topic-auditor-title i{color:#8A6E1F}
+.topic-auditor-body{font-size:12px;color:#5F5E5A;line-height:1.6;white-space:pre-wrap}
+.topic-leaves-header{padding:16px 24px 8px;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#8A887E;font-weight:600;border-top:1px solid #EEECE2;margin-top:8px}
+.topic-leaves{padding:0 24px 32px}
+.topic-leaf{display:flex;background:#fff;border:1px solid #e5e4df;border-radius:8px;margin-bottom:6px;cursor:pointer;transition:all .1s ease;overflow:hidden}
+.topic-leaf:hover{border-color:#3C3489;background:#FCFBF8}
+.topic-leaf-ord{width:36px;flex-shrink:0;background:#F8F6EE;border-right:1px solid #EEECE2;display:flex;align-items:center;justify-content:center;font-size:12px;color:#8A887E;font-weight:500}
+.topic-leaf-body{flex:1;padding:10px 14px;min-width:0}
+.topic-leaf-head{display:flex;align-items:center;gap:8px;font-size:12px;flex-wrap:wrap}
+.topic-leaf-ref{font-weight:600;color:#3C3489;font-family:'SF Mono',ui-monospace,monospace;font-size:11px;background:#EEEDFE;padding:2px 6px;border-radius:4px}
+.topic-leaf-fr{font-size:10px;padding:1px 5px;border-radius:3px;font-weight:600;letter-spacing:.02em}
+.topic-leaf-title{color:#3D3B32;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.topic-leaf-role{font-size:10px;color:#5F5E5A;background:#F0EDE3;padding:1px 6px;border-radius:4px;font-weight:500}
+.topic-leaf-tmpl{font-size:9px;color:#3B6D11;background:#EAF3DE;padding:1px 5px;border-radius:3px;font-weight:600;letter-spacing:.03em}
+.topic-leaf-gap{font-size:11px;color:#5F5E5A;margin-top:5px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.topic-leaf-note{font-size:11px;color:#8A887E;font-style:italic;margin-top:4px;line-height:1.5}
+
 /* ── Chat panel ── */
 .chat-wrap{display:flex;flex-direction:column;height:100%}
 .chat-messages{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:14px}
@@ -350,6 +409,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <button class="nav-item active" id="nav-dashboard" onclick="setMode('dashboard')">
       <i class="ti ti-layout-dashboard" aria-hidden="true"></i> Dashboard
     </button>
+    <button class="nav-item" id="nav-topics" onclick="setMode('topics')"
+            title="Compliance workflows grouped by topic — DSR, incident response, risk cycle, etc.">
+      <i class="ti ti-folders" aria-hidden="true"></i> Topics
+    </button>
     <button class="nav-item" id="nav-queue" onclick="setMode('queue')">
       <i class="ti ti-clipboard-check" aria-hidden="true"></i> Review queue
       <span class="nav-badge" id="nb-queue"
@@ -470,6 +533,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <!-- Queue body -->
     <div class="main-body" id="body-queue" style="display:none">
       <div class="empty"><i class="ti ti-plug-connected-x" aria-hidden="true"></i><p>Connect to load the review queue</p></div>
+    </div>
+
+    <!-- Ship 54'.b — Topics body (bundled compliance workflows) -->
+    <div class="main-body" id="body-topics" style="display:none">
+      <div id="topics-wrap">
+        <div class="empty"><i class="ti ti-plug-connected-x" aria-hidden="true"></i><p>Connect to load topic bundles</p></div>
+      </div>
     </div>
 
     <!-- Chat body -->
@@ -862,7 +932,7 @@ async function apiForm(path, formData) {
 // ── Mode switching ──
 function setMode(m) {
   mode = m;
-  ['dashboard','queue','chat','docs','profile','cascade','risks','inbox','getstarted','trace'].forEach(x => {
+  ['dashboard','topics','queue','chat','docs','profile','cascade','risks','inbox','getstarted','trace'].forEach(x => {
     const navEl = document.getElementById('nav-'+x);
     if (navEl) navEl.classList.toggle('active', x===m);
     const tbEl  = document.getElementById('toolbar-'+x);
@@ -874,6 +944,7 @@ function setMode(m) {
   closeDetail();
   if (m === 'queue')      loadQueue();
   if (m === 'dashboard')  loadDashboard();
+  if (m === 'topics')     loadTopics();
   if (m === 'profile')    loadProfile();
   if (m === 'cascade')    loadCascadeTimeline();
   if (m === 'risks')      loadRisks();
@@ -892,7 +963,7 @@ function _applyHashRoute() {
   if (!raw) return;
   const [modeName, query] = raw.split('?');
   const params = new URLSearchParams(query || '');
-  const knownModes = new Set(['dashboard','queue','chat','docs','profile',
+  const knownModes = new Set(['dashboard','topics','queue','chat','docs','profile',
                               'cascade','risks','inbox','getstarted','trace']);
   if (!knownModes.has(modeName)) return;
   setMode(modeName);
@@ -3211,6 +3282,228 @@ async function deleteExternalSystem(systemId, name) {
 }
 
 // ── Dashboard ──
+// ── Ship 54'.b — Topics view ────────────────────────────────────────
+//
+// Curated compliance-topic bundles that group per-leaf work into
+// workflow shape (DSR, incident response, consent, risk cycle, etc.).
+// Data source: GET /api/v1/advisory/topics + /topics/{slug}.
+//
+// Two states: landing grid (renderTopicsList) + detail view
+// (renderTopicDetail). Clicking a leaf in detail routes to the
+// dashboard drill-in for that control ref, preserving the existing
+// per-control interaction surface.
+
+const _FRAMEWORK_ICONS = {
+  'GDPR:2016/679':  'ti-scale',        // regulation
+  'ISO27001:2022':  'ti-certificate',  // program
+  'ISO27701:2019':  'ti-shield-lock',  // privacy extension
+  'multi':          'ti-topology-star',
+};
+
+const _FRAMEWORK_LABELS = {
+  'GDPR:2016/679':  'GDPR',
+  'ISO27001:2022':  'ISO 27001',
+  'ISO27701:2019':  'ISO 27701',
+  'multi':          'Cross-framework',
+};
+
+const _ROLE_LABEL = {
+  primary_policy:              'Policy',
+  primary_procedure:           'Procedure',
+  primary_register:            'Register',
+  supporting_prerequisite:     'Prerequisite',
+  supporting_iso_mirror:       'ISO mirror',
+  supporting_cross_framework:  'Cross-framework',
+  form:                        'Form',
+  log:                         'Log',
+  review_record:               'Review record',
+  evidence:                    'Evidence',
+};
+
+async function loadTopics() {
+  const wrap = document.getElementById('topics-wrap');
+  wrap.innerHTML = '<div class="empty"><i class="ti ti-loader-2"></i><p>Loading topic bundles…</p></div>';
+  try {
+    const d = await api('/api/v1/advisory/topics');
+    renderTopicsList(d.topics || []);
+  } catch (e) {
+    wrap.innerHTML = '<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load topics.</p></div>';
+  }
+}
+
+function renderTopicsList(topics) {
+  const wrap = document.getElementById('topics-wrap');
+  if (!topics.length) {
+    wrap.innerHTML = '<div class="empty"><i class="ti ti-folder-question"></i><p>No topics curated for this tenant yet.</p></div>';
+    return;
+  }
+  const cards = topics.map(t => {
+    const v = t.verdict_counts || {};
+    const fr = t.framework_role_counts || {};
+    const totalAssessed = (v.Comply||0) + (v.OFI||0) + (v.NC||0) + (v['N/A']||0);
+    const compliancePct = t.leaf_count > 0
+      ? Math.round(100 * (v.Comply||0) / t.leaf_count) : 0;
+    const icon = _FRAMEWORK_ICONS[t.primary_framework] || 'ti-folder';
+    const fwLabel = _FRAMEWORK_LABELS[t.primary_framework] || t.primary_framework;
+    const descSnip = (t.description || '').split('\n')[0].slice(0, 180);
+    // Framework-role chips
+    const chips = [
+      fr.program    ? `<span class="topic-frchip topic-frchip-P" title="Programs — ISO 27001 foundations">P·${fr.program}</span>` : '',
+      fr.extension  ? `<span class="topic-frchip topic-frchip-E" title="Extensions — ISO 27701 PIMS controls">E·${fr.extension}</span>` : '',
+      fr.obligation ? `<span class="topic-frchip topic-frchip-O" title="Obligations — GDPR articles">O·${fr.obligation}</span>` : '',
+    ].join('');
+    // Verdict pills
+    const pills = [
+      v.NC        ? `<span class="topic-vp f-NC">${v.NC} NC</span>` : '',
+      v.OFI       ? `<span class="topic-vp f-OFI">${v.OFI} OFI</span>` : '',
+      v.Comply    ? `<span class="topic-vp f-Comply">${v.Comply} Comply</span>` : '',
+      v['N/A']    ? `<span class="topic-vp f-NA">${v['N/A']} N/A</span>` : '',
+      v.unassessed ? `<span class="topic-vp f-NotAssessed">${v.unassessed} unassessed</span>` : '',
+    ].join('');
+    return `
+      <div class="topic-card" onclick="openTopicDetail('${escapeHtml(t.slug)}')">
+        <div class="topic-card-head">
+          <i class="ti ${icon}" aria-hidden="true"></i>
+          <div class="topic-card-title">${escapeHtml(t.title)}</div>
+          <span class="topic-fwtag">${fwLabel}</span>
+        </div>
+        <div class="topic-card-desc">${escapeHtml(descSnip)}${descSnip.length >= 180 ? '…' : ''}</div>
+        <div class="topic-card-stats">
+          <span class="topic-count">${t.leaf_count} items</span>
+          ${chips ? `<span class="topic-chips">${chips}</span>` : ''}
+        </div>
+        <div class="topic-card-verdicts">${pills || '<span class="muted">no assessments</span>'}</div>
+      </div>
+    `;
+  }).join('');
+  wrap.innerHTML = `
+    <div class="topics-header">
+      <h2 style="margin:0;font-weight:600;color:#3D3B32">Compliance Topics</h2>
+      <div class="muted" style="margin-top:4px;font-size:12px">
+        Workflow bundles that group per-control items into how you actually run compliance — DSR, incident response, consent lifecycle, and more. Click a topic for the full workflow with per-item status.
+      </div>
+    </div>
+    <div class="topics-grid">${cards}</div>
+  `;
+}
+
+async function openTopicDetail(slug) {
+  const wrap = document.getElementById('topics-wrap');
+  wrap.innerHTML = '<div class="empty"><i class="ti ti-loader-2"></i><p>Loading bundle…</p></div>';
+  try {
+    const d = await api(`/api/v1/advisory/topics/${encodeURIComponent(slug)}`);
+    renderTopicDetail(d);
+  } catch (e) {
+    wrap.innerHTML = `<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn't load bundle "${escapeHtml(slug)}".</p></div>`;
+  }
+}
+
+function renderTopicDetail(d) {
+  const wrap = document.getElementById('topics-wrap');
+  const v = d.verdict_counts || {};
+  const fr = d.framework_role_counts || {};
+  const fwLabel = _FRAMEWORK_LABELS[d.primary_framework] || d.primary_framework;
+  const icon = _FRAMEWORK_ICONS[d.primary_framework] || 'ti-folder';
+  const compliancePct = d.leaf_count > 0
+    ? Math.round(100 * (v.Comply||0) / d.leaf_count) : 0;
+
+  // Progress bar segments
+  const seg = (label, count, cls) => count
+    ? `<span class="topic-seg ${cls}" style="flex:${count}" title="${count} ${label}"></span>`
+    : '';
+  const progressBar = `
+    <div class="topic-progress">
+      ${seg('Comply',     v.Comply||0,     'f-Comply-bg')}
+      ${seg('OFI',        v.OFI||0,        'f-OFI-bg')}
+      ${seg('NC',         v.NC||0,         'f-NC-bg')}
+      ${seg('N/A',        v['N/A']||0,     'f-NA-bg')}
+      ${seg('unassessed', v.unassessed||0, 'f-NotAssessed-bg')}
+    </div>
+  `;
+
+  // Framework role chips
+  const chips = [
+    { label: 'Programs',    hint: 'ISO 27001 program layer',  n: fr.program||0,    cls: 'topic-frchip-P' },
+    { label: 'Extensions',  hint: 'ISO 27701 PIMS extension', n: fr.extension||0,  cls: 'topic-frchip-E' },
+    { label: 'Obligations', hint: 'GDPR obligations',         n: fr.obligation||0, cls: 'topic-frchip-O' },
+  ].filter(c => c.n > 0).map(c =>
+    `<span class="topic-frchip ${c.cls}" title="${c.hint}">${c.label}: ${c.n}</span>`
+  ).join('');
+
+  // Leaves — grouped visually by role but ordered by workflow_order
+  const leafRows = (d.leaves || []).map(l => {
+    const findingCls = _FINDING_CLASS[l.finding] || 'f-NotAssessed';
+    const findingText = l.finding || 'not assessed';
+    const roleTag = _ROLE_LABEL[l.role] || l.role || '';
+    const frTag = { program: 'P', extension: 'E', obligation: 'O' }[l.framework_role] || '';
+    const templateBadge = l.template_available
+      ? '<span class="topic-leaf-tmpl" title="Template scaffold available">TMPL</span>'
+      : '';
+    const displayTitle = l.leaf_title
+      || (l.control_title ? `${l.control_title} — ${l.leaf_type}` : l.leaf_type);
+    const roleNote = l.role_note
+      ? `<div class="topic-leaf-note">${escapeHtml(l.role_note)}</div>`
+      : '';
+    return `
+      <div class="topic-leaf" onclick="_openControlDetailAndDashboard('${escapeHtml(l.control_ref)}')">
+        <div class="topic-leaf-ord">${l.workflow_order || 0}</div>
+        <div class="topic-leaf-body">
+          <div class="topic-leaf-head">
+            <span class="topic-leaf-ref">${escapeHtml(l.control_ref)}</span>
+            ${frTag ? `<span class="topic-leaf-fr topic-frchip-${frTag}">${frTag}</span>` : ''}
+            <span class="topic-leaf-title">${escapeHtml(displayTitle)}</span>
+            ${templateBadge}
+            <span class="topic-leaf-role">${escapeHtml(roleTag)}</span>
+            <span class="topic-vp ${findingCls}" style="margin-left:auto">${findingText}</span>
+          </div>
+          ${l.gap_excerpt ? `<div class="topic-leaf-gap">${escapeHtml(l.gap_excerpt)}</div>` : ''}
+          ${roleNote}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  wrap.innerHTML = `
+    <div class="topics-header">
+      <button class="btn-back" onclick="setMode('topics')" title="Back to topics">
+        <i class="ti ti-arrow-left" aria-hidden="true"></i> All topics
+      </button>
+      <div class="topic-detail-title">
+        <i class="ti ${icon}" aria-hidden="true"></i>
+        <h2 style="margin:0;font-weight:600;color:#3D3B32">${escapeHtml(d.title)}</h2>
+        <span class="topic-fwtag">${fwLabel}</span>
+      </div>
+      <div class="topic-detail-desc">${escapeHtml(d.description || '')}</div>
+
+      <div class="topic-progress-wrap">
+        <div class="topic-progress-label">
+          <span>${d.leaf_count} items</span>
+          <span>${compliancePct}% Comply · ${chips || ''}</span>
+        </div>
+        ${progressBar}
+      </div>
+
+      ${d.auditor_expects ? `
+        <div class="topic-auditor-box">
+          <div class="topic-auditor-title"><i class="ti ti-gavel" aria-hidden="true"></i> What auditors expect</div>
+          <div class="topic-auditor-body">${escapeHtml(d.auditor_expects)}</div>
+        </div>
+      ` : ''}
+    </div>
+
+    <div class="topic-leaves-header">Workflow · ${d.leaf_count} items in order</div>
+    <div class="topic-leaves">${leafRows}</div>
+  `;
+}
+
+// Deep-link into dashboard control detail from a topic leaf click
+function _openControlDetailAndDashboard(ref) {
+  if (!ref) return;
+  setMode('dashboard');
+  // Small delay so dashboard body is visible before opening drill-in
+  setTimeout(() => _openControlDetail(ref), 50);
+}
+
 async function loadDashboard() {
   const wrap = document.getElementById('dash-wrap');
   wrap.innerHTML = '<div class="dash-empty"><i class="ti ti-loader-2"></i><p>Loading posture…</p></div>';

@@ -3156,6 +3156,265 @@ async def dashboard_control_demonstrated_by(
     }
 
 
+# ── Ship 54'.b — advisory topic bundles ────────────────────────────────
+#
+# Topic bundles group per-leaf templates into compliance workflow
+# bundles (DSR, incident response, consent, etc.). Data source:
+# db/topics/*.yaml → Postgres topics + topic_leaves tables (loaded
+# via enrichment/topics/load_to_postgres.py). Per-topic verdict
+# roll-up joins topic_leaves ⋈ posture_controls at request time.
+#
+# Two endpoints:
+#   GET /api/v1/advisory/topics       — list with per-topic roll-up
+#   GET /api/v1/advisory/topics/{slug} — bundle detail per-leaf status
+#
+# See db/topics/README.md + docs/memory/ship_54_prime_a for design.
+
+def _classify_framework_role(leaf_id: str) -> str:
+    """Derive Program / Extension / Obligation from leaf_id pattern.
+    Same derivation used in the Ship 54'.a audit query. Kept as a
+    module-level helper so future consumers (chat, SPA, external
+    API) share it."""
+    if leaf_id.startswith("req:Art."):
+        return "obligation"
+    if leaf_id.startswith("req:A.7.") or leaf_id.startswith("req:B.8."):
+        return "extension"
+    if leaf_id.startswith("req:A."):
+        return "program"
+    # ISO 27001 ISMS body clauses (4.1, 5.2, 6.1.2, ...)
+    _rest = leaf_id[4:] if leaf_id.startswith("req:") else leaf_id
+    if _rest and _rest[0].isdigit():
+        return "program"
+    return "other"
+
+
+def _control_ref_from_leaf_id(leaf_id: str) -> str:
+    """Extract the control_ref portion (e.g., 'A.5.15' from
+    'req:A.5.15:communication_record'). Mirrors what
+    load_posture reads from posture_controls.control_ref."""
+    parts = leaf_id.split(":")
+    return parts[1] if len(parts) >= 2 else ""
+
+
+@app.get("/api/v1/advisory/topics", tags=["posture"])
+async def advisory_topics_list(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_scope("posture")),
+):
+    """Return the curated list of topic bundles with per-topic
+    verdict roll-up + framework-role composition.
+
+    Data source: `topics` + `topic_leaves` (Ship 54'.a schema_v91).
+    Roll-up: LEFT JOIN topic_leaves ⋈ posture_controls with tenant
+    RLS applied. Leaves without posture entries count as 'unassessed'.
+
+    Framework-role counts (program / extension / obligation) derived
+    from leaf_id pattern per `_classify_framework_role`.
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute("""
+                SELECT slug, title, description, primary_framework,
+                       auditor_expects, display_order
+                  FROM topics
+                 ORDER BY display_order, slug
+            """)
+            topics = cur.fetchall()
+
+            cur.execute("""
+                SELECT tl.topic_slug, tl.leaf_id, tl.role, tl.workflow_order,
+                       tl.role_note, pc.finding
+                  FROM topic_leaves tl
+                  LEFT JOIN posture_controls pc
+                    ON  pc.tenant_id   = %s::uuid
+                    AND pc.control_ref = split_part(tl.leaf_id, ':', 2)
+                    AND pc.is_active   = TRUE
+                 ORDER BY tl.topic_slug, tl.workflow_order, tl.leaf_id
+            """, [key_info.tenant_id])
+            leaves = cur.fetchall()
+
+        # Group leaves by topic + roll up
+        by_topic: dict[str, dict] = {}
+        for (slug, leaf_id, role, workflow_order, role_note, finding) in leaves:
+            entry = by_topic.setdefault(slug, {
+                "verdict_counts": {
+                    "Comply": 0, "OFI": 0, "NC": 0, "N/A": 0, "unassessed": 0,
+                },
+                "framework_role_counts": {
+                    "program": 0, "extension": 0, "obligation": 0, "other": 0,
+                },
+                "leaf_count": 0,
+            })
+            entry["leaf_count"] += 1
+            entry["verdict_counts"][finding or "unassessed"] = \
+                entry["verdict_counts"].get(finding or "unassessed", 0) + 1
+            fr = _classify_framework_role(leaf_id)
+            entry["framework_role_counts"][fr] = \
+                entry["framework_role_counts"].get(fr, 0) + 1
+
+        result = []
+        for (slug, title, description, primary_framework,
+             auditor_expects, display_order) in topics:
+            roll = by_topic.get(slug, {})
+            result.append({
+                "slug":                  slug,
+                "title":                 title,
+                "description":           description,
+                "primary_framework":     primary_framework,
+                "auditor_expects":       auditor_expects,
+                "display_order":         display_order,
+                "leaf_count":            roll.get("leaf_count", 0),
+                "verdict_counts":        roll.get("verdict_counts", {}),
+                "framework_role_counts": roll.get("framework_role_counts", {}),
+            })
+
+        return {
+            "topics":   result,
+            "trace_id": request.state.trace_id,
+        }
+    finally:
+        pool.putconn(conn)
+
+
+@app.get("/api/v1/advisory/topics/{slug}", tags=["posture"])
+async def advisory_topic_detail(
+    slug:     str,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_scope("posture")),
+):
+    """Return a topic bundle with per-leaf posture status +
+    workflow order. Returns 404 when the slug is unknown.
+
+    Each leaf carries:
+      leaf_id           — canonical req:X:Y
+      control_ref       — extracted A.5.15 / Art.15 / etc.
+      leaf_type         — the third segment (e.g., 'communication_record')
+      role              — per-topic role (primary_procedure/register/etc.)
+      workflow_order    — 1..N ordering within the topic
+      role_note         — optional consultant-authored note
+      framework_role    — program / extension / obligation (derived)
+      finding           — current posture (NC/OFI/Comply/N/A) or null
+      gap_excerpt       — first 200 chars of gap_description (posture)
+      template_available — bool (whether a db/templates/req__*.md exists)
+    """
+    # Slug shape guard — kebab-case slugs only
+    import re as _re
+    if not _re.match(r"^[a-z][a-z0-9_-]{0,63}$", slug or ""):
+        raise HTTPException(status_code=400, detail="invalid topic slug shape")
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute("""
+                SELECT title, description, primary_framework, auditor_expects,
+                       display_order
+                  FROM topics WHERE slug = %s
+            """, [slug])
+            row = cur.fetchone()
+            if not row:
+                raise HTTPException(status_code=404, detail="topic not found")
+            (title, description, primary_framework, auditor_expects,
+             display_order) = row
+
+            cur.execute("""
+                SELECT tl.leaf_id, tl.role, tl.workflow_order, tl.role_note,
+                       pc.finding,
+                       LEFT(COALESCE(pc.gap_description,''), 200) AS gap_excerpt,
+                       (t.leaf_id IS NOT NULL)                    AS template_available
+                  FROM topic_leaves tl
+                  LEFT JOIN posture_controls pc
+                    ON  pc.tenant_id   = %s::uuid
+                    AND pc.control_ref = split_part(tl.leaf_id, ':', 2)
+                    AND pc.is_active   = TRUE
+                  LEFT JOIN templates t ON t.leaf_id = tl.leaf_id
+                 WHERE tl.topic_slug = %s
+                 ORDER BY tl.workflow_order, tl.leaf_id
+            """, [key_info.tenant_id, slug])
+            leaves_rows = cur.fetchall()
+
+        # Neo4j lookup for leaf titles + control titles (best-effort)
+        leaf_ids   = [r[0] for r in leaves_rows]
+        node_titles: dict[str, str] = {}
+        try:
+            from rag.posture_loader import _build_engine_neo4j_driver
+            neo_drv = _build_engine_neo4j_driver()
+            if neo_drv is not None:
+                with neo_drv.session() as s:
+                    # Look up EvidenceRequirement titles (leaf-level)
+                    for row in s.run(
+                        "UNWIND $ids AS lid "
+                        "MATCH (er:EvidenceRequirement {id: lid}) "
+                        "RETURN er.id AS id, er.title AS title",
+                        ids=leaf_ids,
+                    ):
+                        node_titles[row["id"]] = row["title"] or ""
+                    # Look up control-level titles too (for the ref shown
+                    # in the UI, e.g., A.5.15 → "Access control")
+                    refs = list({_control_ref_from_leaf_id(lid) for lid in leaf_ids})
+                    for row in s.run(
+                        "UNWIND $refs AS rf "
+                        "MATCH (n:RequirementNode {ref: rf}) "
+                        "RETURN n.ref AS ref, n.title AS title LIMIT 200",
+                        refs=refs,
+                    ):
+                        # Namespace under a leaf_id-shaped key to avoid
+                        # collision with leaf titles
+                        node_titles[f"ctrl:{row['ref']}"] = row["title"] or ""
+        except Exception as _e:
+            logger.debug("topic detail neo4j title lookup failed: %s", _e)
+
+        leaves = []
+        for (leaf_id, role, workflow_order, role_note, finding,
+             gap_excerpt, template_available) in leaves_rows:
+            ctrl_ref = _control_ref_from_leaf_id(leaf_id)
+            parts = leaf_id.split(":")
+            leaf_type = parts[2] if len(parts) >= 3 else ""
+            leaves.append({
+                "leaf_id":            leaf_id,
+                "control_ref":        ctrl_ref,
+                "leaf_type":          leaf_type,
+                "leaf_title":         node_titles.get(leaf_id, ""),
+                "control_title":      node_titles.get(f"ctrl:{ctrl_ref}", ""),
+                "role":               role,
+                "workflow_order":     workflow_order,
+                "role_note":          role_note,
+                "framework_role":     _classify_framework_role(leaf_id),
+                "finding":            finding,
+                "gap_excerpt":        gap_excerpt or "",
+                "template_available": bool(template_available),
+            })
+
+        # Roll-up mirrors list endpoint for consistency
+        verdict_counts = {"Comply": 0, "OFI": 0, "NC": 0, "N/A": 0, "unassessed": 0}
+        framework_role_counts = {"program": 0, "extension": 0, "obligation": 0, "other": 0}
+        for lf in leaves:
+            verdict_counts[lf["finding"] or "unassessed"] = \
+                verdict_counts.get(lf["finding"] or "unassessed", 0) + 1
+            framework_role_counts[lf["framework_role"]] = \
+                framework_role_counts.get(lf["framework_role"], 0) + 1
+
+        return {
+            "slug":                  slug,
+            "title":                 title,
+            "description":           description,
+            "primary_framework":     primary_framework,
+            "auditor_expects":       auditor_expects,
+            "display_order":         display_order,
+            "leaf_count":            len(leaves),
+            "verdict_counts":        verdict_counts,
+            "framework_role_counts": framework_role_counts,
+            "leaves":                leaves,
+            "trace_id":              request.state.trace_id,
+        }
+    finally:
+        pool.putconn(conn)
+
+
 @app.get("/api/v1/posture/{control_ref}", tags=["posture"])
 async def posture_control(
     control_ref: ControlRefParam,
