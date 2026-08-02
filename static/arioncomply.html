@@ -175,6 +175,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .topic-leaf-title{color:#3D3B32;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .topic-leaf-role{font-size:10px;color:#5F5E5A;background:#F0EDE3;padding:1px 6px;border-radius:4px;font-weight:500}
 .topic-leaf-tmpl{font-size:9px;color:#3B6D11;background:#EAF3DE;padding:1px 5px;border-radius:3px;font-weight:600;letter-spacing:.03em}
+/* Ship 54'.b addendum 3 — per-leaf state chip */
+.topic-leaf-state{margin-left:auto;font-size:10px;padding:2px 7px;border-radius:5px;font-weight:500;display:inline-flex;align-items:center;gap:4px;letter-spacing:.02em}
+.topic-leaf-state i{font-size:12px}
+.leaf-state-complete{background:#EAF3DE;color:#3B6D11}
+.leaf-state-partial{background:#FDF6E7;color:#854F0B}
+.leaf-state-notstarted{background:#FADEDE;color:#9C2E2E}
+.leaf-state-na{background:#F0EDE3;color:#5F5E5A}
+/* When leaf-state is present, the finding pill gets a leading margin
+   instead of margin-left:auto so both sit at the right */
+.topic-leaf-state + .topic-vp{margin-left:6px}
 .topic-leaf-gap{font-size:11px;color:#5F5E5A;margin-top:5px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .topic-leaf-note{font-size:11px;color:#8A887E;font-style:italic;margin-top:4px;line-height:1.5}
 
@@ -3520,7 +3530,8 @@ function renderTopicDetail(d) {
             <span class="topic-leaf-title">${escapeHtml(displayTitle)}</span>
             ${templateBadge}
             <span class="topic-leaf-role">${escapeHtml(roleTag)}</span>
-            <span class="topic-vp ${findingCls}" style="margin-left:auto">${findingText}</span>
+            ${_renderLeafStateChip(l)}
+            <span class="topic-vp ${findingCls}" title="Parent control finding: ${escapeHtml(findingText)}">${findingText}</span>
             <i class="ti ti-chevron-down topic-leaf-chevron" aria-hidden="true"></i>
           </div>
           <div class="topic-leaf-detail" data-expanded="false">
@@ -3564,6 +3575,32 @@ function renderTopicDetail(d) {
     <div class="topic-leaves-header">Workflow · ${d.leaf_count} items in order</div>
     <div class="topic-leaves">${leafRows}</div>
   `;
+}
+
+// Ship 54'.b addendum 3 — leaf-level state chip. Distinct from the
+// parent-control finding pill because a leaf can be complete (all its
+// MUSTs satisfied) even when the parent control is NC due to OTHER
+// leaves in the control. Shown next to the finding pill in the row
+// header so users see both perspectives at a glance.
+const _LEAF_STATE_LBL = {
+  complete:   { label: 'Complete',    icon: 'ti-circle-check',    cls: 'leaf-state-complete' },
+  partial:    { label: 'In progress', icon: 'ti-circle-half-2',   cls: 'leaf-state-partial' },
+  notstarted: { label: 'Not started', icon: 'ti-circle-dashed',   cls: 'leaf-state-notstarted' },
+  na:         { label: 'No MUSTs',    icon: 'ti-circle-minus',    cls: 'leaf-state-na' },
+};
+
+function _renderLeafStateChip(l) {
+  const s = _LEAF_STATE_LBL[l.leaf_state];
+  if (!s) return '';
+  const nTotal = l.leaf_n_total || 0;
+  const nHave  = l.leaf_n_have || 0;
+  const count  = nTotal > 0 ? ` ${nHave}/${nTotal}` : '';
+  const title  = nTotal > 0
+    ? `Leaf state: ${nHave} of ${nTotal} MUSTs satisfied by evidence`
+    : 'Leaf state';
+  return `<span class="topic-leaf-state ${s.cls}" title="${title}">
+    <i class="ti ${s.icon}" aria-hidden="true"></i>${s.label}${count}
+  </span>`;
 }
 
 // Ship 54'.b addendum 2 — inline expansion in the topics view with

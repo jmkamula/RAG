@@ -2371,6 +2371,31 @@ def _leaf_item_ids() -> dict[str, set[str]]:
     return _LEAF_ITEM_IDS_CACHE
 
 
+_LEAF_MUST_IDS_CACHE: Optional[dict[str, set[str]]] = None
+
+
+def _leaf_must_ids() -> dict[str, set[str]]:
+    """Ship 54'.b addendum 3 — MUST-only leaf universe map.
+    Used by the topics endpoint to compute per-leaf state chips
+    (complete / partial / notstarted / na). Excludes SHOULD items
+    so the chip reflects mandatory compliance, not aspirational."""
+    global _LEAF_MUST_IDS_CACHE
+    if _LEAF_MUST_IDS_CACHE is None:
+        from enrichment.documents.document_requirements import (
+            ALL_EVIDENCE_REQUIREMENTS, ALL_DERIVED_SPECS,
+        )
+        cache: dict[str, set[str]] = {}
+        def add(er):
+            cache[er.id] = {it.id for it in list(er.must_contain)}
+        for er in ALL_EVIDENCE_REQUIREMENTS:
+            add(er)
+        for spec in ALL_DERIVED_SPECS:
+            for er in spec.direct_evidence:
+                add(er)
+        _LEAF_MUST_IDS_CACHE = cache
+    return _LEAF_MUST_IDS_CACHE
+
+
 def _enrich_leaf_sources(pg_conn, tenant_id: str, verdict: dict) -> None:
     """For each leaf child in the verdict, attach `source_documents`: the
     list of {filename, document_id, evidence_type} for every uploaded
@@ -3370,6 +3395,26 @@ async def advisory_topic_detail(
             """, [key_info.tenant_id, slug])
             leaves_rows = cur.fetchall()
 
+            # Ship 54'.b addendum 3 — bulk fetch (control_ref, must_id)
+            # combos with at least one active document_findings row.
+            # Combined with the per-leaf MUST-universe cache, this lets us
+            # compute a per-leaf state chip (complete / partial / notstarted
+            # / na) without a per-leaf advisory call. One extra query total.
+            ctrl_refs = list({_control_ref_from_leaf_id(r[0]) for r in leaves_rows})
+            satisfied_musts: dict[str, set[str]] = {}  # control_ref → {must_id}
+            if ctrl_refs:
+                cur.execute("""
+                    SELECT DISTINCT control_ref, checklist_item_id
+                      FROM document_findings
+                     WHERE tenant_id = %s::uuid
+                       AND is_active = TRUE
+                       AND status IN ('present', 'partial')
+                       AND control_ref = ANY(%s)
+                """, [key_info.tenant_id, ctrl_refs])
+                for (cref, mid) in cur.fetchall():
+                    if mid:
+                        satisfied_musts.setdefault(cref, set()).add(mid)
+
         # Neo4j lookup for leaf titles + control titles (best-effort)
         leaf_ids   = [r[0] for r in leaves_rows]
         node_titles: dict[str, str] = {}
@@ -3402,11 +3447,31 @@ async def advisory_topic_detail(
             logger.debug("topic detail neo4j title lookup failed: %s", _e)
 
         leaves = []
+        must_ids_by_leaf = _leaf_must_ids()
         for (leaf_id, role, workflow_order, role_note, finding,
              gap_excerpt, template_available) in leaves_rows:
             ctrl_ref = _control_ref_from_leaf_id(leaf_id)
             parts = leaf_id.split(":")
             leaf_type = parts[2] if len(parts) >= 3 else ""
+
+            # Per-leaf state chip — Ship 54'.b addendum 3.
+            # Universe: leaf's must_contain from the catalog.
+            # Present: MUSTs with an active document_findings row on this
+            # tenant + the parent control_ref. Skip SHOULDs so state
+            # reflects mandatory compliance.
+            leaf_musts = must_ids_by_leaf.get(leaf_id) or set()
+            n_total = len(leaf_musts)
+            sat = satisfied_musts.get(ctrl_ref) or set()
+            n_have = len(leaf_musts & sat)
+            if n_total == 0:
+                leaf_state = "na"
+            elif n_have == 0:
+                leaf_state = "notstarted"
+            elif n_have >= n_total:
+                leaf_state = "complete"
+            else:
+                leaf_state = "partial"
+
             leaves.append({
                 "leaf_id":            leaf_id,
                 "control_ref":        ctrl_ref,
@@ -3420,6 +3485,10 @@ async def advisory_topic_detail(
                 "finding":            finding,
                 "gap_excerpt":        _scrub_topic_gap_text(gap_excerpt or ""),
                 "template_available": bool(template_available),
+                # Leaf-level state (separate from control-level finding)
+                "leaf_state":         leaf_state,
+                "leaf_n_have":        n_have,
+                "leaf_n_total":       n_total,
             })
 
         # Roll-up mirrors list endpoint for consistency
