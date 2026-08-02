@@ -680,6 +680,24 @@ CLEAR_INTENT_PHRASES = [
     (re.compile(r'\blist\s+(?:our\s+)?(?:NC|OFI|non.conformit|non-conformit)\b', re.IGNORECASE),
      "gap_analysis", []),
 
+    # Ship 53'.i (2026-08-02) — Stage-2 engine-verdict / posture-proposal
+    # review-queue queries. Case #37 regression: the consensus aggregator's
+    # ambiguity detector was firing on "what engine verdicts need review?"
+    # because it saw retrieval scatter across the currently-pending refs.
+    # Curator-tier pattern re-anchors these to `posture_check` (which is
+    # separately added to _refless_intent in rag/consensus/aggregator.py so
+    # the ambiguity bypass kicks in).
+    (re.compile(
+        r'\b(?:'
+        r'what\s+engine\s+(?:verdicts?|proposals?)\s+(?:need|needs|require)'
+        r'|engine\s+(?:verdicts?|proposals?)\s+(?:need|needing|awaiting)\s+(?:review|approval)'
+        r'|(?:show|list)\s+(?:me\s+)?(?:the\s+)?pending\s+engine\s+(?:verdicts?|proposals?)'
+        r'|what\s+posture\s+proposals?\s+(?:need|needs|require)'
+        r'|posture\s+proposals?\s+(?:need|needing|awaiting)\s+(?:review|approval)'
+        r')\b',
+        re.IGNORECASE),
+     "posture_check", []),
+
     # Glossary / definition queries — bypass clarification, answer directly
     (re.compile(r'\bwhat\s+(?:is|are)\s+(?:an?\s+)?(?:NC|OFI|ISMS|DPIA|DPA|RoPA|DSR|DSAR)\b', re.IGNORECASE),
      "definition", []),

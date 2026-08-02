@@ -128,8 +128,16 @@ def _detect_ambiguity(
     # controls, so ref-ambiguity is a wrong signal. The dry-run
     # exposed this via a session where retrieval scattered enough to
     # tip the ambiguity threshold on a valid doc query.
+    # Ship 53'.i (2026-08-02) — added `posture_check` for Stage-2 review-
+    # queue queries ("what engine verdicts need review?"). Retrieval
+    # scatters across the currently-pending refs, tripping ambiguity
+    # detection — but the query is a state-list surface, not a specific-
+    # ref question. Pairs with the CLEAR_INTENT_PHRASES pattern in
+    # rag/classifier.py that emits curated_lexicon with question_type=
+    # posture_check for these queries.
     _refless_intent = {"definition", "gap_analysis", "cross_framework",
-                       "free_assessment", "document_inventory"}
+                       "free_assessment", "document_inventory",
+                       "posture_check"}
     for sig in signals:
         if (sig.fired and sig.name == "curated_lexicon"
                 and sig.question_type in _refless_intent):

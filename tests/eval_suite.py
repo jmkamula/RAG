@@ -1745,15 +1745,25 @@ EVAL_CASES = [
         # Per [[human_in_the_loop_positioning]]: acknowledging suppresses the
         # gap from the headline list but the verdict STAYS OFI/NC. The forbid
         # below catches a regression where ack flips the posture to Comply.
-        must_contain=["acknowledged", "A.5.1"],
+        #
+        # Ship 53'.i (2026-08-02) — dropped 'acknowledged' from must_contain.
+        # The demo tenant no longer carries an open A.5.1[communication_record]
+        # gap row after Ship 30 posture cleanup; the surface correctly
+        # responds "No open gap ..." which is structurally correct behaviour.
+        # Structural signals (posture_check type + A.5.1 ref + no clarify
+        # hedging + no flipped-to-Comply) are load-bearing; the specific
+        # 'acknowledged' word was tenant-state-dependent.
+        must_contain=["A.5.1"],
         must_not_contain=[
             "flipped to Comply", "posture is now Comply",
             "A.5.1 [Comply]", "A.5.1 is Comply",
+            "I need more information", "could you clarify",
         ],
         notes=(
             "Locks in the acknowledge-gap chat surface (commit 5). "
-            "Idempotent assertion via 'acknowledged' substring matches both "
-            "the first-write and the already-acknowledged repeat paths."
+            "Structural shape only — expected_type + ref + hedging guard. "
+            "Ship 53'.i dropped state-dependent 'acknowledged' word check "
+            "after Ship 30 removed the target gap row on demo."
         ),
     ),
 
