@@ -3254,6 +3254,60 @@ def _scrub_topic_gap_text(text: str) -> str:
     return out
 
 
+@app.get("/api/v1/dashboard/control/{control_ref}/topics",
+         tags=["posture"])
+async def dashboard_control_topics(
+    control_ref: ControlRefParam,
+    request:     Request,
+    key_info:    APIKeyInfo = Depends(require_scope("posture")),
+):
+    """Ship 54' cross-nav — list topics that reference this control.
+
+    Powers the "Part of these topics" panel in the dashboard drill-
+    in. Dashboard is the compliance ATLAS (control-centric, evidence-
+    forensic); Topics is the compliance PLAYBOOK (workflow-centric,
+    curator-ordered). This endpoint gives a control-first user the
+    ability to jump into workflow context.
+
+    Returns the topics with per-topic role annotation for THIS
+    control's leaves. Same topic may appear once per role/leaf that
+    the control participates in — deduped at the topic level so the
+    UI shows one pill per topic.
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute("""
+                SELECT DISTINCT t.slug, t.title, t.primary_framework,
+                       t.display_order,
+                       string_agg(DISTINCT tl.role, ',' ORDER BY tl.role) AS roles
+                  FROM topics t
+                  JOIN topic_leaves tl ON tl.topic_slug = t.slug
+                 WHERE split_part(tl.leaf_id, ':', 2) = %s
+                 GROUP BY t.slug, t.title, t.primary_framework, t.display_order
+                 ORDER BY t.display_order, t.slug
+            """, [control_ref])
+            rows = cur.fetchall()
+        return {
+            "control_ref": control_ref,
+            "topics": [
+                {
+                    "slug":              slug,
+                    "title":             title,
+                    "primary_framework": primary_framework,
+                    "display_order":     display_order,
+                    "roles":             (roles or "").split(",") if roles else [],
+                }
+                for (slug, title, primary_framework, display_order, roles) in rows
+            ],
+            "trace_id": request.state.trace_id,
+        }
+    finally:
+        pool.putconn(conn)
+
+
 @app.get("/api/v1/advisory/topics", tags=["posture"])
 async def advisory_topics_list(
     request:  Request,

@@ -210,6 +210,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
    the detail panel carries the full status body */
 .topic-leaf.expanded .topic-leaf-gap{display:none}
 
+/* Ship 54' cross-nav — dashboard drill-in "Part of these topics" panel */
+.dp-topics-panel{background:#F8F6EE;border:1px solid #E7E3D0;border-radius:8px;padding:12px 14px;margin:14px 0 10px}
+.dp-topics-lbl{font-weight:600;font-size:12px;color:#3D3B32;margin-bottom:5px;display:flex;align-items:center;gap:6px}
+.dp-topics-lbl i{color:#3C3489;font-size:14px}
+.dp-topics-hint{font-size:11px;color:#5F5E5A;line-height:1.5;margin-bottom:8px;font-style:italic}
+.dp-topics-pills{display:flex;flex-wrap:wrap;gap:6px}
+.topic-nav-pill{background:#fff;border:1px solid #D0CBEA;color:#3C3489;padding:5px 10px;border-radius:5px;font-size:11px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-family:inherit;transition:all .1s ease}
+.topic-nav-pill:hover{background:#EEEDFE;border-color:#3C3489;transform:translateY(-1px)}
+.topic-nav-pill i{font-size:12px}
+.topic-nav-pill-fw{background:#EEEDFE;color:#3C3489;padding:1px 5px;border-radius:3px;font-size:9px;font-weight:600;letter-spacing:.02em;margin-left:2px}
+
 /* Ship 54'.b addendum 2 — 5-section detail body */
 .topic-leaf-detail-body{padding:0}
 .topic-leaf-loading{padding:16px 4px;color:#8A887E;font-size:12px;display:flex;align-items:center;gap:8px}
@@ -3758,11 +3769,14 @@ function _renderTopicLeafDetailBody(d, roleNote) {
         </div>
       </div>
       <div class="topic-leaf-action-block topic-leaf-action-escape">
-        <div class="topic-leaf-action-label">Full evidence audit view</div>
+        <div class="topic-leaf-action-label">See full evidence + auditor view for this control</div>
+        <div class="topic-leaf-action-hint">
+          Dashboard shows every source document, cross-framework bridge, and cascade implication. Topics is the workflow lens; Dashboard is the evidence lens.
+        </div>
         <div class="topic-leaf-action-row">
           <button class="topic-leaf-btn topic-leaf-btn-muted"
                   onclick="event.stopPropagation();openTopicLeafInDashboard('${ctrl}')">
-            <i class="ti ti-external-link" aria-hidden="true"></i> Open in Dashboard
+            <i class="ti ti-external-link" aria-hidden="true"></i> Open ${ctrl} in Dashboard
           </button>
         </div>
       </div>
@@ -4295,6 +4309,23 @@ async function selectHeatCell(c, ev) {
     }
   } catch (e) {
     // Silent: demonstrated-by is supplementary
+  }
+
+  // ── Ship 54' cross-nav — Topics containing this control ─────────────
+  // Dashboard = compliance ATLAS (control-centric, evidence-forensic).
+  // Topics = compliance PLAYBOOK (workflow-centric). When a control is
+  // part of one or more curated bundles, surface a "Part of these
+  // topics" panel so a control-first user can jump to workflow context.
+  try {
+    const tp = await api(`/api/v1/dashboard/control/${encodeURIComponent(c.control_ref)}/topics`);
+    if (selected !== null && selected.control_ref === c.control_ref
+        && tp && tp.topics && tp.topics.length) {
+      const dp = document.getElementById('dp-gap');
+      if (dp) dp.insertAdjacentHTML('beforeend',
+        renderControlTopicsPanel(c.control_ref, tp.topics));
+    }
+  } catch (e) {
+    // Silent: cross-nav is supplementary
   }
 
   // ── S3p: cascade implications drill-in ───────────────────────────────
@@ -5721,6 +5752,46 @@ async function _citeSubmitVerify(leafId, systemId) {
   } catch (e) {
     alert(`Verify error: ${e.message}`);
   }
+}
+
+// Ship 54' cross-nav — dashboard drill-in → Topics view.
+// Renders a "Part of these topics" pill list. Each pill routes to
+// Topics mode + opens the topic detail. Complements the topics-side
+// "Full detail → Dashboard" escape hatch (Ship 54'.b).
+function renderControlTopicsPanel(controlRef, topics) {
+  if (!topics || !topics.length) return '';
+  const pills = topics.map(t => {
+    const fwLabel = _FRAMEWORK_LABELS[t.primary_framework] || t.primary_framework;
+    const roleHint = (t.roles || []).map(r => _ROLE_LABEL[r] || r).join(' · ');
+    return `
+      <button class="topic-nav-pill" onclick="_openTopicFromDashboard('${escapeHtml(t.slug)}')"
+              title="Open the ${escapeHtml(t.title)} workflow view — ${escapeHtml(fwLabel)} · this control's role: ${escapeHtml(roleHint || 'referenced')}">
+        <i class="ti ti-folder" aria-hidden="true"></i>
+        ${escapeHtml(t.title)}
+        <span class="topic-nav-pill-fw">${escapeHtml(fwLabel)}</span>
+      </button>
+    `;
+  }).join('');
+  return `
+    <div class="dp-topics-panel">
+      <div class="dp-topics-lbl">
+        <i class="ti ti-topology-star-3" aria-hidden="true"></i>
+        Part of ${topics.length} compliance ${topics.length === 1 ? 'topic' : 'topics'}
+      </div>
+      <div class="dp-topics-hint">
+        Dashboard shows this control's full evidence + audit trail. For
+        workflow context (curator-ordered steps, per-leaf remediation,
+        template downloads), open a topic bundle below.
+      </div>
+      <div class="dp-topics-pills">${pills}</div>
+    </div>
+  `;
+}
+
+function _openTopicFromDashboard(slug) {
+  if (!slug) return;
+  setMode('topics');
+  setTimeout(() => openTopicDetail(slug), 50);
 }
 
 function renderDemonstratedByPanel(dm) {
