@@ -5139,10 +5139,11 @@ async def download_template(
                 )
             from rag.templates.docx_renderer import render_template_docx
             docx_bytes = render_template_docx(
-                pg_conn       = conn,
-                tenant_id     = key_info.tenant_id,
-                leaf_id       = leaf_id,
-                template_body = rendered.body_md,
+                pg_conn          = conn,
+                tenant_id        = key_info.tenant_id,
+                leaf_id          = leaf_id,
+                template_body    = rendered.body_md,
+                template_version = rendered.template_version,
             )
             from fastapi.responses import Response
             return Response(

@@ -37,6 +37,14 @@ EDIT_ZONE_START  = re.compile(r"<!--\s*EDIT-ZONE-START\s+(item:[A-Za-z0-9.]+:[a-
 EDIT_ZONE_END    = re.compile(r"<!--\s*EDIT-ZONE-END\s+(item:[A-Za-z0-9.]+:[a-z0-9_]+)\s*-->")
 HTML_COMMENT_RE  = re.compile(r"^<!--.*?-->\s*$", re.DOTALL)
 PROV_COMMENT_RE  = re.compile(r"^<!--.+?-->\n*", re.DOTALL)
+# Ship 54'.d — doc-control + revision-history markers. When a template
+# includes <<DOC_CONTROL>>, the renderer emits a document-control
+# table (Doc No / Rev / Prepared / Reviewed / Approved / Date + wet-
+# sign lines). <<REVISION_HISTORY>> emits an empty audit-defensible
+# revision history table. Optional per-template — not every template
+# is a controlled document.
+DOC_CONTROL_RE       = re.compile(r"^\s*<<DOC_CONTROL>>\s*$")
+REVISION_HISTORY_RE  = re.compile(r"^\s*<<REVISION_HISTORY>>\s*$")
 INLINE_RUN_RE    = re.compile(
     r"(\*\*[^*\n]+\*\*"     # **bold**
     r"|__[^_\n]+__"          # __bold__
@@ -159,17 +167,161 @@ def _render_text_placeholder(doc) -> None:
 
 # ── Main converter ──────────────────────────────────────────────────────────
 
+# ── Ship 54'.d — doc-control + revision-history block renderers ─────────
+
+def _derive_doc_number(leaf_id: str, template_version: int | None) -> str:
+    """Compose a human-readable document number from the leaf_id.
+
+    Examples:
+      req:5.2:information_security_policy → ISP-5.2-Rev00
+      req:A.5.15:communication_record     → REC-A.5.15-Rev00
+      req:Art.30:records_of_processing    → ROPA-Art.30-Rev00
+
+    Convention: {TYPE_PREFIX}-{control_ref}-Rev{template_version:02d}.
+    The TYPE_PREFIX is derived from the leaf_type token (e.g. policy →
+    POL, procedure → PRC, register → REG, record → REC). Falls back
+    to the raw leaf_type slug when unknown so the doc number is always
+    populated + curator-overridable in future via template YAML.
+    """
+    parts = (leaf_id or "").split(":")
+    if len(parts) < 3:
+        return leaf_id or "DOC"
+    ctrl_ref, leaf_type = parts[1], parts[2]
+    lt = leaf_type.lower()
+    if "policy" in lt:
+        prefix = "POL"
+    elif "procedure" in lt or "process" in lt:
+        prefix = "PRC"
+    elif "register" in lt:
+        prefix = "REG"
+    elif "record" in lt or "log" in lt:
+        prefix = "REC"
+    elif "review" in lt:
+        prefix = "REV"
+    elif "framework" in lt:
+        prefix = "FRM"
+    elif "manual" in lt:
+        prefix = "MAN"
+    elif "scope" in lt:
+        prefix = "SCP"
+    else:
+        prefix = "DOC"
+    rev = f"Rev{(template_version or 1):02d}"
+    return f"{prefix}-{ctrl_ref}-{rev}"
+
+
+def _render_doc_control_block(
+    doc, leaf_id: str, template_version: int | None,
+) -> None:
+    """Insert a document-control table matching consultant-toolkit
+    convention (mirrors Share.zip L2-PRC-003 doc-control block).
+
+    Layout (2-column table):
+      Document No.       | {derived from leaf_id}
+      Revision           | Rev{template_version:02d}
+      Revision Date      | {today, DD MMM YYYY}
+      Prepared By        | ___________________________ (wet-sign)
+      Reviewed By        | ___________________________
+      Approved By        | ___________________________
+
+    Deliberate blanks on Prepared/Reviewed/Approved — the tenant fills
+    those at document-control review. No auto-fill from tenant_profile
+    for the MVP (deferred; tenant_profile doesn't carry
+    prepared_by / reviewed_by fields).
+    """
+    from datetime import date
+    doc_no = _derive_doc_number(leaf_id, template_version)
+    today  = date.today().strftime("%d %b %Y")
+    rev    = f"Rev{(template_version or 1):02d}"
+
+    rows: list[tuple[str, str]] = [
+        ("Document No.",   doc_no),
+        ("Revision",       rev),
+        ("Revision Date",  today),
+        ("Prepared By",    "___________________________"),
+        ("Reviewed By",    "___________________________"),
+        ("Approved By",    "___________________________"),
+    ]
+
+    table = doc.add_table(rows=len(rows), cols=2)
+    table.style = "Light Grid Accent 1"
+    table.autofit = True
+    for i, (label, value) in enumerate(rows):
+        c0 = table.cell(i, 0)
+        c1 = table.cell(i, 1)
+        c0.text = ""
+        c1.text = ""
+        p0 = c0.paragraphs[0]
+        r0 = p0.add_run(label)
+        r0.bold = True
+        r0.font.size = Pt(10)
+        p1 = c1.paragraphs[0]
+        r1 = p1.add_run(value)
+        r1.font.size = Pt(10)
+
+    # Small trailing paragraph to separate from body content
+    doc.add_paragraph()
+
+
+def _render_revision_history_block(
+    doc, template_version: int | None,
+) -> None:
+    """Insert a revision-history table. Empty audit-defensible shape:
+    curator/tenant adds one row per version. Convention matches Share
+    L2-PRC-003 revision-history block.
+
+    Columns: Version | Date | Description of Change | Author
+
+    Seeded with one row for the current template_version + today's
+    date. Future edits append rows.
+    """
+    from datetime import date
+
+    doc.add_heading("Revision History", level=2)
+
+    table = doc.add_table(rows=2, cols=4)
+    table.style = "Light Grid Accent 1"
+    table.autofit = True
+
+    # Header row
+    hdr = ["Version", "Date", "Description of Change", "Author"]
+    for i, h in enumerate(hdr):
+        c = table.cell(0, i)
+        c.text = ""
+        r = c.paragraphs[0].add_run(h)
+        r.bold = True
+        r.font.size = Pt(10)
+
+    # Current-version seed row
+    today = date.today().strftime("%d %b %Y")
+    rev = f"{(template_version or 1):02d}"
+    seed = [rev, today, "Initial issue / current version", ""]
+    for i, v in enumerate(seed):
+        c = table.cell(1, i)
+        c.text = ""
+        r = c.paragraphs[0].add_run(v)
+        r.font.size = Pt(10)
+
+    doc.add_paragraph()
+
+
 def render_template_docx(
     pg_conn,
     tenant_id: str,
     leaf_id:   str,
     template_body: str,
+    template_version: int | None = None,
 ) -> bytes:
     """Convert the rendered markdown body to a .docx workbook.
 
     Walks line-by-line, maps markdown idioms to Word styles, and
     preserves structural markers as visible cues. Returns bytes
     suitable for HTTP response.
+
+    Ship 54'.d — the walk also detects <<DOC_CONTROL>> and
+    <<REVISION_HISTORY>> markers and dispatches to the block
+    renderers. `template_version` is passed through so those blocks
+    can render the current Rev number.
     """
     doc = Document()
 
@@ -207,6 +359,16 @@ def render_template_docx(
         # Empty line — paragraph break
         if not line.strip():
             in_list_block = False
+            continue
+
+        # Ship 54'.d — <<DOC_CONTROL>> marker → document-control table
+        if DOC_CONTROL_RE.match(line):
+            _render_doc_control_block(doc, leaf_id, template_version)
+            continue
+
+        # Ship 54'.d — <<REVISION_HISTORY>> marker → revision history table
+        if REVISION_HISTORY_RE.match(line):
+            _render_revision_history_block(doc, template_version)
             continue
 
         # MUST / SHOULD marker as its own line

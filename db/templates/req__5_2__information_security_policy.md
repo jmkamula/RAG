@@ -11,6 +11,8 @@ should_count: 2
 
 # Information Security Policy
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
 The **top-of-stack policy** for your entire ISMS. It's the document
@@ -247,3 +249,7 @@ Note next planned review date + conditions that trigger ad-hoc review
 (significant change, major incident, regulatory update).
 
 <<TEXT>>
+
+---
+
+<<REVISION_HISTORY>>
