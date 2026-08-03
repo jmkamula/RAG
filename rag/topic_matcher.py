@@ -117,12 +117,18 @@ _TOPIC_KEYWORDS: list[tuple[str, list[str]]] = [
 
 
 # Trigger verbs — matched before the topic keyword to bias toward
-# workflow queries vs. definition/gap queries. All optional; a bare
-# topic-keyword query ("consent management") still matches.
+# workflow queries vs. definition/gap queries. Deliberately narrow:
+# workflow-shape verbs only (set up / handle / run / manage /
+# approach / walk me through / etc.). NOT "implement" or bare "do" —
+# those are per-control verbs ("how do I implement A.5.15?" is
+# per-leaf implementation, not a bundle query). Eval case #20 caught
+# the over-routing: "how do we implement a formal access rights
+# review?" was hitting topic_bundle when it should stay
+# implementation. Fixed in Ship 54'.c addendum (2026-08-03).
 _TRIGGER_RE = re.compile(
     r"\b("
     r"how\s+(?:do|would|should|can)\s+(?:i|we)\s+"
-    r"(?:set\s+up|handle|run|implement|manage|do|approach|set-up|do)"
+    r"(?:set\s+up|handle|run|manage|approach|set-up)"
     r"|walk\s+me\s+through"
     r"|what(?:'|)s\s+involved\s+in"
     r"|tell\s+me\s+about"
