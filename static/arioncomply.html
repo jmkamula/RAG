@@ -4267,33 +4267,26 @@ async function selectHeatCell(c, ev) {
     }
   }
 
-  // ── Evidence-class breakdown panel ─────────────────────────────────────
-  // High-level "what types of evidence do you have/need" rollup. Fetched
-  // alongside the advisory; renders ABOVE it (orienting view → editor).
-  // See [[evidence-class-breakdown-backend-2026-06-26]].
-  try {
-    const ec = await api(`/api/v1/dashboard/control/${encodeURIComponent(c.control_ref)}/evidence-classes`);
-    if (selected !== null && selected.control_ref === c.control_ref && ec.breakdown) {
-      const dp = document.getElementById('dp-gap');
-      if (dp) dp.insertAdjacentHTML('beforeend', renderEvidenceClassesPanel(ec.breakdown));
-    }
-  } catch (e) {
-    // Silent: supplementary panel; never block the tree.
-  }
-
-  // ── "How to advance" advisory panel ────────────────────────────────────
-  // Fetched after the verdict tree (parallel would be cleaner but we want
-  // the tree to render first so the user doesn't see a flash of empty
-  // state on the slower of the two calls). Appends below the tree.
-  try {
-    const adv = await api(`/api/v1/dashboard/control/${encodeURIComponent(c.control_ref)}/advisory`);
-    if (selected !== null && selected.control_ref === c.control_ref && adv.advisory) {
-      const dp = document.getElementById('dp-gap');
-      if (dp) dp.insertAdjacentHTML('beforeend', renderAdvisoryPanel(adv.advisory));
-    }
-  } catch (e) {
-    // Silent: advisory is supplementary; never block the existing tree.
-  }
+  // ── Ship 54' Option A — atlas / playbook border sharpening ────────
+  // Removed from Dashboard drill-in:
+  //   · Evidence-class breakdown panel ("18 of 30 elements covered")
+  //     with per-leaf accordions (Review Record 1/9, Register 6/8, ...)
+  //   · "How to strengthen X" per-MUST advisory panel (Have/Still-
+  //     needed per leaf + template download buttons)
+  //
+  // Both now live in the Topics playbook — click any pill in the
+  // "Part of N compliance topics" panel below to reach the per-leaf
+  // MUST checklist + remediation + template downloads within their
+  // workflow context.
+  //
+  // Dashboard stays the compliance ATLAS: standard text, gap, engine
+  // verdict tree (slim), full evidence-sources forensic list, cross-
+  // framework mesh, cascade pressure. Topics stays the PLAYBOOK.
+  //
+  // The endpoints /api/v1/dashboard/control/{ref}/evidence-classes +
+  // /advisory remain in the API (used by other surfaces + reserved for
+  // future re-integration if the border shifts). Just not rendered
+  // here.
 
   // ── Framework role model: demonstrated-by provenance ─────────────────
   // For OBLIGATION controls, surface which PROGRAM/EXTENSION postures
