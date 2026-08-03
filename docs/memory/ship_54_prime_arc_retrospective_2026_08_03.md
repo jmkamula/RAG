@@ -1,0 +1,597 @@
+---
+name: ship-54-prime-arc-retrospective-2026-08-03
+description: "Ship 54' arc retrospective — templating + advisory framework extension. 12 sub-arcs across 2026-08-02→08-03 delivered: topics data layer (17 curated bundles, 185 leaf-refs across Program/Extension/Obligation mesh), advisory API + SPA Topics view + leaf-scoped drill-in with per-leaf state chip, chat topic-bundle intent routing, doc-control renderer block, and the 3-phase structural evidence intake round-trip (detector library + standalone lane + consensus signal fusion). Round-trip binding + dual-role structural fusion codified as IP-worthy elements per operator note. 6 codified lessons captured. Ship 54'.e Phase 3 completes the consensus-signal side of the hybrid design; the intake round-trip is operationally closed."
+metadata:
+  node_type: memory
+  type: project
+---
+
+Ship 54' arc retrospective — templating + advisory framework
+extension. 12 sub-arcs across 2 days (2026-08-02 → 2026-08-03).
+Direct follow-on from Ship 53' consultant-grade grounding arc;
+this arc extends the advisory framework with workflow-oriented
+topic bundles + closes the doc-control round-trip between renderer
+output and extractor input.
+
+## What triggered it
+
+Ship 53' had shipped consultant-grade grounding — remediation
+answers now cite EDPB Guidelines / ISO 27002 / ISO 27701 by
+document number. The operator then provided
+`/data/arioncomply/private/Share.zip` — a 324-file consultant
+toolkit library (Defradar GDPR templates + ISO 27001 Options 1
++ 2) — and asked:
+
+> *"read through and lets revisit our templating, advisory
+> discipline, i want to have formally formed templates both doc
+> and xls with maximum clarity and to glean what we can improve
+> in our overal advisory framework"*
+
+The Share.zip analysis surfaced two structural gaps in our
+existing 845 per-leaf templates + advisory:
+
+1. **No workflow bundling.** Real compliance work happens at
+   topic level (DSR management, incident response, consent
+   lifecycle) — a policy + procedure + form + register + review
+   grouped by workflow. Our advisory surfaced per-leaf; a topic
+   view was missing.
+
+2. **No doc-control shape in output/input.** Share references
+   carried consultant-toolkit convention (Doc No / Rev / Prepared
+   / Reviewed / Approved header + Revision History table). Our
+   renderer emitted markdown scaffolds without those blocks;
+   our extractor didn't recognize them when tenants uploaded
+   docs that had them.
+
+The operator constraint was explicit:
+
+> *"i think i dont understand what the drill in is doing"*
+> *"the topics drilldown needs cleaning"*
+> *"correct me if im wrong"*
+
+And on scope:
+
+> *"i dont want to wonder too far from where we are, i want A + B
+> preserving per-leaf and bringing in topical as an addition"*
+
+Additive scope. Preserve the 845 per-leaf templates untouched.
+Bring in the workflow layer + doc-control shape as pure overlay.
+
+## What shipped
+
+| Sub-arc | Delivery | Commit |
+|---|---|---|
+| 54'.a | Topics data model + 12 curated bundles + `topics` / `topic_leaves` schema (schema_v91) | `63f0cf2` |
+| 54'.a addendum 1 | ISO 27701 mesh coverage — added 12 extension refs across 5 privacy-heavy topics; closed the "obligation without programs" gap in dpia_workflow + records_of_processing | `cb82a4e` |
+| 54'.a addendum 2 | 5 new 27701-anchored topics (consent, privacy notice, PII lifecycle, transfers, processor operations) + 4 small folds. 12 topics → 17 topics; 100 → 185 leaf-refs | `0aa5d65` |
+| 54'.b | Advisory API (list + detail) + SPA Topics view with grid + detail; deep-linked to dashboard drill-in | `c44e2aa` |
+| 54'.b addendum 1 | Inline drill-in in the topics view + text scrub (strip `[Bridge:…]` / `[leaf-scan back-bind]` / markdown escapes) | `14baf08` |
+| 54'.b addendum 2 | Leaf-scoped MUST checklist + per-leaf detail endpoint. Replaced dashboard-style noise with clean 5-section shape: role_note / status / MUST checklist / remediation / actions | `5791f49` |
+| 54'.b addendum 3 | Per-leaf state chip (Complete/In progress/Not started) alongside parent control finding. Resolves the "A.5.34 leaf shows 8/8 but parent NC" UX confusion | `7da35e9` |
+| 54'.c | Chat topic-bundle intent routing — new `QuestionType.TOPIC_BUNDLE` + `rag/topic_matcher.py` + pre-consensus intercept + deterministic short-circuit response | `71b3b4b` |
+| 54'.d | Doc-control renderer block — `<<DOC_CONTROL>>` + `<<REVISION_HISTORY>>` markers → DOCX tables with Doc No / Rev / Prepared / Reviewed / Approved + revision history seed | `cde5190` |
+| 54'.e Phase 1 | Structural evidence detector library — 5 pattern detectors + 13 unit tests + mammoth-normalization for docx-extracted markdown | `2b0d7e5` |
+| 54'.e Phase 2 | Intake wiring — schema_v92 adds `structural_pattern` inference_source + `structural` grounding_method; new binding logic emits document_findings for detected patterns with per-MUST bindings + provenance-preserving excerpts | `bc139eb` |
+| 54'.e Phase 3 | `structural_maturity` consensus signal — 10th signal in the extraction consensus pass; doc-level boost (weight 0.15) scales with pattern-count (40%→100%); closes the dual-role hybrid design | `f3513e4` |
+
+Total: 4 sub-arcs (a/b/c/d/e) with 8 addenda/phases = 12 commits
+of substantive delivery.
+
+## Sub-arc details
+
+### 54'.a — Topics as a curated data layer
+
+The additive-overlay design was locked before writing any code
+after operator confirmed *"preserve per-leaf and bring in topical
+as an addition"*. Three artefacts:
+
+- **schema_v91_ship54a_topics.sql** — two tables:
+  - `topics` (slug PK, title, description, primary_framework,
+    auditor_expects, display_order, source_file)
+  - `topic_leaves` (topic_slug + leaf_id composite PK, role,
+    workflow_order, role_note)
+  - No FK from `topic_leaves.leaf_id` to `templates.leaf_id`
+    because topics can reference not-yet-templated leaves; loader
+    validates against `ALL_EVIDENCE_REQUIREMENTS ∪
+    ALL_DERIVED_SPECS.direct_evidence` canonical catalog union.
+
+- **12 initial topic YAMLs** in `db/topics/*.yaml` covering DSR,
+  incident response, breach notification, risk assessment,
+  DPIA, supplier onboarding, employee lifecycle, business
+  continuity, access rights, RoPA, change management, continual
+  improvement.
+
+- **Loader** — `enrichment/topics/load_to_postgres.py` mirrors the
+  templates loader shape (dry-run mode, fail-fast validation,
+  orphan sweep).
+
+**Operator audit surfaced the 27701 gap** (post-shipment).
+Original 12 topics had 100 leaf-references with **ZERO** ISO
+27701 extensions — every primary_framework was `GDPR`,
+`ISO27001`, or `multi`, none `ISO27701`. The operator caught it:
+
+> *"how did we do with our models Program → Extension →
+> Obligation? what about 27701, it feels like the lost child in
+> this shipment"*
+
+Two-step remediation:
+1. **Addendum 1** — enriched 5 privacy-heavy topics (DSR, DPIA,
+   supplier, RoPA, breach) with ISO 27701 mirrors. Also fixed
+   two topics with zero programs backing their obligations —
+   obligation-without-program is theatre, not compliance.
+2. **Addendum 2** — added 5 new 27701-anchored topics: consent
+   lifecycle, privacy notice transparency, PII lifecycle,
+   data transfers/disclosures, processor operations. Also small
+   folds into existing topics (A.7.3.9 to DSR, A.7.2.6+7 to
+   supplier, A.7.3.10 + Art.22 to DPIA, A.7.2.8 to RoPA).
+
+Framework-role coverage progression:
+
+| Point | Topics | 27701 ext | GDPR obl | Programs | Total refs |
+|---|---|---|---|---|---|
+| Ship 54'.a original | 12 | 0 | 23 | 77 | 100 |
+| Addendum 1 | 12 | 12 | 23 | 79 | 114 |
+| Addendum 2 | **17** | **60** | **40** | **85** | **185** |
+
+Every 27701-anchored topic carries the full Program → Extension
+→ Obligation mesh — no purely-27701 theatre.
+
+### 54'.b — Consumer surfaces (with three UX iterations)
+
+Two new API endpoints:
+- `GET /api/v1/advisory/topics` — list + per-topic verdict
+  roll-up + framework-role composition (LEFT JOIN topic_leaves
+  ⋈ posture_controls with tenant RLS)
+- `GET /api/v1/advisory/topics/{slug}` — bundle detail with
+  per-leaf status ordered by `workflow_order`
+
+New SPA "Topics" mode with landing grid + detail view. Initially
+clicking a leaf redirected to the dashboard drill-in.
+
+**Iteration 1** (operator: *"the topics drilldown needs cleaning
+and we probably need to put it on the topics side bar not the
+dashboard because it is different from the dashboard drilldown"*):
+
+- Removed dashboard redirect; added inline expansion in the
+  topics view
+- Added `_scrub_topic_gap_text()` — strips `[Bridge: ...]`,
+  `[leaf-scan back-bind ...]`, `\-`/`\.` markdown escapes
+
+**Iteration 2** (operator: *"i thought it would be per leaf status
+and remediation like the dashboard"*):
+
+- Rewrote inline drill-in as a lazy-fetched 5-section shape:
+  role_note / status / MUST checklist / remediation / actions
+- New endpoint `GET /api/v1/advisory/leaf/{leaf_id:path}/detail`
+  reuses `build_per_must_advisory_data` filtered to the specific
+  leaf, JOINs with `document_findings` for source names
+- Confidence weights (high/medium/low) dropped per operator note
+  — Stage-1 review concern, not workflow-drill-in concern
+
+**Iteration 3** (operator: *"add the leaf-level state chip"*):
+
+- Added per-leaf state chip (Complete/In progress/Not started/
+  No MUSTs) alongside the parent control finding pill
+- Derived from MUST-completion ratio via
+  `_leaf_must_ids()` cache + one extra bulk query
+- Resolves the "A.5.34 8/8 present but parent NC" ambiguity
+  the operator surfaced during testing
+
+### 54'.c — Chat topic-bundle routing
+
+`QuestionType.TOPIC_BUNDLE` = "topic_bundle" added to the enum.
+`rag/topic_matcher.py` — curator-authored keyword→slug map for
+all 17 topics + trigger-verb detector
+(`how do I set up / walk me through / what's involved in ...`).
+Both trigger AND topic keyword required to route.
+
+**Pre-consensus intercept** turned out to be necessary. First
+implementation added topic detection to `classifier._check_
+explicit`, which is downstream of the consensus layer. Consensus
+was resolving "how do I set up DSR?" to `implementation` type
+with high confidence and skipping the LLM classifier entirely.
+Fix: add topic detection BEFORE `run_consensus()` fires.
+
+Response is deterministic — no LLM call:
+- `_build_topic_bundle_answer` in `arion_graph.py` loads the
+  bundle from Postgres + composes the answer text
+- Verdict roll-up + ordered workflow list + deep-link prompt to
+  Topics tab
+
+Verified across 4 topic queries (DSR, incident response, consent,
+supplier). Regression clean on non-topic queries (`how do I
+remediate A.5.15?` still routes to Ship 53' consultant answer).
+
+### 54'.d — Renderer half of the doc-control round-trip
+
+`docx_renderer.py` gained two opt-in markers:
+
+- `<<DOC_CONTROL>>` — 2-column table with Doc No / Revision /
+  Revision Date / Prepared By / Reviewed By / Approved By
+  (approval rows have wet-sign underscore placeholders —
+  deliberate; tenant fills at doc-control review)
+
+- `<<REVISION_HISTORY>>` — 4-column table (Version / Date /
+  Description of Change / Author) seeded with the current
+  template_version + today
+
+**Doc No derivation** — `_derive_doc_number(leaf_id,
+template_version)` maps leaf_type keyword to a convention prefix:
+`policy → POL`, `procedure → PRC`, `register → REG`,
+`record`/`log` → `REC`, etc. Deterministic + curator-overridable.
+
+Pilot on `req:5.2:information_security_policy` — top-of-stack
+ISMS policy, canonical controlled document. All 11 expected
+labels present in the rendered DOCX; doc number renders as
+`POL-5.2-Rev03` at template_version=3.
+
+### 54'.e — Intake round-trip closure (3 phases)
+
+**Phase 1 — Detector library** (`rag/intake/structural_
+evidence.py`):
+
+5 pattern detectors matched to compliance evidence each proves:
+
+  | Detector | Proves |
+  |---|---|
+  | `detect_doc_control_header` | Formal doc control + named owner + approval |
+  | `detect_revision_history` | Continual improvement via versioned control |
+  | `detect_signature_blocks` | Approval discipline |
+  | `detect_interested_parties` | ISO 27001 clause 4.2 stakeholders |
+  | `detect_table_of_contents` | Document-maturity signal |
+
+Handles two input shapes:
+- Prose (`Label: value` on same line — consultant reference docs)
+- Mammoth docx table shape (`__Label__` \n `value` — each cell
+  on its own line)
+
+`_normalize_mammoth_output()` strips markdown-escape artifacts
+(`\-`, `\.`, `\_`, `\(`, `\)`, `\/`) before pattern matching so
+detectors work uniformly on both shapes.
+
+13 unit tests covering: same-line prose (6/6 fields), mammoth
+two-line, below-threshold guard, revision-history inline table +
+docx one-cell-per-line table, interested parties bullet list,
+TOC with page numbers, full consultant shape, casual note
+negative test.
+
+**Design conversation at Phase 1↔2 handoff** (operator note):
+
+> *"we need to agree on how these additions get absorved/strengthen
+> existing signals or constitute new signals. remember the quality
+> of our intake is a diferentiator and if it turns out that we
+> have come up with a solid intake mechanism, it is a possible
+> patent"*
+
+Three integration shapes considered:
+- **A**: New inference_source lane only
+- **B**: New consensus signal only (boost, no direct evidence)
+- **C**: Hybrid — dual-role (self-standing evidence AND signal)
+
+Operator picked C. Phase 2 delivers the self-standing lane;
+Phase 3 delivers the signal fusion.
+
+**Phase 2 — Standalone inference_source lane**:
+
+Schema_v92 adds `structural_pattern` to
+`document_findings.inference_source` CHECK constraint +
+`structural` to `grounding_method` per Ship 6'.b provenance
+discipline.
+
+Binding logic in `structural_evidence_to_findings()`:
+
+  Pattern signal → MUST slug → target leaves count
+  Prepared_By populated → `:owner` → 37 leaves
+  Approved_By populated → `:approved` → 2 leaves
+  Signature block → `:approved` → 2 leaves
+  Revision_Date populated → `:rev_date` → 198 leaves
+  Revision history table → `:rev_date` + `:rev_reviewer` → 198 each
+  Interested parties → `:parties_listed` → 1 leaf (4.2)
+
+Each finding is provenance-preserving:
+`Approved By: Maria Silva, CEO — structural: doc-control header
+Approved By field` rather than `we detected a doc-control block`.
+
+Verified end-to-end on our own 5.2 DOCX round-trip: mammoth
+extraction + detector + finding conversion emits 3 structural
+findings on the 5.2 program_review leaf. Approved/owner
+correctly skipped when wet-sign placeholders present.
+
+**Phase 3 — Consensus signal fusion**:
+
+New signal `rag/intake/consensus_extraction/signals/structural_
+maturity.py`. Reads
+`doc.extraction_metrics['structural_evidence']` (Phase 2 stash)
+and emits per-candidate boost proportional to pattern count.
+
+Weight scale:
+| Patterns | Scale | Boost | Corroborators |
+|---|---|---|---|
+| 0 | doesn't fire | — | — |
+| 1 | 40% | 0.060 | +1 |
+| 2 | 70% | 0.105 | +1 |
+| ≥3 | 100% | 0.150 | +1 |
+
+Weight 0.15 sits between `per_protocol_scope` (0.10 tiebreaker)
+and `bm25` (0.25 lexical) — subordinate to per-candidate signals
+but adds real corroboration for formal artefacts.
+
+Added to `_POSITIVE_SIGNAL_NAMES` corroborator allowlist.
+Also added `bm25_topk` while there — was missing since Ship 43'.b
+(minor drive-by fix).
+
+Verified on real 5.2 DOCX: 2 patterns detected
+(doc_control + revision_history), boost=0.105, contributes +1
+corroborator to every scoped candidate.
+
+## Codified lessons
+
+### 1. Additive-overlay scoping is the safer default
+
+Operator constraint *"preserve per-leaf and bring in topical as
+an addition"* pinned the arc. Topics data model uses a many-to-
+many overlay (`topic_leaves`) — leaves know nothing about topics;
+topics reference leaves. No changes to the 845 per-leaf templates
+across the whole arc.
+
+Result: same tenant can use per-leaf drill-in (dashboard) AND
+workflow-oriented view (topics) without conflict. Existing eval
+suite unchanged. Zero migration on per-leaf work.
+
+**Rule**: when extending a mature system, ask if the new shape
+can be a pure overlay first. Overlays preserve the working
+substrate + reduce blast radius. Reserve invasive refactors for
+cases where overlay costs are demonstrably higher.
+
+### 2. Framework role model must be audited before claiming coverage
+
+Ship 54'.a original had 12 topics → **0 ISO 27701 extensions**
+across 100 leaf-refs. Purely GDPR obligations + ISO 27001 programs.
+Missing the whole extension layer.
+
+The gap was invisible until the operator asked *"27701 feels
+like the lost child"*. The initial coverage audit
+(programs/extensions/obligations count per topic) was the
+right diagnostic — and it surfaced two problems: no 27701
+extensions AND two topics (dpia_workflow, records_of_processing)
+that were obligation-only without program backing.
+
+**Rule**: when curating a taxonomy that spans a framework role
+model, audit coverage by role before shipping. A topic that
+carries an obligation without a program backing it is theatre.
+Same for extension coverage — if the framework has a role, at
+least some topics should carry that role.
+
+### 3. Consensus intercepts trump downstream short-circuits
+
+Ship 54'.c initial implementation added topic-bundle detection
+to `classifier._check_explicit` — a downstream helper. Live
+test showed the query still routed to `implementation` type.
+
+Root cause: `arion_graph.py::make_classify_node` runs
+`run_consensus()` first (Ship 2'.o retired the legacy classifier
+fallback). Consensus resolved "how do I set up DSR?" to
+`implementation` with high confidence (the trigger verb was
+enough to lock the type) and returned early.
+
+Fix: add topic detection BEFORE `run_consensus()` fires, not
+after. Same pattern as document_inventory intercepts.
+
+**Rule**: consensus runs first. If a stronger classifier resolves
+confidently to intent X, no downstream short-circuit for intent
+Y will fire. Add new intent detection at the same layer as
+consensus (or explicitly before it), not below.
+
+### 4. Operator UX feedback catches things automated tests can't
+
+54'.b required THREE addendums after initial ship, all from
+operator feedback:
+- Addendum 1: "the topics drilldown needs cleaning"
+- Addendum 2: "i thought it would be per leaf status and
+  remediation like the dashboard"
+- Addendum 3: "add the leaf-level state chip"
+
+Each was a distinct UX concern. None would have been caught
+by test-suite alone — they required someone driving the surface
+and asking "does this read right?" Test suite catches shape
+regressions; operator eyes catch communication gaps.
+
+**Rule**: build with live operator review in the loop. Ship a
+first iteration + solicit feedback + iterate. The alternative
+is over-engineering the first shot based on assumptions.
+
+### 5. Round-trip binding discipline is IP-worthy (per operator)
+
+Ship 54'.d emits `<<DOC_CONTROL>>` shape in generated DOCX.
+Ship 54'.e recognizes the same shape when tenants upload docs.
+Output schema = input schema. Templates become self-documenting:
+what we emit IS what we recognize.
+
+Consultant-toolkit norms (Doc No / Rev / Prepared / Reviewed /
+Approved header, revision-history table, interested-parties
+enumeration) are treated as first-class compliance evidence —
+not just "boilerplate to preserve in Word." Each detected
+pattern binds to a specific MUST with a specific excerpt.
+
+**Rule to codify** (per operator's *"possible patent"* note):
+when input and output shapes match by design, the audit trail
+travels with the document. This is genuinely differentiated
+from most compliance-intake tools that treat structural elements
+as noise to skip.
+
+### 6. Dual-role signal fusion — direct evidence AND corroborator
+
+Ship 54'.e explicitly chose the hybrid design (Option C) over
+"just a lane" (Option A) or "just a signal boost" (Option B).
+
+Structural patterns act on both axes from the SAME detection
+pass:
+- **Direct evidence** (Phase 2): Prepared_By populated →
+  `item:*:owner` binding with excerpt "Prepared By: Jane Doe"
+- **Signal boost** (Phase 3): doc-level structural presence →
+  +0.06 to +0.15 corroboration on every content-based candidate
+  in the same doc
+
+Most intake systems treat these as separate concerns —
+structural extractors vs. NLP extractors vs. content classifiers.
+The dual-role design lets one detection pass fuel multiple
+downstream consumers.
+
+**Rule**: when a signal has both intrinsic value AND extrinsic
+context, don't force a choice. Design for both roles from the
+detection pass onward.
+
+### 7. Signal weight tuning is contextual — subordinate vs. sovereign
+
+`structural_maturity_weight = 0.15` sits deliberately between
+`per_protocol_scope` (0.10) and `bm25` (0.25). Not competing
+with per-candidate signals like `fingerprint_keyword` (0.50) or
+`doc_mappings_target` (0.60).
+
+Rationale: structural presence is document-level context, not
+per-MUST evidence. It SHOULDN'T overpower content-based matches
+on specific requirements. It should tilt borderline cases and
+add corroboration where the doc IS a formal artefact.
+
+**Rule**: signal weight belongs in a tier hierarchy. Per-
+candidate exact matches at the top (0.5-1.0). Semantic/lexical
+in the middle (0.2-0.4). Document-context or tiebreakers at the
+bottom (0.1-0.2). Assigning a doc-level signal a per-candidate
+weight distorts the aggregator.
+
+### 8. Provenance-preserving structural extraction
+
+Every structural finding carries:
+- `checklist_item_id` — the specific MUST it binds to
+- `evidence_text` — auditor-facing narrative naming the pattern
+  and its extracted content ("Approved By: Maria Silva, CEO —
+  structural: doc-control header Approved By field")
+- `inference_source = 'structural_pattern'` — the lane
+- `grounding_method = 'structural'` — the auditable method
+
+An auditor tracing the finding sees exactly which line/table
+row generated it. Not "we detected a doc-control block" — but
+"line 34: Prepared By: Jane Doe proves item:5.2:owner".
+
+**Rule** (same as Ship 6'.b): every finding needs a provenance
+chain that lets an auditor reconstruct why we bound this
+evidence to this MUST. Structural evidence is no exception.
+
+## What Ship 54' did NOT do
+
+- **Bulk-add doc-control markers to templates.** Only pilot on
+  `req:5.2:information_security_policy`. Curator task to walk the
+  845 templates + add `<<DOC_CONTROL>>` + `<<REVISION_HISTORY>>`
+  where appropriate.
+- **Auto-fill Prepared_By / Reviewed_By / Approved_By from
+  tenant_profile.** Would need new tenant_profile fields
+  (`isms_manager_name`, `ceo_name`, `dp_officer_name`). Deferred.
+- **Revision-history append on template edits.** MVP seeds one
+  row for the current version + today. When the template_version
+  bumps, a new row would ideally append. Deferred to a future
+  arc.
+- **Test coverage for Phase 3 signal integration end-to-end.**
+  Signal unit-tested in isolation via mocked doc; not
+  end-to-end verified against a real intake run with
+  USE_CONSENSUS_EXTRACTION=1. Deferred.
+- **SPA Documents tab list view + per-doc detail modal.**
+  Deferred from Ship 51 + 52 + 53. Still deferred.
+- **Metadata derivation wire-up in posture_writer.py.** Deferred
+  from Ship 51 + 52 + 53. Still deferred.
+- **Extract `_TOPIC_SCOPE_RE` to shared module.** Deferred.
+- **CI grep guards** for polish preservation + raw Chroma
+  HttpClient + Rule 10 bracket-form. Deferred.
+- **Retire `pillWithLabel` alias.** Deferred from Ship 52.
+
+## Deferred / follow-on candidates
+
+### Ship 55 candidates (near-term)
+
+- Bulk-add `<<DOC_CONTROL>>` + `<<REVISION_HISTORY>>` markers to
+  policy/procedure templates (curator arc)
+- tenant_profile schema addition for Prepared_By / Reviewed_By /
+  Approved_By auto-fill in doc-control renderer
+- End-to-end intake test with USE_CONSENSUS_EXTRACTION=1 to
+  measure Phase 3 signal impact on precision/recall
+- Documents tab list view + per-doc detail modal
+- Metadata derivation wire-up in posture_writer.py
+- Chat: structured TopicBundleCard schema for the topic-bundle
+  response (currently prose + deep-link only)
+
+### Longer-term
+
+- **Patent filing preparation** for the intake mechanism —
+  round-trip binding, dual-role structural fusion, provenance-
+  preserving structural extraction (per operator's IP note).
+  Prior art search + spec draft.
+- Structural detection extension: records-produced section
+  (auto-cross-link procedures to registers) + reference-to-
+  other-documents (dependency graph writes).
+- Topic view: chat + topic-bundle context — asking follow-ups
+  inside a bundle context (session continuation).
+- Bulk-audit: run structural detectors across the whole Arion
+  demo document corpus + surface structural coverage metrics
+  in the dashboard.
+
+## The round-trip diagram
+
+```
+                   Ship 54'.d               Ship 54'.e
+                   ─────────                ─────────
+
+    db/templates/  →  DOCX renderer  →  tenant fills in
+    req__5_2__     →  <<DOC_CONTROL>> →  Prepared/Reviewed/
+    isp.md            block emitted       Approved names
+        │
+        │                                        │
+        │            downloaded                  │  uploaded back
+        ▼                                        ▼
+    tenant_profile                    intake/readers.py
+    substituted                       (mammoth for docx)
+        │                                        │
+        │                                        ▼
+        ▼                             structural_evidence.py
+    doc-control                       ├─ detect_doc_control_header
+    table with                        ├─ detect_revision_history
+    signature lines                   ├─ detect_signature_blocks
+                                      ├─ detect_interested_parties
+                                      └─ detect_table_of_contents
+                                                 │
+                                                 ├─ Phase 2:
+                                                 │   structural_evidence_to_findings()
+                                                 │   → document_findings rows
+                                                 │     with inference_source='structural_pattern'
+                                                 │
+                                                 └─ Phase 3:
+                                                     doc.extraction_metrics['structural_evidence']
+                                                     → structural_maturity signal
+                                                     → boost every candidate
+```
+
+Output schema = input schema. Same detection pass fuels both
+self-standing evidence AND consensus signal. That's the round-
+trip binding + dual-role fusion that IS the intake differentiator.
+
+## Verified state
+
+- Topics data: 17 topics, 185 leaf-references, cleanly grounded
+  across Program → Extension → Obligation
+- Topics API: 200 on list + detail endpoints; deep-linked to
+  dashboard for legacy drill-in
+- Topics SPA: nav mode added; landing grid + inline drill-in
+  with 5-section shape + per-leaf state chip
+- Chat topic-routing: 4 topic queries route correctly (DSR,
+  incident, consent, supplier); regression clean on non-topic
+  queries
+- Doc-control renderer: 5.2 ISP DOCX contains all 11 expected
+  labels; doc number renders as POL-5.2-Rev03
+- Structural detector: 13 unit tests pass; round-trip on our own
+  5.2 DOCX yields 3 findings on 5.2 program_review leaf
+  (item:5.2:rev_date × 2 + item:5.2:rev_reviewer)
+- Consensus signal: emits boost=0.105 for the 2-pattern 5.2 DOCX
+  case; scales correctly through the 40%/70%/100% ranges
+
+Ship 54' arc closes. The templating + advisory + intake round-
+trip is operationally complete across all three phases of the
+54'.e hybrid design. The workflow layer is a first-class
+consumer surface alongside the dashboard.
