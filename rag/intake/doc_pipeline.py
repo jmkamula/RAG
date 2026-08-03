@@ -418,6 +418,51 @@ class DocumentPipeline:
             findings = extract(doc, controls, self.api_key)
             s3_ms = int((time.time() - t3) * 1000)
 
+            # ── Ship 54'.e Phase 2 — structural evidence lane ──
+            # Detects consultant-toolkit structural patterns
+            # (doc-control header, revision history, interested parties,
+            # etc.) in the uploaded doc + binds them to specific MUST
+            # items on the in-scope controls. Additive to content-based
+            # extraction — same finding shape, new inference_source
+            # 'structural_pattern'. Companion to Ship 54'.d renderer.
+            try:
+                from rag.intake.structural_evidence import (
+                    extract_structural_evidence,
+                    structural_evidence_to_findings,
+                )
+                _text_for_structural = doc.markdown or doc.full_text or ""
+                _structural = extract_structural_evidence(_text_for_structural)
+                if _structural.any_detected:
+                    _cref_std_map = {
+                        c.get("ref"): c.get("standard_id", "")
+                        for c in controls if c.get("ref")
+                    }
+                    _structural_findings = structural_evidence_to_findings(
+                        _structural,
+                        upload_id     = doc.upload_id or "",
+                        tenant_id     = tenant_id,
+                        document_name = doc.original_name or file_name,
+                        control_refs  = list(_cref_std_map.keys()),
+                        standard_ids  = _cref_std_map,
+                    )
+                    if _structural_findings:
+                        findings.extend(_structural_findings)
+                    # Stash doc-level summary for Ship 54'.e Phase 3
+                    # consensus-signal integration (structural_maturity
+                    # signal boosting content-based extractions).
+                    doc.extraction_metrics["structural_evidence"] = (
+                        _structural.summary()
+                    )
+                    logger.info(
+                        f"structural evidence: {len(_structural_findings)} "
+                        f"findings from {sum(1 for k, v in _structural.summary().items() if v)} patterns"
+                    )
+            except Exception as _se_exc:
+                logger.warning(
+                    f"structural evidence detection failed on {file_name}: "
+                    f"{_se_exc}"
+                )
+
             # Prefer the extractor's tracked LLM-call count over the
             # section-count estimate — section_based now sometimes
             # rebuilds sections from markdown chunks, so len(raw_sections)

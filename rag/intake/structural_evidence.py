@@ -440,10 +440,200 @@ def extract_structural_evidence(text: str) -> StructuralEvidence:
     )
 
 
+# ── Ship 54'.e Phase 2 — DocumentFinding conversion ────────────────────
+#
+# Maps detected structural patterns to document_findings rows with
+# checklist_item_id bindings + auditor-facing excerpts. Called from
+# the intake pipeline after content-based extraction.
+#
+# Binding strategy — Phase 2 targets 4 universal MUST slugs that
+# appear across many curated leaves:
+#
+#   :owner           — 37 leaves (any leaf with an owner MUST)
+#                       ← doc-control Prepared_By populated
+#   :approved        — 2 leaves (top policies)
+#                       ← doc-control Approved_By populated
+#                       ← signature block present
+#   :rev_date        — 198 leaves (any leaf with rev_date MUST —
+#                       covers all *_program_review leaves)
+#                       ← doc-control Rev_Date populated
+#                       ← revision history table present
+#   :rev_reviewer    — 198 leaves (paired with rev_date)
+#                       ← revision history table present
+#   :parties_listed  — 1 leaf (req:4.2:interested_parties_register)
+#                       ← interested parties enumeration present
+#
+# Excerpts are pattern-specific + auditor-defensible: "Prepared By:
+# Jane Doe" not "we detected a doc-control block". Every finding is
+# provenance-traceable to a specific line/table row in the doc.
+
+# Universal target MUST slugs. Each maps a structural detection to
+# a MUST slug suffix; the finding-builder iterates the leaf catalog
+# looking for MUSTs ending with each slug on the target controls.
+_STRUCTURAL_BINDING_SLUGS = {
+    "prepared_by":         "owner",
+    "approved_by":         "approved",
+    "signature_present":   "approved",
+    "rev_date":            "rev_date",
+    "rev_history":         "rev_date",       # revision history → rev_date
+    "rev_reviewer":        "rev_reviewer",
+    "interested_parties":  "parties_listed",
+}
+
+
+def _leaf_musts_for(control_ref: str) -> dict[str, list[tuple[str, str]]]:
+    """Return {slug_suffix: [(leaf_id, must_id_full), ...]} for a
+    given control_ref by walking the canonical catalog union.
+
+    Called from structural_evidence_to_findings — cached per-call by
+    the caller via a small dict so multi-control docs don't re-walk
+    the catalog for each pattern.
+    """
+    from enrichment.documents.document_requirements import (
+        ALL_EVIDENCE_REQUIREMENTS, ALL_DERIVED_SPECS,
+    )
+    out: dict[str, list[tuple[str, str]]] = {}
+    all_ers = list(ALL_EVIDENCE_REQUIREMENTS)
+    for spec in ALL_DERIVED_SPECS:
+        all_ers.extend(spec.direct_evidence)
+    for er in all_ers:
+        # Match leaves for this control_ref
+        er_ctrl = (er.id or "").split(":")[1] if ":" in (er.id or "") else ""
+        if er_ctrl != control_ref:
+            continue
+        for it in er.must_contain:
+            slug = it.id.split(":")[-1] if ":" in it.id else it.id
+            out.setdefault(slug, []).append((er.id, it.id))
+    return out
+
+
+def structural_evidence_to_findings(
+    ev: "StructuralEvidence",
+    *,
+    upload_id:      str,
+    tenant_id:      str,
+    document_name:  str,
+    control_refs:   list[str],
+    standard_ids:   dict[str, str],
+) -> list:
+    """Convert detected structural patterns to DocumentFinding rows.
+
+    Args:
+        ev             — result of extract_structural_evidence(doc_text)
+        upload_id      — document_uploads.id
+        tenant_id      — tenant UUID
+        document_name  — auditor-facing document title
+        control_refs   — controls the doc was scoped to (from extract())
+        standard_ids   — {control_ref: standard_id} for canonical ref tagging
+
+    Returns list[DocumentFinding] with inference_source='structural_pattern'
+    on each row. Skips patterns that produce no bindings on the given
+    control scope. Returns [] when no structural patterns detected OR
+    when no target MUST slugs are present on any of the given controls.
+    """
+    from rag.intake.models import DocumentFinding
+
+    if not ev.any_detected:
+        return []
+
+    # Cache leaf-must lookups per control_ref
+    _cache: dict[str, dict[str, list[tuple[str, str]]]] = {}
+    def _musts(cref: str):
+        if cref not in _cache:
+            _cache[cref] = _leaf_musts_for(cref)
+        return _cache[cref]
+
+    # Per-pattern excerpt + binding-key mapping
+    pattern_bindings: list[tuple[str, str, str]] = []
+    # tuples: (binding_key, excerpt, evidence_text)
+
+    if ev.doc_control.is_present:
+        if ev.doc_control.prepared_by:
+            pattern_bindings.append((
+                "prepared_by",
+                f"Prepared By: {ev.doc_control.prepared_by}",
+                f"Document owner named: {ev.doc_control.prepared_by} (structural: doc-control header Prepared By field)",
+            ))
+        if ev.doc_control.approved_by:
+            pattern_bindings.append((
+                "approved_by",
+                f"Approved By: {ev.doc_control.approved_by}",
+                f"Document approved: {ev.doc_control.approved_by} (structural: doc-control header Approved By field)",
+            ))
+        if ev.doc_control.rev_date:
+            pattern_bindings.append((
+                "rev_date",
+                f"Revision Date: {ev.doc_control.rev_date}",
+                f"Revision date recorded: {ev.doc_control.rev_date} (structural: doc-control header)",
+            ))
+
+    if ev.revision_history.present:
+        pattern_bindings.append((
+            "rev_history",
+            (ev.revision_history.excerpt or "Revision History section present")[:200],
+            f"Revision history table present with {ev.revision_history.row_count} row(s) (structural: versioned document control)",
+        ))
+        pattern_bindings.append((
+            "rev_reviewer",
+            (ev.revision_history.excerpt or "Revision History section present")[:200],
+            "Revision history documents named reviewers per version (structural)",
+        ))
+
+    if ev.signatures.present:
+        pattern_bindings.append((
+            "signature_present",
+            (ev.signatures.excerpt or "Signature block present")[:200],
+            f"Signature block(s) present ({ev.signatures.count}) — structural approval evidence",
+        ))
+
+    if ev.interested_parties.present:
+        parties_str = ", ".join(ev.interested_parties.parties[:8])
+        pattern_bindings.append((
+            "interested_parties",
+            f"Interested Parties: {parties_str}"[:200],
+            f"Interested parties enumerated ({len(ev.interested_parties.parties)}): {parties_str} (structural)",
+        ))
+
+    if not pattern_bindings:
+        return []
+
+    # Build findings by pairing each pattern with matching leaves per control
+    findings: list[DocumentFinding] = []
+    for control_ref in control_refs:
+        std_id = standard_ids.get(control_ref, "")
+        musts = _musts(control_ref)
+        for binding_key, excerpt, evidence_text in pattern_bindings:
+            slug = _STRUCTURAL_BINDING_SLUGS.get(binding_key)
+            if not slug:
+                continue
+            leaf_hits = musts.get(slug, [])
+            if not leaf_hits:
+                continue
+            # Emit one finding per (control_ref, checklist_item_id).
+            # If multiple leaves under the same control share the same
+            # slug (rare), emit once per leaf's must_id.
+            for _leaf_id, must_id_full in leaf_hits:
+                findings.append(DocumentFinding(
+                    upload_id         = upload_id,
+                    tenant_id         = tenant_id,
+                    document_name     = document_name,
+                    control_ref       = control_ref,
+                    standard_id       = std_id,
+                    finding           = "Comply",   # structural evidence = the requirement IS met
+                    evidence_text     = evidence_text,
+                    confidence        = "medium",
+                    checklist_item_id = must_id_full,
+                    inference_source  = "structural_pattern",
+                ))
+
+    return findings
+
+
 __all__ = [
     "DocControlHeader", "RevisionHistory", "SignatureBlock",
     "InterestedParties", "TableOfContents", "StructuralEvidence",
     "detect_doc_control_header", "detect_revision_history",
     "detect_signature_blocks", "detect_interested_parties",
     "detect_table_of_contents", "extract_structural_evidence",
+    "structural_evidence_to_findings",
 ]
