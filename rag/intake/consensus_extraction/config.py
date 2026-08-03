@@ -72,6 +72,18 @@ class ExtractionConsensusConfig:
     bm25_topk:                 int   = 30
     bm25_score_floor:          float = 1.0
 
+    # Ship 54'.e Phase 3 — structural_maturity as 10th consensus signal.
+    # Doc-level boost that fires when the uploaded document carries
+    # consultant-toolkit structural shape (doc-control header,
+    # revision history table, interested parties, TOC). Reads the
+    # summary Phase 2 stashes on doc.extraction_metrics. Every
+    # scoped candidate gets the same per-doc boost — not a per-
+    # candidate match. Weight 0.15 sits between per_protocol_scope
+    # (0.10, tiebreaker) and bm25 (0.25, lexical) — the signal is
+    # subordinate to per-candidate evidence but adds real corroboration
+    # when the doc IS a formal artefact.
+    structural_maturity_weight: float = 0.15
+
     # Feature flags
     llm_arbiter_enabled:       bool = False    # False in shadow mode; True post-cutover
     # Ship 37'.b — toggle for the no-excerpt-auto-drop invariant.

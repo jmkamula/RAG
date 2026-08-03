@@ -33,6 +33,8 @@ _POSITIVE_SIGNAL_NAMES = {
     "semantic_fit_gate",     # both pass and fail modes emit for this signal;
                              #   pass counts as corroborator, fail doesn't
     "bridge_substantiveness",
+    "bm25_topk",             # Ship 43'.b — BM25 lexical corroborator
+    "structural_maturity",   # Ship 54'.e Phase 3 — doc-quality corroborator
 }
 
 

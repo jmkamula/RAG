@@ -34,6 +34,7 @@ from rag.intake.consensus_extraction.signals import (
     semantic_fit_gate,
     content_shape_penalty,
     evidence_uniqueness,
+    structural_maturity,
 )
 
 from rag.telemetry import get_tracer, capture_content
@@ -144,6 +145,14 @@ def run_extraction_consensus(
             doc, widened_leaf_ids, cfg, fingerprint_signal=sig_fingerprint,
         )
 
+        # Ship 54'.e Phase 3 — doc-level structural maturity boost.
+        # Reads doc.extraction_metrics['structural_evidence'] populated
+        # by Phase 2's structural_evidence detection pass.
+        sig_structural      = _run_signal(
+            "structural_maturity", structural_maturity,
+            doc, widened_leaf_ids, cfg,
+        )
+
         signals = [
             sig_explicit_ref,
             sig_doc_mappings,
@@ -154,6 +163,7 @@ def run_extraction_consensus(
             sig_semantic_fit,
             sig_content_shape,
             sig_evidence_uniq,
+            sig_structural,
         ]
 
         with _tracer.start_as_current_span("arion.consensus.aggregate") as agg_span:
