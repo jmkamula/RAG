@@ -594,7 +594,31 @@ CLEAR_INTENT_PHRASES = [
     # Direct 27701 Annex A/B ref queries — "is A.7.2.6 compliant?" etc.
     # These already flow through the posture-by-ref pattern above but this
     # explicit anchor gives short-circuit priority.
-    (re.compile(r'\b(?:is|what\s+is)\s+(?:our\s+)?(?:iso\s*27701\s+)?(A\.7\.[2-5]\.\d+|B\.8\.[2-5]\.\d+)\s+(?:compliant|posture|status|finding|a\s+nc|an?\s+ofi)\b', re.IGNORECASE),
+    (re.compile(r'\b(?:is|what\s+is)\s+(?:our\s+)?(?:iso\s*27701\s+)?(A\.7\.[2-5]\.\d+|B\.8\.[2-5]\.\d+)\s+(?:compliant|posture|status|finding|a\s+nc|an?\s+ofi|applicable(?:\s+to\s+us)?|in\s+scope)\b', re.IGNORECASE),
+     "posture_check", []),
+    # Ship 54' addendum — applicability/scope queries route to posture_check.
+    # "is X applicable?" / "does X apply to us?" / "are we in scope for X?"
+    # are tenant-state-relative — asking whether a specific control applies.
+    # Case #205 exposed the gap when this pattern didn't exist. Covers
+    # ISO 27001 Annex A + ISMS body + GDPR Articles + ISO 27701 A.7/B.8 refs.
+    (re.compile(
+        r'\b(?:is|are)\s+(?:our\s+|the\s+)?'
+        r'(?:iso\s*2700\d\s+)?'
+        r'(?:[AB]\.[\d.]+|\d+\.[\d.]+|Art\.[\d.]+)'
+        r'\s+applicable(?:\s+to\s+us)?\b',
+        re.IGNORECASE),
+     "posture_check", []),
+    (re.compile(
+        r'\bdoes\s+(?:iso\s*2700\d\s+)?'
+        r'(?:[AB]\.[\d.]+|\d+\.[\d.]+|Art\.[\d.]+)'
+        r'\s+apply(?:\s+to\s+us)?\b',
+        re.IGNORECASE),
+     "posture_check", []),
+    (re.compile(
+        r'\bare\s+we\s+in\s+scope\s+for\s+'
+        r'(?:iso\s*2700\d\s+)?'
+        r'(?:[AB]\.[\d.]+|\d+\.[\d.]+|Art\.[\d.]+)\b',
+        re.IGNORECASE),
      "posture_check", []),
 
     # Posture-by-ref — "(what is) our (compliance) posture/status on/for <X>"

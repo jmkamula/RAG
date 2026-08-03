@@ -127,6 +127,37 @@ def _signals_lock_framework(signals: list[SignalOutput]) -> Optional[str]:
     return None
 
 
+def _signals_lock_refs(signals: list[SignalOutput]) -> list[str]:
+    """Return refs from deterministic signals (Signal B explicit_refs +
+    Signal C curated_lexicon) that the gatekeeper cannot clear.
+
+    Ship 54' addendum (2026-08-03) — closes the case #222 stochastic-
+    FAIL root cause. The gatekeeper was clearing Signal C's curator-
+    tier refs (weight 1.00) with reasoning like "clear refs as none
+    are from ISO 27005" — not understanding that ISO 27005 is
+    GUIDANCE FOR ISO 27001 clause 6.1.2, so 6.1.2 IS the correct ref
+    for a "what does ISO 27005 recommend..." query.
+
+    Mirrors _signals_lock_question_type / _signals_lock_framework
+    discipline: deterministic-signal opinions cannot be overridden
+    by the LLM arbiter. The gatekeeper can ADD refs, MODIFY refs
+    outside the locked set, or REJECT to insufficient — but the
+    Signal B / Signal C locked refs stay in the final ref list.
+    """
+    locked: list[str] = []
+    seen: set[str] = set()
+    for s in signals:
+        if not s.fired:
+            continue
+        if s.name not in ("explicit_refs", "curated_lexicon"):
+            continue
+        for ref, _weight in (s.refs or []):
+            if ref and ref not in seen:
+                locked.append(ref)
+                seen.add(ref)
+    return locked
+
+
 def _apply_decision(
     tentative:  ConsensusResult,
     decision:   dict,
@@ -199,6 +230,28 @@ def _apply_decision(
                 f"{proposed_fw!r}, explicit_refs locked {locked_fw!r}"
             )
             proposed_fw = None   # discard the LLM's opinion
+
+        # Ship 54' addendum — refs: Signal B + Signal C locks.
+        # The gatekeeper LLM was clearing curator-tier refs (Signal C
+        # weight 1.00) with reasoning that mistakes guidance-authority
+        # bridges (e.g., "clear 6.1.2 because query mentions ISO 27005"
+        # — but 6.1.2 IS the clause that ISO 27005 provides guidance
+        # for). Same discipline as _signals_lock_question_type + framework:
+        # deterministic-signal refs cannot be dropped, only augmented.
+        locked_refs = _signals_lock_refs(signals) if signals is not None else []
+        if locked_refs and proposed_refs is not None:
+            missing_from_proposal = [r for r in locked_refs if r not in proposed_refs]
+            if missing_from_proposal:
+                override_notes.append(
+                    f"blocked_refs_drop: gatekeeper tried to drop "
+                    f"deterministic refs {missing_from_proposal!r} — "
+                    f"restored (Signal B/C locked)"
+                )
+                # Prepend locked refs so they stay at the top of the
+                # ranked list (mirrors curator-tier weight priority).
+                proposed_refs = list(locked_refs) + [
+                    r for r in proposed_refs if r not in locked_refs
+                ]
 
         # If the gatekeeper resolved question_type on an ambiguous
         # verdict, upgrade to confident — the intent IS clear now.
