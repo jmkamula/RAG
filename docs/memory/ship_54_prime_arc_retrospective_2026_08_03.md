@@ -1,6 +1,6 @@
 ---
 name: ship-54-prime-arc-retrospective-2026-08-03
-description: "Ship 54' arc retrospective — templating + advisory framework extension. 12 sub-arcs across 2026-08-02→08-03 delivered: topics data layer (17 curated bundles, 185 leaf-refs across Program/Extension/Obligation mesh), advisory API + SPA Topics view + leaf-scoped drill-in with per-leaf state chip, chat topic-bundle intent routing, doc-control renderer block, and the 3-phase structural evidence intake round-trip (detector library + standalone lane + consensus signal fusion). Round-trip binding + dual-role structural fusion codified as IP-worthy elements per operator note. 6 codified lessons captured. Ship 54'.e Phase 3 completes the consensus-signal side of the hybrid design; the intake round-trip is operationally closed."
+description: "Ship 54' arc retrospective — templating + advisory framework extension. 13 sub-arcs across 2026-08-02→08-03 delivered: topics data layer (17 curated bundles, 185 leaf-refs across Program/Extension/Obligation mesh), advisory API + SPA Topics view + leaf-scoped drill-in with per-leaf state chip, chat topic-bundle intent routing + trigger-verb tightening addendum (eval #20 caught over-routing on 'implement'), doc-control renderer block, and the 3-phase structural evidence intake round-trip (detector library + standalone lane + consensus signal fusion). Round-trip binding + dual-role structural fusion codified as IP-worthy elements per operator note. 9 codified lessons captured. Ship 54'.e Phase 3 completes the consensus-signal side of the hybrid design; the intake round-trip is operationally closed. Eval baseline post-arc: 229/232 PASS 1 FAIL 2 WARN — #222 is Ship 53'.j stochastic (MISSING '6.1.2' under long-session context accumulation); #200 pre-existing WARN; #205 new WARN (posture_check misroute to unknown, unrelated to Ship 54' changes)."
 metadata:
   node_type: memory
   type: project
@@ -69,6 +69,7 @@ Bring in the workflow layer + doc-control shape as pure overlay.
 | 54'.b addendum 2 | Leaf-scoped MUST checklist + per-leaf detail endpoint. Replaced dashboard-style noise with clean 5-section shape: role_note / status / MUST checklist / remediation / actions | `5791f49` |
 | 54'.b addendum 3 | Per-leaf state chip (Complete/In progress/Not started) alongside parent control finding. Resolves the "A.5.34 leaf shows 8/8 but parent NC" UX confusion | `7da35e9` |
 | 54'.c | Chat topic-bundle intent routing — new `QuestionType.TOPIC_BUNDLE` + `rag/topic_matcher.py` + pre-consensus intercept + deterministic short-circuit response | `71b3b4b` |
+| 54'.c addendum | Tighten topic-matcher trigger verbs — remove `implement` + bare `do` from the trigger-verb set (per-control verbs, not workflow-scope). Caught by eval case #20 over-routing to `topic_bundle` when the case expects `implementation` | `226ecef` |
 | 54'.d | Doc-control renderer block — `<<DOC_CONTROL>>` + `<<REVISION_HISTORY>>` markers → DOCX tables with Doc No / Rev / Prepared / Reviewed / Approved + revision history seed | `cde5190` |
 | 54'.e Phase 1 | Structural evidence detector library — 5 pattern detectors + 13 unit tests + mammoth-normalization for docx-extracted markdown | `2b0d7e5` |
 | 54'.e Phase 2 | Intake wiring — schema_v92 adds `structural_pattern` inference_source + `structural` grounding_method; new binding logic emits document_findings for detected patterns with per-MUST bindings + provenance-preserving excerpts | `bc139eb` |
@@ -201,6 +202,31 @@ Response is deterministic — no LLM call:
 Verified across 4 topic queries (DSR, incident response, consent,
 supplier). Regression clean on non-topic queries (`how do I
 remediate A.5.15?` still routes to Ship 53' consultant answer).
+
+**Addendum — trigger-verb tightening** (post-Ship-54' eval rerun
+surfaced case #20 over-routing):
+
+The initial trigger regex included `implement` alongside genuine
+workflow verbs (set up / walk me through / manage / etc.). Eval
+case #20 ("how do we implement a formal access rights review?")
+routed to `topic_bundle` (access_rights_lifecycle) when the case
+expects `implementation` — the query is asking about a specific
+compliance activity within a bundle, not the whole bundle.
+
+Root cause: `implement` is a per-control verb — natural phrasing
+is "how do I implement A.5.15?" — while `set up / walk me through`
+are inherently workflow-scope. Both patterns felt "how do I
+approach X" on the surface but carry different scope.
+
+Fix — remove `implement` + bare `do` from the trigger set. Final
+alternatives: `set up / set-up / handle / run / manage / approach`
++ `walk me through / what's involved in / tell me about / guide
+me through / help me with / show me the workflow for`. All
+inherently workflow-scope, none per-control.
+
+Verified — 6 positive cases still route (DSR/incident/consent/
+supplier/breach/DPIA); #20 re-run PASS; regression check clean
+on `how do I remediate A.5.15?` and `what are our NC findings?`.
 
 ### 54'.d — Renderer half of the doc-control round-trip
 
@@ -459,7 +485,32 @@ in the middle (0.2-0.4). Document-context or tiebreakers at the
 bottom (0.1-0.2). Assigning a doc-level signal a per-candidate
 weight distorts the aggregator.
 
-### 8. Provenance-preserving structural extraction
+### 8. New intent types need trigger-verb precision
+
+Ship 54'.c's initial trigger regex over-routed on `implement`.
+"How do I implement A.5.15?" is per-control; "how do I set up
+DSR management?" is per-bundle. Both use `how do I <verb>` shape
+but carry different scope.
+
+The eval baseline rerun caught this via case #20 — the trigger
+regex was catching per-control queries whenever they happened to
+mention a topic keyword. Fix: audit each trigger verb for its
+natural scope and remove the ambiguous ones.
+
+Final workflow-shape verbs (all inherently bundle-scope):
+`set up / set-up / handle / run / manage / approach / walk me
+through / what's involved in / tell me about / guide me through /
+help me with / show me the workflow for`.
+
+**Rule**: when adding a new intent type via CLEAR_INTENT_PHRASES-
+style routing, audit each trigger token for how it commonly
+co-occurs. Ambiguous verbs (`implement`, `do`, `handle` sometimes)
+that appear naturally in BOTH per-control and per-bundle phrasing
+need to be tested against the eval suite before shipping. New
+intents pass through the whole normal-query surface + risk over-
+routing on shared vocabulary.
+
+### 9. Provenance-preserving structural extraction
 
 Every structural finding carries:
 - `checklist_item_id` — the specific MUST it binds to
