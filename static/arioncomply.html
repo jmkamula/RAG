@@ -4243,27 +4243,37 @@ async function selectHeatCell(c, ev) {
     `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${escapeHtml(c.gap_excerpt || '')}</div>
      <div style="margin-top:10px;font-size:11px;color:#9C9A8E"><i class="ti ti-loader-2"></i> Loading details…</div>`;
 
+  // Gap description text is core atlas content — always render if
+  // present. Previously the advisory panels (removed in Ship 54'
+  // Option A completion) carried gap prose too, so for leaf-only
+  // controls where the slim verdict tree returns empty, dp-gap was
+  // ending up blank. Ensure the block always contains SOMETHING
+  // meaningful when a gap exists.
+  const _gapBox = (txt) => `
+    <div style="padding:8px 10px;background:#FAF8F2;border-radius:6px;
+                border:1px solid #E8E5DA;font-size:12px;line-height:1.5;
+                color:#3D3B32;white-space:pre-wrap">${escapeHtml(txt)}</div>`;
   try {
     const d = await api(`/api/v1/stage2/queue/${encodeURIComponent(c.control_ref)}`);
     if (selected !== null && selected.control_ref === c.control_ref && d.verdict) {
-      // slim: skip the coverage header + leaf list — Evidence coverage
-      // panel below covers the same info with richer per-leaf display.
-      // renderVerdictTree still emits derived-children blocks for
-      // DerivedSpec controls (Art.30, Art.32, etc.) since those have no
-      // equivalent elsewhere; returns empty string for leaf-only controls
-      // and the Evidence coverage + advisory panels take over.
+      // Slim verdict tree emits derived-children blocks for DerivedSpec
+      // controls (Art.30, Art.32, etc.); returns empty string for leaf-
+      // only controls. Show gap text ALWAYS + slim tree ONLY if it has
+      // content — no more empty "Gap description" heading with nothing
+      // beneath (Ship 54' Option A completion fix).
       const slimTree = renderVerdictTree(d.verdict, d.standard_id || c.standard_id || '', {slim: true});
-      document.getElementById('dp-gap').innerHTML = slimTree;
+      const gapHtml  = c.gap_excerpt ? _gapBox(c.gap_excerpt) : '';
+      const combined = gapHtml + (slimTree || '');
+      document.getElementById('dp-gap').innerHTML = combined || _gapBox('(no gap text recorded)');
     } else if (selected !== null && selected.control_ref === c.control_ref) {
-      // No engine verdict — drop the spinner and keep the gap excerpt only.
       document.getElementById('dp-gap').innerHTML =
-        `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${escapeHtml(c.gap_excerpt || '(no engine verdict; no gap text recorded)')}</div>`;
+        _gapBox(c.gap_excerpt || '(no engine verdict; no gap text recorded)');
     }
   } catch (e) {
     if (selected !== null && selected.control_ref === c.control_ref) {
       document.getElementById('dp-gap').innerHTML =
-        `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${escapeHtml(c.gap_excerpt || '')}</div>
-         <div style="margin-top:8px;font-size:11px;color:#9C9A8E">No derivation tree available for this control.</div>`;
+        _gapBox(c.gap_excerpt || '(no gap text recorded)') +
+        `<div style="margin-top:8px;font-size:11px;color:#9C9A8E">No derivation tree available for this control.</div>`;
     }
   }
 
