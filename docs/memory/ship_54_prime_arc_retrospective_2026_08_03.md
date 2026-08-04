@@ -1,6 +1,6 @@
 ---
 name: ship-54-prime-arc-retrospective-2026-08-03
-description: "Ship 54' arc retrospective — templating + advisory framework extension. 13 sub-arcs across 2026-08-02→08-03 delivered: topics data layer (17 curated bundles, 185 leaf-refs across Program/Extension/Obligation mesh), advisory API + SPA Topics view + leaf-scoped drill-in with per-leaf state chip, chat topic-bundle intent routing + trigger-verb tightening addendum (eval #20 caught over-routing on 'implement'), doc-control renderer block, and the 3-phase structural evidence intake round-trip (detector library + standalone lane + consensus signal fusion). Round-trip binding + dual-role structural fusion codified as IP-worthy elements per operator note. 9 codified lessons captured. Ship 54'.e Phase 3 completes the consensus-signal side of the hybrid design; the intake round-trip is operationally closed. Eval baseline post-arc: 229/232 PASS 1 FAIL 2 WARN — #222 is Ship 53'.j stochastic (MISSING '6.1.2' under long-session context accumulation); #200 pre-existing WARN; #205 new WARN (posture_check misroute to unknown, unrelated to Ship 54' changes)."
+description: "Ship 54' arc retrospective — templating + advisory framework extension. 18 sub-arcs across 2026-08-02→08-04 delivered: topics data layer (17 curated bundles, 185 leaf-refs across Program/Extension/Obligation mesh), advisory API + SPA Topics view + leaf-scoped drill-in with per-leaf state chip, chat topic-bundle intent routing + trigger-verb tightening addendum, doc-control renderer block, 3-phase structural evidence intake round-trip (detector library + standalone lane + consensus signal fusion), root-cause fixes on eval FAILs #222 (Signal C ref lock in gatekeeper) + #205 (applicability CLEAR_INTENT gap), and 4-iteration atlas/playbook border sharpening (Dashboard = compliance ATLAS, Topics = compliance PLAYBOOK, explicit cross-nav pills + escape hatch). Round-trip binding + dual-role structural fusion codified as IP-worthy elements per operator note. 11 codified lessons captured. Eval baseline post-arc: 231/232 PASS 0 FAIL 1 WARN (only pre-existing #200 documented unrelated to LLM behavior)."
 metadata:
   node_type: memory
   type: project
@@ -70,6 +70,11 @@ Bring in the workflow layer + doc-control shape as pure overlay.
 | 54'.b addendum 3 | Per-leaf state chip (Complete/In progress/Not started) alongside parent control finding. Resolves the "A.5.34 leaf shows 8/8 but parent NC" UX confusion | `7da35e9` |
 | 54'.c | Chat topic-bundle intent routing — new `QuestionType.TOPIC_BUNDLE` + `rag/topic_matcher.py` + pre-consensus intercept + deterministic short-circuit response | `71b3b4b` |
 | 54'.c addendum | Tighten topic-matcher trigger verbs — remove `implement` + bare `do` from the trigger-verb set (per-control verbs, not workflow-scope). Caught by eval case #20 over-routing to `topic_bundle` when the case expects `implementation` | `226ecef` |
+| 54' post-eval fix | Root-cause fixes for eval cases #222 (Signal C's refs cleared by LLM gatekeeper) + #205 (CLEAR_INTENT gap on "is X applicable?"). Neither was stochastic — both were traceable via `chat_consensus_log.disagreement_notes` + `chat_casefile_log.question_type` | `1155fbd` |
+| 54' cross-nav 1 | Dashboard ↔ Topics cross-nav pills. New endpoint `GET /api/v1/dashboard/control/{ref}/topics`; "Part of N compliance topics" panel in Dashboard drill-in; sharpened "Open X in Dashboard" label on Topics leaf escape hatch | `4fb3f7d` |
+| 54' border 1 | Complete Option A — drop Evidence-classes panel + "How to strengthen X" advisory from Dashboard drill-in (over-shoot; removed too much including the sources list) | `efb5652` |
+| 54' border 2 | Restore gap-text box for leaf-only controls where slim verdict tree returned empty (under-shoot fix — Gap description heading was appearing with empty content) | `7052792` |
+| 54' border 3 | Restore evidence-classes panel in `atlasMode: true` — keeps yield stats + per-leaf sources list (auditor-forensic); suppresses template CTA + Evidence Package + Cite external source buttons (self-service, Topics job) | `11630e8` |
 | 54'.d | Doc-control renderer block — `<<DOC_CONTROL>>` + `<<REVISION_HISTORY>>` markers → DOCX tables with Doc No / Rev / Prepared / Reviewed / Approved + revision history seed | `cde5190` |
 | 54'.e Phase 1 | Structural evidence detector library — 5 pattern detectors + 13 unit tests + mammoth-normalization for docx-extracted markdown | `2b0d7e5` |
 | 54'.e Phase 2 | Intake wiring — schema_v92 adds `structural_pattern` inference_source + `structural` grounding_method; new binding logic emits document_findings for detected patterns with per-MUST bindings + provenance-preserving excerpts | `bc139eb` |
@@ -350,6 +355,106 @@ Verified on real 5.2 DOCX: 2 patterns detected
 (doc_control + revision_history), boost=0.105, contributes +1
 corroborator to every scoped candidate.
 
+### 54' post-arc — atlas/playbook border sharpening
+
+After the arc was declared "closed," operator surfaced two follow-
+ons that turned into 5 additional commits:
+
+**Root-cause fixes on eval FAILs (`1155fbd`)**
+
+Ship 54' initial eval rerun showed 229/232 with 1 FAIL (#222)
+and 2 WARNs. Operator pushed back on the retro's optimistic
+"stochastic" framing:
+
+> *"we should not have any stochastic cases please investigate
+> the cases"*
+
+Correct — CLAUDE.md's codified rule is *"LLM-stochastic is not an
+acceptable category — it usually hides a real infra defect."*
+Diagnostic paths landed both fixes in one commit:
+
+- **#222** — `chat_consensus_log.disagreement_notes` showed the
+  LLM gatekeeper's reasoning: *"clear refs as none are from ISO
+  27005."* Signal C emitted 6.1.2 at curator-tier weight 1.00
+  (via DOCUMENT_TOPIC_MAP "risk assessment" → 6.1.2), but the
+  gatekeeper cleared it because 6.1.2 is an ISO 27001 ref and
+  the query mentioned ISO 27005. The LLM didn't understand that
+  6.1.2 IS the ISMS clause that ISO 27005 provides guidance for.
+
+  Fix: `_signals_lock_refs()` helper + wire into
+  `_apply_decision`. Mirrors the existing question_type + framework
+  locks. Deterministic-signal refs (Signal B explicit + Signal C
+  curated) cannot be dropped by the arbiter — only augmented.
+
+- **#205** — `chat_casefile_log.question_type = 'unknown'`.
+  Scanned CLEAR_INTENT_PHRASES — no pattern for "is X applicable?"
+  / "does X apply to us?" / "are we in scope for X?" Applicability
+  interrogatives fell through to the LLM classifier which returned
+  `unknown`.
+
+  Fix: three new CLEAR_INTENT_PHRASES patterns + extended the
+  27701 direct-ref pattern to accept "applicable" / "in scope"
+  alongside existing verdict words.
+
+Full rerun post-fix: 231/232 PASS, 0 FAIL, 1 WARN (only #200
+pre-existing). Back to the pre-Ship-54' baseline.
+
+**Atlas/Playbook border sharpening (4 iterations)**
+
+Operator raised the design concern:
+
+> *"we developed topics and created a topics page and a leaf drill
+> in it feels to me that there is a collition between the topics
+> page and the dashboard, can we start by distinguishing what
+> each represents and investigate whether we can have both on a
+> single page."*
+
+Design conclusion: keep both surfaces, sharpen borders + explicit
+cross-nav. Dashboard = compliance ATLAS (auditor lens). Topics =
+compliance PLAYBOOK (DPO lens). But executing the border took
+four iterations because "drop the advisory panel" turned out to
+be more nuanced than the initial option-picking suggested:
+
+1. **`4fb3f7d` cross-nav pills** — added Dashboard→Topics pills
+   ("Part of N compliance topics") + sharpened Topics→Dashboard
+   escape hatch label. Both surfaces gain explicit awareness of
+   the other lens. But didn't remove any overlapping content —
+   operator surfaced that as under-delivery on Option A.
+
+2. **`efb5652` over-removal** — dropped both the Evidence-classes
+   panel (yield stats + per-leaf sources) AND the "How to
+   strengthen X" advisory. Operator paste confirmed the drill-in
+   became too thin: standard text · finding · gap · pills · ask
+   button. Missing: **which docs cite this control?** — that's
+   audit-forensic content, not workflow content.
+
+3. **`7052792` gap-text restore** — for leaf-only controls where
+   the slim verdict tree returns empty AND there's no advisory
+   panel to catch, "Gap description" heading rendered with
+   nothing beneath. Added `_gapBox()` helper that ALWAYS renders
+   gap-prose (or "(no gap text recorded)" fallback).
+
+4. **`11630e8` evidence-classes atlas mode** — restored the
+   Evidence-classes panel with new `opts.atlasMode` parameter.
+   Keeps yield stats + per-leaf sources list (audit forensics);
+   suppresses template CTA + Evidence Package + Cite external
+   source buttons (self-service, Topics-owned). Correct border.
+
+Final border, per audit vs. author lens:
+
+| Content | Home |
+|---|---|
+| Which docs cite each leaf (sources list) | **Dashboard** |
+| Per-leaf coverage stats + yield percentages | **Dashboard** |
+| Cross-framework mesh (demonstrated-by) | **Dashboard** |
+| Cascade pressure | **Dashboard** |
+| Template downloads (MD/Word/Excel) | **Topics** |
+| Evidence Package export | **Topics** |
+| Cite external source workflow | **Topics** |
+| "How to strengthen X" per-MUST advisory prose | **Topics** |
+| Ask AI CTA | **Topics** + Chat |
+| Cross-nav pills / escape hatch | Both |
+
 ## Codified lessons
 
 ### 1. Additive-overlay scoping is the safer default
@@ -510,7 +615,83 @@ need to be tested against the eval suite before shipping. New
 intents pass through the whole normal-query surface + risk over-
 routing on shared vocabulary.
 
-### 9. Provenance-preserving structural extraction
+### 9. "LLM-stochastic" is never an acceptable diagnosis
+
+Post-Ship-54' eval showed 1 FAIL (#222) and 2 WARNs (#200,
+#205). The retro's initial framing hedged #222 as "stochastic
+under long-session context accumulation." Operator correctly
+pushed back — CLAUDE.md's codified rule is:
+
+> *"'LLM-stochastic' is not an acceptable category — it usually
+> hides a real infra defect. Root-cause intermittent failures
+> rather than hedging assertions."*
+
+Both #222 and #205 had specific infra defects traceable via
+existing diagnostic logs:
+
+- `chat_consensus_log.disagreement_notes` captured the LLM
+  gatekeeper's reasoning verbatim: *"clear refs as none are
+  from ISO 27005."* Signal C's curator-tier refs (weight 1.00)
+  were being cleared by the arbiter because there was no
+  hard-lock protecting refs (only question_type + framework
+  had locks). Genuine architectural gap.
+
+- `chat_casefile_log.question_type` recorded `unknown` for
+  "is X applicable?" queries. Scan of `CLEAR_INTENT_PHRASES`
+  confirmed no applicability pattern existed. Genuine coverage
+  gap.
+
+Fixes landed as curator-tier discipline additions (Signal B/C
+ref lock + CLEAR_INTENT gap fill) — no "hedge the assertion"
+route needed.
+
+**Rule** (reinforcing CLAUDE.md): every "stochastic" failure
+report should trigger a diagnostic-log trace. `chat_consensus_
+log`, `chat_casefile_log`, `ai_call_log` capture enough state
+that the specific infra cause is almost always recoverable.
+Hedging the assertion instead of finding the cause accumulates
+untracked infra debt.
+
+### 10. Option-picking is easy; executing the option is nuanced
+
+The atlas/playbook border-sharpening (post-arc) took FOUR
+iterations to land — despite the design conclusion (Option A:
+"keep both, sharpen borders") being clear at the option-pick
+moment.
+
+The nuance revealed itself only through operator paste of the
+rendered output at each iteration:
+
+1. Cross-nav pills only → operator: "advisory should MOVE to
+   topics" (initial commit under-delivered)
+2. Removed BOTH advisory + evidence-classes → operator: "still
+   feels incomplete" (over-shot; lost audit-forensic sources)
+3. Restored gap-text fallback → operator: "still feels
+   incomplete" (missing the sources list — different from
+   advisory)
+4. Restored evidence-classes with atlasMode flag → correct
+   border
+
+The lesson: "drop the advisory panel" turned out to mean
+different things at different levels:
+- Drop the per-MUST "Have/Still-needed" prose ✓
+- Drop the template download CTA buttons ✓
+- Drop the Evidence Package export ✓
+- Drop the Cite external source CTA ✓
+- KEEP the per-leaf sources list (audit-forensic) — NOT
+  self-service
+- KEEP the yield stats (audit-forensic) — NOT self-service
+
+Each of those had to be teased apart by looking at the actual
+rendered output. Option labels are necessarily coarse.
+
+**Rule**: when executing an ambitious UX option, paste the
+rendered output back at each iteration. What "sharpen borders"
+means at the abstraction level is different from what it
+means at the CSS/DOM level. Operator eyes catch the granularity
+gaps that code review + tests don't.
+
+### 11. Provenance-preserving structural extraction
 
 Every structural finding carries:
 - `checklist_item_id` — the specific MUST it binds to
