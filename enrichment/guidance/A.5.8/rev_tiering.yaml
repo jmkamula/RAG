@@ -1,0 +1,20 @@
+must_id: item:A.5.8:rev_tiering
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Tiering audit (sample of projects re-tiered to validate the tier criteria are still calibrated
+  to actual risk)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a representative sample of current projects and record their names, owners, and assigned security
+  tiers in a dated review log.
+- Re-assess each sampled project's tier using the documented tiering criteria, and record any changes
+  or confirmations alongside the rationale and date.
+- Name the reviewer who conducted each re-tiering decision, ensuring the individual is specifically identified
+  and not listed as a group or department.
+- Document any updates made to the tiering criteria as a result of the review, including the date and
+  the approver’s name.
+- Retain evidence of the review meeting, such as signed minutes or an attendance record, showing discussion
+  and agreement on tiering calibration.

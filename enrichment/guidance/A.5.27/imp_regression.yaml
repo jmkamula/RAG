@@ -1,0 +1,20 @@
+must_id: item:A.5.27:imp_regression
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Regression-prevention check (where the change replaced a previous control, verify the prior
+  failure mode no longer applies)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific failure mode from the previous control in the improvement action record, including
+  a brief description and date identified.
+- Document the exact change or new control implemented, naming the responsible individual and the date
+  the change was put in place.
+- State the method used to verify that the previous failure mode no longer occurs, including test results,
+  monitoring logs, or review outcomes.
+- Attach evidence of the regression-prevention check, such as screenshots, test reports, or signed confirmation
+  from the control owner.
+- Name the owner as a specific individual responsible for the regression-prevention check—do not use generic
+  roles or team names.

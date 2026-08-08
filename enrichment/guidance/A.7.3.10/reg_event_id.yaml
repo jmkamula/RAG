@@ -1,0 +1,17 @@
+must_id: item:A.7.3.10:reg_event_id
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Unique event identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique, sequential identifier to each event row in the register, ensuring no duplicates across
+  the entire register.
+- Record the identifier in a dedicated column, clearly separated from other event details for unambiguous
+  reference.
+- Cross-reference each identifier with supporting documentation or system logs to verify traceability
+  of the event.
+- Confirm that no event row uses a generic or reused identifier, such as "N/A" or "000", which auditors
+  would flag as insufficient.

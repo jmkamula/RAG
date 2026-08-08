@@ -1,0 +1,16 @@
+must_id: item:A.5.25:classification_scale
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Classification scale used (event, near-miss, incident with severity)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the full classification scale in the procedure, clearly defining terms like "event," "near-miss,"
+  and each incident severity level.
+- Document the date and version of the classification scheme, showing when it was last reviewed or updated.
+- Name the person or role responsible for maintaining and updating the classification scheme, using a
+  specific individual rather than a generic team or department.
+- Cross-reference the classification scale in the procedure to the agreed scheme in your risk or incident
+  register, ensuring consistency.

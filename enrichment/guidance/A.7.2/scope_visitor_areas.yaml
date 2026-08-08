@@ -1,0 +1,18 @@
+must_id: item:A.7.2:scope_visitor_areas
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Visitor-accessible areas defined (vs strictly-staff areas)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each area of your premises in a documented floor plan, clearly marking which are accessible to
+  visitors and which are staff-only.
+- Document the criteria used to classify areas as visitor-accessible or staff-only, including any exceptions
+  or special cases.
+- Assign a specific individual as the owner responsible for maintaining and updating the secure areas
+  scope, not a team or department.
+- Record the date of the most recent review or update of the secure areas scope to show it is current.
+- Cross-reference the defined secure areas with your visitor management procedure to confirm alignment
+  between documented scope and operational controls.

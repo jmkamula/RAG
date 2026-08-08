@@ -1,0 +1,17 @@
+must_id: item:B.8.5.7:proc_exclusion_justification
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+must_text: Justification for any excluded Annex B control per subcontractor (§5.4.1.3)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each subcontractor and the Annex B controls considered for exclusion in a dated record maintained
+  with your Subcontractor Engagement Procedure.
+- State the specific reason for excluding each Annex B control per subcontractor, referencing relevant
+  risk assessments or contractual limitations.
+- Name the individual who approved each exclusion decision, avoiding group or department names.
+- Retain supporting evidence, such as meeting minutes or documented risk assessments, that demonstrate
+  the rationale for each exclusion.
+- Review the exclusions annually and update the justification record with the date and name of the reviewer.

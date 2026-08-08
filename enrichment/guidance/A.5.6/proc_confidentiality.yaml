@@ -1,0 +1,18 @@
+must_id: item:A.5.6:proc_confidentiality
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Confidentiality expectations when sharing internal info to SIGs (TLP labelling, NDA awareness)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the confidentiality expectations for sharing information with Special Interest Groups (SIGs) in
+  the engagement procedure, referencing TLP labelling and NDA requirements.
+- Document the process for applying Traffic Light Protocol (TLP) labels to all information shared externally,
+  including examples of correct labelling.
+- Name the person responsible for confirming that all SIG participants have signed a Non-Disclosure Agreement
+  (NDA) before receiving internal information.
+- Record each instance of information shared with SIGs, including the date, TLP label used, and confirmation
+  of NDA status.
+- Specify the owner of the procedure as a named individual, not a generic role or group.

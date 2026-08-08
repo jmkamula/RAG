@@ -1,0 +1,17 @@
+must_id: item:Art.45:recipient_eligibility
+control_ref: Art.45
+standard_id: GDPR:2016/679
+must_text: Recipient eligibility check (e.g. US-DPF requires recipient on active list with current self-certification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the name of the third-country recipient and the specific adequacy mechanism relied upon in
+  a dated record.
+- Confirm the recipient’s current status on the official adequacy or certification list by capturing a
+  dated screenshot or printout.
+- Record the date and source URL of the eligibility check to demonstrate the information was current at
+  the time of transfer.
+- Name the individual who performed the check — do not leave the owner field blank or list only a department.
+- Retain evidence of periodic re-checks for ongoing transfers, not just at the initial assessment.

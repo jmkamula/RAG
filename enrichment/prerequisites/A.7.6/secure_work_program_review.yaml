@@ -1,0 +1,38 @@
+leaf_id: req:A.7.6:secure_work_program_review
+control_ref: A.7.6
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which locations, teams, and processes are in-scope for secure work areas
+    before you can review compliance with secure-area rules. The review is meaningless if scope is undefined.
+  good_enough: A clear, current scope statement that identifies all physical and logical secure work areas
+    relevant to the ISMS.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Defined roles clarify who is responsible for enforcing secure-area rules, maintaining session
+    registers, and conducting periodic reviews. Without this, accountability for the review is unclear.
+  good_enough: Documented assignment of responsibilities for secure work area management and review, even
+    if not fully detailed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You must know which assets (e.g., devices, registers) are present in secure areas to verify
+    that all are covered by the review and that incidents are captured.
+  good_enough: A basic, up-to-date list of physical and logical assets located in secure work areas.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Understanding the classification of information and assets in secure areas helps determine
+    the level of controls and scrutiny required during the review.
+  good_enough: A simple scheme showing how information and assets in secure areas are classified, even
+    if not fully mature.

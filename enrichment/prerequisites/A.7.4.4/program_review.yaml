@@ -1,0 +1,47 @@
+leaf_id: req:A.7.4.4:program_review
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You cannot review whether data minimization objectives are current or appropriate unless
+    you have clearly documented the purposes for which personal data is processed. This is the anchor
+    for assessing necessity and proportionality.
+  good_enough: A current, accessible register of processing purposes exists, with enough detail to match
+    data categories to business needs.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Reviewing minimization requires knowing the lawful basis for each processing activity, as
+    this determines what data is strictly necessary and what is excessive.
+  good_enough: Each processing purpose has a mapped lawful basis, with basic documentation of how the
+    basis applies.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: To verify minimization and detect over-collection, you need an up-to-date inventory of information
+    assets, including personal data types and storage locations.
+  good_enough: A working asset register exists, listing major data sets and their owners, even if some
+    details are pending.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A classification scheme helps distinguish personal data from other information, supporting
+    targeted minimization and risk assessment.
+  good_enough: A basic classification scheme is in place, with personal data categories clearly marked.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: cross_role
+  rationale: Minimization techniques must be appropriate for the risk profile. Without a risk assessment,
+    you cannot judge if current controls are sufficient or if re-identification risk is stable.
+  good_enough: A recent risk assessment exists that covers personal data processing and highlights key
+    risks relevant to minimization.

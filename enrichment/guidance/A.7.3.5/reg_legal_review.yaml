@@ -1,0 +1,17 @@
+must_id: item:A.7.3.5:reg_legal_review
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Legal counsel signoff for balancing-test rejections
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each balancing-test rejection in the Objection Event Register with the date, data subject details,
+  and summary of the objection.
+- Name the legal counsel who reviewed and signed off on the rejection, ensuring a specific individual
+  is listed rather than a generic title or team.
+- Attach a signed and dated statement from legal counsel justifying the rejection decision for each event
+  entry.
+- Cross-reference the relevant legal basis or policy cited in the balancing test to the specific entry
+  in the register.

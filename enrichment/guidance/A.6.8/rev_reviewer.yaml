@@ -1,0 +1,17 @@
+must_id: item:A.6.8:rev_reviewer
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Reviewer identity (InfoSec lead + HR partner; Legal for whistleblower-territory cases)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer for each program report as a specific individual, listing both the InfoSec lead and
+  HR partner by full name.
+- Document the involvement of a Legal team member by full name and date for any review related to whistleblower
+  cases.
+- Record the date and outcome of each review in the reporting program log, linking to the signed review
+  summary.
+- Avoid listing reviewers as generic roles or teams; always use named individuals to meet accountability
+  requirements.

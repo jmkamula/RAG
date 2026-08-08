@@ -1,0 +1,16 @@
+must_id: item:Art.15:reg_extension_reason
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Extension reason captured when Art.12.3 two-month extension was used
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date the extension was applied to each data subject access request in the DSAR register.
+- Document the specific reason for invoking the two-month extension for each applicable request, referencing
+  supporting correspondence or case notes.
+- Name the staff member who approved the extension, ensuring the entry lists a specific individual, not
+  just a team or department.
+- Attach or cross-reference the notification sent to the data subject informing them of the extension
+  and the reason provided.

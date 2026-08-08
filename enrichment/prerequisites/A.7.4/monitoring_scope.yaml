@@ -1,0 +1,39 @@
+leaf_id: req:A.7.4:monitoring_scope
+control_ref: A.7.4
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the overall boundaries of your ISMS before you can define which sites and
+    areas require monitoring. The monitoring scope must align with the declared ISMS scope.
+  good_enough: A documented ISMS scope that clearly lists all included sites, business units, and assets
+    is available—even if not fully optimized.
+- ref: A.7.1
+  standard_id: ISO27001:2022
+  title: Physical security perimeters
+  category: direct
+  rationale: Physical perimeters define the boundaries for monitoring; you can't specify monitoring coverage
+    unless you know where the protected boundaries are.
+  good_enough: A list or map of established physical security perimeters exists, even if some details
+    are pending refinement.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: Knowing which assets are present in each area helps determine what needs monitoring and why.
+    The asset register informs the rationale for monitoring specific zones.
+  good_enough: A basic inventory of key physical and information assets per site/area is available, even
+    if not fully exhaustive.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: The rationale for monitoring specific areas should be risk-driven. A risk assessment identifies
+    threats and vulnerabilities that justify monitoring decisions.
+  good_enough: An initial risk assessment covering physical security risks for all in-scope sites is documented,
+    even if some risk ratings are provisional.

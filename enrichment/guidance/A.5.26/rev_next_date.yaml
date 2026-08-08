@@ -1,0 +1,16 @@
+must_id: item:A.5.26:rev_next_date
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Incident Response Program in a dated document, such as the
+  program review log or meeting minutes.
+- Name the person responsible for scheduling the next review, listing them as a specific individual rather
+  than a team or department.
+- Record the method used to determine the review interval, referencing the relevant risk assessment or
+  policy document.
+- Retain evidence of management approval for the scheduled review date, such as a signed or emailed confirmation.

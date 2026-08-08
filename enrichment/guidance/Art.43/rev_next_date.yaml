@@ -1,0 +1,14 @@
+must_id: item:Art.43:rev_next_date
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the certification body program in a dated document or schedule.
+- Record the name of the person responsible for setting and updating the review date in the same document.
+- Confirm the review date is specific and not listed as "TBD" or left blank.
+- Retain a copy of the document showing the current and next planned review dates, with version history
+  if updated.

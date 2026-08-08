@@ -1,0 +1,16 @@
+must_id: item:Art.25:default_review_dpia_link
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Reference to DPIA process for changes to defaults that increase risk
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each privacy-default configuration change that increases risk to the corresponding Data
+  Protection Impact Assessment (DPIA) record by unique identifier.
+- Document the date and summary of the DPIA review that justified or approved the change to default settings.
+- Name the individual responsible for assessing whether a DPIA is required for each configuration change,
+  not just a team or department.
+- Retain evidence of management approval for any change to privacy defaults that triggers a DPIA, including
+  signatures and decision dates.

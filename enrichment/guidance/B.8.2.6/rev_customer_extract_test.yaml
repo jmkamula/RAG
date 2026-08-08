@@ -1,0 +1,19 @@
+must_id: item:B.8.2.6:rev_customer_extract_test
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: Customer-extract test — sampled customers requested + received their RoPA row within SLA
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for customers to request their Record of Processing Activities (RoPA) row, including
+  contact method and expected response time.
+- Record the date and time of each sampled customer request for their RoPA row, along with the customer's
+  name and contact details.
+- Retain evidence showing the RoPA row was provided to each sampled customer within the stated service-level
+  agreement (SLA), such as dated email correspondence.
+- Cross-reference each fulfilled request with the relevant entry in the RoPA register to confirm accuracy
+  and completeness.
+- Name the person responsible for handling and responding to RoPA requests as a specific individual, not
+  a team or generic mailbox.

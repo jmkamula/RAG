@@ -1,0 +1,17 @@
+must_id: item:7.1:rev_reviewer
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (ISMS Manager + finance partner + top management)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each reviewer by full name and job title, listing ISMS Manager, finance partner, and top management
+  individually in the review record.
+- Record the date each reviewer completed their review, ensuring all required parties are documented on
+  the same review cycle.
+- Obtain a signature or written approval from each named reviewer, attaching these to the final Resources
+  Program Review document.
+- Avoid listing groups or roles such as "the team" or "management" as reviewers; always specify individual
+  names.

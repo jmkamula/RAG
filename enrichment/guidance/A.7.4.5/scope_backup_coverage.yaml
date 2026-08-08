@@ -1,0 +1,18 @@
+must_id: item:A.7.4.5:scope_backup_coverage
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: Backup + DR system coverage (PII in backups within scope; deletion propagation policy documented)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all backup and disaster recovery systems that store personal data, listing each system and
+  its data types in a dated inventory.
+- Document the policy for how deletion requests for personal data are applied to backups, including any
+  technical or operational limitations.
+- Name the person responsible for ensuring deletion propagation in backups as a specific individual, not
+  a team or department.
+- Record the date when the deletion propagation policy was last reviewed and approved by management.
+- Attach evidence of a test or review showing that deletion requests are correctly handled in at least
+  one backup or recovery scenario.

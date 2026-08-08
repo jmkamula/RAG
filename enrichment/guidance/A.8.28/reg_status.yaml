@@ -1,0 +1,16 @@
+must_id: item:A.8.28:reg_status
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Per-finding status (open / fixed / accepted-with-expiry)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the status of each secure coding finding as either "open", "fixed", or "accepted-with-expiry"
+  in the register, with no blank or ambiguous entries.
+- Name the individual responsible for updating each finding’s status, avoiding generic labels such as
+  "the team" or "IT".
+- Document the date when each status was last updated to provide a clear timeline of remediation or acceptance.
+- Attach evidence of review or approval for any "accepted-with-expiry" status, such as a signed risk acceptance
+  form or email from an authorized manager.

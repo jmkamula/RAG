@@ -1,0 +1,19 @@
+must_id: item:B.8.4.2:scope_ma_events
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+must_text: M&A events — where PII moves to another controller (transfer scenario)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific M&A event where personally identifiable information (PII) will be transferred to another
+  controller, including the date and parties involved.
+- Document the categories and quantity of PII that will be transferred, referencing the relevant data
+  inventory or records of processing activities.
+- Assign a named individual responsible for overseeing the PII transfer and record their acceptance of
+  this responsibility in writing.
+- Record the legal basis and contractual terms governing the PII transfer, including any data protection
+  clauses, in the signed agreement between parties.
+- Specify the recipient controller by legal entity name — avoid vague references such as "the acquiring
+  company" or "future owner."

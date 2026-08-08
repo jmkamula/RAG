@@ -1,0 +1,20 @@
+must_id: item:A.6.7:proc_approval_workflow
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Per-worker approval workflow before remote-working starts (line manager + InfoSec sign-off,
+  suitable-workspace attestation, equipment-provisioning checkpoint, awareness-training completion check)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each remote worker’s approval using a dated record signed by both their line manager and the
+  designated InfoSec representative.
+- Record the worker’s written attestation that their remote workspace meets security and privacy requirements
+  before access is granted.
+- Confirm equipment provisioning by listing all devices issued to the worker in an asset register, with
+  serial numbers and assignment dates.
+- Verify completion of remote working awareness training by attaching a dated certificate or training
+  log entry to the worker’s approval file.
+- Name the approvers as specific individuals—avoid using generic titles like “the team” or “management”
+  in approval records.

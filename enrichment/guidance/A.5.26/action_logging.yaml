@@ -1,0 +1,14 @@
+must_id: item:A.5.26:action_logging
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: All response decisions and actions logged (for evidence preservation and post-incident review)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record every response action and decision in an incident log, including the date, time, responsible
+  person, and a brief description.
+- Assign a specific individual to maintain and update the incident log throughout the incident lifecycle.
+- Retain all incident logs in a secure, tamper-evident system for future evidence and post-incident analysis.
+- Name the decision-maker for each critical action, avoiding generic labels like "the team" or "IT department."

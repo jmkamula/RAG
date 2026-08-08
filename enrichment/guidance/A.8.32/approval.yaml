@@ -1,0 +1,19 @@
+must_id: item:A.8.32:approval
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Change approval workflow (CAB / lightweight async approval / automated approval per risk tier)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step change approval workflow, including who approves which types of changes and
+  any risk-based tiers.
+- Name the Change Advisory Board (CAB) members or specific approvers for each risk tier, listing individuals
+  by name and role.
+- Record each change request’s approval, including the approver’s name, decision, and date, in a change
+  log or ticketing system.
+- State the criteria for when automated or asynchronous approval is permitted, and link to the relevant
+  risk assessment or policy.
+- Confirm that all approval records are retained and accessible for past changes, not just the most recent
+  or high-risk ones.

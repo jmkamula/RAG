@@ -1,0 +1,17 @@
+must_id: item:B.8.2.3:proc_default_prohibition
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: Default prohibition — customer PII not usable for org's marketing/advertising by default
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that customer personal information is not to be used for any marketing or advertising
+  activities by default.
+- Name the procedure owner as a specific individual with responsibility for enforcing the prohibition,
+  not a team or department.
+- Document the approval of the procedure with the approver’s full name, signature, and date.
+- Record the procedure’s version number and review date on the document to show it is current and maintained.
+- Attach an example of a completed marketing request form showing denial when customer personal information
+  is involved, as supporting evidence.

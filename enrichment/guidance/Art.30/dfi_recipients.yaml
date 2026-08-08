@@ -1,0 +1,19 @@
+must_id: item:Art.30:dfi_recipients
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: External recipients identified per flow (processors, joint controllers, third parties) — feeds
+  Art.30.1.d
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each external recipient of personal data for every data flow, specifying the organisation name
+  and role (processor, joint controller, or third party).
+- Record the lawful basis for sharing personal data with each external recipient, referencing the relevant
+  contract or agreement.
+- State the specific categories of personal data shared with each recipient, matching the categories used
+  in your main data inventory.
+- Name the owner responsible for maintaining the external recipient list as a specific individual, not
+  a team or department.
+- Date each entry or update in the inventory to show when the information was last reviewed or changed.

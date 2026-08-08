@@ -1,0 +1,18 @@
+must_id: item:Art.18:rev_active_restrictions
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Active-restrictions check — every active row still has a valid Art.18.1 ground
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Export a current list of all data processing restrictions marked as active, including the date each
+  restriction was applied and the relevant data subject.
+- Cross-reference each active restriction with documented evidence showing which specific Art.18.1 ground
+  justifies its ongoing status.
+- Record the name and date of the reviewer who verified the validity of each active restriction against
+  the Art.18.1 criteria.
+- Flag any active restriction where the justification is missing, expired, or not clearly tied to a specific
+  Art.18.1 ground for immediate follow-up.
+- Name the reviewer as a specific individual, not a group or department, to avoid ambiguity in accountability.

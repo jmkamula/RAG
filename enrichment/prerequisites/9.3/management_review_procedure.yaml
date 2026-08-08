@@ -1,0 +1,42 @@
+leaf_id: req:9.3:management_review_procedure
+control_ref: '9.3'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The management review must consider the full scope of the ISMS to ensure all relevant areas
+    are covered. Without a defined scope, the procedure cannot specify what needs to be reviewed or who
+    should attend.
+  good_enough: The scope statement exists, is approved, and clearly defines the boundaries and applicability
+    of the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The management review procedure must align with the organisation’s information security policy,
+    as this sets the direction and priorities for the ISMS. The policy provides the baseline for what
+    management should review.
+  good_enough: A current, approved information security policy is available and accessible to management.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: direct
+  rationale: Management reviews must consider the results of risk assessments to evaluate the effectiveness
+    of controls and identify areas for improvement. Without a risk assessment, the procedure cannot specify
+    required inputs or agenda items.
+  good_enough: At least one documented risk assessment has been completed and its results are available
+    for management review.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: The procedure must define who attends and who is responsible for preparing and following
+    up on management reviews. Clear roles and responsibilities ensure the review is actionable and decisions
+    are implemented.
+  good_enough: Roles and responsibilities for ISMS governance are documented and assigned to specific
+    individuals or teams.

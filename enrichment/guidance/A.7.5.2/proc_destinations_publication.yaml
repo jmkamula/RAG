@@ -1,0 +1,19 @@
+must_id: item:A.7.5.2:proc_destinations_publication
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+must_text: Destinations list publication — countries + international orgs made available to customers/subjects
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Compile a dated list of all countries and international organizations where personal data is transferred
+  outside your organization.
+- Publish the current destinations list on your public-facing website or customer portal, making it accessible
+  without requiring login or special request.
+- Name the person responsible for maintaining and updating the destinations list, specifying their full
+  name and job title.
+- Record each update to the list with the date, summary of changes, and the name of the person who approved
+  the update.
+- Avoid using generic terms like "various countries" or "global partners"; specify each country and organization
+  by name.

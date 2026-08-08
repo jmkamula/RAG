@@ -1,0 +1,13 @@
+must_id: item:Art.35:reg_dpo_advice_date
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Per-row DPO advice date + summary
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date the Data Protection Officer (DPO) provided advice for each entry in the DPIA Register.
+- Summarize the DPO’s advice for each DPIA entry in a dedicated column, using clear and specific language.
+- Name the DPO who gave the advice for each DPIA entry, avoiding generic titles or team names.
+- Retain any supporting correspondence or documents from the DPO as linked evidence for each DPIA entry.

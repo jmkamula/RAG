@@ -1,0 +1,15 @@
+must_id: item:A.5.33:rev_date
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval (typically within 12 months of last review)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent Records Protection Program review in a central log or register.
+- Document the planned review interval, such as "every 12 months," in the program documentation or review
+  schedule.
+- Confirm the next scheduled review date is no more than 12 months after the last completed review.
+- Name the reviewer as a specific individual responsible for the last review, not a group or department.
+- Retain a signed or approved record of the latest review, including the date and reviewer’s name.

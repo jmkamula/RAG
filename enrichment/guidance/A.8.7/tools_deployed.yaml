@@ -1,0 +1,20 @@
+must_id: item:A.8.7:tools_deployed
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Anti-malware / EDR tools deployed (endpoints / servers / mail gateways / web traffic / cloud
+  workloads)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all anti-malware and endpoint detection tools deployed, specifying coverage for endpoints, servers,
+  mail gateways, web traffic, and cloud workloads.
+- Record the deployment dates and current version numbers of each tool in a maintained inventory or asset
+  register.
+- Name the individual responsible for monitoring and updating anti-malware protections, avoiding generic
+  titles like "IT team" or "system administrators."
+- Attach recent deployment or configuration reports showing active protection on all relevant systems
+  and services.
+- Retain vendor support agreements or renewal confirmations to show ongoing maintenance and updates for
+  each anti-malware solution.

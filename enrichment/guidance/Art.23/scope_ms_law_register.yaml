@@ -1,0 +1,16 @@
+must_id: item:Art.23:scope_ms_law_register
+control_ref: Art.23
+standard_id: GDPR:2016/679
+must_text: Member State law register — every applicable law cited with title, article, scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every Member State law that restricts data subject rights, including the official title, relevant
+  articles, and a brief description of the scope.
+- Record the date each law was reviewed and entered into the register, along with the name of the person
+  who performed the review.
+- Cross-reference each law in the register to the specific GDPR right it restricts, citing the relevant
+  GDPR article.
+- Name the owner of the law register as a specific individual, not a department or team.

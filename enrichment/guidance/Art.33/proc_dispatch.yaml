@@ -1,0 +1,20 @@
+must_id: item:Art.33:proc_dispatch
+control_ref: Art.33
+standard_id: GDPR:2016/679
+must_text: Dispatch path to lead supervisory authority (Art.56 + Art.55 — which SA, which channel, with
+  confirmation of receipt)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the lead supervisory authority for your organisation based on your main establishment or decision-making
+  location in the EU.
+- Document the official communication channel (such as email address or online portal) used to notify
+  the identified supervisory authority.
+- Record the date, time, and method of each breach notification sent to the supervisory authority in a
+  breach log.
+- Retain confirmation of receipt from the supervisory authority for each notification, such as an email
+  acknowledgment or portal confirmation.
+- Name the responsible individual—not a team or department—tasked with dispatching notifications and tracking
+  confirmations.

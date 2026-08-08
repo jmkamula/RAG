@@ -1,0 +1,18 @@
+must_id: item:Art.29:scope_processor_role
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Org-role classification — does the org act as processor for any customer (Art.29 binds the
+  org's own staff in that capacity)?
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all customer relationships where your organisation acts as a data processor, listing each customer
+  and the relevant processing activities.
+- Name the specific organisational roles or job titles that perform processing tasks for customers, avoiding
+  generic labels like "staff" or "team."
+- Document a dated statement confirming that these roles are subject to customer instructions under Article
+  29, signed by a responsible manager.
+- Cross-reference your list of processor roles with employment or engagement contracts to show that staff
+  are contractually bound to follow customer instructions.

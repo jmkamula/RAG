@@ -1,0 +1,41 @@
+leaf_id: req:A.7.5:applicable_sites_scope
+control_ref: A.7.5
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope statement defines which parts of the organization, including sites, are covered
+    by the ISMS. Without this, you cannot accurately determine which sites should be included in the applicable
+    sites and threat catalogue scope.
+  good_enough: A documented and approved scope statement that clearly lists all organizational units and
+    sites included in the ISMS.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: direct
+  rationale: The risk assessment identifies threats relevant to each site type, which directly informs
+    the threat catalogue for the applicable sites. You need this to justify which threats are considered
+    per site.
+  good_enough: A completed risk assessment that identifies key threats per site type, even if not fully
+    detailed, to guide initial threat catalogue scoping.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register lists physical and logical assets at each site, helping ensure all relevant
+    sites are considered and that the threat catalogue covers the right assets.
+  good_enough: An up-to-date list of major assets per site, sufficient to identify which sites and asset
+    types need to be covered in the scope note.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures someone is accountable for defining and maintaining the
+    scope of applicable sites and the associated threat catalogue.
+  good_enough: Documented assignment of responsibility for ISMS scope and threat catalogue management,
+    even if role descriptions are high-level.

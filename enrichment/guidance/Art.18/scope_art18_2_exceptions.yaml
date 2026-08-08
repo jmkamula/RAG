@@ -1,0 +1,19 @@
+must_id: item:Art.18:scope_art18_2_exceptions
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Art.18.2 exceptions enumerated (subject consent / legal claims / protection of rights / important
+  public interest)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each exception to restriction of processing under Art.18.2, including subject consent, legal claims,
+  protection of rights, and important public interest.
+- Document the legal or factual basis for invoking any exception, referencing the specific data processing
+  activity and relevant supporting evidence.
+- Record the date and name of the individual who approved the application of an exception for each case.
+- Name the owner responsible for maintaining the exceptions log as a specific individual, not a team or
+  department.
+- Retain copies of communications with data subjects informing them when an exception to restriction has
+  been applied.

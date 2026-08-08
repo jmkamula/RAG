@@ -1,0 +1,20 @@
+must_id: item:A.5.31:scope_sectoral_class
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Sectoral classification (NIS2 essential/important, DORA financial-entity, critical-infrastructure
+  designation, etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all sectoral regulations and classifications that apply to your organisation, such as NIS2,
+  DORA, or critical infrastructure designation, and list them in a dated document.
+- Name the responsible individual who determined the sectoral classification, including their job title
+  and the date of assessment.
+- Document the rationale for each classification, referencing specific criteria or thresholds from the
+  relevant regulation or authority.
+- Attach official correspondence or notifications from regulators or authorities confirming your sectoral
+  status, where available.
+- Specify the classification using the exact regulatory term—avoid vague labels like "regulated" or "critical"
+  without referencing the specific framework.

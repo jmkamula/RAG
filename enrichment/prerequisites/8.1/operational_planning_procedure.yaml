@@ -1,0 +1,40 @@
+leaf_id: req:8.1:operational_planning_procedure
+control_ref: '8.1'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know exactly which parts of your organisation and which processes are covered
+    by the ISMS before you can plan and control operational activities. The scope sets the boundaries
+    for all ISMS procedures.
+  good_enough: A clear, documented scope statement that identifies included business units, locations,
+    and processes. It should be reviewed and agreed by management.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: direct
+  rationale: Operational planning must address the risks identified in your risk assessment. Without this,
+    you can't ensure your controls and procedures are targeting the right threats and vulnerabilities.
+  good_enough: A completed risk assessment with identified risks and their owners. It does not need to
+    be perfect, but must exist and be recent enough to inform planning.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The operational planning procedure must align with the organisation's information security
+    policy, which sets the overall direction and principles for security management.
+  good_enough: A formally approved policy document that outlines the organisation’s security objectives
+    and commitments. It should be accessible to relevant staff.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities is essential so that operational controls
+    can be planned and implemented by the right people.
+  good_enough: A documented list or matrix showing who is responsible for key ISMS roles and tasks. It
+    does not need to be exhaustive, but must cover major responsibilities.

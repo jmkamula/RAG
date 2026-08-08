@@ -1,0 +1,20 @@
+must_id: item:Art.47:scope_extension
+control_ref: Art.47
+standard_id: GDPR:2016/679
+must_text: New-entity onboarding rule — how a newly-acquired or newly-spun-up entity joins the BCRs (or
+  moves to alternative safeguard)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the formal process for onboarding new entities to the Binding Corporate Rules (BCRs), including
+  required steps, approvals, and timelines, in a dated procedure.
+- Name the individual or role responsible for assessing each new entity’s eligibility for BCR coverage
+  in a written record.
+- Record each new entity’s onboarding decision, including whether it joins the BCRs or uses an alternative
+  safeguard, in a dated and signed log.
+- Attach supporting evidence for each onboarding decision, such as due diligence reports or legal assessments,
+  to the entity’s compliance file.
+- Specify the onboarding rule in clear, entity-specific language — avoid using generic or boilerplate
+  statements that do not address your organisation’s structure.

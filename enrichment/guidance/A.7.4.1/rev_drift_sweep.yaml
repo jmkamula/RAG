@@ -1,0 +1,18 @@
+must_id: item:A.7.4.1:rev_drift_sweep
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Drift sweep — new fields added since last review flagged for necessity review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Run a report listing all personal data fields currently collected across systems, including any fields
+  added since the last program review date.
+- Cross-reference the new fields against the previous review's inventory to identify which fields have
+  been added since the last review.
+- Document the necessity review for each new field, including the business justification and the name
+  of the reviewer, with a date.
+- Name the reviewer as a specific individual responsible for the necessity assessment, not a group or
+  department.
+- Retain the comparison report and necessity review records as dated evidence for the next program review.

@@ -1,0 +1,17 @@
+must_id: item:A.7.4.2:reg_last_reviewed
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+must_text: Last necessity-review date per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent necessity-review date for each processing operation directly in the corresponding
+  row of your inventory spreadsheet or system.
+- Name the reviewer responsible for the last necessity assessment as a specific individual, not a group
+  or department.
+- Retain supporting documentation or meeting notes that confirm the necessity-review took place on the
+  recorded date for each operation.
+- Cross-reference each necessity-review date with the relevant policy or procedure version in effect at
+  the time of review.

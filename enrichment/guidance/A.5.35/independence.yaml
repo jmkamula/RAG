@@ -1,0 +1,18 @@
+must_id: item:A.5.35:independence
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Independence of the reviewer demonstrated (separate function, external auditor, or rotating
+  internal reviewer with no operational ownership of the reviewed areas)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual or external firm, clearly stating their role and lack of
+  operational responsibility for the reviewed areas.
+- Document the reporting line of the reviewer, showing separation from the management or teams responsible
+  for the information security controls under review.
+- Attach a signed and dated statement from the reviewer confirming their independence for this review
+  cycle.
+- Avoid listing the reviewer as a team, department, or anyone with day-to-day operational duties in the
+  reviewed area; specify a unique, independent person or entity.

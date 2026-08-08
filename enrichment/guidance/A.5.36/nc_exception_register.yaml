@@ -1,0 +1,20 @@
+must_id: item:A.5.36:nc_exception_register
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Exception register integration — risk-accepted NCs with expiry date (so 'we accept this' doesn't
+  drift into 'we forgot this')
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each risk-accepted nonconformity in the Compliance Nonconformity Register, including a clear
+  description and the date the acceptance decision was made.
+- Assign a specific expiry date for every risk-accepted nonconformity, showing when the acceptance must
+  be reviewed or closed.
+- Name the individual who approved the risk acceptance, ensuring their full name and role are listed,
+  not just a team or department.
+- Cross-reference each risk-accepted nonconformity to the relevant entry in the Exception Register, linking
+  both records for traceability.
+- Document the review outcome or closure action by the expiry date, attaching evidence of follow-up or
+  renewed acceptance if applicable.

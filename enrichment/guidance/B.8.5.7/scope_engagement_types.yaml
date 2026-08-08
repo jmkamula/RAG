@@ -1,0 +1,20 @@
+must_id: item:B.8.5.7:scope_engagement_types
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+must_text: Engagement types enumerated (SaaS subprocessor / infrastructure provider / support-outsourcing
+  / one-off contractor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all engagement types relevant to your organisation, such as SaaS subprocessor, infrastructure provider,
+  support-outsourcing, and one-off contractor, in a dated document.
+- Name the person responsible for maintaining the engagement scope list, identifying them by full name
+  and job title.
+- Cross-reference each engagement type to specific contracts or agreements currently in place, attaching
+  copies or links where possible.
+- Specify the date when the engagement scope was last reviewed and updated, ensuring this is visible on
+  the document.
+- Avoid using generic categories like "third parties" or "vendors" without further breakdown; enumerate
+  each engagement type explicitly.

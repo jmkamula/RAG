@@ -1,0 +1,18 @@
+must_id: item:A.5.21:eol_lessons
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: Lessons-learned from the replacement feeding back to the procedure (e.g. sourcing-control gaps)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each ICT component replacement by recording the date, reason for replacement, and any issues
+  encountered in a lessons-learned log.
+- Assign a named individual to review each lessons-learned entry and identify any sourcing or control
+  gaps revealed during the replacement process.
+- Update the end-of-life replacement procedure with specific improvements based on documented lessons
+  learned, citing the date and person responsible for the update.
+- Name the procedure owner as a specific individual—do not use a team or department as the owner.
+- Retain evidence of periodic reviews of the lessons-learned log and procedure updates, including reviewer
+  names and review dates.

@@ -1,0 +1,20 @@
+must_id: item:A.5.17:rev_scope_expansion
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Scope-expansion check per compromise record (if a credential was compromised, what else might
+  the actor have accessed? — surfaces lateral-movement concerns to A.5.25/A.5.26)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, time, and unique identifier of each compromised credential in a dedicated revocation
+  or reissue log entry.
+- Name the individual responsible for investigating each credential compromise, ensuring a specific person
+  is listed rather than a team or department.
+- Document the systems, data, and accounts reviewed for potential access by the actor using the compromised
+  credential, referencing each by name.
+- State the findings of the scope-expansion check, including any evidence of lateral movement or related
+  incidents, in the same record.
+- Cross-reference the revocation record with incident response or access review reports from controls
+  A.5.25 and A.5.26, noting the relevant document locations.

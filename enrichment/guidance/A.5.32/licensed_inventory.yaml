@@ -1,0 +1,19 @@
+must_id: item:A.5.32:licensed_inventory
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Inventory of licensed commercial software with entitlements (seats / cores / sites) and expiry
+  per licence
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all licensed commercial software in use, including product names, version numbers, and vendors,
+  in a dated inventory record.
+- Record the number of entitlements for each licence, specifying seats, cores, or sites, alongside each
+  software entry.
+- Document the start and expiry dates for every licence, ensuring each entry is current and not left blank.
+- Name the inventory owner as a specific individual, not a team or department, with contact details included
+  in the record.
+- Attach copies of licence agreements or certificates to each software entry to verify entitlement and
+  validity.

@@ -1,0 +1,19 @@
+must_id: item:B.8.5.3:rev_completeness
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+must_text: Completeness check
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all third-party processors in a central register, including their names, services provided, and
+  dates of onboarding.
+- Cross-reference each processor entry with signed data processing agreements and privacy notices to confirm
+  inclusion of all required disclosures.
+- Assign a named individual to review the processor register annually, recording the review date and any
+  updates made.
+- Document the review outcome in a dated summary report, noting any missing or outdated processor disclosures
+  and actions taken.
+- Name the reviewer as a specific person, not a generic role or team, to avoid auditor concerns about
+  unclear accountability.

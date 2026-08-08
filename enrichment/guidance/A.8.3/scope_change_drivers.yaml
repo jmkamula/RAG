@@ -1,0 +1,19 @@
+must_id: item:A.8.3:scope_change_drivers
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new system, classification re-tier, regulatory inspection)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current systems in scope, including names, owners, and dates added, in a maintained register
+  reviewed at least annually.
+- Document a trigger list that specifies events requiring re-scoping, such as onboarding a new system,
+  changing data classification, or receiving a regulatory request.
+- Assign a named individual responsible for monitoring and updating the trigger list, with their name
+  and assignment date recorded in the register.
+- Record each re-scoping decision with the trigger event, date, and decision-maker’s name to provide a
+  clear audit trail.
+- Specify triggers using organisation-specific examples; avoid generic or boilerplate lists that do not
+  reflect your actual environment.

@@ -1,0 +1,16 @@
+must_id: item:8.3:proc_escalation
+control_ref: '8.3'
+standard_id: ISO27001:2022
+must_text: Escalation rule when items slip past target date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the escalation rule in the procedure, specifying exactly who must be notified when an item misses
+  its target date.
+- Name the escalation owner as a specific individual, not a generic role or team, to avoid ambiguity in
+  responsibility.
+- Document the date the escalation rule was last reviewed and approved by management within the procedure.
+- Cross-reference the escalation rule to a sample incident or log entry showing it was followed when a
+  deadline was missed.

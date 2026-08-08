@@ -1,0 +1,19 @@
+must_id: item:A.8.29:reg_artefact_ref
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Per-test artefact reference (report / scan output / pen-test deliverable retained)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each security test entry in the register with a unique identifier matching the corresponding
+  test artefact, such as a report or scan output.
+- Attach or link the actual test artefact—such as a PDF report or scan file—to the register entry, ensuring
+  the file is accessible and unaltered.
+- State the date the artefact was received or generated, and name the individual or vendor who delivered
+  the test results.
+- Name the artefact location specifically; avoid vague references like "on file" or "with IT" that do
+  not point to a concrete, retrievable source.
+- Retain all referenced artefacts for the period required by your retention policy, and confirm their
+  presence during each register review.

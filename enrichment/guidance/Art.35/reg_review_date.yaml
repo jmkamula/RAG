@@ -1,0 +1,17 @@
+must_id: item:Art.35:reg_review_date
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Per-row next review date
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a specific next review date for each DPIA entry in the register, using a clear day, month, and
+  year format.
+- Name the individual responsible for conducting the next review in each DPIA row, not just a team or
+  department.
+- Update the next review date immediately after each DPIA review, and retain the previous review date
+  for audit history.
+- Avoid leaving the next review date field blank or marked as "TBD"—enter a concrete, scheduled date for
+  every DPIA.

@@ -1,0 +1,19 @@
+must_id: item:A.7.4.8:scope_change_drivers
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Trigger list (new media type / new cloud provider)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current types of media and cloud providers used for storing or processing personal data, including
+  any newly adopted since the last review.
+- Document the date each new media type or cloud provider was added to your environment in a version-controlled
+  register.
+- Name a specific individual responsible for updating the disposal contexts scope whenever a new media
+  type or cloud provider is introduced.
+- Cross-reference each disposal context entry to the relevant trigger event, such as the onboarding of
+  a new provider, to show why it was added.
+- Avoid using generic categories like "cloud" or "removable media" without specifying the exact service
+  or device in your scope documentation.

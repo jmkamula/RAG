@@ -1,0 +1,19 @@
+must_id: item:A.8.21:rev_findings_update
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Findings propagated to procedure / register / scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each network services program review finding in a dated log, including a clear description of
+  the issue and its potential impact.
+- Update relevant procedures, registers, or scope documents to reflect each finding, referencing the specific
+  review date and finding number.
+- Assign a named individual to track and confirm that each finding has been integrated into the appropriate
+  document or register.
+- Attach evidence of the update, such as a revised procedure or register entry, showing the change and
+  the date it was made.
+- Name the responsible owner for each update as a specific person, not a team or department, to avoid
+  ambiguity.

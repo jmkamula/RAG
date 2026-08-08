@@ -1,0 +1,19 @@
+must_id: item:A.5.37:scope_coverage
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Scope coverage stated (every information processing facility represented — gaps surface where
+  a facility exists without a documented procedure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every information processing facility in use, including physical, virtual, and cloud-based, with
+  a unique identifier and location for each.
+- Cross-reference each facility in the register with its corresponding documented operating procedure,
+  noting the procedure's title and last review date.
+- State the scope coverage clearly at the top of the register, specifying that all information processing
+  facilities are included.
+- Name a specific individual responsible for maintaining the register, not a team or department.
+- Highlight any facility without a documented operating procedure as an action item, with a due date and
+  assigned owner for resolution.

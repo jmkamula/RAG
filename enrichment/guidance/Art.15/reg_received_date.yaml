@@ -1,0 +1,17 @@
+must_id: item:Art.15:reg_received_date
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Request received date (the start of the Art.12.3 clock) per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each data subject access request is received in a dedicated column for every entry
+  in the DSAR register.
+- Name the individual responsible for logging received dates, ensuring a specific person is listed rather
+  than a generic team or department.
+- Cross-reference each received date with the original request communication, such as email or web form,
+  to confirm accuracy.
+- Retain a copy of the original request alongside the register entry to provide clear evidence of the
+  date received.

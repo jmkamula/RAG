@@ -1,0 +1,31 @@
+leaf_id: req:Art.8:child_consent_program_review
+control_ref: Art.8
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of processing
+  category: direct
+  rationale: You must confirm the lawful basis for processing children's data before reviewing child consent
+    mechanisms, as Art.8 only applies when consent is the chosen basis under Art.6.1.a.
+  good_enough: Document which processing activities for children rely on consent as the lawful basis and
+    ensure this mapping is up to date.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: A current RoPA is needed to identify which services process children's data and are in scope
+    for child consent review. Without this, you can't verify coverage or completeness.
+  good_enough: Maintain a list of processing activities that clearly identifies those involving children
+    and the relevant consent flows.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope must cover all information-society services offered to children to ensure
+    the review includes all relevant systems and processes.
+  good_enough: Have a documented ISMS scope that explicitly includes services where child consent is required,
+    even if at a high level.

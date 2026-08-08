@@ -1,0 +1,19 @@
+must_id: item:Art.47:content_check
+control_ref: Art.47
+standard_id: GDPR:2016/679
+must_text: Art.47.2 a-n content checklist mapped to BCR sections
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Map each item from GDPR Article 47.2(a)-(n) to a specific section in your Binding Corporate Rules procedure,
+  listing section numbers or titles.
+- Document the name and role of the person responsible for maintaining the mapping, including their contact
+  details and date of assignment.
+- Attach a dated copy of the most recent Binding Corporate Rules procedure showing all referenced sections
+  are present and up to date.
+- Cross-reference each mapped section with supporting evidence, such as policy documents or process descriptions,
+  and list these references in the mapping document.
+- Name the mapping document version and date; avoid using undated drafts or generic templates that lack
+  organisation-specific details.

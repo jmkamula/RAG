@@ -1,0 +1,20 @@
+must_id: item:Art.24:rev_iso_alignment
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: ISO 27001 alignment — derived dependencies (5.1/5.3/9.3/A.5.1/A.5.34/A.5.36) still in compliant
+  state
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for maintaining ISO 27001 alignment within your GDPR accountability
+  program documentation.
+- Document a dated review of all ISO 27001-derived dependencies, showing how each remains compliant with
+  GDPR Article 24 requirements.
+- Cross-reference each dependency to its corresponding ISO 27001 clause and GDPR control in a single,
+  updated register.
+- Record any changes to dependencies or controls, including the date, nature of the change, and the person
+  who approved it.
+- Attach evidence of the most recent management review meeting minutes confirming ongoing compliance with
+  both GDPR and ISO 27001 requirements.

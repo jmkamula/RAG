@@ -1,0 +1,19 @@
+must_id: item:B.8.2.1:proc_subject_matter_scope
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+must_text: Subject-matter + duration + nature + purpose scope per Art.28.3 requirements
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the subject-matter of the processing in the agreement, describing what types of personal data
+  are being handled for the customer.
+- Specify the duration of processing by including clear start and end dates or event-based triggers in
+  the agreement text.
+- Describe the nature and purpose of processing, detailing how and why the personal data will be used,
+  in a dedicated section.
+- Name the owner of the agreement as a specific individual with responsibility for updates, avoiding generic
+  titles or groups.
+- Reference the exact clause in the agreement where each required element—subject-matter, duration, nature,
+  and purpose—is addressed.

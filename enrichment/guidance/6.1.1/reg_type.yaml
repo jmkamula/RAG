@@ -1,0 +1,19 @@
+must_id: item:6.1.1:reg_type
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Per-row type (risk-addressing / opportunity-enhancing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to your ISMS Planned Action Register to record whether each action addresses a risk or
+  enhances an opportunity.
+- State the type for each action as either "risk-addressing" or "opportunity-enhancing" in the new column,
+  based on your documented analysis.
+- Name the person responsible for classifying each action’s type, ensuring it is a specific individual
+  and not a group or department.
+- Record the date when each action’s type was last reviewed or updated to show ongoing attention to both
+  risks and opportunities.
+- Avoid leaving the type column blank or using unclear labels like "N/A" or "general" that do not clearly
+  indicate risk or opportunity.

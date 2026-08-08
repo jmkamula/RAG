@@ -1,0 +1,16 @@
+must_id: item:A.5.25:log_source
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Detection source per row (which monitoring system / user / third party reported it)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the detection source for each event in the triage log, specifying the exact monitoring system,
+  user, or third party that reported it.
+- Name the detection source using a unique identifier or full system/user/organization name, not a generic
+  label like "monitoring" or "external".
+- Cross-reference each event entry with supporting evidence, such as alert IDs, user reports, or third-party
+  notifications, to verify the source.
+- Date and time-stamp each log entry to show when the event was reported and by whom.

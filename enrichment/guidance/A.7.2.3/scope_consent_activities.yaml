@@ -1,0 +1,19 @@
+must_id: item:A.7.2.3:scope_consent_activities
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: Consent-required activity list (marketing / cookies non-essential / research participation
+  / children)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all activities where personal data processing requires consent, such as marketing communications,
+  non-essential cookies, research participation, and processing children’s data.
+- Document the legal or regulatory basis for requiring consent for each identified activity, referencing
+  relevant laws or standards.
+- Name the specific individual responsible for maintaining and updating the consent-required activity
+  list, not a team or department.
+- Record the date of the most recent review or update to the consent-required activity list.
+- Retain supporting evidence, such as consent forms or system screenshots, showing how consent is collected
+  for each listed activity.

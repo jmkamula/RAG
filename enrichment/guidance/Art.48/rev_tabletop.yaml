@@ -1,0 +1,19 @@
+must_id: item:Art.48:rev_tabletop
+control_ref: Art.48
+standard_id: GDPR:2016/679
+must_text: Tabletop exercise — procedure tested at least annually against a hypothetical foreign authority
+  request (mirrors A.5.24 IR exercises)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Schedule an annual tabletop exercise simulating a foreign authority data request, and record the date
+  and scenario details in a review log.
+- Assign a named individual to lead the exercise and document their name and role in the exercise summary
+  report.
+- Capture attendance by listing all participants with full names and roles in the exercise documentation.
+- Document the step-by-step actions taken during the exercise, including decisions made and any issues
+  identified, in a dated exercise report.
+- Attach evidence of post-exercise review, such as meeting minutes or a signed summary, confirming lessons
+  learned and any required follow-up actions.

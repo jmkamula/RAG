@@ -1,0 +1,17 @@
+must_id: item:A.5.24:communications
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: External communication paths (regulator, legal, PR, law enforcement) with thresholds and named
+  owners
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all external parties to be notified during incidents, including regulators, legal counsel, public
+  relations, and law enforcement, in the planning framework.
+- Define clear thresholds for when each external party must be contacted, and include these criteria as
+  dated entries in the framework.
+- Assign a named individual as the owner for each external communication path; avoid using roles like
+  "the team" or generic department names.
+- Document the approval of the framework by a senior manager, including their name and the date of sign-off.

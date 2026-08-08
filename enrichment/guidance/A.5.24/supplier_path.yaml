@@ -1,0 +1,20 @@
+must_id: item:A.5.24:supplier_path
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Supplier-driven incident path documented (A.5.21 supplier-side incidents trigger our framework
+  even when we're not directly hit)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a clear process in your incident management framework for responding to incidents reported
+  by suppliers, even if your systems are not directly affected.
+- Cross-reference the supplier incident response section in your framework to your supplier relationship
+  controls as described in A.5.21.
+- Name a specific individual responsible for monitoring supplier incident notifications and initiating
+  your internal incident response process.
+- Record the date your framework was last updated to include supplier-driven incident scenarios, ensuring
+  it is not left undated or generic.
+- Include an example scenario in your framework showing how a supplier-side incident would trigger your
+  internal response steps.

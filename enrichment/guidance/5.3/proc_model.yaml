@@ -1,0 +1,19 @@
+must_id: item:5.3:proc_model
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Responsibility model stated (RACI, DACI, RAPID or equivalent)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the chosen responsibility model, such as RACI, DACI, or RAPID, in a dated document approved by
+  senior management.
+- Name the owner of the responsibility model as a specific individual, not a team or department, in the
+  framework documentation.
+- Document the roles and responsibilities for each ISMS process using the selected model, listing named
+  individuals for each role.
+- Cross-reference the responsibility assignments with your ISMS policy and process documents to confirm
+  consistency across all records.
+- Retain evidence of management approval for the responsibility model, such as a signed meeting minute
+  or approval email.

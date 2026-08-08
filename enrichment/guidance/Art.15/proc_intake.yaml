@@ -1,0 +1,18 @@
+must_id: item:Art.15:proc_intake
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Intake channels for DSARs enumerated (web form, email, post, in-person) and a single point
+  of receipt named
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all intake channels for data subject access requests, such as web form, dedicated email address,
+  postal address, and in-person submission, in the procedure document.
+- Name a specific individual as the single point of receipt for DSARs, avoiding generic titles like "the
+  team" or "compliance department".
+- Record the date the DSAR handling procedure was last updated and approved, showing current and accurate
+  intake information.
+- Cross-reference the named intake channels with contact details published on your public-facing privacy
+  notice.

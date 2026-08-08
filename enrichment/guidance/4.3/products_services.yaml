@@ -1,0 +1,18 @@
+must_id: item:4.3:products_services
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Products and services in scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all products and services included in the ISMS scope statement, using their official names as referenced
+  in company records.
+- State any products or services that are explicitly excluded from the scope, with a brief reason for
+  each exclusion.
+- Name the person who approved the scope statement, ensuring it is a specific individual and not a group
+  or department.
+- Record the approval date of the scope statement in the document itself.
+- Cross-reference the scope statement with your organisation chart or service catalogue to confirm completeness
+  and accuracy.

@@ -1,0 +1,16 @@
+must_id: item:A.7.3.2:rev_reviewer
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Legal + UX)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewers as specific individuals representing Data Protection Officer, Legal, and User Experience
+  roles in the program review record.
+- Record the date each reviewer completed their assessment on the notice content program review document.
+- Collect and attach each reviewer's signed or digitally acknowledged approval to the final version of
+  the review artefact.
+- Avoid listing roles or teams only; ensure each reviewer is identified by full name and job title in
+  the documentation.

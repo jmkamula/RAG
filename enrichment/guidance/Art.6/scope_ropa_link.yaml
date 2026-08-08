@@ -1,0 +1,18 @@
+must_id: item:Art.6:scope_ropa_link
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Link to Art.30 RoPA — every RoPA entry must have a corresponding Art.6 basis assignment
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each entry in your Record of Processing Activities (RoPA) with a specific lawful basis
+  under Article 6, clearly noting the legal ground used.
+- Document the exact Article 6 paragraph and point (e.g., 6(1)(a), 6(1)(b)) for each processing activity
+  in the RoPA.
+- Name the person responsible for assigning and maintaining the lawful basis for each processing activity,
+  ensuring this is a specific individual, not a team or department.
+- Record the date when each lawful basis assignment was last reviewed or updated in the RoPA.
+- Avoid using generic or boilerplate lawful basis text; tailor the justification to the actual processing
+  activity described in each RoPA entry.

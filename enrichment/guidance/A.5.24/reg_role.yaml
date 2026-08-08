@@ -1,0 +1,18 @@
+must_id: item:A.5.24:reg_role
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Role per row (ir_lead / deputy / comms / legal / forensic_specialist / technical_lead) — explicitly
+  mapped to framework role taxonomy
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each incident response team member in a separate row, assigning only one role per row according
+  to your framework's role taxonomy.
+- Map each listed role directly to the corresponding framework role name, using the exact terminology
+  from your documented role taxonomy.
+- Name the assigned person for each role as a specific individual, not a group, team, or department.
+- Record the date each role assignment was last reviewed or updated, showing the register is current.
+- Attach a cross-reference to your organisation’s official role taxonomy document to demonstrate explicit
+  mapping.

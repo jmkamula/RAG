@@ -1,0 +1,18 @@
+must_id: item:Art.48:transparency_report
+control_ref: Art.48
+standard_id: GDPR:2016/679
+must_text: Transparency report contribution — aggregate disclosure statistics published periodically
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to compile aggregate statistics on foreign authority disclosure requests received
+  and processed within a defined reporting period.
+- Document the total number of disclosure requests and outcomes in a dated report, ensuring no identifying
+  details of data subjects are included.
+- Publish the aggregate disclosure statistics in a publicly accessible section of your website, clearly
+  stating the reporting period covered.
+- Record the date and method of publication for each transparency report to demonstrate regular and timely
+  updates.
+- Name the report author and approver as specific individuals, not as a team or department.

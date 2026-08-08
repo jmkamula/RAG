@@ -1,0 +1,17 @@
+must_id: item:Art.20:identity_verification
+control_ref: Art.20
+standard_id: GDPR:2016/679
+must_text: Identity verification step (Art.12.6)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process used to verify the identity of individuals requesting data portability, including
+  required forms of identification and responsible staff.
+- Record the name and role of the staff member who completed the identity verification for each request,
+  along with the date of verification.
+- Retain copies of the identification documents reviewed, or a log referencing the type and date of documents
+  checked, for each request.
+- Name the owner of the identity verification process as a specific individual, not a generic team or
+  department.

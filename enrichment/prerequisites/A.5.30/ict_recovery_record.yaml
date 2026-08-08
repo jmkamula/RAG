@@ -1,0 +1,49 @@
+leaf_id: req:A.5.30:ict_recovery_record
+control_ref: A.5.30
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.29
+  standard_id: ISO27001:2022
+  title: Information Security Continuity Activation
+  category: direct
+  rationale: You must have a record of when and why continuity plans were activated, as this provides
+    the trigger and context for each recovery event. Without this, you cannot accurately log or evidence
+    recovery actions.
+  good_enough: A basic activation record exists for each recovery event, capturing the trigger, date,
+    and scope of activation.
+- ref: A.5.26
+  standard_id: ISO27001:2022
+  title: Information Security Incident Register
+  category: direct
+  rationale: Recovery events often stem from security incidents. The incident register provides the linkage
+    and context needed to explain why a recovery was necessary, ensuring the recovery record is complete
+    and traceable.
+  good_enough: A minimal incident register exists, with each incident assigned a unique ID and basic details
+    (date, type, affected assets).
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You need to know which information assets and services are in scope for each recovery event.
+    The asset register defines what must be recovered and what the recovery record should reference.
+  good_enough: A current list of key information assets and services exists, with enough detail to identify
+    what was involved in each recovery event.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organization and which systems/processes are
+    covered by the ISMS, and thus, which recovery events must be recorded.
+  good_enough: A documented ISMS scope exists, specifying the organizational boundaries and systems covered
+    by continuity and recovery controls.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: The classification scheme helps determine the criticality of assets and the required recovery
+    objectives (RTO/RPO), which must be referenced in the recovery record.
+  good_enough: A basic classification scheme is in place, with assets/services labeled by criticality
+    or sensitivity, informing recovery priorities.

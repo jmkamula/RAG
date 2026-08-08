@@ -1,0 +1,16 @@
+must_id: item:A.6.5:owner
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Named owner of the procedure (HR with InfoSec + Legal partners)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual in HR as the documented owner of the post-employment and role-change procedure,
+  not just "HR" or a team.
+- List named contacts from Information Security and Legal as documented partners in the procedure, including
+  their roles and current titles.
+- Record the date the ownership and partner roles were last reviewed and updated in the procedure document.
+- Retain a signed approval page from all listed owners and partners, showing agreement on responsibilities
+  and current procedure version.

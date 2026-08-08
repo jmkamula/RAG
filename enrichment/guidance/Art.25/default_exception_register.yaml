@@ -1,0 +1,19 @@
+must_id: item:Art.25:default_exception_register
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Exception register for higher-than-default settings with documented justification
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each instance where privacy settings are configured higher than the default, including the date
+  and system or application involved.
+- Document a clear, specific justification for every exception, referencing the business or legal need
+  that required the higher setting.
+- Name the individual who approved the exception, ensuring this is a specific person and not a group or
+  department.
+- Retain supporting evidence, such as meeting minutes or approval emails, linked to each exception entry
+  in the register.
+- Review the exception register at least annually and update entries to reflect any changes or removals
+  of higher-than-default settings.

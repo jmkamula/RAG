@@ -1,0 +1,20 @@
+must_id: item:A.5.33:rev_scope_check
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Cross-check against the records-categories scope — any new business activity / legal driver
+  / data category that should add classes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the current records protection program scope with the latest business activities, legal
+  requirements, and data categories in your asset register.
+- Document any new business activity, legal driver, or data category identified since the last review
+  in a dated update log.
+- Assign a named individual to review and approve additions or changes to records classes based on the
+  cross-check findings.
+- Record the date and outcome of each periodic review, including confirmation that no relevant scope changes
+  were missed.
+- Name the reviewer as a specific person—do not use generic labels like "Records Team" or "Compliance
+  Department".

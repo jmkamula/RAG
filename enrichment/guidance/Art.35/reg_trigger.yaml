@@ -1,0 +1,18 @@
+must_id: item:Art.35:reg_trigger
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Per-row trigger (Art.35.3.a-c / SA list / sectoral / risk-based)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific trigger for each DPIA entry, stating whether it is based on Art.35.3(a-c), a supervisory
+  authority list, sectoral guidance, or a risk assessment.
+- Reference the exact source or document that led to the DPIA requirement, such as a link to the relevant
+  supervisory authority list or internal risk assessment.
+- Name the individual who determined the trigger for each DPIA, avoiding generic roles like "the team"
+  or "compliance department".
+- Date each entry to show when the trigger was identified and the DPIA was initiated.
+- Attach supporting evidence, such as meeting notes or emails, confirming the decision to conduct the
+  DPIA based on the identified trigger.

@@ -1,0 +1,19 @@
+must_id: item:A.7.2.5:proc_consultation
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: Stakeholder consultation — DPO opinion (Art.35.2) + subject-representative views where appropriate
+  (Art.35.9)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer (DPO) who provided an opinion on the Privacy Impact Assessment, including
+  their full name and the date of consultation.
+- Document the method and outcome of consulting with representatives of affected data subjects, such as
+  meeting notes or survey results, where appropriate.
+- Retain written records of all stakeholder feedback received during the assessment, including any concerns
+  raised and responses given.
+- State explicitly if subject-representative consultation was deemed not appropriate, providing a brief
+  justification signed and dated by the assessment lead.
+- Avoid listing the DPO as a generic role or team; specify an individual by name to show clear accountability.

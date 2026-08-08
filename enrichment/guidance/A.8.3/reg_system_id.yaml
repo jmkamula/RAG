@@ -1,0 +1,17 @@
+must_id: item:A.8.3:reg_system_id
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Per-row system identifier (from asset register A.5.9)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each system in the access matrix to its unique identifier as recorded in the asset register
+  maintained for control A.5.9.
+- Record the asset register identifier in a dedicated column for every row of the access matrix, ensuring
+  no system is left blank.
+- Confirm that the asset register identifier used matches the current, official value in the asset register,
+  not an outdated or informal label.
+- Name the asset register as the authoritative source in the access matrix documentation, avoiding generic
+  references like "internal list" or "IT inventory."

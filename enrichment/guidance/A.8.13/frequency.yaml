@@ -1,0 +1,16 @@
+must_id: item:A.8.13:frequency
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Frequency per asset class (continuous / hourly / daily / weekly aligned to RPO)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each asset class in the backup procedure, specifying the required backup frequency for each one.
+- Document the rationale for each backup frequency, referencing the relevant recovery point objective
+  (RPO) for that asset class.
+- Record the date and name of the person who approved the backup frequencies for all asset classes.
+- Name the owner of the backup procedure as a specific individual, not a team or department.
+- Attach evidence of the most recent review of backup frequencies, showing the review date and reviewer’s
+  name.

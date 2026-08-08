@@ -1,0 +1,17 @@
+must_id: item:5.1:periodic_reaffirm
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Periodic reaffirmation commitment (e.g. on each annual planning cycle)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a dated statement signed by top management reaffirming their commitment to the information
+  security management system during each annual planning cycle.
+- Name the specific individual or individuals in top management who have provided the reaffirmation, avoiding
+  generic titles or group references.
+- Retain copies of previous years’ reaffirmation statements to demonstrate the periodic nature of the
+  commitment over time.
+- Record the date when the reaffirmation was communicated to relevant staff, referencing meeting minutes
+  or official communication logs.

@@ -1,0 +1,47 @@
+leaf_id: req:A.7.2.3:applicable_scope
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines which business units, processes, and information assets are covered
+    by the privacy program, ensuring that consent requirements are identified only for relevant activities.
+  good_enough: A clear, documented scope that identifies the organizational boundaries and activities
+    subject to privacy controls.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the specific purposes for processing personal data before determining if consent
+    is required for any of them.
+  good_enough: A list of processing activities with their associated purposes, even if not fully mapped
+    to all data flows yet.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Consent is only one of several lawful bases for processing; you need to know which activities
+    rely on consent versus other bases to define the applicable consent scope.
+  good_enough: Each processing activity has a provisional lawful basis assigned, highlighting those that
+    currently rely on consent.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of Processing
+  category: cross_role
+  rationale: GDPR Article 6 sets the legal yardstick for when consent is required versus other lawful
+    bases, directly informing which activities must be included in the consent scope.
+  good_enough: A basic mapping of processing activities to Article 6 bases, with special attention to
+    those defaulting to consent.
+- ref: Art.8
+  standard_id: GDPR:2016/679
+  title: Conditions Applicable to Child's Consent
+  category: cross_role
+  rationale: Processing children's data often requires parental consent; you need to identify activities
+    involving minors to ensure the consent scope covers these cases.
+  good_enough: A preliminary identification of any processing involving children, with notes on where
+    parental consent may be needed.

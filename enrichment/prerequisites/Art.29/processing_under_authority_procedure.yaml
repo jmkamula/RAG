@@ -1,0 +1,31 @@
+leaf_id: req:Art.29:processing_under_authority_procedure
+control_ref: Art.29
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.28
+  standard_id: GDPR:2016/679
+  title: Processor
+  category: direct
+  rationale: Art.29's requirement that processing only occurs on documented controller instructions assumes
+    that a valid Art.28 controller-processor contract exists, specifying those instructions and the relationship.
+  good_enough: A signed, current processor agreement (or equivalent documented contract) is in place,
+    clearly defining the controller's instructions for processing personal data.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: To ensure that processing under authority is limited to documented instructions, you need
+    a clear record of what processing activities are authorized and by whom.
+  good_enough: A maintained RoPA exists that lists the relevant processing activities and identifies the
+    controller and processor roles for each.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: direct
+  rationale: Processing under authority must always be on a lawful basis; knowing the lawful basis for
+    each processing activity is essential to ensure instructions are valid and enforceable.
+  good_enough: Each processing activity has an identified lawful basis, documented at a high level, even
+    if not all supporting evidence is yet collected.

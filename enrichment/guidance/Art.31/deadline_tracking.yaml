@@ -1,0 +1,18 @@
+must_id: item:Art.31:deadline_tracking
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Deadline tracking — SA-stated deadlines met or extensions formally negotiated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each supervisory authority request with the received date and stated deadline in a central, dated
+  log maintained by a named individual.
+- Document all communications about deadline extensions, including authority responses, with dates and
+  names of involved parties.
+- Attach evidence of completed actions or responses for each request, showing the date sent and recipient
+  details.
+- Name the responsible owner for deadline tracking as a specific individual, not a team or department.
+- Review the log regularly to confirm all deadlines are met or extensions are formally agreed before the
+  original deadline passes.

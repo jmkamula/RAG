@@ -1,0 +1,17 @@
+must_id: item:A.5.37:proc_runbook_drill
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Runbook-drill cadence — periodic exercise of selected procedures (especially emergency-use
+  ones) so they're verified actionable under pressure
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Schedule and document runbook drills for all emergency-use procedures, recording dates, participants,
+  and scenarios exercised in a central log.
+- Assign a named individual to lead each drill and record their name in the drill log for accountability.
+- Capture lessons learned and required updates after each drill in a dated after-action report, referencing
+  specific procedures tested.
+- Name the procedures selected for each drill explicitly—do not use generic terms like "critical processes"
+  or "key runbooks."

@@ -1,0 +1,16 @@
+must_id: item:A.7.1:reg_remediation
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Remediation log per row where barriers fall short of classification requirements
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each perimeter barrier that does not meet its required classification in the Per-Site Perimeter
+  Register, including the specific shortfall.
+- Document a remediation action plan for every identified shortfall, assigning a named individual responsible
+  for completion and a target date.
+- Update the register with the completion date and outcome of each remediation action, referencing supporting
+  evidence such as photos or contractor reports.
+- Name the responsible person for each remediation log entry as a specific individual, not a team or department.

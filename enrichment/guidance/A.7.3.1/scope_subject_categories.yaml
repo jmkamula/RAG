@@ -1,0 +1,17 @@
+must_id: item:A.7.3.1:scope_subject_categories
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Subject categories per jurisdiction (customers / employees / minors / patients / etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all jurisdictions where personal data is processed, naming each country or region in a dated register.
+- Identify and record each category of data subject per jurisdiction, such as customers, employees, minors,
+  or patients, in a structured table.
+- Name the person responsible for maintaining the jurisdiction and subject scope, avoiding generic titles
+  like "the team" or "HR".
+- Cross-reference the subject categories with relevant processing activities to show how each group’s
+  data is handled in each jurisdiction.
+- Review and update the register at least annually, recording the review date and the reviewer’s name.

@@ -1,0 +1,39 @@
+leaf_id: req:A.5.6:sig_engagement_procedure
+control_ref: A.5.6
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organisation and which information assets are in scope
+    for SIG engagement. This ensures the procedure targets relevant teams and topics.
+  good_enough: A clear, current scope statement that identifies the business units, locations, and information
+    types covered by the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The SIG engagement procedure must align with the organisation’s overall security objectives
+    and commitments. The policy sets the tone for expected behaviours and priorities.
+  good_enough: An approved, published policy that outlines the organisation’s security objectives and
+    high-level commitments.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles is needed to identify who is authorised to join SIGs, represent
+    the organisation, and act on intelligence received. Without this, the procedure cannot specify responsibilities.
+  good_enough: A documented list or matrix showing who is responsible for SIG engagement and related activities.
+- ref: A.5.7
+  standard_id: ISO27001:2022
+  title: Threat Intelligence
+  category: direct
+  rationale: The value of SIG engagement is often realised through improved threat intelligence. Understanding
+    how threat intelligence is collected and used ensures the procedure captures and channels relevant
+    insights.
+  good_enough: A basic process or outline for collecting, analysing, and acting on threat intelligence,
+    even if not fully mature.

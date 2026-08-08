@@ -1,0 +1,17 @@
+must_id: item:B.8.5.6:reg_disclosure_date
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+must_text: Disclosure date per row (pre-use)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each subcontractor was disclosed in a dedicated "Disclosure Date" column for every
+  entry in the register.
+- Cross-reference each disclosure date with supporting communication or approval documents to confirm
+  the date reflects disclosure before subcontractor use.
+- Name the person responsible for entering and verifying disclosure dates as a specific individual, not
+  a team or department.
+- Review the register to ensure no subcontractor entry is missing a disclosure date prior to their first
+  use.

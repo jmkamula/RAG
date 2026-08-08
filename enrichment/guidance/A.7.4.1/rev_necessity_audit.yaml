@@ -1,0 +1,19 @@
+must_id: item:A.7.4.1:rev_necessity_audit
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Necessity audit — sampled fields reviewed against current purpose register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer responsible for the necessity audit as a specific individual in the program review
+  record.
+- Document the sampled data fields and the corresponding business purposes from the current purpose register
+  in a dated review log.
+- Record the review findings for each sampled field, stating whether its collection is necessary for the
+  identified purpose.
+- Cross-reference each sampled field to its entry in the purpose register, showing alignment or noting
+  any discrepancies.
+- Retain evidence of management approval for the review results, including the approver’s name and date
+  of sign-off.

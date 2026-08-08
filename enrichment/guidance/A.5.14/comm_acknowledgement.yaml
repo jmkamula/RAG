@@ -1,0 +1,19 @@
+must_id: item:A.5.14:comm_acknowledgement
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: User-level acknowledgement captured (e-signature, training completion record, click-through)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Publish the Information Transfer Policy on a platform that tracks user access and requires explicit
+  acknowledgement before proceeding.
+- Capture each user's acknowledgement using an e-signature, training completion certificate, or system-generated
+  click-through receipt with a timestamp.
+- Record the full name and unique identifier of each user who acknowledges the policy, ensuring no group
+  or anonymous acknowledgements are accepted.
+- Store acknowledgement records in a secure, searchable system that allows retrieval by user, date, and
+  policy version.
+- Review acknowledgement logs regularly to confirm all current users have individually acknowledged the
+  latest policy version.

@@ -1,0 +1,17 @@
+must_id: item:A.8.28:reg_severity
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Per-finding severity
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a severity rating to each secure coding finding in the register, using a defined scale such as
+  low, medium, or high.
+- Record the date and name of the individual who determined the severity for every finding entry in the
+  register.
+- Reference the criteria or methodology used to assess severity for each finding, linking to the documented
+  process or policy.
+- Name the severity owner as a specific person for each finding—do not use generic labels like "the team"
+  or "IT department".

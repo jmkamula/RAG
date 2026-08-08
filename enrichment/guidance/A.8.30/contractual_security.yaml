@@ -1,0 +1,18 @@
+must_id: item:A.8.30:contractual_security
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Security requirements in development contracts (cross-link to A.5.20 supplier contracts)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all outsourced development contracts and cross-reference each to documented security requirements
+  included in the contract text.
+- Reference each contract’s security requirements to the relevant supplier contract controls specified
+  under A.5.20, showing alignment.
+- Attach a copy of the most recent signed contract for each outsourced development engagement, highlighting
+  the security clauses.
+- Name the contract owner as a specific individual responsible for ensuring security requirements are
+  included, not a generic role or team.
+- Record the date of the last review of each contract’s security requirements to demonstrate ongoing oversight.

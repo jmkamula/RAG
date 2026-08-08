@@ -1,0 +1,16 @@
+must_id: item:A.7.14:rev_date
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the disposal program in a dated log or register entry.
+- State the planned review interval for the disposal program in a documented schedule or policy.
+- Confirm the actual review date falls within the planned interval by cross-referencing the review log
+  and the schedule.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Retain evidence of the completed review, such as meeting minutes or a signed review report, for auditor
+  examination.

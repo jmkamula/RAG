@@ -1,0 +1,16 @@
+must_id: item:7.5:reg_retention
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Retention period per row (cross-link to A.5.33 / A.5.34)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a specific retention period for each document listed in the ISMS Document Register, using a clear
+  duration or end date.
+- Cross-reference each retention period entry to the relevant policy or legal requirement, such as A.5.33
+  or A.5.34, in the same row.
+- Name the person responsible for setting and reviewing each retention period, ensuring it is a named
+  individual and not a role or team.
+- Review the register to confirm no retention period field is left blank or marked as "TBD" or "ongoing".

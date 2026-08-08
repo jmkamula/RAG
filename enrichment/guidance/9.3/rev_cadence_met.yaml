@@ -1,0 +1,17 @@
+must_id: item:9.3:rev_cadence_met
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Cadence check — every planned review happened (or was rescheduled with rationale)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all planned management review dates for the period in a dated schedule, naming the responsible
+  organizer for each session.
+- Record the actual date each management review occurred, attaching meeting minutes or attendance records
+  as supporting evidence.
+- Document any reviews that were rescheduled, including the new date and a written explanation for the
+  change, signed by the responsible organizer.
+- Name the review program owner as a specific individual, not a group or department, in the schedule or
+  program documentation.

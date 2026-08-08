@@ -1,0 +1,19 @@
+must_id: item:A.5.29:reg_severity
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Severity tier per row (tier_1_full_disruption / tier_2_partial / tier_3_localised) — drives
+  the activation path
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'Assign a severity tier to each disruption scenario row using the defined categories: tier_1_full_disruption,
+  tier_2_partial, or tier_3_localised.'
+- Document the rationale for each severity tier assignment in a dedicated column, referencing impact or
+  criteria used for classification.
+- Name the individual responsible for assigning and reviewing severity tiers in the register, avoiding
+  generic roles like "the team" or "IT".
+- Record the date each severity tier was last reviewed or updated to show ongoing accuracy and relevance.
+- Cross-reference each scenario’s severity tier to the corresponding activation path or response procedure
+  in your incident response documentation.

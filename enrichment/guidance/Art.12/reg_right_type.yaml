@@ -1,0 +1,18 @@
+must_id: item:Art.12:reg_right_type
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Per-row right type (Art.15 access / Art.16 rectification / Art.17 erasure / Art.18 restriction
+  / Art.20 portability / Art.21 objection / Art.22 automated)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific right type for each request in a dedicated column of the Rights Request Register,
+  using the exact terminology from GDPR Articles 15-22.
+- Cross-reference each entry with the relevant GDPR article number to clearly show which right is being
+  exercised.
+- Name the requestor and date of request in each row to link the right type to a specific individual and
+  event.
+- Avoid using generic terms like "data request" or "user inquiry"—specify the precise right type for every
+  entry.

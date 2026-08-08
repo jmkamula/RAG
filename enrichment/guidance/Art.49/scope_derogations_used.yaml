@@ -1,0 +1,20 @@
+must_id: item:Art.49:scope_derogations_used
+control_ref: Art.49
+standard_id: GDPR:2016/679
+must_text: 'Derogations actually relied on enumerated (most orgs: a explicit consent + b contract; some:
+  e legal claims)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each specific derogation from Article 49 that your organisation relies on for data transfers, referencing
+  the relevant lettered subsection (e.g., a, b, e).
+- Document the lawful basis for each derogation with a dated record explaining why it applies to your
+  data transfer scenario.
+- Name the individual responsible for approving the use of each derogation, avoiding generic titles like
+  "the team" or "management".
+- Retain copies of explicit consent forms or contracts where these derogations are used, ensuring they
+  are signed and dated.
+- Review the list annually and record the date of each review to confirm that only necessary derogations
+  are in use.

@@ -1,0 +1,18 @@
+must_id: item:A.5.34:data_subject_rights
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Data subject rights enabled (access, rectification, erasure, portability, restriction, objection
+  where applicable; intake path + response SLAs documented — cross-link to GDPR Art.12-22 and DSAR procedure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the intake process for data subject requests, including contact channels and responsible roles,
+  in the Privacy and PII Protection Policy.
+- List each data subject right enabled under GDPR Articles 12-22, with a clear cross-reference to your
+  detailed DSAR procedure.
+- Specify response timeframes (SLAs) for each type of request, stating calendar days and escalation steps
+  for missed deadlines.
+- Name the policy owner as a specific individual with authority, not a generic team or department.
+- Record the policy approval date and version number on the policy document.

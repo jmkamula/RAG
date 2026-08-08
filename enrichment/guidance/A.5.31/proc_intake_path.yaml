@@ -1,0 +1,20 @@
+must_id: item:A.5.31:proc_intake_path
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Intake path from trigger to register entry (who flags, who interprets, who classifies, who
+  confirms compliance approach)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for flagging new or changed legal and regulatory requirements, recording
+  their name and role in the procedure.
+- Document the process for interpreting each flagged requirement, specifying who performs the interpretation
+  and capturing their analysis in a dated record.
+- Assign a specific person to classify each requirement in the register, ensuring their name and the classification
+  date are clearly recorded.
+- Record the decision on the compliance approach for each requirement, including the name and signature
+  of the confirmer and the confirmation date.
+- Avoid using generic roles like "the team" or "compliance department" as owners; always list specific
+  individuals by name.

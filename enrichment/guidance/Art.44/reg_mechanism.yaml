@@ -1,0 +1,17 @@
+must_id: item:Art.44:reg_mechanism
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Per-row Art.45/46/47/49 mechanism cited
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each international data transfer in the register, including the destination country and recipient
+  organisation, with a unique row for each transfer.
+- Cite the specific GDPR Article 45, 46, 47, or 49 mechanism used for each transfer directly in the corresponding
+  row.
+- Reference supporting documents for each mechanism, such as adequacy decisions, Standard Contractual
+  Clauses, or Binding Corporate Rules, by file name and date.
+- Name the responsible individual for maintaining and updating the register, not just a team or department.
+- Record the date each transfer entry was last reviewed or updated to show ongoing compliance.

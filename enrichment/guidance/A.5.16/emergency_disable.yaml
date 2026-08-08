@@ -1,0 +1,20 @@
+must_id: item:A.5.16:emergency_disable
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Emergency-disable path (break-glass deactivation when standard SLA is too slow — e.g. immediate
+  revocation on incident escalation)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step emergency-disable process in the procedure, including who can initiate, how
+  to request, and how access is revoked immediately.
+- Name the specific roles or individuals authorized to trigger emergency-disable actions, avoiding generic
+  terms like "IT team" or "security group".
+- Record each emergency-disable event in an access log, noting the requester, approver, affected account,
+  timestamp, and reason for action.
+- State the requirement to review and confirm the emergency-disable action within 24 hours, with a named
+  reviewer signing off on the outcome.
+- Retain evidence of periodic testing or drills of the emergency-disable process, including dates, participants,
+  and any issues found.

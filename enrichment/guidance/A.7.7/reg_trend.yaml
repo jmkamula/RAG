@@ -1,0 +1,19 @@
+must_id: item:A.7.7:reg_trend
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Per-audit trend analysis (vs previous audit — improvement / worsening / steady)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the results of each clear desk and clear screen audit in a dated register, including specific
+  findings and any non-conformities.
+- Compare the latest audit results with those from the previous audit, noting any improvements, deteriorations,
+  or unchanged areas for each finding.
+- Document a brief summary of the trend analysis, including whether overall compliance has improved, worsened,
+  or remained steady since the last audit.
+- Name the individual responsible for conducting and recording the trend analysis, ensuring this is a
+  specific person rather than a team or department.
+- Retain copies of previous audit registers and trend analyses to provide a clear history of compliance
+  over time.

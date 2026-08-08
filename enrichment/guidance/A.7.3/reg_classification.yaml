@@ -1,0 +1,18 @@
+must_id: item:A.7.3:reg_classification
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Per-room classification (matches procedure's classification scheme)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each room in the register with a unique identifier and location description to allow precise cross-referencing
+  with your classification procedure.
+- Assign a classification level to each room that matches the terms and categories defined in your official
+  classification scheme.
+- Record the name of the person who determined each room’s classification, along with the date the decision
+  was made.
+- Link each room’s classification entry to the relevant section or version of your classification procedure
+  for traceability.
+- Name the classification owner as a specific individual, not a generic role or team, to avoid ambiguity.

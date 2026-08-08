@@ -1,0 +1,19 @@
+must_id: item:A.6.4:rev_date
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the disciplinary process in a central log, showing it falls within
+  the planned review interval.
+- Name the individual responsible for conducting the review, listing their full name and job title in
+  the review documentation.
+- Attach a signed or approved summary of the review findings, including any updates or confirmation that
+  no changes were needed.
+- Specify the next planned review date in the same log, ensuring it aligns with the documented review
+  interval.
+- Avoid leaving the review owner field blank or listing a group; always identify a single accountable
+  person.

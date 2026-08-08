@@ -1,0 +1,18 @@
+must_id: item:A.8.15:rev_date
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval (≤180 days)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of each logging program review in a central log, ensuring the interval between reviews
+  does not exceed 180 days.
+- Name the individual responsible for scheduling and conducting each review, listing them by full name
+  and job title.
+- Retain a signed or approved record of the most recent review, including findings and any actions taken.
+- Cross-reference the review record with your documented review schedule to confirm adherence to the planned
+  interval.
+- Specify the review date clearly—do not use vague terms like "quarterly" or "biannually" without an exact
+  date.

@@ -1,0 +1,17 @@
+must_id: item:A.8.34:reg_dates
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Per-engagement start / end / time-windows
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the planned start and end dates for each audit testing engagement in the register, using a consistent
+  date format.
+- Document the specific time window allocated for each engagement, including any scheduled breaks or blackout
+  periods.
+- Name the responsible individual for each engagement entry, avoiding generic labels like "audit team"
+  or "staff".
+- Confirm that each engagement entry is updated if dates or time windows change, keeping a dated revision
+  history.

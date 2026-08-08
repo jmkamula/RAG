@@ -1,0 +1,16 @@
+must_id: item:A.8.3:rev_reviewer
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Reviewer identity (IT lead + InfoSec lead jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the IT lead and the Information Security lead as joint reviewers in the access restriction
+  program review record.
+- Record the full names and job titles of both reviewers on the documented review outcome, not just their
+  departments or teams.
+- Confirm both reviewers have signed and dated the review document to show joint participation and agreement.
+- Retain the review document in a location accessible for audit, with version control showing the most
+  recent review and reviewer details.

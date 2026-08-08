@@ -1,0 +1,20 @@
+must_id: item:A.7.13:scope_supervision_threshold
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Supervision threshold (which equipment classes require in-house supervision during maintenance
+  — typically anything carrying classified data)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all equipment types that process, store, or transmit confidential or classified data in your maintenance
+  scope document, including model and location.
+- State which equipment classes require in-house supervision during maintenance, specifying the supervision
+  threshold and rationale for each class.
+- Name the responsible individual who approves the supervision requirements for each equipment class,
+  not just a team or department.
+- Record the date and version of the maintenance scope document to show when supervision thresholds were
+  last reviewed and updated.
+- Attach evidence of management approval for the defined supervision thresholds, such as a signed decision
+  or approval email.

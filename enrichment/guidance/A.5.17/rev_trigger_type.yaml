@@ -1,0 +1,19 @@
+must_id: item:A.5.17:rev_trigger_type
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Trigger type per record (identity_termination / rotation_due / compromise_detected / lost_token
+  / factor_change / decommission)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'Record the trigger type for each credential revocation or reissue event using the approved list: identity_termination,
+  rotation_due, compromise_detected, lost_token, factor_change, or decommission.'
+- Document the date and time when the revocation or reissue action was performed for each credential event.
+- Name the individual who authorized the revocation or reissue, ensuring a specific person is listed rather
+  than a team or department.
+- Cross-reference each record with supporting evidence, such as incident reports or termination notices,
+  that justify the selected trigger type.
+- Review records regularly to confirm no trigger type is left blank or described with free-text outside
+  the approved taxonomy.

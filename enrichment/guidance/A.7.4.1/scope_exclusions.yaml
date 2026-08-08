@@ -1,0 +1,19 @@
+must_id: item:A.7.4.1:scope_exclusions
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Excluded surfaces with rationale (e.g. anonymous analytics)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all data collection contexts in a register, including both included and excluded surfaces, with
+  clear descriptions for each.
+- Document the rationale for excluding each surface, referencing specific business processes or technical
+  controls that prevent personal data collection.
+- Name a specific individual responsible for maintaining and updating the collection context register,
+  not a team or department.
+- Record the date of each exclusion decision and rationale, ensuring the register shows when each entry
+  was last reviewed.
+- Attach supporting evidence, such as configuration screenshots or system logs, to demonstrate that excluded
+  surfaces do not collect personal data.

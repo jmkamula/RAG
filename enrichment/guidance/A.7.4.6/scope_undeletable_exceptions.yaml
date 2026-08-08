@@ -1,0 +1,20 @@
+must_id: item:A.7.4.6:scope_undeletable_exceptions
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+must_text: Undeletable-file exceptions (circumstances where deletion isn't possible per §7.4.6) with rationale
+  + compensating controls
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each system or process where temporary files cannot be deleted, and record the specific technical
+  or legal reason for each case.
+- Document a clear rationale for every undeletable-file exception, referencing the relevant section of
+  §7.4.6 in your written justification.
+- List and describe compensating controls implemented to mitigate risks from undeletable files, such as
+  encryption or restricted access, in a dated register.
+- Name the responsible individual for each exception, avoiding generic titles like "IT team" or "system
+  owner."
+- Review and update the exceptions register at least annually, recording the review date and reviewer’s
+  name.

@@ -1,0 +1,20 @@
+must_id: item:A.8.15:central_collection
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Centralised collection (SIEM or log aggregator) — no source-only retention for security-relevant
+  logs
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the log collection system used, such as a SIEM or aggregator, in the logging procedure with its
+  current version and deployment date.
+- Document the process for forwarding security-relevant logs from all sources to the central system, including
+  responsible roles and frequency.
+- Record a sample log entry from the central system showing successful receipt from a key source, with
+  timestamp and source identifier.
+- State explicitly in the procedure that logs are not retained only at the source, but are centrally collected
+  and available for analysis.
+- Assign a specific individual as the owner of the central log collection process—do not use generic terms
+  like "IT team" or "security group".

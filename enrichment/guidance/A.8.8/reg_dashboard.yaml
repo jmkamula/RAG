@@ -1,0 +1,17 @@
+must_id: item:A.8.8:reg_dashboard
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Aggregate dashboard linked (open-critical count, MTTR, SLA-attainment %)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Link the vulnerability backlog register to a live dashboard that displays open critical vulnerabilities,
+  mean time to remediate, and SLA attainment percentage.
+- Record the date and name of the person responsible for updating the dashboard metrics each reporting
+  cycle.
+- Cross-reference each dashboard metric to its underlying data source in the backlog register for traceability.
+- Name the dashboard owner as a specific individual, not a team or department, to avoid unclear accountability.
+- Retain screenshots or exports of the dashboard at regular intervals to evidence historical operational
+  visibility.

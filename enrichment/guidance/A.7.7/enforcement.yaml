@@ -1,0 +1,18 @@
+must_id: item:A.7.7:enforcement
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Enforcement approach (spot checks, awareness, sanctions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the enforcement approach in the Clear Desk and Clear Screen Policy, specifying methods such
+  as spot checks, awareness training, and sanctions.
+- Name the individual responsible for conducting spot checks and include their title and contact details
+  in the policy.
+- Record the dates and outcomes of recent spot checks in a log that is accessible for audit review.
+- Retain evidence of communicated sanctions or corrective actions taken in response to violations, including
+  dates and names involved.
+- State the enforcement approach using organisation-specific details; avoid generic language that could
+  apply to any company.

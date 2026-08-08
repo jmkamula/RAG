@@ -1,0 +1,17 @@
+must_id: item:Art.40:reg_monitoring_body
+control_ref: Art.40
+standard_id: GDPR:2016/679
+must_text: Per-row monitoring body engaged (Art.41)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the monitoring body engaged for each code of conduct entry as a specific organization, not as a
+  generic group or left blank.
+- Record the date when the monitoring body was formally engaged for each code, referencing supporting
+  correspondence or contract.
+- Document the contact details of the monitoring body, including a named individual and their official
+  email address, for each register row.
+- Cross-reference each register row to the agreement or contract that defines the monitoring body’s responsibilities
+  and scope.

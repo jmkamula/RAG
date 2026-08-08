@@ -1,0 +1,17 @@
+must_id: item:A.5.35:sch_owner
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Named owner accountable for executing the schedule (typically CISO / InfoSec lead with management
+  sponsor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner responsible for executing the Independent Review Schedule Register;
+  do not use a team or department name.
+- Record the owner's full name and job title in the register, along with the date they were assigned accountability.
+- Document the management sponsor’s name and their formal approval of the owner’s accountability, including
+  the date of approval.
+- Retain a signed or digitally approved record confirming the owner’s acceptance of their responsibility
+  for the register.

@@ -1,0 +1,41 @@
+leaf_id: req:Art.31:applicable_scope
+control_ref: Art.31
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of your processing activities to identify which supervisory
+    authorities (SAs) are relevant to your operations. This directly informs which SAs you must cooperate
+    with under Art.31.
+  good_enough: A draft or working RoPA that lists processing activities, locations, and data flows is
+    sufficient to identify relevant SAs for the cooperation scope.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope helps clarify which parts of your organization and which processing activities
+    are covered by your compliance program, ensuring that the SA cooperation scope is neither too broad
+    nor too narrow.
+  good_enough: A defined ISMS scope that maps to your GDPR-relevant processing activities is enough to
+    proceed.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If a Data Protection Officer is required, their designation and contact details are necessary
+    for effective cooperation with supervisory authorities as required by Art.31.
+  good_enough: A named DPO (or documented rationale for not appointing one) with contact details is sufficient
+    at this stage.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for your processing activities helps determine the nature
+    of your obligations and the scope of cooperation required with SAs.
+  good_enough: A summary of lawful bases for major processing activities is enough to inform the cooperation
+    scope.

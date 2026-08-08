@@ -1,0 +1,15 @@
+must_id: item:A.5.1:review_triggers
+control_ref: A.5.1
+standard_id: ISO27001:2022
+must_text: List of significant-change triggers that should prompt an ad-hoc review
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific events that would trigger an ad-hoc policy review, such as major system upgrades, regulatory
+  changes, or security incidents.
+- Document each trigger with a clear description and date added in the policy review record.
+- Name the person responsible for monitoring and identifying these triggers, ensuring a specific individual
+  is listed rather than a group or department.
+- Review the triggers annually and update the record with the review date and the name of the reviewer.

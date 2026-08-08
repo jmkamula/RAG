@@ -1,0 +1,19 @@
+must_id: item:B.8.2.5:proc_information_request
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: Ad-hoc information request pathway — customer inquiries routed + responded within stated SLA
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for receiving, routing, and responding to customer compliance information
+  requests, including the stated service level agreement (SLA) timeframe.
+- Name the individual responsible for monitoring and coordinating responses to customer inquiries, listing
+  their full name and current job title.
+- Record each customer request and its response date in a log or ticketing system, showing compliance
+  with the documented SLA.
+- Attach a sample completed request and response, including timestamps, to demonstrate the procedure is
+  actively used and meets the SLA.
+- Specify the escalation path for overdue requests, naming specific roles rather than generic terms like
+  "the team" or "management".

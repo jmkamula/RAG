@@ -1,0 +1,17 @@
+must_id: item:Art.39:risk_based
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Risk-based approach (Art.39.2 — having due regard to the risk associated with processing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document how the Data Protection Officer (DPO) assesses privacy risks for each processing activity,
+  including the criteria used and the date of assessment.
+- Name the DPO as a specific individual responsible for risk evaluation, avoiding generic titles like
+  "the team" or "compliance department".
+- Record examples of recent processing activities where the DPO adjusted advice or oversight based on
+  the level of risk identified.
+- Retain evidence of regular reviews by the DPO of high-risk processing activities, such as meeting minutes
+  or review logs with dates.

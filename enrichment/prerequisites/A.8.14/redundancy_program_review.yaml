@@ -1,0 +1,40 @@
+leaf_id: req:A.8.14:redundancy_program_review
+control_ref: A.8.14
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The redundancy program review must align with the defined scope of the ISMS to ensure all
+    critical services and assets are included. Without a clear scope, you can't be sure which systems
+    require redundancy.
+  good_enough: A documented scope statement that clearly lists included business units, locations, and
+    systems is available and up to date.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An accurate asset register is needed to identify which assets are critical and require redundancy.
+    The review process depends on knowing what assets exist and their importance.
+  good_enough: A current list of information assets, with criticality and ownership identified, is available
+    for reference during the review.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: The redundancy approach should be based on risk assessment results, which identify threats
+    to availability and the required level of redundancy for each service.
+  good_enough: A recent risk assessment exists that covers availability risks for all in-scope critical
+    services.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that the right people are responsible for maintaining and
+    reviewing redundancy measures. Without this, the review process may lack accountability.
+  good_enough: Documented roles and responsibilities for redundancy and availability management are assigned
+    and known to relevant staff.

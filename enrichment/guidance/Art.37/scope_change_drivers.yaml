@@ -1,0 +1,19 @@
+must_id: item:Art.37:scope_change_drivers
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: Trigger list (org-scale change, processing-shift, new MS entry)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all organisational changes that could trigger a review of the Data Protection Officer (DPO) designation,
+  such as mergers, acquisitions, or major restructures.
+- Document any significant shifts in personal data processing activities, including new technologies or
+  changes in processing purpose, with dates and responsible individuals.
+- Record each entry into a new EU Member State market, specifying the date, country, and business lead
+  responsible for the expansion.
+- Name the DPO owner as a specific individual, not a department or generic team, in all designation and
+  review records.
+- Retain a dated log of all trigger events and corresponding DPO designation reviews to demonstrate ongoing
+  compliance with scope requirements.

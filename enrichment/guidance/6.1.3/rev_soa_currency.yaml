@@ -1,0 +1,18 @@
+must_id: item:6.1.3:rev_soa_currency
+control_ref: 6.1.3
+standard_id: ISO27001:2022
+must_text: SoA currency check — still matches treatment plan + Annex A version
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the current Statement of Applicability (SoA) version against your latest risk treatment
+  plan and Annex A to confirm all controls align.
+- Record the date and outcome of the SoA review in a version-controlled register, including any discrepancies
+  found and actions taken.
+- Name the reviewer as a specific individual responsible for the SoA currency check, not a generic role
+  or team.
+- Document any updates made to the SoA, treatment plan, or Annex A mapping, attaching supporting evidence
+  of approval or sign-off.
+- Retain previous SoA versions and review records to demonstrate the history of updates and periodic checks.

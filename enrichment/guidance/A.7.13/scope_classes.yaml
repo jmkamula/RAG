@@ -1,0 +1,20 @@
+must_id: item:A.7.13:scope_classes
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Equipment classes (drawn from A.7.8 + A.5.9 — servers, network gear, UPS/generator, HVAC, recording
+  devices)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all equipment classes in scope for maintenance, including servers, network devices, UPS/generators,
+  HVAC systems, and recording devices, in a dated inventory document.
+- Reference the specific locations or assets covered under each equipment class, linking to asset registers
+  or floor plans where applicable.
+- Name the responsible individual for maintaining the equipment scope document, ensuring a specific person
+  is identified rather than a team or department.
+- Record the approval of the equipment maintenance scope by a named manager, including the approval date
+  and signature.
+- Review the scope document annually and update it to reflect any changes in equipment classes or locations,
+  noting the review date.

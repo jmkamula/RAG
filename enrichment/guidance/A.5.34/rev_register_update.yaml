@@ -1,0 +1,17 @@
+must_id: item:A.5.34:rev_register_update
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Changes propagated back to the live register with reference to this review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and findings of each privacy and PII protection program review in a dedicated review
+  log.
+- Update the live privacy and PII register to reflect all approved changes, citing the specific review
+  log entry as the source.
+- Name the individual responsible for updating the register, avoiding generic labels like "the team" or
+  "IT."
+- Retain evidence of the register update, such as a version history or change log entry with timestamps
+  and references to the review.

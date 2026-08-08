@@ -1,0 +1,34 @@
+leaf_id: req:A.6.2:applicable_workers_scope
+control_ref: A.6.2
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the boundaries of your ISMS—what parts of the organization, locations, and
+    activities are in-scope—before you can identify which worker categories are relevant. This ensures
+    the worker scope aligns with the overall ISMS coverage.
+  good_enough: A clear, documented ISMS scope that lists included business units, functions, and locations.
+    It doesn't need to be perfect, but it must be specific enough to identify which worker types are in
+    or out.
+- ref: A.6.1
+  standard_id: ISO27001:2022
+  title: Screening
+  category: direct
+  rationale: Screening requirements often vary by worker category. Understanding your screening approach
+    helps define which categories exist and what checks apply, informing the scope of applicable worker
+    types.
+  good_enough: A summary of current screening practices by worker type, even if not fully formalized,
+    is sufficient to proceed.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: direct
+  rationale: Documented roles and responsibilities help clarify which worker categories exist and what
+    access or duties they have, which is essential for scoping applicable workers.
+  good_enough: A draft or working list of main roles and their responsibilities, mapped to worker types,
+    is enough to unblock this step.

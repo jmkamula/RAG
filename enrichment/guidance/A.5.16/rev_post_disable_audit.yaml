@@ -1,0 +1,19 @@
+must_id: item:A.5.16:rev_post_disable_audit
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Post-disable verification window noted (e.g. 30-day check that no stale access reappears via
+  service-account chains)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time when each user identity is disabled in a revocation log, including the responsible
+  administrator’s name.
+- Document the scheduled verification window, such as a 30-day post-disable check, in the same revocation
+  record for each identity.
+- Assign a specific individual to perform and sign off on the verification that no access has reappeared
+  for the disabled identity after the set window.
+- Attach evidence of the verification check, such as screenshots or audit logs, to the revocation record
+  for each identity.
+- Name the verifier as a specific person—do not use generic labels like "IT team" or "admin group."

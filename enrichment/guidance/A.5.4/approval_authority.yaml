@@ -1,0 +1,16 @@
+must_id: item:A.5.4:approval_authority
+control_ref: A.5.4
+standard_id: ISO27001:2022
+must_text: Statement of the signatory's authority (delegation chain if not CEO)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual who approved the InfoSec Directive, specifying their job title and position within
+  the organisation.
+- State the signatory's authority to approve the Directive, including reference to a delegation letter
+  or board resolution if not the CEO.
+- Attach a dated and signed approval page to the Directive, showing the signatory’s name and authority
+  statement.
+- Avoid listing the signatory as a group or department; use a specific person with documented authority.

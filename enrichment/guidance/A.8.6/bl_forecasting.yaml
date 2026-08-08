@@ -1,0 +1,17 @@
+must_id: item:A.8.6:bl_forecasting
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Forecasting approach documented (historical trend / business-driven / leading-indicator)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the chosen forecasting approach for capacity planning, clearly stating if it is based on historical
+  trends, business needs, or leading indicators.
+- Name the individual responsible for maintaining and updating the capacity forecasting documentation,
+  avoiding generic roles like "IT team."
+- Record the date when the forecasting approach was last reviewed or updated to show it is current and
+  actively managed.
+- Cross-reference the documented forecasting method with actual capacity monitoring reports to demonstrate
+  the approach is being applied in practice.

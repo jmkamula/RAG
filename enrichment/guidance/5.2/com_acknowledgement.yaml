@@ -1,0 +1,18 @@
+must_id: item:5.2:com_acknowledgement
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: Acknowledgement record (signed receipt, training completion, or equivalent)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Publish the current information security policy in a location accessible to all relevant staff, and
+  record the publication date.
+- Assign responsibility to a named individual for distributing the policy and tracking acknowledgements.
+- Collect signed acknowledgements or digital receipts from each staff member confirming they have read
+  and understood the policy.
+- Retain dated records of completed policy training sessions, including participant names and the trainer’s
+  signature.
+- Name the policy version and date in each acknowledgement record to avoid confusion with outdated or
+  generic documents.

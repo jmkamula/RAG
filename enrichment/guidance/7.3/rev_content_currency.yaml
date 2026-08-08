@@ -1,0 +1,18 @@
+must_id: item:7.3:rev_content_currency
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Content currency check — material still reflects current 5.2 policy
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Review the current awareness program materials and compare them against the latest version of the 5.2
+  information security policy.
+- Record the date of the last content review and the name of the person who performed the comparison in
+  a tracking log.
+- Document any updates made to the awareness materials to align with changes in the 5.2 policy, including
+  specific references to updated sections.
+- Name the reviewer as a specific individual, not a group or department, to avoid ambiguity about accountability.
+- Retain a copy of the reviewed awareness materials and the corresponding 5.2 policy version as evidence
+  of alignment.

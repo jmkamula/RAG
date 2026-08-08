@@ -1,0 +1,17 @@
+must_id: item:Art.36:reg_response_date
+control_ref: Art.36
+standard_id: GDPR:2016/679
+must_text: Per-row SA response date
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date you submitted each prior consultation to the supervisory authority in a dedicated column
+  of the register.
+- Enter the date you received a response from the supervisory authority for each consultation in a separate,
+  clearly labeled column.
+- Name the supervisory authority contact or reference number associated with each response to support
+  traceability.
+- Avoid leaving the response date column blank or using placeholders like "pending" without a follow-up
+  date; update once a response is received.

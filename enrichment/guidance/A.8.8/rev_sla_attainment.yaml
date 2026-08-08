@@ -1,0 +1,19 @@
+must_id: item:A.8.8:rev_sla_attainment
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: SLA-attainment trending review per severity
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the dates and results of each vulnerability remediation review, showing which issues met or
+  missed their service level agreement deadlines.
+- Record the severity level assigned to each vulnerability and the corresponding remediation timeframe
+  required by your policy.
+- Chart the trend of SLA attainment for each severity class over at least the last three review periods,
+  highlighting any recurring delays.
+- Name the reviewer as a specific individual who signs and dates the review summary—do not use a group
+  or role as the owner.
+- Attach evidence of follow-up actions for any missed SLAs, such as assigned tickets or management escalation
+  records.

@@ -1,0 +1,19 @@
+must_id: item:A.5.11:reg_byod_flag
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: BYOD flag per row where leaver used personal device (drives different wipe path — selective
+  MDM removal vs full wipe)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to the Leaver Asset Return Register to indicate whether each leaver used a personal device
+  for work purposes.
+- Record a clear "Yes" or "No" BYOD flag for each leaver entry, based on documented HR or IT records.
+- Cross-reference the BYOD flag with the device wipe method applied, ensuring selective MDM removal is
+  noted for personal devices.
+- Name the person responsible for verifying the BYOD status for each leaver entry, not just "IT" or "the
+  team".
+- Retain evidence of the decision process for each BYOD flag, such as email confirmation or signed declaration
+  from the leaver.

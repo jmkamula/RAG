@@ -1,0 +1,49 @@
+leaf_id: req:B.8.4.2:end_of_service_register
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: The End-of-Service Action Register must reference which assets (including personal data)
+    are being returned, transferred, or disposed of. Without an up-to-date asset register, you cannot
+    accurately track or evidence end-of-service actions.
+  good_enough: A current, reasonably complete asset register exists, listing all relevant information
+    assets and personal data sets under management.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: Knowing the classification of assets and data is critical to determine the appropriate end-of-service
+    action (e.g., secure deletion for sensitive data). The register is meaningless if you don't know which
+    items require special handling.
+  good_enough: A documented classification scheme is in place and applied to assets, so you can identify
+    which require special end-of-service procedures.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the original purpose for processing personal data to ensure end-of-service
+    actions (return, transfer, disposal) are appropriate and compliant with privacy requirements.
+  good_enough: Purposes for processing personal data are documented for each customer or processing activity,
+    even if not exhaustively detailed.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: The lawful basis for processing personal data affects what actions are required or permitted
+    at end-of-service. Without this, you risk non-compliance when disposing of or transferring data.
+  good_enough: Lawful bases for processing are identified and recorded for each relevant processing activity,
+    sufficient to inform end-of-service decisions.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The register must only cover assets and data within the defined ISMS and PIMS scope. If scope
+    is unclear, you risk omitting required actions or overreaching.
+  good_enough: A documented ISMS scope exists, clearly identifying the boundaries of the information and
+    processing activities covered.

@@ -1,0 +1,15 @@
+must_id: item:A.8.3:rev_date
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of your Access Restriction Program in a dated log entry or meeting
+  minutes.
+- State the planned review interval for the Access Restriction Program in a documented schedule or policy.
+- Confirm the actual review date falls within the planned interval by cross-referencing the review log
+  and the documented schedule.
+- Name the reviewer as a specific individual in the review record, not as a team or department.

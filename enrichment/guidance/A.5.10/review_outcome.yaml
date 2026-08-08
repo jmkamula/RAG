@@ -1,0 +1,14 @@
+must_id: item:A.5.10:review_outcome
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Outcome captured (no change / amended / re-issued) with rationale per amendment
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Name the individual responsible for the Acceptable Use Policy review in a dated record.
+- Document the review outcome as "no change," "amended," or "re-issued" in the policy review log.
+- State the rationale for each amendment or decision not to change the policy in the same record.
+- Record the date and names of all reviewers who participated in the decision.
+- Avoid using vague rationales such as "routine update"—provide specific reasons for each outcome.

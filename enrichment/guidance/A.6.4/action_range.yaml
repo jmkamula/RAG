@@ -1,0 +1,17 @@
+must_id: item:A.6.4:action_range
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Range of actions defined (verbal warning, written warning, suspension, termination, legal referral,
+  regulator notification where mandatory)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each possible disciplinary action in the written process, including verbal warning, written warning,
+  suspension, termination, legal referral, and regulator notification.
+- Document the criteria and escalation steps for when each type of disciplinary action may be applied,
+  with clear examples.
+- Name the person or role responsible for deciding and recording disciplinary actions as a specific individual,
+  not just a department or "the team."
+- Date and approve the disciplinary process document with a signature from a senior manager or HR lead.

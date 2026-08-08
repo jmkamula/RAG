@@ -1,0 +1,16 @@
+must_id: item:A.8.22:rev_date
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent network segregation program review in a tracking log or management
+  system.
+- Name the reviewer as a specific individual responsible for conducting the review, not a generic team
+  or department.
+- Cross-reference the planned review interval in your documented schedule to confirm the review occurred
+  within the required timeframe.
+- Retain a copy of the completed review report, including the date and reviewer’s signature or approval.

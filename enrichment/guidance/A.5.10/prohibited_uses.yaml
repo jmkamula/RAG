@@ -1,0 +1,17 @@
+must_id: item:A.5.10:prohibited_uses
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Prohibited use rules stated (unlawful, harmful, security-bypassing activities, unauthorised
+  software)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Acceptable Use Policy that unlawful activities, harmful actions, and attempts to bypass
+  security controls are strictly prohibited.
+- List specific examples of unauthorised software and clarify that installation or use of such software
+  is not allowed.
+- Document the policy version and approval date on the policy’s front page to show it is current and maintained.
+- Name the policy owner as a specific individual, not a department or team, to allow clear accountability.
+- Retain evidence of formal approval, such as a signed or digitally approved copy by a senior manager.

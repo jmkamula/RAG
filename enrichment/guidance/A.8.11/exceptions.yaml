@@ -1,0 +1,17 @@
+must_id: item:A.8.11:exceptions
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Exception process for unmasked data (e.g. live-production debugging) with time-limited authorisation
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the exception process in the Data Masking Procedure, including steps for requesting, approving,
+  and tracking unmasked data access.
+- Name the authorising individual for exceptions as a specific person, not a generic role or team.
+- Record each exception request with the requester’s name, reason for unmasking, and the exact start and
+  end dates for access.
+- Retain signed approval for each exception, showing explicit time limits and justification for unmasking
+  data.
+- Review all active exceptions monthly and document closure or extension decisions with updated authorisation.

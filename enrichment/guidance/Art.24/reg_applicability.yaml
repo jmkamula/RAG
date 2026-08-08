@@ -1,0 +1,16 @@
+must_id: item:Art.24:reg_applicability
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Per-row applicability assessment (in scope / N/A with reason)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record for each row whether the item is in scope or not applicable, using clear "In Scope" or "N/A"
+  labels.
+- State a specific reason for every "N/A" entry, describing why the requirement does not apply to your
+  organisation or processing.
+- Name the person responsible for each applicability assessment, listing their full name rather than a
+  team or department.
+- Date each applicability assessment to show when the determination was made.

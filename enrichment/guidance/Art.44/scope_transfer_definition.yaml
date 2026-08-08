@@ -1,0 +1,17 @@
+must_id: item:Art.44:scope_transfer_definition
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Operational definition of 'transfer' per EDPB 05/2021 three cumulative criteria
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State your organisation’s operational definition of ‘transfer’ in a written document, explicitly referencing
+  the three cumulative EDPB 05/2021 criteria.
+- Name the individual responsible for maintaining and updating the operational definition, listing their
+  full name and job title.
+- Cross-reference the definition to the relevant section of EDPB 05/2021, showing how each criterion is
+  addressed in your context.
+- Record the date the operational definition was last reviewed or updated, ensuring it is not left undated
+  or marked as “ongoing.”

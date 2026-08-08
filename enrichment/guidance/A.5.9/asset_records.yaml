@@ -1,0 +1,18 @@
+must_id: item:A.5.9:asset_records
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Asset records exist (information assets, software, hardware, services, cloud resources)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all information assets, software, hardware, services, and cloud resources in a central inventory
+  with unique names and descriptions for each item.
+- Assign a specific individual as the owner for every asset entry, avoiding generic terms like "IT" or
+  "the team".
+- Record the date each asset was added or last updated in the inventory to show records are current.
+- Cross-reference each asset with supporting documentation, such as purchase orders, service agreements,
+  or configuration files, to confirm its existence.
+- Review the inventory at least annually and keep a signed record of the review, noting any changes or
+  confirmations.

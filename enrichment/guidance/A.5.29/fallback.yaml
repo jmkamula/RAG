@@ -1,0 +1,20 @@
+must_id: item:A.5.29:fallback
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: 'Fallback / compensating security measures when primary controls fail (per-control: what replaces
+  it, what residual risk it accepts)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each primary security control in your disruption plan, specifying its normal function and the risk
+  it addresses.
+- Document a named fallback or compensating measure for each primary control, including how it will be
+  activated during disruption.
+- State the residual risk accepted when using each fallback measure, referencing a dated risk assessment
+  or approval.
+- Name the responsible individual for activating and monitoring each fallback measure — do not use generic
+  roles or teams.
+- Attach evidence of management approval for all fallback measures, such as a signed decision or meeting
+  minutes.

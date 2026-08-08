@@ -1,0 +1,19 @@
+must_id: item:A.7.5.4:proc_investigation_disclosures
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Investigation / audit disclosures — one-off recording of lawful investigation + external audit
+  disclosures
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each instance of PII disclosed for lawful investigations or external audits in a dedicated
+  disclosure log, including the date and recipient.
+- State the specific legal basis or audit authority that required the disclosure, referencing the relevant
+  law, regulation, or contract.
+- Name the individual who approved the disclosure, ensuring a specific person is listed rather than a
+  team or department.
+- Retain copies of all correspondence or formal requests related to the disclosure, attaching them to
+  the disclosure log entry.
+- Record the exact PII elements disclosed, avoiding vague descriptions such as "user data" or "records."

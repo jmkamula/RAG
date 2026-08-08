@@ -1,0 +1,18 @@
+must_id: item:A.6.5:reg_trigger
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Per-row trigger (termination / contract end / role change within org / retirement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific trigger event for each leaver entry, choosing from termination, contract end, role
+  change within organisation, or retirement.
+- Name the leaver and their unique identifier, such as employee ID or email address, in each row of the
+  register.
+- Enter the date the trigger event was communicated to HR or management for each leaver entry.
+- Assign a named individual responsible for processing each leaver’s exit, avoiding generic labels like
+  "HR team" or "Manager".
+- Retain supporting documentation for each trigger event, such as resignation letters or contract end
+  notices, and reference their location in the register.

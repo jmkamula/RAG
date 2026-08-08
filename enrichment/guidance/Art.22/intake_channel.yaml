@@ -1,0 +1,17 @@
+must_id: item:Art.22:intake_channel
+control_ref: Art.22
+standard_id: GDPR:2016/679
+must_text: Intake channel via Art.12 procedure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Describe the intake channel for individuals to submit objections or requests regarding automated decisions,
+  referencing the Art.12 procedure in your documented process.
+- Document the responsible individual’s name and contact details for managing intake requests under Art.22,
+  not just a generic team or department.
+- Record the date and method each intake request is received, linking it to the corresponding Art.12 procedure
+  documentation.
+- Retain copies of all communications with individuals who use the intake channel, including acknowledgments
+  and outcomes, in a secure, dated file.

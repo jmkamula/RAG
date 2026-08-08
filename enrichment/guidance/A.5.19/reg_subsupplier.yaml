@@ -1,0 +1,18 @@
+must_id: item:A.5.19:reg_subsupplier
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Disclosed sub-suppliers / fourth parties tracked per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each supplier in the register as a separate row, including their full legal name and primary contact
+  details.
+- Record all disclosed sub-suppliers or fourth parties for each supplier in dedicated columns or linked
+  rows, clearly identifying their relationship.
+- State the date each sub-supplier or fourth party was last confirmed as disclosed by the primary supplier.
+- Name the person responsible for maintaining and updating each supplier entry, avoiding generic titles
+  like "the team" or "Procurement".
+- Attach supporting documentation or correspondence where suppliers have disclosed their sub-suppliers,
+  referencing the file location or communication date.

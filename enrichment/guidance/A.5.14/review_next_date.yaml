@@ -1,0 +1,17 @@
+must_id: item:A.5.14:review_next_date
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date directly in the Information Transfer Policy document, using a clear
+  and specific calendar date.
+- Record the name of the person responsible for the next review, ensuring a named individual is listed
+  rather than a team or department.
+- Document the date when the last review was completed, keeping this information visible in the policy’s
+  revision history section.
+- Update the policy immediately if the planned review date changes, and save a new version with the revised
+  date and editor’s name.

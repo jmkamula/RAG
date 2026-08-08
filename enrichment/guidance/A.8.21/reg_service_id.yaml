@@ -1,0 +1,14 @@
+must_id: item:A.8.21:reg_service_id
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Per-row service identifier (ISP / CDN / DNS / SD-WAN / managed-firewall)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each network service in the register with a unique service identifier, clearly stating if it is
+  ISP, CDN, DNS, SD-WAN, or managed-firewall.
+- Record the service provider’s full name and contact details next to each service entry for traceability.
+- Enter the date each service was added or last reviewed in the register to show current information.
+- Name the owner of each service entry as a specific individual, not a team or department, to avoid ambiguity.

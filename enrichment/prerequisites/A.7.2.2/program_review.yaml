@@ -1,0 +1,40 @@
+leaf_id: req:A.7.2.2:program_review
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Every processing activity must have its purpose and lawful basis documented before you can
+    review whether those bases remain valid and defensible. Without this, there is nothing to review.
+  good_enough: All activities in scope have a documented purpose and lawful basis, even if some details
+    need refinement.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need an up-to-date register of information assets and processing activities to ensure
+    all relevant activities are included in the lawful basis review. Missing assets could mean missing
+    unlawful processing.
+  good_enough: A current list of information assets and processing activities exists, covering all major
+    data flows.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: Special-category data requires dual lawful bases and extra scrutiny. You need to know which
+    activities involve special-category data to check for correct lawful basis coverage.
+  good_enough: Activities involving special-category data are flagged or classified, even if the scheme
+    is basic.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The review must cover all in-scope activities. If the scope is unclear, you risk missing
+    activities or reviewing irrelevant ones.
+  good_enough: There is a documented scope statement that clearly defines which parts of the organization
+    and which activities are included.

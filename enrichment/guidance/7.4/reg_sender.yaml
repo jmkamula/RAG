@@ -1,0 +1,15 @@
+must_id: item:7.4:reg_sender
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: Per-row sender / responsible person
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the individual who initiated or is responsible for each communication event
+  in a dedicated column of the register.
+- Enter the date and time for each communication event to establish a clear timeline of actions.
+- Name the sender or responsible person as a specific individual, not as a group, team, or department.
+- Cross-reference each entry with supporting documentation, such as emails or meeting minutes, to verify
+  the responsible person's involvement.

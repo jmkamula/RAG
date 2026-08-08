@@ -1,0 +1,16 @@
+must_id: item:A.7.2.2:rev_date
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of your Lawful Basis Program in a dated document or review log.
+- State the planned review interval for the Lawful Basis Program in a documented schedule or policy.
+- Confirm the next scheduled review date is within the documented planned interval and note this in the
+  review log.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Attach evidence of the completed review, such as meeting minutes or a signed review summary, with a
+  clear review date.

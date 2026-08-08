@@ -1,0 +1,14 @@
+must_id: item:4.3:owner
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Named owner of the scope statement (ISMS Manager)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the ISMS Manager as the specific, accountable owner of the scope statement, using their full name
+  and job title.
+- Record the date the ISMS Manager was assigned ownership within the scope statement document.
+- Sign the scope statement to confirm the ISMS Manager’s acceptance of responsibility.
+- Avoid listing a group, team, or department as the owner; use only an individual’s name.

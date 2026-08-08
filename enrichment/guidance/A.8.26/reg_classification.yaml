@@ -1,0 +1,16 @@
+must_id: item:A.8.26:reg_classification
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Per-row data-classification footprint
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the data classification for each application row using your organisation’s official data classification
+  scheme.
+- Cross-reference each application’s classification with your central data classification register to
+  confirm consistency.
+- Record the name and date of the person assigning each classification for every application entry.
+- Flag any application row where the data classification field is left blank or marked as “unknown” for
+  follow-up.

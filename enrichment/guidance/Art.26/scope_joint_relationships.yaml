@@ -1,0 +1,16 @@
+must_id: item:Art.26:scope_joint_relationships
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Relationships qualifying as joint controllership enumerated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all business relationships where your organisation and another party jointly decide why and how
+  personal data is processed, referencing specific contracts or projects.
+- Name each joint controller partner as a specific legal entity, not as a generic group or department.
+- Document the date and version of the record enumerating joint controllership relationships, and update
+  it whenever a new relationship is established or changed.
+- Cross-reference each listed relationship to the relevant joint controllership agreement or memorandum
+  of understanding.

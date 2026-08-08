@@ -1,0 +1,17 @@
+must_id: item:A.7.2:scope_change_drivers
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new secure area, area classification change, sub-letting)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific events that require re-scoping, such as new secure areas, changes in area classification,
+  or sub-letting agreements, in a dated document.
+- Assign a named individual responsible for monitoring and triggering re-scoping actions when any listed
+  event occurs.
+- Record each re-scoping decision with the date, the triggering event, and the person who approved the
+  updated secure areas scope.
+- Avoid using vague triggers like "as needed" or "periodically"—state clear, actionable events that prompt
+  a review.

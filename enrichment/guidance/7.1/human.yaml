@@ -1,0 +1,18 @@
+must_id: item:7.1:human
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Human resources assigned (headcount, roles, time allocation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the names and job titles of all individuals assigned to ISMS responsibilities in a dated resource
+  allocation record.
+- Specify the percentage of each assigned person's work time dedicated to ISMS activities in the same
+  record.
+- Document the headcount and roles required for ISMS operation, referencing your organisational chart
+  or staffing plan.
+- Name the ISMS resource owner as a specific individual, not a team or department, in the allocation record.
+- Obtain sign-off from senior management confirming the adequacy of assigned ISMS resources, and retain
+  the signed approval with the record.

@@ -1,0 +1,20 @@
+must_id: item:Art.35:content_minimum
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Minimum content per Art.35.7 (systematic description + necessity/proportionality + risks +
+  measures to address)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a systematic description of the data processing activity, including its purpose, scope, and
+  data flows, in the assessment procedure.
+- State the reasons why the processing is necessary and proportionate, referencing specific business needs
+  and legal bases in the procedure.
+- Record the identified risks to the rights and freedoms of individuals, listing potential impacts and
+  likelihood in the assessment documentation.
+- Describe the measures planned to address these risks, including safeguards, security controls, and mechanisms
+  for ongoing monitoring.
+- Name the procedure owner as a specific individual, not a generic role or department, and include their
+  contact details in the procedure document.

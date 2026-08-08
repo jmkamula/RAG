@@ -1,0 +1,18 @@
+must_id: item:10.1:tracking
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Tracking of improvement actions to closure with effectiveness check
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each improvement action in a central log, including a unique identifier, description, responsible
+  person, and date raised.
+- Assign a specific individual as the owner for each action — do not use generic roles like "the team"
+  or "management".
+- Document the closure date and a summary of actions taken for each improvement entry in the log.
+- Capture evidence of effectiveness checks for each closed action, such as test results, user feedback,
+  or audit findings, linked to the log entry.
+- Review the improvement log at regular intervals and keep meeting minutes showing discussion of progress
+  and any overdue actions.

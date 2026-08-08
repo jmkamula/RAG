@@ -1,0 +1,19 @@
+must_id: item:Art.21:rev_balancing_quality
+control_ref: Art.21
+standard_id: GDPR:2016/679
+must_text: Balancing-test quality sample — continued-processing decisions have compelling-grounds documentation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a recent sample of continued-processing decisions where individuals objected to processing under
+  Article 21.1 and document the selection date.
+- Gather the written balancing-test assessments for each sampled case, showing how compelling grounds
+  for continued processing were evaluated and justified.
+- Confirm each assessment includes a clear explanation of the legitimate interests pursued and why they
+  override the individual's rights and interests.
+- Name the decision-maker responsible for each balancing-test outcome as a specific individual, not as
+  a team or department.
+- Retain dated records of the final decision and rationale for each case, ensuring they are accessible
+  for audit review.

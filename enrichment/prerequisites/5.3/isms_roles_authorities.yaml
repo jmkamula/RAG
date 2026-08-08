@@ -1,0 +1,32 @@
+leaf_id: req:5.3:isms_roles_authorities
+control_ref: '5.3'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS roles and authorities matrix must align with the defined scope of the ISMS. Without
+    a clear scope, you cannot meaningfully assign or communicate responsibilities.
+  good_enough: The scope statement should be formally documented and approved, clearly identifying the
+    boundaries and applicability of the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets out management’s commitment and high-level expectations for information security,
+    which the roles and authorities matrix operationalizes. The matrix must reflect the commitments and
+    principles set in the policy.
+  good_enough: A current, approved information security policy exists and is accessible to those drafting
+    the matrix.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and Responsibilities (Operational)
+  category: direct
+  rationale: While 5.3 is about management-system roles, operational roles from A.5.2 may overlap or inform
+    assignments. Awareness of operational responsibilities helps avoid gaps or duplication.
+  good_enough: A draft or working list of operational information security roles and responsibilities
+    is available for reference during matrix drafting.

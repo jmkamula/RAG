@@ -1,0 +1,39 @@
+leaf_id: req:A.8.28:coding_program_review
+control_ref: A.8.28
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, applications, and development activities are in-scope for
+    the ISMS to ensure the secure coding program review covers all relevant areas.
+  good_enough: A current, approved scope statement that clearly identifies which development environments
+    and codebases are included in the ISMS.
+- ref: A.8.25
+  standard_id: ISO27001:2022
+  title: Secure development life cycle
+  category: direct
+  rationale: The secure development life cycle defines the baseline secure coding practices and standards
+    that the periodic review must assess for effectiveness and currency.
+  good_enough: Documented SDLC procedures that specify secure coding requirements and are being followed
+    for in-scope development.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment identifies which coding risks are most relevant, helping to focus the review
+    on high-impact areas and justify updates to coding standards or tooling.
+  good_enough: A recent risk assessment that includes risks related to software development and coding
+    practices.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of responsibilities ensures that the right people are accountable for conducting
+    and acting on the secure coding program review.
+  good_enough: A list or matrix showing who is responsible for secure coding practices and for conducting
+    the periodic review.

@@ -1,0 +1,14 @@
+must_id: item:Art.19:rev_reviewer
+control_ref: Art.19
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as the Data Protection Officer (DPO) by full name and job title in the notification
+  program review record.
+- Record the date the DPO completed the review on the notification program review document.
+- Sign the review record physically or electronically to confirm the DPO’s direct involvement.
+- Avoid listing the reviewer as “the team” or a generic department; use a specific, identifiable individual.

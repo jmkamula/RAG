@@ -1,0 +1,20 @@
+must_id: item:A.5.33:scope_jurisdictions
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Jurisdictions covered (each may impose different minimum-retention or right-to-erasure constraints
+  — HQ, places of business, data-residency destinations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all countries and regions where your organisation operates, stores, or processes records, including
+  headquarters and any cloud or third-party data locations.
+- Document the specific legal or regulatory retention and erasure requirements for each jurisdiction identified,
+  citing the relevant laws or regulations by name.
+- Assign a named individual responsible for monitoring changes in jurisdictional requirements and updating
+  the records categories scope accordingly.
+- Record the date of your most recent review of jurisdictional coverage to demonstrate the information
+  is current and actively maintained.
+- Specify each jurisdiction individually—do not use generic terms like "global" or "various regions" that
+  lack clear scope.

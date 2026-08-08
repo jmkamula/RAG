@@ -1,0 +1,17 @@
+must_id: item:A.7.3.5:reg_objection_type
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Objection type per row (absolute — marketing/stats; balancing — legitimate interests / public
+  interest)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each objection as a separate row, clearly stating the objection type as either "absolute" (e.g.,
+  marketing/statistics) or "balancing" (e.g., legitimate interests/public interest).
+- Reference the relevant GDPR Article 21 clause for each objection entry to show the legal basis for the
+  objection type selected.
+- Name the individual who classified the objection type for each row, avoiding generic attributions such
+  as "the team" or "staff".
+- Date each entry to provide a timeline of when the objection was logged and classified.

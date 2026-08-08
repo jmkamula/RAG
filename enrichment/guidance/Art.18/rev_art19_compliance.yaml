@@ -1,0 +1,19 @@
+must_id: item:Art.18:rev_art19_compliance
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Art.19 notification compliance — recipient notifications fired for new/lifted restrictions
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each instance when a data processing restriction is imposed or lifted, including the date and
+  the affected data subject.
+- Name the specific staff member responsible for sending notifications to all recipients of the restricted
+  data.
+- Record the date, time, and method used to notify each recipient whenever a restriction is applied or
+  removed.
+- Retain copies of all notification messages sent to recipients, including recipient names and delivery
+  confirmations.
+- Name all recipients individually in notification logs—do not use generic terms like "all partners" or
+  "relevant parties."

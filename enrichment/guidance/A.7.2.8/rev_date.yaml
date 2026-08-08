@@ -1,0 +1,18 @@
+must_id: item:A.7.2.8:rev_date
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of your Records of Processing Activities (RoPA) program in a dated
+  entry or review log.
+- State the planned review interval for the RoPA program in a documented schedule or policy, referencing
+  a specific time frame (e.g., annually).
+- Compare the actual review date against the planned interval and document the outcome in a review checklist
+  or summary.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Retain evidence of the completed review, such as meeting minutes or a signed review report, with the
+  date clearly visible.

@@ -1,0 +1,33 @@
+leaf_id: req:Art.16:applicable_systems_scope
+control_ref: Art.16
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a current, accurate inventory of all processing activities and systems handling
+    personal data to identify which systems are in scope for rectification requests. Without this, you
+    can't reliably determine where rectifiable data resides.
+  good_enough: A working RoPA that lists all major systems and processing activities involving personal
+    data, even if some minor updates are pending.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: Knowing the ISMS scope helps clarify which systems and business units are covered by your
+    compliance program, ensuring your rectification scope aligns with your broader security and privacy
+    boundaries.
+  good_enough: A documented ISMS scope that clearly identifies included systems and locations, even if
+    not fully detailed for every asset.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for processing personal data helps determine which processing
+    activities are subject to rectification rights and which may be exempt or limited.
+  good_enough: A summary mapping of lawful bases to processing activities, sufficient to flag any activities
+    where rectification might not apply.

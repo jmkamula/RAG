@@ -1,0 +1,16 @@
+must_id: item:9.1:scope_target_derivation
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Target derivation rationale per metric (regulatory, contractual, internal-baseline, benchmark)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each metric with its corresponding measurement target in a dated document maintained by the information
+  security manager.
+- State the rationale for each target, specifying whether it is based on regulatory, contractual, internal
+  baseline, or industry benchmark requirements.
+- Reference the exact source for each target, such as a regulation name, contract clause, internal policy,
+  or benchmark report, in the same document.
+- Name the individual who approved each target and rationale, avoiding group or department names.

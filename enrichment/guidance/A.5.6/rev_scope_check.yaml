@@ -1,0 +1,18 @@
+must_id: item:A.5.6:rev_scope_check
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Cross-check against the risk-topic scope — any new threat or domain that should add a SIG
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the list of current SIGs with your documented risk topics to identify any gaps or new
+  areas not covered by an existing SIG.
+- Document any new threats or domains identified during risk assessments that are not currently addressed
+  by a SIG.
+- Assign responsibility to a named individual to initiate SIG engagement for each uncovered risk topic
+  or domain.
+- Record the date and outcome of each periodic review, including decisions and rationale for adding or
+  not adding new SIGs.
+- Name the reviewer as a specific person, not a group or department, to avoid ambiguity in accountability.

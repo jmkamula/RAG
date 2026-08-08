@@ -1,0 +1,17 @@
+must_id: item:A.5.2:review_triggers
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: List of significant-change triggers (reorg, new business line, key role departure) that should
+  prompt an ad-hoc review
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific events that would trigger an ad-hoc review, such as mergers, major restructures, new business
+  lines, or critical staff departures.
+- Document each trigger in the Roles and Responsibilities Review Record, including a brief description
+  and the date it was added.
+- Name the person responsible for monitoring these triggers by full name and job title, not just a team
+  or department.
+- Review the list annually and record the date and outcome of the review, even if no changes are made.

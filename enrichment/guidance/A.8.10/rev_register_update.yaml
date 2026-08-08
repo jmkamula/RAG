@@ -1,0 +1,18 @@
+must_id: item:A.8.10:rev_register_update
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Findings propagated to procedure / scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and summary of the most recent periodic deletion program review in a central log accessible
+  to relevant stakeholders.
+- Document each finding from the review, linking it to the specific procedure or scope area it affects.
+- Update the written procedure or scope documentation to reflect changes or improvements based on review
+  findings, including version numbers and dates.
+- Name the individual responsible for approving and implementing each documented change, avoiding generic
+  roles or group ownership.
+- Retain evidence of communication to staff about updated procedures, such as an email or meeting record
+  with recipient names and dates.

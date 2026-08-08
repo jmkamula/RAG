@@ -1,0 +1,19 @@
+must_id: item:Art.25:default_accessibility
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Default accessibility limited — data not made accessible to indefinite recipients without intervention
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the default privacy settings for each system, showing that personal data is only accessible
+  to necessary users unless changed by a deliberate action.
+- Name the person responsible for setting and reviewing default accessibility for each system, listing
+  them as a specific individual, not a team.
+- Record the date and outcome of the most recent review confirming that no personal data is accessible
+  to undefined or unlimited recipients by default.
+- Retain system configuration screenshots or export files that demonstrate restricted default access settings
+  for personal data.
+- State any exceptions where broader access is required, including the justification and approval by a
+  named decision-maker.

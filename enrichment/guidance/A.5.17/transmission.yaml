@@ -1,0 +1,19 @@
+must_id: item:A.5.17:transmission
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Transmission method requirements (out-of-band, encrypted, never on the same channel as the
+  identity itself; never via plain email)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the approved methods for transmitting authentication information, specifying encryption and
+  out-of-band requirements in a formally version-controlled procedure.
+- State that authentication information must never be sent via plain email or on the same channel as the
+  user’s identity.
+- Name a specific individual as the procedure owner—do not list a team or department as responsible.
+- Record the date of the last review and approval of the procedure, including the approver’s name and
+  signature.
+- Cross-reference the procedure with technical controls or system logs that demonstrate compliance with
+  the documented transmission methods.

@@ -1,0 +1,20 @@
+must_id: item:A.6.3:effectiveness_metrics
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Effectiveness measurement (quiz pass rates, phishing simulation click rates trend, reporting-rate
+  trend from A.6.8)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the methods used to measure training effectiveness, such as quiz pass rates, phishing simulation
+  click rates, and incident reporting trends, in a dated record.
+- Record the results of each measurement activity, including dates and responsible individuals, in a central
+  log or dashboard.
+- Name a specific individual responsible for reviewing and analyzing effectiveness data, rather than assigning
+  this to a group or department.
+- Review the measurement results at least annually and document any actions taken or improvements made
+  in response to identified trends.
+- Retain evidence of measurement results and improvement actions, such as meeting minutes or updated training
+  materials, for auditor inspection.

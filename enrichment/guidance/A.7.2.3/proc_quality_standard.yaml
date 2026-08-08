@@ -1,0 +1,19 @@
+must_id: item:A.7.2.3:proc_quality_standard
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: Consent-quality standard (freely given / specific / unambiguous / clear affirmative act)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the consent determination procedure, clearly describing how consent is obtained, recorded,
+  and withdrawn, with version control and approval date.
+- State the criteria used to judge if consent is freely given, specific, unambiguous, and based on a clear
+  affirmative act, with examples.
+- Name the individual responsible for reviewing and updating the consent determination procedure—do not
+  list a team or department.
+- Retain sample consent records demonstrating the procedure in action, showing explicit user action and
+  clear language for each consent type.
+- Cross-reference the procedure to the relevant privacy notice and data processing activities to show
+  alignment with actual data collection practices.

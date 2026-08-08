@@ -1,0 +1,19 @@
+must_id: item:B.8.2.3:rev_isolation_audit
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: Isolation audit — marketing systems verified to use own-controller PII only
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific individual responsible for verifying that marketing systems only use personal data
+  collected under your own controller role.
+- Document the most recent audit of marketing systems, including system names, data sources checked, and
+  the audit completion date.
+- Record evidence showing that no personal data from third-party controllers is present in marketing databases,
+  such as screenshots or data lineage reports.
+- State the method used to confirm data isolation, such as technical controls or system configuration,
+  and include supporting documentation.
+- Avoid listing the owner as "marketing team" or "IT"—identify a named person accountable for ongoing
+  compliance.

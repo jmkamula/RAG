@@ -1,0 +1,17 @@
+must_id: item:A.8.32:reg_emergency_flag
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Per-change emergency flag + post-hoc-review reference where emergency
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add an "emergency" checkbox or field to each change entry in the Change Register, allowing users to
+  clearly flag if the change was an emergency.
+- Record the name and date of the person who made the emergency designation for each flagged change.
+- Link each emergency change entry to a dated record of the post-implementation review, including reviewer
+  name and summary of findings.
+- Name the reviewer for each emergency change as a specific individual, not a group or team.
+- Avoid leaving any emergency flag or post-hoc review fields blank; auditors will flag incomplete records
+  as non-compliant.

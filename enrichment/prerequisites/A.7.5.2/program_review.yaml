@@ -1,0 +1,47 @@
+leaf_id: req:A.7.5.2:program_review
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.5.1
+  standard_id: ISO27701:2019
+  title: List of Personal Data Destinations
+  category: direct
+  rationale: You must have an up-to-date register of all personal data destinations before you can review
+    its accuracy or alignment with public notices. The review process depends on having a baseline list
+    to check.
+  good_enough: A documented list of all current personal data destinations, even if not fully validated,
+    is sufficient to begin the review.
+- ref: A.7.4.6
+  standard_id: ISO27701:2019
+  title: Public Privacy Notice
+  category: direct
+  rationale: The review must compare the destinations register with what is disclosed in your public privacy
+    notice. Without an existing notice, you cannot verify alignment or completeness.
+  good_enough: A published privacy notice that references data transfers or destinations, even if not
+    exhaustive, is enough to start the review.
+- ref: A.7.4.7
+  standard_id: ISO27701:2019
+  title: Sub-Processor Register
+  category: direct
+  rationale: To confirm that subcontractor destinations are captured, you need a current list of all sub-processors
+    handling personal data. This ensures the review covers all relevant third parties.
+  good_enough: A working draft or partial list of sub-processors is sufficient to proceed with the review.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organization and which data flows are in-scope
+    for the review. Without this, you risk missing destinations or reviewing irrelevant ones.
+  good_enough: A documented ISMS scope that identifies in-scope business units and data flows, even if
+    high-level, is enough to unblock the review.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An asset register helps identify systems and data flows that may involve personal data transfers,
+    ensuring the destinations list is complete and accurate.
+  good_enough: An initial asset register listing key systems and data repositories is sufficient to support
+    the review process.

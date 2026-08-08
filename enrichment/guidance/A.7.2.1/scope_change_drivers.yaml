@@ -1,0 +1,16 @@
+must_id: item:A.7.2.1:scope_change_drivers
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Trigger list (new product line, new geo entry, new data source)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all triggers that require a scope review, such as launching a new product line, entering a new
+  country, or adding a new data source, in a dated document.
+- Assign a named individual responsible for monitoring these triggers and updating the processing activities
+  scope when any are met.
+- Record each scope review event with the trigger, date, and decision outcome in a log that is accessible
+  for audit.
+- Name the owner as a specific person, not a team or department, to avoid ambiguity in responsibility.

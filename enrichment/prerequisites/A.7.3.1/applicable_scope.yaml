@@ -1,0 +1,40 @@
+leaf_id: req:A.7.3.1:applicable_scope
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know the boundaries of your overall management system before you can define which
+    jurisdictions and subject categories are relevant for privacy controls. This ensures your privacy
+    scope is anchored to your broader ISMS.
+  good_enough: A clear, documented ISMS scope that identifies included business units, locations, and
+    activities. It doesn't need to be perfect, but must exist and be agreed internally.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Understanding the purposes for processing personal data is essential to determine which jurisdictions
+    and subject categories are in play. Without this, you can't accurately map your privacy obligations.
+  good_enough: A list of the main purposes for processing personal data, even if some details are still
+    being refined.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: You need to know the legal grounds for processing personal data in each context to identify
+    which jurisdictions' laws apply and which data subjects are covered.
+  good_enough: A working draft of lawful bases for each processing activity, sufficient to identify which
+    laws/jurisdictions are relevant.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of privacy and compliance roles is necessary to ensure the right people
+    are involved in defining and maintaining the applicable scope.
+  good_enough: Named individuals or teams responsible for privacy and compliance, even if role descriptions
+    are still being finalized.

@@ -1,0 +1,17 @@
+must_id: item:5.3:rev_currency
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Matrix currency check — every role still has an active holder
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Export the current ISMS roles matrix, including named individuals and their assigned responsibilities,
+  with a date-stamp for the review.
+- Cross-reference each role in the matrix with current HR or organizational records to confirm every listed
+  individual is still actively employed.
+- Name the owner of each role as a specific person, not a group or department, to avoid ambiguity in accountability.
+- Record the results of the matrix review, noting any vacant roles or mismatches, and document actions
+  taken to resolve gaps.
+- Sign and date the completed review by the responsible manager to provide evidence of timely oversight.

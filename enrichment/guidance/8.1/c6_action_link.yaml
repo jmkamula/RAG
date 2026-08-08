@@ -1,0 +1,19 @@
+must_id: item:8.1:c6_action_link
+control_ref: '8.1'
+standard_id: ISO27001:2022
+must_text: Traceability from Clause 6 actions to operational implementation
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each action from Clause 6 risk treatment plans to a specific operational control or
+  process in your procedure document.
+- Record the date and responsible person for each operational control implementation linked to Clause
+  6 actions.
+- Attach evidence of operational activities, such as logs or meeting minutes, that demonstrate the actions
+  were carried out as planned.
+- Name the owner of the operational planning and control procedure as a specific individual, not a team
+  or department.
+- Review the procedure annually and update the mapping if Clause 6 actions or operational controls change,
+  keeping a dated revision history.

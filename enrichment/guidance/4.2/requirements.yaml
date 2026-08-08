@@ -1,0 +1,18 @@
+must_id: item:4.2:requirements
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Requirements per party documented (legal, regulatory, contractual, business expectations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each interested party by name and role in the register, including customers, regulators, suppliers,
+  and internal stakeholders.
+- Document the specific legal, regulatory, contractual, and business requirements for each party, referencing
+  source documents or agreements.
+- Assign a named individual responsible for maintaining and updating each party’s requirements in the
+  register.
+- Record the date each requirement was last reviewed or updated to show ongoing relevance.
+- Avoid grouping requirements under vague categories like “various laws” or “industry standards”; specify
+  the exact law, regulation, or contract.

@@ -1,0 +1,18 @@
+must_id: item:A.5.8:templates
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Standard project templates referenced (security sections in initiation pack, requirements template,
+  closure checklist)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all standard project templates used, including initiation pack, requirements template, and closure
+  checklist, in the procedure with their current version numbers.
+- Reference specific security-related sections within each template, stating their section numbers or
+  headings in the documented procedure.
+- Attach or link the actual templates to the procedure document, ensuring they are accessible and match
+  the referenced versions.
+- Name the template owner as a specific individual responsible for updates, not a generic team or department.
+- Record the date the procedure was last reviewed and updated to reflect any changes in the templates.

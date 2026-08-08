@@ -1,0 +1,19 @@
+must_id: item:A.5.32:intake_ma
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: M&A or contractor-handover intake — IPR transferred in is inventoried and ownership re-confirmed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each acquired work or asset in an inventory, including title, description, acquisition date,
+  and source organization or contractor.
+- Name the current intellectual property owner for each item as a specific individual or legal entity,
+  not a team or department.
+- Document evidence of IPR transfer, such as signed agreements or assignment letters, and link these to
+  the relevant inventory entry.
+- Confirm and date the review of ownership status for each acquired asset, with the reviewer’s name clearly
+  indicated.
+- Cross-reference the updated inventory with the M&A or contractor-handover checklist to verify no acquired
+  works are missing.

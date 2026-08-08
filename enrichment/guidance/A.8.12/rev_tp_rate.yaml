@@ -1,0 +1,19 @@
+must_id: item:A.8.12:rev_tp_rate
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: True-positive rate trending (detection effectiveness)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the true-positive rate for each review period in a dated record, showing the number of true
+  positives versus total alerts.
+- Chart the true-positive rate trend across multiple review periods in a single visual, such as a line
+  graph, with clear date labels.
+- Name the reviewer who validated the true-positive rate calculations for each period, using their full
+  name and review date.
+- Attach supporting evidence, such as sample alert logs or case summaries, to demonstrate how true positives
+  were identified and confirmed.
+- Record any changes made to detection rules or processes between review periods, linking them to observed
+  changes in the true-positive rate.

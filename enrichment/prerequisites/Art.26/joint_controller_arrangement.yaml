@@ -1,0 +1,31 @@
+leaf_id: req:Art.26:joint_controller_arrangement
+control_ref: Art.26
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: Up-to-date records of processing activities help identify joint processing and clarify the
+    scope and nature of shared responsibilities between controllers.
+  good_enough: Maintain a current RoPA that lists all processing activities, including those involving
+    other controllers, to support accurate arrangement drafting.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: direct
+  rationale: Each joint controller must establish a lawful basis for the processing activities they jointly
+    determine, as this underpins the arrangement and allocation of responsibilities.
+  good_enough: Identify and document the lawful basis for each relevant processing activity before finalizing
+    the joint controller arrangement.
+- ref: Art.28
+  standard_id: GDPR:2016/679
+  title: Processor Obligations
+  category: direct
+  rationale: Distinguishing between joint controller and controller-processor relationships is critical,
+    as the arrangement under Art.26 is only appropriate where both parties are controllers.
+  good_enough: Review and confirm that the relationship is not controller-processor by reference to Art.28
+    requirements before proceeding with a joint controller arrangement.

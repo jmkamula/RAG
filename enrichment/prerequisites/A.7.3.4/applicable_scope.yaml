@@ -1,0 +1,39 @@
+leaf_id: req:A.7.3.4:applicable_scope
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the specific purposes for which personal data is processed before you can determine
+    which activities rely on consent. This ensures that consent is only sought where appropriate and relevant.
+  good_enough: A documented list of all processing purposes, even if not fully mapped to every data flow,
+    is sufficient to proceed.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: You need to identify the lawful basis for each processing activity to distinguish which ones
+    rely on consent. This is essential for scoping consent-based activities accurately.
+  good_enough: A working register mapping each activity to its lawful basis (consent, contract, legal
+    obligation, etc.) is enough to unblock this step.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The overall ISMS scope defines which parts of the organization and which activities are covered,
+    ensuring that the consent-basis activities you identify are within the program’s boundaries.
+  good_enough: A draft or approved ISMS scope statement that outlines the organizational and process boundaries
+    is sufficient.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A data classification scheme helps you identify which information assets are personal data,
+    so you can focus your consent-basis scope on relevant activities.
+  good_enough: A basic classification scheme that distinguishes personal data from other data types is
+    enough to proceed.

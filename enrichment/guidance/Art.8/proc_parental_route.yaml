@@ -1,0 +1,19 @@
+must_id: item:Art.8:proc_parental_route
+control_ref: Art.8
+standard_id: GDPR:2016/679
+must_text: Parental-consent capture route (when subject is under threshold) — verifiable parental authority
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for verifying a child's age before collecting personal data, including the age
+  threshold and verification method, in a dated procedure document.
+- State the steps for obtaining parental consent, detailing how you confirm the parent or guardian’s authority,
+  in a written workflow.
+- Record each instance of parental consent with the parent or guardian’s full name, contact details, date
+  of consent, and method of verification in an auditable log.
+- Name the staff member responsible for reviewing and updating the procedure, ensuring a specific individual
+  is listed rather than a team or department.
+- Retain copies of all parental consent records and verification evidence for each child, stored securely
+  and retrievable upon request.

@@ -1,0 +1,20 @@
+must_id: item:A.6.3:curriculum
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Curriculum aligned to job functions (general awareness for all, deeper modules per role — developers,
+  admins, finance, HR, executives)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Map all job functions to required security awareness topics and role-specific modules in a curriculum
+  matrix, dated and approved by the information security manager.
+- Document the curriculum content for each role, including general awareness for all staff and deeper
+  modules for developers, admins, finance, HR, and executives.
+- Assign a named owner responsible for maintaining and updating the curriculum; do not list a team or
+  department as the owner.
+- Record evidence of curriculum review and approval by management, including names, signatures, and dates
+  on the latest version.
+- Cross-reference training records to the curriculum matrix to show that assigned modules match each employee’s
+  documented job function.

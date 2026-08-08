@@ -1,0 +1,17 @@
+must_id: item:A.5.28:disp_closure_type
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Closure type per record (external_handover / retention_destruction / case_closed_internal)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Record the closure type for each package in the disposal or handover register, selecting from external_handover,
+  retention_destruction, or case_closed_internal.
+- Name the individual responsible for confirming the closure type on each record, ensuring a specific
+  person is listed rather than a team or department.
+- Date each entry at the time the closure type is assigned to provide a clear timeline for the preservation
+  lifecycle.
+- Cross-reference each closure record with supporting documentation, such as destruction certificates
+  or handover receipts, to verify the selected closure type.

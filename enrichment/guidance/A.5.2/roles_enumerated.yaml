@@ -1,0 +1,18 @@
+must_id: item:A.5.2:roles_enumerated
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: Information security roles enumerated (CISO, ISMS Manager, Asset Owners, Risk Owners, Incident
+  Manager, DPO where applicable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all key information security roles, including CISO, ISMS Manager, Asset Owners, Risk Owners, Incident
+  Manager, and DPO if required, in a table.
+- Name the owner of each role as a specific individual, not a team or department, and record their full
+  name in the matrix.
+- Document the main responsibilities for each role in clear, specific terms within the matrix.
+- Date and approve the completed matrix with a signature from senior management to confirm accuracy and
+  authority.
+- Review the matrix annually and record the review date and reviewer’s name to show it is kept up to date.

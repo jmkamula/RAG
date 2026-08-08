@@ -1,0 +1,18 @@
+must_id: item:7.2:gap_actions
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Actions taken to close competence gaps (training, hiring, mentoring) where applicable
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and list specific competence gaps for each relevant role in a dated competence assessment record.
+- Document the actions taken to address each gap, such as completed training, new hires, or assigned mentors,
+  with supporting dates.
+- Name the individual responsible for approving each action taken, ensuring a specific person is listed
+  rather than a group or department.
+- Attach evidence of completion, such as training certificates, signed onboarding forms, or mentoring
+  logs, to each competence gap entry.
+- Record a follow-up review date and outcome to confirm the effectiveness of the action taken in closing
+  the competence gap.

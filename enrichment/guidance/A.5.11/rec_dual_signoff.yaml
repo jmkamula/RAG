@@ -1,0 +1,16 @@
+must_id: item:A.5.11:rec_dual_signoff
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Dual signoff per record (returning party + receiving role) — captured even when in-person handover
+  isn't possible (remote attestation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name and contact details of the person returning each asset on the asset return record.
+- Capture the date and time of asset return, specifying the method used (in-person or remote handover).
+- Require both the returning party and a designated receiving individual to sign or electronically attest
+  to the asset return on the same record.
+- Name the receiving party as a specific individual, not a generic role or department, to avoid ambiguity.
+- Retain a copy of the signed or attested asset return record in a secure, auditable location.

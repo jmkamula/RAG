@@ -1,0 +1,20 @@
+must_id: item:A.8.31:rev_no_prod_data_sample
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Sample-based check — no raw production data found in lower environments (auditor-critical for
+  GDPR)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the environment separation review and record their name and role in
+  the review log.
+- Document the date, scope, and sample selection criteria for each review in a dedicated Environment Separation
+  Program Review record.
+- Record the results of sample-based checks, explicitly stating whether any raw production data was found
+  in lower environments.
+- Attach evidence of checks performed, such as screenshots or database queries, to the review record for
+  each sampled environment.
+- Name any exceptions or findings with specific details; avoid using vague terms like "no issues" or "all
+  clear" without supporting evidence.

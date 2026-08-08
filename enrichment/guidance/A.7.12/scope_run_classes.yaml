@@ -1,0 +1,19 @@
+must_id: item:A.7.12:scope_run_classes
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Run classes (LAN backbone, intra-rack, perimeter, external/landlord-controlled)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all cabling runs by class, including LAN backbone, intra-rack, perimeter, and external/landlord-controlled,
+  in a dated inventory document.
+- Name the person responsible for maintaining the cabling runs scope, identifying a specific individual
+  rather than a team or department.
+- Document the physical or logical boundaries for each cabling class, referencing building plans or network
+  diagrams with version and date.
+- Record any changes to cabling scope or classification in a change log, including the date, description,
+  and approver’s name.
+- Attach evidence of review and approval for the cabling runs scope, such as a signed and dated sign-off
+  by the responsible individual.

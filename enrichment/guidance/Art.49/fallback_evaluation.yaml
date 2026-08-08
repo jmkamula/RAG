@@ -1,0 +1,19 @@
+must_id: item:Art.49:fallback_evaluation
+control_ref: Art.49
+standard_id: GDPR:2016/679
+must_text: Documented attempt at Art.46 safeguards before resorting to Art.49 (per EDPB 2/2018)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each cross-border data transfer request, including the purpose, destination country, and reason
+  why standard safeguards under Article 46 were not used.
+- Record a dated assessment showing which Article 46 safeguards were considered and the reasons they were
+  found not to be applicable or feasible.
+- Attach evidence of consultation with legal or data protection experts regarding the inability to implement
+  Article 46 safeguards for the specific transfer.
+- Name the responsible individual who made the final decision to rely on an Article 49 derogation, not
+  just a team or department.
+- Retain all supporting correspondence and decision records in a central register before proceeding with
+  the transfer.

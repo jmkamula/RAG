@@ -1,0 +1,16 @@
+must_id: item:Art.38:reg_coi_attestation
+control_ref: Art.38
+standard_id: GDPR:2016/679
+must_text: Per-row conflict-of-interest re-attestation (Art.38.6)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the DPO for each register entry as a specific individual, not a department or generic title.
+- Document a signed and dated statement from the DPO for each entry, explicitly confirming no conflict
+  of interest exists.
+- Record the date of the most recent conflict-of-interest re-attestation for each row in the register.
+- Attach supporting evidence, such as a conflict-of-interest declaration form, to each register entry
+  for auditor review.
+- Review all register entries annually and update attestations to ensure ongoing accuracy and compliance.

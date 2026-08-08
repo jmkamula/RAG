@@ -1,0 +1,17 @@
+must_id: item:A.8.3:reg_last_recert
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Per-row last recertification date (drives staleness detection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent access recertification date for each system and user combination in a dedicated
+  column of the Access Matrix Register.
+- Name the person who performed each recertification, using their full name rather than a generic role
+  or team label.
+- Cross-reference each recertification date with supporting evidence, such as a signed review log or approval
+  email, stored in a central location.
+- Flag any row with a missing or outdated recertification date for immediate review to prevent undetected
+  access drift.

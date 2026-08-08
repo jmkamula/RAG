@@ -1,0 +1,19 @@
+must_id: item:A.8.25:rev_lifecycle_effectiveness
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Lifecycle-effectiveness review (incidents that traced to SDLC gaps)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the SDLC program review and record their name and role in the review
+  documentation.
+- Document all security incidents from the review period that were traced to SDLC process gaps, including
+  incident dates and descriptions.
+- Cross-reference each identified SDLC gap with the relevant incident report to show how the gap contributed
+  to the incident.
+- Record the date of the SDLC program review and have all participants sign or acknowledge the review
+  meeting minutes.
+- Name the owner of each corrective action as a specific person, not a team or department, in the review
+  outcomes.

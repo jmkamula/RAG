@@ -1,0 +1,34 @@
+leaf_id: req:Art.47:applicable_scope
+control_ref: Art.47
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of all processing activities to determine which intra-group
+    data flows and entities are relevant for BCR coverage. Without this, you cannot accurately define
+    the scope of your BCRs.
+  good_enough: A current, reasonably complete RoPA that lists all group entities, processing purposes,
+    and cross-border flows is available—even if some minor updates are pending.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope helps clarify which parts of the organization and which information assets
+    are already subject to formal controls, supporting alignment between BCR scope and existing security
+    boundaries.
+  good_enough: A documented ISMS scope exists that identifies included entities and locations, even if
+    not all privacy-specific details are finalized.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity is essential to justify why certain
+    data flows are included or excluded from BCRs. This ensures BCR scope is not broader or narrower than
+    necessary.
+  good_enough: A summary mapping of processing activities to their lawful bases is available, even if
+    some edge cases are still under review.

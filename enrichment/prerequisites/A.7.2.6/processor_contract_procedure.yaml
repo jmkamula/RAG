@@ -1,0 +1,47 @@
+leaf_id: req:A.7.2.6:processor_contract_procedure
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which business units, processes, and data types are in scope for your ISMS
+    and privacy extension before you can identify which PII processing activities require processor contracts.
+  good_enough: A documented scope statement that clearly covers all PII processing activities and relevant
+    third-party relationships.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must have clarity on the purposes for which PII is processed to ensure processor contracts
+    are tailored to actual processing activities and legal requirements.
+  good_enough: A list or register of PII processing purposes, linked to relevant business processes and
+    third parties.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for each processing activity is essential to ensure contracts with
+    PII processors reflect the correct legal obligations and restrictions.
+  good_enough: Documented lawful basis for each processing activity involving PII processors, even if
+    high-level.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures accountability for drafting, approving, and managing processor
+    contracts and related procedures.
+  good_enough: A documented matrix or list showing who is responsible for processor contract management
+    and oversight.
+- ref: Art.28
+  standard_id: GDPR:2016/679
+  title: Processor Requirements
+  category: cross_role
+  rationale: GDPR Article 28 sets the legal minimum for processor contracts; your procedure must ensure
+    these requirements are met or exceeded.
+  good_enough: A summary or checklist of Article 28.3 requirements to inform contract drafting, even if
+    not yet fully mapped to all contracts.

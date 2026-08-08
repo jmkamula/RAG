@@ -1,0 +1,17 @@
+must_id: item:Art.24:charter_approval
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Approved by top management with date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the top management individual who has authority to approve the Privacy Programme Charter, listing
+  their full name and job title.
+- Record the formal approval of the Privacy Programme Charter in meeting minutes or an official decision
+  log, including the approval date.
+- Sign the Privacy Programme Charter with a physical or electronic signature from the approving top management
+  individual, clearly dated.
+- Avoid using undated or unsigned versions of the Charter, as auditors will flag missing evidence of formal
+  approval.

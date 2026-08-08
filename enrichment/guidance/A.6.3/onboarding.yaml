@@ -1,0 +1,19 @@
+must_id: item:A.6.3:onboarding
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Initial training on onboarding BEFORE access to information assets (gates A.5.18 access grant)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the onboarding training schedule, showing that all new starters complete information security
+  training before being granted access to any information assets.
+- Record the names, roles, and training completion dates for each new hire in a central register, ensuring
+  dates precede access grant dates.
+- Cross-reference each access approval record with the corresponding training completion entry to demonstrate
+  that training occurred before access was granted.
+- Name the training programme owner as a specific individual, not a team or department, in the programme
+  documentation.
+- Retain signed or digitally acknowledged training completion forms for each new employee as evidence
+  of participation.

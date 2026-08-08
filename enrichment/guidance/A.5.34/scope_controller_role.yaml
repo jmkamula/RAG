@@ -1,0 +1,18 @@
+must_id: item:A.5.34:scope_controller_role
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Controller vs Processor vs Joint Controller status per processing context (drives different
+  obligation sets — Art.24-31 for controllers, Art.28 for processors, Art.26 for joint controllers)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the data processing context and describe the specific activities, systems, and data types involved
+  in each scenario.
+- Assign the status of controller, processor, or joint controller for each processing context, referencing
+  GDPR definitions and relevant contracts.
+- Record the named individual responsible for determining and reviewing the status decision for each processing
+  context.
+- Document the date of the most recent review or update to each context’s status and supporting rationale.
+- Specify the status owner as a named person, not a team, department, or generic role.

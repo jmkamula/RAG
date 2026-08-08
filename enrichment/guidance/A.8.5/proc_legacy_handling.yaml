@@ -1,0 +1,19 @@
+must_id: item:A.8.5:proc_legacy_handling
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Legacy protocol handling (rejection by default; documented exception with compensating controls)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all legacy authentication protocols currently in use, including protocol names, system locations,
+  and responsible owners, in a dated inventory record.
+- State in the procedure that legacy authentication protocols are rejected by default and require explicit,
+  documented exception approval before use.
+- Record each approved exception with the named approver, date, justification, and a description of compensating
+  controls in an exceptions log.
+- Name the owner responsible for reviewing and updating the legacy protocol list as a specific individual,
+  not a team or department.
+- Attach evidence of implemented compensating controls—such as additional monitoring or access restrictions—for
+  each exception to the corresponding entry in the exceptions log.

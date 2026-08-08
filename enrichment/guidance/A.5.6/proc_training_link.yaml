@@ -1,0 +1,16 @@
+must_id: item:A.5.6:proc_training_link
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Link to training programme (A.6.3) for representatives who attend on behalf of the org
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the SIG Engagement Procedure to the current training programme for representatives,
+  including the document title and version number.
+- Record the names of all representatives required to attend SIGs and the date they completed the relevant
+  training.
+- Attach evidence of completed training, such as certificates or attendance logs, to each representative’s
+  personnel file.
+- Name the training programme owner as a specific individual, not a generic role or department.

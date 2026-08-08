@@ -1,0 +1,19 @@
+must_id: item:A.7.2.7:proc_breach_coordination
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Breach-notification coordination — who notifies SA + subjects
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the designated individual responsible for notifying the supervisory authority and affected individuals
+  in the joint controller arrangement, listing their full name and role.
+- Document the agreed notification process, including timelines and communication channels, in a signed
+  joint controller procedure dated within the last 12 months.
+- Record the criteria for determining which party leads notification in different breach scenarios, referencing
+  specific examples or decision rules.
+- Attach evidence of mutual approval, such as signatures from both controllers, confirming agreement on
+  the breach notification responsibilities.
+- Specify notification responsibilities using precise job titles or names—avoid vague terms like "the
+  team" or "the organisation."

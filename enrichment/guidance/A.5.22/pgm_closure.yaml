@@ -1,0 +1,19 @@
+must_id: item:A.5.22:pgm_closure
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Findings-closure rate (open / aged / closed) across the portfolio
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the total number of supplier review findings, clearly categorizing each as open, aged, or closed
+  in a dated summary report.
+- Document the criteria used to define "aged" findings, including the specific time threshold and the
+  date this definition was approved.
+- Name the individual responsible for tracking and updating findings-closure rates, listing their full
+  name and current job title.
+- Present closure rate statistics in a table or dashboard, showing calculations for each category and
+  referencing the source data.
+- Avoid reporting only aggregate numbers—break down findings by status and supplier to prevent missing
+  persistent issues with specific vendors.

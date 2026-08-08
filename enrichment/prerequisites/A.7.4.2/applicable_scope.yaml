@@ -1,0 +1,39 @@
+leaf_id: req:A.7.4.2:applicable_scope
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and system boundaries for all security and privacy
+    controls, which is essential to accurately identify which processing operations fall under the privacy
+    extension.
+  good_enough: A documented scope statement that clearly outlines the organizational units, systems, and
+    processes included in the ISMS, even if not fully detailed for privacy yet.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is needed to identify all information assets and systems where
+    PII processing might occur, ensuring no relevant processing operations are missed.
+  good_enough: A working inventory of information assets and systems, with at least high-level identification
+    of those that handle or could handle PII.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the purposes for which PII is processed before you can define
+    the scope of applicable processing operations, as this determines relevance and inclusion.
+  good_enough: A list of documented processing purposes for PII, even if some are still being refined.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A data classification scheme helps distinguish PII from non-PII and anonymized data, which
+    is critical for excluding fully-anonymised operations from the privacy scope.
+  good_enough: A basic classification policy that distinguishes at least between PII, non-PII, and anonymized
+    data, even if not fully rolled out.

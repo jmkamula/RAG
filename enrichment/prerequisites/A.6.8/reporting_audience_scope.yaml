@@ -1,0 +1,40 @@
+leaf_id: req:A.6.8:reporting_audience_scope
+control_ref: A.6.8
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the boundaries of your ISMS to determine who is included in the reporting
+    audience. The scope defines which people, processes, and systems are covered, ensuring the reporting
+    channel reaches everyone it should.
+  good_enough: A clear, documented scope that identifies all relevant internal and external parties with
+    access to the ISMS environment.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Understanding who holds which roles is essential to identify who can and should report incidents,
+    and who needs awareness of the reporting channel. This ensures no key audience is missed.
+  good_enough: A current list or matrix of roles and responsibilities, at least for all groups with access
+    to ISMS-protected assets.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Knowing which assets are in scope helps identify all individuals (including non-employees)
+    who interact with those assets and should be included in the reporting audience.
+  good_enough: An up-to-date register of key assets and their users, even if high-level, to map out potential
+    reporting audiences.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The classification scheme helps determine which information types are most sensitive and
+    which audiences must be especially aware of reporting channels.
+  good_enough: A basic documented scheme showing how information is classified and which user groups handle
+    each class.

@@ -1,0 +1,17 @@
+must_id: item:A.8.26:reg_approval
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Per-row approval lineage (who approved + when)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the individual who approved each application security requirement directly in
+  the corresponding row of the register.
+- Enter the exact approval date for each requirement in a dedicated column next to the approver’s name.
+- Attach or link to any supporting approval documentation, such as an email or signed form, for each requirement
+  row.
+- Name the approver as a specific person, not a group, team, or department, to avoid ambiguity in accountability.
+- Review the register regularly to confirm that every row contains both an approver’s name and a date,
+  with no blank or placeholder entries.

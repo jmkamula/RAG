@@ -1,0 +1,16 @@
+must_id: item:A.7.2:reg_timestamp
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Per-event timestamp (entry; exit timestamp where mantrap enforces it)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time of each individual’s entry into the secure area in the Physical Entry
+  Event Register.
+- Capture the exit timestamp for each individual when a mantrap or similar control enforces tracked exits.
+- Name the person responsible for maintaining and updating the register as a specific individual, not
+  a team or department.
+- Review the register regularly to confirm all required timestamps are present and clearly legible for
+  each event.

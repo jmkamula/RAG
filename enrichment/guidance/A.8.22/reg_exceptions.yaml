@@ -1,0 +1,17 @@
+must_id: item:A.8.22:reg_exceptions
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Per-zone exception inventory (cross-zone allowances with expiry)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each network zone and its intended boundaries in the Network Zone Register, including a unique
+  name and description for each zone.
+- Record all exceptions that allow communication between zones, specifying the source zone, destination
+  zone, and the business justification.
+- State the expiry date for each cross-zone exception and the person responsible for reviewing or renewing
+  the exception.
+- Attach supporting approval records for each exception, signed and dated by an authorized individual.
+- Name the exception owner as a specific person, not a group or department, to avoid ambiguity in responsibility.

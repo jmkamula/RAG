@@ -1,0 +1,19 @@
+must_id: item:A.7.4.6:proc_disposal_period
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+must_text: Disposal period stated per taxonomy category
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each taxonomy category of temporary files in the procedure, using clear, specific names that match
+  your data inventory.
+- State the exact disposal period for each category, using precise timeframes such as "30 days" or "7
+  days after processing."
+- Document the rationale for each disposal period, referencing legal, regulatory, or business requirements
+  where applicable.
+- Assign a named individual responsible for reviewing and updating disposal periods, not a generic role
+  or team.
+- Date and version the procedure document, ensuring the most current version is available for auditor
+  review.

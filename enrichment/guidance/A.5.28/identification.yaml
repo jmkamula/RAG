@@ -1,0 +1,17 @@
+must_id: item:A.5.28:identification
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Identification step (what counts as evidence — logs, images, physical media, witness statements,
+  network captures)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of evidence your organisation recognises, such as system logs, photos, physical devices,
+  witness statements, and network captures, in the procedure document.
+- State clear criteria for what qualifies as evidence in each category, using examples relevant to your
+  organisation’s operations and risks.
+- Name a specific individual or role responsible for confirming whether an item meets the evidence definition
+  at the identification stage.
+- Record the date and method of identification for each piece of evidence in an evidence register or log.

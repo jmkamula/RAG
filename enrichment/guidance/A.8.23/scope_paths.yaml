@@ -1,0 +1,19 @@
+must_id: item:A.8.23:scope_paths
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: Traffic paths covered (on-network / VPN / remote-proxy / split-tunnel exclusions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all network traffic paths where web filtering is applied, including on-premises, VPN, remote proxy,
+  and any split-tunnel exclusions.
+- Document the start and end points for each traffic path, specifying device types, locations, and filtering
+  solutions in use.
+- Name a specific individual responsible for maintaining the web filtering scope, avoiding generic roles
+  like "IT" or "security team."
+- Record the date of the most recent review or update to the web filtering scope, including any changes
+  to traffic path coverage.
+- Cross-reference the documented scope with technical network diagrams to confirm all relevant traffic
+  paths are accurately included.

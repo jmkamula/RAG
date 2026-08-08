@@ -1,0 +1,40 @@
+leaf_id: req:Art.26:joint_controller_program_review
+control_ref: Art.26
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify which processing operations
+    involve joint controllers. Without this, you cannot reliably determine the scope of joint-controller
+    relationships to review.
+  good_enough: A current RoPA that clearly lists all joint-controller arrangements is available, even
+    if some minor updates are pending elsewhere.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Each joint-controller arrangement must be supported by a valid lawful basis for processing.
+    This ensures that the review covers only legitimate processing activities.
+  good_enough: Documented lawful bases exist for all processing activities involving joint controllers,
+    even if some are under periodic review.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated Data Protection Officer (DPO) is often required to oversee joint-controller
+    arrangements and ensure ongoing compliance, including annual reviews.
+  good_enough: A DPO (or equivalent privacy lead) is formally appointed and reachable, even if their training
+    or onboarding is still in progress.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope must include joint-controller activities to ensure that the review process
+    is aligned with the organization's overall information security management.
+  good_enough: The ISMS scope statement references joint-controller activities, even if the description
+    is high-level or pending further detail.

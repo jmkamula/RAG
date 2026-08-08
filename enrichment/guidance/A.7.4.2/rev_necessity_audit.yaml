@@ -1,0 +1,15 @@
+must_id: item:A.7.4.2:rev_necessity_audit
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+must_text: Necessity audit — sampled operations reviewed against current purpose register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of current data processing operations and list them in a dated review log.
+- Cross-reference each sampled operation against the documented purposes in your current purpose register.
+- Record the reviewer’s name, review date, and any mismatches or unclear purposes found during the audit.
+- Document actions taken to address any operations lacking a clear, registered purpose, including responsible
+  individuals and completion dates.
+- Name the reviewer as a specific individual—do not use group names or job titles alone.

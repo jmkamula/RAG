@@ -1,0 +1,19 @@
+must_id: item:A.7.3.5:rev_absolute_audit
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Absolute-objection audit — sampled marketing objections verified to have halted processing
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each marketing objection received, including the date, individual’s details, and the specific
+  processing activity objected to.
+- Document the exact date and method when processing was halted for each objection, referencing system
+  logs or workflow tickets.
+- Cross-reference objection records with marketing activity logs to confirm no further processing occurred
+  after the objection date.
+- Name the responsible individual who reviewed and confirmed the halt in processing for each objection
+  — do not use a team or department name.
+- Retain evidence of periodic sampling and audit results showing that objections resulted in actual cessation
+  of processing, not just updates to records.

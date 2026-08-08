@@ -1,0 +1,18 @@
+must_id: item:A.6.2:signature
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Signature requirement before employment commences (no access granted without signed terms)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the employment contract template that information security terms must be signed before any
+  access to systems or data is granted.
+- Require the new hire and an authorised representative to sign and date the contract before the employment
+  start date.
+- Retain a copy of the signed contract in the employee’s personnel file, with the date clearly visible.
+- Confirm that no user accounts or access rights are provisioned until the signed contract is received
+  and filed.
+- Name the responsible HR staff member who verifies receipt of the signed contract, avoiding generic titles
+  like "HR team".

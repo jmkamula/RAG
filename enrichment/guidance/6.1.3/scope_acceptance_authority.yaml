@@ -1,0 +1,20 @@
+must_id: item:6.1.3:scope_acceptance_authority
+control_ref: 6.1.3
+standard_id: ISO27001:2022
+must_text: Residual-risk acceptance authority per band (who can sign off on residual high vs medium vs
+  low)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific individuals or roles authorized to accept residual risk at each defined risk level
+  (high, medium, low) in your methodology document.
+- Document the date and version of the methodology where these authorities are listed, ensuring it matches
+  your current risk management process.
+- State the approval process for residual risk acceptance, including required signatures or documented
+  decisions for each risk band.
+- Avoid listing vague authorities such as "the team" or "management"; specify named roles or persons for
+  each risk acceptance level.
+- Retain signed or digitally approved records of residual risk acceptance decisions, clearly indicating
+  the risk level and the authorized approver.

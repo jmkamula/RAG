@@ -1,0 +1,17 @@
+must_id: item:9.1:rec_status
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Per-row status (above-target / on-target / below-target / breach)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the measurement status for each row as "above-target," "on-target," "below-target," or "breach"
+  in the ISMS Measurement Record.
+- State the date each status was determined and the name of the person who made the assessment in the
+  corresponding row.
+- Cross-reference each status entry to supporting evidence, such as monitoring logs or reports, to show
+  how the status was evaluated.
+- Name the status using the required terms only—avoid vague or custom labels like "good" or "needs improvement"
+  that do not match the defined categories.

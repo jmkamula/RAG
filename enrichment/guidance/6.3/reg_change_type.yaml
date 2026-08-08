@@ -1,0 +1,16 @@
+must_id: item:6.3:reg_change_type
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Per-row change type (scope / policy / manual / roles / risk-criteria / structural)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Add a column to the ISMS Change Register to record the change type for each entry, using the required
+  categories.
+- Record the specific change type for every change row, selecting only one category per change.
+- Name the person responsible for categorizing each change type, listing a specific individual rather
+  than a team or department.
+- Review the register to confirm there are no blank or ambiguous change type entries, such as "miscellaneous"
+  or "other".

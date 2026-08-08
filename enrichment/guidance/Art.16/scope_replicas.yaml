@@ -1,0 +1,20 @@
+must_id: item:Art.16:scope_replicas
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Replica + backup handling rules — when rectification reaches them, when supplementary statement
+  substitutes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems, replicas, and backups where personal data is stored, including system names and locations,
+  in a dated inventory document.
+- Document the procedure for updating or rectifying personal data in each replica and backup, including
+  responsible individuals and expected timeframes.
+- State the specific rules for when a supplementary statement is used instead of rectifying data in backups,
+  with clear criteria and examples.
+- Name the owner as a specific individual responsible for ensuring rectification or supplementary statements
+  are applied, not just a team or department.
+- Retain records of completed rectifications or supplementary statements, including dates, affected systems,
+  and confirmation from the responsible individual.

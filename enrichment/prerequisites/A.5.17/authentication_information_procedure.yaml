@@ -1,0 +1,50 @@
+leaf_id: req:A.5.17:authentication_information_procedure
+control_ref: A.5.17
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.16
+  standard_id: ISO27001:2022
+  title: Identity Management
+  category: direct
+  rationale: You must have a clear process for managing identities before you can define how authentication
+    information (like passwords or tokens) is allocated and managed. The authentication procedure relies
+    on the lifecycle of identities to ensure credentials are issued, updated, and revoked appropriately.
+  good_enough: A documented identity management process exists, covering onboarding, changes, and offboarding
+    of users, even if some details are still being refined.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: Authentication information is a critical asset. You need an up-to-date asset register to
+    identify which systems, applications, and data require authentication controls, and to track where
+    credentials are used.
+  good_enough: A basic asset register exists, listing key systems and applications that require authentication,
+    even if not all minor assets are included yet.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: The sensitivity of authentication information (e.g., admin passwords vs. user PINs) depends
+    on your classification scheme. This informs how credentials should be protected and handled in your
+    procedure.
+  good_enough: A draft or working classification scheme is in place, with authentication information identified
+    as a sensitive asset type.
+- ref: A.6.5
+  standard_id: ISO27001:2022
+  title: Responsibilities after Termination or Change of Employment
+  category: direct
+  rationale: Your authentication procedure must address how credentials are revoked or changed when personnel
+    leave or change roles. This control ensures that post-employment risks are covered.
+  good_enough: A process exists for handling access and credential changes upon employment termination
+    or role change, even if not fully automated.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The authentication procedure must align with your overarching security policy, which sets
+    the tone for acceptable use, access control, and user responsibilities.
+  good_enough: A current information security policy exists and references access control and authentication
+    expectations, even if it is high-level.

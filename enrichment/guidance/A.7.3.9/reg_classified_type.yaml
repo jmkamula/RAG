@@ -1,0 +1,19 @@
+must_id: item:A.7.3.9:reg_classified_type
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Classified type per row (access / correction / erasure / portability / restriction / objection
+  / complaint / other)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each subject request in the register with a unique entry, including the date received and the
+  requestor’s identity.
+- Classify the type of each request per row as access, correction, erasure, portability, restriction,
+  objection, complaint, or other, based on the data subject’s submission.
+- Name the person responsible for handling each request as a specific individual, not a team or department.
+- Cross-reference each register entry with supporting documentation, such as the original request and
+  any correspondence or decision records.
+- Confirm that no register row is left blank or marked “miscellaneous” for request type, as auditors flag
+  vague or incomplete classifications.

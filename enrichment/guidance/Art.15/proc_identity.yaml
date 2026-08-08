@@ -1,0 +1,19 @@
+must_id: item:Art.15:proc_identity
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Identity verification approach stated, proportionate to data sensitivity (reasonable doubts
+  trigger, Art.12.6)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific steps required to verify the identity of a data subject before releasing personal
+  data, tailored to the sensitivity of the data requested.
+- Document the criteria used to determine when there are "reasonable doubts" about a requester’s identity,
+  with clear examples.
+- Name the individual responsible for making identity verification decisions in each DSAR case—do not
+  list a team or department.
+- Record each instance where additional identification was requested, including the reason and the supporting
+  evidence reviewed.
+- Review the procedure annually and retain a dated record of the review and any updates made.

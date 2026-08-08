@@ -1,0 +1,18 @@
+must_id: item:10.2:scope_audit_sources
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Audit sources in scope (9.2 internal audit major + minor NCs; surveillance + re-cert audit
+  NCs; second-party customer-audit NCs)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all sources of nonconformities, including internal audits, external surveillance and re-certification
+  audits, and customer audits, in a single, dated register.
+- Name the specific individual responsible for maintaining the nonconformity sources register, avoiding
+  generic roles like "the team" or "management".
+- Cross-reference each nonconformity entry to its original audit report, including the audit type, date,
+  and issuing auditor or organization.
+- Record the scope and boundaries for each audit source, specifying which parts of your organization or
+  processes were covered.

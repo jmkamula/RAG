@@ -1,0 +1,19 @@
+must_id: item:A.7.3.10:scope_change_drivers
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Trigger list (new automated decision system / new jurisdiction with full-automation prohibition)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all new or significantly changed automated decision systems in a dated register, including a description
+  of their purpose and deployment date.
+- Record each new jurisdiction where your organisation operates, noting any local laws that prohibit or
+  restrict fully automated decisions.
+- Cross-reference each automated decision system with applicable jurisdictional requirements in the register
+  to show which systems are affected by local prohibitions.
+- Name the responsible individual for maintaining and updating the automated decision scope register—do
+  not leave the owner as "the team" or a department.
+- Review and update the register at least annually, keeping a dated record of each review and any changes
+  made.

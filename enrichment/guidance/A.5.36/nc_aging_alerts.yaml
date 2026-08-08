@@ -1,0 +1,17 @@
+must_id: item:A.5.36:nc_aging_alerts
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Aged-overdue alerting (notification when target date passes without closure)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for generating alerts when a nonconformity remains open past its target closure
+  date in the Compliance Nonconformity Register.
+- Record the date and recipient of each overdue alert notification sent, keeping a log that shows timely
+  communication of missed deadlines.
+- Name the responsible individual who monitors the register and triggers overdue notifications, avoiding
+  generic roles like "the team" or "compliance department."
+- Retain a sample of an actual overdue alert email or system notification, showing the message content
+  and timestamp.

@@ -1,0 +1,17 @@
+must_id: item:A.8.31:reg_access_ref
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Per-row access-list reference (cross-link to A.8.3 access matrix)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each environment entry in the register to a specific row in the A.8.3 access matrix,
+  using a unique identifier.
+- Record the date when each cross-reference was last reviewed or updated, and name the person responsible
+  for the review.
+- Attach a copy or direct link to the relevant access matrix row for each environment entry, making the
+  relationship explicit.
+- Name the access matrix owner as a specific individual, not a group or department, to avoid ambiguity
+  in responsibility.

@@ -1,0 +1,16 @@
+must_id: item:A.8.22:reg_contained_systems
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Per-zone contained-systems list (drawn from A.5.9)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems contained within each network zone in the Network Zone Register, referencing their
+  unique identifiers from the Asset Register.
+- Cross-reference each system entry with the corresponding record in the Asset Register to confirm consistency
+  of system details.
+- Name the individual responsible for maintaining the per-zone system lists, avoiding generic titles like
+  "IT" or "the team".
+- Date each update to the per-zone contained-systems list to provide a clear record of changes over time.

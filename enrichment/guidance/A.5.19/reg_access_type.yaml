@@ -1,0 +1,17 @@
+must_id: item:A.5.19:reg_access_type
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Access type per row (logical / physical / network / application / app-to-app)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each supplier in the register with a separate row, including the full legal name and a unique identifier.
+- Specify the type of access granted to each supplier per row, choosing from logical, physical, network,
+  application, or app-to-app.
+- Record the date when the access type was last reviewed or updated for each supplier entry.
+- Name the person responsible for approving each supplier’s access type, using a specific individual’s
+  name rather than a generic title or team.
+- Attach supporting documentation or a cross-reference to the contract or agreement that describes the
+  access type for each supplier.

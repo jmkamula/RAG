@@ -1,0 +1,18 @@
+must_id: item:A.7.5.1:reg_supplementary_measures
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: Supplementary measures per row where TIA identified deficiencies
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Review each entry in the Cross-Jurisdiction Transfer Basis Register where a Transfer Impact Assessment
+  (TIA) found deficiencies.
+- Document the specific supplementary measures implemented for each identified deficiency, referencing
+  the relevant row in the register.
+- Name the individual responsible for approving each supplementary measure, ensuring a specific person
+  is listed rather than a team or department.
+- Record the date when each supplementary measure was approved and implemented in the register.
+- Attach supporting evidence, such as signed decisions or technical documentation, to each register entry
+  where supplementary measures are applied.

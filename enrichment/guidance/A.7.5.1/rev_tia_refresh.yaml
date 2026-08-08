@@ -1,0 +1,19 @@
+must_id: item:A.7.5.1:rev_tia_refresh
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: TIA refresh — recent case law + guidance considered
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date of the most recent Transfer Impact Assessment (TIA) review, showing it occurred within
+  the past 12 months.
+- Name the individual responsible for monitoring changes in case law and regulatory guidance relevant
+  to international data transfers.
+- Record specific references to recent case law and official guidance, such as EDPB 01/2020, that were
+  considered during the TIA refresh.
+- Attach meeting minutes or a signed statement confirming that the review team discussed and incorporated
+  new legal developments into the TIA process.
+- Name the owner as a specific individual — not a group or department — for accountability in tracking
+  ongoing legal and regulatory updates.

@@ -1,0 +1,18 @@
+must_id: item:A.7.5.1:scope_exclusions
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: Excluded flows (intra-jurisdiction) with rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all data transfer flows and document which are intra-jurisdiction, specifying the countries
+  or regions involved for each flow.
+- State the rationale for excluding each intra-jurisdiction flow from cross-jurisdiction transfer controls,
+  referencing relevant legal or regulatory definitions.
+- Name the person responsible for determining and approving the scope of excluded flows, ensuring this
+  is a specific individual, not a team or department.
+- Record the date when the scope and rationale for exclusions were last reviewed and approved.
+- Retain supporting documentation that demonstrates how each excluded flow meets the criteria for intra-jurisdiction
+  status.

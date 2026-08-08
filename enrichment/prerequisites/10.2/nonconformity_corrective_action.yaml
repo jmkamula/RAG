@@ -1,0 +1,41 @@
+leaf_id: req:10.2:nonconformity_corrective_action
+control_ref: '10.2'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know what parts of the organisation and which processes are covered by the ISMS
+    before you can define how nonconformities and corrective actions will be managed. The scope determines
+    where the procedure applies.
+  good_enough: A documented scope statement that clearly defines the ISMS boundaries and applicability
+    is available and accessible.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The nonconformity and corrective action procedure must align with the organisation’s overarching
+    information security policy, ensuring actions support policy objectives and commitments.
+  good_enough: A current, approved information security policy exists and is communicated to relevant
+    staff.
+- ref: '10.1'
+  standard_id: ISO27001:2022
+  title: Continual Improvement
+  category: direct
+  rationale: The continual improvement process provides the context for why nonconformities are tracked
+    and corrected. Understanding this process is necessary to ensure corrective actions feed into ongoing
+    ISMS improvements.
+  good_enough: A basic continual improvement approach is defined, even if not fully implemented, so the
+    corrective action procedure can reference it.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities is essential so the procedure can specify
+    who is accountable for identifying, investigating, and correcting nonconformities.
+  good_enough: A documented list or matrix of ISMS roles and their responsibilities exists, at least in
+    draft form.

@@ -1,0 +1,19 @@
+must_id: item:Art.6:justification
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Justification recorded for the chosen basis per activity
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the lawful basis for each processing activity in your register, matching one of the six options
+  listed in Article 6 of GDPR.
+- Document a clear justification for why the chosen lawful basis applies to each activity, using plain
+  language and specific details.
+- Record the date when each justification was reviewed or updated, and identify the person responsible
+  for the entry.
+- Attach or cross-reference supporting evidence, such as contracts or consent records, that demonstrate
+  the lawful basis in practice.
+- Name the owner as a specific individual — do not list a team or department as the responsible party
+  for each register entry.

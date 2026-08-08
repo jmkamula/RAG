@@ -1,0 +1,20 @@
+must_id: item:A.5.17:rev_actions
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Action items captured (e.g. expand MFA to remaining identity types, automate rotation for service
+  tokens, retire phishable factors)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record all action items from each periodic authentication-information program review in a dated meeting
+  minutes document or an action tracker.
+- Assign each action item to a named individual with a target completion date, avoiding generic owners
+  like "IT" or "the team".
+- Document the specific adjustment or improvement required for each action item, such as expanding multi-factor
+  authentication or automating token rotation.
+- Attach supporting evidence for each action item, such as screenshots, updated procedures, or communications
+  confirming implementation steps.
+- Review and update the action tracker after each review cycle to show progress, completion, or carry-over
+  of outstanding items.

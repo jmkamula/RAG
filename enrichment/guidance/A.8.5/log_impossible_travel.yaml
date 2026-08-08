@@ -1,0 +1,19 @@
+must_id: item:A.8.5:log_impossible_travel
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Impossible-travel / geo-anomaly detection where applicable
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the authentication activity log format, including fields for user ID, timestamp, source IP,
+  and geographic location.
+- Record each authentication event with its detected location and flag any impossible-travel or geo-anomaly
+  incidents with a unique incident ID.
+- Assign responsibility for reviewing geo-anomaly alerts to a named individual, listing their name and
+  review frequency in a dated record.
+- Retain evidence of geo-anomaly investigations, including analyst notes and resolution outcomes, linked
+  to the original log entry.
+- Name the detection method and its configuration settings, avoiding generic statements like "geo-anomaly
+  detection enabled" without specifying the tool or rule set.

@@ -1,0 +1,17 @@
+must_id: item:A.7.5.1:reg_transfer_id
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: Unique transfer relationship identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each transfer relationship row in the register, using a sequential or
+  structured numbering system.
+- Record the identifier in a dedicated column, ensuring it is not duplicated across any other row in the
+  register.
+- Cross-reference each identifier in related documentation, such as contracts or data transfer assessments,
+  to maintain traceability.
+- Name the owner responsible for maintaining the identifier system as a specific individual, not a team
+  or department.

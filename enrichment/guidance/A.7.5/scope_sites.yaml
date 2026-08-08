@@ -1,0 +1,16 @@
+must_id: item:A.7.5:scope_sites
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Sites in scope (drawn from A.7.1 applicable-sites scope)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical and virtual sites included in the A.7.1 applicable-sites scope, with full addresses
+  or unique identifiers.
+- Cross-reference each site with the corresponding entry in the threat catalogue to confirm inclusion
+  and relevance.
+- Record the date and name of the person who validated the sites-in-scope list for A.7.5 alignment.
+- Name the owner as a specific individual responsible for maintaining the sites-in-scope list, not a generic
+  team or department.

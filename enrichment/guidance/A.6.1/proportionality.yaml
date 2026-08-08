@@ -1,0 +1,18 @@
+must_id: item:A.6.1:proportionality
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Proportionality stated by role, information classification accessed, and perceived risk (junior
+  office role vs admin vs CISO — different check depth)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure how screening requirements differ by job role, information classification accessed,
+  and risk level, with clear examples for each.
+- Document the criteria and rationale used to determine screening depth for at least three distinct roles,
+  such as junior staff, administrators, and senior management.
+- Name the person or role responsible for reviewing and updating screening criteria, ensuring it is not
+  listed as "HR" or "the team."
+- Retain dated records showing when the proportionality criteria were last reviewed and approved by a
+  named decision-maker.

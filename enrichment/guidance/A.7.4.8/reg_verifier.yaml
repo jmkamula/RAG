@@ -1,0 +1,17 @@
+must_id: item:A.7.4.8:reg_verifier
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Verifier identity per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the individual who verified each PII disposal event in a dedicated column for
+  every row in the register.
+- State the date on which the verifier confirmed the disposal, ensuring each entry has a corresponding
+  verification date.
+- Sign or initial each row by the verifier to provide clear, attributable evidence of their review and
+  action.
+- Name the verifier as a specific person — do not use generic labels like "IT team" or "staff" in the
+  identity column.

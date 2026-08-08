@@ -1,0 +1,18 @@
+must_id: item:B.8.2.4:rev_notification_audit
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Notification audit — sampled notifications reviewed for accuracy + timeliness
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of recent customer notifications regarding infringing instructions and list them
+  with dates in a review log.
+- Compare each sampled notification against the documented notification procedure to confirm all required
+  information was included.
+- Record the time elapsed between identifying the infringing instruction and sending the notification
+  for each case in the review log.
+- Document the reviewer’s name and date of review for each sampled notification to provide a clear audit
+  trail.
+- Name the responsible reviewer as a specific individual, not a team or department, in the review documentation.

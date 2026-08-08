@@ -1,0 +1,14 @@
+must_id: item:A.8.1:rev_date
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the endpoint program in a dated log or register entry.
+- State the planned review interval in months or years in the same log or review schedule document.
+- Confirm the actual review date falls within the documented planned interval by cross-referencing both
+  dates in the review record.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.

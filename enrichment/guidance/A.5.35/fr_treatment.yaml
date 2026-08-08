@@ -1,0 +1,19 @@
+must_id: item:A.5.35:fr_treatment
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Agreed treatment per finding (accept / remediate / transfer with rationale; mirrors the management
+  response committed in the report)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the agreed treatment for each review finding in the register, clearly stating whether it will
+  be accepted, remediated, or transferred.
+- Document the rationale for the chosen treatment for each finding, referencing any supporting evidence
+  or risk assessment used in the decision.
+- Cross-reference each treatment entry to the corresponding management response in the independent review
+  report to confirm consistency.
+- Name the responsible individual for each finding’s treatment, avoiding generic roles like "the team"
+  or "IT department".
+- Date each treatment decision and rationale entry to provide a clear timeline of actions taken.

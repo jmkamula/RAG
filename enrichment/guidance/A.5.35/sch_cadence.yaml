@@ -1,0 +1,18 @@
+must_id: item:A.5.35:sch_cadence
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Planned cadence stated (annual is the doctrine baseline; risk-tier or scope-area may drive
+  tighter cadences for hot domains)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the planned review frequency for each scope area in the register, specifying intervals such as
+  annual or more frequent for higher-risk domains.
+- Record the date when the review schedule was last approved, along with the name of the approver.
+- Name the owner responsible for maintaining the schedule as a specific individual, not a team or department.
+- Cross-reference any risk assessments or business justifications that require tighter review cadences
+  for certain domains.
+- Avoid leaving any scope area with an undefined or "as needed" review interval; each must have a concrete,
+  scheduled cadence.

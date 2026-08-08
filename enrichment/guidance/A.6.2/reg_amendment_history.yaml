@@ -1,0 +1,19 @@
+must_id: item:A.6.2:reg_amendment_history
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Amendment history per row where contracts were amended mid-employment (drives change tracking)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each employment contract amendment with the date, summary of change, and name of the person authorising
+  the update in the register row.
+- Attach a copy of the signed amendment document to the relevant register entry for every mid-employment
+  contract change.
+- Name the employee and the specific contract version affected by the amendment, avoiding generic labels
+  or missing version details.
+- Update the amendment history field immediately after any contract change, ensuring no amendments are
+  left undocumented.
+- Review the register quarterly to confirm all mid-employment amendments are fully captured with supporting
+  evidence and signatures.

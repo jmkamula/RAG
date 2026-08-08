@@ -1,0 +1,19 @@
+must_id: item:A.7.4.9:proc_audit_logs
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Audit log retention for every transmission (who + what + when + where)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each PII transmission event in an audit log, capturing the sender, recipient, date, time, and
+  transmission method.
+- Record the specific PII data elements transmitted for each event, not just a generic description or
+  file name.
+- Assign responsibility for maintaining and reviewing the audit log to a named individual, not a team
+  or department.
+- Retain audit logs for the period defined in your data retention policy, and keep a dated record of the
+  retention schedule.
+- Confirm that audit logs are protected from unauthorized alteration or deletion, with access permissions
+  reviewed and documented at least annually.

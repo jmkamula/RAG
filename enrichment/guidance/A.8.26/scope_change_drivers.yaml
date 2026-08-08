@@ -1,0 +1,18 @@
+must_id: item:A.8.26:scope_change_drivers
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new product class, new acquisition pattern, new regulatory regime)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current application security requirements and their scope in a dated document, naming the person
+  responsible for maintaining this list.
+- Document a trigger list that includes events such as launching a new product class, acquiring new technology,
+  or changes in regulatory requirements.
+- Assign a specific individual to review the trigger list at least annually and record the review date
+  and outcome.
+- Name the owner as a specific individual — do not use generic labels like "the team" or "IT department."
+- Retain evidence of each re-scoping decision, including the date, trigger event, and names of those involved
+  in the decision.

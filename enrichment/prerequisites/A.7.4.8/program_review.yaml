@@ -1,0 +1,47 @@
+leaf_id: req:A.7.4.8:program_review
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.4.7
+  standard_id: ISO27701:2019
+  title: Disposal Procedures
+  category: direct
+  rationale: You must have documented and implemented disposal procedures before you can review their
+    effectiveness or coverage. The review checks that these procedures are up-to-date and being followed.
+  good_enough: A current, approved disposal procedure exists and is being used for all relevant media
+    and data types.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: A complete asset register is needed to ensure all relevant media and devices are included
+    in the disposal program and its review. Without it, you can't verify lifecycle coverage.
+  good_enough: A working asset register lists all media types and devices subject to disposal, even if
+    some details are still being refined.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: Knowing the classification of information on assets helps determine appropriate disposal
+    techniques and ensures sensitive data is handled correctly during disposal.
+  good_enough: A basic classification scheme is in place and applied to assets, so disposal requirements
+    for sensitive data are clear.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: Understanding the purpose for processing personal data helps ensure that disposal aligns
+    with privacy requirements and data minimization principles.
+  good_enough: Documented purposes exist for personal data processing, even if some are high-level or
+    pending further detail.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures accountability for disposal activities and for conducting
+    the annual review.
+  good_enough: Roles for disposal and review are assigned and communicated, even if some responsibilities
+    are still being fine-tuned.

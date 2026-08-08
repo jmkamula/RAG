@@ -1,0 +1,20 @@
+must_id: item:A.7.2.1:proc_specificity_test
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Specificity test — purpose statements must be sufficiently clear + detailed for use in §7.3.2
+  notice + §7.2.3 consent
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each data processing purpose using clear, specific language that describes the exact activity and
+  outcome, not generic terms like "business operations".
+- Document a dated record showing how each purpose statement was reviewed against actual processing activities
+  and updated for accuracy.
+- Cross-reference each purpose statement to the relevant privacy notice and consent form sections to confirm
+  alignment and sufficient detail.
+- Assign responsibility for drafting and approving purpose statements to a named individual, not a group
+  or department.
+- Retain evidence of management approval for each purpose statement, such as a signed or digitally acknowledged
+  document.

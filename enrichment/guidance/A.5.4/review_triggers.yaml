@@ -1,0 +1,16 @@
+must_id: item:A.5.4:review_triggers
+control_ref: A.5.4
+standard_id: ISO27001:2022
+must_text: Ad-hoc triggers listed (major policy reorg, M&A, regulatory change) prompting unscheduled review
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific ad-hoc triggers, such as major policy changes, mergers and acquisitions, or new regulations,
+  in the management directive review procedure.
+- Document each unscheduled review by recording the trigger event, date, and reviewer’s name in the review
+  log.
+- Reference the section of the management directive that was reviewed or updated in response to each ad-hoc
+  trigger.
+- Name the reviewer as a specific individual, not a group or department, for each triggered review entry.

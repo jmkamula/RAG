@@ -1,0 +1,17 @@
+must_id: item:Art.45:reg_adequacy_decision
+control_ref: Art.45
+standard_id: GDPR:2016/679
+must_text: Per-row adequacy decision cited (Commission decision reference + effective date)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the official European Commission adequacy decision reference number for each country or territory
+  listed in your Adequacy Reliance Register.
+- Enter the effective date of each cited adequacy decision as published by the European Commission in
+  the register row.
+- Cross-reference each adequacy decision to its official publication or legal text, providing a direct
+  link or document location.
+- Name the individual responsible for verifying the accuracy of each adequacy decision entry, ensuring
+  it is not left blank or assigned to a group.

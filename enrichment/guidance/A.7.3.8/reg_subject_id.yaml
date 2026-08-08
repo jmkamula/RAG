@@ -1,0 +1,16 @@
+must_id: item:A.7.3.8:reg_subject_id
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Subject identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique subject identifier for each entry in the Copy Request Register, such as a reference
+  number or pseudonym, in a dedicated column.
+- Document the date each copy request was received alongside the subject identifier to support traceability.
+- Name the subject identifier using a consistent format that does not directly reveal personal information,
+  avoiding use of full names or direct identifiers.
+- Cross-reference each subject identifier with the corresponding request documentation to confirm accuracy
+  and completeness.

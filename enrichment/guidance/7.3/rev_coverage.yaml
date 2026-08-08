@@ -1,0 +1,17 @@
+must_id: item:7.3:rev_coverage
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Coverage check — register completion rate against the in-scope audience
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify the full list of people in scope for the awareness program and record their names in a dated
+  register.
+- Document the completion status for each individual in the register, showing who has and has not finished
+  the program.
+- Calculate and record the overall completion rate as a percentage, referencing the total number of people
+  required to participate.
+- Name the owner responsible for maintaining the register as a specific individual, not a team or department.
+- Retain a copy of the most recent register and completion rate report, dated and ready for auditor inspection.

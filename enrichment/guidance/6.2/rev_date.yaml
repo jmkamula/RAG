@@ -1,0 +1,17 @@
+must_id: item:6.2:rev_date
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of your objectives program in a dated meeting note or review log
+  entry.
+- Compare the recorded review date against your documented review schedule to confirm it falls within
+  the planned interval.
+- Name the reviewer or review committee as specific individuals in the review documentation, avoiding
+  generic titles like "management" or "the team."
+- Retain supporting evidence of the review, such as signed minutes or an approved summary report, showing
+  the review was completed as scheduled.

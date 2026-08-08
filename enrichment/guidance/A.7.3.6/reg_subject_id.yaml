@@ -1,0 +1,16 @@
+must_id: item:A.7.3.6:reg_subject_id
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: Subject identifier per row (post identity verification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name or unique identifier of each data subject in a dedicated column for every request
+  logged in the register.
+- Confirm that identity verification has been completed before entering the subject identifier, and note
+  the verification method and date in the same row.
+- Assign responsibility for maintaining the register to a named individual, not a team or department.
+- Retain supporting evidence of identity verification, such as a dated copy of the verification record,
+  linked to each register entry.

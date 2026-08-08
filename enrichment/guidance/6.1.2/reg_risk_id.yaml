@@ -1,0 +1,16 @@
+must_id: item:6.1.2:reg_risk_id
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Unique risk identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique alphanumeric risk identifier to each row in the Information Security Risk Register.
+- Record the assigned risk identifier in a dedicated column for every risk entry, ensuring no duplicates
+  exist.
+- Cross-reference each risk identifier with related documentation, such as risk assessments or treatment
+  plans, to confirm traceability.
+- Name the risk owner as a specific individual for each risk entry, avoiding generic labels like "IT"
+  or "the team."

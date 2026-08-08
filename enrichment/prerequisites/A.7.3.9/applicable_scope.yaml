@@ -1,0 +1,40 @@
+leaf_id: req:A.7.3.9:applicable_scope
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines which parts of the organisation and which information types are covered
+    by the management system, directly impacting which requests are in or out of scope for privacy rights
+    handling.
+  good_enough: A clear, current scope statement exists that identifies the organisational boundaries and
+    information assets covered by the ISMS.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Understanding and documenting the purposes for processing PII is essential to determine which
+    requests are legitimate, as only requests related to documented processing activities should be considered.
+  good_enough: A list of processing purposes for all PII is documented and mapped to business processes,
+    even if not yet fully optimised.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for each processing activity helps determine if a data subject’s
+    request is valid or if there are legal grounds for exclusion.
+  good_enough: Each processing activity has a recorded lawful basis, even if some are provisional pending
+    legal review.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that requests are assessed and handled by authorised personnel,
+    reducing the risk of unauthorised disclosures or mishandling.
+  good_enough: Roles for privacy request handling are assigned and documented, even if detailed procedures
+    are still being developed.

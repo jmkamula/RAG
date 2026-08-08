@@ -1,0 +1,40 @@
+leaf_id: req:A.5.30:ict_service_register
+control_ref: A.5.30
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which ICT services are in-scope for your ISMS before you can catalogue them
+    in the continuity register. If the scope is unclear, the register will be incomplete or misaligned.
+  good_enough: A documented scope statement that clearly lists the business units, locations, and ICT
+    services covered by the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The ICT Service Continuity Register builds on the asset register, which should already list
+    all ICT assets. Without an up-to-date asset register, you risk missing services or including out-of-scope
+    ones.
+  good_enough: A current asset register that at least identifies all ICT services and systems relevant
+    to the ISMS scope.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: You need to know who is responsible for each ICT service and its recovery posture. Without
+    clear roles, you can't assign recovery owners or ensure accountability in the register.
+  good_enough: A basic mapping of key ICT services to named recovery owners or responsible roles, even
+    if not fully formalized.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment results inform which ICT services are critical and what recovery targets
+    (RTO/RPO) are appropriate. Without this, the register can't reflect real business priorities.
+  good_enough: A recent risk assessment that at least ranks ICT services by business impact and identifies
+    criticality tiers.

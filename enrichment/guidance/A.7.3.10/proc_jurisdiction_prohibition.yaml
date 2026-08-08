@@ -1,0 +1,20 @@
+must_id: item:A.7.3.10:proc_jurisdiction_prohibition
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Jurisdiction-specific full-automation prohibition awareness (§7.3.10 NOTE — some jurisdictions
+  restrict full automation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all jurisdictions where your organisation operates and record them in a dated table maintained
+  by the privacy or compliance officer.
+- Document any laws or regulations in each jurisdiction that prohibit or restrict fully automated decisions,
+  citing the specific legal sources and effective dates.
+- Assign a named individual to review and update the procedure annually, ensuring changes in jurisdictional
+  requirements are captured with revision dates.
+- State in the procedure that full automation is not permitted where prohibited, referencing the relevant
+  jurisdiction and legal citation for each case.
+- Name the owner as a specific individual responsible for monitoring changes in jurisdictional laws—do
+  not use a generic title or team name.

@@ -1,0 +1,19 @@
+must_id: item:A.7.4.5:scope_end_triggers
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: End-trigger enumeration per activity type
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity and describe the specific event or condition that triggers the end of
+  processing for that activity.
+- Document the rationale for why personal data is no longer necessary for each activity, referencing legal,
+  contractual, or business requirements.
+- Name the person responsible for determining and reviewing end-of-processing triggers for each activity,
+  using a specific individual’s name.
+- Record the date when each end-of-processing trigger was last reviewed or updated in your processing
+  records.
+- Avoid using generic statements like "when no longer needed"—replace with clear, activity-specific triggers
+  an auditor can verify.

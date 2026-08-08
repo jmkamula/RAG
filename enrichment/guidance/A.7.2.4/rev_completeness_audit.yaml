@@ -1,0 +1,19 @@
+must_id: item:A.7.2.4:rev_completeness_audit
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Completeness audit — sampled consented users have retrievable records
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of users who have provided consent within the past year and list their unique
+  identifiers in a dated record.
+- Retrieve and save the specific consent records for each sampled user, ensuring each record shows the
+  date, method, and content of consent.
+- Confirm each consent record is stored in a system that allows retrieval on demand, with no missing or
+  incomplete entries for the sampled users.
+- Name the person responsible for maintaining and providing access to consent records as a specific individual,
+  not a team or department.
+- Document any sampled user for whom a consent record cannot be found, and record the investigation and
+  resolution steps taken.

@@ -1,0 +1,41 @@
+leaf_id: req:Art.42:certification_program_review
+control_ref: Art.42
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify which certifications are
+    relevant to your data processing and to ensure the certification program covers all applicable processing
+    operations.
+  good_enough: A current, reasonably complete RoPA exists that lists all major processing activities and
+    their purposes.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated Data Protection Officer (DPO) is typically responsible for overseeing GDPR compliance,
+    including certification reviews. Without a DPO or clear responsibility, certification oversight may
+    be uncoordinated.
+  good_enough: A named DPO (internal or external) is documented and contactable, with basic responsibilities
+    assigned.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which parts of your organization and which processes are covered by
+    certifications. Without this, you can't confirm if certifications are current and relevant.
+  good_enough: A documented ISMS scope exists that identifies the organizational boundaries and information
+    assets covered by the ISMS and related certifications.
+- ref: A.5.33
+  standard_id: ISO27001:2022
+  title: Compliance with legal and contractual requirements
+  category: cross_role
+  rationale: Understanding which legal and contractual obligations apply is necessary to determine which
+    certifications are required and to review their status.
+  good_enough: A list of key legal and contractual requirements is available, even if not fully mapped,
+    to guide certification relevance.

@@ -1,0 +1,17 @@
+must_id: item:Art.85:reg_commission_notification
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: Reference to Member State notification to Commission per Art.85.3 (where available)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and source of each Member State’s notification to the European Commission regarding
+  Article 85.3 derogations in the register.
+- Cross-reference each entry with the official notification document or public record published by the
+  European Commission or Member State.
+- Name the individual responsible for maintaining and updating the register with new or amended notifications.
+- Attach a copy or direct link to the official notification for each jurisdiction where available.
+- Specify if a notification is missing or unavailable, rather than leaving the field blank or using placeholders
+  like “TBC” or “pending”.

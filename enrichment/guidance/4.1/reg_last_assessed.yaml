@@ -1,0 +1,15 @@
+must_id: item:4.1:reg_last_assessed
+control_ref: '4.1'
+standard_id: ISO27001:2022
+must_text: Last assessment date per issue row (drives staleness detection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each internal and external issue was last assessed in a dedicated column within the
+  Issues Register.
+- Name the person responsible for each issue’s assessment, listing a specific individual rather than a
+  team or department.
+- Review the register regularly to confirm no issue row is missing a last assessment date.
+- Retain previous versions of the register to show changes in assessment dates over time.

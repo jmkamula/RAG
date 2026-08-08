@@ -1,0 +1,16 @@
+must_id: item:4.3:stakeholders
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Key interested parties referenced (link to 4.2)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all key interested parties relevant to your ISMS scope, referencing each by name or role, in the
+  scope statement document.
+- Cross-reference each interested party listed with the corresponding entry in your documented results
+  from ISO27001:2022 control 4.2.
+- State the date the scope statement was last updated to reflect any changes in interested parties.
+- Name the person responsible for maintaining the scope statement, avoiding generic titles like "the team"
+  or "management".

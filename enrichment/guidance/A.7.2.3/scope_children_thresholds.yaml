@@ -1,0 +1,19 @@
+must_id: item:A.7.2.3:scope_children_thresholds
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: Per-jurisdiction age-of-consent thresholds
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each country or jurisdiction where you collect or process children's personal data and record
+  them in a dated scope document.
+- Research and document the legal age-of-consent threshold for each listed jurisdiction, referencing the
+  specific law or regulation.
+- Name the individual responsible for maintaining and updating the consent age mapping, ensuring a specific
+  person is listed rather than a team or department.
+- Cross-reference your documented age-of-consent thresholds with your consent collection process to confirm
+  alignment for each jurisdiction.
+- Retain evidence of your legal research sources, such as government websites or legal counsel opinions,
+  with access dates clearly noted.

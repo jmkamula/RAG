@@ -1,0 +1,40 @@
+leaf_id: req:A.5.3:periodic_review
+control_ref: A.5.3
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Information security roles and responsibilities
+  category: direct
+  rationale: You need a clear, up-to-date mapping of information security roles and responsibilities before
+    you can review whether duties are properly segregated. The review process depends on knowing who is
+    assigned to which roles.
+  good_enough: Documented roles and responsibilities exist and are current enough to reflect recent org
+    changes, even if not perfect.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organization and which processes are covered
+    by the ISMS, ensuring the segregation review targets the right areas.
+  good_enough: A written scope statement exists that identifies the in-scope org units and processes for
+    the ISMS, even if minor updates are pending.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information security risk assessment
+  category: foundational
+  rationale: Risk assessment identifies where segregation of duties is most critical, helping prioritize
+    which roles and processes need the most scrutiny during the review.
+  good_enough: A recent risk assessment exists that highlights key risks related to conflicting duties,
+    even if not all risks are fully mitigated.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Inventory of information and other associated assets
+  category: direct
+  rationale: Knowing what assets are managed by which roles is essential to identify potential conflicts
+    and ensure segregation is meaningful.
+  good_enough: An asset register exists and links assets to responsible roles, even if some mappings are
+    incomplete.

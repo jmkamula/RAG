@@ -1,0 +1,18 @@
+must_id: item:A.8.13:reg_integrity_check
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Per-test integrity-verification artefact (checksum / hash / functional test of restored data)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, time, and location of each restore test in the Restore Test Register.
+- Document the specific integrity verification method used for each restore test, such as checksum, hash
+  comparison, or functional test.
+- Attach or reference the actual integrity verification artefact (e.g., hash output file, test results)
+  for each restore test entry.
+- Name the individual who performed and validated the integrity verification for each restore test, ensuring
+  a specific person is listed.
+- Confirm that each restore test entry is complete and not missing the integrity-verification artefact,
+  as auditors will flag incomplete records.

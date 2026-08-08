@@ -1,0 +1,40 @@
+leaf_id: req:A.5.20:supplier_agreement_security_template
+control_ref: A.5.20
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.19
+  standard_id: ISO27001:2022
+  title: Information security in supplier relationships
+  category: direct
+  rationale: A.5.19 sets the overall policy and expectations for managing information security in supplier
+    relationships. Without this policy, it is unclear what security requirements should be included in
+    supplier agreements.
+  good_enough: A documented and approved supplier relationship security policy exists, outlining the general
+    approach and key requirements for supplier management.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which supplier relationships and types of information are covered
+    by the ISMS. This ensures the agreement template is tailored to relevant suppliers and assets.
+  good_enough: A current, approved ISMS scope statement that clearly identifies included supplier types
+    and information assets.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment identifies the threats and vulnerabilities associated with supplier relationships,
+    informing which security requirements need to be included in agreements.
+  good_enough: A recent risk assessment that covers supplier-related risks and highlights key controls
+    or requirements needed in supplier contracts.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: A classification scheme ensures that the agreement template addresses the correct handling
+    and protection requirements for different types of information shared with suppliers.
+  good_enough: A documented classification scheme exists and is referenced when drafting agreement clauses
+    for information handling.

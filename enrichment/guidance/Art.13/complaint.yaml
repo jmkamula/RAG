@@ -1,0 +1,16 @@
+must_id: item:Art.13:complaint
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Right to lodge complaint with supervisory authority
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the privacy notice that individuals have the right to lodge a complaint with a supervisory
+  authority, using clear and accessible language.
+- Name the relevant supervisory authority, including its official name, address, and contact details,
+  within the privacy notice.
+- Record the date the privacy notice was last updated and ensure this version includes the complaint right
+  information.
+- Name the owner of the privacy notice as a specific individual, not a generic team or department.

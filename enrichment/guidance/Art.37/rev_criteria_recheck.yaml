@@ -1,0 +1,17 @@
+must_id: item:Art.37:rev_criteria_recheck
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: Criteria recheck — Art.37.1 applicability re-assessed against current processing scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Review the current data processing activities and compare them against Article 37.1 criteria to determine
+  if a Data Protection Officer (DPO) is still required.
+- Document the assessment results in a dated record, clearly stating whether the criteria for mandatory
+  DPO designation are met.
+- Name the individual responsible for conducting and signing off on the reassessment, ensuring this is
+  a specific person and not a team or department.
+- Retain supporting evidence, such as data flow maps or processing inventories, used to inform the reassessment
+  decision.

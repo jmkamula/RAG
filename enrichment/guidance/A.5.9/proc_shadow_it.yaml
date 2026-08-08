@@ -1,0 +1,19 @@
+must_id: item:A.5.9:proc_shadow_it
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Shadow-IT handling — unregistered assets discovered in scans are blocked, registered, or removed
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for identifying unregistered assets during regular network or inventory scans,
+  including the tools and scan frequency, in the procedure.
+- Assign a named individual or role responsible for investigating and deciding the action for each unregistered
+  asset found.
+- Record each unregistered asset discovery, the action taken (blocked, registered, or removed), and the
+  date in an asset management log.
+- Name the decision and action taken for each asset with a specific person’s approval, not just a generic
+  team or department.
+- Retain evidence of asset registration or removal, such as screenshots or system logs, linked to the
+  corresponding asset management log entry.

@@ -1,0 +1,20 @@
+must_id: item:A.6.6:rev_signer_currency
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Signer-currency analysis (% on current template version; plan for re-signing the gap where
+  material clauses changed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the current NDA template version number and effective date in a central register, listing any
+  material changes from previous versions.
+- Cross-reference all signed NDAs against the register to identify which version each signer has agreed
+  to, noting any outdated agreements.
+- Calculate and record the percentage of active signers who are on the current NDA template version, using
+  a dated summary report.
+- Name a specific individual responsible for tracking NDA template usage and re-signing plans—do not assign
+  this to a generic team or department.
+- Create a documented plan, with target dates, for re-signing NDAs where material clauses have changed,
+  and attach evidence of communication to affected signers.

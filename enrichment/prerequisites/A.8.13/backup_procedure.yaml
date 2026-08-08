@@ -1,0 +1,39 @@
+leaf_id: req:A.8.13:backup_procedure
+control_ref: A.8.13
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, data, and business units are in scope for the ISMS to determine
+    what must be backed up and covered by the backup procedure.
+  good_enough: A clear, current scope statement that identifies the boundaries and applicability of the
+    ISMS, including all relevant information assets.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: A current asset register is essential to identify which information assets require backup,
+    their locations, and their criticality.
+  good_enough: A working inventory of information assets, with enough detail to identify what needs to
+    be backed up and where it resides.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Knowing the classification of information assets ensures that backup procedures apply appropriate
+    controls (e.g., encryption, retention) based on sensitivity.
+  good_enough: A documented scheme that assigns security classifications to information assets, with practical
+    guidance on handling requirements.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment identifies threats and vulnerabilities related to data loss, informing the
+    design and priorities of backup procedures.
+  good_enough: A recent risk assessment that covers risks to information availability and integrity, highlighting
+    backup needs and priorities.

@@ -1,0 +1,20 @@
+must_id: item:A.5.9:proc_cloud_provision
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Cloud-provisioning hooks (IaC pipelines auto-register infra; manual creations require a register
+  entry first)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each cloud asset's creation method in the asset register, specifying whether it was provisioned
+  via pipeline or manual process.
+- Configure infrastructure-as-code pipelines to automatically trigger asset registration, capturing asset
+  owner, creation date, and unique identifier.
+- Require manual asset creators to submit a completed register entry before provisioning, including asset
+  details and responsible individual.
+- Name the asset owner as a specific person in the register—do not use generic labels like "IT team" or
+  "Cloud group".
+- Retain logs showing successful auto-registration events and manual register submissions for all new
+  cloud assets.

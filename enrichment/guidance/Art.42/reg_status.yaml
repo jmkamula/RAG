@@ -1,0 +1,17 @@
+must_id: item:Art.42:reg_status
+control_ref: Art.42
+standard_id: GDPR:2016/679
+must_text: Per-row status (active / under renewal / withdrawn)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the current status for each certification entry as "active," "under renewal," or "withdrawn"
+  in a dedicated column of the Certification Register.
+- State the date when the status was last updated for each certification to provide a clear audit trail
+  of lifecycle changes.
+- Name the individual responsible for updating each certification's status, ensuring a specific person
+  is listed rather than a team or department.
+- Retain supporting evidence for any status change, such as renewal applications or withdrawal notices,
+  linked to the relevant row in the register.

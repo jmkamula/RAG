@@ -1,0 +1,17 @@
+must_id: item:A.7.2.2:scope_jurisdictions
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: Applicable jurisdictions listed (with basis for each — establishment / target-market / monitoring)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all countries or regions where your organisation collects, processes, or stores personal data in
+  a dated document.
+- State the legal basis for each jurisdiction, specifying whether it is due to establishment, targeting
+  residents, or monitoring behaviour.
+- Name a specific individual responsible for maintaining and updating the list of applicable jurisdictions.
+- Attach supporting evidence, such as contracts or business registration documents, to justify inclusion
+  of each jurisdiction.
+- Avoid using generic terms like "global" or "all markets"—specify each jurisdiction by name.

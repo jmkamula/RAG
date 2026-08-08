@@ -1,0 +1,19 @@
+must_id: item:A.5.23:exit_migration_plan
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Migration plan executed (data export, dependency-rewiring, replacement service stood up)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the migration plan with clear steps for data export, dependency updates, and replacement service
+  activation, including responsible individuals and target dates.
+- Record the actual execution dates for each migration step, noting any deviations from the original plan
+  and the reasons for changes.
+- Attach evidence of data export completion, such as export logs or confirmation emails, with dates and
+  names of those who performed the export.
+- Name the owner of the migration as a specific individual, not a team or department, to ensure clear
+  accountability for the process.
+- Retain a signed completion statement from the migration owner confirming all steps were executed and
+  the replacement service is operational.

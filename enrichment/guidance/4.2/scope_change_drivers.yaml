@@ -1,0 +1,16 @@
+must_id: item:4.2:scope_change_drivers
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new contract type, new regulator in scope, M&A)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific events that would require re-scoping, such as new contract types, new regulators, or mergers
+  and acquisitions, in a dated document.
+- Assign a named individual responsible for monitoring and updating the trigger list as organizational
+  changes occur.
+- Record each review of the trigger list with the review date and reviewer’s name to show regular assessment.
+- Avoid using generic triggers like “significant change”—describe each trigger clearly so it cannot be
+  misinterpreted.

@@ -1,0 +1,18 @@
+must_id: item:A.6.2:scope_jurisdictions
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Jurisdictions covered (employment-law variations per country drive local-language and clause
+  variants)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each country where your workers are employed, including remote or contract staff, in a dated document
+  approved by HR or Legal.
+- Name the specific employment laws or regulations that apply in each jurisdiction, referencing the relevant
+  statute or regulation number.
+- Assign a named individual responsible for maintaining and updating the jurisdiction list as employment
+  locations change.
+- Avoid using vague terms like "global" or "all regions"—specify each country individually to prevent
+  ambiguity.

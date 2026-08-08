@@ -1,0 +1,48 @@
+leaf_id: req:B.8.5.4:disclosure_request_register
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You must know which parts of your organisation and which processing activities are in-scope
+    for privacy management before you can track disclosure requests. This ensures the register covers
+    all relevant areas.
+  good_enough: A documented scope that clearly defines the organisational boundaries and activities covered
+    by your ISMS and PIMS.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that staff know who is responsible for recording, reviewing,
+    and responding to legally-binding disclosure requests.
+  good_enough: A current roles matrix or policy showing who is responsible for handling and logging disclosure
+    requests.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: You must know the lawful basis for each processing activity to assess whether a disclosure
+    request is valid and how to document it in the register.
+  good_enough: A list or mapping of processing activities to their lawful bases, sufficient to reference
+    when a disclosure request is received.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register helps identify which information assets may be subject to disclosure
+    requests and ensures completeness of the register.
+  good_enough: A basic inventory of key information assets, including those likely to be affected by legal
+    disclosure requests.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Understanding and documenting the purpose of processing is necessary to evaluate the appropriateness
+    and scope of any legally-binding disclosure request.
+  good_enough: A summary of processing purposes for each data set or activity, available for reference
+    during disclosure request review.

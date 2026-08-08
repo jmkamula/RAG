@@ -1,0 +1,19 @@
+must_id: item:Art.46:scope_change_drivers
+control_ref: Art.46
+standard_id: GDPR:2016/679
+must_text: Trigger list (new vendor in non-adequate country, Schrems-style ruling, SCCs version change)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current vendors transferring personal data to countries without an EU adequacy decision, including
+  the country and transfer mechanism, in a dated register.
+- Document each trigger event, such as onboarding a new vendor in a non-adequate country, a relevant court
+  ruling, or a change to Standard Contractual Clauses, with the date and description.
+- Assign a named individual responsible for monitoring legal developments and vendor changes that could
+  affect the safeguards scope.
+- Record the review date and outcome each time the safeguards scope is reassessed following a trigger
+  event.
+- Name the trigger event specifically—do not use vague terms like "regulatory change" or "legal update"
+  without details.

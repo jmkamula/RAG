@@ -1,0 +1,18 @@
+must_id: item:A.7.4.8:scope_contexts
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Disposal contexts enumerated (end-of-processing / hardware failure / decommission / device
+  return / paper archive)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all disposal scenarios relevant to your organisation, including end-of-processing, hardware failure,
+  decommission, device return, and paper archive.
+- Document each scenario in a dated scope statement, explicitly describing when and how personal data
+  disposal occurs in each context.
+- Name a specific individual responsible for maintaining and updating the disposal contexts scope, avoiding
+  generic titles like "IT" or "the team."
+- Cross-reference your disposal contexts scope with your asset inventory and data flow diagrams to confirm
+  all data storage and processing locations are included.

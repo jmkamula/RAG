@@ -1,0 +1,16 @@
+must_id: item:A.7.2.6:reg_processor_id
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Processor identifier per row (legal entity name)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full legal entity name of each PII processor in a dedicated column for every entry in the
+  contract register.
+- Cross-reference each processor’s legal entity name with their official registration documents to confirm
+  accuracy.
+- Name the processor using their registered legal name — do not use abbreviations, nicknames, or generic
+  terms like "vendor" or "partner".
+- Date each entry to show when the processor was added or last reviewed in the register.

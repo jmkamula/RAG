@@ -1,0 +1,19 @@
+must_id: item:A.8.9:proc_change_link
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Cross-link to A.8.32 change management for baseline updates
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the section in your Configuration Management Procedure that describes baseline updates
+  to the corresponding section in your Change Management Procedure.
+- State in writing that all configuration baseline changes must follow the formal change management process
+  described in A.8.32.
+- Name the individual responsible for maintaining both procedures and updating cross-references when either
+  document changes.
+- Attach the latest version numbers and approval dates of both procedures to demonstrate they are current
+  and aligned.
+- Avoid using generic statements like "refer to change management" without specifying the exact procedure
+  name and section number.

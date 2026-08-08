@@ -1,0 +1,18 @@
+must_id: item:9.2:scope
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Audit scope covering all ISMS processes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all ISMS processes in the audit programme, referencing each process by its specific name as defined
+  in your ISMS documentation.
+- Document the audit scope for each scheduled audit, explicitly stating which ISMS processes will be covered
+  and the planned timeframe.
+- Assign a named individual as responsible for confirming that every ISMS process is included in the audit
+  cycle.
+- Attach dated evidence showing periodic review and update of the audit programme to reflect any changes
+  to ISMS processes.
+- Name the audit scope owner as a specific person, not a generic role or team, to avoid ambiguity.

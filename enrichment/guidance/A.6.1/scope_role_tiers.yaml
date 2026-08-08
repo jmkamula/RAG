@@ -1,0 +1,19 @@
+must_id: item:A.6.1:scope_role_tiers
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Role tiers defined (junior office, standard, sensitive [access to special-category PII or financial
+  systems], privileged [admin / production access], executive)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'List all roles in your organisation, grouping them into the required tiers: junior office, standard,
+  sensitive, privileged, and executive.'
+- Document the criteria used to assign each role to its tier, including examples of access or responsibilities
+  for each.
+- Name the owner responsible for maintaining and updating the role tier definitions as a specific individual,
+  not a team or department.
+- Record the date when the role tier definitions were last reviewed and approved by management.
+- Cross-reference each role tier to the relevant access controls or systems in your access management
+  register.

@@ -1,0 +1,20 @@
+must_id: item:A.5.28:reg_handover_log
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Per-handover signature trail (immutable append-only — every transfer logs both releasing and
+  receiving custodian)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each handover event in the Evidence Custody Register, capturing the date, time, and unique evidence
+  identifier for traceability.
+- Require both the releasing and receiving custodians to sign each handover entry, using handwritten or
+  approved digital signatures.
+- Confirm the register is configured as append-only, preventing edits or deletions of past entries, and
+  retain system logs showing this configuration.
+- Name the custodians involved in each transfer as specific individuals, not generic roles or teams, to
+  avoid ambiguity.
+- Retain completed custody register entries in a secure, access-controlled location, with regular backups
+  and documented retention periods.

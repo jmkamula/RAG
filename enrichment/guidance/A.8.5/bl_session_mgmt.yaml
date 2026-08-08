@@ -1,0 +1,17 @@
+must_id: item:A.8.5:bl_session_mgmt
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Session management (timeout, re-authentication for sensitive actions, concurrent-session limits)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document session timeout settings, including duration and affected systems, in a dated configuration
+  record approved by a named system owner.
+- State which sensitive actions require re-authentication, listing them in a policy or procedure with
+  the latest approval date and approver’s name.
+- Record the maximum number of concurrent sessions allowed per user in a technical standard, referencing
+  the system and date of implementation.
+- Name the owner as a specific individual responsible for session management controls, not as a team or
+  department.

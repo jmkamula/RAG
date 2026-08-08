@@ -1,0 +1,15 @@
+must_id: item:A.8.1:rev_next_date
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Endpoint Program in the review meeting minutes or program
+  documentation.
+- Record the date in a calendar entry or tracking system that is accessible to relevant stakeholders.
+- Name the individual responsible for scheduling and leading the next review, specifying their full name
+  and role.
+- Avoid leaving the next review date as "TBD" or "to be confirmed"—enter a specific calendar date.

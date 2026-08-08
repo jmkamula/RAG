@@ -1,0 +1,19 @@
+must_id: item:A.8.7:reg_dashboard
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Aggregate dashboard linked (coverage %, current-signature %, recent-detection rate)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for maintaining the malware protection coverage register, listing their
+  full name and current job title.
+- Document the aggregate dashboard’s location and provide a direct link within the register for auditor
+  access.
+- Record the current malware protection coverage percentage, signature update status, and recent detection
+  rate with clear dates for each metric.
+- Cross-reference each dashboard metric to its data source, such as endpoint management tools or antivirus
+  consoles, specifying system names and report dates.
+- State the date of the latest dashboard update; avoid using undated screenshots or generic “current”
+  labels that lack verifiable timestamps.

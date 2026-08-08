@@ -1,0 +1,19 @@
+must_id: item:A.7.2.7:proc_arrangement_form
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Documented arrangement form — contract or equivalent binding document
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name all joint PII controllers in the arrangement, listing specific legal entities and their registered
+  addresses in the document.
+- Document the roles and responsibilities of each party regarding personal data processing, using clear,
+  non-generic language.
+- State the legal basis for the arrangement by referencing the signed contract or equivalent binding document,
+  including the effective date.
+- Obtain signatures from authorized representatives of each joint controller, ensuring each signature
+  is dated.
+- Attach a copy of the executed contract or binding document to the procedure file; do not rely on unsigned
+  drafts or verbal agreements.

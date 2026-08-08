@@ -1,0 +1,13 @@
+must_id: item:A.8.6:log_breaches
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Threshold-breach events logged with timestamp, magnitude, duration
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each threshold-breach event in the Capacity Monitoring Log with the exact date and time it occurred.
+- Document the measured magnitude of the breach, specifying the metric and value that exceeded the threshold.
+- Note the duration of each event, from the initial breach to when normal capacity was restored.
+- Name the individual responsible for logging each event, avoiding anonymous or group entries.

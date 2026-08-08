@@ -1,0 +1,19 @@
+must_id: item:A.6.6:reg_signature_date
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Per-row signature date (proves signing happened BEFORE access granted per A.5.18)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of each individual who signed an NDA in a dedicated column of the NDA Signature
+  Register.
+- Enter the exact date each NDA was signed in a separate column, ensuring the date is before any access
+  to confidential information is granted.
+- Cross-reference each NDA entry with the corresponding access grant record to confirm that signature
+  dates precede access dates.
+- Name the NDA signatory as a specific individual, not a group or generic title, to avoid ambiguity in
+  the register.
+- Retain a scanned copy of each signed NDA linked to its register entry for verification of both signature
+  and date.

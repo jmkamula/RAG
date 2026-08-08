@@ -1,0 +1,19 @@
+must_id: item:A.5.5:proc_intake_path
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Intake path for adding a new authority (driven from the applicable-authorities scope leaf)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for submitting a request to add a new authority, including required
+  information and responsible contact.
+- Name the individual responsible for reviewing and approving new authority additions, listing their full
+  name and current job title.
+- Record each intake request and its outcome in a dated log, including who submitted, who reviewed, and
+  the final decision.
+- Specify the intake path in the procedure, referencing the applicable-authorities scope leaf to show
+  how new authorities are identified.
+- Avoid using generic roles such as "the team" or "management" as the intake owner; assign a specific
+  person by name.

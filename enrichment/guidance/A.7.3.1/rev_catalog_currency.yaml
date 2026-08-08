@@ -1,0 +1,17 @@
+must_id: item:A.7.3.1:rev_catalog_currency
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Catalog currency — recent regulatory / case-law developments incorporated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to monitor regulatory updates and case-law developments relevant to your jurisdictions,
+  recording their name and responsibility in the obligations program.
+- Document the date and summary of each new or amended regulation or case-law incorporated into your obligations
+  register, referencing the specific source.
+- Review and update the obligations program at least annually, recording the review date and the reviewer’s
+  name in meeting minutes or a change log.
+- Name the owner as a specific individual — not a team or department — responsible for approving updates
+  to the obligations program, and retain their approval record.

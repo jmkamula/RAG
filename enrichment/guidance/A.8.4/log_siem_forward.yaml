@@ -1,0 +1,17 @@
+must_id: item:A.8.4:log_siem_forward
+control_ref: A.8.4
+standard_id: ISO27001:2022
+must_text: Events forwarded to SIEM (cross-link to A.8.16)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each instance of source code access in a monitoring log, including user name, date, time, and
+  accessed repository.
+- Cross-reference the monitoring log with SIEM event records to show that source code access events are
+  forwarded and ingested by the SIEM.
+- Name the person responsible for reviewing the log and SIEM integration, ensuring this is a specific
+  individual, not a team or department.
+- Record the date of the most recent review of the log-to-SIEM forwarding process, and keep evidence of
+  any issues found and actions taken.

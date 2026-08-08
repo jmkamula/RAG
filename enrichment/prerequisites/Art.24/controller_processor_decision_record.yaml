@@ -1,0 +1,41 @@
+leaf_id: req:Art.24:controller_processor_decision_record
+control_ref: Art.24
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear inventory of processing activities before you can assign controller or processor
+    roles to each one. Without this, you can't reliably document or justify your role decisions.
+  good_enough: A draft or working list of all processing activities, even if not fully detailed, is sufficient
+    to begin role assignment.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity helps clarify whether your organization
+    is acting as a controller or processor. This is essential context for making and recording accurate
+    role decisions.
+  good_enough: A preliminary mapping of lawful bases to processing activities, even if some are pending
+    confirmation, is enough to support initial role decisions.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which parts of your organization and which activities are covered
+    by your compliance program. This ensures your role decisions are made for the correct set of processing
+    activities.
+  good_enough: A documented ISMS scope that identifies the business units and activities in scope, even
+    if not fully granular, is sufficient to proceed.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If a Data Protection Officer (DPO) is required, they should be involved in or aware of role
+    decisions to ensure accountability and oversight. This helps avoid gaps in compliance.
+  good_enough: A named DPO or a documented decision that a DPO is not required is enough to move forward
+    with role documentation.

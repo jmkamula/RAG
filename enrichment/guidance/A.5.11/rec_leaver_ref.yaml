@@ -1,0 +1,17 @@
+must_id: item:A.5.11:rec_leaver_ref
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Leaver identifier per record (links to leaver register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the unique identifier for each leaver on every asset return record, matching the identifier format
+  used in your leaver register.
+- Cross-reference each asset return record to the corresponding entry in the leaver register, ensuring
+  both records can be linked directly.
+- Name the leaver using a specific identifier, such as employee ID or HR system number, rather than only
+  a name or email address.
+- Confirm that all asset return records are dated and signed by the individual processing the return,
+  not left unsigned or undated.

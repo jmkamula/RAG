@@ -1,0 +1,18 @@
+must_id: item:A.5.37:audience_per_procedure
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Intended audience per procedure (which personnel 'need' the procedure — drives access permissions
+  and training links)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the intended audience for each operating procedure by naming specific job titles or roles, not
+  generic groups like "staff" or "IT".
+- Document the rationale for why each listed role requires access to the procedure, referencing relevant
+  job responsibilities or tasks.
+- Cross-reference each procedure in the register with the corresponding training records for the named
+  roles to show alignment.
+- Record the date and name of the person who last reviewed and confirmed the accuracy of the intended
+  audience for each procedure.

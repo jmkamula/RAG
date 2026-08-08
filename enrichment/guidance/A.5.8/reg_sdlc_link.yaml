@@ -1,0 +1,18 @@
+must_id: item:A.5.8:reg_sdlc_link
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: SDLC link per row where project involves software development (cross-ref to A.8.25 / A.8.26
+  outputs)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each project involving software development to its corresponding SDLC documentation,
+  such as design reviews or testing results, in the Project Security Register.
+- Document the specific outputs from secure development (A.8.25) and secure coding (A.8.26) activities
+  for each relevant project row.
+- Name the responsible individual for maintaining SDLC links in the register, not just a team or department.
+- Record the date when each SDLC link was last reviewed or updated in the register.
+- Attach or hyperlink the actual SDLC artefacts referenced, avoiding placeholder text like "see SDLC"
+  without a working link or file.

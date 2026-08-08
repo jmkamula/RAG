@@ -1,0 +1,19 @@
+must_id: item:A.5.14:comm_audience
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Audience reached (all in-scope users, including new joiners; targeted refresh for users who
+  handle sensitive transfers frequently)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name all in-scope users, including new joiners, in a distribution list used to communicate the Information
+  Transfer Policy.
+- Document the date and method used to communicate the policy to each user group in a communication log.
+- Record targeted refresher communications sent to users who handle sensitive transfers frequently, noting
+  recipient names and dates.
+- Retain evidence of communication, such as email delivery receipts or signed acknowledgements, for each
+  user reached.
+- Specify individual recipients in records—do not use vague terms like "all staff" or "the department"
+  as audience identifiers.

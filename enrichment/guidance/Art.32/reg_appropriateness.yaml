@@ -1,0 +1,19 @@
+must_id: item:Art.32:reg_appropriateness
+control_ref: Art.32
+standard_id: GDPR:2016/679
+must_text: Per-row appropriateness justification (state of art / cost / nature of processing weighted
+  against risk)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each security measure in the register with a unique identifier and clear description of its function.
+- State for each measure how it reflects the current state of technology, referencing specific standards,
+  products, or practices where relevant.
+- Document the estimated cost of implementing and maintaining each measure, including both direct and
+  indirect expenses.
+- Describe the nature, scope, context, and purposes of the processing activities that the measure is intended
+  to protect.
+- Justify the appropriateness of each measure by explicitly weighing its benefits against the risks to
+  data subjects, referencing a completed risk assessment dated and signed by a named individual.

@@ -1,0 +1,19 @@
+must_id: item:Art.38:scope_coi_matrix
+control_ref: Art.38
+standard_id: GDPR:2016/679
+must_text: COI matrix — which other roles DPO cannot also hold (CISO / security architect / product owner
+  of PII flows / etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each role that cannot be combined with the Data Protection Officer position, such as CISO, security
+  architect, or product owner of personal data flows.
+- Document the rationale for each conflict of interest, referencing GDPR Article 38.6 and relevant internal
+  risk assessments.
+- Assign a specific individual as the DPO, avoiding generic titles like "the team" or "IT department."
+- Record the date and version of the conflict of interest matrix to show when it was last reviewed and
+  updated.
+- Cross-reference the matrix with your current organisational chart to confirm no listed conflicts exist
+  in practice.

@@ -1,0 +1,19 @@
+must_id: item:A.5.30:reg_rto_rpo
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: RTO/RPO targets per row (specific numeric values, not 'best effort')
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the Recovery Time Objective (RTO) and Recovery Point Objective (RPO) as specific numeric values
+  for each ICT service listed in the register.
+- Name the business owner responsible for setting each service’s RTO and RPO, ensuring a specific individual
+  is listed, not a team or department.
+- Document the date each RTO and RPO value was last reviewed and approved, referencing the meeting minutes
+  or approval record.
+- Cross-reference each RTO and RPO entry to the documented business continuity plan section that supports
+  the chosen targets.
+- Avoid using vague terms like “best effort” or “TBD” for RTO/RPO; enter only concrete, measurable numbers
+  in each field.

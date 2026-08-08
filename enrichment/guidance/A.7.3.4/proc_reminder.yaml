@@ -1,0 +1,19 @@
+must_id: item:A.7.3.4:proc_reminder
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+must_text: Periodic reminder that withdrawal is available (in-product / newsletter footer)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for sending periodic reminders about consent withdrawal options, including frequency
+  and communication channels, in a dated procedure file.
+- State in the procedure where the withdrawal reminder will appear, such as in-product notifications or
+  newsletter footers, with screenshots or template samples.
+- Assign a named individual responsible for reviewing and updating reminder content, listing their name
+  and role in the procedure document.
+- Retain copies of sent reminders or newsletters showing the withdrawal option, with visible dates and
+  distribution lists.
+- Name the reminder owner as a specific person, not a generic team or department, to avoid auditor concerns
+  about unclear accountability.

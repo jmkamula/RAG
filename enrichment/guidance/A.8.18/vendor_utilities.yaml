@@ -1,0 +1,17 @@
+must_id: item:A.8.18:vendor_utilities
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Vendor-provided utility programs treated under the same rules (no vendor-default-allow)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy that all vendor-provided utility programs are subject to the same approval and control
+  processes as internal tools.
+- List each vendor utility program in an inventory, including the date it was reviewed and the person
+  responsible for its approval.
+- Document any exceptions or allowed uses, including the specific justification and the name of the approving
+  manager.
+- Name the policy owner as a specific individual, not a department or generic team.
+- Attach a copy of the most recent policy version with a clear publication date and version number.

@@ -1,0 +1,17 @@
+must_id: item:A.5.9:proc_ownership
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Ownership assignment rules (who can be an owner, transfer process on role change)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the asset owner as a specific individual by full name and job title in the asset register, not
+  as a team or department.
+- Document clear criteria for who can be assigned as an asset owner, including required role, authority,
+  and responsibilities, in the procedure.
+- State the step-by-step process for transferring asset ownership when someone changes roles or leaves,
+  including required approvals and documentation.
+- Record the date and details of each ownership transfer in the asset register, including both outgoing
+  and incoming owners.

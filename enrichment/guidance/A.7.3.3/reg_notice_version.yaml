@@ -1,0 +1,16 @@
+must_id: item:A.7.3.3:reg_notice_version
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: Notice version served per row (link to A.7.3.2 artifact register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact version number of the privacy notice served for each entry in the log.
+- Cross-reference each notice version in the log to the corresponding entry in the A.7.3.2 artifact register.
+- Document the date and method by which each notice version was delivered to the recipient.
+- Name the responsible individual who confirmed delivery for each notice entry, avoiding generic roles
+  or team names.
+- Retain a copy of each notice version referenced, ensuring it matches the version logged for every delivery
+  instance.

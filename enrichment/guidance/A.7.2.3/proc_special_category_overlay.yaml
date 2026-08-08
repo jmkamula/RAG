@@ -1,0 +1,19 @@
+must_id: item:A.7.2.3:proc_special_category_overlay
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: Special-category explicit-consent overlay (Art.9.2.a explicit consent for health/biometric)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for obtaining explicit consent for processing health or biometric data, including
+  the exact wording used to inform individuals.
+- Record the date, time, and method of each explicit consent obtained, linking it to the relevant data
+  subject and processing activity.
+- Name the individual responsible for managing and reviewing explicit consent records, ensuring this is
+  a specific person, not a team or department.
+- Retain copies of all explicit consent forms or digital confirmations, ensuring each is signed or otherwise
+  clearly affirmed by the data subject.
+- Review all consent records at regular intervals and document the results, noting any withdrawals or
+  updates to consent status.

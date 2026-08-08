@@ -1,0 +1,18 @@
+must_id: item:A.7.2:reg_anomaly_flag
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Anomaly flag per event (out-of-hours, unusual area for this subject, override-without-justification)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, time, individual’s name, and location for each physical entry event in the register.
+- Flag each event in the register if it occurs outside standard hours, in an unusual area for that individual,
+  or uses an override without justification.
+- Document the specific reason for any override or unusual access, ensuring the justification is clearly
+  written and not left blank or generic.
+- Name the person responsible for reviewing flagged anomalies, listing a specific individual rather than
+  a team or department.
+- Retain a log of all flagged anomalies and the follow-up actions taken, including dates and the names
+  of those involved.

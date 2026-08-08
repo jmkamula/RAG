@@ -1,0 +1,40 @@
+leaf_id: req:6.1.3:statement_of_applicability
+control_ref: 6.1.3
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The SoA must reflect which Annex A controls are applicable based on the defined scope of
+    the ISMS. If the scope is unclear or unstable, it's impossible to justify control inclusion or exclusion.
+  good_enough: A documented and approved scope statement that clearly defines the organizational boundaries
+    and assets covered by the ISMS.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: direct
+  rationale: The results of the risk assessment directly inform which controls are necessary to treat
+    identified risks. Without this, control selection in the SoA is arbitrary.
+  good_enough: A completed risk assessment with documented risks and their ratings, sufficient to justify
+    control choices in the SoA.
+- ref: A.5.31
+  standard_id: ISO27001:2022
+  title: Compliance with legal and contractual requirements
+  category: direct
+  rationale: Controls may be required due to legal, regulatory, or contractual obligations. The compliance
+    register ensures these drivers are considered when justifying control applicability in the SoA.
+  good_enough: A basic register or list of key legal, regulatory, and contractual obligations relevant
+    to information security, even if not fully exhaustive.
+- ref: 6.1.3
+  standard_id: ISO27001:2022
+  title: Information Security Risk Treatment Plan
+  category: direct
+  rationale: The SoA and the risk treatment plan are co-produced; the plan documents how selected controls
+    will address identified risks. Drafting the SoA without at least a draft risk treatment plan risks
+    inconsistencies.
+  good_enough: A draft risk treatment plan that maps risks to proposed controls, sufficient to cross-check
+    SoA justifications.

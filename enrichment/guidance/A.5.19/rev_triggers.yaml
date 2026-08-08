@@ -1,0 +1,18 @@
+must_id: item:A.5.19:rev_triggers
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Ad-hoc triggers (M&A, market events, new business line, supplier incident) prompting unscheduled
+  review
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific ad-hoc events—such as mergers, acquisitions, new business lines, or supplier incidents—in
+  your supplier review procedure document.
+- Record each unscheduled supplier portfolio review in a dated log, including the triggering event and
+  the decision to initiate the review.
+- Assign a named individual to approve the initiation of each ad-hoc review, avoiding generic roles like
+  "the team" or "procurement."
+- Attach supporting evidence of the triggering event, such as incident reports or business case documents,
+  to the review record.

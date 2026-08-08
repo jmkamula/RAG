@@ -1,0 +1,19 @@
+must_id: item:A.8.24:pii_keys
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Key management for PII encryption keys (separation of duties / DPIA-required where applicable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the key management owner for PII encryption keys, avoiding generic titles
+  like "IT" or "the team".
+- Document the process for generating, storing, rotating, and revoking PII encryption keys in the Use
+  of Cryptography Policy, referencing relevant sections.
+- Assign and record separate individuals for key management and data processing roles to demonstrate clear
+  separation of duties.
+- Retain a dated record of Data Protection Impact Assessments (DPIAs) conducted for systems using PII
+  encryption, including any identified risks and mitigation actions.
+- Cross-reference the Use of Cryptography Policy with GDPR Article 32 requirements in your compliance
+  register, noting the latest review date.

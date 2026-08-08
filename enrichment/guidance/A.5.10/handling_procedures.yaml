@@ -1,0 +1,20 @@
+must_id: item:A.5.10:handling_procedures
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Handling procedures per information class (storage, transmission, retention, disposal) aligned
+  with A.5.12
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all information classifications used by your organisation, referencing your Information Classification
+  Policy and naming the current policy version and approval date.
+- Document specific handling procedures for each classification, covering storage, transmission, retention,
+  and disposal, in a table within your Acceptable Use Policy.
+- Cross-reference each handling procedure to the relevant requirements in your Information Classification
+  Policy and A.5.12 to show alignment.
+- Name the policy owner as a specific individual with responsibility for updates, not a generic role or
+  department.
+- Record the date of last review and approval of the Acceptable Use Policy, including the approver’s full
+  name and position.

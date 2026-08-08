@@ -1,0 +1,17 @@
+must_id: item:A.5.17:reg_last_rotated
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Last-rotated timestamp per row where applicable (drives drift detection — stale-rotation alert)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time each credential was last rotated in a dedicated column for every entry
+  in the credential register.
+- Name the person responsible for updating the last-rotated timestamp for each credential, ensuring individual
+  accountability is clear.
+- Review the register to confirm there are no missing or default timestamps such as "N/A" or "unknown"
+  for any credential row.
+- Cross-reference the last-rotated timestamps with change logs or ticketing records to verify accuracy
+  and completeness.

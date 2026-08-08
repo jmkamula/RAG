@@ -1,0 +1,19 @@
+must_id: item:A.8.30:code_ownership
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Code ownership / escrow / IP terms in contract
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for managing outsourced development contracts, listing their full name
+  and job title in the procedure.
+- Document the specific code ownership, escrow, and intellectual property terms included in each contract,
+  referencing the relevant contract section and date.
+- Retain a signed copy of each contract showing agreed code ownership, escrow arrangements, and IP terms,
+  with signatures and dates from both parties.
+- Cross-reference each contract to a central register of outsourced development agreements, including
+  contract number, supplier name, and review date.
+- Avoid using generic or template clauses—customize contract terms to reflect your organization’s specific
+  requirements for code ownership and IP.

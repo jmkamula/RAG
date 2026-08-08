@@ -1,0 +1,16 @@
+must_id: item:A.7.4:reg_source
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: Per-event source (CCTV / IDS / access-control / alarm)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the source system or device for each monitoring event, specifying if it is CCTV, intrusion detection,
+  access control, or an alarm.
+- Name the individual responsible for entering each event, ensuring the entry is traceable to a specific
+  person.
+- Enter the date and time each event was detected, matching the timestamp format used by the source system.
+- Avoid using generic terms like "security system" as the source; specify the exact system or device for
+  each event.

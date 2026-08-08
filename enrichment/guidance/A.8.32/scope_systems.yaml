@@ -1,0 +1,15 @@
+must_id: item:A.8.32:scope_systems
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: In-scope systems (cross-link to A.5.9 asset register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems affected by the change in a dated change scope document, specifying each system by
+  name and unique identifier.
+- Cross-reference each listed system to its corresponding entry in the A.5.9 asset register, including
+  asset ID and owner.
+- Name the change scope owner as a specific individual, not a group or department.
+- Attach the signed approval of the change scope, including date and approver’s full name.

@@ -1,0 +1,16 @@
+must_id: item:A.8.30:reg_engagement_id
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Per-engagement unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each outsourced development engagement before work begins, and record
+  it in the Outsourced Development Engagement Register.
+- Document the unique identifier alongside the engagement’s name, vendor, and start date in the register
+  for clear traceability.
+- Cross-reference the unique identifier in all related contracts, statements of work, and project documentation.
+- Name the unique identifier using a format that cannot be confused with other registers or reused for
+  different engagements.

@@ -1,0 +1,15 @@
+must_id: item:A.7.4.8:reg_date
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Disposal date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the disposal date for each entry in the PII Disposal Record Register, using a consistent date
+  format.
+- Cross-reference each disposal date with the corresponding PII item and disposal method in the same row.
+- Confirm that no row in the register is missing a disposal date before finalizing or archiving the record.
+- Name the person responsible for entering each disposal date, ensuring a specific individual is listed,
+  not a team or department.

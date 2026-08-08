@@ -1,0 +1,15 @@
+must_id: item:6.2:proc_template
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: Objective template (SMART or equivalent)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select and document a standard template for security objectives that includes Specific, Measurable,
+  Achievable, Relevant, and Time-bound fields.
+- Name the template owner as a specific individual responsible for maintaining and updating the template.
+- Record the date the template was last reviewed or updated in the document header or footer.
+- Attach a completed example of the template filled out for a current security objective to demonstrate
+  its use.

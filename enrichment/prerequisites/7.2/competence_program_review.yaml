@@ -1,0 +1,38 @@
+leaf_id: req:7.2:competence_program_review
+control_ref: '7.2'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which roles and functions are in-scope for the ISMS before you can review
+    competence requirements or gaps. The scope defines the population for which competence must be managed.
+  good_enough: A documented scope statement that clearly identifies the organizational boundaries and
+    functions covered by the ISMS.
+- ref: '7.1'
+  standard_id: ISO27001:2022
+  title: Resources
+  category: direct
+  rationale: You can't review or close competence gaps unless resources (time, budget, personnel) have
+    been allocated to address them. Resource provision is a direct input to any competence program review.
+  good_enough: Evidence that resources for competence management have been identified and allocated, even
+    if not yet fully expended.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Competence requirements are tied to specific roles. You must have a clear mapping of roles
+    and responsibilities before you can verify if competence is current or identify gaps.
+  good_enough: A current roles and responsibilities matrix or similar document covering all in-scope functions.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Competence gaps should be prioritized based on risk. Without an up-to-date risk assessment,
+    you can't meaningfully evaluate which competence gaps are most urgent or impactful.
+  good_enough: A recent risk assessment that identifies key risks relevant to staff competence, even if
+    not exhaustive.

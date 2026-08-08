@@ -1,0 +1,32 @@
+leaf_id: req:Art.23:restrictions_procedure
+control_ref: Art.23
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify which data subject rights
+    (Art.12-22, Art.34) apply to which processing operations, and where Member State restrictions might
+    be relevant.
+  good_enough: A draft or working RoPA that covers all major processing activities and highlights where
+    national law may impose restrictions is sufficient to proceed.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity is essential to determine if
+    and how Member State restrictions under Art.23 could impact the exercise of data subject rights.
+  good_enough: A mapped list of lawful bases for all main processing activities, even if not fully detailed,
+    is enough to start drafting the restrictions procedure.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If a DPO is required, they must be involved in assessing and documenting Member State restrictions
+    and ensuring the procedure aligns with GDPR obligations.
+  good_enough: A named DPO or interim privacy lead with responsibility for GDPR compliance is sufficient
+    to move forward.

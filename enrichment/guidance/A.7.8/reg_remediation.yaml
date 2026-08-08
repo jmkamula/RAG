@@ -1,0 +1,19 @@
+must_id: item:A.7.8:reg_remediation
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Per-row remediation log where protection falls short of required
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each piece of equipment in the register, including its location and the required protection measures
+  as specified by your policy.
+- Document any instance where the actual protection at a site does not meet the required measures, including
+  a clear description of the shortfall.
+- Assign a named individual responsible for each remediation action, ensuring the owner is a specific
+  person and not a team or department.
+- Log the date and details of all remediation actions taken, including completion or current status, for
+  each affected equipment entry.
+- Attach supporting evidence, such as photos or maintenance records, to each remediation log entry to
+  show actions have been carried out.

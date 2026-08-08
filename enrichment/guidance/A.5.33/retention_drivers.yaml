@@ -1,0 +1,18 @@
+must_id: item:A.5.33:retention_drivers
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Legal/regulatory driver per retention period stated (statute, regulator guidance, contractual
+  obligation, business need — never an arbitrary number)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the legal, regulatory, contractual, or business need that determines the retention period for each
+  record class in the schedule.
+- Reference the specific statute, regulation, contract clause, or documented business requirement for
+  each retention entry, including section or article numbers where applicable.
+- Record the name and role of the individual who determined or approved each retention period, along with
+  the approval date.
+- Avoid entering a retention period without a documented driver; do not use arbitrary numbers or generic
+  statements like "industry standard."

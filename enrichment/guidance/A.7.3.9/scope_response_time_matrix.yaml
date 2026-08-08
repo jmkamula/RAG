@@ -1,0 +1,19 @@
+must_id: item:A.7.3.9:scope_response_time_matrix
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Per-jurisdiction response-time matrix (Art.12.3 30 days default + extensions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all jurisdictions where you process personal data, referencing legal or contractual documents that
+  define your operational scope.
+- Document the statutory response time for each jurisdiction, citing the specific law or regulation that
+  mandates the timeframe.
+- Record any permitted extensions to response times, including conditions and maximum extension periods,
+  with legal references.
+- Name a specific individual responsible for maintaining and updating the response-time matrix, not a
+  team or department.
+- Date and version-control the matrix, ensuring each update is clearly logged and previous versions are
+  retained.

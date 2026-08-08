@@ -1,0 +1,17 @@
+must_id: item:Art.39:rev_risk_prioritisation_check
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Risk prioritisation check — DPO attention skewed toward higher-risk processing
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the criteria used to rank data processing activities by risk, including examples of high, medium,
+  and low-risk categories, in a dated record.
+- Record the most recent DPO review of processing activities, noting which were selected for detailed
+  attention and the rationale for prioritisation.
+- Name the DPO responsible for the review, ensuring a specific individual is listed rather than a team
+  or department.
+- Retain evidence of any adjustments made to the review process following identification of new or emerging
+  high-risk activities, with dates and decision details.

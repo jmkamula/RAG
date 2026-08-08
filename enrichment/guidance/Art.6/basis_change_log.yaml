@@ -1,0 +1,19 @@
+must_id: item:Art.6:basis_change_log
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Log of lawful basis changes per activity (drives Art.13 notice amendments)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each change to the lawful basis for every processing activity in a dated entry within the Lawful
+  Basis Register.
+- Name the individual who approved each lawful basis change, ensuring a specific person is listed rather
+  than a team or department.
+- State the reason for each lawful basis change, referencing the relevant processing activity and linking
+  to supporting documentation if applicable.
+- Cross-reference each register update with the corresponding amendment date in your Article 13 privacy
+  notice to show alignment.
+- Retain previous versions of the register so auditors can trace the full history of lawful basis decisions
+  and changes.

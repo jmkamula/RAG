@@ -1,0 +1,16 @@
+must_id: item:A.8.27:scope_domains
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Engineering domains enumerated (product / platform / infrastructure / integration / data)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all engineering domains relevant to your organisation, such as product, platform, infrastructure,
+  integration, and data, in a dated architecture principles document.
+- Name the specific individual responsible for maintaining the architecture principles scope, avoiding
+  generic roles like "the team" or "IT department."
+- Cross-reference each domain with its associated architecture principles in the document to show explicit
+  coverage.
+- Review and update the scope annually, recording the review date and the reviewer’s name in the document.

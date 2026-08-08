@@ -1,0 +1,19 @@
+must_id: item:A.5.10:comm_acknowledgement
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: User-level acknowledgement captured (e-signature, training completion record, click-through)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Publish the Acceptable Use Policy on a platform that tracks user access and requires explicit acknowledgement
+  before granting system use.
+- Capture each user's acknowledgement with a dated e-signature, training completion record, or click-through
+  confirmation tied to their unique identifier.
+- Record the full list of users who have acknowledged the policy, including names and dates, in a central,
+  exportable register.
+- Name the owner responsible for maintaining the acknowledgement records as a specific individual, not
+  a group or department.
+- Retain historical acknowledgement records to show both current and previous user compliance, not just
+  the latest version.

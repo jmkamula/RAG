@@ -1,0 +1,19 @@
+must_id: item:A.8.18:scope_inclusion_test
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Inclusion test (any program with 'can override control' capability is in scope, regardless
+  of source)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all utility programs in use, including those from vendors, open source, or internally developed,
+  in a dated inventory record.
+- Identify and document which programs have the capability to override system or security controls, citing
+  specific features or functions.
+- Confirm inclusion of every program with override capability in your scope document, regardless of its
+  source or intended use.
+- Name the individual responsible for maintaining the inventory and scope decisions, avoiding generic
+  roles or team names.
+- Retain evidence of periodic review of the inventory and scope, such as a signed and dated review log.

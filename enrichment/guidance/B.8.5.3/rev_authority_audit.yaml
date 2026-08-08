@@ -1,0 +1,18 @@
+must_id: item:B.8.5.3:rev_authority_audit
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+must_text: Authority audit — sampled disclosures
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each authority disclosure by recording the date, recipient authority, purpose, and legal basis
+  in a central disclosure log.
+- Assign a named individual to review a random sample of disclosure records at least annually, and record
+  the review date and findings.
+- Cross-reference each sampled disclosure with supporting evidence, such as correspondence or legal requests,
+  and retain copies in the disclosure file.
+- Name the reviewer as a specific person, not a group or department, in the review record.
+- Record any issues or non-conformities found during the review, along with corrective actions and responsible
+  persons, in a dated action log.

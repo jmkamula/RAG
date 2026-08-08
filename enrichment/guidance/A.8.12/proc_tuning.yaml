@@ -1,0 +1,17 @@
+must_id: item:A.8.12:proc_tuning
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: False-positive tuning process (suppression with justification, periodic re-evaluation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for suppressing false positives, including required justification, in the DLP Operations
+  Procedure with a clear revision date.
+- Record each false-positive suppression decision with the specific justification, the name of the approver,
+  and the date of action.
+- Assign a named individual responsible for periodically re-evaluating all active suppressions, not just
+  "the team" or a department.
+- Log the results of each periodic re-evaluation, including any changes or confirmations, with dates and
+  reviewer names.

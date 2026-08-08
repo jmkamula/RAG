@@ -1,0 +1,19 @@
+must_id: item:B.8.5.8:reg_change_id
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+must_text: Unique change identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique change identifier to each entry in the Subcontractor Change Register, using a sequential
+  or otherwise non-repeating numbering system.
+- Record the unique identifier in a dedicated column for every change logged, ensuring no two changes
+  share the same identifier.
+- Cross-reference the unique identifier in related documentation, such as approval records or change requests,
+  to maintain traceability.
+- Confirm that no register row is missing a unique identifier by periodically reviewing the register for
+  blank or duplicate entries.
+- Name the register owner as a specific individual responsible for maintaining the uniqueness of identifiers,
+  not as a team or department.

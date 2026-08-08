@@ -1,0 +1,17 @@
+must_id: item:9.1:rev_reviewer
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (ISMS Manager + KPI lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the ISMS Manager and the KPI lead as the reviewers in the monitoring program review document, using
+  their full names and job titles.
+- Record the date when the review was completed and ensure it is visible on the monitoring program review
+  document.
+- Sign the review document physically or electronically by both the ISMS Manager and the KPI lead to confirm
+  their participation.
+- Avoid listing the reviewer as a group or department; specify individual names to prevent ambiguity about
+  accountability.

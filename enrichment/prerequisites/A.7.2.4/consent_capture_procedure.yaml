@@ -1,0 +1,43 @@
+leaf_id: req:A.7.2.4:consent_capture_procedure
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Before you can capture and record consent, you must clearly define and document the specific
+    purposes for which personal data is being processed. This ensures that consent is meaningful and tied
+    to a legitimate, documented purpose.
+  good_enough: A current, reviewed list of processing purposes exists and is accessible to those drafting
+    the consent capture procedure.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Consent is only one possible lawful basis for processing personal data. You need to confirm
+    that consent is the appropriate basis for each processing activity before designing how it will be
+    captured and recorded.
+  good_enough: A mapping of processing activities to lawful bases is available, with those requiring consent
+    clearly identified.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Effective consent capture and recording depends on knowing who is responsible for obtaining,
+    recording, and responding to consent-related requests. Clear assignment of roles prevents gaps or
+    confusion in the process.
+  good_enough: Documented role assignments exist for key privacy and data handling responsibilities, including
+    consent management.
+- ref: Art.7
+  standard_id: GDPR:2016/679
+  title: Conditions for Consent
+  category: cross_role
+  rationale: The GDPR sets out specific requirements for valid consent, including record-keeping and the
+    ability to demonstrate consent. These legal standards shape what must be included in your consent
+    capture and recording procedure.
+  good_enough: A summary of GDPR consent requirements is available to the drafting team, ensuring the
+    procedure aligns with legal expectations.

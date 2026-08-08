@@ -1,0 +1,17 @@
+must_id: item:A.8.15:reg_destination
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Per-source collection destination (SIEM index / cold-archive bucket / regulator-required path)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each log source in the register, specifying the exact storage location such as SIEM index name,
+  archive bucket, or regulatory path.
+- Record the date when each log source was added or updated in the register to show current and historical
+  storage destinations.
+- Name the responsible individual for maintaining each log source entry, avoiding generic roles like "IT
+  team" or "Security department".
+- Cross-reference each storage location with access permissions documentation to demonstrate who can retrieve
+  or modify stored logs.

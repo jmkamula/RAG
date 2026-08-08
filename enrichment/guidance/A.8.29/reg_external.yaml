@@ -1,0 +1,16 @@
+must_id: item:A.8.29:reg_external
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Per-test external/internal flag (independent vs internal)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record for each security test whether it was performed by an independent external party or by internal
+  staff, using a clear yes/no or named provider.
+- Name the individual or company responsible for each test, avoiding generic entries like "the team" or
+  "IT department".
+- Date each test entry to show when the test was conducted and by whom.
+- Cross-reference each test entry with supporting documentation, such as contracts or statements of work
+  for external parties.

@@ -1,0 +1,56 @@
+leaf_id: req:Art.30:records_of_processing
+control_ref: Art.30
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need a current inventory of information assets to identify what personal data is processed,
+    where it resides, and which systems or services are involved. Without this, the RoPA will be incomplete
+    or inaccurate.
+  good_enough: A basic, up-to-date list of information assets that hold or process personal data, even
+    if not fully classified, is sufficient to start the RoPA.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A data classification scheme helps you label and categorize personal data types, which is
+    essential for describing processing activities and data categories in the RoPA.
+  good_enough: A simple scheme that distinguishes personal data from other types, and identifies special
+    categories if relevant, is enough to proceed.
+- ref: A.5.31
+  standard_id: ISO27001:2022
+  title: Compliance Register
+  category: cross_role
+  rationale: The compliance register lists applicable laws and legal bases, which you must reference in
+    the RoPA to show why each processing activity is lawful.
+  good_enough: A working list of relevant privacy laws and lawful bases (e.g., consent, contract) covering
+    your main processing activities is sufficient.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: You must know the lawful basis for each processing activity to accurately complete the RoPA
+    and demonstrate compliance with GDPR.
+  good_enough: A mapped list of lawful bases for your main processing activities, even if some edge cases
+    are still under review, is enough to unblock RoPA drafting.
+- ref: A.5.20
+  standard_id: ISO27001:2022
+  title: Supplier Agreements
+  category: cross_role
+  rationale: Supplier and processor agreements identify third parties who process personal data on your
+    behalf, which must be captured in the RoPA as recipients or processors.
+  good_enough: A current list of key suppliers and processors with basic contract details is sufficient
+    to start.
+- ref: Art.28
+  standard_id: GDPR:2016/679
+  title: Processor Agreements (DPAs)
+  category: direct
+  rationale: You need to know which processing activities involve external processors, and have DPAs in
+    place, to accurately record these relationships in the RoPA.
+  good_enough: A summary of which activities use processors and whether DPAs are signed is enough to proceed,
+    even if some contracts are still being finalized.

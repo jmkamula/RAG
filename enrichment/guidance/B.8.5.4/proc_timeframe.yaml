@@ -1,0 +1,18 @@
+must_id: item:B.8.5.4:proc_timeframe
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+must_text: Agreed timeframe per customer contract (typically 24-72h)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the agreed notification timeframe for legally-binding disclosure requests in each customer
+  contract, specifying the number of hours or days.
+- Name the responsible individual who must notify customers of disclosure requests, listing their full
+  name and job title in the procedure.
+- Record the date and time of each notification sent to customers in response to a legally-binding disclosure
+  request.
+- Attach a copy of the actual notification sent to the customer, showing the timestamp and recipient details.
+- Avoid referencing only a generic timeframe like "as soon as possible"—state the exact timeframe agreed
+  in the contract.

@@ -1,0 +1,17 @@
+must_id: item:A.7.9:scope
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Scope (laptops, mobile devices, removable media, equipment taken off-premises)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of assets covered by the policy, such as laptops, mobile devices, removable media, and
+  any equipment allowed off-premises.
+- Specify the physical or logical boundaries that define "off-premises" in your organisation, including
+  remote work locations and third-party sites.
+- Name the policy owner as a specific individual responsible for maintaining and updating the scope, not
+  a generic team or department.
+- Date the current policy version and retain previous versions to show how the scope has changed over
+  time.

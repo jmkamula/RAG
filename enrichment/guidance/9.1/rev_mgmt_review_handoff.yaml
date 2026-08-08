@@ -1,0 +1,19 @@
+must_id: item:9.1:rev_mgmt_review_handoff
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Management review handoff — last cycle's measurement results actually surfaced in 9.3 minutes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and time when measurement results from the last monitoring cycle were delivered to
+  management for review.
+- Attach the specific monitoring results report that was provided for discussion in the most recent management
+  review meeting.
+- Record in the management review meeting minutes the agenda item where last cycle’s measurement results
+  were discussed, referencing the attached report.
+- Name the individual who presented the measurement results to management, ensuring this is a specific
+  person and not a generic role or team.
+- Confirm that the minutes explicitly reference the measurement results, avoiding generic statements like
+  "metrics were reviewed" without detail.

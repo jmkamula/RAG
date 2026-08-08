@@ -1,0 +1,15 @@
+must_id: item:A.6.4:reg_closure_date
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Per-case closure date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the closure date for each disciplinary case in the register as soon as the case is formally concluded.
+- Name the person responsible for entering and verifying the closure date for each case in the register.
+- Retain supporting documentation that confirms the closure decision and matches the recorded closure
+  date for each case.
+- Avoid leaving the closure date field blank or using placeholders like "TBD" or "N/A"—enter a specific,
+  actual date for every closed case.

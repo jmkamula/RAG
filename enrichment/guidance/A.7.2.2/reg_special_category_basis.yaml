@@ -1,0 +1,19 @@
+must_id: item:A.7.2.2:reg_special_category_basis
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: Special-category basis where applicable (Art.9.2.a-j / Art.10 basis)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity involving special-category or criminal offence data in the Lawful Basis
+  Register, referencing the relevant GDPR Article 9.2 or 10 basis.
+- Name the specific lawful basis used for each activity, citing the exact subparagraph (e.g., 9.2(a),
+  9.2(b)), not just "GDPR Art.9".
+- Record the decision date and the individual who approved the lawful basis for each special-category
+  processing entry.
+- Attach supporting documentation or policy references that justify the chosen lawful basis for each processing
+  activity.
+- Avoid using generic or catch-all justifications; specify the actual condition from Article 9.2 or 10
+  for every entry.

@@ -1,0 +1,19 @@
+must_id: item:A.5.2:competency_link
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: Notes competency/training requirements per role (cross-ref A.6.3)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each information security role in the matrix with the person's full name, not just a job title
+  or department.
+- Document the specific competency or training required for each role, referencing relevant course names
+  or certifications.
+- Cross-reference each competency or training requirement to the corresponding clause in your training
+  policy or A.6.3 documentation.
+- Record the date each individual last completed the required training, using training records or certificates
+  as evidence.
+- State any roles with missing or outdated training records, and document a remediation plan with assigned
+  responsibilities and target dates.

@@ -1,0 +1,16 @@
+must_id: item:Art.18:reg_scope
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Per-row scope (which data, which systems are restricted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific data categories or data sets subject to restriction in each row of the register.
+- Identify the exact IT systems, applications, or databases where the restriction applies for each entry.
+- Record the start and end date of each restriction to show the period of limitation for each data set.
+- Assign a named individual responsible for maintaining and updating each restriction entry, not just
+  a team or department.
+- Cross-reference each restriction entry to the relevant data subject request or legal basis that triggered
+  the restriction.

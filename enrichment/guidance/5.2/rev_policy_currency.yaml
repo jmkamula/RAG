@@ -1,0 +1,18 @@
+must_id: item:5.2:rev_policy_currency
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: Policy currency check — still appropriate to organisational purpose and scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Review the current information security policy against recent organisational changes and document any
+  gaps or misalignments in a dated review log.
+- Record the date of the most recent policy review and the name of the reviewer in the policy document
+  or an associated register.
+- Obtain a signed statement from a senior leader confirming the policy remains appropriate to the organisation’s
+  purpose and scope.
+- Name the policy owner as a specific individual, not a group or department, in the policy documentation.
+- Archive previous versions of the policy with review dates to show a clear history of updates and rationale
+  for changes.

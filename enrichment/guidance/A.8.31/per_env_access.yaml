@@ -1,0 +1,19 @@
+must_id: item:A.8.31:per_env_access
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Access controls per environment (dev access ≠ prod access; production-access is privileged-access
+  per A.8.2)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific access permissions for each environment, listing named users and their roles for
+  development, test, and production.
+- Assign production environment access only to named individuals with a documented business need, referencing
+  their privileged-access approval under A.8.2.
+- Record the date and outcome of the most recent review of environment access lists, including any changes
+  made and the reviewer’s name.
+- Name the owner of the access control procedure as a specific individual, not a team or department.
+- Retain evidence of access removal when staff change roles or leave, including the date and the person
+  who performed the removal.

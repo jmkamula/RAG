@@ -1,0 +1,19 @@
+must_id: item:A.8.10:gdpr_erasure_path
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: GDPR Art.17 erasure path (DSAR-triggered deletion) cross-link to A.5.34 PII protection
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the Information Deletion Procedure as a specific individual, not a team or department,
+  in the procedure document.
+- Document the step-by-step process for handling GDPR Article 17 erasure requests, including how requests
+  are received, verified, and fulfilled.
+- Cross-reference the Information Deletion Procedure to the A.5.34 PII protection policy, citing the exact
+  section and version in both documents.
+- Record each deletion request and action taken in a log, including requester identity, date received,
+  decision, and completion date.
+- State how the procedure is reviewed and updated to reflect changes in GDPR or ISO27001 requirements,
+  including the review date and responsible person.

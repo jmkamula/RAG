@@ -1,0 +1,16 @@
+must_id: item:A.5.21:reg_owner
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: Named internal owner per component (typically architecture or platform team)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the internal owner for each ICT component or vendor entry, avoiding generic
+  labels like "team" or department names.
+- Record the owner's full name and current job title next to each component or vendor in the register,
+  along with the date of assignment.
+- Document any changes in ownership by updating the register entry with the new owner's details and the
+  effective date of the change.
+- Review the register quarterly to confirm all entries have a named owner and update any outdated information.

@@ -1,0 +1,16 @@
+must_id: item:7.2:proc_gap_handling
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Gap-handling pathway (training plan → hiring → mentoring → role re-allocation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step process for handling competence gaps, clearly outlining options for training,
+  hiring, mentoring, or re-assigning roles.
+- Assign responsibility for each gap-handling action to a named individual, not a generic title or team.
+- Record each competence gap identified, the chosen pathway, and the completion date in a dated log or
+  register.
+- Attach evidence of completed actions, such as signed training records, hiring confirmations, or mentoring
+  agreements, to each entry in the log.

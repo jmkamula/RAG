@@ -1,0 +1,17 @@
+must_id: item:8.3:proc_assignment
+control_ref: '8.3'
+standard_id: ISO27001:2022
+must_text: Assignment rules (how each plan item lands with an operational owner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the operational owner for each treatment plan item as a specific individual, not as a group or
+  department.
+- Document the assignment rules in the Treatment Execution Procedure, including criteria for matching
+  plan items to owners.
+- Record the date and method of each assignment decision in a register or log that can be referenced during
+  audits.
+- Review and update the owner assignments whenever there are changes in staff roles or responsibilities,
+  noting the date of each update.

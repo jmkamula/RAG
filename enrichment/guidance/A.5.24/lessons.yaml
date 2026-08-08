@@ -1,0 +1,20 @@
+must_id: item:A.5.24:lessons
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Lessons learned process (cross-link to A.5.27 lessons register; how lessons feed back into
+  framework revisions)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for capturing lessons learned after each security incident, including who is responsible
+  and how findings are recorded.
+- Cross-reference each captured lesson to an entry in the A.5.27 lessons register, ensuring traceability
+  between incidents and lessons learned.
+- Name the individual responsible for reviewing lessons and updating the incident management framework,
+  avoiding generic titles like "the team."
+- Record the date and details of each framework revision triggered by lessons learned, maintaining a clear
+  revision history.
+- State how lessons learned are communicated to relevant staff and incorporated into future incident response
+  training sessions.

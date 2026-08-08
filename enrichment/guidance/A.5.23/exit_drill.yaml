@@ -1,0 +1,18 @@
+must_id: item:A.5.23:exit_drill
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Rolling exit-readiness drill (test exits without actually exiting, for critical services)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Schedule and document exit-readiness drills for each critical cloud service at least annually, including
+  the date and scope of each test.
+- Assign a named individual to lead each drill, recording their name and contact details in the exit drill
+  log.
+- Record the results and lessons learned from each drill in a dated summary, including any issues found
+  and actions taken.
+- Attach supporting evidence such as test plans, screenshots, or exported data samples to each drill record.
+- Name the specific cloud service tested in each record—do not use generic labels like "cloud platform"
+  or "main provider".

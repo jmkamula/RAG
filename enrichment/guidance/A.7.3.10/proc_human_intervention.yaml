@@ -1,0 +1,19 @@
+must_id: item:A.7.3.10:proc_human_intervention
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Human intervention pathway (Art.22.3)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for handling requests for human intervention in automated decisions,
+  listing their full name and contact details in the procedure.
+- Document the step-by-step process for data subjects to request human intervention, including submission
+  channels and expected response timelines.
+- Record each request for human intervention in a dated log, including the requestor’s identity, nature
+  of the request, and outcome.
+- Attach a sample completed request and documented response as evidence that the pathway is operational
+  and not just theoretical.
+- State that generic or verbal-only instructions for intervention requests will be flagged; ensure all
+  instructions are written, specific, and accessible.

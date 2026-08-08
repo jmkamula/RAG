@@ -1,0 +1,17 @@
+must_id: item:Art.42:reg_certification_id
+control_ref: Art.42
+standard_id: GDPR:2016/679
+must_text: Per-row certification identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique certification identifier to each entry in the Certification Register and record it in
+  a dedicated column.
+- Cross-reference each certification identifier with supporting documentation, such as certificates or
+  audit reports, to verify traceability.
+- State the format of the certification identifier in a documented procedure to ensure consistency across
+  all register entries.
+- Avoid using generic or duplicate identifiers; each row must have a distinct value that cannot be confused
+  with another entry.

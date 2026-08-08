@@ -1,0 +1,16 @@
+must_id: item:B.8.5.7:reg_engagement_date
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+must_text: Engagement effective date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the effective date of each subcontractor engagement in a dedicated column for every entry in
+  the register.
+- Confirm each effective date is the actual contract start date, not the date the record was created or
+  last updated.
+- Cross-reference the effective date in the register with the signed contract or agreement for each subcontractor.
+- Name the person responsible for maintaining and updating the effective dates in the register as a specific
+  individual, not a team or department.

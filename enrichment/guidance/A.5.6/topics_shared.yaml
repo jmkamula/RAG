@@ -1,0 +1,16 @@
+must_id: item:A.5.6:topics_shared
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Topics or threat categories that drive each engagement
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each special interest group or professional forum in a register, including the full name and a
+  direct contact person.
+- Record the specific topic or threat category that motivates your participation for each group, using
+  clear and current language.
+- Update the register at least annually, noting the review date and the person responsible for the update.
+- Name the engagement driver as a specific risk, regulation, or technology — avoid vague entries like
+  "general interest" or "networking."

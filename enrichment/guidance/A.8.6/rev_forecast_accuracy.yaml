@@ -1,0 +1,19 @@
+must_id: item:A.8.6:rev_forecast_accuracy
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Forecast-vs-actual accuracy check across the review window
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for conducting the forecast-vs-actual capacity check in the review documentation,
+  using their full name and job title.
+- Document the forecasted capacity figures and the actual capacity figures for the review period in a
+  dated comparison table.
+- Record the analysis of any significant differences between forecasted and actual capacity, including
+  explanations and supporting data.
+- Attach evidence of management review or sign-off on the forecast-vs-actual accuracy check, such as a
+  signed meeting minute or approval email.
+- Specify the review window dates clearly; avoid using vague periods like "quarterly" without exact start
+  and end dates.

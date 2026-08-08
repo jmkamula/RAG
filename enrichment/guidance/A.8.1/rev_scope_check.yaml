@@ -1,0 +1,18 @@
+must_id: item:A.8.1:rev_scope_check
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Cross-check against the applicable scope — any new class or vendor missing
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the current endpoint inventory against the defined scope to identify any new device
+  types or vendors not previously listed.
+- Document any discrepancies or additions found during the review in a dated log, including details of
+  the new class or vendor.
+- Assign a named individual to review and approve the updated inventory, confirming all new entries are
+  captured.
+- Name the owner as a specific person responsible for the periodic review, not as "the team" or a generic
+  department.
+- Retain the signed and dated review record as evidence of the completed cross-check process.

@@ -1,0 +1,19 @@
+must_id: item:B.8.5.3:scope_normal_disclosures
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+must_text: Normal-course disclosures enumerated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all third parties and subprocessors to whom personal data is routinely disclosed during normal
+  business operations, including their names and roles.
+- Document the specific categories of personal data shared with each third party, referencing relevant
+  data flow diagrams or records.
+- State the legal basis or contractual terms that permit each disclosure, citing the relevant clause or
+  agreement.
+- Name the individual responsible for maintaining and updating the disclosure list—do not use a group
+  or department as the owner.
+- Record the date when the disclosure scope was last reviewed and updated, and retain the version history
+  for reference.

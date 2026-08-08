@@ -1,0 +1,18 @@
+must_id: item:Art.25:rev_coverage
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Design-coverage check — every in-scope design activity had a DPbD review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every in-scope design activity in a dated register, including project name, description, and responsible
+  owner.
+- Record the date and outcome of each Data Protection by Design (DPbD) review next to the corresponding
+  design activity in the register.
+- Attach or link the completed DPbD review documentation for each design activity, showing specific privacy
+  risks and mitigation steps.
+- Name the reviewer for each DPbD review as a specific individual, not as a team or department.
+- Flag any design activity missing a DPbD review in the register and document the reason and corrective
+  action taken.

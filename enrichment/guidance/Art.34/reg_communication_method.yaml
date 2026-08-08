@@ -1,0 +1,19 @@
+must_id: item:Art.34:reg_communication_method
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: Per-row communication method (email + in-app / public notice / mixed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific communication method used for each data subject row, such as "email," "in-app message,"
+  "public notice," or "mixed."
+- Document the date and time each communication was sent or made available to the data subject in the
+  corresponding row.
+- Name the individual responsible for sending or publishing each notification in the record, ensuring
+  a specific person is listed.
+- Attach or link the actual message content or notice text used for each row, so the auditor can verify
+  what was communicated.
+- Confirm that no row uses a generic or blank value for communication method, as auditors will flag missing
+  or ambiguous entries.

@@ -1,0 +1,18 @@
+must_id: item:A.8.5:proc_recovery
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Account recovery flow with identity-proofing (NOT password reset via email-only)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step account recovery process, including how users must prove their identity beyond
+  email verification.
+- State the required identity-proofing methods, such as government-issued ID check or live video verification,
+  in the procedure.
+- Name the person or role responsible for approving identity-proofing before account access is restored.
+- Record each account recovery event with the date, user details, identity-proofing method used, and approver’s
+  name.
+- Specify that password resets must not rely on email-only verification—describe the additional identity
+  check required.

@@ -1,0 +1,39 @@
+leaf_id: req:A.8.23:web_filtering_policy
+control_ref: A.8.23
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of your organization and which systems are in-scope for the
+    ISMS to determine where web filtering must apply. Without this, the policy could miss key areas or
+    overreach.
+  good_enough: A clear, current ISMS scope statement that identifies the business units, locations, and
+    systems covered by the ISMS.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment identifies threats related to web access, such as exposure to malicious
+    sites, which informs what the web filtering policy must address.
+  good_enough: A recent risk assessment that highlights web access risks and justifies the need for filtering
+    controls.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register ensures you know which devices and systems connect to the web
+    and need to be covered by the filtering policy.
+  good_enough: A basic inventory of IT assets that access external websites, even if not fully detailed.
+- ref: A.8.20
+  standard_id: ISO27001:2022
+  title: Networks security
+  category: direct
+  rationale: Network security controls set the baseline for how web traffic is managed and monitored,
+    which directly shapes the technical and procedural scope of the web filtering policy.
+  good_enough: Documented network security measures that show how web traffic is routed and protected,
+    even if not exhaustive.

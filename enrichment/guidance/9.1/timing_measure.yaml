@@ -1,0 +1,17 @@
+must_id: item:9.1:timing_measure
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: When monitoring and measurement is performed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific dates or intervals when monitoring and measurement activities are performed within
+  the procedure document.
+- Record each monitoring and measurement event in a dated log, referencing the relevant control or process
+  being evaluated.
+- Name the responsible individual for scheduling and carrying out each monitoring and measurement activity,
+  avoiding generic roles like "the team".
+- Cross-reference the procedure with actual monitoring records to confirm that activities match the documented
+  schedule.

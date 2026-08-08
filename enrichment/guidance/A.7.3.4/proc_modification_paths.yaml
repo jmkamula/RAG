@@ -1,0 +1,19 @@
+must_id: item:A.7.3.4:proc_modification_paths
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+must_text: Modification paths (partial withdrawal / opt-in-to-fewer-purposes / restrict processing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure that allows individuals to partially withdraw consent, opt in to fewer purposes,
+  or restrict processing, including step-by-step instructions.
+- Name the person responsible for handling consent modification or withdrawal requests, listing their
+  full name and job title in the procedure.
+- Record an example request and its resolution, showing how a modification or partial withdrawal was processed
+  and communicated to the individual.
+- State the date the procedure was last reviewed and updated, ensuring it reflects current legal and operational
+  requirements.
+- Specify that all modification options are clearly described—avoid using only general language like "withdraw
+  consent" without detailing partial or purpose-specific choices.

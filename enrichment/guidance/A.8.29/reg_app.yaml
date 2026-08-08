@@ -1,0 +1,18 @@
+must_id: item:A.8.29:reg_app
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Per-test application (cross-link to A.8.26 application register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each security test entry with a unique identifier, test date, and the specific application tested
+  as listed in the application register.
+- Cross-reference the tested application by linking to its entry in the application register maintained
+  for A.8.26.
+- Name the responsible tester as a specific individual, not a team or generic role.
+- Document the test outcome and any follow-up actions, including dates and responsible persons for remediation
+  steps.
+- Avoid using generic or missing application names; confirm each test is clearly tied to a registered
+  application entry.

@@ -1,0 +1,16 @@
+must_id: item:A.8.3:recertification
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Periodic recertification cadence per system (cross-link to A.5.18)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the required frequency for access recertification per system, referencing the specific schedule
+  in the Information Access Restriction Procedure.
+- Cross-reference the recertification cadence to the relevant section of the A.5.18 control in your policy
+  documentation.
+- Assign a named individual responsible for triggering and overseeing each system’s recertification process,
+  not just a team or department.
+- Record the date of the most recent access recertification for each system in a central, reviewable log.

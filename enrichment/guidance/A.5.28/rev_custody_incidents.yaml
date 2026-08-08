@@ -1,0 +1,20 @@
+must_id: item:A.5.28:rev_custody_incidents
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Custody-incident analysis (any broken-seal events, missing-handover signatures, unauthorised
+  access flagged for review)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the custody-incident analysis and record their name and role in the
+  review documentation.
+- Document each broken-seal event, missing-handover signature, or unauthorised access incident with dates,
+  involved parties, and a brief incident description.
+- Cross-reference each incident with supporting evidence, such as access logs, chain-of-custody forms,
+  or surveillance records, in the review file.
+- Record the date and outcome of the periodic program review, including any actions taken or recommendations
+  made, in a signed summary report.
+- Name each incident specifically; avoid grouping multiple events under a generic label like "miscellaneous
+  issues" in the review documentation.

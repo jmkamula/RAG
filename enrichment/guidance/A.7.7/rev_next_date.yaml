@@ -1,0 +1,15 @@
+must_id: item:A.7.7:rev_next_date
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Clear Desk / Clear Screen Program in the review log or tracking
+  document.
+- Record the name of the person responsible for scheduling the next review alongside the planned date.
+- Document the date this review schedule was last updated to show it reflects current planning.
+- Name the owner as a specific individual — do not list a team or department as responsible for the review
+  schedule.

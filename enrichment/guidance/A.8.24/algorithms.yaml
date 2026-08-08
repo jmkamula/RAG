@@ -1,0 +1,18 @@
+must_id: item:A.8.24:algorithms
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Approved cryptographic algorithms with minimum strengths (per regulator/NIST/CNSA-compliant
+  tables)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all cryptographic algorithms currently in use, including key lengths and modes, in a dated inventory
+  maintained by the security or IT team.
+- Cross-reference each algorithm in use against regulator, NIST, or CNSA-approved tables to confirm compliance
+  with minimum strength requirements.
+- Document the approval of cryptographic algorithms and key strengths in a signed policy or decision record
+  by the designated information security officer.
+- Name the policy owner as a specific individual—do not use generic titles like "IT" or "the team" as
+  the owner.

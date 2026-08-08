@@ -1,0 +1,16 @@
+must_id: item:Art.26:rev_contact_point
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Contact-point health check — point still reachable, requests being routed correctly
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the designated contact point for data subjects as a specific individual or role, not a generic
+  team or department.
+- Confirm the contact point’s email and phone number are current by sending a test message and recording
+  the date and outcome.
+- Document at least one recent data subject request, showing it was received at the contact point and
+  routed to the correct party.
+- Record the date of the last review of contact point details in your joint controller agreement or register.

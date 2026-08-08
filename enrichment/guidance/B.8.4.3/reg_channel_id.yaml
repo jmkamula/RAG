@@ -1,0 +1,17 @@
+must_id: item:B.8.4.3:reg_channel_id
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Unique channel identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each transmission channel entry in the inventory, using a consistent format
+  such as "TC-001", "TC-002", etc.
+- Record the unique identifier directly in the first column of each row, ensuring it is not duplicated
+  elsewhere in the inventory.
+- Cross-reference each unique identifier when documenting related incidents or changes, so all references
+  point to the correct channel.
+- Name the inventory owner as a specific individual responsible for maintaining unique identifiers, not
+  as a team or department.

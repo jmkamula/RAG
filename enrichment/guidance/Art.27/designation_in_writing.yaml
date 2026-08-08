@@ -1,0 +1,17 @@
+must_id: item:Art.27:designation_in_writing
+control_ref: Art.27
+standard_id: GDPR:2016/679
+must_text: Designation in writing with date and signature
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the designated representative as a specific individual or legal entity in the written document,
+  avoiding generic titles or group names.
+- State the representative’s full contact details, including address, email, and telephone number, within
+  the designation document.
+- Sign and date the designation document by an authorised person from your organisation and the representative,
+  capturing both signatures.
+- Retain a copy of the fully executed designation document in a central compliance repository with version
+  control.

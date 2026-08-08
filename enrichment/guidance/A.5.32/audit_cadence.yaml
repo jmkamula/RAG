@@ -1,0 +1,18 @@
+must_id: item:A.5.32:audit_cadence
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Audit date within the planned interval (typically annual; more frequent if a vendor audit risk
+  is high)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent intellectual property rights and licence audit in a central register.
+- Document the planned audit interval and next scheduled audit date, referencing your risk assessment
+  if more frequent audits are required.
+- Name the individual responsible for conducting the audit, ensuring this is a specific person and not
+  a team or department.
+- Retain the completed audit report with a clear date and signatures from both the auditor and the reviewer.
+- Cross-reference the audit register with your policy to confirm the audit was performed within the required
+  timeframe.

@@ -1,0 +1,19 @@
+must_id: item:B.8.5.4:reg_requester
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+must_text: Requesting authority per row (law enforcement / regulator / court)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the requesting authority for each disclosure request in the register, specifying
+  if it is law enforcement, a regulator, or a court.
+- Document the date each disclosure request was received, linking it to the corresponding authority entry
+  in the register.
+- Name the individual who processed or logged each request, ensuring a specific person is listed rather
+  than a team or department.
+- Attach supporting documentation, such as the official request letter or court order, to each entry in
+  the register for verification.
+- Review the register regularly to confirm that no entries list the requesting authority as "unknown"
+  or use vague descriptions.

@@ -1,0 +1,17 @@
+must_id: item:A.7.9:home_office_link
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Reference to remote working policy (A.6.7) where home is the off-premises location
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the remote working policy by title and document number within the Security of Assets
+  Off-Premises Policy where home use is discussed.
+- State that the requirements for home-based asset security align with those in the remote working policy,
+  citing the relevant section or clause.
+- Name the policy owner as a specific individual, not a generic role or team, in both policies to avoid
+  ambiguity.
+- Record the date when the cross-reference was last reviewed and updated in the Security of Assets Off-Premises
+  Policy.

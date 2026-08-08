@@ -1,0 +1,31 @@
+leaf_id: req:Art.40:code_adherence_procedure
+control_ref: Art.40
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of your processing activities to determine which codes
+    of conduct are relevant and to demonstrate adherence to them.
+  good_enough: A basic, current inventory of processing activities that covers all major data flows and
+    purposes is sufficient to proceed.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Understanding and documenting your lawful bases for processing is essential before committing
+    to a code of conduct, as codes may have requirements tied to specific legal grounds.
+  good_enough: A documented mapping of each processing activity to its lawful basis, even if not fully
+    detailed, is enough to unblock drafting the procedure.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer (DPO) Designation
+  category: foundational
+  rationale: If a DPO is required, their involvement is critical in assessing, selecting, and monitoring
+    code of conduct adherence, as well as liaising with monitoring bodies.
+  good_enough: A named DPO (or a clear decision that one is not required) and a basic description of their
+    role in compliance activities is sufficient.

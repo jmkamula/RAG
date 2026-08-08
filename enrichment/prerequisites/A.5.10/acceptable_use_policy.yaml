@@ -1,0 +1,40 @@
+leaf_id: req:A.5.10:acceptable_use_policy
+control_ref: A.5.10
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: direct
+  rationale: The Acceptable Use Policy (AUP) is a subordinate policy that must align with the overarching
+    information security policy framework. Without this parent policy, the AUP would lack context and
+    authority.
+  good_enough: A documented, approved information security policy exists, outlining the organisation’s
+    general security principles and policy hierarchy.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification of information
+  category: direct
+  rationale: Acceptable use rules must be tailored to different information classes or asset types. The
+    classification scheme must be defined so the AUP can reference and enforce differentiated handling.
+  good_enough: A basic, published classification scheme is in place, with at least high-level categories
+    and examples for key information types.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Inventory of information and other associated assets
+  category: direct
+  rationale: The AUP must specify rules for the use of information and associated assets. An up-to-date
+    asset inventory is needed to identify what assets require acceptable use rules.
+  good_enough: A preliminary asset register exists, listing the main categories of information and associated
+    assets relevant to the organisation.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: Determining the scope of the information security management system
+  category: foundational
+  rationale: The AUP must only cover assets and activities within the defined ISMS scope. Without a clear
+    scope statement, the policy could be over- or under-inclusive.
+  good_enough: A documented ISMS scope statement exists, identifying the organisational boundaries and
+    key in-scope assets and processes.

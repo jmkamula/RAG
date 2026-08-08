@@ -1,0 +1,16 @@
+must_id: item:A.8.34:pre_authorisation
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Pre-authorisation required before any audit testing on operational systems
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy that all audit testing on operational systems requires written pre-authorisation
+  from a named, designated approver.
+- Name the approver as a specific individual or role with authority, not as "the team" or a department.
+- Record each pre-authorisation decision in a dated log, including the requester, scope of testing, and
+  the approver’s signature or digital approval.
+- Retain copies of all pre-authorisation records and related correspondence in a central, access-controlled
+  location.

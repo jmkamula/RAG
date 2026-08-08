@@ -1,0 +1,17 @@
+must_id: item:A.7.3.1:reg_sla
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Response-time SLA per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the required response time for each obligation in a dedicated column of the Applicable Obligations
+  Register, using clear and specific timeframes.
+- Name the individual responsible for meeting each response-time obligation, listing a specific person
+  rather than a team or department.
+- Document the source of each response-time requirement by referencing the relevant law, contract, or
+  policy in the register.
+- Review the register quarterly and sign off on any updates to response times, keeping a dated record
+  of each review.

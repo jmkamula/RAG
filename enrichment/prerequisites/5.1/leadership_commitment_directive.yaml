@@ -1,0 +1,39 @@
+leaf_id: req:5.1:leadership_commitment_directive
+control_ref: '5.1'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: Leadership commitment must be directed toward a clearly defined scope. Without an agreed
+    ISMS scope, top management cannot meaningfully commit to the ISMS or allocate resources.
+  good_enough: A documented and approved ISMS scope statement that identifies the organizational boundaries
+    and applicability of the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: direct
+  rationale: The leadership directive should align with and reinforce the organization's information security
+    policy. The policy provides the principles and direction that management is committing to uphold.
+  good_enough: A draft or approved information security policy that outlines the organization's security
+    objectives and direction.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Management commitment includes ensuring roles and responsibilities are assigned and understood.
+    A basic definition of who is responsible for the ISMS is needed before leadership can formally commit.
+  good_enough: A list or matrix of key ISMS roles and their assigned responsibilities, even if not fully
+    detailed.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: direct
+  rationale: Leadership commitment should be informed by the organization's risk context. An initial risk
+    assessment helps management understand what they are committing to address.
+  good_enough: A preliminary risk assessment identifying major information security risks, even if the
+    process is not fully mature.

@@ -1,0 +1,16 @@
+must_id: item:A.7.9:rev_next_date
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the off-premises program in the official review schedule document.
+- Record the date in a location accessible to all relevant stakeholders, such as a shared compliance calendar
+  or tracking system.
+- Name the individual responsible for scheduling and conducting the next review, ensuring a specific person
+  is listed rather than a team or department.
+- Retain a copy of the most recent review meeting minutes or decision log that confirms agreement on the
+  next review date.

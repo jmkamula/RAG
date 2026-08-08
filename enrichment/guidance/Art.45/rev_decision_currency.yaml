@@ -1,0 +1,19 @@
+must_id: item:Art.45:rev_decision_currency
+control_ref: Art.45
+standard_id: GDPR:2016/679
+must_text: Decision currency — every cited adequacy decision still in force (not repealed, suspended,
+  or invalidated)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each adequacy decision currently relied upon, including the country or territory and the original
+  decision date.
+- Confirm the current legal status of each adequacy decision by checking the latest official publications
+  or regulatory websites.
+- Record the date and source of your last status check for each adequacy decision in your review documentation.
+- Name the reviewer as a specific individual responsible for verifying the ongoing validity of each adequacy
+  decision.
+- Remove any adequacy decision from your program review if it has been repealed, suspended, or invalidated,
+  and document the reason for removal.

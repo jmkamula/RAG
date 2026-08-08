@@ -1,0 +1,19 @@
+must_id: item:A.7.7:reg_audit_id
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Per-audit unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each audit entry before starting the audit, using a sequential number
+  or timestamp that cannot be reused.
+- Record the unique identifier alongside the audit date, location, and auditor’s name in the Clear Desk
+  / Clear Screen Audit Register.
+- Cross-reference the unique identifier in all related audit documentation, such as findings reports and
+  follow-up actions, to maintain traceability.
+- Confirm that no two audit entries share the same identifier by reviewing the register for duplicates
+  after each new entry.
+- Avoid using generic or repeated identifiers like "Audit1" or "MonthlyAudit" that could apply to multiple
+  audits.

@@ -1,0 +1,40 @@
+leaf_id: req:A.8.33:test_dataset_register
+control_ref: A.8.33
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The Test Dataset Register must only cover datasets within the defined ISMS scope. Without
+    a clear scope statement, you can't reliably identify which test datasets need to be catalogued.
+  good_enough: The scope statement should be documented and include all business units, systems, and processes
+    where test datasets are created or used.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The Test Dataset Register relies on an up-to-date asset register to identify relevant information
+    assets, including those used for testing. Without this, you risk missing datasets or misclassifying
+    them.
+  good_enough: The asset register should list all major information assets, including test environments
+    and data stores, even if some details are still being finalized.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: You need a documented classification scheme to determine how test datasets are labelled (e.g.,
+    synthetic, masked, live-PII-banned). This ensures consistent treatment and accurate register entries.
+  good_enough: The classification scheme should be approved and in use, with clear categories for test
+    data types relevant to the register.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding the risks associated with test datasets (e.g., exposure of live PII) is essential
+    for deciding what information to track in the register and how to prioritize controls.
+  good_enough: A recent risk assessment should exist that covers the use of test datasets, even if some
+    risk treatments are still pending.

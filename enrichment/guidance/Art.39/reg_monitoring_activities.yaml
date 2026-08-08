@@ -1,0 +1,19 @@
+must_id: item:Art.39:reg_monitoring_activities
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Per-row monitoring activities (audits, sample reviews, compliance checks)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each monitoring activity in the DPO Activity Register with a clear title, date, and brief description
+  of the scope.
+- Name the individual who conducted each activity, ensuring the entry lists a specific person rather than
+  a team or department.
+- State the type of monitoring performed for each row, such as audit, sample review, or compliance check,
+  to clarify the method used.
+- Attach or reference supporting evidence for each activity, such as audit reports or review summaries,
+  directly in the register entry.
+- Confirm that each entry is dated and complete; avoid leaving rows with missing dates, responsible persons,
+  or activity types.

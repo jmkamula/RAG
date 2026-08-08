@@ -1,0 +1,19 @@
+must_id: item:A.5.9:classification
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Classification per asset (links to the A.5.12 classification scheme)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each information asset and its associated assets in a central inventory, including a unique identifier
+  and asset description.
+- Assign a classification label to every asset in the inventory, referencing the organisation’s approved
+  classification scheme from control A.5.12.
+- Record the name of the person responsible for each asset’s classification decision, ensuring it is a
+  specific individual and not a group or department.
+- Date each classification entry in the inventory to show when the classification was last reviewed or
+  updated.
+- Cross-reference each asset’s classification entry to the current version of the classification scheme,
+  avoiding use of outdated or generic labels.

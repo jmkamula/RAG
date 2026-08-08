@@ -1,0 +1,17 @@
+must_id: item:A.7.3.5:proc_information_provision
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Information provision — subjects informed of objection right at first communication (Art.21.4)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in your first communication template the data subject’s right to object to processing, using clear
+  and accessible language.
+- Document the date and version of the communication template where the objection right is disclosed.
+- Name the individual responsible for updating and maintaining the communication template, not just a
+  team or department.
+- Retain a sample of the actual first communication sent to a data subject, showing the objection right
+  statement.
+- Record when and how the objection right information was last reviewed for accuracy and legal compliance.

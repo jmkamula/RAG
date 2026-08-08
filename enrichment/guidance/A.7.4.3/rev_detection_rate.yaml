@@ -1,0 +1,19 @@
+must_id: item:A.7.4.3:rev_detection_rate
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: Detection rate check — under-detection surfaces via low incident counts
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the method used to measure detection rates, including calculation steps and data sources, in
+  a dated review report.
+- Record the number of detected incidents and compare it to historical averages or expected baselines
+  in the same report.
+- State any identified gaps or anomalies in detection rates, especially if incident counts are unusually
+  low, with supporting analysis.
+- Name the reviewer as a specific individual, not a team or department, and have them sign and date the
+  completed review.
+- Retain evidence of follow-up actions taken to address any under-detection, such as meeting minutes or
+  updated procedures, linked to the review.

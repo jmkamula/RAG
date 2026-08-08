@@ -1,0 +1,18 @@
+must_id: item:A.7.1:area_classification
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Classification of areas inside each perimeter (general office, secure area, server room, restricted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical areas within each security perimeter, assigning a clear classification such as general
+  office, secure area, server room, or restricted.
+- Document the rationale for each area's classification in the policy, referencing supporting risk assessments
+  or business needs.
+- Name the person responsible for reviewing and updating area classifications, ensuring this is a specific
+  individual, not a team or department.
+- Record the date of the most recent review and approval of the area classifications in the policy document.
+- Attach a floor plan or map cross-referenced to the classifications, showing boundaries and access points
+  for each area.

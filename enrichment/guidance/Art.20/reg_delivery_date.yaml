@@ -1,0 +1,17 @@
+must_id: item:Art.20:reg_delivery_date
+control_ref: Art.20
+standard_id: GDPR:2016/679
+must_text: Per-row delivery date (within Art.12.3 SLA)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each portability request is delivered to the requester in a dedicated column of
+  the Portability Request Register.
+- Cross-reference each delivery date with supporting evidence, such as an email confirmation or signed
+  receipt, stored in the relevant case file.
+- Name the responsible staff member who confirmed the delivery for each request, avoiding generic titles
+  like "team" or "department".
+- Document any delays or exceptions, including the reason and approval from a named supervisor, in the
+  same row as the request.

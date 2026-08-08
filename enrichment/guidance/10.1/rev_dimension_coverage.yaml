@@ -1,0 +1,20 @@
+must_id: item:10.1:rev_dimension_coverage
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Dimension coverage — improvements span suitability AND adequacy AND effectiveness (not just
+  one)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a dated review of your continual improvement program that explicitly addresses suitability,
+  adequacy, and effectiveness as separate sections.
+- Name the reviewer as a specific individual responsible for the program review, not a generic role or
+  team.
+- State the evidence or data sources used to assess each dimension, such as audit results for effectiveness
+  or stakeholder feedback for suitability.
+- Record any identified improvements and link them to the dimension(s) they address, showing coverage
+  across all three areas.
+- Retain meeting minutes or a signed summary confirming that all three dimensions were discussed and evaluated
+  during the review.

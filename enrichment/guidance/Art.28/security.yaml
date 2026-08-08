@@ -1,0 +1,17 @@
+must_id: item:Art.28:security
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Security measures per Art.32
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all security measures in the Data Processing Agreement, referencing specific Article 32 requirements
+  such as encryption and access controls.
+- Name the responsible individual at the processor who implements and monitors these security measures,
+  avoiding generic titles or team names.
+- Attach a dated appendix or schedule to the DPA detailing the current technical and organisational security
+  measures in place.
+- Obtain signatures from both the controller and processor on the DPA, confirming agreement to the specified
+  security measures.

@@ -1,0 +1,19 @@
+must_id: item:6.3:a832_link
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Link to A.8.32 for technical change management of the underlying ICT
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference your ISMS change planning procedure to the technical change management process described
+  in control A.8.32, citing specific document sections.
+- Document each planned ISMS change with a record that includes the related technical change ticket or
+  reference number from the ICT system.
+- Assign a named individual to review and confirm that every ISMS change considers potential impacts on
+  underlying ICT assets.
+- State in your procedure that generic references like "see technical process" are not sufficient; always
+  provide exact document names and locations.
+- Retain dated approval records showing that ISMS and technical change management processes were reviewed
+  together before implementation.

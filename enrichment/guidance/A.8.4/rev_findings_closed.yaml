@@ -1,0 +1,19 @@
+must_id: item:A.8.4:rev_findings_closed
+control_ref: A.8.4
+standard_id: ISO27001:2022
+must_text: Outstanding scanner findings reviewed (closed / accepted / extended)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all outstanding scanner findings in a dated register, listing each finding’s status as closed,
+  accepted, or extended.
+- Assign a named individual to review each outstanding finding and record their decision on closure, acceptance,
+  or extension with a date.
+- Retain evidence of management approval for accepted or extended findings, such as a signed email or
+  meeting minutes.
+- Name the approver for each accepted or extended finding as a specific person, not a group or generic
+  title.
+- Cross-reference each reviewed finding to supporting remediation or risk acceptance documentation, ensuring
+  traceability.

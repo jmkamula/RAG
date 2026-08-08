@@ -1,0 +1,18 @@
+must_id: item:Art.34:reg_exception_cited
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: Per-row Art.34.3 exception cited (if claimed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific Article 34.3 exception cited for each affected data subject in the communication
+  record, matching the wording in the regulation.
+- Name the individual who determined the exception for each case, listing their full name and role in
+  the record.
+- Date the entry for each exception cited, showing when the determination was made and recorded.
+- Attach supporting documentation or evidence justifying the exception for each subject, such as legal
+  advice or risk assessment results.
+- Avoid using generic or blanket statements; cite the specific exception for each subject rather than
+  applying the same reason to all cases.

@@ -1,0 +1,20 @@
+must_id: item:B.8.5.6:proc_countries_always_public
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+must_text: Countries list always public — per §8.5.6 last paragraph, the destination country list is disclosed
+  in all cases
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Publish an up-to-date list of all countries where subcontractors may process personal data on your public-facing
+  website or privacy notice.
+- Document the exact web address or location where the country list is made available, including the date
+  it was last updated.
+- Assign a named individual responsible for reviewing and updating the published country list whenever
+  subcontractor arrangements change.
+- Retain a copy of each previous version of the published country list, with dates, to evidence historical
+  disclosure.
+- State the country list explicitly in the disclosure procedure—do not reference only “available on request”
+  or provide it verbally.

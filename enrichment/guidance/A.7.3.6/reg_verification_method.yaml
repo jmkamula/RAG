@@ -1,0 +1,18 @@
+must_id: item:A.7.3.6:reg_verification_method
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: Identity verification method used
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific identity verification method used for each access, correction, or erasure request
+  in the request register entry.
+- Name the staff member who performed the identity verification for each request, ensuring a real individual
+  is listed.
+- Date the completion of the identity verification process for each request to provide a clear audit trail.
+- Attach or cross-reference supporting evidence, such as a copy of the verification document or confirmation
+  email, in the register entry.
+- Avoid using vague descriptions like "standard process" or "usual checks" for verification methods; specify
+  exactly what was done.

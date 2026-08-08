@@ -1,0 +1,18 @@
+must_id: item:8.3:scope_deferred_items
+control_ref: '8.3'
+standard_id: ISO27001:2022
+must_text: Deferred items listed with deferral rationale + next-cycle target
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each deferred item in the treatment plan, including a clear description and unique identifier for
+  traceability.
+- State the specific rationale for deferring each item, referencing relevant risk assessments or business
+  constraints in dated records.
+- Record a target date or review cycle for each deferred item, showing when it will be reconsidered or
+  implemented.
+- Name the decision-maker for each deferral as a specific individual, not a group or department.
+- Attach supporting documentation, such as meeting minutes or approval emails, confirming the deferral
+  decision and rationale.

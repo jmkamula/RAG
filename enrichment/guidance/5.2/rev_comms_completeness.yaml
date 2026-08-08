@@ -1,0 +1,17 @@
+must_id: item:5.2:rev_comms_completeness
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: Communication completeness check — required audience is covered and current
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all roles and teams that must receive the information security policy, referencing your current
+  organisational chart for accuracy.
+- Cross-reference the distribution list with recent onboarding and offboarding records to confirm all
+  current staff are included and departed staff are removed.
+- Record the date and method of the most recent policy communication to each required audience, such as
+  email logs or meeting minutes.
+- Name the audience recipients as specific individuals or roles, not as generic groups like "all staff"
+  or "IT department".

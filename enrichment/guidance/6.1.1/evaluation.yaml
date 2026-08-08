@@ -1,0 +1,18 @@
+must_id: item:6.1.1:evaluation
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Evaluation of effectiveness of planned actions
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for evaluating whether planned risk and opportunity actions have achieved their
+  intended outcomes in the ISMS Risk and Opportunity Planning Procedure.
+- Assign a named individual responsible for conducting and recording the evaluation of each planned action’s
+  effectiveness.
+- Record the results of each evaluation, including the date, action evaluated, and evidence supporting
+  the conclusion, in a dedicated section of the procedure.
+- Name the owner of the evaluation process as a specific person, not a group or department, to avoid ambiguity.
+- Review and update the procedure to reflect lessons learned from completed evaluations, with version
+  control and approval by management.

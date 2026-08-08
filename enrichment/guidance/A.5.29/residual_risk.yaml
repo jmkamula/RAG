@@ -1,0 +1,19 @@
+must_id: item:A.5.29:residual_risk
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Residual-risk register for disruption scenarios where degradation creates accepted exposure
+  (named risk owner per scenario)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each disruption scenario where service degradation leads to accepted risk exposure in a dedicated
+  residual-risk register.
+- Assign a named individual as the risk owner for every scenario, avoiding generic labels like "the team"
+  or "IT department".
+- Record the date each risk was reviewed and accepted, along with supporting evidence of management approval.
+- Cross-reference each scenario in the register to the corresponding section of the Information Security
+  During Disruption Plan.
+- Retain evidence of periodic updates to the register, showing ongoing review and adjustment of risk ownership
+  and acceptance.

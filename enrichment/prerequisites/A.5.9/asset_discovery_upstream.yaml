@@ -1,0 +1,41 @@
+leaf_id: req:A.5.9:asset_discovery_upstream
+control_ref: A.5.9
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You must know what parts of your organization and which types of assets are in-scope for
+    your ISMS before you can meaningfully discover and onboard assets. Without a defined scope, asset
+    discovery efforts may miss critical systems or waste effort on irrelevant ones.
+  good_enough: A documented, management-approved scope statement that clearly defines the organizational
+    boundaries and asset types covered by the ISMS.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that asset discovery activities are owned and executed
+    by the right people. Without this, discovery processes may be incomplete or lack accountability.
+  good_enough: A basic RACI or responsibility matrix showing who is responsible for asset discovery and
+    onboarding, even if not fully detailed.
+- ref: A.5.37
+  standard_id: ISO27001:2022
+  title: Documented Operating Procedures
+  category: direct
+  rationale: Asset discovery processes must align with existing operating procedures to ensure consistency
+    and integration with other ISMS activities. This prevents gaps or overlaps in how assets are identified
+    and managed.
+  good_enough: A draft or outline of relevant operating procedures that reference or anticipate asset
+    discovery activities, even if not finalized.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Knowing how assets will be classified helps prioritize discovery efforts and ensures that
+    discovered assets are onboarded with the right level of protection and handling.
+  good_enough: A simple, documented classification scheme (even if draft) that defines at least the main
+    categories of asset sensitivity or criticality.

@@ -1,0 +1,41 @@
+leaf_id: req:Art.24:privacy_programme_charter
+control_ref: Art.24
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear understanding of what personal data processing activities exist before you
+    can define the scope and responsibilities of your privacy programme. Art.30 records provide the factual
+    baseline for the charter.
+  good_enough: A draft or working list of processing activities that covers all major business units and
+    data flows is sufficient to inform the charter, even if not fully polished.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer (DPO) Designation
+  category: foundational
+  rationale: If a DPO is required, their appointment and role must be clear before the privacy programme
+    charter can assign ownership and governance responsibilities. The charter needs to reference or integrate
+    the DPO's function.
+  good_enough: A documented decision on whether a DPO is required, and if so, a named individual or role,
+    is enough to proceed.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The privacy programme charter must align with the overall ISMS scope to ensure that privacy
+    controls and governance are not defined in isolation. This prevents gaps or overlaps in coverage.
+  good_enough: A basic ISMS scope statement that outlines the organisational and technical boundaries
+    is sufficient, even if not fully detailed.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Understanding the lawful bases for processing is essential to set the context for the privacy
+    programme and its policies. The charter should reflect the organisation’s approach to legal compliance.
+  good_enough: A summary or matrix of lawful bases used for key processing activities is enough to inform
+    the charter, even if some details are pending.

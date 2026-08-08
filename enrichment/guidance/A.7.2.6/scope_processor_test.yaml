@@ -1,0 +1,20 @@
+must_id: item:A.7.2.6:scope_processor_test
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Processor test — supplier processes PII on org's behalf under org's instructions (not for its
+  own purposes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all suppliers who process personal data on your behalf, including their legal names and the specific
+  services they provide.
+- Document for each supplier the written instructions you have issued regarding how they must handle personal
+  data.
+- State explicitly in each supplier contract that the supplier may only process personal data under your
+  instructions, not for their own purposes.
+- Name the responsible individual in your organisation who approves and reviews processor engagements,
+  avoiding generic titles like "the team" or "IT".
+- Retain copies of all signed processor agreements and any correspondence clarifying the supplier’s role
+  as a processor, with dates.

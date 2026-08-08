@@ -1,0 +1,17 @@
+must_id: item:A.8.19:approval_workflow
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Approval workflow for new software (security review + licence check + integration test)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the approver for new software installations, not a generic role or team.
+- Document the security review results for each new software request, including the reviewer's name and
+  the completion date.
+- Record the licence check outcome, attaching evidence of valid licensing and the name of the person who
+  performed the check.
+- Confirm that integration testing was completed by attaching the test report and the date it was signed
+  off.
+- Retain a dated approval record showing all three checks were completed before installation proceeded.

@@ -1,0 +1,46 @@
+leaf_id: req:A.7.5.2:destinations_procedure
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.3.2
+  standard_id: ISO27701:2019
+  title: Information Provided to PII Principals
+  category: direct
+  rationale: You must first identify and communicate to PII principals the purposes and details of PII
+    processing, including potential transfers, before you can document and publish transfer destinations.
+  good_enough: A draft or template of the privacy notice that includes references to international transfers
+    and categories of recipients.
+- ref: A.7.5.1
+  standard_id: ISO27701:2019
+  title: Basis for Transfer of PII
+  category: direct
+  rationale: You need to establish and document the legal or contractual basis for transferring PII to
+    other countries or organizations before listing those destinations.
+  good_enough: A working list or matrix showing the legal bases for each type of international transfer,
+    even if not fully finalized.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is essential to identify which information assets (including
+    PII) are transferred and where they reside, forming the foundation for mapping transfer destinations.
+  good_enough: A basic inventory of information assets that includes data flows and external recipients,
+    even if some details are pending.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purposes for which PII is processed and transferred to justify and contextualize
+    the list of transfer destinations.
+  good_enough: A summary table or document outlining the main processing purposes for each PII category.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines the organizational and geographic boundaries for your ISMS, clarifying
+    which PII transfers are in-scope for documentation.
+  good_enough: A current ISMS scope statement that covers all relevant business units and geographies
+    involved in PII transfers.

@@ -1,0 +1,16 @@
+must_id: item:Art.12:reg_response_date
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Per-row response sent date (or extension notice date)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date you sent your response or extension notice for each rights request in the Rights
+  Request Register.
+- Name the staff member responsible for sending each response or extension notice alongside the date entry.
+- Attach a copy of the actual response or extension notice sent for each request as supporting evidence
+  in the register.
+- Enter the response date as a specific calendar date—do not use vague terms like "within deadline" or
+  "pending".

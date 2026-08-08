@@ -1,0 +1,19 @@
+must_id: item:A.7.3.1:scope_change_drivers
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Trigger list (new geo entry / new subject category / new regulation)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current jurisdictions, data subject categories, and applicable regulations in a dated register
+  reviewed at least annually.
+- Record each trigger event—such as entry into a new country, addition of a new subject category, or new
+  regulation—in a change log with the date and responsible person.
+- Update the scope register immediately after any trigger event, cross-referencing the change log entry
+  for traceability.
+- Name the owner as a specific individual responsible for maintaining the register, not a generic team
+  or department.
+- Retain evidence of periodic reviews and updates, such as meeting minutes or approval emails, with clear
+  dates and participants.

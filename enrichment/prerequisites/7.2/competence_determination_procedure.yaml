@@ -1,0 +1,32 @@
+leaf_id: req:7.2:competence_determination_procedure
+control_ref: '7.2'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organization and which roles are in-scope for the ISMS
+    before defining how competence is determined. This ensures the procedure covers all relevant personnel
+    and activities.
+  good_enough: A documented scope that clearly identifies the organizational boundaries and functions
+    included in the ISMS.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Competence requirements are tied to specific roles and responsibilities. Without a clear
+    definition of these, you cannot meaningfully determine what competence is required or how to assess
+    it.
+  good_enough: A list or matrix of key roles with their main information security responsibilities identified.
+- ref: '7.1'
+  standard_id: ISO27001:2022
+  title: Resources
+  category: direct
+  rationale: 'Resource planning comes first: you must know what resources (people, skills, training) are
+    available before you can set out how to determine if they are competent for their roles.'
+  good_enough: A summary of available human and training resources relevant to information security, even
+    if not fully optimized yet.

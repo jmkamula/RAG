@@ -1,0 +1,18 @@
+must_id: item:A.7.4.5:rev_verification_audit
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: Verification audit — sampled actions verified to have removed PII across primary + backup
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the names and dates of sampled deletion actions from both primary and backup systems in a formal
+  audit log.
+- Document the technical method used for each deletion, including screenshots or system logs showing successful
+  removal of PII.
+- Assign a specific individual to verify and sign off that sampled PII was removed from both primary and
+  backup locations.
+- Attach evidence of verification, such as before-and-after data inventories or system reports, to each
+  sampled action in the audit record.
+- Name the verifier as a specific person — do not use generic labels like "IT team" or "Data Management".

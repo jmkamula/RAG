@@ -1,0 +1,16 @@
+must_id: item:7.5:legibility
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Protection from loss of legibility, loss of integrity, unauthorised use
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual as the policy owner, listing their full name and job title on the policy document.
+- Document the version history with dates and a summary of changes on the first page of the policy.
+- State the access permissions for the policy, specifying who can view, edit, and approve the document.
+- Record the storage location and backup schedule for the policy in a central register, including the
+  date of the last backup.
+- Retain a signed approval page for the current policy version, showing the approver’s name, signature,
+  and date.

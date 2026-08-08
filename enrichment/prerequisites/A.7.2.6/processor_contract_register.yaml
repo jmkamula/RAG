@@ -1,0 +1,47 @@
+leaf_id: req:A.7.2.6:processor_contract_register
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of your organization and which processing activities are in
+    scope for privacy management before you can identify relevant PII processors and contracts.
+  good_enough: A documented scope statement that clearly defines the organizational and processing boundaries
+    for the ISMS and PIMS.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must have clarity on the purposes for which PII is processed to determine why processors
+    are engaged and what their contracts must cover.
+  good_enough: A list or register of processing purposes for all PII processing activities, mapped to
+    relevant business processes.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for each processing activity is essential to ensure processor contracts
+    are aligned with legal requirements and obligations.
+  good_enough: Each processing activity has a documented lawful basis (e.g., consent, contract, legal
+    obligation) that can be referenced when drafting or reviewing processor contracts.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of privacy and security roles ensures accountability for maintaining the
+    processor contract register and managing processor relationships.
+  good_enough: Documented roles and responsibilities for privacy management, including who is responsible
+    for engaging and overseeing PII processors.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register helps identify which assets (systems, data, services) are managed
+    by external processors, supporting completeness of the processor contract register.
+  good_enough: A current inventory of information assets, with external processor-managed assets clearly
+    identified.

@@ -1,0 +1,17 @@
+must_id: item:A.8.15:scope_change_drivers
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new system, new regulator, new attack pattern)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific events that require a review of logging scope, such as onboarding a new system, changes
+  in regulations, or discovery of new attack patterns.
+- Document the trigger list in a dated, version-controlled register that is accessible to relevant stakeholders.
+- Assign a named individual responsible for monitoring and initiating re-scoping activities when a trigger
+  event occurs.
+- Record each re-scoping decision with the date, the trigger event, and the person approving the change.
+- Name the trigger events precisely; avoid vague entries like "significant change" or "as needed," which
+  auditors may flag as insufficiently specific.

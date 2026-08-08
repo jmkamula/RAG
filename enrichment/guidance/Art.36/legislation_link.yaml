@@ -1,0 +1,18 @@
+must_id: item:Art.36:legislation_link
+control_ref: Art.36
+standard_id: GDPR:2016/679
+must_text: Link to Art.36.5 — MS law may require prior consultation in additional cases
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and list any national laws in your country that require prior consultation with the supervisory
+  authority beyond GDPR Article 36.
+- Document the specific circumstances or processing activities where these additional prior consultation
+  requirements apply, citing the relevant legal provisions.
+- Assign a named individual responsible for monitoring updates to national law that could affect prior
+  consultation obligations.
+- Record the date when the national law review was last conducted and keep evidence of the findings for
+  auditor inspection.
+- Name the owner as a specific individual—do not use generic titles like "the team" or "Legal Department".

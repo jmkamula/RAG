@@ -1,0 +1,15 @@
+must_id: item:A.5.22:sch_last_review
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Last review date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date for each supplier entry in the register, using a consistent date
+  format.
+- Name the reviewer for each supplier review, listing a specific individual rather than a team or department.
+- Cross-reference each review date with supporting documentation, such as meeting minutes or review reports,
+  to confirm accuracy.
+- Update the register promptly after each review to avoid missing or outdated review dates.

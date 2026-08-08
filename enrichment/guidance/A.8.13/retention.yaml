@@ -1,0 +1,18 @@
+must_id: item:A.8.13:retention
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Retention period per asset class (drives storage cost + recovery range)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each information asset class in a table within the backup procedure, including examples such as
+  email, databases, and user files.
+- State the specific retention period for backups of each asset class, using clear timeframes such as
+  "30 days" or "7 years."
+- Name the person or role responsible for approving and reviewing retention periods, ensuring it is a
+  named individual, not a generic team or department.
+- Record the date of the last review and approval of the retention periods in the backup procedure document.
+- Cross-reference the retention periods in the backup procedure with your organisation’s data retention
+  policy to confirm alignment.

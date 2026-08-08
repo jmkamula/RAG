@@ -1,0 +1,17 @@
+must_id: item:A.8.30:rev_findings_update
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Findings propagated to procedure / contract terms
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each review finding in a dated record, clearly linking it to the relevant outsourced development
+  program and specific contract or procedure.
+- Update the affected procedure or contract terms to address each finding, noting the change date and
+  referencing the original review record.
+- Name the individual responsible for implementing each update, avoiding generic titles like "the team"
+  or "IT department".
+- Retain evidence of communication to the vendor or internal stakeholders about the updated terms, such
+  as an email or signed acknowledgment.

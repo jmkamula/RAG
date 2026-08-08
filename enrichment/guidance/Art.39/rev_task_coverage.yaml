@@ -1,0 +1,19 @@
+must_id: item:Art.39:rev_task_coverage
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Task coverage audit — every Art.39.1 task has corresponding activity-register entries
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every Art.39.1 task in a table, referencing the exact wording from the regulation alongside your
+  interpretation.
+- Cross-reference each listed task with a dated activity entry in your DPO activity register, showing
+  when and how the task was addressed.
+- Name the responsible individual for each task entry, avoiding generic labels like "the team" or "DPO
+  office".
+- Attach supporting evidence for each activity, such as meeting notes, training logs, or correspondence,
+  linked to the relevant register entry.
+- Record the date of your most recent review of task coverage, and have the DPO sign off on the completed
+  audit.

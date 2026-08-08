@@ -1,0 +1,16 @@
+must_id: item:Art.6:consent_link
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: For consent-based activities, link to Art.7 consent capture record
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each consent-based processing activity in the Lawful Basis Register to its specific
+  Article 7 consent capture record by unique identifier.
+- Attach a copy or direct link to the signed or actively recorded consent form for each relevant activity
+  entry.
+- Record the date and method of consent collection for every consent-based activity listed in the register.
+- Name the individual responsible for maintaining the consent capture records, avoiding generic titles
+  like "the team" or "Compliance Department."

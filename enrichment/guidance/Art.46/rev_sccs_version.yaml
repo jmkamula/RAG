@@ -1,0 +1,18 @@
+must_id: item:Art.46:rev_sccs_version
+control_ref: Art.46
+standard_id: GDPR:2016/679
+must_text: SCCs version audit — any old-version SCCs identified for migration
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all contracts using Standard Contractual Clauses (SCCs), including the version date and relevant
+  counterparties, in a dated register.
+- Cross-reference each SCC contract against Commission Decision 2021/914 to confirm whether it uses the
+  current approved version.
+- Identify any contracts still using pre-2021 SCCs, and document a migration plan with responsible individuals
+  and target dates.
+- Name the contract owner as a specific individual, not a team or department, for each SCC contract listed.
+- Retain evidence of communication with counterparties regarding the migration to updated SCCs, such as
+  dated emails or signed acknowledgements.

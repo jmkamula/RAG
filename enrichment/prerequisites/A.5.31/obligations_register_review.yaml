@@ -1,0 +1,43 @@
+leaf_id: req:A.5.31:obligations_register_review
+control_ref: A.5.31
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.31
+  standard_id: ISO27001:2022
+  title: Legal, statutory, regulatory and contractual requirements
+  category: direct
+  rationale: You must have an up-to-date register of legal, statutory, regulatory, and contractual obligations
+    before you can review its adequacy or freshness. The review process depends on the existence of this
+    register.
+  good_enough: A documented register exists listing all relevant obligations, even if some entries need
+    refinement or updating.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: Determining the scope of the information security management system
+  category: foundational
+  rationale: The scope statement defines which parts of your organization and operations are covered by
+    the ISMS and, by extension, the obligations register. Without a clear scope, you cannot determine
+    which obligations are relevant.
+  good_enough: A written scope statement exists that identifies the organizational boundaries for the
+    ISMS, even if it is high-level.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information security policy
+  category: foundational
+  rationale: The information security policy sets the overall direction and commitment to compliance,
+    including the need to identify and review legal and regulatory obligations. This policy underpins
+    the register review process.
+  good_enough: A current, approved information security policy is available and references compliance
+    obligations, even if it is brief.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information security risk assessment
+  category: foundational
+  rationale: Risk assessments help identify which legal and regulatory obligations pose significant risks
+    and should be prioritized in the register and its review. Without this, the register may miss critical
+    items.
+  good_enough: A basic risk assessment has been performed that considers legal and regulatory risks, even
+    if it is not exhaustive.

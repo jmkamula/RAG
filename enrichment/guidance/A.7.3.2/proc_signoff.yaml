@@ -1,0 +1,19 @@
+must_id: item:A.7.3.2:proc_signoff
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: DPO + Legal signoff for notice text changes before deploy
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer and a designated legal counsel as the required approvers for all privacy
+  notice text changes.
+- Document each proposed privacy notice change in a tracked record, including the date, nature of the
+  change, and responsible author.
+- Obtain and retain written signoff from both the Data Protection Officer and legal counsel on the final
+  notice text before deployment.
+- Record the deployment date and maintain a version history linking each notice text to its corresponding
+  approval documentation.
+- Avoid using generic titles or group names as approvers; list specific individuals who provided signoff
+  for each change.

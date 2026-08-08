@@ -1,0 +1,21 @@
+must_id: item:A.7.3.2:proc_field_catalog
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: Field catalog — every information item that must be provided (purposes + controller identity
+  + basis + source + statutory/contractual + rights + withdrawal + transfers + recipients + retention
+  + automated decisions + complaint route + frequency)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each required information item in a table, including purposes, controller identity, legal basis,
+  data source, and all other specified fields.
+- Document the specific statutory or contractual requirements that apply to each information item, referencing
+  relevant laws or contracts by name and section.
+- Name the person responsible for maintaining and updating the field catalog, using their full name and
+  job title.
+- Record the date of the most recent review or update to the field catalog, ensuring it is not left blank
+  or marked as "ongoing".
+- Attach a sample completed privacy notice that includes all catalogued fields, showing how each required
+  item is communicated to data subjects.

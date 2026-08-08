@@ -1,0 +1,19 @@
+must_id: item:Art.20:direct_transmission
+control_ref: Art.20
+standard_id: GDPR:2016/679
+must_text: Direct controller-to-controller transmission supported where technically feasible (Art.20.2)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the technical process used to transfer personal data directly to another controller, including
+  supported formats and secure transmission methods, in a dated procedure.
+- Name the individual responsible for overseeing direct controller-to-controller data transfers, listing
+  their full name and current job title.
+- Record at least one example of a completed direct data transfer, including date, recipient controller,
+  and method used.
+- State explicitly in your procedure how you determine whether direct transmission is technically feasible
+  for each data type.
+- Avoid using vague terms like "if possible" or "where appropriate" in your procedure—describe specific
+  technical criteria and decision points.

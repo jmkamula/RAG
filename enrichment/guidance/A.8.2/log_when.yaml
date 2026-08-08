@@ -1,0 +1,17 @@
+must_id: item:A.8.2:log_when
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Timestamp captured per action
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time for each privileged activity in the log, using a synchronized system
+  clock.
+- Confirm that each log entry includes both the action performed and its corresponding timestamp, with
+  no missing or blank timestamp fields.
+- Name the system or tool responsible for generating and storing the timestamps, and document its time
+  synchronization method.
+- Review a sample of recent privileged activity logs to verify that all actions are timestamped and that
+  no entries use generic or default dates.

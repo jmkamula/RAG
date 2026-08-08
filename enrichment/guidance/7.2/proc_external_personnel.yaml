@@ -1,0 +1,19 @@
+must_id: item:7.2:proc_external_personnel
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Coverage of contractors / third-party personnel where their work affects ISMS performance
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name all roles, including contractors and third-party personnel, whose work can impact the information
+  security management system in your competence determination procedure.
+- Document the criteria and process used to assess competence for each identified role, ensuring contractors
+  and third-party personnel are explicitly included.
+- Record the date and outcome of each competence assessment for contractors and third-party personnel
+  in a register or tracking system.
+- Assign responsibility for contractor and third-party competence assessments to a specific named individual,
+  not a team or department.
+- Retain evidence of communication to contractors and third-party personnel about competence requirements,
+  such as signed acknowledgements or training records.

@@ -1,0 +1,19 @@
+must_id: item:A.7.4.8:proc_media_lifecycle
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Media lifecycle coverage (production + backup + archive + failed hardware + decommissioned
+  equipment)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for securely disposing of PII from production, backup, archive, failed hardware,
+  and decommissioned equipment in a dated policy.
+- Name the responsible individual for approving each disposal action, avoiding generic titles like "IT
+  team" or "Operations."
+- Record each disposal event with the date, method used, media type, and person performing the action
+  in a disposal log.
+- Cross-reference the disposal procedure with inventory lists to confirm all relevant media types are
+  covered and no category is omitted.
+- Retain evidence of destruction certificates or disposal receipts for each completed disposal event.

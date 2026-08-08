@@ -1,0 +1,17 @@
+must_id: item:Art.30:dfi_flows
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Data flows between systems documented (sources, destinations, integration mechanism)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems that send or receive personal data, naming each system specifically rather than using
+  generic terms like "internal database".
+- Document the source and destination for each data flow, including the responsible contact person for
+  each system.
+- Describe the integration mechanism for each data flow, specifying the method used (for example, API,
+  file transfer, manual upload).
+- Record the date each data flow was last reviewed or updated, and keep this information in your inventory.
+- Attach supporting diagrams or flowcharts that visually represent the documented data flows between systems.

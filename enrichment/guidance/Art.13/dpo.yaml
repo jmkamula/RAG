@@ -1,0 +1,16 @@
+must_id: item:Art.13:dpo
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: DPO contact details if applicable
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the full name, official title, and direct contact details of the Data Protection Officer in the
+  privacy notice if your organisation is required to appoint one.
+- Document the decision to appoint a DPO, including the date, board meeting minutes, and the individual’s
+  acceptance of the role.
+- Name the DPO as a specific person with contact information—do not use only a generic email address or
+  department name.
+- Retain a copy of the published privacy notice showing the DPO’s details and the date it was last updated.

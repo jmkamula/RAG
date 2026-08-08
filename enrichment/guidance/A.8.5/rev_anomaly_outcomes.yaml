@@ -1,0 +1,17 @@
+must_id: item:A.8.5:rev_anomaly_outcomes
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Anomaly-detection outcomes reviewed (true-positive rate, missed-detection postmortems)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the dates and attendees of each periodic review meeting focused on authentication anomaly-detection
+  outcomes.
+- Document the true-positive rate calculations for authentication anomaly detections, including the data
+  sources and timeframes used.
+- Summarize findings from missed-detection postmortems, including root causes, corrective actions, and
+  responsible individuals.
+- Name the reviewer as a specific individual, not a generic group or department, in the review documentation.
+- Retain signed approval of the review outcomes and any action plans by the designated security lead.

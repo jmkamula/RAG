@@ -1,0 +1,17 @@
+must_id: item:8.1:reg_process_id
+control_ref: '8.1'
+standard_id: ISO27001:2022
+must_text: Process identifier per row (matches procedure's process catalog)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique process identifier to each row in the Operational Execution Register that matches the
+  identifier used in the official process catalog.
+- Cross-reference each process identifier in the register with the corresponding entry in the procedure's
+  process catalog to confirm accuracy.
+- Document the date and name of the person responsible for updating or verifying each process identifier
+  in the register.
+- List the process owner as a named individual for each entry, avoiding generic labels like "Operations
+  Team" or "IT Department."

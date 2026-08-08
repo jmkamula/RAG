@@ -1,0 +1,19 @@
+must_id: item:Art.16:rev_systems_completeness
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Systems-completeness check — sampled requests reached every system in scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems that store or process personal data, including databases, backups, and third-party
+  platforms, in a dated inventory document.
+- Record a sample of rectification requests and track which systems each request was sent to, using a
+  dated tracking log.
+- Cross-reference the tracking log with the systems inventory to confirm every system in scope received
+  at least one sampled request.
+- Attach evidence of successful rectification in each system, such as confirmation emails or system logs,
+  for each sampled request.
+- Name the reviewer as a specific individual who verified system coverage, not a generic role or team
+  name.

@@ -1,0 +1,16 @@
+must_id: item:Art.34:rev_next_date
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Subject Communication Program in a clearly visible section
+  of the program document.
+- Record the name of the individual responsible for scheduling and conducting the next review alongside
+  the planned date.
+- Update the program document immediately if the review date changes, ensuring the most current date is
+  always displayed.
+- Name the owner as a specific person, not a team or department, to avoid ambiguity about responsibility.

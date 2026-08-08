@@ -1,0 +1,19 @@
+must_id: item:A.8.31:scope_platforms
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Platforms in scope with environment-tiering rules per platform
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all technology platforms in scope, naming each platform and its primary business use in a dated
+  inventory record.
+- Document the environment-tiering rules for each platform, specifying how production, development, and
+  test environments are separated.
+- Assign a named individual responsible for maintaining the environment-tiering rules for each platform
+  in the record.
+- State any exceptions to environment separation, including a justification and approval by a named decision-maker
+  with a date.
+- Avoid using generic descriptions like "standard separation applies"; provide platform-specific details
+  that clearly distinguish environment boundaries.

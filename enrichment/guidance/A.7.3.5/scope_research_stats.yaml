@@ -1,0 +1,19 @@
+must_id: item:A.7.3.5:scope_research_stats
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Research / statistics processing (Art.21.6 applies)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and list all processing activities conducted for research or statistical purposes where GDPR
+  Article 21.6 applies.
+- Document the legal basis and justification for each research or statistical processing activity, including
+  references to relevant GDPR articles.
+- Name a specific individual responsible for maintaining the scope list—do not use generic roles like
+  "the team" or "Research Department."
+- Record the date each processing activity was last reviewed for compliance with Article 21.6, and update
+  this record after each review.
+- Cross-reference each listed activity with supporting documentation, such as data protection impact assessments
+  or ethics board approvals.

@@ -1,0 +1,19 @@
+must_id: item:A.5.20:incident_notification
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Incident notification clause with timeline (e.g. within 24h of detection) + collaboration during
+  remediation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Insert a clause in the template requiring suppliers to notify your organisation of security incidents
+  within a specific timeframe, such as 24 hours of detection.
+- Specify in writing that suppliers must actively collaborate with your organisation during incident investigation
+  and remediation efforts.
+- Name the responsible contact person or role at your organisation for suppliers to notify in the event
+  of an incident.
+- State the notification timeline as a clear, concrete number of hours or days—avoid vague terms like
+  "promptly" or "as soon as possible."
+- Record the template version number and approval date to show the clause was reviewed and formally adopted.

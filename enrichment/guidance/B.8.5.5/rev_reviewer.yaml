@@ -1,0 +1,17 @@
+must_id: item:B.8.5.5:rev_reviewer
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Reviewer identity (Legal + Trust + DPO)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer for each disclosure decision as a specific individual from Legal, Trust, and Data
+  Protection Officer roles.
+- Record the date each reviewer completed their assessment on the Disclosure Decision Program Review form.
+- Document each reviewer's comments or approval decision in writing within the program review record.
+- Retain all signed or digitally authenticated review records for each disclosure decision in a secure,
+  auditable location.
+- Avoid listing groups or departments as reviewers; always specify named individuals to meet accountability
+  requirements.

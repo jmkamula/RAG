@@ -1,0 +1,18 @@
+must_id: item:A.5.7:sources
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Threat intelligence sources enumerated (open-source feeds, vendor feeds, ISACs, government
+  advisories, paid intel services)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all threat intelligence sources in the procedure, specifying each by name and type, such as open-source,
+  vendor, ISAC, government, or paid service.
+- Record the date each source was last reviewed or updated to show regular evaluation of relevance and
+  reliability.
+- Name the individual responsible for maintaining and updating the list of threat intelligence sources,
+  not just a team or department.
+- Attach supporting documentation, such as subscription confirmations or access agreements, for each paid
+  or restricted intelligence source.

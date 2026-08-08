@@ -1,0 +1,18 @@
+must_id: item:A.5.12:review_downstream
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Downstream-control alignment checked (A.5.13 labelling rules, A.5.10 handling rules, A.5.14
+  transfer still consistent)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the classification scheme review and record their name and review
+  date in the review log.
+- Cross-reference the current classification scheme against the latest labelling, handling, and transfer
+  rules, noting any discrepancies in a comparison table.
+- Document the outcome of the alignment check, including any changes required, in a dated review summary
+  approved by the scheme owner.
+- Name the downstream control owners as specific individuals, not generic roles or teams, in the review
+  documentation.

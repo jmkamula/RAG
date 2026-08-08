@@ -1,0 +1,19 @@
+must_id: item:Art.40:monitoring_body_interaction
+control_ref: Art.40
+standard_id: GDPR:2016/679
+must_text: Monitoring body interaction (Art.41 — accredited monitoring body for the code)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the accredited monitoring body responsible for overseeing your code of conduct, including full
+  legal name and contact details in your procedure document.
+- Document the process for submitting reports, updates, or queries to the monitoring body, including responsible
+  staff and required formats.
+- Record the dates and outcomes of all formal communications with the monitoring body, such as compliance
+  reviews or feedback received.
+- Attach evidence of the monitoring body's accreditation status, such as a copy of their accreditation
+  certificate or official notification.
+- Specify a named individual as the main contact for monitoring body interactions—do not list a team or
+  department.

@@ -1,0 +1,19 @@
+must_id: item:A.8.11:personal_data
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Personal data explicitly in scope including PII / sensitive PII categories
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that personal data, including all types of personally identifiable information
+  and sensitive categories, is explicitly covered.
+- List the specific categories of PII and sensitive PII that are subject to data masking, referencing
+  GDPR Article 4 definitions.
+- Name a responsible individual for maintaining and updating the list of in-scope data types, rather than
+  assigning responsibility to a team or department.
+- Cross-reference the procedure with your data inventory or records of processing activities to show alignment
+  of masked data with documented personal data holdings.
+- Record the date of the latest review or update to the procedure, ensuring it is not left undated or
+  marked as “draft.”

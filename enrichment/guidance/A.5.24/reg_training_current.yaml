@@ -1,0 +1,19 @@
+must_id: item:A.5.24:reg_training_current
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Training-currency per row (last training date, training type; flagged when stale)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name and current role of each incident response team member in the register, ensuring
+  no entries are left as generic titles or teams.
+- Enter the most recent training date and specific training type completed by each team member in their
+  corresponding row.
+- Flag any team member whose last training date exceeds your organisation’s defined currency period, such
+  as 12 months, with a visible indicator.
+- Review and update the register at least quarterly, noting the review date and reviewer’s name in a dedicated
+  column.
+- Retain evidence of training completion, such as certificates or attendance logs, linked to each team
+  member’s entry in the register.

@@ -1,0 +1,19 @@
+must_id: item:A.6.4:rev_register_update
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Changes propagated to the procedure with reference to this review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of each disciplinary process review in a dedicated log, including any identified
+  changes or improvements.
+- Document each specific change made to the disciplinary procedure, referencing the corresponding review
+  entry and date in the procedure’s change history.
+- Name the individual responsible for approving changes to the procedure, and obtain their dated signature
+  on the updated document.
+- Attach a copy of the revised disciplinary procedure to the review record, showing the updated version
+  number and effective date.
+- Avoid using generic statements like “procedure updated as needed”—specify the actual changes and link
+  them to the documented review.

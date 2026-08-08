@@ -1,0 +1,17 @@
+must_id: item:6.1.3:scope_change_drivers
+control_ref: 6.1.3
+standard_id: ISO27001:2022
+must_text: Trigger list for re-evaluating treatment (new risk, new control, regulator change)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific triggers for re-evaluating risk treatment, such as identification of a new risk, implementation
+  of a new control, or regulatory changes, in your methodology document.
+- Document the date when the trigger list was last reviewed and updated, and name the individual who performed
+  the review.
+- Reference the version number of the risk treatment methodology where the trigger list appears, ensuring
+  it is not an undated or draft version.
+- Name the owner as a specific individual responsible for maintaining and updating the trigger list, not
+  a team or department.

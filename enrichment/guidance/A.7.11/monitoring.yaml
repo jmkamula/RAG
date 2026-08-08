@@ -1,0 +1,19 @@
+must_id: item:A.7.11:monitoring
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Monitoring with alerting for utility status (BMS / power quality / temperature)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the monitoring tools or systems in use for power, temperature, and utilities, including their
+  make, model, and installation dates.
+- Name the responsible individual who receives and acts on alerts from the monitoring systems, specifying
+  their contact details.
+- Record sample alert logs showing actual utility status events and the corresponding timestamps within
+  the past six months.
+- Retain evidence of regular tests of the alerting system, such as test reports or screenshots, with dates
+  and tester names.
+- Specify alert recipients as named individuals, not generic addresses or group emails, to avoid ambiguity
+  about who is accountable.

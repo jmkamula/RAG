@@ -1,0 +1,39 @@
+leaf_id: req:A.8.23:filtering_program_review
+control_ref: A.8.23
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, users, and locations are in-scope for the ISMS to determine
+    where web filtering controls and their review must apply.
+  good_enough: A clear, current scope statement that identifies all relevant networks and endpoints is
+    available.
+- ref: A.8.20
+  standard_id: ISO27001:2022
+  title: Networks security
+  category: direct
+  rationale: Network security controls define the technical boundaries and baseline protections that web
+    filtering builds on. Without this, you can't meaningfully review the filtering program's effectiveness
+    or coverage.
+  good_enough: Documented network security controls and architecture diagrams exist, showing how web filtering
+    integrates with broader network protections.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: A current asset register ensures you know which devices and systems should be covered by
+    web filtering, so you can check for coverage gaps during the review.
+  good_enough: An up-to-date list of networked assets (devices, endpoints, servers) is available for reference.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures someone is accountable for maintaining, monitoring, and
+    reviewing the web filtering program.
+  good_enough: Documented roles exist for web filtering administration and review, even if responsibilities
+    are shared or informal.

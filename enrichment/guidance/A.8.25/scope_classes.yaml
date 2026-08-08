@@ -1,0 +1,19 @@
+must_id: item:A.8.25:scope_classes
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Development classes in scope (in-house product / major internal tooling / API-as-product /
+  customer-facing add-ons)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all software development activities and products, specifying which are in-house products, major
+  internal tooling, API-as-product, and customer-facing add-ons.
+- Name the individual responsible for determining and maintaining the scope of development classes, avoiding
+  generic roles like "the team" or "IT".
+- Document the rationale for including each development class in scope, referencing ISO27001:2022 control
+  A.8.25 requirements.
+- Record the date when the scope was last reviewed and updated, and keep this record available for inspection.
+- Cross-reference the documented scope in your main information security management system register or
+  equivalent master document.

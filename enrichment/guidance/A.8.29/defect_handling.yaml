@@ -1,0 +1,18 @@
+must_id: item:A.8.29:defect_handling
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Defect handling (creation / triage / fix / retest cycle with closure criteria)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the full defect lifecycle in the procedure, including creation, triage, assignment, fixing,
+  retesting, and closure with clear criteria.
+- Record each defect in a tracking system with a unique ID, date reported, description, and the person
+  responsible for resolution.
+- Name the defect owner as a specific individual for each defect, not a generic group or department.
+- Confirm that closure criteria are stated for each defect and that closure is logged with the date and
+  the person authorizing closure.
+- Retain evidence of retesting for each fixed defect, such as test logs or screenshots, attached to the
+  defect record.

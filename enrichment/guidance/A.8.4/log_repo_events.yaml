@@ -1,0 +1,19 @@
+must_id: item:A.8.4:log_repo_events
+control_ref: A.8.4
+standard_id: ISO27001:2022
+must_text: Repository access events captured (clone / push / admin actions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Configure repository settings to automatically log all access events, including clone, push, and administrative
+  actions, with timestamps and user identifiers.
+- Assign a named administrator to review and approve the access monitoring configuration, recording their
+  name and date of approval.
+- Retain access monitoring logs for a defined retention period, and record the retention policy location
+  and version in your documentation.
+- Name the log reviewer as a specific individual, not a group or team, and record the date of each periodic
+  review.
+- Document any detected unauthorized access attempts in a separate incident log, including the date, user,
+  and actions taken.

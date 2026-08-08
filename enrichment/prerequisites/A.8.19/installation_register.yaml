@@ -1,0 +1,39 @@
+leaf_id: req:A.8.19:installation_register
+control_ref: A.8.19
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which assets, systems, and locations are covered by the ISMS,
+    ensuring the installation register only tracks relevant software installations.
+  good_enough: A clear, current scope statement that identifies all in-scope business units, systems,
+    and locations for the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register provides the authoritative list of hardware and systems where software
+    may be installed, forming the basis for tracking installations.
+  good_enough: An up-to-date inventory of all in-scope hardware and systems, sufficient to identify where
+    software could be installed.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that responsibilities for installing software and maintaining
+    the installation register are understood and actionable.
+  good_enough: Documented assignment of responsibility for software installation and register maintenance,
+    even if not fully detailed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: The classification scheme helps determine which software installations are critical or sensitive,
+    guiding the level of detail and controls needed in the register.
+  good_enough: A basic classification scheme that distinguishes between at least sensitive and non-sensitive
+    software installations.

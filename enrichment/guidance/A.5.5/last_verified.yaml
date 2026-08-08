@@ -1,0 +1,17 @@
+must_id: item:A.5.5:last_verified
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Last-verified date per entry (proves the entry is current)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the last-verified date for each authority contact entry in the register, using a consistent date
+  format for all entries.
+- Name the person who performed the verification for each entry, ensuring a specific individual is listed
+  rather than a group or department.
+- Cross-reference each last-verified date with supporting evidence, such as an email confirmation or call
+  log, to prove the check occurred.
+- Update any entry missing a last-verified date or showing a date older than your defined review period,
+  as auditors will flag outdated or blank dates.

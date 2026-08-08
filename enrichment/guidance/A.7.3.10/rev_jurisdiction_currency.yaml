@@ -1,0 +1,19 @@
+must_id: item:A.7.3.10:rev_jurisdiction_currency
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Jurisdiction-currency check — new full-automation prohibitions surfaced
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all jurisdictions where automated decision-making is used, listing them in a dated register
+  maintained by a named compliance officer.
+- Document a review of current laws in each jurisdiction to check for new or updated prohibitions on fully
+  automated decisions, with review date and reviewer name.
+- Record any surfaced prohibitions or regulatory changes in a tracked log, including the source, effective
+  date, and a summary of the impact.
+- Name the reviewer as a specific individual, not a group or department, to avoid audit findings for unclear
+  accountability.
+- Retain evidence of communication to relevant teams about any new prohibitions, such as dated emails
+  or meeting minutes referencing the jurisdiction and change.

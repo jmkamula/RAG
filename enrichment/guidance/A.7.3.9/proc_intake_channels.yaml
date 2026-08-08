@@ -1,0 +1,17 @@
+must_id: item:A.7.3.9:proc_intake_channels
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Intake channels enumerated (email, web form, in-product, phone, mail)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all intake channels for subject requests, such as email, web form, in-product tool, phone, and
+  mail, in the written procedure.
+- Document the responsible person or role for monitoring each intake channel by name and job title in
+  the procedure.
+- State the date the procedure was last reviewed or updated to show current intake channels are included.
+- Attach or reference a sample intake log or register that records requests received through each channel.
+- Name each channel specifically; do not use generic terms like "various" or "as appropriate" that could
+  cause auditor concern.

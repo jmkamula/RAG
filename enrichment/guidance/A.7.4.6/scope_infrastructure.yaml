@@ -1,0 +1,19 @@
+must_id: item:A.7.4.6:scope_infrastructure
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+must_text: Infrastructure surfaces enumerated (app servers + DB + cache + queue + log processors + backup
+  staging)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each infrastructure component where temporary files are created, including application servers,
+  databases, caches, queues, log processors, and backup staging areas.
+- Name a specific individual responsible for maintaining the temp-file context scope, avoiding generic
+  roles like "IT" or "the team".
+- Record the date when the scope was last reviewed or updated to show the information is current.
+- Cross-reference the enumerated surfaces with system architecture diagrams or asset inventories to confirm
+  completeness.
+- Document any exclusions from the scope and provide a clear justification for each, signed by the responsible
+  individual.

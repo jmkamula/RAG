@@ -1,0 +1,45 @@
+leaf_id: req:A.7.4.9:transmission_controls_procedure
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.8.24
+  standard_id: ISO27001:2022
+  title: Use of Cryptography
+  category: cross_role
+  rationale: Controls for secure transmission of PII rely on established cryptographic measures; you need
+    to know what cryptographic controls are in place before defining transmission procedures.
+  good_enough: Documented cryptographic controls exist for protecting data in transit, even if not fully
+    rolled out to all systems yet.
+- ref: A.5.14
+  standard_id: ISO27001:2022
+  title: Information Transfer
+  category: cross_role
+  rationale: The general approach to information transfer must be defined so that PII-specific transmission
+    controls can align and extend these baseline practices.
+  good_enough: A basic procedure or policy for information transfer is available, covering at least the
+    main channels and responsibilities.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification of Information
+  category: cross_role
+  rationale: You must know how PII is classified to determine which data flows require special transmission
+    controls.
+  good_enough: A working classification scheme exists, and PII is clearly identified within it.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose of Processing
+  category: direct
+  rationale: Understanding the purpose of PII processing helps define which transmissions are necessary
+    and what controls are appropriate.
+  good_enough: Documented purposes for PII processing exist for major data flows, even if some edge cases
+    are pending review.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Inventory of Information and Other Associated Assets
+  category: cross_role
+  rationale: An up-to-date asset register is needed to identify which systems and data sets involve PII
+    transmission, so controls can be scoped correctly.
+  good_enough: A basic asset inventory exists, with PII-related assets flagged, even if not exhaustive.

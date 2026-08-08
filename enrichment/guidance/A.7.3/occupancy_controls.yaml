@@ -1,0 +1,19 @@
+must_id: item:A.7.3:occupancy_controls
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Occupancy controls (max people in secure rooms, lone-worker rules where required)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the maximum number of people allowed in each secure room, including the calculation method
+  and date of approval, in the procedure.
+- Name the person responsible for monitoring occupancy limits for each secure area, listing them by full
+  name and job title.
+- State the lone-worker rules for secure rooms, including required check-in/check-out procedures, and
+  reference the supporting process documentation.
+- Record the date and outcome of the most recent review of occupancy and lone-worker controls, attaching
+  any incident reports or exceptions.
+- Specify that occupancy control ownership must not be assigned to a generic group or department; use
+  a named individual for accountability.

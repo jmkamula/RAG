@@ -1,0 +1,19 @@
+must_id: item:Art.45:periodic_review
+control_ref: Art.45
+standard_id: GDPR:2016/679
+must_text: Periodic Art.45.4 review awareness — Commission reviews adequacy at least every 4 years
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and source of the most recent European Commission adequacy decision relevant to your
+  data transfers in a central register.
+- Assign a named individual responsible for monitoring updates or reviews of adequacy decisions, listing
+  their name and contact details.
+- Record a scheduled review date at least every four years from the last adequacy decision, and log any
+  interim checks or alerts received.
+- Keep copies of any communications or alerts from the European Commission regarding adequacy reviews
+  or changes, with received dates.
+- Name the responsible person as an individual — do not use generic titles like "the team" or "compliance
+  department".

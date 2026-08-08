@@ -1,0 +1,16 @@
+must_id: item:A.7.3.4:reg_channel
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+must_text: Withdrawal channel per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each consent withdrawal in the register with the specific channel used, such as email, web form,
+  phone call, or in-person request.
+- Name the individual who processed each withdrawal, including their full name and job title, in the corresponding
+  register entry.
+- Enter the date and time the withdrawal was received and processed for every row in the register.
+- Avoid using generic terms like "various" or "multiple" for withdrawal channels; specify the exact method
+  for each entry.

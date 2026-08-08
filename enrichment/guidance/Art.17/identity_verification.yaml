@@ -1,0 +1,19 @@
+must_id: item:Art.17:identity_verification
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Identity verification step (proportionate, not over-collecting)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the identity verification process in the erasure procedure, describing acceptable methods and
+  required information for confirming requester identity.
+- Name the person or role responsible for verifying requester identity in each erasure case, ensuring
+  accountability is clear.
+- Record the date, method, and outcome of each identity verification in an access log or case file for
+  every erasure request.
+- State the minimum information collected for verification, confirming it is proportionate and does not
+  exceed what is necessary.
+- Avoid using generic statements like "verify as appropriate"—specify concrete steps and criteria for
+  verification in the documented procedure.

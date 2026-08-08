@@ -1,0 +1,16 @@
+must_id: item:A.5.29:reg_fallback
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Fallback path per row (which compensating measure activates; what residual risk it accepts)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record for each disruption scenario a clear, step-by-step fallback path describing which compensating
+  measure will activate if the main control fails.
+- State the specific residual risk accepted for each scenario after the fallback path is applied, using
+  plain language rather than generic risk terms.
+- Name the owner responsible for each fallback path as a specific individual, not a team or department.
+- Date each entry in the register to show when the fallback path and residual risk were last reviewed
+  or updated.

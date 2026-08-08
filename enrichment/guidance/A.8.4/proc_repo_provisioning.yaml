@@ -1,0 +1,19 @@
+must_id: item:A.8.4:proc_repo_provisioning
+control_ref: A.8.4
+standard_id: ISO27001:2022
+must_text: Repository provisioning procedure (creator authority, default branch-protection, classification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for requesting and provisioning new source code repositories, including
+  required approvals and responsible roles.
+- Name the individual with authority to approve repository creation requests, avoiding generic titles
+  like "the team" or "IT department".
+- State the default branch-protection settings applied to all new repositories, including requirements
+  for code review or approval before merging.
+- Record how each repository’s information classification is assigned and where this classification is
+  documented within the provisioning process.
+- Retain dated records of repository provisioning requests, approvals, and applied controls for each new
+  repository.

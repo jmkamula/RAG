@@ -1,0 +1,16 @@
+must_id: item:8.3:scope_change_drivers
+control_ref: '8.3'
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new high-risk finding, capacity change, vendor change)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific trigger events—such as new high-risk findings, major capacity changes, or vendor changes—in
+  a dated document reviewed by the risk owner.
+- Assign a named individual responsible for monitoring these triggers and recording when any occur.
+- Record each occurrence of a trigger event with the date, description, and action taken in a treatment
+  plan log.
+- Name the responsible owner as a specific person, not a group or department, to avoid ambiguity in accountability.
+- Review and update the trigger list at least annually, documenting the review date and reviewer’s name.

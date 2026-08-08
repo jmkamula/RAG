@@ -1,0 +1,17 @@
+must_id: item:A.7.4.2:scope_integrations
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+must_text: Integration processing (webhooks + third-party enrichment + backup + DR)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all integration processing activities, including webhooks, third-party enrichment, backup, and
+  disaster recovery, in a documented processing operations scope.
+- Name a specific individual responsible for maintaining and updating the processing operations scope,
+  avoiding generic roles like "IT team" or "Operations."
+- Record the date when the processing operations scope was last reviewed and updated to reflect current
+  integration activities.
+- Cross-reference each integration activity with relevant data protection controls and legal bases in
+  your data processing register.

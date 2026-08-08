@@ -1,0 +1,18 @@
+must_id: item:A.8.17:scope_exclusions
+control_ref: A.8.17
+standard_id: ISO27001:2022
+must_text: Exclusion rationale (network-isolated systems with documented offline-clock procedure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each network-isolated system excluded from time synchronization, listing its hostname, location,
+  and responsible owner.
+- State the specific rationale for exclusion, referencing the documented offline-clock procedure for each
+  system.
+- Attach or cross-reference the offline-clock procedure, including the version number and last review
+  date.
+- Name the owner as a specific individual responsible for maintaining the exclusion rationale, not a team
+  or department.
+- Record the date the exclusion rationale was last reviewed and approved by management.

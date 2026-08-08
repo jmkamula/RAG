@@ -1,0 +1,18 @@
+must_id: item:A.7.4.7:scope_business_data
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Business PII categories with business retention rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all categories of personal data your organisation processes, using clear business terms that match
+  your actual activities.
+- Document the specific business reason for retaining each personal data category, referencing relevant
+  laws, contracts, or operational needs.
+- State the retention period for each data category, showing how it aligns with your documented business
+  rationale.
+- Name the person responsible for approving each retention decision, ensuring this is a named individual
+  and not a group or department.
+- Record the date each retention rationale and period was last reviewed and updated.

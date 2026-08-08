@@ -1,0 +1,19 @@
+must_id: item:A.7.4.8:proc_cross_link_a528
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Cross-link to A.5.28 evidence handling — disposal_record shape reused for evidence forensics
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the PII Disposal Procedure to the A.5.28 evidence handling policy, explicitly stating
+  the shared disposal_record format.
+- Attach a sample disposal_record template showing all required fields for both PII and evidence disposal,
+  dated and version-controlled.
+- Name the individual responsible for maintaining alignment between PII disposal and evidence handling
+  procedures, listing their full name and role.
+- Document a completed disposal_record for a recent PII item, demonstrating the reused format and referencing
+  the related evidence disposal entry.
+- Avoid using generic or mismatched disposal_record templates; confirm all records use the same structure
+  as defined in A.5.28.

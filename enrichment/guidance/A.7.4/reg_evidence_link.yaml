@@ -1,0 +1,20 @@
+must_id: item:A.7.4:reg_evidence_link
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: Per-event evidence-package link (CCTV clip reference, log excerpt — for cases handed to A.5.28
+  evidence handling)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique identifier for each monitoring event in the register, matching it to the corresponding
+  incident or investigation case number.
+- Attach or cross-reference the exact location of supporting evidence, such as a CCTV clip filename or
+  log excerpt, for each event entry.
+- Name the evidence package owner as a specific individual responsible for maintaining access and integrity,
+  not as a team or department.
+- Confirm the date and method by which the evidence was linked to the event, noting any transfer to formal
+  evidence handling under A.5.28.
+- Review each register entry to ensure no generic or missing evidence links, which would prevent traceability
+  during an audit.

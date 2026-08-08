@@ -1,0 +1,17 @@
+must_id: item:A.8.6:log_trending
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Trending views for capacity planning (weekly / monthly / yearly aggregates)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record weekly, monthly, and yearly capacity usage data in a dated log, showing clear aggregation for
+  each period.
+- Generate and save trending charts or tables that visualize capacity changes over time, referencing the
+  underlying log entries.
+- Name a specific individual responsible for maintaining and updating the capacity monitoring log, avoiding
+  generic titles or teams.
+- Retain historical versions of the log and trending views to demonstrate ongoing capacity planning and
+  forecasting.

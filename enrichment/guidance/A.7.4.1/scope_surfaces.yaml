@@ -1,0 +1,20 @@
+must_id: item:A.7.4.1:scope_surfaces
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Collection surfaces enumerated (customer forms / employee onboarding / marketing forms / cookies
+  / weblogs / API webhooks / integrations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all ways personal data is collected, such as website forms, onboarding processes, cookies, APIs,
+  and integrations, in a dated inventory document.
+- Name a specific individual responsible for maintaining and updating the collection contexts inventory,
+  not just a team or department.
+- Cross-reference each collection context in the inventory with the relevant business process or system
+  where data is captured.
+- Record the date of the last review and update of the collection contexts inventory, and retain evidence
+  of who performed the review.
+- Document any changes or additions to collection methods with supporting records, such as change requests
+  or meeting minutes, to show ongoing coverage.

@@ -1,0 +1,19 @@
+must_id: item:A.5.34:rev_scope_check
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Cross-check against the privacy applicability scope — any new jurisdiction, regulated activity,
+  data subject category that should add register entries
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Review the current privacy applicability scope document and highlight any new jurisdictions, regulated
+  activities, or data subject categories since the last review date.
+- Cross-reference the updated scope against your privacy register to identify any missing entries related
+  to new requirements.
+- Record the date of the review and the name of the reviewer in the privacy program review log.
+- Name any new or changed register entries with specific details, avoiding generic labels like "miscellaneous"
+  or "other".
+- Retain supporting evidence, such as meeting minutes or correspondence, that confirm the review and any
+  resulting register updates.

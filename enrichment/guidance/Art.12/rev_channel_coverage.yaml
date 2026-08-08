@@ -1,0 +1,18 @@
+must_id: item:Art.12:rev_channel_coverage
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Channel coverage check — every in-scope channel is reaching the procedure (no orphan requests)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all communication channels where individuals can submit data requests, including web forms, email
+  addresses, phone numbers, and physical mail.
+- Cross-reference each channel against your documented data request procedure to confirm all requests
+  are routed and handled consistently.
+- Record the date and outcome of your most recent check, noting any channels that were missing or not
+  properly linked to the procedure.
+- Name the reviewer responsible for this check as a specific individual, not a team or generic role.
+- Document any corrective actions taken if an orphan channel was found, including the completion date
+  and person responsible.

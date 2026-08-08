@@ -1,0 +1,19 @@
+must_id: item:Art.48:scope_change_drivers
+control_ref: Art.48
+standard_id: GDPR:2016/679
+must_text: Trigger list (new MLAT entered into force, new jurisdiction)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current Mutual Legal Assistance Treaties (MLATs) and relevant jurisdictions in a dated register
+  maintained by a named responsible individual.
+- Record each time a new MLAT enters into force or a new jurisdiction becomes applicable, including the
+  effective date and source of information.
+- Assign a specific person to monitor official updates on MLATs and jurisdictional changes, documenting
+  their review schedule.
+- Update the register promptly after each trigger event; do not rely on undated or generic lists that
+  lack clear evidence of review.
+- Retain notifications or official communications about new MLATs or jurisdictional changes as supporting
+  documentation.

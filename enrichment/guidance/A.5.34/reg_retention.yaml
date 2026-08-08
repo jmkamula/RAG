@@ -1,0 +1,18 @@
+must_id: item:A.5.34:reg_retention
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Retention period per activity (concrete duration with start/end triggers; cross-link to A.5.33
+  records schedule — no arbitrary numbers)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific retention period for each PII processing activity, stating the exact duration and
+  what triggers the start and end dates.
+- Cross-reference each retention period in the PII Processing Register to the corresponding entry in your
+  A.5.33 records retention schedule.
+- Name the trigger events that start and end retention, such as "user account closure" or "contract termination,"
+  for each processing activity.
+- Avoid using arbitrary or generic durations like "as long as necessary" or "until further notice"—state
+  concrete, justified timeframes.

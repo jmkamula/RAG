@@ -1,0 +1,19 @@
+must_id: item:A.6.8:scope_audience_segments
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Audience segments enumerated (employees, contractors, suppliers' staff with access, visitors,
+  customers in some sectors — anyone who might observe an event)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all audience segments who may observe or report security events, including employees, contractors,
+  supplier staff, visitors, and customers where relevant.
+- Document the criteria used to determine which groups are included or excluded from the reporting audience
+  scope.
+- Name the person responsible for maintaining and updating the audience list as a specific individual,
+  not a generic role or team.
+- Record the date the audience scope was last reviewed and updated to show it is current.
+- Attach supporting evidence, such as communications or policy extracts, that confirm each segment has
+  been informed of their reporting responsibilities.

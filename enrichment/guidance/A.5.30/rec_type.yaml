@@ -1,0 +1,18 @@
+must_id: item:A.5.30:rec_type
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Recovery type per record (real_recovery / scheduled_test / partial_drill / chaos_engineering_test)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the recovery type for each recovery event, clearly marking it as real recovery, scheduled test,
+  partial drill, or chaos engineering test.
+- Assign a unique identifier to each recovery event record to allow easy cross-referencing and traceability.
+- Name the person responsible for classifying the recovery type on each event record, using a specific
+  individual rather than a team or department.
+- Date each recovery event record to show when the recovery activity took place and when the type was
+  assigned.
+- Review all recovery event records quarterly to confirm that each has a clearly stated and accurate recovery
+  type.

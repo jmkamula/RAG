@@ -1,0 +1,39 @@
+leaf_id: req:A.8.27:architecture_program_review
+control_ref: A.8.27
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know what systems, processes, and assets are in-scope for the ISMS before you
+    can meaningfully review whether architecture principles and reference architectures are still appropriate.
+  good_enough: A clear, current scope statement that identifies the boundaries and applicability of the
+    ISMS—enough to know what the architecture review should cover.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The architecture principles should align with the organisation's overarching information
+    security policy. Without this policy, you can't assess whether the principles are still fit for purpose.
+  good_enough: A published, approved information security policy that sets out the organisation’s security
+    objectives and direction.
+- ref: A.8.25
+  standard_id: ISO27001:2022
+  title: Secure development life cycle
+  category: direct
+  rationale: The secure development lifecycle defines the security architecture principles and practices
+    that must be periodically reviewed. You need this baseline to know what you are reviewing.
+  good_enough: A documented secure development lifecycle process that includes defined security architecture
+    principles—even if not fully mature.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You need an up-to-date asset register to ensure the architecture principles and reference
+    architectures cover all relevant assets, especially as new systems or technologies are introduced.
+  good_enough: An asset register that lists key information assets and systems in scope for the ISMS,
+    even if some details are still being refined.

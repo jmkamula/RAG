@@ -1,0 +1,14 @@
+must_id: item:A.8.13:rev_next_date
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the backup program in the documented review schedule.
+- Record the date in a version-controlled document or calendar entry that is accessible to relevant stakeholders.
+- Name the individual responsible for scheduling and conducting the next review, not just a team or department.
+- Cross-reference the stated date with meeting minutes or approval records from the most recent backup
+  program review.

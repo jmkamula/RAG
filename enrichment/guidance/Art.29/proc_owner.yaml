@@ -1,0 +1,15 @@
+must_id: item:Art.29:proc_owner
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Named owner (DPO + ops lead)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer (DPO) as the primary owner of the Processing Under Authority Procedure
+  in the document header.
+- List the operations lead as a co-owner by full name and job title, not just by department or team.
+- Record the date when both owners last reviewed and approved the procedure in the document history section.
+- Attach signatures or documented approval from both the DPO and the operations lead to confirm their
+  ownership.

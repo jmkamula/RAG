@@ -1,0 +1,43 @@
+leaf_id: req:A.8.14:failover_procedure
+control_ref: A.8.14
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, locations, and processes are in-scope for your ISMS before
+    you can define which assets and operations require a failover procedure. This ensures the procedure
+    covers all relevant areas and nothing critical is missed.
+  good_enough: A documented scope statement that clearly lists included systems and business processes,
+    even if not perfectly detailed, is sufficient to proceed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: Failover procedures must reference specific assets (e.g., servers, databases, applications)
+    that require continuity. Without an asset register, you can't reliably identify what needs to be included
+    in the failover plan.
+  good_enough: A basic, up-to-date list of key information assets and their owners is enough to start
+    drafting the procedure.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Failover procedures depend on clear assignment of authority and responsibility—who can invoke
+    failover, who executes steps, and who approves failback. This must be defined before the procedure
+    is meaningful.
+  good_enough: A simple RACI or list of responsible persons for operational security is sufficient to
+    unblock drafting.
+- ref: A.5.30
+  standard_id: ISO27001:2022
+  title: ICT Readiness for Business Continuity
+  category: direct
+  rationale: Failover procedures are a key operationalization of ICT readiness. You need to have identified
+    critical ICT services and their continuity requirements to ensure the failover procedure aligns with
+    business needs.
+  good_enough: A summary of critical ICT services and their required recovery objectives (RTO/RPO), even
+    if not fully formalized, is enough to proceed.

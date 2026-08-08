@@ -1,0 +1,16 @@
+must_id: item:Art.25:rev_defaults_currency
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Defaults register currency check (cross-leaf — defaults still match deployed system state)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the current defaults register against the live system configuration and record the date
+  and name of the reviewer.
+- Document any differences found between the defaults register and the deployed system, including screenshots
+  or configuration exports as evidence.
+- Assign a specific individual to approve updates to the defaults register, and retain their approval
+  with a date.
+- Name the owner of the defaults register as a specific person, not a team or department.

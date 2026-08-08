@@ -1,0 +1,17 @@
+must_id: item:5.1:proc_escalation
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Escalation path for ISMS issues that need top-management decision
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a clear, step-by-step escalation path for information security management system issues requiring
+  top management attention, including specific roles and contact details.
+- Name the top management decision-maker by individual name, not by title or department, as the final
+  escalation point in the framework.
+- Record the date the escalation path was last reviewed and approved by top management, and retain the
+  approval record.
+- Publish the escalation path in a location accessible to all relevant staff, and keep a record of the
+  communication or notification.

@@ -1,0 +1,16 @@
+must_id: item:B.8.4.2:rev_reviewer
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+must_text: Reviewer identity (Trust + DPO + Platform Ops)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer for each role—Trust, Data Protection Officer (DPO), and Platform Operations—using
+  full names and job titles on the program review record.
+- Record the date each reviewer completed their review on the End-of-Service Program Review document.
+- Require each reviewer to sign or formally approve the review, capturing their individual acknowledgment
+  in the final record.
+- Avoid listing groups or teams as reviewers; specify only individual persons responsible for each required
+  role.

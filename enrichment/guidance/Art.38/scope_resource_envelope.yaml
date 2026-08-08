@@ -1,0 +1,19 @@
+must_id: item:Art.38:scope_resource_envelope
+control_ref: Art.38
+standard_id: GDPR:2016/679
+must_text: Resource envelope (budget category + escalation threshold for additional spend)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the budget category that funds the Data Protection Officer’s activities in a documented resource
+  plan, including the current fiscal year.
+- Document the escalation threshold amount that triggers additional approval for DPO-related spending
+  in a dated policy or procedure.
+- Assign a specific individual, not a generic title or team, as the authority for approving extra DPO
+  resource requests above the threshold.
+- Record the most recent approval or denial of a DPO resource request, including the date, requester,
+  and decision-maker’s name.
+- State explicitly in the resource plan that the DPO’s budget is independent from operational departments
+  to avoid conflicts of interest.

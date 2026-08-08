@@ -1,0 +1,17 @@
+must_id: item:Art.13:rec_version
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Version identifier per row (when notice content changes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique version identifier to each published privacy notice, updating the identifier whenever
+  any content changes.
+- Record the publication date and version identifier for every privacy notice entry in your publication
+  log.
+- Name the person responsible for approving each new or updated privacy notice version in the publication
+  record.
+- Avoid using generic version labels like "latest" or "current"—use specific version numbers or dates
+  for each entry.

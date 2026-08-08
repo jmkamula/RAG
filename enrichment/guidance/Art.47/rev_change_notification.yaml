@@ -1,0 +1,18 @@
+must_id: item:Art.47:rev_change_notification
+control_ref: Art.47
+standard_id: GDPR:2016/679
+must_text: Material-change notification — significant changes notified to lead SA per Art.63 consistency
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and document all types of changes considered "material" to your Binding Corporate Rules, referencing
+  GDPR Article 47.2.k in your policy.
+- Record each material change with a description, date of occurrence, and the responsible individual in
+  a change log.
+- Notify the lead Supervisory Authority in writing of each material change, including the date sent and
+  confirmation of receipt.
+- Retain copies of all correspondence with the lead Supervisory Authority regarding material changes,
+  including any responses or follow-up actions.
+- Name the individual responsible for notifications as a specific person, not as a team or department.

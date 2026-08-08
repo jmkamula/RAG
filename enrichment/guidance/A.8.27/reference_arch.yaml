@@ -1,0 +1,18 @@
+must_id: item:A.8.27:reference_arch
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Reference architecture patterns embedding the principles (concrete blueprints)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each approved system architecture pattern by name and version in an appendix to the policy, with
+  a clear reference to embedded security principles.
+- Attach a sample blueprint or diagram for at least one architecture pattern, showing how security principles
+  are applied in practice.
+- Cross-reference each pattern to the relevant section of the Secure System Architecture and Engineering
+  Principles Policy, using section numbers or hyperlinks.
+- Name the pattern owner as a specific individual responsible for updates, not a team or generic role.
+- Record the approval date and approver’s name for each referenced pattern in a table within the policy
+  document.

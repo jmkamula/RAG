@@ -1,0 +1,48 @@
+leaf_id: req:A.7.4.9:transmission_channel_inventory
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organization, systems, and processes are in-scope for
+    PII processing before you can inventory transmission channels. This ensures the inventory is complete
+    and relevant.
+  good_enough: A documented scope statement that clearly defines the boundaries of the ISMS and includes
+    all PII-relevant assets and processes.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is essential to identify all systems and devices that may transmit
+    PII, forming the basis for mapping transmission channels.
+  good_enough: A basic list of information assets, including systems and devices that handle PII, even
+    if some details are pending refinement.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: You must know which data is classified as PII to accurately identify and record the relevant
+    transmission channels.
+  good_enough: A documented scheme that marks which data types are considered PII, with enough clarity
+    to guide inventory efforts.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Understanding the purpose for processing PII helps determine why and how PII is transmitted,
+    which is critical for a meaningful channel inventory.
+  good_enough: A summary of processing purposes for PII, even if not fully detailed, to inform which channels
+    are relevant.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for PII processing ensures that only authorized transmission channels
+    are inventoried and helps assess compliance risks.
+  good_enough: A list of lawful bases for each major PII processing activity, sufficient to validate the
+    legitimacy of transmission channels.

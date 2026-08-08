@@ -1,0 +1,19 @@
+must_id: item:A.7.1:shared_building
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Shared-building considerations (other tenants, common corridors, lobby access)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name all shared areas in your building, such as corridors, lobbies, and entrances, in your Physical
+  Security Perimeters Policy.
+- Document how access to these shared areas is controlled and monitored, including any physical barriers
+  or surveillance measures.
+- List all other tenants or organisations sharing the building, and describe any agreements or protocols
+  in place for shared space security.
+- State the specific individual responsible for managing shared-area security, avoiding generic terms
+  like "the team" or "facilities."
+- Attach a dated copy of any correspondence or agreements with the building management or other tenants
+  regarding shared space access and security.

@@ -1,0 +1,40 @@
+leaf_id: req:4.4:isms_manual_change_record
+control_ref: '4.4'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You must define the boundaries and applicability of your ISMS before you can meaningfully
+    track or record changes to it. The change record only makes sense in the context of a clearly established
+    scope.
+  good_enough: A documented scope statement exists, describing what parts of the organisation and which
+    processes are covered by the ISMS.
+- ref: '7.5'
+  standard_id: ISO27001:2022
+  title: Documented Information
+  category: direct
+  rationale: The rules for creating, updating, and controlling documented information must be set before
+    you can properly record and manage ISMS manual changes. Without these rules, change records may lack
+    structure or integrity.
+  good_enough: Documented procedures or guidelines exist for managing ISMS documents, including version
+    control and retention.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The ISMS manual and its changes must align with the organisation’s information security policy.
+    Without a policy in place, you cannot ensure that manual amendments are consistent with your security
+    objectives.
+  good_enough: An approved information security policy is available and communicated to relevant stakeholders.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities is essential so that only authorised individuals
+    can make or approve changes to the ISMS manual. This prevents unauthorised or unclear amendments.
+  good_enough: A list or matrix of ISMS roles and responsibilities is documented and up to date.

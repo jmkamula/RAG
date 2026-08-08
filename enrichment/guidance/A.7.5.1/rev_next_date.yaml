@@ -1,0 +1,17 @@
+must_id: item:A.7.5.1:rev_next_date
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Transfer Basis Program in the program documentation, using
+  a specific calendar date.
+- Record the date in a version-controlled document or register that tracks all program reviews and their
+  scheduled dates.
+- Name the individual responsible for scheduling and conducting the next review, using their full name
+  and job title.
+- Avoid leaving the review date field blank or using vague terms like "annually" or "TBD"—enter a concrete
+  date.

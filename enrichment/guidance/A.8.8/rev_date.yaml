@@ -1,0 +1,19 @@
+must_id: item:A.8.8:rev_date
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval (≤180 days)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of each vulnerability program review in a central log, clearly showing the most recent
+  review date.
+- Confirm the time since the last review does not exceed 180 days by cross-referencing review dates in
+  the log.
+- Name the reviewer as a specific individual on each review record, avoiding generic titles like "IT team"
+  or "Security."
+- Retain evidence of completed reviews, such as signed meeting minutes or review reports, with visible
+  dates and names.
+- Document any missed review intervals with a corrective action entry, including the reason and planned
+  remediation date.

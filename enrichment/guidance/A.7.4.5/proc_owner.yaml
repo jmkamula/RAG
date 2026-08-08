@@ -1,0 +1,15 @@
+must_id: item:A.7.4.5:proc_owner
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: Named owner (Data Ops + Privacy Engineering)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the end-of-processing deletion and de-identification procedure,
+  not a team or department.
+- Document the owner's full name and role in the procedure document, including the date of assignment.
+- Record the owner's acceptance of responsibility by capturing their signature or written confirmation
+  on the current version of the procedure.
+- Review and update the named owner annually, keeping a dated record of each review and any changes made.

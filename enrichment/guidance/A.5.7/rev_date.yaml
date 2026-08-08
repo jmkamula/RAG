@@ -1,0 +1,18 @@
+must_id: item:A.5.7:rev_date
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Review date within the planned 180-day interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent threat intelligence program review date in a central log, clearly showing the
+  day, month, and year.
+- Name the individual responsible for scheduling and conducting each review, listing them by full name
+  rather than a team or department.
+- Document the planned review interval as 180 days in the program documentation or review schedule.
+- Retain evidence of the last two completed reviews, such as signed meeting minutes or summary reports,
+  with visible completion dates.
+- Cross-reference the review log with calendar invites or meeting records to confirm the review was not
+  missed or delayed beyond 180 days.

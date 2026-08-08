@@ -1,0 +1,18 @@
+must_id: item:6.1.2:reg_treatment_status
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Treatment status per row (accept / mitigate / transfer / avoid; link to 6.1.3 plan)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'Record the chosen treatment status for each risk entry in the risk register using clear terms: accept,
+  mitigate, transfer, or avoid.'
+- Cross-reference each risk entry to the corresponding action or plan documented under ISO27001:2022 control
+  6.1.3.
+- Name the responsible individual for each risk treatment decision, avoiding generic labels like "the
+  team" or "IT department".
+- Date each treatment status entry to show when the decision was made or last reviewed.
+- Document any changes in treatment status with a brief explanation and a reference to supporting evidence
+  or meeting minutes.

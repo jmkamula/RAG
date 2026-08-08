@@ -1,0 +1,18 @@
+must_id: item:A.7.3.4:scope_channel_map
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+must_text: Per-activity collection channel → withdrawal channel map
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each activity where personal data is collected based on consent, specifying the exact collection
+  channel used for each.
+- Map and document the corresponding withdrawal channel for each collection channel, ensuring the withdrawal
+  method matches or exceeds the ease of the original collection.
+- Name the individual responsible for maintaining the mapping, avoiding generic titles like "the team"
+  or "IT department".
+- Record the date the mapping was last reviewed and updated, keeping a version history for reference.
+- Cross-reference the mapping with your public privacy notice or consent forms to confirm consistency
+  between what is stated and what is implemented.

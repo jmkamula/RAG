@@ -1,0 +1,19 @@
+must_id: item:A.8.17:rev_findings_update
+control_ref: A.8.17
+standard_id: ISO27001:2022
+must_text: Findings propagated to procedure / scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of the latest clock sync program review in a version-controlled log, including
+  any findings or recommendations.
+- Document each finding from the review and clearly state how it impacts existing procedures or scope,
+  referencing specific sections or processes.
+- Update relevant procedures or scope documents to address each finding, including the revision date and
+  the name of the person making the change.
+- Name the individual responsible for implementing each update, avoiding generic titles like "IT team"
+  or "management."
+- Retain evidence of communication to affected staff about the updated procedures, such as an email or
+  meeting record with date and recipients.

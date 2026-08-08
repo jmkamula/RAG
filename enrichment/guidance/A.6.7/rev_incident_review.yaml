@@ -1,0 +1,20 @@
+must_id: item:A.6.7:rev_incident_review
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Remote-context incident review (any A.5.26 incident-register entries flagged as remote-work-related
+  in the period; lessons fed back into policy / procedure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all incident register entries from the review period that are flagged as related to remote
+  work, listing each by date and description.
+- Assign a named individual to lead the review of these remote-work-related incidents, recording their
+  name and the review start date.
+- Summarize lessons learned from each remote-context incident, linking each lesson to the specific incident
+  entry in the register.
+- Document any updates made to remote working policies or procedures as a result of these lessons, including
+  the date and the person approving the changes.
+- Name the policy or procedure owner as a specific individual, not a generic group or department, in the
+  updated documentation.

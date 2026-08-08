@@ -1,0 +1,18 @@
+must_id: item:A.8.22:reg_classification
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Per-zone classification tier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each network zone in the register with a unique name and description, ensuring no zone is ambiguously
+  defined or duplicated.
+- Assign a specific classification tier to every network zone, referencing your organisation’s approved
+  data classification scheme.
+- Record the name of the individual who determined each zone’s classification tier, along with the date
+  the decision was made.
+- Cross-reference the classification tier in the register with related controls or policies that apply
+  to each zone.
+- Specify the owner as a named person, not a team or department, for each network zone entry.

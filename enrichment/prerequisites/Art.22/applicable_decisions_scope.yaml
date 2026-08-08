@@ -1,0 +1,33 @@
+leaf_id: req:Art.22:applicable_decisions_scope
+control_ref: Art.22
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date inventory of all processing activities to identify which ones
+    involve automated decision-making. Without this, you can't reliably determine the scope of Art.22
+    applicability.
+  good_enough: A current, reasonably complete RoPA that lists all automated processing activities, even
+    if some details are pending, is sufficient to start scoping Art.22.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity helps clarify which automated
+    decisions are legitimate and which may be problematic under Art.22. This ensures only relevant processes
+    are considered.
+  good_enough: A mapping of lawful bases to each automated processing activity, even if some are provisional,
+    is enough to proceed.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which business units, systems, and processes are covered by your compliance
+    program. This ensures your Art.22 analysis is neither over- nor under-inclusive.
+  good_enough: A draft ISMS scope that identifies the main business areas and IT systems involved in automated
+    processing is sufficient for initial Art.22 scoping.

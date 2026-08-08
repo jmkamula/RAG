@@ -1,0 +1,16 @@
+must_id: item:A.5.15:authorisation
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Authorisation rules — who can authorise access at which level (cross-link to A.5.18 procedure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific individuals or roles authorised to grant access at each level in the Access Control
+  Policy, listing names or job titles.
+- Cross-reference the Access Control Policy to the documented access provisioning and revocation procedure
+  described in section A.5.18.
+- Document the date and version number of the Access Control Policy to show it is current and maintained.
+- Name the policy owner as a specific individual, not a generic group or department.
+- Record the formal approval of the policy by a named senior manager, including the date of approval.

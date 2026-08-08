@@ -1,0 +1,16 @@
+must_id: item:A.5.29:reg_supplier_dep
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Supplier dependency flag per row where the fallback relies on a specific supplier
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to the Disruption Scenario Register to indicate if the fallback for each scenario depends
+  on a specific supplier.
+- Name the supplier explicitly in the register row where a dependency exists, rather than using generic
+  terms like "third party" or "vendor."
+- Cross-reference each supplier-dependent fallback to the corresponding supplier entry in the Supplier
+  Register maintained for control A.5.22.
+- Record the date and name of the person who last updated each supplier dependency flag in the register.

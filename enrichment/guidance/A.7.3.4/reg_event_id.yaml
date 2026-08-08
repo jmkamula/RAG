@@ -1,0 +1,17 @@
+must_id: item:A.7.3.4:reg_event_id
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+must_text: Unique event identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique event identifier to each consent modification or withdrawal entry in the register, using
+  a sequential or otherwise non-repeating numbering system.
+- Record the unique event identifier alongside the date, data subject’s name, and nature of the consent
+  change for every entry.
+- Cross-reference each unique event identifier with supporting documentation, such as consent forms or
+  withdrawal requests, to enable traceability.
+- Avoid using generic or duplicate identifiers; verify that each event identifier is distinct and not
+  reused elsewhere in the register.

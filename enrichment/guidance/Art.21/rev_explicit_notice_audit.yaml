@@ -1,0 +1,19 @@
+must_id: item:Art.21:rev_explicit_notice_audit
+control_ref: Art.21
+standard_id: GDPR:2016/679
+must_text: Explicit-notice audit — Art.21 right is drawn to attention at first communication across surfaces
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all customer-facing communication channels where personal data is processed, and list them
+  in a dated inventory reviewed by a named individual.
+- Document the exact wording used to inform individuals of their right to object under Article 21 in each
+  communication template.
+- Record the date and method when the Article 21 right was first communicated to individuals for each
+  channel, with supporting evidence such as screenshots or copies.
+- Name the person responsible for reviewing and updating objection notices, ensuring the owner is a specific
+  individual, not a team or department.
+- Retain evidence of periodic audits confirming that the Article 21 right is explicitly highlighted in
+  all initial communications across all identified surfaces.

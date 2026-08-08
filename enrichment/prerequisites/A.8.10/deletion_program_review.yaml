@@ -1,0 +1,47 @@
+leaf_id: req:A.8.10:deletion_program_review
+control_ref: A.8.10
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You need a current asset register to know what information assets exist, where they reside,
+    and which ones are subject to deletion. Without this, you can't verify if all required deletions have
+    occurred.
+  good_enough: A maintained list of information assets, including locations and owners, is available and
+    up to date for the review period.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: A working classification scheme is necessary to identify which data types are subject to
+    specific retention and deletion requirements. This ensures the review checks the right data sets.
+  good_enough: A documented and applied classification scheme exists, mapping data types to retention/deletion
+    rules.
+- ref: A.8.33
+  standard_id: ISO27001:2022
+  title: Test information
+  category: direct
+  rationale: Test information must be included in deletion reviews to ensure that non-production data
+    is also deleted according to policy. This prevents overlooked data sets.
+  good_enough: Test data is covered by deletion mechanisms and included in the review scope.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines which parts of the organization and which information assets are included
+    in the deletion program. Without a clear scope, the review could miss critical areas.
+  good_enough: A current ISMS scope statement exists, specifying the organizational and asset boundaries
+    for deletion controls.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures accountability for deletion activities and for conducting
+    the periodic review. Without this, the review process may stall or lack authority.
+  good_enough: Roles for data deletion and review are assigned and documented, with responsible persons
+    identified.

@@ -1,0 +1,19 @@
+must_id: item:Art.10:reg_safeguards
+control_ref: Art.10
+standard_id: GDPR:2016/679
+must_text: Per-row safeguards (retention limit, access restrictions, separate-system storage)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the retention limit for each criminal data entry, specifying an exact duration or review date
+  in the register.
+- Document the access restrictions for each row, listing named roles or individuals permitted to view
+  or handle the data.
+- State the storage location for each entry, confirming if it is held in a separate system or database
+  from other personal data.
+- Name the owner for each register row as a specific individual—do not use generic labels like "HR" or
+  "the team".
+- Cross-reference each entry to the policy or legal basis justifying the safeguard, including a version
+  date or approval record.

@@ -1,0 +1,18 @@
+must_id: item:A.5.3:comm_a64_link
+control_ref: A.5.3
+standard_id: ISO27001:2022
+must_text: Linkage into A.6.4 disciplinary process — non-compliance with separation has stated consequence
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the segregation matrix to the disciplinary policy by including a section number or hyperlink
+  in the communication record.
+- State in the communication record that non-compliance with segregation duties will trigger the disciplinary
+  process as outlined in A.6.4.
+- Name the responsible manager who communicated this linkage to staff, and record the date of communication.
+- Attach a copy or screenshot of the actual communication sent to staff, showing the stated consequence
+  for non-compliance.
+- Specify the consequence in clear, organisation-specific terms—avoid generic statements like "may be
+  subject to disciplinary action."

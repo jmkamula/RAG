@@ -1,0 +1,19 @@
+must_id: item:A.7.2.1:rev_undocumented_sweep
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Undocumented-processing sweep — new activities emerged since last review flagged for registration
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead a review of all business units for new or changed personal data processing
+  activities since the last documented review date.
+- Document each newly identified processing activity in a dated log, including a description, data types
+  involved, and the responsible business contact.
+- Cross-reference the log entries with your current processing register to confirm which activities are
+  missing and require registration.
+- Record the date and outcome of the review, including any follow-up actions, in a review summary signed
+  by the responsible individual.
+- Name the reviewer as a specific person — do not use generic labels like "the team" or "management" in
+  the review documentation.

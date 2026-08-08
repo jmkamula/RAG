@@ -1,0 +1,17 @@
+must_id: item:A.5.5:proc_verification_cadence
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Re-verification cadence for contact details (annual at minimum)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the required re-verification frequency for authority contact details as at least once every 12
+  months in the procedure document.
+- Assign a named individual responsible for performing and recording the annual re-verification of authority
+  contact details.
+- Record the date of each completed re-verification in a log or register, including the name of the person
+  who performed it.
+- Specify that generic roles or teams must not be listed as the responsible party for re-verification;
+  use a specific individual’s name.

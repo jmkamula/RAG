@@ -1,0 +1,17 @@
+must_id: item:A.7.3.6:reg_propagation
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: Propagation status per row (systems updated / third parties notified)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the propagation status for each request row, clearly stating whether all relevant systems have
+  been updated and which ones.
+- Document the date and method used to notify each third party about the access, correction, or erasure
+  request.
+- Name the individual responsible for confirming completion of updates and notifications for each request,
+  not just a team or department.
+- Attach supporting evidence, such as confirmation emails or system logs, to each register entry showing
+  third party notification was completed.

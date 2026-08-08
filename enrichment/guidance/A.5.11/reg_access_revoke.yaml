@@ -1,0 +1,18 @@
+must_id: item:A.5.11:reg_access_revoke
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Access-revocation timestamp per row (when corp accounts/SSO/credentials were disabled — should
+  align with effective date)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time when each leaver’s corporate account, SSO, or credentials were disabled
+  in a dedicated column for every row.
+- Cross-reference the access-revocation timestamp with the leaver’s effective departure date to confirm
+  alignment for each entry.
+- Name the person responsible for disabling access as a specific individual, not a generic team or department,
+  in the register.
+- Retain supporting system logs or screenshots showing account disablement for each leaver to support
+  the recorded timestamp.

@@ -1,0 +1,19 @@
+must_id: item:B.8.5.6:proc_nda_path
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+must_text: NDA path — where public disclosure raises security risk, disclosure under NDA + on customer
+  request
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for disclosing subcontractor details only under a signed non-disclosure agreement
+  when public disclosure poses a security risk.
+- State that subcontractor information will be provided to customers only upon formal written request,
+  referencing the request in a disclosure log.
+- Retain copies of all signed non-disclosure agreements related to subcontractor disclosures in a dedicated,
+  access-controlled repository.
+- Name the individual responsible for approving each subcontractor disclosure, avoiding generic titles
+  like "the team" or "management".
+- Record the date, recipient, and purpose for each subcontractor disclosure in a register for future reference.

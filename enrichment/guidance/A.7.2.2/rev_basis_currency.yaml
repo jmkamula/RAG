@@ -1,0 +1,19 @@
+must_id: item:A.7.2.2:rev_basis_currency
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: Basis currency — every registered activity still has a valid basis in force
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each registered processing activity with its corresponding lawful basis and the date the basis
+  was last reviewed or updated.
+- Confirm that supporting documentation for each lawful basis, such as consent forms or contractual clauses,
+  is current and accessible.
+- Assign a named individual responsible for verifying the ongoing validity of each lawful basis, avoiding
+  generic roles like "the team."
+- Record the outcome of the most recent review for each activity, including the review date and any changes
+  made to the lawful basis.
+- Cross-reference each activity’s lawful basis with relevant legislation or guidance to demonstrate that
+  the basis remains applicable.

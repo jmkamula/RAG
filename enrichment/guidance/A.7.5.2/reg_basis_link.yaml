@@ -1,0 +1,17 @@
+must_id: item:A.7.5.2:reg_basis_link
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+must_text: Basis link per row (link to A.7.5.1 register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each transfer destination entry to its corresponding lawful basis record in the A.7.5.1
+  register, using a unique identifier or direct link.
+- Document the date each cross-reference was established or last reviewed, and record the responsible
+  individual's name for traceability.
+- Name the register owner as a specific individual, not a generic team or department, to avoid ambiguity
+  about accountability.
+- Review the register to confirm that no transfer destination row is missing a basis link; flag and correct
+  any incomplete entries.

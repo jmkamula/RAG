@@ -1,0 +1,18 @@
+must_id: item:Art.43:rev_complaint_handling
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Complaint handling audit — complaints processed within fair procedural standards
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each complaint received with the date, complainant’s details, and summary of the issue in a
+  central complaints log.
+- Record the steps taken to investigate and resolve each complaint, including dates and the names of responsible
+  staff members.
+- Retain copies of all correspondence with complainants, including acknowledgment, investigation updates,
+  and final resolution letters.
+- Name the individual responsible for complaint handling as a specific person, not a generic title or
+  team.
+- Review and sign off on each closed complaint case to confirm adherence to published procedural standards.

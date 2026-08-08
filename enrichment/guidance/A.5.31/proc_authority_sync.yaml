@@ -1,0 +1,20 @@
+must_id: item:A.5.31:proc_authority_sync
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Authority-contact sync — adding an obligation that introduces a new regulator triggers A.5.5
+  register update
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each new legal or regulatory obligation by recording the full name and contact details of the
+  relevant authority in the register.
+- Cross-reference every new authority entry with the corresponding obligation and date of addition in
+  the Legal/Regulatory Register.
+- Name the individual responsible for updating the register with new authority contacts, avoiding generic
+  titles like "Compliance Team."
+- Retain evidence of communication confirming the authority’s contact information, such as an email or
+  official notice, attached to the register entry.
+- Review the register after each update to confirm that all new authorities are listed and matched to
+  their obligations.

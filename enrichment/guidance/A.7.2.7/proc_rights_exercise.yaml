@@ -1,0 +1,18 @@
+must_id: item:A.7.2.7:proc_rights_exercise
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Single point of contact + subject-rights routing (subjects can exercise against either controller
+  regardless of arrangement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the single point of contact for data subjects, listing their full name
+  and contact details in the arrangement document.
+- Document the agreed process for routing subject rights requests, including how requests received by
+  either controller are logged and forwarded.
+- State in the procedure that data subjects may exercise their rights with either controller, regardless
+  of which holds their data.
+- Record the date of approval and signatures from authorised representatives of both controllers on the
+  final procedure document.

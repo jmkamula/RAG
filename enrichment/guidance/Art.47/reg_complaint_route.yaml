@@ -1,0 +1,16 @@
+must_id: item:Art.47:reg_complaint_route
+control_ref: Art.47
+standard_id: GDPR:2016/679
+must_text: Per-row complaint-routing target (group privacy team contact)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the complaint-routing contact for each group entity as a specific individual, not just a team or
+  generic mailbox.
+- Record the contact’s full name, role, and direct email address in each row of the BCR Coverage Register.
+- Confirm the contact details are current by cross-checking with the group’s internal directory and updating
+  any outdated information.
+- Retain a dated version of the BCR Coverage Register showing all complaint-routing contacts at the time
+  of last review.

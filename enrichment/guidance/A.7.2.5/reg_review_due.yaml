@@ -1,0 +1,17 @@
+must_id: item:A.7.2.5:reg_review_due
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: Next review due date per row (triggered by change or periodic)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the next review due date for each PIA or DPIA entry in the register, based on either a scheduled
+  interval or recent processing changes.
+- Name the individual responsible for tracking and updating review dates for each assessment, avoiding
+  generic roles like "Compliance Team."
+- Update the register immediately when a change in processing activities occurs, noting the trigger and
+  the new review due date.
+- Retain a dated record of each review, including any outcomes or required follow-up actions, alongside
+  the corresponding register entry.

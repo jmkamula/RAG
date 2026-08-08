@@ -1,0 +1,17 @@
+must_id: item:A.5.11:rec_post_close_review
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Post-closure verification window noted (e.g. 30-day check that no stale access reappears)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the length of the post-closure verification window, such as "30 days," in the asset return record
+  for each leaver.
+- Assign a named individual responsible for conducting the post-closure access check and record their
+  name in the leaver’s documentation.
+- Record the date when the post-closure verification is completed and note any findings or confirmation
+  that no stale access remains.
+- Avoid leaving the verification responsibility to a group or unnamed role; always specify a single accountable
+  person.

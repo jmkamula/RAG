@@ -1,0 +1,16 @@
+must_id: item:A.5.21:eol_authoriser
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: Authoriser of the replacement (or of the delay + risk acceptance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the authoriser for each ICT component replacement or delay as a specific individual, not a generic
+  role or team.
+- Record the date when the authorisation decision was made for each replacement or delay.
+- Document the risk acceptance statement if a replacement is delayed, including the reason and any mitigating
+  actions.
+- Retain a signed or digitally approved record of the authorisation decision in your asset management
+  or change control system.

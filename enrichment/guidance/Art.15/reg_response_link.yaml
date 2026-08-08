@@ -1,0 +1,19 @@
+must_id: item:Art.15:reg_response_link
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Linkage to the per-request response artifact (req:Art.15:dsar_response instance)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each data subject access request (DSAR) in the register with a unique identifier and the date
+  the request was received.
+- Cross-reference the DSAR entry to the specific response document or file, using the same unique identifier
+  for both records.
+- Name the responder who prepared and sent the response, including their full name and role, not just
+  a generic team or department.
+- Attach or link the final response artifact directly in the register, ensuring it is accessible for each
+  individual request.
+- Confirm that every DSAR entry includes a completed response artifact; do not leave any requests without
+  a documented outcome.

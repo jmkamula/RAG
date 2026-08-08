@@ -1,0 +1,41 @@
+leaf_id: req:A.5.28:evidence_custody_register
+control_ref: A.5.28
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The Evidence Custody Register must only cover evidence packages relevant to the defined ISMS
+    scope. Without a clear scope statement, you can't determine which incidents or evidence types should
+    be included.
+  good_enough: A documented scope statement exists that clearly defines the organizational boundaries
+    and activities covered by the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register provides the baseline list of information assets, including those that
+    may become evidence. You need this to identify and track evidence packages accurately in the custody
+    register.
+  good_enough: A basic asset register is in place listing key information assets, with enough detail to
+    cross-reference evidence items.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Evidence packages must be classified according to their sensitivity and type. Without a classification
+    scheme, you can't consistently record or handle evidence in the register.
+  good_enough: A documented classification scheme exists and is applied to evidence types, even if not
+    yet fully rolled out to all assets.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: The custody register must record current custodians and ensure only authorized personnel
+    handle evidence. Defined roles and responsibilities are essential for this accountability.
+  good_enough: Roles for evidence handling and register maintenance are assigned and documented, even
+    if not yet fully operational.

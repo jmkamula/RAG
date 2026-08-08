@@ -1,0 +1,41 @@
+leaf_id: req:Art.32:applicable_scope_note
+control_ref: Art.32
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date inventory of all processing activities to determine which ones fall
+    under Art.32’s security requirements. Without this, you cannot accurately define the scope for security
+    measures.
+  good_enough: A current, working RoPA that lists all major processing activities, their purposes, and
+    data categories is sufficient to proceed.
+- ref: Art.24
+  standard_id: GDPR:2016/679
+  title: Responsibility of the controller
+  category: direct
+  rationale: Art.24 sets the baseline for controller accountability, which Art.32 builds on by requiring
+    specific security measures. You must clarify who is responsible for implementing and maintaining these
+    measures.
+  good_enough: A documented assignment of controller responsibility for data protection and security,
+    even if not fully detailed, is enough to unblock this step.
+- ref: Art.25
+  standard_id: GDPR:2016/679
+  title: Data protection by design and by default
+  category: direct
+  rationale: Art.25 ensures that security and privacy are embedded in processing activities from the outset.
+    This foundation is necessary to justify and contextualize the Art.32 security measures.
+  good_enough: Evidence that privacy and security have been considered in the design of processing activities—such
+    as a summary of design decisions or risk assessments—is sufficient at this stage.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope statement helps align GDPR security obligations with the broader information
+    security management system, ensuring no relevant processing activities are missed.
+  good_enough: A draft or working ISMS scope statement that covers personal data processing environments
+    is enough to proceed.

@@ -1,0 +1,20 @@
+must_id: item:A.5.17:user_advisory
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Advisory guidance to personnel on protecting their authentication information (no sharing,
+  no re-use, password-manager guidance, compromise reporting path)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for protecting authentication information, including rules against sharing, re-use,
+  and use of password managers, in a dated written policy.
+- Name the reporting path for suspected compromise by specifying a current, individual contact person
+  and their contact details in the procedure.
+- Publish the advisory guidance to all personnel and record the date and method of distribution, such
+  as email or intranet post.
+- Retain evidence of personnel acknowledgment, such as signed forms or electronic receipts, confirming
+  they have read and understood the guidance.
+- State password-manager recommendations clearly, referencing approved solutions and prohibiting generic
+  statements like "use a secure tool."

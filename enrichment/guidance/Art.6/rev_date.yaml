@@ -1,0 +1,15 @@
+must_id: item:Art.6:rev_date
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of your Lawful Basis Program in a dated document or system entry.
+- State the planned review interval in months or years in your program documentation.
+- Confirm the review was completed within the planned interval by cross-referencing the last review date
+  and the stated interval.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Retain a copy of the completed review report with the date and reviewer’s name clearly visible.

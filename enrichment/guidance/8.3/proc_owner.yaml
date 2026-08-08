@@ -1,0 +1,17 @@
+must_id: item:8.3:proc_owner
+control_ref: '8.3'
+standard_id: ISO27001:2022
+must_text: Named owner of the procedure (Risk Manager + ops lead)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the procedure owner as a specific individual, such as the Risk Manager or operations lead, in the
+  header section of the document.
+- Record the owner's full name, job title, and contact information within the procedure to allow clear
+  identification.
+- Sign and date the procedure by the named owner to confirm acceptance of responsibility for its execution
+  and updates.
+- Avoid listing a team, department, or generic role as the owner; auditors require a clearly identified
+  person.

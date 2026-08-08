@@ -1,0 +1,19 @@
+must_id: item:Art.30:proc_update_path
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Path from trigger to register entry stated (who notifies, who reviews, who approves the entry)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person or role responsible for identifying new or changed processing activities that require
+  an entry in the RoPA.
+- Document the notification process, including how and when the responsible person informs the data protection
+  team of a required register update.
+- Assign a specific individual to review proposed register entries for completeness and accuracy before
+  approval.
+- State who has final approval authority for adding or amending entries, and record their name and approval
+  date in the procedure.
+- Avoid describing responsibilities with vague terms like "the team" or "management"—specify named roles
+  or individuals throughout the procedure.

@@ -1,0 +1,19 @@
+must_id: item:B.8.2.2:scope_own_controller
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: Own-controller carve-out — services where org acts as controller (billing / marketing to prospects)
+  excluded with rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all processing activities your organisation performs, including both customer-related and internal
+  activities, in a dated processing register.
+- Identify and mark activities where your organisation acts as the controller, such as billing or marketing
+  to prospects, in the register.
+- Document a clear rationale for excluding each controller activity from the scope, referencing relevant
+  legal or contractual obligations.
+- Name the person responsible for approving the scope and exclusions as a specific individual, not a team
+  or department.
+- Retain the signed and dated approval of the scope document, including the rationale for each exclusion.

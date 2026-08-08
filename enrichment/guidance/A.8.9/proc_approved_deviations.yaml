@@ -1,0 +1,19 @@
+must_id: item:A.8.9:proc_approved_deviations
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Approved-deviation register for assets unable to meet baseline (compensating controls + expiry)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each asset that cannot meet the configuration baseline in a dedicated deviation register, including
+  asset name, unique identifier, and location.
+- Record the compensating controls implemented for each deviation, describing how they address the specific
+  risk posed by not meeting the baseline.
+- State the expiry or review date for every approved deviation entry, ensuring that temporary exceptions
+  are time-bound.
+- Name the approving authority as a specific individual for each deviation — do not use generic titles
+  or groups.
+- Retain evidence of formal approval for each deviation, such as a signed decision or dated email from
+  the named authority.

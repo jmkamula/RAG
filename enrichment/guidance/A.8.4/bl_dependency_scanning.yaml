@@ -1,0 +1,19 @@
+must_id: item:A.8.4:bl_dependency_scanning
+control_ref: A.8.4
+standard_id: ISO27001:2022
+must_text: Dependency vulnerability scanning active per repository (SCA tool integrated)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the name and version of the software composition analysis (SCA) tool integrated with each source
+  code repository in a central register.
+- Record the date when dependency vulnerability scanning was first activated for each repository, including
+  the responsible person's name.
+- Save the most recent automated scan report for each repository, showing detected vulnerabilities and
+  remediation status.
+- Name the repository owner as a specific individual responsible for monitoring scan results, not as a
+  team or generic role.
+- Confirm that scan integration settings are enabled in the repository configuration and capture a screenshot
+  as evidence.

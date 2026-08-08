@@ -1,0 +1,17 @@
+must_id: item:A.7.4.8:proc_technique_selection
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Technique selection factors (nature + extent of PII + metadata associations + media characteristics)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the specific factors considered when choosing PII disposal techniques, including the type of PII,
+  amount, metadata links, and storage media.
+- Document the rationale for each disposal method selection in the procedure, referencing how each factor
+  influenced the decision.
+- Name the individual responsible for evaluating and approving disposal techniques, ensuring a specific
+  person is identified rather than a group or department.
+- Attach a dated record of the most recent review or update of the procedure, showing when factors and
+  techniques were last reassessed.

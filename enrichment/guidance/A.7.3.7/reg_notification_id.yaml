@@ -1,0 +1,16 @@
+must_id: item:A.7.3.7:reg_notification_id
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Unique notification identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique notification identifier to each new entry in the Third-Party Notification Register,
+  ensuring no duplicates exist.
+- Record the assigned identifier alongside the notification date and third-party name in the register.
+- Cross-reference each identifier with supporting documentation, such as notification emails or letters,
+  to confirm traceability.
+- Avoid using generic or repeating identifiers such as "N/A" or "0001" for multiple entries, as auditors
+  will flag non-unique values.

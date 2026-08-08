@@ -1,0 +1,17 @@
+must_id: item:Art.43:accreditation
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Accreditation per Art.43.1 (by SA OR by national accreditation body per ISO 17065)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the certification body and specify the exact accreditation authority, either the national data
+  protection authority or national accreditation body.
+- Document the accreditation certificate number, date of issue, and expiration date in your certification
+  body procedure file.
+- Cross-reference the accreditation to ISO 17065 by attaching a copy of the accreditation decision or
+  certificate.
+- State the legal basis for accreditation by citing GDPR Article 43.1 directly in the procedure documentation.
+- Name the accreditation owner as a specific individual, not a department or generic title.

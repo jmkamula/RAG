@@ -1,0 +1,18 @@
+must_id: item:Art.36:scope_ms_law
+control_ref: Art.36
+standard_id: GDPR:2016/679
+must_text: MS law Art.36.5 additional consultation triggers identified per applicable jurisdiction
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each country where your processing activities occur and list the relevant national laws that
+  expand consultation triggers under GDPR Article 36.5.
+- Document the exact wording of each additional consultation trigger from national law, citing the legal
+  reference and effective date.
+- Name the person responsible for monitoring changes in national consultation requirements, specifying
+  their full name and job title.
+- Record the date when your organisation last reviewed national laws for new or updated Article 36.5 triggers.
+- Avoid listing only "GDPR" or "EU law" without specifying country-level requirements, as auditors will
+  flag missing local legal detail.

@@ -1,0 +1,18 @@
+must_id: item:10.2:react
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: React to the nonconformity — control, correct, and deal with consequences
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each identified nonconformity with a unique reference number, description, date of discovery,
+  and the person who reported it.
+- Record the immediate actions taken to control or contain the nonconformity, including dates and names
+  of responsible individuals.
+- State the corrective actions implemented to address and correct the root cause, with details of who
+  approved and executed each action.
+- Name the owner of each nonconformity as a specific individual, not a group or department.
+- Retain evidence of the consequences addressed, such as communications, incident logs, or impact assessments,
+  with clear dates and sign-offs.

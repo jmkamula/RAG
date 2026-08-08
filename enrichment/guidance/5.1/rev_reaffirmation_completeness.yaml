@@ -1,0 +1,19 @@
+must_id: item:5.1:rev_reaffirmation_completeness
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Reaffirmation record completeness — required reaffirmations all present
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all required reaffirmations for the leadership program in a master checklist, including responsible
+  individuals and due dates.
+- Collect signed and dated reaffirmation records from each required participant, matching each to the
+  corresponding item on the checklist.
+- Cross-reference each reaffirmation record with the relevant section of the leadership program documentation
+  to confirm alignment.
+- Flag and resolve any missing or unsigned reaffirmations before finalizing the review—do not leave checklist
+  items incomplete or marked as "pending."
+- Retain the completed checklist and all supporting reaffirmation records together in a single, easily
+  accessible location.

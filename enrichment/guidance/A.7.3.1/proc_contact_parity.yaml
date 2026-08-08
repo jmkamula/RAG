@@ -1,0 +1,20 @@
+must_id: item:A.7.3.1:proc_contact_parity
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Contact-point parity — contact channel matches PII-collection channel (email if collected by
+  email, web if collected via web; not phone/fax fallback)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each channel used to collect personal data, such as email, web form, or paper, in a dated register
+  entry.
+- Document the corresponding contact method for each channel, ensuring it matches the original collection
+  method, in your obligations procedure.
+- Name the responsible individual who reviews and updates the contact channels, avoiding generic roles
+  like "the team" or "IT department."
+- Record the latest review date and any changes to contact channels in a version-controlled procedure
+  document.
+- Cross-reference your published contact information with the register to confirm no fallback to unrelated
+  channels like phone or fax.

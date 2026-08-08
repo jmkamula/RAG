@@ -1,0 +1,18 @@
+must_id: item:9.3:scope_optional_inputs
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Optional / organisation-determined inputs enumerated (sectoral threat intel, M&A pipeline,
+  regulator engagements)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all optional management review input topics your organisation considers, such as sector-specific
+  threats, planned acquisitions, or recent regulator interactions, in a dated document.
+- Document the rationale for including or excluding each optional input, referencing relevant business
+  context or risk assessments in the same record.
+- Name the person responsible for reviewing and updating the list of optional inputs—do not use a group
+  or department name.
+- Attach evidence of management review discussion or decisions about these optional inputs, such as meeting
+  minutes or signed review notes, to the documented scope.

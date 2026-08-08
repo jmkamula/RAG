@@ -1,0 +1,16 @@
+must_id: item:7.2:rev_date
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the competence program in a dated document, such as meeting minutes
+  or a review log.
+- State the planned review interval for the competence program in a formally approved policy or schedule.
+- Confirm the next scheduled review date is within the documented interval by cross-referencing the last
+  review date and the planned frequency.
+- Name the reviewer or review team as specific individuals in the review record, avoiding generic titles
+  like "HR" or "the team."

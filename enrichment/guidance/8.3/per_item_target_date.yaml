@@ -1,0 +1,17 @@
+must_id: item:8.3:per_item_target_date
+control_ref: '8.3'
+standard_id: ISO27001:2022
+must_text: Per-treatment-item target completion date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a specific target completion date for each risk treatment item in the operational risk treatment
+  register.
+- Name the person responsible for each risk treatment item, ensuring it is an individual and not a group
+  or department.
+- Document any changes to target completion dates with the date of change and the reason, keeping a clear
+  history in the register.
+- Cross-reference each risk treatment item to supporting evidence showing progress or completion, such
+  as meeting notes or status updates.

@@ -1,0 +1,17 @@
+must_id: item:7.1:approved_by
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Approving authority recorded (top management for budget allocations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the approving authority for ISMS resource allocations as a specific member of top management, not
+  a generic title or group.
+- Record the date and details of each budget allocation approval in a dedicated ISMS Resource Allocation
+  Record.
+- Attach a signed approval document or email from the named top management authority for each allocation
+  entry.
+- Cross-reference each allocation entry with the corresponding ISMS project or initiative to show alignment
+  with organisational objectives.

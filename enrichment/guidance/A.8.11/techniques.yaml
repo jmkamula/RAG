@@ -1,0 +1,20 @@
+must_id: item:A.8.11:techniques
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Masking techniques approved (static / dynamic / tokenisation / pseudonymisation / synthetic
+  data)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the approved data masking techniques in the procedure, specifying whether static masking, dynamic
+  masking, tokenisation, pseudonymisation, or synthetic data is used.
+- Name the individual or role responsible for reviewing and approving the selection of masking techniques,
+  and record the approval date.
+- Cross-reference each masking technique in the procedure to the relevant legal or regulatory requirement,
+  such as SPEC_ART_25, to show applicability.
+- Attach evidence of management approval for the documented masking techniques, such as a signed decision
+  or meeting minutes.
+- State the version and review date of the procedure; avoid using undated or generic templates that do
+  not reflect your organisation’s actual practices.

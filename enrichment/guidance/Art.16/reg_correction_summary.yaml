@@ -1,0 +1,18 @@
+must_id: item:Art.16:reg_correction_summary
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Per-row summary of correction made
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific data field(s) corrected for each rectification request, including both the original
+  and updated values, in the register.
+- Document the date the correction was made and the name of the person who performed the update for each
+  entry.
+- Summarize the reason for the correction in a dedicated column, using clear and specific language.
+- Attach supporting evidence, such as email confirmation or signed request, to each register entry for
+  traceability.
+- Name the individual responsible for approving each correction, avoiding generic titles like "team" or
+  "admin".

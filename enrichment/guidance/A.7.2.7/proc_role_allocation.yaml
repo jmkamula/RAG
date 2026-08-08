@@ -1,0 +1,19 @@
+must_id: item:A.7.2.7:proc_role_allocation
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Role + responsibility allocation (security / notice / rights fulfilment / breach notification
+  / DPIA)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Name each joint PII controller and assign a specific individual as the primary contact for each organisation
+  in the arrangement.
+- Document the allocation of responsibilities for security, privacy notices, rights fulfilment, breach
+  notification, and DPIA in a signed agreement.
+- State the process for resolving disputes or ambiguities in role allocation, including escalation contacts
+  and decision-making authority.
+- Record the date of the most recent review and approval of the joint controller arrangement by all parties.
+- Avoid using vague terms like "the team" or "department" when assigning responsibilities; specify named
+  individuals or roles.

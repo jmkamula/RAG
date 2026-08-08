@@ -1,0 +1,18 @@
+must_id: item:B.8.5.2:reg_role
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+must_text: Role per row (direct storage / subprocessor / support access)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processor transfer destination as a separate row in the register, clearly identifying the
+  entity by legal name and location.
+- Specify the role for each destination in its row, choosing only from 'direct storage', 'subprocessor',
+  or 'support access'.
+- Name the responsible individual who assigned the role for each entry, avoiding generic titles like 'IT
+  team' or 'Operations'.
+- Record the date when each role assignment was last reviewed or updated in the register.
+- Cross-reference each entry with supporting documentation, such as contracts or data flow diagrams, to
+  confirm the assigned role matches actual processing activities.

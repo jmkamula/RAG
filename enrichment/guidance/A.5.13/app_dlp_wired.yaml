@@ -1,0 +1,16 @@
+must_id: item:A.5.13:app_dlp_wired
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: DLP-rule-wired flag per record where the platform supports DLP enforcement of labels
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each platform's ability to enforce labels using Data Loss Prevention (DLP) by recording a clear
+  yes/no flag for every platform in your application record.
+- Name the individual responsible for verifying and updating the DLP enforcement flag for each platform,
+  ensuring accountability.
+- Record the date when the DLP enforcement status was last reviewed or changed for each platform entry.
+- Avoid marking the DLP enforcement flag as "unknown" or leaving it blank; always select a definitive
+  yes or no value.

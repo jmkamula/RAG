@@ -1,0 +1,20 @@
+must_id: item:A.6.6:reg_breach_log
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Per-row breach log (any suspected breach of NDA terms recorded with investigation outcome and
+  enforcement decision)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each suspected breach of NDA terms as a new entry in the NDA Signature Register, including the
+  date the breach was identified.
+- Document the details of the investigation for each breach, naming the investigator and summarizing findings
+  in the corresponding register row.
+- State the enforcement decision for each breach, including any disciplinary or remedial actions taken,
+  and record the decision date.
+- Name the individual who approved the enforcement decision for each breach, avoiding generic titles or
+  group names.
+- Attach supporting evidence for each breach entry, such as investigation reports or correspondence, and
+  cross-reference these documents in the register row.

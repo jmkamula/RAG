@@ -1,0 +1,18 @@
+must_id: item:A.5.9:owner_per_asset
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Owner named per asset (individual or role accountable for protection and risk decisions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each information asset and associated asset in an inventory, assigning a unique entry for every
+  item.
+- Name the owner for each asset as a specific individual or clearly defined role responsible for protection
+  and risk decisions.
+- Record the date when each owner assignment was last reviewed or updated in the inventory.
+- Avoid using vague terms like "the team" or "IT department" as owners; specify a person or formal role
+  title for each asset.
+- Cross-reference the inventory with supporting documentation, such as job descriptions or appointment
+  letters, to confirm the owner's accountability.

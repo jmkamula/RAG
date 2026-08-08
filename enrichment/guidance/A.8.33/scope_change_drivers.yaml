@@ -1,0 +1,16 @@
+must_id: item:A.8.33:scope_change_drivers
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new data class, new test pattern — e.g. AI-training data)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific events that require re-scoping, such as introduction of new data types, new test patterns,
+  or use of data for AI training.
+- Document the trigger list in a dated, version-controlled register or policy, accessible to relevant
+  stakeholders.
+- Assign a named individual responsible for reviewing and updating the trigger list when changes occur.
+- Record each update to the trigger list with the date, the change made, and the person who approved it.
+- Name the owner as a specific individual — not a team or department — to avoid ambiguity in accountability.

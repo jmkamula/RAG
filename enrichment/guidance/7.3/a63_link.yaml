@@ -1,0 +1,19 @@
+must_id: item:7.3:a63_link
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Integration with A.6.3 operational awareness training programme (where merged delivery is used)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document how the ISMS awareness programme content aligns with the operational awareness training topics
+  covered under control A.6.3.
+- Cross-reference the ISMS awareness training schedule with the operational training calendar, showing
+  merged sessions where applicable.
+- Name the person responsible for coordinating the integration of ISMS and operational training, specifying
+  their role and contact details.
+- Retain attendance records for all merged training sessions, clearly indicating which controls and topics
+  were addressed.
+- State explicitly in the programme documentation that integration with A.6.3 has been achieved, avoiding
+  generic statements that could apply to any training.

@@ -1,0 +1,39 @@
+leaf_id: req:A.8.3:access_restriction_program_review
+control_ref: A.8.3
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.15
+  standard_id: ISO27001:2022
+  title: Access control
+  category: direct
+  rationale: The access control policy defines how access restrictions are structured and enforced, providing
+    the baseline against which the periodic review must be conducted.
+  good_enough: A documented, current access control policy exists and is accessible to reviewers; it does
+    not need to be perfect, but it must reflect the actual access model in use.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: The asset register lists the information assets subject to access restrictions, ensuring
+    the review covers all relevant systems and data.
+  good_enough: A reasonably up-to-date asset register exists, covering major systems and data types; minor
+    gaps are acceptable if they do not affect core access controls.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: The classification scheme determines which assets require heightened access restrictions,
+    guiding the scope and focus of the review.
+  good_enough: There is a documented classification scheme that is in use for at least the most sensitive
+    assets; it does not need to be exhaustive.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that the right people are accountable
+    for enforcing and reviewing access restrictions.
+  good_enough: Roles and responsibilities for access management and review are documented and assigned,
+    even if not all edge cases are covered.

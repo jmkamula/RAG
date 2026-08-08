@@ -1,0 +1,19 @@
+must_id: item:A.8.14:rev_baseline_update
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Baseline / runbook updates published from findings
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and results of each redundancy program review in a central log, including any identified
+  gaps or improvement areas.
+- Assign a named individual to update the baseline or runbook with specific changes resulting from the
+  review findings.
+- Publish the revised baseline or runbook with a new version number and date, making it accessible to
+  all relevant staff.
+- Record evidence that the updated baseline or runbook was communicated to all affected teams, such as
+  an email distribution list or meeting minutes.
+- Name the owner responsible for approving runbook updates as a specific person, not a group or generic
+  title.

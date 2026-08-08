@@ -1,0 +1,41 @@
+leaf_id: req:A.7.4.6:program_review
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: The temp files program review depends on knowing what temporary files and storage locations
+    exist. Without an up-to-date asset register, you can't verify if all relevant temp files are being
+    managed and reviewed.
+  good_enough: A current list of systems and storage locations where temp files are created or stored,
+    even if not fully detailed, is available to guide the review.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: You need to know how temp files are classified to determine appropriate retention and disposal
+    periods. The review process relies on these classifications to check if handling matches policy.
+  good_enough: A documented scheme that covers temp files and indicates their sensitivity and required
+    handling, even if some categories are broad.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: Understanding why temp files are created and retained is essential for reviewing if their
+    retention and disposal align with privacy requirements. The review can't assess appropriateness without
+    this context.
+  good_enough: A brief documented statement of the purposes for which temp files are created and kept,
+    covering main business processes.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: foundational
+  rationale: The review must check if temp file retention is justified under a lawful basis. Without this,
+    you can't assess compliance or necessity.
+  good_enough: A list or mapping of lawful bases for temp file retention, even if some are provisional
+    or high-level.

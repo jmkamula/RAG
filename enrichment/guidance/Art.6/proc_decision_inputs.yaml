@@ -1,0 +1,17 @@
+must_id: item:Art.6:proc_decision_inputs
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Decision inputs documented (activity purpose, data minimisation alternatives, subject expectations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific purpose for each processing activity in a dated record, linking it to the relevant
+  business function or project.
+- List and describe any alternative approaches considered to minimise personal data used, including reasons
+  for rejecting each alternative.
+- Record how you assessed the reasonable expectations of data subjects regarding the processing, citing
+  sources such as privacy notices or surveys.
+- Name the decision-maker as a specific individual, not a group or department, and include their signature
+  and decision date.

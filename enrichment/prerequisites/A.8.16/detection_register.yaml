@@ -1,0 +1,39 @@
+leaf_id: req:A.8.16:detection_register
+control_ref: A.8.16
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of your organization and which assets are in-scope for security
+    monitoring before cataloguing detection use-cases. The register is only meaningful if it aligns with
+    the defined ISMS scope.
+  good_enough: A clear, approved scope statement that identifies the organizational and technical boundaries
+    for the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: Detection use-cases must reference specific assets or asset types. Without an up-to-date
+    asset register, you can't reliably map detections to what they protect.
+  good_enough: A basic, current list of key information assets and systems, sufficient to link detection
+    rules to asset coverage.
+- ref: A.8.15
+  standard_id: ISO27001:2022
+  title: Logging
+  category: direct
+  rationale: You can't define or catalogue detection use-cases without knowing what logging data is available.
+    Logging is the raw input for detection rules.
+  good_enough: Documented logging sources and coverage for in-scope systems, even if not fully comprehensive.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Detection priorities should be risk-driven. Without a risk assessment, you can't justify
+    which threats or events your detection use-cases address.
+  good_enough: A recent risk assessment identifying key threats and risks to in-scope assets, enough to
+    inform detection priorities.

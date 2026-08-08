@@ -1,0 +1,19 @@
+must_id: item:Art.15:rev_timing
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Timing metric — percentage within one month, count of extensions used, count of late responses
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each data subject access request (DSAR) is received and the date the response is sent
+  in a central log.
+- Calculate and document the percentage of DSARs responded to within one month, referencing the dates
+  in your log.
+- Track and note the number of times an extension was used, including the reason and the new response
+  deadline for each case.
+- List the count of DSARs where the response was sent after the allowed timeframe, with an explanation
+  for each late response.
+- Name the individual responsible for maintaining and updating the DSAR timing metrics — do not leave
+  ownership as "the team" or "admin".

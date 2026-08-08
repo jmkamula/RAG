@@ -1,0 +1,15 @@
+must_id: item:A.8.26:rev_next_date
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for application security requirements in the review record or tracking
+  document.
+- Name the person responsible for conducting the next review as a specific individual, not a team or department.
+- Record the date this next review date was set, along with who approved it, in the same document.
+- Cross-reference the review schedule with your organisation’s compliance calendar to confirm alignment
+  with other security activities.

@@ -1,0 +1,19 @@
+must_id: item:A.7.2.3:reg_channel_id
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: Channel identifier per row (web signup / iOS app onboarding / support-call recording opt-in)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific channel used to collect consent for each entry, such as "web signup," "iOS app onboarding,"
+  or "support-call recording opt-in."
+- Cross-reference each consent record with a timestamp and user identifier to enable traceability back
+  to the original consent event.
+- Name the channel clearly for each row—avoid generic labels like "online" or "app" that do not distinguish
+  between different consent mechanisms.
+- Document the person responsible for maintaining the register, listing their full name and role, not
+  just a department or team.
+- Retain evidence of any changes to channel identifiers in the register, including the date and person
+  making the update.

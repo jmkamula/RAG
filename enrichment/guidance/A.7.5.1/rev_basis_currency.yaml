@@ -1,0 +1,18 @@
+must_id: item:A.7.5.1:rev_basis_currency
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: Basis currency — Art.45 adequacy decisions still in force (Privacy Shield lessons apply)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the current legal basis for each international data transfer, citing the specific adequacy
+  decision or mechanism in use.
+- Confirm and record the date each adequacy decision was last checked for validity and legal standing.
+- Name the individual responsible for monitoring changes to adequacy decisions, ensuring this is a specific
+  person, not a team or department.
+- Retain evidence of periodic reviews, such as meeting minutes or review logs, showing that adequacy status
+  is actively monitored.
+- Flag and update any transfer relying on a framework that has been invalidated, such as Privacy Shield,
+  to prevent reliance on outdated mechanisms.

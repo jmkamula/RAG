@@ -1,0 +1,40 @@
+leaf_id: req:Art.47:bcr_procedure
+control_ref: Art.47
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of all processing activities to identify which data flows
+    and transfers will be covered by the Binding Corporate Rules. Without this, you can't scope or justify
+    the BCRs.
+  good_enough: A current, reasonably complete RoPA that maps out all intra-group transfers and the relevant
+    entities involved.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: BCRs only apply to processing that is lawful under GDPR. You must confirm that all processing
+    activities covered by the BCRs have a valid legal basis.
+  good_enough: Documented lawful bases for each relevant processing activity, even if not yet formally
+    reviewed by legal.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer Designation
+  category: foundational
+  rationale: A DPO is required to oversee and advise on GDPR compliance, including the creation and maintenance
+    of BCRs. The DPO will be a key stakeholder in drafting and implementing the BCR procedure.
+  good_enough: A named DPO (internal or external) with contact details and a basic understanding of their
+    responsibilities.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which parts of the organization and which data flows are covered by
+    security controls. This helps align the BCRs with existing security boundaries and ensures consistency.
+  good_enough: A documented ISMS scope that at least identifies the group entities and processing environments
+    relevant to the BCRs.

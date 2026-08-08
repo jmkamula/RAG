@@ -1,0 +1,17 @@
+must_id: item:9.2:rec_mgmt_review_link
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Per-audit reference number cited in the next 9.3 management review
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique reference number to each internal audit and record it on the official audit execution
+  document.
+- Cross-reference the audit’s unique reference number in the agenda or minutes of the next management
+  review meeting.
+- Document the date and names of participants present when the audit reference number was discussed during
+  the management review.
+- Avoid using generic or recycled reference numbers—each audit must have its own distinct identifier clearly
+  visible in both records.

@@ -1,0 +1,17 @@
+must_id: item:A.8.24:roles
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Roles + responsibilities for cryptography (key custodian / approver / operator)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the key custodian, approver, and operator as specific individuals in the policy, avoiding generic
+  titles like "IT team" or "management".
+- Document each person's responsibilities for cryptographic key management, including approval, operation,
+  and custody, in a dated policy section.
+- Record the date and version of the policy where these roles and responsibilities are assigned for future
+  reference.
+- Obtain a signature or written approval from senior management confirming the assignment of these cryptography
+  roles.

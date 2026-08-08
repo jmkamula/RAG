@@ -1,0 +1,18 @@
+must_id: item:A.6.3:scope_module_catalogue
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Module catalogue stated (every training module the org delivers — baseline awareness, role-specific
+  deep dives, special topics — DPbD, secure coding, fraud, PII handling)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every training module delivered, including baseline awareness, role-specific sessions, and special
+  topics such as data protection, secure coding, fraud, and PII handling.
+- Document the intended audience for each module, specifying roles or departments rather than using generic
+  terms like "all staff" or "the team."
+- Record the date each module was last updated and the person responsible for maintaining its content.
+- Cross-reference each module to its relevant compliance requirement or business need in the catalogue.
+- Retain a signed approval from a designated authority confirming the accuracy and completeness of the
+  current module catalogue.

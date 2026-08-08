@@ -1,0 +1,18 @@
+must_id: item:Art.41:reg_activity_type
+control_ref: Art.41
+standard_id: GDPR:2016/679
+must_text: Per-row activity (eligibility check / periodic monitoring / complaint / infringement action)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the type of monitoring activity for each row, specifying if it is an eligibility check, periodic
+  monitoring, complaint, or infringement action.
+- Document the date and time when each activity was performed to provide a clear timeline of monitoring
+  actions.
+- Name the individual responsible for carrying out each activity, avoiding generic entries such as "the
+  team" or "staff".
+- State the outcome or decision for each activity, including any follow-up actions or resolutions taken.
+- Retain supporting evidence for each activity, such as correspondence, reports, or decision documents,
+  and reference them in the record.

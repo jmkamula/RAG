@@ -1,0 +1,41 @@
+leaf_id: req:6.1.3:risk_treatment_plan
+control_ref: 6.1.3
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: direct
+  rationale: You need a completed risk assessment to identify which risks require treatment and to inform
+    the selection of treatment options. The risk treatment plan cannot be drafted until you know what
+    risks exist and their assessed levels.
+  good_enough: A documented risk assessment with a populated risk register, showing identified risks and
+    their risk levels, is sufficient to proceed.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines the boundaries of your ISMS, ensuring the risk treatment plan
+    only covers relevant assets, processes, and locations. Without a clear scope, your plan may miss critical
+    areas or overreach.
+  good_enough: A written scope statement that identifies what is in and out of scope for the ISMS, even
+    if high-level, is enough to start drafting the plan.
+- ref: '5.1'
+  standard_id: ISO27001:2022
+  title: Leadership and Commitment
+  category: foundational
+  rationale: Risk treatment often requires resources, approvals, and support from top management. Without
+    leadership commitment, your plan may not be actionable or funded.
+  good_enough: Documented evidence (such as meeting minutes or a signed policy) that top management is
+    aware of and supports the ISMS and its risk treatment activities is sufficient.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register ensures that all relevant information assets are considered
+    in the risk treatment plan. Missing assets could result in untreated risks.
+  good_enough: A basic, current list of key information assets, even if not fully detailed, is enough
+    to proceed with risk treatment planning.

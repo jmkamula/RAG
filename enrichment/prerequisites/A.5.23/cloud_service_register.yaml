@@ -1,0 +1,42 @@
+leaf_id: req:A.5.23:cloud_service_register
+control_ref: A.5.23
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: Knowing which cloud services are in use depends on understanding the boundaries of your ISMS—what
+    business units, processes, and systems are in scope. Without this, your register risks being incomplete
+    or misaligned.
+  good_enough: A documented scope statement that clearly defines which parts of the organization and IT
+    landscape are included in the ISMS, especially as it relates to cloud usage.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The cloud service register builds on your asset register, which should already list key information
+    assets and their locations. This ensures you don't miss cloud services that are already recognized
+    as assets.
+  good_enough: An up-to-date asset register that at least identifies major cloud services and platforms
+    in use, even if not all metadata is complete.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: To record what classification of data each cloud service holds, you need a working data classification
+    scheme. This enables accurate tagging and risk assessment for each service in the register.
+  good_enough: A basic, documented classification scheme that defines at least 2-3 levels of data sensitivity
+    and is referenced in asset or service inventories.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding the risks associated with cloud services—such as data residency, shared responsibility,
+    or vendor lock-in—requires a risk assessment process. This informs what details to capture in the
+    register.
+  good_enough: A recent risk assessment that covers at least the main categories of cloud service risk
+    relevant to your organization, even if not every service is individually assessed yet.

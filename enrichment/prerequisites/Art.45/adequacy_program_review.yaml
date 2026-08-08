@@ -1,0 +1,41 @@
+leaf_id: req:Art.45:adequacy_program_review
+control_ref: Art.45
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.44
+  standard_id: GDPR:2016/679
+  title: General principle for transfers
+  category: direct
+  rationale: You must confirm that all international data transfers are permitted only when the conditions
+    in Chapter V are met. This principle is the legal foundation for relying on adequacy decisions under
+    Art.45.
+  good_enough: Document a clear policy or procedure that restricts international transfers to those allowed
+    under GDPR Chapter V, with staff aware of this baseline requirement.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need up-to-date records of processing activities to identify which data flows involve
+    international transfers and which recipients rely on adequacy decisions. Without this, you can't meaningfully
+    review adequacy status.
+  good_enough: Maintain a current RoPA that lists all international data transfers and their legal bases,
+    even if some details are still being finalized.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: You must know the lawful basis for each processing activity, including those involving international
+    transfers, to ensure that adequacy reviews are only applied where appropriate.
+  good_enough: Identify and document the lawful basis for each processing activity, especially those involving
+    cross-border transfers, at least at a summary level.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: A clear ISMS scope ensures you know which organizational units and processing activities
+    are covered by your compliance program, so your adequacy review is complete and not missing any transfers.
+  good_enough: Have a documented ISMS scope that includes all business units and systems involved in international
+    data transfers, even if the scope is still being refined.

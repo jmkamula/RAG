@@ -1,0 +1,18 @@
+must_id: item:9.2:rec_findings
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Per-audit findings list (conformities + nonconformities + observations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each audit finding individually, clearly labelling it as a conformity, nonconformity, or observation,
+  in the internal audit execution record.
+- State the evidence or observation that supports each finding, referencing specific documents, interviews,
+  or records reviewed during the audit.
+- Name the auditor(s) responsible for each finding, ensuring a specific individual is listed rather than
+  a generic team or department.
+- Date each finding to show when it was identified during the audit process.
+- Review the findings list to confirm that no findings are described in vague or generic terms that could
+  apply to any audit or organisation.

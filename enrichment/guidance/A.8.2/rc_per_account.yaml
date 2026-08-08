@@ -1,0 +1,19 @@
+must_id: item:A.8.2:rc_per_account
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Per-privileged-account outcome (re-confirmed / amended / revoked)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each privileged account in a register, including the account name, assigned user, and current access
+  level.
+- Record the outcome of the recertification for each account as "re-confirmed," "amended," or "revoked,"
+  with the date of review.
+- Name the reviewer as a specific individual who made the recertification decision for each account, not
+  a generic team or department.
+- Retain evidence of any changes made, such as screenshots or system logs, showing access amendments or
+  revocations.
+- Sign off the completed register with the reviewer’s name and date to confirm all accounts were individually
+  assessed.

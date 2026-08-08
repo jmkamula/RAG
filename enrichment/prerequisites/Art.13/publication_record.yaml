@@ -1,0 +1,44 @@
+leaf_id: req:Art.13:publication_record
+control_ref: Art.13
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.12
+  standard_id: GDPR:2016/679
+  title: Transparent information, communication and modalities for the exercise of the rights of the data
+    subject
+  category: direct
+  rationale: Art.12 defines the required qualities for providing privacy notice information under Art.13
+    — it must be concise, transparent, intelligible, and easily accessible. You can't prove your notice
+    is properly published unless you know and meet these standards.
+  good_enough: A summary of how your privacy notice is made accessible and understandable to data subjects,
+    with reference to language, format, and access points, is documented.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of processing
+  category: direct
+  rationale: Art.13.1(c)-(d) requires you to disclose the lawful basis for processing and, where relevant,
+    legitimate interests. You can't publish a compliant privacy notice without first determining and recording
+    your lawful bases.
+  good_enough: A list of processing activities with their corresponding lawful bases is available, even
+    if not yet fully mapped to every data flow.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: A current record of processing activities (RoPA) ensures you know what data you process,
+    for what purposes, and with whom it's shared — all details that must be reflected in the privacy notice
+    and its publication record.
+  good_enough: A basic RoPA exists, listing core processing activities and key data flows, even if some
+    details are still being refined.
+- ref: Art.13
+  standard_id: GDPR:2016/679
+  title: Information to be provided where personal data are collected from the data subject
+  category: direct
+  rationale: You need a finalized version of your privacy notice content (as required by Art.13) before
+    you can record its publication details. The publication record is meaningless without an actual notice
+    to reference.
+  good_enough: A draft or approved privacy notice text exists, covering all required Art.13 elements,
+    even if minor edits are pending.

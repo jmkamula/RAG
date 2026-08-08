@@ -1,0 +1,18 @@
+must_id: item:A.6.8:timeliness
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Timeliness expectation (e.g. as soon as practicable, within N hours of awareness; tighter for
+  active-attack indicators)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the maximum allowed time between awareness of a security event and initial reporting in the procedure,
+  using a specific number of hours or minutes.
+- Document separate, shorter reporting timeframes for indicators of active attack, such as within 30 minutes
+  of detection.
+- Name the person or role responsible for monitoring timeliness of event reporting, listing them by name
+  or unique job title.
+- Record the procedure version and approval date, ensuring the timeliness expectations are present and
+  not left as placeholders or generic terms like "as soon as possible."

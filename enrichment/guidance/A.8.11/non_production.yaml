@@ -1,0 +1,17 @@
+must_id: item:A.8.11:non_production
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Non-production environments explicitly covered (dev / test / staging / training / demo)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that data masking is mandatory for all non-production environments, including
+  development, testing, staging, training, and demo systems.
+- List each non-production environment by name and describe how data masking is applied in each, referencing
+  relevant systems or applications.
+- Assign a named individual responsible for implementing and verifying data masking in non-production
+  environments, not just a team or department.
+- Attach a dated record of the most recent review or update of the data masking procedure, showing explicit
+  inclusion of non-production environments.

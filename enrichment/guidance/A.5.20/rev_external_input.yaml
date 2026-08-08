@@ -1,0 +1,19 @@
+must_id: item:A.5.20:rev_external_input
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: External counsel or industry-benchmark input considered
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to coordinate the supplier agreement template review and record their name
+  and review period in a tracking log.
+- Document the date and source of external counsel or industry-benchmark input consulted during the review
+  in the review report.
+- Attach or reference the specific external advice or benchmark documentation used, ensuring it is relevant
+  to your sector and agreement type.
+- Record the decision and any changes made to the template based on the external input, including who
+  approved them and when.
+- Name the external input source specifically—avoid vague references like "industry feedback" or "legal
+  team" without clear attribution.

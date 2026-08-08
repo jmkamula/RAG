@@ -1,0 +1,19 @@
+must_id: item:A.5.5:rev_per_entry
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Per-entry outcome (verified / amended / removed) and the verification method used
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name and contact details of each authority in the register, including the date of the
+  last verification.
+- Document the outcome for each authority entry as "verified," "amended," or "removed," with a brief explanation
+  for the decision.
+- Specify the verification method used for each entry, such as direct email confirmation, phone call,
+  or checking an official website.
+- Name the reviewer who performed the check for each entry, ensuring a specific individual is listed rather
+  than a team or department.
+- Retain supporting evidence of verification, such as email correspondence or screenshots, linked to each
+  authority entry in the register.

@@ -1,0 +1,17 @@
+must_id: item:B.8.2.4:rev_trigger_health
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Trigger health — sample of high-risk instruction categories reviewed for missed infringement
+  flags
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify a specific individual responsible for coordinating the review of high-risk instruction categories
+  and record their name in the review log.
+- List and date the high-risk instruction categories selected for sampling in a documented review plan.
+- Record the sample size, selection criteria, and rationale for each category in the review documentation.
+- Document findings for each sampled instruction, noting any missed infringement flags and the date of
+  discovery.
+- Sign and date the final review summary, confirming completion and listing all participants by name.

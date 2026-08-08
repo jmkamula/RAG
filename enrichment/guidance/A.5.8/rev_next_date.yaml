@@ -1,0 +1,15 @@
+must_id: item:A.5.8:rev_next_date
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date in the project-security program review document, using a clear and
+  specific calendar date.
+- Record who set the next review date by naming the responsible individual and including their job title.
+- Sign and date the review document to confirm when the next review date was established.
+- Name the owner as a specific individual — not a group, team, or department — responsible for scheduling
+  the next review.

@@ -1,0 +1,16 @@
+must_id: item:A.5.5:scope_jurisdictions
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Jurisdictions covered (HQ, places of business, customer locations) — each maps to one or more
+  authorities
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each country, state, or region where your organisation has a headquarters, branch, or serves customers
+  in a dated register.
+- Map every listed jurisdiction to the specific legal, regulatory, or contractual authorities that apply,
+  recording the authority name and reference.
+- Name the person responsible for maintaining this register as a specific individual, not a team or department.
+- Review and update the register at least annually, recording the review date and the reviewer’s name.

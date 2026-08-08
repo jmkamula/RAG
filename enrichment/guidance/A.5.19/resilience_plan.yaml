@@ -1,0 +1,19 @@
+must_id: item:A.5.19:resilience_plan
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Backup or alternative supplier processes / treatment of supplier disruption
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for identifying backup or alternative suppliers when a critical supplier is disrupted,
+  including clear decision criteria and responsible roles.
+- Name the individual responsible for activating backup supplier arrangements, listing their full name
+  and job title in the procedure.
+- Record the date when the backup or alternative supplier process was last tested or reviewed, attaching
+  supporting evidence such as test reports or meeting minutes.
+- State the specific steps to follow if no backup supplier exists, including escalation paths and risk
+  acceptance documentation signed by a senior manager.
+- Avoid using generic statements like "alternative suppliers will be used"—specify named suppliers or
+  detailed sourcing procedures tailored to your organisation.

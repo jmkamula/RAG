@@ -1,0 +1,19 @@
+must_id: item:10.2:scope_10_1_boundary
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: 10.1 boundary — observations / opportunities / non-conforming-but-acceptable findings route
+  to 10.1, NCs route here
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for routing observations, opportunities, and non-conforming-but-acceptable findings
+  to the 10.1 boundary, and non-conformities to the 10.2 process.
+- Cross-reference each observation, opportunity, and non-conforming-but-acceptable finding in your register
+  with evidence of its routing decision and date.
+- Record each non-conformity with a unique identifier, the date it was logged, and the individual responsible
+  for follow-up.
+- Name the owner of the routing process as a specific individual, not a team or department.
+- Retain evidence of periodic review showing that all findings have been correctly routed according to
+  the documented process.

@@ -1,0 +1,18 @@
+must_id: item:Art.39:scope_additional_tasks
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Additional tasks beyond Art.39.1 (if any) consistent with Art.38.6 no-conflict-of-interest
+  rule
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all additional tasks assigned to the Data Protection Officer beyond those in Article 39.1, with
+  clear descriptions and assignment dates.
+- Confirm each additional task does not create a conflict of interest by documenting a statement from
+  the DPO and their line manager.
+- Name the DPO as a specific individual, not a generic role or department, in all records related to additional
+  tasks.
+- Retain copies of communications or meeting minutes where the scope of additional tasks and conflict
+  checks were discussed and approved.

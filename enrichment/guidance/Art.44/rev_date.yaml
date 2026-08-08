@@ -1,0 +1,16 @@
+must_id: item:Art.44:rev_date
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of your Transfer Program in a dated log or register entry.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Confirm the planned review interval is documented and matches your internal policy or schedule.
+- Cross-reference the review date against the planned interval to show the review occurred within the
+  required timeframe.
+- Retain a signed or approved record of the review decision, including any actions or updates resulting
+  from the review.

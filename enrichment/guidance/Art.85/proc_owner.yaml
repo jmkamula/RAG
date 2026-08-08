@@ -1,0 +1,16 @@
+must_id: item:Art.85:proc_owner
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: Named owner of the procedure (typically DPO + legal counsel + editorial/academic lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the Art.85 Derogation Application Procedure as a specific individual, such as the
+  DPO, legal counsel, or editorial/academic lead.
+- Document the full name, job title, and contact details of each named owner within the procedure document.
+- Record the date when ownership was assigned and include this date in the procedure document.
+- Obtain a signature or written confirmation from each named owner acknowledging their responsibility
+  for the procedure.
+- Avoid listing generic roles or groups such as "the team" or "legal department"—use only named individuals.

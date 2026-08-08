@@ -1,0 +1,49 @@
+leaf_id: req:B.8.5.1:transfer_basis_register
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: You must identify and document the lawful basis for each processing activity before you can
+    record the transfer basis for cross-jurisdictional data transfers. Without this, you cannot accurately
+    complete the register.
+  good_enough: A list of all processing activities with their lawful bases identified and documented,
+    even if some are provisional or pending legal review.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Knowing the specific purposes for each processing activity is essential to justify and contextualize
+    international transfers in the register. This ensures each transfer is mapped to a legitimate business
+    need.
+  good_enough: A documented summary of purposes for all processing activities involving personal data,
+    sufficient to link each transfer to a business context.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is needed to identify which information assets (including personal
+    data) are transferred, and to whom, forming the basis for tracking cross-jurisdictional flows.
+  good_enough: A current inventory of information assets, including data types and locations, that covers
+    all assets involved in international transfers.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You must know which parts of your organization and which data processing activities are in
+    scope for your ISMS and PIMS before you can reliably register international transfers.
+  good_enough: A documented scope statement that clearly defines the organizational and data boundaries
+    relevant to international transfers, even if some edges are still being clarified.
+- ref: Art.44
+  standard_id: GDPR:2016/679
+  title: General Principle for Transfers
+  category: cross_role
+  rationale: GDPR Article 44 sets the legal yardstick for international transfers, ensuring your register
+    aligns with regulatory expectations and covers all required transfer scenarios.
+  good_enough: A basic understanding and documented summary of GDPR’s requirements for international transfers,
+    sufficient to inform the structure and content of your register.

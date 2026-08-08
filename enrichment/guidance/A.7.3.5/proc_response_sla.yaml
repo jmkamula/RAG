@@ -1,0 +1,16 @@
+must_id: item:A.7.3.5:proc_response_sla
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Response-time SLA stated + honoured
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the maximum response time for handling objections in the written procedure, specifying the timeframe
+  in days.
+- Document each objection received, including the date and time it was logged, in a central register.
+- Record the date and time of every response sent to the individual raising the objection.
+- Cross-reference objection cases with the stated response-time SLA to confirm each was answered within
+  the required timeframe.
+- Name the procedure owner as a specific individual, not a generic role or team.

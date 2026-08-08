@@ -1,0 +1,19 @@
+must_id: item:A.7.4.3:scope_low_churn_fields
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: Low-churn field categories (date of birth / national ID / immutable identifiers)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all data fields in your systems that are considered low-churn, such as date of birth, national
+  ID, or other immutable identifiers.
+- Document the business processes or systems where each low-churn field is collected, used, or stored,
+  including specific system names and process owners.
+- Name the owner responsible for maintaining the accuracy scope for each low-churn field as a specific
+  individual, not a team or department.
+- Record the date when the low-churn field categories and their applicable contexts were last reviewed
+  and approved by the designated owner.
+- Cross-reference your documented scope with your data inventory or data flow maps to confirm all relevant
+  low-churn fields are included.

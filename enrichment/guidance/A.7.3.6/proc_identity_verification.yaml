@@ -1,0 +1,18 @@
+must_id: item:A.7.3.6:proc_identity_verification
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: Identity verification step (proportionate — avoids granting rights to imposters)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for verifying the identity of anyone requesting access, correction,
+  or erasure of personal data.
+- Name the person or role responsible for confirming identity before processing any data subject request.
+- Record the type of evidence accepted for identity verification, such as government-issued ID or secure
+  authentication, in the procedure.
+- State the criteria for when additional verification is required, such as for sensitive data or remote
+  requests.
+- Specify that requests are not actioned if identity cannot be confirmed, and retain a record of any such
+  refusals.

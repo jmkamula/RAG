@@ -1,0 +1,17 @@
+must_id: item:A.5.21:reg_eol_date
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: End-of-support / end-of-life date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the end-of-support and end-of-life dates for each ICT component or vendor entry as separate,
+  clearly labeled columns in the register.
+- Cross-reference each date with official vendor documentation or public notices, and retain a copy or
+  link alongside the register entry.
+- Name the person responsible for updating end-of-support and end-of-life information for each entry,
+  using a specific individual rather than a team or department.
+- Update the register immediately when notified of changes to support or lifecycle dates, and log the
+  date and source of each update.

@@ -1,0 +1,19 @@
+must_id: item:A.8.4:bl_signed_commits
+control_ref: A.8.4
+standard_id: ISO27001:2022
+must_text: Commit signing enforced for protected branches
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the repository settings showing commit signing is enforced for all protected branches, including
+  a screenshot or exported configuration file with a visible date.
+- Name the individual responsible for managing repository access and commit signing enforcement, listing
+  their full name and role in an access control register.
+- Record an example of a recent signed commit on a protected branch, including the commit hash, author,
+  and verification status.
+- State in a written procedure that unsigned commits are automatically rejected on protected branches,
+  referencing the relevant repository configuration or policy.
+- Avoid listing "team" or "developers" as the owner of commit signing enforcement; specify a single accountable
+  person.

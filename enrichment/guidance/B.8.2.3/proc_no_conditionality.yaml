@@ -1,0 +1,19 @@
+must_id: item:B.8.2.3:proc_no_conditionality
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: No-conditionality rule — service delivery not conditioned on subject accepting marketing
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that access to services is never dependent on agreeing to receive marketing or
+  advertising communications.
+- Document a clear process for offering services separately from any request for marketing consent, with
+  dated examples of service sign-up forms.
+- Name the individual responsible for ensuring marketing consent is always presented as optional, not
+  required.
+- Retain a copy of the most recent customer-facing consent form showing separate, unticked marketing consent
+  options at the point of service delivery.
+- Avoid using generic language like "may be required" in the procedure; specify that marketing consent
+  is always optional and never a prerequisite.

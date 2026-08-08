@@ -1,0 +1,16 @@
+must_id: item:A.5.7:rev_reviewer
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Reviewer identity (program owner + InfoSec lead jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the program owner and the InfoSec lead as individual reviewers in the review record for each
+  periodic threat intelligence program review.
+- Record the date when the review was completed and ensure both reviewers are listed for that specific
+  review cycle.
+- Obtain signatures or documented approval from both the program owner and the InfoSec lead on the review
+  outcome.
+- Avoid listing generic roles or teams as reviewers; specify full names to clearly identify accountability.

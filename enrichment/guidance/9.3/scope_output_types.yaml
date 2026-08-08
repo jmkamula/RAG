@@ -1,0 +1,19 @@
+must_id: item:9.3:scope_output_types
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Output types in scope (continual improvement opportunities, ISMS changes, resource changes,
+  objective updates)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all management review meeting dates and attach the agenda or minutes showing discussion of continual
+  improvement opportunities, ISMS changes, resource changes, and objective updates.
+- Document each output type as a separate, clearly labeled section in the meeting minutes, specifying
+  decisions or actions taken for each.
+- Name the responsible individual for each output action, avoiding generic titles like "the team" or "management."
+- Record the date each output action was assigned and any follow-up deadlines in the meeting minutes or
+  action tracker.
+- Cross-reference outputs in the minutes with supporting evidence, such as updated policies, resource
+  allocation records, or revised objectives.

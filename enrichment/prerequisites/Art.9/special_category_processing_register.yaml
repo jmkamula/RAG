@@ -1,0 +1,43 @@
+leaf_id: req:Art.9:special_category_processing_register
+control_ref: Art.9
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of Processing
+  category: direct
+  rationale: You must identify the lawful basis for each processing activity before you can determine
+    if special category data is being processed lawfully under Art.9. Without this, you cannot justify
+    or document special category processing.
+  good_enough: Each special category processing activity has a clearly documented lawful basis under Art.6,
+    even if not yet fully mapped to all data flows.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: foundational
+  rationale: A current RoPA is needed to identify which processing activities involve special category
+    data, and to reference those activities in the special category register. Without a RoPA, you cannot
+    reliably scope or cross-reference special category processing.
+  good_enough: A working RoPA exists that lists all processing activities, with at least provisional identification
+    of those involving special category data.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which parts of the organization and which data types are covered by
+    compliance activities, including special category data. This ensures the register is complete and
+    not missing in-scope activities.
+  good_enough: A draft or approved ISMS scope statement exists that includes all business units and systems
+    handling special category data.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer (DPO) Designation
+  category: foundational
+  rationale: If required, a DPO should oversee or validate the special category processing register to
+    ensure compliance and provide expert input. Without a DPO (where needed), the register may lack necessary
+    oversight.
+  good_enough: A DPO is appointed (if required by GDPR), or a responsible person is designated to oversee
+    special category data processing.

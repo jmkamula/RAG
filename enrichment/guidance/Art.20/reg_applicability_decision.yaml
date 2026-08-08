@@ -1,0 +1,18 @@
+must_id: item:Art.20:reg_applicability_decision
+control_ref: Art.20
+standard_id: GDPR:2016/679
+must_text: Per-row applicability decision (in-scope / out-of-scope with grounds)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each portability request with the requester's name, date received, and a unique reference number
+  in the register.
+- State for each request whether it is in-scope or out-of-scope, based on the specific data and processing
+  context.
+- Document the grounds for your decision for each row, citing the relevant GDPR Article 20 criteria or
+  legal basis.
+- Name the decision-maker as a specific individual for each entry, not as a team or department.
+- Retain evidence of any supporting correspondence or documentation used to make the applicability decision,
+  linked to the register entry.

@@ -1,0 +1,19 @@
+must_id: item:A.8.13:storage_separation
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Storage separation (offsite OR air-gapped OR immutable-storage) — 3-2-1 rule applied
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the backup procedure which storage separation method is used, such as offsite, air-gapped,
+  or immutable storage.
+- Document how the 3-2-1 backup rule is implemented, specifying the number of copies, media types, and
+  offsite location details.
+- Name the individual responsible for verifying storage separation, avoiding generic roles like "IT team"
+  or "admins".
+- Record the date of the most recent successful test demonstrating that backups can be restored from the
+  separated storage location.
+- Attach evidence, such as screenshots or logs, showing that backup copies exist in the designated separated
+  storage.

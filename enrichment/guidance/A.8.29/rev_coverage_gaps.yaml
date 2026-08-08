@@ -1,0 +1,19 @@
+must_id: item:A.8.29:rev_coverage_gaps
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Test-coverage gap check vs applicable scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all assets, systems, and processes in the current security testing scope, referencing the latest
+  asset inventory and risk assessment.
+- Cross-reference each item in the scope against the actual security testing schedule or reports from
+  the last review period.
+- Identify and document any assets, systems, or processes not covered by recent security tests, noting
+  the specific gaps.
+- Name the reviewer as a specific individual responsible for confirming the gap analysis, avoiding generic
+  roles like "the team."
+- Record the review date and maintain the signed summary of findings, including any action plans to address
+  identified gaps.

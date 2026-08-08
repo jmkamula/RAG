@@ -1,0 +1,19 @@
+must_id: item:A.5.5:scope_change_monitoring
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Source for change monitoring (legal counsel, regulator alerts) that triggers re-scoping
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual or role responsible for monitoring changes in applicable laws and regulations, listing
+  their contact details in a documented register.
+- Document the official sources used for change monitoring, such as legal counsel subscriptions or regulator
+  alert services, with access dates.
+- Record each instance when a change notification is received, including the date, source, and summary
+  of the change in a change log.
+- State the process for reviewing and updating the authorities scope, referencing the trigger event and
+  the decision made, with names and dates.
+- Avoid listing generic sources or stating "monitored by the team"—identify specific sources and responsible
+  persons for each authority monitored.

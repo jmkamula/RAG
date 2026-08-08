@@ -1,0 +1,19 @@
+must_id: item:Art.16:identity_verification
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Identity verification step (proportionate, not over-collecting)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the identity verification process in your rectification procedure, specifying what information
+  is collected and why it is necessary.
+- Name the person or role responsible for confirming the requester’s identity before any data rectification
+  is processed.
+- Record each rectification request with the date, requester’s details, verification method used, and
+  outcome in a secure log.
+- State in the procedure that only the minimum information needed to confirm identity will be collected,
+  avoiding unnecessary or excessive data.
+- Avoid using generic descriptions like “ID required”; specify acceptable forms of identification and
+  ensure these are proportionate to the risk.

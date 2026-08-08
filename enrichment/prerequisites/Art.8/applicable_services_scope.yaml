@@ -1,0 +1,31 @@
+leaf_id: req:Art.8:applicable_services_scope
+control_ref: Art.8
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of processing
+  category: direct
+  rationale: Art.8 only applies if processing is based on consent under Art.6(1)(a); you must first determine
+    which processing activities rely on consent as their lawful basis.
+  good_enough: You have mapped which services/processes use consent as their legal basis, even if not
+    all consent flows are fully documented yet.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear inventory of your processing activities to identify which services might
+    fall under Art.8 and whether any are offered directly to children.
+  good_enough: You have a working draft or summary of your processing activities, with enough detail to
+    spot services potentially in Art.8 scope.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: Understanding the organisational and service scope under your ISMS helps clarify which offerings
+    are in play and whether any could be considered information-society services offered to children.
+  good_enough: Your ISMS scope statement covers all major business lines and services, even if some boundaries
+    are still being refined.

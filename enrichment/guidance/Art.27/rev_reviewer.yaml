@@ -1,0 +1,17 @@
+must_id: item:Art.27:rev_reviewer
+control_ref: Art.27
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO + legal counsel)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual, listing both the Data Protection Officer and the designated
+  legal counsel by full name and job title.
+- Record the date the Representative Program Review was conducted, ensuring it is clearly visible on the
+  review document.
+- Document the method of review, such as meeting minutes or a written report, and attach this evidence
+  to the review record.
+- Sign the review document with handwritten or digital signatures from both the DPO and legal counsel
+  to confirm their participation.

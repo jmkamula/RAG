@@ -1,0 +1,18 @@
+must_id: item:A.7.14:approved_providers
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Approved disposal providers list with security expectations
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all approved disposal providers by name and company, including contact details, in a dated and
+  version-controlled document.
+- Document the specific security expectations and requirements each provider must meet, such as data wiping
+  or destruction standards.
+- Obtain written approval of the provider list and security expectations from a named senior manager,
+  with signature and date.
+- Name the owner of the provider list as a specific individual, not a team or department, to avoid ambiguity.
+- Retain records of periodic reviews and updates to the provider list, showing review dates and reviewer
+  names.

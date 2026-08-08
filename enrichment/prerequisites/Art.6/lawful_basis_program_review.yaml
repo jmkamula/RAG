@@ -1,0 +1,40 @@
+leaf_id: req:Art.6:lawful_basis_program_review
+control_ref: Art.6
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date inventory of all processing activities before you can review whether
+    each has a lawful basis. Without this record, you can't verify coverage or completeness.
+  good_enough: A current, reasonably complete RoPA listing all processing activities, even if some details
+    are still being refined.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If your organization requires a Data Protection Officer, they must be involved in reviewing
+    lawful bases and ensuring regulatory guidance is followed. The review process depends on DPO oversight
+    where applicable.
+  good_enough: A named DPO (internal or external) with contact details, or a documented assessment showing
+    why a DPO is not required.
+- ref: Art.20
+  standard_id: GDPR:2016/679
+  title: Right to data portability
+  category: direct
+  rationale: Certain lawful bases (consent, contract) trigger data portability rights. You need to know
+    which processing activities fall under these bases to ensure the review covers portability obligations.
+  good_enough: A mapping of which processing activities are subject to portability, or a note that none
+    are, based on current lawful bases.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope of your ISMS defines which parts of your organization and which processing activities
+    are covered by compliance reviews. The lawful basis review must align with this scope.
+  good_enough: A documented ISMS scope that clearly includes all in-scope processing activities for GDPR
+    purposes.

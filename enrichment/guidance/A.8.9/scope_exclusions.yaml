@@ -1,0 +1,19 @@
+must_id: item:A.8.9:scope_exclusions
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Exclusion rationale + compensating controls per excluded class
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all asset types in scope for configuration management, referencing a dated inventory reviewed by
+  the asset owner.
+- Document each excluded asset class, stating a clear, specific rationale for its exclusion in a dated
+  record.
+- Describe compensating controls applied to each excluded asset class, linking to relevant control documents
+  or procedures.
+- Name the decision-maker who approved each exclusion and compensating control, ensuring this is a specific
+  individual, not a group or department.
+- Attach evidence of periodic review of exclusions and compensating controls, such as a signed and dated
+  review log.

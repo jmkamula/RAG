@@ -1,0 +1,16 @@
+must_id: item:A.6.8:rev_date
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the reporting program in a dated log or register entry.
+- Document the planned review interval in months or years, referencing the approved policy or schedule.
+- Confirm the next scheduled review date is within the documented interval by cross-referencing the last
+  review date and the interval.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Retain evidence of the completed review, such as meeting minutes or a signed review checklist, with
+  the recorded date.

@@ -1,0 +1,17 @@
+must_id: item:5.1:outcomes_achieved
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Ensuring the ISMS achieves its intended outcomes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the member of top management who is accountable for the ISMS achieving its intended outcomes in
+  the directive, using their full name and title.
+- Document a dated statement from top management explicitly committing to the ISMS objectives and intended
+  outcomes within the directive.
+- Record evidence of a management review meeting where ISMS outcomes were discussed, including attendees,
+  date, and summary of decisions.
+- Avoid using generic language or boilerplate statements in the directive; tailor commitments to your
+  organisation’s specific ISMS objectives and context.

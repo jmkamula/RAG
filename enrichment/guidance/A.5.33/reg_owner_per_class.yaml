@@ -1,0 +1,16 @@
+must_id: item:A.5.33:reg_owner_per_class
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Owner per record class (named role responsible for the class — HR for personnel records, Finance
+  for financial records, etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner for each record class as a specific job title or named role, such as "HR Manager" or
+  "Finance Director".
+- Document the owner’s name and contact details next to each record class entry in the Records Schedule.
+- Record the date when each owner assignment was last reviewed or updated in the register.
+- Avoid listing owners as "the team", "IT", or a department; use only specific roles or titles to prevent
+  ambiguity.

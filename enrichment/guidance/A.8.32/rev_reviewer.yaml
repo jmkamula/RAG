@@ -1,0 +1,17 @@
+must_id: item:A.8.32:rev_reviewer
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Change Management lead + Engineering + InfoSec)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer from Change Management, Engineering, and InfoSec as specific individuals in the review
+  record, not as teams or roles.
+- Record the date each reviewer completed their assessment on the documented Change Management Program
+  review.
+- Sign the final review summary with each named reviewer’s signature or electronic approval to confirm
+  participation.
+- Retain the completed review record in a central location accessible for audit, including all reviewer
+  names and approval dates.

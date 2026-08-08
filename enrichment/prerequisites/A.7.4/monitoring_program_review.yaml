@@ -1,0 +1,40 @@
+leaf_id: req:A.7.4:monitoring_program_review
+control_ref: A.7.4
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which locations, assets, and processes are in-scope for monitoring before
+    you can review whether monitoring is effective. The scope frames what should be covered by the monitoring
+    program.
+  good_enough: A documented, current scope statement that clearly lists the physical areas and systems
+    included in the ISMS.
+- ref: A.7.1
+  standard_id: ISO27001:2022
+  title: Physical security perimeters
+  category: direct
+  rationale: Defined security perimeters are necessary to identify where monitoring controls (like cameras
+    or alarms) should be in place and reviewed. Without this, you can't verify if monitoring covers all
+    critical areas.
+  good_enough: A list or map of established physical security perimeters, with boundaries and critical
+    zones identified.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register ensures you know which physical assets require monitoring and
+    review. This is essential for verifying that monitoring is effective for all relevant assets.
+  good_enough: A basic, current inventory of physical assets that are subject to monitoring controls.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment identifies threats and vulnerabilities that monitoring is intended to address.
+    Reviewing monitoring effectiveness only makes sense if you know the risks being mitigated.
+  good_enough: A recent risk assessment that highlights physical security risks relevant to the monitored
+    areas or assets.

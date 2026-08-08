@@ -1,0 +1,19 @@
+must_id: item:A.7.4.7:reg_citation
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Citation per row (specific statute / regulation / business rationale document)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific statute, regulation, or internal business rationale document that justifies the
+  retention period for each PII data type in the register.
+- Cross-reference each cited statute or document with a hyperlink or document ID so an auditor can easily
+  locate the source.
+- State the full name and section or clause number of the legal or business requirement, not just a generic
+  law or policy title.
+- Name the person responsible for verifying the accuracy of each citation, ensuring it is a specific individual
+  rather than a team or department.
+- Review the register for any entries that list "common practice" or "industry standard" as a rationale,
+  and replace these with a precise, documented source.

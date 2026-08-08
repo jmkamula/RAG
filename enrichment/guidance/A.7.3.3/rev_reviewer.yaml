@@ -1,0 +1,15 @@
+must_id: item:A.7.3.3:rev_reviewer
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Product + UX)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer for each notice delivery program as a specific individual from Data Protection Officer,
+  Product, and User Experience teams.
+- Record the date each reviewer completed their review in a central log or review register.
+- Document the review comments or approval decision from each named reviewer in the program review file.
+- Retain evidence of communication confirming each reviewer’s participation, such as email confirmation
+  or signed review forms.

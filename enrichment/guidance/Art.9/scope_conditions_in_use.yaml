@@ -1,0 +1,19 @@
+must_id: item:Art.9:scope_conditions_in_use
+control_ref: Art.9
+standard_id: GDPR:2016/679
+must_text: Art.9.2 conditions in use across activities (a-j)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all processing activities that involve special categories of personal data, including a clear description
+  and purpose for each activity.
+- Document the specific Article 9.2 condition (a-j) relied upon for each activity, referencing the exact
+  letter and legal text.
+- Name the responsible individual who determined the lawful basis for each processing activity, ensuring
+  a specific person is identified.
+- Record the date when each lawful basis decision was made or last reviewed, linking to supporting documentation
+  where available.
+- Avoid using generic or catch-all justifications; match each activity to a clearly relevant and specific
+  Article 9.2 condition.

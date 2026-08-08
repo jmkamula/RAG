@@ -1,0 +1,14 @@
+must_id: item:Art.19:rev_date
+control_ref: Art.19
+standard_id: GDPR:2016/679
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the notification program in a dated log or review register.
+- Name the reviewer as a specific individual responsible for the most recent program review, not a group
+  or department.
+- Document the planned review interval and confirm the actual review date falls within this timeframe.
+- Retain a copy of the signed or approved review summary as evidence of completion.

@@ -1,0 +1,39 @@
+leaf_id: req:A.8.9:configuration_program_review
+control_ref: A.8.9
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The configuration program review must be performed within the defined boundaries of the ISMS.
+    Without a clear scope, it's impossible to know which systems, assets, and configurations are in play.
+  good_enough: The ISMS scope statement exists, is up to date, and clearly identifies the organizational
+    and technical boundaries relevant to configuration management.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Reviewing configuration baselines and deviations requires an accurate inventory of assets.
+    Without an asset register, you can't ensure all relevant systems are included in the review.
+  good_enough: There is a current, reasonably complete asset register listing all major IT assets subject
+    to configuration controls.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: The review process depends on clear assignment of responsibilities for configuration management
+    and review activities. If roles aren't defined, accountability and follow-up are impossible.
+  good_enough: Key roles for configuration management and review are documented and assigned, even if
+    detailed procedures are still being finalized.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: The review should focus on configurations that mitigate identified risks. Without a risk
+    assessment, it's unclear which configurations are critical or require special attention.
+  good_enough: A basic risk assessment has been completed, identifying major threats and vulnerabilities
+    relevant to configuration management.

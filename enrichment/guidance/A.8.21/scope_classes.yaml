@@ -1,0 +1,19 @@
+must_id: item:A.8.21:scope_classes
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Service classes enumerated with assessment depth per class
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all network service types in use, such as VPN, DNS, email, and web access, in a dated inventory
+  document.
+- Describe the assessment depth applied to each service class, specifying methods like vulnerability scanning
+  or penetration testing in the same inventory.
+- Name the person responsible for maintaining and updating the network services inventory, ensuring a
+  specific individual is identified.
+- Cross-reference each service class to supporting risk assessment records that justify the chosen assessment
+  depth.
+- Avoid using generic categories like "internet access" without further breakdown, as auditors will flag
+  insufficiently detailed service classes.

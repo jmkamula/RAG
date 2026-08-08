@@ -1,0 +1,18 @@
+must_id: item:A.8.21:monitoring_approach
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Service-delivery monitoring approach (synthetic checks / passive instrumentation / vendor-reported)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Describe the monitoring approach used for network services, specifying whether you use synthetic checks,
+  passive instrumentation, or vendor-reported metrics.
+- Document the tools or platforms in use for network monitoring, including screenshots or logs showing
+  active monitoring.
+- Name the individual responsible for reviewing network monitoring results, avoiding generic roles like
+  "IT team" or "Network group".
+- Record the frequency of monitoring reviews and retain dated records of at least one recent review session.
+- Cross-reference any alerts or incidents detected by the monitoring system with corresponding incident
+  response records.

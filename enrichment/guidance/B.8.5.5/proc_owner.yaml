@@ -1,0 +1,15 @@
+must_id: item:B.8.5.5:proc_owner
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Named owner (Legal + Trust)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the Disclosure Decision Procedure, listing both their legal
+  and trust responsibilities.
+- Record the owner's full name and job title in the procedure document, along with the date of assignment.
+- Document the approval of the procedure by the named owner, including their signature and the approval
+  date.
+- Avoid listing a group, department, or generic title as the owner—use only a named individual.

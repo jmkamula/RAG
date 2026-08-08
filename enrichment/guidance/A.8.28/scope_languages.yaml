@@ -1,0 +1,19 @@
+must_id: item:A.8.28:scope_languages
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Languages in use with tooling stack per language (SAST tool / linter / formatter)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all programming languages currently used in your codebase, including versions, in a dated document
+  maintained by your development lead.
+- Record the specific static analysis tools, linters, and formatters applied to each language, including
+  tool versions and configuration files.
+- Name the individual responsible for maintaining and updating the secure coding tooling list; avoid generic
+  roles like "the team" or "developers".
+- Cross-reference each language and tool pairing with evidence of recent scan or linting reports, showing
+  active use within the last quarter.
+- Review and update the documented scope and tooling list at least annually, recording the date and approver
+  of each review.

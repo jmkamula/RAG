@@ -1,0 +1,16 @@
+must_id: item:B.8.4.3:reg_last_verified
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Last verification date per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the last date each transmission channel was verified in a dedicated column for every row in the
+  inventory.
+- Name the person who performed the verification for each channel, listing their full name rather than
+  a team or department.
+- Retain supporting evidence, such as screenshots or logs, showing the verification activity and date
+  for each transmission channel.
+- Update the inventory immediately after each verification to avoid stale or missing verification dates.

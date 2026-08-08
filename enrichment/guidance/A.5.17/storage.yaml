@@ -1,0 +1,19 @@
+must_id: item:A.5.17:storage
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Storage requirements (hashed + salted with modern algorithm — argon2/scrypt/bcrypt; vaulted
+  in secrets manager; never plaintext anywhere)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific hashing algorithm used for authentication information, such as argon2, scrypt, or
+  bcrypt, in the documented procedure.
+- Document that all authentication information is salted before hashing, with details on salt generation
+  and storage method.
+- Record the location and configuration of the secrets manager or vault where authentication information
+  is stored.
+- Confirm that no authentication information is stored or transmitted in plaintext by providing dated
+  technical evidence or configuration screenshots.
+- Name the procedure owner as a specific individual, not a team or department, in the procedure document.

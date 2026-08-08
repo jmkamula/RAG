@@ -1,0 +1,42 @@
+leaf_id: req:A.5.28:evidence_disposal_record
+control_ref: A.5.28
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The disposal or handover record must reference the specific evidence package being closed.
+    Without an up-to-date asset register, you cannot reliably identify, track, or link the disposal record
+    to the correct evidence package.
+  good_enough: A current, accessible register listing all evidence packages with unique identifiers is
+    available and in use.
+- ref: A.5.28
+  standard_id: ISO27001:2022
+  title: Evidence Handling and Chain of Custody Procedure
+  category: direct
+  rationale: The disposal record is the final step in the chain of custody. You need a documented procedure
+    that defines how evidence is handled, transferred, and ultimately disposed of or handed over, so the
+    record aligns with these requirements.
+  good_enough: There is a documented, communicated procedure covering evidence lifecycle, including closure
+    steps, even if minor improvements are pending.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The method and rigor of evidence disposal or handover may depend on the classification of
+    the evidence. The disposal record must reflect any special handling or destruction requirements based
+    on classification.
+  good_enough: A basic classification scheme exists and is applied to evidence packages, with clear indications
+    of any special handling needs.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know whether evidence management and disposal are in scope for your ISMS. If
+    not, drafting disposal records for evidence packages may not be required or meaningful.
+  good_enough: The ISMS scope statement explicitly includes (or excludes) evidence management activities,
+    and this has been communicated to relevant stakeholders.

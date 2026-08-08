@@ -1,0 +1,19 @@
+must_id: item:B.8.5.6:reg_customer_ack
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+must_text: Customer acknowledgement per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each subcontractor entry with the subcontractor’s full legal name, service provided, and date
+  of disclosure to the customer.
+- Name the customer contact who received the disclosure for each subcontractor row, using a specific individual’s
+  name rather than a generic title.
+- Obtain and attach written acknowledgement from the customer for each subcontractor entry, such as a
+  signed email or confirmation letter.
+- Cross-reference each acknowledgement to its corresponding subcontractor row in the register, ensuring
+  clear traceability between disclosure and customer response.
+- Review the register quarterly to confirm all new subcontractors have documented customer acknowledgements;
+  flag any missing confirmations for immediate follow-up.

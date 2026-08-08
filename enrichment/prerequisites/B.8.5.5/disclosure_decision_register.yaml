@@ -1,0 +1,41 @@
+leaf_id: req:B.8.5.5:disclosure_decision_register
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the specific purposes for which personal data is processed before
+    you can meaningfully record and justify disclosure decisions. This ensures each disclosure aligns
+    with a legitimate, defined purpose.
+  good_enough: A current, documented list of processing purposes for all relevant data types is available
+    and referenced in disclosure decision-making.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Each disclosure decision must be assessed against a lawful basis for processing under applicable
+    privacy laws. Without this, you cannot justify or record the rationale for accepting or rejecting
+    a disclosure request.
+  good_enough: A mapped list of lawful bases for all processing activities, with clear references for
+    each data type, is documented and accessible.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know which parts of your organization, systems, and data are in scope for privacy
+    management before tracking disclosure decisions. This ensures the register covers all relevant areas.
+  good_enough: A finalized ISMS scope statement that clearly defines organizational and system boundaries
+    relevant to personal data handling.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is essential to identify which information assets may be subject
+    to disclosure requests, so you can accurately log and assess each decision.
+  good_enough: A current inventory of information assets, including those containing personal data, is
+    available and referenced in disclosure workflows.

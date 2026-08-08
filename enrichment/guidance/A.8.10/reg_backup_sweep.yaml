@@ -1,0 +1,19 @@
+must_id: item:A.8.10:reg_backup_sweep
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Per-deletion backup-sweep confirmation (or rationale if deferred to next backup-cycle deletion)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time of each backup deletion in the Disposal Register, along with the unique identifier
+  of the deleted data set.
+- Name the person who performed or supervised the backup deletion for each entry, using their full name
+  rather than a generic role or team.
+- Document a confirmation statement for each deletion, explicitly stating that all relevant backups were
+  swept, or provide a clear rationale if deletion was deferred.
+- Attach supporting evidence, such as system logs or screenshots, to each register entry to show the backup
+  sweep was completed as recorded.
+- Review the register monthly to verify that no entries list "pending" or "next cycle" without a documented,
+  specific reason and follow-up date.

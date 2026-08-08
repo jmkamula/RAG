@@ -1,0 +1,17 @@
+must_id: item:B.8.4.1:proc_tenant_isolation
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+must_text: Tenant isolation of temp files — no cross-tenant leakage in shared infrastructure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the technical controls in place that prevent temporary files from being accessible across tenants
+  in shared infrastructure, including file system permissions and logical isolation.
+- Assign a named individual responsible for regularly reviewing and updating the temp files disposal procedure
+  to address tenant isolation.
+- Record the date and outcome of the most recent test or audit that verified no cross-tenant access to
+  temporary files is possible.
+- Name the owner as a specific person, not a group or department, to avoid ambiguity in accountability
+  for tenant isolation.

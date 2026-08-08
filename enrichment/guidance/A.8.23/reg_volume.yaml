@@ -1,0 +1,18 @@
+must_id: item:A.8.23:reg_volume
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: Aggregate blocked-event volume per category (rolling window)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define web filtering categories clearly in the register, using specific names that match your filtering
+  solution’s configuration.
+- Record the number of blocked events per category daily, including the date and the person responsible
+  for the entry.
+- Calculate and update the rolling total for each category at least monthly, showing the aggregation period’s
+  start and end dates.
+- Assign a named individual to review and sign off on the aggregated data for accuracy each month.
+- Avoid listing categories as "miscellaneous" or "other" without explanation; specify the content type
+  for each blocked event category.

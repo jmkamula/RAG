@@ -1,0 +1,15 @@
+must_id: item:A.5.29:reg_owner
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Named owner per row (accountable for keeping this scenario's plan section current)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner for each disruption scenario row, avoiding group names or roles
+  like "IT" or "the team".
+- Record the owner's full name and job title directly in the register alongside each scenario entry.
+- Document the date when each owner was last assigned or confirmed for their scenario responsibility.
+- Review the register quarterly and update ownership details if there are any changes in personnel or
+  responsibilities.

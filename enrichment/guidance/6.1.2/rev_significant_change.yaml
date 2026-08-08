@@ -1,0 +1,19 @@
+must_id: item:6.1.2:rev_significant_change
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Significant-change trigger sweep — 8.2 ad-hoc assessments captured
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all significant changes in the environment over the review period, including system upgrades, new
+  services, or major process changes, with dates.
+- Document each ad-hoc risk assessment performed in response to these changes, including the assessment
+  date and the specific trigger event.
+- Name the individual responsible for initiating each ad-hoc assessment, ensuring a specific person is
+  listed rather than a group or department.
+- Cross-reference each ad-hoc assessment to the relevant change record or incident log to show the connection
+  between trigger and assessment.
+- Retain evidence of decisions or actions taken as a result of each ad-hoc assessment, such as meeting
+  minutes, signed approvals, or updated risk registers.

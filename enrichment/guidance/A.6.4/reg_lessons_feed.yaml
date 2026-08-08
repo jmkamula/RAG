@@ -1,0 +1,19 @@
+must_id: item:A.6.4:reg_lessons_feed
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Per-case lessons feed (where the violation surfaced a control gap, feeds back to relevant control
+  owner / awareness curriculum)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each disciplinary case where a control gap was identified, including a brief description of the
+  gap and the date it was discovered.
+- Name the specific control owner notified about the gap, including the date and method of communication.
+- Document the lesson learned and any recommended changes or updates to the relevant control or awareness
+  training.
+- Attach evidence of follow-up actions taken, such as updated procedures, revised training materials,
+  or meeting minutes confirming discussion of the lesson.
+- Name the individual responsible for reviewing and closing each lesson learned entry—avoid leaving this
+  field blank or assigning it to a generic group.

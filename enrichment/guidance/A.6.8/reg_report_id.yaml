@@ -1,0 +1,18 @@
+must_id: item:A.6.8:reg_report_id
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Per-row report identifier (links to A.5.25 triage record where the report was triaged)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each event report entry in the register, ensuring no duplicate or missing
+  identifiers in the sequence.
+- Cross-reference each event report identifier with the corresponding A.5.25 triage record, using a direct
+  link or reference number.
+- Record the date and name of the person who entered or updated the cross-reference for each report row.
+- Name the owner of the register as a specific individual, not a team or department, in the register header
+  or metadata.
+- Review the register to confirm that every event report row includes a valid, non-empty triage record
+  reference; flag and resolve any blank or generic entries.

@@ -1,0 +1,19 @@
+must_id: item:Art.23:purpose_mapping
+control_ref: Art.23
+standard_id: GDPR:2016/679
+must_text: 'Per-law mapping to Art.23.1 purpose (a-j: national security, defence, public security, criminal
+  law, public interest objectives, regulatory function, monitoring/inspection/regulatory, judicial proceedings,
+  breach of professional ethics, data subject protection)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each Member State law that restricts GDPR rights, referencing the specific Article 23.1 purpose
+  (a-j) it supports.
+- Document the exact text or citation of each law, including the official publication date and legal reference
+  number.
+- Map each restriction to its corresponding Art.23.1 purpose, stating the letter (a-j) and the rationale
+  for the mapping.
+- Name the responsible individual who performed the mapping — do not use a group or department name.
+- Retain a dated version of the mapping table and procedure, signed off by a designated compliance officer.

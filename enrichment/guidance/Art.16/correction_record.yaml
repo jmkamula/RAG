@@ -1,0 +1,16 @@
+must_id: item:Art.16:correction_record
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Correction recorded with what was changed, when, by whom
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each data correction in a log, including the original and updated information, with clear details
+  of what was changed.
+- State the exact date and time when the correction was made in the rectification log entry.
+- Name the individual who authorized or performed the correction, listing their full name and job title.
+- Avoid using vague identifiers like "admin" or "team"—always specify a real person responsible for the
+  change.
+- Retain the rectification log as a dated record that can be produced during an audit.

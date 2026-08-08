@@ -1,0 +1,14 @@
+must_id: item:A.5.36:review_date
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Review date and period covered (start/end of the review activity)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact start and end dates of each compliance review in the review log or register.
+- Document the period covered by the review, specifying which policies, rules, or standards were assessed.
+- Name the reviewer as a specific individual, not just a team or department, in the review record.
+- Attach or reference the signed review report that includes the review date and scope for each completed
+  review cycle.

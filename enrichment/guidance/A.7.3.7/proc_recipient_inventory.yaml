@@ -1,0 +1,20 @@
+must_id: item:A.7.3.7:proc_recipient_inventory
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Recipient inventory — active communication channels with every third party PII has been shared
+  with (link to A.7.5.4 disclosure register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every third party who has received personal data, including full legal name and contact details,
+  in a maintained inventory.
+- Document the current, active communication channel for each third party, specifying method (e.g. email,
+  portal) and responsible contact person.
+- Cross-reference each entry in the inventory to the corresponding record in your A.7.5.4 disclosure register,
+  noting the unique identifier or link.
+- Name the owner of the inventory as a specific individual, not a team or department, and record the date
+  of last update.
+- Record evidence of periodic review of the inventory, such as a dated sign-off or meeting minutes confirming
+  channels remain active and accurate.

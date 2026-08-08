@@ -1,0 +1,47 @@
+leaf_id: req:A.8.29:applicable_test_scope
+control_ref: A.8.29
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of your organization, systems, and applications are covered
+    by your ISMS before you can define which assets require security testing and to what extent.
+  good_enough: A clear, up-to-date ISMS scope statement that identifies all relevant business units, systems,
+    and applications is available.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An accurate asset register is essential to identify which applications and systems exist,
+    so you can determine which ones need to be included in the security testing scope.
+  good_enough: A working inventory of information assets, including applications and their owners, is
+    in place and reasonably current.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: You need to know the classification of each application (e.g., PII-touching, internal admin)
+    to decide the appropriate level and type of security testing required.
+  good_enough: A documented classification scheme exists and has been applied to all assets in the register,
+    at least at a basic level.
+- ref: A.8.25
+  standard_id: ISO27001:2022
+  title: Secure development life cycle
+  category: direct
+  rationale: The SDLC defines when and how security testing should be integrated into development, which
+    directly informs the scope and timing of required tests.
+  good_enough: A documented SDLC process exists that references security testing activities at relevant
+    stages, even if not fully mature.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment helps prioritize which applications or classes of assets require more rigorous
+    or frequent security testing based on their risk profile.
+  good_enough: A recent risk assessment has been performed that covers key applications and highlights
+    those with elevated risk.

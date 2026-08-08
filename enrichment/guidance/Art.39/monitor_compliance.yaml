@@ -1,0 +1,18 @@
+must_id: item:Art.39:monitor_compliance
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Monitor compliance with GDPR + MS data protection provisions + internal policies (Art.39.1.b)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer (DPO) as a specific individual with full contact details in the DPO
+  Tasks Procedure document.
+- Document the process the DPO uses to regularly check compliance with GDPR, Member State data protection
+  laws, and internal privacy policies.
+- Record the dates and outcomes of each compliance monitoring activity in a log maintained by the DPO.
+- Attach evidence of any identified issues and actions taken, such as meeting minutes or corrective action
+  plans, to the procedure file.
+- Specify how and when the DPO reports monitoring results to senior management, including named recipients
+  and scheduled reporting intervals.

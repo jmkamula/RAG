@@ -1,0 +1,15 @@
+must_id: item:A.5.32:audit_reviewer
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Reviewer identity and role (procurement / legal / engineering)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer responsible for the IPR and Licence Audit as a specific individual, including their
+  full name and job title.
+- Record the reviewer’s organisational role, clearly stating if they represent procurement, legal, or
+  engineering, in the audit documentation.
+- Document the date the review was completed and link it to the reviewer’s identity in the audit record.
+- Avoid listing a team or department as the reviewer; always assign responsibility to a named person.

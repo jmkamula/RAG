@@ -1,0 +1,17 @@
+must_id: item:B.8.5.4:proc_request_intake
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+must_text: Request intake path — law-enforcement / regulator / court requests routed to Legal
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the official intake email address or portal where all legally binding disclosure requests must
+  be submitted.
+- Name the Legal team member responsible for receiving and logging incoming law-enforcement, regulator,
+  or court requests.
+- Record each request’s receipt date, sender, and reference number in a centralized disclosure request
+  log.
+- State in the procedure that requests must not be handled by operational staff or routed verbally; all
+  must go directly to Legal.

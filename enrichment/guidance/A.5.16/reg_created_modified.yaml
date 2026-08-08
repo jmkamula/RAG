@@ -1,0 +1,19 @@
+must_id: item:A.5.16:reg_created_modified
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Created and last-modified timestamps per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time each identity entry is created in a dedicated "Created Timestamp" column for
+  every row in the register.
+- Update the "Last Modified Timestamp" column with the current date and time whenever any detail in a
+  row is changed.
+- Name the person making each change in a separate "Modified By" column to provide clear accountability
+  for updates.
+- Confirm that no row is missing either a created or last-modified timestamp before finalizing or exporting
+  the register for review.
+- Avoid using system-generated default dates or leaving timestamp fields blank, as auditors will flag
+  incomplete or placeholder data.

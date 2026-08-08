@@ -1,0 +1,15 @@
+must_id: item:A.5.2:review_reviewer
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: Reviewer identity and role
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual, including their full name and job title, on the roles and
+  responsibilities review record.
+- Record the date the review was completed next to the reviewer’s details on the review record.
+- Document the reviewer’s role in the context of the review, specifying their authority or responsibility
+  for this process.
+- Avoid listing a group, team, or department as the reviewer; always identify a single accountable person.

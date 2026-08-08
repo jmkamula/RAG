@@ -1,0 +1,18 @@
+must_id: item:A.5.37:proc_template
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Template definition stated (purpose / scope / prerequisites / steps / verification / rollback
+  / contacts) — drives consistent shape
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'State the required template sections: purpose, scope, prerequisites, steps, verification, rollback,
+  and contacts in the documented procedure.'
+- Name the person responsible for maintaining and updating the template definition, listing their full
+  name and role.
+- Record the date when the template definition was last reviewed or updated in the procedure document.
+- Attach a completed example of an operating procedure using the defined template to demonstrate consistent
+  application.
+- Specify each template section clearly; avoid using generic placeholders or leaving any section blank.

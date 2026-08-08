@@ -1,0 +1,16 @@
+must_id: item:A.6.4:reg_investigation_outcome
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Per-case investigation outcome (substantiated / not-substantiated / partially-substantiated)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the investigation outcome for each disciplinary case as "substantiated," "not-substantiated,"
+  or "partially-substantiated" in the register, with the case reference number.
+- Name the individual who determined the investigation outcome, ensuring a specific person is listed rather
+  than a team or department.
+- Date the entry for each investigation outcome to show when the decision was finalized.
+- Retain supporting evidence or documentation for each outcome, such as investigation reports or meeting
+  notes, linked to the corresponding case entry.

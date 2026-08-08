@@ -1,0 +1,16 @@
+must_id: item:A.5.32:audit_inventory_update
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Inventory updated as a result of the audit with reference to this review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and scope of the IPR and licence audit in your software and asset inventory system.
+- Update the inventory entries to reflect any changes, additions, or removals identified during the audit,
+  citing the audit record as the reference.
+- Name the person responsible for making these inventory updates, ensuring a specific individual is listed
+  rather than a team or department.
+- Attach or link the audit summary report to the updated inventory to provide clear evidence of the review’s
+  impact.

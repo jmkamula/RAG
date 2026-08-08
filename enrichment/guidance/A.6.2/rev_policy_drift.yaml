@@ -1,0 +1,19 @@
+must_id: item:A.6.2:rev_policy_drift
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Referenced-policy drift check — has A.5.1/A.5.10/A.5.15 changed in ways that require template
+  amendment?
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named HR or compliance manager to conduct the periodic review of the Employment Terms Template,
+  recording their name and review date.
+- Cross-reference the current versions of A.5.1, A.5.10, and A.5.15 policies against the template, documenting
+  any differences or updates found.
+- Record the outcome of the drift check in a dated review log, noting whether amendments to the template
+  are required based on policy changes.
+- Name the policies and their version numbers in the review record—do not reference only “current policies”
+  without specific version details.
+- Retain evidence of any template amendments, including who approved the changes and the date of approval.

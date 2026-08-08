@@ -1,0 +1,39 @@
+leaf_id: req:A.5.15:periodic_review
+control_ref: A.5.15
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: direct
+  rationale: A.5.1 requires the establishment of topic-specific policies, including access control. You
+    can't review an access control policy if it hasn't been formally defined and approved under A.5.1.
+  good_enough: A documented and approved access control policy exists, even if it will be improved later.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: To review whether access controls are effective, you need an up-to-date inventory of assets
+    (systems, applications, data stores) that the policy should cover. Otherwise, you can't check for
+    coverage gaps.
+  good_enough: A current list of key information assets and systems exists, even if some details are pending.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Access control policies should reflect the classification of information and assets. Without
+    a working classification scheme, you can't judge if access restrictions are appropriate for the sensitivity
+    of assets.
+  good_enough: A basic classification scheme is documented and applied to core assets, even if not all
+    assets are classified yet.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Periodic review requires clarity on who is responsible for maintaining, reviewing, and updating
+    access control policies. Without this, reviews may not be assigned or completed.
+  good_enough: Roles for policy ownership and review are assigned, even if role descriptions are still
+    being refined.

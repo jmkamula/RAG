@@ -1,0 +1,17 @@
+must_id: item:A.7.4.9:scope_email_paths
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Email + file-sharing paths where PII may be transmitted
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all email systems and file-sharing services in use where personal data may be sent, including both
+  internal and external platforms.
+- Document typical transmission scenarios for each listed system, specifying the types of personal data
+  involved and intended recipients.
+- Name the individual responsible for maintaining the list of transmission contexts, avoiding generic
+  roles like "IT" or "the team".
+- Record the date when the transmission contexts scope was last reviewed and updated to show it reflects
+  current practices.

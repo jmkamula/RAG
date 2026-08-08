@@ -1,0 +1,19 @@
+must_id: item:B.8.5.6:scope_exclusions
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+must_text: Excluded suppliers (no PII contact) with rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all subcontractors in a table, including company name and primary contact, to show the full population
+  considered for scope determination.
+- State for each excluded subcontractor the specific reason they do not process personal data, using clear,
+  factual language.
+- Document the rationale for exclusion with a dated note from the responsible data protection officer
+  or privacy lead.
+- Name the reviewer who approved each exclusion decision, ensuring this is a specific individual, not
+  a group or department.
+- Avoid using generic justifications like "no PII" without further explanation; specify the service or
+  contract terms that prevent access to personal data.

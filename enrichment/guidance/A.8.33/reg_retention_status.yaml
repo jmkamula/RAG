@@ -1,0 +1,15 @@
+must_id: item:A.8.33:reg_retention_status
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Per-row retention status (active / scheduled-for-deletion / archived)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the retention status for each test dataset row as "active," "scheduled-for-deletion," or "archived"
+  in a dedicated column of the register.
+- Assign responsibility for updating retention statuses to a named individual, not a generic team or department.
+- Date each change to a dataset's retention status to provide a clear history of status updates.
+- Cross-reference each dataset row with the relevant retention policy or schedule that justifies its current
+  status.

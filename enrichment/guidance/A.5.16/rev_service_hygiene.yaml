@@ -1,0 +1,19 @@
+must_id: item:A.5.16:rev_service_hygiene
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: 'Service-account hygiene audit (sample of service accounts re-validated: owner still employed,
+  scope still appropriate, expiry not lapsed)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a sample of active service accounts from your identity-management system and record their unique
+  identifiers in a dated review log.
+- Name the owner of each service account as a specific individual, not a team or department, in the review
+  documentation.
+- Confirm and document that each listed owner is still employed by the organisation as of the review date.
+- Review and record whether the assigned permissions and scope for each service account remain appropriate
+  for its current use.
+- Check and note the expiry date for each service account, flagging any that have lapsed or are missing
+  expiry information.

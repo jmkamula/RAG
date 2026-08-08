@@ -1,0 +1,19 @@
+must_id: item:Art.35:rev_coverage
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Coverage check — every in-scope activity has a current DPIA OR documented Art.35.5 white-list
+  justification
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current data processing activities that fall within the scope of GDPR Article 35 in a dated
+  register.
+- Cross-reference each activity in the register with either a completed Data Protection Impact Assessment
+  (DPIA) or a documented Article 35.5 justification.
+- Name the responsible individual who verified the coverage for each activity, avoiding generic titles
+  like "the team" or "IT department".
+- Record the date when each DPIA or justification was last reviewed or updated.
+- Retain copies of all DPIAs and white-list justifications linked to their corresponding activities for
+  auditor inspection.

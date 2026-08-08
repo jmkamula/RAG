@@ -1,0 +1,19 @@
+must_id: item:9.2:corrective
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Corrective action follow-up process
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for tracking corrective actions raised during audits, including responsible persons
+  and deadlines, in the Internal Audit Programme.
+- Assign a named individual to monitor the status of each corrective action and update progress in a dated
+  log.
+- Record evidence of follow-up activities, such as emails or meeting notes, confirming completion or progress
+  of each corrective action.
+- Name the owner of each corrective action as a specific person, not a group or department, to avoid ambiguity
+  in accountability.
+- Retain signed or approved closure records for each corrective action, showing verification that the
+  issue has been addressed.

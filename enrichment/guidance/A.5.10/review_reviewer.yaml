@@ -1,0 +1,13 @@
+must_id: item:A.5.10:review_reviewer
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Reviewer identity and role (typically CISO with HR and legal input)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual, such as the CISO, in the Acceptable Use Policy review record.
+- Record the review date and the reviewer’s role in the policy review log or meeting minutes.
+- List all contributors from HR and legal by full name and job title in the review documentation.
+- Obtain a signature or written approval from the named reviewer to confirm completion of the policy review.

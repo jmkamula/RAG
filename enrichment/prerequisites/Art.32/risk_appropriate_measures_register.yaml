@@ -1,0 +1,48 @@
+leaf_id: req:Art.32:risk_appropriate_measures_register
+control_ref: Art.32
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a complete and up-to-date RoPA to identify all processing activities for which risk-appropriate
+    measures must be documented. Without this, you cannot scope or structure the register required by
+    Art.32.
+  good_enough: A current RoPA listing all relevant processing activities, with enough detail to map each
+    activity to its risk profile and implemented measures.
+- ref: Art.24
+  standard_id: GDPR:2016/679
+  title: Responsibility of the controller
+  category: direct
+  rationale: Art.24 sets the expectation that the controller is accountable for implementing and evidencing
+    appropriate measures. This frames the need for a documented register as required by Art.32.
+  good_enough: A clear assignment of responsibility for GDPR compliance, showing who is accountable for
+    security measures and their documentation.
+- ref: Art.25
+  standard_id: GDPR:2016/679
+  title: Data protection by design and by default
+  category: direct
+  rationale: DPbD decisions shape the technical and organizational measures that must be justified in
+    the Art.32 register. Without this, you cannot explain why measures are risk-appropriate.
+  good_enough: Documented evidence that privacy and security were considered in the design of processing
+    activities, even if not fully mature.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information security risk assessment
+  category: cross_role
+  rationale: A risk assessment per processing activity is needed to justify why specific measures are
+    'appropriate' for the risk. Art.32 requires this risk-based approach.
+  good_enough: A recent risk assessment with risk scores or summaries for each processing activity, sufficient
+    to support measure selection.
+- ref: A.5.7
+  standard_id: ISO27001:2022
+  title: Threat intelligence
+  category: cross_role
+  rationale: Threat intelligence informs the risk assessment and helps determine what measures are appropriate
+    for current threats. Without this, risk judgments may be outdated or incomplete.
+  good_enough: A summary of current threat intelligence relevant to your processing activities, even if
+    not exhaustive.

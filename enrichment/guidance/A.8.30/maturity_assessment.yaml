@@ -1,0 +1,19 @@
+must_id: item:A.8.30:maturity_assessment
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Vendor security-maturity assessment before engagement (cross-link to A.5.19 supplier risk)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the security-maturity assessment results for each potential development vendor, including assessment
+  date and responsible assessor’s name.
+- Cross-reference each vendor’s assessment record to the supplier risk register entry required by A.5.19,
+  showing risk rating and mitigation actions.
+- Name the person who approved the vendor selection decision, ensuring this is a specific individual and
+  not a group or department.
+- Retain evidence of completed assessments and approvals before signing any contract or starting work
+  with the vendor.
+- State the criteria used for security-maturity assessment and confirm these were applied consistently
+  to all considered vendors.

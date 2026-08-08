@@ -1,0 +1,17 @@
+must_id: item:A.7.6:scope_areas
+control_ref: A.7.6
+standard_id: ISO27001:2022
+must_text: Secure areas in scope (drawn from A.7.1 register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the list of secure areas from your A.7.1 physical security register to confirm all relevant
+  locations are included in your scope document.
+- Name each secure area in scope using its unique location identifier and a plain-language description,
+  avoiding vague terms like "offices" or "server rooms."
+- Document the date and version of the secure areas scope, and record the person responsible for maintaining
+  its accuracy.
+- Attach or link supporting floor plans or access lists that clearly show the boundaries of each secure
+  area named in the scope.

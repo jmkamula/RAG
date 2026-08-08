@@ -1,0 +1,18 @@
+must_id: item:A.7.4.4:rev_drift_sweep
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+must_text: Drift sweep — new processing activities checked for minimisation opportunity
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to conduct regular reviews of all new or changed data processing activities
+  for minimisation opportunities.
+- Document each review in a dated record, noting the processing activity, assessment findings, and any
+  minimisation actions taken or recommended.
+- Cross-reference each review entry with the corresponding data inventory or processing register to confirm
+  all new activities are included.
+- Name the reviewer as a specific person — do not use generic roles like "the team" or "IT department".
+- Retain evidence of management sign-off for any minimisation recommendations that are not implemented,
+  including the rationale for the decision.

@@ -1,0 +1,18 @@
+must_id: item:Art.85:proc_activity_classification
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: Classification rules for journalism / academic / artistic / literary expression activities
+  (distinguishes from general processing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document clear written criteria that define journalism, academic, artistic, and literary expression
+  activities, distinguishing them from general data processing.
+- Name the individual or role responsible for applying these classification rules, ensuring it is not
+  listed as a group or department.
+- Record each application of the rules in a dated log, including the rationale for the classification
+  decision and any supporting evidence.
+- Review the classification rules annually and update the documented criteria with the date of review
+  and the name of the reviewer.

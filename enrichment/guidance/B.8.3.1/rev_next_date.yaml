@@ -1,0 +1,16 @@
+must_id: item:B.8.3.1:rev_next_date
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the support program in the review document, using a clear and
+  specific calendar date.
+- Record the name of the individual responsible for scheduling and conducting the next review within the
+  same document.
+- Confirm that the review document is dated and version-controlled to show when the next review date was
+  last set.
+- Name the owner as a specific individual—do not use generic titles like "the team" or "support staff."

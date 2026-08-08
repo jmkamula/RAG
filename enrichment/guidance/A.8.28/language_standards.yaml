@@ -1,0 +1,20 @@
+must_id: item:A.8.28:language_standards
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Language-specific coding standards published (Python / Java / JavaScript / Go / C/C++ / Rust
+  as applicable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the programming languages your organisation uses in a dated register, listing Python, Java, JavaScript,
+  Go, C/C++, or Rust as applicable.
+- Document secure coding standards for each language in separate, clearly titled sections or files, referencing
+  recognised industry sources.
+- Publish the language-specific standards on your internal documentation portal, noting the publication
+  date and the responsible author.
+- Assign a named individual as the owner for each language’s coding standard, avoiding generic roles like
+  “the team” or “IT department.”
+- Review and update each standard at least annually, recording the review date and reviewer’s name in
+  the document history.

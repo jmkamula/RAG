@@ -1,0 +1,18 @@
+must_id: item:A.5.10:acceptable_uses
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Acceptable use rules stated (work purposes, identified personal-use boundaries, BYOD where
+  applicable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific work purposes for which organisational systems and devices may be used in the Acceptable
+  Use Policy document.
+- Document clear boundaries for personal use of organisational resources, including any restrictions or
+  permitted activities, within the policy.
+- Include explicit rules for the use of personally owned devices (BYOD), if applicable, in a dedicated
+  section of the policy.
+- Name the policy owner as a specific individual, not a team or department, on the policy cover page.
+- Record the policy approval date and the name of the approving authority in the policy document.

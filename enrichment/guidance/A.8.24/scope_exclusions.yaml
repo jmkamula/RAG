@@ -1,0 +1,18 @@
+must_id: item:A.8.24:scope_exclusions
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Exclusion rationale + compensating controls (e.g. public-classification data)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific systems, data types, or processes excluded from cryptography requirements, including
+  clear reasons for each exclusion.
+- State the classification level of excluded data, confirming it is publicly available or otherwise justified
+  for exclusion.
+- Describe compensating controls in place to address risks for each exclusion, such as access restrictions
+  or monitoring.
+- Name the decision-maker responsible for each exclusion as a specific individual, not a group or department.
+- Record the date and version of the exclusion rationale document, ensuring it is current and not an undated
+  draft.

@@ -1,0 +1,19 @@
+must_id: item:A.8.8:scanning_cadence
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Vulnerability scanning cadence per asset class (continuous for high-criticality, weekly minimum)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the scanning frequency for each asset class in the procedure, specifying "continuous" for high-criticality
+  assets and "weekly minimum" for others.
+- Name the person responsible for scheduling and monitoring vulnerability scans for each asset class,
+  listing their full name and role.
+- Record the date and version number of the procedure to show when scanning cadences were last reviewed
+  and approved.
+- Attach sample scan logs or reports that show actual scan dates and asset classes, demonstrating adherence
+  to the documented cadence.
+- Specify asset classes clearly; avoid vague categories like "servers" or "applications" without further
+  breakdown by criticality.

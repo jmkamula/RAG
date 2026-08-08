@@ -1,0 +1,20 @@
+must_id: item:A.5.35:findings
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Findings listed with severity (concrete, evidenced, traceable to the underlying observation
+  — not just generic recommendations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each finding with a clear severity rating, such as "high," "medium," or "low," directly linked
+  to the risk or impact described.
+- Reference the specific observation or evidence for each finding, such as log entries, interview notes,
+  or document excerpts, within the report.
+- Assign a unique identifier to every finding so it can be traced back to supporting evidence and the
+  relevant review date.
+- Name the reviewer as a specific individual, not a team or department, and include their signature and
+  the date of the review.
+- Avoid using generic recommendations; describe each finding in concrete terms, showing how it was identified
+  and why it matters.

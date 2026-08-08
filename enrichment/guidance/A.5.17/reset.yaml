@@ -1,0 +1,20 @@
+must_id: item:A.5.17:reset
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Reset / recovery process with identity re-verification (out-of-band; no static security questions;
+  rate-limited)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step reset and recovery process, including how users are prompted for identity
+  re-verification using a separate communication channel.
+- State the method used for identity re-verification, ensuring it does not rely on static security questions
+  or information easily guessed or found.
+- Record the rate-limiting controls in place for reset and recovery attempts, including thresholds and
+  lockout procedures, in the procedure.
+- Name the owner as a specific individual responsible for maintaining and updating the reset and recovery
+  procedure, not a team or department.
+- Retain logs showing recent reset or recovery events, including timestamps and the method of identity
+  re-verification used.

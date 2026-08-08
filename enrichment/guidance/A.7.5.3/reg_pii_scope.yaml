@@ -1,0 +1,18 @@
+must_id: item:A.7.5.3:reg_pii_scope
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+must_text: PII scope per row (categories + volume)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific categories of personal data transferred in each log entry, using clear and consistent
+  terminology that matches your data inventory.
+- Document the volume or quantity of personal data transferred per event, using a measurable unit such
+  as number of records or files.
+- Name the PII transfer event log owner as a specific individual, not a team or department, in the log
+  documentation.
+- Cross-reference each log entry to the relevant processing activity or system to confirm the PII is within
+  your defined scope.
+- Date and sign each log entry to provide a clear record of when and by whom the information was entered.

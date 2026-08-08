@@ -1,0 +1,17 @@
+must_id: item:A.7.4.9:proc_authz_channels
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Authorised transmission channels defined (secure protocols + endpoints + auth requirements)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all approved channels for transmitting personal data, specifying the secure protocols, endpoints,
+  and authentication methods in a dated procedure document.
+- Name the individuals or roles authorized to use each transmission channel, ensuring each is identified
+  by full name or unique job title.
+- Document the process for reviewing and updating authorized channels and individuals, including the review
+  frequency and responsible person.
+- Avoid describing channels or users in vague terms like "as needed" or "all staff"—use precise definitions
+  for both.

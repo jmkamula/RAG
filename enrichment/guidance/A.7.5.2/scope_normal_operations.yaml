@@ -1,0 +1,19 @@
+must_id: item:A.7.5.2:scope_normal_operations
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+must_text: Normal-operations destinations (direct + subprocessor + support tier)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all destinations where personal data is routinely sent during normal operations, including direct
+  recipients, subprocessors, and support providers, in a dated register.
+- Name the specific legal entity for each destination, avoiding generic labels like "cloud provider" or
+  "support team".
+- Record the type of personal data shared with each destination and the business purpose for the transfer
+  in the same register.
+- Review and update the register at least annually, noting the review date and the person responsible
+  for the update.
+- Retain evidence of communication with each destination confirming their role and responsibilities regarding
+  received personal data.

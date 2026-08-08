@@ -1,0 +1,16 @@
+must_id: item:A.5.36:pgm_date
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Meta-review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent compliance review meta-review in a dated log or register.
+- State the planned interval for meta-reviews in a documented schedule or policy, referencing the relevant
+  control.
+- Compare the actual meta-review date to the planned interval and document the result in the review log.
+- Name the reviewer who confirmed the timing as a specific individual, not a group or department.
+- Retain evidence of the meta-review, such as meeting minutes or a signed checklist, showing the date
+  and participants.

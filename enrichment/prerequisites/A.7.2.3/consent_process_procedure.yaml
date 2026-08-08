@@ -1,0 +1,41 @@
+leaf_id: req:A.7.2.3:consent_process_procedure
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the specific purposes for processing personal data before you
+    can determine if consent is the appropriate lawful basis. This clarity is essential to decide when
+    and how to seek consent.
+  good_enough: A list or register of processing activities with clearly stated purposes is available and
+    up-to-date for all relevant data flows.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Consent is only one of several lawful bases for processing personal data. You need to have
+    already assessed and documented which processing activities require consent versus another lawful
+    basis.
+  good_enough: A documented mapping of processing activities to their lawful bases exists, with those
+    requiring consent clearly flagged.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope of your ISMS defines which parts of the organization and which data processing
+    activities are covered. This ensures your consent procedure applies to all relevant areas.
+  good_enough: A current ISMS scope statement exists that includes all business units and processes where
+    personal data is processed.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles is necessary so that responsibilities for obtaining and managing
+    consent are understood and actionable.
+  good_enough: A documented assignment of privacy and consent-related responsibilities exists, even if
+    high-level, covering all relevant teams.

@@ -1,0 +1,14 @@
+must_id: item:A.6.2:owner
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Named owner of the template (HR with InfoSec + Legal joint sign-off on the clauses)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the template owner in the document header, not just "HR" or a department.
+- Record the joint sign-off by HR, Information Security, and Legal with printed names, signatures, and
+  dates on the template approval page.
+- Attach a version history table showing each update, the approvers, and the date of approval.
+- Store the signed template and version history in a controlled document repository with access logs.

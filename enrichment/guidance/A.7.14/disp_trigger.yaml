@@ -1,0 +1,17 @@
+must_id: item:A.7.14:disp_trigger
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Per-record disposal trigger
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific event or reason that triggered disposal for each equipment item in the disposal
+  record, such as end-of-life, upgrade, or damage.
+- Document the date the disposal trigger was identified and the name of the person who authorized the
+  disposal action.
+- Attach supporting evidence, such as a decommissioning request or incident report, to each disposal record
+  for traceability.
+- Name the disposal trigger clearly for each item—avoid using vague terms like "routine" or "as needed"
+  that lack specific context.

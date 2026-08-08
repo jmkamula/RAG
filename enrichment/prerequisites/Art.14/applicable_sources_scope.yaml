@@ -1,0 +1,42 @@
+leaf_id: req:Art.14:applicable_sources_scope
+control_ref: Art.14
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of processing
+  category: direct
+  rationale: You must identify and document the lawful basis for processing personal data from third-party
+    sources, as this must be communicated under Art.14. Without a clear lawful basis, you cannot accurately
+    scope or justify the data sources covered.
+  good_enough: A list of lawful bases mapped to each third-party data source, with brief justification
+    for each, is sufficient to proceed.
+- ref: Art.12
+  standard_id: GDPR:2016/679
+  title: Transparent information, communication and modalities for the exercise of the rights of the data
+    subject
+  category: direct
+  rationale: Art.12 sets the transparency and communication standards for all privacy notices, including
+    those required under Art.14. You need to know how information about third-party data sources will
+    be delivered to data subjects.
+  good_enough: A summary of the chosen communication channels and formats for privacy notices is enough
+    to unblock the Art.14 scope draft.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: Your RoPA should already list the categories of data, sources, and processing activities.
+    This inventory is essential to identify which third-party sources are in scope for Art.14.
+  good_enough: A current RoPA that lists all third-party data sources and their associated processing
+    activities is sufficient, even if not fully detailed.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which business units, systems, and processes are covered by your compliance
+    program. You need this to ensure all relevant third-party data flows are captured in your Art.14 scope.
+  good_enough: A high-level ISMS scope statement that identifies the organizational boundaries for data
+    processing is enough to proceed.

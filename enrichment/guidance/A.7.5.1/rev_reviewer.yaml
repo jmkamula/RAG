@@ -1,0 +1,15 @@
+must_id: item:A.7.5.1:rev_reviewer
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Legal)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the Data Protection Officer (DPO) and a designated Legal representative as reviewers in the
+  Transfer Basis Program Review document.
+- Record the date each reviewer completed their assessment directly on the review form or report.
+- Obtain a physical or electronic signature from both the DPO and Legal representative to confirm their
+  participation in the review.
+- Avoid listing a group, team, or department as the reviewer; specify named individuals for clear accountability.

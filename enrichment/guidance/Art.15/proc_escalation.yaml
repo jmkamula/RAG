@@ -1,0 +1,16 @@
+must_id: item:Art.15:proc_escalation
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: DPO or legal escalation path for unusual requests (mixed-rights, joint controllers, processor-held
+  data)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the DPO or legal contact responsible for escalation by full name and job title in the DSAR Handling
+  Procedure.
+- Document a clear, step-by-step escalation process for handling unusual requests, including mixed-rights,
+  joint controllers, or processor-held data scenarios.
+- Record the date of the most recent review or update of the escalation path in the procedure.
+- Avoid listing only a generic team or department as the escalation contact; specify an accountable individual.

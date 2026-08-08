@@ -1,0 +1,20 @@
+must_id: item:A.5.13:reg_classification_levels
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Classification levels deployed per row (links to A.5.12 scheme — sometimes a system only uses
+  a subset)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each system or information type in the register to the classification levels actually
+  used, not just those defined in the policy.
+- Document the classification scheme version from control A.5.12 that applies to each row, including a
+  date or version number.
+- Name the person responsible for assigning classification levels for each system, using a specific individual
+  rather than a team or role.
+- Record any exceptions where a system does not use all available classification levels, with a brief
+  explanation and approval date.
+- Confirm that each entry in the register is dated and reviewed at least annually, with the reviewer's
+  name clearly listed.

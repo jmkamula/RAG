@@ -1,0 +1,18 @@
+must_id: item:A.6.5:nda_continuation
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: NDA continuation note — most NDAs survive employment per A.6.6 templates; the exit briefing
+  reinforces this
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the exit briefing document that the employee’s confidentiality obligations continue after employment,
+  referencing the relevant NDA clause.
+- Cross-reference the NDA signed by the employee, ensuring it includes a post-employment confidentiality
+  section with clear survival terms.
+- Record the date and name of the person who delivered the exit briefing, and have the departing employee
+  sign to acknowledge receipt.
+- Name the responsible HR or security staff member overseeing the exit process as a specific individual,
+  not as a team or department.

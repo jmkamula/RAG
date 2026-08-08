@@ -1,0 +1,17 @@
+must_id: item:A.7.2.8:scope_covered_activities
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Covered activities enumerated (all processing activities the org performs)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all personal data processing activities your organization performs in a single, dated Record of
+  Processing Activities (RoPA) document.
+- Assign a specific individual as the owner responsible for maintaining the RoPA, naming them directly
+  rather than using a team or department.
+- Cross-reference each processing activity in the RoPA with its relevant business function or department
+  to demonstrate full coverage.
+- Review the RoPA for completeness and update it at least annually, recording the review date and reviewer’s
+  name.

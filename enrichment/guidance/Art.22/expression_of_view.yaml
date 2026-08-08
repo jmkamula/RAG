@@ -1,0 +1,16 @@
+must_id: item:Art.22:expression_of_view
+control_ref: Art.22
+standard_id: GDPR:2016/679
+must_text: Expression-of-view mechanism (subject can communicate context the model didn't see)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a clear process that allows individuals to submit their point of view regarding any automated
+  decision that affects them.
+- Name a specific staff member responsible for receiving and responding to these submissions, rather than
+  a generic team or department.
+- Record each submission from a data subject, including the date, content, and any follow-up actions taken.
+- Retain evidence of communication channels offered to subjects, such as a dedicated email address or
+  web form, in your procedure documentation.

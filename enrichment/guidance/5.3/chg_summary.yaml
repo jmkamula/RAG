@@ -1,0 +1,15 @@
+must_id: item:5.3:chg_summary
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Change summary — what was added, removed, or reassigned
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each change to ISMS roles with a clear summary stating what was added, removed, or reassigned,
+  including relevant role titles.
+- Name the individual who authorized the change, and include their job title to show clear accountability.
+- Date every change entry to provide a timeline of role assignments and updates.
+- Reference the related policy, procedure, or meeting minutes that triggered the change for traceability.
+- Avoid vague descriptions like "updated roles"—specify the exact nature of each change for audit clarity.

@@ -1,0 +1,17 @@
+must_id: item:B.8.5.2:reg_basis_link
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+must_text: Basis link per row (link to B.8.5.1)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each transfer destination entry to the corresponding lawful basis record from B.8.5.1
+  using a unique identifier or direct link.
+- Document the lawful basis for every transfer destination in the register, ensuring it matches the justification
+  listed in B.8.5.1.
+- Name the individual responsible for maintaining the register, avoiding generic titles such as "the team"
+  or "IT department".
+- Record the date each transfer destination entry was last reviewed or updated to show ongoing alignment
+  with B.8.5.1.

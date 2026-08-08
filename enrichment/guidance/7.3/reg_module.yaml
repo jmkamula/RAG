@@ -1,0 +1,17 @@
+must_id: item:7.3:reg_module
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Module identifier per row (policy module, contribution module, consequences module)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to the ISMS Awareness Completion Register to record the specific module identifier for
+  each training entry.
+- Record the exact module identifier (e.g., "policy module," "contribution module," or "consequences module")
+  for every individual’s completed training row.
+- Cross-reference each module identifier in the register with the official list of ISMS awareness modules
+  to confirm accuracy.
+- Name the module identifier clearly; avoid using vague terms like "general training" that do not specify
+  the covered module.

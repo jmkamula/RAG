@@ -1,0 +1,19 @@
+must_id: item:Art.18:restriction_mechanism
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Technical restriction mechanism (flag in data store / move to restricted partition / temporary
+  access lock)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the technical method used to restrict processing, such as a data flag, restricted partition,
+  or access lock, in a dated procedure record.
+- Name the individual responsible for activating and monitoring the restriction mechanism, listing their
+  full name and role in the procedure.
+- Record each restriction event in a log, including the date, time, data subject identifier, and reason
+  for restriction.
+- Confirm that the restriction mechanism prevents all processing except storage or uses allowed by law,
+  and retain screenshots or system logs as evidence.
+- Specify the restriction owner as a named person, not a team or department, to avoid ambiguity in accountability.

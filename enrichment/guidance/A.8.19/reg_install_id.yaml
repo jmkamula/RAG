@@ -1,0 +1,17 @@
+must_id: item:A.8.19:reg_install_id
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Per-install unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each software installation entry in the register, using a sequential number
+  or UUID that cannot be reused.
+- Record the unique identifier alongside details such as software name, version, installation date, and
+  device or location.
+- Cross-reference the unique identifier in related records, such as license documentation or removal logs,
+  to maintain traceability.
+- Avoid using generic or duplicate identifiers like "N/A" or "default" that could prevent auditors from
+  distinguishing between installations.

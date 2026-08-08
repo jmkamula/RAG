@@ -1,0 +1,18 @@
+must_id: item:A.5.16:rev_actions
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Action items captured (e.g. tighten auto-suspend threshold, expand HR-cascade automation, retire
+  shared accounts)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each action item from the identity-management program review in a dated meeting minutes document,
+  listing the specific adjustment discussed.
+- Assign a named individual as the responsible owner for each action item, avoiding generic roles like
+  "IT team" or "management."
+- Document the rationale for each action item, linking it to the relevant program review finding or risk
+  identified during the session.
+- Capture the agreed target completion date for every action item in the same record, ensuring deadlines
+  are explicit and trackable.

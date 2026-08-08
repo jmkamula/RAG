@@ -1,0 +1,18 @@
+must_id: item:A.7.2.8:proc_secure_maintenance
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Secure maintenance — access control + integrity for the RoPA itself
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual as the RoPA administrator and record their name and contact details in the
+  RoPA Maintenance Procedure.
+- Document the technical and physical access controls restricting who can view or edit the RoPA, including
+  system names and permission levels.
+- Record the process for approving changes to the RoPA, including required sign-off by a named data protection
+  officer or delegate.
+- Retain an audit log showing the date, time, and user for each change made to the RoPA.
+- Specify the owner as a specific person, not a group or department, to avoid auditor concerns about unclear
+  accountability.

@@ -1,0 +1,16 @@
+must_id: item:B.8.5.7:reg_processing_scope
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+must_text: Processing scope per row (what the subcontractor does)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific processing activities each subcontractor performs in a dedicated column of the Subcontractor
+  Engagement Register.
+- Name the data types or categories handled by each subcontractor, matching them to your organisation’s
+  data inventory.
+- State the lawful basis or contractual reason for each subcontractor’s processing, referencing the relevant
+  agreement or contract clause.
+- Name the processing scope in clear, concrete terms—avoid vague descriptions like “IT services” or “support.”

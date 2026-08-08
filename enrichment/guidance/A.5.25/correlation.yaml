@@ -1,0 +1,19 @@
+must_id: item:A.5.25:correlation
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Correlation / aggregation of events for trend identification (links to A.8.16 monitoring)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for collecting and combining security event data from all relevant sources, including
+  logs, alerts, and incident reports, in a written procedure.
+- Assign a named individual or role responsible for regularly reviewing aggregated event data to identify
+  trends or patterns.
+- Record examples of past event correlation or trend identification, including dates, sources analyzed,
+  and resulting actions taken.
+- Name the owner of the procedure as a specific person, not a generic team or department, in the procedure
+  document.
+- Cross-reference the procedure to the monitoring activities described in your A.8.16 documentation, showing
+  how event data feeds into trend analysis.

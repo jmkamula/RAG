@@ -1,0 +1,16 @@
+must_id: item:B.8.5.7:proc_written_contract
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+must_text: Written contract with each subcontractor
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a signed contract for each subcontractor, including the date of signature and the names of
+  both parties.
+- Retain a copy of each subcontractor contract in a central, access-controlled repository.
+- Name the contract owner as a specific individual responsible for managing subcontractor agreements,
+  not a generic role or team.
+- Cross-reference each subcontractor in your supplier register with the corresponding contract file and
+  signature date.

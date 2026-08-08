@@ -1,0 +1,19 @@
+must_id: item:A.5.27:rev_repeat
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Repeat-incident analysis (lessons that should have prevented later incidents — did they?)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for tracking and analyzing repeat incidents, avoiding generic
+  roles like "security team" or "IT department".
+- Document each incident where a previous lesson should have prevented recurrence, including incident
+  date, description, and related prior lesson.
+- Record the analysis outcome for each repeat incident, stating whether the lesson was applied, misapplied,
+  or ignored, and why.
+- Retain meeting minutes or review logs showing discussion of repeat incidents and decisions on further
+  action, with participant names and dates.
+- Assign follow-up actions to named individuals for any lessons found ineffective, and log completion
+  dates for these actions.

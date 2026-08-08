@@ -1,0 +1,47 @@
+leaf_id: req:A.7.2.5:applicable_scope
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines which parts of the organization and which processing activities are
+    covered. You need this to know which activities to assess for PIA triggers.
+  good_enough: A clear, up-to-date scope statement that lists included business units, systems, and processing
+    activities.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purposes for which personal data is processed to determine if any activity
+    could trigger a PIA requirement.
+  good_enough: Documented purposes for all in-scope processing activities, even if some are high-level
+    or pending further detail.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity helps identify those that may
+    present higher risk and require a PIA.
+  good_enough: Each processing activity has a mapped lawful basis, even if some are provisional or under
+    review.
+- ref: Art.35
+  standard_id: GDPR:2016/679
+  title: Data Protection Impact Assessment (DPIA)
+  category: cross_role
+  rationale: Article 35 defines when a DPIA (PIA) is legally required, including the criteria and mandatory
+    triggers. This is essential for setting the scope of applicable PIA triggers.
+  good_enough: A summary of Art.35 triggers and any relevant supervisory authority lists, tailored to
+    your processing context.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: You need to know which information assets involve personal data and their sensitivity to
+    identify high-risk processing activities.
+  good_enough: A basic classification scheme that flags personal and sensitive data assets, even if not
+    fully mature.

@@ -1,0 +1,17 @@
+must_id: item:A.5.1:comm_date
+control_ref: A.5.1
+standard_id: ISO27001:2022
+must_text: Date of publication/communication
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date the information security policy was published and communicated in a dated register
+  or communication log.
+- Name the person responsible for sending or posting the policy, specifying a real individual rather than
+  a generic role or team.
+- Retain a copy of the communication, such as an email, intranet post, or announcement, showing the date
+  and recipients.
+- Cross-reference the policy version communicated with the date in your register to confirm alignment
+  between the document and the communication record.

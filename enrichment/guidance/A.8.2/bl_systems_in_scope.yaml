@@ -1,0 +1,16 @@
+must_id: item:A.8.2:bl_systems_in_scope
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Systems and processes in scope for privileged access governance
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems and processes that require privileged access in a dated inventory, referencing unique
+  system or process names.
+- Assign a named individual as the owner for each system or process, avoiding group or team designations.
+- Document the criteria used to determine which systems and processes are in scope, including the rationale
+  and approval date.
+- Cross-reference each system or process in the inventory with supporting access control documentation,
+  such as access logs or privilege assignment records.

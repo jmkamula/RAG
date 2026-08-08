@@ -1,0 +1,19 @@
+must_id: item:Art.32:reg_iso_mapping
+control_ref: Art.32
+standard_id: GDPR:2016/679
+must_text: Per-row mapping to implementing ISO 27001 controls
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each risk-appropriate measure in your register with a unique row, including a clear description
+  and date of implementation.
+- Map every measure to the specific ISO 27001 control by referencing the control number and title in the
+  same row.
+- Name the responsible individual for maintaining the mapping, avoiding generic roles like "IT" or "Compliance
+  Team".
+- Attach supporting evidence, such as policy documents or technical configurations, to each row to demonstrate
+  the control’s implementation.
+- Review and update the register at least annually, recording the review date and reviewer’s name for
+  each update.

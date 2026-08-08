@@ -1,0 +1,48 @@
+leaf_id: req:B.8.2.6:processor_ropa_register
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The processor RoPA must accurately reflect the scope of processing activities covered by
+    the ISMS. Without a clear scope statement, it is impossible to determine which processing activities
+    and customers need to be included in the register.
+  good_enough: A documented, up-to-date ISMS scope statement that identifies all relevant processing activities
+    and customer relationships.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: The processor RoPA requires knowledge of the information assets and systems involved in processing
+    on behalf of customers. An asset register ensures you know what data and systems are in play.
+  good_enough: A basic inventory of information assets and systems used in customer data processing, even
+    if not fully detailed.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Accurate RoPA maintenance depends on clear assignment of responsibility for collecting, updating,
+    and safeguarding processing records. Without this, the register may be incomplete or outdated.
+  good_enough: Named individuals or teams responsible for maintaining processor-side RoPA, documented
+    in a policy or job description.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Each processing activity in the RoPA must have its purpose documented. This is a direct input
+    to the register fields required by B.8.2.6.
+  good_enough: A list or summary of processing purposes for each customer relationship, even if not yet
+    in final RoPA format.
+- ref: Art.30.2
+  standard_id: GDPR:2016/679
+  title: Processor Records of Processing Activities
+  category: cross_role
+  rationale: Article 30.2 of the GDPR defines the minimum content required for processor-side RoPA. The
+    ISO27701 register must align with these legal requirements to be meaningful and compliant.
+  good_enough: Awareness of the GDPR Article 30.2 field set and a mapping of which data points are available
+    or missing for each customer.

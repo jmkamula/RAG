@@ -1,0 +1,19 @@
+must_id: item:Art.35:scope_mandatory
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Art.35.3 mandatory categories (a-c) operationalised — systematic evaluation / large-scale special
+  category / large-scale systematic public monitoring
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity and clearly state whether it involves systematic evaluation, large-scale
+  special category data, or large-scale public monitoring, as defined in Art.35.3.
+- Document the criteria and reasoning used to determine if each activity meets any of the Art.35.3 mandatory
+  DPIA categories.
+- Name the individual responsible for the assessment decision for each processing activity, not just a
+  team or department.
+- Record the date when each processing activity was last reviewed against the Art.35.3 criteria.
+- Attach supporting evidence, such as data flow diagrams or processing volume estimates, to justify classification
+  under or outside the mandatory DPIA scope.

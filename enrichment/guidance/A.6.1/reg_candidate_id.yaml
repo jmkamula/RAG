@@ -1,0 +1,17 @@
+must_id: item:A.6.1:reg_candidate_id
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Per-record candidate identifier (links to identity register A.5.16 once hired; anonymised pre-hire
+  to comply with data minimisation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign each candidate a unique, anonymised identifier in the screening record register before hire,
+  avoiding use of names or personal details.
+- Cross-reference the candidate identifier with the identity register entry under control A.5.16 once
+  the candidate is hired, ensuring traceability.
+- Document the date each identifier is assigned and linked, creating a clear audit trail for every candidate
+  record.
+- Avoid using generic or duplicate identifiers; each must be unique to a single candidate and not reused.

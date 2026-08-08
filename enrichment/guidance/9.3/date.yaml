@@ -1,0 +1,17 @@
+must_id: item:9.3:date
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Date of review
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date of the management review meeting in the minutes to provide a clear timeline of
+  when the review occurred.
+- Name all attendees present at the review, listing each person individually rather than referring to
+  a group or department.
+- Sign the minutes by the chairperson or designated authority to confirm the accuracy and completeness
+  of the recorded date and discussion.
+- Retain the final version of the minutes in a controlled document repository, ensuring the date is visible
+  on every page.

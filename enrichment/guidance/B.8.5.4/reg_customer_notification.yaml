@@ -1,0 +1,19 @@
+must_id: item:B.8.5.4:reg_customer_notification
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+must_text: Customer notification date per row (or gag-order flag)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each customer was notified about a legally-binding disclosure request in a dedicated
+  column for every entry in the register.
+- Mark any disclosure request subject to a gag order with a clear flag in the same row, instead of a notification
+  date.
+- Name the person responsible for updating notification dates or gag order flags for each register entry,
+  using their full name.
+- Retain supporting evidence of customer notifications or gag order documents linked to each register
+  entry for verification.
+- Avoid leaving the notification date or gag order flag column blank—auditors will flag missing entries
+  as incomplete evidence.

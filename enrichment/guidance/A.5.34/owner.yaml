@@ -1,0 +1,19 @@
+must_id: item:A.5.34:owner
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Named owner of the privacy program (DPO where law requires; Privacy Officer or InfoSec lead
+  where DPO is not mandatory; named individual, not a generic 'Privacy Team')
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the privacy program in the policy, using their full name
+  and job title.
+- Document the date when the policy owner was last assigned or updated, and keep this record with the
+  policy document.
+- State in the policy whether a Data Protection Officer is required by law, and if not, specify the designated
+  Privacy Officer or Information Security lead.
+- Avoid listing a group, team, or department as the owner; use only a single, named person for clear accountability.
+- Retain evidence of the owner's acceptance of responsibility, such as a signed or acknowledged statement
+  within the policy.

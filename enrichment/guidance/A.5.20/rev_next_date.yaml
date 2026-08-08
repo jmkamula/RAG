@@ -1,0 +1,15 @@
+must_id: item:A.5.20:rev_next_date
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date clearly on the supplier agreement template, using a specific day,
+  month, and year.
+- Record the name of the individual responsible for the next review, avoiding generic titles like "team"
+  or "department".
+- Document the date this next review date was last updated, ensuring it is not left blank or undated.
+- Retain a copy of the supplier agreement template showing the current next review date for auditor inspection.

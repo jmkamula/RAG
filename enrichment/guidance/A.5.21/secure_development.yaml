@@ -1,0 +1,19 @@
+must_id: item:A.5.21:secure_development
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: Secure development practice expectations for software vendors
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the minimum secure development practices required from software vendors in your ICT Supply Chain
+  Information Security Procedure, referencing recognized standards such as OWASP or NIST.
+- Document the process for assessing vendor secure development maturity, including criteria, frequency,
+  and responsible person, in a dated procedure section.
+- Name the individual responsible for verifying vendor compliance with secure development expectations—do
+  not list a group or department.
+- Retain evidence of completed vendor assessments, such as signed checklists or evaluation reports, in
+  a centralized and dated repository.
+- Cross-reference each vendor’s contract to confirm secure development requirements are explicitly included
+  and not left as generic or boilerplate clauses.

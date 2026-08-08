@@ -1,0 +1,15 @@
+must_id: item:A.5.13:app_owner
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Owner per record (platform owner accepts ongoing accountability for labelling on this system)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the platform owner as a specific individual, including full name and job title, on each labelling
+  application record.
+- Record the date when the platform owner accepted responsibility for labelling on the relevant system.
+- Obtain the platform owner's signature or documented approval confirming ongoing accountability for labelling
+  on the system.
+- Avoid listing a team, department, or generic title as the owner; always specify an accountable person.

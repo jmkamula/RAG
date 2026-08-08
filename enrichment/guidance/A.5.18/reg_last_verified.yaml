@@ -1,0 +1,18 @@
+must_id: item:A.5.18:reg_last_verified
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Last-verified date per row (when this access was last confirmed still needed — drives staleness
+  detection between formal reviews)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a "Last Verified" date column to your Access Rights Register to record when each individual access
+  entry was most recently reviewed.
+- Record the actual date of last verification for every access entry, not just the date of the most recent
+  overall review.
+- Name the verifier as a specific individual for each row, avoiding generic entries like "IT" or "the
+  team".
+- Update the "Last Verified" date immediately after each access check, ensuring no row is left blank or
+  with outdated information.

@@ -1,0 +1,19 @@
+must_id: item:Art.37:scope_criteria_test
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: Art.37.1 criteria test operationalised (a public authority / b core activities = systematic
+  monitoring large-scale / c core activities = large-scale special category)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the results of an annual assessment that tests your organisation against each of the three
+  Article 37.1 criteria, with clear answers for a, b, and c.
+- Name the person or team responsible for conducting and signing off on the assessment, including their
+  title and the assessment date.
+- State the specific business activities reviewed for "core activities" and "large-scale" processing,
+  referencing relevant data flows or processing records.
+- Attach supporting evidence, such as data processing inventories or system diagrams, that demonstrate
+  how you determined whether the criteria apply.
+- Name the DPO designation owner as a specific individual, not just a department or generic title.

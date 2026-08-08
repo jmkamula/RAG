@@ -1,0 +1,16 @@
+must_id: item:A.5.26:reg_status
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Status per row (open / contained / eradicated / recovered / closed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the current status for each incident in the register using only the terms "open", "contained",
+  "eradicated", "recovered", or "closed".
+- Update the status field with the date of each status change to provide a clear timeline for every incident.
+- Name the person responsible for updating each incident’s status, ensuring a specific individual is listed
+  rather than a team or department.
+- Review the register regularly to confirm no incident is missing a status or has an ambiguous or outdated
+  status entry.

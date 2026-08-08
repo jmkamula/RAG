@@ -1,0 +1,16 @@
+must_id: item:A.5.35:fr_owner
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Named owner per finding (named individual, not generic team) with target closure date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each review finding in the register with a unique identifier, date of discovery, and a short
+  description of the issue.
+- Name a specific individual as the owner for each finding — do not use generic roles, teams, or departments.
+- Assign and document a clear target closure date for every finding, ensuring the date is realistic and
+  agreed by the named owner.
+- Update the register with the owner's full name and the closure date, and have the owner acknowledge
+  their responsibility with a dated signature or email confirmation.

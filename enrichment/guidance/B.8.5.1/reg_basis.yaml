@@ -1,0 +1,18 @@
+must_id: item:B.8.5.1:reg_basis
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+must_text: Basis cited per row (Art.45/46/47/49 or equivalent)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the legal basis for each international data transfer in the register, citing the specific article
+  number or equivalent law per entry.
+- Cross-reference each transfer entry with supporting documentation, such as contracts or adequacy decisions,
+  that justify the cited legal basis.
+- Name the person responsible for reviewing and updating each register entry, ensuring a specific individual
+  is listed rather than a team or department.
+- Date each entry and update in the register to show when the legal basis was last reviewed or confirmed.
+- Avoid using generic or placeholder text like "see contract" or "as applicable" as the legal basis; specify
+  the exact article or law.

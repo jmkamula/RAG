@@ -1,0 +1,18 @@
+must_id: item:A.7.5:reg_likelihood
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Per-row likelihood rating (informed by geography / historical events / climate projections)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a likelihood rating for each threat entry, using a defined scale that reflects the probability
+  of occurrence at the specific site.
+- Reference relevant geographic data, historical incident records, or climate projections for each likelihood
+  rating to show how the assessment was informed.
+- Name the individual responsible for assigning each likelihood rating in the register, ensuring a specific
+  person is listed, not a team or department.
+- Date each likelihood assessment entry to provide a clear timeline of when the evaluation was performed.
+- Attach supporting documentation or links for each threat where external data or projections were used
+  to justify the likelihood rating.

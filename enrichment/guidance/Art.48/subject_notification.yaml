@@ -1,0 +1,17 @@
+must_id: item:Art.48:subject_notification
+control_ref: Art.48
+standard_id: GDPR:2016/679
+must_text: Subject notification consideration — where lawful, notify affected subjects of disclosure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each instance where a foreign authority requests disclosure, including the date, requesting
+  authority, and information requested.
+- State whether notifying affected subjects is lawful for each disclosure by referencing the relevant
+  legal basis or restriction.
+- Record the decision to notify or not notify affected subjects, including the rationale and the name
+  of the decision-maker.
+- Retain copies of all notifications sent to affected subjects, with dates and recipient details.
+- Name the decision-maker as a specific individual, not a group or department, for each notification decision.

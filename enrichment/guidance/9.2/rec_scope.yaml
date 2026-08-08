@@ -1,0 +1,17 @@
+must_id: item:9.2:rec_scope
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Per-audit scope (which ISMS process / area was audited)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific ISMS process or area covered in each audit entry, using clear names that match your
+  documented ISMS scope.
+- Record the audit date, auditor(s), and the defined scope in the internal audit execution record for
+  each audit performed.
+- Cross-reference the audit scope with your ISMS scope document to confirm alignment and avoid missing
+  or mislabelled areas.
+- Name the audit scope owner as a specific individual responsible for defining and approving the scope,
+  not a generic team or department.

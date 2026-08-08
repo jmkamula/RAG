@@ -1,0 +1,19 @@
+must_id: item:9.1:rec_metric_id
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Metric identifier per row (matches procedure's metric catalog)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each metric in the ISMS Measurement Record with a unique identifier that exactly matches the identifier
+  in your documented metric catalog.
+- Cross-reference every metric entry in the Measurement Record to its corresponding entry in the metric
+  catalog, including title and description.
+- Confirm that the metric catalog is version-controlled and that the version number is recorded in the
+  Measurement Record for traceability.
+- Name the person responsible for maintaining the metric catalog and Measurement Record as a specific
+  individual, not a team or department.
+- Avoid using generic or placeholder identifiers—replace any such entries with specific, catalog-matching
+  metric codes.

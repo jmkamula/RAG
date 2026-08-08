@@ -1,0 +1,48 @@
+leaf_id: req:A.8.2:privileged_activity_log
+control_ref: A.8.2
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.15
+  standard_id: ISO27001:2022
+  title: Access control
+  category: direct
+  rationale: You need a defined access-control policy to know which users and roles are considered privileged,
+    and what actions require logging. Without this, you can't determine what should be monitored in the
+    privileged activity log.
+  good_enough: A documented access-control policy exists that clearly identifies privileged roles and
+    the types of actions they can perform.
+- ref: A.5.3
+  standard_id: ISO27001:2022
+  title: Segregation of duties
+  category: direct
+  rationale: Segregation of duties defines how privileged access is split to reduce risk. This informs
+    which activities and users must be logged to demonstrate that no single individual can perform conflicting
+    tasks.
+  good_enough: A basic segregation-of-duties matrix or description is available, showing how privileged
+    tasks are divided among roles.
+- ref: A.8.18
+  standard_id: ISO27001:2022
+  title: Use of privileged utility programs
+  category: direct
+  rationale: Privileged utility programs often allow powerful actions; knowing which utilities are in
+    scope ensures their use is logged as privileged activity.
+  good_enough: A list of privileged utility programs is identified, with a note on which roles can use
+    them.
+- ref: A.8.4
+  standard_id: ISO27001:2022
+  title: Access to source code
+  category: direct
+  rationale: Access to source code is a sensitive, privileged action. You need to know who can access
+    source code to ensure those activities are included in the privileged activity log.
+  good_enough: A record exists of who has source code access and what systems or repositories are in scope.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities is needed to identify who is considered privileged
+    and who is accountable for monitoring and reviewing the logs.
+  good_enough: A simple list or chart of key roles and their main responsibilities, especially for privileged
+    access, is available.

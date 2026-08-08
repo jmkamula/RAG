@@ -1,0 +1,18 @@
+must_id: item:A.7.2.5:rev_sa_consultation_audit
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: SA-consultation audit — high-residual-risk PIAs verified to have escalated where required
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each high-residual-risk Privacy Impact Assessment (PIA) completed in the past year, listing
+  them with unique identifiers and assessment dates.
+- Document the escalation path for each high-risk PIA, naming the individual or committee to whom each
+  was escalated.
+- Record the date and outcome of each escalation, including any decisions or actions taken, in a central
+  register.
+- Attach evidence of consultation with the relevant supervisory authority where required, such as correspondence
+  or meeting minutes.
+- Name the person responsible for verifying escalations as a specific individual, not as a team or department.

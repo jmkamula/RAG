@@ -1,0 +1,40 @@
+leaf_id: req:A.8.34:applicable_audit_testing_scope
+control_ref: A.8.34
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the boundaries of your ISMS to determine which systems and processes are
+    subject to audit testing. Without a clear scope, it's impossible to define what 'applicable' means
+    for audit activities.
+  good_enough: A documented scope statement that identifies the organizational units, assets, and processes
+    included in the ISMS—even if it's high-level or draft.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register ensures you know which information assets exist and are in scope
+    for audit testing. This is essential to avoid missing critical systems or testing irrelevant ones.
+  good_enough: A basic list of key information assets and systems, even if not fully detailed, so you
+    can reference what may be audited.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Knowing the classification of assets helps prioritize audit testing and ensures sensitive
+    or critical assets receive appropriate scrutiny.
+  good_enough: A simple documented scheme that assigns at least basic sensitivity levels to assets, so
+    you can identify which require more rigorous audit attention.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment results guide which areas and systems should be prioritized for audit testing,
+    ensuring resources are focused on the most significant risks.
+  good_enough: A recent risk assessment identifying major risks and vulnerable areas, even if not exhaustive,
+    to inform audit scope decisions.

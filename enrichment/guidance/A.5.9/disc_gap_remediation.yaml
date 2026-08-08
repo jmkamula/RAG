@@ -1,0 +1,20 @@
+must_id: item:A.5.9:disc_gap_remediation
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Process for closing coverage gaps (procuring new tools, mandating registration in ungovernable
+  zones)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a written procedure describing how asset coverage gaps are identified, evaluated, and addressed,
+  including steps for procurement or mandatory registration.
+- Assign a named individual responsible for reviewing asset inventory reports and initiating gap closure
+  actions, not a generic team or department.
+- Record each identified coverage gap, the chosen remediation method, and the date of closure in a central,
+  version-controlled register.
+- Retain evidence of decisions to procure new tools or enforce registration, such as signed approval forms
+  or meeting minutes with named approvers.
+- Review and update the gap closure process at least annually, noting the date and responsible person
+  for each review cycle.

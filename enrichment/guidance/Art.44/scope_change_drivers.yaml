@@ -1,0 +1,16 @@
+must_id: item:Art.44:scope_change_drivers
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Trigger list (new vendor in third country, vendor migration, new business region)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all scenarios that trigger a data transfer assessment, such as onboarding a new vendor outside
+  the EU, vendor migration, or entering a new business region.
+- Document each trigger event with a dated entry in a central register, specifying the nature of the transfer
+  and the countries involved.
+- Name the responsible individual who reviews and updates the trigger list, avoiding generic roles like
+  "the team" or "IT department."
+- Review the trigger list at least annually and record the review date and reviewer’s name in the register.

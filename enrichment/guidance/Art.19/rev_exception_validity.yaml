@@ -1,0 +1,19 @@
+must_id: item:Art.19:rev_exception_validity
+control_ref: Art.19
+standard_id: GDPR:2016/679
+must_text: Exception validity sample — claimed impossibility/disproportionality grounds still hold
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each data subject notification exception granted on grounds of impossibility or disproportionate
+  effort, listing the specific case and date of approval.
+- Document the current facts or circumstances that support continued validity of each exception, including
+  any supporting evidence or correspondence.
+- Review and record whether any changes have occurred that would remove the original grounds for exception,
+  noting the date and reviewer’s name.
+- Name the reviewer as a specific individual responsible for confirming exception validity—do not use
+  a group, team, or department as owner.
+- Retain a signed statement from the reviewer confirming that each sampled exception was reassessed and
+  remains justified under Article 19.

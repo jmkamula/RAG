@@ -1,0 +1,17 @@
+must_id: item:6.1.1:reg_status
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Status per row (planned / in-progress / complete / deferred)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the current status for each action item in the ISMS Planned Action Register using only "planned,"
+  "in-progress," "complete," or "deferred."
+- Update the status field with the date of the most recent change for each action to show when progress
+  was last tracked.
+- Name the person responsible for updating each status entry, ensuring a specific individual is listed
+  rather than a team or department.
+- Retain previous status changes in a version history or change log to provide evidence of ongoing tracking
+  and updates.

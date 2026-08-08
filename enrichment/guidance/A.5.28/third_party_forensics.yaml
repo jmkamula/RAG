@@ -1,0 +1,18 @@
+must_id: item:A.5.28:third_party_forensics
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Third-party forensic engagement path (when to engage, sealed-container handover, return-to-custody
+  on completion)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific individual or role authorized to engage third-party forensic support, avoiding generic
+  terms like "IT" or "the team".
+- Document the criteria and decision points for when external forensic experts must be engaged, including
+  escalation thresholds and approval steps.
+- Record the sealed-container handover process in a dated log, including chain-of-custody signatures from
+  both internal and third-party representatives.
+- Confirm the procedure for return-to-custody of evidence upon completion, capturing the date, condition,
+  and identity of the person receiving the materials.

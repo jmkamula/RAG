@@ -1,0 +1,17 @@
+must_id: item:A.7.8:scope_change_drivers
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new equipment class, hardware refresh, M&A)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current equipment types and classes in a dated equipment inventory, naming the person responsible
+  for maintaining its accuracy.
+- Document a trigger list that specifies events requiring scope review, such as new equipment classes,
+  hardware refresh cycles, or mergers and acquisitions.
+- Assign a specific individual to monitor for trigger events and record their name and contact details
+  in the equipment scope procedure.
+- Record each time the trigger list is reviewed or updated, including the date and the name of the reviewer.
+- Name the owner of the trigger list as a specific individual, not a team or department.

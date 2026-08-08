@@ -1,0 +1,18 @@
+must_id: item:A.8.27:reg_pattern_id
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Per-pattern unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each reference architecture pattern in the register, using a consistent
+  format that cannot be confused with others.
+- Record the assigned identifier directly alongside the pattern’s name and description in the register
+  entry.
+- Cross-reference the identifier in any related documentation or systems that use or reference the architecture
+  pattern.
+- Confirm that no two patterns in the register share the same identifier by reviewing the full list for
+  duplicates.
+- Name the owner responsible for maintaining the register as a specific individual, not a team or department.

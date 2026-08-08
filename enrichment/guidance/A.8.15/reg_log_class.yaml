@@ -1,0 +1,16 @@
+must_id: item:A.8.15:reg_log_class
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Per-source log class (auth / access / change / fault / business-event / privacy-relevant)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each log source in the register with a unique name and clear description of its purpose.
+- Assign a specific log class to every log source, choosing from authentication, access, change, fault,
+  business-event, or privacy-relevant.
+- Record the date each log source entry was last reviewed or updated in the register.
+- Name the owner of each log source as a specific individual, not a team or department.
+- Cross-reference each log source entry to supporting documentation or system configuration that confirms
+  the log class assignment.

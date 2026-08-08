@@ -1,0 +1,40 @@
+leaf_id: req:A.8.16:monitoring_activities_procedure
+control_ref: A.8.16
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You must know which systems, processes, and assets are in scope for monitoring before you
+    can define a meaningful monitoring activities procedure. This ensures your procedure covers all relevant
+    areas and nothing critical is missed.
+  good_enough: A documented, management-approved scope statement that clearly lists the boundaries and
+    assets covered by the ISMS.
+- ref: A.8.15
+  standard_id: ISO27001:2022
+  title: Logging
+  category: direct
+  rationale: Effective monitoring relies on the existence of logs. Without logging, there is no data to
+    monitor for anomalous behaviour or security events.
+  good_enough: Logging is enabled and operational for all in-scope systems, with at least basic event
+    types being captured and stored.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of monitoring responsibilities is essential so that alerts are routed correctly
+    and actions are taken promptly. The procedure must reference who does what.
+  good_enough: A current list of roles with monitoring-related duties assigned, even if not fully detailed,
+    so the procedure can specify responsibilities.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment identifies which threats and assets are most critical, informing what needs
+    to be monitored and what constitutes anomalous behaviour.
+  good_enough: A recent risk assessment that highlights key risks and assets, providing enough context
+    to prioritize monitoring activities.

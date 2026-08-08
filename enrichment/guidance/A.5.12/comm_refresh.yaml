@@ -1,0 +1,19 @@
+must_id: item:A.5.12:comm_refresh
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Periodic refresher referenced (annual at minimum, especially after scheme amendments)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and method of each classification scheme refresher communication in a central log,
+  including both initial and follow-up sessions.
+- Name the individual responsible for delivering the refresher, ensuring a specific person is listed rather
+  than a team or department.
+- Record attendee lists for each refresher session, capturing names and dates to show who received the
+  communication.
+- Cross-reference any scheme amendments with the corresponding refresher communication entry to demonstrate
+  timely updates after changes.
+- Retain copies of communication materials used in each refresher, such as emails or presentation slides,
+  alongside the communication record.

@@ -1,0 +1,47 @@
+leaf_id: req:A.7.2.6:program_review
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope must clearly define which processing activities, entities, and processors
+    are covered, so you know which contracts and subprocessors fall under the annual review.
+  good_enough: The scope statement should exist and explicitly mention all relevant processing activities
+    and external processors.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: You need to know the specific purposes for which personal data is processed to ensure processor
+    contracts and subprocessor authorisations are aligned with those purposes.
+  good_enough: A documented list of processing purposes for each processor relationship is available and
+    up to date.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: foundational
+  rationale: The lawful basis for each processing activity must be identified to verify that processor
+    contracts include the correct legal terms and obligations.
+  good_enough: Each processor relationship has an identified lawful basis, documented in a way that can
+    be referenced during contract review.
+- ref: Art.28
+  standard_id: GDPR:2016/679
+  title: Processor Requirements
+  category: cross_role
+  rationale: Article 28 defines the mandatory contract terms and subprocessor authorisation requirements
+    that must be checked during the annual review.
+  good_enough: A summary or checklist of Art.28.3 requirements is available to guide the review of processor
+    contracts.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures someone is accountable for maintaining processor contracts
+    and conducting the annual review.
+  good_enough: Documented assignment of responsibility for processor management and contract review exists
+    and is communicated.

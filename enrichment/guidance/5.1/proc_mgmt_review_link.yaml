@@ -1,0 +1,17 @@
+must_id: item:5.1:proc_mgmt_review_link
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Link to management review (9.3) — top management owns the review, not just attends
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific member of top management as the owner responsible for conducting the management review,
+  not just as an attendee.
+- Document the management review meeting minutes with the owner's name, date, and explicit statement of
+  their leadership role in the review.
+- Cross-reference the Leadership Engagement Framework to the management review records, showing how top
+  management’s actions fulfill the framework’s requirements.
+- Record a signed statement from the top management owner confirming their responsibility for the review
+  process and outcomes.

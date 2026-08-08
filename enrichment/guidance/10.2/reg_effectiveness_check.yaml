@@ -1,0 +1,19 @@
+must_id: item:10.2:reg_effectiveness_check
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Per-row effectiveness verification (did the action prevent recurrence?)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the corrective action taken for each nonconformity, including a brief description and the date
+  it was implemented.
+- Assign a named individual to verify whether the corrective action has prevented recurrence, and document
+  their name and verification date.
+- State the method used to confirm effectiveness for each case, such as follow-up audits, monitoring results,
+  or interviews, and attach supporting evidence.
+- Enter a clear statement of effectiveness outcome for each row, specifying whether recurrence was prevented
+  or not, with justification.
+- Avoid leaving the effectiveness field blank or marked as “TBD”; update each row with a completed verification
+  and outcome.

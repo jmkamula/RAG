@@ -1,0 +1,16 @@
+must_id: item:A.8.17:reg_source
+control_ref: A.8.17
+standard_id: ISO27001:2022
+must_text: Per-row current sync source
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the current time synchronization source for each system in the Clock Sync Status Register, specifying
+  the exact server or service used.
+- State the date and time when the synchronization source was last verified for each entry in the register.
+- Name the person responsible for verifying each system’s sync source, using their full name rather than
+  a generic role or team.
+- Cross-reference each system entry with supporting logs or screenshots showing successful synchronization
+  with the listed source.

@@ -1,0 +1,17 @@
+must_id: item:A.6.8:handoff_to_triage
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Handoff to triage process (A.5.25 assessment-and-decision) on receipt — drives traceability
+  from report through to closure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the exact handoff step in the procedure, showing how every reported event is passed to the
+  triage process defined in A.5.25.
+- Record the date, time, and name of the person responsible for each handoff in an event log or tracking
+  system.
+- Cross-reference each event report with its corresponding triage assessment record to demonstrate end-to-end
+  traceability.
+- Name the triage owner as a specific individual for each event, not as a team or department.

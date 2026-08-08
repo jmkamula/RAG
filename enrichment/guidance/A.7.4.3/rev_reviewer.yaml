@@ -1,0 +1,17 @@
+must_id: item:A.7.4.3:rev_reviewer
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Data Ops)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and role, explicitly identifying both the Data
+  Protection Officer and the Data Operations lead.
+- Record the date when each reviewer completed their review of the accuracy program, using a dated sign-off
+  or electronic log entry.
+- Document the review outcome in a written summary, attaching the reviewers’ names and signatures to the
+  final version.
+- Retain the review record in a designated compliance folder, ensuring it is accessible for future audits
+  and reference.

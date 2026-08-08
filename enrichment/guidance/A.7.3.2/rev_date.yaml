@@ -1,0 +1,17 @@
+must_id: item:A.7.3.2:rev_date
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Notice Content Program in a dated document or system log.
+- Document the planned review interval for the Notice Content Program, specifying the frequency in months
+  or years.
+- Name the reviewer as a specific individual responsible for the most recent review, not a group or department.
+- Cross-reference the actual review date against the planned interval to confirm it falls within the required
+  timeframe.
+- Retain evidence of the review decision, such as meeting minutes or a signed review form, showing the
+  date and outcome.

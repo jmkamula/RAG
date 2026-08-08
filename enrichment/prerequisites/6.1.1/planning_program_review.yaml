@@ -1,0 +1,38 @@
+leaf_id: req:6.1.1:planning_program_review
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know what parts of the business and which assets are covered by the ISMS before
+    you can meaningfully review whether planning activities are effective and complete.
+  good_enough: A documented scope statement that clearly defines the organizational boundaries and assets
+    included in the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The review must check alignment with the organization's security policy, so the policy must
+    exist and be accessible before the review can be planned or evaluated.
+  good_enough: A current, approved information security policy that sets out the organization's security
+    objectives and direction.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: direct
+  rationale: Planning reviews must consider the latest risk assessment results to ensure that risks are
+    being addressed and tracked in the action register.
+  good_enough: A completed risk assessment within the last 12 months, identifying key risks and their
+    status.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that the right people are involved in the review and that
+    action items are properly owned and tracked.
+  good_enough: A list or matrix showing who is responsible for ISMS planning, reviews, and follow-up actions.

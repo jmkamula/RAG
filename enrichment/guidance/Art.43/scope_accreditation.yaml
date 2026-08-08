@@ -1,0 +1,16 @@
+must_id: item:Art.43:scope_accreditation
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Accreditation scope + source (SA / NAB)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Obtain the official accreditation certificate from the certification body, showing their scope of accreditation
+  and the specific standards covered.
+- Record the source of accreditation by naming the supervisory authority or national accreditation body
+  that granted the certification.
+- Confirm the accreditation certificate includes a clear issue date and expiry date to demonstrate current
+  and valid status.
+- Name the certification body as a specific legal entity, not just a general brand or group name.

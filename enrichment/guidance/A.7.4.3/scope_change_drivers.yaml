@@ -1,0 +1,17 @@
+must_id: item:A.7.4.3:scope_change_drivers
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: Trigger list (new PII category / new verification source)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all contexts where personal data accuracy is critical, referencing specific data types and business
+  processes in a dated document.
+- Document each trigger event that requires accuracy review, such as adding a new personal data category
+  or verification source, in a maintained register.
+- Name the responsible individual for monitoring and updating the trigger list, avoiding generic roles
+  like "the team" or "IT."
+- Record each update to the trigger list with the date, reason for change, and the person who approved
+  the update.

@@ -1,0 +1,17 @@
+must_id: item:A.8.34:performance_impact
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Performance-impact consideration + limit
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy that audit testing must not disrupt business-critical systems or degrade performance
+  beyond an agreed threshold.
+- Name a specific individual responsible for approving audit test plans and performance impact limits,
+  avoiding generic roles like "IT" or "the team".
+- Document each audit’s approved performance impact limit and any exceptions, including date and approver’s
+  name, in an audit testing log.
+- Retain evidence of communication to system owners about scheduled audit tests and agreed performance
+  safeguards, such as dated emails or meeting notes.

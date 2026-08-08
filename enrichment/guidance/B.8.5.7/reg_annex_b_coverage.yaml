@@ -1,0 +1,18 @@
+must_id: item:B.8.5.7:reg_annex_b_coverage
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+must_text: Annex B controls covered per row (all / itemised)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each subcontractor engagement as a separate row, including the subcontractor's legal name and a
+  unique identifier.
+- Itemise which Annex B controls apply to each subcontractor by marking each relevant control per row,
+  rather than stating "all".
+- Record the date each subcontractor was last assessed against the Annex B controls, along with the name
+  of the assessor.
+- Attach supporting evidence for each control marked as covered, such as a contract clause reference or
+  assessment report.
+- Name the register owner as a specific individual, not a team or department.

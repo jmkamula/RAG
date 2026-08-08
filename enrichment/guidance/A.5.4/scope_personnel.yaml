@@ -1,0 +1,17 @@
+must_id: item:A.5.4:scope_personnel
+control_ref: A.5.4
+standard_id: ISO27001:2022
+must_text: Applicability to all personnel (employees, contractors, third parties acting on behalf of the
+  organisation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the management directive that it applies to all employees, contractors, and third parties acting
+  on behalf of the organisation.
+- Name the responsible executive who approved the directive, including their full name and job title.
+- Record the date the directive was last reviewed and approved, ensuring it is current within the past
+  year.
+- List all personnel categories explicitly; do not use vague terms like "all staff" or "users" that could
+  be misinterpreted.

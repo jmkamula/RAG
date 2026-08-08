@@ -1,0 +1,38 @@
+leaf_id: req:A.8.15:log_source_register
+control_ref: A.8.15
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need a clear inventory of assets (systems, applications, devices) to identify all potential
+    log sources. Without this, you can't ensure your log source register is complete or accurate.
+  good_enough: A current, basic list of all information assets and systems in scope, even if some metadata
+    is missing.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Knowing the classification of assets and data helps prioritize which log sources are most
+    critical to monitor and register. This ensures the register covers sensitive or regulated data flows.
+  good_enough: A documented scheme that assigns at least basic sensitivity levels to asset types or data
+    categories.
+- ref: A.8.17
+  standard_id: ISO27001:2022
+  title: Clock Synchronization
+  category: direct
+  rationale: Accurate timestamps are essential for log integrity and event correlation. If log sources
+    aren't time-synced, the register can't reliably support incident investigation or 'silent source'
+    detection.
+  good_enough: A policy or technical control ensuring all log sources synchronize clocks at least daily.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The register must only cover log sources within the ISMS scope. Without a defined scope,
+    you can't determine which sources to include or exclude.
+  good_enough: A written scope statement that clearly lists included business units, locations, and technologies.

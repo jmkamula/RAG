@@ -1,0 +1,17 @@
+must_id: item:A.5.35:sch_delta
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Scheduled-vs-completed delta tracked (so missed reviews surface)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each scheduled independent review in the register, including the planned date and the assigned
+  reviewer’s full name.
+- Log the actual completion date for every review, leaving the field blank if the review has not yet occurred.
+- Calculate and update a column showing the difference between scheduled and completed dates, highlighting
+  any missed or overdue reviews.
+- Name the owner of the register as a specific individual, not a team or department, to ensure clear accountability.
+- Retain evidence of follow-up actions for any missed reviews, such as emails or meeting notes, attached
+  to the relevant register entry.

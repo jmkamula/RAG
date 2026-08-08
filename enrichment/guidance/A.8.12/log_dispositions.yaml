@@ -1,0 +1,19 @@
+must_id: item:A.8.12:log_dispositions
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Per-alert disposition (false-positive / true-positive remediated / accepted-with-justification
+  / escalated to incident)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the disposition of each DLP alert in the log, clearly marking it as false-positive, true-positive
+  remediated, accepted-with-justification, or escalated to incident.
+- Name the individual who made the disposition decision for each alert, using their full name rather than
+  a generic role or team.
+- Document the date and time when each disposition was made, ensuring the log entry is timestamped.
+- Attach supporting evidence or justification for any alert marked as "accepted-with-justification," such
+  as a risk assessment or management approval.
+- Review the log regularly to confirm that no alert is left without a disposition or marked with ambiguous
+  terms like "pending" or "N/A."

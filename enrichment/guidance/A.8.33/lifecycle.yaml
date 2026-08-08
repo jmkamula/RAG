@@ -1,0 +1,19 @@
+must_id: item:A.8.33:lifecycle
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Lifecycle (provisioning + refresh cadence + deletion at end of need; cross-link to A.8.10)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the procedure owner as a specific individual, including their job title and contact details, in
+  the document header.
+- Document the process for creating, reviewing, and deleting test information, including required approvals
+  and retention periods, in a dated procedure.
+- State the refresh schedule for test information, specifying how often data is reviewed and updated,
+  with evidence of the last review date.
+- Cross-reference the procedure to the relevant section of your data masking or protection controls as
+  required by A.8.10, citing the exact document and section.
+- Record all deletions of test information at end-of-need in a log, including date, data description,
+  and person responsible.

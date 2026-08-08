@@ -1,0 +1,16 @@
+must_id: item:6.1.2:reg_owner
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Risk owner per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a specific, named individual as the risk owner for each risk entry in the Information Security
+  Risk Register.
+- Record the date when each risk owner was assigned to their respective risk entry in the register.
+- Avoid listing the risk owner as a team, department, or generic role; use full names to ensure clear
+  accountability.
+- Cross-reference each risk entry with supporting documentation that confirms the risk owner's acceptance
+  of responsibility.

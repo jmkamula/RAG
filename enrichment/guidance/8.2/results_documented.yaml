@@ -1,0 +1,19 @@
+must_id: item:8.2:results_documented
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Results documented and retained
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, scope, and participants for each operational risk assessment in a dedicated risk assessment
+  log.
+- Document the identified risks, their likelihood, impact, and assigned risk owners in a structured risk
+  assessment report.
+- Sign and date the final risk assessment report to confirm its completion and approval by a named responsible
+  individual.
+- Retain all versions of completed risk assessment records in a secure, access-controlled location for
+  future reference.
+- Name the risk assessment owner as a specific individual—avoid using generic titles like "the team" or
+  "operations department."

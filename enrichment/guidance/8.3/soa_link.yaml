@@ -1,0 +1,17 @@
+must_id: item:8.3:soa_link
+control_ref: '8.3'
+standard_id: ISO27001:2022
+must_text: Link to Statement of Applicability for control selection rationale
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each operational risk treatment record to the relevant control in the current Statement
+  of Applicability, using the exact control identifier.
+- Document the rationale for selecting or excluding each control in the Statement of Applicability, ensuring
+  it matches the reasoning in the risk treatment record.
+- Record the date and name of the person who approved the linkage between the risk treatment record and
+  the Statement of Applicability.
+- Name the control owner as a specific individual, not a generic role or team, in both the risk treatment
+  record and the Statement of Applicability.

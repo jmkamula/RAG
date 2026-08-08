@@ -1,0 +1,45 @@
+leaf_id: req:B.8.2.5:program_review
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know which services, teams, and customer support functions are in-scope before
+    you can review their effectiveness or compliance. This ensures the review covers all relevant areas.
+  good_enough: A clear, current scope statement that explicitly includes customer support processes and
+    systems.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Defined roles and responsibilities are essential to know who is accountable for customer
+    support, SLAs, certifications, and audit rights. Without this, you can't verify if obligations are
+    being met.
+  good_enough: A documented list or matrix showing who is responsible for each key customer support obligation.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You must know which assets (systems, tools, channels) are used for customer support to verify
+    their functionality and coverage during the review.
+  good_enough: An up-to-date register listing all customer support assets, even if not fully classified
+    yet.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: Understanding and documenting the purpose of processing in customer support is needed to
+    assess if support pathways and data handling align with privacy requirements.
+  good_enough: A brief statement of the main purposes for which customer support processes personal data.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: foundational
+  rationale: You need to know the lawful basis for processing personal data in customer support to ensure
+    the review checks for compliance with privacy obligations.
+  good_enough: A list of lawful bases identified for each major customer support data processing activity.

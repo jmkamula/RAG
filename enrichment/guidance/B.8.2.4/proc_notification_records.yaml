@@ -1,0 +1,19 @@
+must_id: item:B.8.2.4:proc_notification_records
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Notification record retention — every issued notice retained for audit
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each issued infringing instruction notification with a unique identifier, recipient name, date,
+  and summary of the issue in a central log.
+- Retain a copy of every notification sent, including any attachments or supporting evidence, in a secure
+  and organized repository.
+- Record the name of the individual who authorized or sent each notification, ensuring it is a specific
+  person and not a generic role or team.
+- Cross-reference each notification record with any related investigation or corrective action files to
+  demonstrate a complete audit trail.
+- Review the notification log quarterly to confirm that no issued notices have been deleted or overwritten
+  since the last review.

@@ -1,0 +1,14 @@
+must_id: item:7.3:rev_reviewer
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (HR partner + ISMS Manager)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the HR partner and ISMS Manager as the designated reviewers in the Awareness Program Review document.
+- Record the date each reviewer completed their assessment on the review form.
+- Obtain signatures or written confirmation from both the HR partner and ISMS Manager to show their approval
+  of the review.
+- Avoid listing a group or department as the reviewer; specify named individuals for clear accountability.

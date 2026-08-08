@@ -1,0 +1,17 @@
+must_id: item:B.8.5.2:reg_destination_id
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+must_text: Destination identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each transfer destination listed in the register, such as a sequential
+  number or code.
+- Record the unique identifier alongside each destination entry, ensuring it is present in every row of
+  the register.
+- Cross-reference the identifier in related documentation, such as data transfer agreements or risk assessments,
+  to maintain consistency.
+- Name the destination using a clear, specific label — avoid vague descriptions like "various" or "external
+  partner".

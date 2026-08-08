@@ -1,0 +1,17 @@
+must_id: item:6.1.1:scope_change_drivers
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Trigger list for ad-hoc replanning (major incident, M&A, regulator change)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific events that require ad-hoc replanning, such as major incidents, mergers and acquisitions,
+  or regulatory changes, in a dated planning document.
+- Name the person responsible for monitoring and triggering the replanning process in response to these
+  events.
+- Record the date when the trigger list was last reviewed and updated to reflect current risks and business
+  context.
+- Avoid using generic triggers like "significant change" without examples; provide clear, concrete scenarios
+  an auditor can recognize.

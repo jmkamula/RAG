@@ -1,0 +1,16 @@
+must_id: item:A.5.20:cov_jurisdiction
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Governing jurisdiction per agreement
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the governing jurisdiction for each supplier agreement in the Supplier Agreement Coverage Register,
+  using the exact wording from the signed contract.
+- Cross-reference each jurisdiction entry to the relevant section or clause number in the corresponding
+  supplier agreement.
+- Name the person responsible for verifying jurisdiction entries as a specific individual, not a team
+  or department.
+- Date each jurisdiction entry to show when it was last reviewed or updated in the register.

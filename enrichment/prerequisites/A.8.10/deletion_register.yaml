@@ -1,0 +1,39 @@
+leaf_id: req:A.8.10:deletion_register
+control_ref: A.8.10
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You need a current asset register to identify what information assets exist before you can
+    track their deletion. Without this, you can't meaningfully record or verify what was deleted.
+  good_enough: A basic, up-to-date list of information assets is available, even if not fully detailed
+    or classified.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: A classification scheme is necessary to determine the sensitivity and required handling of
+    each asset, which impacts deletion requirements and verification.
+  good_enough: A simple classification scheme is defined and applied to core assets, even if not all edge
+    cases are covered.
+- ref: A.8.33
+  standard_id: ISO27001:2022
+  title: Test Information
+  category: direct
+  rationale: Test information must be subject to deletion controls, so you need to know how test data
+    is handled and when it should be deleted to ensure the register is complete.
+  good_enough: Documented procedures exist for handling and deleting test data, even if not all test environments
+    are fully mapped.
+- ref: A.7.14
+  standard_id: ISO27001:2022
+  title: Secure Disposal
+  category: direct
+  rationale: Secure disposal requirements define acceptable deletion methods and verification, which must
+    be reflected in the deletion register.
+  good_enough: A documented process for secure disposal exists, specifying at least one approved deletion
+    method and basic verification steps.

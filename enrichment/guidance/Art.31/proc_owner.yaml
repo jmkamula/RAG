@@ -1,0 +1,17 @@
+must_id: item:Art.31:proc_owner
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Named owner (DPO + legal counsel)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the procedure owner as a specific individual by full name and title, such as the Data Protection
+  Officer or designated legal counsel.
+- Record the date when the owner was assigned responsibility for the Supervisory Authority Cooperation
+  Procedure in a formal document or register.
+- Document the contact details of the named owner within the procedure, including email and phone number,
+  to allow direct communication.
+- Avoid listing a group, team, or department as the owner; ensure a single accountable person is clearly
+  identified.

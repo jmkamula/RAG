@@ -1,0 +1,15 @@
+must_id: item:6.1.3:soa_reference
+control_ref: 6.1.3
+standard_id: ISO27001:2022
+must_text: Reference to the implementing policy/procedure per included control
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each included control in the Statement of Applicability with a unique identifier matching the ISO27001:2022
+  numbering.
+- Cross-reference every included control to a named, current policy or procedure document that describes
+  how the control is implemented.
+- State the document version and approval date for each referenced policy or procedure to show it is current.
+- Name the owner of each policy or procedure as a specific individual, not a team or department.

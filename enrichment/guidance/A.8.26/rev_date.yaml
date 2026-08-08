@@ -1,0 +1,17 @@
+must_id: item:A.8.26:rev_date
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date for application security requirements in a dated log or register
+  entry.
+- Name the person responsible for conducting the review as a specific individual, not a team or department.
+- Document the planned review interval in months or years within your application security policy or review
+  schedule.
+- Attach evidence of the completed review, such as meeting minutes or a signed checklist, showing the
+  review occurred within the planned interval.
+- Cross-reference the review record with the policy to confirm the review date matches the required interval.

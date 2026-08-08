@@ -1,0 +1,15 @@
+must_id: item:A.6.2:rev_next_date
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date clearly within the Employment Terms Template, using a specific day,
+  month, and year.
+- Record the name of the individual responsible for the next review directly on the template.
+- Sign and date the most recent review decision, attaching it to the template as a separate approval record.
+- Avoid leaving the review date field blank or using vague terms like "annually" or "as needed"—always
+  specify an exact date.

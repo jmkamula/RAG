@@ -1,0 +1,18 @@
+must_id: item:A.5.9:disc_sources
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Discovery sources enumerated (network scan tool, CSPM tool, EDR/MDM inventory, procurement
+  system, license database)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each asset discovery source by name, such as network scan tool, cloud security posture management
+  tool, endpoint inventory, procurement system, and license database.
+- Document the responsible owner for maintaining each discovery source as a named individual, not a group
+  or department.
+- Record the date when each discovery source was last reviewed or updated in a central asset management
+  register.
+- Attach supporting screenshots or export files from each discovery source to the register as evidence
+  of current integration and use.

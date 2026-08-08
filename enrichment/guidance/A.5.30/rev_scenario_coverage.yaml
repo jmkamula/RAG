@@ -1,0 +1,19 @@
+must_id: item:A.5.30:rev_scenario_coverage
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Scenario-coverage audit (which scenarios from A.5.29 register actually tested via real recovery;
+  which still untested; remediation plan per gap)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each scenario from your A.5.29 register, showing which ones have been tested through actual ICT
+  recovery exercises, with test dates.
+- Document any scenarios from the A.5.29 register that remain untested, including reasons for omission
+  and risk impact.
+- Record a remediation plan for each untested scenario, assigning a named individual and target completion
+  date for future testing.
+- Name the program review owner as a specific person, not a team or department, in the review documentation.
+- Attach evidence of the most recent review meeting, such as signed minutes or an attendance record with
+  date and participant names.

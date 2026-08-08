@@ -1,0 +1,18 @@
+must_id: item:Art.36:rev_advice_handling
+control_ref: Art.36
+standard_id: GDPR:2016/679
+must_text: Advice handling sample — SA written advice incorporated or formally rejected with rationale
+  recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the written advice received from the supervisory authority, including the date and the name of
+  the official who provided it.
+- Document the decision to incorporate or reject each piece of advice, clearly stating the rationale for
+  acceptance or rejection.
+- Name the responsible individual who reviewed and made the final decision, avoiding generic titles like
+  "the team" or "management".
+- Retain copies of all correspondence and decision records in a central, dated file accessible for audit
+  review.

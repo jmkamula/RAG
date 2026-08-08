@@ -1,0 +1,19 @@
+must_id: item:A.6.6:return_destruction
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Return or destruction obligation at end of relationship (with certified-destruction option
+  for paper, secure-deletion for digital — links to A.8.10)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Insert a clause in the template requiring all confidential information to be returned or destroyed at
+  the end of the relationship.
+- Specify in the template that paper records must be destroyed with a certificate of destruction from
+  a reputable provider.
+- State in the template that digital records must be securely deleted using methods that prevent recovery,
+  referencing secure deletion standards.
+- Cross-reference the template’s destruction and deletion requirements to your organisation’s asset disposal
+  policy, as required by control A.8.10.
+- Name the owner of the template as a specific individual, not a generic title or team.

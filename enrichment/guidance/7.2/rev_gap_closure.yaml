@@ -1,0 +1,16 @@
+must_id: item:7.2:rev_gap_closure
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Gap-closure progress check — open gaps either closed or on a remediation plan
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all open competence gaps identified in the last review, including the date each gap was first recorded.
+- Document the current status of each gap, marking them as either closed with evidence or linked to a
+  specific remediation plan.
+- Attach dated records showing completed actions or progress updates for each remediation plan.
+- Name the responsible individual for each open gap or remediation plan — do not use generic titles like
+  "HR" or "the team."
+- Record the date of the most recent progress check and the reviewer’s name to confirm ongoing oversight.

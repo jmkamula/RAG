@@ -1,0 +1,18 @@
+must_id: item:A.6.3:rev_ad_hoc_triggers
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Ad-hoc review triggers (major incident exposing awareness gap, new compliance regime, major
+  tech adoption)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each ad-hoc review trigger, such as major incidents or regulatory changes, in a dated log maintained
+  by the programme owner.
+- Name the individual responsible for initiating awareness programme reviews when a trigger occurs, ensuring
+  this is not listed as a generic team or department.
+- Record the decision to conduct an ad-hoc review, including the reason and date, in the awareness programme
+  review file.
+- Attach supporting evidence, such as incident reports or compliance notifications, to the review documentation
+  to show the trigger was identified and acted upon.

@@ -1,0 +1,20 @@
+must_id: item:A.5.29:communication
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Communication during disruption (internal personnel, external customers, regulators, suppliers;
+  out-of-band channels when corp comms compromised)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for activating and overseeing communication during disruptions
+  in the plan, not just a department or team.
+- Document clear procedures for notifying internal personnel, external customers, regulators, and suppliers,
+  including required contact details and notification templates.
+- State alternative communication channels to use if primary corporate systems are unavailable, such as
+  personal phones or secure messaging apps.
+- Cross-reference the disruption communication plan to the business continuity arrangements described
+  under control A.5.24, citing the relevant document and section.
+- Record the date of the most recent test or exercise of the communication plan, including participants
+  and outcomes.

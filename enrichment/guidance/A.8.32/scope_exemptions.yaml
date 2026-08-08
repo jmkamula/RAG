@@ -1,0 +1,18 @@
+must_id: item:A.8.32:scope_exemptions
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Exemption rationale (read-only operations; A.8.2 break-glass usage governed there; A.8.19 software-install
+  governed there)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific systems, data, or operations that are exempt from this control, referencing the
+  relevant ISO27001 controls that govern them instead.
+- State the rationale for each exemption, clearly explaining why read-only operations or break-glass scenarios
+  are not in scope here.
+- Cross-reference the exact location of supporting policies or procedures for A.8.2 and A.8.19 to prevent
+  overlap or ambiguity.
+- Name the individual who approved each exemption, avoiding generic titles like "the team" or "IT department".
+- Record the date each exemption rationale was reviewed and confirmed as current.

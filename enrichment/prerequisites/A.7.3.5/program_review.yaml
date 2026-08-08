@@ -1,0 +1,51 @@
+leaf_id: req:A.7.3.5:program_review
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must have clearly documented the purposes for which personal data is processed before
+    you can review whether objection channels and absolute objections are handled correctly. Without this,
+    you cannot assess if objections are being evaluated against legitimate processing purposes.
+  good_enough: A current, accessible register of processing purposes exists for all relevant data activities,
+    even if some descriptions are high-level or pending legal review.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for each processing activity is essential to determine when objections
+    must be absolutely honoured and when a balancing test is required. This underpins the defensibility
+    of your objection-handling process.
+  good_enough: Each processing activity has a documented lawful basis (e.g., consent, legitimate interests),
+    even if some are provisional or flagged for further review.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope statement defines which parts of your organisation and processing activities are
+    covered by the privacy program and thus subject to objection review. Without this, you risk missing
+    key areas or overreaching.
+  good_enough: A written scope statement exists that covers all business units and systems where personal
+    data is processed, even if some boundaries are still being clarified.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of privacy and objection-handling responsibilities ensures that annual reviews
+    are conducted by the right people and that findings are actionable. Without this, reviews may be incomplete
+    or lack authority.
+  good_enough: A documented list of roles exists for privacy management and objection handling, with named
+    individuals or teams, even if some responsibilities are shared or interim.
+- ref: Art.21
+  standard_id: GDPR:2016/679
+  title: Right to Object
+  category: cross_role
+  rationale: GDPR Article 21 sets the legal requirements for handling objections, including absolute and
+    conditional rights. The review must be benchmarked against these obligations to ensure compliance.
+  good_enough: A summary or working interpretation of Article 21 is available to the review team, even
+    if a full legal opinion is pending.

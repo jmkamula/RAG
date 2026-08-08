@@ -1,0 +1,41 @@
+leaf_id: req:B.8.2.2:purpose_limitation_procedure
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You cannot enforce or audit purpose limitation unless the specific purposes for processing
+    PII are clearly identified and documented for each customer. This artefact is the foundation for any
+    procedure that restricts processing to customer instructions.
+  good_enough: A documented list or register of customer-specific processing purposes exists, even if
+    not yet fully automated or mapped to every system.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity ensures that customer instructions
+    are not only followed but are also legally valid. This prevents accidental overreach or unlawful processing.
+  good_enough: Each documented purpose is mapped to a lawful basis (e.g., contract, consent), even if
+    the mapping is high-level or in draft.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope statement defines which business units, systems, and data flows are covered by
+    your ISMS and PIMS. Without this, you cannot reliably determine which processing activities and customer
+    instructions fall under your purpose limitation procedure.
+  good_enough: A written scope statement exists that includes all processing environments and customer
+    PII relevant to the PIMS, even if not yet formally approved.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that the right people are accountable for capturing, communicating,
+    and enforcing customer processing instructions. Ambiguity here leads to gaps in adherence.
+  good_enough: A basic RACI or similar matrix exists showing who is responsible for receiving, documenting,
+    and enforcing customer instructions, even if not yet fully embedded in job descriptions.

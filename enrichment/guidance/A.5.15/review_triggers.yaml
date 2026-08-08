@@ -1,0 +1,17 @@
+must_id: item:A.5.15:review_triggers
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Ad-hoc triggers listed (M&A, new identity provider, major SaaS adoption, access-related incident)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all ad-hoc triggers for policy review, such as mergers, new identity systems, major SaaS adoption,
+  and access-related incidents, in the policy document.
+- Record the date and details of each ad-hoc review in a version-controlled change log, including the
+  specific trigger event.
+- Name the reviewer as a specific individual responsible for each ad-hoc review, avoiding generic roles
+  like "the team" or "IT."
+- Attach supporting evidence, such as incident reports or project documentation, to each review entry
+  to show the trigger was addressed.

@@ -1,0 +1,18 @@
+must_id: item:6.3:scope_grey_areas
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Grey-area decisions captured (e.g. major tooling change with process implications)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of changes that fall under your Information Security Management System, including technology,
+  process, and organisational changes.
+- Document any decisions made about changes that were debated or unclear, such as whether a tooling update
+  counts as a major change.
+- Record the date, decision-maker’s name, and rationale for each grey-area change decision in your ISMS
+  change log.
+- Name the owner of the ISMS change types scope as a specific individual, not a group or department.
+- Attach supporting evidence, such as meeting minutes or email threads, for each grey-area decision included
+  in the scope.

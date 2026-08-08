@@ -1,0 +1,17 @@
+must_id: item:Art.8:reg_timestamp
+control_ref: Art.8
+standard_id: GDPR:2016/679
+must_text: Per-row capture timestamp
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time when each child's consent is obtained in a dedicated timestamp column
+  for every entry in the register.
+- Confirm that the timestamp is generated automatically by the system or is entered immediately during
+  the consent process.
+- Retain the original timestamp for each consent entry and avoid overwriting or editing it after initial
+  capture.
+- Name the staff member responsible for entering or verifying each timestamp, using their full name rather
+  than a generic role or team.

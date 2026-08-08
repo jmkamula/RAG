@@ -1,0 +1,16 @@
+must_id: item:Art.25:default_amount
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Default collection minimises the amount of personal data per purpose
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the minimum set of personal data fields collected for each business purpose in a dated configuration
+  record.
+- Name the individual responsible for approving privacy-default settings for each system, avoiding generic
+  titles like "IT" or "the team."
+- Record the date and outcome of the most recent review confirming that only the necessary data is collected
+  by default.
+- Cross-reference each data field with its specific business purpose to show why it is required.

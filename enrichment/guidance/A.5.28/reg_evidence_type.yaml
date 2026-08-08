@@ -1,0 +1,16 @@
+must_id: item:A.5.28:reg_evidence_type
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Evidence type per row (log export / disk image / memory capture / physical media / statement
+  / photograph)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the evidence type for each entry in the register, using clear terms like "log export," "disk image,"
+  "memory capture," "physical media," "statement," or "photograph."
+- Cross-reference each evidence item with its corresponding case or incident number to enable traceability.
+- State the date and time each evidence item was added to the register to establish a clear chain of custody.
+- Name the person responsible for entering each evidence item, avoiding generic labels like "IT team"
+  or "security department."

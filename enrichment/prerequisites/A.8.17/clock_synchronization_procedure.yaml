@@ -1,0 +1,42 @@
+leaf_id: req:A.8.17:clock_synchronization_procedure
+control_ref: A.8.17
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The clock synchronization procedure must clearly define which systems and environments are
+    in-scope for synchronization. Without a defined ISMS scope, you cannot determine which assets require
+    synchronized clocks.
+  good_enough: The ISMS scope statement should exist and specify the organizational boundaries and information
+    systems covered by the ISMS, even if not all details are finalized.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need an up-to-date asset register to identify which systems, devices, and platforms require
+    clock synchronization. The procedure cannot be drafted meaningfully without knowing what assets are
+    in play.
+  good_enough: A basic asset register listing key information systems and devices is available, even if
+    some minor assets are still being catalogued.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: The procedure must assign responsibility for configuring, monitoring, and maintaining clock
+    synchronization. If roles and responsibilities are undefined, you cannot allocate these tasks.
+  good_enough: There is a documented list of information security roles and their main responsibilities,
+    including system administration and monitoring.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding the risks associated with unsynchronized clocks (e.g., log integrity, incident
+    investigation) is necessary to justify and tailor the synchronization procedure. Without a risk assessment,
+    the procedure may miss critical requirements.
+  good_enough: A recent risk assessment exists that covers at least the major information systems and
+    highlights risks related to time discrepancies.

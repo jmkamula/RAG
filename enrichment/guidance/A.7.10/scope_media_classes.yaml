@@ -1,0 +1,20 @@
+must_id: item:A.7.10:scope_media_classes
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Media classes (USB drives, external HDDs, optical disks, tape, paper-with-PII, mobile devices
+  with data)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all media types in use that may store information, including USB drives, external hard drives,
+  optical disks, backup tapes, paper records, and mobile devices.
+- Document which of these media types are used to store personal or sensitive information, referencing
+  specific examples or inventory records.
+- Name the person responsible for maintaining and updating the list of applicable media classes, identifying
+  them by full name and job title.
+- Record the date when the media classes scope was last reviewed and updated, keeping this date visible
+  in the document.
+- Avoid using generic descriptions like "all media" or "various devices"—specify each media class clearly
+  to prevent auditor rejection.

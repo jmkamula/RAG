@@ -1,0 +1,16 @@
+must_id: item:Art.15:purposes
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Purposes of the processing
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each specific purpose for which the data subject’s personal data is being processed in the written
+  response to their access request.
+- Reference the relevant section of your privacy notice or policy that describes these purposes, and include
+  a copy or direct link in the response.
+- Confirm that the stated purposes are tailored to the data subject’s context and not copied boilerplate
+  that could apply to any organisation.
+- Date and sign the response by the individual responsible for handling the access request.

@@ -1,0 +1,20 @@
+must_id: item:A.5.17:reg_identity_link
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Identity-register linkage per row (which identity types use this credential type — closes the
+  loop with A.5.16)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each credential type in the register with a unique, descriptive name that clearly distinguishes
+  it from other credential types.
+- Link every credential type entry to the specific identity types that are authorized to use it, referencing
+  the corresponding identity register row.
+- Record the date each linkage was established or last reviewed, and name the individual who confirmed
+  the linkage.
+- Cross-reference each credential type to the relevant identity register entry, using a unique identifier
+  or row number for traceability.
+- Name the identity types precisely; avoid vague labels like "users" or "staff" that do not match explicit
+  entries in the identity register.

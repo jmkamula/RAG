@@ -1,0 +1,18 @@
+must_id: item:A.5.37:procedure_inventory
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Inventory of operating procedures (which facilities/systems they cover — backup, restore, patching,
+  on-call response, change deployment, monitoring response, capacity, log-handling, etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all critical operating procedures, specifying which facilities or systems each procedure covers,
+  in a centralized register.
+- Name the responsible owner for each procedure as a specific individual, not a team or department.
+- Record the latest review date and version number for each procedure entry in the register.
+- Cross-reference each procedure in the register to its full documentation, ensuring links or file paths
+  are current and accessible.
+- Document any gaps or missing procedures in the register, along with assigned action owners and target
+  completion dates.

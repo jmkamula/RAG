@@ -1,0 +1,19 @@
+must_id: item:9.3:rev_action_closure
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Action-closure check — decisions from prior reviews tracked to 10.1/10.2 closure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each decision and action item from the previous management review in a dated register, including
+  the responsible individual for closure.
+- Cross-reference each recorded action item to the relevant clause 10.1 or 10.2 in your improvement log
+  or corrective action tracker.
+- Confirm and document the closure status of each action item with supporting evidence, such as signed-off
+  reports or completed corrective action forms.
+- Name the owner for each action item as a specific individual, not a group or department, to avoid ambiguity
+  in accountability.
+- Retain meeting minutes or review records showing discussion and verification of action item closures
+  at the next management review.

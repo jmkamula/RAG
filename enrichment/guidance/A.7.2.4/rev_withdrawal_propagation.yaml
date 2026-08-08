@@ -1,0 +1,18 @@
+must_id: item:A.7.2.4:rev_withdrawal_propagation
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Withdrawal propagation — sampled withdrawals verified to have stopped downstream processing
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a sample of recent consent withdrawal requests and record their unique identifiers and withdrawal
+  dates in a tracking log.
+- Trace each sampled withdrawal through all relevant systems and document evidence that downstream processing
+  of personal data has ceased.
+- Capture screenshots or system logs showing the removal or flagging of data for each withdrawal in both
+  primary and downstream systems.
+- Name the reviewer who performed the verification for each sampled withdrawal and record the review date.
+- Avoid using generic statements like "all withdrawals processed" without attaching evidence for specific
+  sampled cases.

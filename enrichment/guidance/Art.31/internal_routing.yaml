@@ -1,0 +1,17 @@
+must_id: item:Art.31:internal_routing
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Internal routing — DPO + legal + relevant subject-matter expert
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer, legal counsel, and relevant subject-matter expert by full name and
+  job title in the procedure document.
+- Document the internal steps for routing supervisory authority requests, including who receives, reviews,
+  and responds at each stage.
+- Record the date and version of the procedure, and update it whenever personnel or process changes occur.
+- Assign responsibility for updating the procedure to a specific individual, not a generic team or department.
+- Retain evidence of the most recent supervisory authority request handled, showing involvement of all
+  required roles.

@@ -1,0 +1,33 @@
+leaf_id: req:Art.17:erasure_register
+control_ref: Art.17
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of all processing activities to identify where personal
+    data resides and which systems or processes are impacted by erasure requests. Without this, you cannot
+    reliably track or action erasure across your environment.
+  good_enough: A basic, current RoPA that lists all major processing activities and data locations is
+    sufficient to start building the erasure register.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity is essential to determine if
+    an erasure request is valid or if an exception applies. This underpins the decision-making recorded
+    in the erasure register.
+  good_enough: A mapping of each processing activity to its lawful basis, even if high-level, is enough
+    to support initial erasure request assessments.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer (DPO) Designation
+  category: foundational
+  rationale: A designated DPO or responsible person ensures erasure requests are handled consistently
+    and in line with GDPR requirements, and is typically accountable for maintaining the erasure register.
+  good_enough: A named individual (internal or external) with responsibility for GDPR compliance is identified
+    and reachable for erasure request oversight.

@@ -1,0 +1,19 @@
+must_id: item:A.7.3.7:rev_impossibility_audit
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Impossibility-invocation audit — sampled invocations reviewed for defensibility
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of third-party notification cases where impossibility was invoked in the past
+  12 months and list each by date and case number.
+- Document the specific reason for invoking impossibility for each sampled case, referencing the supporting
+  evidence or correspondence.
+- Review each sampled case to confirm a named individual approved the invocation, with their name and
+  approval date recorded.
+- Record the outcome of the review for each case, stating whether the invocation was defensible based
+  on documented facts and legal requirements.
+- Name the reviewer as a specific individual, not a group or department, and record the completion date
+  of the review.

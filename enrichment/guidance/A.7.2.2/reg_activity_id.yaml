@@ -1,0 +1,17 @@
+must_id: item:A.7.2.2:reg_activity_id
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: Processing activity identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each processing activity row in the Lawful Basis Register, using a sequential
+  number or clear code.
+- Record the identifier in a dedicated column, ensuring it appears consistently for every processing activity
+  listed.
+- Cross-reference each identifier with related records or documentation, such as data flow maps or risk
+  assessments, to support traceability.
+- Name the processing activity clearly and specifically in each row—avoid vague descriptions that could
+  apply to multiple activities.

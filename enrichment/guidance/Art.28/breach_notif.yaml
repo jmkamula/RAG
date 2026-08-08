@@ -1,0 +1,17 @@
+must_id: item:Art.28:breach_notif
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Breach notification timeline to controller
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the maximum number of hours or days within which the processor must notify the controller after
+  becoming aware of a data breach.
+- Document the notification timeline clearly in the Data Processing Agreement, referencing the specific
+  clause and page number.
+- Name a specific individual or role within the processor’s organisation responsible for sending breach
+  notifications to the controller.
+- Avoid using vague terms like "without undue delay" without specifying an exact timeframe, as auditors
+  will flag this as insufficient.

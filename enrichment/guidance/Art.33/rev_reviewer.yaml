@@ -1,0 +1,16 @@
+must_id: item:Art.33:rev_reviewer
+control_ref: Art.33
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO + legal + incident-response lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'Name the reviewer as a specific individual for each required role: Data Protection Officer, legal counsel,
+  and incident-response lead.'
+- Record the full name, job title, and contact details of each reviewer in the breach notification program
+  review document.
+- Confirm that each reviewer has signed and dated the review to show their participation and approval.
+- Retain evidence that the review was not conducted by a group or anonymous team, but by named individuals
+  in the required roles.

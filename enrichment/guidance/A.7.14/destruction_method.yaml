@@ -1,0 +1,19 @@
+must_id: item:A.7.14:destruction_method
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Destruction method matched to data classification (shred/melt/degauss for highest)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the destruction methods approved for each data classification level in the Secure Disposal
+  and Re-Use of Equipment Procedure.
+- Name the individual responsible for approving destruction methods and update the procedure with their
+  full name and role.
+- Record each disposal event with the equipment identifier, data classification, destruction method used,
+  date, and person performing the action.
+- Cross-reference the destruction method used for each disposal event against the documented requirements
+  for that data classification.
+- Specify the destruction method in detail—avoid vague terms like "destroyed" or "disposed" without describing
+  the actual process.

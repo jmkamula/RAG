@@ -1,0 +1,19 @@
+must_id: item:A.5.24:rev_actions
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Action items captured (e.g. add new role, refresh communications playbook, expand exercise
+  scope, tighten 72h path)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record all action items from each periodic Incident Management Framework review in a dated meeting summary
+  or review log.
+- Assign each action item to a named individual with a target completion date, documented in the review
+  log or action tracker.
+- Document the specific adjustment discussed, such as adding a new role or updating the communications
+  playbook, with clear descriptions.
+- Name the responsible reviewer as a specific person, not a group or department, in the review documentation.
+- Retain evidence of follow-up on previous action items, such as status updates or closure notes, in the
+  same log or tracker.

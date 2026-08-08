@@ -1,0 +1,19 @@
+must_id: item:B.8.4.1:scope_change_drivers
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+must_text: Trigger list (new infrastructure)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific individual responsible for maintaining the list of new infrastructure components that
+  trigger processor temp-file creation.
+- Document each new infrastructure component in a dated register entry, including its deployment date
+  and relevance to processor temp-file scope.
+- State the criteria used to determine when a new infrastructure component should be added to the trigger
+  list, and record this in a version-controlled document.
+- Confirm that the trigger list is reviewed and updated at least quarterly, with each review signed and
+  dated by the named owner.
+- Avoid listing categories like "all servers" or "cloud resources"—specify each component by name and
+  deployment date to prevent ambiguity.

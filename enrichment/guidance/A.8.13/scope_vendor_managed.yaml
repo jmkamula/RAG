@@ -1,0 +1,18 @@
+must_id: item:A.8.13:scope_vendor_managed
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Vendor-managed backups delegated to A.5.19/A.5.21 supplier obligations
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems and data types in your environment, marking which are backed up by your vendors and
+  which are your responsibility.
+- Document the specific vendor names and contract references for each system or dataset where backup is
+  handled externally.
+- State in your backup scope record that vendor-managed backups are excluded, with a cross-reference to
+  the relevant supplier obligation controls (A.5.19/A.5.21).
+- Name the individual responsible for maintaining the backup scope, avoiding generic roles like "IT team"
+  or "Operations".
+- Attach the latest signed supplier agreements that explicitly mention backup responsibilities and obligations.

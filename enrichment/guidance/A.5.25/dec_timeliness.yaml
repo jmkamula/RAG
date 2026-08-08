@@ -1,0 +1,18 @@
+must_id: item:A.5.25:dec_timeliness
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Timeliness target met (decision within stated triage timeline)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the maximum allowed time for triage decisions in your incident response procedure, and record
+  the approval date of this documented timeline.
+- Record the exact date and time each event is detected and when the triage decision is made in your incident
+  management log.
+- Cross-reference each triage decision entry with the stated timeline to confirm the decision was made
+  within the allowed period.
+- Name the person responsible for each triage decision as a specific individual, not a group or team name.
+- Retain completed triage decision records for each event, showing both timestamps and the responsible
+  person's name.

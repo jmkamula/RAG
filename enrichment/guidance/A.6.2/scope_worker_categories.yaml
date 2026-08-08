@@ -1,0 +1,17 @@
+must_id: item:A.6.2:scope_worker_categories
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Worker categories enumerated (employees, fixed-term, contractors, interns, secondees from suppliers,
+  agency workers)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all worker categories relevant to your organisation, including employees, fixed-term staff, contractors,
+  interns, secondees from suppliers, and agency workers, in a dated document.
+- Name the person responsible for maintaining the worker categories list as a specific individual, not
+  a team or department.
+- Cross-reference your worker categories list with HR and procurement records to confirm all types of
+  workers are included.
+- Review the list annually and record the date of each review and any updates made.

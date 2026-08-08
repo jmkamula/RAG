@@ -1,0 +1,40 @@
+leaf_id: req:A.8.31:environment_register
+control_ref: A.8.31
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The Environment Register must only include environments within the defined ISMS scope. Without
+    a clear scope, you risk cataloguing irrelevant or out-of-scope environments, undermining the register’s
+    accuracy.
+  good_enough: A documented scope statement that clearly lists included business units, systems, and boundaries
+    is available.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need a baseline asset inventory to identify which environments exist and to cross-reference
+    environment ownership and asset relationships. The Environment Register builds on this asset foundation.
+  good_enough: An initial asset register exists, listing key environments and their owners, even if some
+    details are pending.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The Environment Register must record which data classes are permitted in each environment.
+    This requires a defined data classification scheme to reference.
+  good_enough: A documented classification scheme exists, with clear data class definitions that can be
+    referenced in the register.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Each environment in the register must have an assigned owner. Clear role definitions ensure
+    ownership is meaningful and traceable.
+  good_enough: A roles and responsibilities matrix or document exists, identifying who can be assigned
+    as environment owners.

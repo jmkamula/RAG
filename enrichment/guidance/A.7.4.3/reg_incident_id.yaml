@@ -1,0 +1,16 @@
+must_id: item:A.7.4.3:reg_incident_id
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: Unique incident identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each incident entered in the register, using a sequential or otherwise
+  non-repeating numbering system.
+- Record the assigned identifier in a dedicated column for every incident row, ensuring no two incidents
+  share the same identifier.
+- Cross-reference each incident’s identifier in related investigation or resolution documents to maintain
+  a clear audit trail.
+- Confirm that no incident is listed without an identifier or with a placeholder such as "TBD" or "N/A".

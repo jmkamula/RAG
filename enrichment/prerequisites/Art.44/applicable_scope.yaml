@@ -1,0 +1,42 @@
+leaf_id: req:Art.44:applicable_scope
+control_ref: Art.44
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify which data flows, transfers,
+    and processing operations are in scope for international transfers under Art.44. Without this, you
+    can't reliably determine what constitutes a 'transfer' or where personal data is moving.
+  good_enough: A current, working RoPA that lists all processing activities and their locations, even
+    if some entries are high-level or pending detail, is sufficient to start defining transfer scope.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and system boundaries, which are essential for
+    mapping which data flows and entities are subject to GDPR transfer requirements. This ensures you
+    don't overlook relevant systems or entities.
+  good_enough: A documented ISMS scope that clearly states included business units, systems, and geographies—even
+    if not yet fully optimized for GDPR—is enough to proceed.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity helps determine which data transfers
+    are legitimate and must be included in the transfer scope. This avoids scoping transfers that lack
+    a legal foundation.
+  good_enough: A mapping of lawful bases to processing activities, even if some are provisional or under
+    review, is sufficient to identify which transfers are in scope.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated DPO (if required) ensures there is a responsible party to oversee and validate
+    the identification of transfers and the applicable scope, reducing the risk of missing key flows.
+  good_enough: A named DPO (or documented rationale for not appointing one) is enough to move forward
+    with defining the transfer scope.

@@ -1,0 +1,18 @@
+must_id: item:A.7.2.4:reg_artifact_version
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Artifact version consented to per row (link to A.7.2.3 register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact version number or date of the consent statement each individual agreed to in a dedicated
+  column of the register.
+- Cross-reference each consent entry to the corresponding row in the A.7.2.3 register, using a unique
+  identifier or direct link.
+- Name the data subject for each row as a specific individual, not as a group or generic label.
+- Retain a timestamp for when consent was captured, ensuring it matches the version of the consent statement
+  presented at that time.
+- Document any updates to the consent statement and verify that new consents reference the updated version
+  in the register.

@@ -1,0 +1,20 @@
+must_id: item:A.5.34:transfer_restrictions
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Cross-border transfer discipline (which transfers happen, on what legal basis — SCCs / adequacy
+  / BCRs / derogations; cross-link to A.5.14 transfer policy + GDPR Art.44-49)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all countries where personal data is transferred, including both routine and occasional transfers,
+  in a dated appendix to the Privacy and PII Protection Policy.
+- State the legal basis for each cross-border transfer, referencing specific mechanisms such as Standard
+  Contractual Clauses, adequacy decisions, Binding Corporate Rules, or derogations.
+- Cross-reference the A.5.14 transfer policy and relevant GDPR Articles 44-49 within the Privacy and PII
+  Protection Policy, using explicit section numbers or hyperlinks.
+- Name the policy owner as a specific individual with responsibility for cross-border transfer compliance,
+  not as a team or department.
+- Review and update the policy at least annually, recording the review date and the reviewer’s name in
+  the policy document.

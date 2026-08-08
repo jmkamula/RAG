@@ -1,0 +1,20 @@
+must_id: item:A.7.4.4:scope_reidentification_risk
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+must_text: Re-identification risk considerations per context (combinations of attributes / auxiliary data
+  / linkage)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each context where personal data minimization applies, specifying the system, process, and data
+  types involved, with a dated record.
+- Document the attributes and auxiliary data available in each context, including possible external or
+  linked data sources, in a maintained register.
+- Assess and record the risk of re-identification for each context, referencing the specific attribute
+  combinations and linkage scenarios considered.
+- Name the responsible individual for each context’s risk assessment, avoiding generic roles like "the
+  team" or "IT department".
+- Review and update the re-identification risk documentation annually, capturing the review date and the
+  reviewer’s name.

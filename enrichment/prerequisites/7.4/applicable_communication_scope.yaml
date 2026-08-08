@@ -1,0 +1,42 @@
+leaf_id: req:7.4:applicable_communication_scope
+control_ref: '7.4'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the overall boundaries of your ISMS—what business units, processes, and
+    information types are covered—before you can define which communications are in scope. This ensures
+    communication procedures align with the ISMS's actual coverage.
+  good_enough: A documented scope statement that clearly lists included organizational units, activities,
+    and information types. It doesn't need to be perfect, but it must be specific enough to avoid confusion
+    about what is in or out of scope.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the high-level direction for information security, including communication
+    expectations and commitments. Without this, you can't determine which communication topics are required
+    or voluntary.
+  good_enough: A published policy that references communication requirements and objectives, even if it
+    is still being socialized internally.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Knowing who is responsible for communication and who the key audiences are (internal and
+    external) is essential for defining the scope of communication procedures.
+  good_enough: A basic roles and responsibilities matrix or list that identifies communication owners
+    and key stakeholder groups.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: You need to know how information is classified to determine which topics or data types require
+    specific communication controls or notifications.
+  good_enough: A draft or working classification scheme that identifies at least the main categories of
+    information handled by the organization.

@@ -1,0 +1,19 @@
+must_id: item:B.8.2.4:reg_instruction_summary
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Instruction summary per row (what the customer asked for)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each customer instruction that may infringe privacy in a separate row, summarizing exactly what
+  the customer requested in plain language.
+- Name the individual who received and logged the instruction, including their full name and the date
+  of entry.
+- Attach or cross-reference supporting documentation, such as emails or tickets, that show the original
+  customer instruction.
+- Confirm that each instruction summary is specific and unique; avoid using generic descriptions that
+  could apply to multiple cases.
+- Review the register regularly and update it with any follow-up actions or resolutions linked to each
+  instruction entry.

@@ -1,0 +1,19 @@
+must_id: item:B.8.2.1:reg_customer_role
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+must_text: Customer role per row (controller / processor / joint) to route obligations correctly
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each customer in the Customer PII Agreement Register with a separate row, ensuring no grouping
+  or combined entries.
+- Record the customer's role for each entry as either "controller," "processor," or "joint," based on
+  the contractual agreement.
+- Reference the specific contract clause or document that defines the customer's role for each row in
+  the register.
+- Name the individual who determined and entered the customer role, and include the date of entry for
+  traceability.
+- Avoid using vague or generic roles such as "varies" or "TBD"—assign a clear, specific role for every
+  customer entry.

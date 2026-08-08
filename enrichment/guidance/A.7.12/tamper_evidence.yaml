@@ -1,0 +1,18 @@
+must_id: item:A.7.12:tamper_evidence
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Tamper-evident protection where sensitive data is carried (locked cabinets, sealed runs)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for cabling security by full name and job title in the procedure document.
+- Document the locations of all cabling runs carrying sensitive data, including diagrams and installation
+  dates.
+- Record the type of tamper-evident protection used for each cabling run, such as locked cabinets or sealed
+  conduits, in a dated inventory.
+- Attach photographs or installation certificates showing tamper-evident features for each sensitive cabling
+  route.
+- State the review schedule for inspecting tamper-evident protections, including the name of the reviewer
+  and the next planned inspection date.

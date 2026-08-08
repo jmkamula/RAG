@@ -1,0 +1,19 @@
+must_id: item:A.6.7:proc_owner
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Named owner of the procedure (typically Head of IT / InfoSec with HR partner for approval workflow)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the procedure owner, such as "Jane Smith, Head of IT," rather than a team
+  or department.
+- Document the procedure owner's full name, job title, and contact details within the procedure's header
+  section.
+- Record the date the current owner accepted responsibility for the procedure in the document version
+  history.
+- Assign a named HR partner to approve the procedure, listing their full name and role in the approval
+  section.
+- Retain a signed and dated approval record from both the procedure owner and HR partner in your document
+  management system.

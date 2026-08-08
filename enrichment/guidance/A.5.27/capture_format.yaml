@@ -1,0 +1,17 @@
+must_id: item:A.5.27:capture_format
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Lessons capture format (what worked, what didn't, root causes, control gaps)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each incident's lessons learned in a dated document that clearly separates what worked, what
+  didn't, root causes, and control gaps.
+- Name the individual responsible for compiling and validating the lessons learned for each incident,
+  not just a team or department.
+- Cross-reference each lessons learned document to the related incident report and any updated policies
+  or controls resulting from the findings.
+- Confirm that the lessons learned document includes specific examples and actionable recommendations,
+  avoiding vague or generic statements that could apply to any incident.

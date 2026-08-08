@@ -1,0 +1,14 @@
+must_id: item:A.7.3:rev_date
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Rooms Program in a dated log or meeting minutes.
+- State the planned review interval for the Rooms Program in a documented schedule or policy.
+- Compare the actual review date to the planned interval and document any deviations with reasons in the
+  review record.
+- Name the reviewer as a specific individual in the review documentation, not as a group or department.

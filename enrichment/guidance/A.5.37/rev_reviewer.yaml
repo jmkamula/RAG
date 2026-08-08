@@ -1,0 +1,17 @@
+must_id: item:A.5.37:rev_reviewer
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Reviewer identity and role recorded (operations lead + InfoSec lead jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full names and job titles of both the operations lead and the information security lead responsible
+  for each program review.
+- Document the date each review was completed and ensure both leads are listed as reviewers on the same
+  record.
+- Obtain signatures or electronic approval from both the operations lead and the information security
+  lead on the review record.
+- Name the reviewers as specific individuals—do not use generic titles like "the team" or "management"
+  in the reviewer field.

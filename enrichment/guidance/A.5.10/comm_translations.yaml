@@ -1,0 +1,19 @@
+must_id: item:A.5.10:comm_translations
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Translations or language considerations where the workforce is multilingual
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all primary languages spoken by your workforce and record them in a dated language needs assessment
+  document.
+- Document the Acceptable Use Policy translations provided, listing each language version and the date
+  it was made available.
+- Name the individual responsible for verifying translation accuracy, ensuring this person is listed by
+  name rather than by role or department.
+- Retain signed or acknowledged receipts from employees confirming they received and understood the policy
+  in their preferred language.
+- Highlight any language groups not covered by a translation and record a plan or justification for how
+  these gaps will be addressed.

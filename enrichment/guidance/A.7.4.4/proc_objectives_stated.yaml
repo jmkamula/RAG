@@ -1,0 +1,19 @@
+must_id: item:A.7.4.4:proc_objectives_stated
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+must_text: Minimization objectives stated per processing activity (target level of identifiability required)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity that handles personal data in a table, including a clear description of
+  the activity and its purpose.
+- State the minimization objective for each activity, specifying the minimum amount or type of personal
+  data required to achieve its purpose.
+- Document the target level of identifiability for each activity, such as anonymous, pseudonymous, or
+  directly identifiable.
+- Name the individual responsible for approving each minimization objective, ensuring a specific person
+  is listed rather than a team or department.
+- Record the date each minimization objective was last reviewed and updated, maintaining a version history
+  for audit reference.

@@ -1,0 +1,15 @@
+must_id: item:A.5.7:reg_contact
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Contact per row (vendor support, ISAC liaison)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List a named contact person for each threat intelligence feed entry, including their full name and direct
+  contact details.
+- Record the date each contact was last confirmed as current and reachable in the register.
+- Attach supporting documentation showing communication with each contact, such as an email thread or
+  support ticket.
+- Avoid using generic roles or team names as contacts; specify an individual for each feed entry.

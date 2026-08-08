@@ -1,0 +1,19 @@
+must_id: item:A.5.15:comm_refresh
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Periodic refresher referenced (annual at minimum)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Access Control Policy that refresher communication will occur at least annually, with the
+  review date clearly shown.
+- Record each instance of policy communication, including the date, method, and recipients, in a dated
+  communication log.
+- Name the person responsible for scheduling and delivering the annual refresher, identifying them as
+  a specific individual.
+- Attach evidence of the most recent refresher, such as an email or meeting invite, showing the date and
+  content shared.
+- Avoid referencing only one-time or ad hoc communication; explicitly document the recurring, periodic
+  nature of refresher activities.

@@ -1,0 +1,18 @@
+must_id: item:A.7.5.2:scope_change_drivers
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+must_text: Trigger list (new region / new subprocessor)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current regions and subprocessors where personal data is transferred in a dated register maintained
+  by a named data protection officer.
+- Update the register within five business days whenever a new region or subprocessor is added as a destination
+  for personal data.
+- Record the decision to add each new region or subprocessor, including the approval date and the name
+  of the approving manager.
+- Name the owner of the register as a specific individual, not as a team or department.
+- Cross-reference each entry in the register to supporting contracts or data transfer agreements with
+  subprocessors or regional entities.

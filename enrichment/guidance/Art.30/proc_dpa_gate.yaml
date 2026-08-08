@@ -1,0 +1,20 @@
+must_id: item:Art.30:proc_dpa_gate
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Linkage to Art.28 DPA process — adding a new processor cannot complete without DPA and register
+  update
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step in your RoPA maintenance procedure that requires a Data Processing Agreement (DPA)
+  to be signed before adding a new processor.
+- Cross-reference the RoPA update checklist to the DPA approval record, ensuring both are linked by processor
+  name and date.
+- Name the individual responsible for confirming that the RoPA register is updated immediately after each
+  new DPA is executed.
+- Record the date and outcome of each processor addition in a log that shows both DPA completion and RoPA
+  update before access is granted.
+- State explicitly in the procedure that a new processor cannot be added if the DPA or RoPA update is
+  missing—do not allow exceptions or verbal approvals.

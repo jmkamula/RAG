@@ -1,0 +1,20 @@
+must_id: item:Art.20:scope_boundary
+control_ref: Art.20
+standard_id: GDPR:2016/679
+must_text: Scope boundary — only data 'provided by' the subject (excludes derived data and observed data
+  per EDPB guidance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define the types of personal data that are considered 'provided by' the data subject in your procedure,
+  referencing GDPR and EDPB guidance.
+- List specific examples of data included and excluded, clearly distinguishing between data provided,
+  observed, and derived.
+- Name the individual responsible for reviewing data requests to confirm only eligible data is included
+  in each response.
+- Document each data portability request with a dated record showing which data categories were released
+  and which were excluded, with reasons.
+- Avoid using generic or boilerplate definitions of 'provided by' data—tailor descriptions to your organisation’s
+  actual data collection practices.

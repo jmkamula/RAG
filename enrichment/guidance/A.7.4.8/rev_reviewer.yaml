@@ -1,0 +1,17 @@
+must_id: item:A.7.4.8:rev_reviewer
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Reviewer identity (Infrastructure + DPO)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer for infrastructure as a specific individual, listing their full name and job title
+  in the disposal program review record.
+- Record the Data Protection Officer’s full name and signature as evidence of their participation in the
+  disposal program review.
+- Document the date on which both reviewers completed their assessment, ensuring the review record is
+  clearly time-stamped.
+- Attach the completed review form or report to the disposal program documentation, making sure both reviewers
+  are clearly identified.

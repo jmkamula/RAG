@@ -1,0 +1,18 @@
+must_id: item:A.8.29:scope_app_classes
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Application classes enumerated with test-type matrix per class
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all application classes in a dated document, using clear categories relevant to your environment
+  such as web, mobile, or internal tools.
+- Define and record the specific security testing types required for each application class, such as penetration
+  testing, code review, or vulnerability scanning.
+- Cross-reference each application class with its required test types in a matrix format, ensuring every
+  class has at least one associated test type.
+- Name the person responsible for maintaining the application class and test-type matrix, avoiding generic
+  roles like "IT" or "the team".
+- Review and update the matrix at least annually, recording the date and approver for each update.

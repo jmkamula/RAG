@@ -1,0 +1,17 @@
+must_id: item:5.1:rea_date
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Reaffirmation date stated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact date leadership reaffirmed their commitment to the information security policy in the
+  Leadership Reaffirmation Record.
+- Record the full name and title of the individual or group providing the reaffirmation, avoiding generic
+  terms like "management" or "the team."
+- Attach a signed or formally acknowledged statement from leadership confirming the reaffirmation occurred
+  on the stated date.
+- Retain a copy of the previous reaffirmation record to demonstrate the current record is up to date and
+  not a reused template.

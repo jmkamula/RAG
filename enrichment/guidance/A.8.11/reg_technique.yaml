@@ -1,0 +1,19 @@
+must_id: item:A.8.11:reg_technique
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Per-row masking technique applied (from procedure's approved-techniques list)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each dataset in the masking register, including a unique identifier and a clear description of
+  its contents.
+- Record the specific per-row masking technique applied to each dataset, referencing the exact technique
+  name from the approved-techniques list.
+- State the date the masking technique was applied and the name of the individual who performed the masking
+  for each dataset entry.
+- Attach a copy or direct link to the procedure’s approved-techniques list referenced for each masking
+  decision.
+- Name the masking technique for each dataset as a specific method — do not use vague terms like "standard"
+  or "usual practice".

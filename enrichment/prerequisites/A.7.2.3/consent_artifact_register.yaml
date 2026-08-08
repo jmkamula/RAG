@@ -1,0 +1,41 @@
+leaf_id: req:A.7.2.3:consent_artifact_register
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the specific purposes for which personal data is collected before
+    you can design or register consent mechanisms. Without this, you cannot ensure that consent artifacts
+    are aligned with the actual data processing activities.
+  good_enough: A documented list of all purposes for data collection, mapped to each collection channel,
+    is available and up to date.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Consent is only one possible lawful basis for processing personal data; you need to confirm
+    that consent is the appropriate basis for each data collection activity before creating or registering
+    consent artifacts.
+  good_enough: Each data collection activity has a recorded lawful basis, and those requiring consent
+    are clearly identified.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope statement defines which business units, processes, and systems are covered by the
+    ISMS and PIMS, ensuring that all relevant consent mechanisms are included in the register.
+  good_enough: A current ISMS scope statement exists that clearly covers all personal data collection
+    activities relevant to consent.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles and responsibilities ensures that the right people are accountable
+    for designing, approving, and maintaining consent artifacts and the register itself.
+  good_enough: Documented roles exist for data collection, consent management, and register maintenance,
+    with named individuals or teams assigned.

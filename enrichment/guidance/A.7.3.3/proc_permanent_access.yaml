@@ -1,0 +1,19 @@
+must_id: item:A.7.3.3:proc_permanent_access
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: Permanent accessibility — notice available at stable URL / in-product location at any time
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Publish the privacy notice at a stable, bookmarked URL or fixed in-product location accessible to users
+  at all times.
+- Record the date the notice location was established and any subsequent changes in a change log maintained
+  by a named individual.
+- Confirm the notice is not behind login walls or temporary links by documenting a screenshot of public
+  access and the URL/location.
+- Name the owner as a specific individual responsible for maintaining the notice’s accessibility, not
+  a generic team or department.
+- Review the notice location quarterly and log each check with the reviewer’s name and date to demonstrate
+  ongoing permanent accessibility.

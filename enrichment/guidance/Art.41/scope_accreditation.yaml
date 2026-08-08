@@ -1,0 +1,19 @@
+must_id: item:Art.41:scope_accreditation
+control_ref: Art.41
+standard_id: GDPR:2016/679
+must_text: Accreditation source (SA + scope of accreditation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the supervisory authority that granted accreditation, specifying the country and full legal name
+  in your monitoring documentation.
+- Document the official accreditation decision letter or certificate, including the date issued and reference
+  number, in your compliance records.
+- State the exact scope of your monitoring activities as defined in the accreditation, quoting or attaching
+  the relevant section from the accreditation source.
+- Cross-reference your monitoring procedures to the scope outlined in the accreditation to demonstrate
+  alignment between your activities and the approved scope.
+- Name the responsible individual who maintains the accreditation records, avoiding generic titles like
+  "the team" or "compliance department".

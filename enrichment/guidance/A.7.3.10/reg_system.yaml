@@ -1,0 +1,15 @@
+must_id: item:A.7.3.10:reg_system
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Automated system involved per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each automated decision event in the register, specifying the exact automated system used for each
+  row.
+- Cross-reference each event entry with the corresponding record in your Article 22 register, including
+  a unique identifier.
+- Name the automated system using its official title or version, not a generic term like "system" or "tool".
+- Record the date and name of the person who added or last updated each event entry in the register.

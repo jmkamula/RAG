@@ -1,0 +1,39 @@
+leaf_id: req:A.8.22:segregation_program_review
+control_ref: A.8.22
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which networks, systems, and environments are in-scope for your ISMS before
+    you can review whether network segregation controls are appropriate and complete.
+  good_enough: A current, approved scope statement that clearly identifies all relevant networked environments
+    and boundaries.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: A complete asset register ensures you know what systems and data reside in each network zone,
+    which is essential for verifying zone-register completeness and exception inventories.
+  good_enough: An up-to-date list of assets mapped to network zones, even if some details are still being
+    refined.
+- ref: A.8.20
+  standard_id: ISO27001:2022
+  title: Networks security
+  category: direct
+  rationale: Your baseline network security controls and architecture must be defined before you can meaningfully
+    review the effectiveness and appropriateness of network segregation.
+  good_enough: Documented network security controls and a high-level network diagram showing segmentation
+    boundaries.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding the risks associated with network zones and flows is necessary to judge if
+    current segregation and flow rules are still appropriate.
+  good_enough: A recent risk assessment that covers network-related threats and vulnerabilities, even
+    if some risks are still being mitigated.

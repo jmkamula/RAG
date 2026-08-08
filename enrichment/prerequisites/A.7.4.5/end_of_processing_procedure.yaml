@@ -1,0 +1,47 @@
+leaf_id: req:A.7.4.5:end_of_processing_procedure
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the specific purposes for which PII is processed in order to determine
+    when that purpose ends and data should be deleted or de-identified.
+  good_enough: All PII processing activities have a documented, up-to-date purpose statement that is accessible
+    to those drafting the end-of-processing procedure.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for processing PII is essential to determine retention requirements
+    and when deletion or de-identification is legally required.
+  good_enough: Each PII processing activity has a recorded lawful basis that can be referenced to inform
+    end-of-processing decisions.
+- ref: A.7.4.7
+  standard_id: ISO27701:2019
+  title: Retention Policy
+  category: direct
+  rationale: The retention policy defines how long PII should be kept, which directly informs when the
+    end-of-processing procedure should be triggered.
+  good_enough: There is a documented retention schedule for each category of PII, even if some durations
+    are provisional or based on best estimates.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A working classification scheme is needed to identify which data qualifies as PII and must
+    be considered for deletion or de-identification.
+  good_enough: PII is clearly identified and labeled within the organization’s data classification scheme,
+    at least at a basic level.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register ensures you know where PII resides, so you can apply deletion
+    or de-identification procedures effectively.
+  good_enough: The main systems and repositories containing PII are listed in the asset register, even
+    if some inventories are still being refined.

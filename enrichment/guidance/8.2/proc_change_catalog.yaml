@@ -1,0 +1,18 @@
+must_id: item:8.2:proc_change_catalog
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Catalog of significant changes that trigger reassessment (new product, new region, new regulator,
+  major incident, M&A, supplier change)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each type of significant change that requires a new operational risk assessment, such as new products,
+  new regions, new regulators, major incidents, mergers, acquisitions, or supplier changes.
+- Document the date when the catalog of triggers was last reviewed and updated, and name the person responsible
+  for the review.
+- Name the owner as a specific individual responsible for maintaining the trigger catalog, not a team
+  or department.
+- Cross-reference each trigger in the catalog to the relevant section of your operational risk assessment
+  procedure.

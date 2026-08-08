@@ -1,0 +1,17 @@
+must_id: item:Art.15:complaint
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Right to lodge a complaint with a supervisory authority
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the response letter that the data subject has the right to lodge a complaint with a supervisory
+  authority, using clear and direct language.
+- Name the relevant supervisory authority, including its full name and contact details, in the response
+  documentation.
+- Record the date the response letter was sent and keep a copy of the exact wording provided to the data
+  subject.
+- Avoid using generic phrases such as "contact your authority"—specify the actual authority relevant to
+  the data subject's location.

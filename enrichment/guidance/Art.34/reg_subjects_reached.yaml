@@ -1,0 +1,18 @@
+must_id: item:Art.34:reg_subjects_reached
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: Per-row subjects-reached count (or 'unable to calculate, public communication used')
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact number of affected individuals reached for each communication event in the Subject
+  Communication Record.
+- State "unable to calculate, public communication used" in the count field if direct reach cannot be
+  determined.
+- Name the person responsible for tracking and entering the per-row count or public communication note
+  for each event.
+- Date each entry to show when the communication reach was assessed and recorded.
+- Avoid leaving the count field blank or using vague terms like "many" or "various"—use a specific number
+  or the required phrase.

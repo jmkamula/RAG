@@ -1,0 +1,39 @@
+leaf_id: req:Art.47:bcr_register
+control_ref: Art.47
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of all processing activities to identify which data transfers
+    occur and which entities are involved. This is essential to accurately map BCR coverage and ensure
+    the register is complete.
+  good_enough: A current, reasonably complete RoPA that lists all group entities and cross-border data
+    flows is available, even if some minor updates are pending.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: direct
+  rationale: You must confirm that each transfer relying on BCRs has a valid lawful basis under GDPR.
+    Without this, you cannot justify or document reliance on BCRs for specific transfers.
+  good_enough: Each transfer relying on BCRs has a documented lawful basis, even if not all are fully
+    reviewed for every processing activity.
+- ref: Art.47
+  standard_id: GDPR:2016/679
+  title: Binding Corporate Rules (BCRs) Approval
+  category: direct
+  rationale: You cannot register which entities are bound by BCRs until the BCRs themselves have been
+    formally approved by the relevant supervisory authority.
+  good_enough: Formal BCR approval (or at least written confirmation of approval in principle) is available
+    for reference.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated DPO is required to oversee GDPR compliance, including BCR implementation and
+    register maintenance. Without a DPO, accountability for the register is unclear.
+  good_enough: A named DPO is appointed and contactable, even if internal processes are still maturing.

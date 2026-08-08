@@ -1,0 +1,20 @@
+must_id: item:A.6.8:rev_triage_handoff
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Triage handoff check — every report reached A.5.25 triage; no reports lost in the handoff;
+  cycle time from report to triage measured
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each periodic report’s submission date and unique identifier in a central log to track its progress
+  through the triage process.
+- Cross-reference the central log with A.5.25 triage records to confirm every report was received and
+  reviewed by the triage team.
+- Calculate and document the time elapsed between each report’s submission and its triage review, noting
+  any delays or exceptions.
+- Name the individual responsible for monitoring the handoff process, avoiding generic titles like "the
+  team" or "management."
+- Retain dated evidence of periodic reconciliation checks showing no reports were lost or unaccounted
+  for during the reporting cycle.

@@ -1,0 +1,17 @@
+must_id: item:A.8.11:roles
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Roles responsible (Engineering owners applying masking; DPO oversight for PII)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the engineering owner responsible for applying data masking by full name and job title in the procedure
+  document.
+- Assign oversight of personal data masking to the Data Protection Officer (DPO), listing their full name
+  and contact details in the document.
+- Document the approval of the data masking procedure by both the engineering owner and the DPO, including
+  signatures and approval dates.
+- Avoid listing a team or department as the responsible party; specify individual names to ensure clear
+  accountability.

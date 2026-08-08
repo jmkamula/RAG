@@ -1,0 +1,15 @@
+must_id: item:5.3:org_chart_link
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Integration with the organizational chart (link from each role to a real org-chart position)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each ISMS role in the matrix to a specific position title as shown on the current organizational
+  chart.
+- Attach or link the latest approved organizational chart to the roles and responsibilities matrix for
+  direct comparison.
+- Name the owner of each ISMS role as a specific individual, not as a team or department.
+- Record the date when the matrix was last updated to reflect any organizational changes.

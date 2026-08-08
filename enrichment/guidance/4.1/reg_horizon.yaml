@@ -1,0 +1,16 @@
+must_id: item:4.1:reg_horizon
+control_ref: '4.1'
+standard_id: ISO27001:2022
+must_text: Time-horizon column per issue (near-term vs long-term)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a "Time-horizon" column to your Issues Register to clearly classify each issue as near-term or long-term.
+- Record the planned resolution timeframe for each issue, using specific dates or periods, in the "Time-horizon"
+  column.
+- Name the person responsible for assigning time-horizons to issues, ensuring this is a specific individual
+  rather than a team or department.
+- Review the register to confirm that no issue is missing a time-horizon entry, and update any incomplete
+  records.

@@ -1,0 +1,14 @@
+must_id: item:A.8.13:reg_date
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Per-test date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each restore test is performed in the Restore Test Register.
+- Name the individual responsible for conducting each restore test alongside the test date.
+- Attach supporting evidence, such as screenshots or logs, showing the date of each restore test completion.
+- Avoid using vague timeframes like "monthly" or "recent"—always enter a specific calendar date for each
+  test.

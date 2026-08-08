@@ -1,0 +1,17 @@
+must_id: item:B.8.3.1:scope_change_drivers
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+must_text: Trigger list (new contract tier / new self-service feature)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a trigger list that includes events like signing a new contract tier or launching a new self-service
+  feature, with the date the list was last updated.
+- Name a specific individual responsible for maintaining and updating the trigger list, avoiding generic
+  roles like "the team" or "IT".
+- Record each time the trigger list is reviewed or updated, including the reviewer's name and the review
+  date.
+- Cross-reference the trigger list in your support scope documentation to show how changes prompt a scope
+  review.

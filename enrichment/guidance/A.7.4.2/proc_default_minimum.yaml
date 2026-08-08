@@ -1,0 +1,16 @@
+must_id: item:A.7.4.2:proc_default_minimum
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+must_text: Default-minimum — limited to minimum necessary by default; expansions require documented rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the default data fields collected and processed for each activity, showing only the minimum
+  necessary to achieve the stated purpose.
+- Record any expansion of data processing beyond the default minimum, including a written rationale and
+  approval from a named decision-maker.
+- Name the owner of the procedure as a specific individual, not a group or department.
+- Retain dated versions of the procedure and all related approvals to demonstrate when changes and exceptions
+  were authorized.

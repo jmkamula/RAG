@@ -1,0 +1,19 @@
+must_id: item:A.5.22:sch_tier_link
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Linkage to A.5.19 supplier register tier (drives cadence)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each supplier in the review schedule register to its risk tier as recorded in the A.5.19
+  supplier register.
+- State the review frequency for each supplier based on its assigned risk tier, using language consistent
+  with your supplier risk policy.
+- Name the individual responsible for scheduling and conducting each supplier review, listing their full
+  name rather than a team or department.
+- Record the date of the last and next scheduled review for each supplier, ensuring these align with the
+  required cadence for the risk tier.
+- Document any changes in supplier risk tier promptly in both the supplier register and the review schedule
+  to maintain alignment.

@@ -1,0 +1,16 @@
+must_id: item:10.1:scope_change_drivers
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new signal source from new tooling, new feedback channel)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current sources that could trigger a change in scope, such as new tools, feedback channels,
+  or regulatory updates, in a dated document.
+- Name a specific individual responsible for maintaining and updating the trigger list, avoiding generic
+  roles like "the team" or "IT".
+- Record each trigger's addition or removal with a date and a brief justification in the same document.
+- Cross-reference the trigger list with recent tooling or process changes to confirm all relevant signals
+  are included.

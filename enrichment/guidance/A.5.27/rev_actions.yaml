@@ -1,0 +1,17 @@
+must_id: item:A.5.27:rev_actions
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Action items captured for the program (e.g. tighten root-cause typing, expand pattern scope)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record all action items from each lessons-learned program review in a dated log, including specific
+  details about the improvement identified.
+- Assign each action item to a named individual with a clear deadline, avoiding generic assignees such
+  as "the team" or "management".
+- Document evidence of follow-up on previous action items by referencing completed tasks or updated processes
+  in the next review meeting minutes.
+- Retain signed approval of the action item log by the program owner to confirm review and acceptance
+  of responsibilities.

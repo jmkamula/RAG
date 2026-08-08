@@ -1,0 +1,19 @@
+must_id: item:A.7.4.5:reg_verification
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: Verification result per row (post-action check confirming PII gone)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and name of the person who performed the end-of-processing action for each entry in
+  the register.
+- Document the specific method used to verify that all personal data was deleted, anonymized, or returned
+  as required for each processing activity.
+- Attach or reference evidence of the verification check, such as system logs, screenshots, or confirmation
+  emails, for every completed action.
+- State the verification result clearly for each row, using unambiguous terms like "PII deleted" or "No
+  PII found" rather than vague statements.
+- Name the verifier as a specific individual — not a group, team, or department — to avoid auditor concerns
+  about unclear accountability.

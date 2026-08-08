@@ -1,0 +1,20 @@
+must_id: item:Art.32:rev_appropriateness
+control_ref: Art.32
+standard_id: GDPR:2016/679
+must_text: Appropriateness re-assessment — measures still proportionate given current threat landscape
+  and tech state-of-art
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the annual security program review, documenting their name and the
+  review start date in the review log.
+- Document the current threat landscape and recent technological advancements, citing at least two reputable
+  external sources with publication dates.
+- Record a written assessment comparing existing security measures against current threats and available
+  technologies, including specific examples of any gaps or improvements.
+- Sign and date the final review decision on whether existing measures remain appropriate, including justification
+  for any changes or confirmations.
+- Name the reviewer as a specific person, not a generic title or team, to avoid audit findings about unclear
+  accountability.

@@ -1,0 +1,18 @@
+must_id: item:10.2:scope_external_sources
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: External sources in scope (regulator findings, customer complaints, supplier breaches affecting
+  our scope)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all external sources that could lead to nonconformities, such as regulator findings, customer complaints,
+  and supplier breaches, in a dated register.
+- Name the specific individual responsible for maintaining and updating the external sources register,
+  avoiding generic roles like "the team."
+- Cross-reference each external source entry to the relevant area of your information security management
+  system scope.
+- Attach supporting evidence for each entry, such as official regulator letters, customer complaint logs,
+  or supplier breach notifications.

@@ -1,0 +1,17 @@
+must_id: item:7.5:reg_doc_id
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Unique document identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique document identifier to each entry in the ISMS Document Register, ensuring no two documents
+  share the same identifier.
+- Record the unique identifier in a dedicated column for every document listed, matching the format specified
+  in your document control procedure.
+- Cross-reference each identifier with the corresponding document file or location to confirm traceability
+  from the register to the actual document.
+- Avoid using generic or repeated identifiers such as "TBD" or "N/A"—each identifier must be specific
+  and permanent.

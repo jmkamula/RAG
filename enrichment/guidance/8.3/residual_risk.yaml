@@ -1,0 +1,15 @@
+must_id: item:8.3:residual_risk
+control_ref: '8.3'
+standard_id: ISO27001:2022
+must_text: Residual risk recorded after treatment
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the calculated residual risk for each operational risk after treatment in a dated entry within
+  your risk register.
+- Name the individual responsible for assessing and documenting the residual risk for each risk entry.
+- Reference the specific risk treatment actions taken alongside the residual risk value in the same record.
+- Avoid leaving the residual risk field blank or marked as "TBD"—enter a specific value or qualitative
+  assessment for every treated risk.

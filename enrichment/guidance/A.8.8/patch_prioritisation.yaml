@@ -1,0 +1,19 @@
+must_id: item:A.8.8:patch_prioritisation
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Patch prioritisation factoring exploitability + business impact (KEV catalogue if used)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for assessing vulnerabilities by both exploitability and business impact, referencing
+  any external sources like the KEV catalogue if used.
+- Record each patch prioritisation decision with the rationale, including specific exploitability and
+  business impact factors considered.
+- Name the individual responsible for final patch prioritisation decisions, avoiding generic roles such
+  as "IT" or "the team".
+- Retain evidence of regular reviews of the prioritisation process, showing updates when new exploitability
+  data or business impact information emerges.
+- Cross-reference each prioritised vulnerability to supporting records, such as threat intelligence reports
+  or business impact assessments.

@@ -1,0 +1,20 @@
+must_id: item:Art.44:transfer_identification
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Transfer-identification mechanism — any flow of personal data outside EU/EEA flagged at intake
+  (vendor onboarding, integration design, support routing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each new data flow at intake by recording the source, destination, and whether the destination
+  is outside the EU/EEA in a central register.
+- Assign responsibility to a named individual for reviewing data flows for cross-border transfers during
+  vendor onboarding, integration design, and support routing.
+- Flag any data flow involving a non-EU/EEA destination in the register with a clear, dated entry indicating
+  the transfer risk.
+- Name the owner as a specific person, not a team or department, to avoid ambiguity in accountability
+  for transfer identification.
+- Retain evidence of the review and flagging process, such as completed checklists or signed intake forms,
+  for each data flow involving personal data.

@@ -1,0 +1,19 @@
+must_id: item:Art.36:scope_residual_high_risk
+control_ref: Art.36
+standard_id: GDPR:2016/679
+must_text: Operational interpretation of 'residual high risk' (post-mitigation high likelihood × severity)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define 'residual high risk' in your risk methodology document, using both likelihood and severity after
+  mitigation measures are applied.
+- Document the calculation or scoring method used to determine when a risk qualifies as 'high' post-mitigation,
+  with clear thresholds.
+- Record a dated decision by a named risk owner or Data Protection Officer confirming the operational
+  interpretation and its alignment with GDPR guidance.
+- Reference at least one completed risk assessment where the 'residual high risk' threshold was applied
+  to a real scenario.
+- Name the owner as a specific individual — not a group or department — responsible for maintaining and
+  updating the interpretation.

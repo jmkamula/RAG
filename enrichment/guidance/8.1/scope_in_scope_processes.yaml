@@ -1,0 +1,20 @@
+must_id: item:8.1:scope_in_scope_processes
+control_ref: '8.1'
+standard_id: ISO27001:2022
+must_text: ISMS-relevant processes enumerated (risk-assessment cadence, treatment execution, access reviews,
+  incident response, awareness delivery, audit cycle)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all operational processes that support your information security management system, such as risk
+  assessment, incident response, access reviews, and security awareness.
+- Document the frequency or schedule for each process, such as quarterly risk assessments or annual access
+  reviews, in a dated operational scope register.
+- Assign a named individual as the process owner for each listed process, avoiding generic labels like
+  "IT team" or "management."
+- Cross-reference each process to relevant policies or procedures, providing document titles and version
+  numbers for traceability.
+- Review and update the operational processes scope at least annually, recording the review date and the
+  reviewer’s name.

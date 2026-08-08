@@ -1,0 +1,19 @@
+must_id: item:B.8.2.6:rev_completeness
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: Completeness check — one RoPA row per active customer engagement
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all active customer engagements by name and date in a master list maintained by the data protection
+  or privacy team.
+- Cross-reference each active customer engagement against the current Processor RoPA to confirm a corresponding
+  entry exists for every engagement.
+- Document any gaps found during the cross-check, including missing RoPA entries, in a dated review log
+  signed by the reviewer.
+- Name the reviewer as a specific individual responsible for the completeness check, not as a team or
+  department.
+- Retain the completed review log and the cross-referenced master list as evidence of the completeness
+  check for the audit period.

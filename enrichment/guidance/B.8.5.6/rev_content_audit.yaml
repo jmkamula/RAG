@@ -1,0 +1,17 @@
+must_id: item:B.8.5.6:rev_content_audit
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+must_text: Content audit — sampled disclosures include countries + obligations mechanism
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of recent subcontractor disclosures from your records, noting the date and disclosure
+  reference for each.
+- Check each sampled disclosure to confirm it clearly lists all countries where personal data may be processed
+  or accessed.
+- Verify that each disclosure describes the specific mechanism used to ensure subcontractor obligations,
+  such as contractual clauses or data processing agreements.
+- Record the name of the reviewer and the date the content audit was completed for traceability.
+- Name the person responsible for disclosures as a specific individual, not a team or department.

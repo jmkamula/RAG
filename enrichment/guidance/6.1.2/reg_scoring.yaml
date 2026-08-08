@@ -1,0 +1,16 @@
+must_id: item:6.1.2:reg_scoring
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Likelihood + consequence scores per row applied per the procedure's criteria
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the likelihood and consequence scores for each risk entry in the risk register, using the exact
+  criteria defined in your risk assessment procedure.
+- Cross-reference each score to the relevant section of your documented risk assessment procedure to show
+  how the scoring was determined.
+- Name the person who assigned the scores for each risk, ensuring a specific individual is listed rather
+  than a group or department.
+- Date each scoring entry to provide a clear timeline of when the risk was evaluated.

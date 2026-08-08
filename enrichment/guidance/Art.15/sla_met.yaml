@@ -1,0 +1,19 @@
+must_id: item:Art.15:sla_met
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Structured SLA-met flag per response — boolean against the Art.12.3 1-month clock (or extended
+  clock where Art.12.3 extension was formally invoked); analogous to A.5.16:rev_sla_met
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each data subject access request is received in a central register, listing the requester’s
+  name and request details.
+- Document the date the response is sent, referencing the specific request entry in the register.
+- State whether the response met the 1-month deadline by recording a clear yes/no flag for each request,
+  based on the recorded dates.
+- Note any formal extension under Art.12.3, including the extension notification date and justification,
+  linked to the original request record.
+- Name the person responsible for tracking and flagging SLA compliance for each request, avoiding generic
+  roles like "the team" or "admin".

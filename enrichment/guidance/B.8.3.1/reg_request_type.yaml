@@ -1,0 +1,18 @@
+must_id: item:B.8.3.1:reg_request_type
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+must_text: Request type per row (rectification support / erasure support / portability export / restriction
+  / info-for-Art.15)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific type of each subject rights request in a dedicated column, using clear terms like
+  "rectification," "erasure," "portability," "restriction," or "information."
+- Document the date each request was received and the name of the individual who logged it in the register.
+- Name the owner responsible for handling each request as a specific individual, not as a team or department.
+- Cross-reference each entry with supporting correspondence or documentation to confirm the nature of
+  the request type.
+- Avoid using generic or catch-all labels such as "other" or "miscellaneous" for request types; specify
+  the exact right being exercised.

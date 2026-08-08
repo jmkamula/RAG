@@ -1,0 +1,18 @@
+must_id: item:A.5.7:control_use
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Use into technical controls (firewall blocklists, IDS rules, EDR indicators, vulnerability
+  prioritisation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document how threat intelligence feeds are integrated into technical controls such as firewalls, intrusion
+  detection systems, and endpoint detection platforms, including specific data sources and update frequency.
+- Record examples of recent threat intelligence indicators that were actioned, showing dates, sources,
+  and the technical controls updated as a result.
+- Assign a named individual responsible for reviewing and applying threat intelligence to technical controls;
+  avoid listing a team or generic role.
+- Retain change logs or tickets showing when threat intelligence led to updates in blocklists, IDS rules,
+  or vulnerability prioritisation, including timestamps and approver names.

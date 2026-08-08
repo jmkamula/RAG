@@ -1,0 +1,18 @@
+must_id: item:A.5.21:eol_trigger
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: EOL trigger per record (vendor announcement / contract end / vulnerability-driven decommission)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific end-of-life trigger for each ICT component, such as vendor announcement, contract
+  end date, or identified vulnerability, in the replacement log.
+- Attach supporting evidence for the trigger, such as a vendor notice, contract excerpt, or vulnerability
+  report, to each component’s end-of-life record.
+- Name the person who confirmed and documented the end-of-life trigger for each component, ensuring it
+  is not left blank or attributed to a group.
+- Date each entry to show when the end-of-life trigger was identified and recorded for the component.
+- Review records to confirm no generic or copy-paste triggers are used; each trigger must be specific
+  to the component and its context.

@@ -1,0 +1,18 @@
+must_id: item:A.7.13:rev_register_update
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Changes propagated to the procedure / scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and summary of each maintenance program review in a dedicated log, including any identified
+  changes to procedures or scope.
+- Document the specific updates made to the maintenance procedure or scope, referencing the review meeting
+  or decision that triggered each change.
+- Assign a named individual to approve and sign off on all procedural or scope changes, ensuring the approver
+  is clearly identified.
+- Retain previous and current versions of the maintenance procedure, showing tracked changes and effective
+  dates for each revision.
+- Name the owner of the maintenance program as a specific person, not a generic group or department.

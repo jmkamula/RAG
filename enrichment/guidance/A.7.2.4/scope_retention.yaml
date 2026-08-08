@@ -1,0 +1,18 @@
+must_id: item:A.7.2.4:scope_retention
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Consent record retention (until withdrawn + statutory retention period for demonstration)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all systems and processes where personal data consent is collected, and list them in a dated
+  inventory maintained by a named data protection officer.
+- Document the statutory retention periods for each consent type, referencing the specific legal or regulatory
+  source for each entry.
+- Record the date consent was given and, if applicable, the date it was withdrawn for each individual
+  in a searchable register.
+- Retain each consent record until the later of withdrawal or statutory retention expiry, and log the
+  destruction date when records are deleted.
+- Name the owner responsible for consent record retention as a specific individual, not as a team or department.

@@ -1,0 +1,19 @@
+must_id: item:A.8.2:bl_pam_tool
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: PAM tooling configured (vaulting, session recording, command brokering)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific PAM tool in use and record its configuration version and deployment date in your privileged
+  access baseline document.
+- Document the enabled features for vaulting, session recording, and command brokering, including screenshots
+  or export files from the PAM tool’s configuration interface.
+- Assign a named individual responsible for maintaining and updating the PAM configuration, avoiding generic
+  roles like "IT" or "security team".
+- Confirm that session recording and command brokering are actively enforced by generating and saving
+  a recent audit log showing these controls in action.
+- Retain evidence of periodic reviews of the PAM configuration, including reviewer names, dates, and any
+  changes made.

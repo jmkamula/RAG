@@ -1,0 +1,19 @@
+must_id: item:A.5.6:basis_of_contact
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Basis of contact per entry (paid membership, subscription, named-individual attendance, community
+  access)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each special interest group or professional forum in the register with its full name and a brief
+  description of its focus.
+- Record the basis of contact for each entry, specifying whether it is paid membership, subscription,
+  named-individual attendance, or community access.
+- Name the individual or role responsible for maintaining each entry, avoiding vague labels such as "the
+  team" or "IT department."
+- Enter the date when each register entry was last reviewed or updated to show ongoing accuracy.
+- Attach supporting documentation, such as membership invoices or attendance confirmations, for each listed
+  contact basis.

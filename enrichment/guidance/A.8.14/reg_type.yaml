@@ -1,0 +1,19 @@
+must_id: item:A.8.14:reg_type
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Per-test type (planned drill / unplanned real / fault-injection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the type of each failover event in the register as "planned drill," "unplanned real," or "fault-injection"
+  at the time of entry.
+- Name the person responsible for classifying the test type for each failover event, using their full
+  name rather than a team or department.
+- Document the date and time each failover event was initiated, linking this information to the specific
+  test type recorded.
+- Retain supporting evidence, such as test plans or incident reports, that clearly show the intent and
+  context for each failover event type.
+- Review the register quarterly to confirm all entries have a clearly stated and accurate test type; flag
+  and correct any missing or ambiguous classifications.

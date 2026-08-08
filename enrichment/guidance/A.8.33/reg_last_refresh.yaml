@@ -1,0 +1,17 @@
+must_id: item:A.8.33:reg_last_refresh
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Per-row last refresh timestamp (drives stale-test-data detection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a "Last Refresh Timestamp" column to the Test Dataset Register to record the exact date and time
+  each dataset was last updated.
+- Enter a specific, ISO-formatted timestamp for every dataset row, ensuring no dataset is left with a
+  blank or placeholder value.
+- Name the person responsible for updating each timestamp, listing their full name rather than a generic
+  team or department.
+- Review the register monthly and record the review date and reviewer’s name to confirm all timestamps
+  remain current and accurate.

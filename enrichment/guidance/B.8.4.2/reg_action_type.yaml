@@ -1,0 +1,15 @@
+must_id: item:B.8.4.2:reg_action_type
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+must_text: Action type per row (return / transfer / dispose / hybrid)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the action type for each end-of-service event in the register, clearly marking whether it is
+  return, transfer, dispose, or hybrid.
+- Name the responsible individual for each action entry, avoiding generic labels like "IT team" or "staff".
+- Date each action entry to show when the end-of-service action was completed.
+- Cross-reference each action entry with supporting documentation, such as disposal certificates or transfer
+  receipts, to verify the action type.

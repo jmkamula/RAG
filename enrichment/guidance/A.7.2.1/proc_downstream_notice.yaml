@@ -1,0 +1,19 @@
+must_id: item:A.7.2.1:proc_downstream_notice
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Downstream notice — purpose changes propagate to notice + consent + RoPA + PIA
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each change in processing purpose with a dated record, including a clear description of the
+  new or revised purpose.
+- Update all relevant privacy notices to reflect the new or changed purpose, and retain copies showing
+  the revision date and content.
+- Revise consent records to match the updated purpose, capturing the date and method of obtaining new
+  or refreshed consent.
+- Amend the Record of Processing Activities (RoPA) to include the new purpose, and keep a dated version
+  history of all changes.
+- Review and update any affected Privacy Impact Assessments (PIAs), ensuring each updated PIA is signed
+  and dated by the responsible individual.

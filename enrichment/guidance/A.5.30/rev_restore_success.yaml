@@ -1,0 +1,17 @@
+must_id: item:A.5.30:rev_restore_success
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Restore-success-rate analysis (last N restores attempted; success rate; failed restores investigated)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the number of restore attempts made in the last review period, including dates and systems involved,
+  in a dated report.
+- Calculate and document the percentage of successful versus failed restore attempts in the same report.
+- Investigate each failed restore attempt and attach a summary of root cause analysis and corrective actions
+  taken.
+- Name the reviewer as a specific individual who signed off on the restore-success-rate analysis, not
+  a generic role or team.
+- Retain the completed analysis report and supporting investigation records for auditor inspection.

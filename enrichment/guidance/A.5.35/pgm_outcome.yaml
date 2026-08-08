@@ -1,0 +1,20 @@
+must_id: item:A.5.35:pgm_outcome
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Cadence-adjustment or scope-adjustment decisions (tighten / loosen / re-tier / change reviewer
+  pool)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each decision to adjust the review cadence or scope in a dated record, specifying whether the
+  change is to tighten, loosen, re-tier, or alter the reviewer pool.
+- Name the individual who approved the adjustment, ensuring the record lists a specific person and not
+  a group or department.
+- State the rationale for each adjustment, referencing the relevant risk assessment, incident, or business
+  change that prompted the decision.
+- Retain evidence of communication to all affected reviewers or stakeholders, such as an email or meeting
+  minutes, confirming awareness of the new cadence or scope.
+- Cross-reference the adjustment record with the latest version of the Periodic Independent Review Program
+  to show the change has been implemented.

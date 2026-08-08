@@ -1,0 +1,16 @@
+must_id: item:A.8.31:distinct_environments
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Distinct environments enumerated (dev / test / staging / production) with purpose per environment
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each environment by name—such as development, test, staging, and production—in the procedure document.
+- Describe the specific purpose and allowed activities for each environment in a dedicated section of
+  the procedure.
+- Assign a named owner for each environment, ensuring the owner is a specific individual and not a team
+  or department.
+- Date and version the procedure document to show when the environments and purposes were last reviewed
+  or updated.

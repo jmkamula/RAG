@@ -1,0 +1,19 @@
+must_id: item:A.8.15:protection
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Protection from tampering (append-only / write-once / hashed / off-host SIEM)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the technical controls in place that make logs append-only, write-once, or cryptographically
+  hashed, including system names and configuration dates.
+- Name the person responsible for regularly reviewing log integrity and protection measures, specifying
+  their full name and job title.
+- Record the date and outcome of the most recent test or verification showing that logs cannot be altered
+  or deleted after creation.
+- State the storage location for logs, confirming if logs are sent to an off-host SIEM or other protected
+  system.
+- Avoid describing log protection in generic terms; specify the actual technology or method used, not
+  just "logs are protected."

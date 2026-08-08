@@ -1,0 +1,18 @@
+must_id: item:A.7.5:reg_site_threat
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Per-row site + threat pair (one row per applicable threat per site)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the threat register for each site, listing their full name
+  and contact details in the register.
+- Document each site and threat pair as a separate row, clearly stating both the site name and the specific
+  threat being assessed.
+- Record the date of the most recent assessment for each site-threat pair, ensuring no row is left undated.
+- Cross-reference each threat entry with supporting evidence, such as risk assessments or incident logs,
+  by including document titles and dates.
+- Avoid using generic site names or threats; specify actual site locations and clearly defined threats
+  relevant to each site.

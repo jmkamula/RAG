@@ -1,0 +1,19 @@
+must_id: item:A.5.30:rev_dependency_check
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Dependency-currency check (sample of services where dependency map re-validated against current
+  reality; shifts flagged for plan update)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify a sample of critical ICT services and record their names and owners in a dated review log.
+- Cross-reference each service’s documented dependency map with current system architecture diagrams and
+  vendor lists, noting any mismatches or outdated links.
+- Document any changes or shifts in dependencies since the last review, including new, removed, or altered
+  connections, in the review log.
+- Assign responsibility for updating the readiness plan to a named individual, not a group or department,
+  and record the assignment with a date.
+- Attach evidence of the review, such as meeting minutes or annotated diagrams, to show the dependency-currency
+  check was completed for the sampled services.

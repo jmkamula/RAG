@@ -1,0 +1,18 @@
+must_id: item:A.7.3.1:proc_fulfilment_means
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Fulfilment means enumerated per obligation (which subject-rights channel handles each right
+  — access / rectification / erasure / portability / objection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each individual privacy right (access, rectification, erasure, portability, objection) in the PII
+  Principal Obligations Procedure with a separate section for each.
+- Name the specific subject-rights channel or process responsible for handling requests related to each
+  privacy right, not just a generic contact.
+- Assign a named owner for maintaining and updating the procedure, avoiding non-specific roles like "the
+  team" or "IT department".
+- Record the date of the most recent review and update of the procedure at the top of the document.
+- Cross-reference each right to supporting documentation or request forms to show how requests are processed.

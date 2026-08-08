@@ -1,0 +1,16 @@
+must_id: item:A.5.20:acceptable_use
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Acceptable + unacceptable use rules stated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State acceptable uses of the supplier’s services or systems in a dedicated section, using clear examples
+  relevant to your organisation.
+- List specific unacceptable uses, such as sharing credentials or using data for non-contracted purposes,
+  in the agreement template.
+- Reference the internal policy or standard that defines acceptable and unacceptable use, including the
+  policy’s title and version.
+- Name the person responsible for maintaining the template as a specific individual, not a team or department.

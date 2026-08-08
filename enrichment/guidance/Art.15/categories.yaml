@@ -1,0 +1,17 @@
+must_id: item:Art.15:categories
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Categories of personal data concerned
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all categories of personal data included in the response, such as contact details, employment records,
+  or financial information.
+- Reference the specific data sources or systems where each category of personal data was obtained or
+  is stored.
+- Document the date the data categories were identified and included in the response to show the information
+  is current.
+- Name the staff member who compiled and verified the list of data categories, not just the department
+  or team.

@@ -1,0 +1,15 @@
+must_id: item:A.8.31:rev_date
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Environment Separation Program in a dated log or register
+  entry.
+- Confirm the review occurred within the planned interval stated in your policy or program documentation.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Attach supporting evidence of the review, such as meeting minutes or a signed review checklist, to the
+  program documentation.

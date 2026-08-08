@@ -1,0 +1,15 @@
+must_id: item:A.8.3:reg_owner
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Per-row matrix owner (system owner accountable for accuracy)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the matrix owner for each system row, avoiding generic entries like "IT"
+  or "the team".
+- Record the date each matrix row was last reviewed or updated by the named owner.
+- Document the owner's confirmation of responsibility for the accuracy of access rights in a signed or
+  acknowledged statement.
+- Cross-reference each matrix row to the corresponding system inventory entry to ensure ownership alignment.

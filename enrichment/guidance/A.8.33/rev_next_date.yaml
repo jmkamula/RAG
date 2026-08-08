@@ -1,0 +1,15 @@
+must_id: item:A.8.33:rev_next_date
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Periodic Test Information Program in the program document
+  or review schedule.
+- Record the date in a version-controlled document that is accessible to relevant stakeholders.
+- Name the reviewer or responsible individual for the next review, avoiding generic titles like "the team"
+  or "IT department."
+- Confirm the date is future-oriented and aligns with your organization's review frequency policy.

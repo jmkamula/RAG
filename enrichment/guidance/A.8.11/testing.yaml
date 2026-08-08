@@ -1,0 +1,19 @@
+must_id: item:A.8.11:testing
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Verification that masking is effective (sampling for re-identification residual risk)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to conduct regular checks on masked datasets for possible re-identification
+  of personal or sensitive information.
+- Document the sampling method and frequency used to test the effectiveness of data masking in a dated
+  verification log.
+- Record the results of each sampling exercise, including any instances where re-identification was possible,
+  with supporting evidence.
+- Name the person who reviewed and approved the sampling results, ensuring this is a specific individual
+  and not a group or role.
+- Retain evidence of corrective actions taken when masking was found to be ineffective, including dates
+  and responsible persons.

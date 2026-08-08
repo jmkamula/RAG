@@ -1,0 +1,15 @@
+must_id: item:A.5.2:asset_owner_resp
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: Accountability for protection and risk management of specific assets assigned
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual as the accountable owner for each information asset listed in the matrix,
+  avoiding generic titles like "IT" or "the team".
+- Document the specific protection and risk management responsibilities for each asset owner directly
+  in the matrix.
+- Record the date of assignment and the name of the person making the assignment for each asset entry.
+- Review and update the matrix at least annually, capturing the date of review and the reviewer’s name.

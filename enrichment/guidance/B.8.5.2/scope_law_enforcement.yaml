@@ -1,0 +1,18 @@
+must_id: item:B.8.5.2:scope_law_enforcement
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+must_text: Law-enforcement exception handling documented
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a written procedure describing how requests from law enforcement for personal data are handled
+  when they cannot be specified in advance.
+- Name the person or role responsible for evaluating and responding to unexpected law enforcement requests
+  in the documented procedure.
+- Record the date of approval and the approver's name on the documented exception handling procedure.
+- State that each law enforcement request will be logged with the requestor's details, date, and the decision
+  made, even if the request is denied.
+- Avoid using generic statements like "handled as appropriate"—describe concrete steps and escalation
+  paths for handling unspecified law enforcement requests.

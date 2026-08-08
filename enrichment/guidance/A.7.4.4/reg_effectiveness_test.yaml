@@ -1,0 +1,19 @@
+must_id: item:A.7.4.4:reg_effectiveness_test
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+must_text: Effectiveness assessment per row (re-identification risk estimate)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each data minimization technique in a table, assigning a unique row for every technique used within
+  your processing activities.
+- Document a clear, dated estimate of re-identification risk for each technique, referencing the method
+  or criteria used for assessment.
+- Name the individual responsible for each risk estimate, ensuring a specific person is listed rather
+  than a team or department.
+- Attach supporting evidence, such as test results or expert reviews, to each row to substantiate the
+  effectiveness assessment.
+- Record the date of the most recent review or update for each technique’s risk estimate, avoiding undated
+  or outdated entries.

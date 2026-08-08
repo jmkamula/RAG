@@ -1,0 +1,20 @@
+must_id: item:A.6.2:aup_link
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Links to Acceptable Use Policy (A.5.10) by reference (so AUP updates don't require contract
+  amendment)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the Acceptable Use Policy in the employment contract template by title, document number,
+  and current version date.
+- State in the contract that employees are bound by the latest published version of the Acceptable Use
+  Policy, not just the version at signing.
+- Document the location where the Acceptable Use Policy is published and accessible to employees, such
+  as an intranet link or policy portal.
+- Name the contract template owner as a specific individual responsible for updating policy references,
+  not a generic team or department.
+- Retain a copy of the contract template showing the Acceptable Use Policy reference and update mechanism
+  for auditor review.

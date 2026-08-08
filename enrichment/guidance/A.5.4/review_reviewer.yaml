@@ -1,0 +1,18 @@
+must_id: item:A.5.4:review_reviewer
+control_ref: A.5.4
+standard_id: ISO27001:2022
+must_text: Reviewer identity and role (typically CISO or compliance lead, validated by top management)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual, such as the CISO or compliance lead, in the review record
+  for each management directive.
+- Record the reviewer’s official role or job title alongside their name in the documented review outcome.
+- Document the date the review was completed and reference the specific version of the management directive
+  reviewed.
+- Obtain written validation of the reviewer’s identity and role by having top management sign or formally
+  approve the review record.
+- Avoid listing the reviewer as a group or department; always specify an individual responsible for the
+  review.

@@ -1,0 +1,17 @@
+must_id: item:5.1:continual_improvement
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Promoting continual improvement
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a member of top management as the individual responsible for promoting continual improvement of
+  the information security management system.
+- Document a signed and dated directive from top management explicitly committing to ongoing improvement
+  of information security processes and outcomes.
+- Record at least one recent example where top management initiated or approved an improvement action,
+  including the date and outcome.
+- Avoid using generic statements or boilerplate text; tailor the directive to your organisation’s specific
+  information security context and objectives.

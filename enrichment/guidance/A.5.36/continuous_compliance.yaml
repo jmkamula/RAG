@@ -1,0 +1,20 @@
+must_id: item:A.5.36:continuous_compliance
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Continuous-compliance monitoring tooling output considered (where used — config drift, control
+  health checks, CSPM signal)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific continuous-compliance monitoring tools in use, including their names, scope, and
+  the date they were implemented.
+- Record the output from these tools showing recent configuration drift, control health checks, or CSPM
+  signals, with timestamps.
+- Cross-reference each compliance review record with the relevant monitoring tool output to demonstrate
+  that findings were considered during the review.
+- Name the individual who reviewed the tooling output and made decisions, avoiding generic roles like
+  "the team" or "IT".
+- Retain evidence of actions taken in response to tool findings, such as remediation tickets or meeting
+  notes, with dates and responsible persons.

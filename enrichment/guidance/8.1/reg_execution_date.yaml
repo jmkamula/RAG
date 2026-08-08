@@ -1,0 +1,15 @@
+must_id: item:8.1:reg_execution_date
+control_ref: '8.1'
+standard_id: ISO27001:2022
+must_text: Execution / iteration date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the actual execution or iteration date for each operational activity directly in its corresponding
+  row of the register.
+- Cross-reference each date entry with supporting evidence, such as a signed checklist or system log,
+  to confirm accuracy.
+- State the date in a consistent, unambiguous format (e.g., YYYY-MM-DD) to avoid confusion or misinterpretation.
+- Avoid leaving any row blank or marked “ongoing”—each entry must have a specific, completed date.

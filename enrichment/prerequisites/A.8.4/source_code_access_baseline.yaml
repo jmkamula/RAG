@@ -1,0 +1,47 @@
+leaf_id: req:A.8.4:source_code_access_baseline
+control_ref: A.8.4
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement clarifies whether software development activities and source code repositories
+    are in-scope for the ISMS. Without this, it is unclear if A.8.4 applies at all.
+  good_enough: The scope must explicitly mention software development or source code repositories, or
+    clearly exclude them.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register is needed to identify which source code repositories exist and
+    are subject to access controls. This ensures the baseline covers all relevant repositories.
+  good_enough: A list of current source code repositories, with basic ownership and location details,
+    is available.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities is required to define who can access, administer,
+    and review source code repositories. This underpins the RBAC model in the baseline.
+  good_enough: Documented roles for repository owners, admins, and users exist, even if not fully mapped
+    to every individual yet.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: The classification scheme determines the sensitivity of source code, which drives the strictness
+    of access controls and protection mechanisms in the baseline.
+  good_enough: A basic classification exists for source code assets (e.g., confidential, internal), even
+    if not yet fully applied to every repository.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment identifies threats and vulnerabilities related to source code access, informing
+    which controls (like branch protection and secrets scanning) are necessary in the baseline.
+  good_enough: A recent risk assessment covers source code repositories and highlights at least the main
+    risks (e.g., unauthorized access, code leaks).

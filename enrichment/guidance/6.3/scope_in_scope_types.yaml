@@ -1,0 +1,16 @@
+must_id: item:6.3:scope_in_scope_types
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: ISMS-level change types enumerated (scope, policy, manual, risk criteria, organisational, structural)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of changes that could affect your Information Security Management System, including changes
+  to scope, policy, manual, risk criteria, and organisational structure.
+- Document each change type in a dated register or table, explicitly naming and describing what is included
+  and excluded.
+- Name the person responsible for maintaining the change types register as a specific individual, not
+  a group or department.
+- Review the register at least annually and record the review date and reviewer’s name in the document.

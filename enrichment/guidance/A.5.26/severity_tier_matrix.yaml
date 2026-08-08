@@ -1,0 +1,20 @@
+must_id: item:A.5.26:severity_tier_matrix
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Severity-tier matrix defined explicitly (P1/P2/P3 or equivalent, with criteria for each tier
+  and the response cadence each triggers)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define a severity-tier matrix in the incident response procedure, listing each tier (such as P1, P2,
+  P3) with clear, specific criteria.
+- State the required response time or cadence for each severity tier, including initial response and escalation
+  timelines, in the documented procedure.
+- Name the owner of the severity-tier matrix as a specific individual, not a group or department, within
+  the procedure document.
+- Record the version and date of the procedure to show when the severity-tier matrix was last reviewed
+  and updated.
+- Attach or cross-reference an example incident for each tier, showing how the criteria and response cadence
+  would apply in practice.

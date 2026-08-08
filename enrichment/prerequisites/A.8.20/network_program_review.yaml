@@ -1,0 +1,39 @@
+leaf_id: req:A.8.20:network_program_review
+control_ref: A.8.20
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The network program review must focus on the correct boundaries; without a clear ISMS scope,
+    you can't determine which network segments, assets, and controls are in-scope for review.
+  good_enough: A documented scope statement that identifies all relevant business units, locations, and
+    technologies covered by the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Reviewing network architecture requires an up-to-date inventory of network assets to ensure
+    the register reflects reality and all segments are accounted for.
+  good_enough: A current list of network assets (devices, segments, systems) that is at least as fresh
+    as the last major network change.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: The review should consider whether the network architecture and controls still address current
+    risks; a recent risk assessment is needed to inform this.
+  good_enough: A risk assessment that identifies key threats and vulnerabilities relevant to the network,
+    completed or updated within the last 12 months.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Understanding which network zones handle sensitive or critical information depends on a defined
+    classification scheme, so the review can verify appropriate controls are in place.
+  good_enough: A documented scheme that categorizes information and assets, with clear criteria for what
+    is considered sensitive or critical.

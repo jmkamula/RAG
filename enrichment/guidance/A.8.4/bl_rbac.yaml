@@ -1,0 +1,18 @@
+must_id: item:A.8.4:bl_rbac
+control_ref: A.8.4
+standard_id: ISO27001:2022
+must_text: RBAC configured per repository (read / write / admin) at the platform level
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the role-based access control (RBAC) settings for each source code repository, listing named
+  users and their assigned roles (read, write, admin).
+- Record the date and outcome of the most recent review of repository access permissions, including who
+  conducted the review.
+- Name the owner responsible for managing repository access as a specific individual, not a team or department.
+- Retain screenshots or export logs from the source code platform showing current RBAC configurations
+  for each repository.
+- Cross-reference the access permissions with your joiner/mover/leaver records to confirm only current
+  staff have access.

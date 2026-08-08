@@ -1,0 +1,18 @@
+must_id: item:Art.13:retention
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Retention period or criteria for determining it
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact retention period for each category of personal data collected directly in the privacy
+  notice, using clear and specific timeframes.
+- Describe the criteria used to determine retention if a fixed period cannot be specified, providing concrete
+  examples relevant to your processing activities.
+- Name the person or role responsible for reviewing and updating retention information in the privacy
+  notice, ensuring accountability is clear.
+- Record the date the privacy notice was last updated to reflect current retention periods or criteria.
+- Avoid using vague statements like "we keep data as long as necessary" without further explanation, as
+  auditors will flag this as insufficient.

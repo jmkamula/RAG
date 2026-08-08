@@ -1,0 +1,17 @@
+must_id: item:B.8.4.3:proc_authz_channels
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Authorised transmission channels per customer
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all transmission channels used to send customer data, specifying each channel by name and technical
+  method in a dated document.
+- Document the customer-specific authorisation for each transmission channel, including customer name,
+  channel, and approval date.
+- Name the individual who approved each channel for each customer, avoiding generic titles like "the team"
+  or "IT department".
+- Retain evidence of periodic reviews confirming that only authorised channels are in use, with reviewer
+  name and review date.

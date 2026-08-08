@@ -1,0 +1,20 @@
+must_id: item:A.5.3:exception_process
+control_ref: A.5.3
+standard_id: ISO27001:2022
+must_text: Exception process for temporary or unavoidable conflicts (e.g. on-call coverage breaking normal
+  separation)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the exception process in a written procedure, including steps for requesting, approving, and
+  tracking temporary segregation of duties conflicts.
+- Name the person authorized to approve exceptions, listing a specific individual by name and title, not
+  just a role or team.
+- Record each exception granted in the Segregation of Duties Matrix, including dates, reason, and the
+  approving individual’s name.
+- Retain evidence of exception approvals, such as signed forms or dated emails, for each instance where
+  normal separation was not possible.
+- Review the matrix quarterly to confirm all exceptions are documented and have corresponding approval
+  records.

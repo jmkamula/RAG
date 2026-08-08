@@ -1,0 +1,19 @@
+must_id: item:A.5.13:reg_system_id
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Each in-scope information system captured with a unique identifier (file shares, M365 tenants,
+  drive backends, ticketing systems, code repos with sensitive data)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every in-scope information system, including file shares, cloud tenants, drive backends, ticketing
+  systems, and code repositories with sensitive data, in the Labelling Coverage Register.
+- Assign a unique identifier to each listed system and record it in a dedicated column next to the system
+  name.
+- Name the register owner as a specific individual, not a team or department, and record their contact
+  details in the register.
+- Record the date each system entry was last reviewed or updated to show ongoing maintenance of the register.
+- Cross-reference each system entry with its corresponding sensitivity or classification label in the
+  register.

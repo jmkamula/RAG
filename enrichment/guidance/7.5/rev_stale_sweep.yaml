@@ -1,0 +1,17 @@
+must_id: item:7.5:rev_stale_sweep
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Stale-document sweep — overdue review dates surfaced; refresh or retire decisions made
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Generate a list of all controlled documents, including their last review dates and next scheduled review
+  dates, in a dated register.
+- Identify documents with review dates that have passed, and flag them clearly in the register as overdue.
+- Record a decision for each overdue document, stating whether it will be refreshed, retired, or retained
+  as-is, with the decision date.
+- Name the reviewer or decision-maker for each document as a specific individual, not a group or department.
+- Retain evidence of completed reviews and decisions, such as signed meeting minutes or approval emails,
+  linked to each document in the register.

@@ -1,0 +1,30 @@
+leaf_id: req:A.8.17:sync_register
+control_ref: A.8.17
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which systems and environments are covered by the ISMS, which
+    is essential to know which systems must be tracked in the Clock Sync Status Register.
+  good_enough: A clear, current list of in-scope systems and environments is available, even if some boundaries
+    are still being finalized.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register provides the authoritative list of systems and devices that require clock
+    synchronization monitoring, ensuring completeness of the register.
+  good_enough: A working inventory of systems (with unique IDs) exists, even if some metadata is incomplete.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that someone is accountable for maintaining the Clock Sync
+    Status Register and responding to sync issues.
+  good_enough: Named individuals or teams are assigned responsibility for system monitoring and register
+    upkeep, even if role descriptions are still being refined.

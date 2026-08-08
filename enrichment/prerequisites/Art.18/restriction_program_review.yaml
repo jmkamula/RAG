@@ -1,0 +1,40 @@
+leaf_id: req:Art.18:restriction_program_review
+control_ref: Art.18
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify which data subjects have
+    restrictions in place, and to track where those restrictions apply across systems and processes.
+  good_enough: A current RoPA that lists processing activities and flags where restrictions under Art.18
+    are active or could be triggered.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity is essential to determine if
+    an Art.18 restriction is valid or if an exception applies.
+  good_enough: A mapping of lawful bases to each processing activity, with enough detail to check if restrictions
+    or exceptions are relevant.
+- ref: Art.19
+  standard_id: GDPR:2016/679
+  title: Notification Obligation Regarding Rectification or Erasure of Personal Data or Restriction of
+    Processing
+  category: direct
+  rationale: You must be able to verify that notifications to recipients are triggered when restrictions
+    are applied or lifted, as required by Art.19.
+  good_enough: A documented process or log showing that notifications are sent to relevant recipients
+    when a restriction is enacted or revoked.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer Designation
+  category: foundational
+  rationale: A DPO (if required) should oversee the restriction review process and ensure compliance with
+    Art.18 and related obligations.
+  good_enough: A named DPO or documented rationale for why a DPO is not required, with contact details
+    available for review oversight.

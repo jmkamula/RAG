@@ -1,0 +1,17 @@
+must_id: item:A.5.2:comm_role_briefing
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: Role-specific briefing or acknowledgement from named role-holders (CISO, asset owners, etc.)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each individual assigned to a security role, such as CISO or asset owner, in a roles and responsibilities
+  register with full name and job title.
+- Document the date and method of communication used to brief each role-holder on their specific responsibilities.
+- Obtain a signed or otherwise acknowledged statement from each role-holder confirming they have received
+  and understood their responsibilities.
+- Store all acknowledgement records in a central location, referencing the specific role and date for
+  each entry.
+- Avoid listing roles as groups or teams; always identify a specific person for each key responsibility.

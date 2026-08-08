@@ -1,0 +1,20 @@
+must_id: item:A.7.3.2:scope_field_diffs
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: Per-context field differences (e.g. indirect collection triggers additional Art.14 fields;
+  children triggers plain-language obligation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each context where a privacy notice is provided, such as direct collection, indirect collection,
+  or collection from children, in a dated register.
+- Document the specific information fields included in the notice for each context, referencing legal
+  triggers like indirect collection or child audiences.
+- Cross-reference each context’s notice fields to the relevant legal or regulatory requirement, such as
+  GDPR Article 13 or 14.
+- State the rationale for any additional or simplified fields, such as plain language for children, in
+  a written justification signed by the data protection officer.
+- Name the person responsible for reviewing and updating notice content per context — do not use generic
+  roles like "the team" or "compliance department".

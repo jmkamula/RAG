@@ -1,0 +1,18 @@
+must_id: item:Art.16:reg_systems_touched
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Per-row systems where rectification was applied
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific system or application where each rectification was applied in a dedicated column
+  for every entry in the register.
+- Name the individual who confirmed the rectification in each system, listing their full name rather than
+  a team or department.
+- Document the date when the rectification was completed in each system for every request.
+- Cross-reference each rectification entry with supporting evidence, such as a screenshot or confirmation
+  email, stored in an accessible location.
+- Avoid using generic system names or leaving the system field blank; specify the exact system instance
+  for each rectification.

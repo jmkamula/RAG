@@ -1,0 +1,40 @@
+leaf_id: req:A.6.6:applicable_parties_scope
+control_ref: A.6.6
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organization, processes, and information assets are covered
+    by the ISMS before you can define which parties and situations require NDAs. This ensures the NDA
+    scope aligns with the overall ISMS boundaries.
+  good_enough: A documented scope statement that clearly identifies the organizational and information
+    boundaries for the ISMS, even if not fully detailed, is sufficient to proceed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: You must know how information is classified to determine which info-class thresholds trigger
+    NDA requirements for different parties. Without this, you can't set meaningful NDA triggers.
+  good_enough: A basic, documented classification scheme that distinguishes at least between public and
+    confidential information is enough to start defining NDA triggers.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An asset register identifies the information assets and their owners, helping you map which
+    assets are sensitive and which parties may access them, informing NDA applicability.
+  good_enough: An initial list of key information assets and their classifications is sufficient, even
+    if not exhaustive.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: direct
+  rationale: Clear roles and responsibilities are needed to identify which categories of parties (e.g.,
+    employees, contractors, visitors) may require NDAs based on their access.
+  good_enough: A draft mapping of major party types and their typical access levels is enough to begin
+    defining NDA requirements.

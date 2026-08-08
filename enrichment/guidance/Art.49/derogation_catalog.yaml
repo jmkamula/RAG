@@ -1,0 +1,19 @@
+must_id: item:Art.49:derogation_catalog
+control_ref: Art.49
+standard_id: GDPR:2016/679
+must_text: Art.49.1 a-g derogation catalog (explicit consent / contract necessity / public interest /
+  legal claims / vital interests / public register / compelling legitimate interests last-resort)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each Art.49.1 derogation with its legal basis and a plain-language summary in your Derogations
+  Procedure document.
+- Document the specific scenario and data transfer for each derogation used, including dates and the countries
+  involved.
+- Name the decision-maker authorizing each derogation as a specific individual, not a group or department.
+- Attach evidence of explicit consent or other required justification for each derogation, such as a signed
+  consent form or contract.
+- Record the rationale for choosing a derogation, explaining why no other GDPR transfer mechanism was
+  available.

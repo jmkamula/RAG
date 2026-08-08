@@ -1,0 +1,19 @@
+must_id: item:A.8.2:log_tamper_protect
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Log integrity protection (write-once / SIEM forwarding off-host)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the technical controls in place that prevent log entries from being altered or deleted after
+  creation, such as write-once storage or append-only configurations.
+- Record the system or process that automatically forwards privileged activity logs to an off-host location,
+  such as a Security Information and Event Management (SIEM) system.
+- Name the individual responsible for regularly verifying that log forwarding and integrity protections
+  are functioning as intended, including their job title and contact details.
+- Retain a sample privileged activity log file showing timestamps, event details, and evidence of successful
+  off-host transfer.
+- Avoid using generic descriptions like "logs are protected" without specifying the exact technology or
+  process used for integrity protection.

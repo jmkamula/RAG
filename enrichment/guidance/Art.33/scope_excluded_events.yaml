@@ -1,0 +1,18 @@
+must_id: item:Art.33:scope_excluded_events
+control_ref: Art.33
+standard_id: GDPR:2016/679
+must_text: Excluded events (security events NOT involving personal data; minor near-misses)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all security events that were assessed and determined not to involve personal data, including
+  the date and responsible assessor.
+- State the specific criteria used to exclude events from Article 33 reporting, referencing relevant definitions
+  of personal data.
+- Record examples of minor near-misses and explain why they do not trigger Article 33 notification, with
+  supporting evidence.
+- Name the individual who made each exclusion decision, avoiding generic roles like "the team" or "IT
+  department".
+- Retain a dated log of all excluded events and decisions for future audit reference.

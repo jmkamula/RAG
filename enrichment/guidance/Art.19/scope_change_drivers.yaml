@@ -1,0 +1,18 @@
+must_id: item:Art.19:scope_change_drivers
+control_ref: Art.19
+standard_id: GDPR:2016/679
+must_text: Trigger list (new processor onboarded, new joint controller relationship)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current data recipients, including processors and joint controllers, in a dated and version-controlled
+  register.
+- Record each time a new processor or joint controller relationship is established, noting the date and
+  the nature of the relationship.
+- Update the recipients register immediately upon onboarding a new processor or joint controller, capturing
+  the responsible staff member’s name and update date.
+- Name the owner of the recipients register as a specific individual, not a team or department.
+- Retain evidence of notifications sent to data subjects or supervisory authorities when the recipient
+  list changes, including dates and recipients.

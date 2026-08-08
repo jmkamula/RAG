@@ -1,0 +1,19 @@
+must_id: item:A.8.30:reg_maturity_outcome
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Per-engagement maturity-assessment outcome
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the maturity assessment outcome for each outsourced development engagement, including the date
+  and assessment criteria used.
+- Name the individual responsible for performing each maturity assessment, ensuring their full name and
+  role are listed.
+- Attach supporting evidence for each assessment, such as completed questionnaires or evaluation reports,
+  to the corresponding register entry.
+- State the rationale for the maturity rating assigned to each vendor, referencing specific findings or
+  risk factors identified during assessment.
+- Avoid using generic or template assessment results; tailor each maturity outcome to the specific vendor
+  and engagement.

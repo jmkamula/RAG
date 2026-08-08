@@ -1,0 +1,15 @@
+must_id: item:A.5.11:rev_reviewer
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Reviewer identity (HR head + IT head + InfoSec lead jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewers as the HR head, IT head, and InfoSec lead by full name and job title in the review
+  meeting record.
+- Record the date and time of the periodic asset-return program review in a signed meeting minutes document.
+- Obtain signatures or written approval from all three named reviewers on the finalized review outcome.
+- Avoid listing a group or department as reviewer; specify each required individual by name to meet the
+  joint review requirement.

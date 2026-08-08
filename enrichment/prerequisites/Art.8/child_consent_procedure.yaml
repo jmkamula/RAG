@@ -1,0 +1,32 @@
+leaf_id: req:Art.8:child_consent_procedure
+control_ref: Art.8
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of Processing
+  category: direct
+  rationale: You must first identify the lawful basis for processing personal data, as Art.8 (child consent)
+    is only relevant if consent is your chosen basis under Art.6. Without this, you cannot determine if
+    child-specific consent requirements apply.
+  good_enough: A documented decision on the lawful basis for each relevant processing activity, especially
+    those involving children, is sufficient to proceed.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need to know which processing activities involve children and information-society services
+    to scope where Art.8 applies. Art.30 records help identify these activities.
+  good_enough: A working draft or inventory that flags processing activities involving children or online
+    services is enough to start drafting the procedure.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope should clarify whether information-society services offered to children are
+    in scope, ensuring alignment between security and privacy controls.
+  good_enough: A current ISMS scope statement that mentions (or explicitly excludes) services to children
+    is sufficient for alignment at this stage.

@@ -1,0 +1,19 @@
+must_id: item:B.8.5.1:rev_date
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Processor Transfer Basis Program in a dated log or review
+  register.
+- State the planned review interval in months or years within the program documentation, referencing the
+  policy or risk assessment that sets this interval.
+- Assign a named individual responsible for scheduling and conducting the review, listing their name and
+  role in the program documentation.
+- Attach evidence of the completed review, such as a signed review checklist or meeting minutes, dated
+  within the planned interval.
+- Avoid listing the review date as "ongoing" or "as needed"—enter a specific, calendar-based date for
+  clear evidence.

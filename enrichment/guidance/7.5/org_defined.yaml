@@ -1,0 +1,16 @@
+must_id: item:7.5:org_defined
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Organisation-determined necessary documented information identified
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of documented information your organisation needs for its information security management
+  system in a dated inventory or register.
+- Name a specific individual responsible for maintaining and updating the documented information inventory,
+  avoiding generic roles like "the team" or "IT".
+- Cross-reference each item in the inventory to the relevant ISO27001:2022 clause or control it supports.
+- Document the process and criteria used to determine which documented information is necessary, and record
+  the date of last review.

@@ -1,0 +1,19 @@
+must_id: item:A.5.37:rev_accuracy_sample
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Accuracy sampling — operator walked through a sample procedure end-to-end? procedure matches
+  current system reality (UI screenshots current, commands work, dependencies still valid)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of operating procedures and record the procedure names, sample size, and selection
+  date in a review log.
+- Assign a named operator to walk through each sampled procedure end-to-end, recording their name and
+  the date of the walkthrough.
+- Capture screenshots or outputs from the current system during the walkthrough to demonstrate that steps,
+  commands, and dependencies are up to date.
+- Compare each procedure’s documented steps and screenshots to the actual system interface and commands,
+  noting any discrepancies in the review log.
+- Name the reviewer as a specific individual—do not list a team or department as the reviewer.

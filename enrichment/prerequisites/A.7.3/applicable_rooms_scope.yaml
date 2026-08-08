@@ -1,0 +1,40 @@
+leaf_id: req:A.7.3:applicable_rooms_scope
+control_ref: A.7.3
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which locations, business units, and activities are covered by your ISMS
+    before you can specify which rooms are in scope for A.7.3. This ensures that the room scope aligns
+    with the overall ISMS boundaries.
+  good_enough: A documented scope statement that clearly lists included sites and functions, even if some
+    details are still being finalized.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register should identify physical assets and their locations, which is essential
+    for determining which rooms need to be considered and classified under A.7.3.
+  good_enough: A preliminary asset register that lists key physical assets and their associated rooms,
+    even if not fully exhaustive.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: You need a documented classification scheme to drive how rooms are classified and included
+    in scope. Without this, you can't justify or explain the inclusion or exclusion of specific rooms.
+  good_enough: A draft or approved classification scheme that defines categories and criteria for physical
+    spaces, even if refinements are pending.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: direct
+  rationale: Risk assessment results help determine which rooms are critical or sensitive, guiding which
+    should be in scope for protection and monitoring.
+  good_enough: A recent risk assessment that identifies key risks related to physical locations, even
+    if some risk treatments are still in progress.

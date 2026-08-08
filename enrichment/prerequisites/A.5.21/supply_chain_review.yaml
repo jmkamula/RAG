@@ -1,0 +1,48 @@
+leaf_id: req:A.5.21:supply_chain_review
+control_ref: A.5.21
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: A current asset register is essential to identify which ICT components and suppliers are
+    in scope for the supply chain review. Without a clear list of assets, the review cannot be comprehensive
+    or targeted.
+  good_enough: A documented, reasonably up-to-date register of ICT assets and suppliers exists, even if
+    not perfect, so the review can reference real inventory.
+- ref: A.5.20
+  standard_id: ISO27001:2022
+  title: Addressing information security within supplier agreements
+  category: direct
+  rationale: Supplier agreements define the security expectations and obligations for each vendor. Reviewing
+    these agreements is a core part of assessing supply chain risk and maturity.
+  good_enough: Supplier agreements are available and include at least basic security clauses for key ICT
+    vendors, so gaps and risks can be identified during the review.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: foundational
+  rationale: A risk assessment provides the context for why supply chain reviews matter and helps prioritize
+    which suppliers or components need closer scrutiny.
+  good_enough: A recent risk assessment exists that covers supply chain risks at a high level, even if
+    not exhaustive, to inform the review focus.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope statement clarifies which parts of the organization and which ICT supply chains
+    are included in the review, preventing wasted effort or missed areas.
+  good_enough: A documented scope statement exists that at least outlines the main business units and
+    ICT supply chains covered by the ISMS.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Knowing the classification of information handled by each supplier helps prioritize review
+    efforts and identify where the highest risks lie.
+  good_enough: A basic information classification scheme is in place and mapped to key suppliers, so the
+    review can focus on critical data flows.

@@ -1,0 +1,19 @@
+must_id: item:A.8.9:scope_vendor_managed
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Vendor-managed asset classes delegated to A.5.19 supplier obligations
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all asset types in your environment and identify which are managed directly versus those managed
+  by external vendors.
+- Document each vendor-managed asset class in your asset register, clearly referencing the relevant supplier
+  contract or agreement.
+- State in your configuration management scope document that responsibility for vendor-managed asset classes
+  is delegated to supplier controls under A.5.19.
+- Name the individual responsible for maintaining the asset scope, avoiding generic titles like "IT team"
+  or "Operations."
+- Cross-reference the configuration management scope with supplier management records to confirm alignment
+  and avoid unintentional gaps.

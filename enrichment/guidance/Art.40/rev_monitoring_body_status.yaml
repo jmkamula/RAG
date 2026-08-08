@@ -1,0 +1,18 @@
+must_id: item:Art.40:rev_monitoring_body_status
+control_ref: Art.40
+standard_id: GDPR:2016/679
+must_text: Monitoring body status — body still accredited (Art.41) and engaged
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Confirm the monitoring body’s current accreditation status by obtaining a dated certificate or official
+  record from the relevant supervisory authority.
+- Document the name and contact details of the specific accredited monitoring body engaged for the code
+  adherence program.
+- Record the start and renewal dates of the engagement with the monitoring body, including any signed
+  agreements or contracts.
+- Name the monitoring body as a specific legal entity, not as a generic group or association.
+- Retain correspondence or meeting minutes from the past 12 months showing active engagement with the
+  monitoring body.

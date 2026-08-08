@@ -1,0 +1,17 @@
+must_id: item:A.8.2:proc_revocation_path
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Revocation path on role change / termination (links to A.5.18 revocation records)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step process for removing privileged access when an employee changes roles or leaves
+  the organization, including responsible parties and timelines.
+- Name the person or role responsible for initiating and confirming access revocation, ensuring this is
+  a specific individual and not a generic team.
+- Cross-reference each revocation action to a dated record in your access revocation log, clearly linking
+  it to the relevant personnel change.
+- State how and where revocation records are stored, ensuring they are easily retrievable for future audits
+  and linked to A.5.18 requirements.

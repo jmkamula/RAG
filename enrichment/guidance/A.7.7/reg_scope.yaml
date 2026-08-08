@@ -1,0 +1,16 @@
+must_id: item:A.7.7:reg_scope
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Per-audit scope (which floors / areas covered)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific floors, rooms, or work areas covered in each audit entry, avoiding vague terms like
+  "office" or "all areas."
+- Record the date and time of each audit alongside the defined scope to show when and where checks occurred.
+- Assign the audit to a named individual responsible for verifying the scope was fully covered during
+  the inspection.
+- Retain supporting evidence, such as annotated floor plans or checklists, that match the listed scope
+  for each audit entry.

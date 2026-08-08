@@ -1,0 +1,20 @@
+must_id: item:A.7.4.5:proc_end_of_processing_trigger
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: End-of-processing trigger definition per activity (purpose fulfilled / consent withdrawn /
+  retention lapsed / no further processing anticipated)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define the specific trigger for ending processing for each data activity, such as purpose completion,
+  consent withdrawal, or retention period expiry, in a documented procedure.
+- Record the date and rationale for each trigger in a register that links to the relevant data processing
+  activity.
+- Name the individual responsible for confirming that the trigger has occurred for each activity, avoiding
+  generic roles like "the team" or "IT".
+- Document the method used for deletion or de-identification once the trigger is met, referencing the
+  specific data set and action taken.
+- Retain evidence of each completed deletion or de-identification, such as a signed confirmation or system
+  log entry, for auditor review.

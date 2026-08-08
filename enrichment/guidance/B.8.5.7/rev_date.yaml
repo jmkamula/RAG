@@ -1,0 +1,18 @@
+must_id: item:B.8.5.7:rev_date
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Subcontractor Engagement Program in a dated log or register
+  entry.
+- State the planned review interval for the program in a documented schedule or policy, referencing the
+  specific frequency (e.g., annually).
+- Confirm the next scheduled review date is set and documented, falling within the defined interval from
+  the last review.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Attach evidence of the completed review, such as a signed review report or meeting minutes, with the
+  corresponding date.

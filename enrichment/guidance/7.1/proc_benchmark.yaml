@@ -1,0 +1,19 @@
+must_id: item:7.1:proc_benchmark
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Industry benchmark references where used (ISACA, ENISA staffing norms)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific industry benchmarks used for ISMS resource sizing, such as ISACA or ENISA, directly
+  in the procedure document.
+- Document the date and version of each referenced benchmark to show current and relevant guidance was
+  used.
+- Cross-reference the section of your procedure where benchmark data informs staffing decisions, linking
+  to supporting calculations or tables.
+- State the rationale for selecting each benchmark, explaining why it is appropriate for your organisation’s
+  context and ISMS scope.
+- Avoid citing generic or outdated benchmarks; specify the exact publication and year to prevent auditor
+  concerns about relevance.

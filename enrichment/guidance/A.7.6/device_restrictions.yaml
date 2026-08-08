@@ -1,0 +1,19 @@
+must_id: item:A.7.6:device_restrictions
+control_ref: A.7.6
+standard_id: ISO27001:2022
+must_text: Restrictions on personal devices, recording, photography
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that personal devices, including phones and cameras, are not allowed in secure
+  areas unless specifically authorized in writing.
+- Name the individual responsible for approving exceptions to the personal device restriction, listing
+  their full name and job title.
+- Document the process for checking and recording any authorized personal devices entering secure areas,
+  including date, device type, and owner.
+- Include a clear statement prohibiting all forms of unauthorized recording and photography in secure
+  areas, with reference to disciplinary consequences.
+- Specify that the procedure version is dated and signed by the responsible manager, avoiding undated
+  or unsigned drafts.

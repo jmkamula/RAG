@@ -1,0 +1,19 @@
+must_id: item:Art.20:scope_in_scope_activities
+control_ref: Art.20
+standard_id: GDPR:2016/679
+must_text: Art.30 RoPA activities in scope (basis consent / contract AND automated)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all processing activities in your Record of Processing Activities (RoPA) that rely on consent or
+  contract as the legal basis and use automated means.
+- Document the categories of personal data and data subjects involved for each identified processing activity,
+  including clear descriptions in the RoPA.
+- Confirm the lawful basis for each processing activity by referencing the specific consent or contract
+  documentation, with dates and named parties.
+- Name the owner of each processing activity as a specific individual, not a team or department, in the
+  RoPA entry.
+- Retain copies of any consent forms or contracts that support the lawful basis for each automated processing
+  activity within your compliance documentation.

@@ -1,0 +1,18 @@
+must_id: item:A.8.14:reg_findings
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Per-test findings + corrective actions where target missed
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, test scenario, and actual failover results for each test entry in the Failover Test
+  Register.
+- Document any test where the recovery target was not met, including specific details of the missed objective.
+- List the corrective actions assigned for each failed test, naming the responsible individual and target
+  completion date.
+- Attach evidence of corrective action completion, such as updated procedures or test rerun results, to
+  the corresponding test entry.
+- Name the owner of each test as a specific individual, not a team or department, to avoid ambiguity in
+  accountability.

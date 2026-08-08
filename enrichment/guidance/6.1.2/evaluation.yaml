@@ -1,0 +1,17 @@
+must_id: item:6.1.2:evaluation
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Risks evaluated against acceptance criteria
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the risk acceptance criteria clearly in the risk assessment procedure, including thresholds or
+  examples, with a version date.
+- Document each identified risk’s evaluation outcome, showing how it was measured against the stated acceptance
+  criteria in the assessment record.
+- Name the person responsible for applying the acceptance criteria to each risk, listing them as an individual
+  rather than a team or department.
+- Retain evidence of any risk that did not meet acceptance criteria, including the date and decision on
+  further action or mitigation.

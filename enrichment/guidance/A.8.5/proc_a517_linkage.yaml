@@ -1,0 +1,18 @@
+must_id: item:A.8.5:proc_a517_linkage
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Cross-link to A.5.17 authentication info procedure (credential rotation, revocation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the section in your Authentication Provisioning Procedure that links directly to the
+  A.5.17 authentication information procedure.
+- Document the exact page or paragraph number in both procedures where credential rotation and revocation
+  are described.
+- Name the individual responsible for maintaining both procedures and updating cross-references when either
+  document changes.
+- Attach a dated change log entry showing when the cross-link was last reviewed or updated.
+- Avoid referencing A.5.17 in generic terms; specify the full procedure title and version number in your
+  cross-link.

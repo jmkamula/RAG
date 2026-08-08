@@ -1,0 +1,16 @@
+must_id: item:5.2:approved
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: Approved by top management
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the approving top management individual by full name and job title in the policy approval section.
+- Record the approval date on the policy document itself, ensuring it is clearly visible near the signature
+  or approval statement.
+- Obtain a physical or digital signature from the named top management individual on the final version
+  of the policy.
+- Avoid using generic titles like "the management team" as the approver; specify a single accountable
+  person.

@@ -1,0 +1,39 @@
+leaf_id: req:8.3:treatment_execution_procedure
+control_ref: '8.3'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: direct
+  rationale: You need a current risk assessment to know which risks require treatment. The procedure for
+    executing treatments depends on having a clear, prioritized list of risks to address.
+  good_enough: A recent, documented risk assessment identifying risks and their owners is available, even
+    if not all risks are fully quantified.
+- ref: '8.2'
+  standard_id: ISO27001:2022
+  title: Information security risk assessment
+  category: direct
+  rationale: The most recent risk assessment results are the direct input for treatment planning and execution.
+    Without these, you can't meaningfully track or escalate treatment progress.
+  good_enough: The latest risk assessment outputs are documented and accessible, showing which risks are
+    pending treatment.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The treatment execution procedure must align with the organization's overarching security
+    policy, especially regarding risk tolerance and escalation.
+  good_enough: A current, approved information security policy exists and is referenced in risk and treatment
+    documentation.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles is essential for treatment execution—without defined responsibilities,
+    you can't assign, track, or escalate treatment actions.
+  good_enough: A list of information security roles and their responsibilities is documented, even if
+    not all are mapped to named individuals yet.

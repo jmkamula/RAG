@@ -1,0 +1,17 @@
+must_id: item:A.7.13:post_verification
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Post-maintenance verification (functional test, integrity check)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific functional tests and integrity checks required after each maintenance activity
+  in the Equipment Maintenance Procedure, including test methods and expected outcomes.
+- Assign responsibility for post-maintenance verification to a named individual, not a generic role or
+  team, in the procedure documentation.
+- Record the date, time, and results of each post-maintenance test on a maintenance log signed by the
+  person who performed the verification.
+- Retain evidence of completed post-maintenance checks, such as test logs or checklists, alongside maintenance
+  records for each piece of equipment.

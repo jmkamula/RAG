@@ -1,0 +1,39 @@
+leaf_id: req:A.7.2:physical_entry_procedure
+control_ref: A.7.2
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which locations, buildings, or areas fall within the ISMS scope before defining
+    physical entry controls. This ensures the procedure covers all relevant secure areas and avoids gaps.
+  good_enough: A clear, current list of in-scope facilities or areas is documented, even if some boundaries
+    are still being refined.
+- ref: A.7.1
+  standard_id: ISO27001:2022
+  title: Physical Security Perimeters
+  category: direct
+  rationale: Physical entry controls only make sense once the boundaries of secure areas are defined.
+    You must know where the perimeter is before specifying how entry is controlled.
+  good_enough: A documented description or map of physical security perimeters exists, identifying which
+    areas require controlled entry.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: You need to assign responsibility for authorising access, managing entry points, and monitoring
+    compliance. Without clear roles, the procedure cannot specify who does what.
+  good_enough: Key roles (e.g., security manager, reception, facilities) are named and their responsibilities
+    for physical entry are outlined, even if detailed job descriptions are pending.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Knowing which assets are housed in each area helps determine the appropriate level of entry
+    control. The asset register informs risk-based decisions about access restrictions.
+  good_enough: A basic inventory of critical assets and their locations is available, even if not fully
+    comprehensive.

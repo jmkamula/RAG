@@ -1,0 +1,20 @@
+must_id: item:A.7.2.7:proc_classification_test
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Classification test — when a relationship is joint control (jointly determine purposes + means)
+  vs controller-processor vs independent controllers
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for applying the classification test to new or existing data sharing relationships,
+  including their full name and job title.
+- Document the specific criteria and questions used to assess whether a relationship is joint control,
+  controller-processor, or independent controllers, with references to GDPR definitions.
+- Record the outcome of each classification decision in a dated log, including the rationale and supporting
+  evidence for the chosen classification.
+- Attach a signed statement from both parties confirming mutual agreement on the relationship classification
+  before any joint processing begins.
+- Avoid using generic or copy-paste justifications; tailor the rationale for each relationship to its
+  actual data flows and decision-making structure.

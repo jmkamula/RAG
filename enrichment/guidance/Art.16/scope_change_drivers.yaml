@@ -1,0 +1,18 @@
+must_id: item:Art.16:scope_change_drivers
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Trigger list (new system holding PII, new processor onboarded)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current systems that store or process personal data, including cloud services and third-party
+  platforms, in a dated inventory document.
+- Record each time a new system holding personal data is introduced or a new data processor is onboarded,
+  with the responsible person's name and date.
+- Update the inventory immediately when systems are decommissioned or replaced, ensuring the change is
+  logged with a timestamp.
+- Name the owner responsible for maintaining the inventory as a specific individual, not a team or department.
+- Cross-reference the inventory with onboarding and procurement records to confirm all relevant systems
+  and processors are captured.

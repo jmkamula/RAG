@@ -1,0 +1,19 @@
+must_id: item:10.2:rev_recurrence_check
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Recurrence check — closed NCs sampled for whether the same nature recurred (effectiveness failure
+  signal)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify a sample of closed nonconformities from the past review period, listing each by unique reference
+  and closure date.
+- Compare each sampled nonconformity against new issues raised since closure, documenting any recurrence
+  of the same nature.
+- Record the analysis results in a dated review log, explicitly stating whether recurrence was detected
+  for each sampled case.
+- Name the reviewer as a specific individual responsible for the recurrence check, not a group or department.
+- Retain supporting evidence, such as meeting minutes or annotated logs, showing the recurrence check
+  was completed as described.

@@ -1,0 +1,18 @@
+must_id: item:B.8.3.1:scope_support_matrix
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+must_text: Support matrix per contract tier (Enterprise API access / Business self-service / Startup email
+  support)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each contract tier and describe its support level in a support matrix, listing Enterprise API access,
+  Business self-service, and Startup email support.
+- Assign a specific individual as the owner responsible for maintaining and updating the support matrix.
+- Document the date the support matrix was last reviewed and approved by the designated owner.
+- Cross-reference the support matrix with current customer contracts to confirm alignment between documented
+  support levels and contractual commitments.
+- Avoid using generic or placeholder terms like "varies" or "as needed" in the matrix; specify exact support
+  channels and response times for each tier.

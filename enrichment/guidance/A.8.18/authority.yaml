@@ -1,0 +1,17 @@
+must_id: item:A.8.18:authority
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Named policy authority (InfoSec lead with Infrastructure lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the policy authority as both the Information Security lead and the Infrastructure lead, listing
+  their full names and current job titles.
+- Record the date when each authority formally accepted responsibility for the Privileged Utility Programs
+  Policy.
+- Sign the policy document with handwritten or digital signatures from both named authorities to confirm
+  their approval.
+- Avoid listing the authority as a team, committee, or department—use only specific individuals with assigned
+  roles.

@@ -1,0 +1,19 @@
+must_id: item:A.8.9:proc_deployment
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Deployment process enforcing baseline (IaC / image / config-mgmt tool)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the deployment process step-by-step, including how baseline configurations are applied using
+  infrastructure-as-code, images, or configuration management tools.
+- Name the specific tool or method used to enforce baseline configurations, such as Terraform, Ansible,
+  or a standardised virtual machine image.
+- Record the individual responsible for approving configuration changes before deployment, including their
+  full name and approval date.
+- Retain deployment logs or change records that show when baseline configurations were last applied to
+  production systems.
+- Name the owner as a specific individual — not a team or department — for maintaining and updating the
+  configuration management procedure.

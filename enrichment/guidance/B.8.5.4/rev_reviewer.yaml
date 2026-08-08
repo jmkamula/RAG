@@ -1,0 +1,17 @@
+must_id: item:B.8.5.4:rev_reviewer
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+must_text: Reviewer identity (Legal + DPO)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer for each disclosure request program review as a specific individual from the Legal
+  team and a specific individual from the Data Protection Officer (DPO) function.
+- Record the full names, roles, and review dates for both the Legal and DPO reviewers in the program review
+  documentation.
+- Sign the completed review document with both reviewers’ signatures or electronic approvals, clearly
+  indicating their consent to the review outcome.
+- Avoid listing generic roles or teams—ensure named individuals are identified, as auditors will flag
+  non-specific or group attributions.

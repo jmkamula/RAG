@@ -1,0 +1,18 @@
+must_id: item:B.8.2.4:proc_customer_notification
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Customer notification format — written notice with cited legislation, dispute pathway, and
+  'processor's opinion' framing
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the notification template, including sections for cited legislation, dispute pathway, and a
+  statement that the processor's opinion is being provided.
+- Name the person responsible for preparing and sending notifications, listing their full name and job
+  title in the procedure.
+- Record each notification sent, attaching a copy of the written notice and the date it was provided to
+  the customer.
+- State the specific legislation cited in each notification; do not use generic references or omit legal
+  citations.

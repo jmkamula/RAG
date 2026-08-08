@@ -1,0 +1,18 @@
+must_id: item:Art.25:rev_certification_validity
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: If Art.25.3 certification used — certification still in validity period
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Locate the current data protection by design (DPbD) certification document and verify the expiration
+  or validity date is clearly stated.
+- Record the certification number, issuing body, and validity period in your compliance register with
+  a reference to the original certificate.
+- Confirm the certification is still within its validity period as of the date of your most recent DPbD
+  program review.
+- Attach a copy of the valid certificate to your DPbD program review documentation for direct evidence.
+- Name the certification owner as a specific individual responsible for renewals—do not list a team or
+  department.

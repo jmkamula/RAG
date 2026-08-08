@@ -1,0 +1,14 @@
+must_id: item:A.5.9:rev_reviewer
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Reviewer identity and role recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the individual who completed the asset inventory reconciliation in the reconciliation
+  log or report.
+- Specify the reviewer’s job title or role alongside their name in the same reconciliation documentation.
+- Capture the date the reconciliation was performed and reviewed to provide a clear audit trail.
+- Avoid listing a group or department as the reviewer; always identify a single, accountable person.

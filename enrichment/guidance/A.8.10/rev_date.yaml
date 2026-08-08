@@ -1,0 +1,17 @@
+must_id: item:A.8.10:rev_date
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the deletion program in a central log or register, showing it
+  falls within the planned review interval.
+- Name the individual responsible for conducting the review, listing their full name and role in the review
+  documentation.
+- Attach evidence of the review, such as meeting minutes or a signed review checklist, clearly dated to
+  match the recorded review date.
+- Specify the planned review interval in the program documentation, avoiding vague terms like "regular"
+  or "as needed."

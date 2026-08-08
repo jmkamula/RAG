@@ -1,0 +1,16 @@
+must_id: item:A.5.35:fr_status
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Current status per finding (open / in-progress / closed / aged-overdue) with last-updated date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the current status for each review finding as "open", "in-progress", "closed", or "aged-overdue"
+  in the response register.
+- Enter the last-updated date for each finding, reflecting the most recent action or review.
+- Name the individual responsible for updating each finding’s status, not just a team or department.
+- Update the register promptly whenever a finding’s status changes or new information is received.
+- Cross-reference each finding with supporting evidence of actions taken, such as meeting notes or remediation
+  tickets.

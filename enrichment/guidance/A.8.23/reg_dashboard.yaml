@@ -1,0 +1,16 @@
+must_id: item:A.8.23:reg_dashboard
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: Dashboard linked (coverage % / block rate / override volume)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Link the web filtering event register to a dashboard that displays real-time coverage percentage, block
+  rate, and override volume.
+- Record the date and time of the most recent dashboard data refresh in the register for traceability.
+- Name a specific individual responsible for maintaining the dashboard linkage and data accuracy, not
+  a team or department.
+- Document the method used to calculate each metric on the dashboard, attaching supporting screenshots
+  or calculation logs.

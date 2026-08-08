@@ -1,0 +1,17 @@
+must_id: item:A.8.24:reg_custodian
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Per-row custodian (HSM / KMS / split-knowledge custodians)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the custodian for each cryptographic key entry, avoiding generic labels
+  like "IT team" or "security department".
+- Record the date when each custodian was assigned responsibility for their respective cryptographic key
+  in the register.
+- Document the method of custody for each key, specifying if it is managed by an HSM, KMS, or split-knowledge
+  arrangement.
+- Cross-reference each key entry with supporting evidence, such as access logs or assignment records,
+  to confirm custodian assignment.

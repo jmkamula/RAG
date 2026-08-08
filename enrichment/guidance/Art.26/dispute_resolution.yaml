@@ -1,0 +1,19 @@
+must_id: item:Art.26:dispute_resolution
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Dispute-resolution mechanism between joint controllers
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each joint controller and their designated contact person in the arrangement, ensuring individuals—not
+  just organisations—are clearly identified.
+- Document a step-by-step dispute-resolution process, including timelines and escalation points, in the
+  written joint controller agreement.
+- State the method for recording disputes and their outcomes, such as a shared log or register with dates
+  and responsible parties.
+- Sign and date the final arrangement by authorised representatives from all joint controllers, confirming
+  agreement on the dispute-resolution mechanism.
+- Avoid using generic or boilerplate language; tailor the dispute-resolution process to the specific relationship
+  and data processing activities of the joint controllers.

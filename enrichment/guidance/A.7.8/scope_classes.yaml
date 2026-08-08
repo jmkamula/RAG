@@ -1,0 +1,18 @@
+must_id: item:A.7.8:scope_classes
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Equipment classes (workstations, server-room equipment, network kit, HSMs, recording devices,
+  printers/MFDs)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all equipment classes in scope, including workstations, server-room equipment, network devices,
+  HSMs, recording devices, and printers or multifunction devices, in a dated inventory.
+- Name the person responsible for maintaining the equipment scope, specifying an individual rather than
+  a team or department.
+- Document the criteria used to determine which equipment types are included or excluded, and reference
+  any supporting policies or risk assessments.
+- Record the date of the last review or update of the equipment scope, and keep a copy of the signed approval
+  from management.

@@ -1,0 +1,17 @@
+must_id: item:Art.12:reg_identity_method
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Per-row identity verification method used
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the identity verification method used for each rights request directly in the corresponding row
+  of the Rights Request Register.
+- Specify the verification method with enough detail, such as "passport checked" or "two-factor email
+  confirmation," not just "verified."
+- Name the staff member who performed the verification in the same row to provide a clear point of contact.
+- Enter the date the identity verification was completed for each request to establish a clear timeline.
+- Avoid leaving the verification method field blank or using generic terms like "standard process," as
+  auditors will flag missing or vague entries.

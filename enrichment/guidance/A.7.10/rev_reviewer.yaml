@@ -1,0 +1,17 @@
+must_id: item:A.7.10:rev_reviewer
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Reviewer identity (IT + InfoSec)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewers as specific individuals from both IT and Information Security, listing their full
+  names and job titles in the review record.
+- Record the date each periodic storage media program review was completed, attaching the signed review
+  summary to the program documentation.
+- Document the review findings and any required follow-up actions in a dedicated section of the review
+  report, referencing supporting evidence where applicable.
+- Avoid listing only a team or department as the reviewer; ensure named individuals are clearly identified
+  for each review cycle.

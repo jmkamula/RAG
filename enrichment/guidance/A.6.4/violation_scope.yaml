@@ -1,0 +1,18 @@
+must_id: item:A.6.4:violation_scope
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Scope of violations covered (policy breach, negligence, deliberate misuse, repeated non-compliance
+  with awareness training, deliberate circumvention of security controls)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each type of violation covered by the disciplinary process, including policy breach, negligence,
+  deliberate misuse, repeated training non-compliance, and circumvention of controls.
+- Reference the exact section and page in your disciplinary policy where these violation types are defined
+  and described.
+- Name the person or role responsible for maintaining and updating the list of covered violations in the
+  disciplinary process.
+- Avoid using vague categories like "misconduct" without examples; specify each violation type clearly
+  in the documented process.

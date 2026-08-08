@@ -1,0 +1,20 @@
+must_id: item:Art.34:content
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: Communication content per Art.34.2 — clear plain language describing nature + DPO contact +
+  likely consequences + measures taken
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the exact message template used for notifying affected individuals, ensuring it includes a
+  plain-language description of the breach’s nature.
+- State the contact details of your Data Protection Officer or relevant privacy contact within the notification
+  template.
+- Describe the likely consequences of the breach in the communication, using specific examples relevant
+  to the incident.
+- List the measures taken or proposed to address the breach and mitigate its effects, as included in the
+  notification template.
+- Name the person responsible for approving the final notification content, avoiding generic roles like
+  “the team” or “management.”

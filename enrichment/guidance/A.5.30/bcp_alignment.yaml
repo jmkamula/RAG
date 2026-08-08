@@ -1,0 +1,20 @@
+must_id: item:A.5.30:bcp_alignment
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Alignment with A.5.29 disruption-security plan stated explicitly (this is the ICT mechanical
+  layer; A.5.29 is the security-annex layer; both must reconcile)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the ICT Readiness for Business Continuity Plan the specific reference to the disruption-security
+  plan created under A.5.29, using the exact document title and version.
+- Cross-reference each ICT continuity control with its corresponding security requirement from the A.5.29
+  plan, listing both control identifiers side by side in a table.
+- Document any differences or gaps between the ICT plan and the A.5.29 disruption-security plan, including
+  a dated action plan for resolving them.
+- Name the owner of the ICT Readiness for Business Continuity Plan as a specific individual, not a generic
+  role or team.
+- Attach a signed approval page confirming that both the ICT and disruption-security plans have been reviewed
+  together for alignment.

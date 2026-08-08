@@ -1,0 +1,17 @@
+must_id: item:10.1:triggers
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Improvement triggers (audit findings, nonconformities, opportunities, performance gaps, interested-party
+  feedback)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all accepted improvement triggers in the procedure, including audit findings, nonconformities,
+  opportunities, performance gaps, and feedback from interested parties.
+- Name the responsible individual for reviewing and acting on each improvement trigger, avoiding generic
+  roles like "the team" or "management."
+- Record the date and source of each improvement trigger in a log or register for traceability.
+- Attach evidence of how each trigger was evaluated and, if applicable, the resulting improvement action
+  taken.

@@ -1,0 +1,17 @@
+must_id: item:B.8.2.1:scope_customer_list
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+must_text: In-scope customer engagements enumerated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current customer engagements that involve personal data processing in a dated register, including
+  project names and unique identifiers.
+- Name the individual responsible for maintaining the engagement scope register, avoiding generic titles
+  like "the team" or "IT department".
+- Cross-reference each listed engagement with supporting contracts or statements of work that confirm
+  their inclusion in scope.
+- Review and update the register at least annually, recording the date and name of the reviewer for each
+  update.

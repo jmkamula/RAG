@@ -1,0 +1,19 @@
+must_id: item:Art.44:rev_mechanism_validity
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Mechanism-validity sample — Art.45 adequacy decisions, Art.46 SCCs, Art.47 BCRs all current
+  versions / approvals
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all international data transfer mechanisms in use, specifying whether each relies on adequacy decisions,
+  Standard Contractual Clauses, or Binding Corporate Rules.
+- Attach the current, signed versions or official approvals for each mechanism, including dates and the
+  relevant supervisory authority or legal reference.
+- Cross-reference each transfer mechanism to the specific data flow or vendor in your data transfer register.
+- Confirm that no expired or draft versions of SCCs, BCRs, or adequacy decisions are included in your
+  evidence set.
+- Name the responsible individual who reviewed and verified the validity of each mechanism, avoiding generic
+  roles like "Legal Team" or "Compliance Department."

@@ -1,0 +1,20 @@
+must_id: item:A.6.7:proc_equipment_provision
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Equipment provisioning step (corporate device only / BYOD permitted with MDM / specific peripheral
+  restrictions like external monitors / printers), cross-link to A.5.9 asset register so remote-issued
+  equipment is tracked
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for approving remote work equipment, specifying if only company devices are allowed
+  or if personal devices are permitted with mobile device management.
+- List any restrictions on peripherals, such as prohibiting external monitors or printers, in the written
+  procedure.
+- Cross-reference each remote-issued device in the asset register, including serial numbers and assigned
+  user, to show tracking under A.5.9.
+- Name the equipment approver as a specific individual, not a team or department, in the procedure documentation.
+- Record the date and method of equipment provisioning for each remote worker in a log that can be produced
+  for audit.

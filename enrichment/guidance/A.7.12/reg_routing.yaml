@@ -1,0 +1,18 @@
+must_id: item:A.7.12:reg_routing
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Per-row routing description (conduit / overhead-tray / under-floor / via-shared-corridor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact routing method for each cable run in the register, specifying conduit, overhead tray,
+  under-floor, or shared corridor as applicable.
+- Name the person responsible for verifying each routing entry, listing a specific individual rather than
+  a team or department.
+- Date each register entry to show when the routing method was last checked or updated.
+- Cross-reference each cable run with a physical location or map identifier to allow auditors to verify
+  the described route on site.
+- Avoid using generic or copy-paste descriptions; tailor the routing description to each cable run’s actual
+  path and protection method.

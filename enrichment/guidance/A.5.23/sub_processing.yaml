@@ -1,0 +1,16 @@
+must_id: item:A.5.23:sub_processing
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Sub-processing terms for cloud (CSP's own sub-processors, notification, approval)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the requirement for cloud service providers to disclose all sub-processors in the Information
+  Security for Use of Cloud Services Policy, including names and roles.
+- State the process for receiving advance notification from cloud providers about any changes or additions
+  to their sub-processors, with a dated procedure.
+- Record the approval process for new sub-processors, including who must grant approval and how it is
+  documented, such as a signed decision log.
+- Name the policy owner as a specific individual, not a team or department, to avoid ambiguity in responsibility.

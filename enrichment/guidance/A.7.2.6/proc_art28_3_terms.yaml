@@ -1,0 +1,20 @@
+must_id: item:A.7.2.6:proc_art28_3_terms
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Art.28.3 terms coverage (subject matter + duration + nature + purpose + PII categories + subject
+  categories + controller/processor obligations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the subject matter, duration, nature, and purpose of processing in each PII processor contract,
+  referencing the relevant contract section and date.
+- Specify the categories of personal data and data subjects covered, ensuring these are clearly itemized
+  in the contract schedule or appendix.
+- Describe the obligations and rights of both the controller and processor, citing the exact contract
+  clauses where these are detailed.
+- Name the contract owner as a specific individual responsible for maintaining and updating the contractual
+  terms, not a team or department.
+- Retain a signed and dated copy of each executed processor contract, showing all required GDPR Art.28.3
+  terms are included.

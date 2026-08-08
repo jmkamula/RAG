@@ -1,0 +1,13 @@
+must_id: item:A.5.4:approval_target
+control_ref: A.5.4
+standard_id: ISO27001:2022
+must_text: Reference to the specific version of the management directive being approved
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact version number and date of the information security directive in the approval document.
+- Name the approving top management individual, not just their title or a group, in the approval record.
+- Record the approval decision with a physical or electronic signature and the date of approval.
+- Attach or cross-reference the full text of the approved directive within the approval documentation.

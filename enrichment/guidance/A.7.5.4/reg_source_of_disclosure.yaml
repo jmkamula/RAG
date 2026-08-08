@@ -1,0 +1,15 @@
+must_id: item:A.7.5.4:reg_source_of_disclosure
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Internal source of disclosure per row (which team / system released the data)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the internal source for each disclosure event by naming the specific team or system responsible
+  in a dedicated column of the log.
+- Name the responsible source as a specific team or system — do not use vague labels like "staff" or "IT".
+- Document the date and time of each disclosure event alongside the named internal source for traceability.
+- Assign a log owner who reviews new entries weekly and signs off on the completeness and accuracy of
+  the source information.

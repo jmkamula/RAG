@@ -1,0 +1,15 @@
+must_id: item:A.8.17:rev_reviewer
+control_ref: A.8.17
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Infrastructure lead + Security Operations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual from the Infrastructure team and a specific individual from
+  Security Operations in the review record.
+- Record the date each reviewer completed their assessment in the periodic clock sync program review log.
+- Sign the review outcome by both named reviewers, using either digital or handwritten signatures, on
+  the final review document.
+- Retain the review document and reviewer details in a central repository accessible for audit purposes.

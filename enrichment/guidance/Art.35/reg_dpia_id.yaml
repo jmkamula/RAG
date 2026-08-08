@@ -1,0 +1,17 @@
+must_id: item:Art.35:reg_dpia_id
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Per-row DPIA identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each Data Protection Impact Assessment (DPIA) entry in the register, such
+  as a sequential number or code.
+- Record the assigned identifier in a dedicated column for every DPIA row, ensuring no two entries share
+  the same identifier.
+- Cross-reference the identifier in related documentation, such as DPIA reports or risk assessments, to
+  maintain traceability.
+- State the identifier format in the register documentation, avoiding generic or reused codes that could
+  cause confusion during audit.

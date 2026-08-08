@@ -1,0 +1,18 @@
+must_id: item:A.5.15:logical_rules
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Logical access rules (systems, applications, network segments)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all systems, applications, and network segments that require logical access controls in a dated
+  inventory reviewed by a named owner.
+- State the specific rules for granting, changing, and revoking access for each listed asset in the access
+  control policy.
+- Assign responsibility for approving access requests to a named individual, not to a group or department.
+- Cross-reference the policy with supporting procedures or workflows that show how access is managed and
+  monitored.
+- Record the latest approval of the access control policy with the approver’s name, signature, and approval
+  date.

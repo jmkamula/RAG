@@ -1,0 +1,18 @@
+must_id: item:A.7.1:reg_perimeter_id
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Perimeter identifier per row (a site may have multiple perimeters — outer + inner + secure-room)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each site perimeter separately in the register, assigning a unique identifier to every distinct
+  boundary, including outer, inner, and secure-room perimeters.
+- Record the physical location and description for each perimeter, linking it to its unique identifier
+  in the register.
+- Name the perimeter owner as a specific individual for each entry, avoiding generic labels like "IT"
+  or "Facilities Team."
+- Date each register entry to show when the perimeter was last reviewed or updated.
+- Cross-reference each perimeter identifier with supporting site maps or floor plans to verify the physical
+  boundaries.

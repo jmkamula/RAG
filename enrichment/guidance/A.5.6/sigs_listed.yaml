@@ -1,0 +1,18 @@
+must_id: item:A.5.6:sigs_listed
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: SIGs and forums enumerated (ISACs, ISC2/ISACA chapters, vendor security groups, sector-specific
+  councils)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all special interest groups and professional forums your organisation participates in, including
+  full names and relevant sectors or topics.
+- Record the name and contact details of the specific individual responsible for each group or forum membership.
+- Document the date your organisation joined each group or forum and the frequency of participation or
+  engagement.
+- Attach evidence of active participation, such as meeting minutes, membership confirmations, or correspondence,
+  for each listed group or forum.
+- Name the owner of the register as a specific individual, not a generic team or department.

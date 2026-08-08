@@ -1,0 +1,17 @@
+must_id: item:A.8.26:reg_threat_model_ref
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Per-row threat-model reference (link to artefact)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each application security requirement with a unique threat model entry by including
+  a direct link or identifier in the register row.
+- Document the date and version of the threat model referenced for each requirement to show it is current
+  and relevant.
+- Name the person who performed the threat assessment for each requirement, listing their full name rather
+  than a team or department.
+- Confirm that every application security requirement row contains a completed threat-model reference;
+  do not leave any row blank or marked "N/A".

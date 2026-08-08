@@ -1,0 +1,16 @@
+must_id: item:A.5.8:rev_date
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Review date within the planned annual interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent project-security program review in a central log, specifying the
+  exact day, month, and year.
+- Name the individual responsible for scheduling and conducting the review, avoiding generic titles like
+  "the team" or "IT department."
+- Cross-reference the review date against the planned annual interval to confirm it falls within the required
+  timeframe.
+- Retain a copy of the signed review report or meeting minutes that clearly show the review date and attendees.

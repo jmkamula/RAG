@@ -1,0 +1,17 @@
+must_id: item:A.5.5:scope_personal_data
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Personal-data processing flag → drives DPA inclusion per jurisdiction
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all jurisdictions where your organisation processes personal data and list them in a dated
+  register.
+- Record for each jurisdiction whether personal data processing occurs, using a clear yes/no flag for
+  every entry.
+- Cross-reference each flagged jurisdiction with the relevant Data Protection Authority (DPA) and document
+  the DPA’s full name and contact details.
+- Name the person responsible for maintaining this register as a specific individual, not a team or department.
+- Review the register at least annually and sign off on any updates, keeping previous versions for reference.

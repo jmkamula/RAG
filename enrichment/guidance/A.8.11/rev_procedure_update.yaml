@@ -1,0 +1,17 @@
+must_id: item:A.8.11:rev_procedure_update
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Findings propagated to procedure / approved-techniques list
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the findings from each periodic masking program review in a dated summary document, listing specific
+  issues and recommendations.
+- Update the masking procedure and approved-techniques list to reflect all review findings, referencing
+  the summary document and date of change.
+- Obtain written approval for each updated procedure or techniques list from a named responsible individual,
+  not a generic role or group.
+- Cross-reference the updated documents in your change management log, including the date and the name
+  of the person making the update.

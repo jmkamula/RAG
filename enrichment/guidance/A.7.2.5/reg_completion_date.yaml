@@ -1,0 +1,17 @@
+must_id: item:A.7.2.5:reg_completion_date
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: PIA completion date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the completion date for each Privacy Impact Assessment or Data Protection Impact Assessment in
+  a dedicated column of the register.
+- Name the person responsible for entering each completion date, ensuring a specific individual is listed
+  rather than a team or department.
+- Cross-reference each register entry with the final signed assessment report to confirm the date matches
+  the documented completion.
+- Review the register regularly to confirm no entries are missing completion dates or contain placeholders
+  like "TBD" or "ongoing".

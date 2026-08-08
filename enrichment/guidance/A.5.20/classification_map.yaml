@@ -1,0 +1,19 @@
+must_id: item:A.5.20:classification_map
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Information classification mapping (org scheme → supplier scheme where they differ)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for mapping your organisation’s information classification scheme to each
+  supplier’s scheme in the agreement template.
+- Document your organisation’s classification levels and each supplier’s equivalent levels side-by-side
+  in a table within the agreement template.
+- State any differences or gaps between your classification scheme and the supplier’s, and describe how
+  these will be addressed in the agreement.
+- Attach a dated record of the most recent review or update of the classification mapping for each supplier
+  agreement template.
+- Specify the mapping for each supplier, not just a generic mapping — avoid using boilerplate language
+  that could apply to any supplier.

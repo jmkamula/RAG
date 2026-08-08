@@ -1,0 +1,14 @@
+must_id: item:A.6.1:reg_outcome
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Outcome per record (cleared / cleared-with-conditions / blocked / superseded by waiver)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the screening outcome for each candidate as "cleared", "cleared-with-conditions", "blocked",
+  or "superseded by waiver" in the register.
+- Name the individual who made the screening decision for each candidate, not just a department or team.
+- Enter the date the screening decision was finalized for each candidate in the register.
+- Attach or cross-reference any waiver documentation for candidates marked as "superseded by waiver".

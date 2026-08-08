@@ -1,0 +1,19 @@
+must_id: item:A.7.3.9:rev_complaint_route_test
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Complaint-route visibility test — subject notice surfaces the SA-complaint right
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for maintaining subject access request (SAR) communications, ensuring
+  a specific person is listed rather than a generic team.
+- Document the current subject notice and highlight the section that explains how individuals can submit
+  a complaint to the supervisory authority.
+- Record the date and outcome of a test where a user attempts to locate and follow the complaint route
+  from the subject notice.
+- Retain evidence of the test, such as screenshots or a walkthrough, showing the complaint right is clearly
+  presented and accessible.
+- State any changes made to the notice following the test, including the date and the person who approved
+  the update.

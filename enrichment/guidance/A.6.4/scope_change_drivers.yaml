@@ -1,0 +1,19 @@
+must_id: item:A.6.4:scope_change_drivers
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new geography, new sectoral regulator, major employment-law reform)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current jurisdictions and worker categories in a dated scope document, naming the person responsible
+  for maintaining its accuracy.
+- Document a trigger list that includes new geographies, sectoral regulators, and major employment-law
+  reforms, with clear examples for each.
+- Assign a specific individual to monitor for changes in jurisdictions or regulations, recording their
+  name and review frequency in the scope document.
+- Record each re-scoping event with the trigger, date, and decision-maker’s name, attaching supporting
+  evidence such as regulatory notices or legal updates.
+- Avoid using generic or outdated triggers; update the trigger list regularly and reference the latest
+  version in the scope document.

@@ -1,0 +1,17 @@
+must_id: item:A.7.2.7:rev_coverage_check
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Coverage check — every joint arrangement identified is documented
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every joint controller arrangement in a dedicated register, including the names of all parties
+  and the scope of shared processing.
+- Document the date each arrangement was identified and the individual responsible for its entry in the
+  register.
+- Cross-reference each arrangement in the register with supporting agreements or contracts that define
+  joint controller roles.
+- Name the owner of the register as a specific person, not a group or department.
+- Review the register annually and record the date and reviewer’s name for each completed review.

@@ -1,0 +1,18 @@
+must_id: item:A.8.14:bl_critical_services
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Critical services enumerated with availability requirement per service (drawn from A.5.30 BIA)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all critical services in a table, referencing the most recent Business Impact Analysis (BIA) for
+  each entry.
+- State the specific availability requirement for each critical service, such as uptime percentage or
+  maximum allowable downtime, with supporting BIA data.
+- Name the owner of each service as a specific individual, not a team or department, in the table.
+- Record the date when the redundancy baseline was last reviewed and approved by management, attaching
+  the approval record.
+- Cross-reference each service entry to the relevant BIA section or page number to show the source of
+  the availability requirement.

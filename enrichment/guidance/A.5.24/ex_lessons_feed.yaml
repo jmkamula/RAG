@@ -1,0 +1,20 @@
+must_id: item:A.5.24:ex_lessons_feed
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Lessons feed per record to A.5.27 lessons register where the exercise surfaced patterns worth
+  retaining beyond this control
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, scope, and participants of each framework activation exercise in a dedicated activation
+  record.
+- Summarize any patterns or lessons identified during the exercise that may have value beyond the immediate
+  control.
+- Cross-reference each lesson or pattern worth retaining by entering it into the A.5.27 lessons register,
+  including a link back to the exercise record.
+- Name the individual responsible for transferring lessons to the A.5.27 register—avoid listing only a
+  team or department.
+- Retain evidence of the completed cross-reference, such as a signed or timestamped entry in both the
+  activation record and the lessons register.

@@ -1,0 +1,17 @@
+must_id: item:9.2:rev_next_date
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date clearly within the audit program document, using a specific day,
+  month, and year.
+- Record the decision for the next review date in meeting minutes or an approval log, including the name
+  of the approver and the date of agreement.
+- Name the responsible individual who will oversee the next review, avoiding generic titles like "the
+  team" or "management."
+- Cross-reference the stated review date in the audit program with your organisation’s compliance calendar
+  to confirm alignment.

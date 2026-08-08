@@ -1,0 +1,19 @@
+must_id: item:A.5.28:legal_admissibility
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Legal admissibility considerations (jurisdictional rules, multi-jurisdiction scenarios)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the legal counsel or compliance expert who reviewed the procedure for jurisdiction-specific admissibility
+  requirements, including their name and review date.
+- Document the specific laws and regulations referenced for each relevant jurisdiction within the procedure,
+  listing sources and effective dates.
+- State the steps required to identify and address multi-jurisdictional conflicts or overlaps in evidence
+  handling, with examples included in the procedure.
+- Record the date and version of the procedure, ensuring it is not left undated or marked as "draft" when
+  in use.
+- Assign responsibility for periodic review and update of legal admissibility considerations to a named
+  individual, not a generic team or department.

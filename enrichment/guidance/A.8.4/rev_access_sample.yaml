@@ -1,0 +1,19 @@
+must_id: item:A.8.4:rev_access_sample
+control_ref: A.8.4
+standard_id: ISO27001:2022
+must_text: Sample-based repo access verification (per-repo admin and write list re-confirmed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner responsible for conducting source code repository access reviews,
+  not a group or department.
+- Document the date, repository name, and list of users with admin or write access for each sampled repository
+  in a review log.
+- Confirm with each repository owner that current admin and write access lists are accurate and necessary,
+  recording their explicit approval and the date.
+- Record any access removals or changes made as a result of the review, including who made the change
+  and when.
+- Retain evidence of the completed review, such as signed review logs or email confirmations, for each
+  sampled repository.

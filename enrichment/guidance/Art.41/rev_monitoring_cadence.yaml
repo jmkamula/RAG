@@ -1,0 +1,19 @@
+must_id: item:Art.41:rev_monitoring_cadence
+control_ref: Art.41
+standard_id: GDPR:2016/679
+must_text: Monitoring cadence audit — every adherent assessed per procedure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the monitoring schedule showing each adherent’s assessment dates, with references to the documented
+  procedure used for each review.
+- Record the completion of each adherent’s assessment with the assessor’s name, assessment date, and outcome
+  in a central log.
+- Cross-reference each assessment entry to the specific procedure version applied, ensuring the procedure
+  is dated and version-controlled.
+- Name the responsible reviewer for each adherent’s assessment as a specific individual, not a group or
+  department.
+- Retain evidence of any missed or delayed assessments, along with documented reasons and corrective actions
+  taken.

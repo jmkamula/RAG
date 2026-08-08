@@ -1,0 +1,19 @@
+must_id: item:B.8.5.1:rev_notification_audit
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+must_text: Notification audit — advance-notification obligations verified for all changes since last review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all processor transfers made since the last review in a dated log, including the nature and date
+  of each change.
+- Document the advance notification sent for each transfer, attaching copies of the actual notifications
+  and their delivery dates.
+- Name the individual responsible for sending notifications, ensuring a specific person is identified
+  rather than a team or department.
+- Record confirmation of receipt or acknowledgment from each notified party, including the date and method
+  of acknowledgment.
+- Highlight any transfers where notification was delayed or missing, and document the corrective actions
+  taken with dates and responsible persons.

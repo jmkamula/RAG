@@ -1,0 +1,18 @@
+must_id: item:5.2:rev_approval_currency
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: Approval currency check — signed by current top management
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Locate the most recent version of the information security policy and confirm it is dated within the
+  current review cycle.
+- Identify the top management individual(s) by name and title who are responsible for policy approval.
+- Obtain a physical or electronic signature from the current top management on the policy document, including
+  the approval date.
+- Cross-reference the signatory against the latest organizational chart to confirm they hold top management
+  status at the time of approval.
+- Avoid using generic titles or group names; name a specific individual as the approver, not "the team"
+  or "management."

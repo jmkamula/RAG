@@ -1,0 +1,19 @@
+must_id: item:A.8.20:zero_trust
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Zero-trust direction encoded — no implicit trust at network layer; identity-verified per request
+  (modern baseline)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Networks Security Policy that all network access is denied by default and requires explicit
+  identity verification for each request.
+- Document the technical controls in place that enforce per-request identity checks, such as network segmentation
+  and authentication gateways.
+- Name the policy owner as a specific individual responsible for maintaining and updating the zero-trust
+  direction.
+- Record the date of the most recent policy review and approval by a named senior manager.
+- Cross-reference the policy to supporting procedures or system configurations that demonstrate zero-trust
+  enforcement at the network layer.

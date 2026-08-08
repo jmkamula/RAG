@@ -1,0 +1,18 @@
+must_id: item:A.7.4.2:rev_access_audit
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+must_text: Access-limit audit — sampled access groups reviewed against operation registry
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and list all access groups with potential to access personal data, referencing each group by
+  name in a dated inventory.
+- Cross-reference each access group against the operation registry to confirm which processing activities
+  they support, recording findings in a review log.
+- Document the results of a sample review, noting any discrepancies or over-broad access, and include
+  the date and reviewer’s name.
+- Name the reviewer as a specific individual, not a generic title or team, in the review documentation.
+- Retain evidence of corrective actions taken for any identified issues, including dated records of changes
+  to group membership or permissions.

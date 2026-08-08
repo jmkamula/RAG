@@ -1,0 +1,32 @@
+leaf_id: req:Art.43:certification_issuance_record
+control_ref: Art.43
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear and up-to-date record of processing activities to identify which processing
+    operations are covered by any issued certification. This ensures the certification issuance record
+    is accurate and traceable.
+  good_enough: A current, basic RoPA exists that lists all major processing activities and responsible
+    parties, even if some details are pending refinement.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: direct
+  rationale: Before issuing a certification, you must confirm that each processing activity has a documented
+    lawful basis. This underpins the legitimacy of the certification and its issuance record.
+  good_enough: Each processing activity in scope has a stated lawful basis, even if supporting documentation
+    is still being finalized.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated Data Protection Officer (DPO) is required to oversee and validate the certification
+    process, including issuance records, ensuring accountability and regulatory alignment.
+  good_enough: A DPO is formally named and contactable, even if their full onboarding or training is still
+    underway.

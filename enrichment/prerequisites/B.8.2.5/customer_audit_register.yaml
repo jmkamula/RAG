@@ -1,0 +1,49 @@
+leaf_id: req:B.8.2.5:customer_audit_register
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope statement defines which customers, services, and data flows are covered by your
+    ISMS and privacy extension. You can't reliably track or respond to customer audit or information requests
+    until you know what is in-scope.
+  good_enough: A documented scope that clearly lists included business units, services, and geographies
+    relevant to customer data processing.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: You need to know who is responsible for handling customer audits and information requests,
+    as well as who maintains the register. Without this, requests may be missed or mishandled.
+  good_enough: A named individual or team assigned to manage customer requests and maintain the register,
+    with responsibilities documented.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: To respond accurately to customer information requests, you must know what personal data
+    assets exist and where they are stored. The asset register is the foundation for this visibility.
+  good_enough: A basic inventory of systems and data stores that hold customer personal data, even if
+    not fully detailed.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Customers may ask for information about how their data is processed and for what purposes.
+    You need this documentation to provide meaningful responses and to log the context of each request
+    in the register.
+  good_enough: Documented purposes for all major categories of customer data processing, even if not yet
+    granular for every process.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: When responding to customer requests, you may need to explain the legal basis for processing
+    their data. This information should be available before you can maintain a compliant register.
+  good_enough: A summary table or list mapping each processing activity to its lawful basis, covering
+    the main data flows.

@@ -1,0 +1,19 @@
+must_id: item:A.8.13:rpo_alignment
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: RPO alignment with A.5.30 ICT readiness (each system's BIA RPO ≤ backup frequency)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each system's Recovery Point Objective (RPO) from the Business Impact Analysis (BIA)
+  with the documented backup schedule in the procedure.
+- State the backup frequency for each system in the procedure, ensuring it meets or exceeds the RPO identified
+  in the BIA.
+- Name the individual responsible for reviewing and updating backup schedules when BIA RPOs change, rather
+  than listing a team or department.
+- Record the date of the most recent alignment check between BIA RPOs and backup frequencies within the
+  procedure document.
+- Attach or link the relevant BIA summary for each system to the backup procedure as supporting evidence
+  of RPO requirements.

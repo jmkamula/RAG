@@ -1,0 +1,17 @@
+must_id: item:A.7.2:periodic_review
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Periodic access-list review trigger (links to A.5.18 access reviews)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact frequency for access-list reviews in the procedure, such as "quarterly" or "every six
+  months," with a clear review date.
+- Assign a named individual, not a team or department, as responsible for initiating each periodic access-list
+  review.
+- Document the review trigger by cross-referencing the related access review requirement in section A.5.18
+  within the procedure.
+- Record the completion of each access-list review with a dated entry and the reviewer’s signature or
+  name in an access review log.

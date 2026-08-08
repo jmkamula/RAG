@@ -1,0 +1,19 @@
+must_id: item:Art.28:confidentiality
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Confidentiality obligations on processor staff
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Data Processing Agreement that all processor staff with access to personal data are bound
+  by confidentiality obligations.
+- Name the confidentiality obligation as a specific clause in the agreement, referencing the relevant
+  section and page number.
+- Require the processor to maintain a dated register of staff who have signed confidentiality agreements
+  related to personal data handling.
+- Attach a sample signed confidentiality agreement or declaration for processor staff as an appendix to
+  the DPA.
+- Name the responsible contact at the processor for managing staff confidentiality, avoiding generic titles
+  like "the team" or "HR department".

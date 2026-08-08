@@ -1,0 +1,17 @@
+must_id: item:A.5.19:off_trigger
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Offboarding trigger captured (termination / non-renewal / supplier failure / re-tendering)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific offboarding trigger for each supplier, such as contract termination, non-renewal,
+  supplier failure, or re-tendering, in the offboarding log.
+- Document the date the offboarding trigger was identified and the person who confirmed it in the supplier
+  offboarding record.
+- Attach supporting evidence, such as termination notices or non-renewal correspondence, to the supplier’s
+  offboarding file.
+- Name the individual responsible for verifying the offboarding trigger, avoiding generic titles like
+  "the team" or "procurement."

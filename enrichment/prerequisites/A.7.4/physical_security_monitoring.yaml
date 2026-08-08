@@ -1,0 +1,40 @@
+leaf_id: req:A.7.4:physical_security_monitoring
+control_ref: A.7.4
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which sites, buildings, and areas are in-scope for your ISMS before you
+    can define where physical security monitoring applies. This ensures the procedure covers all relevant
+    premises and avoids gaps.
+  good_enough: A clear, current list of all physical locations and boundaries included in the ISMS is
+    documented and accessible.
+- ref: A.7.1
+  standard_id: ISO27001:2022
+  title: Physical security perimeters
+  category: direct
+  rationale: Defined perimeters are essential to determine the boundaries for monitoring and what constitutes
+    unauthorized access. Without this, you can't specify monitoring points or coverage.
+  good_enough: Documented physical perimeters exist for all in-scope premises, with diagrams or descriptions
+    sufficient to identify where monitoring starts and ends.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Knowing which physical assets (e.g., servers, network equipment) are present helps prioritize
+    monitoring efforts and identify high-risk areas needing enhanced surveillance.
+  good_enough: A basic inventory of physical assets is available, showing their location within the monitored
+    premises.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment identifies threats and vulnerabilities related to physical access, guiding
+    what needs to be monitored and how intensively.
+  good_enough: A recent risk assessment exists that covers physical security threats for all in-scope
+    locations, even if mitigation plans are still in progress.

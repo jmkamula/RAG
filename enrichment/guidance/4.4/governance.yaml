@@ -1,0 +1,16 @@
+must_id: item:4.4:governance
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: Governance structure (ownership, decision rights, escalation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the ISMS owner as a specific individual, not a team or department, in the ISMS Manual or Charter.
+- Document the decision-making process for ISMS-related matters, including who approves, who reviews,
+  and who is consulted, with named roles and dates.
+- State the escalation path for unresolved ISMS issues, listing the specific positions or individuals
+  responsible at each escalation level.
+- Record the date of the most recent approval or update of the ISMS Manual or Charter, including the name
+  and signature of the approver.

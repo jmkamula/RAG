@@ -1,0 +1,15 @@
+must_id: item:Art.12:reg_request_id
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Unique request identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each rights request entry in the register, using a sequential or otherwise
+  non-repeating numbering system.
+- Record the unique identifier in a dedicated column for every new request, ensuring no two requests share
+  the same identifier.
+- Cross-reference the unique identifier in all related correspondence and documentation for each request.
+- Confirm that no register row is left blank or marked "N/A" in the unique identifier column.

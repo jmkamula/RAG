@@ -1,0 +1,17 @@
+must_id: item:Art.19:reg_ack_received
+control_ref: Art.19
+standard_id: GDPR:2016/679
+must_text: Per-row recipient acknowledgement where available
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each data recipient’s acknowledgement of notification in the register, including the recipient’s
+  name, date, and method of acknowledgement.
+- Attach supporting evidence of acknowledgement, such as a signed email response or confirmation letter,
+  to each corresponding register entry.
+- Name the recipient contact as a specific individual, not just a company or department, for each acknowledgement
+  entry.
+- Document any cases where acknowledgement could not be obtained, including the reason and attempts made,
+  in the register row.

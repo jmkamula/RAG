@@ -1,0 +1,16 @@
+must_id: item:A.8.24:rev_reviewer
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Cryptography SME + InfoSec + Data Protection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewers as specific individuals with roles in Cryptography, Information Security, and Data
+  Protection on the review record.
+- Record the date each reviewer completed their assessment on the periodic cryptography program review
+  document.
+- Obtain signatures or written confirmation from all three required reviewers to verify their participation
+  in the review.
+- Avoid listing generic groups or teams as reviewers; specify named persons to meet accountability requirements.

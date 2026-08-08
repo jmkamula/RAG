@@ -1,0 +1,16 @@
+must_id: item:B.8.5.8:reg_effective_date
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+must_text: Change effective date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the effective date of each subcontractor change in a dedicated column for every entry in the
+  Subcontractor Change Register.
+- Confirm that each effective date is a full calendar date, not just a month or year, to avoid ambiguity.
+- Cross-reference each change entry with supporting documentation, such as signed contract amendments
+  or change notices, that show the same effective date.
+- Review the register regularly to ensure no row is missing an effective date and correct any incomplete
+  entries immediately.

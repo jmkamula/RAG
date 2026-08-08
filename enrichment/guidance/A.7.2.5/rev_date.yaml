@@ -1,0 +1,17 @@
+must_id: item:A.7.2.5:rev_date
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the PIA Program in a dated log entry maintained by the designated
+  program owner.
+- Document the planned review interval for the PIA Program in the program documentation, specifying the
+  frequency in months or years.
+- Name the program owner as a specific individual responsible for scheduling and conducting reviews, not
+  a group or department.
+- Cross-reference the actual review date against the planned interval to confirm compliance, and retain
+  evidence of this check.

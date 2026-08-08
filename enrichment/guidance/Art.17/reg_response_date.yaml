@@ -1,0 +1,17 @@
+must_id: item:Art.17:reg_response_date
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Per-row response date (Art.12.3 SLA)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each erasure request is received in a dedicated column for every entry in the Erasure
+  Request Register.
+- Enter the date a response is sent to the requester in a separate, per-row column, ensuring this is not
+  left blank.
+- Cross-reference each response date with supporting correspondence, such as a dated email or letter confirming
+  the response was sent.
+- Name the staff member responsible for recording response dates, using a specific individual’s name rather
+  than a generic team or department.

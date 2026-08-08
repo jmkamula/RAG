@@ -1,0 +1,16 @@
+must_id: item:A.8.26:scope_exclusions
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Exclusion rationale (low-risk internal scripts / experimental prototypes pre-production)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each excluded application, script, or prototype by name and location in a dated application inventory
+  or register.
+- Document a clear, specific rationale for each exclusion, referencing risk level and intended use, in
+  the same inventory entry.
+- Name the individual who approved each exclusion, and record their approval date alongside the rationale.
+- Avoid using generic justifications such as "internal use" or "not in production" without supporting
+  risk assessment details.

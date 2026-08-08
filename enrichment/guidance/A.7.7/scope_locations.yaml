@@ -1,0 +1,18 @@
+must_id: item:A.7.7:scope_locations
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Locations enumerated (offices, meeting rooms, lab benches, home offices, coworking spaces,
+  customer-site visits)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical locations where information is accessed or processed, including offices, meeting rooms,
+  lab benches, home offices, coworking spaces, and customer sites, in a dated document.
+- Name the person responsible for maintaining the list of applicable locations as a specific individual,
+  not a team or department.
+- Cross-reference each location in the list to supporting evidence, such as lease agreements, access logs,
+  or remote work policies.
+- Review and update the locations list at least annually, recording the date and name of the reviewer
+  for each update.

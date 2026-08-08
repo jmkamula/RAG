@@ -1,0 +1,19 @@
+must_id: item:Art.7:reg_withdrawal_status
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Per-row withdrawal status (current / withdrawn-on-date)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the current consent status for each individual entry as either "active" or "withdrawn" in the
+  consent register.
+- Enter the specific date of withdrawal for any consent marked as "withdrawn" to show when the change
+  occurred.
+- Name the person responsible for updating each withdrawal status entry, using their full name rather
+  than a generic role or team.
+- Retain all historical changes to withdrawal status, including previous statuses and dates, to provide
+  a complete audit trail.
+- Avoid leaving any consent entry with a blank or ambiguous withdrawal status; every row must clearly
+  show either "active" or a withdrawal date.

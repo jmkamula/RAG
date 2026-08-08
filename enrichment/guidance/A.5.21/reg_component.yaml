@@ -1,0 +1,17 @@
+must_id: item:A.5.21:reg_component
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: Component / service identified per row (vendor, product, version)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each ICT component or service on a separate row in the register, including hardware, software,
+  and cloud-based solutions.
+- Record the vendor name, product name, and specific version number for every entry to allow precise identification.
+- Assign a unique identifier to each component or service to avoid confusion between similar products
+  or versions.
+- Name the owner of each register entry as a specific individual, not a team or department.
+- Update the register whenever a component is added, changed, or removed, and record the date of each
+  change.

@@ -1,0 +1,18 @@
+must_id: item:Art.28:scope_change_drivers
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Trigger list (new vendor onboarded, vendor service-shape change)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current vendors who process personal data, including full legal names and the specific services
+  they provide.
+- Document each instance when a new vendor is onboarded or an existing vendor changes the nature of their
+  services.
+- Record the date and name of the person responsible for updating the processor list after each trigger
+  event.
+- Name the owner as a specific individual responsible for maintaining the processor list, not a team or
+  department.
+- Retain previous versions of the processor list to show a clear history of updates and changes.

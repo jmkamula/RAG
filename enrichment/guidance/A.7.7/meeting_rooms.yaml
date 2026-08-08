@@ -1,0 +1,17 @@
+must_id: item:A.7.7:meeting_rooms
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Specific rules for meeting rooms and shared spaces (whiteboard wipe, printout collection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document clear rules requiring all whiteboards in meeting rooms and shared spaces to be wiped clean
+  after use, with examples of sensitive information.
+- Assign responsibility for checking and maintaining clear desks and screens in shared spaces to a named
+  individual or role, not a generic team.
+- Record the process for collecting and securely disposing of printouts left in meeting rooms, including
+  who is responsible and how often checks occur.
+- State that verbal reminders alone are insufficient; include written procedures and visible signage in
+  meeting rooms and shared spaces.

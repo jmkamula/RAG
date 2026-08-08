@@ -1,0 +1,18 @@
+must_id: item:A.8.25:reg_data_classification
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Per-project data classification footprint (drives PII-handling rules)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each development project in the register with a unique project name and a named project lead responsible
+  for data handling.
+- State the data classification for each project, specifying if personal data or special categories of
+  data are processed.
+- Record the lawful basis for processing personal data under GDPR for each project, referencing the relevant
+  GDPR article.
+- Name the data classification owner as a specific individual, not a team or department, for each project
+  entry.
+- Date each register entry and update it whenever the data classification changes during the project lifecycle.

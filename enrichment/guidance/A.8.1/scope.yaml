@@ -1,0 +1,16 @@
+must_id: item:A.8.1:scope
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Scope — device classes in scope (corporate-owned, BYOD, contractor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all device classes covered by the policy, including corporate-owned, bring-your-own-device (BYOD),
+  and contractor devices, in a dated policy document.
+- Name the specific individual responsible for defining and updating the scope of device classes in the
+  policy.
+- Record the date of the most recent policy review and approval by a named decision-maker.
+- Avoid using vague terms like "all devices" or "as applicable"—describe each device class explicitly
+  in the policy text.

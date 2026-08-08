@@ -1,0 +1,19 @@
+must_id: item:A.7.4.4:reg_technique
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+must_text: Technique per row (masking / generalisation / suppression / noise addition / k-anonymity /
+  differential privacy / etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each data minimization technique used in your environment in a separate row of the inventory, specifying
+  the technique by name.
+- Describe the purpose and context for each technique, linking it to the specific dataset or processing
+  activity it applies to.
+- Name the individual responsible for maintaining and updating the inventory, avoiding generic roles like
+  "IT" or "the team".
+- Record the date each technique was last reviewed or updated in the inventory to show ongoing oversight.
+- Attach or reference supporting documentation that explains how each technique is implemented, such as
+  process diagrams or configuration files.

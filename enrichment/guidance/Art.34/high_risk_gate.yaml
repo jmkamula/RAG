@@ -1,0 +1,20 @@
+must_id: item:Art.34:high_risk_gate
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: High-risk gate — when subject communication IS required (likely to result in high risk to rights
+  and freedoms)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the decision-making process that determined the breach is likely to result in high risk to
+  individuals’ rights and freedoms, including risk assessment date and participants.
+- Name the person responsible for approving subject communications, ensuring this is a specific individual
+  and not a generic role or team.
+- Record the date and content of the communication sent to affected individuals, attaching a copy of the
+  actual message used.
+- Retain evidence of how and when the communication was delivered to data subjects, such as email logs
+  or postal receipts.
+- State any exceptions applied under Art.34.3, including justification and approval by a named decision-maker,
+  if communication was not sent.

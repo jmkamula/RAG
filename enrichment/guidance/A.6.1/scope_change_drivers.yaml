@@ -1,0 +1,18 @@
+must_id: item:A.6.1:scope_change_drivers
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new geography, new sector entry, new regulator action affecting
+  screening)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all events that require a re-scoping review, such as entering a new country, sector, or responding
+  to regulator changes, in a dated document.
+- Assign a named individual to monitor for these trigger events and record their name and role in the
+  document.
+- State the review frequency for the trigger list and record the last review date and reviewer’s name.
+- Name the owner as a specific person, not a team or department, to avoid ambiguity in responsibility.
+- Retain evidence of communication of the trigger list to all relevant stakeholders, such as an email
+  or meeting minutes.

@@ -1,0 +1,19 @@
+must_id: item:B.8.2.2:reg_binding_controls
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: Binding controls per row (tenant isolation config / data-tag enforcement / access scoping)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner for each customer purpose entry, avoiding generic roles like
+  "IT" or "the team".
+- Document the binding control applied to each data processing purpose, specifying tenant isolation, data-tag
+  enforcement, or access scoping per row.
+- Record the date each control was implemented or last reviewed, linking to supporting configuration or
+  enforcement evidence.
+- Cross-reference each register entry to the documented customer purpose statement and relevant processing
+  agreement.
+- Retain evidence of periodic review and update of controls, with the reviewer’s name and review date
+  clearly listed.

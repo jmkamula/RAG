@@ -1,0 +1,19 @@
+must_id: item:A.6.2:scope_template_mapping
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Template-to-category mapping (which categories use the master template; which use a variant
+  — contractor-lite NDA-only path is common)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all worker categories by specific name, such as "permanent employee," "contractor," or "vendor,"
+  in a dated document.
+- Map each worker category to the template or variant they must use, clearly stating any exceptions like
+  "contractor-lite NDA-only."
+- Assign a named individual responsible for maintaining and updating the mapping document, ensuring accountability.
+- Cross-reference the mapping document with onboarding checklists or HR records to show the correct template
+  is used for each category.
+- Specify the mapping owner as a named person, not a group or department, to avoid ambiguity auditors
+  would flag.

@@ -1,0 +1,15 @@
+must_id: item:Art.12:rev_reviewer
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO + ops lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and job title, not just a role or department.
+- Document the Data Protection Officer’s participation by recording their signature and review date on
+  the transparency program review record.
+- Record the operations lead’s full name, job title, and signature alongside the DPO on the same review
+  document.
+- Retain the signed and dated review record in a central location accessible for audit purposes.

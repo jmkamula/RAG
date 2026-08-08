@@ -1,0 +1,16 @@
+must_id: item:A.8.12:rev_reviewer
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Reviewer identity (DLP lead + Data Protection + InfoSec)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the DLP program review lead, Data Protection officer, and Information Security manager as specific
+  individuals in the review documentation.
+- Record the full names and job titles of each reviewer in the DLP program review meeting minutes or summary
+  report.
+- Confirm each reviewer’s participation by collecting their dated signatures or written acknowledgments
+  on the final review document.
+- Avoid listing groups or teams as reviewers; always identify individuals responsible for the review.

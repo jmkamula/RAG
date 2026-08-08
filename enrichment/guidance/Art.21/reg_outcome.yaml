@@ -1,0 +1,16 @@
+must_id: item:Art.21:reg_outcome
+control_ref: Art.21
+standard_id: GDPR:2016/679
+must_text: Per-row outcome (processing ceased / continued with compelling grounds / partial)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the outcome of each objection in the register, stating clearly whether processing was ceased,
+  continued with compelling grounds, or partially restricted.
+- Document the date and reasoning for the outcome decision for each objection, referencing supporting
+  evidence or legal grounds as applicable.
+- Name the decision-maker for each objection as a specific individual, not a group or department.
+- Attach any correspondence sent to the data subject informing them of the outcome, including the date
+  and summary of the response.

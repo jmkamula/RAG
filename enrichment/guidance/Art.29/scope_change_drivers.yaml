@@ -1,0 +1,17 @@
+must_id: item:Art.29:scope_change_drivers
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Trigger list (new role processing PII, contractor onboarding)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each instance where a new role or contractor is onboarded and will process personal data, including
+  the date and responsible manager.
+- Name the specific individual responsible for assessing whether Art.29 applies to each new processing
+  activity, not just a team or department.
+- Record the decision outcome for each trigger event, stating if Art.29 requirements are in scope, with
+  supporting rationale.
+- Retain evidence of communication or training provided to new roles or contractors regarding their personal
+  data processing responsibilities.

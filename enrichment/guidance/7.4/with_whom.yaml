@@ -1,0 +1,17 @@
+must_id: item:7.4:with_whom
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: With whom (internal audiences and external interested parties)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all internal audiences and external interested parties by name or role in the ISMS Communication
+  Procedure, including specific business units and partner organisations.
+- Document the date and version of the procedure where these audiences and parties are identified, ensuring
+  the list is current and not outdated.
+- Name the responsible individual who maintains and updates the list of audiences and parties, avoiding
+  generic titles like "the team" or "management".
+- Attach evidence of the most recent review or update, such as a signed or approved change log entry referencing
+  the named audiences and parties.

@@ -1,0 +1,18 @@
+must_id: item:A.7.3.8:reg_format_delivered
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Format delivered per row (JSON / CSV / PDF / structured export)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each copy request in a register, recording requester name, date, data subject, and data categories
+  per row.
+- Export the register in a structured format such as JSON, CSV, or PDF, ensuring each request is a separate
+  row or entry.
+- Confirm the export includes all required fields and is machine-readable, not a scanned image or unstructured
+  text file.
+- Name the register owner as a specific individual responsible for maintaining and exporting the register,
+  not a team or department.
+- Retain a dated copy of the most recent structured export for auditor review.

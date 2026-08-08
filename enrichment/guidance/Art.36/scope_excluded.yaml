@@ -1,0 +1,18 @@
+must_id: item:Art.36:scope_excluded
+control_ref: Art.36
+standard_id: GDPR:2016/679
+must_text: Out-of-scope processing (residual low/medium risk; DPIA-mitigated to acceptable level)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each processing activity assessed as out-of-scope for Article 36, including a summary of the
+  risk level and mitigation measures applied.
+- Record the date and outcome of the Data Protection Impact Assessment (DPIA) that reduced the risk to
+  an acceptable level for each activity.
+- Name the individual who approved the DPIA conclusion and residual risk rating for each processing activity.
+- Attach evidence of the risk assessment and DPIA results, such as signed reports or meeting minutes,
+  to each processing activity record.
+- Specify the rationale for out-of-scope determination; avoid generic statements that could apply to any
+  processing activity.

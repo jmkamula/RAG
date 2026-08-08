@@ -1,0 +1,15 @@
+must_id: item:Art.37:reg_dpo_identity
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: DPO identity per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer as a specific individual, including full legal name and contact details,
+  in each row of the designation record.
+- Record the date of appointment for each DPO entry to show when the designation became effective.
+- Document the method of designation, such as board resolution or employment contract, and reference the
+  supporting document for each DPO.
+- Avoid listing only a role or department as DPO; always specify a named person to meet authenticity requirements.

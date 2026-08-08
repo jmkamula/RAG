@@ -1,0 +1,18 @@
+must_id: item:A.5.23:reg_responsibility
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Shared-responsibility split recorded per service (what is CSP-managed, what is org-managed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each cloud service in the Cloud Service Register, including the provider name, service type, and
+  date of entry.
+- Document the specific responsibilities handled by the cloud service provider and those managed by your
+  organisation for each service entry.
+- Cross-reference each responsibility split with the relevant contract or service agreement, noting the
+  document title and version.
+- Name the person responsible for reviewing and updating each responsibility split, using a specific individual
+  rather than a team or department.
+- Record the date of the most recent review or update for each service’s shared-responsibility split.

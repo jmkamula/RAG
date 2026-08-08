@@ -1,0 +1,19 @@
+must_id: item:A.7.14:rev_register_update
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Changes propagated to the procedure / scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of the most recent periodic review of the disposal program in a formal meeting
+  note or review log.
+- Name the individual responsible for updating the disposal procedure and scope following the review,
+  listing them in the review documentation.
+- Document specific changes made to the procedure or scope, referencing the section numbers and providing
+  a summary of what was updated.
+- Attach the updated, version-controlled procedure document with the revision date and approver’s signature
+  to the review record.
+- Avoid using generic statements like "procedure updated as needed"—clearly describe each change and its
+  rationale in the review artefact.

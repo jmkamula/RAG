@@ -1,0 +1,17 @@
+must_id: item:A.8.20:reg_perimeter
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Per-row perimeter type (boundary firewall / service mesh / IAP / vendor-managed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each network connection or segment in the Network Inventory Register, including internal, external,
+  and cloud-based links.
+- Record the perimeter type for every row, specifying whether it uses a boundary firewall, service mesh,
+  identity-aware proxy, or is vendor-managed.
+- Name the owner of each network segment as a specific individual, not a team or department.
+- Date each entry and update, showing when the perimeter type was last reviewed or changed.
+- Cross-reference each perimeter type to supporting configuration or vendor documentation stored in a
+  named location.

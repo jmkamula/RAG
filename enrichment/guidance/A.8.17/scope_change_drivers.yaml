@@ -1,0 +1,17 @@
+must_id: item:A.8.17:scope_change_drivers
+control_ref: A.8.17
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new system class, new regulator drift requirement)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a dated trigger list that specifies events requiring a review of your sync scope, such as new
+  system types or regulatory changes.
+- Assign a named individual responsible for monitoring and updating the trigger list when relevant changes
+  occur.
+- Cross-reference each trigger to the corresponding policy or procedure that governs sync scope updates.
+- Name the owner as a specific person, not a team or department, to avoid ambiguity in accountability.
+- Retain records of past trigger activations and resulting scope reviews, including dates and decisions
+  made.

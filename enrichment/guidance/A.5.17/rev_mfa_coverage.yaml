@@ -1,0 +1,19 @@
+must_id: item:A.5.17:rev_mfa_coverage
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: MFA enrolment coverage audit (% of in-scope identities with MFA enrolled; gap analysis per
+  uncovered identity type)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Extract a list of all in-scope user identities from your identity management system and save it as a
+  dated report.
+- Generate a separate report showing which of these identities have multi-factor authentication (MFA)
+  currently enabled.
+- Calculate the percentage of in-scope identities with MFA enrolled and document this figure in a dated
+  summary.
+- Identify and list each identity type not covered by MFA, providing a brief explanation for each gap
+  in a gap analysis document.
+- Name the person responsible for the MFA coverage audit as a specific individual, not a team or department.

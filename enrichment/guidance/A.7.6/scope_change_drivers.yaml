@@ -1,0 +1,17 @@
+must_id: item:A.7.6:scope_change_drivers
+control_ref: A.7.6
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new secure area, new third-party access pattern)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current secure areas and third-party access patterns in a dated document reviewed at least
+  annually.
+- Document specific triggers for re-scoping, such as creation of a new secure area or introduction of
+  a new third-party access method.
+- Assign a named individual responsible for monitoring changes that could trigger a re-scope, with their
+  name and role recorded in the document.
+- Record each review or update of the trigger list with the reviewer's name and date.
+- Name the owner as a specific person, not a generic role or team, to avoid ambiguity in accountability.

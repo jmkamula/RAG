@@ -1,0 +1,17 @@
+must_id: item:B.8.2.3:scope_marketing_channels
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: Marketing channels enumerated (email marketing / retargeting / in-product prompts / third-party
+  ad platforms)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all marketing channels used to contact or profile individuals, specifying each channel by name,
+  in a dated document.
+- Name the person responsible for maintaining the marketing activities scope, identifying them as an individual
+  rather than a team or department.
+- Cross-reference each listed channel to supporting evidence, such as campaign logs, platform dashboards,
+  or contracts with third-party ad platforms.
+- Review the scope document at least annually, recording the review date and the reviewer’s name or signature.

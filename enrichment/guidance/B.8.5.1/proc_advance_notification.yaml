@@ -1,0 +1,17 @@
+must_id: item:B.8.5.1:proc_advance_notification
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+must_text: Advance notification of changes with agreed timeframe (customer can object / terminate)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for notifying customers of cross-jurisdiction data transfers, including required
+  advance notice periods and objection/termination rights.
+- Name a specific individual responsible for sending notifications to customers, avoiding generic roles
+  like "the team" or "compliance."
+- Record each notification sent, including the date, recipient, summary of the change, and the agreed
+  notice period.
+- Retain written customer responses to notifications, showing whether they objected, accepted, or chose
+  to terminate the agreement.

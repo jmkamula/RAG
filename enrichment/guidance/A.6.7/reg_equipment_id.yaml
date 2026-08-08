@@ -1,0 +1,19 @@
+must_id: item:A.6.7:reg_equipment_id
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Per-row issued-equipment identifier (links to A.5.9 asset register; if BYOD, MDM-enrolment
+  id)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique equipment identifier for each remote worker in the register, matching the identifier
+  used in the asset register for issued devices.
+- Cross-reference each equipment identifier with the corresponding entry in the asset register to confirm
+  linkage and traceability.
+- Enter the mobile device management (MDM) enrolment ID for any bring-your-own-device (BYOD) listed, instead
+  of an asset register ID.
+- Name the owner of each equipment entry as a specific individual, not a team or department, to avoid
+  ambiguity.
+- Date each register entry to show when the equipment was assigned or BYOD status was verified.

@@ -1,0 +1,18 @@
+must_id: item:7.4:scope_mandated_voluntary
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: Mandated vs voluntary split (regulatory deadlines vs internal preference)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all required information security communications, specifying whether each is mandated by law, regulation,
+  or contract, or is voluntary/internal.
+- Document the regulatory or contractual source and any associated deadlines for each mandated communication
+  in a dated register.
+- State the rationale for each voluntary communication, linking it to internal policy or risk assessment,
+  and record the decision date.
+- Name the responsible individual for each communication, avoiding generic titles like "the team" or "management."
+- Cross-reference each communication entry to supporting evidence, such as policy documents, regulatory
+  notices, or meeting minutes.

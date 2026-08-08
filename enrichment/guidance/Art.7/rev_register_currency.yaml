@@ -1,0 +1,15 @@
+must_id: item:Art.7:rev_register_currency
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Register currency check — consent events for all in-scope activities are landing in the register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the list of all in-scope data processing activities with the consent register to confirm
+  each activity has corresponding consent events recorded.
+- Document the date of the most recent consent event for each in-scope activity in the register.
+- Assign a named individual to review the consent register at least quarterly and record the review date
+  and findings.
+- Name the owner of the consent register as a specific person, not a team or department.

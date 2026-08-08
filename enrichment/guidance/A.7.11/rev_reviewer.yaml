@@ -1,0 +1,16 @@
+must_id: item:A.7.11:rev_reviewer
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Facilities + InfoSec + BCP lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Facilities, Information Security, and Business Continuity leads responsible for the review
+  as specific individuals, not as teams or departments.
+- Record the date each reviewer completed their section of the periodic utilities program review in the
+  official review log.
+- Document each reviewer's comments, findings, and sign-off in the review report, ensuring each section
+  is clearly attributed to the named individual.
+- Retain the final, fully signed review document with all reviewer names and dates for audit reference.

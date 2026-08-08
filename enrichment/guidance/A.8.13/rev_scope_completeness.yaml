@@ -1,0 +1,19 @@
+must_id: item:A.8.13:rev_scope_completeness
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Scope-completeness check (new in-scope system covered)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems currently in scope for backup, including any new systems added since the last review,
+  in a dated inventory document.
+- Cross-reference each in-scope system against the backup program documentation to confirm inclusion and
+  coverage.
+- Record the date and outcome of the most recent backup program review, specifically noting any new systems
+  and their backup status.
+- Name the reviewer as a specific individual responsible for confirming scope completeness, not a team
+  or department.
+- Retain evidence of any updates made to the backup program as a result of the review, such as revised
+  schedules or procedures.

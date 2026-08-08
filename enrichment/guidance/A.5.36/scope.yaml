@@ -1,0 +1,18 @@
+must_id: item:A.5.36:scope
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Scope of this cycle (which policies / rules / standards were reviewed — typically a slice of
+  the full catalogue if rotated across cycles)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each policy, rule, and standard included in the current review cycle by title and unique identifier
+  in a dated review log.
+- Cross-reference the reviewed items against your full policy catalogue to show which documents were in
+  scope and which were deferred.
+- Name the specific individual who determined the scope for this cycle, avoiding generic labels like "the
+  team" or "management".
+- Attach a copy or extract of the policy catalogue as it existed at the start of the review cycle to evidence
+  completeness.

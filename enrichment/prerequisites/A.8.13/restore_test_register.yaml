@@ -1,0 +1,39 @@
+leaf_id: req:A.8.13:restore_test_register
+control_ref: A.8.13
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, data, and processes are in-scope for restore testing. This
+    ensures the register only tracks relevant restore tests.
+  good_enough: A documented scope statement that clearly identifies the systems and data included in the
+    ISMS, even if some boundaries are still being refined.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You must know what assets exist and are subject to backup and restore, so you can accurately
+    record what was restored in each test.
+  good_enough: A basic, up-to-date asset inventory listing key information assets, even if some details
+    are pending.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of who is responsible for conducting, verifying, and recording restore tests
+    is needed to ensure register entries are accurate and complete.
+  good_enough: A simple roles matrix or documented assignment showing who is responsible for restore testing
+    and register maintenance.
+- ref: A.8.12
+  standard_id: ISO27001:2022
+  title: Data Backup
+  category: direct
+  rationale: Restore tests can only be performed if backup procedures are defined and operational. The
+    register depends on knowing what backups exist and how they are managed.
+  good_enough: Documented backup procedures and evidence that backups are being taken, even if not fully
+    optimized yet.

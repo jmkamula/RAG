@@ -1,0 +1,18 @@
+must_id: item:A.8.10:scope_classes
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Information classes enumerated with retention trigger source per class (cross-link to A.5.33)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all information classes handled by your organisation in a table, using clear, specific names for
+  each class.
+- Identify and record the retention trigger source for each information class, such as a legal requirement,
+  contract clause, or internal policy.
+- Cross-reference each information class to its corresponding retention rule or policy as defined under
+  A.5.33, including document titles and version numbers.
+- Name the person responsible for maintaining the deletion scope and retention mapping, using a specific
+  individual’s name rather than a team or department.
+- Date and approve the completed deletion scope document, capturing the approver’s name and signature.

@@ -1,0 +1,17 @@
+must_id: item:A.7.4.5:reg_action_id
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: Unique action identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique action identifier to each row in the End-of-Processing Action Register, using a sequential
+  or non-repeating format.
+- Record the assigned identifier alongside the corresponding action details, ensuring no two actions share
+  the same identifier.
+- Cross-reference each identifier with related documentation or evidence, such as completion records or
+  approvals, to support traceability.
+- Name the register owner as a specific individual responsible for maintaining identifier uniqueness,
+  not as a team or department.

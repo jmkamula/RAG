@@ -1,0 +1,19 @@
+must_id: item:A.5.23:reg_subprocessors
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Disclosed sub-processors per service tracked
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all cloud services in use, including the service name, provider, and a unique identifier, in a
+  central Cloud Service Register.
+- Record each disclosed sub-processor for every cloud service, including the sub-processor’s legal name
+  and the date disclosure was last updated.
+- Cross-reference each sub-processor entry with the relevant provider’s official documentation or contract
+  section that lists sub-processors.
+- Name the person responsible for maintaining sub-processor records as a specific individual, not a team
+  or department.
+- Retain previous versions of the register to show historical changes to sub-processor disclosures, with
+  dates of each update.

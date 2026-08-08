@@ -1,0 +1,16 @@
+must_id: item:A.5.22:chg_escalation
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Escalation criteria for findings — when a finding terminates the relationship
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define clear, written escalation criteria that specify the types and severity of findings that trigger
+  contract termination with a supplier.
+- Document each supplier service change finding in the Response Log, including the date, description,
+  and escalation status.
+- Name the individual responsible for making termination decisions in the log—do not list a team or department.
+- Record the final decision and termination date, signed by the responsible individual, for each escalated
+  finding that results in ending the relationship.

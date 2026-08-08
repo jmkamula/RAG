@@ -1,0 +1,15 @@
+must_id: item:Art.16:rev_date
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the rectification program in a dated log or review report.
+- Cross-reference the recorded review date with the planned review interval documented in your compliance
+  schedule.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Retain evidence of any actions taken or decisions made during the review, such as meeting minutes or
+  signed approvals.

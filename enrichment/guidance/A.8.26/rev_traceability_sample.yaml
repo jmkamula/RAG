@@ -1,0 +1,19 @@
+must_id: item:A.8.26:rev_traceability_sample
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Sample-based traceability verification (requirements → test cases mapping intact)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for maintaining the application security requirements-to-test-cases mapping
+  in a dated record.
+- Document a sample set of security requirements and their corresponding test cases, showing clear traceability
+  links for each.
+- Record the date and outcome of the most recent periodic review verifying that all sampled requirements
+  still map to current test cases.
+- Attach evidence of any updates made to test cases or requirements as a result of the review, including
+  who approved the changes.
+- Specify individual owners for each requirement and test case mapping—do not list groups or teams as
+  owners.

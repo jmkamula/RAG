@@ -1,0 +1,20 @@
+must_id: item:10.2:rev_isms_change_pattern
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: ISMS-change pattern check — high-volume NC areas drove 6.3 ISMS changes where systemic causes
+  warranted it
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and list all high-volume nonconformance areas from the NC/CA program review, including dates
+  and responsible individuals.
+- Document each ISMS change initiated under clause 6.3, linking it directly to the related systemic cause
+  from the NC/CA findings.
+- Record the rationale for each ISMS change, explicitly stating how the systemic cause justified the change,
+  with references to supporting evidence.
+- Name the decision-maker who approved each ISMS change, ensuring a specific individual is listed rather
+  than a group or department.
+- Retain meeting minutes or formal records showing discussion and approval of ISMS changes in response
+  to high-volume nonconformance areas.

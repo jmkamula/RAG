@@ -1,0 +1,18 @@
+must_id: item:A.8.24:reg_rotation_status
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Per-row rotation-status flag (overdue / within-window / not-due)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to your cryptographic key register that clearly shows the rotation status for each key
+  as "overdue", "within-window", or "not-due".
+- Record the last rotation date and the next scheduled rotation date for each key in the register.
+- Name the person responsible for updating rotation status for each key, using a specific individual's
+  name rather than a team or department.
+- Review and update the rotation status flag after every key rotation event, capturing the date of the
+  update in the register.
+- Retain historical rotation status changes for each key to provide an audit trail of compliance over
+  time.

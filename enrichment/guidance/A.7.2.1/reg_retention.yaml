@@ -1,0 +1,18 @@
+must_id: item:A.7.2.1:reg_retention
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Retention period per purpose
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing purpose in the PII Processing Purpose Register with a clear, specific description
+  and a unique identifier.
+- Record the retention period for each processing purpose, stating the exact duration or review interval
+  in years, months, or days.
+- Cite the legal, regulatory, or business reason that justifies each retention period, referencing the
+  relevant law, contract, or policy.
+- Name the person responsible for reviewing and updating retention periods, using a specific individual’s
+  name, not a role or team.
+- Date each entry and update in the register to show when the retention period was last reviewed or changed.

@@ -1,0 +1,17 @@
+must_id: item:A.7.14:scope
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Scope (all equipment containing any form of storage media — laptops, servers, phones, printers/MFDs
+  with storage, network gear)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of equipment with storage media in the procedure, including laptops, servers, phones,
+  printers/MFDs, and network devices.
+- State explicitly that the procedure applies to every item containing any form of storage media, regardless
+  of device type or location.
+- Name the procedure owner as a specific individual, not a team or department, to ensure clear accountability.
+- Date the most recent review or approval of the procedure and include the approver’s name for traceability.
+- Cross-reference the inventory register to confirm all in-scope equipment types are covered by the procedure.

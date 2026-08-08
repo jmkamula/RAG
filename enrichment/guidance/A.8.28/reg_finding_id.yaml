@@ -1,0 +1,13 @@
+must_id: item:A.8.28:reg_finding_id
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Per-finding unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each secure coding finding at the time it is logged in the register.
+- Record the unique identifier alongside the finding description and date in the register entry.
+- Cross-reference the unique identifier in all related remediation or status update records for the finding.
+- Avoid using duplicate or recycled identifiers—each finding must have its own distinct code.

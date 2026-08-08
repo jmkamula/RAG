@@ -1,0 +1,18 @@
+must_id: item:B.8.2.1:proc_customer_dpia_support
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+must_text: Art.35.1 DPIA support pathway — how customer requests DPIA-input from processor
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step procedure describing how customers can request input or support for a Data Protection
+  Impact Assessment (DPIA) from your organization.
+- Name a specific contact person or role responsible for receiving and responding to DPIA support requests
+  from customers.
+- Record each DPIA support request and your organization’s response in a dated log or ticketing system.
+- Attach a copy of the most recent DPIA support request and your documented response as evidence of following
+  the procedure.
+- Specify that generic contact details or references to “the team” are not acceptable; use a named individual
+  or defined role.

@@ -1,0 +1,18 @@
+must_id: item:A.5.35:sch_change_triggers
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Ad-hoc change triggers documented (M&A, major architectural shift, regulatory upheaval, major
+  breach) — fires reviews outside the planned cadence
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific ad-hoc change triggers in the Independent Review Schedule Register, such as mergers, major
+  system changes, regulatory updates, or significant breaches.
+- Record the date each ad-hoc trigger was identified and the corresponding decision to initiate an out-of-cycle
+  review.
+- Name the individual responsible for recognizing and documenting each trigger, avoiding generic roles
+  like "the team" or "IT department".
+- Attach supporting evidence, such as board minutes or incident reports, that confirm the occurrence of
+  each listed trigger.

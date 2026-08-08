@@ -1,0 +1,15 @@
+must_id: item:A.5.20:cov_owner
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Named owner accountable for the agreement (typically procurement or legal partner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner accountable for each supplier agreement, avoiding generic titles
+  like "the team" or "procurement department".
+- Record the owner's full name and job title next to each supplier agreement entry in the Supplier Agreement
+  Coverage Register.
+- Document the date when the owner was assigned responsibility for each agreement in the register.
+- Review and update the register at least annually to confirm the named owner is still current and accurate.

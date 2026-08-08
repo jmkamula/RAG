@@ -1,0 +1,19 @@
+must_id: item:A.7.4.1:rev_default_state_audit
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Default-state audit — optional fields default off across surfaces
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the default settings for all optional data collection fields, showing that each is set to "off"
+  or "disabled" by default.
+- Capture dated screenshots or configuration logs from each user interface or data intake system, demonstrating
+  that optional fields are not pre-selected.
+- Name the person responsible for reviewing and approving default-state configurations, listing them as
+  a specific individual rather than a team or department.
+- Record the most recent review date and outcome of the default-state audit in a formal register or tracking
+  document.
+- Retain evidence of any changes to default settings, including who authorized the change and the justification
+  provided.

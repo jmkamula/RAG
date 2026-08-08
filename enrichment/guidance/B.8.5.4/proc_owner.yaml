@@ -1,0 +1,14 @@
+must_id: item:B.8.5.4:proc_owner
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+must_text: Named owner (Legal + DPO)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the disclosure request notification procedure as a specific individual from Legal
+  and a specific individual from the Data Protection Office.
+- Document the full names, titles, and contact details of both owners within the procedure document.
+- Record the date when ownership was last reviewed or updated in the procedure documentation.
+- Retain evidence of approval or sign-off from both named owners, such as signatures or confirmation emails.

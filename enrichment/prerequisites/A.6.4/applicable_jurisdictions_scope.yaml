@@ -1,0 +1,40 @@
+leaf_id: req:A.6.4:applicable_jurisdictions_scope
+control_ref: A.6.4
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the overall boundaries of your ISMS before defining which jurisdictions
+    and worker categories are in scope for this procedure. The ISMS scope sets the baseline for what locations,
+    entities, and activities are covered.
+  good_enough: A clear, documented ISMS scope that identifies the organizational units, locations, and
+    activities included is available and up to date.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Understanding who is responsible for employment and contractor management is essential to
+    accurately map which worker categories are affected by jurisdictional requirements.
+  good_enough: A basic roles and responsibilities matrix exists, showing who manages employees, contractors,
+    and related HR processes.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment helps identify which jurisdictions and worker categories present unique
+    risks or require special handling, informing the scope of the procedure.
+  good_enough: A recent risk assessment has been performed that at least flags jurisdictional and worker-type
+    risks relevant to employment practices.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Knowing where assets (including people and locations) are situated helps determine which
+    jurisdictions and worker types are actually present and need to be covered.
+  good_enough: An asset register exists that includes locations and key personnel categories, even if
+    not fully detailed for every asset.

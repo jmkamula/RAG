@@ -1,0 +1,20 @@
+must_id: item:A.5.29:rev_fallback_validity
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: 'Fallback-validity check (sample of fallbacks re-validated: would they actually work? are dependencies
+  still in place? are owners still in role?)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a representative sample of fallback procedures from your continuity-security program and list
+  them by name and version in a dated review log.
+- Assign a named individual to re-validate each selected fallback, confirming in writing that dependencies,
+  contacts, and technical steps are still current.
+- Record the results of each re-validation, noting any failures, outdated dependencies, or required updates,
+  with the date and reviewer’s signature.
+- Name the fallback owner as a specific person for each procedure—avoid listing only a team or department
+  as responsible.
+- Document any corrective actions taken for fallbacks that failed re-validation, including the date completed
+  and the person who approved the fix.

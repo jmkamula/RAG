@@ -1,0 +1,39 @@
+leaf_id: req:7.3:awareness_program_review
+control_ref: '7.3'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The awareness program must align with the defined scope of the ISMS to ensure all relevant
+    people, processes, and assets are covered in the review.
+  good_enough: A documented and approved ISMS scope statement exists, clearly identifying the boundaries
+    and applicability of the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The awareness program content and review criteria must reflect the current information security
+    policy, as this sets the direction and expectations for security behaviors.
+  good_enough: A current, approved information security policy is available and communicated to relevant
+    staff.
+- ref: '7.2'
+  standard_id: ISO27001:2022
+  title: Competence
+  category: direct
+  rationale: Competence requirements determine what knowledge and skills staff need, directly shaping
+    the awareness program’s objectives and review benchmarks.
+  good_enough: Competence requirements for relevant roles are defined and documented, even if not fully
+    assessed yet.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that the right audience is targeted
+    and accountable for awareness activities, which is essential for a meaningful review.
+  good_enough: A list of information security roles and their responsibilities is documented and up to
+    date.

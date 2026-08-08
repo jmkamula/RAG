@@ -1,0 +1,20 @@
+must_id: item:A.5.18:emergency_access
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Emergency-access ('break-glass') procedure stated separately (pre-approved accounts with mandatory
+  post-use justification + audit)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the emergency-access procedure in a separate, clearly labeled section within the Access Rights
+  Management Procedure document.
+- Name all pre-approved emergency-access accounts, including unique identifiers and assigned individuals,
+  in a dated and version-controlled list.
+- Require mandatory written justification for each use of emergency access, recorded in an auditable log
+  with user, date, and reason.
+- Document the process for immediate post-use review of emergency access events, including the name of
+  the reviewer and the review date.
+- Avoid grouping emergency access with standard access procedures; auditors will flag if the process is
+  not distinctly separated.

@@ -1,0 +1,19 @@
+must_id: item:Art.16:supplementary_statement
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Mechanism for supplementary statement when correction is contested
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for individuals to submit a supplementary statement if they dispute the accuracy
+  of their personal data after a correction request.
+- Assign a named staff member responsible for receiving, reviewing, and attaching supplementary statements
+  to the relevant data records.
+- Record each supplementary statement with the date received, the individual’s details, and the contested
+  data entry in a central log.
+- Retain copies of all supplementary statements alongside the original data, ensuring both are accessible
+  for future reference and audit.
+- Specify that the mechanism does not rely on verbal agreements or undocumented discussions—written records
+  must be maintained.

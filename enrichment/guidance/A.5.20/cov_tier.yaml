@@ -1,0 +1,18 @@
+must_id: item:A.5.20:cov_tier
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Supplier tier per row (drives which clause variant is required)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each supplier in the register with a unique row, including their full legal name and a clear description
+  of the service provided.
+- Assign a specific supplier tier to every row, using a defined tiering scheme documented elsewhere in
+  your supplier management process.
+- Cross-reference each supplier’s tier to the relevant agreement clause variant required, ensuring the
+  clause matches the assigned tier.
+- Record the date and name of the person who last updated the supplier tier, so changes are traceable
+  to a specific individual.
+- Name the supplier tier owner as a specific person, not a team or department, to avoid ambiguity in responsibility.

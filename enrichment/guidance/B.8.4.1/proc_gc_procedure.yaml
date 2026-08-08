@@ -1,0 +1,19 @@
+must_id: item:B.8.4.1:proc_gc_procedure
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+must_text: Garbage collection procedure identifying unused files + last-use timestamp
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a written procedure that describes how temporary processor files are identified as unused and
+  scheduled for disposal.
+- Record the last-use timestamp for each temporary file in a log or tracking system, including file name
+  and location.
+- Assign responsibility for running the garbage collection process to a named individual, not a generic
+  team or department.
+- Retain evidence of each garbage collection run, including date, files deleted, and the person who performed
+  the deletion.
+- State in the procedure how often garbage collection is performed and reference where the schedule is
+  maintained.

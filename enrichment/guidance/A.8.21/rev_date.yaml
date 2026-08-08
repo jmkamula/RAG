@@ -1,0 +1,15 @@
+must_id: item:A.8.21:rev_date
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval (≤180 days)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of each Network Services Program review in a central log, showing the exact day the
+  review was completed.
+- Name the reviewer as a specific individual, not a team or department, in the review documentation.
+- Cross-reference the review date with the planned review schedule to confirm the interval does not exceed
+  180 days.
+- Retain a signed or digitally approved record of the review outcome, including any actions or findings.

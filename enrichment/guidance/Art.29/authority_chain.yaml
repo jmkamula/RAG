@@ -1,0 +1,19 @@
+must_id: item:Art.29:authority_chain
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Authority chain — every person touching personal data covered by an authorisation traceable
+  to the controller's instruction
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the controller’s written instruction authorising data processing, including date and name of
+  the individual granting authorisation.
+- List each person with access to personal data, linking them to the specific controller instruction that
+  authorises their processing activities.
+- Name the owner of the authorisation register as a specific individual, not a team or department.
+- Retain signed acknowledgements from each authorised individual confirming they have received and understood
+  the controller’s instruction.
+- Cross-reference the authorisation records with current staff access lists to confirm only authorised
+  individuals handle personal data.

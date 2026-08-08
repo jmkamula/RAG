@@ -1,0 +1,13 @@
+must_id: item:A.5.14:approval_date
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Approval date recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the approval date of the Information Transfer Policy in the policy document itself.
+- Name the approving manager as a specific individual, not a group or department.
+- Retain a signed or digitally approved copy of the policy showing the approval date.
+- Cross-reference the approval date in your policy register or document control log.

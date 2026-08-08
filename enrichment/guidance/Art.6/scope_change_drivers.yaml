@@ -1,0 +1,18 @@
+must_id: item:Art.6:scope_change_drivers
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Trigger list for re-scoping (new activity launch, new Member State, regulator guidance)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current data processing activities in a dated register, including their purpose and legal basis
+  under Article 6.
+- Document a trigger list that specifies events requiring re-scoping, such as launching a new processing
+  activity, entering a new country, or new regulator guidance.
+- Assign a named individual responsible for monitoring for trigger events and updating the processing
+  activities register.
+- Record each time the trigger list is reviewed or updated, including the review date and the person who
+  completed the review.
+- Name the owner as a specific person, not a group or department, to avoid ambiguity about accountability.

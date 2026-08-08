@@ -1,0 +1,39 @@
+leaf_id: req:A.6.5:leaver_briefing_register
+control_ref: A.6.5
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organization, roles, and processes are covered by the
+    ISMS to ensure the leaver briefing register includes all relevant leavers and role changes.
+  good_enough: A documented scope that clearly identifies the business units, functions, and personnel
+    types included in the ISMS.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear definition of roles and responsibilities ensures you know who is considered a 'leaver'
+    or subject to role change, and who is responsible for conducting and recording briefings.
+  good_enough: A current list of roles and their information security responsibilities, including who
+    manages onboarding and offboarding.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: Understanding which assets (including information and access rights) are tied to each leaver
+    is critical for meaningful exit briefings and acknowledgment of ongoing obligations.
+  good_enough: A basic asset register that links users to key assets and access rights, even if not fully
+    exhaustive.
+- ref: A.6.5
+  standard_id: ISO27001:2022
+  title: Responsibilities after termination or change of employment
+  category: direct
+  rationale: You need a clear policy or procedure describing what obligations survive after employment
+    ends or changes, so the register can track acknowledgment of these obligations.
+  good_enough: A documented summary of post-employment obligations and a simple process for communicating
+    them to leavers.

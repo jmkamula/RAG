@@ -1,0 +1,17 @@
+must_id: item:A.5.26:investigation
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Investigation steps defined (root cause analysis, timeline reconstruction)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document step-by-step instructions for conducting root cause analysis, including data collection, analysis
+  techniques, and reporting requirements, in the incident response procedure.
+- Specify how to reconstruct the incident timeline, listing required sources such as logs, interviews,
+  and system records, with clear responsibilities assigned.
+- Name the owner of the investigation process as a specific individual, not a team or department, in the
+  procedure documentation.
+- Record the date of the latest procedure review and update, ensuring the investigation steps reflect
+  current practices and lessons learned.

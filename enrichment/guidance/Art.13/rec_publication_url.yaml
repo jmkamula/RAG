@@ -1,0 +1,14 @@
+must_id: item:Art.13:rec_publication_url
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Per-row publication location (URL, app screen, signup flow)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each privacy notice in a register, including the exact location where it is published, such as
+  a URL, app screen, or signup flow.
+- Record the date each privacy notice was published or last updated at its listed location.
+- Name the person responsible for maintaining the accuracy of each publication location entry.
+- Specify the publication location precisely—do not use vague descriptions like "on website" or "in app".

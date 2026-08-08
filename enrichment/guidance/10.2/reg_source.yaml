@@ -1,0 +1,17 @@
+must_id: item:10.2:reg_source
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Per-row source (9.2 internal audit, surveillance audit, incident lesson, regulator finding,
+  party complaint)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the source of each nonconformity in the register, specifying whether it came from an internal
+  audit, external audit, incident, regulator, or complaint.
+- Cross-reference the source entry to a dated document or report, such as an audit report ID or incident
+  reference number.
+- Name the individual who identified or reported the nonconformity, not just a team or department.
+- Avoid using generic terms like "review" or "assessment" as the source; specify the exact process or
+  event that triggered the entry.

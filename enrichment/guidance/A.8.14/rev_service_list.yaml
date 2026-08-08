@@ -1,0 +1,17 @@
+must_id: item:A.8.14:rev_service_list
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Critical-service list re-confirmed (new service in scope; retired service removed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current critical services in a dated inventory, including any new services added since the
+  last review.
+- Remove any services from the inventory that have been retired, and record the date and reason for removal.
+- Confirm the updated critical-service list is reviewed and signed off by a named responsible manager.
+- Name the owner as a specific individual responsible for maintaining the critical-service list, not a
+  generic team or department.
+- Retain the previous and current versions of the critical-service list to show changes made during the
+  review.

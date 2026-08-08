@@ -1,0 +1,17 @@
+must_id: item:5.1:rea_activity_evidence
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Evidence packet for the period (board minutes excerpt, sponsor signoffs, mgmt review attendance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and attendees of each management review meeting where leadership reaffirmed commitment
+  to the information security management system.
+- Attach a signed statement or meeting minute excerpt from a senior leader explicitly reaffirming ongoing
+  support for information security policies and objectives.
+- Name the accountable executive sponsor as a specific individual, not as a group or department, in the
+  reaffirmation documentation.
+- Retain copies of all relevant board minutes, signoff sheets, and attendance records for each reaffirmation
+  event within the audit period.

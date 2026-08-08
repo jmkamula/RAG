@@ -1,0 +1,33 @@
+leaf_id: req:A.5.2:communication_record
+control_ref: A.5.2
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organization and which activities are covered by the
+    ISMS before you can communicate roles and responsibilities. The scope defines the boundaries for who
+    needs to be informed.
+  good_enough: A documented scope statement that clearly identifies the organizational units, processes,
+    and assets included in the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the overall direction and expectations for information security, which roles
+    and responsibilities must align with. Communication of roles is only meaningful if the policy context
+    is clear.
+  good_enough: A formally approved and published information security policy that is accessible to relevant
+    staff.
+- ref: A.5.3
+  standard_id: ISO27001:2022
+  title: Segregation of Duties
+  category: direct
+  rationale: Understanding how duties are segregated helps clarify which roles have which responsibilities,
+    ensuring communications are accurate and complete.
+  good_enough: A basic mapping or documented approach showing how key duties are separated among roles,
+    even if not fully implemented yet.

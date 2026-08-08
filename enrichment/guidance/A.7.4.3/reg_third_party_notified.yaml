@@ -1,0 +1,19 @@
+must_id: item:A.7.4.3:reg_third_party_notified
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: Third-party notification flag if A.7.3.7 fired
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each accuracy incident with a unique identifier, date, and description in the Accuracy Incident
+  Register.
+- State clearly in the register whether third-party notification is required for each incident, referencing
+  the trigger from control A.7.3.7.
+- Name the person responsible for assessing and recording the third-party notification flag for every
+  incident entry.
+- Attach supporting evidence, such as notification emails or correspondence, when the third-party notification
+  flag is set to "Yes".
+- Specify the downstream third parties notified, avoiding vague entries like "partners" or "external parties"—list
+  each organisation by name.

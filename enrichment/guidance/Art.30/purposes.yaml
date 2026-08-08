@@ -1,0 +1,17 @@
+must_id: item:Art.30:purposes
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Purposes of the processing stated per activity
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity separately in your Records of Processing Activities, using a clear and
+  specific title for each.
+- State the exact purpose for each processing activity, using language tailored to your organisation’s
+  actual use, not generic or boilerplate text.
+- Record the date when each purpose statement was last reviewed or updated, and name the person responsible
+  for the review.
+- Cross-reference each purpose statement to the relevant lawful basis documented elsewhere, ensuring consistency
+  between records.

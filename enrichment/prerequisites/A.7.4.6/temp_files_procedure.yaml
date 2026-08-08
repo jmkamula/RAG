@@ -1,0 +1,50 @@
+leaf_id: req:A.7.4.6:temp_files_procedure
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, processes, and data types are in-scope for your ISMS and
+    privacy extension before defining how temporary files are handled. This ensures the procedure covers
+    all relevant PII processing activities.
+  good_enough: A clear, documented scope that identifies the business units, systems, and data flows where
+    PII is processed or stored.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is essential to identify where temporary files may be created
+    and stored, including servers, endpoints, and cloud services. Without this, you can't reliably define
+    disposal procedures.
+  good_enough: A basic inventory listing key systems and storage locations where PII and related temporary
+    files are processed or stored.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: You must know how PII and associated temporary files are classified to determine appropriate
+    disposal timelines and methods. The classification scheme guides what is considered sensitive and
+    the required handling.
+  good_enough: A documented scheme that distinguishes PII from non-PII and indicates required protection
+    levels for each class.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Knowing the purpose for which PII is processed helps define when temporary files are no longer
+    needed and can be disposed of. This underpins the retention and disposal logic in your procedure.
+  good_enough: A summary of processing purposes for each major PII data flow, even if not fully granular,
+    to inform retention decisions.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for PII processing is necessary to justify retention periods
+    and disposal practices for temporary files, ensuring compliance with privacy obligations.
+  good_enough: A list of lawful bases mapped to each processing activity, sufficient to justify why and
+    how long temporary files are retained.

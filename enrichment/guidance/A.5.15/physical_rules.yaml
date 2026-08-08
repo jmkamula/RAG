@@ -1,0 +1,17 @@
+must_id: item:A.5.15:physical_rules
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Physical access rules (premises, server rooms, restricted areas)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the physical areas covered by access control, such as premises, server rooms, and restricted
+  zones, in the Access Control Policy with clear descriptions.
+- Name the person responsible for approving and reviewing physical access rights, listing them as a specific
+  individual rather than a group or department.
+- State the rules for granting, reviewing, and revoking physical access, including how and when access
+  reviews will occur, with version-controlled policy updates.
+- Record the date the Access Control Policy was last reviewed and approved, including the approver’s name
+  and signature.

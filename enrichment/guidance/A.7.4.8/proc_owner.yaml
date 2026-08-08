@@ -1,0 +1,16 @@
+must_id: item:A.7.4.8:proc_owner
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Named owner (Infrastructure + DPO)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the PII Disposal Procedure as a specific individual from Infrastructure and the Data
+  Protection Officer, not a generic team or title.
+- Record the full names and job titles of both owners in the header or ownership section of the procedure
+  document.
+- Date the most recent owner assignment and keep a copy of the signed or approved procedure showing both
+  owners' acknowledgment.
+- Cross-reference the named owners in your compliance or policy register to match the procedure document.

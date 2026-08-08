@@ -1,0 +1,17 @@
+must_id: item:Art.7:scope_consent_activities
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Activities using consent as the lawful basis enumerated (drawn from the Art.6 lawful basis
+  register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all processing activities where consent is the lawful basis, referencing each activity's entry
+  in the Article 6 lawful basis register.
+- Document the specific purpose for each consent-based activity, ensuring descriptions are clear and tailored
+  to your organisation.
+- Name the individual responsible for maintaining the consent activities list, avoiding generic roles
+  like "the team" or "compliance department".
+- Record the date when the consent activities scope was last reviewed and updated.

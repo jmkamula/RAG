@@ -1,0 +1,16 @@
+must_id: item:A.6.3:training_records
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Training records maintained (who completed what, when) for audit and the completion register
+  leaf
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each employee’s full name, training module completed, and completion date in a central training
+  register.
+- Retain copies of completion certificates or digital confirmations for each training session, linked
+  to the individual’s training record.
+- Update the training register immediately after each session; do not rely on memory or informal lists.
+- Name the training register owner as a specific individual responsible for its accuracy and updates.

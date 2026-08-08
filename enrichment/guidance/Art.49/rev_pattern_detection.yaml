@@ -1,0 +1,19 @@
+must_id: item:Art.49:rev_pattern_detection
+control_ref: Art.49
+standard_id: GDPR:2016/679
+must_text: Pattern detection — recurring derogation use for same recipient/purpose flagged for Art.46
+  migration
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each instance where a derogation under Article 49 is used, including the recipient, purpose,
+  and date, in a central register.
+- Review the register quarterly to identify any recipients or purposes that appear more than once within
+  a 12-month period.
+- Flag recurring derogation use for the same recipient or purpose and record the decision to initiate
+  assessment for Article 46 safeguards.
+- Name the reviewer responsible for this analysis as a specific individual, not a group or department.
+- Retain evidence of the review, such as a dated summary or meeting minutes, showing detection and follow-up
+  actions.

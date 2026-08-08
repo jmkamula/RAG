@@ -1,0 +1,18 @@
+must_id: item:A.5.5:escalation_criteria
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Engagement criteria per authority (incident classes, regulatory deadlines that require contact)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each authority with a clear description of the types of incidents that require engagement, referencing
+  relevant laws or regulations where possible.
+- Document specific regulatory deadlines for notifying each authority, including the timeframes and triggering
+  events.
+- Name the individual responsible for maintaining the register and updating engagement criteria, ensuring
+  a named person is listed, not a team or department.
+- Record the date of the last review and update of the engagement criteria for each authority in the register.
+- Attach or cross-reference supporting documentation, such as regulatory guidance or correspondence, that
+  confirms the stated engagement criteria and deadlines.

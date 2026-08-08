@@ -1,0 +1,19 @@
+must_id: item:A.7.13:authorised_providers
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Authorised maintenance providers list with security expectations
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all authorised equipment maintenance providers by legal business name and contact details in a
+  dated, version-controlled document.
+- State the specific security expectations or requirements each provider must meet, such as background
+  checks or data handling protocols, in the same document.
+- Name the person responsible for approving and updating the authorised providers list, ensuring this
+  is a specific individual, not a team or department.
+- Retain signed approval from management for the current version of the authorised providers list and
+  associated security expectations.
+- Review and update the authorised providers list at least annually, recording the review date and reviewer’s
+  name each time.

@@ -1,0 +1,19 @@
+must_id: item:A.5.13:rev_coverage_trend
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Coverage-trend analysis (per-system coverage % delta since last review; investigate any drop)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the percentage of systems covered by the labelling program at the current and previous review
+  dates in a dated review log.
+- Calculate and document the change in coverage percentage for each system since the last review, noting
+  any increases or decreases.
+- Investigate and write a brief explanation for any system where coverage percentage has dropped, including
+  the reason and any corrective actions taken.
+- Name the reviewer responsible for the analysis as a specific individual, not as a team or department,
+  in the review record.
+- Attach supporting evidence, such as system inventories or labelling reports, to substantiate the calculated
+  coverage percentages.

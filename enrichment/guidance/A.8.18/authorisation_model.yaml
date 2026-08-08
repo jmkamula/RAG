@@ -1,0 +1,17 @@
+must_id: item:A.8.18:authorisation_model
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Authorisation model — who can approve use per utility class (InfoSec + system owner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy that both the Information Security Manager and the relevant system owner must approve
+  use of each privileged utility program class.
+- Name the Information Security Manager and each system owner as specific individuals, not generic roles
+  or teams, in the policy’s authorisation section.
+- Record the date and version of the policy document to show when the authorisation model was last reviewed
+  and approved.
+- Attach a signed approval page showing both the Information Security Manager and each system owner have
+  formally agreed to the policy’s authorisation model.

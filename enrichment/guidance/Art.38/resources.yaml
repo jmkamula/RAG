@@ -1,0 +1,18 @@
+must_id: item:Art.38:resources
+control_ref: Art.38
+standard_id: GDPR:2016/679
+must_text: Resources provided to DPO (budget + staff support + system access + training time per Art.38.2)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the DPO’s annual budget allocation, including amounts for staff support, system access, and
+  training, in a dated and approved budget record.
+- Name the individuals assigned to support the DPO, listing their roles and responsibilities in a formally
+  approved organisational chart.
+- Record the DPO’s access rights to all relevant systems in an access control log, including the date
+  access was granted and by whom.
+- Log all training hours allocated and completed by the DPO in a dated training register, referencing
+  specific training topics and providers.
+- Name the DPO as a specific individual in all records—do not use generic titles or refer to a department.

@@ -1,0 +1,16 @@
+must_id: item:A.8.29:reg_gate
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Per-test lifecycle gate (where in lifecycle this test ran)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific lifecycle phase (e.g., design, development, pre-production, production) for each
+  security test entry in the register.
+- Name the individual responsible for confirming the lifecycle phase for each test, ensuring this is not
+  left blank or listed as a team.
+- Date each test entry to show when the test was conducted relative to the project timeline.
+- Cross-reference each test with related project documentation that defines lifecycle phases, such as
+  project plans or development schedules.

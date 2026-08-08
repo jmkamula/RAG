@@ -1,0 +1,17 @@
+must_id: item:A.7.4.1:reg_collection_mode
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Collection mode per row (direct form / cookie / weblog / API integration / third-party enrichment)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each data field collected in your inventory, specifying the exact method used for collection per
+  field (e.g., form, cookie, API).
+- Record the source system or platform for each field, using a named application or service, not a generic
+  label like "website".
+- Assign a responsible individual for maintaining the accuracy of collection mode entries, naming a specific
+  person rather than a team.
+- Date each update to the inventory, keeping a visible change log for when collection modes are added
+  or modified.

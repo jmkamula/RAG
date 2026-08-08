@@ -1,0 +1,17 @@
+must_id: item:A.7.9:return_procedures
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Return procedures and post-return inspection (tamper-check, integrity verification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step procedure for returning off-premises assets, including required forms, responsible
+  persons, and timelines.
+- Assign a named individual to perform and record a tamper-evidence check and integrity verification upon
+  asset return.
+- Record the results of each post-return inspection in a dated log, including any discrepancies or damage
+  found.
+- Require the inspector to sign and date the completed inspection record for each returned asset.
+- Name the asset return process owner as a specific person, not a generic role or team.

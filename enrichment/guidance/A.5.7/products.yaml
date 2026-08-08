@@ -1,0 +1,18 @@
+must_id: item:A.5.7:products
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Intelligence products defined per layer (IOC lists, TTP signatures, threat briefings, sector
+  advisories)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the types of intelligence products delivered at each layer, such as IOC lists, TTP signatures,
+  threat briefings, and sector advisories, in the procedure.
+- Assign a named individual responsible for maintaining and updating the list of intelligence products,
+  avoiding generic roles like "the security team."
+- Record the publication date and version number of the procedure to show when intelligence product definitions
+  were last reviewed or updated.
+- Cross-reference each intelligence product type to its intended audience or use case within the procedure
+  to demonstrate tailored delivery.

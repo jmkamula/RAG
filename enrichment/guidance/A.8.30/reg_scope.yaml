@@ -1,0 +1,19 @@
+must_id: item:A.8.30:reg_scope
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Per-engagement scope description (what's being developed; data classes touched)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the name of each outsourced development engagement and the external party involved in the register,
+  with a unique reference for tracking.
+- Describe the specific software, system, or feature being developed for each engagement, avoiding vague
+  terms like "application" or "project."
+- List the types of data each engagement will access, process, or store, using clear data class labels
+  such as "personal data" or "financial records."
+- Date each entry to show when the scope was defined and last reviewed, ensuring the information is current
+  and auditable.
+- Name the individual responsible for verifying the scope details for each engagement, not just a department
+  or generic team.

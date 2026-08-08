@@ -1,0 +1,18 @@
+must_id: item:A.5.33:rev_ad_hoc_triggers
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Ad-hoc review triggers listed (new regulator action, new sector entry, M&A, legal-hold invocation
+  pattern shift)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all specific ad-hoc review triggers in the Records Protection Program document, including new regulator
+  actions, sector entry, mergers, acquisitions, and legal-hold pattern changes.
+- Document the date and details of the most recent ad-hoc review, including which trigger prompted the
+  review and who conducted it.
+- Name the responsible individual for monitoring and initiating ad-hoc reviews, avoiding generic roles
+  like "the team" or "IT department."
+- Cross-reference each ad-hoc review event to supporting evidence, such as regulatory notifications, merger
+  announcements, or legal-hold logs.

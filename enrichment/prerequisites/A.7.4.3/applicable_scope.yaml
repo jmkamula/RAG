@@ -1,0 +1,49 @@
+leaf_id: req:A.7.4.3:applicable_scope
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and information boundaries for all security and
+    privacy controls, ensuring that the accuracy management scope aligns with the overall ISMS coverage.
+    Without this, you cannot reliably identify which PII categories are in play.
+  good_enough: A documented ISMS scope that clearly lists included business units, systems, and data types.
+    It should be specific enough to identify where PII is processed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A working classification scheme is essential to distinguish between different PII categories
+    and their sensitivity, which directly impacts which data types require active accuracy management.
+  good_enough: A basic, current data classification scheme that covers all PII types in use, even if not
+    fully mature.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An asset register provides a list of information assets, including PII, enabling you to map
+    which PII categories exist and where. This is foundational for determining which categories need accuracy
+    controls.
+  good_enough: An up-to-date inventory of information assets that includes all relevant PII categories
+    and their locations.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Understanding the purpose for processing each PII category helps determine which data points
+    are dynamic and require accuracy management versus those that are static.
+  good_enough: A documented list of processing purposes for each PII category, even if high-level, to
+    support scoping decisions.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for processing each PII category is necessary to justify why certain
+    data must be kept accurate and up-to-date, especially for categories with legal or contractual obligations.
+  good_enough: A mapped lawful basis for each major PII category, sufficient to explain why accuracy is
+    required for some and not others.

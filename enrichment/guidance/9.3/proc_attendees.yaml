@@ -1,0 +1,16 @@
+must_id: item:9.3:proc_attendees
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Required attendees listed (top management + ISMS Manager; CISO and function heads as needed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each required attendee by name and job title, including top management and the ISMS Manager, in
+  the Management Review Procedure document.
+- Specify additional roles such as CISO and function heads by title, clarifying when their attendance
+  is needed.
+- Record the date of the latest procedure update and the person responsible for maintaining the attendee
+  list.
+- Name individuals, not just departments or teams, to avoid ambiguity about who must attend.

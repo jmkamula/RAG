@@ -1,0 +1,18 @@
+must_id: item:A.5.8:tiering
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Project tiering (which projects need full vs lightweight security review; criteria based on
+  data sensitivity, regulatory scope, third-party exposure)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define clear project tiering criteria based on data sensitivity, regulatory requirements, and third-party
+  involvement in a dated procedure document.
+- Assign responsibility for project tiering decisions to a named individual, not a group or department.
+- Record each project’s assigned tier and the rationale in a project register, including the date and
+  the person making the decision.
+- Review and update tiering criteria at least annually, documenting the review date and the reviewer’s
+  name.
+- Avoid using generic or boilerplate criteria that do not reflect your organisation’s actual risk environment.

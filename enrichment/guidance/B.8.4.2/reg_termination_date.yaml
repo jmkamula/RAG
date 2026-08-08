@@ -1,0 +1,17 @@
+must_id: item:B.8.4.2:reg_termination_date
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+must_text: Contract termination date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the contract termination date for each entry in the End-of-Service Action Register as a separate,
+  clearly labeled column.
+- Cross-reference each termination date with the original signed contract or termination notice to confirm
+  accuracy.
+- Name the responsible individual who entered or verified each termination date, avoiding generic titles
+  like "admin" or "team."
+- Retain a copy of the supporting contract or termination documentation linked to each register entry
+  for auditor review.

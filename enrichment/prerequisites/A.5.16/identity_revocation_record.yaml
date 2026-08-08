@@ -1,0 +1,40 @@
+leaf_id: req:A.5.16:identity_revocation_record
+control_ref: A.5.16
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.11
+  standard_id: ISO27001:2022
+  title: Identity Register
+  category: direct
+  rationale: The revocation record must reference the specific identity being terminated, which presumes
+    a maintained register of all identities in scope. Without this, you cannot reliably evidence which
+    identities have been revoked.
+  good_enough: A current, accessible list of all user and system identities, with unique identifiers and
+    status (active/inactive), is available.
+- ref: A.6.5
+  standard_id: ISO27001:2022
+  title: Responsibilities after termination or change of employment
+  category: direct
+  rationale: This control defines the obligations and timelines for removing access after employment changes,
+    which directly informs the SLA and compliance requirements for revocation records.
+  good_enough: Documented procedures or policy excerpts that specify what must happen to access rights
+    after termination or role change.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Revocation often involves reclaiming or transferring access to assets (mailboxes, file shares).
+    An asset register is needed to verify that all relevant access has been addressed during revocation.
+  good_enough: A list or inventory of key information assets and systems to which identities may have
+    access, sufficient to check for residual access.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which identities and systems are covered by the ISMS, ensuring
+    revocation records are created for all in-scope identities.
+  good_enough: A clear, up-to-date ISMS scope statement that includes all relevant business units, systems,
+    and identity types.

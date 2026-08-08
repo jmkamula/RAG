@@ -1,0 +1,15 @@
+must_id: item:6.2:rev_reviewer
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (ISMS Manager + function heads)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the ISMS Manager and each relevant function head as reviewers in the objectives program review
+  document.
+- Record the date each reviewer completes their review next to their name in the review log.
+- Obtain a signature or written confirmation from each reviewer to evidence their participation in the
+  review.
+- Avoid listing groups or departments as reviewers; specify individual names for clear accountability.

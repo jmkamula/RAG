@@ -1,0 +1,20 @@
+must_id: item:A.6.8:rev_channel_mix
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Channel-mix analysis (which channels are being used; under-used channels may need awareness
+  promotion or retirement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all communication channels currently used for reporting, including email addresses, web portals,
+  phone lines, and in-person options, with a last-updated date.
+- Record usage statistics for each channel over the last review period, showing the number of reports
+  received per channel and the reporting period dates.
+- Document any channels with low or no usage, and state whether they will be promoted for awareness or
+  considered for retirement, with a named decision-maker.
+- Name the reviewer as a specific individual responsible for the channel-mix analysis, not a group or
+  generic title.
+- Attach meeting minutes or a signed summary confirming management has reviewed and approved the channel-mix
+  analysis and any proposed actions.

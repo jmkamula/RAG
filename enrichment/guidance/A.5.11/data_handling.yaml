@@ -1,0 +1,19 @@
+must_id: item:A.5.11:data_handling
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Data wipe / sanitisation step for assets carrying organisational information (cross-link to
+  A.8.10 deletion)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Return of Assets Procedure that all devices containing organisational data must be wiped
+  or sanitised before return or reassignment.
+- Cross-reference the data sanitisation process in the Return of Assets Procedure to the detailed deletion
+  methods described in your A.8.10 documentation.
+- Record the date, method, and responsible individual for each data wipe in a log, and retain this log
+  for auditor review.
+- Name the person responsible for approving completed data wipes as a specific individual, not as a team
+  or department.
+- Attach a signed confirmation of data sanitisation to each returned asset’s record.

@@ -1,0 +1,19 @@
+must_id: item:A.8.7:rev_coverage
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Coverage check across the register (% assets with current agent / signature)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and results of the most recent malware protection review, including the percentage
+  of assets with up-to-date agents or signatures.
+- Cross-reference the asset register to show which devices are covered by current malware protection and
+  which are not.
+- Name the individual responsible for verifying malware protection coverage, listing their full name and
+  job title.
+- Retain screenshots or exported reports from the malware management tool showing agent or signature status
+  for all assets at the time of review.
+- Avoid listing coverage as "all" or "most"; specify the exact percentage and number of assets with current
+  protection.

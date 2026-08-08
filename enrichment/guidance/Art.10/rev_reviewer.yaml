@@ -1,0 +1,17 @@
+must_id: item:Art.10:rev_reviewer
+control_ref: Art.10
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO + legal counsel)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and job title, confirming they are the appointed
+  Data Protection Officer or designated legal counsel.
+- Record the date and outcome of each program review in a version-controlled document signed by both the
+  DPO and legal counsel.
+- Attach evidence of the DPO’s and legal counsel’s qualifications or appointment letters to the review
+  documentation.
+- Avoid listing the reviewer as a group, department, or generic role; always specify named individuals
+  responsible for the review.

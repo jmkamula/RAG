@@ -1,0 +1,16 @@
+must_id: item:10.1:reg_action_id
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Unique action identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique, sequential identifier to each improvement action entered in the register, ensuring
+  no duplicates exist.
+- Record the identifier in a dedicated column for every row, making it visible and unambiguous.
+- Cross-reference each identifier in related documentation, such as meeting minutes or status reports,
+  to confirm traceability.
+- Name the register owner as a specific individual responsible for maintaining unique identifiers, not
+  a team or department.

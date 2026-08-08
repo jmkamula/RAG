@@ -1,0 +1,20 @@
+must_id: item:A.7.2.3:proc_children_overlay
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: Children-consent overlay — parental consent thresholds per jurisdiction (age of consent varies
+  GDPR Art.8)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify the age of digital consent for each relevant jurisdiction using official government or regulatory
+  sources, and record these thresholds in a dated table.
+- Document the process for verifying a data subject’s age and obtaining parental consent when required,
+  including responsible roles and step-by-step actions.
+- Name the owner of the consent determination procedure as a specific individual, not a team or department,
+  in the procedure document.
+- Attach a sample completed parental consent form, showing the jurisdiction, date, and signatures of both
+  parent and child where applicable.
+- Review and update the procedure annually, recording the review date and the name of the reviewer in
+  the document revision history.

@@ -1,0 +1,17 @@
+must_id: item:A.7.5.2:rev_date
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Destinations Program in a dated entry within the review log.
+- Confirm the planned review interval is clearly stated in the Destinations Program documentation.
+- Compare the most recent review date to the planned interval and document whether the review occurred
+  within the required timeframe.
+- Name the reviewer as a specific individual in the review record, avoiding generic titles like "the team"
+  or "management".
+- Retain evidence of the completed review, such as meeting minutes or a signed review checklist, attached
+  to the program documentation.

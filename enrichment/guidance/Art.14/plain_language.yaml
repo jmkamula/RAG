@@ -1,0 +1,17 @@
+must_id: item:Art.14:plain_language
+control_ref: Art.14
+standard_id: GDPR:2016/679
+must_text: Written in plain, clear language
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Write the privacy notice using simple, everyday words and short sentences that avoid legal or technical
+  terms.
+- Assign a named individual to review the notice for clarity and confirm their review with a dated signature.
+- Record feedback from at least one person outside your legal or compliance team confirming the notice
+  is easy to understand.
+- Keep a copy of the final notice version with the date it was last updated and the reviewer’s name.
+- Avoid copying generic templates; tailor the notice to your organisation and data practices, and document
+  the customisation process.

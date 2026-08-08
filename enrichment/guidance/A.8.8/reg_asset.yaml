@@ -1,0 +1,15 @@
+must_id: item:A.8.8:reg_asset
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Per-finding affected asset (from A.5.9 register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each vulnerability entry with the specific asset name as listed in your A.5.9 asset
+  register.
+- Record the unique asset identifier from the A.5.9 register alongside each vulnerability in the backlog.
+- Name the affected asset owner as a specific individual, not a team or department, for every vulnerability
+  entry.
+- Confirm the date each vulnerability was linked to its affected asset in the backlog register.

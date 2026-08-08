@@ -1,0 +1,17 @@
+must_id: item:A.5.30:backup
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Backup arrangements (frequency aligned to RPO, retention, geographic separation, restore tested
+  and verified)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the backup schedule, including frequency and retention periods, and cross-reference these with
+  your Recovery Point Objective (RPO) in your business continuity plan.
+- Record the physical or cloud locations where backups are stored, specifying geographic separation from
+  primary systems.
+- Name the individual responsible for managing and monitoring backup processes, not just a team or department.
+- Maintain dated records of backup restore tests, including verification results and any issues identified
+  or resolved.

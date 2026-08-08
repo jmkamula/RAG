@@ -1,0 +1,19 @@
+must_id: item:A.7.2.1:scope_activities
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: In-scope processing activities enumerated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all personal data processing activities carried out by your organisation, including both automated
+  and manual processes, in a dated document.
+- Describe the purpose, data types, and affected individuals for each processing activity to show clear
+  boundaries of what is in scope.
+- Name the owner responsible for maintaining the processing activities list as a specific individual,
+  not a team or department.
+- Cross-reference each processing activity with relevant business units or systems to confirm completeness
+  and traceability.
+- Review and update the scope document at least annually, recording the date and the person who approved
+  the latest version.

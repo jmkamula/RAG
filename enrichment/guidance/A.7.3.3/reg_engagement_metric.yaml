@@ -1,0 +1,16 @@
+must_id: item:A.7.3.3:reg_engagement_metric
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: Engagement metric per row (view count, expand-detail rate)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the number of times each privacy notice was viewed in a dedicated column for every entry in the
+  Notice Delivery Log.
+- Capture the rate at which users expanded or clicked for more details on each notice, noting this metric
+  per log row.
+- Name the individual responsible for collecting and updating engagement metrics for each notice, avoiding
+  generic titles like "the team."
+- Date each log entry to show when the engagement metrics were last updated for traceability.

@@ -1,0 +1,19 @@
+must_id: item:7.2:basis_of_competence
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Basis of competence (education, training, experience) recorded per person
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each employee’s name alongside their relevant education, training, and work experience in a dated
+  ISMS Competence Record.
+- Specify the basis of competence for each person, referencing actual qualifications or certificates,
+  not generic statements like "sufficient experience."
+- Attach copies or digital links to supporting documents, such as diplomas, training certificates, or
+  employment letters, for each entry.
+- Update the record whenever an employee completes new training or gains relevant experience, noting the
+  date of the update.
+- Name the person responsible for maintaining the ISMS Competence Record as a specific individual, not
+  a team or department.

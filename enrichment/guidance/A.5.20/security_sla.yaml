@@ -1,0 +1,18 @@
+must_id: item:A.5.20:security_sla
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Security-specific SLAs (e.g. patching cadence, MFA requirements, vulnerability remediation
+  timelines)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all security-specific service level agreements, such as patching timelines, multi-factor authentication,
+  and vulnerability remediation, directly in the supplier agreement template.
+- Specify measurable targets for each security requirement, including exact timeframes and performance
+  metrics, within the agreement template.
+- Name the individual responsible for monitoring supplier compliance with these SLAs, not just a team
+  or department.
+- Attach a dated approval record showing that the template, including security SLAs, was reviewed and
+  accepted by a designated authority.

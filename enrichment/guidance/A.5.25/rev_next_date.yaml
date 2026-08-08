@@ -1,0 +1,14 @@
+must_id: item:A.5.25:rev_next_date
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Periodic Event Triage Program in the review documentation.
+- Record the date in a dedicated section of the review report or program calendar entry.
+- Name the responsible individual who set the next review date, including their full name and role.
+- Avoid leaving the next review date blank or using vague terms like "TBD" or "annually"; specify an exact
+  date.

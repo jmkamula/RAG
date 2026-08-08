@@ -1,0 +1,16 @@
+must_id: item:7.1:proc_approval
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Approval pathway (function head → ISMS Manager → top management)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each approval step in the procedure, listing function head, ISMS Manager, and top management in
+  the correct order.
+- Document the names and job titles of individuals responsible for each approval stage, avoiding generic
+  roles like "the team" or "management."
+- Record the date and signature or electronic approval for each approver on the final procedure document.
+- Retain a version-controlled copy of the approved procedure, showing the full approval pathway and all
+  approvers.

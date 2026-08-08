@@ -1,0 +1,18 @@
+must_id: item:A.8.2:rc_role_change_trigger
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Role-change events trigger ad-hoc recertification outside the interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each role-change event by recording the user's name, previous role, new role, and the date
+  of the change in an access log.
+- Assign a named individual to review and recertify privileged access for the affected user immediately
+  after a role-change event is recorded.
+- Record the date, outcome, and reviewer’s name for each ad-hoc recertification triggered by a role change
+  in your access management system.
+- Name the reviewer as a specific person, not as a group or department, to avoid ambiguity in responsibility.
+- Retain evidence of completed ad-hoc recertifications, such as signed forms or system audit trails, for
+  each role-change event.

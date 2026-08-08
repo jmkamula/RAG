@@ -1,0 +1,18 @@
+must_id: item:A.6.3:scope_role_module_matrix
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Role-to-module matrix (which audience segment receives which modules — drives the completion-register
+  expected-set)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all job roles or audience segments that require security awareness or training, using specific
+  titles rather than generic groupings.
+- Map each training module to the relevant job roles in a matrix, showing which roles are assigned which
+  modules.
+- Document the rationale for each mapping, explaining why each module is required for each role based
+  on job responsibilities.
+- Record the date the matrix was last updated and the name of the person who approved the current version.
+- Name the owner of the matrix as a specific individual, not a team or department.

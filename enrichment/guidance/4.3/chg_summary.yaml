@@ -1,0 +1,16 @@
+must_id: item:4.3:chg_summary
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Change summary — what was added or removed from scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date of the scope change in the ISMS Scope Change Record.
+- Describe in plain language what was added to or removed from the ISMS scope, including relevant systems,
+  locations, or processes.
+- Name the individual who authorized the change, including their job title, not just a department or team.
+- Attach or reference supporting documentation that triggered the scope change, such as a business decision
+  or risk assessment.
+- Avoid using vague terms like "updated" or "modified"—specify exactly what changed in the scope statement.

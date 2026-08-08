@@ -1,0 +1,18 @@
+must_id: item:B.8.2.3:reg_activity_scope
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: Marketing activity scope per row (targeted advertising channels + creative)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific advertising channels used for each marketing activity in a dedicated column of the
+  exception register.
+- Describe the creative content or messaging for each marketing activity in a separate column, using clear
+  and unique descriptions.
+- Name the individual responsible for entering each row, avoiding generic labels like "marketing team"
+  or "staff".
+- Date each entry to show when the marketing activity was reviewed and recorded in the register.
+- Cross-reference each row to supporting documentation, such as campaign briefs or channel booking confirmations,
+  to verify accuracy.

@@ -1,0 +1,16 @@
+must_id: item:A.5.7:reg_signal_rating
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Signal/noise rating per row (high/medium/low) updated at each program review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a signal/noise rating of high, medium, or low for each threat intelligence feed entry in the
+  register.
+- Update the signal/noise rating for every feed entry during each scheduled program review, noting the
+  review date.
+- Name the reviewer responsible for assigning or updating each signal/noise rating in the register.
+- Avoid leaving any feed entry without a current signal/noise rating or with an outdated rating from a
+  previous review cycle.

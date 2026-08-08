@@ -1,0 +1,17 @@
+must_id: item:A.7.4.8:reg_action_id
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Unique disposal action identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each disposal action in the register, using a sequential number or code
+  that does not repeat.
+- Record the identifier alongside the disposal action details, including date, type of PII, and responsible
+  individual.
+- Cross-reference each identifier with supporting evidence, such as certificates of destruction or disposal
+  logs.
+- Name the responsible owner for assigning identifiers as a specific individual, not a group or department.
+- Retain a dated record of the process used to generate and manage unique identifiers for auditor review.

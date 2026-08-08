@@ -1,0 +1,16 @@
+must_id: item:A.8.4:rev_next_date
+control_ref: A.8.4
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned source code access review date in the review log, using a clear and specific
+  future calendar date.
+- Record the name of the person responsible for scheduling the next review, ensuring a single, named individual
+  is listed.
+- Document the date this next review date was set, keeping a dated entry in the same review log.
+- Avoid leaving the next review date blank or marked as "TBD"—auditors will flag missing or vague future
+  dates.

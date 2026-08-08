@@ -1,0 +1,17 @@
+must_id: item:A.8.8:scope_asset_classes
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Asset classes enumerated with scanning approach per class
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all asset classes in scope for vulnerability management in a dated inventory, including hardware,
+  software, cloud services, and network devices.
+- Describe the vulnerability scanning method assigned to each asset class, such as automated scanning,
+  manual review, or third-party assessment.
+- Name the person responsible for maintaining the asset inventory and updating scanning approaches, ensuring
+  a specific individual is identified.
+- Record the date of the most recent review or update to the asset scope and scanning approach documentation.
+- Attach evidence of a completed vulnerability scan for each asset class, showing the scan type and date.

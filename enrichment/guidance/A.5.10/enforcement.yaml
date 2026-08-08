@@ -1,0 +1,17 @@
+must_id: item:A.5.10:enforcement
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Enforcement and disciplinary consequences referenced (link to A.6.4 disciplinary process)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Acceptable Use Policy that violations will result in disciplinary action, referencing the
+  formal disciplinary process described in section A.6.4.
+- Cross-reference the Acceptable Use Policy to the current version of the disciplinary process document,
+  including the document title and version number.
+- Name the policy owner as a specific individual responsible for enforcing disciplinary actions, not as
+  a department or team.
+- Record the date of the last policy update and the person who approved the disciplinary consequences
+  section.

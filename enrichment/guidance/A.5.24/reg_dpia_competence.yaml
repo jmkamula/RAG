@@ -1,0 +1,19 @@
+must_id: item:A.5.24:reg_dpia_competence
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: DPIA / data-protection competence flag per row (drives who handles the GDPR Art.33 path when
+  personal data is in scope)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each incident response team member by full name and current role in the Incident Response Team
+  Register.
+- Record a clear flag or column for each member indicating whether they have data-protection and DPIA
+  competence relevant to GDPR Article 33.
+- Cross-reference each flagged member’s competence to a dated training record or certification in data
+  protection and DPIA.
+- Name the GDPR Article 33 escalation contact as a specific individual, not as a team or department.
+- Update the register immediately when team membership or competence status changes, noting the date of
+  each change.

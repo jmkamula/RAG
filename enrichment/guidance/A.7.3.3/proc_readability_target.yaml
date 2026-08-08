@@ -1,0 +1,15 @@
+must_id: item:A.7.3.3:proc_readability_target
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: Readability target stated (Flesch score / school-grade)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the chosen readability target for privacy notices, such as a Flesch Reading Ease score or school-grade
+  level, in the procedure document.
+- Document the method or tool used to assess readability, including its name and version, in the procedure.
+- Record the date the readability target was last reviewed or updated, along with the name of the reviewer.
+- Name the individual responsible for maintaining and updating the readability target, not just a team
+  or department.

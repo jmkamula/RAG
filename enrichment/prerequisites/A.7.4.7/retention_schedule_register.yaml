@@ -1,0 +1,47 @@
+leaf_id: req:A.7.4.7:retention_schedule_register
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the specific purposes for which PII is processed before you can define how
+    long it should be retained. Retention periods must align with the documented purposes.
+  good_enough: Each PII processing activity has a clearly documented and approved purpose statement, even
+    if not fully mapped to every data element.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: The lawful basis for processing PII often determines or constrains retention periods. You
+    cannot set compliant retention schedules without knowing the legal grounds for each activity.
+  good_enough: Each processing activity has a recorded lawful basis (e.g., consent, contract, legal obligation),
+    even if some edge cases are still under review.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: Retention schedules must be mapped to categories of PII, which requires a working classification
+    scheme. Without this, you cannot group or differentiate retention needs.
+  good_enough: There is a basic, documented classification scheme that distinguishes PII types and sensitivity,
+    even if not fully rolled out.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need to know what PII assets exist and where they reside to apply and enforce retention
+    schedules. The asset register provides this inventory.
+  good_enough: A preliminary asset register exists listing key PII repositories and systems, even if some
+    minor assets are pending inclusion.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The retention schedule register must only cover PII and activities within the defined ISMS
+    and PIMS scope. Without a scope statement, you risk omitting or wrongly including data.
+  good_enough: There is a documented ISMS scope that at least outlines the main business units, locations,
+    and systems in scope for PII processing.

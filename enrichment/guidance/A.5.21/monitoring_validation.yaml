@@ -1,0 +1,17 @@
+must_id: item:A.5.21:monitoring_validation
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: Monitoring and validation methods for conformance to stated security requirements
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Describe the specific monitoring methods used to check supplier compliance with each stated security
+  requirement in your ICT Supply Chain Information Security Procedure.
+- Record the frequency and responsible individual for each monitoring activity in a dated monitoring schedule.
+- Document the validation process, including how evidence of supplier conformance is collected, reviewed,
+  and retained.
+- Name the owner of the monitoring and validation process as a specific individual, not a team or department.
+- Attach recent examples of completed monitoring or validation records that demonstrate the process in
+  action.

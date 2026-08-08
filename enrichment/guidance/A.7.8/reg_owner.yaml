@@ -1,0 +1,15 @@
+must_id: item:A.7.8:reg_owner
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Per-row owner
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner for each equipment entry as a specific individual, not a team or department, to ensure
+  clear accountability.
+- Record the owner's full name and job title next to each equipment item in the Equipment Siting Register.
+- Confirm the date each owner was assigned responsibility by adding a dated entry in the register.
+- Review the register quarterly and update ownership details if equipment is relocated or staff roles
+  change.

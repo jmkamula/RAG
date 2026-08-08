@@ -1,0 +1,18 @@
+must_id: item:A.8.1:reg_owner
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Per-device named owner (user) and asset owner (IT)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each endpoint in the inventory register with a unique identifier, such as a serial number or
+  asset tag, to avoid ambiguity.
+- Name the user owner for every device as a specific individual, not as a group, department, or generic
+  role.
+- Assign an asset owner from IT for each device, listing a named person responsible for lifecycle management.
+- Document the date of assignment for both user owner and asset owner to provide clear evidence of current
+  accountability.
+- Review the register quarterly and update ownership details, recording the review date and reviewer’s
+  name.

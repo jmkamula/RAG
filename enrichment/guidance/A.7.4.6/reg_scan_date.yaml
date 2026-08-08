@@ -1,0 +1,14 @@
+must_id: item:A.7.4.6:reg_scan_date
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+must_text: Scan date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the scan date for each temporary file entry as a separate column in the Temp Files Sweep Register.
+- Confirm each scan date is in a standard date format and is not left blank or marked as "ongoing."
+- Cross-reference the scan date with automated sweep logs or manual checklists to verify accuracy.
+- Name the person responsible for entering each scan date, using their full name rather than a generic
+  role or team.

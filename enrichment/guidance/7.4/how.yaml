@@ -1,0 +1,19 @@
+must_id: item:7.4:how
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: How (channels, formats, escalation paths)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each approved communication channel, such as email, intranet, or meetings, in the ISMS Communication
+  Procedure with clear descriptions.
+- Specify the required formats for each type of ISMS information, such as reports, memos, or presentations,
+  within the procedure.
+- Map out escalation paths by naming responsible individuals and their roles for each type of ISMS communication,
+  including when and how to escalate.
+- Name the owner of the ISMS Communication Procedure as a specific person, not a team or department, and
+  record the date of assignment.
+- Review and update the procedure to remove any generic or boilerplate language that does not reflect
+  your organisation’s actual communication practices.

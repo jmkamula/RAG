@@ -1,0 +1,19 @@
+must_id: item:A.5.8:closure_signoff
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Project closure security sign-off step (handover to operations; outstanding-risk transfer documented)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a formal project closure checklist that includes a security sign-off section, with the checklist
+  version and date clearly recorded.
+- Assign a named individual to complete and sign the security sign-off, confirming all security requirements
+  have been addressed at closure.
+- Record any outstanding security risks at closure in a risk register, including the date, risk owner,
+  and transfer details to operations.
+- Attach evidence of the handover to operations, such as a dated email or meeting minutes acknowledging
+  receipt of outstanding risks.
+- Name the risk owner as a specific person, not a team or department, to avoid ambiguity in responsibility
+  for outstanding risks.

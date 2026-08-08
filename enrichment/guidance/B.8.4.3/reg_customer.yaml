@@ -1,0 +1,16 @@
+must_id: item:B.8.4.3:reg_customer
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Customer per row (if channel is customer-specific)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each data transmission channel in the inventory, creating a separate row for each unique channel.
+- Record the specific customer associated with each channel in its corresponding row if the channel is
+  customer-specific.
+- Name the customer using their full legal entity name, not a generic label like "client" or "various
+  customers".
+- Date each entry in the inventory to show when the channel and customer association was last verified
+  or updated.

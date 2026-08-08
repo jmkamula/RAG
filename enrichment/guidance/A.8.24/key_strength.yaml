@@ -1,0 +1,19 @@
+must_id: item:A.8.24:key_strength
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Key length / strength requirements stated (Style v2 promotion — was SHOULD)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the minimum key lengths and cryptographic algorithm strengths required for all approved encryption
+  methods in the policy document.
+- Reference relevant industry standards or regulatory requirements that inform your key length and algorithm
+  strength choices within the policy.
+- Name the person or role responsible for reviewing and updating key length requirements as cryptographic
+  standards evolve.
+- Specify key length requirements separately for different use cases, such as data at rest, data in transit,
+  and digital signatures.
+- Avoid using generic phrases like "adequate strength"—list explicit bit lengths and algorithm names to
+  prevent ambiguity.

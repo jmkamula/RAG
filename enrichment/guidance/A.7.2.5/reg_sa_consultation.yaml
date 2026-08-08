@@ -1,0 +1,18 @@
+must_id: item:A.7.2.5:reg_sa_consultation
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: SA consultation flag per row (Art.36 invoked yes/no)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a dedicated column to your PIA/DPIA Report Register to indicate if supervisory authority consultation
+  under Article 36 was required for each assessment.
+- Record a clear "Yes" or "No" value in the consultation column for every PIA/DPIA entry, based on documented
+  risk analysis.
+- Name the decision-maker who determined the need for consultation, listing a specific individual rather
+  than a generic role or team.
+- Enter the date the consultation decision was made for each assessment to provide a verifiable timeline.
+- Attach supporting evidence, such as risk assessment notes or consultation correspondence, for every
+  row marked "Yes" in the consultation column.

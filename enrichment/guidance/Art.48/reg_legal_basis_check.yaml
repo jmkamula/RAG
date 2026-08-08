@@ -1,0 +1,19 @@
+must_id: item:Art.48:reg_legal_basis_check
+control_ref: Art.48
+standard_id: GDPR:2016/679
+must_text: Per-row legal-basis check outcome (international agreement / Art.49 derogation / refused)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and details of each foreign authority request in the register, including the requesting
+  country and the data requested.
+- State the specific legal basis for each request, citing either an international agreement, Article 49
+  derogation, or note if the request was refused.
+- Document the outcome of the legal-basis check for each entry, including the name and role of the person
+  who made the determination.
+- Name the legal-basis reviewer as a specific individual, not as a team or department, to avoid ambiguity
+  in accountability.
+- Retain supporting documents for each decision, such as copies of agreements, derogation justifications,
+  or refusal correspondence, linked to the relevant register entry.

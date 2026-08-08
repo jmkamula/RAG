@@ -1,0 +1,16 @@
+must_id: item:A.8.1:reg_compliance
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Compliance state per row (encryption on / patch current / EDR active)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the encryption status, patch currency, and endpoint detection tool status for each device as
+  separate columns in the inventory register.
+- Name the person responsible for updating and verifying each row, using a specific individual's name
+  rather than a generic team or department.
+- Date each entry and update to show when the compliance state was last checked or changed for every endpoint.
+- Attach or cross-reference supporting evidence, such as screenshots or system reports, for a random sample
+  of endpoints to validate register accuracy.

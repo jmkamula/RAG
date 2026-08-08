@@ -1,0 +1,17 @@
+must_id: item:A.5.5:proc_template_link
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Links to notification templates kept beside the procedure
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Attach current notification templates directly to the Authority Contact Maintenance Procedure document
+  as appendices or embedded files.
+- Cross-reference each notification template by filename and version number within the procedure text
+  to avoid confusion during incidents.
+- Confirm the location of the notification templates is clearly stated in the procedure, with direct links
+  if stored digitally.
+- Name the responsible individual who updates both the procedure and templates; avoid listing a team or
+  department as the owner.

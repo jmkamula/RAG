@@ -1,0 +1,19 @@
+must_id: item:A.8.12:log_siem_forward
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Alerts forwarded to SIEM (cross-link to A.8.16)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for forwarding Data Loss Prevention (DLP) alerts to your Security Information and
+  Event Management (SIEM) system in a dated procedure file.
+- Record each DLP alert forwarded to the SIEM in a log, including alert ID, timestamp, and the name of
+  the person responsible for the action.
+- Cross-reference the DLP alert log entry with the corresponding SIEM event ID to show the alert was received
+  and processed by the SIEM.
+- Name the owner responsible for managing DLP alert forwarding as a specific individual, not a team or
+  department.
+- Review and update the forwarding procedure annually, capturing the review date and the name of the reviewer
+  in the procedure document.

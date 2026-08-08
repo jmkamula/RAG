@@ -1,0 +1,19 @@
+must_id: item:A.7.4.1:rev_reviewer
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Privacy Engineering)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and job title, such as "Jane Smith, Data Protection
+  Officer," in the review record.
+- Record the participation of a named privacy engineering representative, listing their full name and
+  role in the review documentation.
+- Document the date the Collection Limitation Program review was completed, ensuring the record is signed
+  or acknowledged by both reviewers.
+- Attach or reference the meeting minutes or review summary that clearly shows input from both the DPO
+  and privacy engineering representative.
+- Avoid listing the reviewer as "the team" or "department"—use only named individuals to meet accountability
+  requirements.

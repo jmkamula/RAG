@@ -1,0 +1,42 @@
+leaf_id: req:Art.15:dsar_register
+control_ref: Art.15
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.12
+  standard_id: GDPR:2016/679
+  title: Transparent information, communication and modalities for the exercise of the rights of the data
+    subject
+  category: direct
+  rationale: Art.12 defines how and when you must communicate with data subjects about their rights, including
+    the 1-month response deadline for DSARs. You can't track or demonstrate compliance with DSAR handling
+    unless you know the rules for responding.
+  good_enough: You have a clear summary of the response timelines and communication requirements for DSARs,
+    including any extension conditions.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: Art.30 requires you to maintain a record of processing activities, which is essential context
+    for logging and understanding DSARs. Without this, you can't reliably identify which processing activities
+    are relevant to a given access request.
+  good_enough: A basic RoPA exists listing your main processing activities, even if not fully detailed,
+    so you can link DSARs to relevant data flows.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer (DPO) Designation
+  category: foundational
+  rationale: If required, a DPO is responsible for overseeing DSAR handling and ensuring the register
+    is maintained. Without clarity on DPO designation, responsibility for the register may be unclear.
+  good_enough: You have determined whether a DPO is required and, if so, have named a responsible person
+    or role.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which parts of your organization and which data processing activities
+    are covered by your compliance program. This ensures your DSAR register captures all relevant requests.
+  good_enough: A draft ISMS scope exists that covers the business units and systems where DSARs may be
+    received or processed.

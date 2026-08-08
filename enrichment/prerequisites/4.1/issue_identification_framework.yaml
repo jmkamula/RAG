@@ -1,0 +1,34 @@
+leaf_id: req:4.1:issue_identification_framework
+control_ref: '4.1'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the boundaries of your ISMS—what people, processes, and systems are in scope—before
+    you can systematically identify relevant issues. Without a defined scope, the issue identification
+    framework may miss critical areas or include irrelevant ones.
+  good_enough: A documented scope statement that clearly defines what is and isn't covered by the ISMS,
+    even if it's high-level or draft, is sufficient to proceed.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the overall direction and priorities for information security, which guides
+    what types of issues should be identified and prioritized. Without this, your framework may lack alignment
+    with organizational objectives.
+  good_enough: A current or draft policy that outlines the organization's commitment and approach to information
+    security is enough to inform the framework.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: direct
+  rationale: The risk assessment process informs which issues are relevant and how they should be evaluated.
+    Your issue identification framework must align with or feed into this process to ensure systematic
+    coverage.
+  good_enough: A basic risk assessment methodology or template—showing how risks are identified and evaluated—is
+    sufficient to unblock drafting the issue identification framework.

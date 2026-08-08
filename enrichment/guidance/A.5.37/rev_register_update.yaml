@@ -1,0 +1,17 @@
+must_id: item:A.5.37:rev_register_update
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Changes propagated back to the live register with reference to this review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of the periodic operating procedures review in a dedicated review log, including
+  any required changes identified.
+- Update the live register of operating procedures to reflect all approved changes, citing the review
+  log entry as the source.
+- Name the individual responsible for updating the live register, avoiding generic attributions such as
+  "the team" or "operations."
+- Cross-reference each updated procedure in the register to the specific review date and log entry that
+  triggered the change.

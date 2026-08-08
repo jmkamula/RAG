@@ -1,0 +1,17 @@
+must_id: item:A.7.3.7:proc_impossibility_exception
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Impossibility / disproportionate-effort exception documented per Art.19
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific reasons why notifying each affected third party is impossible or would require
+  disproportionate effort, referencing GDPR Article 19.
+- Name the individual responsible for assessing and approving each exception, ensuring a specific person
+  is listed rather than a team or department.
+- Record the date and outcome of each exception decision in the third-party notification log, including
+  supporting evidence for the assessment.
+- Attach any correspondence or internal memos that demonstrate attempts made to notify third parties before
+  deciding on the exception.

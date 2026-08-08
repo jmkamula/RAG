@@ -1,0 +1,19 @@
+must_id: item:A.8.1:reg_last_seen
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Last check-in timestamp per row (drives stale-device detection)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the last check-in timestamp for each endpoint in the inventory register, ensuring the date and
+  time are clearly visible per device entry.
+- Assign responsibility to a named individual for updating and verifying the check-in timestamps on a
+  regular, scheduled basis.
+- Cross-reference each endpoint’s check-in timestamp with system logs or management tools to confirm accuracy
+  and completeness.
+- Name the owner of the register as a specific person, not a team or department, to avoid ambiguity in
+  accountability.
+- Retain historical check-in data to demonstrate that stale-device detection is possible and that monitoring
+  is ongoing.

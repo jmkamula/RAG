@@ -1,0 +1,17 @@
+must_id: item:6.1.3:soa_ref
+control_ref: 6.1.3
+standard_id: ISO27001:2022
+must_text: Reference to the live Statement of Applicability (the SoA leaf)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the current version of your Statement of Applicability by document name, version number,
+  and date within the Risk Treatment Plan.
+- Confirm the referenced Statement of Applicability is the live, approved version by attaching a copy
+  or providing a direct link.
+- Name the individual who approved the latest Statement of Applicability, including their role and the
+  approval date.
+- Avoid referencing an outdated or draft Statement of Applicability—always update the Risk Treatment Plan
+  if the SoA changes.

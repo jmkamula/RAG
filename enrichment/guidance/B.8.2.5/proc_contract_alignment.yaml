@@ -1,0 +1,19 @@
+must_id: item:B.8.2.5:proc_contract_alignment
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: Contract alignment — audit + information rights consistent with B.8.2.1 agreement + Art.28.3.h
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the Customer Compliance Information Procedure with the latest signed customer contract
+  to confirm audit and information rights match those stated in B.8.2.1 and Article 28.3.h.
+- Document the specific sections and clauses in both the procedure and contract that address audit and
+  information rights, listing their exact locations and dates.
+- Name the procedure owner as a specific individual, not a team or department, and record their responsibility
+  for maintaining contract alignment.
+- Retain a dated approval record from legal or compliance confirming the procedure’s consistency with
+  contractual and regulatory requirements.
+- Attach a copy of the most recent procedure version to the contract file, ensuring it is not an undated
+  or draft document.

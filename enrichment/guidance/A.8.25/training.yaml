@@ -1,0 +1,16 @@
+must_id: item:A.8.25:training
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Secure-coding training requirements (cross-link to A.8.28 + A.6.3)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the secure-coding training requirements for developers and technical staff in the Secure Development
+  Lifecycle Policy, referencing both A.8.28 and A.6.3.
+- Name the individual responsible for maintaining and updating the secure-coding training section in the
+  policy, not just a team or department.
+- Document the date the secure-coding training requirements were last reviewed and updated in the policy.
+- Cross-reference the Secure Development Lifecycle Policy with the current secure-coding training materials
+  and attendance records to show alignment.

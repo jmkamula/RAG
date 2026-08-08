@@ -1,0 +1,19 @@
+must_id: item:A.7.3.8:scope_art_15_universe
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Art.15.3 (copy) universe — all subjects with PII processed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems, databases, and storage locations where copies of personal data are held, including
+  backups and archives, in a dated inventory.
+- Name each data subject group whose personal data is processed and could be subject to access or copy
+  requests.
+- Document the lawful basis for holding each type of personal data copy, referencing the relevant GDPR
+  Article 15.3 requirement.
+- Assign a specific individual as the owner responsible for maintaining and updating the copy context
+  scope, not a team or department.
+- Record the last review date and reviewer’s name on the scope document to show it is current and actively
+  managed.

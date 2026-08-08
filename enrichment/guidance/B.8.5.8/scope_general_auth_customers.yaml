@@ -1,0 +1,17 @@
+must_id: item:B.8.5.8:scope_general_auth_customers
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+must_text: Customers on general-authorisation contract per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each customer covered by a general-authorisation contract in a dedicated row of your change scope
+  register, using their full legal name.
+- Record the date each customer was added to or removed from the change scope, ensuring the register reflects
+  current applicability.
+- Attach a copy of the signed general-authorisation contract for each customer referenced, cross-referencing
+  the contract number in the register.
+- Name the responsible individual who maintains and updates the change scope register, avoiding generic
+  titles like "the team" or "admin".

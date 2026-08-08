@@ -1,0 +1,16 @@
+must_id: item:B.8.4.1:reg_sweep_id
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+must_text: Unique sweep run identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique sweep run identifier to each row in the Processor Temp Files Sweep Register, using a
+  sequential or timestamp-based format.
+- Record the date and time of each sweep run alongside its unique identifier in the register.
+- Name the person responsible for each sweep run in the register, ensuring an individual is listed rather
+  than a team or department.
+- Cross-reference each sweep run identifier with supporting evidence, such as system logs or screenshots,
+  to confirm the sweep occurred.

@@ -1,0 +1,17 @@
+must_id: item:Art.47:approval
+control_ref: Art.47
+standard_id: GDPR:2016/679
+must_text: Lead SA approval evidence per Art.47.1 with consistency mechanism
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the formal approval letter or decision from the Lead Supervisory Authority, including the date
+  and reference number, for your Binding Corporate Rules.
+- Cross-reference the approval record with the consistency mechanism documentation, showing that the European
+  Data Protection Board was consulted as required.
+- Retain all correspondence with the Lead Supervisory Authority and other relevant authorities regarding
+  the approval process.
+- Name the Lead Supervisory Authority as a specific national authority, not as a generic "EU regulator"
+  or similar non-specific term.

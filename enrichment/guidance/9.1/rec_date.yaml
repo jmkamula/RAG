@@ -1,0 +1,16 @@
+must_id: item:9.1:rec_date
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Per-row measurement date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each ISMS measurement is taken in a dedicated column of the measurement record.
+- Confirm the measurement date is entered in a consistent, unambiguous format such as YYYY-MM-DD for every
+  row.
+- Cross-reference each measurement entry with its corresponding date to show that all data is current
+  and regularly updated.
+- Avoid leaving any measurement row undated or using vague timeframes like "monthly" or "Q1" instead of
+  a specific date.

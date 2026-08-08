@@ -1,0 +1,48 @@
+leaf_id: req:A.8.26:application_security_requirements_procedure
+control_ref: A.8.26
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which applications and development activities are in scope for your ISMS
+    before defining a procedure for application security requirements. This ensures the procedure covers
+    all relevant systems and avoids gaps.
+  good_enough: A current, approved ISMS scope statement that clearly lists in-scope applications and development/acquisition
+    activities.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment identifies threats and vulnerabilities relevant to applications, which directly
+    informs what security requirements need to be addressed in the procedure.
+  good_enough: A recent risk assessment that covers application-related risks and is available to inform
+    requirement categories.
+- ref: A.8.25
+  standard_id: ISO27001:2022
+  title: Secure development life cycle
+  category: direct
+  rationale: The secure development lifecycle process establishes when and how security requirements are
+    integrated into development. The requirements procedure must align with and reference this lifecycle.
+  good_enough: A documented secure development lifecycle process that defines key phases and security
+    checkpoints.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register ensures you know which applications exist and require security
+    requirements, preventing omissions in the procedure.
+  good_enough: A maintained list of applications and related assets, even if basic, to scope the requirements
+    procedure.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles is needed so the procedure can specify who is responsible for identifying,
+    specifying, approving, and reviewing application security requirements.
+  good_enough: A simple roles and responsibilities matrix covering application development and security
+    requirement approval.

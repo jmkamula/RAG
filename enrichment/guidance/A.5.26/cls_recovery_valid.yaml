@@ -1,0 +1,19 @@
+must_id: item:A.5.26:cls_recovery_valid
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Recovery validation evidenced (system returned to secure state; verified, not just attempted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific date and time when recovery actions were completed for each incident in the closure
+  record.
+- Document the method used to verify that the affected system was restored to a secure and fully operational
+  state.
+- Name the individual who performed and confirmed the recovery validation, ensuring this is a specific
+  person rather than a team or generic role.
+- Attach evidence of successful validation, such as test results, screenshots, or logs, to the incident
+  closure record.
+- State in the closure record that recovery was verified as successful, not just attempted, before formally
+  closing the incident.

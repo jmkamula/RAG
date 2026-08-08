@@ -1,0 +1,16 @@
+must_id: item:A.5.2:allocation
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: Allocation to named individuals or positions, not just abstract role labels
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each information security responsibility in the matrix and assign it to a specific individual or
+  a clearly defined job title.
+- Document the full name or unique job title for each responsibility, avoiding generic terms like "the
+  team" or "IT department".
+- Record the date when each assignment was last reviewed or updated to show the matrix is current.
+- Obtain sign-off from a senior manager confirming the accuracy and completeness of the assignments in
+  the matrix.

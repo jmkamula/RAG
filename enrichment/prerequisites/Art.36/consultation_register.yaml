@@ -1,0 +1,43 @@
+leaf_id: req:Art.36:consultation_register
+control_ref: Art.36
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of all processing activities to identify which ones may
+    require prior consultation with a supervisory authority. Without this, you can't reliably determine
+    when Art.36 applies.
+  good_enough: A basic, current RoPA listing all processing activities, even if not fully detailed, is
+    sufficient to start identifying candidates for consultation.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity is essential to assess risk and
+    necessity for prior consultation. If the lawful basis is unclear, you can't justify or document the
+    need for consultation.
+  good_enough: Each processing activity should have a stated lawful basis, even if the supporting documentation
+    is minimal.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated Data Protection Officer (DPO) is required to be involved in the consultation
+    process and to act as a point of contact for supervisory authorities. Without a DPO, the consultation
+    register cannot be properly managed.
+  good_enough: A named DPO (internal or external) with contact details is enough to proceed, even if their
+    full onboarding is pending.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and process boundaries for compliance activities,
+    ensuring the consultation register covers all relevant processing activities. Missing scope may lead
+    to incomplete or misaligned records.
+  good_enough: A draft scope statement that outlines the main business units and processing activities
+    is sufficient to start mapping consultations.

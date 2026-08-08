@@ -1,0 +1,19 @@
+must_id: item:A.5.16:modification
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Modification steps for role changes (add/remove entitlements; same-day or next-business-day
+  SLA)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each step required to add or remove user entitlements following a role change, including who
+  performs each action and how it is tracked.
+- Record the date and time when a role change request is received and when entitlements are updated, showing
+  same-day or next-business-day completion.
+- Assign responsibility for approving entitlement changes to a named individual, not a group or department.
+- Retain evidence of completed entitlement modifications, such as system logs or confirmation emails,
+  linked to the original role change request.
+- State the service level agreement (SLA) for entitlement changes in the procedure, specifying the exact
+  timeframes required for compliance.

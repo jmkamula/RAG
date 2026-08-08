@@ -1,0 +1,19 @@
+must_id: item:A.5.36:sch_full_catalogue
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Full catalogue of in-scope items enumerated (InfoSec policy + every topic-specific policy +
+  rules + applicable standards — completeness is the integrity check)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every in-scope information security policy, topic-specific policy, rule, and applicable standard
+  in a single, dated compliance review schedule.
+- Cross-reference each item in the schedule to its unique document identifier or location, so auditors
+  can trace every entry to a real artefact.
+- Name the owner for each listed item as a specific individual, not a team or department, to avoid accountability
+  gaps.
+- Confirm that no required policy, rule, or standard is missing by comparing the schedule against your
+  documented scope and regulatory obligations.
+- Record the date the schedule was last reviewed and approved by a named, responsible manager.

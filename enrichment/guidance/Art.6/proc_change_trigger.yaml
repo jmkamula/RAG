@@ -1,0 +1,17 @@
+must_id: item:Art.6:proc_change_trigger
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Trigger list for re-evaluating the basis (purpose change, audience change, regulator guidance
+  update)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific triggers that require re-evaluating lawful basis, such as changes in processing purpose,
+  target audience, or new regulator guidance.
+- Document the date each trigger was last reviewed and the person responsible for monitoring changes.
+- Name the owner as a specific individual — not a team or department — for maintaining and updating the
+  trigger list.
+- Record any updates to the trigger list in a version-controlled document, including the reason for each
+  change.

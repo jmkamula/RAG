@@ -1,0 +1,17 @@
+must_id: item:A.8.29:reg_type
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Per-test type (matches procedure's test-types list)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each test entry in the Security Test Register with the corresponding test type listed
+  in the approved security testing procedure.
+- Record the specific test type for every test entry, using exact wording from the procedure’s test-types
+  list.
+- Name the individual who verified the match between the register entry and the procedure’s test type,
+  including the date of verification.
+- Avoid using generic or undefined test type labels such as "other" or "miscellaneous" that do not appear
+  in the procedure’s test-types list.

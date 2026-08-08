@@ -1,0 +1,20 @@
+must_id: item:A.5.8:cls_supplier_handover
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Supplier-agreement handover per record where project introduced new third-party contracts (operational
+  owner takes A.5.22 review duty)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each project that introduced a new third-party contract and record this in the security closure
+  record with project name and contract date.
+- Name the operational owner assigned to take over ongoing supplier review duties for each relevant contract,
+  listing them as a specific individual.
+- Attach a copy of the supplier agreement handover document, signed and dated by both the project lead
+  and the operational owner.
+- Cross-reference the handover in the supplier management register, noting the date the operational owner
+  assumed responsibility for A.5.22 review.
+- Avoid leaving the operational owner field blank or listing only a team or department; always specify
+  a named person.

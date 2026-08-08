@@ -1,0 +1,19 @@
+must_id: item:A.6.7:rev_policy_currency
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Policy-currency check (referenced policies still aligned — A.5.10 acceptable use, A.5.12 classification,
+  A.5.15 access, A.5.18 access review, A.7.4 physical, A.7.7 desk policy, A.8.1 user endpoint, A.8.24
+  cryptography)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the exact versions and last review dates of all referenced policies in the Remote Working Programme
+  Review document.
+- Cross-reference each policy’s current version against the requirements of the Remote Working Programme
+  to confirm ongoing alignment.
+- Record the name and signature of the individual who performed the policy-currency check, along with
+  the date of completion.
+- Flag and update any policy reference that is outdated or mismatched—do not leave references to superseded
+  or draft documents.

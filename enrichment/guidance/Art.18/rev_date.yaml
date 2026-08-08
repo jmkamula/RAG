@@ -1,0 +1,17 @@
+must_id: item:Art.18:rev_date
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the restriction program in a dated log or review register.
+- Name the reviewer as a specific individual responsible for conducting the restriction program review.
+- Cross-reference the actual review date against the planned review interval documented in your compliance
+  schedule.
+- Document any deviations from the planned interval, including reasons and corrective actions, in the
+  review record.
+- Retain evidence of the completed review, such as meeting minutes or a signed review checklist, with
+  the corresponding date.

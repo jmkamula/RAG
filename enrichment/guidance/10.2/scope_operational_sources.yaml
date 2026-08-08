@@ -1,0 +1,19 @@
+must_id: item:10.2:scope_operational_sources
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Operational sources in scope (incident lessons that surface a process gap, measurement breaches
+  indicating control failure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all operational sources that could reveal process gaps or control failures, such as incident reports
+  and measurement logs, in a dated document.
+- Name the specific individual responsible for maintaining and updating the list of in-scope sources,
+  avoiding generic roles like "the team."
+- Cross-reference each listed source with a recent example where it identified a process or control issue,
+  including the date and outcome.
+- Record the review and approval of the scope document by a named manager, with a signature and date.
+- Document any sources considered but excluded, along with a brief justification and the decision-maker’s
+  name.

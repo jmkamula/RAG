@@ -1,0 +1,19 @@
+must_id: item:8.2:scope_asset_classes
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Asset/process classes in scope for operational assessment (production systems, data flows,
+  supplier integrations, deployed products)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all production systems, data flows, supplier integrations, and deployed products in a dated operational
+  assessment scope document.
+- Name the specific individual responsible for maintaining and updating the operational assessment scope,
+  not just a team or department.
+- Cross-reference each asset or process class in scope to its unique identifier in the master asset register.
+- Record the approval of the operational assessment scope by a named senior manager, including the date
+  of approval.
+- Attach supporting diagrams or inventories that visually map the included data flows and integrations
+  to the documented scope.

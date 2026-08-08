@@ -1,0 +1,19 @@
+must_id: item:Art.35:rev_advice_quality
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: DPO-advice quality sample — advice substantive, not rubber-stamp
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a recent DPIA where the Data Protection Officer (DPO) provided written advice, and save the full
+  advice document with date and author clearly shown.
+- Highlight sections in the advice where the DPO identifies risks, suggests mitigations, or requests clarifications,
+  demonstrating substantive input.
+- Cross-reference the DPIA decision record to show how the DPO’s advice influenced the final risk treatment
+  or project decision.
+- Name the DPO as a specific individual in the advice document—avoid unsigned, undated, or generic “DPO
+  team” attributions.
+- Retain any follow-up correspondence or meeting notes that show management considered and responded to
+  the DPO’s advice.

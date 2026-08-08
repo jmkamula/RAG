@@ -1,0 +1,19 @@
+must_id: item:Art.19:trigger_events
+control_ref: Art.19
+standard_id: GDPR:2016/679
+must_text: Trigger events stated (Art.16 rectification / Art.17 erasure / Art.18 restriction)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all trigger events in your procedure, explicitly naming rectification, erasure, and restriction
+  of processing as required by Articles 16, 17, and 18.
+- Document the process for notifying each data recipient, including the method of notification and the
+  responsible individual, in a dated procedural record.
+- Record each notification sent to recipients, including the date, recipient’s name, and the specific
+  trigger event, in a notification log.
+- Name the notification owner as a specific individual, not as a team or department, in the procedure
+  documentation.
+- Retain copies of all recipient notifications and any recipient responses as evidence in a designated,
+  access-controlled repository.

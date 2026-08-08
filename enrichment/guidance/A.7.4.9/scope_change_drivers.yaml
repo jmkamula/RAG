@@ -1,0 +1,19 @@
+must_id: item:A.7.4.9:scope_change_drivers
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Trigger list (new integration / new region / new partner)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current data transmission scenarios, including new integrations, new regions, and new partners,
+  in a dated transmission context register.
+- Name a specific individual responsible for updating the transmission context register whenever a new
+  trigger event occurs.
+- Record the date and description of each trigger event that prompts a review or update of the transmission
+  context scope.
+- Attach supporting documentation, such as integration agreements or regional launch plans, to each relevant
+  entry in the register.
+- Avoid using outdated or generic trigger lists; confirm the trigger list is tailored to your organisation’s
+  actual transmission activities and reviewed at least annually.

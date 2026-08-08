@@ -1,0 +1,18 @@
+must_id: item:6.2:rev_currency
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: Register currency check — every objective reviewed (refreshed / closed / re-targeted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each information security objective in a central register, including the date it was last reviewed
+  and its current status.
+- Record the outcome of each objective’s review—refreshed, closed, or re-targeted—along with the reviewer’s
+  name and review date.
+- Attach supporting evidence, such as meeting minutes or approval emails, confirming decisions made for
+  each objective during the review.
+- Name the owner responsible for each objective as a specific individual, not a team or department.
+- Cross-reference the register entries with updated program documents to confirm all objectives have been
+  addressed in the latest review cycle.

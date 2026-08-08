@@ -1,0 +1,40 @@
+leaf_id: req:A.8.28:finding_register
+control_ref: A.8.28
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.8.25
+  standard_id: ISO27001:2022
+  title: Secure development life cycle
+  category: direct
+  rationale: Secure development life cycle processes define how secure coding is embedded into development,
+    including how findings are identified, triaged, and tracked. Without an SDLC, there is no structured
+    way to generate or manage secure coding findings.
+  good_enough: A documented SDLC exists that includes secure coding practices and outlines how code is
+    reviewed and tested for security issues.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register is necessary to map findings to specific systems, applications,
+    or codebases. Without knowing what assets exist, findings cannot be accurately tracked or assigned.
+  good_enough: A basic asset inventory exists that lists all major software assets and code repositories
+    in scope for secure coding activities.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that findings are assigned to responsible individuals or
+    teams for remediation and tracking. Without this, findings may go unaddressed.
+  good_enough: Roles for secure coding, code review, and remediation are defined and assigned to specific
+    personnel or teams.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment informs which findings are most critical and helps prioritize remediation
+    based on severity and business impact. This context is essential for meaningful tracking and SLA assignment.
+  good_enough: A recent risk assessment exists that covers software development risks and provides a basis
+    for prioritizing secure coding findings.

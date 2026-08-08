@@ -1,0 +1,19 @@
+must_id: item:A.5.17:factor_classes
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Authentication factor classes documented (knowledge / possession / inherence) and which combinations
+  satisfy MFA per access tier
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each authentication factor class used (knowledge, possession, inherence) in your procedure, with
+  examples of methods for each class.
+- Map and document which combinations of authentication factors are required for each access tier, referencing
+  specific systems or data types.
+- State how multi-factor authentication requirements change based on risk level or sensitivity, with clear
+  criteria for each tier.
+- Name the individual responsible for maintaining and updating the authentication mapping—avoid using
+  a team or department as the owner.
+- Attach a dated approval record for the procedure, signed by a designated authority.

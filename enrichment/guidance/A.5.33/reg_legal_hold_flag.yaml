@@ -1,0 +1,18 @@
+must_id: item:A.5.33:reg_legal_hold_flag
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Active legal-hold flag per class (rows currently under hold are visible at-a-glance)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a clearly labeled "Legal Hold" column to your records schedule, allowing each record class to be
+  marked as under legal hold or not.
+- Record the date the legal hold was applied and the name of the person authorizing it for each affected
+  record class.
+- Update the legal hold status immediately when a hold is lifted, including the date and the individual
+  who approved the change.
+- Name the legal hold owner as a specific individual, not a group or department, to avoid ambiguity in
+  responsibility.
+- Review the register regularly to confirm that all active legal holds are clearly visible and up to date.

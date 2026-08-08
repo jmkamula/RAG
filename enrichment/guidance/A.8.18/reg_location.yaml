@@ -1,0 +1,18 @@
+must_id: item:A.8.18:reg_location
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Per-row current location (systems where installed) — drives removal-where-unneeded principle
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each privileged utility program by name and version in the register, ensuring each entry is unique
+  and clearly identifiable.
+- Record the exact system names or IP addresses where each program is currently installed, updating this
+  information whenever changes occur.
+- Assign a named individual responsible for verifying the accuracy of each program’s location entry, not
+  a generic team or department.
+- Date each register entry and any subsequent updates to provide a clear change history for auditors.
+- Remove any register entries that list systems where the program is no longer installed, avoiding outdated
+  or misleading information.

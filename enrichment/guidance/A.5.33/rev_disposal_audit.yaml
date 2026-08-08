@@ -1,0 +1,18 @@
+must_id: item:A.5.33:rev_disposal_audit
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Disposal audit — sample of classes past retention end-date confirmed disposed (certificate
+  of destruction present) or held under documented legal hold; overruns flagged for remediation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a sample of record classes whose retention periods have ended, using a documented list with retention
+  end-dates and class descriptions.
+- Confirm each sampled record class has either a certificate of destruction on file or a documented legal
+  hold with reference to applicable law or litigation.
+- Record any instances where records are retained past their retention end-date without valid legal hold,
+  and flag these for remediation with assigned responsibility.
+- Name the reviewer as a specific individual, not a group or department, and record the review date on
+  the audit documentation.

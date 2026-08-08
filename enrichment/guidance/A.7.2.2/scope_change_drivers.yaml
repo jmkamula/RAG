@@ -1,0 +1,19 @@
+must_id: item:A.7.2.2:scope_change_drivers
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: Trigger list (new geo entry, new regulation enacted)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for maintaining the list of applicable jurisdictions and legal
+  bases, avoiding generic titles like "the team" or "compliance department".
+- Document each new jurisdiction or regulation added to your operations with the date of entry and the
+  triggering event.
+- Record the legal basis for processing personal data in each jurisdiction, referencing the relevant law
+  or regulation by name and section.
+- Review and update the list whenever a new geography is entered or a new regulation is enacted, and keep
+  a dated change log for each update.
+- Retain evidence of periodic reviews, such as a signed and dated summary from the responsible individual
+  at least annually.

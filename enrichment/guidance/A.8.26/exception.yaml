@@ -1,0 +1,18 @@
+must_id: item:A.8.26:exception
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Exception process for requirements that cannot be met (compensating-control + expiry)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step exception process in the procedure, including how to request, assess, and approve
+  exceptions to application security requirements.
+- Name a specific individual responsible for reviewing and approving exceptions, rather than listing a
+  team or department.
+- Record each approved exception with a description of the unmet requirement, the compensating control
+  in place, and a clear expiry or review date.
+- Retain signed approval records for each exception, including the approver’s name and date of decision.
+- Cross-reference all active exceptions in a central register, ensuring each entry links to its compensating
+  control and expiry date.

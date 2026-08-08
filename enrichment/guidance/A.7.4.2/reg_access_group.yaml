@@ -1,0 +1,19 @@
+must_id: item:A.7.4.2:reg_access_group
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+must_text: Access group per row (which internal roles can perform this operation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing operation in a dedicated row, using clear and specific operation names that match
+  your actual business activities.
+- Name the internal roles or job titles that are permitted to access or perform each processing operation,
+  avoiding generic terms like "staff" or "team".
+- Document the access group for each operation by recording the date and the person responsible for assigning
+  these permissions.
+- Cross-reference each access group entry with the relevant access control policy or procedure to show
+  alignment with documented controls.
+- Review the inventory regularly and update it when roles or access permissions change, recording the
+  date and person making each update.

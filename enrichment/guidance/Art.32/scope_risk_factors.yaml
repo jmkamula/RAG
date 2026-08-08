@@ -1,0 +1,19 @@
+must_id: item:Art.32:scope_risk_factors
+control_ref: Art.32
+standard_id: GDPR:2016/679
+must_text: Art.32.2 risk factors enumerated (accidental or unlawful destruction / loss / alteration /
+  unauthorised disclosure or access)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each risk factor from Art.32.2—accidental or unlawful destruction, loss, alteration, unauthorised
+  disclosure or access—in a dated document.
+- Name the person responsible for identifying and updating these risk factors, using their full name and
+  job title.
+- Record the date when the risk factors were last reviewed and confirmed as current.
+- Describe how each risk factor could realistically affect your organisation’s data, using examples specific
+  to your operations.
+- Avoid using generic or copy-paste risk descriptions that could apply to any organisation; tailor the
+  risks to your actual environment.

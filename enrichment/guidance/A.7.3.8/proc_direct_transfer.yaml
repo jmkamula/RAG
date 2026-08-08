@@ -1,0 +1,19 @@
+must_id: item:A.7.3.8:proc_direct_transfer
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Direct-transfer capability — where technically feasible, transfer directly to another controller
+  (Art.20.2)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the technical process for securely transferring personal data directly to another organization,
+  including supported formats and transfer protocols, in a dated procedure.
+- Name a specific individual responsible for managing and authorizing direct transfers, avoiding generic
+  titles like "IT team" or "Data Office."
+- Record each direct transfer request and its outcome, including recipient details, transfer date, and
+  method, in a dedicated transfer log.
+- Obtain and retain written confirmation from the receiving organization acknowledging receipt and integrity
+  of the transferred data.
+- Review and update the procedure annually, noting the review date and the person who approved any changes.

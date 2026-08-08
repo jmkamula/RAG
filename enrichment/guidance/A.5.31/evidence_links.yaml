@@ -1,0 +1,18 @@
+must_id: item:A.5.31:evidence_links
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Links to evidence of compliance per requirement (policies, audit reports, certifications)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each legal, statutory, regulatory, and contractual requirement in the register with a unique reference
+  number and a clear description.
+- Link each requirement entry to a specific, named document or record that demonstrates compliance, such
+  as a policy, audit report, or certification.
+- Record the date each evidence document was last reviewed or updated, and name the person responsible
+  for maintaining its accuracy.
+- Cross-reference the register entry to the exact section or page of the evidence document that addresses
+  the requirement.
+- Name the owner of each requirement as a specific individual, not a team or department.

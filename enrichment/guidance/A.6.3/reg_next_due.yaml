@@ -1,0 +1,15 @@
+must_id: item:A.6.3:reg_next_due
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Per-row next-due date (drives reminder/escalation workflow)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the completion date and the calculated next-due date for each individual training entry in the
+  register.
+- Assign responsibility for updating next-due dates to a named individual, not a generic role or team.
+- Cross-reference each next-due date with the organisation’s training policy to show alignment with required
+  update intervals.
+- Retain evidence of automated or manual reminders sent based on next-due dates for each row.

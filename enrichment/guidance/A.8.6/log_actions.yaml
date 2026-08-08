@@ -1,0 +1,18 @@
+must_id: item:A.8.6:log_actions
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Actions taken in response to breach captured (auto-scale event / manual scale / accepted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each capacity breach event in the Capacity Monitoring Log, including the date, time, and system
+  or service affected.
+- Document the specific action taken for each breach, clearly stating if it was an auto-scale event, manual
+  intervention, or if the breach was accepted.
+- Name the individual who authorized or executed the response action for each event, avoiding generic
+  roles like "IT team" or "operations".
+- Attach supporting evidence, such as system logs or approval emails, to each log entry to verify the
+  action taken.
+- Review and sign off on each completed log entry by a designated manager to confirm accuracy and completeness.

@@ -1,0 +1,20 @@
+must_id: item:A.6.3:role_specific_deep
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Role-specific deep dives (developers — secure coding from A.8.25; admins — privileged-access
+  discipline from A.8.2; finance — fraud awareness; HR — DSAR handling)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the information security training curriculum for each role group, including developers, administrators,
+  finance, and HR, with dates and version numbers.
+- Name a specific individual responsible for maintaining and updating each role-specific training module,
+  rather than listing a team or department.
+- Record attendance logs for each training session, showing participant names, roles, dates, and completion
+  status.
+- Cross-reference the training content for each role to the relevant ISO27001 controls (e.g., A.8.25 for
+  secure coding) in your training programme documentation.
+- Retain feedback or assessment results from participants to demonstrate that training was understood
+  and is proportionate to their job responsibilities.

@@ -1,0 +1,20 @@
+must_id: item:A.8.2:rc_sla_met
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Revocation-actions-within-SLA flag per row (auditor-critical timeliness proof, parallel to
+  A.5.16 rev_sla_met)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time each privileged access was identified for revocation in a dedicated column
+  within the recertification log.
+- Document the date and time the revocation action was completed for each entry, ensuring both timestamps
+  are present and unambiguous.
+- Calculate and flag whether revocation was performed within the defined service level agreement (SLA)
+  for each row, using a clear "Yes/No" or similar indicator.
+- Name the responsible individual who approved or executed each revocation, avoiding generic labels like
+  "IT team" or "admin group".
+- Retain the signed-off version of the SLA document referenced in the recertification log, showing the
+  agreed timeframe for revocation actions.

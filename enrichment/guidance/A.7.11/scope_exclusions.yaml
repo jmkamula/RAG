@@ -1,0 +1,19 @@
+must_id: item:A.7.11:scope_exclusions
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Exclusions (cloud workloads → cloud provider handles utilities; co-located rack space → provider
+  responsibility)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical sites under your operational control where utility continuity is your responsibility,
+  including addresses and site names.
+- Document exclusions for cloud workloads and co-located rack space, clearly stating that utility continuity
+  is handled by the respective service providers.
+- Name a specific individual responsible for maintaining and updating the list of applicable and excluded
+  sites, avoiding generic roles or teams.
+- Cross-reference each exclusion to supporting contracts or service agreements that confirm the provider’s
+  responsibility for utility continuity.
+- Date and sign the completed scope document to show when it was last reviewed and by whom.

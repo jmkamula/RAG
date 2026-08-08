@@ -1,0 +1,15 @@
+must_id: item:A.8.31:reg_data_allowed
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Per-row data classes permitted (drives masking obligations from A.8.11)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each environment in the register with a unique name and a clear description of its purpose.
+- Assign a specific data class to every environment row, using your organisation’s approved data classification
+  scheme.
+- Cross-reference each environment’s data class to the masking requirements documented under control A.8.11.
+- Name the register owner as a specific individual, not a team or department.
+- Record the date of the most recent review or update for each environment entry.

@@ -1,0 +1,17 @@
+must_id: item:A.8.18:rev_reviewer
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Reviewer identity (InfoSec + Infrastructure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer for privileged utility programs as a specific individual from the Information Security
+  team, not a generic team or role.
+- Record the identity of the Infrastructure team member who participated in the review, including their
+  full name and job title.
+- Document the date the review was completed and retain a signed or digitally acknowledged record from
+  both the Information Security and Infrastructure reviewers.
+- Cross-reference the review record with the list of privileged utility programs to show the scope covered
+  during the review.

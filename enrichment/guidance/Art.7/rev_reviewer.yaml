@@ -1,0 +1,16 @@
+must_id: item:Art.7:rev_reviewer
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO or Privacy Lead + product lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual holding the DPO or Privacy Lead role, not a generic title
+  or team.
+- Record the product lead’s full name and role alongside the DPO or Privacy Lead in the consent program
+  review document.
+- Document the date when both the DPO or Privacy Lead and the product lead completed their review of the
+  consent program.
+- Sign the review document with both reviewers’ signatures or digital approvals to confirm their participation.

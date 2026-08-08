@@ -1,0 +1,18 @@
+must_id: item:A.7.4.6:reg_system
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+must_text: System / infrastructure component per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each system or infrastructure component that generates or stores temporary files as a separate
+  row in the Temp Files Sweep Register.
+- Record the responsible individual’s full name for each component entry, avoiding generic labels like
+  "IT team" or "system owner".
+- Document the date of the most recent temporary file sweep for each component, referencing supporting
+  logs or screenshots where available.
+- State the method used for sweeping temporary files for each component, such as automated script or manual
+  process, in the register.
+- Review the register quarterly and sign off with the reviewer’s name and date to confirm ongoing coverage.

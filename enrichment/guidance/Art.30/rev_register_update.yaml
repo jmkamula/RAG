@@ -1,0 +1,17 @@
+must_id: item:Art.30:rev_register_update
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Changes propagated back to the live register with reference to this review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of each RoPA review and clearly identify any changes required as a result of the review.
+- Name the individual responsible for updating the live RoPA register based on the review findings.
+- Cross-reference each change in the live register to the specific review record, including the review
+  date and summary of changes.
+- Document confirmation that all required changes have been implemented in the live register, signed or
+  approved by the responsible individual.
+- Avoid leaving changes unlinked to a review record—ensure every update in the live register cites its
+  originating review.

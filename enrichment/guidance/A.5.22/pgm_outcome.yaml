@@ -1,0 +1,17 @@
+must_id: item:A.5.22:pgm_outcome
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Cadence-adjustment decisions or scope-adjustment decisions (tighten / loosen / re-tier)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each decision to change the frequency or scope of supplier reviews in a dated entry within the
+  Supplier Review Program Meta-Review log.
+- Name the individual who approved the cadence or scope adjustment, ensuring the approver is a specific
+  person, not a group or role.
+- State the reason for each adjustment, referencing relevant supplier risk factors, performance data,
+  or changes in business requirements.
+- Attach supporting evidence, such as risk assessments or supplier performance reports, to each meta-review
+  entry documenting the decision.

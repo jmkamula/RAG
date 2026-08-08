@@ -1,0 +1,17 @@
+must_id: item:Art.8:reg_subject_id
+control_ref: Art.8
+standard_id: GDPR:2016/679
+must_text: Minor's pseudonymous identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique pseudonymous identifier to each minor in the register, ensuring it cannot be traced
+  back to their real identity without additional information.
+- Record the assigned pseudonymous identifier alongside each consent entry, matching the identifier to
+  the specific consent event.
+- Document the method used to generate pseudonymous identifiers in a dated procedure, and reference this
+  procedure in the register.
+- Name the person responsible for maintaining the register as a specific individual, not as a team or
+  department.

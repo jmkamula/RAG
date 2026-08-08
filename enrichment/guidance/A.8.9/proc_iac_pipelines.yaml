@@ -1,0 +1,17 @@
+must_id: item:A.8.9:proc_iac_pipelines
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Infrastructure-as-code pipelines for repeatable deployment
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the use of infrastructure-as-code tools in your configuration management procedure, naming
+  the specific tools and pipeline stages used for deployments.
+- Record the date and author of the latest procedure update that includes infrastructure-as-code requirements
+  for repeatable deployment.
+- Name the owner responsible for maintaining and updating the infrastructure-as-code pipelines as a specific
+  individual, not a team or department.
+- Attach a sample pipeline execution log or deployment record that demonstrates a successful, repeatable
+  deployment using the documented procedure.

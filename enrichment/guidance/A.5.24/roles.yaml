@@ -1,0 +1,18 @@
+must_id: item:A.5.24:roles
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Roles and responsibilities defined (IR lead, deputies, comms lead, legal liaison, exec sponsor;
+  named individuals or stable roles, not 'TBD')
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each incident response role—IR lead, deputies, communications lead, legal liaison, executive sponsor—in
+  a table within the planning framework.
+- Assign a named individual or a stable job title to each role, avoiding placeholders like "TBD" or generic
+  labels such as "the team."
+- Record the date each assignment was last reviewed or updated, and include this date in the framework
+  document.
+- Cross-reference each named individual or job title with their contact information and reporting line
+  in an appendix or directory.

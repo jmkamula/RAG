@@ -1,0 +1,19 @@
+must_id: item:A.8.33:protection
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Protection equivalent to production where data warrants it (encryption / access logging / retention)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for test data protection by full name and job title in the Test Information
+  Management Procedure.
+- Document the encryption methods and access logging controls applied to test environments, matching those
+  used in production where sensitive data is present.
+- Record the retention period for test data, ensuring it does not exceed the period defined for production
+  data in your data retention policy.
+- State in the procedure that test data containing sensitive information must never be left unencrypted
+  or accessible without logging, even temporarily.
+- Attach a dated approval signature from a senior manager confirming the procedure meets production-equivalent
+  protection standards.

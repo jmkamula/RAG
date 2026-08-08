@@ -1,0 +1,16 @@
+must_id: item:6.1.2:scope_calibration
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Calibration notes (when scoring was last validated against actual incidents)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date when your risk scoring method was last compared to real security incidents in a dated
+  calibration log.
+- Document the names of individuals who performed the calibration and their roles in the process.
+- Summarize the findings from the comparison, noting any adjustments made to scoring criteria as a result.
+- Attach evidence of the actual incidents used for calibration, such as incident reports or summaries,
+  to the calibration record.
+- Name the calibration owner as a specific individual, not a group or department, in the methodology documentation.

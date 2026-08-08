@@ -1,0 +1,40 @@
+leaf_id: req:A.6.1:screening_record_register
+control_ref: A.6.1
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of your organization and which roles are in-scope for screening
+    before you can build a meaningful screening record register. This ensures you capture all relevant
+    candidates and avoid gaps.
+  good_enough: A documented scope that clearly identifies the business units, locations, and job roles
+    covered by the ISMS and subject to screening controls.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of who is responsible for conducting, recording, and approving screening
+    is essential. Without this, the register may lack ownership or accuracy.
+  good_enough: A list or matrix showing who is responsible for screening decisions and record-keeping,
+    even if not fully formalized.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Knowing the classification of information and systems accessed by each role helps determine
+    the level of screening required and what details to record in the register.
+  good_enough: A basic mapping of role tiers to information classification, sufficient to justify screening
+    depth for each candidate.
+- ref: A.6.1
+  standard_id: ISO27001:2022
+  title: Screening
+  category: direct
+  rationale: You must have defined what screening checks are required for each role before you can record
+    which checks were performed for each candidate.
+  good_enough: A documented list of required screening checks per role, even if not fully detailed, to
+    guide register entries.

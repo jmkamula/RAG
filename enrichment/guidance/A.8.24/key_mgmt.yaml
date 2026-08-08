@@ -1,0 +1,20 @@
+must_id: item:A.8.24:key_mgmt
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Key-management principles defined (generation / storage / rotation / revocation / archival
+  / destruction)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the key-management principles in your cryptography policy, covering generation, storage, rotation,
+  revocation, archival, and destruction in clear, separate sections.
+- Name the individual responsible for key management by full name and job title, avoiding generic roles
+  like "IT team" or "security group".
+- Record the date of the most recent policy approval and the approving authority’s signature or documented
+  decision.
+- Cross-reference supporting procedures or technical standards for each key-management phase, ensuring
+  links or document titles are up to date and accessible.
+- State the review schedule for the policy, including a specific review frequency and the person assigned
+  to lead the review.

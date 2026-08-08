@@ -1,0 +1,17 @@
+must_id: item:A.5.37:template_adherence
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Template adherence flag per procedure (consistent shape across the catalogue — purpose / scope
+  / prerequisites / steps / verification / rollback)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- List each operating procedure in the register with a unique title and version number for clear identification.
+- Attach the completed template for each procedure, showing sections for purpose, scope, prerequisites,
+  steps, verification, and rollback.
+- Mark a template adherence flag for each procedure, indicating whether all required sections are present
+  and filled out.
+- Name the reviewer who checked template adherence for each procedure, avoiding anonymous or group attributions.
+- Record the date of the most recent template adherence check for each procedure in the register.

@@ -1,0 +1,19 @@
+must_id: item:A.7.3.3:scope_delivery_channels
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: Delivery channels enumerated with notice-at-collection status per channel
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all delivery channels used to provide products or services, including websites, apps, physical
+  locations, and customer service lines, in a dated document.
+- State for each delivery channel whether a privacy notice is presented at the point of data collection,
+  and describe the method used.
+- Name the person responsible for maintaining the delivery channel inventory and updating notice-at-collection
+  status, ensuring this is a specific individual.
+- Attach supporting screenshots, sample notices, or photographs as evidence of notice presentation for
+  each channel where applicable.
+- Cross-reference your delivery channel inventory with your privacy notice register to confirm all channels
+  are covered.

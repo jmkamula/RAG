@@ -1,0 +1,16 @@
+must_id: item:A.5.33:reg_storage_location
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Storage location per class (system / repository / physical archive — needed at disposal and
+  at legal-hold invocation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the storage location for each record class, specifying the exact system, repository, or physical
+  archive used.
+- Name the owner responsible for each storage location as a specific individual, not a team or department.
+- Record the date when each storage location entry was last reviewed or updated in the register.
+- Cross-reference any legal hold procedures or disposal workflows to the relevant storage location entry
+  for each record class.

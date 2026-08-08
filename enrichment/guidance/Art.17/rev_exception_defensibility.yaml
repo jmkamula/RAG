@@ -1,0 +1,19 @@
+must_id: item:Art.17:rev_exception_defensibility
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Art.17.3 exception sample — refused requests have defensible exception grounds
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each refused erasure request with the specific Article 17.3 exception cited, including the
+  relevant legal or regulatory justification.
+- Record the name and role of the decision-maker who approved the refusal, along with the date of the
+  decision.
+- Attach supporting evidence, such as correspondence with the requester and any legal opinions or internal
+  memos justifying the exception.
+- Name the exception clearly and avoid using generic phrases like "business need" or "operational reasons"
+  without referencing Article 17.3 criteria.
+- Review and update the refusal log regularly to confirm all entries remain accurate and traceable to
+  the original request and decision.

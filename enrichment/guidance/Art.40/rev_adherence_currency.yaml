@@ -1,0 +1,18 @@
+must_id: item:Art.40:rev_adherence_currency
+control_ref: Art.40
+standard_id: GDPR:2016/679
+must_text: Adherence currency — every active adherence has current monitoring body sign-off
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every active code of conduct your organisation adheres to, including the full title and version,
+  in a dated register.
+- Obtain and retain a signed statement or certificate from the relevant monitoring body confirming current
+  adherence for each code.
+- Record the date of the most recent monitoring body sign-off for each code in your register.
+- Name the monitoring body and a specific contact person for each code, not just the organisation or a
+  generic role.
+- Flag any code where the monitoring body sign-off is missing, expired, or undated, and document actions
+  taken to resolve these gaps.

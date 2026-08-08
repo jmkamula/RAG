@@ -1,0 +1,39 @@
+leaf_id: req:A.5.8:project_security_register
+control_ref: A.5.8
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The Project Security Register must only include projects that fall within the defined ISMS
+    scope. Without a clear scope statement, you cannot reliably determine which projects need to be tracked.
+  good_enough: A documented and approved ISMS scope that clearly identifies the business units, locations,
+    and activities covered by the ISMS.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: The register requires assignment of project owners and InfoSec liaisons for each entry. If
+    roles and responsibilities are undefined, you cannot populate or maintain the register accurately.
+  good_enough: A basic matrix or list mapping key security roles (including project owner and InfoSec
+    liaison) to named individuals or positions.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Projects may need to be classified by security tier or sensitivity in the register. Without
+    a classification scheme, you cannot consistently assign security tiers to projects.
+  good_enough: A simple, documented set of classification levels and criteria that can be referenced when
+    categorizing projects in the register.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Projects often create or modify information assets. The asset register provides a reference
+    point for linking projects to affected assets, ensuring completeness and traceability.
+  good_enough: An initial asset register listing major information assets, even if not fully detailed,
+    to support cross-referencing with project activities.

@@ -1,0 +1,17 @@
+must_id: item:A.5.19:off_transition
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Transition completion evidence (operational handover, replacement supplier engaged where applicable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and details of the operational handover from the outgoing supplier, including named
+  recipients and specific transferred responsibilities.
+- Record the name and contract start date of any replacement supplier engaged, attaching the signed agreement
+  or onboarding confirmation.
+- Retain written confirmation from relevant business owners that all critical services and data have been
+  transitioned or secured before final supplier disengagement.
+- Name the responsible individual overseeing the offboarding process—do not list a team or department
+  as the owner.

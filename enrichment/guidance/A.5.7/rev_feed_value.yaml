@@ -1,0 +1,19 @@
+must_id: item:A.5.7:rev_feed_value
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Feed-value analysis per source (which feeds delivered actionable IOCs / advisories; which were
+  dropped)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each threat intelligence feed source in a dated review document, specifying the period covered
+  and the individual conducting the analysis.
+- Record for each source which indicators or advisories were actionable and used, and which were dropped
+  or found irrelevant.
+- Document the criteria used to determine feed value, including examples of actionable and non-actionable
+  items for the review period.
+- Name the reviewer as a specific individual, not a team or department, to avoid ambiguity in accountability.
+- Retain evidence of any decisions to discontinue or add sources, including the rationale and approval
+  date.

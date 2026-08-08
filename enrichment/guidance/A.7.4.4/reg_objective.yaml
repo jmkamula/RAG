@@ -1,0 +1,17 @@
+must_id: item:A.7.4.4:reg_objective
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+must_text: Minimization objective per row (target identifiability level — identified / pseudonymised /
+  anonymised)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- List each data processing activity in the inventory with a unique identifier and a clear description.
+- State the minimization objective for each activity, specifying whether data is identified, pseudonymised,
+  or anonymised.
+- Name the owner responsible for each minimization objective as a specific individual, not a team or department.
+- Record the date each minimization objective was last reviewed or updated in the inventory.
+- Cross-reference supporting documentation that explains how the stated identifiability level is achieved
+  for each activity.

@@ -1,0 +1,18 @@
+must_id: item:6.3:approval
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Approval authority before implementation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual or role with authority to approve ISMS changes in the Planning of Changes to the
+  ISMS Procedure document.
+- Document each planned ISMS change in a change log, including a description, date, and the person requesting
+  the change.
+- Record formal approval for each change with the approver’s name, signature (physical or electronic),
+  and approval date before implementation.
+- Attach the approved change request or meeting minutes as evidence of authorization to the change log
+  entry.
+- Specify the approver as a named person or unique role—avoid using generic terms like "the team" or "management."

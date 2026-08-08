@@ -1,0 +1,42 @@
+leaf_id: req:A.7.4.3:accuracy_incident_register
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Knowing the documented purposes for processing personal data is essential to determine what
+    constitutes an inaccuracy and whether it impacts the intended processing. Without this, you can't
+    assess or record the relevance of accuracy incidents.
+  good_enough: A clear, up-to-date list of processing purposes for all personal data types, even if not
+    fully mapped to every system.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity helps determine the severity
+    and remediation requirements for accuracy incidents. It ensures the register captures incidents that
+    could affect compliance.
+  good_enough: A basic mapping of each processing activity to its lawful basis, even if some edge cases
+    are still under review.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An asset register is needed to identify which information systems and data sets are in scope
+    for accuracy monitoring. Without it, you can't reliably track where inaccuracies may occur or need
+    to be logged.
+  good_enough: A working inventory of key information assets that handle personal data, even if some minor
+    assets are pending inclusion.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organization and which data are covered by
+    the ISMS and PIMS, ensuring the register only tracks relevant incidents.
+  good_enough: A documented scope that at least covers all business units and systems processing personal
+    data, even if not yet fully granular.

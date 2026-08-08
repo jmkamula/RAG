@@ -1,0 +1,20 @@
+must_id: item:A.5.11:rev_writeoff_audit
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Write-off audit (any leaver row written off — was risk acceptance appropriately authorised?
+  what value was lost?)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each asset written off in the leaver register, including asset type, serial number, and the
+  date of write-off.
+- Document the risk assessment and justification for each asset write-off, referencing any supporting
+  evidence or business case.
+- Name the individual who authorised the risk acceptance for each write-off, ensuring this is a specific
+  person and not a group or department.
+- Record the estimated value lost for each written-off asset, including how this value was calculated
+  or sourced.
+- Attach the signed risk acceptance approval for each write-off, dated and linked to the corresponding
+  leaver record.

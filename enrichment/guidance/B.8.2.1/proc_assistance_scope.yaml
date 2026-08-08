@@ -1,0 +1,19 @@
+must_id: item:B.8.2.1:proc_assistance_scope
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+must_text: Assistance scope enumerated (Art.28.3.e subject rights + Art.28.3.f security + breach notification
+  + PIA support + prior consultation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each type of assistance your organisation will provide to customers regarding subject rights, security,
+  breach notification, PIA support, and prior consultation in the procedure document.
+- Reference the specific articles of the GDPR (Art.28.3.e and Art.28.3.f) in the procedure to show alignment
+  with legal requirements.
+- Name the individual or role responsible for delivering each type of assistance, avoiding generic terms
+  like "the team" or "IT department".
+- Record the approval of the procedure by a named senior manager, including the approval date.
+- Attach a copy of the most recent signed customer agreement that includes the enumerated assistance scope
+  as described in the procedure.

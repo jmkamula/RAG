@@ -1,0 +1,18 @@
+must_id: item:A.7.4.2:proc_access_limit
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+must_text: Access limitation — role-based access controls scoped by purpose
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a list of all personal data processing activities, including the specific business purpose
+  for each activity, in a dated register.
+- Assign access rights for each processing activity to named individuals or roles, linking them directly
+  to the stated business purpose.
+- Record the approval of access rights by a designated manager, including the approver’s name and the
+  date of approval.
+- Name the access control owner as a specific person, not a generic group or department.
+- Retain records of periodic reviews of access rights, showing the date, reviewer’s name, and any changes
+  made.

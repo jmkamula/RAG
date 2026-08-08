@@ -1,0 +1,18 @@
+must_id: item:Art.26:relationship_essence
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Essence of the arrangement made available to data subjects (in privacy notice or similar)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in your privacy notice that you operate as joint controllers and briefly describe the main points
+  of your joint arrangement.
+- Name all joint controller organisations involved, listing their legal names rather than generic terms
+  or group names.
+- Document where in your privacy notice the joint controller arrangement is described, referencing the
+  exact section or paragraph.
+- Record the date your privacy notice was last updated to include the joint controller arrangement information.
+- Confirm that the published privacy notice is accessible to data subjects without requiring login or
+  special access.

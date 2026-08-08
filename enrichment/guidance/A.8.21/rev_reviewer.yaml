@@ -1,0 +1,17 @@
+must_id: item:A.8.21:rev_reviewer
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Network Engineering + Supplier Management)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer from Network Engineering as a specific individual, not a group or job title, in the
+  review documentation.
+- Record the reviewer’s full name and role from Supplier Management in the signed review report for each
+  program review cycle.
+- Document the date each reviewer completed their portion of the review in the official program review
+  record.
+- Retain copies of all review reports with both reviewers’ names and signatures for each completed review
+  period.

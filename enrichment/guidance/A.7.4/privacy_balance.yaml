@@ -1,0 +1,19 @@
+must_id: item:A.7.4:privacy_balance
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: Privacy considerations for monitoring of personnel (GDPR / employment law compliance)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the legal basis for monitoring personnel, referencing relevant GDPR articles and local employment
+  law, in the procedure’s introduction.
+- State the specific types of personal data collected during monitoring and the purposes for which each
+  type is processed.
+- Name a specific individual responsible for reviewing privacy impacts, avoiding vague roles like "the
+  team" or "HR department".
+- Record the date and outcome of the most recent privacy impact assessment, attaching the signed assessment
+  report to the procedure.
+- Publish a summary of monitoring activities and privacy safeguards to personnel, with a dated communication
+  record or acknowledgment list.

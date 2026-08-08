@@ -1,0 +1,17 @@
+must_id: item:B.8.5.8:proc_notification_content
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+must_text: Notification content (new subcontractor identity + countries + Annex B coverage summary)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the full legal name and contact details of the new subcontractor in the change notification
+  record.
+- List all countries where the new subcontractor will process or access personal data in the notification.
+- Summarize which Annex B privacy requirements the new subcontractor will cover, referencing specific
+  clauses in the notification.
+- Attach a copy of the notification sent to affected parties, showing the date and recipients.
+- Name the person responsible for preparing and sending the notification as a specific individual, not
+  a generic role or team.

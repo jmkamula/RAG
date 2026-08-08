@@ -1,0 +1,17 @@
+must_id: item:A.5.10:comm_date
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Date of publication/communication
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date the Acceptable Use Policy was communicated to all relevant users in a dated communication
+  log or register.
+- Name the individual responsible for distributing the policy, ensuring a specific person is listed rather
+  than a generic team or department.
+- Retain a copy of the communication sent to users, such as an email or intranet announcement, showing
+  the date and content.
+- Document user acknowledgements or confirmations of receipt, including the date each user responded or
+  signed.

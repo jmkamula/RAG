@@ -1,0 +1,15 @@
+must_id: item:A.6.5:reg_briefer
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Per-row briefer identity (HR partner; line manager joins for role-change cases)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the HR partner who conducted each leaver briefing in a dedicated column for
+  every entry in the register.
+- Document the line manager’s full name alongside the HR partner for any leaver cases involving a role
+  change.
+- Enter the date each briefing was completed next to the corresponding briefer identities in the register.
+- Name the briefer as a specific individual—avoid using group labels like "HR team" or "management".

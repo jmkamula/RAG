@@ -1,0 +1,18 @@
+must_id: item:A.8.29:scope_change_drivers
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new app class, new test technique, new regulator)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific triggers that require a review of the security testing scope, such as new application
+  types, testing methods, or regulatory changes.
+- Document each trigger in a dated register, including a brief description and the person responsible
+  for monitoring changes.
+- Assign a named individual—not a team or department—to review the scope when a trigger occurs.
+- Record each instance when a trigger is activated and the resulting decision, including the date and
+  the approver’s name.
+- Review the trigger list annually and update it as needed, keeping a record of the review date and reviewer’s
+  name.

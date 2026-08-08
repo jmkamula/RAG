@@ -1,0 +1,17 @@
+must_id: item:A.5.11:verification
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Verification step signed by both the returning party and the receiving role (IT/manager) with
+  itemised confirmation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each returned asset by serial number and description on a dedicated return form for the departing
+  user.
+- Assign a specific individual from IT or management as the receiving party, naming them on the form rather
+  than using a generic role.
+- Obtain signatures from both the returning user and the named receiving party on the completed asset
+  return form, with the date of return.
+- Retain the signed and dated asset return form in your records management system for future reference.

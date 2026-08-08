@@ -1,0 +1,19 @@
+must_id: item:Art.44:rev_silent_transfer_sweep
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Silent-transfer sweep — verify no new vendor or service-shape change created an unflagged transfer
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all new vendors and any changes to existing services in the past review period using a dated
+  change log.
+- Cross-reference each new or changed vendor against your list of approved data transfer mechanisms and
+  locations.
+- Document any data flows to countries outside the European Economic Area introduced by new vendors or
+  service changes, including transfer type and justification.
+- Record the review findings in a dated summary, explicitly stating if no new transfers or changes were
+  detected.
+- Name the reviewer as a specific individual, not a team or department, responsible for conducting and
+  signing off the sweep.

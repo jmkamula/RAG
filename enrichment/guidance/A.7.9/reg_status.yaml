@@ -1,0 +1,16 @@
+must_id: item:A.7.9:reg_status
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Per-row status (active-off-premises / returned / lost / stolen / written-off)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the current status for each asset in the register, using clear terms such as "active-off-premises",
+  "returned", "lost", "stolen", or "written-off".
+- Date each status entry to show when the asset's status last changed.
+- Name the person responsible for updating each asset's status, ensuring a specific individual is listed
+  for every row.
+- Avoid leaving any asset row with a blank or ambiguous status, as auditors will flag incomplete or unclear
+  entries.

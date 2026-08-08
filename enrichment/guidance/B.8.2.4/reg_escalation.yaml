@@ -1,0 +1,18 @@
+must_id: item:B.8.2.4:reg_escalation
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Escalation history per row (Legal / DPO / SA notification if unresolved)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and details of each escalation step for every unresolved instruction, including who
+  escalated and to whom.
+- Name the specific individuals involved in each escalation, such as the Legal contact, Data Protection
+  Officer, or Supervisory Authority.
+- Document the outcome or current status of each escalation, noting any pending actions or final resolutions.
+- Attach supporting correspondence or decision records for each escalation, such as emails or signed meeting
+  notes.
+- Avoid listing escalation recipients as generic roles or teams; always identify named individuals for
+  accountability.

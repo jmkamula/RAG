@@ -1,0 +1,48 @@
+leaf_id: req:A.7.5.4:disclosure_event_log
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the purposes for which PII is processed before you can log and
+    justify each disclosure event. Without this, you cannot meaningfully record the authority or context
+    for any PII disclosure.
+  good_enough: A documented list of processing purposes for all relevant PII, with enough detail to link
+    each disclosure event to its purpose.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Every PII disclosure must be supported by a lawful basis. This prerequisite ensures you can
+    record the source of authority for each event in the log.
+  good_enough: A mapped set of lawful bases for each processing purpose, sufficient to reference in the
+    disclosure event log.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: You need a way to identify and describe the types and sensitivity of PII being disclosed.
+    The classification scheme provides the language and structure for this.
+  good_enough: A basic, operational classification scheme that covers all PII types in scope, even if
+    not fully mature.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: To log PII disclosures, you must know what PII assets exist and where they reside. The asset
+    register provides this inventory.
+  good_enough: An up-to-date list of PII data assets, with enough detail to identify what was disclosed
+    in each event.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The disclosure event log must align with the defined scope of your ISMS and PIMS. Without
+    a clear scope, you cannot determine which disclosures need to be logged.
+  good_enough: A documented ISMS/PIMS scope that clearly includes all relevant PII processing activities
+    and systems.

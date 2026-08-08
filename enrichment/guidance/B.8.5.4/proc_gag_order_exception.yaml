@@ -1,0 +1,18 @@
+must_id: item:B.8.5.4:proc_gag_order_exception
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+must_text: Gag-order exception — where notification prohibited by law, notification suppressed with legal-hold
+  record retained for post-order disclosure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each legally-binding disclosure request where notification is prohibited by law, including
+  the specific legal reference and date received.
+- Name a specific individual responsible for maintaining a legal-hold record for each suppressed notification
+  — do not list a team or department.
+- Retain a copy of the legal-hold record, clearly marking the prohibition period and the trigger for post-order
+  disclosure.
+- Record the date and method of post-order disclosure once the prohibition is lifted, attaching supporting
+  correspondence or evidence.

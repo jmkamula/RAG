@@ -1,0 +1,19 @@
+must_id: item:A.8.28:reg_pattern_signal
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Per-finding pattern flag (repeating patterns flagged for training feedback)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each secure coding finding in the register with a clear description, date, and the name of the
+  developer or team responsible.
+- Flag any finding that matches a previously recorded pattern by cross-referencing earlier entries and
+  noting the recurring issue in a dedicated column.
+- Assign a specific individual to review flagged patterns and document the decision on whether training
+  or feedback is required.
+- Name the owner of the register as a specific person, not a group or department, to avoid ambiguity in
+  responsibility.
+- Retain evidence of completed training or feedback sessions linked to the flagged patterns, including
+  attendee names and session dates.

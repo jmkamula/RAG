@@ -1,0 +1,15 @@
+must_id: item:Art.21:rev_reviewer
+control_ref: Art.21
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO + marketing/product lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as the Data Protection Officer by full name and job title in the objection program
+  review document.
+- Identify the marketing or product lead reviewer by full name and job title in the same review record.
+- Record the date each reviewer completed their review and add their signatures or digital sign-off to
+  the document.
+- Avoid listing reviewers as a group or department; specify named individuals for both required roles.

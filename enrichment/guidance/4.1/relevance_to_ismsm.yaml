@@ -1,0 +1,19 @@
+must_id: item:4.1:relevance_to_ismsm
+control_ref: '4.1'
+standard_id: ISO27001:2022
+must_text: Relevance to ISMS intended outcomes stated per issue
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each internal and external issue separately in the Issues Register, using clear descriptions that
+  relate directly to your information security management system.
+- State for each issue how it could impact your ability to achieve the intended outcomes of your information
+  security management system.
+- Name the specific intended outcome(s) affected by each issue, avoiding generic statements like "affects
+  ISMS" or "general risk."
+- Record the date each issue was identified and the person responsible for assessing its relevance to
+  the intended outcomes.
+- Review and update the Issues Register at planned intervals, documenting the date of each review and
+  any changes in relevance or impact.

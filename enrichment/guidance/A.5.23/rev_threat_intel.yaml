@@ -1,0 +1,19 @@
+must_id: item:A.5.23:rev_threat_intel
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: External threat-intel input considered (link to A.5.7)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and outcome of each cloud service posture review, including explicit mention of external
+  threat intelligence sources evaluated.
+- Name the individual responsible for integrating external threat intelligence into the review, ensuring
+  this is a specific person, not a group or role.
+- Cross-reference the review record to the relevant external threat intelligence reports or feeds used,
+  attaching copies or links as evidence.
+- State how the external threat intelligence influenced any decisions or changes to cloud service configurations,
+  with clear examples in the review notes.
+- Confirm that the review includes a check against control A.5.7 requirements, noting the date and reviewer
+  in the record.

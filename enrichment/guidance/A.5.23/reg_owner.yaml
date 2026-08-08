@@ -1,0 +1,16 @@
+must_id: item:A.5.23:reg_owner
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Named internal owner accountable per service (typically platform / SRE / business owner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each cloud service in the Cloud Service Register with a separate entry that includes the service
+  name and description.
+- Name a specific individual as the internal owner accountable for each cloud service, using their full
+  name and job title.
+- Record the date when each owner assignment was last reviewed or updated in the register.
+- Avoid listing a team, department, or role as the owner; always assign a named person for clear accountability.
+- Cross-reference each owner with their contact details so an auditor can verify responsibility directly.

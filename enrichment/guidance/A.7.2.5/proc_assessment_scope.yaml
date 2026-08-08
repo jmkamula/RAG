@@ -1,0 +1,20 @@
+must_id: item:A.7.2.5:proc_assessment_scope
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: Assessment scope — PII types + storage + transfers + retention + risks to subjects + safeguards
+  + residual risk
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name all types of personal data included in each assessment, listing specific categories such as names,
+  addresses, or health information.
+- Document where each type of personal data is stored, how it is transferred, and the retention period
+  in a dated assessment record.
+- Record identified risks to individuals whose data is processed, describing the potential impact for
+  each risk in the assessment documentation.
+- List all safeguards applied to reduce risks, such as encryption or access controls, and note any remaining
+  risks after safeguards are applied.
+- Assign a specific individual as the assessment owner; do not use generic titles like "the team" or "IT
+  department".

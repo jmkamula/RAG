@@ -1,0 +1,18 @@
+must_id: item:A.7.3.6:rev_sla_audit
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: SLA audit — sampled requests measured against undue-delay standard
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for monitoring SLA compliance for access requests in the ACR Program
+  Review documentation.
+- Document a sample of access requests, including dates of receipt and response, to show measurement against
+  the undue-delay standard.
+- Record the specific undue-delay standard being used, referencing the relevant policy or legal requirement
+  in the review notes.
+- Retain evidence of any requests that exceeded the standard, including explanations and corrective actions
+  taken.
+- State the date of the most recent SLA audit and the names of those who conducted and approved the review.

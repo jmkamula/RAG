@@ -1,0 +1,47 @@
+leaf_id: req:B.8.5.6:subcontractor_disclosure_procedure
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the purposes for which PII is processed before you can identify
+    which subcontractors are involved and what information needs to be disclosed to customers.
+  good_enough: A current list of PII processing purposes, mapped to relevant business processes, is available
+    and reviewed for completeness.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each PII processing activity is essential to determine
+    the legal obligations around subcontractor disclosures and any restrictions that may apply.
+  good_enough: Each PII processing activity has a documented lawful basis, even if some are provisional
+    or pending legal review.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that someone is accountable for managing subcontractor
+    relationships and for making required disclosures to customers.
+  good_enough: A named individual or team is responsible for subcontractor management and customer communications,
+    documented in a current RACI or similar chart.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register helps identify which assets (including information systems and
+    data flows) are managed by subcontractors, enabling accurate disclosure.
+  good_enough: A working inventory exists that lists key assets and indicates which are managed or accessed
+    by subcontractors, even if not all details are fully validated.
+- ref: Art.28
+  standard_id: GDPR:2016/679
+  title: Processor Obligations
+  category: cross_role
+  rationale: GDPR Article 28 sets the legal requirements for engaging and disclosing subcontractors in
+    PII processing, forming the regulatory basis for your procedure.
+  good_enough: A summary of Article 28 requirements is available and referenced, and any known contractual
+    obligations with customers regarding subcontractor use are identified.

@@ -1,0 +1,16 @@
+must_id: item:B.8.5.2:rev_date
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Processor Destinations Program in a dated log or review register.
+- Confirm the planned review interval is documented and matches the organization’s policy or schedule.
+- Cross-reference the actual review date against the planned interval to verify it falls within the required
+  timeframe.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Retain evidence of the completed review, such as a signed review summary or meeting minutes, with the
+  date clearly visible.

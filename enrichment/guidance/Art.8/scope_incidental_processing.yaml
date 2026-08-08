@@ -1,0 +1,20 @@
+must_id: item:Art.8:scope_incidental_processing
+control_ref: Art.8
+standard_id: GDPR:2016/679
+must_text: Incidental-minor-data scenarios stated (and why they don't trigger Art.8 — e.g. parent account
+  holder)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all information-society services your organisation provides, including a brief description of each
+  service and its typical users.
+- Identify and document any scenarios where minor data may be processed only incidentally, such as when
+  a parent is the account holder.
+- State clearly, for each scenario, why Article 8 does not apply, referencing the specific relationship
+  or context that exempts it.
+- Name the person responsible for assessing and documenting these scenarios, avoiding generic titles like
+  "the team" or "compliance department".
+- Retain dated records of your analysis and decisions for each scenario, including supporting evidence
+  and any legal advice received.

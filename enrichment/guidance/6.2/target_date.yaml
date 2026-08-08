@@ -1,0 +1,15 @@
+must_id: item:6.2:target_date
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: Per-objective target date stated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State a clear, specific target date for each information security objective in the register, using the
+  format YYYY-MM-DD.
+- Record the name of the person responsible for setting each target date alongside the objective entry.
+- Review the register to confirm that no objective is missing a target date or has a vague timeframe such
+  as "ongoing" or "TBD".
+- Retain previous versions of the register to show any changes made to target dates over time.

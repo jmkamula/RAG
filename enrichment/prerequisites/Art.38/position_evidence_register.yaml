@@ -1,0 +1,31 @@
+leaf_id: req:Art.38:position_evidence_register
+control_ref: Art.38
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Designation of the Data Protection Officer
+  category: direct
+  rationale: You cannot demonstrate evidence of the DPO's position, independence, or resources unless
+    a DPO has been formally designated. Art.38 duties only apply once Art.37 designation has occurred.
+  good_enough: A documented decision naming the DPO and confirming their appointment is available, even
+    if some onboarding steps are still in progress.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: Understanding the scope and nature of processing activities is essential for the DPO to perform
+    their oversight role and for the organization to justify the DPO's involvement and independence.
+  good_enough: A basic, up-to-date RoPA exists that outlines the main processing activities, even if some
+    details are pending.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: Clarity on the ISMS scope helps define the organizational boundaries relevant to the DPO's
+    responsibilities and ensures the evidence register covers all applicable areas.
+  good_enough: A draft or approved ISMS scope statement exists that identifies the organizational units
+    and activities in scope for GDPR compliance.

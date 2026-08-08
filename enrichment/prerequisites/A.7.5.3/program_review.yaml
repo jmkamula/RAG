@@ -1,0 +1,46 @@
+leaf_id: req:A.7.5.3:program_review
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which business units, systems, and processes are covered by the
+    ISMS and PIMS, ensuring the transfer records program review addresses all relevant areas.
+  good_enough: A documented scope that clearly includes all personal data transfers and related processes
+    is available and up to date.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An asset register is needed to identify all information assets involved in personal data
+    transfers, so the review can verify that all relevant transfer events are captured.
+  good_enough: A current list of information assets, including those involved in personal data transfers,
+    is maintained and accessible.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Knowing the documented purposes for processing and transferring personal data is essential
+    to assess whether transfers are justified and minimisation principles are applied during the review.
+  good_enough: Documented purposes for all personal data transfers exist and are referenced in transfer
+    records.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: The lawful basis for each transfer must be established before reviewing whether transfers
+    are appropriate and compliant with privacy requirements.
+  good_enough: Each transfer event or category has a recorded lawful basis, even if this is high-level
+    or provisional.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: cross_role
+  rationale: RoPA provides the legal reference for what transfer records must exist and be reviewed, ensuring
+    the program review aligns with GDPR requirements.
+  good_enough: A RoPA exists that lists data transfers, even if some details are pending or incomplete.

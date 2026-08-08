@@ -1,0 +1,16 @@
+must_id: item:A.5.5:backup_contacts
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Backup or secondary contacts per authority
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each authority in the register with both a primary and a named backup contact, including full names
+  and direct contact details.
+- Record the date each contact entry was last confirmed as current, and keep a copy of the confirmation
+  communication.
+- Name backup contacts as specific individuals—do not use generic roles like "team" or "office" as substitutes.
+- Cross-reference the register with your incident response plan to verify all listed authorities and contacts
+  are covered.

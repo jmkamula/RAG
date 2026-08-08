@@ -1,0 +1,20 @@
+must_id: item:A.5.32:audit_opensource
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Open-source attribution and licence-obligation check (NOTICE files, source-availability where
+  required)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to be responsible for conducting open-source licence and attribution checks,
+  listing their name and role in the audit record.
+- Document the date and results of each periodic review of all open-source components, including confirmation
+  that required NOTICE files are present and accurate.
+- Cross-reference each open-source component in use with its licence obligations, recording where source
+  code must be made available and how this is fulfilled.
+- Retain evidence of any communications or actions taken to correct missing or incomplete attributions
+  or licence notices, including dates and responsible persons.
+- Name the specific versions of all reviewed components; do not use generic labels like "latest" or "various"
+  in audit records.

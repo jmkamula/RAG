@@ -1,0 +1,20 @@
+must_id: item:A.7.8:hsm_specifics
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Specific guidance for high-value equipment (HSMs, server racks, key safes — extra siting +
+  tamper-detection requirements)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name all high-value equipment types covered by the procedure, such as HSMs, server racks, and key safes,
+  in a dated equipment inventory.
+- Document siting requirements for each equipment type, including physical barriers, restricted access
+  zones, and environmental controls, in the written procedure.
+- State tamper-detection measures for each high-value asset, such as seals, alarms, or monitoring systems,
+  with installation dates and responsible persons.
+- Assign a specific individual, not a team or department, as the owner responsible for reviewing and updating
+  the procedure annually.
+- Record the latest review and approval of the procedure with the approver’s name, signature, and date
+  on the document.

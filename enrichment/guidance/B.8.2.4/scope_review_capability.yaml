@@ -1,0 +1,20 @@
+must_id: item:B.8.2.4:scope_review_capability
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Review capability disclosure — where technological constraints limit ability to detect infringement
+  (per §8.2.4 implementation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and list all technological systems where detection of infringement may be limited, specifying
+  each system by name and function.
+- Document the specific technological constraints for each system, including what types of infringements
+  cannot be detected and why.
+- State the date and outcome of the most recent review of these constraints, including any changes in
+  system capability or scope.
+- Name the individual responsible for assessing and disclosing these limitations — do not use a team or
+  department as the owner.
+- Retain evidence of communication to management or relevant stakeholders about these limitations, such
+  as dated emails or meeting minutes.

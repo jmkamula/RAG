@@ -1,0 +1,18 @@
+must_id: item:A.8.3:scope_exclusions
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Exclusions stated (vendor-managed systems delegated via A.5.19; public-content systems with
+  no restriction)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all information systems in scope, including system names and primary functions, in a dated and
+  version-controlled scope document.
+- State each system excluded from scope, giving a clear reason such as vendor management under A.5.19
+  or unrestricted public content.
+- Reference supporting contracts or agreements for vendor-managed exclusions, attaching copies or links
+  to the relevant documents.
+- Name the person responsible for approving scope exclusions as a specific individual, not a team or department.
+- Record the approval date and signature for the final scope and exclusions document.

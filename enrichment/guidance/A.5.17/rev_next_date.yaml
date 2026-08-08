@@ -1,0 +1,16 @@
+must_id: item:A.5.17:rev_next_date
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Next planned review date stated (within 180d of this review)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the current authentication-information program review in a dated meeting note or
+  review log entry.
+- State the next planned review date, ensuring it is no more than 180 days after the current review, in
+  the same record.
+- Name the individual responsible for scheduling the next review, listing their full name rather than
+  a team or department.
+- Attach the review schedule or calendar invite showing the next review date to the review documentation.

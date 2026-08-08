@@ -1,0 +1,18 @@
+must_id: item:A.7.4.6:proc_garbage_collection
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+must_text: Garbage-collection procedure — identifies unused temp files + last-use timestamp
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for running the garbage-collection procedure by full name and job title
+  in the procedure document.
+- Document the process for identifying unused temporary files, including the specific criteria and tools
+  used, in a dated procedure.
+- Record the last-use timestamp for each temporary file in a log that is updated every time the garbage-collection
+  procedure runs.
+- State the frequency and schedule for running the garbage-collection procedure, with clear dates and
+  times, in the procedure documentation.
+- Avoid describing the owner as "the team" or "IT"; use a named individual to ensure clear accountability.

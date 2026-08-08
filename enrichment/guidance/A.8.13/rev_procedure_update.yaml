@@ -1,0 +1,16 @@
+must_id: item:A.8.13:rev_procedure_update
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Findings propagated to procedure / scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each backup program review finding in a dated record, clearly describing the issue and recommended
+  change.
+- Assign responsibility for each finding to a named individual, not a group or department, for follow-up
+  action.
+- Update relevant backup procedures or scope documents to reflect changes, referencing the specific review
+  finding and date.
+- Retain evidence of communication showing that updated procedures were shared with all affected staff.

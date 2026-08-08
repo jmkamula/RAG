@@ -1,0 +1,20 @@
+must_id: item:A.5.8:reg_supplier_link
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Supplier-agreement link per row where project triggers new third-party contracts (cross-ref
+  to A.5.20)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each project entry that results in a new third-party contract with the relevant supplier
+  agreement, including agreement title and unique identifier.
+- Record the date when the supplier agreement was signed and the name of the individual who authorized
+  the contract.
+- Link each project entry to the corresponding supplier risk assessment or due diligence record as required
+  by A.5.20.
+- Name the responsible project owner as a specific individual for each register entry, not as a team or
+  department.
+- Attach a copy or direct reference to the signed supplier agreement for every project that triggers a
+  new third-party contract.

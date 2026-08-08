@@ -1,0 +1,15 @@
+must_id: item:A.7.2.7:reg_effective_dates
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Effective / termination dates per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the effective start date for each joint controller arrangement in a dedicated column of the register.
+- Enter the termination or planned end date for each arrangement in a separate, clearly labeled column.
+- Confirm that both dates are present and specific for every row; do not leave these fields blank or use
+  placeholders like "TBD."
+- Review the register quarterly to update any arrangements that have ended or had their dates changed,
+  and document the review date.

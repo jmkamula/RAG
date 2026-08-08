@@ -1,0 +1,19 @@
+must_id: item:A.8.29:rev_findings_update
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Findings propagated to procedure / scope / tooling
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each security testing finding in a dated report, clearly linking it to the relevant procedure,
+  scope, or tool affected.
+- Assign a named individual to review each finding and determine required updates to procedures, scope,
+  or tooling.
+- Record the specific changes made to procedures, scope, or tooling in a change log, referencing the original
+  finding.
+- Attach evidence of updated procedures, scope documents, or tool configurations, showing the date and
+  approver for each change.
+- Name the person responsible for confirming that all findings have been addressed—do not leave this as
+  "the team" or an unnamed group.

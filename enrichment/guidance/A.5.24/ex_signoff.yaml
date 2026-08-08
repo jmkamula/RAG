@@ -1,0 +1,16 @@
+must_id: item:A.5.24:ex_signoff
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Signoff per record (exercise lead + IR team lead + exec sponsor where high-tier exercise)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the exercise lead, incident response team lead, and executive sponsor (for high-tier exercises)
+  on each framework activation record.
+- Obtain a dated signature or written approval from each required individual on the activation record
+  before closing the exercise.
+- Retain each signed activation record in a dedicated, access-controlled location for future reference.
+- Avoid using group names or unsigned approvals; ensure all signoffs are from named individuals with clear
+  roles.

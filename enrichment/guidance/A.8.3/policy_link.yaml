@@ -1,0 +1,17 @@
+must_id: item:A.8.3:policy_link
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Cross-link to A.5.15 access control policy + A.5.16 identity management
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the current version and location of the A.5.15 access control policy within the Information
+  Access Restriction Procedure document.
+- Link the Information Access Restriction Procedure to the A.5.16 identity management procedure by naming
+  the exact document title and version.
+- State in the procedure that all access restrictions must align with the requirements set out in both
+  the access control and identity management policies.
+- Name the owner of the Information Access Restriction Procedure as a specific individual, not a team
+  or department.

@@ -1,0 +1,20 @@
+must_id: item:A.8.24:rev_algorithm_currency
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Algorithm-table currency check vs NIST / national-regulator advisories (deprecated algorithms
+  retired)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a table listing all cryptographic algorithms currently in use, including their purpose, system
+  location, and implementation details, with a version and date.
+- Cross-reference each algorithm in the table against the latest NIST and relevant national regulator
+  advisories to identify deprecated or weak algorithms.
+- Record the review date, findings, and required actions in a signed review log, naming the reviewer and
+  any decisions to retire or replace algorithms.
+- Name the reviewer as a specific individual, not a group or department, to avoid ambiguity in responsibility
+  for the review.
+- Retain evidence of communication to system owners about required algorithm changes, including the date
+  and recipient, for all identified deprecations.

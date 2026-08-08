@@ -1,0 +1,19 @@
+must_id: item:Art.16:rev_sla_compliance
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: SLA compliance (Art.12.3 one-month)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the standard operating procedure that specifies requests for rectification are processed within
+  one month, including the escalation path for delays.
+- Record each rectification request’s receipt date and completion date in a central log to demonstrate
+  adherence to the one-month deadline.
+- Assign a named individual responsible for monitoring and reporting on rectification request timelines,
+  not a generic team or department.
+- Retain copies of communications sent to data subjects confirming completion of rectification within
+  the required timeframe.
+- Review a sample of closed requests quarterly to confirm the one-month SLA was consistently met and document
+  findings in a dated report.

@@ -1,0 +1,19 @@
+must_id: item:Art.24:role_contract_link
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Per-row contract link (DPA Art.28 / Art.26 arrangement / Art.46 transfer mechanism)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the controller or processor for each processing activity as a specific individual or legal entity,
+  not a generic team or department.
+- Document the legal basis for the relationship by linking to the signed contract, data processing agreement,
+  or relevant arrangement for each row.
+- Cross-reference the applicable GDPR article (Art.28, Art.26, or Art.46) for each contract or arrangement
+  in the decision record.
+- Record the date each contract or arrangement was signed and the parties involved, ensuring all entries
+  are current and not expired.
+- Attach or link to the actual contract document or transfer mechanism for each processing activity, making
+  sure the link is accessible and not broken.

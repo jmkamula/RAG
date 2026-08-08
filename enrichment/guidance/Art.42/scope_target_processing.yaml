@@ -1,0 +1,19 @@
+must_id: item:Art.42:scope_target_processing
+control_ref: Art.42
+standard_id: GDPR:2016/679
+must_text: Target processing activities for certification
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all data processing activities that are included in the certification scope, referencing their
+  titles and descriptions from your data processing register.
+- Document the specific business units, systems, and locations involved in each processing activity within
+  the certification scope.
+- State any processing activities that are explicitly excluded from the certification scope, with reasons
+  for exclusion.
+- Name the individual responsible for defining and maintaining the certification scope, ensuring this
+  is not a generic role or department.
+- Retain a dated version of the certification scope document that reflects the current processing activities
+  covered.

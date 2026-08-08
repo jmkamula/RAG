@@ -1,0 +1,18 @@
+must_id: item:Art.37:group_designation
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: Group-level designation rule (Art.37.2 single DPO for an undertaking group)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the DPO Designation Procedure that a single Data Protection Officer is appointed for the entire
+  group of undertakings, as per Article 37.2.
+- Name the designated DPO as a specific individual, including their full name and contact details, not
+  just a department or role.
+- Document the date of the DPO’s appointment and the group entities covered in a signed and dated record.
+- Cross-reference the procedure to the relevant section of Article 37.2 of the GDPR to show alignment
+  with the legal requirement.
+- Retain evidence of board or executive approval of the group-level DPO designation, such as meeting minutes
+  or a signed decision.

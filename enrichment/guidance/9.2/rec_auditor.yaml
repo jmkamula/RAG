@@ -1,0 +1,14 @@
+must_id: item:9.2:rec_auditor
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Per-audit auditor identity + independence assertion
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of each auditor assigned to the internal audit in the audit execution record.
+- Document a signed statement from each auditor confirming they are independent of the area being audited.
+- State the specific business area or process audited, cross-referencing it to the auditor's regular job
+  responsibilities.
+- Name the auditor as an individual, not as a team, department, or generic role title.

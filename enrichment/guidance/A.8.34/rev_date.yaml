@@ -1,0 +1,15 @@
+must_id: item:A.8.34:rev_date
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Audit Testing Protection Program in a dated log or register.
+- State the planned review interval in months or years within the program documentation or review schedule.
+- Compare the actual review date to the planned interval and document any deviations with reasons in the
+  review report.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Retain the signed review report or meeting minutes as evidence of the completed periodic review.

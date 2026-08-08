@@ -1,0 +1,19 @@
+must_id: item:5.1:integration
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: ISMS integrated into business processes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a member of top management who is responsible for integrating the ISMS into business processes
+  in a dated directive.
+- Document a signed statement from top management describing how the ISMS aligns with and supports key
+  business objectives.
+- Cross-reference the ISMS policy with documented business process maps or procedures to show explicit
+  integration points.
+- Record meeting minutes where top management discussed ISMS integration with business process owners,
+  including names and dates.
+- Specify the responsible individual by name, not by role or department, to avoid vague ownership that
+  auditors would flag.

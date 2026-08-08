@@ -1,0 +1,43 @@
+leaf_id: req:A.5.12:periodic_review
+control_ref: A.5.12
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: direct
+  rationale: The classification scheme is a topic-specific policy that must be formally established before
+    it can be periodically reviewed. Without a documented scheme, there is nothing to review for relevance
+    or effectiveness.
+  good_enough: A documented classification scheme exists, even if it is basic or due for improvement.
+    It must be accessible and referenced in the information security policy set.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Inventory of information and other associated assets
+  category: direct
+  rationale: An up-to-date asset inventory is essential to ensure all relevant assets are considered in
+    the classification scheme review. If assets are missing or outdated, the review cannot accurately
+    assess coverage or identify new categories.
+  good_enough: A current asset inventory exists that covers all major information assets. Minor gaps are
+    acceptable if they do not materially affect the classification scheme.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which assets, processes, and locations are included in the ISMS,
+    directly impacting which classification schemes are relevant for review. Reviewing schemes outside
+    the defined scope wastes effort and may miss critical areas.
+  good_enough: A documented ISMS scope exists, even if it is high-level, so reviewers know which assets
+    and processes to include in the classification scheme review.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information security risk assessment
+  category: foundational
+  rationale: Risk assessment results inform the sensitivity and criticality of assets, which underpin
+    the logic of the classification scheme. Without a risk assessment, the review cannot determine if
+    classification levels still reflect actual risk.
+  good_enough: At least one recent risk assessment has been performed, identifying key risks and asset
+    sensitivities relevant to the classification scheme.

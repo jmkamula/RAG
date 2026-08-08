@@ -1,0 +1,18 @@
+must_id: item:A.7.5:scope_change_drivers
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (climate event reclassification, new geography, sectoral standard
+  update)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current sites and threat types in a dated catalogue, naming the person responsible for maintaining
+  its accuracy.
+- Document a trigger list for re-scoping events, including climate event reclassification, new geography,
+  and sectoral standard updates.
+- Record each time the trigger list is reviewed or updated, including the date and the reviewer’s name.
+- Name the scope owner as a specific individual, not a team or department, in the catalogue documentation.
+- Retain evidence of the most recent re-scoping decision, including the rationale and the date of the
+  change.

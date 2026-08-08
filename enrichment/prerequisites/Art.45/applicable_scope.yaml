@@ -1,0 +1,42 @@
+leaf_id: req:Art.45:applicable_scope
+control_ref: Art.45
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.44
+  standard_id: GDPR:2016/679
+  title: General principle for transfers
+  category: direct
+  rationale: Art.44 sets the baseline requirement that personal data transfers outside the EEA are only
+    lawful if the conditions in Chapter V are met. You cannot meaningfully define which adequacy decisions
+    you rely on (Art.45) without first confirming that your transfers are subject to these rules.
+  good_enough: You have mapped which data flows are international transfers under GDPR and confirmed that
+    Chapter V applies to them.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: Art.30 records provide the authoritative list of processing activities, including details
+    of international transfers and recipient countries. Without this inventory, you cannot accurately
+    identify which transfers might rely on adequacy decisions.
+  good_enough: You have a current, working RoPA that lists all relevant international transfers and their
+    destinations.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Each transfer must have a lawful basis under GDPR. Before relying on adequacy (Art.45), you
+    must confirm that the underlying processing is itself lawful.
+  good_enough: For each transfer, you have identified and documented the lawful basis for processing under
+    Art.6.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which parts of your organization and processing activities are covered
+    by your compliance program. This ensures your adequacy reliance statement is aligned with your actual
+    operational boundaries.
+  good_enough: You have a defined ISMS scope that includes all business units and processes involved in
+    international transfers.

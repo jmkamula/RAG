@@ -1,0 +1,18 @@
+must_id: item:A.5.21:traceability
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: Traceability of critical components through the supply chain (end-to-end provenance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each critical ICT component and its suppliers in a register, including unique identifiers and dates
+  of acquisition.
+- Document the chain of custody for each critical component, recording all handovers, storage locations,
+  and responsible individuals.
+- Retain purchase orders, shipping documents, and supplier attestations that confirm the origin and handling
+  of each critical component.
+- Name the traceability record owner as a specific individual, not a department or generic team.
+- Cross-reference traceability records with incident logs to show the ability to track components in case
+  of a security event.

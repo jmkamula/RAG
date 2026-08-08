@@ -1,0 +1,20 @@
+must_id: item:A.5.34:scope_data_subjects
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Data subject categories the organisation touches (customers, employees, prospects, suppliers'
+  staff, minors, healthcare patients, financial-services clients — drives extra-safeguard rules)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all categories of individuals whose personal data your organisation processes, such as customers,
+  employees, suppliers’ staff, minors, or patients, in a dated document.
+- Name the person responsible for maintaining and updating the data subject category list, identifying
+  them by full name and job title.
+- Cross-reference each data subject category with relevant business processes or systems where their personal
+  data is handled.
+- Avoid using generic terms like “users” or “staff” without further detail; specify each group clearly
+  to prevent ambiguity.
+- Review and update the data subject category list at least annually, recording the date and the reviewer’s
+  name for each update.

@@ -1,0 +1,18 @@
+must_id: item:A.7.3.6:proc_refusal_reasoning
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: Refusal reasoning — where request refused / cannot be met, subject informed of reasons + right
+  to complain
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each refusal to grant access, correction, or erasure in a dated record, including the specific
+  reasons for the decision.
+- State in the refusal response to the data subject the reasons for denial and clearly outline their right
+  to lodge a complaint.
+- Retain a copy of the refusal communication sent to the data subject, showing the date, recipient, and
+  content.
+- Name the decision-maker responsible for each refusal as a specific individual, not a generic team or
+  department.

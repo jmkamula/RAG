@@ -1,0 +1,19 @@
+must_id: item:A.5.9:rev_register_update
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Register updated as a result of the reconciliation with reference to this review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date the asset inventory reconciliation was completed in the asset register, referencing
+  the specific review period.
+- Update the asset register to reflect any additions, removals, or changes identified during the reconciliation,
+  with clear descriptions.
+- Name the person responsible for updating the register as a specific individual, not a generic role or
+  team.
+- Attach or link the reconciliation report or summary directly to the updated asset register entry for
+  traceability.
+- Retain evidence of management review or approval of the updated asset register, such as a signed or
+  timestamped record.

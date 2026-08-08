@@ -1,0 +1,20 @@
+must_id: item:A.5.28:rev_competence
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Competence/training status of authorised personnel reviewed (certifications current, new staff
+  onboarded properly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all personnel authorised to handle evidence, including full names and roles, in a dated register
+  reviewed at least annually.
+- Record the current certification status and completed training modules for each authorised person, attaching
+  copies of certificates or training records.
+- Confirm that new staff assigned to evidence handling have completed onboarding and required training,
+  noting completion dates in the register.
+- Name the reviewer as a specific individual who signs and dates the competence review — do not leave
+  this as "the team" or "HR".
+- Flag any expired certifications or missing training in the review record, and document follow-up actions
+  with responsible persons and target dates.

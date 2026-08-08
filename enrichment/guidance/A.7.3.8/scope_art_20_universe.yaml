@@ -1,0 +1,18 @@
+must_id: item:A.7.3.8:scope_art_20_universe
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Art.20 (portability) universe — subset where basis=consent OR contract AND processing is automated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name all processing activities where personal data is handled on the basis of consent or contract and
+  the processing is automated.
+- Document the lawful basis for each identified processing activity, explicitly stating whether it is
+  consent or contract, in your data processing register.
+- Record the systems and data types involved in these processing activities, including where and how data
+  is stored and transferred.
+- State the specific individual responsible for maintaining and updating this scope, not a team or department.
+- Cross-reference your documented scope with GDPR Article 20 requirements to confirm all relevant processing
+  is included and nothing is omitted.

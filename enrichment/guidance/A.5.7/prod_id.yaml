@@ -1,0 +1,19 @@
+must_id: item:A.5.7:prod_id
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Product identifier per record (unique, sequenced)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique, sequential product identifier to each intelligence record and record it in a dedicated
+  field within the record.
+- Document the product name and version alongside the identifier in each intelligence record to clearly
+  distinguish between different products.
+- Cross-reference each intelligence record with its corresponding product identifier in a central register
+  or tracking system.
+- Confirm that no intelligence record uses duplicate or reused identifiers by running a periodic check
+  and saving the results with a date and reviewer name.
+- Name the product owner as a specific individual for each record—do not use generic titles such as "the
+  team" or "IT department".

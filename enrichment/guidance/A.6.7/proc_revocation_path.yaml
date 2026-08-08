@@ -1,0 +1,20 @@
+must_id: item:A.6.7:proc_revocation_path
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Revocation path on termination / extended leave / approval expiry / policy breach — includes
+  equipment return per A.5.11 and access revocation per A.5.18 (cross-link to leaver flows)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step process for revoking remote work access when employment ends, leave is extended,
+  approval expires, or a policy breach occurs.
+- Cross-reference your leaver management procedure, specifically noting how equipment return (A.5.11)
+  and access revocation (A.5.18) are triggered in remote work cases.
+- Assign responsibility for each revocation action to a named individual, not a team or department, in
+  the procedure.
+- Record the date and outcome of each revocation and equipment return in a log signed by the responsible
+  person.
+- State that verbal-only revocation or undocumented returns are not permitted; require written confirmation
+  for each step.

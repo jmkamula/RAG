@@ -1,0 +1,19 @@
+must_id: item:A.8.5:proc_exception
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Exception process for lost-MFA / new-device scenarios with identity-proofing fallback
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step process for handling lost multi-factor authentication or new device requests,
+  including how users initiate the exception.
+- Name the fallback identity-proofing methods used to verify user identity, such as a video call or secondary
+  government-issued ID check.
+- Assign a specific individual or role responsible for approving exception requests, listing their name
+  or title in the procedure.
+- Record each exception granted, including the user’s name, date, reason, and identity-proofing method,
+  in a dedicated log or register.
+- Specify that generic approvals or verbal-only confirmations are not accepted; require written, dated
+  approval for each exception.

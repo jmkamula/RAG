@@ -1,0 +1,15 @@
+must_id: item:A.7.2.2:reg_lia_reference
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: LIA reference per row where basis is legitimate interests
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific Legitimate Interests Assessment (LIA) reference number next to each processing activity
+  that relies on legitimate interests as the lawful basis.
+- Cross-reference each LIA entry to a dated and completed balancing test document stored in your records.
+- Name the individual who approved the LIA and balancing test for each relevant processing activity.
+- Avoid listing "LIA on file" or generic notes; always provide a unique, traceable LIA reference for each
+  row.

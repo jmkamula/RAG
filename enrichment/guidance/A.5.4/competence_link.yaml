@@ -1,0 +1,19 @@
+must_id: item:A.5.4:competence_link
+control_ref: A.5.4
+standard_id: ISO27001:2022
+must_text: Link to competence and training requirement (A.7.2 / Clause 7.2) so personnel know how to comply
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the management directive that all personnel must receive training on information security compliance
+  requirements relevant to their roles.
+- Cross-reference the directive to your documented competence and training procedure, specifically citing
+  ISO27001 Clause 7.2 or control A.7.2.
+- Name the person or role responsible for ensuring that training on compliance requirements is delivered
+  and tracked.
+- Attach or link a dated record showing the most recent training session covering compliance obligations
+  for staff.
+- Specify in the directive that generic or outdated training content is not acceptable—training must reflect
+  current compliance requirements and organisational context.

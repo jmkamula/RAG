@@ -1,0 +1,31 @@
+leaf_id: req:Art.32:program_review
+control_ref: Art.32
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.24
+  standard_id: GDPR:2016/679
+  title: Responsibility of the controller
+  category: foundational
+  rationale: Art.24 establishes the controller’s overall responsibility for implementing appropriate technical
+    and organisational measures, which is the basis for any security program review under Art.32.
+  good_enough: A clear assignment of controller responsibility and a documented approach to accountability
+    are in place, even if not fully mature.
+- ref: Art.25
+  standard_id: GDPR:2016/679
+  title: Data protection by design and by default
+  category: direct
+  rationale: Art.25 ensures that data protection is embedded into processing activities and systems, which
+    directly informs the scope and effectiveness of the security measures reviewed under Art.32.
+  good_enough: Documented evidence that privacy-by-design principles are considered in system and process
+    development, even if not exhaustive.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of processing activities
+  category: foundational
+  rationale: A current and accurate RoPA is essential to identify all processing activities that must
+    be covered by the Art.32 security review, ensuring completeness.
+  good_enough: A reasonably up-to-date RoPA exists, listing all major processing activities, even if some
+    minor updates are pending.

@@ -1,0 +1,15 @@
+must_id: item:A.8.6:proc_owner
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Named procedure owner (Infrastructure lead with Finance partner for cost-tied capacity)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the procedure owner as a specific individual, listing both the Infrastructure Lead and the Finance
+  Partner by name and job title.
+- Document the date the procedure owner assignment was last reviewed or updated in the procedure header.
+- Record contact details for both named owners within the procedure so they can be reached for questions
+  or approvals.
+- Avoid listing a team, department, or role alone as the owner; always specify named individuals.

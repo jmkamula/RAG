@@ -1,0 +1,18 @@
+must_id: item:Art.26:rev_currency
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Arrangement currency — every active relationship has current signed arrangement
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all current joint controller relationships and list them with named partner organisations and
+  start dates in a dated register.
+- Obtain and retain a signed copy of the current joint controller arrangement for each listed relationship,
+  showing signatures and effective dates.
+- Confirm that each arrangement explicitly references the latest data processing activities and responsibilities
+  as agreed with the partner.
+- Name the responsible individual for maintaining the register and updating arrangements — do not use
+  a team or department as the owner.
+- Review all arrangements annually and record the review date and reviewer’s name in the register.

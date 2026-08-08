@@ -1,0 +1,17 @@
+must_id: item:7.4:reg_channel
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: Per-row channel used
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific communication channel used for each ISMS event entry, such as email, intranet post,
+  meeting, or memo.
+- State the date and time the communication occurred for each row to provide clear evidence of when information
+  was shared.
+- Name the sender and recipient or audience for each communication event, identifying individuals or groups
+  involved.
+- Avoid using vague terms like "various" or "multiple" for the channel; specify the exact method used
+  for each entry.

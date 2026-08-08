@@ -1,0 +1,19 @@
+must_id: item:Art.43:reg_grounds
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Per-row decision grounds (criteria-mapped)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific certification decision for each applicant, including whether certification was granted
+  or denied, in a dated entry.
+- Document the exact criteria from the certification scheme used to make each decision, mapping each criterion
+  to the applicant’s evidence.
+- State the grounds for each decision in clear, applicant-specific terms, avoiding generic or boilerplate
+  justifications.
+- Name the individual or committee responsible for each decision, ensuring a specific person or group
+  is listed, not just a department.
+- Retain all supporting documentation and correspondence linked to each decision, cross-referenced to
+  the relevant certification record.

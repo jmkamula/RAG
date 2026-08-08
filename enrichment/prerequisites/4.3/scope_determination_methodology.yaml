@@ -1,0 +1,41 @@
+leaf_id: req:4.3:scope_determination_methodology
+control_ref: '4.3'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.1'
+  standard_id: ISO27001:2022
+  title: Understanding the organization and its context
+  category: foundational
+  rationale: The ISMS scope must be grounded in a clear understanding of the organization's context, including
+    internal and external issues that affect information security. Without this, scope decisions may be
+    arbitrary or misaligned with real risks.
+  good_enough: A documented summary of key context issues, even if high-level, that can be referenced
+    during scope discussions.
+- ref: '4.2'
+  standard_id: ISO27001:2022
+  title: Understanding the needs and expectations of interested parties
+  category: foundational
+  rationale: The needs and expectations of interested parties (such as customers, regulators, and partners)
+    directly influence what should be included or excluded from the ISMS scope. Missing this input risks
+    overlooking critical requirements.
+  good_enough: A list or matrix of main interested parties and their top information security expectations,
+    even if not fully validated.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: direct
+  rationale: The information security policy sets the overall direction and priorities for information
+    security, which should inform the criteria and rationale for scope determination.
+  good_enough: A draft or approved policy statement that outlines the organization's information security
+    objectives and priorities.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Knowing what information assets exist and where they reside is essential for making informed
+    inclusion/exclusion decisions in the ISMS scope.
+  good_enough: An initial inventory of key information assets, even if not fully complete, to support
+    scope boundary discussions.

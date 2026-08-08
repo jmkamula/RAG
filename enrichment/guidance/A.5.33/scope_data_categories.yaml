@@ -1,0 +1,19 @@
+must_id: item:A.5.33:scope_data_categories
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Personal/sensitive/regulated data categories handled (drives PII overlay and special-category
+  retention)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all categories of personal, sensitive, and regulated data your organisation handles in a dated
+  document approved by a named data protection lead.
+- Cross-reference each data category to relevant laws or regulations, such as GDPR or sector-specific
+  rules, in the same document.
+- State the business processes or systems where each data category is stored or processed, naming the
+  responsible system owner.
+- Name the owner as a specific individual for each data category — do not use generic titles like "the
+  team" or "IT department".
+- Retain a signed and dated review record showing this scope was checked and updated at least annually.

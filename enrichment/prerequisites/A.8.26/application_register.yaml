@@ -1,0 +1,40 @@
+leaf_id: req:A.8.26:application_register
+control_ref: A.8.26
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.8.25
+  standard_id: ISO27001:2022
+  title: Secure development life cycle
+  category: direct
+  rationale: You need a defined secure development lifecycle before you can catalogue and trace application
+    security requirements. This ensures that requirements are identified, documented, and approved as
+    part of a repeatable process.
+  good_enough: A documented, organization-approved SDLC process exists and is in use for new or maintained
+    applications—even if not fully mature.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You must know which applications exist before you can register their security requirements.
+    The asset register provides the authoritative list of applications in scope.
+  good_enough: A current, reasonably complete application inventory exists, even if some legacy or shadow
+    IT apps are still being identified.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Application security requirements depend on the classification of data and processes handled
+    by each application. The classification scheme guides which requirements apply.
+  good_enough: A basic, documented classification scheme is available and used to tag applications by
+    criticality or sensitivity.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which applications are covered by the ISMS and, therefore, which
+    must appear in the register.
+  good_enough: A written ISMS scope exists that clearly includes (or excludes) applications, even if not
+    perfectly detailed.

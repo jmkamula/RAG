@@ -1,0 +1,16 @@
+must_id: item:7.5:scope_iso_required
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: ISO 27001:2022-required document classes enumerated (scope statement, policy, SoA, risk register,
+  audit programme, etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each required ISMS document class by name, such as scope statement, information security policy,
+  Statement of Applicability, risk register, and audit programme.
+- Reference the specific ISO 27001:2022 clause or annex that mandates each document class in your list.
+- Assign a named individual as the owner responsible for maintaining the list of required document classes.
+- Date and version the document class list to show when it was last reviewed or updated.
+- Avoid using generic or catch-all terms like "all necessary documents"—specify each document class explicitly.

@@ -1,0 +1,19 @@
+must_id: item:A.7.4:rev_response_sla
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: Response-SLA analysis (alarm-to-on-site arrival times measured against SLA)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the agreed response time targets for alarm-to-on-site arrival in a signed Service Level Agreement
+  with your security provider.
+- Record actual alarm-to-on-site arrival times for each incident in a dated incident log, referencing
+  the specific SLA target for each entry.
+- Analyze and summarize monthly or quarterly response time performance in a written report, clearly noting
+  any breaches of the SLA.
+- Name the reviewer as a specific individual who signs and dates the periodic monitoring program review—avoid
+  using only a department or generic title.
+- Retain evidence of any corrective actions taken for missed SLAs, including dated communications and
+  follow-up actions with responsible parties.

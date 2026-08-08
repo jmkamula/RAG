@@ -1,0 +1,19 @@
+must_id: item:Art.6:scope_member_state
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Member State law overlay (Art.6.2/Art.6.3 derogations and Member State specifications)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all processing activities where legal basis relies on Member State law, citing the specific
+  law or regulation for each activity.
+- Document the exact Article 6.2 or 6.3 derogation or specification applied, including relevant legal
+  text or reference.
+- Name the responsible individual who determined the applicability of each Member State law, avoiding
+  generic roles like "Legal Team."
+- Record the date when each processing activity was last reviewed for compliance with updated Member State
+  legislation.
+- Retain copies of legal advice or official guidance used to interpret Member State law for each processing
+  activity.

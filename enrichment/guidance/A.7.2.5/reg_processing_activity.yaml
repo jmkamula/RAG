@@ -1,0 +1,16 @@
+must_id: item:A.7.2.5:reg_processing_activity
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: Processing activity assessed per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity as a separate row in the PIA/DPIA Report Register, using clear and specific
+  activity names.
+- Cross-reference each row to the corresponding PIA or DPIA report by including the report title and completion
+  date.
+- Name the individual responsible for each processing activity assessment, avoiding generic entries like
+  "the team" or "IT department".
+- Record the assessment date for each processing activity to provide a clear audit trail.

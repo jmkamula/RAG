@@ -1,0 +1,13 @@
+must_id: item:6.2:owner
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: Per-objective owner identified
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each information security objective in the register with a unique identifier and clear description.
+- Name the owner of each objective as a specific individual, including their full name and job title.
+- Record the date each owner was assigned responsibility for their objective in the register.
+- Avoid listing groups, teams, or departments as owners; assign ownership only to named persons.

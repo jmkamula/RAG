@@ -1,0 +1,20 @@
+must_id: item:A.7.3.3:scope_indirect_collection
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: Indirect-collection handling — where PII sourced from third party, notice within reasonable
+  time per Art.14.3
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name all delivery contexts where personal data is collected indirectly from third parties in a dated
+  scope document.
+- Document the process for providing privacy notice to individuals whose data is collected indirectly,
+  including the method and timeframe.
+- Record the actual dates when privacy notices were sent for each indirect collection event, referencing
+  the relevant delivery context.
+- Assign a specific individual responsible for ensuring privacy notices are issued within the required
+  timeframe — do not list a team or department.
+- Retain copies of the privacy notices sent, including evidence of delivery, for each applicable delivery
+  context.

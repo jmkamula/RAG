@@ -1,0 +1,19 @@
+must_id: item:A.8.23:reg_overrides
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: Override events captured (user / site / justification / approval)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each web filtering override event in the register, including the user's name, the specific website
+  accessed, and the date and time.
+- Document the justification provided by the user for requesting the override, using their own words or
+  a direct quote.
+- Name the approving individual for each override, ensuring it is a specific person and not a generic
+  role or team.
+- Retain evidence of approval, such as a signed form or an email from the approver, linked to the corresponding
+  event entry.
+- Review the register regularly to confirm all required fields are completed and no override is missing
+  a justification or approval.

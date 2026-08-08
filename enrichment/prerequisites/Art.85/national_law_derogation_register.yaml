@@ -1,0 +1,42 @@
+leaf_id: req:Art.85:national_law_derogation_register
+control_ref: Art.85
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date inventory of processing activities to identify which ones may
+    be impacted by national law derogations under Art.85. Without this, you cannot reliably map derogations
+    to specific activities or jurisdictions.
+  good_enough: A current, reasonably complete RoPA that covers all relevant processing activities and
+    their geographic scope.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity is essential to determine if
+    and how a national law derogation under Art.85 applies. This ensures the register only covers activities
+    where derogations are relevant.
+  good_enough: Each processing activity in scope has a documented lawful basis, even if high-level, to
+    support initial mapping to derogations.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: A defined ISMS scope ensures you know which parts of your organization and which jurisdictions
+    are covered, so you can accurately track and register national law derogations for the right entities
+    and activities.
+  good_enough: A documented scope statement that identifies the organizational and jurisdictional boundaries
+    relevant to GDPR compliance.
+- ref: Art.85
+  standard_id: GDPR:2016/679
+  title: Processing and freedom of expression and information
+  category: direct
+  rationale: A clear understanding of the specific national law derogations enacted under Art.85 in each
+    relevant Member State is required to populate the register accurately.
+  good_enough: A compiled list or summary of current national law derogations under Art.85 for each Member
+    State where you operate or process data.

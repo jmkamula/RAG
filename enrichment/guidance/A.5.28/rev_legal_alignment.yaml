@@ -1,0 +1,19 @@
+must_id: item:A.5.28:rev_legal_alignment
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Alignment-with-current-legal-standards check (jurisdictional updates, regulator guidance, case
+  law shifts considered)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual with legal or compliance expertise to lead the review of evidence-handling
+  procedures for current legal standards.
+- Document the date and outcome of each review, listing all legal sources checked, such as recent laws,
+  regulator guidance, and relevant case law.
+- Record any changes made to evidence-handling procedures, citing the specific legal developments or guidance
+  that prompted each update.
+- Attach copies or links to the reviewed legal sources and regulator communications to the review record
+  for future reference.
+- Name the reviewer as a specific person, not a generic role or team, to avoid ambiguity in accountability.

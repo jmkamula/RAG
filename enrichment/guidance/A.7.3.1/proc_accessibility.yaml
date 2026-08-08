@@ -1,0 +1,20 @@
+must_id: item:A.7.3.1:proc_accessibility
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Accessibility standard — accessible + timely means (WCAG-align, language accessibility, response-time
+  SLA)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure’s publication date and location in your records to show when and where it became
+  available to PII principals.
+- State the accessibility features implemented, such as WCAG 2.1 compliance and language options, in a
+  dated accessibility statement attached to the procedure.
+- Record the response-time service level agreement (SLA) for handling PII principal requests in the procedure,
+  including a specific timeframe in days.
+- Name the owner responsible for maintaining accessibility and timely response as a specific individual,
+  not a team or department.
+- Retain evidence of periodic accessibility testing results, including tester names, dates, and any remediation
+  actions taken.

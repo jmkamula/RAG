@@ -1,0 +1,18 @@
+must_id: item:A.7.4.9:rev_audit_log_retention_check
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Audit-log retention check — retention meets policy
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the current retention period for audit logs in the transmission program review, referencing
+  the specific policy section and retention timeframe.
+- Record the date of the most recent review of audit-log retention settings, including the reviewer’s
+  full name and job title.
+- Cross-reference the actual retention configuration in the system with the documented policy to confirm
+  alignment, attaching a screenshot or export as evidence.
+- Name the owner responsible for audit-log retention as a specific individual, not a team or department.
+- Retain a signed statement from the reviewer confirming that audit-log retention meets the policy as
+  of the review date.

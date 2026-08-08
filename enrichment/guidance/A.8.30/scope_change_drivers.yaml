@@ -1,0 +1,18 @@
+must_id: item:A.8.30:scope_change_drivers
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new engagement type, new vendor model)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current outsourced development engagements and their scope in a dated register maintained by
+  the responsible project manager.
+- Document a trigger list that specifies events requiring re-scoping, such as onboarding a new vendor
+  or changing the engagement model.
+- Assign a named individual to review the trigger list at least annually and record the review date and
+  outcome.
+- Name the owner for outsourced development scope as a specific person, not a team or department, in the
+  register.
+- Retain records of all re-scoping decisions, including the trigger event, date, and approving individual.

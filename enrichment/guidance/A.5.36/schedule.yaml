@@ -1,0 +1,17 @@
+must_id: item:A.5.36:schedule
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Schedule honoured for this cycle (each planned policy/rule/standard actually reviewed in the
+  period; gaps flagged for next cycle)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each policy, rule, and standard scheduled for review in the current cycle, including the planned
+  review date and responsible reviewer.
+- Record the actual review date and reviewer name for each item, attaching evidence of the completed review
+  such as meeting notes or sign-off.
+- Flag any item not reviewed as scheduled by documenting the missed review, reason, and plan for completion
+  in the next cycle.
+- Name the reviewer as a specific individual for each item, not as a team or department.

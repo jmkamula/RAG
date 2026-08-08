@@ -1,0 +1,18 @@
+must_id: item:A.7.12:rev_remediation_closure
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Remediation closure rate from prior period
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the total number of cabling issues identified in the previous review period in a dated summary
+  report.
+- Record the number of remediation actions completed, with closure dates and responsible individuals,
+  in the same report.
+- Calculate and state the remediation closure rate as a percentage, showing the math used, in the review
+  documentation.
+- Attach supporting evidence for each closed remediation, such as work orders or completion sign-offs,
+  to the review record.
+- Name the person who verified the closure rate calculation, avoiding anonymous or group sign-offs.

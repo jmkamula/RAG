@@ -1,0 +1,20 @@
+must_id: item:A.7.4.1:proc_indirect_collection
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Indirect collection scoped (weblogs / cookies / device signals / third-party enrichment) —
+  same necessity test applied
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all sources of indirectly collected personal data, such as web logs, cookies, device signals,
+  and third-party enrichment, in a dated register.
+- State the specific necessity test applied to each indirect collection method, showing how it matches
+  the test used for direct collection.
+- Name the individual responsible for reviewing and approving the necessity test for indirect data collection,
+  not just a team or department.
+- Retain evidence of periodic reviews of indirect collection practices, including reviewer names and review
+  dates.
+- Record any changes to the collection limitation procedure, including the reason for the change and the
+  date it was approved.

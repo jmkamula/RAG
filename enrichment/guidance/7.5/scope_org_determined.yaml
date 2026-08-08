@@ -1,0 +1,17 @@
+must_id: item:7.5:scope_org_determined
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Organisation-determined classes enumerated (procedures, standards, work instructions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of information security documents your organisation uses, such as policies, procedures,
+  standards, guidelines, and work instructions.
+- Document the scope and purpose for each document class in a dated register or table, including a brief
+  description for clarity.
+- Name the person or role responsible for maintaining the list of document classes, ensuring this is a
+  specific individual rather than a team or department.
+- Review and update the document class register at least annually, recording the review date and reviewer’s
+  name each time.

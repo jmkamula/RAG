@@ -1,0 +1,17 @@
+must_id: item:Art.31:reg_sa
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Per-row supervisory authority identifier (which MS + which SA)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the name of the specific Member State for each supervisory authority interaction in a dedicated
+  column of the SA Interaction Register.
+- Enter the full official name of the supervisory authority involved in each interaction, avoiding abbreviations
+  or generic terms.
+- Cross-reference each entry with supporting correspondence or documentation that confirms the Member
+  State and supervisory authority details.
+- Name the supervisory authority as a specific entity, not as "the team", "local regulator", or any non-specific
+  label.

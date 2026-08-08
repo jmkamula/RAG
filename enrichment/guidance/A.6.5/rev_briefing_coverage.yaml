@@ -1,0 +1,19 @@
+must_id: item:A.6.5:rev_briefing_coverage
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Briefing coverage check — every leaver in the period received and acknowledged a briefing (the
+  register's completeness gate)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the leavers register for the review period against the post-employment briefing log
+  to identify all individuals who exited.
+- Confirm each leaver has a dated record of receiving and acknowledging the post-employment briefing,
+  such as a signed form or email receipt.
+- Name the reviewer who performed the completeness check as a specific person, not a generic role or team.
+- Document any missing acknowledgements with an explanation and actions taken, attaching supporting correspondence
+  or escalation records.
+- Retain the final checklist or summary report showing all leavers, briefing dates, acknowledgements,
+  and reviewer sign-off.

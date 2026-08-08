@@ -1,0 +1,15 @@
+must_id: item:10.2:reg_nc_id
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Unique NC identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique, sequential identifier to each nonconformity entry in the register, using a consistent
+  numbering or coding format.
+- Record the assigned identifier in a dedicated column for every nonconformity row, ensuring no duplicates
+  exist.
+- Cross-reference each identifier with related investigation or corrective action records to confirm traceability.
+- Name the register owner as a specific individual, not a team or department, to avoid ambiguity in responsibility.

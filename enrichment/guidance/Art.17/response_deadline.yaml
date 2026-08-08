@@ -1,0 +1,19 @@
+must_id: item:Art.17:response_deadline
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Response to data subject within one month (extendable by two months for complex requests)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date each erasure request is received in a central log, including the requester’s name
+  and contact details.
+- Assign a named individual to track and manage each erasure request, recording their name in the log
+  for accountability.
+- Record the date and content of the response sent to the data subject, ensuring it is within one month
+  of receipt.
+- State the reason for any extension and notify the data subject in writing before the initial one-month
+  period expires.
+- Avoid using undated or unsigned response templates; always personalize and date each communication to
+  the data subject.

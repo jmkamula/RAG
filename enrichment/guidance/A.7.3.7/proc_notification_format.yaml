@@ -1,0 +1,18 @@
+must_id: item:A.7.3.7:proc_notification_format
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Notification format standardised (e.g. structured message with subject ref, event type, expected
+  action)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a notification template that includes fields for subject reference, event type, and expected
+  action, and save it in your procedures folder.
+- State in the procedure that all third-party notifications must use the standard template, referencing
+  the template version and location.
+- Assign responsibility for maintaining and updating the notification template to a named individual,
+  not a generic team or department.
+- Retain at least one completed notification sent to a third party using the template as evidence of consistent
+  application.

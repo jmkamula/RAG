@@ -1,0 +1,17 @@
+must_id: item:7.3:nonconformity_consequences
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Content covers consequences of not conforming to ISMS requirements
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the ISMS awareness programme content, explicitly listing the consequences of not following
+  ISMS requirements in a dated training outline.
+- Name the person responsible for updating and approving the awareness programme content, ensuring an
+  individual is specified rather than a group or department.
+- Retain attendance records showing staff have completed training that includes the consequences of non-conformance,
+  with participant names and completion dates.
+- Include a sample training slide or handout that directly addresses the consequences of failing to meet
+  ISMS requirements.

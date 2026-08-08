@@ -1,0 +1,18 @@
+must_id: item:Art.32:scope_change_drivers
+control_ref: Art.32
+standard_id: GDPR:2016/679
+must_text: Trigger list (new processing activity, new threat landscape signal)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each new data processing activity in a dated register, naming the responsible individual for each
+  entry.
+- Record any new threat landscape signals, such as emerging vulnerabilities or attack patterns, in a dedicated
+  log with the date and source.
+- Cross-reference each trigger event—new processing activity or threat signal—with a documented review
+  of security measures under Article 32.
+- Name the owner of the trigger list as a specific person, not a generic team or department.
+- Retain evidence of periodic reviews of the trigger list, showing dates and participants for each review
+  session.

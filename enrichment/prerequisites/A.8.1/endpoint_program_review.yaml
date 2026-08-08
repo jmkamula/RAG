@@ -1,0 +1,39 @@
+leaf_id: req:A.8.1:endpoint_program_review
+control_ref: A.8.1
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which assets, locations, and business units are in scope before reviewing
+    endpoint protections. This ensures the review covers all relevant endpoints and device classes.
+  good_enough: A documented scope statement that clearly lists included systems and locations, even if
+    not perfectly detailed, is sufficient to proceed.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The endpoint program review must check alignment with the current security policy. If the
+    policy is missing or outdated, the review cannot verify compliance or relevance.
+  good_enough: A published, current version of the security policy that addresses endpoint management
+    at a high level is enough to unblock the review.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need an up-to-date asset register to verify that the endpoint register matches reality
+    and that all device classes are included in the review.
+  good_enough: A working asset register that lists all known endpoints, even if some minor updates are
+    pending, is sufficient to start the review.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding current risks to endpoints is necessary to judge if protections remain appropriate
+    and if new device classes introduce new risks.
+  good_enough: A recent risk assessment that covers endpoint risks, even if not exhaustive, is enough
+    to inform the review process.

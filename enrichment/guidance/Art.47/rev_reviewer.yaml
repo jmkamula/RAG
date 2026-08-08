@@ -1,0 +1,15 @@
+must_id: item:Art.47:rev_reviewer
+control_ref: Art.47
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO + group privacy lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and job title, not just as "the team" or a department.
+- Record the reviewer's role as either the Data Protection Officer or the designated group privacy lead
+  in the review documentation.
+- Document the date the BCR Program Review was completed and reviewed by each named individual.
+- Retain a signed or digitally acknowledged statement from both the DPO and group privacy lead confirming
+  their review participation.

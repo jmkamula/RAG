@@ -1,0 +1,19 @@
+must_id: item:Art.27:member_state
+control_ref: Art.27
+standard_id: GDPR:2016/679
+must_text: Member State where representative is established (one of the MS where subjects targeted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the designated representative as a specific individual or company established in at least one EU
+  Member State where you target data subjects.
+- Document the representative’s full contact details, including address, email, and phone number, in a
+  dated appointment letter signed by both parties.
+- State in your privacy notice the Member State where your representative is based, ensuring it matches
+  the country where you offer goods or services.
+- Retain evidence that the representative is authorized to act on your behalf, such as a signed mandate
+  or power of attorney.
+- Avoid listing only a generic role or department as representative; always specify a named person or
+  legal entity with clear contact information.

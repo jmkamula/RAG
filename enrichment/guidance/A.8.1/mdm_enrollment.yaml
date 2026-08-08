@@ -1,0 +1,18 @@
+must_id: item:A.8.1:mdm_enrollment
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: MDM enrolment required before access to corporate information
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the User Endpoint Devices Policy that all user devices must be enrolled in the approved Mobile
+  Device Management (MDM) system before accessing corporate information.
+- Name the person or role responsible for approving and maintaining the list of MDM-enrolled devices in
+  the policy document.
+- Record the date and version of the policy, ensuring it is not left undated or marked as "draft".
+- Attach a sample screenshot or export of the current MDM-enrolled device list, showing device identifiers
+  and enrolment dates.
+- Specify that policy exceptions must be documented and approved in writing by a named individual, not
+  granted verbally or left undocumented.

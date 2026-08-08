@@ -1,0 +1,18 @@
+must_id: item:A.8.18:scope_exclusions
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Exclusion rationale (admin tools already governed under A.8.2 PAM)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all utility programs considered for inclusion, specifying their function and intended users in
+  a dated inventory document.
+- State clearly in a written statement that administrative tools are excluded from this scope because
+  they are governed under control A.8.2.
+- Cross-reference the relevant section of your A.8.2 Privileged Access Management documentation to demonstrate
+  where admin tool controls are addressed.
+- Name the individual responsible for the exclusion decision, avoiding generic titles like "IT" or "Security
+  Team".
+- Retain a signed and dated approval of the exclusion rationale from an authorized decision-maker.

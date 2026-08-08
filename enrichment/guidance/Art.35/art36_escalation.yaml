@@ -1,0 +1,17 @@
+must_id: item:Art.35:art36_escalation
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Art.36 prior-consultation escalation — when residual high risk remains, escalate to SA
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for identifying when a Data Protection Impact Assessment results in residual high
+  risk that cannot be mitigated.
+- Name the individual responsible for escalating unresolved high risks to the Supervisory Authority, ensuring
+  this is not a generic role or team.
+- Record each instance where escalation to the Supervisory Authority occurs, including the date, summary
+  of risks, and decision to escalate.
+- Retain copies of all correspondence with the Supervisory Authority related to escalated high-risk processing
+  activities.

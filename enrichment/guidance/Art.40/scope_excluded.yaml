@@ -1,0 +1,19 @@
+must_id: item:Art.40:scope_excluded
+control_ref: Art.40
+standard_id: GDPR:2016/679
+must_text: Codes considered but not adhered to (rationale)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all industry or sector codes of conduct relevant to your processing activities, including their
+  official names and publication dates.
+- Document which codes you have chosen not to adhere to, clearly stating each one by name and the date
+  the decision was made.
+- Record a written rationale for each code not adopted, explaining why it is not appropriate or necessary
+  for your organisation.
+- Name the decision-maker as a specific individual, not a group or department, and include their signature
+  and date on the rationale document.
+- Retain copies of all referenced codes and your rationale documents in a central, accessible location
+  for future reference.

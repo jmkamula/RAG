@@ -1,0 +1,19 @@
+must_id: item:Art.30:retention
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Envisaged time limits for erasure per category
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each data category processed in your Records of Processing Activities, using clear and specific
+  names that match actual data sets.
+- State the exact time limit for erasure or review for each data category, referencing policy or legal
+  basis where applicable.
+- Document the date each time limit was last reviewed and approved by the designated Data Protection Officer
+  or responsible manager.
+- Name the owner responsible for enforcing erasure time limits as a specific individual, not a team or
+  department.
+- Attach supporting evidence, such as a signed policy or retention schedule, to each data category entry
+  in your Records of Processing Activities.

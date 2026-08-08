@@ -1,0 +1,16 @@
+must_id: item:A.7.12:reg_traffic_class
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Per-row carried traffic class (drives encryption + tamper-evidence requirements)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the traffic class for each cabling run in the register, specifying whether it carries sensitive,
+  confidential, or public data.
+- Cross-reference each traffic class entry with the corresponding encryption and tamper-evidence controls
+  applied to that cabling run.
+- Name the individual responsible for assigning and reviewing traffic classes in the register, avoiding
+  generic titles like "IT" or "the team".
+- Date each entry and any subsequent updates to the traffic class or associated controls for audit traceability.

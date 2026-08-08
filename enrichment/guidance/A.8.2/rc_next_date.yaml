@@ -1,0 +1,16 @@
+must_id: item:A.8.2:rc_next_date
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Next planned recertification date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the next planned recertification date for each privileged access account in your access management
+  register.
+- Name the person responsible for scheduling and overseeing the next recertification, listing them as
+  a specific individual.
+- Document the method and frequency for recertification reviews in a dated procedure or policy.
+- Avoid leaving the next recertification date blank or marked as "TBD"—enter a concrete, calendar date
+  for each account.

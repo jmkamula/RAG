@@ -1,0 +1,16 @@
+must_id: item:7.3:owner
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Named owner of the programme
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the ISMS Awareness Programme in the programme documentation,
+  avoiding generic titles like "the team" or "IT department".
+- Record the owner's full name, job title, and contact details in the ISMS Awareness Programme document.
+- Date the assignment of ownership and retain a copy of the communication or approval confirming this
+  responsibility.
+- Review and update the named owner annually or whenever there is a change in personnel, documenting the
+  date of each review.

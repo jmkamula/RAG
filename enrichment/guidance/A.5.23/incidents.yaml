@@ -1,0 +1,17 @@
+must_id: item:A.5.23:incidents
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Procedures for handling cloud-related security incidents (link to A.5.24-27, support obligations
+  from CSP)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document step-by-step procedures for identifying, reporting, and responding to cloud-related security
+  incidents, referencing controls A.5.24 to A.5.27.
+- Cross-reference your incident response procedures with your cloud service provider’s contractual support
+  obligations and escalation contacts.
+- Name a specific individual as the incident response coordinator for cloud services, not a generic team
+  or department.
+- Record the date of the latest procedure review and approval, including the approver’s name and signature.

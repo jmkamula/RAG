@@ -1,0 +1,19 @@
+must_id: item:A.5.19:questionnaire_ref
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Reference to standard supplier security questionnaire
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that all new suppliers must complete the standard supplier security questionnaire
+  before onboarding.
+- Reference the exact title and current version number of the standard supplier security questionnaire
+  within the procedure.
+- Cross-reference the location of the questionnaire in your document management system or supplier onboarding
+  portal.
+- Name the person or role responsible for maintaining and updating the standard supplier security questionnaire
+  in the procedure.
+- Avoid using a generic reference such as "see supplier questionnaire"—specify the unique document name
+  and version to prevent ambiguity.

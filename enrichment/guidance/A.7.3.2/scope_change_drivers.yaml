@@ -1,0 +1,19 @@
+must_id: item:A.7.3.2:scope_change_drivers
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: Trigger list (new processing activity / new audience segment)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all contexts where privacy notices are required, such as new data processing activities or introduction
+  of new audience segments, in a dated document.
+- Document the trigger events that require notice review or update, including specific examples like launching
+  new services or targeting new user groups.
+- Assign a named individual responsible for maintaining and updating the notice contexts scope, ensuring
+  their name and contact details are recorded.
+- Include a cross-reference to the latest version of the notice context scope in your data processing
+  register, with a clear version date.
+- Specify actual trigger events and contexts—do not use vague terms like "as needed" or "various activities"
+  that lack clear audit evidence.

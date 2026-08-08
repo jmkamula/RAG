@@ -1,0 +1,19 @@
+must_id: item:A.5.21:rev_maturity
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: Vendor maturity review (recent attestations, incidents, sub-supplier disclosures)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the ICT supply chain review and record their name and role in the
+  review documentation.
+- Collect and file recent third-party attestations or certifications from each vendor, including the date
+  and issuing authority.
+- Request and document any known security incidents or breaches reported by each vendor in the past review
+  period.
+- Obtain and record disclosures from vendors identifying their key sub-suppliers and any changes since
+  the last review.
+- State the review date and ensure all evidence is dated within the current review cycle—do not accept
+  undated or outdated documents.

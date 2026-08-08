@@ -1,0 +1,46 @@
+leaf_id: req:A.5.30:ict_readiness_for_business_continuity
+control_ref: A.5.30
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, services, and processes are in-scope for your ISMS before
+    you can plan ICT continuity. The scope defines what must be covered by your continuity plan.
+  good_enough: A documented scope statement that clearly lists included business units, locations, and
+    systems is available and up to date.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment identifies critical ICT assets, threats, and vulnerabilities, which inform
+    business continuity priorities and recovery objectives. Without this, you can't set meaningful RTO/RPO
+    targets.
+  good_enough: A recent risk assessment exists that covers ICT-related risks and identifies critical assets
+    and processes.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register is essential to know which ICT assets and services require continuity
+    planning, backup, and recovery procedures.
+  good_enough: A current list of ICT assets and services, including owners and criticality, is available
+    for reference.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures accountability for business continuity planning, implementation,
+    and testing. Without this, continuity plans may lack ownership or execution.
+  good_enough: Documented roles and responsibilities exist for business continuity and ICT recovery activities.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Knowing the classification of information and systems helps prioritize which ICT services
+    need the most robust continuity measures.
+  good_enough: A basic classification scheme is in place and applied to key ICT assets and data types.

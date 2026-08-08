@@ -1,0 +1,16 @@
+must_id: item:A.6.3:reg_completion_date
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Per-row completion date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact completion date for each individual’s training in a dedicated column of the Training
+  Completion Register.
+- Cross-reference each entry with supporting evidence, such as a signed attendance sheet or digital training
+  platform confirmation.
+- Name the person responsible for maintaining the register as a specific individual, not a team or department.
+- Review the register regularly to confirm that no row is missing a completion date or contains placeholder
+  text like “TBC” or “pending.”

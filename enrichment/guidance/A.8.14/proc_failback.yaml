@@ -1,0 +1,19 @@
+must_id: item:A.8.14:proc_failback
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Failback procedure — return to primary after recovery (often more risky than failover)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step failback procedure that details how to safely return operations from the backup
+  site to the primary site, including required checks.
+- Name the individual responsible for authorizing the failback process, listing their full name and job
+  title in the procedure.
+- Record the date of the most recent test of the failback procedure, including the test results and any
+  lessons learned.
+- State specific conditions that must be met before initiating failback, such as system integrity checks
+  and confirmation of primary site readiness.
+- Avoid using generic statements like "reverse the failover steps"—provide tailored instructions specific
+  to your environment.

@@ -1,0 +1,19 @@
+must_id: item:Art.17:scope_public_data
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Public-data overlay — when org has made data public, Art.17.2 reasonable-measures scope applies
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all systems where personal data has been made public, listing each system by name and location
+  in a dated inventory record.
+- Document the process used to determine which data is considered "public," including criteria and responsible
+  individuals, in a written procedure.
+- Record the reasonable measures taken to inform other controllers processing the public data, including
+  dates and contact details, in a communication log.
+- Name the owner responsible for managing public-data erasure requests as a specific individual, not a
+  team or department, in the scope document.
+- Attach evidence of at least one completed erasure request involving public data, showing the steps taken
+  and outcomes achieved.

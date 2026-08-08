@@ -1,0 +1,50 @@
+leaf_id: req:A.7.4.5:program_review
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope statement defines which systems, processes, and data are covered by the ISMS and
+    its privacy extension. You need to know what is in-scope to ensure your end-of-processing review covers
+    all relevant PII and associated systems.
+  good_enough: A documented scope that clearly lists all business units, systems, and data types subject
+    to ISO 27701 controls.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is essential to identify all locations where PII may reside,
+    including backups, so you can verify that end-of-processing triggers and data deletion are effective
+    everywhere.
+  good_enough: A current inventory of all information assets (including backups and archives) that may
+    store PII.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: You need a working classification scheme to reliably identify which data is PII and ensure
+    the review process targets the right data sets for end-of-processing checks.
+  good_enough: A documented scheme that marks PII within your data landscape, applied to all in-scope
+    assets.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Knowing the documented purposes for processing PII is critical to determine when processing
+    should end and what triggers the review. Without this, you cannot meaningfully verify end-of-processing
+    events.
+  good_enough: Each processing activity has a documented, reviewed purpose statement linked to relevant
+    data sets.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: The lawful basis for processing informs when processing must cease and what obligations exist
+    for data deletion or retention, directly impacting the review process.
+  good_enough: Each processing activity has a recorded lawful basis, with clear retention or deletion
+    requirements mapped.

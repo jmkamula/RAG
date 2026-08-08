@@ -1,0 +1,20 @@
+must_id: item:A.5.34:rev_ad_hoc_triggers
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Ad-hoc review triggers listed (Schrems-style adequacy shift, new regulator enforcement action
+  in scope sector, M&A, large-scale breach in industry)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all specific ad-hoc events that trigger a privacy and PII program review, such as regulatory changes,
+  industry breaches, or mergers, in a dated policy document.
+- Name the individual responsible for monitoring and initiating reviews based on these triggers, recording
+  their full name and role in the policy.
+- Document the process for identifying and responding to each trigger, including required actions and
+  timeframes, in a written procedure approved by management.
+- Record each occurrence of a trigger and the resulting review in a change log, including the date, description,
+  and outcome.
+- Avoid using vague trigger descriptions like "significant event"—specify concrete examples relevant to
+  your organisation and sector.

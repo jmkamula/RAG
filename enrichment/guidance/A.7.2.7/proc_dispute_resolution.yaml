@@ -1,0 +1,17 @@
+must_id: item:A.7.2.7:proc_dispute_resolution
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Dispute-resolution mechanism between joint controllers
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the agreed process for resolving disputes between joint PII controllers, including escalation
+  steps and decision timelines, in a written procedure.
+- Name the specific individual responsible for managing dispute resolution, rather than listing a team
+  or department as the owner.
+- Record the date when the dispute-resolution mechanism was last reviewed and updated, showing it is current
+  and periodically maintained.
+- Attach evidence of communication of the procedure to all joint controllers, such as an email confirmation
+  or signed acknowledgement.

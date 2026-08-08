@@ -1,0 +1,18 @@
+must_id: item:A.6.4:formalised
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Formalised in writing with HR + Legal review (drives consistent application; ad-hoc disciplinary
+  action is a fairness / employment-tribunal risk)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the disciplinary process in a written policy that clearly outlines steps, potential outcomes,
+  and criteria for information security breaches.
+- Name the policy owner as a specific individual, not a department or team, to ensure clear accountability.
+- Record the date and names of HR and Legal representatives who reviewed and approved the policy before
+  implementation.
+- Retain evidence of communication to all staff, such as a dated email or intranet announcement, confirming
+  the policy’s distribution.
+- Review and update the policy at least annually, recording the review date and approver’s name each time.

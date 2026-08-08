@@ -1,0 +1,17 @@
+must_id: item:B.8.2.4:rev_date
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Infringing Instruction Program in a dated log or register
+  entry.
+- State the planned review interval for the program in a documented schedule or policy.
+- Confirm the next scheduled review date falls within the documented interval by cross-referencing the
+  last review date and the interval.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Retain evidence of the completed review, such as meeting minutes or a signed review checklist, with
+  the corresponding date.

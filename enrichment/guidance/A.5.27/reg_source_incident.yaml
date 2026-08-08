@@ -1,0 +1,19 @@
+must_id: item:A.5.27:reg_source_incident
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Source incident reference per row (links to A.5.26 incident register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each lessons learned entry with a unique incident reference number that matches the
+  corresponding row in the incident register.
+- Document the date each lesson was added to the register, ensuring it matches the timeline of the associated
+  incident.
+- Name the person responsible for entering each lesson, using their full name rather than a generic title
+  or team name.
+- Attach or link supporting evidence, such as investigation reports or meeting notes, for each lesson
+  to show its origin from a specific incident.
+- Confirm that no lesson is listed without a clear, traceable incident reference; remove or correct any
+  entries missing this link.

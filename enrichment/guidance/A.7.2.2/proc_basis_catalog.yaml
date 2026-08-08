@@ -1,0 +1,20 @@
+must_id: item:A.7.2.2:proc_basis_catalog
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: Basis catalog — enumerated permitted bases per applicable jurisdiction (GDPR Art.6.1.a-f; other
+  jurisdictions as applicable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all jurisdictions where your organization processes personal data, referencing a dated register
+  or map of processing locations.
+- Enumerate each permitted lawful basis for processing personal data under GDPR Article 6.1(a-f) and relevant
+  laws for other jurisdictions in a dated procedure document.
+- Cross-reference each lawful basis in your catalog to the specific law or regulation section it derives
+  from, citing the legal text and date accessed.
+- Name the person responsible for maintaining and updating the lawful basis catalog, identifying them
+  by full name and job title.
+- Avoid using generic or boilerplate lists—tailor the catalog to your organization’s actual processing
+  activities and jurisdictions, and document the customization date.

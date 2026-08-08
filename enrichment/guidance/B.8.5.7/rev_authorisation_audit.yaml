@@ -1,0 +1,19 @@
+must_id: item:B.8.5.7:rev_authorisation_audit
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+must_text: Authorisation audit — every engagement traceable to customer authorisation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each subcontractor engagement with a unique reference number linked to the specific customer
+  authorisation that permitted the engagement.
+- Record the date and method of customer authorisation for each subcontractor engagement, attaching supporting
+  evidence such as a signed email or contract clause.
+- Name the individual who approved the engagement, ensuring the approver is identified by full name and
+  role, not by team or department.
+- Retain copies of all customer authorisations in a central, access-controlled repository, ensuring each
+  is retrievable for audit purposes.
+- Cross-reference each subcontractor engagement in your register with its corresponding customer authorisation
+  to demonstrate a clear audit trail.

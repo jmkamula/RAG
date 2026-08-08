@@ -1,0 +1,19 @@
+must_id: item:A.7.3.3:rev_plain_language_audit
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: Plain-language audit — sampled notices reviewed against readability target
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a sample of delivered privacy notices from the past year and record their document names and
+  delivery dates in a review log.
+- Assign a named reviewer to assess each sampled notice against your organisation’s plain-language readability
+  target, noting the assessment date.
+- Document the readability score or summary for each notice, referencing the specific tool or method used
+  for measurement.
+- Record any notices that did not meet the readability target and describe the corrective action taken
+  or planned, with responsible person and timeline.
+- Name the reviewer as a specific individual — do not use generic roles like "Compliance Team" or "Legal
+  Department".

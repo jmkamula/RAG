@@ -80,6 +80,8 @@ policy establishes how we discharge that trust."
 **✗ Avoid**: "We are committed to information security." (Means
 nothing — every org "is committed.")
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 2. Set security objectives (or the framework for setting them)
@@ -104,6 +106,8 @@ disclosures."
 
 **✗ Avoid**: Aspirational language with no measure ("strive to
 protect", "best-in-class security").
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -130,6 +134,8 @@ captured in Data Processing Agreements."
 **✗ Avoid**: Listing every law (the register does that; the policy
 commits to the discipline).
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 4. Commit to continual improvement
@@ -152,6 +158,8 @@ refresh as the threat landscape evolves."
 
 **✗ Avoid**: "We continuously improve" (passive marketing language).
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Document top-management approval
@@ -171,6 +179,8 @@ the signature, the policy is a draft.
 no later than <<APPROVAL_DATE_PLUS_1_YEAR>>."
 
 **✗ Avoid**: "Approved by Management" (un-named — not auditable).
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -197,6 +207,8 @@ A.6.6."
 **✗ Avoid**: "Published on the intranet" (publishing isn't
 communication — evidence that people received it is required).
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Name the document owner
@@ -212,6 +224,8 @@ management approves but doesn't operate day-to-day.
 
 **✓ Good**: "Document owner: ISMS Manager (<<ISMS_MANAGER_NAME>>).
 Reviewer: Data Protection & Risk Manager. Approver: <<CEO_NAME>>, CEO."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -235,6 +249,8 @@ customer-trust-centre URL or NDA-gated portal).
 <trust-centre-url>; full policy under NDA to customers and prospects
 on request via <legal@>; provided to certification body during audit."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### State review frequency
@@ -247,6 +263,8 @@ _Document-control discipline — required by Clause 7.5._
 
 Note next planned review date + conditions that trigger ad-hoc review
 (significant change, major incident, regulatory update).
+
+<<GUIDANCE>>
 
 <<TEXT>>
 

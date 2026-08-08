@@ -1,0 +1,18 @@
+must_id: item:9.1:scope_isms_processes
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: ISMS processes in measurement scope (risk-assessment cadence, treatment progress, audit cycle,
+  incident response timeliness, etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all ISMS processes included in your measurement scope, such as risk assessment, treatment progress,
+  audit cycle, and incident response timeliness.
+- Document the specific measurement criteria and frequency for each ISMS process, referencing the latest
+  approved ISMS documentation.
+- Name the responsible individual for maintaining and updating the measurement scope, avoiding generic
+  titles like "the team" or "IT department."
+- Record the date when the measurement scope was last reviewed and approved by management, keeping a copy
+  of the signed approval.

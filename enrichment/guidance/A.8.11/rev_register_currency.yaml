@@ -1,0 +1,19 @@
+must_id: item:A.8.11:rev_register_currency
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Register currency check (refresh timestamps within tolerance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent review for each masking program in a central register, listing the
+  responsible individual by name.
+- Confirm that each review date falls within the defined review interval, such as annually or quarterly,
+  as specified in your policy.
+- Update the register immediately after each periodic review, ensuring the timestamp reflects the actual
+  completion date.
+- Name the owner of the register as a specific individual, not a team or department, to avoid ambiguity
+  in accountability.
+- Retain previous versions of the register to show a clear history of review dates and any corrective
+  actions taken.

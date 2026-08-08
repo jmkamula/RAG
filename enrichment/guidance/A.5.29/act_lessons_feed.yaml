@@ -1,0 +1,18 @@
+must_id: item:A.5.29:act_lessons_feed
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Lessons feed per record to A.5.27 lessons register where the activation surfaced patterns worth
+  retaining beyond this control
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each activation’s lessons learned in the Per-Activation Plan Record, including details of any
+  recurring issues or successful approaches identified.
+- Cross-reference lessons that reveal broader patterns or improvements to the central A.5.27 lessons register,
+  citing the activation date and specific finding.
+- Name the individual responsible for reviewing each activation’s lessons and making the decision to escalate
+  patterns to the A.5.27 register.
+- Avoid leaving the “lessons learned” section blank or with generic statements; provide specific, actionable
+  insights for each activation.

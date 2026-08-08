@@ -1,0 +1,17 @@
+must_id: item:B.8.5.6:reg_customer_id
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+must_text: Customer per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each subcontractor on a separate row, ensuring the associated customer is clearly named in the
+  same row.
+- Record the full legal name of the customer for every subcontractor entry, avoiding abbreviations or
+  generic terms like "various clients."
+- Date each entry when a subcontractor is added or updated, capturing a clear timeline of disclosures.
+- Assign responsibility for maintaining the register to a named individual, not a team or department.
+- Review the register regularly to confirm no rows are missing customer information or contain placeholders
+  such as "TBD."

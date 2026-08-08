@@ -1,0 +1,19 @@
+must_id: item:Art.15:proc_format
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Default response format (electronic where request was electronic, structured layout for readability)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the default response template used for electronic requests, showing structured sections and
+  clear formatting for readability.
+- Attach a sample completed response sent electronically, including metadata showing it was delivered
+  in the same format as received.
+- State in the procedure that responses to electronic requests are always provided in a commonly used
+  electronic format, such as PDF or CSV.
+- Name the person responsible for verifying that each response matches the structured layout and format
+  requirements before sending.
+- Specify that the procedure avoids generic or unstructured responses, and include a checklist confirming
+  each section is present and clearly labelled.

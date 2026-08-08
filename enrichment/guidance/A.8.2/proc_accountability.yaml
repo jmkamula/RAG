@@ -1,0 +1,18 @@
+must_id: item:A.8.2:proc_accountability
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Users acknowledge accountability for their privileged access (e.g. signed acceptable-use)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each user with privileged access in a register, including full name, job title, and unique identifier.
+- Document each user's signed acknowledgement of the privileged access procedure, capturing the date and
+  method of acknowledgement.
+- Store all signed acknowledgements in a central, access-controlled location, referencing each record
+  to the corresponding user in the register.
+- Confirm that acknowledgements are renewed and re-signed whenever the privileged access procedure is
+  updated.
+- Specify the owner responsible for collecting and maintaining acknowledgements as a named individual,
+  not a generic team or department.

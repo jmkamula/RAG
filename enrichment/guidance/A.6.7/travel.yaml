@@ -1,0 +1,16 @@
+must_id: item:A.6.7:travel
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Security when travelling
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Remote Working Policy the security measures required when staff travel, such as device
+  encryption and use of secure Wi-Fi.
+- Document a procedure for reporting lost or stolen devices while travelling, including contact details
+  and response timelines.
+- Name a specific individual responsible for reviewing and updating travel security guidance, avoiding
+  generic roles like "IT" or "the team".
+- Record the date of the last policy review and approval by a named manager to show the policy is current.

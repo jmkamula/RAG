@@ -1,0 +1,17 @@
+must_id: item:6.1.2:scope_scoring_scale
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Scoring scale stated (e.g. 5×5 qualitative, ALE quantitative)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact scoring scale used in your risk assessment methodology, such as "5x5 qualitative" or
+  "annual loss expectancy quantitative," in a dated document.
+- Document the definitions for each level of likelihood and impact within the chosen scoring scale, ensuring
+  these are clear and unambiguous.
+- Name the person or role responsible for approving the scoring scale, and record their approval with
+  a dated signature or email confirmation.
+- Avoid using generic or template language—customize the scoring scale description to reflect your organization's
+  actual risk appetite and context.

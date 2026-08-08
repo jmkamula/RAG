@@ -1,0 +1,16 @@
+must_id: item:4.4:chg_approval
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: Approval signature with date (ISMS Manager or top management)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each change to the ISMS Manual in a dedicated change log, including a brief description and the
+  date of the change.
+- Name the approver as a specific individual, such as the ISMS Manager or a member of top management,
+  not a generic title or group.
+- Obtain the approver’s handwritten or electronic signature, along with the approval date, for each change
+  entry in the change record.
+- Retain the signed and dated change record as part of the official ISMS Manual documentation set.

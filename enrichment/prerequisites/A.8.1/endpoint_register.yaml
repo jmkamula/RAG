@@ -1,0 +1,39 @@
+leaf_id: req:A.8.1:endpoint_register
+control_ref: A.8.1
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The endpoint inventory must only include devices within the defined ISMS scope. Without a
+    clear scope statement, you can't know which endpoints are relevant or required to be tracked.
+  good_enough: A documented scope statement that lists the business units, locations, and systems covered
+    by the ISMS, so you know which endpoints to include.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The endpoint register is a subset of the broader asset register, focusing specifically on
+    endpoint devices. You need a basic asset register to identify which assets are endpoints.
+  good_enough: An initial asset register that at least lists all known hardware and device assets, even
+    if not fully detailed or classified yet.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Someone must be assigned responsibility for maintaining the endpoint register and ensuring
+    its accuracy. Without clear roles, the register will quickly become outdated or incomplete.
+  good_enough: A named individual or team assigned to manage endpoint inventory, even if detailed procedures
+    are still being developed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Endpoints may need to be classified based on sensitivity, criticality, or data handled. A
+    basic classification scheme helps ensure the register captures the right attributes.
+  good_enough: A simple, documented classification scheme that distinguishes at least between ordinary
+    and sensitive endpoints, even if not fully mature.

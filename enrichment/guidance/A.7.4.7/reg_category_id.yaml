@@ -1,0 +1,16 @@
+must_id: item:A.7.4.7:reg_category_id
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Category / activity combination identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each row in the PII Retention Schedule Register that clearly links a specific
+  category and activity combination.
+- Record the identifier in a dedicated column, ensuring it is not reused for different category/activity
+  pairs elsewhere in the register.
+- Cross-reference the identifier in related policy documents or data maps to demonstrate consistent use
+  across records.
+- Name the owner responsible for maintaining the register as a specific individual, not a team or department.

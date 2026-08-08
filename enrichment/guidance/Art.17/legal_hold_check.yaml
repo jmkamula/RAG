@@ -1,0 +1,19 @@
+must_id: item:Art.17:legal_hold_check
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Legal-hold check before erasure (links to A.8.10:legal_hold)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step in your erasure procedure requiring staff to check for any active legal hold before
+  deleting personal data.
+- Name the individual or role responsible for confirming the presence or absence of a legal hold prior
+  to erasure.
+- Record each legal hold check with the date, data subject identifier, and decision outcome in an auditable
+  log.
+- Attach evidence of the legal hold check, such as a signed or digitally approved confirmation, to the
+  erasure request record.
+- Specify that erasure must not proceed if a legal hold is identified, and require documented justification
+  if erasure is delayed.

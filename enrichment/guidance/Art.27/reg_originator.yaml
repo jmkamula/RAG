@@ -1,0 +1,16 @@
+must_id: item:Art.27:reg_originator
+control_ref: Art.27
+standard_id: GDPR:2016/679
+must_text: Per-row originator (data subject / SA / other)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the originator for each entry in the Representative Operations Record, specifying whether it
+  is a data subject, supervisory authority, or another source.
+- Name the originator as a specific individual or organization, avoiding generic labels like "user" or
+  "external party."
+- Date each entry to show when the originator's request or action was logged.
+- Cross-reference each originator entry with supporting documentation, such as correspondence or official
+  requests, to verify authenticity.

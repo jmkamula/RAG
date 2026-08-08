@@ -1,0 +1,18 @@
+must_id: item:A.7.5.2:reg_subcontractor
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+must_text: Subcontractor per row where the destination is via a subprocessor
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each data transfer destination in the register, including all countries and entities receiving
+  personal data.
+- Record the name of the specific subcontractor or subprocessor involved for each relevant transfer destination
+  row.
+- State the legal basis or contract reference that permits the subcontractor to process personal data
+  for each entry.
+- Name the owner of the register as a specific individual, not a team or department.
+- Date each entry and update the register whenever a new subcontractor is added or an existing one is
+  changed.

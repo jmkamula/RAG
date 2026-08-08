@@ -1,0 +1,19 @@
+must_id: item:A.7.2.2:proc_lia_procedure
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: Legitimate-interests balancing test procedure (necessity + balancing against subject rights)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific legitimate interest being pursued, including a clear description and justification,
+  in a dated assessment record.
+- Record the necessity test by explaining why the processing is needed to achieve the stated interest,
+  with supporting evidence.
+- Assess and document potential impacts on individuals’ rights and freedoms, listing identified risks
+  and proposed mitigations.
+- Name the decision-maker who approved the balancing test outcome, ensuring this is a specific individual
+  and not a group or department.
+- Retain the completed assessment and approval record for each processing activity relying on legitimate
+  interests as a lawful basis.

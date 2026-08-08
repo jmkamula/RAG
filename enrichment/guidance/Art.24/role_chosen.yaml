@@ -1,0 +1,18 @@
+must_id: item:Art.24:role_chosen
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Per-row role chosen (controller / processor / joint controller / third party)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the role for each data processing activity as controller, processor, joint controller, or third
+  party in a dedicated column of your decision record.
+- Document the reasoning behind each role choice with a brief explanation and reference to relevant GDPR
+  definitions or agreements.
+- Assign a specific individual who made or approved each role decision, listing their full name and job
+  title.
+- Record the date each role decision was made or last reviewed to show decisions are current.
+- Avoid using generic terms like "the team" or leaving the role field blank—each row must have a clear,
+  specific role selected.

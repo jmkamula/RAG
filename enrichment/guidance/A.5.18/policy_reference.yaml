@@ -1,0 +1,17 @@
+must_id: item:A.5.18:policy_reference
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: References the topic-specific access control policy (A.5.15) — drives consistency between policy
+  and operational practice
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the access rights management procedure to the current version of the topic-specific
+  access control policy by title and document number.
+- State the date when the access control policy was last reviewed to show alignment with the procedure’s
+  effective date.
+- Name the individual responsible for maintaining both the access rights management procedure and the
+  access control policy.
+- Avoid referencing a generic or outdated policy; cite the specific, current policy relevant to your organisation.

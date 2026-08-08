@@ -1,0 +1,18 @@
+must_id: item:Art.24:role_counterparty
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Per-row counterparty (customer / vendor / partner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the counterparty for each relationship row using their full legal entity name as listed in official
+  contracts.
+- Document whether your organisation is acting as controller or processor for each counterparty, referencing
+  the relevant service or processing activity.
+- Record the date the role decision was made and the individual who approved it for each entry.
+- Attach supporting documentation, such as contracts or data processing agreements, that clarify the nature
+  of the relationship for each counterparty.
+- State the counterparty role decision explicitly; avoid using generic terms like "partner" or leaving
+  the field blank.

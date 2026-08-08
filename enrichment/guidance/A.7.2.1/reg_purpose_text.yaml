@@ -1,0 +1,15 @@
+must_id: item:A.7.2.1:reg_purpose_text
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Purpose statement text (clear + specific)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Write a clear and specific description for each processing activity in the PII Processing Purpose Register,
+  avoiding vague terms like "business needs".
+- State the lawful basis or legitimate interest for each processing purpose, linking to relevant policies
+  or legal references where applicable.
+- Record the date each purpose statement was last reviewed or updated, along with the name of the reviewer.
+- Name the owner of each purpose statement as a specific individual, not a team or department.

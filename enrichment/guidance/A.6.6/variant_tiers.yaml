@@ -1,0 +1,20 @@
+must_id: item:A.6.6:variant_tiers
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Tiered NDA variants (employee NDA — lighter; contractor — full; supplier — bilateral; M&A counterparty
+  — heavy with extended duration)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all NDA template variants by type (employee, contractor, supplier, M&A counterparty) in a single
+  document with version numbers and dates.
+- Document the rationale for each NDA variant, explaining why its terms are lighter or heavier based on
+  the relationship and risk.
+- Assign a named owner responsible for maintaining and updating each NDA template, not just "Legal" or
+  "HR".
+- Attach a sample completed NDA for each variant, signed and dated by both parties, to demonstrate actual
+  use.
+- State the duration and key clauses for each NDA variant in a summary table, avoiding generic or copy-paste
+  language that does not reflect real differences.

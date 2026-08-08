@@ -1,0 +1,17 @@
+must_id: item:6.3:change_identification
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Identification trigger for ISMS-level changes (scope, policy, risk criteria, structural)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific triggers that require ISMS-level changes, such as changes in scope, policy, risk criteria,
+  or organizational structure, in your documented procedure.
+- Assign a named individual or role responsible for monitoring and identifying when these triggers occur,
+  and record this assignment in the procedure.
+- Document the date and details of each identified trigger event in a change log maintained for ISMS-level
+  changes.
+- Avoid using vague language like "as needed" or "periodically" in your procedure—state clear, objective
+  criteria for when a change must be considered.

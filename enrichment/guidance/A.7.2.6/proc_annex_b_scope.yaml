@@ -1,0 +1,18 @@
+must_id: item:A.7.2.6:proc_annex_b_scope
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: 'Annex B implementation scope — which B.8.x controls apply per processor engagement (default:
+  all)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific Annex B.8.x controls that apply to each processor engagement in the contracting procedure,
+  listing control numbers and titles.
+- Document any deviations from the default of "all B.8.x controls apply" with a clear, written justification
+  approved by the data protection officer.
+- Assign responsibility for reviewing and updating the list of applicable B.8.x controls to a named individual,
+  not a team or department.
+- Record the date and version of the contracting procedure used for each processor engagement to show
+  which controls were in scope at the time.

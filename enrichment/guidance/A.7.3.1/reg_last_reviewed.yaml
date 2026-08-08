@@ -1,0 +1,16 @@
+must_id: item:A.7.3.1:reg_last_reviewed
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Last review date per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the last review date for each obligation in a dedicated column within the Applicable Obligations
+  Register.
+- Name the reviewer as a specific individual for each obligation, avoiding generic labels like "Compliance
+  Team" or "Legal."
+- Cross-reference each review date with supporting evidence, such as a meeting note or approval email,
+  to confirm the review occurred.
+- Update the review date immediately after any change or formal review of the obligation is completed.

@@ -1,0 +1,19 @@
+must_id: item:A.8.5:proc_user_education
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: User education on phishing-resistant authentication usage
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a training session agenda that covers phishing-resistant authentication methods, including
+  date and trainer’s name.
+- Record attendance for each user who completes the phishing-resistant authentication training, listing
+  full names and completion dates.
+- Retain copies of training materials or presentations provided to users, clearly labeled with the date
+  of last update.
+- Name the person responsible for updating and delivering user education on phishing-resistant authentication,
+  not just a team or department.
+- Collect signed or acknowledged statements from users confirming they understand and will use phishing-resistant
+  authentication as instructed.

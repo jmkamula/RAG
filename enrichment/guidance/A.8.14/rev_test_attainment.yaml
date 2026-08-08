@@ -1,0 +1,19 @@
+must_id: item:A.8.14:rev_test_attainment
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Failover-test attainment per service (cadence met; targets met)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date, scope, and results of each service failover test in a centralized log, including
+  whether defined recovery targets were met.
+- Name the individual responsible for scheduling and overseeing each service's failover test, avoiding
+  generic roles like "IT team."
+- Record evidence that failover tests occurred at the required intervals, such as calendar invites, meeting
+  minutes, or system-generated test reports.
+- Retain signed management approval of test results and any remediation plans for services that did not
+  meet recovery targets.
+- Cross-reference each service's test record with the documented test schedule to confirm that all required
+  tests were performed on time.

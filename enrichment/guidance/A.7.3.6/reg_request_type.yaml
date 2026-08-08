@@ -1,0 +1,17 @@
+must_id: item:A.7.3.6:reg_request_type
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: Request type per row (access / correction / erasure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each incoming request in the register with a separate row, capturing the requestor’s name, date
+  received, and request details.
+- Specify the request type for every row as either "access", "correction", or "erasure" — do not leave
+  this field blank or use generic labels.
+- Assign a unique reference number to each request entry to allow easy cross-referencing with related
+  correspondence or decisions.
+- Name the staff member responsible for processing each request in the corresponding row, not just a team
+  or department.

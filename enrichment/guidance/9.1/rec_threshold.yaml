@@ -1,0 +1,17 @@
+must_id: item:9.1:rec_threshold
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Per-row threshold / target value applied
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific threshold or target value for each measurement row in the ISMS record, clearly matching
+  each metric to its intended goal.
+- Document the date each threshold or target value was set or updated, referencing the decision or meeting
+  where it was approved.
+- Name the individual responsible for setting and reviewing each threshold, avoiding generic titles like
+  "the team" or "management".
+- Cross-reference each threshold or target value to the relevant policy or risk assessment that justifies
+  its selection.

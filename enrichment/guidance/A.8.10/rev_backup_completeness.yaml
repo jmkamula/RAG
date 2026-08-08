@@ -1,0 +1,16 @@
+must_id: item:A.8.10:rev_backup_completeness
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Backup-sweep completeness sample (no orphan copies surviving)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and scope of the most recent backup deletion program review in a signed meeting record.
+- Name the reviewer responsible for verifying that no orphan backup copies remain after scheduled deletions.
+- Record a sample check showing specific backup sets and confirming their complete removal, including
+  evidence of deletion logs.
+- Cross-reference the deletion records with your backup inventory to confirm all listed items were addressed
+  in the sweep.
+- Name the reviewer as a specific individual, not a team or department, to avoid ambiguity in accountability.

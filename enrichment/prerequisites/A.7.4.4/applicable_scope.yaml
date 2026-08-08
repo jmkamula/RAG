@@ -1,0 +1,48 @@
+leaf_id: req:A.7.4.4:applicable_scope
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines the organizational and system boundaries for all information security
+    and privacy controls, ensuring that minimization contexts are mapped to the correct assets and processes.
+  good_enough: A current, documented scope statement that clearly identifies which business units, systems,
+    and data flows are in-scope for the ISMS and privacy extension.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is needed to identify which information assets (including datasets
+    and environments) are subject to minimization, and to distinguish between operational and non-operational
+    contexts.
+  good_enough: A basic inventory of information assets, tagged by type and use, that covers all environments
+    where PII may be processed.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the documented purposes for each processing activity to determine which ones
+    are candidates for minimization and which require full PII.
+  good_enough: A list of processing activities with their stated purposes, even if some purposes are high-level
+    or pending further detail.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A classification scheme helps distinguish between data that must be minimized and data that
+    is operationally necessary, supporting clear scoping of minimization contexts.
+  good_enough: A simple data classification policy that at least differentiates PII from non-PII and marks
+    data used for analytics, testing, or ML.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity is essential to justify whether
+    minimization is required or if full PII retention is legally necessary.
+  good_enough: A mapping of processing activities to their lawful bases, even if some are provisional
+    or awaiting legal review.

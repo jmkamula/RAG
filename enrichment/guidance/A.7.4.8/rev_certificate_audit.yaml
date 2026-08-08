@@ -1,0 +1,18 @@
+must_id: item:A.7.4.8:rev_certificate_audit
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Certificate audit — sampled disposals have valid certificates
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each disposal event in a disposal log, including date, asset description, and a unique reference
+  number for traceability.
+- Attach a copy of the disposal certificate, signed and dated by the authorised disposal provider, to
+  each log entry.
+- Cross-reference the disposal log entry with the corresponding certificate to confirm that every sampled
+  disposal has valid supporting documentation.
+- Name the reviewer who checked the certificates for sampled disposals, and record the date of each review.
+- Avoid using generic or template certificates; ensure each certificate clearly identifies the specific
+  assets disposed of and matches the log details.

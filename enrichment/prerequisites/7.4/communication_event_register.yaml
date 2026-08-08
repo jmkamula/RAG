@@ -1,0 +1,39 @@
+leaf_id: req:7.4:communication_event_register
+control_ref: '7.4'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organisation and which information assets
+    are covered by the ISMS, directly impacting which communications need to be recorded in the register.
+  good_enough: A clear, approved scope statement exists that identifies the boundaries and applicability
+    of the ISMS, so you know what communications fall within scope.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the tone for information security communications and may specify mandatory
+    communication types or channels, guiding what events must be registered.
+  good_enough: A current, communicated policy is in place that references information security communications,
+    even if it’s high-level.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Knowing who is responsible for sending, receiving, and recording communications is essential
+    for accurate event registration and accountability.
+  good_enough: A basic roles and responsibilities matrix or list exists, identifying who is accountable
+    for ISMS communications and register upkeep.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: The classification scheme helps determine the sensitivity of information being communicated,
+    which affects how communication events are recorded and handled.
+  good_enough: A simple, documented classification scheme is available, so you can tag communications
+    by sensitivity in the register if needed.

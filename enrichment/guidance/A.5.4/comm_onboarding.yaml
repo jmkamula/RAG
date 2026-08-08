@@ -1,0 +1,17 @@
+must_id: item:A.5.4:comm_onboarding
+control_ref: A.5.4
+standard_id: ISO27001:2022
+must_text: Distribution at onboarding for new personnel evidenced (induction pack, mandatory module)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the inclusion of the management directive in the official onboarding checklist for new personnel,
+  referencing the specific document version and date.
+- Record the date each new joiner receives the directive by capturing their name and onboarding completion
+  date in a central register.
+- Retain a signed or electronically acknowledged receipt from each new joiner confirming they have read
+  and understood the directive.
+- Name the responsible individual overseeing onboarding distribution, avoiding generic titles like "HR
+  team" or "management."

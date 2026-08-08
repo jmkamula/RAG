@@ -1,0 +1,18 @@
+must_id: item:A.7.2.2:scope_overlap_rules
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: Overlap rules — where an activity spans jurisdictions, most-restrictive-basis policy documented
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all jurisdictions where personal data processing occurs, naming each country or region in a dated
+  register maintained by the privacy team.
+- Identify and document the legal bases for processing personal data in each jurisdiction, referencing
+  specific laws or regulations for each entry.
+- Compare requirements across jurisdictions for each processing activity, and record the most restrictive
+  rule that applies in a written summary.
+- Name the individual responsible for maintaining and updating the overlap rules, avoiding generic titles
+  like "the team" or "Compliance Department."
+- Approve the documented most-restrictive-basis policy with a dated signature from a designated decision-maker.

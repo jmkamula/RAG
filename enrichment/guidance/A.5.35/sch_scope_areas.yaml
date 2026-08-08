@@ -1,0 +1,18 @@
+must_id: item:A.5.35:sch_scope_areas
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Scope areas planned (the ISMS may be reviewed end-to-end annually OR sliced across cycles —
+  both acceptable; the slicing is documented)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all ISMS scope areas, including people, processes, and technologies, in the Independent Review
+  Schedule Register with clear, specific names.
+- Document the planned review cycle for each scope area, stating whether it is reviewed annually end-to-end
+  or in defined slices.
+- Describe the rationale for any sliced review approach, specifying which areas are covered in each cycle
+  and the schedule for full coverage.
+- Name the owner of the review schedule as a specific individual, not a team or department.
+- Record the date the schedule was last updated and approved, with the approver’s name clearly shown.

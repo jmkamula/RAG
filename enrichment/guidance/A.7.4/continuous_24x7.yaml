@@ -1,0 +1,19 @@
+must_id: item:A.7.4:continuous_24x7
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: 24/7 / continuous monitoring approach (manned SOC, automated with SOC review, hybrid)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Describe the chosen 24/7 monitoring approach in the procedure, specifying whether it is manned, automated,
+  or a hybrid model.
+- Name the specific individual or role responsible for overseeing the monitoring process, avoiding generic
+  terms like "the team" or "security staff".
+- Record the schedule and method for regular reviews of monitoring logs or alerts, including the frequency
+  and reviewer’s name.
+- Document how incidents detected by monitoring are escalated, including the steps taken and the person
+  or role notified.
+- Retain dated evidence of monitoring activity, such as log extracts or SOC shift handover records, for
+  auditor inspection.

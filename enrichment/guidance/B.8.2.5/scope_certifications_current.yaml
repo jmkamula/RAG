@@ -1,0 +1,18 @@
+must_id: item:B.8.2.5:scope_certifications_current
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: Current certifications enumerated with expiry
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current certifications relevant to information and audit contexts, specifying the full certification
+  name and issuing body for each entry.
+- Record the exact expiry date for each certification in a dated register or tracking document.
+- Attach supporting evidence for each certification, such as a scanned copy or official confirmation letter,
+  to the register.
+- Name a responsible individual for maintaining and updating the certification register, avoiding generic
+  roles like "the team" or "IT department."
+- Review and update the register at least quarterly, recording the review date and reviewer’s name each
+  time.

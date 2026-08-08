@@ -1,0 +1,18 @@
+must_id: item:Art.46:scope_non_adequate_transfers
+control_ref: Art.46
+standard_id: GDPR:2016/679
+must_text: Non-adequate transfers enumerated (cross-link to Art.44 register filtered by mechanism=Art.46)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all international data transfers to countries not recognized as adequate under GDPR, including
+  destination country and data categories.
+- Cross-reference each listed transfer to the corresponding entry in your Article 44 data transfer register,
+  filtered to show only those using Article 46 mechanisms.
+- Document the specific Article 46 safeguard mechanism applied for each transfer, such as Standard Contractual
+  Clauses or Binding Corporate Rules.
+- Name the responsible individual who maintains and updates the list of non-adequate transfers, avoiding
+  generic roles like "the team" or "IT".
+- Record the date when the non-adequate transfers list was last reviewed and updated.

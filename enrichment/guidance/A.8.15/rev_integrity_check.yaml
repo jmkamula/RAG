@@ -1,0 +1,19 @@
+must_id: item:A.8.15:rev_integrity_check
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Integrity-verification spot-check (hash chain or signature validates against retained logs)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for performing integrity-verification spot-checks on logs, listing their
+  full name and job title in the review record.
+- Document the date, method used (e.g., hash chain or digital signature), and outcome of each spot-check
+  in a log review register.
+- Attach evidence of the validation process, such as screenshots or exported verification results, to
+  the review record for each spot-check.
+- Record any detected discrepancies or failures, including actions taken and resolution dates, in the
+  same review register.
+- Avoid using generic statements like "integrity verified" without attaching specific validation results
+  or naming the validator.

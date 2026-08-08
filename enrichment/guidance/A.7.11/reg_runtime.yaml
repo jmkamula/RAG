@@ -1,0 +1,17 @@
+must_id: item:A.7.11:reg_runtime
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Per-row autonomous-runtime stat (UPS minutes, generator fuel days)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the autonomous runtime for each site in the utility register, specifying UPS backup duration
+  in minutes and generator fuel supply in days.
+- State the date each runtime value was last tested or verified, and name the person who performed the
+  check.
+- Attach supporting evidence, such as test logs or supplier statements, for each runtime figure entered
+  in the register.
+- Name the owner of each site’s utility entry as a specific individual, not a team or generic role.
+- Review the register annually and document the review date and reviewer’s name for each site entry.

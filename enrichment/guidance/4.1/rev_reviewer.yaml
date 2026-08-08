@@ -1,0 +1,16 @@
+must_id: item:4.1:rev_reviewer
+control_ref: '4.1'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (ISMS Manager + executive sponsor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the ISMS Manager and executive sponsor as the reviewers in the Context Program Review document,
+  using their full names and job titles.
+- Record the date each reviewer completed their review in the document to show when the review took place.
+- Obtain signatures or written approval from both the ISMS Manager and executive sponsor on the final
+  Context Program Review.
+- Avoid listing the reviewer as a group or department; specify named individuals to meet accountability
+  requirements.

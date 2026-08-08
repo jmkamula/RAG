@@ -1,0 +1,17 @@
+must_id: item:A.8.34:authority
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Named policy authority (InfoSec lead with Internal Audit partner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the policy authority as a specific individual by full name and job title, such as "Jane Smith,
+  Information Security Lead."
+- Document the internal audit partner by full name and role, ensuring both authorities are clearly listed
+  on the policy cover page.
+- Record the date both authorities reviewed and approved the policy, capturing their signatures or electronic
+  approval.
+- Avoid listing a group, department, or generic title as the authority; use only named individuals for
+  clear accountability.

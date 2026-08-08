@@ -1,0 +1,19 @@
+must_id: item:A.7.3.2:rev_currency_audit
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: Currency audit — sampled notices verified against A.7.2.1 purpose register + A.7.2.8 RoPA
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a recent sample of published privacy notices and record their URLs and publication dates in a
+  review log.
+- Cross-reference each notice’s stated purposes and processing activities against your current A.7.2.1
+  purpose register and A.7.2.8 record of processing activities.
+- Document any mismatches or outdated information found, including the notice reference, specific issue,
+  and date identified.
+- Assign a named individual to approve and sign off on the completed review log, confirming all sampled
+  notices were checked for currency.
+- Name the reviewer as a specific person, not a group or generic title, to avoid auditor concerns about
+  unclear accountability.

@@ -1,0 +1,42 @@
+leaf_id: req:A.5.37:operating_procedures_register
+control_ref: A.5.37
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The operating procedures register must reflect the actual information processing facilities
+    within the scope of your ISMS. Without a clear scope statement, you cannot reliably identify which
+    facilities and systems require documented procedures.
+  good_enough: A current, management-approved scope statement that lists all relevant facilities and systems
+    is available.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need an up-to-date register of information processing assets to know which facilities
+    and systems require operating procedures. The asset register is the authoritative source for what
+    needs to be covered in the procedures register.
+  good_enough: A basic asset register exists, listing all major information processing facilities and
+    systems, even if some details are pending.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Each procedure in the register must have an assigned owner responsible for its maintenance
+    and review. Clear role assignments ensure accountability for the creation and upkeep of operating
+    procedures.
+  good_enough: Key roles and responsibilities for information security and facility management are documented
+    and assigned, even if not fully formalized.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The security policy sets the expectations for documentation, availability, and review of
+    operating procedures. It provides the baseline requirements that the register must meet.
+  good_enough: A published information security policy exists, referencing the need for documented procedures
+    and their accessibility.

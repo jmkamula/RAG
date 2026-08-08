@@ -1,0 +1,39 @@
+leaf_id: req:A.5.11:leaver_return_register
+control_ref: A.5.11
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You can't track the return of assets if you don't have a definitive list of what assets are
+    assigned to each person. The asset register is the source of truth for what needs to be returned.
+  good_enough: A current, accessible register exists that reliably lists all assets assigned to staff,
+    even if not all historical assignments are perfectly captured.
+- ref: A.6.5
+  standard_id: ISO27001:2022
+  title: Responsibilities after termination or change of employment
+  category: direct
+  rationale: This control defines what obligations persist after someone leaves or changes roles, including
+    asset return. It sets the rules that the leaver return register must evidence in practice.
+  good_enough: Documented procedures or policy excerpts exist that specify asset return requirements for
+    leavers, even if not fully automated.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of responsibility ensures someone is accountable for updating and maintaining
+    the leaver return register. Without this, the register may be neglected or incomplete.
+  good_enough: A named individual or team is assigned responsibility for asset return tracking, even if
+    this is only noted in a policy or job description.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organisation and which assets are covered
+    by the ISMS, ensuring the register includes all relevant leavers and assets.
+  good_enough: A documented scope exists that covers the business units and asset types relevant to leaver
+    management, even if not perfectly granular.

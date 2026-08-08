@@ -1,0 +1,18 @@
+must_id: item:7.2:scope_contractors
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Contractor coverage rules where contractors fill ISMS-affecting roles
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all ISMS-affecting roles and clearly indicate which are filled by contractors, including contractor
+  company names where applicable.
+- Document the rules or criteria used to determine when contractors may fill ISMS-affecting roles, including
+  any approval or vetting requirements.
+- Name the individual responsible for overseeing contractor compliance with ISMS requirements, rather
+  than listing a team or department.
+- Record the date when contractor coverage rules were last reviewed and updated, attaching the reviewed
+  document or meeting minutes.
+- Retain signed agreements or contracts that explicitly state contractors’ ISMS responsibilities and obligations.

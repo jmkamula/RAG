@@ -1,0 +1,18 @@
+must_id: item:A.6.5:duration
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Duration of each obligation (indefinite for confidentiality; time-limited for non-compete;
+  per-jurisdiction limits where law caps duration)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the duration of each post-employment obligation in the employee exit checklist, specifying "indefinite"
+  for confidentiality and exact dates for other restrictions.
+- Document any legal or jurisdictional limits that cap the duration of non-compete or similar obligations,
+  referencing the relevant law or regulation.
+- Name the responsible individual who approves and updates these durations, avoiding generic titles like
+  "HR" or "the team."
+- Retain a signed acknowledgment from the departing employee confirming their understanding of each obligation's
+  duration.

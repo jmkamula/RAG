@@ -1,0 +1,17 @@
+must_id: item:A.7.14:certificate
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Certificate of destruction obtained where applicable
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each instance of equipment disposal in a log, including the asset ID, date, and method of disposal.
+- Obtain a certificate of destruction from the disposal vendor for every applicable item, ensuring it
+  lists serial numbers and destruction date.
+- Attach the certificate of destruction to the corresponding entry in the disposal log for traceability.
+- Name the responsible staff member who verified and filed each certificate, rather than using a generic
+  role or team name.
+- Review all disposal records quarterly to confirm that certificates are present and correctly linked
+  to disposed assets.

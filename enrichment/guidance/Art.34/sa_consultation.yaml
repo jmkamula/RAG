@@ -1,0 +1,20 @@
+must_id: item:Art.34:sa_consultation
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: SA consultation pathway — SA may require communication even when controller assesses exception
+  applies (Art.34.4)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for consulting with the Supervisory Authority when you believe an exception to
+  notifying data subjects applies.
+- Name the individual responsible for initiating contact with the Supervisory Authority in cases where
+  an exception is being considered.
+- Record each instance of Supervisory Authority consultation, including the date, summary of the situation,
+  and the Authority’s response.
+- Attach written confirmation from the Supervisory Authority if they require subject notification despite
+  your initial exception assessment.
+- Avoid using generic statements like “consult as needed”—specify exact triggers and steps for Supervisory
+  Authority engagement in your procedure.

@@ -1,0 +1,40 @@
+leaf_id: req:A.5.22:program_meta_review
+control_ref: A.5.22
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.21
+  standard_id: ISO27001:2022
+  title: Managing information security in the ICT supply chain
+  category: direct
+  rationale: The supplier review meta-review cannot be performed unless there is an established process
+    for managing information security in the ICT supply chain, including a maintained supplier register
+    and ongoing monitoring activities.
+  good_enough: A documented supplier management process and up-to-date supplier register exist, with evidence
+    of at least one review cycle having been performed.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which suppliers and supply chain activities fall under the ISMS,
+    ensuring the meta-review covers the correct portfolio and boundaries.
+  good_enough: A current, approved ISMS scope statement that clearly includes supply chain and supplier
+    management activities.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the overall expectations for information security, including the requirement
+    for supplier management and periodic reviews, which the meta-review must align with.
+  good_enough: An approved information security policy that references supplier management and review
+    expectations.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding the risk landscape is essential to determine if the supplier review program
+    is targeting the right risks and suppliers, which is a key focus of the meta-review.
+  good_enough: A recent risk assessment that identifies supply chain risks and informs the supplier review
+    program’s priorities.

@@ -1,0 +1,48 @@
+leaf_id: req:A.5.18:access_rights_review
+control_ref: A.5.18
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need a current, accurate register of information assets to know which systems and data
+    require access rights review. Without this, you can't reliably identify what access should be checked
+    or by whom.
+  good_enough: A basic, up-to-date list of key information assets and their owners is available, even
+    if not all metadata fields are perfect.
+- ref: A.5.15
+  standard_id: ISO27001:2022
+  title: Access Control
+  category: direct
+  rationale: Your access control policy defines how access rights are granted, changed, and revoked. Without
+    a clear policy, you can't judge whether current access is appropriate or excessive during a review.
+  good_enough: A documented access control policy exists and is communicated to relevant staff, even if
+    some procedures are still being refined.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Knowing the classification of assets helps prioritize which access rights need stricter review
+    and which can be handled with lighter controls.
+  good_enough: A simple classification scheme is in place and applied to core assets, even if some legacy
+    items are not yet classified.
+- ref: A.6.5
+  standard_id: ISO27001:2022
+  title: Responsibilities after Termination or Change of Employment
+  category: direct
+  rationale: You need to ensure that access rights are promptly reviewed and revoked when staff leave
+    or change roles, as part of the periodic review process.
+  good_enough: There is a basic process for notifying IT/security when staff leave or change roles, even
+    if some manual follow-up is required.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that someone is accountable for conducting access rights
+    reviews and acting on their findings.
+  good_enough: Roles for access management and review are assigned and understood, even if not yet formally
+    documented in all job descriptions.

@@ -1,0 +1,17 @@
+must_id: item:A.5.7:rev_next_date
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Next planned review date stated (within 180d of this review)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the current threat intelligence program review in an official meeting record or review
+  log.
+- State the next planned review date in the same document, ensuring it is no more than 180 days after
+  the current review.
+- Name the individual responsible for scheduling and conducting the next review, listing their full name
+  and role.
+- Avoid leaving the next review date blank or stating "TBD"—auditors will flag missing or vague scheduling
+  details.

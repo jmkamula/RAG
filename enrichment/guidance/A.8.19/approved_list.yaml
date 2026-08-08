@@ -1,0 +1,19 @@
+must_id: item:A.8.19:approved_list
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Approved software list maintained (positive list — only approved software permitted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a responsible individual who maintains the approved software list, recording their full name and
+  job title in the procedure document.
+- Document the current approved software list, including software name, version, and approval date, in
+  a centrally accessible register.
+- Record each approval decision for new software by attaching a dated sign-off from the designated approver
+  to the register entry.
+- Cross-reference the software installation procedure to the approved software list, ensuring only listed
+  software is permitted for installation.
+- State explicitly that generic entries like "all Microsoft products" or "commonly used tools" are not
+  permitted on the approved list.

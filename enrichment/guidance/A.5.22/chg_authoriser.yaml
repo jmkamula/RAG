@@ -1,0 +1,15 @@
+must_id: item:A.5.22:chg_authoriser
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Authoriser of the treatment decision (proportional to residual risk)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the authoriser of each supplier service change treatment decision as a specific individual, not
+  a group or generic role.
+- Record the date and outcome of each treatment decision in the Supplier Service Change Response Log.
+- Document the rationale for the treatment decision, referencing the assessed residual risk for each supplier
+  service change.
+- Retain evidence of the authoriser’s approval, such as a signed or digitally approved entry in the log.

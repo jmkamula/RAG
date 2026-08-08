@@ -1,0 +1,31 @@
+leaf_id: req:A.5.4:periodic_review
+control_ref: A.5.4
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The management directive must align with the overarching information security policy, as
+    this policy sets the baseline expectations and requirements that the directive enforces and references.
+  good_enough: A current, approved information security policy exists and is accessible to reviewers;
+    it does not need to be perfect, but must reflect the organization's present security posture.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Information security roles and responsibilities
+  category: direct
+  rationale: Clear assignment of security roles and responsibilities is necessary to identify who should
+    conduct and document the periodic review of the management directive.
+  good_enough: Roles and responsibilities are documented and assigned, even if not fully optimized, so
+    reviewers know who is accountable for the directive and its review.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: Determining the scope of the information security management system
+  category: foundational
+  rationale: The scope statement defines which parts of the organization and which policies the management
+    directive must reference and remain aligned with during review.
+  good_enough: A documented ISMS scope exists that identifies the organizational boundaries and relevant
+    assets, even if it is high-level or pending minor updates.

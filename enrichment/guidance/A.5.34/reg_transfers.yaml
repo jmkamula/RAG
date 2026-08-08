@@ -1,0 +1,20 @@
+must_id: item:A.5.34:reg_transfers
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Cross-border transfers per activity (destination jurisdictions + legal mechanism — SCCs / adequacy
+  / BCRs / derogations; explicit 'none' where applicable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity involving personal data in the PII Processing Register, including a clear
+  description of the activity and its purpose.
+- Record the destination country or countries for any cross-border transfer associated with each processing
+  activity, specifying each jurisdiction by name.
+- State the legal mechanism used for each transfer, such as Standard Contractual Clauses, adequacy decision,
+  Binding Corporate Rules, or derogation, and attach supporting documentation.
+- Enter 'none' explicitly in the register for activities where no cross-border transfer occurs, avoiding
+  blank fields or ambiguous entries.
+- Name the responsible individual maintaining the register, ensuring this is a specific person rather
+  than a team or department.

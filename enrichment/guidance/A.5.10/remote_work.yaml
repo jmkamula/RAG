@@ -1,0 +1,19 @@
+must_id: item:A.5.10:remote_work
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Remote and teleworking provisions where physical environment is outside the org's control
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Acceptable Use Policy that remote and teleworking provisions apply when working outside
+  the organisation’s physical premises.
+- Document specific security measures required for remote and teleworking, such as secure Wi-Fi, device
+  locking, and confidential information handling.
+- Name the policy owner as a specific individual responsible for maintaining and updating remote and teleworking
+  provisions.
+- Record the date of the most recent policy review and approval, showing the provisions are current and
+  have been formally accepted.
+- Include an explicit statement that the policy covers environments not controlled by the organisation,
+  avoiding generic or ambiguous language.

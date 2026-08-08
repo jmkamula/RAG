@@ -1,0 +1,18 @@
+must_id: item:Art.18:response_deadline
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: One-month response deadline
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that all requests to restrict processing must be acknowledged and responded to
+  within one month of receipt.
+- Record the date each restriction request is received and the date the response is sent in a central
+  log.
+- Assign a named individual, not a generic role or team, as responsible for monitoring and meeting the
+  one-month deadline.
+- Retain copies of all communications with the requester, including timestamps, to evidence timely responses.
+- Specify in the procedure that extensions beyond one month must be documented with reasons and communicated
+  to the requester in writing.

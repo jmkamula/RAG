@@ -1,0 +1,17 @@
+must_id: item:A.7.4:scope_blind_spots
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: Known blind spots identified with compensating controls (e.g. patrol coverage where CCTV impractical)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all areas where electronic monitoring is not feasible, such as server rooms without CCTV, in a
+  dated monitoring scope document.
+- Describe compensating controls for each blind spot, such as physical patrols or access logs, and include
+  these in the same document.
+- Assign a named individual responsible for reviewing and updating the monitoring scope and compensating
+  controls annually.
+- Avoid using vague terms like "all areas covered"—specifically identify any limitations and the measures
+  in place to address them.

@@ -1,0 +1,19 @@
+must_id: item:A.5.1:comm_interested
+control_ref: A.5.1
+standard_id: ISO27001:2022
+must_text: Communication to relevant interested parties (contractors, suppliers) where appropriate
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all relevant external parties, such as contractors and suppliers, who require awareness of
+  the information security policy.
+- Document the date, recipient name, and method used each time the information security policy is communicated
+  externally.
+- Retain copies of the actual communication sent, such as emails or signed acknowledgements, to each external
+  party.
+- Name the responsible individual who approves and oversees external policy communications, avoiding generic
+  titles like "the team" or "IT department".
+- Review and update the communication record annually, noting the review date and any changes in external
+  parties or policy content.

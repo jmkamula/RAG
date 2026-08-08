@@ -1,0 +1,19 @@
+must_id: item:8.2:comparison_to_prior
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Comparison or movement from prior assessment
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Retrieve the previous operational risk assessment record and keep it available alongside the current
+  assessment for direct comparison.
+- Document any changes in risk ratings, controls, or identified risks between the current and previous
+  assessments, noting specific differences.
+- State the reasons for significant increases or decreases in risk scores, referencing supporting evidence
+  or incident records where applicable.
+- Name the individual responsible for reviewing and confirming the comparison, ensuring this is a specific
+  person and not a generic team or department.
+- Attach a dated summary table or chart that visually shows the movement or trend of key risks across
+  assessment periods.

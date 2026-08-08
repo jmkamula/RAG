@@ -1,0 +1,17 @@
+must_id: item:A.7.5.4:reg_timestamp
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Timestamp per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time for each PII disclosure event in a dedicated timestamp column in the
+  event log.
+- Confirm that all existing and new log entries include a completed timestamp field before finalizing
+  the record.
+- Name the person responsible for entering each disclosure event and its timestamp, using their full name
+  rather than a generic role or team.
+- Review the log regularly to verify that no entry is missing a timestamp or contains placeholder values
+  like "TBD" or "unknown".

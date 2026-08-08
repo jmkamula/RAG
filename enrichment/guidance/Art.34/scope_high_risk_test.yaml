@@ -1,0 +1,19 @@
+must_id: item:Art.34:scope_high_risk_test
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: High-risk test operational criteria (likelihood × severity × number affected × category sensitivity)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the operational process used to assess whether a personal data breach meets the high-risk threshold,
+  including likelihood, severity, number affected, and sensitivity.
+- Record each breach assessment with the date, responsible assessor’s name, and the specific criteria
+  considered for likelihood, severity, number affected, and category sensitivity.
+- State the rationale for each high-risk determination, referencing the evidence or data used to support
+  the decision.
+- Name the individual responsible for final risk classification — avoid listing a team or department as
+  the owner.
+- Retain copies of completed risk assessments and decisions for each breach, ensuring they are dated and
+  signed by the responsible individual.

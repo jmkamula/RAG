@@ -1,0 +1,17 @@
+must_id: item:A.7.10:rev_inventory_audit
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Inventory audit — sample-based confirmation of media at stated location
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the full inventory of all storage media, including serial numbers, types, and their stated
+  physical locations, in a dated register.
+- Assign a named individual to select a random sample of storage media from the inventory for physical
+  verification.
+- Record the date, sampled items, actual locations found, and the verifier’s name in a signed audit log.
+- Note any discrepancies between the inventory and actual locations, with explanations and corrective
+  actions, in the same audit log.
+- Name the verifier as a specific person — do not use a generic role or team name.

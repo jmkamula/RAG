@@ -1,0 +1,16 @@
+must_id: item:A.8.24:rev_exception_inventory
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Exception inventory re-confirmed / retired
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current cryptography exceptions in an inventory, including the original approval date and the
+  person who authorized each exception.
+- Confirm with the responsible owner of each exception whether the exception is still required or can
+  be retired, and record their decision with a date.
+- Update the exception inventory to clearly mark retired exceptions as closed, including the retirement
+  date and who approved the closure.
+- Name the owner of each exception as a specific individual — do not use group names or generic roles.

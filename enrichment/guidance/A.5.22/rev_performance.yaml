@@ -1,0 +1,19 @@
+must_id: item:A.5.22:rev_performance
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Service performance monitored against agreement (SLAs, incidents, breaches)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to be responsible for monitoring supplier performance against agreed service
+  levels and information security requirements.
+- Document each review of supplier performance with the date, the reviewer’s name, and a summary of findings
+  related to SLAs, incidents, and breaches.
+- Record all supplier-related incidents and breaches in a central log, including dates, descriptions,
+  and actions taken.
+- Attach evidence of follow-up actions or communications with the supplier for any performance issues
+  or breaches identified during reviews.
+- State clearly in records the specific supplier and agreement reviewed—avoid using generic labels or
+  omitting supplier names.

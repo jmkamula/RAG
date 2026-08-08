@@ -1,0 +1,16 @@
+must_id: item:7.2:proc_role_mapping
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Method for mapping ISMS-affecting roles to required competence (skills matrix or equivalent)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all roles that impact the information security management system and list them in a dated document.
+- Map each listed role to its required skills, knowledge, and experience in a structured skills matrix.
+- Name the person responsible for maintaining and updating the skills matrix as a specific individual,
+  not a team or department.
+- Cross-reference each role in the matrix to relevant job descriptions or competency frameworks to show
+  alignment.
+- Review and update the skills matrix at least annually, recording the review date and reviewer’s name.

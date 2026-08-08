@@ -1,0 +1,16 @@
+must_id: item:A.5.27:imp_action_type
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Action type captured (control updated / training added / procedure amended / risk accepted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific action taken for each lesson learned, clearly stating if it was a control update,
+  new training, procedure amendment, or risk acceptance.
+- Name the individual responsible for implementing each action, listing their full name rather than a
+  team or department.
+- Date each improvement action entry to show when the decision or change was made.
+- Attach supporting evidence, such as a revised procedure document or training material, to each action
+  record for verification.

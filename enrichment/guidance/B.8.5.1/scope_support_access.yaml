@@ -1,0 +1,19 @@
+must_id: item:B.8.5.1:scope_support_access
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+must_text: Support-access transfers (support engineers in different regions accessing customer PII)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all support-access scenarios where support engineers in different regions access customer personal
+  data, including the regions and types of data involved.
+- Name a specific individual responsible for maintaining and updating the processor transfer scope, avoiding
+  generic roles like "IT" or "Support Team".
+- Record the lawful basis and customer notification method for each cross-border support-access transfer
+  in a dated register.
+- Cross-reference each support-access scenario to the relevant data processing agreement or customer contract
+  that permits such transfers.
+- Retain evidence of periodic reviews of support-access transfer scenarios, including reviewer names and
+  review dates.

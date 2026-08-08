@@ -1,0 +1,17 @@
+must_id: item:5.1:proc_sponsor
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Named executive sponsor for the ISMS with documented activities (sign-offs, briefings, reviews)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the executive sponsor for the ISMS as a specific individual, not a group or department, in the
+  Leadership Engagement Framework.
+- Document all activities performed by the executive sponsor, such as policy sign-offs, security briefings,
+  and formal reviews, with dates and descriptions.
+- Record each instance where the executive sponsor provides direction or makes decisions regarding the
+  ISMS in meeting minutes or decision logs.
+- Retain signed evidence of the executive sponsor’s approval of key ISMS documents, such as the information
+  security policy and major risk assessments.

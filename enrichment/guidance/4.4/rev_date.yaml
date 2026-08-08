@@ -1,0 +1,17 @@
+must_id: item:4.4:rev_date
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the ISMS Manual Program in a dated meeting note or review log
+  entry.
+- Document the planned review interval in the ISMS Manual Program, specifying the frequency in months
+  or years.
+- Name the reviewer as a specific individual responsible for the ISMS Manual Program review, not a group
+  or department.
+- Cross-reference the actual review date against the planned interval to confirm it falls within the required
+  timeframe.

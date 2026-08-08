@@ -1,0 +1,16 @@
+must_id: item:4.3:proc_review_trigger
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Trigger list for re-evaluation (M&A, new product, new site, regulator change)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific trigger events that require ISMS scope re-evaluation, such as mergers, acquisitions, new
+  products, new sites, or regulatory changes.
+- Document the trigger list in the ISMS Scope Determination Methodology, including the date of last update
+  and the responsible author.
+- Assign a named individual or role responsible for monitoring for trigger events, and record this assignment
+  in the methodology.
+- Avoid using vague triggers like "significant change"—describe each trigger with clear, objective criteria.

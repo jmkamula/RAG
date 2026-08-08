@@ -1,0 +1,16 @@
+must_id: item:A.8.27:rev_reviewer
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Chief Architect + Security Architect + InfoSec)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Chief Architect, Security Architect, and Information Security Officer as individual reviewers
+  in the architecture principles review meeting minutes.
+- Record the date and time of the periodic architecture principles review in an official meeting log or
+  review register.
+- Document each reviewer’s approval or comments by capturing their signatures or written acknowledgments
+  in the review record.
+- Avoid listing groups or teams as reviewers; specify named individuals to provide clear accountability.

@@ -1,0 +1,20 @@
+must_id: item:A.5.18:rev_disabled_proof
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Evidence access was actually disabled (system log entry, RBAC change attestation, confirmation
+  from each affected system) — not just 'we asked'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time when access was revoked for each user in a system-generated log or access management
+  tool.
+- Attach a screenshot or export of the updated user permissions list showing the individual’s access has
+  been removed from each relevant system.
+- Obtain a confirmation email or signed statement from the system owner verifying that access was disabled,
+  not just requested.
+- Name the person who performed the revocation as a specific individual, avoiding generic references like
+  "IT" or "the team".
+- Cross-reference the revocation record with the original access removal request to confirm all listed
+  systems were addressed.

@@ -1,0 +1,17 @@
+must_id: item:A.8.16:threat_hunting
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Threat-hunting cadence for proactive detection (quarterly minimum for tier-1 assets)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the required threat-hunting frequency for tier-1 assets as at least quarterly in the Monitoring
+  Activities Procedure, with a clear definition of "tier-1 assets".
+- Assign a named individual or specific role responsible for conducting and documenting each threat-hunting
+  activity, avoiding vague ownership like "the team".
+- Record the date, scope, and outcome of each threat-hunting session in a log or register that can be
+  produced on request.
+- Reference the most recent completed threat-hunting report in the procedure to demonstrate the cadence
+  is being followed as written.

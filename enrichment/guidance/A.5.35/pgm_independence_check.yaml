@@ -1,0 +1,19 @@
+must_id: item:A.5.35:pgm_independence_check
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Independence-discipline check — did the actual reviewers meet the criteria? rotation worked?
+  any reviewer reviewing their own area?
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each reviewer's name and role for every periodic review, linking them to the specific area they
+  assessed.
+- Cross-reference each reviewer’s assigned area with their regular job responsibilities to confirm no
+  one reviewed their own area.
+- Document the rotation schedule showing reviewer assignments changed between review periods, with dates
+  and names.
+- State the independence criteria reviewers must meet, and record how each reviewer satisfied these criteria
+  for the relevant review period.
+- Name the reviewer for each area as a specific individual, not as a team or department.

@@ -1,0 +1,42 @@
+leaf_id: req:A.5.34:privacy_applicability_scope
+control_ref: A.5.34
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You must define the overall scope of your ISMS before you can meaningfully identify which
+    privacy laws and jurisdictions are relevant. Without a clear ISMS scope, you can't reliably determine
+    the boundaries for privacy applicability.
+  good_enough: A documented ISMS scope that lists in-scope business units, locations, and activities is
+    available and has management sign-off.
+- ref: A.5.31
+  standard_id: ISO27001:2022
+  title: Legal, statutory, regulatory and contractual requirements
+  category: direct
+  rationale: A current legal register is essential to identify which privacy laws and sectoral regimes
+    apply to your organisation. This directly informs the privacy applicability scope and ensures you
+    don't miss key obligations.
+  good_enough: A list of relevant privacy laws, regulations, and contractual privacy requirements is compiled
+    and reviewed by legal or compliance.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Knowing what information assets you process, and where, is necessary to map which jurisdictions
+    and data subject categories are in play. This underpins the accuracy of your privacy applicability
+    scope.
+  good_enough: An up-to-date inventory of information assets, including data types and processing locations,
+    exists and is accessible to compliance.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: A working data classification scheme helps you identify which data is personal or sensitive,
+    which is critical for determining the scope of privacy obligations.
+  good_enough: A basic classification scheme is in place that distinguishes personal data from other types,
+    even if not fully rolled out.

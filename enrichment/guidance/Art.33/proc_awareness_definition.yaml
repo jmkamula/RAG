@@ -1,0 +1,19 @@
+must_id: item:Art.33:proc_awareness_definition
+control_ref: Art.33
+standard_id: GDPR:2016/679
+must_text: Definition of 'awareness' (when the 72h clock starts) — typically when the controller has reasonable
+  degree of certainty that a security event has occurred and resulted in a personal data breach (EDPB
+  Guidelines 9/2022 reference)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure the exact point when the 72-hour notification clock starts, referencing EDPB
+  Guidelines 9/2022 for 'awareness'.
+- Name the individual or role responsible for determining when 'awareness' of a personal data breach is
+  reached.
+- Document the decision process and timestamp when 'awareness' is established for each incident in a breach
+  log.
+- Reference the specific section of EDPB Guidelines 9/2022 used to define 'awareness' within the procedure.
+- Specify that the owner must be a named person, not a generic group or department.

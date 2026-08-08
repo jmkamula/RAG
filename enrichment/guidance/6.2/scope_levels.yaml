@@ -1,0 +1,16 @@
+must_id: item:6.2:scope_levels
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: Levels in scope enumerated (org / business unit / function / team)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all organisational levels included in the scope, such as company, business unit, function, and
+  team, in a dated scope document.
+- Name each level using the official titles from your organisational chart, avoiding generic terms like
+  "all teams" or "the business."
+- Cross-reference the scope document with your organisational chart to show alignment between named levels
+  and actual structure.
+- Record the approval of the scope document by a named senior manager, including the date of approval.

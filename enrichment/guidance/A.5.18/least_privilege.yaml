@@ -1,0 +1,18 @@
+must_id: item:A.5.18:least_privilege
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Provisioning applies least privilege and segregation-of-duties checks (cross-link to A.5.3
+  segregation of duties — flagged combinations are blocked or compensated)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for granting access, showing how least privilege is enforced for each role or user
+  type in the procedure.
+- Cross-reference your access provisioning steps to the segregation-of-duties matrix, highlighting how
+  flagged combinations are identified and managed.
+- Record examples of blocked or compensated access requests, including the date, requester, and decision,
+  to demonstrate segregation-of-duties controls in action.
+- Name the person responsible for reviewing and updating the segregation-of-duties rules—avoid listing
+  a team or department as the owner.

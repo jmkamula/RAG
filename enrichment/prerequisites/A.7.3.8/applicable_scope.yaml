@@ -1,0 +1,40 @@
+leaf_id: req:A.7.3.8:applicable_scope
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines the organizational and process boundaries for all information security
+    and privacy controls, including which processing activities are in-scope for privacy rights like data
+    portability.
+  good_enough: A clear, current scope statement that identifies which business units, systems, and processing
+    activities are covered by the ISMS and PIMS.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the specific purposes for which PII is processed to determine which activities
+    may trigger data portability rights under GDPR Art.20.
+  good_enough: A documented list of processing purposes for each PII processing activity, even if not
+    yet fully mapped to all legal bases.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Data portability rights only apply to processing based on consent or contract; knowing the
+    lawful basis for each activity is essential to scoping applicability.
+  good_enough: Each processing activity has a recorded lawful basis, with at least a draft mapping to
+    consent or contract where relevant.
+- ref: Art.20
+  standard_id: GDPR:2016/679
+  title: Right to Data Portability
+  category: cross_role
+  rationale: The GDPR's definition of data portability determines which processing activities must be
+    included in the applicable scope for this control.
+  good_enough: A working interpretation of Art.20 requirements, including which processing activities
+    are likely in-scope based on consent or contract and automated means.

@@ -1,0 +1,19 @@
+must_id: item:Art.49:rev_strict_construction_audit
+control_ref: Art.49
+standard_id: GDPR:2016/679
+must_text: Strict-construction audit — sampled invocations reviewed against EDPB 2/2018 narrow interpretation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer responsible for each derogation invocation as a specific individual, not a group or
+  generic role.
+- Document the legal basis for each derogation invocation, referencing the exact GDPR Article 49 clause
+  relied upon.
+- Cross-reference each derogation invocation to the relevant section of EDPB 2/2018 guidance, showing
+  how the narrow interpretation was applied.
+- Record the date and outcome of each derogation program review, including any decisions or required follow-up
+  actions.
+- Retain evidence of any legal or DPO consultation for each derogation invocation, including names and
+  dates.

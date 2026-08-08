@@ -1,0 +1,19 @@
+must_id: item:4.4:chg_comms
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: Communication of the change to affected staff (link to 7.4)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, description, and reason for each ISMS Manual change in a dedicated change log maintained
+  by the ISMS manager.
+- Name all affected staff roles or individuals who must be informed about the change, avoiding generic
+  references like "all staff" or "the team".
+- Document the method and date of communication used to notify each affected staff member, such as email,
+  meeting minutes, or intranet post.
+- Retain copies of the actual communication sent, including recipient lists and timestamps, as evidence
+  of delivery.
+- Cross-reference the change log entry with the related communication record to show clear linkage between
+  the change and its notification.

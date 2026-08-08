@@ -1,0 +1,14 @@
+must_id: item:A.7.4.4:rev_next_date
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the minimization program in the documented review schedule.
+- Record the date in a version-controlled document or register that tracks all program reviews.
+- Name the person responsible for scheduling and conducting the next review as a specific individual,
+  not a team or department.
+- Confirm the review date is future-dated and not left blank or marked as "TBD".

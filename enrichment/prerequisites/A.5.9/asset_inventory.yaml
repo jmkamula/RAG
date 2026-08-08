@@ -1,0 +1,39 @@
+leaf_id: req:A.5.9:asset_inventory
+control_ref: A.5.9
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The asset inventory must only include assets that are within the defined ISMS scope. Without
+    a clear scope statement, you can't reliably determine which assets to include or exclude.
+  good_enough: The ISMS scope is documented and agreed, with boundaries clear enough to identify all relevant
+    assets for the register.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The asset inventory requires a classification column, so a scheme for classifying information
+    and assets must exist before the register can be meaningfully populated.
+  good_enough: A basic, documented classification scheme is available and can be referenced in the asset
+    register, even if it will be refined later.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and Responsibilities
+  category: foundational
+  rationale: Each asset in the inventory must have an assigned owner, so roles and responsibilities for
+    asset ownership must be defined beforehand.
+  good_enough: Asset ownership roles are assigned and documented for all asset types in scope, even if
+    some owners are roles rather than named individuals.
+- ref: A.5.37
+  standard_id: ISO27001:2022
+  title: Documented Operating Procedures
+  category: direct
+  rationale: Operating procedures reference the asset inventory to define which assets are covered by
+    which procedures. The inventory must exist to enable accurate procedure documentation.
+  good_enough: There is a draft or template for operating procedures that references the asset register,
+    even if not all procedures are finalized.

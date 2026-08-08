@@ -1,0 +1,17 @@
+must_id: item:A.5.19:risk_rules
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: InfoSec rules per supplier type / access type with minimum requirements
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each supplier type and access type in your procedure, describing how they interact with your information
+  or systems.
+- Define minimum information security requirements for each supplier and access type, referencing specific
+  controls or standards where applicable.
+- Assign a named individual to approve and update these minimum requirements, recording their name and
+  the approval date in the procedure.
+- Specify rules that are tailored to your organisation — do not use generic or boilerplate requirements
+  that could apply to any company.

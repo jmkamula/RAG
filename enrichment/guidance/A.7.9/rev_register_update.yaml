@@ -1,0 +1,18 @@
+must_id: item:A.7.9:rev_register_update
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Changes propagated to the policy / scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of each off-premises program review in a central log, including any identified
+  changes to policy or scope.
+- Document the specific policy or scope sections updated as a result of the review, referencing the review
+  date and responsible individual.
+- Assign a named individual to approve each policy or scope change, capturing their name and approval
+  date in the change log.
+- Name the owner responsible for updating the policy or scope as a specific person, not a group or department.
+- Retain previous and updated versions of the policy or scope, clearly marking the version dates and changes
+  made.

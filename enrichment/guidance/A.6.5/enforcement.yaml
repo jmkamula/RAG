@@ -1,0 +1,20 @@
+must_id: item:A.6.5:enforcement
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Enforcement approach (legal action for breach, breach of contract claims, regulatory referral
+  where misconduct + sectoral notification obligations apply)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the enforcement actions available for post-employment or role-change breaches, such as legal
+  action, breach of contract claims, and regulatory referrals, in a formal policy.
+- Name the individual or role responsible for initiating enforcement actions, ensuring this is a specific
+  person and not a generic group or department.
+- Record examples of recent enforcement actions or referrals taken in the past 12 months, including dates
+  and outcomes, in an incident log.
+- Cross-reference the enforcement policy with relevant employment contracts and regulatory obligations
+  to show alignment and coverage of sector-specific requirements.
+- State the process for notifying regulators or sector bodies in cases of serious misconduct, including
+  required timelines and contact details, in a documented procedure.

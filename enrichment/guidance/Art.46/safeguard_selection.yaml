@@ -1,0 +1,19 @@
+must_id: item:Art.46:safeguard_selection
+control_ref: Art.46
+standard_id: GDPR:2016/679
+must_text: Safeguard-selection decision tree (Art.46.2 a-f or Art.46.3 a-b after authorisation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a decision tree that clearly maps each international data transfer to the specific safeguard
+  option in Article 46.2(a-f) or 46.3(a-b).
+- Name the person responsible for selecting and approving the appropriate safeguard for each transfer,
+  using their full name and job title.
+- Record the date each safeguard-selection decision was made and reference the supporting documentation
+  or authorisation received.
+- Attach evidence of any required authorisation from a supervisory authority when relying on Article 46.3(a-b)
+  safeguards.
+- Avoid using generic or copy-paste decision trees; tailor the procedure to your organisation’s actual
+  transfer scenarios and safeguard choices.

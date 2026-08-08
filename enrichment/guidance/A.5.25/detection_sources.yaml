@@ -1,0 +1,19 @@
+must_id: item:A.5.25:detection_sources
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Detection sources enumerated (monitoring, user reports, third parties)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all sources used to detect security events, including automated monitoring tools, user incident
+  reports, and notifications from third parties, in the procedure document.
+- Name the person or role responsible for regularly reviewing and updating the list of detection sources,
+  specifying them by full name or unique job title.
+- Record the date when the detection sources were last reviewed and updated, and include this date in
+  the procedure document.
+- Attach or reference sample evidence, such as screenshots or logs, from each detection source to demonstrate
+  they are actively in use.
+- Specify each detection source individually—do not use generic terms like "various systems" or "external
+  contacts" without clear identification.

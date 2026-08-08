@@ -1,0 +1,43 @@
+leaf_id: req:10.2:applicable_nc_sources_scope
+control_ref: '10.2'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You must define the boundaries and applicability of your ISMS before you can specify which
+    sources of findings are in-scope for nonconformities. This ensures that only relevant sources are
+    considered when identifying nonconformities.
+  good_enough: A documented ISMS scope that clearly states what business units, processes, and assets
+    are covered is sufficient to proceed.
+- ref: '10.1'
+  standard_id: ISO27001:2022
+  title: Continual improvement
+  category: direct
+  rationale: Understanding how continual improvement is managed helps distinguish between nonconformities
+    (which trigger corrective action) and other improvement opportunities (which may not). This distinction
+    is necessary to correctly scope nonconformity sources.
+  good_enough: A basic description of how continual improvement findings are logged and routed is enough
+    to clarify the boundary with nonconformity sources.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that responsibility for identifying, classifying, and escalating
+    nonconformities is understood. This is essential for defining which sources are authoritative for
+    nonconformity findings.
+  good_enough: A simple RACI or list of responsible roles for nonconformity identification and escalation
+    is sufficient.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: A documented classification scheme helps differentiate between nonconformities, incidents,
+    and observations. This is critical for setting the boundaries of what qualifies as a nonconformity
+    source.
+  good_enough: A draft or working classification scheme that distinguishes nonconformities from other
+    types of findings is enough to proceed.

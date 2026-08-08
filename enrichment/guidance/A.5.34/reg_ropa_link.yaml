@@ -1,0 +1,18 @@
+must_id: item:A.5.34:reg_ropa_link
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Direct link to GDPR Art.30 RoPA register where the two are kept as one artefact — saves duplication,
+  prevents drift
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the PII Processing Register to the GDPR Article 30 Record of Processing Activities by
+  including a direct hyperlink or document reference.
+- State in the PII Processing Register that it serves as both the ISO27001 and GDPR Art.30 register to
+  clarify its dual purpose.
+- Name the register owner as a specific individual responsible for maintaining both compliance requirements,
+  not just a team or department.
+- Record the date of the most recent update to the register and ensure it matches across both compliance
+  frameworks.

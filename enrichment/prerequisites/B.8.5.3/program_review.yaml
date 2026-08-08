@@ -1,0 +1,45 @@
+leaf_id: req:B.8.5.3:program_review
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which business units, processes, and systems are included in
+    the ISMS and privacy extension. Without this, you can't determine which disclosures or processing
+    activities should be reviewed.
+  good_enough: A documented scope that clearly lists in-scope entities and systems for privacy management.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purposes for which personal data is processed to verify that disclosures
+    are captured and authority is documented. This is essential context for any meaningful program review.
+  good_enough: A current register or list of processing purposes for all relevant data processing activities.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Documenting the lawful basis for processing is necessary to confirm that disclosures are
+    authorized. The review cannot proceed without this foundational information.
+  good_enough: Each processing activity has a stated lawful basis (e.g., contract, consent) documented
+    and accessible.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of privacy and security roles ensures accountability for maintaining disclosure
+    records and conducting reviews. Without this, the review process may lack ownership or completeness.
+  good_enough: Named individuals or roles responsible for privacy and disclosure record-keeping are documented.
+- ref: Art.28
+  standard_id: GDPR:2016/679
+  title: Processor Obligations
+  category: cross_role
+  rationale: The GDPR sets out processor obligations regarding record-keeping and disclosures. Understanding
+    these legal requirements is necessary to assess whether your program review meets regulatory expectations.
+  good_enough: A summary or checklist of processor obligations under GDPR Art.28 is available to guide
+    the review.

@@ -1,0 +1,17 @@
+must_id: item:Art.43:public_criteria
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Public certification criteria approved by SA / EDPB (Art.43.5)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the certification criteria used, clearly identifying the version and date, in your certification
+  body procedure document.
+- Document the formal approval from the relevant Supervisory Authority or the European Data Protection
+  Board, including the approval date.
+- Attach or cross-reference the published certification criteria within your procedure, ensuring they
+  are accessible and match the approved version.
+- State the specific Supervisory Authority or EDPB decision number or reference, avoiding generic statements
+  like "approved by authorities."

@@ -1,0 +1,17 @@
+must_id: item:A.5.23:risk_management
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: How information security risks in cloud use will be managed (assessment + treatment approach)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the process for assessing information security risks before adopting any new cloud service, and
+  reference the documented risk assessment template.
+- Document the risk treatment options available for identified cloud-related risks, including acceptance,
+  mitigation, transfer, or avoidance, with clear examples.
+- Name the individual responsible for reviewing and approving cloud risk assessments, ensuring a specific
+  person is listed rather than a team or department.
+- Record the date of the most recent policy review and update, and attach a copy of the signed approval
+  from senior management.

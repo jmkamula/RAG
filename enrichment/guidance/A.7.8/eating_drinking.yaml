@@ -1,0 +1,19 @@
+must_id: item:A.7.8:eating_drinking
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Rules on food/drink near equipment (incidental-damage prevention)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that food and drink are not permitted near sensitive equipment to prevent accidental
+  spills and damage.
+- Name the person responsible for enforcing the no food/drink rule in each area, using a specific job
+  title or individual’s name.
+- Document a dated record of staff communication or training that explains the food and drink restriction
+  near equipment.
+- Include a step for periodic checks, and record the date and name of the person conducting each check
+  for compliance with the rule.
+- Specify that the procedure version is dated and approved by a named manager, avoiding undated or unsigned
+  documents.

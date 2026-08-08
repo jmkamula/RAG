@@ -1,0 +1,17 @@
+must_id: item:Art.49:reg_derogation
+control_ref: Art.49
+standard_id: GDPR:2016/679
+must_text: Per-row Art.49.1 derogation cited (a-g + second-paragraph)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cite the specific Art.49.1 derogation (a–g or second paragraph) for each data transfer entry in the
+  register, using the exact wording from the regulation.
+- Record the date the derogation was invoked for each entry, ensuring the register reflects when the exception
+  was applied.
+- Name the individual who approved the use of each derogation, listing their full name and role for every
+  row.
+- Avoid using generic or catch-all language such as "other" or "miscellaneous" as the cited derogation;
+  specify the exact legal basis.

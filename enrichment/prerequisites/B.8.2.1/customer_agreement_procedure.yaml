@@ -1,0 +1,49 @@
+leaf_id: req:B.8.2.1:customer_agreement_procedure
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You must know which services, systems, and processing activities are in-scope for your ISMS
+    and privacy extension before you can define a procedure for customer PII processing agreements. This
+    ensures the procedure covers all relevant processor activities.
+  good_enough: A documented, management-approved scope statement that clearly identifies the boundaries
+    and applicability of the ISMS and PIMS.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You need to have identified and documented the purposes for which you process PII on behalf
+    of customers. This is essential to ensure your agreement procedure accurately reflects the processing
+    activities and supports controller obligations.
+  good_enough: A list or register of processing purposes for each customer relationship, reviewed and
+    confirmed by relevant stakeholders.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity is critical to drafting a procedure
+    that aligns with customer contracts and supports controller obligations under applicable law.
+  good_enough: A documented mapping of lawful bases for each processing purpose, even if some are provisional
+    pending customer confirmation.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that the right people are involved
+    in drafting, approving, and executing the customer agreement procedure.
+  good_enough: A current roles and responsibilities matrix or document that covers privacy and contract
+    management functions.
+- ref: Art.28
+  standard_id: GDPR:2016/679
+  title: Processor Obligations (Contract Requirements)
+  category: cross_role
+  rationale: GDPR Article 28 sets the legal requirements for processor contracts, which your procedure
+    must address to be effective and compliant.
+  good_enough: A summary or checklist of Article 28 requirements, tailored to your services, to guide
+    the drafting of the agreement procedure.

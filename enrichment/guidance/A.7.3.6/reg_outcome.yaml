@@ -1,0 +1,16 @@
+must_id: item:A.7.3.6:reg_outcome
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: Outcome per row (granted / refused with reason / partial)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the outcome for each request in the register, clearly stating whether it was granted, refused
+  with a reason, or partially fulfilled.
+- Document the specific reason for any refusal or partial fulfilment, referencing relevant policy or legal
+  basis in the register entry.
+- Name the staff member who made the decision for each request, using their full name rather than a team
+  or department.
+- Date each outcome entry to show when the decision was communicated to the requester.

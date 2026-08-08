@@ -1,0 +1,19 @@
+must_id: item:A.7.12:encrypted_backbone
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Encrypted backbone or MACsec on segments crossing low-trust zones
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all network segments that cross between high-trust and low-trust zones in a network diagram,
+  including segment names and boundaries.
+- State in the Cabling Security Procedure that encrypted backbone links or MACsec are mandatory for these
+  identified segments.
+- Record the encryption method and configuration details for each relevant segment, including dates and
+  responsible engineers.
+- Name the owner as a specific individual responsible for maintaining and updating cabling security controls,
+  not a generic team or department.
+- Retain evidence of periodic reviews confirming encryption is active on all applicable segments, such
+  as screenshots or logs with review dates.

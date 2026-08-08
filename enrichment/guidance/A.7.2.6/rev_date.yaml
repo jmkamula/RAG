@@ -1,0 +1,17 @@
+must_id: item:A.7.2.6:rev_date
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of each processor contract in a central register, ensuring the date
+  is clearly visible and unambiguous.
+- State the planned review interval for processor contracts in a documented schedule, referencing the
+  relevant policy or procedure.
+- Confirm that the actual review date for each contract falls within the planned interval by cross-referencing
+  the register and the schedule.
+- Name the reviewer as a specific individual in the review record, avoiding generic titles like "Legal
+  Team" or "Procurement."

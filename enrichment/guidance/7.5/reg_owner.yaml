@@ -1,0 +1,17 @@
+must_id: item:7.5:reg_owner
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Document owner per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the document owner for each row in the ISMS Document Register, avoiding
+  generic titles or team names.
+- Record the full name and current job title of each document owner alongside the corresponding document
+  entry.
+- Update the register immediately when ownership changes, and include the date of the change next to the
+  new owner’s details.
+- Review the register quarterly to confirm all listed owners are still valid and reflect any organizational
+  changes.

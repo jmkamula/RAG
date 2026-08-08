@@ -1,0 +1,18 @@
+must_id: item:Art.13:rev_collection_coverage
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Coverage check — every in-scope collection point still presents the current notice
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current data collection points by name and location in a dated inventory reviewed within the
+  last 12 months.
+- Cross-reference each collection point against the published privacy notice version to confirm alignment
+  with the current notice text.
+- Capture screenshots or export copies of the privacy notice as presented at each collection point, including
+  the date of capture.
+- Name the reviewer who completed the coverage check and record the completion date in the review log.
+- Flag and update any collection point where the notice is missing, outdated, or inconsistent with the
+  approved version.

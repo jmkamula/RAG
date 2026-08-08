@@ -1,0 +1,16 @@
+must_id: item:A.7.6:scope_third_party_categories
+control_ref: A.7.6
+standard_id: ISO27001:2022
+must_text: Third-party categories addressed (cleaning, maintenance contractors, regulators on-site, customers)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all third-party categories with physical access, such as cleaning staff, maintenance contractors,
+  regulators, and customers, in the secure areas scope document.
+- Name a specific individual responsible for maintaining and updating the secure areas scope, avoiding
+  generic titles like "Facilities Team."
+- Record the date when each third-party category was last reviewed and updated in the scope document.
+- Attach supporting agreements or contracts that define access terms for each third-party category referenced
+  in the scope.

@@ -1,0 +1,41 @@
+leaf_id: req:Art.21:applicable_basis_scope
+control_ref: Art.21
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: direct
+  rationale: You must first identify and document the lawful bases for all processing activities to determine
+    which ones fall under Art.6.1.e (public task), Art.6.1.f (legitimate interests), or involve direct
+    marketing. Without this, you cannot accurately scope where Art.21 objection rights apply.
+  good_enough: A documented list of processing activities with their assigned lawful bases is available,
+    even if some edge cases are still under review.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: A current RoPA is needed to map all processing activities, their purposes, and legal bases.
+    This enables you to cross-reference which activities are subject to objection rights under Art.21.
+  good_enough: A working RoPA exists that covers all main processing activities, with at least basic details
+    on purposes and lawful bases.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and system boundaries for compliance activities,
+    ensuring your Art.21 scope note only covers relevant processing within your ISMS perimeter.
+  good_enough: A documented ISMS scope exists that clearly states which business units, systems, and data
+    are in-scope for GDPR compliance.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If a DPO is required, their involvement ensures the correct identification and documentation
+    of processing bases and objection rights. This supports the accuracy and defensibility of your Art.21
+    scope.
+  good_enough: A DPO (or designated privacy lead) is appointed and available for consultation on lawful
+    basis and objection scope, even if their processes are still maturing.

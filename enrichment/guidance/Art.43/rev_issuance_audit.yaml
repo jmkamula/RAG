@@ -1,0 +1,19 @@
+must_id: item:Art.43:rev_issuance_audit
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Issuance audit — sampled decisions reviewed against published criteria (Art.43.5)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific certification decisions selected for sampling, including dates and unique identifiers,
+  in a documented review log.
+- Document the published criteria used for certification decisions, referencing the exact version and
+  publication date in the review records.
+- Record the outcome of each sampled decision review, noting any discrepancies or confirmations of alignment
+  with the published criteria.
+- Assign a named, qualified reviewer to each sampled decision and capture their signature and review date
+  in the log.
+- Avoid using generic criteria or undated versions—reference only the officially published and dated criteria
+  for each review.

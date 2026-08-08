@@ -1,0 +1,19 @@
+must_id: item:A.7.2:emergency_egress
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Emergency egress provisions (panic bars, post-incident accountability)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the locations and types of emergency egress devices, such as panic bars, in a floor plan dated
+  and signed by the facilities manager.
+- State the procedure for regular testing of emergency exits and panic bars, including test frequency
+  and the responsible individual’s name.
+- Record each emergency exit drill or test in a log with date, time, participants, and results, signed
+  by the person supervising the drill.
+- Name the individual responsible for post-incident accountability, ensuring this is a specific person
+  and not a generic role or team.
+- Retain incident reports that detail emergency egress use, including who exited and when, with signatures
+  from both the incident lead and a witness.

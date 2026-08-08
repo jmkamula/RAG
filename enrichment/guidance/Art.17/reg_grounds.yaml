@@ -1,0 +1,18 @@
+must_id: item:Art.17:reg_grounds
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Per-row Art.17.1 ground (a-f) recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific legal ground from Article 17.1 (a-f) for each erasure request directly in the corresponding
+  row of the register.
+- State the exact letter (a, b, c, d, e, or f) and a brief description of the ground, not just a generic
+  reference to Article 17.1.
+- Name the staff member responsible for evaluating and recording the ground for each request, ensuring
+  individual accountability.
+- Enter the date the ground was determined for each request to provide a clear audit trail.
+- Avoid leaving the ground field blank or using vague terms like "data subject request" without specifying
+  the Article 17.1 ground.

@@ -1,0 +1,33 @@
+leaf_id: req:Art.25:applicable_design_scope
+control_ref: Art.25
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of what processing activities exist to determine which
+    ones are subject to Data Protection by Design (DPbD) requirements. Without this, you can't reliably
+    identify the design activities or changes that fall under Art.25.
+  good_enough: A current, working RoPA that lists all major processing activities, even if some minor
+    updates are pending.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity helps clarify which activities are
+    legitimate and therefore in scope for DPbD. This ensures you only consider design activities tied
+    to lawful processing.
+  good_enough: Each processing activity in the RoPA has a stated lawful basis, even if some documentation
+    is high-level.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and system boundaries, helping you determine which
+    products, systems, or features are covered by your compliance program and thus relevant for DPbD.
+  good_enough: A documented ISMS scope that covers all major business units and systems, even if some
+    edge cases are still being clarified.

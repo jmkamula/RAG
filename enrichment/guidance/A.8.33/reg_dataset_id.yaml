@@ -1,0 +1,15 @@
+must_id: item:A.8.33:reg_dataset_id
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Per-row dataset identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each test dataset entry in the register, using a consistent format that
+  distinguishes every row.
+- Record the assigned identifier directly in the register alongside each dataset’s details, ensuring no
+  row is left blank.
+- Cross-reference each identifier with the corresponding dataset location or storage path to enable traceability.
+- Name the person responsible for maintaining the register as a specific individual, not a team or department.

@@ -1,0 +1,16 @@
+must_id: item:A.8.19:rev_reviewer
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Infrastructure + InfoSec)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer for infrastructure as a specific individual, not a group or department, in the review
+  documentation.
+- Name the reviewer for information security as a specific individual, ensuring their role is clearly
+  stated in the review record.
+- Record the date each reviewer completed their review on the periodic installation program review document.
+- Retain evidence of both reviewers’ input, such as signatures or electronic acknowledgments, attached
+  to the final review report.

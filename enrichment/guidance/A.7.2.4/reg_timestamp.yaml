@@ -1,0 +1,17 @@
+must_id: item:A.7.2.4:reg_timestamp
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Timestamp of consent per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time when each individual gives consent in a dedicated column for every entry
+  in the register.
+- Confirm that the timestamp is generated automatically by the system or manually entered by the staff
+  member collecting consent.
+- Name the staff member responsible for entering or verifying each timestamp, using their full name instead
+  of a generic role or team.
+- Review the register to ensure no consent entry is missing a timestamp or contains placeholder text like
+  "N/A" or "unknown".

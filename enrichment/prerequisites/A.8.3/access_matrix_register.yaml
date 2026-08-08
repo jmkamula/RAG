@@ -1,0 +1,47 @@
+leaf_id: req:A.8.3:access_matrix_register
+control_ref: A.8.3
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You need a current inventory of systems, repositories, and datasets before you can catalogue
+    who has access to what. Without knowing what assets exist, you can't build an accurate access matrix.
+  good_enough: A basic, up-to-date list of all key information assets and systems is available, even if
+    some minor details are pending.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Understanding the classification of each asset helps determine the sensitivity and criticality
+    of access rights, which is essential for meaningful access matrices.
+  good_enough: A simple scheme exists that tags assets by sensitivity or business impact, even if not
+    all assets are fully classified yet.
+- ref: A.5.15
+  standard_id: ISO27001:2022
+  title: Access Control
+  category: direct
+  rationale: The access control policy sets the rules and principles for restricting access, which the
+    access matrix register must reflect. Without this policy, the register lacks context and authority.
+  good_enough: A documented access control policy exists, outlining general rules for user/system access,
+    even if some procedures are still being refined.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities is needed to attribute access rights in the
+    matrix and to identify who approves or reviews access.
+  good_enough: A basic mapping of key roles and their information security responsibilities is documented,
+    even if some role definitions are high-level.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which systems and processes are covered by the ISMS, ensuring
+    the access matrix register is complete and relevant.
+  good_enough: A draft scope statement exists that identifies the main systems and business units in-scope,
+    even if some boundaries are still being finalized.

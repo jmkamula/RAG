@@ -1,0 +1,47 @@
+leaf_id: req:B.8.2.5:applicable_scope
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need a clear ISMS scope to define the organizational and information boundaries before
+    specifying which privacy-relevant information and audit contexts apply. Without this, the privacy
+    extension's scope cannot be reliably set.
+  good_enough: A documented ISMS scope that lists included business units, locations, and systems, even
+    if not fully optimized for privacy, is sufficient to proceed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is essential to identify what information is held, processed,
+    or transmitted—critical for defining the privacy-relevant scope and audit contexts.
+  good_enough: A basic inventory of major information assets (systems, databases, data types) is available,
+    even if some details are pending.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: You must know how information is classified to determine which data falls under privacy requirements
+    and customer compliance demonstration.
+  good_enough: A draft or working classification scheme that distinguishes personal data from other types
+    is in place.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Documenting the purposes for processing personal information is necessary to define which
+    information and audit contexts are relevant for privacy compliance.
+  good_enough: A list of main processing purposes for personal data, even if not fully mapped to all systems,
+    is available.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for processing helps determine which information must be included
+    in the privacy scope and how audit obligations may differ by context.
+  good_enough: A summary of lawful bases for key processing activities is documented, even if not exhaustive.

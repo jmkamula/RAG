@@ -1,0 +1,16 @@
+must_id: item:5.3:chg_comms
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Communication of the change (link to 7.4) — affected role-holders informed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and method used to communicate each ISMS role change to affected individuals in the
+  ISMS Roles Change Record.
+- List the names of all role-holders who received the communication, ensuring no group labels like "all
+  staff" or "the team" are used.
+- Attach or link the actual message or announcement sent, showing the content and timing of the communication.
+- Obtain and file confirmation of receipt from each affected individual, such as a signed acknowledgment
+  or email reply.

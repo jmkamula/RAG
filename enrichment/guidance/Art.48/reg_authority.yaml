@@ -1,0 +1,17 @@
+must_id: item:Art.48:reg_authority
+control_ref: Art.48
+standard_id: GDPR:2016/679
+must_text: Per-row requesting authority + jurisdiction
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of each foreign authority making a data request in a dedicated column for every
+  entry in the register.
+- State the legal jurisdiction of the requesting authority for each row, specifying the country and relevant
+  legal body.
+- Cross-reference each request with supporting documentation, such as the original request letter or legal
+  order, and note the file location.
+- Name the authority and jurisdiction with precise details—avoid generic terms like "foreign agency" or
+  "international body."

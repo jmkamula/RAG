@@ -1,0 +1,18 @@
+must_id: item:A.7.5:reg_impact
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Per-row impact rating (worst-case + most-likely scenarios)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record both a worst-case and a most-likely impact rating for each threat entry in the per-site threat
+  register, using clear, predefined scales.
+- Name the person responsible for assigning each impact rating in a dedicated column, using individual
+  names rather than roles or teams.
+- Date each impact assessment entry to show when the rating was last reviewed or updated.
+- Attach supporting evidence or rationale for each impact rating, such as incident history or risk analysis
+  notes, directly in the register or via a cross-reference.
+- Avoid leaving any threat row with missing or identical worst-case and most-likely ratings unless justified
+  with a specific comment.

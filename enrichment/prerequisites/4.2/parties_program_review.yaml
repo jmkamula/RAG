@@ -1,0 +1,34 @@
+leaf_id: req:4.2:parties_program_review
+control_ref: '4.2'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The review of interested parties must be anchored to the current ISMS scope, as this defines
+    which parties are relevant and why. Without a clear, up-to-date scope, you cannot assess if the parties
+    register or framework boundaries are appropriate.
+  good_enough: A documented scope statement exists that identifies the organizational and information
+    boundaries for the ISMS, even if it is due for its own review soon.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the expectations for how interested parties are considered and what framework
+    is to be followed. Reviewing parties against an absent or outdated policy undermines the review’s
+    value.
+  good_enough: A current, approved information security policy is available that references the treatment
+    of interested parties and the ISMS framework.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Knowing who is responsible for maintaining the parties register and conducting reviews is
+    essential for accountability. Without this, the review process cannot be meaningfully assigned or
+    verified.
+  good_enough: Roles and responsibilities for ISMS maintenance, including the parties register, are documented
+    and assigned, even if some details are still being refined.

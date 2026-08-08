@@ -1,0 +1,20 @@
+must_id: item:A.5.34:pims_alignment
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: ISO/IEC 27701 (PIMS) alignment note where applicable — extends the ISMS into a Privacy Information
+  Management System; references the 27701 PII-controller / PII-processor controls applied
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Privacy and PII Protection Policy whether ISO/IEC 27701 is in scope for your organisation,
+  including the date this was determined.
+- Cross-reference specific ISO/IEC 27701 PII-controller and PII-processor controls applied, listing control
+  numbers and their locations in your policy.
+- Document how the Privacy and PII Protection Policy extends or integrates with your existing Information
+  Security Management System, citing relevant ISMS sections.
+- Name a specific individual responsible for maintaining the 27701 alignment note in the policy—do not
+  use a team or department as the owner.
+- Retain a signed approval of the policy update by senior management, showing explicit acknowledgement
+  of 27701 integration.

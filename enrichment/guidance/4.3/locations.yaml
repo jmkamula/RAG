@@ -1,0 +1,17 @@
+must_id: item:4.3:locations
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Physical and logical locations covered
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical office locations, data centers, and remote work environments included in the ISMS
+  scope, with full addresses and relevant details.
+- Specify all logical environments, such as cloud platforms, networks, and applications, by name and function
+  within the scope statement.
+- Name the scope owner as a specific individual responsible for maintaining and updating the scope statement.
+- Record the date of the most recent scope review and approval, signed by a senior manager.
+- Avoid using vague terms like "all company locations" or "IT systems"—describe each location and system
+  explicitly.

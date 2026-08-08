@@ -1,0 +1,17 @@
+must_id: item:A.8.33:dpia_consideration
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: DPIA / privacy considerations when PII-derived (cross-link to A.5.34 PII protection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that all test data containing personal information must undergo a documented
+  privacy impact assessment before use.
+- Cross-reference the procedure to your organisation’s Personal Information Protection Policy, specifically
+  linking to the section that covers A.5.34 requirements.
+- Name a specific individual responsible for approving the use of PII-derived test data, not a generic
+  team or department.
+- Record the date and outcome of each privacy impact assessment in a central register accessible for audit.
+- Attach a copy of the completed privacy impact assessment to each test data approval record.

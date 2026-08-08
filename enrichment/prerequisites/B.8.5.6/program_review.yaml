@@ -1,0 +1,48 @@
+leaf_id: req:B.8.5.6:program_review
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which business units, processes, and systems are covered by the
+    ISMS and its privacy extension. You need to know if subcontractor management and disclosures are in-scope
+    before reviewing the program.
+  good_enough: The scope statement should explicitly mention subcontractor relationships or third-party
+    processing if they are relevant to your privacy program.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that someone is accountable for managing subcontractor
+    disclosures and for conducting the annual review. Without this, the review process may lack ownership
+    or authority.
+  good_enough: Documented roles exist for privacy and third-party management, with named individuals or
+    teams responsible.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the specific purposes for which subcontractors process personal data to verify
+    that disclosures are accurate and complete during the program review.
+  good_enough: A list of processing purposes for each subcontractor is available and up-to-date.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each subcontractor’s processing is essential to confirm
+    that disclosures and NDAs are appropriate and compliant.
+  good_enough: Lawful bases for subcontractor processing are identified and mapped to each processing
+    activity.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register helps ensure all subcontractors and related data flows are accounted
+    for in the disclosure program review.
+  good_enough: The asset register lists all current subcontractors and the data assets they access or
+    process.

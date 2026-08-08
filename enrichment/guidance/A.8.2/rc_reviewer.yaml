@@ -1,0 +1,17 @@
+must_id: item:A.8.2:rc_reviewer
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Reviewer identity (asset owner or delegated authority)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual, such as the asset owner or their formally delegated authority,
+  in the recertification record.
+- Record the date when the privileged access review was completed and the reviewer’s identity in the access
+  recertification log.
+- Attach evidence of formal delegation if the reviewer is not the asset owner, such as a signed delegation
+  letter or email.
+- Avoid listing generic roles like "IT team" or "Security" as the reviewer; use a named person for clear
+  accountability.

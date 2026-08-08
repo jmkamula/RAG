@@ -1,0 +1,16 @@
+must_id: item:A.8.20:authority
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Named policy authority (Network Engineering lead with InfoSec lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Network Engineering lead and the Information Security lead as the specific authorities in the
+  policy document, using full names and job titles.
+- Record the date the policy authority was last reviewed and confirmed by both named leads, showing current
+  accountability.
+- Sign the policy authority section with electronic or physical signatures from both leads to demonstrate
+  explicit approval.
+- Avoid listing a team, department, or generic title as the policy authority; use only named individuals.

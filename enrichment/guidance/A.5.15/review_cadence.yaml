@@ -1,0 +1,18 @@
+must_id: item:A.5.15:review_cadence
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Periodic access review cadence stated (typically quarterly for privileged, annual otherwise
+  — link to A.5.18)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the frequency of access reviews for both privileged and regular accounts in the Access Control
+  Policy, referencing control A.5.18 for alignment.
+- Document the rationale for chosen review intervals, such as quarterly for privileged access and annually
+  for standard users, in a dated policy section.
+- Name a specific individual as responsible for scheduling and overseeing access reviews, avoiding generic
+  titles like "the team" or "IT department."
+- Cross-reference the Access Control Policy with the Access Review Procedure to show consistency in review
+  cadence and responsible parties.

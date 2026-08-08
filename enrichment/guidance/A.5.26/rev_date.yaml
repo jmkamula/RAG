@@ -1,0 +1,16 @@
+must_id: item:A.5.26:rev_date
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Incident Response Program in a dated log or register entry.
+- State the planned review interval in months or years within the Incident Response Program documentation.
+- Confirm the next scheduled review date is not past due by comparing it to the planned interval and the
+  last review date.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Retain evidence of the completed review, such as a signed meeting summary or updated program document
+  with the review date.

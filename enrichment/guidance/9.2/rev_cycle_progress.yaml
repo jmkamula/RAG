@@ -1,0 +1,19 @@
+must_id: item:9.2:rev_cycle_progress
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Cycle progress check — at end-of-cycle every ISMS process audited at least once
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all ISMS processes in a master register, including process names and responsible owners, with version
+  control and review dates.
+- Record each audit activity in an audit log, specifying the process audited, audit date, and auditor
+  name for every entry.
+- Cross-reference the audit log against the master register to confirm every ISMS process has been audited
+  at least once during the cycle.
+- Document the review of the completed audit cycle with a dated sign-off by the audit program owner, confirming
+  all processes were covered.
+- Name the audit program owner as a specific individual, not a generic role or team, to avoid ambiguity
+  in accountability.

@@ -1,0 +1,19 @@
+must_id: item:B.8.5.1:proc_customer_information
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+must_text: Customer information — transfer arrangements (suppliers, other parties, other countries) disclosed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all countries where customer information is transferred, including any suppliers or third parties
+  involved, in a dated procedure document.
+- Name the specific legal basis or contractual arrangement for each cross-border transfer, referencing
+  the relevant agreement or regulation.
+- Document the process and frequency for updating customers about changes to transfer arrangements, including
+  responsible individual and communication method.
+- Attach a sample customer notification or disclosure statement that clearly outlines current transfer
+  arrangements and jurisdictions.
+- Name the owner as a specific individual responsible for maintaining and communicating transfer arrangement
+  disclosures—not a team or department.

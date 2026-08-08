@@ -1,0 +1,17 @@
+must_id: item:A.7.3.5:rev_date
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Objection Program in a dated log or meeting minutes.
+- Document the planned review interval for the Objection Program in a policy or schedule, specifying the
+  frequency in months or years.
+- Cross-reference the actual review date against the planned interval to confirm the review occurred on
+  time.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Retain evidence of the completed review, such as a signed summary or updated program document, with
+  the review date clearly visible.

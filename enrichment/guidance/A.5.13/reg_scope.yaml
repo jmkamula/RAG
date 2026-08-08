@@ -1,0 +1,19 @@
+must_id: item:A.5.13:reg_scope
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Scope per row (which content classes this system stores — e.g. customer data, HR records, source
+  code, financial)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each system or data store in a separate row, using its unique name as referenced in your asset
+  inventory.
+- Specify for each row which content classes are stored, such as customer data, HR records, source code,
+  or financial information.
+- Name the person responsible for verifying the content class assignments for each system, using a full
+  name rather than a role or team.
+- Record the date when each row was last reviewed or updated to show ongoing accuracy.
+- Avoid using vague labels like "miscellaneous" or "general data" for content classes; clearly define
+  each class in plain language.

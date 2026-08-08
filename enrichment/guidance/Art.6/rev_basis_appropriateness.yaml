@@ -1,0 +1,19 @@
+must_id: item:Art.6:rev_basis_appropriateness
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Basis-appropriateness sample — high-volume / high-sensitivity activities re-evaluated for whether
+  the chosen basis still fits
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all high-volume or high-sensitivity data processing activities in a dated inventory, naming
+  the responsible owner for each activity.
+- Document the current lawful basis for each selected activity, referencing the original justification
+  and approval date.
+- Re-evaluate whether the chosen lawful basis still fits by recording a written assessment signed and
+  dated by the responsible owner.
+- Attach evidence of any changes in processing purpose, scope, or legal context that could affect the
+  appropriateness of the lawful basis.
+- Name the owner as a specific individual — not a team or department — for each activity’s basis review.

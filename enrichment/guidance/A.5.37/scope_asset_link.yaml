@@ -1,0 +1,20 @@
+must_id: item:A.5.37:scope_asset_link
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Cross-link to A.5.9 asset register — every information asset that is a facility should map
+  to one or more procedures
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each information processing facility in your documented scope, using clear names that match entries
+  in your asset register.
+- Cross-reference every facility in your scope to its corresponding entry in the A.5.9 asset register,
+  noting register IDs or unique identifiers.
+- Link each facility to one or more documented operational procedures, citing exact procedure titles or
+  document references for traceability.
+- Name the owner of each facility as a specific individual, not a team or department, in both the scope
+  and asset register records.
+- Record the date of your last cross-check between the scope, asset register, and procedures to show the
+  mapping is current.

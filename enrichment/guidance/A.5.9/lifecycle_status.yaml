@@ -1,0 +1,16 @@
+must_id: item:A.5.9:lifecycle_status
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Lifecycle status per asset (active, retired, in-procurement, in-disposal)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every information asset and its current lifecycle status (such as active, retired, in-procurement,
+  or in-disposal) in the asset inventory spreadsheet.
+- Assign a named individual as the owner responsible for updating each asset’s lifecycle status, avoiding
+  generic labels like “IT” or “the team.”
+- Record the date each time an asset’s lifecycle status changes, creating an audit trail in the inventory.
+- Review the inventory quarterly and document the review date and reviewer’s name to confirm lifecycle
+  statuses remain accurate.

@@ -1,0 +1,17 @@
+must_id: item:A.8.14:proc_failover_authority
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Failover invocation authority per service (automated vs manual; on-call authority)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person or role with authority to invoke failover for each service in the procedure, specifying
+  if the process is automated or manual.
+- Document the escalation path and contact details for on-call authority, including after-hours or emergency
+  contacts, in the procedure.
+- State the date the failover authority list was last reviewed and updated, and include the reviewer’s
+  name.
+- Avoid listing authority as "the team" or a department—identify a specific individual or named role for
+  each service.

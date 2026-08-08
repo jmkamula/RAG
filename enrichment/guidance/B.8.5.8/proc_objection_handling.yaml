@@ -1,0 +1,19 @@
+must_id: item:B.8.5.8:proc_objection_handling
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+must_text: Objection handling — customer objection triggers negotiation / termination pathway
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure that requires customers to be notified in writing before any subcontractor change,
+  including a clear objection process.
+- Name the individual responsible for receiving and responding to customer objections about subcontractor
+  changes, listing their full name and role.
+- Record each customer objection and the subsequent negotiation or termination steps taken, including
+  dates and outcomes, in a dedicated log.
+- Attach copies of all correspondence related to objections, negotiations, and final decisions to the
+  subcontractor change file for each case.
+- Specify that objections and outcomes must be handled through documented channels—do not rely on verbal
+  agreements or undocumented meetings.

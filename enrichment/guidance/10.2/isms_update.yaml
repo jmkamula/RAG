@@ -1,0 +1,19 @@
+must_id: item:10.2:isms_update
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Make changes to the ISMS where appropriate
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each identified nonconformity with a unique reference number, a clear description, and the
+  date it was found.
+- Assign a named individual responsible for evaluating and implementing changes to the ISMS in response
+  to each nonconformity.
+- Record the specific changes made to the ISMS, including the date of implementation and a brief summary
+  of the modification.
+- Retain evidence of management approval for each ISMS change, such as a signed meeting minute or approval
+  email.
+- Name the person who verified the effectiveness of the change, avoiding generic titles like "the team"
+  or "management".

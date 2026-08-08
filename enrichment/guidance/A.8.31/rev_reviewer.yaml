@@ -1,0 +1,17 @@
+must_id: item:A.8.31:rev_reviewer
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Infrastructure + InfoSec + Engineering leads)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer for each area—Infrastructure, Information Security, and Engineering—using specific
+  individual names, not roles or teams.
+- Record the date each reviewer completed their assessment in the Environment Separation Program review
+  log.
+- Document each reviewer's comments or findings in the review report, clearly linked to their name and
+  area of responsibility.
+- Obtain each reviewer’s signature or written confirmation on the final review document to verify their
+  participation.

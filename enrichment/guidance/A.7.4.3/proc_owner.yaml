@@ -1,0 +1,15 @@
+must_id: item:A.7.4.3:proc_owner
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: Named owner (Data Ops + Privacy Engineering)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the PII Accuracy + Quality Procedure, not a team or department.
+- Document the owner's full name and job title in the procedure header, along with the date of assignment.
+- Record the owner's acceptance of responsibility by obtaining their signature or written confirmation
+  on the procedure document.
+- Review and update the named owner annually, capturing the review date and any changes in a revision
+  history table.

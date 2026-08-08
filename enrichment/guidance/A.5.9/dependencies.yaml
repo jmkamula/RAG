@@ -1,0 +1,16 @@
+must_id: item:A.5.9:dependencies
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Dependency or relationship to other assets (supports A.8.x topology and risk mapping)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each information asset and its associated assets in the inventory, clearly showing how they depend
+  on or relate to each other.
+- Cross-reference each asset entry with relevant records in your risk register and network topology diagrams,
+  using unique identifiers.
+- Name the owner of each asset as a specific individual, not a team or department, to avoid ambiguity
+  in responsibility.
+- Record the date each relationship or dependency was last reviewed and updated in the inventory.

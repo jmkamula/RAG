@@ -1,0 +1,17 @@
+must_id: item:A.7.12:scope_exclusions
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Exclusions (carrier-provided fibre — provider responsibility for protection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in your cabling scope document that carrier-provided fibre is excluded from your responsibility
+  for physical protection.
+- Name the specific carrier or provider responsible for protecting the excluded fibre runs.
+- Reference the relevant contract or service agreement that confirms the provider’s responsibility for
+  fibre protection.
+- Record the date and version of the scope document where the exclusion is defined.
+- Name the owner as a specific individual responsible for maintaining the cabling scope, not a team or
+  department.

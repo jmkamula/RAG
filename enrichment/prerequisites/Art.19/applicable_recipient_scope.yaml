@@ -1,0 +1,33 @@
+leaf_id: req:Art.19:applicable_recipient_scope
+control_ref: Art.19
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of processing activities to identify which data flows,
+    transfers, and recipient classes exist. Without this, you cannot accurately determine who falls within
+    the scope of Art.19 notifications.
+  good_enough: A current RoPA that lists all data recipients and transfer types for relevant processing
+    activities is sufficient to proceed.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for each processing activity helps clarify which disclosures and
+    recipient relationships are legitimate and thus in scope for Art.19. This ensures only appropriate
+    recipients are considered.
+  good_enough: A mapping of each processing activity to its lawful basis, covering all activities involving
+    data transfers, is enough to unblock this step.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and process boundaries for compliance activities,
+    ensuring that the Art.19 recipient scope aligns with the overall information security management system.
+  good_enough: A documented ISMS scope that includes all business units and processes handling personal
+    data is sufficient for this purpose.

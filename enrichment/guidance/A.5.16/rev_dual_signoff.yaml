@@ -1,0 +1,20 @@
+must_id: item:A.5.16:rev_dual_signoff
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Dual signoff per record (IT identity-owner + HR or hiring manager — captures even when in-person
+  handover impossible)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the identity being revoked, including full name, unique identifier, and date of revocation, in
+  a dedicated revocation log entry.
+- Name the IT identity-owner responsible for initiating the revocation and require their physical or digital
+  signature on the record.
+- Require a second signature from either the HR representative or the hiring manager, confirming the revocation,
+  even if the handover was not in person.
+- State the reason for revocation and the method used, ensuring details are specific to the individual
+  and not generic or templated.
+- Avoid listing groups or departments as signatories; ensure both signoff fields contain named individuals
+  with dates.

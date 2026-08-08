@@ -1,0 +1,20 @@
+must_id: item:A.5.30:rec_lessons_feed
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Lessons feed per record to A.5.27 lessons register where recovery surfaced patterns worth retaining
+  beyond this control
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, time, and description of each recovery event in a dedicated log, including the individuals
+  involved in the recovery process.
+- Document any lessons learned or patterns identified during the recovery event that may be relevant to
+  future incidents or improvements.
+- Cross-reference each recovery event record with the A.5.27 lessons register if the event surfaces lessons
+  or patterns worth retaining.
+- Name the person responsible for reviewing each recovery event and confirming whether new lessons should
+  be added to the lessons register.
+- Avoid leaving the lessons field blank or copying generic statements—provide specific, event-driven insights
+  for each record.

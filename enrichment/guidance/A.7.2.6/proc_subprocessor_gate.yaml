@@ -1,0 +1,19 @@
+must_id: item:A.7.2.6:proc_subprocessor_gate
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Subprocessor consent gate (Art.28.2 + Art.28.4) — general or specific written authorisation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the contracting procedure that subprocessors may only be engaged with either general or specific
+  written authorisation from the PII controller.
+- Document the method for obtaining and recording the controller’s authorisation for each subprocessor,
+  including the date and the name of the authorising individual.
+- Attach a sample written authorisation form or template to the procedure, showing how consent is captured
+  and referenced for each subprocessor.
+- Name the responsible individual (not a team or department) who reviews and approves subprocessor authorisations
+  within the procedure document.
+- Record a cross-reference to where signed subprocessor authorisations are stored, such as a contract
+  repository or compliance register.

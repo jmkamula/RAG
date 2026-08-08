@@ -1,0 +1,18 @@
+must_id: item:A.8.30:incident_notification
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Incident-notification obligation in contract (vendor must notify within agreed window; cross-link
+  to A.5.25/A.5.26)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the required incident notification timeframe in the contract, specifying the maximum hours or
+  days for vendor notification after discovery.
+- Cross-reference the contract clause to your incident management and information sharing procedures as
+  described in controls A.5.25 and A.5.26.
+- Name the contract owner as a specific individual responsible for monitoring vendor compliance with incident
+  notification obligations.
+- Retain a signed and dated copy of the executed contract showing the incident notification clause and
+  cross-references.

@@ -1,0 +1,19 @@
+must_id: item:A.5.15:comm_decision_makers
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Decision-maker awareness specifically captured (manager training, system-owner briefing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each decision-maker by full name and role in a communication log dedicated to access control
+  policy briefings or training.
+- Record the date, method, and content summary of each policy communication session delivered to managers
+  and system owners.
+- Obtain a signed or acknowledged receipt from each decision-maker confirming they have received and understood
+  the access control policy.
+- Attach supporting materials, such as training slides or briefing notes, to each communication record
+  for future reference.
+- Specify individual names in all records—avoid generic labels like "management team" or "system owners
+  group."

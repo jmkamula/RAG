@@ -1,0 +1,18 @@
+must_id: item:A.6.6:scope_jurisdictions
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Jurisdictions covered (where signatories sign / where info is protected — drives governing-law
+  clause and enforceability)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all countries and regions where signatories are based or where data is processed in a dated, version-controlled
+  document.
+- Name the specific laws or regulations in each jurisdiction that apply to the agreement and information
+  protection.
+- Assign a responsible individual to review and update the jurisdictions list annually or when business
+  operations change.
+- Avoid using generic terms like "global" or "all applicable laws"; specify each jurisdiction and law
+  by name.

@@ -1,0 +1,18 @@
+must_id: item:A.5.29:act_scope
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Scope of degradation per record (which controls dropped to fallback; which held at full; expected
+  vs actual)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific controls that were downgraded to fallback mode in the activation plan, listing each
+  by name and date of change.
+- Document which controls remained fully operational during the activation, referencing their identifiers
+  and confirming their status with supporting logs.
+- State the expected scope of degradation for each control before activation, and compare it to the actual
+  outcome after activation, noting any discrepancies.
+- Name the individual who approved the scope of degradation per activation, ensuring this is not left
+  as a group or department.

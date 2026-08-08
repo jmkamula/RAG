@@ -1,0 +1,18 @@
+must_id: item:A.8.2:bl_admin_tools_restricted
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Access to system-administration tools restricted to privileged roles only
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all system-administration tools in a dated inventory, including the tool name, version, and the
+  systems they manage.
+- Document each privileged role with access to these tools, naming specific individuals and their job
+  titles.
+- Record the access approval for each privileged user, including the approver’s name, approval date, and
+  justification.
+- State in the baseline that non-privileged users are explicitly denied access to system-administration
+  tools.
+- Name the owner of the privileged access baseline as a specific individual, not a group or department.

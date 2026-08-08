@@ -1,0 +1,17 @@
+must_id: item:A.5.19:tiering_model
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Tiering model with concrete criteria (data sensitivity, dependency, financial exposure)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define concrete tiering criteria such as data sensitivity, operational dependency, and financial exposure
+  in a documented section of your Supplier Information Security Risk Management Procedure.
+- Assign each supplier to a specific risk tier based on the documented criteria, and record the assignment
+  with the supplier’s name and assessment date.
+- Name the person responsible for tiering decisions as a specific individual, not a group or department,
+  in the procedure document.
+- Attach a completed example of a supplier tiering assessment that references the actual criteria used,
+  not generic or boilerplate language.

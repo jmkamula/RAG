@@ -1,0 +1,40 @@
+leaf_id: req:Art.46:applicable_scope
+control_ref: Art.46
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.44
+  standard_id: GDPR:2016/679
+  title: General principle for transfers
+  category: direct
+  rationale: You must first determine whether your data transfers fall under the GDPR’s international
+    transfer regime. Art.44 sets the baseline for when Art.46 safeguards are even relevant.
+  good_enough: You have identified which data flows are considered international transfers under GDPR
+    and confirmed that no adequacy decision applies.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: A clear record of processing activities is essential to identify which transfers are in scope
+    and what data, purposes, and recipients are involved. This underpins any assessment of applicable
+    safeguards.
+  good_enough: You have a current, working RoPA that lists data flows, recipients, and transfer destinations,
+    even if not fully detailed for every processing activity.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: You need to confirm that each transfer has a lawful basis before considering safeguards.
+    Without this, you cannot justify or scope the use of Art.46 mechanisms.
+  good_enough: You have mapped each transfer to a lawful basis, at least at a high level, to ensure the
+    transfer is legitimate before applying safeguards.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which parts of your organization and which information assets are
+    covered by your controls, including those relevant to international transfers.
+  good_enough: You have a documented ISMS scope that includes the business units and systems involved
+    in international transfers, even if not fully granular.

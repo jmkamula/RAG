@@ -1,0 +1,19 @@
+must_id: item:A.8.5:log_retention
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Retention period defined and enforced (cross-link to A.8.15)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact retention period for authentication activity logs in a documented policy, referencing
+  both A.8.5 and A.8.15 controls.
+- Name the person responsible for enforcing log retention and deletion, listing their full name and job
+  title in the policy document.
+- Record the date when the retention period was last reviewed or updated, and keep this record with the
+  policy.
+- Cross-reference the authentication log retention policy in the data retention register, clearly linking
+  it to A.8.15 requirements.
+- Avoid specifying the retention owner as a group or department—list a specific individual to prevent
+  auditor concerns about unclear accountability.

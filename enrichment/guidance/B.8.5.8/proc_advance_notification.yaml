@@ -1,0 +1,19 @@
+must_id: item:B.8.5.8:proc_advance_notification
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+must_text: Advance notification with agreed timeframe (opportunity to object)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the agreed advance notification timeframe in the Subcontractor Change Notification Procedure,
+  including how objections can be raised.
+- Name the person responsible for sending subcontractor change notifications, listing their full name
+  and job title in the procedure.
+- Record each subcontractor change notification sent, including the date, recipient, and response, in
+  a dated log or register.
+- Retain written evidence of objections received and the actions taken in response, attaching all correspondence
+  to the change record.
+- Specify the notification timeframe as a concrete period (e.g., "30 days"), not as a vague term like
+  "reasonable notice."

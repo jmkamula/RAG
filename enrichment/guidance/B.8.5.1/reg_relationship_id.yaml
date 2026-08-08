@@ -1,0 +1,16 @@
+must_id: item:B.8.5.1:reg_relationship_id
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+must_text: Unique transfer relationship identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each transfer relationship row in the register, using a consistent numbering
+  or coding system.
+- Record the assigned unique identifier directly in the register alongside all relevant transfer details
+  for each entry.
+- Cross-reference the unique identifier in any related documentation or correspondence about the specific
+  transfer relationship.
+- Avoid using duplicate or generic identifiers such as "N/A" or "TBD" that could apply to multiple rows.

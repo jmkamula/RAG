@@ -1,0 +1,17 @@
+must_id: item:A.5.33:rev_register_update
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Changes propagated back to the live schedule with reference to this review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of the Records Protection Program review in a version-controlled document.
+- List all changes identified during the review, referencing the specific section or control affected.
+- Update the live Records Protection Program schedule to include each approved change, citing the review
+  date and document as the source.
+- Name the individual responsible for updating the schedule, avoiding generic titles like "the team" or
+  "Records Management."
+- Retain both the pre-review and post-review versions of the schedule to demonstrate that changes were
+  properly propagated.

@@ -1,0 +1,19 @@
+must_id: item:B.8.2.5:reg_request_id
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: Unique request identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each customer audit or information support request entered in the register,
+  using a sequential or otherwise non-repeating format.
+- Record the unique identifier in a dedicated column for every new row, ensuring no two requests share
+  the same value.
+- Cross-reference each identifier with related correspondence or evidence, so that all supporting materials
+  can be traced back to the register entry.
+- Verify that no row in the register is missing a unique identifier or contains a duplicate, correcting
+  any issues immediately.
+- Name the register owner as a specific individual responsible for maintaining the uniqueness of request
+  identifiers, not as a team or department.

@@ -1,0 +1,16 @@
+must_id: item:A.7.9:scope_change_drivers
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new asset class, new travel-risk geography)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current asset classes and travel destinations in a dated document, naming the person responsible
+  for maintaining this scope.
+- Document a clear trigger list that requires re-scoping when a new asset class is introduced or a new
+  travel-risk geography is identified.
+- Record each review of the trigger list and scope, including the date and the specific individual who
+  conducted the review.
+- Name the owner as a specific individual—do not use group names like "the team" or "IT department."

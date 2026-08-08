@@ -1,0 +1,39 @@
+leaf_id: req:A.7.7:cd_cs_audit_register
+control_ref: A.7.7
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organization and which assets are in-scope for ISMS controls
+    before you can meaningfully audit clear desk and clear screen practices.
+  good_enough: A documented scope that clearly identifies the locations, teams, and assets covered by
+    the ISMS—even if it's a draft—is sufficient to proceed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Auditing clear desk and clear screen practices requires knowing what information assets (e.g.,
+    devices, documents) exist and where they are located.
+  good_enough: A basic, up-to-date list of physical and digital assets relevant to the audit areas is
+    enough to start drafting the audit register.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: You need clarity on who is responsible for conducting audits, reporting findings, and applying
+    sanctions to ensure the register is actionable and owned.
+  good_enough: A simple roles matrix or list showing who leads and participates in audits is sufficient
+    at this stage.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy should set the expectation for clear desk and clear screen practices, which the
+    audits will measure compliance against.
+  good_enough: A published or draft policy that references clear desk and clear screen requirements is
+    enough to proceed with drafting the audit register.

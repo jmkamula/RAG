@@ -1,0 +1,17 @@
+must_id: item:A.5.10:scope
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Scope of the policy (which assets, which users — employees / contractors / third parties —
+  which information classes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific types of assets covered by the policy, such as laptops, mobile devices, cloud services,
+  and network resources, in a dated policy document.
+- List all user groups subject to the policy, naming employees, contractors, and third parties explicitly,
+  with no generic terms like "users."
+- Define the information classifications included in scope, such as confidential, internal, or public,
+  and reference your organisation’s classification scheme.
+- Record the date of the most recent policy review and approval, signed by a named responsible manager.

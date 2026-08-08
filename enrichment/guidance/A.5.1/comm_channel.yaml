@@ -1,0 +1,19 @@
+must_id: item:A.5.1:comm_channel
+control_ref: A.5.1
+standard_id: ISO27001:2022
+must_text: Channel used (intranet publication, email, training session, town hall)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact channel used to communicate the information security policy, such as intranet, email,
+  training session, or town hall, in a dated log.
+- Name the person responsible for sending or presenting the policy, listing their full name and job title
+  in the communication record.
+- Attach or link supporting evidence, such as a screenshot of the intranet post, a copy of the email,
+  or an attendance list from a training session.
+- Specify the date the policy was communicated using the chosen channel, ensuring the record shows when
+  staff received the information.
+- Avoid using vague descriptions like "shared with staff"—state the specific channel and method used for
+  each communication event.

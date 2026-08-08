@@ -1,0 +1,15 @@
+must_id: item:A.8.5:rev_next_date
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the authentication program in the review documentation, using
+  a specific day, month, and year.
+- Record the name of the individual responsible for scheduling the next review, not just a team or department.
+- Document the date when the current review was completed to show the timeline between reviews.
+- Attach evidence of management approval for the scheduled next review date, such as a signed or emailed
+  confirmation.

@@ -1,0 +1,17 @@
+must_id: item:Art.37:rev_reviewer
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (executive sponsor + legal counsel)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the executive sponsor responsible for the DPO Designation Program Review as a specific individual,
+  not a generic title or department.
+- Record the full name and title of the legal counsel who participated in the review, including their
+  role in the process.
+- Document the date when both the executive sponsor and legal counsel reviewed and approved the DPO Designation
+  Program.
+- Retain a signed or formally acknowledged record from both individuals confirming their review and approval
+  of the program.

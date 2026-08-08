@@ -1,0 +1,17 @@
+must_id: item:A.5.19:reg_critical_flag
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Critical-supplier flag (drives audit + continuity scrutiny — link to A.5.29 / A.5.30)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all suppliers in the Supplier Register, including full legal names and a primary contact for each
+  entry.
+- Mark each supplier with a clear "critical" or "non-critical" flag based on documented business impact
+  criteria.
+- Cross-reference every supplier flagged as "critical" with related audit and continuity controls in A.5.29
+  and A.5.30, noting specific links.
+- Name the owner of the Supplier Register as a specific individual, not a team or department.
+- Record the date of the last review or update for each supplier entry to show current status.

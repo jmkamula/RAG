@@ -1,0 +1,14 @@
+must_id: item:Art.22:scope_in_scope_systems
+control_ref: Art.22
+standard_id: GDPR:2016/679
+must_text: In-scope systems enumerated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems that make automated decisions affecting individuals, including system names and a short
+  description of each decision type.
+- Record the date each system was added to the list and the name of the person responsible for the entry.
+- Cross-reference each system with the relevant business process or department to confirm completeness.
+- Name the owner of each system as a specific individual, not a team or department.

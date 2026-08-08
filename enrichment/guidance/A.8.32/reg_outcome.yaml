@@ -1,0 +1,16 @@
+must_id: item:A.8.32:reg_outcome
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Per-change outcome (success / partial / rolled-back / failed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Record the outcome of each change in the Change Register, clearly marking it as success, partial, rolled-back,
+  or failed.
+- Name the person responsible for confirming and entering the outcome for each change, using their full
+  name.
+- Date each outcome entry in the Change Register to show when the result was determined.
+- Avoid leaving the outcome field blank or using vague terms like "done" or "complete"—use only the specified
+  outcome categories.

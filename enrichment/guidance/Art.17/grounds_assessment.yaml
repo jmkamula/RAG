@@ -1,0 +1,18 @@
+must_id: item:Art.17:grounds_assessment
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Assessment of which Art.17.1 ground applies (a-f) recorded per request
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific Article 17.1 ground (a-f) that applies to each erasure request in a dedicated tracking
+  log.
+- Name the staff member who assessed and determined the applicable ground for each request, ensuring individual
+  accountability.
+- Date each assessment entry to show when the decision was made for every erasure request.
+- Attach supporting documentation, such as correspondence or forms, that justify the selected ground for
+  erasure.
+- Avoid using generic statements like "user requested"—always specify the exact legal ground from Article
+  17.1.

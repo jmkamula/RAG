@@ -1,0 +1,18 @@
+must_id: item:A.8.27:rev_pattern_currency
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Reference-pattern currency check (no abandoned patterns; new technology patterns added)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current architecture reference patterns in a dated inventory, including when each pattern was
+  last reviewed or updated.
+- Assign a named individual to review the inventory at least annually, recording the review date and any
+  patterns marked as outdated or abandoned.
+- Document the addition of any new technology patterns with the date added and a brief description of
+  the change.
+- Cross-reference each pattern in the inventory with current technology deployments to confirm ongoing
+  relevance and identify missing patterns.
+- Name the reviewer as a specific person, not a generic role or team, to avoid ambiguity in accountability.

@@ -1,0 +1,17 @@
+must_id: item:A.5.1:comm_audience
+control_ref: A.5.1
+standard_id: ISO27001:2022
+must_text: Audience reached (all staff, scoped subset, or named groups)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all staff, scoped subsets, or named groups who must receive the information security policy, specifying
+  names or roles as appropriate.
+- Record the date and method used to communicate the policy to each identified audience, such as email,
+  intranet post, or in-person meeting.
+- Confirm receipt or acknowledgment from each recipient group, capturing signatures, read receipts, or
+  completed acknowledgment forms.
+- Name the audience as specific individuals or defined groups—do not use vague terms like "everyone" or
+  "all staff" without clear definition.

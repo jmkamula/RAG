@@ -1,0 +1,16 @@
+must_id: item:A.7.3:scope_rooms_inventory
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Inventory of rooms across all sites in scope (from facilities inventory)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all rooms at each site included in the information security management system scope, using the
+  latest facilities inventory as your source.
+- Record the physical address and unique room identifier for every room, ensuring no shared or ambiguous
+  names are used.
+- Assign a named individual responsible for maintaining and updating the room inventory, not a team or
+  department.
+- Date and save the completed inventory document, so the most current version is clearly identifiable.

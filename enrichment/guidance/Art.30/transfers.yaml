@@ -1,0 +1,17 @@
+must_id: item:Art.30:transfers
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Transfers to third countries or international organisations with safeguards identified
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each transfer of personal data to a country outside the European Economic Area or to an international
+  organisation in your Records of Processing Activities.
+- Specify the legal safeguard used for each transfer, such as Standard Contractual Clauses or adequacy
+  decisions, and reference the supporting documentation.
+- Name the individual responsible for approving and maintaining records of these transfers, avoiding generic
+  titles like "the team" or "IT department."
+- Record the date when each transfer and its associated safeguard were last reviewed or updated in the
+  RoPA.

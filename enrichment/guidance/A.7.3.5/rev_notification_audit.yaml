@@ -1,0 +1,18 @@
+must_id: item:A.7.3.5:rev_notification_audit
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Notification-of-right audit — first-communication notices reviewed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Collect copies of all first-communication privacy notices sent to individuals, including the date and
+  method of delivery.
+- Document the most recent review of these notices, naming the reviewer and recording the review date
+  in a change log or meeting minutes.
+- Record any updates or changes made to the objection rights language, linking to the revised notice and
+  noting the approval date.
+- Name the reviewer as a specific individual, not a group or department, to avoid ambiguity in accountability.
+- Retain evidence of how objections are communicated and handled, such as sample correspondence or helpdesk
+  tickets with dates and outcomes.

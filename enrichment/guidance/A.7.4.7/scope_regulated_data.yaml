@@ -1,0 +1,19 @@
+must_id: item:A.7.4.7:scope_regulated_data
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Regulated PII categories (health / financial / employment / tax / other jurisdiction-specific)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all categories of regulated personal data you process, such as health, financial, employment, tax,
+  or jurisdiction-specific identifiers, in a dated document.
+- Name the specific laws or regulations that apply to each data category, referencing the relevant section
+  or article for each.
+- Assign a named individual responsible for maintaining and updating the list of regulated data categories
+  and their legal bases.
+- State the business processes or systems where each regulated data category is used, linking to supporting
+  documentation or data flow diagrams.
+- Avoid using generic terms like "all PII" or "various data types"—specify each regulated category and
+  its context explicitly.

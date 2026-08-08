@@ -1,0 +1,16 @@
+must_id: item:A.8.30:reg_owner
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Per-engagement named owner (Engineering sponsor + Procurement partner)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both an Engineering sponsor and a Procurement partner for each outsourced development engagement
+  in the register, listing their full names and job titles.
+- Record the date each owner was assigned responsibility for the engagement in the register entry.
+- Document any changes in ownership by updating the register with the new owner's details and the effective
+  date of the change.
+- Avoid listing generic roles such as "the team" or "Procurement" as owners; always specify identifiable
+  individuals.

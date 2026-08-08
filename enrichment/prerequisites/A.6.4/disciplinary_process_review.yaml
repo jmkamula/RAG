@@ -1,0 +1,39 @@
+leaf_id: req:A.6.4:disciplinary_process_review
+control_ref: A.6.4
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which jurisdictions, business units, and employee groups are in-scope for
+    the ISMS to ensure the disciplinary process review covers all relevant areas and legal requirements.
+  good_enough: A current, approved scope statement that clearly identifies the boundaries and applicability
+    of the ISMS, including relevant jurisdictions and business functions.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The disciplinary process must align with the overarching information security policy, which
+    sets expectations for acceptable behavior and consequences for violations.
+  good_enough: A published, up-to-date information security policy that explicitly references disciplinary
+    expectations and is accessible to all staff.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that the right people are accountable
+    for conducting, reviewing, and updating the disciplinary process.
+  good_enough: A documented list or matrix showing who is responsible for managing, reviewing, and updating
+    the disciplinary process, with named individuals or roles.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: direct
+  rationale: The disciplinary process should be reviewed in light of current risks related to staff behavior,
+    insider threats, and compliance obligations, which are identified through risk assessment.
+  good_enough: A recent risk assessment that includes risks related to staff conduct and disciplinary
+    actions, even if only at a high level.

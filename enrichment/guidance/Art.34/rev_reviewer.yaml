@@ -1,0 +1,15 @@
+must_id: item:Art.34:rev_reviewer
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO + legal + incident-response lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'Name the reviewer as a specific individual for each role: Data Protection Officer, legal counsel, and
+  incident-response lead.'
+- Record the date each reviewer completed their review of the Subject Communication Program.
+- Document each reviewer’s signature or written confirmation of their participation in the review.
+- Retain the review record in a location accessible to auditors and reference the file path or system
+  location in your compliance register.

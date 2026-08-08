@@ -1,0 +1,16 @@
+must_id: item:A.6.8:reg_reporter
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Per-row reporter identity or 'anonymous' (anonymous reports are first-class; non-attribution
+  is the point of the option)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the reporter’s full name or explicitly state 'anonymous' for each event entry in the register.
+- Confirm that anonymous reports are accepted and processed identically to named reports, with no additional
+  fields or restrictions.
+- Review the register to ensure no entries list vague identifiers like 'staff', 'user', or 'team' instead
+  of a specific name or 'anonymous'.
+- Document the date and time each event report is logged, regardless of reporter identity.

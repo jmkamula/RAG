@@ -1,0 +1,30 @@
+leaf_id: req:Art.27:representative_designation
+control_ref: Art.27
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a basic record of your processing activities to inform the representative about
+    your data processing footprint and ensure the designation document is accurate.
+  good_enough: A draft or summary RoPA listing key processing activities, categories of data, and data
+    subjects is enough to draft the designation.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: Clarity on the organizational and geographic scope of your ISMS helps define which entities
+    and processing activities require an EU representative.
+  good_enough: A working scope statement that identifies the legal entities and processing locations relevant
+    to GDPR obligations is sufficient.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Understanding your lawful bases for processing is necessary to brief the EU representative
+    and ensure they can respond to data subject or regulator queries.
+  good_enough: A list of lawful bases mapped to your main processing activities is enough for this stage.

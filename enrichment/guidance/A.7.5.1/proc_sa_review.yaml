@@ -1,0 +1,20 @@
+must_id: item:A.7.5.1:proc_sa_review
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: SA-review awareness — some jurisdictions require transfer agreements reviewed by supervisory
+  authority
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the supervisory authority responsible for reviewing PII transfer agreements in your jurisdiction,
+  recording the full legal entity and contact details.
+- Document each PII transfer agreement requiring authority review, including the date submitted and the
+  authority’s reference or acknowledgment.
+- Retain copies of all correspondence and formal responses from the supervisory authority regarding each
+  transfer agreement.
+- Record the individual within your organisation responsible for submitting agreements and tracking supervisory
+  authority feedback, naming a specific person rather than a team or department.
+- Cross-reference each reviewed agreement in your data transfer register, noting the supervisory authority’s
+  decision and any conditions imposed.

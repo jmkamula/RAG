@@ -1,0 +1,18 @@
+must_id: item:A.6.7:rev_reviewer
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Head of IT / InfoSec lead + HR partner; reviewer must not be the sole approver
+  of any reviewed row)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the Head of IT or Information Security lead and the HR partner as reviewers for each periodic
+  remote working programme review.
+- Record the date and outcome of each review in a dedicated log, listing both reviewers’ full names and
+  job titles.
+- Confirm that neither reviewer is the only approver for any row they review by cross-referencing the
+  approval log with the review assignments.
+- Avoid listing a team or department as reviewer; always specify named individuals responsible for each
+  review instance.

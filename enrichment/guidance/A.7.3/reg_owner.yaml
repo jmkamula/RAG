@@ -1,0 +1,15 @@
+must_id: item:A.7.3:reg_owner
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Per-room owner (department or named individual responsible)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each room in the Room Register with a unique identifier and location description.
+- Name the owner for each room as a specific department or individual, avoiding generic labels like "the
+  team" or "staff".
+- Record the date the ownership assignment was last reviewed or updated for each room entry.
+- Document contact details for each room owner to allow for direct accountability if needed.
+- Retain evidence of management approval for each owner assignment, such as a signed or emailed confirmation.

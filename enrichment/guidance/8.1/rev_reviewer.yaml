@@ -1,0 +1,15 @@
+must_id: item:8.1:rev_reviewer
+control_ref: '8.1'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (ISMS Manager + ops lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the ISMS Manager and the operations lead as the designated reviewers in the operational planning
+  program review document.
+- Record the full names, job titles, and review dates for both reviewers on the program review form.
+- Sign the review document with handwritten or digital signatures from both the ISMS Manager and the operations
+  lead.
+- Avoid listing a group or department as the reviewer; specify individual names to clearly show accountability.

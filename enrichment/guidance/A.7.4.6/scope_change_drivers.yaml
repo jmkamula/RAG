@@ -1,0 +1,17 @@
+must_id: item:A.7.4.6:scope_change_drivers
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+must_text: Trigger list (new infrastructure component)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each new infrastructure component added since the last review in a dated register maintained by
+  the IT or security team.
+- Document the specific temporary file contexts relevant to each new component, referencing system architecture
+  diagrams or deployment records.
+- Assign a named individual responsible for updating the scope whenever a new infrastructure component
+  is introduced.
+- Avoid using generic descriptions like "all new servers"—specify each component by name and deployment
+  date.

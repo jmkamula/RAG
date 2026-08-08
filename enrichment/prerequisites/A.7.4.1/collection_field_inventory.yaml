@@ -1,0 +1,47 @@
+leaf_id: req:A.7.4.1:collection_field_inventory
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The Collection Field Inventory must align with the defined scope of the ISMS to ensure all
+    relevant PII fields are captured and nothing outside the scope is mistakenly included.
+  good_enough: A clear, documented scope that identifies the business units, processes, and systems where
+    PII is collected or processed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need a current asset register to know which systems, databases, and applications may
+    contain PII fields, so you can inventory them accurately.
+  good_enough: An up-to-date list of information assets that store or process PII, even if some details
+    are high-level.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A documented classification scheme is necessary to distinguish PII from other data types,
+    ensuring only relevant fields are included in the inventory.
+  good_enough: A basic scheme that clearly marks which data types or fields are considered PII within
+    your organization.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Each PII field in the inventory must be linked to a documented purpose for collection, as
+    required by privacy principles.
+  good_enough: A list or register showing the main purposes for which PII is collected, even if some purposes
+    are grouped broadly.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: For each PII field, you must know the lawful basis for collection to justify its inclusion
+    and default state (opt-in/required).
+  good_enough: A mapping of lawful bases to each main category of PII collected, even if some are provisional
+    or pending legal review.

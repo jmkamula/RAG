@@ -1,0 +1,19 @@
+must_id: item:A.7.3.3:proc_visual_aids
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: Visual aids where helpful (icons, diagrams — per §7.3.3 NOTE)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify sections of the privacy notice where visual aids such as icons or diagrams would clarify key
+  information for readers.
+- Document each visual aid used, including its purpose and placement, in the Privacy Notice Delivery Procedure
+  with a dated revision history.
+- Reference the specific privacy notice version and page where each icon or diagram appears, ensuring
+  traceability for auditors.
+- Name the person responsible for approving visual aids, listing them as an individual rather than a team
+  or department.
+- Retain sample copies of the privacy notice with all visual aids included, dated to show when each version
+  was published.

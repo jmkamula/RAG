@@ -1,0 +1,18 @@
+must_id: item:A.8.9:rev_deviation_inventory
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Deviation inventory re-confirmed / retired
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current configuration deviations in a dated inventory, including the system, deviation details,
+  and original approval reference.
+- Confirm each deviation’s ongoing need or retirement with a named, responsible individual’s signature
+  and date on the inventory.
+- Record the decision to retire any deviation by updating the inventory with the retirement date and the
+  approving person’s name.
+- Attach supporting evidence for each reconfirmed deviation, such as risk assessments or business justifications,
+  to the inventory.
+- Name the owner of the deviation inventory as a specific individual, not a team or department.

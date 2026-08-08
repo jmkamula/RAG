@@ -1,0 +1,18 @@
+must_id: item:A.7.2.4:reg_channel
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Collection channel per row (web / mobile / paper / verbal)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the collection channel for each consent entry in the register, specifying whether it was web,
+  mobile, paper, or verbal.
+- Name the individual responsible for maintaining the register, ensuring a specific person is listed rather
+  than a team or department.
+- Date each consent entry to show when the consent was obtained and through which channel.
+- Cross-reference each consent record with the related data processing activity or system, allowing for
+  clear traceability.
+- Retain supporting evidence for verbal or paper consents, such as audio files or scanned forms, linked
+  to the corresponding register entry.

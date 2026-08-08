@@ -1,0 +1,17 @@
+must_id: item:9.2:criteria
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Audit criteria defined
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific audit criteria for each audit in the programme, referencing relevant policies, standards,
+  or legal requirements by name and version.
+- Document the audit criteria in the internal audit programme schedule, ensuring each entry is dated and
+  clearly linked to the audit scope.
+- Name the individual who approved the audit criteria for each audit, recording their full name and approval
+  date.
+- Avoid using vague or generic criteria such as "general compliance"—specify measurable and relevant standards
+  for each audit area.

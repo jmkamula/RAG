@@ -1,0 +1,17 @@
+must_id: item:A.7.3.7:rev_reviewer
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Vendor Management)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and job title, clearly identifying both the
+  Data Protection Officer and Vendor Management representative.
+- Record the date each reviewer completed their assessment on the Third-Party Notification Program Review
+  document.
+- Sign the review form or approval record by both the Data Protection Officer and the Vendor Management
+  representative to confirm their participation.
+- Retain copies of all completed review documents in a central, access-controlled location for future
+  reference.

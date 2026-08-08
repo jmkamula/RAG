@@ -1,0 +1,17 @@
+must_id: item:A.5.27:kb_update
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Knowledge base or runbook update step
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each lesson learned from security incidents in a central knowledge base, including date, incident
+  reference, and responsible person.
+- Update the relevant runbook or procedure with actionable changes based on the lesson learned, citing
+  the incident and update date.
+- Assign a named individual to review and approve each knowledge base or runbook update, recording their
+  name and approval date.
+- Avoid leaving lessons learned as standalone documents; cross-reference each one to the updated knowledge
+  base or runbook entry.

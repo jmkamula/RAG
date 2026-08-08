@@ -1,0 +1,17 @@
+must_id: item:A.7.3.4:reg_subject_id
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+must_text: Subject identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the unique identifier for each data subject in a dedicated column for every consent modification
+  or withdrawal entry.
+- Cross-reference each subject identifier with the corresponding consent record to confirm traceability
+  from the register to the original consent.
+- Name the subject identifier using a consistent format, avoiding ambiguous labels such as initials only
+  or generic terms like "user."
+- Document the date and nature of each modification or withdrawal alongside the subject identifier for
+  complete traceability.

@@ -1,0 +1,17 @@
+must_id: item:A.8.23:authority
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: Named policy authority (InfoSec lead with Legal/HR partner for category boundaries)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the policy authority as a specific individual by full name and job title, such as "Jane Smith,
+  Information Security Lead."
+- List the Legal and HR partners by full name and job title, confirming their role in defining category
+  boundaries.
+- Record the date each authority and partner approved the policy, keeping a signed or digitally acknowledged
+  approval record.
+- Avoid using generic terms like "the team" or "IT department" when identifying policy authorities; specify
+  named individuals only.

@@ -1,0 +1,40 @@
+leaf_id: req:Art.26:joint_controller_register
+control_ref: Art.26
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of all processing activities to identify which ones involve
+    joint controllers. Without this, you can't reliably determine where joint-controller arrangements
+    exist.
+  good_enough: A draft or working RoPA that lists all processing activities and flags those involving
+    other controllers is sufficient to start the joint controller register.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Each joint controller arrangement must be linked to a lawful basis for processing. This ensures
+    the register only covers relationships that are legally grounded.
+  good_enough: A mapping of each processing activity to its lawful basis, even if some are provisional,
+    is enough to proceed.
+- ref: Art.26
+  standard_id: GDPR:2016/679
+  title: Joint Controller Arrangements
+  category: direct
+  rationale: You must first identify and document the existence of joint controller relationships and
+    the main terms agreed with partners before you can maintain a register.
+  good_enough: A list of all current joint controller relationships and the key points of their agreements
+    (even if not fully formalized) is sufficient to begin the register.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated Data Protection Officer (DPO) is often required to oversee joint controller
+    arrangements and ensure the register is maintained and reviewed.
+  good_enough: A named DPO or interim privacy lead, with contact details and basic responsibilities defined,
+    is enough to unblock drafting the register.

@@ -1,0 +1,15 @@
+must_id: item:A.8.25:rev_reviewer
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Engineering leads + InfoSec)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each reviewer by full name and job title in the SDLC program review record for every review cycle.
+- Record the review date and the specific SDLC program version or period covered in the review documentation.
+- Document explicit confirmation from both an engineering lead and an information security representative
+  that they have completed the review.
+- Avoid listing groups or roles only; specify individual reviewers rather than generic entries like "Engineering"
+  or "InfoSec team."

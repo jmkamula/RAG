@@ -1,0 +1,18 @@
+must_id: item:A.7.1:reg_classification
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Area classification per row (matches policy's classification scheme)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each site's area classification in the register with your official policy's classification
+  scheme to confirm alignment.
+- Document the exact classification label for each site area, using only terms defined in your policy,
+  not custom or ambiguous wording.
+- Record the date and name of the person who assigned each classification to provide a clear audit trail.
+- Name the owner of the register as a specific individual, not a team or department, to avoid accountability
+  gaps.
+- Review the register for any missing or outdated classifications and update entries to reflect the current
+  policy scheme.

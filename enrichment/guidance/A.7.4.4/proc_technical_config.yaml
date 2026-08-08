@@ -1,0 +1,17 @@
+must_id: item:A.7.4.4:proc_technical_config
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+must_text: Technical configurations documented (how the minimisation is implemented in code / infrastructure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each system or application that processes personal data, listing where minimisation controls
+  are applied in code or infrastructure settings.
+- Describe the specific technical measures used to limit personal data collection, storage, or access,
+  referencing configuration files or code snippets by location.
+- Name the individual responsible for maintaining and updating these technical configurations, avoiding
+  generic titles like "IT team" or "developers".
+- Record the date of the most recent review or update to each minimisation configuration, linking to change
+  logs or version control records.

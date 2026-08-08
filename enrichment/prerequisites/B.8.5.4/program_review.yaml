@@ -1,0 +1,47 @@
+leaf_id: req:B.8.5.4:program_review
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must have clearly documented the purposes for which personal data is processed to evaluate
+    if disclosure requests and notifications are handled appropriately during the program review.
+  good_enough: A current, approved list of processing purposes covering all relevant data flows is available
+    and referenced in privacy operations.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for each processing activity is essential to assess if disclosures
+    and notifications are legally justified and defensible during annual review.
+  good_enough: A mapped record of lawful bases for all processing activities exists and is accessible
+    to reviewers.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope statement defines which systems, processes, and data are covered by the ISMS and
+    privacy extension, ensuring the review covers all relevant areas.
+  good_enough: A documented scope statement exists and includes all business units and systems subject
+    to disclosure requests.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that those responsible for handling and reviewing disclosure
+    requests are identified and accountable.
+  good_enough: A roles and responsibilities matrix or document exists, naming individuals or teams responsible
+    for disclosure request management and review.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: cross_role
+  rationale: A RoPA provides the authoritative record of processing activities, enabling reviewers to
+    verify that all relevant disclosures and notifications are tracked and compliant.
+  good_enough: A maintained RoPA exists, listing all processing activities in scope for disclosure requests,
+    even if not fully exhaustive.

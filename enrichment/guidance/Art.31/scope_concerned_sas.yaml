@@ -1,0 +1,17 @@
+must_id: item:Art.31:scope_concerned_sas
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Concerned SAs enumerated (MS where subjects affected)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all EU member states where data subjects affected by your processing are located and list them
+  in a dated document.
+- Name each concerned supervisory authority (SA) by its official title and country, matching the list
+  of affected member states.
+- Cross-reference your list of SAs with records of data processing activities to confirm all relevant
+  jurisdictions are included.
+- Specify the individual responsible for maintaining and updating the list of concerned SAs, avoiding
+  generic roles like "the team" or "compliance department".

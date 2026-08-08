@@ -1,0 +1,17 @@
+must_id: item:Art.7:reg_scope
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Per-row scope of consent (which activity / purpose)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific activity or purpose for which consent was obtained in a dedicated column for each
+  entry in the consent register.
+- Use clear, plain language to describe each activity or purpose, avoiding generic terms like "marketing"
+  or "business use" without further detail.
+- Cross-reference each consent entry with the relevant privacy notice or data processing description provided
+  to the individual at the time of consent.
+- Name the individual responsible for maintaining and updating the consent register, rather than listing
+  a team or department.

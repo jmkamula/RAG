@@ -1,0 +1,17 @@
+must_id: item:A.8.24:reg_purpose
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Per-row purpose (encryption-at-rest / TLS / signing / KEK / DEK / token-signing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the purpose of each cryptographic key in the register, specifying its use such as encryption-at-rest,
+  TLS, signing, KEK, DEK, or token-signing.
+- Document the unique identifier of each key alongside its stated purpose in the register for clear traceability.
+- Assign a specific individual as the owner for each key entry, avoiding generic labels like "IT team"
+  or "security group".
+- Record the date each key was added or updated in the register to provide a clear audit trail.
+- Cross-reference each key’s purpose with relevant system or application documentation to confirm alignment
+  with actual usage.

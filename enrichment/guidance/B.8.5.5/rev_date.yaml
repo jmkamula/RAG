@@ -1,0 +1,17 @@
+must_id: item:B.8.5.5:rev_date
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Disclosure Decision Program in a dated document or meeting
+  minutes.
+- State the planned review interval in the program documentation, specifying the exact frequency in months
+  or years.
+- Compare the actual review date to the planned interval and document any deviations with reasons in the
+  review record.
+- Name the reviewer as a specific individual in the review documentation—avoid listing only a team or
+  department.

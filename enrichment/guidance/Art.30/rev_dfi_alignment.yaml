@@ -1,0 +1,19 @@
+must_id: item:Art.30:rev_dfi_alignment
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Cross-check against the data flow inventory recorded — both should describe the same reality
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the RoPA entries with your current data flow inventory, confirming that each processing
+  activity matches a documented data flow.
+- Record the date and outcome of the cross-check in a review log, including any discrepancies found and
+  actions taken.
+- Assign a named individual to sign off on the completed cross-check, ensuring clear accountability for
+  the review.
+- State any updates made to either the RoPA or data flow inventory as a result of the review, with version
+  numbers and dates.
+- Name the owner as a specific individual — avoid listing only a team or department as responsible for
+  the cross-check.

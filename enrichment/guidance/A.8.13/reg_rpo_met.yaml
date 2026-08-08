@@ -1,0 +1,20 @@
+must_id: item:A.8.13:reg_rpo_met
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Per-test RPO-met flag (data-recoverable-to-RPO confirmed; auditor-critical proof parallels
+  A.5.30 rec_success_status)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time of each restore test alongside the system or dataset name in the Restore Test
+  Register.
+- State the Recovery Point Objective (RPO) for each system or dataset tested, matching the value to your
+  documented backup policy.
+- Confirm and mark in the register whether the data restored during each test met the stated RPO, using
+  a clear "yes" or "no" flag.
+- Name the individual who verified the RPO was met for each test, avoiding generic entries like "IT team"
+  or "admin".
+- Retain supporting evidence for each test, such as screenshots or logs, cross-referenced to the corresponding
+  register entry.

@@ -1,0 +1,38 @@
+leaf_id: req:A.7.3.2:program_review
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which business units, systems, and processes are in-scope for privacy notices
+    before reviewing their content. This ensures the review covers all relevant processing activities.
+  good_enough: A current, documented scope statement that clearly lists all included business units and
+    systems is available.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Notices must accurately reflect the purposes for which personal data is processed. You can't
+    review notice content unless the processing purposes are already identified and documented.
+  good_enough: A list of processing purposes for all in-scope activities is documented and accessible.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Notices must state the lawful basis for each processing activity. The review can't confirm
+    completeness or accuracy if these bases aren't already mapped.
+  good_enough: Each processing activity has a documented lawful basis that can be referenced during the
+    notice review.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: To ensure notice coverage is complete, you need an up-to-date register of information assets
+    (systems, datasets, applications) involved in personal data processing.
+  good_enough: A basic asset register exists listing all key systems and datasets handling personal data,
+    even if not fully detailed.

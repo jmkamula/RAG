@@ -1,0 +1,40 @@
+leaf_id: req:B.8.2.5:customer_information_procedure
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the boundaries of your ISMS and privacy program before you can define what
+    information is relevant to share with customers about compliance. This ensures the procedure covers
+    the right services, systems, and data.
+  good_enough: A documented scope statement that clearly defines what parts of the business, systems,
+    and data are in-scope for ISO 27701 and customer relationships.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of privacy and security roles is essential so that customer information
+    requests are routed to the right people and handled appropriately.
+  good_enough: A current list or matrix showing who is responsible for privacy and compliance communication
+    with customers.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the purposes for which personal data is processed to accurately
+    inform customers and support their compliance needs.
+  good_enough: A summary or register of processing purposes for all relevant personal data, even if not
+    fully detailed, to support customer-facing explanations.
+- ref: Art.28.3.h
+  standard_id: GDPR:2016/679
+  title: Processor Support for Audits
+  category: cross_role
+  rationale: GDPR requires processors to support customer audits and provide necessary information. Your
+    procedure must align with these legal expectations.
+  good_enough: A basic understanding of the audit-support obligations in processor contracts, with a reference
+    to GDPR Article 28.3.h requirements.

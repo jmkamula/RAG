@@ -1,0 +1,20 @@
+must_id: item:A.5.26:rev_identity_pair_25
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Bidirectional A.5.25 ↔ A.5.26 lifecycle pair check — every register row traces back to an A.5.25
+  triage decision (no orphan incidents) and every escalated triage decision opened an incident (no lost
+  escalations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each incident in the response register to a specific, dated A.5.25 triage decision record,
+  ensuring no incident lacks a documented origin.
+- Confirm every A.5.25 triage decision marked for escalation has a matching incident entry in the response
+  register, with both records linked by a unique identifier.
+- Document the reviewer's name and date for each lifecycle pair check, showing who verified that no triage
+  decisions or incidents are unaccounted for.
+- Name the owner responsible for the lifecycle pair check as a specific individual, not as a team or department.
+- Record any orphaned or lost entries found during the review, along with the corrective action taken
+  and the date resolved.

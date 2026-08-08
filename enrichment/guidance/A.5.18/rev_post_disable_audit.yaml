@@ -1,0 +1,20 @@
+must_id: item:A.5.18:rev_post_disable_audit
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Post-disable verification window noted (30-day check that no stale access reappears via service-account
+  chains or forgotten group memberships)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time when each user or service account is disabled, capturing this in an access
+  revocation log.
+- Assign a named individual to perform a follow-up review of all related accounts and group memberships
+  within 30 days of revocation.
+- Document the results of the 30-day review, noting any reactivated or lingering access, and include the
+  reviewer's name and date.
+- Name the reviewer as a specific person — do not use generic labels like "IT team" or "administrator"
+  in the review record.
+- Retain evidence of any corrective actions taken if stale access is discovered, including who approved
+  and completed the remediation.

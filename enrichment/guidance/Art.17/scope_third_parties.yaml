@@ -1,0 +1,19 @@
+must_id: item:Art.17:scope_third_parties
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Third-party processor handling via Art.28 DPA flow-through
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems where personal data is processed by third-party vendors, including the vendor name
+  and system function, in a dated inventory.
+- Document the existence and location of signed Data Processing Agreements (DPAs) with each third-party
+  processor, referencing Article 28 GDPR requirements.
+- Cross-reference each system in your inventory to its corresponding DPA, ensuring erasure obligations
+  are explicitly addressed in the agreement.
+- Name the individual responsible for managing and updating the third-party processor inventory, avoiding
+  generic titles like "IT" or "the team."
+- Retain evidence of periodic reviews confirming that all third-party processors remain contractually
+  bound to support data erasure requests.

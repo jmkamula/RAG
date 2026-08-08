@@ -1,0 +1,19 @@
+must_id: item:A.7.5.1:reg_basis_cited
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: Basis cited per row (Art.45 adequacy / Art.46 SCC / Art.46 BCR / Art.49 derogation / non-EU
+  equivalent)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the legal basis for each cross-jurisdiction data transfer in the register, specifying if it is
+  adequacy, standard clauses, binding rules, derogation, or equivalent.
+- Document the specific article or legal reference supporting the chosen basis for each transfer, including
+  relevant country or region details.
+- Assign a named individual responsible for verifying the accuracy of each entry, avoiding generic titles
+  like "the team" or "IT department".
+- Record the date each transfer basis was last reviewed or updated in the register to show ongoing compliance.
+- Retain supporting evidence, such as signed contracts or adequacy decisions, linked to each register
+  entry for auditor inspection.

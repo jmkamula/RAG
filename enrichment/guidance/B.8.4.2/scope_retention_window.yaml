@@ -1,0 +1,18 @@
+must_id: item:B.8.4.2:scope_retention_window
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+must_text: Post-termination retention window before disposal (accidental-lapse protection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact length of time personal data will be retained after service termination in a dated retention
+  schedule.
+- Name the individual responsible for authorising data disposal after the retention window, not a team
+  or department.
+- Record the date when each terminated account or dataset enters the retention window in a central log.
+- Document the process for securely disposing of data at the end of the retention period, including method
+  and date of destruction.
+- Retain evidence of disposal approval, such as a signed or electronically approved record, for each data
+  set destroyed.

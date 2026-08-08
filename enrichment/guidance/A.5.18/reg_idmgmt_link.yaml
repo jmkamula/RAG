@@ -1,0 +1,20 @@
+must_id: item:A.5.18:reg_idmgmt_link
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Linkage to A.5.16 identity-management register per row — every access right attaches to a registered
+  identity (no orphan rights pointing to disabled or deleted identities)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each access right entry to a unique identity in the identity-management register by
+  including the corresponding identity record ID in every row.
+- Confirm that no access right is assigned to an identity marked as disabled or deleted in the identity-management
+  register by checking status fields.
+- Record the date and name of the person who last verified the linkage between the access rights register
+  and the identity-management register.
+- Name the owner of the access rights register as a specific individual, not a team or department, to
+  avoid ambiguity in responsibility.
+- Flag and resolve any access right entries that do not have a valid, active identity reference, documenting
+  actions taken for each orphaned entry.

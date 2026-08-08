@@ -1,0 +1,17 @@
+must_id: item:6.2:proc_approval
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: Approval authority per objective (top management for org-level, function head for function-level)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the approval authority for each security objective, specifying either a top management member or
+  the relevant function head by full name and title.
+- Record the date and method of approval for each objective, such as a signed document, meeting minutes,
+  or an email confirmation.
+- Attach evidence of approval, such as a signed statement or digital sign-off, to each documented security
+  objective.
+- Avoid listing groups or departments as approvers; always identify a single accountable individual for
+  each objective.

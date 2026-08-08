@@ -1,0 +1,20 @@
+must_id: item:A.5.30:reg_data_residency
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Data residency note per row where backup geographic separation has jurisdictional implications
+  (cross-link to A.5.14 transfer policy)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the physical location and country for each backup listed in the ICT Service Continuity Register,
+  including any cross-border storage details.
+- Cross-reference each backup entry to the relevant section of your A.5.14 data transfer policy, using
+  a direct link or policy reference number.
+- State any jurisdictional or legal implications for each backup location, such as local data residency
+  laws or restrictions.
+- Name the responsible individual for verifying the accuracy of backup location and policy cross-links,
+  avoiding generic roles like "IT team."
+- Record the date when each entry was last reviewed or updated to show current compliance with data residency
+  requirements.

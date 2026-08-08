@@ -1,0 +1,16 @@
+must_id: item:A.5.18:reg_privileged_flag
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Privileged-access rows flagged for A.8.2 oversight (drives separate-tier review and tighter
+  cadence for privileged subset)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Flag each privileged-access entry in the Access Rights Register with a clear marker indicating it requires
+  separate oversight under control A.8.2.
+- Cross-reference each flagged privileged-access entry to the corresponding A.8.2 review schedule and
+  reviewer in the register.
+- Name the reviewer for each privileged-access entry as a specific individual, not a generic role or team.
+- Record the date of the most recent A.8.2 review for each privileged-access entry in the register.

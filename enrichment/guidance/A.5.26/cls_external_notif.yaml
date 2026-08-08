@@ -1,0 +1,18 @@
+must_id: item:A.5.26:cls_external_notif
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: External notifications made per record (regulators, customers, suppliers)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, time, and recipient of each external notification made for the incident in the closure
+  record.
+- Name the specific individual who sent each notification, rather than listing a team or department.
+- Attach copies of the actual notification messages or correspondence sent to regulators, customers, or
+  suppliers.
+- State the reason for each external notification and reference any regulatory or contractual obligation
+  that triggered it.
+- Confirm that no required external notifications were missed by cross-referencing the incident type with
+  your notification policy.

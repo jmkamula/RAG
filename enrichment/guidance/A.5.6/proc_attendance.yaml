@@ -1,0 +1,18 @@
+must_id: item:A.5.6:proc_attendance
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Attendance/participation expectations per membership (minimum events, working groups, briefings)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the minimum number of events, working groups, and briefings each member is expected to attend
+  in the documented procedure.
+- Name the responsible individual who monitors attendance and participation, specifying their full name
+  and job title.
+- Record attendance for each event, working group, and briefing in a dated log that lists participant
+  names.
+- Review and update the procedure annually, documenting the review date and the reviewer’s name and signature.
+- Specify participation requirements clearly—avoid vague terms like “regularly” or “as needed” that could
+  be interpreted differently.

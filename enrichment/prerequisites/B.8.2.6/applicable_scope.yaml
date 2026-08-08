@@ -1,0 +1,40 @@
+leaf_id: req:B.8.2.6:applicable_scope
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know the overall boundaries of your ISMS before you can define which customer
+    engagements and processing activities fall under the processor RoPA. This ensures your B.8.2.6 scope
+    is aligned with your certified ISMS.
+  good_enough: A clear, documented ISMS scope that identifies included business units, geographies, and
+    services is available—even if not fully optimized for privacy yet.
+- ref: B.8.2.1
+  standard_id: ISO27701:2019
+  title: Processor RoPA (Record of Processing Activities)
+  category: direct
+  rationale: You must have identified all processor activities in scope per B.8.2.1 before you can map
+    which engagements require a corresponding RoPA row under B.8.2.6.
+  good_enough: A draft or working list of processor activities is available, even if some details are
+    pending.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: Understanding and documenting the purpose of processing for each customer engagement is essential
+    to accurately scoping the RoPA and ensuring only relevant activities are included.
+  good_enough: Each processor activity has a brief, documented purpose statement, even if not yet fully
+    reviewed by legal.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of privacy and security roles ensures the right people are accountable for
+    identifying, documenting, and maintaining the processor RoPA scope.
+  good_enough: A named individual or team is responsible for processor RoPA activities, even if role descriptions
+    are still being finalized.

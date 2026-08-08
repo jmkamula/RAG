@@ -1,0 +1,20 @@
+must_id: item:A.7.3.5:proc_balancing_test
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Legitimate-interests balancing test — org demonstrates compelling grounds override subject
+  rights or objection prevails
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for conducting a legitimate interests balancing test, including criteria used to
+  weigh organisational needs against individual rights.
+- Record each objection received, including the date, the data subject’s details, and the nature of the
+  objection.
+- Name the decision-maker responsible for each balancing test as a specific individual, not a group or
+  department.
+- Retain a signed and dated record of the final decision, clearly stating whether the objection was upheld
+  or overridden, with supporting justification.
+- Attach evidence showing that the outcome was communicated to the data subject, including the date and
+  method of notification.

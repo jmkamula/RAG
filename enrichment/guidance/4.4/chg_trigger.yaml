@@ -1,0 +1,17 @@
+must_id: item:4.4:chg_trigger
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: Change trigger stated (scope change, audit finding, process redesign, regulator change)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific reason for each ISMS Manual change, such as audit finding, scope change, process
+  redesign, or regulator requirement, in the change record.
+- Record the date and a brief summary of the change trigger alongside the change entry in the ISMS Manual
+  Change Record.
+- Name the individual who identified or authorized the change trigger, ensuring a specific person is listed
+  rather than a team or department.
+- Attach or reference supporting evidence for the change trigger, such as audit reports, regulatory notices,
+  or process review documents, in the change record.

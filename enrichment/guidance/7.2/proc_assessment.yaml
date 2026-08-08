@@ -1,0 +1,19 @@
+must_id: item:7.2:proc_assessment
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Assessment cadence (annual review, on role change, on certification expiry)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the schedule for competence assessments, specifying annual reviews, role changes, and certification
+  expiry dates in a dated procedure.
+- Assign responsibility for conducting competence assessments to a named individual, not a generic role
+  or department.
+- Record each completed competence assessment with the date, assessed individual’s name, and the trigger
+  event (annual, role change, or certification expiry).
+- Retain evidence of notifications sent to staff about upcoming or required competence reviews, including
+  dates and recipients.
+- Review and update the competence determination procedure annually, recording the review date and the
+  name of the reviewer.

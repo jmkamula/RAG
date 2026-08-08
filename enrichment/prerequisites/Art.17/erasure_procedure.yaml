@@ -1,0 +1,42 @@
+leaf_id: req:Art.17:erasure_procedure
+control_ref: Art.17
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify where personal data resides,
+    which is essential for locating and erasing data when a request is made. Without this, you cannot
+    reliably fulfill erasure requests.
+  good_enough: A basic, current inventory of processing activities and systems holding personal data is
+    documented, even if not fully detailed.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity is necessary to assess whether a valid
+    ground for erasure exists or if an exception applies. This underpins the decision-making in your erasure
+    procedure.
+  good_enough: Each processing activity has a documented lawful basis, even if some are provisional or
+    pending review.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer (DPO) Designation
+  category: foundational
+  rationale: If a DPO is required, their involvement is critical for overseeing and advising on erasure
+    requests and ensuring the procedure aligns with GDPR requirements.
+  good_enough: A DPO is designated (if required) and contactable, or a responsible privacy lead is assigned
+    if a formal DPO is not mandatory.
+- ref: A.8.10
+  standard_id: ISO27001:2022
+  title: Removal of Information
+  category: cross_role
+  rationale: Your erasure procedure must address the technical and organizational means to actually remove
+    data from all relevant systems, including backups and replicas. This ISO control provides the operational
+    baseline.
+  good_enough: There is a documented process for deleting data from primary systems and a plan or policy
+    for handling backups, even if full automation is not yet in place.

@@ -1,0 +1,20 @@
+must_id: item:A.5.30:scenario_coverage
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Test scenarios cover BOTH partial-failure AND full-outage cases (most orgs only test partial
+  — auditor-tested concern)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document at least one test scenario simulating a full outage of critical ICT systems, including total
+  loss of primary data center or cloud service.
+- Record a separate scenario simulating a partial failure, such as loss of a single application or network
+  segment, with expected recovery steps.
+- Name the person responsible for designing and approving each scenario, listing them by full name and
+  job title.
+- Attach dated evidence of completed tests for both partial and full outage scenarios, such as test reports
+  or signed completion checklists.
+- Avoid using only partial-failure scenarios in your test documentation—include at least one full-outage
+  case to meet auditor expectations.

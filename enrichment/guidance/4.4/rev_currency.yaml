@@ -1,0 +1,18 @@
+must_id: item:4.4:rev_currency
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: Currency check — manual still matches how the ISMS actually runs
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a specific individual to lead the ISMS manual review and record their name and the review start
+  date in meeting minutes.
+- Compare each ISMS manual section with current operational practices and document any discrepancies or
+  updates needed in a tracked change log.
+- Interview key process owners and record their confirmation that described procedures match actual day-to-day
+  activities.
+- Update the ISMS manual to reflect any identified changes and record the revision date and version number
+  on the document.
+- Name the reviewer as a specific person, not a group or department, to avoid ambiguity about accountability.

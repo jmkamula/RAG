@@ -1,0 +1,40 @@
+leaf_id: req:A.5.12:management_approval
+control_ref: A.5.12
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: direct
+  rationale: The classification scheme is a topic-specific policy that must align with the overarching
+    information security policies. Without these policies, there is no framework or authority for defining
+    or approving classification.
+  good_enough: A documented, approved information security policy that references or allows for topic-specific
+    schemes is available.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Inventory of information and other associated assets
+  category: direct
+  rationale: You cannot classify assets until you know what assets exist. The asset inventory provides
+    the list of items that the classification scheme will cover.
+  good_enough: A current, basic asset inventory exists that lists major information assets in scope for
+    classification.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organisation and which assets are covered
+    by the ISMS, ensuring the classification scheme is applied to the correct set of assets.
+  good_enough: A documented scope statement exists that identifies the boundaries and applicability of
+    the ISMS.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that the right people are involved in drafting, reviewing,
+    and approving the classification scheme.
+  good_enough: Roles for information security management, including scheme approval, are assigned and
+    documented.

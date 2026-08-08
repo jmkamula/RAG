@@ -1,0 +1,14 @@
+must_id: item:10.2:reg_status
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Per-row status (open / in-progress / closed / re-opened)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Name a specific status for each nonconformity row, using only "open", "in-progress", "closed", or "re-opened".
+- Record the date when the status was last updated for each nonconformity entry.
+- Assign a responsible individual for updating and maintaining the status of each nonconformity.
+- Avoid leaving any status field blank or using vague terms like "pending" or "ongoing" that are not part
+  of the approved list.

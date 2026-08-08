@@ -1,0 +1,19 @@
+must_id: item:A.5.15:segregation_link
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Cross-link to A.5.3 segregation of duties — access decisions respect documented separation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the section in your Access Control Policy where access rights are granted with the documented
+  segregation of duties requirements from A.5.3.
+- Document explicit statements in the policy that access decisions are checked against the segregation
+  of duties register before approval.
+- Name the individual responsible for verifying that access assignments do not violate separation of duties,
+  listing their full name and job title.
+- Attach a dated example of an access request that was reviewed and approved with reference to the segregation
+  of duties documentation.
+- Avoid generic statements like "access respects segregation" without pointing to the specific duties
+  or roles listed in your A.5.3 documentation.

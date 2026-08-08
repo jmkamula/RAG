@@ -1,0 +1,33 @@
+leaf_id: req:Art.37:designation_record
+control_ref: Art.37
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: foundational
+  rationale: You need to know what processing activities your organisation undertakes to determine if
+    a Data Protection Officer (DPO) is required and to properly document their designation. RoPA provides
+    the inventory of processing that informs DPO necessity.
+  good_enough: A basic, up-to-date list of processing activities, even if not fully detailed, is sufficient
+    to clarify whether DPO designation is mandatory and to support the record.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organisational and geographical boundaries for compliance, which
+    is essential for accurately recording which parts of the organisation the DPO designation covers.
+  good_enough: A draft or approved scope statement that identifies the main business units and locations
+    in scope for GDPR is enough to proceed.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Understanding the lawful bases for processing personal data helps clarify the types of processing
+    activities and their risk, which can influence the need for a DPO and the content of the designation
+    record.
+  good_enough: A summary table or list of lawful bases used for core processing activities is sufficient
+    to inform the DPO designation record.

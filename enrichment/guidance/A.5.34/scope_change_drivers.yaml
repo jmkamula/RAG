@@ -1,0 +1,20 @@
+must_id: item:A.5.34:scope_change_drivers
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new geography, new service line entering a regulated sector, M&A
+  bringing new data subject categories, new transfer destinations)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific events that require re-scoping, such as entering new countries, launching new services,
+  or acquiring companies handling personal data.
+- Document the trigger list in the Privacy Applicability Scope record, including the date of the most
+  recent update.
+- Assign a named individual responsible for monitoring business changes and initiating re-scoping when
+  a trigger event occurs.
+- Avoid using vague triggers like "significant change"; describe each event in clear, concrete terms relevant
+  to your organisation.
+- Retain evidence of periodic reviews of the trigger list, such as meeting minutes or review logs with
+  dates and attendees.

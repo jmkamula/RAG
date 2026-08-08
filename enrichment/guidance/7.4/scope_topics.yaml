@@ -1,0 +1,17 @@
+must_id: item:7.4:scope_topics
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: Topic classes in scope (policy comms, objective comms, performance reporting, incident comms,
+  change comms, breach notification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each required communication topic class—policy, objectives, performance, incidents, changes, and
+  breaches—in a documented communication scope statement.
+- Name the specific individual responsible for maintaining the communication scope, avoiding generic titles
+  like "the team" or "management".
+- Record the date the communication scope was last reviewed and updated in the document metadata.
+- Cross-reference the communication scope statement with relevant policy or procedure documents to show
+  alignment with actual practices.

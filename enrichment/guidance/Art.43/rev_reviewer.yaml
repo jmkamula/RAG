@@ -1,0 +1,17 @@
+must_id: item:Art.43:rev_reviewer
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (executive sponsor + independent counsel)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the executive sponsor responsible for the program review as a specific individual, including their
+  full name and job title, in the review documentation.
+- Record the identity of the independent counsel involved, listing their full name, professional credentials,
+  and role in the review report.
+- Document the date each reviewer confirmed their participation by having them sign or formally acknowledge
+  the review record.
+- Avoid listing groups, departments, or generic titles as reviewers; always specify named individuals
+  for both roles.

@@ -1,0 +1,15 @@
+must_id: item:A.6.4:rev_next_date
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the disciplinary process in the documented review schedule.
+- Record the date in a version-controlled document, such as the disciplinary process policy or review
+  log.
+- Name the responsible individual who set the next review date, ensuring a specific person is listed rather
+  than a role or team.
+- Retain evidence of management approval for the scheduled review date, such as a signed or emailed confirmation.

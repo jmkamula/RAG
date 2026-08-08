@@ -1,0 +1,16 @@
+must_id: item:B.8.5.1:reg_jurisdiction_pair
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+must_text: Origin + destination jurisdiction per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the origin jurisdiction for each data transfer in the Processor Transfer Basis Register, specifying
+  the exact country or legal area involved.
+- Enter the destination jurisdiction for each data transfer, clearly identifying the receiving country
+  or legal area in a separate column.
+- Cross-reference each register entry with supporting transfer documentation, such as contracts or data
+  flow diagrams, to confirm accuracy.
+- Name the person responsible for maintaining the register as a specific individual, not a team or department.

@@ -1,0 +1,17 @@
+must_id: item:A.7.11:rev_vendor_sla
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Vendor-SLA review (response times against SLA, breach incidents)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to be responsible for reviewing vendor service level agreements and document
+  their name and role in the review record.
+- Record the dates and outcomes of each periodic review of vendor response times and any breach incidents
+  in a dedicated review log.
+- Cross-reference each review entry with the specific SLA document version and vendor contract being assessed.
+- Document any identified breaches or missed response times, including the vendor’s explanation and any
+  corrective actions taken.
+- Name the reviewer as a specific person, not a team or department, to avoid ambiguity in accountability.

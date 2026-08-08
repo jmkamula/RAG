@@ -1,0 +1,16 @@
+must_id: item:Art.26:rev_next_date
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Joint Controller Program in a dated document or review schedule.
+- Record the decision on the review date in meeting minutes or an official action log, including who agreed
+  to it.
+- Name the responsible individual who will oversee the next review, avoiding generic titles like "the
+  team" or "management".
+- Publish the planned review date in a location accessible to all relevant stakeholders, such as a compliance
+  calendar or shared document.

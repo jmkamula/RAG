@@ -1,0 +1,16 @@
+must_id: item:A.8.6:proc_runbook
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Threshold-breach runbook for common scenarios
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document clear, step-by-step instructions for responding to common capacity threshold breaches, such
+  as storage, memory, or network saturation.
+- Name the person or role responsible for executing each step in the runbook, using specific job titles
+  rather than generic team names.
+- Record the date and version of the runbook, updating it whenever scenarios or procedures change.
+- Attach or cross-reference logs or screenshots from recent real or test incidents to demonstrate the
+  runbook has been used and is actionable.

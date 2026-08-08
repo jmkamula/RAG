@@ -1,0 +1,38 @@
+leaf_id: req:A.5.26:incident_closure_record
+control_ref: A.5.26
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.25
+  standard_id: ISO27001:2022
+  title: Response to Information Security Incidents
+  category: direct
+  rationale: You need a documented process for responding to incidents before you can record their closure.
+    The closure record must reference how the incident was handled and resolved according to this process.
+  good_enough: A clear, current procedure for incident response exists and is being followed, even if
+    minor improvements are pending.
+- ref: A.5.24
+  standard_id: ISO27001:2022
+  title: Reporting Information Security Events
+  category: direct
+  rationale: Incidents must first be reported and registered before they can be closed. The closure record
+    must link to the original incident report.
+  good_enough: There is a working incident/event reporting mechanism and register, with each incident
+    assigned a unique identifier.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: Determining the Scope of the ISMS
+  category: foundational
+  rationale: The scope statement defines which incidents are in-scope for closure records. Without this,
+    you can't determine which incidents require documentation.
+  good_enough: A documented ISMS scope exists, covering the relevant organizational units and assets.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Information Security Roles and Responsibilities
+  category: foundational
+  rationale: Roles and responsibilities must be defined so it's clear who is authorized to close incidents
+    and complete closure records.
+  good_enough: Key roles for incident management and closure are assigned and communicated, even if job
+    descriptions are still being refined.

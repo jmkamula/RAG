@@ -1,0 +1,17 @@
+must_id: item:A.8.14:proc_a530_link
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Cross-link to A.5.30 ICT readiness — coordinated with broader recovery plan
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference the broader organisational recovery plan by title and version number within the failover procedure
+  document.
+- Cross-link the failover procedure to the ICT readiness control (A.5.30) by including a specific section
+  or appendix with relevant references.
+- Name the individual responsible for maintaining alignment between the failover procedure and the organisational
+  recovery plan.
+- Avoid using generic statements such as “refer to recovery plan” without specifying the exact document
+  and section referenced.

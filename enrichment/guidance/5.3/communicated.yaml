@@ -1,0 +1,17 @@
+must_id: item:5.3:communicated
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Roles communicated within the organization
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each ISMS role and its assigned individual in a matrix, listing full names rather than generic
+  titles or departments.
+- Document the date and method each role assignment was communicated to relevant staff, such as via email
+  or meeting minutes.
+- Retain a signed acknowledgement from each assigned individual confirming receipt and understanding of
+  their ISMS responsibilities.
+- Store a copy of the published matrix in a location accessible to all affected staff, with version control
+  showing the latest update.

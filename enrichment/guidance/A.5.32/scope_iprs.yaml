@@ -1,0 +1,17 @@
+must_id: item:A.5.32:scope_iprs
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Scope of IPRs covered (software licences, trademarks, copyrights, patents, trade secrets, AI
+  model weights / training data where applicable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all categories of intellectual property relevant to your organisation, including software licences,
+  trademarks, copyrights, patents, trade secrets, and AI assets if used.
+- Document each intellectual property category with a brief description and examples specific to your
+  organisation in the procedure.
+- Name the individual responsible for maintaining the IPR scope, avoiding generic titles like "the team"
+  or "management."
+- Record the date the IPR scope was last reviewed and updated in the procedure document.

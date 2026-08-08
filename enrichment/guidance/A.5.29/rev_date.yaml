@@ -1,0 +1,16 @@
+must_id: item:A.5.29:rev_date
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Review date within the planned 180-day interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent program review date in a central log, clearly showing it falls within the last
+  180 days.
+- Name the individual responsible for scheduling and conducting the review, listing their full name and
+  role.
+- Attach the signed review summary or meeting minutes, including the date and names of all participants.
+- Cross-reference the review log with the planned schedule to confirm no interval exceeds 180 days.
+- Specify the review owner as a named person, not a generic group or department.

@@ -1,0 +1,16 @@
+must_id: item:A.5.29:act_scenario_ref
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Triggered scenario reference per record (links to scenario register entry)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference the specific triggered scenario by its unique ID from your scenario register in each per-activation
+  plan record.
+- Cross-link each per-activation plan record to the corresponding scenario register entry using a direct
+  hyperlink or register page number.
+- Record the date and name of the person who linked the scenario to the activation plan in each record.
+- Name the scenario in the activation plan exactly as it appears in the scenario register—do not use abbreviations
+  or alternate titles.

@@ -1,0 +1,19 @@
+must_id: item:A.8.30:scope_boundary_a65
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Boundary with A.6.5 (staff augmentation governed there) + A.5.20 (general supplier security
+  contract terms)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name all outsourced software development activities in scope, listing each supplier and project in a
+  dated register maintained by a designated owner.
+- Cross-reference each listed activity to the relevant contract, confirming that A.5.20 supplier security
+  terms are included and up to date.
+- State explicitly in the register which activities are staff augmentation only, directing those to A.6.5
+  controls and excluding them from this scope.
+- Name the owner as a specific individual responsible for maintaining the register, not a team or department.
+- Document the latest review date and reviewer for the register to show regular validation of scope and
+  boundaries.

@@ -1,0 +1,18 @@
+must_id: item:B.8.2.6:ropa_transfers
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: Third-country / international-org transfers per row (Art.30.2.c) with cited safeguards
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity involving transfers to countries outside your jurisdiction in the Records
+  of Processing Activities (RoPA), specifying the destination country or international organisation.
+- Cite the specific legal safeguard relied upon for each transfer, such as standard contractual clauses
+  or adequacy decisions, directly in the corresponding RoPA row.
+- Name the individual responsible for authorising each international transfer, avoiding generic titles
+  like "the team" or "IT department".
+- Attach or cross-reference supporting documentation for each cited safeguard, such as signed agreements
+  or adequacy statements, within the RoPA or linked repository.
+- Record the date each transfer arrangement was last reviewed or updated to demonstrate ongoing oversight.

@@ -1,0 +1,20 @@
+must_id: item:A.8.33:selection
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Selection criteria — synthetic preferred; production-derived only with masking (cross-link
+  to A.8.11)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that synthetic data is the default choice for all test information unless a valid
+  exception is documented.
+- Cross-reference the masking requirements in control A.8.11 when production-derived data is used, and
+  include a direct link or appendix reference.
+- Name the person responsible for approving exceptions to synthetic data use as a specific individual,
+  not a team or department.
+- Record each exception decision with the date, the reason for using production-derived data, and evidence
+  of masking applied.
+- Document the selection criteria for test data in a dated, version-controlled procedure that is reviewed
+  and approved at least annually.

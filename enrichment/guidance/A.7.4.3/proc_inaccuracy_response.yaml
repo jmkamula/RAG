@@ -1,0 +1,17 @@
+must_id: item:A.7.4.3:proc_inaccuracy_response
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: Inaccuracy response — how the org responds when inaccuracy is detected (internal + subject-flagged)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step procedure for investigating and correcting inaccurate personal data, including
+  both internally discovered and data subject-reported issues, with version and approval date.
+- Assign responsibility for inaccuracy response to a named individual, not a team or department, and record
+  their name and role in the procedure.
+- Record each detected inaccuracy and the corrective action taken in a log, including detection date,
+  reporter, and resolution details.
+- Retain copies of all communications with data subjects regarding reported inaccuracies, including dates
+  and names of correspondents.

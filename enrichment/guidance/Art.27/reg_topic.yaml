@@ -1,0 +1,18 @@
+must_id: item:Art.27:reg_topic
+control_ref: Art.27
+standard_id: GDPR:2016/679
+must_text: Per-row topic (rights request routing, SA inquiry, breach communication)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the designated EU representative for each data processing activity as a specific individual, including
+  full name and contact details.
+- Document the date and method by which the representative was informed of their responsibilities for
+  each rights request, supervisory authority inquiry, and breach communication.
+- Record the routing procedure for each type of request or communication, specifying how and when the
+  representative is notified and involved.
+- State the outcome of each routed request or inquiry, including the date of response and the individual
+  who handled it.
+- Avoid listing the representative as a generic role or company name; use a named person to ensure accountability.

@@ -1,0 +1,42 @@
+leaf_id: req:A.5.7:intel_product_record
+control_ref: A.5.7
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that intelligence products are delivered
+    to the correct consumers and that downstream actions are traceable to accountable individuals or teams.
+    Without this, per-product records cannot reliably identify who received or acted on intelligence.
+  good_enough: Documented assignments showing who is responsible for producing, distributing, and consuming
+    intelligence products, even if not fully mapped to every product yet.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register is necessary to identify which systems, applications, or business
+    units are relevant consumers of intelligence products. This enables accurate mapping of intelligence
+    delivery and action to specific assets.
+  good_enough: A basic list of key assets and owners, sufficient to link intelligence products to at least
+    the main systems or teams they protect.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: A classification scheme ensures that intelligence products are labelled appropriately, guiding
+    their distribution and handling. This is essential for recording who can access each product and what
+    actions are appropriate.
+  good_enough: A simple scheme that distinguishes at least between public, internal, and restricted intelligence
+    products, with guidance on distribution.
+- ref: A.5.7
+  standard_id: ISO27001:2022
+  title: Threat Intelligence Feed Register
+  category: direct
+  rationale: The feed register documents the sources of threat intelligence, which must be referenced
+    in each per-product record to demonstrate traceability from source to consumer.
+  good_enough: A working list of current intelligence feeds, their providers, and basic details, even
+    if not fully formalized.

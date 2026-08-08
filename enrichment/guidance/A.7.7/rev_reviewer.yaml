@@ -1,0 +1,14 @@
+must_id: item:A.7.7:rev_reviewer
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Facilities + InfoSec + HR partner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer from Facilities, Information Security, and HR by full name and job title in the program
+  review record.
+- Record the date each reviewer completed their assessment in the review documentation.
+- Obtain and retain each reviewer's signature or written confirmation of their participation in the review.
+- Avoid listing a department or team as the reviewer; always specify individual names for accountability.

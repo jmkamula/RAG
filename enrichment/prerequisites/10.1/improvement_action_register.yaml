@@ -1,0 +1,48 @@
+leaf_id: req:10.1:improvement_action_register
+control_ref: '10.1'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '5.3'
+  standard_id: ISO27001:2022
+  title: Organizational Roles, Responsibilities and Authorities
+  category: foundational
+  rationale: Every improvement action must have a clearly assigned owner with the authority to drive it
+    to completion. Without defined roles and responsibilities, actions cannot be meaningfully tracked
+    or closed.
+  good_enough: A current, communicated roles and responsibilities matrix exists, and action owners can
+    be unambiguously assigned for each improvement.
+- ref: '9.2'
+  standard_id: ISO27001:2022
+  title: Internal Audit
+  category: direct
+  rationale: Internal audits are a major source of improvement actions. You need an active audit programme
+    to generate meaningful improvement items for the register.
+  good_enough: An audit schedule is in place and at least one recent audit has been completed, producing
+    findings that could drive improvement actions.
+- ref: '9.3'
+  standard_id: ISO27001:2022
+  title: Management Review
+  category: direct
+  rationale: Management reviews identify opportunities for ISMS improvement and are a key trigger for
+    new improvement actions. Without this process, the register will lack relevant input.
+  good_enough: Management review meetings are scheduled and at least one has occurred, with documented
+    outputs that could inform improvement actions.
+- ref: A.5.27
+  standard_id: ISO27001:2022
+  title: Lessons Learned
+  category: direct
+  rationale: The lessons-learned process ensures that post-incident insights are captured and translated
+    into improvement actions. This is a critical input to the register.
+  good_enough: A basic lessons-learned process is documented and has been used at least once to generate
+    improvement recommendations.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: Determining the Scope of the ISMS
+  category: foundational
+  rationale: The improvement action register must align with the defined ISMS scope to ensure all actions
+    are relevant and tracked appropriately.
+  good_enough: A current ISMS scope statement exists, so improvement actions can be mapped to the correct
+    boundaries.

@@ -1,0 +1,48 @@
+leaf_id: req:A.7.2.6:applicable_scope
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know the overall boundaries of your ISMS before defining which supplier relationships
+    fall under the privacy extension as PII processors. Without this, you can't reliably determine which
+    engagements are in or out of scope.
+  good_enough: A documented ISMS scope that clearly lists the business units, processes, and geographies
+    covered by your ISO 27001 program.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of privacy and supplier management roles is essential to accurately classify
+    supplier relationships as PII processors or otherwise. If roles are unclear, misclassification is
+    likely.
+  good_enough: A current RACI or similar document showing who is responsible for privacy and supplier
+    relationship management.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purpose for which PII is processed by each supplier to determine if they
+    act as a processor or in another capacity. This underpins correct engagement classification.
+  good_enough: A list or register showing the documented purpose of PII processing for each supplier relationship.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A working data classification scheme ensures you can identify which data handled by suppliers
+    is PII, which is necessary to scope processor engagements.
+  good_enough: A documented scheme that distinguishes PII from other data types, applied to supplier data
+    flows.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for processing PII with each supplier is critical to determine if
+    the relationship qualifies as a processor engagement under privacy law.
+  good_enough: A summary table or register showing the lawful basis for PII processing for each supplier
+    relationship.

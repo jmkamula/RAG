@@ -1,0 +1,17 @@
+must_id: item:A.8.13:scope_systems
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Systems / datasets enumerated with RPO tier per row (drawn from A.5.30 BIA)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems and datasets that require backup, referencing the outputs from your A.5.30 Business
+  Impact Analysis.
+- Assign a Recovery Point Objective (RPO) tier to each system or dataset in a dedicated column, based
+  on business needs.
+- Cross-reference each entry with the corresponding BIA record or identifier to show alignment between
+  backup scope and impact analysis.
+- Name the responsible individual for maintaining this backup scope list, not just a team or department.
+- Date and version the backup scope document to confirm it reflects the most current BIA results.

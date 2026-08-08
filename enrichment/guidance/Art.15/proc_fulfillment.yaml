@@ -1,0 +1,20 @@
+must_id: item:Art.15:proc_fulfillment
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Fulfillment steps — who searches which systems against the data flow inventory to assemble
+  the response
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific individual responsible for coordinating Data Subject Access Request (DSAR) fulfillment
+  in the procedure document.
+- List each system to be searched, referencing your current data flow inventory, and assign a named person
+  to search each one.
+- Document the step-by-step process for collecting data from all relevant systems, including how requests
+  are tracked and progress is recorded.
+- State how and where the search results are compiled, and record the date and person who completes the
+  response assembly.
+- Avoid describing the responsible party as "the team" or "IT"; always specify named individuals for each
+  search task.

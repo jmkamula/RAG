@@ -1,0 +1,16 @@
+must_id: item:A.7.4:scope_sites_covered
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: Sites covered by monitoring (drawn from A.7.1 applicable-sites scope)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical sites where monitoring is implemented, using the same site names as defined in your
+  A.7.1 applicable-sites scope document.
+- Document the monitoring methods used at each site, specifying technologies or processes in a dated record.
+- Cross-reference each monitored site to its entry in the A.7.1 scope register to confirm alignment.
+- Name the person responsible for maintaining the monitoring scope list as a specific individual, not
+  a team or department.
+- Retain evidence of periodic review of the monitoring scope, such as a dated sign-off or meeting minutes.

@@ -1,0 +1,16 @@
+must_id: item:Art.26:reg_review_date
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Per-row next-review date
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a specific next-review date for each joint controller arrangement entry in the register, using
+  a clear day/month/year format.
+- Assign responsibility for updating the next-review date to a named individual, not a team or department.
+- Document the method used to determine each next-review date, such as risk assessment or contractual
+  obligations, in a notes field for each entry.
+- Review the register to confirm no entries have blank, expired, or generic next-review dates like "TBD"
+  or "annually".

@@ -1,0 +1,19 @@
+must_id: item:Art.10:reg_purpose
+control_ref: Art.10
+standard_id: GDPR:2016/679
+must_text: Per-row purpose (must be narrow — pre-employment screening, sanctions check, regulatory KYC,
+  fraud investigation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific, narrow purpose for processing criminal data in each register entry, such as "pre-employment
+  screening" or "fraud investigation".
+- Record the lawful basis and relevant legal authority for each instance of criminal data processing in
+  the register entry.
+- Name the responsible individual overseeing each processing activity, avoiding generic roles like "HR
+  team" or "Compliance Department".
+- Confirm each register entry is dated to show when the processing activity was added or last reviewed.
+- Cross-reference each register entry with supporting documentation that demonstrates the necessity and
+  proportionality of the stated purpose.

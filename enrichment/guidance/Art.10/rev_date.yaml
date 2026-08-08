@@ -1,0 +1,16 @@
+must_id: item:Art.10:rev_date
+control_ref: Art.10
+standard_id: GDPR:2016/679
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Criminal Data Program in a dated entry, clearly visible in
+  the program review log.
+- Cross-reference the review date against the planned review schedule to confirm it falls within the required
+  interval.
+- Name the reviewer as a specific individual responsible for the review, not a group or department.
+- Retain evidence of the completed review, such as meeting minutes or a signed review summary, with the
+  corresponding review date.

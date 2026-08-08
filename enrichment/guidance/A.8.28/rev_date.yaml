@@ -1,0 +1,16 @@
+must_id: item:A.8.28:rev_date
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent secure coding program review date in a central log, including the name of the
+  reviewer and the completion date.
+- State the planned review interval for the secure coding program in a documented schedule, referencing
+  the policy or management decision that sets the interval.
+- Confirm the next scheduled review date is within the planned interval by cross-referencing the last
+  review date and the documented schedule.
+- Name the reviewer as a specific individual, not a group or department, in the review record.

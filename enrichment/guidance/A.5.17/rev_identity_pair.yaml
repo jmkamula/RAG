@@ -1,0 +1,20 @@
+must_id: item:A.5.17:rev_identity_pair
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Cross-reference to paired A.5.16 identity revocation record where this credential revocation
+  was identity-triggered (closes the loop)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, time, and unique identifier for each credential revocation or reissue in a dedicated
+  register.
+- Cross-reference each credential revocation entry to the corresponding identity revocation record from
+  A.5.16 when the action was identity-triggered.
+- Name the individual who authorized the credential revocation, ensuring a specific person is listed rather
+  than a group or department.
+- Attach supporting documentation, such as email or ticket, confirming the identity revocation event that
+  led to the credential action.
+- Review the register regularly to confirm all identity-triggered credential revocations have a valid,
+  linked A.5.16 record.

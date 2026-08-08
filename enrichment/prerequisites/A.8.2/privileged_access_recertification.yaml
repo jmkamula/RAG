@@ -1,0 +1,48 @@
+leaf_id: req:A.8.2:privileged_access_recertification
+control_ref: A.8.2
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.15
+  standard_id: ISO27001:2022
+  title: Access control
+  category: direct
+  rationale: A clear access-control policy is essential to define what constitutes privileged access and
+    to set the rules for granting, reviewing, and revoking such access. Without this, you cannot meaningfully
+    review or recertify privileged access.
+  good_enough: A documented access-control policy exists, specifying privileged roles and the criteria
+    for access assignment and review.
+- ref: A.5.3
+  standard_id: ISO27001:2022
+  title: Segregation of duties
+  category: direct
+  rationale: Segregation of duties ensures that no single individual has unchecked privileged access,
+    which directly impacts how privileged access is assigned and recertified. This must be defined before
+    recertification can be performed.
+  good_enough: A basic segregation-of-duties matrix or documented principle is in place, identifying key
+    functions that require separation.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register is needed to identify which systems and data require privileged
+    access, so you know what to review during recertification.
+  good_enough: A current list of key information assets and systems exists, with owners identified for
+    those requiring privileged access.
+- ref: A.8.18
+  standard_id: ISO27001:2022
+  title: Use of privileged utility programs
+  category: direct
+  rationale: Privileged utility programs are a common vector for elevated access. Understanding and documenting
+    their use is necessary to ensure all privileged access is included in the recertification process.
+  good_enough: A list of privileged utility programs in use is available, with responsible owners identified.
+- ref: A.8.4
+  standard_id: ISO27001:2022
+  title: Access to source code
+  category: direct
+  rationale: Access to source code is a form of privileged access. You must know who has this access and
+    under what conditions before you can recertify it.
+  good_enough: A record of individuals or roles with source code access exists, even if not yet fully
+    reviewed for appropriateness.

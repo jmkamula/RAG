@@ -1,0 +1,20 @@
+must_id: item:Art.10:proc_comprehensive_register
+control_ref: Art.10
+standard_id: GDPR:2016/679
+must_text: Restriction — comprehensive register of criminal convictions only under official authority
+  (e.g. police, public prosecution); other controllers process only specific cases
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific official authority responsible for maintaining any comprehensive register of criminal
+  convictions, such as the police or public prosecution office.
+- Document each instance where your organisation processes criminal conviction data, including the legal
+  basis, purpose, and the individual case details.
+- Confirm that your organisation does not maintain a comprehensive register of criminal convictions unless
+  you are an official authority permitted by law.
+- Record the decision and rationale for each processing activity involving criminal conviction data, signed
+  and dated by a named data protection officer or equivalent.
+- Avoid listing a team or department as the data owner; name a specific individual responsible for authorising
+  and overseeing criminal conviction data processing.

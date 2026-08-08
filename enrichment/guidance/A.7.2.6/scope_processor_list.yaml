@@ -1,0 +1,18 @@
+must_id: item:A.7.2.6:scope_processor_list
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: In-scope processors enumerated with classification rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all third-party processors currently handling personal data, including company names and contact
+  details, in a dated register.
+- Document the specific types of personal data each processor handles and the processing activities performed.
+- State the rationale for including each processor in scope, referencing legal, contractual, or operational
+  requirements.
+- Name the person responsible for maintaining and updating the processor register as a specific individual,
+  not a team or department.
+- Attach supporting contracts or data processing agreements for each processor entry to demonstrate the
+  relationship and scope.

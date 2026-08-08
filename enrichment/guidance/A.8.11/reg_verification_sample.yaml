@@ -1,0 +1,18 @@
+must_id: item:A.8.11:reg_verification_sample
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Per-row verification-sample link (re-identification residual-risk sample retained)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique identifier for each masked row in the register, linking it directly to the corresponding
+  original data sample.
+- Retain a copy of each original data sample used for verification, stored securely and dated to show
+  when masking was tested.
+- Document the residual risk assessment for each sample, including who performed it and the date of completion.
+- Name the responsible individual for maintaining the register—avoid listing a team or department as the
+  owner.
+- Cross-reference each verification sample to its masking method and dataset version, ensuring traceability
+  for every entry.

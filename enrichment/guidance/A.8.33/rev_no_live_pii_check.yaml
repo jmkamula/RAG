@@ -1,0 +1,19 @@
+must_id: item:A.8.33:rev_no_live_pii_check
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: No-live-PII spot-check in non-production environments (auditor-critical for GDPR)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual responsible for conducting spot-checks of non-production environments to confirm
+  no live personal data is present.
+- Document the date, scope, and results of each spot-check in a central log, including screenshots or
+  export evidence where possible.
+- Record the method used to verify that data is non-live, such as data masking or use of synthetic data,
+  in each test cycle entry.
+- Name the data owner who reviewed and signed off on the spot-check results, avoiding generic titles like
+  "IT team" or "QA department".
+- Retain signed review records for each spot-check cycle, showing both the check and the absence of live
+  personal data.

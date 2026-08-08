@@ -1,0 +1,20 @@
+must_id: item:B.8.2.5:scope_audit_tiers
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: 'Audit tier map (contract tier → audit rights: e.g. Enterprise → onsite / Business → questionnaire
+  / Startup → certification only)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Map each contract tier to its corresponding audit right in a table, specifying the exact audit method
+  allowed for each tier.
+- Document the rationale for assigning each audit right to each contract tier, referencing contractual
+  obligations or risk assessments.
+- Name the individual responsible for maintaining and updating the audit tier map, avoiding generic roles
+  like "the team" or "IT".
+- Date and version-control the audit tier map, ensuring the latest approved version is clearly marked
+  and previous versions are retained for reference.
+- Cross-reference the audit tier map with actual contracts to confirm that stated audit rights align with
+  contractual language.

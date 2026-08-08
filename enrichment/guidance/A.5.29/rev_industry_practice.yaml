@@ -1,0 +1,20 @@
+must_id: item:A.5.29:rev_industry_practice
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Industry-practice scan (notable disruptions in the sector; how peers handled; lessons applicable
+  to our plan)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the industry-practice scan, recording their name and assignment date
+  in the review documentation.
+- Document at least three recent, notable disruptions in your sector, including dates and sources for
+  each event.
+- Summarize how peer organizations responded to these disruptions, citing specific public reports or industry
+  publications.
+- State the lessons learned from these peer responses and explicitly link each lesson to a proposed update
+  or confirmation of your own continuity-security plan.
+- Record the date and names of all participants who reviewed and approved the updated plan, avoiding unsigned
+  or undated approval records.

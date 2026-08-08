@@ -1,0 +1,20 @@
+must_id: item:A.5.32:audit_entitlement
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Entitlement check — deployed seats/cores vs licence allowance per commercial entry, exceptions
+  remediated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to be responsible for conducting licence entitlement checks, listing their
+  name and role in the audit log.
+- Document the actual number of deployed software seats or cores for each licensed product in a dated
+  inventory record.
+- Cross-reference each deployed count against the corresponding licence allowance as stated in the current
+  commercial agreement or contract.
+- Record any exceptions where deployments exceed entitlements, along with the remediation action taken
+  and the date completed.
+- Name the owner as a specific individual—do not use generic labels like "IT team" or "system administrator"
+  in the audit documentation.

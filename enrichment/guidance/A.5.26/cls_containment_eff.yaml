@@ -1,0 +1,17 @@
+must_id: item:A.5.26:cls_containment_eff
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Containment effectiveness assessed (did the actions taken actually limit damage)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific containment actions taken for each incident in the closure record, including dates
+  and responsible individuals.
+- Document an assessment of whether the containment actions effectively limited the impact or spread of
+  the incident, with supporting evidence.
+- Name the person who performed the effectiveness assessment, ensuring this is a named individual and
+  not a group or generic title.
+- Attach or reference any follow-up analysis or metrics that demonstrate the outcome of the containment
+  efforts for the incident.

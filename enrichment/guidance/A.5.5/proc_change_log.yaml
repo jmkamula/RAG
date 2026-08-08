@@ -1,0 +1,15 @@
+must_id: item:A.5.5:proc_change_log
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Change-log requirement for any register edit so the audit trail is preserved
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each change to the register in a dedicated change-log, including the date, nature of the change,
+  and the person making the edit.
+- Assign responsibility for updating the change-log to a named individual, not a team or department.
+- Retain previous versions of the register alongside the change-log to allow full reconstruction of the
+  edit history.
+- Confirm that each change-log entry is timestamped and includes a brief, specific reason for the change.

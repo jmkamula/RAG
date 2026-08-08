@@ -1,0 +1,16 @@
+must_id: item:A.5.16:rev_actual_timestamp
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Actual revocation timestamp per record (drives SLA-met calculation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time when each user’s access is revoked in the revocation log for every identity.
+- Name the individual who performed the revocation for each entry, avoiding generic labels like "IT" or
+  "admin team".
+- Cross-reference each revocation entry with the corresponding access removal request or trigger event
+  for traceability.
+- Retain the revocation record alongside supporting evidence, such as screenshots or system logs, showing
+  the access was removed at the recorded time.

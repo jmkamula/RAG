@@ -1,0 +1,18 @@
+must_id: item:B.8.4.3:scope_internal_flows
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Internal + cross-region flows (backup replication / DR / warehouse)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all internal and cross-region data transmissions involving personal data, including backup replication,
+  disaster recovery, and data warehouse transfers, in a dated register.
+- Name the specific systems and locations involved in each data flow, avoiding generic descriptions such
+  as "cloud" or "Europe."
+- Assign a named individual responsible for maintaining and updating the transmission scope register.
+- Record the legal basis or contractual terms for each cross-region transfer, referencing the relevant
+  agreement or policy document.
+- Confirm the register is reviewed and updated at least annually, with the review date and reviewer’s
+  name clearly documented.

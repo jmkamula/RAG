@@ -1,0 +1,42 @@
+leaf_id: req:A.5.16:identity_register
+control_ref: A.5.16
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organization and which systems are in-scope for the ISMS
+    before you can determine which identities must be tracked in the register. The scope defines the population
+    of identities to be catalogued.
+  good_enough: A documented and approved scope statement that clearly lists included business units, systems,
+    and locations is available.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register identifies the systems, applications, and services where identities exist.
+    Without this, you can't reliably enumerate all identities that need to be included in the identity
+    register.
+  good_enough: A current asset register exists, listing all key information systems and platforms where
+    identities are provisioned.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures you know who owns each identity and
+    who is responsible for maintaining the register. This is critical for accountability and register
+    accuracy.
+  good_enough: A documented list of roles and responsibilities for identity lifecycle management is available
+    and assigned.
+- ref: A.6.5
+  standard_id: ISO27001:2022
+  title: Responsibilities after termination or change of employment
+  category: direct
+  rationale: You must have a process for handling identity status changes when people leave or change
+    roles. This ensures the register reflects current, accurate identity status and supports timely revocation.
+  good_enough: A process exists for updating or revoking identities promptly after employment changes,
+    even if not yet fully automated.

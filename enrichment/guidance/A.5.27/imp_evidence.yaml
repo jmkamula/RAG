@@ -1,0 +1,20 @@
+must_id: item:A.5.27:imp_evidence
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Evidence of change (control configuration diff, training-record entry, procedure-revision link,
+  risk-register entry)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each lesson learned with a unique identifier, date, and a clear description of the issue or opportunity
+  identified.
+- Document the specific change made, such as a configuration update, revised procedure, or new training
+  entry, linking it to the lesson learned.
+- Cross-reference the improvement action in the relevant risk register or procedure document, including
+  the date and responsible individual.
+- Attach before-and-after evidence, such as screenshots of configuration changes or marked-up procedure
+  revisions, to demonstrate the actual improvement.
+- Name the responsible person for each improvement action as a specific individual, not a group or generic
+  role.

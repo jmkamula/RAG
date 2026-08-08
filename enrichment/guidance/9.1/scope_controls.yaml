@@ -1,0 +1,19 @@
+must_id: item:9.1:scope_controls
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Annex A controls in measurement scope (e.g. MFA coverage, patch SLA, awareness completion rate)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all Annex A controls included in your measurement scope, referencing their specific control numbers
+  and descriptions in a dated document.
+- Document the exact metrics used for each control, such as multi-factor authentication coverage or security
+  patch timelines, in a measurement register.
+- Name the individual responsible for maintaining and updating the measurement scope, avoiding generic
+  titles like "IT team" or "Security Department."
+- Record the date when the measurement scope was last reviewed and approved by management, attaching evidence
+  of approval such as a signed meeting minute.
+- Cross-reference each metric to its supporting data source, such as system reports or training completion
+  logs, in your measurement documentation.

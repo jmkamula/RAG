@@ -1,0 +1,18 @@
+must_id: item:A.5.11:reg_data_preserved
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Data-preserved flag per row (org information migrated/captured before wipe)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a "Data Preserved" column to the Leaver Asset Return Register for each asset entry, with a clear
+  Yes/No flag.
+- Record the date and method of data migration or capture for each asset before any data wipe, referencing
+  supporting evidence if available.
+- Name the individual responsible for verifying data preservation per asset, using their full name rather
+  than a team or department.
+- Confirm that each asset row is updated before asset wipe or return, and that no row is left blank or
+  marked "N/A" without justification.
+- Retain supporting documentation, such as screenshots or transfer logs, for each "Yes" flag in the register.

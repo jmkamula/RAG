@@ -1,0 +1,19 @@
+must_id: item:A.8.24:exceptions
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Exceptions process for legacy algorithms with compensating-control + retirement plan
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a formal process for requesting exceptions to cryptography standards, including required justification
+  and approval steps, in the policy.
+- Name a specific individual as the approver for cryptography exceptions—avoid listing a team or generic
+  role.
+- Record each approved exception with details of the legacy algorithm, compensating controls in place,
+  and the date of approval.
+- Attach a written retirement plan for each exception, specifying target dates and responsible persons
+  for phasing out legacy algorithms.
+- Review and update the exception register at least annually, noting any changes in status or progress
+  on retirement plans.

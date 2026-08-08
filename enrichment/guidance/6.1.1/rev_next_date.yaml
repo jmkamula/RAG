@@ -1,0 +1,14 @@
+must_id: item:6.1.1:rev_next_date
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date in the Planning Program Review document, using a clear and specific
+  calendar date.
+- Name the individual responsible for conducting the next review, listing their full name and job title.
+- Record the date when the current review was completed to show the review cycle timeline.
+- Avoid leaving the next review date blank or stating only a vague timeframe such as "annually" or "TBD".

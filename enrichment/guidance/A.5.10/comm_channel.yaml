@@ -1,0 +1,18 @@
+must_id: item:A.5.10:comm_channel
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Channel used (mandatory training module, intranet publication with notification, signature
+  campaign)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific communication channel used to share the Acceptable Use Policy, such as "mandatory
+  training module" or "intranet publication with notification."
+- Document the date the policy was communicated and the name of the person responsible for initiating
+  the communication.
+- Retain evidence of user acknowledgment, such as completed training records or signed acceptance forms,
+  linked to the communication channel.
+- Name the communication owner as a specific individual, not a group or department, to avoid ambiguity
+  in accountability.

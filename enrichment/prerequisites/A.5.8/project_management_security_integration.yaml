@@ -1,0 +1,49 @@
+leaf_id: req:A.5.8:project_management_security_integration
+control_ref: A.5.8
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the business and which types of projects are covered by your
+    ISMS before you can define how security is integrated into project management. The scope sets the
+    boundaries for which projects and activities the procedure must address.
+  good_enough: A clear, approved scope statement that identifies the organizational units, activities,
+    and project types included in the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The project management security procedure must align with the organization's overarching
+    information security policy, ensuring consistency in objectives and principles across all projects.
+  good_enough: A published, accessible information security policy that sets out the organization's security
+    objectives and high-level commitments.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of security roles and responsibilities is essential before defining who
+    does what in project management processes. Without this, you can't specify accountable parties in
+    the procedure.
+  good_enough: A documented list or matrix showing who is responsible for information security in projects
+    and related activities.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding how risks are identified and assessed is critical for integrating security
+    into project management, as risk-based decisions will shape project controls and acceptance criteria.
+  good_enough: A current, organization-wide risk assessment methodology and at least one completed risk
+    assessment relevant to projects.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: A classification scheme is needed to guide how information is handled and protected within
+    projects, especially when defining deliverables and security gates.
+  good_enough: A documented scheme that defines information classification levels and handling requirements,
+    available to project teams.

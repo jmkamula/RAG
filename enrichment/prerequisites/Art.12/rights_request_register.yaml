@@ -1,0 +1,41 @@
+leaf_id: req:Art.12:rights_request_register
+control_ref: Art.12
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of all processing activities to identify which data subject
+    rights may apply and to whom. This ensures that rights requests are logged against the correct processing
+    operations.
+  good_enough: A basic RoPA exists, listing all major processing activities and their owners, even if
+    some details are still being refined.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity is essential to determine which rights
+    apply or may be restricted in response to a request. This prevents errors when logging and responding
+    to rights requests.
+  good_enough: Each processing activity in the RoPA has a stated lawful basis, even if not yet fully documented
+    for every sub-activity.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated DPO (or clear responsibility for data protection) is needed to oversee the rights
+    request process and ensure the register is maintained and reviewed.
+  good_enough: A named person or team is responsible for data protection tasks, even if a formal DPO appointment
+    is still pending.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope statement clarifies which parts of the organisation and which data processing
+    activities are covered, ensuring the register includes all relevant rights requests.
+  good_enough: A draft scope statement exists that covers the main business units and processing activities
+    relevant to GDPR compliance.

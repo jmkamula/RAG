@@ -1,0 +1,19 @@
+must_id: item:A.7.2.7:rev_essence_publication_audit
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Essence-publication audit — sampled arrangements verified to have published essence reachable
+  by subjects
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each joint controller arrangement and record its unique reference in a central register with
+  a named responsible contact for each.
+- Document the published summary ("essence") of each arrangement, including where and how data subjects
+  can access it, with a direct URL or physical location.
+- Confirm the publication date and method for each essence, retaining a dated screenshot or copy as evidence
+  of public availability.
+- Cross-reference each arrangement in the register with its corresponding published essence to demonstrate
+  that every arrangement is covered.
+- Name the responsible individual for publication — do not list a team or department as the owner.

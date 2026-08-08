@@ -1,0 +1,16 @@
+must_id: item:B.8.2.2:reg_last_verified
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: Last verification date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the last verification date for each customer purpose entry in the register, using a standard
+  date format such as YYYY-MM-DD.
+- Name the individual who performed the verification beside each date to provide clear accountability.
+- Cross-reference each verification date with supporting evidence, such as an email confirmation or meeting
+  minutes, stored in an accessible location.
+- Avoid leaving any verification date field blank or marked as "ongoing"—each row must show a specific,
+  completed date.

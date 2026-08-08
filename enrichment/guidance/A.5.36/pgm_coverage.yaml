@@ -1,0 +1,19 @@
+must_id: item:A.5.36:pgm_coverage
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Coverage check — did the schedule actually run? what fraction of catalogue reviewed in period?
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the actual dates each scheduled compliance review took place during the period in a dated review
+  log.
+- Record which items from the compliance catalogue were reviewed in each session, referencing catalogue
+  identifiers.
+- Calculate and state the percentage of the total compliance catalogue that was reviewed during the period,
+  showing your working.
+- Name the person who verified the review coverage calculation as a specific individual, not a group or
+  department.
+- Attach evidence of any missed or rescheduled reviews, including explanations and approval from a named
+  decision-maker.

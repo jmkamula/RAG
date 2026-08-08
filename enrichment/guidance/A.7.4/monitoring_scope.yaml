@@ -1,0 +1,16 @@
+must_id: item:A.7.4:monitoring_scope
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: Monitoring scope stated (premises perimeter, secure areas, equipment rooms, entry/exit points)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact areas covered by monitoring, such as premises perimeter, secure areas, equipment rooms,
+  and all entry/exit points, in the procedure document.
+- Name the specific individual responsible for maintaining and updating the monitoring scope, avoiding
+  generic roles like "security team."
+- Record the date the monitoring scope was last reviewed and approved by management in the procedure document.
+- Attach a site map or list that cross-references each monitored area with its corresponding monitoring
+  method or device.

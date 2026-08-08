@@ -1,0 +1,15 @@
+must_id: item:A.7.3.2:reg_version_effective
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: Version + effective date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the version number for each notice artifact in a dedicated column within the register.
+- Enter the effective date for each notice artifact in a separate column, ensuring the date reflects when
+  the artifact became valid.
+- Name the person responsible for updating version and effective date information for each entry, using
+  their full name.
+- Confirm that no row lists "current" or "latest" instead of a specific version number or date.

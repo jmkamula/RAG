@@ -1,0 +1,40 @@
+leaf_id: req:A.8.33:test_data_program_review
+control_ref: A.8.33
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The test data program review depends on knowing what test data assets exist, where they are
+    stored, and their current status. Without an up-to-date asset register, you cannot verify register
+    currency or perform meaningful spot-checks.
+  good_enough: Asset register includes all known test data sets and locations, updated within the last
+    year.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: You need a clear data classification scheme to determine what constitutes live PII and how
+    test data should be masked or handled. This underpins effective spot-checks and masking effectiveness
+    reviews.
+  good_enough: Classification scheme is documented and applied to test data, with clear definitions for
+    live PII and masked data.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement ensures that test data and related systems are included within the ISMS,
+    so the review covers all relevant areas. If test data is out of scope, the review may miss critical
+    assets.
+  good_enough: ISMS scope statement explicitly includes test data environments and processes.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles is necessary to ensure accountability for maintaining the test
+    data register, performing spot-checks, and conducting the annual review.
+  good_enough: Roles for test data management and review are assigned and communicated to relevant staff.

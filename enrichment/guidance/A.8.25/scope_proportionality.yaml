@@ -1,0 +1,20 @@
+must_id: item:A.8.25:scope_proportionality
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Proportionality rules per project class (lightweight gates for low-risk; full SDLC for customer-facing
+  PII-touching)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the criteria used to classify projects by risk, including examples of low-risk and high-risk
+  project types, in a dated policy document.
+- Name the person or role responsible for applying proportionality rules to each new project, listing
+  them in the SDLC scope register.
+- State the specific SDLC requirements for each project class, showing which controls are mandatory for
+  high-risk and which are optional for low-risk.
+- Record the classification and applied SDLC controls for each project in a project log, including the
+  date and decision-maker.
+- Avoid using generic terms like "all projects" or "as needed" in your SDLC scope—specify clear rules
+  for each project class.

@@ -1,0 +1,16 @@
+must_id: item:A.5.23:exit_authoriser
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Authoriser of the exit (or of the delay + risk acceptance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the authoriser of the cloud service exit or migration as a specific individual, not a group or
+  department.
+- Record the authoriser’s written approval of the exit, or of any delay and associated risk acceptance,
+  with a date and signature.
+- Retain supporting documentation showing the decision rationale and any risk assessments reviewed by
+  the authoriser.
+- Cross-reference the authorisation record in your cloud service register or migration plan for traceability.

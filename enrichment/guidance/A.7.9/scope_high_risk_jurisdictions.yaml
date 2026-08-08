@@ -1,0 +1,19 @@
+must_id: item:A.7.9:scope_high_risk_jurisdictions
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: High-risk-jurisdiction list (extra precautions — loaner-only, data minimisation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all countries considered high-risk for data protection or information security in a dated document
+  approved by the information security manager.
+- Document the specific asset types and data classes that require extra precautions when handled in or
+  transferred to each high-risk jurisdiction.
+- State the additional controls enforced for these jurisdictions, such as loaner device use or data minimisation,
+  in a written procedure.
+- Name the individual responsible for maintaining and updating the high-risk jurisdiction list, avoiding
+  generic roles like "IT" or "security team".
+- Retain evidence of periodic reviews and updates to the high-risk jurisdiction list, including the review
+  date and reviewer’s name.

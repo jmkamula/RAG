@@ -1,0 +1,17 @@
+must_id: item:4.3:interfaces
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Interfaces and dependencies with other organisations
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all external organisations your information security management system interacts with, including
+  suppliers, partners, and regulators, in the scope statement.
+- Describe the nature of each interface or dependency, specifying what information, services, or processes
+  are shared or relied upon.
+- Name a specific individual responsible for managing each external interface or dependency, avoiding
+  generic roles like "the team" or "IT".
+- Date and version the scope statement to show when interfaces and dependencies were last reviewed and
+  updated.

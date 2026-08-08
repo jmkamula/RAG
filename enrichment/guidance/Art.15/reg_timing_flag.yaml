@@ -1,0 +1,18 @@
+must_id: item:Art.15:reg_timing_flag
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Timing compliance flag (within 1 month / extended per Art.12.3 / late)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each data subject access request (DSAR) is received in the register, ensuring the entry
+  is timestamped and linked to the specific requestor.
+- Document the date of your response to each DSAR, clearly noting whether the response was within one
+  month or if an extension was applied.
+- State the reason for any extension granted under Article 12.3, referencing supporting correspondence
+  or documentation in the register.
+- Flag any DSARs responded to after the permitted timeframe as "late" in the register, with an explanation
+  for the delay.
+- Name the owner responsible for monitoring DSAR timing as a specific individual, not as a team or department.

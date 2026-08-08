@@ -1,0 +1,19 @@
+must_id: item:A.8.14:rev_bia_alignment
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Cross-check with A.5.30 BIA (any availability-tier change → redundancy approach re-evaluation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for the redundancy program review as a specific individual, not a team or
+  department.
+- Cross-reference the most recent Business Impact Analysis (BIA) record, including its date and any documented
+  availability-tier changes.
+- Document any changes in system or service availability tiers and explicitly state if these triggered
+  a re-evaluation of redundancy measures.
+- Record the outcome of the redundancy approach re-evaluation, including the date, findings, and any actions
+  taken or decisions made.
+- Retain meeting minutes or review notes that show the linkage between BIA updates and redundancy program
+  adjustments.

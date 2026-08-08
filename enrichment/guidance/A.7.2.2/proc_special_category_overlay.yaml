@@ -1,0 +1,19 @@
+must_id: item:A.7.2.2:proc_special_category_overlay
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: Special-category overlay (Art.9/10 basis required in addition to Art.6 for health, biometric,
+  criminal, etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific lawful basis under Article 9 or 10 for each special-category data processing activity
+  in your assessment documentation.
+- Document the rationale for choosing each Article 9 or 10 basis, referencing the relevant processing
+  purpose and data type.
+- Assign a named individual responsible for reviewing and updating the lawful basis assessment annually.
+- Attach supporting evidence, such as policy excerpts or consent forms, that demonstrate compliance with
+  the identified Article 9 or 10 basis.
+- Avoid using generic justifications or boilerplate text; tailor each assessment to the actual processing
+  activity and data involved.

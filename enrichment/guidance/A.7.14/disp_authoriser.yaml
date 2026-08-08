@@ -1,0 +1,14 @@
+must_id: item:A.7.14:disp_authoriser
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Per-record authoriser
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual authorising each equipment disposal by full name and job title in the disposal record.
+- Record the date and time of authorisation for each disposal entry to provide a clear audit trail.
+- Obtain a physical or digital signature from the authoriser on each disposal record to confirm approval.
+- Avoid listing groups or departments as the authoriser; specify a single accountable person for each
+  disposal event.

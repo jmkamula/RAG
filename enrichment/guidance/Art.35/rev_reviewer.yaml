@@ -1,0 +1,18 @@
+must_id: item:Art.35:rev_reviewer
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO + executive sponsor + lead privacy engineer)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'Name the reviewer as a specific individual for each required role: Data Protection Officer, executive
+  sponsor, and lead privacy engineer.'
+- Record the full name, job title, and contact details of each reviewer in the DPIA program review document.
+- Confirm the date each reviewer participated in the DPIA program review and include this date in the
+  review record.
+- Obtain a signature or written confirmation from each reviewer to evidence their involvement in the DPIA
+  program review.
+- Avoid listing generic roles or teams as reviewers; always identify named individuals for each required
+  position.

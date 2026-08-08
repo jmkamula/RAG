@@ -1,0 +1,19 @@
+must_id: item:A.6.3:scope_special_topics
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Special-topic modules tied to specific compliance regimes (GDPR for PII handlers, PCI for payment-card
+  handlers, HIPAA for healthcare)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all staff roles that handle personal data, payment card data, or healthcare data, listing named
+  individuals and their assigned compliance regimes.
+- Document the curriculum for each special-topic module, clearly linking content to the relevant compliance
+  regime (GDPR, PCI DSS, HIPAA).
+- Record completion dates and participant names for each special-topic training session, keeping attendance
+  logs for each compliance regime.
+- Name the training module owner as a specific individual responsible for content accuracy and updates,
+  not as a team or department.
+- Retain copies of training materials and attendance records for each compliance regime, dated and version-controlled.

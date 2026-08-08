@@ -1,0 +1,18 @@
+must_id: item:A.5.13:app_legacy_done
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Legacy-asset remediation completion noted per record (pre-existing items retro-labelled within
+  the timeline)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each legacy asset was retroactively labelled in the application record, showing completion
+  within the required timeline.
+- Name the individual responsible for updating each legacy asset’s label, ensuring a specific person is
+  listed rather than a team or department.
+- Attach evidence of the labelling action, such as a screenshot or system log entry, to each asset’s application
+  record.
+- Document any exceptions or delays for assets not labelled within the timeline, including reasons and
+  approval from a designated authority.

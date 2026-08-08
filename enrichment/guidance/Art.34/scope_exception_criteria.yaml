@@ -1,0 +1,20 @@
+must_id: item:Art.34:scope_exception_criteria
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: Art.34.3 exception criteria operationalised (encryption deemed appropriate / risk-mitigation
+  measures / disproportionate effort definition)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific encryption methods used to protect personal data, including technology type and
+  implementation date, in a dated technical record.
+- State the additional risk-mitigation measures in place beyond encryption, listing each measure and the
+  date it was put into operation.
+- Define what constitutes "disproportionate effort" for your organisation in a written statement, approved
+  and signed by a named senior manager.
+- Name the individual responsible for reviewing and updating the exception criteria, avoiding generic
+  titles like "the team" or "IT department".
+- Retain evidence of each exception decision, including the rationale and the date, in a central register
+  accessible for audit.

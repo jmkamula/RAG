@@ -1,0 +1,17 @@
+must_id: item:A.7.10:reg_last_seen
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Per-row last-seen timestamp (drives stale-issue detection)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time each storage media item was last physically checked or used in a dedicated
+  "last-seen" column in the register.
+- Name the person who performed the last check or verification for each storage media item, ensuring individual
+  accountability.
+- Update the "last-seen" timestamp immediately after each inventory check, movement, or usage event for
+  every item in the register.
+- Avoid leaving the "last-seen" field blank or using generic entries like "recent" or "unknown"—enter
+  a specific, dated value for every row.

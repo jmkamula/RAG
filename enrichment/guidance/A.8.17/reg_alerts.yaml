@@ -1,0 +1,16 @@
+must_id: item:A.8.17:reg_alerts
+control_ref: A.8.17
+standard_id: ISO27001:2022
+must_text: Per-row outstanding alerts (drift exceeded / source lost)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the current synchronization status for each system in the register, including any alerts for
+  time drift or lost time source.
+- Document the date and time when each alert was detected, along with a brief description of the issue.
+- Assign responsibility for investigating and resolving each alert to a named individual, not a generic
+  team or department.
+- Update the register with the resolution status and the date the alert was cleared for each affected
+  system.

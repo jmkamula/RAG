@@ -1,0 +1,19 @@
+must_id: item:A.8.16:siem_use_cases
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: SIEM use-case catalogue with coverage map (each use case mapped to detection method + asset
+  class)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each SIEM use case in a catalogue, including a clear description and a unique identifier for traceability.
+- Map every use case to its specific detection method, such as log correlation, anomaly detection, or
+  alerting rule, in the catalogue.
+- Link each use case to the relevant asset class, such as servers, endpoints, or network devices, specifying
+  asset types by name.
+- Name the catalogue owner as a specific individual, not a team or department, and record the date of
+  last update.
+- Cross-reference the catalogue with your current asset inventory and detection tool configurations to
+  confirm all critical asset classes are covered.

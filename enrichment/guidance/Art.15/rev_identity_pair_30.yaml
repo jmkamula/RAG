@@ -1,0 +1,19 @@
+must_id: item:Art.15:rev_identity_pair_30
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Bidirectional Art.15 ↔ Art.30 RoPA pair check — every system the review period's DSARs actually
+  queried is captured in the data flow inventory; every system the inventory lists was reachable when
+  DSARs landed on it (closes the silent inventory-drift gap)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each system accessed during the review period’s DSARs against your current data flow
+  inventory, listing matches in a dated record.
+- Identify any system in the inventory that was not actually queried by DSARs during the review period,
+  and document the reason.
+- Record any system accessed for DSARs that is missing from the inventory, and update the inventory entry
+  with a date and named approver.
+- Name the reviewer as a specific individual responsible for this check—do not list a team or department.
+- Sign and date the completed cross-check record, attaching it to the DSAR process review artefact.

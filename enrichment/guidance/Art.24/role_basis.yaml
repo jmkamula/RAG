@@ -1,0 +1,18 @@
+must_id: item:Art.24:role_basis
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Per-row decision basis (who determines means and purposes — EDPB Guidelines 7/2020 test)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State for each processing activity who determines both the purposes and the means, referencing the EDPB
+  Guidelines 7/2020 test.
+- Record the named individual or job title responsible for making the controller or processor decision
+  for each activity.
+- Document the date the decision was made and the rationale supporting the classification for each processing
+  activity.
+- Attach supporting evidence, such as meeting minutes or signed statements, confirming the decision for
+  each row.
+- Name the decision-maker as a specific person or role, not a group or generic department.

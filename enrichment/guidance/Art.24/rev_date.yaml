@@ -1,0 +1,15 @@
+must_id: item:Art.24:rev_date
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the accountability program in a dated log or register.
+- Cross-reference the documented review date with your established review schedule to confirm it falls
+  within the planned interval.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Retain evidence of the review meeting or process, such as signed minutes or a summary report, with the
+  review date clearly shown.

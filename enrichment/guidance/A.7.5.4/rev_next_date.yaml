@@ -1,0 +1,15 @@
+must_id: item:A.7.5.4:rev_next_date
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Disclosure Records Program in a clearly visible section of
+  the review document.
+- Name the individual responsible for scheduling the next review, including their full name and job title.
+- Record the date when the current review was completed to show the basis for the next review cycle.
+- Avoid leaving the next review date blank or stating "TBD"—auditors will flag missing or vague future
+  review dates.

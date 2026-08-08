@@ -1,0 +1,18 @@
+must_id: item:A.7.2.2:reg_purpose_link
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: Purpose link (which A.7.2.1 purpose(s) this basis authorises)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each lawful basis entry in the register to the specific purpose(s) listed under A.7.2.1
+  that it authorises.
+- Record the unique identifier or title of each purpose alongside the lawful basis entry, ensuring the
+  link is clear and unambiguous.
+- Name the person responsible for maintaining these cross-links, identifying an individual rather than
+  a team or department.
+- Document the date each cross-link was last reviewed or updated to show ongoing accuracy.
+- Avoid using generic or catch-all statements like "all purposes"—specify only the relevant purposes for
+  each lawful basis.

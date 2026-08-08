@@ -1,0 +1,16 @@
+must_id: item:7.2:rev_reviewer
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (HR partner + ISMS Manager + relevant function heads)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each reviewer as a specific individual by full name and job title, including the HR partner, ISMS
+  Manager, and relevant function heads.
+- Record the date each reviewer completed their review on the Competence Program Review document.
+- Obtain and retain a signature or written confirmation from each reviewer, showing their explicit approval
+  of the review.
+- Avoid listing groups or departments as reviewers; always identify named individuals to ensure clear
+  accountability.

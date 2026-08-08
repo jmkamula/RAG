@@ -1,0 +1,15 @@
+must_id: item:A.5.16:rev_effective_date
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Effective date per record (last working day OR contract expiry OR incident decision time)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact effective date of each identity revocation in the revocation log, specifying last working
+  day, contract end, or incident decision time.
+- Name the individual who authorized the revocation and include their signature or approval in the record.
+- Document the reason for revocation alongside the effective date to provide clear context for the timing
+  decision.
+- Avoid using vague dates such as "immediate" or "ASAP"; specify the actual calendar date for each revocation.

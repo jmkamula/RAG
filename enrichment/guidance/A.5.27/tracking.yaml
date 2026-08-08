@@ -1,0 +1,16 @@
+must_id: item:A.5.27:tracking
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Tracking actions to closure with status updates
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each lesson learned from an information security incident in a dated log, including a clear description
+  of the issue and recommended actions.
+- Assign a named individual responsible for each action item, avoiding generic owners like "the team"
+  or "IT department."
+- Update the log with status changes for each action, including dates and brief notes on progress or completion.
+- Document the final closure of each action with a completion date and confirmation from the responsible
+  individual.

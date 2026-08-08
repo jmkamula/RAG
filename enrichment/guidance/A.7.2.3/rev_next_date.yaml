@@ -1,0 +1,16 @@
+must_id: item:A.7.2.3:rev_next_date
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Consent Determination Program in the review document, using
+  a clear and specific calendar date.
+- Record the name of the individual responsible for scheduling and conducting the next review, not just
+  a team or department.
+- Confirm that the stated review date is no more than one year from the current review date, unless justified
+  and documented.
+- Retain the signed approval of the current review, showing agreement on the next planned review date.

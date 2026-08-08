@@ -1,0 +1,17 @@
+must_id: item:A.5.1:legal_compliance
+control_ref: A.5.1
+standard_id: ISO27001:2022
+must_text: Commitment to legal, regulatory and contractual compliance
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy that the organisation is committed to meeting all relevant legal, regulatory, and
+  contractual information security obligations.
+- Name the person or role responsible for monitoring changes in applicable laws, regulations, and contracts
+  within the policy document.
+- Record the approval of the policy by a named senior manager, including their signature and the date
+  of approval.
+- Specify the date of the latest policy review and ensure it is not older than one year from today.
+- Name the owner as a specific individual, not a generic group or department, to avoid ambiguity in accountability.

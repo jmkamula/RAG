@@ -1,0 +1,19 @@
+must_id: item:6.1.1:reg_effectiveness
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Per-row effectiveness evaluation captured on completion
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the completion date for each action in the ISMS Planned Action Register to show when the action
+  was finalized.
+- Document a clear, specific effectiveness evaluation for each completed action, stating whether the intended
+  outcome was achieved.
+- Name the individual who performed the effectiveness evaluation for each action, avoiding generic labels
+  like "team" or "management."
+- Attach supporting evidence, such as test results or review notes, to each evaluation entry to substantiate
+  the effectiveness assessment.
+- Review the register regularly to confirm that every completed action has a corresponding, dated effectiveness
+  evaluation entry.

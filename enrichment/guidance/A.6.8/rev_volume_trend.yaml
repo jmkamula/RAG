@@ -1,0 +1,20 @@
+must_id: item:A.6.8:rev_volume_trend
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Volume trend analysis (report rate per segment — sudden drops may indicate under-reporting;
+  sudden spikes may indicate a campaign or a known issue surfacing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to be responsible for collecting and analyzing report volume data for each
+  segment on a defined schedule.
+- Document the report rate for each segment in a dated record, noting any significant increases or decreases
+  compared to previous periods.
+- Record explanations for any sudden spikes or drops in report volume, referencing supporting evidence
+  such as incident logs or campaign announcements.
+- Name the segments clearly and specifically in your analysis — avoid using vague groupings like "various
+  teams" or "general users".
+- Retain copies of all periodic review reports, including trend charts and analysis notes, in a location
+  accessible for audit review.

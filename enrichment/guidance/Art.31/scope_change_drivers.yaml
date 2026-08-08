@@ -1,0 +1,17 @@
+must_id: item:Art.31:scope_change_drivers
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Trigger list (new MS jurisdiction, main-establishment change)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each event that would trigger cooperation with a new supervisory authority, such as entering a
+  new country or changing your main establishment.
+- Document the date and details of each trigger event in a central register, including the affected jurisdictions
+  and relevant business units.
+- Name the responsible individual who monitors for these trigger events, avoiding generic titles like
+  "the team" or "compliance department."
+- Retain supporting evidence for each trigger event, such as board minutes, registration filings, or official
+  correspondence, with clear dates and signatories.

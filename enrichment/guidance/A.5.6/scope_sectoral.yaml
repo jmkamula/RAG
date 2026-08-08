@@ -1,0 +1,20 @@
+must_id: item:A.5.6:scope_sectoral
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Sectoral concerns (finance ISAC, health ISAC, critical infra forum) driving sector-specific
+  memberships
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all sectoral forums or ISACs your organisation belongs to, naming each group and the sector it
+  represents.
+- Document the specific sectoral concerns that led to each membership, referencing meeting notes or risk
+  assessments where these were discussed.
+- State the individual responsible for monitoring sector-specific risks and memberships, naming a person
+  rather than a team or department.
+- Retain dated evidence of membership confirmation or participation, such as welcome letters, invoices,
+  or event attendance records.
+- Cross-reference each sectoral membership to the relevant risk topics in your SIG Engagement Risk-Topic
+  Scope document.

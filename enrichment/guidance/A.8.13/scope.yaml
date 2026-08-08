@@ -1,0 +1,18 @@
+must_id: item:A.8.13:scope
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Scope — which information, software, systems are backed up (with frequency tier per class)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all information types, software, and systems included in backup, specifying each by name and location
+  in the backup procedure document.
+- Assign a backup frequency tier to each class of information, software, and system, recording the schedule
+  in a dated table or matrix.
+- Name the backup procedure owner as a specific individual, not a team or department, in the procedure
+  document.
+- Cross-reference each item in the scope to its corresponding backup job or process, including job IDs
+  or automation references where applicable.
+- Record the date of the last procedure review and the reviewer’s name in the procedure document.

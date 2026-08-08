@@ -1,0 +1,17 @@
+must_id: item:B.8.5.8:reg_objection_status
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+must_text: Objection status per row (none / raised / resolved / termination)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Record the objection status for each subcontractor change as "none", "raised", "resolved", or "termination"
+  in a dedicated column of the register.
+- Name the individual responsible for updating objection statuses for each entry, ensuring a specific
+  person is listed rather than a team or department.
+- Document the date when any objection is raised, resolved, or leads to termination, capturing a clear
+  timeline for each status change.
+- Attach supporting evidence for each objection status, such as correspondence or meeting notes, directly
+  to the relevant row in the register.

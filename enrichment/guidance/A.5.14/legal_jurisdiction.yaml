@@ -1,0 +1,19 @@
+must_id: item:A.5.14:legal_jurisdiction
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Legal and jurisdictional considerations (cross-border transfers, data sovereignty, GDPR Art.44-49
+  international-transfer mechanisms)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all countries where information is transferred, including the legal basis for each cross-border
+  transfer, in a dated policy appendix.
+- State which international-transfer mechanisms are used for each country, such as Standard Contractual
+  Clauses or adequacy decisions, with references to supporting agreements.
+- Name the policy owner as a specific individual responsible for monitoring legal changes, not a team
+  or department.
+- Record the most recent review date and approval of the policy, including the approver’s name and signature.
+- Cross-reference the policy to relevant GDPR Articles 44-49 and any local data protection laws applicable
+  to the jurisdictions involved.

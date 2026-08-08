@@ -1,0 +1,17 @@
+must_id: item:A.7.13:reg_date
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Per-event date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each maintenance event occurs in the register, using a consistent date format
+  such as YYYY-MM-DD.
+- Name the individual responsible for entering each event’s date, ensuring accountability for accurate
+  recordkeeping.
+- Cross-reference each event’s date entry with supporting documentation, such as work orders or service
+  reports, to confirm accuracy.
+- Avoid leaving any event entries undated or marked as “various” or “ongoing”—each event must have a specific,
+  checkable date.

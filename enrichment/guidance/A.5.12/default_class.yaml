@@ -1,0 +1,16 @@
+must_id: item:A.5.12:default_class
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Default classification for unclassified information (typically 'Internal' as fail-safe)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the default classification level for all unclassified information in the Information Classification
+  Scheme document, using clear language.
+- Name the person responsible for approving the default classification, listing their full name and role
+  in the scheme.
+- Record the date the default classification was last reviewed or updated in the scheme documentation.
+- Specify the default classification as a concrete label (such as "Internal"), not a generic or undefined
+  term like "default" or "standard".

@@ -1,0 +1,19 @@
+must_id: item:A.5.27:training_refresh
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Training refresh step where lessons reveal awareness gaps
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each incident's lessons learned in a dated record, clearly highlighting any identified gaps
+  in staff awareness or understanding.
+- Assign a named individual to assess whether existing training materials address the identified awareness
+  gaps.
+- Record a decision, with date and responsible person, on whether a training refresh is required based
+  on the incident findings.
+- Update training materials and schedules to include new content if a gap is found, and keep a version-controlled
+  copy of the changes.
+- Name the specific staff members who received the updated training, with completion dates, rather than
+  relying on general statements like "all staff trained."

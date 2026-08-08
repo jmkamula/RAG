@@ -1,0 +1,17 @@
+must_id: item:A.5.5:rev_register_update
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Changes propagated back to the live register with reference to this review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of the authority contact review in a dedicated review log, including any
+  identified changes.
+- Update the live authority contact register with all changes resulting from the review, referencing the
+  specific review log entry.
+- Name the reviewer and approver for each change in the register, using specific individuals rather than
+  generic roles or teams.
+- Attach or link the review log entry directly to the updated register record to provide a clear audit
+  trail.

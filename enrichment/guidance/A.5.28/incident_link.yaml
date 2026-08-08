@@ -1,0 +1,17 @@
+must_id: item:A.5.28:incident_link
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Cross-reference to A.5.26 incident-response procedure (evidence-collection step at containment)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the incident-response procedure by including a section number and title from A.5.26
+  where evidence collection is first required.
+- Document the specific evidence-collection steps that must occur during the containment phase, matching
+  the language used in the A.5.26 procedure.
+- Name the individual responsible for updating both procedures if either document changes, avoiding generic
+  roles like "security team."
+- Record the date when the cross-reference was last reviewed and verified as accurate by the procedure
+  owner.

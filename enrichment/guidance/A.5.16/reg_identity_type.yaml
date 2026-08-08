@@ -1,0 +1,16 @@
+must_id: item:A.5.16:reg_identity_type
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Identity type per row (human_employee / human_contractor / service / shared / system_account)
+  — drives policy variant applied
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- List each identity in the register with a unique row, including all human and non-human accounts.
+- 'Specify the identity type for every row using the approved categories: human_employee, human_contractor,
+  service, shared, or system_account.'
+- Name the owner of each identity as a specific individual, not a team or department.
+- Record the date each identity was added or last reviewed in the register.
+- Cross-reference each identity row to the relevant policy variant that applies based on its type.

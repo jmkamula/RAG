@@ -1,0 +1,20 @@
+must_id: item:A.5.34:rev_breach_history
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Breach history for the period (every personal-data breach in scope confirmed handled per Art.33
+  72h notification + Art.34 data-subject notification where required; lessons fed into A.5.27)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each personal-data breach in a dated register, including a summary of the incident, detection
+  date, and affected data subjects.
+- Confirm for every breach entry that notification to the supervisory authority was completed within 72
+  hours, with supporting evidence such as sent emails or submission receipts.
+- Document whether data subjects were notified for each breach, citing the rationale and attaching copies
+  of notification messages where required.
+- Cross-reference each breach entry with the lessons-learned log, showing how outcomes were incorporated
+  into the organisational improvement actions under A.5.27.
+- Name a specific individual responsible for breach management and notification decisions—do not list
+  a team or department as the owner.

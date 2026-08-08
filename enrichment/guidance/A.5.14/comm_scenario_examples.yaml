@@ -1,0 +1,20 @@
+must_id: item:A.5.14:comm_scenario_examples
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Scenario-based examples included in training (e.g. external auditor data request, supplier
+  integration handover, regulator response)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document at least three real-world scenarios involving information transfer, such as responding to an
+  external auditor, supplier onboarding, and regulator requests, in the training materials.
+- Record the date and names of employees who attended training sessions where these scenarios were discussed,
+  using a signed attendance sheet.
+- Attach the specific slides, handouts, or training content that describe each scenario to the communication
+  record for auditor review.
+- Name the trainer or presenter as a specific individual, not just a department or "training team", on
+  the training session documentation.
+- Retain feedback forms or quiz results that demonstrate participants understood the scenario-based examples
+  presented during the training.

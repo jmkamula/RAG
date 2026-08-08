@@ -1,0 +1,18 @@
+must_id: item:A.5.35:fr_severity
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Severity recorded per finding (matches the report's severity classification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the severity rating for each finding in the response register exactly as stated in the independent
+  review report.
+- Cross-reference each severity entry in the register to the corresponding section or page in the original
+  review report.
+- Name the person responsible for entering severity ratings, ensuring a specific individual is listed
+  rather than a team or department.
+- Confirm that all findings in the register have a severity rating; do not leave any severity field blank
+  or marked as "TBD".
+- Retain a copy of the independent review report alongside the register for direct comparison during audits.

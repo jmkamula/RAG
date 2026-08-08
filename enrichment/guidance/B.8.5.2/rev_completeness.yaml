@@ -1,0 +1,17 @@
+must_id: item:B.8.5.2:rev_completeness
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+must_text: Completeness check — actual customer-PII flows reconciled against register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the list of all actual customer personal data flows with the entries in your data processing
+  register, noting any missing or extra flows.
+- Document the date and results of the reconciliation, including any discrepancies found and actions taken
+  to resolve them.
+- Name a specific individual responsible for performing and signing off on the completeness check—do not
+  list a team or department.
+- Retain evidence of supporting records used for the reconciliation, such as system diagrams, data flow
+  maps, or export logs.

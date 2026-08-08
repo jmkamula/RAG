@@ -1,0 +1,18 @@
+must_id: item:A.5.21:requirements_propagation
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: ICT service / product suppliers required to propagate requirements through their sub-contractors
+  / component suppliers
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific information security requirements that must be passed to all sub-contractors or
+  component suppliers in your ICT Supply Chain Information Security Procedure.
+- Name each primary supplier and require them in writing to cascade these requirements to their own sub-contractors
+  or component suppliers.
+- Retain copies of signed agreements or attestations from suppliers confirming that they have communicated
+  the requirements to all relevant sub-contractors.
+- Specify a named individual, not a department or team, responsible for verifying supplier compliance
+  with this propagation requirement.

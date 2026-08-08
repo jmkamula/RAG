@@ -1,0 +1,39 @@
+leaf_id: req:Art.31:cooperation_procedure
+control_ref: Art.31
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You must have up-to-date records of processing activities to effectively respond to supervisory
+    authority inquiries and demonstrate compliance as required under Art.31.
+  good_enough: A current, accessible RoPA covering all relevant processing activities is available and
+    can be referenced or shared if requested.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer (DPO) Designation
+  category: foundational
+  rationale: If a DPO is required, their designation and contact details must be clear so the supervisory
+    authority knows whom to contact and your team knows who coordinates responses.
+  good_enough: A DPO (or clear statement of non-applicability) is documented, and contact details are
+    available for routing authority communications.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: Knowing the ISMS scope ensures you can identify which parts of your organization and which
+    processing activities are covered when responding to supervisory authority requests.
+  good_enough: A documented ISMS scope exists, even if high-level, so you can quickly determine which
+    teams and systems are in-scope for GDPR compliance.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Supervisory authorities often ask about the legal basis for processing; you need this mapped
+    to respond accurately and provide supporting evidence.
+  good_enough: A summary table or documented mapping of processing activities to their lawful bases is
+    available for reference during authority inquiries.

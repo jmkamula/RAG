@@ -1,0 +1,17 @@
+must_id: item:A.5.11:rec_closure_date
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Closure date recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date when all assigned assets are returned by the departing individual in the asset
+  return record.
+- Name the person responsible for verifying and entering the closure date, ensuring accountability for
+  the record’s accuracy.
+- Attach supporting evidence, such as a signed checklist or return receipt, to confirm the asset return
+  process was completed on the recorded date.
+- Avoid leaving the closure date field blank or using vague entries like "N/A" or "upon exit"—always enter
+  a specific calendar date.

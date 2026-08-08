@@ -1,0 +1,20 @@
+must_id: item:A.8.21:security_mechanisms
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Security-mechanism standards per service class (encryption / authentication / integrity / availability)
+  with minimum baselines
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each network service class in the procedure, specifying its purpose and scope, to show all relevant
+  services are covered.
+- Document minimum required security mechanisms for each service class, including encryption, authentication,
+  integrity, and availability controls.
+- State the baseline configuration or standard for each security mechanism, referencing specific protocols,
+  algorithms, or settings where applicable.
+- Name the owner as a specific individual responsible for maintaining and updating these baselines, not
+  just a team or department.
+- Record the approval date and approver’s name for the procedure to confirm it is current and formally
+  authorized.

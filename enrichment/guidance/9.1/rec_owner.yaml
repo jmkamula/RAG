@@ -1,0 +1,15 @@
+must_id: item:9.1:rec_owner
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Per-row metric owner
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the metric owner for each row as a specific individual, using full name and job title, not a team
+  or department.
+- Record the date when each metric owner was assigned responsibility in the measurement record.
+- Document any changes in metric ownership with the date of change and the names of both outgoing and
+  incoming owners.
+- Cross-reference each metric owner to their contact details in your staff directory for verification.

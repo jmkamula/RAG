@@ -1,0 +1,17 @@
+must_id: item:A.7.11:reg_site_utility
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Per-row site + utility pair
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each site and its corresponding utility in a separate row to clearly show the site-utility relationship.
+- Record the full address or unique identifier for each site to avoid confusion between similarly named
+  locations.
+- Specify the utility type (e.g., electricity, water, gas) for each entry rather than using generic terms
+  like "utilities."
+- Assign a responsible individual for maintaining each site-utility entry, listing them by name rather
+  than by team or department.
+- Date each entry to show when the information was last verified or updated.

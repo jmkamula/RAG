@@ -1,0 +1,17 @@
+must_id: item:4.4:map_ownership
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: Ownership overlay (which role owns which process node)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of each process node as a specific individual and their role, avoiding generic labels
+  like "IT" or "the team".
+- Document the date when each ownership assignment was last reviewed or updated in the process interaction
+  map.
+- Cross-reference each process node to the corresponding job description or responsibility statement for
+  the named role.
+- Retain a signed approval from senior management confirming the accuracy of the ownership overlay on
+  the map.

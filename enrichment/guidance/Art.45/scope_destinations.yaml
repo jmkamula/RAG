@@ -1,0 +1,18 @@
+must_id: item:Art.45:scope_destinations
+control_ref: Art.45
+standard_id: GDPR:2016/679
+must_text: Adequate destinations in use (e.g. UK, Japan, US-DPF certified)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all countries outside the European Economic Area where you transfer personal data, including the
+  specific services or systems involved.
+- Document the adequacy status of each destination country by referencing the official European Commission
+  adequacy decision with the decision date.
+- Record the legal basis for each transfer, such as "adequacy decision," and include supporting evidence
+  like a copy or link to the relevant decision.
+- Name the individual responsible for monitoring changes to adequacy decisions, not just a team or department.
+- Review and update the list at least annually, keeping a dated record of each review and any changes
+  made.

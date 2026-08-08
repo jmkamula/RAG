@@ -1,0 +1,17 @@
+must_id: item:Art.29:reg_person_id
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Per-row person identifier (employee / contractor reference)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique identifier for each person listed, such as employee number or contractor ID, in every
+  row of the Personnel Authorisation Register.
+- State the full legal name of each individual alongside their identifier to avoid ambiguity between similarly
+  named personnel.
+- Cross-reference each person’s identifier with official HR or contractor records to confirm accuracy
+  and traceability.
+- Name the person explicitly—do not use group labels like "IT team" or "contractors" in place of individual
+  identifiers.

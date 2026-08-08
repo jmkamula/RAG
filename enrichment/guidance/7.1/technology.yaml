@@ -1,0 +1,17 @@
+must_id: item:7.1:technology
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Technology platforms supporting the ISMS (GRC tool, document repo, training platform)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each technology platform used to support your ISMS, including the GRC tool, document repository,
+  and training platform, in a dated resource allocation record.
+- Name the owner of each platform as a specific individual, not a team or department, in the allocation
+  record.
+- Document the date each platform was assigned or implemented to support the ISMS, referencing supporting
+  purchase or implementation records.
+- Attach or cross-reference evidence of current access rights or licenses for each platform to confirm
+  ongoing availability.

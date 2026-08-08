@@ -1,0 +1,48 @@
+leaf_id: req:B.8.5.5:applicable_scope
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know the boundaries of your ISMS to determine which disclosure requests fall
+    within your privacy management system. This ensures your disclosure decision scope aligns with your
+    organisation’s overall security and privacy coverage.
+  good_enough: A documented ISMS scope that clearly defines the organisational units, assets, and processes
+    covered by your ISMS, even if not fully detailed for privacy specifics.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is necessary to identify which information assets could be subject
+    to disclosure requests, so you can accurately define the scope of applicable decisions.
+  good_enough: A basic, current list of information assets (including data types and locations) that could
+    be affected by disclosure requests.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purposes for which personal data is processed to determine when a disclosure
+    request is relevant and within scope. This underpins any decision about whether to disclose or reject.
+  good_enough: Documented purposes for all major processing activities, even if some minor activities
+    are still being mapped.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for processing is essential to decide if a disclosure is permitted
+    or required. This ensures your scope note only covers requests where a legal basis exists.
+  good_enough: A summary of lawful bases for each processing activity, with at least the main categories
+    covered.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: cross_role
+  rationale: A RoPA provides a comprehensive map of data flows and processing activities, which is critical
+    to identify which disclosure requests are in-scope for privacy decisions.
+  good_enough: A working draft RoPA that lists key processing activities and data categories, even if
+    some details are pending.

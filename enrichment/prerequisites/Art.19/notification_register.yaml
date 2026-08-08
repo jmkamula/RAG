@@ -1,0 +1,47 @@
+leaf_id: req:Art.19:notification_register
+control_ref: Art.19
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date RoPA to identify which processing activities may trigger Art.16/17/18
+    events, and to track which data subjects and recipients are involved. Without this, you can't reliably
+    record or prove notifications.
+  good_enough: A current RoPA that lists all processing activities, their purposes, and recipients is
+    available—even if not perfect, it must cover all relevant data flows.
+- ref: Art.16
+  standard_id: GDPR:2016/679
+  title: Right to Rectification
+  category: direct
+  rationale: You must know when a rectification event has occurred, as this triggers the Art.19 notification
+    duty. A basic process or log for Art.16 events is needed before you can register notifications.
+  good_enough: A simple record or log of Art.16 (rectification) requests and outcomes exists, even if
+    not fully formalized.
+- ref: Art.17
+  standard_id: GDPR:2016/679
+  title: Right to Erasure
+  category: direct
+  rationale: Art.17 events (erasure requests) also trigger Art.19 notifications. You need a way to identify
+    and track these events before you can record notifications sent to recipients.
+  good_enough: A basic tracking mechanism for Art.17 (erasure) requests and their status is in place.
+- ref: Art.18
+  standard_id: GDPR:2016/679
+  title: Right to Restriction of Processing
+  category: direct
+  rationale: Restriction events under Art.18 require notification to recipients under Art.19. You need
+    to be able to identify when these events occur to populate the notification register.
+  good_enough: There is at least a minimal log or record of Art.18 (restriction) requests and actions
+    taken.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity helps determine when data subject rights
+    apply and when notifications are required. This underpins the accuracy of your notification register.
+  good_enough: A documented list of lawful bases for all main processing activities exists, even if some
+    edge cases are still being clarified.

@@ -1,0 +1,16 @@
+must_id: item:A.5.32:owner
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Named owner of the procedure (typically legal/IT lead jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the Intellectual Property Rights Protection Procedure as a specific individual, such
+  as the Legal Lead or IT Lead, not a generic team.
+- Document the owner's full name and job title on the cover page or header of the procedure.
+- Record the date when the owner was assigned responsibility for the procedure in the document history
+  or change log.
+- Obtain the owner's signature or written confirmation acknowledging their responsibility for maintaining
+  and updating the procedure.

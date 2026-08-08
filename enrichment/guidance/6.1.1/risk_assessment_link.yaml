@@ -1,0 +1,16 @@
+must_id: item:6.1.1:risk_assessment_link
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Link to risk assessment process (6.1.2)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the ISMS Risk and Opportunity Planning Procedure to the documented risk assessment process
+  by title and document version.
+- State in the procedure how identified risks and opportunities are evaluated using the risk assessment
+  process described in section 6.1.2.
+- Name the individual responsible for maintaining alignment between the planning procedure and the risk
+  assessment process.
+- Avoid generic references such as "see related processes"—specify the exact process name and location.

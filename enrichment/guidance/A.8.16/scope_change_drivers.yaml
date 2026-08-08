@@ -1,0 +1,17 @@
+must_id: item:A.8.16:scope_change_drivers
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new asset class, new attack-vector category, regulator inspection)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a trigger list that includes new asset classes, new attack-vector categories, and regulator
+  inspections as reasons to review monitoring scope.
+- Name the person responsible for updating the monitoring scope when a trigger event occurs, using a specific
+  individual’s name rather than a team or department.
+- Record the date when the trigger list was last reviewed and updated, maintaining a version history for
+  reference.
+- Cross-reference the trigger list in your monitoring policy or scope document, ensuring auditors can
+  easily locate and verify its use.

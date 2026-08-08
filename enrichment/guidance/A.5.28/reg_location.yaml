@@ -1,0 +1,15 @@
+must_id: item:A.5.28:reg_location
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Current location per row (vault id / cloud bucket reference / external-party receipt id)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact current location for each evidence item in the register, using a specific vault ID,
+  cloud bucket reference, or external-party receipt ID.
+- Cross-reference each location entry with supporting documentation, such as access logs or signed handover
+  receipts, to confirm accuracy.
+- Name the custodian responsible for each evidence item as a specific individual, not a team or department.
+- Date every update to an item's location in the register to provide a clear history of custody changes.

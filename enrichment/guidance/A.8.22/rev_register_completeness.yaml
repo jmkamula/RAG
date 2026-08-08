@@ -1,0 +1,19 @@
+must_id: item:A.8.22:rev_register_completeness
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Register-completeness check (new zones registered)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for maintaining the network zone register, listing their full name and job
+  title in the register itself.
+- Record the date of the most recent completeness check in the network zone register, including a summary
+  of the review process.
+- Cross-reference all newly created network zones from change management records against the register
+  to confirm each is listed.
+- Document any discrepancies found during the review and the actions taken to resolve them, including
+  who resolved each issue and when.
+- Avoid listing network zone owners as "IT" or "the team"—assign each zone to a specific individual by
+  name.

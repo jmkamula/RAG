@@ -1,0 +1,18 @@
+must_id: item:A.6.7:reg_location_category
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Per-row location category (home / co-working / abroad — drives jurisdictional risk; affects
+  data-residency analysis where the worker handles personal data)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each remote worker in the register with their full name and unique identifier to avoid ambiguity.
+- Record the primary work location category for each worker as "home," "co-working," or "abroad" in a
+  dedicated column.
+- Specify the actual country for any worker marked as "abroad" to support data-residency and jurisdictional
+  checks.
+- Date-stamp each entry and update whenever a worker’s location category changes to maintain current and
+  accurate records.
+- Assign responsibility for maintaining the register to a named individual, not a team or department.

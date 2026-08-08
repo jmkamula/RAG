@@ -1,0 +1,16 @@
+must_id: item:4.1:proc_refresh_cadence
+control_ref: '4.1'
+standard_id: ISO27001:2022
+must_text: Refresh cadence stated (typically annual + significant-change trigger)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the planned refresh frequency in the framework document, specifying both the regular interval
+  and the trigger for significant changes.
+- Name the individual responsible for reviewing and updating the framework, avoiding generic titles like
+  "the team" or "IT department."
+- Record the date of the most recent framework review and update in a visible section of the document.
+- Document the process for identifying and responding to significant changes that would trigger an out-of-cycle
+  refresh.

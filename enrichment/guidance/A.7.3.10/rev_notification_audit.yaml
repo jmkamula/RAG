@@ -1,0 +1,19 @@
+must_id: item:A.7.3.10:rev_notification_audit
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Notification audit — sampled A.22 systems verified to have subject-notification surfaced
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems using automated decision-making that fall under control A.22, including system names
+  and responsible owners, in a dated inventory.
+- Document the method each system uses to notify individuals about automated decisions, attaching screenshots
+  or notification templates as evidence.
+- Sample a selection of A.22 systems and record the dates and results of tests confirming that notifications
+  are actually presented to users.
+- Name the reviewer who conducted the notification checks for each sampled system, ensuring an individual
+  is identified rather than a team or department.
+- Retain records of any issues found and corrective actions taken, including dates and responsible persons
+  for each action.

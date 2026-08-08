@@ -1,0 +1,18 @@
+must_id: item:A.7.12:scope_change_drivers
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (network refresh, new site)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current cabling runs in a dated document that includes their physical locations and installation
+  dates.
+- State specific events that require re-scoping, such as network refreshes, new site openings, or major
+  office renovations.
+- Assign a named individual responsible for monitoring these trigger events and updating the cabling scope
+  document.
+- Record each re-scoping decision with the date, reason for review, and the person who approved the updated
+  scope.
+- Name the owner as a specific individual — not a team or department — in the cabling runs scope document.

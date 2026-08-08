@@ -1,0 +1,19 @@
+must_id: item:A.5.13:automation
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Automation / tooling references where labelling is auto-applied (DLP, sensitivity-label policies)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all automated labelling tools or systems in use, including product names and versions, within
+  the Information Labelling Procedure.
+- State how each tool applies labels automatically, describing triggers, rules, or policies that result
+  in label assignment.
+- Cross-reference the Information Labelling Procedure to specific configuration records or screenshots
+  showing active automated labelling policies.
+- Name the person responsible for maintaining and updating automated labelling tool settings, using a
+  specific individual’s name rather than a team or department.
+- Record the date of the most recent review or test of automated labelling effectiveness, attaching evidence
+  such as a test report or meeting minutes.

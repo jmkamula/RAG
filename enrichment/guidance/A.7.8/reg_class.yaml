@@ -1,0 +1,16 @@
+must_id: item:A.7.8:reg_class
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Per-row equipment class (drives required protection level)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each piece of equipment in the register with a clear, descriptive name and unique identifier.
+- Assign a specific equipment class to each row, reflecting its type and required protection level.
+- Reference the criteria or policy used to determine equipment classes and protection levels within the
+  register.
+- Avoid using generic labels like "miscellaneous" or "IT equipment" for equipment class; specify the actual
+  category for each item.
+- Record the date and name of the person who classified each item to provide traceability.

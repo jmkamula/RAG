@@ -1,0 +1,41 @@
+leaf_id: req:A.5.22:change_response_log
+control_ref: A.5.22
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.21
+  standard_id: ISO27001:2022
+  title: Managing information security in the ICT supply chain
+  category: direct
+  rationale: You need an up-to-date register of ICT suppliers and a process for managing their security
+    to identify which supplier services are in scope for change monitoring. Without this, you can't reliably
+    log or assess changes in supplier service delivery.
+  good_enough: A current list of ICT suppliers with basic risk ratings and points of contact is available,
+    and there is a documented process for reviewing supplier security arrangements.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines which supplier relationships and services are covered by your controls.
+    You need this to know which supplier changes must be logged and assessed.
+  good_enough: A written scope statement exists that clearly identifies the business units, processes,
+    and supplier relationships included in the ISMS.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment process is needed to evaluate the impact of supplier service changes and
+    decide on appropriate treatments or escalation. Without this, you can't meaningfully assess or respond
+    to changes.
+  good_enough: A basic risk assessment methodology is documented and has been applied at least once to
+    supplier-related risks.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that supplier changes are logged, assessed, and escalated
+    by the right people. Without defined responsibilities, change response logs may be incomplete or unmanaged.
+  good_enough: A responsibility matrix or similar document exists, showing who is accountable for supplier
+    management and change response activities.

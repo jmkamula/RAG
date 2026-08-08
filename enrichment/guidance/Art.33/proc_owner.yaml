@@ -1,0 +1,17 @@
+must_id: item:Art.33:proc_owner
+control_ref: Art.33
+standard_id: GDPR:2016/679
+must_text: Named owner of the procedure (DPO + legal counsel)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the breach notification procedure as a specific individual, listing both the Data
+  Protection Officer and a named legal counsel.
+- Record the full names, job titles, and contact details of the DPO and legal counsel directly on the
+  first page of the procedure document.
+- Date and sign the procedure to confirm the current ownership and responsibility by both the DPO and
+  legal counsel.
+- Avoid listing the owner as a group, team, or department; use only named individuals to meet accountability
+  requirements.

@@ -1,0 +1,17 @@
+must_id: item:Art.13:scope_exclusions
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Out-of-scope situations (data from third parties → Art.14 scope; non-personal data)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all data collection points and identify which involve receiving data from third parties, marking
+  these as out of Article 13 scope.
+- Document each collection point where only non-personal data is processed, specifying the data types
+  and confirming no personal data is involved.
+- State the legal basis or reason for excluding each out-of-scope collection point, referencing relevant
+  GDPR articles or definitions.
+- Name the individual responsible for maintaining and updating the collection points scope, avoiding generic
+  roles like "the team" or "IT".

@@ -1,0 +1,19 @@
+must_id: item:A.6.7:rev_metrics
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Metrics noted (count of active remote workers, distribution by location category, count of
+  expired-pending-revocation rows, count of remote-context incidents in period)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the count of active remote workers as of the review date in a dated summary table, naming the
+  person compiling the data.
+- List the distribution of remote workers by location category, showing totals for each category in the
+  same summary table.
+- Document the number of expired remote access permissions pending revocation, referencing the specific
+  rows in your access management system.
+- Log the count and brief description of remote work-related security incidents for the review period,
+  citing incident report IDs.
+- Name the reviewer as a specific individual—do not use generic labels like "the team" or "IT department."

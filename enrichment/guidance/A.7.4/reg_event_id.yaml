@@ -1,0 +1,16 @@
+must_id: item:A.7.4:reg_event_id
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: Per-event unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique, sequential identifier to each monitoring event at the time it is logged in the register.
+- Record the assigned identifier alongside the event details, including date, time, and responsible person,
+  in the register entry.
+- Cross-reference any related investigation or follow-up actions using the same unique identifier to maintain
+  traceability.
+- Confirm that no two events share the same identifier by periodically reviewing the register for duplicates.
+- Name the person responsible for assigning identifiers as a specific individual, not as a team or department.

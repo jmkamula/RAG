@@ -1,0 +1,17 @@
+must_id: item:Art.7:reg_timestamp
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Per-row capture timestamp
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time when each consent is obtained in a dedicated timestamp field for every
+  entry in the consent register.
+- Confirm that the timestamp is generated automatically by the system, not entered manually, to prevent
+  accidental or intentional alteration.
+- Name the staff member or system process responsible for capturing each timestamp, ensuring it is a specific
+  individual or process, not a generic role.
+- Review the consent register regularly to verify that no entries are missing timestamps or have default
+  or placeholder values.

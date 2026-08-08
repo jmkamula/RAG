@@ -1,0 +1,16 @@
+must_id: item:A.7.6:rev_incidents
+control_ref: A.7.6
+standard_id: ISO27001:2022
+must_text: Incidents review (escort failures, device-intrusion events) — closure status
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Schedule regular reviews of all escort failures and device-intrusion events, recording the review date
+  and participants in a dated meeting log.
+- Document the closure status of each incident, noting the resolution date and the person responsible
+  for confirming closure.
+- Attach supporting evidence for closed incidents, such as investigation reports or corrective action
+  records, to each incident entry.
+- Name the reviewer as a specific individual—do not use generic roles like "security team" or "IT department."

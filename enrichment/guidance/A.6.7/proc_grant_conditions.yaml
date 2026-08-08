@@ -1,0 +1,20 @@
+must_id: item:A.6.7:proc_grant_conditions
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Conditions per approval recorded (location category — home / co-working / abroad; permitted
+  hours; data-class restrictions; supervision requirements; expiry / review date)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each remote working approval with the specific location category selected from home, co-working
+  space, or abroad, and include the exact address if applicable.
+- Record permitted working hours for each approval, specifying start and end times or shift patterns as
+  agreed with the manager.
+- State any data classification restrictions for the remote worker, listing which types of data may or
+  may not be accessed remotely.
+- Specify supervision requirements in the approval record, naming the responsible supervisor and describing
+  the method and frequency of check-ins.
+- Enter an explicit expiry or review date for each approval; avoid leaving this field blank or using "ongoing"
+  as a placeholder.

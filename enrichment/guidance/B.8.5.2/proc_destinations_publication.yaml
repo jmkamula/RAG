@@ -1,0 +1,18 @@
+must_id: item:B.8.5.2:proc_destinations_publication
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+must_text: Destinations publication per customer (customer receives the list of countries + international
+  orgs)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all countries and international organizations where personal data is transferred in a dated document
+  specific to each customer.
+- Name the individual responsible for maintaining and updating the transfer destinations list for each
+  customer.
+- Share the current transfer destinations document directly with each customer and retain a record of
+  the communication date and recipient.
+- Avoid using a generic or undated destinations list; confirm each customer receives a version tailored
+  to their data transfers.

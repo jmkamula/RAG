@@ -1,0 +1,18 @@
+must_id: item:6.1.1:reg_integration_target
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Integration target per row (which ISMS process consumes this action)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the ISMS process that will consume or act on each planned action directly in the corresponding
+  row of the register.
+- Cross-reference each action to a specific ISMS procedure or policy by title and version, not just a
+  general process area.
+- Record the name of the individual responsible for ensuring the action is integrated into the identified
+  ISMS process.
+- Avoid leaving the integration target field blank or using vague terms like "various" or "all processes"—specify
+  one clear process per action.
+- Date each entry to show when the integration target was assigned or last reviewed.

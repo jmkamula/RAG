@@ -1,0 +1,19 @@
+must_id: item:A.8.22:enforcement
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Enforcement points (firewall / ACL / security group / identity-aware proxy / service-mesh policy)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the enforcement points used for network segregation, such as firewalls, access control lists, or
+  security groups, in the procedure document.
+- Document the responsible individual for maintaining each enforcement point, listing their full name
+  and current job title.
+- Record the date of the most recent review or update to each enforcement point configuration within the
+  procedure.
+- Attach or reference a network diagram showing how enforcement points segment different network zones
+  or environments.
+- Specify each enforcement point’s configuration location; avoid generic statements like "controls are
+  in place" without concrete references.

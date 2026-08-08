@@ -1,0 +1,19 @@
+must_id: item:Art.28:instructions
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Process only on documented controller instructions
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Data Processing Agreement that processing of personal data will only occur on documented
+  instructions from the controller.
+- Name the individual at your organisation responsible for receiving and acting on controller instructions
+  within the DPA.
+- Retain a dated record of each set of instructions received from the controller, including the method
+  of communication.
+- Cross-reference each processing activity in your records to the specific controller instruction authorising
+  it.
+- Avoid using generic language like "instructions as needed"—specify that only documented, controller-provided
+  instructions will be followed.

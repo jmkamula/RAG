@@ -1,0 +1,18 @@
+must_id: item:A.5.14:review_reviewer
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Reviewer identity and role (CISO + Data Protection Officer + Legal jointly where cross-border
+  transfers are in scope)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewers as specific individuals holding the CISO, Data Protection Officer, and Legal roles
+  in the policy review record.
+- Record the date each reviewer completed their review and approval in the policy review log.
+- Document the scope of the review, explicitly stating if cross-border transfers were assessed during
+  this cycle.
+- Retain signed or digitally acknowledged statements from each reviewer confirming their participation
+  in the joint review.
+- Avoid listing a group or department as the reviewer; specify each person by name and role in the documentation.

@@ -1,0 +1,17 @@
+must_id: item:8.1:scope_exclusions
+control_ref: '8.1'
+standard_id: ISO27001:2022
+must_text: Out-of-scope processes stated explicitly (purely operational IT runs that don't bear on ISMS)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all operational IT processes in a table, including a brief description and the responsible owner
+  for each process.
+- State explicitly which operational IT processes are out of scope for the Information Security Management
+  System, with a clear rationale for each exclusion.
+- Name the owner as a specific individual for each out-of-scope process — do not use generic roles like
+  "IT team" or "Operations".
+- Record the date when the scope decision was last reviewed and approved by management, attaching the
+  signed approval document.

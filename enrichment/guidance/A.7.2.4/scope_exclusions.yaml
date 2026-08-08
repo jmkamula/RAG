@@ -1,0 +1,18 @@
+must_id: item:A.7.2.4:scope_exclusions
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Non-consent activities excluded with rationale (contract necessity / legal obligation basis)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all data processing activities and clearly mark those that do not require consent, referencing
+  the specific contract or legal obligation for each.
+- Document the rationale for excluding consent for each marked activity, citing the relevant contractual
+  clause or legal reference.
+- Name the individual responsible for reviewing and approving the exclusion decisions, ensuring this is
+  a specific person, not a group or department.
+- Retain dated records of each exclusion decision and supporting rationale in a central, accessible location.
+- Avoid using generic justifications such as "business need"—always provide a detailed, specific legal
+  or contractual basis for each exclusion.

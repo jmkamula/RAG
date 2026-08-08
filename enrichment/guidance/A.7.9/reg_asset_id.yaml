@@ -1,0 +1,18 @@
+must_id: item:A.7.9:reg_asset_id
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Per-row asset identifier (cross-link to A.5.9 asset register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each off-premises asset in the register, matching the format used in the
+  main asset register for consistency.
+- Cross-reference each off-premises asset entry to its corresponding row in the A.5.9 asset register using
+  the unique identifier.
+- Record the date each asset was added to the off-premises register to provide a clear audit trail.
+- Name the asset owner as a specific individual for each entry, avoiding generic labels like "IT" or "the
+  team".
+- Review the register regularly to confirm all off-premises assets are accurately linked to the main asset
+  register.

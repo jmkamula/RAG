@@ -1,0 +1,15 @@
+must_id: item:Art.9:reg_approval
+control_ref: Art.9
+standard_id: GDPR:2016/679
+must_text: Per-row approval signature + date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each instance of special category data processing as a separate row in the register, including
+  a clear description of the processing activity.
+- Name the approving individual for each processing activity, ensuring the name is a specific person and
+  not a team or department.
+- Sign and date each row in the register to confirm approval, using handwritten or secure electronic signatures.
+- Retain the signed and dated register entries in a format that prevents later alteration or removal.

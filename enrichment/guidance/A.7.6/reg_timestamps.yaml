@@ -1,0 +1,15 @@
+must_id: item:A.7.6:reg_timestamps
+control_ref: A.7.6
+standard_id: ISO27001:2022
+must_text: Per-session entry/exit timestamps
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact entry and exit time for each person in the secure area work session register at the
+  moment they occur.
+- Name each individual attending the session, avoiding group labels like "staff" or "team" to ensure accountability.
+- Sign or initial each entry in the register to confirm the accuracy of the recorded timestamps.
+- Review the register weekly to confirm all sessions include both entry and exit times, and document the
+  review date and reviewer’s name.

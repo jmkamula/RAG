@@ -1,0 +1,19 @@
+must_id: item:A.8.24:scope_data_classes
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Data classes enumerated with encryption obligation per class (drawn from A.5.12 classification
+  + A.5.34 PII)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all data classes in your organisation, referencing your information classification policy and personal
+  data inventory.
+- Document the encryption requirement for each data class, stating whether encryption is mandatory, optional,
+  or not required.
+- Cross-reference each data class with its legal, regulatory, or contractual encryption obligations, including
+  those for personal data.
+- Name the owner responsible for maintaining the cryptography scope as a specific individual, not a team
+  or department.
+- Date and approve the final cryptography scope document, capturing the approver’s name and signature.

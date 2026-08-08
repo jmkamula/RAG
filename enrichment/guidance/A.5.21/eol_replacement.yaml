@@ -1,0 +1,19 @@
+must_id: item:A.5.21:eol_replacement
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: Replacement component selected and sourcing controls re-applied
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date the end-of-life ICT component was identified and the decision to replace it in a change
+  management log.
+- Name the person responsible for selecting the replacement component and document their selection decision
+  in a dated record.
+- Document how sourcing controls, such as supplier evaluation and approval steps, were re-applied for
+  the new component, including references to supporting evidence.
+- Attach or link to purchase orders or contracts showing the approved supplier and the specific replacement
+  component chosen.
+- State the version or model of the replacement component to avoid generic descriptions that could apply
+  to any device.

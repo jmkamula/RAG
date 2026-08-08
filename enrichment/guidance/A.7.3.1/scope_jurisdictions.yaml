@@ -1,0 +1,19 @@
+must_id: item:A.7.3.1:scope_jurisdictions
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Applicable jurisdictions listed with basis per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each country or region where personal data is processed or stored in a dated register maintained
+  by the privacy or compliance lead.
+- State the legal or regulatory basis for including each jurisdiction, referencing specific laws such
+  as GDPR, CCPA, or local equivalents.
+- Name the data subject categories (e.g., employees, customers) covered in each jurisdiction, ensuring
+  each entry is explicit and not left as "all users."
+- Assign a named individual responsible for reviewing and updating the jurisdiction list at least annually,
+  with review dates recorded.
+- Avoid using generic justifications like "global operations" as the basis; specify the actual law or
+  contract that applies to each jurisdiction.

@@ -1,0 +1,18 @@
+must_id: item:5.2:com_audience
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: Audience coverage stated (employees, contractors, third parties as relevant)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all relevant audiences in the information security policy document, including employees, contractors,
+  and third parties as applicable.
+- State in the policy or a communication record that each identified audience has been included in policy
+  distribution.
+- Record the date and method of policy communication to each audience group in a communication log or
+  register.
+- Name the responsible individual who confirmed policy communication to each audience, not just a generic
+  team or department.
+- Retain evidence of communication, such as emails or signed acknowledgements, for each audience group.

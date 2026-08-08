@@ -1,0 +1,18 @@
+must_id: item:A.5.8:cls_residual_risks
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Residual-risk register transfer per record (outstanding risks named, accepted by named operational
+  owner with date)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all outstanding risks for the project in the security closure record, using clear descriptions
+  that match those in the main risk register.
+- Name the operational owner accepting each outstanding risk as a specific individual, not a role or team.
+- Record the date each operational owner formally accepts responsibility for their assigned residual risks
+  in the closure record.
+- Cross-reference each accepted risk to its entry in the organisation’s central risk register for traceability.
+- Attach evidence of acceptance, such as a signed or digitally approved statement from each named operational
+  owner.

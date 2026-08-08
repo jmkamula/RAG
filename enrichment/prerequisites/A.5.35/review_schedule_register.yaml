@@ -1,0 +1,39 @@
+leaf_id: req:A.5.35:review_schedule_register
+control_ref: A.5.35
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The review schedule must clearly identify which areas of the ISMS are subject to independent
+    review. Without a defined scope, you cannot meaningfully plan or allocate reviews.
+  good_enough: A documented scope statement that lists the boundaries and applicability of the ISMS, even
+    if high-level, is sufficient to start scheduling reviews.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: The review schedule must specify who is responsible for conducting or commissioning independent
+    reviews. Without defined roles, you cannot assign reviewers or ensure independence.
+  good_enough: A basic roles and responsibilities matrix or list that identifies who can act as independent
+    reviewers or who oversees the review process.
+- ref: A.5.3
+  standard_id: ISO27001:2022
+  title: Segregation of Duties
+  category: direct
+  rationale: To ensure reviews are independent, you need clarity on who must not review their own work
+    or areas of responsibility. This prevents conflicts of interest in the review schedule.
+  good_enough: A simple statement or register indicating which roles or individuals must not review certain
+    areas, even if not fully formalized.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: direct
+  rationale: The frequency and focus of independent reviews should be informed by risk—higher risk areas
+    may need more frequent review. Without a risk assessment, scheduling is arbitrary.
+  good_enough: An initial risk assessment that highlights key risk areas and suggests review priorities,
+    even if not exhaustive.

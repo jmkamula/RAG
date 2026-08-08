@@ -1,0 +1,17 @@
+must_id: item:A.5.20:authorized_personnel
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Named or role-defined authorized personnel + conditions for access
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the authorized personnel or roles permitted access in the agreement, specifying individuals or
+  job titles rather than generic terms like "staff."
+- Document the exact conditions under which access is granted, such as purpose, duration, and required
+  approvals, within the agreement template.
+- Record the date and version of the template to demonstrate when the security requirements were last
+  updated.
+- Assign responsibility for maintaining and updating the template to a specific named individual, not
+  a group or department.

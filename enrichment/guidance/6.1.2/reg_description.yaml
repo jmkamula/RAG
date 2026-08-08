@@ -1,0 +1,15 @@
+must_id: item:6.1.2:reg_description
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Risk description per row (asset, threat, vulnerability)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each risk in a separate row, clearly stating the associated asset, specific threat, and related
+  vulnerability.
+- Name the asset using a unique and descriptive identifier, not a generic label like "systems" or "data".
+- Record the date each risk was identified and the person responsible for its entry in the risk register.
+- Cross-reference each risk entry with supporting evidence, such as assessment reports or incident logs,
+  to show how the risk was identified.

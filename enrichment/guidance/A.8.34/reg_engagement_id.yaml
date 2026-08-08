@@ -1,0 +1,17 @@
+must_id: item:A.8.34:reg_engagement_id
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Per-engagement unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each audit testing engagement before it begins, using a consistent numbering
+  or naming convention.
+- Record the unique identifier alongside the engagement details in the Audit Testing Engagement Register,
+  including date and scope.
+- Cross-reference the unique identifier in all related documentation, such as testing reports and correspondence,
+  to maintain traceability.
+- Name the identifier clearly and specifically; do not reuse or use generic labels like "audit1" or "testA"
+  for multiple engagements.

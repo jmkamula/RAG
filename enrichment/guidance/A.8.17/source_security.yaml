@@ -1,0 +1,19 @@
+must_id: item:A.8.17:source_security
+control_ref: A.8.17
+standard_id: ISO27001:2022
+must_text: NTP-feed security (authenticated / signed) for high-criticality logging contexts
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the use of authenticated or signed Network Time Protocol (NTP) feeds for all high-criticality
+  logging systems in the procedure.
+- Name the specific NTP servers used, including their authentication method, and record their addresses
+  in the procedure.
+- Assign responsibility for monitoring NTP feed integrity to a named individual, not a team or generic
+  role.
+- Retain logs or screenshots showing successful authenticated synchronization from each high-criticality
+  system, with timestamps and server details.
+- State the review schedule for verifying NTP configuration and authentication status, and record the
+  date and reviewer for each check.

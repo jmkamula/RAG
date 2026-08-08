@@ -1,0 +1,18 @@
+must_id: item:A.5.18:reg_business_justification
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Business justification stated per grant (why this access is needed — informs review decisions
+  later)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific business reason for each access grant in the Access Rights Register, using clear
+  language that matches the user's job responsibilities.
+- Name the person who approved the access and include the approval date alongside the business justification
+  entry.
+- Cross-reference each access entry with the supporting request or ticket that documents the original
+  business need.
+- Avoid using generic justifications like "needed for work"—state the actual task, project, or system
+  purpose for each access grant.

@@ -1,0 +1,15 @@
+must_id: item:A.7.5.4:reg_customer_notification
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Customer notification flag per row if the disclosure involved customer PII (link to B.8.5.4)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to the PII Disclosure Event Log to indicate if customer PII was involved in each disclosure
+  event.
+- Mark each row in the log with a clear "Yes" or "No" to show whether customer PII was disclosed.
+- Cross-reference each "Yes" entry with the related notification record or incident ticket number.
+- Name the individual responsible for updating the customer notification flag, not just a team or department.
+- Review the log regularly to confirm no rows are missing the customer notification flag or cross-reference.

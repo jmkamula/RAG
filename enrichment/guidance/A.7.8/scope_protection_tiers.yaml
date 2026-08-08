@@ -1,0 +1,18 @@
+must_id: item:A.7.8:scope_protection_tiers
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Protection tier per class (basic / standard / high / critical)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all equipment types in scope, including servers, laptops, mobile devices, and network hardware,
+  in a dated inventory record.
+- Assign a protection tier (basic, standard, high, or critical) to each equipment class, referencing documented
+  business impact or data sensitivity.
+- Name the person responsible for tier assignments as a specific individual, not a team or department.
+- Document the rationale for each tier assignment, linking to risk assessment results or relevant policy
+  references.
+- Review and update the equipment scope and tier assignments annually, recording the review date and reviewer’s
+  name.

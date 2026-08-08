@@ -1,0 +1,19 @@
+must_id: item:A.8.21:incident_path
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Incident path when service degraded / breached (cross-link to A.5.25/A.5.26)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for reporting and escalating network service degradation or breaches,
+  including initial detection through to resolution.
+- Cross-reference the incident response procedures in A.5.25 and A.5.26 within the network services procedure,
+  citing exact section numbers and document titles.
+- Name the responsible individual for managing network service incidents, avoiding generic titles like
+  "IT team" or "Support staff".
+- Record the date of the most recent review or update of the procedure, showing it reflects current operational
+  practices.
+- Retain a sample completed incident report demonstrating the documented path was followed for a real
+  or test network service incident.

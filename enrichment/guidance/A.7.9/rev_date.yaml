@@ -1,0 +1,17 @@
+must_id: item:A.7.9:rev_date
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the off-premises program in a dated log or register.
+- Document the planned review interval for the off-premises program in a formal schedule or policy.
+- Name the reviewer as a specific individual responsible for conducting the periodic review, not a generic
+  role or team.
+- Retain evidence of the completed review, such as a signed review report or meeting minutes, showing
+  the actual review date.
+- Cross-reference the review date against the planned interval to confirm the review occurred within the
+  required timeframe.

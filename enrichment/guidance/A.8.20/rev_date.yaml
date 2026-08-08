@@ -1,0 +1,16 @@
+must_id: item:A.8.20:rev_date
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent network program review date in a log or register, ensuring the entry is clearly
+  dated and easily retrievable.
+- State the planned review interval in months or years in a documented schedule approved by a named responsible
+  individual.
+- Confirm the actual review date falls within the planned interval by cross-referencing the review log
+  against the documented schedule.
+- Name the review owner as a specific individual, not a team or department, in the review documentation.

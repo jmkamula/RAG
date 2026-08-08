@@ -1,0 +1,14 @@
+must_id: item:A.6.6:last_reviewed
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Last-reviewed date on the template (review evidence — drives the freshness check)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Display the last-reviewed date clearly on the first page of the Confidentiality / Non-Disclosure Agreement
+  template.
+- Record the name of the person who conducted the most recent review directly on the template.
+- Retain a copy of the review log or meeting minutes showing when and by whom the template was last reviewed.
+- Avoid using undated or generic templates; always update the review date after each formal review.

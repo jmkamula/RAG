@@ -1,0 +1,47 @@
+leaf_id: req:A.7.3.10:program_review
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, processes, and jurisdictions are in-scope for privacy controls
+    before you can review whether automated decision subject obligations are being met.
+  good_enough: A current, documented scope statement that clearly identifies the boundaries of the ISMS
+    and includes all relevant automated decision-making activities.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must have documented the purposes for which personal data is processed, especially where
+    automated decisions are involved, to assess if subject notification and objection pathways are appropriate.
+  good_enough: A list of processing purposes covering all automated decision-making activities, with enough
+    detail to support review of subject rights.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for each automated decision process is essential to determine which
+    subject rights apply and how objection/human-intervention pathways should function.
+  good_enough: A mapping of each automated processing activity to its lawful basis, sufficient to inform
+    subject rights obligations.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that someone is accountable for maintaining, reviewing,
+    and updating subject notification and objection mechanisms.
+  good_enough: A documented assignment of responsibility for privacy controls related to automated decisions,
+    even if not fully detailed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need to know which information assets (systems, datasets) are involved in automated decision-making
+    to verify that all relevant subject rights mechanisms are covered in the review.
+  good_enough: A basic inventory of assets involved in automated decisions, sufficient to identify review
+    targets.

@@ -1,0 +1,20 @@
+must_id: item:A.5.35:prior_review_compare
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Comparison or movement from prior review's findings (open / closed / aged) — proves the program
+  returns value across cycles
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each current finding with the previous review’s findings, clearly marking items as new,
+  open, closed, or aged.
+- Record the date each finding was first identified and, if closed, the date of closure, in the review
+  report.
+- Name the responsible individual for tracking and updating the status of each finding, not just a team
+  or department.
+- Document a summary section that highlights overall movement since the last review, including the number
+  of findings resolved or still outstanding.
+- Attach supporting evidence, such as action plans or closure confirmations, for each finding marked as
+  closed.

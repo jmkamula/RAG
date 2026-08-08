@@ -1,0 +1,18 @@
+must_id: item:A.5.34:reg_data_subjects
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Data subject categories per processing activity (customers, employees, prospects, minors, vulnerable
+  groups — drives extra-safeguard decisions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity in your PII Processing Register with a unique reference and a clear, descriptive
+  title.
+- Specify the exact categories of data subjects involved in each processing activity, such as customers,
+  employees, minors, or vulnerable groups.
+- Name the owner of each processing activity as a specific individual, not a team or department.
+- Record the date each entry was last reviewed or updated to show the information is current.
+- Avoid using generic categories like "users" or "public" without further detail, as auditors will flag
+  vague or incomplete classifications.

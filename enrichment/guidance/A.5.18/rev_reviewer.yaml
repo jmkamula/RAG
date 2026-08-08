@@ -1,0 +1,20 @@
+must_id: item:A.5.18:rev_reviewer
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Reviewer identity and role recorded (asset owner + InfoSec lead jointly; reviewer must not
+  be the same person who authorised the access)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the asset owner and the Information Security lead as joint reviewers in the access rights
+  review record, listing their full names and job titles.
+- Record the date and time when each reviewer completed their part of the access rights review, creating
+  a clear audit trail.
+- Confirm in the review record that neither reviewer is the same person who originally authorised the
+  access, noting the authoriser’s name for cross-checking.
+- Require both reviewers to sign or electronically acknowledge the completed review, attaching evidence
+  of their independent review actions.
+- Avoid using generic titles like "the team" or "IT department" for reviewers; always specify individuals
+  by name.

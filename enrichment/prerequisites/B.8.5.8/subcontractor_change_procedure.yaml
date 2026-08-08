@@ -1,0 +1,51 @@
+leaf_id: req:B.8.5.8:subcontractor_change_procedure
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: B.8.5.1
+  standard_id: ISO27701:2019
+  title: Processor Use of Subcontractors
+  category: direct
+  rationale: This control establishes the baseline requirement for processors to obtain general written
+    authorisation from the customer before engaging subcontractors. Without this, there is no basis for
+    the notification or objection process described in B.8.5.8.
+  good_enough: There must be a documented approach or policy confirming that customer authorisation is
+    required for subcontractor engagement, even if not yet fully operationalised.
+- ref: B.8.5.7
+  standard_id: ISO27701:2019
+  title: Processor Subcontractor Obligations
+  category: direct
+  rationale: This control ensures that any subcontractor used by the processor is subject to the same
+    privacy obligations as the processor itself. The notification procedure must reference or align with
+    these obligations to ensure continuity of protection.
+  good_enough: There should be a template or checklist showing that subcontractor agreements mirror processor
+    obligations, even if not all contracts are updated.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which business units, processes, and third parties (including
+    subcontractors) are covered by the ISMS and PIMS. Without clarity on scope, it is impossible to know
+    which subcontractor changes require notification.
+  good_enough: A draft or approved scope statement that clearly identifies in-scope third parties and
+    processing activities.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities is necessary to ensure that the right people
+    are accountable for managing subcontractor changes and customer notifications.
+  good_enough: A RACI or similar matrix showing who is responsible for subcontractor management and customer
+    communications, even if not yet fully embedded in practice.
+- ref: Art.28
+  standard_id: GDPR:2016/679
+  title: Processor Obligations
+  category: cross_role
+  rationale: Article 28 of the GDPR sets the legal expectation for processors to inform controllers of
+    intended changes to subcontractors and allow objections. The procedure must align with these legal
+    requirements to be effective and defensible.
+  good_enough: A summary or mapping of Article 28 requirements to internal procedures, demonstrating awareness
+    of the legal standard.

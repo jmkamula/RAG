@@ -1,0 +1,19 @@
+must_id: item:A.8.29:lifecycle_gates
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Test gates in lifecycle (per-commit / pre-merge / pre-release / post-deployment)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each test gate in the development lifecycle by name, trigger point, and required tests in the
+  Security Testing in Development and Acceptance Procedure.
+- Assign a specific individual as the owner responsible for approving test results at each gate, listing
+  their name and role.
+- Record the date and outcome of security tests at each gate in a version-controlled log linked to the
+  relevant code change or release.
+- Attach evidence of test completion, such as signed reports or automated tool outputs, to each stage’s
+  acceptance checklist.
+- Specify test gate owners by individual name, not by team or generic role, to avoid auditor concerns
+  about unclear accountability.

@@ -1,0 +1,19 @@
+must_id: item:A.8.13:scope_change_drivers
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new system, RPO change, new vendor)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current systems, applications, and data sources included in your backup scope, with named owners
+  and last review dates.
+- Document a trigger list that requires immediate backup scope review when adding a new system, changing
+  Recovery Point Objectives, or onboarding a new vendor.
+- Assign responsibility for monitoring trigger events to a specific individual, not a team or department,
+  and record their name in the backup policy.
+- Record each backup scope review decision with the date, reason for review, and names of participants
+  in a version-controlled register.
+- Cross-reference the trigger list and backup scope in your change management records to show prompt action
+  when a trigger event occurs.

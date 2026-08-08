@@ -1,0 +1,19 @@
+must_id: item:A.7.4.9:scope_customer_apis
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Customer-facing APIs carrying PII
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all customer-facing APIs that transmit personally identifiable information (PII) and list them
+  in a dated inventory document.
+- Document the types of PII transmitted by each API, referencing specific data fields and data flow diagrams
+  where available.
+- Name a specific individual responsible for maintaining the API inventory and updating the scope as APIs
+  or data flows change.
+- Record the approval of the transmission context scope by a named data protection officer or equivalent,
+  including the approval date.
+- Avoid describing the scope in generic terms; specify actual API endpoints and data types rather than
+  using broad categories like "all customer data."

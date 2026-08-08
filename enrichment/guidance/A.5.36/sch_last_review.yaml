@@ -1,0 +1,17 @@
+must_id: item:A.5.36:sch_last_review
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Last review date per item
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the last review date for each compliance item in the schedule, using a clear date format such
+  as YYYY-MM-DD.
+- Name the reviewer as a specific individual for each item, avoiding generic labels like "Compliance Team"
+  or "IT Department."
+- Retain evidence of the review, such as meeting minutes or a signed checklist, linked to each item's
+  last review date.
+- Cross-reference the review schedule with supporting documentation to confirm each listed date matches
+  the actual review activity.

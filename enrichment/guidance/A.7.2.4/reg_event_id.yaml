@@ -1,0 +1,17 @@
+must_id: item:A.7.2.4:reg_event_id
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Unique consent event id per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique consent event ID to each row in the register, using a sequential or system-generated
+  identifier that cannot be reused.
+- Record the date and time each consent was captured alongside the unique event ID for clear traceability.
+- Name the data subject and the specific processing activity linked to each consent event ID in the register.
+- Cross-reference each consent event ID with supporting evidence, such as a signed consent form or digital
+  confirmation.
+- Avoid using generic or duplicate IDs; verify that each event ID is distinct and not repeated elsewhere
+  in the register.

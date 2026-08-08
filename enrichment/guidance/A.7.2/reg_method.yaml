@@ -1,0 +1,15 @@
+must_id: item:A.7.2:reg_method
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Per-event entry method (badge / biometric / mechanical / visitor-escort / exception-override)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the entry method used for each physical access event in the register, specifying badge, biometric,
+  mechanical key, visitor-escort, or exception-override.
+- Document the date, time, and full name of each person entering, along with the entry method, for every
+  event.
+- Assign responsibility for maintaining the register to a named individual, not a team or department.
+- Review the register regularly to confirm that no entry event is missing a clearly stated entry method.

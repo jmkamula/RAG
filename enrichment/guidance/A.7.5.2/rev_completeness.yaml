@@ -1,0 +1,17 @@
+must_id: item:A.7.5.2:rev_completeness
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+must_text: Completeness check — actual PII flows reconciled against register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the list of countries in your PII transfer register with actual data flow diagrams or
+  system logs from the Destinations Program.
+- Document any discrepancies between registered destinations and observed PII flows in a dated reconciliation
+  report, naming the reviewer.
+- Assign a specific individual to review and sign off on the reconciliation, avoiding generic titles like
+  "the team" or "IT".
+- Record corrective actions taken for any unregistered PII transfers, including dates and responsible
+  persons.

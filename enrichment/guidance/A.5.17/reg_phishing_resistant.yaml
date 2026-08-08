@@ -1,0 +1,20 @@
+must_id: item:A.5.17:reg_phishing_resistant
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Phishing-resistant flag per row where the credential is phishing-resistant (FIDO2, passkeys,
+  hardware-token) vs phishable (SMS, password)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a "Phishing-Resistant" column to your credential register, labeling each credential as either "Yes"
+  or "No" based on its authentication method.
+- List the specific authentication technology for each credential entry, such as "FIDO2," "passkey," "hardware
+  token," "SMS," or "password."
+- Cross-reference each credential entry with supporting documentation or system logs that confirm the
+  authentication method in use.
+- Name the person responsible for maintaining the accuracy of the phishing-resistant status for each credential,
+  using a specific individual's name, not a team or department.
+- Record the date of the last review or update for each credential entry to show ongoing maintenance and
+  accuracy.

@@ -1,0 +1,19 @@
+must_id: item:8.1:reg_criteria_met
+control_ref: '8.1'
+standard_id: ISO27001:2022
+must_text: Criteria-met indicator per row (process ran per the established criteria)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to the Operational Execution Register labeled "Criteria Met" with clear Yes/No or Pass/Fail
+  options for each process entry.
+- Record the date and name of the individual who verified that each process met the established criteria
+  in the corresponding register row.
+- Attach or cross-reference supporting evidence, such as logs or reports, for each process entry where
+  "Criteria Met" is marked Yes.
+- Name the verifier as a specific individual for each row—do not use generic terms like "team" or "operations
+  staff".
+- Review the register regularly to confirm that no process entry is missing a completed "Criteria Met"
+  indicator or verifier name.

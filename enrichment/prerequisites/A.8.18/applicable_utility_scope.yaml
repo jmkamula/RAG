@@ -1,0 +1,40 @@
+leaf_id: req:A.8.18:applicable_utility_scope
+control_ref: A.8.18
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines which systems, processes, and assets are covered by your information
+    security program. You can't define which utility programs are "applicable" until you know what parts
+    of the organization and infrastructure are in-scope.
+  good_enough: A clear, approved scope statement that identifies the boundaries of the ISMS and the main
+    assets and processes it covers.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need an up-to-date asset register to identify which systems and software are in use,
+    so you can determine which utility programs could be privileged or sensitive in your environment.
+  good_enough: A working inventory of key assets (hardware, software, tools) relevant to the ISMS, even
+    if not fully exhaustive.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Knowing how assets and tools are classified (e.g., by sensitivity or criticality) helps determine
+    which utility programs require special controls and should be considered "privileged."
+  good_enough: A basic, documented classification scheme that distinguishes at least between ordinary
+    and sensitive/privileged tools.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment identifies threats and vulnerabilities related to utility programs, helping
+    you justify why certain tools are considered privileged and need to be in scope.
+  good_enough: A recent risk assessment that covers key risks associated with privileged or utility software,
+    even if not fully detailed.

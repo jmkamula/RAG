@@ -1,0 +1,17 @@
+must_id: item:Art.36:reg_sa
+control_ref: Art.36
+standard_id: GDPR:2016/679
+must_text: Per-row supervisory authority engaged
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the name of the supervisory authority engaged for each consultation row in the register, matching
+  the relevant jurisdiction for the processing activity.
+- Enter the date when the supervisory authority was first contacted for each entry, providing a clear
+  timeline of engagement.
+- Attach or cross-reference correspondence or meeting notes with the supervisory authority for each row,
+  ensuring traceability of the engagement.
+- Name the contact person at the supervisory authority for each consultation, avoiding generic references
+  such as "the authority" or "their office".

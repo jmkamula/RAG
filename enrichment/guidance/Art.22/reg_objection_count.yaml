@@ -1,0 +1,16 @@
+must_id: item:Art.22:reg_objection_count
+control_ref: Art.22
+standard_id: GDPR:2016/679
+must_text: Per-row objection count (Art.22-related rights requests this period)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the number of Art.22-related objections received for each automated decision-making process in
+  a dedicated column of the register for this period.
+- Name the individual responsible for updating objection counts in the register, listing their full name
+  rather than a team or department.
+- Date each update to the objection count so auditors can verify the reporting period covered.
+- Cross-reference each objection entry with supporting documentation, such as request forms or correspondence,
+  stored in your case management system.

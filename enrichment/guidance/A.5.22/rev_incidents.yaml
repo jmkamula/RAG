@@ -1,0 +1,19 @@
+must_id: item:A.5.22:rev_incidents
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Information exchanged about InfoSec incidents; joint review documented
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and agenda of each joint review meeting with the supplier, including discussion of information
+  security incidents and exchanged information.
+- Document the names and roles of all attendees from both your organisation and the supplier present at
+  each review.
+- Summarise key decisions, actions, and follow-ups agreed during the review, and include references to
+  any incident reports discussed.
+- Obtain signatures or written confirmation from both parties to verify that the joint review took place
+  and the documented outcomes are agreed.
+- Name the review owner as a specific individual, not a group or department, to avoid ambiguity about
+  responsibility.

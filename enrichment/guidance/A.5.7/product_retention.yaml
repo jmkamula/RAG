@@ -1,0 +1,18 @@
+must_id: item:A.5.7:product_retention
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Retention period for intelligence products stated (often shorter than other compliance records
+  — IOC libraries age fast)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific retention period for each type of intelligence product in the Threat Intelligence
+  Programme Procedure, with justification for shorter durations where applicable.
+- Document the date when each intelligence product is added to your repository, so its age and relevance
+  can be tracked.
+- Name the individual responsible for reviewing and updating retention periods, ensuring this is not left
+  to a team or department.
+- Record the date of the last review of retention periods in the procedure, showing regular reassessment
+  based on product relevance.

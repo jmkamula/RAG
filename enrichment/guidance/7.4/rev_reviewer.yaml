@@ -1,0 +1,17 @@
+must_id: item:7.4:rev_reviewer
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (ISMS Manager + comms lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the ISMS Manager and the communications lead as the reviewers in the Communication Program Review
+  document, listing their full names and job titles.
+- Record the date each reviewer completed their review in the document, ensuring the dates are clearly
+  visible and unambiguous.
+- Obtain signatures or written confirmation from both the ISMS Manager and the communications lead to
+  verify their participation in the review.
+- Avoid listing a team, department, or generic title as the reviewer; specify named individuals to meet
+  accountability requirements.

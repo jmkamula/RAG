@@ -1,0 +1,17 @@
+must_id: item:A.8.15:analysis_link
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Analysis integration (cross-link to A.8.16 monitoring — passive logging insufficient)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference your logging procedure to the monitoring process described under control A.8.16, showing
+  how log data is actively analysed for security events.
+- Document the specific tools or methods used to review and analyse log data, including how alerts or
+  anomalies are identified.
+- Name the individual or role responsible for performing log analysis, ensuring it is not listed as a
+  generic team or department.
+- Record examples of recent log analysis activities, including dates and outcomes, to demonstrate that
+  analysis is ongoing and not just passive collection.

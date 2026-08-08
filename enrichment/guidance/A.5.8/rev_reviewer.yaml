@@ -1,0 +1,15 @@
+must_id: item:A.5.8:rev_reviewer
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Reviewer identity (InfoSec lead + PMO/project office head jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the Information Security lead and the head of the PMO or project office as joint reviewers
+  in the review documentation.
+- Record the full names, job titles, and signatures of both reviewers on each completed project-security
+  program review form.
+- State the date the joint review was conducted on the review record to provide a clear timeline.
+- Avoid listing a group or department as reviewer; specify individual names to meet accountability requirements.

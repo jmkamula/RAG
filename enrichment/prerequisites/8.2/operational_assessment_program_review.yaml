@@ -1,0 +1,41 @@
+leaf_id: req:8.2:operational_assessment_program_review
+control_ref: '8.2'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need a clear ISMS scope to know which processes, assets, and organizational units must
+    be covered by operational assessments and their reviews. Without this, you can't be sure your review
+    is complete or relevant.
+  good_enough: A documented scope statement that identifies the boundaries and applicability of the ISMS,
+    even if it's not perfect, is sufficient to proceed.
+- ref: '8.1'
+  standard_id: ISO27001:2022
+  title: Operational planning and control
+  category: direct
+  rationale: Operational planning defines what assessments are required, their frequency, and triggers
+    for significant changes. The review in 8.2 checks if these plans were followed, so you need them in
+    place first.
+  good_enough: A basic operational plan listing required assessments and change triggers is enough to
+    start the review, even if some details are still being refined.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: direct
+  rationale: Risk assessments identify what needs to be tested and reviewed operationally. Without an
+    initial risk assessment, you can't judge if the right operational assessments were planned or conducted.
+  good_enough: At least one completed risk assessment covering the main ISMS scope is sufficient to inform
+    the operational assessment review.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the organization's commitment to security and defines expectations for reviews
+    and continuous improvement. The review process should align with these policy commitments.
+  good_enough: A published, management-approved security policy that references review and improvement
+    is enough to proceed, even if it's brief.

@@ -1,0 +1,17 @@
+must_id: item:B.8.2.4:reg_customer_response
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Customer response per row (withdrew / defended / disputed / no response)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'Record the customer’s response to each infringing instruction notification in a dedicated column of
+  the register, using clear terms: withdrew, defended, disputed, or no response.'
+- Enter the date the customer response was received for each notification to provide a clear timeline
+  of actions.
+- Name the staff member who logged each customer response in the register for traceability.
+- Attach supporting correspondence or evidence of the customer’s response to each register entry.
+- Avoid leaving the customer response field blank or using vague terms like \\"pending\\" or \\"TBC\\";
+  update with a definitive status for every row.

@@ -1,0 +1,19 @@
+must_id: item:A.7.3.4:rev_channel_test
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+must_text: Channel test — end-to-end withdrawal test per channel
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each communication channel where individuals can withdraw consent, such as email, web form, or
+  phone, in a dated register.
+- Conduct an end-to-end test of the withdrawal process for each channel and record the date, tester name,
+  and outcome for each test.
+- Save copies of all test communications and system responses as evidence of the withdrawal process functioning
+  as intended.
+- Assign a specific individual to review and sign off on the successful completion of each channel test,
+  not a generic team or department.
+- Document any issues found during testing and the corrective actions taken, including dates and responsible
+  persons.

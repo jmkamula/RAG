@@ -1,0 +1,19 @@
+must_id: item:B.8.2.1:proc_standard_terms
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+must_text: Standard terms template used across customers with change-control
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the standard terms template file and record its version number and approval date in a central document
+  register.
+- Assign a specific individual as the template owner responsible for maintaining and updating the standard
+  terms.
+- Document the change-control process, including steps for requesting, reviewing, and approving any changes
+  to the template.
+- Retain a log of all approved changes to the template, including the date, nature of the change, and
+  the approver’s name.
+- Confirm that all customer agreements reference the correct template version by cross-referencing agreement
+  records with the template register.

@@ -1,0 +1,17 @@
+must_id: item:A.7.3.9:reg_fee_charged
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Fee-charged flag + amount per row where applicable
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to the Master Subject Request Register to record whether a fee was charged for each subject
+  request.
+- Enter the exact fee amount in the register row for each subject request where a fee was applied.
+- Record "No fee" or leave the fee amount column blank only when no fee was charged, avoiding ambiguous
+  entries like "N/A".
+- Name the person responsible for updating fee information in the register as a specific individual, not
+  a team or department.
+- Date each entry in the register to show when the fee decision and amount were recorded.

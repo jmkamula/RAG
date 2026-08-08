@@ -1,0 +1,40 @@
+leaf_id: req:Art.20:portability_procedure
+control_ref: Art.20
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of what personal data you process, for what purposes,
+    and under which lawful bases to identify which data is subject to portability. Without this, you can't
+    reliably fulfill or scope a portability request.
+  good_enough: A current RoPA that covers all relevant processing activities, including lawful basis and
+    data categories, is available and accessible to those drafting the procedure.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Art.20 only applies to data processed on the basis of consent or contract. You must know
+    which processing activities use these lawful bases to determine when the right to portability applies.
+  good_enough: A mapping or summary exists showing which processing activities rely on consent or contract,
+    sufficient to identify in-scope data for portability.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer (DPO) Designation
+  category: foundational
+  rationale: If a DPO is required, they must be involved in the design and oversight of data subject rights
+    procedures, including portability. Their input ensures legal and practical adequacy.
+  good_enough: If a DPO is required, their role and contact details are documented, and they are available
+    for consultation during procedure drafting.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which systems, processes, and data are covered by security controls,
+    which impacts how and where personal data can be extracted and transferred for portability.
+  good_enough: A defined ISMS scope exists that covers the relevant systems and processes handling personal
+    data subject to portability requests.

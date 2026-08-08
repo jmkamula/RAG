@@ -1,0 +1,18 @@
+must_id: item:A.5.6:renewal_dates
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Subscription or membership renewal dates tracked
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each group or forum name, the subscribed individual, and the initial subscription or membership
+  start date in the register.
+- Enter the next renewal date for each membership, updating this field immediately after each renewal
+  is processed.
+- Assign responsibility for tracking renewals to a named individual, not a generic role or team.
+- Retain evidence of renewal confirmations, such as dated receipts or email acknowledgments, linked to
+  each register entry.
+- Review the register quarterly and document the review date and reviewer’s name to confirm all renewal
+  dates remain current.

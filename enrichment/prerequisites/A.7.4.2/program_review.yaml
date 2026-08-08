@@ -1,0 +1,49 @@
+leaf_id: req:A.7.4.2:program_review
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope statement defines which processing activities, assets, and business units are covered
+    by the ISMS and privacy extension. Without a clear scope, it's impossible to know which processing
+    operations must be reviewed for limitation and necessity.
+  good_enough: A documented scope that clearly lists in-scope processes, locations, and entities for privacy
+    management.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is needed to identify all information assets and systems involved
+    in personal data processing. This ensures the review covers all relevant processing operations.
+  good_enough: A current inventory of systems, applications, and data stores that handle personal data,
+    even if some details are high-level.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You cannot review processing limitations or necessity without first having documented the
+    purposes for which personal data is processed. This forms the baseline for assessing necessity and
+    access.
+  good_enough: Each processing activity has a stated and documented purpose, even if some are grouped
+    or described at a summary level.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: To verify processing limitation and necessity, you need to know the lawful basis for each
+    processing operation. This ensures that only justified processing is included in the review.
+  good_enough: Lawful basis is mapped to each processing activity, with at least a basic justification
+    for each.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of privacy and security roles is necessary to ensure accountability for
+    conducting the annual review and enforcing access limitations.
+  good_enough: Named individuals or roles are assigned responsibility for privacy program oversight and
+    review activities.

@@ -1,0 +1,15 @@
+must_id: item:A.5.7:reg_source_id
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Each active source captured with a unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each active threat intelligence feed in the register, assigning a unique identifier that is not
+  reused for any other source.
+- Record the name, provider, and activation date for each feed entry to ensure clear traceability.
+- Cross-reference each identifier with supporting documentation or contracts to confirm the feed’s legitimacy
+  and current status.
+- Name the register owner as a specific individual, not a team or department, to avoid ambiguity in responsibility.

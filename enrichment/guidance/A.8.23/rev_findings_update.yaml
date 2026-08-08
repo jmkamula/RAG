@@ -1,0 +1,19 @@
+must_id: item:A.8.23:rev_findings_update
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: Findings propagated to policy / scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the findings from the latest web filtering program review in a dated summary report, naming
+  the individual responsible for the review.
+- Cross-reference each finding to the relevant section of your information security policy or scope statement,
+  noting any required updates.
+- Assign a named individual to update affected policies or scope documents, recording the date and nature
+  of each change.
+- Record formal approval of updated policies or scope by a specific decision-maker, capturing their name
+  and the approval date.
+- Name the policy or scope owner as a specific individual, not a team or department, to avoid ambiguity
+  in accountability.

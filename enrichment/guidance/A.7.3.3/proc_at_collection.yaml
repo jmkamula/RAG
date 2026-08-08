@@ -1,0 +1,19 @@
+must_id: item:A.7.3.3:proc_at_collection
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: At-collection delivery — notice presented when PII is collected (form, signup flow, kiosk)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the exact point in each data collection process where the privacy notice is shown to individuals,
+  including screenshots or workflow diagrams.
+- Record the date each privacy notice was last updated and the date it was implemented in the collection
+  process.
+- Name the person responsible for maintaining and updating the privacy notice delivery procedure, using
+  a specific individual's name rather than a team or department.
+- Retain copies of the privacy notices as presented at each collection point, showing the content visible
+  to users at the time of data entry.
+- Confirm that the privacy notice cannot be bypassed or skipped before personal information is submitted,
+  and keep evidence of this control in system logs or user flow documentation.

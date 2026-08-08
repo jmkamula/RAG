@@ -1,0 +1,17 @@
+must_id: item:7.1:scope_categories
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Resource categories in scope (financial, human, infrastructure, technology, knowledge/IP)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each resource category in scope—financial, human, infrastructure, technology, and knowledge/intellectual
+  property—in a dated document approved by management.
+- Name the specific individual responsible for maintaining the resource categories list, avoiding generic
+  titles like "the team" or "management."
+- Cross-reference the resource categories list with your information security management system scope
+  statement to confirm alignment.
+- Retain evidence of annual review of the resource categories list, including reviewer name and review
+  date.

@@ -1,0 +1,19 @@
+must_id: item:A.7.10:transport
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Transport rules (encryption in transit, courier requirements, chain of custody)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for encrypting storage media before transport, including the encryption method
+  and responsible person, in the lifecycle procedure.
+- Name the approved couriers or transport methods for physical media, including any vetting or contractual
+  requirements, in a dated register.
+- Record each media transfer in a chain of custody log, capturing sender, recipient, date, time, and unique
+  media identifier.
+- Require signatures from both sender and recipient on the chain of custody log for every handover, ensuring
+  no steps are verbal-only or unsigned.
+- State the process for reporting and investigating any loss or tampering of media during transport, including
+  notification contacts and timelines.

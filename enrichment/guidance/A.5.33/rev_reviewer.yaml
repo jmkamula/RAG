@@ -1,0 +1,17 @@
+must_id: item:A.5.33:rev_reviewer
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Reviewer identity and role recorded (records manager / compliance lead with legal-counsel sign-off
+  where material)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name and job title of the person conducting the review in the review log for each Periodic
+  Records Protection Program assessment.
+- Name the reviewer as a specific individual — do not use generic titles like "the team" or "IT department."
+- Document the date the review was completed and attach any supporting review notes or findings to the
+  record.
+- Obtain a signed approval or email confirmation from legal counsel if the review identifies material
+  changes or issues, and store this with the review record.

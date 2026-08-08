@@ -1,0 +1,18 @@
+must_id: item:Art.23:scope_purpose_distribution
+control_ref: Art.23
+standard_id: GDPR:2016/679
+must_text: Per-law Art.23.1 purpose (a-j)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each applicable Member State law that restricts GDPR rights, citing the specific law name and section
+  relevant to your organisation.
+- Document the exact purpose from Article 23.1(a-j) that each restriction addresses, matching the law
+  to the corresponding lettered purpose.
+- Name the internal legal or compliance lead responsible for reviewing and updating this list, using a
+  specific individual’s name.
+- Record the date when each law and purpose mapping was last reviewed and confirmed as current.
+- Avoid using generic or catch-all statements like "all relevant laws apply"—reference only concrete,
+  identified legal restrictions.

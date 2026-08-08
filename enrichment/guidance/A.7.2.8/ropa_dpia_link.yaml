@@ -1,0 +1,16 @@
+must_id: item:A.7.2.8:ropa_dpia_link
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: DPIA report link per row where PIA performed (A.7.2.5)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each processing activity in your PII Records of Processing with a direct link to the
+  corresponding Data Protection Impact Assessment report, where performed.
+- Document the date the DPIA was completed and the name of the person who approved it in the same row
+  as the processing activity.
+- State clearly in the RoPA when a DPIA was not required, including the rationale and a named decision-maker.
+- Name the DPIA owner as a specific individual, not a team or department, to avoid auditor concerns about
+  unclear accountability.

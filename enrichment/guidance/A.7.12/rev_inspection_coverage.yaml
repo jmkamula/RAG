@@ -1,0 +1,19 @@
+must_id: item:A.7.12:rev_inspection_coverage
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Per-run inspection coverage in period (all runs inspected per planned cadence)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to be responsible for scheduling and overseeing each periodic cabling inspection
+  cycle.
+- Record the date, location, and unique identifier of every cabling run inspected during each review period
+  in a central log.
+- Cross-reference the completed inspection log against the master list of all cabling runs to confirm
+  full coverage for the period.
+- Retain signed confirmation from the responsible individual that all planned cabling runs were inspected
+  as scheduled.
+- Name each inspected run specifically—avoid using generic terms like "all cables in server room" without
+  listing individual identifiers.

@@ -1,0 +1,17 @@
+must_id: item:B.8.4.2:proc_transfer_capability
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+must_text: Transfer capability — hand PII to nominated third party at customer request
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for transferring personal data to a nominated third party at the customer’s
+  written request, including required authorisations.
+- Name the individual responsible for approving each transfer request, ensuring this is a specific person
+  and not a generic role or team.
+- Record each transfer request and its outcome, including the date, customer details, third party identity,
+  and method of transfer, in a secure log.
+- Retain a copy of the customer’s explicit written request and the confirmation of transfer provided to
+  the customer.

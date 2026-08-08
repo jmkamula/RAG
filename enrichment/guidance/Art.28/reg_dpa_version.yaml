@@ -1,0 +1,13 @@
+must_id: item:Art.28:reg_dpa_version
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Per-row DPA version + execution date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the version number of the Data Processing Agreement (DPA) for each processor entry in the register.
+- Enter the date the DPA was fully executed for each processor, using a clear date format such as YYYY-MM-DD.
+- Attach a copy or direct link to the signed DPA document for each processor row in the register.
+- Name the processor and DPA owner as specific individuals, not generic roles or departments.

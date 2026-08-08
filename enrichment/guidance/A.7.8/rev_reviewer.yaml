@@ -1,0 +1,16 @@
+must_id: item:A.7.8:rev_reviewer
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Facilities + InfoSec)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Facilities and Information Security reviewers as specific individuals in the review record,
+  avoiding generic titles like "the team" or "department."
+- Record the date each reviewer completed their assessment on the Periodic Equipment Siting Program Review
+  document.
+- Sign the review document or approval form to confirm each named reviewer’s participation and agreement
+  with the findings.
+- Retain the final, signed review document in a centralized location accessible for audit reference.

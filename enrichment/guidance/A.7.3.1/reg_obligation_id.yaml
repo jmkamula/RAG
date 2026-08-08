@@ -1,0 +1,18 @@
+must_id: item:A.7.3.1:reg_obligation_id
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Unique obligation identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each obligation entry in the register, using a consistent numbering or
+  coding format.
+- Record the identifier directly alongside the full text of the obligation in each row of the register.
+- Cross-reference each identifier in related compliance documents, such as policies or risk assessments,
+  to demonstrate traceability.
+- Name the person responsible for maintaining and updating the obligation identifiers, listing them by
+  full name rather than a team or department.
+- Confirm that no two obligations share the same identifier by performing a periodic check and keeping
+  a dated record of the review.

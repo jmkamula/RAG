@@ -1,0 +1,47 @@
+leaf_id: req:A.7.3.9:master_request_register
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.3.4
+  standard_id: ISO27701:2019
+  title: Register of Access Requests
+  category: direct
+  rationale: The master register must reference and aggregate all subject access requests, which are tracked
+    in detail under A.7.3.4. Without this sub-register, the master cannot be complete.
+  good_enough: A basic log or table of access requests exists, even if not fully detailed, so the master
+    register can link or summarize them.
+- ref: A.7.3.5
+  standard_id: ISO27701:2019
+  title: Register of Rectification Requests
+  category: direct
+  rationale: Rectification requests are a core subject right and must be captured in the master register.
+    The sub-register for these requests must exist to ensure completeness.
+  good_enough: A simple record of rectification requests is available, even if not yet fully categorized,
+    to allow aggregation in the master register.
+- ref: A.7.3.6
+  standard_id: ISO27701:2019
+  title: Register of Erasure Requests
+  category: direct
+  rationale: Erasure (right to be forgotten) requests are a key privacy right. The master register cannot
+    be accurate without a source record of these requests.
+  good_enough: There is a working list or log of erasure requests that can be referenced or summarized
+    in the master register.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: Understanding the purposes for which personal data is processed is essential to correctly
+    categorize and respond to subject requests in the master register.
+  good_enough: A high-level mapping of processing purposes exists, even if not fully granular, to inform
+    the handling of subject requests.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: foundational
+  rationale: Knowing the lawful basis for processing is necessary to determine the organization's obligations
+    when handling subject requests and to record this in the master register.
+  good_enough: A summary of lawful bases for main processing activities is documented, sufficient to guide
+    responses to subject requests.

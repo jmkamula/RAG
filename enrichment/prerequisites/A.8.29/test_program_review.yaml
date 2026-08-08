@@ -1,0 +1,39 @@
+leaf_id: req:A.8.29:test_program_review
+control_ref: A.8.29
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know what systems, processes, and assets are in scope for your ISMS before you
+    can meaningfully review the coverage and effectiveness of your security testing program.
+  good_enough: A current, approved scope statement that clearly defines the boundaries of your ISMS, including
+    all relevant assets and processes.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: The security testing program should be risk-driven; without an up-to-date risk assessment,
+    you can't judge if your testing covers the most relevant threats and vulnerabilities.
+  good_enough: A recent risk assessment identifying key threats, vulnerabilities, and risk priorities
+    for the ISMS scope.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You need an inventory of information assets to ensure your testing program covers all critical
+    systems and data types.
+  good_enough: A maintained list of information assets relevant to the ISMS, with enough detail to map
+    them to security testing activities.
+- ref: A.8.25
+  standard_id: ISO27001:2022
+  title: Secure development life cycle
+  category: direct
+  rationale: The SDLC defines when and how security testing is integrated into development; you can't
+    review the testing program without understanding these lifecycle touchpoints.
+  good_enough: Documented SDLC procedures that specify security testing requirements and checkpoints for
+    new and changed systems.

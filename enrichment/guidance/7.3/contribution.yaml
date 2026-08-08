@@ -1,0 +1,19 @@
+must_id: item:7.3:contribution
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Content covers contribution to ISMS effectiveness (incl. benefits of improved performance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the specific topics in your awareness programme that explain how staff actions contribute to the
+  effectiveness of your information security management system.
+- Document examples in the training materials showing the benefits of improved information security performance,
+  such as reduced incidents or compliance achievements.
+- Record the date and version of the awareness programme content to show it includes up-to-date information
+  on ISMS effectiveness and benefits.
+- Name the programme owner as a specific individual responsible for content accuracy and updates, not
+  just a team or department.
+- Retain attendee records confirming staff have received and understood the ISMS effectiveness and benefits
+  content.

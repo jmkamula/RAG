@@ -1,0 +1,17 @@
+must_id: item:Art.26:contact_point
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Contact point for data subjects identified
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the designated contact point for data subjects as a specific individual or role in the joint controller
+  arrangement document.
+- Document the contact details, including email and phone number, for the identified contact point in
+  the arrangement.
+- State the process for updating the contact point information and record the date of the most recent
+  update.
+- Avoid listing only a generic email address or unnamed team as the contact point; specify a real person
+  or defined role.

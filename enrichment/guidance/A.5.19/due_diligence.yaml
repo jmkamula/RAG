@@ -1,0 +1,17 @@
+must_id: item:A.5.19:due_diligence
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Due diligence steps before engagement (questionnaire, attestation review, audit)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the due diligence process steps in the Supplier Information Security Risk Management Procedure,
+  including use of questionnaires, attestation reviews, and audits.
+- Assign responsibility for conducting supplier due diligence to a named individual, not a generic role
+  or team.
+- Retain completed supplier questionnaires, attestation documents, and audit reports with supplier names
+  and dates in a central, accessible location.
+- Record the final due diligence decision, including approval or rejection, with the approver’s name and
+  date on a formal record.

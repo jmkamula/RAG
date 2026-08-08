@@ -1,0 +1,16 @@
+must_id: item:8.2:rev_reviewer
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Risk Manager + ISMS Manager)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the Risk Manager and ISMS Manager as individual reviewers in the assessment program review
+  document, using full names and current job titles.
+- Record the date each reviewer completed their review beside their name in the program review documentation.
+- Obtain and attach a signed or digitally acknowledged statement from both reviewers confirming their
+  participation in the review.
+- Avoid listing a group, team, or department as the reviewer; always specify named individuals for clear
+  accountability.

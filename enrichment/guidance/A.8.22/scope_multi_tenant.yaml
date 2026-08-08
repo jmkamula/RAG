@@ -1,0 +1,19 @@
+must_id: item:A.8.22:scope_multi_tenant
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Per-tenant segregation requirements where multi-tenant (data + control + log isolation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific data, control, and log elements that require segregation for each tenant in a documented
+  segregation scope statement.
+- Assign a named individual responsible for maintaining and updating the segregation scope, avoiding generic
+  roles like "IT team" or "Operations".
+- Record the technical and procedural controls in place that enforce tenant-specific segregation, referencing
+  configuration files or system settings by date.
+- Document the date and outcome of the most recent review of segregation controls, including any changes
+  made or issues identified.
+- Retain evidence of testing or validation activities demonstrating that tenant data, controls, and logs
+  are not accessible across tenants.

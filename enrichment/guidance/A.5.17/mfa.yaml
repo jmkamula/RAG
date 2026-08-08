@@ -1,0 +1,20 @@
+must_id: item:A.5.17:mfa
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Multi-factor authentication mandated for in-scope access (admin accounts, remote access, sensitive
+  data access) — promoted from SHOULD because MFA is no longer optional baseline
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that multi-factor authentication is required for all admin accounts, remote access,
+  and access to sensitive data systems.
+- List the specific systems and applications where multi-factor authentication is enforced, including
+  screenshots or configuration records as evidence.
+- Name the individual responsible for maintaining and updating the multi-factor authentication settings,
+  not just a team or department.
+- Record the date the procedure was last reviewed and updated to reflect the mandatory multi-factor authentication
+  requirement.
+- Attach a sample access log or authentication report showing successful use of multi-factor authentication
+  for an in-scope account.

@@ -1,0 +1,17 @@
+must_id: item:Art.29:exception_handling
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Exception handling — Union/MS law overrides (Art.29 second clause) recorded when invoked
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each instance when Union or Member State law overrides normal processing authority, including
+  the specific law invoked and the date of occurrence.
+- Name the individual who authorized the exception, ensuring a specific person is listed rather than a
+  generic role or team.
+- Retain a copy of the legal basis or official communication that triggered the exception, attaching it
+  to the relevant case record.
+- Record the decision and rationale for invoking the exception in a dedicated exception log, referencing
+  the applicable article or statute.

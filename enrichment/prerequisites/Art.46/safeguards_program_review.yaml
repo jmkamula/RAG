@@ -1,0 +1,40 @@
+leaf_id: req:Art.46:safeguards_program_review
+control_ref: Art.46
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.44
+  standard_id: GDPR:2016/679
+  title: General principle for transfers
+  category: direct
+  rationale: You must confirm that your data transfers fall under GDPR’s general rules for international
+    transfers before you can rely on Art.46 safeguards. This ensures you’re not bypassing any fundamental
+    transfer restrictions.
+  good_enough: Document the types of cross-border transfers in scope and confirm that Art.44 applies to
+    them, even if not every transfer is fully mapped yet.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: A current RoPA is needed to identify which processing activities involve international transfers
+    and which vendors or partners are in scope for Art.46 safeguards.
+  good_enough: Maintain a basic, up-to-date RoPA that lists all processing activities and highlights those
+    involving international transfers.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: You must know the lawful basis for each processing activity to assess if transfers and safeguards
+    are justified and compliant under GDPR.
+  good_enough: Identify and record the lawful basis for each relevant processing activity, especially
+    those involving international transfers, even if some justifications are still being finalized.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: A clear ISMS scope ensures that your safeguards review covers all relevant systems, vendors,
+    and data flows subject to GDPR transfer rules.
+  good_enough: Have a documented ISMS scope that includes all business units and systems involved in international
+    data transfers, even if the scope is still being refined.

@@ -1,0 +1,16 @@
+must_id: item:A.7.4.1:reg_last_reviewed
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Last necessity-review date per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent necessity-review date for each data collection field as a separate column in
+  your inventory spreadsheet.
+- Name the reviewer responsible for each necessity review as a specific individual, not a group or department.
+- Retain supporting evidence, such as meeting notes or approval emails, that confirm the necessity review
+  occurred on the recorded date.
+- Update the necessity-review date promptly after each review to avoid outdated or missing entries in
+  the inventory.

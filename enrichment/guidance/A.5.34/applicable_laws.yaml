@@ -1,0 +1,17 @@
+must_id: item:A.5.34:applicable_laws
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Applicable privacy laws identified (GDPR, UK GDPR, regional equivalents, sectoral privacy laws
+  — HIPAA, LGPD, PIPEDA, CCPA, etc.) — each named, not just 'privacy laws'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each privacy law and regulation by its full name and jurisdiction in the policy document, such
+  as "General Data Protection Regulation (GDPR) – European Union".
+- Reference the specific sections or articles of each law that apply to your organisation’s activities
+  and types of personal data handled.
+- Name the person or role responsible for monitoring changes in privacy laws and updating the policy,
+  using a named individual rather than a generic title.
+- Date the policy version and include a revision history showing when each law was last reviewed or added.

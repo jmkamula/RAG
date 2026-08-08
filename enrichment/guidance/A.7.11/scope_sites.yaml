@@ -1,0 +1,18 @@
+must_id: item:A.7.11:scope_sites
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Sites in scope (drawn from A.7.1 register — typically data centres + key office sites)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the list of sites in your utility continuity scope against the A.7.1 register to confirm
+  all relevant locations are included.
+- Document each site by name and address, specifying whether it is a data centre, key office, or other
+  critical facility.
+- Assign a specific individual responsible for maintaining the list of applicable sites, naming them directly
+  rather than a team or department.
+- Record the date when the site list was last reviewed and updated to show it reflects current operations.
+- Attach supporting evidence, such as floor plans or utility contracts, for each site listed to demonstrate
+  their relevance to the scope.

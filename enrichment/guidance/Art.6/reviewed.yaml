@@ -1,0 +1,16 @@
+must_id: item:Art.6:reviewed
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Register reviewed within freshness window when activities or bases change
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent review of the Lawful Basis Register in a dedicated column or field.
+- Assign a named individual responsible for monitoring changes in processing activities or lawful bases.
+- Document any updates or changes to the register with a brief description, date, and the person making
+  the change.
+- Name the reviewer as a specific individual, not a team or department, for each review entry.
+- Retain evidence of periodic review, such as a signed or digitally acknowledged review log, within the
+  register or accompanying documentation.

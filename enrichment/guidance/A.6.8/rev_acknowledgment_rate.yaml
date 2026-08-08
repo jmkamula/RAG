@@ -1,0 +1,20 @@
+must_id: item:A.6.8:rev_acknowledgment_rate
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Acknowledgment rate to reporters (where reporter known) — drives reporter satisfaction and
+  ongoing willingness to report
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for acknowledging receipt of reports, including required timeframe, in a written
+  procedure approved and dated by management.
+- Record each acknowledgment sent to a known reporter, including the date, method of communication, and
+  name of the recipient.
+- Track and calculate the acknowledgment rate for all reports with known reporters in a dated summary
+  report reviewed by a named manager.
+- Name the owner responsible for monitoring acknowledgment rates as a specific individual, not a team
+  or department.
+- Retain copies of acknowledgment messages sent to reporters in a secure, auditable location for reference
+  during reviews.

@@ -1,0 +1,16 @@
+must_id: item:A.8.9:reg_version
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Per-baseline current version (semver or date-stamped)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the current version of each configuration baseline in the register using a clear format such
+  as semantic versioning or a date stamp.
+- Name the individual responsible for updating each baseline version, ensuring a specific person is listed
+  rather than a team or department.
+- Cross-reference each baseline entry with the date it was last reviewed or updated, showing ongoing maintenance.
+- Retain previous baseline versions in the register for comparison, allowing detection of unauthorized
+  or unplanned changes.

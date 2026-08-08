@@ -1,0 +1,17 @@
+must_id: item:A.8.10:scope_media_methods
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Media classes enumerated with required deletion method per class
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of media used in your organisation, such as hard drives, USB sticks, backup tapes, and
+  cloud storage.
+- Specify the required deletion or destruction method for each media type, referencing recognised standards
+  or manufacturer guidance where applicable.
+- Assign a named individual responsible for approving the deletion method for each media class, not just
+  a team or department.
+- Document the date when the deletion scope and methods were last reviewed and updated.
+- Retain the signed approval record for the current media deletion scope and methods.

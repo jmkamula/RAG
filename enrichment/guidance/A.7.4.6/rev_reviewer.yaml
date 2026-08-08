@@ -1,0 +1,16 @@
+must_id: item:A.7.4.6:rev_reviewer
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+must_text: Reviewer identity (Infrastructure + DPO)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer for the Temp Files Program as a specific individual from Infrastructure and a specific
+  individual from the Data Protection Officer team.
+- Record the full names and job titles of both reviewers in the program review document, along with the
+  date of the review.
+- Sign the review document by both named reviewers to confirm their participation and agreement with the
+  review findings.
+- Avoid listing a group, department, or generic title as the reviewer; always specify named individuals.

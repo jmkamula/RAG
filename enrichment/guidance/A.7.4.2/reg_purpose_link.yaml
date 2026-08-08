@@ -1,0 +1,18 @@
+must_id: item:A.7.4.2:reg_purpose_link
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+must_text: Purpose link per row (A.7.2.1)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing operation in your inventory, assigning a unique row for every distinct activity
+  involving personal data.
+- Record the specific, documented purpose for each processing operation directly in its corresponding
+  row, referencing the approved purpose statement.
+- Cross-reference each purpose to the relevant section of your organisation’s data processing policy or
+  privacy notice.
+- Name the owner of each processing operation as a specific individual, not a team or department.
+- Review the inventory to confirm there are no generic or missing purposes; update any vague entries such
+  as “business needs” with precise, approved wording.

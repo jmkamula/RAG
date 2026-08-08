@@ -1,0 +1,18 @@
+must_id: item:Art.28:scope_controller_vs_processor
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Controller-vs-processor decision criteria (means & purpose test per EDPB guidelines)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific business activity and describe who determines the purpose and means of processing
+  in a dated record.
+- Name the decision-maker as a specific individual responsible for applying the controller-versus-processor
+  test, not a team or department.
+- Record the criteria used for the controller-versus-processor decision, referencing the EDPB guidelines
+  and noting any relevant examples.
+- Retain written justification for each processor relationship, including how the means and purpose test
+  was applied, signed by the responsible individual.
+- Cross-reference each documented decision to the relevant contract or data processing agreement for traceability.

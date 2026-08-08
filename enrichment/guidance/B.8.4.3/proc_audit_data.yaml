@@ -1,0 +1,19 @@
+must_id: item:B.8.4.3:proc_audit_data
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Audit data retention per transmission event
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the retention period for audit data related to each transmission event in the Processor Transmission
+  Controls Procedure, including start and end dates.
+- Record each transmission event in an audit log, capturing the date, time, data type, and responsible
+  individual.
+- State the location where audit data is stored and reference the relevant retention schedule in your
+  procedure.
+- Name the person responsible for monitoring and enforcing audit data retention, ensuring this is a specific
+  individual rather than a team or department.
+- Retain evidence of periodic reviews confirming that expired audit data is deleted or archived according
+  to the documented retention period.

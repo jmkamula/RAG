@@ -1,0 +1,18 @@
+must_id: item:Art.35:scope_sa_list
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Lead SA Art.35.4 published list integrated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Retrieve the latest published list of processing operations requiring a Data Protection Impact Assessment
+  (DPIA) from your Lead Supervisory Authority’s official website.
+- Cross-reference your organisation’s processing activities against each item on the Lead SA’s published
+  list, recording the results in your DPIA register.
+- Document the date and source URL of the Lead SA list version you used, attaching a copy or screenshot
+  for audit evidence.
+- Name a specific individual responsible for maintaining and updating the DPIA scope with reference to
+  changes in the Lead SA’s published list.
+- Avoid using a generic or outdated list; confirm the list is current and specific to your Lead SA’s jurisdiction.

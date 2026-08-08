@@ -1,0 +1,17 @@
+must_id: item:A.7.13:schedule
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Maintenance schedule per equipment class with intervals
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each equipment class in a table, including a clear description and unique identifier for every
+  type of equipment covered.
+- Specify the required maintenance interval for each equipment class, using exact timeframes such as "monthly"
+  or "quarterly" in the schedule.
+- Assign a named individual or role responsible for maintaining each equipment class, avoiding vague labels
+  like "IT" or "the team".
+- Record the date the maintenance schedule was last reviewed and approved, including the approver’s name
+  or signature.

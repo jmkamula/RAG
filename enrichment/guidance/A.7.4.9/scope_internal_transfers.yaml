@@ -1,0 +1,17 @@
+must_id: item:A.7.4.9:scope_internal_transfers
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Internal transfers (cross-region backup / DR replication / data warehouse loads)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all internal data transfers, including cross-region backups, disaster recovery replications, and
+  data warehouse loads, in a dated transmission context register.
+- Document the systems, data types, and regions involved for each internal transfer, referencing specific
+  system names and geographic locations.
+- Assign a named individual responsible for maintaining and updating the transmission context scope, ensuring
+  the owner is a specific person, not a team or department.
+- Record the review date and reviewer’s name for each update to the transmission context scope to provide
+  evidence of regular oversight.

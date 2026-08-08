@@ -1,0 +1,20 @@
+must_id: item:A.5.36:sch_cadence
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Cadence per item (annual baseline; tighter for high-risk or fast-changing items — e.g. acceptable
+  use, access control)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each compliance item in the review schedule, specifying the required review frequency for each
+  based on risk and rate of change.
+- Assign a named individual as the responsible owner for scheduling and tracking each review, avoiding
+  generic roles like "the team."
+- Record the date when the review frequency was last set or updated for each item, along with who approved
+  it.
+- Attach supporting risk assessments or rationale justifying any review cadence shorter or longer than
+  annual for specific items.
+- Review the schedule at least annually to confirm all listed frequencies remain appropriate and update
+  the record with the review date and reviewer’s name.

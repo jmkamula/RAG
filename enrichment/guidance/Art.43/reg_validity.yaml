@@ -1,0 +1,18 @@
+must_id: item:Art.43:reg_validity
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Per-row validity period (max 3 years per Art.42.7)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the start and end dates for each certification issued, ensuring the validity period does not
+  exceed three years.
+- Name the individual who approved the certification issuance, listing their full name and role for each
+  record.
+- State the legal basis for the validity period in each record, referencing Article 42.7 of the GDPR.
+- Flag any record where the validity period exceeds three years, and document corrective action taken
+  to address the non-compliance.
+- Retain a copy of the original certification document for each entry, linked to its corresponding validity
+  period record.

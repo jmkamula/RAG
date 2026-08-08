@@ -1,0 +1,20 @@
+must_id: item:Art.36:rev_escalation_audit
+control_ref: Art.36
+standard_id: GDPR:2016/679
+must_text: Escalation audit — every Art.35 DPIA flagging residual high risk has a corresponding Art.36
+  consultation row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference every Data Protection Impact Assessment (DPIA) that identifies a residual high risk
+  with a dated entry in the Article 36 consultation log.
+- Record the name of the individual responsible for escalating each high-risk DPIA to the supervisory
+  authority in the consultation log.
+- Attach supporting documentation showing the supervisory authority was consulted, including correspondence
+  and any feedback received.
+- Name the DPIA owner as a specific individual, not as a team or department, in both the DPIA and consultation
+  records.
+- Confirm that no DPIA with residual high risk lacks a matching consultation entry by conducting a periodic
+  reconciliation between DPIA and consultation logs.

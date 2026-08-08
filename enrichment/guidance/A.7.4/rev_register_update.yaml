@@ -1,0 +1,19 @@
+must_id: item:A.7.4:rev_register_update
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: Changes propagated to the procedure / scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and summary of each monitoring program review in a central log, including any identified
+  changes to procedures or scope.
+- Name the person responsible for updating procedures or scope following each review, ensuring this is
+  a specific individual, not a group or department.
+- Document the exact changes made to the procedure or scope, referencing the review that triggered each
+  update.
+- Attach the updated version of the procedure or scope, with version number and date, to the review record
+  for traceability.
+- Obtain and retain a signed confirmation from the program owner that all agreed changes have been implemented
+  after each review.

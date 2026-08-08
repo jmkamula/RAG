@@ -1,0 +1,17 @@
+must_id: item:A.7.4.9:reg_endpoint
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Source + destination endpoints per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each PII transmission channel in a table, including both the source endpoint and the destination
+  endpoint for every row.
+- Specify endpoints using unique system names or IP addresses, not vague terms like "internal server"
+  or "cloud."
+- Record the date each entry was added or last updated, and name the person responsible for maintaining
+  the inventory.
+- Attach supporting documentation, such as network diagrams or data flow maps, to cross-reference each
+  listed transmission channel.

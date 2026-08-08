@@ -1,0 +1,19 @@
+must_id: item:B.8.2.5:scope_change_drivers
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: Trigger list (new certification obtained / certification lapsed / new audit tier launched)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current certifications and audit tiers relevant to your information management in a dated register
+  maintained by a named responsible individual.
+- Record each time a new certification is obtained, a certification lapses, or a new audit tier is launched,
+  including the date and decision-maker.
+- Cross-reference the trigger events in your audit context scope document, showing when and why updates
+  were made.
+- Name the owner as a specific individual responsible for monitoring and updating trigger events—do not
+  use a team or department name.
+- Retain evidence of communication or approval for each trigger event, such as an email or signed record
+  from management.

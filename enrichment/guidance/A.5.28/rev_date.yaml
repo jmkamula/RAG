@@ -1,0 +1,15 @@
+must_id: item:A.5.28:rev_date
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Review date within the planned annual interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent evidence-handling program review date in a central log, clearly showing the day,
+  month, and year.
+- Compare the recorded review date against the planned annual interval to confirm it falls within the
+  required timeframe.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Retain a signed or approved copy of the review outcome, showing the date and reviewer’s name.

@@ -1,0 +1,19 @@
+must_id: item:7.4:reg_ack
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: Per-row acknowledgement evidence where required (read-receipt, attendance log, signed receipt)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, time, and method of each ISMS communication event in the register, linking to the relevant
+  policy or message shared.
+- Capture a per-person acknowledgement for each event, such as a read-receipt, signed attendance log,
+  or signed receipt, and attach it to the register entry.
+- Name each recipient individually in the register; avoid listing groups or departments without specifying
+  actual attendees.
+- Retain digital or physical copies of all acknowledgement evidence alongside the corresponding register
+  entry for future reference.
+- Review each register entry to confirm that required acknowledgements are present and complete before
+  marking the communication event as closed.

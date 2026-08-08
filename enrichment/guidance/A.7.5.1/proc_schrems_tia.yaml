@@ -1,0 +1,20 @@
+must_id: item:A.7.5.1:proc_schrems_tia
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: Schrems II Transfer Impact Assessment — for Art.46 safeguard transfers, assess third-country
+  legal environment + supplementary measures per EDPB 01/2020
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and document each third-country where personal data will be transferred, including the specific
+  recipient organisation and purpose of transfer.
+- Record the legal basis for transfer under Article 46, specifying the exact safeguard mechanism used,
+  such as Standard Contractual Clauses.
+- Complete and retain a Schrems II Transfer Impact Assessment for each transfer, detailing the third-country’s
+  surveillance laws and potential access by public authorities.
+- Describe any supplementary technical, contractual, or organisational measures applied to mitigate identified
+  risks, referencing EDPB Recommendations 01/2020.
+- Name the responsible individual who approved the assessment and measures, ensuring the record is signed
+  and dated—do not leave this as a group or department.

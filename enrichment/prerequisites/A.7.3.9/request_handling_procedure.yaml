@@ -1,0 +1,57 @@
+leaf_id: req:A.7.3.9:request_handling_procedure
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.3.4
+  standard_id: ISO27701:2019
+  title: Procedure for Responding to Access Requests
+  category: direct
+  rationale: This procedure details how to handle subject access requests, which is a core type of subject-rights
+    request. Without it, the umbrella request handling procedure cannot specify intake and response steps
+    for access requests.
+  good_enough: A documented, draft-level procedure exists describing intake, verification, and response
+    for access requests.
+- ref: A.7.3.5
+  standard_id: ISO27701:2019
+  title: Procedure for Responding to Rectification Requests
+  category: direct
+  rationale: Rectification is a common subject-right, and its handling must be referenced in the umbrella
+    procedure. The specifics of rectification requests must be known before integrating them into the
+    broader process.
+  good_enough: A basic documented process for handling rectification requests is available, even if not
+    fully optimized.
+- ref: A.7.3.6
+  standard_id: ISO27701:2019
+  title: Procedure for Responding to Erasure Requests
+  category: direct
+  rationale: Erasure (right to be forgotten) requests have unique requirements and risks. The umbrella
+    procedure must reference and coordinate with this specific process.
+  good_enough: There is a working draft or outline of the erasure request process, covering intake and
+    basic decision logic.
+- ref: A.7.3.7
+  standard_id: ISO27701:2019
+  title: Procedure for Responding to Restriction Requests
+  category: direct
+  rationale: Restriction of processing is another subject-right that must be addressed in the overall
+    request handling procedure. Its process must be defined to ensure correct triage and routing.
+  good_enough: A documented outline exists for handling restriction requests, sufficient to reference
+    in the umbrella procedure.
+- ref: A.7.3.8
+  standard_id: ISO27701:2019
+  title: Procedure for Responding to Objection Requests
+  category: direct
+  rationale: Objections to processing are a distinct category of subject-rights requests. The umbrella
+    procedure must be able to direct these appropriately, requiring a defined underlying process.
+  good_enough: A draft or template procedure for objection requests is available for reference and linkage.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: Understanding the purposes for which personal data is processed is essential for triaging
+    and responding to subject-rights requests. This context is needed to determine the validity and scope
+    of requests.
+  good_enough: A current list of processing purposes exists, even if not fully mapped to all systems,
+    to support request evaluation.

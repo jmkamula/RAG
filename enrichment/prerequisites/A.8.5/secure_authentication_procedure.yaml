@@ -1,0 +1,48 @@
+leaf_id: req:A.8.5:secure_authentication_procedure
+control_ref: A.8.5
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, users, and environments are in-scope for your ISMS before
+    defining how authentication provisioning applies. This ensures the procedure covers all relevant assets
+    and avoids gaps.
+  good_enough: A clear, approved scope statement that identifies the boundaries and applicability of the
+    ISMS, including major systems and user groups.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register is needed to identify which systems and accounts require authentication
+    provisioning, and to ensure all relevant assets are covered by the procedure.
+  good_enough: A basic, current list of information assets (applications, systems, devices) that require
+    user authentication.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities is essential so you know who is authorized
+    to provision, modify, or revoke authentication credentials.
+  good_enough: A documented list or matrix showing who is responsible for authentication-related tasks,
+    even if not fully detailed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Understanding the classification of information helps determine the required strength and
+    type of authentication for different systems or data sets.
+  good_enough: A simple, working classification scheme that distinguishes at least between public, internal,
+    and sensitive/confidential data.
+- ref: A.5.17
+  standard_id: ISO27001:2022
+  title: Authentication Information Lifecycle
+  category: direct
+  rationale: The lifecycle management of authentication information (creation, distribution, storage,
+    destruction) directly informs how provisioning should be handled securely.
+  good_enough: A draft or outline of how authentication information is managed throughout its lifecycle,
+    even if not finalized.

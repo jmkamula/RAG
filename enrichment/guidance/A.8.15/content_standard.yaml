@@ -1,0 +1,19 @@
+must_id: item:A.8.15:content_standard
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Required log content per source class (who / what / when / where / outcome / target)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all log sources by class (e.g., servers, applications, network devices) in the logging procedure
+  with a named owner for each class.
+- Specify required log fields for each source class, including user identity, action taken, timestamp,
+  source location, result, and affected target.
+- Document an example log entry for each source class showing all required fields populated with realistic
+  sample data.
+- State the review date and reviewer’s name on the procedure to confirm the log content requirements are
+  current and validated.
+- Name the owner as a specific individual — not a team or department — responsible for maintaining and
+  updating log content requirements.

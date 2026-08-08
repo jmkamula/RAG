@@ -1,0 +1,20 @@
+must_id: item:A.5.11:rev_unreturned_rate
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Unreturned-asset rate analysed (count of leavers with status=exception or written_off; root
+  cause per cluster)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the total number of departing staff and count those with assets marked as "exception" or "written_off"
+  in a dated review log.
+- Analyse and document the unreturned-asset rate, showing the percentage and absolute numbers for each
+  reporting period.
+- Identify and summarise root causes for unreturned assets, grouping them by common factors or clusters
+  in a written report.
+- Name the reviewer as a specific individual responsible for the analysis, avoiding generic labels like
+  "HR" or "IT team".
+- Retain supporting evidence, such as exception logs and written-off asset records, referenced in the
+  review documentation.

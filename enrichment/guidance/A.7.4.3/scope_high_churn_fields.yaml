@@ -1,0 +1,19 @@
+must_id: item:A.7.4.3:scope_high_churn_fields
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: High-churn field categories (contact details / address / employment / preferences)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all personal data fields with high-churn risk, such as contact details, addresses, employment status,
+  and user preferences, in a dated register.
+- Name a specific individual responsible for maintaining the accuracy of each high-churn field category
+  in the register.
+- Document the criteria used to determine which data fields are considered high-churn, including examples
+  and rationale, in a version-controlled record.
+- Record the date and outcome of the most recent review of high-churn field categories, including any
+  updates or changes made.
+- Avoid grouping ownership under generic labels like "the team" or "IT"; assign responsibility to a named
+  person for each field category.

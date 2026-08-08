@@ -1,0 +1,15 @@
+must_id: item:A.5.2:review_date
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: Review date within the planned review interval (typically within 12 months of last review)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent roles and responsibilities review in a dedicated register or tracking
+  document.
+- Name the person responsible for conducting the review as a specific individual, not a team or department.
+- Confirm the review date falls within the planned interval by cross-referencing it with the previous
+  review date and the documented schedule.
+- Sign and date the review record to provide clear evidence of when the review was completed.

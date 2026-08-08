@@ -1,0 +1,16 @@
+must_id: item:A.8.33:reg_location
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Per-row storage location + access-control reference
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the physical or cloud storage location for each test dataset row in the register, using a specific
+  path, bucket, or server name.
+- Cross-reference each dataset row to its applicable access-control policy or group, citing the exact
+  policy name or group identifier.
+- Name the owner of each test dataset row as a specific individual, not a team or generic department.
+- Date each entry in the register to show when the storage location and access-control references were
+  last verified.

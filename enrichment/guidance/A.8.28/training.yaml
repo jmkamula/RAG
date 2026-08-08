@@ -1,0 +1,16 @@
+must_id: item:A.8.28:training
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Secure-coding training for developers (cross-link to A.6.3)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the names of all developers who have completed secure-coding training, including training dates
+  and the specific course or provider.
+- Cross-reference the secure-coding training records with the staff training register required by control
+  A.6.3.
+- Retain attendance certificates or completion confirmations for each developer as evidence of training.
+- Name the training owner as a specific individual responsible for maintaining training records, not as
+  a team or department.

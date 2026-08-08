@@ -1,0 +1,17 @@
+must_id: item:Art.39:scope_risk_prioritisation
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Risk-based prioritisation criteria (per Art.39.2 due regard to risk)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the criteria used to prioritise data protection tasks based on risk, referencing specific risk
+  factors such as data sensitivity and processing volume.
+- Name the individual responsible for defining and updating the risk-based prioritisation criteria, ensuring
+  a specific person is listed rather than a group or department.
+- Record the date when the criteria were last reviewed and updated, maintaining a version history for
+  audit purposes.
+- Cross-reference the prioritisation criteria with your organisation’s risk assessment or register to
+  show alignment with identified data protection risks.

@@ -1,0 +1,17 @@
+must_id: item:A.6.1:rev_register_update
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Changes propagated back to the procedure / scope with reference to this review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and findings of the most recent periodic screening program review in a version-controlled
+  document.
+- Update the screening procedure or scope to reflect any approved changes, referencing the specific review
+  by date and summary.
+- Assign a named individual to approve and sign off on all updates made as a result of the review.
+- Cross-reference the updated procedure or scope with the review record to demonstrate that changes were
+  directly linked to review outcomes.
+- Name the owner as a specific individual—do not use generic titles like "HR team" or "Compliance department".

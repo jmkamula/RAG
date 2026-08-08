@@ -1,0 +1,18 @@
+must_id: item:8.1:rev_outsourced_oversight
+control_ref: '8.1'
+standard_id: ISO27001:2022
+must_text: Outsourced oversight check — every outsourced process has current supplier-side evidence (A.5.19/A.5.20)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each outsourced process in your operational planning program, naming the responsible supplier and
+  the internal owner for oversight.
+- Obtain and file current evidence from each supplier showing their controls meet your security and privacy
+  requirements, dated within the last 12 months.
+- Cross-reference each piece of supplier evidence to the relevant contract clause or service agreement
+  in your records.
+- Name the internal owner as a specific individual — do not use generic roles like "IT" or "the team".
+- Review and sign off on the completeness of supplier evidence annually, recording the date and approver’s
+  name.

@@ -1,0 +1,16 @@
+must_id: item:A.5.5:contact_details
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Current contact details per authority (name/role, phone, email, address)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each relevant authority by full name and role in the Authority Contact Register, ensuring no authorities
+  are grouped under generic titles.
+- Record up-to-date phone numbers, email addresses, and physical addresses for every authority entry,
+  verifying details are current as of the last review date.
+- Assign responsibility for maintaining the register to a named individual, not a department or team.
+- Date and sign the most recent review or update of the register to show when and by whom the information
+  was last confirmed.

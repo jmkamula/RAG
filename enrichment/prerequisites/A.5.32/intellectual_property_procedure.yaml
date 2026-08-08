@@ -1,0 +1,38 @@
+leaf_id: req:A.5.32:intellectual_property_procedure
+control_ref: A.5.32
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organisation and which information assets are in scope
+    for IPR protection. The procedure must align with the defined ISMS boundaries.
+  good_enough: A clear, documented scope that identifies included business units, processes, and asset
+    types is available and up to date.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You can't protect intellectual property if you don't know what assets exist or which ones
+    are IPR-relevant. The asset register provides the inventory needed to identify and apply IPR controls.
+  good_enough: A working asset register exists, listing key information assets and flagging those with
+    IPR implications.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: IPR protection depends on knowing the sensitivity and ownership of information. The classification
+    scheme ensures assets are labelled and handled according to their IPR status.
+  good_enough: A documented classification scheme is in place and applied to major asset types, including
+    those with IPR relevance.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The IPR procedure must be consistent with the organisation's overall security policy, which
+    sets the tone and expectations for protecting information, including intellectual property.
+  good_enough: A current, approved information security policy is available and accessible to staff.

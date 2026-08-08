@@ -1,0 +1,19 @@
+must_id: item:A.6.4:scope_jurisdictions
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Jurisdictions covered (employment-law variants — at-will US states vs just-cause EU vs notice-period
+  UK — drive process step variations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all countries and regions where your workers are employed or contracted, including US states, EU
+  countries, and UK jurisdictions, in a dated document.
+- Name the employment-law category for each jurisdiction, such as "at-will," "just-cause," or "notice-period,"
+  with a brief description for each.
+- Assign a specific individual responsible for maintaining and updating the jurisdictions and categories
+  list; do not use a team or department name.
+- Cross-reference each listed jurisdiction to the relevant employment process documents that reflect the
+  local legal requirements.
+- Retain a record of the last review date and the reviewer’s name on the scope document.

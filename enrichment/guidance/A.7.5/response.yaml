@@ -1,0 +1,20 @@
+must_id: item:A.7.5:response
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Response procedures per threat type (evacuation, suppression, shutdown, BCP activation cross-link
+  A.5.29/A.5.30)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step response procedure for each identified threat type, including evacuation, fire
+  suppression, system shutdown, and business continuity plan activation.
+- Cross-reference each response procedure with the relevant business continuity and disaster recovery
+  plans, specifically linking to controls A.5.29 and A.5.30.
+- Name a specific individual as the procedure owner for each threat type, avoiding generic titles like
+  "the team" or "IT department".
+- Record the date of the latest procedure review and approval, and retain evidence of sign-off by a designated
+  senior manager.
+- State the location where physical copies of the procedures are stored and confirm digital access permissions
+  for authorized staff.

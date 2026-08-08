@@ -1,0 +1,17 @@
+must_id: item:B.8.2.6:scope_own_controller_exclusion
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: Own-controller processing excluded (goes to a separate own-controller RoPA if the org also
+  acts as controller — Arion does both)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all processing activities in the Processor RoPA and clearly mark those performed solely as a processor
+  for another controller.
+- Exclude any processing activities where your organisation acts as its own controller; document these
+  in a separate, dedicated Controller RoPA.
+- Name the person responsible for maintaining the Processor RoPA as a specific individual, not a team
+  or department.
+- Record the date when the Processor RoPA was last reviewed to show the scope is current and accurate.

@@ -1,0 +1,19 @@
+must_id: item:A.8.12:log_alerts
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: All DLP alerts captured (channel / rule / classification / user / outcome)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record every data loss prevention (DLP) alert in a log, including the date, time, channel, triggered
+  rule, classification, user involved, and outcome.
+- Name the person responsible for maintaining the DLP alert log as a specific individual, not a team or
+  department.
+- Document the DLP rule or policy that triggered each alert by referencing its unique identifier or version
+  in the log entry.
+- Confirm that each log entry includes the final outcome or action taken, such as blocked, allowed, or
+  escalated, with supporting evidence.
+- Review the log monthly and sign off on the review, noting any missing required fields or incomplete
+  entries.

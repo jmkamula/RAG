@@ -1,0 +1,16 @@
+must_id: item:Art.85:rev_next_date
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Art.85 Derogation Program in the review document, using a
+  clear and specific calendar date.
+- Record the date in a dedicated section labeled "Next Planned Review Date" within the program review
+  file.
+- Name the responsible individual who set the review date, avoiding generic titles like "the team" or
+  "compliance department."
+- Retain a dated copy of the review document showing when the next review date was last updated.

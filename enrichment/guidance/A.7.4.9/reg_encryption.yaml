@@ -1,0 +1,17 @@
+must_id: item:A.7.4.9:reg_encryption
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Encryption standard per row (TLS 1.2 / TLS 1.3 / VPN / SFTP / etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each channel used to transmit personal data, specifying the exact protocol or encryption method
+  (e.g., TLS 1.2, SFTP) in a dated inventory.
+- Name the owner responsible for maintaining the inventory as a specific individual, not a team or department.
+- Record the date when each encryption method was last reviewed or updated for every transmission channel.
+- Attach supporting documentation or configuration screenshots that show the actual encryption settings
+  in use for each channel.
+- Cross-reference each channel entry with relevant data flow diagrams or network maps to confirm completeness
+  and accuracy.

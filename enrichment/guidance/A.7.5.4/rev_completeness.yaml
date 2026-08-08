@@ -1,0 +1,18 @@
+must_id: item:A.7.5.4:rev_completeness
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Completeness check — investigation + audit disclosures reconciled
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a responsible individual to oversee the reconciliation of investigation and audit disclosure records,
+  listing their full name and job title.
+- Document a dated record showing the comparison of all investigation disclosures against audit disclosures
+  for the review period.
+- Cross-reference each disclosure in the investigation log with its corresponding entry in the audit log,
+  noting any discrepancies in a reconciliation report.
+- Record the resolution of any unmatched disclosures, including actions taken and the person responsible
+  for each resolution.
+- Sign and date the final reconciliation report to confirm the completeness check was performed and reviewed.

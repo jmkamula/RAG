@@ -1,0 +1,18 @@
+must_id: item:Art.48:scope_authority_types
+control_ref: Art.48
+standard_id: GDPR:2016/679
+must_text: Foreign authority types in scope (law enforcement / national security / tax / regulatory)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all foreign authority types that may request access to personal data, specifying law enforcement,
+  national security, tax, and regulatory bodies.
+- Document the legal basis or agreements that allow each identified authority type to request data, including
+  relevant laws or treaties.
+- Name the person responsible for maintaining and updating the list of foreign authority types, ensuring
+  a specific individual is identified.
+- Record the date when the scope of foreign authority types was last reviewed and updated.
+- Avoid using generic categories such as "government agencies"—specify the exact authority types to prevent
+  ambiguity.

@@ -1,0 +1,18 @@
+must_id: item:A.7.13:reg_supervision_outcome
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Per-event supervision outcome (in-house supervised / unsupervised-with-justification / pre-cleared
+  provider)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, time, and location of each maintenance event in the Maintenance Event Register.
+- Name the supervisor present for each event, or document the justification if no in-house supervision
+  occurred.
+- State clearly for each event whether it was in-house supervised, unsupervised with justification, or
+  conducted by a pre-cleared provider.
+- Attach supporting evidence such as access logs or provider clearance documentation for each maintenance
+  entry.
+- Name the supervisor or decision-maker as a specific individual, not as a team or department.

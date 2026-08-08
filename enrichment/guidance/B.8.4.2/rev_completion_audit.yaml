@@ -1,0 +1,19 @@
+must_id: item:B.8.4.2:rev_completion_audit
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+must_text: Completion audit — sampled terminations verified end-to-end (data returned + disposal certified)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of recent service terminations and list them with unique identifiers and termination
+  dates in an auditable log.
+- Confirm for each sampled termination that all customer data was returned or transferred, and record
+  the completion date and responsible staff member.
+- Obtain and file a signed certificate or attestation of data disposal for each sampled termination, including
+  the disposal method and date.
+- Name the reviewer who performed the audit as a specific individual and record the date the audit was
+  completed.
+- Avoid using generic statements like "all data disposed" without supporting evidence for each sampled
+  termination.

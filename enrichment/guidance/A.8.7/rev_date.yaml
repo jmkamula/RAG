@@ -1,0 +1,15 @@
+must_id: item:A.8.7:rev_date
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval (≤180 days)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent malware protection program review date in a central log, showing it falls within
+  the last 180 days.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Attach the signed review summary or meeting minutes as evidence of the completed periodic review.
+- Schedule the next review date in a shared calendar, confirming it is no more than 180 days from the
+  last review.

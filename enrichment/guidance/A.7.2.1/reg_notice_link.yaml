@@ -1,0 +1,17 @@
+must_id: item:A.7.2.1:reg_notice_link
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Notice link — which §7.3.2 notice text discloses this purpose to subjects
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each processing purpose in the PII Processing Purpose Register to the exact section
+  or paragraph of the §7.3.2 notice where it is disclosed.
+- Record the URL or file path of the published §7.3.2 notice text alongside each processing purpose entry
+  in the register.
+- Name the individual responsible for maintaining the accuracy of these cross-references in the register,
+  using a specific person's name.
+- Confirm that every processing purpose listed in the register has a corresponding disclosure in the notice;
+  do not leave any purpose without a linked notice reference.

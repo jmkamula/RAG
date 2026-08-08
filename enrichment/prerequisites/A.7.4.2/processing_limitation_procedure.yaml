@@ -1,0 +1,47 @@
+leaf_id: req:A.7.4.2:processing_limitation_procedure
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the specific purposes for processing PII before you can limit
+    processing to what is adequate, relevant, and necessary. Without this, you cannot define or enforce
+    meaningful processing limitations.
+  good_enough: A documented list of processing purposes for each PII processing activity exists, even
+    if not fully optimized or mapped to all systems yet.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Processing limitation depends on knowing the lawful basis for each processing activity. This
+    ensures that only processing justified by a valid legal ground is permitted.
+  good_enough: Each processing activity has a stated lawful basis (e.g., consent, contract), even if some
+    edge cases are still under review.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A classification scheme is needed to identify which data is PII and to apply appropriate
+    access and retention controls. Without this, you cannot reliably limit processing or disclosure.
+  good_enough: A basic data classification scheme is in place and PII is tagged or identified in key systems.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An asset register helps you know where PII resides and which systems/processes handle it.
+    This is essential for enforcing processing limitations and access controls.
+  good_enough: A current inventory of information assets exists, with PII-relevant systems flagged, even
+    if not all legacy systems are fully mapped yet.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of your organization and which processing activities are in-scope
+    for privacy controls. This ensures your limitation procedure covers all relevant areas.
+  good_enough: A documented ISMS scope exists that includes all PII processing activities relevant to
+    this procedure.

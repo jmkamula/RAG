@@ -1,0 +1,18 @@
+must_id: item:7.3:reg_assessment_score
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Per-row assessment score where the module included a knowledge check
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each individual's full name, completion date, and assessment score for every ISMS awareness module
+  that includes a knowledge check.
+- Attach the specific module title and version to each register entry to clearly identify which knowledge
+  check was completed.
+- Name the owner of the register as a specific individual, not a team or department, to ensure clear accountability.
+- Retain evidence of the completed knowledge checks, such as quiz results or certificates, linked to each
+  register entry.
+- Review the register regularly to confirm that all required modules with knowledge checks have corresponding
+  assessment scores recorded.

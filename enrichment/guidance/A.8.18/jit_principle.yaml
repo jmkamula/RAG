@@ -1,0 +1,19 @@
+must_id: item:A.8.18:jit_principle
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: JIT-access principle — utilities not standing-installed where avoidable; cross-link to A.8.2
+  PAM
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a policy statement requiring privileged utility programs to be installed only when needed and
+  removed immediately after use.
+- Cross-reference the Privileged Access Management (PAM) policy section that governs JIT-access controls
+  for privileged utilities.
+- Name the policy owner as a specific individual with responsibility for enforcing JIT-access, not a team
+  or department.
+- Record the date of the most recent policy review and approval, signed by a designated senior manager.
+- List all privileged utility programs with their installation status and removal dates in an auditable
+  register.

@@ -1,0 +1,18 @@
+must_id: item:A.5.31:proc_update_triggers
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Update triggers enumerated (new law/regulation, regulator guidance, new customer contract,
+  new jurisdiction, sectoral code change)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all specific triggers that require an update to the legal/regulatory register, such as new laws,
+  regulatory guidance, customer contracts, new jurisdictions, or sectoral code changes.
+- Document each trigger in the maintenance procedure with a clear description and an example to show how
+  it applies to your organisation.
+- Assign a named individual responsible for monitoring these triggers, not a team or department, and record
+  their name and role in the procedure.
+- Record the date when the update triggers were last reviewed and approved, and retain the signed approval
+  from management.

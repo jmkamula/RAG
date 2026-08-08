@@ -1,0 +1,17 @@
+must_id: item:B.8.2.3:reg_withdrawal_handling
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: Withdrawal handling pathway per row (how subject opt-out propagates)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the withdrawal handling pathway for each exception entry, describing how a subject’s opt-out
+  request is received, recorded, and actioned.
+- Name the individual responsible for managing opt-outs for each entry, avoiding generic titles like "marketing
+  team" or "admin".
+- Record the date each withdrawal pathway was last reviewed or updated, showing the process is current
+  and maintained.
+- Cross-reference each pathway to supporting evidence, such as system logs or confirmation emails, that
+  demonstrate opt-out requests are processed as described.

@@ -1,0 +1,16 @@
+must_id: item:A.7.4:reg_timestamp
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: Per-event timestamp
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time for each monitoring event entry in the register, using a consistent and
+  unambiguous format.
+- Confirm that each event’s timestamp is generated automatically by the monitoring system, not entered
+  manually by staff.
+- Cross-reference each event’s timestamp with system logs to verify accuracy and detect any discrepancies.
+- Name the person responsible for reviewing the register to ensure all events have a valid, system-generated
+  timestamp.

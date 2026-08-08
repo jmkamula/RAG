@@ -1,0 +1,16 @@
+must_id: item:A.5.7:prod_distribution
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Distribution date and channel per record (email, ticket, briefing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each intelligence product was distributed in the per-product intelligence record.
+- Specify the distribution channel used for each product, such as email, ticketing system, or in-person
+  briefing, in the record.
+- Name the individual responsible for distributing each product, not just a team or department, in the
+  record.
+- Attach or reference supporting evidence, such as sent email logs or ticket numbers, to each distribution
+  entry.

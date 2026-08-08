@@ -1,0 +1,14 @@
+must_id: item:A.7.4.8:reg_media_type
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Media type per row (SSD / HDD / paper / tape / cloud volume)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the media type for each disposal entry in the register, specifying SSD, HDD, paper, tape, or
+  cloud volume as appropriate.
+- Cross-reference each media type entry with the corresponding asset inventory record to confirm accuracy.
+- Name the individual responsible for verifying the correct media type per row, not just a team or department.
+- Document the date each disposal entry was added to the register to support traceability.

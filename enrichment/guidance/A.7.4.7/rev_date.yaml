@@ -1,0 +1,16 @@
+must_id: item:A.7.4.7:rev_date
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of your retention program in a dated log or register entry.
+- Confirm the planned review interval is clearly stated in your retention program documentation, such
+  as annually or every two years.
+- Cross-reference the actual review date with the planned interval to show the review occurred on schedule.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Retain evidence of the review outcome, such as meeting minutes or a signed review summary, with the
+  review date visible.

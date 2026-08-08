@@ -1,0 +1,19 @@
+must_id: item:Art.30:processor_records
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: If the org also acts as processor, processor-side records per Art.30.2.a-d are included or
+  kept as a parallel register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all instances where your organisation acts as a data processor for other entities and list
+  them in a dedicated section of your Records of Processing Activities.
+- Document, for each processing activity as a processor, the name and contact details of the controller
+  and, where applicable, the controller’s representative and data protection officer.
+- Record the categories of processing carried out on behalf of each controller, ensuring descriptions
+  are specific and not generic or boilerplate.
+- State any transfers of personal data to a third country or international organisation, including the
+  identification of that country or organisation.
+- Name the owner of the processor-side records as a specific individual, not as a team or department.

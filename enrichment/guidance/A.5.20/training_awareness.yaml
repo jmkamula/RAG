@@ -1,0 +1,19 @@
+must_id: item:A.5.20:training_awareness
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Training and awareness requirements specific to information and access
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific training and awareness topics related to information security and access that suppliers
+  must cover in their staff programs within the agreement template.
+- Name the individual at your organisation responsible for verifying supplier training and awareness compliance,
+  listing their full name and job title.
+- Document the frequency at which suppliers must provide evidence of completed training, specifying a
+  clear interval such as "annually" or "upon onboarding."
+- Require suppliers to provide dated records or certificates of completed training for all staff with
+  access to your information or systems.
+- Specify that generic or boilerplate training requirements will not be accepted; tailor requirements
+  to the risks and access levels relevant to your organisation.

@@ -1,0 +1,18 @@
+must_id: item:Art.29:rev_authorisation_completeness
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Authorisation completeness — every person with access has a register row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every individual with access to personal data in a central register, including their full name
+  and unique identifier.
+- Record the date each person was granted access and the specific systems or data sets they can use.
+- Assign a named manager to review and approve each access entry, capturing their signature or electronic
+  approval.
+- Update the register immediately when access is revoked or changed, noting the date and reason for the
+  change.
+- Avoid grouping users under generic labels like "IT team" or "contractors"—enter each authorised person
+  as a separate row.

@@ -1,0 +1,17 @@
+must_id: item:A.7.2.1:proc_review_signoff
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Review + signoff step (DPO + legal counsel) before purpose enters production register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each new data processing purpose in a draft record, including a clear description and intended
+  use.
+- Assign the draft record to the Data Protection Officer and legal counsel for review, listing their full
+  names.
+- Record the review date and collect signatures from both the Data Protection Officer and legal counsel
+  on the draft record.
+- Retain the signed and dated review record before entering the purpose into the production register.
+- Name the reviewers as specific individuals—do not use generic titles or group names.

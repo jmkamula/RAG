@@ -1,0 +1,41 @@
+leaf_id: req:A.8.24:applicable_crypto_scope
+control_ref: A.8.24
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know what parts of your business and which information assets are covered by
+    your ISMS before you can define which data classes require cryptography. This ensures the cryptography
+    scope is aligned with your overall security boundaries.
+  good_enough: A clear, documented scope statement that identifies the organizational units, processes,
+    and information assets included in the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You must have an inventory of information assets to identify which ones process, store, or
+    transmit sensitive data that may require encryption. Without this, you can't map cryptographic needs
+    to actual assets.
+  good_enough: A basic, up-to-date list of key information assets, including data types and owners, is
+    available.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: A data classification scheme is essential to determine which data classes are sensitive and
+    thus require cryptographic protection. This underpins decisions about encryption requirements.
+  good_enough: A documented classification scheme exists and has been applied to major data types in the
+    asset register.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment identifies threats and vulnerabilities related to information assets, helping
+    prioritize which data classes need cryptographic controls based on risk exposure.
+  good_enough: A recent risk assessment that covers key information assets and highlights any cryptography-related
+    risks.

@@ -1,0 +1,17 @@
+must_id: item:A.8.29:scope_pen_test_classes
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Pen-test scope (which application classes require annual third-party testing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all application classes in scope for annual third-party penetration testing, including web, mobile,
+  and APIs, in a dated inventory document.
+- Name the specific individual responsible for defining and updating the penetration testing scope, not
+  a team or department.
+- Document the rationale for including or excluding each application class from annual third-party testing
+  in a written, dated record.
+- Reference the approved penetration testing scope in the annual security testing plan and cross-check
+  against actual testing engagements.

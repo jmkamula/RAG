@@ -1,0 +1,39 @@
+leaf_id: req:9.2:internal_audit_programme
+control_ref: '9.2'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The audit programme must cover the entire ISMS scope, so you need a stable, documented scope
+    to define what is in and out of audit coverage.
+  good_enough: The ISMS scope is documented, up to date, and agreed by management, with clear boundaries
+    for what the audit will address.
+- ref: 6.1.3
+  standard_id: ISO27001:2022
+  title: Statement of Applicability
+  category: direct
+  rationale: The Statement of Applicability (SoA) lists all controls and their implementation status,
+    guiding auditors on what to include in the audit programme.
+  good_enough: The SoA is current, lists all applicable controls, and is available to the audit planning
+    team.
+- ref: '5.3'
+  standard_id: ISO27001:2022
+  title: Organisational Roles, Responsibilities and Authorities
+  category: foundational
+  rationale: Clear roles and responsibilities are needed to ensure auditor independence and to assign
+    audit tasks appropriately within the organisation.
+  good_enough: Roles and reporting lines are defined well enough to identify independent auditors and
+    avoid conflicts of interest.
+- ref: A.8.34
+  standard_id: ISO27001:2022
+  title: Protection of information systems during audit testing
+  category: direct
+  rationale: Controls must be in place to ensure that audit activities do not compromise information systems,
+    which is essential for safe audit execution.
+  good_enough: There is a documented approach or guideline for protecting systems during audit activities,
+    even if detailed procedures are still being refined.

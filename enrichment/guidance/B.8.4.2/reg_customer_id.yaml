@@ -1,0 +1,17 @@
+must_id: item:B.8.4.2:reg_customer_id
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+must_text: Customer identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique customer identifier for each entry in the End-of-Service Action Register, ensuring it
+  matches the identifier used in your customer records.
+- Cross-reference each customer identifier in the register with your master customer list to confirm accuracy
+  and traceability.
+- Name the customer identifier field clearly in the register, avoiding generic labels like "client" or
+  "user" that could cause confusion.
+- Retain the date each end-of-service action was recorded alongside the customer identifier for complete
+  traceability.

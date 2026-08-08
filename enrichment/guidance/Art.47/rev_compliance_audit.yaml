@@ -1,0 +1,18 @@
+must_id: item:Art.47:rev_compliance_audit
+control_ref: Art.47
+standard_id: GDPR:2016/679
+must_text: Compliance audit — bound entities adhering to BCR provisions (sampled audit results)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named auditor or audit team with documented expertise in GDPR and BCR to conduct the compliance
+  review, listing individuals by name.
+- Record the audit scope, sampled entities, and BCR provisions tested in a dated audit plan approved by
+  a senior compliance officer.
+- Document audit findings for each sampled entity, including evidence of adherence or non-conformance,
+  in a signed and dated report.
+- Retain evidence that sampled entities were selected based on risk or random sampling, not convenience
+  or self-selection.
+- Name the audit owner as a specific individual — not a generic group or department — in the audit documentation.

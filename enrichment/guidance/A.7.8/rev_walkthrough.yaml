@@ -1,0 +1,18 @@
+must_id: item:A.7.8:rev_walkthrough
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Physical walkthrough (sample-based) — siting verified, tamper-evidence intact
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead each equipment siting review and record their name and review date
+  in a tracking log.
+- Document the specific equipment sampled, including serial numbers and physical locations, in a dated
+  walkthrough checklist.
+- Record observations confirming tamper-evidence features are intact for each sampled item, noting any
+  exceptions or concerns.
+- Attach photos or other evidence from the walkthrough to the review record for each sampled equipment
+  location.
+- Name the reviewer as a specific person, not a generic role or team, to avoid ambiguity in accountability.

@@ -1,0 +1,17 @@
+must_id: item:A.7.4.5:reg_activity_link
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: Processing activity per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each processing activity as a separate row in the End-of-Processing Action Register, clearly
+  describing the specific activity being completed.
+- Name the person responsible for each processing activity in the register, using their full name rather
+  than a team or department.
+- Enter the date when the end-of-processing action was completed for each activity, ensuring the date
+  field is not left blank.
+- Cross-reference each row to the relevant data processing agreement or contract, using a unique identifier
+  or contract number.

@@ -1,0 +1,19 @@
+must_id: item:A.7.5:scope_sectoral_drivers
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Sectoral drivers (data-centre industry standards, healthcare facility codes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical sites where your organisation operates, including data centres and healthcare facilities,
+  in a dated and version-controlled register.
+- Identify and document sector-specific standards or codes that apply to each site, such as data-centre
+  industry standards or healthcare facility codes.
+- Assign a named individual responsible for maintaining and updating the catalogue of applicable sites
+  and sectoral requirements.
+- Cross-reference each site entry with the relevant threat catalogue, showing how sectoral drivers influence
+  threat identification and controls.
+- Name the scope owner as a specific person, not a generic group or department, to avoid ambiguity in
+  responsibility.

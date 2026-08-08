@@ -1,0 +1,40 @@
+leaf_id: req:Art.36:prior_consultation_procedure
+control_ref: Art.36
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.35
+  standard_id: GDPR:2016/679
+  title: Data Protection Impact Assessment (DPIA)
+  category: direct
+  rationale: You cannot define when prior consultation is required unless you have a DPIA process that
+    identifies processing likely to result in high risk. The DPIA is the trigger for considering prior
+    consultation.
+  good_enough: A documented DPIA process exists and is used to assess new or changed processing activities
+    for risk, even if not all DPIAs are fully complete yet.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: Accurate records of processing are essential to identify which activities may require a DPIA
+    and, in turn, prior consultation. Without this, you can't reliably scope or trigger the procedure.
+  good_enough: A basic, up-to-date RoPA exists that lists core processing activities, even if some details
+    are still being refined.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer (DPO) Designation
+  category: foundational
+  rationale: The DPO is typically involved in both DPIAs and any engagement with the supervisory authority.
+    The procedure must clarify who leads or supports prior consultation.
+  good_enough: A DPO (or designated privacy lead) is named and contactable, even if their role is still
+    being fully operationalized.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope statement ensures the prior consultation procedure covers all relevant processing
+    activities within the ISMS boundary, avoiding gaps or overlaps.
+  good_enough: A draft ISMS scope exists that identifies the main business units and systems in scope
+    for GDPR compliance.

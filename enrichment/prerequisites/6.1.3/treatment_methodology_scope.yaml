@@ -1,0 +1,40 @@
+leaf_id: req:6.1.3:treatment_methodology_scope
+control_ref: 6.1.3
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know what parts of your organization and which information assets are in scope
+    for the ISMS before you can define how risks to them will be treated. The treatment methodology must
+    align with the boundaries set by the ISMS scope.
+  good_enough: A documented scope statement that clearly defines the organizational and asset boundaries
+    for the ISMS, even if some edge cases are still being clarified.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The risk treatment methodology must be consistent with the organization’s overarching information
+    security policy, which sets the tone for acceptable risk and treatment approaches.
+  good_enough: A published policy that sets out the organization's general approach to information security,
+    including risk appetite and high-level treatment principles.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information security risk assessment
+  category: direct
+  rationale: You can’t define how to treat risks until you know what those risks are and how they’ve been
+    assessed. The outputs of risk assessment directly inform the treatment methodology.
+  good_enough: A completed risk assessment process with documented risks and their ratings, even if some
+    risks are still being validated.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Defining who is authorized to accept residual risk and who is responsible for implementing
+    treatments is essential for a practical and enforceable methodology.
+  good_enough: A list or matrix showing key roles and their responsibilities for risk acceptance and treatment,
+    even if some assignments are interim.

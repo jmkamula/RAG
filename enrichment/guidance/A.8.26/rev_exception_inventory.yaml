@@ -1,0 +1,19 @@
+must_id: item:A.8.26:rev_exception_inventory
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Exception inventory re-confirmed / retired
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current application security exceptions in a dated inventory, including details of each exception
+  and its original approval.
+- Assign a named individual to review each exception for continued validity, confirming with a dated sign-off
+  for each item.
+- Record decisions to retire or re-confirm exceptions, referencing supporting evidence or risk assessments
+  for each decision.
+- Update the inventory to remove retired exceptions, noting the retirement date and the person authorizing
+  the removal.
+- Name the reviewer as a specific individual—avoid using group names or generic titles like "IT team"
+  or "Security Department".

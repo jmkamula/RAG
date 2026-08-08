@@ -1,0 +1,20 @@
+must_id: item:Art.85:proc_derogation_decision
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: Decision rules for which GDPR provisions are derogated for which activities (Chapter II/III/IV/V/VI/VII/IX
+  scope of permissible derogations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific GDPR articles and provisions being derogated, referencing the exact chapter and
+  article number for each activity.
+- State the lawful basis and justification for each derogation, linking to the relevant activity and explaining
+  why the derogation is necessary.
+- Name the individual or role responsible for approving each derogation decision, avoiding generic labels
+  like "the team" or "management".
+- Record the date each derogation decision was made and include a version number for the procedure to
+  show updates over time.
+- Cross-reference each derogation to supporting evidence, such as legal opinions or risk assessments,
+  to demonstrate the necessity of the derogation.

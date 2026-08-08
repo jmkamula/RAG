@@ -1,0 +1,16 @@
+must_id: item:B.8.5.4:scope_request_types
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+must_text: Request types enumerated (subpoena / court order / national security letter / regulator compulsion)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of legally-binding requests your organisation may receive, such as subpoenas, court orders,
+  national security letters, and regulator demands.
+- Document the source and legal authority for each request type in a dated register, referencing relevant
+  laws or regulations.
+- Name a specific individual responsible for maintaining and updating the request scope list—do not assign
+  this to a group or department.
+- Record the date of the last review or update to the request types, and keep a copy of the reviewed document.

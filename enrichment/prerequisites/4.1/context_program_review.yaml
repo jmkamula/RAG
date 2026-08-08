@@ -1,0 +1,40 @@
+leaf_id: req:4.1:context_program_review
+control_ref: '4.1'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The context review must verify that the ISMS scope is still accurate and relevant; without
+    a defined scope, there is nothing to review or validate.
+  good_enough: A documented scope statement exists that outlines the boundaries and applicability of the
+    ISMS, even if it is due for review or minor updates.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: direct
+  rationale: Understanding the organization's context requires knowledge of current risks; a recent risk
+    assessment ensures the issues register and identification framework are based on up-to-date information.
+  good_enough: A risk assessment has been performed within the last year, with key risks identified and
+    documented, even if some mitigation actions are still in progress.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: The context review process depends on clear assignment of responsibilities for maintaining
+    the issues register and identification framework; without this, accountability for context management
+    is unclear.
+  good_enough: Roles and responsibilities for ISMS context management are assigned and documented, even
+    if some role descriptions need refinement.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The context review must consider whether all relevant assets are captured and reflected in
+    the issues register and scope; missing asset information undermines the review's completeness.
+  good_enough: A basic asset register exists listing key information assets, even if some entries need
+    updating or categorization.

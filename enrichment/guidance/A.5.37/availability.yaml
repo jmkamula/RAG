@@ -1,0 +1,17 @@
+must_id: item:A.5.37:availability
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Availability mechanism stated per procedure (where personnel find them — intranet location,
+  runbook system, wiki path with permissions, code-of-conduct package)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact location where each operating procedure is published, such as a specific intranet URL,
+  wiki path, or document repository.
+- Record the access permissions for each procedure, listing which personnel or roles can view or edit
+  the document.
+- Name the owner responsible for maintaining the availability of each procedure as a specific individual,
+  not a team or department.
+- Document the date when each procedure’s availability mechanism was last verified or updated in the register.

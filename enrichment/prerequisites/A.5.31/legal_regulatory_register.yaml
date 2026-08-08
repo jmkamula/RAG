@@ -1,0 +1,39 @@
+leaf_id: req:A.5.31:legal_regulatory_register
+control_ref: A.5.31
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The legal and regulatory register must reflect the actual scope of the ISMS; without a clear
+    scope, you can't reliably identify which laws, regulations, and contracts apply.
+  good_enough: The ISMS scope statement exists, is documented, and covers all relevant business units,
+    locations, and activities for information security.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need to know what information assets exist and where they reside to determine which legal,
+    regulatory, and contractual requirements apply to them.
+  good_enough: There is a current list of key information assets, including owners and locations, sufficient
+    to map obligations to assets.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Understanding the classification of information helps identify which requirements are relevant,
+    especially where laws or contracts apply only to certain data types.
+  good_enough: A basic classification scheme is in place and applied to core information assets, so you
+    can link requirements to data types.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment helps prioritize which legal and regulatory requirements are most critical
+    based on the risks to information assets.
+  good_enough: A recent risk assessment exists that identifies major risks and references relevant legal
+    or regulatory drivers.

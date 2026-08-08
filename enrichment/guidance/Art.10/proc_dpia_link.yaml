@@ -1,0 +1,16 @@
+must_id: item:Art.10:proc_dpia_link
+control_ref: Art.10
+standard_id: GDPR:2016/679
+must_text: Link to Art.35 DPIA — Art.10 processing nearly always triggers DPIA
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the Criminal Convictions Data Authorisation Procedure to the relevant Data Protection
+  Impact Assessment (DPIA) by title and date in the procedure document.
+- State in the procedure that processing criminal convictions data requires a DPIA under Article 35.3(b),
+  citing the legal basis.
+- Attach a copy of the completed and signed DPIA, or a direct link to its location, within the authorisation
+  procedure records.
+- Name the DPIA owner as a specific individual responsible for updates and queries, not a team or department.

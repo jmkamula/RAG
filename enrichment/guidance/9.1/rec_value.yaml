@@ -1,0 +1,16 @@
+must_id: item:9.1:rec_value
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Per-row measured value
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each measurement result in its own row, clearly stating the measured value and the date it was
+  collected.
+- Name the person responsible for collecting and entering each measured value in a dedicated column for
+  accountability.
+- Cross-reference each measured value to the specific control or objective it relates to within the ISMS.
+- Avoid using summary averages or ranges in place of individual measured values; enter each discrete measurement
+  separately.

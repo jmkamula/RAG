@@ -1,0 +1,15 @@
+must_id: item:A.8.34:reg_outcome
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Per-engagement outcome + findings count
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the outcome of each audit testing engagement in the register, clearly stating if objectives were
+  met or issues were identified.
+- Document the exact number of findings for each engagement, listing zero if no findings were discovered.
+- Name the lead auditor or responsible person for each engagement, avoiding generic labels like "audit
+  team" or "staff".
+- Date each entry to show when the engagement was completed and the findings were recorded.

@@ -1,0 +1,16 @@
+must_id: item:Art.14:rev_date
+control_ref: Art.14
+standard_id: GDPR:2016/679
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Art.14 Privacy Notice Program in a dated document or register
+  entry.
+- Name the person who conducted the review, listing a specific individual rather than a group or department.
+- Cross-reference the documented review date against your planned review schedule to confirm it falls
+  within the required interval.
+- Retain evidence of the review, such as a signed review checklist or meeting minutes, showing the review
+  was actually completed.

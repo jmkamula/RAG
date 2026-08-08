@@ -1,0 +1,19 @@
+must_id: item:A.7.4.6:rev_orphan_sample
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+must_text: Orphan-file sample check — random directories checked for temp files past retention
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select and record a random sample of directories from your systems, listing their paths and the selection
+  date in a review log.
+- Identify and document any temporary files found in these directories that exceed your defined retention
+  period, noting file names and last modified dates.
+- Name the individual who performed the sample check, ensuring a specific person is listed rather than
+  a team or department.
+- Attach screenshots or export logs showing the presence or absence of out-of-retention temp files for
+  each sampled directory.
+- Sign and date the review summary, confirming the check was completed and any orphan files were addressed
+  or escalated.

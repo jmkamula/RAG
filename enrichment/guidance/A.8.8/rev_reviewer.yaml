@@ -1,0 +1,15 @@
+must_id: item:A.8.8:rev_reviewer
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Vulnerability Management lead + InfoSec lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Vulnerability Management lead and the Information Security lead as the designated reviewers
+  in the program review documentation.
+- Record the full names, job titles, and signatures of both leads on each periodic vulnerability program
+  review report.
+- State the review date clearly on the report to show when the most recent review was completed.
+- Avoid listing groups or teams as reviewers; identify specific individuals responsible for the review.

@@ -1,0 +1,17 @@
+must_id: item:Art.85:reg_national_provision
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: Per-row specific national-law citation (statute + section + as-of date)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact statute name, section, and official publication reference for each national law derogation
+  in the register row.
+- Enter the as-of date for each cited law, showing when the derogation was last confirmed as current.
+- Name the person responsible for maintaining and updating each register entry, using a specific individual’s
+  full name.
+- Attach a copy or official link to the cited legal text for each derogation to support traceability.
+- Avoid using generic or placeholder references such as “national law applies”—always specify the precise
+  legal citation.

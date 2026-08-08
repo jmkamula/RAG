@@ -1,0 +1,17 @@
+must_id: item:A.8.29:bug_bounty
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Bug-bounty / responsible-disclosure programme
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the existence of a bug-bounty or responsible-disclosure program in your Security Testing in
+  Development and Acceptance Procedure, including scope and contact details.
+- Name a specific individual responsible for managing the program, not a generic team or department.
+- Publish clear instructions for external parties to report security vulnerabilities, including a dedicated
+  email address or online submission form.
+- Record all received vulnerability reports and your responses in a dated log, including actions taken
+  and resolution dates.
+- Review and update the procedure annually, noting the review date and reviewer’s name in the document.

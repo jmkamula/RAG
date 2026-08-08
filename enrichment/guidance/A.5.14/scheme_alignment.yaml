@@ -1,0 +1,20 @@
+must_id: item:A.5.14:scheme_alignment
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Alignment with the A.5.12 classification scheme stated explicitly (transfer protections per
+  level — cascade from parent scheme)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference the exact information classification levels from your A.5.12 scheme within the Information
+  Transfer Policy, using the same terminology and definitions.
+- State the required transfer protections for each classification level, listing specific controls or
+  safeguards that must be applied during transfer.
+- Cross-reference the parent A.5.12 classification scheme in the policy, citing the document name, version,
+  and approval date.
+- Name the policy owner as a specific individual, not a group or department, and record their approval
+  with a dated signature.
+- Review the policy to confirm there are no generic or placeholder statements about classification; all
+  transfer requirements must clearly map to your actual scheme.

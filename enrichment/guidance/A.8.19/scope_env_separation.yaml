@@ -1,0 +1,19 @@
+must_id: item:A.8.19:scope_env_separation
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Cross-link to A.8.31 environment separation — non-prod governed under separate looser rules
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all systems and locations included in your installation scope, listing them in a dated document
+  with clear environment labels (production, non-production).
+- Cross-reference each non-production environment in your scope document to the specific rules or controls
+  that apply under A.8.31.
+- State explicitly in the scope document that non-production environments are governed by separate, less
+  strict controls, and cite the relevant policy sections.
+- Name the individual responsible for maintaining the scope document and cross-linking updates, avoiding
+  generic roles like "IT team" or "Operations".
+- Retain a version-controlled copy of the scope document showing when and by whom the cross-links to A.8.31
+  were last reviewed.

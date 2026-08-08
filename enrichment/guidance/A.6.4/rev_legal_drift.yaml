@@ -1,0 +1,18 @@
+must_id: item:A.6.4:rev_legal_drift
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Employment-law drift check per jurisdiction (legal counsel input)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named legal counsel to review the disciplinary process for compliance with current employment
+  laws in each relevant jurisdiction.
+- Document the date, jurisdiction, and summary of legal counsel’s findings in a formal review record.
+- Record any required updates or changes to the disciplinary process, citing the specific legal advice
+  or law that prompted each change.
+- Retain written confirmation from legal counsel that the review addressed all applicable jurisdictions,
+  not just the primary business location.
+- Name the legal counsel as a specific individual in the review record — do not list only a law firm or
+  generic title.

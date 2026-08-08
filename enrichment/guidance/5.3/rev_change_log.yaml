@@ -1,0 +1,16 @@
+must_id: item:5.3:rev_change_log
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Cross-check against change records — every org-chart change touching ISMS roles is logged
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each ISMS role change in the org chart with a corresponding entry in your change log,
+  including date and description.
+- Record the name of the individual who authorized each ISMS role change, ensuring this matches both the
+  org chart and the change log.
+- Document the effective date of every ISMS role update in both the org chart and the change log for traceability.
+- Name the owner responsible for maintaining the change log as a specific person, not a group or department.
+- Review the change log quarterly and sign off that all ISMS role changes in the org chart are fully captured.

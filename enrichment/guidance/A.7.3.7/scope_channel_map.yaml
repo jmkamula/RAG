@@ -1,0 +1,17 @@
+must_id: item:A.7.3.7:scope_channel_map
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Per-recipient communication channel (email / API / portal)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each third-party recipient by name, including only those with whom personal data is actively shared.
+- Record the specific communication channel used for each recipient, such as email, API, or secure portal,
+  in a dated register.
+- Assign a named individual responsible for maintaining and updating the third-party sharing register.
+- Specify the communication channel for each recipient—avoid generic entries like "various" or "as needed,"
+  which auditors may flag as insufficient.
+- Retain evidence of the most recent communication or data transfer for each recipient, showing the channel
+  in use.

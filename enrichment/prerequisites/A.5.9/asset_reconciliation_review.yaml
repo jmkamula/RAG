@@ -1,0 +1,41 @@
+leaf_id: req:A.5.9:asset_reconciliation_review
+control_ref: A.5.9
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which assets are in-scope for your ISMS before you can reconcile or review
+    any asset inventory. Without a clear scope, asset reconciliation efforts may miss critical assets
+    or include irrelevant ones.
+  good_enough: A documented, approved scope statement that clearly defines the organizational and technical
+    boundaries for the ISMS.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Asset reconciliation requires clear assignment of responsibility for maintaining the asset
+    register and performing periodic reviews. If roles are not defined, reconciliation tasks may be neglected
+    or duplicated.
+  good_enough: Roles and responsibilities for asset management and reconciliation are documented and communicated
+    to relevant staff.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: A classification scheme ensures assets are categorized appropriately, which is essential
+    for prioritizing reconciliation efforts and understanding the impact of missing or outdated assets.
+  good_enough: A basic asset classification scheme exists and is applied to the asset register, even if
+    it is not fully mature.
+- ref: A.5.37
+  standard_id: ISO27001:2022
+  title: Documented Operating Procedures
+  category: direct
+  rationale: Reconciliation reviews must follow documented procedures to ensure consistency and repeatability.
+    Without these, reviews may be ad hoc and unreliable.
+  good_enough: There is a documented procedure for asset inventory management and reconciliation, even
+    if it is a draft or in early use.

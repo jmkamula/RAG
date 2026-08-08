@@ -1,0 +1,15 @@
+must_id: item:6.1.2:likelihood
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Realistic likelihood assessed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure how likelihood is defined and what criteria or scale are used to rate it.
+- Document the method for gathering input on likelihood, such as using incident history, threat intelligence,
+  or expert judgement.
+- Record the date and source for each likelihood assessment in the risk register or assessment form.
+- Name the person or role responsible for approving each likelihood rating, ensuring it is a specific
+  individual and not a team.

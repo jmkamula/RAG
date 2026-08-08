@@ -1,0 +1,18 @@
+must_id: item:Art.36:rev_waiting_compliance
+control_ref: Art.36
+standard_id: GDPR:2016/679
+must_text: Waiting-period compliance — no processing started before SA waiting period elapsed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date you submitted the prior consultation request to the supervisory authority in a dated
+  log entry.
+- Document the official response date or the end date of the statutory waiting period in the same log.
+- Confirm with a signed statement from the project lead that no processing activities began before the
+  waiting period elapsed.
+- Retain any correspondence with the supervisory authority that clarifies the waiting period or grants
+  early permission to proceed.
+- Name the project lead as a specific individual responsible for enforcing the waiting period—not a group
+  or department.

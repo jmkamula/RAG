@@ -1,0 +1,17 @@
+must_id: item:A.7.2.7:reg_document_reference
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Executed arrangement document reference per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the title and version of the executed joint controller arrangement document for each entry in
+  the register.
+- State the date on which each arrangement document was signed by all relevant parties.
+- Name the specific individual responsible for maintaining each arrangement entry, avoiding generic roles
+  like "Legal Team" or "Management."
+- Cross-reference the register entry to the actual signed document location, such as a file path or document
+  management system link.
+- Retain a copy of each fully executed arrangement document, ensuring it is accessible for inspection.

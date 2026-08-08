@@ -1,0 +1,18 @@
+must_id: item:8.2:scope_exclusions
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Out-of-scope classes (test/dev environments where 6.1.2 already covers them at higher level)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all operational environments and systems, specifying which are in scope and which are out of scope
+  for the assessment.
+- Document the rationale for excluding each out-of-scope class, referencing coverage by control 6.1.2
+  or other relevant controls.
+- Name the individual responsible for approving the scope decision, ensuring this is a specific person
+  and not a group or department.
+- Record the date the scope decision and exclusions were formally approved in the assessment documentation.
+- Attach supporting evidence, such as meeting minutes or approval emails, that explicitly confirm the
+  agreed scope and exclusions.

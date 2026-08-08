@@ -1,0 +1,17 @@
+must_id: item:Art.22:reg_art22_2_basis
+control_ref: Art.22
+standard_id: GDPR:2016/679
+must_text: Art.22.2 basis cited per row (contract / MS law / explicit consent)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- List each automated decision-making process in the register with a unique row for clear identification.
+- 'State the specific legal basis for each process in the register: contract, Member State law, or explicit
+  consent.'
+- Reference the supporting document or record that proves the cited legal basis for each entry, such as
+  a signed contract or consent form.
+- Name the responsible individual for each register entry, avoiding generic labels like "the team" or
+  "IT department".
+- Date each register entry to show when the legal basis was last reviewed or confirmed.

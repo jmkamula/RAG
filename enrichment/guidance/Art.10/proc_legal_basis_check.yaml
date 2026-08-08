@@ -1,0 +1,20 @@
+must_id: item:Art.10:proc_legal_basis_check
+control_ref: Art.10
+standard_id: GDPR:2016/679
+must_text: Legal-basis verification step — official-authority OR Member State authorisation cited per
+  activity
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each processing activity involving criminal convictions data and record it in a register with
+  a clear description of its purpose.
+- State the specific legal basis for each activity, citing either official authority or the exact Member
+  State law authorising the processing.
+- Attach a copy or reference to the relevant official authority mandate or Member State legislation for
+  each cited legal basis.
+- Name the responsible individual who verified the legal basis for each activity — do not use a team or
+  department as the owner.
+- Date and sign the verification record for each activity to confirm when and by whom the legal basis
+  was checked.

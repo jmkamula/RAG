@@ -1,0 +1,42 @@
+leaf_id: req:Art.34:subject_communication_procedure
+control_ref: Art.34
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.33
+  standard_id: GDPR:2016/679
+  title: Notification of a Personal Data Breach to the Supervisory Authority
+  category: direct
+  rationale: Art.34 subject communication is only triggered after a breach is identified and assessed
+    under Art.33. You need a working breach notification procedure for authorities before you can define
+    when and how to notify affected data subjects.
+  good_enough: There is a documented, actionable process for identifying, assessing, and reporting personal
+    data breaches to the supervisory authority, even if not fully optimized.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: Knowing what personal data is processed and for which data subjects is essential to identify
+    who must be notified in the event of a breach. Without up-to-date RoPA, you cannot reliably determine
+    the affected audience.
+  good_enough: A current, reasonably complete record of processing activities exists, covering the main
+    categories of data, processing purposes, and data subject types.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Designation of the Data Protection Officer
+  category: foundational
+  rationale: The DPO (if required) must be involved in breach response and subject communications. The
+    procedure must clarify DPO roles and contact points for compliance and transparency.
+  good_enough: The organization has formally designated a DPO (if required) and has a clear point of contact
+    for data protection matters.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: Determining the Scope of the ISMS
+  category: cross_role
+  rationale: The ISMS scope defines which information assets and business units are covered by security
+    and privacy procedures, including breach response. Without this, you cannot be sure your subject communication
+    procedure covers all relevant areas.
+  good_enough: There is a documented ISMS scope statement that identifies the organizational boundaries
+    relevant to personal data processing and breach management.

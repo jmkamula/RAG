@@ -1,0 +1,19 @@
+must_id: item:4.1:reg_risk_handoff
+control_ref: '4.1'
+standard_id: ISO27001:2022
+must_text: Per-issue handoff to the risk assessment (6.1.2) where relevance warrants it
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each identified internal and external issue in the Issues Register with a clear description and
+  the date it was logged.
+- Cross-reference each relevant issue in the Issues Register to a specific risk entry in the Risk Assessment
+  Register, including the risk ID.
+- Document the decision for each issue on whether it was handed off to risk assessment, including the
+  name of the person making the decision and the date.
+- Name the decision-maker for each issue as a specific individual, not a group or department, to avoid
+  ambiguity.
+- Retain evidence of periodic reviews showing that new and existing issues are consistently evaluated
+  for risk assessment handoff.

@@ -1,0 +1,41 @@
+leaf_id: req:Art.25:dpbd_procedure
+control_ref: Art.25
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date inventory of processing activities to identify which systems
+    and processes require Data Protection by Design (DPbD) review. Without this, you can't reliably scope
+    or trigger DPbD procedures.
+  good_enough: A basic, current list of processing activities with key details (purpose, data types, systems)
+    is available, even if not fully exhaustive or automated.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity is essential to determine the appropriate
+    technical and organisational measures during design. DPbD measures must align with the legal grounds
+    for processing.
+  good_enough: Each processing activity has a documented lawful basis (e.g., consent, contract, legal
+    obligation), even if the supporting evidence is still being gathered.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer (DPO) Designation
+  category: foundational
+  rationale: If a DPO is required, their involvement in the DPbD procedure is critical for oversight and
+    advice. The procedure must clarify DPO engagement points.
+  good_enough: A DPO has been formally designated (or a decision with rationale not to appoint one is
+    documented), and their contact details are known internally.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which systems, products, and processes are covered by information
+    security and privacy controls, ensuring the DPbD procedure applies to the right areas.
+  good_enough: A draft or approved ISMS scope exists that identifies the organisational boundaries and
+    key assets relevant to GDPR compliance.

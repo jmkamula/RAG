@@ -1,0 +1,19 @@
+must_id: item:A.7.4.9:proc_recipient_verification
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Recipient verification — PII reaches intended destination + not intercepted
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for verifying recipient identity before sending personally identifiable information,
+  including required checks and approved verification methods.
+- Record each transmission of personally identifiable information, noting the date, time, sender, recipient,
+  and verification step completed.
+- Name the responsible individual who approves the recipient verification process, listing their full
+  name and role in the procedure document.
+- Retain evidence of recipient verification, such as screenshots or system logs, for each transmission
+  of personally identifiable information.
+- Avoid using generic recipient descriptions like "the team" or "partner organisation"—specify named individuals
+  or unique recipient identifiers in all records.

@@ -1,0 +1,19 @@
+must_id: item:B.8.5.1:scope_direct_transfers
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+must_text: Direct customer-PII transfers (multi-region cloud / backup + DR)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all cloud services and backup or disaster recovery solutions where customer personal data is
+  transferred across regional or national boundaries.
+- Document each instance of cross-border customer personal data transfer, including source and destination
+  regions, in a dated transfer register.
+- Name the responsible individual overseeing each transfer scenario, avoiding generic titles like "IT
+  team" or "Operations".
+- Retain evidence of customer notification or contractual approval for each cross-border transfer, such
+  as signed data processing agreements or consent records.
+- Review the transfer register annually and record the date and outcome of each review to confirm ongoing
+  accuracy.

@@ -1,0 +1,20 @@
+must_id: item:A.5.7:rev_missed
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Missed-event analysis (events surfaced by A.5.25 triage or A.5.27 lessons that intel didn't
+  flag in advance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the missed-event analysis, recording their name and role in the review
+  documentation.
+- Document each security event surfaced by A.5.25 triage or A.5.27 lessons that was not previously flagged
+  by threat intelligence.
+- Cross-reference each missed event with the relevant threat intelligence sources and note any gaps or
+  reasons for the oversight.
+- Record the date and outcome of the review, including any updates made to the threat intelligence program
+  as a result.
+- State clearly if any events were missed due to lack of timely review, avoiding vague explanations such
+  as “unknown cause” or “oversight.”

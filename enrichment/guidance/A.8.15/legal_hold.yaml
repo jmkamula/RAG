@@ -1,0 +1,17 @@
+must_id: item:A.8.15:legal_hold
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Legal-hold integration overriding retention
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the logging procedure that any legal hold order suspends normal log retention and deletion
+  schedules until the hold is lifted.
+- Document the process for receiving, recording, and actioning legal hold notifications, including who
+  is responsible for enforcing the hold.
+- Name the specific individual or role authorized to approve and lift legal holds, avoiding generic titles
+  like "IT" or "the team".
+- Record each legal hold event with the date, scope of affected logs, and the person initiating the hold
+  in a dedicated legal hold log.

@@ -1,0 +1,17 @@
+must_id: item:Art.12:rev_next_date
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Transparency Program in a clearly visible section of the
+  program documentation.
+- Record the date the review schedule was last updated, including the name of the person who set the next
+  review date.
+- Name the responsible individual for the next review, avoiding generic titles like "the team" or "Compliance
+  Department".
+- Retain a copy of the current review schedule alongside previous schedules to show a history of planned
+  review dates.

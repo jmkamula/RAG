@@ -1,0 +1,16 @@
+must_id: item:A.7.3.9:proc_triage_routing
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Triage + routing — request classified + routed to correct A.7.3.x sub-procedure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for classifying incoming subject requests by type, referencing the
+  relevant A.7.3.x sub-procedure for each category.
+- Assign a named individual responsible for triaging and routing each request, listing their full name
+  and role in the procedure.
+- Record each request’s classification and routing decision in a dated log entry, including the sub-procedure
+  code and the handler’s name.
+- Name the owner as a specific person, not a generic group or department, to avoid ambiguity in responsibility.

@@ -1,0 +1,40 @@
+leaf_id: req:A.5.3:management_approval
+control_ref: A.5.3
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Information security roles and responsibilities
+  category: direct
+  rationale: You need a clear definition of information security roles and responsibilities before top
+    management can approve a segregation matrix. The matrix depends on knowing who is assigned to which
+    roles and what duties may conflict.
+  good_enough: Documented roles and responsibilities exist, are up to date, and cover all positions relevant
+    to segregation of duties—even if not yet fully optimized.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The segregation matrix must align with the ISMS scope, ensuring only in-scope functions,
+    assets, and personnel are included. Without a defined scope, you risk omitting or misassigning duties.
+  good_enough: A current ISMS scope statement exists that identifies the organizational boundaries and
+    functions covered by the ISMS.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Information classification
+  category: direct
+  rationale: Understanding which information types are most sensitive helps prioritize segregation of
+    duties. The matrix should reflect higher scrutiny for roles handling classified or sensitive data.
+  good_enough: A basic classification scheme is in place, identifying at least the most sensitive information
+    types relevant to segregation decisions.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Inventory of information and other associated assets
+  category: direct
+  rationale: Knowing what assets exist and who is responsible for them is essential for mapping out segregation
+    of duties. The matrix should reference actual assets and their custodians.
+  good_enough: An asset register exists that lists key information assets and their owners, even if not
+    exhaustive.

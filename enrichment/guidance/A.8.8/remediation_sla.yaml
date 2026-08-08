@@ -1,0 +1,18 @@
+must_id: item:A.8.8:remediation_sla
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Remediation SLA per severity (critical=72h / high=14d / medium=30d / low=90d typical)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- State the specific remediation timeframes for each vulnerability severity level in the procedure, matching
+  critical=72h, high=14d, medium=30d, low=90d.
+- Name the individual responsible for tracking and enforcing remediation deadlines by role and full name
+  in the procedure document.
+- Record the date of the latest procedure review and approval, signed by the designated authority.
+- Attach a sample vulnerability log showing actual remediation dates compared to the defined SLAs for
+  each severity level.
+- Specify that generic or missing severity definitions will be flagged, and update any placeholder text
+  to reflect your organisation’s actual risk criteria.

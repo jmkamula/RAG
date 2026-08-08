@@ -1,0 +1,18 @@
+must_id: item:A.8.26:requirements_step
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Security-requirements gathering step at project initiation (cross-link to A.5.8 project + A.8.25
+  SDLC)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the security requirements gathering step in the Application Security Requirements Procedure,
+  clearly stating it must occur at project initiation.
+- Cross-reference the procedure to both A.5.8 (project management) and A.8.25 (secure development lifecycle)
+  by including explicit section links.
+- Name the responsible individual for gathering and documenting security requirements at project initiation,
+  not just a team or department.
+- Record the date and outcome of each security requirements gathering activity in the project documentation
+  for each new application or major change.

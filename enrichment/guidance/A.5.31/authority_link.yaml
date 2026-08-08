@@ -1,0 +1,18 @@
+must_id: item:A.5.31:authority_link
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Each entry tagged with the authority(ies) responsible — cross-link to A.5.5 authority register
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each legal, statutory, regulatory, or contractual requirement as a separate entry in the register
+  with a clear, descriptive title.
+- Cross-reference each entry to the corresponding authority in the A.5.5 authority register using a unique
+  identifier or hyperlink.
+- Name the responsible authority as a specific individual or role, not a group or department, to avoid
+  ambiguity.
+- Record the date each entry was last reviewed or updated, along with the reviewer’s name.
+- Attach supporting documentation or source references for each requirement, such as legislation titles,
+  contract numbers, or regulatory citations.

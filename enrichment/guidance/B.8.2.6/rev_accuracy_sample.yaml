@@ -1,0 +1,18 @@
+must_id: item:B.8.2.6:rev_accuracy_sample
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: Accuracy sample — random rows verified against customer instruction record + subprocessor list
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of processing activities from the current Processor Record of Processing Activities
+  (RoPA) for verification.
+- Cross-reference each sampled activity against the corresponding customer instruction record to confirm
+  alignment of processing details.
+- Compare each sampled activity’s subprocessor entries with the current subprocessor list to verify accuracy
+  and completeness.
+- Record the date, sampled activities, verification results, and the name of the reviewer in a dated review
+  log.
+- Name the reviewer as a specific individual, not a team or department, to avoid ambiguity in accountability.

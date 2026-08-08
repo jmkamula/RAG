@@ -1,0 +1,48 @@
+leaf_id: req:A.7.2.4:program_review
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the specific purposes for which personal data is processed before
+    you can review whether consent records are complete and appropriate. Consent must be linked to a clear,
+    documented purpose.
+  good_enough: A current, accessible list of processing purposes covering all relevant activities is available
+    and mapped to consent requirements.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Consent is only one possible lawful basis for processing; you need to know which activities
+    rely on consent to ensure your review covers the right records and events.
+  good_enough: A documented mapping of processing activities to their lawful basis, with those requiring
+    consent clearly identified.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You must know which systems, processes, and entities are in scope for privacy management
+    to ensure your consent review is complete and not missing any relevant areas.
+  good_enough: A current scope statement that includes all systems and processes handling personal data
+    subject to consent.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need an up-to-date register of information assets to identify where consent records are
+    stored and processed, ensuring your review covers all relevant locations.
+  good_enough: A basic asset register listing all key systems and repositories where consent data may
+    reside.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that the right people are accountable for maintaining consent
+    records and for conducting the annual review.
+  good_enough: Documented roles and responsibilities for consent management and review, even if not fully
+    detailed.

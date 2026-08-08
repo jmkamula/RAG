@@ -1,0 +1,40 @@
+leaf_id: req:A.7.9:off_premises_register
+control_ref: A.7.9
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The off-premises asset register is a filtered view of the main asset register, focusing on
+    location and movement. You need a current, basic asset inventory before you can track which assets
+    are off-site.
+  good_enough: A simple, up-to-date list of all key information assets (e.g., laptops, removable media,
+    devices) with unique identifiers is sufficient to start the off-premises register.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which assets, locations, and activities are covered by your ISMS.
+    Without this, you can't reliably determine which off-premises assets should be tracked.
+  good_enough: A clear, documented scope that identifies included business units, locations, and asset
+    types is enough to proceed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Asset classification helps prioritize which off-premises assets require tracking and what
+    level of detail is needed, based on sensitivity or criticality.
+  good_enough: A basic scheme that tags assets by sensitivity (e.g., confidential, internal, public) and
+    is applied to the main asset register is sufficient.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of responsibility ensures someone is accountable for maintaining the off-premises
+    asset register and reporting changes.
+  good_enough: Documented roles for asset management, with named individuals or teams, is enough to move
+    forward.

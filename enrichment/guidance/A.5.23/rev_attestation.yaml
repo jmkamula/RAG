@@ -1,0 +1,19 @@
+must_id: item:A.5.23:rev_attestation
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: CSP attestation refresh checked per service (current vs stale)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each cloud service in a central register, naming the responsible owner for attestation review with
+  a specific individual, not a team or department.
+- Record the date of the most recent attestation or assurance statement obtained from the cloud service
+  provider for each service.
+- Compare the attestation date against your defined review frequency and flag any service with a stale
+  or missing attestation.
+- Document the outcome of each review, including the reviewer’s name, date, and any actions taken for
+  outdated attestations.
+- Retain copies of all current and previous attestations, ensuring each is clearly labeled with the associated
+  service and review period.

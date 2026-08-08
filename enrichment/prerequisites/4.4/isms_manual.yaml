@@ -1,0 +1,40 @@
+leaf_id: req:4.4:isms_manual
+control_ref: '4.4'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: Determining the scope of the ISMS
+  category: foundational
+  rationale: The ISMS manual must clearly define what parts of the organisation and which information
+    assets are covered. Without a defined scope, the ISMS cannot be meaningfully described or implemented.
+  good_enough: A draft scope statement exists that identifies the organisational boundaries and key assets/processes
+    included in the ISMS.
+- ref: '7.5'
+  standard_id: ISO27001:2022
+  title: Documented information
+  category: foundational
+  rationale: The ISMS manual relies on documented information practices to ensure policies, procedures,
+    and records are properly controlled and maintained. Without these, the manual cannot be effectively
+    implemented or kept current.
+  good_enough: There is a basic documented information procedure or policy that covers creation, approval,
+    and control of ISMS documents.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: direct
+  rationale: The ISMS manual references and is guided by the organisation’s overarching information security
+    policy. This policy sets the direction and principles that the ISMS manual must operationalise.
+  good_enough: A current, approved information security policy exists that outlines the organisation’s
+    commitment and approach to information security.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: The ISMS manual must describe roles and responsibilities for ISMS operation. Without clarity
+    on who does what, the system cannot function or be maintained.
+  good_enough: A list or matrix of assigned ISMS roles and responsibilities is available, even if not
+    fully detailed.

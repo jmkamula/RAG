@@ -1,0 +1,40 @@
+leaf_id: req:A.5.3:segregation_of_duties
+control_ref: A.5.3
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Information security roles and responsibilities
+  category: direct
+  rationale: You need a clear definition of information security roles and responsibilities before you
+    can identify which duties may conflict and require segregation. Without this, you can't map or justify
+    segregation pairs.
+  good_enough: A current, documented list of security-relevant roles and their main responsibilities exists,
+    even if not fully formalized or signed off.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The segregation matrix must only cover in-scope functions, processes, and assets. If the
+    ISMS scope is unclear, you risk missing or overreaching in your segregation analysis.
+  good_enough: A draft or approved scope statement exists that defines which organizational units, processes,
+    and systems are covered by the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: Understanding which assets (systems, applications, data stores) are in play is necessary
+    to identify where conflicting duties could arise and need to be segregated.
+  good_enough: A working asset register exists that lists key information assets relevant to business
+    processes, even if not fully exhaustive.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information security risk assessment
+  category: foundational
+  rationale: Risk assessment highlights areas where segregation of duties is critical to reduce the risk
+    of fraud, error, or abuse. It helps prioritize which conflicts matter most.
+  good_enough: At least an initial risk assessment has been performed, identifying key risks related to
+    conflicting duties or access.

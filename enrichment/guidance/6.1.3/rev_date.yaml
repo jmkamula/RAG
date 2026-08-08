@@ -1,0 +1,15 @@
+must_id: item:6.1.3:rev_date
+control_ref: 6.1.3
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the risk treatment program in a dated log or meeting minutes.
+- Document the planned review interval in the risk treatment program or associated schedule.
+- Confirm the actual review occurred within the planned interval by cross-referencing the review date
+  and the scheduled date.
+- Name the reviewer as a specific individual in the review record, not as a group or department.
+- Retain a signed or approved copy of the review outcome as evidence of completion.

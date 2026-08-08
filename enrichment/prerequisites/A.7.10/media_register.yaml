@@ -1,0 +1,39 @@
+leaf_id: req:A.7.10:media_register
+control_ref: A.7.10
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need a complete and current asset register to identify which storage media exist and
+    should be tracked in the media register. Without this, you can't ensure all relevant media are catalogued.
+  good_enough: A basic, up-to-date list of all storage media assets is available, even if some metadata
+    is still being refined.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The media register must record the classification of each item, so you need an agreed scheme
+    to assign sensitivity levels. This ensures the register reflects the right handling requirements.
+  good_enough: A documented, organization-wide classification scheme exists and is referenced by asset
+    owners, even if not all assets are yet classified.
+- ref: A.5.13
+  standard_id: ISO27001:2022
+  title: Labelling of information
+  category: direct
+  rationale: Media must be labelled according to its classification before it can be properly tracked
+    in the register. Unlabelled media can't be managed for security or compliance.
+  good_enough: A process exists for labelling media with its classification, and most media in scope are
+    labelled or scheduled for labelling.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organization and which types of media are in scope for
+    the ISMS, so you don't miss or wrongly include assets in the register.
+  good_enough: A documented scope statement exists that clearly defines which media and business units
+    are covered, even if some edge cases are still being clarified.

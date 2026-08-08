@@ -1,0 +1,19 @@
+must_id: item:A.5.22:rev_scope
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Scope of review (security practices, service delivery, changes since last review)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific supplier and service under review in the record, including the date and the individuals
+  conducting the review.
+- Document the security practices assessed, referencing relevant supplier policies, certifications, or
+  controls reviewed during this cycle.
+- Record how the supplier’s service delivery was evaluated, noting any performance metrics, incidents,
+  or deviations from agreed terms.
+- List and describe any changes in the supplier’s operations, personnel, or security controls since the
+  last review, with supporting evidence.
+- State the review scope clearly; avoid using generic or boilerplate descriptions that do not reflect
+  the supplier’s actual situation.

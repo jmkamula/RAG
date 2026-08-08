@@ -1,0 +1,18 @@
+must_id: item:A.7.4.4:reg_implementation
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+must_text: Implementation reference per row (code repo / config file / infrastructure component)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each minimization technique in your inventory with a unique row for every distinct method or tool
+  used.
+- Specify the exact implementation reference for each technique, such as a code repository URL, configuration
+  file path, or infrastructure component name.
+- Name the responsible individual for maintaining each implementation reference, avoiding generic labels
+  like "IT" or "the team."
+- Record the date when each implementation reference was last reviewed or updated to show ongoing oversight.
+- Cross-reference each minimization technique with relevant policy or procedure documents to demonstrate
+  alignment with internal requirements.

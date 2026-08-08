@@ -1,0 +1,18 @@
+must_id: item:Art.36:scope_change_drivers
+control_ref: Art.36
+standard_id: GDPR:2016/679
+must_text: Trigger list (new high-risk processing line, regulator guidance update)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all new or significantly changed data processing activities that may present a high risk to individuals’
+  rights or freedoms, with creation or change dates.
+- Document each trigger event that prompts a review of Article 36 applicability, such as new regulator
+  guidance or major project launches, with supporting references.
+- Assign a named individual responsible for monitoring regulatory updates and internal changes that could
+  affect Article 36 scope.
+- Record the decision and rationale for including or excluding each processing activity from Article 36
+  scope, with the date and decision-maker’s name.
+- Name the owner as a specific individual — do not use generic roles like "the team" or "IT department".

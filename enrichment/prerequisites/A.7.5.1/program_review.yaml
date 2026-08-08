@@ -1,0 +1,48 @@
+leaf_id: req:A.7.5.1:program_review
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know which entities, systems, and processes are in-scope for privacy and data
+    transfer controls before you can review transfer relationships. This ensures the review covers all
+    relevant transfers.
+  good_enough: A documented scope statement that clearly identifies all business units, systems, and geographies
+    subject to the ISMS and privacy extension.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You can't verify the appropriateness of transfer bases or TIAs unless you know the specific
+    purposes for which personal data is processed and transferred. This underpins lawful transfer analysis.
+  good_enough: A maintained record of processing purposes for each data transfer relationship, even if
+    some are high-level or pending further detail.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: A review of transfer bases requires that each transfer relationship already has an identified
+    lawful basis. Without this, you can't assess validity or regulatory alignment.
+  good_enough: A list or register mapping each transfer relationship to its claimed lawful basis, even
+    if some are flagged for further legal review.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: Knowing which information assets are transferred, and to whom, is essential for identifying
+    all transfer relationships that need to be reviewed.
+  good_enough: An up-to-date asset register that includes personal data assets and their associated transfer
+    channels or third parties.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: You need to distinguish personal data from other types of information to ensure the review
+    covers only relevant transfers and applies the correct regulatory standards.
+  good_enough: A documented scheme that marks which assets or data flows are personal data, even if some
+    legacy assets are still being classified.

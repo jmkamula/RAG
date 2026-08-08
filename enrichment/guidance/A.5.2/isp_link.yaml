@@ -1,0 +1,16 @@
+must_id: item:A.5.2:isp_link
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: Links back to the Information Security Policy (A.5.1)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each role and responsibility in the matrix to the relevant section of the Information
+  Security Policy by section number or title.
+- Document the date and version of the Information Security Policy referenced in the matrix to show alignment
+  with the current policy.
+- Name the matrix owner as a specific individual, not a group or department, to avoid ambiguity in accountability.
+- Attach or link the Information Security Policy directly within the matrix file to provide immediate
+  access for verification.

@@ -1,0 +1,48 @@
+leaf_id: req:A.7.5.4:program_review
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know which systems, processes, and data are in-scope for privacy management before
+    reviewing disclosure records. This ensures the review covers all relevant disclosures and nothing
+    critical is missed.
+  good_enough: A clear, current scope statement that identifies the boundaries of your ISMS and includes
+    privacy-relevant assets and processes.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You can't meaningfully review disclosures unless you know the documented purposes for processing
+    personal data. Each disclosure must be tied to a legitimate, recorded purpose.
+  good_enough: A maintained list of processing purposes for all major data flows, even if some are high-level
+    or pending further detail.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Every disclosure should be justified by a lawful basis. Without this, you can't verify if
+    disclosures are legitimate or properly documented.
+  good_enough: A mapping of each processing activity (or category) to its lawful basis, with enough detail
+    to support review of disclosures.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: To review disclosures, you need to know what personal data assets exist and where they reside.
+    The asset register provides this foundational inventory.
+  good_enough: An up-to-date list of information assets that includes personal data repositories and key
+    systems involved in disclosures.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that disclosure intake, documentation, and review responsibilities
+    are understood and actionable.
+  good_enough: Named individuals or teams responsible for privacy disclosures and their review, documented
+    in a policy or RACI chart.

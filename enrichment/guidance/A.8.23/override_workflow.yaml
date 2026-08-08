@@ -1,0 +1,19 @@
+must_id: item:A.8.23:override_workflow
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: Override / business-justification workflow (block-page UX with audit trail)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the override process in the Web Filtering Policy, including required steps for requesting and
+  approving access to blocked sites.
+- Name a specific individual or role responsible for reviewing and approving override requests, avoiding
+  generic titles like "IT" or "the team".
+- Record each override request and decision in an audit log, capturing requester, approver, date, time,
+  and business justification.
+- Display a block page to users that clearly explains the override request process and captures the business
+  justification before submission.
+- Retain override audit logs for a defined period, as stated in the policy, to support later review or
+  investigation.

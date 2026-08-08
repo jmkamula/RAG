@@ -1,0 +1,14 @@
+must_id: item:B.8.4.1:rev_reviewer
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+must_text: Reviewer identity (Platform Ops + DPO)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual from Platform Operations and a specific individual from the
+  Data Protection Officer team in the review record.
+- Record the date each reviewer completed their assessment in the program review document.
+- Sign the review document electronically or physically by both named reviewers to confirm their participation.
+- Attach any reviewer comments or findings to the program review file for traceability.

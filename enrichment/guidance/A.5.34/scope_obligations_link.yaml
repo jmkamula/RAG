@@ -1,0 +1,20 @@
+must_id: item:A.5.34:scope_obligations_link
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Cross-link to A.5.31 applicable-obligations scope — privacy laws are a subset; the two should
+  share drivers and stay aligned
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the privacy applicability scope document to the applicable obligations register created
+  for A.5.31, listing the relevant privacy laws and regulations.
+- Document the shared legal and regulatory drivers in both the privacy scope and the obligations register,
+  using identical wording for the same requirements.
+- Name the individual responsible for maintaining alignment between the privacy scope and the obligations
+  register, specifying their full name and role.
+- Record the date when the privacy scope was last reviewed for alignment with A.5.31, and keep a copy
+  of the review decision.
+- Avoid using generic references like "see compliance register" without specifying document titles and
+  sections; always provide direct cross-links.

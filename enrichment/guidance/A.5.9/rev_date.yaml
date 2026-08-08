@@ -1,0 +1,17 @@
+must_id: item:A.5.9:rev_date
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Reconciliation date within the planned interval (typically within 90 days of last reconciliation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of each asset inventory reconciliation in a central log, showing the interval since
+  the previous reconciliation.
+- Name the person responsible for performing and signing off each reconciliation, using their full name
+  rather than a generic role or team.
+- Cross-reference the reconciliation log entry with the corresponding asset inventory report to confirm
+  the review covered all listed assets.
+- Retain evidence of the planned reconciliation schedule, showing that actual reconciliation dates do
+  not exceed the 90-day interval.

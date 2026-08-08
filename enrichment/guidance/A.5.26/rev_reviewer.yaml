@@ -1,0 +1,16 @@
+must_id: item:A.5.26:rev_reviewer
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Incident Manager + InfoSec lead jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the Incident Manager and the Information Security lead as joint reviewers in the review record
+  for each periodic Incident Response Program review.
+- Record the date of each review and retain the documented findings in a version-controlled file or system.
+- Obtain signatures or written confirmation from both named reviewers to evidence their joint participation
+  in the review.
+- Avoid listing a group, team, or department as reviewer—identify specific individuals by name and role
+  for each review cycle.

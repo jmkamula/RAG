@@ -1,0 +1,16 @@
+must_id: item:Art.25:rev_date
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of your Data Protection by Design (DPbD) program in a dated log or
+  review register.
+- Document the planned review interval for the DPbD program, such as annually or biannually, in a policy
+  or schedule.
+- Confirm the actual review date falls within the documented planned interval by cross-referencing the
+  review log and the schedule.
+- Name the reviewer as a specific individual, not a group or department, in the review record.

@@ -1,0 +1,19 @@
+must_id: item:Art.26:scope_test_criteria
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Test criteria for joint controllership (joint decision on means + purposes) per EDPB 7/2020
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific processing activity under review, including the data types, purposes, and means of
+  processing, in a dated document.
+- Document the decision-making process showing how both parties jointly determine the purposes and essential
+  means of processing, referencing meeting notes or signed agreements.
+- Cross-reference the EDPB 7/2020 criteria and explicitly test each element, recording the outcome for
+  each in a checklist or table.
+- Name the individuals representing each party who participated in the joint decision, avoiding generic
+  titles or unnamed groups.
+- Retain a signed and dated record confirming both parties agree on the joint controllership scope and
+  responsibilities.

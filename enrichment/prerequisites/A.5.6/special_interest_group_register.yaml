@@ -1,0 +1,48 @@
+leaf_id: req:A.5.6:special_interest_group_register
+control_ref: A.5.6
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The register must only cover SIG and forum memberships relevant to the defined ISMS scope.
+    Without a clear scope, you cannot determine which external contacts are in or out of scope for registration.
+  good_enough: A documented ISMS scope that identifies the business units, processes, and assets covered
+    by the ISMS. It should be clear enough to judge which SIGs and forums are relevant.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The security policy sets the tone for external engagement and may define expectations or
+    restrictions on professional memberships. The register should align with these policy requirements.
+  good_enough: A current, approved information security policy that addresses external engagement or at
+    least does not prohibit it.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Memberships in SIGs and forums should be driven by identified risks and needs for threat
+    intelligence or skills. Without a risk assessment, you cannot justify or prioritize which groups to
+    engage with.
+  good_enough: A recent risk assessment identifying key information security risks and any knowledge or
+    threat intelligence gaps that SIG engagement could address.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: The register must identify who is responsible for maintaining memberships and for representing
+    the organization in external groups. Clear roles prevent gaps or overlaps in engagement.
+  good_enough: Documented assignment of responsibility for external engagement and register maintenance,
+    even if only at a high level.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Knowing the classification of information handled by the organization helps determine which
+    SIGs or forums are appropriate and what information can be shared externally.
+  good_enough: A basic information classification scheme that distinguishes between public, internal,
+    and confidential data, guiding what can be discussed in external forums.

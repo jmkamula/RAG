@@ -1,0 +1,19 @@
+must_id: item:A.7.5.1:reg_tia_reference
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: TIA reference per row where Art.46 safeguard invoked
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the legal basis for each cross-border data transfer in the register, specifying if Article 46
+  safeguards are being used.
+- Cross-reference the corresponding Transfer Impact Assessment (TIA) for every transfer relying on Article
+  46, linking to the dated TIA document.
+- Name the responsible individual who validated each TIA, ensuring a specific person is listed rather
+  than a team or department.
+- Confirm each TIA reference in the register matches an actual, completed TIA document stored in your
+  records.
+- Avoid leaving any register row blank or with placeholders where Article 46 is invoked; incomplete entries
+  will be flagged by auditors.

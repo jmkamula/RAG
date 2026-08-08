@@ -1,0 +1,19 @@
+must_id: item:10.1:dimensions
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Improvement targets cover suitability, adequacy, and effectiveness
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State explicit improvement targets in the procedure that address suitability, adequacy, and effectiveness
+  of the information security management system.
+- Document how each target will be measured and tracked, referencing specific metrics or evidence sources
+  in the procedure.
+- Assign a named individual responsible for reviewing progress against each target, listing their full
+  name and role in the document.
+- Record the date of the most recent review of improvement targets within the procedure to show ongoing
+  attention.
+- Avoid using generic or copy-pasted targets that could apply to any organisation; tailor targets to your
+  actual context and risks.

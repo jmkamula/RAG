@@ -1,0 +1,16 @@
+must_id: item:Art.49:reg_invocation_id
+control_ref: Art.49
+standard_id: GDPR:2016/679
+must_text: Per-row invocation id
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique invocation ID to each derogation entry in the register, using a sequential or otherwise
+  non-repeating format.
+- Record the assigned invocation ID alongside all relevant details for each derogation, ensuring the ID
+  appears in every row.
+- Cross-reference each invocation ID with supporting documentation, such as legal opinions or transfer
+  records, to demonstrate traceability.
+- Avoid leaving any row without an invocation ID or using placeholders like "TBD" or "N/A" in the ID field.

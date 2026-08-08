@@ -1,0 +1,19 @@
+must_id: item:A.7.3.1:rev_sla_audit
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: SLA audit — sampled A.7.3.9 request register measured against catalog SLAs
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for conducting the SLA audit, listing their full name and job
+  title in the review record.
+- Document the date the sampled A.7.3.9 request register was reviewed, attaching the actual sample list
+  and the review date.
+- Cross-reference each sampled request in the register with the corresponding SLA target from the obligations
+  catalog, noting any deviations.
+- Record the outcome of the audit, including whether requests were handled within the defined "timely
+  manner" per SLA, in a dated summary report.
+- Attach evidence of management review and sign-off on the audit findings, using a signed and dated approval
+  from a named manager.

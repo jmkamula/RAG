@@ -1,0 +1,18 @@
+must_id: item:Art.30:dfi_retention
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Retention period per system or per data category — feeds Art.30.1.f
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each system or data category that processes personal data, including a clear name and description
+  for identification.
+- Document the specific retention period for each listed system or data category, stating the duration
+  in months or years.
+- Reference the legal or business reason supporting each retention period, citing the relevant law, regulation,
+  or policy.
+- Name the responsible individual for maintaining and updating retention periods, avoiding generic roles
+  like "IT" or "the team."
+- Record the date when each retention period was last reviewed or updated in the inventory.

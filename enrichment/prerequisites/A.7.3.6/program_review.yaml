@@ -1,0 +1,40 @@
+leaf_id: req:A.7.3.6:program_review
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purposes for which personal data is processed before you can review whether
+    access and correction requests (ACRs) are handled properly. This ensures the review covers all relevant
+    data processing activities.
+  good_enough: A documented list of processing purposes for all relevant systems and data types, even
+    if not fully detailed, is sufficient to proceed with the review.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity is essential to assess if ACR
+    refusals are defensible and compliant with privacy requirements during the review.
+  good_enough: A summary mapping of each processing activity to its lawful basis, even if some edge cases
+    are flagged for later clarification, is enough to start the review.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that ACR handling, escalation, and review responsibilities
+    are understood, so the review can accurately assess accountability and process reliability.
+  good_enough: A current roles and responsibilities matrix or list that covers ACR-related duties, even
+    if some roles are shared or informal, is sufficient.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is needed to verify that all relevant systems are included in
+    the ACR review, ensuring there are no overlooked data sources or propagation gaps.
+  good_enough: A working inventory of systems and data stores that process personal data, even if not
+    fully granular, is enough to proceed with the review.

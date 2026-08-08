@@ -1,0 +1,14 @@
+must_id: item:Art.38:reg_period
+control_ref: Art.38
+standard_id: GDPR:2016/679
+must_text: Per-row reporting period (typically quarterly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact start and end dates of the reporting period for each row in the register.
+- Record the name of the person responsible for entering or updating the reporting period for each entry.
+- Confirm that each reporting period aligns with your organisation’s defined quarterly schedule and is
+  not left blank or marked as “ongoing.”
+- Retain a dated record of when each reporting period entry was last reviewed or updated.

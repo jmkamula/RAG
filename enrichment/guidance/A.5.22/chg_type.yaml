@@ -1,0 +1,18 @@
+must_id: item:A.5.22:chg_type
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Change type captured (network / technology / dev tools / location / sub-contractor / re-tendering)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific type of each supplier service change in the log, clearly marking whether it is network,
+  technology, dev tools, location, sub-contractor, or re-tendering.
+- Name the person responsible for categorizing each change type, ensuring a specific individual is listed
+  rather than a team or department.
+- Date each entry in the log to show when the change type was captured and reviewed.
+- Cross-reference each logged change type with supporting documentation, such as supplier notifications
+  or change requests, to confirm accuracy.
+- Review the log regularly to confirm no entries are missing a change type or use vague descriptions like
+  "miscellaneous" or "other."

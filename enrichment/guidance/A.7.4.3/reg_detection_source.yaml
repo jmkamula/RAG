@@ -1,0 +1,18 @@
+must_id: item:A.7.4.3:reg_detection_source
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: Detection source per row (internal audit / subject rectification / integration reconciliation
+  / external notification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the detection source for each incident row, specifying whether it was found by internal audit,
+  subject rectification, integration reconciliation, or external notification.
+- Name the individual or team responsible for identifying each incident, ensuring the entry is not left
+  blank or marked as "unknown."
+- Date each detection entry to show when the incident was first identified, providing a clear timeline
+  for traceability.
+- Cross-reference each incident with supporting evidence, such as audit reports or notification emails,
+  to verify the stated detection source.

@@ -1,0 +1,17 @@
+must_id: item:8.3:retention
+control_ref: '8.3'
+standard_id: ISO27001:2022
+must_text: Documented information of results retained
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each operational risk treatment decision in a dated entry, including the risk description, treatment
+  chosen, and outcome.
+- Name the responsible individual who approved each risk treatment result, avoiding generic titles or
+  group names.
+- Retain supporting evidence, such as meeting minutes or signed approval forms, linked to each risk treatment
+  record.
+- Store all risk treatment records in a central, access-controlled location where retrieval by date and
+  risk identifier is possible.

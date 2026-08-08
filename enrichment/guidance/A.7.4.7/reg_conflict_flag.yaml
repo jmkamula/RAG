@@ -1,0 +1,17 @@
+must_id: item:A.7.4.7:reg_conflict_flag
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Conflict flag per row if legal + business tension exists
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each type of personal data in a separate row, listing both legal retention requirements and business
+  needs side by side.
+- Flag any row where the business retention period exceeds the legal requirement, using a clear indicator
+  such as a "conflict" checkbox or column.
+- Name the individual responsible for resolving each flagged conflict, ensuring a specific person is listed
+  rather than a team or department.
+- Document the date and outcome of each business decision made to resolve a flagged conflict, attaching
+  supporting records where available.

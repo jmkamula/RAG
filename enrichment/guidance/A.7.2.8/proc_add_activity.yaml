@@ -1,0 +1,18 @@
+must_id: item:A.7.2.8:proc_add_activity
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: New-activity intake trigger + workflow (new product launch / new integration / new data source)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific events that trigger a review or update of the Records of Processing Activities,
+  such as new product launches or integrations, in the procedure.
+- Assign a named individual responsible for initiating the RoPA update workflow when a triggering event
+  occurs.
+- Record each instance of a new activity intake with a dated entry in a central log, referencing the related
+  product, integration, or data source.
+- State the step-by-step workflow for updating the RoPA, including required approvals and documentation,
+  within the written procedure.
+- Name the owner as a specific person, not a team or department, to avoid ambiguity in responsibility.

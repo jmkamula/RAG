@@ -1,0 +1,34 @@
+leaf_id: req:Art.27:representative_operations_record
+control_ref: Art.27
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of all processing activities to understand what operations
+    the representative may be involved in and what queries or requests could arise. This forms the baseline
+    for tracking representative interactions.
+  good_enough: A draft or working RoPA that lists all relevant processing activities, even if not fully
+    polished, is sufficient to start drafting the representative operations record.
+- ref: Art.27
+  standard_id: GDPR:2016/679
+  title: EU Representative Appointment
+  category: foundational
+  rationale: The representative must be formally appointed and their role defined before you can record
+    their operational activities. Without this, there is no context for what 'representative operations'
+    means.
+  good_enough: A signed appointment letter or contract naming the representative and outlining their responsibilities
+    is enough to proceed.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: direct
+  rationale: Knowing the lawful basis for each processing activity helps the representative respond accurately
+    to queries from data subjects and supervisory authorities. It informs how requests should be handled
+    and escalated.
+  good_enough: A summary table or list mapping processing activities to their lawful bases, even if not
+    fully detailed, is sufficient to unblock drafting the operations record.

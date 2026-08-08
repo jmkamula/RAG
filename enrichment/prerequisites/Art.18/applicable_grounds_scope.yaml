@@ -1,0 +1,43 @@
+leaf_id: req:Art.18:applicable_grounds_scope
+control_ref: Art.18
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of what personal data is processed, for what purposes,
+    and under which lawful bases to determine where Art.18 restrictions could apply. Without this, you
+    can't meaningfully scope or operationalize restriction grounds.
+  good_enough: A current RoPA that lists all relevant processing activities, data classes, and lawful
+    bases, even if not fully detailed for every minor process.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity is essential to interpret which
+    Art.18 restriction grounds are relevant and how exceptions might apply. This underpins the operational
+    scope for restriction requests.
+  good_enough: A mapped list of lawful bases for each processing activity, sufficient to identify which
+    activities could be subject to restriction.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated DPO or equivalent is needed to oversee and interpret restriction requests, ensure
+    correct application of Art.18, and handle exceptions. Without this role, operationalizing restriction
+    grounds is not feasible.
+  good_enough: A named DPO or responsible privacy lead with authority to advise on and oversee restriction
+    handling, even if not a full-time role.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which parts of the organization and which data/processes are covered
+    by controls, including those related to data subject rights. This ensures your Art.18 operational
+    scope aligns with your broader compliance boundaries.
+  good_enough: A documented ISMS scope that covers all business units and systems where personal data
+    subject to Art.18 could reside.

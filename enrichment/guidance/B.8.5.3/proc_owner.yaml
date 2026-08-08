@@ -1,0 +1,15 @@
+must_id: item:B.8.5.3:proc_owner
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+must_text: Named owner (DPO + Trust + Legal)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the Processor Disclosure Recording Procedure as a specific individual, listing their
+  full name and job title.
+- Record the date the owner accepted responsibility for the procedure in a version-controlled document.
+- Document the involvement of the Data Protection Officer, Trust, and Legal functions by naming the individuals
+  consulted during procedure creation or updates.
+- Sign the procedure to confirm owner approval, including a signature and date on the latest version.

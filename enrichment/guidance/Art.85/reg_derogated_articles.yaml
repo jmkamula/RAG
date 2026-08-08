@@ -1,0 +1,17 @@
+must_id: item:Art.85:reg_derogated_articles
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: Per-row enumeration of GDPR articles being derogated (must be from Chapter II/III/IV/V/VI/VII/IX)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each national law derogation in a separate row, clearly identifying the jurisdiction and the relevant
+  national law or regulation.
+- Specify the exact GDPR article(s) being derogated in each row, referencing only articles from Chapters
+  II, III, IV, V, VI, VII, or IX.
+- Cross-reference each derogation entry with the full text or citation of the national law to support
+  the claimed derogation.
+- Name the person responsible for maintaining the register as a specific individual, not a team or department.
+- Record the date each entry was last reviewed or updated to show ongoing accuracy.

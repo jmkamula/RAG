@@ -1,0 +1,17 @@
+must_id: item:A.5.10:review_triggers
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Ad-hoc triggers listed (new technology rollout, incident lessons-learned, regulatory change)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific ad-hoc triggers for Acceptable Use Policy review, such as new technology rollout, incident
+  lessons-learned, or regulatory change, in the policy review procedure.
+- Document each occurrence of a trigger and the resulting review in a dated log, naming the person responsible
+  for initiating the review.
+- Attach meeting minutes or decision records showing discussion and actions taken for each triggered review,
+  including any policy updates.
+- Name the policy review owner as a specific individual, not a group or department, in the review documentation.
+- Cross-reference updated policy versions to the trigger event and review date in a version control register.

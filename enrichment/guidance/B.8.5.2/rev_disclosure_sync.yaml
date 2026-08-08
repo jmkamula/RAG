@@ -1,0 +1,19 @@
+must_id: item:B.8.5.2:rev_disclosure_sync
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+must_text: Customer-facing disclosure sync (DPA schedule / trust page / on-request material matches register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the current list of processor destinations in your internal register with the information
+  shown on your public trust page and customer DPA schedule.
+- Document the date and outcome of your most recent review confirming all customer-facing disclosures
+  match your internal processor destinations register.
+- Assign a named individual to approve any updates to processor destinations before changes are published
+  or shared with customers.
+- Retain a copy of all customer-facing materials provided on request, including the date sent and the
+  recipient’s details.
+- Name the owner as a specific individual responsible for maintaining alignment—do not use a team or department
+  as the owner.

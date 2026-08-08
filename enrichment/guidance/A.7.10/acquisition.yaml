@@ -1,0 +1,17 @@
+must_id: item:A.7.10:acquisition
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Acquisition controls (approved media types, sourcing controls)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all approved storage media types in the procedure, specifying brand or model where relevant, and
+  include the date of latest approval.
+- Document the sourcing process, naming the authorized supplier(s) and referencing any contracts or purchase
+  agreements on file.
+- Assign a named individual responsible for approving new storage media acquisitions, and record their
+  approval with a dated signature.
+- State explicitly that only listed, approved media types may be acquired; avoid vague language that allows
+  for unapproved or generic media.

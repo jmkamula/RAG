@@ -1,0 +1,31 @@
+leaf_id: req:Art.40:adherence_register
+control_ref: Art.40
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify which processing operations
+    are covered by specific codes of conduct. This ensures the adherence register is accurate and relevant.
+  good_enough: A current, working RoPA that lists all major processing activities and is reviewed at least
+    annually.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity is essential to determine if
+    and how codes of conduct apply, and to justify inclusion in the adherence register.
+  good_enough: Each processing activity in the RoPA has a documented lawful basis, even if not yet fully
+    mapped to every code.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated DPO or privacy lead is needed to oversee code adherence and maintain the register,
+    ensuring ongoing compliance and annual refreshes.
+  good_enough: A named individual is responsible for GDPR oversight, even if the DPO role is not formally
+    registered with authorities.

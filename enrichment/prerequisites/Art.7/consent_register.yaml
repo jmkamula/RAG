@@ -1,0 +1,33 @@
+leaf_id: req:Art.7:consent_register
+control_ref: Art.7
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of processing
+  category: direct
+  rationale: You must first identify which processing activities rely on consent as their lawful basis
+    under Art.6.1.a. Without this, you cannot determine which consents need to be recorded in the Consent
+    Register.
+  good_enough: A documented list of processing activities with their lawful basis clearly marked, specifically
+    flagging those that use consent (Art.6.1.a), is available and up to date.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: A current RoPA gives you the inventory of all processing activities, helping you identify
+    where consent is the lawful basis and which data subjects are affected. This is essential for ensuring
+    your Consent Register covers all relevant activities.
+  good_enough: A maintained RoPA exists, listing all processing activities and their lawful bases, even
+    if not fully detailed, so you can cross-reference consent-based activities.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Designation of the Data Protection Officer
+  category: foundational
+  rationale: If a DPO is required, they must be involved in overseeing consent management and the Consent
+    Register. Their designation ensures accountability and proper governance for consent processes.
+  good_enough: A DPO has been formally designated (if required), or a clear decision and rationale for
+    not appointing one is documented and accessible to those managing consent records.

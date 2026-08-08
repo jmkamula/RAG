@@ -1,0 +1,18 @@
+must_id: item:A.7.2.6:reg_subprocessor_flag
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Subprocessors permitted flag + list per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record for each contract whether the use of subprocessors is permitted, using a clear "Yes" or "No"
+  flag in a dedicated column.
+- List all approved subprocessors for each contract in a separate column, naming each subprocessor individually.
+- Name the contract owner as a specific individual responsible for maintaining the register, not as a
+  team or department.
+- Date each entry and update when subprocessors are added or removed, keeping a visible change history
+  per contract.
+- Cross-reference each contract entry to the relevant contract clause that addresses subprocessor permissions
+  and obligations.

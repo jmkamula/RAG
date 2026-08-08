@@ -1,0 +1,19 @@
+must_id: item:A.8.28:rev_tooling_currency
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Tooling-stack currency (SAST / SCA rules current; new tooling adopted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for maintaining and updating secure coding tool configurations,
+  including SAST and SCA rule sets, in a dated record.
+- Document the most recent review of all secure coding tools and rule sets, including dates, tool versions,
+  and any updates or changes made.
+- Record the evaluation and adoption decision for any new secure coding tools, including who approved
+  the change and the implementation date.
+- Cross-reference the review record with evidence of communication to developers about updated tooling
+  or rules, such as an email or meeting minutes.
+- Avoid listing tool ownership or review responsibility as "the team" or a department; always assign to
+  a named individual.

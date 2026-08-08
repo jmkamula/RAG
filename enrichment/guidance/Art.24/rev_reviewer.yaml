@@ -1,0 +1,16 @@
+must_id: item:Art.24:rev_reviewer
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO + executive sponsor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and job title, clearly identifying both the
+  Data Protection Officer and the executive sponsor.
+- Record the date the review was completed, ensuring it is visible on the Accountability Program Review
+  document.
+- Require both the Data Protection Officer and the executive sponsor to sign or formally approve the review,
+  capturing their signatures or electronic approvals.
+- Avoid listing generic roles such as "the team" or "management" as reviewers; always specify named individuals.

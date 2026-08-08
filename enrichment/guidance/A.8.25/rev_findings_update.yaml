@@ -1,0 +1,18 @@
+must_id: item:A.8.25:rev_findings_update
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Findings propagated to policy / scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and summary of each SDLC program review in a central log, including any findings that
+  require policy or scope changes.
+- Assign each finding to a named individual responsible for evaluating its impact on existing policies
+  or scope documents.
+- Document the specific changes made to policies or scope as a result of review findings, including the
+  date and approver’s name.
+- Retain evidence of communication to relevant stakeholders about updated policies or scope, such as an
+  email or meeting record.
+- Name the owner of the review process as a specific person, not a group or department.

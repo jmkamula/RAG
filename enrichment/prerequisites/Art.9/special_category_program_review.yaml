@@ -1,0 +1,32 @@
+leaf_id: req:Art.9:special_category_program_review
+control_ref: Art.9
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a complete and up-to-date record of processing activities to identify which activities
+    involve special category data under Art.9. Without this, you can't reliably review or verify the relevant
+    processing operations.
+  good_enough: A current RoPA that clearly flags all special category processing activities, even if some
+    minor details are pending update.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of processing
+  category: direct
+  rationale: Every special category processing activity must first have a valid Art.6 lawful basis before
+    you can assess Art.9.2 conditions. This is a hard dependency for any Art.9 review.
+  good_enough: Each special category processing activity has a documented lawful basis under Art.6, even
+    if some supporting evidence is still being gathered.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If your organization is required to appoint a Data Protection Officer, their oversight is
+    critical for reviewing special category processing and ensuring compliance with Art.9 safeguards.
+  good_enough: A DPO is formally designated (if required), with contact details available and basic involvement
+    in privacy reviews established.

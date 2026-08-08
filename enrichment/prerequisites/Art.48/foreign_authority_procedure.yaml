@@ -1,0 +1,41 @@
+leaf_id: req:Art.48:foreign_authority_procedure
+control_ref: Art.48
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of what personal data is processed, where it is stored,
+    and which third countries are involved. This is essential to identify if a foreign authority’s request
+    relates to your processing activities and to assess the impact.
+  good_enough: A current, reasonably complete RoPA that covers all major processing activities and cross-border
+    data flows is available for reference.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Understanding the lawful bases for your processing is critical to determine whether any disclosure
+    to a foreign authority could be justified under GDPR, and to ensure you do not act outside your legal
+    grounds.
+  good_enough: Documented lawful bases for all main processing activities, with at least high-level mapping
+    to data categories and purposes.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer Designation
+  category: foundational
+  rationale: A designated DPO (or equivalent contact) is needed to coordinate responses to foreign authority
+    requests, provide oversight, and ensure the procedure is followed correctly.
+  good_enough: A named DPO or privacy lead is assigned and contactable, even if not all formalities are
+    fully complete.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: A clear ISMS scope helps determine which parts of the organisation and which data assets
+    are covered by the foreign authority disclosure procedure, ensuring the procedure is applied consistently.
+  good_enough: A documented scope statement exists that identifies the main business units, systems, and
+    locations covered by the ISMS.

@@ -1,0 +1,16 @@
+must_id: item:A.5.15:comm_audience
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Audience reached (decision-makers — managers, system owners, IT admins — plus all access-holders)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all individuals who hold access, including decision-makers, system owners, IT administrators, and
+  regular users, in a dated distribution log.
+- Document the method and date each person received the access control policy, such as email, training
+  session, or intranet post.
+- Record individual acknowledgements of receipt, such as signed forms or email confirmations, for every
+  person listed in the distribution log.
+- Name the audience using specific roles or names; do not use generic terms like "all staff" or "the team."

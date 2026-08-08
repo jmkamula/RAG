@@ -1,0 +1,19 @@
+must_id: item:A.8.20:change_control
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Change control for network devices (cross-link to A.8.32)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for approving network device changes, listing their full name and role in
+  the policy document.
+- Document each network device change request, including date, requester, description, and reason, in
+  a dedicated change log.
+- Cross-reference the change control process in the network security policy with the detailed procedure
+  described under control A.8.32.
+- Retain evidence of formal approval for each network device change, such as a signed or digitally authorized
+  record.
+- Specify that generic or verbal approvals are not acceptable by requiring written authorization for all
+  network device changes.

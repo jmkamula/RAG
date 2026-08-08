@@ -1,0 +1,38 @@
+leaf_id: req:7.5:document_control_program_review
+control_ref: '7.5'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organization and which information assets are covered
+    by the ISMS before you can review whether document control policies are being applied correctly.
+  good_enough: A clear, approved scope statement that identifies the organizational boundaries and assets
+    covered by the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The document control program review checks if the policy is being applied, so the policy
+    itself must exist and be accessible to serve as the benchmark for compliance.
+  good_enough: A current, approved information security policy that is available to relevant staff.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You must have an up-to-date register of information assets to verify that all relevant documents
+    are controlled and reviewed for currency.
+  good_enough: A maintained list of key information assets, even if not exhaustive, that covers the main
+    document types subject to control.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: A classification scheme is needed to determine which documents require control and what level
+    of review or protection is appropriate.
+  good_enough: A basic, documented scheme that categorizes information and documents by sensitivity or
+    criticality.

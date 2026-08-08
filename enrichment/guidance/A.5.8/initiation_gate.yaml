@@ -1,0 +1,20 @@
+must_id: item:A.5.8:initiation_gate
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Security gate at project initiation (risk assessment, classification of information, scope
+  of personal data if applicable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a formal project initiation checklist that includes mandatory fields for risk assessment, information
+  classification, and personal data scope.
+- Assign a named individual as the project security gate reviewer, listing their full name and role on
+  each project record.
+- Record the date when the security gate review is completed and retain the signed or digitally approved
+  checklist with the project documentation.
+- State the information classification level and whether personal data is involved in the project initiation
+  artefacts, referencing supporting evidence.
+- Avoid leaving the project security gate reviewer as "the team" or an unnamed group; always specify a
+  single accountable person.

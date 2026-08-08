@@ -1,0 +1,20 @@
+must_id: item:A.5.31:rev_scope_check
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Cross-check against the applicable-obligations scope — any new applicability that should add
+  entries
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the review of the legal and regulatory register, recording their name
+  and the review date in the register.
+- Cross-reference the register entries against the latest documented list of applicable laws, regulations,
+  and contractual obligations to identify any missing items.
+- Document any new or changed obligations that now apply, including the source, effective date, and responsible
+  owner for each new entry.
+- State explicitly in the review record that all new applicability areas have been checked and either
+  added or confirmed as not relevant.
+- Avoid using generic statements like "no changes" without showing evidence of the cross-check against
+  the current obligations list.

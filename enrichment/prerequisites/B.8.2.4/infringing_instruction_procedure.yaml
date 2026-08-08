@@ -1,0 +1,40 @@
+leaf_id: req:B.8.2.4:infringing_instruction_procedure
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: You need to know the lawful basis for each processing activity to recognize when a customer
+    instruction might conflict with applicable laws or regulations. Without this, you cannot reliably
+    assess if an instruction is potentially infringing.
+  good_enough: A documented mapping of processing activities to their lawful bases, even if not fully
+    complete, is sufficient to start drafting the notification procedure.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Clear documentation of the intended purposes for processing is essential to spot instructions
+    that fall outside the agreed scope or violate stated purposes, which is a key trigger for notification.
+  good_enough: A working list of purposes for each processing activity, with enough detail to distinguish
+    compliant from non-compliant instructions, is enough to proceed.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You must know which parts of the organization and which processing activities are in-scope
+    for privacy management, so you can determine when an instruction is relevant and potentially infringing.
+  good_enough: A draft or approved scope statement that covers all relevant processing activities and
+    boundaries is sufficient.
+- ref: Art.28.3.h
+  standard_id: GDPR:2016/679
+  title: Processor Duty to Notify of Infringing Instructions
+  category: cross_role
+  rationale: This GDPR article sets the legal expectation for processors to notify controllers of unlawful
+    instructions, which your procedure must operationalize and align with.
+  good_enough: A clear understanding of the article’s requirements and how they apply to your processor
+    role is enough to begin drafting the procedure.

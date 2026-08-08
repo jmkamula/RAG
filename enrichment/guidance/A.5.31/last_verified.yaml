@@ -1,0 +1,17 @@
+must_id: item:A.5.31:last_verified
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Last-verified or last-reviewed date per entry
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the last-verified or last-reviewed date for each requirement entry in the register, using a clear
+  date format such as YYYY-MM-DD.
+- Name the person who performed the most recent review for each entry, listing a specific individual rather
+  than a team or department.
+- Retain evidence of the review activity, such as a signed checklist or email confirmation, linked to
+  each register entry.
+- Update the register immediately after any review or verification activity to avoid undated or outdated
+  entries, which auditors will flag.

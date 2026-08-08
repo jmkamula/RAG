@@ -1,0 +1,18 @@
+must_id: item:A.5.30:reg_last_tested
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Last-tested date per row (drives stale-test detection — services not tested in N months flag
+  for refresh)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the last-tested date for each ICT service in the continuity register, using a consistent date
+  format for every entry.
+- Name the person responsible for updating each last-tested date, listing a specific individual rather
+  than a team or department.
+- Cross-reference each last-tested date to supporting test evidence, such as a signed test report or meeting
+  minutes.
+- Review the register quarterly to confirm no ICT service shows a last-tested date older than your defined
+  maximum interval.

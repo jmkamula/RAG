@@ -1,0 +1,18 @@
+must_id: item:Art.8:rev_verification_quality
+control_ref: Art.8
+standard_id: GDPR:2016/679
+must_text: Age-verification sample audit — claimed-age values look plausible vs other signals
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a recent sample of child user registrations and record the claimed ages alongside other available
+  data points, such as school year or parent details.
+- Compare claimed ages to supporting signals, noting any inconsistencies or outliers in a dated audit
+  log.
+- Document the method used to verify plausibility, including any thresholds or rules applied during the
+  review.
+- Name the individual who conducted the sample audit, ensuring a specific person is listed rather than
+  a team or department.
+- Retain the audit results and any follow-up actions as a dated record for future reference.

@@ -1,0 +1,17 @@
+must_id: item:B.8.5.5:proc_source_variety
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Source variety awareness — courts, tribunals, admin authorities, any jurisdiction
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all possible sources of disclosure requests, including courts, tribunals, and administrative authorities
+  from any jurisdiction, in the procedure document.
+- Document the process for verifying the legitimacy and scope of each disclosure request, referencing
+  the specific source and jurisdiction in each case record.
+- Name the decision-maker responsible for authorizing disclosures as a specific individual, not a group
+  or department, in the procedure.
+- Record each disclosure decision with the source type, jurisdiction, decision date, and authorizing person's
+  name in a disclosure log.

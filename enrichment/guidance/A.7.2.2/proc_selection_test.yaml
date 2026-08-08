@@ -1,0 +1,21 @@
+must_id: item:A.7.2.2:proc_selection_test
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: Selection test per basis (consent — freely given + specific + unambiguous; contract — necessity;
+  legal obligation — cited law; vital interests — physical safety; public interest — cited task; legitimate
+  interests — LIA with balancing test)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the selection test for each lawful basis, showing how the chosen basis meets the specific criteria
+  listed in the requirement.
+- Name the person responsible for conducting and recording the assessment for each processing activity,
+  using their full name and role.
+- Record the exact law, contract, or public task referenced when relying on legal obligation, contract,
+  or public interest as the lawful basis.
+- Attach a completed Legitimate Interests Assessment (LIA) with a documented balancing test when using
+  legitimate interests as the lawful basis.
+- Avoid using generic or boilerplate justifications that could apply to any organisation; tailor each
+  assessment to the specific processing activity.

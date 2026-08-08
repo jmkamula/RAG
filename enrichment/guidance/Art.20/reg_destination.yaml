@@ -1,0 +1,17 @@
+must_id: item:Art.20:reg_destination
+control_ref: Art.20
+standard_id: GDPR:2016/679
+must_text: Per-row destination (export to subject / direct controller transmission)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the destination for each portability request row, specifying whether data was exported directly
+  to the subject or transmitted to another controller.
+- Name the recipient controller for direct transmissions, including their organisation name and contact
+  details, not just a generic label.
+- Document the date and method of data transfer for each request, such as secure email or encrypted download
+  link.
+- Retain confirmation of successful delivery or receipt, such as an acknowledgment email or signed receipt,
+  for each completed transfer.

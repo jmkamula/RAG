@@ -1,0 +1,50 @@
+leaf_id: req:A.5.35:independent_review_report
+control_ref: A.5.35
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The independent review must assess the effectiveness of information security management within
+    the defined ISMS scope. Without a clear scope statement, the reviewer cannot determine what should
+    be included or excluded from the review.
+  good_enough: A documented scope statement exists, identifying the boundaries and applicability of the
+    ISMS, even if minor refinements are pending.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The review evaluates how well the organisation's information security approach aligns with
+    its stated policy. The policy sets the baseline against which effectiveness and compliance are measured.
+  good_enough: A formally approved, current information security policy is available and communicated
+    to relevant stakeholders.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: foundational
+  rationale: The review must consider whether risk assessments are being conducted and acted upon. Without
+    a recent risk assessment, the reviewer cannot judge if controls are appropriate to the risks faced.
+  good_enough: At least one documented risk assessment covering the current ISMS scope is available, even
+    if some risk treatments are still in progress.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Independence of the reviewer and clarity of responsibilities are critical for the credibility
+    of the review. Documented roles help demonstrate that the review is conducted by someone not responsible
+    for day-to-day ISMS operation.
+  good_enough: A roles and responsibilities matrix or document exists, showing who is responsible for
+    ISMS operation and who is eligible to act as an independent reviewer.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: The review must cover people, processes, and technology, which requires an up-to-date asset
+    register. Without this, the reviewer cannot verify that all relevant assets are included in the review
+    scope.
+  good_enough: A basic asset register exists, listing key information assets, even if some categories
+    or owners are still being updated.

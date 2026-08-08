@@ -1,0 +1,48 @@
+leaf_id: req:B.8.5.3:disclosure_event_log
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which processing activities, systems, and data flows are in-scope for your
+    ISMS and privacy extension before you can log processor-side disclosures. This ensures the event log
+    covers all relevant disclosures.
+  good_enough: A documented scope that clearly identifies the boundaries and applicability of your ISMS
+    and privacy program, including processor activities.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You must know which information assets (datasets, systems, applications) are being processed
+    or disclosed to accurately record disclosure events as a processor.
+  good_enough: A basic, up-to-date inventory of information assets relevant to processing activities,
+    even if not fully detailed.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Each disclosure event must be linked to a documented processing purpose, so you can justify
+    and contextualize the disclosure in the event log.
+  good_enough: A list of processing purposes for which personal data is handled, with enough detail to
+    map disclosures to these purposes.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: You need to record the lawful basis for each processing activity, including disclosures,
+    to ensure the event log demonstrates compliance with privacy requirements.
+  good_enough: A summary of lawful bases for each processing activity, sufficient to reference in the
+    disclosure event log.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: cross_role
+  rationale: The RoPA provides the master record of processing activities and disclosures, which the processor
+    disclosure event log must reference and align with for regulatory compliance.
+  good_enough: A working RoPA that lists processing activities and disclosures, even if not fully polished,
+    so you can cross-reference disclosure events.

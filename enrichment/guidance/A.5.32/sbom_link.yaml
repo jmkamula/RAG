@@ -1,0 +1,17 @@
+must_id: item:A.5.32:sbom_link
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Link to SBOM tooling output for open-source components (A.8.29 secure-development linkage)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all licensed software and open-source components in a dated inventory, including product names,
+  versions, and license types.
+- Link each open-source component in the inventory to its corresponding SBOM (Software Bill of Materials)
+  tooling output, referencing the exact file or report location.
+- Cross-reference the inventory entries with secure development records to show how open-source components
+  are tracked and assessed for vulnerabilities.
+- Name the inventory owner as a specific individual responsible for updates, not a generic team or department.
+- Retain previous versions of the inventory to demonstrate historical changes and updates over time.

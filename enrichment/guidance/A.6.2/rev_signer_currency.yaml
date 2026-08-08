@@ -1,0 +1,20 @@
+must_id: item:A.6.2:rev_signer_currency
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Signer-currency analysis — what fraction of active workers on the current template? plan for
+  recontracting the gap
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for tracking employment template usage by listing their full name and
+  role in a dated document.
+- Record the total number of active workers and the number who have signed the current employment terms
+  template in a dated spreadsheet.
+- Calculate and document the percentage of active workers covered by the current template, referencing
+  the specific template version and date.
+- Document a written plan, approved and signed by management, for recontracting workers who are not on
+  the current template.
+- List the names of workers not yet on the current template; avoid using group labels like "legacy staff"
+  or "contractors" without specifics.

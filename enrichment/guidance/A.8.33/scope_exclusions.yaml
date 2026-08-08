@@ -1,0 +1,19 @@
+must_id: item:A.8.33:scope_exclusions
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Exclusion rationale (test fixtures in code governed via A.8.4; one-off load-test data with
+  no real source)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific types of test information excluded from the scope, such as test fixtures in code
+  and one-off load-test data.
+- Document the rationale for each exclusion, clearly linking each to the relevant control or business
+  context, such as A.8.4 for code fixtures.
+- Name the individual who approved each exclusion, ensuring a specific person is listed rather than a
+  team or department.
+- Record the date when each exclusion rationale was reviewed and approved to provide a clear timeline.
+- Cross-reference each exclusion to supporting documentation or registers that substantiate the rationale
+  and decision.

@@ -1,0 +1,15 @@
+must_id: item:5.3:isms_conformance
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Role assigned for ensuring the ISMS conforms to ISO 27001:2022
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for ISMS conformity to ISO 27001:2022 in the Roles, Responsibilities
+  and Authorities Matrix, including their job title.
+- Document the date the responsibility was assigned to this individual in the matrix.
+- Cross-reference the matrix entry with the official ISMS policy or organisational chart to confirm alignment.
+- Avoid listing a group or department as the responsible party; specify a single named person for accountability.
+- Retain a signed or formally approved version of the matrix showing the current assignment of this responsibility.

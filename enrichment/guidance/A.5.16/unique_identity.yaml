@@ -1,0 +1,18 @@
+must_id: item:A.5.16:unique_identity
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Unique identity per person (no shared user accounts for individuals; named accountability)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a procedure that states each individual is assigned a unique user identity for all systems
+  and services.
+- Name the person responsible for approving creation of new user identities, listing their full name and
+  job title.
+- Record evidence that shared user accounts are prohibited, such as a clear statement in the procedure
+  and removal of any existing shared accounts.
+- List all current user identities in a register, showing each identity mapped to a specific, named individual.
+- Specify that generic or group names are not used for individual accounts—each account must be traceable
+  to one person.

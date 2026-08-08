@@ -1,0 +1,17 @@
+must_id: item:Art.14:rev_register_currency
+control_ref: Art.14
+standard_id: GDPR:2016/679
+must_text: Register currency check — every active third-party source has a current row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every active third-party data source in your privacy notice register, including the source name
+  and the date information was last reviewed.
+- Confirm that each listed third-party source has a corresponding, up-to-date entry with a review date
+  within the past 12 months.
+- Assign a named individual responsible for checking and updating the register, and record their name
+  and the date of the last check.
+- Flag and update any register row that is missing a review date or lists a source as "various" or "external
+  partners" without specifics.

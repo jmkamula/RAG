@@ -1,0 +1,17 @@
+must_id: item:Art.28:rev_subprocessor_audit
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Sub-processor audit — every active sub-processor authorised; unauthorised additions flagged
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference your current list of sub-processors against all active data processing agreements to
+  confirm each sub-processor is formally authorised.
+- Document the date and outcome of your most recent sub-processor review in a signed and dated record.
+- Flag any sub-processor found in use but missing from the authorised list, and record the incident and
+  follow-up action in an incident log.
+- Name the reviewer as a specific individual responsible for the sub-processor audit, not a team or department.
+- Retain evidence of notifications sent to customers about new or changed sub-processors, including dates
+  and recipients.

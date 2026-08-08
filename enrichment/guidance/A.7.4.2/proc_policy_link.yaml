@@ -1,0 +1,16 @@
+must_id: item:A.7.4.2:proc_policy_link
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+must_text: Link to information-security + privacy policies (§6.2 / A.5.1) as the governance vehicle
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the Processing Limitation Procedure to the current versions of your information-security
+  and privacy policies by title and document number.
+- State in the procedure that processing limitations are governed by the overarching information-security
+  and privacy policies.
+- Name the policy owner as a specific individual responsible for maintaining the linkage, not a generic
+  team or department.
+- Record the date when the cross-references were last reviewed and updated in the procedure document.

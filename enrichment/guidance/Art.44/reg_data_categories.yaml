@@ -1,0 +1,17 @@
+must_id: item:Art.44:reg_data_categories
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Per-row data categories (cross-link to Art.30 RoPA)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each entry in the International Transfer Register to the specific data categories listed
+  in your Article 30 Record of Processing Activities.
+- Document the exact data categories transferred for each international transfer, using the same terminology
+  as in your Article 30 records.
+- Name the person responsible for maintaining the accuracy of data category cross-links for each register
+  entry.
+- Avoid using generic terms like "personal data" or "various" for data categories; specify the actual
+  types, such as "employee contact details" or "customer purchase history".

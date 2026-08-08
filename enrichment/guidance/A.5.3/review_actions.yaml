@@ -1,0 +1,20 @@
+must_id: item:A.5.3:review_actions
+control_ref: A.5.3
+standard_id: ISO27001:2022
+must_text: Actions captured where compensating controls failed in practice (operational incidents, audit
+  findings)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each incident or audit finding where compensating controls for segregation of duties failed,
+  including the date, description, and affected process.
+- Assign a named individual to investigate each failure and document their analysis and conclusions in
+  a dated report.
+- Document the specific corrective actions taken for each failure, referencing the related incident or
+  finding in your action tracking log.
+- Name the responsible person who approved the corrective action, ensuring this is a specific individual
+  and not a team or department.
+- Retain evidence of follow-up reviews confirming the effectiveness of corrective actions, with reviewer
+  name and review date.

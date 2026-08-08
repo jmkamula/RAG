@@ -1,0 +1,15 @@
+must_id: item:A.7.4.8:rev_next_date
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Disposal Program in a clearly visible section of the document.
+- Record the date the current review was completed and the name of the reviewer in the review log.
+- Name the responsible individual for scheduling the next review, avoiding generic titles like "the team"
+  or "IT department".
+- Cross-reference the stated next review date with your organisation’s compliance calendar or tracking
+  tool.

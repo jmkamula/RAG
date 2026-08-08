@@ -1,0 +1,20 @@
+must_id: item:A.7.3.4:proc_channel_parity
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+must_text: Channel parity — withdrawal via same medium as collection (email if email, web if web; not
+  phone/fax fallback)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each consent collection channel used, listing the specific mediums (such as email, web form,
+  or paper) in a dated register.
+- State in the withdrawal procedure that individuals can withdraw consent using the same channel through
+  which it was originally collected.
+- Record an example for each channel showing a completed withdrawal request processed via that same medium,
+  with dates and outcomes.
+- Name the procedure owner as a specific individual responsible for maintaining channel parity, not a
+  generic team or department.
+- Review all withdrawal instructions to confirm none redirect users to a different channel (e.g., do not
+  require phone withdrawal for web-collected consent).

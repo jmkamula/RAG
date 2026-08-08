@@ -1,0 +1,18 @@
+must_id: item:A.5.11:rec_writeoff_auth
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Write-off authoriser per record where applicable (proportional to asset value; InfoSec sign-off
+  for data-bearing devices)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name and job title of the person authorising any asset write-off directly on the leaver
+  asset return record.
+- State the date of write-off authorisation clearly on each record to show when the decision was made.
+- Assign InfoSec sign-off for write-offs involving data-bearing devices and attach their written approval
+  to the record.
+- Name the authoriser as a specific individual, not a team or department, to avoid ambiguity in accountability.
+- Cross-reference the asset’s value in the record to confirm that write-off authorisation level matches
+  the proportionality requirement.

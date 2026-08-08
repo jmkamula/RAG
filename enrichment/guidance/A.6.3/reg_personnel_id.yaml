@@ -1,0 +1,15 @@
+must_id: item:A.6.3:reg_personnel_id
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Per-row personnel identifier (links to identity register A.5.16)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each training completion with a unique personnel identifier that matches the format used in your
+  identity register under control A.5.16.
+- Cross-reference every identifier in the training completion register to the corresponding entry in the
+  identity register to confirm accuracy.
+- Name the personnel identifier as a specific value, not as a generic label like "employee" or "user".
+- Document the date of training completion alongside the identifier for each individual row.

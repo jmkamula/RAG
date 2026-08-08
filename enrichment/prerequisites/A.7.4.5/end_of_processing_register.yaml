@@ -1,0 +1,48 @@
+leaf_id: req:A.7.4.5:end_of_processing_register
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the specific purposes for processing personal data to determine when processing
+    ends and what actions (deletion, de-identification) are required. Without this, you can't accurately
+    record or justify end-of-processing actions.
+  good_enough: A documented list of processing purposes for all relevant data sets, even if not fully
+    mapped to every system, is sufficient to proceed.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: The lawful basis for processing impacts retention and deletion requirements. You need this
+    context to ensure end-of-processing actions are compliant and properly recorded.
+  good_enough: Each processing activity has a stated lawful basis, even if some edge cases are still under
+    review.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You must know what information assets (systems, databases, files) hold personal data to track
+    and verify deletion or de-identification actions. The register is essential for completeness.
+  good_enough: A basic inventory of all major systems and data stores containing personal data, even if
+    some legacy assets are pending review.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A data classification scheme helps identify which data is personal and subject to end-of-processing
+    requirements. This ensures the register covers all relevant data types.
+  good_enough: A simple classification scheme that distinguishes personal from non-personal data, applied
+    to key data sets.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organization and which data processing activities
+    are covered. This ensures the register is neither over- nor under-inclusive.
+  good_enough: A draft scope statement that identifies the business units and systems in scope for privacy
+    controls.

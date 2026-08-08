@@ -1,0 +1,39 @@
+leaf_id: req:A.5.22:review_schedule_register
+control_ref: A.5.22
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.21
+  standard_id: ISO27001:2022
+  title: Managing information security in the ICT supply chain
+  category: direct
+  rationale: You need a current register of ICT suppliers before you can schedule or track reviews. Without
+    knowing who your suppliers are, you can't plan or assign review activities.
+  good_enough: A basic, up-to-date supplier register listing all relevant ICT suppliers is available,
+    even if some details are pending.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that someone is accountable for scheduling and conducting
+    supplier reviews. Without this, the review schedule register will lack ownership and follow-through.
+  good_enough: Documented roles exist for supplier management and review, with named individuals or teams,
+    even if responsibilities are still being refined.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment informs how often each supplier should be reviewed. The review schedule should
+    be risk-based, so you need at least an initial risk rating for each supplier.
+  good_enough: Each supplier has a provisional risk rating or tier, even if the risk assessment process
+    is not fully mature.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Knowing which assets are managed or accessed by each supplier helps prioritize review frequency
+    and focus. The asset register links suppliers to critical systems or data.
+  good_enough: A draft asset register exists, mapping key assets to suppliers, even if some mappings are
+    incomplete.

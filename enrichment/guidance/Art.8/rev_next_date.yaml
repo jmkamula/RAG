@@ -1,0 +1,13 @@
+must_id: item:Art.8:rev_next_date
+control_ref: Art.8
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Child Consent Program in the program documentation.
+- Record the name of the individual responsible for scheduling and conducting the next review.
+- Confirm the review date is future-dated and not left blank or marked as "TBD".
+- Retain a dated record of when the next review date was last updated or approved.

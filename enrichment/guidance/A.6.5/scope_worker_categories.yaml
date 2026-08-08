@@ -1,0 +1,18 @@
+must_id: item:A.6.5:scope_worker_categories
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Worker categories addressed (employees vs contractors vs interns — different obligation scope)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all worker categories involved with your organisation, such as employees, contractors, and interns,
+  in a dated obligations scope document.
+- Specify the information security obligations that apply to each worker category, referencing relevant
+  policy sections or contractual clauses.
+- Name the person responsible for maintaining and updating the obligations scope, ensuring this is a specific
+  individual, not a team or department.
+- Attach supporting evidence, such as sample contracts or onboarding checklists, that demonstrate the
+  distinct obligations communicated to each worker category.
+- Review the obligations scope annually and record the review date and reviewer’s name in the document.

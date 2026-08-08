@@ -1,0 +1,18 @@
+must_id: item:B.8.2.4:reg_legislation_cited
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Legislation cited per row (which provision the instruction appears to infringe)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name and citation of the specific law or regulation allegedly infringed for each instruction
+  entered in the register.
+- Reference the exact section, article, or clause of the legislation that the instruction appears to violate
+  in a dedicated column.
+- Name the individual who identified and documented the legislative provision, avoiding anonymous or group
+  entries.
+- Date each entry to show when the potential infringement and corresponding legislation were identified.
+- Attach supporting documentation, such as legal opinions or regulatory guidance, that clarifies how the
+  cited provision applies to the instruction.

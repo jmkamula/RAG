@@ -1,0 +1,17 @@
+must_id: item:Art.23:rev_next_date
+control_ref: Art.23
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Art.23 Restrictions Program in a clearly visible section
+  of the program document.
+- Record the date the current review was completed, along with the name of the reviewer, in the document’s
+  revision history table.
+- Name the individual responsible for scheduling and conducting the next review, avoiding generic titles
+  like “Compliance Team.”
+- Attach evidence of management approval for the planned review date, such as a signed meeting minute
+  or approval email.

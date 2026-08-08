@@ -1,0 +1,13 @@
+must_id: item:Art.16:rev_next_date
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- State the next planned review date for the Art.16 Rectification Program in the program documentation.
+- Record the name of the individual responsible for scheduling and conducting the next review.
+- Document the date this review schedule was last updated in the same record.
+- Name the owner as a specific individual, not a team or department, to avoid ambiguity.

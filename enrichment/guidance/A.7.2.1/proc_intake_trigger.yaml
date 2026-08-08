@@ -1,0 +1,17 @@
+must_id: item:A.7.2.1:proc_intake_trigger
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Intake triggers listed (new product launch, new processing activity, new data source, new integration)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all intake triggers in the procedure, including new product launch, new processing activity, new
+  data source, and new integration, with clear definitions.
+- Document the date the procedure was last updated and the name of the person who approved the current
+  version.
+- State that purposes for processing must be identified and recorded before any new trigger event is acted
+  upon.
+- Name the owner of the procedure as a specific individual, not a team or department.
+- Attach a sample completed intake form showing how each trigger leads to documented purpose identification.

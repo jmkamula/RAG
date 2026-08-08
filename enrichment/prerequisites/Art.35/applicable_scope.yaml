@@ -1,0 +1,33 @@
+leaf_id: req:Art.35:applicable_scope
+control_ref: Art.35
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a current, accurate inventory of all processing activities to determine which ones
+    may fall within the DPIA scope. Without this, you can't reliably identify or justify which activities
+    are subject to DPIA requirements.
+  good_enough: A draft or working list of processing activities that covers all major business units and
+    data flows, even if some details are pending.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: direct
+  rationale: Knowing the lawful basis for each processing activity helps assess risk and necessity, which
+    are key factors in deciding if a DPIA is required. Some lawful bases (like legitimate interests) may
+    trigger higher risk.
+  good_enough: Each processing activity should have a stated lawful basis, even if the justification is
+    brief or pending legal review.
+- ref: Art.35.3
+  standard_id: GDPR:2016/679
+  title: Mandatory DPIA Categories
+  category: direct
+  rationale: You need to understand the specific categories of processing that always require a DPIA (e.g.,
+    systematic monitoring, large-scale special category data) to define your DPIA scope accurately.
+  good_enough: A summary of the Art.35.3 categories and a preliminary check of which of your activities
+    might fit them.

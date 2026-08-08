@@ -1,0 +1,19 @@
+must_id: item:A.8.31:network_separation
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Network + identity separation between environments (cross-link to A.8.22 network segregation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the technical controls that enforce separate networks and user accounts for development, test,
+  and production environments, including configuration screenshots or diagrams.
+- Cross-reference your network diagrams and access control lists with the network segregation controls
+  described in your A.8.22 documentation.
+- Name the owner responsible for maintaining environment separation as a specific individual, not a team
+  or department.
+- Record the date of the last review of environment separation procedures and any updates made, with reviewer
+  name and signature.
+- List all exceptions to environment separation, including business justification and formal approval
+  by a named manager.

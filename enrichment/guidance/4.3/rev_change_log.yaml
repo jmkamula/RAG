@@ -1,0 +1,19 @@
+must_id: item:4.3:rev_change_log
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Cross-check against change records — every actual scope change in the year is logged
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the ISMS scope document with your change management log to identify all scope changes
+  made in the past year.
+- Record each scope change with a date, description, and reference to the corresponding change record
+  in both the scope review and change log.
+- Name the individual who approved each scope change, ensuring the approver is a specific person and not
+  a generic role or group.
+- Confirm that no scope changes were made verbally or without documentation by checking for missing or
+  incomplete entries in the change log.
+- Retain a signed and dated summary of the annual scope review, listing all changes and their corresponding
+  change record references.

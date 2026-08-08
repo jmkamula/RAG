@@ -1,0 +1,18 @@
+must_id: item:A.5.14:approval_signatory
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Signatory at appropriate management level (typically CISO with executive endorsement; CIO co-sign
+  where transfer mechanisms involve IT systems)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the CISO as the primary signatory on the Information Transfer Policy, listing their full name and
+  job title.
+- Obtain a dated signature from an executive leader endorsing the policy, such as the CEO or a board member.
+- Co-sign the policy with the CIO if any information transfer mechanisms involve IT systems, capturing
+  their full name and title.
+- Record the approval date on the policy document and reference the current policy version number.
+- Avoid using generic titles like "IT Department" or "Management Team" as signatories; specify named individuals
+  only.

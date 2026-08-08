@@ -1,0 +1,42 @@
+leaf_id: req:7.5:document_control_policy
+control_ref: '7.5'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The Documented Information Control Policy must clearly define which documents are covered,
+    and this is only possible if the ISMS scope is already established. Without a stable scope, you cannot
+    determine which information or records fall under the policy.
+  good_enough: The ISMS scope statement is formally approved and up-to-date, with clear boundaries for
+    what people, processes, and assets are in-scope.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Knowing what information assets exist (including documents and records) is essential to define
+    what needs to be controlled under the policy. Without an asset register, you risk missing critical
+    information that should be governed.
+  good_enough: A basic asset register exists listing key information assets, including document types
+    and repositories, even if not fully detailed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The policy must address how documents of different sensitivity levels are controlled. A classification
+    scheme provides the necessary categories to reference in the policy.
+  good_enough: A draft or approved classification scheme is available, with at least high-level categories
+    (e.g., public, internal, confidential).
+- ref: '7.5'
+  standard_id: ISO27001:2022
+  title: ISMS Document Register
+  category: direct
+  rationale: The policy should reference or align with the actual register of ISMS documents to ensure
+    all required documents are covered and controlled. Without a register, the policy cannot be meaningfully
+    scoped.
+  good_enough: A working list or draft register of ISMS documents exists, even if not finalized, to inform
+    policy coverage.

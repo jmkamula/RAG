@@ -1,0 +1,16 @@
+must_id: item:A.8.15:scope_log_classes
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Log classes required per system class (auth / access / change / fault)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each system class in scope, such as authentication, access, change, and fault, in a dated logging
+  scope document.
+- Specify the exact types of activities to be logged for each system class, using clear examples or categories.
+- Assign a named individual as the owner responsible for maintaining and updating the logging scope document.
+- Avoid using generic terms like "all systems" or "all logs"; describe each logging requirement per system
+  class explicitly.
+- Review and sign off the logging scope document by a designated manager, recording the date of approval.

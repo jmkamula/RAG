@@ -1,0 +1,19 @@
+must_id: item:A.7.3.4:proc_pre_withdrawal_valid
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+must_text: Pre-withdrawal processing remains valid; post-withdrawal processing halts (Art.7.3 — no retroactive
+  effect)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure that clearly states data processing before consent withdrawal remains valid and
+  is not retroactively affected.
+- Record each consent withdrawal request with a timestamp and the specific data subject’s identity.
+- Name the person responsible for updating processing activities when consent is withdrawn, listing them
+  as a specific individual.
+- Retain evidence showing that data processing based on withdrawn consent stops from the withdrawal date
+  forward, such as system logs or workflow records.
+- Avoid using generic statements like “processing stops” without showing dated records or logs that demonstrate
+  the actual halt of processing.

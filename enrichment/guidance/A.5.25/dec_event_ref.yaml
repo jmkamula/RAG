@@ -1,0 +1,15 @@
+must_id: item:A.5.25:dec_event_ref
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Event identifier per record (links back to the triage log row)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique event identifier to each triage decision record that matches the corresponding entry
+  in the main triage log.
+- Record the event identifier clearly at the top of each decision record to enable easy cross-referencing.
+- Cross-reference the event identifier in both the triage log and the decision record to confirm they
+  are linked.
+- Avoid using generic or duplicate identifiers—each event must have its own distinct reference.

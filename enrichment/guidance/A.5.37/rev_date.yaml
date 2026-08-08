@@ -1,0 +1,15 @@
+must_id: item:A.5.37:rev_date
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval (typically within 12 months of last review)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the last operating procedures program review in a central log, including the name
+  of the reviewer.
+- Schedule the next review within 12 months of the previous review date and document this planned interval
+  in the same log.
+- Attach the signed and dated review summary or meeting minutes as evidence of the most recent review.
+- Name the reviewer as a specific individual, not a group or department, in all review records.

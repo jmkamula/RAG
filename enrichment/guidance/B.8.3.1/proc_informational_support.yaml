@@ -1,0 +1,19 @@
+must_id: item:B.8.3.1:proc_informational_support
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+must_text: Informational support — customer can request info about processing (as processor's records
+  permit) to inform Art.15 responses
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the procedure owner, listing their full name and job title in the document.
+- Document the step-by-step process for handling customer information requests, including how requests
+  are received, logged, and fulfilled.
+- Record the date of the most recent procedure review and approval, including the approver’s name and
+  signature.
+- Cross-reference the procedure to the current data processing records so auditors can verify that available
+  information matches what is offered to customers.
+- State that only documented, written requests are accepted—do not rely on verbal or informal channels
+  for subject rights requests.

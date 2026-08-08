@@ -1,0 +1,18 @@
+must_id: item:7.2:scope_supporting_roles
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Supporting roles enumerated (engineering with InfoSec responsibilities, HR with onboarding,
+  IT ops with access provisioning)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all roles that have responsibilities affecting the information security management system, including
+  engineering, HR, and IT operations.
+- Name the person currently filling each role, using full names rather than job titles or departments.
+- Document the specific information security duties assigned to each role in a dated register or matrix.
+- Update the register whenever roles or responsibilities change, and retain previous versions for historical
+  reference.
+- Avoid grouping responsibilities under vague labels like "the team" or "IT"; specify individual accountability
+  for each role.

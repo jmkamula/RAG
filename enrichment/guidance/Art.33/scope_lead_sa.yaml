@@ -1,0 +1,15 @@
+must_id: item:Art.33:scope_lead_sa
+control_ref: Art.33
+standard_id: GDPR:2016/679
+must_text: Lead supervisory authority identified per main-establishment rules (Art.56)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the lead supervisory authority for your organisation based on the location of your main establishment
+  in the European Union.
+- Document the reasoning and criteria used to determine your main establishment and the corresponding
+  supervisory authority, referencing relevant business locations and decision-making centres.
+- Record the date this determination was made and the individual responsible for the assessment.
+- Name the lead authority as a specific national authority, not as "the EU" or a generic term like "regulator".

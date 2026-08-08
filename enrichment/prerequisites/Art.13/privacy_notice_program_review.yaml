@@ -1,0 +1,42 @@
+leaf_id: req:Art.13:privacy_notice_program_review
+control_ref: Art.13
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.12
+  standard_id: GDPR:2016/679
+  title: Transparent information, communication and modalities for the exercise of the rights of the data
+    subject
+  category: direct
+  rationale: Art.12 sets the rules for how privacy notice information must be delivered—concise, transparent,
+    intelligible, and easily accessible. You can't review or update your privacy notice program without
+    first ensuring these communication standards are met.
+  good_enough: You have a documented approach for delivering privacy notices that meets Art.12's clarity
+    and accessibility requirements, even if not every channel is perfect yet.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of processing
+  category: direct
+  rationale: The privacy notice must specify the lawful basis for each processing activity, as required
+    by Art.13. Without clear lawful bases (as per Art.6), you can't verify or update the notice content
+    accurately.
+  good_enough: Each processing activity in scope has a mapped lawful basis, with enough documentation
+    to reference in the privacy notice—even if some edge cases are still under review.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: An up-to-date RoPA is essential to ensure the privacy notice reflects all current processing
+    activities. Without this record, you risk missing or misrepresenting processing in your annual review.
+  good_enough: You have a current RoPA that lists all major processing activities, even if some minor
+    updates are pending.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer Designation
+  category: foundational
+  rationale: If a DPO is required, their contact details must appear in the privacy notice. You need clarity
+    on DPO designation before reviewing or updating the notice.
+  good_enough: You have determined whether a DPO is required and, if so, have designated one with contact
+    details available for inclusion in the notice.

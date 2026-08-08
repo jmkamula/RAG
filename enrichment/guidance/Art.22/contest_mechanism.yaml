@@ -1,0 +1,17 @@
+must_id: item:Art.22:contest_mechanism
+control_ref: Art.22
+standard_id: GDPR:2016/679
+must_text: Contest-decision mechanism (subject can contest the automated decision)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process by which individuals can contest automated decisions, including contact details
+  and response timelines, in your Automated Decision-Making Procedure.
+- Name a specific person or role responsible for handling contest requests, ensuring this is not listed
+  as "the team" or a generic department.
+- Record each contest request and the outcome in a dated log, including the decision made and any actions
+  taken.
+- Publish clear instructions for individuals on how to submit a contest request, referencing the relevant
+  section in your privacy notice or website.

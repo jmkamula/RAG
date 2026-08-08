@@ -1,0 +1,19 @@
+must_id: item:Art.21:explicit_notice
+control_ref: Art.21
+standard_id: GDPR:2016/679
+must_text: Right is explicitly drawn to subject's attention at first communication (Art.21.4)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in your first communication to the data subject that they have the right to object to processing
+  of their personal data.
+- Include a clear and prominent section or sentence about the right to object, not buried in general terms
+  or privacy policy links.
+- Record the exact wording and location of the right to object notice in a dated copy of the first communication
+  template.
+- Name the person responsible for reviewing and updating the notice to ensure it remains explicit and
+  compliant.
+- Retain a sample of the first communication, showing the explicit right to object notice, as evidence
+  for auditors.

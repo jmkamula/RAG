@@ -1,0 +1,17 @@
+must_id: item:A.6.1:rev_reviewer
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Reviewer identity and role recorded (HR lead + InfoSec lead jointly; legal-counsel sign-off
+  where jurisdictional shifts material)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full names and job titles of both the HR lead and InfoSec lead who jointly reviewed the screening
+  program in the review log.
+- Obtain a dated signature or written approval from legal counsel when the review involves material changes
+  to jurisdictional requirements.
+- Attach the documented review outcomes to the official screening program file, clearly referencing the
+  reviewers and legal counsel sign-off where applicable.
+- Name each reviewer as a specific individual; do not use group names such as "HR team" or "Security department".

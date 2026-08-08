@@ -1,0 +1,20 @@
+must_id: item:A.5.29:bcp_integration
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Integration with the broader Business Continuity Plan (this is the security ANNEX to the BCP
+  — BCP itself is out of scope)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the Information Security During Disruption Plan to the current version and location
+  of the organisation’s main Business Continuity Plan.
+- Name the individual responsible for aligning the security annex with updates to the Business Continuity
+  Plan, including their role and contact details.
+- Document the date and outcome of the most recent review where both the security annex and Business Continuity
+  Plan were checked for consistency.
+- Attach evidence of joint approval or sign-off from both the information security lead and the business
+  continuity manager.
+- Specify how security-specific actions in the annex map to corresponding steps in the main Business Continuity
+  Plan, avoiding generic statements that could fit any organisation.

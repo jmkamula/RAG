@@ -1,0 +1,16 @@
+must_id: item:A.5.2:comm_audience
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: Audience reached (all staff or named role-holders)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all staff or named role-holders who must receive information about roles and responsibilities in
+  a dated communication log.
+- Record the date, method, and sender of each communication to provide a clear audit trail of dissemination.
+- Obtain confirmation of receipt from each recipient, such as a signed acknowledgement or email reply,
+  and retain these records.
+- Name the audience as specific individuals or roles—do not use vague terms like "all staff" without supporting
+  recipient details.

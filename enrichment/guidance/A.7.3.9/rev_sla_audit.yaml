@@ -1,0 +1,17 @@
+must_id: item:A.7.3.9:rev_sla_audit
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: SLA audit — aggregate + sampled requests measured against response-time matrix
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the agreed response-time matrix, including specific timeframes for each request type, and store
+  it with version history and approval date.
+- Record aggregate statistics showing total requests received, response times achieved, and percentage
+  meeting the matrix targets for the audit period.
+- Select and retain a sample of individual request records, each showing the request date, response date,
+  and calculated response time.
+- Name the reviewer who performed the SLA audit and include the review date in the audit report.
+- Confirm the owner of the SLA audit is a named individual, not a team or department.

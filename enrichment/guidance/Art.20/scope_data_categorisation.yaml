@@ -1,0 +1,19 @@
+must_id: item:Art.20:scope_data_categorisation
+control_ref: Art.20
+standard_id: GDPR:2016/679
+must_text: Categorisation rules — what counts as 'provided by' the subject vs derived/observed (EDPB Guidelines
+  WP242 reference)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the rules used to distinguish between data 'provided by' the individual and data that is derived
+  or observed about them.
+- List concrete examples of each data type, referencing actual data fields from your systems or records.
+- Name the person responsible for maintaining and updating these categorisation rules, specifying their
+  full name and job title.
+- Record the date when the categorisation rules were last reviewed and updated, including a link to the
+  review record.
+- Avoid using generic or copy-paste definitions from external sources without tailoring them to your organisation’s
+  actual data types and processes.

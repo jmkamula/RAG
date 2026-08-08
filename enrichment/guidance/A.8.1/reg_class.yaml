@@ -1,0 +1,15 @@
+must_id: item:A.8.1:reg_class
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Per-device class (corporate / BYOD / contractor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each endpoint in the inventory register with a unique identifier, device type, and assigned user
+  or owner.
+- Specify the device class for every entry as "corporate," "BYOD," or "contractor" in a dedicated column.
+- Name the owner as a specific individual for each device, not as a team or department.
+- Record the date each device was added or updated in the register to show information is current.
+- Cross-reference each device entry with applicable policy documents based on its class.

@@ -1,0 +1,19 @@
+must_id: item:A.8.7:rev_exclusions
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Exclusion inventory re-confirmed / retired
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current malware protection exclusions in an inventory, including the system, file, or process
+  and the reason for exclusion.
+- Assign a named individual to review each exclusion for continued business need and technical justification,
+  recording their name and review date.
+- Document the outcome for each exclusion, stating whether it is re-confirmed or retired, along with supporting
+  rationale.
+- Update the inventory to remove any exclusions that are retired, ensuring the change is dated and the
+  responsible person is identified.
+- Name the reviewer as a specific person, not a generic role or team, to avoid auditor concerns about
+  unclear accountability.

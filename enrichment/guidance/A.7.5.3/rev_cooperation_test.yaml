@@ -1,0 +1,19 @@
+must_id: item:A.7.5.3:rev_cooperation_test
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+must_text: Cooperation channel test — sampled third parties re-contactable for subject-rights follow-up
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for maintaining up-to-date contact details for all third parties
+  involved in personal data transfers.
+- Document the date and outcome of a recent test where a sample of third parties was successfully re-contacted
+  for subject-rights cooperation.
+- Record the method used to verify each third party’s responsiveness, such as email confirmation or logged
+  phone call, with supporting evidence.
+- Retain correspondence or evidence of follow-up actions taken when a third party did not respond or could
+  not be reached.
+- State the frequency of these cooperation channel tests in a written procedure, ensuring the schedule
+  is clear and version-controlled.

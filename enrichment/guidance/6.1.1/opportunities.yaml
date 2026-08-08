@@ -1,0 +1,17 @@
+must_id: item:6.1.1:opportunities
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Opportunities identified to enhance ISMS effectiveness
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document at least one recent opportunity to improve the ISMS, including a clear description and the
+  date it was identified.
+- Name the individual responsible for evaluating and acting on each identified opportunity, avoiding generic
+  roles like "the team" or "management".
+- Record the outcome of each opportunity assessment, including decisions made and any actions taken, with
+  supporting evidence such as meeting minutes or action logs.
+- Cross-reference each opportunity to relevant ISMS objectives or processes to show how it could enhance
+  ISMS effectiveness.

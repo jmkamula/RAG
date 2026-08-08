@@ -1,0 +1,18 @@
+must_id: item:B.8.4.1:scope_infrastructure
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+must_text: Customer-serving infrastructure enumerated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems and services that process customer data, including servers, databases, and storage
+  used for temporary files.
+- Document each system’s location, function, and data flow in a dated inventory record maintained by a
+  named individual.
+- Cross-reference the inventory with active customer contracts to confirm all relevant infrastructure
+  is included.
+- Name the owner as a specific individual responsible for maintaining and updating the infrastructure
+  list, not a team or department.
+- Review and update the inventory at least annually, recording the date and person who completed the review.

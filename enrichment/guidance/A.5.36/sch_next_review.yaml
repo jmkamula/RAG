@@ -1,0 +1,15 @@
+must_id: item:A.5.36:sch_next_review
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Next review date per item
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each compliance item in the review schedule with a unique identifier and a clear description.
+- Record the next planned review date for every listed item in a dedicated column of the schedule.
+- Name the responsible reviewer for each item as a specific individual, not a team or department.
+- Update the schedule immediately after each review to show the new next review date, with a timestamp
+  of the update.
+- Retain previous review dates and outcomes in an audit log linked to each item for historical reference.

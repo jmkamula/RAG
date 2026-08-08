@@ -1,0 +1,18 @@
+must_id: item:A.5.18:temporary_access
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Temporary access provisions for time-bound tasks or third parties (expiry date mandatory; automated
+  revocation at expiry)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each temporary access request with a named requester, purpose, start date, and mandatory expiry
+  date in an access log.
+- Assign responsibility to a specific individual to approve and record each temporary access grant, avoiding
+  generic roles or group approvals.
+- Configure the access management system to automatically revoke temporary access at the recorded expiry
+  date, and retain system logs showing revocation events.
+- Review the access log monthly to confirm all expired temporary accesses have been revoked, and record
+  the review date and reviewer’s name.

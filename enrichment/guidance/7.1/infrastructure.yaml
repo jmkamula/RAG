@@ -1,0 +1,15 @@
+must_id: item:7.1:infrastructure
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Infrastructure provided (premises, equipment, transport)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all premises, equipment, and transport assets allocated to the ISMS in a dated resource allocation
+  record.
+- Assign a named individual responsible for maintaining and updating the resource allocation record.
+- Record the date each resource was provided and the person authorizing its allocation.
+- Attach supporting documents, such as purchase orders or lease agreements, to each listed resource.
+- Name the owner for each resource as a specific individual, not a team or department.

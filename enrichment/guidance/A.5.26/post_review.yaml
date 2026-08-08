@@ -1,0 +1,15 @@
+must_id: item:A.5.26:post_review
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Post-incident review step required after closure (handoff to A.5.27 lessons-learned)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the completion of each incident with a dated post-incident review report signed by the incident
+  response lead.
+- Name the individual responsible for conducting the post-incident review — do not use generic roles like
+  "the team" or "IT staff".
+- Record the date the incident was formally closed and the review was completed in the incident log.
+- Cross-reference the post-incident review report with the lessons-learned register required by A.5.27.

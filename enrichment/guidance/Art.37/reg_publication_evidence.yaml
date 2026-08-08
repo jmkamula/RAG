@@ -1,0 +1,17 @@
+must_id: item:Art.37:reg_publication_evidence
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: Per-row publication evidence (privacy notice URL + SA notification confirmation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the designated Data Protection Officer in the record, listing a specific individual with full contact
+  details.
+- Document the exact URL of the published privacy notice where the DPO’s contact information is displayed.
+- Record the date and method used to notify the relevant Supervisory Authority of the DPO appointment,
+  including confirmation receipt if available.
+- Attach supporting evidence for each row, such as screenshots of the published privacy notice and copies
+  of the notification sent to the Supervisory Authority.
+- Avoid listing the DPO as a generic role or department; always specify a named individual.

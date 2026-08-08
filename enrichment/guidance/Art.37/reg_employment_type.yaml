@@ -1,0 +1,17 @@
+must_id: item:Art.37:reg_employment_type
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: Per-row employment type (internal staff / external service contract)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each Data Protection Officer in the DPO Designation Record with a separate row for every individual
+  appointment.
+- State the employment type for each DPO as either "internal staff" or "external service contract" in
+  a dedicated column.
+- Name the DPO owner as a specific person, not a team or department, to avoid ambiguity.
+- Record the date each DPO was designated and the date employment type was last confirmed or updated.
+- Attach supporting documentation, such as employment contracts or service agreements, for each DPO appointment
+  row.

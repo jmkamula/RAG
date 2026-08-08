@@ -1,0 +1,17 @@
+must_id: item:B.8.5.6:rev_reviewer
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+must_text: Reviewer identity (Trust + Legal + DPO)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer for each Subcontractor Disclosure Program Review as a specific individual from Trust,
+  Legal, and Data Protection Officer roles.
+- Record the date each reviewer completed their assessment on the review document.
+- Document each reviewer's comments or findings directly in the review record, clearly attributed to their
+  name.
+- Sign the review document by each named reviewer to confirm their participation and agreement.
+- Avoid listing generic roles or teams as reviewers; always specify actual individuals responsible for
+  the review.

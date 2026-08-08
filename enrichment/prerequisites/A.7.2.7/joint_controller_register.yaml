@@ -1,0 +1,40 @@
+leaf_id: req:A.7.2.7:joint_controller_register
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which processing activities, entities, and relationships are
+    covered by your ISMS and PIMS, ensuring the joint controller arrangements you register are within
+    your compliance boundaries.
+  good_enough: A current, approved scope statement that clearly includes joint controller activities and
+    relevant business units.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purposes for which personal data is processed in joint controller arrangements
+    to accurately register and describe each arrangement.
+  good_enough: A documented list of processing purposes for each joint controller arrangement, even if
+    high-level, is available.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Each joint controller arrangement must have a lawful basis for processing; this underpins
+    the legitimacy of the arrangement and must be referenced in the register.
+  good_enough: A mapped lawful basis for each joint controller arrangement, with enough detail to justify
+    inclusion in the register.
+- ref: Art.26
+  standard_id: GDPR:2016/679
+  title: Joint Controllers
+  category: cross_role
+  rationale: Article 26 defines the legal requirements for joint controller arrangements, including the
+    need for a transparent arrangement and making the essence available to data subjects.
+  good_enough: A summary of Article 26 requirements and a template or checklist for joint controller arrangements,
+    even if not all arrangements are fully documented yet.

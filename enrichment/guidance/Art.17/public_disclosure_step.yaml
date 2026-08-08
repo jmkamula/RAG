@@ -1,0 +1,20 @@
+must_id: item:Art.17:public_disclosure_step
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Step for Art.17.2 public-disclosure cases — reasonable measures to inform controllers processing
+  the public data
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for initiating notifications to other controllers when personal data
+  has been made public and erasure is requested.
+- Document the process used to identify all controllers currently processing the publicly disclosed data,
+  including data sources checked and search methods used.
+- Record the date, method, and content of each notification sent to other controllers, including confirmation
+  of delivery where possible.
+- Retain copies of all correspondence and responses from notified controllers as evidence of reasonable
+  efforts to inform them.
+- Specify the actual names of notified controllers in records—do not use generic terms like "various third
+  parties" or "external partners."

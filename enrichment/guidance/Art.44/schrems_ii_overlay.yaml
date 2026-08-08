@@ -1,0 +1,20 @@
+must_id: item:Art.44:schrems_ii_overlay
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Schrems II + Transfer Impact Assessment (TIA) overlay — supplementary measures consideration
+  where third-country law affects protection level
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the countries to which personal data is transferred, including the specific services or systems
+  involved, in a dated transfer register.
+- Record the results of a Transfer Impact Assessment (TIA) for each third-country transfer, including
+  identified risks and relevant legal references.
+- List all supplementary measures considered and implemented, such as encryption or contractual clauses,
+  with clear links to the corresponding TIA findings.
+- Name the responsible individual who approved the transfer and supplementary measures, avoiding generic
+  titles like "the team" or "IT department."
+- Retain evidence of regular reviews of third-country laws and update the TIA and supplementary measures
+  if legal changes are identified.

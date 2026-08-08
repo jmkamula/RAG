@@ -1,0 +1,20 @@
+must_id: item:B.8.2.2:proc_technical_binding
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: Technical binding — engineering controls that prevent processing beyond stated purposes (tenant
+  isolation / data-tag enforcement / access scoping)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the technical controls in place that enforce processing only for stated customer purposes,
+  such as data tagging or tenant isolation.
+- Name the individual responsible for configuring and maintaining these controls, ensuring the owner is
+  a specific person, not a team or department.
+- Record system logs or audit trails that show enforcement actions taken when attempted processing exceeds
+  the defined purposes.
+- Cross-reference the stated processing purposes in your customer agreements with the technical enforcement
+  rules configured in your systems.
+- Retain evidence of periodic reviews or tests confirming that engineering controls prevent unauthorized
+  processing beyond stated purposes.

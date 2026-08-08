@@ -1,0 +1,20 @@
+must_id: item:A.5.29:rev_scenario_currency
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: 'Scenario-currency audit (each scenario in the register re-validated: still plausible? still
+  relevant? new scenarios that should be added?)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each scenario in the continuity register with a unique identifier and description, including the
+  date it was last reviewed for relevance.
+- Document the outcome of a scenario-currency audit by listing which scenarios remain plausible, which
+  are outdated, and any new scenarios identified.
+- Assign a named individual to sign and date the scenario-currency audit, confirming that each scenario
+  was actively re-evaluated.
+- Record any scenarios removed or added, including the rationale for each change, in a dated change log
+  attached to the register.
+- Avoid leaving scenario ownership or review responsibility to a group or department; specify a single
+  accountable person for each scenario.

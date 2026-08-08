@@ -1,0 +1,39 @@
+leaf_id: req:Art.47:bcr_program_review
+control_ref: Art.47
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a current, accurate record of processing activities to verify that all entities
+    remain compliant and to identify any changes or gaps during the BCR program review.
+  good_enough: A maintained RoPA exists, covering all relevant entities and processing activities, even
+    if minor updates are pending.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated Data Protection Officer is required to oversee the BCR program, handle complaints,
+    and coordinate with supervisory authorities as part of the review process.
+  good_enough: A named DPO is in place and contactable, with responsibilities covering the BCR program,
+    even if some onboarding is ongoing.
+- ref: Art.47
+  standard_id: GDPR:2016/679
+  title: Binding Corporate Rules (BCRs) Documentation
+  category: direct
+  rationale: The BCRs themselves must be documented and approved, as the review process checks compliance
+    against these specific rules and their requirements.
+  good_enough: A current, organization-approved BCR document exists, even if minor clarifications are
+    in progress.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: The review must confirm that all processing activities under the BCRs have a valid lawful
+    basis, as required by GDPR.
+  good_enough: Each processing activity has a documented lawful basis, even if some records need minor
+    updates.

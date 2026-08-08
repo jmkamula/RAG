@@ -1,0 +1,16 @@
+must_id: item:7.4:responsibility
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: Who is responsible for each communication
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the responsible person for each type of ISMS communication in the procedure,
+  avoiding generic roles like "the team".
+- Document the responsibilities and contact details for each named individual in a table within the communication
+  procedure.
+- Record the date when each responsibility assignment was last reviewed and updated in the procedure document.
+- Obtain a signature or written approval from each named individual acknowledging their communication
+  responsibility.

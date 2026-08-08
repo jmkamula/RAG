@@ -1,0 +1,17 @@
+must_id: item:8.1:scope_in_house_outsourced
+control_ref: '8.1'
+standard_id: ISO27001:2022
+must_text: In-house vs outsourced split — which processes are owned, which delegated to suppliers
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all operational processes in scope, specifying for each whether it is managed internally or outsourced
+  to a third party.
+- Name the owner for each process as a specific individual, not a team or department, to show clear accountability.
+- Document the supplier’s legal name and contract reference for every outsourced process, linking to the
+  signed agreement.
+- Record the date when the in-house vs outsourced status was last reviewed and approved by management.
+- Attach evidence of management’s approval of the process ownership split, such as a signed meeting minute
+  or decision record.

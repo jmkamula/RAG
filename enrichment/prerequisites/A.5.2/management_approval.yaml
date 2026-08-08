@@ -1,0 +1,31 @@
+leaf_id: req:A.5.2:management_approval
+control_ref: A.5.2
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the boundaries of your ISMS before assigning or approving roles and responsibilities.
+    The scope defines which teams, processes, and assets are in play for top management's approval.
+  good_enough: A documented scope statement that clearly lists what is included and excluded from the
+    ISMS, even if it's a draft, is sufficient to proceed.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the tone and direction for information security, which roles and responsibilities
+    must align with. Top management can't approve allocations without a clear policy context.
+  good_enough: A current or draft policy that outlines the organization's information security objectives
+    and commitments is enough to move forward.
+- ref: A.5.3
+  standard_id: ISO27001:2022
+  title: Segregation of Duties
+  category: direct
+  rationale: Understanding how duties are separated is essential before approving who does what. This
+    ensures no single person has conflicting responsibilities, which top management must explicitly approve.
+  good_enough: A preliminary mapping or list of key duties and their separation, even if not finalized,
+    is sufficient to inform the approval process.

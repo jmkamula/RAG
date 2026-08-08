@@ -1,0 +1,16 @@
+must_id: item:A.7.2.1:rev_next_date
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Purpose Documentation Program in the program document or
+  review log.
+- Record the name of the person responsible for scheduling and conducting the next review alongside the
+  planned date.
+- Update the review schedule immediately after each review to avoid leaving the next review date blank
+  or outdated.
+- Retain a dated copy of the document or log showing the most recent update to the planned review date.

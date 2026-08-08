@@ -1,0 +1,19 @@
+must_id: item:8.2:significant_change
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Significant-change trigger for ad-hoc reassessments documented
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in your risk assessment procedure the specific events or changes that will trigger an ad-hoc operational
+  risk reassessment.
+- Document the date and description of each significant change that led to an ad-hoc risk assessment in
+  your risk register.
+- Name the individual responsible for identifying and recording significant changes that require reassessment,
+  specifying their full name and role.
+- Attach evidence of each ad-hoc reassessment, such as a completed risk assessment form or meeting minutes,
+  linked to the triggering event.
+- Avoid using vague triggers like "as needed" or "when necessary"—describe concrete examples such as system
+  upgrades, regulatory changes, or new business processes.

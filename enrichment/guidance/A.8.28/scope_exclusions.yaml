@@ -1,0 +1,19 @@
+must_id: item:A.8.28:scope_exclusions
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Exclusion rationale (vendor-shipped code / generated code with documented review path)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all software components in scope and clearly mark those excluded from secure coding requirements,
+  such as vendor-shipped or auto-generated code.
+- Document a specific rationale for each exclusion, explaining why secure coding does not apply and referencing
+  relevant vendor or generation details.
+- Name the individual responsible for approving each exclusion, avoiding generic roles like "the team"
+  or "IT department."
+- Record the review path or control in place for excluded code, such as vendor patching processes or automated
+  code review logs, with supporting evidence.
+- Attach the date and version of the documented exclusions to show when the scope and rationale were last
+  reviewed and updated.

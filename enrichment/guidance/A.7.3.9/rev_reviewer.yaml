@@ -1,0 +1,15 @@
+must_id: item:A.7.3.9:rev_reviewer
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Privacy Ops lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and job title, explicitly identifying the Data
+  Protection Officer and Privacy Operations Lead.
+- Record the date each reviewer completed their review in the program documentation or review log.
+- Obtain and retain a signed or digitally acknowledged statement from both the Data Protection Officer
+  and Privacy Operations Lead confirming their review.
+- Avoid listing generic roles or teams as reviewers; always specify named persons to prevent ambiguity.

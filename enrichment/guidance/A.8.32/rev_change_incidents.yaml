@@ -1,0 +1,19 @@
+must_id: item:A.8.32:rev_change_incidents
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Change-induced incident trending (cross-link to A.5.26 register — change as incident root cause)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record all incidents in the incident register, clearly noting any where a recent change was a root cause
+  or contributing factor.
+- Cross-reference each change-related incident in the change management log, including the incident ID
+  and a summary of the impact.
+- Document a periodic review meeting where trends in change-induced incidents are discussed, listing attendees,
+  date, and key findings.
+- Name the reviewer responsible for analyzing change-induced incident trends as a specific individual,
+  not a group or department.
+- Retain a summary report that links incident trends to specific change management improvements or corrective
+  actions taken.

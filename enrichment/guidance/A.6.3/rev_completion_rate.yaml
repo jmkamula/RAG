@@ -1,0 +1,17 @@
+must_id: item:A.6.3:rev_completion_rate
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Completion rate analysis (overall % current; per-audience-segment % current; aged-overdue list)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the overall completion percentage for the latest awareness programme cycle in a dated report
+  signed by the responsible training coordinator.
+- Break down completion rates by defined audience segments, such as departments or roles, and include
+  these figures in the same report.
+- List all individuals with overdue or incomplete training, including names, roles, and the date their
+  training became overdue.
+- Name the report owner as a specific individual, not a group or department, to avoid ambiguity about
+  responsibility for the analysis.

@@ -1,0 +1,17 @@
+must_id: item:A.8.6:bl_current_vs_expected
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Current vs expected capacity baseline documented per resource
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each key system or resource that requires capacity monitoring, such as servers, network links,
+  or storage devices, in a dated inventory.
+- Record the current capacity usage for each listed resource, including measurement units and the date
+  of data collection.
+- Document the expected or forecasted capacity for each resource, specifying the basis for the projection
+  and the responsible individual.
+- Name the owner for each resource's capacity baseline as a specific individual, not a team or department.
+- Retain historical versions of the capacity baseline to show changes over time and support trend analysis.

@@ -1,0 +1,42 @@
+leaf_id: req:A.6.3:awareness_programme_review
+control_ref: A.6.3
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The awareness programme must align with the defined scope of the ISMS to ensure all relevant
+    personnel and activities are covered in the review. If the scope is unclear, you can't verify if the
+    programme is comprehensive.
+  good_enough: A documented, current ISMS scope statement that clearly identifies the organisational and
+    process boundaries for security management.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The awareness curriculum and review must reflect the organisation’s security policy objectives
+    and commitments. Without a current policy, you can't judge if the programme content or metrics are
+    relevant.
+  good_enough: A formally approved information security policy that sets out high-level objectives and
+    is accessible to staff.
+- ref: A.6.2
+  standard_id: ISO27001:2022
+  title: Terms and conditions of employment
+  category: direct
+  rationale: Awareness requirements and expectations are typically embedded in employment terms. You need
+    these in place to verify if onboarding and ongoing awareness align with contractual obligations.
+  good_enough: Standard employment contracts or onboarding checklists that reference information security
+    responsibilities and awareness requirements.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: The review must confirm that all relevant roles are included in the awareness programme and
+    that responsibilities for programme execution and review are assigned. Without this, you can't check
+    for coverage or accountability.
+  good_enough: A roles and responsibilities matrix or documented assignments that specify who manages,
+    delivers, and reviews the awareness programme.

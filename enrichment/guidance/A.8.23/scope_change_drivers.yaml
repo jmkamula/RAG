@@ -1,0 +1,16 @@
+must_id: item:A.8.23:scope_change_drivers
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new device class, new remote-access pattern)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a trigger list that specifies events requiring re-scoping, such as introduction of new device
+  types or changes in remote access methods.
+- Name a specific individual responsible for monitoring and updating the trigger list, avoiding generic
+  roles like "IT team" or "security group".
+- Record the date each time the trigger list is reviewed or updated, keeping a version history for reference.
+- Cross-reference the trigger list in your web filtering policy or scope document, ensuring auditors can
+  easily locate the current version.

@@ -1,0 +1,19 @@
+must_id: item:6.3:scope_thresholds
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Threshold rules (when a change is 'significant' enough to need 6.3 planning)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define clear, written criteria that specify what qualifies as a 'significant' change within your Information
+  Security Management System (ISMS).
+- Document threshold rules with concrete examples, such as changes to policy, technology, or suppliers,
+  in a dated and version-controlled register.
+- Name the individual or role responsible for applying these threshold rules, avoiding vague titles like
+  "the team" or "management".
+- Review and update the threshold rules annually, recording the review date and the reviewer’s name in
+  the change log.
+- Cross-reference each significant change decision to the threshold rule it met, maintaining a record
+  for each instance.

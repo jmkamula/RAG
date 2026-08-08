@@ -1,0 +1,41 @@
+leaf_id: req:A.5.10:management_approval
+control_ref: A.5.10
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: direct
+  rationale: The Acceptable Use Policy (AUP) must align with the overarching information security policies.
+    Without an established policy framework, management cannot meaningfully approve or contextualize the
+    AUP.
+  good_enough: A documented, management-endorsed information security policy exists and is accessible
+    to those drafting or approving the AUP.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification of information
+  category: direct
+  rationale: The AUP often references information classification levels to define acceptable and prohibited
+    actions. The classification scheme must be set before the AUP can be finalized or approved.
+  good_enough: A current, published information classification scheme is available and referenced in the
+    draft AUP.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: Management approval of the AUP presumes that the organization’s information security objectives
+    and commitments are already defined at a high level. This ensures the AUP is consistent with the organization's
+    security direction.
+  good_enough: A high-level information security policy is documented and approved, even if it is brief
+    or in draft form.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and responsibilities
+  category: foundational
+  rationale: To obtain valid management approval, the organization must have defined who holds authority
+    for policy approval and enforcement. Otherwise, the approval may lack legitimacy.
+  good_enough: Roles for policy approval and enforcement are assigned and documented, even if only at
+    a basic level.

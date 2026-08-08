@@ -1,0 +1,33 @@
+leaf_id: req:4.1:applicable_issue_domains_scope
+control_ref: '4.1'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need a clear understanding of the overall ISMS scope before you can define which issue
+    domains are relevant or excluded. The ISMS scope sets the organizational and operational boundaries
+    that the issue-domain scope must align with.
+  good_enough: A draft or working version of the ISMS scope statement that outlines the main organizational
+    units, processes, and assets covered is sufficient to proceed.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: direct
+  rationale: A preliminary risk assessment helps identify which issue domains (e.g., regulatory, supply
+    chain) are actually relevant to your context. Without this, you can't justify why certain domains
+    are included or excluded.
+  good_enough: An initial risk assessment identifying key risk sources and domains, even if not fully
+    detailed, is enough to inform the issue-domain scope.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that someone is accountable for defining and maintaining
+    the issue-domain scope. Without this, the scope may lack ownership or clarity.
+  good_enough: A basic mapping of who is responsible for ISMS scoping decisions and documentation is sufficient
+    to move forward.

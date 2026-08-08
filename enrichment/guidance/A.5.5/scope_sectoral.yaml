@@ -1,0 +1,19 @@
+must_id: item:A.5.5:scope_sectoral
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Sectoral obligations stated (finance, health, critical infrastructure, telecoms) driving sectoral
+  regulators
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all sectoral laws and regulations that apply to your organisation, such as finance, health, critical
+  infrastructure, or telecoms, in a dated document.
+- Name the specific regulatory authorities or bodies overseeing each sectoral obligation, linking each
+  to the relevant law or regulation.
+- State the business units or functions affected by each sectoral obligation, specifying how each is impacted.
+- Avoid using generic terms like "all applicable laws"; cite each sectoral obligation and authority by
+  name and reference.
+- Assign a named individual responsible for maintaining and updating this scope document, including their
+  contact information.

@@ -1,0 +1,20 @@
+must_id: item:A.5.16:reg_hr_link
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: HR-record link per row for human identities (joiner/leaver triggers cascade automatically —
+  no manual sync)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each human identity in the Identity Register to a specific HR record using a unique,
+  traceable identifier.
+- Document the automated process that updates the Identity Register when HR records change, including
+  joiner and leaver events.
+- Record the date and outcome of the most recent test showing that HR-triggered changes cascade automatically
+  to the Identity Register.
+- Name the system owner responsible for maintaining the automated sync, listing a specific individual
+  rather than a team or department.
+- Retain logs showing successful and failed sync events between HR records and the Identity Register for
+  at least 12 months.

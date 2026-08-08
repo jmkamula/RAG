@@ -1,0 +1,16 @@
+must_id: item:B.8.2.4:rev_next_date
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Infringing Instruction Program in the program document or
+  review log.
+- Record the date in a way that is visible and unambiguous, such as a dedicated "Next Review Date" field.
+- Name the individual responsible for scheduling the next review, avoiding generic titles like "Compliance
+  Team" or "Management."
+- Retain a copy of the most recent review record showing the stated next review date and the reviewer’s
+  name.

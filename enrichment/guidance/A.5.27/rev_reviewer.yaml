@@ -1,0 +1,14 @@
+must_id: item:A.5.27:rev_reviewer
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Reviewer identity (program owner + InfoSec lead jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the program owner and the Information Security lead as joint reviewers in the lessons-learned
+  program review record.
+- Record the date of each periodic review in a version-controlled document or register.
+- Obtain signatures or written acknowledgments from both named reviewers on the completed review summary.
+- Avoid listing a group or department as reviewer; specify individual names with current job titles.

@@ -1,0 +1,16 @@
+must_id: item:A.7.3:rev_register_check
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Per-room outcome (verified / amended / retired / new added)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each room in the review register with a unique identifier and the most recent review date.
+- Record the specific outcome for each room as "verified," "amended," "retired," or "new added" in the
+  review documentation.
+- Name the reviewer responsible for each room’s outcome, using a full name rather than a team or department.
+- Attach supporting evidence for any amendments, retirements, or new additions, such as meeting notes
+  or approval emails.
+- Sign and date the completed review summary to confirm all room statuses are up to date.

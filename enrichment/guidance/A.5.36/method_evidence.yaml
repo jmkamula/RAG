@@ -1,0 +1,20 @@
+must_id: item:A.5.36:method_evidence
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Method evidence retained (sample selection notes, attestation responses, audit working papers)
+  for audit defensibility
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the method used to select samples for each compliance review, including criteria and rationale,
+  in a dated review log.
+- Retain copies of attestation responses or confirmations from staff, with names and dates, as part of
+  the review documentation.
+- Store audit working papers, such as checklists, notes, and findings, in a version-controlled folder
+  linked to the specific review event.
+- Name the reviewer and approver for each compliance review as specific individuals, not generic roles
+  or teams.
+- Attach all supporting evidence to the compliance review record to allow independent verification of
+  the review process and outcomes.

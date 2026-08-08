@@ -1,0 +1,17 @@
+must_id: item:A.7.3.9:reg_intake_channel
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Intake channel per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the intake channel used for each subject request in a dedicated column of the Master Subject
+  Request Register.
+- Specify the intake channel as a clear, descriptive value such as "web form," "email," or "phone call"
+  for each entry.
+- Name the person responsible for updating the intake channel column to avoid missing or inconsistent
+  entries.
+- Cross-reference each intake channel entry with supporting documentation, such as email headers or web
+  form submission logs, where available.

@@ -1,0 +1,17 @@
+must_id: item:A.7.2.6:proc_return_or_delete
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: End-of-service disposition (Art.28.3.g) — return or delete all PII with certification
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the contracting procedure that all personal data must be returned or securely deleted at the
+  end of service, as contractually required.
+- Name a specific individual responsible for overseeing and confirming the return or deletion of personal
+  data, rather than a generic team or department.
+- Document the process for obtaining written certification from the processor confirming completion of
+  data return or deletion, including a required signature and date.
+- Retain copies of all certifications and related correspondence in a dedicated, access-controlled location
+  for future reference.

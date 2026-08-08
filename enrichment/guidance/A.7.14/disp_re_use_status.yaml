@@ -1,0 +1,16 @@
+must_id: item:A.7.14:disp_re_use_status
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Per-record re-use status where the equipment goes to internal re-use (new owner + re-provisioned
+  configuration link)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the new internal owner for each re-used equipment item in the disposal record.
+- Document the date the equipment was transferred for internal re-use alongside the new owner's details.
+- Link the disposal record to the configuration or asset register entry showing the updated provisioning
+  for the new owner.
+- Avoid leaving the new owner field blank or listing only a department; always specify an individual by
+  name.

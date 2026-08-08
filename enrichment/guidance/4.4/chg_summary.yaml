@@ -1,0 +1,15 @@
+must_id: item:4.4:chg_summary
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: Change summary — what sections of the manual changed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and version number for each ISMS Manual update in the change record.
+- Summarize the specific sections or clauses of the manual that were changed, using clear section numbers
+  or titles.
+- Name the person who authorized or approved the changes, including their full name and job title.
+- Avoid vague descriptions like "general updates"—describe each change with enough detail that an auditor
+  can trace what was modified.

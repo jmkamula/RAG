@@ -1,0 +1,16 @@
+must_id: item:A.8.31:promotion_process
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Promotion / deployment process between environments (cross-link to A.8.32 change management)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for moving code or data between development, test, and production
+  environments in a dated procedure.
+- Cross-reference the procedure to your formal change management process as described in your A.8.32 documentation.
+- Name the individual responsible for authorizing promotions between environments, avoiding generic roles
+  like "the team" or "IT department."
+- Record each deployment event with the date, environment details, and the approver’s name in a deployment
+  log.

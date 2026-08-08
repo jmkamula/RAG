@@ -1,0 +1,19 @@
+must_id: item:A.7.3.8:proc_self_service
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Self-service export where feasible
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process by which individuals can request and obtain a copy of their personal data through
+  a self-service portal, including step-by-step instructions.
+- Name the person responsible for maintaining and updating the self-service export functionality, listing
+  their full name and job title.
+- Record the date when the self-service export feature was last tested for accuracy and completeness,
+  and keep the test results.
+- State any limitations or exceptions where self-service export is not feasible, providing clear justification
+  and approval from a designated authority.
+- Avoid using generic statements like "export available upon request" without evidence of an actual self-service
+  mechanism in place.

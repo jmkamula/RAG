@@ -1,0 +1,39 @@
+leaf_id: req:Art.28:processor_register
+control_ref: Art.28
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You must know which processing activities involve processors before you can register and
+    track their DPAs. Art.30 records provide the baseline list of all processors in use.
+  good_enough: A current, working list of all processors used by the organization, even if not fully detailed,
+    is sufficient to start building the DPA register.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: direct
+  rationale: You need to confirm that each processing activity involving a processor has a lawful basis.
+    This ensures that DPAs are only signed for legitimate, compliant processing.
+  good_enough: A mapping of each processor to its lawful basis, even if some are provisional or under
+    review, is enough to proceed.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which parts of the organization and which processing activities are
+    covered. This prevents accidental omission of processors from the DPA register.
+  good_enough: A draft or working scope statement that identifies the main business units and activities
+    in scope is sufficient to begin the register.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If a DPO is required, they must be involved in reviewing processor relationships and DPAs.
+    Their designation ensures oversight and accountability.
+  good_enough: A named DPO (or confirmation that one is not required) is enough to unblock DPA register
+    drafting.

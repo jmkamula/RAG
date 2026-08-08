@@ -1,0 +1,18 @@
+must_id: item:A.5.18:identity_link
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Explicit linkage to A.5.16 identity management (every access right attaches to a registered
+  identity; no orphan access)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each access right in the procedure to a unique, registered user identity listed in your
+  current identity register.
+- Document the process for immediately revoking access when a user identity is deleted or disabled in
+  the identity management system.
+- Name the person responsible for reconciling access rights with registered identities at least quarterly,
+  and record the date of each reconciliation.
+- State that generic, shared, or orphan accounts are prohibited, and require all access rights to be linked
+  to a named individual.

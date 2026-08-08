@@ -1,0 +1,16 @@
+must_id: item:4.2:rev_reviewer
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (ISMS Manager + executive sponsor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the ISMS Manager and executive sponsor as the designated reviewers in the Interested Parties Program
+  Review document.
+- Record the full names and job titles of both reviewers on the program review cover page.
+- Sign and date the review section to confirm that both the ISMS Manager and executive sponsor have completed
+  their review.
+- Avoid listing a group or department as the reviewer; specify individual names to meet accountability
+  requirements.

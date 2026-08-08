@@ -1,0 +1,17 @@
+must_id: item:A.8.20:monitoring_req
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Monitoring requirement (cross-link to A.8.16)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Networks Security Policy that network monitoring is required, referencing the specific
+  monitoring controls defined in section A.8.16.
+- Cross-reference the Networks Security Policy to the documented monitoring procedures or tools listed
+  under A.8.16, including their version and location.
+- Name the individual responsible for overseeing network monitoring activities, ensuring a specific person
+  is identified rather than a team or department.
+- Record the date the Networks Security Policy was last reviewed and updated to include the monitoring
+  requirement and cross-link.

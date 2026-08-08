@@ -1,0 +1,20 @@
+must_id: item:A.5.11:rec_data_attestation
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Data-deletion attestation per record where leaver-personal-device held org data (BYOD scenarios
+  — selective-MDM removal proof or screenshot evidence)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each leaver who used a personal device for work and record their name and device details in
+  the asset return record.
+- Document the method used to remove organisational data from the personal device, such as selective mobile
+  device management (MDM) removal or manual deletion.
+- Capture and attach a screenshot or system-generated proof showing successful removal of organisational
+  data from the personal device.
+- Obtain a signed attestation from the leaver confirming that all organisational data has been deleted
+  from their personal device.
+- Specify the date of data deletion and the person responsible for verifying the removal in the asset
+  return record.

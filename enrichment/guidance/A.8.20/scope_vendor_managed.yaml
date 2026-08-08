@@ -1,0 +1,18 @@
+must_id: item:A.8.20:scope_vendor_managed
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Vendor-managed networks delegated to A.5.19/A.5.21 supplier obligations
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all network segments and connections, specifying which are managed by vendors and which are under
+  your direct control.
+- Cross-reference each vendor-managed network segment with the relevant supplier contract or agreement
+  that covers security obligations under A.5.19 and A.5.21.
+- State the exact start and end points of your organisation’s responsibility for each network, using diagrams
+  or maps dated and approved by a named individual.
+- Name the owner of the network scope documentation as a specific person, not a team or department.
+- Retain copies of all supplier agreements that delegate network security obligations, ensuring each is
+  signed and dated by both parties.

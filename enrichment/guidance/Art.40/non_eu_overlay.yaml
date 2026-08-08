@@ -1,0 +1,19 @@
+must_id: item:Art.40:non_eu_overlay
+control_ref: Art.40
+standard_id: GDPR:2016/679
+must_text: Non-EU controller/processor overlay (Art.40.3 — codes may provide GDPR-equivalent safeguards)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for assessing whether non-EU controllers or processors are subject to the code
+  of conduct and GDPR-equivalent safeguards, including assessment criteria and responsible roles.
+- Name the specific individual responsible for approving non-EU adherence to the code, avoiding generic
+  titles or group ownership.
+- Record each instance where a non-EU controller or processor is approved under the code, including the
+  date, decision-maker, and evidence of equivalent safeguards.
+- Retain copies of all correspondence and agreements with non-EU entities that demonstrate their commitment
+  to GDPR-equivalent protections under the code.
+- State the process for periodic review of non-EU adherence, including review frequency and the person
+  accountable for conducting these reviews.

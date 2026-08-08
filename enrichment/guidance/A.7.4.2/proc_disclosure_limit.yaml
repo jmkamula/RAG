@@ -1,0 +1,19 @@
+must_id: item:A.7.4.2:proc_disclosure_limit
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+must_text: Disclosure limitation — who PII is disclosed to (internal + external) constrained per purpose
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all internal and external parties who may receive personal data, specifying names or roles and
+  linking each to its permitted processing purpose.
+- Document the legal or contractual basis for each disclosure, referencing the relevant agreement, law,
+  or policy for every recipient.
+- State the specific purposes for which personal data may be disclosed to each party, avoiding generic
+  or catch-all statements.
+- Name the procedure owner as a specific individual responsible for maintaining and updating the disclosure
+  list, not a group or department.
+- Record the date of the most recent review and approval of the procedure, including the approver’s name
+  and signature.

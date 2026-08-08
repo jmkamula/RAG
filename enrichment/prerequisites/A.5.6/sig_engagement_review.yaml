@@ -1,0 +1,39 @@
+leaf_id: req:A.5.6:sig_engagement_review
+control_ref: A.5.6
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organization and which risk topics are covered
+    by the ISMS, directly informing which SIGs (Special Interest Groups) are relevant for engagement and
+    review.
+  good_enough: A documented and approved ISMS scope that clearly identifies the organizational boundaries
+    and risk topics is available.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding current risks and their priorities is essential to determine which SIGs are
+    relevant and whether any new gaps have emerged that require engagement.
+  good_enough: A recent risk assessment exists, identifying key information security risks and their owners,
+    even if some risk treatments are still in progress.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of responsibility ensures that someone is accountable for managing SIG memberships
+    and conducting periodic reviews.
+  good_enough: Documented roles exist for SIG engagement and review, with named individuals or teams assigned.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register helps identify which information assets or systems may benefit from SIG
+    engagement, ensuring reviews are comprehensive and relevant.
+  good_enough: A basic asset register is available, listing major information assets and owners, even
+    if some details are pending.

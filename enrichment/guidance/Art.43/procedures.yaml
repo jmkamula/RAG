@@ -1,0 +1,19 @@
+must_id: item:Art.43:procedures
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Procedures for issue + renewal + withdrawal + complaint handling (Art.43.2.c-d)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document step-by-step procedures for issuing, renewing, and withdrawing certifications, including required
+  approvals and responsible roles, in a dated procedure manual.
+- Record the complaint handling process, naming the individual responsible for investigating and resolving
+  certification-related complaints, with contact details.
+- Retain logs of all certification decisions, including dates, outcomes, and sign-off by a named authorized
+  person.
+- Name the owner of the certification body procedure as a specific individual, not a team or department,
+  in the procedure documentation.
+- Review and update the procedures at least annually, recording the date of each review and the reviewer’s
+  name.

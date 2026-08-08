@@ -1,0 +1,17 @@
+must_id: item:A.8.34:rev_reviewer
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Reviewer identity (InfoSec lead + Internal Audit lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the InfoSec lead and Internal Audit lead responsible for the review in the official audit testing
+  protection program document.
+- Record the full names and job titles of both reviewers on the program review sign-off page, including
+  the review date.
+- Obtain signatures or documented approval from both the InfoSec lead and Internal Audit lead to confirm
+  their participation in the review.
+- Avoid listing generic roles such as "the team" or "security department"—use specific individuals’ names
+  for clear accountability.

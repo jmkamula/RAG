@@ -1,0 +1,18 @@
+must_id: item:B.8.4.3:reg_encryption
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Encryption standard per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each data transmission channel used for processing personal data in a table, with a separate row
+  for each channel.
+- Specify the exact encryption standard used for each channel, such as "TLS 1.2" or "AES-256", in a dedicated
+  column.
+- Name the individual responsible for maintaining the inventory, avoiding generic titles like "IT team"
+  or "Security department".
+- Record the date when each entry was last reviewed or updated to show ongoing oversight.
+- Attach supporting documentation, such as configuration screenshots or vendor specifications, to verify
+  the stated encryption standards.

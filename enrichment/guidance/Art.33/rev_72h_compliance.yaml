@@ -1,0 +1,18 @@
+must_id: item:Art.33:rev_72h_compliance
+control_ref: Art.33
+standard_id: GDPR:2016/679
+must_text: 72h-compliance audit — every required notification met the SLA (or had documented Art.33.1
+  delay reason)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each personal data breach reported in the past year, including the date and time the breach was
+  discovered.
+- Record the exact date and time each breach notification was sent to the supervisory authority.
+- Compare notification times to the 72-hour deadline and document any cases where the deadline was missed.
+- Document the specific reason for any delayed notification, referencing Article 33.1, and include the
+  name of the person who approved the delay.
+- Name the reviewer as a specific individual who conducted the 72h-compliance audit, not just "the team"
+  or a department.

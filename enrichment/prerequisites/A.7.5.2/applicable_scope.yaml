@@ -1,0 +1,48 @@
+leaf_id: req:A.7.5.2:applicable_scope
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You must have a clear ISMS scope to know which parts of your organisation, processes, and
+    systems are covered by your privacy management system. This foundational scope sets the boundaries
+    for identifying where PII processing occurs.
+  good_enough: A documented ISMS scope that includes all relevant business units, locations, and systems
+    where PII may be processed or accessed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is essential to identify all systems, applications, and data
+    flows that could involve PII processing, including those that may transfer data to other jurisdictions.
+  good_enough: A basic inventory of information assets, including cloud services and third-party systems,
+    with enough detail to trace PII flows.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You need to know the purposes for which PII is processed to determine which jurisdictions
+    are relevant, as different purposes may involve different data flows and destinations.
+  good_enough: A list of main PII processing purposes, mapped to business processes, even if not fully
+    detailed.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity helps clarify which jurisdictions'
+    legal requirements must be considered and documented in your scope.
+  good_enough: A summary of lawful bases (e.g., consent, contract) for each major PII processing activity,
+    even if some are provisional.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of privacy and security roles ensures that someone is accountable for identifying
+    and documenting all relevant PII destinations and jurisdictions.
+  good_enough: Named individuals or teams responsible for privacy and data flow mapping, even if role
+    descriptions are brief.

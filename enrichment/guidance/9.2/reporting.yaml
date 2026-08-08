@@ -1,0 +1,17 @@
+must_id: item:9.2:reporting
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Reporting process to management defined
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the internal audit reporting process in a written procedure, including how and when audit results
+  are communicated to management.
+- Name the management position or individual who receives audit reports, avoiding generic titles like
+  "leadership" or "the team".
+- Record the date and method of each audit report submission to management in an audit log or tracking
+  sheet.
+- Retain copies of all audit reports and evidence of management receipt, such as email confirmations or
+  signed acknowledgements.

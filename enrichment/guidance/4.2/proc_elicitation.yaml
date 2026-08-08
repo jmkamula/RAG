@@ -1,0 +1,20 @@
+must_id: item:4.2:proc_elicitation
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Requirement elicitation process (contract reading, regulator-subscription monitoring, customer
+  requirement intake)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for maintaining the stakeholder identification framework, avoiding
+  generic titles like "the team" or "management".
+- Document the process for reading and extracting requirements from contracts, including the date reviewed
+  and the person who performed the review.
+- Record how regulatory subscriptions are monitored for new or changing requirements, listing the source,
+  date checked, and assigned reviewer.
+- Capture customer requirement intake by saving dated communications or meeting notes that specify the
+  requirement and the person who received it.
+- Cross-reference each identified requirement to its original source document or communication to provide
+  a clear audit trail.

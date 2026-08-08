@@ -1,0 +1,18 @@
+must_id: item:A.7.3:key_management
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Key/card lifecycle management (issue, return, lost-card revocation; cross-link to A.5.18)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for issuing, returning, and revoking keys or access cards, including who is responsible
+  at each stage, in the procedure.
+- Record each key or card issued, returned, or revoked in an access log, including the named individual,
+  date, and action taken.
+- Cross-reference your procedure to the physical security policy that addresses visitor and contractor
+  access control, as required by control A.5.18.
+- Name the owner of the key/card management process as a specific individual, not a team or department.
+- Retain incident records for lost or stolen keys/cards, including the date, person involved, and actions
+  taken to revoke access.

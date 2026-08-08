@@ -1,0 +1,18 @@
+must_id: item:A.7.3.9:reg_sla_met_flag
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: SLA-met flag per row (auditor-critical timeliness proof)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each subject request is received and the date it is closed in the Master Subject Request
+  Register.
+- Calculate and enter an SLA-met flag for each request row, indicating if the response met the required
+  timeframe.
+- Name the person responsible for updating the SLA-met flag for each request, using a specific individual’s
+  name rather than a team or department.
+- Retain evidence of the SLA calculation method, such as a documented policy or formula referenced in
+  the register.
+- Review the register regularly to confirm no request rows are missing the SLA-met flag or required dates.

@@ -1,0 +1,17 @@
+must_id: item:Art.21:rev_direct_marketing_sla
+control_ref: Art.21
+standard_id: GDPR:2016/679
+must_text: Direct-marketing immediate-cessation SLA met across all objections
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each direct marketing objection with the date received and the date marketing communications
+  ceased for that individual.
+- Assign responsibility for actioning objections to a named staff member, not a generic team or department.
+- Record evidence of system changes or suppression list updates that stopped marketing to the objector,
+  including timestamps.
+- Review a sample of objections quarterly to confirm all met the immediate-cessation service level agreement.
+- Retain correspondence sent to objectors confirming cessation of direct marketing, including the date
+  sent.

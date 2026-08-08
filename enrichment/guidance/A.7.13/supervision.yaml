@@ -1,0 +1,17 @@
+must_id: item:A.7.13:supervision
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Supervision requirements when maintenance involves access to sensitive information
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that all maintenance involving access to sensitive information must be supervised
+  by an authorised staff member.
+- Name the supervisor responsible for each maintenance event in a dated maintenance log entry.
+- Record the names of all individuals present during maintenance, including external vendors, in the same
+  log entry.
+- Require the supervisor to sign off on completion of maintenance, confirming that sensitive information
+  was not accessed or disclosed.
+- Specify the supervisor by individual name, not by role or department, to avoid ambiguity in responsibility.

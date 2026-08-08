@@ -1,0 +1,19 @@
+must_id: item:A.5.32:audit_expiry
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Expired/expiring licences flagged and renewal or removal completed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to maintain a central register of all software licences, including purchase
+  dates and expiry dates.
+- Record the outcome of each periodic licence review in a dated audit log, noting any expired or soon-to-expire
+  licences.
+- Document the decision and action taken for each flagged licence, such as renewal confirmation or removal,
+  with responsible person and date.
+- Attach supporting evidence, such as renewal receipts or removal confirmation emails, to the relevant
+  licence record in the register.
+- Name the owner as a specific person, not a generic title or team, to avoid auditor concerns about unclear
+  accountability.

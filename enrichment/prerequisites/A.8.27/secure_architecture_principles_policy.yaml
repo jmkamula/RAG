@@ -1,0 +1,46 @@
+leaf_id: req:A.8.27:secure_architecture_principles_policy
+control_ref: A.8.27
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, processes, and assets are in-scope for your ISMS before defining
+    secure architecture principles. This ensures the policy is relevant and complete.
+  good_enough: A clear, current scope statement that identifies the boundaries of your ISMS and the systems
+    it covers.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: foundational
+  rationale: Risk assessment identifies threats and vulnerabilities that your architecture principles
+    must address. Without this, your policy may miss critical risks.
+  good_enough: A recent risk assessment covering key systems and processes, with documented risks and
+    their treatment status.
+- ref: A.8.25
+  standard_id: ISO27001:2022
+  title: Secure development life cycle
+  category: direct
+  rationale: Your secure architecture principles must align with and support your secure development lifecycle.
+    This ensures security is embedded from design through deployment.
+  good_enough: A documented secure development lifecycle process that outlines security checkpoints and
+    requirements for new or changed systems.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: Knowing what assets exist and their criticality helps tailor architecture principles to real-world
+    systems and data.
+  good_enough: An up-to-date asset register listing major information assets, owners, and basic classifications.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear roles and responsibilities ensure that architecture principles are owned, maintained,
+    and applied by the right people.
+  good_enough: A roles and responsibilities matrix or policy that covers key ISMS and IT architecture
+    roles.

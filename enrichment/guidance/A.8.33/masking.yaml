@@ -1,0 +1,18 @@
+must_id: item:A.8.33:masking
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Masking requirements when production-derived data is used (cross-link to A.8.11 procedure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that all production-derived data used for testing must be masked according to
+  documented masking rules.
+- Cross-reference the section of your A.8.11 procedure that details data masking techniques and responsibilities.
+- Name the person responsible for approving the use of production-derived data in test environments, specifying
+  their full name and role.
+- Record each instance of production-derived data used in testing, including the date, masking method
+  applied, and approval evidence.
+- Specify masking requirements in writing; do not rely on verbal instructions or generic statements like
+  "data must be protected as appropriate."

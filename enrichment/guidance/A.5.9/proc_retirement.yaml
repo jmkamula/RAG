@@ -1,0 +1,18 @@
+must_id: item:A.5.9:proc_retirement
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Retirement and disposal handoff (status set to retired, disposal handled per A.7.14/A.8.10,
+  register row archived)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the retirement date and reason for each asset in the asset register, marking its status as "retired"
+  with a named individual responsible.
+- Document the disposal method for each retired asset, referencing compliance with secure disposal procedures
+  outlined in A.7.14 and A.8.10.
+- Archive the asset’s register row with a timestamp and the name of the person authorizing the retirement
+  and disposal.
+- Name the asset owner and disposal approver as specific individuals, not generic roles or teams, in the
+  archived record.

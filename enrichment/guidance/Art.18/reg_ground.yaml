@@ -1,0 +1,15 @@
+must_id: item:Art.18:reg_ground
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Per-row Art.18.1 ground (a-d) cited
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cite the specific GDPR Article 18.1 ground (a, b, c, or d) for each entry in the restriction register,
+  referencing the exact letter.
+- Record the date when the restriction was applied for every row, ensuring each entry is time-stamped.
+- Name the individual or role responsible for confirming the ground cited for each restriction entry.
+- Avoid using generic statements like "data subject request" as a ground; specify the precise Article
+  18.1 letter and context.

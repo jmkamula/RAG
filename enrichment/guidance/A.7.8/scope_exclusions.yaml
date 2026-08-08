@@ -1,0 +1,17 @@
+must_id: item:A.7.8:scope_exclusions
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Exclusions stated (off-premises equipment → A.7.9; ephemeral cloud — no physical footprint)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all equipment types included in your scope, specifying physical devices and locations, in a dated
+  document approved by a named manager.
+- State any exclusions clearly, such as off-premises equipment or ephemeral cloud resources, with references
+  to the relevant controls or standards.
+- Cross-reference excluded items to the corresponding control (e.g., off-premises equipment to A.7.9)
+  in your equipment scope document.
+- Name the scope document version and approval date; avoid using undated drafts or generic templates that
+  lack organisation-specific details.

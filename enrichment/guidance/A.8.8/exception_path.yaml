@@ -1,0 +1,19 @@
+must_id: item:A.8.8:exception_path
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Exception path for accepted-risk vulnerabilities (compensating controls + expiry + owner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each accepted-risk vulnerability with a clear description, the reason for acceptance, and the
+  compensating controls in the procedure.
+- Name the owner responsible for each accepted-risk vulnerability as a specific individual, not a group
+  or department.
+- Record the expiry or review date for each accepted-risk exception, ensuring it is a specific calendar
+  date.
+- Attach evidence of formal approval for each exception, such as a signed decision or approval email from
+  the designated authority.
+- Cross-reference each accepted-risk entry in the procedure with the relevant risk register or tracking
+  log for traceability.

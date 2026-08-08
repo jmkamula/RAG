@@ -1,0 +1,18 @@
+must_id: item:Art.32:resilience_test_independent
+control_ref: Art.32
+standard_id: GDPR:2016/679
+must_text: Test conducted or reviewed by an independent party
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual or external organization responsible for conducting or reviewing the resilience
+  and restoration test in the test report.
+- Document the date the independent review or test was completed in the official test record.
+- Attach evidence of independence, such as a contract, engagement letter, or conflict-of-interest statement,
+  to the test documentation.
+- Avoid listing internal team members as independent reviewers; specify a person or entity not involved
+  in daily operations or system management.
+- Sign and retain the final test report with confirmation from the independent party who performed or
+  reviewed the test.

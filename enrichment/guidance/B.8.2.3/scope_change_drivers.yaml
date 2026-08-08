@@ -1,0 +1,18 @@
+must_id: item:B.8.2.3:scope_change_drivers
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: Trigger list (new marketing programme launched / new customer permit request)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current marketing activities and programmes in a dated document, specifying launch dates and
+  any recent changes.
+- Record each new marketing programme launch or customer permit request in a central log, including the
+  responsible person's name and the date.
+- Update the marketing activities scope document within five business days of any new trigger event, attaching
+  supporting communications or approvals.
+- Name the owner of the marketing activities scope as a specific individual, not a team or department,
+  in the document header.
+- Retain previous versions of the scope document to show how the scope has changed over time.

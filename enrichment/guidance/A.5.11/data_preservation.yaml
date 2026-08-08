@@ -1,0 +1,20 @@
+must_id: item:A.5.11:data_preservation
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Data preservation step BEFORE wipe (org information on the asset must be captured / migrated,
+  not just deleted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for identifying and preserving organisational information on each returned
+  asset in the procedure document.
+- Document the specific process for capturing or migrating all organisational data from the asset before
+  any data deletion or wipe occurs.
+- Record the date and details of each data preservation or migration activity in an asset return log,
+  including the asset identifier and responsible staff member.
+- Retain evidence of completed data preservation, such as transfer logs or confirmation emails, linked
+  to the corresponding asset return record.
+- Specify that the procedure must not allow immediate data wiping before confirming data preservation,
+  avoiding generic instructions to "delete all data upon return."

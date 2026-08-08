@@ -1,0 +1,16 @@
+must_id: item:A.8.27:reg_owner
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Per-pattern named owner
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner for each reference architecture pattern, avoiding generic labels
+  like "team" or department names.
+- Record the owner's full name and current job title next to each pattern entry in the Reference Architecture
+  Register.
+- Document the date when ownership was assigned or last reviewed for each pattern in the register.
+- Retain evidence of communication to each named owner confirming their responsibility for the assigned
+  architecture pattern.

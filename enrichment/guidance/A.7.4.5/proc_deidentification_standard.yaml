@@ -1,0 +1,17 @@
+must_id: item:A.7.4.5:proc_deidentification_standard
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: De-identification standard — resulting data cannot reasonably permit re-identification
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the de-identification techniques used, including specific methods and tools, in a dated procedure
+  signed by the data protection officer.
+- Name the person responsible for approving de-identification processes as a specific individual, not
+  a team or department.
+- Record test results showing that de-identified data sets cannot be linked back to individuals, including
+  the date and tester’s name.
+- Retain a version-controlled copy of the de-identification standard, showing the effective date and latest
+  review or update.

@@ -1,0 +1,39 @@
+leaf_id: req:6.2:objective_setting_procedure
+control_ref: '6.2'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the boundaries of your ISMS before you can set meaningful security objectives.
+    The scope defines what people, processes, and assets your objectives should address.
+  good_enough: A documented scope statement that clearly identifies the organizational boundaries for
+    the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: Objectives must be aligned with the organization’s information security policy. Without a
+    finalized policy, you can’t ensure objectives reflect management intent and direction.
+  good_enough: A formally approved and communicated information security policy that sets out top-level
+    intentions and direction.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: direct
+  rationale: Objectives should address the risks identified in your risk assessment. You need a current
+    risk assessment to ensure objectives are relevant and risk-driven.
+  good_enough: A completed risk assessment with documented risks and their evaluation, even if risk treatment
+    is still in progress.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: The procedure must specify who is responsible for setting, approving, and reviewing objectives.
+    Clear roles and responsibilities are essential.
+  good_enough: A basic roles and responsibilities matrix or list that covers key ISMS roles, even if not
+    fully detailed.

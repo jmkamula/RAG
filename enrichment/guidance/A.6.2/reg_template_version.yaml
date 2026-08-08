@@ -1,0 +1,20 @@
+must_id: item:A.6.2:reg_template_version
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Template version signed per row (drives currency check — old-version signers may need recontract
+  on material changes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the template version number for each employment terms entry in the register, matching the exact
+  document signed by the employee.
+- Attach a copy of the signed employment terms for each individual, showing their signature and the template
+  version on the document.
+- Name the signatory as a specific individual, not a generic role or department, to clearly link each
+  signature to a person.
+- Date each entry to confirm when the employment terms were signed, enabling checks against policy updates
+  or template changes.
+- Review the register after any template update to identify and flag individuals who signed an outdated
+  version for possible recontracting.

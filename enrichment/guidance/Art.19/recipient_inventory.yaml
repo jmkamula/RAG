@@ -1,0 +1,17 @@
+must_id: item:Art.19:recipient_inventory
+control_ref: Art.19
+standard_id: GDPR:2016/679
+must_text: Recipient inventory mechanism (links to Art.30 RoPA recipients column)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a current list of all third parties and internal teams who receive personal data, including
+  names and contact details, in a central inventory.
+- Cross-reference each recipient in your inventory with the corresponding entry in the Article 30 Record
+  of Processing Activities recipients column.
+- Assign responsibility for maintaining and updating the recipient inventory to a named individual, not
+  a generic team or department.
+- Record the date of the most recent review or update of the recipient inventory, and retain previous
+  versions for audit purposes.

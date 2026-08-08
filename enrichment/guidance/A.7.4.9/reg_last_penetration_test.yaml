@@ -1,0 +1,18 @@
+must_id: item:A.7.4.9:reg_last_penetration_test
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Last pen-test / security assessment date per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each channel used to transmit personal data in your inventory, including email, file transfer,
+  APIs, or physical media.
+- Record the date of the most recent penetration test or security assessment for each listed channel in
+  a dedicated column.
+- Name the individual responsible for updating and maintaining the inventory, ensuring a specific person
+  is identified rather than a team or department.
+- Attach supporting evidence of the last assessment, such as a report summary or certificate, linked or
+  referenced for each channel entry.
+- Review the inventory quarterly and document the review date and reviewer’s name to show ongoing oversight.

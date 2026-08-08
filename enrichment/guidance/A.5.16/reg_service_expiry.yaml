@@ -1,0 +1,19 @@
+must_id: item:A.5.16:reg_service_expiry
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Expiry date per row for service / shared / temporary identities (forces deliberate renewal
+  rather than indefinite drift)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record an explicit expiry date for every service, shared, and temporary identity in the identity register.
+- Name the owner responsible for each identity, using a specific individual’s name rather than a team
+  or department.
+- Document the date when each identity was last reviewed or renewed, alongside the expiry date, in the
+  register.
+- Cross-reference each identity entry with supporting documentation that explains the business justification
+  for its continued use.
+- Avoid leaving any expiry date field blank or marked as "indefinite"—update all entries to have a concrete,
+  reviewable date.

@@ -1,0 +1,20 @@
+must_id: item:A.8.15:retention
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Retention period per log class (regulatory + business + investigation horizon — typically 90d
+  hot, 1y cold)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the retention period for each log class, specifying both "hot" (immediate access) and "cold"
+  (archived) storage durations in days.
+- State the regulatory, business, and investigation requirements that determine each log class's retention
+  period, referencing applicable laws or internal policies.
+- Name the individual responsible for approving and periodically reviewing log retention periods, avoiding
+  generic titles like "IT" or "the team."
+- Record the date of the most recent review or update to the logging procedure, ensuring it is not left
+  undated or marked as "draft."
+- Cross-reference where and how archived logs are stored, including access controls and deletion schedules,
+  in the procedure document.

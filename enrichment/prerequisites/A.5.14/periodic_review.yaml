@@ -1,0 +1,40 @@
+leaf_id: req:A.5.14:periodic_review
+control_ref: A.5.14
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: direct
+  rationale: A current, approved information security policy framework is essential, as the periodic review
+    of transfer policies must align with and reference these overarching policies. Without this, there
+    is no baseline or structure for the review.
+  good_enough: A documented, management-approved information security policy exists and is accessible
+    to reviewers, even if not perfect or fully comprehensive.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification of information
+  category: direct
+  rationale: You can't meaningfully review transfer policies unless you know how information is classified,
+    since transfer requirements and risks differ by classification (e.g., public vs. confidential).
+  good_enough: A basic, documented classification scheme is in place and in use, even if some assets are
+    still being classified.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Inventory of information and other associated assets
+  category: direct
+  rationale: An up-to-date asset inventory is needed to identify what information is being transferred,
+    by what means, and to whom—otherwise, the review risks missing key transfer channels.
+  good_enough: A working asset inventory exists that covers major information assets and their owners,
+    even if some details are still being filled in.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: Determining the scope of the information security management system
+  category: foundational
+  rationale: The review must be scoped to the ISMS boundaries; if the scope is unclear, you can't determine
+    which transfers or policies are in play.
+  good_enough: A documented ISMS scope statement exists and is understood by those conducting the review,
+    even if it is due for a refresh.

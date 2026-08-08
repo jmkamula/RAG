@@ -1,0 +1,19 @@
+must_id: item:A.5.26:gdpr_72h_trigger_check
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Where the incident touches personal data, Art.33 72h notification trigger fires and the breach-notification
+  path activates (links to req:Art.33:breach_notification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for activating the breach-notification process when an incident involves
+  personal data.
+- Document the decision point in the incident response procedure where the 72-hour GDPR notification trigger
+  is assessed and recorded.
+- Cross-reference the incident response procedure to the breach-notification process, specifically linking
+  to the GDPR Art.33 requirements.
+- Record the date and time when the 72-hour notification window starts for each relevant incident.
+- Avoid using generic triggers such as "notify if serious"—specifically state the GDPR 72-hour rule and
+  its activation criteria.

@@ -1,0 +1,33 @@
+leaf_id: req:Art.42:applicable_scope
+control_ref: Art.42
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of all processing activities to determine which ones
+    could be included in or excluded from the certification scope. Without this, you cannot credibly define
+    or justify the scope for Art.42 certification.
+  good_enough: A current, reasonably complete RoPA that lists all major processing activities, even if
+    some minor updates are pending.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope provides the organizational and operational boundaries for information security,
+    which should align with or inform the scope of GDPR certification. Misalignment can undermine the
+    credibility of the certification scope.
+  good_enough: A documented ISMS scope that covers the main business units, locations, and systems relevant
+    to GDPR processing activities.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity is necessary to assess which
+    activities are eligible and appropriate for certification, and to justify their inclusion or exclusion.
+  good_enough: A mapping of each processing activity to its lawful basis, even if some edge cases are
+    still under review.

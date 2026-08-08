@@ -1,0 +1,13 @@
+must_id: item:A.7.3:rev_next_date
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Periodic Rooms Program in the program review document.
+- Record the date in a calendar or tracking system that is accessible to relevant stakeholders.
+- Name the individual responsible for scheduling and conducting the next review in the same document.
+- Avoid leaving the next review date blank or marked as "TBD"—auditors will flag missing or vague dates.

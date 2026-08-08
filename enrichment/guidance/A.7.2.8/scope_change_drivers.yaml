@@ -1,0 +1,17 @@
+must_id: item:A.7.2.8:scope_change_drivers
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Trigger list (new product line / new geo / M&A activity)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all trigger events that require a review of the Record of Processing Activities, such as launching
+  a new product, entering a new country, or mergers and acquisitions.
+- Document the date each trigger event is identified and the person responsible for initiating the RoPA
+  review.
+- Name the owner as a specific individual responsible for maintaining the trigger list, not a generic
+  team or department.
+- Record each RoPA update with a reference to the specific trigger event and include the date of the update.
+- Review the trigger list at least annually and keep a signed record of the review and any changes made.

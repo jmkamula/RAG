@@ -1,0 +1,17 @@
+must_id: item:8.3:rev_progress
+control_ref: '8.3'
+standard_id: ISO27001:2022
+must_text: Progress check — every active plan item status updated; on-track vs slipping called out
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the current status of every active treatment plan item in a dated review log, noting any changes
+  since the previous review.
+- State clearly which items are on track and which are slipping, using specific language rather than general
+  terms like "in progress."
+- Name the reviewer responsible for each status update, ensuring a specific individual is listed and not
+  a team or department.
+- Retain evidence of any corrective actions or escalations for slipping items, such as meeting notes or
+  action assignments with dates.

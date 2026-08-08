@@ -1,0 +1,50 @@
+leaf_id: req:B.8.2.3:marketing_use_procedure
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must first identify and document the specific purposes for which customer PII is processed.
+    This ensures you can distinguish between operational processing and any potential marketing/advertising
+    use.
+  good_enough: A documented list of processing purposes that clearly flags any marketing/advertising intent
+    is available and up to date.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Before restricting marketing use, you need to know the lawful basis for all processing activities,
+    especially whether consent is required for marketing. This underpins the prohibition and consent gating.
+  good_enough: A summary table or record showing the lawful basis for each processing purpose, including
+    marketing, is documented.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope must cover all processing activities involving customer PII, including any
+    marketing-related processing, to ensure the prohibition procedure applies to the right systems and
+    teams.
+  good_enough: A scope statement that explicitly includes all relevant PII processing, with mention of
+    marketing/advertising if applicable, is available.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that only authorized personnel can initiate or approve
+    marketing activities involving customer PII, and that responsibility for enforcing the prohibition
+    is defined.
+  good_enough: A roles and responsibilities matrix or policy that covers who can handle marketing use
+    of PII is in place.
+- ref: Art.7
+  standard_id: GDPR:2016/679
+  title: Conditions for Consent
+  category: cross_role
+  rationale: Understanding GDPR consent requirements is essential to ensure that any marketing use of
+    PII is properly gated and that consent is not bundled or coerced, as required by the prohibition.
+  good_enough: A summary or checklist of GDPR consent requirements, especially for marketing, is available
+    to inform the procedure.

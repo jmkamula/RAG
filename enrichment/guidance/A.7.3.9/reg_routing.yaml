@@ -1,0 +1,19 @@
+must_id: item:A.7.3.9:reg_routing
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Routing per row (which sub-procedure handled it)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the unique identifier for each subject request in the Master Subject Request Register, linking
+  it to the corresponding entry row.
+- Document the specific sub-procedure or workflow used to handle each request in a dedicated column for
+  traceability.
+- Name the individual or team responsible for routing each request, ensuring a named person is listed
+  rather than a generic group.
+- Enter the date the request was routed and the date it was completed, providing clear evidence of timely
+  handling.
+- Cross-reference each register entry with supporting documentation, such as email confirmations or workflow
+  logs, to validate the routing and handling process.

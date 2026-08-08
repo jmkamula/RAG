@@ -1,0 +1,17 @@
+must_id: item:A.8.3:authorisation
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Authorisation workflow for granting / changing / revoking access
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for requesting, approving, and removing access, including required
+  forms and approval authorities, in a dated procedure file.
+- Name the individual responsible for reviewing and authorising each access change, avoiding generic titles
+  like "IT team" or "management."
+- Record each access grant, change, or removal in an access log, including requester, approver, date,
+  and nature of the change.
+- Retain evidence of completed approvals, such as signed forms or email confirmations, for each access
+  modification.

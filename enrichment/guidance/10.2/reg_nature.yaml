@@ -1,0 +1,19 @@
+must_id: item:10.2:reg_nature
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Per-row nature of NC (what failed against what requirement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific nonconformity by describing exactly what failed, using clear language that identifies
+  the process, control, or activity involved.
+- State the exact requirement or policy that was not met, referencing the relevant clause, control, or
+  documented procedure.
+- Cross-reference each nonconformity entry to supporting evidence, such as audit reports or incident logs,
+  with document names and dates.
+- Name the owner of each nonconformity as a specific individual, not a team or department, to avoid ambiguity
+  in accountability.
+- Date each entry to show when the nonconformity was identified, ensuring the timeline is clear for each
+  row in the register.

@@ -1,0 +1,18 @@
+must_id: item:B.8.5.1:proc_basis_documentation
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+must_text: Compliance basis documented per transfer relationship (SCC / BCR / CBPR / adequacy)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each cross-jurisdictional data transfer relationship in a table, including the countries involved
+  and the type of data transferred.
+- Document the specific legal basis used for each transfer, such as Standard Contractual Clauses, Binding
+  Corporate Rules, CBPR, or adequacy decision.
+- Name the individual responsible for maintaining and updating the transfer basis records, using a specific
+  person's name rather than a team or department.
+- Attach copies of signed agreements or adequacy decisions for each transfer relationship to the procedure
+  documentation.
+- Date each entry and update in the procedure to show when the compliance basis was last reviewed or changed.

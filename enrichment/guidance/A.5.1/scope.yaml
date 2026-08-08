@@ -1,0 +1,17 @@
+must_id: item:A.5.1:scope
+control_ref: A.5.1
+standard_id: ISO27001:2022
+must_text: Scope of the policy defined (which assets, locations, personnel)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact types of information assets, locations, and personnel covered by the policy in a dedicated
+  “Scope” section of the document.
+- Name the owner of the policy as a specific individual, including their job title and contact details,
+  not just a department or team.
+- Record the date the scope statement was last reviewed and updated, showing it reflects current operations
+  and boundaries.
+- Cross-reference the scope section with your asset register and organizational chart to confirm all relevant
+  areas and roles are included.

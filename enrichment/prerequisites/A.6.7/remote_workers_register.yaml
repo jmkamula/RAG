@@ -1,0 +1,47 @@
+leaf_id: req:A.6.7:remote_workers_register
+control_ref: A.6.7
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know whether remote working is in scope for your ISMS before you can create a
+    register of approved remote workers. If remote work is out of scope, this register is not required.
+  good_enough: A documented scope statement that explicitly includes or excludes remote working arrangements.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The remote workers register must reference which corporate equipment is issued to each approved
+    remote worker. Without an up-to-date asset register, you cannot accurately track or link issued devices.
+  good_enough: A basic, current list of corporate assets (e.g., laptops, phones) with assigned users,
+    even if not fully detailed.
+- ref: A.5.16
+  standard_id: ISO27001:2022
+  title: Identity Management
+  category: direct
+  rationale: Every remote worker must be a registered identity. Without a reliable identity register,
+    you cannot ensure that only authorized individuals are approved for remote work.
+  good_enough: A maintained list of user identities with enough detail to uniquely identify each remote
+    worker.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: You need clarity on who is responsible for approving, maintaining, and reviewing the remote
+    workers register. Without assigned roles, the register may be incomplete or unmanaged.
+  good_enough: Documented assignment of responsibility for remote work approvals and register maintenance,
+    even if roles are informal.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: foundational
+  rationale: A risk assessment should identify the risks associated with remote working, which informs
+    what conditions and controls are needed for approval. This ensures the register reflects real security
+    needs.
+  good_enough: A risk assessment that at least mentions remote working and identifies key risks, even
+    if mitigation actions are still in progress.

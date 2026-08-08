@@ -1,0 +1,17 @@
+must_id: item:B.8.5.5:reg_legal_review
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Legal counsel signoff per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each disclosure decision in a dedicated register, including date, purpose, recipient, and relevant
+  legal basis for the disclosure.
+- Assign a named legal counsel to review and sign each row in the register, confirming their approval
+  of the disclosure decision.
+- Attach supporting documentation for each disclosure, such as legal advice or correspondence, as evidence
+  for the decision.
+- State the legal counsel’s full name and signature for each entry — do not use generic titles or unsigned
+  approvals.

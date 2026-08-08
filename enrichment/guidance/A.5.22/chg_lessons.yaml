@@ -1,0 +1,19 @@
+must_id: item:A.5.22:chg_lessons
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Lessons-learned feeding back to the procedure or template (link to A.5.19 / A.5.20)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each supplier service change incident in the log, including a summary of what happened and the
+  date it was identified.
+- Document lessons learned from each incident, specifying what worked, what failed, and any root causes
+  discovered.
+- Name the individual responsible for reviewing lessons learned and updating the relevant supplier management
+  procedure or template.
+- Cross-reference each log entry to the updated procedure or template version, showing where improvements
+  were made based on the lesson.
+- Avoid leaving lessons learned sections blank or filled with generic statements—provide specific, actionable
+  insights for each incident.

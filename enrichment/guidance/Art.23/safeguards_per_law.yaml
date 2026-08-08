@@ -1,0 +1,20 @@
+must_id: item:Art.23:safeguards_per_law
+control_ref: Art.23
+standard_id: GDPR:2016/679
+must_text: Safeguards required by Art.23.2 per applicable law (purposes / categories / scope / safeguards
+  / specification of controller / retention / risks / right to information)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each applicable national law or regulation that restricts data subject rights, citing the specific
+  article or section referenced.
+- Document the purpose, categories of personal data, and scope of each restriction in a dated procedure,
+  referencing the relevant legal basis.
+- Specify the safeguards in place for each restriction, including technical and organisational measures,
+  in a written record signed by the data protection officer.
+- Name the data controller responsible for implementing each restriction as a specific individual, not
+  a department or generic title.
+- Record the retention period for data affected by each restriction and the risks and information rights
+  impacted, with supporting documentation.

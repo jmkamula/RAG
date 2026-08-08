@@ -1,0 +1,19 @@
+must_id: item:Art.14:rev_exception_reassessment
+control_ref: Art.14
+standard_id: GDPR:2016/679
+must_text: Art.14.5 exception re-assessment — exceptions claimed still hold (proportionate-impossibility
+  may change)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific individual responsible for reassessing Article 14.5 exceptions, avoiding generic titles
+  like "Legal Team" or "Compliance Department".
+- Document the date and outcome of the most recent review confirming that each exception still applies
+  and remains justified.
+- Record any changes in circumstances that could affect the validity of previously claimed exceptions,
+  such as new data sources or updated processing methods.
+- Retain supporting evidence, such as correspondence or risk assessments, that demonstrate why each exception
+  continues to meet the proportionate-impossibility criteria.
+- State the next scheduled review date for reassessing Article 14.5 exceptions to show ongoing monitoring.

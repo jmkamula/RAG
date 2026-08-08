@@ -1,0 +1,19 @@
+must_id: item:8.2:proc_link_to_6_1_2
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Link to the 6.1.2 procedure (8.2 uses 6.1.2's methodology, not a separate one)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference the 6.1.2 risk assessment procedure by title and document number within the operational risk
+  assessment trigger procedure.
+- Cross-reference the specific section or appendix in the operational risk assessment trigger procedure
+  where the 6.1.2 methodology is applied.
+- State explicitly in the procedure that operational risk assessments use the same criteria and process
+  as defined in 6.1.2.
+- Name the owner of the operational risk assessment trigger procedure as a specific individual, not a
+  generic role or team.
+- Attach or hyperlink the current, approved version of the 6.1.2 procedure to the operational risk assessment
+  trigger procedure for direct access.

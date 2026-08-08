@@ -1,0 +1,17 @@
+must_id: item:A.5.12:comm_onboarding
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Distribution at onboarding for new personnel evidenced (induction pack, mandatory module)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each new joiner by name and start date in a record of onboarding activities.
+- Attach the classification scheme or induction pack version distributed to each new joiner, with a date
+  of distribution.
+- Obtain and file a signed or digitally acknowledged receipt from each new joiner confirming they received
+  and read the classification scheme.
+- Name the person responsible for onboarding communications as a specific individual, not a generic role
+  or team.
+- Retain a copy of the induction materials as they were at the time of each new joiner’s onboarding.

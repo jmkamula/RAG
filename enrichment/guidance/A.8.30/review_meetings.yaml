@@ -1,0 +1,17 @@
+must_id: item:A.8.30:review_meetings
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Regular review-meeting cadence during engagement (cross-link to A.5.22)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the planned frequency of review meetings in the Outsourced Development Governance Procedure, referencing
+  the related monitoring requirement in control A.5.22.
+- Document each review meeting with a dated agenda, attendee list naming individuals, and summary minutes
+  stored in a central repository.
+- Assign responsibility for scheduling and leading review meetings to a named individual, not a generic
+  role or team.
+- Cross-reference the meeting records in your supplier monitoring register to show ongoing oversight throughout
+  the engagement period.

@@ -1,0 +1,16 @@
+must_id: item:A.7.3.4:reg_event_type
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+must_text: Event type per row (modification / partial withdrawal / full withdrawal)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each consent modification, partial withdrawal, or full withdrawal as a separate row in the register
+  with the event type clearly stated.
+- Document the date and time of each event alongside the event type to provide a clear timeline of consent
+  changes.
+- Name the individual or system user who processed each event in the register for traceability.
+- Specify the event type for every row; do not leave the event type column blank or use generic labels
+  like "change."

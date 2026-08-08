@@ -1,0 +1,18 @@
+must_id: item:A.6.1:scope_check_matrix
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Check matrix — which check types apply to which role tier (matrix is the spec; rows show consistency)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each role tier and check type in a matrix, using clear and specific titles that match your organisation's
+  terminology.
+- Document which check types apply to each role tier by marking the corresponding cells in the matrix
+  with a clear indicator, such as a tick or "Yes".
+- Assign a named individual as the owner of the matrix, listing their full name and job title in the document
+  header.
+- Record the date the matrix was last reviewed and approved, and include the approver’s name and signature.
+- Avoid using generic role descriptions like "staff" or "IT team" in the matrix; specify actual role titles
+  to prevent ambiguity.

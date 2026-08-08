@@ -1,0 +1,17 @@
+must_id: item:6.1.1:issues_input
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Issues from 4.1 considered as planning input
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all internal and external issues identified under clause 4.1 in a dated section of your ISMS Risk
+  and Opportunity Planning Procedure.
+- Cross-reference each listed issue to its corresponding source document or meeting record to show it
+  was considered during planning.
+- Name the person responsible for reviewing and updating the issues list, using a specific individual’s
+  full name and job title.
+- Avoid using generic terms like "various issues" or "as applicable"—describe each issue clearly and specifically
+  in the procedure.

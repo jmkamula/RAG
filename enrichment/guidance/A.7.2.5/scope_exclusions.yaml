@@ -1,0 +1,18 @@
+must_id: item:A.7.2.5:scope_exclusions
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: Out-of-scope processing (low-risk / legacy) with rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all processing activities reviewed and mark those considered out-of-scope for a Privacy Impact
+  Assessment, including a brief rationale for each.
+- Document the specific criteria or risk thresholds used to determine low-risk or legacy status, referencing
+  the decision date and responsible individual.
+- State the business or technical justification for excluding each out-of-scope activity, ensuring the
+  explanation is tailored and not generic.
+- Name the individual who approved the out-of-scope determinations, avoiding group or department-level
+  attributions.
+- Retain a signed and dated record of the final scope decision, including all exclusions and rationales.

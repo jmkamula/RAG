@@ -1,0 +1,20 @@
+must_id: item:Art.25:scope_exclusions
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Out-of-scope changes (bug fixes, performance tuning, internal refactoring without processing
+  change)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific types of changes considered out-of-scope, such as bug fixes, performance improvements,
+  and internal refactoring, in a documented list.
+- Document the criteria used to determine when a change does not affect personal data processing, with
+  examples for each category.
+- Record each out-of-scope change in a change log, including a brief justification and the name of the
+  person making the determination.
+- State that all out-of-scope determinations are reviewed and confirmed by a named data protection lead,
+  not left to automated or verbal-only decisions.
+- Retain dated records of all out-of-scope change assessments for future reference and potential audit
+  requests.

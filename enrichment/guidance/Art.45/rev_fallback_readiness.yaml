@@ -1,0 +1,20 @@
+must_id: item:Art.45:rev_fallback_readiness
+control_ref: Art.45
+standard_id: GDPR:2016/679
+must_text: Fallback readiness — if a decision were invalidated, Art.46 fallback (e.g. SCCs) pre-staged
+  with affected vendors
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each vendor relying on an adequacy decision and list them in a dated register, including the
+  data transferred and relevant jurisdictions.
+- Document which fallback mechanism (such as Standard Contractual Clauses) is pre-staged for each vendor,
+  attaching draft agreements where available.
+- Name the responsible individual who will activate fallback arrangements if the adequacy decision is
+  invalidated.
+- Record the last review date and outcome of your fallback readiness check, including confirmation that
+  fallback contracts are up to date.
+- Avoid listing fallback owners as "Legal" or "the team"—name a specific person accountable for each vendor
+  relationship.

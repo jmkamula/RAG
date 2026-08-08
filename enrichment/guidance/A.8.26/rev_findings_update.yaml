@@ -1,0 +1,18 @@
+must_id: item:A.8.26:rev_findings_update
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Findings propagated to procedure / scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of each application security requirements review in a central log, including
+  any findings or gaps identified.
+- Assign a named individual to update relevant procedures or scope documents with each approved finding,
+  referencing the review log entry.
+- Document the approval of each procedural or scope change with the approver’s name and date on the updated
+  document.
+- Cross-reference updated procedures or scope documents to the specific review findings to show how each
+  issue was addressed.
+- Name the owner responsible for propagating findings as a specific person, not a team or department.

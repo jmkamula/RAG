@@ -1,0 +1,19 @@
+must_id: item:A.5.30:reg_criticality
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Criticality tier per row (tier_1_mission_critical / tier_2_business_critical / tier_3_supporting)
+  — drives RTO/RPO selection
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- List each ICT service in the register with a unique name and description to clearly identify what is
+  being assessed.
+- 'Assign a criticality tier to each service using only the defined categories: tier_1_mission_critical,
+  tier_2_business_critical, or tier_3_supporting.'
+- Name the person responsible for assigning the tier for each service, ensuring it is a specific individual,
+  not a team or department.
+- Record the date when each tier assignment was last reviewed or updated in the register.
+- Cross-reference each service’s tier with supporting business impact analysis documentation to show how
+  the tier was determined.

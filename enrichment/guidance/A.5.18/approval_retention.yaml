@@ -1,0 +1,18 @@
+must_id: item:A.5.18:approval_retention
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Retention period for approval evidence stated (drives the audit trail for who-approved-what-when)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact retention period for access approval evidence in the Access Rights Management Procedure,
+  specifying the number of years or months.
+- Name the person or role responsible for enforcing the retention period, using a specific individual
+  or job title rather than a generic group.
+- Document the location where approval evidence will be stored, such as a named system, folder, or database.
+- Record the procedure version and date of last update to show when the retention period was last reviewed
+  or changed.
+- Avoid using vague terms like "retain as needed" or "keep for a reasonable time"—specify a clear, measurable
+  retention timeframe.

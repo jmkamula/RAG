@@ -1,0 +1,40 @@
+leaf_id: req:Art.45:adequacy_procedure
+control_ref: Art.45
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.44
+  standard_id: GDPR:2016/679
+  title: General principle for transfers
+  category: direct
+  rationale: Art.44 sets the overarching rule that personal data can only be transferred to third countries
+    if the requirements of Chapter V are met. You must confirm this general principle is addressed before
+    detailing how adequacy decisions are relied upon.
+  good_enough: A clear statement or policy confirming that all international transfers are subject to
+    Chapter V requirements is in place.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need to know which processing activities involve international transfers and to which
+    countries before you can apply or check adequacy decisions. Art.30 records provide this mapping.
+  good_enough: A basic, up-to-date register of processing activities exists, listing any transfers to
+    third countries or international organisations.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Before relying on adequacy, you must ensure that each transfer has a lawful basis under GDPR.
+    Without this, adequacy reliance is moot.
+  good_enough: Each processing activity involving a transfer has a documented lawful basis (e.g. contract,
+    consent, legitimate interest) identified.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope must cover international transfers to ensure that the adequacy procedure is
+    relevant and enforceable within your information security management system.
+  good_enough: The ISMS scope statement explicitly includes international data transfers or cross-border
+    processing activities.

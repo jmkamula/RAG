@@ -1,0 +1,17 @@
+must_id: item:Art.17:reg_request_id
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Per-row request id (Art.12 cross-ref)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique request ID to each erasure request entry in the register, ensuring no two requests share
+  the same identifier.
+- Cross-reference each request ID with the corresponding data subject request record in your Art.12 log
+  to show traceability.
+- Record the date each request ID was created in the register to provide a clear audit trail.
+- Name the individual responsible for managing the register, avoiding generic roles like "the team" or
+  "IT department".
+- Document any changes to request IDs with a dated note, preventing untracked edits or deletions.

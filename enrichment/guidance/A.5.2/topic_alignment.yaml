@@ -1,0 +1,17 @@
+must_id: item:A.5.2:topic_alignment
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: Allocation covers ISMS operation, asset ownership, risk management, audits and security review
+  topics
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all information security tasks related to ISMS operation, asset ownership, risk management, audits,
+  and security reviews in a single matrix.
+- Assign each task to a named individual, not a team or department, and include their current job title.
+- Record the date the matrix was last reviewed and updated, and keep a copy of the previous version for
+  reference.
+- Cross-reference each task to relevant policy or procedure documents to show alignment with your ISMS
+  framework.

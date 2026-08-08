@@ -1,0 +1,19 @@
+must_id: item:7.1:scope_isms_vs_business
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Boundary between ISMS-dedicated resources and shared-business resources allocated to ISMS
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all information assets, systems, and resources in scope for the ISMS, including their business
+  function and physical or logical location.
+- Document which resources are dedicated solely to the ISMS and which are shared with other business areas,
+  specifying the nature of each allocation.
+- Name the person responsible for maintaining the scope document as a specific individual, not a team
+  or department.
+- Date and version-control the scope document to show when the boundary decisions were last reviewed and
+  updated.
+- Cross-reference the scope document with supporting diagrams or inventories to clearly illustrate the
+  boundary between ISMS and shared resources.

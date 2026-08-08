@@ -1,0 +1,19 @@
+must_id: item:5.1:resources
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Resources for the ISMS made available
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a member of top management who is responsible for allocating resources to the information security
+  management system in a dated directive.
+- Document a formal decision, signed by top management, that specifies the types and amounts of resources
+  allocated to the ISMS.
+- Attach supporting evidence, such as a budget approval or resource allocation memo, that clearly references
+  the ISMS and is dated within the current cycle.
+- State the frequency with which resource needs for the ISMS are reviewed and record the date of the most
+  recent review.
+- Avoid using vague terms like "sufficient resources" without quantifying or specifying what resources
+  are provided for the ISMS.

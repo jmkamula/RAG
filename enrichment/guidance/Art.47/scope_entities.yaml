@@ -1,0 +1,17 @@
+must_id: item:Art.47:scope_entities
+control_ref: Art.47
+standard_id: GDPR:2016/679
+must_text: Bound entities enumerated (jurisdictions + roles)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each legal entity covered by the Binding Corporate Rules, including full legal names and registered
+  addresses.
+- Specify the jurisdictions where each entity operates, referencing country and region for clarity.
+- Describe the roles and responsibilities of each entity in relation to personal data processing under
+  the Binding Corporate Rules.
+- Name the owner responsible for maintaining and updating the entity and jurisdiction list as a specific
+  individual, not a group or department.
+- Date and archive the final enumerated list to show when it was last reviewed and confirmed as accurate.

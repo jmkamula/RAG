@@ -1,0 +1,16 @@
+must_id: item:B.8.5.8:proc_owner
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+must_text: Named owner (Trust + Legal + Procurement)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the procedure owner, listing their full name and job title, not a team
+  or department.
+- Document the procedure owner’s responsibilities for Trust, Legal, and Procurement sign-off within the
+  procedure document.
+- Record the date the owner was assigned and include it in the procedure’s version history or change log.
+- State the escalation path if the named owner is unavailable, referencing a backup individual by name
+  and role.

@@ -1,0 +1,17 @@
+must_id: item:A.5.34:reg_owner_per_activity
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Owner per processing activity (named role responsible for the activity — HR for employee processing,
+  Sales for prospect processing, etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner for each processing activity as a specific role or individual, such as "HR Manager" or
+  "Sales Director," not a generic team.
+- Record the date each owner assignment was made or last reviewed in the PII Processing Register.
+- Document the scope of responsibility for each owner, clearly linking them to the relevant processing
+  activity in the register.
+- Cross-reference each processing activity with supporting documentation that describes the owner’s duties
+  and authority.

@@ -1,0 +1,17 @@
+must_id: item:5.1:importance_communicated
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Importance of effective ISMS and conformance communicated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a signed statement from top management that explains why the Information Security Management
+  System (ISMS) is critical to the organisation’s success.
+- Publish the statement to all staff using a dated internal communication, such as an email or intranet
+  post, and retain a copy.
+- Name a specific member of top management as the individual responsible for communicating ISMS importance,
+  avoiding generic titles like “management” or “the team.”
+- Record attendance or acknowledgment from staff confirming they have received and understood the communication
+  about ISMS importance.

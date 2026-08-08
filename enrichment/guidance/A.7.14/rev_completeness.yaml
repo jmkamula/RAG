@@ -1,0 +1,16 @@
+must_id: item:A.7.14:rev_completeness
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Completeness check — every retired asset (from A.5.9) has a matching disposal_record
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the list of all retired assets from A.5.9 with the disposal records, ensuring every
+  asset has a corresponding, dated disposal entry.
+- Document any missing disposal records by asset identifier and assign a named individual to investigate
+  and resolve each gap.
+- Record the date and name of the person who completed the completeness check in a review log.
+- Name the reviewer as a specific individual, not a team or department, to avoid ambiguity in accountability.
+- Retain the completed cross-reference checklist and supporting evidence for auditor inspection.

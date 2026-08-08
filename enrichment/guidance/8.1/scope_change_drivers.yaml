@@ -1,0 +1,18 @@
+must_id: item:8.1:scope_change_drivers
+control_ref: '8.1'
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new ISMS process, outsourcing decision change, M&A)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all operational processes currently within the scope of your information security management system,
+  including the date of the latest review.
+- Document a trigger list that specifies events requiring scope reassessment, such as new processes, outsourcing
+  changes, or mergers and acquisitions.
+- Assign a named individual responsible for monitoring and initiating scope reviews when a trigger event
+  occurs.
+- Record each scope review decision with the date, the trigger event, and the names of those involved
+  in the decision.
+- Name the owner as a specific person, not a group or department, to avoid ambiguity in accountability.

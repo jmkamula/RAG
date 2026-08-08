@@ -1,0 +1,20 @@
+must_id: item:A.8.31:data_handling
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Data-handling rules between environments — NO raw production data in lower environments (cross-link
+  to A.8.11 masking + A.8.33 test info)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure that prohibits using raw production data in development and test environments,
+  referencing controls A.8.11 and A.8.33.
+- Name a specific individual responsible for approving data movement between production and lower environments,
+  not a team or department.
+- Record each instance where production data is requested for use in lower environments, including the
+  masking or anonymization method applied.
+- Cross-reference the data-handling procedure in your environment access logs to confirm no unmasked production
+  data is present in non-production systems.
+- Retain dated evidence of regular reviews of environment separation controls, showing updates or corrective
+  actions taken if issues were found.

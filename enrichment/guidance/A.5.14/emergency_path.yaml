@@ -1,0 +1,20 @@
+must_id: item:A.5.14:emergency_path
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Emergency / out-of-band transfer path (when standard channels are unavailable — break-glass
+  procedure with post-hoc authorisation)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a clear emergency information transfer procedure in the policy, specifying when and how to
+  use it if standard channels are unavailable.
+- Name a specific individual responsible for authorising emergency transfers, avoiding generic titles
+  like "the team" or "IT department".
+- Record each emergency transfer event, including date, time, data transferred, method used, and the person
+  who authorised it.
+- Require post-event written authorisation by a designated manager, attaching this approval to the transfer
+  record.
+- Review the emergency transfer log quarterly and document any lessons learned or policy updates resulting
+  from these incidents.

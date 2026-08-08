@@ -1,0 +1,17 @@
+must_id: item:A.7.4.6:reg_sweep_id
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+must_text: Unique sweep run identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each sweep run and record it in a dedicated column for every entry in
+  the Temp Files Sweep Register.
+- Document the date, time, and responsible individual for each sweep run alongside the unique identifier
+  in the register.
+- Cross-reference each sweep run identifier with any related incident or exception reports to maintain
+  a clear audit trail.
+- Avoid using generic or repeated identifiers such as "monthly sweep" or "routine"—each identifier must
+  be distinct and traceable.

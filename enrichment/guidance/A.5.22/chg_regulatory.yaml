@@ -1,0 +1,19 @@
+must_id: item:A.5.22:chg_regulatory
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Regulatory-notification check (where the change triggers a regulator-notify obligation)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each supplier service change in the log with a clear description, date of change, and the responsible
+  individual’s name.
+- Document the regulatory-notification assessment for each change, stating whether notification is required
+  and referencing the relevant regulation or authority.
+- Name the person who made the regulatory-notification decision for each entry, avoiding generic roles
+  like "Compliance Team" or "Management".
+- Attach evidence of any notifications sent, such as dated emails or submission receipts, to the corresponding
+  log entry.
+- Review the log quarterly to confirm all required regulatory notifications were assessed and, if needed,
+  completed for each change.

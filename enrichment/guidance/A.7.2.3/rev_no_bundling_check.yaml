@@ -1,0 +1,19 @@
+must_id: item:A.7.2.3:rev_no_bundling_check
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: No-bundling regression check — no service gated behind unrelated consent
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each service and its required consents in a dated register, showing that no service access
+  is conditional on unrelated consent.
+- Cross-reference user journey screens or consent forms to confirm that consent requests are clearly separated
+  and not bundled.
+- Name the reviewer who performed the regression check, including the review date and any identified issues
+  or exceptions.
+- Attach screenshots or extracts from live systems demonstrating that users can access services without
+  providing unrelated consents.
+- Specify any changes made since the last review, avoiding generic statements like "no changes" without
+  supporting evidence.

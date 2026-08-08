@@ -1,0 +1,17 @@
+must_id: item:A.7.5:insurance
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Insurance considerations and coverage referenced
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference the current insurance policy number and provider in the procedure, including coverage details
+  relevant to physical and environmental threats.
+- Document the date of the most recent insurance review and the name of the person who confirmed coverage
+  aligns with identified residual risks.
+- Cross-reference the risk register entry that lists residual risks mitigated by insurance, showing a
+  clear link between risks and coverage.
+- Name the individual responsible for maintaining insurance coverage—avoid listing a generic department
+  or team as the owner.

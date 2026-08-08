@@ -1,0 +1,18 @@
+must_id: item:A.8.10:reg_target
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Per-deletion target identifier (dataset / record class / asset / media id)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the unique identifier of each dataset, record class, asset, or media item targeted for deletion
+  in the disposal register entry.
+- State the type of item being deleted, such as dataset, physical media, or asset, alongside its identifier
+  in the register.
+- Name the individual authorizing the deletion for each entry, avoiding generic roles like "IT team" or
+  "admin staff".
+- Confirm the date and time of each deletion event in the register for traceability.
+- Cross-reference each register entry with supporting documentation, such as deletion requests or approval
+  emails, to verify the target identifier.

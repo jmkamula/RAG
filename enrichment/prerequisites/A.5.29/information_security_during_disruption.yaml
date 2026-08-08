@@ -1,0 +1,48 @@
+leaf_id: req:A.5.29:information_security_during_disruption
+control_ref: A.5.29
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The disruption plan must identify which information assets and supporting controls are critical
+    to maintain during disruption. Without an up-to-date asset register, you cannot determine what needs
+    protection or prioritization.
+  good_enough: A current, reasonably complete list of key information assets and their owners is available,
+    even if some minor assets are still being catalogued.
+- ref: A.5.7
+  standard_id: ISO27001:2022
+  title: Threat Intelligence
+  category: direct
+  rationale: Understanding relevant threats is essential to define realistic disruption scenarios and
+    plan appropriate fallback measures. The plan is ineffective if it does not reflect actual threat vectors.
+  good_enough: A summary of recent and likely threat types (e.g., ransomware, DDoS, supply chain outage)
+    is documented and reviewed, even if not exhaustive.
+- ref: A.5.21
+  standard_id: ISO27001:2022
+  title: ICT Supply Chain
+  category: direct
+  rationale: Disruptions often originate from suppliers or service providers. Knowing which suppliers
+    are critical allows you to plan for supplier-related disruptions and compensating controls.
+  good_enough: A list of key ICT suppliers and their roles in critical processes is available, with basic
+    risk notes for each.
+- ref: A.5.24
+  standard_id: ISO27001:2022
+  title: Information Security Incident Management Procedure
+  category: direct
+  rationale: The disruption plan may be triggered by security incidents. Clear incident management procedures
+    ensure the plan can be activated and integrated with broader response efforts.
+  good_enough: There is a documented, accessible incident response procedure that covers escalation and
+    activation of continuity/disruption plans.
+- ref: A.5.30
+  standard_id: ISO27001:2022
+  title: ICT Readiness for Business Continuity
+  category: direct
+  rationale: The disruption plan must align with ICT continuity arrangements to avoid gaps or overlaps.
+    Understanding ICT readiness ensures that fallback and restoration steps are feasible.
+  good_enough: The current ICT continuity plan exists and identifies minimum service levels and recovery
+    priorities, even if some details are still being refined.

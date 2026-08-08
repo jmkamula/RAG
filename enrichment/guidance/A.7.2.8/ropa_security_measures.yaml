@@ -1,0 +1,19 @@
+must_id: item:A.7.2.8:ropa_security_measures
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: General description of technical + organizational security measures per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a clear, specific summary of technical security measures for each processing activity row,
+  such as encryption, access controls, or pseudonymization.
+- Record organizational security measures for each processing activity, including training, policies,
+  or incident response procedures, in the corresponding RoPA entry.
+- Name the individual responsible for maintaining each security measure description, ensuring a named
+  person is listed rather than a team or department.
+- Cross-reference each security measure described in the RoPA with supporting policy documents or technical
+  specifications, and note the location or document title in the RoPA row.
+- State the date each security measure description was last reviewed or updated in the RoPA, providing
+  a clear record of currency.

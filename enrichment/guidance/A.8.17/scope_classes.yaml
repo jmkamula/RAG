@@ -1,0 +1,18 @@
+must_id: item:A.8.17:scope_classes
+control_ref: A.8.17
+standard_id: ISO27001:2022
+must_text: System classes enumerated with drift tolerance per class
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all system classes in scope, such as databases, file servers, and cloud storage, in a dated inventory
+  document.
+- Assign a specific individual as the owner responsible for maintaining the system class inventory—do
+  not use group names or generic titles.
+- Specify and record the acceptable drift tolerance for each system class, including timeframes or thresholds,
+  in the same inventory.
+- Cross-reference each system class entry with relevant policy or procedure documents that define drift
+  management practices.
+- Review and update the inventory at least annually, recording the review date and the name of the reviewer.

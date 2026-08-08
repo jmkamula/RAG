@@ -1,0 +1,17 @@
+must_id: item:A.5.26:rev_benchmark
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: External benchmarking input considered (industry IR-metrics references)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify at least one current industry incident response metric or benchmark from a reputable external
+  source, such as an industry association or regulator.
+- Document how the selected external benchmarks were reviewed and compared to your internal incident response
+  metrics, including the date and participants.
+- Record any changes or recommendations to your incident response program that resulted from this benchmarking
+  review, noting who approved them and when.
+- Name the reviewer or decision-maker as a specific individual, not a generic title or team, in the review
+  documentation.

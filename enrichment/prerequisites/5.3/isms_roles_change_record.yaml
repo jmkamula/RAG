@@ -1,0 +1,39 @@
+leaf_id: req:5.3:isms_roles_change_record
+control_ref: '5.3'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the boundaries of your ISMS before you can meaningfully track role changes,
+    as roles must be defined in relation to the in-scope processes, assets, and entities.
+  good_enough: A documented scope statement that clearly identifies what is in and out of scope for the
+    ISMS, even if not fully detailed.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: direct
+  rationale: A current, approved roles and responsibilities matrix is essential, since the change record
+    tracks amendments to this baseline. Without it, there is nothing to compare changes against.
+  good_enough: An initial roles and responsibilities matrix exists, even if it is a draft, so changes
+    can be tracked from a known starting point.
+- ref: A.5.3
+  standard_id: ISO27001:2022
+  title: Segregation of Duties
+  category: direct
+  rationale: Understanding segregation of duties requirements is necessary to assess the impact of role
+    changes and ensure that critical duties remain properly segregated after each change.
+  good_enough: Documented segregation of duties requirements or principles are available, even if not
+    fully implemented, to inform the review of role changes.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the overall direction for information security, including expectations for
+    role management and change control. It provides the context for why role changes must be tracked.
+  good_enough: A published information security policy that references role management, even if it is
+    high-level.

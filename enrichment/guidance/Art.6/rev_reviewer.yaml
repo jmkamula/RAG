@@ -1,0 +1,14 @@
+must_id: item:Art.6:rev_reviewer
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO or Privacy Lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual, such as the Data Protection Officer or Privacy Lead, in
+  the program review record.
+- Record the reviewer's full name, job title, and contact details on the documented review of lawful basis.
+- Date the review to show when the DPO or Privacy Lead completed their assessment.
+- Sign or digitally approve the review to confirm the reviewer’s direct involvement and responsibility.

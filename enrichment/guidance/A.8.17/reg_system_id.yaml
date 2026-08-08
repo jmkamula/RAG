@@ -1,0 +1,16 @@
+must_id: item:A.8.17:reg_system_id
+control_ref: A.8.17
+standard_id: ISO27001:2022
+must_text: Per-row system identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each system in the register using a unique, specific identifier such as hostname or asset tag,
+  not a generic label.
+- Record the identifier in a dedicated column for every row, ensuring no row is left blank or marked as
+  "various."
+- Cross-reference each identifier with your asset inventory to confirm accuracy and traceability.
+- Review the register quarterly to verify that all system identifiers remain current and reflect any system
+  changes.

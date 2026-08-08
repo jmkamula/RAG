@@ -1,0 +1,41 @@
+leaf_id: req:A.8.27:architecture_register
+control_ref: A.8.27
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The architecture register must align with the defined ISMS scope to ensure only relevant
+    systems, processes, and patterns are catalogued. Without a clear scope, the register could be incomplete
+    or misaligned.
+  good_enough: A documented and approved ISMS scope that clearly identifies the organizational boundaries
+    and information assets covered by the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The architecture register should reference assets that are already identified and catalogued.
+    If the asset register is missing, it is unclear what systems or components require architectural patterns.
+  good_enough: A basic, up-to-date inventory of key information assets and systems, even if not fully
+    detailed, to anchor the architecture patterns.
+- ref: A.8.25
+  standard_id: ISO27001:2022
+  title: Secure development life cycle
+  category: direct
+  rationale: Secure development lifecycle processes define the security principles and controls that must
+    be embedded in architectural patterns. Without this, the register cannot reliably state which security
+    principles are addressed.
+  good_enough: A documented SDLC process that outlines security checkpoints and principles, even if not
+    fully mature or automated.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The architecture register should indicate how patterns support the protection of information
+    based on its classification. Without a scheme, it is unclear how to prioritize or apply security principles.
+  good_enough: A simple, approved classification scheme for information types, with at least basic categories
+    (e.g., public, internal, confidential).

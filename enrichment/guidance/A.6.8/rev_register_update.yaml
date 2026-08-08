@@ -1,0 +1,17 @@
+must_id: item:A.6.8:rev_register_update
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Changes propagated to the procedure / scope with reference to this review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and findings of each periodic reporting program review in a centralized log, including
+  any identified changes needed.
+- Update the written procedure or scope document to reflect agreed changes, citing the specific review
+  date and findings as the source.
+- Attach or link the updated procedure or scope to the review log entry, showing clear traceability from
+  review to change.
+- Name the person who approved the changes, ensuring this is a specific individual and not a group or
+  department.

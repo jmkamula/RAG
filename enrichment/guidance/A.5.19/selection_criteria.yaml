@@ -1,0 +1,20 @@
+must_id: item:A.5.19:selection_criteria
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Selection and evaluation criteria based on sensitivity of information and services (risk analysis,
+  references, attestations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the criteria used to select and evaluate suppliers, including how information sensitivity and
+  service criticality are factored into the process.
+- Record the results of a risk analysis for each supplier, showing how risks related to information security
+  were identified and assessed.
+- Attach references or attestations from suppliers that demonstrate their information security capabilities
+  and relevant certifications.
+- Name the individual responsible for approving supplier selection decisions, ensuring a specific person
+  is listed rather than a team or department.
+- Retain dated records of each supplier evaluation, including the criteria applied and the outcome of
+  the assessment.

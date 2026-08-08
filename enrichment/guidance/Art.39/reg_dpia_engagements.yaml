@@ -1,0 +1,17 @@
+must_id: item:Art.39:reg_dpia_engagements
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Per-row DPIA engagements (which DPIAs DPO advised on)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each Data Protection Impact Assessment (DPIA) engagement in the DPO Activity Register with a
+  unique reference, project name, and date of advice.
+- Name the DPO who provided advice for each DPIA, using a specific individual’s full name, not a role
+  or team.
+- Document the nature of advice given by the DPO for each DPIA, including key recommendations or concerns
+  raised.
+- Attach or cross-reference supporting evidence, such as meeting notes or email correspondence, confirming
+  the DPO’s involvement in each DPIA.

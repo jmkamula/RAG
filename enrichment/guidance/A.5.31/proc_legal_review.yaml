@@ -1,0 +1,14 @@
+must_id: item:A.5.31:proc_legal_review
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Legal review step before a new entry is finalised (internal or external counsel approval)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual or external counsel to review each proposed register entry for legal accuracy
+  before it is finalized.
+- Document the review date and the name of the reviewer in the register entry’s approval section.
+- Require a written sign-off—such as an email or signed form—from the reviewer confirming the legal interpretation.
+- Avoid using generic approvals; specify the reviewer by name, not by role or department, for each entry.

@@ -1,0 +1,18 @@
+must_id: item:A.5.30:reg_recovery_owner
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Named recovery owner per row (technical lead accountable for the service's recovery, not just
+  IT generally)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the recovery owner for each ICT service as a specific individual, listing their full name and job
+  title in the register.
+- Record the date each recovery owner was assigned responsibility in a dedicated column of the ICT Service
+  Continuity Register.
+- Cross-reference the recovery owner’s contact details with your staff directory to confirm accuracy and
+  current employment status.
+- Avoid listing generic roles like "IT" or "the team" as recovery owners; update any such entries to a
+  named person.

@@ -1,0 +1,17 @@
+must_id: item:8.1:changes_managed
+control_ref: '8.1'
+standard_id: ISO27001:2022
+must_text: Changes to planned processes managed (link to 6.3)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each change to planned processes in a change log, including the date, description, and reason
+  for the change.
+- Name the person responsible for approving each process change, ensuring a specific individual is listed
+  rather than a team or department.
+- Record evidence of approval for each change, such as a signed form or an email confirmation from the
+  named approver.
+- Cross-reference each change entry to the relevant section of the operational planning and control procedure
+  and to the requirements in clause 6.3.

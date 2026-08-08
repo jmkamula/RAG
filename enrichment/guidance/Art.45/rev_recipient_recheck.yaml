@@ -1,0 +1,19 @@
+must_id: item:Art.45:rev_recipient_recheck
+control_ref: Art.45
+standard_id: GDPR:2016/679
+must_text: Recipient-eligibility recheck — certifications still active (US-DPF, etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each recipient organization and record their current certification status with the relevant
+  data protection framework, including the certification expiry date.
+- Document the date you last checked each recipient’s certification status using official public registers
+  or certification authority websites.
+- Name the person responsible for performing and recording these eligibility rechecks, ensuring it is
+  a specific individual, not a team or department.
+- Retain screenshots or downloaded evidence of each recipient’s certification status at the time of the
+  recheck.
+- Flag any recipient whose certification cannot be verified or has lapsed, and document the action taken
+  in response.

@@ -1,0 +1,17 @@
+must_id: item:A.8.1:encryption
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Full-disk or storage encryption required
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the User Endpoint Devices Policy that all user devices must use full-disk or storage encryption
+  before storing organisational data.
+- Name the person responsible for enforcing device encryption, listing a specific individual rather than
+  a team or department.
+- Record the date the encryption requirement was last reviewed and approved in the policy document.
+- Cross-reference the encryption requirement in the policy to the relevant device management procedure
+  or technical standard.
+- Retain evidence of policy communication, such as a dated email or announcement sent to all staff.

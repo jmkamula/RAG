@@ -1,0 +1,17 @@
+must_id: item:A.5.19:reg_classification
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Risk classification (tier or category) per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a risk classification to each supplier in the register, using a clear tier or category that matches
+  your documented risk methodology.
+- Record the name of the person who determined each supplier’s risk classification, along with the date
+  of the assessment.
+- Cross-reference each supplier’s risk classification to supporting documentation, such as a completed
+  risk assessment or due diligence checklist.
+- Name the risk classification for each supplier as a specific tier or category — do not leave this field
+  blank or use generic terms like "varies".

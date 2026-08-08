@@ -1,0 +1,18 @@
+must_id: item:A.5.10:comm_refresh
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Periodic re-acknowledgement (annual at minimum) referenced
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Acceptable Use Policy that all users must re-acknowledge the policy at least once every
+  12 months.
+- Record each user's re-acknowledgement date and method in a central register, including the user's full
+  name and unique identifier.
+- Assign responsibility for tracking re-acknowledgement to a named individual, not a group or department.
+- Retain evidence of the most recent communication sent to users about the policy, including the date
+  and sender.
+- Cross-reference the register with user access lists to confirm all current users have re-acknowledged
+  within the past 12 months.

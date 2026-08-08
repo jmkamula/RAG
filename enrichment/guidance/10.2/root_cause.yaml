@@ -1,0 +1,19 @@
+must_id: item:10.2:root_cause
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Evaluate the need for action to eliminate causes (root cause analysis)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead each root cause analysis for identified nonconformities, recording
+  their name and the date of assignment.
+- Document the specific method used for root cause analysis in each case, such as "5 Whys" or "Fishbone
+  Diagram," in the corrective action record.
+- Record the detailed findings of the root cause analysis, including contributing factors and evidence
+  reviewed, in a dated investigation report.
+- State the decision on whether corrective action is needed, referencing the documented root cause and
+  signed by the responsible individual.
+- Avoid using generic or template language for causes; describe the actual, specific root cause relevant
+  to each nonconformity.

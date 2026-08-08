@@ -1,0 +1,18 @@
+must_id: item:A.5.25:dec_handoff
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: 'Where escalated: handoff reference into A.5.26 incident register'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the triage decision for each event, including the date, time, and the name of the person making
+  the decision.
+- State clearly in the record whether the event was escalated to an incident or closed as non-incident.
+- Cross-reference escalated events by entering the corresponding incident register ID from A.5.26 in the
+  triage record.
+- Name the person responsible for entering the handoff reference, ensuring it is a specific individual
+  and not a generic team or role.
+- Retain all triage decision records and cross-references in a central, auditable location with version
+  history.

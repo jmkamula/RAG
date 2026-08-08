@@ -1,0 +1,19 @@
+must_id: item:A.6.8:channels
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Multiple reporting channels offered (email, hotline, portal, manager, ticket system) — drives
+  discoverability and accessibility under various conditions including when normal tooling is unavailable
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all available reporting channels in the procedure, naming each method such as email, hotline, web
+  portal, manager, and ticket system.
+- State how to access each channel, including contact details, URLs, or instructions for use, so staff
+  can report events in different scenarios.
+- Document a fallback reporting method for situations when primary systems are unavailable, such as a
+  direct phone number or in-person contact.
+- Name a specific individual or role responsible for maintaining the accuracy of channel information—do
+  not use a generic group or department.
+- Record the date of the last review or update of the reporting channels to show the procedure is current.

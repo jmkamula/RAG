@@ -1,0 +1,18 @@
+must_id: item:10.1:reg_source_xref
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Per-row cross-reference to the trigger source (9.2 audit finding id, 9.1 measurement breach,
+  9.3 review decision)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the trigger source for each improvement action by referencing the specific audit finding ID,
+  measurement breach, or review decision that prompted it.
+- Cross-reference each entry in the register to supporting evidence, such as the original audit report,
+  measurement log, or management review minutes.
+- Name the trigger source with a unique identifier or date — avoid vague descriptions like "audit issue"
+  or "management feedback."
+- Review the register periodically to confirm that every action has a clear, documented link to its originating
+  source.

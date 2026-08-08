@@ -1,0 +1,16 @@
+must_id: item:A.5.11:triggers
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Triggers enumerated (termination, role change, contract end, change of agreement, end of secondment)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all triggers for asset return in the procedure, including termination, role change, contract end,
+  agreement change, and end of secondment.
+- Document the date each trigger was last reviewed or updated in the procedure to show it reflects current
+  organisational practices.
+- Name the person responsible for updating triggers as a specific individual, not just a team or department.
+- Attach a signed approval page showing management has reviewed and accepted the listed triggers in the
+  current version of the procedure.

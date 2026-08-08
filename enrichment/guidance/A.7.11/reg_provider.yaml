@@ -1,0 +1,16 @@
+must_id: item:A.7.11:reg_provider
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Per-row provider with SLA reference
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each utility provider by their full legal name in a separate row of the register for every site.
+- Record the start and end dates of the current service agreement for each provider entry.
+- Cross-reference each provider row with the specific section or page of the signed service level agreement
+  (SLA).
+- Attach a copy of the most recent signed SLA for each provider and note its storage location in the register.
+- Name the responsible individual for maintaining each provider entry—do not use generic titles like "Facilities
+  Team" or "Admin".

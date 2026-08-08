@@ -1,0 +1,19 @@
+must_id: item:A.8.8:reg_status
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Per-finding status (open / mitigated / patched / accepted-with-expiry)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Record each vulnerability finding in the backlog register with a unique identifier, discovery date,
+  and detailed description.
+- 'Assign a current status to every finding: open, mitigated, patched, or accepted-with-expiry, and update
+  this status as actions are taken.'
+- Name the responsible individual for each finding, avoiding generic labels like "IT team" or "security
+  group".
+- Document the date and details of any status change, including who made the update, to maintain a clear
+  audit trail.
+- Attach supporting evidence for status changes, such as screenshots of patches applied or formal risk
+  acceptance approvals with expiry dates.

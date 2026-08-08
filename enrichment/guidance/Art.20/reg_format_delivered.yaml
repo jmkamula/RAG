@@ -1,0 +1,19 @@
+must_id: item:Art.20:reg_format_delivered
+control_ref: Art.20
+standard_id: GDPR:2016/679
+must_text: Per-row delivered format
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact format in which each data portability request was delivered, such as CSV, PDF, or XML,
+  in a dedicated column.
+- Name the staff member who prepared and delivered the data for each request, using their full name, not
+  just a job title.
+- Enter the delivery date for each request, ensuring the date is specific and not left blank or marked
+  as "pending."
+- Attach or link to a sample of the delivered data file for at least one recent request, showing the actual
+  format provided.
+- Confirm that no row lists the format as "various" or "as requested" without specifying the actual file
+  type used.

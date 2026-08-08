@@ -1,0 +1,16 @@
+must_id: item:A.7.5.4:rev_date
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Disclosure Records Program in a dated entry, signed by the
+  reviewer.
+- State the planned review interval for the Disclosure Records Program in the program documentation or
+  review schedule.
+- Cross-reference the actual review date against the planned interval to confirm the review occurred within
+  the required timeframe.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.

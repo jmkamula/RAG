@@ -1,0 +1,39 @@
+leaf_id: req:Art.30:ropa_annual_review
+control_ref: Art.30
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: foundational
+  rationale: The annual review cannot occur unless a current, structured RoPA exists. This is the baseline
+    record that will be checked for accuracy and completeness.
+  good_enough: A RoPA exists that lists all relevant processing activities, even if some details may need
+    updating during the review.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: direct
+  rationale: Each RoPA entry must reference a lawful basis for processing. The review must verify that
+    these bases are still valid and correctly documented.
+  good_enough: Each processing activity in the RoPA has a stated lawful basis, even if some may need validation
+    or correction during the review.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Designation of the Data Protection Officer (DPO)
+  category: direct
+  rationale: If a DPO is required, they must be involved in or oversee the RoPA review process to ensure
+    regulatory alignment and independence.
+  good_enough: A DPO is designated (if required), and their involvement in the review process is planned
+    or documented.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which parts of the organization and which processing activities are
+    covered, ensuring the RoPA review is comprehensive and not missing key areas.
+  good_enough: A documented ISMS scope exists that aligns with the organizational boundaries used in the
+    RoPA.

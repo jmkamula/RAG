@@ -1,0 +1,39 @@
+leaf_id: req:Art.22:automated_decision_procedure
+control_ref: Art.22
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify which processes involve
+    automated decision-making and whether they have legal or significant effects on individuals.
+  good_enough: A current RoPA that flags all processing operations involving automated decisions, even
+    if some details are pending, is sufficient to start drafting the procedure.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Before defining safeguards for automated decisions, you must confirm there is a lawful basis
+    for the processing, as required by GDPR.
+  good_enough: A documented lawful basis for each automated processing activity, even if not yet fully
+    reviewed by legal, is enough to proceed.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer (DPO) Designation
+  category: foundational
+  rationale: If a DPO is required, they must be involved in the design and oversight of procedures for
+    automated decision-making to ensure compliance and act as a contact point for data subjects.
+  good_enough: A named DPO or a clear statement that a DPO is not required, with interim contact details,
+    is sufficient to unblock drafting.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Inventory of Information and Other Associated Assets
+  category: cross_role
+  rationale: Knowing which information assets and systems are used for automated decisions helps ensure
+    the procedure covers all relevant data flows and technical safeguards.
+  good_enough: A basic asset inventory identifying systems involved in automated processing, even if not
+    fully detailed, is enough to proceed.

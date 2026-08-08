@@ -1,0 +1,19 @@
+must_id: item:A.8.8:zero_day_handling
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Zero-day handling procedure (mitigation while patch unavailable; cross-link to A.5.7)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for handling zero-day vulnerabilities, including temporary mitigations
+  to reduce risk while no patch is available.
+- Cross-reference the zero-day handling procedure to the relevant section of the Threat Intelligence control
+  (A.5.7) in your documentation.
+- Name the responsible individual who must approve and oversee zero-day mitigation actions, avoiding generic
+  titles like "IT" or "the team".
+- Record each zero-day incident with the date identified, mitigation steps taken, and the date when a
+  permanent fix is applied.
+- State the communication protocol for notifying affected stakeholders about zero-day risks and interim
+  mitigations, with a sample notification template included.

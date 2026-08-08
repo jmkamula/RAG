@@ -1,0 +1,18 @@
+must_id: item:A.5.30:rec_services
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Services in scope per record (links to service register entries)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all services affected by each recovery event, using their exact names as shown in your official
+  service register.
+- Cross-reference each listed service to its unique entry in the service register, including register
+  ID or direct link.
+- Record the date and time of the recovery event alongside the service details in the event record.
+- Name the person responsible for entering and verifying the service information for each recovery event
+  record.
+- Avoid using generic service descriptions or placeholders; specify only services formally documented
+  in your service register.

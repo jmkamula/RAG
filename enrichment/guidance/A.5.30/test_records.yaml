@@ -1,0 +1,20 @@
+must_id: item:A.5.30:test_records
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Test cadence and records (last test date per service, outcome, gaps identified, remediation
+  status)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the last test date for each critical ICT service in a dated log, clearly linking each entry to
+  the specific service tested.
+- Document the test outcome for each service, including whether objectives were met and any disruptions
+  or failures encountered.
+- List all gaps or weaknesses identified during each test, referencing the specific ICT service and test
+  date.
+- Track the remediation status for each identified gap, noting the responsible individual and the completion
+  date or current status.
+- Name the test owner as a specific individual for each service—do not use generic roles or teams as the
+  owner.

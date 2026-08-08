@@ -1,0 +1,19 @@
+must_id: item:A.8.30:rev_vendor_incidents
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Vendor incident-pattern review (cross-link to A.5.22 supplier review)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for reviewing outsourced development vendor incidents, specifying their
+  full name and job title in the review record.
+- Document each vendor’s incident history for the review period, including incident dates, types, and
+  resolution outcomes in a dated summary report.
+- Cross-reference the incident review summary with the most recent supplier performance review under control
+  A.5.22, noting the date and location of the related record.
+- Record any actions or decisions taken as a result of the incident-pattern review, including who approved
+  them and the date of approval.
+- Avoid using generic descriptions like “no issues” or “as usual” in review records; provide specific
+  findings and supporting evidence for each vendor.

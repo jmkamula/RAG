@@ -1,0 +1,17 @@
+must_id: item:A.5.25:triage_timeline
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Timeline for triage decision after detection
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the maximum allowed time from security event detection to triage decision in the procedure, specifying
+  hours or minutes.
+- Document the date and time when each security event is detected and when the triage decision is made
+  in an event log.
+- Assign a named individual or specific role responsible for making triage decisions, avoiding vague references
+  like "the team" or "IT".
+- Record any exceptions to the timeline with a justification and approval from a designated authority,
+  including date and signature.

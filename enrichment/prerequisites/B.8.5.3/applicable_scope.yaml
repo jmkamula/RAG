@@ -1,0 +1,40 @@
+leaf_id: req:B.8.5.3:applicable_scope
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the overall boundaries of your ISMS before you can define where processor
+    disclosures of PII occur. This ensures that all relevant contexts are considered and nothing critical
+    is missed.
+  good_enough: A documented scope statement that clearly identifies included business units, systems,
+    and processes is available—even if it will be refined later.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is essential to identify which information assets contain PII
+    and may be disclosed to third parties. Without this, you can't reliably map disclosure contexts.
+  good_enough: A basic inventory of information assets, with those containing PII flagged, is available
+    and accessible for reference.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purpose for processing PII to determine when and why disclosures to third
+    parties are necessary. This underpins the legitimacy and scope of such disclosures.
+  good_enough: A list of processing purposes for each PII context is documented, even if some purposes
+    are still being clarified.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for processing PII is required to justify disclosures to third
+    parties and to ensure compliance with privacy obligations.
+  good_enough: Each processing activity involving PII has a stated lawful basis, even if supporting evidence
+    is still being gathered.

@@ -1,0 +1,42 @@
+leaf_id: req:A.8.33:applicable_test_data_scope
+control_ref: A.8.33
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines which systems, processes, and information types are covered by the
+    organisation’s security controls, including test environments. You need this to know what test data
+    could be in or out of scope.
+  good_enough: The scope statement should clearly mention all environments and data types relevant to
+    testing, even if only at a high level.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register identifies information assets, including test datasets and environments.
+    Without it, you can’t reliably list or describe what constitutes “test information.”
+  good_enough: A working inventory that includes test data assets (synthetic, sampled, or production-derived)
+    and their locations is sufficient to proceed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The classification scheme tells you how different types of information—including test data—are
+    labelled and handled. This is essential for distinguishing test data from other data types and for
+    applying appropriate controls.
+  good_enough: A documented scheme that covers test data categories and their required handling is enough
+    to unblock drafting.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The security policy sets the overall rules for information handling, including the use and
+    protection of test information. It provides the baseline expectations for what should be included
+    in the test data scope.
+  good_enough: A current, approved policy that references test data or test environments in its scope
+    or principles is sufficient.

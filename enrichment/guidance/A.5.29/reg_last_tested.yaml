@@ -1,0 +1,17 @@
+must_id: item:A.5.29:reg_last_tested
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Last-tested date per row (drives stale-scenario detection — scenarios not exercised in N months
+  flag for refresh)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each disruption scenario was last tested in a dedicated column within the Disruption
+  Scenario Register.
+- Name the individual responsible for updating test dates, ensuring a specific person is listed rather
+  than a team or department.
+- Cross-reference each scenario entry with supporting evidence of the test, such as a signed test report
+  or meeting minutes.
+- Review the register quarterly to confirm that no scenario has a missing or undated last-tested entry.

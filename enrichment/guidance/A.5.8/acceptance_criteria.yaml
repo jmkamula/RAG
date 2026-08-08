@@ -1,0 +1,19 @@
+must_id: item:A.5.8:acceptance_criteria
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Risk-acceptance criteria stated (when residual risk forces escalation; named approver per tier)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific risk-acceptance thresholds for each project tier in the procedure, including clear
+  criteria for when escalation is required.
+- Name the individual approver for each risk tier, ensuring each is a specific person and not a generic
+  role or group.
+- Document the process for recording risk-acceptance decisions, including the date, project name, risk
+  description, and approver’s signature or written confirmation.
+- Cross-reference the procedure with the organisation’s risk register to show how project risks align
+  with overall risk management practices.
+- Review the procedure to confirm that no risk-acceptance criteria are left as “to be determined” or copied
+  boilerplate from templates.

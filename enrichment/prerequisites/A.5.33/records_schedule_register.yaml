@@ -1,0 +1,47 @@
+leaf_id: req:A.5.33:records_schedule_register
+control_ref: A.5.33
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the organisational and information boundaries before you can identify which
+    records classes are in scope for the records schedule. The schedule must align with the ISMS scope.
+  good_enough: A documented scope statement that clearly defines the organisational units, activities,
+    and information assets covered by the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The records schedule must reference all relevant information assets, so you need an up-to-date
+    asset register to identify what records exist and where they are held.
+  good_enough: A basic inventory of information assets, including data repositories and record types,
+    is available and reviewed for completeness.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Each record class in the schedule must be classified according to sensitivity and criticality,
+    which requires an established classification scheme.
+  good_enough: A documented classification scheme exists and is applied to at least major record classes,
+    even if not yet fully rolled out.
+- ref: A.5.31
+  standard_id: ISO27001:2022
+  title: Legal, statutory, regulatory and contractual requirements
+  category: direct
+  rationale: Retention and protection requirements for records are often driven by legal and regulatory
+    obligations, which must be identified and documented before you can assign them in the records schedule.
+  good_enough: A list or register of key legal and regulatory requirements relevant to information retention
+    and protection is available, even if not exhaustive.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of ownership and responsibility is needed for each record class in the schedule,
+    so roles and responsibilities must be defined first.
+  good_enough: A basic roles and responsibilities matrix exists, showing who is accountable for information
+    assets and records management.

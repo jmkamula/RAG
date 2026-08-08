@@ -1,0 +1,16 @@
+must_id: item:B.8.3.1:rev_reviewer
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Product + Trust)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer for each support program as a specific individual, listing their full name and role,
+  not just a team or department.
+- Record the review date and time for each support program in a dated log or meeting minutes.
+- Document the involvement of the Data Protection Officer, a Product representative, and a Trust representative
+  in the review, specifying their participation.
+- Retain signed or acknowledged evidence from all three required roles confirming their review of the
+  support program.

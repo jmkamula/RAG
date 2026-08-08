@@ -1,0 +1,40 @@
+leaf_id: req:A.7.3.5:objection_procedure
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: You must know the lawful basis for each processing activity before you can determine if and
+    how individuals can object. The objection procedure depends on whether processing is based on legitimate
+    interests, direct marketing, or other grounds.
+  good_enough: A documented list of processing activities with their lawful bases identified, even if
+    not fully mapped to every data flow yet.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Clear documentation of processing purposes is essential to assess if an objection is valid
+    and to apply the correct response (e.g., direct marketing vs. legitimate interests).
+  good_enough: A basic register of processing purposes linked to activities, even if some purposes are
+    still being clarified.
+- ref: Art.21
+  standard_id: GDPR:2016/679
+  title: Right to Object
+  category: cross_role
+  rationale: The GDPR’s Article 21 defines the legal requirements and scenarios for objections, which
+    your procedure must address to be effective and compliant.
+  good_enough: A summary or working understanding of Article 21’s requirements, not necessarily a full
+    legal analysis.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of your organization and which processing activities are in
+    scope for privacy management, so the objection procedure covers all relevant areas.
+  good_enough: A draft scope statement that identifies the main business units and processing activities
+    covered by the ISMS and PIMS.

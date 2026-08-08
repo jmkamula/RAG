@@ -1,0 +1,15 @@
+must_id: item:A.8.6:rev_date
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date for the Capacity Program in a dated log or register entry.
+- State the planned review interval for the Capacity Program in a documented schedule or policy.
+- Compare the actual review date to the planned interval and document any deviations with an explanation.
+- Name the reviewer as a specific individual, not a team or department, in the review record.
+- Retain evidence of the completed review, such as meeting minutes or a signed review report, with the
+  review date clearly visible.

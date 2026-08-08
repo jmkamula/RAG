@@ -1,0 +1,17 @@
+must_id: item:4.1:scope_drivers
+control_ref: '4.1'
+standard_id: ISO27001:2022
+must_text: Sectoral / regulatory drivers per domain (which laws or rules force coverage of which domain)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each information security domain in your scope and assign a unique name to each domain for clear
+  identification.
+- Identify and record the specific sectoral or regulatory requirements that apply to each domain, citing
+  the exact law, regulation, or standard.
+- Cross-reference each domain with its corresponding regulatory driver in a dated scope document or register.
+- Name the person responsible for maintaining this mapping as a specific individual, not a team or department.
+- Review and update the mapping whenever a new regulation or domain is added, and keep a dated change
+  log.

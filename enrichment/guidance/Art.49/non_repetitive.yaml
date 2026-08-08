@@ -1,0 +1,20 @@
+must_id: item:Art.49:non_repetitive
+control_ref: Art.49
+standard_id: GDPR:2016/679
+must_text: Non-repetitive transfer constraint for Art.49.1 second-paragraph compelling-legitimate-interests
+  route
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each data transfer using the compelling legitimate interests route, including date, purpose,
+  and justification, in a central transfer log.
+- State explicitly in each transfer record that the transfer is non-repetitive and describe the circumstances
+  that make it exceptional.
+- Name the decision-maker who approved the use of this derogation for each transfer, avoiding generic
+  titles or group names.
+- Retain evidence showing that no other transfer mechanism under GDPR was available or suitable before
+  relying on this derogation.
+- Flag any instance where the same data or data subject is transferred repeatedly under this route, as
+  auditors will challenge repetitive use.

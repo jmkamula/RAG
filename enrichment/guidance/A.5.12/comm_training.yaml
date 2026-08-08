@@ -1,0 +1,17 @@
+must_id: item:A.5.12:comm_training
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Classification training completion captured at user level (proves users can apply the scheme)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each user's completion of classification scheme training in a dated training log or learning
+  management system report.
+- Name the owner responsible for maintaining the training records as a specific individual, not a generic
+  team or department.
+- Cross-reference each user's training record with their unique identifier, such as employee ID or email
+  address.
+- Retain evidence of training content and completion, such as signed attendance sheets or digital certificates,
+  for all users.

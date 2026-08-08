@@ -1,0 +1,17 @@
+must_id: item:A.8.14:reg_service
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Per-test service tested
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the name of each service tested in the Failover Test Register for every individual failover test
+  entry.
+- State the date and time each failover test was performed alongside the corresponding service name in
+  the register.
+- Name the person responsible for conducting or overseeing each failover test for every service, not just
+  a generic team or department.
+- Cross-reference each test entry with supporting evidence, such as test logs or screenshots, to confirm
+  the specific service tested.

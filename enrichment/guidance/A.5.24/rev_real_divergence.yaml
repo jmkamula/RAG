@@ -1,0 +1,20 @@
+must_id: item:A.5.24:rev_real_divergence
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Real-incident vs framework divergence (where actual responses deviated from framework — was
+  the framework too prescriptive, missing a path, or just unused?)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and list all real security incidents from the review period, including dates, incident owners,
+  and documented response actions.
+- Compare each incident response with the steps outlined in the current Incident Management Framework,
+  noting any deviations or missing procedures.
+- Record the reason for each divergence, specifying whether the framework was too prescriptive, lacked
+  guidance, or was not followed.
+- Name the reviewer as a specific individual responsible for conducting and signing off on the divergence
+  analysis, avoiding generic titles or teams.
+- Document any framework updates or corrective actions proposed as a result of the review, including the
+  date and decision-maker’s name.

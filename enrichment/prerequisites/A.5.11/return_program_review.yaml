@@ -1,0 +1,38 @@
+leaf_id: req:A.5.11:return_program_review
+control_ref: A.5.11
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You can't review the effectiveness of the asset return process unless you know which assets
+    are in scope. The asset register defines the population of items that must be tracked for return.
+  good_enough: A current, reasonably complete asset register exists, covering all asset types subject
+    to return, even if some minor gaps remain.
+- ref: A.6.5
+  standard_id: ISO27001:2022
+  title: Responsibilities after termination or change of employment
+  category: direct
+  rationale: The asset return process is triggered by employment changes. Clear post-employment responsibilities
+    ensure the review covers all relevant scenarios and that the process is properly authorised.
+  good_enough: Documented procedures exist for handling assets when staff leave or change roles, even
+    if not all edge cases are covered.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Asset criticality and required handling depend on classification. The review must consider
+    whether higher-risk assets are being returned and access revoked appropriately.
+  good_enough: A basic classification scheme is in place and applied to assets in the register, even if
+    some assets are not yet classified.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The review should only cover assets and processes within the defined ISMS scope. Without
+    a scope statement, you can't know what should be included.
+  good_enough: A documented ISMS scope exists, even if it's high-level or pending minor clarifications.

@@ -1,0 +1,18 @@
+must_id: item:A.5.29:scenarios
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Disruption scenarios considered (cyber attack [link to A.5.7 threat intel], natural event,
+  supplier failure [link to A.5.21], regulatory action, key-personnel loss)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each disruption scenario considered in the plan, including cyber attack, natural event, supplier
+  failure, regulatory action, and key-personnel loss.
+- Cross-reference the cyber attack scenario to your threat intelligence documentation as required by control
+  A.5.7.
+- Link the supplier failure scenario to your supplier management records as required by control A.5.21.
+- Name the person responsible for maintaining the disruption scenarios, avoiding generic roles like "the
+  team" or "IT".
+- Date and version the disruption plan to show when scenarios were last reviewed or updated.

@@ -1,0 +1,15 @@
+must_id: item:A.8.24:reg_lifecycle_dates
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Per-row lifecycle dates (generated / activated / next-rotation / retirement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each cryptographic key was generated in a dedicated column of the key register.
+- Enter the activation date for each key, showing when it was first put into use, in the register.
+- Specify the planned next rotation date for each key, based on your key management policy, in the register.
+- Document the retirement date for each key, indicating when it was removed from service, in the register.
+- Name the responsible individual for each key entry—avoid using generic roles like "IT team" or "Security
+  department".

@@ -1,0 +1,14 @@
+must_id: item:5.3:owner
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Named owner of the matrix (typically ISMS Manager)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the matrix as a specific individual, such as the ISMS Manager, not a team or department.
+- Record the owner's full name and job title directly on the matrix document, along with the date of assignment.
+- Obtain the owner's signature or written confirmation acknowledging responsibility for maintaining and
+  updating the matrix.
+- Retain a dated copy of the matrix in your document management system to show current ownership.

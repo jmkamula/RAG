@@ -1,0 +1,18 @@
+must_id: item:A.5.13:reg_external_ingress
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: External-ingress flag per row where docs arrive from outside (triggers the external_handling
+  SHOULD path)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add an "External Ingress" column to your Labelling Coverage Register to clearly indicate if each document
+  originated from outside your organisation.
+- Mark each row with a "Yes" or "No" in the "External Ingress" column based on the document's source,
+  using dated supporting evidence where possible.
+- Name the person responsible for verifying the external origin status for each document, listing them
+  by full name rather than a team or department.
+- Review the register to confirm that no entries have a blank or ambiguous value in the "External Ingress"
+  column.

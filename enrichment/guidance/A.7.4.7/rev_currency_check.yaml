@@ -1,0 +1,18 @@
+must_id: item:A.7.4.7:rev_currency_check
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Schedule currency check — recent regulatory / business changes reflected
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to be responsible for reviewing the retention program schedule and record
+  their name and review date in the document.
+- Document the date of the most recent review and list any regulatory or business changes considered during
+  that review.
+- Cross-reference updated retention periods to specific new or amended laws, regulations, or business
+  policies in the review record.
+- Name the owner as a specific person, not a group or department, to avoid ambiguity in accountability.
+- Retain a signed approval or confirmation from the reviewer that all relevant changes have been incorporated
+  into the retention schedule.

@@ -1,0 +1,20 @@
+must_id: item:Art.85:proc_legal_basis_docs
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: Per-derogation legal-basis documentation requirement (which national-law provision authorises
+  which derogation for which activity)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific national law provision that authorises each derogation, citing the exact article,
+  section, and jurisdiction.
+- State the precise activity or processing operation for which the derogation is being applied, with a
+  clear description and purpose.
+- Cross-reference each derogation to its supporting legal basis in a central register, linking the activity,
+  derogation, and law provision.
+- Name the responsible individual who approved the application of each derogation, avoiding generic titles
+  or group references.
+- Retain dated records of all derogation applications and their legal justifications, ensuring each record
+  is version-controlled and not left undated.

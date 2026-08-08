@@ -1,0 +1,18 @@
+must_id: item:A.8.3:reg_exception_log
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Exception log for temporary elevated access per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each instance of temporary elevated access in the register, including the user’s name, system,
+  access level, and start and end dates.
+- Document the business reason for granting temporary elevated access for each entry, referencing the
+  related approval or ticket number.
+- Name the approver for each exception as a specific individual, not a group or generic title.
+- Attach evidence of access removal or downgrade, such as a ticket closure or system log, to each relevant
+  register row.
+- Review the register monthly and sign off on completed exceptions to confirm all temporary access has
+  been revoked as scheduled.

@@ -1,0 +1,19 @@
+must_id: item:A.7.2.7:rev_rights_routing_test
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Rights-routing test — sampled subject requests verified to route correctly regardless of party
+  addressed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a sample of recent data subject requests received by each joint controller party and record their
+  details in a dated test log.
+- Trace each sampled request through the routing process, documenting how and when it was forwarded to
+  the responsible party for handling.
+- Confirm the final response to each request, noting the responsible individual and the date the request
+  was fulfilled.
+- Attach supporting evidence, such as email chains or ticketing system records, showing the complete routing
+  and handling path for each sampled request.
+- Name the reviewer who conducted the test as a specific individual, not as a team or department.

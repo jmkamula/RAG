@@ -1,0 +1,16 @@
+must_id: item:8.2:scope_change_drivers
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new asset class, sector entry)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific events that require re-scoping, such as acquisition of new asset types, entry into new
+  sectors, or significant business changes.
+- Document the trigger list in the operational assessment scope document, including the date of last update
+  and the person responsible.
+- Name the owner as a specific individual responsible for monitoring triggers, not a generic title or
+  team.
+- Record each time the trigger list is reviewed or updated, including the review date and reviewer’s name.

@@ -1,0 +1,19 @@
+must_id: item:A.7.2.3:rev_children_audit
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: Children-consent audit — age-gates functioning where age-of-consent applies
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process used to determine user age before collecting personal data, including screenshots
+  or workflow diagrams showing age-gate steps.
+- Record the date and outcome of the most recent test of age-gate functionality, including any issues
+  found and actions taken.
+- Name the individual responsible for maintaining and monitoring the age-gate mechanism, listing their
+  full name and job title.
+- Retain evidence of parental consent obtained for users below the age of consent, such as completed consent
+  forms or system logs.
+- State the specific age threshold used and reference the applicable legal requirement, avoiding generic
+  or missing age values.

@@ -1,0 +1,20 @@
+must_id: item:A.5.30:rec_disruption_link
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Cross-reference to A.5.29 plan_activation_record where this recovery was BCP-driven (closes
+  loop)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the per-recovery event record to the specific plan_activation_record from A.5.29 when
+  the recovery was triggered by a business continuity plan.
+- Record the date and time of the recovery event, matching these details to the corresponding activation
+  record for traceability.
+- Name the individual who confirmed the recovery was BCP-driven, using their full name rather than a generic
+  role or team.
+- Attach or link supporting documentation, such as incident reports or meeting minutes, that demonstrate
+  the connection between the recovery and the BCP activation.
+- Review the event record to confirm no references are missing or ambiguous, especially where multiple
+  activations occurred close together.

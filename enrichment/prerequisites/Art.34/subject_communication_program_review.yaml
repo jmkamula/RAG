@@ -1,0 +1,43 @@
+leaf_id: req:Art.34:subject_communication_program_review
+control_ref: Art.34
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify which data processing
+    operations could trigger a personal data breach requiring Art.34 notification. Without this, you can't
+    reliably review or scope your subject communication program.
+  good_enough: A current, working RoPA that covers all relevant processing activities and is accessible
+    to those responsible for breach response and notification.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity is essential to assess the risk
+    and defensibility of decisions around breach communications. This ensures that exceptions and justifications
+    for not notifying are grounded in the correct legal context.
+  good_enough: A mapped list of lawful bases for all processing activities, sufficient to inform breach
+    response decisions and communication content.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated Data Protection Officer (DPO) is typically responsible for overseeing GDPR compliance,
+    including breach notification processes and annual reviews. Without a DPO or equivalent, the review
+    process lacks required oversight.
+  good_enough: A named DPO or formally assigned privacy lead with responsibility for breach notification
+    and program review.
+- ref: Art.34
+  standard_id: GDPR:2016/679
+  title: Communication of a Personal Data Breach to the Data Subject
+  category: direct
+  rationale: You must have a documented process for communicating breaches to data subjects before you
+    can review its effectiveness or compliance. The review checks if this process meets Art.34.2 requirements
+    and is applied correctly.
+  good_enough: A documented and operational breach notification procedure that covers content, timing,
+    and exceptions as required by Art.34.

@@ -1,0 +1,14 @@
+must_id: item:Art.13:rec_prior_archive
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Prior versions retained for audit (proves what subjects saw at the time of collection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Retain a dated copy of every published privacy notice version in a secure, access-controlled location.
+- Record the publication date and removal date for each privacy notice version in a version control log.
+- Name the individual responsible for updating and archiving privacy notices, not just a team or department.
+- Cross-reference each privacy notice version with the data collection forms or systems in use at the
+  time.

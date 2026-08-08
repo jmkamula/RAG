@@ -1,0 +1,16 @@
+must_id: item:A.7.4.1:reg_field_id
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Unique field identifier per row (form_id + field_name)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each field by combining the form's ID and the field's name in a single
+  column.
+- Record each field as a separate row in the inventory, ensuring no duplicate identifier appears across
+  rows.
+- Name the owner of the inventory as a specific individual, not a team or department.
+- Document the date the inventory was last updated in a clearly labeled column.
+- Cross-reference the inventory with actual forms to confirm all fields are listed with their unique identifiers.

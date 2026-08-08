@@ -1,0 +1,17 @@
+must_id: item:A.8.31:reg_env_id
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Per-row environment unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each environment entry in the register, using a consistent format such
+  as "ENV-001", "ENV-002", and so on.
+- Record the unique identifier in a dedicated column for every row, ensuring there are no duplicate values
+  across the register.
+- Cross-reference each environment's unique identifier in related documentation, such as risk assessments
+  or access control lists, to support traceability.
+- Confirm that every environment entry has a completed unique identifier field; do not leave any row blank
+  or marked as "TBD".

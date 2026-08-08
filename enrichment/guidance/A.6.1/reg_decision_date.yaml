@@ -1,0 +1,13 @@
+must_id: item:A.6.1:reg_decision_date
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Decision date per record (proves the screening completed BEFORE access was granted per A.5.18)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date when the screening decision was made for each candidate in the register.
+- State the name of the individual who approved the screening decision for each candidate.
+- Cross-reference each candidate’s access start date to confirm it is after the screening decision date.
+- Avoid leaving the decision date field blank or using placeholders like "TBD" or "upon hire" in the register.

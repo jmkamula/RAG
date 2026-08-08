@@ -1,0 +1,17 @@
+must_id: item:A.8.27:rev_findings_update
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Findings propagated to policy / register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each architecture principles review finding in a dated log, including the specific principle
+  and the outcome of the review.
+- Cross-reference each finding to the relevant policy or register entry by listing the exact document
+  name and section updated.
+- Document the date and details of any policy or register change resulting from the review, including
+  the name of the person who made the update.
+- Name the individual responsible for confirming that all findings have been addressed in the relevant
+  documents, not just a team or department.

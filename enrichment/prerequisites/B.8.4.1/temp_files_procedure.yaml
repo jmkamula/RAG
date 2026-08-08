@@ -1,0 +1,41 @@
+leaf_id: req:B.8.4.1:temp_files_procedure
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which systems, processes, and data are covered by your ISMS,
+    including whether processor activities and temporary files are in-scope. Without this, you can't be
+    sure your procedure covers all relevant temp files.
+  good_enough: The scope must explicitly mention processor activities and any environments where temp
+    files containing customer PII may be generated.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You need an up-to-date asset register to know where temp files might exist (e.g., servers,
+    endpoints, cloud storage). This is essential for identifying what needs to be covered by your disposal
+    procedure.
+  good_enough: A basic inventory exists listing all major systems and storage locations where temp files
+    containing customer PII could be created.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: A data classification scheme ensures you can identify which temp files actually contain PII
+    and must be disposed of under this control. Without it, you risk missing or misclassifying files.
+  good_enough: There is a documented method for classifying files, and it is clear which temp files are
+    considered to contain PII.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Knowing the purpose for which PII is processed helps determine when temp files are created
+    and when they are no longer needed, which is critical for setting disposal timelines.
+  good_enough: The purposes for processing customer PII are documented, and there is clarity on when temp
+    files become obsolete for each purpose.

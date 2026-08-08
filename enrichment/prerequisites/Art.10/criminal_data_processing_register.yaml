@@ -1,0 +1,40 @@
+leaf_id: req:Art.10:criminal_data_processing_register
+control_ref: Art.10
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of processing
+  category: direct
+  rationale: Before documenting criminal data processing, you must confirm that each activity has a valid
+    lawful basis under GDPR. Art.10 processing is only allowed if it meets an Art.6 lawful basis and is
+    authorised by Union or Member State law.
+  good_enough: Each criminal data processing activity is mapped to a specific Art.6 lawful basis, with
+    a brief justification for selection.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: A general RoPA is needed to identify all processing activities, including those involving
+    criminal data. This ensures you know which activities fall under Art.10 and require special registration.
+  good_enough: A current RoPA exists, listing all processing activities and flagging those that involve
+    criminal convictions/offences.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer Designation
+  category: foundational
+  rationale: If you process criminal data at scale, you may be required to appoint a DPO. The DPO is typically
+    responsible for overseeing registers and ensuring compliance with Art.10 requirements.
+  good_enough: A DPO is appointed if required, or a documented assessment shows why a DPO is not needed
+    for criminal data processing.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: Your ISMS scope should explicitly include processing of criminal data if relevant. This ensures
+    that security and privacy controls cover these sensitive activities.
+  good_enough: The ISMS scope statement mentions criminal data processing or confirms it is out of scope,
+    with justification.

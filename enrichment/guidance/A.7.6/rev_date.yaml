@@ -1,0 +1,15 @@
+must_id: item:A.7.6:rev_date
+control_ref: A.7.6
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent secure work program review in a central log or register.
+- State the planned review interval in months or years within the secure work program documentation.
+- Confirm that the actual review date falls within the documented planned interval since the previous
+  review.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Retain a signed or digitally approved record of the review, including the date and reviewer’s name.

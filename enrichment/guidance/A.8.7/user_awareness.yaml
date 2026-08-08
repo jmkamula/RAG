@@ -1,0 +1,17 @@
+must_id: item:A.8.7:user_awareness
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: User awareness component (cross-link to A.6.3 training)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference the specific section in your malware procedure that describes user awareness and training
+  requirements related to malware risks.
+- Cross-link the malware procedure to your documented security awareness training program, explicitly
+  naming the relevant A.6.3 training materials or sessions.
+- Record the date and content of the most recent user awareness session covering malware, including a
+  list of attendees.
+- Name the owner responsible for maintaining and updating the user awareness content as a specific individual,
+  not a team or department.

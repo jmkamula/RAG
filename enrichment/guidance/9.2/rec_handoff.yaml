@@ -1,0 +1,17 @@
+must_id: item:9.2:rec_handoff
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Per-audit handoff to 10.2 NC/CA procedure where findings include nonconformities
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of each internal audit, including whether any nonconformities were identified,
+  in the audit execution record.
+- Name the specific individual responsible for handing off nonconformity findings to the corrective action
+  process—avoid listing a team or department.
+- Document the reference number or identifier linking each nonconformity to the corresponding entry in
+  the corrective action tracking system.
+- Attach evidence of the communication or handoff, such as an email or signed form, showing the transfer
+  of findings to the corrective action owner.

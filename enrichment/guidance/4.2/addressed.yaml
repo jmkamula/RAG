@@ -1,0 +1,19 @@
+must_id: item:4.2:addressed
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Which requirements the ISMS will address per party (and how)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each interested party by name and role in the Interested Parties and Requirements Register, linking
+  to relevant contracts or agreements where applicable.
+- Record the specific information security requirements for each party, referencing the source such as
+  a regulation, contract, or internal policy.
+- State clearly in the register how the ISMS will address each listed requirement, including the related
+  ISMS control or process.
+- Assign a named individual as the owner for each requirement, avoiding generic labels like "the team"
+  or "IT department".
+- Date and version the register, updating it whenever requirements or parties change, and retain previous
+  versions for audit trail.

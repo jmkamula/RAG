@@ -1,0 +1,18 @@
+must_id: item:A.8.18:scope_change_drivers
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new utility class, new vendor diagnostic, new investigation tool)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current utility programs in scope, including their names, purposes, and deployment locations,
+  in a dated inventory document.
+- Document a trigger list that specifies events requiring re-scoping, such as introduction of a new utility
+  class, vendor diagnostic, or investigation tool.
+- Assign a named individual responsible for reviewing the trigger list and updating the scope when any
+  trigger event occurs.
+- Record each re-scoping decision with the date, the trigger event, and the person who approved the updated
+  scope.
+- Name the owner as a specific individual—do not use generic terms like "IT team" or "Operations Department."

@@ -1,0 +1,16 @@
+must_id: item:6.1.3:soa_implementation_status
+control_ref: 6.1.3
+standard_id: ISO27001:2022
+must_text: Implementation status per included control (Implemented / Partially / Planned)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each included control in the Statement of Applicability with a clear status marked as "Implemented,"
+  "Partially Implemented," or "Planned."
+- Record the date when each status was last updated to show the information is current and actively maintained.
+- Name the responsible individual for verifying each control’s status, avoiding generic titles like "IT
+  team" or "management."
+- Attach supporting evidence, such as test results or project plans, for any control marked as "Partially
+  Implemented" or "Planned."

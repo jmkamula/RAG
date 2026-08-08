@@ -1,0 +1,18 @@
+must_id: item:A.7.4.7:proc_periodic_review
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Periodic review — schedule refreshed on regulatory change or business shift
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the review schedule for the PII Retention Procedure, including specific dates or triggers such
+  as regulatory updates or major business changes.
+- Assign a named individual responsible for monitoring regulatory changes and business shifts that could
+  impact PII retention requirements.
+- Record each review activity in a log, noting the date, participants, and any updates made to the procedure.
+- State the process for updating the review schedule, ensuring it reflects the latest regulatory or business
+  environment changes.
+- Name the review owner as a specific person, not a generic team or department, to avoid auditor concerns
+  about accountability.

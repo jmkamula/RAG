@@ -1,0 +1,55 @@
+leaf_id: req:A.5.15:access_control_policy
+control_ref: A.5.15
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of your organisation and which assets are covered by your ISMS
+    before you can define access control rules that are relevant and complete.
+  good_enough: A documented scope statement that clearly identifies the boundaries and applicability of
+    the ISMS, including key business units, locations, and asset types.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Access control rules must be based on a current inventory of information assets; without
+    knowing what assets exist, you cannot define who should have access to what.
+  good_enough: A basic, up-to-date list of information assets (physical and logical) that will be covered
+    by the access control policy.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Access rules often depend on the sensitivity or classification of assets, so you need a scheme
+    that defines these classes before setting policy.
+  good_enough: A documented scheme that groups assets into at least two or three sensitivity levels (e.g.,
+    public, internal, confidential), even if not all assets are yet classified.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: The access control policy must specify who is responsible for approving, granting, and reviewing
+    access; these roles must be defined first.
+  good_enough: A list of key information security roles and their basic responsibilities, especially those
+    involved in access decisions.
+- ref: A.5.3
+  standard_id: ISO27001:2022
+  title: Segregation of Duties
+  category: direct
+  rationale: The policy needs to reference any critical combinations of duties that must be separated
+    to prevent conflicts of interest or fraud.
+  good_enough: An initial analysis or list of duties that should not be combined, even if only covering
+    the most obvious risk areas for now.
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: direct
+  rationale: The access control policy is a topic-specific policy that must align with and reference the
+    overarching information security policy framework.
+  good_enough: A published, approved information security policy that sets out the organisation’s general
+    approach to information security.

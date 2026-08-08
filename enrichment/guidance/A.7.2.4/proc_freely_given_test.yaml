@@ -1,0 +1,19 @@
+must_id: item:A.7.2.4:proc_freely_given_test
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Freely-given test — no detriment for refusal, no bundled coercion
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for offering individuals a genuine choice to give or withhold consent, including
+  clear language that refusal will not affect service access.
+- Record a dated example of a consent request form or screen showing that consent is not bundled with
+  unrelated terms or conditions.
+- State explicitly in the procedure that declining consent does not result in denial of core services
+  or negative consequences.
+- Name the owner responsible for reviewing consent mechanisms as a specific individual, not a team or
+  department.
+- Retain evidence of periodic reviews confirming that consent requests remain separate from other agreements
+  and are not presented as mandatory.

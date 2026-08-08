@@ -1,0 +1,15 @@
+must_id: item:A.8.19:scope_systems
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Operational systems enumerated (production + customer-facing + business-critical)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all operational systems, including production, customer-facing, and business-critical platforms,
+  in a dated inventory document.
+- Name each system's business owner as a specific individual, not as a team or department.
+- Cross-reference each system in the inventory with supporting documentation, such as network diagrams
+  or asset registers.
+- Record the date of the last review and the reviewer’s name on the inventory to show it is current.

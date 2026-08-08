@@ -1,0 +1,17 @@
+must_id: item:A.7.3.8:scope_change_drivers
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Trigger list (new consent/contract-basis processing)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all contexts where personal data is processed under new consent or contract, including system names
+  and processing purposes, in a dated register.
+- Assign a specific individual as the owner responsible for maintaining and updating the scope list, not
+  a team or department.
+- Record the trigger event, such as new consent obtained or new contract signed, with the date and reference
+  to supporting documentation.
+- Review and update the scope register at least annually, documenting the review date and the person who
+  performed the review.

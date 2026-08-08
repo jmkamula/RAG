@@ -1,0 +1,18 @@
+must_id: item:A.8.18:reg_jit_vault
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Per-row JIT-vault availability flag (where applicable, indicates non-standing-install path)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column in the Privileged Utility Programs Register to indicate whether each program is available
+  via just-in-time (JIT) vault access.
+- Record for each program whether JIT-vault access is available, using a clear yes/no or similar unambiguous
+  flag.
+- Name the specific individual responsible for maintaining the JIT-vault availability information, not
+  a team or department.
+- Update the register entry with the date when the JIT-vault availability flag was last reviewed or changed.
+- Attach supporting documentation or a link showing how JIT-vault access is configured for each flagged
+  program, if applicable.

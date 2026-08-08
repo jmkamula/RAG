@@ -1,0 +1,15 @@
+must_id: item:A.7.10:reg_holder
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Per-row current holder
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the individual currently responsible for each storage media item in a dedicated
+  "Current Holder" column of the register.
+- Update the register immediately whenever custody of a storage media item changes, including the date
+  of transfer and new holder's name.
+- Name the current holder as a specific person, not a team, department, or generic title.
+- Retain previous holder information in an audit trail or history log linked to each register entry.

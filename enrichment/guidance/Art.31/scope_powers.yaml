@@ -1,0 +1,19 @@
+must_id: item:Art.31:scope_powers
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Art.58 SA powers acknowledged — info access (Art.58.1.a-f), corrective (Art.58.2), authorisation
+  (Art.58.3)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each supervisory authority (SA) relevant to your processing activities, naming the country and
+  the specific SA contact person.
+- Document a statement acknowledging the full scope of SA powers under Article 58.1, 58.2, and 58.3, signed
+  by your Data Protection Officer.
+- Record the date and method by which your organisation communicated this acknowledgement to relevant
+  staff, attaching supporting evidence such as an email or training record.
+- Name the owner responsible for maintaining this record as a specific individual, not a team or department.
+- Attach copies of any correspondence or formal requests from SAs and your organisation’s responses, ensuring
+  each is dated and attributed.

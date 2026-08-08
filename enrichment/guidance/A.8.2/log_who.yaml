@@ -1,0 +1,17 @@
+must_id: item:A.8.2:log_who
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Identity of the privileged user captured per action
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Configure the privileged activity logging system to record the unique username or ID of each user performing
+  privileged actions.
+- Review a recent sample of privileged activity logs and confirm each entry shows the specific individual
+  responsible for the action.
+- Name the owner of the logging process as a specific person, not a team or department, in documentation
+  or system configuration records.
+- Document the date and method used to test that the log cannot be edited to obscure or remove the user
+  identity.

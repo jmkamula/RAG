@@ -1,0 +1,16 @@
+must_id: item:A.8.25:rev_date
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval (≤180 days)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent SDLC program review in a central register, ensuring it is clearly
+  visible and unambiguous.
+- Confirm the next planned review date is scheduled no more than 180 days after the last completed review.
+- Name the responsible individual who conducted the last review, avoiding generic titles like "the team"
+  or "IT department".
+- Retain meeting minutes or a signed summary document that shows the review took place on the recorded
+  date.

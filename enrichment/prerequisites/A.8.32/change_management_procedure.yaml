@@ -1,0 +1,47 @@
+leaf_id: req:A.8.32:change_management_procedure
+control_ref: A.8.32
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, processes, and facilities are in-scope for the ISMS before
+    you can define which changes require formal management. The scope sets the boundaries for the change
+    management procedure.
+  good_enough: A documented, management-approved scope statement that clearly lists included systems and
+    processes is available.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Change management procedures depend on clear assignment of responsibilities for initiating,
+    approving, and reviewing changes. Without this, you can't define or enforce the workflow.
+  good_enough: A current roles and responsibilities matrix or document exists, showing who is accountable
+    for change management activities.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Each change must be risk-assessed, so you need an established risk assessment approach to
+    embed in the procedure. This ensures changes are evaluated for security impact.
+  good_enough: A basic risk assessment methodology is documented and in use, even if not fully mature.
+- ref: A.8.19
+  standard_id: ISO27001:2022
+  title: Installation of software on operational systems
+  category: direct
+  rationale: Rules for installing software are enforced through change management. You need these rules
+    defined to ensure your procedure covers relevant scenarios.
+  good_enough: Documented rules or guidelines exist for software installation on operational systems,
+    even if not fully comprehensive.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You must know what assets exist to determine which are subject to change management. The
+    asset register provides this inventory.
+  good_enough: An up-to-date list of key information assets and systems is available, even if some details
+    are pending.

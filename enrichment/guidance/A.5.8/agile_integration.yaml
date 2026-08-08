@@ -1,0 +1,20 @@
+must_id: item:A.5.8:agile_integration
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Adaptation for agile/iterative delivery (continuous security touchpoints rather than waterfall
+  gates only)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Update the procedure to describe how security requirements are reviewed at each sprint or iteration,
+  not just at project start and end.
+- Assign a named security contact for each project who participates in regular agile ceremonies, such
+  as sprint planning or retrospectives.
+- Record security-related decisions and actions in sprint or iteration meeting notes, including the date
+  and responsible individual.
+- Specify in the procedure that security checkpoints are embedded in the agile workflow, replacing any
+  references to one-time "phase gates."
+- Avoid using generic statements like "security is considered throughout" without naming when and how
+  this happens in the agile process.

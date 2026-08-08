@@ -1,0 +1,19 @@
+must_id: item:A.8.2:log_siem_correlation
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: SIEM correlation rules tuned for privileged-access misuse patterns
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific SIEM correlation rules in use that are designed to detect misuse of privileged
+  access, including rule names and descriptions.
+- Record the date each correlation rule was last reviewed and tuned, along with the name of the individual
+  who performed the tuning.
+- Attach evidence of test results or alert samples showing the rules have triggered on simulated or real
+  privileged-access misuse scenarios.
+- Name the person responsible for ongoing rule maintenance as a specific individual, not a group or generic
+  role.
+- Retain a change log showing all updates to privileged-access misuse detection rules, including dates
+  and approvers.

@@ -1,0 +1,19 @@
+must_id: item:A.8.8:scope_exclusions
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Exclusion rationale (vendor-managed assets covered via supplier obligations A.5.20)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all assets considered for vulnerability management, including vendor-managed assets, in a dated
+  asset inventory approved by the information security manager.
+- Document the exclusion of vendor-managed assets from internal vulnerability management, citing supplier
+  obligations under control A.5.20 with reference to relevant supplier contracts.
+- Name the individual responsible for approving each exclusion, ensuring the owner is a specific person,
+  not a team or department.
+- Attach supporting evidence, such as supplier security clauses or third-party assurance reports, to justify
+  each exclusion decision.
+- Record the date and outcome of each exclusion review in the asset inventory, confirming periodic reassessment
+  of the rationale.

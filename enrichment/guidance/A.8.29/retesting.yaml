@@ -1,0 +1,18 @@
+must_id: item:A.8.29:retesting
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Retesting requirement after remediation (no fix-without-retest)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that all identified security issues must be retested after remediation before
+  release to production.
+- Document the retesting process with required steps, responsible individual, and evidence to be collected
+  for each remediation.
+- Record the date, tester’s name, and test results for each retest in a log or defect tracking system.
+- Name the owner responsible for approving that no fixes are released without successful retest — use
+  a specific individual, not a team.
+- Attach evidence of retest completion, such as screenshots or reports, to the corresponding remediation
+  ticket or acceptance record.

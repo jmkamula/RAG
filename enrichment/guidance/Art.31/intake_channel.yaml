@@ -1,0 +1,19 @@
+must_id: item:Art.31:intake_channel
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: SA intake channel (dedicated mailbox + DPO direct + legal counsel)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the dedicated email address used for supervisory authority communications in your official
+  procedure, including the mailbox name and creation date.
+- Name the Data Protection Officer (DPO) as a specific individual with direct contact details, avoiding
+  generic titles or team references.
+- List the legal counsel responsible for supervisory authority interactions, providing their full name
+  and direct contact information.
+- Record the date when the intake channels were last tested for accessibility and responsiveness, and
+  keep evidence of the test results.
+- Retain copies of all communications received through these channels, including timestamps and recipient
+  details.

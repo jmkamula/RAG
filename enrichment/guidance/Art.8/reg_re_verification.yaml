@@ -1,0 +1,20 @@
+must_id: item:Art.8:reg_re_verification
+control_ref: Art.8
+standard_id: GDPR:2016/679
+must_text: Re-verification trigger when minor crosses the age threshold (consent transitions from parental
+  to direct)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each minor's date of birth in the Child Consent Register alongside their consent status and the
+  date consent was obtained.
+- Set an automated reminder or flag in the register to identify when each minor will reach the age threshold
+  for direct consent.
+- Document the process for re-verifying consent when a minor reaches the age threshold, including responsible
+  staff and required actions.
+- Name the staff member responsible for monitoring and actioning age threshold transitions, avoiding generic
+  roles like "the team" or "admin".
+- Retain evidence of each re-verification request and updated consent status, including dates and the
+  method of contact.

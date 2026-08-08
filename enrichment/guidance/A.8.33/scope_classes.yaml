@@ -1,0 +1,17 @@
+must_id: item:A.8.33:scope_classes
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Test-information classes in scope (synthetic-generated / production-derived / vendor-provided
+  / user-contributed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all test-information classes used, specifying whether each is synthetic-generated, production-derived,
+  vendor-provided, or user-contributed, in a dated document.
+- Name the person responsible for maintaining the test-information scope, identifying them as an individual
+  rather than a team or department.
+- Cross-reference each test-information class to its source and intended use in a register or table.
+- Record the approval of the defined test-information scope by a named manager, including the date and
+  signature.

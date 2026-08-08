@@ -1,0 +1,19 @@
+must_id: item:A.5.27:pattern_analysis
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Recurring-pattern analysis (lessons compared across incidents to find systemic causes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a specific individual to lead recurring-pattern analysis of information security incidents, naming
+  them in the incident response documentation.
+- Document a dated summary comparing lessons learned from at least two separate incidents to identify
+  any common root causes or systemic issues.
+- Record the analysis method used to compare incidents, such as timeline mapping or cause categorization,
+  in the incident review report.
+- Name the systemic causes identified and cross-reference them with previous incident reports to demonstrate
+  that patterns were actively sought and recognized.
+- Avoid using generic or copy-pasted lessons learned; tailor each summary to the actual incidents reviewed,
+  with incident dates and unique findings.

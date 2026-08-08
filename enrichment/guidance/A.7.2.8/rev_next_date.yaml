@@ -1,0 +1,15 @@
+must_id: item:A.7.2.8:rev_next_date
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the RoPA Program in the review documentation, using a clear and
+  specific calendar date.
+- Record the name of the individual responsible for scheduling the next review, not just a team or department.
+- Document the date when the current review was completed to show the timeline between reviews.
+- Cross-reference the review schedule in the RoPA Program with your organisation’s compliance calendar
+  to confirm alignment.

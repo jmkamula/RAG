@@ -1,0 +1,17 @@
+must_id: item:A.8.12:rev_next_date
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Data Loss Prevention (DLP) program in the official review
+  schedule document.
+- Record the date the review schedule was last updated, including the name of the person who made the
+  update.
+- Name the responsible individual for scheduling and conducting the next DLP program review, not just
+  a team or department.
+- Retain a copy of the most recent DLP program review meeting minutes that reference the agreed next review
+  date.

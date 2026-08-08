@@ -1,0 +1,16 @@
+must_id: item:A.7.4.5:reg_action_type
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: Action type per row (delete / de-identify)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the action taken for each data set in the register, specifying clearly whether data was deleted
+  or de-identified.
+- Name the individual responsible for carrying out each end-of-processing action, listing their full name
+  and job title.
+- Enter the date the action was completed for each row, using a consistent date format.
+- Avoid using vague action types such as "handled" or "processed"; specify only "delete" or "de-identify"
+  as required by the standard.

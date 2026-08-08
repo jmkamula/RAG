@@ -1,0 +1,19 @@
+must_id: item:A.5.32:intake_procurement
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Procurement intake — every commercial software purchase routes through licence review and inventory
+  registration before deployment
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each commercial software request in a central intake log, including requester name, date, and
+  intended use before any purchase is made.
+- Assign a specific individual to review software licence terms and document their approval or rejection
+  in the intake log.
+- Cross-reference each approved software entry with your software inventory register, ensuring the entry
+  is dated and matches the intake log.
+- Name the responsible owner for each intake entry as a specific person, not a team or department.
+- Retain evidence of licence review and inventory registration before deployment, such as signed approval
+  forms or dated screenshots.

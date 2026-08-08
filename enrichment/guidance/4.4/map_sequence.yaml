@@ -1,0 +1,16 @@
+must_id: item:4.4:map_sequence
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: Sequence / dependency arrows between processes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Draw clear arrows on the ISMS Process Interaction Map to show the sequence and dependencies between
+  each identified process.
+- Label each arrow with the specific input or output that links the processes, using consistent terminology
+  from your documented procedures.
+- Date and version the Process Interaction Map so an auditor can confirm it is current and matches your
+  latest ISMS documentation.
+- Name the person responsible for maintaining the map as a specific individual, not a team or department.

@@ -1,0 +1,20 @@
+must_id: item:A.8.26:requirement_types
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Requirement categories (authn / authz / data-protection / logging / error-handling / integrations
+  / privacy)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all application security requirement categories, including authentication, authorization, data
+  protection, logging, error handling, integrations, and privacy, in a dedicated section of the procedure.
+- Assign a named individual as the owner responsible for maintaining and updating the application security
+  requirements procedure.
+- Document the date of the latest review and approval of the procedure, signed by the designated owner
+  or approving authority.
+- Cross-reference each requirement category to relevant supporting policies or technical standards within
+  your documentation set.
+- Specify requirement categories using organization-specific details, not generic or boilerplate text
+  that could apply to any organization.

@@ -1,0 +1,41 @@
+leaf_id: req:A.5.1:isp_policy
+control_ref: A.5.1
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The information security policy must align with the defined scope of the ISMS, ensuring that
+    all relevant organizational units, assets, and activities are covered. Without a clear scope, the
+    policy risks being incomplete or misaligned.
+  good_enough: A documented and approved ISMS scope statement that identifies what is in and out of scope
+    for the ISMS.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and Responsibilities
+  category: direct
+  rationale: The policy must assign and reference key information security roles and responsibilities.
+    These need to be defined beforehand so the policy can accurately reflect accountability and authority.
+  good_enough: A list or matrix of information security roles and their responsibilities, even if not
+    fully detailed, to reference in the policy.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: foundational
+  rationale: The policy should be informed by the organization’s risk assessment, ensuring that it addresses
+    the actual risks faced. Without at least an initial risk assessment, the policy may miss critical
+    threats or controls.
+  good_enough: A basic, documented risk assessment identifying major information security risks relevant
+    to the ISMS scope.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The policy should reference or align with the organization’s information classification scheme
+    to ensure appropriate handling of information assets. This scheme must exist to inform policy statements.
+  good_enough: A draft or approved classification scheme that defines at least basic categories for information
+    assets.

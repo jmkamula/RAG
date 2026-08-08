@@ -1,0 +1,19 @@
+must_id: item:A.5.36:pgm_closure
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Findings-closure rate across the program (open / aged / closed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the total number of compliance findings identified during the review period in a dated summary
+  report.
+- Document the current status of each finding as open, aged (with the date it became overdue), or closed,
+  referencing supporting evidence for closure.
+- Calculate and state the findings-closure rate by showing counts and percentages for open, aged, and
+  closed findings in the report.
+- Name the individual responsible for tracking and reporting findings status, avoiding generic labels
+  like "the team" or "compliance department."
+- Retain evidence of management review and sign-off on the findings-closure rate summary, including the
+  date and names of reviewers.

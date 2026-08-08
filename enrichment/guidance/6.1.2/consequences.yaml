@@ -1,0 +1,17 @@
+must_id: item:6.1.2:consequences
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Potential consequences analysed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific potential consequences for each identified information security risk in the risk
+  assessment record, including impacts on confidentiality, integrity, and availability.
+- State the date and name of the person responsible for analysing and recording the consequences for each
+  risk entry.
+- Attach supporting evidence, such as meeting notes or impact analysis worksheets, that show how each
+  consequence was determined.
+- Name the owner of each risk as a specific individual, not a team or department, to avoid ambiguity in
+  responsibility.

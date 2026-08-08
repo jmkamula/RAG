@@ -1,0 +1,15 @@
+must_id: item:A.8.27:authority
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Named policy authority (Chief Architect / Security Architect with InfoSec lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the policy authority as a specific individual, such as the Chief Architect or Security Architect
+  with Information Security lead, in the policy document.
+- Record the authority’s full name, job title, and contact information on the policy’s approval page.
+- Sign and date the policy to confirm the named authority’s formal approval and accountability.
+- Avoid listing a team, committee, or department as the policy authority; use only a single, identifiable
+  person.

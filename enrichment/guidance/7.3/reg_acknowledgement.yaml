@@ -1,0 +1,17 @@
+must_id: item:7.3:reg_acknowledgement
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Acknowledgement per row (signed receipt, LMS attestation, quiz pass)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each employee’s name, date, and method of ISMS awareness completion in the register immediately
+  after training is finished.
+- Capture a signed receipt, LMS attestation, or quiz pass result for every individual listed, attaching
+  or linking this evidence to the register entry.
+- Name the acknowledgement owner as a specific person for each row—avoid generic labels like "staff" or
+  "all users."
+- Retain all supporting evidence in a location accessible for audit, and cross-reference its storage location
+  in the register.

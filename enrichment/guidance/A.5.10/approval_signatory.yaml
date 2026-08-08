@@ -1,0 +1,17 @@
+must_id: item:A.5.10:approval_signatory
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Signatory at appropriate management level (typically CISO or HR director, with top-management
+  endorsement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the approver as a specific individual at the required management level, such as the CISO or HR
+  Director, in the policy document.
+- Obtain a dated signature or digital approval from the named approver, clearly indicating their title
+  and authority.
+- Record evidence of top-management endorsement, such as meeting minutes or a signed memo referencing
+  the Acceptable Use Policy approval.
+- Retain the approved policy version with all signatures and dates in a central, accessible repository.

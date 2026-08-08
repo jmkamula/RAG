@@ -1,0 +1,32 @@
+leaf_id: req:Art.48:foreign_request_register
+control_ref: Art.48
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of all processing activities to identify which data or
+    processing operations could be subject to foreign authority requests. This ensures the register is
+    accurate and relevant.
+  good_enough: A basic, current RoPA covering all major processing activities, even if some details are
+    high-level or incomplete, is sufficient to start the register.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity helps determine how to respond
+    to foreign authority requests and what disclosures are legally permissible.
+  good_enough: A summary mapping of processing activities to their lawful bases is enough to inform register
+    entries, even if not every edge case is resolved.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer (DPO) Designation
+  category: foundational
+  rationale: If a DPO is required, their involvement is critical for assessing, recording, and responding
+    to foreign authority requests. The register process should reflect DPO oversight where applicable.
+  good_enough: A named DPO or a clear statement that a DPO is not required (with rationale) is sufficient
+    to proceed with the register.

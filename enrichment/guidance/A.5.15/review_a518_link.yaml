@@ -1,0 +1,19 @@
+must_id: item:A.5.15:review_a518_link
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: A.5.18 provisioning procedure cross-checked for alignment with policy changes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for updating the access provisioning procedure in response to policy changes,
+  listing them by full name and role.
+- Document the date and summary of the most recent Access Control Policy review in a version-controlled
+  record.
+- Cross-reference the updated policy version number in the provisioning procedure document, showing explicit
+  alignment.
+- Record a statement from the procedure owner confirming review of the latest policy and noting any required
+  changes.
+- Attach evidence of the cross-check, such as a signed checklist or annotated comparison, to the change
+  log for both documents.

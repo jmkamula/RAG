@@ -1,0 +1,19 @@
+must_id: item:Art.28:subprocessors
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Sub-processor restrictions and approval process
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the DPA that sub-processors may only be engaged with the prior written approval of the data
+  controller.
+- List the approval process for new sub-processors, including how and when the data controller will be
+  notified and can object.
+- Name each approved sub-processor in an appendix or schedule, including the date of approval and the
+  approving individual.
+- Attach a copy of the most recent sub-processor approval communication, showing explicit, dated consent
+  from the data controller.
+- Name the owner as a specific individual responsible for managing sub-processor approvals, not a generic
+  team or department.

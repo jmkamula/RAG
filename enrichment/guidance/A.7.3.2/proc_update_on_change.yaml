@@ -1,0 +1,18 @@
+must_id: item:A.7.3.2:proc_update_on_change
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: Update-on-change — purpose changes / new processing trigger a notice update within stated SLA
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific service-level agreement (SLA) timeframe for updating the privacy notice when processing
+  purposes change or new processing begins.
+- Assign a named individual responsible for monitoring changes in processing purposes and initiating privacy
+  notice updates.
+- Record each privacy notice update with the date, reason for change, and reference to the updated processing
+  purpose.
+- Retain evidence of communication sent to affected individuals when the privacy notice is updated due
+  to a change in processing purposes.
+- Name the owner as a specific person, not a generic role or team, to avoid ambiguity in accountability.

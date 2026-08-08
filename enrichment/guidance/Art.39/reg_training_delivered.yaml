@@ -1,0 +1,17 @@
+must_id: item:Art.39:reg_training_delivered
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Per-row training / awareness sessions delivered
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, topic, and format of each training or awareness session delivered in a dedicated column
+  for every activity row.
+- Name the trainer or facilitator as a specific individual for each session, avoiding generic titles like
+  "HR" or "Compliance Team".
+- Document the list of participants for each session, including full names and job titles, to show who
+  received the training.
+- Attach or cross-reference supporting materials, such as agendas or attendance sheets, to each entry
+  for verifiable evidence of delivery.

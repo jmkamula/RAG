@@ -1,0 +1,40 @@
+leaf_id: req:A.5.20:coverage_register
+control_ref: A.5.20
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which suppliers and agreements fall within the ISMS scope before you can
+    build a meaningful coverage register. This ensures the register is complete and relevant.
+  good_enough: A clear, approved scope statement that identifies the business units, processes, and supplier
+    relationships covered by the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: The asset register identifies information assets and their custodians, helping you determine
+    which suppliers handle or access critical assets. This informs which supplier agreements must be tracked.
+  good_enough: A basic, current list of key information assets and associated suppliers, even if not fully
+    detailed.
+- ref: A.5.19
+  standard_id: ISO27001:2022
+  title: Information security in supplier relationships
+  category: direct
+  rationale: You need an established policy or process for managing supplier relationships to define what
+    security clauses and controls should be included in supplier agreements. This frames what the coverage
+    register must track.
+  good_enough: A documented, approved supplier relationship policy or procedure that specifies required
+    security controls for supplier agreements.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that someone is responsible for maintaining the supplier
+    agreement coverage register and following up on gaps.
+  good_enough: Named individuals or teams assigned responsibility for supplier management and register
+    upkeep, even if role descriptions are brief.

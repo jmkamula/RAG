@@ -1,0 +1,15 @@
+must_id: item:7.1:rev_next_date
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Resources Program in a dated document or review schedule.
+- Record the name of the individual responsible for scheduling the next review, not just a team or department.
+- Document the method used to determine the next review date, such as referencing policy or risk assessment
+  outcomes.
+- Retain the most recent version of the review schedule with the stated next review date in a location
+  accessible for audit.

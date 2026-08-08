@@ -1,0 +1,17 @@
+must_id: item:A.8.14:proc_communications
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Stakeholder communications during failover (status page, customer notifications)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for stakeholder communications during failover in the procedure,
+  avoiding generic roles like "the team" or "IT department."
+- Document the exact methods and channels for notifying stakeholders, such as a public status page URL
+  and customer email templates, within the procedure.
+- Record the timing and triggers for each communication step, including who approves sending notifications
+  and when updates must be posted.
+- Retain copies of previous stakeholder notifications and status page updates from past failover events
+  as evidence of execution.

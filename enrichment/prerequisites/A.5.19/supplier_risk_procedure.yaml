@@ -1,0 +1,48 @@
+leaf_id: req:A.5.19:supplier_risk_procedure
+control_ref: A.5.19
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: foundational
+  rationale: A clear, approved information security policy is needed to define the overall approach and
+    expectations for managing supplier risks. The supplier risk procedure must align with and reference
+    this overarching policy.
+  good_enough: A current, approved policy that explicitly covers supplier relationships or references
+    the need for supplier controls.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information security risk assessment
+  category: foundational
+  rationale: Supplier risk is a subset of the organisation's overall information security risk. The risk
+    assessment process must exist so supplier-specific risks can be identified, evaluated, and prioritised
+    within the broader risk context.
+  good_enough: A documented, operational risk assessment process that includes supplier-related risks
+    as a category.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Inventory of information and other associated assets
+  category: direct
+  rationale: Knowing which assets are managed or accessed by suppliers is essential for scoping supplier
+    risk and determining which supplier relationships require controls.
+  good_enough: An up-to-date asset register that identifies assets owned by or accessible to suppliers.
+- ref: A.5.31
+  standard_id: ISO27001:2022
+  title: Compliance with policies, rules and standards for information security
+  category: direct
+  rationale: Supplier contracts often include compliance obligations (e.g., data protection, regulatory
+    requirements). The compliance register must exist to track these obligations and inform the supplier
+    risk procedure.
+  good_enough: A basic compliance register listing key supplier-related obligations and regulatory requirements.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification of information
+  category: direct
+  rationale: Understanding the classification of information shared with or processed by suppliers is
+    critical to defining appropriate risk controls and due diligence steps.
+  good_enough: A documented classification scheme that is referenced or applied to information handled
+    by suppliers.

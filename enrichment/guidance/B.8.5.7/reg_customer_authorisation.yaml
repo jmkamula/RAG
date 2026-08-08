@@ -1,0 +1,17 @@
+must_id: item:B.8.5.7:reg_customer_authorisation
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+must_text: Customer authorisation reference per row (general or specific)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the customer authorisation reference for each subcontractor entry, clearly linking it to either
+  a general or specific approval in the contract.
+- Cross-reference each authorisation to a dated contract clause, amendment, or written approval from the
+  customer.
+- Name the customer contact who granted the authorisation, using a specific individual’s name rather than
+  a generic title or department.
+- Attach supporting documentation, such as an email or signed letter, for each authorisation reference
+  listed in the register.

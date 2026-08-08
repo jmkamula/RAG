@@ -1,0 +1,16 @@
+must_id: item:A.7.4.8:scope_media_types
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Media types in inventory (SSD / HDD / tape / paper / cloud volume / mobile device)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all media types used in your organisation’s inventory, including SSDs, HDDs, tapes, paper records,
+  cloud volumes, and mobile devices.
+- Document the location and owner for each media type, naming a specific individual responsible for each
+  category.
+- Record the date when each media type was last reviewed or updated in the inventory.
+- Avoid using generic categories like "other" or "miscellaneous" without a clear description, as auditors
+  will flag unclear classifications.

@@ -1,0 +1,16 @@
+must_id: item:A.7.3.2:reg_audience
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: Target audience per row (public / customer / employee / minor / EU / US / etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the intended target audience for each notice in the register, specifying categories such as "public,"
+  "employee," or "EU resident."
+- Name the individual responsible for assigning the correct audience per notice, avoiding generic roles
+  like "the team" or "department."
+- Record the date each audience classification was last reviewed or updated for every notice entry.
+- Cross-reference each notice with supporting documentation that justifies the selected audience, such
+  as policy statements or legal requirements.

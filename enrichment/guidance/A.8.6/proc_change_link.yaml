@@ -1,0 +1,19 @@
+must_id: item:A.8.6:proc_change_link
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Cross-link to A.8.32 change management for capacity expansion deployments
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference the specific section of your change management procedure (A.8.32) within your capacity management
+  procedure where capacity expansion deployments are addressed.
+- Document the process for notifying the change management owner when a capacity expansion is planned,
+  including the responsible person's name and contact details.
+- Record an example of a recent capacity expansion deployment that followed both procedures, including
+  dates and cross-referenced change request numbers.
+- Name the owner of the capacity management procedure as a specific individual, not a generic team or
+  department.
+- Review the procedures to confirm that all references to change management are current and not outdated
+  or generic boilerplate.

@@ -1,0 +1,16 @@
+must_id: item:A.7.3.1:rev_date
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of your obligations program in a dated log or register entry.
+- Document the planned review interval in months or years within your obligations program documentation.
+- Confirm the actual review date falls within the documented planned interval by cross-referencing both
+  dates in your register.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Retain evidence of the review outcome, such as meeting minutes or a signed summary, attached to the
+  review record.

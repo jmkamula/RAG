@@ -1,0 +1,19 @@
+must_id: item:Art.15:copy
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Copy of the personal data undergoing processing provided to the data subject
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date the data subject access request was received and the date the response was sent in a
+  dedicated log.
+- Compile a copy of all personal data relating to the requester that is currently being processed, including
+  data from all relevant systems.
+- Name the person responsible for gathering and verifying the completeness of the personal data provided
+  in the response.
+- Retain a copy of the exact data set and accompanying cover letter sent to the data subject, with the
+  transmission date clearly marked.
+- Confirm that the response was sent securely to the data subject using their verified contact details,
+  and document the method of delivery.

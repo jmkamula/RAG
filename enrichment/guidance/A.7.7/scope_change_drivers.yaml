@@ -1,0 +1,17 @@
+must_id: item:A.7.7:scope_change_drivers
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new location, new work-pattern — return to office, hot-desking)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current business locations and work-patterns in a dated document reviewed at least annually
+  by the information security manager.
+- Document a trigger list that includes events like opening a new office, shifting to remote work, or
+  introducing hot-desking arrangements.
+- Assign a named individual to monitor for changes in locations or work-patterns and update the scope
+  document within one month of any trigger.
+- Record each re-scoping decision with the date, reason, and names of those who approved the updated scope.
+- Name the owner of the scope document as a specific person, not a team or department.

@@ -1,0 +1,18 @@
+must_id: item:4.2:scope_categories
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Stakeholder categories in scope enumerated (mirrors framework categories or narrows them)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all stakeholder categories relevant to your information security management system, referencing
+  the categories defined in ISO27001:2022 or narrowing them as justified.
+- Document the rationale for including or excluding each stakeholder category, with clear explanations
+  and supporting evidence for any exclusions.
+- Name the person responsible for maintaining the stakeholder scope, ensuring this is a specific individual
+  and not a team or department.
+- Record the date of the most recent review or update to the stakeholder domains scope document.
+- Attach or cross-reference the approved stakeholder domains scope in your compliance documentation set,
+  ensuring it is easily retrievable for audit.

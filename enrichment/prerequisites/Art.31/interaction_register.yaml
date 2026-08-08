@@ -1,0 +1,42 @@
+leaf_id: req:Art.31:interaction_register
+control_ref: Art.31
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of your processing activities to understand what information
+    may be relevant during any engagement with a Supervisory Authority (SA). This register is often the
+    first thing an SA will request.
+  good_enough: A current, reasonably complete RoPA covering all core business processes and data flows
+    is available, even if not perfect in every detail.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If your organization requires a Data Protection Officer (DPO), their contact details and
+    responsibilities must be clear, as the DPO is typically the main point of contact for SAs. The interaction
+    register must reflect this.
+  good_enough: A DPO (or documented rationale for not appointing one) is designated, with contact information
+    and responsibilities outlined.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope of your ISMS defines which parts of your organization and which processing activities
+    are covered. This ensures the interaction register aligns with the actual operational and compliance
+    boundaries.
+  good_enough: A documented ISMS scope exists that covers all relevant business units and processing activities
+    subject to GDPR oversight.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for your processing activities is essential for responding
+    to SA inquiries and documenting those interactions accurately.
+  good_enough: A summary of lawful bases for all major processing activities is documented and accessible
+    to those managing SA interactions.

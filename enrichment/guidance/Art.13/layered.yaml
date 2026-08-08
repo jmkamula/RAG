@@ -1,0 +1,19 @@
+must_id: item:Art.13:layered
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Layered or concise format used
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the privacy notice that a layered or concise format is used, and include a version date on
+  the document.
+- Document the structure of the notice, showing clear sections or links for each key information area
+  required by GDPR Article 13.
+- Name the person responsible for maintaining the privacy notice, listing their full name and contact
+  details in the document.
+- Attach a copy or screenshot of the published privacy notice as seen by users, showing the layered or
+  concise presentation.
+- Avoid using generic templates without customization—tailor the notice to your organisation’s data practices
+  and reference specific data types collected.

@@ -1,0 +1,19 @@
+must_id: item:A.7.2:rev_anomalies
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Anomaly review (flagged events from the register triaged)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to review all flagged entry anomalies from the register, recording their name
+  and the review date in a log.
+- Document the outcome of each anomaly review, including actions taken or rationale for no action, in
+  a dated review record.
+- Cross-reference each reviewed anomaly to its original register entry, ensuring traceability between
+  the flagged event and the review decision.
+- Record any escalations or further investigations as separate entries, naming the responsible person
+  and date for each action.
+- Name the reviewer as a specific person, not a group or department, to avoid auditor concerns about unclear
+  accountability.

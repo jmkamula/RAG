@@ -1,0 +1,19 @@
+must_id: item:Art.39:dpia_advice
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Provide DPIA advice + monitor performance per Art.39.1.c (links to Art.35)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer (DPO) as a specific individual responsible for providing advice on
+  Data Protection Impact Assessments (DPIAs).
+- Document each instance of DPIA advice given by the DPO, including the date, project name, and summary
+  of recommendations.
+- Record evidence of DPO monitoring DPIA outcomes, such as follow-up reports or meeting minutes showing
+  review of mitigation actions.
+- Retain correspondence or signed statements confirming that the DPO’s advice was considered in each DPIA
+  process.
+- Avoid using generic or template DPIA advice that is not tailored to the specific processing activity
+  under review.

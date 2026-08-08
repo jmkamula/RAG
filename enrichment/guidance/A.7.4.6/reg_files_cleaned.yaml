@@ -1,0 +1,16 @@
+must_id: item:A.7.4.6:reg_files_cleaned
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+must_text: Files cleaned + volume per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each temporary file sweep in the register with the date, time, and name of the person who performed
+  the sweep.
+- List the specific files or file types deleted during each sweep, along with the total volume of data
+  removed in megabytes or gigabytes.
+- Name the responsible individual for each sweep entry—do not use generic labels like "IT team" or "staff".
+- Retain register entries for a defined period, showing a consistent and ongoing approach to temporary
+  file deletion.

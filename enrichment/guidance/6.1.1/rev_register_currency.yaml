@@ -1,0 +1,19 @@
+must_id: item:6.1.1:rev_register_currency
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Action register currency check — every row reviewed for status + relevance
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to be responsible for maintaining and updating the action register, recording
+  their name and assignment date.
+- Review each row in the action register, confirming the current status and ongoing relevance, and record
+  the review date next to each entry.
+- Document any changes, closures, or updates made to action items directly in the register, including
+  who made the change and when.
+- Cross-reference each action with related program documents to confirm alignment and note the reference
+  location in the register.
+- Name the reviewer for each action as a specific person, not a group or department, to avoid ambiguity
+  in accountability.

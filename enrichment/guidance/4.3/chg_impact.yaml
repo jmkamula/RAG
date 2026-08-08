@@ -1,0 +1,16 @@
+must_id: item:4.3:chg_impact
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Impact assessment — which controls / processes / risk-assessment scope is affected
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and description of each proposed ISMS scope change in a dedicated Scope Change Record.
+- Name the specific controls, processes, and risk-assessment areas impacted by the change, referencing
+  their unique identifiers where possible.
+- Document the assessment of how each impacted area will be affected, including any new or altered risks.
+- Cross-reference the Scope Change Record to the related risk assessment and any updated documentation
+  from Clause 6.3.
+- Name the responsible individual who approved the impact assessment — do not list a group or department.

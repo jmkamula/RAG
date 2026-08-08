@@ -1,0 +1,19 @@
+must_id: item:A.6.3:reg_overdue_alerts
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Overdue-status alerting (notification to line manager when training crosses next-due date)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for identifying overdue training, including how and when the system checks for
+  missed deadlines, in a dated procedure file.
+- Record the method used to notify line managers of overdue training, such as automated email or dashboard
+  alert, with a screenshot or sample message.
+- Name the individual responsible for monitoring overdue notifications and following up, listing their
+  full name and role in the register.
+- Retain evidence of at least one actual overdue alert sent to a line manager, showing the date, recipient,
+  and content of the notification.
+- Specify the alert recipient as a named line manager, not a generic mailbox or department, to avoid auditor
+  concerns about unclear accountability.

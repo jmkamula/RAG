@@ -1,0 +1,18 @@
+must_id: item:A.5.7:reg_internal_input
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Internal sources captured alongside external (e.g. A.5.6 SIG-membership outputs, internal IR
+  observations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each threat intelligence feed in the register, clearly marking whether the source is internal or
+  external for every entry.
+- Record specific internal sources, such as incident response observations or security interest group
+  outputs, with named contacts and dates.
+- Cross-reference each internal feed to its originating process or team, not just a generic department
+  or function.
+- Attach or link supporting evidence for each feed, such as meeting notes, incident summaries, or membership
+  communications, with clear dates.

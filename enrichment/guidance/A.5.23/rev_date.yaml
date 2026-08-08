@@ -1,0 +1,17 @@
+must_id: item:A.5.23:rev_date
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of each cloud service posture review in a central log, showing it falls within the planned
+  review interval.
+- Name the reviewer as a specific individual responsible for the most recent cloud service posture review,
+  not just a team or department.
+- Retain a copy of the completed review report, including the date and signatures or acknowledgements
+  from all required participants.
+- Cross-reference the review date against your documented review schedule to confirm the interval has
+  not been exceeded.

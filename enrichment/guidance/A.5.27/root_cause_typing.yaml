@@ -1,0 +1,17 @@
+must_id: item:A.5.27:root_cause_typing
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Root-cause typing (e.g. multiple incidents traced to lack of patching, MFA gaps)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the root cause for each incident in the lessons learned report, using clear categories such as
+  patching gaps or missing multi-factor authentication.
+- Cross-reference each root cause with supporting incident evidence, such as system logs or investigation
+  notes, to show how the conclusion was reached.
+- Name the person responsible for root cause analysis for each incident, using a specific individual’s
+  name rather than a team or department.
+- Review all incidents quarterly to identify patterns or repeated root causes, and document any trends
+  in a summary report.

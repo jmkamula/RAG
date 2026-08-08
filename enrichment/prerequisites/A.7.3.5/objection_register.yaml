@@ -1,0 +1,40 @@
+leaf_id: req:A.7.3.5:objection_register
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Understanding and documenting the purposes for processing personal data is essential to determine
+    when and why individuals may object to processing. Without this, you cannot meaningfully record or
+    assess objection events.
+  good_enough: A current, documented list of processing purposes exists and is accessible to those managing
+    objections, even if not fully mapped to all data assets yet.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: The lawful basis for each processing activity must be known to assess the validity of objections
+    and determine the appropriate response. This underpins the objection register's accuracy.
+  good_enough: Each processing activity has a stated lawful basis, at least for major data flows, so objection
+    handling can be aligned with legal requirements.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope statement defines which parts of the organization and which processing activities
+    are covered, ensuring the objection register is complete and relevant.
+  good_enough: A basic ISMS scope statement exists, identifying the organizational boundaries and main
+    processing activities relevant to privacy management.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that objections are logged, reviewed, and resolved by the
+    right people, and that the register is maintained properly.
+  good_enough: Documented responsibility for handling data subject requests and maintaining the objection
+    register, even if roles are not fully detailed.

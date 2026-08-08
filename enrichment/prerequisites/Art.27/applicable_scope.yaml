@@ -1,0 +1,38 @@
+leaf_id: req:Art.27:applicable_scope
+control_ref: Art.27
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.3
+  standard_id: GDPR:2016/679
+  title: Territorial Scope
+  category: foundational
+  rationale: You must first determine whether your processing activities fall within the territorial scope
+    of the GDPR, as defined in Art.3, before assessing if Art.27 (representative requirement) applies.
+  good_enough: A documented decision on whether your organization is established in the EU or if your
+    processing targets individuals in the EU is sufficient to proceed.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: direct
+  rationale: You need a basic inventory of your processing activities to judge if any Art.27.2 exceptions
+    apply (e.g., occasional processing, special categories, risk level).
+  good_enough: A high-level list of processing activities, even if not fully detailed, is enough to identify
+    if your processing is occasional or involves special categories.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: Your ISMS scope helps clarify which parts of your organization and which processing activities
+    are relevant for GDPR obligations, including Art.27.
+  good_enough: A draft ISMS scope that identifies the business units and processing activities in or out
+    of GDPR scope is sufficient at this stage.
+- ref: Art.9
+  standard_id: GDPR:2016/679
+  title: Processing of Special Categories of Personal Data
+  category: foundational
+  rationale: You must know if you process special categories of data, as this impacts whether you qualify
+    for any Art.27.2 exceptions.
+  good_enough: A simple statement on whether you process special category data is enough to move forward.

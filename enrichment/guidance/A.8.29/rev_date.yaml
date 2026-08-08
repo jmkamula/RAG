@@ -1,0 +1,16 @@
+must_id: item:A.8.29:rev_date
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval (≤180 days)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of each security testing program review in a central log, showing the most recent review
+  occurred within the past 180 days.
+- Name the reviewer as a specific individual responsible for the periodic review, not a generic role or
+  team.
+- Retain a signed or approved summary of the review findings, including the date and reviewer’s name.
+- Cross-reference the review log with your documented testing schedule to confirm the review interval
+  does not exceed 180 days.

@@ -1,0 +1,19 @@
+must_id: item:A.7.2:authorisation_list
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Authorisation list per secure area (who is permitted, by role or name; cross-link to A.5.18)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all individuals or roles permitted to access each secure area, including full names or job titles,
+  in a dated authorisation register.
+- Cross-reference each entry on the authorisation list to the corresponding record in your visitor and
+  access rights register required by control A.5.18.
+- Assign a specific person as the owner responsible for maintaining and updating the authorisation list;
+  do not use generic labels like "security team."
+- Review and update the authorisation list at least annually, recording the review date and the name of
+  the reviewer.
+- Retain previous versions of the authorisation list to show a clear history of changes and access permissions
+  over time.

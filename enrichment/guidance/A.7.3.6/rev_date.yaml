@@ -1,0 +1,15 @@
+must_id: item:A.7.3.6:rev_date
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the ACR Program in a dated entry within the review log or minutes.
+- Confirm the planned review interval is clearly documented in the ACR Program documentation or schedule.
+- Compare the actual review date to the planned interval and document any deviations with an explanation
+  in the review record.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Retain evidence of the completed review, such as signed meeting minutes or a dated review checklist.

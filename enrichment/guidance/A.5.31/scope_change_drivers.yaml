@@ -1,0 +1,18 @@
+must_id: item:A.5.31:scope_change_drivers
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new geography, new service line, M&A, change in customer mix)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific events that require re-scoping, such as entering a new country, launching a new service,
+  or acquiring another company.
+- Document the trigger list in a dated and version-controlled obligations scope register, naming the person
+  responsible for updates.
+- Assign a named individual to monitor for these triggers and record their name and review frequency in
+  the obligations scope register.
+- Record each time the trigger list is reviewed or updated, including the date and the name of the reviewer.
+- Avoid using generic triggers like "significant change" without examples; specify concrete events an
+  auditor can verify.

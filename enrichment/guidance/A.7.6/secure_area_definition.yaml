@@ -1,0 +1,18 @@
+must_id: item:A.7.6:secure_area_definition
+control_ref: A.7.6
+standard_id: ISO27001:2022
+must_text: Secure area definition (which areas are 'secure' per A.7.1 classification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical locations and rooms that are classified as 'secure areas' under your A.7.1 information
+  classification scheme in your procedure.
+- State the specific security controls or measures that apply to each named secure area, referencing your
+  classification criteria.
+- Name the owner responsible for maintaining the secure area list as a specific individual, not a team
+  or department.
+- Record the date when the secure area definitions were last reviewed and updated in the procedure document.
+- Attach a cross-reference to the supporting risk assessment or classification register that justifies
+  why each area is designated as secure.

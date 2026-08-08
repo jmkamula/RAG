@@ -1,0 +1,17 @@
+must_id: item:B.8.2.6:proc_customer_availability
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: Customer-availability path — how a customer requests + receives their RoPA row extract
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the exact process a customer must follow to request their RoPA row extract, including contact
+  details and required request format, in the procedure.
+- Name the individual or role responsible for handling RoPA extract requests, ensuring this is a specific
+  person and not a generic team.
+- Record the method and timeframe for delivering the requested RoPA extract to the customer, specifying
+  secure transmission channels and maximum response period.
+- Cross-reference the RoPA extract request process in the audit-support section of your procedure, explicitly
+  linking to the relevant clause or step.

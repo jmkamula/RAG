@@ -1,0 +1,43 @@
+leaf_id: req:10.1:improvement_program_review
+control_ref: '10.1'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The continual improvement review must be performed with a clear understanding of the ISMS
+    boundaries and applicability. Without a defined scope, it's impossible to verify that improvement
+    actions and triggers cover all relevant areas.
+  good_enough: A documented scope statement that identifies the organizational boundaries and assets included
+    in the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The improvement program review should be aligned with the organization's security policy
+    objectives. If the policy is missing or unclear, it's not possible to assess whether improvement actions
+    support strategic goals.
+  good_enough: An approved, current information security policy that sets out the organization's objectives
+    and direction for information security.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: direct
+  rationale: Improvement actions and triggers are often based on risk assessment outcomes. Without a recent
+    risk assessment, the review cannot verify that all relevant risks are being addressed through continual
+    improvement.
+  good_enough: A completed and documented risk assessment identifying current risks and their treatment
+    status.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles is essential to ensure improvement actions are owned, tracked,
+    and reviewed. Without this, the review cannot confirm accountability for actions or effectiveness
+    checks.
+  good_enough: Documented roles and responsibilities for ISMS operation and continual improvement, with
+    named individuals or teams.

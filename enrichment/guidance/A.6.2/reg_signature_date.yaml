@@ -1,0 +1,18 @@
+must_id: item:A.6.2:reg_signature_date
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Signature date per row (proves signing happened BEFORE access granted per A.5.18)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name and job title of each employee in the Employment Terms Register for every new hire.
+- Enter the exact date each employee signed their employment terms in a dedicated column next to their
+  name.
+- Confirm that the signature date is before the employee’s first system access date by cross-referencing
+  with access logs or onboarding records.
+- Name the person responsible for maintaining and updating the register as a specific individual, not
+  a team or department.
+- Retain a scanned copy of each signed employment agreement linked to the corresponding register entry
+  for verification.

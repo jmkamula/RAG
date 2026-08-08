@@ -1,0 +1,19 @@
+must_id: item:A.7.3.4:scope_change_drivers
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+must_text: Trigger list (new consent-based activity)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current activities that rely on individual consent as the legal basis for processing personal
+  data, including a brief description for each.
+- Record the date each consent-based activity was last reviewed or updated, ensuring the list reflects
+  only current and active processes.
+- Assign a named individual responsible for maintaining and updating the consent-based activities list,
+  specifying their full name and job title.
+- Document the trigger process for adding new consent-based activities, including who must approve and
+  how updates are logged.
+- Avoid using generic descriptions like "marketing activities"—describe each activity specifically so
+  an auditor can verify its inclusion and scope.

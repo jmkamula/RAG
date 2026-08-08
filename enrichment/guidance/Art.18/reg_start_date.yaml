@@ -1,0 +1,13 @@
+must_id: item:Art.18:reg_start_date
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Per-row restriction start date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the restriction start date for each entry in the register using the format YYYY-MM-DD.
+- Cross-reference each start date with the original request or notification that triggered the restriction.
+- Name the individual responsible for entering and updating restriction start dates in the register.
+- Avoid leaving the start date field blank or using placeholders like "TBC" or "N/A" for any row.

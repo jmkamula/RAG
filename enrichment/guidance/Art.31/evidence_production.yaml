@@ -1,0 +1,20 @@
+must_id: item:Art.31:evidence_production
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Evidence production process — pulling demonstrability artefacts (RoPA, SoA-equivalent compliance
+  register, DPIA records, breach register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for responding to supervisory authority requests in the procedure, using
+  their full name and job title.
+- Document the step-by-step process for collecting and providing records such as the RoPA, compliance
+  register, DPIA records, and breach register.
+- Record the location and access method for each demonstrability artefact, referencing specific file paths
+  or system links in the procedure.
+- Retain a dated log of all requests from supervisory authorities and the corresponding evidence provided,
+  including who fulfilled each request.
+- Specify that all referenced artefacts must be current versions, not drafts or outdated documents, to
+  avoid auditor concerns over incomplete evidence.

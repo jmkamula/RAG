@@ -1,0 +1,19 @@
+must_id: item:A.8.25:testing
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Security testing integration (cross-link to A.8.29 — testing in lifecycle)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Secure Development Lifecycle Policy that security testing is required at defined stages
+  of all software development projects.
+- Cross-reference control A.8.29 within the policy section on testing, specifying how security testing
+  is integrated into the lifecycle.
+- Name a specific individual, such as the Head of Development or Security Lead, as the policy owner responsible
+  for enforcing security testing requirements.
+- Document the date of the most recent policy review and approval, signed by a named member of senior
+  management.
+- Avoid using generic statements like "testing is performed as needed"; specify concrete testing activities
+  and when they must occur.

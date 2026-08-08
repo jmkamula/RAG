@@ -1,0 +1,15 @@
+must_id: item:8.2:owner
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Per-assessment owner (Risk Manager or function risk-owner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner for each operational risk assessment as a specific individual, such as the Risk Manager
+  or designated function risk-owner.
+- Record the owner's full name and job title directly on each risk assessment document, alongside the
+  assessment date.
+- Sign each risk assessment electronically or physically to confirm the named owner's acceptance of responsibility.
+- Avoid listing generic roles like "the team" or "IT department" as the owner; use only named individuals.

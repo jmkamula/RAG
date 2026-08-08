@@ -1,0 +1,17 @@
+must_id: item:A.7.4.3:reg_pii_scope
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: PII scope per row (which fields / how many subjects affected)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific types of personal data involved in each incident row, listing the exact fields affected
+  such as name, email, or address.
+- State the number of individuals whose personal data was impacted in each incident row, using a clear
+  numeric value.
+- Cross-reference each incident entry with supporting evidence, such as incident reports or investigation
+  summaries, to validate the scope details.
+- Name the data owner or responsible individual for each incident row, avoiding generic labels like "IT"
+  or "the team".

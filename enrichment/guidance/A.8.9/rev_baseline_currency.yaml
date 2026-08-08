@@ -1,0 +1,18 @@
+must_id: item:A.8.9:rev_baseline_currency
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Baseline-vs-vendor-current check (CIS / vendor / NIST version drift)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the current configuration baseline version for each system, including the date and the specific
+  standard or vendor reference used.
+- Record the latest available version from the relevant standard, vendor, or CIS/NIST benchmark, noting
+  the publication date and source.
+- Compare and cross-reference your current baseline against the latest version, highlighting any differences
+  or version drift in a dated review log.
+- Assign a named individual to sign off on the review findings, confirming that any gaps or drift have
+  been identified and documented.
+- Name the reviewer as a specific person, not a team or department, to avoid ambiguity in accountability.

@@ -1,0 +1,19 @@
+must_id: item:Art.41:reg_sa_notification
+control_ref: Art.41
+standard_id: GDPR:2016/679
+must_text: Per-row SA notification where Art.41.4 actions taken
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each instance where actions under Art.41.4 are taken in the Code Monitoring Activity Record,
+  including the date and description of the action.
+- State the specific Supervisory Authority notified for each action, including the authority's full name
+  and contact details.
+- Attach a copy of the notification sent to the Supervisory Authority for each action, including the date
+  sent and recipient confirmation.
+- Name the individual responsible for notifying the Supervisory Authority for each action, avoiding generic
+  roles like "the team" or "compliance department".
+- Cross-reference each entry with any related correspondence or follow-up from the Supervisory Authority,
+  ensuring all responses are linked to the relevant row.

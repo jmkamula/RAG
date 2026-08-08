@@ -1,0 +1,19 @@
+must_id: item:A.5.22:rev_compliance
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Supplier's compliance-review / enforcement responsibilities confirmed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for confirming supplier compliance-review and enforcement duties in your
+  supplier management register, using their full name and job title.
+- Document the supplier’s agreed compliance-review and enforcement responsibilities in the signed contract
+  or service agreement, referencing the relevant section.
+- Record the date and outcome of your most recent review of the supplier’s compliance responsibilities,
+  including any follow-up actions, in a dedicated review log.
+- Attach evidence of supplier acknowledgment, such as a signed statement or email confirmation, showing
+  they understand and accept their compliance-review and enforcement obligations.
+- Avoid using generic language like “supplier is responsible” without specifying the actual duties and
+  enforcement actions required in the agreement.

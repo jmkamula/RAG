@@ -1,0 +1,16 @@
+must_id: item:A.5.9:last_updated
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Last-updated date per record (proves the register is actively maintained, not snapshotted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a clear "last updated" date for each asset entry in the inventory to show when information was
+  most recently reviewed or changed.
+- Name the person responsible for updating each asset record, listing a specific individual rather than
+  a team or department.
+- Document any changes to asset details by updating the "last updated" date immediately after each modification.
+- Review the inventory regularly and update the "last updated" date for each asset even if no changes
+  are needed, confirming ongoing maintenance.

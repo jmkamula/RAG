@@ -1,0 +1,16 @@
+must_id: item:B.8.5.2:reg_customer_disclosure
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+must_text: Customer disclosure status per row (published in DPA schedule / trust page / on request)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the disclosure status for each processor transfer destination row as "published in DPA schedule,"
+  "published on trust page," or "available on request."
+- Cross-reference each row’s disclosure status with the actual publication location or documented process
+  for customer access.
+- Name the person responsible for updating and verifying the disclosure status for each entry, using a
+  specific individual rather than a team or department.
+- Date each entry to show when the disclosure status was last reviewed or updated.

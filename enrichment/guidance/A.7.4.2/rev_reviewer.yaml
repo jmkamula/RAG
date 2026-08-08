@@ -1,0 +1,15 @@
+must_id: item:A.7.4.2:rev_reviewer
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Engineering)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and job title, explicitly identifying both the
+  Data Protection Officer and an Engineering representative.
+- Record the date each reviewer completed their review in the Processing Limitation Program Review document.
+- Sign the review record physically or electronically to confirm each named reviewer’s participation.
+- Retain evidence of the review, such as meeting minutes or annotated documents, showing input from both
+  the DPO and Engineering.

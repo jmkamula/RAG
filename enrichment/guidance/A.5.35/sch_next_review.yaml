@@ -1,0 +1,15 @@
+must_id: item:A.5.35:sch_next_review
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Next review date stated (per scope area where sliced)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each scope area separately in the register, ensuring each has its own row or entry.
+- State the next scheduled review date for every scope area, using a clear and unambiguous date format.
+- Name the responsible individual for each scope area's review, avoiding generic titles like "team" or
+  "department".
+- Record the date when the register was last updated to show information is current.
+- Cross-check that no scope area is missing a next review date, as missing dates are a common audit finding.

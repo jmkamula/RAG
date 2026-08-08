@@ -1,0 +1,16 @@
+must_id: item:A.7.5.2:reg_public_disclosure
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+must_text: Public-disclosure status per row (in privacy notice / DPA schedule)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the public-disclosure status for each transfer destination row, stating clearly whether it appears
+  in your privacy notice or data processing agreement schedule.
+- Cross-reference each disclosed destination with the specific section or URL of your published privacy
+  notice or DPA schedule.
+- Name the individual responsible for updating and verifying the public-disclosure status in the register,
+  using a full name rather than a job title or team.
+- Date each entry or update to the public-disclosure status to show when it was last reviewed or confirmed.

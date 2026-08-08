@@ -1,0 +1,19 @@
+must_id: item:A.6.1:rev_scope_check
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Cross-check against the applicable-roles scope — any new role tier, new jurisdiction, new sectoral
+  driver?
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the list of roles included in the latest screening program review with your current
+  HR role inventory, noting any new or changed roles.
+- Document any new jurisdictions or sector-specific regulations that have come into scope since the last
+  review, citing the relevant legal or regulatory source.
+- Record the date and outcome of the most recent screening program review, including who conducted the
+  cross-check and their findings.
+- Name the reviewer as a specific individual responsible for the cross-check, not a group or generic title.
+- Attach supporting evidence, such as meeting minutes or annotated role matrices, showing how changes
+  were identified and addressed.

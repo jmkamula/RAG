@@ -1,0 +1,17 @@
+must_id: item:Art.9:scope_categories_in_use
+control_ref: Art.9
+standard_id: GDPR:2016/679
+must_text: Art.9.1 categories actually processed enumerated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each special category of personal data processed, using the exact terms from Article 9.1, in a
+  dated document.
+- Name the business process or system where each special category is used, linking to relevant data flow
+  diagrams or inventories.
+- Assign a specific individual as the owner responsible for maintaining the accuracy of this special category
+  data list.
+- Avoid using vague or generic descriptions like "sensitive data"—specify the exact category, such as
+  "health data" or "racial origin."

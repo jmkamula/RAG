@@ -1,0 +1,16 @@
+must_id: item:A.8.32:reg_risk_tier
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Per-change risk tier (drives approval path applied)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the risk tier for each change in the Change Register, clearly marking it as low, medium, or high
+  based on your risk assessment criteria.
+- Cross-reference each change entry with the documented risk assessment that justifies the assigned risk
+  tier, including the date and assessor’s name.
+- Name the risk tier approver for each change as a specific individual, not a group or generic role.
+- Document the approval path followed for each change, showing it matches the required process for the
+  recorded risk tier.

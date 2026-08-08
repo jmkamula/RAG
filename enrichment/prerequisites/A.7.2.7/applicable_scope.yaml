@@ -1,0 +1,40 @@
+leaf_id: req:A.7.2.7:applicable_scope
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You must know the overall boundaries of your ISMS, including which business units, processes,
+    and systems are in scope, before you can identify which relationships might involve joint control
+    over PII.
+  good_enough: A clear, current ISMS scope statement that covers all relevant PII processing activities
+    and entities.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Understanding the specific purposes for which PII is processed is essential to determine
+    whether any processing activities are shared with other parties in a way that creates joint controllership.
+  good_enough: Documented purposes for all major PII processing activities, even if some are high-level
+    or provisional.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for each PII processing activity helps clarify the nature of the
+    relationship with other parties and whether joint controllership applies.
+  good_enough: A list or matrix mapping each processing activity to its lawful basis, with enough detail
+    to distinguish joint from other controller relationships.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles and responsibilities is necessary to distinguish between joint
+    controllers, processors, and independent controllers in multi-party arrangements.
+  good_enough: A current roles and responsibilities matrix or document that covers all parties involved
+    in PII processing.

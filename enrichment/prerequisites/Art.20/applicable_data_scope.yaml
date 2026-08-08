@@ -1,0 +1,32 @@
+leaf_id: req:Art.20:applicable_data_scope
+control_ref: Art.20
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date inventory of all processing activities to identify which ones might
+    fall within the scope of data portability under Art.20. Without this, you cannot reliably determine
+    what data or processes are even in play.
+  good_enough: A current, working RoPA that lists all processing activities, their purposes, and data
+    categories is available—even if not fully optimized.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: direct
+  rationale: Art.20 only applies to data processed on the basis of consent or contract. You must know
+    the lawful basis for each processing activity to filter those eligible for portability.
+  good_enough: Each RoPA entry has a lawful basis tagged (at least 'consent', 'contract', or 'other')
+    for all relevant activities.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and system boundaries for compliance activities,
+    ensuring the data portability scope aligns with what is operationally covered.
+  good_enough: A documented ISMS scope exists that covers the systems and processes where personal data
+    is processed, even if not exhaustively detailed.

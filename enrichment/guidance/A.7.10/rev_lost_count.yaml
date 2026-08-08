@@ -1,0 +1,19 @@
+must_id: item:A.7.10:rev_lost_count
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Lost-media count for period (every loss has an incident link)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record every instance of lost storage media in a central register, including the date of loss and a
+  unique incident reference.
+- Cross-reference each lost-media entry with its corresponding incident report, ensuring the incident
+  link is active and accessible.
+- Name the person responsible for maintaining the lost-media register as a specific individual, not a
+  team or department.
+- Review and update the lost-media register at least once per review period, noting the review date and
+  reviewer’s name.
+- Document the total count of lost-media cases for the review period in a summary report, attaching supporting
+  incident links.

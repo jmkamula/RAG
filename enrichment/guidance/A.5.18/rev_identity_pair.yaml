@@ -1,0 +1,21 @@
+must_id: item:A.5.18:rev_identity_pair
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Identity-pair check per record — confirms A.5.16 identity revocation_record exists for the
+  same identity (where the trigger is termination/contract-end) OR identity remains active (where trigger
+  is role-change/explicit-revoke); closes the bidirectional lifecycle loop
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each access revocation record with the corresponding identity record to confirm the
+  same person’s access was revoked as documented in A.5.16.
+- Record the trigger for each revocation—termination, contract end, role change, or explicit revoke—alongside
+  the identity in the revocation log.
+- Confirm that, for terminations or contract ends, the identity is fully deactivated and no active accounts
+  remain for that person.
+- Verify that, for role changes or explicit revokes, the identity remains active only with updated permissions,
+  and document this status in the record.
+- Name the reviewer who performed the identity-pair check for each record, avoiding generic entries like
+  "IT" or "team".

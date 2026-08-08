@@ -1,0 +1,20 @@
+must_id: item:A.5.34:dpo_role
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: DPO designation note (mandatory under GDPR Art.37 for public authorities, large-scale special-category
+  processing, large-scale systematic monitoring; voluntary otherwise — captured here regardless of mandate)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer (DPO) as a specific individual, including full name and job title,
+  in the Privacy and PII Protection Policy.
+- Document the date the DPO was formally appointed and include a signed appointment letter or HR record
+  as evidence.
+- State whether DPO designation is mandatory or voluntary for your organisation, referencing the relevant
+  GDPR Article 37 criteria.
+- Record the DPO’s contact details in the policy, ensuring they are current and not a generic group email
+  or phone number.
+- Retain evidence of regular DPO training or certification, such as dated certificates or training completion
+  records.

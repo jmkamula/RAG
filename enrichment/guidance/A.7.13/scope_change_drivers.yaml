@@ -1,0 +1,19 @@
+must_id: item:A.7.13:scope_change_drivers
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new equipment class, refreshed hardware)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current equipment types included in the maintenance scope, with model names and dates added,
+  in a maintained inventory document.
+- Record each time new equipment classes are introduced or existing hardware is refreshed, noting the
+  date and responsible individual.
+- Document a trigger list specifying events that require maintenance scope review, such as new equipment
+  types or hardware refresh cycles.
+- Name the person responsible for updating the maintenance scope, ensuring the owner is a specific individual,
+  not a team or department.
+- Retain dated records of each maintenance scope review, including what triggered the review and any resulting
+  changes.

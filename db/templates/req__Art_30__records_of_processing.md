@@ -41,6 +41,8 @@ one-off document.
       processor recipients
 - [ ] **Art.44-49 transfer mechanisms** in place where applicable
 
+<<PREREQUISITES>>
+
 ## Cross-references
 
 - **Art.32 Security Measures** — RoPA references the T&O measures

@@ -1,0 +1,20 @@
+must_id: item:A.6.5:reg_obligations_covered
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Per-row covered obligations list (confidentiality + IP + non-poach + non-compete where applicable
+  per jurisdiction)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all post-employment obligations for each leaver in the register, specifying confidentiality, intellectual
+  property, non-poach, and non-compete as applicable.
+- Reference the relevant contract clause or policy for each obligation listed, ensuring traceability to
+  the original signed document.
+- Name the jurisdiction or country for each leaver to confirm which obligations apply based on local legal
+  requirements.
+- Assign a specific individual to review and update the register entry for each leaver, recording their
+  name and the date of review.
+- Avoid using generic terms like "standard obligations"—detail each obligation explicitly for every leaver
+  row.

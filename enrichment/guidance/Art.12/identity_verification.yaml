@@ -1,0 +1,17 @@
+must_id: item:Art.12:identity_verification
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Identity verification protocol (proportionate, not over-collecting)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process used to verify the identity of individuals making data requests, including
+  what information is collected at each stage.
+- State the minimum information required for verification and justify why each data point is necessary,
+  avoiding collection of excessive or irrelevant details.
+- Name the person responsible for reviewing and updating the identity verification protocol, ensuring
+  a specific individual is listed rather than a team or department.
+- Record the date of the most recent review or update of the protocol to show it is regularly assessed
+  for proportionality.

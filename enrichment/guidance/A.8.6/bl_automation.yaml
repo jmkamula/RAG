@@ -1,0 +1,17 @@
+must_id: item:A.8.6:bl_automation
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Auto-scaling automation configured for elastic workloads (modern baseline)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the auto-scaling automation configuration for all elastic workloads, including thresholds and
+  triggers, in a dated technical record.
+- Name the person responsible for maintaining and updating the auto-scaling settings as a specific individual,
+  not a team or department.
+- Record a recent test or exercise demonstrating the auto-scaling automation responded as expected, including
+  date and test results.
+- Attach screenshots or logs showing the auto-scaling events occurred automatically in response to workload
+  changes.

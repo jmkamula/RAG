@@ -1,0 +1,18 @@
+must_id: item:Art.12:response_deadline
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: One-month response deadline (extendable by two months for complex requests with notification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date each data subject request is received in a central log, including the requester’s
+  name and contact details.
+- Record the date and method of your response to each request, ensuring it falls within one month of receipt.
+- State the reason and justification in writing if you extend the deadline by up to two additional months,
+  and notify the requester within the initial month.
+- Name the individual responsible for monitoring deadlines and responses for each request, rather than
+  listing a team or department.
+- Retain copies of all correspondence with the requester, including notifications of any extensions and
+  final responses.

@@ -1,0 +1,40 @@
+leaf_id: req:Art.8:child_consent_register
+control_ref: Art.8
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of processing
+  category: direct
+  rationale: You must first establish a lawful basis for processing personal data, as required by Art.6,
+    before you can assess and record parental consent for children under Art.8. Art.8 only applies if
+    consent is your chosen lawful basis.
+  good_enough: Document which processing activities involving children rely on consent as their lawful
+    basis, and confirm that consent is the selected basis for those activities.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: A current record of processing activities is needed to identify which data processing operations
+    involve children, so you know where child consent is required and what to register.
+  good_enough: Maintain a basic RoPA that lists all processing activities, highlighting those that involve
+    children or may require parental consent.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: Your ISMS scope must cover the information-society services and processing activities involving
+    children, or else the child consent register may be incomplete or out of scope.
+  good_enough: Ensure your ISMS scope statement explicitly includes any services or processing activities
+    where children's data and consent are relevant.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If required, a Data Protection Officer (DPO) should be in place to oversee compliance with
+    child consent requirements and the maintenance of the consent register.
+  good_enough: If your organization meets the criteria for mandatory DPO appointment, designate a DPO
+    and document their role in overseeing child consent processes.

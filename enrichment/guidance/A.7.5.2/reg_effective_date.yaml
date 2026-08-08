@@ -1,0 +1,16 @@
+must_id: item:A.7.5.2:reg_effective_date
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+must_text: Effective date per row (when destination added)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each transfer destination is added as a separate column in the Transfer Destinations
+  Register.
+- Name the person responsible for entering each new destination and its effective date in the register.
+- Cross-reference each entry’s effective date with supporting documentation, such as approval emails or
+  meeting minutes, to confirm accuracy.
+- Avoid leaving the effective date field blank or using placeholders like "TBD" or "ongoing" for any destination
+  row.

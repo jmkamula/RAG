@@ -1,0 +1,18 @@
+must_id: item:A.5.12:review_outcome
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Outcome captured (no change / amended / re-issued) with rationale per amendment
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the periodic review of the classification scheme and record their
+  name and review date in the review log.
+- Document the review outcome as "no change," "amended," or "re-issued" in a dated record signed by the
+  reviewer.
+- State the rationale for each outcome or amendment, referencing specific findings or triggers discussed
+  during the review.
+- Attach or link any updated classification scheme documents to the review record, ensuring version numbers
+  and dates are clearly visible.
+- Name the reviewer as a specific person, not a group or department, to avoid ambiguity in accountability.

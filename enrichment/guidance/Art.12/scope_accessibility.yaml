@@ -1,0 +1,19 @@
+must_id: item:Art.12:scope_accessibility
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Accessibility provisions (disability, language)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all communication channels where individuals can exercise their data rights, including web forms,
+  email addresses, phone lines, and postal addresses.
+- Document the accessibility features provided for each channel, such as screen reader compatibility,
+  alternative text, or translation services.
+- State which languages are supported for each channel and include evidence of translated materials or
+  multilingual support staff.
+- Name a specific individual responsible for maintaining and updating accessibility and language provisions,
+  avoiding generic titles like "the team" or "IT."
+- Retain dated records of periodic accessibility testing or reviews, showing when and how accessibility
+  was last verified for each channel.

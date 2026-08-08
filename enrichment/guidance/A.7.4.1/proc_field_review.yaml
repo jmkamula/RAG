@@ -1,0 +1,18 @@
+must_id: item:A.7.4.1:proc_field_review
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Data-field review — each new field added to a collection form goes through necessity review
+  before deploy
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each new data field proposed for collection in a change log, including the date and the name
+  of the requester.
+- Record the necessity review outcome for each field, stating the specific business need and justification,
+  signed by the reviewer.
+- Name the reviewer as a specific individual responsible for approving or rejecting each field, not a
+  group or department.
+- Retain the final approved version of the collection form, showing only fields that passed necessity
+  review, with the approval date.

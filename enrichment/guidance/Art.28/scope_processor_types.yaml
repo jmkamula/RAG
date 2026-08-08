@@ -1,0 +1,19 @@
+must_id: item:Art.28:scope_processor_types
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Processor types in scope (cloud / SaaS providers, payroll, marketing platforms, analytics,
+  support ticketing, etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all third-party service providers that process personal data on your behalf, including cloud, SaaS,
+  payroll, marketing, analytics, and support platforms.
+- Record the specific processing activities each provider performs, such as data storage, analytics, or
+  customer support.
+- Name the business owner responsible for maintaining and updating the list of in-scope processors as
+  a specific individual, not a team or department.
+- Date the most recent review or update of the processor list to show it is current and actively maintained.
+- Attach supporting contracts or data processing agreements for each listed processor to demonstrate their
+  formal engagement.

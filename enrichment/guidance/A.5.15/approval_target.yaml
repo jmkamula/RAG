@@ -1,0 +1,13 @@
+must_id: item:A.5.15:approval_target
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Reference to the specific version of the access control policy being approved
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact version number and date of the access control policy in the approval document.
+- Name the approver as a specific individual, not a group or department, in the approval record.
+- Sign and date the approval document to confirm the decision and timing.
+- Attach or link the approved policy version directly to the approval record for clear cross-reference.

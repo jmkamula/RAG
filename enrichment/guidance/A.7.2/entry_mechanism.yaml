@@ -1,0 +1,19 @@
+must_id: item:A.7.2:entry_mechanism
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Entry mechanism stated per area (badge, biometric, mechanical key, mantrap)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each secure area by name and location in the procedure, creating a separate entry for every distinct
+  physical space.
+- State the exact entry mechanism used for each area, such as badge access, biometric scanner, mechanical
+  key, or mantrap, without using generic terms.
+- Record the date of the most recent review or update of entry mechanisms for each area, and include the
+  name of the person who performed it.
+- Name the owner responsible for maintaining and updating the entry mechanism list as a specific individual,
+  not a team or department.
+- Attach supporting documentation, such as access system logs or photographs of entry devices, to verify
+  that the stated mechanisms are actually in place.

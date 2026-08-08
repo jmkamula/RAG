@@ -1,0 +1,19 @@
+must_id: item:B.8.5.2:proc_law_enforcement_exception
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+must_text: Law enforcement exception handled per §8.5.4 + §8.5.5
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that law enforcement data transfer exceptions cannot be specified in advance,
+  referencing ISO27701:2019 sections 8.5.4 and 8.5.5.
+- Document the process for recording each law enforcement request, including date, requesting authority,
+  and data requested, in a dedicated log.
+- Assign a named individual responsible for reviewing and approving each law enforcement data transfer,
+  ensuring their name and approval date are recorded.
+- Retain a copy of the communication with law enforcement and the internal approval for each exception
+  as part of the transfer record.
+- Name the owner of the procedure as a specific person, not a team or department, to avoid ambiguity in
+  responsibility.

@@ -1,0 +1,16 @@
+must_id: item:A.7.1:reg_site_id
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Site identifier per perimeter row (HQ, regional offices, data centres, co-locations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each physical perimeter in the register with a unique site identifier, such as "HQ", "London Office",
+  or "Data Centre 1".
+- Record the full address for each site identifier to clearly distinguish between locations with similar
+  names.
+- Assign a named individual as the owner for maintaining accuracy of each perimeter row, not a team or
+  department.
+- Date each entry to show when the perimeter information was last verified or updated.

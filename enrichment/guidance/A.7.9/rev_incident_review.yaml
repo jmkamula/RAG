@@ -1,0 +1,18 @@
+must_id: item:A.7.9:rev_incident_review
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Theft/loss incidents in period — handled per policy, lessons captured
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record all theft or loss incidents involving off-premises assets during the review period in a dated
+  incident log with unique reference numbers.
+- Document the actions taken for each incident, referencing the specific policy section followed for handling
+  and resolution.
+- Capture lessons learned from each incident in a separate, dated summary, including any changes made
+  to procedures or controls.
+- Name the reviewer as a specific individual who conducted the periodic review, not a group or department.
+- Retain evidence of communication to relevant staff about updated procedures or lessons learned, such
+  as dated emails or meeting minutes.

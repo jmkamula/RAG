@@ -1,0 +1,18 @@
+must_id: item:A.7.3.5:scope_public_task
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Public-task processing enumerated (Art.21.1 applies)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all processing activities where your organisation relies on "public task" as the legal basis, referencing
+  each activity in your data processing register.
+- Document the specific reasons each activity is considered a "public task," citing the relevant statutory
+  or regulatory authority.
+- State explicitly for each listed activity that individuals have the right to object under GDPR Article
+  21.1.
+- Name the owner responsible for maintaining and updating this scope as a specific individual, not a team
+  or department.
+- Record the date when this scope was last reviewed and updated, and retain the version history.

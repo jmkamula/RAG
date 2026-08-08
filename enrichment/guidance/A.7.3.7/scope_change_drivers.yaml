@@ -1,0 +1,17 @@
+must_id: item:A.7.3.7:scope_change_drivers
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Trigger list (new third-party sharing / termination of sharing)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each new instance where personal data is shared with a third party in a dated register entry,
+  including the purpose and recipient.
+- Record the date and reason for terminating any third-party data sharing in the same register, referencing
+  the original sharing entry.
+- Assign responsibility for maintaining and updating the sharing register to a named individual, not a
+  generic team or department.
+- Review the register at least quarterly and sign off on its currency, noting the review date and reviewer’s
+  name.

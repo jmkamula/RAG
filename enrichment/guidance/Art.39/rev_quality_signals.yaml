@@ -1,0 +1,19 @@
+must_id: item:Art.39:rev_quality_signals
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Quality signals — incident-trend reduction, DPIA-handling improvement, SA-interaction outcomes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a summary of incident trends over the past year, highlighting reductions or patterns, in a
+  dated report signed by the Data Protection Officer.
+- Record specific improvements in Data Protection Impact Assessment (DPIA) handling, including process
+  changes and measurable outcomes, in a tracked action log.
+- Summarize outcomes of interactions with Supervisory Authorities, including dates, topics discussed,
+  and resolutions, in a formal meeting record.
+- Name the Data Protection Officer responsible for the review as a specific individual, not as a generic
+  team or department.
+- Retain evidence of follow-up actions taken in response to review findings, such as updated procedures
+  or staff training records, with clear completion dates.

@@ -1,0 +1,19 @@
+must_id: item:A.5.16:rev_orphan_analysis
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Orphan analysis (identities without active HR record / business reason; remediation per orphan)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for conducting orphan identity analysis, listing their full name
+  and job title in the review documentation.
+- Document the date of each periodic review, including a summary of the method used to identify orphan
+  accounts across all relevant systems.
+- Record each orphan identity found, noting the system, user identifier, and the absence of an active
+  HR record or business justification.
+- State the remediation action taken for every orphan identity, such as account disablement or deletion,
+  and include the date and responsible person.
+- Attach evidence of completed remediation, such as system logs or screenshots, to the review record for
+  each orphan identity addressed.

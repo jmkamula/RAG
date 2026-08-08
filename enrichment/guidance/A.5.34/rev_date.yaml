@@ -1,0 +1,18 @@
+must_id: item:A.5.34:rev_date
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval (typically within 12 months of last review)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent Privacy and PII Protection Program review in a central compliance
+  log.
+- Name the individual responsible for scheduling and conducting the next review, specifying their full
+  name and job title.
+- Confirm the planned review interval is documented and does not exceed 12 months from the previous review
+  date.
+- Attach evidence of the completed review, such as meeting minutes or a signed summary, with the actual
+  review date clearly shown.
+- Avoid listing the review owner as a group or department; assign a specific person to ensure clear accountability.

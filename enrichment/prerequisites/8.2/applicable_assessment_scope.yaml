@@ -1,0 +1,42 @@
+leaf_id: req:8.2:applicable_assessment_scope
+control_ref: '8.2'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You must know the overall boundaries of your ISMS before you can define which assets, processes,
+    and suppliers are in-scope for operational assessment. This ensures the 8.2 assessment scope is consistent
+    with the organization's declared ISMS scope.
+  good_enough: A documented ISMS scope statement that clearly lists included business units, locations,
+    and technologies. It does not need to be perfect, but must exist and be approved.
+- ref: '8.1'
+  standard_id: ISO27001:2022
+  title: Operational planning and control
+  category: direct
+  rationale: Operational planning and control sets the context for how operational activities are managed
+    and reviewed. Without this, you can't meaningfully define which assets or processes should be individually
+    assessed under 8.2.
+  good_enough: A basic operational planning/control process is documented, even if not fully mature. It
+    should outline how operational activities are identified and managed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need an inventory of assets to determine which ones fall within the operational assessment
+    scope. Without an asset register, you can't reliably identify what needs to be assessed.
+  good_enough: A preliminary asset register exists, listing key information assets, systems, and suppliers.
+    It can be high-level but must be available to inform scope decisions.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: direct
+  rationale: The risk assessment process helps prioritize which assets and processes are most critical
+    and thus must be included in the operational assessment scope. It ensures the scope is risk-driven,
+    not arbitrary.
+  good_enough: A risk assessment methodology is defined and at least an initial risk assessment has been
+    performed, even if it is not exhaustive.

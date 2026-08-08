@@ -1,0 +1,20 @@
+must_id: item:A.5.29:restoration
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Restoration of normal security controls after disruption ends (sequenced, verified — re-encryption,
+  audit-log replay, access-control reactivation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step restoration plan that lists the order for re-enabling each security control,
+  including re-encryption, audit-log replay, and access-control reactivation.
+- Assign a named individual responsible for verifying that each control is restored and functioning as
+  intended after disruption ends.
+- Record the date, time, and outcome of each restoration step in a log, including any issues encountered
+  and how they were resolved.
+- Cross-reference the restoration plan with your business continuity and disaster recovery procedures,
+  specifically linking to the process described in control A.5.30.
+- Name the owner as a specific person, not a team or department, to avoid ambiguity about who is accountable
+  for restoration actions.

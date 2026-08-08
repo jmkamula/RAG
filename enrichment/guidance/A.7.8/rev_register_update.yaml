@@ -1,0 +1,19 @@
+must_id: item:A.7.8:rev_register_update
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Changes propagated to the live register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each completed equipment siting review in a dated log entry, listing all changes identified and
+  the responsible reviewer’s name.
+- Update the live equipment register immediately after each review, reflecting all approved changes with
+  corresponding review dates.
+- Cross-reference the updated register with the review log to confirm every identified change has been
+  propagated to the live record.
+- Name the register owner as a specific individual, not a team or department, to ensure clear accountability
+  for updates.
+- Retain previous versions of the register and review logs to demonstrate the history of changes and timely
+  propagation.

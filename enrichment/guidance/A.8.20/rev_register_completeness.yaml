@@ -1,0 +1,19 @@
+must_id: item:A.8.20:rev_register_completeness
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Register-completeness check (every new segment registered)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each new network segment in the official network register, including a unique identifier and
+  the date of registration.
+- Assign a named individual to review the network register after each new segment is added, confirming
+  completeness and accuracy.
+- Document the review with a dated entry and the reviewer’s name or signature in the register or a linked
+  change log.
+- Name the owner of the network register as a specific person, not a team or department, to avoid ambiguity
+  in accountability.
+- Retain evidence of each periodic completeness check, such as review meeting minutes or annotated register
+  snapshots.

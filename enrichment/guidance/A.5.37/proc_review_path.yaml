@@ -1,0 +1,18 @@
+must_id: item:A.5.37:proc_review_path
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Review path before publication (peer review by other operators, InfoSec sign-off for procedures
+  touching security controls)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the peer reviewer by full name and role in the procedure's review section before publishing the
+  operating procedure.
+- Record the date and outcome of the peer review in a tracked change log or approval table within the
+  procedure document.
+- Obtain InfoSec sign-off with a dated signature for any procedure that impacts security controls, attaching
+  the approval to the final document.
+- Avoid using generic group names like "Operations Team" or "Security Department" as reviewers; always
+  specify individual names.

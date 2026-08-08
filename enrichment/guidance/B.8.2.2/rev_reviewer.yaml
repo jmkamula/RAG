@@ -1,0 +1,16 @@
+must_id: item:B.8.2.2:rev_reviewer
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Engineering Lead + Compliance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'Name the reviewer as a specific individual for each required role: Data Protection Officer, Engineering
+  Lead, and Compliance representative.'
+- Record the full names and job titles of all reviewers in the Purpose Adherence Program Review document.
+- Document the date each reviewer completed their review and approval within the same record.
+- Sign the review document physically or electronically to confirm each reviewer’s participation and agreement.
+- Avoid listing a group or department as the reviewer; always specify named individuals for each required
+  role.

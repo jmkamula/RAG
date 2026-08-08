@@ -1,0 +1,19 @@
+must_id: item:A.8.34:rev_evidence_hygiene
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Evidence-preservation hygiene check (artefacts retained per chain-of-custody)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for evidence preservation by full name and job title in the audit testing
+  protection program documentation.
+- Record the dates when evidence is collected, transferred, and stored in a chain-of-custody log signed
+  by each handler.
+- Document the specific location and method of evidence storage, including access controls and retention
+  periods, in a dated register.
+- Retain copies of all evidence-handling logs and related correspondence for each audit cycle, ensuring
+  they are accessible for review.
+- Avoid using generic descriptions like "secure storage"—specify exact storage locations and procedures
+  in the documented process.

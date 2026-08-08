@@ -1,0 +1,16 @@
+must_id: item:A.7.7:reg_findings
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Per-audit findings (count of violations, types observed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, time, and location of each clear desk and clear screen audit in the audit register.
+- List the specific types of violations observed during each audit, such as unattended documents or unlocked
+  screens.
+- Count and enter the total number of violations found per audit, broken down by violation type.
+- Name the auditor who conducted each audit as a specific individual, not as a team or department.
+- Attach or reference any supporting evidence, such as photos or checklists, for each audit entry in the
+  register.

@@ -1,0 +1,19 @@
+must_id: item:B.8.2.3:proc_freely_given_alignment
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: Alignment with Art.7.4 — freely-given consent test factored into any permit granted
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for obtaining consent for marketing or advertising, including how individuals
+  are informed of their right to refuse consent.
+- State explicitly in the procedure that consent for marketing is not a condition for accessing any service
+  or contract.
+- Name the person responsible for reviewing and updating the consent process to ensure it meets the "freely-given"
+  standard.
+- Attach a sample consent form showing separate, unticked checkboxes for marketing consent, dated and
+  version-controlled.
+- Avoid using generic statements like "consent is always obtained"—instead, provide a specific, dated
+  record of the last consent review.

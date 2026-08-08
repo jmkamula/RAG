@@ -1,0 +1,17 @@
+must_id: item:A.8.1:scope_change_drivers
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new device class, new vendor, regulatory inspection rights)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current endpoint types, vendors, and regulatory inspection rights in a dated document reviewed
+  at least annually.
+- Document a trigger list specifying events that require re-scoping, such as adding a new device class,
+  onboarding a new vendor, or changes in regulatory inspection rights.
+- Assign a named individual responsible for monitoring and updating the trigger list when relevant changes
+  occur.
+- Record each re-scoping decision with the date, reason, and the person who approved the update.
+- Name the owner as a specific individual — do not use generic terms like "IT team" or "Security Department".

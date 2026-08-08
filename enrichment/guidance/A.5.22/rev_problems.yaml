@@ -1,0 +1,17 @@
+must_id: item:A.5.22:rev_problems
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Identified problems / incidents managed through to resolution
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each identified supplier-related problem or incident in a dated log entry, including a clear
+  description and the person who reported it.
+- Assign a named individual to investigate and manage each logged problem or incident, avoiding generic
+  ownership like "the team" or "IT".
+- Document all actions taken to resolve each issue, including dates, responsible persons, and any communications
+  with the supplier.
+- Confirm and record the closure of each problem or incident, including the date and the name of the person
+  who approved the resolution.

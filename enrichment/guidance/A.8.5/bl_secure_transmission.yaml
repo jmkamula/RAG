@@ -1,0 +1,20 @@
+must_id: item:A.8.5:bl_secure_transmission
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Secure transmission enforced (TLS only, no plaintext credentials anywhere — including legacy
+  protocols)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all authentication mechanisms and protocols in use, listing each system and specifying whether
+  TLS is enforced for credential transmission.
+- Record the configuration settings or screenshots showing TLS is enabled and plaintext authentication
+  is disabled on all relevant systems and services.
+- Name a specific individual responsible for maintaining and reviewing secure transmission settings, avoiding
+  generic roles like "IT" or "the team".
+- Retain evidence of periodic technical tests or scans confirming no plaintext credentials are accepted
+  or transmitted, including test dates and results.
+- State any exceptions or legacy systems explicitly, with a signed risk acceptance or remediation plan
+  and a clear timeline for resolution.

@@ -1,0 +1,19 @@
+must_id: item:Art.29:rev_training_currency
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Training currency — A.6.3 / 7.3 training current for every authorised person
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the names of all individuals authorised to process personal data, along with their specific roles,
+  in a dated register.
+- Confirm completion dates of GDPR and data protection training for each authorised person, referencing
+  A.6.3 and 7.3 requirements.
+- Retain certificates or signed acknowledgements of training completion for every authorised person, including
+  renewal or refresher dates.
+- Name the owner responsible for monitoring training currency as a specific individual, not a group or
+  department.
+- Document a periodic review schedule and the most recent review date to show ongoing compliance with
+  training requirements.

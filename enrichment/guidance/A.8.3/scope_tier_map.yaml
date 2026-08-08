@@ -1,0 +1,20 @@
+must_id: item:A.8.3:scope_tier_map
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Classification tier → enforcement strictness mapping (public / internal / confidential / restricted
+  → ACL vs RBAC vs MFA-gated)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems in scope with their assigned classification tier (public, internal, confidential, restricted)
+  and record the date of classification.
+- Map each classification tier to a specific enforcement method (e.g., ACL, RBAC, MFA) and document this
+  mapping in a table or matrix.
+- Name a specific individual responsible for maintaining and updating the classification and enforcement
+  mapping, not a team or department.
+- Attach evidence of enforcement configuration for at least one system per tier, such as screenshots or
+  configuration files, dated and labeled.
+- Review and sign off on the mapping and enforcement evidence annually, with the signatory and review
+  date clearly recorded.

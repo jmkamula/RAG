@@ -1,0 +1,17 @@
+must_id: item:Art.25:proc_record
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Per-review record retained (which design, which decisions, which measures)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each system or process design reviewed, including a unique name and version, in a dated entry
+  within your Data Protection by Design log.
+- Document all decisions made during the review, listing the specific privacy risks identified and the
+  mitigation measures selected.
+- Name the individual responsible for each review and decision, avoiding generic labels like "the team"
+  or "IT department."
+- Retain a copy of the final review record, including any supporting materials, in a designated compliance
+  folder with a clear retention date.

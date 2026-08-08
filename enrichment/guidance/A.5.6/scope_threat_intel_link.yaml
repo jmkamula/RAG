@@ -1,0 +1,18 @@
+must_id: item:A.5.6:scope_threat_intel_link
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Cross-link to threat-intelligence procedure (A.5.7) — the two scopes should share drivers
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the SIG Engagement Risk-Topic Scope document to the current threat-intelligence procedure
+  by title and document version.
+- State the shared business drivers or risks that appear in both the SIG Engagement Risk-Topic Scope and
+  the threat-intelligence procedure.
+- Name the individual responsible for maintaining alignment between the SIG Engagement Risk-Topic Scope
+  and the threat-intelligence procedure.
+- Attach or link a dated record showing the last review of both documents for cross-control coherence.
+- Specify the threat-intelligence procedure using its unique identifier, not a generic description or
+  placeholder text.

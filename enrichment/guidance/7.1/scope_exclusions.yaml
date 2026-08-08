@@ -1,0 +1,17 @@
+must_id: item:7.1:scope_exclusions
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Exclusions stated explicitly with rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all resource categories considered for inclusion in the information security management system,
+  using clear and specific category names.
+- State any excluded resource categories by name and provide a brief, written rationale for each exclusion.
+- Record the decision date and the name of the individual or committee responsible for approving each
+  exclusion.
+- Attach supporting evidence, such as risk assessments or business justifications, that explain why each
+  excluded category does not require coverage.
+- Name the owner of the exclusions document as a specific individual, not a group or department.

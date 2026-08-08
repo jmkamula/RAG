@@ -1,0 +1,18 @@
+must_id: item:A.8.7:reg_exclusions
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Per-asset exclusion rationale where agent not installable (e.g. embedded / OT)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each asset where malware protection cannot be installed, including device type, location, and unique
+  identifier in the register.
+- Document the technical or operational reason why malware protection is not installable for each asset,
+  using plain language.
+- Name the individual who approved the exclusion for each asset, ensuring a specific person is listed
+  rather than a team or department.
+- Record the date the exclusion rationale was reviewed and approved for each asset in the register.
+- Attach or cross-reference any supporting documentation, such as vendor statements or risk assessments,
+  that justify the exclusion.

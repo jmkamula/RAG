@@ -1,0 +1,18 @@
+must_id: item:Art.33:timing
+control_ref: Art.33
+standard_id: GDPR:2016/679
+must_text: Notified within 72 hours of becoming aware
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time you became aware of the personal data breach in an incident log entry.
+- Document the date and time the notification was sent to the supervisory authority, attaching a copy
+  of the submitted notification.
+- Name the individual responsible for submitting the notification, ensuring a specific person is listed
+  rather than a team or department.
+- Retain confirmation of receipt from the supervisory authority, such as an email acknowledgement or reference
+  number.
+- Cross-reference the breach notification with your internal incident report to show the notification
+  was made within the required 72-hour window.

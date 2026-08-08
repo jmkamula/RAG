@@ -1,0 +1,17 @@
+must_id: item:A.8.10:scope_vendor_managed
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Vendor-managed data delegated to A.5.19/A.5.20 supplier obligations (contractual deletion-on-termination)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems and data types where vendors manage deletion, specifying each vendor and the relevant
+  data categories in a dated register.
+- Cross-reference each vendor-managed data entry with the corresponding contract clause mandating deletion
+  upon termination.
+- Name the individual responsible for maintaining and updating the deletion scope register, avoiding generic
+  roles like "IT" or "the team".
+- Document the review date and outcome for the most recent verification of vendor deletion obligations,
+  including any updates made.

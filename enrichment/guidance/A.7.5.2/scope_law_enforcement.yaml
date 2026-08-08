@@ -1,0 +1,19 @@
+must_id: item:A.7.5.2:scope_law_enforcement
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+must_text: Law-enforcement-request handling (not in advance-disclosed list)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each law enforcement request received, including the date, requesting authority, and the specific
+  data requested.
+- Record the decision process for each request, naming the individual who approved or denied the disclosure
+  and the rationale used.
+- Retain copies of all correspondence and legal documents related to each request, including any warrants
+  or court orders.
+- Name the owner responsible for handling law enforcement requests as a specific individual, not a generic
+  team or department.
+- Confirm that no pre-approved or advance-disclosed list of law enforcement destinations exists in your
+  documentation.

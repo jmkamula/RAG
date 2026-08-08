@@ -1,0 +1,16 @@
+must_id: item:A.8.13:rev_reviewer
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Backup Operations + Infrastructure + InfoSec)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer for Backup Operations as a specific individual, not a team or department, in the review
+  record.
+- Record the full name and job title of the Infrastructure reviewer in the documented backup program review.
+- Document the InfoSec reviewer's identity, including date of review, in the signed backup program review
+  log.
+- Cross-reference the review record with supporting evidence, such as meeting minutes or approval emails,
+  showing each named reviewer participated.

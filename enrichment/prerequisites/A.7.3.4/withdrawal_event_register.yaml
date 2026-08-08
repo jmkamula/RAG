@@ -1,0 +1,48 @@
+leaf_id: req:A.7.3.4:withdrawal_event_register
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the specific purposes for which personal data is processed and consent is collected
+    before you can track withdrawals or modifications. This ensures the register is meaningful and mapped
+    to actual processing activities.
+  good_enough: A documented list of processing purposes linked to consent, even if not fully mapped to
+    every system, is sufficient to begin drafting the withdrawal register.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: You need to confirm which processing activities rely on consent as their lawful basis, so
+    you know which events must be logged in the register.
+  good_enough: A basic mapping of processing activities to lawful basis, with those relying on consent
+    clearly identified, is enough to proceed.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The register must cover all in-scope systems and processing activities. Without a defined
+    scope, you risk missing relevant withdrawal events.
+  good_enough: A draft scope statement that identifies the business units, systems, and data types covered
+    by the ISMS and PIMS is sufficient to start.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that someone is responsible for recording, updating, and
+    reviewing consent withdrawal events.
+  good_enough: A named individual or team responsible for privacy operations, even if role descriptions
+    are high-level, is enough to unblock drafting the register.
+- ref: Art.7
+  standard_id: GDPR:2016/679
+  title: Conditions for Consent
+  category: cross_role
+  rationale: GDPR Article 7 sets the legal requirements for obtaining, managing, and withdrawing consent,
+    which the register must help demonstrate.
+  good_enough: A summary of how your consent process aligns with Article 7, even if not fully operationalized,
+    is sufficient to inform the register's requirements.

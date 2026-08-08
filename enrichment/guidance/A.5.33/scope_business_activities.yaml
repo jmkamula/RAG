@@ -1,0 +1,18 @@
+must_id: item:A.5.33:scope_business_activities
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Business activities considered (HR/employment, finance/tax, sales/customer, operations/security,
+  regulated activities — each may generate distinct record classes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all core business activities such as HR, finance, sales, operations, and regulated functions in
+  a documented records categories scope.
+- Name a specific individual responsible for maintaining the records categories scope, avoiding generic
+  titles like "the team" or "management".
+- Cross-reference each business activity to the distinct classes of records it generates, such as payroll,
+  tax filings, contracts, or security logs.
+- Date and approve the records categories scope document to confirm it reflects current business operations
+  and compliance obligations.

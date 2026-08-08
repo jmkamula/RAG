@@ -1,0 +1,20 @@
+must_id: item:A.5.32:incident_handling
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Handling path for suspected IPR infringement (internal report, takedown, internal remediation,
+  cease-and-desist response)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step process for reporting suspected intellectual property rights infringement, including
+  how and where to submit internal reports.
+- Assign a named individual or role responsible for investigating IPR infringement reports, and record
+  their contact details in the procedure.
+- State the actions required for internal remediation, such as content takedown or system changes, and
+  reference the person authorized to approve these actions.
+- Include a template or example of a cease-and-desist response letter, dated and reviewed by legal counsel,
+  within the procedure.
+- Specify that all reports and actions must be logged with dates and names; avoid accepting anonymous
+  or verbal-only reports as sufficient evidence.

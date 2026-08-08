@@ -1,0 +1,17 @@
+must_id: item:A.8.20:rev_reviewer
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Network Engineering + InfoSec)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer from Network Engineering as a specific individual, listing their full name and role
+  in the review record.
+- Record the reviewer from Information Security as a named person, not just "InfoSec" or a team title,
+  in the review documentation.
+- Document the date each reviewer completed their assessment, attaching their comments or sign-off to
+  the review artefact.
+- Retain copies of the review record showing both reviewers’ names and completion dates for each periodic
+  network program review.

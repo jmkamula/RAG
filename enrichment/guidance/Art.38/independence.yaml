@@ -1,0 +1,19 @@
+must_id: item:Art.38:independence
+control_ref: Art.38
+standard_id: GDPR:2016/679
+must_text: Independence protection — DPO not instructed on tasks (Art.38.3) + not dismissed/penalised
+  for performance of tasks (Art.38.3)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that the Data Protection Officer (DPO) reports directly to the highest management
+  level, naming the position or individual.
+- Document a clear statement that the DPO cannot be instructed on how to perform their data protection
+  tasks, with a dated management approval.
+- Record a clause prohibiting dismissal or penalties for DPO performance of GDPR duties, referencing the
+  relevant GDPR article and date of adoption.
+- Name the DPO as a specific individual in the procedure, not as a team or department, to avoid ambiguity.
+- Retain evidence of communication to all staff about the DPO’s protected status, such as a dated company-wide
+  announcement or training record.

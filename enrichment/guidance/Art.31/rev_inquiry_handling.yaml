@@ -1,0 +1,20 @@
+must_id: item:Art.31:rev_inquiry_handling
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Inquiry handling audit — every SA interaction this year handled per procedure with deadlines
+  met
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each inquiry from a Supervisory Authority (SA) this year in a central log, including the date
+  received and the responsible staff member.
+- Record the steps taken to handle each inquiry, referencing the documented procedure and noting any deadlines
+  specified by the SA.
+- Attach evidence of communications with the SA, such as emails or letters, showing responses were sent
+  within required timeframes.
+- Name the staff member who approved the final response to the SA for each inquiry, ensuring this is a
+  specific individual, not a team or department.
+- Review the log for any inquiries missing completion dates or documentation, and update records to avoid
+  gaps an auditor could flag.

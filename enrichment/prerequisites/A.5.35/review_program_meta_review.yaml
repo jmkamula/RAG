@@ -1,0 +1,39 @@
+leaf_id: req:A.5.35:review_program_meta_review
+control_ref: A.5.35
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities is essential to ensure that reviewers and
+    meta-reviewers are independent and that the review program is managed objectively.
+  good_enough: Documented roles exist for both reviewers and those conducting the meta-review, with independence
+    criteria outlined.
+- ref: A.5.3
+  standard_id: ISO27001:2022
+  title: Segregation of Duties
+  category: foundational
+  rationale: Segregation of duties ensures that no single individual has unchecked control over the review
+    process, supporting the independence required for a credible meta-review.
+  good_enough: A basic matrix or list shows that those conducting the meta-review are not the same as
+    those running or participating in regular reviews.
+- ref: A.5.35
+  standard_id: ISO27001:2022
+  title: Periodic Independent Review Program
+  category: direct
+  rationale: The existence and operation of the underlying review program is necessary to conduct a meta-review;
+    without it, there is nothing to assess for independence, cadence, or effectiveness.
+  good_enough: There is a documented review program with at least one completed review cycle, including
+    reviewer selection and findings.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines what assets, processes, and teams are subject to review, ensuring
+    the meta-review considers the full intended coverage.
+  good_enough: A current scope statement exists that identifies the boundaries of the ISMS and what is
+    included in the review program.

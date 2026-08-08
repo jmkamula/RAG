@@ -1,0 +1,15 @@
+must_id: item:A.5.25:rev_date
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent Event Triage Program review in a central register or tracking document.
+- State the planned review interval in months or years within the Event Triage Program documentation.
+- Confirm the actual review date falls within the stated interval by cross-referencing the last review
+  date and the planned schedule.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Retain a signed or approved copy of the review outcome with the completion date clearly visible.

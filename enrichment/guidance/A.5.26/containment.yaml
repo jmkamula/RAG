@@ -1,0 +1,16 @@
+must_id: item:A.5.26:containment
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Containment steps documented (immediate actions to limit damage)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific containment actions to be taken immediately after an incident is detected, listing
+  each step in the procedure with clear instructions.
+- Name the person or role responsible for initiating each containment action, ensuring individuals are
+  identified rather than generic teams or departments.
+- Record the date and version of the procedure to show when containment steps were last reviewed or updated.
+- Include a cross-reference to any related incident response records or logs that demonstrate these containment
+  steps have been followed in past incidents.

@@ -1,0 +1,18 @@
+must_id: item:A.8.23:categories
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: Category-based blocking minimum set (malware / phishing / illegal content / anonymisers / known-malicious)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the policy owner as a specific individual, including their job title and contact details, on the
+  Web Filtering Policy document.
+- Document the exact categories blocked by default—malware, phishing, illegal content, anonymisers, and
+  known-malicious—in a dated policy section.
+- Record the date of the last policy review and the reviewer’s name and signature on the policy document.
+- Attach a screenshot or export of the current web filter configuration showing the blocked categories,
+  with the date captured.
+- State any exceptions to category blocking in a separate, approved list, including the name and role
+  of the approver and approval date.

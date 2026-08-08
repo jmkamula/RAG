@@ -1,0 +1,18 @@
+must_id: item:Art.35:dpo_advice
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: DPO advice mandatory (Art.35.2) — DPO consulted during DPIA, advice recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer (DPO) as a specific individual in the Data Protection Impact Assessment
+  (DPIA) documentation.
+- Record the date and method of DPO consultation within the DPIA procedure, such as meeting minutes or
+  written correspondence.
+- Document the DPO’s advice in full, attaching any written recommendations or comments to the DPIA record.
+- Confirm that the DPIA includes a statement acknowledging the DPO’s advice was considered before final
+  approval.
+- Avoid referencing DPO involvement in vague terms; specify the actual person and advice provided, not
+  just that “the DPO was consulted.”

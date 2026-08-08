@@ -1,0 +1,17 @@
+must_id: item:A.7.1:perimeter_inventory
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Inventory of perimeters defined (which physical boundaries exist per site)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each physical security perimeter by site, including building names, floor numbers, and restricted
+  areas, in a dated inventory document.
+- Name the person responsible for maintaining the perimeter inventory as a specific individual, not a
+  team or department.
+- Attach site maps or floor plans that visually mark each defined perimeter and reference them in the
+  inventory document.
+- Record the date of the last review or update of the perimeter inventory and keep previous versions for
+  comparison.

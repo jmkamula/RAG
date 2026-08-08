@@ -1,0 +1,39 @@
+leaf_id: req:A.8.26:applicable_appsec_scope
+control_ref: A.8.26
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of your business and IT landscape are in-scope for your ISMS
+    before you can decide which applications should be covered by application security requirements.
+  good_enough: A clear, current ISMS scope statement that identifies included business units, systems,
+    and application types.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register is essential to identify all applications in use, so you can
+    determine which ones need to be included in the application security requirements scope.
+  good_enough: A working inventory of applications, with enough detail to distinguish customer-facing,
+    internal, and third-party/COTS apps.
+- ref: A.8.25
+  standard_id: ISO27001:2022
+  title: Secure development life cycle
+  category: direct
+  rationale: The secure development lifecycle process defines when and how application security requirements
+    are applied, so you need this process in place to determine which applications are subject to full-depth
+    requirements.
+  good_enough: A documented SDLC process that specifies security requirements integration points for different
+    application types.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Knowing how information and applications are classified helps determine which applications
+    require more rigorous security requirements.
+  good_enough: A basic classification scheme that covers application types and their sensitivity or criticality.

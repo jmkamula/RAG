@@ -1,0 +1,19 @@
+must_id: item:7.3:cadence
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Delivery cadence stated (onboarding + annual refresher, with refresh on policy update)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the delivery schedule in the ISMS Awareness Programme document, specifying onboarding, annual
+  refresher, and refresh after policy updates.
+- Name the individual responsible for maintaining and updating the delivery schedule in the programme
+  documentation.
+- Record the date the delivery cadence was last reviewed and approved by management in meeting minutes
+  or an approval log.
+- Attach evidence of the most recent awareness session, showing the date and confirming alignment with
+  the stated schedule.
+- Specify the cadence using concrete timeframes—avoid vague terms like "regularly" or "as needed" that
+  lack clear auditor evidence.

@@ -1,0 +1,19 @@
+must_id: item:Art.45:scope_eligibility_proof
+control_ref: Art.45
+standard_id: GDPR:2016/679
+must_text: Eligibility-proof method per destination (Commission register / DPF list / etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each non-EU country where personal data is transferred in a documented list, including the specific
+  data transfer destination.
+- Record the eligibility method used for each destination, such as the European Commission adequacy decision
+  or the Data Privacy Framework list.
+- Cross-reference each listed country to the current official register or list, including the publication
+  date and relevant link or document.
+- State the individual responsible for maintaining and updating this list, avoiding generic titles like
+  "the team" or "IT department."
+- Retain evidence of periodic review, such as a dated sign-off or update log, to show the list remains
+  current.

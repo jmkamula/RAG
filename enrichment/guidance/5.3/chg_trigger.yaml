@@ -1,0 +1,15 @@
+must_id: item:5.3:chg_trigger
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Change trigger stated (org restructure, new control area, person change, new framework)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific reason for each ISMS role change in the record, such as organisational restructure,
+  new framework adoption, or personnel change.
+- Record the date the change was triggered and the date it was implemented to provide a clear timeline.
+- Name the individual who authorised the change, including their role and contact details.
+- Avoid using vague triggers like "needed update" or "routine review"—describe the actual event or decision
+  that prompted the change.

@@ -1,0 +1,19 @@
+must_id: item:A.7.7:printer_rules
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Printer / multifunction device rules (pull-print, collect immediately, fax-line policy)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the rules requiring users to collect printed documents immediately from printers and multifunction
+  devices in your Clear Desk and Clear Screen Policy.
+- State the use of pull-print technology or secure release mechanisms for all networked printers and multifunction
+  devices in the policy.
+- Name a specific individual responsible for monitoring compliance with printer and fax security rules,
+  not just "IT" or "the team".
+- Record the fax-line policy, specifying whether physical fax machines are permitted and how received
+  documents are handled and secured.
+- Retain a dated and approved version of the policy, signed by a senior manager, to demonstrate it is
+  current and authorised.

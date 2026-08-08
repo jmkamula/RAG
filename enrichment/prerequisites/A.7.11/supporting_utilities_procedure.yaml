@@ -1,0 +1,39 @@
+leaf_id: req:A.7.11:supporting_utilities_procedure
+control_ref: A.7.11
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which sites, systems, and processes are covered by the ISMS,
+    ensuring the supporting utilities procedure is relevant and complete for all applicable locations.
+  good_enough: A documented scope that clearly lists all sites and facilities where information processing
+    occurs, so you know where utility continuity must be addressed.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment identifies which utilities are critical and what types of disruptions could
+    impact information processing, guiding the focus and depth of the continuity procedure.
+  good_enough: A recent risk assessment that highlights utility-related risks for information processing
+    facilities, even if not fully mitigated yet.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: The asset register lists key information processing facilities and infrastructure, helping
+    ensure all relevant assets are considered in the continuity procedure.
+  good_enough: An up-to-date list of major information processing assets and their locations, sufficient
+    to identify which assets depend on supporting utilities.
+- ref: A.7.11
+  standard_id: ISO27001:2022
+  title: Supporting Utilities Register
+  category: direct
+  rationale: The register of supporting utilities is needed to know which utilities (e.g., power, HVAC,
+    water) require continuity planning and procedural controls.
+  good_enough: A basic list of utilities supporting each critical facility, even if not fully detailed,
+    so the procedure can reference them accurately.

@@ -1,0 +1,19 @@
+must_id: item:B.8.2.4:rev_legislation_currency
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Legislation currency — cited legislation updated for regulatory changes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all legislation cited in the Infringing Instruction Program, including full titles and relevant
+  sections, in a dated reference table.
+- Document the date each piece of legislation was last checked for amendments or updates, with the name
+  of the person who performed the check.
+- Attach evidence, such as official government website printouts or links, showing the current version
+  of each cited law as of the review date.
+- Name the reviewer as a specific individual, not a group or department, responsible for confirming legislative
+  currency.
+- Record any changes made to the program due to legislative updates, including the date of change and
+  who approved the update.

@@ -1,0 +1,20 @@
+must_id: item:A.5.18:rev_ad_hoc_triggers
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Ad-hoc review triggers listed (org restructure, M&A, major access policy change, security incident
+  affecting access controls)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific ad-hoc triggers for access rights reviews, such as organisational restructure, mergers,
+  major access policy changes, or security incidents, in your access review procedure.
+- Document the date and details of each ad-hoc access rights review, including the trigger event, in an
+  access review log.
+- Name the person responsible for initiating ad-hoc access reviews in response to each listed trigger,
+  ensuring a specific individual is identified.
+- Attach supporting evidence, such as meeting minutes or incident reports, that confirm the occurrence
+  of the trigger event prompting the review.
+- Avoid using vague or generic triggers like "as needed" or "when necessary"; specify concrete events
+  that require an ad-hoc review.

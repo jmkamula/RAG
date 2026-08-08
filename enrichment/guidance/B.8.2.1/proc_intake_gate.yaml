@@ -1,0 +1,19 @@
+must_id: item:B.8.2.1:proc_intake_gate
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+must_text: Intake gate — new customer onboarding blocked until PII processing agreement executed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure that requires a signed PII processing agreement before any new customer onboarding
+  can begin.
+- Record the date and name of the person who verifies execution of each PII processing agreement in an
+  onboarding checklist.
+- Attach a copy of the executed PII processing agreement to the customer’s onboarding file before granting
+  system access.
+- Name the responsible individual who approves onboarding, ensuring this is a specific person and not
+  a generic role or team.
+- Retain evidence of any onboarding attempts blocked due to missing agreements, such as system logs or
+  email correspondence.

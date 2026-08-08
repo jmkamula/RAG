@@ -1,0 +1,19 @@
+must_id: item:A.8.7:rev_threat_intel
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Threat-intel review (cross-link to A.5.7 — new tactics → tool/rule updates)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the malware protection program review and record their name and role
+  in the review documentation.
+- Document the date and outcome of the most recent threat intelligence review, including any new malware
+  tactics identified.
+- Cross-reference the threat intelligence findings to specific updates made to malware protection tools
+  or detection rules, citing version numbers or change logs.
+- State how the review incorporated requirements from control A.5.7, noting any actions taken to address
+  new or evolving threats.
+- Avoid referencing only generic or undated threat intelligence sources—cite specific reports or feeds
+  with publication dates.

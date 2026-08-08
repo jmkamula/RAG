@@ -1,0 +1,39 @@
+leaf_id: req:A.5.19:supplier_register
+control_ref: A.5.19
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The supplier register must only include suppliers relevant to the ISMS scope. Without a clear
+    scope statement, you cannot determine which suppliers should be tracked.
+  good_enough: The ISMS scope is documented and up to date, with enough detail to identify which business
+    units, processes, and suppliers are in or out of scope.
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: direct
+  rationale: The supplier register is governed by the organization’s information security policies, which
+    define expectations for supplier management and classification.
+  good_enough: There is a current, approved information security policy that addresses supplier relationships
+    at a high level.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: To accurately record what suppliers provide and what they access, you need an asset register
+    that lists key information assets and their ownership.
+  good_enough: The asset register exists and covers major information assets, with enough detail to link
+    suppliers to the assets they impact.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Supplier risk classification relies on the organization’s information classification scheme
+    to determine the sensitivity of data or services accessed by each supplier.
+  good_enough: There is a documented classification scheme that is being used to categorize information
+    and services, even if not all assets are fully classified yet.

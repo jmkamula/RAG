@@ -1,0 +1,20 @@
+must_id: item:B.8.5.5:proc_contractual_scope
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Contractually-agreed scope — what customer-authorised requests look like (per B.8.2.1 agreement
+  clauses)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact types of customer-authorised disclosure requests permitted under each contract, referencing
+  the relevant agreement clause and date.
+- Document the step-by-step procedure for verifying and processing customer-authorised requests, including
+  required documentation and approval checkpoints.
+- Name the person responsible for making disclosure decisions for each contract, ensuring this is a specific
+  individual and not a generic role or team.
+- Record each disclosure request and decision with the requester’s name, date, contract reference, and
+  outcome in a central log.
+- Attach a copy of the relevant contract section to each logged disclosure decision to show alignment
+  with the agreed scope.

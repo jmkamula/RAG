@@ -1,0 +1,17 @@
+must_id: item:Art.27:scope_member_state_target
+control_ref: Art.27
+standard_id: GDPR:2016/679
+must_text: MS targeted (Art.27.3 — representative MUST be in one of these)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all European Union member states where you offer goods or services or monitor individuals, with
+  dates and supporting business records.
+- Document how you determined these member states are within the scope of Article 27, referencing contracts,
+  marketing materials, or customer data.
+- Name the designated Article 27 representative and specify the exact member state where they are located,
+  matching your documented scope.
+- Avoid listing a representative in a country not included in your documented scope, as auditors will
+  flag mismatches between scope and representative location.

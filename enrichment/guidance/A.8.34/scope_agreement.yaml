@@ -1,0 +1,18 @@
+must_id: item:A.8.34:scope_agreement
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Written scope-agreement required (what's in / what's out / what tests / what data)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the audit scope in writing, clearly listing included and excluded systems, data types, and
+  specific tests to be performed.
+- Name the individual who approved the scope agreement, ensuring their full name and role appear on the
+  document.
+- Record the date the scope agreement was finalized and signed by both the auditor and the organization
+  representative.
+- Attach the signed scope agreement to the audit planning file, making it available for auditor review.
+- Specify exclusions and limitations explicitly—do not use vague terms like "as needed" or "to be determined"
+  in the scope document.

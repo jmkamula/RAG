@@ -1,0 +1,18 @@
+must_id: item:Art.35:rev_date
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of your Data Protection Impact Assessment (DPIA) program in a dated
+  document or register.
+- Document the planned review interval for the DPIA program, specifying the frequency in months or years
+  in a policy or schedule.
+- Compare the actual review date to the planned interval and note any discrepancies in a review log or
+  meeting minutes.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Retain evidence of the review decision, such as signed meeting minutes or an approved report, showing
+  the review occurred within the required timeframe.

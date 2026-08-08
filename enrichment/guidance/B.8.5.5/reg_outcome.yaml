@@ -1,0 +1,18 @@
+must_id: item:B.8.5.5:reg_outcome
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Outcome per row (rejected / accepted / customer-consulted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each disclosure request in the register with a unique identifier, date received, and the name
+  of the requesting party.
+- State the decision outcome for every entry as "rejected," "accepted," or "customer-consulted" in a dedicated
+  column.
+- Name the decision-maker for each disclosure, listing a specific individual rather than a generic role
+  or group.
+- Document the date the decision was made for each row to provide a clear timeline of actions.
+- Avoid leaving the outcome column blank or using vague terms such as "pending" or "in progress" for completed
+  decisions.

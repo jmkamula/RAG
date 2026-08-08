@@ -1,0 +1,17 @@
+must_id: item:A.7.2.3:proc_collection_mechanism
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: Collection mechanism per channel (web form / mobile app / physical form / verbal with recording)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each consent collection method by channel, specifying whether it is a web form, mobile app,
+  physical form, or verbal recording, in a dated procedure file.
+- Name the person responsible for overseeing consent collection for each channel, listing them as a specific
+  individual rather than a team or department.
+- Attach sample evidence for each channel, such as screenshots of web forms, photos of physical forms,
+  or audio files for verbal consent.
+- State the date each consent mechanism was last reviewed or updated, and record this in the procedure
+  documentation.

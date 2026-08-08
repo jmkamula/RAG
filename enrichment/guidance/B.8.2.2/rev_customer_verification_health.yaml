@@ -1,0 +1,18 @@
+must_id: item:B.8.2.2:rev_customer_verification_health
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: Customer verification health — audits requested + supported within stated SLA
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each customer audit request with the requestor’s name, date received, and the specific SLA deadline
+  in a central log.
+- Document all communications and evidence provided to the customer during the audit process, including
+  dates and responsible staff.
+- Confirm the date and outcome of each audit support action against the SLA, noting any delays or exceptions
+  with reasons.
+- Name the individual responsible for managing and responding to customer audit requests — do not list
+  a group or department.
+- Retain copies of completed audit responses and customer acknowledgments for each request as dated records.

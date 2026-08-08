@@ -1,0 +1,41 @@
+leaf_id: req:Art.14:source_register
+control_ref: Art.14
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of processing
+  category: direct
+  rationale: You must know and document the lawful basis for each processing activity before you can record
+    or communicate it in the Art.14 Source Register. Art.14.1(c)-(d) requires this information to be provided
+    to data subjects.
+  good_enough: A clear mapping of each third-party data source to its lawful basis under Art.6 is available,
+    even if not yet fully documented in every system.
+- ref: Art.12
+  standard_id: GDPR:2016/679
+  title: Transparent information, communication and modalities for the exercise of the rights of the data
+    subject
+  category: direct
+  rationale: Art.14 notices must meet the transparency and communication standards set by Art.12. Without
+    understanding these requirements, you can't ensure your source register or notices are compliant.
+  good_enough: A summary of Art.12 requirements is available and referenced in your notice templates or
+    register process.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of processing activities
+  category: foundational
+  rationale: A basic record of processing activities (RoPA) is needed to identify which processing activities
+    involve third-party data sources. This underpins the completeness of your Art.14 Source Register.
+  good_enough: A draft or working RoPA exists that lists all processing activities and flags those involving
+    third-party data sources, even if some details are pending.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know the organizational and system boundaries for GDPR compliance, as defined
+    in your ISMS scope, to ensure all relevant third-party sources are captured in the register.
+  good_enough: A current ISMS scope statement exists that covers all business units and systems where
+    third-party personal data sources may be present.

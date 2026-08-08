@@ -1,0 +1,19 @@
+must_id: item:A.5.14:review_legal_scan
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Legal-landscape scan (cross-border ruling updates, regulator guidance, sectoral rules that
+  touch transfers — GDPR Chap V, sector schemes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to be responsible for monitoring changes in cross-border data transfer laws
+  and sector-specific regulations.
+- Document the dates and sources of all legal and regulatory updates reviewed, including references to
+  GDPR Chapter V and relevant sector schemes.
+- Record the outcome of each legal-landscape scan in a dated summary, noting any impact on your information
+  transfer policy.
+- Attach regulator guidance or rulings that triggered policy review as supporting evidence in your policy
+  review file.
+- Name the reviewer as a specific person, not a generic title or team, in the policy review record.

@@ -1,0 +1,17 @@
+must_id: item:Art.41:reg_date
+control_ref: Art.41
+standard_id: GDPR:2016/679
+must_text: Per-row activity date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each code monitoring activity takes place in a dedicated column for every row
+  in the activity record.
+- Confirm that every row in the activity record contains a completed date field, with no blanks or placeholders
+  such as "ongoing" or "N/A".
+- Cross-reference each activity date with supporting documentation, such as meeting minutes or system
+  logs, to verify accuracy.
+- Name the person responsible for entering and verifying each activity date, identifying them by full
+  name rather than a generic role or team.

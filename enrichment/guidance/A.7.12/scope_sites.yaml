@@ -1,0 +1,19 @@
+must_id: item:A.7.12:scope_sites
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Sites in scope (drawn from A.7.1)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical sites included in your ISO27001 scope statement, referencing the latest approved scope
+  document with version and date.
+- Document the specific cabling runs at each site, using site maps or floor plans marked with unique identifiers
+  and revision dates.
+- Cross-reference each cabling run to the corresponding site in your asset or infrastructure register,
+  ensuring both records match.
+- Name the responsible individual for maintaining the cabling runs scope; do not use a generic role or
+  department name.
+- Record the date when the cabling runs scope was last reviewed and approved, attaching the signed approval
+  record.

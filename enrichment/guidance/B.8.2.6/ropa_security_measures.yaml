@@ -1,0 +1,18 @@
+must_id: item:B.8.2.6:ropa_security_measures
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: General description of technical + organizational measures per row (Art.30.2.d)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Describe the specific technical and organizational security measures applied to each processing activity
+  row in your Records of Processing Activities (RoPA) table.
+- Reference the relevant policy document, procedure, or system control for each measure listed, using
+  document titles and version numbers.
+- Name the individual responsible for maintaining and updating the technical and organizational measures
+  for each processing activity.
+- Record the date when each set of measures was last reviewed or updated in the RoPA entry.
+- Avoid using generic phrases like "standard security controls" or "as per policy"—provide concrete, activity-specific
+  details for each row.

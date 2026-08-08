@@ -1,0 +1,19 @@
+must_id: item:Art.32:rev_register_currency
+control_ref: Art.32
+standard_id: GDPR:2016/679
+must_text: Register currency — every Art.30 RoPA activity covered with current measures
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each processing activity in your Article 30 Record of Processing Activities (RoPA) with
+  the specific security measures currently in place for that activity.
+- Document the date each security measure was last reviewed or updated, ensuring this date is clearly
+  visible alongside the corresponding RoPA entry.
+- Name the responsible individual for each security measure, avoiding generic titles such as "IT team"
+  or "Data Protection group".
+- Record any gaps where a processing activity lacks a mapped, current security measure, and log an action
+  item with a named owner and target date.
+- Review the entire RoPA and security measures mapping at least annually, and retain a signed and dated
+  record of this review.

@@ -1,0 +1,18 @@
+must_id: item:A.5.17:reg_rotation_cadence
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Rotation cadence per row (manual N-days / automated / on-event-only with stated trigger types)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the rotation cadence for each credential in the register, stating the exact number of days, automation
+  status, or specific event triggers.
+- Name the person or system responsible for rotating each credential, listing a specific individual or
+  system name, not a team or generic role.
+- Document the date of the last rotation and the next scheduled rotation for each credential entry.
+- State the trigger types for any on-event-only rotations, describing the qualifying events in clear,
+  specific terms.
+- Review the register to confirm no entries have missing or vague cadence details such as "as needed"
+  or "periodically".

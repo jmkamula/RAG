@@ -1,0 +1,17 @@
+must_id: item:A.5.20:screening
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Screening / vetting requirements for supplier personnel (where applicable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific screening or vetting checks required for supplier personnel in the agreement template,
+  such as background checks or reference verification.
+- Document the roles or situations where screening is mandatory, making clear which supplier personnel
+  are in scope.
+- Name the individual or job title responsible for confirming supplier compliance with screening requirements
+  in each agreement.
+- Specify that screening requirements must be tailored to your organisation’s risk profile, not copied
+  generically from another template.

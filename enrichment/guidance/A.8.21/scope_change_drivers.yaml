@@ -1,0 +1,18 @@
+must_id: item:A.8.21:scope_change_drivers
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new service class, new provider, criticality change)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current network services, including provider names, service classes, and criticality levels,
+  in a dated and version-controlled document.
+- Document a trigger list that specifies events requiring re-scoping, such as adding a new service class,
+  onboarding a new provider, or changing criticality.
+- Assign a named individual responsible for reviewing the trigger list and updating the scope when any
+  listed event occurs.
+- Record each scope review activity with the date, the trigger event, and the reviewer’s name in a change
+  log.
+- Name the scope owner as a specific person—avoid generic labels like "IT team" or "Network department".

@@ -1,0 +1,17 @@
+must_id: item:A.5.4:enforcement
+control_ref: A.5.4
+standard_id: ISO27001:2022
+must_text: Statement of consequence for non-compliance (link to HR disciplinary process — A.6.4)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the consequences of information security non-compliance in the management directive, explicitly
+  referencing the organisation’s HR disciplinary process by name.
+- Cross-reference the relevant HR disciplinary policy section and document the exact location within the
+  directive for easy auditor verification.
+- Name the individual responsible for updating and maintaining the directive, avoiding generic titles
+  like "management" or "the team".
+- Record the approval date and the name of the approver on the directive to show it is current and formally
+  authorised.

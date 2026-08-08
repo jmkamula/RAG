@@ -1,0 +1,17 @@
+must_id: item:A.8.32:rev_register_completeness
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Register-completeness sample (sample of production changes traced to register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of recent production changes from system logs or deployment records, noting change
+  IDs and implementation dates.
+- Cross-reference each sampled change against entries in the official change management register, recording
+  register IDs and entry dates.
+- Document any sampled changes not found in the register, including details of the missing entries and
+  possible reasons for omission.
+- Name the reviewer who performed the cross-check as a specific individual, not a team or department.
+- Retain a dated summary report of the sample, cross-references, and findings for future audit review.

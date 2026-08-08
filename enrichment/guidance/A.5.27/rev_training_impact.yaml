@@ -1,0 +1,19 @@
+must_id: item:A.5.27:rev_training_impact
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Training-impact evidence reviewed where lessons drove curriculum changes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for reviewing training outcomes following lessons-learned activities in
+  a dated record.
+- Document specific curriculum changes made as a result of lessons-learned reviews, including the date
+  and decision-maker.
+- Record evidence of training-impact analysis, such as assessment scores or feedback, that was reviewed
+  to inform curriculum updates.
+- Attach meeting minutes or review logs showing discussion of how lessons learned influenced training
+  content.
+- Specify the curriculum change owner by individual name, not by team or department, in the change approval
+  record.

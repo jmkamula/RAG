@@ -1,0 +1,14 @@
+must_id: item:Art.29:reg_status
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Per-row status (active / suspended / revoked-on-date)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the current status for each person in the register as "active", "suspended", or "revoked", with
+  no blank or ambiguous entries.
+- Enter the exact date for any status change, especially when marking an authorisation as "revoked".
+- Name the individual responsible for updating each row, not just a team or department.
+- Retain a history of previous statuses and dates for each person, not just the most recent change.

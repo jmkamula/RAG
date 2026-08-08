@@ -1,0 +1,18 @@
+must_id: item:A.5.16:reg_last_used
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Last-used timestamp per row (drives auto-suspend at N days idle; orphan detection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time each identity last accessed any system in a dedicated "last-used" column for
+  every row in the register.
+- Assign responsibility to a named individual for updating and verifying the "last-used" timestamp data
+  at least monthly.
+- Cross-reference each "last-used" timestamp with system access logs to confirm accuracy and completeness.
+- Name the owner of each identity as a specific person, not a generic role or department, to avoid ambiguity
+  in orphan detection.
+- Document the automated process or schedule that checks for identities idle beyond the defined threshold
+  and triggers suspension or review.

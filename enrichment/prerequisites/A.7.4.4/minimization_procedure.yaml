@@ -1,0 +1,46 @@
+leaf_id: req:A.7.4.4:minimization_procedure
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the specific purposes for which PII is processed before you can
+    define what data is necessary and how to minimize it. Without this, minimization objectives are arbitrary.
+  good_enough: A clear, up-to-date list of processing purposes for each PII category, even if not fully
+    mapped to all systems yet.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for processing PII is essential to determine what data is strictly
+    necessary and what can be minimized or de-identified.
+  good_enough: A documented lawful basis for each processing activity, with gaps flagged for follow-up.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A working data classification scheme helps you identify which data is PII and what sensitivity
+    level applies, which is critical for setting minimization and de-identification controls.
+  good_enough: A basic classification scheme that at least distinguishes PII from non-PII and marks sensitive
+    PII.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need an inventory of information assets to know where PII resides and which systems or
+    datasets require minimization procedures.
+  good_enough: A preliminary asset register listing major systems and repositories where PII is stored
+    or processed.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of your organization and which data types are covered
+    by your ISMS and PIMS, ensuring minimization procedures are applied to the right areas.
+  good_enough: A draft scope statement that identifies the main business units, locations, and data types
+    in scope for PII processing.

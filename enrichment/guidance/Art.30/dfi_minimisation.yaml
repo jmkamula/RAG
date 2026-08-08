@@ -1,0 +1,19 @@
+must_id: item:Art.30:dfi_minimisation
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Notes data minimisation review touchpoints (Art.5.1.c) — flows or fields flagged for reduction
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each point in your data flow inventory where personal data fields are reviewed for necessity,
+  including the date and reviewer’s name.
+- Record any specific data fields or flows identified as candidates for reduction or removal, citing the
+  reason for minimisation.
+- State the outcome of each minimisation review, such as fields retained, modified, or eliminated, and
+  reference supporting decisions or meeting notes.
+- Name the reviewer as a specific individual for each minimisation decision — do not use generic titles
+  like "the team" or "IT department".
+- Cross-reference your data flow inventory entries with relevant data minimisation policy sections to
+  show alignment with Art.5.1.c.

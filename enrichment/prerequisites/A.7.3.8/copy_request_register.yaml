@@ -1,0 +1,40 @@
+leaf_id: req:A.7.3.8:copy_request_register
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the specific purposes for which personal data is processed before
+    you can meaningfully record and justify any copy requests. This ensures the register aligns with legitimate
+    processing activities.
+  good_enough: A clear, up-to-date list of processing purposes for each relevant data set, documented
+    and accessible to those managing copy requests.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Before logging copy requests, you need to confirm the lawful basis for processing the data
+    involved. This underpins the legitimacy of responding to copy requests and is essential for compliance.
+  good_enough: Each processing activity has an identified lawful basis, with a simple mapping to the data
+    types relevant to copy requests.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You must know what personal data assets exist and where they reside to accurately record
+    which data sets are covered by each copy request in the register.
+  good_enough: A basic, current inventory of personal data assets, including locations and owners, sufficient
+    to reference in the copy request register.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of responsibilities ensures that copy requests are handled by authorized
+    personnel and that register entries are accurate and accountable.
+  good_enough: Documented roles for handling copy requests and maintaining the register, with named individuals
+    or teams assigned.

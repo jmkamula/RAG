@@ -1,0 +1,20 @@
+must_id: item:A.5.7:prod_effectiveness
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Effectiveness check planned or recorded (post-distribution validation that the product drove
+  the intended action)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for planning and recording effectiveness checks for each product in the
+  intelligence record.
+- Document the date and method of each planned effectiveness check, such as surveys, interviews, or usage
+  analytics, in the record.
+- Record the results of completed effectiveness checks, including whether the intended action was observed,
+  with supporting evidence.
+- State any follow-up actions or improvements identified as a result of the effectiveness check, and assign
+  them to a named individual.
+- Avoid leaving the effectiveness check section blank or marked "N/A" without justification, as auditors
+  will flag missing validation steps.

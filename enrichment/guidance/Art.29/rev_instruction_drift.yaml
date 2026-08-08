@@ -1,0 +1,18 @@
+must_id: item:Art.29:rev_instruction_drift
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Instruction-drift sweep — sample processing activities to verify they stay within documented
+  controller instructions
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a recent sample of processing activities and list them in a dated review log for traceability.
+- Cross-reference each sampled activity against the documented controller instructions to confirm alignment.
+- Record any deviations from the documented instructions, including details of the activity, date, and
+  responsible staff member.
+- Name the reviewer as a specific individual who conducted the sweep—do not use generic roles or team
+  names.
+- Document any corrective actions taken for identified instruction drift, including the date and person
+  responsible for implementation.

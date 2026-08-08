@@ -1,0 +1,19 @@
+must_id: item:7.4:rev_cadence_check
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: Cadence check — planned communications actually delivered on time
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the planned communication schedule, including dates, topics, and responsible individuals, in
+  a dated program plan or calendar.
+- Record actual delivery dates and recipients for each planned communication in a tracking log or annotated
+  calendar.
+- Cross-reference each delivered communication with supporting evidence, such as emails sent, meeting
+  minutes, or published intranet posts.
+- Name the reviewer who checks for missed or late communications as a specific individual, not a group
+  or department.
+- Retain records of any missed or delayed communications, including explanations and corrective actions,
+  in a dated exception log.

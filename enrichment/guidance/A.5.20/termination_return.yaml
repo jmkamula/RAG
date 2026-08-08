@@ -1,0 +1,19 @@
+must_id: item:A.5.20:termination_return
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: 'Termination obligations: data return/destruction, transition arrangements, handover of records'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the template that, upon contract termination, the supplier must return or securely destroy
+  all data belonging to your organisation.
+- Specify transition arrangements in the template, including timelines and responsibilities for data handover
+  and service continuity during the exit process.
+- Name the individual responsible for overseeing supplier offboarding and data handover, rather than using
+  a generic role or department.
+- Include a requirement for the supplier to provide a signed certificate confirming data destruction or
+  return at contract end.
+- Record the date of the latest template review and approval by a named authority to demonstrate it is
+  current and in use.

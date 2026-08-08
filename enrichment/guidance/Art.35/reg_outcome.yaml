@@ -1,0 +1,14 @@
+must_id: item:Art.35:reg_outcome
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Per-row outcome (proceed / mitigate-then-proceed / Art.36 consult / abandon)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'Record the outcome for each DPIA entry as one of: proceed, mitigate-then-proceed, consult under Article
+  36, or abandon.'
+- Name the decision-maker for each DPIA outcome as a specific individual, not a group or department.
+- Date each DPIA outcome entry to show when the decision was made.
+- Cross-reference any mitigation actions or Article 36 consultations to supporting documentation or correspondence.

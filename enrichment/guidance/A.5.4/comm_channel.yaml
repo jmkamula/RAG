@@ -1,0 +1,17 @@
+must_id: item:A.5.4:comm_channel
+control_ref: A.5.4
+standard_id: ISO27001:2022
+must_text: Channel used (all-hands briefing, intranet publication, manager cascade, training module)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact channel used to communicate the management directive, such as "all-hands meeting" or
+  "intranet post," in a dated communication log.
+- Name the individual responsible for delivering or publishing the directive, ensuring a specific person
+  is listed rather than a team or department.
+- Retain a copy or screenshot of the communication as evidence, clearly showing the channel and date of
+  dissemination.
+- Cross-reference the communication record with the management directive document to confirm alignment
+  between content and delivery method.

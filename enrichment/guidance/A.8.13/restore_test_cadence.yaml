@@ -1,0 +1,16 @@
+must_id: item:A.8.13:restore_test_cadence
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Restore-test cadence stated per asset class (annual minimum; quarterly for tier-1)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the restore-test frequency for each asset class in the backup procedure, specifying annual minimum
+  and quarterly for tier-1 assets.
+- Name the person responsible for scheduling and overseeing restore tests for each asset class within
+  the procedure.
+- Record the date of the last restore test for each asset class in a table or log included in the procedure.
+- Avoid using vague terms like "regularly" or "as needed"—clearly define the exact cadence for each asset
+  class.

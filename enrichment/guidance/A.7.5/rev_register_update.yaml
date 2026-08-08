@@ -1,0 +1,19 @@
+must_id: item:A.7.5:rev_register_update
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Changes propagated to the threat register and procedure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of each Environmental Protection Program review in a dedicated log, including
+  any identified changes or new risks.
+- Cross-reference each identified change to the updated threat register entry, noting the date and person
+  responsible for the update.
+- Update the relevant procedure documents to reflect changes, and include a revision history with the
+  date and name of the person making the update.
+- Name the individual responsible for propagating changes, avoiding generic titles like "the team" or
+  "management."
+- Retain evidence of communication, such as an email or meeting minutes, showing that changes were shared
+  with all affected staff.

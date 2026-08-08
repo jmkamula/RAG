@@ -1,0 +1,17 @@
+must_id: item:Art.13:legitimate
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Legitimate interests if relied upon
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific legitimate interest you rely upon in your privacy notice, using plain language tailored
+  to your organisation’s actual processing purpose.
+- Name the individual or role responsible for determining and reviewing the legitimate interest, not just
+  a department or generic title.
+- Document the date when the legitimate interest assessment was last reviewed, and retain a copy of the
+  assessment for reference.
+- Cross-reference the section of your privacy notice where the legitimate interest is described, ensuring
+  it matches your internal records.

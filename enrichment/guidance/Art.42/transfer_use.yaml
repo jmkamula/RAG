@@ -1,0 +1,19 @@
+must_id: item:Art.42:transfer_use
+control_ref: Art.42
+standard_id: GDPR:2016/679
+must_text: Use for international transfers (Art.46.2.f) where applicable
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for using GDPR certification as a legal basis for international data transfers
+  under Article 46.2.f, including step-by-step instructions.
+- Name the person responsible for assessing whether certification is applicable for each international
+  transfer, listing them by full name and role.
+- Record each international transfer where certification is used as the transfer mechanism, including
+  the date, countries involved, and relevant certification details.
+- Attach evidence of the valid certification referenced for each transfer, such as a certificate copy
+  or official registry entry.
+- Specify the decision and rationale for choosing certification over other transfer mechanisms, avoiding
+  generic statements that could apply to any transfer.

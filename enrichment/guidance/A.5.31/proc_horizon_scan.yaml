@@ -1,0 +1,20 @@
+must_id: item:A.5.31:proc_horizon_scan
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Horizon-scanning cadence for upcoming obligations (proposed legislation, pending regulator
+  decisions)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the frequency for reviewing upcoming legal and regulatory changes in your procedure, specifying
+  a clear interval such as "quarterly" or "monthly."
+- Assign a named individual, not a team or department, as responsible for monitoring proposed legislation
+  and pending regulator decisions.
+- Document the sources to be checked for horizon-scanning, such as government websites, regulatory bulletins,
+  or legal update services, in the procedure.
+- Record each horizon-scanning activity in a dated log, noting the sources reviewed and any relevant findings
+  or actions required.
+- Review and update the procedure annually, capturing the review date and the name of the person who approved
+  any changes.

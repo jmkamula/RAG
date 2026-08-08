@@ -1,0 +1,16 @@
+must_id: item:6.1.3:soa_owner
+control_ref: 6.1.3
+standard_id: ISO27001:2022
+must_text: Named owner of the SoA (typically ISMS Manager)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the Statement of Applicability, listing their full name and
+  job title in the document.
+- Record the date the owner was assigned responsibility for the Statement of Applicability in the document’s
+  header or change log.
+- Avoid listing a team, department, or generic role as the owner; use a named person to ensure clear accountability.
+- Document the owner's acceptance of responsibility by having them sign or formally acknowledge their
+  role in the Statement of Applicability.

@@ -1,0 +1,17 @@
+must_id: item:A.5.28:reg_status
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Status per row (active / handed-over / disposed) with date of last transition
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the current status for each evidence item in the custody register as "active," "handed-over,"
+  or "disposed," using a dedicated column.
+- Enter the exact date when each evidence item last changed status, ensuring the date is clearly associated
+  with the status update.
+- Name the person responsible for updating each status and date entry, using a full name rather than a
+  generic role or team.
+- Retain previous status and date entries in an audit trail or version history, rather than overwriting
+  or deleting past records.

@@ -1,0 +1,18 @@
+must_id: item:A.8.7:scope_class_means
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Per-class definition of 'protection' (signature agent vs runtime-protection vs image-scan vs
+  upstream-gateway)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all asset classes that require malware protection, such as laptops, servers, cloud workloads, and
+  email gateways, in a dated asset inventory.
+- Document the specific type of malware protection applied to each asset class, such as signature-based
+  agent, runtime protection, image scanning, or upstream gateway.
+- Name the individual responsible for defining and reviewing the protection method for each asset class,
+  avoiding generic roles like "IT team."
+- Cross-reference each protection method to supporting configuration records or deployment logs that show
+  the protection is active on the relevant assets.

@@ -1,0 +1,17 @@
+must_id: item:A.5.2:review_next_date
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for roles and responsibilities in the review record, using a clear
+  and specific calendar date.
+- Record the name of the person responsible for scheduling and conducting the next review alongside the
+  planned date.
+- Update the review record immediately if the planned review date changes, keeping previous dates visible
+  for audit history.
+- Avoid leaving the next review date field blank or using vague terms like "annually" or "TBD"—always
+  enter a concrete date.

@@ -1,0 +1,20 @@
+must_id: item:A.5.2:cloud_responsibilities
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: For cloud and external services, responsibilities split between the organization and the provider
+  stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all cloud and external services currently in use, including the provider name and a brief description
+  of each service.
+- Document the specific information security responsibilities assigned to your organization and to each
+  provider for every listed service.
+- Cross-reference each responsibility with a named individual or role within your organization, avoiding
+  generic labels like "the team" or "IT department."
+- Attach the relevant sections of provider contracts or service agreements that define provider-side security
+  responsibilities, including dates and signatures where available.
+- Review and update the matrix annually, recording the review date and the name of the person who completed
+  the review.

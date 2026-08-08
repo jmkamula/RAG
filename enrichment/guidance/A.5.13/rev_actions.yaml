@@ -1,0 +1,18 @@
+must_id: item:A.5.13:rev_actions
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Action items captured (e.g. extend labelling to platform X, tighten automation, refresh training
+  module, address drop)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record all action items discussed during the periodic labelling program review in meeting minutes, including
+  specific details and responsible individuals.
+- Assign each action item to a named person with a target completion date, avoiding generic assignments
+  to teams or roles.
+- Document decisions to extend labelling, update automation, refresh training, or address identified gaps,
+  referencing supporting evidence where applicable.
+- Retain a signed and dated copy of the review meeting summary, confirming agreement on all captured action
+  items.

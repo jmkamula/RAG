@@ -1,0 +1,15 @@
+must_id: item:A.5.20:rev_repapering
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Re-papering plan for existing supplier agreements that need to catch up to a new template version
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for managing the re-papering plan in a dated document.
+- List all existing supplier agreements that do not match the new template version in a tracked register.
+- Document the timeline and milestones for updating each agreement, including target completion dates.
+- Attach evidence of communication sent to suppliers about required agreement updates, such as dated emails
+  or letters.
+- Record approvals of the re-papering plan by a named decision-maker, with signature and date.

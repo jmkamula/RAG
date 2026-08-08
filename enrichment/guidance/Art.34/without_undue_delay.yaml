@@ -1,0 +1,19 @@
+must_id: item:Art.34:without_undue_delay
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: Timing — 'without undue delay' interpretation (decision matrix per breach severity)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a decision matrix that defines specific timeframes for notifying affected individuals based
+  on breach severity levels.
+- Record the date and time each personal data breach is identified and when the notification decision
+  is made.
+- Assign responsibility for notification timing decisions to a named individual, not a generic role or
+  team.
+- Retain copies of all communications sent to affected individuals, including timestamps and recipient
+  lists.
+- State in the procedure that verbal-only notifications are insufficient; require written records for
+  all breach communications.

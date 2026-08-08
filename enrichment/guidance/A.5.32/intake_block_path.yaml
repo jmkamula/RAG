@@ -1,0 +1,18 @@
+must_id: item:A.5.32:intake_block_path
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Block path for non-compliant intake (e.g., GPL component in a closed-source product) — rejection
+  and alternatives sourcing process
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for rejecting non-compliant acquisitions, including specific criteria such as prohibited
+  licenses or unacceptable terms, in a dated procedure.
+- Name the individual responsible for intake review and rejection decisions, avoiding generic roles like
+  "the team" or "IT department."
+- Record each rejection decision with supporting evidence, including the reason for rejection, date, and
+  the reviewer’s name.
+- Maintain a log of alternative sourcing actions taken after a rejection, including links to evaluated
+  and approved alternatives.

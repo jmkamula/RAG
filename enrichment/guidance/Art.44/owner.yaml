@@ -1,0 +1,15 @@
+must_id: item:Art.44:owner
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Named owner (DPO + legal counsel)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the Transfer Principle Procedure as a specific individual, listing both the Data Protection
+  Officer and the lead legal counsel.
+- Record the full names, job titles, and contact details of the named owner(s) in the procedure document.
+- Date the most recent owner assignment and update this record whenever ownership changes.
+- Sign the procedure document to confirm acceptance of ownership by both the Data Protection Officer and
+  the legal counsel.

@@ -1,0 +1,15 @@
+must_id: item:Art.34:reg_breach_id
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: Per-row breach id (Art.33 register cross-reference)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each subject communication entry with the unique breach ID from your Article 33 breach
+  register.
+- Record the breach ID in a dedicated column for every row in the subject communication record.
+- Confirm that the breach ID matches an existing entry in the Article 33 register before finalizing the
+  communication record.
+- Avoid leaving the breach ID field blank or using placeholders like "N/A" or "TBD" in any row.

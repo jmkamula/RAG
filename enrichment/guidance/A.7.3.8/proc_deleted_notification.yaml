@@ -1,0 +1,19 @@
+must_id: item:A.7.3.8:proc_deleted_notification
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Deleted-PII notification — where PII already deleted per retention policy, subject informed
+  of that fact
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for responding to PII copy requests when the requested data has already been
+  deleted according to the retention policy.
+- Record each subject request for PII copies and the corresponding response, including the date and the
+  name of the staff member handling it.
+- State in the response to the subject that their PII was deleted in line with your retention policy,
+  and specify the deletion date if available.
+- Attach a copy of the actual notification sent to the subject to the request record as evidence.
+- Name the staff member responsible for sending notifications as a specific individual, not just a team
+  or department.

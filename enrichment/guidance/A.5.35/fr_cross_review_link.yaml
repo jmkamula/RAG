@@ -1,0 +1,17 @@
+must_id: item:A.5.35:fr_cross_review_link
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Cross-link to A.5.36 compliance-review nonconformity register where the two are kept as one
+  artefact (common in mature programs)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the Independent Review Finding Response Register to the A.5.36 compliance-review nonconformity
+  register using a clear section or column header.
+- State in the register documentation that both A.5.35 and A.5.36 requirements are addressed within this
+  single artefact.
+- Name a specific individual as the register owner, avoiding generic titles like "Compliance Team" or
+  "Management".
+- Record the date when the cross-linking and dual-purpose use of the register was last reviewed and approved.

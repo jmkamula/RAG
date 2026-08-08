@@ -1,0 +1,18 @@
+must_id: item:A.5.19:rev_actions
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Action items captured where monitoring or training arrangements need adjustment
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record all action items from each supplier portfolio review in a dated log, including those related
+  to monitoring or training adjustments.
+- Assign each action item to a named individual with a target completion date documented in the review
+  log.
+- Document the specific monitoring or training arrangement that requires adjustment, referencing the relevant
+  supplier and rationale discussed in the review.
+- Attach evidence of follow-up, such as updated training materials or revised monitoring procedures, to
+  the action item record.
+- Name responsible individuals for each action item—avoid listing only teams or departments as owners.

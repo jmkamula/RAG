@@ -1,0 +1,18 @@
+must_id: item:A.5.33:scope_legal_drivers
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: 'Legal/regulatory drivers enumerated (statutes mandating record-keeping: corporate law, tax
+  law, employment law, sectoral regulations, GDPR Art.30, AML, etc.) — cross-link to A.5.31 register'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each records category alongside the specific law, regulation, or contractual obligation that requires
+  its retention, citing the statute or regulation by name.
+- Cross-reference each legal or regulatory driver to the corresponding entry in your A.5.31 records of
+  processing register, using a unique identifier.
+- Record the date each legal driver was last reviewed for applicability and any changes, maintaining a
+  dated log for auditor inspection.
+- Name the person responsible for verifying the legal basis for each records category, ensuring a specific
+  individual is listed rather than a team or department.

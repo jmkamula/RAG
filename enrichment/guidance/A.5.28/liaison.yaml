@@ -1,0 +1,20 @@
+must_id: item:A.5.28:liaison
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Liaison path with external authorities (law enforcement, regulators) — who initiates, what
+  is required
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person or role authorized to initiate contact with external authorities, listing their full
+  name or job title in the procedure.
+- Document the specific circumstances or triggers that require liaison with law enforcement or regulators,
+  including examples in the procedure.
+- State the required information and documentation to be prepared before making contact, such as incident
+  reports or evidence logs.
+- Record the communication path, including how and where each contact attempt or response is logged, with
+  dates and responsible individuals.
+- Specify that generic references to "the team" or "management" as initiators are not acceptable; assign
+  responsibility to a clearly identified individual or defined role.

@@ -1,0 +1,20 @@
+must_id: item:A.5.26:cls_gdpr_triggered
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: GDPR Art.33 breach-notification trigger flag per record (yes/no with notification reference
+  where yes) — proves the personal-data integration with A.5.26 fires reliably
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a dedicated field in each incident closure record to indicate if the GDPR Article 33 notification
+  trigger was assessed and met.
+- Record a clear yes/no flag for the GDPR notification trigger, and where "yes," include the notification
+  reference number or case ID.
+- Cross-reference each "yes" flag to supporting evidence of notification, such as a copy of the submitted
+  notification or regulator acknowledgment.
+- Name the responsible individual who assessed the GDPR trigger for each incident, avoiding generic entries
+  like "the team" or "IT."
+- Date and sign off each closure record to confirm the GDPR trigger check was completed at the time of
+  incident closure.

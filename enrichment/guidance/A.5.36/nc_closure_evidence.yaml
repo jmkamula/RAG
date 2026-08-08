@@ -1,0 +1,17 @@
+must_id: item:A.5.36:nc_closure_evidence
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Closure evidence reference per closed NC (link to the artefact that proves the NC was addressed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique identifier for each nonconformity in the register to allow clear tracking from discovery
+  to closure.
+- Attach or link the specific document, ticket, or signed record that proves corrective action was completed
+  for each closed nonconformity.
+- Enter the closure date and the name of the individual who verified the evidence for each nonconformity
+  entry.
+- Name the closure evidence reference specifically for each nonconformity — do not use generic phrases
+  like "see attached" or "fixed".

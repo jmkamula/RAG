@@ -1,0 +1,16 @@
+must_id: item:A.7.3.1:proc_owner
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Named owner (DPO + Privacy Ops)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the PII Principal Obligations Procedure as a specific individual, such as the Data
+  Protection Officer, not a team or department.
+- Document the Privacy Operations lead as a co-owner by listing their full name and job title in the procedure
+  header.
+- Record the date the ownership was last reviewed and updated in the procedure document.
+- Sign the procedure to confirm both owners have formally accepted responsibility for its maintenance
+  and accuracy.

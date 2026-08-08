@@ -1,0 +1,16 @@
+must_id: item:Art.6:proc_lia_template
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Legitimate Interests Assessment (LIA) template referenced for Art.6.1.f activities
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference the current Legitimate Interests Assessment (LIA) template by title and version number in
+  your Lawful Basis Determination Procedure document.
+- Cross-reference each activity relying on Article 6.1.f with the relevant completed LIA record, including
+  the date and responsible person.
+- Name the owner of the LIA template as a specific individual, not a generic team or department.
+- Document the review date of the LIA template to show it is kept up to date and relevant to current processing
+  activities.

@@ -1,0 +1,17 @@
+must_id: item:A.7.2.5:reg_residual_risk
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: Residual-risk rating per row (low/medium/high after mitigations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the final residual-risk rating for each assessment entry in the register, using clear categories
+  such as low, medium, or high.
+- State the date when the residual-risk rating was determined for each entry, ensuring the rating reflects
+  post-mitigation status.
+- Name the individual responsible for assigning the residual-risk rating in each row, avoiding anonymous
+  or group attributions.
+- Cross-reference each residual-risk rating to supporting documentation that explains how the rating was
+  decided after mitigations.

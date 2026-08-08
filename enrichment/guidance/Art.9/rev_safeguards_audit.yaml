@@ -1,0 +1,19 @@
+must_id: item:Art.9:rev_safeguards_audit
+control_ref: Art.9
+standard_id: GDPR:2016/679
+must_text: Safeguards audit — Art.9.3 secrecy obligations being enforced (where Art.9.2.h-i applies)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific individual responsible for enforcing secrecy obligations under Article 9.3 in a documented
+  role assignment.
+- Document the procedures in place that restrict access to special category data only to authorized personnel
+  with a legitimate need.
+- Record evidence of staff training on secrecy obligations, including attendee lists and training dates,
+  for those handling special category data.
+- Retain copies of signed confidentiality agreements from all personnel with access to special category
+  data, dated and linked to their roles.
+- Confirm that secrecy obligations are referenced in relevant contracts or policies, and cross-reference
+  these documents by version and date.

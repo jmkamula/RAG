@@ -1,0 +1,18 @@
+must_id: item:6.2:scope_functions
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: Functions in scope enumerated (engineering, ops, sales, legal, HR, finance as relevant)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all business functions and organizational levels included in the information security management
+  system scope, using department names such as engineering, sales, HR, and finance.
+- Document the rationale for including or excluding each function or level, referencing specific business
+  activities or risk assessments.
+- Name the person responsible for maintaining the scope document as a specific individual, not a group
+  or department.
+- Record the date of the most recent review or update to the scope document to show it is current.
+- Attach evidence of management approval for the defined scope, such as a signed or digitally authorized
+  document.

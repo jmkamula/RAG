@@ -1,0 +1,17 @@
+must_id: item:A.5.19:rev_date
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent supplier portfolio review in a central register, clearly linked to
+  the responsible owner.
+- Name the individual who conducted the review, avoiding generic entries like "Procurement Team" or "IT
+  Department".
+- Document the planned review interval in months or years, and cross-reference it with the actual review
+  date.
+- Retain a signed or approved record of the review decision, including any actions or follow-ups identified
+  during the review.

@@ -1,0 +1,18 @@
+must_id: item:Art.7:withdrawal_mechanism
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Withdrawal mechanism documented — must be 'as easy as' giving consent
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the exact steps a user must follow to withdraw consent, matching the simplicity of the original
+  consent process.
+- Name the person responsible for maintaining and updating the withdrawal mechanism, listing their full
+  name and job title.
+- Record the date the withdrawal process was last tested for ease of use, along with the test results.
+- Include clear instructions in the procedure for users to withdraw consent, avoiding legal jargon or
+  complex language.
+- Attach a screenshot or copy of the withdrawal option as presented to users, showing it is as accessible
+  as the consent option.

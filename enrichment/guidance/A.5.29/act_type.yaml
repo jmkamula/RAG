@@ -1,0 +1,16 @@
+must_id: item:A.5.29:act_type
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Activation type per record (real_disruption / scheduled_test / partial_drill / regulator_led_exercise)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the activation type for each plan activation, clearly choosing from real_disruption, scheduled_test,
+  partial_drill, or regulator_led_exercise in the activation log.
+- Name the person responsible for classifying the activation type on each record, using their full name
+  rather than a team or department.
+- Date each activation record to show when the activation type was assigned and logged.
+- Cross-reference each activation record with supporting documentation, such as incident reports or test
+  schedules, to confirm the selected activation type.

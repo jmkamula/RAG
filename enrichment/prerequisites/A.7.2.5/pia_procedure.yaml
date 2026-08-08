@@ -1,0 +1,48 @@
+leaf_id: req:A.7.2.5:pia_procedure
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which processes, systems, and data are in scope for privacy management before
+    defining when and how to trigger a Privacy Impact Assessment. The PIA procedure must align with the
+    actual organizational boundaries.
+  good_enough: A clear, current scope statement that identifies the business units, systems, and data
+    types covered by the ISMS and privacy extension.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You can't assess privacy impacts unless you know the purposes for which personal data is
+    processed. The PIA procedure relies on this to determine risk and necessity.
+  good_enough: Documented purposes for all major processing activities, even if some are high-level or
+    pending further detail.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for processing is essential to determine if a PIA is required
+    and to assess compliance risks. The PIA procedure must reference these bases.
+  good_enough: A list or register showing the lawful basis for each processing activity, even if some
+    are provisional.
+- ref: Art.35
+  standard_id: GDPR:2016/679
+  title: Data Protection Impact Assessment (DPIA)
+  category: cross_role
+  rationale: The triggers and requirements for a DPIA under GDPR set the legal baseline for when and how
+    your PIA procedure must operate. Your procedure must at least meet these regulatory expectations.
+  good_enough: A summary of GDPR Art.35 DPIA triggers and criteria, mapped to your processing activities,
+    to inform your procedure design.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: A PIA procedure must specify who is responsible for initiating, conducting, and approving
+    PIAs. Clear roles prevent gaps or confusion during assessments.
+  good_enough: A documented list of privacy and information security roles, with named individuals or
+    functions, even if some assignments are interim.

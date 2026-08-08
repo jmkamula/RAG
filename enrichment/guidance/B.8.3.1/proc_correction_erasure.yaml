@@ -1,0 +1,18 @@
+must_id: item:B.8.3.1:proc_correction_erasure
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+must_text: Correction + erasure in timely fashion (example given in §8.3.1)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for receiving, verifying, and responding to customer requests for correction or
+  erasure of personal data, including timeframes.
+- Assign a named individual responsible for managing and tracking each subject rights request from receipt
+  to resolution.
+- Record the date each request is received and the date action is completed in a subject rights request
+  log.
+- Retain evidence of communication with the customer confirming correction or erasure was completed within
+  the documented timeframe.
+- Name the responsible person as a specific individual, not a generic role or team, in the procedure documentation.

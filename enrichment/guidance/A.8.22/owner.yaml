@@ -1,0 +1,16 @@
+must_id: item:A.8.22:owner
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Named procedure owner (Network Engineering lead with InfoSec partner)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the procedure owner as a specific individual by full name and job title, such as "Jane Smith, Network
+  Engineering Lead."
+- Document the InfoSec partner by full name and role, confirming their responsibility for co-ownership
+  or review in the procedure header.
+- Record the date the ownership was last reviewed or updated directly on the procedure document.
+- Avoid listing the owner as "the team," "IT," or a department; use only named individuals to meet accountability
+  requirements.

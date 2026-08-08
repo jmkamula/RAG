@@ -1,0 +1,18 @@
+must_id: item:A.8.10:rev_legal_hold_inventory
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Legal-hold inventory re-confirmed / retired
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all items under legal hold in a dated inventory, including the reason for hold and responsible
+  owner for each item.
+- Confirm with each owner in writing that the legal hold status is still required or can be retired, capturing
+  their name and date of confirmation.
+- Record any items removed from legal hold with the justification, retirement date, and approval from
+  a named authority.
+- Retain evidence of the review cycle, such as meeting minutes or review logs, showing when and by whom
+  the inventory was checked.
+- Name the owner of the legal-hold inventory as a specific individual, not a group or department.

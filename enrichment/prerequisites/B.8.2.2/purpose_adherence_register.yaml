@@ -1,0 +1,50 @@
+leaf_id: req:B.8.2.2:purpose_adherence_register
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must first identify and document the specific purposes for which personal data is processed
+    for each customer. Without this, you cannot meaningfully track or demonstrate adherence to those purposes.
+  good_enough: A documented list of processing purposes per customer, even if not yet fully validated,
+    is sufficient to begin drafting the register.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for each processing purpose is essential to ensure that adherence
+    is not just operational but also legally justified. This underpins the legitimacy of each customer
+    purpose entry.
+  good_enough: A draft mapping of lawful bases to each identified purpose is enough to proceed, even if
+    some legal review is pending.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need to know which information assets are involved in customer data processing to link
+    technical controls and identify any side-processing. This ensures the register covers all relevant
+    systems.
+  good_enough: A basic asset inventory listing systems that process customer data is sufficient, even
+    if not fully detailed.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which customers, systems, and data flows are covered by your
+    ISMS and privacy extension. Without this, you risk omitting relevant processing activities from the
+    register.
+  good_enough: A clear, current scope statement that includes all customer-facing processing is enough
+    to unblock the register drafting.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A data classification scheme helps you distinguish personal data from other types, ensuring
+    the register only tracks relevant processing and controls.
+  good_enough: A working draft of the classification scheme that identifies personal data categories is
+    sufficient for initial register work.

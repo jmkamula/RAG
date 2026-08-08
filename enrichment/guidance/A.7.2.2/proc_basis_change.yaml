@@ -1,0 +1,19 @@
+must_id: item:A.7.2.2:proc_basis_change
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: Basis change procedure — changing basis requires re-assessment and often subject notice (§7.3.3)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for reassessing lawful basis whenever the purpose for processing personal
+  data changes or expands.
+- Name a specific individual responsible for approving any change in lawful basis, avoiding generic titles
+  like "the team" or "management".
+- Record the date and outcome of each reassessment, including the rationale for the new lawful basis and
+  any supporting evidence.
+- State in writing when and how affected individuals will be notified of the change in lawful basis, including
+  the method and timing of communication.
+- Retain copies of all reassessment records and notification materials for each change, ensuring they
+  are dated and easily retrievable.

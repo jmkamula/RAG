@@ -1,0 +1,16 @@
+must_id: item:B.8.5.3:rev_date
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Processor Disclosure Records Program in a dated document or
+  system entry.
+- Name the individual who conducted the review, ensuring a specific person is listed rather than a team
+  or department.
+- Confirm the planned review interval is documented and matches the actual review frequency shown in records.
+- Retain evidence of the review outcome, such as a signed summary report or meeting minutes referencing
+  the review date.

@@ -1,0 +1,20 @@
+must_id: item:Art.29:instructions_source
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Instructions source documented (DPA terms + change orders / customer support tickets / contract
+  amendments)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the original customer instructions for processing personal data, referencing the specific contract
+  clause or data processing agreement section.
+- Record any changes to processing instructions by saving dated copies of change orders, customer support
+  tickets, or contract amendments.
+- Cross-reference each instruction or change to its source document, ensuring the link is clear and traceable
+  in your procedure records.
+- Name the person responsible for updating and maintaining the record of instructions as a specific individual,
+  not a team or department.
+- Retain all versions of instructions and related correspondence in a central location, with clear version
+  dates visible.

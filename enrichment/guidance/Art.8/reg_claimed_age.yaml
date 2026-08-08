@@ -1,0 +1,15 @@
+must_id: item:Art.8:reg_claimed_age
+control_ref: Art.8
+standard_id: GDPR:2016/679
+must_text: Per-row claimed age at registration
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the claimed age of each child at the time of registration in a dedicated column within the Child
+  Consent Register.
+- Document the registration date for each entry to establish when the claimed age was provided.
+- Name the individual who collected the consent and recorded the age for each row in the register.
+- Avoid leaving the claimed age field blank or using generic terms like "minor"; enter the specific number
+  provided by the registrant.

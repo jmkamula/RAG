@@ -1,0 +1,19 @@
+must_id: item:Art.7:rev_withdrawal_sla
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Withdrawal SLA check — withdrawal requests processed within the published timeline
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the published timeline for processing consent withdrawal requests, including the exact number
+  of days, in your consent management policy.
+- Record each consent withdrawal request with the date received and the date processed in a central log
+  or tracking system.
+- Cross-reference a sample of withdrawal requests against the published timeline to confirm all were completed
+  within the stated period.
+- Name the individual responsible for monitoring and reporting withdrawal request processing times—do
+  not list a team or department.
+- Retain evidence of any exceptions or delays, including reasons and corrective actions, in a dated incident
+  or exception log.

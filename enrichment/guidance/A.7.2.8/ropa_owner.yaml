@@ -1,0 +1,15 @@
+must_id: item:A.7.2.8:ropa_owner
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Named owner responsible for accuracy + completeness
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the PII Records of Processing, avoiding group names or generic
+  titles.
+- Document the owner's full name and job title in the header or ownership section of the RoPA.
+- Record the date when ownership was assigned or last confirmed in the RoPA documentation.
+- Obtain a signed or formally acknowledged statement from the named owner accepting responsibility for
+  the accuracy and completeness of the RoPA.

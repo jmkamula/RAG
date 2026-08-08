@@ -1,0 +1,15 @@
+must_id: item:B.8.2.5:proc_owner
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: Named owner (Trust + Compliance)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the Customer Compliance Information Procedure as a specific individual, including
+  their full name and job title.
+- Document the owner's acceptance of responsibility by having them sign and date the procedure document.
+- Record the owner's contact details within the procedure to allow direct communication if needed.
+- Avoid listing a team, department, or generic title as the owner; always specify a single accountable
+  person.

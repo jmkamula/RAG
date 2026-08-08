@@ -1,0 +1,20 @@
+must_id: item:A.8.16:scope_vendor_managed
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Vendor-managed monitoring delegated to A.5.19/A.5.21 supplier obligations with evidence of
+  effectiveness
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all monitoring activities performed by vendors, specifying which controls are delegated under supplier
+  agreements.
+- Reference the exact contract clauses or service-level agreements that assign monitoring responsibilities
+  to each vendor.
+- Obtain and retain evidence from vendors demonstrating the effectiveness of their monitoring, such as
+  recent reports or test results.
+- Name the internal staff member responsible for reviewing vendor monitoring evidence, not just a team
+  or department.
+- Record the date and outcome of the most recent review of vendor monitoring effectiveness, including
+  any follow-up actions taken.

@@ -1,0 +1,19 @@
+must_id: item:Art.10:rev_access_audit
+control_ref: Art.10
+standard_id: GDPR:2016/679
+must_text: Access audit — restricted-access requirements being enforced (no broad access to criminal-data
+  stores)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a list of all individuals with access to criminal data stores, including full names and job
+  titles, in a dated access register.
+- Confirm that access permissions for each individual are limited to what is strictly necessary for their
+  role, with supporting screenshots or system logs.
+- Record the results of the most recent access audit, including dates, findings, and any corrective actions
+  taken, in a signed review report.
+- Name the access approver as a specific person, not a group or department, in the access control documentation.
+- Retain evidence of removed or denied access requests, such as ticket numbers or email records, to show
+  enforcement of restricted access.

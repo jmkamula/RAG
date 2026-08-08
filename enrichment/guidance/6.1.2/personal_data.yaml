@@ -1,0 +1,17 @@
+must_id: item:6.1.2:personal_data
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Personal data processing risks explicitly addressed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that risks related to personal data processing are identified, assessed, and
+  treated in line with GDPR Article 32 requirements.
+- List specific risk scenarios involving personal data, such as unauthorized access or data loss, in the
+  documented risk assessment template.
+- Assign responsibility for assessing personal data processing risks to a named individual, not a generic
+  team or department.
+- Record the date when the procedure was last reviewed to confirm it reflects current GDPR and ISO27001
+  requirements.

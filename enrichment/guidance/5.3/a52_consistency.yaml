@@ -1,0 +1,17 @@
+must_id: item:5.3:a52_consistency
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Consistency with A.5.2 operational security roles flagged inline
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each operational security role listed in A.5.2 with the corresponding entry in the ISMS
+  Roles, Responsibilities and Authorities Matrix.
+- Document the specific responsibilities and authorities for each operational security role, using the
+  same role titles and descriptions as in A.5.2.
+- Name the owner of each role as a specific individual, not a generic group or department.
+- Record the date of the most recent review of both A.5.2 and the matrix to demonstrate alignment at a
+  point in time.
+- Attach evidence of management approval for the matrix, such as a signed or digitally approved document.

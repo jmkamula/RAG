@@ -1,0 +1,16 @@
+must_id: item:A.7.12:rev_next_date
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the cabling program in the review log or schedule, using a clear
+  and specific calendar date.
+- Record the name of the person responsible for scheduling the next review, ensuring a named individual
+  is listed rather than a team or department.
+- Document the date when the next review date was last updated, keeping a dated record in the review log.
+- Attach evidence of management approval for the planned review schedule, such as a signed or emailed
+  confirmation.

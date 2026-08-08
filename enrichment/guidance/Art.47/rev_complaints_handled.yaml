@@ -1,0 +1,19 @@
+must_id: item:Art.47:rev_complaints_handled
+control_ref: Art.47
+standard_id: GDPR:2016/679
+must_text: Complaints-handling audit — Art.47.2.i path functioning + SAs receiving cooperation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for handling complaints under your Binding Corporate Rules, including each step
+  from receipt to resolution, in a dated procedure.
+- Record at least one recent complaint case, showing how it was handled and closed, with dates and responsible
+  individuals named.
+- Confirm that your process includes a clear path for cooperation with Supervisory Authorities, and reference
+  specific communications or meeting notes as evidence.
+- Name the individual responsible for complaints-handling oversight—do not list a department or generic
+  team.
+- Retain correspondence with Supervisory Authorities demonstrating timely responses and active cooperation
+  during complaint investigations.

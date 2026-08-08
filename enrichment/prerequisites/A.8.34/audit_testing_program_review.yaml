@@ -1,0 +1,40 @@
+leaf_id: req:A.8.34:audit_testing_program_review
+control_ref: A.8.34
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, processes, and data are in-scope for audit testing protection
+    before you can review the effectiveness of the program. The review is meaningless if the scope is
+    undefined or outdated.
+  good_enough: A current, approved scope statement that clearly defines boundaries and applicability for
+    audit testing controls.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: A complete and up-to-date asset register is necessary to verify that all relevant assets
+    are covered by audit testing protection and included in the periodic review.
+  good_enough: A maintained list of information assets relevant to audit testing, with ownership and status
+    reasonably up to date.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that responsibilities for maintaining, reviewing, and evidencing
+    the audit testing protection program are understood and actionable.
+  good_enough: Documented roles for those managing and reviewing audit testing controls, even if not fully
+    formalized.
+- ref: A.8.34
+  standard_id: ISO27001:2022
+  title: Audit Testing Protection
+  category: direct
+  rationale: The underlying audit testing protection controls must be implemented and documented before
+    you can meaningfully review their effectiveness or compliance.
+  good_enough: Documented procedures and evidence showing audit testing protection is in place, even if
+    minor gaps exist.

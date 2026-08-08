@@ -1,0 +1,19 @@
+must_id: item:A.8.16:scope_classes
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Asset classes enumerated with monitoring coverage expectation per class
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all asset classes relevant to your environment, such as networks, systems, and applications, in
+  a dated monitoring scope document.
+- Describe the expected monitoring coverage for each asset class, specifying what is monitored and how
+  often.
+- Name the individual responsible for maintaining and updating the monitoring scope, avoiding generic
+  roles like "IT" or "the team".
+- Cross-reference each asset class to its corresponding monitoring procedure or tool, ensuring traceability
+  between scope and implementation.
+- Review and update the monitoring scope document at least annually, recording the review date and approver’s
+  name.

@@ -1,0 +1,17 @@
+must_id: item:8.3:plan_implemented
+control_ref: '8.3'
+standard_id: ISO27001:2022
+must_text: Treatment plan from 6.1.3 being implemented (status per item)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for each risk treatment action in the plan, using full names rather than
+  job titles or teams.
+- Record the implementation status for each risk treatment action, including the date of completion or
+  current progress update.
+- Attach supporting evidence for completed actions, such as signed approvals, configuration screenshots,
+  or training attendance records.
+- Review the risk treatment plan regularly and update the status log to reflect any changes, delays, or
+  completed actions with dates.

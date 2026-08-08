@@ -1,0 +1,19 @@
+must_id: item:B.8.5.2:proc_subprocessor_inclusion
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+must_text: Subprocessor-derived destinations included
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all subprocessors who process personal data on your behalf, including their company names and countries
+  where data is transferred.
+- Document each subprocessor’s role and the specific personal data processing activities they perform,
+  with clear descriptions in your procedure.
+- Cross-reference contracts or data processing agreements that authorize each subprocessor’s involvement
+  and specify transfer mechanisms.
+- Name the owner as a specific individual responsible for maintaining and updating the list of subprocessor-derived
+  destinations—do not use a team or department name.
+- Record the date of the latest review or update to the subprocessor destinations list within the procedure
+  document.

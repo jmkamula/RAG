@@ -1,0 +1,40 @@
+leaf_id: req:A.5.23:exit_migration_record
+control_ref: A.5.23
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know whether cloud services are in-scope for your ISMS before you can meaningfully
+    record an exit or migration event. The scope statement clarifies which systems, services, and data
+    are covered.
+  good_enough: A current, approved scope statement that explicitly includes (or excludes) relevant cloud
+    services.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You must identify which assets (data, applications, infrastructure) are hosted in the cloud
+    to document their migration or deletion during exit. The asset register provides this inventory.
+  good_enough: An up-to-date list of cloud assets with enough detail to identify what was migrated or
+    deleted during the exit.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that the right people are authorised to trigger, execute,
+    and approve the cloud exit or migration. This supports the integrity and accountability of the record.
+  good_enough: Documented roles showing who is responsible for cloud service management, migration, and
+    authorisation.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: You need to know the classification of data involved in the migration or deletion to ensure
+    appropriate handling and evidence in the record.
+  good_enough: A basic classification scheme that covers cloud data and is referenced in migration/exit
+    planning.

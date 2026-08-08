@@ -1,0 +1,17 @@
+must_id: item:A.8.5:log_auth_events
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: All authentication events captured (success / failure / MFA challenge / step-up)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each authentication event, including successful logins, failed attempts, multi-factor prompts,
+  and step-up authentication, in a timestamped activity log.
+- Document the username or unique identifier associated with every authentication event in the log entry.
+- Confirm that the log captures the authentication method used for each event, such as password, token,
+  or biometric.
+- Name the system or application generating the log to avoid generic or ambiguous log sources.
+- Retain authentication logs for a defined period, with the retention timeframe and deletion schedule
+  documented and dated.

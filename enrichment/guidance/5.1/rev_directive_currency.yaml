@@ -1,0 +1,19 @@
+must_id: item:5.1:rev_directive_currency
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Directive currency check — signed by current top management
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the current top management individual(s) responsible for the leadership program by full name and
+  job title in the review document.
+- Document the date the leadership program review was completed and ensure it falls within the current
+  review cycle.
+- Obtain a physical or electronic signature from the named top management individual(s) on the review
+  document.
+- Confirm that the signed review references the latest version of the leadership directive, not an outdated
+  or superseded one.
+- Avoid using a generic title or group as the signatory; ensure a specific, accountable person is identified
+  and has signed.

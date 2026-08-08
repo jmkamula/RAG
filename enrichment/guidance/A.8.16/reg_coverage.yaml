@@ -1,0 +1,18 @@
+must_id: item:A.8.16:reg_coverage
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Per-detection asset coverage (which asset classes / sources feed it)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each detection use-case in the register with a unique name and description, ensuring each entry
+  is clearly distinguishable.
+- Document the specific asset classes or sources—such as network devices, servers, or applications—that
+  feed data into each detection use-case.
+- Cross-reference each detection use-case with the relevant asset inventory record to show which assets
+  are covered.
+- Name the owner of each detection use-case as a specific individual, not a team or department.
+- Record the date each detection use-case entry was last reviewed or updated to provide evidence of ongoing
+  maintenance.

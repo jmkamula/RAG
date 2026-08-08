@@ -1,0 +1,19 @@
+must_id: item:5.1:policy_objectives_strategy
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Policy and objectives compatible with strategic direction
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific member of top management who approved the information security policy, including their
+  full name and job title.
+- Document the date when the policy and objectives were formally approved to show they are current and
+  relevant.
+- State how the policy and objectives align with the organisation’s strategic direction in a written statement
+  within the directive.
+- Attach evidence, such as meeting minutes or a signed directive, showing top management’s explicit endorsement
+  of the policy and objectives.
+- Avoid using generic or boilerplate language that does not reference your organisation’s actual strategy
+  or context.

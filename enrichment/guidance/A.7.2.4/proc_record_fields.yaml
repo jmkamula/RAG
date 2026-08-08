@@ -1,0 +1,20 @@
+must_id: item:A.7.2.4:proc_record_fields
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Per-consent record fields (subject identifier + timestamp + purposes consented to + artifact
+  version consented to + collection mechanism)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each consent record with the subject's unique identifier, the exact date and time consent was
+  given, and the specific purposes agreed to.
+- Record the version number or date of the consent form or privacy notice that was presented at the time
+  of consent.
+- Specify the exact mechanism used to collect consent, such as web form, paper form, or verbal agreement,
+  in each record.
+- Name the individual responsible for maintaining consent records, avoiding generic labels like "the team"
+  or "admin staff."
+- Cross-reference each consent entry with the corresponding data processing activity to confirm alignment
+  with stated purposes.

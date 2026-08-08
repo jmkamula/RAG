@@ -1,0 +1,18 @@
+must_id: item:Art.40:scope_chosen_codes
+control_ref: Art.40
+standard_id: GDPR:2016/679
+must_text: Codes chosen for adherence with rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each code of conduct your organisation has chosen to follow, listing the full official name
+  and version.
+- Document the specific GDPR processing activities or data types each code applies to within your organisation.
+- State the business or legal rationale for selecting each code, referencing relevant risks, stakeholders,
+  or sector requirements.
+- Name the decision-maker who approved adherence to each code, avoiding generic titles like "management"
+  or "the team".
+- Record the date when the adherence decision was made and keep a copy of the documented rationale for
+  future reference.

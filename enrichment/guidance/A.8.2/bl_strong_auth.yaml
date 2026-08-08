@@ -1,0 +1,18 @@
+must_id: item:A.8.2:bl_strong_auth
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Strong authentication required for all privileged access (MFA enforced)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the baseline requirement that all privileged accounts must use multi-factor authentication,
+  including the date and the policy owner’s name.
+- List all privileged accounts in a register and indicate the MFA status for each, with the date of last
+  verification.
+- Capture a screenshot or system log entry showing MFA enforcement is enabled on privileged access systems,
+  including the timestamp.
+- Name the owner responsible for MFA enforcement as a specific individual, not a group or department.
+- Retain evidence of periodic checks confirming MFA remains active on all privileged accounts, with reviewer
+  name and review date.

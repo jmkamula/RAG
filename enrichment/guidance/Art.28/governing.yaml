@@ -1,0 +1,16 @@
+must_id: item:Art.28:governing
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Governing law and jurisdiction
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the governing law explicitly in the DPA, naming the specific country or jurisdiction in a dedicated
+  clause.
+- Specify the jurisdiction where disputes will be resolved, identifying the exact court or legal venue
+  in the agreement.
+- Record the date the governing law and jurisdiction clauses were last reviewed and updated in the DPA.
+- Name the owner responsible for maintaining the DPA as a specific individual, not as a team or department.
+- Retain a signed and dated copy of the DPA with the governing law and jurisdiction clauses clearly visible.

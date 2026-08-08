@@ -1,0 +1,19 @@
+must_id: item:Art.20:scope_exclusions
+control_ref: Art.20
+standard_id: GDPR:2016/679
+must_text: Out-of-scope activities (basis legal obligation / vital interests / public task / legitimate
+  interests; manual processing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all data processing activities and indicate which are excluded from data portability due to legal
+  obligation, vital interests, public task, or legitimate interests.
+- Document the specific legal basis for each out-of-scope activity, referencing the relevant law, regulation,
+  or internal policy.
+- Record whether each out-of-scope activity involves manual (paper-based) processing, noting the date
+  of assessment.
+- Name the decision-maker who determined the scope exclusions, ensuring this is a specific individual,
+  not a team or department.
+- Retain a signed and dated summary of the scope determination for future reference.

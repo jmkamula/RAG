@@ -1,0 +1,17 @@
+must_id: item:9.2:scope_rotation
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Process-rotation plan (which processes audited each year of the cycle)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all critical business processes by name in a master register, including the process owner and last
+  audit date for each.
+- Map each process to a specific year in the multi-year audit cycle, showing when it will be audited next.
+- Document the rationale for the rotation order and frequency, referencing risk assessments or regulatory
+  requirements where applicable.
+- Name the person responsible for maintaining and updating the rotation plan, ensuring a specific individual
+  is identified rather than a team or department.
+- Attach the signed and dated approval of the rotation plan by senior management, confirming formal endorsement.

@@ -24,6 +24,27 @@ class ChecklistItem:
     category:     str    # "must" | "should"
     gdpr_aligned: bool   # True if this item is required for GDPR alignment specifically
     rationale:    str    # why this item is required
+    guidance: tuple[str, ...] = ()
+    # Tenant-facing best-practice steps that help capture evidence for this
+    # MUST. Resolved at catalog-load time from one YAML per must_id under
+    # enrichment/guidance/{control_ref}/{slug}.yaml via apply_to_catalog.py
+    # (Ship 56'.a). Empty tuple = no bank hit; renderer suppresses the block.
+
+
+@dataclass
+class Prerequisite:
+    """One prerequisite of an EvidenceRequirement.
+
+    Authored under enrichment/prerequisites/{control_ref}/{slug}.yaml
+    per the Ship 57' architecture. Resolved onto EvidenceRequirement.
+    prerequisites at catalog-load time via apply_to_catalog.py.
+    """
+    ref:         str    # "4.3", "A.5.9", "Art.30", etc.
+    standard_id: str    # "ISO27001:2022" | "ISO27701:2019" | "GDPR:2016/679"
+    title:       str    # display title (RequirementNode.title)
+    category:    str    # "foundational" | "direct" | "cross_role"
+    rationale:   str    # WHY this prereq matters for THIS artefact (1-3 sentences)
+    good_enough: str = ""   # what "done enough" looks like (1-2 sentences)
 
 
 @dataclass
@@ -46,6 +67,10 @@ class EvidenceRequirement:
                                             # requirement. Read by leaf_evaluators._check_freshness.
     must_contain:     list[ChecklistItem] = field(default_factory=list)
     should_contain:   list[ChecklistItem] = field(default_factory=list)
+    prerequisites:    tuple[Prerequisite, ...] = ()
+    # Ship 57' — resolved at catalog-load time from one YAML per leaf under
+    # enrichment/prerequisites/{control_ref}/{slug}.yaml via apply_to_catalog.py.
+    # Empty tuple = no bank hit; renderer suppresses the <<PREREQUISITES>> block.
 
 
 # ── Derived specs (cross-control derivation) ──────────────────────────────────

@@ -1,0 +1,18 @@
+must_id: item:B.8.2.4:scope_instruction_channels
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Instruction channels enumerated (contract terms + change orders + support tickets + product
+  configuration)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all instruction channels used, including contract terms, change orders, support tickets, and product
+  configuration, in a dated document.
+- Name a specific individual responsible for maintaining and updating the instruction channels list, not
+  a team or department.
+- Cross-reference each instruction channel to relevant supporting records or systems, such as ticketing
+  platforms or configuration logs.
+- Record the date of the most recent review or update of the instruction channels scope to show it is
+  current.

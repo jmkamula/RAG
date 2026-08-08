@@ -1,0 +1,19 @@
+must_id: item:A.5.36:findings
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Findings recorded per review with severity (compliance vs. nonconformity vs. opportunity-for-improvement;
+  concrete, evidenced)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, scope, and participants for each compliance review in a dedicated log or register.
+- Document each finding from the review, clearly stating whether it is compliant, a nonconformity, or
+  an opportunity for improvement.
+- Attach or reference concrete evidence supporting each finding, such as screenshots, policy excerpts,
+  or audit trails.
+- Assign a severity level to each nonconformity and opportunity for improvement, using defined criteria
+  in your documented review procedure.
+- Name the reviewer(s) as specific individuals, not as a group or department, and obtain their signature
+  or electronic approval on the review record.

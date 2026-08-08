@@ -1,0 +1,19 @@
+must_id: item:Art.10:rev_law_currency
+control_ref: Art.10
+standard_id: GDPR:2016/679
+must_text: Member State law currency — every cited law still in force; any new MS authorisations swept
+  in
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every Member State law cited in your criminal data program, including title, reference number,
+  and date of enactment.
+- Confirm each cited law remains in force by checking the latest official government or EU legal database,
+  and record the verification date.
+- Identify and document any new Member State authorisations or amendments relevant to criminal data processing
+  since your last review.
+- Name the reviewer who completed the law currency check, and record the completion date.
+- Avoid referencing laws without a specific citation or using outdated legal provisions; update any such
+  references with current, verifiable sources.

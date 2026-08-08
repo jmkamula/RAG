@@ -1,0 +1,17 @@
+must_id: item:A.7.6:rev_compliance_check
+control_ref: A.7.6
+standard_id: ISO27001:2022
+must_text: Compliance sampling — sessions verified against permit/escort/device-restriction rules
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer responsible for compliance sampling as a specific individual, not a group or department.
+- Document each secure work session sampled, including date, location, and names of all participants present.
+- Record evidence that permit, escort, and device-restriction rules were checked for each sampled session,
+  such as completed checklists or signed logs.
+- Retain copies of any identified non-compliance incidents and the corrective actions taken, with dates
+  and responsible persons clearly noted.
+- Cross-reference each sampled session to the relevant permit or access record to confirm alignment with
+  established security procedures.

@@ -1,0 +1,18 @@
+must_id: item:B.8.2.5:reg_request_type
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: Request type per row (audit / certification-share / DPIA input / DSAR support / configuration
+  query)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the request type for each entry in the register, clearly stating if it is an audit, certification-share,
+  DPIA input, DSAR support, or configuration query.
+- Assign a unique identifier to each request, linking it to supporting documentation or correspondence
+  for traceability.
+- Name the individual responsible for handling each request, listing a specific person rather than a team
+  or department.
+- Date each entry to show when the request was received and when information was provided or actioned.
+- Review the register regularly to confirm that no entries have a missing or unclear request type.

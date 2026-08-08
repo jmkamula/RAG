@@ -1,0 +1,17 @@
+must_id: item:A.8.23:byod_strategy
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: BYOD coverage strategy (proxy enforcement / off-network behaviour)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Web Filtering Policy how web access is controlled for personal devices used for work, including
+  when they are off the company network.
+- Document the technical method used to enforce web filtering on BYOD devices, such as a proxy, VPN, or
+  mobile device management tool.
+- Name the specific individual responsible for monitoring and updating BYOD web filtering controls, not
+  just "IT" or "the security team".
+- Record the date and outcome of the most recent test or review of BYOD web filtering effectiveness, including
+  any gaps found and actions taken.

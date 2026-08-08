@@ -1,0 +1,18 @@
+must_id: item:B.8.4.2:proc_customer_visibility
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+must_text: Customer visibility — disposal policy made available to customer on request
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Publish the current PII disposal policy in a documented format, such as a PDF or web page, with a clear
+  version number and date.
+- Assign responsibility to a named individual for responding to customer requests for the disposal policy.
+- Record each customer request for the disposal policy and the date the policy was provided in a request
+  log.
+- Retain copies of all versions of the disposal policy shared with customers, including the dates they
+  were distributed.
+- Name the policy owner as a specific person, not a generic role or department, to avoid ambiguity in
+  accountability.

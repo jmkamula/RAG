@@ -1,0 +1,39 @@
+leaf_id: req:B.8.2.2:program_review
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You cannot review adherence to customer-stated purposes unless those purposes are clearly
+    identified and documented. This forms the baseline for any technical or procedural enforcement.
+  good_enough: A current, accessible record of all customer data processing purposes exists, even if not
+    yet fully mapped to all systems.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Purpose adherence is only meaningful if each purpose has a lawful basis. This ensures that
+    the review checks not just technical enforcement, but also legal justification.
+  good_enough: Each documented purpose has a corresponding lawful basis identified, even if some edge
+    cases are still under review.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know which systems, processes, and data are in-scope for the program review.
+    Without a defined scope, you risk missing key areas or reviewing irrelevant ones.
+  good_enough: A written scope statement exists that covers all relevant processing activities and systems
+    for the privacy extension.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that the right people are accountable for enforcing and
+    reviewing purpose adherence. Without this, reviews may be incomplete or lack authority.
+  good_enough: Documented roles exist for those responsible for privacy controls and program reviews,
+    even if some responsibilities are still being clarified.

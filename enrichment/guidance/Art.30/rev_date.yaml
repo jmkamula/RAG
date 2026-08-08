@@ -1,0 +1,14 @@
+must_id: item:Art.30:rev_date
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Review date within the planned interval (typically within 12 months of last review)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent RoPA review in a dedicated column of your RoPA review log.
+- Name the individual who completed the review, listing their full name rather than a team or department.
+- Confirm the review date falls within 12 months of the previous review by cross-referencing both dates
+  in the log.
+- Retain a copy of the signed or approved review confirmation, showing the actual review date.

@@ -1,0 +1,20 @@
+must_id: item:Art.34:scope_art33_boundary
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: Boundary with Art.33 — Art.33 fires lower (any breach of personal data not 'unlikely to result
+  in risk'); Art.34 fires higher (high risk only)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the criteria your organisation uses to distinguish between ‘risk’ and ‘high risk’ personal
+  data breaches under Articles 33 and 34.
+- Record a dated decision log for each breach, stating whether it meets the threshold for Art.33 notification,
+  Art.34 notification, or both.
+- Name the individual responsible for making and recording the risk assessment decision for each breach—do
+  not list a team or department.
+- Cross-reference each breach assessment with supporting evidence, such as risk analysis reports or impact
+  assessments, to justify the classification.
+- Retain all records of breach assessments and notification decisions, including rationale for not notifying
+  under Art.34 when only Art.33 applies.

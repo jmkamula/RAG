@@ -1,0 +1,18 @@
+must_id: item:Art.21:direct_marketing_absolute
+control_ref: Art.21
+standard_id: GDPR:2016/679
+must_text: Direct marketing objection — absolute right, immediate cessation (Art.21.3)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for handling objections to direct marketing, including immediate steps to stop
+  all marketing communications upon receiving an objection.
+- Record each direct marketing objection with the requester’s name, date received, and the action taken
+  to cease communications.
+- Assign responsibility to a named individual for actioning and confirming cessation of direct marketing
+  to the objector.
+- Retain evidence of the communication sent to confirm to the individual that their objection has been
+  processed and marketing has stopped.
+- Name the owner as a specific individual — not a team or generic department — in the procedure documentation.

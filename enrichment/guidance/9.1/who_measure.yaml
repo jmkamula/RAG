@@ -1,0 +1,16 @@
+must_id: item:9.1:who_measure
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Who shall monitor and measure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for monitoring and measuring ISMS performance in the procedure, using
+  their full name and job title.
+- Document the date when the monitoring and measurement responsibilities were last reviewed and updated
+  in the procedure.
+- Record the specific monitoring and measurement tasks assigned to the named individual within the procedure.
+- Avoid listing a group, team, or department as responsible; assign accountability to a single, identifiable
+  person.

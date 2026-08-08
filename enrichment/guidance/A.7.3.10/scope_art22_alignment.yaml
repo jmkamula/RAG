@@ -1,0 +1,19 @@
+must_id: item:A.7.3.10:scope_art22_alignment
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Alignment with Art.22 applicable scope — reference the Art.22 scope register (item:Art.22:scope_solely_automated
+  etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each automated decision process with the corresponding entry in your Article 22 scope
+  register, including the item identifier (e.g., Art.22:scope_solely_automated).
+- Document the specific data types and processing purposes for each automated decision process in a dated
+  record.
+- Name a specific individual responsible for maintaining the automated decision scope and updating the
+  register, not a team or department.
+- Confirm that each referenced scope entry includes a clear description of whether human intervention
+  is possible or not.
+- Retain copies of all updates to the scope register, showing version history and dates of changes.

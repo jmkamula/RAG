@@ -1,0 +1,41 @@
+leaf_id: req:A.5.23:cloud_services_policy
+control_ref: A.5.23
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The cloud services policy must align with the overall ISMS scope, ensuring that all relevant
+    cloud services, business units, and geographies are included or explicitly excluded. Without a defined
+    scope, the policy could miss critical assets or responsibilities.
+  good_enough: The ISMS scope statement should exist and clearly indicate whether cloud services are in
+    or out of scope for the ISMS.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: foundational
+  rationale: A risk assessment is needed to identify and prioritize the specific risks associated with
+    cloud service use, which directly informs policy requirements for selection, controls, and incident
+    handling.
+  good_enough: A recent risk assessment that covers cloud service usage and identifies key risks is available,
+    even if mitigation plans are still in progress.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register is necessary to know which cloud services and related assets
+    are in use, so the policy can address all relevant services and data flows.
+  good_enough: There is a working inventory of cloud services and associated information assets, even
+    if some details are still being refined.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that the policy can specify who is
+    accountable for cloud service selection, monitoring, incident response, and exit processes.
+  good_enough: Key roles for cloud service management are defined and assigned, even if not all responsibilities
+    are fully documented.

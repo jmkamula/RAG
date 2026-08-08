@@ -1,0 +1,42 @@
+leaf_id: req:Art.46:appropriate_safeguards_procedure
+control_ref: Art.46
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.44
+  standard_id: GDPR:2016/679
+  title: General principle for transfers
+  category: direct
+  rationale: Art.44 sets the overarching rule that any international data transfer must comply with GDPR
+    requirements, including the need for appropriate safeguards under Art.46. Without confirming that
+    a transfer is subject to these principles, drafting a safeguards procedure is premature.
+  good_enough: A clear determination that the contemplated transfer is not covered by an adequacy decision
+    and thus requires safeguards under Art.46.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date inventory of processing activities, including details on international
+    transfers, to identify which data flows require Art.46 safeguards and to scope the procedure accurately.
+  good_enough: A current, working RoPA that lists all relevant transfers and recipients, even if some
+    details are still being finalized.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Before selecting and documenting safeguards, you must confirm that each transfer has a lawful
+    basis under GDPR. This ensures the procedure only covers transfers that are legitimate in the first
+    place.
+  good_enough: Each transfer in scope has a documented lawful basis, even if the supporting evidence is
+    basic or still being reviewed.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope statement clarifies which business units, systems, and data flows are covered
+    by your information security management system, helping to align GDPR transfer procedures with broader
+    security controls.
+  good_enough: A draft or approved ISMS scope statement that includes international data transfers, even
+    if some boundaries are still being refined.

@@ -1,0 +1,15 @@
+must_id: item:A.5.12:review_next_date
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the classification scheme in the review log or summary document.
+- Record the date on which the next review was scheduled, including who set the date, in a dated entry.
+- Name the responsible individual for the upcoming review, avoiding generic roles like "the team" or "IT
+  department".
+- Retain the document or system record where the next review date is visible and accessible to relevant
+  stakeholders.

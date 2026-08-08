@@ -1,0 +1,17 @@
+must_id: item:A.8.2:bl_jit_capability
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Just-in-time / time-bound elevation capability available — eliminates standing privilege
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the technical method used to grant privileged access only for a limited time, such as just-in-time
+  elevation or time-bound roles.
+- Record each privileged access elevation event with the user’s name, start and end time, and the approving
+  authority in an access log.
+- Name the owner responsible for managing and reviewing privileged access as a specific individual, not
+  a team or department.
+- Retain evidence showing that standing, permanent privileged accounts have been removed or converted
+  to time-bound elevation, such as deprovisioning records or configuration screenshots.

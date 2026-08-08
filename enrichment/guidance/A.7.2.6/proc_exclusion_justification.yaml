@@ -1,0 +1,19 @@
+must_id: item:A.7.2.6:proc_exclusion_justification
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Justification required if any Annex B control is excluded from contract (§5.4.1.3)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each Annex B control considered for exclusion in the PII Processor Contracting Procedure, referencing
+  the specific control number and title.
+- Document a clear, written justification for each excluded control, explaining why it is not applicable
+  or necessary in the contract.
+- Name the person responsible for approving each exclusion, ensuring this is a specific individual rather
+  than a group or department.
+- Record the date when the justification and approval for each exclusion were finalized and included in
+  the contracting procedure.
+- Attach the signed approval or decision record to the contract file to evidence that exclusions were
+  formally reviewed and justified.

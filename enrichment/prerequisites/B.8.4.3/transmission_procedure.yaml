@@ -1,0 +1,46 @@
+leaf_id: req:B.8.4.3:transmission_procedure
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, processes, and data flows are in-scope for your ISMS and
+    privacy extension before defining how PII transmissions are controlled. This ensures the procedure
+    covers all relevant processor activities.
+  good_enough: A clear, current scope statement that identifies all processor-side PII handling and transmission
+    contexts is available.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Transmission controls depend on knowing which data is PII and its sensitivity. The classification
+    scheme underpins decisions about what protections are needed during transmission.
+  good_enough: A documented scheme exists that distinguishes PII from other data and indicates required
+    protection levels for transmission.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You must know which assets (systems, applications, network paths) process or transmit customer
+    PII to apply appropriate controls and document procedures.
+  good_enough: An up-to-date asset register lists all relevant assets involved in PII transmission.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Understanding the purpose for processing and transmitting PII is essential for determining
+    if, when, and how transmission should occur, and for consulting customers where contracts are silent.
+  good_enough: Documented purposes for all processor PII transmissions are available, even if brief.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: You must know the lawful basis for processing and transmitting PII to ensure procedures align
+    with contractual and legal requirements, especially when customer consultation is needed.
+  good_enough: Each PII transmission scenario has a mapped lawful basis, or a placeholder if still under
+    review.

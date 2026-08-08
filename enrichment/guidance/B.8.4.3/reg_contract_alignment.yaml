@@ -1,0 +1,19 @@
+must_id: item:B.8.4.3:reg_contract_alignment
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Contract-alignment status per row (in / not-in customer B.8.2.1 agreement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processor transmission channel in an inventory, including a unique identifier and a brief
+  description of its function.
+- Cross-reference each channel to the relevant customer contract or data processing agreement, citing
+  the specific clause covering the channel.
+- State for each channel whether it is included in the customer’s B.8.2.1 agreement, using clear terms
+  such as "in agreement" or "not in agreement".
+- Name the contract alignment status reviewer as a specific individual, not a team or department, and
+  record the review date.
+- Flag any channel marked "not in agreement" with a documented explanation and action plan for contract
+  update or risk acceptance.

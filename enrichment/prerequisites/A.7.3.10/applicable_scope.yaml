@@ -1,0 +1,42 @@
+leaf_id: req:A.7.3.10:applicable_scope
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines the organizational and system boundaries for all security and privacy
+    controls, including those related to automated decision-making. Without a clear scope, it is impossible
+    to determine where automated decisions are relevant.
+  good_enough: A documented scope statement that identifies the organizational units, processes, and systems
+    covered by the ISMS, including any that use automated decision-making.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Knowing the specific purposes for processing personal data is essential to determine which
+    automated decisions fall within the scope of privacy requirements. This ensures only relevant processes
+    are included in the automated decision scope.
+  good_enough: A list or register of processing purposes that is up-to-date and includes any processes
+    involving automated decisions about individuals.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: The lawful basis for each processing activity must be established before determining if automated
+    decisions are permissible and within scope. This underpins the legitimacy of any automated processing.
+  good_enough: Each processing activity, especially those involving automated decisions, has a documented
+    lawful basis that is traceable and justified.
+- ref: Art.22
+  standard_id: GDPR:2016/679
+  title: Automated Individual Decision-Making, Including Profiling
+  category: cross_role
+  rationale: Art.22 defines the regulatory threshold for what constitutes significant automated decisions,
+    which directly informs the scope for this ISO27701 control. The scope note must align with this legal
+    definition.
+  good_enough: A clear interpretation or register of processing activities that meet the Art.22 criteria,
+    even if preliminary, to ensure the ISO27701 scope note references the correct set.

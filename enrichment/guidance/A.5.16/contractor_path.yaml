@@ -1,0 +1,20 @@
+must_id: item:A.5.16:contractor_path
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Contractor-specific path documented (fixed expiry, automatic disable; no manual extension without
+  re-approval)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the contractor onboarding process, including steps for assigning access with a fixed end date,
+  in the Identity Lifecycle Management Procedure.
+- State the automated process that disables contractor accounts at expiry, referencing the system or tool
+  that enforces this control.
+- Record the re-approval workflow required for any manual extension of contractor access, including who
+  must authorize and how the approval is captured.
+- Name the owner of the contractor access process as a specific individual, not a team or department,
+  in the procedure document.
+- Attach a sample log or screenshot showing a recent contractor account automatically disabled at expiry,
+  with dates visible.

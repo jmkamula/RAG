@@ -1,0 +1,17 @@
+must_id: item:A.8.10:reg_event_id
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Per-deletion unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each deletion event before disposal, using a sequential or randomised
+  scheme that cannot be reused.
+- Record the unique identifier alongside the deletion date, asset description, and responsible person
+  in the disposal register.
+- Cross-reference the unique identifier in related disposal documentation, such as certificates of destruction
+  or transfer records.
+- Name the responsible individual for assigning and recording each unique identifier, avoiding generic
+  roles or group names.

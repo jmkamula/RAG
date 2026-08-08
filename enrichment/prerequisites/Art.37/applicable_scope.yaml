@@ -1,0 +1,33 @@
+leaf_id: req:Art.37:applicable_scope
+control_ref: Art.37
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of processing activities to determine whether your organisation
+    meets the criteria for mandatory DPO designation under Art.37. This record helps identify the nature,
+    scope, and scale of processing.
+  good_enough: A current, reasonably complete RoPA that lists all major processing activities and their
+    purposes, even if some minor details are pending.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity is essential to assess risk and
+    necessity for DPO designation, especially for activities involving special categories or large-scale
+    processing.
+  good_enough: A mapping of each processing activity to its lawful basis, with enough detail to show which
+    activities may trigger the DPO requirement.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope statement defines the organisational and operational boundaries relevant for
+    GDPR compliance, ensuring that the DPO designation covers all applicable entities and activities.
+  good_enough: A documented ISMS scope that identifies the main business units, locations, and systems
+    in scope for GDPR, even if some boundaries are still being refined.

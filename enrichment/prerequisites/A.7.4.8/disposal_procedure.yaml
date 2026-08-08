@@ -1,0 +1,41 @@
+leaf_id: req:A.7.4.8:disposal_procedure
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need an up-to-date asset register to know which physical and digital media may contain
+    PII and therefore require secure disposal. Without this, you can't define disposal procedures that
+    cover all relevant assets.
+  good_enough: A basic, current list of all information assets and media types that may store PII is available,
+    even if not fully detailed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A working classification scheme ensures you can identify which information is PII and what
+    level of protection (including disposal) it requires. This is essential for tailoring disposal procedures
+    to the sensitivity of the data.
+  good_enough: A documented scheme exists that marks PII as a distinct class, with at least draft-level
+    guidance on handling requirements.
+- ref: A.7.4.5
+  standard_id: ISO27701:2019
+  title: Criteria for PII Disposal
+  category: direct
+  rationale: A.7.4.5 defines the triggers and scope for PII disposal (the WHEN and WHAT). You need this
+    to know under what circumstances and for which data your disposal procedure (the HOW) applies.
+  good_enough: A summary or draft of the triggers and scope for PII disposal is available, even if not
+    fully formalized.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that the right people are accountable for carrying out
+    and overseeing PII disposal. Without this, procedures may not be followed or enforced.
+  good_enough: A list of responsible roles for information security, including PII handling and disposal,
+    is defined and communicated.

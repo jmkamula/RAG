@@ -1,0 +1,18 @@
+must_id: item:A.6.1:rescreen_triggers
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Re-screening triggers (significant role change, escalated access from A.5.18, security incident
+  involving the individual)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all re-screening triggers in the Personnel Screening Procedure, including significant role change,
+  escalated access, and security incidents involving the individual.
+- Document the date each trigger was last reviewed and updated, showing ongoing attention to changes in
+  risk or organisational context.
+- Name the person responsible for initiating re-screening, ensuring this is a specific individual rather
+  than a team or department.
+- Record examples of completed re-screenings, including the trigger event, date, and outcome, in a central
+  log.

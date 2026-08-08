@@ -1,0 +1,17 @@
+must_id: item:9.3:scope_escalation_thresholds
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Escalation thresholds (when a finding needs an interim review rather than waiting for annual)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define specific escalation thresholds for management review findings, such as severity, regulatory impact,
+  or repeated issues, in a documented procedure.
+- Name the individual responsible for triggering interim reviews when thresholds are met, rather than
+  using a generic role or team.
+- Record each instance when an interim review is initiated, including the date, reason, and decision,
+  in the management review log.
+- Document the outputs and actions resulting from interim reviews, ensuring each is dated and linked to
+  the original finding.

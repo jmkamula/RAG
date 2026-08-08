@@ -1,0 +1,17 @@
+must_id: item:A.5.15:approval_signatory
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Signatory at appropriate management level (typically CISO with IT / business endorsement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the CISO or equivalent senior manager as the official signatory for the access control policy,
+  listing their full name and title.
+- Document the date of formal approval on the policy, ensuring it is clearly visible on the cover or approval
+  page.
+- Record explicit endorsements from both IT and business representatives, capturing their names, titles,
+  and dates of endorsement.
+- Avoid using generic titles such as "IT Department" or "Management Team" as signatories; specify individual
+  names and roles.

@@ -1,0 +1,19 @@
+must_id: item:A.8.34:stakeholder_notification
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Stakeholder-notification requirement (affected teams / on-call / customer where material)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all stakeholders who must be notified before audit testing, including affected teams, on-call staff,
+  and customers if the impact is material.
+- Document the notification process, specifying how and when each stakeholder will be informed prior to
+  audit activities.
+- Record the date, time, and method of each notification sent, attaching confirmation receipts or acknowledgements
+  from recipients.
+- Name the responsible individual who approves stakeholder notifications, ensuring this is a specific
+  person and not a generic group or department.
+- Retain copies of all communications and approvals related to stakeholder notifications in a central,
+  dated repository.

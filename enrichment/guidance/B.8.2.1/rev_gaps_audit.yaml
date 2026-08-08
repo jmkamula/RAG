@@ -1,0 +1,19 @@
+must_id: item:B.8.2.1:rev_gaps_audit
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+must_text: Gaps audit — sampled agreements checked for Art.28.3.e-h assistance coverage
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of recent customer agreements and record the selection date and criteria in a
+  dated review log.
+- Cross-reference each sampled agreement to confirm explicit clauses covering Article 28.3.e-h assistance
+  obligations, noting clause numbers in the review log.
+- Document any agreements missing required assistance clauses and record follow-up actions with responsible
+  individuals and completion dates.
+- Name the reviewer as a specific individual, not a generic role or team, in the review log for each agreement
+  checked.
+- Retain copies of reviewed agreements and completed review logs in a designated compliance folder with
+  access restricted to authorized personnel.

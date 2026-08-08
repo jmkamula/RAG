@@ -1,0 +1,19 @@
+must_id: item:Art.8:proc_information
+control_ref: Art.8
+standard_id: GDPR:2016/679
+must_text: Information presentation adapted for children (plain language where minors will read it)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Write the child-facing information using short sentences, simple vocabulary, and examples relevant to
+  the age group, saving the final text version.
+- Document the reading level of the information using a recognized tool (such as Flesch-Kincaid), and
+  keep the assessment results with the procedure.
+- Name the person responsible for reviewing and updating the child-facing information, listing them as
+  a specific individual, not a team or department.
+- Record feedback from children or parents on the clarity of the information, including dates and summary
+  notes of any changes made as a result.
+- Retain the final approved version of the child-facing information, dated and signed by the designated
+  reviewer.

@@ -1,0 +1,40 @@
+leaf_id: req:A.5.19:offboarding_record
+control_ref: A.5.19
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: foundational
+  rationale: You need an overarching information security policy that sets expectations for managing supplier
+    relationships, including offboarding. Without this, there’s no agreed baseline for what offboarding
+    should achieve or record.
+  good_enough: A documented policy exists that references supplier lifecycle management, including offboarding
+    requirements.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: To offboard a supplier, you must know which assets (data, devices, access rights) they have.
+    The asset register is essential for identifying what needs to be returned, deleted, or revoked.
+  good_enough: A current list of assets linked to each supplier is available and accessible for offboarding
+    events.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures someone is accountable for executing and recording supplier
+    offboarding actions. Without this, offboarding records may be incomplete or missing.
+  good_enough: Documented roles exist for supplier management, including who is responsible for offboarding
+    and recordkeeping.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know whether supplier relationships are in scope for your ISMS. If they’re out
+    of scope, offboarding records may not be required.
+  good_enough: A scope statement exists and explicitly includes supplier relationships relevant to the
+    ISMS.

@@ -1,0 +1,17 @@
+must_id: item:Art.15:source
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Source of the personal data where not collected from the data subject (any available information)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and record the original source of the personal data if it was not collected directly from the
+  data subject.
+- Document any available information about the source, such as the organisation name, contact details,
+  and date of data receipt.
+- Include the source details in the written response to the data subject’s access request, referencing
+  the specific data items involved.
+- Name the source as a specific entity or individual—do not use vague terms like "third party" or "external
+  provider."

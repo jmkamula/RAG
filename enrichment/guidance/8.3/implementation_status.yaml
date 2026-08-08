@@ -1,0 +1,16 @@
+must_id: item:8.3:implementation_status
+control_ref: '8.3'
+standard_id: ISO27001:2022
+must_text: Implementation status per treatment item (planned, in-progress, complete, deferred)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- List each risk treatment item with a unique identifier in your operational risk register.
+- Record the current implementation status for each item as planned, in-progress, complete, or deferred,
+  with the date of last update.
+- Name the responsible individual for updating each treatment item's status, not just a team or department.
+- Attach supporting evidence, such as meeting minutes or project updates, confirming the status for at
+  least one recent treatment item.
+- Review and update the status entries regularly, documenting the date and person making each change.

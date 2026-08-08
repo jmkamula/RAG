@@ -1,0 +1,16 @@
+must_id: item:A.5.27:rev_date
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent lessons-learned program review date in a central log, including the name of the
+  person who led the review.
+- State the planned review interval in months or years in a documented schedule approved by management.
+- Confirm the actual review date falls within the planned interval by cross-referencing the central log
+  and the approved schedule.
+- Name the review owner as a specific individual, not a team or department, in the program documentation.
+- Retain a copy of the review meeting minutes or summary, dated and signed by the review owner.

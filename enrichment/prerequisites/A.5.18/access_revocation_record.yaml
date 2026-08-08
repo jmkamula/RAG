@@ -1,0 +1,52 @@
+leaf_id: req:A.5.18:access_revocation_record
+control_ref: A.5.18
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.15
+  standard_id: ISO27001:2022
+  title: Access Control Policy
+  category: direct
+  rationale: A clear access control policy is essential to define how access rights are granted, reviewed,
+    and revoked. Without this policy, there is no baseline for what access should exist or how revocation
+    should be handled, making it impossible to meaningfully record or audit revocation events.
+  good_enough: A documented and approved access control policy that covers the lifecycle of access rights,
+    including revocation triggers and responsibilities.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Revocation records must reference the specific assets or systems from which access is being
+    removed. Without an up-to-date asset register, you cannot reliably track or evidence which access
+    was revoked or validate completeness.
+  good_enough: A current, reasonably complete asset register listing all key systems and data repositories
+    subject to access controls.
+- ref: A.6.5
+  standard_id: ISO27001:2022
+  title: Responsibilities after Termination or Change of Employment
+  category: direct
+  rationale: This control defines the obligations and processes that trigger access revocation, such as
+    employment termination or role change. Without clarity here, you cannot reliably identify when revocation
+    should occur or what constitutes a valid revocation event.
+  good_enough: A documented process or checklist for handling access and responsibilities when staff leave
+    or change roles, even if not fully automated.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that someone is accountable for initiating,
+    executing, and recording access revocations. Without this, revocation actions and records may fall
+    through the cracks.
+  good_enough: Named individuals or teams assigned to access management and revocation duties, documented
+    in a policy or RACI matrix.
+- ref: A.5.16
+  standard_id: ISO27001:2022
+  title: Identity Management
+  category: direct
+  rationale: Identity management processes underpin the lifecycle of user accounts and credentials. Without
+    a reliable identity register and lifecycle controls, you cannot ensure that revocation records are
+    complete or that all identities are properly deprovisioned.
+  good_enough: A basic identity register and process for creating, updating, and disabling user identities,
+    even if manual.

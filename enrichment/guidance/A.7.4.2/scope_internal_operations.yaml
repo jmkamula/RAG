@@ -1,0 +1,20 @@
+must_id: item:A.7.4.2:scope_internal_operations
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+must_text: Internal processing operations enumerated (application queries / reports / dashboards / ML
+  pipelines / exports)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all internal processing operations by name, including application queries, reports, dashboards,
+  machine learning pipelines, and data exports, in a dated document.
+- Assign a specific individual as the owner responsible for maintaining and updating the processing operations
+  scope.
+- Cross-reference each processing operation to the relevant business process or system in your data inventory
+  or register.
+- State the review date and reviewer’s name on the scope document to show periodic validation of the listed
+  operations.
+- Avoid using generic descriptions or placeholders; describe each processing operation with enough detail
+  that an auditor can identify its purpose and data flow.

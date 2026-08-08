@@ -1,0 +1,17 @@
+must_id: item:Art.17:intake_channel
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Intake channel published and accessible to data subjects
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Publish a clear, dedicated web page or contact form where individuals can submit data erasure requests,
+  including instructions and contact details.
+- Document the URL or physical location of the intake channel in your erasure procedure, with a date showing
+  when it was last verified as active.
+- Name a specific individual responsible for monitoring and responding to erasure requests, not just a
+  generic team or department.
+- Retain a screenshot or copy of the published intake channel as evidence that it is accessible to data
+  subjects.

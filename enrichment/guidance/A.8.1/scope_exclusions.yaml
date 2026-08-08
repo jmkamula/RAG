@@ -1,0 +1,19 @@
+must_id: item:A.8.1:scope_exclusions
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Exclusions stated explicitly (kiosks via A.8.18, servers via A.8.9, lab/test rigs via A.8.31)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all endpoint types in your environment, including desktops, laptops, kiosks, servers, and lab/test
+  rigs, in a dated inventory document.
+- State explicitly in the scope document which endpoint types are excluded, referencing the relevant ISO27001
+  controls (A.8.18, A.8.9, A.8.31).
+- Name the person responsible for approving endpoint scope and exclusions as a specific individual, not
+  a team or department.
+- Attach evidence of formal approval for the scope and exclusions, such as a signed and dated decision
+  record.
+- Cross-reference the exclusions in your main asset register to ensure consistency with the stated scope
+  document.

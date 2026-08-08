@@ -1,0 +1,42 @@
+leaf_id: req:A.7.3.6:applicable_scope
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and process boundaries for all information security
+    and privacy controls, ensuring that the privacy extension’s scope aligns with the overall ISMS. Without
+    this, you can’t clearly state which subjects and contexts are covered by A.7.3.6.
+  good_enough: A documented ISMS scope that identifies the organizational units, processes, and systems
+    included in the ISMS, even if not fully detailed for privacy.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the purposes for which personal data is processed to determine
+    which contexts and restrictions apply under A.7.3.6. This is essential for scoping applicable ACR
+    contexts.
+  good_enough: A list or summary of processing purposes for each relevant data subject category, even
+    if not exhaustively mapped.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for processing is critical to understanding which legal restrictions
+    or derogations (like research or legal obligations) might apply to the scope of ACR contexts.
+  good_enough: A basic mapping of processing activities to their lawful bases, sufficient to flag where
+    special restrictions or exceptions may apply.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A data classification scheme helps identify which types of personal data are in scope and
+    whether special categories or restrictions (e.g., sensitive data, research data) are relevant for
+    A.7.3.6.
+  good_enough: A draft or working classification scheme that distinguishes personal data types, even if
+    not fully rolled out.

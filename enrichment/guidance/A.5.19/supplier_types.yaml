@@ -1,0 +1,17 @@
+must_id: item:A.5.19:supplier_types
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Supplier types identified and documented (ICT services, ICT infrastructure components, logistics,
+  utilities, financial, etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all supplier types relevant to your organisation, such as ICT services, infrastructure, logistics,
+  utilities, and financial providers, in your risk management procedure.
+- Document clear definitions and examples for each supplier type to avoid ambiguity or overlap between
+  categories.
+- Name the person responsible for maintaining and updating the supplier type list, ensuring a specific
+  individual is identified rather than a team or department.
+- Record the date of the most recent review or update to the supplier type documentation within the procedure.

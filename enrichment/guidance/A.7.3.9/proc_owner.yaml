@@ -1,0 +1,14 @@
+must_id: item:A.7.3.9:proc_owner
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Named owner (Privacy Ops)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the Subject Request Handling Procedure, not a team or department.
+- Document the owner's full name and job title in the header or first section of the procedure.
+- Record the date the owner was assigned responsibility within the procedure document.
+- Retain evidence of the owner's acceptance, such as a signed or acknowledged statement in the procedure
+  file.

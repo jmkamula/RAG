@@ -1,0 +1,18 @@
+must_id: item:A.7.4.3:rev_root_cause_closure
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: Root-cause closure — systemic remediations from prior period reviewed for completeness
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a responsible individual who will oversee the closure of all systemic remediation actions identified
+  in the prior period.
+- Document each remediation action, its root cause, and the completion date in a tracked register or log.
+- Record evidence of review meetings where the effectiveness and completeness of each remediation action
+  were discussed and confirmed.
+- Attach supporting materials, such as updated procedures or system changes, that demonstrate the remediation
+  was fully implemented.
+- Avoid listing remediation actions as "in progress" or "pending" without a clear explanation and a target
+  completion date.

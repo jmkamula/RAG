@@ -1,0 +1,20 @@
+must_id: item:A.7.3.10:proc_cross_link_art22
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Cross-link to A.7.2.5 PIA and the Art.22 4-leaf procedure register — no double-registration;
+  this control handles the SUBJECT-facing obligations while Art.22 procedure handles the internal governance
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the Automated Decision Subject Obligations Procedure to the A.7.2.5 PIA documentation
+  by including the exact document title and version number.
+- Link directly to the Art.22 4-leaf procedure register within the procedure, specifying its location
+  and latest update date.
+- State in the procedure that subject-facing obligations are addressed here, while internal governance
+  is covered solely in the Art.22 procedure, to avoid double-registration.
+- Name the procedure owner as a specific individual, not a team or department, and record the assignment
+  date.
+- Include a revision history table showing each update, reviewer, and approval date to demonstrate ongoing
+  alignment with GDPR Art.22.

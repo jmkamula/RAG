@@ -1,0 +1,17 @@
+must_id: item:A.5.28:preservation
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Preservation method (read-only/write-blocked storage, secure vault, environmental controls)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Describe the preservation method used, such as read-only storage, write-blocked devices, or secure vaults,
+  in the written procedure with clear technical details.
+- Document the specific environmental controls in place, such as temperature and humidity monitoring,
+  in a dated section of the procedure.
+- Name the person or role responsible for maintaining the preservation environment, ensuring this is a
+  specific individual and not a generic team or department.
+- Record the date the preservation method was last tested or verified, including the outcome, in a log
+  referenced in the procedure.

@@ -1,0 +1,17 @@
+must_id: item:A.6.5:rev_reviewer
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Reviewer identity (HR lead + InfoSec lead + Legal counsel)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the HR lead, InfoSec lead, and Legal counsel who reviewed the program in the review meeting minutes,
+  using their full names and job titles.
+- Record the date of the most recent post-employment program review in a dated document signed by all
+  three required reviewers.
+- Attach each reviewer’s signature or written approval to the final review summary to confirm their participation
+  and agreement.
+- Avoid listing a group or department as the reviewer; specify each individual by name to meet accountability
+  requirements.

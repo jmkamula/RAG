@@ -1,0 +1,18 @@
+must_id: item:Art.20:rev_sla_compliance
+control_ref: Art.20
+standard_id: GDPR:2016/679
+must_text: SLA compliance against Art.12.3 (one month)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the current service level agreement (SLA) for responding to data portability requests, explicitly
+  stating the one-month deadline required by Article 12.3.
+- Record the name and contact details of the individual responsible for monitoring and enforcing SLA compliance
+  for data portability requests.
+- Retain dated logs of all data portability requests received and the corresponding response dates to
+  demonstrate adherence to the one-month timeframe.
+- Cross-reference each closed request with supporting evidence that the response was provided within one
+  month, such as email timestamps or system logs.
+- Name the SLA owner as a specific person, not a generic role or team, to avoid ambiguity in accountability.

@@ -1,0 +1,43 @@
+leaf_id: req:B.8.2.4:applicable_scope
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and system boundaries for all information security
+    and privacy controls, including which processes and assets are covered. You can't meaningfully define
+    which instruction contexts are in-scope for infringement review without knowing the overall ISMS scope.
+  good_enough: A documented, management-approved ISMS scope statement that clearly identifies the organizational
+    units, systems, and processes included.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is needed to identify all information assets and channels through
+    which customer instructions are received. Without this, you can't reliably determine which instruction
+    contexts exist or are relevant for review.
+  good_enough: A current list or inventory of information assets and communication channels, even if not
+    fully classified, that covers all customer instruction entry points.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Understanding and documenting the purposes for which personal data is processed helps clarify
+    which instruction contexts are relevant for privacy infringement review. This ensures only applicable
+    channels are included in scope.
+  good_enough: Documented purposes for all major processing activities, with enough detail to map them
+    to instruction channels.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles and responsibilities ensures that someone is accountable for identifying,
+    documenting, and maintaining the list of applicable instruction contexts. Without this, scope decisions
+    may be incomplete or inconsistent.
+  good_enough: A basic roles and responsibilities matrix or statement that assigns ownership for privacy
+    and instruction context documentation.

@@ -1,0 +1,19 @@
+must_id: item:B.8.5.6:proc_disclosure_content
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+must_text: Disclosure content (subcontractor identity + countries + international orgs + obligations mechanism)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the full legal name of each subcontractor involved in processing personal data in the Subcontractor
+  Disclosure Procedure.
+- Record the country or countries where each subcontractor processes personal data, including any relevant
+  international organizations.
+- State the specific contractual or policy mechanism used to ensure each subcontractor meets privacy obligations,
+  such as data processing agreements.
+- Name the owner as a specific individual responsible for maintaining and updating the Subcontractor Disclosure
+  Procedure, not as a team or department.
+- Retain dated records of each update to the procedure, showing when new subcontractors or countries are
+  added.

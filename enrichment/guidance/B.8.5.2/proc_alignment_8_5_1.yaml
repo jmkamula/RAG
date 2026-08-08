@@ -1,0 +1,16 @@
+must_id: item:B.8.5.2:proc_alignment_8_5_1
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+must_text: Alignment with B.8.5.1 basis register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each listed transfer destination in the Processor Transfer Destinations Procedure with
+  the corresponding lawful basis entry in the B.8.5.1 register.
+- Record the date and name of the person who verified the alignment between the procedure and the register.
+- Attach a copy or screenshot of the current B.8.5.1 basis register to the Processor Transfer Destinations
+  Procedure for direct comparison.
+- Name the owner as a specific individual responsible for maintaining both the procedure and the register,
+  not just a team or department.

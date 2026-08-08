@@ -1,0 +1,19 @@
+must_id: item:A.7.3.3:scope_change_drivers
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: Trigger list (new product surface / new data source)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current delivery contexts, such as products, services, or platforms, in a dated scope document
+  reviewed within the past 12 months.
+- Identify and record any new product surfaces or data sources added since the last review, including
+  the date each was introduced.
+- Assign a named individual responsible for updating the delivery context scope whenever a new product
+  surface or data source is planned or launched.
+- Avoid using generic terms like "all products" or "various data sources"; specify each context and data
+  source by name in the scope document.
+- Retain evidence of each scope update, such as meeting minutes or change logs, showing when and why changes
+  were made.

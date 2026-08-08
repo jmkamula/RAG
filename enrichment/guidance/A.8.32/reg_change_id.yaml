@@ -1,0 +1,18 @@
+must_id: item:A.8.32:reg_change_id
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Per-change unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each change entry in the Change Register before any change is implemented.
+- Record the unique identifier alongside the change description, date, and responsible person for every
+  entry.
+- Cross-reference the unique identifier in related documentation, such as approvals or testing records,
+  to maintain traceability.
+- Confirm that no two changes share the same identifier by periodically reviewing the Change Register
+  for duplicates.
+- Name the identifier using a consistent format that includes numbers or letters specific to your organisation,
+  not generic labels.

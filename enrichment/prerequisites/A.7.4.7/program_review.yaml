@@ -1,0 +1,39 @@
+leaf_id: req:A.7.4.7:program_review
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the specific purposes for which PII is processed before you can review whether
+    retention schedules and deletion triggers are appropriate and effective.
+  good_enough: A documented list of processing purposes for all PII in scope, even if not fully mapped
+    to every data set, is sufficient to proceed.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Retention periods and deletion requirements depend on the lawful basis for processing PII;
+    you can't review retention if you don't know the legal grounds.
+  good_enough: A summary of lawful bases for each major category of PII processing, even if some edge
+    cases are pending, is enough to start the review.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is needed to identify where PII resides, so you can verify retention
+    and deletion controls are applied to all relevant systems.
+  good_enough: A basic inventory listing all systems and repositories holding PII, even if not yet fully
+    detailed, is sufficient to unblock the review.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A data classification scheme ensures you can distinguish PII from other data, which is essential
+    for reviewing retention and deletion practices specific to PII.
+  good_enough: A draft or interim classification scheme that clearly marks PII is enough to proceed with
+    the retention review.

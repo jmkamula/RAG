@@ -1,0 +1,19 @@
+must_id: item:9.1:rev_threshold_recalibration
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Threshold recalibration — targets reviewed for continued relevance and stretch
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the current monitoring thresholds and targets in a dated review log, including the original
+  rationale for each threshold.
+- Assign a named individual to lead the threshold review, recording their name and the review start date
+  in the log.
+- Record the outcome of the threshold review, noting any recalibrations, supporting data, and the date
+  of decision.
+- Obtain a dated sign-off from a specific manager confirming that recalibrated thresholds remain relevant
+  and appropriately challenging.
+- Name the reviewer as a specific individual, not a group or department, to avoid auditor concerns about
+  unclear accountability.

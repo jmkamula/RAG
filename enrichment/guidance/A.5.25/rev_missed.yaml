@@ -1,0 +1,19 @@
+must_id: item:A.5.25:rev_missed
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Missed-event analysis (events surfaced via lessons-learned that triage didn't catch)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the missed-event analysis, recording their name and the review period
+  in a dated document.
+- Document each event surfaced through lessons-learned that was not detected by the triage process, including
+  event details and discovery date.
+- Record analysis findings for every missed event, stating why the triage process failed to catch it and
+  any contributing factors.
+- Approve and date any corrective actions or process changes resulting from the analysis, with the responsible
+  person's name clearly listed.
+- Avoid using generic descriptions like "various incidents"—list each missed event specifically to prevent
+  auditor concerns about incomplete analysis.

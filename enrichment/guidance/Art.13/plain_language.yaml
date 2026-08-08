@@ -1,0 +1,17 @@
+must_id: item:Art.13:plain_language
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Written in plain, clear language
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Write the privacy notice using short sentences and everyday words that a typical user can understand
+  without legal or technical knowledge.
+- Test the notice’s readability by having at least two non-expert staff or users read it and confirm in
+  writing that they understood the content.
+- Document the date and names of individuals who reviewed the notice for clarity and readability, keeping
+  their feedback on file.
+- Name the author or editor responsible for the final wording as a specific person, not just a team or
+  department.

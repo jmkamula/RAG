@@ -1,0 +1,14 @@
+must_id: item:4.4:owner
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: Named owner of the manual (ISMS Manager)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the ISMS Manual owner as a specific individual, including full name and job title, in the manual’s
+  title or introduction section.
+- Record the date the ownership was assigned to the ISMS Manager within the manual or in a change log.
+- Sign the ISMS Manual to confirm acceptance of ownership by the named ISMS Manager.
+- Avoid listing the owner as a team, department, or generic role; use a real person’s name and position.

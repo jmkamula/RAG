@@ -1,0 +1,18 @@
+must_id: item:A.5.12:handling_per_level
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Handling implications per level (links to A.5.13 labelling, A.5.10 acceptable use, A.5.14 transfer)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each information classification level and describe specific handling rules for each, referencing
+  related controls such as labelling, use, and transfer.
+- Cross-reference the classification scheme to documented procedures for labelling, acceptable use, and
+  transfer, showing how each level is managed in practice.
+- Assign a named owner responsible for maintaining and updating the classification scheme, avoiding generic
+  roles like "IT" or "the team".
+- Record the approval date and approver’s name for the current version of the classification scheme.
+- Document how the scheme addresses security needs for each classification, providing concrete examples
+  relevant to your organisation’s information types.

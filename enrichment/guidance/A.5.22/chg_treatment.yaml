@@ -1,0 +1,16 @@
+must_id: item:A.5.22:chg_treatment
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Treatment decided (accept / mitigate / re-paper agreement / terminate relationship)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Record the treatment decision for each supplier service change as "accept", "mitigate", "re-paper agreement",
+  or "terminate relationship" in the response log.
+- Name the individual who made the treatment decision for each entry, avoiding generic labels like "the
+  team" or "IT".
+- Date each treatment decision entry to show when the response was determined.
+- Cross-reference each treatment decision to supporting documentation, such as risk assessments or updated
+  agreements, in the log.

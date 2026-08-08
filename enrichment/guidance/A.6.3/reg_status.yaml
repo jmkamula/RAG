@@ -1,0 +1,16 @@
+must_id: item:A.6.3:reg_status
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Per-row status (current / overdue / waived-with-reason / N/A — for role change exemptions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the training status for each individual in the register as "current," "overdue," "waived-with-reason,"
+  or "N/A" for role change exemptions.
+- State the date of last training completion for each person to support the assigned status.
+- Document the specific reason for any "waived-with-reason" status, referencing the approving manager
+  by name.
+- Name the owner of the register as a specific individual, not a team or department.
+- Review and update the register at least quarterly, noting the date of each review.

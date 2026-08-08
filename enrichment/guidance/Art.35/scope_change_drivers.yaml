@@ -1,0 +1,16 @@
+must_id: item:Art.35:scope_change_drivers
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Trigger list (new product/feature launch, processing-pattern shift, SA list update)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each event that should trigger a DPIA, such as new product launches, major processing changes,
+  or updates to the processing activities list.
+- Document the date and description of each trigger event in a DPIA trigger log maintained by a named
+  responsible individual.
+- Cross-reference each trigger event in the log to the corresponding DPIA assessment or decision record.
+- Name the DPIA trigger owner as a specific individual, not a team or department, to avoid ambiguity in
+  responsibility.

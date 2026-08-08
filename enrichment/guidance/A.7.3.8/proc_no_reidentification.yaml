@@ -1,0 +1,17 @@
+must_id: item:A.7.3.8:proc_no_reidentification
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: No-re-identification rule — de-identified data not re-identified solely to fulfil this control
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that de-identified data must not be re-identified solely to respond to PII copy
+  requests.
+- Name a specific individual responsible for approving any exceptions to the no-re-identification rule,
+  rather than a group or department.
+- Document each PII copy request and confirm that only existing identified data is used, retaining a dated
+  record of this check.
+- Record any instance where re-identification was considered and the rationale for rejecting it, including
+  the decision-maker’s name and date.

@@ -1,0 +1,17 @@
+must_id: item:B.8.5.5:reg_binding_classification
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Binding classification per row (legally binding / not binding)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the legal status of each disclosure in the register as either "legally binding" or "not binding"
+  in a dedicated column.
+- Document the decision-maker’s name and the date for each classification entry to show who made the determination
+  and when.
+- Cross-reference each classification to the supporting legal or contractual document that justifies the
+  binding status.
+- Avoid using generic or unclear terms like "uncertain" or "pending" in the classification column; select
+  only "legally binding" or "not binding".

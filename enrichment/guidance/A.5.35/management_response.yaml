@@ -1,0 +1,18 @@
+must_id: item:A.5.35:management_response
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Management response to findings (accept / remediate / transfer / risk-accept with rationale);
+  response is documented IN the report, not deferred
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each finding’s management response directly in the review report, clearly stating whether it
+  will be accepted, remediated, transferred, or risk-accepted.
+- Document the rationale for any risk acceptance decision, providing specific business or technical reasons
+  rather than generic statements.
+- Name the responsible manager for each response as a specific individual, not as a team or department.
+- Date each management response entry to show when the decision was made.
+- Avoid referencing a separate action plan or follow-up document; ensure all responses are fully contained
+  within the review report itself.

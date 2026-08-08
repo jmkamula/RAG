@@ -1,0 +1,18 @@
+must_id: item:Art.15:proc_training
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Front-line staff trained on DSAR recognition and routing (so a request in the wrong channel
+  still reaches the procedure)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the names and training completion dates of all front-line staff who have received instruction
+  on recognising and routing data subject access requests.
+- Retain a copy of the training materials or session agenda that specifically covers identification and
+  escalation of DSARs from any channel.
+- Record a sample communication or workflow diagram showing how a misdirected DSAR is routed to the correct
+  team or procedure.
+- Name the training owner as a specific individual responsible for maintaining up-to-date DSAR recognition
+  training, not as a department or generic team.

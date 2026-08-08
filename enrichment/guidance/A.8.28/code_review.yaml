@@ -1,0 +1,19 @@
+must_id: item:A.8.28:code_review
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Code-review requirement before merge for production code (cross-link to A.8.4 branch protection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a written secure coding procedure that explicitly requires code review before merging any production
+  code.
+- Cross-reference your secure coding procedure to the branch protection rules described in your A.8.4
+  documentation.
+- Name a specific individual or role responsible for approving code reviews before production merges—do
+  not use generic terms like "the team."
+- Record dated evidence of completed code reviews for each production merge, such as pull request approvals
+  or review logs.
+- Retain version history of the secure coding procedure, ensuring each update is dated and clearly identifies
+  the author.

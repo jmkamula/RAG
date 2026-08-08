@@ -1,0 +1,39 @@
+leaf_id: req:A.8.9:configuration_management_procedure
+control_ref: A.8.9
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The configuration management procedure must align with the defined scope of the ISMS to ensure
+    all relevant systems and assets are covered and nothing critical is omitted.
+  good_enough: The ISMS scope statement should clearly identify which systems, locations, and processes
+    are in scope for configuration management.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need an up-to-date asset register to know which assets require configuration management
+    and to ensure all relevant items are included in the procedure.
+  good_enough: A basic, current list of information assets (hardware, software, etc.) with ownership is
+    available and accessible.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities is necessary so the configuration management
+    procedure can specify who owns, approves, and monitors configurations.
+  good_enough: Key roles for configuration management (e.g., owners, approvers) are named and their responsibilities
+    are described.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding risks related to misconfiguration or unauthorized changes helps prioritize
+    controls and monitoring in the configuration management procedure.
+  good_enough: A recent risk assessment exists that identifies configuration-related risks for in-scope
+    assets.

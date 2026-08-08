@@ -1,0 +1,41 @@
+leaf_id: req:Art.15:dsar_response
+control_ref: Art.15
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.12
+  standard_id: GDPR:2016/679
+  title: Transparent information, communication and modalities for the exercise of the rights of the data
+    subject
+  category: direct
+  rationale: Art.12 sets out the rules for how and when you must respond to data subject requests, including
+    the 1-month deadline and communication requirements. You can't draft a compliant DSAR response without
+    knowing these modalities.
+  good_enough: You have a documented process that covers how DSARs are received, tracked, and responded
+    to within the required timeframes.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: To answer a DSAR fully, you need to know what personal data you process, for what purposes,
+    and where it is stored. Art.30 records are the main source for this information.
+  good_enough: A current, reasonably complete RoPA exists, listing the main processing activities, categories
+    of data, and recipients.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: DSAR responses must explain the legal basis for processing personal data. Without this, you
+    can't provide the required transparency under Art.15(1)(c).
+  good_enough: You have mapped each processing activity to a lawful basis and can reference this mapping
+    in DSAR responses.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer Designation
+  category: foundational
+  rationale: If a DPO is required, their contact details must be provided in DSAR responses. This ensures
+    data subjects know whom to contact for further queries.
+  good_enough: You have determined whether a DPO is required and, if so, have designated one and documented
+    their contact details.

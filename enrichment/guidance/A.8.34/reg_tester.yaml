@@ -1,0 +1,15 @@
+must_id: item:A.8.34:reg_tester
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Per-engagement tester identity (internal team / external firm)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the individual or firm responsible for testing each engagement directly in the
+  Audit Testing Engagement Register.
+- Specify whether the tester is an internal staff member or an external service provider for every entry
+  in the register.
+- Enter the date when each tester was assigned to the engagement to create a clear timeline.
+- Name the tester as a specific person or firm—do not use generic labels like "IT team" or "external vendor."

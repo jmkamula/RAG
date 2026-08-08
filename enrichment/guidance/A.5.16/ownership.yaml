@@ -1,0 +1,19 @@
+must_id: item:A.5.16:ownership
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Ownership of each lifecycle phase (HR triggers from leaver register; IT executes; manager approves;
+  InfoSec oversight)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of each identity lifecycle phase as a specific individual, listing their full name and
+  role for each phase.
+- Document the HR trigger process by referencing the leaver register and including the date and responsible
+  HR contact for each entry.
+- Record the IT execution steps, naming the IT staff member who performs each action and the date completed.
+- Require manager approval for each lifecycle event by capturing the manager’s name, signature, and approval
+  date on the procedure record.
+- Cross-reference your procedure to the related control in your documentation for A.5.11, noting the exact
+  document and section.

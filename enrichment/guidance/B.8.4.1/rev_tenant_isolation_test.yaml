@@ -1,0 +1,19 @@
+must_id: item:B.8.4.1:rev_tenant_isolation_test
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+must_text: Tenant isolation test — sampled sweeps confirmed no cross-tenant temp file spillover
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual responsible for conducting tenant isolation tests, recording their name and
+  role in the test documentation.
+- Document the date, time, and scope of each sampled sweep, including which tenants and systems were tested
+  for temp file isolation.
+- Record detailed test results showing evidence that no temporary files from one tenant were accessible
+  to others, including screenshots or logs where possible.
+- Retain signed approval from a designated reviewer confirming that the test results demonstrate effective
+  tenant isolation with no spillover detected.
+- Name the specific tenants included in the sample—do not use generic labels like "various tenants" or
+  "multiple clients."

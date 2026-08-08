@@ -1,0 +1,17 @@
+must_id: item:8.2:rev_cadence_met
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Cadence-met check — every scheduled assessment for each tier happened
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all scheduled operational assessments for each tier in a dated register, including planned intervals
+  and responsible individuals.
+- Record the actual completion date of each assessment next to its scheduled date in the register.
+- Attach supporting evidence for each assessment, such as meeting minutes, review reports, or sign-off
+  records.
+- Highlight any missed or rescheduled assessments with a documented explanation and corrective action.
+- Name the owner responsible for monitoring assessment cadence as a specific individual, not a group or
+  department.

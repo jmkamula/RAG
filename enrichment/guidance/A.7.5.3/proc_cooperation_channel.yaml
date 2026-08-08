@@ -1,0 +1,18 @@
+must_id: item:A.7.5.3:proc_cooperation_channel
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+must_text: Cooperation channel — third parties can be re-contacted for subject-rights follow-up
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific contact person at each third party who can be reached for future subject-rights requests,
+  recording their full name and role.
+- Document the agreed communication method and contact details for each third party in the PII Transfer
+  Recording Procedure.
+- Record the date when cooperation arrangements were last confirmed or updated with each third party.
+- Retain written confirmation from each third party acknowledging their responsibility to cooperate with
+  future subject-rights requests.
+- Avoid listing generic contacts such as "support team" or "info@company.com"; always specify an individual
+  or dedicated privacy contact.

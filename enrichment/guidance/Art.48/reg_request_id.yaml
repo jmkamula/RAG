@@ -1,0 +1,17 @@
+must_id: item:Art.48:reg_request_id
+control_ref: Art.48
+standard_id: GDPR:2016/679
+must_text: Per-row request id (or 'no requests this period' affirmative statement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique request ID to each foreign authority data request and record it in the register.
+- Record the date each request was received and the name of the requesting authority in the register.
+- State "no requests this period" in the register if no foreign authority requests were received during
+  the reporting period.
+- Name the staff member responsible for maintaining the register as a specific individual, not a team
+  or department.
+- Retain a copy of each completed register entry, including the affirmative statement if applicable, for
+  the audit period.

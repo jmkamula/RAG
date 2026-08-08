@@ -1,0 +1,18 @@
+must_id: item:A.5.12:approval_authority
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Statement of the signatory's authority (delegation chain if not top-management)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual who approved the classification scheme, including their job title and department,
+  in the approval record.
+- Document the date of approval and retain the signed approval document in a central, version-controlled
+  location.
+- State the signatory’s authority in the approval record, specifying if authority is delegated and referencing
+  the relevant delegation document.
+- Attach or cross-reference the delegation of authority document if the signatory is not a member of top
+  management.
+- Avoid listing the approver as a group or team; use a named individual to ensure clear accountability.

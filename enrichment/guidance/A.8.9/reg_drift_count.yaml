@@ -1,0 +1,19 @@
+must_id: item:A.8.9:reg_drift_count
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Per-baseline outstanding drift finding count + open SLA breaches
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the number of outstanding drift findings for each configuration baseline in the register, including
+  the date the count was last updated.
+- Document any open breaches of service level agreements (SLAs) related to configuration drift, listing
+  the specific baseline and breach date.
+- Name the responsible individual for updating drift findings and SLA breaches, avoiding generic roles
+  like "IT team" or "Operations".
+- Cross-reference each drift finding and SLA breach to its corresponding incident or ticket number for
+  traceability.
+- Retain historical entries for closed drift findings and resolved SLA breaches to provide a continuous
+  evidence trail.

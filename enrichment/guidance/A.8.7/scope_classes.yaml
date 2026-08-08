@@ -1,0 +1,19 @@
+must_id: item:A.8.7:scope_classes
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Asset classes enumerated (endpoint / server / container / serverless / mobile / OT / cloud-native
+  services)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all technology asset classes in scope for malware protection, including endpoints, servers, containers,
+  serverless, mobile devices, OT, and cloud-native services.
+- Document the rationale for including or excluding each asset class, referencing relevant risk assessments
+  or business justifications.
+- Name the responsible individual who approved the asset scope, ensuring a specific person is identified
+  rather than a team or department.
+- Record the date the asset scope was last reviewed and updated, providing a clear version history.
+- Cross-reference the asset scope document with your current asset inventory to confirm all relevant asset
+  classes are addressed.

@@ -1,0 +1,39 @@
+leaf_id: req:10.1:continual_improvement_procedure
+control_ref: '10.1'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The continual improvement procedure must be aligned to the defined scope of the ISMS. Without
+    a clear scope, it is impossible to determine what areas require improvement or to measure effectiveness.
+  good_enough: A documented and approved ISMS scope statement that defines the organisational boundaries
+    and applicability of the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The continual improvement procedure needs to reference and support the organisation’s information
+    security policy, ensuring improvements are consistent with top-level objectives and commitments.
+  good_enough: A current, approved information security policy that sets out the organisation’s direction
+    and objectives for information security.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: foundational
+  rationale: Continual improvement activities are often triggered by risk assessment outcomes. Without
+    a risk assessment process, it is unclear what risks need to be addressed or improved upon.
+  good_enough: A documented risk assessment methodology and at least one completed risk assessment relevant
+    to the ISMS scope.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: The continual improvement procedure must assign responsibilities for identifying, tracking,
+    and implementing improvements. Without defined roles, the procedure cannot be effectively executed.
+  good_enough: Documented assignment of ISMS roles and responsibilities, including those related to continual
+    improvement activities.

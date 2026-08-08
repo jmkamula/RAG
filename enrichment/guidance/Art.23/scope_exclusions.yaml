@@ -1,0 +1,18 @@
+must_id: item:Art.23:scope_exclusions
+control_ref: Art.23
+standard_id: GDPR:2016/679
+must_text: Out-of-scope MS laws (those that don't restrict GDPR rights — e.g. those that GRANT rights)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all Member State laws reviewed, including title, jurisdiction, and date, in a table or register
+  maintained by the compliance team.
+- Identify and record which Member State laws do not restrict GDPR rights but instead grant or expand
+  rights, with a brief description for each.
+- Document the reasoning for classifying each law as out-of-scope, referencing the relevant section or
+  article of the law.
+- Name the reviewer who made the out-of-scope determination for each law, avoiding anonymous or group
+  attributions.
+- Attach or link to dated copies or official summaries of each out-of-scope law to support your classification.

@@ -1,0 +1,18 @@
+must_id: item:A.5.33:classification_scheme
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Records classification scheme stated (record classes and the protection class assigned to each
+  — cross-link to A.5.12 classification of information)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the records classification scheme directly in the policy, listing each record class and its assigned
+  protection class.
+- Cross-reference each protection class in the policy to the corresponding information classification
+  level defined under control A.5.12.
+- Name the individual responsible for maintaining the classification scheme, using a specific person’s
+  name rather than a generic title or team.
+- Attach a dated version of the classification scheme to the policy, and update the date whenever changes
+  are made.

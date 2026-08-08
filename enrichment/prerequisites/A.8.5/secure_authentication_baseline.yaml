@@ -1,0 +1,40 @@
+leaf_id: req:A.8.5:secure_authentication_baseline
+control_ref: A.8.5
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, applications, and environments are in-scope for your ISMS
+    before you can define a secure authentication baseline. This ensures you’re not missing critical assets
+    or applying controls where they aren’t needed.
+  good_enough: A clear, current list of in-scope systems and boundaries is documented and available to
+    guide which authentication mechanisms need to be covered.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: A reliable asset register identifies all information systems and user endpoints that require
+    authentication controls. Without this, you can't ensure your baseline covers all relevant assets.
+  good_enough: A working inventory exists listing all systems, applications, and devices that users authenticate
+    to, even if some details are still being refined.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Knowing the classification of information and systems helps determine the appropriate strength
+    of authentication (e.g., MFA for sensitive data). This prevents under- or over-securing access.
+  good_enough: A basic classification scheme is in place, with at least high/medium/low tiers, so you
+    can map authentication requirements to asset sensitivity.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment identifies threats and vulnerabilities related to authentication, such as
+    weak passwords or credential stuffing. This informs which controls are necessary in your baseline.
+  good_enough: A recent risk assessment exists that highlights authentication-related risks for in-scope
+    systems, even if some risks are still being evaluated.

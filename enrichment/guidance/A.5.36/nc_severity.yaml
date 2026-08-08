@@ -1,0 +1,16 @@
+must_id: item:A.5.36:nc_severity
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Severity recorded per NC (matches the review record's severity classification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the severity of each nonconformity in the Compliance Nonconformity Register using the same classification
+  terms as your review record.
+- Cross-reference each nonconformity entry with its corresponding review record to show the severity matches
+  exactly.
+- Name the person responsible for assigning severity for each nonconformity, ensuring a specific individual
+  is listed rather than a group or department.
+- Date each severity entry in the register to confirm when the classification was assigned.

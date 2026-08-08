@@ -1,0 +1,17 @@
+must_id: item:Art.41:scope_jurisdictions
+control_ref: Art.41
+standard_id: GDPR:2016/679
+must_text: Jurisdictions covered
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each country or jurisdiction where your monitoring activities are conducted in a dated document
+  reviewed by your compliance lead.
+- Name the legal basis or authority for monitoring in each jurisdiction, referencing relevant local laws
+  or agreements.
+- Assign a specific individual responsible for maintaining and updating the list of covered jurisdictions,
+  not a generic team or department.
+- Attach supporting documentation, such as contracts or regulatory correspondence, that confirms your
+  monitoring scope in each named jurisdiction.

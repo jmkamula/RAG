@@ -1,0 +1,16 @@
+must_id: item:10.1:reg_target_date
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Per-row target completion date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Enter a specific target completion date for each improvement action row in the register, using the format
+  YYYY-MM-DD.
+- Record the name of the person responsible for each action alongside the target date to show clear accountability.
+- Update the register with actual completion dates once actions are finished, keeping both target and
+  actual dates visible.
+- Avoid leaving the target completion date field blank or using vague entries like "TBD" or "ASAP" for
+  any action row.

@@ -1,0 +1,17 @@
+must_id: item:A.8.22:reg_zone_id
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Per-zone unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each network zone in the register, using a consistent format that cannot
+  be confused with other zones.
+- Record the assigned unique identifier next to each network zone entry, along with the date it was created
+  or last updated.
+- Name the person responsible for assigning and maintaining these identifiers, listing their full name
+  rather than a team or department.
+- Cross-reference each unique identifier with the corresponding network diagram or documentation to confirm
+  accuracy and traceability.

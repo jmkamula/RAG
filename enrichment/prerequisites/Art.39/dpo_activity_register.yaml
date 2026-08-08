@@ -1,0 +1,32 @@
+leaf_id: req:Art.39:dpo_activity_register
+control_ref: Art.39
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Designation of the Data Protection Officer
+  category: foundational
+  rationale: The DPO Activity Register only makes sense if a DPO has been formally designated as required
+    by Art.37. Without this, there is no responsible individual to perform or log the required activities.
+  good_enough: There is documented evidence of DPO appointment, including name and contact details, and
+    this is communicated internally.
+- ref: Art.38
+  standard_id: GDPR:2016/679
+  title: Position of the Data Protection Officer
+  category: direct
+  rationale: Art.39 tasks assume the DPO operates under the independence, resources, and support conditions
+    set out in Art.38. If these are not in place, the DPO cannot meaningfully perform or record their
+    activities.
+  good_enough: There is a brief statement or record confirming the DPO’s independence, reporting line,
+    and access to necessary resources.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: direct
+  rationale: The DPO’s activities often relate to monitoring and advising on processing activities. Without
+    an up-to-date RoPA, the DPO cannot effectively perform or document their oversight duties.
+  good_enough: A current RoPA exists, even if not perfect, listing core processing activities and main
+    data flows.

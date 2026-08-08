@@ -1,0 +1,19 @@
+must_id: item:A.7.3.8:reg_direct_transfer
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Direct-transfer flag if Art.20.2 invoked
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a dedicated column in the Copy Request Register to indicate if a direct transfer under Art.20.2
+  has been requested.
+- Record the date and details of each direct transfer request, including the requester’s name and the
+  method of transfer.
+- Attach supporting documentation showing the individual’s explicit request for direct transfer, such
+  as an email or signed form.
+- Name the staff member responsible for processing direct transfers as a specific individual, not a team
+  or department.
+- Review the register regularly to confirm each direct transfer flag is supported by corresponding evidence
+  in the request file.

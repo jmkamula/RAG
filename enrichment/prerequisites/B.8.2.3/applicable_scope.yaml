@@ -1,0 +1,40 @@
+leaf_id: req:B.8.2.3:applicable_scope
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and operational boundaries for all information
+    security activities, which is essential to understand before narrowing down to privacy-specific marketing
+    activities.
+  good_enough: A documented, management-approved ISMS scope that clearly identifies the organizational
+    units and processes covered.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: You must know and document the purposes for which personal data is processed before you can
+    specify which marketing activities (if any) could involve customer PII.
+  good_enough: A list or register of processing purposes, with at least a basic description for each,
+    covering all relevant business activities.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is needed to identify systems, databases, and processes that
+    could potentially process customer PII for marketing, ensuring nothing is overlooked.
+  good_enough: A current inventory of information assets, with enough detail to identify which assets
+    could be used for marketing or advertising.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: You need a working data classification scheme to distinguish customer PII from other data
+    types, so you can accurately scope which marketing activities could touch customer PII.
+  good_enough: A documented scheme that at minimum distinguishes customer PII from non-PII, and is applied
+    to relevant assets and data flows.

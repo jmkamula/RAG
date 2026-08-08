@@ -1,0 +1,17 @@
+must_id: item:9.1:what_monitored
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: What is monitored and measured (ISMS processes and security controls)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all ISMS processes and security controls that are subject to monitoring and measurement in a dated
+  procedure document.
+- Assign a named individual responsible for monitoring and measuring each listed ISMS process and security
+  control.
+- Specify the exact metrics or indicators used to measure each ISMS process and security control in the
+  procedure.
+- Avoid using vague terms like "all controls" or "as needed"—clearly identify each process and control
+  by name or unique identifier.

@@ -1,0 +1,19 @@
+must_id: item:A.8.17:protocol
+control_ref: A.8.17
+standard_id: ISO27001:2022
+must_text: Synchronisation protocol (NTP / PTP) with security where supported (NTS / authenticated NTP)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific time synchronization protocol used, such as NTP or PTP, in your procedure document,
+  including the version number.
+- Document the security mechanism enabled for time synchronization, such as NTS or authenticated NTP,
+  and reference supporting configuration screenshots or logs.
+- Name the person responsible for maintaining and monitoring clock synchronization, listing their full
+  name and job title in the procedure.
+- Record the date of the last successful synchronization test and retain the test output or log file as
+  evidence.
+- Specify the source time server addresses used, avoiding generic terms like "public NTP pool" without
+  listing actual server hostnames or IPs.

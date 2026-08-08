@@ -1,0 +1,20 @@
+must_id: item:A.5.11:rev_revoke_latency
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Access-revocation latency analysed (gap between effective_date and access_revoke_timestamp;
+  investigate outliers)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Extract all records of asset returns and corresponding access revocation timestamps from the past review
+  period into a dated report.
+- Calculate the time gap between each asset's return effective date and the actual access revocation timestamp
+  in the report.
+- Identify and highlight any records where the time gap exceeds the organisation’s defined threshold for
+  timely revocation.
+- Document investigations and outcomes for each outlier, including named responsible individuals and dated
+  explanations or corrective actions.
+- Name the reviewer as a specific individual, not a generic role or team, and record the review completion
+  date in the program log.

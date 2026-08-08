@@ -1,0 +1,17 @@
+must_id: item:Art.37:qualifications
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: DPO qualifications stated (Art.37.5 — expert knowledge of data protection law and practices,
+  ability to fulfil tasks)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the required qualifications for the Data Protection Officer, including expert knowledge of data
+  protection law and practices, in the designation procedure document.
+- List the specific skills and experience needed to fulfil the DPO’s tasks, referencing relevant data
+  protection regulations and operational responsibilities.
+- Name the DPO qualification requirements as applying to a specific individual or role, not generically
+  to “the team” or “the department.”
+- Record the date the DPO qualification criteria were last reviewed and approved by a named senior manager.

@@ -1,0 +1,17 @@
+must_id: item:A.5.25:dec_rationale
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Rationale stated (criteria-based reasoning, not just a binary outcome)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the triage decision for each event, including the specific criteria used to reach the outcome.
+- State the rationale for each decision in writing, explaining why the event met or did not meet escalation
+  thresholds.
+- Name the individual who made the triage decision, ensuring it is a specific person and not a team or
+  generic role.
+- Date each triage record to show when the decision and rationale were documented.
+- Avoid using one-word rationales or generic phrases; provide clear, criteria-based reasoning tailored
+  to the specific event.

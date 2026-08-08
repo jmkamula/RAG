@@ -1,0 +1,15 @@
+must_id: item:A.5.28:disp_package_ref
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Package identifier per record (links to custody register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique package identifier for each disposal or handover event, matching the identifier used
+  in your custody register.
+- Cross-reference each disposal or handover record with the corresponding entry in the custody register
+  to show a clear link.
+- State the date and time of each disposal or handover, and name the individual responsible for the action.
+- Name the package in clear, specific terms—avoid vague labels like "miscellaneous" or "various items."

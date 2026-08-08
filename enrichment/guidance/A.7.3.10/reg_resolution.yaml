@@ -1,0 +1,15 @@
+must_id: item:A.7.3.10:reg_resolution
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Resolution per row (human-reviewed decision / procedure applied / dismissed with reason)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the outcome of each automated decision event, specifying if it was human-reviewed, a procedure
+  was applied, or dismissed with a reason.
+- Name the reviewer or decision-maker for each event, ensuring a specific individual is listed rather
+  than a team or department.
+- Date each resolution entry to provide a clear timeline of when the decision or action was taken.
+- Attach supporting documentation or notes for dismissed events, detailing the justification for dismissal.

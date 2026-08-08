@@ -1,0 +1,16 @@
+must_id: item:Art.30:rev_outcome
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Per-activity outcome (no change / amended / retired) recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the outcome of each processing activity review as "no change," "amended," or "retired" in the
+  RoPA review log with the review date.
+- Name the reviewer responsible for each activity’s outcome, ensuring a specific individual is listed
+  rather than a team or department.
+- Attach supporting evidence for any "amended" or "retired" outcome, such as updated RoPA entries or decommissioning
+  records.
+- Sign off each review outcome by the designated data protection lead or delegate to confirm completion.

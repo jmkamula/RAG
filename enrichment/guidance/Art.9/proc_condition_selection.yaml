@@ -1,0 +1,19 @@
+must_id: item:Art.9:proc_condition_selection
+control_ref: Art.9
+standard_id: GDPR:2016/679
+must_text: Art.9.2 condition selection (a-j) with rationale per activity
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each processing activity involving special category data and record it in a register with a
+  unique reference and clear description.
+- Select the specific Article 9.2 condition (a–j) relied upon for each activity and document the exact
+  letter and legal text.
+- State the rationale for choosing each condition, linking it directly to the processing purpose and context
+  in plain language.
+- Name the decision-maker responsible for each condition selection as a specific individual, not a group
+  or department.
+- Date and retain the documented rationale and condition selection for each activity, ensuring it is available
+  for audit review.

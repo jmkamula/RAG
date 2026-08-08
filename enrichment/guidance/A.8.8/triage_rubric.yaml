@@ -1,0 +1,17 @@
+must_id: item:A.8.8:triage_rubric
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Triage rubric (CVSS + exploitability + asset criticality + reachability)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a triage rubric that explicitly combines CVSS score, exploitability, asset criticality, and
+  reachability in a single, dated procedure.
+- Name the individual responsible for applying the rubric, using their full name and job title, not just
+  a team or department.
+- Record an example vulnerability assessment where the rubric was applied, showing how each factor influenced
+  the prioritization decision.
+- Cross-reference the rubric in your vulnerability management procedure, ensuring the latest version is
+  attached or linked directly.

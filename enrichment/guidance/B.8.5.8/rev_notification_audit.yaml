@@ -1,0 +1,17 @@
+must_id: item:B.8.5.8:rev_notification_audit
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+must_text: Notification audit — sampled changes verified against timeframe
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each subcontractor change in a dated change log, including the notification date sent to relevant
+  parties.
+- Cross-reference a sample of logged changes with corresponding notification emails or letters to verify
+  timely communication.
+- Document the timeframe requirement for notifications in your subcontractor management procedure and
+  reference the specific section.
+- Name the reviewer who performed the audit of sampled changes and record the date the review was completed.
+- Attach evidence of notification for each sampled change; avoid relying on undocumented verbal notifications.

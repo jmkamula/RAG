@@ -1,0 +1,17 @@
+must_id: item:B.8.2.1:reg_term
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+must_text: Term / expiry / renewal per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the start date, expiry date, and any renewal date for each customer PII agreement as separate
+  columns in the register.
+- Name the responsible individual for updating agreement terms, ensuring a specific person is listed rather
+  than a team or department.
+- Attach a copy or reference number of each agreement to its corresponding row for direct cross-checking
+  of term details.
+- Review the register quarterly and document the review date and reviewer’s name to show ongoing currency
+  of agreement information.

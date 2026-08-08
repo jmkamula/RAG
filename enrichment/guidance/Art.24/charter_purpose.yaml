@@ -1,0 +1,17 @@
+must_id: item:Art.24:charter_purpose
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Statement of GDPR compliance objective + accountability commitment
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the organisation’s objective to comply with GDPR in a dedicated section of the Privacy Programme
+  Charter, referencing Article 24.1.
+- Document a clear commitment to accountability for personal data processing, explicitly naming GDPR as
+  the regulatory framework.
+- Name a specific individual, such as the Data Protection Officer or Privacy Lead, as responsible for
+  overseeing GDPR compliance — not a team or department.
+- Record the date the Privacy Programme Charter was last approved by senior management, with names and
+  signatures where possible.

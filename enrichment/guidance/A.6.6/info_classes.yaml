@@ -1,0 +1,18 @@
+must_id: item:A.6.6:info_classes
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Information classes protected (cross-link to A.5.12 classification — confidential / restricted
+  / trade-secret tiers; PII overlay where applicable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the agreement template to your documented information classification scheme, citing
+  the exact policy or register section covering confidential, restricted, and trade-secret data.
+- State in the template which information classes are protected, using the same terms and definitions
+  as your classification policy.
+- Include a section in the template that explicitly addresses protection of personal data if the agreement
+  may cover personally identifiable information.
+- Name the template owner as a specific individual responsible for updates, not a generic team or department.
+- Record the template version and last review date in the document footer.

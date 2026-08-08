@@ -1,0 +1,17 @@
+must_id: item:Art.16:response_deadline
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Response to data subject within one month (extendable by two months for complex requests)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each rectification request is received in a central log to establish the official start
+  of the response timeline.
+- Document the date and content of your response to the data subject, showing it was sent within one month
+  of receiving the request.
+- Retain evidence of any extension decision, including justification for complexity and notification to
+  the data subject, with both dates clearly stated.
+- Name the responsible individual who approves and signs off on all rectification responses, avoiding
+  generic titles like "the team" or "Data Protection."

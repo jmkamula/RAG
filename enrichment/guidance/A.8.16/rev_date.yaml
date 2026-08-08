@@ -1,0 +1,17 @@
+must_id: item:A.8.16:rev_date
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval (≤180 days)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of each monitoring program review in a central log, showing the most recent review occurred
+  within the last 180 days.
+- Name the reviewer as a specific individual responsible for the latest monitoring program review, not
+  a group or department.
+- Retain the signed or approved review report as evidence that the review was completed on the recorded
+  date.
+- Cross-reference the review log with your monitoring program schedule to confirm all reviews meet the
+  ≤180-day interval requirement.

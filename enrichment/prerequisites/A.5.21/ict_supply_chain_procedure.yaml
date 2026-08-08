@@ -1,0 +1,42 @@
+leaf_id: req:A.5.21:ict_supply_chain_procedure
+control_ref: A.5.21
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ICT supply chain procedure must align with the defined ISMS scope to ensure all relevant
+    suppliers, products, and services are covered. If the scope omits key ICT dependencies, the procedure
+    will be incomplete or misaligned.
+  good_enough: The ISMS scope statement should clearly identify which ICT supply chain elements are in-scope
+    for information security management.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Supply chain controls must be risk-driven. Without a current risk assessment, it's impossible
+    to prioritize which ICT suppliers, components, or services require the most attention in the procedure.
+  good_enough: A recent risk assessment exists that identifies and ranks ICT supply chain risks relevant
+    to the organization.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: The procedure relies on knowing which ICT assets and components are in use, as well as their
+    suppliers. An up-to-date asset register is essential for identifying what needs to be protected in
+    the supply chain.
+  good_enough: The asset register lists key ICT assets and their associated suppliers, even if some minor
+    details are pending.
+- ref: A.5.20
+  standard_id: ISO27001:2022
+  title: Addressing information security within supplier agreements
+  category: direct
+  rationale: Supplier agreements are the primary vehicle for enforcing information security requirements
+    in the supply chain. The procedure must reference or build upon these agreements to ensure requirements
+    are propagated and monitored.
+  good_enough: There is a template or example supplier agreement that includes basic information security
+    clauses relevant to ICT supply chain risks.

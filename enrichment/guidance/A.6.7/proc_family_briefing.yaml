@@ -1,0 +1,15 @@
+must_id: item:A.6.7:proc_family_briefing
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Family/visitor access briefing (verbal explanation to the worker that family members must not
+  use the corporate device — drives the policy's family-access rule into operational reality)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and time when the worker received a verbal explanation that family members must not
+  use the corporate device.
+- Name the specific individual who delivered the family-access briefing, not just the department or team.
+- Record the worker’s acknowledgement of the briefing, such as a signed or emailed confirmation.
+- Retain a copy of the briefing script or talking points used to ensure consistency across all briefings.

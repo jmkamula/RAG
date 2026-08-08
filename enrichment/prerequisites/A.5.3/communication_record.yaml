@@ -1,0 +1,39 @@
+leaf_id: req:A.5.3:communication_record
+control_ref: A.5.3
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Information security roles and responsibilities
+  category: direct
+  rationale: You must define and assign information security roles and responsibilities before you can
+    communicate segregation requirements. The segregation matrix only makes sense if roles are clearly
+    established.
+  good_enough: A documented list of security roles and their responsibilities exists, with named individuals
+    or teams assigned to each role.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The segregation matrix and its communication must be relevant to the defined ISMS scope.
+    Without a clear scope, you can't be sure who needs to receive segregation information.
+  good_enough: A current ISMS scope statement exists, identifying the organizational boundaries and functions
+    covered.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Information classification
+  category: direct
+  rationale: Knowing which information types require segregation helps determine which roles need to be
+    informed about specific separation mechanisms.
+  good_enough: A basic information classification scheme is in place, with at least high-level categories
+    mapped to business functions.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information security policy
+  category: foundational
+  rationale: The security policy sets the expectation for compliance with segregation controls and underpins
+    the authority for communicating such requirements.
+  good_enough: A formally approved information security policy exists and is accessible to relevant staff.

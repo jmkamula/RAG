@@ -1,0 +1,17 @@
+must_id: item:B.8.5.3:reg_recipient
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+must_text: Recipient per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full legal name of each recipient organization or individual in a dedicated column for every
+  disclosure event row.
+- State the specific contact person or role at the recipient, not just the company name, to clarify exactly
+  who received the data.
+- Document the date and time of each disclosure alongside the recipient details to provide a complete
+  event history.
+- Avoid using generic terms like "external party" or "partner" as recipient names; specify the actual
+  entity or person involved.

@@ -1,0 +1,18 @@
+must_id: item:A.6.7:reg_status
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Per-row status (active / suspended / expired-pending-revocation / revoked) — drives the leaver
+  pair-check vs A.5.18 access register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- List each remote worker by full name and unique identifier in the register, ensuring no duplicate or
+  missing entries.
+- 'Assign a clear status to each row: "active", "suspended", "expired-pending-revocation", or "revoked",
+  with no blank or ambiguous values.'
+- Record the date and name of the person who last updated each status entry for traceability.
+- Cross-reference each "expired-pending-revocation" or "revoked" status with the corresponding entry in
+  the A.5.18 access register to confirm access removal.
+- Name the register owner as a specific individual, not a team or department.

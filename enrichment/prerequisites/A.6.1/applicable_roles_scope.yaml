@@ -1,0 +1,40 @@
+leaf_id: req:A.6.1:applicable_roles_scope
+control_ref: A.6.1
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines which parts of the organization, processes, and information assets
+    are covered by the security management system. You cannot determine which roles and checks are applicable
+    until you know what is in scope.
+  good_enough: A documented scope statement that clearly identifies the organizational boundaries and
+    assets included in the ISMS, even if some details are still being finalized.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: direct
+  rationale: Understanding which roles exist and what responsibilities they carry is essential for mapping
+    out which checks and vetting procedures apply to each role tier.
+  good_enough: A current list of defined roles and their core responsibilities, sufficient to distinguish
+    between different levels of access or authority.
+- ref: A.5.3
+  standard_id: ISO27001:2022
+  title: Segregation of Duties
+  category: direct
+  rationale: Segregation of duties helps identify critical roles that require additional scrutiny or checks,
+    such as those with conflicting or high-risk responsibilities.
+  good_enough: A basic mapping of which duties must be separated and which roles are affected, even if
+    the full implementation is pending.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: The risk assessment identifies threats and regulatory drivers that inform which roles require
+    specific checks (e.g., PEP, sanctions, credentialing).
+  good_enough: A preliminary risk assessment that highlights key risks and regulatory requirements relevant
+    to role-based checks, even if not exhaustive.

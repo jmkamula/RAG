@@ -1,0 +1,48 @@
+leaf_id: req:A.8.34:audit_testing_protection_policy
+control_ref: A.8.34
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which information systems and business processes are in-scope for your ISMS
+    before you can define how audit testing on those systems should be protected. The policy must align
+    with the defined scope.
+  good_enough: A clear, current scope statement that identifies the systems, locations, and activities
+    covered by the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register is essential to identify which systems and data may be subject
+    to audit testing, so the policy can address their protection requirements.
+  good_enough: A basic inventory of information systems and key assets, even if not fully detailed, that
+    covers all in-scope systems.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that the right people are involved
+    in planning, authorising, and overseeing audit activities, as required by the policy.
+  good_enough: Documented roles for audit authorisation and oversight, even if responsibilities are high-level
+    or combined.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The overarching information security policy sets the tone and principles for all subordinate
+    policies, including how audit testing should be managed and protected.
+  good_enough: A published, approved information security policy that references the need for supporting
+    policies and controls.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding the risks associated with audit testing on operational systems helps shape
+    the controls and requirements in the protection policy.
+  good_enough: A recent risk assessment that at least considers audit/testing activities as a risk scenario,
+    even if not fully detailed.

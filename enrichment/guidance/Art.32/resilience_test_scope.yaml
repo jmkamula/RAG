@@ -1,0 +1,17 @@
+must_id: item:Art.32:resilience_test_scope
+control_ref: Art.32
+standard_id: GDPR:2016/679
+must_text: Test scope covers confidentiality, integrity, availability and resilience
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the test plan including explicit objectives for confidentiality, integrity, availability, and
+  resilience, and reference the relevant GDPR Article 32.1.d requirement.
+- Name the individual responsible for approving the test scope, ensuring they are identified by full name
+  and role, not as a team or department.
+- Record the date, participants, and systems involved in each test, attaching evidence that each aspect—confidentiality,
+  integrity, availability, and resilience—was addressed.
+- Retain test results and any remediation actions taken, clearly linking them to the specific scope areas
+  tested.

@@ -1,0 +1,20 @@
+must_id: item:A.6.4:reg_case_id
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Per-case unique identifier (anonymised externally; internal traceability to personnel record
+  preserved)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique case identifier to each disciplinary case in the register, ensuring no two cases share
+  the same identifier.
+- Record the mapping between each case identifier and the relevant personnel record in a secure, access-controlled
+  location.
+- Document the process for generating and managing case identifiers, including how external anonymisation
+  is maintained.
+- Name a specific individual responsible for maintaining the identifier mapping, avoiding generic roles
+  like "HR team" or "management".
+- Confirm that no personally identifiable information appears alongside case identifiers in any externally
+  shared reports or summaries.

@@ -1,0 +1,18 @@
+must_id: item:10.2:reg_corrective_action
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Per-row corrective action(s) with owner + target date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each nonconformity as a separate row with a clear description, date identified, and reference
+  to the relevant policy or process.
+- Assign a named individual as the owner for each corrective action — do not list a team or department.
+- Document the specific corrective action(s) to be taken for each nonconformity, including clear steps
+  and expected outcomes.
+- Set and record a realistic target completion date for each corrective action, ensuring it is not left
+  blank or marked as "TBD".
+- Update the register with the date of completion and evidence of action taken once each corrective action
+  is closed.

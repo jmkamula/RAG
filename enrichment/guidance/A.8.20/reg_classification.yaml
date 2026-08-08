@@ -1,0 +1,18 @@
+must_id: item:A.8.20:reg_classification
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Per-row classification tier (from A.5.12)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each network asset as a separate row in the Network Inventory Register, including unique identifiers
+  and relevant details.
+- Assign a classification tier to each asset row, using the same tiering scheme defined in your A.5.12
+  Information Classification Policy.
+- Cross-reference each asset's classification tier in the register to the documented policy or matrix
+  from A.5.12, ensuring consistency.
+- Name the owner of the register as a specific individual, not a team or department, to avoid ambiguity
+  in responsibility.
+- Record the date of the most recent review or update for each row, showing the classification is current.

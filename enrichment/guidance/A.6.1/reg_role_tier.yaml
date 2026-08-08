@@ -1,0 +1,18 @@
+must_id: item:A.6.1:reg_role_tier
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Role tier per record (drives the proportional check-depth applied; junior / standard / sensitive
+  / privileged)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a specific role tier to each candidate record in the register, using clear categories like junior,
+  standard, sensitive, or privileged.
+- Document the name of the person who determined the role tier and the date the decision was made for
+  each candidate.
+- Cross-reference the assigned role tier with the documented screening depth applied, showing that proportional
+  checks were performed.
+- Avoid using vague or generic role tier labels such as "various" or "N/A"; always specify the exact tier
+  for each record.

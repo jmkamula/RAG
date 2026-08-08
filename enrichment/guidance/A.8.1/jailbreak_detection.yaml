@@ -1,0 +1,19 @@
+must_id: item:A.8.1:jailbreak_detection
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Jailbreak / root detection where mobile
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the User Endpoint Devices Policy that all mobile devices must have jailbreak and root detection
+  enabled before accessing company data.
+- Document the technical method or tool used for jailbreak and root detection, including version numbers
+  and implementation date, in the policy appendix.
+- Assign a named individual responsible for monitoring compliance with jailbreak and root detection, listing
+  their full name and job title in the policy.
+- Record the date of the most recent test or audit confirming that jailbreak and root detection is functioning
+  on all managed mobile devices.
+- Name the owner as a specific person, not a generic group or department, to avoid ambiguity in policy
+  accountability.

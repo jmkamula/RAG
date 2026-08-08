@@ -1,0 +1,20 @@
+must_id: item:A.5.8:reg_cloud_link
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Cloud-service link per row where project introduces a new cloud service (cross-ref to A.5.23
+  cloud register)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column in the Project Security Register to record the specific cloud service introduced by each
+  project.
+- Cross-reference each new cloud service entry with its corresponding record in the Cloud Register, including
+  a direct link or unique identifier.
+- Record the date when the cloud service was added to both the Project Security Register and the Cloud
+  Register.
+- Name the project owner as a specific individual responsible for verifying the cloud service link, not
+  as a team or department.
+- Review the register to confirm that no project introducing a cloud service is missing a cross-reference
+  to the Cloud Register.

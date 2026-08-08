@@ -1,0 +1,19 @@
+must_id: item:A.7.5:rev_detection_test
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Detection-system test outcomes (smoke detectors, water-leak sensors functionally tested in
+  the period)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, time, and location of each smoke detector and water-leak sensor functional test in
+  a log maintained by facilities staff.
+- Name the individual who performed each test and the person who witnessed or verified the outcome in
+  the same log entry.
+- Document the test results, including any faults found and actions taken to resolve them, with clear
+  pass/fail status for each device.
+- Attach supporting evidence such as signed checklists, digital photos, or maintenance tickets to each
+  test record.
+- Name the responsible owner for the testing program as a specific person, not a team or department.

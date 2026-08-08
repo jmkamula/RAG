@@ -1,0 +1,14 @@
+must_id: item:7.1:rev_date
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Resources Program in a dated log or review register.
+- Document the planned review interval for the Resources Program in a formal schedule or policy document.
+- Confirm the next scheduled review date falls within the documented interval by cross-referencing the
+  review schedule and the last review date.
+- Name the reviewer as a specific individual in the review record, not as a team or department.

@@ -1,0 +1,39 @@
+leaf_id: req:6.1.2:risk_register
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know what parts of your organization and which assets are covered by the ISMS
+    before you can identify and record relevant risks. The scope defines the boundaries for risk identification.
+  good_enough: A clear, documented scope that lists included business units, locations, and systems is
+    available—even if it will be refined later.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the organization's risk appetite and approach, which directly shapes how
+    risks are identified, evaluated, and recorded in the register.
+  good_enough: A current, approved policy exists that describes the organization's risk management principles
+    and objectives.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You can't assess or record risks without knowing what assets exist. The asset register is
+    the baseline for identifying what needs to be protected and what risks may apply.
+  good_enough: A working list of key information assets (hardware, software, data, people) is available,
+    even if not fully exhaustive.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Knowing the classification of assets helps prioritize risk assessment and ensures the register
+    reflects the impact of risks on different types of information.
+  good_enough: A basic scheme for classifying information (e.g., public, internal, confidential) is defined
+    and applied to main assets.

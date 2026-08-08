@@ -1,0 +1,17 @@
+must_id: item:Art.36:reg_dpia_xref
+control_ref: Art.36
+standard_id: GDPR:2016/679
+must_text: Per-row DPIA cross-reference (Art.35 register entry)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each prior consultation entry with the specific Data Protection Impact Assessment (DPIA)
+  record by including the DPIA register entry number or unique identifier.
+- Record the date and name of the person who completed the cross-reference for each row in the Prior Consultation
+  Register.
+- Attach or link the full DPIA document or summary to each prior consultation entry, ensuring it is accessible
+  from the register.
+- Name the DPIA owner as a specific individual for each cross-reference, avoiding generic labels like
+  "the team" or "Data Protection Office."

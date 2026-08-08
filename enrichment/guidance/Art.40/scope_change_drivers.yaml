@@ -1,0 +1,19 @@
+must_id: item:Art.40:scope_change_drivers
+control_ref: Art.40
+standard_id: GDPR:2016/679
+must_text: Trigger list (new code approved in sector, customer requirement)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and source of your last review of sector-approved codes to show when you checked for
+  new or updated codes.
+- Record any customer requests or contractual requirements that reference specific codes, including the
+  date received and the requesting party.
+- Name the individual responsible for monitoring and updating the list of applicable codes—do not assign
+  this to a team or department.
+- Retain evidence of how you determined which codes apply, such as meeting notes or decision logs with
+  named participants and dates.
+- Cross-reference your code scope list with public registers or official sector announcements to confirm
+  no new codes have been missed.

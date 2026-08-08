@@ -1,0 +1,45 @@
+leaf_id: req:A.7.4.9:program_review
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which systems, assets, and processes are covered by the ISMS
+    and its privacy extension, ensuring the transmission review is comprehensive and relevant.
+  good_enough: A clear, up-to-date scope statement that includes all systems and data flows relevant to
+    personal data transmission.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: Knowing which assets handle or transmit personal data is essential to verify encryption,
+    logging, and endpoint controls during the review.
+  good_enough: A basic inventory of information assets involved in personal data transmission, even if
+    not fully detailed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Data classification ensures that the review focuses on the correct data types (e.g., personal
+    data) and applies appropriate transmission controls.
+  good_enough: A documented scheme that distinguishes personal data from other data types, applied to
+    key assets.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Understanding the purpose for processing personal data helps determine which transmission
+    paths and controls are relevant for the annual review.
+  good_enough: A summary of processing purposes for personal data, linked to main data flows.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: The lawful basis for processing may affect transmission requirements (e.g., consent, contract),
+    so it must be clear before reviewing controls.
+  good_enough: A list of lawful bases for each main processing activity involving personal data transmission.

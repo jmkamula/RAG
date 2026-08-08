@@ -1,0 +1,17 @@
+must_id: item:A.8.7:reg_last_scan
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Per-asset last successful scan timestamp
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the last successful malware scan timestamp for each asset in the register, using a date and time
+  format that matches system logs.
+- Name the responsible individual who verifies scan completion per asset, listing their full name—not
+  just a team or department.
+- Cross-reference each scan entry with the original scan report or log file location to allow auditors
+  to trace the evidence.
+- Update the register immediately after each scan to avoid gaps or outdated entries that could indicate
+  missed scans.

@@ -1,0 +1,17 @@
+must_id: item:A.7.3.3:proc_plain_language
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: Plain-language standard — reading-level target, jargon audit, tested against target audience
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the reading-level target for your privacy notice in a documented procedure, specifying the grade
+  or age group.
+- Record the results of a jargon audit, listing any technical or legal terms identified and the plain-language
+  alternatives used.
+- Document the method and date of testing the privacy notice with a sample of your target audience, including
+  feedback received.
+- Name the individual responsible for approving the final plain-language version of the privacy notice,
+  not just a team or department.

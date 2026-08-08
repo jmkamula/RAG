@@ -1,0 +1,19 @@
+must_id: item:A.8.4:bl_ci_isolation
+control_ref: A.8.4
+standard_id: ISO27001:2022
+must_text: CI/CD systems access restricted to authorised roles (cross-link to A.8.31 environment separation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all CI/CD systems and record the names of individuals with access, including their specific roles
+  and the date of last review.
+- Document the approval records granting CI/CD access, including the approver’s name, the requestor’s
+  name, and the date of approval.
+- Cross-reference each CI/CD access list with environment separation controls under A.8.31, noting any
+  shared or segregated environments.
+- Name the access owner as a specific individual responsible for regular access reviews, not as a team
+  or department.
+- Retain logs showing removal of access for users whose roles no longer require CI/CD system access, with
+  dates and responsible person identified.

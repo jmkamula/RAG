@@ -1,0 +1,15 @@
+must_id: item:A.7.3.9:reg_request_id
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Unique request identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique, sequential identifier to each subject request entered in the register, ensuring no
+  duplicates or reused numbers.
+- Record the identifier directly alongside the corresponding request details in each row of the register.
+- Cross-reference each request identifier with related correspondence or documentation to confirm traceability.
+- Name the register owner as a specific individual responsible for maintaining uniqueness, not as a team
+  or department.

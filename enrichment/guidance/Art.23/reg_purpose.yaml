@@ -1,0 +1,17 @@
+must_id: item:Art.23:reg_purpose
+control_ref: Art.23
+standard_id: GDPR:2016/679
+must_text: Per-row Art.23.1 a-j purpose
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific legal or regulatory purpose for each restriction entry in the register, referencing
+  the relevant Art.23.1(a-j) clause.
+- Document the date each purpose was determined and the individual or role who made the determination
+  for traceability.
+- Cross-reference each purpose to supporting documentation, such as legal advice or policy, to demonstrate
+  the basis for the restriction.
+- Name the purpose clearly and specifically—do not use vague terms like "business need" or generic phrases
+  that do not map to Art.23.1(a-j).

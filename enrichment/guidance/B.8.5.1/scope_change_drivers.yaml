@@ -1,0 +1,17 @@
+must_id: item:B.8.5.1:scope_change_drivers
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+must_text: Trigger list (new region / new subprocessor)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current regions and subprocessors handling personal data in a dated register reviewed at least
+  quarterly.
+- Record each time a new region or subprocessor is added, including the date, the decision-maker, and
+  the justification for the change.
+- Cross-reference new entries against a documented trigger list to confirm the scope update was prompted
+  by a region or subprocessor change.
+- Name the individual responsible for maintaining and updating the processor transfer scope—do not use
+  a group or generic title.

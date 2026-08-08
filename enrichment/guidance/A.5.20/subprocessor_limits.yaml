@@ -1,0 +1,19 @@
+must_id: item:A.5.20:subprocessor_limits
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Sub-processor / fourth-party restrictions, approval process and propagation of requirements
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the template that suppliers must obtain written approval before engaging any sub-processors
+  or fourth parties.
+- Document the process for suppliers to request and receive approval for sub-processor use, including
+  named approvers and required documentation.
+- Specify in the template that all security requirements in your agreement must be flowed down to any
+  approved sub-processors.
+- Name the individual responsible for reviewing and updating sub-processor clauses in the template—do
+  not list a team or department.
+- Include a section requiring suppliers to provide a list of all sub-processors used, with names and dates
+  of engagement.

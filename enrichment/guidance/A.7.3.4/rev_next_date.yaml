@@ -1,0 +1,16 @@
+must_id: item:A.7.3.4:rev_next_date
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Withdrawal Program in the review document, using a clear
+  and specific calendar date.
+- Record the name of the individual responsible for scheduling the next review, not just a team or department.
+- Retain the current and previous versions of the review document, each showing their respective next
+  planned review dates.
+- Confirm that the stated next review date is realistic and aligns with your organisation’s review cycle
+  policy.

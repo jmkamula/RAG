@@ -1,0 +1,19 @@
+must_id: item:A.6.4:reg_action_taken
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Per-case action taken (matches the action_range categories; 'no action' is a valid outcome
+  where investigation didn't substantiate)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific action taken for each disciplinary case in the register, matching the action to
+  one of the defined action_range categories.
+- State "no action" as the outcome in the register if the investigation did not substantiate the case,
+  rather than leaving the field blank.
+- Name the person who approved the action taken for each case, ensuring a specific individual is listed
+  and not a generic role or team.
+- Date each entry in the register to show when the action was decided and implemented.
+- Cross-reference each case entry with supporting documentation, such as investigation reports or decision
+  memos, to confirm the action taken.

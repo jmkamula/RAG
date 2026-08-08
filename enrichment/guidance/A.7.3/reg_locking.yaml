@@ -1,0 +1,18 @@
+must_id: item:A.7.3:reg_locking
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Per-room locking standard in place (matches required standard per classification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the required locking standard for each room classification in a written policy, including specific
+  lock types and access controls.
+- Record the actual locking mechanism installed for each room in the Room Register, noting the room number,
+  lock type, and installation date.
+- Cross-reference each room’s locking mechanism in the Room Register against the required standard, marking
+  any discrepancies with a dated note.
+- Name the person responsible for verifying room locks as a specific individual, not as a team or department.
+- Retain a signed record of the most recent physical inspection confirming that all rooms meet the documented
+  locking standard.

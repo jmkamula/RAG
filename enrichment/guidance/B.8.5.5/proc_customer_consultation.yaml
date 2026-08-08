@@ -1,0 +1,16 @@
+must_id: item:B.8.5.5:proc_customer_consultation
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Customer consultation before disclosure of contractually-agreed requests
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each contractually-agreed disclosure request in a dated log, including the request details
+  and the requesting party’s name.
+- Name the customer contact person consulted for each disclosure, recording the date and method of consultation.
+- Retain written evidence of the customer’s response or approval, such as an email or signed form, before
+  proceeding with disclosure.
+- Avoid recording consultation as “customer notified” without naming a specific individual and capturing
+  their response.

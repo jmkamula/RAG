@@ -1,0 +1,17 @@
+must_id: item:A.5.20:rev_reviewer
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Reviewer identity (legal + InfoSec lead jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the legal lead and the information security lead as joint reviewers in the supplier agreement
+  review record for each review cycle.
+- Record the date of each periodic review and link it to the specific supplier agreement template version
+  reviewed.
+- Obtain signatures or written confirmation from both named reviewers to evidence their joint participation
+  in the review.
+- Avoid listing a group or department as reviewer; specify individual names for both legal and information
+  security leads.

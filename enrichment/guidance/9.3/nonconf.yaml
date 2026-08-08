@@ -1,0 +1,17 @@
+must_id: item:9.3:nonconf
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Nonconformities and corrective actions status
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all identified nonconformities discussed during the management review, including a brief description
+  and the date each was raised.
+- Record the current status of each corrective action, noting whether it is open, in progress, or closed,
+  with supporting dates.
+- Name the individual responsible for each corrective action, avoiding generic roles such as "the team"
+  or "management."
+- Attach or reference supporting evidence for completed corrective actions, such as signed reports or
+  closure confirmations.

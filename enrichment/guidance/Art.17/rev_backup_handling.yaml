@@ -1,0 +1,17 @@
+must_id: item:Art.17:rev_backup_handling
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Backup-handling sample — backups actually purged on cycle, immutable records correctly flagged-not-erased
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the backup purge schedule, including dates and responsible individuals, in a version-controlled
+  register accessible to auditors.
+- Record a sample of backup deletion logs showing successful purges on the scheduled cycle, with timestamps
+  and system identifiers.
+- Cross-reference immutable backup records in your inventory, marking them as "not eligible for erasure"
+  with justification and approval by a named data protection officer.
+- Name the backup owner as a specific individual, not a team or department, in all related documentation
+  and registers.

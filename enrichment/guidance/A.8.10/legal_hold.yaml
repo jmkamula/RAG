@@ -1,0 +1,19 @@
+must_id: item:A.8.10:legal_hold
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Legal-hold integration overriding deletion (with documented hold rationale and termination
+  criteria)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for pausing scheduled information deletion when a legal hold is issued, including
+  steps for identifying affected data.
+- Record the legal hold rationale and termination criteria in a dated legal hold register, referencing
+  the specific case or regulatory trigger.
+- Assign a named individual as the legal hold owner, responsible for authorizing both the initiation and
+  removal of the hold.
+- Attach evidence of legal hold communication to relevant staff, such as a dated email or signed acknowledgement.
+- Specify the legal hold owner by name, not by role or department, to avoid ambiguity an auditor would
+  flag.

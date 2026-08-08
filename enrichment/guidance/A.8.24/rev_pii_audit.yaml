@@ -1,0 +1,19 @@
+must_id: item:A.8.24:rev_pii_audit
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: PII-key audit (custodianship + DPIA alignment + cross-border transfer Art.5.1.f impact)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual as the custodian responsible for each PII-encrypting key, listing their name
+  and contact details in the key inventory.
+- Document the date and outcome of the most recent Data Protection Impact Assessment (DPIA) that references
+  each cryptographic key used for PII.
+- Cross-reference each key’s usage log with records of cross-border data transfers to confirm compliance
+  with GDPR Art.5.1.f.
+- Record the review date, participants, and any actions taken in a signed meeting summary for each periodic
+  cryptography program review.
+- State the custodianship owner as a specific person—do not use generic titles like “IT team” or “Security
+  department.”

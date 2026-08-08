@@ -1,0 +1,32 @@
+leaf_id: req:Art.41:code_monitoring_procedure
+control_ref: Art.41
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.40
+  standard_id: GDPR:2016/679
+  title: Codes of Conduct
+  category: direct
+  rationale: Before you can establish a code monitoring body procedure, there must be an approved or draft
+    code of conduct in place that requires monitoring. Art.41 procedures only make sense in the context
+    of an existing code.
+  good_enough: A documented code of conduct (draft or approved) that outlines the specific data protection
+    commitments and monitoring needs.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer Designation
+  category: foundational
+  rationale: A monitoring body must have clear data protection expertise and oversight, typically ensured
+    by appointing a DPO. This is foundational for drafting robust monitoring procedures.
+  good_enough: A named DPO with contact details and a basic description of their role in the monitoring
+    body context.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: Accurate records of processing activities are essential for a monitoring body to understand
+    what it is monitoring and to demonstrate compliance with the code and GDPR.
+  good_enough: A current, high-level RoPA covering the processing activities relevant to the code of conduct
+    and monitoring scope.

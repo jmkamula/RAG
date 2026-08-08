@@ -1,0 +1,18 @@
+must_id: item:A.5.18:sla_targets
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: SLA targets stated per operation (grant within X days, modification within Y days, revocation
+  within Z hours of trigger — drives the rev_sla_met flag on revocation_record)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific timeframes for granting, modifying, and revoking access rights in the procedure,
+  referencing days or hours for each operation.
+- Name the person or role responsible for meeting each SLA target, listing them individually rather than
+  as a group or department.
+- Record the date the procedure was last updated to show when SLA targets were most recently reviewed
+  or changed.
+- Cross-reference the SLA targets in the procedure with the rev_sla_met flag logic in the revocation record
+  system to confirm alignment.

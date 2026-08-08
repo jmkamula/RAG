@@ -1,0 +1,17 @@
+must_id: item:Art.40:rev_reviewer
+control_ref: Art.40
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO + sector compliance lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as the Data Protection Officer and the sector compliance lead by full name and job
+  title in the program review document.
+- Record the date each reviewer completed their evaluation and input this date next to their name in the
+  review log.
+- Obtain signatures or written confirmation from both the DPO and sector compliance lead to verify their
+  participation in the review.
+- Avoid listing reviewer identity as a group or department; specify individual names to meet accountability
+  requirements.

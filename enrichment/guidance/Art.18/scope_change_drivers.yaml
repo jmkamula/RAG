@@ -1,0 +1,17 @@
+must_id: item:Art.18:scope_change_drivers
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Trigger list for re-scoping (new data class, new system surfacing)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current grounds for restricting processing, including the specific data classes and systems
+  involved, in a dated document.
+- Document each trigger event that requires re-scoping, such as introduction of a new data class or system,
+  with the date and responsible person.
+- Assign a named individual to review the restriction grounds whenever a trigger event occurs, ensuring
+  the owner is not listed as a team or department.
+- Record the outcome of each re-scoping review, including any changes made, in a version-controlled log
+  with dates and reviewer names.

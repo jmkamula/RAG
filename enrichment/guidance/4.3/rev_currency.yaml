@@ -1,0 +1,17 @@
+must_id: item:4.3:rev_currency
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Currency check — scope still matches organisational reality (sites, products, third parties)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Review the current ISMS scope statement and compare it to the latest organisational structure, business
+  units, and physical locations.
+- List all products, services, and third-party relationships included in the ISMS scope, referencing up-to-date
+  contracts or service agreements.
+- Record the date of the most recent scope review and the name of the individual who conducted it.
+- Document any changes or confirmation of no changes in a signed review record, approved by a named senior
+  manager.
+- Name the scope owner as a specific individual—avoid generic titles such as "the team" or "IT department".

@@ -1,0 +1,17 @@
+must_id: item:A.5.19:rev_outcome
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Outcome per supplier or per tier (no change / re-tiered / added / removed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all suppliers in the current portfolio, including their assigned tier, in a dated review document.
+- Record the outcome for each supplier or tier as "no change," "re-tiered," "added," or "removed," with
+  supporting rationale.
+- Name the reviewer as a specific individual, not a group or department, and capture their signature or
+  approval on the review record.
+- Attach evidence of any changes, such as updated contracts or exit documentation, to the review file.
+- State the review date clearly; avoid undated or draft versions that could cause confusion about the
+  review period.

@@ -1,0 +1,19 @@
+must_id: item:A.5.33:format_guidance
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Format-specific protection guidance (paper vs digital vs hybrid records; storage media handled
+  — cloud objects, immutable WORM stores, optical media, physical archives)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'Document format-specific protection measures for each record type: paper, digital, and hybrid, including
+  storage, access, and disposal methods.'
+- Name the storage media used for each record type, such as cloud objects, WORM stores, optical media,
+  or physical archives, in the policy.
+- Assign a specific individual as the policy owner, not a team or department, and record their name and
+  contact details.
+- State how the policy addresses risks unique to each storage medium, such as fire for paper or unauthorized
+  deletion for digital records.
+- Record the date of the latest policy review and approval, signed by the designated policy owner.

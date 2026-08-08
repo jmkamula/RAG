@@ -1,0 +1,19 @@
+must_id: item:A.5.18:rev_date
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval (typically within 6 months of last review under the
+  180d cadence)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent access rights review in an access review log, including the name
+  of the reviewer.
+- Cross-reference the review date against the planned 180-day interval to confirm it falls within the
+  required timeframe.
+- Document any overdue reviews with a corrective action entry, including the reason for delay and the
+  planned completion date.
+- Name the reviewer as a specific individual, not a group or department, to avoid ambiguity in accountability.
+- Retain evidence of the completed review, such as a signed checklist or annotated user access report,
+  for the current and previous review cycles.

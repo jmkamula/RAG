@@ -1,0 +1,19 @@
+must_id: item:A.7.3.10:proc_notification_of_existence
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Notification-of-existence — subjects informed that automated decision-making occurs (Art.13.2.f
+  + 14.2.g)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the privacy notice that automated decision-making is used, including a brief description of
+  the process.
+- Document the communication method and date when data subjects were informed about automated decision-making
+  in a notification log.
+- Name the person responsible for maintaining and updating the notification content, ensuring a specific
+  individual is listed rather than a team or department.
+- Retain copies of all versions of the notification provided to data subjects, with clear version dates.
+- Cross-reference the notification text with the relevant articles of GDPR (Art.13.2.f and 14.2.g) to
+  confirm required information is included.

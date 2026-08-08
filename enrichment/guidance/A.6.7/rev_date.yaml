@@ -1,0 +1,14 @@
+must_id: item:A.6.7:rev_date
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval (typically within 12 months of last review)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the last Remote Working Programme review in a central log or register.
+- Schedule the next review to occur within 12 months of the last recorded review date.
+- Assign a named individual as responsible for conducting the upcoming review, not a team or department.
+- Document the completion date and outcome of each review in the same log for clear evidence of periodic
+  activity.

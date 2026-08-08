@@ -1,0 +1,16 @@
+must_id: item:A.5.32:third_party_respect
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Third-party IPR respect (citation, attribution, royalty payment, open-source licence compliance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the procedure owner as a specific individual responsible for IPR protection, not a generic team
+  or department.
+- Document the process for citing and attributing third-party intellectual property in all published materials,
+  including required formats and locations.
+- Record each instance of royalty payment or open-source licence compliance in a dated register, including
+  supporting evidence such as invoices or licence files.
+- State the review schedule for this procedure and keep a signed, dated record of each review and update.

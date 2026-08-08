@@ -1,0 +1,17 @@
+must_id: item:A.6.5:rev_next_date
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the post-employment program in the review documentation, using
+  a clear and specific calendar date.
+- Record the name of the individual responsible for scheduling and conducting the next review, not just
+  a department or team.
+- Retain the most recent review record with the stated next review date, signed or acknowledged by the
+  responsible individual.
+- Cross-reference the stated next review date in the program documentation with the organisation’s compliance
+  calendar or tracking system.

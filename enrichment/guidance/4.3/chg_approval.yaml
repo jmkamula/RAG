@@ -1,0 +1,15 @@
+must_id: item:4.3:chg_approval
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Approval signature with date (top management or delegated authority)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual with delegated authority or top management who is responsible for approving ISMS
+  scope changes in the record.
+- Obtain a physical or electronic signature from the named approver on the ISMS Scope Change Record.
+- Record the date of approval next to the signature to show when the scope change was authorized.
+- Avoid using generic titles or group names as approvers; specify a single accountable person for each
+  approval.

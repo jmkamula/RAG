@@ -1,0 +1,19 @@
+must_id: item:A.8.22:rev_exception_inventory
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Exception inventory re-confirmed / retired
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current network segregation exceptions in a dated inventory, including the original approval
+  and justification for each exception.
+- Assign a named individual to review each exception for continued validity, recording their name and
+  the review date next to each item.
+- Document a clear decision for each exception—either re-confirmed or retired—along with supporting rationale
+  in the inventory.
+- Remove any exceptions from the inventory that are no longer needed, updating the record to show the
+  retirement date and reviewer.
+- Name the reviewer as a specific person, not a group or role, to avoid ambiguity about who performed
+  the review.

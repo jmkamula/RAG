@@ -1,0 +1,19 @@
+must_id: item:Art.7:reg_consent_version
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Per-row consent-text version captured at time of capture (proves what they agreed to)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact version of the consent text shown to each individual at the time they gave consent
+  in the register entry.
+- Store a copy of each consent-text version with a clear version number and date of adoption in a controlled
+  document repository.
+- Link each register entry to the corresponding consent-text version by unique identifier or version number,
+  not just by date.
+- Name the person responsible for updating and archiving consent-text versions as a specific individual,
+  not a team or department.
+- Retain historical consent-text versions so that auditors can verify what was agreed to at any point
+  in time.

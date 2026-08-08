@@ -1,0 +1,18 @@
+must_id: item:Art.34:rev_content_quality
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: Content-quality audit — communications used plain language, included DPO contact, described
+  concrete measures
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Review all subject communication templates and confirm each uses plain, clear language understandable
+  by a non-expert.
+- Document that every communication includes the full name and direct contact details of the Data Protection
+  Officer.
+- Check each communication for a specific, concrete description of the measures taken or planned to address
+  the breach.
+- Record the date and name of the person who last audited the content quality of these communications.
+- Name the DPO as a specific individual, not just a role or generic contact point.

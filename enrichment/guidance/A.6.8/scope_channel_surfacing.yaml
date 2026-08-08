@@ -1,0 +1,21 @@
+must_id: item:A.6.8:scope_channel_surfacing
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Channel-surfacing per segment (employees see it in onboarding training + intranet; contractors
+  see it at onboarding briefing; visitors see it in lobby; customers in T&Cs)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each audience segment (employees, contractors, visitors, customers) and the specific channel where
+  the reporting scope is surfaced for them.
+- Document the onboarding training materials for employees, including a dated screenshot or copy showing
+  the reporting scope content.
+- Retain a copy of the onboarding briefing script or slides for contractors, with the reporting scope
+  section clearly marked and dated.
+- Capture a dated photo or screenshot of the reporting scope as displayed in the lobby for visitors.
+- Attach the relevant section of customer terms and conditions, highlighting where the reporting scope
+  is presented, and include the publication date.
+- Name a specific individual responsible for maintaining and updating these materials—avoid listing a
+  team or department as the owner.

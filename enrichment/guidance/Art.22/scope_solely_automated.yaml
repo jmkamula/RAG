@@ -1,0 +1,19 @@
+must_id: item:Art.22:scope_solely_automated
+control_ref: Art.22
+standard_id: GDPR:2016/679
+must_text: Operational test for 'solely automated' (no meaningful human involvement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all decision-making processes where outcomes are determined without human review or override,
+  and record them in a dated inventory.
+- Document the operational test or criteria used to determine if a process is 'solely automated', including
+  specific examples from your environment.
+- Name the individual responsible for assessing and confirming the absence of meaningful human involvement
+  in each listed process.
+- Retain evidence of the last test or review, such as screenshots, logs, or meeting notes, showing how
+  'solely automated' status was verified.
+- Specify the point of human involvement, if any, and avoid vague descriptions like "reviewed as needed"
+  or "team checks", which auditors flag as insufficient.

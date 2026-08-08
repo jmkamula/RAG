@@ -1,0 +1,17 @@
+must_id: item:A.8.26:reg_app_id
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Per-row application identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique, unambiguous identifier to each application listed in the register, such as an application
+  name or code.
+- Record the identifier in a dedicated column for every row, ensuring no application entry is left blank
+  or marked as "various."
+- Cross-reference each application identifier with supporting documentation, such as architecture diagrams
+  or asset inventories, to confirm accuracy.
+- Name the application owner as a specific individual alongside the identifier, avoiding generic labels
+  like "IT team" or "system admin."

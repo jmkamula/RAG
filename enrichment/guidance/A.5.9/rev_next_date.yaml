@@ -1,0 +1,17 @@
+must_id: item:A.5.9:rev_next_date
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Next planned reconciliation date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the next planned asset inventory reconciliation date in the asset management log, including the
+  day, month, and year.
+- Name the person responsible for conducting the next reconciliation, listing a specific individual rather
+  than a team or department.
+- Document the date this next reconciliation schedule was last reviewed or updated, and keep a copy of
+  the review record.
+- Cross-reference the scheduled reconciliation date with your organisation’s calendar or meeting system
+  to confirm it is booked.

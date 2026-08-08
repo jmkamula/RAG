@@ -1,0 +1,19 @@
+must_id: item:A.6.3:reg_score
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Per-row score where the module includes assessment (drives effectiveness metrics)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each employee’s full name, training module title, and completion date in the register for every
+  training session attended.
+- Enter the assessment score for each module where an assessment is included, ensuring the score is clearly
+  matched to the individual and module.
+- State “N/A” in the score column only for modules without assessments; do not leave the field blank or
+  use inconsistent notations.
+- Name the register owner as a specific individual responsible for maintaining and updating the training
+  records, not a team or department.
+- Retain dated evidence of assessment results, such as digital certificates or screenshots, linked to
+  each register entry for auditor reference.

@@ -1,0 +1,18 @@
+must_id: item:A.8.5:rev_exception_inventory
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Exception inventory re-confirmed / retired
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current authentication exceptions in a dated inventory, including the reason for each exception
+  and the responsible individual.
+- Assign a named individual to review each exception and confirm in writing whether it is still required
+  or can be retired.
+- Record the review outcome and decision date for each exception, attaching supporting evidence or rationale
+  for continued exceptions.
+- Update the inventory to clearly mark retired exceptions with the retirement date and the name of the
+  person authorizing removal.
+- Name the owner as a specific individual—do not use generic labels like "IT team" or "security group".

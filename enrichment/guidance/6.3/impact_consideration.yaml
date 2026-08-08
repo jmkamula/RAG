@@ -1,0 +1,19 @@
+must_id: item:6.3:impact_consideration
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Consideration of impact on ISMS effectiveness
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each proposed change to the Information Security Management System (ISMS) in a change log with
+  a clear description and intended outcome.
+- Assess and record the potential impact of the change on ISMS effectiveness, including risks and benefits,
+  in a dated impact assessment.
+- Name the responsible individual who reviewed and approved the impact assessment, avoiding generic titles
+  like "the team" or "management".
+- Retain evidence of formal approval for the change, such as a signed decision or approval email, before
+  implementation.
+- Cross-reference the change log entry with related risk assessments or policy updates to show consideration
+  of ISMS effectiveness.

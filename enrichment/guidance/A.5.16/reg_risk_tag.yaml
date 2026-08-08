@@ -1,0 +1,18 @@
+must_id: item:A.5.16:reg_risk_tag
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Risk tag per row where the identity has elevated privileges or sensitive scope (drives faster-cadence
+  review)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a "Risk Tag" column to your identity register to flag identities with elevated privileges or sensitive
+  access.
+- Mark each relevant row with a clear risk tag such as "Elevated Privilege" or "Sensitive Scope" based
+  on documented access rights.
+- Name the risk assessor for each tagged identity as a specific individual, not a team or department.
+- Record the date when each risk tag was last reviewed or updated for traceability.
+- Avoid leaving any risk tag column blank for identities with privileged or sensitive access—auditors
+  will flag missing tags as a gap.

@@ -1,0 +1,17 @@
+must_id: item:A.6.5:reg_briefing_date
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Per-row briefing date (typically last working day or shortly after; for role change, at point
+  of role transition)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each leaver or role-changer received their exit or transition briefing in a dedicated
+  column of the Leaver Briefing Register.
+- Name the individual who conducted each briefing, listing their full name rather than a team or department.
+- Cross-reference each briefing entry with supporting documentation, such as a signed briefing acknowledgement
+  or email confirmation, for every leaver or role-changer.
+- Avoid leaving briefing date fields blank or using placeholders like "TBC"; update the register with
+  the actual date as soon as the briefing occurs.

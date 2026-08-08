@@ -1,0 +1,19 @@
+must_id: item:A.7.5.4:scope_audit
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: External audit disclosures (regulatory + customer audits)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of external audits that may require disclosure of personal data, including regulatory
+  inspections and customer-initiated audits, in a dated document.
+- Name a specific individual responsible for maintaining and updating the list of applicable disclosure
+  contexts, avoiding generic roles or teams.
+- Record the legal or contractual basis for each type of disclosure, referencing the relevant law, regulation,
+  or customer agreement.
+- Review and update the disclosure contexts list at least annually, and retain a dated record of each
+  review cycle.
+- Document any changes to the scope or nature of disclosures, including the date, reason, and person authorizing
+  the update.

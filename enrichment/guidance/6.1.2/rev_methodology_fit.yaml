@@ -1,0 +1,18 @@
+must_id: item:6.1.2:rev_methodology_fit
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Methodology fit check — scoring scale still discriminating, acceptance bands still calibrated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the current risk scoring scale and acceptance bands in the risk assessment methodology, including
+  version numbers and last review date.
+- Review a recent sample of risk assessments to confirm the scoring scale produces varied results that
+  reflect actual risk differences.
+- Record the names and roles of individuals who approved the continued use of the current scoring scale
+  and acceptance bands.
+- Cross-reference the acceptance bands with recent risk treatment decisions to confirm alignment between
+  risk ratings and actions taken.
+- Name the methodology owner as a specific individual, not a group or department, in the program documentation.

@@ -1,0 +1,19 @@
+must_id: item:7.2:rev_currency
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Record currency check — turnover, role changes, new hires reflected
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date of the most recent competence program review in a register, noting any updates made
+  due to staff turnover or role changes.
+- List all new hires and employees with changed roles since the last review, linking each to updated competence
+  requirements.
+- Record the name of the individual who conducted the currency check, ensuring this is a specific person
+  and not a group or department.
+- Cross-reference the competence program records with HR onboarding and offboarding logs to confirm all
+  relevant personnel changes are captured.
+- Attach evidence of communication to affected staff about updated competence requirements following the
+  review.

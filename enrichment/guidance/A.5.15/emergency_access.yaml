@@ -1,0 +1,18 @@
+must_id: item:A.5.15:emergency_access
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Emergency / break-glass access provisions (with mandatory after-the-fact justification)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a clear process for emergency or break-glass access, including required steps and responsible
+  roles, in the Access Control Policy.
+- Name a specific individual responsible for authorizing emergency access, avoiding generic titles like
+  "IT" or "the team."
+- Require all emergency access events to be logged with date, time, user, and reason in an auditable record.
+- State that after-the-fact justification and approval must be completed and signed by a manager within
+  a defined timeframe after each emergency access event.
+- Retain all emergency access logs and justifications for a defined period, and reference their storage
+  location in the policy.

@@ -1,0 +1,20 @@
+must_id: item:Art.28:rev_security_currency
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Security assurance currency — Art.32-equivalent evidence (cert, audit) refreshed within validity
+  period
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each processor and record the name of the specific security certification or audit report they
+  provide as Art.32-equivalent evidence.
+- Confirm the issue and expiry dates of each processor’s certification or audit report, and retain a copy
+  of the document for each period.
+- Review the validity period of each processor’s evidence and log the next required refresh date in a
+  central tracker.
+- Request updated certification or audit evidence from the processor before the current one expires, and
+  keep written confirmation of receipt.
+- Name the person responsible for tracking and updating processor security evidence, avoiding generic
+  roles such as “the team” or “IT department”.

@@ -1,0 +1,18 @@
+must_id: item:A.6.3:scope_audience
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Scope and audience defined (all personnel + relevant interested parties such as contractors,
+  third parties with access)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name all groups included in the programme’s audience, listing employees, contractors, and third parties
+  with access in a dated document.
+- Document the scope of the training programme, specifying which information security topics and activities
+  are covered in a formal statement.
+- Assign a specific individual as the owner responsible for maintaining the audience and scope list, avoiding
+  generic titles like "the team" or "HR".
+- Record the approval of the defined scope and audience by a named senior manager, including the date
+  of approval.

@@ -1,0 +1,16 @@
+must_id: item:A.8.19:reg_software
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Per-install software name + version + source (from approved list)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each installed software’s name, exact version number, and installation date in the Software Installation
+  Register.
+- Document the source of each software installation, specifying the approved repository or vendor used.
+- Cross-reference each software entry with the organisation’s approved software list to confirm authorisation.
+- Name the person responsible for each software installation as a specific individual, not a team or department.
+- Retain evidence of approval for any exceptions to the approved software list, including the approver’s
+  name and date.

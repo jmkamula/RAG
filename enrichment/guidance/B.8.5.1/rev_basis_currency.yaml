@@ -1,0 +1,18 @@
+must_id: item:B.8.5.1:rev_basis_currency
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+must_text: Basis currency — Art.45 adequacy currency + Art.46 SCC version currency
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each country where personal data is transferred and record the current adequacy decision date
+  or the most recent assessment of adequacy.
+- List all Standard Contractual Clauses (SCCs) in use and document the exact version and adoption date
+  for each.
+- Confirm that all adequacy decisions and SCC versions are reviewed and updated at least annually, with
+  the review date and responsible person recorded.
+- Attach supporting evidence, such as official adequacy decision notices or signed SCC agreements, to
+  each transfer record.
+- Name the reviewer as a specific individual, not a generic title or team, to avoid ambiguity in accountability.

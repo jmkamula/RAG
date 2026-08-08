@@ -1,0 +1,18 @@
+must_id: item:A.6.2:reg_worker_category
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Worker category per row (employee / contractor / intern — different categories may use different
+  templates)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the worker category for each entry in the Signed Employment Terms Register, specifying if the
+  person is an employee, contractor, or intern.
+- Cross-reference each row with the relevant employment terms template used, ensuring the template matches
+  the worker category listed.
+- Name the owner of the register as a specific individual, not a generic role or team, to provide clear
+  accountability.
+- Confirm that every row in the register is complete and does not contain blank or ambiguous worker category
+  fields.

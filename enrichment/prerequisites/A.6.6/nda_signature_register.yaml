@@ -1,0 +1,39 @@
+leaf_id: req:A.6.6:nda_signature_register
+control_ref: A.6.6
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which entities, locations, and processes are in-scope for your ISMS to determine
+    which NDA signings must be tracked. This ensures the NDA register covers all relevant parties.
+  good_enough: A clear, documented scope that identifies the boundaries and applicability of the ISMS,
+    including all relevant personnel and third parties.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register helps identify which information assets require NDA protection
+    and who has access, guiding who should appear in the NDA register.
+  good_enough: A basic list of key information assets and their owners/users, sufficient to identify parties
+    needing NDAs.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures you know who is accountable for managing
+    NDAs and maintaining the register.
+  good_enough: Documented roles that specify who handles NDA administration and oversight, even if not
+    fully detailed.
+- ref: A.5.18
+  standard_id: ISO27001:2022
+  title: Access Rights to Information and Other Assets
+  category: direct
+  rationale: Access rights management is directly linked to NDA requirements; you must know who has access
+    to sensitive information to ensure they have signed an NDA.
+  good_enough: A working list or process that shows who has access to sensitive assets, even if not fully
+    automated or integrated.

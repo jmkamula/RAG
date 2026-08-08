@@ -1,0 +1,17 @@
+must_id: item:A.5.27:rev_benchmark
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: External benchmark or industry-practice input considered
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and source of at least one external benchmark or industry practice reviewed during
+  the most recent lessons-learned program evaluation.
+- Name the individual responsible for gathering and presenting external input, ensuring a specific person
+  is listed rather than a team or department.
+- Record a summary of how external findings were discussed and considered in meeting minutes or a review
+  report, including any decisions made.
+- Attach or cross-reference the actual external materials used—such as reports, articles, or benchmarking
+  data—within the review documentation.

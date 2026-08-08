@@ -1,0 +1,16 @@
+must_id: item:A.5.3:comm_date
+control_ref: A.5.3
+standard_id: ISO27001:2022
+must_text: Date of publication/communication
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date the segregation matrix was first published or communicated in a dated entry within
+  the communication record.
+- Name the person responsible for distributing the segregation matrix, listing their full name and job
+  title in the record.
+- Attach or link the actual communication (such as an email or memo) that includes the publication date
+  and recipient list.
+- Avoid using undated or draft versions of the segregation matrix as evidence of communication.

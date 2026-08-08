@@ -1,0 +1,17 @@
+must_id: item:A.7.4.6:rev_date
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Temp Files Program in a dated entry within your official review
+  log.
+- Name the reviewer as a specific individual responsible for the Temp Files Program review, not a group
+  or department.
+- Document the planned review interval in months or years in the program documentation or review schedule.
+- Cross-reference the actual review date against the planned interval to confirm it falls within the required
+  timeframe.
+- Retain a signed or approved record of the review decision, including any actions taken or updates made.

@@ -1,0 +1,17 @@
+must_id: item:A.5.2:comm_channel
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: Channel used (intranet publication, email, training session, onboarding pack)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the exact channel used to communicate roles and responsibilities, such as "company intranet"
+  or "onboarding pack," in a dated communication log.
+- Name the individual responsible for sending or publishing the communication, ensuring a specific person
+  is listed rather than a generic team or department.
+- Retain a copy or screenshot of the actual communication as evidence, showing the content and the date
+  it was shared with staff.
+- Record the list of recipients or audience, such as new hires or all employees, to demonstrate who received
+  the information.

@@ -1,0 +1,16 @@
+must_id: item:B.8.4.2:reg_verifier
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+must_text: Verifier identity per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the individual who verified each end-of-service action in a dedicated column
+  for every row in the register.
+- Document the date when each verification was completed, ensuring the date is specific to each action
+  listed.
+- Name the verifier as a specific person, not a generic role or team, to avoid ambiguity in accountability.
+- Cross-reference each verification entry with supporting evidence, such as a signed checklist or email
+  confirmation from the verifier.

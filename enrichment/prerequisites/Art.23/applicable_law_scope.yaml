@@ -1,0 +1,32 @@
+leaf_id: req:Art.23:applicable_law_scope
+control_ref: Art.23
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of all processing activities to identify which Member
+    State laws might apply and restrict data subject rights. Without this, you can't reliably determine
+    the scope of applicable restrictions.
+  good_enough: A current, reasonably complete RoPA that covers all major processing activities and identifies
+    the jurisdictions involved is sufficient to proceed.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity is essential, as certain Member State
+    restrictions only apply to specific legal grounds (e.g., public interest, legal obligation).
+  good_enough: Each processing activity in the RoPA should have a documented lawful basis; it does not
+    need to be exhaustively justified at this stage.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: A defined ISMS scope ensures you know which parts of your organization and which processing
+    activities are in play, so you can accurately assess which Member State laws might restrict rights.
+  good_enough: A draft or approved ISMS scope that includes all locations and business units handling
+    personal data is enough to move forward.

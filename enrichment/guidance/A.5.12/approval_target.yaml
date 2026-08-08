@@ -1,0 +1,14 @@
+must_id: item:A.5.12:approval_target
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Reference to the specific version of the classification scheme being approved
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific version number and date of the classification scheme in the approval document.
+- Record the name and title of the individual manager granting approval, not just a department or team.
+- Sign and date the approval document to confirm the decision and its timing.
+- Attach or cross-reference the exact classification scheme version being approved within the approval
+  record.

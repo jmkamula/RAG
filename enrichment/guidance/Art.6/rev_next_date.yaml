@@ -1,0 +1,17 @@
+must_id: item:Art.6:rev_next_date
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for your Lawful Basis Program in a dated document or tracking system
+  entry.
+- Name the person responsible for scheduling and leading the next review, listing their full name and
+  job title.
+- Record the decision on the review date in meeting minutes or a formal approval document, signed or acknowledged
+  by a manager.
+- Avoid leaving the review date blank or marked as "TBD"—enter a specific calendar date to meet planning
+  requirements.

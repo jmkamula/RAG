@@ -1,0 +1,15 @@
+must_id: item:A.8.12:proc_triage
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Alert triage flow (severity → first-responder → outcome)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for triaging data loss prevention alerts, including how severity is
+  determined and who is notified first.
+- Name the first-responder role as a specific individual or job title, not a generic group or "the team".
+- Record each alert’s severity rating, assigned responder, and final outcome in a dated incident log.
+- Cross-reference the triage flow in your DLP operations procedure with the documented technical and organizational
+  measures applied to alerts.

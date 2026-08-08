@@ -1,0 +1,19 @@
+must_id: item:A.7.2.8:ropa_transfer_safeguards
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Transfer safeguards per row where third-country transfer occurs (Chap V mechanism cited)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each processing activity involving personal data transfers to countries outside your region,
+  listing the exact destination country for each transfer.
+- State the specific legal safeguard used for each transfer, such as Standard Contractual Clauses or Binding
+  Corporate Rules, in the corresponding RoPA entry.
+- Cross-reference the cited safeguard to the relevant section or clause in your contracts or policies,
+  attaching supporting documentation where possible.
+- Name the individual responsible for maintaining and updating each RoPA entry, avoiding generic titles
+  like "the team" or "IT."
+- Record the date each RoPA entry was last reviewed or updated to show ongoing compliance with transfer
+  requirements.

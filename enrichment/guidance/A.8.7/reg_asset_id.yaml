@@ -1,0 +1,18 @@
+must_id: item:A.8.7:reg_asset_id
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Per-asset identifier (from A.5.9 asset register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each asset in the Malware Protection Coverage Register with its unique identifier from
+  the A.5.9 asset register.
+- Record the asset identifier exactly as it appears in the A.5.9 asset register to avoid mismatches or
+  ambiguity.
+- Document the date when each asset’s identifier was last verified against the asset register.
+- Name the person responsible for maintaining the linkage between the Malware Protection Coverage Register
+  and the asset register.
+- Avoid using generic or placeholder asset names; use only the specific identifiers assigned in the asset
+  register.

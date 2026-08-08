@@ -1,0 +1,20 @@
+must_id: item:B.8.2.3:rev_conditionality_check
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: No-conditionality regression check — signup / renewal / support flows not gated on marketing
+  consent
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the signup, renewal, and support workflows with screenshots and step-by-step descriptions showing
+  users are not required to give marketing consent.
+- Name the individual responsible for reviewing these workflows for compliance with the no-conditionality
+  requirement.
+- Record the date and outcome of the most recent review, including any issues found and actions taken
+  to resolve them.
+- Attach evidence that marketing consent checkboxes are not pre-ticked and are not required fields in
+  user interface forms.
+- State explicitly in documentation that marketing consent is never a precondition for access, avoiding
+  vague or boilerplate statements that could apply to any process.

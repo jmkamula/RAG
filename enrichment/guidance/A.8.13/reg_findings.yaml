@@ -1,0 +1,18 @@
+must_id: item:A.8.13:reg_findings
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Per-test findings + corrective actions where target missed
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, scope, and outcome of each restore test in the Restore Test Register, including whether
+  recovery objectives were met.
+- Document any issues or failures identified during the restore test, describing what went wrong and the
+  impact.
+- State the corrective actions assigned for each missed target, naming the responsible individual and
+  setting a due date.
+- Attach evidence of follow-up, such as updated procedures or confirmation of retest, to show corrective
+  actions were completed.
+- Name the owner of each test and action as a specific individual, not a team or department.

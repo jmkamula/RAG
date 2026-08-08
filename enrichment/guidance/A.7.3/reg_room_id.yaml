@@ -1,0 +1,15 @@
+must_id: item:A.7.3:reg_room_id
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Per-room unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each room in the register, ensuring no two rooms share the same code or
+  number.
+- Record the unique identifier next to each room’s name and location in the register, with the date of
+  entry.
+- Name the person responsible for maintaining the register as a specific individual, not a team or department.
+- Cross-reference the unique identifier with any related access control or security logs to confirm consistency.

@@ -1,0 +1,17 @@
+must_id: item:A.8.5:rev_threat_landscape
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Threat-landscape review (new attack patterns since last review — feed from threat intel A.5.7)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the authentication program review and record their name and role in
+  the review documentation.
+- Document the date of the last authentication program review and clearly state the review period covered.
+- Cross-reference the latest threat intelligence report from control A.5.7 and list any new attack patterns
+  identified since the previous review.
+- Record specific changes or recommendations made to the authentication program in response to new threats,
+  including the date and responsible person.
+- Name the reviewer as a specific individual, not a group or department, to avoid ambiguity in accountability.

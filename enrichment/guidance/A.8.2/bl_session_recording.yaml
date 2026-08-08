@@ -1,0 +1,19 @@
+must_id: item:A.8.2:bl_session_recording
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Session recording active for high-risk privileged actions
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the list of high-risk privileged actions that require session recording, including clear descriptions
+  and examples for each action.
+- Name the system or tool used to record sessions, specifying its configuration settings and the date
+  these were last updated.
+- Assign responsibility for monitoring and maintaining session recording to a specific named individual,
+  not a generic team or department.
+- Record a sample session log showing a high-risk privileged action, including the date, time, and user
+  involved.
+- Retain evidence of regular reviews of session recordings, such as a dated log or meeting minutes confirming
+  checks were performed.

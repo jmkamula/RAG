@@ -1,0 +1,17 @@
+must_id: item:B.8.2.6:ropa_processor_dpo
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: Processor DPO / representative contact if applicable (Art.30.2.a)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer (DPO) or representative as a specific individual, including full name
+  and job title, in the Processor RoPA.
+- Record the direct contact details for the named DPO or representative, such as email address and phone
+  number, in the RoPA entry.
+- Confirm the DPO or representative’s appointment is documented with a signed letter or HR record, dated
+  and available for inspection.
+- Update the RoPA immediately if the DPO or representative changes, ensuring no outdated or placeholder
+  information remains.

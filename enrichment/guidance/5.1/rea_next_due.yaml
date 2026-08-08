@@ -1,0 +1,17 @@
+must_id: item:5.1:rea_next_due
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Next reaffirmation due date stated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next reaffirmation due date clearly in the Leadership Reaffirmation Record, using the full
+  date in day-month-year format.
+- Record the name of the person responsible for scheduling the next reaffirmation, listing a specific
+  individual rather than a team or department.
+- Confirm the reaffirmation due date is based on your organisation’s defined interval, referencing the
+  relevant policy or schedule.
+- Retain a dated entry or signature from leadership acknowledging awareness of the next reaffirmation
+  due date.

@@ -1,0 +1,21 @@
+must_id: item:Art.15:proc_identity_pair_30
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Bidirectional Art.15 ↔ Art.30 pair MUST — every system listed in the data flow inventory is
+  reachable by DSAR fulfilment, and every system reached by fulfilment is captured in the inventory (closes
+  the silent 'fulfilment queries somewhere RoPA doesn't list' gap)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference every system listed in your data flow inventory with your DSAR fulfilment logs to confirm
+  each is accessible for subject access requests.
+- Document all systems actually queried during DSAR fulfilment in a dated record, including any manual
+  or automated lookups performed.
+- Identify and update your data flow inventory to include any system reached during DSAR fulfilment that
+  was missing from the original inventory.
+- Name the owner responsible for maintaining both the data flow inventory and DSAR fulfilment records
+  as a specific individual, not a team or department.
+- Record the date of your last cross-check between the data flow inventory and DSAR fulfilment records,
+  keeping evidence of any discrepancies found and resolved.

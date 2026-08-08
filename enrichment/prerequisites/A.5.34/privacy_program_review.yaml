@@ -1,0 +1,40 @@
+leaf_id: req:A.5.34:privacy_program_review
+control_ref: A.5.34
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.31
+  standard_id: ISO27001:2022
+  title: Legal, statutory, regulatory and contractual requirements
+  category: direct
+  rationale: You must know which privacy laws, regulations, and contractual obligations apply before you
+    can review whether your privacy program is still fit for purpose. The legal register defines the yardstick
+    for what your program must achieve.
+  good_enough: A current, working list of applicable privacy and PII-related laws and obligations, with
+    basic mapping to your operations, is sufficient to proceed with the review.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Inventory of information and other associated assets
+  category: direct
+  rationale: You need an up-to-date asset register to verify that all PII processing activities and associated
+    systems are covered by your privacy program and reflected in the review.
+  good_enough: A maintained asset register that lists all systems and data stores handling PII, even if
+    not perfectly granular, is enough to support the review.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Information security roles and responsibilities
+  category: foundational
+  rationale: Clear assignment of privacy and PII protection responsibilities is required to ensure the
+    right people are involved in the program review and that follow-up actions are owned.
+  good_enough: Documented roles for privacy program ownership and review participation, even if not fully
+    mapped to every process, are sufficient to unblock drafting.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information security policy
+  category: foundational
+  rationale: The privacy program review must check alignment between policy and practice, so you need
+    a current policy as the baseline for comparison.
+  good_enough: A published privacy and PII protection policy, even if due for minor updates, is enough
+    to proceed with the review process.

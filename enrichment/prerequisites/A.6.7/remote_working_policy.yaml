@@ -1,0 +1,47 @@
+leaf_id: req:A.6.7:remote_working_policy
+control_ref: A.6.7
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The remote working policy must align with the defined scope of the ISMS, ensuring it covers
+    all relevant locations, business units, and information assets where remote working occurs.
+  good_enough: The scope statement should clearly identify whether remote working is in or out of scope
+    for the ISMS and which teams or roles are affected.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The overarching information security policy sets the tone and principles that the remote
+    working policy must follow, ensuring consistency and alignment with organizational objectives.
+  good_enough: The information security policy should be approved, published, and reference the need for
+    supporting topic-specific policies like remote working.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment identifies threats and vulnerabilities specific to remote working, which
+    must inform the controls and requirements set out in the remote working policy.
+  good_enough: There should be a documented risk assessment that considers remote working scenarios and
+    highlights key risks to be addressed in the policy.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: Knowing which assets (devices, data, applications) are used for remote work is essential
+    to define appropriate controls and responsibilities in the remote working policy.
+  good_enough: The asset register should list major information assets and devices used for remote work,
+    even if not fully detailed.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that the remote working policy can
+    specify who is accountable for policy enforcement, monitoring, and support.
+  good_enough: There should be a basic mapping of key roles (e.g., IT, HR, managers, end users) and their
+    responsibilities related to information security.

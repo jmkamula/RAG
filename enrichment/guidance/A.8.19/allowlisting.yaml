@@ -1,0 +1,19 @@
+must_id: item:A.8.19:allowlisting
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Allowlisting on operational systems where supported (modern baseline)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for managing software allowlisting on operational systems, identifying them
+  by full name and job title.
+- Document the approved allowlist of software for each operational system, including version numbers and
+  the date of last review.
+- Record the method used to implement allowlisting, such as specific tools or configuration settings,
+  and include screenshots or configuration files as evidence.
+- Retain logs showing all software installation attempts and whether they were blocked or allowed, with
+  timestamps and user details.
+- State the process for updating the allowlist, including who approves changes and how updates are communicated
+  to relevant staff.

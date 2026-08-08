@@ -3634,6 +3634,7 @@ async def advisory_leaf_detail(
             logger.debug("advisory build failed for leaf %s: %s", leaf_id, _e)
             adv = None
 
+        prerequisites: list[dict] = []
         if adv and adv.get("leaves"):
             # Filter to our specific leaf
             for lf in adv["leaves"]:
@@ -3644,11 +3645,22 @@ async def advisory_leaf_detail(
                         "id":         item.get("id"),
                         "text":       item.get("text") or "",
                         "satisfied":  bool(item.get("satisfied")),
+                        "guidance":   list(item.get("guidance") or []),
                         "sources":    [],   # filled below
                     })
                 n_have  = lf.get("n_have", 0)
                 n_total = lf.get("n_total", 0)
+                prerequisites = list(lf.get("prerequisites") or [])
                 break
+
+        # Ship 57' — advisory build only fires when posture in (NC, OFI).
+        # For Comply leaves adv is None; look up prereqs directly so the
+        # UI still shows them (the Prerequisites callout is not gated on
+        # posture verdict).
+        if not prerequisites:
+            from rag.templates.prerequisites_lookup import get_prerequisites_for_leaf
+            from dataclasses import asdict as _asdict
+            prerequisites = [_asdict(p) for p in get_prerequisites_for_leaf(leaf_id)]
 
         # ── Source names per MUST via document_findings ─────────────
         if must_items:
@@ -3743,6 +3755,7 @@ async def advisory_leaf_detail(
             "n_have":              n_have,
             "n_total":             n_total,
             "must_items":          must_items,
+            "prerequisites":       prerequisites,
             "remediation_actions": remediation_actions,
             "trace_id":            request.state.trace_id,
         }

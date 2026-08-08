@@ -1,0 +1,16 @@
+must_id: item:A.5.21:rev_reviewer
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: Reviewer identity (typically architecture lead + InfoSec lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual, such as the architecture lead or InfoSec lead, in the supply
+  chain review record.
+- Record the reviewer's full name and job title alongside the date of each periodic ICT supply chain review.
+- Sign or electronically approve the completed review to clearly link the documented findings to the named
+  reviewer.
+- Avoid listing generic roles or groups as reviewers; always identify a single accountable person for
+  each review instance.

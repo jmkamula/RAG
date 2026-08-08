@@ -1,0 +1,42 @@
+leaf_id: req:A.5.10:communication_record
+control_ref: A.5.10
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: direct
+  rationale: The Acceptable Use Policy (AUP) is a child of the broader information security policy framework.
+    You need a clear, approved set of overarching security policies before you can communicate or enforce
+    specific acceptable use rules.
+  good_enough: A current, approved information security policy exists and is accessible to staff. It does
+    not need to be perfect, but it must set out the general security expectations and policy hierarchy.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification of information
+  category: direct
+  rationale: Acceptable use rules often depend on the sensitivity or classification of information (e.g.,
+    stricter rules for confidential data). You must have a defined classification scheme so the AUP can
+    reference and enforce the right controls.
+  good_enough: A documented classification scheme is in place and staff are aware of the main categories.
+    Full rollout is not required, but the scheme must be stable enough to inform AUP content.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which users, systems, and locations are covered by the ISMS and,
+    by extension, the AUP. Without this, you can't be sure who needs to receive or acknowledge the AUP.
+  good_enough: A written scope statement exists, identifying the main organisational boundaries for the
+    ISMS. It does not need to be exhaustive, but must be clear enough to identify the population for AUP
+    communication.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and responsibilities
+  category: foundational
+  rationale: Clear roles and responsibilities are needed to assign accountability for communicating the
+    AUP and tracking acknowledgements. Without this, communication records may be incomplete or unreliable.
+  good_enough: Roles for AUP distribution and record-keeping are assigned and documented, even if not
+    yet fully operationalised.

@@ -1,0 +1,18 @@
+must_id: item:A.5.21:eol_verification
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: Post-replacement verification (integrity-verification, functional acceptance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to perform post-replacement checks and record their name and date on the verification
+  log.
+- Document the specific integrity-verification steps completed for each replaced ICT component, including
+  test results and any issues found.
+- Record the outcome of functional acceptance testing, listing the date, tester’s name, and confirmation
+  that the component meets operational requirements.
+- Attach supporting evidence such as screenshots, test logs, or signed checklists to each replacement
+  record.
+- Specify the actual person responsible for verification — do not use generic roles or team names.

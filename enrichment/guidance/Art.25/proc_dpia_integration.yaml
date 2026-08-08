@@ -1,0 +1,19 @@
+must_id: item:Art.25:proc_dpia_integration
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Integration with Art.35 DPIA — when DPbD review escalates to DPIA
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific triggers in your Data Protection by Design (DPbD) procedure that require escalation
+  to a Data Protection Impact Assessment (DPIA) under Article 35.
+- Cross-reference the relevant section of your DPIA procedure within the DPbD procedure, citing Article
+  35.3.b as the legal basis.
+- Name the individual responsible for deciding when a DPbD review must escalate to a DPIA, using their
+  full name and job title.
+- Record each instance where a DPbD review led to a DPIA, including the date, decision-maker, and reason
+  for escalation.
+- Avoid using generic statements like "refer to DPIA as needed"—instead, specify clear, actionable criteria
+  for escalation in the documented procedure.

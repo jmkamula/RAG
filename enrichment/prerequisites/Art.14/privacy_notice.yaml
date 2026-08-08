@@ -1,0 +1,41 @@
+leaf_id: req:Art.14:privacy_notice
+control_ref: Art.14
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of processing
+  category: foundational
+  rationale: You must know and document the lawful basis for each processing activity before drafting
+    a privacy notice under Art.14, as this information must be communicated to data subjects.
+  good_enough: A clear mapping of each processing activity to its lawful basis under Art.6 is documented
+    and available for reference.
+- ref: Art.12
+  standard_id: GDPR:2016/679
+  title: Transparent information, communication and modalities for the exercise of the rights of the data
+    subject
+  category: foundational
+  rationale: Art.12 sets the standards for how privacy information must be communicated, ensuring your
+    Art.14 notice meets GDPR transparency and accessibility requirements.
+  good_enough: Documented procedures or templates exist that show how privacy information is communicated
+    in a clear, accessible, and transparent manner.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of processing activities
+  category: foundational
+  rationale: A current record of processing activities is needed to identify which activities involve
+    data not collected from the subject, and to ensure all relevant details are included in the Art.14
+    notice.
+  good_enough: A working RoPA exists that lists processing activities, including data sources, purposes,
+    and recipients, sufficient to identify those requiring an Art.14 notice.
+- ref: Art.13
+  standard_id: GDPR:2016/679
+  title: Information to be provided where personal data are collected from the data subject
+  category: direct
+  rationale: Art.14 notices must include nearly all information required by Art.13, so you need a current
+    Art.13 template or checklist to ensure completeness and consistency.
+  good_enough: An up-to-date Art.13 privacy notice or checklist is available to cross-reference required
+    content for the Art.14 notice.

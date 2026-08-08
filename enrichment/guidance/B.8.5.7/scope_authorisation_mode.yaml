@@ -1,0 +1,17 @@
+must_id: item:B.8.5.7:scope_authorisation_mode
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+must_text: Authorisation mode per engagement type (general via contract clause / specific per subcontractor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each engagement type in a table, naming whether general authorisation or specific authorisation
+  is required for subcontractors.
+- Attach the relevant contract clause or written approval for each engagement type as evidence of the
+  chosen authorisation mode.
+- Name the individual who approved the authorisation mode for each engagement type, and record the approval
+  date.
+- Avoid using vague terms like "as needed" or "per policy" in the authorisation mode column; specify the
+  exact method used.

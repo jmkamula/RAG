@@ -1,0 +1,17 @@
+must_id: item:A.5.14:comm_date
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Date of publication/communication
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date the information transfer policy was communicated to staff in a dated communication
+  log or announcement.
+- Name the individual responsible for sending or publishing the policy, listing their full name and job
+  title in the communication record.
+- Retain a copy of the actual communication, such as an email or intranet post, showing both the content
+  and the date sent.
+- Avoid using undated policy documents or communications; always include a clear publication or communication
+  date on each version.

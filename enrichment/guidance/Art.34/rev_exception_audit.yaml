@@ -1,0 +1,20 @@
+must_id: item:Art.34:rev_exception_audit
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: Exception-claim audit — Art.34.3 exception claims reviewed for legitimacy (especially encryption-deemed-appropriate
+  where keys may also have been compromised)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each instance where your organisation claimed an exception to notifying data subjects under
+  Art.34.3, including the specific reason and date.
+- Name the individual responsible for reviewing the legitimacy of each exception claim, ensuring this
+  is a specific person, not a group or department.
+- Record evidence that encryption was in place and assess whether encryption keys could have been compromised
+  in each relevant case.
+- Retain a signed decision or formal approval from the reviewer confirming the legitimacy of each exception
+  claim.
+- Cross-reference exception claims with incident response records to confirm all relevant cases have been
+  reviewed and documented.

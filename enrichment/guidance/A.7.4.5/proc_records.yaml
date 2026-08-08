@@ -1,0 +1,17 @@
+must_id: item:A.7.4.5:proc_records
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: Record of end-of-processing action (link to A.7.4.5 register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each completed deletion or de-identification action in an end-of-processing log, including
+  the date, data set, and responsible individual.
+- Cross-reference every logged action to the relevant entry in the A.7.4.5 register to show the link between
+  processing and deletion.
+- Name the person who authorized the deletion or de-identification, ensuring this is a specific individual,
+  not a group or department.
+- Retain evidence of the deletion or de-identification method used, such as a screenshot, confirmation
+  email, or system-generated report.

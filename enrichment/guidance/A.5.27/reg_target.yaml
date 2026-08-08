@@ -1,0 +1,19 @@
+must_id: item:A.5.27:reg_target
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Target per row (which control / training / procedure is affected)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each lesson learned as a separate entry, clearly describing the incident or event and the date
+  it occurred.
+- State the specific ISO27001 control, training, or procedure impacted by each lesson in a dedicated column
+  for every row.
+- Name the individual responsible for implementing follow-up actions for each lesson, using a full name
+  rather than a team or department.
+- Review and update the register after each incident or project closure, noting the review date and reviewer’s
+  name.
+- Avoid using generic phrases like "all controls" or "general training" as targets; specify the exact
+  control, training, or procedure affected.

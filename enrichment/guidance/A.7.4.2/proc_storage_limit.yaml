@@ -1,0 +1,18 @@
+must_id: item:A.7.4.2:proc_storage_limit
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+must_text: Storage-during-processing limitation — no unnecessary retention in intermediate systems
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific intermediate systems where personal data is temporarily stored during processing,
+  listing each system by name and function.
+- State the maximum retention period for personal data in each intermediate system, referencing a dated
+  and approved procedure.
+- Assign a named individual responsible for monitoring and deleting personal data from intermediate systems
+  after processing is complete.
+- Record each deletion event with the date, time, and responsible person's name in a log that is regularly
+  reviewed.
+- Name the owner as a specific individual — not a team or department — in the procedure to avoid ambiguity.

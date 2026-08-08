@@ -1,0 +1,18 @@
+must_id: item:A.6.1:check_types
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Types of checks defined (identity, employment history, education, criminal record where lawful,
+  financial where role-relevant, sanctions/PEP for finance-sector roles)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each type of background check required for all roles, including identity, employment history, education,
+  criminal record, financial, and sanctions/PEP where relevant.
+- Specify which roles require each type of check, linking the check type to the job title or function
+  in a documented table.
+- Reference applicable laws or regulations that limit or require specific checks, and note any exceptions
+  with a dated explanation.
+- Name the procedure owner as a specific individual, not a team or department, in the procedure document.
+- Record the approval date and the approver’s name on the latest version of the personnel screening procedure.

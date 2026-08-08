@@ -1,0 +1,40 @@
+leaf_id: req:A.8.16:applicable_monitoring_scope
+control_ref: A.8.16
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of your organisation and which assets are covered by your ISMS
+    before you can define what monitoring applies. The monitoring scope must align with the overall ISMS
+    scope.
+  good_enough: A clear, up-to-date scope statement that identifies included business units, systems, and
+    locations is available.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You can't define which asset classes are monitored if you don't have a current inventory
+    of assets. The asset register is the authoritative list for what could be in scope for monitoring.
+  good_enough: A basic asset register exists, listing key information assets and their owners, even if
+    not fully detailed.
+- ref: A.8.15
+  standard_id: ISO27001:2022
+  title: Logging
+  category: direct
+  rationale: Logging is the technical foundation for monitoring. If logging isn't in place, you can't
+    monitor activity or detect issues on assets.
+  good_enough: Logging is enabled on critical systems and assets, with at least minimal retention and
+    coverage.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Knowing the classification of assets helps prioritise which assets require more intensive
+    monitoring. The monitoring scope should reflect asset sensitivity.
+  good_enough: A simple classification scheme is documented and applied to major asset types, even if
+    not all assets are fully classified yet.

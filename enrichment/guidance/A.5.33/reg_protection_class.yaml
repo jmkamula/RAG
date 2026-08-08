@@ -1,0 +1,20 @@
+must_id: item:A.5.33:reg_protection_class
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Protection class per record class (which classification + protection profile from the procedure
+  applies) — drives the access-control / encryption / immutability decision
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a specific protection class to each record class in the Records Schedule, referencing your organisation’s
+  approved classification and protection procedure.
+- Document the exact classification label and associated protection profile for each record class, ensuring
+  these match the latest approved procedure version.
+- Cross-reference each record class entry with the relevant access-control, encryption, and immutability
+  requirements as defined in your protection procedure.
+- Name the owner responsible for each record class as a specific individual, not a team or department,
+  in the register.
+- Record the date when each protection class and profile assignment was last reviewed or updated in the
+  schedule.

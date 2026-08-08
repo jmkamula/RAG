@@ -1,0 +1,20 @@
+must_id: item:A.5.6:scope_tech_stack
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Technology-stack components for which vendor/community SIGs are valuable (cloud, OS, network,
+  OT/IoT)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all technology-stack components in use, including cloud services, operating systems, network devices,
+  and OT/IoT platforms, in a dated inventory.
+- Identify and document which vendor or community Special Interest Groups (SIGs) are relevant for each
+  component in the inventory.
+- Name a specific individual responsible for maintaining the SIG engagement scope—do not use a team or
+  department as the owner.
+- Record the date and method of the most recent review of the SIG engagement scope, including any updates
+  or changes made.
+- Attach evidence of communication or participation with at least one SIG per relevant technology component,
+  such as meeting notes or membership confirmations.

@@ -1,0 +1,17 @@
+must_id: item:A.5.18:reg_review_due
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Next review-due date per row (drives the schedule for the periodic review leaf)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the next review-due date for each access right entry in the register, using a clear and consistent
+  date format.
+- Name the person responsible for each access right’s review, listing a specific individual rather than
+  a team or department.
+- Cross-reference each review-due date with the last completed review to confirm the interval aligns with
+  your documented schedule.
+- Retain evidence of any changes to review-due dates, including who made the change and when, in an audit
+  trail.

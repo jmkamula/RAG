@@ -1,0 +1,18 @@
+must_id: item:B.8.3.1:scope_exclusions
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+must_text: Excluded engagements (own-controller services) with rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all engagements excluded from your support scope, using their official names and unique identifiers,
+  in a dated document.
+- State the rationale for excluding each engagement, linking to relevant classification or business criteria
+  for transparency.
+- Name the decision-maker who approved each exclusion, ensuring the person is identified by full name
+  and role.
+- Attach supporting evidence, such as classification records or business justifications, to each exclusion
+  entry for traceability.
+- Avoid using generic terms like "various" or "not applicable"—describe each excluded engagement specifically.

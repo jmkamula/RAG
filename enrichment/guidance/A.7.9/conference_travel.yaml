@@ -1,0 +1,16 @@
+must_id: item:A.7.9:conference_travel
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Specific guidance for conferences and customer-site visits (loaner devices, data minimisation)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document specific rules for using loaner devices and minimising data taken to conferences and customer
+  sites in the Security of Assets Off-Premises Policy.
+- Name a responsible individual who approves exceptions to these rules, rather than listing a group or
+  department.
+- Record the date and version of the policy update that added conference and customer-site visit guidance.
+- Retain evidence of staff communication or training about these updated requirements, such as an email
+  or attendance list.

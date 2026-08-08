@@ -1,0 +1,16 @@
+must_id: item:5.2:app_prior_versions
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: Prior approval signatures retained for audit trail (covers turnover)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each approver as a specific individual, listing their full name and job title on the policy approval
+  record.
+- Record the date each approval signature was provided, ensuring dates are clearly visible next to each
+  signature.
+- Retain all prior versions of the information security policy approval record, including signatures from
+  previous approvers, in a secure location.
+- Obtain handwritten or digital signatures for each approval—do not rely on verbal or email-only approvals.

@@ -1,0 +1,17 @@
+must_id: item:A.8.34:rollback
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Rollback procedure stated for any change introduced during testing
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the rollback procedure in the policy, describing step-by-step actions to restore systems to their
+  original state after audit testing changes.
+- Name the person responsible for executing the rollback, identifying them by full name and job title
+  in the policy document.
+- Document the approval date and version number of the rollback procedure within the policy to show it
+  is current and maintained.
+- Avoid using generic or placeholder text for rollback steps; describe actions specific to your systems
+  and environment.

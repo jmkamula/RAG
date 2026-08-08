@@ -1,0 +1,43 @@
+leaf_id: req:Art.21:objection_procedure
+control_ref: Art.21
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of Processing
+  category: foundational
+  rationale: You must know the lawful basis for each processing activity (e.g., legitimate interests,
+    public task, direct marketing) to determine when and how the right to object applies. Without this,
+    you cannot design appropriate objection workflows.
+  good_enough: A documented mapping of all processing activities to their lawful bases is available, even
+    if not fully audited for completeness.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: foundational
+  rationale: Accurate records of processing activities are essential to identify which activities are
+    subject to objection rights and to operationalize responses. Without RoPA, you cannot reliably trace
+    or act on objections.
+  good_enough: A basic RoPA exists that lists all major processing activities, their purposes, and lawful
+    bases, even if some details are pending.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Designation of the Data Protection Officer
+  category: foundational
+  rationale: If a DPO is required, they must be involved in handling objections and ensuring procedures
+    meet GDPR standards. Knowing whether a DPO is designated clarifies roles and responsibilities in the
+    objection process.
+  good_enough: A decision has been made and documented on whether a DPO is required, and if so, who holds
+    the role.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: Determining the Scope of the ISMS
+  category: cross_role
+  rationale: The ISMS scope defines which parts of the organization and which processing activities are
+    covered by compliance procedures, including objection handling. This ensures the procedure applies
+    to all relevant areas.
+  good_enough: A draft ISMS scope statement exists that identifies the organizational boundaries for GDPR
+    compliance, even if not finalized.

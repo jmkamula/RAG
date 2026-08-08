@@ -1,0 +1,17 @@
+must_id: item:A.7.2.6:reg_service_scope
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Service scope per row (what the processor does + PII categories involved)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific service provided by each processor in the contract register, describing what the processor
+  does with personal data.
+- List the categories of personal data handled by each processor in a dedicated column for every contract
+  entry.
+- Cross-reference each contract entry with the relevant signed agreement that details the processing activities
+  and data categories.
+- Specify the service scope and data categories for each processor entry—do not use generic descriptions
+  like "data processing" or "various data".

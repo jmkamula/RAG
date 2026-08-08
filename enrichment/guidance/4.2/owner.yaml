@@ -1,0 +1,14 @@
+must_id: item:4.2:owner
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Named owner of the register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the Interested Parties and Requirements Register, avoiding
+  generic titles like "the team" or "IT department".
+- Record the owner's full name and job title directly on the first page of the register.
+- Date the assignment of ownership and update the record whenever the owner changes.
+- Retain evidence of management approval for the named owner, such as a signed or emailed confirmation.

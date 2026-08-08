@@ -1,0 +1,17 @@
+must_id: item:Art.15:confirmation
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Confirmation that personal data is or is not processed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the receipt of the data subject access request with the requester's name and the date received
+  in a central log.
+- State in the written response whether personal data about the requester is being processed or not, using
+  clear and unambiguous language.
+- Name the staff member responsible for preparing and sending the response, ensuring this is a specific
+  individual and not a generic role.
+- Retain a dated copy of the final response sent to the requester, including any supporting documentation,
+  in your records.

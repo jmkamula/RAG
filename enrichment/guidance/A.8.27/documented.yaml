@@ -1,0 +1,18 @@
+must_id: item:A.8.27:documented
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Principles documented in accessible form for engineers (wiki / handbook / training material)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the secure system architecture and engineering principles in a written policy, clearly dated
+  and version-controlled.
+- Publish the policy in a location accessible to all engineers, such as an internal wiki or engineering
+  handbook.
+- Name the policy owner as a specific individual responsible for updates and accuracy, not a team or department.
+- Cross-reference the policy in onboarding or training materials for engineers, listing the exact location
+  or link.
+- Retain evidence of communication to engineers about the policy’s availability, such as an announcement
+  email or training record.

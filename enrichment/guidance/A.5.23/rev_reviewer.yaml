@@ -1,0 +1,16 @@
+must_id: item:A.5.23:rev_reviewer
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Reviewer identity (typically platform lead + InfoSec lead jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the platform lead and the Information Security lead as joint reviewers in the documented record
+  of each cloud service posture review.
+- Record the date of each review and capture the signatures or electronic approvals of both named reviewers
+  in the review artefact.
+- Attach or link the completed review artefact to the relevant cloud service entry in your asset or risk
+  register.
+- Avoid listing a team or department as reviewer; specify named individuals to ensure clear accountability.

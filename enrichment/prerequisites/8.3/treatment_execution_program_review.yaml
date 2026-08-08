@@ -1,0 +1,40 @@
+leaf_id: req:8.3:treatment_execution_program_review
+control_ref: '8.3'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know what parts of the organization and which assets are covered by the ISMS
+    before you can review whether treatment plans are being executed as intended. The scope defines the
+    boundaries for what must be reviewed.
+  good_enough: A documented, approved scope statement that clearly identifies the organizational and technical
+    boundaries for the ISMS.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: The treatment plan is based on the results of the risk assessment. Without an up-to-date
+    risk assessment, you cannot meaningfully verify if the right risks are being treated or if new risks
+    have emerged.
+  good_enough: A recent risk assessment with documented risks, owners, and risk levels—enough to show
+    what the current treatment plan is addressing.
+- ref: '8.2'
+  standard_id: ISO27001:2022
+  title: Information security risk assessment
+  category: direct
+  rationale: The outputs of the risk assessment process directly inform the treatment plan. Reviewing
+    execution only makes sense if you have the latest assessment results to compare against.
+  good_enough: Evidence that the risk assessment process has been run at least once in the current cycle,
+    with results available for review.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the overall direction and expectations for risk treatment and review. Without
+    this, there is no baseline for what constitutes acceptable execution or escalation.
+  good_enough: An approved, communicated policy that references risk treatment and ongoing review requirements.

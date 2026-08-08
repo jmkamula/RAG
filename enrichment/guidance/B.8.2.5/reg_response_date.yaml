@@ -1,0 +1,16 @@
+must_id: item:B.8.2.5:reg_response_date
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: Response date per row (vs stated SLA)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the actual response date for each customer audit or information support request directly in the
+  register, matching it to the specific request row.
+- State the agreed service level agreement (SLA) response timeframe for each request in a dedicated column
+  within the register.
+- Cross-reference each response date with the corresponding SLA to clearly show if the response met or
+  missed the required timeframe.
+- Name the responsible individual for each response entry, avoiding generic labels like "team" or "department".

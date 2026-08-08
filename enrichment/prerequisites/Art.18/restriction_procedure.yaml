@@ -1,0 +1,32 @@
+leaf_id: req:Art.18:restriction_procedure
+control_ref: Art.18
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need to know what personal data is processed, for what purposes, and on what legal bases
+    to identify where restriction requests may apply. Without a current RoPA, you can't reliably operationalize
+    restriction procedures.
+  good_enough: A basic, up-to-date RoPA covering all major processing activities and legal bases is in
+    place, even if not fully granular.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity is essential to determine if
+    and how restriction rights apply, and to assess the grounds for restriction under Art.18.
+  good_enough: A documented mapping of lawful bases to processing activities exists, even if some edge
+    cases are still being clarified.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Designation of Data Protection Officer (DPO)
+  category: foundational
+  rationale: If a DPO is required, they must be involved in the design and oversight of restriction procedures.
+    Lack of DPO clarity can block proper procedure drafting and escalation paths.
+  good_enough: A DPO is formally designated (or a documented rationale for not appointing one exists),
+    and their contact details are available internally.

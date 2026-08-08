@@ -1,0 +1,15 @@
+must_id: item:A.7.3:rev_register_update
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Changes propagated to the live register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each change from the periodic Rooms Program review in a dated change log entry linked to the
+  live register.
+- Update the live register immediately after review, showing the new information and the date of the update.
+- Name the person responsible for updating the live register as a specific individual, not a team or department.
+- Retain evidence of communication confirming that all relevant stakeholders were notified of the propagated
+  changes.

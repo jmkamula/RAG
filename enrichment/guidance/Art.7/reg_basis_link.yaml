@@ -1,0 +1,17 @@
+must_id: item:Art.7:reg_basis_link
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Per-row link to Art.6 lawful basis register entry (Art.6.1.a row)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each consent entry with the specific lawful basis entry from your Article 6 register,
+  using a unique identifier or direct link.
+- Record the date when the cross-reference was established or last reviewed, ensuring the information
+  remains current and traceable.
+- Name the responsible individual who maintains the cross-references, avoiding generic labels like "the
+  team" or "compliance department".
+- Document any updates to the lawful basis in both registers, ensuring changes are reflected in the consent
+  register without delay.

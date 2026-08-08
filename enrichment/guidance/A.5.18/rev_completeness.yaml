@@ -1,0 +1,20 @@
+must_id: item:A.5.18:rev_completeness
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Completeness check per record — all access rights for the subject (from the register) accounted
+  for (each row statused 'revoked' with its own evidence), not just the primary identity rights
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each access revocation record with the central access rights register to identify all
+  systems and permissions assigned to the individual.
+- Record the revocation status for every listed access right, including secondary and non-primary accounts,
+  with a date and responsible person's name.
+- Attach supporting evidence for each revoked right, such as screenshots or system logs, directly to the
+  corresponding row in the revocation record.
+- Name the individual who verified that no access rights remain, avoiding generic entries like "IT team"
+  or "administrator".
+- Document any exceptions or delays in revocation with a clear explanation and follow-up action, signed
+  and dated by the responsible manager.

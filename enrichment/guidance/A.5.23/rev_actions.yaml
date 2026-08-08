@@ -1,0 +1,17 @@
+must_id: item:A.5.23:rev_actions
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Action items captured per service
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record all identified action items for each cloud service in a dated review log, clearly linking each
+  item to the specific service reviewed.
+- Assign each action item to a named individual with a target completion date, avoiding generic owners
+  such as "IT" or "the team".
+- Document the status of each action item at the next review, noting completion, ongoing work, or reasons
+  for delay.
+- Attach supporting evidence, such as screenshots or change tickets, to demonstrate progress or completion
+  of each action item.

@@ -1,0 +1,15 @@
+must_id: item:5.3:chg_approval
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Approval signature with date (top management or delegated authority)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual from top management or delegated authority who is responsible for approving ISMS
+  role changes in the record.
+- Obtain a handwritten or electronic signature from the named approver directly on the ISMS Roles Change
+  Record.
+- Record the exact date the approval signature was provided next to the approver’s name and signature.
+- Avoid using generic titles or group names as approvers; specify a real person for each approval instance.

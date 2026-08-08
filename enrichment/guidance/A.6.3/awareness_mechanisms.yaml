@@ -1,0 +1,20 @@
+must_id: item:A.6.3:awareness_mechanisms
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Awareness mechanisms beyond formal training (newsletters, phishing simulations, posters, lunch-and-learns,
+  all-hands updates)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all awareness activities beyond formal training, such as newsletters, phishing simulations, posters,
+  and lunch-and-learns, in a dated programme document.
+- Assign a named individual responsible for coordinating and updating these awareness mechanisms, not
+  just "the team" or "HR".
+- Record the schedule and attendance or distribution logs for each awareness activity, including dates
+  and participant names where applicable.
+- Retain copies or screenshots of awareness materials, such as newsletters, posters, or simulation emails,
+  with visible publication or distribution dates.
+- Document periodic reviews of the awareness programme's effectiveness, including meeting notes or feedback
+  summaries, signed and dated by the responsible individual.

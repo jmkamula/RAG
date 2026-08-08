@@ -1,0 +1,18 @@
+must_id: item:Art.8:rev_register_coverage
+control_ref: Art.8
+standard_id: GDPR:2016/679
+must_text: Register coverage — every in-scope service has consent rows flowing in
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every online service or feature that collects personal data from children in a dated register.
+- Record for each service the specific method used to obtain parental consent, including links to supporting
+  documentation.
+- Confirm that each service entry in the register has at least one corresponding consent record received
+  and stored.
+- Name the responsible individual for maintaining and updating the register, avoiding generic roles like
+  "the team" or "IT".
+- Cross-reference the register entries with actual consent logs to verify no in-scope service is missing
+  from the register.

@@ -1,0 +1,40 @@
+leaf_id: req:A.7.3.7:program_review
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.4.6
+  standard_id: ISO27701:2019
+  title: Third-Party Recipient Inventory
+  category: direct
+  rationale: You need an up-to-date inventory of all third-party recipients of personal data to review
+    whether notifications are being sent to the right entities. Without this, you can't verify the completeness
+    or accuracy of your notification program.
+  good_enough: A maintained list of all current third-party recipients, even if not perfectly categorized,
+    is sufficient to proceed with the review.
+- ref: A.7.4.7
+  standard_id: ISO27701:2019
+  title: Third-Party Notification Records
+  category: direct
+  rationale: Evidence that notifications have been issued and acknowledgements tracked is essential for
+    reviewing the effectiveness and reliability of the notification process.
+  good_enough: Basic records or logs showing notifications sent and any responses or acknowledgements
+    received are enough to start the review.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: Understanding the documented purposes for processing personal data helps ensure that notifications
+    to third parties are aligned with the intended use and legal requirements.
+  good_enough: A summary of documented purposes for data sharing, even if not fully detailed, is sufficient
+    to inform the review.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that the right people are accountable for issuing notifications
+    and tracking acknowledgements, which is critical for a meaningful program review.
+  good_enough: A basic roles matrix or list showing who is responsible for third-party notifications is
+    enough to proceed.

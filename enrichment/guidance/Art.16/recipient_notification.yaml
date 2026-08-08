@@ -1,0 +1,18 @@
+must_id: item:Art.16:recipient_notification
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Notification to recipients per Art.19 unless impossible or disproportionate
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each instance where personal data is rectified, including the date, nature of rectification,
+  and affected data subject.
+- List all third parties or recipients who received the original data, referencing contracts or data sharing
+  logs.
+- Notify each recipient of the rectification in writing, and retain copies of sent notifications with
+  dates and recipient details.
+- Record any cases where notification was impossible or required disproportionate effort, including justification
+  and who approved the decision.
+- Name the responsible individual for managing and documenting notifications, not just a team or department.

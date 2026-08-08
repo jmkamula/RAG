@@ -1,0 +1,15 @@
+must_id: item:A.7.11:rev_date
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent Utilities Program review in a dated document or register entry.
+- State the planned review interval for the Utilities Program in a documented schedule or policy.
+- Confirm the actual review date falls within the planned interval by cross-referencing the review date
+  and the schedule.
+- Name the reviewer as a specific individual in the review record, not as a team or department.
+- Retain the signed or approved review outcome as evidence of completion.

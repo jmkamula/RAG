@@ -1,0 +1,20 @@
+must_id: item:Art.37:scope_voluntary_assessment
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: Voluntary-designation assessment — even when not mandatory, did the org choose to designate
+  (rationale recorded)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State whether your organisation is required to appoint a Data Protection Officer under GDPR Article
+  37, citing the relevant criteria.
+- Document the decision to voluntarily designate or not designate a Data Protection Officer, including
+  the rationale and any supporting risk assessment.
+- Name the designated Data Protection Officer, if applicable, as a specific individual with contact details,
+  not just a role or department.
+- Record the date the designation decision was made and who approved it, keeping a signed or otherwise
+  authenticated record.
+- Attach evidence of board or senior management review of the voluntary designation assessment, such as
+  meeting minutes or a signed memo.

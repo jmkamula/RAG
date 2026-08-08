@@ -1,0 +1,15 @@
+must_id: item:A.7.2.8:rev_reviewer
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Data Protection Council)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as the Data Protection Officer and each Data Protection Council member in the RoPA
+  Program Review document.
+- Record the date each reviewer completed their review next to their name in the review log.
+- Obtain a signature or written confirmation from each reviewer to confirm their participation in the
+  review process.
+- Avoid listing the reviewer as "the team" or "council"—use full names and job titles for clear accountability.

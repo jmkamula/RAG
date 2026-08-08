@@ -1,0 +1,18 @@
+must_id: item:A.5.30:reg_service_id
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Each in-scope ICT service captured with a unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each ICT service in the register with a clear, descriptive name that matches how it is referred
+  to in operational documents.
+- Assign a unique identifier to every ICT service entry, avoiding duplicates or reused codes from retired
+  services.
+- Record the date each ICT service was added to the register and the name of the person responsible for
+  the entry.
+- Cross-reference each ICT service with related business processes or systems to demonstrate completeness
+  and visibility.
+- Specify the owner of each ICT service as a named individual, not a team or department.

@@ -1,0 +1,16 @@
+must_id: item:A.8.2:proc_routine_separation
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Procedure prohibits routine non-privileged tasks under a privileged account
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that privileged accounts must not be used for routine, non-privileged tasks such
+  as email or web browsing.
+- Name the owner of the procedure as a specific individual, not a team or department, in the document
+  header.
+- Document an approval record showing the procedure was reviewed and signed by a manager responsible for
+  access control.
+- Record the date of the most recent procedure review to confirm it is current and actively maintained.

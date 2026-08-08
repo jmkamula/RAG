@@ -1,0 +1,18 @@
+must_id: item:A.8.25:personal_data
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Handling of personal data in development / test environments (cross-link to A.8.11 masking
+  — no real PII in non-production)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy that real personal data must never be used in development or test environments under
+  any circumstances.
+- Cross-reference the masking or anonymisation process described in your A.8.11 documentation, specifying
+  the tool or method used.
+- Name the individual responsible for approving data sets for non-production use, ensuring the owner is
+  a specific person, not a team or department.
+- Retain a dated record of each approval for test data sets, showing that no real personal data was included.
+- Document a periodic review schedule for test environments to confirm ongoing compliance with this policy.

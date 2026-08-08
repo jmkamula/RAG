@@ -1,0 +1,18 @@
+must_id: item:A.7.3:scope_change_drivers
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (renovation, repurposing, new tenant fit-out)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical rooms currently included in the security scope, with unique identifiers and dates
+  of last assessment.
+- Document a trigger list that includes renovation, repurposing, and new tenant fit-out as events requiring
+  immediate re-scoping.
+- Assign a named individual responsible for monitoring building changes and initiating re-scoping when
+  a trigger event occurs.
+- Record each trigger event and corresponding re-scoping decision in a dated log, referencing the specific
+  room and event.
+- Name the responsible person, not just a team or department, to avoid ambiguity in ownership.

@@ -1,0 +1,14 @@
+must_id: item:8.1:rev_next_date
+control_ref: '8.1'
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the operational planning program in the program document or review
+  log.
+- Record the date alongside the name of the person responsible for conducting the next review.
+- Update the review schedule immediately if the planned date changes, keeping a dated record of the amendment.
+- Name the review owner as a specific individual, not a team or department, to avoid ambiguity.

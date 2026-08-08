@@ -1,0 +1,19 @@
+must_id: item:A.8.32:rev_emergency_ratio
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Emergency-change ratio (high ratio signals process bypass)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the total number of emergency changes and total changes made during each review period in a dated
+  change management report.
+- Calculate and document the emergency-change ratio for the review period, showing the formula and resulting
+  percentage in the report.
+- Name a specific individual responsible for reviewing and approving the emergency-change ratio analysis,
+  avoiding generic titles like "IT team."
+- Highlight any significant increase in the emergency-change ratio and document actions taken or decisions
+  made in response, with dates and responsible persons.
+- Retain copies of all review meeting minutes and supporting data used in the analysis for each review
+  period.

@@ -1,0 +1,19 @@
+must_id: item:A.5.20:tier_variants
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Variant clause sets per supplier tier
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the criteria used to assign suppliers to each risk or tier category, including thresholds and
+  examples, in a dated reference table.
+- List the variant security clauses for each supplier tier in the template, clearly labelling which clauses
+  apply to which tier.
+- Cross-reference each clause set in the template to the corresponding supplier tier definition, so auditors
+  can trace requirements to risk levels.
+- Name the person responsible for maintaining and updating the tiering criteria and clause sets, specifying
+  their full name and role.
+- Avoid using generic or identical clause sets for all tiers; tailor requirements to demonstrate proportionality
+  and record the rationale for differences.

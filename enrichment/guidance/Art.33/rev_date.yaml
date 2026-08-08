@@ -1,0 +1,15 @@
+must_id: item:Art.33:rev_date
+control_ref: Art.33
+standard_id: GDPR:2016/679
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Breach Notification Program in a dated log or tracking document.
+- Name the reviewer as a specific individual responsible for the program review, not a generic role or
+  team.
+- Cross-reference the planned review interval in your compliance calendar or schedule to confirm alignment
+  with the actual review date.
+- Retain a copy of the completed review report or checklist, showing the date and reviewer’s name.

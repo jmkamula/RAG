@@ -1,0 +1,15 @@
+must_id: item:Art.85:reg_review_date
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: Per-row next planned review date
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Enter a clear, specific next planned review date for each row in the register, using the format YYYY-MM-DD.
+- Record the name of the person responsible for scheduling and conducting the next review for each jurisdictional
+  entry.
+- Update the review date immediately if national law changes or if a review is completed ahead of schedule.
+- Avoid leaving the review date field blank or using placeholders like "TBD" or "ongoing"—auditors will
+  flag missing or vague dates.

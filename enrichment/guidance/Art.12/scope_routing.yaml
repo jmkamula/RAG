@@ -1,0 +1,19 @@
+must_id: item:Art.12:scope_routing
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Routing rules — how each channel reaches the rights-handling team
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each rights request channel (such as email, web form, postal mail) in a table with a clear
+  description of its use.
+- Name the specific individual or role responsible for monitoring each channel and routing requests to
+  the rights-handling team.
+- Record the routing process for each channel, including steps taken from receipt to handoff, in a dated
+  procedure document.
+- Confirm that all routing rules are reviewed and approved by the rights-handling team lead, with their
+  name and approval date clearly shown.
+- Avoid listing generic owners like "the team" or "support" for routing responsibilities; specify named
+  individuals or defined roles.

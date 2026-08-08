@@ -1,0 +1,17 @@
+must_id: item:A.8.23:scope_devices
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: Device classes in scope (corporate-managed / contractor / BYOD with approval)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all device classes that access external websites, specifying corporate-managed, contractor devices,
+  and BYOD with explicit approval.
+- Document the approval process for BYOD devices, including named approvers and dated records of each
+  approval.
+- Name the owner responsible for maintaining the device class list as a specific individual, not a team
+  or department.
+- Record the date of the most recent review of the device class scope to show it is current and regularly
+  updated.

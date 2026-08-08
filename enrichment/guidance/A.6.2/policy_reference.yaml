@@ -1,0 +1,19 @@
+must_id: item:A.6.2:policy_reference
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Reference to InfoSec policy and topic-specific policies binding the personnel (A.5.1 master
+  policy, A.5.10 acceptable use, A.5.15 access control)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the employment contract that the employee must comply with the organisation’s main information
+  security policy and all related topic-specific policies.
+- Reference the exact titles and version numbers of the information security, acceptable use, and access
+  control policies within the contract template.
+- Attach or link the current versions of these policies to the contract template, ensuring employees can
+  review the referenced documents.
+- Name the policy owner or responsible contact in the contract, using a specific individual’s name rather
+  than a department or generic title.
+- Record the date the contract template was last updated to reflect any changes in referenced policies.

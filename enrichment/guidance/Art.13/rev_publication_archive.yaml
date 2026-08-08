@@ -1,0 +1,17 @@
+must_id: item:Art.13:rev_publication_archive
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Publication archive check — prior versions retained for audit defensibility
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Retain all previous versions of the published privacy notice, including dates of publication and withdrawal,
+  in a secure and accessible archive.
+- Record the name of the individual responsible for archiving each version, ensuring a specific person
+  is listed rather than a team or department.
+- Document the location and access controls of the archive in a written procedure, referencing where auditors
+  can find the archive.
+- Cross-reference each archived privacy notice version to the corresponding review or approval record,
+  showing when and by whom it was approved for publication.

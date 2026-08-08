@@ -1,0 +1,19 @@
+must_id: item:5.2:com_refresher
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: Refresher cadence (annual re-acknowledgement or on policy update)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the required refresher cadence in the policy document, specifying annual acknowledgement or immediate
+  action upon policy updates.
+- Record the date each employee last acknowledged the information security policy in a central tracking
+  log.
+- Assign responsibility for tracking and prompting policy re-acknowledgement to a named individual, not
+  a generic group or department.
+- Retain copies of acknowledgement records, showing employee names, dates, and the specific policy version
+  referenced.
+- Review the tracking log annually to confirm all current staff have acknowledged the latest policy version
+  within the required timeframe.

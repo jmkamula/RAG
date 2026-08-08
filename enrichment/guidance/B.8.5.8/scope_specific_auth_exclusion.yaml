@@ -1,0 +1,19 @@
+must_id: item:B.8.5.8:scope_specific_auth_exclusion
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+must_text: Specific-authorisation customers excluded (they get fresh B.8.5.7 engagement each time)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name all customers who require specific authorisation in a dedicated list, ensuring no generic categories
+  or group names are used.
+- Document the scope of each change, clearly marking customers excluded due to specific-authorisation
+  status.
+- Record evidence that each excluded customer received a separate engagement under control B.8.5.7, including
+  dates and responsible individuals.
+- Retain a cross-reference between the change scope document and the B.8.5.7 engagement records for each
+  excluded customer.
+- Confirm that no excluded customer is processed under the general change scope by reviewing the final
+  list for accidental inclusion.

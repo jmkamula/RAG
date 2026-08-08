@@ -1,0 +1,19 @@
+must_id: item:A.5.8:rev_gate_skip
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Gate-skip rate analysed (projects that bypassed gates; root cause and remediation per skip)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each project that bypassed a security gate in a dated log, including project name, gate skipped,
+  and responsible project lead.
+- Document the root cause for each gate skip, referencing supporting communications or decision records
+  where applicable.
+- Assign a specific individual to investigate and approve the documented root cause and proposed remediation
+  for each gate skip.
+- Track completion of remediation actions with a dated entry and evidence of implementation, such as updated
+  process documentation or training records.
+- Name the reviewer of the gate-skip analysis as a specific person, not a group or department, and capture
+  their sign-off date.

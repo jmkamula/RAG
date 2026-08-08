@@ -1,0 +1,18 @@
+must_id: item:B.8.5.5:scope_authorisation_paths
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Customer authorisation paths (contract clause / one-off approval / DPA schedule)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all customer data types that may be disclosed, listing them in a dated document reviewed by
+  your data protection officer.
+- Document the specific contractual clause, DPA schedule, or written one-off approval that authorises
+  each type of disclosure.
+- Name the individual who approved each disclosure path, ensuring the name is not a group or department.
+- Retain copies of signed contracts, DPA schedules, or written approvals as evidence for each authorisation
+  path.
+- Cross-reference each disclosure decision in your data processing register to the relevant contract or
+  approval document.

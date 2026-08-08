@@ -1,0 +1,17 @@
+must_id: item:B.8.2.6:ropa_last_verified
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: Last verification date per row (against customer instruction record)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the last verification date for each processing activity row, matching it to the corresponding
+  customer instruction record.
+- Name the individual responsible for verifying each processing activity, listing their full name next
+  to the verification date.
+- Cross-reference each processing activity with the specific customer instruction record reviewed, using
+  a unique identifier or link.
+- Avoid leaving any verification date field blank or marked as "ongoing"—enter a specific, completed date
+  for each row.

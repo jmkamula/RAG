@@ -1,0 +1,17 @@
+must_id: item:A.8.2:rc_date
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Recertification date within the planned interval (≤180 days since last)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent privileged access recertification date for each user in an access review log,
+  including the reviewer's name.
+- Confirm that the interval between the last two recertification dates for each user does not exceed 180
+  days.
+- Document any overdue recertifications with a reason and corrective action, signed and dated by the responsible
+  manager.
+- Name the reviewer as a specific individual for each recertification event—do not use group names or
+  roles only.

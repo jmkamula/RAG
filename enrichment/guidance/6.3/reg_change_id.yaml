@@ -1,0 +1,19 @@
+must_id: item:6.3:reg_change_id
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Unique change identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each change entry in the ISMS Change Register, using a consistent numbering
+  or coding format.
+- Record the unique identifier alongside the date, description, and responsible person for every change
+  listed.
+- Cross-reference the unique identifier in related documentation, such as meeting minutes or approval
+  records, to show traceability.
+- Confirm that no two change entries share the same identifier by periodically reviewing the register
+  for duplicates.
+- Name the identifier clearly in the register column header, avoiding vague labels like "ref" or "misc
+  code".

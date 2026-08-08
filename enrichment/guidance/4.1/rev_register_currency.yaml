@@ -1,0 +1,16 @@
+must_id: item:4.1:rev_register_currency
+control_ref: '4.1'
+standard_id: ISO27001:2022
+must_text: Register currency check — every row reviewed for continued relevance, new issues added
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent review for each row in the context register, showing when it was
+  last checked for relevance.
+- Name the individual who reviewed each row, avoiding group or team names, to provide clear accountability.
+- Document any updates or new issues identified during the review directly in the register, including
+  a brief description and date added.
+- Confirm that no row is marked as "not reviewed" or left blank for review status, as incomplete records
+  will be flagged by auditors.

@@ -1,0 +1,19 @@
+must_id: item:Art.42:scheme_selection
+control_ref: Art.42
+standard_id: GDPR:2016/679
+must_text: Certification scheme selection — which Art.42.5 approved scheme + which Art.43 accredited body
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific GDPR certification scheme selected, referencing its official title and approval under
+  Article 42.5 in your documentation.
+- Document the accredited certification body chosen, including its full legal name and accreditation status
+  under Article 43.
+- Record the date when the scheme and certification body were selected, and the names of decision-makers
+  involved in the selection process.
+- Attach evidence of the scheme’s approval and the body’s accreditation, such as official listings or
+  certificates, to your procedure file.
+- State the scheme and certification body explicitly—do not use placeholders like "TBD" or generic descriptions
+  that lack traceability.

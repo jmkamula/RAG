@@ -1,0 +1,17 @@
+must_id: item:A.7.3.6:scope_subject_universe
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: Subject universe covered (customers / employees / prospects / research participants / etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all categories of individuals whose personal data is processed, such as customers, employees, prospects,
+  and research participants, in a dated scope document.
+- Name the specific data processing activities associated with each category, referencing business processes
+  or systems where applicable.
+- Confirm the scope document is reviewed and approved by a named data protection officer or privacy lead,
+  with a dated signature.
+- Specify each group using clear, descriptive terms—avoid generic labels like "users" or "stakeholders"
+  that could cause ambiguity.

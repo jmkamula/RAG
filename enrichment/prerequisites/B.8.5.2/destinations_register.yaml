@@ -1,0 +1,50 @@
+leaf_id: req:B.8.5.2:destinations_register
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The destinations register must accurately reflect all countries and international organizations
+    relevant to the in-scope processing activities. If the ISMS scope is unclear, you risk omitting or
+    misidentifying transfer destinations.
+  good_enough: A documented scope statement that clearly defines which business units, processes, and
+    systems are in-scope for PII processing and transfers.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: Knowing which information assets (systems, databases, services) process customer PII is essential
+    to identify where data may be transferred internationally. Without this, you can't reliably list transfer
+    destinations.
+  good_enough: A current inventory of all assets that store or process customer PII, including their physical
+    or cloud locations.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You need to know the specific purposes for which customer PII is processed to determine if
+    and why it is transferred to particular countries or organizations. This underpins the accuracy of
+    the register.
+  good_enough: Documented purposes for each processing activity involving customer PII, at least at a
+    summary level.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: The lawful basis for processing (e.g., contract, consent) may affect which transfers are
+    permitted and must be recorded. This ensures the register only lists compliant destinations.
+  good_enough: A mapped lawful basis for each type of customer PII processing, sufficient to justify international
+    transfers.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: cross_role
+  rationale: The RoPA provides a baseline list of processing activities, including categories of data
+    subjects, data, and recipients, which is necessary to cross-check and validate transfer destinations.
+  good_enough: A basic RoPA covering customer PII processing, with at least high-level entries for recipients
+    and transfer locations.

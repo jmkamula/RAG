@@ -1,0 +1,39 @@
+leaf_id: req:A.7.6:working_in_secure_areas_procedure
+control_ref: A.7.6
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which locations, business units, and facilities are in-scope for your ISMS
+    before you can define and document secure areas and related procedures.
+  good_enough: A clear, current scope statement that identifies all physical premises and operational
+    areas covered by the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register helps identify which assets are located in secure areas and
+    what needs protection, informing the controls and restrictions in your procedure.
+  good_enough: A basic inventory of physical and information assets, with location data for those in or
+    near secure areas.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that only authorized personnel are
+    permitted in secure areas and that escort and supervision duties are defined.
+  good_enough: A list of roles with assigned responsibilities for secure area access, even if not fully
+    detailed for every scenario.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment identifies threats and vulnerabilities related to secure areas, guiding
+    what controls and procedures are necessary.
+  good_enough: A recent risk assessment that highlights physical security risks and justifies the need
+    for secure areas and related controls.

@@ -1,0 +1,17 @@
+must_id: item:Art.40:reg_adherence_date
+control_ref: Art.40
+standard_id: GDPR:2016/679
+must_text: Per-row adherence date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each code of conduct was adopted or adhered to in a dedicated column for every
+  entry in the register.
+- Name the individual responsible for confirming adherence for each row, using their full name rather
+  than a generic role or team.
+- Review each register entry to confirm that no row is missing an adherence date or contains placeholders
+  like "TBD" or "ongoing."
+- Retain supporting documentation, such as signed statements or email confirmations, that verify the recorded
+  adherence dates for each code.

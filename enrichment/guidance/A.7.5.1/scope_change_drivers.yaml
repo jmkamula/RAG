@@ -1,0 +1,18 @@
+must_id: item:A.7.5.1:scope_change_drivers
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: Trigger list (new region / new processor / M&A)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current and planned cross-border personal data transfers, including destination countries,
+  in a dated and version-controlled register.
+- Document each trigger event—such as onboarding a new region, engaging a new processor, or completing
+  a merger or acquisition—with a specific date and description.
+- Assign a named individual responsible for reviewing and updating the transfer scope whenever a trigger
+  event occurs.
+- Attach supporting evidence for each update, such as signed contracts, data flow diagrams, or board meeting
+  minutes referencing the trigger.
+- Name the owner as a specific person, not a team or department, to avoid ambiguity in responsibility.

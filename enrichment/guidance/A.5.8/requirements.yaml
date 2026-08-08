@@ -1,0 +1,20 @@
+must_id: item:A.5.8:requirements
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Security requirements captured in project plan / requirements document (functional + non-functional,
+  including data protection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and list all information security requirements, including both functional and non-functional
+  needs, in the project plan or requirements document.
+- Reference relevant data protection obligations, such as personal data handling or retention, directly
+  within the project documentation.
+- Assign a named project manager or security lead responsible for reviewing and confirming the inclusion
+  of security requirements, with their name and date recorded.
+- Attach supporting evidence, such as a signed checklist or approval page, showing that security requirements
+  were reviewed and agreed before project commencement.
+- Specify security requirements in detail; avoid using vague or generic statements that could apply to
+  any project.

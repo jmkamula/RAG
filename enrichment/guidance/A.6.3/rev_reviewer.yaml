@@ -1,0 +1,17 @@
+must_id: item:A.6.3:rev_reviewer
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Security Awareness Lead + InfoSec lead jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the Security Awareness Lead and the Information Security Lead as joint reviewers in the programme
+  review documentation.
+- Record the date when the periodic awareness programme review was completed in the official review log.
+- Sign the review outcome jointly by both named leads, using either physical or digital signatures.
+- Attach the final reviewed document to the central compliance repository, referencing both reviewers
+  and the review date.
+- Avoid listing a group or department as reviewer; always specify the actual individuals responsible for
+  the review.

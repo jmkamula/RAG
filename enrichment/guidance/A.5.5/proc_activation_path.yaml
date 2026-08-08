@@ -1,0 +1,19 @@
+must_id: item:A.5.5:proc_activation_path
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Activation path — who contacts whom on which trigger (incident category, regulatory deadline)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific incident categories or regulatory deadlines that require activating the authority
+  contact procedure in a dated procedure document.
+- Name the individual roles responsible for initiating contact with external authorities, avoiding group
+  or team designations.
+- State the exact trigger event for each authority contact, linking each to the relevant incident type
+  or regulatory requirement.
+- Record the communication path, listing who contacts whom, with timeframes for each step, in a maintained
+  contact flowchart or table.
+- Retain evidence of regular reviews and updates to the procedure, with reviewer names and review dates
+  clearly recorded.

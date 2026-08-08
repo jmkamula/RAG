@@ -1,0 +1,18 @@
+must_id: item:Art.30:dfi_visual
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Visual representation (data flow diagram) accompanies the tabular inventory
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Create a data flow diagram that visually maps how personal data moves between systems, departments,
+  and third parties within your organisation.
+- Label each element in the diagram with system names, data types, and responsible individuals to match
+  entries in your tabular inventory.
+- Date the diagram and include the name of the person who prepared or last updated it.
+- Cross-reference the diagram with the corresponding tabular inventory, ensuring every data flow in the
+  table appears visually.
+- Name the diagram file clearly and avoid using generic templates that do not reflect your actual data
+  flows.

@@ -1,0 +1,14 @@
+must_id: item:A.7.2.3:reg_effective_date
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: Effective date per artifact version
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the effective date for each version of every consent mechanism artifact in the register.
+- Assign a unique version number to each artifact entry alongside its effective date.
+- Document the name of the individual who approved the effective date for each artifact version.
+- Avoid listing artifact versions without a specific effective date—do not use placeholders like "TBD"
+  or leave the field blank.

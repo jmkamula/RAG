@@ -1,0 +1,18 @@
+must_id: item:B.8.2.6:ropa_processing_categories
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: Categories of processing carried out per customer per row (Art.30.2.b)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each customer as a separate row in your processing records, clearly identifying the customer by
+  full legal name.
+- Specify the exact categories of processing activities performed for each customer, using plain language
+  that matches your actual operations.
+- Cross-reference each processing category to the relevant contract or data processing agreement clause
+  for that customer.
+- Record the date the processing categories were last reviewed or updated for each customer row.
+- Name the person responsible for maintaining each customer’s processing record as a specific individual,
+  not a team or department.

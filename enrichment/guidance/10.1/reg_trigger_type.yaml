@@ -1,0 +1,18 @@
+must_id: item:10.1:reg_trigger_type
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Per-row trigger type (audit finding / measurement gap / opportunity / party feedback / mgmt
+  review output)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the trigger type for each improvement action row, clearly stating if it is an audit finding,
+  measurement gap, opportunity, party feedback, or management review output.
+- Cross-reference each trigger type entry to its original source document or meeting minutes, including
+  the date and a unique reference number.
+- Name the person responsible for identifying and recording the trigger type for each action, using a
+  specific individual’s name.
+- Avoid using vague or catch-all terms like "other" or "miscellaneous" as a trigger type; select only
+  from the approved categories.

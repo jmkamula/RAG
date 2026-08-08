@@ -1,0 +1,20 @@
+must_id: item:Art.23:rev_invocation_audit
+control_ref: Art.23
+standard_id: GDPR:2016/679
+must_text: Invocation audit — sampled register rows reviewed for proportionality and Art.23.2 safeguard
+  compliance
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of register entries where Art.23 restrictions were applied, noting the entry
+  IDs and dates selected.
+- Review each sampled entry to confirm documented justification for the restriction and evidence that
+  the limitation was necessary and proportionate.
+- Check that each entry references specific safeguards from Art.23.2, such as data subject rights protections
+  or transparency measures, with supporting documentation.
+- Record the name and role of the individual who performed the review, along with the date the review
+  was completed.
+- Name the reviewer as a specific person, not a group or department, to avoid auditor concerns about unclear
+  accountability.

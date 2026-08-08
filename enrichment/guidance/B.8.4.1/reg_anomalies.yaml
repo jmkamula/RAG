@@ -1,0 +1,18 @@
+must_id: item:B.8.4.1:reg_anomalies
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+must_text: Anomalies per row (accumulation / undue retention)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time each temporary file is created and deleted in the sweep register for every
+  processing activity.
+- Document the specific reason for any temporary file retained longer than the standard retention period,
+  including approval from a named individual.
+- Cross-reference each sweep entry with the relevant data processing task or job to confirm legitimate
+  creation and deletion.
+- Flag and investigate any register row showing repeated accumulation or unexplained retention, and document
+  the investigation outcome with a named reviewer.
+- Name the owner of the sweep register as a specific individual, not a team or department.

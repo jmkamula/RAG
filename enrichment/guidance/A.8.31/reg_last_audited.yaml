@@ -1,0 +1,17 @@
+must_id: item:A.8.31:reg_last_audited
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Per-row last-audited timestamp
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time each environment entry was last audited in a dedicated column within the Environment
+  Register.
+- Name the person who performed the most recent audit for each environment row, ensuring the entry is
+  not left blank or marked as "team."
+- Update the last-audited timestamp immediately after completing each environment review, so the register
+  reflects the most current status.
+- Review the register for any rows missing a last-audited timestamp and correct these gaps before finalizing
+  the document.

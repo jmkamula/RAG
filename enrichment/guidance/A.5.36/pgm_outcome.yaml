@@ -1,0 +1,18 @@
+must_id: item:A.5.36:pgm_outcome
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Cadence-adjustment or method-adjustment decisions (tighten / loosen / change method per item
+  type)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each decision to change the frequency or method of compliance reviews, including the specific
+  item type affected and the rationale, in a dated log.
+- Name the individual who approved each adjustment decision, ensuring the owner is a specific person rather
+  than a group or department.
+- Attach supporting evidence, such as risk assessments or incident trends, that justify the need for each
+  cadence or method adjustment.
+- Document the date when the adjustment takes effect and schedule the next review to confirm the change
+  was implemented as planned.

@@ -1,0 +1,40 @@
+leaf_id: req:A.5.9:asset_lifecycle_procedure
+control_ref: A.5.9
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which assets are in-scope for your ISMS before you can define their lifecycle
+    management. The scope statement ensures the procedure covers all relevant assets and processes.
+  good_enough: A clear, approved scope statement that lists included business units, locations, and asset
+    types is sufficient to proceed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The asset lifecycle procedure must reference how assets are classified at creation and change.
+    Without a defined classification scheme, you can't specify how to handle assets at different lifecycle
+    stages.
+  good_enough: A documented, organization-wide classification scheme that covers all asset types and sensitivity
+    levels is enough to unblock drafting.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of asset ownership and lifecycle responsibilities is essential for defining
+    who does what at each stage. The procedure relies on these roles being established.
+  good_enough: A current list of asset-related roles and their responsibilities, even if not fully mapped
+    to all assets yet, is sufficient.
+- ref: A.5.37
+  standard_id: ISO27001:2022
+  title: Documented Operating Procedures
+  category: direct
+  rationale: Asset lifecycle management procedures must align with broader operating procedures to ensure
+    consistency and avoid gaps. These procedures provide the baseline for integrating asset-specific controls.
+  good_enough: Existing documented procedures for IT and business operations that reference asset handling
+    are enough to proceed, even if not yet fully harmonized.

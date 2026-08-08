@@ -1,0 +1,17 @@
+must_id: item:7.1:rev_gap_response
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Gap response — any under-resourcing surfaced with remediation plan
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all identified resource gaps in a dated review report, specifying the affected areas and the
+  impact on information security objectives.
+- Assign a named individual responsible for each identified gap, ensuring the owner is a specific person
+  and not a team or department.
+- Record a remediation plan for each gap, including concrete actions, responsible persons, and target
+  completion dates.
+- Retain evidence of management approval for each remediation plan, such as a signed or digitally approved
+  document.

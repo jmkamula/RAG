@@ -1,0 +1,39 @@
+leaf_id: req:A.8.5:authentication_log
+control_ref: A.8.5
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, applications, and environments are in-scope for your ISMS
+    before you can determine where authentication activity logging is required.
+  good_enough: A clear, documented scope that identifies all in-scope systems and boundaries for the ISMS,
+    even if some edge cases are still being clarified.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register is essential to identify which assets (applications, endpoints,
+    cloud services) require authentication logging and monitoring.
+  good_enough: A working inventory of key information assets and systems, with enough detail to identify
+    where authentication events occur.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: You must know who is responsible for configuring, maintaining, and reviewing authentication
+    logs to ensure accountability and effective monitoring.
+  good_enough: Documented assignment of responsibilities for authentication logging, even if some roles
+    are shared or interim.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment helps prioritize which authentication events and systems are most critical
+    to monitor, based on threat likelihood and impact.
+  good_enough: A recent risk assessment that covers authentication risks for major systems, even if some
+    lower-risk systems are pending review.

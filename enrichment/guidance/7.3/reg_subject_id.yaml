@@ -1,0 +1,16 @@
+must_id: item:7.3:reg_subject_id
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Subject identifier per row (employee or contractor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full legal name of each employee or contractor who has completed ISMS awareness training
+  in a separate row of the register.
+- Include a unique identifier, such as employee or contractor ID, for each individual listed to avoid
+  confusion between people with similar names.
+- Enter the completion date for each individual's ISMS awareness training in the corresponding row.
+- Name the subject as a specific person—do not use group names, job titles, or generic terms like "staff"
+  or "contractor".

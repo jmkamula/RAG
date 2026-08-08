@@ -1,0 +1,18 @@
+must_id: item:Art.22:rev_date
+control_ref: Art.22
+standard_id: GDPR:2016/679
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the automated decision-making program in a dated log or review
+  register.
+- Document the planned review interval for the program, referencing an approved policy or management decision.
+- Confirm the review was completed by a named individual, not a generic role or team, and include their
+  signature or digital approval.
+- Attach the review findings or summary report to the review record, ensuring it is clearly linked to
+  the specific program.
+- Cross-reference the next scheduled review date in the same log, verifying it aligns with the documented
+  interval.

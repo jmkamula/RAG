@@ -1,0 +1,15 @@
+must_id: item:A.8.16:owner
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Named procedure owner (Security Operations lead)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Security Operations lead as the procedure owner by full name and job title in the Monitoring
+  Activities Procedure document.
+- Record the date when the Security Operations lead was assigned as owner within the procedure document.
+- Avoid listing a team, department, or generic title as the owner; specify a single, accountable individual.
+- Retain evidence of the Security Operations lead’s acknowledgment, such as a signed or emailed acceptance
+  of ownership.

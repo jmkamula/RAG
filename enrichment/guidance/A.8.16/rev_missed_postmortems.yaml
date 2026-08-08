@@ -1,0 +1,19 @@
+must_id: item:A.8.16:rev_missed_postmortems
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Missed-detection postmortems reviewed (incidents that bypassed monitoring)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each incident where monitoring failed to detect an event by recording the date, description,
+  and how the incident bypassed controls.
+- Assign a named individual to review every missed-detection incident and record their findings in a dated
+  postmortem report.
+- Record specific lessons learned and proposed detection improvements in the postmortem, referencing any
+  changes to monitoring rules or processes.
+- Name the reviewer as a specific person in each postmortem—avoid listing only a team or department as
+  responsible.
+- Retain evidence of management sign-off for each postmortem review, such as a signed or approved summary
+  document.

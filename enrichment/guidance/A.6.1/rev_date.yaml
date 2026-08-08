@@ -1,0 +1,17 @@
+must_id: item:A.6.1:rev_date
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the screening program in a dated log or review register.
+- Document the planned review interval for the screening program, referencing the approved policy or management
+  decision.
+- Confirm the next scheduled review date is within the documented interval by cross-referencing the last
+  review date and the interval.
+- Name the reviewer as a specific individual, not a team or department, in the review record.
+- Retain evidence of management acknowledgment or sign-off on the review schedule, such as a dated email
+  or signed meeting minutes.

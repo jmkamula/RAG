@@ -1,0 +1,15 @@
+must_id: item:5.1:rev_date
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the leadership program in a dated document or meeting minutes.
+- State the planned review interval for the leadership program in a formal schedule or policy document.
+- Name the reviewer as a specific individual responsible for the leadership program review, not as a group
+  or department.
+- Retain evidence of the review, such as a signed summary or updated program document, showing the review
+  occurred within the planned interval.

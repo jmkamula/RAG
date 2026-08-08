@@ -1,0 +1,16 @@
+must_id: item:A.7.2:owner
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Named owner of the procedure (Facilities lead with InfoSec partner)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the Physical Entry Controls Procedure as a specific individual, such as the Facilities
+  lead, not a team or department.
+- Document the Information Security partner by full name and job title within the procedure as a co-owner
+  or key collaborator.
+- Record the date when ownership was last reviewed or updated in the procedure document.
+- Sign the procedure document electronically or physically by both the Facilities lead and the Information
+  Security partner.

@@ -1,0 +1,43 @@
+leaf_id: req:Art.49:derogations_program_review
+control_ref: Art.49
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.44
+  standard_id: GDPR:2016/679
+  title: General principle for transfers
+  category: direct
+  rationale: Art.44 establishes the baseline requirement for all international data transfers, which must
+    be satisfied before considering any derogations under Art.49. Without confirming that a transfer falls
+    under Art.44, it is impossible to determine if Art.49 derogations are even relevant.
+  good_enough: A documented assessment confirming the transfer is subject to GDPR Art.44 and cannot rely
+    on adequacy or other general transfer mechanisms.
+- ref: Art.46
+  standard_id: GDPR:2016/679
+  title: Transfers subject to appropriate safeguards
+  category: direct
+  rationale: Art.46 provides the primary mechanisms for international transfers; Art.49 derogations are
+    only available as a last resort when Art.46 cannot be used. You must show that Art.46 options have
+    been considered and ruled out before invoking Art.49.
+  good_enough: Evidence that all Art.46 mechanisms (e.g., SCCs, BCRs) were evaluated and found unavailable
+    or inapplicable for the transfer in question.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: Up-to-date RoPA is essential to identify which processing activities involve international
+    transfers and which may rely on Art.49 derogations. Without this, you cannot systematically review
+    or defend derogation use.
+  good_enough: A current RoPA that clearly identifies processing activities involving international transfers,
+    with enough detail to flag those relying on Art.49.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Every processing activity, including those involving international transfers, must have a
+    lawful basis under Art.6. Reviewing derogations is meaningless if the underlying processing lacks
+    a lawful basis.
+  good_enough: Documented lawful basis for each relevant processing activity, at least at the level of
+    mapping each transfer to its Art.6 justification.

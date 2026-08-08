@@ -1,0 +1,19 @@
+must_id: item:A.8.2:log_anomaly_alert
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Anomaly alerting configured (unusual hours, unusual scope, unusual command)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific alert rules configured for unusual hours, unusual scope, and unusual commands
+  in the privileged activity log system, including rule descriptions and thresholds.
+- Record the date and outcome of the most recent test or simulation showing that anomaly alerts trigger
+  as expected and are received by the responsible team.
+- Name the individual responsible for reviewing and responding to privileged activity anomaly alerts,
+  listing their full name and job title.
+- Attach a screenshot or export of the current alert configuration settings from the privileged activity
+  log tool, showing each rule is active.
+- Avoid using generic or default alert rules; customize each rule to your organisation’s environment and
+  document the rationale for any thresholds set.

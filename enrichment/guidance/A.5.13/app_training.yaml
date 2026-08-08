@@ -1,0 +1,19 @@
+must_id: item:A.5.13:app_training
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Training rollout per record (users of this platform completed labelling refresher; new-joiner
+  integration noted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all users of the platform in a dated training record, including both existing staff and new joiners.
+- Record the completion date of the labelling refresher training for each user, referencing the specific
+  training session or module.
+- Note the integration of labelling training into the onboarding process for new joiners, including the
+  responsible trainer’s name and date.
+- Attach evidence of training completion, such as signed attendance sheets or digital acknowledgements,
+  to each user’s record.
+- Name the training owner as a specific individual, not a generic role or team, to avoid ambiguity in
+  responsibility.

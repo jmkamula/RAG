@@ -1,0 +1,39 @@
+leaf_id: req:A.5.37:procedures_maintenance_procedure
+control_ref: A.5.37
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know what parts of the organization and which information assets are covered
+    by the ISMS before you can define which operating procedures require maintenance and oversight.
+  good_enough: A clear, documented scope that identifies the boundaries and applicability of the ISMS,
+    even if not fully detailed, is sufficient to proceed.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Documented roles and responsibilities ensure you know who is accountable for maintaining,
+    reviewing, and updating procedures, which is essential for an effective maintenance process.
+  good_enough: A basic roles matrix or list that assigns responsibility for procedure maintenance is enough
+    to unblock drafting the maintenance procedure.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The overarching security policy sets the expectations and principles for documentation and
+    maintenance of procedures, providing the context for your maintenance process.
+  good_enough: A published or draft policy that references the need for documented and maintained procedures
+    is sufficient at this stage.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Knowing which assets exist and are in scope helps determine which procedures need to be maintained
+    and updated as assets change.
+  good_enough: An initial asset register that lists key information assets and systems, even if not exhaustive,
+    is enough to proceed with drafting the maintenance procedure.

@@ -1,0 +1,18 @@
+must_id: item:A.5.24:reg_external_partner
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: External-partner contacts captured alongside internal members (regulator points-of-contact,
+  retained forensic firm contact)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all internal incident response team members by full name, role, and direct contact details in the
+  Incident Response Team Register.
+- Add external partner contacts, including regulator points-of-contact and retained forensic firm representatives,
+  with names, roles, and up-to-date contact information.
+- Record the date each contact entry was last verified or updated in the register.
+- Name the owner of the register as a specific individual responsible for maintaining accuracy, not as
+  a team or department.
+- Attach evidence of the most recent review or update, such as a dated and signed change log entry.

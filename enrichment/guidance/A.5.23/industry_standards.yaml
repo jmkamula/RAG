@@ -1,0 +1,19 @@
+must_id: item:A.5.23:industry_standards
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Cloud agreements based on accepted industry standards for architecture and infrastructure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the industry standards your organisation requires for cloud architecture and infrastructure in
+  your policy, such as ISO/IEC 27017 or CSA CCM.
+- Document each cloud service provider’s agreement and cross-reference the specific clauses that align
+  with your named industry standards.
+- Assign a named individual responsible for reviewing and approving cloud agreements for compliance with
+  the listed standards.
+- Retain copies of all signed cloud agreements, including the date of approval and the approving individual’s
+  name.
+- State the owner as a specific person, not a generic team or department, in the policy’s responsibility
+  section.

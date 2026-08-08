@@ -1,0 +1,16 @@
+must_id: item:Art.24:reg_article_id
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Per-row GDPR article identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique GDPR article identifier to each row in the compliance register, referencing the specific
+  article number relevant to that entry.
+- Cross-reference each entry with the full text or summary of the GDPR article to confirm accurate alignment
+  with the regulation.
+- Document the date and name of the person who assigned each article identifier for traceability.
+- Avoid using generic labels like "GDPR applies" or "all articles"—specify the exact article number for
+  each row.

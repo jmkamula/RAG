@@ -1,0 +1,19 @@
+must_id: item:A.8.24:reg_key_id
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Per-row unique key identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each cryptographic key entry in the register that does not repeat or overlap
+  with any other key.
+- Record the unique identifier alongside key details such as type, owner, and creation date in each row
+  of the register.
+- Cross-reference the unique identifier in related documentation, such as key usage logs or incident reports,
+  to maintain traceability.
+- State the format and generation method for unique identifiers in the register documentation to avoid
+  accidental duplication or ambiguity.
+- Name the owner responsible for assigning and maintaining unique identifiers as a specific individual,
+  not a group or department.

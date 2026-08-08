@@ -1,0 +1,17 @@
+must_id: item:6.2:scope_exclusions
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: Exclusions stated explicitly with rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all organisational functions and levels considered for inclusion in the information security management
+  system, with names and clear boundaries.
+- State each excluded function or level explicitly, using precise titles rather than general terms like
+  "miscellaneous" or "other."
+- Document a clear, specific rationale for each exclusion, referencing business, legal, or operational
+  justifications.
+- Record the date and name of the person who approved the scope and exclusions statement.
+- Attach the final, approved scope document to your ISO27001 records for future audit reference.

@@ -1,0 +1,17 @@
+must_id: item:A.8.9:rev_baselines_update
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Updated baselines published from findings
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and results of each configuration program review in a formal report signed by the
+  responsible reviewer.
+- Update configuration baseline documents to reflect all approved changes identified during the review,
+  including version numbers and revision dates.
+- Publish the revised baseline documents in the designated repository, ensuring access is restricted to
+  authorized personnel.
+- Name the individual who approved and published the updated baselines, avoiding generic titles or group
+  references.

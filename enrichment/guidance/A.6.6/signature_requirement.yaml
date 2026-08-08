@@ -1,0 +1,20 @@
+must_id: item:A.6.6:signature_requirement
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Signature requirement enforced before access granted (no access without signed NDA — gates
+  A.5.18 access grant for non-employees)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the NDA template that a physical or electronic signature is required from the non-employee
+  before any access is provided.
+- Record the full name, signature, and date for each non-employee on a dedicated NDA log or register before
+  access is granted.
+- Cross-reference each signed NDA with the corresponding access request record to confirm no access is
+  enabled prior to signature.
+- Name the individual responsible for verifying and enforcing the signed NDA requirement, avoiding generic
+  roles such as "HR" or "IT team".
+- Retain all signed NDAs in a secure, retrievable location for the duration of the individual's access
+  and for any required retention period.

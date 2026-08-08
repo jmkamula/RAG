@@ -1,0 +1,18 @@
+must_id: item:A.5.1:approval_authority
+control_ref: A.5.1
+standard_id: ISO27001:2022
+must_text: Statement of the signatory's authority to approve (delegation chain if not CEO)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual who approved the information security policy, specifying their full name and job
+  title on the approval document.
+- Document the date the policy was formally approved, ensuring it appears on the signed approval page.
+- State the signatory’s authority to approve the policy, referencing the delegation chain if the signatory
+  is not the CEO.
+- Attach or cross-reference the formal delegation document or board resolution that grants approval authority
+  to the signatory.
+- Avoid using generic titles or groups as approvers; always identify a specific person with documented
+  authority.

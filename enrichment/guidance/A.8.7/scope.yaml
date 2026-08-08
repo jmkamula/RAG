@@ -1,0 +1,16 @@
+must_id: item:A.8.7:scope
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Scope coverage stated (every asset class with executable code path)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure which asset classes are covered, listing each type with executable code paths
+  such as servers, endpoints, and mobile devices.
+- Document how each asset class is assessed for malware risk, referencing the specific process or tool
+  used for evaluation.
+- Name the person responsible for maintaining the asset class list, ensuring the owner is a specific individual,
+  not a team or department.
+- Record the date the scope was last reviewed and updated, attaching the signed approval from management.

@@ -1,0 +1,17 @@
+must_id: item:A.5.7:exercise_input
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Use into exercises / tabletop scenarios (intel informs realistic scenarios)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference recent threat intelligence reports when designing tabletop scenarios, and attach the specific
+  reports used to each exercise plan.
+- Document how threat intelligence findings shaped the scenario details in the exercise planning record,
+  including dates and sources.
+- Name the individual responsible for integrating threat intelligence into exercise planning, ensuring
+  this is a specific person, not a group or department.
+- Retain completed exercise materials and debrief notes showing how threat intelligence was applied to
+  scenario realism.

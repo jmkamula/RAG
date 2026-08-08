@@ -1,0 +1,19 @@
+must_id: item:Art.16:rev_art19_audit
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Art.19 audit — recipient notifications fired (or exceptions documented)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each instance where personal data was rectified, including the date, nature of rectification,
+  and affected data subjects.
+- Record all notifications sent to third-party recipients about the rectification, listing recipient names,
+  notification dates, and delivery methods.
+- Retain copies of exception records where notification to recipients was not possible, including the
+  reason and approval from a named decision-maker.
+- Name the responsible individual overseeing recipient notifications, avoiding generic titles like "the
+  team" or "IT department".
+- Cross-reference notification records with the original rectification requests to confirm all required
+  notifications or exceptions are accounted for.

@@ -1,0 +1,16 @@
+must_id: item:6.1.1:reg_action_id
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Unique action identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique, sequential identifier to each action entered in the ISMS Planned Action Register.
+- Record the assigned identifier directly in the first column of each register row alongside the action
+  description.
+- Cross-reference each action identifier in related documentation, such as meeting minutes or status reports,
+  to maintain traceability.
+- Name the register owner as a specific individual responsible for maintaining unique identifiers, not
+  a group or department.

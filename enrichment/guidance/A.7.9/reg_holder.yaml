@@ -1,0 +1,16 @@
+must_id: item:A.7.9:reg_holder
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Per-row current holder (named individual)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the individual currently responsible for each off-premises asset in a dedicated
+  column of the asset register.
+- Update the register immediately when asset custody changes, capturing the new holder’s name and the
+  date of transfer.
+- Cross-reference each asset entry with supporting documentation, such as signed handover forms or loan
+  agreements, to confirm the named holder.
+- Name the current holder as a specific person—do not use generic labels like “IT team” or “staff member.”

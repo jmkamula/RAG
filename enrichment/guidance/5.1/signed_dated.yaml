@@ -1,0 +1,15 @@
+must_id: item:5.1:signed_dated
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Signed by top management with date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Draft the leadership and commitment directive on official letterhead, clearly stating its purpose and
+  scope.
+- Name the top management signatory as a specific individual, not a group or generic title.
+- Obtain the physical or digital signature of the named top management individual on the directive.
+- Record the date of signature directly next to the signature on the directive.
+- Retain the signed and dated directive in a central, access-controlled repository.

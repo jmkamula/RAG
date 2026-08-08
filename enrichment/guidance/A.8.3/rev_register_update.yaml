@@ -1,0 +1,16 @@
+must_id: item:A.8.3:rev_register_update
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Findings propagated to the matrix register / procedure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each access restriction review finding in a dated summary report, naming the reviewer and the
+  systems or areas assessed.
+- Cross-reference each finding to the specific entry in the access control matrix or procedure, updating
+  the register with the review date.
+- Assign responsibility for addressing each finding to a named individual, not a group or department.
+- Record the completion of updates or changes in the matrix or procedure, including the date and the person
+  who made the change.

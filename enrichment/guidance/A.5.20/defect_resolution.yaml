@@ -1,0 +1,17 @@
+must_id: item:A.5.20:defect_resolution
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Defect resolution and conflict resolution processes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the step-by-step process for identifying, reporting, and resolving defects in the supplier agreement,
+  including responsible roles and response timelines.
+- Document the escalation path and decision-makers for conflicts between your organisation and the supplier,
+  with named contacts and clear resolution stages.
+- Name the owner as a specific individual responsible for managing defect and conflict resolution, not
+  a generic team or department.
+- Record the date the defect and conflict resolution processes were last reviewed and approved by a senior
+  manager.

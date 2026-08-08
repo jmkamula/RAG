@@ -1,0 +1,19 @@
+must_id: item:A.6.4:rev_lessons_propagated
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Lessons-propagation check — did case-driven lessons feed back to awareness curriculum (A.6.3),
+  control updates, or policy amendments?
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each disciplinary case review outcome, including any lessons learned, in a dated record signed
+  by the review lead.
+- Cross-reference each lesson learned to specific updates in the awareness training curriculum, control
+  procedures, or policy documents, noting the change date.
+- Assign responsibility for implementing each lesson to a named individual, not a group or department.
+- Retain evidence of communication, such as emails or meeting minutes, showing that updates were shared
+  with relevant staff.
+- Record a periodic review meeting, with attendees and date, confirming that all recent lessons have been
+  considered for process or policy improvements.

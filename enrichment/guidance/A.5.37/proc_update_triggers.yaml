@@ -1,0 +1,20 @@
+must_id: item:A.5.37:proc_update_triggers
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Update triggers enumerated (system change A.8.32 → procedure update, control change, finding
+  from A.5.35/A.5.36 review, exercise outcome from A.5.24/A.5.29, operator-reported error)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all specific events that require an update to the operating procedure, including system changes,
+  control changes, review findings, exercise outcomes, and operator-reported errors.
+- Cross-reference each update trigger with its relevant control or process, such as A.8.32 for system
+  changes or A.5.35/A.5.36 for review findings.
+- Document the date and version number of the procedure each time an update is made in response to a listed
+  trigger.
+- Name the person responsible for maintaining and updating the procedure as a specific individual, not
+  a generic role or team.
+- Retain records of the most recent procedure review, showing that all update triggers were considered
+  and the procedure remains current.

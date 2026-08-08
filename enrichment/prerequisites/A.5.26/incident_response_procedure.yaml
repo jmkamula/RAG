@@ -1,0 +1,50 @@
+leaf_id: req:A.5.26:incident_response_procedure
+control_ref: A.5.26
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know what people, processes, and systems are in-scope for your ISMS before you
+    can define which incidents your response procedure must cover. Without a clear scope, your procedure
+    risks missing critical areas or overreaching.
+  good_enough: A documented scope that identifies the main business units, locations, and systems covered
+    by the ISMS—even if not perfect—is sufficient to proceed.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the overall direction for incident management and establishes management
+    commitment. Your procedure must align with this policy to ensure consistency and authority.
+  good_enough: A current, approved security policy that references incident management responsibilities
+    is enough to move forward.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Incident response procedures depend on clear assignment of roles—who detects, escalates,
+    investigates, and communicates about incidents. Without this, your procedure will lack clarity and
+    accountability.
+  good_enough: A basic documented list of key security roles and their main responsibilities, even if
+    not fully detailed, is sufficient at this stage.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need to know what assets (systems, data, applications) exist to determine what could
+    be affected by incidents and how to respond. The procedure must reference these assets for containment
+    and recovery.
+  good_enough: An initial asset register listing major information assets and owners, even if not exhaustive,
+    is enough to draft the procedure.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding your key risks helps prioritize which types of incidents to prepare for and
+    how to structure your response. The procedure should be risk-driven.
+  good_enough: A recent risk assessment identifying top threats and vulnerabilities, even if high-level,
+    is sufficient to inform the procedure.

@@ -1,0 +1,20 @@
+must_id: item:B.8.2.5:proc_information_catalog
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: Information catalog — what the org routinely makes available (certifications / audit reports
+  / security whitepaper / DPIA input / data flow map)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of compliance information routinely shared with customers, such as certifications, audit
+  reports, security whitepapers, DPIA input, and data flow maps, in a dated inventory.
+- Name the person responsible for maintaining and updating the information catalog, identifying them by
+  full name and job title.
+- Document the review schedule for the information catalog, including specific review dates and the reviewer’s
+  name.
+- Attach copies or direct links to each listed document in the procedure, ensuring each is the current,
+  approved version.
+- Specify the exact documents provided, avoiding vague descriptions or generic placeholders that could
+  apply to any organisation.

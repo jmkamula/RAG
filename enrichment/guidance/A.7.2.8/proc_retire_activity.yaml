@@ -1,0 +1,17 @@
+must_id: item:A.7.2.8:proc_retire_activity
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Retirement — activities that stop generate a retirement record (not deletion) for audit history
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each retirement of a Record of Processing Activities (RoPA) with a dated entry that describes
+  what was retired and why.
+- Assign responsibility for initiating and approving each RoPA retirement to a named individual, not a
+  group or department.
+- Retain a copy of the retirement record in a dedicated, access-controlled location separate from deletion
+  logs.
+- Record the method of retirement and reference any related approvals or supporting documentation in the
+  retirement record.

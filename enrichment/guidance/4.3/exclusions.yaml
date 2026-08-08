@@ -1,0 +1,18 @@
+must_id: item:4.3:exclusions
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Any exclusions with justification
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List any areas, processes, or assets excluded from your ISMS scope in a dedicated section of the scope
+  statement, dated and version-controlled.
+- Provide a clear, written justification for each exclusion, explaining why it does not affect your organisation’s
+  information security objectives or obligations.
+- Name the person responsible for approving exclusions as a specific individual, not a role or department.
+- Attach documented evidence of management approval for all exclusions, such as a signed meeting minute
+  or approval email.
+- Review the exclusions section to confirm it does not use generic or boilerplate text that could apply
+  to any organisation.

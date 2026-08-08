@@ -1,0 +1,16 @@
+must_id: item:Art.38:reg_training
+control_ref: Art.38
+standard_id: GDPR:2016/679
+must_text: Per-row training / development hours (sustains expertise per Art.37.5)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact number of training or development hours completed by the DPO for each year in the register.
+- Name the specific training courses or development activities attended, including the provider and completion
+  dates, for each entry.
+- Attach certificates or proof of attendance for each training or development activity listed in the register.
+- State the DPO’s name as an individual for each row—do not use generic titles or team names.
+- Review and update the register annually to confirm that ongoing training hours are current and accurately
+  reflected.

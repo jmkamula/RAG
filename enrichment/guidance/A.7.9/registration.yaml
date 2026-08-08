@@ -1,0 +1,17 @@
+must_id: item:A.7.9:registration
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Registration / sign-out of equipment before removal from premises
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each asset’s removal by recording the asset ID, description, date, and destination in an equipment
+  sign-out log before it leaves the premises.
+- Name the individual responsible for authorizing each asset’s removal in the sign-out log, using their
+  full name rather than a generic title or team.
+- Require the person taking the asset off-premises to sign and date the sign-out log, providing a clear
+  record of accountability.
+- Cross-reference the sign-out log entries with your asset inventory to confirm all off-site assets are
+  tracked and accounted for.

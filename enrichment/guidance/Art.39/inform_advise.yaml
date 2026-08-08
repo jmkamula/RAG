@@ -1,0 +1,17 @@
+must_id: item:Art.39:inform_advise
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Inform + advise the controller/processor + employees who carry out processing (Art.39.1.a)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer (DPO) as a specific individual with contact details in the DPO Tasks
+  Procedure document.
+- Document the process by which the DPO informs and advises the controller, processor, and employees about
+  data protection obligations, including meeting schedules or communication channels.
+- Record dated evidence of at least one recent instance where the DPO provided advice or guidance, such
+  as a training session, memo, or email.
+- List the roles or job titles of all employees who receive DPO guidance, avoiding vague references like
+  "all staff" or "the team."

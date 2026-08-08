@@ -1,0 +1,19 @@
+must_id: item:A.5.34:reg_dpia_status
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: DPIA status per activity (required / completed / not required with rationale) — drives high-risk
+  processing reviews
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the DPIA status for each processing activity in the PII Processing Register as "required," "completed,"
+  or "not required with rationale."
+- State the rationale for any activity marked "not required," referencing the specific risk assessment
+  or legal basis used in your determination.
+- Name the individual responsible for each DPIA decision, ensuring a specific person is listed rather
+  than a team or department.
+- Date each DPIA status entry to show when the assessment or exemption decision was made.
+- Cross-reference completed DPIAs to their full reports or summaries, including document location or unique
+  identifier.

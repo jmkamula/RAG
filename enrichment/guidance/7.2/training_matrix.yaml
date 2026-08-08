@@ -1,0 +1,15 @@
+must_id: item:7.2:training_matrix
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Training matrix per role (current + required)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each role in your organisation and list the individuals assigned to those roles in a dated training
+  matrix.
+- Document both the current training completed and the required training for each role in the matrix.
+- Assign responsibility for maintaining and updating the training matrix to a specific named individual,
+  not a generic team or department.
+- Record the date of the last review and update of the training matrix to show it is current.

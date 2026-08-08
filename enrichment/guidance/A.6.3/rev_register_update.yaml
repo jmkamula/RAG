@@ -1,0 +1,17 @@
+must_id: item:A.6.3:rev_register_update
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Changes propagated to the curriculum / register / scope with reference to this review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and summary of the most recent awareness programme review in a central log or register.
+- Document specific changes made to the awareness curriculum, register, or scope as a direct result of
+  the review, citing the review date.
+- Cross-reference each change in the curriculum or register to the corresponding review finding or recommendation.
+- Name the individual who approved the curriculum updates, ensuring the approver is a specific person,
+  not a group or department.
+- Retain copies of both the pre- and post-review curriculum versions to show what was updated following
+  the review.

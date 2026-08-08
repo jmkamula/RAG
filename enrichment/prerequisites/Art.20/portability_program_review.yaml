@@ -1,0 +1,31 @@
+leaf_id: req:Art.20:portability_program_review
+control_ref: Art.20
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date inventory of processing activities to determine which data and systems
+    are subject to data portability. Without this, you can't reliably review applicability or ensure coverage.
+  good_enough: A current, reasonably complete RoPA that lists all relevant processing activities and systems,
+    even if some minor updates are pending.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: direct
+  rationale: Portability rights only apply to personal data processed on certain lawful bases (consent
+    or contract). You must know and document these bases to review applicability decisions.
+  good_enough: A documented mapping of lawful bases for each processing activity, with at least those
+    involving data subjects' requests clearly identified.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If a DPO is required, they must be involved in annual reviews of data subject rights processes,
+    including portability. Their oversight ensures legal and procedural consistency.
+  good_enough: A named DPO (or documented rationale for not appointing one), with evidence they are looped
+    into review processes.

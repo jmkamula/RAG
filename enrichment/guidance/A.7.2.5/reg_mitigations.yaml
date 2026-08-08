@@ -1,0 +1,19 @@
+must_id: item:A.7.2.5:reg_mitigations
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: Mitigations summary per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each completed Privacy Impact Assessment or Data Protection Impact Assessment in the register,
+  including a unique identifier and completion date.
+- Summarize the specific mitigation actions decided for each assessment in a dedicated column, using clear
+  and concise language.
+- Name the responsible individual for implementing each mitigation, avoiding generic titles like "the
+  team" or "IT department".
+- Record the date when each mitigation action was approved or signed off, referencing supporting documentation
+  where available.
+- Review the register regularly to confirm that every row includes a mitigation summary; do not leave
+  mitigation columns blank or marked "N/A" without justification.

@@ -1,0 +1,42 @@
+leaf_id: req:A.8.28:secure_coding_procedure
+control_ref: A.8.28
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.8.25
+  standard_id: ISO27001:2022
+  title: Secure development life cycle
+  category: direct
+  rationale: Secure coding procedures must align with the overall secure development life cycle (SDLC)
+    to ensure coding practices are embedded throughout development. Without an established SDLC, secure
+    coding standards may be inconsistently applied or lack organizational support.
+  good_enough: The SDLC should be documented and include at least basic requirements for integrating security
+    into development activities.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The secure coding procedure must clearly apply to the correct systems, teams, and software
+    types. Without a defined ISMS scope, it’s unclear which development activities and codebases the procedure
+    should cover.
+  good_enough: The ISMS scope statement should exist and identify which products, services, and teams
+    are in-scope for information security controls.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Secure coding procedures require defined roles for developers, reviewers, and approvers.
+    If responsibilities aren’t assigned, the procedure cannot be effectively implemented or enforced.
+  good_enough: Key roles for secure development (e.g., developers, reviewers) should be named and their
+    responsibilities outlined, even if detailed RACI matrices are pending.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Secure coding standards often depend on the classification of data handled by applications
+    (e.g., sensitive vs. public). Without a classification scheme, it’s difficult to tailor coding requirements
+    to risk.
+  good_enough: A basic data classification scheme should be in place and referenced by development teams,
+    even if not all assets are fully classified yet.

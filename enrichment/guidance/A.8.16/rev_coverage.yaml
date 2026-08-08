@@ -1,0 +1,18 @@
+must_id: item:A.8.16:rev_coverage
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Coverage check against threat-mapping (any uncovered MITRE technique surfaced)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all MITRE ATT&CK techniques relevant to your environment in a dated register, including those not
+  currently monitored.
+- Cross-reference each periodic monitoring control with the mapped MITRE techniques, noting any techniques
+  not covered by existing controls.
+- Document any uncovered MITRE techniques in a separate section of the review report, including the date
+  and responsible reviewer.
+- Name the reviewer as a specific individual, not a team or department, in the review documentation.
+- Record management approval of the review findings and any action plans for uncovered techniques, including
+  signatures and dates.

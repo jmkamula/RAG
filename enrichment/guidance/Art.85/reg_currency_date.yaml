@@ -1,0 +1,17 @@
+must_id: item:Art.85:reg_currency_date
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: Per-row as-of-date of the national-law citation (proves the law cited is still in force)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the as-of date for each national law citation in the register, showing when the law was last
+  checked for validity.
+- Cross-reference each citation with an official government or legislative source, and note the source
+  and date accessed in the same row.
+- Name the reviewer who confirmed the law's current status, listing a specific individual rather than
+  a team or department.
+- Update the register promptly if a law changes, and retain the previous entry with its as-of date for
+  historical traceability.

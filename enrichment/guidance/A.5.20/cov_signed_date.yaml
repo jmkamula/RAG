@@ -1,0 +1,15 @@
+must_id: item:A.5.20:cov_signed_date
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Signed-date of the active agreement per supplier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each supplier in the Supplier Agreement Coverage Register with their full legal name and unique
+  identifier.
+- Record the signed date of the current, active agreement next to each supplier entry in the register.
+- Attach a copy of the signed agreement showing the signature and date for each supplier listed.
+- Name the individual responsible for maintaining and updating the register, not a generic team or department.
+- Review the register quarterly and update any expired or replaced agreements with new signed dates.

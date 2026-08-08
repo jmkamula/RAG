@@ -1,0 +1,18 @@
+must_id: item:B.8.5.8:reg_resolution
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+must_text: Resolution per row where objection raised
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each subcontractor change in the register with a unique entry, including the date and person
+  responsible for the change.
+- Document any objections raised for each entry, naming the individual who raised the objection and the
+  date it was recorded.
+- State the resolution for every objection directly in the same row, including the decision, date resolved,
+  and the person who approved the resolution.
+- Name the resolver as a specific individual, not as a team or department, to avoid ambiguity in accountability.
+- Retain supporting evidence for each resolution, such as email correspondence or meeting minutes, linked
+  to the relevant register entry.

@@ -1,0 +1,17 @@
+must_id: item:A.5.29:act_activation_id
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Activation identifier per record (unique, sequenced)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique activation identifier to each Per-Activation Plan Record using a sequenced numbering
+  system that cannot be reused or duplicated.
+- Record the assigned activation identifier in a dedicated field within each Per-Activation Plan Record,
+  ensuring it is visible and unambiguous.
+- Cross-reference the activation identifier in related documentation, such as incident logs or test results,
+  to support traceability.
+- Confirm that no Per-Activation Plan Record is missing an activation identifier or uses a generic label
+  such as "N/A" or "TBD".

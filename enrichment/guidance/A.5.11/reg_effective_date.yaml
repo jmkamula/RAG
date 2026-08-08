@@ -1,0 +1,16 @@
+must_id: item:A.5.11:reg_effective_date
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Effective date per row (last working day or role-change date — drives return-deadline calculations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the effective date for each leaver or role change in a dedicated column on the Asset Return Register.
+- State the last working day or official role-change date as the effective date, not the date the register
+  entry was made.
+- Cross-reference the effective date with supporting HR documentation, such as resignation letters or
+  contract change notices.
+- Name the responsible manager who verified the effective date for each entry, avoiding generic titles
+  like "HR team" or "IT department".

@@ -1,0 +1,17 @@
+must_id: item:A.5.32:intake_a519_link
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Cross-link to A.5.19 supplier risk — supplier-supplied IPR follows the supplier-onboarding
+  flow
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the Acquired Works Intake Upstream record to the supplier risk assessment documented
+  under A.5.19, using a unique supplier identifier.
+- Document the intellectual property rights (IPR) status for each acquired work, showing it follows the
+  same review steps as supplier onboarding.
+- Name the individual responsible for verifying that supplier-supplied IPR is tracked through the supplier-onboarding
+  flow, not a generic team or department.
+- Record the date when the cross-link between acquired works and supplier risk was last reviewed or updated.

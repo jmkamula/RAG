@@ -1,0 +1,16 @@
+must_id: item:A.8.32:scope_change_drivers
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new system class, new automation pattern)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific events that require re-scoping, such as introduction of a new system class or adoption
+  of a new automation pattern, in a dated document.
+- Assign responsibility for monitoring these triggers to a named individual, not a generic team or department.
+- Reference the trigger list in your change management procedure and include a version number and approval
+  date.
+- Review and update the trigger list at least annually, recording the review date and reviewer’s name
+  each time.

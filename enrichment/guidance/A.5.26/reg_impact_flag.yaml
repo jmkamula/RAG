@@ -1,0 +1,14 @@
+must_id: item:A.5.26:reg_impact_flag
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Public-facing or regulator-relevant impact flag per row (drives notification path)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to the incident register to flag whether each incident has public-facing or regulator-relevant
+  impact.
+- Record for each incident row whether external notification is required, based on the impact flag.
+- Name the person who assessed and set the impact flag for each incident, not just a team or department.
+- Date the impact assessment entry for each incident to show when the decision was made.

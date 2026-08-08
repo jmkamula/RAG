@@ -1,0 +1,20 @@
+must_id: item:A.5.28:retention
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Retention period stated, driven by legal/regulatory obligations and case status (open investigations
+  override default schedule)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the retention period for each evidence type in the procedure, referencing the specific law, regulation,
+  or contractual obligation that applies.
+- Document how the retention period is extended if the evidence relates to an open investigation or legal
+  case, overriding the default schedule.
+- Name the person responsible for monitoring case status changes and updating evidence retention periods,
+  identifying them by full name and job title.
+- Record the date the procedure was last reviewed and updated, showing that legal and regulatory requirements
+  were checked for changes.
+- Specify retention periods as exact durations or dates—do not use vague terms like "as needed" or "until
+  no longer required."

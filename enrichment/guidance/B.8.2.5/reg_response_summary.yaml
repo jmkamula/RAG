@@ -1,0 +1,18 @@
+must_id: item:B.8.2.5:reg_response_summary
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: Response summary per row (what was shared / rationale for redaction if any)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a clear summary of the information provided or withheld for each customer audit request directly
+  in the register row.
+- State the specific reason for any redaction or withholding of information, referencing relevant policy
+  or legal basis in the same row.
+- Name the individual who approved the response for each request, ensuring the entry is not left blank
+  or attributed to a group.
+- Date each entry to show when the response was completed and recorded in the register.
+- Attach supporting documents or correspondence for each request by cross-referencing file locations or
+  unique document IDs in the register.

@@ -1,0 +1,19 @@
+must_id: item:A.8.19:rev_allowlist_effectiveness
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Allowlist-enforcement effectiveness review (unauthorised-install attempt rate)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the dates and results of each periodic review of allowlist-enforcement effectiveness, including
+  any detected unauthorised installation attempts.
+- Record the number and nature of unauthorised installation attempts identified during the review period,
+  along with supporting system logs or alerts.
+- Name the reviewer as a specific individual who conducted the effectiveness review, not a generic role
+  or team.
+- State any corrective actions taken in response to detected unauthorised attempts, including who approved
+  and implemented each action.
+- Retain evidence of the review, such as signed meeting minutes or a completed checklist, showing the
+  review was performed as scheduled.

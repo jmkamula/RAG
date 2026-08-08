@@ -1,0 +1,19 @@
+must_id: item:A.7.3.8:reg_scope_summary
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Scope summary per row (what PII was included)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific types of personal data included in each copy request directly in the corresponding
+  row of the Copy Request Register.
+- Name the categories of personal data using clear, descriptive terms such as "passport number" or "email
+  address" rather than generic labels like "PII."
+- State the purpose for which each type of personal data was included in the copy request, referencing
+  the relevant business process or legal basis.
+- Confirm that each entry is dated and linked to the individual requestor, allowing traceability for every
+  data copy request.
+- Avoid leaving the scope field blank or using vague descriptions such as "all data"—specify exactly what
+  personal data was included.

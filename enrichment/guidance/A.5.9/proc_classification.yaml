@@ -1,0 +1,18 @@
+must_id: item:A.5.9:proc_classification
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Classification at creation and on material change (cross-link to A.5.12)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for classifying assets at the point of creation, including who is responsible and
+  how the classification is recorded.
+- Record each asset’s classification decision with the name of the person assigning the classification
+  and the date it was set.
+- Update and re-document the asset’s classification whenever there is a material change, capturing the
+  date and the person making the update.
+- Cross-reference the classification process in your procedure to the requirements set out in your Information
+  Classification Policy under control A.5.12.
+- Name the asset classification owner as a specific individual, not as a team or department.

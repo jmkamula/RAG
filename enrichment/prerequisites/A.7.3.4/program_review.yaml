@@ -1,0 +1,47 @@
+leaf_id: req:A.7.3.4:program_review
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You need to know the specific purposes for which personal data is processed before you can
+    review whether withdrawal channels and mechanisms are appropriate and effective for each purpose.
+  good_enough: A documented list of processing purposes that is up-to-date and covers all relevant activities
+    is sufficient to proceed.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity is essential to determine where
+    consent withdrawal must be supported and reviewed.
+  good_enough: A mapping of processing activities to their lawful bases, with clear identification of
+    those relying on consent, is enough to unblock the review.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement ensures you are reviewing withdrawal mechanisms for all in-scope systems
+    and processes, avoiding gaps or overreach.
+  good_enough: A current scope statement that defines which business units, systems, and data flows are
+    included in the ISMS and privacy extension.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that the right people are accountable for maintaining,
+    operating, and reviewing withdrawal processes.
+  good_enough: A documented assignment of responsibilities for privacy and consent management, even if
+    not fully optimized, is sufficient for review purposes.
+- ref: Art.7
+  standard_id: GDPR:2016/679
+  title: Conditions for Consent
+  category: cross_role
+  rationale: GDPR Article 7 sets the legal requirements for consent withdrawal, which the review must
+    measure against to ensure compliance.
+  good_enough: A summary of Article 7 requirements and how they apply to your organization’s consent processes
+    is enough to guide the review.

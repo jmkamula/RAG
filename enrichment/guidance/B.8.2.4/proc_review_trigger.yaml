@@ -1,0 +1,20 @@
+must_id: item:B.8.2.4:proc_review_trigger
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Review trigger — which channels raise potential infringement (support / legal / engineering
+  / compliance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all internal and external channels where potential data protection infringements can be reported,
+  such as support tickets, legal queries, engineering alerts, and compliance reviews.
+- Document the process for reviewing notifications from each channel, including who is responsible and
+  how notifications are escalated.
+- Name the specific individual or role assigned to monitor each channel, avoiding generic titles like
+  "the team" or "department."
+- Record the date of the most recent review of the notification procedure, showing that the process is
+  kept current.
+- State how the organization forms its opinion on whether an instruction is infringing, referencing documented
+  criteria or decision records.

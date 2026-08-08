@@ -1,0 +1,18 @@
+must_id: item:A.7.4.3:proc_up_to_date_check
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: Up-to-date check cadence per PII category (e.g. contact details refresh cadence)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each category of personal data you process and assign a named individual responsible for maintaining
+  its accuracy.
+- Document the specific frequency for checking and updating each data category, such as "contact details
+  reviewed every six months," in your procedure.
+- Record the date of the most recent accuracy check for each data category in a log or tracking system.
+- Attach evidence of completed checks, such as signed review logs or update confirmation emails, for auditor
+  inspection.
+- Specify the cadence as an explicit time frame—avoid vague terms like "regularly" or "as needed" that
+  lack clear evidence.

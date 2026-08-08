@@ -1,0 +1,48 @@
+leaf_id: req:B.8.5.8:applicable_scope
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know the overall boundaries of your ISMS to determine which subcontractor changes
+    fall within the privacy extension's remit. This ensures the change scope aligns with the organisation's
+    defined information security boundaries.
+  good_enough: A documented ISMS scope that clearly states the organisational units, assets, and processes
+    covered is available and up to date.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles and responsibilities ensures that the right people are involved
+    in assessing and approving subcontractor changes, and that privacy obligations are not overlooked.
+  good_enough: A basic roles and responsibilities matrix or list exists, showing who is accountable for
+    subcontractor management and privacy controls.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: Understanding and documenting the purposes for which personal data is processed is essential
+    to determine if a subcontractor change affects privacy-relevant processing activities.
+  good_enough: A summary of processing purposes is documented for all relevant data flows, even if not
+    fully detailed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register helps identify which information assets (including data and
+    systems) are impacted by subcontractor changes, ensuring the scope note is accurate.
+  good_enough: A working list of key information assets, including those managed by subcontractors, is
+    available and reasonably current.
+- ref: B.8.5.7
+  standard_id: ISO27701:2019
+  title: Subcontractor Engagement (Specific Authorisation)
+  category: direct
+  rationale: You must distinguish between changes that require general versus specific authorisation.
+    The process for specific authorisation must be defined to avoid overlap or gaps.
+  good_enough: A documented process or decision rule exists for handling specific-authorisation subcontractor
+    changes, even if not fully operational.

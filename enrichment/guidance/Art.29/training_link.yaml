@@ -1,0 +1,17 @@
+must_id: item:Art.29:training_link
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Link to A.6.3 / A.7.3 awareness training for personnel under authority
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the Processing Under Authority Procedure to the specific sections of your awareness
+  training materials that address A.6.3 and A.7.3.
+- Document the date and version of the awareness training program currently in use and referenced in the
+  procedure.
+- Name the individual responsible for maintaining the link between the procedure and the training content.
+- Attach a copy or screenshot of the relevant training completion records for personnel covered by the
+  procedure.
+- Specify the training owner as a named person, not a generic role or department.

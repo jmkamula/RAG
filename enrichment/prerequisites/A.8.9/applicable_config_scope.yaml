@@ -1,0 +1,42 @@
+leaf_id: req:A.8.9:applicable_config_scope
+control_ref: A.8.9
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope statement defines which parts of the organization and which assets are covered
+    by the information security management system. You can't determine which assets require configuration
+    management until you know what is in scope.
+  good_enough: A clear, documented scope statement that identifies the organizational boundaries and asset
+    types included in the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register is essential to identify which assets exist, their ownership,
+    and their relevance to configuration management. Without this, you can't allocate assets to baseline,
+    vendor-managed, or exception-managed categories.
+  good_enough: A current list of information assets, with enough detail to distinguish asset classes and
+    ownership.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The classification scheme helps determine the criticality and sensitivity of assets, which
+    influences how configuration management controls are applied. This is needed to justify why certain
+    assets are baseline-managed or exception-managed.
+  good_enough: A documented scheme that assigns classification levels to asset types, even if not all
+    assets are fully classified yet.
+- ref: A.5.19
+  standard_id: ISO27001:2022
+  title: Supplier Relationships
+  category: direct
+  rationale: If some assets are vendor-managed, you need to know which suppliers are responsible for configuration
+    management under contractual arrangements. This ensures correct delegation and avoids unmanaged gaps.
+  good_enough: A list or summary of supplier-managed assets and the relevant supplier agreements covering
+    configuration responsibilities.

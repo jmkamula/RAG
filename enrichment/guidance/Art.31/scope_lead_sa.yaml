@@ -1,0 +1,17 @@
+must_id: item:Art.31:scope_lead_sa
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Lead supervisory authority identified
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the lead supervisory authority by its official title and country in a written record approved by
+  your Data Protection Officer.
+- Document the criteria used to determine the lead supervisory authority, referencing the relevant processing
+  activities and establishment locations.
+- Record the date the lead supervisory authority was identified and the individual responsible for this
+  determination.
+- Name the lead supervisory authority as a specific authority, not generically as "local regulator" or
+  "EU authority".

@@ -1,0 +1,17 @@
+must_id: item:Art.44:reg_assessed_date
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Per-row last-assessed date (drives staleness)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a "last assessed" date column to your International Transfer Register to track when each transfer
+  entry was most recently reviewed.
+- Record the specific date of the latest assessment for each transfer row, using a standard date format
+  such as YYYY-MM-DD.
+- Name the person who performed the most recent assessment for each row, avoiding generic entries like
+  "team" or "department".
+- Review the register regularly and update the "last assessed" date for any transfer that has been re-evaluated
+  or changed.

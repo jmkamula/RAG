@@ -1,0 +1,17 @@
+must_id: item:B.8.5.7:rev_flowdown_audit
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+must_text: Flow-down audit — sampled contracts verified against Annex B coverage
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of active subcontractor contracts and list them in a dated review log.
+- Cross-reference each sampled contract against every relevant Annex B requirement, recording specific
+  clauses or evidence for each item.
+- Document the name and role of the individual who performed the contract review, including the review
+  date.
+- Attach copies or extracts of contract sections that demonstrate Annex B coverage for each sampled contract.
+- Name the reviewer as a specific person — do not use generic titles like "Procurement Team" or "Legal
+  Department".

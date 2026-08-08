@@ -1,0 +1,19 @@
+must_id: item:6.3:reg_approval
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Per-row approval signature + date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each planned change in the ISMS Change Register with a clear description and unique identifier
+  for traceability.
+- Assign a specific individual as the approver for each change, listing their full name and job title
+  in the register.
+- Sign and date each change entry in the register upon approval, using a handwritten or secure digital
+  signature.
+- Avoid leaving any approval row unsigned or undated, as missing signatures or dates will be flagged by
+  an auditor.
+- Retain all signed and dated approval records in the register for the duration specified in your document
+  retention policy.

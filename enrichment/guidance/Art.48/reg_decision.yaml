@@ -1,0 +1,17 @@
+must_id: item:Art.48:reg_decision
+control_ref: Art.48
+standard_id: GDPR:2016/679
+must_text: Per-row decision (disclosed / partially-disclosed / refused)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the decision for each foreign authority request in the register as "disclosed," "partially-disclosed,"
+  or "refused," with no blank entries.
+- State the reason for each decision in a dedicated column, referencing supporting documentation or correspondence
+  where applicable.
+- Name the individual who made or approved each decision, using their full name rather than a generic
+  title or team name.
+- Enter the date the decision was made for each request, ensuring all entries are current and not left
+  undated.

@@ -1,0 +1,19 @@
+must_id: item:A.5.17:reg_mfa_required
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: MFA factor requirement per row where applicable (which factor classes; tied to access tier)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the required multi-factor authentication (MFA) factor classes for each credential entry in the
+  register, matching the access tier assigned.
+- Cross-reference each credential’s access tier with your documented MFA policy to confirm alignment with
+  your organisation’s MFA requirements.
+- Name the owner responsible for maintaining and updating the credential register as a specific individual,
+  not a group or department.
+- Date each entry or update in the credential register to show when MFA requirements were last reviewed
+  or changed.
+- Avoid leaving MFA requirement fields blank or using generic terms like "as needed"; specify the exact
+  factor classes required for each credential.

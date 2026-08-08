@@ -1,0 +1,19 @@
+must_id: item:A.8.21:reg_sla_performance
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Per-row SLA performance vs baseline
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the agreed service level baseline for each network service in the register, including measurable
+  targets such as uptime or response time.
+- Document actual performance data for each network service, with dates and metrics that match the baseline
+  targets.
+- Cross-reference each row with monitoring reports or dashboards that show service performance over the
+  relevant period.
+- Name the person responsible for reviewing SLA performance for each network service, using a specific
+  individual rather than a team or department.
+- State any deviations from the baseline in the register, including the date identified and actions taken
+  to address the issue.

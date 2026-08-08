@@ -1,0 +1,17 @@
+must_id: item:A.7.3.10:scope_subject_facing_only
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Scope focus — subject-facing obligations only (system-side governance stays with Art.22 procedure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in writing which automated decisions directly affect individuals, listing each system or process
+  by name and date of assessment.
+- Document only subject-facing obligations in your scope statement, excluding system-side governance measures
+  that are handled under Article 22 procedures.
+- Cross-reference your scope document with the Article 22 procedure to confirm there is no overlap or
+  duplication between the two.
+- Name a specific individual responsible for maintaining and updating the automated decision scope, not
+  a team or department.

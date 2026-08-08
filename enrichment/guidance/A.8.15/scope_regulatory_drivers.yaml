@@ -1,0 +1,19 @@
+must_id: item:A.8.15:scope_regulatory_drivers
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Per-class regulatory drivers (PCI / HIPAA / GDPR Art.30 / DORA / sector audit)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each system or data class in scope for logging, referencing its unique identifier and location
+  in your asset register.
+- Document the specific regulation or law (e.g., PCI DSS, HIPAA, GDPR Article 30, DORA) that applies to
+  each system or data class.
+- State the logging requirements for each class, quoting the relevant regulatory clause or section for
+  traceability.
+- Name the responsible individual for maintaining and updating the logging scope — do not use a team or
+  department name.
+- Record the date of the last review or update to the logging scope, and retain evidence of management
+  approval.

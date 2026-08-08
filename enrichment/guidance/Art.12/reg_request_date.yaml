@@ -1,0 +1,17 @@
+must_id: item:Art.12:reg_request_date
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Per-row request received date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each rights request is received in a dedicated column for every entry in the Rights
+  Request Register.
+- Cross-reference each request entry with the original communication or intake form to confirm the accuracy
+  of the received date.
+- Name the staff member responsible for logging received dates, ensuring a specific individual is listed
+  rather than a team or department.
+- Review the register regularly to verify that no request entry is missing a received date or contains
+  placeholder text like "TBC" or "unknown".

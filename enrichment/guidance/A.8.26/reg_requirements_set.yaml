@@ -1,0 +1,17 @@
+must_id: item:A.8.26:reg_requirements_set
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Per-row requirements set applied (which categories from the procedure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each application security requirement row with the specific category or categories from
+  your documented application security procedure.
+- Record the date and name of the person assigning each requirement to its category, ensuring traceability
+  for every entry.
+- Document any requirement that does not clearly map to a category, and update the procedure or register
+  to resolve the gap.
+- Name the categories using the exact terms from your procedure, avoiding generic labels or undefined
+  abbreviations.

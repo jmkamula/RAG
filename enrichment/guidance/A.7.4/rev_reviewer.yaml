@@ -1,0 +1,17 @@
+must_id: item:A.7.4:rev_reviewer
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Facilities + SOC + InfoSec)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer for each area—Facilities, Security Operations Center, and Information Security—as
+  a specific individual, not a team or department.
+- Record the date each reviewer completed their section of the periodic monitoring program review in the
+  official review log.
+- Document each reviewer’s signature or electronic approval on the finalized review report to confirm
+  their participation.
+- Cross-reference the review log with the monitoring program to show all required areas were covered by
+  the designated reviewers.

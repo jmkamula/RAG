@@ -1,0 +1,17 @@
+must_id: item:A.8.20:rev_findings_update
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Findings propagated to policy / register / scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each finding from the network program review in a dated log, referencing the specific review
+  session and responsible reviewer.
+- Cross-reference each finding to the relevant policy, asset register, or scope document, noting the exact
+  section or entry updated.
+- Document the specific changes made to policies, registers, or scope as a result of each finding, including
+  the date and approver’s name.
+- Name the individual responsible for updating each document, avoiding generic roles such as "IT team"
+  or "management".

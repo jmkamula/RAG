@@ -1,0 +1,15 @@
+must_id: item:A.7.2.6:reg_contract_reference
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Executed contract reference (document + version + signature date)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full title and version number of each executed PII processor contract in the contract register.
+- Enter the unique document reference or identifier for each contract to allow precise retrieval if requested.
+- State the signature date for each contract as shown on the signed document, not the contract start date.
+- Name the individual who signed the contract on behalf of your organisation, avoiding generic roles or
+  team names.
+- Attach or cross-reference the signed contract file in the register to provide direct evidence of execution.

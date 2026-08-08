@@ -1,0 +1,16 @@
+must_id: item:A.8.14:rev_date
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the redundancy program in a dated log or register.
+- State the planned review interval for the redundancy program in a documented schedule or policy.
+- Confirm the next scheduled review date is within the documented interval by cross-referencing the last
+  review date and the planned interval.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Retain evidence of the completed review, such as a signed review report or meeting minutes, with the
+  review date clearly visible.

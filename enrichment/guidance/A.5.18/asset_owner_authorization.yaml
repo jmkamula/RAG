@@ -1,0 +1,18 @@
+must_id: item:A.5.18:asset_owner_authorization
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Asset owner authorization required before access is granted (named authoriser per asset class,
+  not generic 'IT manager')
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the authoriser for each asset class as a specific individual in the procedure, not as a generic
+  role like "IT manager".
+- Document the date and method of each asset owner's authorisation before granting access, attaching the
+  record to the access request.
+- Cross-reference each access approval to the relevant asset register entry, showing the asset class and
+  named owner.
+- Retain signed or digitally approved authorisation records for all access requests, ensuring they are
+  available for auditor review.

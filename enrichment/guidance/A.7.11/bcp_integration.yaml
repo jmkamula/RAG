@@ -1,0 +1,17 @@
+must_id: item:A.7.11:bcp_integration
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: BCP integration (utility-failure scenarios feed A.5.29/A.5.30 BCP plans)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each utility-failure scenario in the Supporting Utilities Continuity Procedure to the
+  relevant section in your Business Continuity Plans for A.5.29 and A.5.30.
+- Document the date and name of the person who reviewed and confirmed that all utility-failure scenarios
+  are included in the BCP integration.
+- Attach evidence of the latest BCP update that incorporates utility-failure scenarios, such as a version-controlled
+  document or change log entry.
+- Name the BCP integration owner as a specific individual, not a team or department, in both the procedure
+  and BCP documentation.

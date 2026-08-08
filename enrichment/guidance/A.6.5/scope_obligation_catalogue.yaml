@@ -1,0 +1,16 @@
+must_id: item:A.6.5:scope_obligation_catalogue
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Obligation catalogue enumerated (confidentiality / IP / non-disparagement / non-poach / non-compete
+  / cooperation-with-investigations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each surviving obligation individually in your catalogue, specifying confidentiality, intellectual
+  property, non-disparagement, non-poach, non-compete, and cooperation-with-investigations.
+- Name the owner responsible for maintaining and updating the obligation catalogue as a specific individual,
+  not a team or department.
+- Record the date when the obligation catalogue was last reviewed and updated.
+- Cross-reference each obligation in the catalogue to the relevant contract clause or policy document.

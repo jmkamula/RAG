@@ -1,0 +1,47 @@
+leaf_id: req:A.6.3:security_awareness_programme
+control_ref: A.6.3
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which personnel, business units, and processes are included in
+    the ISMS, directly determining who must be covered by the security awareness programme.
+  good_enough: A documented scope that clearly lists included departments, roles, and locations is available
+    and referenced.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The security policy sets the high-level expectations and principles that the awareness programme
+    must communicate and reinforce.
+  good_enough: A current, approved information security policy exists and is accessible for reference
+    in training materials.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and Responsibilities
+  category: foundational
+  rationale: Defined roles and responsibilities are needed to tailor training content to specific job
+    functions and ensure the right people receive the right training.
+  good_enough: A list or matrix of information security roles and their key responsibilities is documented
+    and available.
+- ref: A.6.2
+  standard_id: ISO27001:2022
+  title: Terms and Conditions of Employment
+  category: direct
+  rationale: Security obligations and expectations are typically introduced during onboarding, so terms
+    of employment must be defined before training requirements can be set.
+  good_enough: Standard terms of employment include information security clauses and are in use for new
+    hires.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: The classification scheme informs staff about how to handle different types of information,
+    which is a core topic in security awareness training.
+  good_enough: A documented and communicated information classification scheme exists, even if not yet
+    fully embedded.

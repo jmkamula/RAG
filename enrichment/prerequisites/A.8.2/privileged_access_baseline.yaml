@@ -1,0 +1,47 @@
+leaf_id: req:A.8.2:privileged_access_baseline
+control_ref: A.8.2
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.15
+  standard_id: ISO27001:2022
+  title: Access control
+  category: direct
+  rationale: The access-control policy sets the overall rules for granting and managing access, which
+    directly informs the privileged-access baseline. Without this, you cannot define what "privileged"
+    means or how it should be controlled.
+  good_enough: A documented, approved access-control policy that covers user types, access levels, and
+    approval processes.
+- ref: A.5.3
+  standard_id: ISO27001:2022
+  title: Segregation of duties
+  category: direct
+  rationale: Segregation of duties ensures that no single person has unchecked privileged access, which
+    must be reflected in the privileged-access baseline. This prevents conflicts of interest and reduces
+    risk of misuse.
+  good_enough: A clear mapping of critical duties and the controls in place to prevent conflicting privileges.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You need to know which systems and assets exist before you can define who should have privileged
+    access to them. The asset register provides this inventory.
+  good_enough: An up-to-date list of key systems and assets that require privileged access, even if not
+    fully exhaustive.
+- ref: A.8.18
+  standard_id: ISO27001:2022
+  title: Use of privileged utility programs
+  category: direct
+  rationale: The use of privileged utility programs must be governed by the privileged-access baseline.
+    Understanding current usage is necessary to set appropriate controls.
+  good_enough: A basic inventory or list of privileged utility programs in use and who can access them.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Defining privileged roles requires clarity on organisational roles and responsibilities.
+    This ensures the right people are assigned and accountable for privileged access.
+  good_enough: A documented list of roles with assigned responsibilities, especially those related to
+    system administration or privileged functions.

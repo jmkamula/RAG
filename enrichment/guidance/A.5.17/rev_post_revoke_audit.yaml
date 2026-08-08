@@ -1,0 +1,20 @@
+must_id: item:A.5.17:rev_post_revoke_audit
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Post-revocation verification window noted (e.g. 7-day check that no stale auth attempts using
+  the revoked credential succeed)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time when each credential is revoked in a central log, including the responsible
+  person's name.
+- State the length of the verification window after revocation (e.g. "7 days") in the revocation record
+  for each credential.
+- Document the results of post-revocation checks, showing whether any authentication attempts using the
+  revoked credential occurred during the verification window.
+- Name the individual who performed the post-revocation verification, ensuring this is a specific person
+  and not a team or generic role.
+- Retain evidence of any follow-up actions taken if stale authentication attempts were detected within
+  the verification window.

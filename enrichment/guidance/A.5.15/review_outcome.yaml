@@ -1,0 +1,19 @@
+must_id: item:A.5.15:review_outcome
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Outcome captured (no change / amended / re-issued) with rationale per amendment
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the periodic review of the Access Control Policy and record their
+  name and review date in the policy document.
+- Document the review outcome as "no change," "amended," or "re-issued" in a dedicated section of the
+  policy, including the date of decision.
+- State the rationale for each outcome or amendment, providing a brief explanation for any changes or
+  confirmation of continued suitability.
+- Record all amendments with a summary of changes and reference the specific policy sections updated,
+  avoiding generic statements like "minor updates."
+- Obtain a dated sign-off from the designated approver confirming the review outcome and rationale before
+  finalizing the policy document.

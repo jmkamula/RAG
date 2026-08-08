@@ -1,0 +1,16 @@
+must_id: item:Art.42:reg_surveillance_dates
+control_ref: Art.42
+standard_id: GDPR:2016/679
+must_text: Per-row surveillance audit dates
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of each surveillance audit directly in the corresponding row of the Certification Register.
+- Name the auditor or audit team responsible for each surveillance audit in the same row as the audit
+  date.
+- Retain evidence of the completed surveillance audit, such as a signed audit report, and reference its
+  location in the register entry.
+- Enter actual audit dates, not planned or estimated dates, to avoid auditor concerns about inaccurate
+  or misleading records.

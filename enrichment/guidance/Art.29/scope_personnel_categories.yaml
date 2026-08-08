@@ -1,0 +1,16 @@
+must_id: item:Art.29:scope_personnel_categories
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Personnel categories in scope (employees + contractors + embedded third-party staff)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all categories of personnel with access to personal data, including employees, contractors, and
+  embedded third-party staff, in a dated document.
+- Name the owner responsible for maintaining the personnel categories as a specific individual, not a
+  team or department.
+- Cross-reference the documented personnel categories with current access control or HR records to confirm
+  accuracy.
+- Retain evidence of periodic reviews of personnel categories, including reviewer name and review date.

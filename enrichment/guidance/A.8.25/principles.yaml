@@ -1,0 +1,17 @@
+must_id: item:A.8.25:principles
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Security principles for software design (cross-link to A.8.27 architecture principles)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the security principles that guide software design decisions, referencing your Secure Architecture
+  Principles as required by control A.8.27.
+- Cross-reference each security principle in your Secure Development Lifecycle Policy to the corresponding
+  section of your Secure Architecture Principles document.
+- Name the policy owner as a specific individual, not a team or department, and record their contact details
+  in the policy header.
+- Record the date of the most recent policy review and approval, including the approver’s full name and
+  job title.

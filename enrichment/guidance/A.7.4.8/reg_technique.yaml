@@ -1,0 +1,18 @@
+must_id: item:A.7.4.8:reg_technique
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Technique per row (cryptographic erase / overwrite / degaussing / shredding / provider attestation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the disposal date, type of PII, and disposal technique used for each entry in the PII Disposal
+  Record Register.
+- Specify the exact disposal technique for each row, such as "cryptographic erase," "overwrite," "degaussing,"
+  "shredding," or "provider attestation."
+- Name the responsible individual who carried out or verified each disposal action, avoiding generic titles
+  like "IT team" or "staff."
+- Attach supporting evidence for each disposal event, such as a certificate of destruction or provider
+  attestation, where applicable.
+- Sign and date each register entry to confirm completion and accuracy of the recorded disposal technique.

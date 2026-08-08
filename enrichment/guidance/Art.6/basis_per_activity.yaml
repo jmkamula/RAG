@@ -1,0 +1,18 @@
+must_id: item:Art.6:basis_per_activity
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Chosen lawful basis named per activity (one of Art.6.1.a-f)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity in a register, using clear and specific descriptions rather than vague
+  or generic labels.
+- State the chosen lawful basis for each activity, referencing the exact letter (a-f) from Article 6.1
+  of the GDPR.
+- Name the individual who approved the lawful basis decision for each activity, avoiding group or department
+  names.
+- Record the date when the lawful basis was assigned or last reviewed for each processing activity.
+- Cross-reference supporting documentation, such as consent forms or contracts, that justify the selected
+  lawful basis for each activity.

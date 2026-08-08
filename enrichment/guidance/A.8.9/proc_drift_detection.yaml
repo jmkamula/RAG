@@ -1,0 +1,19 @@
+must_id: item:A.8.9:proc_drift_detection
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Drift detection from baseline (continuous; alerts when out of compliance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the configuration baseline by recording the approved settings for each critical system, including
+  the date and the responsible individual.
+- Assign a named person to monitor system configurations using automated tools that continuously compare
+  current states to the documented baseline.
+- Configure alerting mechanisms to generate and log notifications whenever a configuration drifts from
+  the approved baseline.
+- Record each drift incident with the timestamp, affected system, detected deviation, and actions taken
+  to resolve the issue.
+- Name the monitoring owner as a specific individual, not a group or department, to avoid ambiguity in
+  accountability.

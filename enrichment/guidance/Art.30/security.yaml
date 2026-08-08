@@ -1,0 +1,17 @@
+must_id: item:Art.30:security
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: General description of technical and organisational security measures
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific technical and organisational security measures in place, such as encryption, access
+  controls, and staff training, within the RoPA entry.
+- Name the individual responsible for maintaining and updating the description of security measures, ensuring
+  a clear point of accountability.
+- Record the date when the security measures were last reviewed or updated to demonstrate ongoing attention
+  to data protection.
+- Avoid using generic or boilerplate descriptions; tailor the security measures to reflect your actual
+  practices and systems.

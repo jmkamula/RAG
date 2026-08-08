@@ -1,0 +1,19 @@
+must_id: item:A.8.30:delivered_code_testing
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Security testing of delivered code (cross-link to A.8.29; vendor cannot be sole tester)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the security testing process for outsourced code, including steps, tools used, and responsible
+  roles, in the governance procedure.
+- Cross-reference the security testing requirements in your procedure to control A.8.29, showing alignment
+  with secure development practices.
+- Name a specific internal individual or team responsible for conducting or overseeing security tests,
+  ensuring the vendor is not listed as the sole tester.
+- Record the date and outcome of each security test performed on delivered code, including any remediation
+  actions taken.
+- Retain evidence of independent security testing, such as signed test reports or screenshots, to demonstrate
+  that testing was not performed by the vendor alone.

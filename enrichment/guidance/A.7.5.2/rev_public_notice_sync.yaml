@@ -1,0 +1,18 @@
+must_id: item:A.7.5.2:rev_public_notice_sync
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+must_text: Public notice sync — subject-facing destinations list matches register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the published destinations list on your website with the internal data transfer register
+  and note any differences in a dated review log.
+- Document the date and name of the person who last updated both the public list and the internal register
+  to show recent alignment.
+- Record the method and date of the most recent public notice update, such as a web page revision log
+  or announcement email.
+- Name the owner responsible for maintaining the destinations list as a specific individual, not a team
+  or generic role.
+- Retain a screenshot or PDF copy of the public destinations list as it appeared at the last review date.

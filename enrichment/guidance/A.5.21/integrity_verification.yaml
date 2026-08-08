@@ -1,0 +1,19 @@
+must_id: item:A.5.21:integrity_verification
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: Component integrity verification on delivery (signed firmware, signed packages, hash verification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for verifying the integrity of delivered components, including steps for checking
+  digital signatures or hashes, in your ICT Supply Chain Information Security Procedure.
+- Record the results of each integrity check, including the date, method used (e.g., hash, signature),
+  and the name of the person performing the check.
+- Retain evidence of the original supplier-provided hash or signature alongside your verification records
+  for each delivery.
+- Name the responsible individual for performing and recording component integrity checks—do not list
+  a team or department as the owner.
+- State the process for handling and reporting any failed integrity checks, including escalation steps
+  and notification requirements, in the procedure document.

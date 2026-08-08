@@ -1,0 +1,18 @@
+must_id: item:A.5.21:subsupplier_visibility
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: Sub-supplier visibility expectations (disclosure of components, fourth-party listing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that all direct suppliers must disclose the names and roles of their critical
+  sub-suppliers and key components used.
+- Document a process for collecting and updating a list of all disclosed sub-suppliers and fourth parties,
+  including the date of last update.
+- Assign responsibility for maintaining the sub-supplier list to a named individual, not a team or department.
+- Retain evidence of supplier communications where sub-supplier and component information was requested
+  and received, including dates and sender/recipient names.
+- Cross-reference the sub-supplier list in your risk register to show how fourth-party risks are identified
+  and tracked.

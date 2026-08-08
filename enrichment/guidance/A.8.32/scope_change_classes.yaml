@@ -1,0 +1,17 @@
+must_id: item:A.8.32:scope_change_classes
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Change classes enumerated with CM path per class (standard / normal / emergency / pre-approved)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of changes relevant to your environment, clearly labelling each as standard, normal,
+  emergency, or pre-approved.
+- Document the step-by-step change management process for each change class, referencing the exact procedure
+  or workflow location.
+- Name a specific individual as the owner responsible for maintaining and updating the change class list—avoid
+  using generic roles or teams.
+- Record the date when the change classes and their management paths were last reviewed and approved by
+  management.

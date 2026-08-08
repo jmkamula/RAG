@@ -1,0 +1,17 @@
+must_id: item:A.7.12:rev_register_update
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Changes propagated to the register / procedure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of each cabling program review in a change log maintained alongside the
+  cabling register.
+- Update the cabling register or procedure document with all approved changes, including references to
+  the review meeting minutes.
+- Name the individual responsible for updating the register after each review, ensuring a specific person
+  is listed—not a team or department.
+- Attach evidence of communication notifying relevant staff of the updated register or procedure, such
+  as an email or internal announcement.

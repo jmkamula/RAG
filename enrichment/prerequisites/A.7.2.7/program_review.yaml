@@ -1,0 +1,48 @@
+leaf_id: req:A.7.2.7:program_review
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organization and which processing activities
+    are covered by your ISMS and PIMS, ensuring joint controller arrangements are properly included in
+    the review.
+  good_enough: The scope must clearly mention all relevant joint controller relationships and data flows,
+    so you know which arrangements to review.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You need to know the specific purposes for which personal data is processed under each joint
+    arrangement to verify that documentation and publications are accurate and up to date.
+  good_enough: Each joint arrangement should have a documented, current statement of processing purposes,
+    even if high-level.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Reviewing joint controller arrangements requires knowing the lawful basis for each processing
+    activity, as this affects the arrangement's terms and public disclosures.
+  good_enough: Lawful bases must be identified and linked to each joint arrangement, even if not yet fully
+    mapped to every processing activity.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that someone is responsible for maintaining, reviewing,
+    and publishing joint controller arrangements and related information.
+  good_enough: There should be a named role or function responsible for joint controller management, even
+    if not yet fully resourced.
+- ref: Art.26
+  standard_id: GDPR:2016/679
+  title: Joint Controllers
+  category: cross_role
+  rationale: GDPR Article 26 sets the legal requirements for joint controller arrangements, including
+    the need for documented agreements and public information, which the review must verify.
+  good_enough: You must have identified which relationships are joint controllers under GDPR and have
+    at least draft agreements or arrangements in place.

@@ -1,0 +1,19 @@
+must_id: item:10.1:scope_internal_signals
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Internal signal sources in scope (9.1 measurements, 9.2 audit findings non-NC observations,
+  9.3 mgmt review decisions, 7.3 awareness assessment gaps)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all internal sources that can trigger improvements, including measurement results, audit findings,
+  management review decisions, and awareness assessment gaps, in a single document.
+- Name each source clearly and reference the specific clause or process where it originates, such as "9.1
+  measurement results" or "7.3 awareness assessment gaps".
+- Assign a responsible individual for maintaining the list of improvement triggers, avoiding generic roles
+  like "the team" or "management".
+- Date the document and update it whenever new internal signal sources are added or existing ones change.
+- Attach supporting records or links for each trigger source, such as recent audit reports or management
+  review minutes, to demonstrate their inclusion.

@@ -1,0 +1,18 @@
+must_id: item:B.8.3.1:rev_sla_audit
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+must_text: SLA audit — support responses measured against contract SLAs
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the agreed service level targets for support response times as stated in the signed contract,
+  including specific metrics and timeframes.
+- Record each support request, its timestamp, and the response time in a centralized log or ticketing
+  system.
+- Review the support log monthly and compare actual response times against the documented SLA targets,
+  noting any deviations.
+- Name the reviewer as a specific individual responsible for conducting and signing off on each SLA audit
+  report.
+- Retain dated audit reports and evidence of follow-up actions for any missed SLAs.

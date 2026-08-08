@@ -1,0 +1,19 @@
+must_id: item:B.8.5.8:scope_change_drivers
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+must_text: Trigger list (subprocessor churn / consolidation)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all subprocessors involved in processing personal data, including names, roles, and engagement
+  start dates, in a dated register.
+- Record each addition or removal of a subprocessor with the date of change and the individual authorizing
+  the update.
+- Document a trigger list that defines events requiring review of subprocessors, such as onboarding, offboarding,
+  or consolidation.
+- Name the owner responsible for maintaining the subprocessor register as a specific individual, not a
+  team or department.
+- Retain past versions of the subprocessor register to show historical changes and demonstrate ongoing
+  review.

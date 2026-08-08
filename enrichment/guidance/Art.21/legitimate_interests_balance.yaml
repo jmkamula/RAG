@@ -1,0 +1,19 @@
+must_id: item:Art.21:legitimate_interests_balance
+control_ref: Art.21
+standard_id: GDPR:2016/679
+must_text: Legitimate-interests objection — balancing test (compelling legitimate grounds OR establishment
+  of legal claims)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the legitimate interests pursued by your organisation in a written record, including the specific
+  purpose and legal basis for processing.
+- Record the balancing test assessment, detailing how the interests, rights, and freedoms of the individual
+  were weighed against your organisation’s interests.
+- State the compelling legitimate grounds or legal claims that justify continuing processing, with clear
+  reasoning and supporting evidence.
+- Name the decision-maker responsible for the balancing test as a specific individual, not a team or department.
+- Retain a dated copy of the objection response sent to the individual, referencing the outcome of the
+  balancing test.

@@ -1,0 +1,16 @@
+must_id: item:4.3:proc_approval
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Approval authority for the scope statement (top management)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual in top management who has authority to approve the ISMS scope statement in the documented
+  methodology.
+- Document the approval of the scope statement with a signed and dated record from the named top management
+  authority.
+- Attach the approved scope statement to the methodology, clearly showing the version and approval date.
+- Avoid listing a group or department as the approver; specify a single accountable person with decision-making
+  authority.

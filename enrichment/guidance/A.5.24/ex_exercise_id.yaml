@@ -1,0 +1,17 @@
+must_id: item:A.5.24:ex_exercise_id
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Exercise identifier per record (unique, sequenced)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique, sequential identifier to each exercise activation record before the exercise begins,
+  using a consistent numbering or coding format.
+- Record the assigned identifier on the activation record alongside the exercise date and title for clear
+  traceability.
+- Cross-reference the identifier in all related documentation, such as after-action reports and attendance
+  logs, to maintain linkage.
+- Name the person responsible for assigning and tracking identifiers as a specific individual, not a team
+  or department.

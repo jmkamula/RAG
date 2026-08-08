@@ -1,0 +1,17 @@
+must_id: item:A.5.22:rev_audit_trails
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Supplier audit trails / event records reviewed (operational problems, failures, disruption)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to review supplier audit trails and event records for operational problems,
+  failures, or disruptions at least annually.
+- Document the date, reviewer’s name, and summary of findings for each review in a dedicated supplier
+  review log.
+- Record any identified issues or incidents, along with actions taken or recommendations, in a traceable
+  incident register.
+- Attach supporting evidence such as screenshots or reports from supplier systems to each review entry.
+- Name the reviewer as a specific person, not a group or department, to avoid ambiguity in accountability.

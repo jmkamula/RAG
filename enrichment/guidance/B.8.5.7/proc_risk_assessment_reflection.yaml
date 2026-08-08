@@ -1,0 +1,19 @@
+must_id: item:B.8.5.7:proc_risk_assessment_reflection
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+must_text: Contract scope reflects risk assessment (§5.4.1.2) + subprocessing scope (§6.12)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference the most recent risk assessment when drafting each subcontractor contract and attach a copy
+  of the assessment to the contract file.
+- Specify the exact data processing activities and subprocessing allowed in the contract, matching the
+  scope identified in the risk assessment.
+- Name the contract owner as a specific individual responsible for verifying that the contract scope aligns
+  with both risk and subprocessing requirements.
+- Record the date and outcome of a documented review confirming that the contract’s scope matches the
+  risk assessment and subprocessing scope before contract approval.
+- Avoid using generic or template contract language that does not clearly reflect the unique risks and
+  subprocessing arrangements for each subcontractor.

@@ -1,0 +1,20 @@
+must_id: item:A.6.3:reg_phishing_sim_log
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Per-row phishing simulation participation log (separate from formal training — drives awareness
+  metrics)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each employee’s full name, unique identifier, and date of participation in every phishing simulation
+  in the register.
+- Document the specific phishing simulation scenario or campaign name for each entry to distinguish between
+  different awareness exercises.
+- State the outcome of each simulation attempt for every employee, such as “clicked link,” “reported,”
+  or “no action.”
+- Name the register owner as a specific individual responsible for maintaining and updating the log, not
+  a generic team or department.
+- Retain evidence of simulation invitations and results, such as system-generated reports or screenshots,
+  linked to each register entry.

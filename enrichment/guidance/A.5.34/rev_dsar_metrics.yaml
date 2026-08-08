@@ -1,0 +1,20 @@
+must_id: item:A.5.34:rev_dsar_metrics
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: DSAR metrics review (volumes, response times against SLA, refusal/extension rates, complaints
+  to supervisory authority) — operational privacy health
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the periodic review of Data Subject Access Request (DSAR) metrics,
+  recording their name and review date.
+- Document DSAR volumes, average response times versus documented service level agreements, refusal rates,
+  and extension rates in a dated summary report.
+- Record the number and nature of complaints received from supervisory authorities regarding DSAR handling
+  in the same review report.
+- Cross-reference the review report with supporting evidence, such as DSAR logs and correspondence, to
+  verify accuracy of reported metrics.
+- Name the reviewer as a specific person, not a team or department, to avoid auditor concerns about unclear
+  accountability.

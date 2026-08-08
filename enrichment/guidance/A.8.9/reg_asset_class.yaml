@@ -1,0 +1,20 @@
+must_id: item:A.8.9:reg_asset_class
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Per-baseline asset class (Linux server / Windows endpoint / K8s cluster / cloud account / network
+  device)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each configuration baseline by asset class, such as "Linux server," "Windows endpoint," "K8s cluster,"
+  "cloud account," or "network device."
+- Document the unique identifier and version for each baseline entry, including the date it was established
+  or last updated.
+- Assign a specific individual as the owner responsible for each baseline entry, avoiding generic titles
+  like "IT team" or "Operations."
+- Record the location or system where each baseline is stored or applied, referencing exact directories,
+  repositories, or management tools.
+- Cross-reference each baseline entry with the relevant asset inventory record to confirm alignment between
+  baseline and asset class.

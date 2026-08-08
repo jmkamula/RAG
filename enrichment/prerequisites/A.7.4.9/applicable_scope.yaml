@@ -1,0 +1,48 @@
+leaf_id: req:A.7.4.9:applicable_scope
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know the overall boundaries of your ISMS before you can define which transmission
+    contexts are in-scope for PII handling. This ensures your privacy extension is aligned with the main
+    security program.
+  good_enough: A clear, current ISMS scope statement that identifies the organizational and technical
+    boundaries relevant to information security.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is essential to identify which systems, applications, and data
+    flows might transmit PII. Without this, you can't reliably map or scope transmission contexts.
+  good_enough: A working inventory of information assets, including systems and data flows, with enough
+    detail to identify those that may handle PII.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: You must know how PII is classified within your organization to determine which transmission
+    contexts are relevant. This underpins the identification of PII in transit.
+  good_enough: A documented scheme that defines PII as a classification category and is applied to assets
+    and data flows.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Understanding the purpose for processing PII helps determine which transmission contexts
+    are justified and should be included in scope.
+  good_enough: A list or summary of purposes for PII processing that covers the main business activities
+    and data flows.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for processing PII is necessary to justify why certain transmission
+    contexts exist and are in-scope.
+  good_enough: A record of lawful bases for each main category of PII processing, linked to the relevant
+    business processes or systems.

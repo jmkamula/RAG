@@ -1,0 +1,18 @@
+must_id: item:Art.35:scope_white_list
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Art.35.5 SA white-list activities (NOT requiring DPIA) considered
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all data processing activities and record them in a central register with clear descriptions
+  and responsible owners.
+- Cross-reference each activity against your Supervisory Authority’s published white-list of processing
+  operations that do not require a DPIA, noting the source and date.
+- Document the rationale for classifying any activity as not requiring a DPIA, citing the specific white-list
+  entry and its criteria.
+- Name the decision-maker for each classification as a specific individual, not a group or department.
+- Retain copies of the white-list as published at the time of assessment, including version and publication
+  date.

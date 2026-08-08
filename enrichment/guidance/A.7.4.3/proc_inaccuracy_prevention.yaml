@@ -1,0 +1,20 @@
+must_id: item:A.7.4.3:proc_inaccuracy_prevention
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: Inaccuracy prevention — technical + procedural controls (input validation + duplicate detection
+  + integration reconciliation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the technical controls used to validate personal data at entry, such as format checks or required
+  fields, in a dated procedure.
+- Record the process for detecting and resolving duplicate personal data records, including responsible
+  individuals and frequency of checks.
+- Describe how data integrations with other systems are reconciled to prevent inaccuracies, referencing
+  specific reconciliation reports or logs.
+- Name the procedure owner as a specific individual, not a team or department, with their contact details
+  and review date.
+- Retain evidence of periodic reviews and updates to the procedure, including meeting minutes or approval
+  records with dates and attendees.

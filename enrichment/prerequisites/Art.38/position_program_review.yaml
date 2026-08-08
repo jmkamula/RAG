@@ -1,0 +1,31 @@
+leaf_id: req:Art.38:position_program_review
+control_ref: Art.38
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Designation of the data protection officer
+  category: direct
+  rationale: You cannot review whether the DPO position is being upheld unless a DPO has been formally
+    designated. Art.38 obligations only apply once Art.37 designation is complete.
+  good_enough: A named DPO has been officially designated and documented, with basic contact details and
+    role description available.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: direct
+  rationale: To assess whether the DPO is properly involved and resourced, you need a current overview
+    of processing activities. This helps verify the DPO’s engagement with relevant data flows.
+  good_enough: A basic, up-to-date RoPA exists, listing core processing activities and responsible parties,
+    even if some details are pending.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: Understanding the ISMS scope ensures the DPO’s remit aligns with the organization’s information
+    security boundaries, which is key for reviewing DPO involvement and independence.
+  good_enough: A documented ISMS scope exists that identifies the organizational units and activities
+    covered, even if not fully optimized for privacy.

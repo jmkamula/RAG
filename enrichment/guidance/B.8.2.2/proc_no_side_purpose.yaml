@@ -1,0 +1,20 @@
+must_id: item:B.8.2.2:proc_no_side_purpose
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: No-side-purpose rule — customer PII not used for own analytics / ML training / product improvement
+  without express permission
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure that prohibits using customer personal data for analytics, machine learning,
+  or product improvement without explicit customer consent.
+- Name a specific individual responsible for enforcing and updating this procedure, avoiding vague titles
+  like "the team" or "IT department".
+- Record each instance where customer data is proposed for secondary use, including the requestor, purpose,
+  and evidence of customer permission.
+- Retain copies of customer consent forms or contracts that explicitly allow any secondary use, with dates
+  and customer signatures.
+- Review subcontractor agreements to confirm they include the same no-side-purpose rule, and keep signed
+  copies on file.

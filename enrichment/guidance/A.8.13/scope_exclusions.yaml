@@ -1,0 +1,19 @@
+must_id: item:A.8.13:scope_exclusions
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Exclusion rationale where backup not required (ephemeral / reconstructable / public)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all information assets and systems, marking those excluded from backup with a clear identifier
+  in your backup scope document.
+- State a specific reason for each exclusion, such as "ephemeral data," "reconstructable from source,"
+  or "publicly available," in a dated rationale log.
+- Name the individual who approved each exclusion, avoiding generic titles like "IT team" or "management,"
+  and record their approval date.
+- Attach supporting evidence, such as system architecture diagrams or data flow maps, that demonstrate
+  why excluded data does not require backup.
+- Review and update the exclusion list at least annually, recording the review date and reviewer’s name
+  in your backup documentation.

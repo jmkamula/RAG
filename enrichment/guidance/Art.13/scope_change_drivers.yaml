@@ -1,0 +1,18 @@
+must_id: item:Art.13:scope_change_drivers
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Trigger list for re-scoping (new collection channel, new product surface)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current data collection points, naming each channel or product surface with a clear description
+  and the date it was added.
+- Document a trigger list specifying events that require re-scoping, such as launching a new channel or
+  adding a product feature.
+- Assign a named individual responsible for monitoring and updating the trigger list, including their
+  full name and contact details.
+- Record each review of the trigger list with the review date and the reviewer’s name to show ongoing
+  attention.
+- Name the owner as a specific person, not a team or department, to avoid ambiguity about responsibility.

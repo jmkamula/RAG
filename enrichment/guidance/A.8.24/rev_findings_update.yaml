@@ -1,0 +1,17 @@
+must_id: item:A.8.24:rev_findings_update
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Findings propagated to policy / scope / register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the findings from the periodic cryptography program review in a dated summary document, naming
+  the reviewer and the date of completion.
+- Cross-reference each finding to the relevant policy, scope statement, or asset register entry that requires
+  update or action.
+- Assign responsibility for updating each affected policy, scope, or register entry to a named individual,
+  not a group or department.
+- Document the completion of each update with a dated sign-off by the responsible individual, attaching
+  the revised artefact or referencing its location.

@@ -1,0 +1,19 @@
+must_id: item:Art.27:scope_establishment
+control_ref: Art.27
+standard_id: GDPR:2016/679
+must_text: Establishment analysis — where the controller/processor is established + why Art.3.2 applies
+  (offering goods/services OR monitoring behaviour in Union)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the legal entity name and physical address of your main establishment and any branches inside
+  and outside the European Union.
+- State clearly whether your organisation offers goods or services to individuals in the EU or monitors
+  their behaviour, with dated supporting examples.
+- Record the specific reasons why Article 3.2 applies to your activities, referencing relevant business
+  operations or data processing practices.
+- Name the person responsible for this assessment as a specific individual, not a generic role or team.
+- Retain dated evidence of your establishment analysis, such as meeting minutes or internal memos, to
+  show when and how the determination was made.

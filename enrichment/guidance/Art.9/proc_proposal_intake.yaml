@@ -1,0 +1,16 @@
+must_id: item:Art.9:proc_proposal_intake
+control_ref: Art.9
+standard_id: GDPR:2016/679
+must_text: Intake process for new special-category processing proposals (no quiet onboarding)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a formal intake form that must be completed for every new proposal to process special category
+  data, including purpose and data types.
+- Assign a named individual to review and approve each intake form before any processing begins.
+- Record the date of intake form submission and approval for each proposal in a central register.
+- Name the owner as a specific person responsible for intake oversight—do not use generic titles like
+  "the team" or "HR".
+- Retain copies of all completed and approved intake forms for audit review.

@@ -1,0 +1,17 @@
+must_id: item:A.6.8:reg_channel
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Per-row channel used (drives channel-mix analysis — are some channels under-used?)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to the Event Report Register to record the specific channel used for each reported event,
+  such as email, hotline, or web form.
+- Record the actual channel used for every event report entry, ensuring no rows are left blank or marked
+  as "unknown".
+- Name the person responsible for maintaining the accuracy of the channel information in the register,
+  listing a specific individual.
+- Review the register regularly to confirm that each event report row includes a clearly identified channel,
+  not just a general category or multiple options.

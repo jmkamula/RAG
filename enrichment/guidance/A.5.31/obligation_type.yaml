@@ -1,0 +1,17 @@
+must_id: item:A.5.31:obligation_type
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Obligation type tag (statutory / regulatory / contractual / sectoral-code) to drive review
+  cadence
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'List each obligation in the register with a clear tag: "statutory", "regulatory", "contractual", or
+  "sectoral-code" based on its source.'
+- Assign a specific review frequency to each obligation entry, referencing its tagged type to determine
+  how often it must be checked.
+- Name the person responsible for reviewing each obligation, ensuring a named individual is listed rather
+  than a team or department.
+- Record the date of the last review and the next scheduled review for each obligation entry in the register.

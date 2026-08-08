@@ -1,0 +1,40 @@
+leaf_id: req:B.8.2.2:applicable_scope
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and operational boundaries for all information
+    security controls, which is essential to determine which processor services and processing contexts
+    fall under B.8.2.2.
+  good_enough: A clear, up-to-date scope statement that identifies all business units, services, and geographies
+    covered by the ISMS, including those acting as a processor.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An asset register is needed to identify which information assets (including systems and data
+    flows) are involved in processor activities, so you can accurately scope applicable processing contexts.
+  good_enough: A working inventory of information assets, with at least high-level mapping of which assets
+    are used for customer PII processing.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles and responsibilities ensures you know which teams or individuals
+    are accountable for processor activities, which is necessary to define the scope of B.8.2.2.
+  good_enough: Documented roles showing who is responsible for processor-related processing and oversight,
+    even if not fully detailed.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purposes for which customer PII is processed as a processor to determine
+    which services and processing contexts are in-scope for B.8.2.2.
+  good_enough: A list or summary of documented purposes for all processor activities, sufficient to distinguish
+    them from controller activities.

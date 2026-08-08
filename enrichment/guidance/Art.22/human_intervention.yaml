@@ -1,0 +1,18 @@
+must_id: item:Art.22:human_intervention
+control_ref: Art.22
+standard_id: GDPR:2016/679
+must_text: Human intervention pathway (subject can request a human decision)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process by which individuals can request human intervention in automated decision-making,
+  including contact details and response timelines.
+- Name the responsible person or role who reviews and responds to human intervention requests, ensuring
+  it is a specific individual, not a generic team.
+- Record each request for human intervention and the outcome in a dated log accessible to auditors.
+- Publish clear instructions for individuals on how to request human review within your privacy notice
+  or relevant communication channels.
+- Retain copies of all correspondence and decisions relating to human intervention requests for a defined
+  period.

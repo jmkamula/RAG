@@ -1,0 +1,17 @@
+must_id: item:A.8.25:code_review
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Code-review requirements (cross-link to A.8.4 branch protection)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the requirement for code reviews before merging code into production branches, referencing the
+  related branch protection control in section A.8.4.
+- Document the minimum qualifications or roles of individuals authorized to perform code reviews, listing
+  them by name or job title.
+- Cross-reference the code review process in your Secure Development Lifecycle Policy to the documented
+  branch protection settings.
+- Name a specific individual as the policy owner, avoiding generic terms like "the team" or "IT department".
+- Record the approval date and approver’s name on the current version of the policy.

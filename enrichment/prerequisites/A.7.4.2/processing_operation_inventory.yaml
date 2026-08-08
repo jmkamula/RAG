@@ -1,0 +1,42 @@
+leaf_id: req:A.7.4.2:processing_operation_inventory
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the specific purposes for which PII is processed before you can
+    inventory each processing operation. This ensures every operation is tied to a legitimate, declared
+    purpose.
+  good_enough: A list of all PII processing purposes, each clearly described and approved, is available
+    and up to date.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Each processing operation must be linked to a lawful basis, so you cannot inventory operations
+    meaningfully without first establishing and documenting these legal grounds.
+  good_enough: Each processing purpose has an associated lawful basis (e.g., consent, contract, legal
+    obligation) documented and mapped.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A data classification scheme is needed to identify which data is PII and to apply appropriate
+    controls in the inventory. Without this, you cannot reliably distinguish or describe PII processing
+    operations.
+  good_enough: A basic data classification scheme exists, with PII clearly defined and examples provided
+    for staff reference.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need to know what information assets (systems, databases, applications) exist to accurately
+    list where and how PII is processed. Missing this register risks incomplete or inaccurate operation
+    inventory.
+  good_enough: A current list of all major information assets, including those handling PII, is available—even
+    if some details are high-level or pending refinement.

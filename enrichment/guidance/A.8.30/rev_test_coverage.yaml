@@ -1,0 +1,19 @@
+must_id: item:A.8.30:rev_test_coverage
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Delivered-code-test coverage per engagement (was every release tested before merge to production)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and results of each delivered-code test for every outsourced development engagement
+  in a central test coverage log.
+- Name the individual responsible for reviewing and approving test coverage before each code merge to
+  production.
+- Retain evidence of test execution, such as test reports or screenshots, linked to each release in your
+  project management system.
+- Document the review of test coverage for each engagement, including reviewer name and date, in a periodic
+  review summary.
+- Specify the engagement and release for each test record — avoid generic or reused test logs that do
+  not identify the specific code delivered.

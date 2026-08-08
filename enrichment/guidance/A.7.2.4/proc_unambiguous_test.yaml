@@ -1,0 +1,17 @@
+must_id: item:A.7.2.4:proc_unambiguous_test
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Unambiguous test — clear affirmative action, no pre-ticked boxes, no consent by silence
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the consent process showing users must actively select or click to give consent, with no pre-ticked
+  boxes or default acceptance.
+- Capture and retain a dated record of each user's affirmative consent action, such as a checkbox selection
+  or digital signature.
+- State in the procedure that silence, inactivity, or use of a service does not count as consent, with
+  clear examples.
+- Name the procedure owner as a specific individual responsible for maintaining and updating the consent
+  capture process.

@@ -1,0 +1,17 @@
+must_id: item:B.8.4.1:rev_sweep_health
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+must_text: Sweep health check
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to run regular health checks on processor temp files, recording the date and
+  their name in a review log.
+- Document the specific tools and methods used for each health check in a dated entry within your processor
+  temp files program documentation.
+- Record any issues found and corrective actions taken in a tracked ticket or incident log, including
+  the responsible person's name and resolution date.
+- Name the reviewer as a specific person in each health check record—do not use generic terms like "IT
+  team" or "staff".

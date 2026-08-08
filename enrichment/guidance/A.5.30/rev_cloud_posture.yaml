@@ -1,0 +1,20 @@
+must_id: item:A.5.30:rev_cloud_posture
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Cloud-provider posture noted (where ICT readiness depends on hyperscaler features — AZ failover,
+  region replication; their SLA changes affect ours)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all cloud providers whose features or service levels impact your ICT readiness, listing them
+  by name and service type in your review document.
+- Document the specific hyperscaler features relied upon for ICT readiness, such as availability zone
+  failover or region replication, in the periodic review record.
+- Record any recent or upcoming changes to the cloud provider's service level agreements that could affect
+  your ICT readiness posture, including dates and details.
+- Cross-reference your ICT readiness review with your dependency register or risk register as required
+  by control A.5.23, noting the relevant entry.
+- Name the responsible individual who reviewed and confirmed the cloud provider posture, avoiding generic
+  roles like "the team" or "IT department."

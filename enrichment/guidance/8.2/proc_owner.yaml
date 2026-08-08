@@ -1,0 +1,16 @@
+must_id: item:8.2:proc_owner
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Named owner of the trigger procedure
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the Operational Risk Assessment Trigger Procedure, not a
+  team or department.
+- Record the owner's full name and job title in the header or cover page of the procedure document.
+- Document the date when the owner was assigned responsibility within the procedure or an associated change
+  log.
+- Review and update the named owner annually, recording any changes and the date of each update in the
+  procedure history.

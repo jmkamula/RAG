@@ -1,0 +1,17 @@
+must_id: item:B.8.5.8:reg_notification_date
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+must_text: Customer notification date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each customer was notified about a subcontractor change in a dedicated column
+  of the Subcontractor Change Register.
+- Name the individual responsible for sending each customer notification, listing their full name—not
+  just a department or team.
+- Attach a copy of the actual notification sent to the customer, or reference its storage location, for
+  each register entry.
+- Confirm that every register entry includes a notification date; do not leave this field blank or use
+  placeholders like "TBD" or "N/A".

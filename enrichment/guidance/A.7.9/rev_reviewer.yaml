@@ -1,0 +1,16 @@
+must_id: item:A.7.9:rev_reviewer
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Facilities + InfoSec + IT lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Facilities, Information Security, and IT leads responsible for the review as specific individuals
+  in the review documentation.
+- Record the date and time each lead participated in the periodic off-premises program review in the official
+  meeting minutes.
+- Sign the review outcome document by each named lead to confirm their participation and agreement with
+  the findings.
+- Avoid listing a team or department as the reviewer; always use named individuals to ensure clear accountability.

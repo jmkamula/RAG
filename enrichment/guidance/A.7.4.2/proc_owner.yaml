@@ -1,0 +1,16 @@
+must_id: item:A.7.4.2:proc_owner
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+must_text: Named owner (DPO + Engineering)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the Processing Limitation Procedure as a specific individual by full name and job
+  title, not just a team or department.
+- Document the assignment of ownership to both the Data Protection Officer and a named Engineering lead
+  in the procedure itself.
+- Record the date when ownership was last reviewed or updated in the procedure document.
+- Obtain a signature or written confirmation from both named owners acknowledging their responsibility
+  for the procedure.

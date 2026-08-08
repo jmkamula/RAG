@@ -1,0 +1,20 @@
+must_id: item:A.6.1:scope_jurisdictions
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Jurisdictions covered (where checks happen — local legal constraints apply; some checks unavailable
+  in some jurisdictions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all jurisdictions where background checks are conducted, including countries, states, or regions,
+  in a dated register.
+- Document specific legal or regulatory constraints for each jurisdiction that impact the depth or type
+  of checks performed.
+- Name the individual responsible for maintaining the jurisdictional register, ensuring they are identified
+  by full name and job title.
+- Record any jurisdictions where checks are not performed or are limited, along with the reason and relevant
+  legal reference.
+- Avoid using generic statements like "all applicable laws"—specify the actual laws or regulations for
+  each jurisdiction in the register.

@@ -1,0 +1,17 @@
+must_id: item:Art.8:rev_reviewer
+control_ref: Art.8
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO + product lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual, listing both the Data Protection Officer and the product
+  lead by full name and job title.
+- Record the date when the Child Consent Program review was completed, ensuring it is clearly visible
+  on the review document.
+- Sign the review document electronically or physically by both the Data Protection Officer and the product
+  lead.
+- Retain the final, signed review in a central location accessible for audit, avoiding drafts or unsigned
+  copies as evidence.

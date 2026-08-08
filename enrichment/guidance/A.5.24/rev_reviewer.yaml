@@ -1,0 +1,18 @@
+must_id: item:A.5.24:rev_reviewer
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Reviewer identity (CISO + IR lead + Data Protection Officer where personal data scope; Legal
+  where regulator notification scope)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name all reviewers as specific individuals by full name and job title in the review record, avoiding
+  generic roles like "the team" or "management".
+- Document the involvement of the CISO, Incident Response lead, and, if personal data is in scope, the
+  Data Protection Officer in the review log.
+- Record Legal department participation in the review log if the framework includes regulatory notification
+  requirements.
+- Sign and date the review record by each required reviewer to confirm their participation and agreement
+  with the review outcome.

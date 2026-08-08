@@ -1,0 +1,20 @@
+must_id: item:A.6.3:rev_effectiveness
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Effectiveness analysis (quiz pass-rate trend, phishing-simulation click-rate trend, reporting-rate
+  trend per A.6.8)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Collect quiz pass-rate data, phishing-simulation click rates, and reporting rates for each awareness
+  programme cycle, including dates and participant numbers.
+- Analyse trends in these metrics over time, noting any significant improvements or declines, and record
+  your findings in a dated summary report.
+- Name the individual responsible for conducting the analysis and ensure their name, title, and signature
+  appear on the report.
+- Reference the specific awareness programme cycles and simulations reviewed, avoiding generic or undated
+  data that could apply to any period.
+- Attach supporting evidence, such as anonymised quiz results and simulation reports, to the analysis
+  for direct auditor review.

@@ -1,0 +1,15 @@
+must_id: item:A.7.3.7:reg_recipient
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Recipient third party per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each third-party recipient by their full legal entity name in a separate row of the register.
+- Record the date and method of notification for each third-party entry to show when and how they were
+  informed.
+- Name a specific individual as the contact person for each third-party recipient, avoiding generic titles
+  or group names.
+- Cross-reference each entry to the relevant data processing activity or contract for clear traceability.

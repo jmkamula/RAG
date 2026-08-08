@@ -1,0 +1,15 @@
+must_id: item:A.8.10:rev_reviewer
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Data Protection + Infrastructure + Legal jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewers for the periodic deletion program as specific individuals from Data Protection, Infrastructure,
+  and Legal — not just departments or teams.
+- Record the date each reviewer completed their review in the program review log.
+- Document each reviewer’s comments or approval in a signed review summary, clearly attributing input
+  to the named individual.
+- Retain copies of all review records and signatures in a central, access-controlled location.

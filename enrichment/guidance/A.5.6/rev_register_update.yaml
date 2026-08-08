@@ -1,0 +1,17 @@
+must_id: item:A.5.6:rev_register_update
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Changes propagated back to the register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each SIG engagement review date and outcome in a central log, referencing the specific register
+  entry that prompted the review.
+- Document any changes identified during the review, including the nature of the change, in an update
+  log linked to the original register item.
+- Update the register with the agreed changes, noting the date and the name of the person making the update.
+- Attach evidence of review decisions, such as meeting minutes or approval emails, to the corresponding
+  register entry.
+- Name the register owner as a specific individual, not a group or department, to avoid ambiguity in accountability.

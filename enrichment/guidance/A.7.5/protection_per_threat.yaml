@@ -1,0 +1,19 @@
+must_id: item:A.7.5:protection_per_threat
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Protection measures stated per identified threat (passive — building design; active — detection
+  + response)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each identified physical and environmental threat in your procedure, referencing the specific risk
+  assessment or threat register entry by date.
+- Describe the passive protection measures for each threat, such as building design features, and cite
+  the relevant building plans or maintenance logs.
+- Detail the active measures for detection and response, naming the systems or processes in place and
+  linking to incident response records or maintenance schedules.
+- Name the individual responsible for maintaining and updating these measures, not just a team or department.
+- Attach a version history to the procedure, showing dates and approvers for each update to demonstrate
+  ongoing review.

@@ -1,0 +1,18 @@
+must_id: item:A.7.11:rev_test_outcomes
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Per-utility test outcomes review (UPS/generator tests in period — pass/fail/remediation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, time, and outcome of each UPS and generator test in a utilities test log, including
+  whether the test passed or failed.
+- Document any remediation actions taken for failed tests, listing the responsible person and completion
+  date for each action.
+- Name the reviewer who assessed all test outcomes for the period, and have them sign and date the review
+  record.
+- Attach supporting evidence for each test, such as maintenance reports or test result printouts, to the
+  review documentation.
+- Name the reviewer as a specific individual, not a group or department, to avoid ambiguity in accountability.

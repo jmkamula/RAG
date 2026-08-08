@@ -1,0 +1,19 @@
+must_id: item:A.6.4:scope_worker_categories
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Worker categories addressed (employees → full process; contractors → contract-based termination;
+  secondees → escalation to home employer)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all worker categories relevant to your organisation, including employees, contractors, and secondees,
+  in a dated scope document.
+- Describe the specific process applied to each worker category, detailing full process for employees,
+  contract-based termination for contractors, and escalation for secondees.
+- Name the individual responsible for maintaining and updating the scope document, using a specific person
+  rather than a generic role or team.
+- Attach supporting evidence, such as sample contracts or process flowcharts, that demonstrate the described
+  processes for each worker category.
+- Review and update the scope document annually, recording the review date and the reviewer’s name.

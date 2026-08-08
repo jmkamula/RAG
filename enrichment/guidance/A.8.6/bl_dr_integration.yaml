@@ -1,0 +1,17 @@
+must_id: item:A.8.6:bl_dr_integration
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Capacity baseline integrated with A.5.30 ICT readiness (DR target sizing)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the current capacity baseline for all critical systems, including storage, processing, and
+  network resources, with a date and responsible person.
+- Cross-reference the capacity baseline with disaster recovery target sizing requirements defined under
+  A.5.30, showing how each system meets or exceeds those targets.
+- Name the owner of the capacity monitoring process as a specific individual, not a team or department.
+- Retain records of any changes to the baseline, including who approved the change and the date of approval.
+- State any gaps between current capacity and disaster recovery targets, along with a documented action
+  plan and assigned responsible person.

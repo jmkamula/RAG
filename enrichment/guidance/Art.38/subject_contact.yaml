@@ -1,0 +1,16 @@
+must_id: item:Art.38:subject_contact
+control_ref: Art.38
+standard_id: GDPR:2016/679
+must_text: Data subjects' contact point — DPO accessible (Art.38.4)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the official communication channels through which data subjects can contact the Data Protection
+  Officer, such as a dedicated email address or web form, in the procedure.
+- Name the appointed Data Protection Officer as a specific individual, including their full name and direct
+  contact details, not just a generic title or department.
+- Record the date when the DPO’s contact information was last reviewed and updated in the procedure document.
+- Publish the DPO’s contact details on your organisation’s privacy notice or website, and retain a screenshot
+  or copy as evidence.

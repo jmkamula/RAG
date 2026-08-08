@@ -1,0 +1,17 @@
+must_id: item:A.5.16:reg_identity_id
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Each active identity captured with a unique identifier (employee id, contractor id, service-account
+  id, shared-account id)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each active identity in the register with a unique identifier, such as employee ID, contractor
+  ID, or service-account ID.
+- Document the full name and role for each identity entry, linking it to the unique identifier in the
+  register.
+- Cross-reference the register entries with onboarding and offboarding records to confirm all active identities
+  are captured and up-to-date.
+- Name the register owner as a specific individual responsible for updates, not as a team or department.

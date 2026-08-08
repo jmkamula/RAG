@@ -1,0 +1,17 @@
+must_id: item:A.8.25:rev_exception_inventory
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Exception inventory re-confirmed / retired
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current SDLC exceptions in a dated inventory, including the reason for each exception and its
+  original approval.
+- Assign a named individual to review each exception for ongoing relevance and necessity during the periodic
+  SDLC program review.
+- Record the outcome for each exception as "re-confirmed" or "retired," including the review date and
+  the reviewer’s name.
+- Obtain written approval for any re-confirmed exceptions, signed and dated by the designated authority.
+- Specify the owner as a named person, not a generic group or department, to avoid ambiguity in accountability.

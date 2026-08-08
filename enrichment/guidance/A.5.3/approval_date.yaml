@@ -1,0 +1,17 @@
+must_id: item:A.5.3:approval_date
+control_ref: A.5.3
+standard_id: ISO27001:2022
+must_text: Approval date recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the top management individual who approved the segregation matrix, specifying their full name and
+  job title in the approval record.
+- Record the exact date when the segregation matrix was formally approved by top management in the official
+  document.
+- Retain a signed or digitally authenticated copy of the approved segregation matrix showing the approver’s
+  name and approval date.
+- Avoid using undated or draft versions of the segregation matrix as evidence; only finalized, dated documents
+  are acceptable.

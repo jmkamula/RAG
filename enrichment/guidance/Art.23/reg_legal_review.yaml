@@ -1,0 +1,16 @@
+must_id: item:Art.23:reg_legal_review
+control_ref: Art.23
+standard_id: GDPR:2016/679
+must_text: Per-row legal counsel sign-off
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named legal counsel to each restriction entry in the register, recording their full name and
+  role for every row.
+- Obtain a dated, handwritten or digital signature from the assigned legal counsel for each restriction
+  application listed.
+- Retain the original or digital copy of each signed approval as part of the register’s supporting documentation.
+- Avoid using group names or generic titles as signatories; ensure each sign-off is traceable to a specific
+  individual.

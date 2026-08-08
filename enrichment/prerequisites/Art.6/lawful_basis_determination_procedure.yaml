@@ -1,0 +1,30 @@
+leaf_id: req:Art.6:lawful_basis_determination_procedure
+control_ref: Art.6
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date inventory of processing activities to determine which ones require
+    a lawful basis and to ensure the procedure covers all relevant data uses.
+  good_enough: A draft or working list of processing activities with basic descriptions is sufficient
+    to start drafting the procedure.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If a Data Protection Officer is required, their involvement is critical in designing and
+    approving the lawful basis determination procedure.
+  good_enough: A named DPO or a clear decision that a DPO is not required is enough to proceed.
+- ref: Art.20
+  standard_id: GDPR:2016/679
+  title: Right to Data Portability
+  category: direct
+  rationale: Understanding when data portability applies helps ensure the procedure for lawful basis selection
+    correctly identifies when consent or contract is used, as these trigger portability rights.
+  good_enough: A basic awareness of which processing activities may trigger portability rights is sufficient
+    at this stage.

@@ -1,0 +1,17 @@
+must_id: item:Art.22:rev_reviewer
+control_ref: Art.22
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO + ML/product lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and job title, explicitly identifying both the
+  Data Protection Officer and the ML/product lead.
+- Record the date each reviewer completed their assessment in the automated decision-making program review
+  document.
+- Sign the review document physically or electronically to confirm each named reviewer’s participation
+  and agreement.
+- Retain evidence of the review, such as meeting minutes or annotated checklists, showing input from both
+  the DPO and the ML/product lead.

@@ -1,0 +1,17 @@
+must_id: item:6.1.2:methodology
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Methodology documented (ISO 31000, NIST SP 800-30, or equivalent)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the chosen risk assessment methodology by name, referencing ISO 31000, NIST SP 800-30, or another
+  recognized standard in the procedure.
+- Describe each step of your risk assessment process in clear, sequential detail within the written procedure.
+- State how risks are identified, analyzed, evaluated, and recorded, including specific criteria and tools
+  used at each stage.
+- Name the procedure owner as a specific individual, not a team or department, in the document’s header
+  or approval section.
+- Record the procedure’s version number and approval date on the document’s cover page.

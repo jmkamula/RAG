@@ -1,0 +1,15 @@
+must_id: item:Art.29:rev_next_date
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Processing Under Authority Program in a clearly visible section
+  of the review document.
+- Record the date in a format that includes day, month, and year to avoid ambiguity.
+- Name the responsible individual who set the review date, avoiding generic titles like "the team" or
+  "management".
+- Retain a copy of the document with the stated review date in your compliance records.

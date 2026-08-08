@@ -1,0 +1,15 @@
+must_id: item:A.5.11:timeline
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Timeline stated (e.g. assets returned by last working day; data return ahead of access revocation)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Return of Assets Procedure a clear deadline for asset return, such as "by the last working
+  day of employment."
+- Specify in writing the required timing for data return or deletion, such as "before user access is revoked."
+- Name the person responsible for monitoring asset and data return timelines as a specific individual,
+  not a generic role or team.
+- Document each asset return with a dated record confirming the return occurred within the stated timeline.

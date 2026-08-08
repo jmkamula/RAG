@@ -1,0 +1,19 @@
+must_id: item:A.8.15:reg_last_event
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Per-source last-event timestamp (drives silent-source detection — common detection gap)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent event timestamp for each log source in the Log Source Register, updating this
+  field every time new data is received.
+- Name the owner responsible for updating each log source entry as a specific individual, not a team or
+  department.
+- Document the method used to collect event timestamps for each source, including any automated tooling
+  or manual processes.
+- Cross-reference each log source entry with a sample event log to confirm the recorded timestamp matches
+  the actual last event received.
+- Retain historical changes to per-source timestamps to demonstrate ongoing monitoring and support drift
+  detection over time.

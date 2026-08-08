@@ -1,0 +1,15 @@
+must_id: item:A.7.4.1:reg_purpose_link
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Purpose link per row (which A.7.2.1 purpose this field supports)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each data field collected in a table, assigning a unique row for every individual field.
+- Link each field to a specific, numbered purpose from your A.7.2.1 purpose register in the same row.
+- Cross-reference the purpose description so an auditor can trace the field’s use directly to the documented
+  purpose.
+- Name the person responsible for maintaining the inventory as a specific individual, not a team or department.
+- Date the most recent update to the inventory and retain previous versions for historical reference.

@@ -1,0 +1,16 @@
+must_id: item:A.7.4.7:reg_retention_period
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Retention period per row (with unit — years / months / until event)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each category of personal data in a separate row of the retention schedule register.
+- Specify the retention period for each data category, including the unit (e.g., "3 years", "6 months",
+  "until contract termination") in the relevant column.
+- Reference the legal, regulatory, or business reason for each retention period in the register.
+- Name the person responsible for maintaining the retention schedule as a specific individual, not a team
+  or department.
+- Record the date the retention schedule was last reviewed or updated in the register.

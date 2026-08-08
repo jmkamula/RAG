@@ -1,0 +1,15 @@
+must_id: item:Art.49:rev_date
+control_ref: Art.49
+standard_id: GDPR:2016/679
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Derogations Program in a dated log or register entry.
+- State the planned review interval in months or years in the program documentation.
+- Compare the actual review date against the planned interval and document the result in the review log.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Attach evidence of the review, such as meeting minutes or a signed review checklist, to the program
+  file.

@@ -1,0 +1,17 @@
+must_id: item:A.7.3.7:reg_trigger_event
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Trigger event per row (which subject event caused the notification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific event or incident that triggered each third-party notification in a dedicated column
+  for every row in the register.
+- State the date and time the triggering event occurred, matching it to the corresponding notification
+  entry.
+- Name the individual who identified or reported the triggering event for each notification, using their
+  full name rather than a team or department.
+- Cross-reference each trigger event to supporting documentation, such as incident reports or investigation
+  records, to allow traceability.

@@ -1,0 +1,17 @@
+must_id: item:A.7.5.3:scope_recordable_events
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+must_text: Recordable transfer types (batch export / API push / support-driven / M&A / rights-fulfilment
+  cascade)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of personal data transfers that occur, including batch exports, API pushes, support-driven
+  transfers, M&A, and rights-fulfilment cascades.
+- Document each transfer type in a register with a clear description and the date it was first recorded.
+- Name a specific individual responsible for maintaining and updating the transfer events scope, avoiding
+  generic titles like "the team" or "IT".
+- Cross-reference each transfer type with supporting evidence, such as system logs, export records, or
+  documented procedures.

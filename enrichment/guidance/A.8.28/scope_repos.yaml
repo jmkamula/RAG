@@ -1,0 +1,17 @@
+must_id: item:A.8.28:scope_repos
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Repositories in scope (drawn from A.8.4 repo inventory)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each secure coding repository against your A.8.4 repository inventory and record the
+  unique identifier for each in a dated list.
+- Name the specific individual responsible for maintaining the secure coding scope, avoiding generic roles
+  like "the team" or "IT department".
+- Document the inclusion or exclusion rationale for each repository, with a brief justification and the
+  date of the decision.
+- Retain a signed approval from a designated authority confirming the completeness and accuracy of the
+  secure coding scope list.

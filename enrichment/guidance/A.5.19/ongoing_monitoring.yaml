@@ -1,0 +1,19 @@
+must_id: item:A.5.19:ongoing_monitoring
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Ongoing monitoring approach (periodic reassessment, event-triggered review, third-party reports)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Describe the frequency and method for periodic reassessment of supplier information security risks in
+  the documented procedure, including a named responsible individual.
+- Specify clear triggers for event-driven reviews, such as incidents, contract changes, or new threats,
+  and record these in the procedure.
+- Reference how and when third-party security reports or attestations from suppliers are obtained and
+  reviewed, with evidence of the latest review date.
+- Name the owner as a specific individual — not a team or department — responsible for ensuring ongoing
+  supplier risk monitoring activities are completed.
+- Attach a sample completed monitoring log or review record, showing dates, findings, and actions taken
+  for at least one supplier.

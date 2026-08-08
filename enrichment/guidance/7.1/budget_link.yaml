@@ -1,0 +1,19 @@
+must_id: item:7.1:budget_link
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Reference to organisation budget where ISMS spend appears
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Locate the current organisational budget document and identify the specific line item(s) where ISMS-related
+  spending is recorded.
+- Cross-reference the ISMS Resource Allocation Record with the budget document, noting the exact page
+  and line item for ISMS spend.
+- Name the budget owner or finance contact responsible for maintaining the budget, including their full
+  name and job title.
+- Record the date the budget was last approved or updated, ensuring it matches the version referenced
+  in the ISMS Resource Allocation Record.
+- Avoid referencing a generic or outdated budget; always use the most recent, organisation-specific budget
+  document for traceability.

@@ -1,0 +1,18 @@
+must_id: item:A.7.9:travel_restrictions
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Travel restrictions or extra precautions for high-risk jurisdictions (border-crossing data
+  minimisation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific high-risk countries or jurisdictions where travel restrictions or extra data protection
+  measures apply in the policy document, with a version date.
+- Document the process for minimizing or encrypting sensitive data taken across borders, including named
+  responsible roles for approval.
+- Record each instance of staff travel to high-risk jurisdictions, referencing the applied restrictions
+  or precautions in a dated travel log.
+- Name the policy owner as a specific individual, not a team or department, with their contact details
+  listed in the policy.

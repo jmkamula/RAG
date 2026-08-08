@@ -1,0 +1,17 @@
+must_id: item:A.7.2.1:rev_reviewer
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Privacy Office)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and title, such as "Jane Smith, Data Protection
+  Officer", in the program review record.
+- Document the involvement of both the Data Protection Officer and a Privacy Office representative by
+  listing their names and roles in the review meeting minutes.
+- Record the date of the review and obtain signatures or written confirmation from both the DPO and Privacy
+  Office representative on the final review summary.
+- Avoid listing the reviewer as "the team", "DPO group", or "Privacy Office" without specifying individual
+  names, as this will not meet audit requirements.

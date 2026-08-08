@@ -1,0 +1,18 @@
+must_id: item:A.7.4.1:proc_removal_procedure
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Field-removal procedure — periodic sweep of collected fields that are no longer necessary
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for reviewing collected data fields, avoiding generic roles like
+  "the team" or "IT department".
+- Document the schedule for periodic reviews of collected data fields, including exact dates and frequency
+  in a maintained log.
+- Record each completed review with the reviewer’s name, date, and a list of fields identified for removal.
+- Retain evidence of data field removals, such as deletion logs or screenshots, showing the date and fields
+  removed.
+- Cross-reference removed fields with the original data collection inventory to confirm that only unnecessary
+  fields are eliminated.

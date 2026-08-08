@@ -1,0 +1,20 @@
+must_id: item:B.8.2.4:scope_priority_topics
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Priority topics — instruction types most likely to raise infringement issues (retention / disclosure
+  / transfers / children / special category)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all instruction types that involve personal data retention, disclosure, international transfers,
+  processing of children's data, or special category data.
+- Document the rationale for why each listed instruction type is considered high-priority for potential
+  privacy infringement.
+- Name the person responsible for reviewing and updating the priority topics list, ensuring it is not
+  assigned to a generic team or department.
+- Record the date of the most recent review of the instruction contexts scope and retain evidence of any
+  changes made.
+- Cross-reference each priority instruction type to relevant risk assessments or incident records to demonstrate
+  risk-based selection.

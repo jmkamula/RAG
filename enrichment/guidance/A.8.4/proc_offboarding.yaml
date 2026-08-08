@@ -1,0 +1,18 @@
+must_id: item:A.8.4:proc_offboarding
+control_ref: A.8.4
+standard_id: ISO27001:2022
+must_text: Repository access offboarding aligned with A.5.16 identity termination
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for removing user access to all source code repositories when employment
+  or contract ends, referencing A.5.16 requirements.
+- Name the person responsible for initiating and verifying repository access removal, listing their full
+  name and job title.
+- Record each access removal event with the user’s name, repositories affected, removal date, and the
+  person who performed the action.
+- Cross-reference the access removal record with the corresponding HR or IT identity termination record
+  to confirm alignment.
+- Specify that generic statements like "access removed by IT" or undated logs are not acceptable as evidence.

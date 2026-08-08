@@ -1,0 +1,19 @@
+must_id: item:A.8.32:rev_findings_update
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Findings propagated to procedure / scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of the most recent change management program review in a formal meeting
+  summary or review log.
+- Name the individual responsible for updating procedures or scope based on review findings in the documented
+  action items.
+- Document specific changes made to procedures or scope, referencing the related review findings in the
+  updated procedure or scope document.
+- Attach evidence of communication, such as an email or meeting minutes, showing that updated procedures
+  or scope were shared with relevant stakeholders.
+- State the version number and date on all updated documents to avoid using undated or draft procedures
+  as evidence.

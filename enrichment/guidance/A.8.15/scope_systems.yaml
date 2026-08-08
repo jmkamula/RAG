@@ -1,0 +1,17 @@
+must_id: item:A.8.15:scope_systems
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Systems in scope enumerated (drawn from A.5.9 asset register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the list of systems to be logged against the asset register required by control A.5.9,
+  ensuring all relevant assets are included.
+- Document each system in scope for logging with its unique asset identifier and a clear description,
+  matching the asset register entry.
+- Name the individual responsible for maintaining the logging scope, specifying a person rather than a
+  team or department.
+- Record the date when the logging scope was last reviewed and updated, showing regular alignment with
+  changes in the asset register.

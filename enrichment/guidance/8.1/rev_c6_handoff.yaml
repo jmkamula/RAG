@@ -1,0 +1,20 @@
+must_id: item:8.1:rev_c6_handoff
+control_ref: '8.1'
+standard_id: ISO27001:2022
+must_text: Clause 6 handoff check — every 6.1.1 planned action reached operational implementation OR was
+  deferred
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each planned action from Clause 6.1.1 to its operational implementation record or documented
+  deferral decision, showing clear traceability.
+- Record the date and outcome of the operational planning program review, listing all actions checked
+  for implementation or deferral.
+- Name the reviewer as a specific individual responsible for confirming the status of each planned action,
+  not a generic role or team.
+- Attach supporting evidence for each action, such as meeting minutes, change logs, or approval records,
+  to demonstrate operational handoff or deferral.
+- Document any deferred actions with a clear reason and a new target date, avoiding undated or vague deferral
+  notes.

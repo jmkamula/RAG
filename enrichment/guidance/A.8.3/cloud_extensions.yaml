@@ -1,0 +1,19 @@
+must_id: item:A.8.3:cloud_extensions
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Cloud / SaaS app permissions covered (IAM, SCIM provisioning)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all cloud and SaaS applications in use, including their access control mechanisms and integration
+  points such as IAM or SCIM.
+- Document the process for granting, modifying, and revoking user access within each cloud or SaaS application,
+  referencing specific roles and permissions.
+- Assign a named individual responsible for regularly reviewing and updating access rights in each application,
+  avoiding generic owners like "IT" or "the team."
+- Record the date and outcome of the most recent access review for each application, including any changes
+  made or issues identified.
+- Attach evidence of automated provisioning and deprovisioning workflows, such as logs or screenshots,
+  showing how SCIM or IAM is enforced.

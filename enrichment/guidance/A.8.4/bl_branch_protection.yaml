@@ -1,0 +1,19 @@
+must_id: item:A.8.4:bl_branch_protection
+control_ref: A.8.4
+standard_id: ISO27001:2022
+must_text: Branch protection enabled on protected branches (review required, status checks required)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the list of protected branches in your source code repository, including branch names and the
+  date protection was enabled.
+- Record the specific branch protection rules in place, showing that both code review and status checks
+  are required before merging.
+- Capture a screenshot or export of repository settings that displays branch protection configuration,
+  with visible timestamps.
+- Name the repository owner or administrator as a specific individual responsible for maintaining branch
+  protection settings — do not use a team or group name.
+- Review and retain an approval record, such as a signed change request or meeting minutes, confirming
+  that branch protection was enabled and reviewed.

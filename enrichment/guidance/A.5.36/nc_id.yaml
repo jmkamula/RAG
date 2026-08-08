@@ -1,0 +1,16 @@
+must_id: item:A.5.36:nc_id
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Per-NC unique identifier traceable back to the source review record
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each nonconformity entry in the register that does not repeat or overlap
+  with any other entry.
+- Cross-reference each nonconformity’s identifier to the specific review record or audit report where
+  it was first identified.
+- Record the date and name of the reviewer or auditor who documented the nonconformity in the register.
+- Avoid using generic or sequential numbers without a link to the source review, as auditors will flag
+  untraceable entries.

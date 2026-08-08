@@ -1,0 +1,17 @@
+must_id: item:7.3:scope_contractors
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Contractor coverage stated (which contractor classes are in scope; cross-link to A.5.19 supplier)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all contractor types or classes that access your information or systems, specifying which are included
+  in the awareness program scope.
+- Cross-reference each in-scope contractor class to the relevant supplier entry in your A.5.19 supplier
+  register.
+- Name the person responsible for maintaining and updating the contractor awareness audience list, identifying
+  them as an individual, not a team.
+- Record the date when the contractor scope was last reviewed and updated, keeping this record for auditor
+  inspection.

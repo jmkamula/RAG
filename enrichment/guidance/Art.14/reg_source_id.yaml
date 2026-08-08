@@ -1,0 +1,15 @@
+must_id: item:Art.14:reg_source_id
+control_ref: Art.14
+standard_id: GDPR:2016/679
+must_text: Source identifier per row (data broker name, public source URL, affiliate)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific name of the data broker, public source URL, or affiliate for each entry in the Art.14
+  Source Register row.
+- Cross-reference each source identifier with supporting documentation, such as contracts, website printouts,
+  or affiliate agreements, and store copies with the register.
+- State the date each source was added or last verified to demonstrate ongoing accuracy and relevance.
+- Name the source as a specific entity or URL—do not use generic labels like "external partner" or "internet".

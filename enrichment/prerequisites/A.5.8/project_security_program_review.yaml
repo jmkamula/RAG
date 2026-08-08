@@ -1,0 +1,51 @@
+leaf_id: req:A.5.8:project_security_program_review
+control_ref: A.5.8
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The project-security program review must align with the defined ISMS scope to ensure all
+    relevant projects and processes are included in the review. Without clarity on scope, the review could
+    miss critical areas or include irrelevant ones.
+  good_enough: A documented, management-approved scope statement that clearly defines which projects and
+    business units are in-scope for the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The review process should be guided by the organization’s overarching security policy, which
+    sets expectations for security objectives and program oversight. Without a policy, there is no baseline
+    for evaluating program effectiveness.
+  good_enough: A current, communicated security policy that sets out the organization’s security objectives
+    and management commitment.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding the organization’s risk landscape is essential for interpreting review findings
+    (e.g., whether gate skips or late detections expose unacceptable risks). The review should be informed
+    by the latest risk assessment.
+  good_enough: A completed risk assessment covering the projects and processes within ISMS scope, updated
+    within the last review cycle.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures accountability for conducting the review, collecting metrics,
+    and implementing program adjustments. Without defined responsibilities, the review process may stall
+    or lack authority.
+  good_enough: Documented roles and responsibilities for those managing and reviewing the project-security
+    program, with named individuals or functions.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The review must consider whether project tiering and classification are being applied correctly,
+    as misclassifications are a key metric. The scheme must exist before its effectiveness can be reviewed.
+  good_enough: A documented and communicated classification scheme that is actively used to tier projects
+    and information assets.

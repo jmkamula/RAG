@@ -1,0 +1,16 @@
+must_id: item:A.6.5:reg_leaver_id
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Per-row leaver identifier (links to identity register A.5.16; cross-link to A.5.11 return-of-assets
+  record + A.5.16 identity revocation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each leaver's unique identifier in the Leaver Briefing Register, matching the identifier used
+  in the identity register for A.5.16.
+- Cross-reference the Leaver Briefing Register entry to the corresponding return-of-assets record required
+  by A.5.11.
+- Link each register entry to the documented identity revocation record maintained under A.5.16.
+- Name the leaver using a specific identifier or full name—do not use generic labels like "staff" or "user."

@@ -1,0 +1,19 @@
+must_id: item:Art.42:body_engagement
+control_ref: Art.42
+standard_id: GDPR:2016/679
+must_text: Certification body engagement (assessment + decision)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the certification body engaged for GDPR assessment and decision, including their official name
+  and contact details, in your certification procedure document.
+- Document the date you formally engaged the certification body, attaching any signed engagement letters
+  or contracts as supporting evidence.
+- Record the assessment process steps and decision outcome provided by the certification body, referencing
+  any official reports or correspondence.
+- Retain copies of all communications and decisions from the certification body, ensuring each is dated
+  and attributed to a specific individual.
+- Specify the certification body as a named organisation, not a generic term like "external assessor"
+  or "third party".

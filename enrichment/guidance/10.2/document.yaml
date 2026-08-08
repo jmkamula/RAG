@@ -1,0 +1,18 @@
+must_id: item:10.2:document
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Documented information retained on the nature of NC, actions taken, and results
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each nonconformity with a unique reference number, a clear description of the issue, and the
+  date it was identified.
+- Name the responsible individual who investigated and addressed the nonconformity, not just a team or
+  department.
+- Document all corrective actions taken, including dates, specific steps, and who completed them.
+- State the results of the corrective actions, including verification of effectiveness and the date this
+  was confirmed.
+- Retain all records in a controlled location where previous versions and updates are clearly dated and
+  accessible.

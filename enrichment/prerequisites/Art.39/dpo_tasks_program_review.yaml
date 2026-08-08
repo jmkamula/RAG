@@ -1,0 +1,37 @@
+leaf_id: req:Art.39:dpo_tasks_program_review
+control_ref: Art.39
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A DPO must be formally designated before their tasks and performance can be reviewed. Without
+    a named DPO, there is no responsible party to assess against Art.39 requirements.
+  good_enough: A documented appointment of a DPO, with clear contact details and role description, is
+    available.
+- ref: Art.38
+  standard_id: GDPR:2016/679
+  title: Position of the data protection officer
+  category: foundational
+  rationale: Art.39 tasks assume the DPO has the independence, resources, and authority described in Art.38.
+    If these conditions are not met, any review of DPO performance is incomplete or potentially misleading.
+  good_enough: Evidence exists that the DPO operates independently, reports to the highest management,
+    and is not penalized for performing their duties.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: direct
+  rationale: A current RoPA is essential for the DPO to monitor processing activities and advise on compliance,
+    as required by Art.39. Without it, the DPO cannot effectively perform or be reviewed on key tasks.
+  good_enough: A basic, up-to-date record of processing activities is available, even if not fully detailed.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: direct
+  rationale: The DPO’s review includes verifying that processing has a lawful basis. If lawful bases are
+    not documented, the DPO cannot perform or be assessed on this aspect of their role.
+  good_enough: Each processing activity has a stated lawful basis, even if some are pending full justification.

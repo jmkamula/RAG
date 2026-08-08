@@ -1,0 +1,20 @@
+must_id: item:Art.31:rev_readiness
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Readiness check — demonstrability artefacts (RoPA, compliance register) producible on short
+  notice
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a responsible individual who can produce the Record of Processing Activities (RoPA) and compliance
+  register within 48 hours of request.
+- Document the current location and access method for both the RoPA and compliance register in an internal
+  procedure or readiness checklist.
+- Confirm that both artefacts are up to date, with the latest review date and reviewer’s name clearly
+  recorded on each document.
+- Retain evidence of a recent test retrieval, such as an email or ticket showing the artefacts were produced
+  promptly for a simulated or actual request.
+- Avoid listing the owner as a team or department; specify a named person accountable for maintaining
+  and producing these records.

@@ -1,0 +1,16 @@
+must_id: item:B.8.5.3:rev_next_date
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Processor Disclosure Records Program in the program documentation.
+- Record the date the review schedule was last updated, along with the name of the person who set the
+  next review date.
+- Name a specific individual responsible for conducting the next review, avoiding generic titles like
+  "the team" or "management".
+- Retain evidence of communication, such as an email or meeting note, confirming the next review date
+  was shared with relevant stakeholders.

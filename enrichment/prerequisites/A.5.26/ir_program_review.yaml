@@ -1,0 +1,48 @@
+leaf_id: req:A.5.26:ir_program_review
+control_ref: A.5.26
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which systems, processes, and assets are covered by the ISMS
+    and, by extension, the incident response program. Without this, you cannot determine what the IR program
+    review should cover.
+  good_enough: A documented, approved scope statement that clearly identifies the boundaries of the ISMS
+    and the assets/processes it includes.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of IR roles and responsibilities is essential for reviewing program effectiveness,
+    as the review must assess whether the right people are in place and aware of their duties.
+  good_enough: A current list or matrix showing who is responsible for IR activities, with evidence that
+    these assignments are communicated.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: The IR program review must consider whether the program addresses current risks and threats.
+    A recent risk assessment provides the baseline for evaluating IR readiness and relevance.
+  good_enough: A documented risk assessment completed or updated within the last 12 months, identifying
+    key threats and vulnerabilities relevant to incident response.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: Knowing which assets are in scope is necessary to ensure the IR program review covers all
+    critical systems and data. Missing assets could leave gaps in the review.
+  good_enough: An up-to-date inventory of information assets, with criticality ratings, covering all in-scope
+    systems and data.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: The review should check if incident response procedures align with the classification of
+    information, ensuring higher-value or sensitive assets receive appropriate attention.
+  good_enough: A documented scheme for classifying information, with evidence that assets in the register
+    are classified accordingly.

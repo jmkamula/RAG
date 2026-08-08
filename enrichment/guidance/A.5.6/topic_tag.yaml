@@ -1,0 +1,18 @@
+must_id: item:A.5.6:topic_tag
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Each entry tagged with the risk topics that drove inclusion (links back to the scope leaf)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each special interest group or professional forum in the register, including the full name and
+  date of joining.
+- Tag every entry with the specific risk topics that justified inclusion, referencing the relevant risk
+  or scope leaf.
+- Cross-reference each risk topic tag to the corresponding section or identifier in your risk register
+  or scope documentation.
+- Name the individual responsible for maintaining the register, avoiding generic titles like "the team"
+  or "IT department."
+- Review the register quarterly and record the date and name of the reviewer for each update.

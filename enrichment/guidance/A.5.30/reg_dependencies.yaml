@@ -1,0 +1,19 @@
+must_id: item:A.5.30:reg_dependencies
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Service dependencies per row (upstream + downstream — recovery order matters; recover dependencies
+  first)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each ICT service in the register with a unique name and owner, ensuring no duplicate or vague service
+  descriptions.
+- Record both upstream and downstream dependencies for every service row, specifying exact systems or
+  services by name.
+- State the required recovery order for each service, referencing dependencies to show which must be restored
+  first.
+- Confirm all dependencies are reviewed and updated at least annually, recording the review date and responsible
+  reviewer.
+- Name dependencies as specific systems or services, not as generic terms like "infrastructure" or "network".

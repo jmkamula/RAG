@@ -1,0 +1,16 @@
+must_id: item:A.6.7:physical
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Physical security at remote location
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Remote Working Policy that staff must secure devices and sensitive documents in a locked
+  drawer or room when not in use.
+- Name the policy owner as a specific individual responsible for updates and enforcement, not a generic
+  team or department.
+- Document the date of the latest policy review and approval, signed by a senior manager.
+- Require staff to confirm in writing that they have read and understood the physical security requirements
+  for remote work.

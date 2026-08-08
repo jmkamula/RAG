@@ -1,0 +1,15 @@
+must_id: item:A.5.35:sch_last_review
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Last review date recorded (proves the schedule is anchored in reality, not aspirational)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent independent review date in the schedule register, using a specific calendar date,
+  not just a month or year.
+- Name the reviewer as a specific individual, avoiding generic roles or team names.
+- Cross-reference the review entry with supporting evidence, such as a signed review report or meeting
+  minutes.
+- Confirm that the recorded date matches the date on the supporting review documentation.

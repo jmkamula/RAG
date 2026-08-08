@@ -1,0 +1,20 @@
+must_id: item:Art.28:rev_dpa_currency
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: DPA currency check — every active processor has a current DPA (no expired or pre-onboarding
+  processors active)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every active processor by name in a central register, including the date their services began and
+  the date of their latest Data Processing Agreement (DPA).
+- Cross-reference each processor entry with a copy of their signed DPA, ensuring the agreement is dated
+  and not expired.
+- Confirm that no processor is listed as "pre-onboarding" or "pending DPA" in the register; update or
+  remove any such entries.
+- Name the individual responsible for maintaining the processor register and DPA records, specifying their
+  role and contact details.
+- Record the date of the most recent review of all processor DPAs, along with the reviewer’s name and
+  signature.

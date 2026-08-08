@@ -1,0 +1,16 @@
+must_id: item:A.7.8:rev_date
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Equipment Siting Program in a dated log entry signed by the
+  responsible reviewer.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Cross-reference the recorded review date with the planned review interval documented in your compliance
+  calendar or schedule.
+- Retain the review report or meeting minutes as evidence that the review occurred within the required
+  timeframe.

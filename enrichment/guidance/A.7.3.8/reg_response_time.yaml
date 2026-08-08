@@ -1,0 +1,18 @@
+must_id: item:A.7.3.8:reg_response_time
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Response time per row (vs SLA)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each copy request is received in the register, ensuring every entry has a clear, unambiguous
+  timestamp.
+- Document the date and time when each copy request is fulfilled, matching it to the original request
+  entry.
+- Calculate and enter the actual response time for each request, comparing it directly to your documented
+  service level agreement (SLA).
+- Name the responsible individual for each request entry, avoiding generic labels like "team" or "department."
+- Flag any requests where the response time exceeded the SLA, including a brief note explaining the reason
+  for the delay.

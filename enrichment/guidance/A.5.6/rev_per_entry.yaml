@@ -1,0 +1,18 @@
+must_id: item:A.5.6:rev_per_entry
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Per-entry outcome (continue / disengage / upgrade) with value-delivered notes (intel received,
+  contributions made)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and participants of each SIG engagement review in a dedicated log, listing all individuals
+  present by full name.
+- State the outcome for each SIG entry as "continue," "disengage," or "upgrade" in the review log, ensuring
+  no entry is left blank or ambiguous.
+- Document specific value delivered for each SIG, such as intelligence received or contributions made,
+  with clear, concrete examples in the review notes.
+- Name the reviewer who made the outcome decision for each SIG entry, avoiding group or department names.
+- Retain all review records with version history to show changes and decisions over time.

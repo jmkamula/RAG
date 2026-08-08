@@ -1,0 +1,17 @@
+must_id: item:A.7.13:reg_offsite_chain
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Per-event offsite-maintenance chain-of-custody where applicable
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, time, and description of each offsite maintenance event in the Maintenance Event Register.
+- Name the specific individual responsible for authorizing and overseeing the offsite transfer for each
+  event.
+- Document the chain-of-custody by listing all persons and organizations who handled the asset during
+  offsite maintenance, including handover dates.
+- Attach supporting evidence such as signed handover forms or transport receipts to each register entry.
+- Specify asset identifiers clearly—avoid vague descriptions like "server" or "equipment" that could apply
+  to multiple items.

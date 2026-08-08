@@ -1,0 +1,18 @@
+must_id: item:A.5.23:reg_classification
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Data classification per service (which org-classification levels are processed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each cloud service in the Cloud Service Register, including the service name, provider, and a brief
+  description of its purpose.
+- Assign the data classification level(s) for information processed or stored by each service, using your
+  organisation’s official classification scheme.
+- Name the person responsible for confirming the classification for each service — use a specific individual,
+  not a team or department.
+- Record the date when the classification was last reviewed or updated for each service entry.
+- Attach supporting evidence, such as a data flow diagram or classification assessment, to each register
+  entry to show how the classification decision was reached.

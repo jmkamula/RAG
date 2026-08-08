@@ -1,0 +1,20 @@
+must_id: item:A.6.7:proc_travel_briefing
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Specific travel-briefing step for high-risk destinations (countries with elevated surveillance
+  / corporate-espionage risk — burner laptop, restricted credentials, encrypted comms only)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific person responsible for identifying high-risk travel destinations using up-to-date threat
+  intelligence sources.
+- Document a travel-briefing checklist that includes burner laptop issuance, restricted credential access,
+  and encrypted communications requirements for high-risk destinations.
+- Record each completed travel-briefing session with the traveler’s name, date, and the specific high-risk
+  controls discussed.
+- Retain evidence that travelers acknowledged and agreed to the high-risk controls prior to departure,
+  such as a signed briefing form.
+- Avoid generic or copy-paste briefing templates; tailor each briefing record to the specific risks and
+  controls relevant to the destination.

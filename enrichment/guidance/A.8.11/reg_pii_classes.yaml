@@ -1,0 +1,20 @@
+must_id: item:A.8.11:reg_pii_classes
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Per-row PII classes present (drives technique selection — strong pseudonymisation for special-category
+  PII)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each dataset in the masking register, naming the data source and providing a unique identifier
+  for traceability.
+- Record the specific PII class for each row or field, such as "name," "email," or "health data," using
+  clear, unambiguous terms.
+- State the masking or pseudonymisation technique applied to each PII class, referencing the rationale
+  for strong methods with special-category data.
+- Name the individual responsible for maintaining the register, avoiding generic roles like "the team"
+  or "IT department."
+- Date each entry and update, ensuring all changes to PII classification or masking technique are logged
+  with a timestamp.

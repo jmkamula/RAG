@@ -1,0 +1,16 @@
+must_id: item:A.7.14:scope_change_drivers
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new equipment class entering EOL, regulatory change on disposal)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current equipment classes covered by the disposal scope in a dated inventory document.
+- Document specific triggers for re-scoping, such as new equipment types reaching end-of-life or changes
+  in disposal regulations, in a maintained register.
+- Assign a named individual responsible for monitoring regulatory updates and equipment lifecycle changes,
+  with their name and role recorded.
+- Record each review of the trigger list with the review date and reviewer’s signature or approval.
+- Name the owner as a specific individual — do not use generic titles like "IT team" or "Facilities".

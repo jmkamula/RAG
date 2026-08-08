@@ -1,0 +1,19 @@
+must_id: item:A.7.4:rev_coverage_check
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: Coverage check — blind spots remediated? new areas brought into monitoring scope?
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current monitoring areas in a dated inventory, including any new areas added since the last
+  review.
+- Cross-reference monitoring coverage with your latest risk assessment to identify and document any unmonitored
+  or under-monitored areas.
+- Record actions taken to address previously identified blind spots, including responsible individuals
+  and completion dates.
+- Name the reviewer as a specific individual, not a group or department, and capture their sign-off on
+  the updated monitoring scope.
+- Attach meeting minutes or a summary report that details the discussion and decisions about expanding
+  or adjusting monitoring coverage.

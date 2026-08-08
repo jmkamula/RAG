@@ -1,0 +1,16 @@
+must_id: item:9.3:proc_pre_read
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Pre-read distribution rule (inputs sent in advance)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that all management review inputs must be distributed to participants at least
+  five working days before the meeting date.
+- Document the method and timing of pre-read distribution, such as attaching agendas and reports to a
+  calendar invite or email, in the procedure.
+- Assign responsibility for sending pre-read materials to a named individual, not a group or generic role.
+- Retain copies of pre-read distribution emails or calendar invites showing the date sent and the list
+  of recipients.

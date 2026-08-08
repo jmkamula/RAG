@@ -1,0 +1,18 @@
+must_id: item:A.8.15:rev_silent_sources
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Silent-source detection — sources missing recent events triaged
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a list of all expected log sources, including system names and responsible owners, in a dated
+  register.
+- Record the date and outcome of each periodic review, noting any sources that have not generated recent
+  events.
+- Assign a named individual to investigate each silent log source and document the triage results with
+  timestamps.
+- Name the owner as a specific individual for each log source — do not use group names or generic roles.
+- Retain evidence of follow-up actions taken for each silent source, including decisions and remediation
+  steps, in a central repository.

@@ -1,0 +1,16 @@
+must_id: item:A.5.35:review_date
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Review date and period covered (start/end of the review activity + observation window)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact start and end dates of the review activity in the report, referencing the calendar dates
+  when the review work was performed.
+- Specify the observation window by clearly recording the period under examination, including both the
+  beginning and ending dates.
+- Confirm the report includes the date it was finalized and issued, not just the review dates.
+- Name the review period using precise dates — avoid vague phrases like "recent months" or "quarterly
+  review."

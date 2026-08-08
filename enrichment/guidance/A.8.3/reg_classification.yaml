@@ -1,0 +1,17 @@
+must_id: item:A.8.3:reg_classification
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Per-row classification tier (drives enforcement strictness)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a classification tier to each system entry in the access matrix, using your organisation’s approved
+  data classification scheme.
+- Record the date and name of the person who assigned or last updated the classification tier for each
+  system row.
+- Cross-reference each classification tier with the relevant policy or standard that defines enforcement
+  requirements for that tier.
+- Name the classification tier specifically for each row—do not leave the field blank or use generic terms
+  like "varies" or "see policy".

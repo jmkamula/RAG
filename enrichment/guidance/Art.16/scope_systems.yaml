@@ -1,0 +1,17 @@
+must_id: item:Art.16:scope_systems
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Systems enumerated (PII inventory cross-reference — A.5.34:pii_inventory + Art.30 RoPA)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference your personal data inventory to identify all systems where personal data is stored or
+  processed that may require rectification.
+- List each applicable system by name and location in a dated document, linking each entry to the relevant
+  record in your processing activities register.
+- Name the individual responsible for maintaining this systems list, ensuring a specific person is identified
+  rather than a team or department.
+- Review the list to confirm no systems are described generically or omitted due to lack of clarity in
+  the inventory.

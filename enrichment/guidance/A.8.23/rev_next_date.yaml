@@ -1,0 +1,13 @@
+must_id: item:A.8.23:rev_next_date
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Web Filtering Program in the review log or meeting minutes.
+- Record the name of the person responsible for scheduling the next review alongside the planned date.
+- Confirm the review date is specific and not listed as "TBD" or "annually" without a calendar date.
+- Retain a dated copy of the document or record where the next review date is stated.

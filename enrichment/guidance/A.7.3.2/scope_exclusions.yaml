@@ -1,0 +1,17 @@
+must_id: item:A.7.3.2:scope_exclusions
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: Excluded contexts with rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all contexts where privacy notices are typically required, referencing your data processing inventory
+  as the source.
+- Identify and document each context you are excluding from notice requirements, specifying the exact
+  process or system.
+- State the rationale for each exclusion in clear, specific terms, linking to relevant risk assessments
+  or legal interpretations.
+- Name the decision-maker who approved each exclusion as a specific individual, not a group or department.
+- Date each exclusion entry to show when the decision was made and last reviewed.

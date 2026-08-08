@@ -1,0 +1,48 @@
+leaf_id: req:A.7.2.8:ropa_maintenance_procedure
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You can't maintain an accurate RoPA unless you know the purposes for which personal data
+    is processed. This artefact ensures all processing activities are properly identified and documented
+    before maintenance procedures can be defined.
+  good_enough: A current, working list of processing purposes for all activities in scope, even if not
+    fully detailed, is available.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Each RoPA entry must include the lawful basis for processing. Maintenance procedures depend
+    on this information being available and up to date for each activity.
+  good_enough: A basic mapping of each processing activity to its lawful basis exists, even if some edge
+    cases are still being clarified.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The RoPA and its maintenance procedure must align with the defined scope of the ISMS, ensuring
+    only relevant activities are included and maintained.
+  good_enough: A documented ISMS scope that clearly defines organizational and system boundaries for personal
+    data processing.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Effective RoPA maintenance requires clear assignment of responsibilities for updating, reviewing,
+    and reconciling the register.
+  good_enough: Named individuals or teams are assigned responsibility for RoPA management, even if detailed
+    RACI charts are still in progress.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: cross_role
+  rationale: The GDPR's Article 30 defines the minimum content and structure for a RoPA, which the maintenance
+    procedure must support to ensure ongoing compliance.
+  good_enough: A basic understanding of Article 30 requirements is documented and referenced in RoPA-related
+    activities.

@@ -1,0 +1,20 @@
+must_id: item:A.6.4:contributory_factors
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Consideration of contributory factors (intent, recurrence, impact, awareness training status
+  — was the person trained on what they breached?)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each disciplinary case with a written summary that explicitly lists intent, recurrence, impact,
+  and the person’s security training completion status.
+- Name the individual who assessed contributory factors for each case, avoiding group or department-level
+  attribution.
+- Record the date and outcome of the awareness training the person received before the incident, attaching
+  relevant training logs.
+- State in the disciplinary decision file how each contributory factor influenced the chosen action or
+  sanction.
+- Retain evidence that each case was reviewed for proportionality, such as a signed statement or checklist
+  completed by the decision-maker.

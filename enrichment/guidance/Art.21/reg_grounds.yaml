@@ -1,0 +1,19 @@
+must_id: item:Art.21:reg_grounds
+control_ref: Art.21
+standard_id: GDPR:2016/679
+must_text: Per-row grounds for continuing (for legitimate-interests objections continued)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific legitimate interest relied upon for each objection where processing continues, referencing
+  the relevant business purpose or legal basis.
+- Document the outcome of the balancing test for each continued processing decision, including why the
+  legitimate interest overrides the individual's objection.
+- Name the decision-maker responsible for approving continued processing for each objection, ensuring
+  a specific individual is listed.
+- Enter the date when the decision to continue processing was made for each objection, providing a clear
+  timeline of actions taken.
+- Avoid using generic or boilerplate justifications; tailor the grounds for continuing processing to each
+  individual objection.

@@ -1,0 +1,15 @@
+must_id: item:A.7.8:rev_next_date
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Equipment Siting Program in the official review schedule
+  document.
+- Record the date in a version-controlled document that is accessible to all relevant stakeholders.
+- Name a specific individual responsible for updating the review date, avoiding generic titles like "the
+  team" or "IT".
+- Retain evidence of the last review meeting minutes showing agreement on the next planned review date.

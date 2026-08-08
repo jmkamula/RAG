@@ -1,0 +1,18 @@
+must_id: item:Art.38:involvement
+control_ref: Art.38
+standard_id: GDPR:2016/679
+must_text: DPO involvement in 'all issues which relate to the protection of personal data' (Art.38.1)
+  — invitation rights + escalation paths
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for inviting the Data Protection Officer (DPO) to all meetings and decisions
+  involving personal data protection issues, including a dated process flow.
+- Name the DPO as a specific individual with contact details, not just a role or department, in the procedure
+  documentation.
+- State the formal escalation path for the DPO to raise unresolved data protection concerns directly to
+  senior management, with a dated approval record.
+- Record examples of recent invitations sent to the DPO for relevant meetings or consultations, including
+  dates and topics discussed.

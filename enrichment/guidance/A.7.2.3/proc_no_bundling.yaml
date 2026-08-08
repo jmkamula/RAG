@@ -1,0 +1,19 @@
+must_id: item:A.7.2.3:proc_no_bundling
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: No-bundling rule — consent not conditioned on service delivery except where genuinely necessary
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a written procedure that explains how consent requests are separated from service access, except
+  where consent is strictly necessary for delivery.
+- Name the individual responsible for reviewing and approving all consent language to ensure compliance
+  with the no-bundling rule.
+- Record examples of consent forms or online flows showing that optional consents are not pre-ticked or
+  required for basic service access.
+- State in the procedure that any exception to the no-bundling rule must be justified in writing, with
+  a clear explanation of necessity.
+- Avoid using generic statements like "consent is required for all services" without specific justification,
+  as auditors will flag this as non-compliant.

@@ -1,0 +1,18 @@
+must_id: item:A.7.1:access_points
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Access points designated per perimeter (which doors are entry/exit, which are emergency-only)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical perimeters in your facility, such as building boundaries, office suites, and secure
+  rooms, in a dated policy document.
+- Identify and label each access point for every perimeter, specifying which doors are designated for
+  entry/exit and which are emergency-only.
+- Attach a floor plan or diagram to the policy, cross-referencing each access point’s designation to its
+  location on the map.
+- Name the person responsible for maintaining and updating access point designations as a specific individual,
+  not a team or department.
+- Record the approval date and signature of management on the current version of the policy.

@@ -1,0 +1,41 @@
+leaf_id: req:B.8.5.2:applicable_scope
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You must know the overall boundaries of your information security management system before
+    you can specify which jurisdictions are in scope for PII processing as a processor. This ensures your
+    privacy scope aligns with your broader ISMS.
+  good_enough: A clear, current ISMS scope statement that identifies the organizational and geographic
+    boundaries relevant to information security.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: To identify all jurisdictions where customer PII is processed, you need an up-to-date inventory
+    of information assets, including locations and data flows. This is essential for mapping processor
+    destinations.
+  good_enough: A working asset register that lists major systems, data stores, and their physical or cloud
+    locations, even if some minor assets are pending.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purposes for which you process PII on behalf of customers to determine
+    which processing activities (and thus which jurisdictions) are in scope for processor obligations.
+  good_enough: A documented list of PII processing purposes for each customer or processing activity,
+    even if some are high-level.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity helps clarify which jurisdictions
+    are relevant and ensures you only include destinations where processing is legitimate.
+  good_enough: A summary of lawful bases for main processing activities, mapped to jurisdictions, even
+    if some edge cases are still under review.

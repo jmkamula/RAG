@@ -1,0 +1,19 @@
+must_id: item:A.5.3:review_outcome
+control_ref: A.5.3
+standard_id: ISO27001:2022
+must_text: Outcome per conflict pair (no change / amended / retired / new pair added)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a specific individual to lead the segregation of duties review and record their name in the review
+  documentation.
+- List each conflict pair reviewed, stating the outcome for each as "no change," "amended," "retired,"
+  or "new pair added," with supporting details.
+- Record the date of the review and have the reviewer sign or formally acknowledge completion in the review
+  log.
+- Attach evidence of any changes made, such as updated access rights or revised process documents, to
+  the review record.
+- Avoid using vague outcomes like "reviewed" or "OK"—clearly specify the action taken for each conflict
+  pair.

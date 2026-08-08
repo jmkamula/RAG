@@ -1,0 +1,40 @@
+leaf_id: req:A.5.7:threat_intel_feed_register
+control_ref: A.5.7
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organization and which information assets are in scope
+    for threat intelligence monitoring before you can meaningfully register and curate threat intelligence
+    feeds.
+  good_enough: A clear, documented scope that identifies the business units, systems, and processes covered
+    by the ISMS is available and up to date.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding your risk landscape helps determine which types of threat intelligence are
+    relevant and what sources should be prioritized in the register.
+  good_enough: A recent risk assessment exists that identifies key threats and risk areas relevant to
+    the organization’s assets and operations.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need a current inventory of information assets to map which threat intelligence feeds
+    are relevant to which assets, ensuring coverage and value.
+  good_enough: An asset register exists that lists major information assets, owners, and basic classifications,
+    even if some details are pending.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of responsibility is needed to ensure someone is accountable for maintaining
+    the threat intelligence feed register and acting on its insights.
+  good_enough: Documented roles exist for information security and threat monitoring, with named individuals
+    or teams assigned.

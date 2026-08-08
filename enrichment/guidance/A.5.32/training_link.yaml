@@ -1,0 +1,19 @@
+must_id: item:A.5.32:training_link
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Cross-link to A.6.3 awareness — staff training on IPR (especially open-source and AI-tool usage)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the Intellectual Property Rights Protection Procedure to the staff training materials
+  that address open-source and AI-tool usage, citing specific document titles and dates.
+- Document the date and content of the most recent staff training session covering intellectual property
+  rights, including open-source and AI-tool topics.
+- Name the individual responsible for maintaining and updating the Intellectual Property Rights Protection
+  Procedure and related training content.
+- Attach a signed attendance record or completion report for staff who have completed IPR training, ensuring
+  it covers open-source and AI-tool usage.
+- Avoid referencing generic or outdated training modules; specify only current, organisation-specific
+  materials linked to your actual procedure.

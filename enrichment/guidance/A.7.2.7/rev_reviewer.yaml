@@ -1,0 +1,15 @@
+must_id: item:A.7.2.7:rev_reviewer
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Legal)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer and a specific Legal representative as the reviewers for the Joint
+  Controller Program Review.
+- Record the full names, job titles, and contact details of both reviewers in the review documentation.
+- Document the date the review was completed and include both reviewers’ signatures or formal electronic
+  approvals.
+- Avoid listing generic roles such as "Legal Department" or "Compliance Team"—use only named individuals.

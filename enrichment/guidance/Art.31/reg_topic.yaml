@@ -1,0 +1,15 @@
+must_id: item:Art.31:reg_topic
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Per-row topic (inquiry / complaint investigation / on-site audit / Art.36 consultation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Record the topic of each supervisory authority interaction in the register, specifying if it is an inquiry,
+  complaint investigation, on-site audit, or Article 36 consultation.
+- Name the individual responsible for entering and updating the topic for each row in the register.
+- Confirm that each register entry includes a date and a unique reference to the specific interaction.
+- Avoid using vague or generic topics; describe the nature of the interaction clearly and select only
+  from the required categories.

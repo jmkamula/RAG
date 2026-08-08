@@ -1,0 +1,15 @@
+must_id: item:A.7.10:reg_media_id
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Per-row media identifier (serial/asset tag)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique serial number or asset tag to each storage media item before adding it to the register.
+- Record the assigned serial number or asset tag in a dedicated column for every row in the storage media
+  register.
+- Cross-reference each media entry with its physical or digital label to confirm the identifier matches
+  what is on the item.
+- Name the owner responsible for each media item as a specific individual, not a team or department.

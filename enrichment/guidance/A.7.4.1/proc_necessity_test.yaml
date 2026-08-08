@@ -1,0 +1,18 @@
+must_id: item:A.7.4.1:proc_necessity_test
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Necessity test per data field — adequate + relevant + necessary for stated purpose
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each personal data field collected in a table, linking it to the specific business purpose for
+  which it is used.
+- Document a written necessity test for each data field, explaining why it is adequate, relevant, and
+  necessary for the stated purpose.
+- Name the individual who approved the necessity test for each data field, ensuring this is a specific
+  person and not a team or department.
+- Record the date when each necessity test was last reviewed or updated, showing regular reassessment.
+- Attach supporting evidence, such as meeting minutes or approval emails, confirming the necessity assessment
+  was discussed and agreed.

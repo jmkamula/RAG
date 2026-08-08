@@ -1,0 +1,19 @@
+must_id: item:B.8.5.1:reg_change_history
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+must_text: Change history per row (all previous bases + notification dates)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each change to the transfer basis in a dedicated row, including the previous and new basis, with
+  clear effective dates.
+- Document the notification date for each change, showing when affected parties were informed in advance
+  of the new transfer basis.
+- Name the individual responsible for approving each change, using a full name rather than a generic role
+  or team.
+- Retain all previous transfer bases and their notification dates in the register, not just the current
+  basis, to provide a complete change history.
+- Cross-reference each change entry with supporting communication records, such as sent emails or signed
+  notifications, to evidence advance notice.

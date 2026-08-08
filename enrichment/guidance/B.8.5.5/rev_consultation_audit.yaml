@@ -1,0 +1,19 @@
+must_id: item:B.8.5.5:rev_consultation_audit
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Consultation audit — customer-consultation happened before disclosure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and method of customer consultation before any disclosure decision in a log entry tied
+  to the specific disclosure event.
+- Name the individual who conducted the customer consultation, ensuring their full name and role are listed
+  in the consultation record.
+- Attach a copy of the customer's response or feedback, such as an email or signed form, to the disclosure
+  decision documentation.
+- Confirm that the consultation record is dated before the disclosure action, not after, to avoid auditor
+  concerns about retroactive compliance.
+- Retain all related correspondence and meeting notes as part of the disclosure decision file for future
+  reference.

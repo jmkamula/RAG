@@ -1,0 +1,17 @@
+must_id: item:Art.36:reg_outcome
+control_ref: Art.36
+standard_id: GDPR:2016/679
+must_text: Per-row outcome (approved / approved-with-conditions / advised-against)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the outcome of each prior consultation request in the register as either "approved," "approved-with-conditions,"
+  or "advised-against," with no other wording.
+- State the date the outcome was decided for each entry to provide a clear timeline of the consultation
+  process.
+- Name the individual or authority who made the decision for each consultation outcome, not just a team
+  or department.
+- Retain any supporting documentation or correspondence that explains the reasoning behind the recorded
+  outcome for each row.

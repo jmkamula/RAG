@@ -1,0 +1,17 @@
+must_id: item:A.5.5:scope_legal_register_link
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Cross-link to the legal/regulatory register (A.5.31) — same drivers; the two should stay aligned
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference your list of applicable authorities with the legal and regulatory register by including
+  direct links or identifiers in both documents.
+- Document the date of your last cross-check between the authorities scope and the legal/regulatory register,
+  and record who performed it.
+- Name the person responsible for maintaining alignment between the authorities scope and the legal/regulatory
+  register, ensuring a specific individual is listed.
+- Attach a signed statement confirming that both documents have been reviewed together and reflect the
+  same legal and regulatory requirements.

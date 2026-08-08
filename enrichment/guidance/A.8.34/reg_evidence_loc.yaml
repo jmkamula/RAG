@@ -1,0 +1,19 @@
+must_id: item:A.8.34:reg_evidence_loc
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Per-engagement evidence-artefact location reference
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the unique name and date of each audit testing engagement in the register to create a clear entry
+  for every assessment.
+- Cross-reference each engagement entry with the exact storage location or system path of its supporting
+  evidence artefacts.
+- Name the responsible individual for maintaining each evidence location, avoiding generic titles like
+  "the team" or "IT department".
+- Review and update the register after each engagement to confirm all evidence locations remain accurate
+  and accessible.
+- Document any changes to evidence locations with the date and author of the update to maintain a traceable
+  history.

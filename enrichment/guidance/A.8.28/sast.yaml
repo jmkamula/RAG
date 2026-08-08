@@ -1,0 +1,19 @@
+must_id: item:A.8.28:sast
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Automated static analysis (SAST) in CI pipeline (blocking severity threshold)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the use of an automated static analysis tool in your secure coding procedure, naming the tool
+  and where it runs in the CI pipeline.
+- State the severity threshold that blocks code merges or deployments, and include a dated screenshot
+  or configuration file showing this setting.
+- Record an example of a recent pipeline run where code was blocked due to a static analysis finding,
+  including timestamps and responsible developer.
+- Name the individual responsible for maintaining the static analysis configuration, avoiding generic
+  roles like "the team" or "developers".
+- Retain a signed approval from a technical lead confirming that the static analysis step is enforced
+  in all relevant CI pipelines.

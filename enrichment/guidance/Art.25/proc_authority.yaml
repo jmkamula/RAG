@@ -1,0 +1,16 @@
+must_id: item:Art.25:proc_authority
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Decision authority for DPbD outcomes (DPO + product lead + engineering lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the decision authority for Data Protection by Design outcomes as the Data Protection Officer, product
+  lead, and engineering lead in the procedure document.
+- Record the full names and job titles of each decision authority in a dated appendix or table within
+  the procedure.
+- Obtain signatures from the DPO, product lead, and engineering lead on the latest approved version of
+  the procedure.
+- Avoid listing decision authority as a group or department; specify named individuals to prevent ambiguity.

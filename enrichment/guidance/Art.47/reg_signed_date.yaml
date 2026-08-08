@@ -1,0 +1,14 @@
+must_id: item:Art.47:reg_signed_date
+control_ref: Art.47
+standard_id: GDPR:2016/679
+must_text: Per-row binding-commitment signed date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each binding corporate rule (BCR) commitment was signed in a dedicated column for every
+  entry in the BCR Coverage Register.
+- Cross-reference each signed date with a copy of the actual signed BCR document to confirm accuracy.
+- Name the individual who signed each BCR commitment, avoiding generic titles or group names.
+- Retain a scanned copy of the signed BCR document alongside the register entry for each row.

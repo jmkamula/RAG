@@ -1,0 +1,40 @@
+leaf_id: req:A.8.18:privileged_utility_programs_policy
+control_ref: A.8.18
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, applications, and environments are in-scope for your ISMS
+    before defining which privileged utility programs require policy coverage. This ensures the policy
+    is relevant and complete.
+  good_enough: A clear, documented scope that identifies the boundaries and applicability of the ISMS,
+    including key systems and business units.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register is necessary to identify which systems and software are present,
+    so you can determine where privileged utility programs exist and need to be controlled.
+  good_enough: A basic inventory of information assets, including critical systems and software, is available
+    and covers all in-scope environments.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities is needed to specify who can authorise, use,
+    and manage privileged utility programs in your policy.
+  good_enough: Documented roles exist for key ISMS and IT functions, with basic mapping of who is responsible
+    for privileged access and utility program oversight.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment helps identify threats and vulnerabilities related to privileged utility
+    programs, informing the policy's controls and restrictions.
+  good_enough: A recent risk assessment has considered privileged access and utility program risks, even
+    if mitigation actions are still in progress.

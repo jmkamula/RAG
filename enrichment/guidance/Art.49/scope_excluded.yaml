@@ -1,0 +1,17 @@
+must_id: item:Art.49:scope_excluded
+control_ref: Art.49
+standard_id: GDPR:2016/679
+must_text: Derogations explicitly NOT relied on (rationale)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all GDPR Article 49 derogations and mark those not applicable to your data transfers in a dated
+  record.
+- State the specific reasons why each non-relied derogation does not apply, referencing relevant business
+  processes or data types.
+- Name the decision-maker who confirmed the non-use of each derogation, ensuring this is a specific individual
+  and not a group or department.
+- Attach supporting documentation, such as legal opinions or data flow diagrams, that substantiate your
+  rationale for excluding each derogation.

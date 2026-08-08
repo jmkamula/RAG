@@ -1,0 +1,49 @@
+leaf_id: req:A.7.3.6:acr_request_register
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purposes for which personal data is processed before you can meaningfully
+    log and respond to access, correction, or erasure (ACR) requests. This ensures each request is evaluated
+    in the context of its processing purpose.
+  good_enough: A documented list of processing purposes for all relevant data types, even if not fully
+    mapped to every system, is sufficient to start the register.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity is essential to determine if
+    an ACR request can be fulfilled or must be limited. This underpins the decision logic recorded in
+    the register.
+  good_enough: A working table mapping each processing activity to its lawful basis, even if some edge
+    cases are flagged for later review.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that ACR requests are handled by authorized personnel and
+    that accountability for register maintenance is established.
+  good_enough: A named individual or team responsible for ACR request handling and register upkeep, documented
+    in a policy or procedure.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need to know where personal data resides to log, track, and fulfill ACR requests. The
+    asset register provides this foundational visibility.
+  good_enough: A basic inventory of systems and data stores containing personal data, even if not fully
+    exhaustive, is enough to begin tracking requests.
+- ref: Art.12
+  standard_id: GDPR:2016/679
+  title: Transparent Information, Communication and Modalities
+  category: cross_role
+  rationale: GDPR requires that data subjects are informed about their rights and the process for exercising
+    them. This legal yardstick shapes what must be tracked in the ACR request register.
+  good_enough: A summary of how ACR requests are communicated to data subjects and the main modalities
+    in place, even if not fully formalized.

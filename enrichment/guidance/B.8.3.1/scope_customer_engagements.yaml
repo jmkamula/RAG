@@ -1,0 +1,16 @@
+must_id: item:B.8.3.1:scope_customer_engagements
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+must_text: Customer engagements enumerated (link to B.8.2.1 register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current customer engagements in a dated register, including project names and unique identifiers
+  for each engagement.
+- Cross-reference each engagement in the register to the B.8.2.1 register, showing how each is covered
+  by support scope.
+- Name a specific individual responsible for maintaining and updating the customer engagement register,
+  not a generic team or department.
+- Record the date of the most recent review or update to the register to demonstrate it is current.

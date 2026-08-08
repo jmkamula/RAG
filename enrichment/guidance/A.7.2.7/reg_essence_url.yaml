@@ -1,0 +1,17 @@
+must_id: item:A.7.2.7:reg_essence_url
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Essence-of-arrangement URL / publication reference per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the public URL or internal publication reference for the joint controller arrangement in a dedicated
+  column for each entry in the register.
+- Confirm that each URL or reference leads directly to the specific arrangement text, not a generic policy
+  or unrelated document.
+- Name the responsible individual who verified the accuracy and accessibility of each arrangement reference,
+  including the date of verification.
+- Avoid leaving any arrangement row blank or marked "TBC" for the publication reference, as auditors will
+  flag incomplete entries.

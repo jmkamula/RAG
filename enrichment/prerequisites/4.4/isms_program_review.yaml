@@ -1,0 +1,38 @@
+leaf_id: req:4.4:isms_program_review
+control_ref: '4.4'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: Determining the scope of the ISMS
+  category: foundational
+  rationale: The ISMS manual and its review must be anchored to a clearly defined scope; without knowing
+    what the ISMS covers, any review would be incomplete or misaligned.
+  good_enough: A documented scope statement exists that defines the organizational boundaries and applicability
+    of the ISMS.
+- ref: '7.5'
+  standard_id: ISO27001:2022
+  title: Documented information
+  category: foundational
+  rationale: The ISMS manual and related documents must be controlled and maintained as documented information;
+    otherwise, there is nothing concrete to review or verify for accuracy.
+  good_enough: There is a current, accessible set of ISMS documents under version control, with clear
+    ownership and update history.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: direct
+  rationale: The ISMS manual review must ensure alignment with the organization’s information security
+    policy; without a defined policy, the review cannot check for consistency or adequacy.
+  good_enough: An approved information security policy exists and is referenced in the ISMS manual.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information security risk assessment
+  category: direct
+  rationale: The ISMS manual should reflect the organization’s current risk environment; a recent risk
+    assessment is needed to verify that the manual addresses relevant risks.
+  good_enough: A risk assessment has been performed or updated within the last review cycle, with key
+    risks documented.

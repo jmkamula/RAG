@@ -1,0 +1,17 @@
+must_id: item:A.6.3:scope_audience_segments
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Audience segments enumerated (all-staff baseline, role-specific tiers — developers, admins,
+  finance, HR, executives, contractors, board)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all audience segments by specific role or function, such as developers, admins, finance, HR, executives,
+  contractors, and board members, in a dated document.
+- Name the person responsible for maintaining the audience list as a specific individual, not a group
+  or department.
+- Cross-reference each audience segment to the relevant training curriculum or materials in a curriculum
+  mapping table.
+- Record the date when the audience list was last reviewed and updated, and retain the reviewer’s name.

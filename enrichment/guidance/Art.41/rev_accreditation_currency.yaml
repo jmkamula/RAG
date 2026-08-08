@@ -1,0 +1,17 @@
+must_id: item:Art.41:rev_accreditation_currency
+control_ref: Art.41
+standard_id: GDPR:2016/679
+must_text: Accreditation currency — SA accreditation still in force
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Confirm the current accreditation certificate from the Supervisory Authority is valid and has not expired
+  by checking the issue and expiry dates.
+- Record the certificate number, issuing authority, and validity period in your compliance register with
+  a link to the original document.
+- Name the responsible individual who monitors accreditation status, not just a department or generic
+  team.
+- Retain copies of all correspondence with the Supervisory Authority regarding accreditation renewals
+  or updates, including dates and contact names.

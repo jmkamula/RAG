@@ -1,0 +1,40 @@
+leaf_id: req:A.7.1:perimeter_program_review
+control_ref: A.7.1
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The perimeter review must be anchored to a clear, up-to-date definition of what the ISMS
+    covers. Without a defined scope, you can't meaningfully assess whether perimeters and controls are
+    appropriate.
+  good_enough: A documented scope statement exists, describing the organizational and technical boundaries
+    of the ISMS, even if minor updates are pending.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Reviewing perimeters requires knowing what assets exist and where they reside. The asset
+    register is the authoritative source for this information.
+  good_enough: There is a current asset register listing key information assets and their locations; it
+    may be incomplete, but major assets and sites are captured.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The review checks if perimeters align with classification needs. You need a defined classification
+    scheme to judge if the perimeter is fit for purpose.
+  good_enough: A documented classification scheme exists, specifying at least basic categories and handling
+    requirements for information types.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: The perimeter review should consider current risks and whether changes in risk exposure require
+    perimeter adjustments. A baseline risk assessment is essential context.
+  good_enough: A recent risk assessment has been performed, identifying key threats and vulnerabilities
+    relevant to perimeter controls.

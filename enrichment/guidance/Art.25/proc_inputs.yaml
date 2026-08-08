@@ -1,0 +1,20 @@
+must_id: item:Art.25:proc_inputs
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Inputs to DPbD review (purpose, data minimisation alternatives, special-category overlay, retention
+  rules)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific business purpose for collecting and processing each category of personal data
+  in the DPbD review record.
+- List all considered data minimisation alternatives, including those rejected, with a brief explanation
+  for each decision in the review documentation.
+- Identify and flag any special-category data involved, recording additional safeguards or overlays applied
+  in the review file.
+- Specify the retention rules for each data type, including time limits and deletion triggers, in the
+  DPbD review form.
+- Name the reviewer as a specific individual, not a group or department, and record the review date in
+  the procedure documentation.

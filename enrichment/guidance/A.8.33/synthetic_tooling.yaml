@@ -1,0 +1,19 @@
+must_id: item:A.8.33:synthetic_tooling
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Synthetic-data-generation tooling preferred over masking where feasible (reduces residual risk)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that synthetic data generation tools are the preferred method for test data creation
+  where technically feasible.
+- Document the evaluation process used to determine feasibility of synthetic data generation versus data
+  masking for each major system.
+- Record the decision and rationale for each system in a dated register, naming the responsible individual
+  who approved the approach.
+- Name the owner of the test information management procedure as a specific individual, not a team or
+  department.
+- Attach evidence of tool selection, such as purchase records or tool configuration screenshots, to support
+  the stated preference for synthetic data.

@@ -1,0 +1,41 @@
+leaf_id: req:9.1:applicable_measurement_scope
+control_ref: '9.1'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope statement defines the organizational boundaries, processes, and assets covered
+    by the management system. Without a clear scope, it is impossible to determine which processes and
+    controls should be measured or excluded.
+  good_enough: A documented scope statement that identifies the key organizational units, activities,
+    and assets included in the ISMS, even if some details are still being refined.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: direct
+  rationale: Risk assessment results identify which processes and controls are critical and therefore
+    must be measured for effectiveness. This ensures measurement efforts are focused on areas of highest
+    risk and relevance.
+  good_enough: A completed risk assessment with a prioritized list of risks and associated controls, sufficient
+    to identify which controls require measurement.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The information security policy sets the organization’s objectives and expectations for information
+    security, which informs what “good” looks like for measurement purposes.
+  good_enough: An approved policy that outlines the main objectives and principles for information security,
+    providing a baseline for defining measurement targets.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register ensures that all relevant assets are considered when defining
+    the measurement scope, avoiding gaps or overlaps in control coverage.
+  good_enough: A current list of key information assets within the ISMS scope, even if some minor assets
+    are still being catalogued.

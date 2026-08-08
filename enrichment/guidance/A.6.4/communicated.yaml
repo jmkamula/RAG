@@ -1,0 +1,20 @@
+must_id: item:A.6.4:communicated
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Communicated to personnel and interested parties (in employment contract, code of conduct,
+  intranet, awareness training)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the disciplinary process in a formal policy that is version-controlled and includes the approval
+  date and approver’s name.
+- Publish the disciplinary process in accessible locations, such as the intranet, employee handbook, and
+  onboarding materials, with clear publication dates.
+- Record evidence that all current personnel have been notified of the disciplinary process, such as signed
+  acknowledgements or digital read receipts.
+- Name the policy owner as a specific individual, not a department or generic role, to avoid ambiguity
+  in responsibility.
+- Retain training records or attendance logs showing the disciplinary process was covered in awareness
+  sessions, including session dates and trainer names.

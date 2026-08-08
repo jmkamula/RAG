@@ -1,0 +1,39 @@
+leaf_id: req:Art.31:cooperation_program_review
+control_ref: Art.31
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to respond accurately and promptly
+    to supervisory authority (SA) inquiries. This forms the factual basis for cooperation and review.
+  good_enough: A current, reasonably complete RoPA covering all core processing activities, even if some
+    minor updates are pending.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated Data Protection Officer (DPO) is typically the main point of contact for SAs
+    and coordinates responses and cooperation. Without a DPO, the review process is likely to stall.
+  good_enough: A named DPO (internal or external) with contact details, even if some onboarding or training
+    is still in progress.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Clear documentation of lawful bases for processing is essential to answer SA questions and
+    demonstrate compliance during reviews.
+  good_enough: A documented list of lawful bases for all major processing activities, even if some edge
+    cases are still under review.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: Knowing the ISMS scope ensures that the cooperation review covers all relevant business units
+    and systems, avoiding gaps in SA responses.
+  good_enough: A defined ISMS scope that includes all GDPR-relevant processing, even if not fully mapped
+    to every asset yet.

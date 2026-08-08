@@ -1,0 +1,17 @@
+must_id: item:Art.24:role_activity_id
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Per-row processing activity (Art.30 RoPA reference)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the controller or processor for each processing activity as a specific individual or legal entity,
+  not a generic team or department.
+- Record the date when the controller or processor role decision was made for each processing activity.
+- Cross-reference each processing activity with its corresponding entry in the Article 30 Record of Processing
+  Activities (RoPA).
+- Document the rationale for assigning the controller or processor role for each processing activity,
+  citing relevant GDPR articles where applicable.
+- Retain evidence of approval or sign-off for each role decision, such as a signed record or meeting minutes.

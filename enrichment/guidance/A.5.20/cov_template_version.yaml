@@ -1,0 +1,17 @@
+must_id: item:A.5.20:cov_template_version
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Template version applied per supplier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the template version number and date used for each supplier agreement in the Supplier Agreement
+  Coverage Register.
+- Cross-reference each supplier entry in the register with the actual signed agreement to confirm the
+  template version applied.
+- Name the person responsible for updating the register with template version details for each new or
+  renewed supplier agreement.
+- Avoid leaving the template version field blank or marked as "current"—enter the specific version identifier
+  for each supplier.

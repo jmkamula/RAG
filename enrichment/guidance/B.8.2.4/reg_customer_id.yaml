@@ -1,0 +1,17 @@
+must_id: item:B.8.2.4:reg_customer_id
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Customer identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique customer identifier for each notification entry in the register, ensuring it matches
+  the identifier used in your customer management system.
+- Cross-reference each customer identifier with supporting documentation, such as contracts or onboarding
+  records, to confirm correct linkage.
+- Name the responsible staff member who entered each customer identifier, and include the entry date for
+  traceability.
+- Avoid using generic terms like "customer" or "client" as identifiers; always use a specific, unique
+  code or number per customer.

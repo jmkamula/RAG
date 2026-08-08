@@ -1,0 +1,18 @@
+must_id: item:4.4:map_external
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: External integrations shown (supplier handoffs, auditor touchpoints)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and label each process in your ISMS map that interacts with external parties, such as suppliers
+  or auditors, using clear names.
+- Document specific handoff points where information, assets, or responsibilities are transferred to or
+  from external parties, including the type of exchange.
+- State the names or roles of external organisations or individuals involved at each integration point,
+  avoiding generic labels like "third party" or "external".
+- Record the date the process interaction map was last reviewed and updated, with the name of the reviewer.
+- Cross-reference each external integration on the map to related contracts, agreements, or audit schedules,
+  listing document titles or reference numbers.

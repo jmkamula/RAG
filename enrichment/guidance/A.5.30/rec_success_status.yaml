@@ -1,0 +1,19 @@
+must_id: item:A.5.30:rec_success_status
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Success status per record (rto_met / rto_missed_with_reason / partial_recovery_acceptable /
+  failed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Record the recovery event date, system affected, and the individual responsible for overseeing the recovery
+  in each event record.
+- 'State the recovery outcome for each event using only the approved status options: rto_met, rto_missed_with_reason,
+  partial_recovery_acceptable, or failed.'
+- Document the reason for any missed or partial recovery, including supporting evidence such as logs or
+  incident reports, in the event record.
+- Name the responsible individual for each event record — do not use generic labels like "IT team" or
+  "operations".
+- Review each event record for completeness and accuracy, and sign off with the reviewer’s name and date.

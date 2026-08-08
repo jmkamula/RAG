@@ -1,0 +1,20 @@
+must_id: item:A.7.1:scope_drivers
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Sectoral/regulatory drivers per site type (data-centre PCI requirements, healthcare HIPAA,
+  finance regulator inspection rights)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each site covered by your information security management system, including physical addresses
+  and a unique site identifier.
+- Document the sectoral or regulatory requirements that apply to each site, referencing specific laws,
+  standards, or inspection rights.
+- Name the individual responsible for maintaining the regulatory mapping for each site, avoiding generic
+  roles like "compliance team."
+- Record the date when each site's regulatory requirements were last reviewed and updated in your scope
+  documentation.
+- Cross-reference supporting evidence, such as regulator correspondence or certification requirements,
+  for each site in your scope register.

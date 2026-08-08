@@ -1,0 +1,16 @@
+must_id: item:A.8.8:reg_severity
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Per-finding triaged severity (from procedure rubric, not raw CVSS)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each vulnerability’s triaged severity in the backlog register, using the severity levels defined
+  in your documented triage procedure.
+- Cross-reference each severity rating to the specific rubric or procedure version used, including a date
+  or version number.
+- Name the individual who performed the severity triage for each finding, not just a team or generic role.
+- Avoid copying raw CVSS scores without applying your internal rubric; document the rationale for the
+  assigned severity where it differs.

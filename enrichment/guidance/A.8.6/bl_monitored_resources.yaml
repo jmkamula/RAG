@@ -1,0 +1,19 @@
+must_id: item:A.8.6:bl_monitored_resources
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Resources monitored (CPU / memory / storage / network / DB connections / licences)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all critical resources to be monitored, including CPU, memory, storage, network bandwidth, database
+  connections, and software licences, in a dated inventory document.
+- Assign a named individual responsible for reviewing resource usage data and updating the monitoring
+  baseline at least quarterly.
+- Record actual usage metrics for each resource in a monitoring log, including timestamps and source system
+  details.
+- Document thresholds or baseline values for each resource, showing approval by a named manager with a
+  date and signature.
+- Specify each resource by name or system — avoid generic entries like "servers" or "applications" that
+  lack clear identification.

@@ -1,0 +1,18 @@
+must_id: item:A.8.1:scope_byod_model
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: BYOD authorisation model (allowed / not-allowed / conditional with container)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State clearly in a written policy whether personally owned devices are allowed, not allowed, or allowed
+  only with specific security controls.
+- Name the person or role responsible for approving and reviewing the BYOD authorisation model in the
+  documented policy.
+- Record the date the BYOD authorisation model was last reviewed and approved in the policy or decision
+  log.
+- Specify any conditional requirements, such as use of a secure container, in the policy text with explicit
+  technical details.
+- Avoid using vague terms like "BYOD as appropriate"—define the authorisation model in unambiguous language.

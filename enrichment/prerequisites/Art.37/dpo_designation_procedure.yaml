@@ -1,0 +1,40 @@
+leaf_id: req:Art.37:dpo_designation_procedure
+control_ref: Art.37
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date inventory of processing activities to determine if your organization
+    meets the criteria for mandatory DPO designation under Art.37. Without this, you can't reliably assess
+    your obligations.
+  good_enough: A basic, current list of processing activities that covers the main data flows and purposes
+    is sufficient to unblock DPO designation decisions.
+- ref: Art.37.1
+  standard_id: GDPR:2016/679
+  title: Criteria for DPO Designation
+  category: direct
+  rationale: You must interpret and apply the legal criteria in Art.37.1 to decide if a DPO is required.
+    This is the direct legal trigger for the procedure.
+  good_enough: A documented determination (even if provisional) of whether your organization meets any
+    of the Art.37.1 thresholds is enough to proceed.
+- ref: Art.38
+  standard_id: GDPR:2016/679
+  title: Position of the Data Protection Officer
+  category: direct
+  rationale: The procedure must account for the required independence, resources, and reporting lines
+    for the DPO, as set out in Art.38. This ensures your designation process is compliant.
+  good_enough: A summary of how the DPO's independence and resources will be respected, even if details
+    are still being finalized, is sufficient at this stage.
+- ref: Art.39
+  standard_id: GDPR:2016/679
+  title: Tasks of the Data Protection Officer
+  category: direct
+  rationale: Understanding the DPO's statutory tasks is necessary to define the role and qualifications
+    in your designation procedure.
+  good_enough: A list of the main DPO tasks as outlined in Art.39, referenced or summarized in your procedure,
+    is enough to move forward.

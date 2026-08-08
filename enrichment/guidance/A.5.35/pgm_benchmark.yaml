@@ -1,0 +1,19 @@
+must_id: item:A.5.35:pgm_benchmark
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: External benchmarking or industry-practice input considered
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and source of external benchmarking or industry-practice input reviewed during the
+  meta-review cycle.
+- Name the individual responsible for sourcing and presenting external benchmarking data, specifying their
+  role and contact details.
+- Attach copies or summaries of relevant external reports, frameworks, or benchmarking studies referenced
+  in the meta-review.
+- Record the meta-review meeting minutes, explicitly noting discussion and consideration of external or
+  industry-practice input.
+- Avoid referencing only internal sources or generic statements; cite at least one specific external benchmark
+  or industry source.

@@ -1,0 +1,16 @@
+must_id: item:Art.38:rev_reviewer
+control_ref: Art.38
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (executive sponsor + non-executive director / external counsel if available)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the executive sponsor who reviewed the DPO position program, listing their full name and job title
+  in the review documentation.
+- Record the identity of a non-executive director or external counsel who participated in the review,
+  including their full name and role.
+- Confirm that each reviewer’s involvement is documented with a dated signature or written acknowledgment
+  in the program review record.
+- Avoid listing groups or job titles only; specify each reviewer as an individual with a unique identifier.

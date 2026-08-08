@@ -1,0 +1,18 @@
+must_id: item:A.8.1:app_controls
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Application allowlisting / blocklisting on managed endpoints
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the User Endpoint Devices Policy that only approved applications may be installed or run on
+  managed devices.
+- Document the process for reviewing and updating the allowlist and blocklist, including the frequency
+  and responsible individual by name.
+- Record the most recent allowlist and blocklist review date and the name of the person who performed
+  it.
+- Name the policy owner as a specific individual, not a team or department, in the policy document.
+- Retain evidence of communication to users about the allowlisting/blocklisting policy, such as a dated
+  email or intranet announcement.

@@ -1,0 +1,16 @@
+must_id: item:A.5.30:rev_next_date
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Next planned review date stated (within 180d of this review)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned ICT Readiness Program review date in the review report, ensuring it is no more
+  than 180 days from the current review.
+- Record the name of the individual responsible for scheduling the next review, not just a team or department.
+- Document the date the current review was completed and reference it alongside the next planned review
+  date for clear audit tracing.
+- Retain a signed or approved copy of the review report that includes both the current and next review
+  dates.

@@ -1,0 +1,16 @@
+must_id: item:Art.40:adherence_decision
+control_ref: Art.40
+standard_id: GDPR:2016/679
+must_text: Adherence decision recorded — formal commitment to code mechanism
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the formal decision to adhere to the code of conduct in a dated record, signed by an authorised
+  individual.
+- Name the specific person or role responsible for maintaining ongoing adherence to the code in the procedure
+  documentation.
+- Retain a copy of the signed adherence commitment alongside the code of conduct for reference.
+- Avoid using generic statements of intent; reference the exact code of conduct version and date in the
+  recorded decision.

@@ -1,0 +1,19 @@
+must_id: item:A.7.7:locked_storage
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Locked storage requirements per classification level (links to A.5.12)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the locked storage requirements for each information classification level in the Clear Desk and
+  Clear Screen Policy, referencing the Information Classification Policy.
+- Name the person responsible for enforcing locked storage requirements in the policy, using a specific
+  individual's name and job title.
+- Document how compliance with locked storage is monitored, such as periodic checks or audits, and retain
+  dated records of these activities.
+- Cross-reference the policy section on locked storage with the relevant clause in the Information Classification
+  Policy to show alignment.
+- Specify that generic or vague storage instructions, such as "store securely," are replaced with clear,
+  actionable requirements for each classification level.

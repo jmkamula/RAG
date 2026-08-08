@@ -1,0 +1,17 @@
+must_id: item:A.8.16:rev_register_update
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Findings propagated to register / procedure / scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each monitoring program review finding in a central findings register, including the date, reviewer’s
+  name, and a clear description of the issue.
+- Cross-reference each finding in the register to the relevant procedure or scope document that requires
+  update or corrective action.
+- Assign responsibility for each finding to a named individual, not a group or department, to ensure accountability
+  for follow-up actions.
+- Document the status and resolution of each finding in the register, including completion date and evidence
+  of updates to procedures or scope.

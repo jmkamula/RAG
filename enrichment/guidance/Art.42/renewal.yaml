@@ -1,0 +1,17 @@
+must_id: item:Art.42:renewal
+control_ref: Art.42
+standard_id: GDPR:2016/679
+must_text: Renewal cadence — certification limited to max 3 years (Art.42.7)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the certification procedure that each GDPR certification is valid for a maximum of three years
+  from the date of issue.
+- Record the specific expiry date for each certification in a central certification register, alongside
+  the issue date and certification body.
+- Assign responsibility for monitoring certification expiry and renewal deadlines to a named individual,
+  not a team or generic role.
+- Retain evidence of scheduled renewal reviews, such as calendar invites or meeting minutes, showing planned
+  action before the three-year limit.

@@ -1,0 +1,19 @@
+must_id: item:Art.28:scope_exclusions
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Out-of-scope vendors (those processing only their own data, intra-group with no GDPR transfer)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all vendors with access to personal data, including their company name and the nature of their
+  access, in a dated register.
+- Document for each vendor whether they process personal data on your behalf or only their own data, with
+  a clear justification.
+- State explicitly which vendors are excluded from GDPR processor obligations, referencing their intra-group
+  status or lack of data processing on your behalf.
+- Name the reviewer who confirmed the out-of-scope status for each vendor, avoiding generic labels like
+  "the team" or "IT department".
+- Retain supporting correspondence or contracts that demonstrate the vendor's role and the absence of
+  GDPR-relevant processing.

@@ -1,0 +1,17 @@
+must_id: item:B.8.2.3:reg_customer_id
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: Customer identifier per row (which customer's PII involved)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique customer identifier for each entry in the Marketing Use Exception Register, clearly
+  linking the exception to the specific customer's PII.
+- Cross-reference each customer identifier with the corresponding customer record in your customer database
+  to confirm accuracy.
+- State the type of PII involved for each customer entry, ensuring the register reflects which personal
+  data is in scope.
+- Name the customer explicitly—avoid using only generic terms like "client" or "user" without a traceable
+  identifier.

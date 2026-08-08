@@ -1,0 +1,18 @@
+must_id: item:A.8.4:proc_dependency_allowlist
+control_ref: A.8.4
+standard_id: ISO27001:2022
+must_text: Dependency allowlist process (new library → security review → approval)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for submitting new software libraries for security review, including
+  required information and submission method, in your procedure.
+- Assign a named individual or role responsible for conducting security reviews of proposed libraries,
+  listing them explicitly in the procedure.
+- Record each security review decision, including date, reviewer name, and outcome, in a central, version-controlled
+  register.
+- Require explicit written approval for each new library before use, attaching the approval record to
+  the dependency allowlist.
+- Name the owner of the allowlist as a specific person, not a generic team or department, to avoid ambiguity.

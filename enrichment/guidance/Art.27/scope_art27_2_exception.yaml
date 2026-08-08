@@ -1,0 +1,20 @@
+must_id: item:Art.27:scope_art27_2_exception
+control_ref: Art.27
+standard_id: GDPR:2016/679
+must_text: Art.27.2 exception assessment (occasional processing + no special-category-large-scale + low
+  risk → no representative needed). Decision recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the assessment of whether your organisation processes data only occasionally, including a dated
+  statement and the name of the assessor.
+- Record whether any special category or criminal offence data is processed on a large scale, with specific
+  examples or a clear statement if not applicable.
+- State the outcome of a risk assessment showing if processing is unlikely to result in a risk to individuals’
+  rights and freedoms, with supporting evidence.
+- Name the decision-maker who determined whether the Art.27.2 exception applies, and avoid listing a team
+  or department as the responsible party.
+- Retain a dated record of the final decision on whether a representative is required, referencing the
+  assessment and supporting documentation.

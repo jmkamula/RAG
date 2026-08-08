@@ -1,0 +1,48 @@
+leaf_id: req:A.5.27:lessons_learned_procedure
+control_ref: A.5.27
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organization and which information assets
+    are covered by the ISMS, ensuring that lessons learned procedures are applied to the correct incidents
+    and controls.
+  good_enough: A documented scope that clearly identifies the organizational boundaries and assets relevant
+    to information security incidents.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that incident response, investigation, and lessons learned
+    activities have accountable owners and participants, which is essential for an effective procedure.
+  good_enough: A current list or matrix showing who is responsible for incident handling, investigation,
+    and follow-up actions.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding the organization's risk landscape is necessary to prioritize which incidents
+    and lessons are most critical to analyze and address in the procedure.
+  good_enough: A recent risk assessment identifying key information security risks and their impact, even
+    if not fully exhaustive.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: Knowing which assets are in scope allows the lessons learned process to link incidents and
+    improvements to specific systems, data, or processes.
+  good_enough: A basic inventory of information assets relevant to incident response and lessons learned
+    activities.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Asset classification helps prioritize incident reviews and ensures that lessons learned focus
+    on the most sensitive or business-critical information.
+  good_enough: A simple classification scheme applied to key assets, even if not yet fully rolled out
+    organization-wide.

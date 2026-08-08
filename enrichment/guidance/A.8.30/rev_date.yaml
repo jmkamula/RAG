@@ -1,0 +1,17 @@
+must_id: item:A.8.30:rev_date
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the outsourced development program in a dated log or register.
+- State the planned review interval in months or years, as approved by management, in the same log or
+  register.
+- Name the reviewer as a specific individual responsible for the review, not a team or department.
+- Attach or reference the signed review report or meeting minutes that confirm the review was completed
+  on the recorded date.
+- Flag any reviews that are overdue by comparing the last review date and planned interval, and document
+  actions taken to address missed deadlines.

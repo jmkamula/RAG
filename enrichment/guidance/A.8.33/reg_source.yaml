@@ -1,0 +1,15 @@
+must_id: item:A.8.33:reg_source
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Per-row source (synthetic-generator / production-snapshot / vendor-provided / contributed-by-user)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- List each test dataset in the register with a unique name and a clear description of its intended use.
+- 'Record the source of each dataset row as one of: synthetic-generator, production-snapshot, vendor-provided,
+  or contributed-by-user.'
+- Name the person responsible for verifying the dataset source for each entry, using a specific individual
+  rather than a team or department.
+- Date each entry in the register to show when the dataset source was last confirmed or updated.

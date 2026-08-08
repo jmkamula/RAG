@@ -1,0 +1,18 @@
+must_id: item:A.6.5:rev_date
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent post-employment program review in a central log, showing it falls
+  within the planned review interval.
+- Name the individual responsible for scheduling and conducting the review, listing them by full name
+  and job title.
+- Document the planned review interval in months or years within the program documentation, referencing
+  the policy or procedure version.
+- Retain meeting minutes or a signed review summary that confirms the review was completed on the recorded
+  date.
+- Specify the next scheduled review date in the log, avoiding open-ended or "as needed" intervals.

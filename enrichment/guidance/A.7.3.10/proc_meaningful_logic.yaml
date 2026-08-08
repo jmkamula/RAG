@@ -1,0 +1,17 @@
+must_id: item:A.7.3.10:proc_meaningful_logic
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Meaningful information about the logic + envisaged consequences
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a clear explanation of how each automated decision system works, including the main logic or
+  rules used to reach decisions.
+- State the likely consequences for individuals affected by each automated decision, describing possible
+  outcomes in plain language.
+- Name the person responsible for maintaining and updating these explanations, identifying them as a specific
+  individual rather than a team or department.
+- Record the date each explanation was last reviewed and updated to show that information is current and
+  accurate.

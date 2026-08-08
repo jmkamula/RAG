@@ -1,0 +1,17 @@
+must_id: item:B.8.4.1:scope_undeletable
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+must_text: Undeletable-file circumstances with rationale + compensating controls
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each type of temporary file that cannot be deleted, and document the technical or legal reason
+  preventing deletion.
+- Record the specific compensating controls in place for each undeletable file type, such as encryption
+  or restricted access, in a dated register.
+- Name the responsible individual for monitoring and reviewing these files, avoiding generic labels like
+  "IT" or "the team".
+- Retain evidence of management approval for the documented rationale and compensating controls, including
+  signatures and approval dates.

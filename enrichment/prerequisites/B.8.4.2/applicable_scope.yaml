@@ -1,0 +1,45 @@
+leaf_id: req:B.8.4.2:applicable_scope
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know the overall boundaries of your information security management system before
+    you can define which customers and PII processing activities are in-scope for end-of-service handling.
+  good_enough: A current, documented ISMS scope that clearly lists included business units, locations,
+    and systems.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is essential to identify which information assets (including
+    PII) are affected when a customer contract ends or in the event of a merger/acquisition.
+  good_enough: A working inventory of information assets, with PII and customer data sources flagged.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that the right people are accountable for identifying,
+    documenting, and managing end-of-service PII scope.
+  good_enough: Documented roles for privacy and information security, with responsibilities for end-of-service
+    activities assigned.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purposes for which PII is processed to determine what data is relevant
+    when a customer relationship ends or PII is transferred.
+  good_enough: A summary of processing purposes for each customer or PII set, even if not fully detailed.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for PII processing helps determine retention, deletion, or
+    transfer obligations at end-of-service.
+  good_enough: A list of lawful bases for main PII processing activities, mapped to customer contracts
+    or data flows.

@@ -1,0 +1,20 @@
+must_id: item:Art.22:special_category_overlay
+control_ref: Art.22
+standard_id: GDPR:2016/679
+must_text: Special-category overlay — Art.22.4 prohibits automated decisions on Art.9 data except Art.9.2.a
+  explicit consent / Art.9.2.g substantial public interest with safeguards
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each automated decision process that uses special-category data, specifying the exact data
+  types and decision logic involved.
+- State the legal basis for processing under Art.9.2.a (explicit consent) or Art.9.2.g (substantial public
+  interest), citing the relevant justification.
+- Retain a copy of the explicit consent form or the documented public interest assessment, including the
+  date and signature of the data subject or responsible authority.
+- Name the owner responsible for each automated decision process as a specific individual, not a team
+  or department.
+- Record safeguards implemented to protect special-category data, detailing technical and organisational
+  measures in a dated procedure document.

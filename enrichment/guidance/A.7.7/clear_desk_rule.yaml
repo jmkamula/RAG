@@ -1,0 +1,19 @@
+must_id: item:A.7.7:clear_desk_rule
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Clear-desk rule for papers and removable media when desk unattended
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the clear-desk rule in your policy, stating that all papers and removable media must be secured
+  when desks are unattended.
+- Assign a named individual as the policy owner, not a team or department, and record their name and contact
+  details in the policy.
+- Record the date the policy was last reviewed and approved by management, and keep a signed approval
+  record.
+- Publish the policy to all staff and retain evidence of communication, such as an email announcement
+  or intranet post with distribution list.
+- Confirm regular spot checks are performed by a named person, and keep dated records of these checks
+  and any findings.

@@ -1,0 +1,19 @@
+must_id: item:7.1:rev_adequacy
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Adequacy check — resources actually provided match the determined need per category
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the categories of resources needed for your information security program, listing each type
+  such as personnel, technology, and training.
+- Record the actual resources provided for each category, including purchase orders, staffing assignments,
+  or training completion records with dates.
+- Cross-reference the determined need against the actual resources provided, noting any gaps or overages
+  in a dated review log.
+- Name a specific individual responsible for approving the adequacy check, avoiding generic titles like
+  "management" or "the team".
+- Retain evidence of the adequacy review outcome, such as a signed summary or meeting minutes, showing
+  the decision and date.

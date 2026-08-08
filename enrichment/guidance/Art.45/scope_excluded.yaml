@@ -1,0 +1,17 @@
+must_id: item:Art.45:scope_excluded
+control_ref: Art.45
+standard_id: GDPR:2016/679
+must_text: Destinations specifically NOT relying on adequacy (fall to Art.46/49)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all countries or territories where personal data is transferred from your organisation.
+- Identify and record which of these destinations do not have a European Commission adequacy decision.
+- Document the legal basis used for each non-adequate destination, referencing the specific GDPR Article
+  46 or 49 mechanism applied.
+- Name the individual responsible for maintaining and updating this list, rather than using a team or
+  department title.
+- Retain dated evidence of your most recent adequacy assessment for each destination, showing when and
+  how the determination was made.

@@ -1,0 +1,19 @@
+must_id: item:A.5.14:approval_authority
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Statement of the signatory's authority (delegation chain if not top-management; legal department
+  consultation noted if cross-border scope)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the signatory’s full name, job title, and position in the organisational hierarchy on the policy
+  approval page.
+- Document the delegation chain if the signatory is not a member of top management, including names and
+  dates of delegation.
+- Record written confirmation from the legal department if the policy covers cross-border information
+  transfers, including the consulted lawyer’s name and date.
+- Sign and date the policy approval page, ensuring the signature is handwritten or uses a secure digital
+  signature method.
+- Avoid listing the signatory as a group or department; name a specific individual with clear authority.

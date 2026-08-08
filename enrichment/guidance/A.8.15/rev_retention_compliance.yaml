@@ -1,0 +1,17 @@
+must_id: item:A.8.15:rev_retention_compliance
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Retention compliance check (no premature deletion; no over-retention of personal data)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for reviewing log retention periods, avoiding generic roles like
+  "IT team" or "security group".
+- Document the current retention schedule for all log types, including start and end dates for each category.
+- Record the results of the latest review, noting any logs identified as being kept too long or deleted
+  too soon.
+- State the decision and rationale for any changes to retention periods in a dated and signed review record.
+- Cross-reference the retention schedule with applicable legal or contractual requirements to confirm
+  alignment and document any discrepancies found.

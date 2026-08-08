@@ -1,0 +1,14 @@
+must_id: item:A.5.36:sch_owner
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Named owner per item (reviewer accountable for the next cycle)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each compliance item in the review schedule with a unique identifier and clear description.
+- Name a specific individual as the owner responsible for each item, avoiding group or team names.
+- Record the date when each owner was assigned responsibility for their respective item.
+- Document the next scheduled review date for each item alongside the assigned owner's name.
+- Retain a signed or acknowledged record from each owner confirming their acceptance of responsibility.

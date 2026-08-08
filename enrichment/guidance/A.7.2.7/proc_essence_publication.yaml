@@ -1,0 +1,18 @@
+must_id: item:A.7.2.7:proc_essence_publication
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Essence-of-arrangement publication — subject-facing summary of who does what, per Art.26.2
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Draft a clear, plain-language summary that explains the main responsibilities of each joint controller
+  for handling personal data.
+- Name each joint controller and describe their specific roles and contact points in the published summary.
+- Publish the summary in a location easily accessible to data subjects, such as a dedicated webpage or
+  privacy notice section.
+- Date the summary and record the approval by a named senior manager to show it is current and officially
+  endorsed.
+- Avoid using generic titles like "the company" or "the team"—list specific organisations and contact
+  details for accountability.

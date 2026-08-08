@@ -1,0 +1,18 @@
+must_id: item:Art.33:proc_severity_gate
+control_ref: Art.33
+standard_id: GDPR:2016/679
+must_text: Severity gate — when notification is NOT required (Art.33.1 unlikely-to-result-in-risk exception).
+  Decision criteria documented
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific decision criteria used to determine when a data breach is unlikely to result in
+  a risk to individuals.
+- Record each breach assessment outcome with the date, the decision made, and the rationale for not notifying
+  authorities.
+- Name the individual responsible for making and documenting the risk assessment decision for each breach.
+- Attach supporting evidence, such as risk analysis or impact assessments, to each decision record.
+- Avoid using generic statements like "no risk" without clear, documented justification specific to the
+  breach scenario.

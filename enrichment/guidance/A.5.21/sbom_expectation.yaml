@@ -1,0 +1,18 @@
+must_id: item:A.5.21:sbom_expectation
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: SBOM expectations for software components and infrastructure
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in your procedure that all software components and infrastructure must have a Software Bill of
+  Materials (SBOM) maintained and updated for each release.
+- Assign a named individual responsible for collecting, reviewing, and storing SBOMs for all critical
+  software and infrastructure components.
+- Document the location and access method for SBOM records, including version history and dates of last
+  update.
+- Name the SBOM owner as a specific person, not a team or department, to avoid ambiguity about responsibility.
+- Record evidence of periodic SBOM reviews, such as meeting minutes or review logs, with dates and names
+  of participants.

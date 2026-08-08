@@ -1,0 +1,17 @@
+must_id: item:A.8.2:log_what
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Action performed captured (command / change / access)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each privileged action in the log, including the exact command run, system change made, or data
+  accessed, with a timestamp.
+- Name the individual user account responsible for each privileged activity, avoiding shared or generic
+  account names.
+- Document the purpose or reason for each privileged action, referencing a related ticket or change request
+  where applicable.
+- Retain the original, unaltered activity log entries for a defined period, with the retention timeframe
+  documented and approved by management.

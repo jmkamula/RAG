@@ -1,0 +1,17 @@
+must_id: item:A.7.2:reg_area
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Per-event area entered (from the perimeter register A.7.1)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific area entered for each physical entry event, matching the naming convention used
+  in the perimeter entry register.
+- Cross-reference each entry event with the corresponding perimeter register record by including the perimeter
+  event ID or timestamp.
+- Name the person responsible for maintaining the event register as a specific individual, not a team
+  or department.
+- Confirm that each register entry is dated and time-stamped to allow clear tracing of movement between
+  areas.

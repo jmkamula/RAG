@@ -1,0 +1,17 @@
+must_id: item:A.8.22:rationale
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Rationale for segregation (sensitivity / function / trust level / regulatory)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific business or security reasons for each network segment, such as data sensitivity,
+  operational function, trust level, or regulatory need, in the procedure document.
+- Document the criteria used to determine why segregation is necessary for each segment, referencing relevant
+  risk assessments or compliance obligations.
+- Name the individual responsible for approving the segregation rationale, ensuring the owner is a specific
+  person and not a team or department.
+- Record the date when the rationale was last reviewed and updated to show ongoing relevance and alignment
+  with current risks or requirements.

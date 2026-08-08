@@ -1,0 +1,47 @@
+leaf_id: req:B.8.2.6:program_review
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must have clearly documented the purposes for which personal data is processed as a processor.
+    This ensures the RoPA accurately reflects all processing activities and their justifications.
+  good_enough: A documented list of processing purposes for all relevant activities, even if not fully
+    mapped to every data flow, is sufficient to proceed.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for each processing activity is essential for RoPA completeness
+    and for demonstrating compliance to controllers and regulators.
+  good_enough: A summary of lawful bases for each major processing activity, even if some edge cases are
+    pending, is enough to unblock the review.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The RoPA review must align with the defined scope of your ISMS to ensure all relevant processing
+    activities are included and none are overlooked.
+  good_enough: A current scope statement that covers all business units and systems involved in personal
+    data processing is sufficient.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is needed to cross-check that all systems and data stores handling
+    personal data are reflected in the RoPA.
+  good_enough: A basic inventory of information assets, even if not fully classified, is enough to support
+    the RoPA review.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: cross_role
+  rationale: The GDPR's RoPA requirements set the legal benchmark for what must be included and maintained
+    in your processor records.
+  good_enough: A working draft or previous version of the RoPA that covers the main GDPR-required fields
+    is sufficient to start the review.

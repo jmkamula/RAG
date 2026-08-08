@@ -1,0 +1,18 @@
+must_id: item:A.8.19:scope_change_drivers
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new system class, new deployment pattern)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all system classes and deployment patterns currently in scope, including the date each was added
+  or last reviewed.
+- Document a trigger list that specifies events requiring re-scoping, such as introduction of a new system
+  class or deployment pattern.
+- Assign a named individual responsible for monitoring changes and initiating re-scoping when a trigger
+  event occurs.
+- Record each re-scoping decision with the date, the trigger event, and the person who approved the updated
+  scope.
+- Name the scope owner as a specific person, not a team or department, to avoid ambiguity in accountability.

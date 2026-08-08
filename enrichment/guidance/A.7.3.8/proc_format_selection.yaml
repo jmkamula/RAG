@@ -1,0 +1,16 @@
+must_id: item:A.7.3.8:proc_format_selection
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Format selection — structured, commonly used, accessible (Art.15.3 + machine-readable for Art.20)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the formats in which you provide personal data copies, specifying that they are structured,
+  commonly used, and accessible.
+- State the process for selecting a machine-readable format when responding to data portability requests
+  under Article 20.
+- Name the individual responsible for approving the selected formats, rather than listing a team or department.
+- Record the date and version of the procedure to show when the format selection process was last reviewed
+  or updated.

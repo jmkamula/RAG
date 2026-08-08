@@ -1,0 +1,17 @@
+must_id: item:A.7.5.3:scope_retention_period
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+must_text: Retention period for transfer records (per A.7.4.7 schedule)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for maintaining transfer records, specifying a named individual rather than
+  a team or department.
+- Document the retention period for each type of transfer record, cross-referencing the schedule defined
+  in control A.7.4.7.
+- Record the date each transfer record is created and the date it is scheduled for deletion, maintaining
+  an auditable log.
+- Retain evidence that expired transfer records are deleted or anonymized according to the documented
+  retention period, such as deletion logs or confirmation emails.

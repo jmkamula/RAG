@@ -1,0 +1,17 @@
+must_id: item:A.7.1:reg_last_assessed
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Last assessment date per row (drives staleness detection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent perimeter assessment for each site in a dedicated column of the Per-Site
+  Perimeter Register.
+- Name the individual responsible for each site's perimeter assessment, using a full name rather than
+  a generic role or team.
+- Review the register to confirm that no row is missing a last assessment date; update any blank or placeholder
+  entries immediately.
+- Retain evidence of each assessment, such as a signed checklist or report, and cross-reference its location
+  in the register.

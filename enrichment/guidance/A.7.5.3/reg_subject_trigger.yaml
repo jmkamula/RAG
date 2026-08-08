@@ -1,0 +1,17 @@
+must_id: item:A.7.5.3:reg_subject_trigger
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+must_text: Subject-request trigger flag per row (rectification/erasure propagation)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to the PII Transfer Event Log to indicate if the transfer was triggered by a data subject’s
+  rectification or erasure request.
+- Record the specific subject-request type (rectification or erasure) for each relevant transfer event,
+  referencing the original request date.
+- Name the responsible individual who verified the subject-request trigger for each logged transfer, avoiding
+  generic roles like "team" or "IT".
+- Retain supporting documentation for each subject-request-triggered transfer, such as a copy of the original
+  request and confirmation of action taken.

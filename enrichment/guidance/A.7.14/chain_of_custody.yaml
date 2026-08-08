@@ -1,0 +1,19 @@
+must_id: item:A.7.14:chain_of_custody
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Chain of custody from collection to disposal
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a specific individual to oversee the chain of custody for each equipment item being disposed
+  of or reused.
+- Record the date, time, and identity of each person handling the equipment at every transfer point in
+  a custody log.
+- Document the final method of disposal or sanitization, including the date, location, and name of the
+  responsible party.
+- Retain signed confirmation from the disposal vendor or internal staff that equipment was securely destroyed
+  or wiped according to policy.
+- Avoid using generic labels like "IT team" or "staff" in custody records; always list full names of individuals
+  involved.

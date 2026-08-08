@@ -1,0 +1,16 @@
+must_id: item:A.8.30:scope_engagement_types
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Engagement types in scope (turn-key contract / dedicated team / co-development / pen-test-as-development)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current outsourced development engagements, specifying the type for each (turn-key contract,
+  dedicated team, co-development, or pen-test-as-development).
+- Name the internal business owner responsible for each engagement, using a specific individual’s name
+  rather than a team or department.
+- Document the start and end dates for each engagement type in a dated register or tracking sheet.
+- Attach copies of signed contracts or statements of work that clearly describe the engagement type for
+  each outsourced development arrangement.

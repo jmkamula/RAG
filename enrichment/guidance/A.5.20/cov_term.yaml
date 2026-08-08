@@ -1,0 +1,17 @@
+must_id: item:A.5.20:cov_term
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Agreement term and renewal/expiry date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the start date, end date, and renewal terms for each supplier agreement in a dedicated column
+  for every row in the register.
+- Name the responsible individual who maintains and updates the register, listing their full name rather
+  than a team or department.
+- Review each row to confirm no agreement is missing a renewal or expiry date, and update any incomplete
+  entries immediately.
+- Retain a copy of the signed agreement or renewal notice linked to each register entry for verification
+  of dates.

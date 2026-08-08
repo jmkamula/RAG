@@ -1,0 +1,17 @@
+must_id: item:Art.48:agreement_check
+control_ref: Art.48
+standard_id: GDPR:2016/679
+must_text: International agreement check — request based on MLAT / treaty / EU+third-country agreement
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for verifying if any foreign authority data request is supported by an existing
+  mutual legal assistance treaty or equivalent international agreement.
+- Record the specific treaty, agreement, or legal instrument cited for each foreign request, including
+  its full name and relevant article or section.
+- Assign responsibility to a named individual—do not list a generic role or team—for confirming the existence
+  and applicability of the agreement before any disclosure.
+- Retain a copy of the correspondence or official documentation from the foreign authority that references
+  the relevant international agreement for each request.

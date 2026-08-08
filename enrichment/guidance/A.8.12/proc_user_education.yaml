@@ -1,0 +1,19 @@
+must_id: item:A.8.12:proc_user_education
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: User-education feedback loop on what triggers DLP (cross-link to A.6.3)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for notifying users immediately when their actions trigger a Data Loss Prevention
+  (DLP) rule, including the notification method and responsible party.
+- Record examples of actual user notifications sent in response to DLP events, including dates and the
+  specific DLP rule triggered.
+- Cross-reference the user education procedure with the relevant section of your security awareness training
+  documentation as required by control A.6.3.
+- Name the owner responsible for maintaining and updating the DLP user feedback loop as a specific individual,
+  not a team or department.
+- Retain evidence of periodic reviews and updates to the feedback loop process, including meeting notes
+  or approval records with dates and attendees.

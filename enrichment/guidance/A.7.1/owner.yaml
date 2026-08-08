@@ -1,0 +1,17 @@
+must_id: item:A.7.1:owner
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Owner named for physical security at each site (Facilities lead with InfoSec partner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner for physical security at each site as a specific individual, such as the Facilities lead,
+  not a generic team or department.
+- Document the InfoSec partner assigned to each site by full name and role in the Physical Security Perimeters
+  Policy.
+- Record the date when each owner and InfoSec partner assignment was last reviewed or updated in the policy
+  document.
+- Cross-reference the named owners and InfoSec partners in the policy with the current organisational
+  chart to confirm accuracy.

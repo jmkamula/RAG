@@ -1,0 +1,16 @@
+must_id: item:A.7.3.1:rev_channel_health
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Channel health — fulfilment channels reachable + functional
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all fulfilment channels used for data subject requests, including web forms, email addresses, and
+  phone numbers, in a dated register.
+- Test each channel monthly and record the date, method, and outcome of each test in a log maintained
+  by a named individual.
+- Document any issues found during testing and the corrective actions taken, including the responsible
+  person and completion date.
+- Name the owner responsible for channel maintenance as a specific individual, not a generic team or department.

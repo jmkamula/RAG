@@ -1,0 +1,18 @@
+must_id: item:6.1.1:rev_inputs_currency
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Inputs currency check — 4.1 + 4.2 reviewed before this planning cycle
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Locate and review the most recent records of 4.1 (organizational context) and 4.2 (interested parties)
+  before starting the planning program review.
+- Record the review dates and names of individuals who confirmed the currency of 4.1 and 4.2 inputs in
+  the planning program documentation.
+- Attach or cross-reference the reviewed 4.1 and 4.2 documents within the planning program review file
+  for traceability.
+- Name the reviewer as a specific individual — not a group or department — to avoid ambiguity in accountability.
+- Sign and date a statement confirming that 4.1 and 4.2 were reviewed and found current prior to the planning
+  cycle.

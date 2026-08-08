@@ -1,0 +1,15 @@
+must_id: item:A.8.21:reg_owner
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Per-row owner (relationship manager + technical owner)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the relationship manager for each network service entry, avoiding generic
+  titles like "IT team" or "department".
+- Assign a technical owner by full name for every row in the register, ensuring each service has clear
+  technical accountability.
+- Record the date each owner assignment was last reviewed or updated in the register to show ongoing accuracy.
+- Cross-reference each owner’s contact details within the register to enable direct follow-up if needed.

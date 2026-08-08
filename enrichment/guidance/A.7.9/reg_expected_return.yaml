@@ -1,0 +1,16 @@
+must_id: item:A.7.9:reg_expected_return
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Per-row expected return date where applicable
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the expected return date for each off-premises asset in the register, leaving the field blank
+  only if not applicable.
+- Name the individual responsible for updating and verifying return dates, listing a specific person rather
+  than a generic role or team.
+- Confirm that each entry with an expected return date includes a corresponding asset custodian, with
+  both fields completed and cross-referenced.
+- Retain a dated log of updates made to expected return dates, showing who made each change and when.

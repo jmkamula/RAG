@@ -1,0 +1,17 @@
+must_id: item:A.7.2.2:reg_primary_basis
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: Primary basis cited per row (Art.6.1.a-f or equivalent)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity in the Lawful Basis Register with a separate row, ensuring no activities
+  are grouped together.
+- State the specific lawful basis for each activity by citing the exact article or section, such as "Art.6.1.b"
+  or local equivalent.
+- Name the owner responsible for each entry as a specific individual, not a team or department.
+- Record the date each lawful basis was assigned or last reviewed for traceability.
+- Attach supporting documentation or references that justify the chosen lawful basis for each processing
+  activity.

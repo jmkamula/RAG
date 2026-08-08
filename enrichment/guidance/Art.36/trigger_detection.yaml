@@ -1,0 +1,19 @@
+must_id: item:Art.36:trigger_detection
+control_ref: Art.36
+standard_id: GDPR:2016/679
+must_text: Trigger detection — Art.35 DPIA flagging residual high risk despite mitigations
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for identifying when a Data Protection Impact Assessment (DPIA) results in residual
+  high risk after proposed mitigations.
+- Record each DPIA outcome, explicitly stating whether any residual high risks remain and referencing
+  the relevant DPIA report by date and title.
+- Name the person responsible for reviewing DPIA results and making the determination to trigger prior
+  consultation with the supervisory authority.
+- Retain evidence of the decision to consult or not consult the supervisory authority, including the rationale
+  and date of the decision.
+- Name the owner as a specific individual — not "the team" or a department — in all DPIA and consultation
+  records.

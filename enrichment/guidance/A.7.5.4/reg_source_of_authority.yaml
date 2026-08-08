@@ -1,0 +1,18 @@
+must_id: item:A.7.5.4:reg_source_of_authority
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Source of authority per row (statute / contract / court order / customer instruction)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific source of authority for each PII disclosure event, clearly stating whether it is
+  a statute, contract, court order, or customer instruction.
+- Cross-reference each authority source to a dated document or communication, such as a contract clause,
+  legal citation, or customer email.
+- Name the individual who approved the disclosure based on the cited authority, ensuring the name is not
+  a generic role or team.
+- Retain copies of the referenced authority documents alongside the log entry for each disclosure event.
+- Avoid using vague descriptions like "as required" or "per policy" as the authority source; specify the
+  actual statute, contract, order, or instruction.

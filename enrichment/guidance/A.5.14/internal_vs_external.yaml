@@ -1,0 +1,16 @@
+must_id: item:A.5.14:internal_vs_external
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Distinction between internal and external transfer requirements (within-org transfers may have
+  lighter controls than out-bound to third parties)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy which controls apply to internal transfers and which to external transfers, using
+  clear, separate sections for each.
+- Document specific examples of internal and external transfer scenarios, showing how requirements differ
+  in practice.
+- Name the policy owner as a specific individual, not a group or department, to avoid ambiguity in responsibility.
+- Record the date of the latest policy review and approval, signed by the named owner.

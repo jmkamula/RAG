@@ -1,0 +1,16 @@
+must_id: item:6.1.3:rev_residual_reaffirm
+control_ref: 6.1.3
+standard_id: ISO27001:2022
+must_text: Residual risks re-affirmed by owners (or re-treatment triggered)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign each residual risk to a named individual risk owner, not to a team or department.
+- Document the risk owner's written confirmation of their acceptance of each residual risk, including
+  their name and the date.
+- Record any decision by a risk owner to reject the residual risk and trigger a new risk treatment, including
+  rationale and date.
+- Retain evidence of periodic reviews where risk owners re-affirm or re-assess their assigned residual
+  risks.

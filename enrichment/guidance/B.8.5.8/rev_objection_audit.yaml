@@ -1,0 +1,19 @@
+must_id: item:B.8.5.8:rev_objection_audit
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+must_text: Objection audit — objection outcomes reviewed for consistency
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to review all subcontractor objection outcomes for consistency, recording
+  their name and review date in the program log.
+- Document each objection outcome and the rationale for the decision in a dated record linked to the relevant
+  subcontractor.
+- Cross-reference objection outcomes from similar cases to confirm consistent application of criteria,
+  noting any deviations and explanations.
+- Name the reviewer as a specific person—do not use generic titles like "the team" or "management" in
+  the review records.
+- Retain signed evidence of the review, such as a dated sign-off or approval email from the designated
+  reviewer.

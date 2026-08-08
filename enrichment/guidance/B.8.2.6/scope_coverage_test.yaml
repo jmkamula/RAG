@@ -1,0 +1,19 @@
+must_id: item:B.8.2.6:scope_coverage_test
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: Coverage test — processor RoPA rowcount reconciles against B.8.2.1 customer register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the total number of processing activities in your processor RoPA with the customer register
+  from B.8.2.1, noting both row counts.
+- Record the date and name of the person who performed the reconciliation in a dated reconciliation log
+  or summary document.
+- Document any discrepancies found between the two registers, including missing or extra entries, and
+  the actions taken to resolve them.
+- Name the owner responsible for maintaining the processor RoPA as a specific individual, not as a team
+  or department.
+- Retain a signed confirmation from the data protection officer or designated lead that the reconciliation
+  was completed and reviewed.

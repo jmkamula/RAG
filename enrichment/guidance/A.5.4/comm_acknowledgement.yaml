@@ -1,0 +1,18 @@
+must_id: item:A.5.4:comm_acknowledgement
+control_ref: A.5.4
+standard_id: ISO27001:2022
+must_text: Personnel acknowledgement captured (signature, e-attestation, training completion)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Publish the management directive to all relevant personnel using a system that tracks individual access
+  and completion.
+- Collect a dated signature, electronic attestation, or training completion record from each person confirming
+  they have read and understood the directive.
+- Name the individual responsible for collecting and storing acknowledgements, ensuring this is a specific
+  person rather than a group or department.
+- Retain all acknowledgement records in a central repository, making sure each entry is linked to a named
+  individual and directive version.
+- Review acknowledgement logs to confirm no entries are missing or marked as "verbal only" or "pending".

@@ -1,0 +1,18 @@
+must_id: item:B.8.2.2:scope_change_drivers
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: Trigger list (new service launch / new integration)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current processing contexts in a dated register, specifying the service or integration name
+  and its purpose.
+- Document each trigger event, such as new service launches or integrations, with the date and a brief
+  description of the change.
+- Assign a named individual responsible for updating the processing contexts register whenever a trigger
+  event occurs.
+- Cross-reference each processing context entry to the relevant trigger event to show when and why it
+  was added or updated.
+- Name the owner as a specific person, not a team or department, to avoid ambiguity in responsibility.

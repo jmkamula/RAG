@@ -1,0 +1,19 @@
+must_id: item:A.8.13:rev_threat_posture
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: 'Threat-posture review (ransomware-resilience: immutability / air-gap / 3-2-1 still adequate)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the periodic review of backup strategies for ransomware resilience,
+  listing them with contact details in the review record.
+- Document the date, attendees, and summary of the most recent backup program review, specifically addressing
+  immutability, air-gap, and 3-2-1 adequacy.
+- State any changes made to backup controls or procedures as a result of the review, including rationale
+  and approval by a named decision-maker.
+- Record evidence that backup test restores were performed since the last review, noting dates and outcomes
+  for each test.
+- Name the current backup strategy explicitly; avoid using generic terms like "industry standard" or "best
+  practice" without describing your actual implementation.

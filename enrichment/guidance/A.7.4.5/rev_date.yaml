@@ -1,0 +1,18 @@
+must_id: item:A.7.4.5:rev_date
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent end-of-processing program review in a central log, clearly referencing
+  the specific program reviewed.
+- Document the planned review interval for each program, showing how the review schedule was determined
+  and approved.
+- Confirm the next scheduled review date is within the documented interval by cross-referencing the last
+  review date and the planned interval.
+- Name the reviewer as a specific individual, not a team or department, in the review record.
+- Retain evidence of the review meeting, such as signed minutes or a dated summary, attached to the program’s
+  compliance documentation.

@@ -1,0 +1,18 @@
+must_id: item:A.5.14:transfer_agreements
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Standard transfer agreements with frequent counterparties referenced (cross-link to A.5.20
+  supplier agreements path where the counterparty is also a supplier)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all frequent counterparties involved in regular information transfers within the Information Transfer
+  Policy, including full legal names and contact details.
+- Reference the specific standard transfer agreement templates or signed contracts used with each frequent
+  counterparty, including document titles and version dates.
+- Cross-link each counterparty that is also a supplier to their corresponding entry in the supplier agreements
+  register, as required by A.5.20.
+- Name the policy owner as a specific individual, not as a team or department, to avoid ambiguity in accountability.
+- Record the approval date and approver’s name for the current version of the Information Transfer Policy.

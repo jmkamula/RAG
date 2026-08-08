@@ -1,0 +1,17 @@
+must_id: item:A.8.2:proc_expiry
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Expiry rules defined for privileged access rights
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the maximum duration for privileged access rights in the procedure, specifying exact time limits
+  for each type of privileged role.
+- Document the process for automatically removing or reviewing privileged access when the defined expiry
+  period is reached, including responsible individuals.
+- Name the person or role responsible for monitoring and enforcing expiry rules, avoiding vague assignments
+  like "the team" or "IT."
+- Record the date of the most recent review or update of expiry rules within the procedure, showing that
+  the rules are current.

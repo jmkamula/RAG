@@ -1,0 +1,20 @@
+must_id: item:A.6.1:third_party_use
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Third-party screening provider contracts and oversight (where used — supplier-management linkage
+  to A.5.19)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the third-party screening provider in a signed contract that clearly describes their screening
+  responsibilities and service scope.
+- Document the date and outcome of your due diligence review of the provider’s screening processes and
+  compliance certifications.
+- Assign a specific individual to oversee the provider relationship and record this responsibility in
+  your supplier management register.
+- Cross-reference the screening provider’s contract in your supplier register entry for personnel screening
+  services.
+- State in writing how you monitor the provider’s ongoing performance, including frequency and method,
+  and retain evidence of completed oversight activities.

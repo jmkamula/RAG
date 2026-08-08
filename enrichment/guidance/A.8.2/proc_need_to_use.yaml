@@ -1,0 +1,20 @@
+must_id: item:A.8.2:proc_need_to_use
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Privileged access granted on need-to-use, event-by-event basis (less than or equal to the period
+  needed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each privileged access request with requester name, reason for access, and specific time period
+  in a dated access log.
+- Approve privileged access individually for each event, with the approver’s name and approval date recorded
+  alongside the request.
+- State the exact start and end time for privileged access in the access log; avoid granting open-ended
+  or indefinite access periods.
+- Name the owner of the privileged access management procedure as a specific individual, not a team or
+  department.
+- Retain records of privileged access revocation, showing access was removed immediately after the stated
+  period ended.

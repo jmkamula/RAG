@@ -1,0 +1,16 @@
+must_id: item:A.5.1:principles
+control_ref: A.5.1
+standard_id: ISO27001:2022
+must_text: Information security principles and objectives stated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the organisation’s information security principles and objectives clearly within the policy document,
+  using language specific to your business context.
+- Name the individual responsible for approving the policy, and include their signature and approval date
+  on the document.
+- Document a version number and review date on the policy to show it is current and regularly maintained.
+- Avoid using generic or boilerplate principles; tailor statements to reflect your organisation’s actual
+  security priorities and goals.

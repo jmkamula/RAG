@@ -1,0 +1,19 @@
+must_id: item:Art.29:scope_subprocessor_boundary
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Sub-processor boundary — sub-processors are Art.28 territory not Art.29
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name all sub-processors in a dedicated register, clearly separating them from internal staff or contractors
+  subject to Article 29.
+- Document the legal basis for each sub-processor relationship, referencing Article 28 in contracts or
+  data processing agreements.
+- State explicitly in your records that sub-processors are managed under Article 28, not Article 29, to
+  avoid scope confusion.
+- Cross-reference your sub-processor list with your Article 29 training or authorization records to confirm
+  no overlap or misclassification.
+- Avoid listing sub-processors as "staff" or "employees" in any compliance documentation, as this is a
+  common pitfall auditors flag.

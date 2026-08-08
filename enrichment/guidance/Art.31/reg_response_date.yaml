@@ -1,0 +1,15 @@
+must_id: item:Art.31:reg_response_date
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Per-row response date or status (open / in-progress / closed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the response date for each supervisory authority interaction in a dedicated column of the register.
+- Update the status of each entry as "open," "in-progress," or "closed" based on the current stage of
+  the interaction.
+- Name the person responsible for updating response dates and statuses, ensuring a specific individual
+  is listed rather than a team or department.
+- Review the register regularly to confirm no entries are missing a response date or status.

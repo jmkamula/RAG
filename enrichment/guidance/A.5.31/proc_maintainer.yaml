@@ -1,0 +1,18 @@
+must_id: item:A.5.31:proc_maintainer
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Named maintainer (compliance lead, legal counsel, or designate) with documented responsibility
+  for register accuracy
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the register maintainer as a specific individual, such as the compliance lead or legal counsel,
+  in the procedure document.
+- Document the maintainer’s responsibility for reviewing and updating the register for accuracy in a dated
+  responsibilities section.
+- Record the maintainer’s acceptance of this responsibility with a signed and dated acknowledgement included
+  in the procedure file.
+- Avoid listing a team or department as the maintainer; specify a single accountable person by name and
+  role.

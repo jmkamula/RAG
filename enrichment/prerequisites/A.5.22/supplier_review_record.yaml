@@ -1,0 +1,40 @@
+leaf_id: req:A.5.22:supplier_review_record
+control_ref: A.5.22
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.21
+  standard_id: ISO27001:2022
+  title: Managing information security in the ICT supply chain
+  category: direct
+  rationale: You need a current, accurate supplier register and defined supply chain security requirements
+    before you can conduct or record meaningful supplier reviews. Without this, you won't know which suppliers
+    to review or what to check.
+  good_enough: A maintained list of in-scope suppliers, with basic risk and security requirements documented
+    for each, is sufficient to start supplier review records.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement clarifies which suppliers and services fall under your ISMS, ensuring
+    reviews are targeted and relevant. Without scope, you risk reviewing irrelevant suppliers or missing
+    critical ones.
+  good_enough: A documented scope that clearly includes the relevant supplier relationships and outsourced
+    services.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: foundational
+  rationale: Risk assessment identifies which suppliers pose significant risks and therefore require more
+    frequent or detailed review. It helps prioritize review activities and evidence collection.
+  good_enough: A recent risk assessment that identifies key supplier-related risks and prioritizes suppliers
+    for review.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures someone is responsible for conducting and recording supplier
+    reviews. Without this, reviews may be missed or poorly documented.
+  good_enough: Documented assignment of responsibility for supplier management and review activities.

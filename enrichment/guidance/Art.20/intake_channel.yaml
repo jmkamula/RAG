@@ -1,0 +1,19 @@
+must_id: item:Art.20:intake_channel
+control_ref: Art.20
+standard_id: GDPR:2016/679
+must_text: Intake channel via Art.12 procedure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Data Portability Procedure that requests must be received through the same intake channels
+  defined in your Article 12 procedure.
+- Cross-reference the documented intake process in your Data Portability Procedure to the specific section
+  of your Article 12 procedure.
+- Name the person responsible for monitoring and processing data portability requests received via the
+  Article 12 intake channel.
+- Record the date when the Data Portability Procedure was last updated to reflect alignment with the Article
+  12 intake process.
+- Name the intake channel as a specific method (e.g., web form, email address) — not a generic phrase
+  like "contact us".

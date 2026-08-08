@@ -1,0 +1,16 @@
+must_id: item:6.3:reg_impact_summary
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Per-row impact summary recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a brief summary of the expected impact for each change entry in the ISMS Change Register, describing
+  both positive and negative consequences.
+- State the date the impact summary was added to each row, ensuring all entries are time-stamped for traceability.
+- Name the person responsible for assessing and documenting the impact for each change, using a specific
+  individual’s full name.
+- Avoid leaving the impact summary field blank or using generic phrases like "no impact" without explanation,
+  as auditors will flag incomplete entries.

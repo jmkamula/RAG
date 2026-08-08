@@ -1,0 +1,16 @@
+must_id: item:B.8.4.2:scope_termination_triggers
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+must_text: Termination triggers enumerated (contract expiry / customer offboarding / product discontinuation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all possible triggers that would end the service, such as contract expiry, customer offboarding,
+  or product discontinuation, in a dated document.
+- Name the person responsible for maintaining the list of termination triggers as a specific individual,
+  not a department or team.
+- Cross-reference each termination trigger to the relevant section in your service agreements or policies
+  to show alignment.
+- Review the list annually and record the review date and reviewer’s name to confirm ongoing accuracy.

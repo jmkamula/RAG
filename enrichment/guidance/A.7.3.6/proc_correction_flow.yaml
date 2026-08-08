@@ -1,0 +1,17 @@
+must_id: item:A.7.3.6:proc_correction_flow
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: Correction flow — including subject-dispute path when correction is disputed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for individuals to request correction of their personal data, including
+  how to submit a dispute if the correction is denied.
+- Name the person or role responsible for managing correction requests and disputes, ensuring this is
+  a specific individual and not a generic team.
+- Record each correction request and its outcome, including the date, decision, and any supporting evidence
+  or correspondence.
+- State the escalation process for unresolved disputes, specifying how individuals are informed of their
+  right to challenge the decision.

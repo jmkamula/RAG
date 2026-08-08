@@ -1,0 +1,39 @@
+leaf_id: req:Art.40:code_program_review
+control_ref: Art.40
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify which processes are covered
+    by the code of conduct and to verify ongoing adherence during the program review.
+  good_enough: A current, reasonably complete RoPA that lists all relevant processing activities and their
+    linkage to the code of conduct is available.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Before reviewing code adherence, you must confirm that each processing activity has a documented
+    lawful basis, as required by the GDPR and referenced in most codes of conduct.
+  good_enough: Each processing activity in scope has a documented lawful basis, even if some are pending
+    periodic review.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Designation of the Data Protection Officer (DPO)
+  category: foundational
+  rationale: If a DPO is required, their involvement is critical for code adherence reviews and for liaising
+    with monitoring bodies.
+  good_enough: A DPO is formally designated (if required), and their contact details are documented and
+    accessible for review purposes.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: A clear ISMS scope ensures that the code adherence review covers all relevant business units
+    and processes, avoiding gaps in compliance.
+  good_enough: A documented ISMS scope exists that includes all areas subject to the code of conduct,
+    even if minor updates are pending.

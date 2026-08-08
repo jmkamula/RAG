@@ -1,0 +1,18 @@
+must_id: item:A.5.2:responsibilities
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: Responsibilities described per role (decision rights, oversight, execution)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each information security role in the matrix using the specific job title or named individual responsible.
+- Describe the decision rights, oversight duties, and execution tasks for each role in separate, clearly
+  labeled columns.
+- Cross-reference each responsibility with the relevant policy or procedure document, including the document
+  title and version date.
+- Assign a named owner to review and update the matrix at least annually, recording the review date and
+  their signature.
+- Avoid using vague role descriptions like "the team" or "IT department"—specify individual titles or
+  names for accountability.

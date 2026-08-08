@@ -1,0 +1,18 @@
+must_id: item:A.6.8:awareness_promotion
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Periodic awareness reminders about the channel (links to A.6.3 training programme; channel
+  discoverability decays without reminder)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Schedule and send quarterly reminders about the information security event reporting channel to all
+  staff, recording the date and distribution list for each reminder.
+- Reference the reporting channel and its location in your annual information security training materials,
+  saving the updated training content with a revision date.
+- Document the communication method used for reminders, such as email or intranet post, and retain a copy
+  or screenshot of each message sent.
+- Name the person responsible for sending reminders as a specific individual, not a group or department,
+  in your procedure documentation.

@@ -1,0 +1,15 @@
+must_id: item:Art.25:rev_next_date
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Data Protection by Design (DPbD) program in a documented
+  schedule or review log entry.
+- Record the name of the individual responsible for conducting the next review alongside the planned date
+  in the same document.
+- Confirm the review date is specific and future-dated, not left blank or marked as "TBD" or "ongoing".
+- Retain the document or log entry with the stated review date in a location accessible to relevant stakeholders.

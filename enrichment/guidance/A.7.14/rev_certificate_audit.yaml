@@ -1,0 +1,19 @@
+must_id: item:A.7.14:rev_certificate_audit
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Certificate audit (sample-based verification that retained certificates match register entries)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the periodic review of the certificate disposal program, recording
+  their name and the review date in the program log.
+- Document a sample selection method for certificate records to be checked, specifying sample size and
+  selection criteria in a dated review plan.
+- Cross-reference each sampled retained certificate against its entry in the certificate register, noting
+  any discrepancies in a review checklist.
+- Record the outcome of the review, including findings and actions taken, in a signed and dated review
+  report.
+- Name the reviewer as a specific person—do not use generic titles like "IT team" or "Compliance department"
+  in the review documentation.

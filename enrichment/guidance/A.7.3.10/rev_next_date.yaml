@@ -1,0 +1,17 @@
+must_id: item:A.7.3.10:rev_next_date
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Automated Decision Subject Obligations Program in a dated
+  program review document.
+- Name the individual responsible for scheduling and conducting the next review, including their full
+  name and job title.
+- Record the date this review schedule was last updated, ensuring it is not left blank or marked as "TBD."
+- Attach the current review schedule to the program documentation, making it accessible to relevant stakeholders.
+- Specify the review date in a way that is clear and unambiguous, avoiding vague terms like "annually"
+  or "as needed."

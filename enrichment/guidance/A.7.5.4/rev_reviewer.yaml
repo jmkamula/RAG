@@ -1,0 +1,17 @@
+must_id: item:A.7.5.4:rev_reviewer
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Legal)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individuals who reviewed the disclosure records program, specifying both the Data Protection
+  Officer and a designated legal representative.
+- Record the review date and link it to the meeting minutes or review report signed by both the DPO and
+  legal reviewer.
+- Attach evidence of the reviewers’ roles, such as organizational charts or appointment letters, confirming
+  their authority to conduct the review.
+- Avoid listing groups or departments as reviewers; ensure named individuals are clearly identified and
+  traceable in the documentation.

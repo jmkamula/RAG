@@ -1,0 +1,17 @@
+must_id: item:Art.16:reg_request_id
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Per-row request id (Art.12 cross-ref)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique request ID to each rectification request entered in the register, ensuring no two requests
+  share the same identifier.
+- Cross-reference each request ID in the register with the corresponding entry in the Article 12 request
+  log, showing clear linkage between records.
+- Record the date each request is received alongside the request ID to provide a clear timeline for each
+  rectification action.
+- Name the individual responsible for managing each request by full name, not by team or department, in
+  the register.

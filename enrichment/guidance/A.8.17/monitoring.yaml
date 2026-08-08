@@ -1,0 +1,19 @@
+must_id: item:A.8.17:monitoring
+control_ref: A.8.17
+standard_id: ISO27001:2022
+must_text: Sync-status monitoring (drift threshold + alert on source loss + alert on stratum increase)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the maximum allowed time drift in seconds between system clocks and the reference time source
+  in your clock synchronization procedure.
+- Record the technical method and tool used to continuously monitor clock synchronization status, including
+  how drift is detected and measured.
+- Configure and retain automated alerts that trigger if the reference time source becomes unavailable
+  or if the stratum level increases unexpectedly.
+- Name the monitoring owner as a specific individual responsible for responding to clock synchronization
+  alerts, not a team or department.
+- Save dated logs or alert records showing at least one example of each alert type being generated and
+  reviewed.

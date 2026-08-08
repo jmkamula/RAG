@@ -1,0 +1,19 @@
+must_id: item:Art.7:rev_mechanism_audit
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Mechanism audit — capture UI still distinguishable, freely-given, no pre-ticked options
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Capture a current screenshot of the consent user interface showing clear, distinguishable consent options
+  with no pre-ticked boxes.
+- Document the process by which users actively select or decline consent, including any mandatory fields
+  or steps required.
+- Name the individual responsible for reviewing and updating the consent mechanism, listing their full
+  name and review date.
+- Retain evidence of the most recent consent mechanism audit, including findings and any corrective actions
+  taken.
+- State explicitly that no consent options are pre-selected or bundled with other terms in the captured
+  UI evidence.

@@ -1,0 +1,19 @@
+must_id: item:A.5.24:evidence
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Evidence collection and preservation requirements (cross-link to A.5.28 evidence-handling procedure;
+  chain-of-custody mandatory from initiation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the incident management framework that evidence collection and preservation are required from
+  the moment an incident is identified.
+- Cross-reference the evidence-handling procedure in section A.5.28 by title and document location within
+  the incident management planning framework.
+- Assign a named individual responsible for initiating and maintaining the chain-of-custody record for
+  each incident.
+- Record each step of evidence handling, including dates, times, and handlers, in a dedicated chain-of-custody
+  log attached to the incident file.
+- Specify that the owner of the evidence process must be a named person, not a generic team or department.

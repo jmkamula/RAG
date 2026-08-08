@@ -1,0 +1,19 @@
+must_id: item:A.7.2.1:scope_exclusions
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Out-of-scope activities (anonymous analytics, aggregate reporting) with rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all processing activities, clearly marking those considered out-of-scope, such as anonymous analytics
+  or aggregate reporting, in a dated record.
+- Document the rationale for each out-of-scope activity, explaining why it does not involve personal data
+  or falls outside privacy requirements.
+- Name the person responsible for determining scope decisions, ensuring this is a specific individual
+  rather than a group or department.
+- Cross-reference each out-of-scope activity to supporting evidence, such as data flow diagrams or system
+  architecture documents, showing no personal data is processed.
+- Retain a signed approval of the scope and rationale from a senior manager, dated to confirm when the
+  decision was made.

@@ -1,0 +1,19 @@
+must_id: item:B.8.2.3:proc_customer_marketing_permit
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: Customer-marketing permit path — customer explicitly authorises + provides consent evidence
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the exact process by which customers provide explicit authorisation for marketing use, including
+  required consent language and method of capture.
+- Record each customer’s marketing consent decision in a dated, tamper-evident system that links directly
+  to the individual’s identity.
+- Retain a copy of the consent evidence, such as a signed form or electronic record, for every customer
+  who authorises marketing use.
+- Name the person responsible for maintaining and updating the consent records as a specific individual,
+  not a group or department.
+- Review all marketing lists to confirm only customers with documented, explicit consent are included,
+  and keep an audit log of each review.

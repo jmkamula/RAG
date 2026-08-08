@@ -1,0 +1,19 @@
+must_id: item:4.4:chg_impact
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: Impact assessment — which processes / artefacts downstream need updating
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each ISMS Manual change with a unique identifier, date, and the name of the person authorizing
+  the change.
+- Document a clear impact assessment that lists all processes and artefacts affected by the change, referencing
+  them by title and version.
+- Cross-reference the impact assessment to related Clause 6.3 change management records to show linkage
+  between requirements.
+- Name the person responsible for updating each downstream process or artefact, avoiding generic roles
+  like "the team" or "IT".
+- Retain evidence of completed updates, such as revised documents with new version numbers and update
+  dates.

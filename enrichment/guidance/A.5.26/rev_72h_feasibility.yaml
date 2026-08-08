@@ -1,0 +1,20 @@
+must_id: item:A.5.26:rev_72h_feasibility
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Art.33 72h feasibility audited empirically across the period — count of personal-data incidents,
+  count notified within 72h, root cause of any late notifications (parity with A.5.24:rev_gdpr_72h_feasibility)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the total number of personal-data incidents identified during the review period in a dated incident
+  log.
+- Document the number of incidents that were notified to the regulator within 72 hours, referencing notification
+  dates for each case.
+- State the root cause for any incidents where notification exceeded 72 hours, including supporting investigation
+  records or communications.
+- Name the reviewer as a specific individual who completed the periodic incident response program review,
+  not a generic team or department.
+- Retain evidence of all notification submissions and regulator correspondence for each incident, including
+  timestamps and recipient details.

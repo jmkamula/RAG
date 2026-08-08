@@ -1,0 +1,19 @@
+must_id: item:A.8.27:rev_principle_set
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Principle-set review (new threats → new principles; obsolete principles retired)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual or role responsible for leading architecture principles reviews, listing them
+  in a dated responsibilities register.
+- Document the schedule for periodic reviews of architecture principles, including the next planned review
+  date, in a maintained calendar or review log.
+- Record meeting minutes or a decision log showing discussion of new threats, updates to principles, and
+  retirement of obsolete principles, with participant names and dates.
+- Update the official architecture principles document to reflect any changes, including version numbers,
+  approval signatures, and revision dates.
+- Name the owner of each principle as a specific person, not a generic team or department, in the principles
+  documentation.

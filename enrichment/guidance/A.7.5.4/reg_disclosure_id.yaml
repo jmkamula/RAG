@@ -1,0 +1,15 @@
+must_id: item:A.7.5.4:reg_disclosure_id
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Unique disclosure identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique, sequential identifier to each PII disclosure event as you enter it into the log.
+- Record the identifier in a dedicated column for every row, ensuring there are no duplicate values.
+- Cross-reference each identifier with related incident documentation to confirm traceability from the
+  log to supporting evidence.
+- Name the log owner as a specific individual responsible for maintaining the uniqueness and accuracy
+  of disclosure identifiers.

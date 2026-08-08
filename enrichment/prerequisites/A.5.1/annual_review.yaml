@@ -1,0 +1,40 @@
+leaf_id: req:A.5.1:annual_review
+control_ref: A.5.1
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organisation and which information assets
+    are covered by the ISMS and its policies. You cannot meaningfully review the master InfoSec policy
+    unless you know what it is supposed to cover.
+  good_enough: A documented scope statement exists that clearly identifies the organisational boundaries
+    and assets included in the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: direct
+  rationale: The review record is about the policy itself; you must have a current, documented Information
+    Security Policy to review and record outcomes against.
+  good_enough: The latest version of the master Information Security Policy is available and accessible
+    to reviewers.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that the right people are responsible for reviewing the
+    policy and recording the review. Without this, the review process may lack authority or accountability.
+  good_enough: Roles for policy ownership and review are documented, with named individuals or positions
+    assigned.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Policy reviews should consider changes in the risk landscape. A current risk assessment informs
+    whether the policy remains adequate or needs updating.
+  good_enough: A recent risk assessment exists, even if high-level, identifying major risks relevant to
+    the policy’s scope.

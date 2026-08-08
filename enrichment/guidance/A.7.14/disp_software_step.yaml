@@ -1,0 +1,17 @@
+must_id: item:A.7.14:disp_software_step
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Per-record software-removal step evidence (license-key handoff or wipe)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the serial number and asset tag of each equipment item being disposed of in the disposal record.
+- Document the specific software titles and license keys removed or transferred from the equipment, including
+  dates and responsible staff member.
+- Attach evidence of license key handoff or wiping process, such as screenshots or signed confirmation
+  from the person performing the removal.
+- Name the responsible individual for each disposal entry, avoiding generic labels like "IT team" or "staff".
+- Retain a signed or electronically approved confirmation that no licensed software remains on the disposed
+  equipment.

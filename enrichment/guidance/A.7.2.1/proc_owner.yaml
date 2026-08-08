@@ -1,0 +1,16 @@
+must_id: item:A.7.2.1:proc_owner
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Named owner (DPO or Privacy Office)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the Purpose Identification Procedure as a specific individual, such as the Data Protection
+  Officer or Head of Privacy.
+- Record the owner's full name, job title, and contact details in the procedure document with the current
+  date.
+- Sign and date the procedure to confirm the owner's acceptance of responsibility for maintaining and
+  updating its content.
+- Review the document to ensure the owner is not listed as a team, department, or generic role.

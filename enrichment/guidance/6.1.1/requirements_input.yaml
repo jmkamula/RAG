@@ -1,0 +1,18 @@
+must_id: item:6.1.1:requirements_input
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Requirements from 4.2 considered as planning input
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all interested parties and their relevant requirements as defined in clause 4.2, with names and
+  dates for each entry.
+- Reference each requirement from clause 4.2 directly within the risk and opportunity planning procedure
+  document.
+- Document how each identified requirement is considered during planning, including specific actions or
+  controls linked to each requirement.
+- Name the person responsible for maintaining the requirements list as a specific individual, not a group
+  or department.
+- Attach a dated version of the planning procedure that clearly shows the integration of 4.2 requirements.

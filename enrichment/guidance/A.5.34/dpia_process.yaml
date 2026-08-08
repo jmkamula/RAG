@@ -1,0 +1,20 @@
+must_id: item:A.5.34:dpia_process
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: PIA / DPIA process reference for high-risk processing (cross-link to GDPR Art.35 + EDPB Guidelines
+  on DPIA — when to trigger, who reviews, supervisory-authority consultation path)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the Privacy and PII Protection Policy to the documented Data Protection Impact Assessment
+  (DPIA) process, including a direct link or appendix reference.
+- State the specific triggers for initiating a DPIA, citing GDPR Article 35 and summarizing EDPB Guidelines
+  criteria within the policy.
+- Name the designated individual or role responsible for reviewing and signing off on DPIAs, avoiding
+  vague terms like "the team" or "management."
+- Document the procedure for consulting with the supervisory authority, including contact details and
+  required documentation, in the policy or as an attached process map.
+- Record the policy version and approval date on the document’s cover page to show it reflects current
+  legal and regulatory requirements.

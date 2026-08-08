@@ -1,0 +1,17 @@
+must_id: item:Art.30:reg_versioning
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Versioning or change-log per activity so historical state can be reconstructed
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document every update to each processing activity in the RoPA, including a summary of the change, the
+  date, and the person making the change.
+- Assign a unique version number or timestamp to each saved version of a processing activity entry in
+  the RoPA.
+- Retain previous versions of each processing activity entry so that changes over time can be traced and
+  reconstructed.
+- Name the person responsible for maintaining the RoPA version history as a specific individual, not a
+  team or department.

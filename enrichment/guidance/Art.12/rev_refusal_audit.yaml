@@ -1,0 +1,19 @@
+must_id: item:Art.12:rev_refusal_audit
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Refusal-grounds audit — refused requests sampled for legitimate Art.12.5 grounds
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of refused data subject requests from the past year and record their reference
+  numbers in an audit log.
+- Document the specific grounds cited for each refusal, ensuring each aligns with the legitimate reasons
+  allowed under Article 12.5.
+- Attach copies of the refusal communications sent to requesters, showing the stated grounds and the date
+  of response.
+- Name the reviewer who conducted the audit for each sampled refusal, listing their full name and the
+  date of review.
+- Confirm that no refusal cites vague or generic reasons such as "not applicable" or "company policy"
+  without reference to Article 12.5.

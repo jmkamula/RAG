@@ -1,0 +1,15 @@
+must_id: item:A.8.31:reg_owner
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Per-row named owner (technology lead with InfoSec partner for production)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific technology lead and their InfoSec partner as the owner for each environment row in the
+  register.
+- Record the full names and current job titles of both owners directly in the environment register, not
+  as a group or team.
+- Document the date when each owner was assigned responsibility for their environment row.
+- Cross-reference each owner’s entry with their contact details or internal directory profile for verification.

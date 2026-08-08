@@ -1,0 +1,17 @@
+must_id: item:Art.20:reg_data_volume
+control_ref: Art.20
+standard_id: GDPR:2016/679
+must_text: Per-row data volume metric (records / bytes)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the number of individual data records processed for each portability request in a dedicated column
+  of the register.
+- Document the total file size in bytes for each data export, using system logs or export tool outputs
+  as the source.
+- Name the staff member responsible for entering data volume metrics for each request, listing their full
+  name rather than a team or department.
+- Cross-reference each entry with the corresponding export file or log to verify the accuracy of the recorded
+  data volume.

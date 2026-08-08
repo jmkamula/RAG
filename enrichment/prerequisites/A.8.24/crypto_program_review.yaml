@@ -1,0 +1,48 @@
+leaf_id: req:A.8.24:crypto_program_review
+control_ref: A.8.24
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which assets, systems, and business processes are in-scope for your ISMS
+    to ensure the cryptography program review covers all relevant areas. If the scope is unclear, you
+    risk missing critical systems or data.
+  good_enough: A documented scope that clearly identifies the boundaries and applicability of the ISMS,
+    including all systems using cryptography.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: A current asset register is essential to identify all assets protected by cryptographic controls.
+    Without it, you can't verify if all relevant assets are included in the review.
+  good_enough: An up-to-date list of information assets, including those protected by cryptographic measures,
+    is available and accessible.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: You need to know which data types require cryptographic protection and their classification
+    to assess if controls and key management are appropriate.
+  good_enough: A documented and operational data classification scheme that identifies which information
+    requires cryptographic protection.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment results inform which cryptographic controls are necessary and how often reviews
+    should occur. Without this, the review may not address actual risks.
+  good_enough: A recent risk assessment that identifies cryptographic risks and informs the scope and
+    frequency of cryptography program reviews.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures accountability for maintaining the cryptography program
+    and conducting periodic reviews.
+  good_enough: Roles and responsibilities for cryptographic controls and review activities are assigned
+    and documented.

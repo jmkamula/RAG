@@ -1,0 +1,20 @@
+must_id: item:A.5.17:rev_effective_time
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Effective time per record (when the revocation needed to take effect — immediate for compromise,
+  end-of-day for rotation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time when each credential revocation or reissue is initiated in the revocation
+  log.
+- State the required effective time for each revocation or reissue, specifying if it is immediate or scheduled
+  for a later point.
+- Name the individual authorizing the effective time decision for each entry, avoiding generic roles like
+  "IT team" or "admin".
+- Retain supporting evidence, such as incident reports or rotation schedules, that justify the chosen
+  effective time for each action.
+- Confirm that the effective time recorded matches the actual system change timestamp by cross-referencing
+  system logs for each event.

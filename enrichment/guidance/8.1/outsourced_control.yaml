@@ -1,0 +1,19 @@
+must_id: item:8.1:outsourced_control
+control_ref: '8.1'
+standard_id: ISO27001:2022
+must_text: Outsourced processes determined and controlled (links to A.5.19/A.5.20)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all outsourced processes in a dated register, listing the service provider, scope of work,
+  and contract reference for each.
+- Assign a named individual as the owner responsible for monitoring each outsourced process, avoiding
+  generic titles like "the team" or "IT".
+- Document the specific controls applied to each outsourced process, referencing relevant clauses from
+  contracts or service level agreements.
+- Record the date and outcome of the most recent review of each outsourced process, including any corrective
+  actions taken.
+- Retain copies of signed agreements with all outsourced providers, showing requirements for information
+  security and compliance with A.5.19 and A.5.20.

@@ -1,0 +1,16 @@
+must_id: item:A.7.6:escort_third_parties
+control_ref: A.7.6
+standard_id: ISO27001:2022
+must_text: Escort requirements when third parties present
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the requirement in the procedure that all third parties must be escorted by an authorised staff
+  member when present in secure areas.
+- Name the designated staff responsible for escorting third parties in a dated section of the procedure.
+- Record each third-party visit and assigned escort in a visitor log, including date, time, and purpose
+  of visit.
+- Specify in the procedure that escort responsibility cannot be delegated to unnamed roles such as "the
+  team" or "any available staff".

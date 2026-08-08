@@ -1,0 +1,15 @@
+must_id: item:Art.41:reg_adherent
+control_ref: Art.41
+standard_id: GDPR:2016/679
+must_text: Per-row adherent monitored
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the individual or entity being monitored in each row of the Code Monitoring
+  Activity Record.
+- Document the date and time of each monitoring activity entry to provide a clear audit trail.
+- State the specific monitoring action taken for each adherent, describing what was checked or reviewed.
+- Name the monitored adherent as a specific individual or legal entity—do not use generic terms like "user"
+  or "staff".

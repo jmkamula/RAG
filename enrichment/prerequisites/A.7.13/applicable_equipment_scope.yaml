@@ -1,0 +1,41 @@
+leaf_id: req:A.7.13:applicable_equipment_scope
+control_ref: A.7.13
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines which parts of the organisation, locations, and assets are covered
+    by the information security management system. You can't determine which equipment needs maintenance
+    controls unless you know what is in-scope.
+  good_enough: A documented scope statement that clearly lists included business units, locations, and
+    asset types. It should be current and specific enough to identify what equipment is covered.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register is essential to identify all equipment that may require maintenance.
+    Without it, you can't reliably specify which equipment classes are relevant for maintenance scope.
+  good_enough: A basic, current inventory of equipment assets, including enough detail to distinguish
+    between different classes (e.g., servers, laptops, network devices).
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The classification scheme helps determine the criticality and sensitivity of equipment, which
+    influences maintenance frequency and supervision requirements. This ensures maintenance efforts are
+    risk-based.
+  good_enough: A simple documented scheme that assigns at least basic sensitivity or criticality levels
+    to equipment classes.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment results guide which equipment requires stricter maintenance and supervision,
+    based on threats and impacts. This ensures maintenance scope is aligned with actual risk.
+  good_enough: A recent risk assessment that identifies key threats and vulnerabilities related to equipment,
+    even if not exhaustive.

@@ -1,0 +1,18 @@
+must_id: item:A.6.5:contractor_parallel
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Equivalent process for contractors and interested parties (offboarding clause in supplier agreement
+  A.5.20)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the offboarding clause in your supplier agreement with the employee exit checklist to
+  confirm both cover information security responsibilities.
+- Document the process for removing access and returning assets for contractors and other third parties
+  in a written procedure.
+- Name the person responsible for enforcing offboarding steps for contractors and interested parties,
+  listing them as a specific individual.
+- Retain signed supplier agreements that include the information security offboarding clause, dated and
+  linked to each contractor or third party.

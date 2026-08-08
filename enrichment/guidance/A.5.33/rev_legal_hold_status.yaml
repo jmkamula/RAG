@@ -1,0 +1,20 @@
+must_id: item:A.5.33:rev_legal_hold_status
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Active legal-hold status reviewed (which classes/rows currently held, by whom, on what basis,
+  expected release trigger) — stale unreleased holds remediated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all records currently under legal hold, including the specific class or row, the responsible individual,
+  the legal basis, and the expected release trigger, in a dated review log.
+- Name the legal hold owner as a specific individual for each record, avoiding generic labels like "Legal"
+  or "Records Team".
+- Document the review of each legal hold's status, noting any that are overdue for release or lack a clear
+  release trigger.
+- Record the remediation action taken for any stale or unreleased holds, including the date and the person
+  authorizing the action.
+- Retain evidence of the periodic review meeting, such as a signed attendance sheet and a summary of decisions
+  made.

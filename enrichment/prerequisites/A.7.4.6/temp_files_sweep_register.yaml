@@ -1,0 +1,41 @@
+leaf_id: req:A.7.4.6:temp_files_sweep_register
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: The Temp Files Sweep Register must reference which assets (systems, storage locations) are
+    subject to periodic sweeps. Without an up-to-date asset register, you cannot reliably identify or
+    track where temporary files reside.
+  good_enough: A current list of systems and storage areas where temporary files may be created or stored,
+    sufficient to scope the sweep activity.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: You need to know which files or data types are considered 'temporary' and whether they contain
+    personal data, as this impacts sweep frequency and handling. The classification scheme defines these
+    categories.
+  good_enough: A documented scheme that distinguishes temporary files and indicates if they may contain
+    personal data, even if not all files are fully classified yet.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: The register must show that sweeps are performed for a defined privacy purpose (e.g., minimizing
+    unnecessary retention of personal data). This ensures the sweep activity aligns with privacy objectives.
+  good_enough: A brief documented statement of the privacy purpose for conducting temp file sweeps, linked
+    to the register.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: foundational
+  rationale: If temp files contain personal data, you must document the lawful basis for processing and
+    deleting them. This underpins the legitimacy of the sweep activity.
+  good_enough: A note of the lawful basis (e.g., legal obligation, legitimate interest) for handling and
+    erasing temp files, referenced in the sweep process.

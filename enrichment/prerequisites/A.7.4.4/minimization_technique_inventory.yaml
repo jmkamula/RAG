@@ -1,0 +1,40 @@
+leaf_id: req:A.7.4.4:minimization_technique_inventory
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the specific purpose for each processing activity before you can assess and
+    document which minimization techniques are appropriate. Without this, minimization decisions lack
+    context.
+  good_enough: A documented list of processing activities with clear, specific purposes is available and
+    up to date.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity is essential to determine the
+    minimum data required and justify minimization choices.
+  good_enough: Each processing activity has a recorded lawful basis that is reviewed and not obviously
+    outdated.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A data classification scheme helps identify which data types are sensitive or personal, guiding
+    the selection of minimization techniques for each processing activity.
+  good_enough: A basic classification scheme exists and is applied to personal data types relevant to
+    processing activities.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register ensures you know what personal data assets exist and where,
+    so you can apply and track minimization techniques accurately.
+  good_enough: A current inventory of information assets, including those containing personal data, is
+    available and accessible to privacy stakeholders.

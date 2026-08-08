@@ -1,0 +1,15 @@
+must_id: item:6.1.2:reg_last_assessed
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Last assessment date per row (drives staleness)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent risk assessment for each risk entry directly in the risk register.
+- Name the assessor responsible for the last review of each risk, using a specific individual’s full name.
+- Cross-reference each risk entry to supporting assessment documentation, including version or file location,
+  to verify the assessment date.
+- Avoid leaving any risk entry with a blank or undated last assessment field, as auditors will flag missing
+  or outdated dates.

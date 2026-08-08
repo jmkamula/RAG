@@ -1,0 +1,19 @@
+must_id: item:A.7.1:rev_scope_check
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Cross-check against the applicable-sites scope — any new site or sub-let that should add a
+  register entry
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current sites and sub-let locations included in your ISO27001 scope, referencing the latest
+  approved scope document with version and date.
+- Cross-check the perimeter program register against the scope list, highlighting any sites or sub-lets
+  missing from the register.
+- Record the date, findings, and responsible person for each periodic review in a signed review log.
+- Name any new or changed sites as specific addresses — do not use vague labels like "new office" or "leased
+  space".
+- Update the register immediately for any site or sub-let identified as missing, attaching supporting
+  documentation for the change.

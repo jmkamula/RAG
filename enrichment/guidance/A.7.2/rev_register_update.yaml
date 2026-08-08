@@ -1,0 +1,19 @@
+must_id: item:A.7.2:rev_register_update
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Changes propagated to the procedure / authorisation lists
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of each entry program review in a version-controlled log, including any
+  identified changes to procedures or authorisation lists.
+- Update the written entry procedure and authorisation lists immediately after review, attaching a copy
+  of the revised documents to the review record.
+- Name the person responsible for making and confirming these updates as a specific individual, not a
+  group or department.
+- Retain evidence of communication notifying relevant staff of the updated procedure or authorisation
+  lists, such as an email or meeting note.
+- Cross-reference the updated documents in the next review cycle to confirm that all agreed changes were
+  implemented.

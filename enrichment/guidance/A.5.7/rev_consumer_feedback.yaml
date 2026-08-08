@@ -1,0 +1,17 @@
+must_id: item:A.5.7:rev_consumer_feedback
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Consumer feedback collected from named consumers (sec ops, A.5.21 supplier risk, A.5.25 detection,
+  exec briefing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name specific individuals from each consumer group (security operations, supplier risk, detection, executive
+  team) who provided feedback on the threat intelligence program.
+- Document the date, method, and summary of feedback collected from each named consumer group in a review
+  log or meeting minutes.
+- Retain copies of feedback forms, emails, or meeting notes showing direct input from the identified consumers.
+- Avoid using generic terms like "the team" or "stakeholders"—list actual names and roles for each feedback
+  provider.

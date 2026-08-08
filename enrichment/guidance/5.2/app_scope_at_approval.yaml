@@ -1,0 +1,16 @@
+must_id: item:5.2:app_scope_at_approval
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: Scope statement (4.3) version that was in effect at approval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Attach the exact version of the scope statement that was current at the time of policy approval to the
+  approval record.
+- Record the approval date and match it to the version date or identifier of the scope statement in the
+  documentation.
+- Name the approver as a specific individual, not a group or role, on the approval record.
+- Cross-reference the policy approval record with the scope statement version in your document control
+  register.

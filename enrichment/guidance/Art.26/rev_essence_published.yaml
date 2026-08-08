@@ -1,0 +1,19 @@
+must_id: item:Art.26:rev_essence_published
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Essence-published audit — privacy notice / equivalent surface reflects each arrangement
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each joint controller arrangement in your published privacy notice or equivalent, listing all participating
+  organisations with clear, specific names.
+- Document the responsibilities of each joint controller in the privacy notice, using language that matches
+  the actual written agreement.
+- State the legal basis and purpose for each joint processing activity in the privacy notice, linking
+  these to the relevant arrangement.
+- Record the date of the most recent update to the privacy notice, ensuring it matches the latest joint
+  controller agreement review.
+- Avoid using generic or boilerplate text that could apply to any organisation; tailor the notice to reflect
+  your unique joint controller arrangements.

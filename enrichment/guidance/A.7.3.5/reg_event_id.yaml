@@ -1,0 +1,16 @@
+must_id: item:A.7.3.5:reg_event_id
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Unique event identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique, sequential identifier to each objection event as it is logged in the register.
+- Record the assigned identifier in a dedicated column for every row, ensuring no two events share the
+  same identifier.
+- Cross-reference the identifier in related documentation or correspondence to maintain a consistent audit
+  trail.
+- Verify that no row is missing an identifier or contains a duplicate, correcting any gaps or repeats
+  immediately.

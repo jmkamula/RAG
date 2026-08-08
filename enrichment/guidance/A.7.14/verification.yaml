@@ -1,0 +1,17 @@
+must_id: item:A.7.14:verification
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Verification of data removal method per classification (overwrite, degauss, physical destruction)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the data classification of each item scheduled for disposal or re-use in a disposal log, including
+  asset tag and responsible owner.
+- Record the specific data removal method used for each item, such as overwriting, degaussing, or physical
+  destruction, with date and operator name.
+- Attach evidence of completion, such as a certificate of destruction or system log showing successful
+  overwrite, to the disposal record.
+- Name the person who verified that the removal method matched the data classification, avoiding generic
+  roles like "IT team" or "staff".

@@ -1,0 +1,16 @@
+must_id: item:A.7.4.9:rev_reviewer
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Reviewer identity (Infrastructure + Security Engineering + DPO)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer from Infrastructure as a specific individual, including full name and job title, in
+  the transmission program review record.
+- Record the reviewer from Security Engineering as a named person, not as a team or department, in the
+  documented review log.
+- Document the DPO’s full name and date of review on the transmission program review form.
+- Retain a signed or digitally acknowledged record from each reviewer confirming their participation in
+  the review process.

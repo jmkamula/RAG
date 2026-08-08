@@ -1,0 +1,18 @@
+must_id: item:Art.39:reg_period
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Per-row reporting period
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the start and end date for each DPO activity entry, showing the exact reporting period covered.
+- State the reporting frequency for each activity, such as monthly, quarterly, or annually, in a dedicated
+  column.
+- Name the person responsible for updating the reporting period, using a specific individual's name rather
+  than a generic role.
+- Cross-reference each activity entry with supporting documentation that confirms the activity occurred
+  within the stated period.
+- Avoid leaving reporting period fields blank or using vague terms like "ongoing"—enter precise dates
+  for every row.

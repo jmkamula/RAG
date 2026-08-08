@@ -1,0 +1,20 @@
+must_id: item:A.5.24:rev_exercise_results
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Exercise-result analysis (last N exercises reviewed; gaps surfaced; remediation per gap; ratio-of-exercises-completed
+  vs planned)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the last N incident management exercises conducted, including dates and responsible individuals
+  for each exercise.
+- Document the analysis results for each exercise, clearly stating any gaps or weaknesses identified during
+  the review.
+- Record the remediation actions assigned for each gap, including the responsible person and target completion
+  date.
+- Calculate and state the ratio of exercises completed versus those planned in the review period, referencing
+  the approved exercise schedule.
+- Name the reviewer as a specific individual who signed and dated the analysis—avoid using generic roles
+  or unsigned documents.

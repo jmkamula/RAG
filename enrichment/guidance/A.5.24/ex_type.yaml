@@ -1,0 +1,17 @@
+must_id: item:A.5.24:ex_type
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Exercise type per record (tabletop / live_simulation / red_team_drill / regulator_led / partial_segment)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'Record the exercise type for each framework activation using the approved taxonomy: tabletop, live_simulation,
+  red_team_drill, regulator_led, or partial_segment.'
+- Name the person responsible for classifying and recording the exercise type on each activation record.
+- Date each framework activation record to show when the exercise type was assigned.
+- Avoid using vague or custom exercise types not listed in the approved taxonomy, as auditors will flag
+  non-standard entries.
+- Cross-reference each activation record with the documented exercise plan to confirm the exercise type
+  matches the planned scenario.

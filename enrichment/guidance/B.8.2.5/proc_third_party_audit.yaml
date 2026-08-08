@@ -1,0 +1,19 @@
+must_id: item:B.8.2.5:proc_third_party_audit
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: Third-party audit acceptance — customer-mandated auditor engagement rules
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for accepting and engaging with customer-mandated third-party auditors, including
+  required approvals and communication steps, in a controlled policy file.
+- Name the decision-maker responsible for approving third-party auditor access as a specific individual,
+  not a generic role or department.
+- Record each customer-mandated audit request and the corresponding approval or denial decision, including
+  dates and signatures, in an auditable log.
+- State any conditions or restrictions placed on third-party auditor activities within the documented
+  procedure, referencing relevant contractual or legal requirements.
+- Retain copies of all correspondence with customers and third-party auditors regarding audit arrangements
+  and outcomes in a dedicated, access-controlled folder.

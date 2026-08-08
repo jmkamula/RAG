@@ -1,0 +1,16 @@
+must_id: item:9.2:frequency
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Audit frequency defined
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the planned frequency for each audit activity in the Internal Audit Programme document, specifying
+  whether audits are annual, biannual, or another interval.
+- Record the date when the audit frequency was last reviewed and updated, and include the name of the
+  person who approved the schedule.
+- Name the owner of the Internal Audit Programme as a specific individual, not as a team or department.
+- Attach evidence of management approval for the defined audit frequency, such as a signed or digitally
+  approved document.

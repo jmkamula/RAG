@@ -1,0 +1,16 @@
+must_id: item:A.7.8:reg_equipment_id
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Per-row equipment identifier (cross-link to A.5.9 asset register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique identifier for each piece of equipment in the Equipment Siting Register that matches
+  the identifier used in the Asset Register.
+- Cross-reference each equipment entry in the Equipment Siting Register to its corresponding row in the
+  Asset Register by including the Asset Register row number or link.
+- Name the owner of each equipment item as a specific individual, not a team or department, in both registers.
+- Confirm that every row in the Equipment Siting Register contains a completed cross-link field; do not
+  leave any cross-link fields blank.

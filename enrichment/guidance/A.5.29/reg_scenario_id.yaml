@@ -1,0 +1,16 @@
+must_id: item:A.5.29:reg_scenario_id
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Each in-scope scenario captured with a unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each disruption scenario in the register, using a consistent numbering
+  or naming convention.
+- Record the full description of each scenario alongside its unique identifier in the register, ensuring
+  no duplicate entries exist.
+- Name the person responsible for maintaining the register as a specific individual, not a team or department.
+- Cross-reference each scenario’s identifier with related risk assessments or business continuity plans
+  to confirm full scenario coverage.

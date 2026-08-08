@@ -1,0 +1,41 @@
+leaf_id: req:A.7.4.8:disposal_record_register
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: The PII Disposal Record Register must reference the specific assets (media, devices, or storage)
+    containing PII that are being disposed of. Without an up-to-date asset register, you cannot accurately
+    track or record disposal actions.
+  good_enough: A current list of all assets holding PII, with enough detail to identify what is being
+    disposed of, is available and accessible to the team drafting the disposal register.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: Knowing the classification of information on each asset ensures that disposal actions are
+    appropriate for the sensitivity of the PII involved. This prevents under- or over-protection during
+    disposal.
+  good_enough: A documented scheme exists that clearly marks which assets or data types are classified
+    as PII, and this scheme is referenced in disposal procedures.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: Understanding the original purpose for processing PII helps determine when retention is no
+    longer justified and disposal is required. This underpins legitimate and timely disposal actions.
+  good_enough: A summary of processing purposes for each PII data set is available, so the team can judge
+    when disposal is appropriate.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: foundational
+  rationale: The lawful basis for processing PII affects retention and disposal requirements. Without
+    this, you cannot confidently determine when disposal is mandatory or permitted.
+  good_enough: For each PII data set, the lawful basis for processing is documented and accessible to
+    inform disposal decisions.

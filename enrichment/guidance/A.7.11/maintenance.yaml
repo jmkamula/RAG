@@ -1,0 +1,18 @@
+must_id: item:A.7.11:maintenance
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Maintenance contracts with provider SLAs (UPS battery replacement, generator service)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all supporting utilities covered by continuity procedures, including uninterruptible power supplies
+  (UPS) and generators, in a dated inventory document.
+- Attach current maintenance contracts for each utility, showing provider names, contract terms, and service
+  level agreements (SLAs) with response times.
+- Record scheduled and completed maintenance activities, including UPS battery replacements and generator
+  servicing, in a maintenance log with dates and technician names.
+- Name the contract owner as a specific individual responsible for each utility, not a generic team or
+  department.
+- Store signed copies of all maintenance contracts and SLA documents in a central, access-controlled repository.

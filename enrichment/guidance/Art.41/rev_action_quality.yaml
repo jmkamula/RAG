@@ -1,0 +1,18 @@
+must_id: item:Art.41:rev_action_quality
+control_ref: Art.41
+standard_id: GDPR:2016/679
+must_text: Action quality — corrective / suspension / exclusion decisions defensible vs procedure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each corrective, suspension, or exclusion decision with the date, the named decision-maker,
+  and a clear reference to the relevant procedure followed.
+- Attach supporting evidence showing how the procedure was applied in each case, such as investigation
+  reports, correspondence, or meeting minutes.
+- Name the owner of the decision as a specific individual, not a group or generic title, to avoid ambiguity
+  in accountability.
+- Record the rationale for each decision, explicitly linking it to the criteria in the documented procedure.
+- Retain a signed record confirming that all decisions were reviewed for consistency with the established
+  procedure.

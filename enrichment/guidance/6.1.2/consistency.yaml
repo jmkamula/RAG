@@ -1,0 +1,16 @@
+must_id: item:6.1.2:consistency
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Consistent and comparable results produced
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the risk assessment methodology, including scoring criteria and scales, in a dated procedure
+  approved by a named manager.
+- Record at least two completed risk assessments using the documented methodology, showing how results
+  are calculated and compared.
+- Cross-reference each risk assessment result to the version of the procedure used, ensuring consistent
+  application of the current methodology.
+- Name the procedure owner as a specific individual, not a team or department, in the procedure document.

@@ -1,0 +1,18 @@
+must_id: item:A.8.32:rev_date
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Change Management Program in a dated log entry signed by the
+  responsible manager.
+- Name the individual responsible for scheduling and conducting the periodic review, ensuring a specific
+  person is listed rather than a team or department.
+- Document the planned review interval in months within the Change Management Program policy or schedule.
+- Cross-reference the actual review date against the documented interval to confirm it falls within the
+  required timeframe.
+- Retain the meeting minutes or review report as evidence that the review was completed on the recorded
+  date.

@@ -1,0 +1,19 @@
+must_id: item:A.8.22:zone_model
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Zone model documented (DMZ / internal / restricted / OT / dev/test/prod / per-tenant where
+  multi-tenant)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a network zone model diagram that clearly labels each zone, such as DMZ, internal, restricted,
+  OT, development, test, production, and per-tenant areas.
+- Name each zone’s purpose and permitted types of systems or data in a written description that matches
+  the diagram.
+- Assign a specific individual as the owner responsible for maintaining and updating the network segregation
+  documentation.
+- Record the date of the latest review or update on the network segregation procedure to show it is current.
+- Specify zone boundaries and controls in writing; avoid generic descriptions that could apply to any
+  organisation’s network.

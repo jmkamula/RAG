@@ -1,0 +1,16 @@
+must_id: item:Art.17:reg_exceptions
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Per-row Art.17.3 exception assessment (none / cited exception)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record for each erasure request whether an exception under Article 17.3 applies, stating "none" or citing
+  the specific exception.
+- Name the person who assessed the exception for each request, using their full name rather than a generic
+  title or team.
+- Date the exception assessment entry for each request to show when the decision was made.
+- Reference the specific Article 17.3 clause or legal basis if an exception is cited, not just a general
+  statement.

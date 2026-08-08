@@ -1,0 +1,16 @@
+must_id: item:A.7.2.3:reg_ux_review
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: UX review notes per version (dark-pattern check)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to conduct a user experience review for each new or updated consent mechanism
+  version.
+- Document review notes that specifically address the presence or absence of dark patterns in the consent
+  interface.
+- Record the date of each UX review and the version number of the consent mechanism being assessed.
+- Attach evidence of any changes made to the consent mechanism in response to UX review findings.
+- Name the reviewer as a specific person—do not use generic roles like "the team" or "UX department".

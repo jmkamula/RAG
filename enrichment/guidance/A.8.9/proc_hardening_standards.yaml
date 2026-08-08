@@ -1,0 +1,17 @@
+must_id: item:A.8.9:proc_hardening_standards
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Hardening standards referenced (CIS / vendor / internal) per asset class
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each asset class in the configuration management procedure, using clear categories such as servers,
+  network devices, and workstations.
+- Reference the specific hardening standard used for each asset class, naming the CIS benchmark, vendor
+  guideline, or internal document by title and version.
+- Attach or link to the current version of each referenced hardening standard within the procedure, ensuring
+  auditors can directly access the source.
+- Name the individual responsible for maintaining and updating the list of hardening standards, avoiding
+  generic roles like "IT team" or "admins".

@@ -1,0 +1,17 @@
+must_id: item:A.8.11:scope_datasets
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Datasets enumerated with masking obligation per dataset (drawn from A.5.34 PII inventory)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each dataset containing personal information in a table, referencing the corresponding entry from
+  your A.5.34 personal information inventory.
+- State the specific masking requirement for each dataset, clearly indicating whether masking is required
+  or not.
+- Name the individual responsible for determining and updating masking obligations for each dataset, avoiding
+  generic titles like "the team" or "IT."
+- Record the date when each masking obligation was last reviewed or updated for traceability.
+- Attach supporting documentation or policy references that justify the masking decision for each dataset.

@@ -1,0 +1,18 @@
+must_id: item:Art.37:reg_contract_link
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: Per-row link to employment / service contract document
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the designated Data Protection Officer (DPO) in the record, listing a specific individual rather
+  than a team or department.
+- Attach a direct link to the DPO’s signed employment or service contract for each entry in the designation
+  record.
+- Record the contract’s effective date and confirm it matches the DPO’s start date in the designation
+  record.
+- State the contract type (employment or service) for each DPO listed, avoiding generic or missing contract
+  references.
+- Review the designation record regularly to update links if contracts are renewed or DPOs change.

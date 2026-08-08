@@ -1,0 +1,16 @@
+must_id: item:A.7.2.4:rev_reviewer
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Engineering)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and role, explicitly identifying both the Data
+  Protection Officer and an Engineering representative.
+- Record the date each reviewer completed their assessment on the Consent Capture Program Review document.
+- Obtain and retain a signature or written approval from both the Data Protection Officer and the Engineering
+  reviewer on the final review record.
+- Avoid listing a group or department as the reviewer; always specify named individuals responsible for
+  the review.

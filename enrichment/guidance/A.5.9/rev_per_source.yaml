@@ -1,0 +1,20 @@
+must_id: item:A.5.9:rev_per_source
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Per-source delta — what each discovery source surfaced vs what the register held (additions,
+  removals, mismatches)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the results of each asset discovery source in a dated log, listing all assets identified during
+  each reconciliation period.
+- Cross-reference each discovery source's asset list with the current asset register, clearly marking
+  additions, removals, and mismatches.
+- Document the specific actions taken to resolve each discrepancy, including who resolved it and the completion
+  date.
+- Name the person responsible for reviewing and approving the reconciliation results — do not use a group
+  or team name.
+- Retain signed or digitally approved records of each completed reconciliation cycle, including evidence
+  of review and resolution.

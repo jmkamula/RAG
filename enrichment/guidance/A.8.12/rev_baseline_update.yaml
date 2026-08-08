@@ -1,0 +1,19 @@
+must_id: item:A.8.12:rev_baseline_update
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Baseline / ruleset / procedure updates published from findings
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the findings from the most recent Data Loss Prevention (DLP) program review in a dated report
+  signed by the review lead.
+- Name the individual responsible for updating the DLP baseline, ruleset, or procedures in response to
+  review findings.
+- Record the specific updates made to the DLP baseline, ruleset, or procedures, including the date and
+  a brief description of each change.
+- Publish the updated DLP documentation to all relevant staff and confirm distribution with a dated communication
+  record.
+- Avoid using generic statements like "procedures updated as needed"—list concrete changes linked to review
+  findings.

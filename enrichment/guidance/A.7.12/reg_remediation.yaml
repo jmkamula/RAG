@@ -1,0 +1,17 @@
+must_id: item:A.7.12:reg_remediation
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Per-row remediation log where protection falls short
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each instance where cabling protection does not meet policy in the Cabling Run Register, including
+  the specific location and date identified.
+- Describe the remediation action taken for each non-compliant cabling run, noting the completion date
+  and the person responsible for the fix.
+- Attach supporting evidence, such as photos or work orders, to each remediation entry to show the issue
+  and its resolution.
+- Name the individual who verified the remediation was completed, avoiding generic labels like "maintenance
+  team" or "IT staff."

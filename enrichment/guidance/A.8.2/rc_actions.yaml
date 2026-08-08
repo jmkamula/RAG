@@ -1,0 +1,17 @@
+must_id: item:A.8.2:rc_actions
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Revocation/modification actions completed for non-reconfirmed access
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each privileged account that was not reconfirmed during recertification in a dated access review
+  log.
+- Document the specific revocation or modification action taken for each non-reconfirmed account, including
+  the date and the person who completed the action.
+- Name the individual who approved the revocation or modification, ensuring the approver is identified
+  by full name, not just a role or team.
+- Retain evidence of system changes, such as screenshots or audit logs, showing the access was actually
+  removed or changed.

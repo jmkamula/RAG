@@ -1,0 +1,19 @@
+must_id: item:A.5.13:legacy_handling
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Handling of legacy unlabelled assets (default-classify rule with retro-labelling timeline)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a rule stating all legacy information assets without labels are to be treated as 'Confidential'
+  by default until properly classified.
+- Assign a named individual responsible for coordinating the retroactive labelling of all unlabelled legacy
+  assets.
+- Set and record a specific deadline by which all legacy assets must be reviewed and labelled according
+  to the current classification scheme.
+- Retain a dated log showing each legacy asset reviewed, its new label, and the person who completed the
+  classification.
+- Name the owner as a specific individual—do not list a team or department as responsible for the retro-labelling
+  process.

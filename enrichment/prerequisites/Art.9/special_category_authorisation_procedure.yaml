@@ -1,0 +1,33 @@
+leaf_id: req:Art.9:special_category_authorisation_procedure
+control_ref: Art.9
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of processing
+  category: direct
+  rationale: Before authorising any special category processing, you must confirm that a valid lawful
+    basis under Art.6 exists. Art.9 processing is only permitted if both a lawful basis and an Art.9.2
+    exemption are documented.
+  good_enough: A clear mapping of each proposed special category processing activity to its lawful basis
+    under Art.6 is available, even if not yet fully reviewed by legal.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify which activities involve
+    special categories of data. This ensures the authorisation procedure targets the right processing
+    operations.
+  good_enough: A working RoPA exists that lists all current processing activities and flags those involving
+    special category data, even if some details are still being refined.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer Designation
+  category: foundational
+  rationale: If a DPO is required, their involvement in reviewing or approving special category processing
+    should be defined in the procedure. This ensures oversight and compliance with GDPR governance expectations.
+  good_enough: A DPO has been formally designated (if required), and their contact details are documented,
+    even if their role in this specific procedure is still being clarified.

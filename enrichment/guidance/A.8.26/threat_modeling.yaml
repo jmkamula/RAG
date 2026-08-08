@@ -1,0 +1,20 @@
+must_id: item:A.8.26:threat_modeling
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Threat modelling at design phase (modern baseline — STRIDE / LINDDUN / kill-chain analysis
+  as appropriate)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for threat modelling during the application design phase, identifying them
+  by full name and job title.
+- Document the chosen threat modelling methodology (such as STRIDE, LINDDUN, or kill-chain analysis) in
+  the procedure, including the rationale for selection.
+- Record the date and outcome of each threat modelling session in the project documentation, attaching
+  any supporting diagrams or analysis notes.
+- Retain evidence of design phase threat modelling reviews, such as meeting minutes or signed approval
+  from the application owner.
+- Specify the threat modelling activity for each new application; do not use generic statements that could
+  apply to any system or project.

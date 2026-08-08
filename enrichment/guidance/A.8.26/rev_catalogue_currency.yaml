@@ -1,0 +1,19 @@
+must_id: item:A.8.26:rev_catalogue_currency
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Requirements-catalogue currency check (new threat patterns → requirement-category updates)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to be responsible for reviewing the application security requirements catalogue
+  and record their name in the review log.
+- Document the date of each review and clearly list any new threat patterns identified since the last
+  review in a dated record.
+- Cross-reference each updated requirement category to the relevant new threat pattern, showing how catalogue
+  changes address current risks.
+- Record the decision to update or not update requirement categories, including the rationale, in a signed
+  and dated review summary.
+- Name the review owner as a specific person, not a generic group or department, to avoid ambiguity in
+  accountability.

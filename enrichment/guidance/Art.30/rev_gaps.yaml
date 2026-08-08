@@ -1,0 +1,20 @@
+must_id: item:Art.30:rev_gaps
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Gaps identified (missing activity, outdated retention, undocumented transfer) with remediation
+  owner and target date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Review the Record of Processing Activities (RoPA) against current operations to identify missing activities,
+  outdated retention periods, or undocumented data transfers.
+- Document each gap found in a dated review log, clearly describing the issue and referencing the relevant
+  section of the RoPA.
+- Assign a named individual as the remediation owner for each identified gap, avoiding generic labels
+  like "the team" or "IT department".
+- Record a specific target date for remediation of each gap, ensuring the date is realistic and not left
+  blank or marked "TBD".
+- Update the review record with evidence of completed remediation, such as a signed confirmation or updated
+  RoPA entry, for each closed gap.

@@ -1,0 +1,19 @@
+must_id: item:10.1:rev_closure_quality
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Closure-quality check — closed actions have effectiveness assessment, not just 'marked complete'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the effectiveness assessment for each closed action, including measurable outcomes or evidence
+  that the intended improvement was achieved.
+- Name the person who performed the effectiveness assessment for each action, ensuring it is a specific
+  individual and not a group or department.
+- Document the date the effectiveness assessment was completed for each closed action in the continual
+  improvement register.
+- Attach supporting evidence, such as test results or user feedback, that demonstrates the action’s effectiveness
+  rather than just marking it as complete.
+- Avoid closing actions without an attached effectiveness assessment—auditors will flag actions marked
+  complete with no supporting evaluation.

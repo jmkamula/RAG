@@ -1,0 +1,46 @@
+leaf_id: req:A.6.7:remote_working_procedure
+control_ref: A.6.7
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know whether remote working is in-scope for your ISMS before you can define procedures
+    for it. If remote work is out of scope, this procedure is not required.
+  good_enough: A clear, current scope statement that explicitly includes or excludes remote working arrangements.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Defining who is responsible for approving, managing, and revoking remote working is essential
+    before you can assign these tasks in a procedure.
+  good_enough: A documented list or matrix of key ISMS roles, with responsibilities for remote work oversight
+    identified at least in draft.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You must know what equipment and assets are provided to remote workers to manage their lifecycle
+    and retrieval in the procedure.
+  good_enough: A basic inventory of assets likely to be assigned to remote workers, even if not fully
+    complete.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risks related to remote working (e.g., data leakage, insecure networks) must be identified
+    to inform approval criteria and controls in the procedure.
+  good_enough: A recent risk assessment that covers remote working scenarios, even if mitigation actions
+    are still in progress.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: You need to know how information handled by remote workers is classified to set appropriate
+    approval conditions and controls.
+  good_enough: A documented classification scheme that applies to information accessed remotely, even
+    if not all data is yet classified.

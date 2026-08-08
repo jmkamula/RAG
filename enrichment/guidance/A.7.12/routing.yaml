@@ -1,0 +1,19 @@
+must_id: item:A.7.12:routing
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Cable routing principles (conduits, protected paths, away from public areas)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for cable routing decisions in the procedure, specifying their full name
+  and job title.
+- Document the approved cable routing paths on a site map, highlighting use of conduits and avoidance
+  of public or high-traffic areas.
+- Record the date and outcome of the most recent inspection verifying cables are installed according to
+  the documented routing principles.
+- State the specific types of physical protection used for cables, such as conduits or trunking, in the
+  procedure text.
+- Avoid using vague terms like "secure area" or "protected route" without clear definitions or mapped
+  references in the procedure.

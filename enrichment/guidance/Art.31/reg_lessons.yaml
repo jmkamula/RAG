@@ -1,0 +1,18 @@
+must_id: item:Art.31:reg_lessons
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Per-row lessons / actions feeding into 10.1 continual improvement
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each supervisory authority interaction as a separate row, including the date, topic, and outcome
+  discussed.
+- Document a specific lesson learned or action identified from each interaction in a dedicated column
+  for that row.
+- Cross-reference each lesson or action to the relevant improvement initiative or policy update, citing
+  the date and responsible person.
+- Name the individual responsible for following up on each action — do not use generic roles or team names.
+- Review the register quarterly and sign off on completed actions, noting the date of completion and reviewer’s
+  name.

@@ -4,12 +4,14 @@ control_ref: A.5.15
 standard_id: ISO27001:2022
 evidence_type: policy
 trigger_type: universal
-template_version: 3
+template_version: 4
 must_count: 7
 should_count: 3
 ---
 
 # Access Control Policy
+
+<<DOC_CONTROL>>
 
 ## What this template gives you
 
@@ -35,6 +37,8 @@ You're producing the Access Control Policy required by **ISO/IEC
       authoriser per asset class
 - [ ] **A.5.3 Segregation of Duties analysis** — flagged
       combinations referenced in the policy
+
+<<PREREQUISITES>>
 
 ## Cross-references
 
@@ -81,6 +85,8 @@ cloud-only per 4.3 ISMS scope; no premises in scope. Cloud
 provider physical security covered by A.5.23 supplier evaluation.
 This MUST is marked N/A in the tenant scope overlay."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 2. State logical access rules
@@ -105,6 +111,8 @@ credentials). (e) Privileged actions logged + alerted (A.8.15).
 (f) Restricted-class data has additional access-time approval
 (break-glass workflow)."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Make RBAC the default access model
@@ -125,6 +133,8 @@ for time-bound contract roles where the role boundary depends on
 project/contract assignment — documented exception register +
 quarterly review. (b) Individual grants for break-glass emergency
 access only — auto-expire 24h + post-hoc review per A.8.2."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -149,6 +159,8 @@ privileged + annually for standard. Permissions broader than
 documented are flagged at attestation + remediated in the next
 A.5.18 cycle."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. State the need-to-know principle
@@ -171,6 +183,8 @@ Implemented via: (a) ABAC overlays on customer-data systems
 (engineers see only the customers they actively support); (b) audit
 logging of all data-instance access; (c) periodic data-access
 reviews surface unusual patterns to managers."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -195,6 +209,8 @@ A.5.18 provisioning references at decision time.
 | Privileged production access | Engineering Manager + Asset owner | Per request + 90-day re-attest |
 | Privileged identity-admin (Okta admin) | CISO + ISMS Owner | Per request + 90-day re-attest |
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Link to segregation of duties (A.5.3)
@@ -216,6 +232,8 @@ that incident) are BLOCKED by the A.5.18 procedure; compensating
 controls require explicit ISMS Manager sign-off. The matrix is
 reviewed at every role change + annually."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ---
@@ -235,6 +253,8 @@ access at 3am)._
 State break-glass mechanism: short-lived elevated access, mandatory
 post-hoc review, full audit trail.
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### Third-party / contractor access
@@ -249,6 +269,8 @@ rules, with contractual hooks per A.5.19/20._
 State how third-party access is provisioned (typically: separate
 identity store, time-bound, contract-referenced authorisation).
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### Periodic review cadence
@@ -262,4 +284,10 @@ _Drift prevention — access drifts without cadence._
 State review cadence: typically quarterly for privileged, annual
 otherwise (matching the A.5.18 procedure).
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+---
+
+<<REVISION_HISTORY>>

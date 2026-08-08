@@ -1,0 +1,17 @@
+must_id: item:Art.30:proc_dpia_gate
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Linkage to Art.35 DPIA — high-risk new processing requires DPIA before register entry is finalised
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each new high-risk processing activity in the RoPA to its completed Data Protection
+  Impact Assessment (DPIA) by including the DPIA title and date.
+- Document the date the DPIA was approved and the name of the approver in the RoPA entry before finalising
+  the register update.
+- State in the RoPA Maintenance Procedure that no high-risk processing activity can be added to the register
+  until a DPIA is completed and reviewed.
+- Name the responsible individual—not a team or department—who verifies DPIA completion before RoPA entry
+  is finalised.

@@ -1,0 +1,16 @@
+must_id: item:A.8.21:scope_criticality
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Per-class criticality tier (drives monitoring intensity + SLA tolerance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all network services in scope, including internal and external connections, in a dated inventory
+  reviewed by the responsible owner.
+- Assign a criticality tier to each network service in the inventory, based on business impact and required
+  availability.
+- Document the monitoring level and service level agreement (SLA) tolerance for each criticality tier
+  in a table cross-referenced to the inventory.
+- Name the owner for each network service as a specific individual, not a team or department.

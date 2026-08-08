@@ -1,0 +1,19 @@
+must_id: item:Art.31:response_review
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Response review + sign-off (DPO + legal counsel before dispatch)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the draft response to the supervisory authority with a clear version number and the date it
+  was finalized.
+- Name the Data Protection Officer and legal counsel who must review and sign off on the response before
+  it is sent.
+- Obtain dated signatures or written approvals from both the Data Protection Officer and legal counsel
+  on the final version of the response.
+- Retain the signed and dated approval record alongside the final response in a designated compliance
+  folder.
+- Avoid using generic titles or unsigned approvals; specify actual names and signatures to demonstrate
+  individual accountability.

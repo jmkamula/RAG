@@ -1,0 +1,41 @@
+leaf_id: req:A.7.2.3:program_review
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You can't review whether consent artifacts are appropriate unless you know the documented
+    purposes for which personal data is processed. This ensures the review is anchored to actual, declared
+    processing activities.
+  good_enough: A current, approved list of processing purposes for all relevant data activities is available
+    and accessible to reviewers.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Consent is only one possible lawful basis for processing personal data. To review consent
+    artifacts, you must know which activities actually rely on consent as their legal ground.
+  good_enough: A mapping of processing activities to their lawful basis exists, with those relying on
+    consent clearly identified.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope statement defines which parts of the business and which data types are covered
+    by the ISMS and its privacy extension. Without this, you can't be sure your review covers all required
+    consent artifacts.
+  good_enough: A documented scope statement exists that includes all business units and systems where
+    consent is collected or managed.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: A review process depends on clear assignment of responsibilities—who owns consent management,
+    who conducts reviews, and who remediates issues.
+  good_enough: Named individuals or roles are assigned for consent management and review, and this is
+    documented and communicated.

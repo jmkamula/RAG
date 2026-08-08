@@ -1,0 +1,19 @@
+must_id: item:Art.30:availability
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Available to the supervisory authority on request (export or read-only access path stated)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the current location and format of your Records of Processing Activities, specifying the system
+  or repository where they are stored.
+- Name a specific individual responsible for providing access to the Records of Processing Activities
+  upon supervisory authority request.
+- State the process for exporting or granting read-only access to the Records of Processing Activities,
+  including any required tools or permissions.
+- Record the date and method of the most recent test or drill demonstrating that the Records of Processing
+  Activities can be made available on request.
+- Avoid describing access procedures in vague terms—specify the exact export steps or access path rather
+  than saying "available upon request."

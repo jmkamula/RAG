@@ -1,0 +1,19 @@
+must_id: item:Art.43:independence
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Independence + expertise demonstrated (Art.43.2.a-b)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the certification body’s lead assessor and document their relevant qualifications and experience
+  in a dated staff profile or CV.
+- Record the certification body’s legal and financial independence from the organisation being assessed
+  in a signed declaration or contract.
+- Attach evidence of completed conflict-of-interest checks for all assessment team members, including
+  dated and signed statements.
+- State the specific expertise areas of each assessor in the assessment procedure, referencing relevant
+  training certificates or professional memberships.
+- Avoid listing the certification body or assessors as “the team” or by department—identify each person
+  by full name and role.

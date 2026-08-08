@@ -1,0 +1,20 @@
+must_id: item:A.5.6:scope_skill_domains
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Professional development / skill domains (CISO peer groups, secure-coding communities) driving
+  professional memberships
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all professional memberships held by security team members, including CISO peer groups and secure-coding
+  communities, in a dated register.
+- Document the skill domains or professional development topics covered by each membership, linking them
+  to relevant roles or responsibilities.
+- Record the renewal or participation confirmation for each membership, including dates and the named
+  individual responsible.
+- Name the owner as a specific individual responsible for managing and updating professional memberships,
+  not a department or generic title.
+- Retain evidence of participation, such as event attendance certificates or meeting minutes, for each
+  listed membership.

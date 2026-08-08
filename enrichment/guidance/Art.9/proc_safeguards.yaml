@@ -1,0 +1,18 @@
+must_id: item:Art.9:proc_safeguards
+control_ref: Art.9
+standard_id: GDPR:2016/679
+must_text: Safeguards required by the chosen Art.9.2 condition (e.g. health-secrecy obligation for Art.9.2.h)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific Article 9.2 condition relied on for processing special category data in a dated, approved
+  procedure document.
+- Document the additional safeguards required by the chosen condition, such as confidentiality obligations
+  or professional secrecy, in the same procedure.
+- Assign responsibility for maintaining these safeguards to a named individual, not a generic role or
+  team.
+- Record evidence of staff training on these safeguards, including attendee names and training dates.
+- Retain copies of any professional or legal obligations referenced, such as contracts or codes of conduct,
+  with clear links to the relevant processing activity.

@@ -1,0 +1,19 @@
+must_id: item:A.7.3.9:scope_legitimate_test
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Legitimate-request test (verifiable subject + about their own PII + relates to org's processing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for verifying the identity of anyone making a personal data request, including
+  required forms of identification and approval steps.
+- Record each request's details, including the requestor’s name, date, and the specific personal data
+  being requested, in a dedicated log.
+- Confirm that each request is about the requestor’s own personal data and relates to data processed by
+  your organisation, noting the relevant processing activity.
+- Name the decision-maker who approved or denied each request as a specific individual, not as a team
+  or department.
+- Retain evidence of communication with the requestor, showing how you informed them of the outcome and
+  the basis for your decision.

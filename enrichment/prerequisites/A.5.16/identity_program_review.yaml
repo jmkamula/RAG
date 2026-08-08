@@ -1,0 +1,49 @@
+leaf_id: req:A.5.16:identity_program_review
+control_ref: A.5.16
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, accounts, and business units are in-scope for identity management
+    before you can review the program. Otherwise, you risk missing orphaned or stale identities outside
+    your defined boundaries.
+  good_enough: A documented scope statement that clearly lists included systems and organizational units
+    is available and referenced.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register is essential to identify all systems and accounts that should
+    be covered by the identity program. Without it, you can't reliably detect orphaned or stale accounts.
+  good_enough: A current list of information assets (including systems and applications with user accounts)
+    is available and accessible for review.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that identity management tasks and review responsibilities
+    are understood and actionable. Reviews are ineffective if no one is accountable for follow-up.
+  good_enough: Documented roles exist for identity lifecycle management and review, with named owners
+    or teams.
+- ref: A.6.5
+  standard_id: ISO27001:2022
+  title: Responsibilities after termination or change of employment
+  category: direct
+  rationale: Post-employment obligations define how quickly access must be revoked after a person leaves
+    or changes roles. This sets the benchmark for SLA-miss analysis and orphan account checks during the
+    review.
+  good_enough: Documented procedures or SLAs for access revocation after termination or role change are
+    available for reference.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Knowing the classification of information and systems helps prioritize which identities and
+    accounts are most critical to review for security and compliance impact.
+  good_enough: A basic classification scheme exists, at least for major systems and data types, to guide
+    review focus.

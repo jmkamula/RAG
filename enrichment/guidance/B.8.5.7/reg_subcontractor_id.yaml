@@ -1,0 +1,17 @@
+must_id: item:B.8.5.7:reg_subcontractor_id
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+must_text: Subcontractor identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each subcontractor entry in the register, such as a serial number or code,
+  to allow clear reference.
+- Record the identifier in a dedicated column for every subcontractor row, ensuring no entry is left blank
+  or duplicated.
+- Cross-reference the identifier with supporting documentation, such as contracts or onboarding forms,
+  to confirm consistency.
+- Name the identifier format and assignment process in a short procedure document, dated and approved
+  by a responsible individual.

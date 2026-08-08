@@ -1,0 +1,15 @@
+must_id: item:Art.29:reg_training_xref
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Per-row training completion cross-reference (A.6.3 / 7.3 records)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each authorised person's entry with a specific training record, including the training
+  title and completion date.
+- Document the unique identifier or direct link to the training record for each individual in the register.
+- Confirm that the training record referenced matches the required GDPR topics for the person's role.
+- Name the training completion as a dated record, not as a verbal confirmation or general statement.
+- Record the name of the person who verified the training completion for each entry.

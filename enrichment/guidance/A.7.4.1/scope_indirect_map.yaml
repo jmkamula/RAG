@@ -1,0 +1,19 @@
+must_id: item:A.7.4.1:scope_indirect_map
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Indirect-collection map (technical logs + inferred data + third-party enrichment)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems and processes where personal data is collected indirectly, such as through technical
+  logs, inferred analytics, or third-party sources, in a dated register.
+- Document the specific types of personal data captured in each indirect collection context, referencing
+  actual data fields or categories.
+- Name the responsible individual for maintaining and updating the indirect-collection map, avoiding generic
+  roles like "IT" or "the team."
+- Cross-reference each indirect collection context to relevant privacy notices or consent mechanisms,
+  showing how individuals are informed about this data use.
+- Record the date of the most recent review or update to the indirect-collection map, ensuring it reflects
+  current practices.

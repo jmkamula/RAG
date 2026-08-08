@@ -1,0 +1,42 @@
+leaf_id: req:A.7.2.4:applicable_scope
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and process boundaries for all information security
+    and privacy controls, including which activities are in-scope for consent management. Without this,
+    you can't reliably identify which activities might generate consent records.
+  good_enough: A clear, documented scope statement that lists included business units, systems, and processing
+    activities.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You need to know the specific purposes for which personal data is processed to determine
+    which activities require consent and thus generate consent records. This is the foundation for mapping
+    consent events.
+  good_enough: A documented list of processing purposes, mapped to relevant activities, even if not yet
+    fully validated with all stakeholders.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Only processing activities relying on consent as their lawful basis will generate consent
+    records. You must identify which activities use consent versus other bases (like contract or legal
+    obligation).
+  good_enough: A working table or matrix showing each processing activity and its lawful basis, with consent-based
+    activities clearly marked.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register helps identify which systems and data flows are involved in
+    consent-based processing, ensuring you don't miss any recordable consent events.
+  good_enough: A basic inventory of systems and data assets involved in personal data processing, with
+    at least high-level mapping to processing activities.

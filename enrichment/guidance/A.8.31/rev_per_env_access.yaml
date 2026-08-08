@@ -1,0 +1,19 @@
+must_id: item:A.8.31:rev_per_env_access
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Per-env access review (cross-link to A.8.3 + A.5.18 outcomes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for conducting environment separation reviews by full name and role in the
+  review documentation.
+- Document the date and scope of each environment separation review, including which environments and
+  access rights were examined.
+- Cross-reference each review to the most recent access control review (A.8.3) and privileged access review
+  (A.5.18) by linking to those records.
+- Record any identified gaps or inconsistencies between environment separation and access controls, along
+  with actions taken and responsible individuals.
+- Avoid using generic statements like "all environments reviewed" without listing specific environments
+  and access records, as this will be flagged by auditors.

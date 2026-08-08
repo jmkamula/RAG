@@ -1,0 +1,16 @@
+must_id: item:A.7.3.9:rev_date
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Request Handling Program in a dated document or system entry.
+- State the planned review interval in months or years within the program documentation.
+- Confirm the next scheduled review date is not past due by comparing the last review date and the planned
+  interval.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Attach evidence of the completed review, such as meeting minutes or a signed review summary, to the
+  program documentation.

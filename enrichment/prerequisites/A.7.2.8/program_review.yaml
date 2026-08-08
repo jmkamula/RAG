@@ -1,0 +1,48 @@
+leaf_id: req:A.7.2.8:program_review
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You cannot review the RoPA program for completeness or accuracy unless all processing purposes
+    have been identified and documented. This forms the backbone of the RoPA and ensures all activities
+    are accounted for.
+  good_enough: A current, reasonably comprehensive list of processing purposes is documented and mapped
+    to relevant processing activities.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Each processing activity in the RoPA must have a lawful basis identified. Without this, you
+    cannot verify the RoPA’s accuracy or compliance during the annual review.
+  good_enough: Each processing activity in the RoPA has a lawful basis recorded, even if some are flagged
+    for further legal review.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles and responsibilities is needed to ensure RoPA ownership and accountability,
+    which is a key review criterion.
+  good_enough: Named individuals or roles are assigned as RoPA owners and reviewers, with responsibilities
+    documented.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: A current asset register ensures all information assets and data flows are captured in the
+    RoPA, supporting a thorough and accurate review.
+  good_enough: A working asset register exists, covering major information assets and data flows relevant
+    to personal data processing.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: cross_role
+  rationale: The GDPR’s RoPA requirements set the legal yardstick for what must be reviewed for completeness
+    and accuracy in the annual program review.
+  good_enough: A RoPA exists that attempts to meet Article 30 requirements, even if some fields are incomplete
+    or need updating.

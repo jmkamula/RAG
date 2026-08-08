@@ -1,0 +1,16 @@
+must_id: item:A.5.25:competent_access
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Competent personnel given access to event/incident/weakness records
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individuals authorized to access event, incident, and weakness records in a dated access control
+  list.
+- Document the qualifications or training records that demonstrate each authorized person’s competence
+  to handle security events.
+- Review and update the access control list at least annually, recording the date and person responsible
+  for the review.
+- Specify individual names, not generic roles or teams, to avoid ambiguity about who has access.

@@ -1,0 +1,20 @@
+must_id: item:A.8.29:test_types
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Test types (SAST / DAST / IAST / SCA / fuzzing / manual review / penetration testing) with
+  applicability rules
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each security test type (such as SAST, DAST, IAST, SCA, fuzzing, manual review, penetration testing)
+  in the procedure with a clear definition.
+- State the specific development or acceptance scenarios where each test type must be applied, referencing
+  project types or risk levels.
+- Assign a named individual or role responsible for deciding which test types apply to each project, and
+  record this in the procedure.
+- Document the date and version of the procedure to show it reflects current practices and has not been
+  copied from generic templates.
+- Cross-reference each test type’s applicability rule to supporting policy or risk assessment records
+  to show alignment with organisational requirements.

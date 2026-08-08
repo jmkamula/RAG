@@ -1,0 +1,18 @@
+must_id: item:Art.9:scope_exclusions
+control_ref: Art.9
+standard_id: GDPR:2016/679
+must_text: Categories explicitly NOT processed (with rationale — important for audit clarity)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each special category of personal data defined in Article 9 that your organisation does not process,
+  using the exact legal terms.
+- State a clear rationale for excluding each non-processed category, such as lack of business need or
+  legal prohibition.
+- Record the name and role of the individual responsible for confirming the accuracy of the non-processed
+  categories list.
+- Date the document and reference the current version to avoid confusion with outdated or draft lists.
+- Name the owner as a specific individual — not a team or department — to avoid auditor concerns about
+  unclear accountability.

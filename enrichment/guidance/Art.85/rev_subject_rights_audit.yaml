@@ -1,0 +1,20 @@
+must_id: item:Art.85:rev_subject_rights_audit
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: Subject-rights audit — confirm derogations are not over-applied (residual rights still honoured
+  where not legitimately derogated)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a responsible individual who reviews all subject-rights derogations, listing their full name and
+  role in the program documentation.
+- Document each instance where a derogation is applied, including the specific legal basis and the date
+  of the decision.
+- Record evidence that residual subject rights are still provided in cases where derogations do not fully
+  apply, such as redacted access logs or partial disclosures.
+- Cross-reference each derogation decision with relevant legal or regulatory guidance to show the justification
+  is specific and not generic or boilerplate.
+- Retain a signed and dated annual review report confirming that derogations have not been over-applied
+  and residual rights are honoured.

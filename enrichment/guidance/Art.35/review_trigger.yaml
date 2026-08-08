@@ -1,0 +1,16 @@
+must_id: item:Art.35:review_trigger
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Review trigger — DPIA reviewed when processing risk changes (Art.35.11)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific events or changes that will trigger a review of the Data Protection Impact Assessment,
+  such as new technology or changes in processing purpose.
+- Assign a named individual responsible for monitoring changes in processing risk and initiating DPIA
+  reviews.
+- Record the date and outcome of each DPIA review, including any updates or decisions made as a result.
+- Name the review trigger in the procedure as a concrete event, not as a vague statement like "as needed"
+  or "periodically".

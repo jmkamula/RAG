@@ -1,0 +1,17 @@
+must_id: item:A.8.14:reg_outcome
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Per-test outcome (success / partial / failure) + actual recovery time vs target
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each failover test with the test date, system tested, and the individual responsible for overseeing
+  the test.
+- Document the outcome of each test as "success," "partial," or "failure" in the register, using clear
+  and unambiguous language.
+- State the actual recovery time achieved for each test and compare it directly against the documented
+  target recovery time.
+- Name the test owner as a specific individual for each entry—do not use generic roles or team names.
+- Retain supporting evidence for each test, such as logs or screenshots, alongside the register entry.

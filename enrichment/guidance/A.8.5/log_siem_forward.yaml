@@ -1,0 +1,18 @@
+must_id: item:A.8.5:log_siem_forward
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Events forwarded to SIEM with correlation to identity events (A.5.16)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for forwarding authentication activity logs to your Security Information and Event
+  Management (SIEM) system, including responsible individuals and system names.
+- Record a sample authentication event in the log and show its corresponding entry in the SIEM, clearly
+  linking both records by event ID or timestamp.
+- Cross-reference identity events in the SIEM with authentication activity logs to demonstrate correlation,
+  attaching screenshots or export files as evidence.
+- Name the SIEM integration owner as a specific individual, not a team or department, in your documentation.
+- Retain configuration files or screenshots showing the forwarding rules that send authentication events
+  to the SIEM.

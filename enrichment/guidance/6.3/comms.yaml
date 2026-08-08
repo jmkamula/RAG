@@ -1,0 +1,17 @@
+must_id: item:6.3:comms
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Communication of the change to affected stakeholders (link to 7.4)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all stakeholders affected by the planned ISMS change and list their names and contact details
+  in the change log.
+- Document the specific communication method used for each stakeholder group, such as email, meeting invite,
+  or internal announcement.
+- Record the date and content of each communication sent about the change, attaching copies or screenshots
+  as evidence.
+- Name the individual responsible for stakeholder communication by full name, not just a team or department,
+  in the procedure documentation.

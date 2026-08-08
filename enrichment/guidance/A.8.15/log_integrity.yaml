@@ -1,0 +1,19 @@
+must_id: item:A.8.15:log_integrity
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Log-integrity verification (hash chain or signing) — forensic defensibility
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the method used to verify log integrity, such as hash chaining or digital signatures, in the
+  logging procedure with a clear technical description.
+- Name the individual responsible for configuring and monitoring log-integrity controls, specifying their
+  full name and job title.
+- Record the dates and results of periodic log-integrity verification checks in a dedicated log verification
+  register.
+- Retain evidence of any detected log tampering attempts, including incident reports and forensic analysis,
+  with timestamps and investigator names.
+- State the specific cryptographic tools or algorithms used for log-integrity, avoiding generic references
+  like "industry standard methods."

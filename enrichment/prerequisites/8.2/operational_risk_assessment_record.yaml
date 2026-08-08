@@ -1,0 +1,40 @@
+leaf_id: req:8.2:operational_risk_assessment_record
+control_ref: '8.2'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the boundaries of your ISMS to ensure risk assessments only cover relevant
+    assets, processes, and locations. Without a defined scope, risk assessment records may be incomplete
+    or misaligned.
+  good_enough: A documented scope statement that clearly defines what is in and out of scope for the ISMS,
+    even if not fully detailed, is sufficient to start risk assessments.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: direct
+  rationale: This clause defines the methodology and criteria for risk assessment. You can't create valid
+    risk assessment records without first establishing how risks are identified, evaluated, and prioritized.
+  good_enough: A basic, documented risk assessment methodology and set of criteria, even if not fully
+    optimized, is enough to begin recording assessments.
+- ref: '8.1'
+  standard_id: ISO27001:2022
+  title: Operational planning and control
+  category: direct
+  rationale: Operational planning ensures that risk assessment activities are scheduled, resourced, and
+    integrated into business processes. Without this, assessments may be ad hoc or missed.
+  good_enough: A simple plan or schedule showing when and how risk assessments will occur is sufficient
+    to unblock drafting assessment records.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need an up-to-date list of information assets to identify what needs to be assessed for
+    risk. Missing assets mean incomplete risk coverage.
+  good_enough: A preliminary asset register listing key information assets, even if not exhaustive, is
+    enough to start meaningful risk assessments.

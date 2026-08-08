@@ -1,0 +1,17 @@
+must_id: item:A.6.7:reporting
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Incident reporting when working remotely
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Remote Working Policy the exact process remote workers must follow to report security incidents,
+  including contact details and response timelines.
+- Name a specific individual or role responsible for receiving and managing incident reports from remote
+  workers, not just "IT" or "the team".
+- Document the date the incident reporting procedure was last reviewed and approved, and retain the approval
+  record signed by a manager.
+- Record at least one example of a remote incident report submitted using the documented process, with
+  date, reporter name, and resolution steps.

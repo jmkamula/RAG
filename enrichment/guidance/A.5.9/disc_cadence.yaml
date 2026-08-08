@@ -1,0 +1,19 @@
+must_id: item:A.5.9:disc_cadence
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Discovery cadence per source (continuous / daily / weekly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the discovery frequency for each upstream asset source in a dated register, specifying if it
+  is continuous, daily, or weekly.
+- Name the person responsible for monitoring each asset source’s discovery cadence, listing their full
+  name and role in the register.
+- Record the last three completed discovery cycles for each source, including start and end timestamps,
+  in an auditable log.
+- State the method used to verify that discovery is occurring as scheduled, such as automated reports
+  or manual checks, and attach a sample verification record.
+- Avoid using generic terms like "as needed" or "periodically" for cadence; specify exact intervals for
+  each source.

@@ -1,0 +1,19 @@
+must_id: item:A.8.3:classification_driven
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Classification-driven restriction (sensitive info → stronger enforcement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State how information is classified and link each classification level to specific access restrictions
+  in the procedure document, dated and version-controlled.
+- Name the person responsible for approving access to each classification level, listing their full name
+  and job title in the procedure.
+- Document the technical and procedural controls enforced for sensitive information, such as encryption
+  or multi-factor authentication, with references to system settings or logs.
+- Record an example of access being granted or denied based on classification, including the request date,
+  requester, decision, and approver.
+- Specify that classification levels and restrictions are reviewed at least annually, with the review
+  date and reviewer’s name clearly logged.

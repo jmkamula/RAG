@@ -1,0 +1,19 @@
+must_id: item:A.6.1:timing
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Timing — pre-joining checks plus ongoing checks where applicable (recurring re-check cadence
+  for high-trust roles)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that all required background checks must be completed before a new employee’s
+  start date, with the date clearly recorded.
+- Document the specific roles that require recurring background checks and define the frequency for each
+  in a dated schedule.
+- Assign responsibility for conducting both initial and recurring checks to a named individual, not a
+  generic title or team.
+- Record the completion date and outcome of each check in a personnel file or tracking log for every covered
+  employee.
+- Review and update the procedure annually, noting the revision date and approver’s name on the document.

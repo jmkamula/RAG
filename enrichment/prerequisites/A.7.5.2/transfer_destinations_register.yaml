@@ -1,0 +1,48 @@
+leaf_id: req:A.7.5.2:transfer_destinations_register
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of your organisation and which processing activities are in-scope
+    before you can accurately list where PII may be transferred. The register must reflect only those
+    destinations relevant to the defined scope.
+  good_enough: A documented scope statement that clearly identifies the organisational boundaries and
+    activities covered by the ISMS and PIMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You can't track PII transfers unless you know what information assets exist and where PII
+    is stored or processed. The asset register provides the foundation for identifying transfer flows.
+  good_enough: A basic, up-to-date inventory of information assets that includes systems and repositories
+    handling PII.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Knowing the purposes for which PII is processed is essential to understanding why and where
+    data might be transferred. This context is needed to justify and document each transfer destination.
+  good_enough: A list of processing purposes for PII, documented at a level that links to specific data
+    flows or systems.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: You must establish the lawful basis for each processing activity before documenting international
+    transfers, as some bases may restrict or condition such transfers.
+  good_enough: Each processing activity involving PII has a recorded lawful basis (e.g., consent, contract,
+    legal obligation), even if not yet fully mapped to every transfer.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: cross_role
+  rationale: RoPA typically includes information about international data transfers and is a legal requirement
+    under GDPR. It provides a starting point for identifying transfer destinations.
+  good_enough: A draft or working RoPA that lists processing activities and any known international transfers,
+    even if not fully complete or formally signed off.

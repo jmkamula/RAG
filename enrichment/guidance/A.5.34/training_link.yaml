@@ -1,0 +1,18 @@
+must_id: item:A.5.34:training_link
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Cross-link to A.6.3 awareness — privacy/PII training for staff who process personal data (consent
+  capture, DSAR handling, breach reporting)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the Privacy and PII Protection Policy to the staff privacy training section in your
+  training register, specifying where awareness content is covered.
+- Document the date and version of the Privacy and PII Protection Policy that includes the cross-link
+  to A.6.3 awareness requirements.
+- Name the individual responsible for maintaining the cross-link between the policy and the privacy/PII
+  training records.
+- Attach a sample training completion record for a staff member who processes personal data, showing the
+  relevant privacy/PII training module.

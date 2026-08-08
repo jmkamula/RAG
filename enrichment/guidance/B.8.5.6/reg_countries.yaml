@@ -1,0 +1,17 @@
+must_id: item:B.8.5.6:reg_countries
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+must_text: Countries + international orgs disclosed per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the country where each subcontractor is based in a dedicated column for every entry in the Subcontractor
+  Disclosure Register.
+- Record the name of any international organization involved with each subcontractor in a separate column
+  for each row.
+- Cross-reference each subcontractor entry with supporting documentation, such as contracts or onboarding
+  forms, that confirm the disclosed country and international organization.
+- Name the person responsible for maintaining the register as a specific individual, not a team or department.
+- Date each entry or update in the register to provide a clear timeline of disclosures.

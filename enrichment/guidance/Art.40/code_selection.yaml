@@ -1,0 +1,19 @@
+must_id: item:Art.40:code_selection
+control_ref: Art.40
+standard_id: GDPR:2016/679
+must_text: Code selection rationale — which approved Art.40 code is adhered to and why (sector relevance
+  / customer requirement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific approved Article 40 Code of Conduct your organisation adheres to, including its official
+  title and issuing body.
+- Document the rationale for selecting this code, clearly linking its scope to your organisation’s sector
+  or customer requirements.
+- State the date your organisation formally adopted the code, referencing a signed decision or meeting
+  minutes.
+- Attach evidence of the code’s approval status under GDPR Article 40, such as a public register entry
+  or official notification.
+- Name the owner as a specific individual responsible for code adherence, not a generic team or department.

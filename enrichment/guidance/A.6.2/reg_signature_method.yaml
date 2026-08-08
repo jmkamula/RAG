@@ -1,0 +1,17 @@
+must_id: item:A.6.2:reg_signature_method
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Signature method per row (wet signature scanned / e-signature platform reference; ensures non-repudiation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the signature method for each employee in the Employment Terms Register, specifying "wet signature
+  scanned" or naming the e-signature platform used.
+- Attach a copy of the signed employment terms document for each row, showing the actual signature and
+  date.
+- Name the individual who verified the authenticity of each signature, and enter the verification date
+  in the register.
+- Avoid listing signature method as "various" or leaving the field blank; specify the exact method for
+  every entry.

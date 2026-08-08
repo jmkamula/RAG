@@ -1,0 +1,18 @@
+must_id: item:Art.37:voluntary_decision
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: Voluntary designation decision recorded where not mandatory but chosen
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the formal decision to appoint a Data Protection Officer voluntarily in a dated document signed
+  by a senior executive.
+- State the reasons for voluntary designation and reference Article 37.4 of the GDPR in the recorded decision.
+- Name the appointed DPO as a specific individual, including their contact details, in the designation
+  record.
+- Attach evidence that the decision was communicated to relevant staff, such as an internal announcement
+  or email notification.
+- Avoid using a generic or template statement; tailor the record to reflect your organisation’s specific
+  context and rationale.

@@ -1,0 +1,20 @@
+must_id: item:A.5.5:rev_scope_check
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Cross-check against the applicable-authorities scope (any new jurisdiction or sector that should
+  add an entry)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the current list of authority contacts against your documented list of applicable jurisdictions
+  and sectors to identify any missing entries.
+- Document any new jurisdictions or sectors identified since the last review, including the date and the
+  source of the change.
+- Assign a named individual to update the authority contact register with any new or revised entries,
+  ensuring their name and the update date are recorded.
+- Record the review outcome in meeting minutes or a change log, specifying what was checked and any actions
+  taken.
+- Name the owner as a specific individual responsible for this review—do not use a team name or generic
+  title.

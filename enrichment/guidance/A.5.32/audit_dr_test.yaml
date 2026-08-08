@@ -1,0 +1,19 @@
+must_id: item:A.5.32:audit_dr_test
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Disposal of unused licences considered (cost optimisation alongside compliance)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to review all software licences and intellectual property rights at least
+  annually, recording the review date and reviewer.
+- Document a list of all unused or underused licences identified during the audit, including software
+  name, licence count, and last usage date.
+- Record the decision and rationale for each unused licence, stating whether it will be disposed of, retained,
+  or reassigned, and who approved the action.
+- Name the owner responsible for licence disposal as a specific person, not a team or department, in the
+  audit documentation.
+- Retain evidence of licence cancellations or reallocations, such as confirmation emails or updated inventory
+  records, with corresponding dates.

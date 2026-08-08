@@ -1,0 +1,19 @@
+must_id: item:A.7.2.7:scope_change_drivers
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Trigger list (new partnership / new co-branded service)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current partnerships and co-branded services that involve joint control of personal data, including
+  start dates and named partner organizations.
+- Document the criteria or triggers used to identify when a new partnership or co-branded service requires
+  assessment as a joint controller relationship.
+- Assign a specific individual responsible for updating the joint controller relationship scope whenever
+  a new trigger event occurs.
+- Record the date of the most recent review of the joint controller relationship scope to demonstrate
+  ongoing currency.
+- Specify named individuals, not just departments or teams, as responsible parties to avoid ambiguity
+  in ownership.

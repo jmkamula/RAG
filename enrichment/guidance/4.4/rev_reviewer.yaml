@@ -1,0 +1,15 @@
+must_id: item:4.4:rev_reviewer
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (ISMS Manager + top management sponsor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the ISMS Manager and top management sponsor as specific individuals in the ISMS Manual Program
+  Review document.
+- Record the date each reviewer completed their review next to their name in the document.
+- Obtain signatures or documented approval from both the ISMS Manager and top management sponsor on the
+  final review version.
+- Avoid listing generic roles or teams as reviewers; use only named individuals with clear accountability.

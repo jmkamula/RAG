@@ -1,0 +1,19 @@
+must_id: item:A.5.13:visual_marks
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Visual marking conventions per classification level (headers, watermarks, banners, footers)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for maintaining the labelling procedure, listing their full name and job
+  title in the document.
+- Document the specific visual marking conventions for each classification level, including required headers,
+  watermarks, banners, and footers.
+- Include clear, labelled examples or screenshots of documents showing correct application of each marking
+  convention.
+- State the effective date and version number on the procedure to avoid using undated or draft versions
+  as evidence.
+- Record formal approval of the procedure by a named individual, with a dated signature or electronic
+  approval record.

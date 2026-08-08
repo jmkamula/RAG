@@ -1,0 +1,17 @@
+must_id: item:A.7.13:rev_reviewer
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Facilities + IT + InfoSec)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer for Facilities as a specific individual, not a department or generic title, in the
+  maintenance program review record.
+- Record the full name of the IT reviewer, along with the review date, in the documented maintenance program
+  review.
+- Document the InfoSec reviewer’s identity and the date they completed their review in the same maintenance
+  program review file.
+- Retain evidence of all three reviewers’ identities and review dates in a single, dated review document
+  for each periodic maintenance cycle.

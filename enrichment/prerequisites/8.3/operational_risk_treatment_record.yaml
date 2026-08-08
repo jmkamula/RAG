@@ -1,0 +1,39 @@
+leaf_id: req:8.3:operational_risk_treatment_record
+control_ref: '8.3'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know what parts of your organisation and which assets are in-scope for risk treatment.
+    Without a clear scope, you can't ensure your risk treatment records are complete or relevant.
+  good_enough: A documented scope statement that identifies the boundaries and applicability of the ISMS,
+    even if high-level, is sufficient to proceed.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: direct
+  rationale: Risk treatment records must be based on identified risks. Without a current risk assessment,
+    you have no basis for deciding which risks need treatment or for tracking treatment actions.
+  good_enough: A recent, documented risk assessment listing identified risks and their owners is enough
+    to start drafting treatment records.
+- ref: '8.2'
+  standard_id: ISO27001:2022
+  title: Information security risk assessment
+  category: direct
+  rationale: Clause 8.3 requires that risk treatment is based on the latest risk assessment results. You
+    need the outputs from 8.2 to know which risks require treatment and to ensure records are up to date.
+  good_enough: An updated risk assessment report or register, refreshed within the last 180 days, is sufficient
+    for this step.
+- ref: 6.1.3
+  standard_id: ISO27001:2022
+  title: Information Security Risk Treatment Plan
+  category: direct
+  rationale: The risk treatment record must document the implementation and results of the treatment plan.
+    Without a treatment plan, you can't record what actions were taken or their effectiveness.
+  good_enough: A documented risk treatment plan with assigned actions, even if not fully executed, is
+    enough to begin recording operational results.

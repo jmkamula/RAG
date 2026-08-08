@@ -1,0 +1,18 @@
+must_id: item:A.7.10:individual_tracking
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Individual media tracking via serial or asset tag
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique serial number or asset tag to each storage media item and record it in a central inventory
+  log.
+- Document the assigned custodian and location for each media item in the inventory, including the date
+  of assignment.
+- Record all lifecycle events—such as issuance, transfer, return, and disposal—against the specific serial
+  number or asset tag in the log.
+- Name the responsible owner for the inventory log as a specific individual, not a team or department.
+- Retain signed or system-generated records for each media disposal event, cross-referenced by serial
+  number or asset tag.

@@ -1,0 +1,21 @@
+must_id: item:A.6.5:offboarding_integration
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Integration with operational offboarding (A.5.11 asset return, A.5.16 identity revocation,
+  A.5.17 credential revocation, A.5.18 access revocation — A.6.5 is the contractual/HR layer; those are
+  the operational layers)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific information security responsibilities that continue after employment or role change
+  in a signed HR exit or transfer checklist.
+- Cross-reference the HR checklist with operational offboarding records for asset return, identity, credential,
+  and access revocation, noting completion dates.
+- Name the responsible HR staff member who verifies that all contractual and operational offboarding steps
+  are completed for each departing or transferring individual.
+- Record any exceptions or delays in offboarding steps, including the reason and the person authorizing
+  the exception, in the individual's HR file.
+- Avoid using generic terms like "HR team" or "IT" as responsible parties; specify named individuals for
+  each step.

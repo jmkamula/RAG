@@ -1,0 +1,16 @@
+must_id: item:A.5.20:incident_contacts
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Security incident contacts named on each side
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the security incident contact for your organization in the agreement,
+  including their full name, title, and contact details.
+- Record the supplier’s designated security incident contact by full name, title, and direct contact information
+  within the agreement template.
+- Confirm that both contacts are listed as individuals, not generic roles like "IT team" or "Security
+  Department," to avoid ambiguity.
+- Retain the date when the contact information was last updated to demonstrate the information is current.

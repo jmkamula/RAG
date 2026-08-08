@@ -1,0 +1,17 @@
+must_id: item:A.7.3.8:rev_scope_leakage_test
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Scope-leakage test — sampled copies verified to contain only the requesting subject's PII
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of data copies provided to individuals in response to access requests during
+  the review period.
+- Compare each sampled copy against the requesting subject’s original records to confirm only their personal
+  information is included.
+- Record the date, reviewer’s name, and outcome for each sample check in a review log.
+- Name the reviewer as a specific individual for each sample, not as a team or generic role.
+- Document any instances where other individuals’ information was included, along with corrective actions
+  taken.

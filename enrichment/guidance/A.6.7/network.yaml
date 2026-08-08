@@ -1,0 +1,19 @@
+must_id: item:A.6.7:network
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Network security requirements (VPN etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Remote Working Policy that all remote connections to company systems must use a company-approved
+  VPN or equivalent secure channel.
+- Name the specific technology or service (e.g., "Acme VPN Client v3.2") required for remote access, including
+  any configuration settings.
+- Assign a named individual or role responsible for maintaining and updating the list of approved remote
+  access methods.
+- Record the date of the last policy review and update, ensuring it reflects recent changes in network
+  security requirements.
+- Specify that generic terms like "secure connection" without naming the actual technology will be flagged
+  as insufficient by auditors.

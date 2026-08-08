@@ -1,0 +1,18 @@
+must_id: item:B.8.2.6:scope_customer_engagements
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: In-scope customer engagements (from B.8.2.1 register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each customer engagement in your Processor Record of Processing Activities (RoPA) against
+  the in-scope list from the B.8.2.1 register.
+- Document the legal entity name and contract reference for every customer engagement included in the
+  RoPA coverage scope.
+- Name the individual responsible for maintaining the in-scope customer engagement list, ensuring it is
+  not a generic team or department.
+- Record the date when the in-scope customer engagement list was last reviewed and updated.
+- Attach evidence of customer instructions or contracts confirming processing is carried out on behalf
+  of each listed customer.

@@ -1,0 +1,20 @@
+must_id: item:A.5.28:integrity
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Integrity verification step (cryptographic hashes recorded at acquisition; verified at each
+  custody handover)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the cryptographic hash value for each digital evidence item at the time of initial acquisition
+  in the evidence log.
+- Record the date, time, and name of the person performing the hash calculation alongside the evidence
+  entry.
+- Verify and re-calculate the cryptographic hash at every custody handover, documenting both the new hash
+  and the person verifying it.
+- Attach all hash verification records to the corresponding evidence file, ensuring each entry is dated
+  and signed.
+- Name the evidence custodian as a specific individual, not a team or department, in all custody and verification
+  records.

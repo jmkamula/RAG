@@ -1,0 +1,17 @@
+must_id: item:A.5.7:reg_cost
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Cost per row (paid feeds vs free) — required for value review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the cost for each threat intelligence feed in the register, clearly stating if it is a paid or
+  free source.
+- Name the specific individual responsible for maintaining and updating the feed cost information in the
+  register.
+- Document the date when each feed's cost was last reviewed or updated in the register.
+- Attach supporting invoices or contracts for paid feeds to the corresponding register entries as evidence
+  of actual costs.
+- Avoid listing costs as "varies" or "unknown"; enter a specific amount or state "free" for each feed.

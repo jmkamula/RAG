@@ -1,0 +1,18 @@
+must_id: item:A.5.37:proc_maintainer
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Named maintainer of the register (typically operations lead with InfoSec partner) accountable
+  for catalogue currency
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the maintainer of the operating procedures register, avoiding generic
+  titles like "the team" or "operations."
+- Document the maintainer’s name and role in the header section of the maintenance procedure, including
+  the date of assignment.
+- Record the InfoSec partner’s name and their supporting responsibilities in the same section for clear
+  accountability.
+- Review and update the named maintainer and InfoSec partner details at least annually, keeping a dated
+  change log of updates.

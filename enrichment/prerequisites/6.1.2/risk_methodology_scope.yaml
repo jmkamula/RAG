@@ -1,0 +1,33 @@
+leaf_id: req:6.1.2:risk_methodology_scope
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know exactly what parts of your organisation and which information assets are
+    covered by the ISMS before you can define the scope of your risk assessment methodology. This ensures
+    your risk process is properly bounded and relevant.
+  good_enough: A clear, approved scope statement that lists included business units, processes, and any
+    exclusions is available.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The information security policy sets the overall direction and principles for risk management,
+    including risk appetite and approach. Your risk assessment methodology must align with this policy.
+  good_enough: A current, management-approved policy that references risk management objectives and principles
+    is in place.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need an up-to-date list of information assets to determine which assets and processes
+    are in scope for risk assessment. Without this, you can't meaningfully define the boundaries of your
+    methodology.
+  good_enough: A basic inventory of key information assets and their owners exists, even if not fully
+    detailed or classified yet.

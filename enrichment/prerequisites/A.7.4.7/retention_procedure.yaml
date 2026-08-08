@@ -1,0 +1,47 @@
+leaf_id: req:A.7.4.7:retention_procedure
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the specific purposes for which PII is processed before you can determine how
+    long it should be retained. Retention periods should be purpose-driven.
+  good_enough: A documented list of processing purposes for each PII data set, even if not fully mapped,
+    is sufficient to start drafting retention procedures.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Retention requirements often depend on the lawful basis for processing (e.g., contract, legal
+    obligation, consent). Without this, you can't align retention with legal or regulatory needs.
+  good_enough: Each PII processing activity should have a stated lawful basis, even if some are provisional
+    or pending legal review.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need to know what PII assets exist and where they reside to apply retention schedules
+    effectively. Missing this, you can't scope your retention procedure.
+  good_enough: A working inventory of PII-relevant assets (systems, databases, files) is available, even
+    if not fully exhaustive.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: Retention rules may differ by data classification (e.g., sensitive vs. non-sensitive PII).
+    A basic scheme is needed to set differentiated retention periods.
+  good_enough: A documented classification approach that covers PII types is in place, even if not all
+    data is yet classified.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organization and which processing activities are in scope
+    for retention controls. Otherwise, your procedure may be incomplete or misapplied.
+  good_enough: A draft or approved scope statement that identifies the business units, locations, and
+    systems subject to the ISMS and PIMS.

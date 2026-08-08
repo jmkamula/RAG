@@ -1,0 +1,19 @@
+must_id: item:Art.49:sa_notification
+control_ref: Art.49
+standard_id: GDPR:2016/679
+must_text: SA notification for Art.49.1 second-paragraph last-resort derogation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific cross-border data transfer scenario triggering the last-resort derogation under
+  Article 49.1 second paragraph, including dates and context.
+- Name the supervisory authority (SA) notified, including the contact person or office, not just the authority’s
+  general name.
+- Record the date, method, and content of the notification sent to the SA, attaching a copy of the actual
+  notification communication.
+- Retain any acknowledgement or response received from the SA regarding the notification, noting the date
+  received.
+- Avoid using generic statements like “SA was notified” without supporting evidence such as dated correspondence
+  or confirmation.

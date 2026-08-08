@@ -1,0 +1,18 @@
+must_id: item:A.5.33:proc_pii_overlay
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: PII overlay — records containing PII inherit additional GDPR Art.5.1.e storage-limitation constraints
+  (cross-link to A.5.34 + Art.5.1.e)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy that records containing personal data must be retained only as long as necessary
+  for their original purpose, referencing GDPR Article 5.1.e.
+- Cross-reference the Records Retention and Protection Policy to both ISO27001 control A.5.34 and GDPR
+  Article 5.1.e within the policy document.
+- Name a specific individual as the policy owner responsible for overseeing PII retention and deletion,
+  not a generic team or department.
+- Document procedures for periodic review and deletion of PII records, including the review frequency
+  and responsible person, in the policy.

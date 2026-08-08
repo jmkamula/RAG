@@ -1,0 +1,19 @@
+must_id: item:B.8.2.1:scope_exclusions
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+must_text: Excluded engagements (own-controller services / non-PII services) with rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all customer engagements and clearly mark those excluded from the privacy management scope, using
+  unique identifiers and engagement names.
+- Document the specific rationale for excluding each engagement, referencing whether it is an own-controller
+  service or does not involve personal data.
+- Name the individual responsible for the classification decision for each excluded engagement, avoiding
+  generic titles like "the team" or "management".
+- Record the date each exclusion decision and rationale was approved, ensuring the record is up to date
+  and version-controlled.
+- Attach supporting evidence, such as data flow diagrams or service descriptions, that substantiate the
+  rationale for each exclusion.

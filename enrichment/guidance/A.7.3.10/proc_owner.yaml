@@ -1,0 +1,16 @@
+must_id: item:A.7.3.10:proc_owner
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Named owner (DPO + ML/Product lead)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner as a specific individual by full name and job title, such as "Jane Doe, Data Protection
+  Officer," in the procedure document.
+- List both the Data Protection Officer and the relevant machine learning or product lead as joint owners,
+  not just one or a generic team.
+- Record the date the ownership was last reviewed or updated within the procedure to show ongoing accountability.
+- Sign off the procedure with the signatures or digital approvals of both named owners to confirm their
+  acceptance of responsibility.

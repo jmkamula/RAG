@@ -1,0 +1,19 @@
+must_id: item:A.5.5:proc_drill
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Periodic tabletop or drill of the activation path (proves the contact path works under pressure)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Schedule and document a tabletop exercise or drill at least annually, including the date, participants,
+  and scenario used to test the authority contact path.
+- Record the step-by-step actions taken during the exercise, noting any delays, failures, or issues encountered
+  in reaching the designated authorities.
+- Assign a named individual to lead the exercise and ensure their name and role are clearly listed in
+  the exercise record.
+- Capture and retain written feedback or lessons learned from all participants, including any recommended
+  improvements to the contact procedure.
+- Specify the exact individuals contacted during the drill—avoid listing generic roles or departments
+  without naming real people.

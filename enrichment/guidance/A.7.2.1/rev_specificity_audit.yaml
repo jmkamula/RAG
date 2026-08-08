@@ -1,0 +1,19 @@
+must_id: item:A.7.2.1:rev_specificity_audit
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Specificity audit — sampled purposes reviewed for clarity + non-vagueness
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer responsible for assessing purpose statements for clarity and specificity in a dated
+  review log.
+- Document at least three sampled purpose statements, highlighting any that use vague terms such as "improve
+  services" or "business needs."
+- Record reviewer comments that identify and correct unclear or generic language in each sampled purpose
+  statement.
+- Confirm that each revised purpose statement clearly describes the intended use of personal data, referencing
+  the relevant business process or activity.
+- State the review date and reviewer’s name on the final version of the purpose documentation to evidence
+  completion.

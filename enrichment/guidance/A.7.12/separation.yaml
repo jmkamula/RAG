@@ -1,0 +1,18 @@
+must_id: item:A.7.12:separation
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Separation of power and data cables to reduce interference
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure that requires physical separation of power and data cables, including minimum
+  distance or barrier specifications, in your Cabling Security Procedure.
+- Name the person responsible for implementing and maintaining cable separation, identifying them by full
+  name and job title.
+- Record the date and results of the most recent inspection confirming that power and data cables are
+  separated according to the documented procedure.
+- Attach photographs or diagrams from the inspection that clearly show separated cable routes in key areas.
+- Specify separation details unique to your site—do not use generic or manufacturer boilerplate that could
+  apply to any organisation.

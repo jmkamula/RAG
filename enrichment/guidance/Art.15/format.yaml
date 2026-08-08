@@ -1,0 +1,19 @@
+must_id: item:Art.15:format
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Provided in a commonly used electronic format where the request was made electronically
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the original data subject access request, including the date received and the communication channel
+  used by the requester.
+- Document the electronic format used to provide the response, such as PDF or CSV, matching the format
+  to what is commonly used and accessible.
+- Retain a copy of the response sent, including the date and the electronic method of delivery, such as
+  email or secure portal.
+- Name the staff member who approved the format and method of delivery for the response, ensuring it is
+  a specific individual, not a team or department.
+- Avoid using non-standard or proprietary formats that may prevent the requester from accessing their
+  data easily.

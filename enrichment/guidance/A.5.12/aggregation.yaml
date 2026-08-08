@@ -1,0 +1,18 @@
+must_id: item:A.5.12:aggregation
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Aggregation rule (combined low-class data items that, in aggregate, warrant higher class)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the aggregation rule in the classification scheme document, clearly describing when combined data
+  items require a higher classification.
+- Provide at least one concrete example in the scheme showing how low-class data, when aggregated, triggers
+  a higher classification.
+- Assign a named individual responsible for reviewing and updating the aggregation rule, listing their
+  full name and job title.
+- Record the date the aggregation rule was last reviewed or updated in the classification scheme.
+- Avoid using vague language such as "use judgment" or "as appropriate"—define specific thresholds or
+  criteria for aggregation.

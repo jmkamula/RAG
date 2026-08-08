@@ -1,0 +1,19 @@
+must_id: item:Art.26:scope_excluded
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Excluded relationships (independent-controllers / controller-processor / no joint decision)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all data processing relationships relevant to your organisation, including partners, vendors, and
+  affiliates, in a dated register.
+- Document for each relationship whether decisions about purposes and means of processing are made jointly
+  or independently.
+- State explicitly which relationships are excluded from joint controllership, specifying if they are
+  independent controllers, controller-processors, or have no joint decision.
+- Name the individual responsible for making and recording these determinations, avoiding generic roles
+  like "the team" or "management".
+- Retain supporting evidence, such as contracts or data processing agreements, that clarify the nature
+  of each excluded relationship.

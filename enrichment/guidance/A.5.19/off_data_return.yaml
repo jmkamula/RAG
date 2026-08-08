@@ -1,0 +1,17 @@
+must_id: item:A.5.19:off_data_return
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Data return or destruction evidence (with attestation from supplier where applicable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and method of data return or destruction in a supplier offboarding record, referencing
+  the specific contract or agreement.
+- Obtain a signed attestation from the supplier confirming all data has been returned or securely destroyed,
+  including the date and responsible individual.
+- Retain supporting evidence such as certificates of destruction, data transfer logs, or email confirmations
+  as attachments to the offboarding record.
+- Name the responsible internal staff member overseeing supplier data return or destruction, avoiding
+  generic titles like "IT team" or "Procurement."

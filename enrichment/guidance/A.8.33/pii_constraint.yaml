@@ -1,0 +1,20 @@
+must_id: item:A.8.33:pii_constraint
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: No live PII in lower environments unless masked / pseudonymised (cross-link to A.8.11 + GDPR
+  alignment)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for masking or pseudonymising personal data before it is used in development
+  or test environments, including specific techniques applied.
+- Cross-reference the masking process to control A.8.11 and GDPR Article 32 in the procedure, showing
+  clear alignment with both requirements.
+- Name the person responsible for approving any use of personal data in lower environments, ensuring this
+  is a specific individual, not a team.
+- Record each instance where live personal data is used in a lower environment, including justification,
+  masking method, and approval date.
+- Retain evidence of regular reviews of test environments to confirm no unmasked personal data is present,
+  with reviewer name and review date.

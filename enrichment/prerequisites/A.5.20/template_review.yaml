@@ -1,0 +1,40 @@
+leaf_id: req:A.5.20:template_review
+control_ref: A.5.20
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.19
+  standard_id: ISO27001:2022
+  title: Information security in supplier relationships
+  category: direct
+  rationale: You need a clear policy on information security requirements for supplier relationships before
+    you can review or update the supplier agreement template. The policy sets the baseline for what must
+    be included in all supplier contracts.
+  good_enough: A documented, approved policy or set of requirements for supplier security is available
+    and current, even if not perfect or exhaustive.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which supplier relationships and agreements fall under your ISMS.
+    Without this, you can't know which templates or contracts need to be reviewed.
+  good_enough: A written scope statement exists that identifies the relevant supplier relationships covered
+    by the ISMS, even if it is high-level.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that the right people are responsible for reviewing, updating,
+    and approving supplier agreement templates.
+  good_enough: Documented roles exist for supplier management and contract review, with named individuals
+    or teams, even if responsibilities are broadly defined.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A current risk assessment helps identify new threats or regulatory changes that should trigger
+    updates to supplier agreement templates.
+  good_enough: A recent risk assessment has been performed that covers supplier relationships, even if
+    some risks are still being evaluated.

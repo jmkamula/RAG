@@ -1,0 +1,41 @@
+leaf_id: req:A.7.9:off_premises_program_review
+control_ref: A.7.9
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which locations, assets, and activities are covered by the ISMS,
+    including off-premises operations. Without a clear scope, you can't determine which off-premises activities
+    need to be reviewed.
+  good_enough: A documented scope that explicitly mentions off-premises work or assets, even if not fully
+    detailed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register lists all assets, including those used off-premises, which are the subject
+    of the periodic review. You can't verify register currency or incident handling if the register doesn't
+    exist.
+  good_enough: An initial asset register that identifies off-premises assets, even if some details are
+    pending.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Asset classification helps prioritize which off-premises assets require stricter controls
+    and review. The review process depends on knowing which assets are sensitive or critical.
+  good_enough: A basic classification scheme applied to off-premises assets, even if not fully rolled
+    out to all assets.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment identifies threats like theft or loss for off-premises assets and informs
+    what needs to be checked during the review. Without it, the review may miss key risks.
+  good_enough: A recent risk assessment that at least considers off-premises asset risks, even if not
+    exhaustive.

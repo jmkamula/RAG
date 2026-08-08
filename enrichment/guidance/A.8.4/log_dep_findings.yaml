@@ -1,0 +1,18 @@
+must_id: item:A.8.4:log_dep_findings
+control_ref: A.8.4
+standard_id: ISO27001:2022
+must_text: Dependency-scanner findings logged with remediation SLA
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each dependency-scanner finding in a dated log entry, including the affected library, version,
+  and nature of the issue.
+- Assign a specific individual as the owner responsible for each finding, avoiding generic labels like
+  "the team" or "IT".
+- Document the remediation deadline for each finding based on your defined service-level agreement (SLA).
+- Cross-reference each logged finding with evidence of remediation action or status updates, such as ticket
+  numbers or change records.
+- Retain historical logs to show how past findings were tracked and resolved within the specified SLA
+  timeframe.

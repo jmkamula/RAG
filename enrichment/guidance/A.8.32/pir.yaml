@@ -1,0 +1,19 @@
+must_id: item:A.8.32:pir
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Post-implementation review for significant changes (learning loop into procedure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the completion of a post-implementation review for each significant change, including lessons
+  learned and improvement actions, in a dated review report.
+- Assign a named individual to lead each post-implementation review and record their name and role in
+  the review documentation.
+- Cross-reference the review report to the specific change request or change ticket number in your change
+  management log.
+- Name the reviewer as a specific person—do not use generic roles like "IT" or "Change Team"—to avoid
+  auditor concerns about accountability.
+- Record any procedural updates or corrective actions resulting from the review and include the date these
+  updates were incorporated into the change management procedure.

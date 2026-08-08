@@ -1,0 +1,18 @@
+must_id: item:A.6.6:scope_party_categories
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Party categories enumerated (employees, contractors, suppliers, visitors, M&A counterparties,
+  partners with joint-development)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all categories of parties relevant to your organisation, including employees, contractors, suppliers,
+  visitors, M&A counterparties, and joint-development partners, in a dated document.
+- Name the person responsible for maintaining and updating the list of party categories, ensuring a specific
+  individual is identified.
+- Cross-reference each party category to supporting documentation or contracts that define their relationship
+  and access to information.
+- Avoid using generic terms such as "others" or "external parties" without clear definitions, as auditors
+  will flag vague categories.

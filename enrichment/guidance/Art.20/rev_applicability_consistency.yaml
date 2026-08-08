@@ -1,0 +1,18 @@
+must_id: item:Art.20:rev_applicability_consistency
+control_ref: Art.20
+standard_id: GDPR:2016/679
+must_text: Applicability consistency audit — like requests handled like ways across the year
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all data portability requests received throughout the year in a central log, including request
+  date, requester identity, and outcome.
+- Review the handling process for each request to confirm that similar requests were processed using the
+  same criteria and procedures.
+- Record the names and roles of individuals who approved or denied each request, with dates, to show consistent
+  decision-making.
+- Cross-reference a sample of request outcomes with the documented procedures to demonstrate that actions
+  matched the stated process.
+- Name the program owner as a specific individual responsible for oversight—avoid listing a team or department.

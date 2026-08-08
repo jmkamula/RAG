@@ -1,0 +1,18 @@
+must_id: item:B.8.5.6:proc_customer_contract_link
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+must_text: Customer contract link — subcontracting provisions in the B.8.2.1 agreement
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the specific section in your customer contract that addresses subcontracting provisions,
+  including clause numbers and effective dates.
+- Document the procedure for notifying customers about subcontractors, including required timelines and
+  responsible individuals.
+- Attach a copy of the executed customer contract showing the agreed subcontracting terms, with signatures
+  and dates visible.
+- Name the contract owner as a specific individual, not a team or department, in your procedure documentation.
+- Record any customer approvals or objections to subcontractors as dated written communications linked
+  to the relevant contract.

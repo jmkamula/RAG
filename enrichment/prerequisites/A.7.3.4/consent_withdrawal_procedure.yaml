@@ -1,0 +1,48 @@
+leaf_id: req:A.7.3.4:consent_withdrawal_procedure
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: You must know which processing activities rely on consent as their lawful basis before you
+    can design a withdrawal procedure. Without this, you can't identify where consent withdrawal applies
+    or what must change when consent is withdrawn.
+  good_enough: A documented list of processing activities with their lawful bases, clearly marking those
+    that depend on consent.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Understanding the specific purposes for which consent was obtained is essential to ensure
+    that withdrawal or modification is applied correctly and communicated to relevant parties.
+  good_enough: Each consent-dependent processing activity has its purpose documented and linked to the
+    consent record.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that someone is accountable for managing consent withdrawal
+    requests and updating downstream systems or third parties.
+  good_enough: Roles and responsibilities for handling consent and data subject requests are assigned
+    and communicated internally.
+- ref: Art.7
+  standard_id: GDPR:2016/679
+  title: Conditions for Consent
+  category: cross_role
+  rationale: GDPR Art.7 sets the legal requirements for obtaining, recording, and withdrawing consent,
+    which your procedure must meet to be compliant.
+  good_enough: A summary of Art.7 requirements is reviewed and referenced to ensure the withdrawal procedure
+    aligns with legal expectations.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: Knowing which data is personal and subject to consent is necessary to ensure that withdrawal
+    is properly applied to all relevant data sets.
+  good_enough: Personal data is classified and tagged in the asset inventory, so consent-related data
+    can be identified for withdrawal actions.

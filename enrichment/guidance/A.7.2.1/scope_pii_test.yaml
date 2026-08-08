@@ -1,0 +1,19 @@
+must_id: item:A.7.2.1:scope_pii_test
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Operational test for 'involves PII processing' (identifiability + processing operation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each business process or system that handles personal data in a documented register, specifying
+  both the data and the processing activity.
+- State for each entry whether the data can be linked to an identifiable individual, recording the reasoning
+  and evidence for identifiability.
+- Document the specific processing operation performed (such as collection, storage, or transfer) for
+  each process or system in the register.
+- Assign a named individual as the owner responsible for confirming the accuracy of each entry — do not
+  use a team or department as owner.
+- Record the date of the latest review or update for each entry to demonstrate the operational test is
+  current.

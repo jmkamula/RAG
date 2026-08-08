@@ -1,0 +1,18 @@
+must_id: item:A.7.3.1:reg_jurisdiction
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Applicable jurisdiction per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each data processing activity in the Applicable Obligations Register with a separate row for clarity.
+- Record the specific jurisdiction(s) that apply to each processing activity in a dedicated column, using
+  the full legal name of the country or region.
+- Name the source of each jurisdictional requirement, such as a law or regulation, and cite the relevant
+  section or article.
+- Assign a named individual responsible for verifying the accuracy of jurisdiction entries, and record
+  the date of their last review.
+- Avoid using generic terms like "global" or "all regions"—specify each jurisdiction separately to prevent
+  auditor rejection.

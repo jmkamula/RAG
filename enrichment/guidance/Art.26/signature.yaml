@@ -1,0 +1,17 @@
+must_id: item:Art.26:signature
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Signed by both joint controllers with date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Draft a written joint controller arrangement that clearly identifies both parties and outlines their
+  respective roles and responsibilities.
+- Name the signatories from each organisation as specific individuals with authority to sign on behalf
+  of their controller.
+- Sign the arrangement with handwritten or legally accepted electronic signatures from both named individuals.
+- Date the arrangement at the time of signing, ensuring the date is clearly visible next to each signature.
+- Retain the final, signed, and dated arrangement in a location accessible for inspection by auditors
+  or supervisory authorities.

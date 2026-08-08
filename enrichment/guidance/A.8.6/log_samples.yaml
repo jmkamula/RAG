@@ -1,0 +1,19 @@
+must_id: item:A.8.6:log_samples
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Resource utilisation samples captured per resource (sub-minute for production)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record resource utilisation samples for each production system at intervals of less than one minute,
+  saving timestamped logs for each resource.
+- Name the specific individual responsible for reviewing the capacity monitoring log, listing their full
+  name and job title.
+- Retain historical capacity monitoring logs for a defined period, showing continuous sub-minute sampling
+  for all production resources.
+- Document any monitoring gaps or outages, including date, time, affected resources, and corrective actions
+  taken.
+- Avoid using generic labels like "server group" or "infrastructure"—identify each monitored resource
+  by its unique name or identifier in the log.

@@ -1,0 +1,40 @@
+leaf_id: req:B.8.2.1:applicable_scope
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines the organizational and service boundaries for security and privacy
+    controls. You need this to ensure the PII processing scope for customer engagements aligns with the
+    overall ISMS boundaries.
+  good_enough: A documented ISMS scope that clearly lists included business units, services, and geographies,
+    even if not fully optimized for privacy yet.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register is essential to identify which systems, applications, and data
+    flows are involved in customer engagements that process PII. Without this, you can't reliably determine
+    the applicable scope.
+  good_enough: A working inventory of information assets and systems, with at least provisional identification
+    of those touching customer data.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the purposes for which PII is processed on behalf of customers
+    to accurately define which engagements are in-scope. This prevents over- or under-inclusion.
+  good_enough: A draft or working list of purposes for each customer engagement, even if some are still
+    being validated.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A data classification scheme is needed to distinguish PII from non-PII services and assets,
+    ensuring only relevant customer engagements are included in the privacy scope.
+  good_enough: A basic scheme that flags PII vs. non-PII data types, applied to key services and systems.

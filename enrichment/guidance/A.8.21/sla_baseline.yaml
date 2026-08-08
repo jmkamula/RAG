@@ -1,0 +1,19 @@
+must_id: item:A.8.21:sla_baseline
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: SLA baseline expectations per service class (availability / latency / support response)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each network service and assign a unique service class label in your Security of Network Services
+  Procedure.
+- Document baseline expectations for availability, latency, and support response times for each service
+  class in a dated appendix or table.
+- Reference the specific section or appendix in each related service provider contract where these baseline
+  expectations are defined.
+- Name the individual responsible for reviewing and updating these baseline expectations, avoiding generic
+  roles like "IT" or "the team".
+- Retain signed approval of the procedure and any updates by a designated manager, including the approval
+  date.

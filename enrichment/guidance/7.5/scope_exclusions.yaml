@@ -1,0 +1,19 @@
+must_id: item:7.5:scope_exclusions
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Exclusions stated explicitly (e.g. operational logs not classified as documented information)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all document types included in your Information Security Management System (ISMS) scope, using
+  clear and specific names for each class.
+- State each excluded document class explicitly, such as operational logs, and provide a brief reason
+  for its exclusion.
+- Reference the version and date of your ISMS scope document where these inclusions and exclusions are
+  recorded.
+- Name the individual responsible for approving the scope and exclusions, ensuring a specific person is
+  identified, not a team or department.
+- Retain a signed and dated approval record for the current scope document, showing when and by whom it
+  was authorized.

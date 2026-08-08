@@ -1,0 +1,20 @@
+must_id: item:9.2:scope_external_layering
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: External-audit interaction note (how 9.2 internal audits coordinate with surveillance / re-cert
+  audits)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document how internal audit schedules are coordinated with external surveillance and re-certification
+  audits in a dated note approved by the audit program manager.
+- Name the individual responsible for liaising with external auditors, specifying their full name and
+  role in the coordination note.
+- Record any changes to internal audit timing or scope that result from external audit requirements, including
+  the date and rationale for each change.
+- Attach correspondence or meeting minutes that show communication between internal and external audit
+  teams regarding audit planning.
+- State explicitly in the note that coordination details are reviewed annually—avoid using undated or
+  generic statements about audit alignment.

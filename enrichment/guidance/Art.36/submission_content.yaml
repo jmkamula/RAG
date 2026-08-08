@@ -1,0 +1,19 @@
+must_id: item:Art.36:submission_content
+control_ref: Art.36
+standard_id: GDPR:2016/679
+must_text: Submission content per Art.36.3 (respective responsibilities + processing purposes/means +
+  measures and safeguards + DPO contact + DPIA + other relevant info)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the respective responsibilities of your organisation and any joint controllers in a dated submission
+  to the supervisory authority.
+- State the specific purposes and intended means of the processing activity in the prior consultation
+  documentation.
+- Describe the technical and organisational measures and safeguards implemented to protect data subjects,
+  referencing your completed Data Protection Impact Assessment.
+- Provide the full name and contact details of your appointed Data Protection Officer in the submission.
+- Attach all other relevant information, including a signed and dated copy of the DPIA, to ensure completeness
+  of the consultation package.

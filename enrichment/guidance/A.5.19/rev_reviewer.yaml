@@ -1,0 +1,16 @@
+must_id: item:A.5.19:rev_reviewer
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Reviewer identity and role (typically procurement + InfoSec lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer by full name and job title in the supplier portfolio review record for each review
+  cycle.
+- Record the date the review was completed and link it to the documented reviewer identity.
+- Specify the reviewer’s role as procurement lead or information security lead, avoiding generic titles
+  like "the team" or "IT department".
+- Retain evidence of the review, such as a signed or digitally acknowledged review summary, showing the
+  named reviewer’s approval.

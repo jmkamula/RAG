@@ -1,0 +1,14 @@
+must_id: item:Art.12:owner
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Named owner (DPO or Privacy Lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the Transparency and Rights Modalities Procedure as a specific individual, such as
+  the Data Protection Officer or Privacy Lead.
+- Record the owner's full name and job title in the procedure document, along with the date of assignment.
+- Document the owner's contact details within the procedure to enable direct communication if needed.
+- Review the procedure to confirm that the owner is not listed as a team, department, or generic role.

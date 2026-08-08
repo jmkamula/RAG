@@ -1,0 +1,47 @@
+leaf_id: req:Art.16:rectification_procedure
+control_ref: Art.16
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to know where personal data resides,
+    which is essential for locating and rectifying inaccurate data across all systems as required by Art.16.
+  good_enough: A basic, current inventory of systems and processing activities that includes personal
+    data locations is sufficient to proceed.
+- ref: Art.12.6
+  standard_id: GDPR:2016/679
+  title: Identity Verification
+  category: direct
+  rationale: Before rectifying data, you must verify the identity of the data subject making the request
+    to prevent unauthorized changes, as required by Art.12.6.
+  good_enough: A documented, working process for verifying the identity of data subjects making requests
+    is in place, even if not fully automated.
+- ref: Art.19
+  standard_id: GDPR:2016/679
+  title: Notification Obligation
+  category: direct
+  rationale: Art.16 rectification requires notifying any recipients of the data about the correction,
+    per Art.19. You need a way to identify and contact these recipients.
+  good_enough: A simple list or mechanism to track who has received the data and a basic notification
+    process is available.
+- ref: Art.12.3
+  standard_id: GDPR:2016/679
+  title: Timely Response to Data Subject Requests
+  category: direct
+  rationale: Art.16 rectification must be completed without undue delay, and Art.12.3 sets the one-month
+    response deadline. Awareness of this timeline is necessary to design the procedure.
+  good_enough: A clear understanding and basic tracking of the one-month deadline for data subject requests
+    is in place.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Understanding the lawful basis for processing is important to assess whether rectification
+    requests can be fulfilled or if there are exceptions.
+  good_enough: A documented lawful basis for each processing activity is identified, even if not yet fully
+    mapped to every data flow.

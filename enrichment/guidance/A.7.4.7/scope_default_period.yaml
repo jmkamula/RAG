@@ -1,0 +1,19 @@
+must_id: item:A.7.4.7:scope_default_period
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Default retention period for uncategorised PII
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the default retention period for uncategorised personal data in a documented policy, including
+  a specific time frame in years or months.
+- Name the individual responsible for approving the default retention period, listing their full name
+  and job title in the policy document.
+- Record the date when the default retention period was last reviewed and approved, ensuring the document
+  is not undated.
+- Cross-reference the default retention period in your data retention register, clearly marking it as
+  applicable to uncategorised personal data.
+- Avoid using vague terms like "until no longer needed" as the default period; specify a concrete duration
+  to prevent auditor rejection.

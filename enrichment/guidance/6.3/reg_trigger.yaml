@@ -1,0 +1,16 @@
+must_id: item:6.3:reg_trigger
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Per-row trigger stated (audit finding, regulator change, org restructure, etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific trigger for each change entry in the ISMS Change Register, such as "audit finding",
+  "regulator change", or "org restructure".
+- Record the date the trigger was identified alongside the change entry to provide a clear timeline.
+- Name the individual who identified and documented the trigger for each change, not a generic team or
+  department.
+- Cross-reference supporting evidence for the trigger, such as audit reports or regulatory notifications,
+  in the register entry.

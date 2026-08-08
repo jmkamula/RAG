@@ -1,0 +1,15 @@
+must_id: item:A.5.1:owner
+control_ref: A.5.1
+standard_id: ISO27001:2022
+must_text: Policy owner named (typically CISO or equivalent)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the policy owner as a specific individual, such as the CISO or equivalent, in the policy document’s
+  header section.
+- Record the owner’s full name, job title, and contact details directly within the policy document.
+- Sign and date the policy to confirm the owner’s acceptance of responsibility for its content and maintenance.
+- Avoid listing the owner as a group, team, or department—use only a named individual to meet accountability
+  requirements.

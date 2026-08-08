@@ -1,0 +1,20 @@
+must_id: item:A.5.34:reg_controls_applied
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Security controls applied per activity (encryption at rest/in transit, access control class,
+  pseudonymisation where used — cross-link to A.8.x and GDPR Art.32)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each personal data processing activity in the PII Processing Register, including a clear description
+  and the purpose for processing.
+- Record the specific security controls applied to each activity, such as encryption at rest, encryption
+  in transit, and access control classification.
+- Cross-reference each listed control to the relevant ISO27001 A.8.x control and GDPR Article 32 requirement
+  in the register entry.
+- Name the individual responsible for verifying the accuracy of each register entry — do not use a team
+  or department as owner.
+- Document the date each register entry was last reviewed and updated, ensuring no undated or outdated
+  entries remain.

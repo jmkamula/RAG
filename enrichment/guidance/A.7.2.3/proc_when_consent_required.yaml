@@ -1,0 +1,16 @@
+must_id: item:A.7.2.3:proc_when_consent_required
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: When-consent-required rules per activity (basis catalog references — see A.7.2.2)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity and clearly state if and when consent is required, referencing the relevant
+  legal or contractual basis for each.
+- Document the specific catalog or regulation (such as GDPR Article 6 or local law) that determines the
+  consent requirement for every activity.
+- Assign a named individual responsible for reviewing and updating these consent determinations, not a
+  team or department.
+- Record the date of each determination and any subsequent updates in a version-controlled register.

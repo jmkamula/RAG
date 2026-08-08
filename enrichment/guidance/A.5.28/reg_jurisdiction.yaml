@@ -1,0 +1,17 @@
+must_id: item:A.5.28:reg_jurisdiction
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Jurisdiction tag per row where evidence may cross borders (drives admissibility considerations)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a "Jurisdiction" column to the Evidence Custody Register to record the legal territory relevant
+  to each evidence item.
+- Record the specific country or region for each evidence entry, based on where the evidence was collected,
+  stored, or may be transferred.
+- Cross-reference each jurisdiction entry with supporting documentation, such as chain-of-custody forms
+  or transfer records, to confirm accuracy.
+- Name the person responsible for assigning jurisdiction tags for each evidence item, ensuring it is not
+  left blank or attributed to a generic team.

@@ -1,0 +1,19 @@
+must_id: item:B.8.2.5:scope_information_types
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: Information types available (certification reports / SOC 2 / ISO 27001 / ISO 27701 / pen test
+  summaries / architecture whitepapers)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all information types you make available to customers, such as certification reports, SOC 2, ISO
+  27001, ISO 27701, pen test summaries, and architecture whitepapers.
+- Document the current version and publication date for each information type in a central register.
+- Name the individual responsible for maintaining and updating each information type, avoiding generic
+  roles like "the team" or "IT."
+- Record where and how customers can access each information type, including any access restrictions or
+  request procedures.
+- Review the register annually and record the date and outcome of each review to confirm information remains
+  accurate and relevant.

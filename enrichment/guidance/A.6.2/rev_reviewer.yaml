@@ -1,0 +1,17 @@
+must_id: item:A.6.2:rev_reviewer
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Reviewer identity (HR + InfoSec + Legal jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewers as specific individuals from HR, Information Security, and Legal in the review record
+  for each template update.
+- Record the date each reviewer completed their review and approval on the review log or meeting minutes.
+- Obtain signatures or written confirmations from all three reviewers to show joint agreement on the reviewed
+  employment terms template.
+- Attach the final reviewed template version to the review record, clearly linking it to the named reviewers
+  and review date.
+- Avoid listing groups or departments as reviewers; always identify each reviewer by full name and role.

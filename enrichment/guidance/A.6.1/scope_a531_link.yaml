@@ -1,0 +1,17 @@
+must_id: item:A.6.1:scope_a531_link
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Cross-link to A.5.31 legal/regulatory register — jurisdictional and sectoral check requirements
+  should be sourced from the single legal-obligations register
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the roles and check-depth scope document to the specific entry in the A.5.31 legal and
+  regulatory obligations register.
+- State the jurisdictional and sectoral check requirements in the roles and check-depth scope, citing
+  the relevant register entry by name and date.
+- Name the owner of the roles and check-depth scope as a specific individual, not a team or department.
+- Record the date when the cross-link to the legal/regulatory register was last reviewed or updated in
+  the roles and check-depth scope document.

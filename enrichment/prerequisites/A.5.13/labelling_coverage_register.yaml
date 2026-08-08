@@ -1,0 +1,39 @@
+leaf_id: req:A.5.13:labelling_coverage_register
+control_ref: A.5.13
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which information platforms are in-scope for your ISMS before you can catalogue
+    and track their labelling coverage. The register must align with the defined scope.
+  good_enough: A documented, up-to-date scope statement that clearly lists included business units, systems,
+    and platforms.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You can't track labelling coverage if you don't have a reliable inventory of all information-storing
+    platforms. The asset register is the source list for the labelling coverage register.
+  good_enough: A current, reasonably complete inventory of all in-scope information systems and platforms,
+    with enough detail to identify them in the labelling register.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification of information
+  category: direct
+  rationale: A classification scheme must exist before you can apply labels or track their coverage. The
+    register documents which platforms are set up to enforce this scheme.
+  good_enough: A documented, approved classification scheme that defines information categories and required
+    labels.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and responsibilities
+  category: foundational
+  rationale: You need to know who owns each platform and who is responsible for labelling, so the register
+    can assign accountability for coverage gaps.
+  good_enough: A list of owners and responsible persons for each in-scope platform, even if not fully
+    formalised.

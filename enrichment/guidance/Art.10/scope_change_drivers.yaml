@@ -1,0 +1,17 @@
+must_id: item:Art.10:scope_change_drivers
+control_ref: Art.10
+standard_id: GDPR:2016/679
+must_text: Trigger list for re-scoping (new MS entry, new business line attracting Art.10 data)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current Member States and business lines where Article 10 data is processed, with names and
+  dates of initial inclusion.
+- Document a trigger list specifying events that require re-scoping, such as entry into a new Member State
+  or launch of a new business line.
+- Assign a named individual responsible for monitoring relevant business changes and updating the trigger
+  list.
+- Record each review of the trigger list with the review date and reviewer’s name.
+- Name the owner as a specific individual — not a team or department — to avoid ambiguity in responsibility.

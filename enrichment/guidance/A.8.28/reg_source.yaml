@@ -1,0 +1,16 @@
+must_id: item:A.8.28:reg_source
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Per-finding source (SAST / SCA / manual review / external researcher)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the source of each secure coding finding in the register, specifying whether it was identified
+  by SAST, SCA, manual review, or an external researcher.
+- Name the individual or tool responsible for each finding, avoiding generic labels like "the team" or
+  "automated scan".
+- Date each finding entry to show when the issue was identified and by which method or person.
+- Cross-reference each finding with supporting evidence, such as scan reports or researcher communications,
+  to verify the stated source.

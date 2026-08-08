@@ -1,0 +1,40 @@
+leaf_id: req:Art.13:applicable_collection_points_scope
+control_ref: Art.13
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of processing
+  category: direct
+  rationale: You must know the lawful basis for each processing activity before you can describe it at
+    each collection point. Art.13 notices require you to specify this basis to data subjects.
+  good_enough: A documented mapping of each collection point to its lawful basis (e.g., consent, contract,
+    legal obligation) is available, even if not yet fully reviewed by legal.
+- ref: Art.12
+  standard_id: GDPR:2016/679
+  title: Transparent information, communication and modalities for the exercise of the rights of the data
+    subject
+  category: direct
+  rationale: Art.12 sets the standards for how information under Art.13 must be presented (clear, accessible,
+    and understandable). Without this, you can't ensure your notices meet GDPR requirements.
+  good_enough: A summary of the intended communication approach (language, format, accessibility) exists
+    for each collection point, even if not yet user-tested.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: Your RoPA is the master list of all processing activities and helps identify all locations
+    where personal data is collected. Without this, you risk missing collection points.
+  good_enough: A working draft of the RoPA exists that lists all known data collection activities and
+    their associated systems or processes, even if some details are pending.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which parts of your organization and which systems are in-scope for
+    compliance. This ensures you don't overlook collection points outside your defined boundaries.
+  good_enough: A current ISMS scope statement is available and includes all business units and systems
+    where personal data is collected, even if not yet finalized for audit.

@@ -1,0 +1,17 @@
+must_id: item:A.8.22:scope_exclusions
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Exclusion rationale + compensating controls per excluded domain
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each excluded domain in the segregation scope with a clear, dated rationale explaining why
+  exclusion is necessary.
+- List compensating controls for every excluded domain, referencing specific control names and implementation
+  dates.
+- Name the decision-maker who approved each exclusion and compensating control, avoiding group or department
+  names.
+- Attach supporting evidence, such as risk assessments or meeting minutes, that justify the exclusion
+  and describe the effectiveness of compensating controls.

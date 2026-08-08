@@ -1,0 +1,16 @@
+must_id: item:B.8.2.2:reg_customer_id
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: Customer identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique customer identifier for each entry in the register, matching the identifier used in
+  your customer management system.
+- Cross-reference each customer identifier with supporting documentation, such as contracts or data processing
+  agreements, to confirm accuracy.
+- Name the customer identifier as a specific value, not a generic label like "customer" or "N/A", to avoid
+  ambiguity.
+- Review the register regularly to confirm that every row includes a valid and current customer identifier.

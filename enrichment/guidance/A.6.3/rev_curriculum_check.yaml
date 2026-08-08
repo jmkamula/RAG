@@ -1,0 +1,20 @@
+must_id: item:A.6.3:rev_curriculum_check
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Curriculum currency check (referenced policies still align with the training content; new topics
+  added per scope changes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to review the awareness training curriculum and document their name and review
+  date in the training records.
+- Cross-reference each training module with the latest versions of referenced policies and record the
+  policy titles and version numbers checked.
+- Document any new or updated topics added to the curriculum, including the date of addition and the reason
+  for inclusion.
+- Name the owner as a specific person responsible for curriculum updates—do not list a team or department
+  as the owner.
+- Retain a signed statement from the reviewer confirming that all referenced policies are current and
+  that the curriculum reflects recent scope changes.

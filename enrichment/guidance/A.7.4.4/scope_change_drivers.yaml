@@ -1,0 +1,19 @@
+must_id: item:A.7.4.4:scope_change_drivers
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+must_text: Trigger list (new analytics use / new ML model)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current analytics uses and machine learning models that process personal data, including project
+  names and responsible owners, in a dated register.
+- Document the trigger events that require scope review, such as launching a new analytics use or deploying
+  a new machine learning model.
+- Assign a named individual to review and update the minimization context scope whenever a trigger event
+  occurs, recording the date of each review.
+- Name the owner as a specific individual — not a team or department — to avoid ambiguity about responsibility
+  for updates.
+- Retain evidence of each scope review, such as meeting notes or approval emails, clearly referencing
+  the relevant trigger event and date.

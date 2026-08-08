@@ -1,0 +1,19 @@
+must_id: item:A.7.3.2:scope_contexts
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: Notice contexts enumerated (direct / indirect / cookie / marketing / employee / minor / etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all situations where personal data notices are provided, such as website forms, employee onboarding,
+  marketing communications, and cookies.
+- Document the specific type of notice used for each context, referencing the actual notice text or template
+  version and its location.
+- Name the individual responsible for maintaining and updating the notice context list, ensuring a specific
+  person is identified rather than a team or department.
+- Record the date when the notice context list was last reviewed and updated, capturing evidence of periodic
+  assessment.
+- Cross-reference each notice context to the relevant privacy notice or policy, confirming that all contexts
+  are covered by an appropriate notice.

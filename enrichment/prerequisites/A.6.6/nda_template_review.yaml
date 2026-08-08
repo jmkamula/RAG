@@ -1,0 +1,49 @@
+leaf_id: req:A.6.6:nda_template_review
+control_ref: A.6.6
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Information Classification
+  category: direct
+  rationale: The NDA template must align with the organisation’s current information classification scheme
+    to ensure appropriate protection levels are reflected in contractual terms. Without a defined and
+    current classification scheme, the NDA content cannot be properly reviewed or updated.
+  good_enough: A documented and approved classification scheme exists, with clear categories and handling
+    rules for information types covered by NDAs.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Knowing which information assets are protected by NDAs is essential to ensure the NDA template
+    covers all relevant asset types and stakeholders. An incomplete asset register could leave gaps in
+    NDA coverage.
+  good_enough: A current list of information assets exists, with those subject to NDAs clearly identified.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which organisational units, processes, and information are covered
+    by the ISMS and, by extension, the NDA process. Reviewing the NDA template is only meaningful if you
+    know what’s in scope.
+  good_enough: A documented ISMS scope statement exists, specifying the boundaries and applicability of
+    the ISMS, including relevant legal jurisdictions.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment identifies threats and vulnerabilities related to information sharing and
+    confidentiality, which should inform NDA template requirements and periodic review focus areas.
+  good_enough: A recent risk assessment has been performed, with risks related to information disclosure
+    and NDAs identified and documented.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The information security policy sets out the organisation’s commitment to confidentiality
+    and legal compliance, which underpins the rationale for having and reviewing NDAs.
+  good_enough: A current, approved information security policy exists, referencing confidentiality obligations
+    and the use of NDAs.

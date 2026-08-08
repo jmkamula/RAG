@@ -1,0 +1,18 @@
+must_id: item:A.7.2.4:reg_withdrawal_link
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Withdrawal timestamp where withdrawal has occurred
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time when each data subject withdraws consent in the consent record register.
+- Cross-reference each withdrawal entry with the related consent request and any linked processing activities
+  in the register.
+- Name the individual responsible for updating withdrawal timestamps, ensuring a specific person is listed
+  rather than a generic role.
+- Retain evidence of the withdrawal request, such as an email or web form submission, alongside the timestamp
+  in the register.
+- Avoid leaving withdrawal fields blank or using placeholders like "N/A" where withdrawal has occurred;
+  always provide a precise timestamp.

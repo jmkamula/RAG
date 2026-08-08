@@ -1,0 +1,18 @@
+must_id: item:Art.41:scope_change_drivers
+control_ref: Art.41
+standard_id: GDPR:2016/679
+must_text: Trigger list (new code, jurisdiction expansion)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all triggers that require a review of your Art.41 monitoring scope, such as new code deployments
+  or expansion into new jurisdictions, in a dated document.
+- Name a specific individual responsible for maintaining and updating the trigger list, avoiding generic
+  roles like "the team" or "compliance department."
+- Record each time the trigger list is reviewed or updated, including the date and the name of the reviewer.
+- Cross-reference each trigger to the relevant business or technical change log to show how the trigger
+  was identified and addressed.
+- Retain previous versions of the trigger list to demonstrate how your monitoring scope has evolved over
+  time.

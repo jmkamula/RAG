@@ -1,0 +1,46 @@
+leaf_id: req:A.5.19:portfolio_review
+control_ref: A.5.19
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: direct
+  rationale: A clear, approved information security policy is needed to set the expectations and rules
+    for supplier management, including how supplier reviews are to be conducted and documented.
+  good_enough: A current, communicated policy that explicitly covers supplier management and review requirements
+    is available.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification of information
+  category: direct
+  rationale: You must know how information is classified to assess which suppliers handle sensitive or
+    critical data, so you can prioritize and tailor the portfolio review accordingly.
+  good_enough: A documented, operational classification scheme exists and is referenced in supplier risk
+    assessments.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Inventory of information and other associated assets
+  category: direct
+  rationale: An up-to-date asset register is essential to identify which assets are managed or accessed
+    by suppliers, ensuring the review covers all relevant supplier relationships.
+  good_enough: A maintained asset register lists assets linked to suppliers, even if not fully exhaustive.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information security risk assessment
+  category: foundational
+  rationale: Supplier portfolio review relies on risk assessment outputs to determine which suppliers
+    pose higher risks and require more scrutiny or controls.
+  good_enough: A recent risk assessment exists that includes supplier-related risks and their current
+    ratings.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures accountability for conducting, documenting, and following
+    up on supplier portfolio reviews.
+  good_enough: Named individuals or teams are assigned responsibility for supplier management and review
+    activities.

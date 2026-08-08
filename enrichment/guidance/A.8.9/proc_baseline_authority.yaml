@@ -1,0 +1,16 @@
+must_id: item:A.8.9:proc_baseline_authority
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Baseline authority defined per asset class (who owns each baseline)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the baseline authority for each asset class as a specific individual, including their job title
+  and contact details, in the procedure document.
+- Document the date each baseline authority assignment was approved and by whom, keeping a signed approval
+  record.
+- Cross-reference each asset class in the configuration management register with its corresponding baseline
+  authority in the procedure.
+- Avoid listing baseline owners as groups or departments; use only named individuals to prevent ambiguity.

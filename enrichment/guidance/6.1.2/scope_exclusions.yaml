@@ -1,0 +1,19 @@
+must_id: item:6.1.2:scope_exclusions
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Exclusions stated explicitly with rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all areas, assets, or processes excluded from the risk assessment in a dedicated section of the
+  methodology document.
+- State a clear, specific reason for each exclusion, referencing relevant business, legal, or technical
+  justification.
+- Name the individual who approved each exclusion, and include their signature and the approval date in
+  the document.
+- Cross-reference exclusions with the organisation’s asset inventory to confirm no excluded item is missing
+  from the list.
+- Avoid using vague terms like "miscellaneous" or "not applicable" as exclusions; provide precise descriptions
+  and rationale for every item.

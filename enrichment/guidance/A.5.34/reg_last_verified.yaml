@@ -1,0 +1,16 @@
+must_id: item:A.5.34:reg_last_verified
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Last-verified date per activity (proves the entry is current; missing dates surface stale activities
+  at review)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each personal data processing activity was last reviewed or verified directly in the
+  PII Processing Register.
+- Assign responsibility for each activity’s review to a named individual, not a generic team or department.
+- Update the last-verified date immediately after each periodic review or change to the processing activity.
+- Cross-reference the last-verified date with meeting minutes or review logs to confirm the review actually
+  took place.

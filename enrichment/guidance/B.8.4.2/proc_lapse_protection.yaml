@@ -1,0 +1,20 @@
+must_id: item:B.8.4.2:proc_lapse_protection
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+must_text: Lapse-of-contract protection — retention period defined before disposal after contract termination
+  (accidental lapse protection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific retention period for PII after contract termination in the written procedure, referencing
+  the relevant contract or legal requirement.
+- Name the individual responsible for authorizing PII disposal or transfer after the retention period,
+  listing their full name and job title.
+- Record the date the contract ended and the scheduled PII disposal date in a log or register for each
+  contract.
+- Document the process for reviewing PII holdings at contract end, including steps to prevent accidental
+  early or late disposal.
+- Avoid using vague retention terms like "as needed" or "reasonable time"—specify an exact duration in
+  days, months, or years.

@@ -1,0 +1,19 @@
+must_id: item:A.7.3.6:proc_downstream_propagation
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: Downstream propagation — corrections/erasures pushed to systems + third parties (see A.7.3.7)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for notifying third parties of corrections or erasures in a dated procedure
+  document.
+- Document each instance where personal data is corrected or erased, including the date, affected systems,
+  and third parties notified.
+- Record written confirmation from each third party that they have actioned the correction or erasure
+  request.
+- State in the procedure that notifications to third parties must be completed within a defined timeframe
+  after the internal change.
+- Specify named third parties in each notification record—do not use generic terms like "partners" or
+  "vendors".

@@ -1,0 +1,19 @@
+must_id: item:A.8.15:rev_reviewer
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Security Operations + Infrastructure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer from Security Operations as a specific individual, including full name and job title,
+  in the review record.
+- Record the reviewer from Infrastructure as a named person, not a group or department, in the periodic
+  logging program review documentation.
+- Document the date each reviewer completed their assessment, ensuring both Security Operations and Infrastructure
+  reviewers are listed separately.
+- Sign or digitally approve the review findings by both named reviewers, attaching evidence of their acknowledgment
+  in the review file.
+- Retain the review record with both reviewers’ names and dates, making sure no section is left blank
+  or marked as “to be determined.”

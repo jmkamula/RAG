@@ -1,0 +1,17 @@
+must_id: item:A.6.3:owner
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Named owner of the programme (typically Security Awareness Lead within InfoSec; HR partner
+  for delivery logistics)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the Information Security Awareness, Education and Training Programme as a specific
+  individual, not a team or department.
+- Record the owner's name, job title, and contact details in the official programme documentation with
+  a clear "Owner" label.
+- Date the assignment of ownership and retain a copy of the communication or approval appointing the owner.
+- Cross-reference the named owner in both the programme document and the organisation's roles and responsibilities
+  register.

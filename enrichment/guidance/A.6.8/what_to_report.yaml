@@ -1,0 +1,20 @@
+must_id: item:A.6.8:what_to_report
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: What to report — observed events, suspected events, near-misses (no judgement required at reporting
+  stage; over-reporting is preferred to under-reporting)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that all observed, suspected, and near-miss information security events must
+  be reported, regardless of certainty or perceived impact.
+- List clear examples of reportable events, including both confirmed incidents and situations where something
+  unusual or suspicious is noticed.
+- Specify that staff should report even if unsure whether an event is truly a security issue, emphasizing
+  that over-reporting is preferred.
+- Name the procedure owner as a specific individual, not a generic role or department, to avoid ambiguity
+  about responsibility.
+- Record the procedure version and approval date on the document to show it is current and has been formally
+  reviewed.

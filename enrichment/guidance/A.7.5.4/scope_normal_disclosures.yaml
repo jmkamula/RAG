@@ -1,0 +1,16 @@
+must_id: item:A.7.5.4:scope_normal_disclosures
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Normal-course disclosures enumerated (recurring integrations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all recurring data disclosures to external parties in a dated register, specifying each integration
+  or data flow by name and purpose.
+- Name the responsible individual for maintaining the disclosure register, avoiding generic titles like
+  "IT" or "the team".
+- Cross-reference each listed disclosure with supporting agreements or contracts, attaching copies or
+  clear links in the register.
+- Record the date of the last review of the disclosure register, including the name of the reviewer.

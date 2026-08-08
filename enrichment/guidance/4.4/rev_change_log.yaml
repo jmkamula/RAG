@@ -1,0 +1,19 @@
+must_id: item:4.4:rev_change_log
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: Cross-check against change records — every actual change in the year is logged
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every change made to the ISMS Manual in the past year in a dated change log, including a brief
+  description of each change.
+- Cross-reference each listed change to a corresponding entry in your formal change records or change
+  management system.
+- Confirm that no changes occurred without a matching entry in the change log by comparing the change
+  log to the change management records.
+- Name the person responsible for maintaining the change log as a specific individual, not a group or
+  department.
+- Attach evidence of the most recent annual review where the change log and change records were checked
+  for completeness and accuracy.

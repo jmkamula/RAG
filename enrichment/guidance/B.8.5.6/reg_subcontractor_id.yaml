@@ -1,0 +1,16 @@
+must_id: item:B.8.5.6:reg_subcontractor_id
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+must_text: Subcontractor identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each subcontractor and enter it in a dedicated column for every row in
+  the register.
+- Document the full legal name of each subcontractor alongside their unique identifier to avoid confusion
+  between similar names.
+- Record the date each subcontractor entry was added or updated to support traceability.
+- Name the register owner as a specific individual, not a team or department, to ensure accountability
+  for maintaining identifiers.

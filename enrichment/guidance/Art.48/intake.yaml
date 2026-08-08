@@ -1,0 +1,17 @@
+must_id: item:Art.48:intake
+control_ref: Art.48
+standard_id: GDPR:2016/679
+must_text: Foreign-authority request intake channel (DPO + legal + executive sponsor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific individuals serving as Data Protection Officer, legal counsel, and executive sponsor
+  responsible for handling foreign authority requests.
+- Document the official intake channel for foreign authority requests, such as a dedicated email address
+  or secure portal, in the written procedure.
+- Record the date and method of approval for the intake channel by all three named roles to show formal
+  agreement.
+- State in the procedure that requests must not be accepted via informal channels, such as personal emails
+  or verbal requests, to avoid ambiguity.

@@ -1,0 +1,16 @@
+must_id: item:A.5.24:reg_oncall
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: On-call status per row (when in active rotation; how long; when next handover)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each incident response team member by full name and current contact details in the register.
+- Record the exact start and end dates for each member’s on-call rotation, including time zones if applicable.
+- State the scheduled date and time for the next handover to the incoming on-call member for each rotation
+  entry.
+- Name the on-call member as a specific individual, not as a team or generic role, for every rotation
+  period.
+- Update the register immediately after each handover and retain a dated record of the update.

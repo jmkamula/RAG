@@ -1,0 +1,15 @@
+must_id: item:9.1:rev_date
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the monitoring program in a dated log entry signed by the responsible
+  reviewer.
+- State the planned review interval for the monitoring program in a documented schedule approved by management.
+- Confirm that the actual review date falls within the planned interval by cross-referencing the review
+  log and the schedule.
+- Name the reviewer as a specific individual in the review record, not as a team or department.

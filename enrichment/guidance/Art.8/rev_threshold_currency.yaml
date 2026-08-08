@@ -1,0 +1,16 @@
+must_id: item:Art.8:rev_threshold_currency
+control_ref: Art.8
+standard_id: GDPR:2016/679
+must_text: Member State threshold currency — any MS that has changed its age threshold reflected
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each EU Member State where you process children's data and record the current age threshold
+  for consent in a dated register.
+- Cross-reference your register against the latest official sources or government publications to confirm
+  the age threshold for each Member State.
+- Document any changes to Member State age thresholds with the date of change and the source of the update.
+- Name a specific individual responsible for monitoring and updating age thresholds, not a team or department.
+- Retain evidence of your most recent review, such as a signed and dated summary or meeting minutes.

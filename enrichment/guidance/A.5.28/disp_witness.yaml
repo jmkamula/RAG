@@ -1,0 +1,15 @@
+must_id: item:A.5.28:disp_witness
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Witness identity per destruction record (independent of authoriser where possible)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the witness for each evidence disposal or handover as a specific individual, not a team or department.
+- Record the witness’s full name, role, and signature on the destruction or handover record at the time
+  of the event.
+- Confirm the witness is not the same person as the authoriser whenever possible, and document any exceptions
+  with justification.
+- Date each witness entry to clearly show when the evidence disposal or handover was observed.

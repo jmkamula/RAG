@@ -1,0 +1,16 @@
+must_id: item:Art.46:reg_safeguard
+control_ref: Art.46
+standard_id: GDPR:2016/679
+must_text: Per-row safeguard type (Art.46.2 a-f / Art.46.3 a-b)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the specific safeguard type used for each data transfer row, referencing the exact article and
+  paragraph from GDPR Art.46.2 or 46.3.
+- Record the legal basis or mechanism text (e.g., "Standard Contractual Clauses, Art.46.2(c)") for each
+  entry, not just a generic label.
+- Name the person who selected or confirmed the safeguard type for each entry, using a full name rather
+  than a team or department.
+- Date each safeguard type entry to show when the selection or confirmation was made.

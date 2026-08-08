@@ -1,0 +1,19 @@
+must_id: item:A.8.33:reg_treatment
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Per-row treatment applied (synthetic / static-masked / dynamic-masked / pseudonymised)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the treatment type applied to each test dataset row, specifying whether it is synthetic, static-masked,
+  dynamic-masked, or pseudonymised.
+- Cross-reference each dataset row with its corresponding treatment method in the register, ensuring no
+  row is left blank or marked as "various."
+- Name the individual responsible for verifying the accuracy of treatment assignments per row, listing
+  their full name and date of verification.
+- Document any changes to treatment methods per row with a dated entry and the name of the person authorising
+  the change.
+- Avoid using generic descriptions or bulk labels for multiple rows; specify the exact treatment for every
+  individual row.

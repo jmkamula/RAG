@@ -1,0 +1,19 @@
+must_id: item:Art.85:scope_change_drivers
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: Trigger list for re-scoping (new editorial product, expansion into new Member State, acquisition
+  of journalism arm)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current editorial products, Member States of operation, and journalism-related business units
+  in a dated document reviewed at least annually.
+- Document a trigger list that includes launching new editorial products, expanding into additional Member
+  States, or acquiring journalism operations.
+- Assign a named individual responsible for monitoring business changes and initiating re-scoping when
+  a trigger is met.
+- Record each re-scoping decision with the date, the trigger event, and the person who approved the updated
+  scope.
+- Name the owner as a specific individual — not a team or department — in the trigger list documentation.

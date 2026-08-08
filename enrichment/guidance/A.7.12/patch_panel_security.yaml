@@ -1,0 +1,19 @@
+must_id: item:A.7.12:patch_panel_security
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Patch panel / IDF / MDF physical security (locked rooms, access logged)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for patch panel, IDF, and MDF room security in the procedure, using a specific
+  individual's name and job title.
+- Document the physical security controls in place, such as locked doors and access badge requirements,
+  with dates of last inspection.
+- Record all access to patch panel, IDF, and MDF rooms in an access log, including names, dates, and purpose
+  of entry.
+- State in the procedure that access logs are reviewed monthly by the named responsible person, and retain
+  evidence of each review.
+- Specify that generic access, such as "all IT staff," is not permitted; list only authorized individuals
+  or roles with documented approval.

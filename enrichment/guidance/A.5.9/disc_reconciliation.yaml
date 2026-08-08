@@ -1,0 +1,19 @@
+must_id: item:A.5.9:disc_reconciliation
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Reconciliation rule — discovered-but-not-in-register entries are flagged for owner assignment
+  and classification
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the reconciliation process in a written procedure that describes how newly discovered assets
+  are compared against the asset register.
+- Record each instance where an asset is discovered but not found in the register, including the date,
+  asset details, and discovery source.
+- Assign a named individual to review flagged assets and update the register with owner assignment and
+  classification within a defined timeframe.
+- Retain evidence of each completed reconciliation, such as a signed or timestamped log entry showing
+  the asset was added and classified.
+- Name the asset owner as a specific person in the register—do not use generic roles or team names.

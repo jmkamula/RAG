@@ -1,0 +1,20 @@
+must_id: item:A.8.12:proc_incident_link
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Incident-response integration when leakage confirmed (cross-link to A.5.25 triage + A.5.26
+  register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step in your DLP operations procedure that triggers incident response when data leakage
+  is confirmed, referencing the specific detection event.
+- Cross-reference the DLP procedure to your formal incident triage process as defined under control A.5.25,
+  citing the exact document and section.
+- Record the requirement to log each confirmed leakage in the incident register mandated by A.5.26, including
+  the register’s location and responsible individual.
+- Name the owner of the DLP operations procedure as a specific individual, not a team or department, in
+  the procedure document.
+- State the date of the most recent review and approval of the DLP operations procedure, with the approver’s
+  name clearly listed.

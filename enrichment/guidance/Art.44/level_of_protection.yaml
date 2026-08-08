@@ -1,0 +1,19 @@
+must_id: item:Art.44:level_of_protection
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Level-of-protection assessment — overall protection of data subjects per Art.44 final clause
+  (not undermined by transfer)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the countries and organisations involved in each data transfer, including the legal basis for
+  transfer under GDPR Article 44.
+- Record a written assessment comparing the recipient country's data protection laws and practices to
+  those of the European Union.
+- Name the individual responsible for conducting and signing off on the level-of-protection assessment
+  for each transfer.
+- Attach evidence that supplementary measures have been considered and implemented if the recipient country’s
+  protections are not essentially equivalent.
+- State the date the assessment was last reviewed or updated, ensuring it reflects current laws and practices.

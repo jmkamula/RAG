@@ -1,0 +1,19 @@
+must_id: item:A.8.17:rev_drift_compliance
+control_ref: A.8.17
+standard_id: ISO27001:2022
+must_text: Drift compliance per class (samples within tolerance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the schedule for periodic clock synchronization reviews, including review dates and the responsible
+  individual’s name.
+- Record the results of each clock drift test, specifying the system class, sample size, and measured
+  drift values.
+- State the drift tolerance threshold for each system class, referencing the source of these limits in
+  your documentation.
+- Confirm that all sampled systems meet the defined drift tolerance, noting any exceptions and the corrective
+  actions taken.
+- Name the reviewer as a specific individual, not a generic role or team, and require a dated signature
+  on each review record.

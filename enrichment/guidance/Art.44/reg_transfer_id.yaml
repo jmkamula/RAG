@@ -1,0 +1,16 @@
+must_id: item:Art.44:reg_transfer_id
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Per-row unique transfer identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique, sequential identifier to each international data transfer entry in the register at
+  the time the transfer is recorded.
+- Record the assigned identifier in a dedicated column for every row, ensuring no two transfers share
+  the same identifier.
+- Cross-reference each identifier with supporting documentation for the transfer, such as contracts or
+  transfer impact assessments.
+- Confirm that identifiers are never reused or overwritten, even if a transfer entry is deleted or amended.

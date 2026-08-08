@@ -1,0 +1,17 @@
+must_id: item:A.7.4.4:reg_activity_id
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+must_text: Processing activity identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each processing activity and record it in a dedicated column of the minimization
+  technique inventory.
+- Cross-reference each identifier with the corresponding processing activity description to ensure clear
+  traceability between inventory and activity records.
+- Document the name of the person responsible for assigning and maintaining processing activity identifiers
+  in the inventory.
+- Avoid using generic or repeated identifiers such as "N/A" or "various"—each row must have a specific,
+  traceable processing activity identifier.

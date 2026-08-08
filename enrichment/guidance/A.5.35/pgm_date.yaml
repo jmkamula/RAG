@@ -1,0 +1,18 @@
+must_id: item:A.5.35:pgm_date
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Meta-review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent meta-review in a central register, clearly referencing the specific
+  review cycle it covers.
+- State the planned interval for meta-reviews in your documented review program, including start and end
+  dates for each cycle.
+- Confirm the meta-review occurred within the planned interval by cross-referencing the actual review
+  date with the scheduled timeline.
+- Name the reviewer as a specific individual, not a group or department, in the meta-review documentation.
+- Retain evidence of the meta-review decision, such as a signed or digitally approved summary report with
+  the review date clearly shown.

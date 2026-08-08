@@ -1,0 +1,20 @@
+must_id: item:A.6.4:scope_regulator_notify
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Regulator-notification triggers per jurisdiction (financial-services FSA notification for serious
+  misconduct, healthcare professional body notification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each jurisdiction where your organisation operates, with a named contact responsible for regulatory
+  notifications in that area.
+- Document the categories of workers whose actions could trigger regulator notification, referencing specific
+  roles and departments.
+- Record the exact notification triggers for each regulator, such as FSA for financial misconduct or healthcare
+  bodies for professional breaches, with legal references.
+- Attach a dated summary of regulator notification requirements, reviewed and signed by your compliance
+  lead or legal counsel.
+- Name the responsible individual for each notification trigger — do not use generic titles like "Compliance
+  Team" or "HR Department".

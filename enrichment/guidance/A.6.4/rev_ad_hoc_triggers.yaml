@@ -1,0 +1,20 @@
+must_id: item:A.6.4:rev_ad_hoc_triggers
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Ad-hoc review triggers (employment tribunal ruling affecting the process, regulator enforcement
+  action, major incident with personnel involvement)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each ad-hoc review trigger, such as tribunal rulings, regulator actions, or major personnel
+  incidents, in a dated review log.
+- Name the individual responsible for monitoring and initiating reviews when a trigger event occurs, specifying
+  their full name and job title.
+- Record the date, reason, and summary of each ad-hoc review decision in meeting minutes or an official
+  change log.
+- Attach supporting evidence, such as tribunal decisions or regulator notices, to the review documentation
+  for each triggered event.
+- Avoid listing generic triggers; describe each trigger with enough detail to show it is specific to your
+  organisation’s disciplinary process.

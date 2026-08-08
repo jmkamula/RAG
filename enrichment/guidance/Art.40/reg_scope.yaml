@@ -1,0 +1,17 @@
+must_id: item:Art.40:reg_scope
+control_ref: Art.40
+standard_id: GDPR:2016/679
+must_text: Per-row scope of adherence (which processing activities)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity by its specific name in a dedicated column for every row in the Code Adherence
+  Register.
+- Cross-reference each processing activity to its corresponding entry in your Record of Processing Activities,
+  including unique identifiers or titles.
+- State the scope of adherence for each row, clearly describing which processing activities are covered
+  and excluding vague terms like "all data" or "general processing".
+- Record the date and name of the person responsible for confirming the scope of adherence for each processing
+  activity listed.

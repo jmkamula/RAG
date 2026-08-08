@@ -1,0 +1,16 @@
+must_id: item:A.6.5:rev_register_update
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Changes propagated to the procedure / scope with reference to this review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of each post-employment program review in a version-controlled document.
+- Document all changes made to the procedure or scope, clearly referencing the specific review that triggered
+  each change.
+- Name the individual responsible for approving and updating the procedure following each review.
+- Attach the updated procedure and scope documents, ensuring each includes the revision date and a summary
+  of changes.
+- Avoid referencing reviews generically; cross-reference each change to a specific, dated review entry.

@@ -1,0 +1,17 @@
+must_id: item:A.5.12:comm_audience
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Audience reached (all information creators, owners, custodians — broader than just data owners)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all individuals and roles who create, own, or manage information assets in a dated register to
+  define the full communication audience.
+- Document the method and date each person or group received the classification scheme, such as email,
+  training session, or intranet post.
+- Retain evidence of delivery, such as read receipts, signed attendance sheets, or system logs confirming
+  access to the classification scheme.
+- Name the audience using specific individuals or roles — do not use vague terms like "all staff" or "the
+  department".

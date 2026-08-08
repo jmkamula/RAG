@@ -1,0 +1,19 @@
+must_id: item:A.7.2:deliveries
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Delivery / loading area handling (drop zones, no direct access to secure areas)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Describe the physical layout of delivery and loading areas, including barriers or locked doors that
+  prevent direct access to secure areas.
+- Document the procedure for receiving deliveries, specifying how staff verify and escort delivery personnel
+  at all times.
+- Name the individual responsible for monitoring deliveries and maintaining a log of all entries and exits
+  through the loading area.
+- Record each delivery in a dated log, including the delivery company, time, and staff member present
+  during the process.
+- Specify that no delivery personnel are allowed unescorted access beyond the designated drop zone, and
+  avoid using generic terms like "staff" or "team" for responsibility.

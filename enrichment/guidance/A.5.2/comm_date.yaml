@@ -1,0 +1,16 @@
+must_id: item:A.5.2:comm_date
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: Date of publication/communication
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date when roles and responsibilities were communicated to staff in a dated communication
+  log or announcement.
+- Name the individual responsible for sending or publishing the roles and responsibilities communication
+  in the record.
+- Attach or link the actual communication document or message to the record for direct reference.
+- Avoid listing only the month or year; specify the full date to prevent auditor concerns about incomplete
+  evidence.

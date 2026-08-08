@@ -1,0 +1,19 @@
+must_id: item:Art.28:rights
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Assistance with data subject rights
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the DPA that the processor will assist the controller with requests from data subjects to exercise
+  their rights under GDPR.
+- Name the specific contact person or role at the processor responsible for handling data subject rights
+  assistance in the DPA.
+- Document the process and expected response times for the processor to support the controller with data
+  subject requests in a dated appendix.
+- Cross-reference the DPA clause to the relevant GDPR article (Art. 28.3e) to show alignment with the
+  legal requirement.
+- Avoid using vague language such as "will assist as appropriate"—specify concrete types of assistance
+  and timelines in the agreement.

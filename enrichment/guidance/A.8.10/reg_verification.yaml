@@ -1,0 +1,19 @@
+must_id: item:A.8.10:reg_verification
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Per-deletion verification artefact reference (log id / certificate / signed attestation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each deletion event in the Disposal Register with a unique entry that includes the date, time,
+  and asset identifier.
+- Reference the specific verification artefact for each deletion, such as a log entry ID, destruction
+  certificate number, or signed attestation.
+- Name the person who performed and verified the deletion for each entry, using full names rather than
+  generic roles or teams.
+- Attach or link supporting artefacts directly to the corresponding register entry to allow auditors to
+  cross-check the evidence.
+- Confirm that every register entry is complete and not missing any required artefact references before
+  marking the deletion as final.

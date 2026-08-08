@@ -1,0 +1,17 @@
+must_id: item:A.5.26:reg_lifecycle_dates
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: 'Lifecycle dates per row: detected / contained / eradicated / recovered / closed'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each incident was detected in a dedicated column for every row in the incident register.
+- Enter the date containment actions were completed for each incident, ensuring no row is left blank or
+  marked "ongoing" indefinitely.
+- Document the date eradication of the threat was achieved for each incident, referencing supporting evidence
+  where available.
+- Capture the date recovery was completed for each incident, showing when normal operations resumed.
+- Name the person who closed each incident and record the closure date; avoid leaving the owner field
+  as "team" or blank.

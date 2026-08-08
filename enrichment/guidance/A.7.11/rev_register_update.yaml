@@ -1,0 +1,17 @@
+must_id: item:A.7.11:rev_register_update
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Changes propagated to the register / procedure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each change identified during the utilities program review in a dated change log, including
+  a brief description of the modification.
+- Update the official utilities register or procedure document to reflect each approved change, referencing
+  the change log entry number.
+- Name the individual responsible for updating the register or procedure, ensuring a specific person is
+  listed rather than a team or department.
+- Retain evidence of communication to relevant stakeholders about the updated register or procedure, such
+  as an email or meeting record.

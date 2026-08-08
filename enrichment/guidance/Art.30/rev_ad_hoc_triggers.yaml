@@ -1,0 +1,16 @@
+must_id: item:Art.30:rev_ad_hoc_triggers
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Ad-hoc review triggers listed (re-org, M&A, new processing line, new processor onboarded)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all specific events that trigger an ad-hoc RoPA review, such as company re-organization, mergers,
+  acquisitions, or onboarding new processors.
+- Document the date each trigger was last reviewed and updated in the RoPA review procedure.
+- Name the person responsible for identifying and reporting these triggers, ensuring a specific individual
+  is assigned rather than a team or department.
+- Cross-reference each listed trigger with actual past RoPA reviews to demonstrate the process is followed
+  when events occur.

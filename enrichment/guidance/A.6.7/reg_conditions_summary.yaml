@@ -1,0 +1,19 @@
+must_id: item:A.6.7:reg_conditions_summary
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Per-row conditions summary (permitted hours, data-class restrictions, expiry date, supervision
+  requirements)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record permitted remote work hours for each individual in the register, specifying days and times allowed
+  for remote access.
+- Document any data classification restrictions per person, clearly stating which types of information
+  may or may not be accessed remotely.
+- Enter an explicit expiry or review date for each remote work arrangement, ensuring no entry is left
+  undated.
+- Specify any supervision or monitoring requirements for each remote worker, including named supervisors
+  if applicable.
+- Name the register owner as a specific individual, not a group or department, to avoid ambiguity in responsibility.

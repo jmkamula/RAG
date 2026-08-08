@@ -1,0 +1,48 @@
+leaf_id: req:B.8.3.1:principal_obligations_support_procedure
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which services, systems, and data flows are in-scope for privacy management
+    before you can define how to support customer subject-rights requests. This ensures the procedure
+    covers all relevant processing activities.
+  good_enough: A clear, current scope statement that identifies all business units, systems, and processing
+    activities relevant to customer data is available.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of privacy and security roles is essential so you know who is responsible
+    for handling and supporting subject-rights requests from customers.
+  good_enough: Documented roles exist for privacy management and subject-rights support, with named individuals
+    or teams assigned.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the purposes for which personal data is processed to determine
+    what information and support you can provide to the customer regarding subject-rights.
+  good_enough: A list of processing purposes for all relevant data is documented and accessible to those
+    drafting the support procedure.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity is necessary to inform the customer
+    about their subject-rights and any limitations or exceptions.
+  good_enough: Each processing activity has its lawful basis identified and recorded, even if not yet
+    fully mapped to all data flows.
+- ref: Art.28
+  standard_id: GDPR:2016/679
+  title: Processor Obligations
+  category: cross_role
+  rationale: GDPR Article 28 sets out the legal requirements for processors to assist controllers in fulfilling
+    data subject rights. Your procedure must align with these obligations.
+  good_enough: A summary of Article 28 requirements is available and reviewed, with key obligations identified
+    for inclusion in the support procedure.

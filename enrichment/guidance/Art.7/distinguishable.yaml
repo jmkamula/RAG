@@ -1,0 +1,17 @@
+must_id: item:Art.7:distinguishable
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Consent request distinguishable from other matters (separate, clear-language statement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the consent request as a standalone section or checkbox, clearly separated from other terms
+  or agreements in your procedure.
+- State the consent language in plain, understandable terms, avoiding legal jargon or bundled requests
+  that could confuse the individual.
+- Retain a dated copy of the consent form or screen as presented to users, showing the separate and clear
+  consent statement.
+- Name the person responsible for reviewing and updating the consent wording, ensuring it remains distinct
+  and understandable.

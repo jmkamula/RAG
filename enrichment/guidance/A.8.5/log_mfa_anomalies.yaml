@@ -1,0 +1,19 @@
+must_id: item:A.8.5:log_mfa_anomalies
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: MFA-prompt fatigue / push-bombing detection
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each authentication attempt with timestamp, user identifier, authentication method, and whether
+  multi-factor authentication was prompted and completed.
+- Document all failed or repeated MFA prompts, including the number of prompts sent within a defined time
+  window for each user.
+- Assign responsibility to a named individual or role to review authentication logs regularly for patterns
+  of excessive MFA prompts or push notifications.
+- Name the detection mechanism for MFA-prompt fatigue explicitly; avoid generic descriptions like "alerts
+  are monitored" without specifying how push-bombing is identified.
+- Retain evidence of investigations and actions taken in response to suspected push-bombing incidents,
+  including dates, findings, and responsible personnel.

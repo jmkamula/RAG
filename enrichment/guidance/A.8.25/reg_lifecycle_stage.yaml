@@ -1,0 +1,17 @@
+must_id: item:A.8.25:reg_lifecycle_stage
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Per-project current lifecycle stage (initiation / design / build / test / release / operate)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the current lifecycle stage for each development project in the register, using clear terms like
+  initiation, design, build, test, release, or operate.
+- Name the project owner as a specific individual responsible for updating the lifecycle stage, not as
+  a team or department.
+- Date each entry or update to the project's lifecycle stage to show when the information was last reviewed
+  or changed.
+- Cross-reference each project entry with supporting documentation, such as project plans or meeting minutes,
+  that confirm the stated lifecycle stage.

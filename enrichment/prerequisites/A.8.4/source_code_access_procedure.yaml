@@ -1,0 +1,40 @@
+leaf_id: req:A.8.4:source_code_access_procedure
+control_ref: A.8.4
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, teams, and code repositories are in-scope for your ISMS before
+    defining how source code access is managed. This ensures your procedure covers all relevant assets
+    and avoids gaps.
+  good_enough: A clear, documented scope that identifies which business units, applications, and repositories
+    are included in the ISMS—even if some boundaries are still being finalized.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: A current asset register is needed to identify which code repositories and related assets
+    require access controls. Without this, you can't reliably define or enforce source code access procedures.
+  good_enough: A working list of code repositories and key supporting assets, with basic ownership and
+    criticality information, is available and up to date.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: You must know how different types of source code and related assets are classified to set
+    appropriate access rules and exceptions. The procedure should align with these classifications.
+  good_enough: A documented scheme that defines at least basic levels (e.g., public, internal, confidential)
+    for source code and related assets, even if not all assets are fully classified yet.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles is essential for defining who can approve, provision, and review
+    source code access. The procedure relies on these role definitions to function.
+  good_enough: A list or matrix showing who is responsible for access management, approvals, and oversight
+    for source code, even if some roles are still being refined.

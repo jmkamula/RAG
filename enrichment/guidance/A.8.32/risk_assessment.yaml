@@ -1,0 +1,17 @@
+must_id: item:A.8.32:risk_assessment
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Per-change risk assessment (impact / blast radius / rollback complexity)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a risk assessment for each proposed change, including potential impact, affected systems, and
+  complexity of rollback, in the change request record.
+- Name the individual who performed the risk assessment for each change, ensuring a specific person is
+  listed rather than a team or generic role.
+- Record the date the risk assessment was completed and link it to the corresponding change request for
+  traceability.
+- Attach evidence of management review and approval of the risk assessment before implementing the change,
+  such as a signed or electronically approved record.

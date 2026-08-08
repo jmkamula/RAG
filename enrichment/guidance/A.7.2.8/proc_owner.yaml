@@ -1,0 +1,17 @@
+must_id: item:A.7.2.8:proc_owner
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Named owner (DPO + Privacy Office)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the RoPA Maintenance Procedure as a specific individual, such as the Data Protection
+  Officer, not a group or department.
+- Document the appointment of the owner in the procedure, including the full name, job title, and date
+  of assignment.
+- Record the Privacy Office as a supporting party, listing contact details and the date their role was
+  confirmed.
+- Retain a signed and dated approval from the named owner confirming their responsibility for maintaining
+  the RoPA.

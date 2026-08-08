@@ -1,0 +1,16 @@
+must_id: item:A.5.11:reg_trigger_type
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Trigger type per row (termination / role_change / contract_end / secondment_end / agreement_change)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'List the trigger type for each asset return entry, using only the approved categories: termination,
+  role_change, contract_end, secondment_end, or agreement_change.'
+- Record the date the trigger was identified for each row to show timely recognition of the asset return
+  event.
+- Name the individual responsible for confirming the trigger type per entry, not just a team or department.
+- Cross-reference each trigger type entry with supporting documentation, such as termination letters or
+  contract change notices.

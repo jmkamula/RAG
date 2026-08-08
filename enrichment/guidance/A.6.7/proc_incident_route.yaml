@@ -1,0 +1,19 @@
+must_id: item:A.6.7:proc_incident_route
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Incident-handling route for remote-context incidents (lost device, suspected unauthorised access
+  at remote site, family-access exposure) — cross-link to A.5.24 incident response
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step process for reporting remote work incidents such as lost devices, suspected
+  unauthorized access, or family member exposure.
+- Cross-reference the remote incident reporting process to your main incident response procedure as defined
+  under ISO27001:2022 control A.5.24.
+- Name a specific individual or role responsible for receiving and triaging remote work incident reports,
+  avoiding generic terms like "the team".
+- Record the date of the most recent review or update of this procedure to show it is current and maintained.
+- State the communication channels remote workers must use to report incidents, such as a dedicated email
+  or hotline, and provide clear contact details.

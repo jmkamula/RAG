@@ -1,0 +1,17 @@
+must_id: item:A.5.26:classification_link
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: References incident classification used at triage (links to A.5.25)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the incident classification scheme from your triage process within the Incident Response
+  Procedure, citing the exact document title and version.
+- State where in the Incident Response Procedure the classification scheme is applied, using section numbers
+  or headings for clarity.
+- Name the person responsible for maintaining alignment between the classification scheme and the response
+  procedure, listing their full name and job title.
+- Attach or link the current classification scheme directly in the Incident Response Procedure, avoiding
+  generic placeholders or references to "see policy".

@@ -1,0 +1,17 @@
+must_id: item:Art.36:rev_next_date
+control_ref: Art.36
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Prior Consultation Program in a clearly visible section of
+  the program documentation.
+- Record the review date in a version-controlled document or register, including the date of entry and
+  the person responsible.
+- Name the responsible individual for scheduling and conducting the review, avoiding generic titles like
+  "the team" or "compliance department".
+- Cross-reference the stated review date with your organization's compliance calendar or review schedule
+  to ensure consistency.

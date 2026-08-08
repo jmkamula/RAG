@@ -1,0 +1,39 @@
+leaf_id: req:Art.41:applicable_scope
+control_ref: Art.41
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear record of what processing activities your organization undertakes to determine
+    which codes of conduct and jurisdictions are relevant for monitoring under Art.41.
+  good_enough: A current, high-level RoPA that lists main processing activities, locations, and responsible
+    parties is sufficient to identify monitoring scope.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope statement defines the organizational and geographical boundaries for compliance,
+    which directly impacts the jurisdiction and extent of monitoring required under Art.41.
+  good_enough: A documented ISMS scope that outlines included business units, locations, and systems is
+    enough to proceed.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: Knowing whether a Data Protection Officer is appointed clarifies who is responsible for overseeing
+    monitoring activities and liaising with accreditation bodies.
+  good_enough: A named DPO (or a documented decision that one is not required) is sufficient for drafting
+    the monitoring scope.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful bases for processing helps determine which processing activities
+    fall under codes of conduct and thus within the monitoring scope.
+  good_enough: A summary table or list of lawful bases for key processing activities is enough to inform
+    the scope note.

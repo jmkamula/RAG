@@ -1,0 +1,17 @@
+must_id: item:A.5.9:location
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Location or hosting system where the asset resides (data centre, cloud region, endpoint pool)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the physical or virtual location for each asset in the inventory, specifying data centre address,
+  cloud region, or endpoint pool name.
+- Cross-reference each asset entry with its corresponding hosting system or platform, using unique identifiers
+  or URLs where applicable.
+- Name the asset owner as a specific individual responsible for the asset’s location details, not as a
+  team or department.
+- Date each inventory update to show when the location or hosting system information was last verified
+  or changed.

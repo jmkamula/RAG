@@ -1,0 +1,14 @@
+must_id: item:Art.32:reg_owner
+control_ref: Art.32
+standard_id: GDPR:2016/679
+must_text: Per-row owner
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner for each row in the Risk-Appropriate Measures Register, not
+  a team or department.
+- Record the date each owner was assigned responsibility for their respective measure in the register.
+- Document contact details for each owner so their accountability can be verified if needed.
+- Review and update the owner assignments annually, recording the review date and any changes made.

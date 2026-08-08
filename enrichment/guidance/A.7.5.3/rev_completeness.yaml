@@ -1,0 +1,19 @@
+must_id: item:A.7.5.3:rev_completeness
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+must_text: Completeness check — actual transfer events reconciled against log
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for reconciling actual transfer events against the transfer log in a dated
+  assignment record.
+- Document the process used to compare all actual data transfers with entries in the transfer log, including
+  the frequency and method.
+- Record the results of each reconciliation, noting any discrepancies and actions taken, in a dated review
+  log.
+- Attach supporting evidence, such as screenshots or export files, showing the comparison between actual
+  transfer records and the log for each review period.
+- Specify any missing or incomplete entries found, and document the corrective steps taken, avoiding generic
+  statements like "no issues found" without supporting detail.

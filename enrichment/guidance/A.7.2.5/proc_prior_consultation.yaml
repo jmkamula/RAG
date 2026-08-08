@@ -1,0 +1,19 @@
+must_id: item:A.7.2.5:proc_prior_consultation
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: Prior-consultation trigger — where residual high risk remains, SA consulted per Art.36
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that if a Privacy Impact Assessment finds residual high risk, the supervisory
+  authority must be consulted before processing begins.
+- Document the specific criteria used to determine when a risk remains "high" after mitigation, referencing
+  GDPR Article 36.1.
+- Assign responsibility for initiating supervisory authority consultation to a named individual, not a
+  generic role or team.
+- Record each consultation with the supervisory authority, including date, contact details, and outcome,
+  in a dedicated register.
+- Include a step requiring retention of all correspondence with the supervisory authority as evidence
+  of compliance with the prior-consultation requirement.

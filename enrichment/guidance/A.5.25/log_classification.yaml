@@ -1,0 +1,19 @@
+must_id: item:A.5.25:log_classification
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Classification per row (event / near-miss / incident / false positive) with severity
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each security event in the triage log with a unique reference number, date, and a brief description
+  of what occurred.
+- Assign a classification to each row as either "event," "near-miss," "incident," or "false positive"
+  based on documented criteria.
+- State the severity level for each entry using a predefined scale, such as "low," "medium," or "high,"
+  and reference the applied criteria.
+- Name the reviewer who performed the classification and severity assessment for each entry, including
+  the review date.
+- Avoid using vague or generic classifications; specify the exact category for each row rather than leaving
+  it blank or using placeholders.

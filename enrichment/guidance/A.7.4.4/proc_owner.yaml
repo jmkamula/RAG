@@ -1,0 +1,16 @@
+must_id: item:A.7.4.4:proc_owner
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+must_text: Named owner (Privacy Engineering + Data Science)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the PII Minimization Procedure, not just "Privacy Engineering"
+  or "Data Science" teams.
+- Document the owner's full name and job title in the header or introduction section of the procedure.
+- Record the date the owner was assigned responsibility for the procedure in an official change log or
+  version history.
+- Obtain the owner's signature or written acknowledgement confirming acceptance of responsibility for
+  the procedure.

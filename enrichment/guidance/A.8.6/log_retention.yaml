@@ -1,0 +1,18 @@
+must_id: item:A.8.6:log_retention
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Log retention period defined and enforced (cross-link to A.8.15)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact retention period for the Capacity Monitoring Log in a documented policy, referencing
+  both control A.8.6 and A.8.15.
+- Cross-reference the retention period in the Capacity Monitoring Log with the central data retention
+  schedule to show alignment.
+- Assign a named individual responsible for enforcing the retention period, listing their full name and
+  role in the policy document.
+- Record the date when retention settings were last reviewed or updated, including the name of the reviewer.
+- Avoid using vague retention terms like "as needed" or "ongoing"—specify a clear time frame such as "12
+  months" or "3 years."

@@ -1,0 +1,19 @@
+must_id: item:A.8.23:monitoring_req
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: Monitoring requirement for attempted access to blocked sites (cross-link to A.8.16)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Web Filtering Policy that all attempts to access blocked websites are logged and regularly
+  monitored.
+- Cross-reference the monitoring process in the Web Filtering Policy to the relevant section of the Logging
+  and Monitoring Policy as required by A.8.16.
+- Name a specific individual or role responsible for reviewing blocked site access logs, avoiding generic
+  terms like "IT team".
+- Record the schedule for reviewing these logs, including the review frequency and the date of the most
+  recent review.
+- Retain evidence of completed log reviews, such as signed or timestamped review records, for auditor
+  inspection.

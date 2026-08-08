@@ -1,0 +1,17 @@
+must_id: item:A.5.32:renewal_tracking
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Renewal dates tracked with lead-time alerts (so expiring licences are renewed before lapse)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record all licensed software titles, license keys, and expiry dates in a central inventory, including
+  the responsible owner for each entry.
+- Set up automated alerts in your inventory system to notify the named owner at least 30 days before each
+  license expiry date.
+- Document the renewal decision and action taken for each license by saving dated confirmation emails
+  or signed renewal forms.
+- Name the owner as a specific individual for each software license—avoid using generic terms like "IT
+  team" or "department."

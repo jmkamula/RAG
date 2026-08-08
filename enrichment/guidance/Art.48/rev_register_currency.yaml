@@ -1,0 +1,19 @@
+must_id: item:Art.48:rev_register_currency
+control_ref: Art.48
+standard_id: GDPR:2016/679
+must_text: Register currency — every actual request handled per procedure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each foreign authority data request in a dedicated register, including request date, authority
+  name, and case reference number.
+- Document the procedure followed for each request, referencing the specific steps taken and the personnel
+  involved.
+- Name the individual responsible for maintaining the register, ensuring the owner is a specific person,
+  not a team or department.
+- Confirm that each entry in the register is dated and includes a clear outcome or resolution for the
+  request.
+- Review the register quarterly and sign off on its completeness, retaining evidence of each review date
+  and reviewer name.

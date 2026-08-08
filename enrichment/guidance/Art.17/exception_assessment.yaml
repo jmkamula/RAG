@@ -1,0 +1,19 @@
+must_id: item:Art.17:exception_assessment
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Assessment of Art.17.3 exceptions with documented refusal grounds where applicable
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each erasure request with the date received, requester’s identity, and data subject’s details
+  in a dedicated erasure log.
+- Assess the request against all five Article 17.3 exception categories and record which, if any, apply
+  to the specific case.
+- State the precise grounds for refusal in writing, referencing the relevant Article 17.3 exception, and
+  include this in the case file.
+- Name the decision-maker as a specific individual, not a team or department, and have them sign and date
+  the refusal decision.
+- Retain all correspondence with the requester, including the refusal notice and supporting rationale,
+  as evidence in the erasure request record.

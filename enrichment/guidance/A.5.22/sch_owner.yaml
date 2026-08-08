@@ -1,0 +1,16 @@
+must_id: item:A.5.22:sch_owner
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Named owner accountable for executing the review per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner for each supplier review entry, avoiding generic labels like
+  "the team" or department names.
+- Record the owner's full name and job title in a dedicated column within the Supplier Review Schedule
+  Register.
+- Document the date when each owner was assigned responsibility for their respective supplier review entry.
+- Review and update the register at least annually to confirm that owner assignments remain current and
+  accurate.

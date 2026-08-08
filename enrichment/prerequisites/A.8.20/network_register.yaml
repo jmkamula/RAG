@@ -1,0 +1,39 @@
+leaf_id: req:A.8.20:network_register
+control_ref: A.8.20
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The network inventory must align with the defined ISMS scope, ensuring only relevant networks
+    and segments are included. Without a clear scope, the register may be incomplete or overbroad.
+  good_enough: A documented scope statement that clearly lists in-scope locations, systems, and network
+    boundaries.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The network inventory builds on the asset register, which should already identify key network
+    assets. This ensures the network register is comprehensive and consistent with other asset records.
+  good_enough: An initial asset register listing all major network components and infrastructure, even
+    if some details are pending.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Each network segment in the register must be classified according to the organization’s scheme.
+    Without this, you cannot assign appropriate classifications to network zones.
+  good_enough: A basic, documented classification scheme with clear categories for confidentiality, integrity,
+    and availability.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: The register must identify owners for each network segment. Defined roles and responsibilities
+    ensure accountability for maintaining and updating the inventory.
+  good_enough: A list of assigned owners or responsible persons for network assets, even if some assignments
+    are provisional.

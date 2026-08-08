@@ -1,0 +1,20 @@
+must_id: item:A.8.12:bl_classification_ruleset
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Classification-driven ruleset configured (cross-link to A.5.12 — stronger rules for higher
+  classifications)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the current data classification scheme, including all classification levels and definitions,
+  in a dated and approved record.
+- Cross-reference each DLP rule to its corresponding data classification level, showing how higher classifications
+  trigger stricter controls.
+- Name the individual responsible for maintaining and updating the DLP ruleset, avoiding generic titles
+  like "IT" or "Security Team".
+- Record the date and outcome of the most recent review confirming that DLP rules align with both classification
+  policy and A.5.12 requirements.
+- Attach evidence of system configuration or screenshots demonstrating that stricter DLP rules are enforced
+  for higher classification levels.

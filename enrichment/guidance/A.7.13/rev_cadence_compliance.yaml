@@ -1,0 +1,19 @@
+must_id: item:A.7.13:rev_cadence_compliance
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Cadence compliance per equipment class (% of due-maintenance actually completed in period)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all equipment classes covered by the maintenance program, with a named owner responsible for each
+  class.
+- Record the scheduled maintenance dates and actual completion dates for each equipment item in a dated
+  log for the review period.
+- Calculate and document the percentage of maintenance tasks completed on time per equipment class for
+  the review period.
+- Attach evidence of completed maintenance, such as signed work orders or digital confirmations, for a
+  sample of items in each class.
+- Specify the cadence owner as a named individual, not a generic team or department, in the maintenance
+  program documentation.

@@ -1,0 +1,16 @@
+must_id: item:A.7.3.3:rev_next_date
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Notice Delivery Program in the review documentation, using
+  a clear and specific calendar date.
+- Record the name of the individual responsible for scheduling the next review, not just a role or department.
+- Confirm the review documentation is dated and approved by a designated manager to show when the last
+  review was completed.
+- Avoid leaving the next review date blank or stating vague intervals like "annually"; specify the exact
+  future date.

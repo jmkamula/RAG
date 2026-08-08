@@ -1,0 +1,39 @@
+leaf_id: req:7.1:resource_determination_procedure
+control_ref: '7.1'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines the boundaries and applicability of the ISMS, which is essential
+    for determining what resources are needed and where they should be allocated.
+  good_enough: A documented scope that clearly identifies included business units, locations, and processes
+    is available and has management approval.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: direct
+  rationale: The risk assessment identifies threats, vulnerabilities, and risk levels, directly informing
+    what resources are required to address and treat those risks.
+  good_enough: A completed and current risk assessment exists, listing key risks and their owners, even
+    if some risk treatments are still being finalized.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The security policy sets the overall direction and priorities for information security, which
+    guides resource allocation decisions and approval criteria.
+  good_enough: A formally approved policy is published and accessible to relevant staff, outlining security
+    objectives and commitments.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that resource needs are identified,
+    justified, and approved by the right people.
+  good_enough: A documented matrix or list exists showing who is responsible for ISMS activities, even
+    if some roles are shared or interim.

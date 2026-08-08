@@ -1,0 +1,18 @@
+must_id: item:Art.29:rev_date
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Processing Under Authority Program in a dated entry within
+  your compliance tracking system.
+- Name the individual responsible for conducting the review, listing their full name and job title in
+  the review documentation.
+- Cross-reference the documented review date against your planned review schedule to confirm it falls
+  within the required interval.
+- Attach evidence of the review, such as meeting minutes or a signed review summary, to the program’s
+  compliance records.
+- Specify the next planned review date in the documentation to avoid missing future periodic requirements.

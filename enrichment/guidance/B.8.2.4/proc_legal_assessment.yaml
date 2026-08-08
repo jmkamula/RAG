@@ -1,0 +1,17 @@
+must_id: item:B.8.2.4:proc_legal_assessment
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Legal assessment step — DPO / legal counsel assesses the instruction against applicable legislation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named Data Protection Officer or legal counsel to perform the legal assessment, recording their
+  full name and role in the procedure document.
+- Document the date and summary of each legal assessment, specifying the legislation or regulation considered
+  for every instruction reviewed.
+- Retain a signed or digitally acknowledged record from the DPO or legal counsel confirming completion
+  of the legal assessment for each instruction.
+- Avoid using generic statements like "reviewed by legal" without identifying the individual and the specific
+  law or regulation checked.

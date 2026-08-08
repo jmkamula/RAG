@@ -1,0 +1,18 @@
+must_id: item:8.3:rev_residual_revisit
+control_ref: '8.3'
+standard_id: ISO27001:2022
+must_text: Residual revisit check — completed items had owner re-affirm residual; divergent residuals
+  escalated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each completed treatment item with its assigned owner and the date the item was marked as complete.
+- Request the assigned owner to re-confirm the current residual risk status in writing, including their
+  name and the date of confirmation.
+- Escalate any residual risk assessments that differ from the previously agreed level to a named decision-maker,
+  documenting the escalation date and outcome.
+- Attach evidence of owner re-affirmation and any escalation outcomes to the treatment execution program
+  review record.
+- Name the owner as a specific individual for each item — do not use group names or job titles alone.

@@ -1,0 +1,19 @@
+must_id: item:4.2:proc_workshop
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Workshop / interview cadence with key party categories
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all key stakeholder categories relevant to your information security objectives in a dated stakeholder
+  register.
+- Name a specific individual responsible for scheduling and running stakeholder workshops or interviews,
+  not just a team or department.
+- Record the planned frequency and actual dates of workshops or interviews for each stakeholder category
+  in a calendar or tracking log.
+- Retain attendance records or meeting notes that show participation from each identified stakeholder
+  category at the agreed cadence.
+- Review and update the stakeholder register and engagement schedule at least annually, documenting the
+  review date and any changes made.

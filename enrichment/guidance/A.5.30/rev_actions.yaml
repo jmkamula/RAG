@@ -1,0 +1,20 @@
+must_id: item:A.5.30:rev_actions
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Action items captured (e.g. add new service, tighten RTO for service that consistently misses,
+  retire stale scenario, refresh test schedule)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record all action items from each ICT readiness program review in a dated log, specifying the issue,
+  required change, and responsible individual.
+- Assign each action item to a named person, not a team or department, and include their contact details
+  in the action log.
+- Document the rationale for each action item, referencing the specific review findings or test results
+  that triggered the adjustment.
+- Track the completion status and date for each action item in the same log, updating it as actions are
+  resolved.
+- Retain meeting minutes or review notes that clearly show discussion and agreement on each action item,
+  signed or acknowledged by participants.

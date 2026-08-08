@@ -1,0 +1,17 @@
+must_id: item:Art.46:rev_tia_currency
+control_ref: Art.46
+standard_id: GDPR:2016/679
+must_text: TIA currency — TIAs refreshed where third-country law has changed materially
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to monitor legal developments in relevant third countries and record this
+  responsibility in the Safeguards Program documentation.
+- Document the date of the most recent review of each Transfer Impact Assessment (TIA) and the legal sources
+  checked for changes.
+- Record any identified material changes in third-country law and the decision to refresh or not refresh
+  the TIA, including the rationale and date.
+- Name the reviewer as a specific person—do not use roles like "the team" or "Legal Department"—in the
+  TIA review log.

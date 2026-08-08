@@ -1,0 +1,41 @@
+leaf_id: req:Art.39:applicable_scope
+control_ref: Art.39
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Designation of the Data Protection Officer
+  category: foundational
+  rationale: The DPO's formal scope of tasks (Art.39) cannot be defined until a DPO has been officially
+    designated and their role established under Art.37. This ensures there is a named individual or function
+    to assign responsibilities to.
+  good_enough: The organisation has documented the DPO appointment, including contact details and a basic
+    role description.
+- ref: Art.38
+  standard_id: GDPR:2016/679
+  title: Position of the Data Protection Officer
+  category: direct
+  rationale: Art.39 tasks require that the DPO's independence, resources, and reporting lines (as set
+    out in Art.38) are already in place. Without these, the DPO cannot effectively carry out or prioritise
+    their responsibilities.
+  good_enough: The DPO's reporting structure, independence, and resource allocation are described in writing,
+    even if not yet fully operational.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: direct
+  rationale: The DPO's scope of tasks (Art.39) must align with the organisation’s actual processing activities.
+    A current RoPA ensures the DPO’s attention is focused on real data flows and risks.
+  good_enough: A draft or working list of processing activities exists, even if not fully complete or
+    formally signed off.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The DPO’s operational focus should be consistent with the boundaries of the ISMS, especially
+    where privacy and information security overlap. This avoids gaps or overlaps in risk coverage.
+  good_enough: The ISMS scope is defined in a brief document or diagram, showing which business units,
+    systems, and locations are in scope.

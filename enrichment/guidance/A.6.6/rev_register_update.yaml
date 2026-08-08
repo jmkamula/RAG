@@ -1,0 +1,17 @@
+must_id: item:A.6.6:rev_register_update
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Changes propagated to the live template and to the signer-re-signing plan
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and details of each NDA template review in a change log, including who conducted the
+  review and the outcome.
+- Update the live NDA template immediately after approved changes, and save the new version with a unique
+  version number and date.
+- Cross-reference the updated template version in the signer re-signing plan, ensuring the plan lists
+  which signers need to re-sign and by when.
+- Name the person responsible for updating both the live template and the re-signing plan, avoiding generic
+  roles like "Legal Team" or "HR".

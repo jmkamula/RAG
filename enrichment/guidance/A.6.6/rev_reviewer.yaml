@@ -1,0 +1,17 @@
+must_id: item:A.6.6:rev_reviewer
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Legal counsel + InfoSec lead jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the Legal Counsel and Information Security Lead as joint reviewers in the NDA template review
+  record for each review cycle.
+- Document the date each reviewer completes their assessment on the NDA template review checklist or meeting
+  minutes.
+- Require both reviewers to sign or formally approve the reviewed NDA template, capturing their names
+  and approval dates.
+- Avoid listing a generic group or department as reviewer; specify named individuals for both required
+  roles.

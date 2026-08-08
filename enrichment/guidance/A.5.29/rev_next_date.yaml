@@ -1,0 +1,17 @@
+must_id: item:A.5.29:rev_next_date
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Next planned review date stated (within 180d of this review)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact next planned review date in the program review record, making sure it is no more than
+  180 days from the current review.
+- Record the name of the individual responsible for scheduling the next review, rather than listing a
+  team or department.
+- Document the date this review was completed, so the 180-day interval can be verified by counting from
+  this entry.
+- Retain a copy of the signed or approved review record that includes both the current and next review
+  dates.

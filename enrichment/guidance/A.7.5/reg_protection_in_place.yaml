@@ -1,0 +1,18 @@
+must_id: item:A.7.5:reg_protection_in_place
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Per-row protection measures actually deployed (matches procedure's per-threat list)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the actual protection measures deployed for each threat in the register, matching them to the
+  specific threat row by row.
+- Cross-reference each listed protection measure with the corresponding procedure or technical control
+  documentation to confirm alignment.
+- Name the person responsible for updating the register and verifying that each protection measure is
+  current and accurately described.
+- State the date each protection measure was last reviewed or updated in the register.
+- Avoid using generic descriptions like "standard controls" or "usual procedures"—specify the exact measures
+  implemented for each threat.

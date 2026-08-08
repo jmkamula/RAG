@@ -1,0 +1,20 @@
+must_id: item:Art.6:scope_special_overlay
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Special category overlay rule — Art.6 basis is in addition to (not instead of) Art.9 condition
+  where Art.9 applies
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all processing activities that involve special category (sensitive) personal data, referencing
+  the specific data types collected.
+- Document the lawful basis under Article 6 for each special category processing activity, including a
+  clear justification for selection.
+- Record the specific Article 9 condition relied upon for each special category processing activity, with
+  a dated entry and named decision-maker.
+- Cross-reference each processing activity to both its Article 6 lawful basis and Article 9 condition
+  in your data processing register.
+- Name the owner as a specific individual responsible for confirming both Article 6 and Article 9 requirements
+  are met — do not use a team or department.

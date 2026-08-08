@@ -1,0 +1,19 @@
+must_id: item:A.5.14:approved_channels
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Approved channel list (e.g. encrypted email, sanctioned file-sharing platforms, MFT solutions)
+  per classification level
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all approved information transfer channels, naming each tool or platform, for every data classification
+  level in the policy document.
+- Specify encryption or protection requirements for each channel and classification level, referencing
+  technical standards or configurations where relevant.
+- Name the policy owner as a specific individual, not a team or department, in the policy header or approval
+  section.
+- Record the date and name of the person who formally approved the channel list in the policy document.
+- Cross-reference the approved channel list in user guidance or training materials to demonstrate alignment
+  with documented policy.

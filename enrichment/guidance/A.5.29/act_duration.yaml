@@ -1,0 +1,16 @@
+must_id: item:A.5.29:act_duration
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Duration per record (start time, end time, restoration time)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact start time and date when the plan was activated in each Per-Activation Plan Record.
+- Enter the end time and date when the plan was deactivated or the incident was resolved in the same record.
+- Document the restoration time, showing when normal operations resumed, as a separate field in the record.
+- Name the individual responsible for entering these times, ensuring a specific person is listed rather
+  than a team or department.
+- Review each record for missing or estimated times, and update with precise timestamps to avoid gaps
+  an auditor would flag.

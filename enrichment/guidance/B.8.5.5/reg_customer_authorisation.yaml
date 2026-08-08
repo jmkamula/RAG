@@ -1,0 +1,16 @@
+must_id: item:B.8.5.5:reg_customer_authorisation
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Customer authorisation reference per row (contract clause / one-off approval)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific contract clause or written approval reference for each disclosure decision in the
+  register.
+- Name the customer contact who provided the authorisation, including their full name and job title.
+- Enter the date the authorisation was received for each disclosure decision.
+- Attach or link the actual authorisation document or email for each entry in the register.
+- Avoid using generic terms like "per contract" or "customer approved" without a traceable reference to
+  the actual authorisation.

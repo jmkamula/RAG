@@ -1,0 +1,49 @@
+leaf_id: req:B.8.5.7:subcontractor_engagement_procedure
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know which parts of your business and which processing activities are in-scope
+    for privacy controls before you can define subcontractor engagement procedures. This ensures the procedure
+    covers all relevant subprocessors.
+  good_enough: A clear, documented scope that identifies all business units and processing activities
+    subject to ISO 27701 and subcontractor involvement.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that the right people are responsible for managing subcontractor
+    relationships and approvals, which is essential for enforcing customer authorisation and contract
+    requirements.
+  good_enough: Documented roles showing who approves, manages, and monitors subcontractor engagements
+    for privacy-relevant processing.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: You must know and document the purpose of processing before you can determine if a subcontractor
+    is appropriate and what privacy controls must flow down to them.
+  good_enough: A list of processing purposes for each data flow or activity where subcontractors might
+    be engaged.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for processing is necessary to ensure that any subcontractor
+    engagement remains compliant and that required contractual terms are included.
+  good_enough: A summary of lawful bases for all processing activities that may involve subcontractors,
+    even if not fully mapped to every data flow yet.
+- ref: B.8.5.1
+  standard_id: ISO27701:2019
+  title: Processor Contracts
+  category: direct
+  rationale: You need a baseline contract template or checklist for processor relationships before you
+    can extend it to cover subcontractors and ensure required privacy controls are flowed down.
+  good_enough: A draft or template contract/checklist covering key processor obligations, ready to be
+    adapted for subcontractor use.

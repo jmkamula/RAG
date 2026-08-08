@@ -1,0 +1,16 @@
+must_id: item:5.2:rev_date
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the information security policy in a policy review log, including
+  the name of the reviewer.
+- Cross-reference the documented review date with the planned review interval stated in the policy to
+  confirm it falls within the required timeframe.
+- Name the reviewer as a specific individual, not a group or department, to avoid ambiguity in accountability.
+- Retain a copy of the meeting minutes or approval record that confirms the review took place on the stated
+  date.

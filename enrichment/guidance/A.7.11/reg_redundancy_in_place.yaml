@@ -1,0 +1,19 @@
+must_id: item:A.7.11:reg_redundancy_in_place
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Per-row redundancy in place (matches the policy's required redundancy)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the required level of utility redundancy for each site as stated in your approved policy, including
+  specific backup sources or failover arrangements.
+- Record the actual redundancy measures in place for each utility at every site, listing equipment, providers,
+  or systems with installation or contract dates.
+- Cross-reference each utility entry in the register to supporting evidence, such as maintenance logs,
+  test results, or supplier agreements, dated within the last 12 months.
+- Name the responsible individual for verifying redundancy per site, avoiding generic roles like "Facilities
+  Team" or "IT Department."
+- Confirm that each register entry is reviewed and signed off by a manager or site lead, with the review
+  date clearly shown.

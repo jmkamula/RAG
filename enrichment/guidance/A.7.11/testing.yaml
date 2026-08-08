@@ -1,0 +1,19 @@
+must_id: item:A.7.11:testing
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Periodic testing arrangements (UPS run-time tests, generator load tests, ATS transfer tests)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the schedule for periodic UPS run-time, generator load, and ATS transfer tests, including specific
+  test dates for the past 12 months.
+- Record the results of each test, noting the date, responsible person, and any issues or failures identified
+  during testing.
+- Assign a named individual as the owner responsible for overseeing and signing off on each test, avoiding
+  generic titles like "IT team."
+- Retain evidence of corrective actions taken for any failed tests, including dated records of issue resolution
+  and follow-up testing.
+- Review and update the testing procedure annually, capturing the date of the latest review and the name
+  of the reviewer.

@@ -1,0 +1,16 @@
+must_id: item:Art.7:child_overlay
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Reference to Art.8 child overlay where service is information-society and may attract minors
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Consent Management Procedure whether your service qualifies as an information-society service
+  that may attract minors.
+- Reference Article 8 of GDPR directly within the procedure if your service is likely to be accessed by
+  children.
+- Name a specific individual responsible for assessing and updating the child consent overlay, avoiding
+  generic roles like "the team."
+- Document the date and version of the procedure where the Article 8 overlay is referenced or updated.

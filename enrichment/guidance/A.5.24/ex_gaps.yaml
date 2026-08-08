@@ -1,0 +1,18 @@
+must_id: item:A.5.24:ex_gaps
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Gaps identified per record (where the framework or team fell short; severity per gap)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each gap identified during the exercise, describing specifically how the framework or team did
+  not meet expected procedures.
+- Assign a severity rating to each gap using a defined scale, and include the date and name of the person
+  making the assessment.
+- Name the individual responsible for addressing each gap, avoiding generic roles like "the team" or "management."
+- Attach supporting evidence for each gap, such as screenshots, logs, or meeting notes, to substantiate
+  the findings.
+- Review and sign the completed activation record by a designated authority to confirm all gaps and severities
+  are documented.

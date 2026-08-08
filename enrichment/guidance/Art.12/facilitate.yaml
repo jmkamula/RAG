@@ -1,0 +1,17 @@
+must_id: item:Art.12:facilitate
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Mechanism to facilitate exercise of rights (rights portal, dedicated email, in-app flow)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Describe the exact mechanism provided for individuals to exercise their rights, such as a web portal,
+  dedicated email, or in-app feature, in your procedure document.
+- Name the specific individual or role responsible for monitoring and responding to rights requests, avoiding
+  generic labels like "the team" or "Support."
+- Record the date when the mechanism was last tested or verified as operational, and keep evidence of
+  the test or check.
+- Document the process for acknowledging receipt of rights requests, including a sample confirmation message
+  and the timeframe for response.

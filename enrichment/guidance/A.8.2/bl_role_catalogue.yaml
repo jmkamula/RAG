@@ -1,0 +1,17 @@
+must_id: item:A.8.2:bl_role_catalogue
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Privileged role catalogue per system (which roles exist, what they grant)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all privileged roles for each system in a central register, including the exact permissions each
+  role grants.
+- Describe the business purpose for each privileged role, linking it to specific system functions or administrative
+  tasks.
+- Name the owner of each privileged role as a specific individual, not a group or generic title.
+- Date and version-control the privileged role catalogue to show when it was last reviewed or updated.
+- Cross-reference each privileged role to the documented access request and approval process for that
+  system.

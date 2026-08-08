@@ -1,0 +1,16 @@
+must_id: item:A.5.28:rev_reviewer
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Reviewer identity (InfoSec lead + legal/compliance counsel jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as the current Information Security lead by full name and job title in the program
+  review record.
+- Record the legal or compliance counsel’s full name and job title as joint reviewer in the same review
+  documentation.
+- Sign and date the review document with both reviewers’ signatures to confirm joint participation.
+- Avoid listing a group or department as reviewer; specify named individuals to meet accountability requirements.
+- Retain the signed and dated review record in a location accessible for future audits.

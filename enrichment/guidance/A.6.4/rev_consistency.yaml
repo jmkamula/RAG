@@ -1,0 +1,20 @@
+must_id: item:A.6.4:rev_consistency
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Consistency analysis — case outcomes reviewed for consistent application across cases / demographics
+  (avoids discriminatory enforcement patterns)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual or committee to conduct the consistency analysis of disciplinary case outcomes,
+  recording their names and roles in a dated document.
+- Document the review process, including the specific cases and demographic data compared, in a table
+  or report with clear references to each case file.
+- Record the analysis findings, highlighting any patterns or inconsistencies identified, and include recommendations
+  for addressing any issues found.
+- Sign and date the final review report, ensuring it is approved by a designated senior manager or compliance
+  officer.
+- Avoid using generic summaries or omitting demographic data, as auditors will flag missing or vague evidence
+  of consistency checks.

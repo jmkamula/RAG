@@ -1,0 +1,17 @@
+must_id: item:B.8.5.3:reg_timestamp
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+must_text: Timestamp per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time of each processor disclosure event in a dedicated timestamp column for
+  every row in the event log.
+- Confirm that the timestamp format is consistent and includes both date and time to the minute or second
+  as appropriate.
+- Review the log to ensure no row is missing a timestamp; incomplete entries may cause auditors to question
+  the log’s reliability.
+- Assign responsibility for maintaining the log to a named individual, not a group or department, to ensure
+  accountability for accurate timestamping.

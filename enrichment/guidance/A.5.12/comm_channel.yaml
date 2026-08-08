@@ -1,0 +1,17 @@
+must_id: item:A.5.12:comm_channel
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Channel used (mandatory training module, classification guide, role-specific workshops)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact communication channel used to share the classification scheme, such as "mandatory training
+  module" or "role-specific workshop," in a dated log.
+- Name the individual responsible for delivering or coordinating the communication, ensuring a specific
+  person is listed rather than a team or department.
+- Retain a copy or screenshot of the communication material, such as the training module or guide, with
+  a visible date and distribution method.
+- Document attendance or completion records for recipients, including names and dates, if the channel
+  was interactive or required participation.

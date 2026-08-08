@@ -1,0 +1,19 @@
+must_id: item:Art.49:rev_sa_notifications
+control_ref: Art.49
+standard_id: GDPR:2016/679
+must_text: SA notifications audit — Art.49.1 second-paragraph notifications dispatched as required
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each instance where personal data is transferred under Article 49.1 derogations and record
+  the specific legal reason for the transfer.
+- Document the date, recipient, and supervisory authority notified for every applicable transfer, including
+  a copy of the notification correspondence.
+- Retain evidence that the notification was dispatched before or at the time of the transfer, such as
+  email timestamps or registered mail receipts.
+- Name the person responsible for sending each notification as a specific individual, not a generic role
+  or team.
+- Archive all supervisory authority responses or acknowledgments related to these notifications alongside
+  the original transfer records.

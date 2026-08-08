@@ -1,0 +1,48 @@
+leaf_id: req:A.8.3:applicable_systems_scope
+control_ref: A.8.3
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope statement defines which parts of the organization, processes, and systems
+    are covered by the ISMS. You can't determine which systems are governed by A.8.3 until the overall
+    ISMS scope is clear.
+  good_enough: A documented scope statement that clearly lists included business units, locations, and
+    system boundaries.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register identifies all information assets, including systems, that could be in
+    scope for classification and governance under A.8.3. Without it, you can't reliably list or justify
+    which systems are included.
+  good_enough: A current, reasonably complete list of information systems and assets, even if some details
+    are pending.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The classification scheme defines the tiers or categories used to classify systems and information.
+    This is essential for mapping systems to enforcement strictness under A.8.3.
+  good_enough: A documented scheme with clear definitions for each classification tier, even if not all
+    assets are yet classified.
+- ref: A.5.15
+  standard_id: ISO27001:2022
+  title: Access control
+  category: direct
+  rationale: Access control policies influence how classification tiers are enforced for different systems.
+    You need at least a baseline access control model to describe enforcement strictness.
+  good_enough: A basic access control policy or matrix showing how access is restricted by classification,
+    even if not fully implemented.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment helps prioritize which systems require stricter controls and informs the
+    rationale for including or excluding systems from A.8.3 governance.
+  good_enough: A recent risk assessment covering major systems, with documented risk levels and key findings.

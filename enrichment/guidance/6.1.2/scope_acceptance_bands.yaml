@@ -1,0 +1,19 @@
+must_id: item:6.1.2:scope_acceptance_bands
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Acceptance bands stated (low/medium/high → accept/treat thresholds)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the acceptance bands for risk levels, such as low, medium, and high, in your documented risk assessment
+  methodology.
+- Define clear thresholds for each band, specifying at what point risks must be accepted or treated, using
+  quantifiable criteria.
+- Name the individual who approved the acceptance bands and thresholds, ensuring this is a specific person
+  rather than a group or department.
+- Record the date when the acceptance bands and thresholds were last reviewed and approved in the methodology
+  document.
+- Attach the signed approval or meeting minutes confirming leadership agreement on the stated acceptance
+  bands and thresholds.

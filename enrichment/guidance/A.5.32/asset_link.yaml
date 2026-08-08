@@ -1,0 +1,20 @@
+must_id: item:A.5.32:asset_link
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Linkage to A.5.9 asset register — each licensed item is also an information asset; the two
+  registers must not drift
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each licensed software entry in the inventory to its corresponding record in the A.5.9
+  asset register using a unique asset identifier.
+- Record the date of the last reconciliation between the licensed software inventory and the asset register,
+  and keep a copy of the reconciliation report.
+- Name the individual responsible for maintaining both the software inventory and the asset register,
+  avoiding generic roles like "IT team."
+- Document any discrepancies found during reconciliation and the actions taken to resolve them, including
+  dates and responsible persons.
+- Retain evidence of periodic reviews, such as signed meeting minutes or review logs, confirming both
+  registers remain synchronized.

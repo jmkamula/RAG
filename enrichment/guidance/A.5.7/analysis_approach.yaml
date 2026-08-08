@@ -1,0 +1,20 @@
+must_id: item:A.5.7:analysis_approach
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Analysis approach defined (relevance to org assets, integrity verification, completeness, correlation,
+  prioritisation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the analysis approach used for threat intelligence, specifying how relevance to your organisation’s
+  assets is determined in a documented procedure.
+- Document the steps taken to verify the integrity and completeness of threat intelligence sources, including
+  who performs these checks and when.
+- State the method used to correlate and prioritise threat intelligence, referencing any tools, criteria,
+  or scoring models in use.
+- Assign a specific individual as the owner of the analysis process — do not list a team or department
+  as the owner.
+- Record the date of the last review or update of the analysis approach, ensuring it is not left undated
+  or marked as “ongoing.”

@@ -1,0 +1,19 @@
+must_id: item:A.5.13:pii_overlay
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: PII / personal-data overlay rule where applicable (additional labelling beyond confidentiality
+  level — e.g. 'Contains PII' footer for GDPR compliance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the procedure owner as a specific individual responsible for maintaining and updating the Information
+  Labelling Procedure.
+- Document a rule in the procedure requiring all documents containing personal data to display a clear
+  'Contains PII' or equivalent label in the footer.
+- Record examples of labelled documents, showing both confidentiality level and personal data overlay,
+  in a dated appendix or evidence folder.
+- State the review date and reviewer’s name on the current version of the Information Labelling Procedure.
+- Avoid using generic or template labels; tailor overlay wording to your organisation and applicable data
+  protection laws.

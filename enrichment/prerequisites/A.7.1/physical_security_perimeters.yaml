@@ -1,0 +1,37 @@
+leaf_id: req:A.7.1:physical_security_perimeters
+control_ref: A.7.1
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which sites, locations, and assets are covered by the ISMS, which
+    is essential to determine where physical security perimeters must be established.
+  good_enough: A documented scope that clearly lists all physical sites and areas where information assets
+    are located or processed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Knowing what information assets exist and where they are located is necessary to identify
+    which areas require physical security perimeters.
+  good_enough: A current inventory of physical and information assets, mapped to their locations, is available.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Asset classification helps determine the level of physical protection required for different
+    areas, ensuring that perimeters are appropriate to the sensitivity of the assets within.
+  good_enough: A basic classification scheme is defined and applied to assets, even if not fully rolled
+    out.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment identifies threats and vulnerabilities related to physical security, informing
+    the design and justification of security perimeters.
+  good_enough: An initial risk assessment covering physical threats to key locations is documented.

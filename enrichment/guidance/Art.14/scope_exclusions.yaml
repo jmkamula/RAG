@@ -1,0 +1,18 @@
+must_id: item:Art.14:scope_exclusions
+control_ref: Art.14
+standard_id: GDPR:2016/679
+must_text: Out-of-scope sources (e.g. publicly-aggregated stats with no personal data)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all third-party data sources reviewed, including names and descriptions, in a dated inventory maintained
+  by the data protection officer.
+- Document the specific criteria used to determine that each source contains no personal data, referencing
+  relevant definitions from GDPR Article 4.
+- Record the decision to exclude each out-of-scope source from GDPR processing, including the name and
+  signature of the responsible reviewer and the review date.
+- Attach supporting evidence, such as data samples or provider statements, to demonstrate that excluded
+  sources do not contain personal data.
+- Name the reviewer as a specific individual—do not use generic roles like "the team" or "IT department".

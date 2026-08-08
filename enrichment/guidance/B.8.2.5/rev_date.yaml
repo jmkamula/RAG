@@ -1,0 +1,15 @@
+must_id: item:B.8.2.5:rev_date
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Customer Support Program in a dated log or meeting minutes.
+- Document the planned review interval in months or years within the Customer Support Program documentation.
+- Confirm the actual review date falls within the documented planned interval by cross-referencing the
+  review log and the program documentation.
+- Name the reviewer or review team as specific individuals, not as a department or generic group, in the
+  review record.

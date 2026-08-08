@@ -1,0 +1,17 @@
+must_id: item:A.7.2.6:scope_exclusions
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Excluded relationships (independent controllers / joint controllers → A.7.2.7 / non-PII vendors)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all third-party relationships and classify each as processor, independent controller, joint controller,
+  or non-personal data vendor in a dated register.
+- Document the rationale for excluding each independent controller, joint controller, or non-personal
+  data vendor from processor scope in a separate column.
+- Cross-reference excluded relationships to supporting contracts or data flow maps that confirm their
+  classification and scope.
+- Name the responsible individual who made each classification decision, avoiding generic titles like
+  "the team" or "Legal."

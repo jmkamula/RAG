@@ -1,0 +1,19 @@
+must_id: item:A.8.27:tm_integration
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Threat-modelling methodology integration (cross-link to A.8.26 + design-phase practice)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy that threat-modelling is a required activity during the design phase of all new
+  or significantly changed systems.
+- Cross-reference the threat-modelling methodology to the Secure Development Policy or Procedure that
+  addresses A.8.26, using a specific document title and version.
+- Assign a named individual or role responsible for ensuring threat-modelling is performed and documented
+  for each project at the design stage.
+- Record the date and outcome of threat-modelling activities for each system design, keeping these records
+  with the relevant project documentation.
+- Name the threat-modelling methodology used, avoiding vague terms like "industry best practice" or generic
+  references without a specific framework or process.

@@ -1,0 +1,16 @@
+must_id: item:Art.23:rev_date
+control_ref: Art.23
+standard_id: GDPR:2016/679
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of your Article 23 Restrictions Program in a dated document or review
+  log.
+- Name the person who conducted the review, listing their full name and job title in the review record.
+- Cross-reference the planned review interval in your compliance calendar or policy schedule to confirm
+  alignment with the actual review date.
+- Attach evidence of the review outcome, such as meeting minutes or a signed summary, to the review record.
+- Specify the next planned review date in the same record to demonstrate ongoing scheduling.

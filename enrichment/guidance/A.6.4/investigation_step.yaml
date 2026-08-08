@@ -1,0 +1,18 @@
+must_id: item:A.6.4:investigation_step
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Investigation step before action, with right of explanation (procedural fairness — drives employment-tribunal
+  defensibility)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the investigation process in a written procedure, including steps for gathering facts and evidence
+  before any disciplinary action is considered.
+- Name the decision-maker responsible for conducting the investigation as a specific individual, not a
+  group or department.
+- Record that the individual involved was given an opportunity to explain their actions, with date and
+  summary of their response.
+- Retain signed and dated records of the investigation outcome and any disciplinary decision, showing
+  the process was followed as documented.

@@ -1,0 +1,19 @@
+must_id: item:A.5.21:eol_cutover
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: Cutover date executed (or compensating controls + risk acceptance where replacement was delayed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the actual cutover date for each ICT component replaced, listing the unique asset identifier
+  and the person responsible for the change.
+- Document any delays in replacement by describing the reason, the affected asset, and the date the delay
+  was identified.
+- State any compensating controls applied during the delay period, including start and end dates, and
+  reference the risk assessment supporting these controls.
+- Obtain a signed risk acceptance statement from a named, accountable manager if replacement was delayed
+  and risks were accepted.
+- Name the owner of each record as a specific individual, not a team or department, to avoid ambiguity
+  in accountability.

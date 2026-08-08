@@ -1,0 +1,19 @@
+must_id: item:A.5.30:rto_rpo
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Recovery Time and Recovery Point Objectives per ICT service (BIA-derived; RTO = how long can
+  it be down; RPO = how much data loss is acceptable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each critical ICT service in your Business Impact Analysis and list them by name in your Business
+  Continuity Plan.
+- Document the Recovery Time Objective (RTO) and Recovery Point Objective (RPO) for each ICT service,
+  referencing the BIA date and source.
+- Name the responsible individual for approving each RTO and RPO, ensuring it is not a generic team or
+  department.
+- Record the date when each RTO and RPO was last reviewed and approved, keeping this information visible
+  in the plan.
+- Attach supporting BIA documentation that shows how each RTO and RPO was determined for traceability.

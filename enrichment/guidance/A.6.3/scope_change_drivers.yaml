@@ -1,0 +1,18 @@
+must_id: item:A.6.3:scope_change_drivers
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new role/function, new compliance regime, new technology adoption
+  requiring training)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific events that require re-scoping of training, such as new roles, new compliance obligations,
+  or adoption of new technologies.
+- Document the date each trigger was last reviewed or updated, and name the person responsible for maintaining
+  the trigger list.
+- Name the owner as a specific individual, not a team or department, to avoid ambiguity about accountability.
+- Cross-reference each trigger to relevant training materials or curriculum updates, showing how changes
+  are incorporated.
+- Retain a signed record of management approval for the current trigger list and curriculum scope.

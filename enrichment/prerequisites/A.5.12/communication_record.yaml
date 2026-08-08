@@ -1,0 +1,40 @@
+leaf_id: req:A.5.12:communication_record
+control_ref: A.5.12
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: direct
+  rationale: A documented information security policy is required to formally establish the existence
+    and authority of the classification scheme. Without this, there is no official basis for communicating
+    or enforcing classification rules.
+  good_enough: A published, current policy that explicitly references the classification scheme and is
+    accessible to all relevant staff.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Inventory of information and other associated assets
+  category: direct
+  rationale: You cannot communicate classification rules if you do not know what information assets exist.
+    The asset inventory provides the list of items that need to be classified and communicated about.
+  good_enough: A basic, up-to-date asset register that covers all major information types and is available
+    to those drafting the communication record.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organisation and which information assets
+    are covered by the ISMS, ensuring the classification scheme communication is targeted and relevant.
+  good_enough: A clear, approved scope statement that identifies the organisational boundaries for the
+    ISMS and the information assets in play.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that responsibilities for classifying information and communicating
+    the scheme are understood and actionable.
+  good_enough: A documented list of roles with assigned responsibilities for information classification
+    and communication, even if not fully detailed yet.

@@ -1,0 +1,20 @@
+must_id: item:A.5.34:breach_handling
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Breach handling reference (cross-link to A.5.24/A.5.26 incident family + GDPR Art.33 supervisory-authority
+  notification within 72h + GDPR Art.34 data-subject notification where high risk)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the organisation’s incident response procedures in the Privacy and PII Protection Policy,
+  specifically citing sections that address personal data breaches.
+- State the requirement to notify the supervisory authority within 72 hours of becoming aware of a personal
+  data breach, as per GDPR Article 33.
+- Describe the process for assessing risk to individuals and, where high risk is identified, outline steps
+  for notifying affected data subjects according to GDPR Article 34.
+- Name the policy owner as a specific individual with responsibility for breach handling and notification,
+  not a generic team or department.
+- Record the date of the most recent policy review and update to show the inclusion of these cross-references
+  and notification requirements.

@@ -1,0 +1,18 @@
+must_id: item:A.8.31:rev_register_currency
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Environment-register currency check
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for maintaining the environment register, ensuring a specific individual
+  is listed rather than a team or department.
+- Record the date of the most recent review of the environment register in a version-controlled document.
+- Document any changes identified during the review, including updates to environment boundaries or separation
+  controls, in a dated change log.
+- Confirm that all listed environments in the register are current by cross-referencing with active infrastructure
+  inventories or configuration management records.
+- Retain evidence of management approval for the completed review, such as a signed or digitally acknowledged
+  review summary.

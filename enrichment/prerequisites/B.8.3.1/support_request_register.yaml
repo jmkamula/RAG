@@ -1,0 +1,48 @@
+leaf_id: req:B.8.3.1:support_request_register
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You must know which business units, systems, and processes are in-scope for privacy management
+    before you can accurately track and respond to customer subject-rights requests.
+  good_enough: A clear, current scope statement that covers all environments and entities where customer
+    personal data is processed.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Subject-rights requests require clear assignment of responsibilities so requests are handled
+    promptly and by the right people.
+  good_enough: A documented list of privacy roles and their responsibilities, with named owners for subject-rights
+    support.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: You need to know the purposes for which personal data is processed to determine if a subject-rights
+    request is valid and how it should be handled.
+  good_enough: A basic register or list of processing purposes for each data set or activity, even if
+    not fully detailed.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity is essential to assess the legitimacy
+    and boundaries of subject-rights requests.
+  good_enough: A working summary of lawful bases for main processing activities, sufficient to inform
+    request handling decisions.
+- ref: Art.12
+  standard_id: GDPR:2016/679
+  title: Transparent Information, Communication and Modalities for the Exercise of the Rights of the Data
+    Subject
+  category: cross_role
+  rationale: You must be able to demonstrate that you have mechanisms to communicate with data subjects
+    and facilitate their rights, as required by GDPR.
+  good_enough: A documented process or communication channel for receiving and responding to subject-rights
+    requests, even if not fully automated.

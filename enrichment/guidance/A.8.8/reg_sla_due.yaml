@@ -1,0 +1,18 @@
+must_id: item:A.8.8:reg_sla_due
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Per-finding SLA due date (derived from severity + first-seen date)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each vulnerability was first identified in the backlog register, using a timestamped
+  entry for every finding.
+- Assign a severity rating to each vulnerability, referencing your documented risk assessment criteria
+  for consistency.
+- Calculate and enter a specific due date for remediation of each vulnerability, based on its severity
+  and first-seen date, using your defined SLA rules.
+- Name the responsible individual for each vulnerability entry, avoiding generic labels like "IT team"
+  or "Security group".
+- Retain an audit trail showing any changes to due dates, including who made the change and when.

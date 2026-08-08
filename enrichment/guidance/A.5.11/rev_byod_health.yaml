@@ -1,0 +1,19 @@
+must_id: item:A.5.11:rev_byod_health
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: BYOD-wipe health check (sample of recent BYOD leavers re-verified for selective-wipe success
+  or org-data presence)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a recent sample of employees who left while using their own devices for work within the last
+  review period.
+- Document the results of selective-wipe attempts or checks for organizational data on each sampled device,
+  including date and outcome.
+- Record the name of the person who performed each device check and the method used for verification.
+- Name the reviewer who approved the sample selection and confirmed that the checks covered all relevant
+  workforce models.
+- Avoid listing only generic device statuses or incomplete wipe logs—ensure each entry links to a specific
+  user and device.

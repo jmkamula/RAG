@@ -1,0 +1,15 @@
+must_id: item:10.1:rev_date
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Continual Improvement Program in a dated log entry.
+- State the planned review interval in months or years within the program documentation.
+- Confirm the next scheduled review date is within the documented interval from the last completed review.
+- Name the reviewer as a specific individual, not a team or department, in the review record.
+- Attach evidence of the completed review, such as a signed summary or meeting minutes, with the corresponding
+  date.

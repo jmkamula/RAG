@@ -1,0 +1,19 @@
+must_id: item:B.8.2.1:proc_documented_instructions
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+must_text: Documented-instructions mechanism (how instructions are recorded, escalated, disputed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for receiving, recording, and acting on customer instructions regarding
+  personal data processing, including required forms or systems.
+- Name the individual responsible for handling and escalating customer instructions, specifying their
+  title and contact details.
+- Record how disputes about instructions are handled, including escalation paths and resolution timelines,
+  in a dated procedure document.
+- State how all instructions and related decisions are logged, referencing where these records are stored
+  and how access is controlled.
+- Specify that all roles are assigned to named individuals, not generic teams or departments, to avoid
+  ambiguity in responsibility.

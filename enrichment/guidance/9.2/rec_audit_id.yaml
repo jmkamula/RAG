@@ -1,0 +1,15 @@
+must_id: item:9.2:rec_audit_id
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Unique audit identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each internal audit record, ensuring no two audits share the same reference
+  number or code.
+- Document the unique identifier directly in the audit execution record alongside the audit date and scope.
+- Cross-reference the unique identifier in related audit documents, such as findings reports and corrective
+  action logs.
+- Confirm that the identifier is not reused or recycled for future audits, maintaining a clear audit trail.

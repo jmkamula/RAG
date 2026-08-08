@@ -1,0 +1,17 @@
+must_id: item:A.7.5.3:rev_reviewer
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Data Ops)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual, listing both the Data Protection Officer (DPO) and a designated
+  Data Operations staff member by full name.
+- Record the date each review was completed next to the corresponding reviewer’s name in the Transfer
+  Records Program Review log.
+- Document the method of review (e.g., checklist, meeting minutes) and attach or reference these materials
+  in the review record.
+- Obtain signatures or electronic approval from both the DPO and Data Ops reviewer to confirm their participation
+  in the review.

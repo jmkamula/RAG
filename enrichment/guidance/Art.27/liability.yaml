@@ -1,0 +1,19 @@
+must_id: item:Art.27:liability
+control_ref: Art.27
+standard_id: GDPR:2016/679
+must_text: Representative without prejudice to controller/processor liability (Art.27.5 acknowledged)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the designated representative in the European Union as a specific individual or legal entity, including
+  full contact details and address.
+- Document a signed statement from the representative acknowledging their role is without prejudice to
+  the controller or processor’s liability under GDPR.
+- Record the date the representative was formally appointed and ensure this is reflected in your records
+  and privacy documentation.
+- Cross-reference the representative’s details in your public privacy notice and internal data processing
+  records for consistency.
+- Avoid listing only a company name or generic contact; specify a named person or official contact point
+  for accountability.

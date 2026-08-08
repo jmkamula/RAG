@@ -1,0 +1,17 @@
+must_id: item:4.4:interactions
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: Interactions between processes described (inputs, outputs, sequence)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each ISMS process with its specific inputs, outputs, and sequence in the ISMS Manual or Charter.
+- Cross-reference where outputs from one process serve as inputs to another, using process names and document
+  titles.
+- Name the process owner for each ISMS process as a specific individual, not a team or department.
+- State how information or materials flow between processes, including any hand-off points or dependencies,
+  with clear examples.
+- Review the ISMS Manual or Charter to confirm all described interactions are current and match actual
+  practice, noting the review date.

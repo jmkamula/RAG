@@ -1,0 +1,19 @@
+must_id: item:Art.20:third_party_rights
+control_ref: Art.20
+standard_id: GDPR:2016/679
+must_text: Third-party rights protection (Art.20.4 — must not adversely affect others)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for identifying and excluding third-party data from any data portability requests,
+  including clear decision criteria and responsible staff.
+- Name the individual responsible for reviewing data sets before transfer to ensure no third-party information
+  is included.
+- Record each data portability request and the steps taken to verify that third-party rights are not affected,
+  including dates and outcomes.
+- Retain evidence of any redactions or exclusions made to protect third-party data, such as annotated
+  copies or logs.
+- Specify that approvals for data transfers must be signed by a named individual, not a generic team or
+  department.

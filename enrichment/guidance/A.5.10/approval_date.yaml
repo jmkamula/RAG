@@ -1,0 +1,17 @@
+must_id: item:A.5.10:approval_date
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Approval date recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the approving manager as a specific individual, not a group or department, on the Acceptable Use
+  Policy approval record.
+- Record the exact approval date on the policy document or approval form, ensuring it is clearly visible
+  and unambiguous.
+- Retain a signed or digitally approved copy of the Acceptable Use Policy showing both the approver’s
+  name and the approval date.
+- Cross-reference the approval date in your policy register or document control log to match the signed
+  policy version.

@@ -1,0 +1,18 @@
+must_id: item:A.5.14:comm_refresh
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Periodic re-acknowledgement (annual at minimum) referenced
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Information Transfer Policy that all users must re-acknowledge the policy at least once
+  every 12 months.
+- Record the date and name of each individual who re-acknowledges the policy in a central register or
+  tracking system.
+- Retain copies of acknowledgement receipts or digital confirmations showing each user’s annual re-acknowledgement.
+- Name the policy owner as a specific individual responsible for monitoring and enforcing periodic re-acknowledgement,
+  not a team or department.
+- Cross-reference the most recent re-acknowledgement dates in your communication record to confirm no
+  user exceeds the annual interval.

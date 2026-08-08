@@ -1,0 +1,40 @@
+leaf_id: req:Art.24:accountability_program_review
+control_ref: Art.24
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope of the ISMS defines which parts of the organization and which processes are covered
+    by the accountability program. Without a clear scope, it is impossible to verify that the accountability
+    program review is comprehensive and relevant.
+  good_enough: A documented and approved ISMS scope statement that identifies the organizational boundaries
+    and information assets subject to GDPR compliance.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: Up-to-date records of processing activities are essential to confirm that the accountability
+    program review covers all relevant data processing and reflects the current state of operations.
+  good_enough: A maintained RoPA that lists all current processing activities, even if some entries are
+    still being finalized.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: The designation (or documented decision not to appoint) a Data Protection Officer is a key
+    accountability decision that must be reviewed annually as part of the program review.
+  good_enough: A documented DPO appointment or a justification for not appointing one, reviewed within
+    the last year.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: direct
+  rationale: Each processing activity must have a lawful basis, and the accountability program review
+    must verify that these bases are still valid and documented.
+  good_enough: A register or summary showing the lawful basis for each processing activity, even if some
+    are pending legal review.

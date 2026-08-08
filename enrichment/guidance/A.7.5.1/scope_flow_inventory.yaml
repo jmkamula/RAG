@@ -1,0 +1,18 @@
+must_id: item:A.7.5.1:scope_flow_inventory
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: PII flow inventory — every flow map row (from A.7.5.2) with jurisdiction pair
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every personal data flow in your inventory, showing both the source and destination jurisdictions
+  for each transfer.
+- Record the lawful basis or mechanism for each cross-jurisdiction transfer, referencing the relevant
+  legal or contractual documentation.
+- Assign a specific owner for maintaining and updating the jurisdiction mapping, naming an individual
+  rather than a team or department.
+- Date each entry in the inventory to show when the jurisdiction mapping was last reviewed or updated.
+- Cross-reference each flow map entry to supporting evidence, such as data processing agreements or transfer
+  impact assessments.

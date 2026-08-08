@@ -1,0 +1,17 @@
+must_id: item:A.8.7:sandboxing
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Sandboxing of suspicious attachments / executables
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the technical process for sandboxing suspicious attachments and executables in your Protection
+  Against Malware Procedure, including detection and escalation steps.
+- Name the person or role responsible for reviewing sandbox alerts and making decisions on potential threats,
+  specifying an individual not just a team.
+- Record examples of sandboxing events with dates, outcomes, and actions taken, storing logs or reports
+  for auditor inspection.
+- State the technology or tool used for sandboxing, referencing a current configuration or vendor agreement
+  with version and deployment details.

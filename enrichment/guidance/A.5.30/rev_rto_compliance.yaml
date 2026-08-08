@@ -1,0 +1,20 @@
+must_id: item:A.5.30:rev_rto_compliance
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: RTO/RPO compliance audit (sample of services re-tested; gap to target per service; root cause
+  per gap)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a representative sample of critical ICT services and list them by name and owner in the review
+  documentation.
+- Record the most recent Recovery Time Objective (RTO) and Recovery Point Objective (RPO) test results
+  for each sampled service, including test dates.
+- Compare actual test results to documented RTO and RPO targets for each service, noting any gaps in a
+  dated summary table.
+- Document the root cause analysis for each identified gap, referencing specific incident reports or investigation
+  records.
+- Name the reviewer as a specific individual and require their dated sign-off on the completed review
+  report.

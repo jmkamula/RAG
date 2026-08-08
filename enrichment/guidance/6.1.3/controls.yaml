@@ -1,0 +1,17 @@
+must_id: item:6.1.3:controls
+control_ref: 6.1.3
+standard_id: ISO27001:2022
+must_text: Controls determined to implement the chosen options
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each chosen risk treatment option alongside the specific control(s) selected to address the risk
+  in the Risk Treatment Plan.
+- Reference the exact control identifier and description from your control framework for each risk, avoiding
+  vague or generic control names.
+- Assign a named individual responsible for implementing each control, not just a team or department.
+- Record the date each control was approved for implementation in the Risk Treatment Plan.
+- Attach supporting evidence, such as meeting minutes or approval emails, confirming the decision to implement
+  each control.

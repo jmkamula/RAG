@@ -1,0 +1,19 @@
+must_id: item:A.5.28:disp_receipt
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: External handover receipt scanned/attached per record (where closure_type = external_handover)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each package handover event in the disposal register, including date, package identifier, and
+  recipient organization details.
+- Attach a scanned copy of the external handover receipt to the corresponding record in the register when
+  closure_type is marked as external_handover.
+- Confirm the handover receipt includes a legible signature, printed name, and date from the external
+  party accepting the package.
+- Name the recipient as a specific organization or individual, not just a generic label like "courier"
+  or "external party".
+- Review each record to verify the attached receipt matches the package identifier and handover date before
+  marking the record as complete.

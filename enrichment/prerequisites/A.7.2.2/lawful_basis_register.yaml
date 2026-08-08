@@ -1,0 +1,39 @@
+leaf_id: req:A.7.2.2:lawful_basis_register
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the purpose of each processing activity before you can determine
+    and record its lawful basis. The lawful basis must always be linked to a specific, documented purpose.
+  good_enough: Each processing activity has a clearly stated and documented purpose, even if some descriptions
+    are high-level or draft.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register ensures you know what personal data assets exist and where,
+    so you can identify all processing activities that require a lawful basis.
+  good_enough: There is a current list of information assets that includes personal data, even if some
+    details are pending validation.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the business and which data processing activities
+    are covered, so you know which activities need a lawful basis recorded.
+  good_enough: The scope statement exists and covers all business units and processes where personal data
+    is processed, even if minor updates are needed.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of Processing
+  category: cross_role
+  rationale: GDPR Article 6 defines the lawful bases for processing personal data, which your register
+    must reference and align with for each activity.
+  good_enough: The organization has identified which Article 6 lawful bases are relevant to its processing
+    activities, even if some mappings are provisional.

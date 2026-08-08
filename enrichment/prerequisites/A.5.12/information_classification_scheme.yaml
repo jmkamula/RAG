@@ -1,0 +1,40 @@
+leaf_id: req:A.5.12:information_classification_scheme
+control_ref: A.5.12
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: direct
+  rationale: A documented information security policy sets the overarching rules and authorises the creation
+    of topic-specific policies, including the classification scheme. Without this, the scheme lacks formal
+    backing and context.
+  good_enough: A published, approved policy that references or allows for the creation of classification
+    rules is available to staff.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Inventory of information and other associated assets
+  category: direct
+  rationale: You can't classify information unless you know what information assets exist. An up-to-date
+    asset inventory is essential to ensure all relevant items are covered by the classification scheme.
+  good_enough: A basic, current list of key information assets (e.g. data types, databases, documents)
+    exists, even if not fully detailed.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: Determining the scope of the information security management system
+  category: foundational
+  rationale: The scope statement defines which parts of the organisation and which information assets
+    are covered by the ISMS. The classification scheme must align with this scope to be meaningful.
+  good_enough: A documented scope statement exists that clearly identifies the boundaries and applicability
+    of the ISMS.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information security risk assessment
+  category: foundational
+  rationale: Risk assessment identifies threats and vulnerabilities to information assets, informing which
+    classification levels and controls are needed. The scheme should reflect actual risk.
+  good_enough: At least one recent risk assessment has been performed, covering major information assets
+    and their risk profiles.

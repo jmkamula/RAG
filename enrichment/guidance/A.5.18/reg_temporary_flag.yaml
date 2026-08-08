@@ -1,0 +1,18 @@
+must_id: item:A.5.18:reg_temporary_flag
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Temporary-access rows flagged with expiry date (drives automated cleanup; complements the procedure's
+  temporary_access SHOULD)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each temporary access grant in the Access Rights Register with the user's name, access scope,
+  and the specific expiry date.
+- Flag every temporary-access row with a clear "temporary" status and the associated expiry date field
+  completed.
+- Assign responsibility to a named individual for reviewing expired temporary access entries and confirming
+  timely removal.
+- Avoid leaving expiry date fields blank or using generic terms like "as needed"—enter a concrete, calendar-based
+  expiry date for each temporary access.

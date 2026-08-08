@@ -1,0 +1,16 @@
+must_id: item:B.8.5.3:reg_source_of_authority
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+must_text: Source of authority per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific legal or contractual basis that permits each processing activity in a dedicated
+  column for every event in the log.
+- Name the source document or agreement by title and date for each row, rather than using generic terms
+  like "contract" or "law".
+- Cross-reference each entry to the relevant section or clause in the cited authority document to allow
+  precise verification.
+- Assign responsibility for maintaining and updating the log to a named individual, not a team or department.

@@ -1,0 +1,17 @@
+must_id: item:A.7.1:rev_register_update
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Changes propagated to the live register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of each perimeter program review in a change log linked to the live register.
+- Name the individual responsible for updating the live register after each review, specifying their full
+  name and role.
+- Document all changes made to the live register, including what was changed and why, with supporting
+  evidence.
+- Cross-reference the updated live register entry with the corresponding review meeting minutes or approval
+  record.
+- Avoid leaving the register owner as "the team" or a department—assign a specific person for accountability.

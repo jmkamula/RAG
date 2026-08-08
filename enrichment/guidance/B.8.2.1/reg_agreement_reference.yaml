@@ -1,0 +1,18 @@
+must_id: item:B.8.2.1:reg_agreement_reference
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+must_text: Executed agreement document reference per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the unique reference number or file path for each executed customer PII agreement in the corresponding
+  row of the register.
+- State the full execution date for each agreement, ensuring the date is visible and matches the signed
+  document.
+- Name the individual who signed the agreement on behalf of your organisation, not just their job title
+  or department.
+- Cross-reference each register entry with the actual signed agreement to confirm accuracy and completeness.
+- Avoid leaving any register row with a missing or placeholder document reference, as auditors will flag
+  incomplete entries.

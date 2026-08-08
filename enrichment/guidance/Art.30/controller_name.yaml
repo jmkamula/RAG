@@ -1,0 +1,17 @@
+must_id: item:Art.30:controller_name
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Name and contact details of controller (and DPO/representative where appointed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the controller as a specific individual or legal entity, not a team or department, in the Records
+  of Processing Activities document.
+- Record the full business address, email, and telephone number for the controller in the RoPA, ensuring
+  all contact details are current.
+- Document the name and contact details of the Data Protection Officer or representative, if appointed,
+  including email and direct phone number.
+- Confirm the date of the last update to the controller and DPO/representative details in the RoPA, and
+  retain a copy of the previous version for reference.

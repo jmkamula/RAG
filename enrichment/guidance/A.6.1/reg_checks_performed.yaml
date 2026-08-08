@@ -1,0 +1,20 @@
+must_id: item:A.6.1:reg_checks_performed
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Checks performed per record (identity / employment-history / education / criminal / financial
+  / sanctions — actual checks run, not just planned)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of each candidate alongside the job role and date the screening was initiated in
+  the register.
+- List the specific verification checks completed for each candidate, such as identity, employment history,
+  education, criminal, financial, and sanctions.
+- Attach or reference dated evidence for each completed check, such as certificates, reports, or confirmation
+  emails, within the register entry.
+- Name the individual who performed and confirmed each check, avoiding generic entries like "HR team"
+  or "recruitment".
+- Note any incomplete or failed checks with an explanation and a dated decision on whether to proceed,
+  signed by the hiring manager.

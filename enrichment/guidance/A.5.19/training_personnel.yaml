@@ -1,0 +1,17 @@
+must_id: item:A.5.19:training_personnel
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Training of own personnel on appropriate engagement and information exchange with suppliers
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the training curriculum that covers secure engagement and information exchange practices with
+  suppliers, including the date it was last updated.
+- Record attendance lists showing named employees who completed the supplier information security training,
+  including training dates.
+- Assign responsibility for delivering and updating the training to a specific individual, not a team
+  or department.
+- Retain copies of training materials and completion certificates for each employee as evidence of participation.
+- Review and update training content annually, and keep a dated record of each review and revision.

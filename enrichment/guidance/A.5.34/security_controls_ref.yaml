@@ -1,0 +1,20 @@
+must_id: item:A.5.34:security_controls_ref
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: References security controls applied to PII (links to A.8.x technical controls — encryption
+  A.8.24, access control A.5.15/A.8.3, logging A.8.15/A.8.16, pseudonymisation A.8.11; satisfies GDPR
+  Art.32 integration with Art.5.1.f)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the policy owner, listing their full name and job title in the policy
+  document.
+- Document explicit references in the policy to technical controls protecting PII, including encryption,
+  access control, logging, and pseudonymisation, with links to relevant procedures.
+- Cross-reference each mentioned technical control in the policy to its corresponding section in your
+  security controls register, noting control numbers (e.g., A.8.24 for encryption).
+- State in the policy how these controls satisfy GDPR Article 32 and Article 5.1.f requirements, including
+  a clear summary paragraph.
+- Record the policy approval date and the approver’s name and signature on the policy’s cover page.

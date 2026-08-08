@@ -1,0 +1,17 @@
+must_id: item:9.3:proc_agenda
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Agenda template covering all 9.3.2 a-g inputs
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each required agenda item from ISO 27001:2022 clause 9.3.2 a-g in the management review agenda
+  template.
+- Reference the specific ISO 27001:2022 clause numbers next to each agenda item in the template for clarity.
+- Date and version-control the agenda template document to show it is current and maintained.
+- Name the responsible individual who reviews and updates the agenda template, not just a department or
+  team.
+- Attach a completed example of the agenda template from a recent management review meeting as supporting
+  evidence.

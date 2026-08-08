@@ -1,0 +1,19 @@
+must_id: item:A.7.9:theft_loss_report
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Theft/loss reporting requirement with timeline (cross-link to A.6.8 event reporting)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy that all theft or loss of off-premises assets must be reported within a defined
+  timeframe, such as 24 hours.
+- Cross-reference the event reporting procedure in section A.6.8 within the policy to show alignment with
+  organisational incident response.
+- Name a specific individual, such as the Security Manager, as the responsible person for receiving and
+  acting on theft or loss reports.
+- Record the policy approval date and the name of the approving authority to provide evidence of current
+  and authorised requirements.
+- Avoid using vague reporting timelines like "as soon as possible"—specify an exact timeframe to prevent
+  auditor findings of unclear requirements.

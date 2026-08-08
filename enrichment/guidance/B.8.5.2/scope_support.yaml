@@ -1,0 +1,17 @@
+must_id: item:B.8.5.2:scope_support
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+must_text: Support-access destinations (where support engineers in other regions can access customer PII)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all countries where support engineers may access customer personal data, including those outside
+  your primary operating region, in a dated document.
+- Name the specific support teams or roles with access privileges for each destination, avoiding vague
+  terms like "global support" or "IT department."
+- Record the business justification for each cross-border access location, referencing any relevant customer
+  agreements or regulatory requirements.
+- Review and update the destinations list at least annually, retaining evidence of each review date and
+  the person responsible.

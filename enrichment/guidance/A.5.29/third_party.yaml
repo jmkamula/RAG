@@ -1,0 +1,20 @@
+must_id: item:A.5.29:third_party
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Third-party-dependent controls flagged (where the plan relies on supplier action — cross-link
+  to A.5.22 review)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all plan sections that rely on supplier or third-party actions to maintain or restore information
+  security during disruptions.
+- Cross-reference each third-party-dependent control in the disruption plan with the corresponding supplier
+  risk assessment or review record from A.5.22.
+- Name the specific supplier or third party responsible for each control, avoiding generic labels like
+  "vendor" or "external partner."
+- Record the date and outcome of the most recent review of these third-party dependencies, including any
+  follow-up actions required.
+- Attach supporting documentation, such as supplier agreements or communications, that confirm the third
+  party’s commitment to the required actions.

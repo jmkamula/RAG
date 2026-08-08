@@ -1,0 +1,19 @@
+must_id: item:A.8.16:incident_handoff
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Incident-response handoff (cross-link to A.5.26 register) when triage confirms incident
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the exact point in your monitoring procedure where triage confirmation triggers incident-response
+  handoff, referencing the relevant section in your written process.
+- Cross-reference each confirmed incident in the monitoring log with its corresponding entry in the A.5.26
+  incident register, including unique identifiers and dates.
+- Assign a named individual responsible for executing the handoff and recording the cross-link, avoiding
+  generic roles like "the team" or "IT."
+- Record the date and time of each handoff decision, along with the name of the person who made the triage
+  confirmation.
+- Retain evidence of communication or ticket updates showing the incident was formally handed off to the
+  incident-response process after triage.

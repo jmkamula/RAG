@@ -1,0 +1,17 @@
+must_id: item:A.8.29:reg_outcome
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Per-test outcome (pass / fail / waived-with-exception) + findings-count
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the outcome of each security test as "pass", "fail", or "waived-with-exception" in the Security
+  Test Register with the test date.
+- Document the exact number of findings identified for each test, linking them to the relevant test entry
+  in the register.
+- Name the person who approved any "waived-with-exception" outcome, ensuring their full name and approval
+  date are included.
+- Avoid using vague outcome labels such as "OK" or "N/A"—use only "pass", "fail", or "waived-with-exception"
+  for each test entry.

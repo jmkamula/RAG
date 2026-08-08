@@ -1,0 +1,19 @@
+must_id: item:A.7.7:home_office_overlay
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Home-office overlay (clear-desk rules adapted for remote workers — cross-link to A.6.7)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a home-office section in your Clear Desk and Clear Screen Policy that addresses how remote
+  workers secure physical and digital information.
+- Cross-reference the home-office section to your remote working policy, specifically linking to the requirements
+  in control A.6.7.
+- Name a specific individual responsible for monitoring compliance with home-office clear desk rules,
+  not just "IT" or "the security team".
+- Record the date the home-office overlay was last reviewed and updated, showing it reflects current hybrid
+  work practices.
+- Retain evidence that remote workers have acknowledged the updated policy, such as signed forms or confirmation
+  emails.

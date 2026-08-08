@@ -1,0 +1,20 @@
+must_id: item:A.5.13:rev_tooling_landscape
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Tooling-landscape check (vendor releases, new sensitivity-label features, capability gaps the
+  program should consider)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to conduct the tooling-landscape check, recording their name and the review
+  period in the program documentation.
+- Document the date and source of each vendor release or update reviewed, including any new sensitivity-label
+  features identified.
+- List any capability gaps discovered during the review, referencing specific tools or features that do
+  not meet current program needs.
+- Record any decisions or recommendations for program changes, including who approved them and the approval
+  date.
+- Name the reviewer as a specific person, not a group or department, to avoid auditor concerns about unclear
+  accountability.

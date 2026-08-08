@@ -1,0 +1,17 @@
+must_id: item:7.4:reg_date
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: Per-row date / time of communication
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time for each communication event in a dedicated column of the ISMS Communication
+  Event Register.
+- Cross-reference each entry with supporting evidence, such as meeting minutes or email timestamps, to
+  verify the recorded date and time.
+- Name the individual responsible for entering each communication event, ensuring the owner is a specific
+  person, not a team or department.
+- Review the register regularly to confirm no entries are missing date or time details, as undated events
+  are a common audit finding.

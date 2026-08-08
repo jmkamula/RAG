@@ -1,0 +1,42 @@
+leaf_id: req:Art.43:certification_body_procedure
+control_ref: Art.43
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.42
+  standard_id: GDPR:2016/679
+  title: Certification
+  category: direct
+  rationale: Art.42 establishes the framework for data protection certification mechanisms, which is a
+    necessary foundation before defining the procedures for an accredited certification body under Art.43.
+    Without this, there is no context for what the certification body is certifying against.
+  good_enough: A clear understanding or documented summary of the certification mechanisms recognized
+    or intended to be used under Art.42 is available.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Designation of the Data Protection Officer
+  category: foundational
+  rationale: The certification body must ensure it has appropriate data protection expertise and oversight,
+    typically via a DPO, to credibly operate under Art.43. This is especially important for impartiality
+    and compliance.
+  good_enough: A DPO has been designated and their contact details are documented, or a justified decision
+    for not appointing one is recorded.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: If the organization is acting as a certification body, its ISMS scope must explicitly include
+    certification activities to ensure relevant controls and procedures are in place.
+  good_enough: The ISMS scope statement includes certification body functions or a documented addendum
+    exists covering these activities.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: The certification body must maintain records of its own processing activities, especially
+    as it handles sensitive applicant and certification data. This is a baseline GDPR requirement for
+    all organizations.
+  good_enough: A draft or template RoPA exists that covers certification-related processing, even if not
+    fully populated.

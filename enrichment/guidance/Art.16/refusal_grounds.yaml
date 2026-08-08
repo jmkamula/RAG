@@ -1,0 +1,17 @@
+must_id: item:Art.16:refusal_grounds
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Documented grounds for refusing manifestly unfounded or excessive requests
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each refusal to rectify data with a dated written explanation stating why the request was considered
+  manifestly unfounded or excessive.
+- Name the decision-maker responsible for assessing and refusing the request as a specific individual,
+  not a team or department.
+- Retain copies of all correspondence with the requester, including the notification of refusal and the
+  grounds provided.
+- Cross-reference each refusal with the relevant policy or criteria used to determine unfounded or excessive
+  requests.

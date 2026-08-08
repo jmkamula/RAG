@@ -1,0 +1,16 @@
+must_id: item:A.5.37:rev_ad_hoc_triggers
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Ad-hoc review triggers listed (major incident exposing procedure gap, M&A, major system migration)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific ad-hoc review triggers in the operating procedures program documentation, such as major
+  incidents, mergers and acquisitions, and major system migrations.
+- Record the date and details of the most recent ad-hoc review, including what triggered it and who participated.
+- Name the responsible individual who determines when an ad-hoc review is required, avoiding generic titles
+  like "the team" or "IT".
+- Attach supporting evidence, such as incident reports or project plans, that directly led to an ad-hoc
+  review being initiated.

@@ -1,0 +1,38 @@
+leaf_id: req:A.5.17:authentication_program_review
+control_ref: A.5.17
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, users, and processes are in-scope for authentication controls
+    before you can meaningfully review the effectiveness of your authentication program.
+  good_enough: A clear, current scope statement that identifies the boundaries of your ISMS and which
+    assets/users are covered by authentication controls.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You must have an up-to-date register of assets (including systems, applications, and accounts)
+    to verify that all relevant authentication points are included in the review.
+  good_enough: A working asset register that lists all systems and accounts subject to authentication,
+    even if some details are still being refined.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that the right people are responsible for credential management,
+    MFA enrolment, and the review process itself.
+  good_enough: Documented roles showing who owns credential processes and who conducts the periodic review.
+- ref: A.6.5
+  standard_id: ISO27001:2022
+  title: Responsibilities after termination or change of employment
+  category: direct
+  rationale: You need to confirm that credential revocation and related controls are enforced when users
+    leave or change roles, as this is a critical part of the authentication program's effectiveness.
+  good_enough: A documented process for handling credential changes on termination or role change, even
+    if not yet fully automated.

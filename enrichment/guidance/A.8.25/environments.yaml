@@ -1,0 +1,16 @@
+must_id: item:A.8.25:environments
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Security of development environments (cross-link to A.8.31 environment separation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the Secure Development Lifecycle Policy as a specific individual, not a group or department.
+- Document the controls in place to protect development environments, including access restrictions and
+  monitoring activities, in a dated policy section.
+- Cross-reference the policy section on environment separation with control A.8.31, citing the exact document
+  location and version.
+- Record the approval of the policy by a named senior manager, including the date of approval and their
+  signature.

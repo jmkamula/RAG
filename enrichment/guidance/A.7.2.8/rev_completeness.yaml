@@ -1,0 +1,17 @@
+must_id: item:A.7.2.8:rev_completeness
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Completeness check — RoPA rowcount matches A.7.2.1 register + system inventory
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the total number of processing activities in your RoPA with the entries in your A.7.2.1
+  data processing register.
+- Compare the systems listed in your system inventory to the systems referenced in your RoPA, confirming
+  all are accounted for.
+- Record the date and name of the person who performed the completeness check in a review log.
+- Name the reviewer as a specific individual, not a group or department, to avoid ambiguity in accountability.
+- Document any discrepancies found and the actions taken to resolve them, attaching supporting evidence
+  for each correction.

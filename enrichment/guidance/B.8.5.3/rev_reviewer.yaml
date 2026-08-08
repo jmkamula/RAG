@@ -1,0 +1,15 @@
+must_id: item:B.8.5.3:rev_reviewer
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Legal)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer by full name and job title, explicitly identifying both the Data Protection Officer
+  and a Legal representative in the review record.
+- Record the date each reviewer completed their review on the Processor Disclosure Records Program documentation.
+- Obtain and retain a physical or electronic signature from both the Data Protection Officer and Legal
+  representative on the review outcome.
+- Avoid listing generic roles such as "the team" or "Legal Department"—use named individuals only.

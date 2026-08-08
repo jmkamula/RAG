@@ -1,0 +1,19 @@
+must_id: item:A.7.2.7:scope_exclusions
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Relationships excluded (controller-processor → A.7.2.6 / independent-controllers → contract-not-arrangement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all third-party data sharing relationships and classify each as joint controller, controller-processor,
+  or independent controller, citing the legal basis for classification.
+- Document exclusions from the joint controller scope, referencing the specific criteria or rationale
+  for classifying as controller-processor or independent controller.
+- Cross-reference excluded relationships to supporting contracts or data processing agreements, ensuring
+  these documents clearly reflect the chosen classification.
+- Name the decision-maker responsible for each classification as a specific individual, not a group or
+  department.
+- Record the date each classification decision was made and reviewed, maintaining a dated log for audit
+  traceability.

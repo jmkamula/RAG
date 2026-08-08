@@ -1,0 +1,20 @@
+must_id: item:A.7.1:rev_walkthrough
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Physical walkthrough conducted per site (sample-based for multi-site orgs) — barriers verified
+  present and functional
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual responsible for scheduling and conducting the physical walkthrough at each
+  site, recording their name and the scheduled date.
+- Document the date, time, and location of each walkthrough in a log, including the specific barriers
+  checked at each site.
+- Record observations for each barrier, noting its presence and whether it is fully functional, with supporting
+  photos or checklists attached.
+- Sign and date the completed walkthrough report by the person who conducted the review, confirming all
+  findings are accurate.
+- Name the sites reviewed in each cycle — do not use vague terms like "various locations" or "sample sites"
+  without specifying exact addresses.

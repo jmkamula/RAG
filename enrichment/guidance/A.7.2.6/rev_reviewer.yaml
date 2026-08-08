@@ -1,0 +1,15 @@
+must_id: item:A.7.2.6:rev_reviewer
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Procurement + Legal)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer from Data Protection Officer, Procurement, and Legal teams as specific individuals
+  in the contract review record.
+- Record the date each reviewer completed their assessment on the processor contract program review form.
+- Obtain a signature or written approval from each named reviewer to confirm their participation in the
+  review process.
+- Avoid listing groups or roles only; ensure each reviewer is identified by full name and job title.

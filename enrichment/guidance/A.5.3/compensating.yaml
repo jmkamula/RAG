@@ -1,0 +1,20 @@
+must_id: item:A.5.3:compensating
+control_ref: A.5.3
+standard_id: ISO27001:2022
+must_text: Compensating controls where full separation is not feasible (small-team exceptions, supervisory
+  review, automated logging)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all roles where full separation of duties is not possible, and list them by named individual
+  in the Segregation of Duties Matrix.
+- Document the specific compensating controls applied for each exception, such as supervisory review or
+  automated activity logging, with dates of implementation.
+- Assign a named supervisor to review and approve activities where duties cannot be fully separated, and
+  retain signed or digitally approved records of these reviews.
+- Record evidence of automated logging for critical activities, including log retention periods and access
+  controls, in the matrix or supporting documentation.
+- Specify the rationale for each exception, referencing the relevant business or resource constraint,
+  and avoid using generic justifications like "small team" without detail.

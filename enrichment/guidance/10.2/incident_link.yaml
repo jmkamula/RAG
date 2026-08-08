@@ -1,0 +1,16 @@
+must_id: item:10.2:incident_link
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Link to A.5.26 (incident response) and A.5.27 (lessons learned)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the Nonconformity and Corrective Action Procedure to the Incident Response Procedure
+  by naming A.5.26 and describing the escalation process.
+- Link the procedure to the Lessons Learned process by referencing A.5.27 and outlining how findings are
+  incorporated into future risk assessments.
+- Document the date and version number of the procedure, showing updates that reflect integration with
+  A.5.26 and A.5.27.
+- Name a specific individual as the procedure owner—avoid listing a team or department.

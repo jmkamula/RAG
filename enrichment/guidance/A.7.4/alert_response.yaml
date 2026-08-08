@@ -1,0 +1,19 @@
+must_id: item:A.7.4:alert_response
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: Alert response procedure (who is notified, escalation, on-site response timing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the alert response procedure, specifying who is notified, how notifications occur, and required
+  response times for each alert type.
+- Name the specific individuals or roles responsible for receiving alerts and responding on-site, avoiding
+  generic terms like "security team."
+- Record the escalation process, including clear steps and decision points, with named contacts and backup
+  personnel for each escalation level.
+- State the expected on-site response time for each alert category, and include the date this procedure
+  was last reviewed or updated.
+- Retain evidence of training or communication showing that all named responders have been informed of
+  their responsibilities and response expectations.

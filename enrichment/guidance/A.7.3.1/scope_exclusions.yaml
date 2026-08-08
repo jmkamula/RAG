@@ -1,0 +1,19 @@
+must_id: item:A.7.3.1:scope_exclusions
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Excluded jurisdictions / subjects with rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all jurisdictions and data subjects considered for inclusion in your privacy program, with names
+  and dates, in a documented scope register.
+- Record each jurisdiction or subject excluded from scope, stating the specific rationale for exclusion
+  in the same register.
+- Name the decision-maker responsible for each exclusion, ensuring a specific individual is identified
+  rather than a group or department.
+- Attach supporting evidence for each exclusion rationale, such as legal opinions or risk assessments,
+  dated and linked to the relevant entry.
+- Review the exclusions list annually, recording the review date and any changes or confirmations in the
+  scope register.

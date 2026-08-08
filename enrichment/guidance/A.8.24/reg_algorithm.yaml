@@ -1,0 +1,19 @@
+must_id: item:A.8.24:reg_algorithm
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Per-row algorithm + strength (must match policy's approved-algorithms table)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the cryptographic algorithm and key strength for each key in the register, using exact names
+  and bit lengths as specified in your policy.
+- Cross-reference each entry’s algorithm and strength against the approved-algorithms table in your cryptography
+  policy to confirm compliance.
+- Name the person responsible for verifying each entry’s algorithm and strength, ensuring a specific individual
+  is listed—not a team or department.
+- Document the date of the last review for each register entry to provide evidence of ongoing compliance
+  with approved algorithms and strengths.
+- Flag and update any register entry where the algorithm or strength does not match the policy, attaching
+  a note describing the corrective action taken.

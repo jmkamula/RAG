@@ -1,0 +1,39 @@
+leaf_id: req:A.5.25:event_triage_log
+control_ref: A.5.25
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.24
+  standard_id: ISO27001:2022
+  title: Information security incident management planning and preparation
+  category: direct
+  rationale: You need an established incident management process before you can meaningfully log and triage
+    security events. The triage log is only useful if it fits into a planned, prepared response framework.
+  good_enough: A documented and communicated incident management plan exists, outlining how events are
+    identified, reported, and escalated.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that triage decisions and log entries are owned and actionable.
+    Without defined responsibilities, event triage cannot be consistently or accountably performed.
+  good_enough: Roles for event triage and incident response are assigned and communicated, even if detailed
+    RACI matrices are still in progress.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: A classification scheme is needed to categorize events and incidents in the triage log. Without
+    it, you can't consistently assess severity or required response.
+  good_enough: A basic, documented scheme exists for classifying information and events (e.g., low/medium/high
+    impact), even if refinement is ongoing.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which assets, processes, and locations are covered by the ISMS
+    and, by extension, the triage log. Without scope, you can't know what events must be logged.
+  good_enough: A written scope statement exists, identifying the main systems and boundaries for ISMS
+    coverage, even if some edge cases are still being clarified.

@@ -1,0 +1,19 @@
+must_id: item:Art.37:rev_qualifications_currency
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: Qualifications currency — DPO continuing-education or certification renewal evidence
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the appointed Data Protection Officer (DPO) as a specific individual, including their full name
+  and current job title.
+- Document the DPO’s most recent continuing-education activities or certification renewals, including
+  completion dates and issuing organizations.
+- Retain copies of certificates, transcripts, or proof-of-completion documents for each listed training
+  or renewal.
+- Record the date of the last review of the DPO’s qualifications to confirm ongoing compliance with GDPR
+  requirements.
+- Avoid listing expired certifications or undated training activities, as auditors will flag outdated
+  or unverifiable evidence.

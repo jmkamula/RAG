@@ -1,0 +1,42 @@
+leaf_id: req:A.8.21:applicable_service_scope
+control_ref: A.8.21
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know what parts of your organization and which services are covered by your ISMS
+    before you can define which network services are in scope for A.8.21. Without this, you can't reliably
+    identify or justify the boundaries of 'applicable' network services.
+  good_enough: A clear, current ISMS scope statement that lists covered business units, IT systems, and
+    service types. It doesn't need to be perfect, but must be specific enough to anchor your network services
+    list.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register is needed to identify all network-related assets and services.
+    This ensures you don't miss any network service that should be considered in scope for A.8.21.
+  good_enough: A working inventory of network assets and services, even if some details are pending. It
+    should cover all major network service types in use.
+- ref: A.8.20
+  standard_id: ISO27001:2022
+  title: Networks security
+  category: direct
+  rationale: You need to have established your baseline approach to network security (A.8.20) before you
+    can meaningfully define which network services are in scope for more specific controls like A.8.21.
+  good_enough: A documented approach or policy for network security, covering general principles and responsibilities.
+    It doesn't need to be fully implemented yet, but must exist in draft or approved form.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that someone is accountable for identifying, managing,
+    and documenting network services in scope. Without this, the scope definition may be incomplete or
+    lack authority.
+  good_enough: Named individuals or teams responsible for network services and ISMS documentation, even
+    if role descriptions are brief.

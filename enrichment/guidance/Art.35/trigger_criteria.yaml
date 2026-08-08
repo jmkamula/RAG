@@ -1,0 +1,18 @@
+must_id: item:Art.35:trigger_criteria
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Trigger criteria — Art.35.3 mandatory cases (systematic monitoring / special-category large-scale
+  / public-area large-scale monitoring) PLUS SA-published list + sectoral guidance
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all processing activities and record which involve systematic monitoring, large-scale special-category
+  data, or large-scale public-area monitoring, referencing Art.35.3 criteria.
+- Cross-reference each processing activity against the supervisory authority’s published list of high-risk
+  processing requiring a Data Protection Impact Assessment.
+- Document any additional trigger criteria from relevant sectoral guidance, noting the source and date
+  of each guidance document used.
+- Name the individual responsible for maintaining and updating the DPIA trigger criteria, avoiding generic
+  roles like “the team” or “IT department.”

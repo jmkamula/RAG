@@ -1,0 +1,19 @@
+must_id: item:B.8.4.2:proc_disposal_capability
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+must_text: Secure disposal capability — including from backups + DR + continuity systems
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for securely disposing of personal data from all storage locations, including
+  backups, disaster recovery, and business continuity systems, in a dated record.
+- Name the individual responsible for overseeing secure disposal activities, specifying their full name
+  and job title in the procedure.
+- Record the technical methods used to erase or destroy personal data from each type of storage system,
+  referencing system names and deletion tools.
+- State how and when disposal actions are verified, including the creation of a dated verification log
+  signed by the responsible individual.
+- Avoid describing disposal capability in generic terms—specify actual systems and processes rather than
+  using boilerplate language that could apply to any organisation.

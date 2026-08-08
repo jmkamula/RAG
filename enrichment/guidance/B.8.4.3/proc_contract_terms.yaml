@@ -1,0 +1,18 @@
+must_id: item:B.8.4.3:proc_contract_terms
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Contract-terms coverage — customer-contract transmission requirements captured (B.8.2.1)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Review all active customer contracts and extract any specific requirements related to the transmission
+  of personal data.
+- Document each contract’s transmission requirements in a central register, including the contract name,
+  customer, and date of extraction.
+- Cross-reference each documented requirement with your current transmission controls procedure, noting
+  any gaps or mismatches.
+- Name the person responsible for maintaining and updating the register as a specific individual, not
+  a team or department.
+- Retain copies of the relevant contract clauses alongside the register for direct evidence during audits.

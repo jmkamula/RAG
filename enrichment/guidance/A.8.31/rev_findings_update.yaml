@@ -1,0 +1,16 @@
+must_id: item:A.8.31:rev_findings_update
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Findings propagated to procedure / register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the findings from each environment separation program review in a dated summary document, naming
+  the reviewer and the review period.
+- Update the relevant procedures or registers with any changes or actions resulting from the review, referencing
+  the specific findings document.
+- Assign responsibility for implementing each action or change to a named individual, not a group or department.
+- Cross-reference the updated procedure or register entry with the original review findings to show clear
+  linkage between review and action.

@@ -1,0 +1,39 @@
+leaf_id: req:7.4:communication_program_review
+control_ref: '7.4'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organization and which information assets
+    are covered by the ISMS, ensuring that the communication program review is relevant and complete.
+  good_enough: A documented scope that clearly lists included business units, locations, and processes
+    is available and up to date.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The security policy sets the expectations and objectives for information security, including
+    communication requirements, which the communication program review must measure against.
+  good_enough: A formally approved policy exists, is accessible to relevant staff, and includes high-level
+    communication objectives.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that communication tasks and reviews are owned and executed,
+    making the annual review meaningful and actionable.
+  good_enough: There is a documented list or matrix showing who is responsible for planning, executing,
+    and reviewing ISMS communications.
+- ref: '7.4'
+  standard_id: ISO27001:2022
+  title: Communication Register
+  category: direct
+  rationale: The review cannot be performed unless there is a register or log of planned and actual communications
+    to verify cadence, completeness, and regulatory deadlines.
+  good_enough: A basic register or log exists listing required communications, their frequency, and actual
+    completion dates for the review period.

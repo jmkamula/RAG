@@ -1,0 +1,18 @@
+must_id: item:A.8.1:rev_compliance_sample
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Sample-based compliance verification across the register (encryption / patching / EDR coverage)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to select a representative sample of endpoints from the asset register for
+  compliance verification.
+- Document the date, sample size, and selection criteria used for each periodic review in a dedicated
+  review log.
+- Record the encryption, patching, and endpoint detection and response (EDR) status for each sampled endpoint,
+  referencing supporting screenshots or system reports.
+- Sign and date the review findings, including any non-compliant endpoints and actions taken, in the review
+  log.
+- Name the reviewer as a specific person—do not list a team, department, or leave the reviewer field blank.

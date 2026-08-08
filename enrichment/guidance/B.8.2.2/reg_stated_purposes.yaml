@@ -1,0 +1,19 @@
+must_id: item:B.8.2.2:reg_stated_purposes
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: Stated customer purposes per row (from B.8.2.1 agreement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each row in the Customer Purpose Adherence Register to the specific customer agreement
+  or instruction from which the purpose is derived.
+- Document the exact stated purpose from the customer agreement in a dedicated column for each entry,
+  using the customer’s original wording.
+- Name the customer or data controller associated with each purpose, ensuring the entry lists a specific
+  organisation or individual, not just "customer".
+- Record the date the customer purpose was agreed or last confirmed, referencing the signed agreement
+  or instruction document.
+- Avoid using generic or vague purposes such as "business use" or "as needed"—state the precise, agreed
+  purpose for each row.

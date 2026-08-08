@@ -1,0 +1,20 @@
+must_id: item:A.5.31:proc_change_assessment
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Impact-assessment step when an obligation changes — affected controls and policies identified,
+  gap actions opened
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each change in legal or regulatory obligations in the register, including the date, source,
+  and a summary of the change.
+- Identify and list all controls and policies impacted by the change, referencing their unique identifiers
+  in the register entry.
+- Assign a named individual to assess the impact and record their findings, including any identified gaps
+  or required actions.
+- Open and track specific gap actions in a dated action log, linking each action to the relevant obligation
+  and impacted control or policy.
+- Name the owner for each action as a specific person, not a generic role or team, to avoid auditor concerns
+  about accountability.

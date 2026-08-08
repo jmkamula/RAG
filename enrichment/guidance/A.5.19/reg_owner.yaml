@@ -1,0 +1,16 @@
+must_id: item:A.5.19:reg_owner
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Named internal owner accountable per supplier (relationship owner + InfoSec contact)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the relationship owner for each supplier entry in the Supplier Register,
+  listing their full name and job title.
+- Record a designated information security contact for each supplier, including their full name and direct
+  contact details.
+- Document the date each owner and InfoSec contact was last reviewed or updated in the register.
+- Avoid using generic terms like "IT team" or "Procurement" as owners; always list a named person for
+  accountability.

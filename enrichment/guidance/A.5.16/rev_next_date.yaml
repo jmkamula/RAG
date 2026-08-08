@@ -1,0 +1,15 @@
+must_id: item:A.5.16:rev_next_date
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Next planned review date stated (within 180d of this review)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact date of the next planned identity-management program review in the review report, ensuring
+  it is within 180 days of the current review.
+- Record the name of the individual responsible for scheduling the next review, not just a team or department.
+- Document the method used to calculate the next review date, referencing the current review's completion
+  date.
+- Retain a signed copy of the review report showing the next review date and responsible person.

@@ -1,0 +1,14 @@
+must_id: item:10.1:reg_status
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Per-row status (proposed / approved / in-progress / closed / superseded)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Name a specific individual responsible for updating the status of each improvement action in the register.
+- 'Record the current status for every action item using only the approved categories: proposed, approved,
+  in-progress, closed, or superseded.'
+- Document the date and name of the person who last changed the status for each action row.
+- Avoid leaving any status field blank or using non-standard terms such as "ongoing" or "done".

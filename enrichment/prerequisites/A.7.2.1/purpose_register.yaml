@@ -1,0 +1,39 @@
+leaf_id: req:A.7.2.1:purpose_register
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the organisational and system boundaries before you can accurately list
+    all purposes for which PII is processed. The scope ensures the register covers all relevant activities.
+  good_enough: A documented scope that clearly defines which business units, systems, and processes are
+    in-scope for PII processing.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: A working data classification scheme is needed to reliably identify which data types are
+    PII, so that only relevant processing purposes are registered.
+  good_enough: A basic, published classification scheme that distinguishes PII from other data types and
+    is referenced by staff handling data.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Each processing purpose must be linked to a lawful basis; you can't register a purpose without
+    knowing its legal justification. This ensures the register is meaningful and compliant.
+  good_enough: A draft or working list of lawful bases mapped to each major PII processing activity, even
+    if not yet fully validated by legal.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of privacy and data governance roles is needed so that the right people
+    can author, review, and maintain the purpose register.
+  good_enough: Named individuals or teams responsible for privacy and data governance, documented in a
+    policy or RACI matrix.

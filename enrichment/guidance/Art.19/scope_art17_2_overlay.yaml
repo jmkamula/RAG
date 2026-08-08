@@ -1,0 +1,20 @@
+must_id: item:Art.19:scope_art17_2_overlay
+control_ref: Art.19
+standard_id: GDPR:2016/679
+must_text: Art.17.2 public-disclosure overlay (when erased data was made public, additional notification
+  + take-down efforts required)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all instances where personal data was made public, listing each location or platform in a dated
+  record.
+- Document the names and contact details of all third parties or recipients who received or accessed the
+  public data.
+- Record the date and method of notification sent to each recipient, requesting erasure or take-down of
+  the disclosed data.
+- Retain copies of all correspondence and responses from recipients confirming data removal or take-down
+  actions.
+- Name the responsible individual overseeing public data disclosures and take-down requests—do not use
+  a group or department name.

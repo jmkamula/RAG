@@ -1,0 +1,17 @@
+must_id: item:A.8.27:reg_principles_embedded
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Per-pattern principles embedded (mapping back to policy's principle set)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each reference architecture pattern to the specific policy principles it supports, listing
+  both the pattern name and the relevant principle identifiers.
+- Document the rationale for how each architecture pattern embodies or enforces the mapped policy principles,
+  including concrete examples where possible.
+- Assign a named individual as the author or maintainer for each pattern entry, with a date of last review
+  or update.
+- Avoid using generic or placeholder language such as "aligns with policy" without specifying which principle
+  and how the alignment is achieved.

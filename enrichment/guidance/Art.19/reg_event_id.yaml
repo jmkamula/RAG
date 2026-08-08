@@ -1,0 +1,16 @@
+must_id: item:Art.19:reg_event_id
+control_ref: Art.19
+standard_id: GDPR:2016/679
+must_text: Per-row source event id (Art.12 register reference)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each notification entry with the unique source event ID from the Article 12 register
+  in a dedicated column.
+- Record the date and time the notification was made alongside the source event ID for each entry.
+- Name the individual responsible for entering each notification and source event ID, using their full
+  name rather than a generic role or team.
+- Retain a copy of the Article 12 register that matches all referenced event IDs to allow for direct verification
+  by an auditor.

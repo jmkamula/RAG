@@ -1,0 +1,19 @@
+must_id: item:A.5.31:compliance_approach
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Approach for compliance per item (how the obligation is met, which controls/policies/processes
+  evidence it)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each legal, statutory, regulatory, and contractual requirement in the register with a clear, unique
+  reference and effective date.
+- Describe the specific approach or method used to meet each requirement, referencing relevant controls,
+  policies, or documented processes.
+- Cross-reference each requirement to supporting evidence, such as policy documents, process records,
+  or control logs, with document titles and version numbers.
+- Name the responsible individual for each requirement, avoiding generic entries like "Compliance Team"
+  or "Management".
+- Review and update the register at least annually, recording the review date and the reviewer’s name.

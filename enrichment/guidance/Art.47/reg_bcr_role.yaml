@@ -1,0 +1,16 @@
+must_id: item:Art.47:reg_bcr_role
+control_ref: Art.47
+standard_id: GDPR:2016/679
+must_text: Per-row BCR role (BCR-C controller / BCR-P processor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each entity covered by the Binding Corporate Rules in a register, using a separate row for each
+  entity.
+- Assign the BCR role for each entity as either "BCR-C controller" or "BCR-P processor" in a dedicated
+  column.
+- Name the BCR role using only the standard terms "BCR-C controller" or "BCR-P processor"—do not use custom
+  or ambiguous labels.
+- Record the date each row was last reviewed or updated to show the register is current.

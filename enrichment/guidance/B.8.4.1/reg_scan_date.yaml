@@ -1,0 +1,16 @@
+must_id: item:B.8.4.1:reg_scan_date
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+must_text: Scan date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each processor temp files sweep is performed in a dedicated column for every entry
+  in the register.
+- Assign responsibility for entering sweep dates to a named individual, not a team or generic role.
+- Cross-reference each sweep entry with supporting logs or automated tool outputs showing the same scan
+  date.
+- Retain historical sweep dates in the register without overwriting previous entries, ensuring a complete
+  audit trail.

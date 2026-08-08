@@ -1,0 +1,18 @@
+must_id: item:B.8.2.1:reg_assistance_coverage
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+must_text: Assistance coverage per row (which Art.28.3.e-h obligations addressed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each customer agreement separately in the register, including customer name and agreement date
+  for clear identification.
+- State which specific Art.28.3.e-h obligations are covered for each agreement row, using clear references
+  to the contract clauses.
+- Name the person responsible for confirming assistance coverage for each agreement, not just a team or
+  department.
+- Record the date when assistance coverage was last reviewed or updated for each agreement entry.
+- Avoid leaving any agreement row blank or marked as "TBC" for assistance coverage, as this signals incomplete
+  compliance.

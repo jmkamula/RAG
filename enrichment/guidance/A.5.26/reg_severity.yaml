@@ -1,0 +1,16 @@
+must_id: item:A.5.26:reg_severity
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Severity per row (per the classification scale used at triage)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the severity level for each incident in the register, using the same classification scale applied
+  during initial triage.
+- Cross-reference each severity entry with the documented triage decision, including the date and name
+  of the person who assigned it.
+- Name the severity scale used in a visible section of the register, ensuring it matches your current
+  incident response procedure.
+- State the rationale for each severity rating in a dedicated column, avoiding generic or copy-paste justifications.

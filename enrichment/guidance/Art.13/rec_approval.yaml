@@ -1,0 +1,17 @@
+must_id: item:Art.13:rec_approval
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Per-row approval (DPO / Privacy Lead sign-off)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the DPO or Privacy Lead as the specific individual responsible for approving each privacy notice,
+  avoiding generic titles or groups.
+- Record the date of approval for each privacy notice in the publication record to provide a clear timeline
+  of sign-off.
+- Obtain a physical or electronic signature from the DPO or Privacy Lead for each privacy notice entry
+  to confirm explicit approval.
+- Retain the signed approval record alongside each privacy notice entry to allow direct cross-checking
+  during audits.

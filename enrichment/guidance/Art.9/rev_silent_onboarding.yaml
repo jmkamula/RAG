@@ -1,0 +1,19 @@
+must_id: item:Art.9:rev_silent_onboarding
+control_ref: Art.9
+standard_id: GDPR:2016/679
+must_text: Silent-onboarding sweep — verify no new special-category data ingested without the procedure
+  being invoked
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all onboarding processes for new data sources, including a checklist confirming whether special-category
+  data is present or absent.
+- Record the date and outcome of each onboarding sweep in a centralized register, noting any detection
+  of special-category data.
+- Name the reviewer responsible for each onboarding sweep as a specific individual, not a group or team.
+- Retain evidence of any escalations or procedure triggers, including emails or meeting notes, when special-category
+  data is identified.
+- Cross-reference onboarding records with data inventory updates to confirm no silent ingestion of special-category
+  data occurred.

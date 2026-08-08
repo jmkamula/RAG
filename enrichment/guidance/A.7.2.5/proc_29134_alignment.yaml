@@ -1,0 +1,16 @@
+must_id: item:A.7.2.5:proc_29134_alignment
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: Alignment with ISO/IEC 29134 methodology (referenced by §7.2.5)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference ISO/IEC 29134 explicitly in your Privacy Impact Assessment Procedure, citing the standard
+  and relevant sections used for your methodology.
+- Document each step of your assessment process, matching them to the corresponding steps outlined in
+  ISO/IEC 29134 Annex A.
+- Name a specific individual as the procedure owner, avoiding group or departmental ownership.
+- Record the approval date and approver’s name for the current version of the procedure.
+- Attach or cross-reference a completed sample assessment that demonstrates use of the ISO/IEC 29134 methodology.

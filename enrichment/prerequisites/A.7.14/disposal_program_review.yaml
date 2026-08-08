@@ -1,0 +1,39 @@
+leaf_id: req:A.7.14:disposal_program_review
+control_ref: A.7.14
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need a current asset register to know what media or devices exist and require disposal.
+    Without this, you can't verify if all relevant assets have been included in disposal reviews.
+  good_enough: A maintained list of all information assets, including storage media, is available and
+    up-to-date for the review period.
+- ref: A.7.10
+  standard_id: ISO27001:2022
+  title: Storage media
+  category: direct
+  rationale: Media handling and storage rules directly inform disposal practices. You must understand
+    how media is managed to assess if disposal controls and records are complete.
+  good_enough: Documented procedures for handling and storing media are in place and have been followed
+    during the review period.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Disposal requirements depend on the classification of information held on media. You need
+    the classification scheme to verify if disposal actions matched the sensitivity of the data.
+  good_enough: A documented classification scheme exists and is applied to assets, so reviewers can check
+    if disposal controls align with data sensitivity.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which assets and processes fall under the ISMS, clarifying what
+    must be included in the disposal program review.
+  good_enough: A clear, current ISMS scope statement exists, identifying the organizational boundaries
+    for disposal activities.

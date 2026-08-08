@@ -1,0 +1,17 @@
+must_id: item:A.7.13:rev_date
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent maintenance program review date in a central log, clearly showing when the review
+  took place.
+- State the planned review interval in months or years within the maintenance program documentation.
+- Confirm the next scheduled review date is calculated and documented based on the stated interval from
+  the last review date.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Attach evidence of the review, such as meeting minutes or a signed checklist, dated within the planned
+  interval.

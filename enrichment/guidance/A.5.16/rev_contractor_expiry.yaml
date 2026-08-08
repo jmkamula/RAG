@@ -1,0 +1,20 @@
+must_id: item:A.5.16:rev_contractor_expiry
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Contractor-expiry verification (audit that expired contractor identities are actually disabled,
+  not just flagged)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to run periodic checks that all contractor accounts with expired end dates
+  are fully disabled in the identity system.
+- Document the date, scope, and results of each review in a register, listing every expired contractor
+  account and its current status.
+- Cross-reference each disabled account with supporting system logs or screenshots showing the actual
+  disablement action and timestamp.
+- Record any exceptions or failures found, along with the responsible person's name and the corrective
+  action taken.
+- Name the reviewer as a specific person on each review record — do not use generic labels like "IT" or
+  "Security Team".

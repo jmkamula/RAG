@@ -1,0 +1,19 @@
+must_id: item:A.7.4.4:proc_deidentification_technique
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+must_text: De-identification technique selection referencing ISO/IEC 20889 taxonomy
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference the ISO/IEC 20889 taxonomy in your procedure, listing the specific de-identification techniques
+  considered for PII minimization.
+- Document the rationale for selecting each de-identification technique, linking the choice to the relevant
+  ISO/IEC 20889 category.
+- Name the person or role responsible for approving the selected de-identification technique, ensuring
+  it is a specific individual, not a group or department.
+- Record the date when the de-identification technique selection was last reviewed or updated in the procedure
+  document.
+- Attach or cross-reference supporting evidence, such as meeting minutes or decision logs, that show the
+  selection process followed the ISO/IEC 20889 taxonomy.

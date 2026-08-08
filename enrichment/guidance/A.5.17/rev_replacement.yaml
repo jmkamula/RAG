@@ -1,0 +1,20 @@
+must_id: item:A.5.17:rev_replacement
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Replacement-issued status per record where applicable (rotation replaces credential; compromise
+  may force forced re-enrolment, not just rotation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the status of each credential as "revoked," "reissued," or "active" in your credential management
+  log, including the date of status change.
+- State the reason for revocation or reissue for each affected credential, such as routine rotation or
+  suspected compromise, in the same record.
+- Name the individual who authorized the revocation or reissue for each credential entry, avoiding generic
+  roles or team names.
+- Attach supporting evidence, such as incident reports or re-enrolment confirmations, to each record where
+  compromise or forced re-enrolment occurred.
+- Review records regularly to confirm that no credential shows both "active" and "revoked" status simultaneously
+  for the same period.

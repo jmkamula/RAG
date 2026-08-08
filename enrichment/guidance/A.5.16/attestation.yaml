@@ -1,0 +1,20 @@
+must_id: item:A.5.16:attestation
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Periodic identity attestation cadence (e.g. annual recertification of each identity by its
+  owner) referenced
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the required frequency for identity attestation, such as "annual recertification," in the procedure
+  with a clear reference to the review schedule.
+- Cross-reference the procedure to the related control for identity management, specifically ISO27001:2022
+  control A.5.18, within the document.
+- Assign responsibility for initiating and tracking the attestation process to a named individual, not
+  a team or department.
+- Record the most recent attestation date and the person who performed the review for each identity in
+  an auditable register.
+- Specify in the procedure that attestation approvals must be documented in writing, not verbally or via
+  informal channels.

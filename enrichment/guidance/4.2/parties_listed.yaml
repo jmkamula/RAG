@@ -1,0 +1,18 @@
+must_id: item:4.2:parties_listed
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Interested parties listed per row (regulators, customers, suppliers, personnel, shareholders,
+  communities)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each interested party in a separate row, specifying their role such as regulator, customer, supplier,
+  personnel, shareholder, or community.
+- Name the owner of the register as a specific individual, not a team or department.
+- Record the date the register was last updated and the name of the person who made the update.
+- Cross-reference each interested party with their relevant requirements or expectations in an adjacent
+  column.
+- Retain evidence of how each interested party was identified, such as meeting minutes or stakeholder
+  analysis documents.

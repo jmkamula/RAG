@@ -1,0 +1,19 @@
+must_id: item:A.7.5.1:scope_internal_transfers
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: Internal cross-region transfers (multi-region cloud + branch offices)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all regions and countries where personal data is stored, processed, or accessed by your organisation,
+  including cloud and branch office locations, in a dated register.
+- Document the types of personal data transferred between each region or country, referencing specific
+  systems or services involved in the transfers.
+- Name the individual responsible for maintaining the cross-jurisdiction transfer register — do not use
+  a team or department as the owner.
+- Record the legal basis or contractual mechanism for each cross-region transfer, such as standard contractual
+  clauses or adequacy decisions, with supporting documentation.
+- Review and update the scope register at least annually, noting the date of each review and any changes
+  to transfer locations or data types.

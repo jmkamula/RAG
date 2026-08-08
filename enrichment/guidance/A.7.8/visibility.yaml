@@ -1,0 +1,20 @@
+must_id: item:A.7.8:visibility
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Visibility minimisation (screens not facing windows, no labels indicating contents, no public-facing
+  maker/model info)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the physical locations of all equipment, including screen orientation and proximity to windows,
+  in a dated equipment siting log.
+- Record photographs showing that screens are positioned away from windows and are not visible from outside
+  the building.
+- Confirm that all equipment labels and signage do not reveal device contents, make, or model to public
+  areas, with a dated inspection checklist.
+- Name the responsible individual for equipment siting decisions, avoiding generic titles like "IT team"
+  or "Facilities Department".
+- Retain evidence of periodic reviews, such as signed checklists or reports, verifying that visibility
+  minimisation measures remain in place.

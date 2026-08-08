@@ -1,0 +1,16 @@
+must_id: item:B.8.3.1:reg_response
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+must_text: Response per row (what was provided / done)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific response provided to each customer subject-rights request in the register, including
+  what information or action was delivered.
+- State the date the response was sent and the name of the staff member who handled the request for each
+  entry.
+- Attach supporting evidence, such as a copy of the correspondence or confirmation of action taken, to
+  each register row.
+- Name the recipient of the response for each request, avoiding generic labels like "customer" or "requester."

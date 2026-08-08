@@ -1,0 +1,17 @@
+must_id: item:A.8.7:scope_change_drivers
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new asset class, new platform, new threat tactic)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current asset types, platforms, and threat tactics covered by malware protection in a dated
+  document reviewed at least annually.
+- Document specific triggers that require re-scoping, such as introduction of a new asset class, deployment
+  of a new platform, or identification of a new threat tactic.
+- Assign a named individual responsible for monitoring changes and initiating re-scoping when a trigger
+  is met.
+- Record each re-scoping event with the date, trigger description, and decision outcome in a change log.
+- Name the owner as a specific person—avoid using generic titles like "IT team" or "Security department".

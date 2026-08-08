@@ -1,0 +1,16 @@
+must_id: item:6.1.2:rev_reviewer
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Risk Manager + ISMS Manager)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Risk Manager and ISMS Manager as the designated reviewers in the Risk Assessment Program Review
+  document.
+- Record the full names and job titles of both reviewers on the cover page of the review report.
+- Sign and date the review report with handwritten or digital signatures from both the Risk Manager and
+  ISMS Manager.
+- Avoid listing a group or department as the reviewer; specify individual names to meet accountability
+  requirements.

@@ -1,0 +1,20 @@
+must_id: item:A.5.34:rev_register_check
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Per-activity outcome (verified / amended / retired / new added) with lawful-basis-still-valid
+  and retention-still-adequate confirmation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the privacy and PII protection program review, recording their name
+  and the review period in a dated document.
+- List each privacy-related activity, and document the outcome for each as verified, amended, retired,
+  or newly added, with supporting notes.
+- Confirm for every activity that the lawful basis for processing is still valid, recording the check
+  date and the person who verified it.
+- State for each activity whether the data retention period remains adequate, including the review date
+  and reviewer’s name.
+- Avoid using generic statements like “all activities reviewed”; record specific outcomes and checks for
+  each individual activity.

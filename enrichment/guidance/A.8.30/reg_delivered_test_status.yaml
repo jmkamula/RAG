@@ -1,0 +1,18 @@
+must_id: item:A.8.30:reg_delivered_test_status
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Per-engagement delivered-code-test status (latest review outcome)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the latest code review outcome for each outsourced development engagement in the register, including
+  the review date and reviewer’s name.
+- State the specific test status for each delivered codebase, such as "passed", "failed", or "pending",
+  with supporting evidence or links to test reports.
+- Name the reviewer as a specific individual for each engagement — do not use generic roles or team names.
+- Cross-reference each entry with the relevant contract or statement of work to confirm the engagement’s
+  scope and deliverables.
+- Retain any correspondence or sign-off documents related to the code review and test status for each
+  engagement.

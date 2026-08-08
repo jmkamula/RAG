@@ -1,0 +1,19 @@
+must_id: item:A.5.15:third_party
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Third-party / contractor access rules referenced (link to A.5.19 supplier relationships)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference the section in your Access Control Policy that addresses third-party and contractor access,
+  explicitly linking to supplier relationship controls in A.5.19.
+- Document the rules for granting, reviewing, and revoking access for third parties and contractors, including
+  named responsible individuals and review dates.
+- Cross-reference any related supplier agreements or contracts that specify access requirements, listing
+  document titles and effective dates.
+- Name the owner of the Access Control Policy as a specific individual, not a group or department, to
+  avoid ambiguity.
+- Retain a version-controlled copy of the Access Control Policy showing when third-party access rules
+  were added or last updated.

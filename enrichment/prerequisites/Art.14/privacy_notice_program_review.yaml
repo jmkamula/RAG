@@ -1,0 +1,42 @@
+leaf_id: req:Art.14:privacy_notice_program_review
+control_ref: Art.14
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of all processing activities to identify which data sources
+    are third-party and to ensure every relevant flow is covered in the Art.14 review. Without this, you
+    can't be sure your review is complete.
+  good_enough: A current, reasonably comprehensive RoPA that lists all third-party data sources and their
+    purposes is available for reference.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of processing
+  category: direct
+  rationale: Art.14 notices must specify the lawful basis for each processing activity. You can't review
+    or confirm notice content without knowing the lawful basis for each third-party data flow.
+  good_enough: Each third-party data flow has a documented lawful basis under Art.6, even if not yet fully
+    mapped to every processing activity.
+- ref: Art.12
+  standard_id: GDPR:2016/679
+  title: Transparent information, communication and modalities for the exercise of the rights of the data
+    subject
+  category: direct
+  rationale: Art.12 sets the standards for how privacy information must be communicated. Your review must
+    verify that Art.14 notices meet these transparency and communication requirements.
+  good_enough: There is a documented approach or template for delivering privacy notices that aligns with
+    Art.12 transparency standards.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which business units, systems, and processes are included in your
+    compliance program. You need this to ensure your Art.14 review covers all in-scope third-party data
+    sources.
+  good_enough: A current ISMS scope statement exists that clearly identifies the organizational and system
+    boundaries relevant to GDPR obligations.

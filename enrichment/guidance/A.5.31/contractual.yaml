@@ -1,0 +1,17 @@
+must_id: item:A.5.31:contractual
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Contractual obligations summarised (customer contracts, regulator agreements, sectoral codes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each customer contract, regulator agreement, and sectoral code in the register with a unique reference
+  and effective date.
+- Summarise the key contractual obligations for each entry, using plain language that is specific to your
+  organisation.
+- Name the individual responsible for monitoring each obligation — do not use generic roles like "Legal"
+  or "Compliance Team".
+- Attach or link to the full contract or agreement for each summarised obligation in the register.
+- Record the last review date and reviewer’s name for each entry to show obligations are kept up to date.

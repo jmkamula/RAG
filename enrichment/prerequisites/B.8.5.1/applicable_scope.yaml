@@ -1,0 +1,49 @@
+leaf_id: req:B.8.5.1:applicable_scope
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and system boundaries for all information security
+    and privacy controls. You can't accurately describe which processor data transfers are in-scope for
+    privacy unless you know the overall ISMS scope.
+  good_enough: A current, approved ISMS scope statement that clearly identifies the organizational units,
+    systems, and geographies covered by the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: Knowing which information assets exist, including PII and related data flows, is essential
+    to mapping processor transfer activities. Without an asset register, you can't reliably identify or
+    document cross-jurisdiction PII flows.
+  good_enough: A maintained list of information assets, including data types and locations, that covers
+    all PII and related data flows relevant to processor activities.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purposes for which PII is processed to determine which transfers are applicable
+    and in-scope. This ensures only relevant flows are included in the processor transfer scope.
+  good_enough: Documented purposes for all PII processing activities, at least at a summary level, covering
+    all processor operations.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each PII processing activity is necessary to justify and
+    document cross-jurisdiction transfers, especially where legal requirements differ by region.
+  good_enough: A list or matrix mapping each PII processing activity to its lawful basis, sufficient to
+    support transfer scope decisions.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of privacy and data transfer responsibilities ensures that the right people
+    are involved in identifying and documenting applicable processor transfer scope.
+  good_enough: Named individuals or roles responsible for privacy and data transfer activities, documented
+    and communicated within the organization.

@@ -1,0 +1,42 @@
+leaf_id: req:A.5.25:triage_program_review
+control_ref: A.5.25
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which assets, processes, and business units are covered by the
+    ISMS, ensuring the triage program review is relevant and complete. Without a clear scope, the review
+    may miss critical detection sources or misalign with organizational boundaries.
+  good_enough: A documented and approved ISMS scope that identifies the boundaries and applicability of
+    the ISMS, even if not fully optimized.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The triage program relies on a consistent classification scheme to assess and prioritize
+    events. Without an established scheme, reviewers cannot calibrate or evaluate the effectiveness of
+    event classification during the review.
+  good_enough: A documented, organization-wide classification scheme exists and is in use, even if it
+    is due for refinement.
+- ref: A.5.24
+  standard_id: ISO27001:2022
+  title: Information security incident management planning and preparation
+  category: direct
+  rationale: A documented incident management plan provides the foundation for the triage program, defining
+    processes, roles, and escalation paths. The review cannot be meaningful if the underlying plan is
+    missing or unclear.
+  good_enough: An approved incident management plan exists that outlines basic processes and responsibilities,
+    even if detailed procedures are still being refined.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that the right people are accountable for reviewing and
+    updating the triage program. Without this, the review process may lack authority or completeness.
+  good_enough: Roles and responsibilities for incident management and triage are documented and communicated,
+    even if not yet fully embedded in practice.

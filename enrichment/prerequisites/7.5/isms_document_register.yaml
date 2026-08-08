@@ -1,0 +1,40 @@
+leaf_id: req:7.5:isms_document_register
+control_ref: '7.5'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know what parts of the business and which information assets are included in
+    the ISMS before you can register and control documents relevant to it. The scope defines the boundaries
+    for what must be tracked.
+  good_enough: A clear, approved scope statement that identifies the organizational and system boundaries
+    for the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the rules for document management, including requirements for control, review,
+    and approval. Without it, you can't define what documents need to be registered or how they should
+    be managed.
+  good_enough: A formally approved policy that includes at least basic requirements for document control
+    and management.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: You must know who is responsible for each document (owner, approver, reviewer) to populate
+    the register accurately. Clear roles prevent gaps or confusion in document control.
+  good_enough: A documented list or matrix assigning ISMS document ownership and approval responsibilities.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The register should reflect the classification of each document, ensuring sensitive documents
+    are handled appropriately. Without a scheme, you can't consistently record or apply classifications.
+  good_enough: A basic, approved classification scheme that can be referenced in the register, even if
+    not all documents are yet classified.

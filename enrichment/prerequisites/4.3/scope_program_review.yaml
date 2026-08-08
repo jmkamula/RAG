@@ -1,0 +1,39 @@
+leaf_id: req:4.3:scope_program_review
+control_ref: '4.3'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.1'
+  standard_id: ISO27001:2022
+  title: Understanding the organization and its context
+  category: foundational
+  rationale: You must first understand your organization's context—its mission, environment, and key drivers—before
+    you can meaningfully review whether your ISMS scope remains accurate and relevant.
+  good_enough: A current, documented summary of organizational context, even if brief, that reflects any
+    major changes in the past year.
+- ref: '4.2'
+  standard_id: ISO27001:2022
+  title: Understanding the needs and expectations of interested parties
+  category: foundational
+  rationale: The needs and expectations of stakeholders (customers, regulators, partners) directly impact
+    what should be in scope for your ISMS, so these must be understood before reviewing scope.
+  good_enough: A list or summary of key interested parties and their relevant requirements, updated within
+    the last year.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: direct
+  rationale: You need an existing, documented ISMS scope statement to review; without it, there is nothing
+    to verify or update.
+  good_enough: A written scope statement that describes what parts of the organization and which processes
+    are currently included in the ISMS, even if it needs updating.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures the right people are involved in the
+    scope review and that any changes are properly captured.
+  good_enough: A basic record of who is responsible for ISMS management and scope decisions, even if not
+    fully formalized.

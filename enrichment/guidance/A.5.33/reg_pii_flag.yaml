@@ -1,0 +1,19 @@
+must_id: item:A.5.33:reg_pii_flag
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: PII flag per class (drives GDPR Art.5.1.e storage-limitation overlay — cross-link to the procedure's
+  PII overlay)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to your Records Schedule that clearly flags each record class as containing personal data
+  or not.
+- Cross-reference each record class flagged as containing personal data to the relevant GDPR storage-limitation
+  procedure or overlay.
+- Name the person responsible for maintaining the PII flag and cross-link for each record class, using
+  a specific individual’s name.
+- Record the date when each PII flag and cross-link was last reviewed or updated in the register.
+- Avoid using generic terms like "various" or "all staff" in the PII flag or owner fields; specify exact
+  details for each entry.

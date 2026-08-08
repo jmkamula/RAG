@@ -1,0 +1,19 @@
+must_id: item:Art.18:scope_data_classes
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Data classes covered (each with implementation pattern — flag / partition / lock)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all personal data classes subject to restriction of processing under Article 18, specifying each
+  type in a dated inventory document.
+- Describe the technical method used for each data class to implement restriction—such as flagging, partitioning,
+  or locking—in a written procedure.
+- Cross-reference each data class and its restriction method to system configuration records or screenshots
+  showing the restriction in effect.
+- Name the individual responsible for maintaining the restriction implementation list, avoiding generic
+  titles like "IT team" or "Data Office".
+- Retain evidence of periodic reviews confirming that restriction mechanisms remain active and effective
+  for each listed data class.

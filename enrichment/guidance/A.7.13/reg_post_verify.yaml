@@ -1,0 +1,19 @@
+must_id: item:A.7.13:reg_post_verify
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Per-event post-verification result (passed / failed-with-action)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the maintenance event date, equipment involved, and responsible technician in the Maintenance
+  Event Register immediately after each maintenance activity.
+- State the post-maintenance verification result as "passed" or "failed-with-action" for each event entry,
+  with no ambiguous terms or blank fields.
+- Name the individual who performed the verification check for each event, ensuring a specific person
+  is listed, not a team or department.
+- Document any required follow-up actions for failed verifications, including a brief description and
+  assigned responsible person, directly in the register.
+- Retain the signed or digitally acknowledged verification record for each event, showing who confirmed
+  the result and when.

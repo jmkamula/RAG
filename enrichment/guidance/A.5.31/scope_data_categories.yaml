@@ -1,0 +1,19 @@
+must_id: item:A.5.31:scope_data_categories
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Personal/sensitive/regulated data categories processed (drives GDPR, HIPAA, sectoral data laws)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all categories of personal, sensitive, or regulated data processed by your organisation in a dated
+  document reviewed within the past year.
+- Name the specific laws or regulations that apply to each data category, such as GDPR, HIPAA, or sector-specific
+  rules.
+- Assign a responsible individual for maintaining and updating the data categories and regulatory mapping,
+  avoiding generic roles like "the team."
+- Cross-reference each data category to the relevant business process or system where it is handled, using
+  clear identifiers.
+- Retain evidence of management approval for the documented scope, such as a signed or digitally approved
+  statement.

@@ -1,0 +1,17 @@
+must_id: item:5.3:chg_a52_check
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: A.5.2 operational-roles cross-check captured (where 5.3 and A.5.2 touch)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each ISMS role change with the corresponding operational role listed under control A.5.2,
+  noting both roles in the change record.
+- Record the date and name of the individual who verified that the ISMS and operational roles align for
+  each change entry.
+- Attach supporting documentation, such as updated organization charts or role descriptions, to each change
+  record entry.
+- Name the verifier as a specific individual—avoid using generic titles like "the team" or "management"
+  in the record.

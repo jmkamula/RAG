@@ -1,0 +1,48 @@
+leaf_id: req:Art.30:ropa_maintenance_procedure
+control_ref: Art.30
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA) Inventory
+  category: direct
+  rationale: The maintenance procedure only makes sense if a RoPA inventory already exists; you need something
+    to maintain and update. Without a current register, you cannot define how to keep it accurate or who
+    is responsible.
+  good_enough: A basic, initial RoPA exists, listing key processing activities, even if not fully detailed
+    or perfect. It must be a living document, not just a template.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer (DPO) Designation
+  category: foundational
+  rationale: The DPO (if required) is typically responsible for overseeing RoPA maintenance or at least
+    involved in the process. Knowing who the DPO is clarifies roles and accountability in the procedure.
+  good_enough: A named DPO (internal or external) is designated, with contact details recorded and communicated
+    to staff.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: direct
+  rationale: RoPA entries must include the lawful basis for each processing activity. The maintenance
+    procedure must ensure updates reflect any changes in lawful basis, so these must be established first.
+  good_enough: Each processing activity in the RoPA has a stated lawful basis, even if some are provisional
+    or under review.
+- ref: Art.28
+  standard_id: GDPR:2016/679
+  title: Processor Engagement and Data Processing Agreements
+  category: direct
+  rationale: Changes in processors (triggering RoPA updates) depend on having a process for onboarding
+    and managing processors under Art.28. The maintenance procedure must link to this process.
+  good_enough: A basic process exists for identifying and documenting new processors, with at least draft
+    DPAs in place for new relationships.
+- ref: Art.35
+  standard_id: GDPR:2016/679
+  title: Data Protection Impact Assessment (DPIA)
+  category: direct
+  rationale: High-risk processing activities (identified via DPIA) often require RoPA updates. The maintenance
+    procedure must reference how DPIA outcomes feed into RoPA maintenance.
+  good_enough: A DPIA process exists and is triggered for new high-risk activities, even if only a few
+    DPIAs have been completed so far.

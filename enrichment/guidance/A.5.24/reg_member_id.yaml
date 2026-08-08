@@ -1,0 +1,15 @@
+must_id: item:A.5.24:reg_member_id
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Each IR team member captured with a unique identifier (employee or contractor id)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every incident response team member by full name in the Incident Response Team Register.
+- Record each team member’s unique identifier, such as their employee or contractor ID, next to their
+  name in the register.
+- State the employment status of each member (employee or contractor) alongside their unique identifier.
+- Name the owner of the register as a specific individual, not a generic team or department.
+- Date and sign the register to confirm its accuracy and completeness.

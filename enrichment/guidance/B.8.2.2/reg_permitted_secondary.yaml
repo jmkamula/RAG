@@ -1,0 +1,19 @@
+must_id: item:B.8.2.2:reg_permitted_secondary
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: Permitted secondary uses per row (where customer has authorised anonymised aggregate use)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each permitted secondary use in a separate column or field, clearly linked to the relevant customer
+  and their express authorisation.
+- Record the date and method of customer authorisation for each secondary use, referencing the original
+  instruction or consent document.
+- Name the specific individual who approved the entry of each secondary use, avoiding generic titles or
+  group names.
+- Attach or cross-reference the anonymisation process documentation for each secondary use to show compliance
+  with the customer's conditions.
+- Avoid using vague or boilerplate descriptions of secondary use; specify the actual use case as described
+  in the customer’s authorisation.

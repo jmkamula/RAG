@@ -1,0 +1,17 @@
+must_id: item:Art.6:lia_link
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: For legitimate-interests activities, link to LIA (necessity + balance test)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity relying on legitimate interests in your Lawful Basis Register, using clear,
+  specific descriptions.
+- Link each listed activity to its completed Legitimate Interests Assessment (LIA), including both the
+  necessity and balance test sections.
+- Record the date of completion and the name of the individual who approved each LIA for traceability.
+- Attach or cross-reference the full LIA document, not just a summary or statement, to each relevant register
+  entry.
+- Name the owner of each LIA as a specific person, not a generic role or team.

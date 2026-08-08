@@ -1,0 +1,15 @@
+must_id: item:5.3:authorities_assigned
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Authorities assigned for each role (decision rights, sign-off authority)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each ISMS role in a table, using the exact job title and full name of the current role holder.
+- Specify the decision rights and sign-off authority for each role, describing what each person can approve
+  or authorize.
+- Reference the date the matrix was last updated and the person who approved the current version.
+- Name the owner as a specific individual — do not use generic labels like "the team" or "IT department".
+- Retain a signed copy of the matrix, showing formal approval by senior management.

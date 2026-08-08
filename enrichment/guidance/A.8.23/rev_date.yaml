@@ -1,0 +1,15 @@
+must_id: item:A.8.23:rev_date
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent web filtering program review in a central register or tracking document.
+- State the planned review interval for the web filtering program in a documented schedule or policy.
+- Confirm that the actual review date falls within the documented planned interval by cross-referencing
+  both records.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Retain a copy of the signed or approved review outcome as evidence of completion.

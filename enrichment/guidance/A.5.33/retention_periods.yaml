@@ -1,0 +1,19 @@
+must_id: item:A.5.33:retention_periods
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Retention period per record class (concrete duration — years/months, with start-trigger and
+  end-trigger defined)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each record class in your register, using clear names that match your organisation’s actual records
+  and business activities.
+- Specify a concrete retention period for each record class, stating the exact number of years or months
+  to keep the records.
+- Define the event that triggers the start of the retention period for each class, such as "contract end
+  date" or "employee departure."
+- State the action or event that marks the end of the retention period, such as "records destroyed" or
+  "records archived."
+- Name the owner as a specific individual responsible for each record class, not just a team or department.

@@ -1,0 +1,18 @@
+must_id: item:7.5:reg_classification
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Information classification per row (cross-link to A.5.12)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each ISMS document in the register with its unique title, version, and location to allow clear
+  identification and retrieval.
+- Assign a specific information classification label to each document row, matching your organisation’s
+  classification scheme.
+- Cross-reference each classification entry to the relevant policy or procedure that defines classification
+  levels, such as your A.5.12 documentation.
+- Name the document owner as a specific individual for each row, avoiding generic entries like "IT" or
+  "the team".
+- Record the date each document was last reviewed or updated to show ongoing protection and oversight.

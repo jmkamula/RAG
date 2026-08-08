@@ -1,0 +1,18 @@
+must_id: item:Art.34:reg_high_risk_decision
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: Per-row high-risk decision (high risk → communicate / no high risk → no communication, with
+  rationale)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each high-risk data breach decision in the Subject Communication Record, including the date,
+  nature of breach, and risk assessment outcome.
+- State clearly for each entry whether communication to affected individuals was required, based on the
+  risk assessment.
+- Document the rationale for each decision, referencing specific risk factors and mitigation actions considered.
+- Name the decision-maker for each entry as a specific individual, not a team or department.
+- Attach supporting evidence, such as risk assessment reports or communication templates, to each record
+  entry.

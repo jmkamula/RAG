@@ -1,0 +1,18 @@
+must_id: item:A.6.2:rev_ad_hoc_triggers
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Ad-hoc review triggers (major policy change, employment-law reform, regulator action affecting
+  employment InfoSec terms)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each ad-hoc review trigger by recording the specific event, such as a policy change or legal
+  update, with the date and a brief description.
+- Name the individual responsible for monitoring and initiating reviews in response to external or internal
+  changes, ensuring a single point of accountability.
+- Retain evidence of the review decision, such as meeting minutes or a signed memo, clearly referencing
+  the trigger event and the action taken.
+- Avoid using generic statements like "review as needed" by specifying the exact trigger and corresponding
+  review action in your records.

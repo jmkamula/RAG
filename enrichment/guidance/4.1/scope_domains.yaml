@@ -1,0 +1,18 @@
+must_id: item:4.1:scope_domains
+control_ref: '4.1'
+standard_id: ISO27001:2022
+must_text: Issue domains enumerated (regulatory, threat landscape, market, technology, supply chain, geopolitical,
+  environmental, workforce)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each issue domain relevant to your organisation, including regulatory, threat landscape, market,
+  technology, supply chain, geopolitical, environmental, and workforce, in a dated scope document.
+- Name the person responsible for maintaining the issue domain list, ensuring a specific individual is
+  identified rather than a team or department.
+- Cross-reference each issue domain with supporting evidence, such as risk assessments or regulatory registers,
+  to show consideration of all required areas.
+- Review the scope document annually and record the review date and reviewer’s name to demonstrate regular
+  updates.

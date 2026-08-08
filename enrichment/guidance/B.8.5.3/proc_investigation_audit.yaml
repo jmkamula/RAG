@@ -1,0 +1,17 @@
+must_id: item:B.8.5.3:proc_investigation_audit
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+must_text: Investigation + external audit disclosures also recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each instance where personal data is disclosed for a lawful investigation or external audit
+  in a dedicated disclosure log with date and purpose.
+- Name the recipient organization and the specific individual or role who received the disclosed data
+  in the log entry.
+- Record the legal basis or authority that required the disclosure, referencing the relevant request or
+  mandate.
+- Attach supporting evidence, such as the official request or audit notice, to each disclosure log entry.
+- Name the owner of the disclosure log as a specific individual, not a team or department.

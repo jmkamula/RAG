@@ -1,0 +1,17 @@
+must_id: item:A.7.2.8:scope_coverage_test
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Coverage test — RoPA rowcount reconciles against A.7.2.1 purpose register + system inventory
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the number of processing activities in your RoPA with the list of purposes in your A.7.2.1
+  purpose register and your system inventory.
+- Record the date and outcome of the reconciliation, noting any discrepancies and how they were resolved,
+  in a version-controlled document.
+- Name a specific individual responsible for performing and signing off on the reconciliation—avoid using
+  a team or department as the owner.
+- Retain supporting evidence, such as annotated registers or screenshots, showing the matching entries
+  and any adjustments made during the reconciliation.

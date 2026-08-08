@@ -1,0 +1,18 @@
+must_id: item:A.5.37:scope_change_drivers
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new system entering production, SaaS adoption, M&A bringing new
+  facilities, decommission)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all triggers that require a review of the information processing facilities scope, such as new
+  systems, SaaS adoption, M&A, or decommissioning.
+- Document each trigger in a dated register, specifying the event and the individual responsible for initiating
+  the re-scoping process.
+- Assign a named owner to review and update the facilities scope when any trigger occurs—do not use a
+  team or department as the owner.
+- Retain evidence of each scope review, including the date, trigger event, and decision, in a version-controlled
+  document.

@@ -45,6 +45,15 @@ PROV_COMMENT_RE  = re.compile(r"^<!--.+?-->\n*", re.DOTALL)
 # is a controlled document.
 DOC_CONTROL_RE       = re.compile(r"^\s*<<DOC_CONTROL>>\s*$")
 REVISION_HISTORY_RE  = re.compile(r"^\s*<<REVISION_HISTORY>>\s*$")
+# Ship 57' — per-leaf prerequisites marker. Sits once per template
+# (typically under "Before you start"); rendered as a grouped callout
+# based on the target leaf_id. Empty prereqs ⇒ marker silently dropped.
+PREREQUISITES_MARKER_RE = re.compile(r"^\s*<<PREREQUISITES>>\s*$")
+
+# Ship 56'.a — per-MUST guidance marker. Interleaved between the
+# MUST/SHOULD marker and the tenant's <<TEXT>> placeholder; resolves to
+# the guidance array on the preceding ChecklistItem.
+GUIDANCE_MARKER_RE  = re.compile(r"^\s*<<GUIDANCE>>\s*$")
 INLINE_RUN_RE    = re.compile(
     r"(\*\*[^*\n]+\*\*"     # **bold**
     r"|__[^_\n]+__"          # __bold__
@@ -153,6 +162,91 @@ def _render_edit_zone_marker(doc, label: str, mid: str) -> None:
     run.font.size  = Pt(9)
     run.italic = True
     run.font.color.rgb = RGBColor(0xBA, 0xB8, 0xAB)
+
+
+def _render_guidance_block(doc, guidance: tuple[str, ...] | list[str]) -> None:
+    """Render a per-MUST guidance callout: bold 'Best practice:' label
+    followed by an indented bullet list of imperative steps. Ship 56'.a."""
+    if not guidance:
+        return
+    label_p = doc.add_paragraph()
+    label_p.paragraph_format.space_before = Pt(6)
+    label_p.paragraph_format.space_after  = Pt(2)
+    lr = label_p.add_run("Best practice:")
+    lr.bold = True
+    lr.font.size = Pt(10)
+    lr.font.color.rgb = RGBColor(0x40, 0x40, 0x40)
+    for g in guidance:
+        bp = doc.add_paragraph(style="List Bullet")
+        bp.paragraph_format.left_indent   = Cm(0.8)
+        bp.paragraph_format.space_before  = Pt(0)
+        bp.paragraph_format.space_after   = Pt(2)
+        _add_runs_with_formatting(bp, g)
+        for run in bp.runs:
+            if run.font.size is None:
+                run.font.size = Pt(10)
+
+
+def _render_prerequisites_block(doc, prereqs) -> None:
+    """Render the per-leaf prerequisites callout: bold "Prerequisites:"
+    label, then grouped entries (foundational → direct → cross_role)
+    each with a ref+title heading, a Why line, and an optional
+    Good-enough line. Ship 57'."""
+    if not prereqs:
+        return
+    order = ("foundational", "direct", "cross_role")
+    by_cat: dict[str, list] = {}
+    for p in prereqs:
+        by_cat.setdefault(p.category, []).append(p)
+
+    label_p = doc.add_paragraph()
+    label_p.paragraph_format.space_before = Pt(6)
+    label_p.paragraph_format.space_after  = Pt(2)
+    lr = label_p.add_run("Prerequisites:")
+    lr.bold = True
+    lr.font.size = Pt(10)
+    lr.font.color.rgb = RGBColor(0x40, 0x40, 0x40)
+
+    for cat in order:
+        for p in by_cat.get(cat, []):
+            ref_display = _humanize_std_ref(p.standard_id, p.ref)
+            head = doc.add_paragraph(style="List Bullet")
+            head.paragraph_format.left_indent  = Cm(0.8)
+            head.paragraph_format.space_before = Pt(2)
+            head.paragraph_format.space_after  = Pt(0)
+            head_run = head.add_run(f"{ref_display} — {p.title}")
+            head_run.bold = True
+            head_run.font.size = Pt(10)
+
+            why = doc.add_paragraph()
+            why.paragraph_format.left_indent  = Cm(1.4)
+            why.paragraph_format.space_before = Pt(0)
+            why.paragraph_format.space_after  = Pt(0)
+            _add_runs_with_formatting(why, f"Why: {p.rationale}")
+            for run in why.runs:
+                if run.font.size is None:
+                    run.font.size = Pt(10)
+
+            if p.good_enough:
+                ge = doc.add_paragraph()
+                ge.paragraph_format.left_indent  = Cm(1.4)
+                ge.paragraph_format.space_before = Pt(0)
+                ge.paragraph_format.space_after  = Pt(2)
+                _add_runs_with_formatting(ge, f"Good enough: {p.good_enough}")
+                for run in ge.runs:
+                    if run.font.size is None:
+                        run.font.size = Pt(10)
+
+
+def _humanize_std_ref(standard_id: str, ref: str) -> str:
+    """Compact display form for prereq ref+std headers."""
+    if standard_id.startswith("GDPR:"):
+        return f"GDPR {ref}"
+    if standard_id.startswith("ISO27001:"):
+        return f"ISO 27001 {ref}"
+    if standard_id.startswith("ISO27701:"):
+        return f"ISO 27701 {ref}"
+    return f"{standard_id} {ref}"
 
 
 def _render_text_placeholder(doc) -> None:
@@ -339,6 +433,8 @@ def render_template_docx(
 
     in_code_block = False
     in_list_block = False
+    current_item_id: str | None = None   # Ship 56'.a — set on MUST/SHOULD marker;
+                                          # consumed by <<GUIDANCE>> marker.
 
     for raw_line in body.splitlines():
         line = raw_line.rstrip()
@@ -374,7 +470,25 @@ def render_template_docx(
         # MUST / SHOULD marker as its own line
         marker = MUST_MARKER_RE.match(line.strip())
         if marker:
+            current_item_id = marker.group(2)
             _render_marker_line(doc, marker)
+            continue
+
+        # Ship 56'.a — <<GUIDANCE>> marker → per-MUST guidance callout
+        # for the preceding MUST/SHOULD's ChecklistItem. Empty list ⇒
+        # marker silently dropped.
+        if GUIDANCE_MARKER_RE.match(line):
+            if current_item_id:
+                from rag.templates.guidance_lookup import get_guidance_for_item
+                _render_guidance_block(doc, get_guidance_for_item(current_item_id))
+            continue
+
+        # Ship 57' — <<PREREQUISITES>> marker → per-leaf prereqs callout.
+        # Uses the template's target leaf_id (parameter to this function),
+        # not a preceding item marker. Empty prereqs ⇒ marker dropped.
+        if PREREQUISITES_MARKER_RE.match(line):
+            from rag.templates.prerequisites_lookup import get_prerequisites_for_leaf
+            _render_prerequisites_block(doc, get_prerequisites_for_leaf(leaf_id))
             continue
 
         # EDIT-ZONE markers

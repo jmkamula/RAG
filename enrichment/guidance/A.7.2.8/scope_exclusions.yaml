@@ -1,0 +1,17 @@
+must_id: item:A.7.2.8:scope_exclusions
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Exclusions — anonymous / aggregate processing not in RoPA with rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all processing activities excluded from the Record of Processing Activities (RoPA) because they
+  involve only anonymous or aggregate data.
+- Document the rationale for each exclusion, clearly explaining why the data cannot identify an individual.
+- Reference supporting evidence, such as data anonymisation reports or aggregation procedures, for each
+  excluded activity.
+- Name the person responsible for approving each exclusion, ensuring a specific individual is identified
+  rather than a team or department.
+- Date each exclusion decision and rationale to show when the determination was made.

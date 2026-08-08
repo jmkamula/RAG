@@ -1,0 +1,17 @@
+must_id: item:A.6.4:owner
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Named owner of the procedure (HR with InfoSec partner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual in HR as the primary owner of the disciplinary process, listing their full
+  name and job title in the document.
+- Assign a named partner from the Information Security team, including their full name and job title,
+  as co-owner in the procedure.
+- Document the date of last review and approval by both the HR owner and InfoSec partner, capturing their
+  signatures or digital approvals.
+- Avoid listing the owner as "HR department," "the team," or any generic group—use only named individuals
+  to meet accountability requirements.

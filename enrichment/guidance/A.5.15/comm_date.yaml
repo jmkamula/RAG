@@ -1,0 +1,16 @@
+must_id: item:A.5.15:comm_date
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Date of publication/communication
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date the access control policy was first published or communicated in a dated communication
+  log entry.
+- Name the individual responsible for distributing the policy, listing their full name rather than just
+  a role or department.
+- Retain a copy of the communication sent to staff, such as an email or intranet post, showing the date
+  and recipients.
+- Confirm that any updates to the policy are also communicated with a new date recorded for each version.

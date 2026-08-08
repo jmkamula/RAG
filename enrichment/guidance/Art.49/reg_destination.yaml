@@ -1,0 +1,16 @@
+must_id: item:Art.49:reg_destination
+control_ref: Art.49
+standard_id: GDPR:2016/679
+must_text: Per-row destination + recipient
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific country or jurisdiction for each data transfer in the Derogation Invocation Register,
+  clearly identifying the destination per entry.
+- List the full legal name of each recipient organization or individual for every transfer row, avoiding
+  generic terms like "partner" or "third party."
+- Cross-reference each register entry with the corresponding Article 44 assessment or documentation to
+  demonstrate the legal basis for the transfer.
+- Date each entry and identify the staff member responsible for recording the transfer details.

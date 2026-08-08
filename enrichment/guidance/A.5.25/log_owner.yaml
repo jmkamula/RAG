@@ -1,0 +1,16 @@
+must_id: item:A.5.25:log_owner
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Named triager per row (accountability)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the individual responsible for triaging each security event in a dedicated column
+  for every log entry.
+- Enter the date and time when each triage action was completed to provide a clear timeline for every
+  event.
+- Name the triager as a specific person, not a group, team, or generic role, to avoid ambiguity in accountability.
+- Retain the triage log in a secure, version-controlled location to ensure records are not altered or
+  lost.

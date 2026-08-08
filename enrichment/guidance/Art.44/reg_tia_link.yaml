@@ -1,0 +1,19 @@
+must_id: item:Art.44:reg_tia_link
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Per-row link to Transfer Impact Assessment where Schrems II analysis applies
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each international data transfer entry with a direct link to the completed Transfer
+  Impact Assessment, including Schrems II analysis where required.
+- Record the date and name of the individual who conducted the Schrems II assessment for each transfer,
+  ensuring traceability.
+- Attach supporting documentation or summary of the Schrems II analysis to each register entry, not just
+  a generic statement of completion.
+- Name the Transfer Impact Assessment owner as a specific individual for each entry, avoiding use of team
+  or department names.
+- Review each register row to confirm that the Schrems II analysis link is unique and not a reused template
+  across multiple transfers.

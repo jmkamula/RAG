@@ -1,0 +1,18 @@
+must_id: item:A.7.2.6:reg_annex_b_coverage
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Annex B controls covered per row (either 'all' or itemised subset with justification link)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each contract row with a clear statement of whether all Annex B controls are covered or specify
+  the exact subset that applies.
+- Link each itemised subset to a documented justification, such as a risk assessment or client instruction,
+  with a reference to the supporting document.
+- Name the individual responsible for reviewing and updating the register, ensuring a specific person
+  is accountable rather than a generic team or department.
+- Record the date of the most recent review or update for each contract entry to show ongoing compliance.
+- Avoid using blanket statements like "all controls apply" without supporting evidence; always provide
+  justification or mapping for any exceptions.

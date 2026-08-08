@@ -1,0 +1,18 @@
+must_id: item:A.7.2.2:scope_basis_catalogs
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: Per-jurisdiction basis catalog (Art.6.1 GDPR / CCPA opt-out model / LGPD Art.7)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each jurisdiction where personal data is processed or stored in a dated register, naming the country,
+  state, or region specifically.
+- Document the lawful basis or consent model used for processing personal data in each jurisdiction, referencing
+  the relevant legal article or statute.
+- Assign a named individual responsible for maintaining and updating the jurisdictional register, avoiding
+  generic titles like "the team" or "compliance department".
+- Cross-reference each jurisdiction’s entry with supporting evidence, such as privacy notices, consent
+  forms, or contractual clauses, to show alignment with stated legal bases.
+- Review and update the register at least annually, recording the review date and the name of the reviewer.

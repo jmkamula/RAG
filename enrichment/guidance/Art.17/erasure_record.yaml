@@ -1,0 +1,18 @@
+must_id: item:Art.17:erasure_record
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Erasure recorded with what was deleted, when, by whom, verification (links to A.8.10:records)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each erasure request with a unique identifier, the data subject’s name, and the specific data
+  items to be deleted.
+- Record the exact date and time when the erasure was completed in a dedicated erasure log.
+- Name the individual who performed the erasure, ensuring a specific person is listed rather than a team
+  or department.
+- Capture evidence of verification by having a second named individual review and sign off that the erasure
+  was fully completed.
+- Cross-reference the erasure log entry with related records in your data inventory to confirm all relevant
+  data was deleted.

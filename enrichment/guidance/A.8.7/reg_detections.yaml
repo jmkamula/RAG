@@ -1,0 +1,16 @@
+must_id: item:A.8.7:reg_detections
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Per-asset detection event count + open dispositions
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each asset with a unique identifier and responsible owner in the Malware Protection Coverage Register.
+- Record the number of malware detection events per asset with corresponding dates and detection tool
+  used.
+- Document the current status of each detection event, clearly marking those with open or unresolved dispositions.
+- Update the register at least weekly, noting the date of each update and the name of the person making
+  the entry.
+- Name the owner for each asset as a specific individual, not a team or department.

@@ -1,0 +1,19 @@
+must_id: item:A.7.11:alternate_site
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Alternate-site considerations where redundancy unachievable on-site
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific alternate site location and its capabilities in the Supporting Utilities Continuity
+  Procedure, including address and utility support details.
+- Name the individual responsible for activating the alternate site in case of primary site utility failure,
+  listing their full name and contact information.
+- Record the date and outcome of the most recent test or simulation of switching to the alternate site,
+  attaching supporting evidence such as logs or reports.
+- State the criteria under which the alternate site would be used, referencing scenarios where on-site
+  redundancy is not possible.
+- Avoid using generic descriptions like "offsite location"—specify the actual site to prevent auditor
+  concerns about vague or boilerplate documentation.

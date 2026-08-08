@@ -1,0 +1,48 @@
+leaf_id: req:A.7.4.3:accuracy_procedure
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which business units, processes, and systems are in scope for privacy management
+    before you can define how PII accuracy will be maintained. This ensures your accuracy procedure covers
+    all relevant PII.
+  good_enough: A documented scope that clearly identifies the boundaries of your ISMS and includes all
+    PII processing activities.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register is essential to identify where PII resides, so you can target
+    accuracy controls to the right data stores and flows.
+  good_enough: A basic inventory listing all systems, applications, and repositories where PII is processed
+    or stored.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: You must know which data is classified as PII to apply accuracy procedures appropriately.
+    Without this, you risk missing relevant data or overextending controls.
+  good_enough: A documented scheme that labels PII and other sensitive data types, even if not fully rolled
+    out to all assets yet.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Understanding the purpose for which PII is processed is critical to defining what 'accurate'
+    and 'up-to-date' mean for each data set.
+  good_enough: A list of processing purposes for each PII data set, even if some are high-level or pending
+    legal review.
+- ref: A.7.3.6
+  standard_id: ISO27701:2019
+  title: Correction Procedure
+  category: direct
+  rationale: Your accuracy procedure must align with and reference the process for correcting inaccurate
+    PII, as required by both ISO27701 and GDPR.
+  good_enough: A draft or outline of the correction procedure, showing how individuals can request corrections
+    and how these are actioned.

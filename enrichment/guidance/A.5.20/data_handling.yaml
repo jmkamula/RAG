@@ -1,0 +1,16 @@
+must_id: item:A.5.20:data_handling
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Data handling requirements (encryption at rest and in transit, location/sovereignty)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the template that all supplier-handled data must be encrypted both at rest and during transmission,
+  referencing specific encryption standards.
+- Specify in the template the permitted geographic locations or countries where supplier data may be stored
+  or processed.
+- Name the individual or role responsible for reviewing and updating the data handling requirements section
+  in the template, not just "the team."
+- Record the date of the most recent update to the data handling requirements within the template document.

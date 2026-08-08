@@ -1,0 +1,19 @@
+must_id: item:A.5.13:rev_scheme_alignment
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Scheme-alignment audit (labels in active systems match A.5.12 levels; drift triggers re-mapping)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the periodic review of the labelling program, recording their name
+  and the review period in a dated log.
+- Cross-reference each label in active systems against the organisation’s documented information classification
+  scheme from A.5.12, noting any mismatches in a review report.
+- Document any changes in system labels or classification levels since the last review, including the
+  date and rationale for each adjustment.
+- State the trigger process for re-mapping labels when drift is detected, and retain evidence of at least
+  one completed re-mapping event.
+- Name the review approver as a specific person, not a group or department, and capture their dated sign-off
+  on the review outcome.

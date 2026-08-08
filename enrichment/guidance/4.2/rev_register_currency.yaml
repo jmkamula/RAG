@@ -1,0 +1,19 @@
+must_id: item:4.2:rev_register_currency
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Register currency check — every party row reviewed for continued relevance, new parties added
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Review each row in the Interested Parties Register and confirm the continued relevance of every listed
+  party with a dated reviewer comment.
+- Add any newly identified interested parties to the register, including the date added and the person
+  responsible for identification.
+- Name the reviewer as a specific individual for each entry, avoiding generic labels like "the team" or
+  "management."
+- Record the date of the most recent full register review at the top of the document for clear evidence
+  of currency.
+- Cross-reference any changes in the register with related risk assessments or policy documents to ensure
+  consistency.

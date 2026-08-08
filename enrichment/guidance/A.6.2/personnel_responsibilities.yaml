@@ -1,0 +1,18 @@
+must_id: item:A.6.2:personnel_responsibilities
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Personnel's information security responsibilities stated (confidentiality, acceptable use,
+  access discipline, incident reporting obligation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific information security responsibilities in the contract template, including confidentiality,
+  acceptable use, access discipline, and incident reporting obligations.
+- Name the responsible role or individual who maintains and updates the contract template, rather than
+  leaving it as "HR" or "the team".
+- Record the date of the latest template review and approval, and include the approver’s name or signature
+  on the document.
+- Cross-reference the contract template with the current information security policy to ensure alignment
+  of stated responsibilities.

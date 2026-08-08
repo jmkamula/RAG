@@ -1,0 +1,18 @@
+must_id: item:B.8.2.2:scope_data_flows
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: Data-flow map — customer PII vs own-controller PII boundary documented
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Draw a data-flow map that clearly shows where customer personal data enters, is processed, and exits
+  your systems.
+- Label each data-flow step as either customer personal data (processed on behalf of customers) or your
+  own-controller personal data.
+- Name the specific individual responsible for maintaining and updating the data-flow map, not just a
+  team or department.
+- Date and version the data-flow map so auditors can see when it was last reviewed and by whom.
+- Cross-reference each processing activity on the map to its documented business purpose to show alignment
+  with intended use.

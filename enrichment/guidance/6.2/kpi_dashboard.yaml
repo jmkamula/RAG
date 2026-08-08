@@ -1,0 +1,19 @@
+must_id: item:6.2:kpi_dashboard
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: KPI dashboard linked
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the KPI dashboard as a specific individual responsible for maintaining its accuracy
+  and updates.
+- Document the direct link between each information security objective in the register and its corresponding
+  KPI on the dashboard.
+- Record the date when the KPI dashboard was last updated and reviewed for alignment with current security
+  objectives.
+- Confirm that the KPI dashboard is accessible to relevant stakeholders by listing their names and access
+  permissions.
+- Cross-reference the objectives register with the live KPI dashboard to show real-time visibility, not
+  just a static or outdated report.

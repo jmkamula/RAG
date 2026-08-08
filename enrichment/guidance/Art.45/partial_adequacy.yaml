@@ -1,0 +1,20 @@
+must_id: item:Art.45:partial_adequacy
+control_ref: Art.45
+standard_id: GDPR:2016/679
+must_text: Partial / sector / territory-specific adequacy handled (e.g. US-DPF applies only to certified
+  entities, not US-wide)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each country, territory, or sector where adequacy is relied upon, referencing the official
+  European Commission adequacy decision and its scope.
+- State the specific legal basis or certification (such as US-DPF certification) for each transfer, naming
+  the certified entity and date of verification.
+- Record any limitations or exclusions in the adequacy decision, such as sector-specific or entity-specific
+  restrictions, in your procedure documentation.
+- Name the responsible individual who reviews and updates adequacy reliance decisions, avoiding generic
+  titles like "the team" or "compliance department."
+- Retain evidence of periodic checks confirming ongoing adequacy status and certification validity for
+  each transfer destination.

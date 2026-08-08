@@ -1,0 +1,16 @@
+must_id: item:A.5.20:dev_supplier
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Supplier identifier per row (link to A.5.19 supplier register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each supplier in the deviation register to the unique identifier used in your supplier
+  register under control A.5.19.
+- Record the supplier’s full legal name and identifier for every deviation entry, ensuring it matches
+  exactly with the supplier register.
+- Name the person responsible for maintaining the deviation register as a specific individual, not a team
+  or department.
+- Document the date each deviation entry is added or updated to maintain a clear audit trail.

@@ -1,0 +1,16 @@
+must_id: item:Art.47:liability
+control_ref: Art.47
+standard_id: GDPR:2016/679
+must_text: Liability allocation per Art.47.2.f-h
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific legal entity within the group that accepts liability for breaches of the Binding
+  Corporate Rules in a signed document.
+- Document the process for individuals to claim compensation and seek remedies, including contact details
+  and response timelines, in the procedure.
+- Name the individual or role responsible for handling liability claims, avoiding generic references such
+  as "the team" or "management".
+- Record the date of approval and the names of all approvers for the Binding Corporate Rules Procedure.

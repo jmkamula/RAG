@@ -1,0 +1,20 @@
+must_id: item:A.5.7:prod_action_taken
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Action taken downstream per record (firewall rule / IDS signature / risk register entry / control
+  update / no-op)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each intelligence item with a unique identifier, date received, and the specific product or system
+  it relates to.
+- Document the downstream action taken for each record, such as firewall rule change, IDS signature update,
+  risk register entry, control update, or justified no action.
+- Name the individual who approved or executed the downstream action, ensuring it is a specific person
+  rather than a team or department.
+- Attach supporting evidence for each action, such as change tickets, updated configuration screenshots,
+  or risk register entries, linked to the intelligence record.
+- Review all records monthly to confirm no intelligence items remain without a documented and dated downstream
+  action.

@@ -1,0 +1,50 @@
+leaf_id: req:B.8.5.2:program_review
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope statement defines which business units, processes, and information flows are covered
+    by the ISMS and, by extension, the privacy program. You can't meaningfully review processor destinations
+    if you don't know what is in-scope.
+  good_enough: A documented scope that clearly identifies all relevant processing activities and geographies
+    for the privacy program.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is essential to identify all systems, applications, and data
+    flows where personal data may be processed or transferred. This underpins the destinations register
+    and ensures completeness.
+  good_enough: A current list of systems and data flows that includes all personal data processing assets
+    and their locations.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: You must know and document the purposes for which personal data is processed to assess whether
+    destinations and disclosures are appropriate and aligned with customer expectations.
+  good_enough: Documented purposes for all personal data processing activities, at least at a summary
+    level.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity is necessary to determine if
+    transfers to destinations (including subprocessors) are legally justified and properly disclosed.
+  good_enough: A mapping of each processing activity to its lawful basis, even if some are provisional
+    or high-level.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: cross_role
+  rationale: The RoPA provides a comprehensive inventory of processing activities, including data flows
+    and transfer destinations, which is critical for verifying the accuracy of the destinations register
+    and disclosures.
+  good_enough: A RoPA draft or working document that lists processing activities and transfer destinations,
+    even if not fully complete.

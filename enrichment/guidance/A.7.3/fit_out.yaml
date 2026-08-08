@@ -1,0 +1,20 @@
+must_id: item:A.7.3:fit_out
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Fit-out / construction security requirements (walls to slab, no gaps above ceiling, sound insulation
+  where speech-confidential)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the physical security specifications for new office or facility construction, including wall-to-slab
+  requirements and absence of ceiling gaps, in the procedure.
+- Name the responsible individual overseeing construction security, specifying a person rather than a
+  team or generic title.
+- Record the date and outcome of a site inspection confirming that walls reach the structural slab and
+  no gaps exist above ceilings.
+- State the sound insulation measures implemented in areas where confidential conversations occur, referencing
+  specific product types or installation details.
+- Attach photographs or construction diagrams showing completed security features, dated and cross-referenced
+  to the relevant inspection report.

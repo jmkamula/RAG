@@ -1,0 +1,19 @@
+must_id: item:A.7.2:rev_access_lists
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Per-area access-list review outcome (active / amended / revoked) — cross-link to A.5.18 access
+  review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the periodic review of entry access lists for each area, recording
+  their name and review date.
+- Document the outcome for each access right as active, amended, or revoked, and include a brief justification
+  for any changes.
+- Cross-reference each reviewed access right to the corresponding entry in your A.5.18 access review register,
+  noting the unique identifier.
+- Record any revoked or amended access in an auditable log, including the date and the person authorizing
+  the change.
+- Name the reviewer as a specific individual, not a group or department, to avoid ambiguity in accountability.

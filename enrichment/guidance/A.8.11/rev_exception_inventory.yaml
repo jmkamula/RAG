@@ -1,0 +1,16 @@
+must_id: item:A.8.11:rev_exception_inventory
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Exception inventory re-confirmed / retired
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current masking exceptions in an inventory, including the business justification, approval
+  date, and responsible individual for each exception.
+- Confirm with the named owner of each exception that the exception is still required, documenting their
+  re-approval or decision to retire it with a date.
+- Record any retired exceptions as closed in the inventory, including the retirement date and the person
+  authorizing the closure.
+- Name the owner for each exception as a specific individual, not a team, department, or generic role.

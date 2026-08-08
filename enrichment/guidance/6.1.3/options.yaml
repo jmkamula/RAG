@@ -1,0 +1,16 @@
+must_id: item:6.1.3:options
+control_ref: 6.1.3
+standard_id: ISO27001:2022
+must_text: Risk treatment options selected for each risk
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each identified risk in the Risk Treatment Plan, referencing its unique risk ID from the risk assessment
+  register.
+- Record the specific treatment option chosen for each risk, such as mitigate, transfer, avoid, or accept,
+  alongside the risk entry.
+- Name the person responsible for approving each risk treatment decision, ensuring this is a named individual
+  and not a group or department.
+- Date each risk treatment decision to show when the option was selected and approved.

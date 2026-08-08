@@ -1,0 +1,19 @@
+must_id: item:A.7.4.6:scope_file_types
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+must_text: File types per surface (application temp / journal / roll-back / cache spillover)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all application components that generate or use temporary files, including journal, roll-back,
+  and cache spillover mechanisms, in a dated inventory.
+- Identify and record the specific file types created by each component, noting extensions and formats,
+  in a table or spreadsheet.
+- Map each file type to its corresponding application surface or context, ensuring no generic or catch-all
+  categories are used.
+- Name a responsible individual for maintaining and updating the temp-file context scope, avoiding assignment
+  to a team or department.
+- Review and update the scope document at least annually, recording the review date and the name of the
+  reviewer.

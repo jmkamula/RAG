@@ -1,0 +1,20 @@
+must_id: item:A.5.23:rev_config_drift
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Configuration-drift assessment against the shared-responsibility split (what the org owns is
+  configured correctly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to be responsible for conducting the cloud service configuration-drift assessment,
+  recording their name and role in the review log.
+- Document the shared-responsibility matrix for each cloud service, clearly marking which controls are
+  owned by your organisation versus the provider.
+- Record the date, scope, and findings of each configuration-drift assessment, including any misalignments
+  with your assigned responsibilities.
+- Attach evidence of corrective actions taken for any identified drift, such as updated configuration
+  screenshots or change tickets with responsible person and completion date.
+- Name the owner as a specific person in all records—do not use generic terms like "IT team" or "Cloud
+  group".

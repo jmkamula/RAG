@@ -1,0 +1,15 @@
+must_id: item:Art.85:reg_member_state
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: Per-row Member State whose national law is being invoked
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the Member State by its full official name in each row of the register, not by abbreviation or
+  region.
+- Record the date when the national law derogation was identified for each Member State entry.
+- Cross-reference each Member State entry to the specific section or article of its national law being
+  invoked.
+- Name the person responsible for verifying the accuracy of each Member State entry in the register.

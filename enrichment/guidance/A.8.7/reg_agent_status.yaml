@@ -1,0 +1,19 @@
+must_id: item:A.8.7:reg_agent_status
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Per-asset agent status (installed / running / signature version current)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each asset by unique name or identifier in the Malware Protection Coverage Register, including
+  servers, endpoints, and mobile devices.
+- Record the installed status of the malware protection agent for every asset, noting "installed" or "not
+  installed" with the date checked.
+- Document whether the malware protection agent is actively running on each asset, with the last verification
+  date and the name of the person who checked.
+- State the current malware signature version for each asset, including the version number and the date
+  it was last updated.
+- Name the responsible individual for maintaining and updating the register—do not use a team or department
+  as the owner.

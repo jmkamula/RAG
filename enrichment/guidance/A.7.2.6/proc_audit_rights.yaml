@@ -1,0 +1,19 @@
+must_id: item:A.7.2.6:proc_audit_rights
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Audit rights (Art.28.3.h) — processor makes available all information + contributes to audits
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the contracting procedure that all processor agreements must include a clause granting the
+  controller audit rights and access to relevant information.
+- Attach a template contract or checklist showing the exact audit rights language required under GDPR
+  Art.28.3.h.
+- Name the person responsible for reviewing and approving processor contracts to confirm audit rights
+  are included before signing.
+- Retain a signed and dated copy of at least one executed processor contract containing the required audit
+  and information access clause.
+- Specify the contract owner as a named individual, not a generic role or department, to avoid ambiguity
+  in responsibility.

@@ -1,0 +1,18 @@
+must_id: item:A.8.18:reg_authorised
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Per-row authorised user list (with approval lineage)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each privileged utility program by name and version in the register, creating a separate row for
+  each distinct program.
+- Name all authorised users for each program row, using full names rather than job titles or group labels.
+- Record the date and name of the individual who approved each user’s access, linking to the original
+  approval record or ticket.
+- Update the register immediately when user access changes, noting the date and the person making the
+  update.
+- Avoid listing generic groups or roles as authorised users; always specify individual names to prevent
+  ambiguity.

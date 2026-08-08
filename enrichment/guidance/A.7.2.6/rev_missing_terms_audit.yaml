@@ -1,0 +1,17 @@
+must_id: item:A.7.2.6:rev_missing_terms_audit
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Missing-terms audit — sampled contracts checked against Art.28.3 mandatory list
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of processor contracts signed within the past year and list them in a dated review
+  log.
+- Cross-reference each contract against the full list of Article 28.3 mandatory terms, recording which
+  terms are present or missing.
+- Document the name of the reviewer and the date for each contract checked in the review log.
+- Attach evidence of any follow-up actions taken to address missing terms, such as emails to legal or
+  requests for contract amendments.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.

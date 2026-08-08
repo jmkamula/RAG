@@ -1,0 +1,33 @@
+leaf_id: req:Art.7:applicable_activities_scope
+control_ref: Art.7
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of Processing
+  category: direct
+  rationale: You must first identify the lawful basis for each processing activity under Art.6 before
+    you can determine which activities specifically rely on consent (Art.6.1.a). Without this, you cannot
+    accurately scope where consent is required.
+  good_enough: A documented mapping of all processing activities to their lawful basis, with those relying
+    on consent clearly flagged, is sufficient to proceed.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: A current, accurate record of processing activities is needed to ensure all relevant activities
+    are considered when determining which rely on consent. Missing or outdated records risk overlooking
+    activities or misapplying consent.
+  good_enough: A working RoPA that lists all processing activities, even if some details are still being
+    refined, is enough to unblock scoping consent-based activities.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and operational boundaries for compliance activities,
+    ensuring that the consent scope aligns with the overall information security management system.
+  good_enough: A draft or approved ISMS scope statement that covers the business units and processes in
+    question is sufficient for aligning the consent activities scope.

@@ -1,0 +1,16 @@
+must_id: item:A.5.26:reg_owner
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Named Incident Manager / owner per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the Incident Manager for each incident entry, avoiding generic labels
+  like "IT team" or "Security Department".
+- Record the full name and contact details of the assigned Incident Manager directly in the register for
+  every incident row.
+- Confirm that each incident row is dated and includes the assignment date of the Incident Manager.
+- Review the register regularly to verify that no incident entry is missing a named owner or lists only
+  a group or role.

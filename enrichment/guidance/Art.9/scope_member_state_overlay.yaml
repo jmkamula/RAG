@@ -1,0 +1,18 @@
+must_id: item:Art.9:scope_member_state_overlay
+control_ref: Art.9
+standard_id: GDPR:2016/679
+must_text: Member State derogations applied (Art.9.4 — Member States may maintain further conditions for
+  genetic / biometric / health data)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all countries where you process genetic, biometric, or health data and list them in a dated
+  record.
+- Document the specific national laws or additional conditions that apply to special category data in
+  each listed country.
+- Name the person responsible for monitoring changes in Member State derogations, using a specific individual's
+  name rather than a team or department.
+- Record the date and outcome of your most recent review of Member State requirements, including any updates
+  to your processing approach.

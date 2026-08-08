@@ -1,0 +1,19 @@
+must_id: item:A.7.2.7:scope_joint_test
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Joint-control test — jointly determine purposes AND means (both prongs required)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all data processing activities where your organisation and another party both influence why
+  and how personal data is processed.
+- Document, for each activity, how your organisation and the other party jointly decide both the purposes
+  and the means of processing.
+- Record the names and roles of specific individuals from each organisation who participate in these joint
+  decisions.
+- State explicitly in your records that both prongs — purposes and means — are jointly determined for
+  each relationship.
+- Avoid listing relationships where only one prong is shared; include only those where both purposes and
+  means are jointly decided.

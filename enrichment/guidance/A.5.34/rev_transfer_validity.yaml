@@ -1,0 +1,20 @@
+must_id: item:A.5.34:rev_transfer_validity
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Transfer-mechanism validity check (SCCs current edition, adequacy decisions still standing
+  — e.g. Schrems shifts, BCRs unchanged) — flag stale mechanisms for remediation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current international data transfer mechanisms in use, including Standard Contractual Clauses,
+  adequacy decisions, and Binding Corporate Rules, in a dated register.
+- Cross-reference each mechanism against the latest regulatory updates and guidance, noting any changes
+  such as Schrems decisions or new SCC editions.
+- Document the date and outcome of the most recent validity check for each mechanism, including any identified
+  risks or compliance gaps.
+- Flag any mechanisms found to be outdated or invalid for remediation, recording the assigned responsible
+  individual and planned corrective actions.
+- Name the reviewer as a specific individual, not a group or department, and record their sign-off on
+  the completed review.

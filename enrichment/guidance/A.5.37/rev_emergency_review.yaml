@@ -1,0 +1,19 @@
+must_id: item:A.5.37:rev_emergency_review
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Emergency-use procedure review — confirmed available and accurate for DR/incident scenarios
+  (these are the procedures where stale = catastrophic)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all emergency-use procedures relevant to disaster recovery and incident response, including document
+  names, version numbers, and last review dates.
+- Assign a named individual with operational responsibility to review each procedure for accuracy and
+  completeness at least annually.
+- Record the completion of each review with the reviewer's name, date, and a summary of any updates or
+  confirmations of accuracy.
+- Attach evidence of a recent test or simulation using each procedure to demonstrate that instructions
+  are practical and up to date.
+- Name the owner as a specific person, not a generic group or department, to avoid ambiguity in responsibility.

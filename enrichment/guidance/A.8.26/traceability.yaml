@@ -1,0 +1,18 @@
+must_id: item:A.8.26:traceability
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Traceability from requirements into design / code / test cases (auditor-defensible chain)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each security requirement with a unique identifier and date in the Application Security Requirements
+  Procedure.
+- Cross-reference each requirement’s identifier in the relevant design documents, code comments, and test
+  case descriptions.
+- Record the name of the individual responsible for mapping requirements to design, code, and test cases.
+- Attach evidence of traceability, such as screenshots or links, showing the requirement’s identifier
+  present in all three artefacts.
+- Name the owner as a specific individual — do not use generic titles like "the team" or "development
+  group".

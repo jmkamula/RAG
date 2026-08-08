@@ -1,0 +1,18 @@
+must_id: item:A.5.5:scope_authority_categories
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Authority categories mapped — supervisory (DPA), sectoral regulator, law enforcement, national
+  CERT/CSIRT
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all external authorities relevant to your operations, including data protection agencies, sector
+  regulators, law enforcement, and national CERT/CSIRT, with full names and contact details.
+- Map each authority to its specific category, such as supervisory, sectoral, law enforcement, or CERT/CSIRT,
+  in a dated table or register.
+- Name a specific individual responsible for maintaining and updating the authority mapping—do not use
+  a team or department as the owner.
+- Cross-reference each authority entry to the relevant legal, regulatory, or contractual obligation that
+  makes it applicable to your organisation.

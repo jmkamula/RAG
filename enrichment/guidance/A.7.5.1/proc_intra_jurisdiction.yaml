@@ -1,0 +1,18 @@
+must_id: item:A.7.5.1:proc_intra_jurisdiction
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: Intra-jurisdiction exclusion rule (§7.5.1 NOTE — where sender + recipient same jurisdiction,
+  applicable law is the same)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the PII Transfer Basis Procedure that transfers within the same jurisdiction are excluded from
+  additional transfer basis requirements, citing the relevant law.
+- Document the specific jurisdictions covered by this exclusion, listing each by name and referencing
+  the applicable legislation.
+- Name the individual responsible for confirming jurisdictional alignment for each PII transfer, ensuring
+  this is not left to a team or department.
+- Record each intra-jurisdictional transfer decision with the sender, recipient, date, and confirmation
+  that both parties fall under the same law.

@@ -1,0 +1,17 @@
+must_id: item:A.8.24:authority
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Named policy authority (InfoSec lead with Cryptography subject-matter expert)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the policy authority as a specific individual, such as the Information Security lead, in the policy
+  document’s approval section.
+- Document the involvement of a named cryptography subject-matter expert by listing their full name and
+  role in the policy’s authorship or review history.
+- Record the date of final policy approval alongside the names of both the policy authority and the cryptography
+  expert.
+- Avoid listing a team or department as the policy authority; specify a single accountable person to prevent
+  ambiguity.

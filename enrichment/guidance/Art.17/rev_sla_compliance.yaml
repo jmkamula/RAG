@@ -1,0 +1,16 @@
+must_id: item:Art.17:rev_sla_compliance
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: SLA compliance (Art.12.3 one-month)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date each erasure request is received in a central log to show when the one-month response
+  period begins.
+- Record the completion date for every erasure request to demonstrate the response time meets the one-month
+  requirement.
+- Assign responsibility for tracking erasure requests to a named individual, not a generic team or department.
+- Retain evidence of communications sent to data subjects confirming erasure within the required timeframe.
+- Review the log quarterly to identify and address any requests that exceeded the one-month SLA.

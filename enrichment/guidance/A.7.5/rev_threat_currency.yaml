@@ -1,0 +1,18 @@
+must_id: item:A.7.5:rev_threat_currency
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Threat-currency check — has the threat landscape shifted (new climate data, regional risk changes)?
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the environmental threat landscape review, documenting their name
+  and role in the review record.
+- Gather and record the latest climate data and regional risk reports, noting publication dates and sources
+  in the review documentation.
+- Compare current threats to those identified in the previous review, explicitly noting any new or changed
+  risks in a dated summary.
+- Document the date of the review and require a signature from the responsible individual to confirm completion.
+- Avoid referencing only generic or outdated threat information—explicitly state the review includes the
+  most recent data available.

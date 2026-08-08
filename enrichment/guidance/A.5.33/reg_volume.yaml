@@ -1,0 +1,20 @@
+must_id: item:A.5.33:reg_volume
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Approximate volume per class (drives prioritisation when storage costs or e-discovery demand
+  it)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each record class in the Records Schedule with a clear, descriptive name that matches actual business
+  activities.
+- Estimate and record the approximate volume of records for each class, using a specific unit such as
+  number of files or gigabytes.
+- State the method used for each volume estimate, such as system reports or sampling, and include the
+  date the estimate was made.
+- Name the individual responsible for maintaining and updating volume estimates for each record class,
+  not just a team or department.
+- Update the volume estimates at least annually, and retain a dated record of each update to show ongoing
+  accuracy.

@@ -1,0 +1,17 @@
+must_id: item:4.3:chg_comms
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Communication of the change to affected stakeholders
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the scope change details in a dated ISMS Scope Change Record, including what changed and the
+  reason for the change.
+- List all stakeholders affected by the scope change, naming specific individuals or roles rather than
+  generic groups.
+- Document the method and date of communication to each affected stakeholder, such as email, meeting minutes,
+  or formal notice.
+- Retain evidence of stakeholder acknowledgement, such as signed attendance sheets, email replies, or
+  confirmation receipts.

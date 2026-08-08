@@ -1,0 +1,17 @@
+must_id: item:A.5.25:rev_actions
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Action items captured (e.g. add monitoring source, adjust severity threshold)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each action item from the periodic event triage program review in a dated meeting minutes document,
+  listing the responsible person for each action.
+- Document the specific change or addition required, such as adding a monitoring source or adjusting a
+  severity threshold, in an action tracking log.
+- Assign a named individual—not a team or department—to each action item, and update the log with their
+  name and the due date.
+- Review the action tracking log after each review cycle to confirm all previous action items are marked
+  as completed or carry-forwarded with updated status.

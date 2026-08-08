@@ -1,0 +1,16 @@
+must_id: item:A.6.8:reg_summary
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Per-row content summary (one-line headline + classification — observed / suspected / near-miss)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a one-line headline for each event in the register that clearly summarizes what happened.
+- Assign a classification to each event as "observed," "suspected," or "near-miss" in a dedicated column.
+- Name the person responsible for entering each event, using their full name rather than a generic role
+  or team.
+- Date each entry to show when the event was recorded in the register.
+- Avoid leaving any row with a missing headline or classification, as incomplete entries will be flagged
+  by auditors.

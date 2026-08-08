@@ -1,0 +1,17 @@
+must_id: item:A.5.21:reg_critical_flag
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: Critical-component flag per row (drives 27002:5.21e scrutiny)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to your ICT Component / Vendor Register that clearly labels each entry as "critical" or
+  "non-critical" based on your risk assessment.
+- Document the criteria used to determine if a component or vendor is critical, and reference this criteria
+  in the register.
+- Name the person responsible for assigning the criticality flag for each entry, ensuring a specific individual
+  is listed, not a team or department.
+- Record the date when each criticality decision was made or last reviewed in the register.
+- Avoid leaving the criticality flag blank or using unclear terms like "TBD" or "unknown" for any entry.

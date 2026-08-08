@@ -1,0 +1,20 @@
+must_id: item:A.5.17:rev_rotation_compliance
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Rotation-compliance audit (sample of credentials past their rotation cadence; root cause per
+  stale credential)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a sample of user and system credentials that have exceeded the defined rotation period, recording
+  usernames, credential types, and last rotation dates.
+- Document the root cause for each stale credential, including missed notifications, process gaps, or
+  technical failures, in a dated review log.
+- Assign a named individual to investigate and resolve each stale credential, recording their name and
+  the date responsibility was accepted.
+- Confirm that all sampled credentials have been rotated or deactivated, and record the completion date
+  for each action in the review log.
+- Name the credential owner as a specific person for each entry—do not use generic labels like "IT team"
+  or "system administrator".

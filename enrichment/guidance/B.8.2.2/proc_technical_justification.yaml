@@ -1,0 +1,19 @@
+must_id: item:B.8.2.2:proc_technical_justification
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: Technical-justification carve-out procedure — where processor must choose method for capacity
+  reasons (per §8.2.2 implementation), justification documented + surfaced to customer
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for documenting technical justifications when processor-selected
+  methods are used due to capacity constraints.
+- Document each technical justification with a clear explanation of why the chosen method was necessary,
+  including relevant technical and capacity details.
+- Record the date and version of each justification to establish a clear timeline of decisions and changes.
+- Surface each documented justification to the customer in writing, such as via email or portal notification,
+  and retain evidence of this communication.
+- Avoid using generic or boilerplate justifications that could apply to any situation; tailor each justification
+  to the specific technical context and decision.

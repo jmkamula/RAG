@@ -1,0 +1,20 @@
+must_id: item:Art.26:respective_responsibilities
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Respective responsibilities for compliance allocated (Art.13/14 information, Art.15-22 rights,
+  Art.32 security, Art.33-34 breach)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each joint controller and assign a specific individual as the responsible contact for GDPR compliance
+  within their organisation.
+- Document the allocation of responsibilities for providing privacy information, handling data subject
+  rights, ensuring security, and managing breaches in a signed agreement.
+- State how and when each joint controller will communicate with data subjects about their rights and
+  privacy information, referencing GDPR Articles 13, 14, and 15-22.
+- Record the date and signatures of all joint controllers on the arrangement, confirming agreement to
+  the allocated responsibilities.
+- Avoid using vague terms like "shared responsibility" without detailing which controller is responsible
+  for each GDPR obligation.

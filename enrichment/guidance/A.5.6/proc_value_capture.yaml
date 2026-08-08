@@ -1,0 +1,19 @@
+must_id: item:A.5.6:proc_value_capture
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Value-capture path — how intelligence/insights flow back (cross-link to A.5.7 threat-intel
+  procedure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process showing how intelligence or insights from SIG engagements are captured
+  and routed back to your organisation.
+- Cross-reference the SIG Engagement Procedure to the relevant section of your A.5.7 Threat Intelligence
+  Procedure, noting document titles and version numbers.
+- Name the individual responsible for reviewing and forwarding SIG-derived intelligence, including their
+  job title and contact details.
+- Record the date each time intelligence is received and integrated, keeping a log of updates and resulting
+  actions.
+- Specify the feedback mechanism in writing — avoid relying on informal or verbal-only communication channels.

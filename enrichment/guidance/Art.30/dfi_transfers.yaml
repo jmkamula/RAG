@@ -1,0 +1,19 @@
+must_id: item:Art.30:dfi_transfers
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Third-country transfers identified per flow with safeguards (SCCs, adequacy, BCRs) — feeds
+  Art.30.1.e
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each personal data flow that involves transfer to a country outside the European Economic Area
+  and record the destination country in the inventory.
+- Specify the legal safeguard used for each third-country transfer, such as Standard Contractual Clauses,
+  adequacy decision, or Binding Corporate Rules.
+- Name the individual responsible for approving each third-country transfer and record their name, not
+  just a team or department.
+- Date each entry to show when the transfer and safeguard were last reviewed or updated in the inventory.
+- Attach or cross-reference the actual signed safeguard documents (e.g., SCCs, BCR approval) for each
+  transfer in the inventory.

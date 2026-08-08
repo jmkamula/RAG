@@ -1,0 +1,16 @@
+must_id: item:A.7.4.7:rev_deletion_audit
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Deletion audit — sampled records past schedule verified deleted per A.7.4.5
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of records that should have been deleted according to the documented retention
+  schedule.
+- Document the deletion status of each sampled record, noting the deletion date and method for each entry.
+- Name the reviewer who performed the audit, recording their full name and the date of review.
+- Attach evidence of deletion, such as system logs or confirmation screenshots, for each sampled record.
+- Record any instances where records were not deleted as scheduled, including the reason and corrective
+  action taken.

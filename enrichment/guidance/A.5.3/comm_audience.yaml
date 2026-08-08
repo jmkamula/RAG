@@ -1,0 +1,19 @@
+must_id: item:A.5.3:comm_audience
+control_ref: A.5.3
+standard_id: ISO27001:2022
+must_text: Audience reached (affected role-holders or all relevant function leads)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all affected role-holders or relevant function leads by name and job title in the segregation matrix
+  communication record.
+- Record the date and method of communication used to share the segregation matrix with each identified
+  individual or group.
+- Obtain written acknowledgment from each recipient confirming they have received and understood the segregation
+  matrix.
+- Attach evidence of communication, such as email delivery receipts or meeting attendance records, to
+  the communication record.
+- Name the audience as specific individuals or roles, avoiding vague descriptions like "all staff" or
+  "the department."

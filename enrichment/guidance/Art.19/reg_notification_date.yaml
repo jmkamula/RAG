@@ -1,0 +1,16 @@
+must_id: item:Art.19:reg_notification_date
+control_ref: Art.19
+standard_id: GDPR:2016/679
+must_text: Per-row notification date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each recipient notification is sent in a dedicated column for every entry in the
+  Recipient Notification Register.
+- Name the individual responsible for sending each notification in the same row as the notification date.
+- Confirm that no row is left with a missing or placeholder date, such as "TBD" or "N/A", for any notification
+  entry.
+- Retain copies of sent notification communications alongside the register for each corresponding date
+  entry.

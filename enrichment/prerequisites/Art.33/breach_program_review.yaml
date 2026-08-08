@@ -1,0 +1,42 @@
+leaf_id: req:Art.33:breach_program_review
+control_ref: Art.33
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date inventory of processing activities to know where personal data resides
+    and which systems/processes could be affected by a breach. This is essential for reviewing whether
+    breach notification procedures cover all relevant data flows.
+  good_enough: A current, reasonably complete RoPA exists and is accessible to the review team, even if
+    some minor updates are pending.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer (DPO) Designation
+  category: foundational
+  rationale: A designated DPO (or clear decision that one is not required) ensures there is a responsible
+    party for breach notification oversight and review. The review process depends on having someone accountable
+    for GDPR compliance.
+  good_enough: A DPO is formally appointed and contactable, or a documented rationale exists for not appointing
+    one.
+- ref: Art.33
+  standard_id: GDPR:2016/679
+  title: Breach Notification Procedure
+  category: direct
+  rationale: You cannot review the effectiveness of your breach notification program unless a documented
+    procedure exists that describes how breaches are detected, assessed, and reported within the 72-hour
+    window.
+  good_enough: A documented breach notification procedure exists, even if it is due for minor updates
+    or refinement.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: Knowing the ISMS scope ensures the review covers all in-scope systems and processes where
+    a breach could occur. This prevents gaps in the annual program review.
+  good_enough: A current ISMS scope statement exists and is referenced in compliance activities, even
+    if some boundaries are under review.

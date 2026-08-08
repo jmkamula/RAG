@@ -1,0 +1,17 @@
+must_id: item:10.1:reg_effectiveness
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Per-row effectiveness assessment captured on closure (did the improvement work?)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each improvement action is closed in the register, linking it to the specific action
+  item for traceability.
+- Document a clear statement for each closed action describing how effectiveness was measured and what
+  evidence supports the outcome.
+- Assign a named individual to assess and sign off on the effectiveness of each improvement, capturing
+  their name and assessment date.
+- Avoid leaving the effectiveness field blank or marked as "N/A"—ensure every closed action includes a
+  completed assessment entry.

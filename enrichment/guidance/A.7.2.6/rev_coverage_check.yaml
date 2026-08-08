@@ -1,0 +1,19 @@
+must_id: item:A.7.2.6:rev_coverage_check
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Coverage check — every engaged processor has a signed contract on file
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every current processor by name and engagement date in a central register maintained by the privacy
+  or procurement lead.
+- Cross-reference each processor in the register to a specific, signed contract file, including the contract’s
+  effective and signature dates.
+- Confirm each contract file includes clear signatures from both your organization and the processor,
+  not just unsigned templates or drafts.
+- Flag any processor in the register without a signed contract on file for immediate remediation and document
+  the follow-up action taken.
+- Name the contract program owner as a specific individual responsible for maintaining the register and
+  contract files, not a generic team or department.

@@ -1,0 +1,16 @@
+must_id: item:A.8.6:proc_forecast_cadence
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Forecast review cadence (quarterly minimum; monthly for elastic / cost-sensitive workloads)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the review frequency for each workload type in the procedure, specifying quarterly for standard
+  and monthly for elastic or cost-sensitive workloads.
+- Name a specific individual responsible for scheduling and leading each capacity forecast review, avoiding
+  generic roles like "the team".
+- Record the date and outcome of each completed capacity review in a log, including any identified actions
+  or adjustments.
+- Attach a sample review calendar or schedule showing upcoming forecast reviews for all relevant workloads.

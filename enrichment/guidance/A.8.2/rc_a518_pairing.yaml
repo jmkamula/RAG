@@ -1,0 +1,17 @@
+must_id: item:A.8.2:rc_a518_pairing
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Cross-link to A.5.18 general access review — every privileged subject also appears under their
+  general access row (no orphan privileged paths)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each privileged user's entry in the privileged access recertification list with their
+  corresponding row in the general access review register.
+- Record the date and name of the person who verified that every privileged user is also listed under
+  general access.
+- Document any privileged account found without a matching general access entry and assign a specific
+  individual to resolve the discrepancy.
+- Name the owner of the cross-linking process as a specific individual, not a team or department.

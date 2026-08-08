@@ -1,0 +1,17 @@
+must_id: item:5.1:support_other_mgmt
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Supporting other relevant management roles in demonstrating their leadership
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific management roles responsible for information security leadership in an official document,
+  listing individual names and titles.
+- Document examples of actions or initiatives where top management has supported these roles, including
+  meeting minutes or project records with dates.
+- Record a signed statement from top management explicitly endorsing and empowering these management roles
+  to demonstrate leadership.
+- Avoid using generic terms like "management team" or "all managers"—identify each role and person individually
+  in the directive.

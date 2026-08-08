@@ -1,0 +1,20 @@
+must_id: item:A.5.18:rev_hr_link
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Tied to HR off-boarding workflow (A.6.5 linkage) — termination trigger fires from HR system,
+  not from manual IT request
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process that links HR off-boarding events in your HR system directly to access revocation
+  actions in your IT systems.
+- Record each access revocation with the corresponding HR termination event ID, date, and the name of
+  the person who completed the action.
+- Name the process owner as a specific individual responsible for monitoring the HR-to-IT access revocation
+  workflow, not a generic team or department.
+- Cross-reference each access revocation record with the HR system log to show the revocation was triggered
+  by the HR event, not a manual IT request.
+- Retain evidence of periodic checks confirming that no access revocation occurs without a matching HR
+  off-boarding trigger.

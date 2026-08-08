@@ -1,0 +1,17 @@
+must_id: item:A.8.9:scope_classes
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Asset classes enumerated with baseline approach per class
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all asset classes relevant to your configuration management, such as servers, network devices,
+  applications, and cloud services, in a dated inventory document.
+- Describe the baseline configuration approach for each asset class, specifying required settings and
+  controls, in a written configuration standard.
+- Assign a named individual as the owner responsible for maintaining and updating the asset class list
+  and baseline approaches.
+- Avoid using generic descriptions or boilerplate text; tailor the baseline approach details to your actual
+  asset types and environment.

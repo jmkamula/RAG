@@ -1,0 +1,18 @@
+must_id: item:A.8.1:rev_register_update
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Changes propagated to the policy / register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of each periodic endpoint program review in a dedicated change log or meeting
+  minutes.
+- Document any required changes to the endpoint policy or asset register as specific, actionable items
+  with clear descriptions.
+- Assign responsibility for implementing each change to a named individual, not a group or department.
+- Update the policy or register with the approved changes, including the date of update and the name of
+  the person making the change.
+- Retain copies of both the previous and updated versions of the policy or register to show the changes
+  were actually made.

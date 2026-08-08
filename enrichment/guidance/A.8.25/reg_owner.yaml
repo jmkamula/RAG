@@ -1,0 +1,17 @@
+must_id: item:A.8.25:reg_owner
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Per-project named owner (technical lead with security partner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the technical lead for each development project in the register, avoiding
+  generic titles like "the team" or "IT".
+- Record the full name of the assigned security partner for each project entry, ensuring both roles are
+  clearly identified.
+- Document the date when each owner and security partner assignment was confirmed, creating a dated record
+  for every project.
+- Cross-reference each project entry with supporting documentation, such as appointment emails or signed
+  acceptance, to verify the named owners.

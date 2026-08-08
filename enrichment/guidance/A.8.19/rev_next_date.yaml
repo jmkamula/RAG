@@ -1,0 +1,16 @@
+must_id: item:A.8.19:rev_next_date
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the installation program in the review documentation, making
+  sure it is clearly visible and unambiguous.
+- Record the date of the most recent review alongside the next planned review date in the same document
+  for clear tracking.
+- Name the individual responsible for scheduling the next review, specifying their full name rather than
+  a team or department.
+- Retain a copy of the review schedule with version control to show updates and planned future dates.

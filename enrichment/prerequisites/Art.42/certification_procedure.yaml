@@ -1,0 +1,39 @@
+leaf_id: req:Art.42:certification_procedure
+control_ref: Art.42
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of your processing activities to determine which processing
+    operations are in-scope for certification and to provide evidence to the certifying body.
+  good_enough: A current, reasonably complete RoPA exists, covering all main processing activities and
+    data flows relevant to the intended certification scope.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Certification requires you to demonstrate that all processing within scope is based on a
+    valid lawful basis under GDPR, as this is a core compliance requirement.
+  good_enough: Each processing activity in scope for certification has a documented lawful basis, even
+    if some are still being reviewed for completeness.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer (DPO) Designation
+  category: foundational
+  rationale: If required, a DPO must be designated and involved in the certification process to ensure
+    oversight and facilitate communication with the certifying body and authorities.
+  good_enough: A DPO is formally designated (if required), with contact details available and basic involvement
+    in GDPR compliance activities.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: A clear ISMS scope helps align the boundaries of GDPR certification with your existing information
+    security management system, avoiding gaps or overlaps.
+  good_enough: A documented ISMS scope exists that can be referenced to define the boundaries of the certification
+    procedure, even if not fully optimized for GDPR.

@@ -1,0 +1,18 @@
+must_id: item:A.8.24:scope_change_drivers
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new data class, algorithm deprecation, PQC transition trigger)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current cryptographic uses, including data types, algorithms, and systems, in a dated document
+  reviewed by the information security manager.
+- Document specific triggers for re-scoping, such as introduction of new data classifications, algorithm
+  deprecation announcements, or post-quantum cryptography requirements.
+- Assign a named individual responsible for monitoring industry and regulatory updates that could affect
+  cryptography scope.
+- State the review frequency and date in the trigger list document to show when the next assessment is
+  due.
+- Name the owner as a specific person, not a team or department, to avoid ambiguity in responsibility.

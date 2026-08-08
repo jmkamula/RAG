@@ -1,0 +1,18 @@
+must_id: item:Art.38:scope_forums
+control_ref: Art.38
+standard_id: GDPR:2016/679
+must_text: Forums DPO is invited to (board, exec committee, change-management, incident response, vendor
+  onboarding)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all internal forums and committees where privacy or data protection topics are discussed, including
+  board, executive, change-management, incident response, and vendor onboarding meetings.
+- Name the Data Protection Officer (DPO) as a standing invitee to each relevant forum, specifying the
+  individual by name and role in meeting records.
+- Record the dates and agendas of meetings where the DPO was present, keeping copies of invitations or
+  attendance logs as evidence.
+- Avoid describing DPO participation in general terms such as "as needed" or "upon request"; specify regular,
+  scheduled involvement in documented procedures.

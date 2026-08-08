@@ -1,0 +1,19 @@
+must_id: item:A.7.3.7:scope_recipients_list
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Third-party recipients enumerated (link to A.7.5.4 disclosure register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all third-party organisations that receive personal data, specifying each by legal name and purpose
+  of data sharing.
+- Cross-reference each third-party entry with the corresponding record in your A.7.5.4 disclosure register,
+  including register location or unique identifier.
+- Document the types of personal data shared with each third party, including any special categories or
+  sensitive data.
+- Name the responsible individual for maintaining and updating the third-party sharing list, avoiding
+  generic roles like "the team" or "IT department."
+- Record the date the third-party sharing scope was last reviewed and updated, ensuring the record is
+  current and not undated.

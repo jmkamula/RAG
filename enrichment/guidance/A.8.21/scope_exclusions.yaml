@@ -1,0 +1,17 @@
+must_id: item:A.8.21:scope_exclusions
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Exclusion rationale (in-house operated services governed under A.8.20)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all network services in use, specifying which are operated in-house and which are externally provided.
+- Document the rationale for excluding in-house operated network services from A.8.21, referencing their
+  governance under A.8.20.
+- Name the individual responsible for determining and documenting the scope and exclusions, avoiding generic
+  titles like "IT team."
+- Record the date the scope and exclusion rationale was last reviewed and approved by management.
+- Attach supporting evidence, such as network diagrams or service inventories, that clearly delineate
+  in-scope and out-of-scope services.

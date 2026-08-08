@@ -1,0 +1,16 @@
+must_id: item:4.2:proc_refresh_cadence
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Refresh cadence stated (typically annual + significant-change trigger)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the frequency for reviewing and updating the Stakeholder Identification Framework, specifying
+  both an annual review and a trigger for significant organisational changes.
+- Document the date of the last review and the next scheduled review in the framework.
+- Name the individual responsible for initiating scheduled and triggered reviews, avoiding generic roles
+  like "the team" or "management".
+- Record any significant organisational changes that would trigger an out-of-cycle review, with dates
+  and brief descriptions.

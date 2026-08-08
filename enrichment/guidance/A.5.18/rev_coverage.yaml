@@ -1,0 +1,20 @@
+must_id: item:A.5.18:rev_coverage
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Coverage stated — full register reviewed OR risk-tiered sampling with documented selection
+  method; gaps flagged for next cycle
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State whether the entire access register or a risk-based sample was reviewed, and record this decision
+  in the review summary document.
+- Document the method used to select any sample, including risk criteria and rationale, in the review
+  plan or meeting minutes.
+- Name the reviewer(s) as specific individuals in the review record, avoiding generic labels like "IT
+  team" or "security group".
+- Record any areas or systems not covered in this cycle as identified gaps, and flag them for inclusion
+  in the next scheduled review.
+- Retain a dated copy of the completed review checklist or report showing which accounts, systems, or
+  roles were examined.

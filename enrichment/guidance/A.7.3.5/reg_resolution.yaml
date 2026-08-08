@@ -1,0 +1,15 @@
+must_id: item:A.7.3.5:reg_resolution
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Resolution per row (processing halted / balancing test rejection with justification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the resolution for each objection event row, clearly stating whether processing was halted or
+  a balancing test was performed.
+- Document the justification for any balancing test rejection, including a summary of the compelling grounds
+  relied upon.
+- Name the decision-maker responsible for each resolution as a specific individual, not a group or department.
+- Date each resolution entry to show when the decision was made and actioned.

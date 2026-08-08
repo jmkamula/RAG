@@ -1,0 +1,16 @@
+must_id: item:A.5.25:dec_outcome
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Decision outcome captured (false positive / filed near-miss / escalated to incident)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the triage decision outcome for each event, clearly marking whether it was a false positive,
+  filed as a near-miss, or escalated to an incident.
+- Document the name of the individual who made the triage decision for each event, avoiding anonymous
+  or group attributions.
+- Enter the date and time when the triage decision was made for each event to establish a clear timeline.
+- Retain supporting evidence or rationale for each decision outcome, such as logs, screenshots, or notes,
+  attached to the event record.

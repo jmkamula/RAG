@@ -1,0 +1,19 @@
+must_id: item:A.8.30:scope_exclusions
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Exclusion rationale (e.g. open-source contributions accepted via A.8.4 repo governance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all outsourced development activities and providers, including any open-source contribution channels,
+  in a dated document approved by a named manager.
+- State clearly which development activities are excluded from the scope, with a brief, specific rationale
+  for each exclusion.
+- Reference the relevant policy or governance process, such as open-source contribution review under A.8.4,
+  that supports each exclusion.
+- Name the responsible individual—not a team or department—who determined and approved the scope and exclusions,
+  including their approval date.
+- Attach supporting evidence, such as meeting minutes or decision logs, that show how and when each exclusion
+  rationale was reviewed and accepted.

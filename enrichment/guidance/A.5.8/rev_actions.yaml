@@ -1,0 +1,17 @@
+must_id: item:A.5.8:rev_actions
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Action items captured for the program (e.g. update templates, retrain PMs, tighten tiering
+  criteria, add reviewer capacity)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record all action items from each project-security program review in a dated log, specifying the issue,
+  required change, and responsible person.
+- Assign each action item to a named individual, not a group or generic role, to avoid unclear accountability.
+- Document the completion status and date for each action item, updating the log as progress is made or
+  tasks are finished.
+- Retain meeting minutes or review summaries that clearly reference the captured action items and their
+  linkage to program adjustments.

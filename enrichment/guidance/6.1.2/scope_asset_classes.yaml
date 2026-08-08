@@ -1,0 +1,14 @@
+must_id: item:6.1.2:scope_asset_classes
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Asset/process classes in scope enumerated (data, systems, people, suppliers, premises)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all asset and process classes in scope, including data, systems, people, suppliers, and premises,
+  in a dated risk assessment methodology document.
+- Name the specific individual responsible for defining and updating the scope, not a team or department.
+- Cross-reference the enumerated classes with your asset inventory and process register to confirm completeness.
+- Retain a signed approval of the scope document from a senior manager to evidence formal acceptance.

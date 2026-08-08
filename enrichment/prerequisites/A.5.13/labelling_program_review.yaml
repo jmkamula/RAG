@@ -1,0 +1,44 @@
+leaf_id: req:A.5.13:labelling_program_review
+control_ref: A.5.13
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification of information
+  category: direct
+  rationale: You need a documented and operational classification scheme before you can review whether
+    labelling is effective. The review checks if labels match the scheme and are applied consistently.
+  good_enough: A current, approved classification scheme exists and is in active use across the estate.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: To review labelling coverage, you must know what assets exist and should be labelled. An
+    up-to-date asset register is essential for identifying gaps or missed systems.
+  good_enough: A reasonably complete asset inventory is available, covering all major information systems
+    and data stores.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that responsibilities for labelling, monitoring, and review
+    are understood and actionable. Without this, review findings cannot be owned or acted upon.
+  good_enough: Roles for labelling and review are assigned and documented, even if not fully optimized.
+- ref: A.5.14
+  standard_id: ISO27001:2022
+  title: Information transfer
+  category: direct
+  rationale: Labelling effectiveness impacts how information is transferred and protected. Reviewing the
+    labelling program requires understanding how labels are used to enforce transfer controls.
+  good_enough: Documented procedures exist for handling information transfers based on labels, even if
+    not fully mature.
+- ref: A.8.12
+  standard_id: ISO27001:2022
+  title: Data leakage prevention
+  category: direct
+  rationale: DLP controls rely on labels to function correctly. The review must consider whether labelling
+    supports DLP as intended.
+  good_enough: DLP rules referencing labels are documented and in use, even if coverage is not yet comprehensive.

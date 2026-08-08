@@ -1,0 +1,18 @@
+must_id: item:A.8.10:verification
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Verification of deletion (audit log entry / sample re-read / certificate of destruction for
+  hardware)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each deletion event in an audit log, including the date, time, method used, and the name of
+  the person performing the deletion.
+- Attach evidence of deletion, such as a screenshot of a successful deletion message or a certificate
+  of destruction for physical hardware, to the log entry.
+- Record the results of a sample re-read or verification check to confirm that the deleted information
+  is no longer accessible.
+- Name the responsible individual who verified the deletion, avoiding generic titles like "IT team" or
+  "administrator."

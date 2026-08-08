@@ -1,0 +1,15 @@
+must_id: item:B.8.2.2:proc_owner
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: Named owner (Engineering + Privacy Engineering)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the Customer-Purpose Adherence Procedure, not just "Engineering"
+  or "Privacy Engineering".
+- Document the owner's full name and job title in the procedure document, with the date of assignment
+  clearly stated.
+- Record the owner's acceptance of responsibility by having them sign or formally acknowledge the procedure.
+- Review and update the named owner information annually, keeping a dated record of each review.

@@ -1,0 +1,18 @@
+must_id: item:A.6.6:rev_ad_hoc_triggers
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Ad-hoc review triggers (material classification change, case-law shift, M&A bringing new counterparty
+  types)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each ad-hoc NDA template review trigger, such as material classification changes, legal precedent
+  shifts, or mergers and acquisitions, in a dated log entry.
+- Name the person responsible for monitoring and identifying events that trigger ad-hoc NDA template reviews,
+  listing them as an individual, not a team.
+- Record the date and outcome of each ad-hoc NDA template review, including any updates made to the template,
+  in a central register.
+- Attach supporting evidence, such as legal memos or M&A announcements, to each review entry to show the
+  reason for the ad-hoc review.

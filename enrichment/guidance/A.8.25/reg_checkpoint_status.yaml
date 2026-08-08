@@ -1,0 +1,17 @@
+must_id: item:A.8.25:reg_checkpoint_status
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Per-project security-checkpoint status (which gates passed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each development project in the register with a unique project name and start date.
+- List all required security checkpoints for each project, using clear, project-specific descriptions
+  rather than generic or boilerplate terms.
+- Document the date each security checkpoint was passed, referencing supporting evidence such as meeting
+  minutes or approval emails.
+- Name the responsible individual who approved each checkpoint, avoiding group or department names.
+- Update the register promptly when a checkpoint status changes, ensuring no checkpoint is left blank
+  or marked as "TBD".

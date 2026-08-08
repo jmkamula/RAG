@@ -1,0 +1,19 @@
+must_id: item:A.7.5.4:rev_authority_audit
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Authority audit — sampled disclosures reviewed for documented authority
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and list each individual disclosure of personal data made during the audit period, including
+  date, recipient, and purpose.
+- Cross-reference each disclosure entry with a documented source of authority, such as a contract clause,
+  legal requirement, or explicit consent form.
+- Record the name and signature of the person who approved each disclosure, ensuring the approver is a
+  specific individual, not a group or department.
+- Review a sample of disclosure records to confirm that the documented authority matches the stated purpose
+  for sharing the data.
+- Flag and update any disclosure records that lack clear, documented authority or have missing approval
+  details.

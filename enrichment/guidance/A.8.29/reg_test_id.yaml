@@ -1,0 +1,16 @@
+must_id: item:A.8.29:reg_test_id
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Per-test unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each security test entry in the register before recording any test details.
+- Record the assigned identifier alongside the test date, scope, and responsible person for every new
+  entry.
+- Cross-reference the unique identifier in related documentation, such as test reports or remediation
+  logs, to maintain traceability.
+- Avoid using generic or reused identifiers—ensure each identifier is distinct and not repeated across
+  different tests.

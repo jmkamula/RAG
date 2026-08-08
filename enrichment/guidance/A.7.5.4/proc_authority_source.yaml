@@ -1,0 +1,19 @@
+must_id: item:A.7.5.4:proc_authority_source
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Source-of-authority recording per row (contract / law / court order / regulator request)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific source of authority for each PII disclosure in your log, clearly stating if it
+  is a contract, law, court order, or regulator request.
+- Name the individual responsible for verifying the authority source for each disclosure, ensuring accountability
+  is traceable to a single person.
+- Attach or cross-reference the actual contract clause, legal citation, court order, or regulator correspondence
+  supporting each disclosure entry.
+- Record the date the authority was checked and the disclosure was made, creating a clear audit trail
+  for each event.
+- Avoid using generic terms like "per policy" or "as required" as the authority source; always specify
+  the exact legal or contractual basis.

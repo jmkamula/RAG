@@ -1,0 +1,18 @@
+must_id: item:A.7.4.7:proc_retention_schedules
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Retention schedules per PII category + activity (with legal + regulatory + business rationale)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each category of personally identifiable information (PII) your organisation processes in a retention
+  schedule table.
+- Specify the business activity or process linked to each PII category in the retention schedule.
+- Document the exact retention period for each PII category and activity, with start and end dates or
+  clear timeframes.
+- State the legal, regulatory, or business reason justifying each retention period, referencing relevant
+  laws or internal policies.
+- Name the owner as a specific individual responsible for maintaining and updating the retention schedule,
+  not a team or department.

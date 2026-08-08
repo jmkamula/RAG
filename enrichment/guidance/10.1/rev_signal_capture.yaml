@@ -1,0 +1,18 @@
+must_id: item:10.1:rev_signal_capture
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Signal-capture check — every in-scope trigger source produced at least one action OR explicit
+  'no opportunities this cycle' rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all in-scope trigger sources for continual improvement in a dated register reviewed at the start
+  of each program cycle.
+- Record for each trigger source either a documented improvement action or a written rationale explaining
+  why no opportunity was identified this cycle.
+- Name the reviewer who confirmed every trigger source was addressed, and capture their sign-off with
+  a date on the review summary.
+- Avoid using generic statements like "all sources reviewed" without individual evidence for each trigger
+  source.

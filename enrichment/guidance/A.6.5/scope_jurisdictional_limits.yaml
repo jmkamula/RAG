@@ -1,0 +1,19 @@
+must_id: item:A.6.5:scope_jurisdictional_limits
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Jurisdictional limits on enforceability (US California voids non-compete; EU restricts duration;
+  UK courts test reasonableness)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all jurisdictions where your organisation operates and record them in a dated obligations register.
+- Document the specific legal limits on non-compete enforceability for each jurisdiction, citing the relevant
+  law or regulation.
+- Name the person responsible for monitoring changes in employment law for each jurisdiction, listing
+  them as a specific individual.
+- Cross-reference each contractual clause with the corresponding jurisdictional requirement, showing how
+  local law is addressed.
+- Retain copies of legal reviews or external counsel opinions that confirm your approach complies with
+  each jurisdiction’s enforceability limits.

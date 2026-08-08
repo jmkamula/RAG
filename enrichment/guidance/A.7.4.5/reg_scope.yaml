@@ -1,0 +1,15 @@
+must_id: item:A.7.4.5:reg_scope
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: Scope per row (which records / systems / backup tier)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity or dataset in a separate row, specifying exactly which records, systems,
+  or backup tiers are covered.
+- Name the responsible individual for each row, avoiding generic titles like "IT" or "the team".
+- Record the date each entry was last reviewed or updated to show ongoing accuracy.
+- Cross-reference each row to supporting documentation, such as data flow diagrams or system inventories,
+  to confirm correct scope.

@@ -1,0 +1,19 @@
+must_id: item:B.8.5.4:proc_legal_review
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+must_text: Legal counsel reviews every request before response
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named legal counsel to review all legally-binding disclosure requests, recording their full
+  name and role on each request record.
+- Document the date and outcome of each legal counsel review directly on the disclosure request file before
+  any response is sent.
+- Retain a copy of the legal counsel’s written review decision, such as an email or signed form, with
+  the disclosure request documentation.
+- Name the legal counsel as a specific individual, not as "Legal" or "the legal team", to avoid ambiguity
+  in responsibility.
+- Record the date and method of notification to the requester, ensuring the legal counsel’s review is
+  referenced in the communication.

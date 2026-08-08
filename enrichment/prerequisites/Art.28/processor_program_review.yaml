@@ -1,0 +1,39 @@
+leaf_id: req:Art.28:processor_program_review
+control_ref: Art.28
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date inventory of all processing activities to identify which vendors are
+    acting as processors. Without this, you can't reliably review processor relationships or ensure all
+    are covered by DPAs.
+  good_enough: A current, working list of all processors and their processing activities, even if not
+    fully detailed, is available for reference.
+- ref: Art.28
+  standard_id: GDPR:2016/679
+  title: Processor Contracts (DPAs)
+  category: direct
+  rationale: You must have signed Data Processing Agreements (DPAs) with each processor before you can
+    review their status or compliance. The review is meaningless if DPAs are missing or incomplete.
+  good_enough: A signed DPA exists for each processor in use, even if some are pending minor updates.
+- ref: Art.32
+  standard_id: GDPR:2016/679
+  title: Security of Processing
+  category: direct
+  rationale: You need to know what security assurances (e.g., certifications, audit reports) each processor
+    provides to verify their ongoing compliance. This is essential for the annual review.
+  good_enough: At least one recent (within the last year) security assurance document or attestation is
+    on file for each processor.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If a Data Protection Officer (DPO) is required, their involvement is crucial for overseeing
+    processor reviews and ensuring regulatory alignment.
+  good_enough: A DPO is formally designated (if required), or a responsible person is assigned for processor
+    oversight.

@@ -1,0 +1,18 @@
+must_id: item:A.7.1:scope_sites
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Sites enumerated (HQ, regional offices, owned data centres, co-located rack space, lab facilities)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical sites in scope by name and address, including headquarters, regional offices, data
+  centres, co-location spaces, and lab facilities.
+- Record the date the site list was last reviewed and updated, and keep a copy of this dated record.
+- Name the person responsible for maintaining the site list as a specific individual, not a department
+  or generic team.
+- Cross-reference each site to supporting documentation, such as lease agreements or ownership records,
+  to confirm its inclusion in scope.
+- Retain evidence of management approval for the final site list, such as a signed and dated sign-off
+  document.

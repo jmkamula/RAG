@@ -1,0 +1,18 @@
+must_id: item:A.6.5:scope_change_drivers
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new geography with distinct employment law, major employment-law
+  reform, sectoral regulator action)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific triggers for re-scoping, such as entry into a new country, major changes in employment
+  law, or new sectoral regulator requirements.
+- Document the date each trigger was last reviewed and the person responsible for monitoring changes in
+  legal or regulatory obligations.
+- Name the owner as a specific individual, not a team or department, who is accountable for initiating
+  re-scoping when a trigger occurs.
+- Retain evidence of periodic reviews, such as meeting minutes or review logs, showing that the trigger
+  list has been checked and updated as needed.

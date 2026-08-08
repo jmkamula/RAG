@@ -1,0 +1,16 @@
+must_id: item:Art.21:reg_response_date
+control_ref: Art.21
+standard_id: GDPR:2016/679
+must_text: Per-row response date (Art.12.3 SLA tracking)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each objection is received in a dedicated column of the Objection Register.
+- Enter the date a formal response is sent for each objection in a separate, clearly labeled column.
+- Cross-reference each response date with supporting evidence, such as a copy of the sent email or letter,
+  stored in a linked file location.
+- Name the staff member responsible for tracking and updating response dates for each objection entry.
+- Avoid leaving response date fields blank or using placeholders like "TBD"—update with the actual date
+  or document the reason for any delay.

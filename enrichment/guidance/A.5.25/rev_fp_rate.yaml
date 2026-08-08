@@ -1,0 +1,18 @@
+must_id: item:A.5.25:rev_fp_rate
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: False-positive rate analysed across the period
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Collect and record the number of false positives identified during each event triage cycle in a dated
+  summary report.
+- Calculate and document the false-positive rate for the review period, showing the formula and data sources
+  used.
+- Assign a named individual to analyse trends in false-positive rates and sign off on the findings with
+  a date.
+- Attach supporting evidence, such as triage logs or incident records, to substantiate the false-positive
+  calculations.
+- Name the reviewer as a specific person, not a group or generic title, to avoid ambiguity in accountability.

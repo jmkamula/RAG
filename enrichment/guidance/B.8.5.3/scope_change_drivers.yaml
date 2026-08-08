@@ -1,0 +1,17 @@
+must_id: item:B.8.5.3:scope_change_drivers
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+must_text: Trigger list (new integration / new regulator inquiry)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current data processing integrations and regulator inquiries in a dated register, updating
+  immediately when a new integration or inquiry occurs.
+- Name a specific individual responsible for maintaining and updating the processor disclosure scope,
+  avoiding generic titles like "IT" or "the team."
+- Document each trigger event with a brief description, date, and the decision on whether it changes the
+  processor disclosure scope.
+- Cross-reference the register against recent integration onboarding and regulator correspondence to confirm
+  all relevant triggers are captured.

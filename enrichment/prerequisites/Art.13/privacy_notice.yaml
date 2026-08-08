@@ -1,0 +1,32 @@
+leaf_id: req:Art.13:privacy_notice
+control_ref: Art.13
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of processing
+  category: direct
+  rationale: You must identify and document the lawful basis for each processing activity before drafting
+    a privacy notice, as Art.13 requires you to inform data subjects about this basis.
+  good_enough: A clear mapping of each processing purpose to its lawful basis, with supporting notes,
+    is sufficient to proceed.
+- ref: Art.12
+  standard_id: GDPR:2016/679
+  title: Transparent information, communication and modalities for the exercise of the rights of the data
+    subject
+  category: direct
+  rationale: Art.12 sets the standards for how privacy information must be presented (clear, accessible,
+    and understandable), which directly impacts the drafting of your privacy notice.
+  good_enough: A summary of the chosen communication methods and accessibility approach is enough to unblock
+    drafting.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: A current record of processing activities ensures you know what data is collected, for what
+    purposes, and from whom—critical details for an accurate privacy notice.
+  good_enough: A working draft or inventory of processing activities covering the relevant data flows
+    is sufficient to begin drafting the notice.

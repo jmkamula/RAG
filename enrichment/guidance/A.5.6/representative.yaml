@@ -1,0 +1,19 @@
+must_id: item:A.5.6:representative
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Internal representative or point of contact per group
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each special interest group and professional forum in the register, including the official group
+  or forum name and purpose.
+- Name a specific individual as the internal representative or point of contact for each group, avoiding
+  generic titles like "IT" or "the team."
+- Record the date the representative was assigned to each group, and update this entry whenever the contact
+  changes.
+- Document the representative’s current contact details, such as email address and phone number, alongside
+  each group entry.
+- Review the register at least annually and sign off on any updates, noting the review date and reviewer’s
+  name.

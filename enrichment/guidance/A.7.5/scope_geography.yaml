@@ -1,0 +1,20 @@
+must_id: item:A.7.5:scope_geography
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Geographic risk overlay (seismic zone, floodplain, climate band, civil-stability index per
+  site location)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each site location by full address in a table to clearly identify the geographic scope for risk
+  assessment.
+- Document the seismic zone, floodplain status, climate band, and civil-stability index for each site,
+  citing the authoritative data source and date.
+- Assign a named individual responsible for maintaining and updating the geographic risk data for all
+  listed sites.
+- Cross-reference each site's risk data to relevant business continuity or disaster recovery plans to
+  show how geographic risks are addressed.
+- Avoid using generic or outdated risk data—verify that all geographic overlays are current and specific
+  to each site, not copied boilerplate.

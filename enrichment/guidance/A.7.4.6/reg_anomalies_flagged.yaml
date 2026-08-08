@@ -1,0 +1,18 @@
+must_id: item:A.7.4.6:reg_anomalies_flagged
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+must_text: Anomalies flagged per row (unusual accumulation / temp files past retention)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time of each temp files sweep in the register, along with the name of the person
+  who performed it.
+- Flag any instance where temp files exceed expected retention periods or show unusual accumulation by
+  marking the relevant row as "anomaly detected."
+- Describe the specific nature of each anomaly in the register entry, such as file age, volume, or location.
+- Name the reviewer who checked each flagged anomaly, ensuring this is a specific individual and not a
+  generic role or team.
+- Attach or cross-reference supporting evidence for each anomaly, such as screenshots or file lists, to
+  the corresponding register row.

@@ -1,0 +1,15 @@
+must_id: item:A.8.18:rev_next_date
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for privileged utility programs in the review log, using a clear
+  and specific calendar date.
+- Record the name of the person responsible for conducting the next review alongside the planned date
+  in the same log.
+- Confirm that the review log entry is dated and references the most recent completed review to show continuity.
+- Name the review owner as a specific individual, not a group or generic title, to avoid ambiguity.

@@ -1,0 +1,18 @@
+must_id: item:A.5.13:reg_automation
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Automation level per row (manual / assisted / automatic; drives which gaps need user training
+  vs config)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the automation level for each labelled information asset in the Labelling Coverage Register as
+  "manual," "assisted," or "automatic."
+- Name the person responsible for verifying the accuracy of each automation level entry in the register.
+- Cross-reference each automation level entry with supporting documentation, such as screenshots or system
+  configuration records, to confirm its accuracy.
+- State the date when each automation level was last reviewed or updated in the register.
+- Name the automation level as one of the three required categories only—do not use unclear terms like
+  "mixed" or "partial."

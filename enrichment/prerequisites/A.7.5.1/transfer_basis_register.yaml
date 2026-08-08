@@ -1,0 +1,40 @@
+leaf_id: req:A.7.5.1:transfer_basis_register
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which entities, systems, and data flows are in scope before you can identify
+    and record cross-jurisdiction PII transfers. Without a clear scope, the register may miss relevant
+    transfers or include irrelevant ones.
+  good_enough: A documented scope statement that identifies all business units, systems, and geographies
+    relevant to PII processing and transfer.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register is essential to identify all information assets and data flows,
+    which is the starting point for mapping cross-jurisdiction PII transfers.
+  good_enough: A list of information assets and data flows, including those involving PII, with enough
+    detail to identify which ones cross jurisdictional boundaries.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purpose for each PII processing activity to determine if and why a cross-jurisdiction
+    transfer is necessary, and to justify the transfer basis.
+  good_enough: Documented purposes for each PII processing activity, especially those involving transfers
+    outside the jurisdiction.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Each cross-jurisdiction PII transfer must have a lawful basis identified and documented;
+    this is the core data point for the transfer basis register.
+  good_enough: A list or mapping of lawful bases for all PII processing and transfer activities, sufficient
+    to cite the basis for each transfer in the register.

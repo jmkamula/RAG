@@ -1,0 +1,31 @@
+leaf_id: req:Art.40:applicable_scope
+control_ref: Art.40
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of your processing activities to determine which approved
+    codes of conduct are relevant to your organisation’s data processing operations.
+  good_enough: A current, reasonably complete RoPA that lists major processing activities, purposes, and
+    data categories is sufficient to identify applicable codes.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Understanding the lawful bases for your processing activities helps ensure that any selected
+    code of conduct aligns with your organisation’s legal grounds and sectoral obligations.
+  good_enough: Documented lawful bases for each processing activity in your RoPA, even if some are provisional,
+    is enough to proceed.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope statement provides organisational boundaries and context, which are necessary
+    to map GDPR codes of conduct to your actual business operations.
+  good_enough: A draft or approved ISMS scope statement that outlines the main business units, locations,
+    and functions covered by your ISMS is sufficient for this step.

@@ -1,0 +1,47 @@
+leaf_id: req:A.8.24:cryptography_policy
+control_ref: A.8.24
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, data, and processes are in-scope for your ISMS before defining
+    which cryptographic controls and policies apply. This ensures your cryptography policy is relevant
+    and complete.
+  good_enough: A documented scope statement that clearly lists included business units, systems, and data
+    types is available and approved.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: foundational
+  rationale: Risk assessment identifies where cryptography is needed to mitigate threats to confidentiality,
+    integrity, or authenticity. Without this, your policy may miss critical areas or over-engineer controls.
+  good_enough: A recent risk assessment exists that highlights areas where cryptography is required or
+    recommended for risk treatment.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need an up-to-date asset register to know which information assets require cryptographic
+    protection and to define policy scope and exceptions.
+  good_enough: A basic asset inventory is available, listing key information assets and their owners,
+    even if not fully detailed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: A data classification scheme is essential to determine which data types require encryption
+    or other cryptographic controls, and at what level.
+  good_enough: A simple, documented classification scheme exists that distinguishes at least between public,
+    internal, and confidential data.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The top-level information security policy sets the organization's intent and commitment to
+    security, which the cryptography policy must align with.
+  good_enough: A current, approved information security policy is published and accessible to policy authors.

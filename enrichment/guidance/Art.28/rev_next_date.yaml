@@ -1,0 +1,15 @@
+must_id: item:Art.28:rev_next_date
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the processor program in a clearly visible section of the review
+  document.
+- Record the date using a full date format (day, month, year) to avoid ambiguity.
+- Name the individual responsible for scheduling the next review, ensuring a specific person is listed
+  rather than a team or department.
+- Retain a copy of the review document showing the stated next review date and responsible person.

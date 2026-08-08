@@ -1,0 +1,18 @@
+must_id: item:A.8.14:proc_runbook
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Per-service failover runbook (steps, validation checks, success criteria)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a separate failover runbook for each critical service, listing step-by-step actions, validation
+  checks, and clear success criteria.
+- Assign a named individual as the owner of each runbook, avoiding generic roles like "IT team" or "Operations".
+- Record the date of the most recent test or walkthrough for each runbook, including the names of participants
+  and test outcomes.
+- Cross-reference each runbook with the relevant business continuity plan section to show alignment and
+  coverage.
+- State any known limitations or prerequisites for the failover process directly in the runbook, with
+  version-specific details.

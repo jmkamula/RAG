@@ -1,0 +1,20 @@
+must_id: item:A.6.2:organization_responsibilities
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Organization's information security responsibilities stated (training provision, tools, protection
+  of personal data, fair-treatment of reported events)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the organization's responsibility to provide information security training in the employment contract
+  template, including frequency and delivery method.
+- Specify in the contract template that employees will be given necessary security tools and resources
+  to fulfill their duties.
+- Document a clause in the template outlining the organization's obligation to protect personal data in
+  accordance with applicable laws.
+- Include a statement in the contract template committing to fair and non-retaliatory treatment of employees
+  who report security events or concerns.
+- Name the responsible person or role who maintains and updates the contract template, avoiding vague
+  references such as "HR team."

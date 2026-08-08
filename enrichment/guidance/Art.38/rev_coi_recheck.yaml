@@ -1,0 +1,16 @@
+must_id: item:Art.38:rev_coi_recheck
+control_ref: Art.38
+standard_id: GDPR:2016/679
+must_text: COI recheck — DPO role assignments still free of conflicts
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the current Data Protection Officer and list all other roles and responsibilities held by this
+  individual in the organisation.
+- Document a dated review confirming the DPO does not participate in decisions about data processing activities.
+- Record the reviewer's name and position who performed the conflict of interest check for the DPO assignment.
+- State explicitly that the DPO is not assigned to any role that could lead to a conflict, such as head
+  of IT, HR, or legal.
+- Avoid listing the DPO owner as "the team" or a department; specify a named individual.

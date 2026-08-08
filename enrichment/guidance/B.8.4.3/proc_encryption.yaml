@@ -1,0 +1,19 @@
+must_id: item:B.8.4.3:proc_encryption
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Encryption in transit standard per channel
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each data transmission channel used for personal data, listing protocols and endpoints in a
+  dated register maintained by the IT security lead.
+- State the encryption standard required for each channel, referencing specific protocol versions (e.g.,
+  TLS 1.2 or higher) in the procedure document.
+- Attach evidence of encryption configuration (such as screenshots or logs) for each channel, dated and
+  signed by the responsible technical staff.
+- Name the owner as a specific individual responsible for maintaining and updating the encryption standards,
+  not a team or department.
+- Review and update the procedure annually, recording the review date and the reviewer’s name in the document
+  revision history.

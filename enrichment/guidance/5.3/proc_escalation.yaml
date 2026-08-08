@@ -1,0 +1,15 @@
+must_id: item:5.3:proc_escalation
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Escalation path when a role is unfilled or contested
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the escalation path in the ISMS RACI Framework, listing each step and responsible individual
+  by name and job title.
+- Name the escalation owner as a specific person, not a group or department, to avoid ambiguity in accountability.
+- Record the date the escalation path was last reviewed and approved by senior management.
+- Cross-reference the escalation path in the ISMS RACI Framework with your organisation’s incident management
+  or HR procedures.

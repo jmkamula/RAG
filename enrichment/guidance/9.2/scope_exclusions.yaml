@@ -1,0 +1,18 @@
+must_id: item:9.2:scope_exclusions
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Any explicit exclusions with rationale (rare — generally all ISMS processes are in scope)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all ISMS processes included in the audit cycle, referencing a current process inventory with version
+  and date.
+- Identify any ISMS processes explicitly excluded from the audit cycle, naming each process and providing
+  a clear, specific rationale for exclusion.
+- Document the approval of exclusions and rationale by a named, accountable manager with a dated signature.
+- State explicitly if no exclusions exist, recording this decision in the audit cycle coverage note with
+  the date and name of the reviewer.
+- Avoid using vague justifications or generic statements like "not applicable" without detailed explanation,
+  as auditors will flag insufficient rationale.

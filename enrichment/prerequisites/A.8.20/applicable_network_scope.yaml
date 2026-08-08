@@ -1,0 +1,41 @@
+leaf_id: req:A.8.20:applicable_network_scope
+control_ref: A.8.20
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS Scope Statement defines the overall boundaries of the information security management
+    system, including which parts of the organization and which assets are covered. You cannot meaningfully
+    define the network scope until you know what the ISMS itself covers.
+  good_enough: A clear, approved ISMS scope statement exists that identifies included business units,
+    locations, and major asset types.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register identifies and inventories all relevant information assets, including
+    network infrastructure. Without a current asset register, you cannot reliably list which networks
+    are in or out of scope.
+  good_enough: A working inventory of network-related assets (e.g., LAN, WAN, wireless, cloud VPCs) is
+    available, even if not fully detailed or perfectly up to date.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: The risk assessment process helps determine which networks are critical and should be included
+    in scope based on risk to the organization. This ensures the scope is risk-driven, not arbitrary.
+  good_enough: At least one recent risk assessment exists that considers network assets and their associated
+    threats and vulnerabilities.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The classification scheme informs which networks handle sensitive or critical information,
+    helping to justify why certain networks are included or excluded from scope.
+  good_enough: There is a documented method for classifying information and assets, and it has been applied
+    to network assets at a basic level.

@@ -1,0 +1,15 @@
+must_id: item:7.5:reg_title
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Document title per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each document in the ISMS Document Register with its full, unique title in a dedicated row.
+- Confirm that no row uses vague or generic titles such as "Policy" or "Procedure"—each must be specific
+  and descriptive.
+- Record the date each document title was added or updated in the register to show currency.
+- Assign responsibility for maintaining document titles in the register to a named individual, not a group
+  or department.

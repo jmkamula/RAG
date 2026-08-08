@@ -1,0 +1,17 @@
+must_id: item:5.2:owner
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: Named owner of the policy (ISMS Manager)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the ISMS Manager as the specific owner of the Information Security Policy, using their full name
+  and job title in the policy document.
+- Record the date when the ISMS Manager was assigned as the policy owner in the document’s version history
+  or change log.
+- Avoid listing a team, department, or generic title as the owner; use a single, identifiable person’s
+  name.
+- Retain evidence of the ISMS Manager’s acceptance of ownership, such as a signed or acknowledged statement
+  within the policy or a related approval record.

@@ -1,0 +1,19 @@
+must_id: item:Art.47:scope_intra_group_flows
+control_ref: Art.47
+standard_id: GDPR:2016/679
+must_text: Intra-group flows covered (controller-to-controller / controller-to-processor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all intra-group data transfers, specifying whether each is controller-to-controller or controller-to-processor,
+  in a dated and version-controlled document.
+- Name the legal entities involved in each data flow, using their full legal names rather than generic
+  group or department references.
+- Document the lawful basis and relevant data protection roles for each transfer, referencing the specific
+  articles of GDPR applied.
+- Attach a signed approval from a designated data protection officer or legal counsel confirming the completeness
+  and accuracy of the BCR scope.
+- Avoid describing flows in vague terms such as "all group data"—detail the types of personal data and
+  processing activities for each transfer.

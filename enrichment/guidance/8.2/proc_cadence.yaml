@@ -1,0 +1,18 @@
+must_id: item:8.2:proc_cadence
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Planned-interval cadence stated per risk tier (annual for low, semi-annual or quarterly for
+  higher-risk)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the required assessment frequency for each risk tier in the procedure, specifying annual for low
+  risk and semi-annual or quarterly for higher-risk.
+- Name the individual responsible for scheduling and tracking risk assessments by role and full name in
+  the procedure document.
+- Record the date when the current version of the procedure was approved and by whom, including a signature
+  or digital approval.
+- Avoid using vague terms like "regularly" or "as needed"—specify exact intervals for each risk tier in
+  the documented procedure.

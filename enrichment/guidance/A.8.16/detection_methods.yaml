@@ -1,0 +1,19 @@
+must_id: item:A.8.16:detection_methods
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Detection methods (signature / anomaly / threat-intel / behavioural / UEBA / hunting)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all detection methods used, such as signature-based, anomaly detection, threat intelligence feeds,
+  behavioural analytics, UEBA, or threat hunting, in the procedure document.
+- Name the person responsible for maintaining and updating the list of detection methods, specifying them
+  by full name and job title.
+- Record the date when each detection method was last reviewed or updated, referencing meeting minutes
+  or change logs.
+- Attach or cross-reference evidence of each detection method in use, such as screenshots, tool reports,
+  or configuration files, in the procedure appendix.
+- Specify detection methods in detail—avoid generic statements like "we monitor for threats" without naming
+  the actual tools or techniques used.

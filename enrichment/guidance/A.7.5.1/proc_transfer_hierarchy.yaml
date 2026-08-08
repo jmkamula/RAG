@@ -1,0 +1,20 @@
+must_id: item:A.7.5.1:proc_transfer_hierarchy
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: 'Transfer basis hierarchy — adequacy decision (Art.45) → appropriate safeguards (Art.46: SCCs,
+  BCRs, codes, certification) → derogations (Art.49) as last resort'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the legal basis for each PII transfer outside the EEA, citing the specific GDPR Article used
+  (45, 46, or 49) with dates.
+- Name the decision-maker who approved the chosen transfer basis for each transfer, identifying them as
+  an individual, not a team or department.
+- Retain copies of adequacy decisions, signed Standard Contractual Clauses, or other safeguards as supporting
+  evidence for each transfer.
+- Record any use of derogations under Article 49 as a last resort, including a written justification explaining
+  why other bases were not applicable.
+- Cross-reference each transfer entry in your data transfer register to the relevant supporting documents
+  and approvals.

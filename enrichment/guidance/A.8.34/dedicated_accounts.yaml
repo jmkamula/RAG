@@ -1,0 +1,20 @@
+must_id: item:A.8.34:dedicated_accounts
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Dedicated test accounts used — no re-use of real user identities (attribution clarity; Style
+  v2 promotion)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for creating and approving dedicated test accounts in your audit testing policy,
+  including who is responsible and when accounts are created.
+- Record the unique identifiers of all test accounts used during audit testing in a dated register, separate
+  from real user accounts.
+- Name the owner of each test account as a specific individual, not a team or generic role, in the test
+  account register.
+- State in the policy that real user identities must never be used for audit testing, and include an explicit
+  prohibition with a revision date.
+- Retain evidence of periodic reviews confirming that only dedicated test accounts are used, such as screenshots
+  or logs from recent audit testing sessions.

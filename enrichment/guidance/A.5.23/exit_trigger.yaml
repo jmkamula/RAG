@@ -1,0 +1,19 @@
+must_id: item:A.5.23:exit_trigger
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Exit trigger captured (termination / replacement / CSP failure / business change)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific event that triggered the cloud service exit, such as contract termination, provider
+  failure, or internal business change, in the migration record.
+- Name the individual who authorized the exit decision, including their job title and contact details,
+  in the documented record.
+- State the date the exit trigger was identified and formally logged, ensuring it matches supporting correspondence
+  or board minutes.
+- Attach supporting evidence, such as termination notices, incident reports, or business case documents,
+  to the exit record for each trigger event.
+- Name the exit trigger clearly and specifically — avoid vague terms like "business reasons" or "strategic
+  decision" without further explanation.

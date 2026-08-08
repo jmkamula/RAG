@@ -1,0 +1,16 @@
+must_id: item:A.7.2.8:ropa_type_purpose
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Type + purpose of processing per row (link to A.7.2.1 register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity in your PII Records of Processing, stating both the specific type of processing
+  and its intended purpose per row.
+- Cross-reference each processing activity to the corresponding entry in your A.7.2.1 processing register,
+  using a unique identifier or direct link.
+- Name the owner of each processing activity as a specific individual, not a team or department.
+- Record the date each entry was last reviewed or updated, showing that information is current and actively
+  maintained.

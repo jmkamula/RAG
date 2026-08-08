@@ -1,0 +1,40 @@
+leaf_id: req:A.5.29:plan_activation_record
+control_ref: A.5.29
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.29
+  standard_id: ISO27001:2022
+  title: Information security continuity plans
+  category: direct
+  rationale: You cannot record an activation unless a formal continuity plan exists to be activated. The
+    plan defines the scenarios, scope, and procedures that the activation record must reference.
+  good_enough: A documented and approved continuity plan exists, covering relevant scenarios and roles,
+    even if not fully optimized.
+- ref: A.5.26
+  standard_id: ISO27001:2022
+  title: Response to information security incidents
+  category: direct
+  rationale: Real disruptions that trigger plan activation must be cross-referenced to incident records.
+    Without an incident register, you cannot properly link or contextualize real-world activations.
+  good_enough: There is a basic incident register in place that logs major security incidents, with enough
+    detail to cross-reference activations.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: Determining the scope of the information security management system
+  category: foundational
+  rationale: The scope statement defines which assets, processes, and locations are covered by the ISMS
+    and thus by the continuity plan and its activations. Without scope, you cannot specify what an activation
+    applies to.
+  good_enough: A written scope statement exists, identifying the main organizational boundaries and in-scope
+    assets/processes.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Inventory of information and other associated assets
+  category: foundational
+  rationale: Activation records must specify which assets or services were affected. An asset register
+    is needed to accurately describe the scope and impact of each activation.
+  good_enough: There is a current list of key assets and services, even if not fully detailed, that can
+    be referenced in activation records.

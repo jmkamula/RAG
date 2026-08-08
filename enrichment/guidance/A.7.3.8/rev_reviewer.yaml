@@ -1,0 +1,17 @@
+must_id: item:A.7.3.8:rev_reviewer
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Engineering)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual from both the Data Protection Officer role and the Engineering
+  team in the review record.
+- Record the full name, job title, and date of each reviewer's participation in the Copy Provision Program
+  Review document.
+- Obtain a signature or written confirmation from both the Data Protection Officer and the Engineering
+  reviewer on the final review outcome.
+- Avoid listing groups or departments as reviewers; always identify individuals by name to meet accountability
+  expectations.

@@ -1,0 +1,19 @@
+must_id: item:Art.21:scope_change_drivers
+control_ref: Art.21
+standard_id: GDPR:2016/679
+must_text: Trigger list (new legitimate-interests activity, new marketing channel)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current data processing activities that rely on legitimate interests or involve marketing channels,
+  including a brief description and start date for each.
+- Record each time a new legitimate-interests activity or marketing channel is introduced, noting the
+  date and the person responsible for the decision.
+- Document the review process for updating the processing basis scope, including meeting minutes or approval
+  records from a named decision-maker.
+- Name the owner as a specific individual responsible for maintaining and updating the processing basis
+  scope—do not use a team or department name.
+- Cross-reference each entry with supporting documentation, such as Data Protection Impact Assessments
+  or legal assessments, to show the rationale for inclusion.

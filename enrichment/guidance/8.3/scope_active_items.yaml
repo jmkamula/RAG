@@ -1,0 +1,18 @@
+must_id: item:8.3:scope_active_items
+control_ref: '8.3'
+standard_id: ISO27001:2022
+must_text: Active treatment items in scope enumerated (current cycle)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all active treatment items currently being implemented, referencing their unique identifiers and
+  descriptions from the latest risk assessment cycle.
+- Document the start and target completion dates for each treatment item, ensuring these are current and
+  not from previous cycles.
+- Name the person responsible for each treatment item as a specific individual, not a team or department.
+- Attach evidence of management approval for the current treatment plan scope, such as a signed or digitally
+  acknowledged document.
+- Cross-reference each treatment item to its corresponding risk in the risk register, confirming all items
+  are within the defined scope.

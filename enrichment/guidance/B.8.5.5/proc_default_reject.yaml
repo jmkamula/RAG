@@ -1,0 +1,18 @@
+must_id: item:B.8.5.5:proc_default_reject
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Default reject rule — non-binding disclosure requests rejected
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a written procedure that states all non-legally binding disclosure requests are automatically
+  rejected by default.
+- Name the individual responsible for reviewing and rejecting non-binding disclosure requests, listing
+  their full name and job title.
+- Record each disclosure request and its legal basis in a dated log, including the rejection decision
+  for non-binding requests.
+- Retain copies of all rejection notifications sent in response to non-binding requests, showing the date
+  and recipient.
+- State in the procedure that requests must not be approved based on informal or verbal instructions.

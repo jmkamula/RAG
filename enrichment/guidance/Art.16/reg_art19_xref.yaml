@@ -1,0 +1,17 @@
+must_id: item:Art.16:reg_art19_xref
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Per-row Art.19 notification reference
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and method used to notify each recipient of rectified personal data in a dedicated column
+  for every rectification request entry.
+- Cross-reference each notification with supporting evidence, such as an email copy or system log, and
+  store the reference in the same row as the request.
+- Name the individual responsible for sending each notification in the register, avoiding generic roles
+  like "team" or "department".
+- Document any recipient who could not be notified, along with the reason, in the corresponding row of
+  the register.

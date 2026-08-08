@@ -1,0 +1,18 @@
+must_id: item:A.7.2:scope_tier_controls
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Per-tier entry controls mapping (which areas need badge-only vs MFA vs escort)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all secure areas by name and physical location, including rooms, data centers, and storage spaces,
+  in a dated scope document.
+- Map each secure area to its required entry control method, specifying badge-only, multi-factor authentication,
+  or escort, in a clear table.
+- Assign a named individual as the owner responsible for maintaining and updating the secure areas scope—avoid
+  using generic titles or teams.
+- Cross-reference each control method to supporting access logs or system configurations that demonstrate
+  the control is in place for that area.
+- Record the date of the last review and approval of the scope document, signed by the designated owner.

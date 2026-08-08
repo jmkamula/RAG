@@ -1,0 +1,17 @@
+must_id: item:Art.15:rev_volume
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Volume metric — number of DSARs received in the review period
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the total number of data subject access requests (DSARs) received during the review period in
+  a dated log or tracking sheet.
+- Name the person responsible for maintaining the DSAR volume record, ensuring a specific individual is
+  listed rather than a generic team or department.
+- Cross-reference each DSAR entry with its unique case identifier to confirm all requests are counted
+  and traceable.
+- Retain the summary metric and supporting log as part of your documented DSAR process review for the
+  specified period.

@@ -1,0 +1,20 @@
+must_id: item:5.3:proc_conflict_handling
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Conflict-of-interest handling (when same person fills multiple roles, when independence is
+  required)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individuals assigned to each ISMS role in the RACI framework, listing full names rather than
+  job titles or teams.
+- Document any instances where one person fills multiple ISMS roles, including a justification for why
+  this is necessary.
+- State how conflicts of interest are identified and managed when independence is required, referencing
+  a dated procedure or policy.
+- Record any approvals or waivers granted for role combinations, including the approver’s name and the
+  approval date.
+- Avoid leaving conflict-of-interest sections blank or with generic statements; provide specific examples
+  relevant to your organisation.

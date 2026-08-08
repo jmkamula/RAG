@@ -1,0 +1,16 @@
+must_id: item:B.8.5.3:proc_source_of_disclosure
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+must_text: Internal source (which team/system released data) captured
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the name of the internal team or system that released personal data in each disclosure record,
+  using a dedicated field.
+- Record the date and time when the data was released by the identified team or system in the disclosure
+  log.
+- Name the releasing party as a specific team or system—do not use vague labels like "internal" or "staff".
+- Cross-reference each disclosure entry with supporting evidence, such as a ticket number or system log,
+  showing the release event.

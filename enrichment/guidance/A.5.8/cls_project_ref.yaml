@@ -1,0 +1,14 @@
+must_id: item:A.5.8:cls_project_ref
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Project identifier per record (links to project register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the unique project identifier from your project register on each security closure record.
+- Cross-reference the project identifier in the closure record with the entry in the official project
+  register to confirm accuracy.
+- Name the project owner as a specific individual, not a team or department, on the closure record.
+- Date each closure record to show when the security closure was completed for the project.

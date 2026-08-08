@@ -1,0 +1,42 @@
+leaf_id: req:A.7.1:applicable_sites_scope
+control_ref: A.7.1
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS Scope Statement defines which parts of the organization, including sites, are covered
+    by the ISMS. You cannot accurately document which sites are in scope for physical security until the
+    overall ISMS scope is agreed.
+  good_enough: A clear, approved scope statement that lists included business units, functions, and locations—even
+    if some details are high-level or pending final confirmation.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register identifies physical and information assets at each site, helping determine
+    which sites hold assets that require physical security controls. Without this, you can't justify why
+    a site is in or out of scope.
+  good_enough: A working inventory of key assets per site, even if some minor assets or locations are
+    still being catalogued.
+- ref: A.6.7
+  standard_id: ISO27001:2022
+  title: Remote Working
+  category: direct
+  rationale: Home offices and remote work locations are typically excluded from site-based physical security,
+    but this must be justified by referencing how remote working risks are managed elsewhere.
+  good_enough: Documented approach for handling remote working risks, with a clear statement that home
+    offices are addressed under A.6.7.
+- ref: A.7.9
+  standard_id: ISO27001:2022
+  title: Physical Security Monitoring
+  category: direct
+  rationale: Some site types (like cloud-only or remote) may be excluded from physical security scope
+    if monitoring controls are handled differently. You need to reference how these are managed to justify
+    exclusions.
+  good_enough: A summary of how physical security monitoring is applied or not applied to excluded sites,
+    even if detailed procedures are still in draft.

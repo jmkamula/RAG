@@ -1,0 +1,19 @@
+must_id: item:4.2:rev_requirements_currency
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Requirements currency check — regulator updates, contract amendments swept in
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current regulators, customers, and partners whose requirements affect your information security
+  program, naming each with a contact and last review date.
+- Document the latest version or amendment date of each relevant regulation, contract, or agreement, referencing
+  the source and date checked.
+- Record any changes or updates found during the review, noting the specific requirement, the date identified,
+  and the responsible reviewer.
+- Attach evidence of communication or confirmation from each regulator or contract owner regarding recent
+  updates, such as an email or signed letter.
+- Name the reviewer as a specific individual, not a group or department, and record the date of the most
+  recent requirements review.

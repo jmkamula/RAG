@@ -1,0 +1,20 @@
+must_id: item:A.6.6:rev_enforceability
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Enforceability check per jurisdiction (legal counsel input — case-law shifts, Schrems-style
+  impacts on cross-border data flows in NDA scope)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named legal counsel to review the NDA template for enforceability in each relevant jurisdiction,
+  recording their name and date of review.
+- Document the specific legal sources or case law referenced during the review, including any recent changes
+  that impact enforceability.
+- Record legal counsel’s written confirmation that the NDA template addresses cross-border data flow risks,
+  especially in light of recent legal developments.
+- Retain a signed and dated statement from legal counsel confirming the NDA template’s compliance with
+  current applicable laws in all relevant jurisdictions.
+- Name the legal counsel as a specific individual, not just “Legal” or “the legal team,” to avoid ambiguity
+  in responsibility.

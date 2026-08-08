@@ -1,0 +1,18 @@
+must_id: item:A.5.27:reg_pattern_link
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Pattern link per row where the lesson is part of a recurring cluster
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each lesson learned as a separate entry with a unique identifier and the date it was added.
+- Cross-reference each lesson to a specific pattern or cluster by linking to a documented pattern entry
+  in the register.
+- Name the pattern owner as a specific individual responsible for maintaining the pattern, not as a team
+  or department.
+- Document the rationale for linking the lesson to the pattern, referencing the relevant recurring issue
+  or theme.
+- Review the register quarterly and update pattern links if new clusters or patterns emerge from recent
+  lessons.

@@ -1,0 +1,19 @@
+must_id: item:A.7.3.8:rev_direct_transfer_test
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Direct-transfer capability tested end-to-end
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and scope of the most recent end-to-end test of the direct-transfer capability in
+  a test report.
+- Name the individual responsible for overseeing and validating the test, listing their full name and
+  job title in the report.
+- Record the specific data sets and systems used during the test, including any third-party endpoints
+  involved in the transfer.
+- Attach evidence of test results, such as screenshots or logs, showing successful completion of the direct-transfer
+  process.
+- State any issues found and corrective actions taken, ensuring the report is signed and dated by the
+  responsible individual.

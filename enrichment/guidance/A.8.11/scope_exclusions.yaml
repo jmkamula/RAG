@@ -1,0 +1,19 @@
+must_id: item:A.8.11:scope_exclusions
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Exclusion rationale where masking not required (synthetic-only test data; production-only systems
+  with no non-prod)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems and data flows where data masking is not applied, specifying whether they handle only
+  synthetic test data or production data exclusively.
+- Document a clear rationale for each exclusion, explaining why masking is unnecessary based on the data
+  type or environment.
+- Name the individual responsible for each exclusion decision, ensuring the owner is a specific person
+  rather than a team or department.
+- Record the date each exclusion rationale was reviewed and approved by an appropriate authority.
+- Attach supporting evidence, such as test data generation logs or environment configuration screenshots,
+  to substantiate each exclusion claim.

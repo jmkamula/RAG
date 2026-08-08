@@ -1,0 +1,20 @@
+must_id: item:A.7.4.5:proc_verification
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: Verification — post-action verification that PII is actually gone / de-identified across all
+  systems + backups
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to verify deletion or de-identification of personal data after processing
+  ends, recording their name and date of verification.
+- Document the specific systems, databases, and backup locations checked for residual personal data, listing
+  each location in a verification log.
+- Record the method used for verification, such as data queries or audit logs, and attach evidence showing
+  no personal data remains.
+- Name the owner as a specific individual responsible for verification—do not use generic terms like "IT
+  team" or "Data Department."
+- Retain a signed confirmation from the verifier stating that all personal data has been deleted or de-identified
+  as required.

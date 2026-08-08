@@ -1,0 +1,19 @@
+must_id: item:Art.9:reg_member_state
+control_ref: Art.9
+standard_id: GDPR:2016/679
+must_text: Per-row Member State law overlay where Art.9.4 derogations apply
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each processing activity involving special category data in your register, listing them as
+  separate rows with clear descriptions.
+- Record the specific Member State law that applies to each activity where Article 9.4 derogations are
+  relevant, including the law’s name and citation.
+- State the legal basis or derogation provided by the Member State law for each processing activity, referencing
+  the exact article or section.
+- Name the owner responsible for maintaining and updating the Member State law overlay as a specific individual,
+  not a generic team or department.
+- Date each entry to show when the Member State law overlay was last reviewed or updated for that processing
+  activity.

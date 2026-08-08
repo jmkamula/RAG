@@ -1,0 +1,20 @@
+must_id: item:Art.15:transfer_safeguards
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Where data is transferred to a third country or international organisation, the appropriate
+  safeguards under Art.46
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each third country or international organisation to which personal data has been transferred
+  in the response to the data subject.
+- State the specific legal mechanism or safeguard used for each transfer, such as Standard Contractual
+  Clauses or Binding Corporate Rules, in the response letter.
+- Attach or reference the most recent, signed version of the relevant safeguard agreement for each transfer,
+  including the date of execution.
+- Name the individual responsible for approving international data transfers, ensuring a specific person
+  is listed rather than a team or department.
+- Record the date the data subject access request response was sent, including all information about international
+  transfers and safeguards.

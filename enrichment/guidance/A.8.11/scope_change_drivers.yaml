@@ -1,0 +1,18 @@
+must_id: item:A.8.11:scope_change_drivers
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new dataset, new non-prod environment, new PII class)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all events that require re-evaluating data masking scope, such as adding new datasets, creating
+  non-production environments, or handling new types of personal data.
+- Document each trigger in a dated register, including a brief description of why it prompts a scope review.
+- Assign a named individual responsible for monitoring and updating the trigger list when organizational
+  or technical changes occur.
+- State the review frequency for the trigger list in a written procedure, referencing the most recent
+  approval date.
+- Name each trigger clearly and specifically—avoid vague terms like "system changes" or "data updates"
+  that could be misinterpreted.

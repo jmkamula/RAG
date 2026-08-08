@@ -1,0 +1,17 @@
+must_id: item:6.1.2:date
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Assessment date and next review date
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date when each risk assessment is completed in the procedure document, using a clear "Assessment
+  Date" field.
+- Specify the next scheduled review date for each risk assessment, and include it as a distinct "Next
+  Review Date" entry.
+- Name the individual responsible for updating assessment and review dates, rather than leaving the owner
+  as a team or department.
+- Retain previous versions of the procedure with visible assessment and review dates to show a history
+  of updates.

@@ -1,0 +1,17 @@
+must_id: item:A.5.13:reg_enabled_flag
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Labelling-enabled flag per row (yes / partial / no — with remediation date if not yes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a labelling-enabled flag for each asset in the register, marking it as "yes", "partial", or "no"
+  based on current status.
+- Enter a remediation date for every asset marked "partial" or "no", showing when labelling will be fully
+  enabled.
+- Name the person responsible for labelling each asset, using a specific individual’s name rather than
+  a team or department.
+- Review the register to confirm there are no blank or default values in the labelling-enabled column
+  for any asset row.

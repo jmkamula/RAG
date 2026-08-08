@@ -1,0 +1,18 @@
+must_id: item:A.8.10:retention_trigger
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Retention trigger source (cross-link to A.5.33 records protection retention schedule)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each information type in the deletion procedure to the specific retention trigger in
+  your records retention schedule from control A.5.33.
+- Document the source of each retention trigger, such as a legal citation, contract clause, or business
+  policy, with a clear reference.
+- Name the person responsible for maintaining the cross-links between the deletion procedure and the retention
+  schedule as a specific individual.
+- Record the date when each cross-link was last reviewed or updated to show ongoing accuracy.
+- Avoid using generic retention periods or triggers that are not clearly tied to the documented retention
+  schedule.

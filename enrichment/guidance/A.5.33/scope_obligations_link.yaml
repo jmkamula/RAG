@@ -1,0 +1,18 @@
+must_id: item:A.5.33:scope_obligations_link
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Cross-link to A.5.31 applicable-obligations scope — same drivers, separate registers; the two
+  should stay aligned
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each records category in your Records Categories Scope to the relevant obligation in
+  your A.5.31 Applicable Obligations register, using unique identifiers.
+- Document the rationale for each cross-link, showing how the same driver or requirement informs both
+  registers.
+- Review both registers together at least annually and record the date and names of reviewers to confirm
+  ongoing alignment.
+- Name the owner of each register as a specific individual, not a team or department, to avoid ambiguity
+  in responsibility.

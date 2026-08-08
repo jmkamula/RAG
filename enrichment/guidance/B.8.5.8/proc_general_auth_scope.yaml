@@ -1,0 +1,19 @@
+must_id: item:B.8.5.8:proc_general_auth_scope
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+must_text: General-authorisation scope — under what contract clause is this procedure valid (versus specific-authorisation
+  cases handled in B.8.5.7)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact contract clause number and title that grants general authorisation for subcontractor
+  changes within the procedure document.
+- Document the procedure’s applicability by listing which types of subcontractor changes fall under general
+  authorisation, with clear examples.
+- Cross-reference any related procedures or records for specific-authorisation cases, such as those required
+  by B.8.5.7, within the procedure.
+- Name the contract owner or responsible manager as a specific individual, not as a team or department,
+  in the procedure document.
+- Retain a signed and dated copy of the procedure showing the latest approval and version history.

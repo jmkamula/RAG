@@ -1,0 +1,19 @@
+must_id: item:A.6.1:rev_register_check
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Per-tier outcome (did every new hire in this tier get the right checks? gaps flagged and remediated)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the list of all new hires in the relevant tier for the review period, including their names,
+  start dates, and roles.
+- Record the specific screening checks completed for each new hire, with check dates and the responsible
+  staff member named.
+- Identify and log any gaps where required checks were missed or incomplete, including a description and
+  date discovered.
+- Assign remediation actions for each gap to a named individual, and record the completion date for each
+  action taken.
+- Name the reviewer as a specific individual who signs and dates the final review outcome—avoid leaving
+  the reviewer field blank or using a generic title.

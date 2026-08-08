@@ -1,0 +1,17 @@
+must_id: item:A.8.17:reg_drift
+control_ref: A.8.17
+standard_id: ISO27001:2022
+must_text: Per-row current drift measurement
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the current time drift for each system in the Clock Sync Status Register, including the measured
+  offset in seconds or milliseconds.
+- Document the date and time when each drift measurement was taken, ensuring the entry is recent and not
+  left blank.
+- Name the person responsible for performing and recording each drift measurement, listing a specific
+  individual rather than a team or department.
+- Cross-reference each drift entry with the source of the reference clock used for comparison, such as
+  NTP server details.

@@ -1,0 +1,18 @@
+must_id: item:Art.7:reg_mechanism
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Per-row capture mechanism (checkbox UI version, sign-up event id, etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the exact mechanism used to capture consent for each entry, such as checkbox selection, digital
+  signature, or sign-up event identifier.
+- Record the date and time when each consent was given, ensuring each entry is timestamped for traceability.
+- Name the individual or system responsible for maintaining the consent register, avoiding generic labels
+  like "the team" or "IT department".
+- Cross-reference each consent entry with the relevant user or data subject, using a unique identifier
+  to enable verification.
+- Retain evidence of the specific consent action, such as screenshots or logs, linked to each register
+  entry.

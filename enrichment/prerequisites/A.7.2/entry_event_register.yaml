@@ -1,0 +1,39 @@
+leaf_id: req:A.7.2:entry_event_register
+control_ref: A.7.2
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You must know which locations, assets, and operations are in-scope for your ISMS before you
+    can meaningfully track and register entry events. This ensures your register covers all relevant secure
+    areas.
+  good_enough: A clear, up-to-date scope statement that identifies all physical locations and areas subject
+    to ISMS controls.
+- ref: A.7.1
+  standard_id: ISO27001:2022
+  title: Physical security perimeters
+  category: direct
+  rationale: You need to define and document the boundaries of your secure areas before you can track
+    who enters them. Without this, you can't know which entry events are relevant.
+  good_enough: A documented list or map of secure areas with defined perimeters, sufficient to identify
+    where entry controls apply.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that responsibilities for maintaining the entry event register
+    and responding to incidents are understood. This prevents gaps in accountability.
+  good_enough: A basic roles matrix or documented assignment showing who manages physical security and
+    entry records.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: Knowing which assets are housed within secure areas helps prioritize which entry events need
+    to be logged and monitored, especially for critical or sensitive assets.
+  good_enough: A working asset register that lists key assets in secure areas, even if not fully detailed.

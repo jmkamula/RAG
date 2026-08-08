@@ -1,0 +1,16 @@
+must_id: item:B.8.4.2:proc_owner
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+must_text: Named owner (Trust + Platform Ops)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the PII Return/Transfer/Disposal Procedure, not a team or
+  department.
+- Document the owner's full name and job title within the header or introduction section of the procedure.
+- Record the date the owner was assigned responsibility for the procedure in a visible location within
+  the document.
+- State the owner's responsibility for maintaining and updating the procedure in a dedicated section of
+  the document.

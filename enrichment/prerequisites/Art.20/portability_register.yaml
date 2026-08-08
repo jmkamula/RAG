@@ -1,0 +1,34 @@
+leaf_id: req:Art.20:portability_register
+control_ref: Art.20
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify which data and systems
+    are in scope for data portability requests. Without this, you can't reliably track or respond to Art.20
+    requests.
+  good_enough: A current, reasonably complete RoPA exists that covers all relevant processing activities
+    and can be referenced to scope portability requests.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: direct
+  rationale: Art.20 rights only apply to data processed on certain lawful bases (consent or contract).
+    You must know the lawful basis for each processing activity to determine if a portability request
+    is valid.
+  good_enough: Each processing activity in your RoPA has a documented lawful basis, at least at a summary
+    level, to support Art.20 eligibility checks.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A Data Protection Officer (DPO) is often responsible for overseeing data subject rights processes,
+    including portability. Having a designated DPO ensures accountability and a clear point of contact
+    for handling requests.
+  good_enough: A DPO (or equivalent responsible person) is formally designated and contactable, even if
+    not all DPO processes are fully mature.

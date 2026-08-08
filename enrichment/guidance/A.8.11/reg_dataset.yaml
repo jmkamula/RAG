@@ -1,0 +1,17 @@
+must_id: item:A.8.11:reg_dataset
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Per-row source dataset identifier (from A.5.9 + A.5.34 PII inventory)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each masked dataset row with its unique source dataset identifier from the PII inventory
+  maintained under A.5.9 and A.5.34.
+- Record the date each dataset identifier was added or updated in the masking register.
+- Name the individual responsible for verifying the accuracy of each source dataset identifier entry.
+- Avoid using generic or placeholder identifiers; ensure each entry matches a specific, documented dataset
+  in the PII inventory.
+- Retain a copy of the current PII inventory alongside the masking register for direct comparison during
+  audits.

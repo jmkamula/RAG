@@ -1,0 +1,16 @@
+must_id: item:A.5.15:need_to_know
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Principle of need-to-know stated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the principle of need-to-know explicitly in the access control policy, using clear language that
+  applies to all users and roles.
+- Document how access to information and systems is limited based on job responsibilities, with examples
+  relevant to your organisation.
+- Name the policy owner as a specific individual, not a group or department, and include their contact
+  details in the policy.
+- Record the policy approval date and the name of the approving authority on the policy document.

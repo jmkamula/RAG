@@ -1,0 +1,16 @@
+must_id: item:A.7.2.5:rev_reviewer
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + risk owner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual, listing both the Data Protection Officer and the designated
+  risk owner by full name.
+- Record the date each reviewer completed their review of the PIA program, using a dated entry on the
+  review document.
+- Sign the PIA program review document with both reviewers’ signatures to confirm their participation
+  and approval.
+- Avoid listing a group, department, or generic title as reviewer; only named individuals are acceptable.

@@ -1,0 +1,17 @@
+must_id: item:A.7.4.9:proc_encryption
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Encryption-in-transit standard (TLS 1.2+ / VPN / SFTP / etc.) per channel
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each channel used to transmit personal data, specifying the protocol or encryption method applied
+  (e.g., TLS 1.2+, VPN, SFTP).
+- Name the individual responsible for approving and maintaining the encryption-in-transit standard for
+  each channel.
+- Record the date and outcome of the most recent review or test confirming encryption is active and configured
+  correctly for every channel.
+- Attach vendor documentation or screenshots showing encryption settings for each channel, ensuring these
+  reference your organisation and are not generic samples.

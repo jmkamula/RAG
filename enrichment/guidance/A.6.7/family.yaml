@@ -1,0 +1,17 @@
+must_id: item:A.6.7:family
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Rules regarding family/visitor access to work equipment
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Remote Working Policy that only authorized employees may use work equipment, explicitly
+  prohibiting access by family members or visitors.
+- Document clear instructions for employees to prevent family or visitors from viewing or handling work
+  devices, including screens and printed materials.
+- Name a specific individual, such as the Information Security Manager, as the policy owner responsible
+  for updates and enforcement—avoid listing a team or department.
+- Record the date the policy was last reviewed and approved by management to show it is current and actively
+  maintained.

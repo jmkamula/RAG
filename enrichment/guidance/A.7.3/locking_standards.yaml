@@ -1,0 +1,18 @@
+must_id: item:A.7.3:locking_standards
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Locking standards per classification (mechanical, electronic with audit logging, biometric
+  for high-security)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the locking method required for each area based on its information classification, specifying
+  mechanical, electronic with audit logs, or biometric controls.
+- Name the individual responsible for approving and updating the locking standards, avoiding generic titles
+  such as "Facilities Team" or "Security Department."
+- Record the installation date and type of lock for each office, room, or facility in a physical security
+  register.
+- Retain audit logs from electronic and biometric locks, showing access attempts and successful entries
+  for high-security areas.

@@ -1,0 +1,16 @@
+must_id: item:A.5.30:rec_recovery_id
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Recovery event identifier per record (unique, sequenced)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique, sequential identifier to each recovery event record at the time the event is logged.
+- Record the assigned identifier prominently within the recovery event record, ensuring it appears on
+  all related documentation.
+- Cross-reference the recovery event identifier in any follow-up reports or incident logs linked to the
+  same event.
+- Avoid using generic or reused identifiers; confirm each identifier is specific to a single recovery
+  event and not duplicated elsewhere.

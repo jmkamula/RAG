@@ -1,0 +1,20 @@
+must_id: item:A.5.24:detection
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Detection and reporting process (where reports come from — A.5.25 triage, monitoring/SOC, user
+  reports, supplier notifications, A.5.7 threat intel)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all sources of incident reports, including user submissions, monitoring systems, security operations
+  center alerts, supplier notifications, and threat intelligence feeds.
+- Cross-reference each listed source with the relevant process in your incident management framework,
+  such as triage procedures under A.5.25.
+- Name the person or role responsible for monitoring each reporting channel, specifying individuals rather
+  than generic teams or departments.
+- Record the date and method for reviewing and updating the list of incident report sources to reflect
+  any changes in reporting mechanisms.
+- State how users and suppliers are informed about the reporting process, providing a copy of the communication
+  or training material used.

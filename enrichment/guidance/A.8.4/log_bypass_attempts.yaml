@@ -1,0 +1,15 @@
+must_id: item:A.8.4:log_bypass_attempts
+control_ref: A.8.4
+standard_id: ISO27001:2022
+must_text: Branch-protection bypass attempts captured (admin override events)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each branch-protection bypass attempt in a log entry, including timestamp, user identity, and
+  the specific branch affected.
+- Name the administrator who approved or performed the override, ensuring a specific individual is listed
+  rather than a group or generic account.
+- Document the reason provided for each override, referencing any related ticket or change request number.
+- Review the log monthly and sign off on the review, noting any unexplained or suspicious bypass attempts.

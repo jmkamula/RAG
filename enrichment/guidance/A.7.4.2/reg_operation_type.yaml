@@ -1,0 +1,17 @@
+must_id: item:A.7.4.2:reg_operation_type
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+must_text: Operation type per row (query / report / analytics / ML training / export / integration)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing operation in the inventory as a separate row, clearly identifying the specific
+  activity being performed.
+- Assign a precise operation type to each row, using terms like "query," "report," "analytics," "ML training,"
+  "export," or "integration."
+- Name the owner of each processing operation as a specific individual, not a team or department.
+- Record the date each operation type was last reviewed or updated in the inventory.
+- Cross-reference each operation type entry with supporting documentation that describes the activity
+  in detail.

@@ -1,0 +1,19 @@
+must_id: item:Art.15:proc_timing
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: One-month timing clock from receipt, with the Art.12.3 two-month extension procedure (when
+  justified, how notified)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date each data subject access request is received in a central log, including the requestor’s
+  name and contact details.
+- State the standard one-month deadline for response in your written DSAR handling procedure, referencing
+  the specific GDPR article.
+- Describe the process for identifying and justifying when a two-month extension is needed, including
+  examples of complex cases.
+- Record how and when you notify the requester in writing if an extension is applied, including the reasons
+  for the delay.
+- Name the DSAR process owner as a specific individual, not a team or department, in the procedure documentation.

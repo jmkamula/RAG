@@ -1,0 +1,18 @@
+must_id: item:A.8.16:rev_threat_intel_feed
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Threat-intel feeding effectiveness (cross-link to A.5.7 — new tactics translated to detections)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the schedule and scope of periodic reviews for the threat intelligence monitoring program,
+  including the most recent review date and responsible individual.
+- Cross-reference each review record with specific threat intelligence sources and note any new tactics,
+  techniques, or procedures identified since the last review.
+- Record how new threat information was translated into updated detection rules or alerts, including dates
+  and the names of individuals who made the changes.
+- Name the owner of the threat intelligence review process as a specific person, not a team or department.
+- Retain meeting notes or approval records that show management has reviewed and accepted the effectiveness
+  of threat-intel feeding and detection updates.

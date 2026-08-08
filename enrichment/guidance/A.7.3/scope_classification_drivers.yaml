@@ -1,0 +1,20 @@
+must_id: item:A.7.3:scope_classification_drivers
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Drivers for room classification (information class stored/processed, equipment held, personnel
+  access level required)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all rooms in scope, including their physical location and primary function, in a dated and version-controlled
+  document.
+- Document for each room the types of information stored or processed, referencing your organisation’s
+  information classification scheme.
+- Specify the equipment held in each room, naming key assets and their purpose, in an equipment inventory
+  linked to the room.
+- State the minimum personnel access level required for each room, naming roles or individuals, not just
+  generic groups like "staff".
+- Record the rationale for each room’s classification, citing relevant business, legal, or regulatory
+  drivers, in a decision log with responsible approver.

@@ -1,0 +1,19 @@
+must_id: item:A.5.21:critical_components
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: Identification of critical components needing special scrutiny (especially when outsourced)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all ICT components and services used by your organisation, including those provided by third parties,
+  in a dated inventory document.
+- Identify and record which components or services are critical to your operations, specifying why each
+  is considered critical in the inventory.
+- Name the person responsible for reviewing and updating the critical components list, ensuring the owner
+  is a specific individual, not a team or department.
+- Document the criteria used to determine criticality, referencing any business impact analysis or risk
+  assessment that supports your decisions.
+- Attach evidence of your most recent review of the critical components list, such as meeting minutes
+  or a signed approval form.

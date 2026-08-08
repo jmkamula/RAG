@@ -1,0 +1,17 @@
+must_id: item:A.5.5:proc_update_triggers
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Update triggers enumerated (new jurisdiction, new service line, regulator reorganisation, contact-change
+  alert)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all events that require an update to authority contacts, including new jurisdictions, new service
+  lines, regulator reorganisations, and contact-change alerts.
+- Document each update trigger in the Authority Contact Maintenance Procedure, with a clear description
+  and a date of last review.
+- Assign a named individual responsible for monitoring and acting on each update trigger, not a group
+  or department.
+- Record the date and name of the person who last reviewed and approved the list of update triggers.

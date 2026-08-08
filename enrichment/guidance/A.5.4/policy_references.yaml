@@ -1,0 +1,19 @@
+must_id: item:A.5.4:policy_references
+control_ref: A.5.4
+standard_id: ISO27001:2022
+must_text: Names or references the in-scope policies, topic-specific policies, and procedures
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all in-scope policies, topic-specific policies, and procedures by full title within the management
+  directive document.
+- Cross-reference each listed policy or procedure to its current version number or effective date in the
+  directive.
+- Name the individual responsible for maintaining the directive and updating references, not just a department
+  or team.
+- Attach or link to the actual documents referenced, ensuring they are accessible from the directive at
+  the time of audit.
+- Record the approval date and approver’s name for the directive to confirm it reflects current policy
+  coverage.

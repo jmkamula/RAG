@@ -1,0 +1,16 @@
+must_id: item:A.7.14:scope_triggers
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Disposal triggers (end-of-life, replacement, return-from-lease, sale, donation, scrap)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each disposal trigger in the equipment disposal scope document, including end-of-life, replacement,
+  return-from-lease, sale, donation, and scrap.
+- Name the individual responsible for approving disposal decisions, ensuring a specific person is identified
+  rather than a team or department.
+- Record the date the disposal scope document was last reviewed and approved by management.
+- Attach supporting evidence, such as a signed approval or meeting minutes, confirming management has
+  reviewed and agreed to the listed disposal triggers.

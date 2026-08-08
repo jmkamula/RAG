@@ -1,0 +1,17 @@
+must_id: item:A.7.14:internal_vs_external
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Decision criteria for in-house vs external disposal
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific criteria used to decide between in-house and external equipment disposal in the
+  Secure Disposal and Re-Use of Equipment Procedure.
+- Name the individual or role responsible for making disposal decisions, ensuring it is not listed as
+  a generic team or department.
+- Record each disposal decision with the applied criteria, the chosen method, and the decision-maker’s
+  name and date in a disposal log.
+- Attach supporting evidence, such as vendor certifications or internal clearance forms, to each recorded
+  disposal decision.

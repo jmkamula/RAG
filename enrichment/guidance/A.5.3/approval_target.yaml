@@ -1,0 +1,17 @@
+must_id: item:A.5.3:approval_target
+control_ref: A.5.3
+standard_id: ISO27001:2022
+must_text: Reference to the specific version of the segregation matrix being approved
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific version number or date of the segregation matrix in the approval document.
+- Record the approval decision with the full name and job title of the top management individual granting
+  approval.
+- Sign and date the approval document to clearly show when the specific version was authorized.
+- Attach or cross-reference the exact segregation matrix version being approved to avoid confusion with
+  previous or draft versions.
+- Avoid using generic references like "latest matrix"—always specify the unique identifier for the approved
+  version.

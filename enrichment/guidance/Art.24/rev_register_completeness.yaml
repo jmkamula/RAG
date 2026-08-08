@@ -1,0 +1,18 @@
+must_id: item:Art.24:rev_register_completeness
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Compliance register completeness — every applicable GDPR article has a row with current status
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every GDPR article in your compliance register, including article number and title, to show full
+  coverage.
+- Record the current compliance status for each article, using clear categories such as "Compliant," "In
+  Progress," or "Not Applicable."
+- Assign a named individual as the responsible owner for each article, avoiding generic labels like "Compliance
+  Team" or "IT."
+- Date-stamp the last review or update for each row to provide evidence of ongoing monitoring.
+- Attach supporting documentation or cross-references for each article, such as policy links or audit
+  reports, to substantiate status claims.

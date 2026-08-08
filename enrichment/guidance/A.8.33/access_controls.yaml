@@ -1,0 +1,18 @@
+must_id: item:A.8.33:access_controls
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Access controls on test data (not every developer sees all test data; cross-link to A.8.3)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the Test Information Management Procedure, avoiding generic
+  titles like "the team" or "IT department".
+- Document the access levels for each developer or tester in a dated access control list, showing who
+  can view which test data sets.
+- Cross-reference the procedure to the data classification register required by control A.8.3, noting
+  where test data is derived from production data.
+- Record approvals for test data access in a log, including the approver’s name and the date of authorization.
+- Retain evidence of periodic reviews of test data access, such as a signed review checklist or meeting
+  minutes with attendees and dates.

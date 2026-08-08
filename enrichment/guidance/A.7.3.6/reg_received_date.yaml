@@ -1,0 +1,16 @@
+must_id: item:A.7.3.6:reg_received_date
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: Received date + resolution date per row (SLA measurable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each access, correction, or erasure request is received in a dedicated column of the
+  request register.
+- Enter the date each request is resolved in a separate, clearly labeled column for resolution date.
+- Cross-reference each request entry with supporting documentation showing the action taken and completion
+  date.
+- Name the responsible staff member handling each request, avoiding generic entries like "team" or "department".
+- Review the register regularly to confirm no requests are missing either a received or resolution date.

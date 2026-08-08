@@ -1,0 +1,16 @@
+must_id: item:A.5.27:imp_lesson_ref
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Lesson identifier per record (links to lessons register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique lesson identifier for each improvement action, matching the identifier used in your
+  central lessons register.
+- Cross-reference each improvement action record to its corresponding lesson entry in the lessons register,
+  showing the direct link.
+- Name the lesson source clearly in each record, avoiding vague references like "various" or "general
+  feedback".
+- Date each improvement action record to show when the lesson was applied or addressed.

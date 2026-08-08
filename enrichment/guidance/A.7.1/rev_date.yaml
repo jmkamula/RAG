@@ -1,0 +1,15 @@
+must_id: item:A.7.1:rev_date
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent perimeter program review date in a log or register, including the name of the
+  reviewer and the review outcome.
+- Document the planned review interval for the perimeter program in a formally approved schedule or policy.
+- Confirm that the actual review date falls within the documented planned interval by cross-referencing
+  the review log and the schedule.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.

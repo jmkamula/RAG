@@ -1,0 +1,42 @@
+leaf_id: req:7.1:resources_program_review
+control_ref: '7.1'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines the boundaries and applicability of the ISMS, which is essential
+    for determining what resources are needed and where they should be allocated. Without a clear scope,
+    resource reviews may overlook critical areas or misallocate support.
+  good_enough: A documented and approved scope statement that identifies the organizational units, assets,
+    and processes covered by the ISMS.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: direct
+  rationale: Risk assessments identify the threats and vulnerabilities that drive resource needs. The
+    annual resource review must be informed by the latest risk landscape to ensure resources are aligned
+    with actual risks.
+  good_enough: The most recent risk assessment results are available, covering all in-scope areas and
+    highlighting key risks and required controls.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the overall direction and priorities for information security, which guides
+    resource allocation decisions. The review must check alignment with policy commitments.
+  good_enough: An up-to-date, approved information security policy that articulates management intent
+    and resource expectations.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that resource needs are identified,
+    requested, and reviewed by the right people. The review process depends on knowing who is accountable
+    for what.
+  good_enough: A documented list of ISMS roles and responsibilities, with named individuals or functions,
+    reviewed within the last year.

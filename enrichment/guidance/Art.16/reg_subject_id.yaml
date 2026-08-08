@@ -1,0 +1,19 @@
+must_id: item:Art.16:reg_subject_id
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Per-row subject identifier (pseudonymous)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique pseudonymous identifier to each rectification request entry, avoiding use of direct
+  personal data like names or email addresses.
+- Record the date each rectification request is received alongside its pseudonymous identifier in the
+  register.
+- Document the staff member responsible for processing each request by full name, not just a job title
+  or team.
+- Cross-reference each register entry with supporting correspondence or evidence, using the pseudonymous
+  identifier for linkage.
+- Avoid using generic or recycled identifiers that could apply to multiple subjects, as auditors will
+  flag non-unique or ambiguous tracking.

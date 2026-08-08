@@ -1,0 +1,19 @@
+must_id: item:A.7.5.2:proc_alignment_7_5_1
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+must_text: Alignment with A.7.5.1 — every destination has a documented basis
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all transfer destinations by name and location in a maintained register, with each entry dated
+  and reviewed at least annually.
+- Document the legal, contractual, or regulatory basis for each transfer destination, referencing the
+  specific clause or agreement authorizing the transfer.
+- Cross-reference each transfer destination entry with the corresponding justification documented under
+  A.7.5.1, ensuring there are no missing or generic justifications.
+- Name the responsible individual for maintaining and updating the register, avoiding use of roles like
+  "the team" or "IT department."
+- Retain copies of all supporting documents, such as contracts or data transfer agreements, linked to
+  each destination in the register.

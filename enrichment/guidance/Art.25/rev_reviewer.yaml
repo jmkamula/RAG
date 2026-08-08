@@ -1,0 +1,16 @@
+must_id: item:Art.25:rev_reviewer
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO + product + engineering)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer from the Data Protection Officer team as a specific individual, including full name
+  and job title, in the program review record.
+- Record the designated product representative’s full name and role, ensuring the individual is directly
+  responsible for the reviewed product.
+- List the engineering reviewer by full name and position, confirming their involvement in the technical
+  aspects of the program.
+- Confirm all three reviewers have signed and dated the DPbD Program Review document to verify their participation.

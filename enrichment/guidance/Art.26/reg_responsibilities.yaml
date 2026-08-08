@@ -1,0 +1,17 @@
+must_id: item:Art.26:reg_responsibilities
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Per-row responsibility split summary
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name all joint controllers involved in each processing activity row, listing full legal entity names.
+- Document the specific responsibilities assigned to each joint controller for every processing activity,
+  using clear and distinct descriptions.
+- State the legal basis for each controller’s assigned responsibility, referencing the relevant section
+  of the joint arrangement or contract.
+- Record the date and name of the individual who approved each responsibility split entry.
+- Avoid using vague terms like "shared" or "joint" without further detail; specify the exact tasks or
+  obligations for each controller.

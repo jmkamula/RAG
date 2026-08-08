@@ -1,0 +1,19 @@
+must_id: item:B.8.2.5:proc_audit_support
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: Audit support pathway — how customers request + receive audit info within stated SLA
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process customers must follow to request audit information, including required
+  contact details and submission format, in the procedure.
+- State the specific service level agreement (SLA) timeframe for responding to audit information requests,
+  and include the effective date of this commitment.
+- Assign a named individual, not a team or generic role, as the point of contact responsible for managing
+  and fulfilling customer audit information requests.
+- Record each customer audit information request and the corresponding response, including dates and the
+  information provided, in an auditable log.
+- Specify in the procedure that only written requests and responses are accepted, avoiding verbal-only
+  handling, to prevent gaps in evidence.

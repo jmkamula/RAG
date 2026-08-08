@@ -1,0 +1,16 @@
+must_id: item:B.8.5.2:rev_reviewer
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+must_text: Reviewer identity (Trust + DPO)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and role, ensuring both the Trust representative
+  and Data Protection Officer are listed.
+- Record the date each reviewer completed their assessment in the Processor Destinations Program Review
+  document.
+- Document each reviewer’s signature or formal written approval in the review record to confirm their
+  participation.
+- Avoid listing generic roles or teams as reviewers; specify named individuals to provide clear accountability.

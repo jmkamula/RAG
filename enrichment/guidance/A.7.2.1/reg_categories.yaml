@@ -1,0 +1,17 @@
+must_id: item:A.7.2.1:reg_categories
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Categories of PII + categories of subjects per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity in a separate row, specifying the distinct categories of personal data
+  and data subjects involved.
+- Name the categories of personal data using clear, descriptive terms such as "contact information" or
+  "financial data" rather than generic labels.
+- Specify the categories of data subjects in each row, such as "customers," "employees," or "suppliers,"
+  avoiding vague groupings like "users."
+- Record the date each entry was added or updated to show the register is current and regularly maintained.
+- Assign responsibility for maintaining the register to a named individual, not a team or department.

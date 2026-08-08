@@ -1,0 +1,16 @@
+must_id: item:5.3:performance_reporting
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Role assigned for reporting on ISMS performance to top management
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for reporting ISMS performance to top management in the Roles, Responsibilities
+  and Authorities Matrix.
+- Document the reporting responsibility with a clear description that includes frequency and method of
+  reporting to top management.
+- Record the date when the reporting role assignment was last reviewed and updated in the matrix.
+- Avoid listing the owner as a group or department; specify a named person accountable for ISMS performance
+  reporting.

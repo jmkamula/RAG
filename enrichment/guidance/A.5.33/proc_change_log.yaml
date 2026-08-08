@@ -1,0 +1,18 @@
+must_id: item:A.5.33:proc_change_log
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Change-log requirement for policy edits (audit trail for retention-period or protection changes)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document every policy edit by recording the date, a summary of the change, and the name of the person
+  making the update in a change-log table.
+- Cross-reference each change entry with the specific section or clause of the policy that was modified.
+- Retain previous versions of the policy alongside the change-log to provide a complete audit trail of
+  all edits.
+- Name the editor as a specific individual in the change-log — do not use generic terms like "admin" or
+  "policy team".
+- Review the change-log regularly to confirm it is up to date and includes all edits affecting retention
+  periods or protection measures.

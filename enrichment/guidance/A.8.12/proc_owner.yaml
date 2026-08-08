@@ -1,0 +1,16 @@
+must_id: item:A.8.12:proc_owner
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Named procedure owner (DLP lead with Data Protection partner)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the DLP Operations Procedure owner as a specific individual, including their full name and job
+  title, on the procedure document’s cover page.
+- Record the Data Protection partner’s full name and role as a co-owner or key stakeholder within the
+  procedure document.
+- Sign and date the procedure document by both the DLP lead and Data Protection partner to confirm their
+  acceptance of ownership.
+- Avoid listing the owner as a group, team, or department—use only named individuals with clear accountability.

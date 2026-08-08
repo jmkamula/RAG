@@ -1,0 +1,19 @@
+must_id: item:A.7.5.2:proc_change_notification
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+must_text: Change notification — new destinations added trigger notice update
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each new transfer destination in the official register immediately upon approval, including
+  the date added and the approving individual’s name.
+- Update the transfer destinations notification or notice within 24 hours of adding a new destination
+  to ensure recipients have the latest information.
+- Notify all relevant stakeholders in writing when the notice is updated, and retain a copy of the communication
+  with a timestamp.
+- Name the individual responsible for maintaining and updating the notice, avoiding generic titles like
+  "the team" or "IT department".
+- Archive previous versions of the notice with clear version dates to demonstrate the history of changes
+  and updates.

@@ -1,0 +1,17 @@
+must_id: item:A.6.2:nda_link
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Cross-link to A.6.6 NDA template (employment terms + NDA together form the personnel info-security
+  contract package)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the employment contract template that information security obligations are complemented by
+  a separate non-disclosure agreement.
+- Cross-reference the exact title and document location of the A.6.6 NDA template within the employment
+  contract template.
+- Name the document owner for both the employment contract template and the NDA template as a specific
+  individual, not a department or team.
+- Record the version number and last review date of both templates in a revision history section.

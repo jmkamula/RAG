@@ -1,0 +1,48 @@
+leaf_id: req:B.8.4.3:program_review
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which systems, processes, and data flows are covered by the ISMS
+    and privacy extension. You cannot meaningfully review processor transmission controls if you don’t
+    know what’s in-scope.
+  good_enough: The scope must clearly include all processor activities and data transmissions relevant
+    to the review.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is needed to identify all systems and channels involved in personal
+    data transmission. Without this, you can’t verify if encryption or controls are current or complete.
+  good_enough: A basic, current list of assets and transmission channels used for processing personal
+    data is available.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the documented purposes for which personal data is processed and transmitted
+    to assess if transmissions and contracts remain aligned with customer expectations and legal requirements.
+  good_enough: Documented purposes for all processor activities involving personal data transmission exist
+    and are accessible.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity is essential to determine if
+    transmissions are justified and if customer consultation is required for changes.
+  good_enough: Lawful basis for each relevant processing activity is recorded and can be referenced during
+    the review.
+- ref: Art.28
+  standard_id: GDPR:2016/679
+  title: Processor Obligations
+  category: cross_role
+  rationale: The GDPR’s processor obligations set the legal yardstick for contract alignment and customer
+    consultation requirements. The review must check compliance with these obligations.
+  good_enough: The organization has access to current processor contract templates and a summary of GDPR
+    Art.28 requirements.

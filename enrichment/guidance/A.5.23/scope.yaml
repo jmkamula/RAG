@@ -1,0 +1,19 @@
+must_id: item:A.5.23:scope
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Scope of cloud services covered (IaaS / PaaS / SaaS, public / private / hybrid)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the types of cloud services covered by the policy, such as IaaS, PaaS, and SaaS, in a clearly
+  labeled section.
+- Specify whether the policy applies to public, private, or hybrid cloud environments, listing each explicitly
+  by name.
+- Name the person responsible for defining and updating the policy scope, using their full name and job
+  title.
+- Record the date the scope section was last reviewed and approved, referencing a signed approval or meeting
+  minutes.
+- Avoid using generic terms like "all cloud services" without further detail; provide specific examples
+  or categories relevant to your organisation.

@@ -1,0 +1,17 @@
+must_id: item:A.8.7:update_cadence
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Signature / threat-intelligence update cadence (continuous or hourly preferred)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the required frequency for malware signature and threat-intelligence updates in the procedure,
+  specifying "continuous" or "hourly" as the update interval.
+- Name the individual or role responsible for monitoring and verifying that updates are applied according
+  to the documented cadence.
+- Record evidence of update checks or logs showing successful signature and threat-intelligence updates
+  at the stated frequency, with timestamps.
+- Specify the update cadence as a concrete interval, not vague terms like "regularly" or "as needed,"
+  to avoid auditor rejection.

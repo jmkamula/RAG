@@ -1,0 +1,17 @@
+must_id: item:Art.30:maintained
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Kept in written form (electronic acceptable)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the Records of Processing Activities in a dedicated electronic file or system that is accessible
+  to authorized personnel.
+- Record the date when the RoPA was last updated and the name of the person responsible for maintaining
+  it.
+- Retain a copy of each RoPA version, showing changes and update history, to demonstrate the record has
+  been kept continuously.
+- Name the RoPA file clearly with a version number and date, avoiding generic titles like "GDPR document"
+  or "Data List".

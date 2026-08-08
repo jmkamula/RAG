@@ -1,0 +1,18 @@
+must_id: item:A.5.7:rev_actions
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Action items captured for the program (e.g. add new feed, retire stale source, tune analysis
+  cadence)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record all action items from each threat intelligence program review in a dated meeting minutes document
+  or an action tracking log.
+- Assign each action item to a named individual with a clear due date, avoiding generic owners like "the
+  team" or "security."
+- Document the rationale for each action item, such as why a new feed is added or a source is retired,
+  in the review record.
+- Confirm that completed action items are marked as closed with the completion date and the responsible
+  person's name in the tracking log.

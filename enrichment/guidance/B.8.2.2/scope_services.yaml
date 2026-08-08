@@ -1,0 +1,17 @@
+must_id: item:B.8.2.2:scope_services
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: In-scope services enumerated (customer-PII processing services)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all services that process customer personal data, including cloud applications, storage, and support
+  functions, in a dated document.
+- Name the person responsible for maintaining the list of in-scope services, specifying their full name
+  and job title.
+- Cross-reference each listed service with supporting documentation showing how it processes customer
+  personal data.
+- Specify the scope for each service, avoiding vague descriptions like "all systems" or "as needed."
+- Review and update the list at least annually, recording the review date and reviewer’s name.

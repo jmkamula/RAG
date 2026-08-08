@@ -1,0 +1,18 @@
+must_id: item:Art.42:rev_surveillance_status
+control_ref: Art.42
+standard_id: GDPR:2016/679
+must_text: Surveillance status — most-recent surveillance audit outcome reviewed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Locate the most recent surveillance audit report from your certification body and confirm the documented
+  outcome and any findings.
+- Record the date the surveillance audit was completed and the name of the auditor or certification body
+  representative.
+- Document a formal review of the surveillance audit outcome, including any actions taken or planned in
+  response to findings.
+- Name the reviewer as a specific individual responsible for the review, not a group or department.
+- Retain evidence of the review, such as a signed and dated review summary or meeting minutes referencing
+  the surveillance audit outcome.

@@ -1,0 +1,19 @@
+must_id: item:Art.44:scope_excluded_flows
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Excluded flows (purely-internal within EU/EEA; transit-only; non-personal data)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all data flows and clearly label those that are purely internal within the EU/EEA, transit-only,
+  or involve non-personal data.
+- Document the reasoning for excluding each flow from transfer requirements, referencing supporting evidence
+  such as data mapping or system architecture diagrams.
+- Name the individual responsible for verifying that excluded flows genuinely meet the exclusion criteria—do
+  not use a team or department name.
+- Retain dated records of each exclusion decision, including the specific criteria applied and the date
+  of review.
+- Cross-reference excluded flows in your data transfer register to demonstrate their deliberate assessment
+  and exclusion.

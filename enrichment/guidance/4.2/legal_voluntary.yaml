@@ -1,0 +1,20 @@
+must_id: item:4.2:legal_voluntary
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Distinction between legal/regulatory requirements and voluntary commitments stated at scope
+  level
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all stakeholders relevant to your information security management system, including regulators,
+  customers, partners, and internal groups, in a dated register.
+- Distinguish each requirement by marking whether it is a legal/regulatory obligation or a voluntary commitment
+  in the register.
+- Reference the specific law, regulation, or voluntary code for each entry, including the full name and
+  jurisdiction where applicable.
+- Name the individual responsible for maintaining and updating the stakeholder requirements register,
+  avoiding generic titles like "the team" or "compliance department."
+- Review and update the register at least annually, recording the date of each review and any changes
+  made.

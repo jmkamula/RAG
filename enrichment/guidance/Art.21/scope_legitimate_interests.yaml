@@ -1,0 +1,16 @@
+must_id: item:Art.21:scope_legitimate_interests
+control_ref: Art.21
+standard_id: GDPR:2016/679
+must_text: Legitimate-interests activities enumerated (links to Art.6 register Art.6.1.f rows)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all processing activities that rely on legitimate interests as the legal basis, referencing each
+  activity by name and description.
+- Cross-reference each listed activity to its corresponding row in your Article 6 register, specifically
+  those marked under Article 6.1(f).
+- Name the individual responsible for maintaining and updating the list of legitimate-interests activities,
+  not just a team or department.
+- Record the date when the list was last reviewed and updated to show it is current.

@@ -1,0 +1,15 @@
+must_id: item:B.8.5.8:rev_reviewer
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+must_text: Reviewer identity (Trust + Legal)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer responsible for the subcontractor change program review as a specific individual,
+  not a group or department.
+- Record the reviewer's full name, job title, and contact details in the program review documentation.
+- Document the review date and retain a copy of the signed or digitally approved review record.
+- Cross-reference the reviewer's qualifications or authority to confirm they meet both trust and legal
+  requirements for this role.

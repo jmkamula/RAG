@@ -1,0 +1,17 @@
+must_id: item:B.8.2.2:proc_instruction_capture
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: Instruction capture — customer purposes recorded per engagement (contract + change-notices)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the customer’s stated purpose for processing personal data in each signed contract and any subsequent
+  change-notice documents.
+- Cross-reference each purpose in a central register, linking to the specific contract or change-notice
+  where the instruction is documented.
+- Name the person responsible for maintaining and updating the register as a specific individual, not
+  a team or department.
+- Retain dated copies of all contracts and change-notices that include customer instructions, ensuring
+  they are accessible for review.

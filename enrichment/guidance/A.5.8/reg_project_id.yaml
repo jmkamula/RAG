@@ -1,0 +1,16 @@
+must_id: item:A.5.8:reg_project_id
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Each in-scope project captured with a unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every in-scope project in the Project Security Register, assigning a unique identifier to each
+  entry that does not repeat across projects.
+- Record the project name, start date, and responsible project manager alongside each unique identifier
+  in the register.
+- Confirm that no project is described only as "miscellaneous," "various," or with generic terms that
+  could apply to multiple projects.
+- Date each register entry when it is first created and update the date if project scope or status changes.

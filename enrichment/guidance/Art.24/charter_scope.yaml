@@ -1,0 +1,17 @@
+must_id: item:Art.24:charter_scope
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Scope of the privacy programme (which legal entities, processing activities, geographies)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all legal entities covered by the privacy programme, naming each entity explicitly in the charter.
+- Describe the categories of personal data processing activities included in scope, referencing specific
+  business processes or systems.
+- Specify the geographic regions or countries where the privacy programme applies, stating each location
+  by name.
+- Name the owner as a specific individual responsible for maintaining the charter, not a team or department.
+- Date and approve the charter with a signature from a senior leader to confirm its current and official
+  status.

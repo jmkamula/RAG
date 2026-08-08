@@ -1,0 +1,19 @@
+must_id: item:A.8.31:ephemeral
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Ephemeral environments where supported (e.g. per-PR preview environments)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for creating and destroying ephemeral environments, including triggers such as
+  pull request creation and closure, in a dated procedure.
+- Record examples of per-pull-request preview environments with timestamps and unique environment identifiers
+  for recent development cycles.
+- Name the system or tool responsible for automatic environment teardown to show environments are not
+  left running after use.
+- Assign a specific individual as the owner of the ephemeral environment process, not a team or generic
+  role.
+- Retain logs showing that test data and credentials are not reused between ephemeral environments and
+  are deleted after environment destruction.

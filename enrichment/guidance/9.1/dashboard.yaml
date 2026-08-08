@@ -1,0 +1,16 @@
+must_id: item:9.1:dashboard
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: KPI dashboard or report catalogue
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current information security KPIs tracked within your ISMS in a dated KPI dashboard or report
+  catalogue.
+- Assign a named individual responsible for updating and maintaining the KPI dashboard or report catalogue.
+- Attach or reference the most recent KPI dashboard or report catalogue to your ISMS Monitoring, Measurement,
+  Analysis and Evaluation Procedure.
+- Specify the frequency of KPI updates and reviews in the procedure, and record the date of the last review.
+- Name the owner of the KPI dashboard as a specific person, not a team or department.

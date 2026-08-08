@@ -1,0 +1,19 @@
+must_id: item:A.7.2.3:reg_artifact_snapshot
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: Consent artifact snapshot (text + UI screenshot + version)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Capture a screenshot of the exact user interface where individuals provide consent, including all visible
+  text and options.
+- Save the full text presented to users at the time of consent, showing wording, choices, and any linked
+  policies.
+- Record the version number or date of the consent mechanism displayed, matching it to the screenshot
+  and text.
+- Name the person responsible for maintaining and updating the consent mechanism artifact register as
+  a specific individual, not a team or department.
+- Store each consent artifact snapshot with a timestamp and reference to the system or process where it
+  was used.

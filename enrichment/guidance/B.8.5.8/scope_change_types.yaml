@@ -1,0 +1,17 @@
+must_id: item:B.8.5.8:scope_change_types
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+must_text: Change types in scope (add / replace / remove)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of changes that are included in scope, such as additions, replacements, and removals,
+  in a dated document.
+- Name the person responsible for defining and updating the change scope, specifying their full name and
+  job title.
+- Record the approval of the change scope document by a named manager, including the approval date and
+  signature.
+- Specify excluded change types separately to avoid ambiguity about what is not covered by the scope.
+- Avoid using vague terms like "all changes" or "as needed"—describe each change type clearly and specifically.

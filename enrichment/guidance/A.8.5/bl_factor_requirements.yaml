@@ -1,0 +1,19 @@
+must_id: item:A.8.5:bl_factor_requirements
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Authentication factor requirements per risk tier (single / MFA / step-up)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document authentication factor requirements for each risk tier in a dated Secure Authentication Baseline,
+  specifying when single, multi-factor, or step-up authentication is required.
+- Name the individual responsible for defining and maintaining authentication factor requirements, avoiding
+  generic owners like "IT" or "security team".
+- Cross-reference each risk tier’s authentication requirements to the corresponding information access
+  restrictions or classification in your information asset register.
+- Record approval of the Secure Authentication Baseline by a senior manager, including their name and
+  the approval date.
+- Retain evidence of periodic reviews and updates to the authentication baseline, showing the reviewer’s
+  name and review date.

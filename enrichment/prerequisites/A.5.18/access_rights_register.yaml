@@ -1,0 +1,47 @@
+leaf_id: req:A.5.18:access_rights_register
+control_ref: A.5.18
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need a definitive list of information assets before you can map who has access to what.
+    The access rights register relies on the asset register as its foundation.
+  good_enough: A current, reasonably complete asset register exists, with enough detail to identify assets
+    for access mapping—even if some minor assets are still being catalogued.
+- ref: A.5.15
+  standard_id: ISO27001:2022
+  title: Access Control Policy
+  category: direct
+  rationale: The access control policy defines the rules for granting, reviewing, and revoking access.
+    Without it, you can't meaningfully record or justify access rights in the register.
+  good_enough: A documented policy exists that sets out how access is granted, reviewed, and revoked—even
+    if some procedures are still being refined.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Asset classification determines the sensitivity of information and drives access restrictions.
+    The access rights register must reflect these classifications to ensure appropriate controls.
+  good_enough: A basic classification scheme is in place and applied to key assets, even if not all assets
+    are fully classified yet.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear definition of roles and responsibilities is needed to assign and track access rights.
+    Without this, you can't reliably link access to individuals or roles in the register.
+  good_enough: Roles and responsibilities are documented for major functions and users, even if some edge
+    cases are still being clarified.
+- ref: A.6.5
+  standard_id: ISO27001:2022
+  title: Responsibilities after Termination or Change of Employment
+  category: direct
+  rationale: Procedures for handling access rights after employment changes are essential for keeping
+    the register accurate and up to date.
+  good_enough: There is a documented process for updating or revoking access after employment changes,
+    even if some automation or tracking is still being improved.

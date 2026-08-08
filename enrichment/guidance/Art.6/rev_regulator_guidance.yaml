@@ -1,0 +1,19 @@
+must_id: item:Art.6:rev_regulator_guidance
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Regulator-guidance sweep — EDPB / supervisory authority guidance updates considered for impact
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to monitor updates from the European Data Protection Board and your national
+  supervisory authority for new or revised guidance.
+- Record the date and source of each guidance update reviewed in a central log, including a summary of
+  the relevant changes.
+- Document the assessment of each update’s impact on your current lawful basis program, referencing specific
+  program components affected.
+- Name the reviewer who conducted the assessment, ensuring this is a specific person rather than a team
+  or department.
+- Retain evidence of any resulting program changes, such as updated procedures or communications, with
+  dates and approver names.

@@ -1,0 +1,16 @@
+must_id: item:Art.32:rev_reviewer
+control_ref: Art.32
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO + CISO + Risk lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewers as specific individuals by full name and job title in the security program review
+  document.
+- Record the date each reviewer completed their review and approval in the review log.
+- Obtain signatures or documented electronic approvals from the DPO, CISO, and Risk lead on the final
+  review record.
+- Avoid listing groups or roles such as "the team" or "security department" instead of named individuals
+  as reviewers.

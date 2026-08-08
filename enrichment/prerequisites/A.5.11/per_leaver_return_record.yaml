@@ -1,0 +1,39 @@
+leaf_id: req:A.5.11:per_leaver_return_record
+control_ref: A.5.11
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register is the authoritative source for what assets are assigned to each user.
+    Without it, you cannot reliably identify which items must be returned or written off for each leaver.
+  good_enough: A current, itemised register exists that links assets to individual users, even if some
+    older assignments are still being reconciled.
+- ref: A.6.5
+  standard_id: ISO27001:2022
+  title: Responsibilities after termination or change of employment
+  category: direct
+  rationale: This control defines the required actions and responsibilities when someone leaves or changes
+    roles, including asset return expectations. It frames what must be documented in the per-leaver record.
+  good_enough: Documented procedures or checklists exist that specify post-employment or role-change steps,
+    including asset return and access revocation.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that asset return, verification, and signoff duties are
+    understood and traceable in the per-leaver process.
+  good_enough: There is a named person or team responsible for managing leaver processes and asset return,
+    even if responsibilities are not yet fully formalised.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Knowing the classification of assets helps prioritise which items require stricter return
+    controls or risk acceptance, especially for sensitive or regulated assets.
+  good_enough: A basic classification exists for key asset types (e.g., laptops, access cards, confidential
+    documents), even if not all assets are fully classified yet.

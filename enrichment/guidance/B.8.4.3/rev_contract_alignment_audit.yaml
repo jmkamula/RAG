@@ -1,0 +1,17 @@
+must_id: item:B.8.4.3:rev_contract_alignment_audit
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Contract-alignment audit — sampled channels reviewed against customer B.8.2.1 agreements
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify a sample of data transmission channels used for processing customer data, listing each channel
+  with a unique identifier and description.
+- Cross-reference each sampled channel against the corresponding customer contract, specifically noting
+  the B.8.2.1 data transmission requirements.
+- Document the results of the review for each channel, including any gaps or deviations from contract
+  requirements, in a dated audit log.
+- Name the reviewer as a specific individual responsible for the audit, not a generic role or team.
+- Retain copies of the sampled contracts and completed review records together for each channel reviewed.

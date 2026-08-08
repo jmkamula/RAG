@@ -1,0 +1,18 @@
+must_id: item:A.7.4.2:reg_operation_id
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+must_text: Unique operation identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each processing operation in the inventory, using a consistent format
+  such as "PROC-001", "PROC-002", etc.
+- Record the assigned unique identifier in a dedicated column for every row of the processing operation
+  inventory.
+- Cross-reference the unique identifier in related documentation, such as data flow diagrams or risk assessments,
+  to ensure traceability.
+- Confirm that no two processing operations share the same identifier by running a duplicate check on
+  the inventory.
+- Name the owner responsible for maintaining the inventory as a specific individual, not a team or department.

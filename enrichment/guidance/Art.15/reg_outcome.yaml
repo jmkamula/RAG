@@ -1,0 +1,16 @@
+must_id: item:Art.15:reg_outcome
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Outcome per row (fulfilled / partial under Art.15.4 / refused under Art.12.5 with reason)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the outcome for each data subject access request in the register as "fulfilled," "partial under
+  Art.15.4," or "refused under Art.12.5."
+- State the specific reason for any request marked as "refused under Art.12.5" directly in the corresponding
+  row of the register.
+- Name the individual who made the outcome decision for each request, avoiding generic entries like "the
+  team" or "admin."
+- Date each outcome entry to show when the decision was finalized and communicated to the requester.

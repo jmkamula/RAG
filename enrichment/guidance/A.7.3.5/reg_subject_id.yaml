@@ -1,0 +1,16 @@
+must_id: item:A.7.3.5:reg_subject_id
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Subject identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique subject identifier for each objection event row, such as a user ID or case number, to
+  enable traceability.
+- Document the method used to generate or assign each subject identifier in a register policy or procedure.
+- Cross-reference each subject identifier with the relevant source system or record to confirm accuracy
+  and completeness.
+- Name the subject identifier clearly in each row—avoid leaving the field blank or using generic placeholders
+  like "N/A" or "unknown".

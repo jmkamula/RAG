@@ -1,0 +1,19 @@
+must_id: item:A.6.3:refresh_cadence
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Refresh cadence (typically annual) plus update on significant policy changes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the planned frequency for security awareness training refresh in your programme document, specifying
+  an annual cadence or more frequent if required.
+- Record the date of each training session and update, including those triggered by significant policy
+  changes, in a central training log.
+- Name the person responsible for monitoring policy changes and initiating unscheduled training updates,
+  using a specific individual rather than a team or role.
+- Document the process for notifying staff of training updates following significant policy changes, including
+  the communication method and date sent.
+- Retain copies of all training materials and update logs to show what content was delivered and when
+  changes occurred.

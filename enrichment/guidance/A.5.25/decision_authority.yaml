@@ -1,0 +1,16 @@
+must_id: item:A.5.25:decision_authority
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Decision authority named (who decides event vs incident vs false positive)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the decision authority as a specific individual by job title, not as a team or department, in the
+  procedure document.
+- Document the process for how the decision authority classifies security events, incidents, and false
+  positives, including clear criteria.
+- Record the date and version of the procedure where the decision authority is identified.
+- Assign responsibility for reviewing and updating the named authority in the procedure at least annually,
+  with a dated sign-off.

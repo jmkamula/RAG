@@ -1,0 +1,19 @@
+must_id: item:A.5.19:off_lessons
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Lessons-learned link feeding back into the procedure or selection criteria
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a summary of lessons learned from each supplier offboarding in a dated record, including any
+  issues or successes encountered during the process.
+- Update the supplier offboarding procedure or selection criteria to reflect relevant lessons learned,
+  referencing the specific offboarding record and date.
+- Name the individual responsible for reviewing and incorporating lessons learned, ensuring a specific
+  person is listed rather than a team or department.
+- Retain evidence of the procedure or criteria change, such as a version-controlled document showing the
+  update and the date of revision.
+- Cross-reference the updated procedure or criteria with the original lessons-learned record to demonstrate
+  the feedback loop is complete.

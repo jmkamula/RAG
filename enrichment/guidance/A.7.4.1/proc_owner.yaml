@@ -1,0 +1,17 @@
+must_id: item:A.7.4.1:proc_owner
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Named owner (Product / Privacy Engineering)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the Collection Limitation Procedure, such as "Jane Smith,
+  Privacy Engineer," in the document header.
+- Record the date the owner was assigned responsibility for the procedure in a version control or change
+  log section.
+- Document the owner's contact information within the procedure to allow for direct communication regarding
+  updates or issues.
+- Avoid listing the owner as "the team," "Product," or "Privacy Engineering"—use a named person to meet
+  accountability requirements.

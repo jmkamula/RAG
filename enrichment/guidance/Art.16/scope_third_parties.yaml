@@ -1,0 +1,19 @@
+must_id: item:Art.16:scope_third_parties
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Third-party processor handling — where requests propagate via Art.28 DPA flow
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems where personal data is processed by third-party vendors, including system names and
+  vendor contact details, in a dated inventory.
+- Document the process for forwarding rectification requests to each third-party vendor, referencing the
+  relevant Data Processing Agreement clause.
+- Name the individual responsible for confirming that each vendor has acted on rectification requests,
+  specifying their full name and role.
+- Retain written confirmation from each third-party vendor showing the rectification was completed, including
+  the date and details of the change.
+- Avoid using generic descriptions like "all vendors" or "as needed" in your records—specify each vendor
+  and system individually.

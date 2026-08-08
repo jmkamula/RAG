@@ -1,0 +1,20 @@
+must_id: item:A.5.24:personal_data
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Step to determine if personal data breach occurred (DPIA-aware classification, controller/processor
+  analysis)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the decision process for each incident to determine if personal data was involved, including
+  references to relevant data protection laws.
+- Record the outcome of a data protection impact assessment (DPIA) or equivalent analysis, noting if a
+  personal data breach classification applies.
+- State whether your organisation is acting as data controller or processor for the affected data, naming
+  the responsible individual for this determination.
+- Retain a dated record of the decision and rationale for whether GDPR notification obligations are triggered
+  for each incident.
+- Name the incident owner as a specific individual—avoid using generic roles like "IT team" or "management"
+  as the responsible party.

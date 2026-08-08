@@ -1,0 +1,18 @@
+must_id: item:A.6.7:reg_approval_date
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Per-row approval date + approving manager identity (closes 'who said yes')
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each remote worker’s full name and unique identifier in the register to clearly identify who
+  is approved.
+- Enter the specific approval date for each remote worker, ensuring the date field is not left blank or
+  auto-filled.
+- Name the approving manager for each remote worker as a specific individual, not a generic title or department.
+- Obtain and retain the approving manager’s signature or written confirmation for each entry to evidence
+  explicit approval.
+- Review the register regularly to confirm all entries include both an approval date and a named approving
+  manager.

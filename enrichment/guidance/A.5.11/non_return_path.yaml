@@ -1,0 +1,20 @@
+must_id: item:A.5.11:non_return_path
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Non-return path defined (when assets cannot be physically returned — remote staff, lost device,
+  contractor dispute — alternative attestation + risk acceptance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step process for handling situations where assets cannot be physically returned,
+  including remote work, loss, or unresolved disputes.
+- Assign a named individual responsible for approving alternative evidence of asset return, such as a
+  signed attestation or declaration of loss.
+- Require a formal risk acceptance statement, signed and dated by a designated risk owner, whenever an
+  asset is not recovered.
+- Name the asset and person involved in each non-return case in a register, avoiding generic entries like
+  "staff laptop" or "contractor device."
+- Retain all supporting records, including attestations and risk acceptance forms, linked to the original
+  asset assignment documentation.

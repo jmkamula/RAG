@@ -1,0 +1,49 @@
+leaf_id: req:A.8.25:secure_development_policy
+control_ref: A.8.25
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, teams, and projects are in-scope for your ISMS before defining
+    a Secure Development Lifecycle Policy. The policy must align with the actual boundaries of your security
+    program.
+  good_enough: A clear, documented scope that identifies which development activities and assets are covered
+    by the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The Secure Development Lifecycle Policy must be consistent with your overall information
+    security objectives and commitments. The top-level policy sets the tone and requirements for all supporting
+    policies.
+  good_enough: A published, approved information security policy that defines high-level security objectives
+    and principles.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: You need to understand your development-related risks before you can set effective SDLC rules.
+    Risk assessment informs which controls and requirements are most critical in your policy.
+  good_enough: A recent risk assessment that identifies key threats and vulnerabilities in your development
+    processes.
+- ref: A.8.31
+  standard_id: ISO27001:2022
+  title: Separation of development, test and production environments
+  category: direct
+  rationale: Clear separation of environments is a basic enabler for secure development. If you haven't
+    defined or implemented this, you can't set meaningful SDLC policy requirements.
+  good_enough: Documented evidence that development, test, and production environments are logically or
+    physically separated.
+- ref: A.8.30
+  standard_id: ISO27001:2022
+  title: Outsourced development
+  category: direct
+  rationale: If you outsource any development, your SDLC policy must address how external parties are
+    managed. You need to know your outsourcing arrangements before drafting the policy.
+  good_enough: A list of outsourced development activities and suppliers, with basic contract or control
+    expectations documented.

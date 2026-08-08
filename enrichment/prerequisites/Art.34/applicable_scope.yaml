@@ -1,0 +1,41 @@
+leaf_id: req:Art.34:applicable_scope
+control_ref: Art.34
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify which data processing
+    operations could trigger a high risk to individuals’ rights and freedoms. Without this, you cannot
+    meaningfully assess or document the scope of Art.34 notification obligations.
+  good_enough: A current, working RoPA that lists all relevant processing activities, even if not fully
+    detailed, is sufficient to start defining the Art.34 scope.
+- ref: Art.33
+  standard_id: GDPR:2016/679
+  title: Notification of a Personal Data Breach to the Supervisory Authority
+  category: direct
+  rationale: You must understand the threshold and process for Art.33 breach notification to distinguish
+    when a breach escalates to the higher-risk Art.34 threshold (notification to data subjects).
+  good_enough: A basic documented process or criteria for Art.33 notifications that clarifies the lower
+    threshold compared to Art.34 is enough to proceed.
+- ref: Art.34.3
+  standard_id: GDPR:2016/679
+  title: Exceptions to Notification
+  category: direct
+  rationale: You need to know and document the specific exceptions under which Art.34 notification to
+    data subjects is not required, as this directly shapes the operational scope.
+  good_enough: A list or summary of the Art.34.3 exceptions, even if not fully tailored to every scenario,
+    is sufficient to draft the scope note.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope statement defines the organizational and system boundaries for information
+    security, which helps clarify which processing activities and breaches fall under your GDPR obligations,
+    including Art.34.
+  good_enough: A draft or approved ISMS scope statement that covers the relevant business units and systems
+    is enough to inform the Art.34 scope.

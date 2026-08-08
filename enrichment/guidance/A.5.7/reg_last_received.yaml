@@ -1,0 +1,17 @@
+must_id: item:A.5.7:reg_last_received
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Last-received timestamp per row (stale-feed detection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time each threat intelligence feed was last received in a dedicated column
+  for every row in the register.
+- Assign responsibility for updating the last-received timestamp to a named individual, not a generic
+  team or department.
+- Review the register monthly to confirm no feed shows a last-received timestamp older than your defined
+  collection cadence.
+- Retain historical versions of the register to show evidence of regular updates and detection of any
+  stale feeds.

@@ -1,0 +1,47 @@
+leaf_id: req:B.8.4.2:return_transfer_disposal_procedure
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, processes, and data types are in scope for your ISMS to ensure
+    your return/transfer/disposal procedure covers all relevant PII.
+  good_enough: A clear, current scope statement that identifies the boundaries of your ISMS and includes
+    all environments where PII is processed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register is essential to identify all PII and related assets that may
+    need to be returned, transferred, or disposed of at the end of service.
+  good_enough: A working inventory of information assets that includes PII and systems storing or processing
+    it, even if not fully detailed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: You must know how PII is classified to apply the right level of protection and disposal controls
+    when returning, transferring, or disposing of it.
+  good_enough: A basic classification scheme that distinguishes PII from other data and indicates required
+    handling levels.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Understanding the purpose for which PII was processed is necessary to determine what must
+    be returned, transferred, or disposed of, and to justify retention or deletion.
+  good_enough: Documented purposes for PII processing for each customer or processing activity, even if
+    not fully mapped.
+- ref: Art.28.3.g
+  standard_id: GDPR:2016/679
+  title: 'Processor Obligations: Return or Erasure of Personal Data'
+  category: cross_role
+  rationale: This GDPR article sets the legal expectation that processors must return or erase personal
+    data at the end of service, shaping the requirements for your procedure.
+  good_enough: A basic understanding of this obligation and how it applies to your processor role, even
+    if not fully operationalized in contracts.

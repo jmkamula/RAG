@@ -1,0 +1,18 @@
+must_id: item:Art.18:recipient_notification
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Notification to recipients per Art.19
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each instance where processing is restricted, including the date, data subject details, and
+  the specific processing activities affected.
+- Name all third parties or recipients who have received the restricted personal data, listing them individually
+  with contact details.
+- Record the date and method used to notify each recipient about the restriction, attaching copies of
+  the actual notifications sent.
+- Retain written confirmation from recipients acknowledging receipt of the restriction notice and their
+  agreement to comply.
+- Name the responsible individual overseeing notifications—do not list a team or department as the owner.

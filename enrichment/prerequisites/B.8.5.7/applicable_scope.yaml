@@ -1,0 +1,42 @@
+leaf_id: req:B.8.5.7:applicable_scope
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and operational boundaries for information security,
+    which must be understood before specifying the scope of privacy-related subcontractor engagements.
+    Without this, you can't reliably determine if a subcontractor's activities fall within your managed
+    risk environment.
+  good_enough: A current, approved ISMS scope statement that clearly identifies included business units,
+    locations, and systems.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: Knowing which assets (including data, systems, and services) are in scope is essential to
+    identify which subcontractor engagements process customer PII. You can't define the privacy scope
+    if you don't know what assets are involved.
+  good_enough: A maintained list of key information assets, including those managed or accessed by subcontractors.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the purpose for processing PII in each subcontractor engagement
+    to determine if it falls within the applicable privacy scope. This ensures only relevant engagements
+    are included.
+  good_enough: A brief written statement of the intended purpose for processing PII for each subcontractor
+    engagement.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Determining the lawful basis for processing PII is necessary to justify including a subcontractor
+    engagement within the privacy scope. This prevents accidental overreach or omission.
+  good_enough: A documented lawful basis (e.g., contract, consent) for each subcontractor engagement that
+    processes customer PII.

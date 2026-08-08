@@ -1,0 +1,20 @@
+must_id: item:A.5.34:lawful_basis
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Lawful basis discipline (lawful basis identified per processing activity — consent, contract,
+  legal obligation, vital interests, public task, legitimate interests; where law requires)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity involving personal data in a table, including a brief description and
+  the department responsible.
+- Identify and record the lawful basis for each processing activity, referencing the specific legal ground
+  such as consent or contract.
+- Name the individual responsible for reviewing and updating lawful basis assignments, avoiding generic
+  roles like "the team" or "IT."
+- Attach evidence of management approval for the lawful basis assignments, such as a dated and signed
+  policy review document.
+- Cross-reference each lawful basis entry to the relevant section of applicable law or regulation, such
+  as GDPR Article 6.

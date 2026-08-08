@@ -1,0 +1,20 @@
+must_id: item:A.5.16:suspension
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Suspension steps for leave of absence, risk events (under investigation), or extended inactivity
+  (auto-suspend at N days idle)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the suspension process in your procedure, including triggers for leave of absence, risk investigations,
+  and auto-suspend after a defined inactivity period.
+- State the exact inactivity threshold in days that triggers automatic suspension, and record the date
+  this threshold was approved by management.
+- Name the individual responsible for reviewing and actioning suspension requests, avoiding generic titles
+  like "IT team" or "HR department".
+- Record each suspension event with the user’s name, reason for suspension, date initiated, and who approved
+  the action.
+- Retain evidence of periodic reviews of suspended accounts, including review dates and the reviewer’s
+  name.

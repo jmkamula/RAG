@@ -1,0 +1,19 @@
+must_id: item:A.5.5:notification_templates
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Notification templates referenced per authority type
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each authority type in the register, such as police, data protection regulator, or fire department,
+  with a clear description.
+- Attach or link a notification template for each authority type directly in the register entry, using
+  a unique file name or URL.
+- State the last review date and reviewer’s name for each template to show it is current and has been
+  checked.
+- Name the template owner as a specific individual, not a generic role or team, to avoid ambiguity about
+  responsibility.
+- Record any authority type without a template as an exception, with a documented action plan and target
+  date for completion.

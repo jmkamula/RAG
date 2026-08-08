@@ -1,0 +1,18 @@
+must_id: item:A.8.33:scope_a811_link
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Cross-link to A.8.11 masking — A.8.33 governs WHAT is selected, A.8.11 governs HOW it's transformed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all test data sets and record their intended use and scope in a dated document approved by
+  a named data owner.
+- Cross-reference each test data set in your register to the relevant masking method documented under
+  A.8.11, using unique identifiers.
+- State explicitly in the test data scope document how A.8.33 determines what data is selected and how
+  A.8.11 governs its transformation.
+- Name the owner of the test data scope as a specific individual, not a team or department, to avoid ambiguity.
+- Retain copies of both the test data scope and masking method documentation together, showing clear linkage
+  between what is selected and how it is masked.

@@ -1,0 +1,19 @@
+must_id: item:Art.23:scope_change_drivers
+control_ref: Art.23
+standard_id: GDPR:2016/679
+must_text: Trigger list (new MS entry, new sectoral regulation enacted)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current EU Member States where your organisation operates, with the date each entry was last
+  reviewed or updated.
+- Record each new Member State entry or sector-specific regulation in a dated log, including the responsible
+  staff member’s name.
+- Assign a specific individual, not a team or department, to monitor and update the list when new Member
+  States or sectoral regulations are identified.
+- Cross-reference each entry with the relevant legal or regulatory source, providing a link or citation
+  for verification.
+- Document the review schedule and the date of the most recent review to show ongoing currency of the
+  trigger list.

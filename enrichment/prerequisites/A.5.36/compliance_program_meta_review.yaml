@@ -1,0 +1,38 @@
+leaf_id: req:A.5.36:compliance_program_meta_review
+control_ref: A.5.36
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know what the ISMS covers before you can meaningfully review whether the compliance
+    review program is effective and complete. The meta-review must align with the defined scope.
+  good_enough: A documented scope statement that clearly defines the boundaries and applicability of the
+    ISMS is available and up to date.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The compliance review program should be assessed against the organisation’s stated security
+    objectives and commitments. The policy sets the baseline for what the review program should support.
+  good_enough: A current, approved information security policy is accessible and reflects management intent.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles is necessary to determine who is responsible for conducting, overseeing,
+    and acting on compliance reviews and their meta-review.
+  good_enough: Documented roles and responsibilities exist for compliance and ISMS activities, with named
+    owners.
+- ref: A.5.36
+  standard_id: ISO27001:2022
+  title: Compliance Review Program
+  category: direct
+  rationale: You cannot review or meta-review a compliance review program if it does not exist. The underlying
+    review process and records must be in place first.
+  good_enough: A documented compliance review program exists, with evidence of at least one cycle of reviews
+    having been conducted.

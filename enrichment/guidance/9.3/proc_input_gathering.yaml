@@ -1,0 +1,19 @@
+must_id: item:9.3:proc_input_gathering
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Input-gathering process (who collects 9.3.2 a-e inputs; deadlines pre-meeting)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for collecting each required input (9.3.2 a-e) in the management review
+  procedure, listing them by full name and role.
+- Document the specific deadlines for submitting each input before the management review meeting, including
+  exact dates or timeframes.
+- Record the method and location where inputs are gathered and stored, such as a shared folder or designated
+  email inbox.
+- State the process for verifying that all required inputs have been received before the meeting, including
+  who performs this check.
+- Avoid listing input owners as "the team" or "management"—assign each responsibility to a clearly identified
+  individual.

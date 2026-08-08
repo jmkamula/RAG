@@ -1,0 +1,15 @@
+must_id: item:Art.46:rev_next_date
+control_ref: Art.46
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Safeguards Program in a dated document or calendar entry.
+- Name the individual responsible for conducting the next review, listing their full name and role.
+- Record the date this review schedule was last updated, ensuring it is not left undated or marked as
+  "TBD."
+- Attach the review date to the current version of the Safeguards Program document, not in a separate
+  or generic schedule.

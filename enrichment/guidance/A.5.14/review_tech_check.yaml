@@ -1,0 +1,19 @@
+must_id: item:A.5.14:review_tech_check
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Technology check — new transfer mechanisms in use (AI assistants, new collab platforms, new
+  file-sharing tools) that need explicit rules added
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for identifying new information transfer technologies used within
+  the organisation.
+- Document each new transfer mechanism in a dated log, including examples such as AI assistants, collaboration
+  platforms, or file-sharing tools.
+- Review and update the Information Transfer Policy to include explicit rules for each newly identified
+  technology, referencing the dated log entry.
+- Record the approval of policy updates with a dated signature from the designated policy owner.
+- Avoid listing technologies generically; specify each tool or platform by name to prevent auditor concerns
+  about incomplete coverage.

@@ -1,0 +1,48 @@
+leaf_id: req:A.6.8:reporting_program_review
+control_ref: A.6.8
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the boundaries of your ISMS to determine which reporting channels, teams,
+    and processes are in-scope for periodic review. Without a clear scope, you can't ensure all relevant
+    reporting flows are being monitored.
+  good_enough: A documented scope statement that clearly identifies the organizational units, assets,
+    and processes covered by the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the tone for reporting expectations, responsibilities, and escalation paths.
+    The review process must align with these policy commitments.
+  good_enough: A current, approved information security policy that addresses reporting and escalation
+    expectations.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures you know who is responsible for receiving, triaging, and
+    acknowledging reports, as well as who conducts the program review.
+  good_enough: A list or matrix showing who is responsible for report intake, triage, acknowledgment,
+    and review oversight.
+- ref: A.5.25
+  standard_id: ISO27001:2022
+  title: Information Security Event Reporting
+  category: direct
+  rationale: You can't review the effectiveness of reporting and triage if you haven't defined how events
+    are reported and handed off for triage. This control underpins the reporting program.
+  good_enough: A documented process or procedure for reporting security events and handing them off for
+    triage, even if not fully optimized.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: Knowing what assets exist helps ensure reporting channels cover all relevant systems and
+    data. The review should check that all critical assets are included in reporting flows.
+  good_enough: An up-to-date register of key information assets relevant to reporting and triage, not
+    necessarily exhaustive.

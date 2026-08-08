@@ -1,0 +1,16 @@
+must_id: item:8.1:rev_execution_completeness
+control_ref: '8.1'
+standard_id: ISO27001:2022
+must_text: Execution completeness check — every scheduled process iteration logged
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each scheduled process iteration in a central log, including the date, time, and responsible
+  individual for each occurrence.
+- Confirm that every entry in the log matches the operational planning program's published schedule for
+  the review period.
+- Name the responsible individual for logging each process iteration—do not use generic roles or team
+  names.
+- Review the log monthly to verify that no scheduled process iterations are missing or left unlogged.

@@ -1,0 +1,17 @@
+must_id: item:A.5.27:actions
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Action items assigned to owners with target dates
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each action item from the incident review in a lessons learned log, including a clear description
+  of the required change or improvement.
+- Assign each action item to a named individual, not a group or department, to ensure clear accountability.
+- Specify a target completion date for every action item and document it alongside the owner in the log.
+- Retain evidence of communication to each owner, such as an email or task assignment notification with
+  the action item and deadline.
+- Update the log with completion dates and supporting evidence, such as a change ticket or confirmation
+  email, once each action is finished.

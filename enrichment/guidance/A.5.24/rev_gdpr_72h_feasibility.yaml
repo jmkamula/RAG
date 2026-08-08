@@ -1,0 +1,20 @@
+must_id: item:A.5.24:rev_gdpr_72h_feasibility
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: GDPR 72-hour feasibility check (when did the last personal-data incident notify? what was the
+  gap to 72h? is the path actually under 72h?)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the most recent personal-data incident and record its notification date and time in your incident
+  log.
+- Calculate the elapsed time between incident discovery and supervisory authority notification, documenting
+  the exact number of hours in your review report.
+- Confirm the notification path by listing each step and responsible person, showing the process from
+  incident detection to notification.
+- State whether the notification occurred within the 72-hour GDPR window, citing the specific evidence
+  from your log.
+- Name the reviewer as a specific individual, not a group or department, and record the review date on
+  the framework review document.

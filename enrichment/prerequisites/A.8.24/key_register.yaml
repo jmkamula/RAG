@@ -1,0 +1,39 @@
+leaf_id: req:A.8.24:key_register
+control_ref: A.8.24
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The key register must only cover cryptographic keys relevant to the defined ISMS scope. Without
+    a clear scope, you can't determine which keys need to be tracked.
+  good_enough: A documented scope that identifies the business units, systems, and processes included
+    in the ISMS, with enough detail to know which keys are in or out.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need an up-to-date asset register to identify which systems and data assets use cryptographic
+    keys, so you know what needs to be included in the key register.
+  good_enough: A basic list of information assets and systems, with enough detail to identify where cryptographic
+    keys are used or stored.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The classification scheme informs the sensitivity and protection requirements for each key,
+    which must be recorded in the register for proper management.
+  good_enough: A simple, documented classification scheme that maps asset types or data to sensitivity
+    levels, so you can tag keys accordingly.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: You need to know who is responsible for key management and register maintenance to assign
+    custodians and ensure accountability for each key.
+  good_enough: A list or matrix showing who is responsible for cryptographic key management and register
+    upkeep, even if not fully formalized.

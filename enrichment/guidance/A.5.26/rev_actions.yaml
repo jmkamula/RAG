@@ -1,0 +1,17 @@
+must_id: item:A.5.26:rev_actions
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Action items captured (e.g. revise containment runbook, refresh contact list, schedule exercise)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each action item from the incident response program review in a dated log, clearly describing
+  the required change or follow-up.
+- Assign each action item to a named individual with a target completion date, avoiding generic owners
+  like "the team" or "IT".
+- Attach supporting evidence for each action item, such as updated runbooks, revised contact lists, or
+  scheduled exercise invitations.
+- Confirm that all action items from the previous review cycle are marked as completed or provide a documented
+  explanation for any outstanding items.

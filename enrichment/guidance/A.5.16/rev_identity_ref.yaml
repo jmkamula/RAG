@@ -1,0 +1,16 @@
+must_id: item:A.5.16:rev_identity_ref
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Identity identifier per record (links to identity register entry)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the unique identifier of each revoked identity in the revocation record, matching the format
+  used in your identity register.
+- Cross-reference each revocation entry with the corresponding identity register entry to confirm the
+  link is accurate and current.
+- Name the revoked identity’s owner as a specific individual, not a generic label or group, in the revocation
+  record.
+- Date each revocation record to show when the identity was revoked.

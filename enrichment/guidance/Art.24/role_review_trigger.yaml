@@ -1,0 +1,19 @@
+must_id: item:Art.24:role_review_trigger
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Per-row review trigger (counterparty service-shape change, M&A)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and details of each review triggered by a change in the counterparty’s service or
+  following a merger or acquisition.
+- Name the individual responsible for assessing whether the controller or processor role remains accurate
+  after each triggering event.
+- Record the specific change or event that prompted the review, referencing supporting documents such
+  as updated contracts or merger announcements.
+- State the outcome of the role review and any updates made, including the decision date and the approver’s
+  name.
+- Avoid using generic triggers like “periodic review”; specify the actual event that led to each review
+  entry.

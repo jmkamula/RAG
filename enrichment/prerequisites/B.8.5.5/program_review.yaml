@@ -1,0 +1,40 @@
+leaf_id: req:B.8.5.5:program_review
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A defensible disclosure decision program relies on a clear and current data classification
+    scheme to determine what information is sensitive and how it should be handled. Without this, annual
+    reviews of disclosure decisions cannot verify if classifications are binding or appropriate.
+  good_enough: A documented and approved classification scheme exists, covering all relevant data types
+    and sensitivity levels.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need an up-to-date asset register to know which information assets are subject to disclosure
+    decisions and to ensure all relevant assets are included in the review.
+  good_enough: A maintained list of information assets, with owners and classifications, is available
+    for reference during the review.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that the right people are involved in disclosure decisions,
+    customer consultations, and the annual review process.
+  good_enough: Roles and responsibilities for disclosure decisions and reviews are documented and communicated
+    to relevant staff.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: Understanding and documenting the purpose for processing personal data is essential to justify
+    disclosure decisions and to review whether customer consultations are appropriate.
+  good_enough: Documented purposes for all major data processing activities exist and are accessible to
+    those conducting the program review.

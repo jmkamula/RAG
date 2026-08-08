@@ -1,0 +1,40 @@
+leaf_id: req:B.8.2.4:infringing_notification_register
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: You must know the lawful basis for each processing activity to identify when an instruction
+    from a controller might infringe applicable law. This clarity is essential to determine when to issue
+    an infringing-instruction notification.
+  good_enough: A documented list of lawful bases for all relevant processing activities, even if not fully
+    mapped to every data flow, is sufficient to proceed.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Clear documentation of processing purposes allows you to spot instructions that fall outside
+    agreed purposes, which is a common trigger for infringing-instruction notices.
+  good_enough: A summary of purposes for each processing activity, even if not fully granular, is enough
+    to start the register.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know which parts of your organisation and which processing activities are covered
+    by your ISMS and PIMS. This ensures the register only tracks relevant notifications.
+  good_enough: A current, high-level scope statement that covers all in-scope processing activities is
+    sufficient.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that notifications are issued and recorded by the right
+    people, and that the register is maintained correctly.
+  good_enough: A basic RACI or list of responsible individuals for privacy and security tasks is enough
+    to move forward.

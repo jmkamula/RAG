@@ -1,0 +1,18 @@
+must_id: item:A.5.9:disc_a812_link
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Cross-link to A.8.12 (data leakage prevention) or A.8.20 (network mapping) where those scans
+  double as discovery
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each asset discovery scan in your asset register to the relevant data leakage prevention
+  or network mapping control where the scan serves both purposes.
+- Document the date and scope of each scan, clearly stating when it also fulfills requirements for A.8.12
+  or A.8.20.
+- Name the individual responsible for confirming that cross-links between asset discovery and related
+  controls are kept up to date.
+- Avoid using generic statements like "see other controls"—specifically list the control numbers and scan
+  dates in your records.

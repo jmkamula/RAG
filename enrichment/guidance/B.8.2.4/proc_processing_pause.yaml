@@ -1,0 +1,18 @@
+must_id: item:B.8.2.4:proc_processing_pause
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Processing-pause protocol — where infringement is clear + severe, processing paused pending
+  customer confirmation or withdrawal
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step procedure for pausing processing when a clear and severe infringement is identified,
+  including required triggers and responsible roles.
+- Name the specific individual authorized to make the decision to pause processing, avoiding generic titles
+  like "the team" or "management".
+- Record each instance of processing paused under this protocol, including the date, reason, and notification
+  sent to the customer.
+- Retain written confirmation from the customer either authorizing continuation or requiring withdrawal
+  of processing before resuming any activity.

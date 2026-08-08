@@ -1,0 +1,17 @@
+must_id: item:7.1:financial
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Financial resources allocated (budget for ISMS activities)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the approved ISMS budget in a dated record, specifying the financial amount allocated for information
+  security management activities.
+- Name the individual responsible for authorising the ISMS budget, ensuring a specific person is listed
+  rather than a department or generic title.
+- Retain evidence of management approval, such as a signed budget approval form or meeting minutes referencing
+  the ISMS financial allocation.
+- Cross-reference the ISMS budget allocation in your organisation’s overall financial plan to demonstrate
+  alignment with broader business planning.

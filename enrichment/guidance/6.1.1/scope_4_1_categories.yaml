@@ -1,0 +1,17 @@
+must_id: item:6.1.1:scope_4_1_categories
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: 4.1 issue categories enumerated as planning inputs
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all categories of internal and external issues identified under clause 4.1 as distinct planning
+  inputs in your risk management documentation.
+- Reference the exact date and version of the document where these issue categories are enumerated for
+  traceability.
+- Name the person responsible for compiling and updating the list of issue categories, using a specific
+  individual's name.
+- Attach supporting evidence, such as meeting minutes or analysis reports, that show how each issue category
+  was determined.

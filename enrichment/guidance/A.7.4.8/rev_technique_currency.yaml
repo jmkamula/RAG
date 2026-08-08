@@ -1,0 +1,19 @@
+must_id: item:A.7.4.8:rev_technique_currency
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Technique currency — techniques still appropriate given hardware / cloud evolution
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Review the current disposal techniques used for data and hardware, and compare them against the latest
+  hardware and cloud technologies in use.
+- Document the date of the most recent disposal program review and list the specific hardware and cloud
+  platforms assessed.
+- Name the individual responsible for evaluating and approving the continued suitability of disposal techniques,
+  ensuring a specific person is listed.
+- Record any changes made to disposal procedures as a result of the review, including the rationale and
+  the date of implementation.
+- Retain evidence of the review meeting, such as signed minutes or a summary report, showing who attended
+  and what decisions were made.

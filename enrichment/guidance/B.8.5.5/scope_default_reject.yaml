@@ -1,0 +1,19 @@
+must_id: item:B.8.5.5:scope_default_reject
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Default reject scope (informal / social-engineering / marketing requests)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a written procedure stating that all informal, social-engineering, and marketing requests for
+  personal data disclosure are automatically rejected by default.
+- Name the individual responsible for reviewing and enforcing the default rejection policy for these types
+  of disclosure requests.
+- Record each rejected informal, social-engineering, or marketing request in a log, including the requestor,
+  date, and reason for rejection.
+- Specify in the procedure that no exceptions to the default rejection are allowed without documented,
+  case-by-case senior management approval.
+- Avoid using vague terms like "requests handled by the team"—identify specific roles or people responsible
+  for decision-making in the documented scope.

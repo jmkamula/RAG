@@ -1,0 +1,41 @@
+leaf_id: req:A.5.20:deviation_register
+control_ref: A.5.20
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.19
+  standard_id: ISO27001:2022
+  title: Information security in supplier relationships
+  category: direct
+  rationale: You need a clear policy for managing information security in supplier relationships before
+    you can track and approve deviations from standard supplier agreements. This policy sets the baseline
+    for what 'normal' looks like, so you can identify and justify exceptions.
+  good_enough: A documented and approved supplier relationship policy exists, covering key security expectations
+    for suppliers.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which suppliers, contracts, and business units are covered by
+    your ISMS. Without this, you can't know which supplier agreements require deviation tracking.
+  good_enough: A current ISMS scope statement exists that clearly includes supplier relationships relevant
+    to information security.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: You must know who is authorized to approve supplier agreement deviations and who is responsible
+    for maintaining the deviation register. Without clear roles, the register can't be reliably managed.
+  good_enough: Roles for approving and recording supplier agreement deviations are assigned and communicated,
+    even if not fully formalized.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment informs which supplier agreement clauses are critical and what compensating
+    controls might be needed if a deviation is approved. This context is essential for meaningful deviation
+    records.
+  good_enough: A basic risk assessment exists for supplier relationships, identifying key risks and controls,
+    even if not exhaustive.

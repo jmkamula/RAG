@@ -1,0 +1,19 @@
+must_id: item:B.8.5.4:rev_gag_order_audit
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+must_text: Gag-order audit — invocations defensible + post-order notifications issued when possible
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each gag-order disclosure request with the date received, legal authority, and a summary of
+  the request in a dedicated register.
+- Record the decision process and rationale for compliance or challenge, including names and signatures
+  of all individuals involved in the review.
+- Confirm that post-order notifications were issued to affected individuals when legally permitted, and
+  retain copies of these notifications or legal advice if not possible.
+- Name the program owner as a specific individual responsible for gag-order requests, avoiding generic
+  titles like "Legal Team" or "Compliance Department".
+- Review all gag-order cases annually and log the review date, reviewer’s name, and any follow-up actions
+  taken.

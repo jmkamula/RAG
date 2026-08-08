@@ -1,0 +1,19 @@
+must_id: item:A.7.8:reg_protection
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Per-row protection measures in place (matches procedure's per-class requirements)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each item of equipment in the register with its exact location and assigned protection class
+  as defined in your procedure.
+- Document specific physical protection measures applied to each equipment row, matching the requirements
+  for its assigned class.
+- Cross-reference each protection measure entry with the relevant section of your approved procedure to
+  show alignment.
+- Name the responsible individual for each equipment row, avoiding generic titles like "IT" or "Facilities
+  Team".
+- Review the register for any equipment rows missing protection measures or with measures that do not
+  match the required class.

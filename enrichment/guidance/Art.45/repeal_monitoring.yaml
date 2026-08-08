@@ -1,0 +1,18 @@
+must_id: item:Art.45:repeal_monitoring
+control_ref: Art.45
+standard_id: GDPR:2016/679
+must_text: Repeal monitoring — Schrems-style invalidations (Schrems I/II) and Commission Art.45.5 amend/repeal/suspend
+  actions tracked
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to monitor European Commission adequacy decisions and related legal developments,
+  recording their name and start date in the procedure document.
+- Document a process for checking updates to adequacy decisions at least quarterly, including the review
+  dates and the person responsible for each check.
+- Record any identified changes, amendments, suspensions, or repeals of adequacy decisions in a dated
+  log, referencing the official source or legal notice.
+- Name the specific individual responsible for triggering a review of data transfer arrangements if an
+  adequacy decision is invalidated—avoid listing a team or department.

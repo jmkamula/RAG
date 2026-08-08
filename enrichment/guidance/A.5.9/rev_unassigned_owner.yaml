@@ -1,0 +1,18 @@
+must_id: item:A.5.9:rev_unassigned_owner
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Treatment of unassigned-owner rows (owner assignment forced or row retired)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Review the asset inventory and identify any assets without a named owner listed in the owner column.
+- Assign a specific individual as the owner for each unassigned asset, recording their full name and assignment
+  date in the inventory.
+- Retire or remove any asset entries that cannot be assigned to a responsible owner, documenting the reason
+  and date of removal.
+- Avoid listing the owner as "the team", "IT", or any non-specific group; use only named individuals for
+  ownership records.
+- Retain a dated record of each reconciliation activity, including who performed the review and any changes
+  made to asset ownership.

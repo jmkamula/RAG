@@ -1,0 +1,19 @@
+must_id: item:B.8.5.4:rev_date
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Disclosure Request Program in a dated document or meeting
+  minutes.
+- Name the individual responsible for scheduling and conducting the review, listing them by full name
+  and job title.
+- Cross-reference the planned review interval in your compliance calendar or policy, showing the expected
+  frequency.
+- Attach evidence of the completed review, such as a signed checklist or approval email, dated within
+  the planned interval.
+- Avoid leaving the review date field blank or listing "ongoing"—enter a specific, completed date for
+  auditor verification.

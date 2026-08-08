@@ -1,0 +1,32 @@
+leaf_id: req:Art.9:applicable_categories_scope
+control_ref: Art.9
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of Processing
+  category: direct
+  rationale: You must identify the lawful basis for processing any personal data before determining if
+    special category data is involved. Art.9 processing is only allowed if an Art.6 lawful basis is established
+    first.
+  good_enough: A clear mapping of each relevant processing activity to at least one valid Art.6 lawful
+    basis is documented and accessible.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an inventory of processing activities to know where special category data may be
+    present. Without this, you can't reliably scope which Art.9 categories apply.
+  good_enough: A working, up-to-date RoPA exists that lists all major processing activities, even if some
+    details are still being refined.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and system boundaries for compliance. This ensures
+    your Art.9 assessment covers all relevant entities and avoids missing in-scope special category data.
+  good_enough: A documented ISMS scope exists that covers all business units and systems where personal
+    data is processed, even if some boundaries are still being finalized.

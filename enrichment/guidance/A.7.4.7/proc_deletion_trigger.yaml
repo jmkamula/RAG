@@ -1,0 +1,19 @@
+must_id: item:A.7.4.7:proc_deletion_trigger
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Deletion trigger — schedule expiry triggers A.7.4.5 end-of-processing action
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the PII retention schedule to the end-of-processing actions listed in your A.7.4.5 documentation,
+  showing clear linkage for each data type.
+- Document the specific event or date that triggers deletion or other end-of-processing actions for each
+  category of PII in your procedure.
+- Assign a named individual responsible for monitoring schedule expiry and initiating the required end-of-processing
+  action, listing their full name and role.
+- Record each deletion or end-of-processing action with a dated entry, referencing the triggering schedule
+  expiry and the data affected.
+- Name the trigger event clearly—avoid vague terms like "as needed" or "periodically" that do not specify
+  when action occurs.

@@ -1,0 +1,20 @@
+must_id: item:A.8.21:rev_mechanisms_currency
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Security-mechanism currency check (TLS versions / crypto algorithms / authentication strength
+  still acceptable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Schedule and document a recurring review of all network service security mechanisms, listing the date,
+  scope, and responsible individual for each review.
+- Record the current TLS versions, cryptographic algorithms, and authentication methods in use, including
+  configuration screenshots or export files as supporting evidence.
+- Compare each mechanism against current industry standards and regulatory guidance, noting any outdated
+  or weak settings in a dated review log.
+- Name the reviewer as a specific individual, not a generic team or department, to provide clear accountability
+  for the assessment.
+- Document any required updates or remediation actions, including assigned owner and target completion
+  date, in an approved action tracking register.

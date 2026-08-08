@@ -1,0 +1,15 @@
+must_id: item:10.1:rev_reviewer
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (ISMS Manager + executive sponsor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the ISMS Manager and executive sponsor as the reviewers in the Continual Improvement Program Review
+  document, listing their full names and titles.
+- Record the date each reviewer completed their review on the program review document.
+- Obtain signatures or documented electronic approval from both the ISMS Manager and executive sponsor
+  on the final review record.
+- Avoid listing a group or department as the reviewer; specify individual names to clearly show accountability.

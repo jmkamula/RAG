@@ -1,0 +1,16 @@
+must_id: item:A.7.2.6:rev_subprocessor_audit
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Subprocessor audit — sampled contracts checked for current subprocessor authorisation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of active processor contracts and list them in a dated review log.
+- Cross-reference each sampled contract against your current subprocessor authorisation register to verify
+  listed subprocessors are approved.
+- Record the name and date of the reviewer who completed each contract check in the review log.
+- Attach evidence of subprocessor authorisation, such as signed approvals or updated registers, to each
+  contract record.
+- Name the reviewer as a specific individual, not a team or department, to avoid ambiguity in accountability.

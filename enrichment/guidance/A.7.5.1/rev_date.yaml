@@ -1,0 +1,15 @@
+must_id: item:A.7.5.1:rev_date
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Transfer Basis Program in a dated entry within the program
+  documentation.
+- Name the reviewer as a specific individual responsible for the review, not a group or department.
+- Document the planned review interval and confirm the actual review date falls within this timeframe.
+- Retain evidence of the completed review, such as meeting minutes or a signed review checklist, attached
+  to the program file.

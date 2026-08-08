@@ -1,0 +1,17 @@
+must_id: item:A.7.2.2:proc_review_signoff
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: DPO + legal counsel signoff before basis enters production
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer and legal counsel responsible for signoff in the Lawful Basis Assessment
+  Procedure, listing their full names and roles.
+- Obtain dated signatures from both the Data Protection Officer and legal counsel on each assessment before
+  the lawful basis is used in production.
+- Record the final signoff date and attach the signed assessment to the project documentation for each
+  new or updated lawful basis.
+- Avoid using unsigned or verbally approved assessments—an auditor will flag any basis that lacks clear,
+  written signoff from both required parties.

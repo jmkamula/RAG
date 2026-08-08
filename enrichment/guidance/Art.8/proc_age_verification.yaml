@@ -1,0 +1,20 @@
+must_id: item:Art.8:proc_age_verification
+control_ref: Art.8
+standard_id: GDPR:2016/679
+must_text: Age-verification mechanism (self-declaration with reasonable-effort cross-check; not relying
+  on self-declaration alone in higher-risk cases)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the age-verification process, including steps for self-declaration and any cross-checks, in
+  a dated procedure owned by a named individual.
+- Record each user’s self-declared age and the method of cross-check used, such as email confirmation
+  or parental contact, in an auditable log.
+- Name the owner as a specific individual responsible for age-verification decisions—do not use a team
+  or department as the owner.
+- Retain evidence of additional verification for higher-risk cases, such as copies of parental consent
+  or third-party confirmation, linked to the relevant user record.
+- Review the procedure annually and sign off on any updates, keeping previous versions and review dates
+  for reference.

@@ -1,0 +1,17 @@
+must_id: item:A.6.8:owner
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Named owner of the procedure (typically InfoSec on-call with HR + Legal partners for sensitive
+  cases)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the Information Security Event Reporting Procedure, listing
+  their full name and job title.
+- Document the current owner’s contact details and date of assignment within the procedure document.
+- List HR and Legal partners by name and role for sensitive case escalation, avoiding generic references
+  like “the team” or “department.”
+- Record the date of the most recent review and approval of the procedure, including the approver’s name
+  and signature.

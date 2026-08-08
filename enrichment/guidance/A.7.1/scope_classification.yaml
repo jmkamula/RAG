@@ -1,0 +1,20 @@
+must_id: item:A.7.1:scope_classification
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Per-site information-classification footprint (drives which areas need which protection class
+  — cross-link to A.5.12)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each physical and cloud site included in the information security scope, specifying the exact address
+  or unique identifier for each location.
+- Assign a named individual responsible for maintaining the information-classification footprint at each
+  site, avoiding generic roles or team names.
+- Document the types of information handled at each site, mapping each to its required protection class
+  as defined in your information-classification policy.
+- Cross-reference each site’s classification footprint to the relevant protection requirements in your
+  A.5.12 records, using explicit links or identifiers.
+- Record the date of the most recent review or update for each site’s classification footprint, ensuring
+  all entries are current and version-controlled.

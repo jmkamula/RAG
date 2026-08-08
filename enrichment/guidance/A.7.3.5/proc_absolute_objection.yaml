@@ -1,0 +1,19 @@
+must_id: item:A.7.3.5:proc_absolute_objection
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Absolute objection handling (Art.21.2 marketing → processing must stop immediately)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step procedure for handling objections to marketing, including immediate cessation
+  of processing upon receipt of an objection.
+- Name the responsible individual who reviews and acts on marketing objections, ensuring this is a specific
+  person and not a team or department.
+- Record each objection received, including the date, the individual’s details, and the timestamp of when
+  marketing processing was stopped.
+- Retain evidence of communication sent to the objector confirming that their marketing data processing
+  has ceased, with a date and sender identified.
+- Review objection logs regularly and cross-reference with marketing activity records to confirm no further
+  processing occurs after an objection.

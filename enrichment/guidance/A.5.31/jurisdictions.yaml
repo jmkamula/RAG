@@ -1,0 +1,20 @@
+must_id: item:A.5.31:jurisdictions
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Jurisdictions covered explicitly per entry (HQ, places of operation, customer locations, data
+  residency)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each legal, statutory, regulatory, or contractual requirement as a separate entry in your register,
+  including a clear title and description.
+- Specify the exact jurisdiction(s) relevant to each entry, such as country, state, or region, and avoid
+  using generic terms like "global" or "all locations."
+- Record the physical or operational locations impacted by each requirement, including headquarters, branch
+  offices, customer sites, and data storage locations.
+- Name the responsible individual for each entry, ensuring the owner is a specific person rather than
+  a team or department.
+- Date each entry and update the register whenever requirements or jurisdictions change, keeping a visible
+  revision history.

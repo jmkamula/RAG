@@ -1,0 +1,48 @@
+leaf_id: req:A.5.11:return_of_assets_procedure
+control_ref: A.5.11
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register is essential to identify which organisational assets are assigned to personnel
+    and must be returned. Without a current register, you cannot create a meaningful return procedure
+    or checklist.
+  good_enough: A basic, up-to-date list of all assets assigned to staff, including physical and logical
+    items, is available and can be referenced.
+- ref: A.6.5
+  standard_id: ISO27001:2022
+  title: Responsibilities after termination or change of employment
+  category: direct
+  rationale: This control defines the obligations and expectations for personnel after their employment
+    status changes, providing the authority and context for requiring asset return.
+  good_enough: Documented post-employment responsibilities exist, specifying that asset return is required
+    and enforceable.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope determines which assets, personnel, and processes are covered by the return
+    of assets procedure. Without a clear scope, you risk omitting critical assets or users.
+  good_enough: A written scope statement exists that identifies the organisational boundaries and asset
+    types relevant to the ISMS.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures accountability for managing the asset
+    return process, including who initiates, verifies, and records returns.
+  good_enough: Key roles (e.g., HR, IT, line managers) are identified and their responsibilities for asset
+    return are described in a policy or procedure.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Asset classification informs the handling, verification, and data wipe requirements for different
+    asset types during the return process.
+  good_enough: A simple classification scheme exists that distinguishes between at least basic categories
+    (e.g., confidential, internal, public) for organisational assets.

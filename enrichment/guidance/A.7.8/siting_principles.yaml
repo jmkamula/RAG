@@ -1,0 +1,20 @@
+must_id: item:A.7.8:siting_principles
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Siting principles (away from public view, environmental controls, restricted access proportional
+  to equipment class)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the physical locations of all critical equipment, including room numbers and floor plans, showing
+  they are not visible from public areas.
+- State the environmental controls in place for each equipment location, such as temperature regulation
+  and water leak detection, with installation dates.
+- Name the access restrictions for each equipment class, listing specific individuals or roles with authorized
+  entry, not generic terms like "staff".
+- Record the date and outcome of the most recent inspection verifying that equipment is sited according
+  to these principles.
+- Attach photographs or access logs as evidence that equipment is protected from unauthorized viewing
+  and entry.

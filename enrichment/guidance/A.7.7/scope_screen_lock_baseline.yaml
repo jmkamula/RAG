@@ -1,0 +1,19 @@
+must_id: item:A.7.7:scope_screen_lock_baseline
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Screen-lock baseline per location (auto-lock after N minutes — varies by location risk)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical locations in scope, including offices, remote sites, and home offices, with a named
+  owner responsible for each location.
+- Document the required screen-lock timeout for each location, specifying the number of minutes and referencing
+  the location’s risk assessment.
+- Record the date and method of approval for each location’s screen-lock baseline, signed by the designated
+  owner or security manager.
+- Attach technical evidence, such as screenshots or system configuration reports, showing the enforced
+  screen-lock settings for each location.
+- Name the owner as a specific individual for each location — do not use generic terms like "IT" or "the
+  team".

@@ -1,0 +1,20 @@
+must_id: item:B.8.2.3:proc_consent_evidence_requirement
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: Consent evidence requirement — if any marketing/advertising use is permitted, subject-level
+  consent evidence required (from customer or via processor arrangement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each instance where personal data is used for marketing or advertising, including the specific
+  campaign name and data subjects involved.
+- Retain a dated record of explicit consent from each individual whose data is used, showing how and when
+  consent was obtained.
+- Cross-reference each consent record to the relevant marketing or advertising activity, ensuring a clear
+  link between consent and data use.
+- Name the responsible person who verifies that consent is in place before any marketing or advertising
+  use, not just a team or department.
+- Avoid relying on verbal or implied consent; ensure all consent evidence is written and accessible for
+  review.

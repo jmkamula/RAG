@@ -1,0 +1,18 @@
+must_id: item:Art.9:reg_safeguards
+control_ref: Art.9
+standard_id: GDPR:2016/679
+must_text: Safeguards in place per row (Art.9.3 secrecy where applicable; technical + organisational measures)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the specific technical and organisational safeguards for each special category processing activity
+  in the register, such as encryption or access controls.
+- Reference the applicable legal basis and any required secrecy obligations for each processing activity,
+  including where Art.9.3 professional secrecy applies.
+- Name the individual responsible for maintaining and updating each row’s safeguards, not just a team
+  or department.
+- Record the date each safeguard was last reviewed or updated in the register to show ongoing compliance.
+- Attach supporting evidence, such as policy documents or signed confidentiality agreements, to each processing
+  activity entry where relevant.

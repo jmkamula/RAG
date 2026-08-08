@@ -1,0 +1,20 @@
+must_id: item:A.6.1:legal_consideration
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Legal, regulatory, and ethical constraints applied per jurisdiction (some checks unlawful or
+  restricted in EU/UK; consent + transparency obligations under GDPR)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and list all jurisdictions where personnel screening occurs, including countries of employment
+  and data processing, in a dated procedure document.
+- Document the specific legal and regulatory requirements for personnel screening in each jurisdiction,
+  citing relevant laws or regulations by name and section.
+- State the consent and transparency obligations under GDPR or equivalent laws, and attach a copy of the
+  consent form used for EU/UK hires.
+- Name the procedure owner as a specific individual, not a department or generic title, in the procedure
+  document.
+- Attach a legal review or sign-off confirming that all screening activities described comply with local
+  laws in each jurisdiction.

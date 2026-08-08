@@ -1,0 +1,41 @@
+leaf_id: req:Art.15:dsar_process_review
+control_ref: Art.15
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.12
+  standard_id: GDPR:2016/679
+  title: Transparent information, communication and modalities for the exercise of the rights of the data
+    subject
+  category: direct
+  rationale: Art.12 sets the rules for how DSARs must be handled, including the 1-month response deadline
+    and requirements for clear communication. Without this, you can't meaningfully review whether your
+    DSAR process meets legal expectations.
+  good_enough: You have a documented DSAR procedure that references Art.12 requirements and shows how
+    deadlines and communication obligations are met.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: Reviewing DSAR effectiveness requires knowing what personal data is processed, where, and
+    by whom. Art.30 records provide the inventory needed to check if DSAR responses are complete and accurate.
+  good_enough: You have an up-to-date RoPA that covers all relevant processing activities and is accessible
+    to those reviewing DSAR handling.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If a DPO is required, they play a key role in overseeing DSAR processes and ensuring compliance.
+    The review process should involve or be overseen by the DPO where applicable.
+  good_enough: You have formally designated a DPO (if required) and their involvement in DSAR oversight
+    is documented.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for processing is essential to determine if any data should
+    be withheld or redacted in DSAR responses. The review must check that these decisions are made correctly.
+  good_enough: You have mapped lawful bases for all processing activities, and this mapping is referenced
+    in DSAR handling guidance.

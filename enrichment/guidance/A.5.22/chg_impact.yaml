@@ -1,0 +1,19 @@
+must_id: item:A.5.22:chg_impact
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Impact assessment on InfoSec arrangements (which controls affected, which threats opened or
+  closed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each supplier service change request with a unique identifier, date received, and the name of
+  the person logging the request.
+- Document a completed impact assessment for each change, clearly listing which information security controls
+  are affected and how.
+- State which new threats are introduced or which existing threats are mitigated or closed as a result
+  of the service change.
+- Name the individual who performed and approved the impact assessment for each entry, avoiding generic
+  roles or team names.
+- Attach supporting evidence, such as risk analysis notes or meeting minutes, directly to each log entry.

@@ -1,0 +1,15 @@
+must_id: item:A.5.4:approval_date
+control_ref: A.5.4
+standard_id: ISO27001:2022
+must_text: Approval date recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the approval date directly on the InfoSec Directive document, ensuring it is clearly visible
+  and unambiguous.
+- Name the approving top management individual, avoiding generic titles or group names such as "the team"
+  or "management".
+- Retain a copy of the signed and dated InfoSec Directive in a central, access-controlled repository.
+- Cross-reference the approval date in your policy register or change log to match the date on the directive.

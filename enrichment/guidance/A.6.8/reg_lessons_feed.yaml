@@ -1,0 +1,20 @@
+must_id: item:A.6.8:reg_lessons_feed
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Per-row lessons-feed flag where the report surfaced a control gap (feeds back to A.6.3 awareness
+  curriculum or relevant control owner)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a "lessons-feed" flag column to the Event Report Register to indicate if a reported event revealed
+  a control gap.
+- Record, for each flagged event, the specific control gap identified and the related ISO27001 control
+  reference in the register row.
+- Name the individual responsible for reviewing each flagged event and updating the awareness curriculum
+  or notifying the relevant control owner.
+- Avoid using generic terms like "staff" or "team" as the responsible party; always list a named individual
+  for accountability.
+- Document the date when each flagged lesson was communicated to the curriculum owner or control owner
+  in the register.

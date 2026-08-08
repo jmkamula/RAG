@@ -1,0 +1,17 @@
+must_id: item:A.7.14:disp_equipment_id
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Per-record equipment identifier (cross-link to A.5.9 asset register, retired entry)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique equipment identifier for each disposal entry, matching the identifier format used in
+  your official asset register.
+- Cross-reference the disposal record to the corresponding retired asset entry in the asset register,
+  including the register’s entry number or code.
+- Name the person responsible for verifying the equipment’s identity before disposal, using their full
+  name rather than a generic title.
+- Date each disposal record to show when the equipment was disposed of and when the asset register was
+  updated.

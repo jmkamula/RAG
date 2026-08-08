@@ -1,0 +1,19 @@
+must_id: item:A.7.3.10:scope_jurisdiction_prohibitions
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Jurisdiction-specific prohibitions on full automation (§7.3.10 NOTE)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all automated decision-making processes that impact personal data and record them in a dated
+  inventory, including the jurisdictions in which they operate.
+- Research and document any laws or regulations in each jurisdiction that prohibit or restrict fully automated
+  decisions affecting individuals.
+- Cross-reference each automated process in your inventory with the relevant jurisdictional requirements,
+  noting any prohibitions or restrictions.
+- Name a specific individual responsible for monitoring changes in jurisdictional laws related to automated
+  decision-making, not a team or department.
+- Retain evidence of legal reviews or external advice obtained regarding automation prohibitions, including
+  the date and the advisor’s name.

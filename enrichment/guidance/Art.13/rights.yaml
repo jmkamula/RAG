@@ -1,0 +1,17 @@
+must_id: item:Art.13:rights
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Data subject rights (access, rectification, erasure etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all data subject rights under GDPR Article 13.2b in the privacy notice, using clear and accessible
+  language.
+- State the process for exercising each right, including contact details for submitting requests and expected
+  response times.
+- Name a specific individual or role responsible for handling data subject rights requests, avoiding generic
+  titles like "the team" or "support".
+- Record the date the privacy notice was last reviewed or updated, showing that rights information is
+  current.

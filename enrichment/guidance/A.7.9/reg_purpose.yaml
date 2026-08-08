@@ -1,0 +1,17 @@
+must_id: item:A.7.9:reg_purpose
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Per-row purpose (daily-loaner / conference / customer-visit / permanent-issue)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific purpose for each off-premises asset entry, such as "daily-loaner," "conference,"
+  "customer-visit," or "permanent-issue," in a dedicated column.
+- Name the individual responsible for assigning asset purposes, ensuring this is a named person rather
+  than a generic role or team.
+- Date each entry when the asset's purpose is assigned or updated to provide a clear timeline of asset
+  use.
+- Review the register quarterly to confirm all asset purposes remain accurate and update any that have
+  changed.

@@ -1,0 +1,15 @@
+must_id: item:A.8.7:rev_reviewer
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Endpoint/Server Engineering + InfoSec)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer from Endpoint/Server Engineering as a specific individual with full name and job title
+  in the review record.
+- Record the reviewer from Information Security as a named person, not just the department or team, in
+  the documented review.
+- Document the date each reviewer completed their review in the program review log.
+- Sign the review summary or approval page with both reviewers’ signatures or digital sign-offs.

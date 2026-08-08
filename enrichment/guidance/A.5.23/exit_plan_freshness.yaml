@@ -1,0 +1,19 @@
+must_id: item:A.5.23:exit_plan_freshness
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Per-service exit plan freshness target (re-test on agreement renewal or major service change)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the current exit plan review date for each cloud service in a dated record maintained alongside
+  the service agreement.
+- Document the specific trigger events—such as agreement renewal or major service change—that require
+  re-testing of the exit plan.
+- Name a specific individual responsible for monitoring exit plan freshness, avoiding generic roles like
+  "IT" or "the team."
+- Record each exit plan re-test event, including the date, the nature of the trigger, and the outcome,
+  in a central log.
+- Cross-reference the latest exit plan version to the corresponding service agreement to confirm alignment
+  and timeliness.

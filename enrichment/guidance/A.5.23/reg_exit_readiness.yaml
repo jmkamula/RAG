@@ -1,0 +1,18 @@
+must_id: item:A.5.23:reg_exit_readiness
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Exit-plan readiness flag per service (Yes / No / Stale)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a dedicated column in the Cloud Service Register to record the exit-plan readiness status for each
+  listed service as Yes, No, or Stale.
+- Name the person responsible for updating the exit-plan readiness status for each service, ensuring an
+  individual is listed rather than a team or department.
+- Record the date when the exit-plan readiness status was last reviewed or updated for each service entry.
+- Attach supporting documentation or a link to the most recent exit plan for each service marked as "Yes"
+  in the register.
+- Review the register quarterly and document the review date and reviewer’s name to confirm exit-plan
+  statuses remain current.

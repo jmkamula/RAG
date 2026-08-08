@@ -1,0 +1,18 @@
+must_id: item:A.6.6:duration
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Duration of confidentiality obligation (indefinite for trade secrets; time-limited for non-trade-secret
+  confidential info — typically 3-5 years post-termination)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the duration of confidentiality obligations in the agreement, specifying "indefinite" for trade
+  secrets and a fixed period for other confidential information.
+- Name the type of information covered by each duration, clearly distinguishing between trade secrets
+  and other confidential data in the template.
+- Reference the section and clause number in the template where the duration is defined, so it is easily
+  located by an auditor.
+- Name the template owner as a specific individual, not a generic role or team, to avoid ambiguity about
+  responsibility.

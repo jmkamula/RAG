@@ -1,0 +1,20 @@
+must_id: item:A.5.26:cls_sla_met
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: MTTC / MTTR / containment-SLA-met flag per record — structured boolean against the targets
+  stated in the procedure or service catalogue; analogous to A.5.16:rev_sla_met
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the maximum time to contain and resolve incidents, as documented in your procedure or service
+  catalogue, with clear target values.
+- Record the actual time to contain and resolve for each incident in the closure record, using precise
+  timestamps.
+- Confirm a structured yes/no (boolean) field in each record indicating if each SLA target was met, directly
+  referencing the stated targets.
+- Name the person who verified and signed off on the SLA-met status for each incident, avoiding anonymous
+  or group attributions.
+- Retain all closure records with timestamps, SLA-met flags, and verifier details for each incident, ready
+  for auditor sampling.

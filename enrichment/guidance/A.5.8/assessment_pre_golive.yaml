@@ -1,0 +1,16 @@
+must_id: item:A.5.8:assessment_pre_golive
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Security assessment before go-live (pen test, control verification, residual-risk acceptance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the project security assessment owner in the procedure, avoiding generic
+  titles like "the team" or "IT department".
+- Document the completion date and results of the security assessment, including penetration test findings
+  and control verification, in the project records.
+- Record formal residual risk acceptance, signed and dated by the designated risk owner, before the project
+  go-live decision.
+- Cross-reference the security assessment evidence in the project closure or go-live approval documentation.

@@ -1,0 +1,41 @@
+leaf_id: req:Art.17:program_review
+control_ref: Art.17
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a current, accurate record of processing activities to identify where personal data
+    resides and which systems/processes are subject to erasure requests. Without this, you can't reliably
+    review or verify erasure program effectiveness.
+  good_enough: A maintained RoPA that lists all relevant processing activities, systems, and data flows,
+    even if some minor updates are pending.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity is essential to determine when erasure
+    is required or when exceptions under Art.17.3 apply. This underpins defensible exception claims during
+    review.
+  good_enough: A documented lawful basis for each processing activity in the RoPA, with clear mapping
+    to data types and purposes.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If required, a designated DPO ensures oversight and accountability for GDPR compliance, including
+    erasure processes and program reviews. The DPO is often responsible for or involved in annual reviews.
+  good_enough: A named DPO (internal or external) with contact details and a basic description of their
+    role, even if full onboarding is in progress.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which systems, locations, and processes are covered by your compliance
+    program, ensuring the erasure review is comprehensive and not missing critical areas.
+  good_enough: A documented scope statement that covers all in-scope systems and processes for personal
+    data, even if some boundaries are still being refined.

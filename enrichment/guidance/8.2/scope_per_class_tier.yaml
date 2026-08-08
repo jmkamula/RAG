@@ -1,0 +1,19 @@
+must_id: item:8.2:scope_per_class_tier
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Risk tier per asset class drives cadence (8.2 'planned intervals' is risk-based, not flat)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each asset class and assign a specific risk tier, naming the individual who determined the tier
+  and the date of assessment.
+- Document the review frequency for each asset class, showing that higher-risk tiers have shorter intervals
+  than lower-risk ones.
+- Cross-reference the operational assessment schedule to the risk tiers, ensuring the cadence matches
+  the documented risk level.
+- Name the owner responsible for maintaining the risk tier and cadence mapping as a specific individual,
+  not a team or department.
+- Retain evidence of management approval for the risk-based assessment intervals, including signatures
+  and approval dates.

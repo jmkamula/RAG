@@ -1,0 +1,17 @@
+must_id: item:7.5:creation_update
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Creation and update process (identification, format, review, approval)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for creating and updating documents, including how each document is identified,
+  formatted, reviewed, and approved.
+- Name the owner responsible for each document as a specific individual, not a group or department.
+- Record the date and version number on every policy document to show when it was last updated.
+- Retain evidence of formal approval for each document, such as a signed or digitally approved record
+  from the designated approver.
+- Store a log of all document reviews and updates, including reviewer names and dates, to demonstrate
+  the review cycle.

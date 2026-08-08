@@ -1,0 +1,18 @@
+must_id: item:A.7.2.5:scope_change_drivers
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: Trigger list (new AI model / new geo / new data source)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all scenarios that require a Privacy Impact Assessment, such as new AI models, new geographic regions,
+  or new data sources, in a dated document.
+- Name the person responsible for maintaining and updating the PIA trigger list, identifying them by full
+  name and job title.
+- Record the date of the most recent review or update to the trigger list on the document itself.
+- Reference specific business activities or projects that have triggered a PIA in the past year, linking
+  them to the trigger list.
+- Specify each trigger clearly; avoid vague descriptions like "significant change" without examples or
+  criteria.

@@ -1,0 +1,20 @@
+must_id: item:A.6.5:surviving_duties
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Surviving duties enumerated (confidentiality — typically indefinite; IP protection; non-disparagement;
+  non-poach where lawful; non-compete where lawful)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all information security responsibilities that continue after employment or role change in a formal
+  document, such as an exit checklist or contract addendum.
+- Specify confidentiality, intellectual property protection, and any lawful non-compete, non-poach, or
+  non-disparagement obligations with clear, plain-language descriptions.
+- State the duration of each surviving obligation, noting if any are indefinite, and include relevant
+  jurisdictional limitations where applicable.
+- Obtain a signed acknowledgment from the departing individual confirming their understanding and acceptance
+  of these ongoing responsibilities.
+- Name the responsible individual who updates and maintains these records, avoiding generic titles like
+  "HR team" or "management."

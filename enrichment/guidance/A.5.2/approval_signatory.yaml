@@ -1,0 +1,19 @@
+must_id: item:A.5.2:approval_signatory
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: Signatory at top-management level (CEO, board chair, or delegated equivalent)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual at top management level (such as CEO, board chair, or delegated equivalent) as the
+  signatory for roles and responsibilities allocation.
+- Document the approved roles and responsibilities in a dated record that clearly lists all relevant positions
+  and their assigned duties.
+- Sign the allocation document with a handwritten or secure digital signature from the named top management
+  signatory.
+- Retain the signed and dated approval in a central location where it can be easily retrieved for audit
+  purposes.
+- Avoid listing the signatory as a generic group or department; specify an actual person holding a top
+  management position.

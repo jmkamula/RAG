@@ -1,0 +1,19 @@
+must_id: item:A.5.14:physical_media
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Rules for physical media transfers (removable storage, paper documents, post/courier — tamper-evident
+  packaging where appropriate)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the rules for transferring physical media, including removable storage and paper, in a dated
+  Information Transfer Policy approved by a named manager.
+- State when tamper-evident packaging must be used for physical transfers, and provide concrete examples
+  within the policy.
+- Assign responsibility for authorising and logging each physical media transfer to a specific individual,
+  not a generic team or department.
+- Record each transfer in a register, including date, sender, recipient, media type, and packaging method.
+- Retain evidence of completed transfers, such as signed delivery receipts or courier tracking records,
+  for auditor inspection.

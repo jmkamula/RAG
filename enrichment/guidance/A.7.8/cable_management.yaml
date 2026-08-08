@@ -1,0 +1,19 @@
+must_id: item:A.7.8:cable_management
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Cable management to prevent damage or interception (cross-link to A.7.12 cabling security)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for routing and securing network and power cables to prevent accidental damage,
+  physical tampering, or unauthorized interception.
+- Cross-reference your cable management procedure to the Cabling Security requirements described in your
+  A.7.12 documentation, including specific section numbers.
+- Name the individual responsible for regularly inspecting cable routes and protection measures, listing
+  their full name and job title.
+- Record the date of the most recent cable inspection and the findings in a log that is accessible for
+  audit review.
+- Specify cable ownership and inspection responsibilities by individual names, not generic roles like
+  "IT" or "Facilities Team".

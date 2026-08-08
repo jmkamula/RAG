@@ -1,0 +1,20 @@
+must_id: item:A.6.6:reg_termination_link
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Per-row cross-link to the offboarding event where applicable (A.6.5 leaver briefing reinforces
+  surviving NDA obligations)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to the NDA Signature Register to record the date and reference of any offboarding event
+  linked to each individual.
+- Cross-reference each applicable NDA entry with the corresponding offboarding record, including the briefing
+  date and responsible HR staff member.
+- Name the responsible person who updates the register as a specific individual, not a generic role or
+  team.
+- Retain evidence of leaver briefings, such as signed acknowledgements, and link these documents to the
+  relevant NDA register entry.
+- Avoid leaving the cross-link field blank for leavers; explicitly record "not applicable" only for current
+  staff or contractors.

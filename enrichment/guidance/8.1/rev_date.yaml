@@ -1,0 +1,15 @@
+must_id: item:8.1:rev_date
+control_ref: '8.1'
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the operational planning program in a dated log or tracking document.
+- Cross-reference the review date against the documented planned review interval to confirm it falls within
+  the required timeframe.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Retain evidence of the review, such as meeting minutes or a signed review checklist, showing the date
+  and participants.

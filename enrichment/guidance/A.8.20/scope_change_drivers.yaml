@@ -1,0 +1,19 @@
+must_id: item:A.8.20:scope_change_drivers
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new cloud region, new partner, new OT environment)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current network components, including cloud regions, partners, and operational technology environments,
+  in a dated network scope document.
+- Document a trigger list that specifies events requiring re-scoping, such as adding a new cloud region,
+  onboarding a new partner, or deploying a new OT environment.
+- Assign a named individual responsible for monitoring changes and updating the network scope when a trigger
+  event occurs.
+- Record each scope review or update with the review date, the person responsible, and the specific trigger
+  that prompted the change.
+- Specify trigger descriptions in clear, organisation-specific language—avoid generic or boilerplate statements
+  that could apply to any company.

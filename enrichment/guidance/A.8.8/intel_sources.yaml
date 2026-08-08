@@ -1,0 +1,17 @@
+must_id: item:A.8.8:intel_sources
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Intelligence sources enumerated (vendor advisories / CVE feeds / ISACs / cross-link to A.5.7
+  threat intel)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all sources used to gather vulnerability information, such as vendor advisories, CVE feeds, and
+  industry sharing groups, in the procedure document.
+- Cross-reference the threat intelligence sources identified under control A.5.7 within the vulnerability
+  management procedure.
+- Name a specific person or role responsible for monitoring each intelligence source, avoiding generic
+  terms like "the team" or "IT".
+- Record the date each source was last reviewed or updated to show ongoing relevance and use.

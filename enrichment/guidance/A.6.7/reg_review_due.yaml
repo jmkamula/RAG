@@ -1,0 +1,19 @@
+must_id: item:A.6.7:reg_review_due
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Per-row next-review-due date (drives the periodic review's expected-set computation; typically
+  12 months from approval)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the initial approval date for each remote worker entry in the register, ensuring the date is
+  specific and unambiguous.
+- Calculate and enter a next-review-due date for each row, typically set 12 months from the approval date
+  unless policy states otherwise.
+- Name the reviewer responsible for the next evaluation as a specific individual, not a team or department.
+- Update the next-review-due date immediately after each completed review, reflecting the new due date
+  in the register.
+- Avoid leaving the next-review-due date field blank or using placeholders like "TBD," as auditors will
+  flag incomplete records.

@@ -1,0 +1,20 @@
+must_id: item:A.5.18:rev_date_recorded
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Effective date per record (last working day OR contract expiry OR role-change effective date
+  OR explicit revocation decision time)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact effective date of access revocation on each access removal record, matching the last
+  working day, contract end, or role-change date.
+- Document the source event that triggered revocation, such as resignation letter, contract termination
+  notice, or role-change approval, and link it to the record.
+- Name the individual who authorized the revocation, ensuring the record is not left unsigned or attributed
+  to a generic group.
+- Attach supporting evidence, such as HR notifications or decision emails, to each revocation record to
+  verify the timeliness of the action.
+- Avoid using vague or default dates like "immediate" or "as soon as possible"—enter a specific calendar
+  date for each revocation.

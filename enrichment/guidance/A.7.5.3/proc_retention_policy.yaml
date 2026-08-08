@@ -1,0 +1,18 @@
+must_id: item:A.7.5.3:proc_retention_policy
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+must_text: Retention period policy for transfer records (link to A.7.4.7)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact retention period for PII transfer records in the documented procedure, referencing the
+  legal or contractual basis for the timeframe.
+- Cross-reference the retention period in the PII Transfer Recording Procedure to the organisation’s master
+  retention schedule or policy required by control A.7.4.7.
+- Name the individual responsible for reviewing and updating the retention period, ensuring a specific
+  person is listed rather than a team or department.
+- Record the approval date and approver’s name for the retention period policy within the procedure documentation.
+- Document the process for securely disposing of PII transfer records once the retention period expires,
+  including the method and responsible party.

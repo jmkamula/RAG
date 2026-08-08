@@ -1,0 +1,16 @@
+must_id: item:A.7.4.2:scope_exclusions
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+must_text: Excluded operations (anonymised / aggregate) with rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all data processing operations and clearly identify those considered out of scope due to anonymisation
+  or aggregation.
+- Document the rationale for each excluded operation, explaining why it does not involve personal data
+  under the standard’s definitions.
+- Name the individual responsible for approving each exclusion, ensuring the owner is a specific person
+  rather than a team or department.
+- Record the date when each exclusion and its rationale were reviewed and approved.

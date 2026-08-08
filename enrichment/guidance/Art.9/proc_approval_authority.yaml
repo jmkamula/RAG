@@ -1,0 +1,16 @@
+must_id: item:Art.9:proc_approval_authority
+control_ref: Art.9
+standard_id: GDPR:2016/679
+must_text: Approval authority for special-category processing (DPO + executive sponsor + applicable function
+  head)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the DPO, executive sponsor, and applicable function head as specific individuals responsible for
+  approving special-category data processing.
+- Document each approval with a dated signature or electronic confirmation from the DPO, executive sponsor,
+  and function head on the authorisation record.
+- Cross-reference the approval record to the specific processing activity and data categories involved.
+- Avoid listing generic roles or groups as approvers; ensure all names are unique, identifiable people.

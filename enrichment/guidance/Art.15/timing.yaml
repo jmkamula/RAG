@@ -1,0 +1,20 @@
+must_id: item:Art.15:timing
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Responded within one calendar month of receipt OR Art.12.3 two-month extension formally applied
+  with notification
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date the data subject access request was received in a log or tracking system with a unique
+  reference number.
+- Document the date and method of your response to the requester, attaching a copy of the actual communication
+  sent.
+- State if a two-month extension was applied, including the formal notification sent to the requester
+  and the reason for the delay.
+- Name the person responsible for handling and responding to the request, ensuring it is a specific individual
+  and not a generic role or team.
+- Retain all correspondence and supporting documents related to the request and response, including any
+  extension notifications, in a single, accessible file.

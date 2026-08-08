@@ -1,0 +1,18 @@
+must_id: item:A.5.31:laws_listed
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Applicable laws and regulations enumerated (GDPR, sectoral, jurisdictional, transfer regimes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each applicable law, regulation, and contractual obligation by full name and citation in the register,
+  including GDPR and any sector-specific rules.
+- Record the jurisdiction and scope for each entry, specifying which business units, products, or data
+  types are affected.
+- Assign a named individual as the owner for each requirement, avoiding generic labels like "Legal" or
+  "Compliance Team".
+- Enter the date each requirement was last reviewed or updated, showing ongoing maintenance of the register.
+- Cross-reference each listed requirement to supporting documentation or contracts, such as data processing
+  agreements or regulatory filings.

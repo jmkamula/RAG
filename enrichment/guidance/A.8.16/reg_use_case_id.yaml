@@ -1,0 +1,16 @@
+must_id: item:A.8.16:reg_use_case_id
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Per-detection use-case identifier (rule id / hunt id / playbook id)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each detection use-case in the register, such as a rule ID, hunt ID, or
+  playbook ID.
+- Record the identifier directly alongside the detection use-case description in the register for clear
+  association.
+- Cross-reference the identifier with the corresponding technical rule, hunt, or playbook documentation
+  to confirm traceability.
+- Name the owner of each detection use-case as a specific individual, not a team or generic role.

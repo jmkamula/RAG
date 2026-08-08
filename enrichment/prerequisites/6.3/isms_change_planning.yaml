@@ -1,0 +1,39 @@
+leaf_id: req:6.3:isms_change_planning
+control_ref: '6.3'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the boundaries and applicability of your ISMS before you can plan changes
+    to it. The scope statement defines what parts of the organization and which processes are covered.
+  good_enough: A documented scope statement that clearly identifies included business units, processes,
+    and locations is available and agreed upon.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The information security policy sets the direction and principles for managing information
+    security, which informs how changes to the ISMS should be planned and governed.
+  good_enough: A current, approved information security policy exists and is accessible to relevant stakeholders.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding current risks is essential for planning ISMS changes, as changes may introduce
+    new risks or address existing ones. The risk assessment provides the baseline for evaluating change
+    impact.
+  good_enough: A recent risk assessment has been performed and documented, identifying key risks relevant
+    to the ISMS.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that ISMS changes are planned, approved,
+    and implemented by the right people, reducing confusion and accountability gaps.
+  good_enough: A documented list of ISMS roles and responsibilities is available and communicated to those
+    involved in change planning.

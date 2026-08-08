@@ -1,0 +1,17 @@
+must_id: item:A.8.1:reg_device_id
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Per-device unique identifier (serial, asset tag, MDM-issued id)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique identifier for each device in the inventory register, such as a serial number, asset
+  tag, or MDM-issued ID.
+- Cross-reference each device’s identifier with its assigned user or location to confirm traceability
+  in the register.
+- Name the person responsible for maintaining the inventory register as a specific individual, not a team
+  or department.
+- Document the date each device was added or updated in the register to provide an audit trail.
+- Avoid using generic or duplicate identifiers; verify that each entry is unique and specific to one device.

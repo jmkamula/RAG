@@ -1,0 +1,18 @@
+must_id: item:Art.23:application_records
+control_ref: Art.23
+standard_id: GDPR:2016/679
+must_text: Per-application record retained (when restriction is invoked, by whom, against which subject
+  right)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, time, and specific application when a restriction on data subject rights is invoked,
+  in a dedicated log entry.
+- Name the individual who authorized the restriction, ensuring the record lists a specific person rather
+  than a team or department.
+- Specify which data subject right was restricted and provide a brief justification for the restriction
+  in the log entry.
+- Retain the restriction record alongside supporting documentation for each instance, ensuring it is accessible
+  for audit review.

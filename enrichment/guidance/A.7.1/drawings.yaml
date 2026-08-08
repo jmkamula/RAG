@@ -1,0 +1,17 @@
+must_id: item:A.7.1:drawings
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Floor plans or perimeter drawings referenced
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference the latest floor plans or perimeter drawings by file name and version number within the Physical
+  Security Perimeters Policy document.
+- Attach or link the referenced floor plans directly in the policy or as an appendix, ensuring they are
+  accessible to auditors.
+- Record the date each floor plan or drawing was last updated and reviewed, listing this information in
+  the policy.
+- Name the person responsible for maintaining and updating the floor plans, avoiding generic titles like
+  "Facilities Team."

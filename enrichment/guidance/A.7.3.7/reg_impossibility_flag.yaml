@@ -1,0 +1,17 @@
+must_id: item:A.7.3.7:reg_impossibility_flag
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Impossibility / disproportionate-effort invocation flag per row where applicable
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to your Third-Party Notification Register to indicate if impossibility or disproportionate
+  effort has been invoked for each data subject notification.
+- Record the specific reason and supporting evidence for each invocation in the corresponding row, referencing
+  any relevant communications or assessments.
+- Name the individual who approved the invocation for each case, ensuring a specific person is listed
+  rather than a team or department.
+- Enter the date the invocation decision was made for each row to provide a clear timeline of actions
+  taken.

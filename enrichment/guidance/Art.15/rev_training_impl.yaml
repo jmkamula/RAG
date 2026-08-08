@@ -1,0 +1,15 @@
+must_id: item:Art.15:rev_training_impl
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Training implications captured where defects trace to staff awareness
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Review each periodic DSAR process assessment report and identify any issues or defects linked to staff
+  awareness or knowledge gaps.
+- Document specific training needs or updates required, referencing the related defect and the date it
+  was identified.
+- Assign responsibility for implementing the training update to a named individual, not a team or department.
+- Record the date and outcome of the training intervention in the DSAR process review log.

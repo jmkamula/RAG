@@ -1,0 +1,17 @@
+must_id: item:Art.20:scope_change_drivers
+control_ref: Art.20
+standard_id: GDPR:2016/679
+must_text: Trigger list (new contract-based activity, new automated processing line)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all new contract-based activities and automated processing lines that involve personal data in
+  a dated register.
+- Identify and record the categories of personal data included in each new activity or processing line.
+- Name the responsible individual for reviewing and updating the portable data scope, avoiding generic
+  roles like "the team" or "IT".
+- Document the date and outcome of each review to confirm the scope remains current with recent changes.
+- Cross-reference each entry in the register with supporting contracts or system descriptions to demonstrate
+  how scope was determined.

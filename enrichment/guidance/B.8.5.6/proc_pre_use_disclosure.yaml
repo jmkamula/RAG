@@ -1,0 +1,19 @@
+must_id: item:B.8.5.6:proc_pre_use_disclosure
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+must_text: Pre-use disclosure — customer informed before subcontractor onboards
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure requiring customer notification before any subcontractor is engaged, including
+  a clear step for pre-use disclosure.
+- Name the person responsible for sending customer notifications, specifying their full name and role
+  in the procedure.
+- Record each customer notification with the date sent, recipient details, and subcontractor name in a
+  disclosure log.
+- Retain copies of all customer notification communications, such as emails or letters, in a dedicated
+  folder for future reference.
+- Specify that notifications must be sent before subcontractor onboarding—do not rely on post-engagement
+  or verbal-only disclosures.

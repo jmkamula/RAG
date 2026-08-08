@@ -1,0 +1,18 @@
+must_id: item:Art.44:onward_transfer
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Onward-transfer handling (Art.44 second sentence — subsequent transfers from third country
+  to another third country also subject to chapter)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure that describes how any data transferred to a third country is only further transferred
+  to another third country under GDPR Chapter V conditions.
+- Name the individual responsible for approving onward transfers, specifying their full name and job title
+  in the procedure.
+- Record each onward transfer decision, including the date, recipient country, legal basis used, and approval
+  evidence.
+- State in the procedure that onward transfers are not permitted based solely on the original transfer
+  agreement without reassessment.

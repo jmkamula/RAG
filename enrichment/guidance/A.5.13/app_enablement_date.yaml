@@ -1,0 +1,17 @@
+must_id: item:A.5.13:app_enablement_date
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Enablement date recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date when the labelling application was enabled on each platform in a dated entry within
+  the application record.
+- Name the individual responsible for enabling the labelling application, listing their full name rather
+  than a team or department.
+- Attach supporting screenshots or system logs that show the enablement date and platform details for
+  each instance.
+- Review the application record to confirm that no enablement dates are missing or listed as "TBD" or
+  "N/A".

@@ -1,0 +1,18 @@
+must_id: item:6.3:rev_register_currency
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Register currency check — every approved change reached implementation OR was withdrawn
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Review the ISMS change register and identify all approved changes listed since the last review date.
+- Record the current status of each approved change as either implemented, withdrawn, or pending, with
+  supporting dates and documentation.
+- Cross-reference each implemented or withdrawn change with evidence such as meeting minutes, completion
+  reports, or withdrawal notices.
+- Name the status reviewer as a specific individual, not a group or department, and record the review
+  date.
+- Flag any approved changes with missing or ambiguous status updates for follow-up, as incomplete status
+  tracking is a common audit finding.

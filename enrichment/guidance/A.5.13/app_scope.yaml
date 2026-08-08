@@ -1,0 +1,16 @@
+must_id: item:A.5.13:app_scope
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Scope per record (which content classes the platform stores)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each platform by name and version in the labelling application record to clearly identify what
+  is being documented.
+- Specify the content classes stored by each platform, using your organisation’s defined categories, in
+  a dedicated column or field.
+- Record the date when the content class mapping was last reviewed or updated for each platform.
+- Name the individual responsible for confirming the accuracy of the content class mapping for each platform.
+- Avoid using generic terms like "various" or "all data" for content classes; describe each class specifically.

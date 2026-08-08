@@ -1,0 +1,17 @@
+must_id: item:A.5.37:proc_retire_path
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Retirement path for obsolete procedures (system decommissioned, procedure superseded) — retired
+  procedures are archived, not deleted
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the retirement process in your maintenance procedure, specifying that obsolete procedures must
+  be archived and not deleted.
+- Record the date and reason for each procedure's retirement in a central register, linking to the archived
+  version.
+- Assign responsibility for archiving retired procedures to a named individual, not a team or department.
+- Retain archived procedures in a secure, access-controlled location with a clear folder structure and
+  retention period.

@@ -1,0 +1,19 @@
+must_id: item:A.7.7:scope_classification_overlay
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Per-location overlay against information-classification handled (Class III docs require locked
+  storage, etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical locations where information is stored or processed, specifying exact addresses and
+  room identifiers.
+- Document the highest classification of information handled at each location, referencing your organisation's
+  information classification scheme.
+- State for each location the specific security controls in place, such as locked cabinets or access restrictions,
+  mapped to the classification requirements.
+- Cross-reference each location's controls with related policies and procedures to demonstrate alignment
+  with information classification handling rules.
+- Name a responsible individual for each location, avoiding generic titles like "the team" or "IT department".

@@ -1,0 +1,19 @@
+must_id: item:B.8.5.7:proc_annex_b_flowdown
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+must_text: 'Annex B flow-down — subcontractor contract requires Annex B controls (default: all)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all Annex B controls in the subcontractor engagement procedure, specifying that each must be included
+  in every subcontractor contract by default.
+- Attach a template subcontractor contract that explicitly references Annex B controls, showing where
+  these requirements are flowed down.
+- Name the person responsible for reviewing subcontractor contracts for Annex B compliance, identifying
+  them by full name and job title.
+- Record the date and outcome of each contract review, keeping a log that shows Annex B flow-down was
+  checked before contract approval.
+- Specify any exceptions to Annex B flow-down in a signed and dated waiver, ensuring generic or blanket
+  exceptions are not used.

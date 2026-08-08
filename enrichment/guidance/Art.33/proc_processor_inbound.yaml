@@ -1,0 +1,20 @@
+must_id: item:Art.33:proc_processor_inbound
+control_ref: Art.33
+standard_id: GDPR:2016/679
+must_text: Processor inbound — handling Art.33.2 notifications from sub-processors / processors WE rely
+  on
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for receiving and managing breach notifications from sub-processors
+  or processors in the procedure document.
+- Document the step-by-step process for logging, assessing, and escalating inbound breach notifications,
+  including required timelines and decision points.
+- Record the contact details of all sub-processors or processors required to notify you of breaches, and
+  update this list whenever changes occur.
+- Attach a sample notification template that sub-processors or processors must use when reporting a breach
+  to ensure consistency and completeness.
+- Specify that notifications must be submitted in writing and dated; avoid accepting verbal-only or undated
+  notifications.

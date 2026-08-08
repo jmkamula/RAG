@@ -1,0 +1,15 @@
+must_id: item:A.7.3.10:rev_date
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Automated Decision Subject Obligations Program in a dated
+  entry, signed by the responsible reviewer.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Document the planned review interval in months or years within the program’s governance records.
+- Cross-reference the actual review date against the planned interval and note any deviations with an
+  explanation in the review log.

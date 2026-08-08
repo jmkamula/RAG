@@ -1,0 +1,19 @@
+must_id: item:B.8.4.3:scope_subprocessor_flows
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Subprocessor flows (data-sharing with subprocessors)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all subprocessors involved in personal data processing, including company names and contact details,
+  in a dated register.
+- Document the specific types of personal data and processing activities each subprocessor handles, referencing
+  relevant contracts or agreements.
+- Record the lawful basis and purpose for each data-sharing arrangement with subprocessors, citing supporting
+  documentation.
+- Name the individual responsible for maintaining and updating the subprocessor register—avoid using generic
+  roles like "IT" or "the team."
+- Retain copies of signed data processing agreements with each subprocessor, including the effective date
+  and scope of data shared.

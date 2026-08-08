@@ -1,0 +1,19 @@
+must_id: item:A.7.6:vacant_rules
+control_ref: A.7.6
+standard_id: ISO27001:2022
+must_text: Vacant-area rules (lock-out, alarm activation, last-person-out checklist)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific steps required when leaving a secure area vacant, including lock-out, alarm activation,
+  and completion of a last-person-out checklist.
+- Assign responsibility for vacant-area checks to a named individual per shift, not a generic role or
+  team.
+- Record the date, time, and name of the person completing the last-person-out checklist in a logbook
+  or digital record.
+- Retain evidence of alarm activation, such as system logs or confirmation receipts, for each instance
+  the area is secured.
+- Review the procedure annually and update it with the revision date and approver’s name to avoid using
+  outdated or undated instructions.

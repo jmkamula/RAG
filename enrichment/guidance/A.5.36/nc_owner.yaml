@@ -1,0 +1,17 @@
+must_id: item:A.5.36:nc_owner
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Named owner per NC (named individual, not generic team) with target closure date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each nonconformity with a unique reference number and a clear description in the Compliance Nonconformity
+  Register.
+- Name a specific individual as the owner for each nonconformity entry, avoiding generic labels like "IT"
+  or "the team".
+- Enter a target closure date for each nonconformity, ensuring the date is realistic and agreed upon by
+  the named owner.
+- Review and update the register regularly to reflect progress, documenting any changes to ownership or
+  closure dates with dates and initials.

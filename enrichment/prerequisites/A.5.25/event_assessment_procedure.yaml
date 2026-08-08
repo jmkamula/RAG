@@ -1,0 +1,41 @@
+leaf_id: req:A.5.25:event_assessment_procedure
+control_ref: A.5.25
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.24
+  standard_id: ISO27001:2022
+  title: Information security incident management planning and preparation
+  category: direct
+  rationale: You need an overarching incident management plan before you can define how to assess and
+    triage security events. The procedure for event assessment must align with the broader incident management
+    framework.
+  good_enough: A documented and approved incident management plan exists, outlining at least the high-level
+    process and roles for handling incidents.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities is essential so you know who is authorized
+    to assess, triage, and escalate security events. Without this, the procedure cannot specify decision
+    authority.
+  good_enough: A current list or matrix of security roles and their responsibilities, including who is
+    responsible for event assessment and escalation.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Event triage often depends on the classification of information assets and data involved.
+    The procedure must reference the organization's classification scheme to determine event criticality.
+  good_enough: A documented classification scheme exists, with enough detail to distinguish between at
+    least low, medium, and high criticality assets or data types.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You need to know what assets could be affected by security events to assess their impact
+    properly. The asset register provides this context for triage decisions.
+  good_enough: An up-to-date inventory of key information assets, with enough detail to identify what
+    is at risk during event assessment.

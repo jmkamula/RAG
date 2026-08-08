@@ -1,0 +1,16 @@
+must_id: item:A.5.36:nc_root_cause
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Root cause noted per NC where determined (drives systemic improvements vs point fixes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the root cause for each nonconformity in the register, using clear language that explains why
+  the issue occurred.
+- Name the person or team who investigated and determined the root cause for each entry, including the
+  date of determination.
+- Reference supporting evidence, such as investigation reports or meeting notes, for each root cause entry
+  in the register.
+- Avoid leaving the root cause field blank or using generic terms like "human error" without further explanation.

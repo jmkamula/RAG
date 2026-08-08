@@ -1,0 +1,40 @@
+leaf_id: req:A.7.3.3:notice_delivery_log
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the specific purposes for which personal data is processed before you can log
+    when and where privacy notices are delivered. The Notice Delivery Log is only meaningful if it is
+    tied to clear, documented purposes.
+  good_enough: A documented list of processing purposes that covers all relevant data flows and user touchpoints
+    is available, even if not yet fully optimized.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Each notice delivery event should reference the lawful basis for processing, ensuring that
+    the notice content aligns with the legal justification. Without this, the log cannot demonstrate compliance.
+  good_enough: A mapping of lawful bases to each processing activity exists, even if some edge cases are
+    still under review.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that someone is accountable for maintaining the Notice
+    Delivery Log and for delivering notices at the right touchpoints.
+  good_enough: A named individual or team is responsible for privacy notice delivery and logging, even
+    if responsibilities are not yet fully embedded in job descriptions.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need to know which systems, applications, and interfaces are in scope for notice delivery
+    to ensure all relevant touchpoints are logged.
+  good_enough: A basic inventory of systems and user-facing interfaces where personal data is collected
+    exists, even if not fully detailed.

@@ -1,0 +1,20 @@
+must_id: item:A.5.37:emergency_flag
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Emergency-use flag per procedure (procedures needed under pressure — DR, incident response
+  — get higher visibility and tighter currency)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a dedicated "Emergency Use" column to your Operating Procedures Register, allowing each procedure
+  to be clearly flagged as emergency-use or not.
+- Mark each procedure in the register with a "Yes" or "No" in the "Emergency Use" column, based on documented
+  business impact analysis or risk assessment.
+- Name the reviewer who approved each emergency-use designation, and record the approval date directly
+  in the register.
+- Avoid leaving the "Emergency Use" column blank or using vague labels like "maybe" or "as needed"—make
+  each entry specific and unambiguous.
+- Cross-reference each emergency-use procedure in the register with its latest review date to show it
+  receives more frequent updates.

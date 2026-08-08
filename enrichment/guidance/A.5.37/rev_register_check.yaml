@@ -1,0 +1,20 @@
+must_id: item:A.5.37:rev_register_check
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Per-procedure outcome (verified / amended / retired / new added) with availability-mechanism-still-works
+  confirmation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each operating procedure reviewed, including its unique title and version, in a dated review log
+  for the current review cycle.
+- Record the outcome for each procedure as verified, amended, retired, or new added, with a brief note
+  explaining any changes or decisions.
+- Confirm and document that each procedure remains accessible to relevant staff through the intended mechanism,
+  such as an intranet link or shared drive location.
+- Name the reviewer(s) as specific individuals, not just a team or department, and include their signatures
+  or electronic approval for each procedure reviewed.
+- Attach supporting evidence for any amendments or retirements, such as updated documents or decommissioning
+  records, to the review log.

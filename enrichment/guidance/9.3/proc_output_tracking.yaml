@@ -1,0 +1,17 @@
+must_id: item:9.3:proc_output_tracking
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Output-tracking process (decisions land in 10.1 improvement / 10.2 NC actions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for tracking management review outputs, listing their full name
+  and job title in the procedure.
+- Document the process for recording each management review decision, including the date, decision details,
+  and assigned action owner.
+- Cross-reference each management review output to either the improvement log (10.1) or nonconformity/corrective
+  action log (10.2), showing where the action is tracked.
+- Retain evidence of completed actions, such as signed-off improvement records or closed nonconformity
+  reports, with clear links to the originating management review.

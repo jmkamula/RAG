@@ -1,0 +1,16 @@
+must_id: item:5.3:rev_next_date
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the ISMS Roles Program in the review document, using a clear
+  and specific calendar date.
+- Record the name of the person responsible for scheduling the next review, ensuring a named individual
+  is listed, not a group or department.
+- Document the date when the current review was completed to provide a reference point for the next scheduled
+  review.
+- Avoid leaving the next review date blank or marked as "TBD"—always enter a concrete, planned date.

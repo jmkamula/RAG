@@ -1,0 +1,15 @@
+must_id: item:A.7.2:reg_event_id
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Per-event unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique, sequential identifier to each physical entry event as it is logged in the register.
+- Record the unique identifier alongside the event details, including date, time, and person entering,
+  in the register.
+- Cross-reference each identifier with any supporting access logs or visitor badges issued for that event.
+- Confirm that no two events share the same identifier by periodically reviewing the register for duplicates.
+- Avoid using generic or reused identifiers such as "N/A" or "000" that could apply to multiple events.

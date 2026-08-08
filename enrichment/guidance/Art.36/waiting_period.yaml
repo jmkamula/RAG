@@ -1,0 +1,19 @@
+must_id: item:Art.36:waiting_period
+control_ref: Art.36
+standard_id: GDPR:2016/679
+must_text: 8-week waiting period (extendable +6 weeks) before processing begins (Art.36.2)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date the prior consultation request was formally submitted to the supervisory authority in
+  a dated log entry.
+- Document the planned processing start date and confirm it is at least 8 weeks after the submission date
+  unless an extension is granted.
+- Retain any written communication from the supervisory authority granting a 6-week extension, including
+  the date and reason for the extension.
+- Name the individual responsible for tracking the consultation timeline and ensure their name—not a team
+  or department—is listed in the procedure record.
+- Archive all correspondence with the supervisory authority regarding the consultation period to demonstrate
+  compliance with the waiting requirement.

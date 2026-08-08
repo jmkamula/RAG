@@ -1,0 +1,16 @@
+must_id: item:Art.39:rev_next_date
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the DPO Tasks Program in a clearly visible section of the review
+  document.
+- Record the date using a day, month, and year format to avoid ambiguity.
+- Name the person responsible for scheduling and conducting the next review, using their full name and
+  job title.
+- Avoid leaving the next review date blank or listing it as "TBD" or "ongoing," as this would be flagged
+  by an auditor.

@@ -1,0 +1,17 @@
+must_id: item:A.7.10:inventory
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Inventory of removable media issued (who holds what)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each removable storage device issued in an inventory log, including unique identifier, device
+  type, and date of issuance.
+- Name the individual holder of each device in the inventory, using their full name rather than a job
+  title or team name.
+- Update the inventory log whenever a device is transferred, returned, or disposed of, noting the date
+  and the person responsible for the change.
+- Review the inventory log quarterly and sign off on its accuracy, with the reviewer's name and date clearly
+  documented.

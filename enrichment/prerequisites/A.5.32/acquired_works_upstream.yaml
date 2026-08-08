@@ -1,0 +1,40 @@
+leaf_id: req:A.5.32:acquired_works_upstream
+control_ref: A.5.32
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know what parts of the organization and which types of information assets are
+    in-scope before defining how new intellectual property rights (IPR) are brought in. This ensures the
+    intake process covers all relevant areas.
+  good_enough: A clear, current scope statement that identifies the business units, functions, and asset
+    types covered by the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The intake process must feed into the asset register, so you need a working inventory structure
+    to know what information is required and how new assets will be recorded.
+  good_enough: A basic asset register template or system exists, with fields for key asset attributes
+    and a process for adding new entries.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: You need an established classification scheme to ensure that new IPR is properly categorized
+    as it enters the organization, supporting appropriate protection and handling.
+  good_enough: A documented set of classification levels and criteria, even if not fully rolled out, so
+    intake can assign initial classifications.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that intake responsibilities—such as who approves, records,
+    and reviews new IPR—are understood and actionable.
+  good_enough: A list or matrix showing who is responsible for asset intake and inventory updates, even
+    if not fully formalized.

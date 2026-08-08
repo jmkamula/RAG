@@ -1,0 +1,47 @@
+leaf_id: req:A.7.3.2:notice_content_procedure
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the purposes for which personal data is processed before you can
+    determine what to include in privacy notices. Notice content is directly shaped by these purposes.
+  good_enough: A current, working list of all key processing purposes, even if not fully formalized, is
+    sufficient to proceed.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Privacy notices must explain the lawful basis for processing personal data. You need at least
+    a draft mapping of lawful bases to processing activities before you can draft notice content.
+  good_enough: A draft mapping of each processing activity to its lawful basis is enough to unblock drafting
+    the notice procedure.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: To determine what information is included in privacy notices, you need to know how data is
+    classified, especially what is considered personal or sensitive data.
+  good_enough: A basic, documented scheme that distinguishes personal data from other data types is sufficient
+    at this stage.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register helps identify where personal data resides, which is essential
+    for accurately describing data sources, recipients, and transfers in privacy notices.
+  good_enough: A preliminary inventory of systems and data stores containing personal data is enough to
+    move forward.
+- ref: Art.13
+  standard_id: GDPR:2016/679
+  title: Information to be Provided Where Personal Data Are Collected from the Data Subject
+  category: cross_role
+  rationale: GDPR Article 13 sets the minimum content requirements for privacy notices. Your procedure
+    must align with these legal obligations.
+  good_enough: A checklist or summary of Article 13 requirements is sufficient to inform the notice content
+    determination procedure.

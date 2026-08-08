@@ -1,0 +1,19 @@
+must_id: item:B.8.5.4:rev_timeframe_audit
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+must_text: Timeframe audit — notifications within agreed timeframes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the agreed notification timeframes for disclosure requests in a dated policy or procedure,
+  referencing the specific section and approval date.
+- Record each disclosure request and the date notification was sent in a central log, ensuring both are
+  clearly visible and traceable.
+- Cross-reference notification timestamps against the agreed timeframe for each request, noting any deviations
+  and corrective actions taken.
+- Name the responsible individual for monitoring and reporting notification timeliness — do not list only
+  a team or department.
+- Retain evidence of periodic reviews of notification timeliness, such as signed meeting minutes or review
+  reports with dates.

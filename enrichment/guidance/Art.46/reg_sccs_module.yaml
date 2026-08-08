@@ -1,0 +1,17 @@
+must_id: item:Art.46:reg_sccs_module
+control_ref: Art.46
+standard_id: GDPR:2016/679
+must_text: 'Per-row SCC module where applicable (1: C2C / 2: C2P / 3: P2P / 4: P2C)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Record the applicable Standard Contractual Clauses (SCC) module number for each data transfer row in
+  the Safeguards Register.
+- Name the specific parties involved in each transfer, clearly identifying their roles as controller or
+  processor.
+- State the date when the SCC module was selected and applied for each transfer entry.
+- Cross-reference each SCC module entry to the signed agreement or contract containing the relevant SCCs.
+- Name the owner as a specific individual responsible for maintaining SCC module accuracy, not as a team
+  or department.

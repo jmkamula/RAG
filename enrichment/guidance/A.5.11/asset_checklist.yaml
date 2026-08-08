@@ -1,0 +1,18 @@
+must_id: item:A.5.11:asset_checklist
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Checklist of asset types to be returned — physical (laptops, mobile devices, badges, tokens)
+  and logical (corp credentials, data on personal devices)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical asset types to be returned, such as laptops, mobile devices, access badges, and security
+  tokens, in a dated checklist.
+- Include logical asset types, such as corporate credentials and company data stored on personal devices,
+  in the same checklist.
+- Name the person responsible for maintaining and updating the checklist as a specific individual, not
+  a department or team.
+- Review and update the checklist at least annually, recording the review date and reviewer’s name each
+  time.

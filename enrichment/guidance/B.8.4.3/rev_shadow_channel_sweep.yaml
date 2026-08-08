@@ -1,0 +1,19 @@
+must_id: item:B.8.4.3:rev_shadow_channel_sweep
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Shadow-channel sweep — unauthorised channels flagged
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all approved data transmission channels used by processors in a dated register, listing the
+  responsible individual for each channel.
+- Review recent transmission logs and network activity reports to identify any data flows not listed in
+  the approved channels register.
+- Flag and record any detected use of unauthorised or shadow channels in a dated incident log, including
+  details of the channel and data involved.
+- Name the reviewer as a specific individual in the review record—avoid attributing responsibility to
+  a team or department.
+- Sign and date the completed review report, confirming all unauthorised channels have been flagged and
+  escalated according to procedure.

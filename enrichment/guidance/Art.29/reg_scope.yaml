@@ -1,0 +1,18 @@
+must_id: item:Art.29:reg_scope
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Per-row scope of processing the person is authorised to perform
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific data processing activities each person is authorised to perform in a dedicated column
+  for every entry in the register.
+- Name the scope of authorisation in clear, plain language that matches your internal data processing
+  categories.
+- State the date when each authorisation was granted or last reviewed, and include the name of the person
+  who approved it.
+- Name the owner of each authorisation entry as a specific individual, not as a team or department.
+- Cross-reference each authorisation with the relevant documented instructions or policy that defines
+  the permitted processing activities.

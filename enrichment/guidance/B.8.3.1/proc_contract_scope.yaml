@@ -1,0 +1,17 @@
+must_id: item:B.8.3.1:proc_contract_scope
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+must_text: Contract-scope reference — support scope specified in the B.8.2.1 customer agreement
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the specific section in the customer agreement where subject-rights support scope is
+  defined, citing the clause number and title.
+- Document the types of subject-rights requests covered under the agreement, listing them explicitly in
+  the procedure.
+- Name the individual responsible for maintaining alignment between the procedure and the contract, avoiding
+  generic titles like "the team."
+- Record the date when the procedure was last reviewed against the current customer agreement to confirm
+  ongoing accuracy.

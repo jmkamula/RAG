@@ -1,0 +1,17 @@
+must_id: item:7.5:accessibility
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Accessibility provisions for personnel needing documents
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy how personnel can request accessible versions of documents, such as large print
+  or screen-reader compatible files, with a dated section.
+- Name a specific individual or role responsible for handling accessibility requests, avoiding generic
+  terms like "the team" or "IT department."
+- Document at least one completed accessibility request, including the request date, requester, and the
+  provided document format.
+- Cross-reference the accessibility process in the policy to related procedures, such as HR onboarding
+  or IT support, with clear document titles and version dates.

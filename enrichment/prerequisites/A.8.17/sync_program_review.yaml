@@ -1,0 +1,37 @@
+leaf_id: req:A.8.17:sync_program_review
+control_ref: A.8.17
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which systems, assets, and processes are covered by the ISMS,
+    ensuring the clock sync program review addresses all relevant environments.
+  good_enough: A current, approved scope statement that clearly lists in-scope systems and boundaries
+    for ISMS coverage.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need an up-to-date asset register to identify which devices and systems require clock
+    synchronization and to verify completeness during the review.
+  good_enough: An asset register that includes all relevant IT and OT assets, with enough detail to identify
+    those needing clock sync.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures someone is accountable for maintaining and reviewing the
+    clock sync program, avoiding gaps in responsibility.
+  good_enough: Documented roles showing who is responsible for clock sync operations and periodic reviews.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding risks related to time drift and clock sync failures helps prioritize which
+    systems and classes require stricter controls and review.
+  good_enough: A recent risk assessment that considers time synchronization risks for in-scope assets.

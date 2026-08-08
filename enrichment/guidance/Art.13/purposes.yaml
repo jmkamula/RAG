@@ -1,0 +1,17 @@
+must_id: item:Art.13:purposes
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Purposes and legal basis for processing
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific purposes for which you collect and use personal data in your published privacy notice,
+  using clear and plain language.
+- Identify and document the legal basis for each processing purpose, referencing the relevant GDPR article
+  in the privacy notice.
+- Name the version and publication date of the privacy notice to show when the stated purposes and legal
+  bases were last reviewed.
+- Avoid using vague or generic purposes such as "for business needs"—describe each purpose in detail relevant
+  to your organisation’s activities.

@@ -1,0 +1,15 @@
+must_id: item:A.5.26:cls_root_cause
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Root cause captured (technical + organisational contributors)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the root cause for each incident in the closure record, clearly separating technical factors
+  from organisational contributors.
+- Name the person responsible for the root cause analysis as a specific individual, not a team or department.
+- Attach supporting evidence, such as investigation notes or meeting minutes, that detail how both technical
+  and organisational causes were identified.
+- Date the closure record to show when the root cause was formally documented and reviewed.

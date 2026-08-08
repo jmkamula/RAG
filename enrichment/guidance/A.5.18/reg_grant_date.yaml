@@ -1,0 +1,16 @@
+must_id: item:A.5.18:reg_grant_date
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Grant date captured per row (proves the grant happened in the right order — authorisation →
+  grant, not reverse)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date access was granted for each user or account entry in the Access Rights Register.
+- Cross-reference each grant date with the corresponding authorisation record to confirm access was not
+  given before approval.
+- Name the person who granted access for each entry, using a specific individual rather than a generic
+  title or team.
+- Retain the original authorisation document or ticket linked to each grant date for future verification.

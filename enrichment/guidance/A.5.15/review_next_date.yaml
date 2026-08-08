@@ -1,0 +1,17 @@
+must_id: item:A.5.15:review_next_date
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date clearly in the Access Control Policy document, using a specific day,
+  month, and year.
+- Record the decision on the review date in meeting minutes or an approval log, including the names of
+  those who agreed to it.
+- Name the policy owner as a specific individual responsible for tracking and initiating the next review,
+  not a team or department.
+- Cross-reference the stated review date in the policy with your policy review schedule or calendar entry
+  to confirm alignment.

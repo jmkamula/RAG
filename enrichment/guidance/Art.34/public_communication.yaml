@@ -1,0 +1,18 @@
+must_id: item:Art.34:public_communication
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: Public communication route — when individual communication is disproportionate, public communication
+  equally effective (Art.34.3.c)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the criteria used to decide when individual communication is disproportionate, including examples
+  and justification, in a dated procedure.
+- Name the person responsible for approving the use of a public communication route, ensuring a specific
+  individual is listed rather than a group or department.
+- Record the method chosen for public communication and explain how it will reach affected individuals
+  as effectively as direct contact.
+- Retain evidence of the actual public communication issued, including date, content, and where it was
+  published.

@@ -1,0 +1,40 @@
+leaf_id: req:B.8.3.1:applicable_scope
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need a clear ISMS scope to know which parts of your organisation and which activities
+    are covered by your privacy management system. This ensures the privacy extension’s scope is aligned
+    and not missing any relevant operations.
+  good_enough: A documented ISMS scope that identifies the organisational boundaries and activities included
+    in the ISMS, even if not fully detailed for privacy yet.
+- ref: B.8.2.1
+  standard_id: ISO27701:2019
+  title: Identify PII Processing Activities
+  category: direct
+  rationale: You must first identify which customer engagements actually involve processing PII on their
+    behalf. Without this, you cannot determine which engagements require subject-rights support.
+  good_enough: A list or register of customer engagements where PII is processed, even if some details
+    are still being clarified.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: Knowing which information assets are involved in customer engagements helps ensure all relevant
+    PII processing activities are included in scope.
+  good_enough: An initial asset register that covers systems and data stores used in customer-facing services,
+    even if not yet fully mapped to every engagement.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: You need to know the purpose for which PII is processed in each engagement to determine if
+    subject-rights support is required.
+  good_enough: Documented purposes for PII processing for each customer engagement, even if some are high-level
+    or pending further detail.

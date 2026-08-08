@@ -1,0 +1,18 @@
+must_id: item:Art.37:reg_qualifications_evidence
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: Per-row qualifications evidence (CV / certifications / professional experience)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the designated Data Protection Officer as a specific individual, not a team or department, in the
+  DPO Designation Record.
+- Attach a current CV for the DPO that details relevant education, professional experience, and data protection
+  expertise.
+- Include copies of any data protection certifications held by the DPO, such as CIPP/E or equivalent,
+  with issue and expiry dates.
+- Record a summary of the DPO’s prior professional roles that demonstrate practical experience in privacy,
+  compliance, or information security.
+- Date and sign the DPO Designation Record to confirm when the qualifications were last reviewed and approved.

@@ -1,0 +1,48 @@
+leaf_id: req:A.7.3.8:copy_provision_procedure
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the purposes for which PII is processed before you can provide
+    a meaningful copy to a data subject. This ensures the copy is relevant, complete, and contextually
+    accurate.
+  good_enough: A documented list of processing purposes for each PII category, even if not yet fully mapped
+    to every data flow, is sufficient to begin drafting the copy provision procedure.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity is essential to determine if
+    and how a copy of PII can be provided, and to justify any limitations or refusals.
+  good_enough: A basic mapping of lawful bases to each processing activity, even if some are provisional,
+    is enough to proceed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need to know where PII resides (systems, databases, files) to collect and provide a complete
+    copy. An asset register is the foundation for locating all relevant PII.
+  good_enough: A working inventory of key systems and repositories containing PII, even if not exhaustive,
+    is sufficient to unblock drafting.
+- ref: Art.15.3
+  standard_id: GDPR:2016/679
+  title: Right to Obtain a Copy of Personal Data
+  category: cross_role
+  rationale: This GDPR article sets the legal expectation for what must be provided to data subjects.
+    Your procedure must align with these requirements to be compliant.
+  good_enough: A summary of Art.15.3 requirements and any known local interpretations is enough to inform
+    the procedure draft.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A classification scheme helps identify which data qualifies as PII and must be included in
+    the copy. Without this, you risk omitting or over-disclosing information.
+  good_enough: A draft or working version of the classification scheme that distinguishes PII from other
+    data types is sufficient for initial procedure development.

@@ -1,0 +1,17 @@
+must_id: item:A.8.8:reg_sla_breaches
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: SLA-breach flag per row + escalation evidence where breached
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add an SLA-breach flag column to the Vulnerability Backlog Register and mark each row where the agreed
+  remediation deadline was missed.
+- Record the date and name of the person who escalated each SLA breach, linking to supporting communication
+  such as an email or ticket.
+- Attach evidence of escalation actions taken for each breach, such as meeting minutes, incident tickets,
+  or management responses.
+- Name the escalation owner as a specific individual for each breached item, avoiding generic labels like
+  "the team" or "IT".

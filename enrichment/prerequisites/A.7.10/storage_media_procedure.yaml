@@ -1,0 +1,47 @@
+leaf_id: req:A.7.10:storage_media_procedure
+control_ref: A.7.10
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organization and which types of storage media are in-scope
+    for your ISMS before you can define lifecycle procedures. This ensures the procedure covers all relevant
+    assets and avoids gaps.
+  good_enough: A documented scope statement that clearly lists included business units, locations, and
+    types of storage media.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: A current asset register is needed to identify what storage media exist, where they are,
+    and who is responsible for them. Without this, you cannot manage media through their lifecycle.
+  good_enough: An up-to-date list of storage media assets, with basic details (type, location, owner)
+    sufficient to reference in the procedure.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The procedure must reflect how different classes of media are handled based on their information
+    classification. Without a scheme, you cannot set appropriate controls for acquisition, use, or disposal.
+  good_enough: A documented classification scheme that defines at least the main sensitivity levels relevant
+    to storage media.
+- ref: A.5.13
+  standard_id: ISO27001:2022
+  title: Labelling of information
+  category: direct
+  rationale: Media handling rules depend on correct labelling—unlabelled media cannot be handled according
+    to its sensitivity. The procedure must assume labelling is in place.
+  good_enough: A basic labelling process is defined and in use for storage media, even if not yet fully
+    rolled out.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The procedure must align with the organization’s top-level security policy, which sets expectations
+    for asset protection and lifecycle management.
+  good_enough: A published security policy that references asset or media protection, even if brief.

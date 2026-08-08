@@ -1,0 +1,56 @@
+leaf_id: req:A.5.24:incident_response_procedure
+control_ref: A.5.24
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organization, assets, and processes are in-scope for
+    incident response planning. This ensures the framework covers all relevant areas and doesn't miss
+    critical assets or teams.
+  good_enough: A documented scope statement that clearly defines the organizational and technical boundaries
+    for the ISMS, including any exclusions.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and Responsibilities
+  category: foundational
+  rationale: Incident response relies on clearly assigned roles and authorities. Without this, you can't
+    define who leads, who approves, or who communicates during an incident.
+  good_enough: A current list or matrix showing named individuals or roles responsible for incident response
+    activities, with clear escalation paths.
+- ref: A.5.5
+  standard_id: ISO27001:2022
+  title: Contact with Authorities
+  category: direct
+  rationale: Your incident response plan must include up-to-date contact details for relevant authorities,
+    as reporting obligations may be triggered during incidents.
+  good_enough: A maintained register or list of authority contacts relevant to your business and jurisdiction,
+    accessible to the incident response team.
+- ref: A.5.6
+  standard_id: ISO27001:2022
+  title: Contact with Special Interest Groups
+  category: direct
+  rationale: External contacts (e.g., industry groups, CERTs) can provide threat intelligence and support
+    during incidents. The framework needs these contacts to be ready.
+  good_enough: A current list of relevant special interest group contacts, such as sectoral CERTs or industry
+    peers, available to the IR team.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme for Information
+  category: foundational
+  rationale: Incident severity and escalation depend on the classification of affected information. The
+    framework must reference your organization's classification scheme.
+  good_enough: A documented classification scheme that is in use and referenced by other security procedures,
+    even if not fully rolled out to all assets yet.
+- ref: A.5.7
+  standard_id: ISO27001:2022
+  title: Threat Intelligence
+  category: direct
+  rationale: Effective incident detection and response depend on timely threat intelligence. Your framework
+    must integrate these sources into detection and escalation processes.
+  good_enough: At least one active threat intelligence feed or source relevant to your environment, with
+    a process for reviewing and acting on alerts.

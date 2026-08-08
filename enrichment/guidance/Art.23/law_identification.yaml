@@ -1,0 +1,16 @@
+must_id: item:Art.23:law_identification
+control_ref: Art.23
+standard_id: GDPR:2016/679
+must_text: Member State law identification per applicable jurisdiction
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each Member State where your organisation processes personal data and list them in the procedure
+  with the relevant jurisdiction name.
+- Document the specific national laws or statutory restrictions that apply in each listed Member State,
+  citing the legal reference or statute number.
+- Name the individual responsible for maintaining the list of Member State laws, ensuring this is a specific
+  person and not a generic role or team.
+- Record the date the procedure was last reviewed and updated to reflect any changes in Member State legislation.

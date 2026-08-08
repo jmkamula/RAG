@@ -1,0 +1,15 @@
+must_id: item:Art.30:recipients
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Categories of recipients per activity (including processors and third parties)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all categories of recipients for each processing activity in your Records of Processing Activities,
+  specifying both internal and external parties.
+- Name each processor and third party recipient category clearly, avoiding vague terms like "partners"
+  or "vendors."
+- Document the date each recipient category was last reviewed or updated in the RoPA.
+- Assign a specific individual responsible for maintaining and updating recipient information in the RoPA.

@@ -1,0 +1,19 @@
+must_id: item:A.5.30:reg_supplier_dep
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Supplier dependency flag per row where recovery depends on supplier action (cross-link to A.5.21
+  / A.5.22)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to your ICT Service Continuity Register to flag each service where recovery depends on
+  supplier action.
+- Cross-reference each flagged entry to the relevant supplier in your Supplier Register, including a link
+  to the contract or agreement.
+- Record the date and name of the person who last reviewed and updated the supplier dependency flags.
+- Name the supplier dependency owner as a specific individual, not a team or department, for each flagged
+  service.
+- Document any changes to supplier dependencies with a brief description and the date of the change in
+  the register.

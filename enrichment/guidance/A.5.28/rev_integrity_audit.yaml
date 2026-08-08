@@ -1,0 +1,19 @@
+must_id: item:A.5.28:rev_integrity_audit
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Integrity-verification audit (sample of register rows re-hashed; mismatches investigated)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the integrity-verification audit and record their name and role in
+  the evidence-handling program documentation.
+- Select a documented sample of register entries, noting the specific rows and the date of selection in
+  an audit log.
+- Re-hash the sampled register entries and record the resulting hash values alongside the original hashes,
+  including the date of verification.
+- Investigate and document any mismatches between original and current hashes, including the cause, actions
+  taken, and resolution date.
+- State the audit completion date and have the responsible individual sign off on the results; avoid unsigned
+  or undated audit records.

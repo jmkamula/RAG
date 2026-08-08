@@ -1,0 +1,16 @@
+must_id: item:A.5.22:rev_findings
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Findings recorded per review with severity
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each supplier review finding in a dated entry, clearly linking it to the specific supplier and
+  review event.
+- Assign a severity rating to every finding using your organisation’s defined scale, and include this
+  rating in the recorded entry.
+- Name the reviewer responsible for each finding as a specific individual, not a team or department.
+- Document any actions or recommendations resulting from each finding, referencing the related severity
+  where applicable.

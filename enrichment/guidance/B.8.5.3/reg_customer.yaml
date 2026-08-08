@@ -1,0 +1,15 @@
+must_id: item:B.8.5.3:reg_customer
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+must_text: Customer whose PII was disclosed per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full legal name of the customer whose personal data was disclosed in each row of the event
+  log.
+- Confirm that each entry lists only one customer per row to avoid ambiguity about whose data was involved.
+- Cross-reference each customer name with your customer master record to ensure accuracy and traceability.
+- Avoid using generic labels like "client" or "user"—always specify the exact customer name for each disclosure
+  event.

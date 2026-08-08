@@ -1,0 +1,18 @@
+must_id: item:A.5.18:rev_authoriser
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Authoriser of the revocation (named individual; for terminations the dual-signoff pattern of
+  IT + HR/manager applies)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the individual who authorised each access revocation in the access revocation
+  log, alongside the date of authorisation.
+- Capture both IT and HR or the relevant manager’s names and signatures for access revocations related
+  to employment termination, confirming dual approval.
+- Attach supporting documentation, such as termination notices or revocation requests, to each record
+  to show the context and basis for the action.
+- Avoid listing authorisers as generic roles or teams; always specify identifiable individuals for each
+  approval.

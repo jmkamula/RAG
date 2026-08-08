@@ -1,0 +1,18 @@
+must_id: item:4.1:rev_scope_check
+control_ref: '4.1'
+standard_id: ISO27001:2022
+must_text: Cross-check against the applicable-domains scope — any new domain that should be covered
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the current context program review against your documented scope statement, highlighting
+  all domains currently in scope.
+- Identify and list any new business activities, technologies, or regulatory requirements that have emerged
+  since the last review.
+- Compare the updated list of domains with the existing scope, noting any gaps or newly relevant domains.
+- Record the date, findings, and the name of the individual responsible for confirming that all applicable
+  domains are covered.
+- Name the reviewer as a specific individual — do not use a group name or department as the responsible
+  party.

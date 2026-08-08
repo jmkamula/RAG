@@ -1,0 +1,16 @@
+must_id: item:A.8.15:time_sync_link
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Time-sync dependency (cross-link to A.8.17 — logs only correlate when clocks aligned)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the logging procedure to the time synchronization procedure, explicitly naming the dependency
+  between accurate logs and aligned system clocks.
+- State in the logging procedure that all log sources must use a centrally managed time source, referencing
+  the system or service by name.
+- Document the process for regularly verifying clock alignment across all log-generating systems, including
+  the frequency and responsible individual.
+- Name the owner of the logging procedure as a specific person, not a generic role or team.

@@ -1,0 +1,20 @@
+must_id: item:A.5.36:pgm_catalogue_check
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Catalogue currency check — did new policies / rules / standards land without entering the schedule?
+  are retired items still scheduled?
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current information security policies, rules, and standards in a dated catalogue, including
+  their publication or revision dates.
+- Cross-reference the catalogue against the periodic review schedule to confirm all new and updated items
+  have assigned review dates.
+- Remove any retired or superseded policies, rules, or standards from the review schedule and document
+  the removal date and reason.
+- Name the catalogue owner as a specific individual, not a group or department, to avoid ambiguity in
+  responsibility.
+- Record the date and outcome of each catalogue currency check, including any discrepancies found and
+  actions taken.

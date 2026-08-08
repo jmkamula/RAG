@@ -1,0 +1,17 @@
+must_id: item:A.5.5:proc_maintainer
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Named maintainer of the register (compliance lead, security manager, or designate)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the maintainer of the Authority Contact Register, such as the compliance
+  lead or security manager, in the procedure document.
+- Record the maintainer’s full name, job title, and contact details in the procedure, avoiding generic
+  roles like "the team" or "IT department."
+- State the effective date of the maintainer assignment within the procedure to provide a clear point
+  of reference.
+- Retain a signed approval from senior management confirming the designated maintainer in the procedure
+  documentation.

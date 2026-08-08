@@ -1,0 +1,17 @@
+must_id: item:Art.32:reg_activity_id
+control_ref: Art.32
+standard_id: GDPR:2016/679
+must_text: Per-row processing activity (Art.30 RoPA cross-reference)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each processing activity in your Risk-Appropriate Measures Register to its corresponding
+  entry in your Article 30 Record of Processing Activities.
+- Record the unique identifier or title from the Article 30 register for every row in the Risk-Appropriate
+  Measures Register.
+- Name the processing activity using the same terminology as in the Article 30 register to avoid ambiguity
+  or mismatched references.
+- Confirm that no row in the Risk-Appropriate Measures Register is left without a clear cross-reference
+  to an Article 30 entry.

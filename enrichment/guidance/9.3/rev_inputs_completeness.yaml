@@ -1,0 +1,19 @@
+must_id: item:9.3:rev_inputs_completeness
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Inputs-completeness check — every 9.3.2 a-g input was present in each review's minutes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each required input from ISO 27001:2022 clause 9.3.2 a-g in a checklist attached to every management
+  review agenda.
+- Record in the meeting minutes where each input was discussed, referencing the relevant agenda item or
+  discussion point.
+- Confirm that all seven inputs are addressed in the minutes for each review, marking any missing input
+  as "not discussed" with an explanation.
+- Name a specific individual responsible for verifying input completeness — do not assign this to a group
+  or department.
+- Retain the signed checklist and annotated minutes together for each management review as evidence of
+  completeness.

@@ -1,0 +1,20 @@
+must_id: item:Art.7:scope_special_overlay
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Special-category overlay rule — Art.9.2.a explicit consent has stricter capture requirements
+  than Art.6.1.a
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all activities where special-category data is processed and identify which rely on explicit consent
+  under Article 9.2.a.
+- Document the method used to obtain explicit consent for each special-category activity, including how
+  consent is distinguished from general consent.
+- Name the owner responsible for maintaining the consent records for each special-category activity as
+  a specific individual, not a team or department.
+- Retain dated records of explicit consent statements, showing the wording presented and the date consent
+  was given for each activity.
+- Cross-reference each special-category activity to its corresponding explicit consent record in your
+  consent register or management system.

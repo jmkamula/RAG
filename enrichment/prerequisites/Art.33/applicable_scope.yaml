@@ -1,0 +1,33 @@
+leaf_id: req:Art.33:applicable_scope
+control_ref: Art.33
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of all personal data processing activities to determine
+    which processing operations could be affected by a breach and whether Art.33 applies. Without this,
+    you can't reliably identify the scope of notifiable incidents.
+  good_enough: A current, reasonably complete RoPA that lists processing purposes, categories of data,
+    and data flows is available—even if not perfect in every detail.
+- ref: Art.34
+  standard_id: GDPR:2016/679
+  title: Communication of a Personal Data Breach to the Data Subject
+  category: direct
+  rationale: You must distinguish between breaches that require notification to the supervisory authority
+    (Art.33) and those that also require notification to data subjects (Art.34). Understanding this boundary
+    is critical for defining the applicable scope.
+  good_enough: A basic decision logic or criteria exists to separate Art.33-only from Art.34-triggering
+    incidents, even if detailed procedures are still in progress.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which information assets and processes are covered by security controls,
+    which directly impacts which events could constitute a personal data breach under GDPR.
+  good_enough: A documented ISMS scope exists that covers personal data processing activities, even if
+    it is not yet fully optimized for GDPR alignment.

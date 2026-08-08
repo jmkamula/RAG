@@ -1,0 +1,15 @@
+must_id: item:A.5.19:reg_inventory
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: 'Each supplier captured: identity, products/services, criticality'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each supplier’s full legal name and primary business address in the supplier register.
+- List the specific products or services each supplier provides, using clear descriptions rather than
+  generic categories.
+- Assign a criticality rating to each supplier, with a named individual responsible for the assessment
+  and the date it was completed.
+- Name the owner of each supplier entry as a specific person, not a team or department.

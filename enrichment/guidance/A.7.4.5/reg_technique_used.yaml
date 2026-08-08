@@ -1,0 +1,19 @@
+must_id: item:A.7.4.5:reg_technique_used
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: De-identification technique used per row (link to A.7.4.4 register)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the de-identification technique used for each processing activity in the End-of-Processing Action
+  Register, referencing the specific method applied.
+- Cross-reference each entry in the End-of-Processing Action Register to the corresponding row in the
+  A.7.4.4 register for traceability.
+- Name the person responsible for selecting and applying the de-identification technique for each processing
+  activity.
+- Specify the date when the de-identification technique was applied and documented for each processing
+  activity.
+- Avoid using generic terms like "anonymized" or "de-identified" without describing the specific technique
+  used for each entry.

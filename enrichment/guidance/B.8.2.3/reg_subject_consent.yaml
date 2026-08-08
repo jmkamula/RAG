@@ -1,0 +1,20 @@
+must_id: item:B.8.2.3:reg_subject_consent
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: Subject-level consent evidence path per row (customer-obtained + provided to processor OR processor-obtained
+  direct)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name and contact details of the individual whose data is listed for marketing use in
+  each register row.
+- Document the date and method by which consent was obtained for each individual, attaching a copy or
+  reference to the original consent record.
+- Specify whether consent was obtained by your organisation directly or provided by the customer, and
+  include supporting evidence for each case.
+- Name the person responsible for verifying each consent entry as a specific individual, not as a team
+  or department.
+- Cross-reference each register entry to the relevant contract clause or consent form to provide a clear
+  evidence trail.

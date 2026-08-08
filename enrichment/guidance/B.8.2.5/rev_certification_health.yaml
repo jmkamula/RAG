@@ -1,0 +1,18 @@
+must_id: item:B.8.2.5:rev_certification_health
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: Certification health — currency + scope of shared certifications reviewed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for reviewing the certification status of customer support program providers
+  in a dated record.
+- Document the current certification details for each provider, including certification name, issuing
+  body, and expiration date, in a review log.
+- Cross-reference each certification to the specific services or systems covered, ensuring the scope matches
+  your organisation’s use.
+- Record the date of the last certification review and schedule the next review date in a calendar entry.
+- State the outcome of the review, including any expired or out-of-scope certifications, and document
+  actions taken to address gaps.

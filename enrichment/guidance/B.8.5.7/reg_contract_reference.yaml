@@ -1,0 +1,17 @@
+must_id: item:B.8.5.7:reg_contract_reference
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+must_text: Executed contract reference per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the unique contract reference number for each subcontractor engagement directly in the corresponding
+  row of the register.
+- Attach a copy or digital link to the fully executed contract for each subcontractor listed, ensuring
+  the document is signed and dated.
+- Name the contract owner as a specific individual responsible for managing the subcontractor relationship,
+  not a generic role or team.
+- Cross-reference the contract reference in the register with the actual contract document to confirm
+  consistency and accuracy.

@@ -1,0 +1,20 @@
+must_id: item:A.5.8:rev_methodology
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Methodology check (does the gate model still fit the org's delivery mix — waterfall vs agile
+  vs hybrid)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the current project delivery methods in use, listing each as waterfall, agile, or hybrid, with
+  supporting examples and dates.
+- Name a specific individual responsible for reviewing whether the existing gate model aligns with these
+  delivery methods.
+- Record the date, participants, and outcome of the most recent methodology fit assessment in a signed
+  meeting summary.
+- Attach evidence of any updates made to the gate model, such as revised process diagrams or approval
+  emails, following the review.
+- Avoid using generic statements like "model fits all projects" without documented analysis or examples,
+  as auditors will flag unsupported claims.

@@ -1,0 +1,18 @@
+must_id: item:B.8.5.4:reg_customer_affected
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+must_text: Customer(s) whose PII was targeted per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full legal name of each customer whose personal data was requested in every row of the disclosure
+  request register.
+- Document the date the disclosure request was received for each customer entry to provide a clear timeline.
+- Name the specific individual responsible for entering each customer’s details, avoiding generic roles
+  like "team" or "admin".
+- Cross-reference each customer entry with supporting documentation, such as the official disclosure request
+  or correspondence.
+- Review the register regularly to confirm no customer is listed as "unknown" or left blank in the targeted
+  PII field.

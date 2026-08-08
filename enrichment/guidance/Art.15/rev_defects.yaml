@@ -1,0 +1,16 @@
+must_id: item:Art.15:rev_defects
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Defects identified (late responses, refusals, supervisory-authority complaints) referenced
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record all defects related to Data Subject Access Requests, including late responses, refusals, and
+  complaints, in a dated defect log.
+- Cross-reference each defect entry with the corresponding DSAR case file and any related supervisory
+  authority communications.
+- Document the resolution status and actions taken for each defect, including the responsible individual
+  and completion date.
+- Name the owner of the defect log as a specific individual — not a team or department.

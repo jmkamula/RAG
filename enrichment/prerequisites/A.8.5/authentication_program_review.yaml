@@ -1,0 +1,47 @@
+leaf_id: req:A.8.5:authentication_program_review
+control_ref: A.8.5
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, applications, and data are in-scope for your ISMS before
+    you can review authentication controls. This ensures the review covers all relevant assets and avoids
+    missing critical systems.
+  good_enough: A current, approved scope statement that clearly lists included systems and boundaries
+    is available.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Authentication requirements must be aligned with the current threat landscape and risk profile.
+    Without an up-to-date risk assessment, you can't judge if your authentication baseline is still appropriate.
+  good_enough: A recent risk assessment exists that identifies authentication-related risks for in-scope
+    assets.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You need an inventory of assets to know where authentication controls should be applied and
+    reviewed. Missing assets mean incomplete review coverage.
+  good_enough: An asset register exists that lists all systems and applications requiring authentication,
+    even if not fully detailed.
+- ref: A.8.4
+  standard_id: ISO27001:2022
+  title: Use of Privileged Utility Programs
+  category: direct
+  rationale: Privileged utility programs often require special authentication controls. Their identification
+    and management must be understood before reviewing the overall authentication program.
+  good_enough: A list of privileged utility programs is available, with basic controls documented.
+- ref: A.8.2
+  standard_id: ISO27001:2022
+  title: Privileged Access Rights
+  category: direct
+  rationale: Understanding how privileged access is granted and managed is essential for reviewing authentication,
+    as these accounts are high-risk and often targeted.
+  good_enough: A summary of how privileged access is assigned and reviewed is documented, even if not
+    fully mature.

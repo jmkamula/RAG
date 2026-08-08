@@ -1,0 +1,19 @@
+must_id: item:A.7.4.6:proc_temp_file_taxonomy
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+must_text: Temp file taxonomy (application temp / file-system journal / database roll-back / cache / in-memory
+  dump)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each type of temporary file used in your environment, such as application temp, file-system journal,
+  database roll-back, cache, and in-memory dump.
+- Document where each temporary file type is stored and which systems or applications generate them, in
+  a dated inventory or data flow diagram.
+- Assign a specific individual as the owner responsible for maintaining and updating the temporary file
+  taxonomy, not a team or department.
+- Record the review date and reviewer’s name on the taxonomy document to show regular assessment and updates.
+- State the criteria for classifying files as temporary, including examples, to avoid generic or unclear
+  definitions that could cause audit findings.

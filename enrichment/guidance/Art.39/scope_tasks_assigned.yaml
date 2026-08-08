@@ -1,0 +1,18 @@
+must_id: item:Art.39:scope_tasks_assigned
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Tasks formally assigned to DPO (mapping to Art.39.1 a-e)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each GDPR Article 39.1 task and map it to a specific, named individual or role in a dated assignment
+  document.
+- Document the formal assignment of these tasks to the Data Protection Officer in a signed letter or official
+  appointment record.
+- Reference the exact GDPR Article 39.1 subsection (a-e) next to each assigned task in the assignment
+  document.
+- Attach evidence of DPO acceptance, such as a signed acknowledgment, confirming understanding and acceptance
+  of the assigned tasks.
+- Name the DPO as a specific individual, not as a team or department, to avoid ambiguity in accountability.

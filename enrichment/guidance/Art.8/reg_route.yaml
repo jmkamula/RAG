@@ -1,0 +1,17 @@
+must_id: item:Art.8:reg_route
+control_ref: Art.8
+standard_id: GDPR:2016/679
+must_text: Per-row consent route (child if age threshold met / parental if below threshold)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of consent and the age of the individual at the time of consent in each row of the Child
+  Consent Register.
+- State in each row whether the consent was obtained directly from the child or from a parent or guardian,
+  based on the recorded age.
+- Name the parent or guardian who provided consent for children below the age threshold, including their
+  contact details.
+- Avoid leaving the consent route field blank or using generic terms like "user" or "family"—specify "child"
+  or "parent/guardian" for each entry.

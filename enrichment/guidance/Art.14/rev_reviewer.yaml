@@ -1,0 +1,15 @@
+must_id: item:Art.14:rev_reviewer
+control_ref: Art.14
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO + procurement / data-acquisition lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and job title, not just as "the team" or a department.
+- Record the date the Art.14 Privacy Notice Program Review was completed in a review log or on the review
+  document itself.
+- Document the involvement of both the Data Protection Officer and the procurement or data-acquisition
+  lead by listing their names and signatures on the review record.
+- Retain the signed review document in a central repository where it can be retrieved for audit purposes.

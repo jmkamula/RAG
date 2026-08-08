@@ -1,0 +1,16 @@
+must_id: item:A.5.10:comm_onboarding
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Distribution at onboarding for new personnel evidenced (induction pack, mandatory module)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Include the Acceptable Use Policy in the official induction pack given to all new personnel, and save
+  a copy of the pack version used.
+- Record the date and names of new joiners who receive the policy during onboarding in a central register.
+- Require each new joiner to sign or electronically acknowledge receipt of the Acceptable Use Policy,
+  and retain the signed or acknowledged record.
+- Name the person responsible for onboarding as a specific individual, not as a team or department, in
+  the distribution record.

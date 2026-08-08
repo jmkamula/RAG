@@ -1,0 +1,16 @@
+must_id: item:Art.42:reg_scope
+control_ref: Art.42
+standard_id: GDPR:2016/679
+must_text: Per-row processing scope covered
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific data processing activities covered by each certification entry in a dedicated column
+  of the Certification Register.
+- Name the business process or system involved for each row, avoiding vague terms like "various" or "general
+  processing."
+- Record the date when the processing scope was last reviewed or updated for each certification entry.
+- Cross-reference each processing scope to the relevant data inventory or record of processing activities
+  for verification.

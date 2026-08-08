@@ -1,0 +1,16 @@
+must_id: item:9.1:rec_trend
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Per-row trend annotation (rising / stable / falling)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Record the measurement value for each ISMS metric in a dated row within the measurement record.
+- 'Annotate each row with a clear trend indicator: "rising", "stable", or "falling" based on comparison
+  with previous periods.'
+- Name the person responsible for assigning the trend annotation for each metric, using their full name.
+- Avoid leaving any trend annotation field blank or using unclear terms like "ok" or "n/a" in the trend
+  column.
+- Retain the annotated measurement record in a location accessible for periodic review and audit.

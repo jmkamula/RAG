@@ -1,0 +1,18 @@
+must_id: item:A.5.19:off_timeliness
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Timeliness target stated (e.g., access removed within 5 business days of contract end)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the maximum number of days allowed for supplier access removal in your supplier offboarding procedure,
+  referencing the specific timeliness target.
+- Record the actual access removal date for each offboarded supplier in a dated log, alongside the contract
+  end date.
+- Name the person responsible for confirming access removal as a specific individual, not a team or department.
+- Retain evidence of completed access removal, such as screenshots or system logs, attached to each supplier's
+  offboarding record.
+- Review a sample of recent offboarding records to confirm the timeliness target was consistently met
+  and document any exceptions.

@@ -1,0 +1,17 @@
+must_id: item:A.5.22:sch_delta
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Scheduled-vs-completed delta tracked (so missed reviews surface)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each supplier's required review frequency and next scheduled review date in the Supplier Review
+  Schedule Register.
+- Log the actual completion date for each supplier review as it occurs, including the name of the reviewer.
+- Track and highlight any missed or overdue supplier reviews by comparing scheduled dates to completion
+  dates in the register.
+- Name the owner responsible for maintaining the register as a specific individual, not a team or department.
+- Retain historical entries showing both scheduled and completed dates to demonstrate ongoing tracking
+  of missed reviews.

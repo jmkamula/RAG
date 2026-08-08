@@ -1,0 +1,14 @@
+must_id: item:6.1.2:owners
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Risk owners identified
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the risk owner for each identified information security risk in your risk
+  assessment records.
+- Record the date when each risk owner was assigned responsibility in the risk assessment documentation.
+- Cross-reference each risk owner’s name with their job title and contact details in the risk register.
+- Avoid listing groups, teams, or departments as risk owners; always assign a named person for each risk.

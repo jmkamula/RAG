@@ -1,0 +1,16 @@
+must_id: item:A.6.4:reg_decision_authority
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Per-case decision authority (named role)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the decision authority for each disciplinary case as a specific individual, not as a generic role
+  or team.
+- Record the decision authority’s full name and job title in the register entry for each disciplinary
+  case.
+- Document the date on which the decision authority was assigned for each case in the register.
+- Retain evidence of the decision authority’s approval or signature for each disciplinary case outcome
+  in the register.

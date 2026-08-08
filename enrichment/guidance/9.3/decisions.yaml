@@ -1,0 +1,15 @@
+must_id: item:9.3:decisions
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Decisions and actions recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record all decisions made during the management review meeting in the official minutes, including the
+  rationale behind each decision.
+- Document specific actions assigned, naming the responsible individual and setting a clear deadline for
+  each action item.
+- Sign and date the minutes at the end of the meeting by the chairperson or designated authority.
+- Name the owner of each action as a specific individual, not as a team or department.

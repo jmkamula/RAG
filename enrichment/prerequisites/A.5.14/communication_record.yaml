@@ -1,0 +1,40 @@
+leaf_id: req:A.5.14:communication_record
+control_ref: A.5.14
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: direct
+  rationale: The information transfer policy communication record must be based on an established, approved
+    set of information security policies. Without these parent policies, there is nothing meaningful to
+    communicate or enforce.
+  good_enough: A formally approved, current information security policy document exists and is accessible
+    to relevant personnel.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Personnel must be informed about which data types require special handling during transfer.
+    A defined classification scheme is essential to set these expectations and rules.
+  good_enough: A documented classification scheme exists, with clear categories and handling requirements,
+    even if not yet fully rolled out.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: To record who has been informed about transfer policies, you must know who is responsible
+    for initiating or approving transfers. Clear roles ensure the right people are targeted for communication.
+  good_enough: A current list of roles and their responsibilities related to information transfer is documented,
+    even if some job descriptions are still being updated.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which people, processes, and systems are covered by the ISMS,
+    and thus who must be included in the communication record.
+  good_enough: A documented ISMS scope exists, identifying the business units and personnel in scope for
+    information transfer controls.

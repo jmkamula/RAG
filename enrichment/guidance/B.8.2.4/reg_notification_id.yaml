@@ -1,0 +1,17 @@
+must_id: item:B.8.2.4:reg_notification_id
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Unique notification identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique notification identifier to each new entry in the Infringing Instruction Notification
+  Register before saving the record.
+- Record the assigned identifier in a dedicated column for every row, ensuring no duplicates exist within
+  the register.
+- Cross-reference each identifier with related correspondence or evidence to confirm traceability from
+  notification to resolution.
+- Name the register owner as a specific individual responsible for maintaining identifier uniqueness,
+  not as a team or department.

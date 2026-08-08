@@ -1,0 +1,16 @@
+must_id: item:6.3:reg_source_xref
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Per-row cross-reference to the source change record (4.3 / 4.4 / 5.3 etc.) where applicable
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each change entry in the ISMS Change Register to its originating document or record,
+  such as 4.3, 4.4, or 5.3.
+- Record the unique identifier or version number of the source document for every change, ensuring traceability
+  to the original decision or requirement.
+- Name the source document using its official title and section number, not a generic label or abbreviation.
+- Confirm that every row in the register with a related source has a completed cross-reference field,
+  leaving no applicable entry blank.

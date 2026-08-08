@@ -1,0 +1,16 @@
+must_id: item:B.8.5.1:reg_customer_ack
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+must_text: Customer acknowledgement per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and method of customer acknowledgement for each processor transfer entry in the register.
+- Name the individual customer representative who provided the acknowledgement, not just the company or
+  a generic title.
+- Attach supporting evidence of acknowledgement, such as a signed email or documented meeting minutes,
+  to each corresponding register row.
+- Cross-reference each register entry with the related contract or data processing agreement that includes
+  the customer's approval.

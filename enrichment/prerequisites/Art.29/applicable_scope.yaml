@@ -1,0 +1,33 @@
+leaf_id: req:Art.29:applicable_scope
+control_ref: Art.29
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.28
+  standard_id: GDPR:2016/679
+  title: Processor
+  category: direct
+  rationale: You cannot define which personnel act under controller/processor authority (Art.29) until
+    you have established the controller-processor relationship and the contractual instructions required
+    by Art.28. Art.29's scope is a direct extension of the boundaries set by Art.28 agreements.
+  good_enough: A signed or draft Art.28 agreement that clearly identifies the controller and processor
+    roles, and outlines the basic instructions for processing, is sufficient to proceed.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: To identify which personnel categories are acting under authority, you need to know what
+    processing activities exist and who is involved. Art.30 records provide the operational map needed
+    to assign or exclude staff from the Art.29 scope.
+  good_enough: A working draft of the RoPA that lists processing activities and the main categories of
+    data subjects and recipients is enough to identify relevant personnel groups.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines the organizational and operational boundaries for information security,
+    which must align with the GDPR personnel scope to avoid gaps or overlaps in compliance coverage.
+  good_enough: A documented ISMS scope that covers the business units and functions involved in GDPR processing
+    is sufficient for alignment at this stage.

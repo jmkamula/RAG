@@ -1,0 +1,19 @@
+must_id: item:A.8.30:rev_register_currency
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Engagement-register currency check
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for maintaining the outsourced development engagement register, listing
+  their full name and current job title.
+- Record the date of the most recent review of the engagement register in a version-controlled document
+  or change log.
+- Document the specific method used to verify that all active outsourced development engagements are included
+  and up to date in the register.
+- Retain evidence of the review, such as a signed checklist or email confirmation from the responsible
+  person, for each review period.
+- Specify individual owners for each engagement entry—avoid using generic labels like "IT" or "the team"
+  as owners.

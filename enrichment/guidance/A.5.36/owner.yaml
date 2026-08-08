@@ -1,0 +1,16 @@
+must_id: item:A.5.36:owner
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Named owner of this review cycle (the person who ran it — typically compliance lead or designate)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for running the compliance review cycle, using their full name and job
+  title in the review record.
+- Record the date the compliance review was completed in the official review log or tracking document.
+- Document the scope and outcome of the review, referencing specific policies, rules, and standards evaluated
+  during the cycle.
+- Avoid listing the owner as "the team," a department, or a generic role; always identify a single, accountable
+  person.

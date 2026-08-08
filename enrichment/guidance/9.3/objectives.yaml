@@ -1,0 +1,19 @@
+must_id: item:9.3:objectives
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Progress toward information security objectives
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the current status of each information security objective in the management review minutes, including
+  measurable progress since the previous review.
+- Name the individual responsible for reporting on each objective’s progress, listing them by full name
+  and role.
+- Record any actions agreed upon to address objectives that are behind schedule, including deadlines and
+  assigned owners.
+- Attach supporting evidence, such as metrics or status reports, referenced directly in the minutes for
+  each objective discussed.
+- Specify the date of the review meeting and ensure all attendees sign or acknowledge the minutes to confirm
+  accuracy.

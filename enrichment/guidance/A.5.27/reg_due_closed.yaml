@@ -1,0 +1,15 @@
+must_id: item:A.5.27:reg_due_closed
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Action due date + closure date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the action due date for each lesson learned entry as a separate, clearly labeled column in the
+  register.
+- Enter the closure date for each action item once completed, ensuring it appears in its own distinct
+  column.
+- Name the responsible person for each action item as a specific individual, not a team or department.
+- Review the register monthly to confirm all action and closure dates are filled in and up to date.

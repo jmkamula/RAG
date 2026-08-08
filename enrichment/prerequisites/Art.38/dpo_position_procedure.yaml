@@ -1,0 +1,31 @@
+leaf_id: req:Art.38:dpo_position_procedure
+control_ref: Art.38
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Designation of the data protection officer
+  category: direct
+  rationale: You cannot define or enforce DPO position safeguards until a DPO has been formally designated
+    under Art.37. The obligations in Art.38 only apply to an appointed DPO.
+  good_enough: A documented decision or record confirming the DPO's designation, with basic contact details
+    and scope of responsibility, is sufficient to proceed.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: Understanding the organization's processing activities is essential for ensuring the DPO
+    is involved in all relevant data protection issues, as required by Art.38.
+  good_enough: A preliminary or working draft of the Records of Processing Activities that identifies
+    key processing operations and responsible parties is enough to inform DPO involvement procedures.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: Clarity on the ISMS scope helps define where the DPO's responsibilities and position safeguards
+    must apply, especially in organizations with complex structures.
+  good_enough: A documented ISMS scope that outlines the organizational boundaries and main activities
+    covered is sufficient to contextualize the DPO's operational role.

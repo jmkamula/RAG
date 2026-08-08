@@ -1,0 +1,19 @@
+must_id: item:A.7.3.10:reg_response_time
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Response time per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time each automated decision subject event is received in the register, creating
+  a clear starting point for response tracking.
+- Enter the date and time when each response is provided to the subject, ensuring both timestamps are
+  present for every row.
+- Calculate and document the elapsed time between event receipt and response for each entry, showing actual
+  response times per event.
+- Name the person responsible for each response, avoiding generic entries like "team" or "system" to ensure
+  individual accountability.
+- Review the register regularly to confirm no rows are missing either the event receipt or response timestamp,
+  preventing incomplete records.

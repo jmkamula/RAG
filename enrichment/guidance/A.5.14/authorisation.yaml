@@ -1,0 +1,20 @@
+must_id: item:A.5.14:authorisation
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Authorisation requirements for transfers above defined classification levels (who approves,
+  for which level, for which counterparty)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific information classification levels that require authorisation for transfer in your
+  Information Transfer Policy, with clear definitions for each level.
+- Name the individuals or roles authorised to approve transfers for each classification level, specifying
+  their full names or unique job titles.
+- Document the approval process for each classification level, including required steps, supporting documentation,
+  and how approval is recorded.
+- Record each transfer approval with the approver’s name, date, classification level, and counterparty
+  in a central, dated log.
+- Specify counterparties for which special authorisation is required, avoiding generic terms like "external
+  parties" or "partners" without further detail.

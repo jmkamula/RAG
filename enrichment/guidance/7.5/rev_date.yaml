@@ -1,0 +1,17 @@
+must_id: item:7.5:rev_date
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Document Control Program in a dated log or tracking sheet.
+- State the planned review interval in months or years, as approved by management, within the Document
+  Control Program documentation.
+- Confirm the next scheduled review date is not past due by cross-referencing the last review date and
+  the planned interval.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Retain evidence of the completed review, such as a signed or digitally approved review summary, with
+  the corresponding date.

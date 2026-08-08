@@ -1,0 +1,18 @@
+must_id: item:A.7.3.3:scope_exclusions
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: Excluded contexts with rationale (e.g. B2B-only channels where notice is contract-embedded)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all delivery contexts where personal data is handled, using clear names and descriptions for each
+  context.
+- Identify and document any delivery contexts excluded from privacy notice requirements, specifying the
+  rationale for each exclusion.
+- Reference supporting evidence for each exclusion, such as contract clauses or documented customer agreements,
+  and include relevant dates.
+- Name the decision-maker responsible for each exclusion as a specific individual, not a group or department.
+- Review the scope document to confirm all exclusions are current and not based on outdated or generic
+  justifications.

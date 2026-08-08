@@ -1,0 +1,16 @@
+must_id: item:A.8.2:proc_authorisation
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Formal authorisation process before privileged access is granted or changed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step process for requesting, reviewing, and approving privileged access, including
+  required forms and approval authority.
+- Name the approver for privileged access as a specific individual with job title, not a generic group
+  or department.
+- Record each privileged access grant or change with the requestor, approver, date, and justification
+  in an access log.
+- Retain copies of completed and signed authorisation forms for all privileged access requests and changes.

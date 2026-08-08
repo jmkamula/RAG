@@ -1,0 +1,19 @@
+must_id: item:A.7.3.4:proc_easy_as_giving
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+must_text: Withdrawal as easy as giving — no additional hurdles beyond original consent process (Art.7.3)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Describe the exact steps a person must take to withdraw consent, matching the simplicity and channels
+  of the original consent process.
+- Document the date and method by which the withdrawal process was last tested to confirm it is as easy
+  as giving consent.
+- Name the individual responsible for maintaining and updating the consent withdrawal procedure, not just
+  a team or department.
+- Retain records showing examples of both consent and withdrawal requests processed through the same channel,
+  such as web forms or email.
+- State explicitly in the procedure that no additional information or steps are required for withdrawal
+  compared to the original consent process.

@@ -1,0 +1,49 @@
+leaf_id: req:A.7.4.6:applicable_scope
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines the organizational and technical boundaries for all information security
+    controls, including privacy extensions. You need to know what parts of your environment are in-scope
+    before identifying where temp files with PII may exist.
+  good_enough: A clear, up-to-date scope statement that covers all relevant infrastructure and business
+    processes, even if some details are high-level.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An asset register lists all information assets, including applications, databases, and storage
+    where temp files could be created. Without this, you can't reliably identify where PII-touching temp
+    files might exist.
+  good_enough: A working inventory of major systems and storage locations, with enough detail to map where
+    temp files could be generated.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: You need a way to distinguish PII from non-PII data in order to identify which temp files
+    are relevant for privacy controls. The classification scheme provides this baseline.
+  good_enough: A documented scheme that marks PII as a distinct class, even if not all assets are fully
+    tagged yet.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Understanding the business purpose for processing PII helps determine which application and
+    infrastructure contexts are relevant for temp file creation and retention.
+  good_enough: Documented purposes for major PII processing activities, sufficient to link to temp file
+    creation contexts.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for processing PII is necessary to justify why temp files containing
+    PII exist and to ensure their handling aligns with privacy obligations.
+  good_enough: A list of lawful bases mapped to key processing activities, even if some edge cases are
+    still under review.

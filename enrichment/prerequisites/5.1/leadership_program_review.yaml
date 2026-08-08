@@ -1,0 +1,39 @@
+leaf_id: req:5.1:leadership_program_review
+control_ref: '5.1'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: Leadership must understand what parts of the organization and which assets are covered by
+    the ISMS before they can meaningfully review and demonstrate commitment to the program.
+  good_enough: A documented and approved scope statement exists, clearly identifying the ISMS boundaries
+    and applicability.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: direct
+  rationale: The leadership review must assess whether the information security policy is current, communicated,
+    and aligned with organizational objectives, making the existence of a policy essential.
+  good_enough: A signed, published information security policy is available and accessible to relevant
+    stakeholders.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Leadership review requires clarity on who is responsible for information security tasks and
+    oversight, to ensure accountability and effective program operation.
+  good_enough: Key information security roles and responsibilities are documented and assigned, even if
+    not fully optimized.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: direct
+  rationale: Leadership must review the effectiveness of risk management activities, which is only possible
+    if a current risk assessment exists to inform their evaluation.
+  good_enough: At least one recent, documented risk assessment covering the ISMS scope is available for
+    leadership to review.

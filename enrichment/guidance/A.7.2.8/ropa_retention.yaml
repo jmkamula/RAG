@@ -1,0 +1,16 @@
+must_id: item:A.7.2.8:ropa_retention
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Retention period per row (or criteria)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the retention period or specific criteria for each type of personal data in every row of your
+  Records of Processing Activities register.
+- Reference the legal or business basis for each retention period by citing the relevant law, regulation,
+  or documented policy in the register.
+- Name the person responsible for approving each retention period, ensuring it is a specific individual
+  and not a team or department.
+- Record the date when each retention period was last reviewed or updated in the register.

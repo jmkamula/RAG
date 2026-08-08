@@ -1,0 +1,17 @@
+must_id: item:Art.26:scope_change_drivers
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Trigger list (new partnership, M&A, service-shape change)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all trigger events that require a review of joint controllership scope, such as new partnerships,
+  mergers, acquisitions, or significant service changes.
+- Document the date each trigger event is identified and the responsible individual who will initiate
+  the review process.
+- Name the owner as a specific individual responsible for monitoring and updating the trigger list, not
+  a team or department.
+- Retain records of all reviews conducted in response to each trigger event, including outcomes and any
+  changes made to the joint controllership scope.

@@ -1,0 +1,18 @@
+must_id: item:6.3:scope_a832_boundary
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Boundary with A.8.32 (technical ICT changes route to A.8.32; ISMS process changes route here)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of changes managed under the ISMS, clearly distinguishing between process changes and
+  technical ICT changes.
+- Cross-reference each technical ICT change type to control A.8.32 in your documented change management
+  procedure.
+- State in writing which change types are handled under ISMS process change procedures, with examples
+  for clarity.
+- Name the person responsible for maintaining the change type scope, avoiding generic roles like "the
+  team" or "IT department".
+- Date and approve the documented scope to show it reflects current practice and has been formally reviewed.

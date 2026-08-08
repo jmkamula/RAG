@@ -1,0 +1,16 @@
+must_id: item:Art.26:reg_activity
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Per-row processing activity (Art.30 RoPA reference)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity as a separate row in the Joint Controller Register, matching the format
+  used in your Article 30 Record of Processing Activities.
+- Cross-reference each processing activity row to the corresponding entry in your Article 30 RoPA, including
+  the unique identifier or title.
+- Name the joint controller responsible for each processing activity as a specific individual, not just
+  an organisation or department.
+- Record the date each processing activity entry was last reviewed or updated in the register.

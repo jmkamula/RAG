@@ -1,0 +1,17 @@
+must_id: item:A.8.10:reg_method
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Per-deletion method used (matches procedure's method table for the media class)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact disposal method used for each deletion event in the Disposal Register, specifying the
+  method by name or code.
+- Cross-reference the recorded disposal method with the approved procedure’s method table for the relevant
+  media class.
+- Attach the current version of the procedure’s method table to each Disposal Register entry, or link
+  to its location, to show alignment.
+- Name the person who performed the deletion for each entry, avoiding generic labels like "IT" or "team".
+- Date each disposal event entry to provide a clear timeline of actions taken.

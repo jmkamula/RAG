@@ -1,0 +1,13 @@
+must_id: item:B.8.5.5:rev_next_date
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Disclosure Decision Program in the program review document.
+- Record the date in a way that is visible and unambiguous, such as a clearly labeled field or table entry.
+- Name the individual responsible for scheduling and conducting the next review, not just a team or department.
+- Retain the review document with the stated date in a location accessible to relevant stakeholders.

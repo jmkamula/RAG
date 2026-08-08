@@ -1,0 +1,17 @@
+must_id: item:7.2:rev_next_date
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the competence program in the review documentation, using a clear
+  and specific calendar date.
+- Record the name of the individual responsible for scheduling and leading the next review, not just a
+  role or team.
+- Document the date when the current review was completed to provide a timeline reference for the next
+  scheduled review.
+- Retain the signed approval or confirmation of the review schedule from a designated manager or program
+  owner.

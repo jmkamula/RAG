@@ -1,0 +1,16 @@
+must_id: item:Art.35:rev_next_date
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the DPIA program in a clearly visible section of the DPIA documentation.
+- Record the date in a version-controlled document, ensuring the timestamp reflects when the review date
+  was last set.
+- Name the individual responsible for scheduling and conducting the next DPIA program review, not just
+  a team or department.
+- Cross-reference the review date in your compliance calendar or tracking tool to show it is actively
+  monitored.

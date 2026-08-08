@@ -1,0 +1,17 @@
+must_id: item:4.1:internal_issues
+control_ref: '4.1'
+standard_id: ISO27001:2022
+must_text: Internal issues documented per row (organizational culture, governance, contracts, capabilities,
+  technologies)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each internal issue as a separate, clearly described row in the register, referencing organizational
+  culture, governance, contracts, capabilities, and technologies.
+- Name the person responsible for identifying and updating each internal issue, using a specific individual's
+  full name, not a team or department.
+- Record the date each internal issue was last reviewed or updated in the register.
+- Document how each internal issue could impact information security objectives, providing a brief, tailored
+  explanation for each row.

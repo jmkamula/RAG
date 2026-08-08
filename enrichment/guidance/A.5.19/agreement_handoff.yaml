@@ -1,0 +1,17 @@
+must_id: item:A.5.19:agreement_handoff
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Conditions under which security requirements get into the supplier agreement (handoff to A.5.20)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific conditions that trigger inclusion of security requirements in supplier agreements,
+  referencing risk assessment outcomes and supplier criticality.
+- Name the individual responsible for deciding when security requirements are added to supplier contracts,
+  ensuring this is not a generic team or department.
+- Record each decision to include or exclude security requirements in a dated log, cross-referencing the
+  related supplier risk assessment.
+- State how and when the handoff to the supplier agreement process under A.5.20 occurs, with a clear reference
+  in the procedure.

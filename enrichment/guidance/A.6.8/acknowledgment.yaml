@@ -1,0 +1,18 @@
+must_id: item:A.6.8:acknowledgment
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Acknowledgment-to-reporter expectation stated (closes the feedback loop — reporters who never
+  hear back stop reporting)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that all reporters will receive an acknowledgment within a defined timeframe,
+  such as 24 or 48 hours.
+- Document the acknowledgment process, including who is responsible for sending responses and how these
+  are tracked.
+- Record sample acknowledgment messages with dates and recipient names to demonstrate the process is in
+  use.
+- Name the responsible individual or role for acknowledgments, avoiding vague terms like "the team" or
+  "IT department."

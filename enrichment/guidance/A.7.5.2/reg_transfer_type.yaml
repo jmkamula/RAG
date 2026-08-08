@@ -1,0 +1,15 @@
+must_id: item:A.7.5.2:reg_transfer_type
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+must_text: Transfer type per row (direct storage / subprocessing / support access / M&A)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- List each transfer destination in the register with a separate row for clarity and traceability.
+- 'Specify the transfer type for each row as one of: direct storage, subprocessing, support access, or
+  M&A.'
+- Name the individual responsible for maintaining the register, avoiding generic titles like "the team"
+  or "IT department".
+- Record the date each entry was last reviewed or updated to show ongoing oversight.

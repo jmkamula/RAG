@@ -1,0 +1,17 @@
+must_id: item:A.8.11:rev_reviewer
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Reviewer identity (DPO + Data Engineering + InfoSec)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Name the reviewer for each periodic masking program review as a specific individual from Data Protection
+  Officer, Data Engineering, and Information Security teams.
+- Record the date each reviewer completed their assessment in the review log for traceability.
+- Document each reviewer’s comments and approval in a signed review summary attached to the program review
+  record.
+- Retain evidence of each reviewer’s participation, such as email confirmations or signed meeting minutes,
+  in the compliance repository.
+- Avoid listing groups or roles as reviewers; specify named individuals to meet accountability requirements.

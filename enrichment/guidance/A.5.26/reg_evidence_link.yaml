@@ -1,0 +1,17 @@
+must_id: item:A.5.26:reg_evidence_link
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Reference to evidence package per row (link to A.5.28 evidence store)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each incident entry with a unique link or identifier pointing to the corresponding evidence
+  package stored under control A.5.28.
+- Record the date and name of the person who attached or verified the evidence package reference for each
+  incident row.
+- State the location or system where the evidence package is stored, using a specific path or repository
+  name, not a generic description.
+- Name the incident owner as a specific individual for each register row, avoiding generic titles like
+  "IT team" or "Security group".

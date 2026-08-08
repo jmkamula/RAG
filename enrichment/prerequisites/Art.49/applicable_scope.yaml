@@ -1,0 +1,42 @@
+leaf_id: req:Art.49:applicable_scope
+control_ref: Art.49
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.44
+  standard_id: GDPR:2016/679
+  title: General principle for transfers
+  category: direct
+  rationale: You must first confirm that your data transfer falls under the general GDPR rules for international
+    transfers before considering any derogations under Art.49. Art.44 acts as the gateway, ensuring the
+    transfer is subject to GDPR oversight.
+  good_enough: A clear determination that the transfer is cross-border and subject to GDPR transfer restrictions,
+    with a basic mapping of the data flow and jurisdictions involved.
+- ref: Art.46
+  standard_id: GDPR:2016/679
+  title: Transfers subject to appropriate safeguards
+  category: direct
+  rationale: Art.49 derogations are only available if you cannot use the standard transfer mechanisms
+    under Art.46 (like SCCs or BCRs). You must show that appropriate safeguards are unavailable or infeasible
+    before relying on a derogation.
+  good_enough: Documented evidence that all Art.46 transfer tools have been considered and ruled out for
+    the specific transfer scenario.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: direct
+  rationale: You need to confirm that the underlying processing itself is lawful under GDPR before addressing
+    international transfer derogations. Art.49 cannot be used to legitimize otherwise unlawful processing.
+  good_enough: A record of the lawful basis for the processing activity tied to the transfer, with a simple
+    justification for its selection.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify which transfers are taking
+    place, their purposes, and the data subjects affected. This is essential for scoping which derogations
+    may apply.
+  good_enough: A current RoPA entry for the relevant processing activity, showing the data categories,
+    purposes, and transfer destinations.

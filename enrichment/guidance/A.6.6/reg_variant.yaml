@@ -1,0 +1,20 @@
+must_id: item:A.6.6:reg_variant
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Per-row NDA variant (employee / contractor / supplier-bilateral / M&A / visitor — matches the
+  template variant_tiers SHOULD)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the NDA variant for each entry in the register, using clear labels such as employee, contractor,
+  supplier-bilateral, M&A, or visitor.
+- Cross-reference each NDA entry to the specific template or variant_tier used, ensuring the register
+  matches the actual document signed.
+- Name the NDA signatory and their relationship to your organisation for every row, avoiding generic terms
+  like "external party" or "staff".
+- Confirm the NDA variant listed aligns with the proportionality principle in ISO 27002:6.6, reflecting
+  the risk and context of the relationship.
+- Retain a dated copy of the signed NDA linked to each register entry, showing the correct variant was
+  actually executed.

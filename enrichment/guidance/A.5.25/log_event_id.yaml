@@ -1,0 +1,17 @@
+must_id: item:A.5.25:log_event_id
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Each event captured with a unique identifier and detection timestamp
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each security event at the time of detection and record it in the triage
+  log.
+- Record the exact date and time each security event was detected, using a consistent timestamp format
+  in the log entry.
+- Name the person responsible for logging each event, ensuring the entry is attributable to a specific
+  individual.
+- Avoid leaving any event entry without a unique identifier or timestamp, as missing data will be flagged
+  by auditors.

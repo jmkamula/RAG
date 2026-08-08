@@ -1,0 +1,39 @@
+leaf_id: req:A.8.11:masking_program_review
+control_ref: A.8.11
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The masking program review requires an up-to-date asset register to identify which data assets
+    are subject to masking and to verify that all relevant assets are included in the review.
+  good_enough: A current, reasonably complete asset register exists, listing all data assets in scope
+    for masking, even if some minor updates are pending.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Effective masking depends on knowing which data types require protection; a documented classification
+    scheme ensures the review covers all relevant data categories.
+  good_enough: A documented classification scheme is in place, mapping data types to protection requirements,
+    with clear linkage to masking controls.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Reviewing masking effectiveness hinges on understanding the risks of re-identification and
+    the threat landscape; a recent risk assessment provides this context.
+  good_enough: A risk assessment has been performed within the last year, identifying key risks related
+    to data masking and re-identification.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organization and which data are covered by
+    the ISMS and, by extension, the masking program review.
+  good_enough: A documented ISMS scope exists, clearly stating the organizational and data boundaries
+    relevant to masking activities.

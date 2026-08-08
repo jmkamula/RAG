@@ -1,0 +1,16 @@
+must_id: item:9.1:scope_exclusions
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Out-of-scope controls (those without measurable signal — usually 'design' or 'governance' controls)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all ISO27001:2022 controls and indicate which are excluded from measurement, providing a clear
+  reason for each exclusion.
+- Document the specific criteria used to determine when a control is considered out of measurement scope.
+- Name the individual responsible for approving the measurement scope, including exclusions, and record
+  their approval with a date.
+- Avoid using generic justifications like "not applicable" without a supporting explanation tied to your
+  organisation’s context.

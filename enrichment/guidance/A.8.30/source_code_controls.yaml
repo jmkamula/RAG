@@ -1,0 +1,19 @@
+must_id: item:A.8.30:source_code_controls
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Source-code access controls for vendor (cross-link to A.8.4; vendor-account governance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for managing vendor source-code access, specifying their full name and
+  role in the procedure document.
+- Document the approval process for granting and revoking vendor access to source-code repositories, including
+  required sign-offs and dated records.
+- Cross-reference the vendor account management procedure in section A.8.4, ensuring the link points to
+  the current, version-controlled document.
+- Record all vendor access events, including dates, times, and user identities, in an auditable access
+  log.
+- State the frequency and method for reviewing vendor access rights, and retain evidence of the most recent
+  completed review.

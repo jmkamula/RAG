@@ -1,0 +1,17 @@
+must_id: item:A.5.22:rev_reports
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Supplier-provided service reports reviewed + progress meetings held
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to review each supplier-provided service report and record their name and
+  review date on the report.
+- Document the date, attendees, and discussion points of each progress meeting with the supplier in meeting
+  minutes.
+- Retain copies of all reviewed service reports and meeting minutes in a dedicated, access-controlled
+  folder.
+- Name the reviewer and meeting participants as specific individuals—do not use generic titles like "the
+  team" or "IT department".

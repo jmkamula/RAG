@@ -1,0 +1,15 @@
+must_id: item:8.2:rev_next_date
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date within the Operational Assessment Program document, using a clear
+  and specific calendar date.
+- Record the name of the individual responsible for scheduling the next review, not just a job title or
+  team.
+- Retain a dated copy of the reviewed program showing the most recent update to the next review date.
+- Cross-reference the stated review date with your organisation’s compliance calendar to confirm alignment.

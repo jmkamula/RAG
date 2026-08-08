@@ -1,0 +1,18 @@
+must_id: item:A.6.7:reg_data_class_max
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Per-row maximum data classification permitted (links to A.5.12 classification scheme — drives
+  'restricted-class data must not leave the office' enforcement)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the maximum data classification each remote worker is permitted to access in a dedicated column
+  for every entry in the register.
+- Cross-reference each permitted classification to your organisation’s official data classification scheme,
+  as defined under control A.5.12.
+- Name the owner of each register entry as a specific individual, not a generic team or department.
+- Record the approval date and approver’s name for each remote worker’s permitted classification level.
+- Flag any register entry missing a permitted classification or cross-reference as incomplete and follow
+  up for correction.

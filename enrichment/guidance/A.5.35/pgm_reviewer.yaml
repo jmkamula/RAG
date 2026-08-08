@@ -1,0 +1,16 @@
+must_id: item:A.5.35:pgm_reviewer
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Reviewer identity (program owner + InfoSec lead jointly + audit committee chair where applicable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the program owner, InfoSec lead, and audit committee chair (if applicable) as individual reviewers
+  in the meta-review record.
+- Document the date each reviewer completed their section of the meta-review, using a dated signature
+  or electronic confirmation.
+- Attach evidence of each reviewer’s input, such as comments, approvals, or meeting minutes, to the meta-review
+  file.
+- Avoid listing groups or roles as reviewers; specify named individuals to satisfy accountability requirements.

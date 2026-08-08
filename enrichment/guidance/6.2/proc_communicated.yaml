@@ -1,0 +1,19 @@
+must_id: item:6.2:proc_communicated
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: Communication step (link to 7.4) — objectives flow to relevant personnel
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document how security objectives are communicated to all relevant personnel, including the method used
+  and the date of each communication.
+- Name the person responsible for sending out security objectives, specifying their full name and job
+  title.
+- Retain copies of emails, meeting minutes, or intranet posts that show when and how objectives were shared
+  with staff.
+- Record acknowledgement from recipients, such as signed attendance sheets or digital read receipts, confirming
+  objectives were received.
+- State the specific roles or teams that receive each objective—avoid generic references like "all staff"
+  without supporting evidence.

@@ -1,0 +1,20 @@
+must_id: item:A.5.16:rev_sla_met
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: SLA-met flag per record (yes / no_with_reason — gap between effective and actual must be within
+  stated SLA, or exception logged)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time each identity revocation was requested and when it was actually completed in
+  the revocation record.
+- State the specific SLA for revocation timing in the record, referencing the documented policy or contract
+  where the SLA is defined.
+- Assign the SLA-met flag as "yes" if the revocation was completed within the stated SLA, or "no_with_reason"
+  if not, with a clear explanation.
+- Name the individual who reviewed and confirmed the SLA-met status for each record, avoiding generic
+  roles like "IT" or "the team."
+- Attach any approved exception or deviation documentation if the SLA was not met, including the date
+  and approver’s name.

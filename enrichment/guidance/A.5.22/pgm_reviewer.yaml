@@ -1,0 +1,17 @@
+must_id: item:A.5.22:pgm_reviewer
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Reviewer identity (program owner + InfoSec lead jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the program owner and the Information Security lead as the joint reviewers in the meta-review
+  document, using full names and job titles.
+- Record the date when both reviewers completed the meta-review, ensuring the date is clearly visible
+  in the document.
+- Obtain signatures or documented electronic approval from both the program owner and the Information
+  Security lead on the meta-review record.
+- Avoid listing a group or department as the reviewer; specify named individuals to meet accountability
+  requirements.

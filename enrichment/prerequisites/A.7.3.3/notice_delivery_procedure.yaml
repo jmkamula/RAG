@@ -1,0 +1,41 @@
+leaf_id: req:A.7.3.3:notice_delivery_procedure
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.3.2
+  standard_id: ISO27701:2019
+  title: Privacy Notice Content Determination
+  category: direct
+  rationale: You cannot define a delivery procedure until you know exactly what information must be included
+    in the privacy notice. This control ensures the content is complete and compliant before focusing
+    on how it is delivered.
+  good_enough: The required privacy notice content has been identified and documented, even if not yet
+    finalized for all processing activities.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: Understanding the purposes for processing personal data is essential for tailoring the notice
+    delivery to relevant data subjects and contexts. This ensures the right information reaches the right
+    people.
+  good_enough: The main purposes for processing personal data are documented for each processing activity
+    in scope.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: foundational
+  rationale: The lawful basis for processing impacts what must be communicated and how notices are framed,
+    especially for consent-based processing. This shapes the delivery approach.
+  good_enough: Each processing activity has a documented lawful basis, even if some are provisional pending
+    legal review.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope statement defines which business units, processes, and data subjects are covered,
+    ensuring the notice delivery procedure addresses all relevant audiences.
+  good_enough: A current ISMS scope statement exists that clearly identifies the organizational and data
+    boundaries for privacy management.

@@ -1,0 +1,19 @@
+must_id: item:A.8.31:iac
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Infrastructure-as-code for environment reproducibility (modern baseline)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the use of infrastructure-as-code tools, specifying the tool name and version, in your environment
+  separation procedure.
+- Record a dated example of code or configuration files used to provision development, test, and production
+  environments.
+- Name a specific individual responsible for maintaining and updating the infrastructure-as-code scripts,
+  avoiding generic roles or teams.
+- Cross-reference deployment logs or change records showing successful, reproducible environment builds
+  from the same codebase.
+- Attach a signed approval from management confirming review and acceptance of the procedure and supporting
+  artefacts.

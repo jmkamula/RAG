@@ -1,0 +1,37 @@
+leaf_id: req:A.8.23:filtering_event_register
+control_ref: A.8.23
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines which systems, networks, and user groups are covered by security controls,
+    including web filtering. Without a clear scope, it's unclear which events must be registered.
+  good_enough: A documented scope that explicitly includes the networks and endpoints subject to web filtering
+    controls.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register identifies the devices, systems, and endpoints where web filtering
+    is enforced, ensuring event capture is comprehensive and relevant.
+  good_enough: A current list of networked assets that are in scope for web filtering, even if some attributes
+    are still being refined.
+- ref: A.8.20
+  standard_id: ISO27001:2022
+  title: Networks security
+  category: direct
+  rationale: The network security baseline establishes the technical controls and monitoring points for
+    web filtering, which directly informs what events should be logged and reviewed.
+  good_enough: Documented network security controls that specify where and how web filtering is implemented.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures accountability for maintaining the event register, investigating
+    incidents, and acting on web filtering data.
+  good_enough: Named individuals or teams responsible for web filtering oversight and event register maintenance.

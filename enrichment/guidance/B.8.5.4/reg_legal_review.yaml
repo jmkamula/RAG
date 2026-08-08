@@ -1,0 +1,17 @@
+must_id: item:B.8.5.4:reg_legal_review
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+must_text: Legal counsel signoff per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each legally-binding disclosure request in the register with the date received, requesting authority,
+  and specific data requested.
+- Assign a named legal counsel to review each disclosure request entry, ensuring the individual is identified
+  by full name and role.
+- Sign each register entry with the legal counsel’s handwritten or digital signature and date, confirming
+  review and approval before any data is disclosed.
+- Avoid leaving any register row unsigned or approved by a generic title such as "Legal Team" or "Compliance
+  Department".

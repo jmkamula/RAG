@@ -1,0 +1,17 @@
+must_id: item:B.8.4.1:reg_files_cleaned
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+must_text: Files cleaned per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time each processor temp file is cleaned in the sweep register, matching each entry
+  to a specific file name or identifier.
+- Name the individual who performed each file sweep in the register, using full names rather than generic
+  roles or team names.
+- Document any failed or missed file sweeps with a clear explanation and corrective action, ensuring no
+  register row is left blank or ambiguous.
+- Cross-reference each register entry with supporting evidence, such as system logs or deletion confirmations,
+  to verify that the file was actually removed.

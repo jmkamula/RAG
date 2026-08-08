@@ -1,0 +1,18 @@
+must_id: item:A.8.31:scope_change_drivers
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new platform, new environment class)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific triggers that require a review of environment separation scope, such as launching a new
+  platform or introducing a new environment class.
+- Document each trigger in a dated register, including who identified it and the date it was added.
+- Assign a named individual responsible for monitoring and updating the trigger list as business or technical
+  changes occur.
+- Cross-reference the trigger list in your environment separation policy or procedure to show how updates
+  prompt re-scoping.
+- Name the responsible owner as a specific person, not a generic team or department, to avoid auditor
+  concerns about accountability.

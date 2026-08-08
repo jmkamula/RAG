@@ -1,0 +1,19 @@
+must_id: item:Art.12:free_of_charge
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Free-of-charge default (fee only for manifestly unfounded / excessive)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that all data subject requests are processed free of charge by default, with
+  no hidden or administrative fees.
+- Document the criteria and process for determining when a request is "manifestly unfounded" or "excessive"
+  before any fee is considered.
+- Record each instance where a fee is charged, including the justification, decision-maker’s name, and
+  date of decision.
+- Name the person responsible for reviewing and approving any decision to charge a fee, ensuring this
+  is a specific individual, not a team or department.
+- Retain copies of all communications to data subjects about fees, including explanations and evidence
+  supporting the decision.

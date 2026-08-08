@@ -1,0 +1,19 @@
+must_id: item:A.8.26:scope_classes
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Application classes enumerated with depth-of-process per class
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all application types in use, such as web, mobile, and desktop, in a dated inventory reviewed by
+  the security lead.
+- Define the security requirements and controls applied to each application class, documenting these in
+  a table or matrix with clear descriptions.
+- Specify the depth of security processes for each class, such as code review or penetration testing,
+  and record this in the same document.
+- Name a specific individual responsible for maintaining and updating the application security requirements
+  scope, not a team or department.
+- Review and update the documented scope annually, recording the review date and the reviewer’s name for
+  each update.

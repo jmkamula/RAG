@@ -1,0 +1,16 @@
+must_id: item:Art.17:reg_systems_erased
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Per-row systems where erasure was applied (including backups + replicas)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific system name for each erasure request row, including production, backup, and replica
+  environments, in the register.
+- Document the date when erasure was completed in each listed system for every request.
+- Name the person who confirmed erasure in each system, ensuring a specific individual is listed rather
+  than a team or department.
+- Cross-reference each erasure entry with supporting evidence, such as deletion logs or confirmation emails,
+  for every system involved.

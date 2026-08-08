@@ -1,0 +1,49 @@
+leaf_id: req:A.7.5.3:transfer_records_procedure
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the purposes for which PII is processed before you can accurately
+    record and justify any PII transfers to third parties. This ensures that transfers are aligned with
+    declared processing activities.
+  good_enough: A current, reviewed register of processing purposes for all relevant PII, covering the
+    data in scope for transfer, is available.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Recording PII transfers requires clarity on the lawful basis for each transfer, especially
+    when responding to subject requests (e.g., erasure, modification). This underpins the legitimacy of
+    the transfer events you will document.
+  good_enough: A list of lawful bases mapped to each PII processing activity, including those involving
+    transfers, is documented and accessible.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need an up-to-date inventory of information assets, including PII datasets and third-party
+    recipients, to ensure all relevant transfers are captured in your recording procedure.
+  good_enough: A maintained asset register exists, listing PII data sets and associated third parties,
+    sufficient to identify what is transferred and to whom.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles is essential so that responsibilities for recording, reviewing,
+    and cooperating on PII transfers (including subject-rights requests) are understood and actionable.
+  good_enough: Documented roles and responsibilities exist for PII handling and transfer activities, with
+    named individuals or teams assigned.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: cross_role
+  rationale: A RoPA provides the legal baseline for what processing (including transfers) must be recorded
+    and reported, ensuring your procedure aligns with regulatory expectations.
+  good_enough: A RoPA exists that covers all relevant PII transfers, even if not fully detailed, to inform
+    the scope and content of your recording procedure.

@@ -1,0 +1,18 @@
+must_id: item:B.8.2.6:proc_subprocessor_update
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: Subprocessor change — subprocessor additions / removals trigger RoPA update
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each subprocessor addition or removal in a dated change log, including the name of the subprocessor
+  and the nature of the change.
+- Update the Record of Processing Activities (RoPA) immediately after any subprocessor change, reflecting
+  the current list of subprocessors.
+- Assign a named individual responsible for reviewing and approving RoPA updates following subprocessor
+  changes.
+- Retain evidence of communication notifying relevant stakeholders of the updated RoPA after each subprocessor
+  change.
+- Name the RoPA owner as a specific person, not a team or department, to avoid ambiguity in accountability.

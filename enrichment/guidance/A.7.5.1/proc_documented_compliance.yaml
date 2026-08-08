@@ -1,0 +1,20 @@
+must_id: item:A.7.5.1:proc_documented_compliance
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: Documented compliance with legislation/regulation applicable at origin AND destination jurisdiction
+  per transfer
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each country or jurisdiction involved in the transfer and record them in the PII Transfer Basis
+  Procedure document.
+- Name the specific legislation or regulation governing personal data transfers for both the origin and
+  destination jurisdictions.
+- Document the lawful basis or mechanism used for the transfer, such as contractual clauses or adequacy
+  decisions, with reference to the relevant law.
+- Attach or cross-reference supporting evidence, such as signed contracts or regulatory approvals, that
+  demonstrate compliance for each transfer.
+- Name the responsible individual for maintaining and updating this documentation—do not list a team or
+  department as the owner.

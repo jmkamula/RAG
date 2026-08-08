@@ -1,0 +1,18 @@
+must_id: item:A.5.7:risk_feedback
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Feedback loop into the risk register / risk assessment (intel that surfaces new exposures triggers
+  reassessment)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document how threat intelligence findings are reviewed at least quarterly to identify new or changed
+  exposures relevant to your organisation.
+- Record each instance where threat intelligence leads to an update or new entry in the risk register,
+  including the date and responsible person.
+- Cross-reference updated risk register entries to the specific threat intelligence source or report that
+  triggered the reassessment.
+- Name the individual responsible for reviewing threat intelligence and updating the risk register—do
+  not list a team or department.

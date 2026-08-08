@@ -1,0 +1,18 @@
+must_id: item:A.7.3.8:rev_format_currency
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Format currency — output format aligns with commonly-used industry standards
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the chosen currency format in the Copy Provision Program Review, specifying symbols, decimal
+  separators, and placement.
+- Cross-reference the documented format with a published industry standard, such as ISO 4217 or a relevant
+  financial guideline.
+- Record the date and name of the individual who approved the selected currency format in the review documentation.
+- Attach a sample output from the program showing the formatted currency, ensuring it matches the documented
+  standard.
+- Name the owner responsible for maintaining the currency format as a specific individual, not a team
+  or department.

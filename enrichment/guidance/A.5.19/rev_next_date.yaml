@@ -1,0 +1,14 @@
+must_id: item:A.5.19:rev_next_date
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the supplier portfolio in your supplier management register or
+  tracking document.
+- Record the name of the individual responsible for conducting the next review alongside the planned date.
+- Document the date this review schedule was last updated to show the information is current.
+- Name the owner as a specific individual — not a team or department — to avoid ambiguity about accountability.

@@ -1,0 +1,19 @@
+must_id: item:A.8.28:rev_finding_patterns
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Finding-pattern trending (recurring patterns → training / tooling action)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Collect and log all secure coding program findings in a dated register, including details of each issue
+  and its resolution status.
+- Analyze the register quarterly to identify recurring patterns or common weaknesses in secure coding
+  practices.
+- Document any identified trends and link them to specific training or tooling actions taken, with dates
+  and responsible persons named.
+- Name a specific individual responsible for reviewing and updating the secure coding program based on
+  these trends, not just "the team".
+- Retain evidence of completed training sessions or tooling updates, including attendance lists or change
+  logs, tied to the identified patterns.

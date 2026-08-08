@@ -1,0 +1,16 @@
+must_id: item:9.2:owner
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Named owner of the programme (typically ISMS Manager + independent auditor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the Internal Audit Programme, such as the ISMS Manager, not
+  a team or department.
+- Document the appointment of an independent auditor in a dated record, such as an email confirmation
+  or meeting minutes.
+- Record both the owner's and auditor's names and roles in the official Internal Audit Programme document.
+- Cross-reference the Internal Audit Programme document in your compliance register, showing clear ownership
+  and accountability.

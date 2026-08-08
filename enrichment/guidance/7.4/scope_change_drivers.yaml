@@ -1,0 +1,17 @@
+must_id: item:7.4:scope_change_drivers
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new regulator, new party, new topic class)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all events that require a review of communication scope, such as new regulators, new third parties,
+  or new types of sensitive information.
+- Document the trigger list in a dated, approved procedure or policy, and store it in your central policy
+  repository.
+- Assign a named individual responsible for monitoring and updating the trigger list when organizational
+  or regulatory changes occur.
+- Record each time the trigger list prompts a re-scoping decision, including the date, event, and decision-maker.
+- Name the owner as a specific individual—do not use generic roles like "the team" or "management".

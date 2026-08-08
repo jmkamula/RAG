@@ -1,0 +1,19 @@
+must_id: item:A.8.24:scope_vendor_managed
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Vendor-managed key handling boundaries (BYOK / HYOK / vendor-only options with risk acceptance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems and services using cryptography, specifying whether keys are managed by you, the vendor,
+  or a hybrid approach.
+- Document the key management option chosen for each system, including Bring Your Own Key (BYOK), Hold
+  Your Own Key (HYOK), or vendor-only.
+- Name the individual responsible for approving each key management boundary, avoiding generic titles
+  like "IT" or "the team".
+- Record any risk acceptance decisions for vendor-only key management, including the approver's name and
+  the date of acceptance.
+- Attach supporting agreements or technical documentation from vendors that describe their key handling
+  responsibilities and boundaries.

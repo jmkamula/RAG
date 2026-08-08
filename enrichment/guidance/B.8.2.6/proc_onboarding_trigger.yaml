@@ -1,0 +1,16 @@
+must_id: item:B.8.2.6:proc_onboarding_trigger
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: New-customer onboarding trigger — RoPA row created per new engagement (link to B.8.2.1)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the onboarding process to specify that creating a new Record of Processing Activities (RoPA)
+  row is a required step for each new customer engagement.
+- Assign responsibility for RoPA row creation to a named individual, not a team or department, in the
+  written procedure.
+- Record the date and customer name for each new RoPA row added, maintaining an auditable log of entries.
+- Cross-reference each new RoPA row to the corresponding customer onboarding record, ensuring traceability
+  to control B.8.2.1.

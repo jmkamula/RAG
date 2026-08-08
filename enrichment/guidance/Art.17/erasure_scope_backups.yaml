@@ -1,0 +1,19 @@
+must_id: item:Art.17:erasure_scope_backups
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Erasure scope covers backups and replicas (links to A.8.10:scope_systems)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the systems and storage locations, including backups and replicas, where personal data is held
+  in a data inventory with last update date.
+- State in the erasure procedure how deletion requests are processed for both live systems and all backup
+  or replica environments.
+- Name the individual responsible for executing erasure in backup and replica systems, not just in production
+  or live environments.
+- Record a sample completed erasure request showing evidence of deletion from both primary and backup
+  systems, with dates and confirmation.
+- Avoid using generic statements like "all systems are covered"; specify each backup and replica system
+  by name in the procedure.

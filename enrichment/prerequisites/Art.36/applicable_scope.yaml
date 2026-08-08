@@ -1,0 +1,33 @@
+leaf_id: req:Art.36:applicable_scope
+control_ref: Art.36
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of all processing activities to identify which ones may
+    trigger the need for prior consultation under Art.36. Without this, you can't reliably determine the
+    applicable scope.
+  good_enough: A current, reasonably complete RoPA that covers all main processing activities and highlights
+    those with potential high risks is sufficient to proceed.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity is essential to assess risk and
+    compliance, which directly impacts whether prior consultation is required.
+  good_enough: Each processing activity in the RoPA should have a documented lawful basis; detailed legal
+    analysis is not required at this stage.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope helps clarify which parts of the organization and which processing activities
+    are covered by your compliance program, ensuring your Art.36 assessment is accurate and not missing
+    any in-scope activities.
+  good_enough: A draft or approved ISMS scope statement that lists included business units, systems, and
+    geographies is enough to support the Art.36 scope note.

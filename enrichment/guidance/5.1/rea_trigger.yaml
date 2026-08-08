@@ -1,0 +1,19 @@
+must_id: item:5.1:rea_trigger
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Trigger captured if mid-cycle (CEO change, major incident, restructuring)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the trigger event, such as CEO change, major incident, or restructuring, with a brief description
+  and the date it occurred.
+- Name the individual who initiated the leadership reaffirmation process, ensuring this is a specific
+  person rather than a group or department.
+- Record the date and outcome of the leadership reaffirmation, including any decisions or actions taken
+  as a result.
+- Obtain a signed statement from the current top leader confirming continued commitment to the information
+  security management system following the trigger event.
+- Attach supporting evidence, such as meeting minutes or official communications, that reference the trigger
+  and reaffirmation for traceability.

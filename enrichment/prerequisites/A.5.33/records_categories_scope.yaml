@@ -1,0 +1,41 @@
+leaf_id: req:A.5.33:records_categories_scope
+control_ref: A.5.33
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the organisational and operational boundaries of your ISMS before you can
+    define which records categories are in-scope. If your scope is unclear, your records categories scope
+    will be incomplete or misaligned.
+  good_enough: A documented scope statement that clearly lists the business units, locations, and activities
+    covered by the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register identifies information assets and systems, which is essential for mapping
+    which records are generated, processed, or stored. Without this, you risk missing entire categories
+    of records.
+  good_enough: A basic, up-to-date inventory of key information assets and systems, even if not fully
+    granular.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: A classification scheme helps you group and prioritise records by sensitivity and type. This
+    is necessary to define which records categories matter for compliance and protection.
+  good_enough: A simple scheme that distinguishes at least between confidential, internal, and public
+    records, and maps to main data types handled.
+- ref: A.5.31
+  standard_id: ISO27001:2022
+  title: Legal, statutory, regulatory and contractual requirements
+  category: direct
+  rationale: You must know your legal and regulatory obligations before you can decide which records categories
+    are required to be kept, for how long, and under what conditions.
+  good_enough: A list or register of the main laws, regulations, and contracts that impose records retention
+    or protection duties, even if not fully exhaustive.

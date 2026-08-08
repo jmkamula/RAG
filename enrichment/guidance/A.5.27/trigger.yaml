@@ -1,0 +1,17 @@
+must_id: item:A.5.27:trigger
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Post-incident review trigger (every incident above a threshold, or all incidents)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define and document a clear threshold for incident severity or impact that triggers a post-incident
+  review in your incident response procedure.
+- Record each incident’s severity assessment and decision to trigger or not trigger a review, including
+  the date and the responsible individual’s name.
+- Name the person responsible for conducting post-incident reviews, ensuring this is a specific individual,
+  not a group or department.
+- Retain completed post-incident review reports for all incidents meeting the threshold, including lessons
+  learned and any follow-up actions.

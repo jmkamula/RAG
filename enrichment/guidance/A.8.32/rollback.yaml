@@ -1,0 +1,15 @@
+must_id: item:A.8.32:rollback
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Rollback plan required per change (no-rollback changes treated as exceptions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a rollback plan for each proposed change, including clear steps and responsible individuals,
+  in the change request record before approval.
+- State in the change log if a change cannot be rolled back, including a documented justification and
+  explicit approval as an exception.
+- Name the approver of each rollback plan or exception as a specific individual, not a group or team.
+- Retain dated records of all rollback plans and exceptions alongside the corresponding change requests.

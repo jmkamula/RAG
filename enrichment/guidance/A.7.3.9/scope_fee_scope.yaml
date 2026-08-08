@@ -1,0 +1,19 @@
+must_id: item:A.7.3.9:scope_fee_scope
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Where fees permitted (excessive/repetitive under GDPR; other jurisdictions vary)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific types of data subject requests for which a fee may be charged, referencing relevant
+  jurisdictional laws or regulations.
+- State the criteria used to determine when a request is considered excessive or repetitive, citing the
+  legal basis for each criterion.
+- Record each instance where a fee is applied, including the requestor’s name, date, justification, and
+  the amount charged.
+- Name the decision-maker who approved the application of the fee as a specific individual, not a generic
+  role or team.
+- Retain copies of communications informing requestors about the fee, including the legal justification
+  and instructions for payment.

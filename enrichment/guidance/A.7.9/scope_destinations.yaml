@@ -1,0 +1,17 @@
+must_id: item:A.7.9:scope_destinations
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Destinations / scenarios (home / customer site / conferences / travel — each has risk profile)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all locations where company assets may be used, such as home offices, customer sites, conferences,
+  and during travel, in a dated document.
+- Describe the specific risks and security considerations for each location or scenario, referencing the
+  relevant asset types involved.
+- Assign a named individual responsible for maintaining and updating the list of asset destinations and
+  scenarios.
+- Avoid using vague categories like "offsite" or "remote" without further detail; specify each destination
+  or scenario clearly.

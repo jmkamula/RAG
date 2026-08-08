@@ -1,0 +1,17 @@
+must_id: item:7.3:rev_refresher
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Refresher cadence check — annual refreshers actually delivered
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the scheduled dates and completion dates of all awareness refresher sessions in a central training
+  log for the past two years.
+- Name the responsible individual who oversees the delivery and tracking of annual awareness refresher
+  sessions, not just a team or department.
+- Retain attendance records or completion certificates for each annual refresher session, showing participant
+  names and dates.
+- Review the training log to confirm there are no gaps longer than 12 months between refresher sessions
+  for any staff member.

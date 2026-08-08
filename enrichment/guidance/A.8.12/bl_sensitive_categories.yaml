@@ -1,0 +1,20 @@
+must_id: item:A.8.12:bl_sensitive_categories
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Sensitive categories defined (PII / payment / health / IP / source-code) with detection patterns
+  per category
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each sensitive information category relevant to your organisation, such as personal data, payment
+  details, health records, intellectual property, and source code.
+- Document detection patterns or rules for each sensitive category, specifying keywords, formats, or identifiers
+  used by your DLP solution.
+- Name a specific individual responsible for maintaining and updating the sensitive categories and detection
+  patterns, not a team or department.
+- Record the date when the DLP baseline was last reviewed and updated to reflect current business and
+  regulatory requirements.
+- Attach supporting evidence, such as screenshots or export files from your DLP tool, showing the configured
+  detection patterns for each category.

@@ -1,0 +1,15 @@
+must_id: item:A.5.23:reg_service
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Each cloud service identified per row (provider, service name, deployment model)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each cloud service in a separate row, clearly identifying the provider, service name, and deployment
+  model for every entry.
+- Record the date each cloud service was added to the register, creating a visible history of updates.
+- Name the person responsible for maintaining the register as a specific individual, not a team or department.
+- Cross-check the register against actual cloud subscriptions or invoices to confirm all active services
+  are included.

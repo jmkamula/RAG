@@ -1,0 +1,19 @@
+must_id: item:A.8.34:evidence_preservation
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Evidence-preservation requirement (logs / results retained per legal-regulatory chain-of-custody)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy that all audit logs and test results must be retained for a defined period, referencing
+  specific legal or regulatory requirements.
+- Assign a named individual as the custodian responsible for preserving audit evidence, listing their
+  full name and job title in the policy.
+- Record the location and format of retained audit evidence in an evidence register, including access
+  controls and retention dates.
+- Document the chain-of-custody process for handling audit evidence, including steps for transfer, storage,
+  and authorized access, with dates and signatures.
+- Avoid using generic retention statements; specify exact retention periods and cite the applicable law
+  or regulation in the policy text.

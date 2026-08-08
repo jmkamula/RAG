@@ -1,0 +1,18 @@
+must_id: item:A.7.3.2:rev_field_completeness
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: Field completeness — sampled notices verified against catalog
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for maintaining the notice content catalog, listing their full name and
+  current job title.
+- Document a sample set of published privacy notices, including URLs or file locations, and the date each
+  notice was last updated.
+- Cross-reference each sampled notice against the catalog to confirm all required information types are
+  present, noting any discrepancies in a dated review log.
+- Record the outcome of the review, including who conducted it and the date, in a signed summary report.
+- Avoid using generic catalog entries that could apply to any organisation; tailor catalog fields to your
+  actual notice content and data types.

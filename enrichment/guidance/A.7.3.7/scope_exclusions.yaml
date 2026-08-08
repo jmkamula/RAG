@@ -1,0 +1,18 @@
+must_id: item:A.7.3.7:scope_exclusions
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Excluded recipients with rationale (e.g. one-time disclosures with PII already destroyed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all third parties considered for data sharing, including those ultimately excluded, in a dated
+  and version-controlled register.
+- Document the specific reason for each exclusion, such as one-time disclosures or prior destruction of
+  personal data, in the register.
+- Name the decision-maker responsible for each exclusion, ensuring an individual is identified rather
+  than a group or department.
+- Attach supporting evidence, such as destruction certificates or correspondence confirming no ongoing
+  data sharing, to each exclusion entry.
+- Review the register annually and record the date and outcome of each review to show ongoing oversight.

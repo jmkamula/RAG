@@ -1,0 +1,17 @@
+must_id: item:A.7.3.9:proc_response_times
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Response times documented in privacy policy per jurisdiction
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each jurisdiction where you process personal data and list them in your subject request handling
+  procedure.
+- Document the legally required response time for subject requests in each jurisdiction, citing the relevant
+  law or regulation.
+- State the response times clearly in your published privacy policy, matching the language and timeframes
+  to those documented in your procedure.
+- Name the owner responsible for updating response times as a specific person, not a team or department.
+- Retain a dated copy of the privacy policy showing the inclusion of response times for each jurisdiction.

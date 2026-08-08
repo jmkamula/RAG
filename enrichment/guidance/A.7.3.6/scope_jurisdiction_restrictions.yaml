@@ -1,0 +1,19 @@
+must_id: item:A.7.3.6:scope_jurisdiction_restrictions
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: Jurisdiction-specific restrictions on when + how correction/erasure can be requested
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all jurisdictions where your organisation processes personal data in a dated register, naming the
+  person responsible for maintaining this list.
+- Document the specific legal restrictions for correction and erasure requests in each jurisdiction, citing
+  the relevant law or regulation by name and section.
+- Cross-reference each jurisdiction's requirements to your internal data subject rights procedures, showing
+  how local restrictions are addressed.
+- Name the owner as a specific individual responsible for reviewing and updating the scope, not a team
+  or department.
+- Retain evidence of legal review or external advice for any jurisdiction where requirements are unclear
+  or have changed within the last 12 months.

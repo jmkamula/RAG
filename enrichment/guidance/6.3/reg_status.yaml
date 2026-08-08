@@ -1,0 +1,17 @@
+must_id: item:6.3:reg_status
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Per-row status (proposed / approved / implemented / withdrawn)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'Add a dedicated status column to the ISMS Change Register with clear options: proposed, approved, implemented,
+  or withdrawn.'
+- Record the current status for each change entry, updating the status as the change progresses through
+  its lifecycle.
+- Name the person responsible for updating each change's status, ensuring a specific individual is listed
+  rather than a team or department.
+- Date each status update in the register to provide a clear timeline of the change process.
+- Review the register regularly to confirm no entries are missing a status or have ambiguous status descriptions.

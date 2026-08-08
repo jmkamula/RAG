@@ -1,0 +1,17 @@
+must_id: item:Art.25:default_systems_inventoried
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Personal-data systems inventoried (links to Art.30 records)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Inventory all systems that process personal data, listing each system by name and primary function in
+  a dated register.
+- Cross-reference each system entry with the corresponding Article 30 processing record, including a direct
+  link or unique identifier.
+- Name a specific individual responsible for maintaining the inventory, avoiding generic titles like "IT
+  team" or "Data Office".
+- Review and update the inventory at least annually, recording the review date and the person who completed
+  it.

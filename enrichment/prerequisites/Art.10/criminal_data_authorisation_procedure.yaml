@@ -1,0 +1,39 @@
+leaf_id: req:Art.10:criminal_data_authorisation_procedure
+control_ref: Art.10
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of Processing
+  category: direct
+  rationale: Before drafting a procedure for processing criminal convictions data, you must confirm there
+    is a lawful basis for processing under GDPR Art.6. Art.10 explicitly requires this as a precondition.
+  good_enough: Document which Art.6 lawful basis applies to the intended processing of criminal convictions
+    data, even if only in draft or summary form.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need to know which processing activities involve criminal convictions data to scope the
+    authorisation procedure. Art.30 records help identify relevant data flows and responsible parties.
+  good_enough: Have a working draft or inventory of processing activities that flags any use of criminal
+    convictions data, even if not fully complete.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Designation of the Data Protection Officer
+  category: foundational
+  rationale: If a DPO is required, they must be involved in authorising or overseeing processing of sensitive
+    data like criminal convictions. Their designation clarifies roles and responsibilities for the procedure.
+  good_enough: Identify whether a DPO is designated and, if so, their contact details and involvement
+    in sensitive data processing decisions.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope should cover processing of special categories of data, including criminal
+    convictions, to ensure the procedure aligns with overall security and compliance boundaries.
+  good_enough: Have a scope statement that at least mentions processing of special categories or sensitive
+    data, even if not fully detailed for criminal convictions.

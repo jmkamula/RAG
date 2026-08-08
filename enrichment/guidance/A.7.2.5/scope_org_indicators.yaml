@@ -1,0 +1,18 @@
+must_id: item:A.7.2.5:scope_org_indicators
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: Org-specific high-risk indicators (novel tech / vulnerable subjects / large-scale)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all organisation-specific situations that trigger a privacy impact assessment, such as new technology,
+  processing sensitive data, or large-scale data use.
+- Document examples of high-risk processing relevant to your business, referencing actual products, services,
+  or data flows.
+- Name the person responsible for maintaining and updating the PIA trigger list, using a specific individual’s
+  name and job title.
+- Record the date when the PIA trigger list was last reviewed and updated, showing regular review.
+- Avoid using only generic or boilerplate triggers; tailor the list to your organisation’s actual activities
+  and risks.

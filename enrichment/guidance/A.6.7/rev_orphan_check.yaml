@@ -1,0 +1,20 @@
+must_id: item:A.6.7:rev_orphan_check
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Orphan-row check (any row whose personnel_id is no longer in A.5.16 active identity register)
+  — surfaces missed leaver-flow revocations; cross-link to A.5.18 access review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each personnel_id in the remote working programme list against the current A.5.16 active
+  identity register to identify any mismatches.
+- Record all orphan rows—where the personnel_id is missing from the active identity register—in a dated
+  exception log.
+- Document the action taken for each orphan row, such as revoking access or investigating discrepancies,
+  and include the responsible person's name and date.
+- Link each orphan-row finding to the corresponding entry in the A.5.18 access review record, showing
+  follow-up on access rights.
+- Name the reviewer who performed the orphan-row check as a specific individual, not a generic team or
+  department.

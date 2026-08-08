@@ -1,0 +1,19 @@
+must_id: item:4.3:proc_inputs
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Inputs consumed (4.1 issues, 4.2 parties, business strategy, regulatory obligations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all internal and external issues identified under clause 4.1, referencing the dated records or
+  meeting minutes where each was discussed.
+- Document interested parties and their requirements from clause 4.2, naming each party and linking to
+  the source of their input.
+- State the current business strategy and regulatory obligations considered, attaching copies or links
+  to the relevant strategy documents and legal registers.
+- Name the person responsible for compiling and updating the scope determination methodology, ensuring
+  this is a specific individual rather than a team or department.
+- Record the date when each input was last reviewed or updated, showing that the methodology reflects
+  the most recent information.

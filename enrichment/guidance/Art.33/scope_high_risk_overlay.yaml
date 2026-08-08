@@ -1,0 +1,19 @@
+must_id: item:Art.33:scope_high_risk_overlay
+control_ref: Art.33
+standard_id: GDPR:2016/679
+must_text: High-risk overlay (when Art.34 subject notification ALSO triggers — boundary to Art.34 leaf)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the criteria used to determine when a personal data breach is considered "high risk" and requires
+  notification under both Art.33 and Art.34.
+- Name the individual responsible for assessing breach severity and making the decision to notify data
+  subjects under Art.34.
+- Record each breach assessment with a dated entry that clearly states whether the incident meets the
+  high-risk threshold for Art.34 notification.
+- Cross-reference the breach log entry with the documented risk assessment to show how the notification
+  boundary between Art.33 and Art.34 was applied.
+- Avoid using vague terms like "serious breach" without specifying what qualifies as "high risk" in your
+  documented criteria.

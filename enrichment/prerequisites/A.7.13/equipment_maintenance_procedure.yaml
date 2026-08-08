@@ -1,0 +1,40 @@
+leaf_id: req:A.7.13:equipment_maintenance_procedure
+control_ref: A.7.13
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which equipment and locations are in-scope for your ISMS before you can
+    define which assets require maintenance procedures. This ensures the procedure covers all relevant
+    equipment and nothing is missed.
+  good_enough: A documented scope statement that clearly lists included sites, systems, and equipment
+    types is available and up-to-date.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register is essential to identify which equipment needs maintenance and
+    to ensure all relevant assets are covered by the procedure.
+  good_enough: A basic asset register exists, listing all equipment types and their locations, even if
+    some details are pending refinement.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that responsibilities for equipment maintenance, supervision,
+    and verification are understood and documented in the procedure.
+  good_enough: A simple RACI or list of responsible persons for equipment maintenance is documented, even
+    if not fully formalised.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment helps prioritise which equipment is most critical to maintain and informs
+    the controls and frequency specified in the procedure.
+  good_enough: A recent risk assessment exists that identifies key equipment risks, even if mitigation
+    actions are still in progress.

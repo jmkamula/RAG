@@ -1,0 +1,19 @@
+must_id: item:A.5.28:reg_custodian
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Current custodian per row (named individual or sealed-storage location)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the current custodian or the specific sealed-storage location for each evidence
+  item in the custody register.
+- Enter the date and time when custody was transferred to the current custodian or storage location for
+  each entry.
+- Name the custodian as a specific individual or uniquely identified storage location—do not use generic
+  terms like "team" or "office".
+- Cross-reference each evidence item’s unique identifier in the register to its associated custody record
+  for traceability.
+- Review and update the register immediately whenever custody changes, ensuring no gaps or outdated information
+  remain.

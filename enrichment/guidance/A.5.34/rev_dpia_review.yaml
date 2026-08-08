@@ -1,0 +1,20 @@
+must_id: item:A.5.34:rev_dpia_review
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: DPIA completion status reviewed (any high-risk processing without a completed DPIA flagged;
+  DPIAs older than 24 months refreshed where processing material to lifecycle changed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a responsible individual to oversee the DPIA review process, listing their full name and role in
+  the review record.
+- Document the completion status of all DPIAs in a dated register, clearly flagging any high-risk processing
+  activities lacking a completed DPIA.
+- Record the last review date for each DPIA and note any that are older than 24 months or where processing
+  activities have changed.
+- Update and retain evidence of refreshed DPIAs for any processing activities that have materially changed
+  since the last assessment.
+- Avoid listing DPIA ownership as "the team" or "department"; always specify a single accountable person
+  for each DPIA.

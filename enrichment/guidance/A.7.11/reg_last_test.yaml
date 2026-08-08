@@ -1,0 +1,16 @@
+must_id: item:A.7.11:reg_last_test
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Per-row last test date and outcome
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent utility test for each site and utility in a dedicated column within
+  the register.
+- Document the outcome of each test per row, clearly stating "pass" or "fail" rather than ambiguous terms
+  like "OK" or "checked".
+- Name the person who conducted or verified each test in the corresponding row to provide clear accountability.
+- Retain supporting evidence for each test, such as signed test reports or screenshots, and cross-reference
+  their storage location in the register.

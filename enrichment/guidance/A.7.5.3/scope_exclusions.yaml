@@ -1,0 +1,19 @@
+must_id: item:A.7.5.3:scope_exclusions
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+must_text: Excluded events (intra-org + fully-anonymised aggregates) with rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all data transfer events and clearly mark those excluded from the scope, specifying if they are
+  intra-organisation or involve fully anonymised aggregates.
+- Document the rationale for each excluded event, stating why it meets the criteria for exclusion under
+  ISO27701:2019 A.7.5.3.
+- Name the individual responsible for determining and approving exclusions, avoiding generic titles like
+  "the team" or "IT department."
+- Record the date each exclusion decision was made and reference supporting documentation or meeting minutes
+  where exclusions were discussed.
+- Review the exclusions list annually and update it, retaining evidence of the review date and any changes
+  made.

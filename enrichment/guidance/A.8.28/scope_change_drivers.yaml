@@ -1,0 +1,19 @@
+must_id: item:A.8.28:scope_change_drivers
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new language, new framework, new vulnerability class)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all programming languages, frameworks, and vulnerability classes currently in use within a dated
+  secure coding scope document.
+- Document a trigger list that specifies events requiring re-scoping, such as adoption of a new language,
+  framework, or discovery of a new vulnerability class.
+- Assign a named individual responsible for monitoring technology changes and initiating re-scoping when
+  a trigger event occurs.
+- Record each re-scoping decision with the date, reason, and the person who approved the update to the
+  secure coding scope.
+- Specify trigger events clearly; avoid vague terms like "technology change" that do not identify concrete
+  actions or criteria.

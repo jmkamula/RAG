@@ -1,0 +1,19 @@
+must_id: item:Art.27:rev_exception_recheck
+control_ref: Art.27
+standard_id: GDPR:2016/679
+must_text: Art.27.2 exception re-check where claimed — processing-pattern shift may invalidate the exception
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the original basis for claiming the Article 27.2 exception, including processing activities,
+  data subjects, and geographic scope, in a dated record.
+- Review processing patterns at least annually and whenever significant business changes occur, recording
+  the date and outcome of each review.
+- Name the individual responsible for monitoring processing-pattern changes and re-checking the Article
+  27.2 exception, not just a team or department.
+- Record any identified changes that could affect the exception status, including a summary of the change
+  and the date it was detected.
+- Sign and date a formal decision statement confirming whether the Article 27.2 exception remains valid
+  or needs to be withdrawn, following each review.

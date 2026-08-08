@@ -1,0 +1,17 @@
+must_id: item:5.2:commitment_req
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: Commitment to satisfy applicable requirements
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy that your organisation is committed to meeting all applicable legal, regulatory,
+  and contractual information security requirements.
+- Name the specific individual, such as the CEO or Managing Director, who has approved this commitment
+  in the policy document.
+- Record the approval date on the policy to show when the commitment to satisfy requirements was formally
+  adopted.
+- Avoid using generic statements like “we comply with all laws”; specify the types of requirements relevant
+  to your organisation’s operations.

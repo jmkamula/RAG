@@ -1,0 +1,19 @@
+must_id: item:4.2:rev_scope_check
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Cross-check against the applicable-domains scope — any new category that should be covered
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the latest interested parties list against your documented scope of applicable domains
+  to identify any missing or new categories.
+- Record any new or changed interested party categories in a dated review log, including who identified
+  them and the rationale for inclusion.
+- Assign a named individual to update the interested parties program documentation to reflect any additions
+  or changes.
+- Name each new category with a clear, specific label—avoid generic terms like "other stakeholders" that
+  lack clear meaning.
+- Retain a signed review summary confirming the cross-check was completed and all relevant categories
+  are now covered.

@@ -1,0 +1,16 @@
+must_id: item:A.5.20:dev_reason
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Reason for the deviation captured (commercial necessity, market constraint, supplier capability)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific reason for each supplier agreement deviation in the register, referencing commercial
+  necessity, market constraint, or supplier capability.
+- Name the individual who approved each deviation, ensuring the register lists a specific person rather
+  than a team or department.
+- Date each entry in the deviation register to show when the reason was documented and the deviation approved.
+- Attach supporting evidence, such as correspondence or meeting notes, that substantiates the stated reason
+  for the deviation.

@@ -1,0 +1,18 @@
+must_id: item:A.7.2.7:reg_processing_scope
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Processing scope per row (activities + PII categories jointly handled)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each joint processing activity in a separate row, specifying the exact business process or system
+  involved.
+- Describe the categories of personal data handled jointly for each activity, using clear and specific
+  terms (e.g., "customer email addresses," not just "personal data").
+- Name the joint controller partner for each activity, identifying the legal entity rather than a generic
+  group or team.
+- Record the date each entry was last reviewed or updated to show ongoing accuracy.
+- Attach or reference the signed joint controller arrangement for each activity to demonstrate agreement
+  on processing scope.

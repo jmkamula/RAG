@@ -1,0 +1,41 @@
+leaf_id: req:A.5.1:communication_record
+control_ref: A.5.1
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organisation and which personnel are in-scope for the
+    ISMS before you can determine who must receive the information security policy. The scope defines
+    your communication audience.
+  good_enough: A documented scope that clearly lists included business units, locations, and functions.
+    It should be specific enough to identify relevant personnel for policy communication.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: direct
+  rationale: You cannot communicate or record the distribution of the information security policy until
+    the policy itself is finalised and approved. The policy is the artefact being communicated.
+  good_enough: A formally approved and current information security policy document, even if it is a draft
+    pending minor edits, as long as its core content is stable.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of information security roles and responsibilities ensures you know who
+    is responsible for communicating the policy and who must receive it. This underpins an effective communication
+    record.
+  good_enough: A basic roles and responsibilities matrix or list that identifies key information security
+    roles and their holders, even if not fully detailed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Knowing the classification of the policy document helps determine the appropriate communication
+    channels and any restrictions on distribution. This ensures the record reflects suitable handling.
+  good_enough: A simple classification scheme that covers at least the policy document, with basic rules
+    for handling and distribution.

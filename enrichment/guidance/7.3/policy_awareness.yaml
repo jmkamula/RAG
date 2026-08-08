@@ -1,0 +1,18 @@
+must_id: item:7.3:policy_awareness
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Content covers awareness of the InfoSec policy
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the specific sections of your Information Security Policy included in the ISMS Awareness Programme
+  materials.
+- Document the date and method used to deliver the awareness content to staff, such as training session
+  attendance records or email distribution logs.
+- Name the individual responsible for updating the awareness programme content when the Information Security
+  Policy changes.
+- Retain copies of the actual materials or presentations used to demonstrate the policy was clearly communicated.
+- Avoid using generic or outdated policy content; confirm all materials reference your current, organisation-specific
+  Information Security Policy version.

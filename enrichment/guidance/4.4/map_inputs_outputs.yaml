@@ -1,0 +1,17 @@
+must_id: item:4.4:map_inputs_outputs
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: Inputs and outputs labelled per process node
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Label each process node with clear input sources and output destinations, using specific document or
+  data names rather than generic terms.
+- Cross-reference each input and output to supporting records or systems, providing document titles or
+  system names for traceability.
+- Name the process owner for each node as a specific individual, not a team or department.
+- Date-stamp the latest version of the process interaction map and retain previous versions for audit
+  history.
+- Review the map to confirm there are no unlabeled or ambiguous inputs or outputs at any process node.

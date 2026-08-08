@@ -1,0 +1,16 @@
+must_id: item:A.7.3.2:reg_signoff
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: DPO + Legal signoff per version
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer and Legal representative who approved each version in the Notice Artifact
+  Register, listing full names and job titles.
+- Record the date of signoff for each version, ensuring it matches the documented approval from both the
+  DPO and Legal.
+- Attach a signed approval statement or email from both the DPO and Legal for every register version,
+  referencing the specific version number.
+- Avoid listing groups or roles as approvers; specify individual names to prevent ambiguity in accountability.

@@ -1,0 +1,33 @@
+leaf_id: req:Art.38:applicable_scope
+control_ref: Art.38
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Designation of the Data Protection Officer
+  category: direct
+  rationale: You cannot define the scope of the DPO’s position (Art.38) until a DPO has been formally
+    designated under Art.37. The scope, forums, and responsibilities only become relevant once the DPO
+    role exists.
+  good_enough: A named DPO has been designated and their appointment is documented, even if all downstream
+    onboarding is still in progress.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: Understanding which processing activities exist is essential to determine where the DPO’s
+    oversight and involvement are required. The DPO’s scope must align with the actual data processing
+    landscape.
+  good_enough: A current, working draft of the RoPA exists that lists major processing activities, even
+    if minor updates are pending.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope helps clarify the organizational and system boundaries relevant to privacy
+    and data protection, informing which areas the DPO should cover.
+  good_enough: A documented ISMS scope exists that outlines the main business units, locations, and systems
+    included, even if not all privacy-specific details are finalized.

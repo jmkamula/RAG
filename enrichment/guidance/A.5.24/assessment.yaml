@@ -1,0 +1,20 @@
+must_id: item:A.5.24:assessment
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Incident assessment and classification criteria (severity tiers; what triggers each tier; alignment
+  with A.5.25 triage decision criteria)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define clear, written severity tiers for incidents, with specific criteria and examples for each tier
+  in your incident management planning framework.
+- Document precise triggers for escalating incidents into each severity tier, referencing observable events
+  or thresholds.
+- Cross-reference your severity tier triggers with the triage decision criteria documented under A.5.25,
+  noting any differences or alignment.
+- Name the individual responsible for maintaining and updating the incident assessment and classification
+  criteria, not just a team or department.
+- Record the date of the most recent review or update to the incident classification criteria within the
+  planning framework.

@@ -1,0 +1,20 @@
+must_id: item:Art.32:rev_iso_alignment
+control_ref: Art.32
+standard_id: GDPR:2016/679
+must_text: ISO 27001 alignment — implementing controls (A.5.24/A.8.x) still in force; any reductions challenged
+  for Art.32 impact
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a current list of all ISO 27001 controls implemented under A.5.24 and A.8.x, including the
+  date of last review and responsible owner.
+- Record any changes or reductions to these controls in a dated change log, including the rationale and
+  a named approver for each change.
+- Cross-reference each change against GDPR Art.32 requirements, noting any potential impacts and the mitigation
+  steps taken.
+- Name the owner as a specific individual responsible for ongoing ISO 27001 alignment — do not use a team
+  or department as the owner.
+- Retain evidence of management challenge or approval for any control reduction, such as meeting minutes
+  or a signed decision document.

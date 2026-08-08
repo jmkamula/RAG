@@ -1,0 +1,20 @@
+must_id: item:A.5.37:related_controls_link
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Cross-link to related controls per procedure (A.5.24/A.5.26 incident, A.5.29 disruption, A.5.30
+  ICT recovery, A.8.x technical controls)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each documented operating procedure to all related ISO27001 controls, listing specific
+  control numbers and titles in the register entry.
+- Record the date each cross-link was last reviewed or updated, and name the individual responsible for
+  maintaining the register.
+- Attach supporting evidence, such as procedure documents or mapping tables, that clearly show how each
+  procedure aligns with the referenced controls.
+- Name the owner of each procedure as a specific individual, not a team or department, to avoid ambiguity
+  in responsibility.
+- Review the register for any procedures missing cross-links to relevant controls, and update entries
+  to ensure no procedure stands alone without references.

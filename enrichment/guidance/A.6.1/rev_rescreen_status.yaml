@@ -1,0 +1,20 @@
+must_id: item:A.6.1:rev_rescreen_status
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Rescreen status — for roles with ongoing-check obligations, what fraction completed on cadence
+  vs aged-overdue
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all roles with ongoing background check requirements and list them in a dated register maintained
+  by HR or compliance.
+- Record the completion date of each periodic screening for individuals in these roles in a centralized
+  tracking log.
+- Calculate and document the percentage of required screenings completed on schedule versus those overdue,
+  updating this metric at least quarterly.
+- Name a specific individual responsible for monitoring and reporting screening status—avoid assigning
+  this responsibility to a team or department.
+- Retain evidence of follow-up actions taken for any overdue screenings, including communications and
+  escalation steps, in an auditable folder.

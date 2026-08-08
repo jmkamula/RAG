@@ -1,0 +1,15 @@
+must_id: item:4.2:reg_last_assessed
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Last assessment date per party row (drives staleness detection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent assessment for each interested party directly in its row of the register.
+- Name the person responsible for updating each assessment date, listing a specific individual rather
+  than a group or department.
+- Cross-reference each assessment date to supporting evidence, such as meeting minutes or correspondence,
+  stored in an accessible location.
+- Avoid leaving any party row blank or with placeholders like "TBD" for the last assessment date.

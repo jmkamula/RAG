@@ -1,0 +1,46 @@
+leaf_id: req:A.8.2:privileged_access_procedure
+control_ref: A.8.2
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.15
+  standard_id: ISO27001:2022
+  title: Access control
+  category: direct
+  rationale: A clear access-control policy is essential to define who can be granted privileged access
+    and under what conditions. Without this, the procedure for privileged access management cannot be
+    meaningfully scoped or enforced.
+  good_enough: A documented, approved access-control policy that outlines principles for granting, reviewing,
+    and revoking access rights.
+- ref: A.5.3
+  standard_id: ISO27001:2022
+  title: Segregation of duties
+  category: direct
+  rationale: Segregation of duties ensures that no single individual has unchecked privileged access,
+    reducing the risk of misuse. The privileged access procedure must reflect these controls.
+  good_enough: A list or matrix showing key duties and how they are separated, with any exceptions documented.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You need to know which systems and assets exist before you can define and manage privileged
+    access to them. The asset register provides this baseline.
+  good_enough: A current inventory of information assets and systems, with owners identified for each.
+- ref: A.8.18
+  standard_id: ISO27001:2022
+  title: Use of privileged utility programs
+  category: direct
+  rationale: Privileged utility programs are a common vector for elevated access. The procedure must account
+    for how these are managed, so their use policy must be understood first.
+  good_enough: A documented approach for controlling and monitoring use of privileged utilities, even
+    if basic.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities is necessary to determine who can approve,
+    grant, and review privileged access.
+  good_enough: A list of key security roles and their responsibilities, especially those relevant to access
+    management.

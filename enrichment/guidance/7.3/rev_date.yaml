@@ -1,0 +1,17 @@
+must_id: item:7.3:rev_date
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent awareness program review date in a central log, showing it falls within the planned
+  review interval.
+- Name the individual responsible for scheduling and conducting the awareness program review, ensuring
+  a specific person is listed.
+- Retain a copy of the signed review report or meeting minutes that confirm the review took place on the
+  recorded date.
+- Cross-reference the planned review interval in your awareness program documentation to show alignment
+  with the actual review date.

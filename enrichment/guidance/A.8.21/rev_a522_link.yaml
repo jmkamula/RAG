@@ -1,0 +1,19 @@
+must_id: item:A.8.21:rev_a522_link
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Cross-link to A.5.22 supplier review outcomes for in-scope vendor services
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each network service provider listed in the periodic review with the latest supplier
+  review outcomes from A.5.22, including review dates.
+- Document any changes in supplier risk ratings or status since the last network services review, citing
+  specific findings from A.5.22 records.
+- Name the individual responsible for verifying that all in-scope vendor services have corresponding supplier
+  review outcomes linked.
+- Attach or link supporting evidence from A.5.22 reviews directly in the network services program review
+  report.
+- Avoid referencing supplier reviews with generic statements; specify the supplier name and the relevant
+  A.5.22 review outcome for each service.

@@ -1,0 +1,18 @@
+must_id: item:Art.13:scope_collection_points
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Collection points enumerated (web forms, sign-up, in-app, phone, in-person, paper)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every method by which personal data is collected, such as web forms, sign-up pages, in-app prompts,
+  phone calls, in-person interactions, and paper documents.
+- Record the exact location or URL for each digital collection point and the physical location for in-person
+  or paper-based points.
+- Assign a specific individual responsible for maintaining and updating the list of collection points,
+  naming them directly rather than a team or department.
+- Date and version the documented list to show when it was last reviewed or updated.
+- Cross-reference each collection point with the relevant privacy notice or information provided to individuals
+  at the time of data collection.

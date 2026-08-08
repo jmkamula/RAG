@@ -15,6 +15,10 @@ table_shape: true
 
 > Per-activity lawful basis record — the documented basis for every processing activity. Annual refresh (freshness=365).
 
+## Before you start
+
+<<PREREQUISITES>>
+
 <!-- TABLE-COLUMNS leaf:req:A.7.2.2:lawful_basis_register -->
 <!-- column: item:A.7.2.2:reg_activity_id -->
 <!-- column: item:A.7.2.2:reg_primary_basis -->

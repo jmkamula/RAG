@@ -1,0 +1,16 @@
+must_id: item:A.6.4:reg_violation_type
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Per-case violation type (matches the procedure's violation_scope categories)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each disciplinary case entry with the violation categories listed in your official disciplinary
+  procedure to ensure alignment.
+- Record the specific violation type for every case in the register, using the exact wording from your
+  procedure’s violation_scope section.
+- Document the date and name of the person assigning the violation type for each case entry.
+- Name the violation type for each case individually—do not use generic terms like "other" or leave the
+  field blank.

@@ -1,0 +1,17 @@
+must_id: item:B.8.5.3:reg_customer_notified
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+must_text: Customer notification flag per row (link to B.8.5.4 if legally-binding request)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to the Processor Disclosure Event Log to record whether the customer was notified for each
+  disclosure event.
+- Link each disclosure event involving a legally-binding request to the relevant entry in the B.8.5.4
+  log, using a unique reference or hyperlink.
+- Record the date and method of customer notification for each event, ensuring details are specific and
+  not left blank or marked "N/A".
+- Name the individual responsible for updating the log for each disclosure event, avoiding generic roles
+  like "team" or "IT".

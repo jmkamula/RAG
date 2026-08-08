@@ -1,0 +1,16 @@
+must_id: item:A.5.12:level_definitions
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Definition and indicative examples per level
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each information classification level with a clear definition that describes what types of information
+  belong in that category.
+- Document at least one concrete example of information for each classification level, using real data
+  types or documents from your organisation.
+- State the rationale for each level’s definition, linking it to your organisation’s needs, risks, or
+  legal obligations.
+- Assign a specific individual as the scheme owner—do not use generic roles like "the team" or "IT department".

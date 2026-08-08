@@ -1,0 +1,18 @@
+must_id: item:Art.10:scope_exclusions
+control_ref: Art.10
+standard_id: GDPR:2016/679
+must_text: Out-of-scope activities (e.g. journalistic / non-EU jurisdictions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all data processing activities and clearly mark those that fall outside GDPR Article 10, such as
+  journalistic or non-EU jurisdiction activities.
+- Document the specific legal basis or exemption for each out-of-scope activity, referencing relevant
+  Member State law or jurisdiction.
+- Name the responsible individual who determined the scope, avoiding generic titles like "the team" or
+  "compliance department".
+- Record the date when the scope determination was last reviewed and updated to reflect current operations.
+- Retain supporting evidence, such as legal opinions or correspondence, that justify why each activity
+  is considered out of scope.

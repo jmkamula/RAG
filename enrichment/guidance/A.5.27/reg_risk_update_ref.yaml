@@ -1,0 +1,17 @@
+must_id: item:A.5.27:reg_risk_update_ref
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Risk register update reference per row where applicable
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each lessons learned entry to a specific risk register item by unique identifier if
+  the lesson relates to an existing or new risk.
+- Record the date and name of the person who updated the risk register in response to each applicable
+  lesson learned entry.
+- Document any lessons learned entries that do not result in a risk register update with a brief justification
+  in the register.
+- Name the risk register owner as a specific individual, not a team or department, in each cross-referenced
+  entry.

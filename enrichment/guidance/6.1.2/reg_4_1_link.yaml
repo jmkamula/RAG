@@ -1,0 +1,17 @@
+must_id: item:6.1.2:reg_4_1_link
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Link from each risk back to the issues register (4.1) entry that surfaced it where applicable
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each risk entry in the Information Security Risk Register to the specific issue or context
+  in the issues register that led to its identification.
+- Record the unique identifier or reference number from the issues register alongside the corresponding
+  risk in the risk register.
+- Name the issues register entry using a clear, descriptive title rather than a generic label or placeholder.
+- Confirm the date each risk was linked to its originating issue by noting it in the risk register entry.
+- Review all risk entries to ensure none reference issues that are missing or have been removed from the
+  issues register.

@@ -1,0 +1,48 @@
+leaf_id: req:A.7.3.2:applicable_scope
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines which parts of the organization, processes, and information assets
+    are covered by the management system. You can't accurately define which processing contexts require
+    a privacy notice without knowing the overall boundaries of your ISMS.
+  good_enough: A clear, documented scope statement that identifies the organizational units, activities,
+    and systems included in the ISMS—even if some details are still being finalized.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Knowing the specific purposes for processing personal data is essential to determine when
+    and why a notice is required. Notice contexts depend on these documented purposes.
+  good_enough: A list of processing activities with their associated purposes, even if some purposes are
+    described at a high level.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: The lawful basis for each processing activity affects notice requirements and content. You
+    need this mapped before you can scope applicable notice contexts.
+  good_enough: Each processing activity has a stated lawful basis, even if the justification is brief
+    or provisional.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register helps identify where personal data resides and which systems
+    or processes are in scope for privacy notices. This underpins accurate scoping of notice contexts.
+  good_enough: A basic inventory of key information assets and systems that process personal data, even
+    if not fully detailed.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of privacy and information security roles ensures the right people are involved
+    in identifying and documenting notice contexts.
+  good_enough: Named individuals or teams responsible for privacy and security, even if role descriptions
+    are still being refined.

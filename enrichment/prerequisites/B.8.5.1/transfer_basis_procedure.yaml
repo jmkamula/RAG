@@ -1,0 +1,47 @@
+leaf_id: req:B.8.5.1:transfer_basis_procedure
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: You must have identified and documented the lawful basis for processing personal data, as
+    this underpins which transfer mechanisms are valid and what information must be provided to customers.
+  good_enough: A list of lawful bases for all relevant processing activities is documented and mapped
+    to data flows, even if some edge cases are still under review.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Knowing the specific purposes for which personal data is processed is essential to determine
+    if international transfers are necessary and to inform customers accurately about transfer justifications.
+  good_enough: Each processing activity has a documented purpose statement that is linked to the relevant
+    data flows and transfer scenarios.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope statement defines which parts of the business, systems, and data are covered, ensuring
+    that your transfer procedure addresses all relevant jurisdictions and subprocessors.
+  good_enough: There is a clear, up-to-date ISMS scope statement that includes all locations and subprocessors
+    involved in personal data processing.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An asset register is needed to identify all systems and subprocessors handling personal data,
+    which is critical for mapping cross-jurisdiction transfers and informing customers.
+  good_enough: A working inventory of information assets and subprocessors exists, with at least basic
+    details on location and data handled.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that the right people are responsible for managing, communicating,
+    and updating transfer basis information to customers.
+  good_enough: Key roles for data transfers and customer notifications are assigned and documented, even
+    if some responsibilities are still being refined.

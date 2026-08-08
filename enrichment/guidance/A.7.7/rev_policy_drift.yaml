@@ -1,0 +1,20 @@
+must_id: item:A.7.7:rev_policy_drift
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Policy currency check (referenced policies — A.5.12 classification, A.6.7 remote-work — still
+  aligned)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Review the latest versions of the Clear Desk / Clear Screen policy, Information Classification policy,
+  and Remote Work policy, noting their document dates and version numbers.
+- Cross-reference each policy section to confirm that requirements for handling information and devices
+  are consistent and do not contradict each other.
+- Record the name and signature of the individual who verified policy alignment, along with the date of
+  review.
+- Name the owner of each policy as a specific individual, not a group or department, to avoid ambiguity
+  in accountability.
+- Document any identified misalignments or required updates, and log the decision and responsible person
+  for addressing them.

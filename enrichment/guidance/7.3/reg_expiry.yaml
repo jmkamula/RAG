@@ -1,0 +1,17 @@
+must_id: item:7.3:reg_expiry
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Expiry / next-due date per row (drives refresher trigger)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each individual completed their most recent ISMS awareness training in a dedicated column
+  of the register.
+- Calculate and enter the expiry or next-due date for refresher training for each individual, based on
+  your defined training frequency.
+- Name the owner responsible for maintaining the register as a specific person, not a generic role or
+  team.
+- Review the register quarterly and document the review date and reviewer’s name to confirm all expiry
+  dates are current and accurate.

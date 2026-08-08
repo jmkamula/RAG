@@ -1,0 +1,18 @@
+must_id: item:8.3:rev_soa_currency
+control_ref: '8.3'
+standard_id: ISO27001:2022
+must_text: SoA currency check — newly implemented controls reflected in the SoA (6.1.3 leaf)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the list of newly implemented controls from the Treatment Execution Program with the
+  current Statement of Applicability (SoA) version.
+- Document the date and outcome of the SoA review, noting any additions or updates made to reflect new
+  controls.
+- Name the individual responsible for updating the SoA, ensuring a specific person is listed rather than
+  a team or department.
+- Retain the previous and updated SoA versions, along with a summary of changes, as dated records for
+  comparison.
+- Record management approval of the updated SoA, including the approver’s name and date of sign-off.

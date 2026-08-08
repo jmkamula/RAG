@@ -1,0 +1,50 @@
+leaf_id: req:A.5.14:information_transfer_policy
+control_ref: A.5.14
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You must know which parts of your organisation, systems, and data are in-scope for the ISMS
+    before you can define which information transfers need to be governed by policy. This ensures the
+    policy covers all relevant transfer scenarios.
+  good_enough: A clear, documented scope statement that identifies the organisational and technical boundaries
+    for the ISMS, even if not fully detailed.
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: direct
+  rationale: The overarching information security policy sets the tone and principles for all subordinate
+    policies, including information transfer. Your transfer policy must align with and reference this
+    parent framework.
+  good_enough: A published, approved information security policy that outlines high-level objectives and
+    responsibilities, even if some details are still being refined.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You need an up-to-date register of information assets to identify what data or information
+    types may be transferred, and to whom. This is essential for setting appropriate transfer rules and
+    controls.
+  good_enough: A basic inventory of key information assets, with enough detail to identify sensitive or
+    regulated data that may be transferred.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Transfer rules depend on the classification of information (e.g., confidential, internal,
+    public). Without a classification scheme, you cannot set risk-appropriate transfer controls.
+  good_enough: A documented scheme that defines at least the main information classification levels and
+    their handling requirements, even if not fully rolled out.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: You need to understand the risks associated with information transfer (e.g., data leakage,
+    interception) to set meaningful policy requirements and controls.
+  good_enough: A recent risk assessment that identifies major information transfer risks and their impact,
+    even if some risk treatments are still pending.

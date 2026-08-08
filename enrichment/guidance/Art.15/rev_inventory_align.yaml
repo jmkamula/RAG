@@ -1,0 +1,20 @@
+must_id: item:Art.15:rev_inventory_align
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Soft cross-check supplementary to rev_identity_pair_30 — narrative observations on inventory
+  drift between formal pair checks
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer responsible for conducting the narrative inventory drift observations, specifying
+  a real individual rather than a group or department.
+- Document narrative observations on inventory drift in a dated review log, clearly referencing the relevant
+  data subject access request (DSAR) process and inventory records.
+- Cross-reference each observation with the most recent formal identity pair check to highlight any discrepancies
+  or changes since the last review.
+- Record any identified inventory drift and actions taken to address it, including dates and responsible
+  persons for follow-up.
+- Retain all review logs and supporting evidence in a central location accessible for audit, ensuring
+  each entry is time-stamped and attributable.

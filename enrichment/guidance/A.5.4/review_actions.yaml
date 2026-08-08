@@ -1,0 +1,16 @@
+must_id: item:A.5.4:review_actions
+control_ref: A.5.4
+standard_id: ISO27001:2022
+must_text: Actions captured where the directive needed amendment (policy reorg, scope change, new personnel
+  categories)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of each periodic review of the management directive in a review log maintained
+  by a named individual.
+- Document specific actions taken when the directive required amendment, including the reason for change
+  and a summary of the update.
+- Name the approver of each amendment as a specific individual, not a group or generic title.
+- Attach the updated directive version and cross-reference it to the review log entry detailing the change.

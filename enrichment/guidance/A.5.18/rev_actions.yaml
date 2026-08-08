@@ -1,0 +1,20 @@
+must_id: item:A.5.18:rev_actions
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Action items closed where rights were amended or revoked (each modification or revocation traceable
+  to a register row update + revocation_record where applicable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each access rights modification or revocation in the access register, including the date, the
+  specific change, and the person making the update.
+- Attach a revocation record for every access removal, such as a ticket or signed confirmation, and link
+  it to the corresponding register row.
+- Update the register row with a reference to the action item or ticket that triggered the change, ensuring
+  traceability for each adjustment.
+- Name the individual who approved the rights change in the register entry—do not leave this field blank
+  or list only a department.
+- Confirm all action items related to access changes are marked as closed, with closure dates and supporting
+  evidence attached to each register entry.

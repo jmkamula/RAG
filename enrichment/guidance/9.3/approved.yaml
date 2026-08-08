@@ -1,0 +1,15 @@
+must_id: item:9.3:approved
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Approved by top management attendee
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the top management attendee present at the review in the meeting minutes, listing their full name
+  and job title.
+- Record the date and time of the management review meeting in the minutes for clear traceability.
+- Sign the minutes with a physical or digital signature from the top management attendee to confirm approval.
+- Avoid listing approval as "management" or "leadership team"—specify the individual who approved the
+  minutes.

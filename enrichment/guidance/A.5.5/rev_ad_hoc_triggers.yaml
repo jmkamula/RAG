@@ -1,0 +1,16 @@
+must_id: item:A.5.5:rev_ad_hoc_triggers
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Ad-hoc review triggers listed (re-org, new geography, new sectoral obligation)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific events that trigger an ad-hoc authority contact review, such as company reorganisation,
+  expansion into new regions, or new regulatory requirements.
+- Document each trigger event and the corresponding review date in a change log maintained by a named
+  individual.
+- Name the review owner as a specific person, not a group or department, to avoid ambiguity in responsibility.
+- Retain evidence of each review, such as meeting notes or updated contact lists, with clear references
+  to the triggering event.

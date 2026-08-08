@@ -1,0 +1,20 @@
+must_id: item:Art.33:rev_severity_audit
+control_ref: Art.33
+standard_id: GDPR:2016/679
+must_text: Severity-gate audit — sampled 'no-notify' decisions reviewed for defensibility against Art.33.1
+  risk threshold
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of recent data breach incidents where the decision was made not to notify the
+  supervisory authority.
+- Document the rationale for each 'no-notify' decision, referencing the specific risk assessment and how
+  it aligns with Article 33.1 criteria.
+- Name the reviewer who assessed each sampled decision, ensuring this is a specific individual and not
+  a group or department.
+- Record the date each review was completed, attaching any supporting evidence used to justify the risk
+  threshold determination.
+- Flag any sampled decision where the justification is missing, generic, or relies on boilerplate language
+  that does not address the specific incident.

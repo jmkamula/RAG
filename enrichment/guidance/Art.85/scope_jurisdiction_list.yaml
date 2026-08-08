@@ -1,0 +1,19 @@
+must_id: item:Art.85:scope_jurisdiction_list
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: List of Member States in which Art.85-qualifying activities occur (drives the per-jurisdiction
+  lookup workload)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all activities that may fall under Article 85 in your organisation and record them in a dated
+  inventory.
+- List each EU Member State where these activities occur, naming the countries explicitly in a table or
+  register.
+- Name the individual responsible for maintaining and updating the list of Member States, avoiding generic
+  roles like "Compliance Team".
+- Review the list annually and record the review date and reviewer’s name to show it is kept current.
+- Attach supporting documentation, such as contracts or project descriptions, that confirm activities
+  in each listed Member State.

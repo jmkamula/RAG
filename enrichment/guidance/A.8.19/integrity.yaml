@@ -1,0 +1,19 @@
+must_id: item:A.8.19:integrity
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Integrity / signature verification before installation (no unsigned packages on production)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for verifying software integrity or digital signatures before installation,
+  including required tools and responsible roles.
+- Record each verification event in a log, naming the software, date, method used, and the individual
+  who performed the check.
+- Attach evidence of verification, such as a screenshot or output file showing successful signature or
+  hash validation, to the installation record.
+- Name the person approving the installation as a specific individual, not a team or department, and require
+  their dated sign-off before proceeding.
+- Flag and document any instance where unsigned or unverifiable software was detected, including actions
+  taken to prevent installation.

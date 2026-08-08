@@ -1,0 +1,18 @@
+must_id: item:A.5.26:rev_exercise
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Tabletop / simulation outcomes reviewed (or scheduled-but-not-yet-run noted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and scope of the most recent incident response tabletop or simulation exercise in
+  an incident response review log.
+- Record the names and roles of all participants involved in the exercise, including the facilitator and
+  observers.
+- Summarize key outcomes, lessons learned, and identified gaps from the exercise in a dated review report.
+- Note any scheduled-but-not-yet-run exercises with planned dates and responsible individuals in the same
+  review log.
+- Attach evidence of management review or sign-off of the exercise outcomes, such as a signed meeting
+  minute or approval email.

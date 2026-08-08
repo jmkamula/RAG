@@ -1,0 +1,19 @@
+must_id: item:A.7.3.9:proc_identity_verification
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Identity verification (proportionate — not overly onerous)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the steps required to verify the identity of a data subject before processing their request,
+  referencing acceptable forms of identification.
+- State the criteria for when additional identification is needed, ensuring requirements are proportionate
+  to the sensitivity of the requested information.
+- Name the person or role responsible for reviewing and approving submitted identification documents for
+  each subject request.
+- Record the date and method of identity verification for each subject request in a log or case management
+  system.
+- Specify that generic instructions such as "verify ID as appropriate" are not permitted; procedures must
+  clearly define acceptable verification methods.

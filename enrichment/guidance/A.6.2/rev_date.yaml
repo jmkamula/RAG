@@ -1,0 +1,16 @@
+must_id: item:A.6.2:rev_date
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Employment Terms Template in a version-controlled document
+  or register.
+- State the planned review interval in months or years within the template documentation.
+- Assign a named individual responsible for conducting the periodic review, not a team or department.
+- Confirm the review was completed on or before the scheduled date by attaching a signed or approved review
+  record.
+- Flag any missed or overdue reviews with a documented explanation and corrective action plan.

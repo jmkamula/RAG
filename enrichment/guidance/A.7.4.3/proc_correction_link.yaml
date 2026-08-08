@@ -1,0 +1,16 @@
+must_id: item:A.7.4.3:proc_correction_link
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: Cross-link to A.7.3.6 correction procedure — subject-initiated rectification handled there
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the PII accuracy and quality procedure to the A.7.3.6 correction procedure by including
+  a direct section number and document title.
+- State in the PII accuracy and quality procedure that subject-initiated rectification requests are managed
+  under the A.7.3.6 correction procedure.
+- Name the document owner as a specific individual, not a generic role or department, in both procedures.
+- Record the date of the most recent review or update on both procedures to show they are current and
+  aligned.

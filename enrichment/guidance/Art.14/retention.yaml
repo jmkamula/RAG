@@ -1,0 +1,16 @@
+must_id: item:Art.14:retention
+control_ref: Art.14
+standard_id: GDPR:2016/679
+must_text: Retention period or criteria
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact retention period or the criteria used to determine retention in the privacy notice,
+  referencing relevant legal or business requirements.
+- Document the date the privacy notice was last updated and the individual responsible for its content.
+- Name the retention period owner as a specific person, not a team or department, in the privacy notice
+  or supporting documentation.
+- Cross-reference the retention period in the privacy notice with your data retention policy to confirm
+  consistency.

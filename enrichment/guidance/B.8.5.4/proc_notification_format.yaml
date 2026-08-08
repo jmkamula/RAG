@@ -1,0 +1,17 @@
+must_id: item:B.8.5.4:proc_notification_format
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+must_text: Notification format (contract-specified content — request source + PII scope + response deadline)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the notification template that includes fields for the request source, the scope of personal
+  data requested, and the response deadline.
+- Name the individual responsible for issuing notifications, ensuring a specific person is listed rather
+  than a team or department.
+- Record each disclosure request notification sent, attaching a copy of the completed template and noting
+  the date and recipient.
+- Cross-reference the notification procedure with relevant contract clauses specifying required notification
+  content.

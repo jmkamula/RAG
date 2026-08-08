@@ -1,0 +1,18 @@
+must_id: item:B.8.3.1:reg_sla_met
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+must_text: SLA-met flag per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column labeled "SLA-met" to your Customer Subject-Rights Support Register for tracking if each
+  request was handled within the agreed timeframe.
+- Record the completion date for each subject rights request alongside the request details in the register.
+- Mark the "SLA-met" column as "Yes" or "No" for each request, based on whether the response met the required
+  service level agreement.
+- Name the person responsible for updating the SLA-met status for each entry, ensuring a specific individual
+  is listed rather than a team or department.
+- Retain the supporting evidence—such as email timestamps or system logs—that demonstrate when each request
+  was completed, linked to the register entry.

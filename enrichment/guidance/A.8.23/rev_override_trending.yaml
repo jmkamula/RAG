@@ -1,0 +1,16 @@
+must_id: item:A.8.23:rev_override_trending
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: Override-volume trending (spikes may indicate category over-blocking or coverage gap)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the number of web filtering overrides each month in a dated log, including the category and reason
+  for each override.
+- Chart override volumes over time and highlight any significant spikes or drops in a summary report.
+- Assign a named individual to review override trends quarterly and document their findings and any actions
+  taken.
+- Name the reviewer as a specific person, not a group or generic title, in the review documentation.
+- Retain copies of all review reports and supporting data for auditor inspection.

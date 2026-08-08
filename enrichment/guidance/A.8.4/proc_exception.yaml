@@ -1,0 +1,17 @@
+must_id: item:A.8.4:proc_exception
+control_ref: A.8.4
+standard_id: ISO27001:2022
+must_text: Exception process for one-off elevated access (emergency hotfix authority)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for requesting and approving one-off elevated source code access,
+  including emergency scenarios, in your Source Code Access Procedure.
+- Name the specific individual authorized to grant emergency access, rather than listing a team or department
+  as the approver.
+- Record each emergency access event with requester, approver, date, time, and reason in an access log
+  or register.
+- Retain evidence of post-access review, showing that the access and related changes were assessed for
+  appropriateness and security impact.

@@ -1,0 +1,19 @@
+must_id: item:A.7.4.9:scope_integrations
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Integration endpoints (partner APIs + processor exchanges + third-party enrichment)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all integration endpoints where personal data is transmitted, including partner APIs, processor
+  exchanges, and third-party enrichment services, in a dated inventory.
+- Name the specific business owner responsible for maintaining the integration endpoints inventory, avoiding
+  generic roles like "IT" or "the team".
+- Document the data types transmitted through each endpoint, referencing relevant data flow diagrams or
+  mapping records.
+- Record the date each endpoint was last reviewed for inclusion in scope, and keep evidence of periodic
+  review cycles.
+- Cross-reference each endpoint in the inventory with contracts or data processing agreements to confirm
+  lawful data sharing.

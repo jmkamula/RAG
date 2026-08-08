@@ -1,0 +1,19 @@
+must_id: item:B.8.5.7:proc_customer_authorisation
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+must_text: Customer written authorisation prior to processing (Art.28.2 general or specific authorisation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each subcontractor engagement request in a dated log, including the customer’s name, purpose,
+  and scope of processing.
+- Obtain and retain a copy of the customer’s written authorisation—email, letter, or signed form—before
+  any subcontractor begins processing personal data.
+- Name the customer authoriser as a specific individual, not a generic title or department, in the engagement
+  records.
+- Cross-reference each authorisation to the relevant contract or data processing agreement section that
+  requires customer approval.
+- Review all subcontractor engagement files to confirm no processing started before written customer authorisation
+  was received.

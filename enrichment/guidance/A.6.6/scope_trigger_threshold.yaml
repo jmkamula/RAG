@@ -1,0 +1,19 @@
+must_id: item:A.6.6:scope_trigger_threshold
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Trigger threshold per category (which info-class triggers NDA — typically access to confidential
+  class and above; some orgs all-access)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define each information classification category in a written document, including clear examples of what
+  data falls under each class.
+- State the specific classification level(s) that require a non-disclosure agreement (NDA) before access
+  is granted, referencing the documented categories.
+- Record the decision and rationale for each trigger threshold in a dated approval document signed by
+  a named responsible individual.
+- Cross-reference the NDA trigger thresholds in your information classification policy so auditors can
+  verify alignment between documents.
+- Name the owner of the trigger threshold decision as a specific person, not a group or department.

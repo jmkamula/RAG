@@ -1,0 +1,16 @@
+must_id: item:Art.49:reg_subject_count
+control_ref: Art.49
+standard_id: GDPR:2016/679
+must_text: Per-row data subject count (frequency / volume — non-repetitive test)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact number of data subjects affected for each derogation entry, using a dated and signed
+  register row.
+- State the method used to determine the data subject count for each instance, referencing supporting
+  documentation or system reports.
+- Name the person responsible for verifying the data subject count per entry, ensuring a specific individual
+  is listed.
+- Avoid using estimates or ranges; enter only precise, non-repetitive counts for each derogation invocation.

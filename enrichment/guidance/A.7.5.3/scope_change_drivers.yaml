@@ -1,0 +1,19 @@
+must_id: item:A.7.5.3:scope_change_drivers
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+must_text: Trigger list (new transfer type / new integration)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current types of personal data transfers and integrations in a dated register reviewed at least
+  quarterly.
+- Record each new transfer type or integration event as it occurs, including the date, nature of transfer,
+  and responsible individual.
+- Assign a specific person to review the register for completeness whenever a new system, vendor, or integration
+  is proposed.
+- Name the owner of the register as a specific individual, not a team or department, to avoid ambiguity
+  in accountability.
+- Retain documented evidence of each review and update, such as meeting minutes or approval emails, with
+  dates and names of reviewers.

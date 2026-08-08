@@ -1,0 +1,19 @@
+must_id: item:A.7.3.5:scope_legitimate_interests
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Legitimate-interests processing enumerated (Art.21.1 balancing-test objection applies)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity that relies on legitimate interests as the legal basis in a documented
+  register with a clear description.
+- Record the specific legitimate interest being pursued for each activity, referencing the relevant GDPR
+  Article 6(1)(f) justification.
+- Document the outcome of the balancing test for each activity, including the date completed and the individual
+  responsible.
+- State explicitly which processing activities are subject to Art.21.1 objection rights, avoiding generic
+  statements that could apply to any organisation.
+- Cross-reference each activity in the register to the privacy notice or policy where the objection right
+  is communicated to individuals.

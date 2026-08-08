@@ -1,0 +1,19 @@
+must_id: item:A.5.26:authority_contacts
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Authority/regulator contact list referenced (links to A.5.5) — load-bearing for breach-notification
+  path
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference the current authority and regulator contact list directly within the incident response procedure,
+  including a version date or document link.
+- Cross-reference the contact list with control A.5.5 to confirm consistency and completeness of required
+  authorities.
+- Name a specific individual responsible for maintaining and updating the contact list, not a generic
+  team or department.
+- Record the date of the most recent review or update of the contact list within the procedure document.
+- Attach or link the actual contact list as an appendix or controlled document, ensuring it is accessible
+  to incident responders.

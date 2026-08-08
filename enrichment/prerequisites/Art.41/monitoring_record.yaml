@@ -1,0 +1,41 @@
+leaf_id: req:Art.41:monitoring_record
+control_ref: Art.41
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of all processing activities to understand what data
+    is being handled, by whom, and for what purpose. This is essential context for monitoring code of
+    conduct compliance and documenting related activities.
+  good_enough: A basic, current RoPA that lists core processing activities and responsible parties is
+    sufficient to begin drafting monitoring records.
+- ref: Art.41
+  standard_id: GDPR:2016/679
+  title: Code of Conduct Monitoring Body Designation
+  category: direct
+  rationale: Before you can record monitoring activities, you must be formally designated as a monitoring
+    body for a code of conduct under Art.41. This establishes your authority and scope for such records.
+  good_enough: A documented decision or official communication confirming monitoring body status is enough
+    to proceed.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If a Data Protection Officer is required, their involvement is critical for overseeing monitoring
+    activities and ensuring records are maintained in line with GDPR requirements.
+  good_enough: A named DPO with contact details and a basic description of their role is sufficient at
+    this stage.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: Understanding the scope of your ISMS helps ensure that monitoring activities and records
+    align with your overall information security boundaries, especially if your monitoring body role overlaps
+    with ISMS coverage.
+  good_enough: A draft or summary scope statement that outlines the main boundaries and exclusions is
+    enough to move forward.

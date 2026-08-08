@@ -1,0 +1,19 @@
+must_id: item:A.8.27:scope_application
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Application depth per domain (full-application for in-house; integration-pattern-only for COTS)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all in-house developed applications and record their architecture principles with full detail,
+  including security, data, and integration aspects, in a dated register.
+- Identify each commercial off-the-shelf (COTS) application and document only the integration-related
+  architecture principles relevant to your environment, with supporting rationale.
+- Name the responsible individual for maintaining the architecture principles register—do not use a team
+  or department as the owner.
+- Cross-reference each application entry with its classification (in-house or COTS) and the corresponding
+  level of architectural detail provided.
+- Retain evidence of periodic review, such as a dated sign-off or approval, confirming that the scope
+  and depth of principles remain appropriate.

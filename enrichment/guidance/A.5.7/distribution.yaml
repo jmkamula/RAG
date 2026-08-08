@@ -1,0 +1,19 @@
+must_id: item:A.5.7:distribution
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Distribution path to named consumers (security ops, IT/network, risk owners, exec briefing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the specific individuals or roles who will receive threat intelligence updates, such as security
+  operations, IT/network leads, risk owners, and executive leadership.
+- Document the exact communication channels used for distribution, such as email lists, secure portals,
+  or scheduled briefings, with dates of last use.
+- Record the frequency and timing of each distribution path, showing when each group last received relevant
+  threat intelligence.
+- Name the owner responsible for maintaining and updating the distribution list as a specific person,
+  not a generic team or department.
+- Retain copies of distributed threat intelligence reports or summaries, showing the recipients and date
+  sent for each communication.

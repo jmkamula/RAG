@@ -1,0 +1,14 @@
+must_id: item:9.2:rec_date
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Per-audit execution date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each internal audit was conducted in the audit execution record.
+- Name the lead auditor responsible for each audit, ensuring a specific individual is listed, not just
+  a team or department.
+- Attach the signed audit report or summary that references the execution date for each audit.
+- Retain all audit records in a central repository where the execution date is clearly visible and unaltered.

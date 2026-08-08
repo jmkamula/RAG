@@ -1,0 +1,17 @@
+must_id: item:A.8.11:rev_next_date
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the masking program in the review log or schedule, using a clear
+  and specific calendar date.
+- Name the person responsible for conducting the next review, listing them as an individual rather than
+  a team or department.
+- Record the date this next review date was set, ensuring it is documented in the same log or schedule
+  entry.
+- Retain a copy of the most recent review meeting minutes or decision record that confirms agreement on
+  the next review date.

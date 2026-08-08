@@ -1,0 +1,14 @@
+must_id: item:Art.14:rev_next_date
+control_ref: Art.14
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date clearly within the Art.14 Privacy Notice Program Review document.
+- Record the name of the individual responsible for conducting the next review alongside the planned date.
+- Confirm the review date is future-dated and realistic, not left blank or marked as "TBD".
+- Retain a version-controlled copy of the document showing the stated next review date and responsible
+  person.

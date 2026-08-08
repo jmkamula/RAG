@@ -1,0 +1,18 @@
+must_id: item:5.1:rev_framework_adherence
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Framework adherence check — board cadence happened, sponsor activities completed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the board meeting dates where the leadership program framework was reviewed, listing each session
+  in a dated record.
+- Document the specific activities completed by the designated program sponsor, including dates and a
+  brief description for each.
+- Cross-reference the leadership program framework version discussed in the review to confirm alignment
+  with the current documented framework.
+- Assign a named individual as the program sponsor, not a group or department, in all related records.
+- Retain signed minutes or attendance logs from board meetings as evidence that the required review cadence
+  was followed.

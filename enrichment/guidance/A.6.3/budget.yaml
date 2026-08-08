@@ -1,0 +1,18 @@
+must_id: item:A.6.3:budget
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Programme budget / resource allocation (signals management commitment — under-resourced awareness
+  is a frequent audit finding)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the approved annual budget for the information security awareness, education, and training
+  programme, including a dated record of management sign-off.
+- Name the specific manager responsible for allocating resources to the programme, ensuring an individual
+  is listed rather than a team or department.
+- Record the planned resource allocation, such as staff time and materials, in the programme plan with
+  clear dates and quantities.
+- Retain evidence of periodic budget reviews or updates, including meeting minutes or emails showing ongoing
+  management oversight.

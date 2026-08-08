@@ -1,0 +1,19 @@
+must_id: item:5.1:proc_board_cadence
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Board-level cadence for InfoSec reporting (frequency, topics, format)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the board meeting schedule showing how often information security updates are presented, including
+  calendar invites or minutes with dates.
+- List the specific information security topics discussed at each board meeting, attaching agendas or
+  annotated minutes as supporting evidence.
+- Specify the format used for reporting to the board, such as a standard slide deck or written report,
+  and attach a recent example.
+- Name the individual responsible for presenting information security updates to the board, avoiding generic
+  titles like "the team" or "IT department."
+- Record the board’s documented review or decisions on information security outcomes, such as signed minutes
+  or action logs.

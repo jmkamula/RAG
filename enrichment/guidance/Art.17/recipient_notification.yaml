@@ -1,0 +1,17 @@
+must_id: item:Art.17:recipient_notification
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Notification to recipients per Art.19 unless impossible or disproportionate
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each erasure request and the corresponding data recipients notified, including names, dates,
+  and method of notification, in a dedicated log.
+- State in the procedure how you assess whether notification to recipients is impossible or requires disproportionate
+  effort, with examples and decision criteria.
+- Name the person responsible for making and recording the notification or impossibility decision as a
+  specific individual, not a team or department.
+- Retain copies of all notifications sent to recipients, or written records explaining why notification
+  was not carried out, with supporting evidence.

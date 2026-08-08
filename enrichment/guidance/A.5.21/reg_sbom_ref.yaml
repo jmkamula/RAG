@@ -1,0 +1,17 @@
+must_id: item:A.5.21:reg_sbom_ref
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: SBOM hash / version reference per software component
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the unique hash or version number from the software bill of materials (SBOM) for each ICT component
+  listed in your register.
+- Cross-reference each ICT component entry with its corresponding SBOM file or repository location to
+  allow traceability.
+- Name the responsible individual who verified the SBOM details for each component, including the date
+  of verification.
+- Avoid listing only generic software names or vendors; specify exact product versions and SBOM references
+  for each entry.

@@ -1,0 +1,19 @@
+must_id: item:A.7.13:predictive_maint
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Predictive maintenance based on monitoring data
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a procedure that describes how equipment monitoring data is collected, analyzed, and used to
+  schedule predictive maintenance activities.
+- Assign a named individual responsible for reviewing monitoring data and initiating predictive maintenance
+  actions, listing their full name and job title.
+- Record each predictive maintenance activity in a dated log, including the equipment ID, action taken,
+  and reference to the supporting monitoring data.
+- Name the data sources and monitoring tools used for predictive maintenance, avoiding generic terms like
+  "system" or "dashboard" without specifics.
+- Retain evidence of periodic reviews of the predictive maintenance process, such as signed meeting minutes
+  or review reports with dates.

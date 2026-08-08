@@ -1,0 +1,20 @@
+must_id: item:A.5.18:rev_privileged_check
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Privileged-access subset reviewed with extra scrutiny (cross-link to A.8.2 privileged-access
+  oversight; tighter cadence may apply for this slice)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all users with privileged access and list them in a separate, dated register distinct from
+  general user access records.
+- Cross-reference each privileged user's access rights review with the oversight controls documented under
+  A.8.2, noting the review date and reviewer.
+- Schedule privileged access reviews at a more frequent interval than standard users, and record each
+  review's completion date and responsible reviewer.
+- Name the reviewer for privileged access as a specific individual, not as a group or department, to avoid
+  ambiguity in accountability.
+- Document any changes or removals of privileged access immediately, including the date, reason, and authorising
+  individual.

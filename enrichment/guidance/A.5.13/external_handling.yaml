@@ -1,0 +1,19 @@
+must_id: item:A.5.13:external_handling
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Handling of inbound third-party documents that arrive unlabelled (default-classify and add
+  internal label)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a procedure that requires staff to assign a default internal classification to any inbound
+  third-party document received without a label.
+- Name the person or role responsible for reviewing and applying the internal label to unlabelled third-party
+  documents.
+- Record each instance of an unlabelled third-party document and the applied classification in a dated
+  log or register.
+- State in the procedure that documents with missing labels must not be distributed internally until the
+  default classification is applied.
+- Specify that the responsible person must be an identified individual, not a generic team or department.

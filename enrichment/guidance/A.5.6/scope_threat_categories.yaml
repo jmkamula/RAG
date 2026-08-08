@@ -1,0 +1,19 @@
+must_id: item:A.5.6:scope_threat_categories
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Threat categories prioritised (ransomware, supply-chain, insider, sector-specific) that justify
+  SIG choices
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the specific threat categories considered, such as ransomware, supply-chain, insider, and sector-specific,
+  in the SIG Engagement Risk-Topic Scope document.
+- Document the rationale for prioritising each threat category, linking each to relevant business context
+  or recent incidents, with references to supporting evidence.
+- State the date and name of the individual who approved the prioritisation of threat categories in the
+  SIG Engagement Risk-Topic Scope.
+- Name the owner of the SIG Engagement Risk-Topic Scope as a specific individual, not a team or department.
+- Attach or cross-reference any external threat intelligence or sector guidance used to justify the inclusion
+  or exclusion of threat categories.

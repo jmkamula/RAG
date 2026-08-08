@@ -1,0 +1,19 @@
+must_id: item:A.8.23:tls_inspection
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: TLS-inspection stance documented (where applied / where bypassed for privacy / legal-categorisation
+  excluded)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Web Filtering Policy where TLS inspection is applied, including specific network segments
+  or user groups, with clear examples.
+- Document all cases where TLS inspection is deliberately bypassed, such as for privacy-sensitive sites
+  or legal exclusions, with justification for each.
+- Name the decision-maker responsible for approving TLS inspection exceptions as a specific individual,
+  not a team or department.
+- Record the date of the most recent policy review or update addressing TLS inspection and exceptions.
+- Cross-reference any legal or regulatory sources that require exclusion from TLS inspection, citing the
+  relevant law or regulation by name.

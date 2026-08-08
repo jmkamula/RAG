@@ -1,0 +1,18 @@
+must_id: item:A.5.3:review_triggers
+control_ref: A.5.3
+standard_id: ISO27001:2022
+must_text: Ad-hoc triggers listed (reorg, M&A, new business line, key role departure) prompting unscheduled
+  review
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific ad-hoc triggers—such as reorganization, mergers and acquisitions, new business line launches,
+  or key role departures—in your segregation of duties review procedure.
+- Document each unscheduled segregation of duties review by recording the trigger event, review date,
+  participants, and outcome in a dated log.
+- Name the responsible individual who must initiate an ad-hoc review when a listed trigger occurs, rather
+  than assigning this to a team or department.
+- Retain evidence of communications or meeting minutes that confirm the review was conducted in response
+  to the specific trigger event.

@@ -1,0 +1,17 @@
+must_id: item:A.7.4.4:scope_candidates
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+must_text: Minimisation candidates enumerated (analytics + reporting + ML + test environments + logs)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all business processes and systems where personal data is used, including analytics, reporting,
+  machine learning, test environments, and logs.
+- Document specific personal data elements processed in each context, referencing actual data fields or
+  categories by name.
+- Assign a named individual responsible for maintaining the minimization scope for each context, avoiding
+  generic roles like "the team" or "IT".
+- Record the date when each minimization context was last reviewed and updated, ensuring the record is
+  current within the past 12 months.

@@ -1,0 +1,15 @@
+must_id: item:A.6.1:reg_authoriser
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Authoriser per record (named individual making the accept/reject decision)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the authoriser for each candidate screening record as a specific individual, not a group or department.
+- Record the date the accept or reject decision was made for each candidate entry in the register.
+- Document the decision outcome (accept or reject) alongside the authoriser's name and date for every
+  candidate.
+- Retain evidence of the authoriser’s decision, such as a signed or digitally approved record, for each
+  candidate screening entry.

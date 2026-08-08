@@ -1,0 +1,15 @@
+must_id: item:Art.9:rev_date
+control_ref: Art.9
+standard_id: GDPR:2016/679
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Special Category Program in a dated entry on the official
+  review log.
+- Confirm the recorded review date falls within the interval specified in your documented review schedule.
+- Name the reviewer as a specific individual in the review log, avoiding generic titles like "the team"
+  or "compliance department".
+- Retain a copy of the signed review summary or meeting minutes as evidence of the completed review.

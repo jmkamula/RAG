@@ -1,0 +1,18 @@
+must_id: item:A.5.17:rev_date
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Review date within the planned 180-day interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of each authentication-information program review in a central log, showing the actual
+  review date and the previous review date.
+- Assign a named individual responsible for scheduling and conducting the review, listing their name and
+  role in the review log.
+- Cross-reference the review log with the planned 180-day interval to confirm no review exceeds the required
+  timeframe.
+- Attach the signed review summary or meeting minutes as evidence for each review entry in the log.
+- Name the review owner as a specific person, not a group or department, to avoid auditor concerns about
+  unclear accountability.

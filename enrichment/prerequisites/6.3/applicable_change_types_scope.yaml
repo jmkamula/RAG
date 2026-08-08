@@ -1,0 +1,40 @@
+leaf_id: req:6.3:applicable_change_types_scope
+control_ref: '6.3'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the boundaries of your ISMS before you can decide which changes are significant
+    enough to fall under clause 6.3. Without a clear scope, it's impossible to define what counts as an
+    'ISMS-level' change.
+  good_enough: A documented, management-approved ISMS scope statement that identifies included business
+    units, processes, and systems.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the tone for how changes are managed and what principles guide change significance.
+    It provides context for distinguishing between ISMS-level and operational changes.
+  good_enough: A published information security policy that references change management expectations,
+    even at a high level.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles is needed to determine who decides whether a change is ISMS-level
+    or operational. Ambiguity here can stall or misdirect the scoping process.
+  good_enough: A current list or matrix showing who is responsible for ISMS oversight and change management
+    decisions.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Knowing which assets are in scope for the ISMS helps clarify which changes could impact ISMS
+    objectives and therefore require clause 6.3 treatment.
+  good_enough: A working inventory of key information assets, even if not fully detailed, that covers
+    the main ISMS scope.

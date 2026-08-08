@@ -1,0 +1,17 @@
+must_id: item:A.6.4:reg_appeals_log
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Per-case appeals log (where appeal was lodged; status tracked)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each appeal is lodged in the disciplinary case register, along with the name of the
+  person submitting the appeal.
+- Track and update the status of each appeal in the register, noting key milestones such as review, decision,
+  and closure dates.
+- Assign a specific individual to oversee and update the appeals log, avoiding generic roles like "HR
+  team" or "management."
+- Document the final outcome of each appeal, including the decision and the name of the person or panel
+  responsible for the resolution.

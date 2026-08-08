@@ -1,0 +1,17 @@
+must_id: item:A.5.29:act_restoration
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Restoration status per record (all controls back to normal; outstanding remediation items tracked)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time when all information security controls were restored to normal operation in
+  each Per-Activation Plan Record.
+- List any outstanding remediation items that remain unresolved after restoration, including assigned
+  owners and target completion dates.
+- Confirm that each Per-Activation Plan Record is updated and signed off by the designated incident manager
+  or recovery lead.
+- Name the restoration status clearly as "all controls back to normal" or specify exceptions; avoid vague
+  statements like "mostly restored" or "in progress".

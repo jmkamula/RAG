@@ -1,0 +1,18 @@
+must_id: item:7.1:proc_inputs
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Inputs to resource determination (6.1.3 treatment plan, 6.2 objectives, 7.2/7.3 competence/awareness
+  demand, audit plan)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all required inputs for resource planning, including the risk treatment plan, information security
+  objectives, competence and awareness needs, and the audit plan.
+- Reference each input with a dated document or register entry, showing when and where it was last reviewed
+  or updated.
+- Name the person responsible for collating these inputs, ensuring it is a specific individual and not
+  a generic role or team.
+- Attach or link the current versions of each input document to the resource determination procedure for
+  direct auditor verification.

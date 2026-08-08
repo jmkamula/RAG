@@ -1,0 +1,19 @@
+must_id: item:Art.48:scope_excluded
+control_ref: Art.48
+standard_id: GDPR:2016/679
+must_text: Excluded request types (subpoenas without agreement basis — refused absent Art.49 derogation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of foreign authority requests your organisation receives, including subpoenas, court
+  orders, and administrative demands.
+- Document which request types are excluded from processing unless there is an explicit international
+  agreement or an Article 49 GDPR derogation.
+- State the legal basis or lack thereof for each excluded request type, referencing relevant agreements
+  or the absence of such.
+- Name the individual responsible for reviewing and refusing requests that lack an agreement or Article
+  49 derogation—do not use a group or department title.
+- Retain dated records of all refused requests, including the grounds for refusal and any correspondence
+  with the requesting foreign authority.

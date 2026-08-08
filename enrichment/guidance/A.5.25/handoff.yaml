@@ -1,0 +1,19 @@
+must_id: item:A.5.25:handoff
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Handoff to incident response process (A.5.26) when classified as incident
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that any security event classified as an incident must be handed off to the incident
+  response process defined under control A.5.26.
+- Document the specific trigger point or criteria for when an event is reclassified as an incident, with
+  examples and references to incident definitions.
+- Assign a named individual or role responsible for confirming and recording the handoff, including date
+  and time, in the event management log.
+- Cross-reference the incident response procedure by title and version number within the assessment and
+  triage procedure to show clear linkage.
+- Name the handoff recipient as a specific person or role, not a generic group or "the team", to avoid
+  auditor concerns about unclear accountability.

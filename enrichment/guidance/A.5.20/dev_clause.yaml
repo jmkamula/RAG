@@ -1,0 +1,18 @@
+must_id: item:A.5.20:dev_clause
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Clause deviated from per row (identified by template section)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact ISO27001 clause number and title deviated from for each entry in the Supplier Agreement
+  Deviation Register.
+- Reference the specific section or template paragraph in the supplier agreement where the deviation occurs
+  for every row.
+- Name the individual who approved each deviation, avoiding generic entries like "management" or "procurement
+  team".
+- Date each deviation entry to show when the deviation was identified and approved.
+- Attach or link supporting documentation, such as the approved deviation request or related correspondence,
+  to each register entry.

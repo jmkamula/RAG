@@ -1,0 +1,17 @@
+must_id: item:A.6.1:reg_provider_ref
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Third-party provider reference per record where used
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full legal name of the third-party screening provider for each candidate entry where such
+  a provider was used.
+- Document the date the third-party provider was engaged for each candidate, matching it to the relevant
+  screening record.
+- Cross-reference each candidate’s screening record with the corresponding contract or agreement with
+  the third-party provider.
+- Name the third-party provider specifically for each record—do not use generic terms like "external agency"
+  or "screening partner".

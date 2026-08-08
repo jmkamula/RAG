@@ -1,0 +1,18 @@
+must_id: item:A.5.29:rev_actions
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Action items captured (e.g. add scenario, retire stale fallback, refresh communication paths,
+  expand test scope)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each action item from the continuity-security program review in a dated log, clearly describing
+  the required adjustment or improvement.
+- Assign a named individual as the responsible owner for each action item, avoiding generic references
+  such as "the team" or "IT".
+- Document the rationale for each action item, linking it to specific findings or scenarios discussed
+  during the review.
+- Confirm that each action item includes a target completion date and update the log when the item is
+  completed or status changes.

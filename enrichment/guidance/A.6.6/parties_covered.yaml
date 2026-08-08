@@ -1,0 +1,18 @@
+must_id: item:A.6.6:parties_covered
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Parties covered (employees, contractors, suppliers, visitors with access to sensitive info,
+  M&A counterparties)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all categories of parties who may access sensitive information in the agreement template, including
+  employees, contractors, suppliers, visitors, and M&A counterparties.
+- Specify that each party must be named individually or as a clearly defined entity, avoiding generic
+  terms like "the team" or "all staff."
+- Record the date of the latest template review and the name of the person who approved the covered parties
+  section.
+- Attach a cross-reference in the template to the organisation’s information classification policy to
+  show alignment with internal definitions of sensitive information.

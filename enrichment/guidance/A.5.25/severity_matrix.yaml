@@ -1,0 +1,17 @@
+must_id: item:A.5.25:severity_matrix
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Severity matrix with concrete examples
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Draft a severity matrix that defines at least three levels of security event impact, using clear, organization-specific
+  language.
+- Include at least one concrete, real-world example for each severity level in the matrix, drawn from
+  your organization’s environment or history.
+- State the date the severity matrix was last reviewed and the name of the reviewer in the procedure document.
+- Name the owner of the severity matrix as a specific individual, not a team or department.
+- Attach the severity matrix as a distinct, referenced section within the Security Event Assessment and
+  Triage Procedure document.

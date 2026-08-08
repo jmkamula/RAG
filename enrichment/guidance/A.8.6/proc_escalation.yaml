@@ -1,0 +1,17 @@
+must_id: item:A.8.6:proc_escalation
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Escalation paths when thresholds breached (engineering → procurement → executive)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific capacity thresholds that trigger escalation, including clear metrics and examples,
+  in the Capacity Management Procedure.
+- Name the individuals responsible for each escalation stage—engineering, procurement, and executive—in
+  the procedure, avoiding generic roles or teams.
+- Record the step-by-step escalation process, including required notifications and timeframes, as a flowchart
+  or table within the procedure.
+- Retain a dated approval of the procedure by an executive leader to confirm the escalation path is authorized
+  and current.

@@ -1,0 +1,18 @@
+must_id: item:Art.22:reg_dpia_link
+control_ref: Art.22
+standard_id: GDPR:2016/679
+must_text: Per-row DPIA reference (Art.35 nearly always triggered for Art.22)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each automated decision-making entry with a specific Data Protection Impact Assessment
+  (DPIA) by including the DPIA's unique title or ID in the register row.
+- Record the date when the DPIA was completed or last reviewed for each automated process listed.
+- Name the DPIA owner as a specific individual, not a team or department, in the corresponding register
+  row.
+- Attach a direct link or file path to the full DPIA documentation for each automated decision-making
+  activity.
+- Avoid leaving any register row without a DPIA reference—auditors will flag missing or generic entries
+  as non-compliant.

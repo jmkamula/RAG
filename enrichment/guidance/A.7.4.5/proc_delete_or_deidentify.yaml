@@ -1,0 +1,18 @@
+must_id: item:A.7.4.5:proc_delete_or_deidentify
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: Delete-or-de-identify decision rule per activity
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a written procedure that clearly states whether data will be deleted or de-identified at the
+  end of each processing activity.
+- Name the responsible individual for making and reviewing the delete-or-de-identify decision for each
+  data processing activity.
+- Record the date and outcome of each decision, including the rationale for choosing deletion or de-identification,
+  in a central register.
+- Attach supporting evidence, such as data flow diagrams or risk assessments, that justify the chosen
+  method for each processing activity.
+- Specify the decision-maker by name, not by role or team, to avoid ambiguity in accountability.

@@ -1,0 +1,17 @@
+must_id: item:A.8.5:log_failure_clusters
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Failure-cluster detection (brute force, password spraying)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the technical method used to detect authentication failures, such as threshold settings for
+  brute force or password spraying, in a dated procedure.
+- Record each authentication failure event in a log, including timestamp, user identifier, source IP,
+  and event type.
+- Assign responsibility for monitoring authentication activity logs to a named individual, not a generic
+  team or department.
+- Review and sign off on periodic reports that summarize detected failure clusters and the actions taken
+  in response.

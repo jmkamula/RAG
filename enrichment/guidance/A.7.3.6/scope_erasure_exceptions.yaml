@@ -1,0 +1,18 @@
+must_id: item:A.7.3.6:scope_erasure_exceptions
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: Erasure exceptions enumerated (Art.17.3 legal obligation / freedom of expression / public interest
+  / research / defence of legal claims)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all situations where personal data cannot be erased, citing the specific legal or regulatory basis
+  for each exception.
+- Document the rationale for each erasure exception, referencing the relevant GDPR Article 17.3 clause
+  or national law.
+- Name the individual responsible for approving erasure exceptions, avoiding generic titles or group ownership.
+- Record the date when the erasure exceptions list was last reviewed and updated.
+- Attach supporting evidence, such as legal opinions or policy documents, that justify each listed erasure
+  exception.

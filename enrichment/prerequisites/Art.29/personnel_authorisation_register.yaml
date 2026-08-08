@@ -1,0 +1,40 @@
+leaf_id: req:Art.29:personnel_authorisation_register
+control_ref: Art.29
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.28
+  standard_id: GDPR:2016/679
+  title: Processor
+  category: direct
+  rationale: Before you can record who is authorised to process personal data under your authority, you
+    must have established the controller-processor relationship and the binding instructions that define
+    those authorisations.
+  good_enough: A signed controller-processor agreement is in place, clearly outlining the scope of instructions
+    and responsibilities for data processing.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify which processing operations
+    exist and which personnel are involved, so you can accurately register authorisations.
+  good_enough: A basic RoPA exists, listing core processing activities and associated teams or roles,
+    even if not yet fully granular.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity is essential to determine the scope
+    and limits of personnel authorisation, ensuring only permitted actions are registered.
+  good_enough: Each processing activity in the RoPA has an identified lawful basis, even if some justifications
+    need further refinement.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: A clear ISMS scope ensures you know which organisational units and systems are in play, so
+    your personnel authorisation register covers all relevant areas.
+  good_enough: A documented scope statement exists, naming the business units, locations, and systems
+    included in the ISMS, even if some boundaries are still being clarified.

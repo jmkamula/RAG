@@ -1,0 +1,18 @@
+must_id: item:A.8.8:scope_change_drivers
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new asset class, new scan tooling, new regulator requirement)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current asset types, scan tools, and regulatory requirements in a dated asset scope document
+  maintained by the vulnerability management owner.
+- Name the person responsible for updating the asset scope when new asset classes, scanning tools, or
+  regulatory requirements are introduced.
+- Document a trigger list that specifies events requiring asset scope review, such as onboarding a new
+  asset class or adopting new scan tooling.
+- Record each scope review with the date, reason for review, and outcome, including any changes made to
+  the asset scope.
+- Specify the owner as a named individual, not a team or department, to avoid ambiguity in responsibility.

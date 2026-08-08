@@ -1,0 +1,33 @@
+leaf_id: req:Art.6:applicable_activities_scope
+control_ref: Art.6
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of all processing activities before you can determine
+    which ones fall within the scope of Art.6. This record is the inventory that Art.6 will reference
+    to assign a legal basis for each activity.
+  good_enough: A draft or working list of processing activities, even if not fully detailed, is sufficient
+    to start scoping which ones are subject to Art.6.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and system boundaries, which helps clarify which
+    processing activities are in play for GDPR purposes. This prevents accidental omission or over-inclusion
+    when mapping activities to Art.6.
+  good_enough: A basic, documented scope statement that outlines what parts of the business and systems
+    are covered is enough to proceed.
+- ref: Art.20
+  standard_id: GDPR:2016/679
+  title: Right to data portability
+  category: direct
+  rationale: Art.20 rights only apply to processing activities that rely on certain Art.6 bases (consent
+    or contract). Knowing which activities are in Art.6 scope is necessary to determine if Art.20 applies.
+  good_enough: A preliminary mapping of processing activities to their Art.6 legal bases, especially noting
+    those using consent or contract, is sufficient at this stage.

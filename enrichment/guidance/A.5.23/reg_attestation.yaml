@@ -1,0 +1,19 @@
+must_id: item:A.5.23:reg_attestation
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Most recent CSP attestation / certification reference per service (with date)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each cloud service provider (CSP) in your Cloud Service Register, including the specific service
+  name and unique identifier.
+- Record the most recent security attestation or certification for each CSP service, such as SOC 2 or
+  ISO 27001, with the exact date issued.
+- Cross-reference each certification entry with a direct link or copy of the original attestation document
+  stored in your compliance repository.
+- Name the person responsible for updating and verifying each CSP certification record, ensuring a specific
+  individual is listed rather than a team or department.
+- Review and update the register at least annually, noting the review date and reviewer’s name for each
+  CSP entry.

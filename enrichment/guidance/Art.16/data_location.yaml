@@ -1,0 +1,18 @@
+must_id: item:Art.16:data_location
+control_ref: Art.16
+standard_id: GDPR:2016/679
+must_text: Data location workflow across all systems including replicas (links to Art.30 RoPA)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Map all systems, databases, and backups where personal data is stored, including replicas, and record
+  their names and locations in a dated inventory.
+- Document the workflow steps for updating or correcting personal data in each identified system, including
+  how changes propagate to replicas.
+- Assign a named individual responsible for maintaining and updating the data location workflow, not a
+  team or department.
+- Cross-reference each system in the workflow to the corresponding entry in your Article 30 Record of
+  Processing Activities (RoPA).
+- Retain a signed and dated approval of the workflow from the data protection officer or equivalent authority.

@@ -1,0 +1,16 @@
+must_id: item:B.8.2.6:proc_owner
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: Named owner (DPO + Trust Ops)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the Data Protection Officer and a specific individual in Trust Operations as the owners of
+  the Processor RoPA Maintenance Procedure.
+- Document the owners’ full names, job titles, and contact details in the header or ownership section
+  of the procedure.
+- Record the date the ownership assignment was last reviewed or updated in the procedure document.
+- Avoid listing the owner as a team, department, or generic title; use named individuals to ensure clear
+  accountability.

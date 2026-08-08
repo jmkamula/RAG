@@ -1,0 +1,46 @@
+leaf_id: req:A.6.7:remote_working_review
+control_ref: A.6.7
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which personnel, systems, and processes are covered by the ISMS,
+    which is essential to determine whose remote working arrangements must be reviewed.
+  good_enough: The scope must clearly identify all relevant personnel and assets that could be subject
+    to remote working, even if not all edge cases are fully mapped.
+- ref: A.6.7
+  standard_id: ISO27001:2022
+  title: Remote Working Policy
+  category: direct
+  rationale: The review process depends on the existence of a documented remote working policy, as this
+    sets the baseline for what should be reviewed and verified.
+  good_enough: A current, approved remote working policy must exist, even if minor updates are pending.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: The asset register is needed to identify which devices and information assets are used in
+    remote working, ensuring the review covers all relevant items and no orphaned assets exist.
+  good_enough: The register should list all key assets used by remote workers, with basic ownership and
+    status information.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that approvals, monitoring, and incident
+    handling for remote working are traceable and actionable during the review.
+  good_enough: Documented assignment of remote working responsibilities, even if some role descriptions
+    are high-level.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: The review should consider whether remote working risks have been identified and addressed,
+    and if new risks have emerged since the last assessment.
+  good_enough: A recent risk assessment that includes remote working scenarios, even if some risk treatments
+    are still in progress.

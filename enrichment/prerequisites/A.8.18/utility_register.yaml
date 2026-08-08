@@ -1,0 +1,46 @@
+leaf_id: req:A.8.18:utility_register
+control_ref: A.8.18
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which systems, assets, and processes are covered by the ISMS,
+    ensuring the utility register only includes relevant privileged utilities.
+  good_enough: A clear, documented scope that identifies the boundaries of the ISMS and the types of systems/utilities
+    in scope.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register provides the baseline inventory of information assets, which is necessary
+    to identify and catalogue privileged utility programs accurately.
+  good_enough: A current list of information assets, including software and utilities, with enough detail
+    to identify privileged utilities.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Knowing who is responsible for managing, authorising, and using privileged utilities is essential
+    for maintaining an accurate register of authorised users.
+  good_enough: Documented roles that specify who can authorise, use, and manage privileged utility programs.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: A classification scheme helps determine which utilities are considered 'privileged' and require
+    special tracking in the register.
+  good_enough: A basic scheme that distinguishes privileged utilities from standard tools, even if not
+    fully mature.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment identifies threats and vulnerabilities related to privileged utilities, informing
+    which utilities need to be tracked and why.
+  good_enough: A recent risk assessment that highlights risks associated with privileged utility programs,
+    even if not exhaustive.

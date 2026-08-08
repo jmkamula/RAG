@@ -1,0 +1,17 @@
+must_id: item:B.8.2.5:reg_customer_satisfaction
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: Customer satisfaction / follow-up per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the outcome of each customer audit or information support request in the register, including
+  date, requester, and summary of findings.
+- Document any follow-up actions taken for each entry, specifying the responsible person and completion
+  date.
+- Name the owner of each register entry as a specific individual, not a team or department.
+- Retain evidence of customer feedback or satisfaction responses linked to each relevant register row.
+- Review the register regularly and update it with any improvements or lessons learned based on customer
+  input.

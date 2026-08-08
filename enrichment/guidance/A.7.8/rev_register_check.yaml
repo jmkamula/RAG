@@ -1,0 +1,18 @@
+must_id: item:A.7.8:rev_register_check
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Per-equipment outcome (verified / amended / remediated)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the equipment siting review, recording their name and the review period
+  in a dated document.
+- List each item of equipment covered by the review, referencing unique asset identifiers and current
+  siting locations.
+- State the outcome for each equipment item as "verified," "amended," or "remediated," with a brief note
+  explaining any changes or actions taken.
+- Record the date and signature of the reviewer who completed the assessment for each equipment item.
+- Avoid grouping multiple items under a single outcome; document results separately for each piece of
+  equipment.

@@ -1,0 +1,15 @@
+must_id: item:4.3:rev_reviewer
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (ISMS Manager + top management)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the ISMS Manager and each top management reviewer by full name and job title in the ISMS Scope
+  Program Review document.
+- Record the date each reviewer completed their review next to their name in the review log section.
+- Obtain signatures or documented approval from both the ISMS Manager and all listed top management reviewers
+  on the final review record.
+- Avoid listing groups or roles as reviewers; specify only individual names to clearly show who is accountable.

@@ -1,0 +1,19 @@
+must_id: item:A.7.2.6:proc_legal_review
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Legal counsel review before signature
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named legal counsel to review each PII processor contract before signature and record their
+  name on the contract review checklist.
+- Document the date legal counsel completes their review in a contract approval log for each PII processor
+  agreement.
+- Retain a copy of the legal counsel’s written review comments or approval, attached to the final contract
+  file.
+- Record the signature of the legal counsel on the contract approval page to confirm review took place
+  before execution.
+- Name the reviewing legal counsel as a specific individual, not just "Legal" or "the legal team", in
+  all approval records.

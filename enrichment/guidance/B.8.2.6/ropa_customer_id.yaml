@@ -1,0 +1,17 @@
+must_id: item:B.8.2.6:ropa_customer_id
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: Customer identifier per row (each controller the org processes for)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the customer or controller for each processing activity row using a unique identifier, such as
+  a legal entity name or customer ID.
+- Document the date each processing activity was added or updated in the record to show when information
+  was last reviewed.
+- Assign a specific individual responsible for maintaining the accuracy of each processing activity entry,
+  listing their name in the record.
+- Avoid using generic terms like "various clients" or "multiple customers"—record a distinct identifier
+  for every controller relationship.

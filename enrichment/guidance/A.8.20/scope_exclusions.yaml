@@ -1,0 +1,19 @@
+must_id: item:A.8.20:scope_exclusions
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Exclusion rationale + compensating controls per excluded class
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all network segments and devices, marking those excluded from the ISO27001 scope in a dated network
+  inventory document.
+- State a clear, specific rationale for each excluded network class in a written scope statement, referencing
+  business or technical justification.
+- Describe compensating controls for each excluded class in a separate section of the scope document,
+  naming responsible individuals for each control.
+- Attach supporting evidence, such as firewall rules or monitoring reports, to demonstrate the effectiveness
+  of compensating controls for excluded network areas.
+- Name the owner of the scope document as a specific individual, not a team or department, and obtain
+  their dated signature on the final version.

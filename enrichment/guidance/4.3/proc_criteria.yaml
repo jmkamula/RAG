@@ -1,0 +1,19 @@
+must_id: item:4.3:proc_criteria
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Inclusion/exclusion criteria (which factors drive an asset/site/process into scope)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific criteria used to include or exclude assets, sites, and processes in the ISMS scope
+  in a dated methodology file.
+- Name the individual responsible for defining and maintaining the scope criteria, listing their full
+  name and job title.
+- State the rationale for each inclusion or exclusion criterion, linking it to business, legal, or regulatory
+  requirements in the methodology.
+- Cross-reference the methodology to the final ISMS scope statement to show how each criterion was applied
+  in practice.
+- Avoid using vague terms like "all relevant assets" or "as needed" in criteria; specify concrete factors
+  and thresholds for inclusion or exclusion.

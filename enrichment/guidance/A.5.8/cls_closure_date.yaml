@@ -1,0 +1,16 @@
+must_id: item:A.5.8:cls_closure_date
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Closure date recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date the project security closure was completed in the closure record, using a standard
+  date format.
+- Name the individual who confirmed project security closure, ensuring the person is identified by full
+  name, not just a role or team.
+- Sign and date the closure record to provide clear evidence of when and by whom the closure was finalized.
+- Attach supporting documentation, such as final security review results, to the closure record to show
+  all requirements were addressed before closure.

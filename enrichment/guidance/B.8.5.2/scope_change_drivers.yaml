@@ -1,0 +1,19 @@
+must_id: item:B.8.5.2:scope_change_drivers
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+must_text: Trigger list (new region / new subprocessor)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current processor destinations, including regions and subprocessors, in a dated register maintained
+  by a named data protection officer.
+- Record each trigger event, such as onboarding a new region or subprocessor, with the date and the responsible
+  individual’s name.
+- Update the processor destinations register immediately after any trigger event, ensuring the change
+  is timestamped and attributed to a specific person.
+- Attach supporting documentation for each update, such as contracts or approval emails, directly to the
+  corresponding entry in the register.
+- Name the owner of the register as a specific individual, not a team or department, to avoid ambiguity
+  in accountability.

@@ -1,0 +1,20 @@
+must_id: item:A.5.14:verbal_visual
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Rules for verbal and visual transfers (calls, screen-shares, in-person discussions in public
+  spaces, conference talks where sensitive info may appear)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document clear rules for handling sensitive information during phone calls, video conferences, and in-person
+  discussions, including examples of acceptable and unacceptable scenarios.
+- State specific procedures for sharing screens or visual materials, such as requiring confirmation before
+  displaying sensitive data to others.
+- Name the policy owner as a specific individual with responsibility for maintaining and updating the
+  rules, not a team or department.
+- Record the date of the most recent policy review and approval by a named manager or information security
+  lead.
+- Include guidance for avoiding accidental disclosures in public or semi-public spaces, such as using
+  private rooms or encrypted communication tools.

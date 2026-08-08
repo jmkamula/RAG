@@ -1,0 +1,19 @@
+must_id: item:A.5.33:scope_change_drivers
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new geography, new service line, M&A, new regulated activity —
+  adding scope must trigger a schedule update)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific events that require a records categories scope review, such as new locations, new business
+  lines, mergers, or new regulatory obligations.
+- Document the trigger list in the records management procedure, including the date of last update and
+  the person responsible for maintaining it.
+- Assign a named individual, not a team or department, to monitor for these trigger events and initiate
+  re-scoping when needed.
+- Record each time the trigger list is reviewed or updated, including the date and the name of the reviewer.
+- Cross-reference the trigger list in your records categories scope document to show it is actively used
+  to maintain currency.

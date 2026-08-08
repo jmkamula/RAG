@@ -1,0 +1,16 @@
+must_id: item:A.5.13:reg_dlp_policy
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: DLP policy link per row where applicable (sensitivity-label-driven DLP rules wired to the system)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each entry in the Labelling Coverage Register with the relevant Data Loss Prevention
+  (DLP) policy by including a direct link in the corresponding row.
+- State "Not Applicable" in the DLP policy link column only after confirming no sensitivity label or DLP
+  rule applies to that entry.
+- Name the DLP policy owner as a specific individual for each linked policy, avoiding generic titles like
+  "IT" or "Security Team".
+- Record the date when each DLP policy link was last reviewed or updated in the register.

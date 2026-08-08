@@ -1,0 +1,17 @@
+must_id: item:A.7.5.2:reg_destination_id
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+must_text: Destination identifier per row (country ISO code or international org name)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique destination identifier to each row in the Transfer Destinations Register, using either
+  the country ISO code or the full international organization name.
+- Document the source used for each identifier, such as the official ISO country code list or the organization’s
+  published name, in an adjacent column.
+- Cross-reference each identifier with the corresponding transfer record to confirm consistency and traceability
+  between registers.
+- Name the destination using a specific code or name—do not use vague labels like "various" or "multiple
+  countries."

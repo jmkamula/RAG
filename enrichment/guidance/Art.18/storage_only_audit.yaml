@@ -1,0 +1,20 @@
+must_id: item:Art.18:storage_only_audit
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Audit trail proving restricted records are stored-only (no further processing other than the
+  Art.18.2 exceptions)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each request for restriction of processing with the requester’s name, date received, and the
+  specific data records involved.
+- Record the exact date and time when processing was restricted, and identify the person who implemented
+  the restriction.
+- Name the owner responsible for monitoring restricted records as a specific individual, not a team or
+  department.
+- Retain system logs or screenshots showing that restricted records are marked as “store-only” and cannot
+  be accessed or processed further.
+- Log any exception processing under Art.18.2 separately, including the reason, date, and person authorizing
+  the exception.

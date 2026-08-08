@@ -1,0 +1,17 @@
+must_id: item:A.7.5.2:scope_multi_region_cloud
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+must_text: Multi-region cloud + backup destinations included
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all cloud regions and backup locations where personal data is stored or processed, including any
+  third-party or disaster recovery sites, in a dated inventory.
+- Name each destination with its specific geographic location and service provider, avoiding vague terms
+  like "cloud" or "Europe."
+- Document the individual responsible for maintaining the destinations inventory, including their name
+  and contact details.
+- Review and update the destinations inventory at least annually, recording the date of each review and
+  any changes made.

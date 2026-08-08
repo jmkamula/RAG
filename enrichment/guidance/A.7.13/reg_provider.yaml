@@ -1,0 +1,17 @@
+must_id: item:A.7.13:reg_provider
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Per-event provider (from authorised list)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the name of the provider for each maintenance event entry in the register, matching the provider
+  to the specific event date.
+- Cross-reference each listed provider against your current authorised provider list, noting the approval
+  reference beside each event.
+- Attach or link the most recent authorised provider list to the register, showing the version date and
+  who approved it.
+- Name the provider as a specific company or individual — do not use generic terms like "vendor" or "maintenance
+  team".

@@ -1,0 +1,20 @@
+must_id: item:A.7.6:work_permits
+control_ref: A.7.6
+standard_id: ISO27001:2022
+must_text: Work-permit system for non-routine activities (maintenance, cleaning, visitors with extended
+  access)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a formal work-permit process in the Secure Areas Procedure, detailing steps for approving non-routine
+  activities like maintenance, cleaning, or extended visitor access.
+- Assign responsibility for issuing and approving work permits to a named individual, not a generic role
+  or team.
+- Record each issued work permit with the permit number, activity description, names of authorized personnel,
+  approval signature, and date.
+- Retain completed work permits for a defined period in a central, auditable location specified in the
+  procedure.
+- State in the procedure that verbal-only approvals are not accepted; require all permits to be formally
+  documented and signed.

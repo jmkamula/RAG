@@ -1,0 +1,42 @@
+leaf_id: req:A.7.2.2:lawful_basis_procedure
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You cannot determine a lawful basis for processing PII unless you have already identified
+    and documented the specific purposes for which the PII is processed. The lawful basis must be tied
+    to a clearly defined purpose.
+  good_enough: A current, reviewed register or list of processing purposes for all PII activities is available
+    and accessible to those drafting the lawful basis procedure.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope statement defines which parts of the organization, processes, and information are
+    covered by the ISMS and, by extension, the privacy extension. Without a clear scope, you cannot reliably
+    identify which processing activities require a lawful basis.
+  good_enough: A documented scope statement exists that clearly includes all relevant PII processing activities
+    and organizational boundaries.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is needed to identify all information assets, including those
+    containing PII, so you can ensure all relevant processing activities are considered when assessing
+    lawful bases.
+  good_enough: A maintained list of information assets, including those containing PII, is available and
+    sufficiently detailed to support mapping processing activities.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A classification scheme helps identify which data is PII and its sensitivity, which is essential
+    for determining when a lawful basis assessment is required and what level of scrutiny is needed.
+  good_enough: A documented classification scheme exists and is applied to data assets, with PII clearly
+    marked and differentiated from other data types.

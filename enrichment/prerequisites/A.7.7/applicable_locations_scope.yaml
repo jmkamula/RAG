@@ -1,0 +1,40 @@
+leaf_id: req:A.7.7:applicable_locations_scope
+control_ref: A.7.7
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which physical and virtual locations are included in the overall ISMS scope
+    before specifying which are subject to clear-desk/clear-screen rules. This ensures alignment and avoids
+    gaps or overreach.
+  good_enough: A current, documented scope statement that clearly lists all relevant locations, even if
+    some details are high-level or pending further refinement.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Understanding which assets (e.g., devices, documents) are present in each location is essential
+    to determine where clear-desk/clear-screen controls are needed.
+  good_enough: A basic inventory of key information assets mapped to locations, even if not fully exhaustive
+    or perfectly categorized.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: You need to know which types of information require protection at each location, as this
+    affects which areas must be included in the clear-desk/clear-screen scope.
+  good_enough: A documented scheme showing at least the main information categories and their required
+    handling, even if some details are still being finalized.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment helps identify which locations present significant risks if clear-desk/clear-screen
+    controls are not applied, guiding the scope decision.
+  good_enough: A recent risk assessment that covers physical and information security risks for major
+    locations, even if some minor sites are still under review.

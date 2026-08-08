@@ -1,0 +1,17 @@
+must_id: item:6.1.2:rev_register_currency
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Register currency check — every row reviewed for continued relevance
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to review each row in the risk register for continued relevance, recording
+  their name and the review date.
+- Document any changes, removals, or confirmations of risks directly in the register, including a brief
+  justification for each decision.
+- Cross-reference each risk with related controls or assets, updating links or notes to reflect any changes
+  since the last review.
+- Record the completion of the register review with a dated sign-off by the responsible reviewer.
+- Name the reviewer as a specific person, not a group or department, to avoid ambiguity in accountability.

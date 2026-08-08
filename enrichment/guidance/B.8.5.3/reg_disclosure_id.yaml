@@ -1,0 +1,17 @@
+must_id: item:B.8.5.3:reg_disclosure_id
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+must_text: Unique disclosure identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique disclosure identifier to each event in the log, using a sequential or randomised format
+  that cannot be reused.
+- Record the disclosure identifier alongside the event details, including date, recipient, and data categories
+  disclosed.
+- Cross-reference each disclosure identifier with supporting documentation, such as notification emails
+  or data sharing agreements.
+- Avoid using generic or duplicate identifiers; verify each identifier is distinct and not repeated elsewhere
+  in the log.

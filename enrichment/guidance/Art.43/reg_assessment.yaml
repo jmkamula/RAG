@@ -1,0 +1,14 @@
+must_id: item:Art.43:reg_assessment
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Per-row assessment outcome with assessor identity
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the assessment outcome for each certification row, clearly stating whether the criteria were
+  met or not met.
+- Name the assessor for each assessment outcome as a specific individual, not a group or generic title.
+- Date each assessment entry to show when the outcome and assessor identity were recorded.
+- Retain the original assessment records in a format that prevents later alteration or deletion.

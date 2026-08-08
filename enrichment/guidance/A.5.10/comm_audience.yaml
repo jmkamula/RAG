@@ -1,0 +1,17 @@
+must_id: item:A.5.10:comm_audience
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Audience reached (all in-scope users, including new joiners and contractors)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all in-scope users, including employees, new joiners, and contractors, in a dated register to confirm
+  the full intended audience.
+- Record the date each user was sent or given access to the Acceptable Use Policy in a communication log.
+- Retain evidence of receipt or acknowledgement from each user, such as signed forms or electronic confirmations.
+- Name the audience as specific individuals in records — do not use generic labels like "all staff" or
+  "contractors".
+- Update the register whenever new users join or contractors start, ensuring their inclusion and communication
+  is documented.

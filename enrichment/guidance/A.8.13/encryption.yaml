@@ -1,0 +1,17 @@
+must_id: item:A.8.13:encryption
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Encryption of backups at rest + in transit (cross-link to A.8.24)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the backup procedure that all backup data must be encrypted both when stored and during transfer.
+- Name the encryption methods and tools used for backup data, referencing specific technologies and versions
+  in the procedure.
+- Cross-reference the procedure to the relevant section of your cryptography policy that covers encryption
+  requirements, including A.8.24.
+- Assign a named individual responsible for verifying encryption is applied to all backups, not just "the
+  team" or "IT".
+- Record the date of the last review and approval of the backup procedure, signed by the designated owner.

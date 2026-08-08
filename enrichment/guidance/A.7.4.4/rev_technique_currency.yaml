@@ -1,0 +1,19 @@
+must_id: item:A.7.4.4:rev_technique_currency
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+must_text: Technique currency — techniques still appropriate for risk profile (advances in re-identification
+  research surfaced)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual with expertise in privacy risk to lead the annual review of data minimization
+  techniques.
+- Document the date and findings of each review, specifically noting any new re-identification research
+  that could affect technique suitability.
+- Cross-reference each minimization technique in use with current industry research or regulatory guidance
+  to confirm ongoing appropriateness.
+- Record any changes made to techniques, including rationale and approval by a named decision-maker, in
+  a dated change log.
+- Name the reviewer as a specific person—do not use generic roles like "the team" or "IT department."

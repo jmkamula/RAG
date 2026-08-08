@@ -1,0 +1,18 @@
+must_id: item:B.8.5.6:scope_pii_processing_test
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+must_text: PII-processing test per supplier (does the supplier touch customer PII?)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all subcontractors by legal name in a register, including a point of contact and the nature of
+  services provided.
+- Document for each subcontractor whether they process, store, or access customer personal data, with
+  a clear yes/no statement and supporting explanation.
+- Record the date and name of the person who performed the PII-processing assessment for each subcontractor.
+- Name the owner as a specific individual responsible for maintaining and updating the subcontractor PII-processing
+  register—not a team or department.
+- Retain evidence of communication with each subcontractor confirming their PII-processing status, such
+  as signed statements or email confirmations.

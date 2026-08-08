@@ -1,0 +1,19 @@
+must_id: item:A.8.29:rev_pattern_trending
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Finding-pattern trending (recurring patterns → SDLC / training / tooling action)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Compile a log of security testing findings from the past 12 months, including dates, descriptions, and
+  associated systems or processes.
+- Analyze the log to identify recurring issues or patterns, documenting any trends that appear across
+  multiple test cycles.
+- Record any actions taken to address root causes, such as updates to development processes, targeted
+  training, or changes in security tools.
+- Name a specific individual responsible for reviewing and approving the analysis and resulting action
+  plan, not a group or department.
+- Retain dated meeting minutes or review records showing discussion of trends and decisions on process,
+  training, or tooling improvements.

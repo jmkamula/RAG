@@ -1,0 +1,17 @@
+must_id: item:7.5:rev_reviewer
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (ISMS Manager + document-control lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and job title, not just a team or department,
+  in the review record.
+- Record the ISMS Manager’s review and approval of the Document Control Program, including their signature
+  and the date of review.
+- Document the document-control lead’s review and approval, capturing their full name, signature, and
+  date on the review form.
+- Retain the completed review record with both reviewers’ identities and approval dates in your compliance
+  documentation system.

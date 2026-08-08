@@ -1,0 +1,19 @@
+must_id: item:Art.12:reg_sla_met
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Per-row SLA-met flag (one month or notified extension)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to the Rights Request Register labeled "SLA Met" to record whether each request was completed
+  within one month or with a notified extension.
+- Record the actual completion date and, if applicable, the date the requester was notified of any extension
+  for each rights request.
+- Mark the "SLA Met" column as "Yes" only if the request was completed within one month or a timely extension
+  notification was sent.
+- Name the person responsible for reviewing and updating the "SLA Met" status for each entry, ensuring
+  a specific individual is listed, not a team or department.
+- Retain supporting evidence, such as dated correspondence with the requester, for each entry to substantiate
+  the SLA status recorded.

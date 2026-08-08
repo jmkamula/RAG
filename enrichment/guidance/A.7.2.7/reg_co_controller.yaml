@@ -1,0 +1,14 @@
+must_id: item:A.7.2.7:reg_co_controller
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Co-controller identity per row (legal entity)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each joint controller as a full legal entity name in a separate row of the register.
+- Record the registration number or unique identifier for each legal entity alongside its name.
+- State the country of registration for each co-controller to clarify jurisdiction.
+- Name the owner of each register entry as a specific individual, not a team or department.
+- Date each entry to show when the co-controller relationship was last verified or updated.

@@ -1,0 +1,18 @@
+must_id: item:Art.25:default_storage
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Default storage period set to the minimum necessary per purpose
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the default storage period for each data type and its specific purpose in a dated configuration
+  record.
+- State the legal or business justification for each storage period, referencing the relevant law, contract,
+  or policy.
+- Name the individual responsible for approving and reviewing storage periods, avoiding group or team
+  designations.
+- Record the date when each storage period was last reviewed and updated in the configuration record.
+- Cross-reference the configuration record with your data retention policy to show alignment between documented
+  periods and policy requirements.

@@ -1,0 +1,17 @@
+must_id: item:A.6.6:owner
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Named owner of the template (Legal counsel with InfoSec partner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the Confidentiality/Non-Disclosure Agreement template as a specific individual from
+  Legal counsel, not a generic team or department.
+- Document the InfoSec partner who co-owns or reviews the template by listing their full name and role
+  on the template cover page.
+- Record the date when ownership was assigned or last reviewed in the template’s version history or change
+  log.
+- Confirm both owners have signed or formally approved the current version of the template, attaching
+  their signatures or approval emails.

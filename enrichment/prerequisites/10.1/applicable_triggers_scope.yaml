@@ -1,0 +1,42 @@
+leaf_id: req:10.1:applicable_triggers_scope
+control_ref: '10.1'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines the organizational and process boundaries for all improvement activities,
+    ensuring that triggers are only considered if they fall within the agreed scope. Without this, you
+    cannot determine which signals are relevant for improvement under 10.1.
+  good_enough: A clear, documented scope statement that identifies the organizational units, activities,
+    and assets covered by the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the overall direction and priorities for information security, which guides
+    what types of improvement triggers are meaningful and aligned with management intent. This ensures
+    improvement activities are relevant and prioritized.
+  good_enough: A current, approved policy that outlines the organization's information security objectives
+    and commitment.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: direct
+  rationale: Understanding the risk assessment process is essential to distinguish between improvement
+    triggers that should be routed to risk-driven change (6.1.3) versus those handled under 10.1. This
+    prevents overlap and ensures correct routing.
+  good_enough: A documented risk assessment approach and recent results that clarify how risk-driven changes
+    are identified.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that improvement triggers are recognized, reported, and
+    acted upon by the right people. Without this, triggers may be missed or misrouted.
+  good_enough: Roles and responsibilities for identifying and escalating improvement triggers are defined
+    and communicated.

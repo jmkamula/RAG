@@ -1,0 +1,40 @@
+leaf_id: req:A.7.13:maintenance_event_register
+control_ref: A.7.13
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which assets, locations, and processes are in scope for your ISMS to determine
+    which maintenance events must be tracked. Without clear scope, you can't reliably decide what belongs
+    in the register.
+  good_enough: A documented scope that identifies the physical and logical boundaries of the ISMS, including
+    key assets and sites, is available and agreed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The maintenance event register must reference specific equipment and assets. Without an up-to-date
+    asset register, you can't accurately log or track maintenance events.
+  good_enough: A basic list of relevant equipment/assets exists, with enough detail to uniquely identify
+    items requiring maintenance.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that maintenance events are logged by the right people
+    and that supervision and verification responsibilities are understood.
+  good_enough: Documented roles exist for those responsible for maintenance, supervision, and register
+    upkeep, even if not fully formalized.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment identifies which assets and maintenance activities are critical for security,
+    helping prioritize what must be tracked in the register.
+  good_enough: A recent risk assessment exists that highlights key assets and maintenance-related risks,
+    even if not exhaustive.

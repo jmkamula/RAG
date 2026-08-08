@@ -1,0 +1,14 @@
+must_id: item:A.8.16:rev_reviewer
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Security Operations lead + InfoSec lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the Security Operations lead and the Information Security lead as individual reviewers in
+  the monitoring program review record.
+- Record the date each reviewer completed their review on the documented monitoring program review form.
+- Sign the review document with both reviewers’ names and signatures to confirm their participation.
+- Attach any reviewer comments or findings to the review record for traceability.

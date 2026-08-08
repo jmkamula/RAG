@@ -1,0 +1,19 @@
+must_id: item:A.5.16:rev_termination_sla
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Termination-SLA analysis (gap between leaver effective_date and identity_revocation date; outliers
+  investigated)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Extract a list of all terminated users from HR records, including both their termination effective date
+  and identity revocation date, for the review period.
+- Calculate and document the time gap between each user's termination date and the date their access was
+  revoked, highlighting any cases exceeding your defined SLA.
+- Investigate and record explanations for any outlier cases where revocation exceeded the SLA, attaching
+  supporting evidence such as email threads or incident tickets.
+- Name the reviewer as a specific individual who conducted the analysis, not a group or department, and
+  date the completed review.
+- Retain the signed review report and supporting evidence for auditor inspection.

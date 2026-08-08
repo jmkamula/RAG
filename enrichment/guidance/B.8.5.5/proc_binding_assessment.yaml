@@ -1,0 +1,16 @@
+must_id: item:B.8.5.5:proc_binding_assessment
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Binding-vs-not assessment — legal counsel classifies every incoming request
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named legal counsel to review each incoming request and record their name on the disclosure
+  decision log.
+- Document the date and outcome of the binding-vs-not assessment for every request in a central register.
+- State the legal basis or reference for each classification decision, linking to relevant laws or regulations
+  where applicable.
+- Retain a copy of the original request alongside the assessment record for each entry in the register.
+- Name the legal counsel as a specific individual, not a team or department, to avoid ambiguity in responsibility.

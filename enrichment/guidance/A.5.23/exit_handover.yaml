@@ -1,0 +1,19 @@
+must_id: item:A.5.23:exit_handover
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Handover of configuration + data evidence (backup downloaded, config preserved)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time when the final backup of all cloud service data was downloaded, including the
+  file location and responsible person.
+- Document the specific configuration settings exported from the cloud service, listing file names, export
+  formats, and the individual who performed the export.
+- Name the person who received and verified the backup and configuration files, ensuring this is a specific
+  individual and not a team or department.
+- Retain signed confirmation from both the departing and receiving parties that the data and configuration
+  handover was completed and is accessible for review.
+- Cross-reference the migration or exit checklist to show all required handover steps were completed,
+  with dates and responsible individuals clearly listed.

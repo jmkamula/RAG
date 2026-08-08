@@ -1,0 +1,19 @@
+must_id: item:A.7.2.6:scope_change_drivers
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Trigger list (new supplier onboarding / supplier role change)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current processor engagements in a dated register, specifying each supplier’s name, role, and
+  onboarding or role change date.
+- Cross-reference each processor entry with documented onboarding or role change approvals, including
+  the approver’s name and date.
+- Update the register immediately when a new processor is onboarded or an existing processor’s role changes,
+  capturing the effective date.
+- Name the individual responsible for maintaining the processor register—do not use a team or department
+  as the owner.
+- Archive previous versions of the processor register to show historical changes and demonstrate ongoing
+  currency.

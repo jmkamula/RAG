@@ -1,0 +1,19 @@
+must_id: item:Art.25:default_extent
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Default processing minimises the extent of processing per purpose
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each system’s default settings for data collection, storage, and sharing in a dated configuration
+  record tied to specific processing purposes.
+- State how each default setting limits data use to only what is strictly necessary for the stated purpose,
+  referencing relevant business processes.
+- Name the individual responsible for approving and maintaining these default configurations, avoiding
+  generic titles or team names.
+- Record any changes to default settings with the date, reason, and approver’s name to show ongoing compliance
+  with minimisation principles.
+- Cross-reference the configuration record with your data inventory or processing register to confirm
+  all systems are covered.

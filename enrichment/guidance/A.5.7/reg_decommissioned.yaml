@@ -1,0 +1,17 @@
+must_id: item:A.5.7:reg_decommissioned
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Decommissioned sources retained with end-date and reason (audit trail)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each decommissioned threat intelligence feed in the register, including the exact end-date when
+  the feed was removed from use.
+- State the specific reason for decommissioning each feed, such as redundancy, cost, or reliability issues,
+  in a dedicated column of the register.
+- Name the individual who approved the decommissioning decision for each feed, avoiding generic entries
+  like "the team" or "IT department."
+- Retain the full register, including all decommissioned entries, as a dated and version-controlled document
+  for future audit reference.

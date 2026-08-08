@@ -1,0 +1,18 @@
+must_id: item:B.8.4.1:reg_system
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+must_text: System / component per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each system or component that creates or stores processor temp files as a separate row in the sweep
+  register.
+- Record the date and time of each temp files sweep for every listed system or component.
+- Name the individual responsible for performing or verifying the sweep for each system or component,
+  not just a team or department.
+- Attach evidence of the most recent sweep, such as a log file or screenshot, to the corresponding row
+  in the register.
+- Review the register quarterly and sign off to confirm all systems and components are covered and records
+  are up to date.

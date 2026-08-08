@@ -1,0 +1,17 @@
+must_id: item:4.2:proc_categories
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Standard stakeholder categories enumerated (regulator, customer, supplier, personnel, shareholder,
+  community, sectoral body, certification body)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each required stakeholder category—regulator, customer, supplier, personnel, shareholder, community,
+  sectoral body, certification body—in your framework document.
+- Name the person responsible for maintaining the stakeholder list as a specific individual, not a team
+  or department.
+- Record the date when the stakeholder categories were last reviewed and updated in the framework.
+- Cross-reference each stakeholder category to a real example relevant to your organisation within the
+  framework.

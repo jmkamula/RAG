@@ -1,0 +1,49 @@
+leaf_id: req:A.8.25:project_register
+control_ref: A.8.25
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which business units, systems, and projects are in-scope for your ISMS before
+    you can register and track development projects. Otherwise, the register may miss key projects or
+    include irrelevant ones.
+  good_enough: A documented scope statement that clearly identifies which projects and environments are
+    covered by the ISMS.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures each project in the register has an accountable owner and
+    that SDLC responsibilities are understood. Without this, the register cannot reliably identify project
+    owners.
+  good_enough: A basic roles and responsibilities matrix or list that covers project ownership and SDLC
+    roles.
+- ref: A.8.30
+  standard_id: ISO27001:2022
+  title: Outsourced development
+  category: direct
+  rationale: If any development is outsourced, you must capture these projects in the register and ensure
+    SDLC controls extend to suppliers. Missing this means incomplete oversight.
+  good_enough: A list of outsourced development arrangements and a note on how they are tracked in the
+    project register.
+- ref: A.8.31
+  standard_id: ISO27001:2022
+  title: Separation of development, test and production environments
+  category: direct
+  rationale: You can't meaningfully track project lifecycle stages or security checkpoints unless development,
+    test, and production environments are separated and defined.
+  good_enough: A simple description or diagram showing how environments are separated for projects in
+    scope.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Projects often create or modify information assets. An up-to-date asset register helps ensure
+    all relevant projects are captured and linked to the assets they affect.
+  good_enough: An asset register that lists major information assets and links them to projects where
+    possible.

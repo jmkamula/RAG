@@ -1,0 +1,16 @@
+must_id: item:A.8.34:rev_register_completeness
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Register-completeness check (every recent audit engagement in register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every audit engagement from the past year in the audit register, including dates and responsible
+  individuals.
+- Cross-reference each entry in the register with supporting documentation, such as audit reports or engagement
+  letters, to confirm completeness.
+- Record the date and name of the person who performed the completeness check in the audit register.
+- Name the reviewer as a specific individual—avoid using generic labels like "the team" or "audit department."
+- Retain evidence of any discrepancies found and actions taken to address missing or incomplete entries.

@@ -1,0 +1,16 @@
+must_id: item:A.6.5:reg_a5_11_link
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Per-row cross-link to A.5.11 return-of-assets register (same leaver event)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each leaver entry in the Leaver Briefing Register to the corresponding row in the A.5.11
+  return-of-assets register using a unique identifier.
+- Record the date and name of the person who completed the cross-link for each leaver event.
+- Confirm that every leaver event in the Briefing Register has a matching entry in the return-of-assets
+  register; flag and investigate any missing links.
+- Name the responsible individual for maintaining the cross-links, avoiding generic roles like "HR team"
+  or "IT department".

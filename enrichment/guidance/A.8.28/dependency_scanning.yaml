@@ -1,0 +1,18 @@
+must_id: item:A.8.28:dependency_scanning
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: SCA / dependency scanning enabled (modern baseline — supply-chain attack vector)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific tool or service used for software composition analysis or dependency scanning in your
+  secure coding procedure.
+- Document the process for enabling and maintaining SCA or dependency scanning on all relevant code repositories,
+  including frequency and responsible person.
+- Record the date SCA or dependency scanning was last run, and retain the latest scan report as evidence.
+- Assign a named individual—not a team or generic role—as the owner responsible for reviewing and addressing
+  scan findings.
+- State how false positives and exceptions are handled, and keep a dated log of any approved exceptions
+  with justification.

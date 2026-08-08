@@ -1,0 +1,17 @@
+must_id: item:Art.7:capture_mechanism
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Capture mechanism documented (granular, freely given, unambiguous affirmative action — no pre-ticked
+  boxes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Describe the exact method used to collect consent, including how users actively indicate agreement,
+  in a dated procedure document.
+- Attach screenshots or samples of the consent interface showing that options are not pre-ticked and require
+  clear user action.
+- List each type of data processing and show how users can consent separately to each, demonstrating granularity.
+- Name the person responsible for maintaining and updating the consent mechanism, not just a team or department.
+- Record the date the procedure was last reviewed and updated to reflect current practices.

@@ -1,0 +1,15 @@
+must_id: item:A.5.13:reg_owner
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: System owner per row (named individual accountable for labelling on this platform)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the system owner for each platform as a specific individual, using their full name, not a team
+  or department.
+- Record the date each system owner was assigned responsibility for labelling in the register.
+- Document the method and frequency of labelling reviews for each platform, referencing the responsible
+  individual.
+- Cross-reference each system owner's name to their current job title and contact details within the register.

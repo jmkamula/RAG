@@ -1,0 +1,18 @@
+must_id: item:A.8.18:reg_utility_id
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Per-row utility identifier (name + version)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each privileged utility program by its full name and version number in a dedicated column of the
+  register.
+- Record the date each entry is added or updated to show the information is current.
+- Name the person responsible for maintaining each register entry, using their full name rather than a
+  generic title or team.
+- Cross-reference each utility entry with supporting documentation, such as installation logs or vendor
+  release notes, to confirm accuracy.
+- Avoid using vague identifiers like "latest version" or "admin tools"—specify exact names and version
+  numbers for each entry.

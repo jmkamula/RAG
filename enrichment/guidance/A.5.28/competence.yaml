@@ -1,0 +1,20 @@
+must_id: item:A.5.28:competence
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Competent personnel requirements (who is authorised to collect/handle evidence; certification
+  expectations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific individuals authorised to collect and handle evidence, listing their full names and
+  current job titles in the procedure document.
+- Document the required certifications or training each authorised person must have, such as digital forensics
+  or chain-of-custody handling.
+- Record the date each authorised individual last completed relevant training or certification, keeping
+  copies of certificates or training records.
+- State the process for updating the list of authorised personnel when roles change, including who is
+  responsible for maintaining accuracy.
+- Avoid listing a team or department as the authorised party; always identify named individuals to prevent
+  ambiguity.

@@ -1,0 +1,16 @@
+must_id: item:7.5:iso_required_docs
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: ISO 27001:2022 required documented information enumerated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each specific document required by ISO 27001:2022, referencing the exact clause number and document
+  title in a table.
+- Assign a named individual as the owner for maintaining and updating the documented information control
+  policy.
+- Record the approval date and the name of the person who authorized the current version of the policy.
+- Cross-reference each required document to its storage location or system, ensuring access can be demonstrated.
+- Specify version numbers and review dates for all listed documents, avoiding undated or draft-only entries.

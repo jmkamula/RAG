@@ -1,0 +1,19 @@
+must_id: item:6.3:planning_required
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Planning required before significant changes (purpose, consequences, integrity considerations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the purpose of each significant change to the Information Security Management System in a dated
+  change request or project plan.
+- Record an assessment of potential consequences, including risks to information security, in a change
+  impact analysis signed by the responsible manager.
+- State how the integrity of the Information Security Management System will be maintained during and
+  after the change in the change documentation.
+- Name the change owner as a specific individual, not a team or department, in the change log or approval
+  record.
+- Retain evidence of formal approval for the planned change, such as a signed decision or meeting minutes,
+  before implementation begins.

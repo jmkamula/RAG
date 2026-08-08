@@ -1,0 +1,20 @@
+must_id: item:A.5.25:dec_retro_flag
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Retroactive-review flag where a closed event was later reopened (drives missed-event analysis
+  in the program review)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the initial triage decision for each event, including the closure date and the name of the person
+  making the decision.
+- Document any instance where a previously closed event is reopened, including the date of reopening and
+  the reason for the change.
+- Add a specific field in the event record to flag cases where retroactive review is required due to event
+  reopening.
+- Name the reviewer responsible for assessing reopened events as a specific individual, not a group or
+  department.
+- Cross-reference reopened event records with the program review documentation to show that missed-event
+  analysis was performed.

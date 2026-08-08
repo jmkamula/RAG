@@ -1,0 +1,14 @@
+must_id: item:7.1:owner
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Named owner of the resources record (typically ISMS Manager with finance partner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the ISMS Resource Allocation Record, such as "Jane Smith,
+  ISMS Manager," not a team or department.
+- Document the finance partner by full name and job title alongside the ISMS Manager in the record.
+- Record the date when ownership was assigned and update this if the owner changes.
+- Retain a signed or formally approved version of the record showing both named owners.

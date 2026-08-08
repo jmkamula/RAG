@@ -1,0 +1,47 @@
+leaf_id: req:A.8.15:applicable_logging_scope
+control_ref: A.8.15
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need a clear ISMS scope to know which systems, processes, and locations are in play for
+    logging requirements. Without this, you can't reliably define which systems must emit logs.
+  good_enough: A documented scope that lists all in-scope systems and business processes, even if some
+    boundaries are still being refined.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register is essential to identify which systems and devices exist, so
+    you can specify which must emit logs and what types of logs are relevant.
+  good_enough: A basic inventory of all key IT assets, including servers, applications, and network devices,
+    with enough detail to map logging requirements.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: You need to know the classification of information handled by each system to determine the
+    sensitivity of logs and any special regulatory or business requirements for log data.
+  good_enough: A working classification scheme that covers major data types and is applied to core systems,
+    even if some edge cases are pending.
+- ref: A.8.17
+  standard_id: ISO27001:2022
+  title: Clock synchronization
+  category: direct
+  rationale: Accurate timestamps are critical for log integrity and correlation across systems. Without
+    synchronized clocks, logs may be unreliable for investigations or compliance.
+  good_enough: A documented approach for synchronizing clocks on all major systems, with evidence of implementation
+    for key assets.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: cross_role
+  rationale: GDPR Article 30 may require audit trails for certain processing activities. Knowing which
+    processing activities are in scope helps determine regulatory drivers for logging.
+  good_enough: A draft or partial RoPA that identifies main processing activities and systems, sufficient
+    to flag where GDPR audit trail requirements might apply.

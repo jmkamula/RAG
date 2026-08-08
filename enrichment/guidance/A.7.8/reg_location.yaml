@@ -1,0 +1,18 @@
+must_id: item:A.7.8:reg_location
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Per-row location (site + room per A.7.3 register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact site and room for each equipment item in the Equipment Siting Register, matching the
+  format used in the A.7.3 Asset Register.
+- Cross-reference each equipment entry with its corresponding asset entry in the A.7.3 register by unique
+  identifier or serial number.
+- Name the person responsible for maintaining the Equipment Siting Register as a specific individual,
+  not a generic role or team.
+- Date each update to the register and retain previous versions to show a clear history of changes.
+- Confirm that no entries use vague locations such as "server room" or "main office" without specifying
+  the precise room number or name.

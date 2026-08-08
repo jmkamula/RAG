@@ -1,0 +1,17 @@
+must_id: item:Art.43:scope_schemes_issued
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Schemes the body issues against
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all certification schemes your body is authorised to issue under GDPR, including scheme names and
+  relevant scope statements, in a dated document.
+- Reference the official approval or accreditation documentation for each scheme, showing the granting
+  authority and the date of approval.
+- Name the individual responsible for maintaining the list of schemes, avoiding generic titles like "compliance
+  team" or "management".
+- Attach supporting evidence, such as certificates or formal notifications, for each scheme listed to
+  demonstrate current validity.

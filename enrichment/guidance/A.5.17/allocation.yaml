@@ -1,0 +1,20 @@
+must_id: item:A.5.17:allocation
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Initial allocation method for authentication information per credential type (in-person, secure
+  channel, ephemeral link, hardware-token enrolment)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the initial allocation method for each credential type, specifying whether it uses in-person
+  verification, secure channel, ephemeral link, or hardware-token enrolment.
+- Name the individual responsible for approving each allocation method, listing their full name and job
+  title in the procedure.
+- Record the date the allocation procedure was last reviewed and updated, attaching the signed approval
+  from the designated authority.
+- Cross-reference each allocation method to supporting evidence, such as enrolment logs or secure channel
+  configuration records, for every credential type.
+- Specify allocation steps for each credential type separately—do not use generic language that could
+  apply to any system or credential.

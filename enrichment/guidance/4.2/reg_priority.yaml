@@ -1,0 +1,18 @@
+must_id: item:4.2:reg_priority
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Per-party priority tag (contractually-bound vs voluntary commitment)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each interested party in the register with a unique name and contact person for clear identification.
+- Record the specific requirement from each party, referencing the source document or agreement where
+  possible.
+- Tag each requirement as "contractually-bound" or "voluntary commitment" in a dedicated column for every
+  party.
+- Name the priority tag for each requirement explicitly — do not leave the field blank or use generic
+  terms like "mixed" or "various".
+- Date and sign off the register update by the responsible compliance manager to confirm accuracy and
+  completeness.

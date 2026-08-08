@@ -1,0 +1,17 @@
+must_id: item:A.5.30:rec_rto_target
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: RTO target per record (what was committed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the Recovery Time Objective (RTO) target for each recovery event in the event record, using a
+  clear duration such as "4 hours".
+- Record the date and time the RTO target was set or confirmed for each event, referencing the relevant
+  business continuity plan.
+- Name the individual who approved or confirmed the RTO target for the recovery event, using their full
+  name and role.
+- Avoid copying generic RTO targets from templates; specify the RTO relevant to the specific system or
+  process involved in the event.

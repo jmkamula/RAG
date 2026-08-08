@@ -1,0 +1,16 @@
+must_id: item:A.5.15:least_privilege
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Principle of least privilege stated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the principle of least privilege explicitly in the access control policy, describing how access
+  rights are limited to what users need for their roles.
+- Name a specific individual as the policy owner, avoiding generic titles like "IT" or "the team".
+- Record the date the policy was last reviewed and approved by management, showing it is current and actively
+  maintained.
+- Cross-reference any supporting procedures or technical controls that enforce least privilege, such as
+  user access reviews or role-based permissions.

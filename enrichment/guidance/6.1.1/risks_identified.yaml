@@ -1,0 +1,16 @@
+must_id: item:6.1.1:risks_identified
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Risks identified that need to be addressed for ISMS to achieve intended outcomes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for risk identification in the procedure, using their full name and job
+  title.
+- Document a dated list of risks that could impact the ISMS achieving its intended outcomes, referencing
+  the specific risk sources considered.
+- State the method used to identify risks, including how input was gathered and from whom, in the procedure.
+- Avoid using generic or template risks; tailor each risk description to your organisation’s specific
+  context and objectives.

@@ -1,0 +1,17 @@
+must_id: item:Art.40:scope_sector_codes
+control_ref: Art.40
+standard_id: GDPR:2016/679
+must_text: Sector codes available (cloud, healthcare, advertising, etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all sector-specific codes of conduct relevant to your organisation’s activities, such as cloud,
+  healthcare, or advertising, in a dated document.
+- Reference the official source or issuing body for each sector code, including a link or citation to
+  the published code.
+- Name the person responsible for monitoring updates to each sector code, specifying their full name and
+  job title.
+- Avoid using generic descriptions like "all applicable codes"—identify each sector code by its official
+  title and version.

@@ -1,0 +1,20 @@
+must_id: item:A.5.32:intake_opensource
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Open-source adoption path — dependency additions pass a licence-compatibility gate; results
+  recorded in the inventory
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each new open-source dependency added by recording its name, version, and source in the central
+  software inventory with the date of intake.
+- Assign a specific individual to review and approve licence compatibility for every new dependency before
+  use, recording their name and approval date.
+- Attach the documented results of the licence compatibility check to the inventory entry for each dependency,
+  including any identified restrictions.
+- Name the licence compatibility reviewer as a named person, not a generic group or team, to avoid ambiguity
+  in responsibility.
+- Cross-reference each dependency’s inventory entry with the relevant project or product to ensure traceability
+  of adoption decisions.

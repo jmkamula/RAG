@@ -1,0 +1,18 @@
+must_id: item:B.8.5.6:reg_disclosure_mode
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+must_text: Disclosure mode per row (public trust page / DPA schedule / NDA + on-request)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the disclosure mode for each subcontractor in a dedicated column, specifying whether it is public,
+  in a contract schedule, or available on request.
+- Name the individual responsible for maintaining the register, listing a specific person rather than
+  a team or department.
+- Date each entry to show when the disclosure mode was last reviewed or updated for that subcontractor.
+- Cross-reference each subcontractor entry with the relevant supporting document or link, such as the
+  public trust page or contract schedule.
+- Avoid using generic terms like "varies" or "TBC" for disclosure mode; specify the actual method for
+  each subcontractor.

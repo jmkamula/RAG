@@ -1,0 +1,31 @@
+leaf_id: req:Art.23:restriction_register
+control_ref: Art.23
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of processing activities to identify where and when subject
+    rights might be restricted under Art.23. Without this, you can't reliably track or justify restrictions.
+  good_enough: A current RoPA exists that covers all relevant processing activities, even if some details
+    are pending refinement.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity is essential to determine if and how
+    Art.23 restrictions can be applied. This ensures restrictions are only invoked where legally justified.
+  good_enough: Each processing activity in scope has a documented lawful basis, even if some are provisional
+    or under review.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated DPO (where required) is critical for overseeing the application of restrictions
+    and ensuring the register is maintained in line with GDPR obligations.
+  good_enough: A DPO is formally appointed (if required), with contact details available and basic responsibilities
+    defined.

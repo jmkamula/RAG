@@ -1,0 +1,19 @@
+must_id: item:A.8.32:emergency
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Emergency-change provisions with mandatory post-hoc review (no untracked emergencies)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the emergency change process in your procedure, including required steps for logging, approval,
+  and implementation of emergency changes.
+- Name the person responsible for reviewing all emergency changes after implementation, ensuring this
+  is a specific individual and not a group or role.
+- Record each emergency change in a dedicated log with the date, time, description, and person authorizing
+  the change.
+- Require a formal, dated review of every emergency change within a set timeframe, with the reviewer’s
+  name and findings documented.
+- State explicitly that no emergency change may bypass documentation or post-hoc review, and remove any
+  language allowing undocumented changes.

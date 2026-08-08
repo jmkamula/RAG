@@ -1,0 +1,17 @@
+must_id: item:A.7.7:removable_media
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Removable media handling rules (locked away when unattended)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the rule that all removable media must be locked in a secure drawer or cabinet when not in
+  use or unattended.
+- Name a specific individual responsible for monitoring compliance with removable media storage, rather
+  than a generic team or department.
+- Record the date and version of the Clear Desk and Clear Screen Policy that includes these removable
+  media handling rules.
+- Retain a signed acknowledgement from all staff confirming they have read and understood the removable
+  media storage requirements.

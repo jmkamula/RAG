@@ -1,0 +1,19 @@
+must_id: item:A.8.19:rev_approved_list_currency
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Approved-list currency check (no abandoned tools; vulnerable versions retired)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for maintaining the approved software list, avoiding generic
+  titles like "IT team" or "system administrators".
+- Document the date of the most recent review of the approved software list in a change log or review
+  register.
+- Record evidence that all tools on the list are actively used by referencing current usage logs or user
+  assignment records.
+- Cross-reference each software version on the list with vendor support or vulnerability notices, noting
+  any retired or unsupported versions.
+- Obtain a dated approval from management confirming the reviewed list, with explicit sign-off on removal
+  of abandoned or vulnerable tools.

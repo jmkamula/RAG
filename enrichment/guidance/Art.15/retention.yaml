@@ -1,0 +1,17 @@
+must_id: item:Art.15:retention
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Envisaged storage period or criteria used to determine it
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific retention period for the requested data in the response letter, using a clear number
+  of days, months, or years.
+- Document the criteria used to determine the retention period if a fixed timeframe does not exist, referencing
+  the relevant policy or legal basis.
+- Name the policy or procedure governing data retention and include its version and approval date in the
+  response.
+- Name the person who approved the retention policy, ensuring this is a specific individual and not a
+  generic role or team.

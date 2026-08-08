@@ -1,0 +1,20 @@
+must_id: item:A.5.13:metadata_tags
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Digital metadata tags or sensitivity labels (e.g. Microsoft Purview / Google labels / equivalent)
+  per level
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each sensitivity level and its corresponding digital label or metadata tag in the Information
+  Labelling Procedure, including examples for each.
+- Name the person responsible for assigning and maintaining digital labels for all information assets,
+  using their full name and role.
+- Record screenshots or export logs from your labelling tool (e.g. Microsoft Purview, Google labels) showing
+  active labels applied to sample files for each sensitivity level.
+- State the review schedule for updating sensitivity labels and metadata tags, including the date of the
+  last review and the reviewer’s name.
+- Specify that generic or default labels (e.g. "Confidential" without context) are not used without customization
+  to your organisation’s defined sensitivity levels.

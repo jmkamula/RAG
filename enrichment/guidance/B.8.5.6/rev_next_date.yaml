@@ -1,0 +1,14 @@
+must_id: item:B.8.5.6:rev_next_date
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Subcontractor Disclosure Program in the review documentation.
+- Record the date the current review was completed alongside the next planned review date for clear tracking.
+- Name the individual responsible for scheduling and conducting the next review in the documented plan.
+- Avoid leaving the next review date blank or using vague terms like "annually"—enter a specific calendar
+  date.

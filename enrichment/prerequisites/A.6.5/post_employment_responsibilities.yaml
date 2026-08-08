@@ -1,0 +1,50 @@
+leaf_id: req:A.6.5:post_employment_responsibilities
+control_ref: A.6.5
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organization, roles, and information assets are covered
+    by the ISMS to define which post-employment responsibilities apply. Without clear scope, you can't
+    determine who or what is in or out of the procedure.
+  good_enough: A documented, management-approved scope statement that identifies the organizational boundaries
+    and key functions covered by the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the overall direction for information security, including expectations for
+    staff conduct and obligations that may persist after employment ends. The procedure must align with
+    these high-level commitments.
+  good_enough: A published, accessible information security policy that references staff responsibilities
+    and is approved by management.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: direct
+  rationale: Clear definition of roles and responsibilities is needed to identify which information security
+    obligations survive termination or role change. This ensures the procedure covers the right people
+    and scenarios.
+  good_enough: A current register or matrix showing information security responsibilities for all relevant
+    roles, including those with ongoing obligations.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Knowing which information assets an individual had access to is essential for defining post-employment
+    obligations and for enforcing restrictions after departure or role change.
+  good_enough: An up-to-date list of key information assets and their custodians, sufficient to identify
+    what a departing or changing employee could have accessed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: A classification scheme helps determine which types of information require ongoing protection
+    after employment ends, guiding what obligations persist.
+  good_enough: A documented scheme that defines information categories and handling rules, at least for
+    sensitive and confidential data.

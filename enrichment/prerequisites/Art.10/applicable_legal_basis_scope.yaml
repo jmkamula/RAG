@@ -1,0 +1,34 @@
+leaf_id: req:Art.10:applicable_legal_basis_scope
+control_ref: Art.10
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of processing
+  category: direct
+  rationale: You must first establish a valid lawful basis for processing under Art.6 before you can justify
+    processing criminal conviction data under Art.10. Art.10 only applies if the processing is already
+    lawful under Art.6 and then further requires a specific legal authorisation.
+  good_enough: Document the lawful basis for each relevant processing activity involving criminal data,
+    even if the mapping is provisional or pending legal review.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: A current record of processing activities is needed to identify which processing operations
+    involve criminal data, and to map these to their legal bases and authorising laws. Without this, you
+    can't reliably scope or justify your Art.10 processing.
+  good_enough: Maintain an up-to-date RoPA that at least lists all processing activities involving criminal
+    conviction data, even if some details are incomplete.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope statement ensures that all processing of criminal conviction data is covered
+    by your information security management system. This is essential for demonstrating that the relevant
+    data and processing activities are subject to appropriate controls.
+  good_enough: Have a documented ISMS scope that explicitly includes systems and processes handling criminal
+    conviction data, even if the scope boundaries are still being refined.

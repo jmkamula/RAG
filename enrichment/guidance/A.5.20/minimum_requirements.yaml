@@ -1,0 +1,19 @@
+must_id: item:A.5.20:minimum_requirements
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Minimum security requirements (controls baseline, certifications expected)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the minimum security controls required for all suppliers in the template, referencing specific
+  standards, certifications, or technical measures.
+- Specify expected certifications, such as ISO 27001 or SOC 2, and include them as mandatory fields to
+  be completed in each agreement.
+- Name the person responsible for approving supplier security requirements in each template version, using
+  a full name and job title.
+- State the date the template was last reviewed and updated, ensuring it is not left blank or marked as
+  "N/A".
+- Avoid using generic language like "appropriate controls" without examples; provide concrete, checkable
+  requirements for suppliers to meet.

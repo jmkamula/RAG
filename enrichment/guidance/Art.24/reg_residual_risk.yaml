@@ -1,0 +1,16 @@
+must_id: item:Art.24:reg_residual_risk
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Per-row residual risk where status is partial
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each row in the GDPR Compliance Register where the compliance status is marked as "partial."
+- Record a clear, specific description of the remaining risk for each "partial" row, using plain language.
+- Assign a named individual responsible for monitoring each residual risk, avoiding generic labels like
+  "the team" or "IT."
+- Date each residual risk entry to show when it was last reviewed or updated.
+- Cross-reference any supporting documents or mitigation plans related to the residual risk in the corresponding
+  register row.

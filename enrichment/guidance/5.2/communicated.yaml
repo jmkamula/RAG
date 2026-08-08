@@ -1,0 +1,17 @@
+must_id: item:5.2:communicated
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: Communicated within the organisation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Publish the approved Information Security Policy on the company intranet or other internal platform
+  accessible to all employees, with a visible posting date.
+- Notify all staff of the policy’s availability and importance through a dated, organisation-wide email
+  or internal communication message.
+- Record the names and dates of employees who have acknowledged reading the policy, using a tracking log
+  or digital receipt system.
+- Name a specific individual responsible for policy communication — avoid listing a team or department
+  as the owner.

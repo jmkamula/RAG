@@ -1,0 +1,15 @@
+must_id: item:A.7.3.4:scope_consent_activities
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+must_text: Consent-based activities enumerated (link to A.7.2.2 lawful basis register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all processing activities that rely on consent as the lawful basis, referencing each activity by
+  name and purpose.
+- Cross-reference each consent-based activity to its entry in the lawful basis register required by A.7.2.2,
+  ensuring clear linkage.
+- Name the individual responsible for maintaining the consent-based activities list, not a team or department.
+- Record the date when the consent-based activities scope was last reviewed and updated.

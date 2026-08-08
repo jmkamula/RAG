@@ -1,0 +1,19 @@
+must_id: item:A.5.8:cls_lessons_link
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Lessons-learned link per record where project surfaced patterns worth feeding into A.5.27 lessons
+  register
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a summary of security lessons learned for each project where new patterns, issues, or improvements
+  were identified during closure.
+- Cross-reference each relevant project closure record to the central lessons-learned register maintained
+  under A.5.27, using a unique register entry ID.
+- Name the individual responsible for submitting the lesson to the A.5.27 register, ensuring this is a
+  specific person, not a team or role.
+- Record the date the lesson was added to the A.5.27 register in the project closure documentation.
+- Attach supporting evidence, such as meeting minutes or incident reports, that substantiate the lesson
+  and its relevance to broader organisational learning.

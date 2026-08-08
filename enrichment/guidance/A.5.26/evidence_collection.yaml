@@ -1,0 +1,18 @@
+must_id: item:A.5.26:evidence_collection
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Evidence collection step embedded in response (links to A.5.28 evidence-handling procedure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the incident response procedure that evidence collection is required as part of the response
+  process for all relevant incidents.
+- Cross-reference the evidence-handling procedure from control A.5.28 within the incident response procedure,
+  including the document title and version number.
+- Assign responsibility for evidence collection to a named individual or role, not a generic team or department.
+- Record the date and time evidence is collected in the incident log, along with the name of the person
+  collecting it.
+- Document the chain of custody steps in the incident response record, referencing the linked evidence-handling
+  procedure.

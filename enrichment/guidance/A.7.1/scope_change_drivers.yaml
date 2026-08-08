@@ -1,0 +1,18 @@
+must_id: item:A.7.1:scope_change_drivers
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new site, sub-letting, M&A, sectoral re-classification)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current sites included in your ISO27001 scope, with addresses and a named responsible person
+  for each site.
+- Document a trigger list that includes new site acquisition, sub-letting, mergers and acquisitions, and
+  sectoral re-classification events.
+- Assign responsibility to a specific individual to review the trigger list quarterly and record the review
+  date in a tracking log.
+- Record any changes to the scope, including rationale and approval, in a dated scope change log signed
+  by the responsible person.
+- Name the scope owner as a specific individual—avoid using generic titles like "the team" or "IT department."

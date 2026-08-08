@@ -1,0 +1,17 @@
+must_id: item:A.5.26:nominated_contact
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Nominated incident-handling contact named (for internal + supplier-side reporting)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the primary incident-handling contact for both internal staff and suppliers
+  in the Incident Response Procedure.
+- Document the contact’s full name, role, and direct communication details, including phone number and
+  email address, in the procedure.
+- State the escalation process and identify a backup contact by name in case the primary contact is unavailable.
+- Avoid listing a team, department, or generic mailbox as the contact; use only named individuals for
+  clear accountability.
+- Record the date the contact information was last reviewed and updated within the procedure document.

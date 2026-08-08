@@ -1,0 +1,19 @@
+must_id: item:Art.41:accreditation_evidence
+control_ref: Art.41
+standard_id: GDPR:2016/679
+must_text: Accreditation by competent SA (Art.41.1)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific supervisory authority that granted accreditation, including the authority’s full name
+  and country.
+- Document the official accreditation decision letter, including the date issued and reference number,
+  in your compliance records.
+- Record the individual or legal entity representing the monitoring body as listed in the accreditation
+  documentation.
+- Retain evidence that the accreditation is current and not expired, such as a renewal notice or validity
+  statement from the supervisory authority.
+- Avoid referencing a pending or provisional accreditation; only cite finalized, documented approvals
+  from the competent supervisory authority.

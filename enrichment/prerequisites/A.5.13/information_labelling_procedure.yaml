@@ -1,0 +1,39 @@
+leaf_id: req:A.5.13:information_labelling_procedure
+control_ref: A.5.13
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification of information
+  category: direct
+  rationale: You must have a documented classification scheme before you can define how information is
+    labelled. The labelling procedure is meaningless without knowing what levels or categories exist.
+  good_enough: A basic, approved classification scheme with clear definitions for each level is in place
+    and accessible to those drafting the labelling procedure.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register is needed to know what information assets exist and require
+    labelling. Without this, you cannot ensure all relevant assets are covered by the procedure.
+  good_enough: A preliminary asset register listing major information assets is available, even if not
+    fully detailed or final.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The labelling procedure must align with the overall information security policy, which sets
+    the organisation’s approach and expectations for information handling.
+  good_enough: A current, approved information security policy exists and is accessible to those drafting
+    procedures.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that the right people are involved
+    in drafting, approving, and implementing the labelling procedure.
+  good_enough: Key roles related to information management and security are defined and assigned, even
+    if some details are still being refined.

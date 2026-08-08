@@ -1,0 +1,19 @@
+must_id: item:A.8.26:security_stories
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Security stories integrated into agile backlog (modern delivery alignment)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for integrating security stories into the agile backlog in the
+  procedure document.
+- Document the process for identifying, drafting, and approving security stories as part of backlog refinement,
+  including required review checkpoints.
+- Record examples of actual security stories added to recent sprint or product backlogs, showing clear
+  linkage to application security requirements.
+- Cross-reference the procedure with sprint review or retrospective meeting notes that confirm security
+  stories were discussed and prioritized.
+- State explicitly in the procedure that security stories must be tracked in the same backlog tool as
+  other user stories, not in a separate list or document.

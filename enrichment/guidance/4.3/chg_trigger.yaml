@@ -1,0 +1,16 @@
+must_id: item:4.3:chg_trigger
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Change trigger stated (new site, divestment, new product line, new regulator)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific event or trigger that led to the scope change, such as a new site, divestment, new
+  product line, or new regulator.
+- Record the date the scope change was identified and the date it was formally approved.
+- Name the individual who authorized the scope change, ensuring this is a specific person and not a group
+  or department.
+- Attach supporting documentation that describes the trigger event, such as a business case, regulatory
+  notice, or project initiation document.

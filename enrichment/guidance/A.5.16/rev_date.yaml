@@ -1,0 +1,17 @@
+must_id: item:A.5.16:rev_date
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Review date within the planned 180-day interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of each identity-management program review in a central log, showing that intervals
+  do not exceed 180 days.
+- Assign a named individual responsible for scheduling and conducting each review, listing their name
+  in the review documentation.
+- Attach the signed review report or meeting minutes, clearly dated, as evidence of the completed review.
+- Cross-reference the review schedule with actual review dates to confirm no review was missed or delayed
+  beyond the 180-day limit.
+- Name the review owner as a specific person, not a team or department, to avoid ambiguity in responsibility.

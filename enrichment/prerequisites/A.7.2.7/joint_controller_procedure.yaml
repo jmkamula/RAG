@@ -1,0 +1,47 @@
+leaf_id: req:A.7.2.7:joint_controller_procedure
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must first know and document the purposes for which PII is processed, as joint controller
+    arrangements depend on clearly defined processing purposes to allocate roles and responsibilities.
+  good_enough: A current, documented list of processing purposes covering all relevant PII activities
+    is available and reviewed for accuracy.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Establishing the lawful basis for each processing activity is essential before defining joint
+    controller arrangements, as these bases inform the allocation of responsibilities and compliance obligations.
+  good_enough: Each processing activity has a documented lawful basis, even if some are provisional pending
+    legal review.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organization and which processing activities
+    are covered, ensuring joint controller procedures are applied to the correct entities and data flows.
+  good_enough: A clear, up-to-date scope statement exists that includes all relevant PII processing and
+    joint controller relationships.
+- ref: Art.26
+  standard_id: GDPR:2016/679
+  title: Joint Controllers
+  category: cross_role
+  rationale: GDPR Article 26 sets the legal requirements for joint controller arrangements, including
+    the need for a documented arrangement and transparency to data subjects.
+  good_enough: A summary of Article 26 requirements is available and reviewed, even if a full legal interpretation
+    is pending.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear internal roles and responsibilities are necessary to ensure that the organization can
+    fulfill its obligations within joint controller arrangements.
+  good_enough: A basic matrix or list of who is responsible for PII processing activities and joint controller
+    coordination is documented.

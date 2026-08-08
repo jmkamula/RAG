@@ -1,0 +1,19 @@
+must_id: item:Art.35:rev_art36_audit
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Art.36 escalation audit — residual-high-risk DPIAs escalated to SA where required
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all completed Data Protection Impact Assessments (DPIAs) that identify residual high risks
+  after mitigation, including assessment dates and responsible individuals.
+- Record each instance where a DPIA with residual high risk was escalated to the Supervisory Authority,
+  including the date and method of escalation.
+- Retain written responses or guidance received from the Supervisory Authority regarding escalated DPIAs,
+  with clear links to the original DPIA records.
+- Name the decision-maker who determined escalation was required, ensuring this is a specific individual
+  and not a group or department.
+- Flag any DPIAs with residual high risk that were not escalated, and document the rationale for not escalating,
+  signed and dated by the responsible individual.

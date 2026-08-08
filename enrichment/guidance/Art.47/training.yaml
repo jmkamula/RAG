@@ -1,0 +1,18 @@
+must_id: item:Art.47:training
+control_ref: Art.47
+standard_id: GDPR:2016/679
+must_text: Periodic training on BCR provisions for group personnel handling transferred data
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the schedule for periodic BCR training sessions, including dates, frequency, and target personnel
+  groups handling transferred data.
+- Record attendance lists for each training session, showing names, dates, and signatures of participants.
+- Assign a named individual responsible for organizing and updating BCR training, avoiding generic titles
+  like "HR" or "the compliance team".
+- Retain copies of training materials and presentations used in each session, with version numbers and
+  last updated dates.
+- Review feedback forms or assessments completed by participants after training to demonstrate understanding
+  of BCR provisions.

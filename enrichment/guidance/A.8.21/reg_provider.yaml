@@ -1,0 +1,18 @@
+must_id: item:A.8.21:reg_provider
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Per-row provider + contract reference (cross-link to A.5.19/A.5.20 supplier register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each network service in the register with its named provider and a unique contract reference number
+  for traceability.
+- Cross-reference each contract number to the corresponding entry in your supplier register used for A.5.19
+  and A.5.20.
+- Record the date each network service entry was last reviewed or updated, along with the name of the
+  reviewer.
+- Name the contract owner as a specific individual, not a team or department, for each network service
+  entry.
+- Attach or link supporting contract documents for each provider to the relevant row in the register.

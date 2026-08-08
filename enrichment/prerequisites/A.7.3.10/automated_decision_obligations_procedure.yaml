@@ -1,0 +1,40 @@
+leaf_id: req:A.7.3.10:automated_decision_obligations_procedure
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the specific purposes for which personal data is processed, including any automated
+    decision-making activities, before you can identify and address subject obligations related to those
+    processes.
+  good_enough: A documented list of processing purposes, with clear indication of which involve automated
+    decision-making, is available and up to date.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity, especially those involving automated
+    decisions, is essential to determine what obligations you owe to data subjects under privacy laws.
+  good_enough: Each automated processing activity has an identified lawful basis, documented and mapped
+    to its purpose.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know whether automated decision-making activities fall within the defined ISMS
+    and PIMS scope to ensure the procedure applies to all relevant systems and data.
+  good_enough: The scope statement explicitly includes (or excludes) automated decision-making processes
+    involving personal data.
+- ref: Art.22
+  standard_id: GDPR:2016/679
+  title: Automated Individual Decision-Making, Including Profiling
+  category: cross_role
+  rationale: GDPR Article 22 sets the legal requirements for subject rights regarding automated decisions;
+    your procedure must align with these obligations to be effective and compliant.
+  good_enough: A summary of Art.22 requirements is available and referenced, ensuring the procedure addresses
+    the key obligations (such as the right to obtain human intervention).

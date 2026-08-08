@@ -1,0 +1,39 @@
+leaf_id: req:A.5.36:compliance_review_record
+control_ref: A.5.36
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines what parts of the organization and which information assets are
+    covered by the ISMS, ensuring compliance reviews are targeted and meaningful.
+  good_enough: A documented scope exists that clearly identifies the organizational boundaries and assets
+    included in the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: Compliance reviews must be measured against the approved information security policy, so
+    a current, communicated policy is essential.
+  good_enough: A formally approved information security policy is available and has been communicated
+    to relevant stakeholders.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that compliance review responsibilities are understood
+    and that review records can be attributed to accountable individuals.
+  good_enough: Roles and responsibilities for compliance reviews are documented and assigned to specific
+    personnel.
+- ref: A.5.36
+  standard_id: ISO27001:2022
+  title: Compliance with policies and standards for information security
+  category: direct
+  rationale: Understanding the requirements of A.5.36 itself is necessary to ensure that review records
+    meet the intent and cover all required elements.
+  good_enough: The requirements of A.5.36 are understood and have been translated into a checklist or
+    template for review activities.

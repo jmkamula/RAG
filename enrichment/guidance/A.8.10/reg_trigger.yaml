@@ -1,0 +1,19 @@
+must_id: item:A.8.10:reg_trigger
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Per-deletion trigger (retention expiry / DSAR / asset retirement / legal-hold release / explicit
+  instruction)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific trigger for each data deletion event in the disposal register, such as retention
+  expiry, data subject request, or asset retirement.
+- Name the individual who authorized the deletion, ensuring the entry lists a real person rather than
+  a team or department.
+- Document the date the deletion was performed and cross-reference any supporting evidence, such as a
+  legal-hold release or explicit instruction.
+- State the type of data or asset deleted, referencing its unique identifier or inventory record for traceability.
+- Retain a copy of any explicit deletion instructions or legal-hold release notices linked to the corresponding
+  register entry.

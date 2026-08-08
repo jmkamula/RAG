@@ -1,0 +1,20 @@
+must_id: item:A.8.22:scope_domains
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Network domains in scope (corporate / cloud / OT / multi-tenant SaaS) with segregation expectation
+  per domain
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all network domains in scope, such as corporate, cloud, operational technology, and multi-tenant
+  SaaS, in a dated inventory document.
+- Describe the segregation expectation for each domain, specifying controls or boundaries in a written
+  statement approved by the information security manager.
+- Name the owner responsible for each domain as a specific individual, not a team or department, in the
+  inventory document.
+- Attach network diagrams or architecture maps that visually show segregation between domains, with version
+  and date clearly marked.
+- Record the date of last review and any changes to domain scope or segregation expectations in a change
+  log maintained by the security team.

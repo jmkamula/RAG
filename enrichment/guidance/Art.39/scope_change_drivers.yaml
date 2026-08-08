@@ -1,0 +1,18 @@
+must_id: item:Art.39:scope_change_drivers
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Trigger list (regulatory change, processing-shift, DPO transition)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all triggers that require review of Art.39 tasks, such as regulatory changes, major processing
+  changes, or a new Data Protection Officer.
+- Document the date and details of each trigger event in a central log maintained by the Data Protection
+  Officer.
+- Name the individual responsible for monitoring and recording trigger events, ensuring this is a specific
+  person and not a group or department.
+- Record the most recent review of the Art.39 tasks scope, including who performed it and the date completed.
+- Attach supporting evidence, such as regulatory update notifications or internal change requests, to
+  each logged trigger event.

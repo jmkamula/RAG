@@ -1,0 +1,16 @@
+must_id: item:A.7.4.8:reg_certificate_ref
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Disposal certificate / attestation reference per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the unique reference number or identifier of the disposal certificate or attestation for each
+  PII disposal event in the register row.
+- Attach a copy or digital link to the actual disposal certificate or attestation alongside each entry
+  in the register.
+- Name the responsible individual who verified the disposal certificate or attestation, avoiding generic
+  roles like "IT team" or "admin staff".
+- Enter the date the disposal certificate or attestation was received and checked for each disposal event.

@@ -1,0 +1,18 @@
+must_id: item:A.6.7:personal_data
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Handling of personal data when working remotely
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Remote Working Policy how personal data must be accessed, processed, and stored when working
+  remotely, referencing GDPR requirements.
+- Name the policy owner as a specific individual responsible for updates and compliance, not a team or
+  department.
+- Document the approval of the policy by a named senior manager, including the approval date.
+- Record the date of the last policy review and the reviewer’s name to show regular assessment for GDPR
+  alignment.
+- Cross-reference the policy to your organisation’s Data Protection Policy to demonstrate consistent personal
+  data handling requirements.

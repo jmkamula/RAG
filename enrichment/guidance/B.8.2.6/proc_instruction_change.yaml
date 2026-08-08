@@ -1,0 +1,16 @@
+must_id: item:B.8.2.6:proc_instruction_change
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: Instruction-change capture — customer purpose changes trigger RoPA update
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each customer instruction that changes the purpose of processing in a dated change log, including
+  a summary of the new purpose.
+- Update the Record of Processing Activities (RoPA) within five business days of receiving a customer
+  instruction that alters processing purpose.
+- Name the staff member responsible for updating the RoPA as a specific individual, not a team or department.
+- Retain a copy of the customer’s written instruction authorizing the change, linked to the corresponding
+  RoPA update entry.

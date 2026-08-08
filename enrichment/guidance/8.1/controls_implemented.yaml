@@ -1,0 +1,18 @@
+must_id: item:8.1:controls_implemented
+control_ref: '8.1'
+standard_id: ISO27001:2022
+must_text: Controls implemented per the criteria
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the operational planning and control procedure, including the specific security controls chosen
+  to meet identified requirements, in a dated and version-controlled file.
+- Name the individual responsible for approving the procedure, and obtain their signature and date on
+  the latest version.
+- Cross-reference each implemented control to the relevant risk assessment or requirement it addresses,
+  using unique identifiers for traceability.
+- Record evidence of periodic review of the procedure, including reviewer names and review dates, to show
+  ongoing suitability.
+- Name the owner as a specific individual — not a team or department — to avoid ambiguity in responsibility.

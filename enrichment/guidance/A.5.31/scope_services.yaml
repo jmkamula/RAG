@@ -1,0 +1,20 @@
+must_id: item:A.5.31:scope_services
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Services offered (regulated activities — payments, health data processing, telco, AI systems
+  under upcoming regimes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all services your organisation offers, clearly describing each regulated activity such as payment
+  processing, health data handling, telecom, or AI system deployment.
+- Document the legal or regulatory obligations that apply to each service, referencing the specific law,
+  regulation, or regime by name and section.
+- Name the individual responsible for maintaining the obligations scope, avoiding generic titles like
+  "the team" or "compliance department".
+- Record the date when the obligations scope was last reviewed and updated, and keep a copy of the previous
+  version for comparison.
+- Cross-reference each listed obligation to supporting evidence, such as contracts, regulatory filings,
+  or correspondence with authorities.

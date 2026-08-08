@@ -1,0 +1,17 @@
+must_id: item:Art.19:notification_method
+control_ref: Art.19
+standard_id: GDPR:2016/679
+must_text: Notification delivery method (email, API call, monthly digest)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the exact method used to notify recipients of personal data updates, such as email, API call,
+  or monthly digest, in the procedure.
+- Name the individual responsible for sending notifications, listing their full name and job title in
+  the procedure document.
+- Record the date the notification delivery method was last reviewed or updated within the procedure.
+- Attach a sample notification message or screenshot showing the chosen delivery method as part of the
+  procedure documentation.
+- Specify the notification method clearly—do not use vague terms like "as appropriate" or "to be determined."

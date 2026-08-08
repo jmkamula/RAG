@@ -1,0 +1,19 @@
+must_id: item:A.8.19:post_install
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Post-install verification (functional test + vulnerability scan + baseline-drift check)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to perform post-installation verification for each software deployment, recording
+  their name and date in the installation log.
+- Document the results of a functional test immediately after installation, including test steps, outcomes,
+  and any issues found, in a dated test report.
+- Record the results of a vulnerability scan run after installation, attaching the scan report and noting
+  the date and responsible person.
+- Capture evidence of a baseline-drift check by comparing current system state to the approved baseline,
+  saving the comparison output with a timestamp.
+- Name the verifier as a specific person, not just a team or department, to avoid auditor concerns about
+  unclear accountability.

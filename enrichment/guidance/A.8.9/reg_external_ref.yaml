@@ -1,0 +1,19 @@
+must_id: item:A.8.9:reg_external_ref
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: External reference (CIS / vendor / NIST) per baseline where applicable
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each configuration baseline in the register with a unique name and version, along with the system
+  or asset it applies to.
+- Reference the exact external standard, guideline, or vendor documentation (such as CIS, NIST, or vendor
+  hardening guide) used for each baseline.
+- Record the publication date and version number of the external reference to show alignment with a specific,
+  current source.
+- Name the individual who selected and approved the external reference for each baseline, avoiding generic
+  roles like "IT" or "the team".
+- Attach or link to the external reference document or webpage in the register to allow direct auditor
+  verification.

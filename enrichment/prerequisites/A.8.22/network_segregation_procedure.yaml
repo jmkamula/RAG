@@ -1,0 +1,46 @@
+leaf_id: req:A.8.22:network_segregation_procedure
+control_ref: A.8.22
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of your organisation and which networks are in-scope for the
+    ISMS before you can define meaningful network segregation procedures.
+  good_enough: A clear, current scope statement that identifies the business units, locations, and IT
+    infrastructure covered by the ISMS.
+- ref: A.8.20
+  standard_id: ISO27001:2022
+  title: Networks security
+  category: direct
+  rationale: Network security controls and their baseline requirements must be established before you
+    can define how to segment and segregate networks effectively.
+  good_enough: Documented network security controls and a summary of how the organisation protects its
+    networks, even if not fully detailed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You need an up-to-date register of information assets to identify what needs to be segregated
+    and to design appropriate network zones.
+  good_enough: A basic, current inventory of key IT assets and systems, even if not fully granular.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Asset classification helps determine which assets require stricter segregation and which
+    can share network zones.
+  good_enough: A documented scheme for classifying information and assets, with at least initial mapping
+    to key assets.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment identifies threats and vulnerabilities that inform where and how network
+    segregation should be applied.
+  good_enough: A recent risk assessment that covers network-related threats and identifies areas needing
+    segregation, even if not exhaustive.

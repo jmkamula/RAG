@@ -1,0 +1,19 @@
+must_id: item:A.5.32:owned_ipr
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Organisation-owned IPR entries (trademarks, patents, trade secrets, copyrighted works) with
+  status and protection scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all organisation-owned intellectual property rights, including trademarks, patents, trade secrets,
+  and copyrighted works, in a central inventory.
+- Record the current status of each IPR entry, such as pending, granted, expired, or active, with the
+  relevant effective and expiry dates.
+- Describe the protection scope for each IPR, specifying jurisdictions, classes, or coverage limits as
+  applicable.
+- Name the responsible individual for each IPR entry, avoiding generic labels like "Legal Team" or "Management."
+- Attach supporting documents for each IPR, such as registration certificates or legal filings, and reference
+  their storage location in the inventory.

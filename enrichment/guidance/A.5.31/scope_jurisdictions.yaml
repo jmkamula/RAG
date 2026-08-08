@@ -1,0 +1,20 @@
+must_id: item:A.5.31:scope_jurisdictions
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Jurisdictions covered (HQ, places of business, customer locations, data residency, transfer
+  destinations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all jurisdictions where your organisation has headquarters, offices, or conducts business, including
+  country and state or province where relevant.
+- Record each location where you store, process, or transfer personal or sensitive data, specifying physical
+  and cloud environments.
+- Name all countries or regions where your customers are located if their data is handled or accessible
+  by your organisation.
+- Document the destinations for any cross-border data transfers, including third-party service providers
+  and backup locations.
+- Name the person responsible for maintaining this jurisdiction list as a specific individual, not a team
+  or department.

@@ -1,0 +1,20 @@
+must_id: item:A.8.32:ci_integration
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: CI/CD pipeline integration for low-risk automated changes (modern baseline; CAB-everything
+  bottleneck not acceptable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the CI/CD pipeline steps for low-risk automated changes, including triggers, approvals, and
+  deployment stages, in a dated procedure file.
+- Name the individual responsible for reviewing and updating the change management procedure, listing
+  their full name and role.
+- Record examples of recent low-risk automated changes processed through the CI/CD pipeline, including
+  timestamps and outcome logs.
+- State the risk criteria used to classify changes as "low-risk," and cross-reference this with your risk
+  assessment documentation.
+- Avoid describing the process as "CAB reviews all changes"—explicitly show how low-risk automated changes
+  bypass traditional CAB approval in your procedure.

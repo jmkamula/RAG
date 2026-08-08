@@ -1,0 +1,19 @@
+must_id: item:A.8.21:rev_sla_attainment
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: SLA-attainment trending per service
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Collect and record monthly or quarterly service level attainment data for each network service, including
+  dates and responsible service providers.
+- Generate and retain trend reports that clearly show SLA performance over time for each network service
+  under review.
+- Name the individual responsible for compiling and reviewing SLA trend data, avoiding generic titles
+  like "IT team" or "Network group".
+- Document any SLA breaches or significant deviations, including actions taken and dates, in a dedicated
+  section of the review report.
+- Cross-reference each trend report to the relevant contract or SLA document to verify the specific service
+  levels being measured.

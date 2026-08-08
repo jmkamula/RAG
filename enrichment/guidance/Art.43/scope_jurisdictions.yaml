@@ -1,0 +1,18 @@
+must_id: item:Art.43:scope_jurisdictions
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Jurisdictions covered
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all countries or regions where the certification body is authorized to operate, referencing official
+  approval documents with dates.
+- Document the legal basis or agreements that allow the certification body to act in each named jurisdiction.
+- Name the certification body’s contact person responsible for maintaining jurisdictional scope information,
+  using a specific individual’s name and title.
+- Attach copies of any relevant accreditations or recognitions that specify or limit the certification
+  body’s geographic scope.
+- Avoid using vague terms like “global” or “international” without supporting documentation that clearly
+  defines the actual jurisdictions covered.

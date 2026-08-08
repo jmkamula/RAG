@@ -1,0 +1,18 @@
+must_id: item:Art.6:rev_register_currency
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Register currency check — every Art.30 RoPA activity has a current Art.6 basis assignment
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each activity listed in your Article 30 Record of Processing Activities (RoPA) with
+  a specific Article 6 lawful basis in your register.
+- Record the date when each lawful basis assignment was last reviewed or updated for every RoPA activity.
+- Name the individual responsible for verifying the accuracy and currency of each lawful basis assignment
+  in the register.
+- Flag and update any RoPA activity that lacks a clearly documented, current Article 6 lawful basis—do
+  not leave any field blank or marked "TBD".
+- Retain evidence of the most recent full review, such as a signed and dated summary or meeting record
+  confirming all assignments are up to date.

@@ -1,0 +1,18 @@
+must_id: item:5.2:app_signature
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: Signature of top management on the latest version
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the top management individual responsible for approving the policy, using their full name and job
+  title.
+- Obtain a handwritten or digital signature from the named top management individual on the latest version
+  of the information security policy.
+- Record the approval date next to the signature to clearly show when the policy was authorized.
+- Attach the signed and dated approval page directly to the current version of the information security
+  policy document.
+- Avoid using generic titles or group names—ensure the approver is a specific, identifiable person, not
+  "the team" or "management".

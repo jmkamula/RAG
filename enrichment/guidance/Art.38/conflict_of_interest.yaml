@@ -1,0 +1,19 @@
+must_id: item:Art.38:conflict_of_interest
+control_ref: Art.38
+standard_id: GDPR:2016/679
+must_text: No conflict of interest with other tasks/duties (Art.38.6) — e.g. DPO not also the CISO if
+  those roles set the rules being audited
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the appointed Data Protection Officer (DPO) in a formal document, listing their full name and date
+  of appointment.
+- Document the DPO’s current job description, highlighting all roles and responsibilities to show separation
+  from decision-making positions in data processing.
+- State in writing that the DPO does not hold any other role, such as Chief Information Security Officer
+  or Head of IT, that determines data processing purposes or means.
+- Record a signed statement from the DPO confirming they have no conflicting duties or interests within
+  the organisation.
+- Specify the DPO as a named individual, not a team or department, to avoid ambiguity about responsibility.

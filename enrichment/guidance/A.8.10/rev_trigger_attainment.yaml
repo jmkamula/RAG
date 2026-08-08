@@ -1,0 +1,19 @@
+must_id: item:A.8.10:rev_trigger_attainment
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Retention-trigger attainment check (deletions completed within configured window)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for overseeing the periodic deletion program in a dated appointment
+  record.
+- Document the configured retention windows for each data type in a register, including the date each
+  was last reviewed.
+- Record the completion date and outcome of each deletion cycle, showing that data was deleted within
+  the required timeframe.
+- Cross-reference deletion logs with retention triggers to confirm that no data was kept beyond its configured
+  window.
+- State any exceptions or delays in deletion, with reasons and approval by a named manager, in a signed
+  exception log.

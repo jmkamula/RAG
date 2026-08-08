@@ -1,0 +1,17 @@
+must_id: item:A.8.21:reg_last_reviewed
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Per-row last-review timestamp
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a last-review timestamp for each network service entry in the register, using a consistent date
+  format such as YYYY-MM-DD.
+- Name the reviewer as a specific individual for each timestamped entry, avoiding generic labels like
+  "IT team" or "admin".
+- Update the last-review timestamp immediately after each review or change, ensuring no entry is left
+  with an outdated or missing date.
+- Cross-reference the timestamped review with supporting evidence, such as meeting minutes or change tickets,
+  to confirm the review actually occurred.

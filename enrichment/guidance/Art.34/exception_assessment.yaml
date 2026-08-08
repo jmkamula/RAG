@@ -1,0 +1,20 @@
+must_id: item:Art.34:exception_assessment
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: 'Art.34.3 exception assessment (a-c: appropriate protection like encryption / measures eliminating
+  high risk / disproportionate effort)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each exception assessment by listing the specific Art.34.3 condition applied, referencing the
+  relevant clause (a, b, or c) in a dated record.
+- Name the person responsible for evaluating whether encryption or similar protections were in place at
+  the time of the breach.
+- Record the technical or organisational measures that eliminated high risk to affected individuals, including
+  evidence such as logs or system reports.
+- State the rationale for claiming disproportionate effort, including supporting calculations or correspondence,
+  not just a generic statement.
+- Attach supporting evidence for each exception used, such as encryption certificates, risk assessments,
+  or documented decision memos.

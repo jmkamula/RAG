@@ -1,0 +1,17 @@
+must_id: item:Art.21:reg_suppression_list
+control_ref: Art.21
+standard_id: GDPR:2016/679
+must_text: Per-row addition to suppression list (direct marketing)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each objection to direct marketing in the Objection Register with the individual's full name,
+  contact details, and date of objection.
+- Cross-reference every new objection entry with your suppression list and add the individual to the list
+  without delay.
+- Document the staff member responsible for processing each objection by name and date in the register.
+- Retain evidence of confirmation sent to the individual acknowledging their removal from direct marketing
+  communications.
+- Name the owner of the Objection Register as a specific person, not a team or department.

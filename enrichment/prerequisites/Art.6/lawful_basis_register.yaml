@@ -1,0 +1,42 @@
+leaf_id: req:Art.6:lawful_basis_register
+control_ref: Art.6
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: foundational
+  rationale: You need a clear, up-to-date inventory of all processing activities before you can assign
+    a lawful basis to each one. Without RoPA, you can't reliably identify or justify which lawful basis
+    applies to which activity.
+  good_enough: A basic RoPA listing all processing activities, even if some details are incomplete, is
+    sufficient to start mapping lawful bases.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer (DPO) Designation
+  category: foundational
+  rationale: If a DPO is required, they must be involved in reviewing and validating the lawful basis
+    register. Their input ensures the register is accurate and defensible.
+  good_enough: A named DPO (internal or external) with contact details and a defined role in privacy governance
+    is enough to proceed.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope of your ISMS defines which parts of the organization and which data processing
+    activities are covered. This ensures your lawful basis register aligns with the actual operational
+    and compliance boundaries.
+  good_enough: A documented scope statement that identifies the business units, systems, and data types
+    included in your ISMS is sufficient for alignment.
+- ref: Art.20
+  standard_id: GDPR:2016/679
+  title: Right to Data Portability
+  category: direct
+  rationale: You must know which processing activities are based on consent or contract, as only these
+    are subject to data portability rights. This mapping depends on having a lawful basis assigned to
+    each activity.
+  good_enough: A preliminary mapping of which activities are based on consent or contract, even if not
+    fully validated, is enough to start the lawful basis register.

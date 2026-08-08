@@ -1,0 +1,48 @@
+leaf_id: req:Art.19:notification_program_review
+control_ref: Art.19
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.16
+  standard_id: GDPR:2016/679
+  title: Right to rectification
+  category: direct
+  rationale: You need a reliable record of all rectification requests and actions to verify that each
+    one triggered the required Art.19 notification or a documented exception.
+  good_enough: A maintained log or register of all Art.16 rectification events in the review period, even
+    if informal, is sufficient to proceed.
+- ref: Art.17
+  standard_id: GDPR:2016/679
+  title: Right to erasure (‘right to be forgotten’)
+  category: direct
+  rationale: Tracking erasure requests is essential to confirm that every such event was considered for
+    Art.19 notification, as required by GDPR.
+  good_enough: A list or summary of all erasure actions taken (or denied) in the period, with basic details,
+    is enough to start the review.
+- ref: Art.18
+  standard_id: GDPR:2016/679
+  title: Right to restriction of processing
+  category: direct
+  rationale: You must know when processing was restricted to ensure that all relevant third parties were
+    notified as per Art.19.
+  good_enough: A simple record of all restriction-of-processing events, even if not fully formalized,
+    is sufficient for the review.
+- ref: Art.19
+  standard_id: GDPR:2016/679
+  title: Notification obligation regarding rectification or erasure of personal data or restriction of
+    processing
+  category: direct
+  rationale: You need access to the actual notification records (or documented exceptions) to verify compliance
+    with Art.19 during the annual review.
+  good_enough: A folder or log showing all Art.19 notifications sent (or reasons for not sending) in the
+    review period is enough to proceed.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: A current RoPA helps identify which processing activities and recipients are in scope for
+    Art.19 notifications, ensuring completeness of the review.
+  good_enough: An up-to-date RoPA covering the review period, even if not perfect, is sufficient to identify
+    relevant processing activities and recipients.

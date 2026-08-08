@@ -1,0 +1,18 @@
+must_id: item:A.6.8:reg_ack_sent
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Per-row acknowledgment-sent-to-reporter flag (where reporter known + non-anonymous)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column in the Event Report Register to record whether an acknowledgment was sent to each known,
+  non-anonymous reporter.
+- Record the date and method of acknowledgment sent for each applicable event, referencing the specific
+  communication (e.g., email, letter).
+- Name the individual responsible for sending acknowledgments in the register, using a specific person's
+  name rather than a team or department.
+- Attach or link a copy of the actual acknowledgment message to each relevant register entry where possible.
+- Check that no register row for a known reporter is left blank or marked “N/A” in the acknowledgment
+  column, as this would be flagged by an auditor.

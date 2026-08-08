@@ -1,0 +1,38 @@
+leaf_id: req:Art.21:objection_register
+control_ref: Art.21
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear record of all processing activities to identify which processing operations
+    individuals might object to. Without this, you cannot accurately log or respond to objections.
+  good_enough: A basic, up-to-date RoPA exists that lists all major processing activities and responsible
+    parties.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity is essential to determine whether an
+    objection is valid and how to handle it. This underpins the decision-making in the objection register.
+  good_enough: Each processing activity in the RoPA has a documented lawful basis, even if not fully reviewed
+    for compliance.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If a DPO is required, their involvement is crucial for reviewing, recording, and responding
+    to objections. The register process must reflect their role if applicable.
+  good_enough: A DPO is formally designated (if required), or a responsible contact is named for handling
+    objections.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope statement clarifies which parts of the organization and processing activities are
+    covered, ensuring the objection register is complete and relevant.
+  good_enough: A draft or approved ISMS scope exists that covers all GDPR-relevant processing activities.

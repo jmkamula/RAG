@@ -1,0 +1,15 @@
+must_id: item:A.5.11:rev_next_date
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the asset-return program in the review documentation, using a
+  clear and specific future calendar date.
+- Record the name of the individual responsible for scheduling the next review, not just a role or team.
+- Document the date when the current review was completed to show the review cycle timeline.
+- Cross-reference the stated next review date in both the asset-return program document and the central
+  compliance calendar to ensure consistency.

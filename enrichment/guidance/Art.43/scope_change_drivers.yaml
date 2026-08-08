@@ -1,0 +1,19 @@
+must_id: item:Art.43:scope_change_drivers
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Trigger list (new approved scheme, jurisdiction expansion)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and details of each new approved certification scheme relevant to your processing
+  activities in a central register.
+- Record any expansion of your organisation’s operations into new jurisdictions, including the effective
+  date and affected services.
+- Cross-reference each trigger event—such as a new scheme or jurisdiction expansion—to the corresponding
+  update in your certification body scope documentation.
+- Name the responsible individual who reviews and updates the certification body scope, avoiding generic
+  titles like "Compliance Team" or "Management".
+- Retain evidence of formal review and approval for each scope update, such as a signed and dated decision
+  record.

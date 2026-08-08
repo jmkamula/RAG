@@ -1,0 +1,19 @@
+must_id: item:A.5.14:electronic_transfer
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Rules for electronic transfers (email, file transfer, cloud sharing, APIs) with encryption
+  requirements per classification level
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the policy owner as a specific individual responsible for information transfer decisions, not as
+  a team or department.
+- Document the encryption requirements for each data classification level in a dated policy section covering
+  email, file transfer, cloud sharing, and APIs.
+- State the approved electronic transfer methods and reference the supporting technical controls or procedures
+  for each method.
+- Record the policy approval date and the name of the approver in the policy document.
+- Cross-reference the policy with the organisation’s data classification scheme to show alignment between
+  transfer rules and classification levels.

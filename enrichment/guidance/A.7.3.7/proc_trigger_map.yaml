@@ -1,0 +1,18 @@
+must_id: item:A.7.3.7:proc_trigger_map
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Trigger map — which subject events (withdrawal / correction / erasure / restriction / objection)
+  require third-party notification
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all possible data subject events, such as withdrawal, correction, erasure, restriction, and objection,
+  in a table with clear definitions.
+- Map each event to specific third-party notification requirements, indicating which events trigger notifications
+  and to whom.
+- Name the individual responsible for maintaining and updating the trigger map, avoiding generic roles
+  like "the team" or "IT".
+- Date and version the trigger map document, ensuring each update is clearly recorded and previous versions
+  are retained for reference.

@@ -1,0 +1,17 @@
+must_id: item:A.8.8:reg_finding_id
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Per-finding unique identifier (CVE / vendor advisory / scanner finding ref)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each vulnerability entry in the backlog register, using the CVE number,
+  vendor advisory ID, or scanner finding reference.
+- Record the source of each identifier, specifying whether it is a CVE, vendor advisory, or scanner reference,
+  alongside the vulnerability details.
+- Cross-reference each vulnerability entry with its identifier in any related incident or remediation
+  records to ensure traceability.
+- Name the owner of each vulnerability entry as a specific individual, not a team or department, to avoid
+  ambiguity in responsibility.

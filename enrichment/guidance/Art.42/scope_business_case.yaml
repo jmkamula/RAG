@@ -1,0 +1,17 @@
+must_id: item:Art.42:scope_business_case
+control_ref: Art.42
+standard_id: GDPR:2016/679
+must_text: Business case (customer requirement / Art.46.2.f transfer safeguard / market differentiation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific business reason for seeking certification, such as a customer request, transfer
+  safeguard under Art.46.2.f, or market differentiation, in a dated record.
+- Name the individual who approved the certification initiative, ensuring the owner is a specific person
+  and not a team or department.
+- Attach supporting evidence, such as customer correspondence or regulatory guidance, that demonstrates
+  the identified business case for certification.
+- Record the certification scope and rationale in a central compliance register, cross-referencing the
+  related business case documentation.

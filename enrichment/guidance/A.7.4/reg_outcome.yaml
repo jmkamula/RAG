@@ -1,0 +1,16 @@
+must_id: item:A.7.4:reg_outcome
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: Per-event outcome (closed-no-action / handed-to-A.5.26-incident / lessons-captured)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the outcome for each monitoring event in the register, specifying if it was closed with no action,
+  escalated, or used for lessons learned.
+- Name the individual responsible for determining and recording each event’s outcome, ensuring a specific
+  person is listed rather than a team or department.
+- Date each outcome entry to show when the decision was made and the event was closed or escalated.
+- Cross-reference any events escalated to incident management by including the related incident record
+  number in the register.

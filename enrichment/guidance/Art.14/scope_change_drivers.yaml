@@ -1,0 +1,19 @@
+must_id: item:Art.14:scope_change_drivers
+control_ref: Art.14
+standard_id: GDPR:2016/679
+must_text: Trigger list for re-scoping (new vendor onboarded, new enrichment line, M&A)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current third-party data sources in a dated inventory, including vendors, enrichment providers,
+  and any acquired entities.
+- Document a trigger list specifying events that require re-scoping, such as onboarding a new vendor,
+  adding a new data enrichment source, or mergers and acquisitions.
+- Assign a named individual responsible for monitoring these triggers and initiating the re-scoping process
+  when an event occurs.
+- Record each re-scoping event with the date, trigger, and outcome in a change log maintained alongside
+  the inventory.
+- Name the responsible person specifically—avoid using generic labels like "the team" or "IT department"
+  as the owner.

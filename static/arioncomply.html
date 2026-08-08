@@ -243,6 +243,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 /* Remediation list */
 .topic-remediation-list{margin:6px 0 0;padding-left:22px;list-style:disc}
 .topic-remediation-list li{font-size:12px;color:#3D3B32;line-height:1.6;margin-bottom:4px}
+/* Prerequisites (Ship 57') */
+.topic-prereq-list{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.topic-prereq-row{padding:8px 10px;border:1px solid #EEECE2;border-radius:6px;background:#FCFBF8}
+.topic-prereq-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin-bottom:4px}
+.topic-prereq-cat{font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.topic-prereq-cat-foundational{background:#E7EFDD;color:#3B6D11}
+.topic-prereq-cat-direct{background:#DDE7EF;color:#1F4A6D}
+.topic-prereq-cat-cross_role{background:#EFE0DA;color:#6D3E1F}
+.topic-prereq-ref{font-size:12px;color:#5F5E5A;font-weight:600}
+.topic-prereq-title{font-size:12px;color:#3D3B32;font-weight:600}
+.topic-prereq-why,.topic-prereq-ge{font-size:11px;color:#3D3B32;line-height:1.5;margin-top:2px}
+.topic-prereq-lbl{font-weight:600;color:#5F5E5A}
 
 /* ── Chat panel ── */
 .chat-wrap{display:flex;flex-direction:column;height:100%}
@@ -3681,6 +3693,44 @@ function _renderTopicLeafDetailBody(d, roleNote) {
     </div>
   `;
 
+  // Section 2b — Prerequisites (Ship 57')
+  // Per-leaf artefacts that should be in place BEFORE drafting this
+  // document. Grouped by category (foundational → direct → cross_role).
+  // Empty list ⇒ section suppressed.
+  const prereqs = d.prerequisites || [];
+  let prereqSection = '';
+  if (prereqs.length) {
+    const catOrder = ['foundational', 'direct', 'cross_role'];
+    const catLabel = { foundational: 'Foundational', direct: 'Direct', cross_role: 'Cross-role' };
+    const byCat = {};
+    prereqs.forEach(p => { (byCat[p.category] = byCat[p.category] || []).push(p); });
+    const prereqRows = catOrder.flatMap(cat => (byCat[cat] || []).map(p => {
+      const refDisplay = escapeHtml(`${humanizeStandardId(p.standard_id)} ${p.ref}`);
+      const title = escapeHtml(p.title || '');
+      const rationale = escapeHtml(p.rationale || '');
+      const good_enough = p.good_enough ? `
+        <div class="topic-prereq-ge"><span class="topic-prereq-lbl">Good enough:</span> ${escapeHtml(p.good_enough)}</div>
+      ` : '';
+      return `
+        <div class="topic-prereq-row">
+          <div class="topic-prereq-head">
+            <span class="topic-prereq-cat topic-prereq-cat-${cat}">${catLabel[cat] || cat}</span>
+            <span class="topic-prereq-ref">${refDisplay}</span>
+            <span class="topic-prereq-title">${title}</span>
+          </div>
+          <div class="topic-prereq-why"><span class="topic-prereq-lbl">Why:</span> ${rationale}</div>
+          ${good_enough}
+        </div>
+      `;
+    })).join('');
+    prereqSection = `
+      <div class="topic-leaf-section">
+        <div class="topic-leaf-section-lbl"><i class="ti ti-list-details" aria-hidden="true"></i> Before you start</div>
+        <div class="topic-prereq-list">${prereqRows}</div>
+      </div>
+    `;
+  }
+
   // Section 3 — MUST checklist (what's covered / what's missing)
   const musts = d.must_items || [];
   let mustSection = '';
@@ -3734,19 +3784,22 @@ function _renderTopicLeafDetailBody(d, roleNote) {
   }
 
   // Section 5 — Actions
+  // Raw href-based download won't attach the X-API-Key header, so route
+  // through downloadTemplateForLeaf() which uses fetch() with the key.
+  const leafIdAttr = escapeHtml(d.leaf_id);
   const templatesRow = window._TOPIC_LEAF_HAS_TEMPLATE_MAP && window._TOPIC_LEAF_HAS_TEMPLATE_MAP[d.leaf_id] ? `
     <div class="topic-leaf-action-block">
       <div class="topic-leaf-action-label">Draft the document from a starter template</div>
       <div class="topic-leaf-action-row">
-        <a class="topic-leaf-btn" href="/api/v1/templates/${encodeURIComponent(d.leaf_id)}/download?format=md" download onclick="event.stopPropagation()">
+        <button class="topic-leaf-btn" type="button" onclick="event.stopPropagation();downloadTemplateForLeaf('${leafIdAttr}','md')">
           <i class="ti ti-markdown" aria-hidden="true"></i> Markdown
-        </a>
-        <a class="topic-leaf-btn" href="/api/v1/templates/${encodeURIComponent(d.leaf_id)}/download?format=docx" download onclick="event.stopPropagation()">
+        </button>
+        <button class="topic-leaf-btn" type="button" onclick="event.stopPropagation();downloadTemplateForLeaf('${leafIdAttr}','docx')">
           <i class="ti ti-file-type-doc" aria-hidden="true"></i> Word
-        </a>
-        <a class="topic-leaf-btn" href="/api/v1/templates/${encodeURIComponent(d.leaf_id)}/download?format=xlsx" download onclick="event.stopPropagation()">
+        </button>
+        <button class="topic-leaf-btn" type="button" onclick="event.stopPropagation();downloadTemplateForLeaf('${leafIdAttr}','xlsx')">
           <i class="ti ti-file-type-xls" aria-hidden="true"></i> Excel
-        </a>
+        </button>
       </div>
     </div>
   ` : '';
@@ -3754,6 +3807,7 @@ function _renderTopicLeafDetailBody(d, roleNote) {
   return `
     ${roleSection}
     ${statusSection}
+    ${prereqSection}
     ${mustSection}
     ${remediation}
     <div class="topic-leaf-section">

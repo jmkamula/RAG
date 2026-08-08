@@ -1,0 +1,50 @@
+leaf_id: req:B.8.5.8:subcontractor_change_register
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the specific purposes for which personal data is processed before
+    you can track and justify subcontractor changes. This ensures that any new or replaced subcontractor
+    aligns with the documented processing purposes.
+  good_enough: A clear, up-to-date record of processing purposes for all relevant data flows is available
+    and referenced in the subcontractor review process.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Before recording subcontractor changes, you need to confirm the lawful basis for processing
+    personal data, as this affects whether and how you can engage new subcontractors and what notifications
+    are required.
+  good_enough: Each processing activity involving subcontractors has an identified lawful basis, documented
+    in a way that can be referenced during subcontractor onboarding or change events.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope statement defines which parts of the business, systems, and data are covered by
+    the ISMS and PIMS. Without this, you can't reliably determine which subcontractor relationships must
+    be tracked in the register.
+  good_enough: A documented ISMS scope exists that clearly covers all business units and data flows relevant
+    to subcontractor use.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is needed to identify which assets (including data and systems)
+    are managed or accessed by subcontractors, ensuring the register is complete and accurate.
+  good_enough: A basic asset register exists listing all major information assets and indicating which
+    are handled by subcontractors.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that someone is responsible for maintaining the subcontractor
+    change register and for notifying customers of changes.
+  good_enough: Roles for managing subcontractor relationships and notifications are assigned and documented,
+    even if not yet fully operationalized.

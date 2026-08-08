@@ -1,0 +1,17 @@
+must_id: item:A.7.10:legacy_exception
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Exception process for legacy media that cannot meet current controls
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step exception process for handling legacy storage media that cannot comply with
+  current security controls, including required approvals.
+- Name a specific individual responsible for reviewing and authorizing each exception, avoiding generic
+  roles like "IT" or "the team."
+- Record each approved exception in a dated register, including details of the media, reason for exception,
+  and planned mitigation measures.
+- Retain evidence of management approval for each exception, such as a signed decision or documented email
+  confirmation.

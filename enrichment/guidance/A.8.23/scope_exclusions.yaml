@@ -1,0 +1,17 @@
+must_id: item:A.8.23:scope_exclusions
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: Exclusion rationale (e.g. air-gapped systems with no internet access)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems excluded from web filtering, including their names and locations, in a dated and version-controlled
+  document.
+- State the specific technical or business reason for each exclusion, such as "air-gapped with no network
+  interface," in the same document.
+- Name the individual who approved each exclusion, avoiding generic titles like "IT" or "the team."
+- Attach supporting evidence, such as network diagrams or screenshots, showing the system’s isolation
+  or lack of internet connectivity.
+- Review and update the exclusion list annually, recording the date and the reviewer’s name for each update.

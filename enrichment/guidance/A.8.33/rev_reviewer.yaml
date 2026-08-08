@@ -1,0 +1,16 @@
+must_id: item:A.8.33:rev_reviewer
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Data Engineering + DPO + InfoSec)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer for each periodic test information program review as a specific individual from Data
+  Engineering, DPO, and InfoSec teams.
+- Record the date each review was completed and link it to the corresponding test information program
+  documentation.
+- Document the review outcome and any follow-up actions in a signed review log, including reviewer names
+  and signatures.
+- Avoid listing groups or departments as reviewers; specify named individuals to provide clear accountability.

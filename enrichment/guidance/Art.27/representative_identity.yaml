@@ -1,0 +1,17 @@
+must_id: item:Art.27:representative_identity
+control_ref: Art.27
+standard_id: GDPR:2016/679
+must_text: Identity and contact details of designated representative (EU establishment)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the designated EU representative as a specific individual or company, including full legal name,
+  in your official compliance documentation.
+- Document the representative’s complete contact details, including physical address, phone number, and
+  email, in your privacy policy or public-facing notice.
+- Record the date and method of appointment, and retain a signed agreement or letter confirming the representative’s
+  acceptance of the role.
+- State the representative’s role and responsibilities clearly, avoiding vague descriptions or generic
+  titles that could apply to any organisation.

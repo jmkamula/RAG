@@ -1,0 +1,20 @@
+must_id: item:B.8.5.1:proc_international_agreements
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+must_text: International-transfer agreement types identified (Model Contract Clauses / BCRs / CBPRs) per
+  relevant country pair
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each country pair where personal data is transferred, specifying both the originating and receiving
+  countries in a dated register.
+- Identify and record the specific legal transfer mechanism used for each country pair, such as Model
+  Contract Clauses, Binding Corporate Rules, or Cross Border Privacy Rules.
+- Attach or cross-reference the signed agreement or documented approval for each transfer mechanism, ensuring
+  each document is dated and version-controlled.
+- Name the responsible individual for maintaining and updating the register, avoiding generic titles like
+  "the team" or "IT department".
+- Review the register annually and document the review date and reviewer’s name to show ongoing oversight
+  of transfer mechanisms.

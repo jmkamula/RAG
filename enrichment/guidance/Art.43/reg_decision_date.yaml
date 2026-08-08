@@ -1,0 +1,18 @@
+must_id: item:Art.43:reg_decision_date
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Per-row decision date + decision (issue / renew / withdraw / refuse)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Record the decision date for each certification issuance, renewal, withdrawal, or refusal in a dedicated
+  column of the Certification Issuance Record.
+- State the specific decision made for each entry as either "issue", "renew", "withdraw", or "refuse"
+  in a separate column.
+- Name the decision-maker as a specific individual for each row, avoiding generic labels like "the team"
+  or "committee".
+- Confirm that no row is missing either a decision date or a decision type before finalizing the record.
+- Retain the Certification Issuance Record in a format that preserves original entry dates and prevents
+  undetected edits.

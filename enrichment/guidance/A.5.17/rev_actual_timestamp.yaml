@@ -1,0 +1,19 @@
+must_id: item:A.5.17:rev_actual_timestamp
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Actual revocation timestamp per record (drives the SLA-met calculation analogous to A.5.16;
+  compromise revocations have tighter SLA)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time each credential is revoked in the revocation log for every individual
+  credential event.
+- State the reason for revocation in each record, clearly distinguishing between compromise and routine
+  revocations.
+- Name the person who authorized each revocation, listing their full name rather than a team or department.
+- Cross-reference each revocation entry with the related incident or request ticket to show the trigger
+  for the action.
+- Avoid leaving any revocation record undated or with only a general time range, as auditors will flag
+  missing or vague timestamps.

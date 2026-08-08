@@ -1,0 +1,39 @@
+leaf_id: req:6.3:isms_change_register
+control_ref: '6.3'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS Change Register must capture changes that affect the defined scope of the ISMS.
+    Without a clear, current scope statement, it is impossible to determine which changes are relevant
+    or require documentation.
+  good_enough: A documented and approved scope statement that outlines the ISMS boundaries and is accessible
+    to those managing changes.
+- ref: '4.4'
+  standard_id: ISO27001:2022
+  title: ISMS and its Processes
+  category: foundational
+  rationale: The Change Register tracks modifications to ISMS processes. If these processes are not defined,
+    there is no baseline for what constitutes a change or how to record it.
+  good_enough: A basic description of the ISMS processes and their owners, even if not fully detailed,
+    so that changes can be identified and logged.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: Changes to the ISMS often involve updates to the information security policy. The register
+    must reference these changes, so an initial policy must exist.
+  good_enough: A formally approved information security policy document, even if it is a first draft.
+- ref: '5.3'
+  standard_id: ISO27001:2022
+  title: Organizational Roles, Responsibilities and Authorities
+  category: foundational
+  rationale: The register must record changes to ISMS roles and responsibilities. These must be defined
+    before changes can be tracked.
+  good_enough: A list of key ISMS roles and their responsibilities, with named individuals or positions
+    assigned.

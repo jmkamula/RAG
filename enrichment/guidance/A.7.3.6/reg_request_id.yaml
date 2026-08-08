@@ -1,0 +1,15 @@
+must_id: item:A.7.3.6:reg_request_id
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: Unique request identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each access, correction, or erasure request at the time it is logged in
+  the register.
+- Record the unique identifier alongside the request details, including requester name, date received,
+  and type of request.
+- Cross-reference any correspondence or follow-up actions with the unique identifier in all related records.
+- Avoid using duplicate or recycled identifiers—each request must have a distinct value that is not reused.

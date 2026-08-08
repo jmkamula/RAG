@@ -1,0 +1,20 @@
+must_id: item:A.5.8:change_control
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: In-project change control step (scope/security-impact changes during build trigger re-assessment,
+  not late-detection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Describe the process for identifying and documenting changes to project scope or security requirements
+  during the project lifecycle in the procedure.
+- Assign responsibility for change assessment to a named individual, not a generic role or team, in the
+  documented procedure.
+- Record each change and its security impact assessment in a dated change log or register, referencing
+  who performed the assessment.
+- Require that any change with potential security impact triggers a formal re-assessment before implementation,
+  with evidence of review and approval.
+- State that late detection of security-impacting changes after project completion is a non-conformance,
+  and require immediate documentation and escalation if this occurs.

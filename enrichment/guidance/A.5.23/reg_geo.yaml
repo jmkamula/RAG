@@ -1,0 +1,17 @@
+must_id: item:A.5.23:reg_geo
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Geographic location of data per service (region, sub-region)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each cloud service in the Cloud Service Register, including the full service name and provider.
+- Record the geographic location for each service, specifying both the region and sub-region where data
+  is stored or processed.
+- Name the individual responsible for verifying the geographic location details for each service entry.
+- Attach supporting documentation from the cloud provider confirming the stated region and sub-region
+  for data storage.
+- Avoid using vague terms like "global" or "multiple regions"—specify exact regions and sub-regions for
+  every service.

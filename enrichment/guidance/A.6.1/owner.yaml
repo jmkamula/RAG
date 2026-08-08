@@ -1,0 +1,16 @@
+must_id: item:A.6.1:owner
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Named owner of the screening procedure (HR + InfoSec jointly; HR runs operationally, InfoSec
+  sets risk-tier criteria)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Name a specific individual in HR as the operational owner of the personnel screening procedure in the
+  document header.
+- Name a specific individual in Information Security as the owner responsible for setting and updating
+  risk-tier criteria in the procedure.
+- Record the date and version number on the procedure to show when ownership was last reviewed or updated.
+- Avoid listing "HR department" or "InfoSec team" as owners; use named individuals with current job titles.

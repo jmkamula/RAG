@@ -1,0 +1,18 @@
+must_id: item:A.5.28:rev_actions
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Action items captured for the program (e.g. retrain on new tooling, update jurisdiction tagging,
+  refresh legal-counsel input)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record all action items from each program review in a dated log, including a clear description of the
+  required change or improvement.
+- Assign each action item to a named individual with a target completion date, avoiding generic assignees
+  such as "the team" or "IT."
+- Document the decision or rationale for each action item, referencing supporting materials such as tool
+  documentation or legal counsel input.
+- Confirm completion of each action item by updating the log with the completion date and the name of
+  the person who verified it.

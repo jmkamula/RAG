@@ -1,0 +1,19 @@
+must_id: item:A.7.10:disposal
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Disposal controls (handoff to A.7.14 secure disposal procedure with chain-of-custody preserved)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each storage media disposal event with a unique identifier, date, media type, and the person
+  responsible for initiating disposal.
+- Cross-reference the disposal event record with the secure disposal procedure outlined in A.7.14, showing
+  the process was followed.
+- Record the full chain-of-custody for each media item, listing all individuals who handled it from initial
+  storage to final disposal.
+- Name the disposal owner as a specific individual, not a team or department, in the procedure and on
+  each disposal record.
+- Retain signed confirmation from the final handler or disposal vendor, including date and method of destruction,
+  for each media item.

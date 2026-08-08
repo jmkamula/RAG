@@ -1,0 +1,20 @@
+must_id: item:A.6.3:scope_third_party_audiences
+control_ref: A.6.3
+standard_id: ISO27001:2022
+must_text: Third-party audience handling (where contractors/visitors with access need awareness — typically
+  a lighter onboarding briefing rather than full curriculum)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all third-party roles, such as contractors and visitors, who require access to your premises
+  or systems, and list them in a dated register.
+- Document the specific awareness topics or onboarding briefing content provided to each third-party role,
+  referencing the curriculum or summary materials.
+- Record the date and method of delivery for each third-party awareness session, linking attendance records
+  to named individuals.
+- Name the responsible staff member who approves third-party access after confirming completion of the
+  required briefing—avoid generic titles like "HR" or "Security Team".
+- Retain signed or acknowledged records from third parties confirming receipt and understanding of the
+  awareness briefing.

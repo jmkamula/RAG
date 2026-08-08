@@ -1,0 +1,47 @@
+leaf_id: req:A.7.4.7:applicable_scope
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know the boundaries of your ISMS, including which business units, processes,
+    and systems are in scope, before you can define which PII categories and activities require retention
+    controls.
+  good_enough: A clear, approved scope statement that identifies the organizational and system boundaries
+    relevant to PII processing.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A working data classification scheme is necessary to identify and group PII categories, which
+    is foundational for determining which require specific retention schedules.
+  good_enough: A documented scheme that distinguishes PII from other data types and is applied to core
+    data assets.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register ensures you know what PII-related assets exist and where PII
+    is processed, supporting accurate mapping of activities to PII categories.
+  good_enough: A basic inventory listing key information assets and their PII relevance, even if not fully
+    exhaustive.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purposes for which PII is processed to determine which activities and PII
+    categories may require unique retention schedules.
+  good_enough: A list of main PII processing purposes, even if some edge cases are pending clarification.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for each processing activity is essential, as retention requirements
+    may differ depending on the legal justification.
+  good_enough: A mapping of each major PII processing activity to its lawful basis, with gaps noted for
+    future follow-up.

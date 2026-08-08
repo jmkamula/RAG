@@ -1,0 +1,17 @@
+must_id: item:B.8.5.5:scope_request_types
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Request types requiring decision (legal request / third-party request / journalist request
+  / marketing lead-gen request)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of disclosure requests your organisation receives, such as legal, third-party, journalist,
+  and marketing lead-generation requests, in a dated document.
+- Name a specific individual responsible for reviewing and updating the list of disclosure request types,
+  avoiding generic titles or teams.
+- Document the criteria used to determine whether each request type requires a formal disclosure decision,
+  including examples where possible.
+- Record the date when the scope of request types was last reviewed and approved by a designated decision-maker.

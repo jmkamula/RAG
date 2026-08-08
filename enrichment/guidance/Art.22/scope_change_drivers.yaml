@@ -1,0 +1,17 @@
+must_id: item:Art.22:scope_change_drivers
+control_ref: Art.22
+standard_id: GDPR:2016/679
+must_text: Trigger list (new ML model deployed, system promotion from review to decision)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all triggers that require scope review, such as deployment of new machine learning models or promotion
+  of systems to make automated decisions.
+- Document each trigger with a clear description and the date it was added to the trigger list.
+- Name a specific individual responsible for maintaining and updating the trigger list, avoiding generic
+  roles like "the team" or "IT".
+- Review and update the trigger list at least annually, recording the review date and the reviewer’s name.
+- Retain previous versions of the trigger list to show changes over time, including dates and reasons
+  for each update.

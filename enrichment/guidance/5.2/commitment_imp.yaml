@@ -1,0 +1,16 @@
+must_id: item:5.2:commitment_imp
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: Commitment to continual improvement of the ISMS
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the information security policy that the organisation is committed to continual improvement
+  of the information security management system.
+- Document the approval of the policy by a named senior leader, including their signature and the date
+  of approval.
+- Reference a specific process or mechanism within the policy for regularly reviewing and updating the
+  ISMS based on lessons learned or changing risks.
+- Name the owner of the policy as a specific individual, not a group or department.

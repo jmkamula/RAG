@@ -1,0 +1,20 @@
+must_id: item:A.5.1:comm_acknowledgment
+control_ref: A.5.1
+standard_id: ISO27001:2022
+must_text: Acknowledgment of receipt and understanding by personnel (e.g. signed register, e-learning
+  completion)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Distribute the current information security policy to all personnel using a trackable method such as
+  email with read receipt or an e-learning platform.
+- Collect individual acknowledgments of receipt and understanding, such as signed registers or digital
+  confirmations, for each staff member.
+- Record the date of acknowledgment and the name of each person in a central register or learning management
+  system report.
+- Name the policy version and date in the acknowledgment record to avoid confusion with previous or draft
+  versions.
+- Retain completed acknowledgment records for all current personnel and ensure records are updated when
+  new staff join or policies change.

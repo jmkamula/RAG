@@ -1,0 +1,40 @@
+leaf_id: req:A.8.25:applicable_sdlc_scope
+control_ref: A.8.25
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS Scope Statement defines the overall boundaries of your information security management
+    system, including which business units and activities are covered. You can't meaningfully define what
+    development is in-scope for SDLC controls without first knowing the broader ISMS scope.
+  good_enough: A documented scope statement that clearly identifies included business areas and activities,
+    even if some details are still being finalized.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register is needed to identify which systems, applications, and codebases
+    exist, so you can determine which development activities are relevant for SDLC scope.
+  good_enough: A working inventory of key information assets, especially software and code repositories,
+    is available and reasonably accurate.
+- ref: A.8.30
+  standard_id: ISO27001:2022
+  title: Outsourced development
+  category: direct
+  rationale: Outsourced development activities must be considered when defining SDLC scope, as controls
+    may need to extend to suppliers or be explicitly excluded.
+  good_enough: A list of outsourced development arrangements exists, with enough detail to decide if and
+    how they fall under SDLC controls.
+- ref: A.8.31
+  standard_id: ISO27001:2022
+  title: Separation of development, test and production environments
+  category: direct
+  rationale: Understanding how environments are separated helps clarify which systems and activities are
+    part of the formal SDLC, and which are not (e.g., ad hoc scripts in production).
+  good_enough: A basic mapping of development, test, and production environments is documented, showing
+    where separation exists or is lacking.

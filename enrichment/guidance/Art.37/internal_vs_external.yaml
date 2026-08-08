@@ -1,0 +1,16 @@
+must_id: item:Art.37:internal_vs_external
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: Internal-vs-external decision (Art.37.6 — staff member OR fulfil tasks under service contract)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State whether the Data Protection Officer is an internal staff member or engaged under a service contract
+  in a dated designation document.
+- Name the DPO as a specific individual, not a team or department, in the designation procedure.
+- Document the decision-making process and criteria used to select internal or external DPO status, including
+  who approved the decision and when.
+- Attach a copy of the signed employment contract or service agreement that confirms the DPO’s engagement
+  type and scope of responsibilities.

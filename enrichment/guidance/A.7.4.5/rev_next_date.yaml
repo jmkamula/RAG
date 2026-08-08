@@ -1,0 +1,14 @@
+must_id: item:A.7.4.5:rev_next_date
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date clearly in the end-of-processing program review document.
+- Record the date in a dedicated section labeled "Next Planned Review Date" within the review artefact.
+- Name the individual responsible for scheduling the next review, using their full name rather than a
+  team or department.
+- Sign and date the review document to confirm when the next review date was set.

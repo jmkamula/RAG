@@ -1,0 +1,18 @@
+must_id: item:A.5.13:training_ref
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: References training so personnel know how to apply labels (cross-link to A.5.12 classification
+  training)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference the specific training module on information classification that covers labelling, including
+  its title and date, within the procedure document.
+- Cross-link the labelling procedure to the classification training record required by control A.5.12,
+  citing the exact location or file name.
+- List the names of all personnel required to complete the labelling training, along with their completion
+  dates, in a training log.
+- Name the training owner as a specific individual responsible for maintaining training content and records,
+  not as a team or department.

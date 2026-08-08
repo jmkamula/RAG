@@ -1,0 +1,17 @@
+must_id: item:Art.34:reg_communication_date
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: Per-row communication date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each communication to a data subject was sent in a dedicated column of the Subject
+  Communication Record.
+- Confirm that every row in the record contains a completed communication date field with no blanks or
+  placeholders.
+- Name the individual responsible for updating and verifying communication dates in the record, using
+  their full name rather than a team or department.
+- Retain copies of the original communications alongside the record to allow auditors to cross-check the
+  recorded dates.

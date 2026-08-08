@@ -1,0 +1,20 @@
+must_id: item:A.5.17:compromise_response
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Compromise-response path (when a credential is reported or detected compromised — forced rotation,
+  identity-level investigation, scope expansion check)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process to follow when a credential compromise is reported or detected, including
+  notification, investigation, and forced credential rotation.
+- Assign a named individual or role responsible for overseeing the compromise response and ensure their
+  contact details are listed in the procedure.
+- Record each credential compromise incident in an incident log, including date detected, actions taken,
+  and investigation results.
+- State the requirement to check for related or expanded compromise by reviewing access logs and linked
+  accounts after any incident.
+- Specify that all actions and decisions must be documented with names and timestamps—avoid relying on
+  verbal or undocumented responses.

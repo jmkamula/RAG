@@ -1,0 +1,18 @@
+must_id: item:9.1:timing_analyse
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: When results are analysed and evaluated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the exact dates when monitoring and measurement results are analysed and evaluated in a dedicated
+  section of the procedure.
+- Name the individual responsible for analysing and evaluating results, listing their full name and job
+  title.
+- Record each analysis and evaluation outcome in a dated log or report, referencing the specific data
+  reviewed.
+- Attach evidence of management review or sign-off for each analysis to confirm that results were formally
+  evaluated.
+- Specify the frequency of analysis in the procedure, avoiding vague terms like "regularly" or "as needed."

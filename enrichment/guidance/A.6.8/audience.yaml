@@ -1,0 +1,16 @@
+must_id: item:A.6.8:audience
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Procedure addresses all personnel (employees, contractors, third parties with access)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that all employees, contractors, and third parties with access must report information
+  security events.
+- List the specific roles or groups covered by the reporting requirement, naming each category explicitly
+  rather than using general terms like "all staff."
+- Document the communication channels and contact points for reporting events, including names or titles
+  and up-to-date contact details.
+- Record the date the procedure was last reviewed and approved by a named responsible individual.

@@ -1,0 +1,17 @@
+must_id: item:A.5.28:rev_external_input
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: External benchmark or industry-practice input considered (peer review, forensic-community guidance)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and document at least one relevant external benchmark or industry guideline used to inform
+  your evidence-handling program review, citing the specific source and date.
+- Record the names and roles of external peers or forensic-community experts who provided input, along
+  with the date and method of their feedback.
+- Attach meeting notes, correspondence, or review summaries that show how external input was considered
+  and integrated into the program review.
+- Name the reviewer(s) as specific individuals, not generic roles or teams, to avoid auditor concerns
+  about accountability.

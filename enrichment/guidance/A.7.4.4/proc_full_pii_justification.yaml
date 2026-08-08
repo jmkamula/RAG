@@ -1,0 +1,18 @@
+must_id: item:A.7.4.4:proc_full_pii_justification
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+must_text: Where processing requires non-minimised PII (identified purpose demands it), justification
+  documented
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each instance where non-minimised personal data is processed, including a clear explanation
+  of why the full data set is necessary.
+- State the specific business or legal purpose that requires non-minimised personal data in a dated justification
+  record.
+- Name the individual who approved the use of non-minimised personal data, ensuring the approval is signed
+  and dated.
+- Avoid using generic justifications such as "business needs"; provide detailed, purpose-specific reasoning
+  for each case.

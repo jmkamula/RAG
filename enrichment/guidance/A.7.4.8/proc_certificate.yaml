@@ -1,0 +1,18 @@
+must_id: item:A.7.4.8:proc_certificate
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Disposal certificate / attestation captured per action
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to oversee each PII disposal action and record their name in the disposal
+  log.
+- Document the date, method, and scope of each PII disposal event in a disposal certificate or attestation
+  form.
+- Obtain a signed attestation or certificate from the person who performed or supervised the disposal,
+  confirming completion.
+- Retain each disposal certificate or attestation with a unique reference number for future audit review.
+- Specify the responsible person by name, not by role or team, to avoid auditor concerns about unclear
+  accountability.

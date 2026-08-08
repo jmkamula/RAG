@@ -1,0 +1,19 @@
+must_id: item:A.7.3.7:rev_dispatch_audit
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Dispatch audit — sampled subject events verified to have generated corresponding third-party
+  notifications
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of subject events from the audit period and record their unique identifiers in
+  an auditable log.
+- Retrieve notification records sent to third parties for each sampled event, including recipient details
+  and dispatch timestamps.
+- Cross-reference each sampled event with its corresponding notification record to confirm that a notification
+  was generated and sent.
+- Document any sampled event that lacks a matching notification and record the investigation outcome and
+  corrective actions taken.
+- Name the reviewer who performed the verification as a specific individual, not as a team or department.

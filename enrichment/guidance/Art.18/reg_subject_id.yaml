@@ -1,0 +1,15 @@
+must_id: item:Art.18:reg_subject_id
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Subject identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique subject identifier for each entry in the restriction register, such as a user ID or
+  case reference number.
+- Document the date the restriction was applied alongside the subject identifier in each row of the register.
+- Name the data subject using a consistent format, avoiding ambiguous labels like "customer" or "user"
+  without further identification.
+- Cross-reference each subject identifier with the corresponding restriction request or supporting documentation.

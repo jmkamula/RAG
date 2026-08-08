@@ -1,0 +1,20 @@
+must_id: item:4.1:scope_exclusions
+control_ref: '4.1'
+standard_id: ISO27001:2022
+must_text: Exclusions stated explicitly with rationale (e.g. consumer-product trends excluded for a B2B-only
+  org)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all information security topics and domains considered during your scope definition, with a dated
+  record of your assessment.
+- State each excluded domain or issue explicitly, along with a clear, written rationale tailored to your
+  organisation’s context.
+- Name the individual who approved each exclusion, ensuring a specific person is identified rather than
+  a group or department.
+- Attach supporting evidence, such as meeting minutes or decision logs, that show when and how exclusions
+  were discussed and agreed.
+- Review your exclusions annually and record the date and outcome of each review to confirm continued
+  relevance.

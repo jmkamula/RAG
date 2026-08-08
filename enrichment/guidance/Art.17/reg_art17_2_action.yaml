@@ -1,0 +1,19 @@
+must_id: item:Art.17:reg_art17_2_action
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Per-row Art.17.2 public-disclosure action where applicable
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each erasure request with a unique identifier, the request date, and the data subject’s details
+  in the Erasure Request Register.
+- Document whether the erased data was publicly disclosed and, if so, specify the exact locations or recipients
+  of the disclosure.
+- State the actions taken to inform third parties of the erasure, including the date and method of notification,
+  for each applicable request.
+- Name the responsible individual who verified and completed the public-disclosure notification for each
+  request—do not use generic roles or team names.
+- Attach supporting evidence, such as copies of notification emails or confirmation receipts from third
+  parties, to each relevant register entry.

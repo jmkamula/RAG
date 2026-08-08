@@ -1,0 +1,17 @@
+must_id: item:7.2:required_competence
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Required competence defined per role affecting ISMS performance
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each ISMS-related role and describe its responsibilities in a dated document.
+- Define the specific skills, knowledge, and qualifications required for each listed role.
+- Name the owner responsible for maintaining the competence requirements as a specific individual, not
+  a group or department.
+- Cross-reference each role’s competence requirements with relevant job descriptions or training records
+  to show alignment.
+- Review and update the competence requirements document at least annually, recording the date and approver
+  of each revision.

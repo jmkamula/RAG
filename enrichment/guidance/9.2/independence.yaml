@@ -1,0 +1,17 @@
+must_id: item:9.2:independence
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Auditor independence and competence requirements
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the lead auditor for each audit as a specific individual, not a team or department, in the internal
+  audit schedule.
+- Document the auditor’s relevant qualifications and recent training in a file or register linked to each
+  audit assignment.
+- State the auditor’s reporting line and confirm it is independent from the area being audited in the
+  audit programme record.
+- Record the date and outcome of a management review confirming auditor independence and competence before
+  each audit begins.

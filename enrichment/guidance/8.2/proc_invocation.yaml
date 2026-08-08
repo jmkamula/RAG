@@ -1,0 +1,19 @@
+must_id: item:8.2:proc_invocation
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Invocation path (how a change-driven reassessment gets requested + approved + scheduled)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for requesting a risk reassessment when operational changes occur,
+  including who initiates the request and how it is submitted.
+- Name the approver as a specific individual with authority to approve risk reassessment requests, not
+  a generic role or team.
+- Record the date and outcome of each approval decision in a central log or register, referencing the
+  related change event.
+- Assign responsibility for scheduling the reassessment to a named person, and capture the scheduled date
+  in the same log.
+- Retain evidence of completed reassessments, such as signed assessment reports or meeting minutes, linked
+  to the original change request.

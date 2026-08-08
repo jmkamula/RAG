@@ -1,0 +1,17 @@
+must_id: item:Art.18:intake_channel
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Intake channel via Art.12 procedure (rights portal)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Describe the intake channel for restriction of processing requests, specifying it is the same as your
+  rights portal under Article 12.
+- Document the procedure for receiving and logging requests submitted through the rights portal, including
+  date and requester details.
+- Assign a named individual responsible for monitoring and responding to restriction of processing requests
+  received via the rights portal.
+- State clearly in the procedure that requests must not be accepted verbally or via informal channels,
+  as auditors will flag this as non-compliant.

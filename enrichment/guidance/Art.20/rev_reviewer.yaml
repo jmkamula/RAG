@@ -1,0 +1,15 @@
+must_id: item:Art.20:rev_reviewer
+control_ref: Art.20
+standard_id: GDPR:2016/679
+must_text: Reviewer identity (DPO + product lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and title, explicitly identifying both the Data
+  Protection Officer and the product lead.
+- Record the date when the Portability Program Review was completed and reviewed by both required parties.
+- Document the signatures or written approvals from both the Data Protection Officer and the product lead
+  on the review record.
+- Avoid listing only job titles or teams as reviewers; ensure the record clearly identifies named individuals.

@@ -15,6 +15,8 @@ Usage:
 """
 from __future__ import annotations
 import argparse
+import dataclasses
+import json
 import os
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
@@ -25,6 +27,14 @@ from enrichment.documents.document_requirements import (
     DerivedSpec,
     EvidenceRequirement,
 )
+
+
+def _prereqs_to_json(prereqs) -> str:
+    """Serialize an EvidenceRequirement.prerequisites tuple to a JSON string
+    for Neo4j property storage. Empty tuple → '[]'."""
+    if not prereqs:
+        return "[]"
+    return json.dumps([dataclasses.asdict(p) for p in prereqs])
 
 
 def _prune_leaf_orphans(session, req: "EvidenceRequirement", dry_run: bool) -> tuple[int, int]:
@@ -146,6 +156,36 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
         driver.close()
         return
 
+    # Resolve per-MUST guidance from flat YAML store (Ship 56'.a).
+    # Mutates ChecklistItems in place so the ChecklistItem MERGE below picks
+    # up the values via item.guidance. Empty until Ship 56'.b generator lands.
+    from enrichment.guidance.apply_to_catalog import apply_guidance_to_catalog
+    g_report = apply_guidance_to_catalog(
+        ALL_EVIDENCE_REQUIREMENTS,
+        ALL_DERIVED_SPECS,
+        dry_run=dry_run,
+    )
+    print(f"Guidance: covered={g_report.covered} empty={g_report.empty} "
+          f"of {g_report.total} items  "
+          f"(banks: {g_report.yamls_loaded} authored)")
+    for w in g_report.warnings:
+        print(f"  ⚠ {w}")
+
+    # Resolve per-leaf prerequisites from flat YAML store (Ship 57').
+    # Mutates EvidenceRequirements in place so the MERGE below picks up
+    # the values via req.prerequisites (serialised to JSON for Neo4j).
+    from enrichment.prerequisites.apply_to_catalog import apply_prerequisites_to_catalog
+    p_report = apply_prerequisites_to_catalog(
+        ALL_EVIDENCE_REQUIREMENTS,
+        ALL_DERIVED_SPECS,
+        dry_run=dry_run,
+    )
+    print(f"Prerequisites: covered={p_report.covered} empty={p_report.empty} "
+          f"of {p_report.total} leaves  "
+          f"(banks: {p_report.yamls_loaded} authored, {p_report.prereq_count} items)")
+    for w in p_report.warnings[:20]:
+        print(f"  ⚠ {w}")
+
     total_reqs = 0
     total_items = 0
     total_rels = 0
@@ -192,6 +232,7 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
                         r.trigger_type   = $trigger_type,
                         r.description    = $description,
                         r.freshness_days = $freshness_days,
+                        r.prerequisites  = $prerequisites,
                         r.updated_at     = datetime()
                     REMOVE r.trigger_event
                     RETURN r.id
@@ -204,6 +245,7 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
                     trigger_type   = req.trigger_type,
                     description    = req.description,
                     freshness_days = req.freshness_days,
+                    prerequisites  = _prereqs_to_json(req.prerequisites),
                 ).consume()
                 total_reqs += 1
 
@@ -263,7 +305,9 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
                             i.gdpr_aligned = $gdpr_aligned,
                             i.rationale    = $rationale,
                             i.control_ref  = $control_ref,
+                            i.guidance     = $guidance,
                             i.updated_at   = datetime()
+                        REMOVE i.guiding_questions
                         RETURN i.id
                     """,
                         id           = item.id,
@@ -272,6 +316,7 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
                         gdpr_aligned = item.gdpr_aligned,
                         rationale    = item.rationale,
                         control_ref  = req.control_ref,
+                        guidance     = list(item.guidance),
                     ).consume()
 
                     # Link to EvidenceRequirement
@@ -397,6 +442,7 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
                         r.trigger_type   = $trigger_type,
                         r.description    = $description,
                         r.freshness_days = $freshness_days,
+                        r.prerequisites  = $prerequisites,
                         r.updated_at     = datetime()
                     REMOVE r.trigger_event
                 """,
@@ -408,6 +454,7 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
                     trigger_type   = req.trigger_type,
                     description    = req.description,
                     freshness_days = req.freshness_days,
+                    prerequisites  = _prereqs_to_json(req.prerequisites),
                 ).consume()
                 total_reqs += 1
 
@@ -434,7 +481,9 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
                             i.gdpr_aligned = $gdpr_aligned,
                             i.rationale    = $rationale,
                             i.control_ref  = $control_ref,
+                            i.guidance     = $guidance,
                             i.updated_at   = datetime()
+                        REMOVE i.guiding_questions
                     """,
                         id           = item.id,
                         text         = item.text,
@@ -442,6 +491,7 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
                         gdpr_aligned = item.gdpr_aligned,
                         rationale    = item.rationale,
                         control_ref  = req.control_ref,
+                        guidance     = list(item.guidance),
                     ).consume()
                     rel_type = "MUST_CONTAIN" if category == "must" else "SHOULD_CONTAIN"
                     s.run(f"""

@@ -1,0 +1,19 @@
+must_id: item:A.7.13:offsite_maintenance
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Asset-removal controls when equipment goes offsite (data removal, escrow, return verification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for approving equipment removal in the procedure, identifying them by full
+  name and job title.
+- Document the steps for securely erasing all sensitive data from equipment before it leaves the premises,
+  including the tool or method used.
+- Record each offsite removal in an asset register, noting the date, asset serial number, and the individual
+  authorizing the removal.
+- Require a signed confirmation of equipment return and condition check, including verification that all
+  data removal steps were completed.
+- Specify that generic or undated procedures are not accepted; update and date the procedure, listing
+  the current version and review date.

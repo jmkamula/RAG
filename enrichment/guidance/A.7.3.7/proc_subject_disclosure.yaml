@@ -1,0 +1,18 @@
+must_id: item:A.7.3.7:proc_subject_disclosure
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Subject-disclosure obligation — on request, org informs the subject of recipients notified
+  (Art.19)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the written procedure that describes how individuals can request information about third parties
+  who have received their personal data.
+- Name the person or role responsible for responding to subject requests regarding third-party disclosures,
+  listing a specific individual rather than a team.
+- Record each subject request and the corresponding response, including the date, requester’s details,
+  and the list of notified recipients.
+- Retain copies of all notifications sent to data subjects about third-party disclosures, ensuring each
+  is dated and references the specific data shared.

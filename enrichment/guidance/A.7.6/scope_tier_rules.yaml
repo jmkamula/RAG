@@ -1,0 +1,18 @@
+must_id: item:A.7.6:scope_tier_rules
+control_ref: A.7.6
+standard_id: ISO27001:2022
+must_text: Per-tier rule variations (server-room rules vs document-vault rules vs lab rules)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each secure area type separately, such as server rooms, document vaults, and labs, in your secure
+  areas scope document.
+- Describe the specific security rules and controls that apply to each area type, highlighting differences
+  between them.
+- Name the individual responsible for approving the scope and rules for each area, not just a department
+  or team.
+- Date the most recent review or update of the secure areas scope to show it is current and maintained.
+- Attach or reference supporting documents or floor plans that clearly show the boundaries of each secure
+  area type.

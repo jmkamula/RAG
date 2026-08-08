@@ -1,0 +1,31 @@
+leaf_id: req:Art.34:subject_communication_record
+control_ref: Art.34
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear record of what personal data is processed and where, so you can identify
+    which data subjects are affected by a breach and require notification under Art.34.
+  good_enough: A current, reasonably complete RoPA that covers the main processing activities and data
+    flows is sufficient to proceed.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Knowing the lawful basis for processing helps determine the context and necessity of notifying
+    data subjects, and whether any exceptions to notification apply.
+  good_enough: A documented lawful basis for each processing activity, even if high-level, is enough to
+    unblock subject communication record drafting.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If a DPO is required, their involvement is critical for ensuring proper breach communication
+    and documentation as required by Art.34.
+  good_enough: A named DPO (or clear justification for not appointing one) and contact details are sufficient
+    for this step.

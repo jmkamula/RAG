@@ -1,0 +1,20 @@
+must_id: item:8.2:rev_triggers_fired
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Trigger-firing sweep — significant changes during the year that should have triggered ad-hoc
+  assessment all did
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all significant operational or technical changes made during the year in a dated change log, including
+  who authorized each change.
+- Cross-reference each listed change with records of ad-hoc operational assessments, noting the assessment
+  date and responsible assessor.
+- Document the criteria used to define a "significant change" and provide evidence that each change was
+  evaluated against these criteria.
+- Name the individual who reviewed the change log to confirm no significant change was missed for ad-hoc
+  assessment — avoid using a team or department as the reviewer.
+- Retain copies of completed ad-hoc assessment reports, each clearly linked to the triggering change and
+  dated.

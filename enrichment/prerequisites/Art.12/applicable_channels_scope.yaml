@@ -1,0 +1,40 @@
+leaf_id: req:Art.12:applicable_channels_scope
+control_ref: Art.12
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify where personal data is
+    handled and which communication channels are used. This ensures that all relevant channels for rights
+    requests are considered.
+  good_enough: A current, working RoPA that lists processing activities and their associated communication
+    channels is available, even if not fully exhaustive.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer (DPO) Designation
+  category: foundational
+  rationale: If a DPO is required, their involvement is critical in defining and validating the channels
+    for rights requests, ensuring legal and practical adequacy.
+  good_enough: A DPO (or designated privacy lead) is named and reachable for consultation on rights request
+    processes.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope helps clarify which organizational units, systems, and processes are covered,
+    so you know which channels must be included for rights requests.
+  good_enough: A draft or approved ISMS scope statement exists that identifies the main business units
+    and systems handling personal data.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity helps determine which rights apply
+    and, therefore, which channels must be available for requests.
+  good_enough: A mapping of processing activities to lawful bases exists, even if some edge cases are
+    still under review.

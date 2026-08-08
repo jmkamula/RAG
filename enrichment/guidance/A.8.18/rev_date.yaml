@@ -1,0 +1,16 @@
+must_id: item:A.8.18:rev_date
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of privileged utility programs in a central log, showing it falls
+  within the documented review interval.
+- Name the reviewer as a specific individual responsible for the periodic review, not a group or department.
+- Document the planned review interval for privileged utility programs in a policy or schedule, with version
+  and approval date.
+- Attach evidence of the completed review, such as a signed checklist or report, dated to match the recorded
+  review date.

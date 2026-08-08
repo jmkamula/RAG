@@ -1,0 +1,19 @@
+must_id: item:A.7.2.5:scope_sa_lists
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: SA-published mandatory-DPIA lists per applicable jurisdiction (Art.35.4)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific data protection authority or supervisory authority whose mandatory DPIA list applies
+  to your organisation’s operations and jurisdiction.
+- Document the official, published DPIA trigger list as issued by the relevant authority, including the
+  publication date and a direct source link.
+- Cross-reference your internal DPIA process or policy to the authority’s published list, showing how
+  each trigger is addressed in your procedures.
+- Record the date your organisation last reviewed and updated its DPIA triggers against the latest authority-published
+  list.
+- Name the responsible individual who monitors for updates to the authority’s DPIA trigger list—do not
+  list a team or department.

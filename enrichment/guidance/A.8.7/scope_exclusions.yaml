@@ -1,0 +1,18 @@
+must_id: item:A.8.7:scope_exclusions
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Documented exclusions with compensating controls (embedded systems / vendor-managed cloud workloads)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all assets excluded from malware protection, specifying asset type, location, and business owner
+  in a dated register.
+- Document the reason for each exclusion, referencing technical limitations or vendor documentation that
+  prevents standard malware controls.
+- Describe compensating controls applied to each excluded asset, such as network segmentation or vendor
+  monitoring, in the same register.
+- Name the owner responsible for each exclusion as a specific individual, not a team or department.
+- Attach supporting evidence, such as vendor contracts or technical specifications, to the exclusion record
+  for auditor review.

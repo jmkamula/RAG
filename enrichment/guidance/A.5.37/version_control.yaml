@@ -1,0 +1,16 @@
+must_id: item:A.5.37:version_control
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Version control per procedure with last-updated date and review-due date (drives the review
+  leaf)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the current version number, last-updated date, and review-due date for each operating procedure
+  in the register.
+- Name the owner of each procedure as a specific individual, not a team or department.
+- Cross-reference each procedure entry in the register with its corresponding approved document to confirm
+  version and date alignment.
+- Retain previous versions and their dates in an accessible archive to demonstrate version history.

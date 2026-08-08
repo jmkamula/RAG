@@ -1,0 +1,16 @@
+must_id: item:Art.27:scope_change_drivers
+control_ref: Art.27
+standard_id: GDPR:2016/679
+must_text: Trigger list (EU market entry/exit, processing-pattern change)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all activities where your organisation offers goods or services to people in the EU or monitors
+  their behaviour, with dates of assessment.
+- Record each time your organisation enters or exits the EU market, or changes how it processes personal
+  data related to EU individuals.
+- Assign a named individual to review and update the trigger list at least annually, with a dated record
+  of each review.
+- Name the owner as a specific person, not a team or department, to avoid ambiguity in responsibility.

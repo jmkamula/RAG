@@ -1,0 +1,18 @@
+must_id: item:A.5.8:rev_late_detection
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Late-detection analysis (security issues surfaced at or after go-live that should have been
+  caught earlier)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each security issue discovered after project go-live, including the date detected and a brief
+  description of the issue.
+- Record an analysis for each late-detected issue explaining why it was not identified earlier in the
+  project lifecycle.
+- Assign responsibility for the analysis to a named individual, not a team or department, to ensure clear
+  accountability.
+- Review and update the project security program based on findings from late-detection analyses, noting
+  changes and the date of each update.

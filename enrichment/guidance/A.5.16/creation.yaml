@@ -1,0 +1,18 @@
+must_id: item:A.5.16:creation
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Identity creation steps (verification of person, naming convention, initial entitlements —
+  least-privilege at issuance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for verifying a person's identity before account creation, including acceptable
+  forms of identification and the responsible verifier's name.
+- State the naming convention used for new identities, providing a sample format and referencing the current
+  version of the documented standard.
+- Record initial entitlements assigned at account creation, listing the specific permissions granted and
+  confirming they follow least-privilege principles.
+- Name the individual who approves new identity creation requests, avoiding generic roles such as "IT
+  team" or "administrator".

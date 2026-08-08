@@ -1,0 +1,18 @@
+must_id: item:A.5.3:review_reviewer
+control_ref: A.5.3
+standard_id: ISO27001:2022
+must_text: Reviewer identity and role (typically risk owner or compliance lead with input from function
+  leads)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual, such as the risk owner or compliance lead, in the Segregation
+  of Duties review record.
+- Document the reviewer’s job title and department alongside their name in the review log for clear role
+  identification.
+- Record the date the review was completed and the reviewer’s signature or electronic approval in the
+  review documentation.
+- Cross-reference input received from relevant function leads by listing their names and roles in the
+  review record.

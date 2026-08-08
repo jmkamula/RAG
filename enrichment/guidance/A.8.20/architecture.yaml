@@ -1,0 +1,20 @@
+must_id: item:A.8.20:architecture
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Security architecture principles (defence-in-depth / segmentation / fail-safe / zero-trust
+  direction)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the security architecture principles applied to your networks, such as segmentation, defence-in-depth,
+  and zero-trust, in your Networks Security Policy document.
+- Name the individual responsible for maintaining and updating the Networks Security Policy, avoiding
+  generic titles like "IT team" or "Network group".
+- Record the date of the most recent formal review and approval of the Networks Security Policy, including
+  the approver’s name and signature.
+- Cross-reference documented network diagrams or architecture overviews that demonstrate implementation
+  of the stated security principles in your environment.
+- Retain evidence of periodic reviews or updates to the policy and supporting diagrams, showing that changes
+  in technology or threats are considered.

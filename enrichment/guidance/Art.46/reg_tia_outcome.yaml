@@ -1,0 +1,17 @@
+must_id: item:Art.46:reg_tia_outcome
+control_ref: Art.46
+standard_id: GDPR:2016/679
+must_text: Per-row TIA outcome (acceptable / acceptable-with-supplementary-measures / not-acceptable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the outcome of each transfer impact assessment in the Safeguards Register as "acceptable", "acceptable-with-supplementary-measures",
+  or "not-acceptable" for every data transfer row.
+- Name the individual who made the TIA outcome determination for each entry, avoiding generic labels like
+  "Legal" or "Compliance Team".
+- Date each TIA outcome entry in the register to show when the assessment was completed and the decision
+  made.
+- Attach or cross-reference supporting documentation for any "acceptable-with-supplementary-measures"
+  outcome, detailing what measures were applied.

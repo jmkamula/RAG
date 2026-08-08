@@ -1,0 +1,47 @@
+leaf_id: req:A.5.8:project_security_closure_record
+control_ref: A.5.8
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The closure record must reference projects within the defined ISMS scope; without a clear
+    scope, you can't determine which projects require closure records or traceability.
+  good_enough: The ISMS scope is documented and includes a list or criteria for in-scope projects, even
+    if the scope statement is not yet fully optimized.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Closure records require named owners for risk transfer and signoff; without defined roles,
+    you can't assign responsibility or ensure accountability for closure actions.
+  good_enough: There is a basic, up-to-date mapping of key information security roles and responsibilities,
+    including project and operational owners.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The closure process must ensure all project assets are identified, archived, or transferred;
+    an asset register is needed to confirm nothing is missed at project close.
+  good_enough: A working asset register exists for each project, even if not all attributes are fully
+    populated, as long as major assets are tracked.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Outstanding project risks must be identified and transferred to operations; a risk assessment
+    is needed to know what risks exist at closure.
+  good_enough: A recent risk assessment exists for the project, identifying key risks, even if mitigation
+    plans are still in progress.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Closure records must ensure security artefacts are archived appropriately; a classification
+    scheme is needed to determine correct handling and storage.
+  good_enough: A documented classification scheme exists and has been applied to project artefacts, even
+    if some artefacts are still being reviewed.

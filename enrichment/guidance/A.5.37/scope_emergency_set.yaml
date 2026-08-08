@@ -1,0 +1,20 @@
+must_id: item:A.5.37:scope_emergency_set
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Emergency-use subset identified (which facilities need procedures available even when normal
+  tooling is down — DR scenarios)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all information processing facilities in your environment, including physical sites, cloud services,
+  and critical infrastructure, with responsible owners named for each.
+- Identify which facilities must remain operational or accessible during emergencies or disaster recovery
+  scenarios, and record these in a dated emergency-use subset register.
+- Document the criteria used to select facilities for emergency-use, including business impact and recovery
+  objectives, and reference this in your register.
+- Name the emergency-use subset owner as a specific individual, not a team or department, to avoid ambiguity
+  in accountability.
+- Review and update the emergency-use subset register at least annually, recording the review date and
+  the reviewer’s name.

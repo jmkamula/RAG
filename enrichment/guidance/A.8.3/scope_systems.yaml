@@ -1,0 +1,16 @@
+must_id: item:A.8.3:scope_systems
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Systems enumerated (drawn from A.5.9 asset register, filtered to access-relevant assets)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the asset register from control A.5.9 to identify all information systems currently
+  in use.
+- Filter the list to include only those systems that store, process, or transmit information requiring
+  access controls.
+- Document each applicable system by name, unique identifier, and owner in a dated scope register.
+- Name the owner of each system as a specific individual, not a team or department.
+- Retain a copy of the filtered scope list with a reference to the version of the asset register used.

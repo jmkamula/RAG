@@ -1,0 +1,15 @@
+must_id: item:7.5:reg_approval_date
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Last approval date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the last approval date for each document in a dedicated column within the ISMS Document Register.
+- Name the approver as a specific individual for each document entry, avoiding generic titles like "management"
+  or "the team".
+- Cross-reference each approval date with the corresponding signed or digitally approved document to verify
+  accuracy.
+- Review the register quarterly and update any missing or outdated approval dates with supporting evidence.

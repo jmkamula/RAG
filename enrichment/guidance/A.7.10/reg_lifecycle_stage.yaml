@@ -1,0 +1,17 @@
+must_id: item:A.7.10:reg_lifecycle_stage
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Per-row lifecycle stage (in-use / in-transit / awaiting-disposal / disposed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- List each storage media item as a separate row in the register, including a unique identifier and description.
+- 'Record the current lifecycle stage for each item in a dedicated column, using only the approved categories:
+  in-use, in-transit, awaiting-disposal, or disposed.'
+- Update the lifecycle stage promptly whenever the status of a storage media item changes, noting the
+  date and the person making the update.
+- Name the person responsible for each register entry as a specific individual, not as a team or department.
+- Retain historical entries showing previous lifecycle stages and changes, rather than overwriting or
+  deleting old information.

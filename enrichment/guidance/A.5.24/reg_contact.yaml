@@ -1,0 +1,18 @@
+must_id: item:A.5.24:reg_contact
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Contact info per row across multiple channels (phone + secondary phone + email + out-of-band
+  channel for if corp comms are compromised)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each incident response team member by full name and job title in the register, creating one row
+  per individual.
+- Record a primary phone number, a secondary phone number, and a work email address for each person in
+  their row.
+- Add an out-of-band communication method for each member, such as a personal email or messaging app,
+  in a separate column.
+- Confirm all contact details are current by including a "last verified" date for each row in the register.
+- Name the owner of the register as a specific individual, not a team or department, in a dedicated field.

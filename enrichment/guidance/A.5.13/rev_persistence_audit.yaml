@@ -1,0 +1,19 @@
+must_id: item:A.5.13:rev_persistence_audit
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Persistence audit (sample of transformed/exported items re-checked — does the label survive
+  copy/export/conversion?)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the periodic review of label persistence across all relevant data
+  transformation and export processes.
+- Document the date, sample size, and method used when selecting items for the persistence audit in a
+  review log.
+- Record the results of each sampled item, noting whether the label survived copying, exporting, or format
+  conversion, in a dated audit report.
+- State any failures or anomalies found, including the specific item and transformation type, in the same
+  audit report.
+- Name the reviewer as a specific person, not a generic role or team, in the final signed review document.

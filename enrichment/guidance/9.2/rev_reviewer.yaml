@@ -1,0 +1,15 @@
+must_id: item:9.2:rev_reviewer
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (ISMS Manager + lead auditor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the ISMS Manager and lead auditor responsible for the audit program review in the documented review
+  record.
+- Record the date of the audit program review alongside the names of both reviewers in the review documentation.
+- Require both the ISMS Manager and lead auditor to sign or formally acknowledge the completion of the
+  review in the record.
+- Avoid listing a group or department as reviewer; specify named individuals for clear accountability.

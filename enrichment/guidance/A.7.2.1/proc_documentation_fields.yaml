@@ -1,0 +1,17 @@
+must_id: item:A.7.2.1:proc_documentation_fields
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Documentation fields per purpose (purpose text, categories of PII, categories of subjects,
+  retention, recipients, legal basis link)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing purpose in a table, including a clear description of the purpose in plain language.
+- Record the categories of personal data and categories of data subjects for each purpose in separate,
+  labeled columns.
+- Specify the retention period, recipient types, and a cross-reference to the legal basis for each purpose
+  in the same table.
+- Name the person responsible for maintaining this procedure as a specific individual, not a team or department.
+- Date and version the procedure document, updating both fields whenever changes are made.

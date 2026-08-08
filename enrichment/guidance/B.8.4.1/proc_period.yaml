@@ -1,0 +1,16 @@
+must_id: item:B.8.4.1:proc_period
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+must_text: Disposal period stated per taxonomy category
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the disposal period for each taxonomy category of processor temp files in the written procedure,
+  using clear timeframes like "30 days" or "6 months".
+- Cross-reference each taxonomy category in the procedure with its corresponding disposal period in a
+  dated table or appendix.
+- Name the person responsible for reviewing and updating disposal periods, identifying them as an individual,
+  not a team or department.
+- Document the approval of the disposal procedure, including the approver’s name and the approval date.

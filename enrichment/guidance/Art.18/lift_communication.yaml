@@ -1,0 +1,18 @@
+must_id: item:Art.18:lift_communication
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Pre-lift communication to subject before restriction is lifted (Art.18.3)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for notifying individuals before lifting any restriction on their data processing,
+  including required content and timing of the notice.
+- Record each instance where restriction is lifted, including the date, data subject’s name, and the reason
+  for lifting the restriction.
+- Retain copies of all pre-lift communications sent to data subjects, showing the date sent and the recipient’s
+  details.
+- Name the staff member responsible for sending pre-lift notifications as a specific individual, not a
+  generic role or team.
+- Review and update the procedure annually, recording the date of each review and the reviewer’s name.

@@ -1,0 +1,17 @@
+must_id: item:A.8.1:rev_reviewer
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Reviewer identity (IT lead + InfoSec lead jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the IT lead and the InfoSec lead as joint reviewers in the review documentation for each periodic
+  endpoint program review.
+- Record the full names and job titles of both reviewers on the review report, avoiding generic labels
+  like "the team" or "IT department".
+- Obtain signatures or electronic approvals from both the IT lead and InfoSec lead, with the date of completion
+  clearly indicated on the review record.
+- Retain the signed and dated review report in a designated compliance repository accessible for audit
+  purposes.

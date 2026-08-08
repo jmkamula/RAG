@@ -1,0 +1,19 @@
+must_id: item:A.6.8:anonymity_option
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Anonymous reporting option for sensitive cases (drives reporting of insider-threat suspicions
+  and whistleblower-territory cases)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Describe the anonymous reporting option in the procedure, including clear instructions for use in sensitive
+  or whistleblower-related cases.
+- Name the individual or third-party service responsible for managing anonymous reports, specifying contact
+  details or access method.
+- Record the date the anonymous reporting option was added or last reviewed in the procedure document.
+- State explicitly that anonymous reports are accepted for insider-threat or whistleblower scenarios,
+  not only general security events.
+- Avoid referencing only generic or non-confidential channels (such as direct manager or open email) as
+  the sole reporting method for sensitive cases.

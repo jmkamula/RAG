@@ -1,0 +1,19 @@
+must_id: item:A.5.22:rev_audit
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Audit conducted (own audit or independent attestation accepted) with follow-up on issues
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for conducting or coordinating the supplier information security audit
+  in a dated assignment record.
+- Document the audit or attestation report received from the supplier, including the date, scope, and
+  key findings.
+- Record all identified issues or non-conformities in a follow-up log, including actions taken and resolution
+  dates.
+- Confirm that follow-up actions on audit findings are completed and signed off by a named accountable
+  person.
+- Avoid accepting generic or undated supplier attestations; require evidence that specifically references
+  your organisation and the relevant review period.

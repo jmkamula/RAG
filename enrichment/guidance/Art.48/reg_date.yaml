@@ -1,0 +1,16 @@
+must_id: item:Art.48:reg_date
+control_ref: Art.48
+standard_id: GDPR:2016/679
+must_text: Per-row decision date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the decision date for each foreign authority request directly in the corresponding row of the
+  register.
+- Confirm the decision date is the actual date the decision was made, not the date the request was received
+  or processed.
+- Name the person who entered the decision date for each row, ensuring accountability for accuracy.
+- Avoid leaving the decision date field blank or using placeholders such as "TBC" or "pending" for any
+  entry.

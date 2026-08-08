@@ -1,0 +1,19 @@
+must_id: item:B.8.2.6:proc_secure_maintenance
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: Secure maintenance — access control + integrity for the processor RoPA
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual as the owner responsible for maintaining and updating the processor Record
+  of Processing Activities (RoPA).
+- Document the access permissions for the RoPA, listing all users with read or edit rights and the date
+  permissions were last reviewed.
+- Record each change to the RoPA in a change log, including the date, description of the update, and the
+  person making the change.
+- Confirm that access to the RoPA is restricted to authorized personnel only by providing a screenshot
+  or export of current access controls.
+- State the procedure for periodic review of RoPA integrity, including the review frequency and the person
+  accountable for conducting the review.

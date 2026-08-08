@@ -1,0 +1,18 @@
+must_id: item:A.7.10:reg_class
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Per-row classification (drives encryption + handling requirements)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the classification level for each storage media entry in the register, specifying if encryption
+  is required based on data sensitivity.
+- State the handling requirements per row, detailing approved storage, transport, and disposal methods
+  for each media item.
+- Cross-reference each entry’s classification with your information asset register to confirm consistency
+  across records.
+- Name the owner for each storage media item as a specific individual, avoiding generic labels like "IT
+  team" or "department."
+- Document the date each entry was last reviewed or updated to provide clear evidence of ongoing oversight.

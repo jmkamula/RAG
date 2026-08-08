@@ -1,0 +1,17 @@
+must_id: item:A.5.7:prod_retention_end
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Retention end-date noted (IOC libraries age fast — old products marked for archive/disposal)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a clear retention end-date for each intelligence record, referencing the product name and version
+  in a dated entry.
+- Update the intelligence record status to "archive" or "disposal" once the retention end-date is reached,
+  with the action taken and date noted.
+- Name the individual responsible for reviewing and updating retention end-dates for each product, avoiding
+  generic titles or team names.
+- Cross-reference each intelligence record with the relevant IOC library version to show its currency
+  and support decisions on archiving or disposal.

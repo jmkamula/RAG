@@ -1,0 +1,16 @@
+must_id: item:A.5.4:comm_date
+control_ref: A.5.4
+standard_id: ISO27001:2022
+must_text: Date of publication/communication
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date when the management directive was formally published or communicated to staff
+  in a dated communication log or register.
+- Attach a copy of the communication, such as an email or memo, showing the date sent and the recipients.
+- Name the person responsible for sending or publishing the directive, ensuring a specific individual
+  is identified rather than a generic group.
+- Retain the original or a screenshot of the communication platform showing the publication date as visible
+  evidence.

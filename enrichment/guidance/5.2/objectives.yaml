@@ -1,0 +1,15 @@
+must_id: item:5.2:objectives
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: Information security objectives or framework for setting them
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the organisation’s information security objectives in the policy document, using clear and measurable
+  language that is specific to your business context.
+- Document the framework or process your organisation uses to set, review, and update information security
+  objectives, including who is responsible.
+- Name the owner of the information security policy as a specific individual, not a group or department.
+- Record the date when the objectives and framework were last reviewed and approved by top management.

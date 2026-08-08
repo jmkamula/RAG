@@ -1,0 +1,17 @@
+must_id: item:A.5.35:fr_finding_id
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Per-finding unique identifier traceable back to the source review report
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each review finding, using a sequential or structured format that cannot
+  be duplicated or reused.
+- Cross-reference each finding’s identifier with the original review report section or page number where
+  the issue was documented.
+- Record the date and name of the person who entered each finding into the register for traceability.
+- Attach a copy or direct link to the source review report alongside each finding entry in the register.
+- Name the source review report explicitly for every finding entry—avoid vague references like "latest
+  audit" or "external review".

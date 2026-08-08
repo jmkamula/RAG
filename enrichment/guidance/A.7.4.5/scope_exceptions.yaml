@@ -1,0 +1,19 @@
+must_id: item:A.7.4.5:scope_exceptions
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: Exceptions (legal-hold / active litigation / regulator inspection) with rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and list all data processing activities that are subject to end-of-processing exceptions, such
+  as legal hold, litigation, or regulatory inspection.
+- Document the specific legal or regulatory basis and rationale for each exception, referencing relevant
+  laws, court orders, or regulatory notices.
+- Name a responsible individual for maintaining the exception list, ensuring the owner is a named person
+  and not a group or department.
+- Record the date each exception was added or reviewed, along with supporting evidence such as legal correspondence
+  or regulator communications.
+- Retain copies of all related legal or regulatory documents that justify each exception in a secure,
+  accessible location.

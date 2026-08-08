@@ -1,0 +1,17 @@
+must_id: item:Art.28:deletion
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Deletion or return of data at end of service
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Data Processing Agreement whether personal data will be deleted or returned to the customer
+  at the end of the service.
+- Name the individual or role responsible for carrying out the deletion or return of data, specifying
+  a contact person rather than a generic team.
+- Document the timeframe within which the deletion or return must occur after contract termination, using
+  clear and specific dates or periods.
+- Retain a signed confirmation from the processor that data has been deleted or returned, including the
+  date and method used.

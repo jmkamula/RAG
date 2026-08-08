@@ -1,0 +1,17 @@
+must_id: item:A.8.21:vendor_governance
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Vendor-managed services governance (cross-link to A.5.19 + A.5.20 + A.5.22 supplier review)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the Security of Network Services Procedure to relevant sections of A.5.19, A.5.20, and
+  A.5.22 in your supplier management documentation.
+- Document the process for reviewing vendor-managed network services, including responsible individuals
+  and review frequency, in a dated procedure.
+- Name the owner of the Security of Network Services Procedure as a specific individual, not a team or
+  department.
+- Record the most recent supplier review meeting minutes, including attendees, date, and key decisions
+  related to network services.

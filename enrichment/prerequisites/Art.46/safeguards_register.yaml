@@ -1,0 +1,41 @@
+leaf_id: req:Art.46:safeguards_register
+control_ref: Art.46
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.44
+  standard_id: GDPR:2016/679
+  title: General principle for transfers
+  category: direct
+  rationale: You must confirm that a data transfer falls under the GDPR’s international transfer rules
+    before you can apply or record any Art.46 safeguards. Art.44 is the legal gateway that determines
+    if Art.46 is even relevant.
+  good_enough: You have a documented process or policy identifying which transfers are subject to GDPR
+    Chapter V, and can point to at least one transfer scenario where Art.46 is the chosen mechanism.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: A current RoPA is essential to identify which processing activities involve international
+    transfers, and to link each transfer to the relevant safeguard. Without this, you cannot reliably
+    populate or maintain a safeguards register.
+  good_enough: You have a RoPA that lists all processing activities, including those involving international
+    transfers, even if some entries are high-level or incomplete.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Each transfer must have a lawful basis for processing under GDPR. You cannot justify or document
+    a safeguard for a transfer unless you know the underlying legal basis.
+  good_enough: You have identified and documented the lawful basis for each processing activity involving
+    a transfer, even if the rationale is brief.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which parts of your organization and which processing activities are
+    covered by your compliance program, ensuring your safeguards register is complete and relevant.
+  good_enough: You have a basic ISMS scope statement that covers all business units and systems involved
+    in international transfers, even if it is not fully detailed.

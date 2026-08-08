@@ -1,0 +1,18 @@
+must_id: item:A.6.5:rev_ad_hoc_triggers
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Ad-hoc review triggers (high-profile leaver, regulator action affecting post-employment terms,
+  employment-tribunal ruling)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each ad-hoc review trigger with a clear description and the date it was identified in a dedicated
+  section of your review log.
+- Name the individual responsible for initiating ad-hoc reviews, ensuring a specific person is listed
+  rather than a team or department.
+- Record the decision to conduct an ad-hoc review, including the reason, trigger event, and approval by
+  a named manager, in meeting minutes or an action register.
+- Attach supporting evidence for each trigger, such as regulator notifications, tribunal rulings, or high-profile
+  resignation letters, to the review documentation.

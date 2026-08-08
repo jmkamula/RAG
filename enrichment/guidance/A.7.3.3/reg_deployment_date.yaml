@@ -1,0 +1,15 @@
+must_id: item:A.7.3.3:reg_deployment_date
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: Deployment date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the deployment date for each notice entry in the log, using the format YYYY-MM-DD.
+- Confirm each row in the log has a unique deployment date filled in; do not leave any date fields blank.
+- Cross-reference the deployment date with supporting evidence, such as email delivery receipts or system
+  logs, for each notice entry.
+- Name the person responsible for entering and verifying deployment dates, ensuring a specific individual
+  is listed rather than a generic role.

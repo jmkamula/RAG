@@ -1,0 +1,19 @@
+must_id: item:A.7.2.2:rev_special_category_audit
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: Special-category audit — dual-basis coverage confirmed where Art.9/10 data processed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all processing activities involving special-category or criminal offence data, listing each
+  activity in a dated inventory reviewed within the last 12 months.
+- Document the lawful basis under GDPR Article 6 and the additional condition under Article 9 or 10 for
+  each processing activity, citing specific legal grounds.
+- Cross-reference each processing activity to supporting evidence, such as consent records or statutory
+  obligations, ensuring documentation is not generic or boilerplate.
+- Name the reviewer as a specific individual who confirmed dual-basis coverage, avoiding group or department-level
+  attribution.
+- Retain a signed and dated record of the latest program review, including any updates or changes to lawful
+  basis decisions.

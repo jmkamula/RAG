@@ -1,0 +1,19 @@
+must_id: item:A.7.3.9:rev_channel_test
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Channel test — sampled inbound requests through each intake channel
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all intake channels used for receiving privacy requests, such as email, web forms, phone, or postal
+  mail, in a dated document.
+- Select and record a sample of actual inbound requests from each channel, including the date received
+  and the channel used.
+- Document the steps taken to process each sampled request, noting any delays or issues encountered during
+  handling.
+- Attach evidence of completed handling for each sampled request, such as confirmation emails or closure
+  notes, with responsible staff named.
+- Name the reviewer as a specific individual who conducted the channel test, avoiding generic titles like
+  "the team" or "compliance group".

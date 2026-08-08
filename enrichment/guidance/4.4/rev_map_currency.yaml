@@ -1,0 +1,18 @@
+must_id: item:4.4:rev_map_currency
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: Process map currency check (cross-leaf coherence)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Review the current process map and confirm it matches the latest versions of all referenced policies,
+  procedures, and controls.
+- Cross-reference each process step with its supporting document, recording the exact document title,
+  version, and date in a tracking log.
+- Name the individual responsible for maintaining the process map as a specific person, not a team or
+  department.
+- Document any discrepancies found between the process map and supporting documents, including actions
+  taken and the date resolved.
+- Retain a dated record of the most recent process map review, signed by the reviewer.

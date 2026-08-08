@@ -1,0 +1,19 @@
+must_id: item:A.7.1:barrier_types
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Barrier types per perimeter class (walls, fences, locked doors, mantraps, anti-ramming where
+  critical)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each physical security perimeter class in your policy, such as "public," "restricted," or "critical."
+- Specify the exact barrier types required for each perimeter class, including details like wall construction,
+  fence height, or door locking mechanisms.
+- Name the person responsible for approving barrier types for each perimeter class, using a specific individual’s
+  name and job title.
+- Attach dated floor plans or diagrams that clearly show the placement and type of barriers for each perimeter
+  class.
+- Avoid using generic descriptions like "appropriate barriers"—describe each barrier type in detail for
+  every perimeter class.

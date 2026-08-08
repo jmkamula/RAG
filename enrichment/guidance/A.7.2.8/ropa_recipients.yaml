@@ -1,0 +1,19 @@
+must_id: item:A.7.2.8:ropa_recipients
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Categories of recipients per row (including third countries + international orgs)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all categories of recipients for each processing activity in your Records of Processing Activities,
+  including internal teams, vendors, and partners.
+- Specify any recipients located in third countries or international organisations, naming the country
+  or organisation for each relevant entry.
+- Record the date each recipient category was last reviewed or updated, and keep this information visible
+  in the register.
+- Name the person responsible for maintaining recipient details for each processing activity, using a
+  specific individual’s name rather than a team or department.
+- Attach supporting documentation, such as data sharing agreements or transfer assessments, for each third
+  country or international recipient listed.

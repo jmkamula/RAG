@@ -1,0 +1,47 @@
+leaf_id: req:A.8.31:environment_separation_procedure
+control_ref: A.8.31
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, environments, and processes are in-scope for your ISMS before
+    defining how development, test, and production environments are separated. This ensures the procedure
+    covers all relevant assets and boundaries.
+  good_enough: A current, approved scope statement that clearly identifies the environments and systems
+    included in the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register is essential to identify which assets exist in each environment,
+    so you can document how they are separated and protected.
+  good_enough: A basic inventory listing key assets (e.g., servers, databases, applications) and their
+    assigned environments.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: You need a data classification scheme to define handling rules for different types of data
+    in each environment, which informs environment-specific controls in the procedure.
+  good_enough: A simple, documented scheme that distinguishes at least between public, internal, and confidential
+    data, and is referenced in environment procedures.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that environment separation procedures
+    specify who is accountable for maintaining boundaries and approving promotions between environments.
+  good_enough: A list or matrix showing who is responsible for environment management and access decisions.
+- ref: A.5.3
+  standard_id: ISO27001:2022
+  title: Segregation of Duties
+  category: direct
+  rationale: Documented segregation of duties is needed to prevent conflicts of interest and reduce risk
+    when managing access and changes across environments.
+  good_enough: A brief statement or table showing how duties are split between development, test, and
+    production environment roles.

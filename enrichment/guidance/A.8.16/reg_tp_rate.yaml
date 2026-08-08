@@ -1,0 +1,18 @@
+must_id: item:A.8.16:reg_tp_rate
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Per-detection true-positive rate (rolling window)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the true-positive rate for each detection use-case in the register, specifying the calculation
+  method and the rolling time window used.
+- Record the date of each true-positive rate update and the name of the person who performed the calculation.
+- Attach supporting evidence, such as alert logs or incident tickets, that were used to determine the
+  true-positive rate for each entry.
+- Name the owner of each detection use-case as a specific individual, not a team or department, in the
+  register.
+- State the threshold or target true-positive rate for each detection use-case and note any actions taken
+  if the rate falls below this target.

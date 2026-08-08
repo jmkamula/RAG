@@ -1,0 +1,18 @@
+must_id: item:B.8.5.5:scope_change_drivers
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Trigger list (new request type / new contract clause)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of new data disclosure requests and new contract clauses that could trigger a review,
+  using a dated trigger list document.
+- Document each update to the trigger list with the name of the person making the change and the date
+  of revision.
+- Name the individual responsible for maintaining and reviewing the trigger list, ensuring this is not
+  a group or department.
+- Cross-reference each disclosure decision to the specific trigger on the list that prompted the review,
+  using a dated record.
+- Review the trigger list at least annually and record the date and outcome of each review session.

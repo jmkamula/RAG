@@ -1,0 +1,19 @@
+must_id: item:4.1:rev_risk_handoff
+control_ref: '4.1'
+standard_id: ISO27001:2022
+must_text: Confirmation that handoff to 6.1.2 risk assessment occurred for material issues
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for reviewing the context program and initiating the handoff to risk assessment
+  in a dated record.
+- Document each material issue identified during the context program review, including a brief description
+  and the date of identification.
+- Record the date and method by which each material issue was handed off to the risk assessment process
+  under control 6.1.2.
+- Attach evidence of acknowledgment from the risk assessment owner confirming receipt of each material
+  issue.
+- Avoid listing the handoff recipient as a group or department; specify an individual by name for clear
+  accountability.

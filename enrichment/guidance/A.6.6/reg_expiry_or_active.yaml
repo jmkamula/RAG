@@ -1,0 +1,18 @@
+must_id: item:A.6.6:reg_expiry_or_active
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Per-row status (active / expired-with-surviving-obligations / superseded-by-new-version)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the status of each NDA in the register as "active," "expired-with-surviving-obligations," or
+  "superseded-by-new-version" for every entry.
+- State the date when the status was last updated for each NDA row to show current and accurate tracking.
+- Name the specific individual responsible for updating each NDA status, avoiding generic labels like
+  "Legal" or "HR team."
+- Cross-reference each "superseded-by-new-version" entry with the new NDA version number or identifier
+  in the register.
+- Document any surviving obligations for expired NDAs in a dedicated field, not just as a note or in a
+  separate file.

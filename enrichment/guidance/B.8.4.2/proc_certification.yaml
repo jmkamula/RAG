@@ -1,0 +1,16 @@
+must_id: item:B.8.4.2:proc_certification
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+must_text: Certification / attestation of completion issued to customer
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for returning, transferring, or disposing of personal data, including steps for
+  certification or attestation upon completion.
+- Assign responsibility for issuing the completion certificate or attestation to a named individual, not
+  a generic team or department.
+- Record the date, recipient, and scope of each certification or attestation issued, keeping copies for
+  each customer engagement.
+- Obtain a signed acknowledgment from the customer confirming receipt of the certification or attestation.

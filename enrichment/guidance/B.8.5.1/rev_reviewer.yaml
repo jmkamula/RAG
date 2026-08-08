@@ -1,0 +1,15 @@
+must_id: item:B.8.5.1:rev_reviewer
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Legal + Trust)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer by full name and job title, confirming they are the Data Protection Officer, a Legal
+  representative, or a Trust lead.
+- Record the date each reviewer completed their assessment on the Processor Transfer Basis Program Review
+  document.
+- Sign the review section to show explicit approval by each required role, not just a group or department.
+- Attach supporting comments or findings from each reviewer, ensuring individual input is clearly attributed.

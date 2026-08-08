@@ -1,0 +1,17 @@
+must_id: item:A.5.35:fr_aging_alerts
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Aged-overdue alerting (notification when target date passes without closure)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for monitoring review findings and triggering alerts when target closure dates
+  are missed in a written procedure.
+- Assign responsibility to a named individual for tracking overdue findings and initiating notifications,
+  listing their name and contact details in the register.
+- Record the date and recipient of each overdue alert sent, maintaining a log that shows timely notification
+  actions for all missed deadlines.
+- Name the escalation path for unresolved overdue items, specifying actual job titles or individuals rather
+  than generic terms like "management" or "the team".

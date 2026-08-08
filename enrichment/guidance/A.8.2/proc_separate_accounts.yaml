@@ -1,0 +1,19 @@
+must_id: item:A.8.2:proc_separate_accounts
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Separate accounts mandated for administrative actions (admin account distinct from daily-use)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Privileged Access Management Procedure that all administrative actions must be performed
+  using dedicated admin accounts, not daily-use accounts.
+- List the specific systems and applications where separate admin accounts are required, referencing their
+  unique account naming conventions.
+- Name the individual responsible for approving and monitoring the creation of admin accounts, using their
+  full name and job title.
+- Attach a sample access request and approval record showing a named user receiving a separate admin account,
+  with dates and signatures.
+- Specify that no admin account owner is listed as "IT" or "the team"—use only named individuals in all
+  documentation.

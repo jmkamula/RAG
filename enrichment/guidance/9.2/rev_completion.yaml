@@ -1,0 +1,17 @@
+must_id: item:9.2:rev_completion
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Completion check — every scheduled audit happened (or deferred with documented reason)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all scheduled audits for the review period in an audit program register, including planned dates
+  and responsible auditors.
+- Record the actual completion date for each scheduled audit, or document the reason for any deferral
+  or cancellation.
+- Attach supporting evidence for each audit, such as signed audit reports or meeting minutes confirming
+  completion.
+- Name the reviewer who checked the audit program for completion, and record the date of this review.
+- Specify deferral reasons clearly—avoid vague entries like "not ready" or "delayed" without further explanation.

@@ -1,0 +1,19 @@
+must_id: item:B.8.5.2:scope_normal
+control_ref: B.8.5.2
+standard_id: ISO27701:2019
+must_text: Normal-operations destinations enumerated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all third-party organizations and countries where personal data is sent during normal operations
+  in a dated register.
+- Name each data transfer destination specifically, avoiding vague entries like "external partners" or
+  "various locations."
+- Document the lawful basis or contract supporting each data transfer, referencing the relevant agreement
+  or policy.
+- Record the individual responsible for maintaining and updating the destinations list, including their
+  full name and contact details.
+- Review and update the register at least annually, keeping a record of the review date and reviewer’s
+  name.

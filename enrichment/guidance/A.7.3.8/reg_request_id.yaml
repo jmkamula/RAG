@@ -1,0 +1,16 @@
+must_id: item:A.7.3.8:reg_request_id
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Unique request identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique, sequential identifier to each new copy request entry in the register at the time it
+  is recorded.
+- Record the identifier directly in the register alongside all relevant request details for every row.
+- Cross-reference the unique identifier in any related correspondence or documentation about the request.
+- Confirm that no two requests share the same identifier by periodically reviewing the register for duplicate
+  entries.
+- Name the person responsible for issuing identifiers as a specific individual, not a team or department.

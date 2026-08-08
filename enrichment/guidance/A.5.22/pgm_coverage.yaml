@@ -1,0 +1,18 @@
+must_id: item:A.5.22:pgm_coverage
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Coverage rate (fraction of supplier portfolio reviewed in period, by tier)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all suppliers in the current portfolio, including their assigned risk tiers, in a dated register
+  owned by a named individual.
+- Record the number of suppliers reviewed during the specified period, referencing completed review reports
+  or checklists for each supplier.
+- Calculate and document the coverage rate for each risk tier, showing both the number reviewed and the
+  total in that tier for the period.
+- State the review period’s start and end dates clearly in the meta-review summary to avoid ambiguity
+  about the timeframe covered.
+- Name the individual who approved the meta-review results, ensuring the approval is signed and dated.

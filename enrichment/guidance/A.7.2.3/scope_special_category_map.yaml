@@ -1,0 +1,20 @@
+must_id: item:A.7.2.3:scope_special_category_map
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: Special-category consent map — health / biometric / genetic / criminal / children require explicit
+  consent unless another Art.9.2 basis applies
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all processing activities involving health, biometric, genetic, criminal, or children's data, including
+  a named owner and processing purpose for each.
+- Document the specific legal basis for each activity, citing GDPR Article 9.2 subsection or explicit
+  consent, with a dated record.
+- Attach copies of explicit consent forms or records for each activity where consent is the basis, showing
+  date and individual’s signature or digital confirmation.
+- Name the legal basis owner as a specific individual, not a team or department, to avoid auditor rejection
+  of unclear accountability.
+- Cross-reference each processing activity to its consent or legal basis evidence in your data processing
+  register.

@@ -1,0 +1,17 @@
+must_id: item:A.8.17:approved_sources
+control_ref: A.8.17
+standard_id: ISO27001:2022
+must_text: Approved time sources named (stratum-1 NTP / GPS / vendor-cloud time service)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each approved time source in the procedure, specifying the exact service or server (for example,
+  "ntp1.vendor.com" or "GPS receiver model X").
+- Document the approval decision for each time source, including the approver’s full name, role, and the
+  date of approval.
+- State the stratum level or authoritative status (such as "stratum-1" or "vendor-certified cloud time
+  service") for each listed source.
+- Avoid listing generic or placeholder sources like "NTP server" or "cloud provider" without clear identification
+  and approval details.

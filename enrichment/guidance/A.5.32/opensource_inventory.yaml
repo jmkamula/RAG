@@ -1,0 +1,20 @@
+must_id: item:A.5.32:opensource_inventory
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Open-source components inventory with licence type per component (drives attribution and obligation
+  handling — feeds SBOM)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all open-source software components in use, including version numbers, in a centralised inventory
+  document maintained by the IT or development team.
+- Record the specific licence type for each open-source component, such as MIT, GPL, or Apache, directly
+  alongside the component entry.
+- Name the inventory owner as a specific individual responsible for updates and accuracy, not as "the
+  team" or a department.
+- Cross-reference each component entry with its source repository or official website to verify the stated
+  licence type.
+- Update the inventory with the date of the last review to show regular verification of component and
+  licence information.

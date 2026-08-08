@@ -1,0 +1,17 @@
+must_id: item:B.8.2.2:proc_customer_verification
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: Customer verification pathway — customer can audit purpose-limitation compliance
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a clear, step-by-step process describing how customers can request and conduct an audit of
+  purpose-limitation compliance.
+- Name a specific individual as the point of contact for customer audit requests, avoiding generic titles
+  like "the team" or "IT department".
+- Record each customer audit request and the corresponding response in a dated audit log, including the
+  outcome of the verification.
+- Publish the procedure and contact details in a location accessible to customers, such as a customer
+  portal or official communication channel.

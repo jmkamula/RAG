@@ -1,0 +1,19 @@
+must_id: item:Art.19:subject_information
+control_ref: Art.19
+standard_id: GDPR:2016/679
+must_text: Subject is informed about the recipients on request (Art.19 second sentence)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a written procedure that explains how individuals can request information about recipients
+  of their personal data.
+- Name the staff member responsible for handling recipient information requests, listing their full name
+  and job title in the procedure.
+- Record each request and response in a dated log, including the name of the requester, the date of the
+  request, and the information provided.
+- State in the procedure that recipient lists are provided in writing and are specific to the individual's
+  data, not generic or boilerplate responses.
+- Retain copies of all correspondence with data subjects regarding recipient information requests for
+  future reference.

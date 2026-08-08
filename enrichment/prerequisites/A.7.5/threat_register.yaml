@@ -1,0 +1,39 @@
+leaf_id: req:A.7.5:threat_register
+control_ref: A.7.5
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which sites and locations are in scope for your ISMS before you can catalogue
+    threats per site. This ensures the threat register covers all relevant physical environments.
+  good_enough: A clear, current list of all in-scope sites and facilities, even if some details are still
+    being finalized.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment process must exist to identify and evaluate threats, including physical
+    and environmental ones. Without this, you can't meaningfully populate a threat register.
+  good_enough: A documented risk assessment approach and at least one recent assessment covering physical/environmental
+    risks for each in-scope site.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Knowing what assets are present at each site is essential for identifying relevant threats
+    and protection measures. The threat register depends on this inventory.
+  good_enough: A basic, up-to-date list of key assets per site, even if some details are high-level or
+    pending further refinement.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of responsibility ensures someone is accountable for maintaining the threat
+    register and implementing protection measures.
+  good_enough: Named individuals or roles responsible for physical security and risk management at each
+    site.

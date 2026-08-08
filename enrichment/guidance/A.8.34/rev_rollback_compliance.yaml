@@ -1,0 +1,18 @@
+must_id: item:A.8.34:rev_rollback_compliance
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Rollback-discipline compliance (no untracked changes introduced during testing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each test session by recording the date, scope, and systems involved in an auditable test log
+  maintained by a named individual.
+- Confirm that all changes made during testing are tracked in a change management record, including who
+  made each change and when.
+- State in the test completion report that all test changes have been rolled back or remediated, with
+  supporting evidence such as system snapshots or logs.
+- Name the rollback approver as a specific individual, not a group or department, in the test documentation.
+- Retain signed confirmation from the system owner that no untracked or unauthorized changes remain after
+  testing.

@@ -1,0 +1,19 @@
+must_id: item:9.2:scope_high_risk
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: High-risk process audit frequency (annual audit even within longer cycle)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all high-risk processes by name and document them in your audit plan with a clear risk justification
+  for each.
+- State the planned audit frequency for each high-risk process, showing that it is at least annual, even
+  if other cycles are longer.
+- Record the date and outcome of the most recent audit for each high-risk process in your audit coverage
+  note.
+- Name the audit owner as a specific individual responsible for scheduling and tracking these audits,
+  not just a team or department.
+- Attach evidence of management approval for the audit plan, such as a signed or dated record from a leadership
+  meeting.

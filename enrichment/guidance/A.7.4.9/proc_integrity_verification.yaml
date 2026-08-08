@@ -1,0 +1,17 @@
+must_id: item:A.7.4.9:proc_integrity_verification
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Integrity verification (checksums / signed payloads for critical transmissions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for applying checksums or digital signatures to all critical transmissions of
+  personally identifiable information, including the tools and methods used.
+- Name the individual responsible for verifying the integrity of transmitted data, ensuring a specific
+  person is listed rather than a team or department.
+- Record sample transmission logs showing the application and verification of checksums or signatures,
+  with dates and responsible personnel clearly identified.
+- Retain evidence of periodic reviews of the transmission controls procedure, including the review date
+  and names of participants.

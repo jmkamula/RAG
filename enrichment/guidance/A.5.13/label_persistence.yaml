@@ -1,0 +1,20 @@
+must_id: item:A.5.13:label_persistence
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Label persistence on copying, export, transformation (PDF print, file format conversion, copy-paste
+  into new container)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the technical methods used to keep information labels visible and unchanged during copying,
+  exporting, or converting files, including screenshots or tool settings.
+- Record a dated test log showing successful label retention after copying, exporting, printing to PDF,
+  and converting at least three file types.
+- Assign a named individual responsible for reviewing and updating label persistence controls, listing
+  them with full name and role in the procedure.
+- State any known limitations or exceptions where label persistence is not technically possible, including
+  compensating controls or user instructions.
+- Name the owner as a specific individual — not a team or department — for sign-off on the procedure’s
+  effectiveness and completeness.

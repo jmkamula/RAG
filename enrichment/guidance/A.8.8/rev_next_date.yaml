@@ -1,0 +1,17 @@
+must_id: item:A.8.8:rev_next_date
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the vulnerability program in the official review schedule or
+  tracking document.
+- Record the decision on the next review date in meeting minutes or a dated approval email from the responsible
+  manager.
+- Name the individual responsible for scheduling and conducting the next review, ensuring a specific person
+  is listed rather than a team or department.
+- Cross-reference the stated next review date in both the vulnerability program documentation and the
+  central compliance calendar to confirm alignment.

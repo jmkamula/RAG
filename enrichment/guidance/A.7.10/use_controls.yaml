@@ -1,0 +1,19 @@
+must_id: item:A.7.10:use_controls
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Use controls (encryption, classification labels per A.5.13, allowed-use rules)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the encryption methods used for each type of storage media in a dated procedure, referencing
+  the specific technology or tool applied.
+- List the classification labels assigned to storage media, cross-referencing your labelling approach
+  with your documented classification scheme from control A.5.13.
+- State the allowed-use rules for each category of storage media, including restrictions on personal use
+  and external transfers, in the written procedure.
+- Name the procedure owner as a specific individual with responsibility for updates and compliance, not
+  as a team or department.
+- Record the date of last review and approval of the procedure, including the name and signature of the
+  approver.

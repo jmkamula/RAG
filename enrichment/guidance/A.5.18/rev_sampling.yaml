@@ -1,0 +1,18 @@
+must_id: item:A.5.18:rev_sampling
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Sampling approach declared if not full coverage of the register (selection method documented
+  — risk-stratified, random, role-targeted)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State whether the access rights review covers all users or a sample, and record this decision in the
+  review plan with the date.
+- Document the method used to select the sample, such as risk-based, random, or by role, in the review
+  procedure.
+- Name the individual responsible for defining and approving the sampling approach, listing them in the
+  review documentation.
+- Avoid describing the sample as "representative" or "random" without detailing the actual selection process
+  used.

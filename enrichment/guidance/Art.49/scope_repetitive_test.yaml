@@ -1,0 +1,19 @@
+must_id: item:Art.49:scope_repetitive_test
+control_ref: Art.49
+standard_id: GDPR:2016/679
+must_text: Operational interpretation of 'non-repetitive' for last-resort derogation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define 'non-repetitive' in your data transfer policy, referencing specific examples relevant to your
+  business operations and transfer scenarios.
+- Document each instance where the derogation is used, including a justification for why the transfer
+  is considered non-repetitive and last-resort.
+- Record the date, data categories, and recipient for every derogation-based transfer in a register maintained
+  by a named individual.
+- Name the policy owner as a specific individual, not a team or department, to ensure clear accountability
+  for interpretation and application.
+- Retain evidence of management review and approval for each derogation-based transfer, such as a signed
+  decision or meeting minutes.

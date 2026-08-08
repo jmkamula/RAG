@@ -1,0 +1,19 @@
+must_id: item:A.7.2.4:scope_consent_activities
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: In-scope activities enumerated (map to A.7.2.3 consent-required list)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all business activities that collect or process personal data requiring consent, referencing the
+  consent-required activities identified under control A.7.2.3.
+- Cross-reference each listed activity to the corresponding consent record or register entry, showing
+  clear mapping between activities and consent documentation.
+- Name the individual responsible for maintaining the scope list, ensuring a specific person is identified
+  rather than a team or department.
+- Date and version the scope document to show when it was last reviewed and updated, avoiding undated
+  or outdated records.
+- Confirm that no activity is described in vague or generic terms; each must be clearly defined and distinguishable
+  from others.

@@ -1,0 +1,40 @@
+leaf_id: req:Art.10:criminal_data_program_review
+control_ref: Art.10
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of processing
+  category: direct
+  rationale: You must confirm a valid lawful basis for each processing activity involving criminal conviction
+    data before you can review its ongoing compliance. Art.10 requires both an Art.6 lawful basis and
+    specific Member State law authorisation.
+  good_enough: A documented mapping of each criminal data processing activity to its lawful basis under
+    Art.6 is available and up-to-date.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a current, accurate record of all processing activities involving criminal conviction
+    data to identify which activities require annual review under Art.10.
+  good_enough: The RoPA includes all activities involving criminal conviction data, with enough detail
+    to identify their scope and legal basis.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope must cover processing of criminal conviction data to ensure that relevant
+    controls and reviews are included in the compliance program.
+  good_enough: The ISMS scope statement explicitly includes systems and processes handling criminal conviction
+    data.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated Data Protection Officer is required to oversee sensitive processing, including
+    criminal data, and should be involved in the annual review process.
+  good_enough: A DPO has been formally appointed and their responsibilities include oversight of criminal
+    data processing activities.

@@ -1,0 +1,17 @@
+must_id: item:A.5.22:pgm_next_date
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Next planned meta-review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned meta-review date in the Supplier Review Program document, using a clear and specific
+  calendar date.
+- Record the date of the last meta-review to show the review cycle and support the scheduling of the next
+  planned date.
+- Name the person responsible for scheduling and conducting the next meta-review, listing a specific individual
+  rather than a team or department.
+- Update the document version and date whenever the next planned meta-review date changes, keeping historical
+  versions for reference.

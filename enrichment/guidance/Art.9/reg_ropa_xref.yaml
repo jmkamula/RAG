@@ -1,0 +1,17 @@
+must_id: item:Art.9:reg_ropa_xref
+control_ref: Art.9
+standard_id: GDPR:2016/679
+must_text: Per-row cross-reference to Art.30 RoPA entry
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each special category processing activity in the register to its corresponding Article
+  30 Record of Processing Activities (RoPA) entry by unique identifier.
+- Record the RoPA entry's title and reference number directly in the same row as the special category
+  processing activity.
+- Confirm that every row in the special category processing register has a completed RoPA cross-reference;
+  do not leave any row blank or marked "TBD".
+- Name the person responsible for maintaining the cross-references as a specific individual, not as a
+  team or department.

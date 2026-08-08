@@ -1,0 +1,17 @@
+must_id: item:B.8.2.4:proc_owner
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Named owner (DPO + Legal counsel)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the Infringing Instruction Notification Procedure as a specific individual, listing
+  both the Data Protection Officer and the Legal Counsel by name.
+- Record the appointment of these owners in the procedure document, including their full names, job titles,
+  and the date of assignment.
+- Sign and date the procedure document to confirm the owners’ acceptance of responsibility for maintaining
+  and updating the procedure.
+- Avoid listing a team, department, or generic title as owner—use only named individuals to meet accountability
+  requirements.

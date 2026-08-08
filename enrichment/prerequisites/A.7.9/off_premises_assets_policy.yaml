@@ -1,0 +1,48 @@
+leaf_id: req:A.7.9:off_premises_assets_policy
+control_ref: A.7.9
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know whether off-premises assets are in-scope for your ISMS before you can write
+    a policy about their protection. The scope statement defines which assets, locations, and activities
+    are covered.
+  good_enough: A clear, current scope statement that explicitly includes (or excludes) off-premises assets
+    and related activities.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register is essential to identify which assets are taken off-premises,
+    who is responsible for them, and what needs protection. Without this, your policy cannot specify controls
+    or responsibilities.
+  good_enough: A working asset register that lists all relevant off-premises assets and their custodians,
+    even if not fully detailed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: You must know the classification of assets to set appropriate off-premises controls (e.g.,
+    encryption, handling). The policy should reference how asset sensitivity affects requirements.
+  good_enough: A documented, basic classification scheme that distinguishes at least between confidential
+    and non-confidential assets.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment identifies threats and vulnerabilities specific to off-premises assets,
+    informing what protections and restrictions your policy should mandate.
+  good_enough: A recent risk assessment that considers off-premises asset scenarios, even if not exhaustive.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The overarching information security policy sets the tone and authority for all sub-policies,
+    including off-premises asset protection. Your policy should align with and reference this document.
+  good_enough: A published, approved information security policy that establishes the need for supporting
+    policies.

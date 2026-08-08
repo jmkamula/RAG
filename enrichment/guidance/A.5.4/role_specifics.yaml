@@ -1,0 +1,18 @@
+must_id: item:A.5.4:role_specifics
+control_ref: A.5.4
+standard_id: ISO27001:2022
+must_text: Role-specific responsibilities cross-referenced (A.5.2 responsibility matrix)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each information security compliance responsibility in the management directive, matching the wording
+  used in the responsibility matrix from A.5.2.
+- Cross-reference each listed responsibility in the directive to the named individual or role in the A.5.2
+  responsibility matrix.
+- State the version and approval date of the responsibility matrix used, so auditors can verify alignment
+  with the current directive.
+- Name the owner of the directive as a specific individual, not a generic group or department.
+- Attach or link the responsibility matrix directly to the directive, ensuring both documents are accessible
+  together.

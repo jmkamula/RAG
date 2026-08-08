@@ -1,0 +1,19 @@
+must_id: item:Art.38:rev_involvement_audit
+control_ref: Art.38
+standard_id: GDPR:2016/679
+must_text: Involvement audit — DPO invited to all in-scope forums; not bypassed on data-protection decisions
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all forums, committees, and meetings where data protection matters are discussed, including dates
+  and attendee names.
+- Document invitations sent to the DPO for each relevant forum, attaching dated calendar invites or meeting
+  requests as evidence.
+- Record the DPO’s actual attendance or participation in meeting minutes, including their input on data-protection
+  decisions.
+- Name the DPO as a specific individual in all records—do not use generic titles like "the team" or "compliance
+  department."
+- Retain copies of communications or decisions showing the DPO was consulted before any final data-protection
+  actions were taken.

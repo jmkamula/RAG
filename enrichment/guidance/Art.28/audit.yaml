@@ -1,0 +1,19 @@
+must_id: item:Art.28:audit
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Audit rights and information to demonstrate compliance
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the DPA that the customer has the right to audit the processor’s data processing activities,
+  including reasonable notice and scope.
+- Document the specific types of information the processor will provide to demonstrate compliance, such
+  as security policies and processing records.
+- Name the individual at the processor responsible for coordinating audits and providing compliance information,
+  including their job title and contact details.
+- Record the date and method by which both parties formally approved the DPA, such as signatures or digital
+  acceptance.
+- Avoid using generic language like "audit rights as required by law"—specify the audit process and information
+  to be provided.

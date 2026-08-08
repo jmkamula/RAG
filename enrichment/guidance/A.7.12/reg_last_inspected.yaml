@@ -1,0 +1,17 @@
+must_id: item:A.7.12:reg_last_inspected
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Per-row last-inspected date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the last-inspected date for each cabling run directly in the register, ensuring the date is specific
+  and not left blank.
+- Name the person who performed the inspection for each entry, using their full name rather than a generic
+  role or team.
+- Cross-reference each inspection date with a corresponding inspection report or checklist, attaching
+  or linking the document in the register.
+- Avoid using undated or recurring placeholders like "monthly" or "ongoing"—enter a specific, calendar
+  date for every inspection row.

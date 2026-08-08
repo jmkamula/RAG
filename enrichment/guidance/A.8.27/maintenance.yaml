@@ -1,0 +1,17 @@
+must_id: item:A.8.27:maintenance
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Maintenance cadence + responsibility (review as technologies / threats / regulations evolve)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the required review frequency for the Secure System Architecture and Engineering Principles Policy
+  in a dated policy section or schedule.
+- Name a specific individual, not a team or department, as responsible for maintaining and updating the
+  policy.
+- Document the triggers for unscheduled reviews, such as major technology changes, new threats, or regulatory
+  updates, in the policy text.
+- Record each completed review with the review date, reviewer’s name, and any resulting updates in a version
+  control table within the policy document.

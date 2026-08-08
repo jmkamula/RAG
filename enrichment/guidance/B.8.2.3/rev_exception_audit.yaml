@@ -1,0 +1,18 @@
+must_id: item:B.8.2.3:rev_exception_audit
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: Exception audit — any registered exceptions still defensible + consent evidence current
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current exceptions to the marketing use program in a dated register, including the reason for
+  each exception.
+- Attach up-to-date consent records for each individual whose data is used under an exception, showing
+  explicit agreement for the specific marketing use.
+- Review each exception to confirm it is still necessary and defensible, recording the review date and
+  the name of the reviewer.
+- Name the owner responsible for managing exceptions as a specific individual, not a team or department.
+- Archive any expired or revoked consents separately, ensuring only current evidence is referenced in
+  the active register.

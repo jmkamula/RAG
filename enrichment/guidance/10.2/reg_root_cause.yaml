@@ -1,0 +1,17 @@
+must_id: item:10.2:reg_root_cause
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Per-row root cause analysis record (5-whys, fishbone, or equivalent)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the root cause analysis method used for each nonconformity entry, such as 5-whys or fishbone,
+  directly in the register row.
+- Document the detailed findings of the root cause analysis for each nonconformity, linking them to the
+  specific incident by date and reference number.
+- Name the individual responsible for conducting and documenting the root cause analysis for each nonconformity,
+  not just a team or department.
+- Attach or cross-reference any supporting evidence or worksheets used during the root cause analysis
+  to the corresponding register entry.

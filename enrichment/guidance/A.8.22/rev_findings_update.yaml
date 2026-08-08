@@ -1,0 +1,17 @@
+must_id: item:A.8.22:rev_findings_update
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Findings propagated to procedure / register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and summary of each network segregation review in a central log or register.
+- Document all findings from the review, including risks or gaps, with clear references to the relevant
+  network segments.
+- Update the network segregation procedure to reflect any required changes, citing the review findings
+  and the date of revision.
+- Assign responsibility for each action item to a named individual, not a team or department.
+- Cross-reference the updated procedure or register entry with the original review findings to show how
+  each issue was addressed.

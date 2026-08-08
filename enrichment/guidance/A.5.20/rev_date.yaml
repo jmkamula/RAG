@@ -1,0 +1,17 @@
+must_id: item:A.5.20:rev_date
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the planned review interval for supplier agreement templates in a dated schedule approved by
+  a named responsible individual.
+- Document the most recent review date and the reviewer’s name in a version-controlled log or register.
+- Confirm the next scheduled review date is within the documented interval from the last review in the
+  same log.
+- Name the review owner as a specific individual, not a team or department, in the review documentation.
+- Retain evidence of the completed review, such as a signed checklist or meeting minutes, with the review
+  date clearly shown.

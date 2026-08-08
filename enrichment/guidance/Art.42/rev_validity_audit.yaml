@@ -1,0 +1,17 @@
+must_id: item:Art.42:rev_validity_audit
+control_ref: Art.42
+standard_id: GDPR:2016/679
+must_text: Validity audit — every active certification still in validity period; renewal in flight where
+  approaching expiry
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all active certifications with their issue and expiry dates in a dated register maintained by a
+  named responsible individual.
+- Record the most recent audit date and outcome for each certification in the register, including the
+  auditor’s name.
+- Document evidence of renewal initiation, such as a signed renewal application or official correspondence,
+  for certifications expiring within the next six months.
+- Name the owner responsible for certification oversight as a specific individual, not a team or department.

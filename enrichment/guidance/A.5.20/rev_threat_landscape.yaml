@@ -1,0 +1,18 @@
+must_id: item:A.5.20:rev_threat_landscape
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Threat-landscape changes considered (e.g. emergent incident-notification expectations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the supplier agreement template review and record their name and review
+  date in the review log.
+- Document recent changes in the threat landscape, such as new incident-notification requirements, in
+  the review meeting minutes.
+- Cross-reference updated agreement clauses with current regulatory or industry guidance to show alignment
+  with new threats.
+- State explicitly in the review record which new or emerging threats were considered and how the template
+  was updated in response.
+- Name the reviewer as a specific person, not a generic role or team, to avoid ambiguity in accountability.

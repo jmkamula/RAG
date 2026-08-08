@@ -1,0 +1,16 @@
+must_id: item:5.3:rev_reviewer
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (ISMS Manager + HR partner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the ISMS Manager and the HR partner as individual reviewers in the ISMS Roles Program Review
+  document.
+- Record the date when each reviewer completed their review of the ISMS Roles Program.
+- Obtain signatures or written confirmation from both the ISMS Manager and the HR partner to evidence
+  their participation in the review.
+- Avoid listing a department or team as the reviewer; specify named individuals to meet accountability
+  requirements.

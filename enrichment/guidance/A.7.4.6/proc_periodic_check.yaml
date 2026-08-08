@@ -1,0 +1,15 @@
+must_id: item:A.7.4.6:proc_periodic_check
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+must_text: Periodic check that unused temp files are deleted within the identified period
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the schedule for checking and deleting unused temporary files, including specific dates and
+  responsible individuals, in a maintained log.
+- Record each completed check with the date, name of the person performing it, and a summary of files
+  deleted or retained.
+- Name the owner of the temporary files disposal process as a specific individual, not a team or department.
+- Retain evidence of deleted files, such as deletion logs or screenshots, for each periodic check.

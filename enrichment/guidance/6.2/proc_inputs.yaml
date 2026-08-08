@@ -1,0 +1,18 @@
+must_id: item:6.2:proc_inputs
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: Inputs to objective-setting (5.2 policy, 6.1.2 risk results, 4.2 party requirements)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the specific documents used as inputs for setting security objectives, including the information
+  security policy, risk assessment results, and interested party requirements.
+- Reference the latest approved version of each input document by title, version number, and date within
+  the objective-setting procedure.
+- Name the person responsible for collecting and verifying these inputs before each objective-setting
+  cycle.
+- Attach or link the actual input documents to the procedure record for each cycle, not just generic references
+  or placeholders.
+- Record any changes to input documents since the last cycle, noting the date and nature of each change.

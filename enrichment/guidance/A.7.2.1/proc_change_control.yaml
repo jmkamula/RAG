@@ -1,0 +1,19 @@
+must_id: item:A.7.2.1:proc_change_control
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Change-control — extending or changing a purpose requires re-review + potentially new consent
+  (§7.2.2)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each proposed change to the data processing purpose in a dated change log, including the reason
+  for the change and the impacted data.
+- Assign a named individual to review and approve each purpose change, recording their name and approval
+  date in the change log.
+- State in the procedure that any extension or change to the processing purpose triggers a formal re-review
+  of consent requirements.
+- Retain copies of updated consent forms or records showing new or refreshed consent was obtained, if
+  required by the change.
+- Name the owner of the change-control process as a specific individual, not a team or department.

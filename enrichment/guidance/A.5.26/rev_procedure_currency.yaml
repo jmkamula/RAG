@@ -1,0 +1,18 @@
+must_id: item:A.5.26:rev_procedure_currency
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Procedure currency assessed against threat landscape + new control changes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the incident response procedure review, recording their name and the
+  review period in a dated document.
+- Document the latest threat intelligence sources consulted, listing the date accessed and summarizing
+  any relevant new threats or trends.
+- Cross-reference each procedure step against newly introduced or updated controls, noting any required
+  changes and the corresponding control identifiers.
+- Record the date the review was completed and obtain a signature from the reviewer and an approver to
+  confirm the assessment.
+- Name the review owner as a specific person, not a team or department, to avoid ambiguity in responsibility.

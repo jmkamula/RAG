@@ -1,0 +1,17 @@
+must_id: item:A.6.6:rev_date
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date for the NDA template in a central register, including the name of
+  the reviewer.
+- Name the responsible individual for scheduling and conducting NDA template reviews, not just a team
+  or department.
+- Document the planned review interval for the NDA template and cross-reference it with actual review
+  dates to confirm alignment.
+- Retain a copy of the reviewed NDA template with tracked changes or a summary of updates, dated and attributed
+  to the reviewer.

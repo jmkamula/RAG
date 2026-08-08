@@ -1,0 +1,15 @@
+must_id: item:A.8.34:reg_rollback_invoked
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Per-engagement rollback-invoked flag where applicable
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to the Audit Testing Engagement Register to record whether a rollback was invoked for each
+  engagement.
+- Mark the rollback-invoked flag as either "Yes" or "No" for each engagement, with the date the decision
+  was made.
+- Name the person responsible for deciding and recording the rollback status for each engagement.
+- Avoid leaving the rollback-invoked flag blank or using unclear entries such as "N/A" or "TBD".

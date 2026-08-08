@@ -1,0 +1,19 @@
+must_id: item:10.1:scope_external_signals
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: External signal sources in scope (4.2 party feedback, regulator updates, sectoral threat intel,
+  surveillance-audit observations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all external sources that could trigger improvements, such as customer feedback, regulator updates,
+  industry threat intelligence, and audit findings.
+- Document the date each external source was last reviewed for relevance and applicability to your organisation.
+- Name a specific individual responsible for monitoring and updating the list of external improvement
+  triggers.
+- Cross-reference each listed trigger to a supporting record, such as a feedback log, regulatory bulletin,
+  or audit report.
+- Specify the scope clearly—avoid vague entries like "external sources" without naming the actual party,
+  regulator, or intelligence provider.

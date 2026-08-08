@@ -1,0 +1,18 @@
+must_id: item:A.7.3.4:proc_response_sla
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+must_text: Response-time SLA stated + honoured
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the maximum allowed response time for consent modification or withdrawal requests in the documented
+  procedure, using a specific number of days.
+- Record each consent modification or withdrawal request with a timestamp and the date a response was
+  provided.
+- Name the individual responsible for monitoring and ensuring responses meet the stated response-time
+  SLA.
+- Retain evidence of at least three recent requests showing the response time met the documented SLA.
+- Specify the response-time SLA in the procedure document itself, not in a separate policy or informal
+  communication.

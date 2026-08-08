@@ -1,0 +1,20 @@
+must_id: item:Art.46:rev_supplementary_audit
+control_ref: Art.46
+standard_id: GDPR:2016/679
+must_text: Supplementary measures audit — applied measures (encryption keys, pseudonymisation, etc.) actually
+  in place at vendor
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all supplementary measures applied to vendor data transfers, such as encryption, pseudonymisation,
+  or contractual clauses, in a dated inventory.
+- Document the technical implementation details for each measure, including encryption key management
+  processes and access controls, with named responsible individuals.
+- Collect evidence from the vendor, such as screenshots, system logs, or signed attestations, confirming
+  each measure is currently active and operational.
+- Name the reviewer who verified the measures are not just described in policy but are actually enforced
+  in practice, with a dated sign-off.
+- Avoid using generic statements like "encryption in place"; specify the encryption method, key location,
+  and who manages the keys.

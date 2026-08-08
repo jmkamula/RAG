@@ -1,0 +1,14 @@
+must_id: item:7.4:rev_audience_coverage
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: Audience coverage check — every in-scope audience reached for required topics
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all in-scope audiences by name or role in a dated register used for communication planning.
+- Cross-reference each required information security topic with the audiences reached in a matrix or checklist.
+- Document the date and method of communication delivery for each audience-topic pair in the review record.
+- Name the reviewer who confirmed all audiences were reached; do not leave this as "the team" or blank.
+- Attach evidence of communications, such as emails or meeting minutes, mapped to each audience and topic.

@@ -1,0 +1,38 @@
+leaf_id: req:A.8.26:appsec_program_review
+control_ref: A.8.26
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which applications and systems are in-scope for your ISMS before you can
+    review whether their security requirements are current and effective.
+  good_enough: A clear, up-to-date scope statement that identifies all relevant applications and environments
+    is available.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Application security requirements should be reviewed in light of current risks; without a
+    recent risk assessment, you can't judge if requirements are still appropriate.
+  good_enough: A recent risk assessment exists that covers application-related threats and vulnerabilities.
+- ref: A.8.25
+  standard_id: ISO27001:2022
+  title: Secure development life cycle
+  category: direct
+  rationale: The secure development lifecycle process defines how application security requirements are
+    set and maintained; you can't review their currency without knowing the baseline process.
+  good_enough: A documented secure development lifecycle exists, showing how application security requirements
+    are integrated.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You need an up-to-date register of applications and supporting assets to ensure all relevant
+    requirements are reviewed.
+  good_enough: A current asset register lists all applications and related components in scope for security
+    review.

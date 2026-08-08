@@ -1,0 +1,15 @@
+must_id: item:10.1:implementation
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Implementation steps for improvement actions (owners, dates, resources)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner for each improvement action, avoiding generic labels like "the
+  team" or "IT department".
+- Record the planned start and completion dates for each improvement action in the procedure document.
+- Document the resources allocated to each improvement action, such as budget, tools, or personnel, in
+  a dedicated section.
+- Assign responsibility for monitoring progress to a named person and include this in the procedure.

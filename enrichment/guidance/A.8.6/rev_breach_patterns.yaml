@@ -1,0 +1,18 @@
+must_id: item:A.8.6:rev_breach_patterns
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Breach-pattern review (recurring breaches → baseline re-calibration)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Schedule a quarterly meeting to review system capacity logs and identify recurring breaches or near-misses,
+  recording the date and attendees.
+- Document each identified breach pattern in a capacity review report, including frequency, affected systems,
+  and potential impact.
+- Record any decision to recalibrate baseline capacity thresholds, including rationale and the name of
+  the approving manager, in the review minutes.
+- Name the owner of the capacity review program as a specific individual, not a team or department, in
+  the program documentation.
+- Retain copies of all review reports and recalibration approvals for at least one audit cycle.

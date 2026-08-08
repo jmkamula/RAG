@@ -1,0 +1,16 @@
+must_id: item:6.3:rev_date
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the ISMS Change Program in a dated log or meeting minutes.
+- Document the planned review interval for the ISMS Change Program in your policy or schedule, specifying
+  the exact frequency.
+- Confirm the actual review date falls within the documented planned interval by cross-referencing the
+  review log and the schedule.
+- Name the reviewer as a specific individual in the review record, avoiding generic titles like "the team"
+  or "management".

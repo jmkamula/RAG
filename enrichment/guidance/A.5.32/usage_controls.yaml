@@ -1,0 +1,20 @@
+must_id: item:A.5.32:usage_controls
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Usage controls preventing unlicensed software installation (allow-listing, MDM/EDR enforcement,
+  procurement gate)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the procedure owner as a specific individual responsible for enforcing software usage controls,
+  not a generic team or department.
+- Document the approved software allow-list, including version numbers and approval dates, in a centrally
+  accessible register.
+- Record the technical controls in place, such as MDM or endpoint security settings, with screenshots
+  or configuration export files dated and attributed.
+- State the procurement process step that checks software licensing before installation, referencing a
+  dated sample purchase request or approval workflow.
+- Retain evidence of periodic reviews of the allow-list and enforcement controls, including reviewer names
+  and review dates.

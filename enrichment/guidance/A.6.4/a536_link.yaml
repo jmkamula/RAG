@@ -1,0 +1,18 @@
+must_id: item:A.6.4:a536_link
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Cross-link to A.5.36 compliance nonconformity register — disciplinary cases are a particular
+  type of compliance NC and should be tracked in concert
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each disciplinary case in the disciplinary process log with its corresponding entry
+  in the compliance nonconformity register, using a unique case identifier.
+- Document the date and outcome of each disciplinary case in both the disciplinary log and the nonconformity
+  register to ensure records match.
+- Name the person responsible for maintaining the cross-link between the disciplinary process log and
+  the nonconformity register, listing a specific individual.
+- Attach supporting evidence, such as investigation reports or decision letters, to both records for each
+  disciplinary case tracked.

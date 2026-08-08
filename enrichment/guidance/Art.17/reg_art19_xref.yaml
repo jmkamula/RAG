@@ -1,0 +1,17 @@
+must_id: item:Art.17:reg_art19_xref
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Per-row Art.19 notification reference
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time each erasure request is received in the Erasure Request Register.
+- Cross-reference each erasure request entry with the specific Art.19 notification sent to relevant recipients,
+  including notification date.
+- Name the person responsible for sending each Art.19 notification, using a full individual name rather
+  than a team or department.
+- Attach or link the actual notification message or confirmation of delivery for each entry in the register.
+- Avoid leaving any notification reference field blank or marked as "N/A" without documented justification
+  for each omission.

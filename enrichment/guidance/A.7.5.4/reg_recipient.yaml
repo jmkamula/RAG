@@ -1,0 +1,16 @@
+must_id: item:A.7.5.4:reg_recipient
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Recipient identity per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full legal name of each recipient for every PII disclosure event in a dedicated column of
+  the event log.
+- Include a unique identifier or contact detail for each recipient to distinguish between individuals
+  or organisations with similar names.
+- Document the date and time of each disclosure alongside the recipient’s identity for clear traceability.
+- Name the recipient as a specific person or organisation — do not use vague labels like "partner" or
+  "external party".

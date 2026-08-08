@@ -1,0 +1,19 @@
+must_id: item:Art.27:rev_operations_sample
+control_ref: Art.27
+standard_id: GDPR:2016/679
+must_text: Operations sample — interactions handled within SLAs, no failed escalations
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Collect a list of all data subject requests and regulatory queries received by the representative in
+  the last 12 months, including dates.
+- Record the response time for each interaction and compare it against the documented service level agreements
+  (SLAs).
+- Document any escalations, noting the date, reason, and resolution outcome for each, with supporting
+  communication records.
+- Confirm that all escalations were resolved within the required timeframes and that no escalations failed
+  or remained open.
+- Name the individual responsible for monitoring representative performance, avoiding generic titles like
+  "the team" or "compliance department".

@@ -1,0 +1,39 @@
+leaf_id: req:A.7.12:cabling_security_procedure
+control_ref: A.7.12
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which physical locations, systems, and cable runs are in-scope for your
+    ISMS before you can define which cabling needs protection and where procedures apply.
+  good_enough: A clear, current scope statement that identifies the facilities and network infrastructure
+    covered by the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: A reliable asset register is needed to identify which cables, patch panels, and supporting
+    infrastructure exist and require security controls.
+  good_enough: A basic, up-to-date list of physical and logical assets, including network cabling and
+    related components.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: You must understand the risks to cabling (e.g., interception, interference, damage) to determine
+    the appropriate level of procedural control and protection.
+  good_enough: A recent risk assessment that considers threats to cabling and supporting infrastructure,
+    even if high-level.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that responsibilities for implementing and maintaining
+    cabling security procedures are understood and actionable.
+  good_enough: Documented roles showing who is responsible for cabling security, even if not yet fully
+    detailed for every task.

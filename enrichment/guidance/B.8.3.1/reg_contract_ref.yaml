@@ -1,0 +1,16 @@
+must_id: item:B.8.3.1:reg_contract_ref
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+must_text: Contract reference per row (which B.8.2.1 agreement scoped this support)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each subject rights support entry to the specific customer contract by listing the contract
+  title and unique identifier in the register row.
+- Record the contract start date and version number for each referenced agreement to enable clear traceability.
+- Name the contract owner as a specific individual, not a team or department, for each contract referenced
+  in the register.
+- Document any updates to the contract reference in the register with the date and the person making the
+  change.

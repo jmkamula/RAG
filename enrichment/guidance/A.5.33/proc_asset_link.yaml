@@ -1,0 +1,18 @@
+must_id: item:A.5.33:proc_asset_link
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Cross-link to A.5.9 asset register — records are information assets; protection class must
+  reconcile
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference the asset register in the Records Retention and Protection Policy, explicitly stating that
+  records are classified as information assets.
+- Cross-check that each record type listed in the policy has a corresponding entry in the asset register,
+  including matching protection classifications.
+- Document the date and name of the person who verified that the policy and asset register classifications
+  are reconciled.
+- Name the owner of the reconciliation process as a specific individual, not a group or department.
+- Attach a copy or screenshot of the relevant asset register section to the policy as supporting evidence.

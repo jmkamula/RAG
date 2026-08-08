@@ -1,0 +1,19 @@
+must_id: item:A.7.5.3:proc_rights_transfer
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+must_text: Rights-transfer capture — modifications / erasure transfers arising from subject requests
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each instance where personal data is transferred, modified, or erased in response to a subject
+  request, including the date and nature of the action.
+- Name the individual responsible for authorizing the transfer, modification, or erasure, ensuring a specific
+  person is listed rather than a team or department.
+- Record the recipient of the transferred data, including their organization and contact details, in the
+  transfer log.
+- Retain copies of the original subject request and the confirmation of action taken, linking both to
+  the relevant transfer record.
+- Review the procedure regularly to confirm that all transfers resulting from subject requests are consistently
+  captured and documented.

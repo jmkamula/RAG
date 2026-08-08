@@ -1,0 +1,19 @@
+must_id: item:Art.43:reg_complaint
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Per-row complaint handling where contested
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each certification issuance in a register, including the applicant’s name, date of issuance,
+  and certification scope.
+- Document any complaints received about a specific certification row, including the date, complainant’s
+  details, and nature of the contest.
+- State the resolution outcome for each contested certification, referencing supporting investigation
+  notes or correspondence.
+- Name the individual responsible for handling each complaint, avoiding generic entries like "the team"
+  or "admin staff".
+- Retain dated evidence of communication with the complainant and any corrective actions taken for each
+  contested certification.

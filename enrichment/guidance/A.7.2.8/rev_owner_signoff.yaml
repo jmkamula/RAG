@@ -1,0 +1,15 @@
+must_id: item:A.7.2.8:rev_owner_signoff
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Owner signoff — designated RoPA owner attests to accuracy + completeness
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the RoPA owner as a specific individual in the RoPA Program documentation, avoiding generic titles
+  like "the team" or "compliance department".
+- Document the date when the RoPA review was completed in the review log or summary report.
+- Require the designated RoPA owner to sign a statement attesting to the accuracy and completeness of
+  the reviewed RoPA.
+- Retain the signed attestation and review record in a location accessible for future audits.

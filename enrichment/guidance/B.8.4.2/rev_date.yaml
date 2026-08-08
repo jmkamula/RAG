@@ -1,0 +1,15 @@
+must_id: item:B.8.4.2:rev_date
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the End-of-Service Program in a dated log or review register.
+- State the planned review interval for the End-of-Service Program in a documented schedule or policy.
+- Compare the actual review date to the planned interval and document the result in the review record.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Attach evidence of the review, such as meeting minutes or a signed review checklist, to the program
+  records.

@@ -1,0 +1,17 @@
+must_id: item:Art.22:rev_safeguards_health
+control_ref: Art.22
+standard_id: GDPR:2016/679
+must_text: Safeguards health — human intervention queue actually used, contest mechanism functioning
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for monitoring the human intervention queue in a dated record.
+- Document at least one instance in the past six months where a user requested human review and received
+  a decision change or confirmation.
+- Record the process and contact method for contesting automated decisions in a published user-facing
+  policy.
+- Confirm the contest mechanism was tested in the last year by providing test logs or screenshots showing
+  a completed user contestation.
+- Specify the human intervention queue owner as a named person, not a generic team or department.

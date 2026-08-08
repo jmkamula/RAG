@@ -1,0 +1,19 @@
+must_id: item:Art.41:reg_outcome
+control_ref: Art.41
+standard_id: GDPR:2016/679
+must_text: Per-row outcome (compliant / non-compliant — corrective / suspension / exclusion per Art.41.4)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the outcome of each code monitoring activity as "compliant" or "non-compliant" in a dated entry
+  for every monitored entity.
+- Specify the corrective action, suspension, or exclusion decision for each non-compliant outcome, referencing
+  Article 41.4 in the record.
+- Name the individual who made each compliance decision, avoiding generic labels like "the team" or "compliance
+  department".
+- Retain supporting evidence for each outcome, such as correspondence or meeting minutes, linked to the
+  relevant activity record.
+- Review and update the record after any follow-up action, noting the date and the person responsible
+  for the update.

@@ -1,0 +1,40 @@
+leaf_id: req:A.7.3.1:program_review
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organization and which processing activities
+    are covered by the ISMS and privacy extension. Without this, you cannot determine which obligations
+    or regulatory requirements are relevant for review.
+  good_enough: A documented scope that clearly lists included business units, systems, and processing
+    activities, even if not yet fully optimized.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purposes for which personal data is processed to identify applicable obligations
+    and ensure the obligations catalog is accurate and complete.
+  good_enough: A current list of processing purposes for all in-scope activities, even if some descriptions
+    are high-level.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity is essential to map regulatory
+    obligations and assess if the obligations catalog is up to date.
+  good_enough: Each processing activity has a documented lawful basis, even if some are provisional pending
+    legal review.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of privacy and compliance roles ensures that the obligations program review
+    is owned, performed, and acted upon by the right people.
+  good_enough: A named individual or team is responsible for privacy obligations, even if role descriptions
+    are basic.

@@ -1,0 +1,16 @@
+must_id: item:A.8.17:stratum_hierarchy
+control_ref: A.8.17
+standard_id: ISO27001:2022
+must_text: Stratum hierarchy documented (internal stratum-2 distribution from external stratum-1)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Draw a network diagram showing all time sources, clearly labeling external stratum-1 and each internal
+  stratum-2 server.
+- Document the hostname or IP address of each stratum-1 and stratum-2 server in the procedure, including
+  their synchronization relationships.
+- Name the person responsible for maintaining the stratum hierarchy, avoiding generic roles like "IT"
+  or "the team".
+- Record the date of the latest review or update of the stratum hierarchy documentation in the procedure.

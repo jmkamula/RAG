@@ -1,0 +1,17 @@
+must_id: item:A.7.2.4:reg_subject_id
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Subject identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique identifier for each data subject in every row of the consent register, such as a customer
+  ID or employee number.
+- Document the method used to generate or assign each subject identifier, and keep a dated record of this
+  process.
+- Cross-reference the subject identifier with supporting documentation, such as onboarding forms or account
+  creation records, to confirm accuracy.
+- Name the subject identifier clearly—avoid using generic labels like "user" or leaving the field blank,
+  which auditors will flag as insufficient.

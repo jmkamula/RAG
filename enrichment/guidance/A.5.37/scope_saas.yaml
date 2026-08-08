@@ -1,0 +1,18 @@
+must_id: item:A.5.37:scope_saas
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Key SaaS environments where the org operates the configuration (M365, Salesforce, ServiceNow,
+  etc.) — even SaaS-hosted facilities need operating procedures for the org-side operator
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all SaaS environments where your organisation manages configuration, such as M365, Salesforce,
+  or ServiceNow, in a dated register.
+- Name a specific individual as the owner responsible for each SaaS environment — avoid using generic
+  roles or teams.
+- Document the scope of information processing activities for each listed SaaS environment, including
+  what data is handled and how.
+- Cross-reference each SaaS environment in your operating procedures to show how configuration and management
+  responsibilities are met.

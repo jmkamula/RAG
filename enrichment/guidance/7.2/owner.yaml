@@ -1,0 +1,14 @@
+must_id: item:7.2:owner
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Named owner of the record (HR partner with ISMS Manager)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the HR partner and ISMS Manager as specific individuals with full names and job titles in the ISMS
+  Competence Record.
+- Record the date when ownership was assigned to these individuals in the ISMS Competence Record.
+- Sign the ISMS Competence Record by both the HR partner and ISMS Manager to confirm acceptance of ownership.
+- Avoid listing the owner as "HR team", "ISMS group", or any generic department—use only named individuals.

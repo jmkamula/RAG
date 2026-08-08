@@ -1,0 +1,20 @@
+must_id: item:A.5.36:nc_corrective_action
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Corrective action stated per NC (the specific change committed — policy update, control implementation,
+  training delivery)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the corrective action for each nonconformity as a clear, specific commitment such as "update
+  password policy" or "deliver phishing training."
+- Name the individual responsible for implementing each corrective action, using a full name rather than
+  a role or team.
+- State the target completion date for each corrective action and update the register when the action
+  is completed, including the actual completion date.
+- Attach supporting evidence for completed actions, such as a revised policy document, training attendance
+  records, or control implementation screenshots.
+- Avoid using vague descriptions like "fix issue" or "address gap" as corrective actions; specify the
+  exact change to be made.

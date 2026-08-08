@@ -1,0 +1,19 @@
+must_id: item:A.7.2.1:rev_coverage_check
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Coverage check — every in-scope activity has a purpose registered
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every in-scope data processing activity in a central register, including a clear description of
+  each activity.
+- Record the specific, documented purpose for each processing activity directly in the register, matching
+  the language used in your privacy notices.
+- Cross-reference each activity and its purpose with the relevant business owner or process lead, naming
+  a specific individual.
+- Confirm that no activity in the register has a missing, vague, or generic purpose such as "business
+  needs" or "various reasons".
+- Date and sign off the completed register review, naming the reviewer responsible for verifying full
+  coverage.

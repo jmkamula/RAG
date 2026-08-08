@@ -1,0 +1,17 @@
+must_id: item:A.8.17:reg_last_sync
+control_ref: A.8.17
+standard_id: ISO27001:2022
+must_text: Per-row last successful sync timestamp
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the last successful clock synchronization timestamp for each system in the register, using a
+  consistent date and time format.
+- Name the system or device clearly in each row to avoid ambiguity about which timestamp applies to which
+  asset.
+- Update the register after each successful synchronization event, ensuring no row is left blank or marked
+  as "unknown."
+- Retain the name of the person or automated process responsible for updating each timestamp, with the
+  most recent update date.

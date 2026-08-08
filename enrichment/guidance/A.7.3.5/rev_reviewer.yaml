@@ -1,0 +1,15 @@
+must_id: item:A.7.3.5:rev_reviewer
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Legal)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and job title, explicitly listing both the Data
+  Protection Officer and a Legal representative.
+- Record the date each reviewer completed their review on the objection program documentation.
+- Sign the review record physically or electronically to confirm each required reviewer’s participation.
+- Avoid listing only roles or teams as reviewers; ensure named individuals are clearly identified for
+  both DPO and Legal.

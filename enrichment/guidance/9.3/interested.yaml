@@ -1,0 +1,17 @@
+must_id: item:9.3:interested
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Feedback from interested parties
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Collect written feedback from interested parties, such as customers, suppliers, or regulators, and attach
+  it to the management review meeting materials.
+- Summarize the key points of feedback in the management review minutes, clearly identifying the source
+  and date of each item.
+- Name the individuals who presented or discussed the feedback during the meeting, recording their full
+  names and roles.
+- Avoid using generic references like "stakeholder feedback received" without specifying the actual parties
+  or providing supporting documentation.

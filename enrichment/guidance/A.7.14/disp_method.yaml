@@ -1,0 +1,18 @@
+must_id: item:A.7.14:disp_method
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Per-record method actually used (overwrite tool + verification, degauss, physical destruction
+  with witness)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact disposal method used for each equipment item, such as overwriting, degaussing, or physical
+  destruction, in the disposal log.
+- Document the name of the individual who performed the disposal and the date it occurred for each equipment
+  entry.
+- Attach verification evidence, such as a signed witness statement or tool-generated report, confirming
+  the disposal method was completed as recorded.
+- Specify the disposal method in detail for each record—avoid generic terms like "disposed" or "wiped"
+  that do not describe the actual process.

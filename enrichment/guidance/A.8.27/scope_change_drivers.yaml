@@ -1,0 +1,17 @@
+must_id: item:A.8.27:scope_change_drivers
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new engineering paradigm, new threat class)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific triggers that require re-scoping architecture principles, such as adoption of new technologies,
+  identification of new threat classes, or significant business changes.
+- Document the date each trigger was last reviewed and the person responsible for monitoring these triggers.
+- Name the owner as a specific individual accountable for maintaining and updating the trigger list, not
+  a team or department.
+- Record each instance when a trigger is activated and the resulting re-scoping decision, including the
+  date and decision-maker.
+- Review and update the trigger list annually, keeping a signed and dated record of each review.

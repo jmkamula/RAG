@@ -1,0 +1,18 @@
+must_id: item:B.8.4.1:reg_tenant_boundary_check
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+must_text: Tenant-boundary integrity check per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the unique tenant identifier for each row in the sweep register, ensuring it matches the originating
+  tenant’s assigned ID.
+- Document the date and time of each integrity check performed on every row, with the name of the individual
+  who completed the check.
+- Cross-reference each row’s tenant identifier with the official tenant directory to confirm no cross-tenant
+  data is present.
+- Name the responsible owner for the integrity check as a specific individual, not a team or generic role.
+- Retain signed evidence of periodic spot checks verifying that no row contains data outside its assigned
+  tenant boundary.

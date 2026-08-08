@@ -1,0 +1,19 @@
+must_id: item:A.7.3.9:proc_fee_policy
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Fee policy (jurisdictions permit fees for excessive/repetitive; document rules)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific circumstances under which a fee may be charged for subject requests, referencing
+  applicable jurisdictions and legal thresholds.
+- Document the exact fee amounts or calculation methods, including any caps or waivers required by law,
+  in the written procedure.
+- Name the individual responsible for approving fee assessments, ensuring this is a specific person and
+  not a generic role or team.
+- Record each instance when a fee is applied, including the requester’s name, date, justification, and
+  calculation details, in a dedicated log.
+- Attach a dated copy of the fee policy to the subject request handling procedure and review it annually
+  for legal updates.

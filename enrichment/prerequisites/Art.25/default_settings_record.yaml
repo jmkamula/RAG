@@ -1,0 +1,32 @@
+leaf_id: req:Art.25:default_settings_record
+control_ref: Art.25
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a current inventory of all processing activities to identify which systems process
+    personal data and to map their default settings. Without this, you can't confirm which systems require
+    privacy-by-default controls.
+  good_enough: A basic, up-to-date list of processing activities and systems handling personal data, even
+    if not fully detailed, is sufficient to start mapping default configurations.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity is essential to determine what data
+    is necessary for each specific purpose, which directly informs what should be set as the default.
+  good_enough: A summary table or mapping showing the lawful basis for each main processing activity is
+    enough to proceed, even if some edge cases are pending review.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which systems and processes are covered by your controls, ensuring
+    your privacy-default configuration record is complete and not missing key systems.
+  good_enough: A draft or working scope statement that lists the main business units, systems, and locations
+    covered by the ISMS is sufficient to identify relevant systems for privacy-by-default.

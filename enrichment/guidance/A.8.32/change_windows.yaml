@@ -1,0 +1,16 @@
+must_id: item:A.8.32:change_windows
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Defined change windows for non-emergency changes
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific days and times when non-emergency changes are permitted in the documented change
+  management procedure.
+- Name the person or role responsible for approving changes outside the defined change windows in the
+  procedure.
+- Record the date the change windows were last reviewed and updated in the procedure document.
+- Avoid describing change windows with vague terms like "regular hours" or "as needed"—use exact times
+  and days.

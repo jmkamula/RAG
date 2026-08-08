@@ -1,0 +1,17 @@
+must_id: item:A.8.34:scope_engagement_types
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Engagement types in scope (internal audit / third-party pen-test / regulator inspection / customer
+  security assessment)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all engagement types included in your audit testing scope, such as internal audits, third-party
+  penetration tests, regulator inspections, and customer security assessments.
+- Document the date each engagement type was last performed and the responsible individual or team for
+  each activity.
+- Attach supporting evidence, such as signed engagement letters or official communications, confirming
+  the inclusion of each engagement type in the scope.
+- Name the owner of the audit testing scope as a specific individual, not a generic role or department.

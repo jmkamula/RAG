@@ -1,0 +1,16 @@
+must_id: item:Art.29:reg_authority_source
+control_ref: Art.29
+standard_id: GDPR:2016/679
+must_text: Per-row source of authority (which DPA + which controller instructions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific Data Protection Authority (DPA) granting authority for each individual in the Personnel
+  Authorisation Register.
+- Record the exact controller instructions that apply to each authorised person, referencing dated documents
+  or written directives.
+- Cross-reference each register entry to the relevant contract or written agreement that details the controller’s
+  instructions.
+- State the full name of the authorised individual—do not use generic labels like "IT team" or "staff".

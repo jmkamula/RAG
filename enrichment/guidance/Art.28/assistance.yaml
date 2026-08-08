@@ -1,0 +1,19 @@
+must_id: item:Art.28:assistance
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Assistance with Art.32-36 obligations
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific section in the Data Processing Agreement that describes how the processor will assist
+  with Articles 32-36 obligations.
+- Document the types of assistance provided, such as support for data breach notifications, impact assessments,
+  and prior consultations with authorities.
+- State the contact person or role at the processor responsible for providing this assistance, including
+  their full name and contact details.
+- Cross-reference the DPA section with internal procedures or records showing a recent instance where
+  such assistance was requested and delivered.
+- Avoid using vague language like "reasonable assistance" without examples or details—specify concrete
+  actions and response timelines in the agreement.

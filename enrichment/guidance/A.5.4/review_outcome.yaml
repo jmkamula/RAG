@@ -1,0 +1,19 @@
+must_id: item:A.5.4:review_outcome
+control_ref: A.5.4
+standard_id: ISO27001:2022
+must_text: Outcome captured (no change / amended / re-issued) and policy-reference drift checked
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of the most recent management directive review, clearly stating whether
+  it was unchanged, amended, or re-issued.
+- Name the individual who conducted and approved the review, capturing their full name and job title in
+  the review record.
+- Cross-reference the reviewed directive against the current policy register to confirm all references
+  are up to date and consistent.
+- Attach or link the reviewed directive version in the review record, ensuring the version number and
+  date are visible.
+- Avoid using undated or generic review statements—capture specific review dates and outcomes for each
+  directive reviewed.

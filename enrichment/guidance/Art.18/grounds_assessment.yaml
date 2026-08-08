@@ -1,0 +1,17 @@
+must_id: item:Art.18:grounds_assessment
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Assessment of which Art.18.1 ground applies (a-d) recorded per request
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific Article 18.1 ground (a, b, c, or d) that applies to each restriction of processing
+  request in a dated log entry.
+- Name the staff member who assessed and determined the applicable ground for each request, ensuring a
+  real individual is listed.
+- Attach supporting evidence, such as correspondence or internal notes, that justifies why the selected
+  ground applies to the request.
+- Avoid using generic or boilerplate justifications—state the unique facts for each request that led to
+  the chosen ground.

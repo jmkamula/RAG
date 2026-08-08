@@ -1,0 +1,17 @@
+must_id: item:Art.25:scope_significant_change
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Definition of 'significant change' triggering re-design review
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define 'significant change' in a written policy, listing specific triggers such as new data types, new
+  processing purposes, or major system updates.
+- Document the approval of this definition by a named senior manager, including the approval date and
+  their signature.
+- Record examples of changes assessed against this definition in a change log, noting the decision and
+  rationale for each.
+- Name the policy owner as a specific individual, not a team or department, in the policy document.
+- Review and update the definition annually, recording the review date and the reviewer’s name.

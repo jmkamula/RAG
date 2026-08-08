@@ -1,0 +1,18 @@
+must_id: item:Art.37:applicability_assessment
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: Applicability assessment per Art.37.1 a-c criteria (public authority / core systematic monitoring
+  / core large-scale special category)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State whether your organisation is a public authority or body, and record the decision with the name
+  and date of the assessor.
+- Document if your main activities involve regular and systematic monitoring of individuals on a large
+  scale, citing specific business processes reviewed.
+- Record whether your main activities include large-scale processing of special categories of personal
+  data, listing relevant data types and processing volumes.
+- Name the person responsible for this assessment as a specific individual, not a team or department.
+- Retain a signed and dated copy of the completed applicability assessment for future reference.

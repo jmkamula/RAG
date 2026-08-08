@@ -1,0 +1,17 @@
+must_id: item:A.8.5:rev_date
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval (≤180 days)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent authentication program review date in a central log, including the name of the
+  reviewer and the date completed.
+- Confirm the next review is scheduled within 180 days of the last review date, and document this planned
+  date in the same log.
+- Attach a copy of the signed review report or meeting minutes as evidence of the review having taken
+  place.
+- Name the reviewer as a specific individual — do not use a group name or department as the responsible
+  party.

@@ -1,0 +1,19 @@
+must_id: item:Art.39:reg_sa_interactions
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Per-row SA interactions (consultations, inquiries handled)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each interaction with a supervisory authority in a dedicated row, including the date, topic,
+  and summary of the communication.
+- Name the DPO or designated staff member responsible for handling each supervisory authority interaction
+  in the register entry.
+- Attach or cross-reference supporting correspondence or documentation for each supervisory authority
+  consultation or inquiry handled.
+- Specify the outcome or resolution of each supervisory authority interaction, including any follow-up
+  actions or commitments made.
+- Enter the supervisory authority’s name and contact details for each row, avoiding generic labels like
+  "regulator" or "authority".

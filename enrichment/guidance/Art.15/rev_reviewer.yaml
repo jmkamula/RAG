@@ -1,0 +1,15 @@
+must_id: item:Art.15:rev_reviewer
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Reviewer identity and role (DPO, privacy lead, or delegated equivalent)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual, listing their full name and official role, such as Data
+  Protection Officer or privacy lead.
+- Record the date the periodic DSAR process review was completed in a review log or meeting minutes.
+- Document the reviewer’s decision or findings in a signed or digitally approved review record.
+- Attach evidence of the reviewer’s delegation if the role is fulfilled by an equivalent, such as a formal
+  letter or email of assignment.

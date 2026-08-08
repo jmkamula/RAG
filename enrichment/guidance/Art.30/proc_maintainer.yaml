@@ -1,0 +1,18 @@
+must_id: item:Art.30:proc_maintainer
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Named maintainer (DPO, privacy lead, or controller's designate) with documented responsibility
+  for register accuracy
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual, such as the DPO, privacy lead, or controller’s designate, as the maintainer
+  of the RoPA in the procedure document.
+- Document the maintainer’s responsibility for keeping the RoPA accurate and up to date, including a clear
+  description of their duties.
+- Record the maintainer’s full name, role, and contact details in the procedure, avoiding generic titles
+  like “the team” or “IT department.”
+- Obtain a dated signature from the named maintainer acknowledging acceptance of their responsibility
+  for RoPA accuracy.

@@ -1,0 +1,40 @@
+leaf_id: req:A.5.27:improvement_action_record
+control_ref: A.5.27
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.25
+  standard_id: ISO27001:2022
+  title: Lessons Learned Register
+  category: direct
+  rationale: You can't record improvement actions for lessons unless you have a register of lessons learned
+    from incidents, nonconformities, or other sources. This register is the source that triggers improvement
+    actions.
+  good_enough: A basic, up-to-date log of lessons learned exists, with enough detail to trace each lesson
+    to its source and status.
+- ref: A.5.26
+  standard_id: ISO27001:2022
+  title: Corrective Action Tracking
+  category: direct
+  rationale: Improvement actions are often a type of corrective action. You need a way to track and manage
+    these actions to ensure lessons are actually addressed and closed.
+  good_enough: A simple tracking mechanism (spreadsheet, ticketing system, or register) is in place to
+    assign, monitor, and close corrective actions.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope defines which parts of your organisation and which processes are covered by the
+    ISMS, so you know where improvement actions must be applied and evidenced.
+  good_enough: A clear, current scope statement exists, identifying the boundaries and applicability of
+    the ISMS.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: You need to know who is responsible for authorising, implementing, and closing improvement
+    actions, as this is part of the required record.
+  good_enough: Roles for managing and approving improvement actions are assigned and documented, even
+    if only at a basic level.

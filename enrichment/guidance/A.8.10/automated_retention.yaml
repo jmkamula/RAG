@@ -1,0 +1,19 @@
+must_id: item:A.8.10:automated_retention
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Automated retention enforcement where supported (TTL / lifecycle-policy / scheduled job)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the automated retention settings for each system, including time-to-live (TTL), lifecycle policies,
+  or scheduled deletion jobs, in a dated procedure.
+- Name the individual responsible for configuring and monitoring each automated deletion mechanism, listing
+  them by full name and job title.
+- Record evidence of the last successful automated deletion run for each system, including date, time,
+  and affected data types.
+- Cross-reference system logs or audit trails that show automated deletion events with the documented
+  retention schedule.
+- Specify the retention configuration for each system — avoid generic statements like "retention is automated"
+  without system-specific details.

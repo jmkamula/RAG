@@ -1,0 +1,18 @@
+must_id: item:A.7.2.4:scope_change_drivers
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Trigger list (new consent-basis activity launched)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all new activities that require consent for personal data processing, including a brief description
+  and launch date for each.
+- Document the legal or business reason for collecting consent for each activity, referencing relevant
+  laws or policies.
+- Assign a named individual responsible for maintaining and updating the consent records scope, ensuring
+  their contact details are included.
+- Record the date when the consent records scope was last reviewed and updated, and keep previous versions
+  for reference.
+- Name the owner as a specific person—do not use generic titles like "the team" or "IT department".

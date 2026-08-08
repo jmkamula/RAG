@@ -1,0 +1,14 @@
+must_id: item:Art.46:reg_transfer_id
+control_ref: Art.46
+standard_id: GDPR:2016/679
+must_text: Per-row transfer id (Art.44 register cross-ref)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique transfer ID to each data transfer entry in the Safeguards Register.
+- Cross-reference each transfer ID with the corresponding entry in the Article 44 transfer register.
+- Record the date each transfer ID is created and linked in both registers.
+- Name the person responsible for maintaining the transfer ID cross-references, ensuring it is not a generic
+  team or department.

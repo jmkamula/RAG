@@ -1,0 +1,18 @@
+must_id: item:A.5.36:sch_delta
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Scheduled-vs-completed delta tracked (so missed reviews surface)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all planned compliance review dates for the year in a central schedule, naming the responsible
+  individual for each review.
+- Record the actual completion date for each scheduled review, updating the schedule promptly after each
+  review occurs.
+- Track any missed or delayed reviews by highlighting scheduled dates without a matching completion date
+  in the schedule.
+- Name the owner as a specific individual — not a group or department — to avoid ambiguity in accountability.
+- Retain both the original schedule and the updated version showing completed and missed reviews for auditor
+  inspection.

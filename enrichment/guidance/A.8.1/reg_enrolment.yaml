@@ -1,0 +1,15 @@
+must_id: item:A.8.1:reg_enrolment
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Enrolment status (MDM-enrolled / not-required / pending) per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the enrolment status for each endpoint in the inventory register, using clear categories such
+  as "MDM-enrolled," "not-required," or "pending."
+- Name the individual responsible for updating and maintaining the enrolment status column in the register.
+- Date each entry or update to the enrolment status to provide a clear timeline of changes.
+- Avoid leaving the enrolment status field blank or using ambiguous terms like "unknown"—select a defined
+  status for every endpoint.

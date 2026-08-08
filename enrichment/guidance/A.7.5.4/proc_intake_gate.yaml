@@ -1,0 +1,16 @@
+must_id: item:A.7.5.4:proc_intake_gate
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Intake gate — disclosures gated on documented request record before release
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each PII disclosure request in a centralized log, including requester name, date, purpose,
+  and specific data requested.
+- Assign a named individual to review and approve each request before any PII is released.
+- Retain a copy of the documented request and approval decision with a date and signature or electronic
+  equivalent.
+- Name the approver as a specific person — do not use generic titles like "the team" or "management".
+- Cross-reference the released PII to its corresponding request record in the log to confirm proper gating.

@@ -1,0 +1,18 @@
+must_id: item:Art.35:subject_consultation
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Subject consultation considered (Art.35.9) — where appropriate, views of subjects/representatives
+  sought
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure how and when the views of data subjects or their representatives will be gathered
+  during the assessment process.
+- Record the method used for consultation, such as surveys, focus groups, or direct communication, and
+  keep a dated summary of feedback received.
+- Name the individual responsible for conducting and documenting the consultation, ensuring this is a
+  specific person rather than a team or department.
+- Document any reasons for not consulting data subjects, referencing the specific risk or impracticality,
+  and include this explanation in the assessment record.

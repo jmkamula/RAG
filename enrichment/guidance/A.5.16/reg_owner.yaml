@@ -1,0 +1,16 @@
+must_id: item:A.5.16:reg_owner
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Named owner per row (human owner accountable for THIS identity — even for service accounts,
+  must be a human)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner for each identity in the register, including service accounts,
+  avoiding group or team names.
+- Record the full name and contact details of each owner directly in the register for every identity entry.
+- Date each entry to show when the owner was assigned responsibility for the identity.
+- Review the register regularly and update owner assignments if individuals change roles or leave the
+  organization.

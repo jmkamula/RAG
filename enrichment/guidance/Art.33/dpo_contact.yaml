@@ -1,0 +1,17 @@
+must_id: item:Art.33:dpo_contact
+control_ref: Art.33
+standard_id: GDPR:2016/679
+must_text: Contact details of DPO or other contact point
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer or designated contact person by full name and job title in the breach
+  notification form.
+- Record the direct email address and telephone number for the named contact in the notification, not
+  just a generic helpdesk or group inbox.
+- Confirm the contact details are current and match those published in your privacy notice or internal
+  records.
+- Avoid using placeholders or leaving the contact field blank, as auditors will flag missing or incomplete
+  contact information.

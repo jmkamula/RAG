@@ -1,0 +1,40 @@
+leaf_id: req:Art.44:transfer_program_review
+control_ref: Art.44
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of all processing activities to identify which data transfers
+    are taking place, to whom, and under what conditions. Without this, you cannot meaningfully review
+    or verify transfer mechanisms.
+  good_enough: A current, reasonably complete RoPA that lists all relevant data transfers and recipients,
+    even if some minor details are pending update.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Each transfer must be linked to a lawful basis for processing. Reviewing transfer mechanisms
+    is only meaningful if you know the legal grounds for each transfer.
+  good_enough: Each transfer in scope has a documented lawful basis, even if some are flagged for further
+    review or clarification.
+- ref: Art.45
+  standard_id: GDPR:2016/679
+  title: Transfers on the basis of an adequacy decision
+  category: direct
+  rationale: You must know which transfers rely on adequacy decisions to confirm their validity during
+    the review. This is a direct input to the annual verification.
+  good_enough: A list of transfers relying on adequacy decisions, with reference to the relevant adequacy
+    status, even if some need confirmation.
+- ref: Art.46
+  standard_id: GDPR:2016/679
+  title: Transfers subject to appropriate safeguards
+  category: direct
+  rationale: Transfers using safeguards (like SCCs) require verification that those safeguards are in
+    place and up to date. This is essential for the review.
+  good_enough: A list of transfers using Art.46 mechanisms, with basic documentation of the safeguards
+    in place, even if some are pending detailed review.

@@ -1,0 +1,41 @@
+leaf_id: req:A.8.29:security_testing_procedure
+control_ref: A.8.29
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, applications, and environments are in-scope for security
+    testing before defining a procedure. This ensures the procedure covers all relevant assets and avoids
+    gaps.
+  good_enough: A documented scope statement that clearly lists the systems and environments covered by
+    the ISMS, even if not fully detailed, is sufficient to proceed.
+- ref: A.8.25
+  standard_id: ISO27001:2022
+  title: Secure development life cycle
+  category: direct
+  rationale: The secure development life cycle (SDLC) control sets the overall framework for how security
+    is integrated into development. Security testing is a key activity within the SDLC, so the SDLC process
+    must be defined first.
+  good_enough: A basic SDLC description that identifies key phases and includes security checkpoints is
+    enough to start drafting the testing procedure.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register is needed to identify which assets require security testing
+    and to ensure coverage. Without it, you risk missing critical components.
+  good_enough: A preliminary asset list that includes major applications and systems in development or
+    acceptance is sufficient to unblock drafting.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles is necessary so the procedure can specify who is responsible for
+    planning, executing, and reviewing security tests.
+  good_enough: A draft or working list of key roles (e.g., developers, testers, approvers) with basic
+    responsibilities outlined is enough to proceed.

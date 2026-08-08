@@ -1,0 +1,18 @@
+must_id: item:A.7.1:reg_barriers
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Barriers in place per row (specific barrier inventory — what walls, what doors, what mechanisms)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each physical site in the Perimeter Register, including full address and a unique site identifier
+  for traceability.
+- Record all perimeter barriers for each site, specifying type (e.g., wall, fence, security door), material,
+  and location within the register.
+- Name the responsible individual for maintaining each site's perimeter entry, avoiding generic roles
+  like "Facilities Team" or "Security Department".
+- Document the installation or last inspection date for each barrier, referencing supporting maintenance
+  or inspection records.
+- Attach or cross-reference site maps or diagrams that visually show the placement of all listed barriers.

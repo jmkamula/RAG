@@ -1,0 +1,18 @@
+must_id: item:A.7.3.8:scope_derived_data
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Derived/inferred data handling — original PII in scope; derived analytics + third-party enrichment
+  typically out of scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all original personal data sources included in your scope, naming each system or dataset and the
+  responsible data owner.
+- Document any derived analytics or third-party enriched data separately, clearly stating why each is
+  excluded from the scope.
+- Reference the EDPB Guidelines in your scope documentation to justify the inclusion or exclusion decisions.
+- Name the scope owner as a specific individual, not a group or department, with a dated sign-off on the
+  scope document.
+- Retain a version-controlled copy of the final scope document, showing all updates and approval dates.

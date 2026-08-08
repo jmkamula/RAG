@@ -1,0 +1,17 @@
+must_id: item:A.8.5:rev_reviewer
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Reviewer identity (IAM lead + InfoSec lead jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name both the IAM lead and the Information Security lead as joint reviewers in the authentication program
+  review record.
+- Record the full names, job titles, and signatures of both reviewers on the completed review document.
+- State the review completion date clearly on the document, ensuring it is not left blank or marked as
+  "ongoing."
+- Avoid listing a group or department as the reviewer; specify named individuals to meet accountability
+  requirements.
+- Retain the signed and dated review document in a location accessible for future audits.

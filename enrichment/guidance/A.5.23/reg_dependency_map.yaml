@@ -1,0 +1,19 @@
+must_id: item:A.5.23:reg_dependency_map
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Business-process dependency map (which processes depend on which service)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all business processes that rely on each cloud service in your Cloud Service Register, including
+  process names and a brief description.
+- Document the specific cloud service each business process depends on, referencing both the process and
+  the service by unique identifiers.
+- Assign a named process owner for each business process listed, ensuring the owner is a specific individual
+  and not a team or department.
+- Record the date when each dependency mapping was last reviewed or updated, and keep previous versions
+  for reference.
+- Cross-reference your dependency map with your business continuity plan to confirm all critical dependencies
+  are addressed.

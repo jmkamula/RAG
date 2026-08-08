@@ -1,0 +1,46 @@
+leaf_id: req:B.8.4.1:program_review
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, services, and tenants are in-scope for privacy controls before
+    you can meaningfully review processor temp file handling and isolation.
+  good_enough: A current, documented scope statement that clearly includes the processor environment and
+    relevant tenant boundaries.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You can't review temp file handling if you don't know which assets (systems, storage, temp
+    locations) are involved in processing personal data.
+  good_enough: A basic asset inventory listing all systems and storage locations where processor temp
+    files may reside.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures someone is accountable for running the annual review and
+    for maintaining tenant isolation controls.
+  good_enough: Documented role assignments showing who is responsible for processor temp file management
+    and review.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purpose for which temp files are created and processed to assess if current
+    controls and sweeps are appropriate and effective.
+  good_enough: A statement of purpose for temp file creation and handling, even if high-level, covering
+    all relevant processing activities.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: You need a way to identify which temp files contain personal data to prioritize review and
+    ensure proper tenant isolation.
+  good_enough: A simple classification scheme that flags temp files containing personal or sensitive data.

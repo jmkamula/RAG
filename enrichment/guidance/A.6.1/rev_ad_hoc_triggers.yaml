@@ -1,0 +1,18 @@
+must_id: item:A.6.1:rev_ad_hoc_triggers
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Ad-hoc review triggers listed (regulator enforcement action in sector, security incident involving
+  inadequately-screened personnel)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific ad-hoc review triggers in the screening program document, including regulator enforcement
+  actions and security incidents involving inadequately-screened personnel.
+- Document the date and details of the most recent ad-hoc review, including what triggered the review
+  and who conducted it.
+- Name the responsible individual who approves updates to the screening program after each ad-hoc review,
+  not just a department or team.
+- Retain evidence of communications or meeting minutes where ad-hoc review triggers and outcomes were
+  discussed and agreed upon.

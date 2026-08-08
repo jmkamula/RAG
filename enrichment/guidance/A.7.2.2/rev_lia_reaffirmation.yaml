@@ -1,0 +1,18 @@
+must_id: item:A.7.2.2:rev_lia_reaffirmation
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: LIA reaffirmation — sampled legitimate-interests activities reviewed against current subject-rights
+  context
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify each legitimate interest activity by name and describe its purpose in a dated review log.
+- Document the current subject rights context, including any changes in law, guidance, or internal policy
+  since the last review.
+- Record the outcome of a balancing test for each activity, stating whether the legitimate interest remains
+  valid or requires adjustment.
+- Name the reviewer as a specific individual and record the date of their assessment for each activity.
+- Attach supporting evidence for each review, such as meeting minutes or signed decisions, rather than
+  relying on verbal confirmation.

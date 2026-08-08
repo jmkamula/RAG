@@ -1,0 +1,18 @@
+must_id: item:A.8.18:removal_principle
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Removal-where-unneeded principle — utility programs removed from systems where not required
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific person responsible for identifying and removing unnecessary privileged utility programs
+  from each system.
+- Document a dated inventory listing all privileged utility programs present on each system, including
+  justification for those retained.
+- Record the removal actions taken for each unnecessary utility program, including the date and the person
+  who performed the removal.
+- Retain evidence of periodic reviews confirming that only required privileged utility programs remain
+  installed on each system.
+- Avoid listing the owner as "IT" or "the team"—assign responsibility to a named individual.

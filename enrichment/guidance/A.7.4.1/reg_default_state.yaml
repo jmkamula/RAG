@@ -1,0 +1,19 @@
+must_id: item:A.7.4.1:reg_default_state
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Default state per row (required / opt-in optional / opt-out optional)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each personal data collection field in the inventory, including a unique identifier and a clear
+  description of its purpose.
+- Record the default state for each field as "required," "opt-in optional," or "opt-out optional" in a
+  dedicated column.
+- State explicitly for each field whether it is disabled by default, referencing §7.4.1, and provide the
+  date this was last reviewed.
+- Name the decision-maker responsible for setting each field’s default state as a specific individual,
+  not a team or department.
+- Attach a screenshot or configuration export showing the actual default state for at least one field,
+  matching the inventory entry.

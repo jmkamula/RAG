@@ -1,0 +1,17 @@
+must_id: item:B.8.5.3:scope_audit
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+must_text: External audit disclosures
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all external audits relevant to personal data processing, including audit dates, scope, and auditors’
+  names, in a dated disclosure register.
+- Document the specific personal data processing activities and systems covered by each external audit
+  in the disclosure register.
+- Name the individual responsible for maintaining and updating the external audit disclosure register,
+  avoiding generic titles like "the team" or "IT".
+- Retain copies of all external audit reports and related correspondence as supporting evidence for each
+  entry in the disclosure register.

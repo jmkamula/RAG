@@ -1,0 +1,48 @@
+leaf_id: req:A.5.18:access_rights_procedure
+control_ref: A.5.18
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.15
+  standard_id: ISO27001:2022
+  title: Access Control Policy
+  category: direct
+  rationale: The access rights management procedure must implement the rules and principles defined in
+    the access control policy. Without an approved policy, there is no clear basis for provisioning, modifying,
+    or revoking access.
+  good_enough: A formally approved access control policy that defines access principles, roles, and rules
+    is available and accessible to the procedure author.
+- ref: A.5.16
+  standard_id: ISO27001:2022
+  title: Identity Management Procedure
+  category: direct
+  rationale: Access rights can only be managed for identities that are properly registered and maintained.
+    The identity management procedure ensures that every access right is linked to a valid, managed identity.
+  good_enough: A documented identity management procedure exists, covering creation, maintenance, and
+    removal of user identities relevant to access provisioning.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and Responsibilities
+  category: foundational
+  rationale: Clear operational roles and responsibilities are needed to assign authorisation and accountability
+    for granting, modifying, and revoking access rights.
+  good_enough: A current list of roles and their responsibilities for access management is documented
+    and available to the procedure drafter.
+- ref: A.5.3
+  standard_id: ISO27001:2022
+  title: Segregation of Duties
+  category: foundational
+  rationale: The procedure must respect segregation of duties requirements to prevent conflicts of interest
+    or fraud. The segregation matrix informs which combinations of access are prohibited.
+  good_enough: A segregation of duties matrix or equivalent documentation exists, highlighting incompatible
+    roles or access combinations relevant to access provisioning.
+- ref: A.6.5
+  standard_id: ISO27001:2022
+  title: Responsibilities after Termination or Change of Employment
+  category: direct
+  rationale: Access rights must be promptly revoked or adjusted when employment status changes. This control
+    ensures the procedure addresses post-employment access handling.
+  good_enough: A documented process or checklist exists for handling access changes following employment
+    termination or role change, even if not fully automated.

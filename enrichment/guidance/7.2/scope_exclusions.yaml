@@ -1,0 +1,16 @@
+must_id: item:7.2:scope_exclusions
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Out-of-scope roles stated explicitly (purely-administrative roles with no ISMS touchpoint)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all organisational roles in a table, including both ISMS-involved and purely administrative positions,
+  with clear role names and descriptions.
+- State explicitly which roles are out of ISMS scope, using a dedicated column or section labeled "Out-of-scope
+  Roles".
+- Name out-of-scope roles individually, avoiding vague groupings like "all admin staff" or "support functions".
+- Record the date and name of the person who approved the out-of-scope role list, ensuring traceability.
+- Retain the documented scope decision in your ISMS records repository for reference during audits.

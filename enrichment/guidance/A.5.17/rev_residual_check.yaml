@@ -1,0 +1,20 @@
+must_id: item:A.5.17:rev_residual_check
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Residual-access check per record (sessions invalidated, refresh tokens revoked, cached credentials
+  purged — not just the credential record disabled)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date, time, and method used to invalidate all active sessions linked to the revoked credential
+  in the revocation record.
+- Document the specific actions taken to revoke or delete all refresh tokens and cached credentials associated
+  with the user or service.
+- Name the person responsible for performing and verifying the residual-access check for each revocation
+  event, not just the system or a generic team.
+- Attach evidence, such as system logs or screenshots, showing successful completion of session invalidation
+  and token revocation steps for each case.
+- Confirm that no residual access remains by performing and recording a test login attempt or access check
+  after revocation is complete.

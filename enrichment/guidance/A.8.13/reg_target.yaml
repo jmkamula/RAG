@@ -1,0 +1,17 @@
+must_id: item:A.8.13:reg_target
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Per-test backup target tested (system / dataset / configuration)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each backup restore test with the specific system, dataset, or configuration targeted, including
+  test date and responsible person.
+- Document the outcome of each restore test, noting whether the backup was successfully restored to its
+  intended target.
+- Name the backup target in clear, specific terms—avoid vague labels like "production" or "main system"
+  that could apply to multiple assets.
+- Retain evidence of the restore process, such as screenshots, logs, or completion reports, attached to
+  each test entry in the register.

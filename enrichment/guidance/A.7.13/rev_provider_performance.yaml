@@ -1,0 +1,16 @@
+must_id: item:A.7.13:rev_provider_performance
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Provider performance review (SLA met / breaches / incident link)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for conducting provider performance reviews, avoiding generic
+  titles like "IT team" or "Procurement."
+- Document each provider's service level achievements and any breaches in a dated review record, referencing
+  the relevant SLA clauses.
+- Cross-reference any incidents linked to provider performance with your incident log, noting incident
+  IDs and resolution outcomes.
+- Record the date of each review and the reviewers' names to create a clear audit trail of periodic assessments.

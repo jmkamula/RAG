@@ -1,0 +1,19 @@
+must_id: item:A.8.5:rev_baseline_update
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Baseline / procedure updates published from findings
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the findings from the most recent authentication program review in a dated summary report,
+  including any identified gaps or improvement areas.
+- Update the authentication baseline or procedure documents to address each finding, referencing the specific
+  review report and date.
+- Publish the revised baseline or procedure documents to the relevant internal portal or document repository,
+  noting the update date and version.
+- Name the individual who approved the updates, ensuring the approver is a specific person and not a group
+  or department.
+- Retain the previous versions of baseline or procedure documents alongside the updated versions for audit
+  traceability.

@@ -1,0 +1,19 @@
+must_id: item:Art.33:scope_breach_definition
+control_ref: Art.33
+standard_id: GDPR:2016/679
+must_text: Operational definition of 'personal data breach' per Art.4(12) — breach of security leading
+  to accidental/unlawful destruction/loss/alteration/unauthorised disclosure/access
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the operational definition of 'personal data breach' in your incident response policy, using the
+  exact wording from Article 4(12).
+- Document examples of incidents that meet the definition, including accidental loss, destruction, alteration,
+  or unauthorised disclosure or access.
+- Name the individual responsible for determining if an incident qualifies as a personal data breach under
+  this definition.
+- Record the date the definition was last reviewed and approved by your data protection officer or equivalent
+  role.
+- Avoid using generic or vague definitions—reference only the specific criteria listed in Article 4(12).

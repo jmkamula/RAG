@@ -1,0 +1,17 @@
+must_id: item:A.5.11:rec_items_returned
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Itemised list of returned items per record (matched against the leaver's asset list from A.5.9)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Retrieve the leaver's assigned asset list from the asset register maintained under A.5.9, including
+  serial numbers and descriptions.
+- Document each returned item on a per-leaver asset return record, matching item details exactly with
+  the original asset list.
+- Record the return date and the condition of each item next to the corresponding asset entry on the return
+  record.
+- Name the verifier as a specific individual who checked the returned items, not a generic role or department.
+- Sign and date the completed asset return record by both the leaver and the verifier to confirm accuracy.

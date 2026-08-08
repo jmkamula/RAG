@@ -1,0 +1,16 @@
+must_id: item:A.5.11:owner
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Owner of the procedure (typically HR + IT joint with InfoSec sign-off authority)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual from HR and a specific individual from IT as joint owners of the Return of
+  Assets Procedure in the document header.
+- Document the date when the current owners accepted responsibility for the procedure in a revision history
+  table.
+- State the name and job title of the InfoSec authority who reviewed and signed off the procedure, including
+  the approval date.
+- Avoid listing the owner as a department or team; use named individuals with clear roles for traceability.

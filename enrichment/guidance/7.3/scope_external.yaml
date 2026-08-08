@@ -1,0 +1,18 @@
+must_id: item:7.3:scope_external
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: External-party coverage stated (auditors, embedded vendor staff, visiting researchers as relevant)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all groups who need security awareness training, including external parties such as auditors, embedded
+  vendor staff, and visiting researchers.
+- Document the criteria used to decide which external parties are included or excluded from the awareness
+  program.
+- Name the owner responsible for maintaining the awareness audience list as a specific individual, not
+  a team or department.
+- Record the date when the awareness audience scope was last reviewed and updated.
+- Attach evidence, such as signed agreements or onboarding checklists, showing external parties have been
+  informed of their awareness obligations.

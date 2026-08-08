@@ -1,0 +1,17 @@
+must_id: item:A.5.12:comm_date
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Date of publication/communication
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date when the classification scheme was first published or communicated in a dated
+  communication log or announcement.
+- Document the method used to communicate the classification scheme, such as email, intranet post, or
+  team meeting minutes.
+- Name the individual responsible for distributing the classification scheme, ensuring a specific person
+  is listed rather than a group or department.
+- Retain a copy of the communication or publication, including the date stamp, in your compliance documentation
+  repository.

@@ -1,0 +1,17 @@
+must_id: item:A.7.3:room_classification
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Classification of rooms (general, restricted, secure, high-security)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all office, room, and facility locations in a central register, including their physical addresses
+  and unique room identifiers.
+- Assign each room a classification level—general, restricted, secure, or high-security—based on documented
+  risk assessment criteria.
+- Name the classification decision-maker for each room as a specific individual, not a group or department.
+- Record the date each room’s classification was last reviewed or updated in the register.
+- Attach or link supporting evidence, such as floor plans or access control logs, to each room’s entry
+  in the register.

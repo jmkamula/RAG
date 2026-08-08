@@ -1,0 +1,19 @@
+must_id: item:A.7.13:reg_event_id
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Per-event unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each maintenance event at the time of logging, using a consistent numbering
+  or coding format.
+- Record the unique identifier alongside the event details, including date, time, location, and responsible
+  person, in the Maintenance Event Register.
+- Cross-reference the unique identifier in any related maintenance documentation, such as work orders,
+  approvals, or incident reports.
+- Confirm that no two maintenance events share the same identifier by periodically reviewing the register
+  for duplicates.
+- Avoid using generic or recycled identifiers; generate a new, specific identifier for each maintenance
+  event without exception.

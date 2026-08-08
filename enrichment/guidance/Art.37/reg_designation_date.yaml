@@ -1,0 +1,16 @@
+must_id: item:Art.37:reg_designation_date
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: Per-row designation date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each Data Protection Officer (DPO) is designated in a dedicated column for every
+  entry in the designation record.
+- Confirm that every row in the DPO designation record includes a completed designation date field, with
+  no blanks or placeholders.
+- Name the DPO designation date as a specific calendar date, not just a month, year, or general timeframe.
+- Review past entries to verify that no designation date is retroactively added without supporting documentation,
+  such as appointment letters or board minutes.

@@ -1,0 +1,20 @@
+must_id: item:A.5.24:ex_external_observer
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: External observer noted per record where an independent party (auditor, peer org, regulator)
+  attended (raises defensibility)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name and organisation of each external observer present for every exercise in the activation
+  record.
+- State the specific role or capacity in which each external observer attended, such as auditor, peer
+  organisation representative, or regulator.
+- Confirm the date and time of the observer's participation, matching this information to the exercise
+  schedule.
+- Obtain a signature or written acknowledgement from each external observer to verify their attendance
+  for the record.
+- Name each observer individually—do not use generic labels like "external party" or "auditor" without
+  identifying details.

@@ -1,0 +1,39 @@
+leaf_id: req:A.8.19:installation_program_review
+control_ref: A.8.19
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, locations, and assets are in-scope before you can review
+    installation programs or enforce allowlists. This ensures the review covers all relevant environments.
+  good_enough: A documented scope statement that clearly lists the boundaries and assets covered by the
+    ISMS, even if not fully detailed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register is essential to identify which devices and systems should be
+    included in the installation program review and allowlist enforcement.
+  good_enough: A working asset register that lists all major hardware and software assets in-scope, even
+    if some minor updates are pending.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures someone is accountable for maintaining allowlists, reviewing
+    installations, and responding to unauthorised software.
+  good_enough: Documented responsibilities for installation program management and review, even if job
+    descriptions are not fully formalised.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment helps prioritise which systems and installation programs need the most
+    scrutiny, guiding the focus of your periodic reviews.
+  good_enough: A recent risk assessment that identifies key risks related to unauthorised installations,
+    even if some lower-risk areas are still being analysed.

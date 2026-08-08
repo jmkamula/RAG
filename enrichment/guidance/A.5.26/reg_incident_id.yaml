@@ -1,0 +1,16 @@
+must_id: item:A.5.26:reg_incident_id
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Each incident captured with a unique identifier (links to A.5.25 triage decision)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each information security incident entry in the register, ensuring no
+  duplicates exist for any incident.
+- Record the triage decision reference from control A.5.25 alongside each incident, clearly linking both
+  records.
+- Name the person responsible for entering and updating each incident, using a specific individual's name
+  rather than a generic role or team.
+- Date each incident entry and any subsequent updates, maintaining a clear timeline of actions taken.

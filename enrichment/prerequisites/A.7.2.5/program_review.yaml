@@ -1,0 +1,46 @@
+leaf_id: req:A.7.2.5:program_review
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You can't review whether PIAs are complete and current unless you know the documented purposes
+    for processing personal data. This artefact defines the triggers for when a PIA is required.
+  good_enough: A current, approved list of processing purposes exists and is accessible to the review
+    team.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Each PIA must be linked to a lawful basis for processing. Without this, you can't verify
+    if PIAs are properly scoped or if consultation obligations apply.
+  good_enough: Each processing activity has a documented lawful basis, even if some are still under review.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope statement defines which parts of the organization and which processing activities
+    are covered by the ISMS and PIMS. Reviewing PIAs is only meaningful if you know what is in-scope.
+  good_enough: A current scope statement exists that clearly includes all relevant business units and
+    processing activities.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need an up-to-date asset register to identify all systems and data flows that may require
+    a PIA. Missing assets could mean missed PIAs.
+  good_enough: A basic asset register exists, listing key systems and data stores involved in personal
+    data processing.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that PIAs are completed, reviewed, and updated by the right
+    people. The annual review depends on knowing who is responsible.
+  good_enough: Roles for PIA ownership and review are assigned, even if some responsibilities are still
+    being clarified.

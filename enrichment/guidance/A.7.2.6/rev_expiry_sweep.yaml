@@ -1,0 +1,19 @@
+must_id: item:A.7.2.6:rev_expiry_sweep
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Expiry sweep — contracts approaching renewal flagged
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all processor contracts in a central register, including contract start dates, end dates, and
+  renewal terms.
+- Assign responsibility to a named individual for monitoring contract expiry and renewal dates in the
+  register.
+- Set up an automated alert or manual review process to flag contracts within 90 days of expiry, and record
+  the date each alert or review is triggered.
+- Record the outcome of each flagged contract review, including renewal, renegotiation, or termination
+  decisions, with the decision-maker’s name and date.
+- Name the contract monitoring owner as a specific person, not a group or department, to avoid ambiguity
+  in responsibility.

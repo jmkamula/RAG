@@ -1,0 +1,19 @@
+must_id: item:B.8.2.2:rev_technical_binding_audit
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: Technical binding audit — sampled tenant boundaries verified to enforce purpose limits
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the technical controls that enforce purpose limits for personal data processing in each tenant
+  boundary, such as access rules or data tagging.
+- Document a sample of tenant boundaries reviewed, including dates, scope, and the specific purposes enforced
+  by each technical control.
+- Record the results of a binding audit, showing evidence that sampled boundaries technically prevent
+  processing for unauthorized purposes.
+- Assign a named individual responsible for conducting and signing off on the audit, ensuring the record
+  is dated and attributable.
+- State the specific purposes configured in each system, avoiding generic or boilerplate descriptions
+  that do not match actual processing activities.

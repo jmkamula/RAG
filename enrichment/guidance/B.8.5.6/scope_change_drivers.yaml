@@ -1,0 +1,17 @@
+must_id: item:B.8.5.6:scope_change_drivers
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+must_text: Trigger list (new supplier onboarding / supplier scope change)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each new supplier onboarding or scope change in a central register, including the date and
+  a brief description of the trigger event.
+- Name the person responsible for reviewing subcontractor privacy scope for each entry, ensuring a specific
+  individual is listed rather than a team or department.
+- Record the outcome of each scope review, including any changes made or confirmation that no change is
+  needed, with the review date.
+- Retain supporting evidence, such as onboarding forms or change requests, linked to the corresponding
+  register entry for each supplier event.

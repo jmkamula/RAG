@@ -1,0 +1,14 @@
+must_id: item:4.3:version
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Version number and review date
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the current version number clearly at the top of the ISMS Scope Statement document.
+- Record the most recent review date in a visible location within the document.
+- Name the person responsible for reviewing and updating the scope statement, identifying them as an individual,
+  not a group or team.
+- Retain previous versions and review dates in a version history table within the document.

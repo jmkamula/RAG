@@ -1,0 +1,18 @@
+must_id: item:A.5.3:separation_method
+control_ref: A.5.3
+standard_id: ISO27001:2022
+must_text: Separation mechanism stated per pair (different people, different systems, four-eyes, time-bound
+  role swaps)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each critical task and its corresponding incompatible duties in a table, specifying the required
+  separation mechanism for every pair.
+- Name the responsible individual for maintaining and updating the matrix, avoiding generic roles like
+  "IT" or "the team".
+- Record the date of the latest review and approval of the matrix, including the approver’s full name
+  and signature.
+- Cross-reference each separation mechanism to supporting evidence, such as access logs, system controls,
+  or documented procedures.

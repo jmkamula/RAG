@@ -1,0 +1,19 @@
+must_id: item:A.5.17:reg_vault
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Storage vault per row (named secrets manager / KMS / cert store — never 'spreadsheet' or 'config
+  file' for production credentials)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each production credential in the register with its exact storage vault name, such as 'AWS Secrets
+  Manager' or 'Azure Key Vault'.
+- Specify the storage location for every credential as a managed vault or secrets manager, never as a
+  spreadsheet, config file, or generic location.
+- Name the owner responsible for each credential's storage as a specific individual, not a team or department.
+- Record the date when each credential was last verified in its storage vault, including the verifier's
+  name.
+- Attach evidence of vault access controls for each credential, such as a screenshot or export of permissions
+  settings.

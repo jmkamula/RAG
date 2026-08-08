@@ -1,0 +1,47 @@
+leaf_id: req:B.8.4.3:transmission_channel_inventory
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The inventory must only cover transmission channels relevant to the in-scope PII processing
+    activities. Without a clear scope statement, you risk omitting or over-including channels.
+  good_enough: A documented scope that clearly defines which business units, systems, and PII processing
+    activities are included in the ISMS and privacy extension.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need a current asset register to identify systems and endpoints involved in PII transmission.
+    This ensures the inventory is comprehensive and accurate.
+  good_enough: A basic, up-to-date list of information assets (systems, applications, endpoints) that
+    handle or transmit customer PII.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: Knowing which data is classified as PII is essential to filter and focus the inventory on
+    relevant transmission channels.
+  good_enough: A documented scheme that marks which data types are considered PII, even if not fully rolled
+    out to all assets yet.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purpose for processing customer PII to understand why and how it is transmitted,
+    which informs the inventory.
+  good_enough: A summary of processing purposes for customer PII, linked to major processing activities,
+    even if not yet mapped to every data flow.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: The lawful basis for processing may affect which transmission channels are permitted or restricted,
+    and must be considered in the inventory.
+  good_enough: A list of lawful bases for each major PII processing activity, sufficient to flag any special
+    restrictions or requirements.

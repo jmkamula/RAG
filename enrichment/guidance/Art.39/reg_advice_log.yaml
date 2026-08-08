@@ -1,0 +1,17 @@
+must_id: item:Art.39:reg_advice_log
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Per-row advice given log (informal queries + formal opinions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each advice request in the DPO Activity Register with the requestor’s name, date, and a brief
+  description of the query.
+- Document the advice given by the DPO, clearly distinguishing between informal guidance and formal written
+  opinions.
+- Attach or reference any supporting documents or correspondence related to each advice entry in the register.
+- Name the DPO providing the advice as a specific individual, not just as "the DPO team" or a generic
+  title.
+- Confirm that each register entry is dated and that no advice log is left undated or with missing context.

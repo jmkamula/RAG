@@ -1,0 +1,16 @@
+must_id: item:A.7.4.3:reg_root_cause
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: Root cause per row (where a systemic issue emerged, remediation link)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the root cause for each accuracy incident in the register, clearly describing any systemic issue
+  identified during investigation.
+- Link each systemic issue entry to a documented remediation action, referencing the corrective action
+  record or ticket number.
+- Name the individual responsible for investigating and documenting the root cause for each incident,
+  not just a team or department.
+- Enter the date when the root cause analysis and remediation link were completed for each incident row.

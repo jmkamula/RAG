@@ -1,0 +1,16 @@
+must_id: item:Art.30:proc_review_cadence
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Cadence for ad-hoc review when no specific trigger fires (e.g. quarterly sweep)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the fixed time interval for ad-hoc RoPA reviews in the procedure, such as "quarterly" or "every
+  six months," with a specific frequency.
+- Assign a named individual responsible for initiating each scheduled ad-hoc review, not a team or department.
+- Record each completed ad-hoc review in a dated log, referencing the procedure and noting any updates
+  or confirmations made.
+- Attach the most recent version of the RoPA Maintenance Procedure with a clear version number and last
+  review date.

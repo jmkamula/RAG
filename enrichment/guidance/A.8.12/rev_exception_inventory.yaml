@@ -1,0 +1,18 @@
+must_id: item:A.8.12:rev_exception_inventory
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Exception inventory re-confirmed / retired
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current data loss prevention (DLP) exceptions in a dated inventory, including the original
+  approval date and reason for each exception.
+- Assign a named individual to review each exception for continued relevance and risk, recording their
+  name and the review date.
+- Document a clear decision for each exception—either re-confirmed with justification or marked for retirement—with
+  supporting evidence or rationale.
+- Update the inventory to show the status of each exception as "active" or "retired," including the date
+  of status change.
+- Name the reviewer as a specific person—do not use generic roles or teams as the responsible party.

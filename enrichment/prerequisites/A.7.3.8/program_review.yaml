@@ -1,0 +1,45 @@
+leaf_id: req:A.7.3.8:program_review
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which systems, processes, and data are covered by the ISMS and
+    PIMS, ensuring the copy provision program review is relevant and complete.
+  good_enough: The scope must clearly include all environments and data types where copy provision obligations
+    apply, even if not fully detailed.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Understanding and documenting the purposes for processing personal data is essential to verify
+    that copy provision formats and restrictions align with stated purposes during the review.
+  good_enough: A current, accessible record of processing purposes for all relevant data sets is available.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register ensures all systems and data repositories subject to copy provision
+    are known and can be included in the review.
+  good_enough: The asset register lists all major data stores and processing systems relevant to personal
+    data, even if some minor assets are pending.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: Data classification is needed to confirm that only the correct (personal) data types are
+    included in copy provision, and scope-restriction is enforced during the review.
+  good_enough: There is a documented scheme that distinguishes personal data from other data, and it is
+    applied to key data sets.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for processing is necessary to determine eligibility and restrictions
+    for data copy provision, which must be checked in the program review.
+  good_enough: Lawful bases are documented for all major processing activities involving personal data.

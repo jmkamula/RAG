@@ -1,0 +1,16 @@
+must_id: item:A.5.28:reg_package_id
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Each evidence package captured with a unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each evidence package at the time of entry in the custody register.
+- Record the identifier alongside a brief description, date of capture, and responsible person for each
+  evidence package.
+- Cross-reference each identifier with any related incident, investigation, or case number in the register.
+- Confirm that no two evidence packages in the register share the same identifier by performing a periodic
+  review.
+- Name the owner of the register as a specific individual, not a generic role or team.

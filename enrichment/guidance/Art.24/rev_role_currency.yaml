@@ -1,0 +1,19 @@
+must_id: item:Art.24:rev_role_currency
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Role decisions current — no counterparty service-shape change unreflected in role decisions
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the most recent review date of all role decisions regarding controller or processor status
+  in a dated record.
+- Cross-reference each role decision to current service agreements or data flows to confirm no unreflected
+  changes in service shape.
+- Name the individual responsible for monitoring counterparty service changes and updating role decisions
+  as needed.
+- Attach evidence of communication with counterparties confirming no recent changes in service delivery
+  that would affect role status.
+- Avoid listing roles as "TBD" or using outdated agreements—update all role decisions to reflect the current
+  operational reality.

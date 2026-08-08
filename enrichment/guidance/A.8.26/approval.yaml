@@ -1,0 +1,18 @@
+must_id: item:A.8.26:approval
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Approval authority for requirements before development / procurement proceeds (InfoSec + business
+  sponsor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the approval authority for application security requirements as a specific individual from Information
+  Security and a named business sponsor.
+- Document the approval of security requirements with signatures and dates from both the Information Security
+  representative and the business sponsor before development or procurement begins.
+- Retain the signed approval record with the application project documentation for each new development
+  or procurement initiative.
+- State in the procedure that verbal or email-only approvals are not accepted; require formal, signed
+  documentation.

@@ -1,0 +1,18 @@
+must_id: item:A.8.33:rev_register_currency
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Register-currency check (active datasets all registered; retired datasets archived/deleted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for maintaining the dataset register, avoiding generic titles
+  like "IT" or "the team".
+- Document the date of the most recent review of the dataset register, showing when active and retired
+  datasets were last checked.
+- Cross-reference each active dataset in the register with current operational systems to confirm all
+  are listed and up to date.
+- Record the removal or archiving date for each retired dataset, including who approved the action.
+- Retain evidence of the periodic review, such as a signed checklist or meeting minutes, confirming the
+  register's accuracy.

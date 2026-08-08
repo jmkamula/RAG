@@ -1,0 +1,16 @@
+must_id: item:A.5.29:act_signoff
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Signoff per record (activation-authority + CISO; exec sponsor where tier-1 disruption)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the activation authority, CISO, and executive sponsor (for tier-1 disruptions) as specific individuals
+  on each Per-Activation Plan Record.
+- Obtain and record dated signatures from the activation authority and CISO on each plan record before
+  activation.
+- Secure an additional dated signature from the executive sponsor when the activation involves a tier-1
+  disruption.
+- Avoid using generic titles or group names; ensure all signoffs clearly identify individual people.

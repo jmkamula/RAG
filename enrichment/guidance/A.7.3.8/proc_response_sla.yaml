@@ -1,0 +1,19 @@
+must_id: item:A.7.3.8:proc_response_sla
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Response-time SLA stated + honoured
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the maximum number of days allowed to provide a copy of personal data to individuals in your documented
+  procedure.
+- Name the person responsible for tracking and fulfilling PII copy requests, listing their full name and
+  job title in the procedure.
+- Record each PII copy request and the response date in a log, ensuring the log is dated and regularly
+  updated.
+- Attach evidence of at least one completed request showing the response was provided within the stated
+  timeframe.
+- Specify the response-time commitment as a clear, fixed number of days—avoid vague terms like "as soon
+  as possible" or "reasonable time".

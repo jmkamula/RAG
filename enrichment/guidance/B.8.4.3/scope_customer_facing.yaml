@@ -1,0 +1,17 @@
+must_id: item:B.8.4.3:scope_customer_facing
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Customer-facing transmission (APIs + webhooks)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all APIs and webhooks that transmit customer data, including endpoint URLs and data types, in a
+  dated transmission inventory document.
+- Name the individual responsible for maintaining the transmission inventory, ensuring a specific person
+  is listed rather than a team or department.
+- Cross-reference each listed API and webhook with the relevant customer contracts or data processing
+  agreements to confirm authorized transmission scope.
+- Record the date of the most recent review of the transmission inventory and any changes made, keeping
+  previous versions for reference.

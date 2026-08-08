@@ -1,0 +1,15 @@
+must_id: item:A.8.11:scope_environments
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Non-production environment classes enumerated (dev / test / staging / training / demo / sandbox)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each non-production environment class in a table, including development, test, staging, training,
+  demo, and sandbox, with a brief description of its purpose.
+- Name the person responsible for maintaining the environment list, using their full name and job title.
+- Record the date the environment classes were last reviewed and updated in the table.
+- Avoid using generic terms like "other" or "miscellaneous" for environment classes; specify each environment
+  type explicitly.

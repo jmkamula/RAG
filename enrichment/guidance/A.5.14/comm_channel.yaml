@@ -1,0 +1,18 @@
+must_id: item:A.5.14:comm_channel
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Channel used (mandatory training module, intranet publication with notification, signature
+  campaign)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact channel used to communicate the Information Transfer Policy, such as "mandatory training
+  module" or "intranet publication with notification," in a dated log.
+- Name the specific individual responsible for initiating the policy communication, avoiding generic roles
+  like "the team" or "HR department."
+- Retain evidence of completion, such as attendance records, signed acknowledgements, or system logs showing
+  policy access by staff.
+- Document the date and method of any follow-up reminders or signature campaigns related to the policy
+  communication.

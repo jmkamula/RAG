@@ -1,0 +1,20 @@
+must_id: item:A.5.36:sch_change_triggers
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Ad-hoc change triggers documented (policy edit, regulator action, incident affecting a policy
+  area) — fires reviews outside the planned cadence
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific ad-hoc triggers such as policy changes, regulatory updates, or incidents in your compliance
+  review schedule with clear, concrete examples.
+- Document the process for initiating an out-of-cycle review, including who is responsible and how the
+  trigger is recognized and recorded.
+- Record each ad-hoc review decision with the date, the trigger event, and the named reviewer who authorized
+  the review.
+- Name the owner of the schedule as a specific individual, not a team or department, to avoid ambiguity
+  in accountability.
+- Retain evidence of completed ad-hoc reviews, such as meeting minutes or approval emails, linked to the
+  triggering event.

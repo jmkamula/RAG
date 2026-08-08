@@ -1,0 +1,19 @@
+must_id: item:Art.44:mechanism_selection
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Mechanism-selection decision tree (Art.45 adequacy first / Art.46 safeguards / Art.47 BCRs
+  / Art.49 derogation last resort)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step decision tree that clearly prioritises adequacy decisions under Article 45 before
+  considering other transfer mechanisms.
+- Record the names and roles of individuals responsible for applying each stage of the decision tree,
+  with dates of assignment.
+- Attach a sample completed decision tree showing an actual transfer scenario, including which mechanism
+  was selected and why.
+- State the legal basis used for each transfer, referencing the specific Article (45, 46, 47, or 49) and
+  supporting documentation.
+- Name the owner of the procedure as a specific individual, not a generic team or department.

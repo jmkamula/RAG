@@ -1,0 +1,15 @@
+must_id: item:B.8.4.3:rev_date
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the processor transmission program in a dated log entry.
+- Document the planned review interval for the processor transmission program in a policy or schedule.
+- Confirm the next scheduled review date falls within the documented planned interval.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Attach evidence of the completed review, such as meeting minutes or a signed checklist, to the program
+  documentation.

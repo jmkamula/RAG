@@ -1,0 +1,20 @@
+must_id: item:A.5.13:app_method
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Enablement method per record (sensitivity-label policy deployed / DLP rule wired / manual-tagging
+  training given)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the enablement method for each platform in the labelling application record, specifying if it
+  is policy-based, rule-driven, or manual training.
+- Name the individual responsible for configuring or delivering the enablement method for each platform,
+  including their full name and role.
+- State the deployment or training completion date for each enablement method, ensuring all entries are
+  current and not left blank.
+- Attach supporting documentation, such as screenshots of deployed policies, DLP rule configurations,
+  or training attendance logs, for each platform.
+- Avoid using vague descriptions like "automatic" or "manual" without further detail; specify the actual
+  mechanism or training provided.

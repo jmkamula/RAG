@@ -1,0 +1,17 @@
+must_id: item:7.2:scope_isms_roles
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: ISMS-team roles enumerated (CISO, ISMS Manager, InfoSec analyst, auditor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all roles that directly impact your Information Security Management System, including CISO, ISMS
+  Manager, Information Security Analyst, and internal auditor.
+- Name the owner of each ISMS-affecting role as a specific individual, not as a group, team, or generic
+  title.
+- Document the responsibilities for each listed role in a dated and version-controlled roles and responsibilities
+  matrix.
+- Cross-reference each role to the relevant ISMS processes or policies they influence within your documentation.
+- Review and update the roles scope document at least annually, recording the date and name of the reviewer.

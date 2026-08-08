@@ -1,0 +1,41 @@
+leaf_id: req:A.8.25:sdlc_program_review
+control_ref: A.8.25
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, teams, and projects are covered by your ISMS before you can
+    meaningfully review SDLC program effectiveness. Without a clear scope, you can't ensure all relevant
+    development activities are included.
+  good_enough: A documented and approved scope statement that clearly identifies which development activities
+    and assets are in-scope for the ISMS.
+- ref: A.8.30
+  standard_id: ISO27001:2022
+  title: Outsourced development
+  category: direct
+  rationale: If any development is outsourced, you must have controls in place to extend SDLC requirements
+    to suppliers. Otherwise, your SDLC review will miss critical risks and compliance gaps.
+  good_enough: A current list of outsourced development arrangements and documented controls or agreements
+    that address SDLC requirements for those suppliers.
+- ref: A.8.31
+  standard_id: ISO27001:2022
+  title: Separation of development, test and production environments
+  category: direct
+  rationale: You can't review SDLC effectiveness if development, test, and production environments aren't
+    properly separated. This separation is a baseline for safe software changes and lifecycle controls.
+  good_enough: Documented procedures and evidence showing that development, test, and production environments
+    are logically or physically separated.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of SDLC-related roles and responsibilities is needed to ensure accountability
+    during the program review. Without this, you can't verify who is responsible for lifecycle controls
+    or exceptions.
+  good_enough: A roles and responsibilities matrix or similar document that assigns SDLC and review duties
+    to specific individuals or teams.

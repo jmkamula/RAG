@@ -1,0 +1,19 @@
+must_id: item:A.5.25:automation
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Automation or playbook references for common event types
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List common security event types in your procedure, referencing specific examples such as phishing,
+  malware detection, or unauthorized access attempts.
+- Document the automated tools or scripts used for initial event triage, including their names and the
+  event types they address.
+- Attach or link to detailed playbooks for each common event type, ensuring each playbook has a version
+  number and last review date.
+- Name the person responsible for maintaining and updating automation scripts and playbooks, avoiding
+  generic titles or teams.
+- Record the date when automation or playbook references were last tested or validated for accuracy and
+  effectiveness.

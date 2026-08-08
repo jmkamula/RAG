@@ -1,0 +1,17 @@
+must_id: item:A.5.31:change_monitoring
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Source for change monitoring per entry (legal counsel, regulator alerts, industry feed)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the source used to monitor changes for each register entry, such as a named legal counsel, regulator
+  alert, or specific industry feed.
+- Document the date each source was last checked for updates, linking this date directly to the relevant
+  register entry.
+- Name the individual responsible for monitoring each entry’s source, avoiding generic roles like "the
+  team" or "compliance department".
+- Attach or reference evidence of the latest update or alert received from each source, such as an email
+  notification or newsletter copy.

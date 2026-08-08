@@ -1,0 +1,31 @@
+leaf_id: req:A.5.4:management_responsibilities
+control_ref: A.5.4
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The management directive must clearly apply to the defined scope of the ISMS. Without a finalized
+    scope, management cannot credibly mandate compliance or ensure all relevant personnel are covered.
+  good_enough: A documented and approved ISMS scope statement that identifies the organizational boundaries
+    and applicability of the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: Management can only direct personnel to comply with information security if there is an established
+    policy framework. The directive references and enforces this policy.
+  good_enough: A published, approved information security policy that sets out the organization's high-level
+    intentions and direction.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Information security roles and responsibilities
+  category: direct
+  rationale: Roles and responsibilities must be defined before management can require personnel to comply.
+    The directive enforces these assignments.
+  good_enough: A documented assignment of information security roles and responsibilities, even if not
+    yet fully communicated to all staff.

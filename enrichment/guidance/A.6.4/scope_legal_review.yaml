@@ -1,0 +1,20 @@
+must_id: item:A.6.4:scope_legal_review
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Legal review path stated (when local employment counsel must be engaged before action — typically
+  all dismissal cases + suspension cases over X days)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific situations that require local employment counsel involvement, such as all dismissals
+  and suspensions exceeding a set number of days, in a written policy.
+- Name the decision-maker responsible for determining when legal review is triggered, listing a specific
+  individual rather than a group or department.
+- Record the date of the most recent legal review of this policy, including the name of the reviewing
+  counsel or firm.
+- Cross-reference the policy section that outlines the legal review path in your jurisdictions and worker
+  categories scope document.
+- State the escalation process for exceptions, ensuring it includes a requirement for written approval
+  by a named senior manager.

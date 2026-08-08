@@ -1,0 +1,18 @@
+must_id: item:A.8.23:reg_top_blockers
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: Top-blocked-sites view (signal for category-tuning opportunity)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Generate a monthly report listing the top-blocked websites by count, including site names, categories,
+  and dates of attempted access.
+- Document the rationale for each site's category assignment in the register, referencing the source or
+  policy that defines the category.
+- Assign a named individual to review the top-blocked-sites report each month, recording their name and
+  review date in the register.
+- Record any category-tuning actions taken as a result of the review, including the decision, date, and
+  person responsible.
+- Name the reviewer as a specific person, not a group or generic title, to avoid ambiguity in accountability.

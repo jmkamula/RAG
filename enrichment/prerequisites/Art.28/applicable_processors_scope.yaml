@@ -1,0 +1,43 @@
+leaf_id: req:Art.28:applicable_processors_scope
+control_ref: Art.28
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date inventory of all processing activities to identify which ones
+    involve external parties and may require processor relationships under Art.28. Without this, you can't
+    reliably determine the scope of applicable processors.
+  good_enough: A draft or working list of processing activities that includes data flows and external
+    parties is sufficient to start defining processor scope.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity helps distinguish between controller,
+    joint controller, and processor roles. This clarity is essential for determining which relationships
+    fall under Art.28.
+  good_enough: A mapping of lawful bases to processing activities, even if not fully finalized, is enough
+    to support initial processor scope decisions.
+- ref: Art.26
+  standard_id: GDPR:2016/679
+  title: Joint Controllers
+  category: direct
+  rationale: You must distinguish between joint controller arrangements (Art.26) and processor relationships
+    (Art.28) to avoid misclassifying third parties. This distinction directly affects the definition of
+    your processor scope.
+  good_enough: A basic decision tree or documented criteria for differentiating joint controllers from
+    processors is sufficient to proceed.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which business units, processes, and systems are in play, helping
+    you identify where processor relationships might exist. If your ISMS scope is unclear, you risk missing
+    relevant processors.
+  good_enough: A draft ISMS scope that covers the main business areas and data flows is enough to inform
+    processor scoping.

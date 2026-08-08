@@ -1,0 +1,20 @@
+must_id: item:A.7.1:logical_integration
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Integration with logical access (which logical privileges require entry to which perimeter
+  — cross-link to A.5.18 access rights)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each physical security perimeter in your policy with the specific logical access privileges
+  required for entry, listing both by name.
+- Document the mapping between physical entry points and corresponding logical access rights in a dated
+  appendix or register.
+- State the decision-maker who approved each physical-logical access mapping, naming a specific individual
+  and including their approval date.
+- Name the owner of the mapping as a specific person, not a team or department, and record their contact
+  details in the policy.
+- Review and update the mapping whenever access rights change, recording the date and the person responsible
+  for each update.

@@ -1,0 +1,18 @@
+must_id: item:A.6.1:decision_authority
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Decision authority named (who accepts or rejects screening outcomes — typically Hiring Manager
+  + HR + InfoSec for sensitive roles)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the decision authority for screening outcomes as specific individuals by role, such as Hiring Manager,
+  HR Manager, and Information Security Lead.
+- Document the acceptance or rejection decision for each candidate in a dated record, signed or acknowledged
+  by the named authority.
+- State the escalation process for disputed screening outcomes, including who is responsible for final
+  resolution and how this is recorded.
+- Avoid listing generic groups like "the team" or "HR department" as decision-makers; use named roles
+  or individuals only.

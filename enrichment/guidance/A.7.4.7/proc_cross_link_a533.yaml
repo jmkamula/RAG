@@ -1,0 +1,20 @@
+must_id: item:A.7.4.7:proc_cross_link_a533
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Cross-link to A.5.33 records retention (records-programme) — retention schedules coherent across
+  the two frames
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference your PII Retention Procedure to the organisation-wide records retention schedule defined
+  under A.5.33, citing the exact document name and version.
+- Document how retention periods for PII align with those in the records retention programme, listing
+  any differences and justifying them with business or legal reasons.
+- Name the individual responsible for maintaining coherence between the PII retention schedule and the
+  records retention programme, including their job title.
+- Attach the latest approved version of both the PII Retention Procedure and the records retention schedule,
+  ensuring both are dated and not marked as "draft."
+- Avoid referencing generic or outdated retention schedules; always link to the current, organisation-specific
+  records retention programme.

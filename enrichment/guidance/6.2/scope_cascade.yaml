@@ -1,0 +1,19 @@
+must_id: item:6.2:scope_cascade
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: Cascade rules (how org objectives cascade into BU/function objectives)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific business units and functions included in the scope, listing them individually rather
+  than using generic terms like "all teams."
+- Document how each organisational objective is broken down into measurable objectives for each relevant
+  business unit or function, with clear links between them.
+- Record the date and author of the document that maps organisational objectives to business unit or function
+  objectives.
+- Cross-reference the mapping document with the latest version of the organisation’s objectives to confirm
+  alignment and coherence.
+- State any exclusions or exceptions explicitly, providing reasons and approval by a named accountable
+  individual.

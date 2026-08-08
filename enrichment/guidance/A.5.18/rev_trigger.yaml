@@ -1,0 +1,20 @@
+must_id: item:A.5.18:rev_trigger
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Revocation trigger captured (termination / role change / contract end / explicit revoke / incident-driven
+  / temporary-expiry / orphan-cleanup)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific trigger for each access revocation, using one of the approved categories such as
+  termination, role change, or incident-driven.
+- Document the date and time the revocation was initiated, along with the name of the person who requested
+  the action.
+- Name the individual who approved the revocation, ensuring this is a specific person and not a generic
+  role or team.
+- Cross-reference each revocation entry with supporting evidence, such as a termination letter, contract
+  end notice, or incident report.
+- Avoid using vague or catch-all reasons like "other" or "N/A" as the trigger; always select or describe
+  a clear, auditable cause.

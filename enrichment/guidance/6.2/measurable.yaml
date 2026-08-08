@@ -1,0 +1,19 @@
+must_id: item:6.2:measurable
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: Per-objective KPI defined where practicable
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each information security objective in the register, using clear language that directly relates
+  to your organisation’s actual risks and needs.
+- Define a measurable key performance indicator (KPI) for each objective where it is practical to do so,
+  specifying exact metrics or targets.
+- Record the name of the individual responsible for tracking each KPI, avoiding generic labels such as
+  "IT" or "the team".
+- Enter the date each KPI was last reviewed or updated, ensuring the register reflects current practices
+  and targets.
+- Attach supporting evidence, such as monitoring reports or dashboard screenshots, that demonstrate the
+  KPI is being tracked in practice.

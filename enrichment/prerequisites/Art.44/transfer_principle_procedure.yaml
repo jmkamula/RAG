@@ -1,0 +1,47 @@
+leaf_id: req:Art.44:transfer_principle_procedure
+control_ref: Art.44
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a current, accurate record of processing activities to identify which data flows
+    involve transfers to third countries or international organisations. Without this, you cannot reliably
+    scope or apply the transfer procedure.
+  good_enough: A documented RoPA that lists all processing activities and flags those involving international
+    transfers, even if some details are pending.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Before transferring data, you must confirm that each processing activity (including transfers)
+    has a lawful basis. This ensures that the transfer procedure is only applied to legitimate data flows.
+  good_enough: Each processing activity in scope for transfer has a recorded lawful basis; this can be
+    a simple mapping or register.
+- ref: Art.45
+  standard_id: GDPR:2016/679
+  title: Transfers on the Basis of Adequacy
+  category: direct
+  rationale: To draft a transfer procedure, you must understand when adequacy decisions apply, as this
+    is the first mechanism to consider for lawful transfers under Art.44.
+  good_enough: A list or summary of current adequacy decisions and a way to check if a destination country
+    qualifies.
+- ref: Art.46
+  standard_id: GDPR:2016/679
+  title: Appropriate Safeguards for Transfers
+  category: direct
+  rationale: If no adequacy decision exists, you need to know which safeguards (like SCCs or BCRs) are
+    available and how to apply them. The procedure must reference these mechanisms.
+  good_enough: A summary of available safeguards and template clauses or agreements for use in transfers.
+- ref: Art.49
+  standard_id: GDPR:2016/679
+  title: Derogations for Specific Situations
+  category: direct
+  rationale: Your procedure must cover exceptional cases where neither adequacy nor safeguards are available,
+    relying on Art.49 derogations.
+  good_enough: A checklist or guidance on when and how to use Art.49 derogations, even if detailed case
+    studies are not yet drafted.

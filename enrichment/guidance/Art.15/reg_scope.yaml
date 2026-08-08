@@ -1,0 +1,19 @@
+must_id: item:Art.15:reg_scope
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Scope of the request as understood (full Art.15 / specific data set / repeat copy)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact scope of each data subject access request as described by the requester in the DSAR
+  Register, including any limitations or specific data sets.
+- Confirm whether the request is for the full Article 15 data set or a specific subset, and document this
+  distinction in the register entry.
+- Name the staff member who clarified and agreed the scope with the requester, and record the date of
+  this communication in the register.
+- Attach a copy of any written correspondence with the requester that confirms the agreed scope to the
+  relevant DSAR Register entry.
+- Avoid using vague descriptions like "all data" or "usual request"—specify the data types or systems
+  covered in each case.

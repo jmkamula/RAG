@@ -1,0 +1,15 @@
+must_id: item:A.5.24:rev_next_date
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Next planned review date stated (within 180d of this review)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Incident Management Framework in the review record, ensuring
+  it is within 180 days of the current review.
+- Record the name of the individual responsible for scheduling the next review, not just a team or department.
+- Confirm the review record is dated and signed by the person conducting the current review.
+- Cross-reference the review record in your document management system so the next review date is easily
+  traceable.

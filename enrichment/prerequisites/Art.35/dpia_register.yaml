@@ -1,0 +1,31 @@
+leaf_id: req:Art.35:dpia_register
+control_ref: Art.35
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of all processing activities to identify which ones may
+    require a DPIA. Without this, you can't reliably determine the scope or necessity of DPIAs.
+  good_enough: A current, reasonably complete RoPA exists, listing all major processing activities and
+    their purposes.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity is essential to assess risk and necessity
+    in a DPIA. It helps determine if processing is high risk or exceptional.
+  good_enough: Each processing activity in the RoPA has a documented lawful basis, even if some are provisional
+    or under review.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated DPO (or documented rationale for not having one) is required to oversee DPIA
+    processes and provide advice, as referenced in Art.35(2).
+  good_enough: A DPO is formally appointed and contactable, or a written justification exists for not
+    appointing one.

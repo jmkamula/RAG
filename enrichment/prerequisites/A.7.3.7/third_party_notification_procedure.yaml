@@ -1,0 +1,41 @@
+leaf_id: req:A.7.3.7:third_party_notification_procedure
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Knowing the specific purposes for processing PII is essential to determine when and why third
+    parties must be notified about changes in consent or data subject requests. This clarity ensures notifications
+    are relevant and accurate.
+  good_enough: A documented list of processing purposes for all PII shared with third parties exists and
+    is up to date.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: The lawful basis for processing (e.g., consent, contract, legal obligation) directly impacts
+    when third-party notifications are required, especially for consent withdrawal or objection scenarios.
+  good_enough: Each processing activity involving third-party PII sharing has an identified and recorded
+    lawful basis.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is needed to identify which third parties receive PII, so notifications
+    can be targeted and complete when data subject rights are exercised.
+  good_enough: A current inventory of third-party recipients of PII is available, even if not fully detailed,
+    covering all major data flows.
+- ref: Art.19
+  standard_id: GDPR:2016/679
+  title: Notification Obligation Regarding Rectification or Erasure of Personal Data or Restriction of
+    Processing
+  category: cross_role
+  rationale: This GDPR article sets the legal expectation for notifying third parties when data subject
+    rights are exercised, serving as the compliance benchmark for the procedure.
+  good_enough: A summary understanding of Art.19 requirements is documented, even if a full legal analysis
+    is pending.

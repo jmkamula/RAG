@@ -1,0 +1,17 @@
+must_id: item:A.8.34:meta_audit
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Audit-of-the-audit logs (record of testing activities for accountability of testers themselves)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each audit test performed by recording the date, time, tester's full name, and purpose in a
+  dedicated audit-of-the-audit log.
+- Record any changes or access to sensitive systems during audit testing, including the method used and
+  the outcome, in the same log.
+- Assign responsibility for maintaining the audit-of-the-audit log to a named individual, not a generic
+  role or team.
+- Retain signed or digitally authenticated entries to confirm that testers acknowledge their recorded
+  activities.

@@ -1,0 +1,17 @@
+must_id: item:A.8.29:acceptance
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Acceptance criteria (severity thresholds that block release; documented exception authority)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific severity levels of security findings that will block release in the procedure, using
+  clear language and defined thresholds.
+- Name the individual or role authorized to approve exceptions to acceptance criteria, avoiding vague
+  terms like "the team" or "management".
+- Document the process for recording and approving exceptions, including required signatures and dates
+  for each exception granted.
+- Cross-reference the acceptance criteria in the procedure with recent release records to show they were
+  applied before deployment.

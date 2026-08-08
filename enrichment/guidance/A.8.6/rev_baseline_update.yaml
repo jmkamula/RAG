@@ -1,0 +1,17 @@
+must_id: item:A.8.6:rev_baseline_update
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Baseline / threshold updates published from findings
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the most recent capacity review findings in a dated report, clearly highlighting any recommended
+  baseline or threshold changes.
+- Name the person responsible for approving baseline or threshold updates following each review, ensuring
+  this is a specific individual, not a team.
+- Publish the updated baselines or thresholds in the official system or register, including the update
+  date and reference to the review findings.
+- Retain evidence of communication sent to relevant stakeholders notifying them of the new baselines or
+  thresholds and the effective date.

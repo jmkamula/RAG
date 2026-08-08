@@ -1,0 +1,17 @@
+must_id: item:A.5.25:log_trend_tag
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: Trend / correlation tag where related events should be grouped
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique correlation or trend tag to each group of related security events in the triage log,
+  referencing the underlying pattern or incident.
+- Record the date and name of the person who applied each correlation tag, ensuring traceability for grouped
+  events.
+- Document the criteria or rationale used to determine event relationships in a dedicated field within
+  the triage log.
+- Name the owner of the triage log as a specific individual, not a team or department, to avoid ambiguity
+  in responsibility.

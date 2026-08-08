@@ -1,0 +1,19 @@
+must_id: item:A.5.24:reg_backup_named
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Backup named per row (no single-person roles; rotation continuity guaranteed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each Incident Response Team member in the register with their full name and primary role, ensuring
+  no role is assigned to only one person.
+- Assign a named backup for every primary team member in a separate column, confirming each backup is
+  a specific individual.
+- Record rotation schedules and coverage periods for both primary and backup roles, including start and
+  end dates for each assignment.
+- State the process for updating the register when team members or backups change, and log the date of
+  the most recent update.
+- Avoid using generic labels like "IT team" or "Security group"—enter only named individuals for both
+  primary and backup roles.

@@ -1,0 +1,19 @@
+must_id: item:A.7.3.6:proc_erasure_flow
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: Erasure flow — including retention-limit + legal-obligation exceptions
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the erasure request workflow, including each step from receipt to completion, in a dated procedure
+  approved by a named data protection officer.
+- State the specific data retention limits that apply before erasure is permitted, referencing the relevant
+  policy section and legal basis.
+- Record all legal or regulatory exceptions that prevent erasure, citing the exact laws or obligations
+  for each exception.
+- Name the decision-maker responsible for approving or denying erasure requests as a specific individual,
+  not a team or department.
+- Retain a log of all erasure requests, including request date, outcome, and justification for any exceptions
+  applied.

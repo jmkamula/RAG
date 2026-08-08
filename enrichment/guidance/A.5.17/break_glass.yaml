@@ -1,0 +1,19 @@
+must_id: item:A.5.17:break_glass
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Break-glass credentials documented separately (emergency-only accounts with sealed-envelope
+  or vault-with-audit access)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all break-glass credentials in a separate, access-controlled file or vault, listing account
+  names, purpose, and creation dates.
+- Assign a named individual as the custodian responsible for maintaining and updating the break-glass
+  credential documentation.
+- Record each instance of break-glass credential access in an audit log, including the date, time, reason,
+  and person accessing.
+- State the storage method for break-glass credentials, such as sealed envelope or digital vault, and
+  include evidence of periodic integrity checks.
+- Name the custodian as a specific person, not a group or department, to avoid ambiguity in responsibility.

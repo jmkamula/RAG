@@ -1,0 +1,18 @@
+must_id: item:9.2:scope_cycle_length
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Audit cycle length stated (typically 3 years for full ISMS coverage)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the full audit cycle length in years and months within the Audit Cycle Coverage Note, referencing
+  the start and end dates.
+- Document the planned intervals for each audit within the cycle, listing specific months or quarters
+  for scheduled reviews.
+- Name the person responsible for maintaining and updating the audit cycle schedule, using their full
+  name and job title.
+- Record the approval date and approver’s signature for the current audit cycle coverage note.
+- Specify the audit cycle length explicitly — avoid vague terms like "regularly" or "ongoing" that lack
+  a clear timeframe.

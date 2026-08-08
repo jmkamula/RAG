@@ -1,0 +1,15 @@
+must_id: item:A.7.14:disp_certificate
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Per-record certificate of destruction (where externally destroyed) or witness signature (where
+  internally destroyed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the serial number and asset tag of each equipment item being disposed of on the disposal record.
+- Attach a dated certificate of destruction from the external provider for each item destroyed offsite.
+- Obtain a legible witness signature and printed name on the record for each item destroyed internally.
+- Name the responsible individual overseeing each disposal event, not just a department or generic title.
+- Retain all disposal records and supporting evidence in a central, easily retrievable location.

@@ -1,0 +1,18 @@
+must_id: item:Art.42:scope_change_drivers
+control_ref: Art.42
+standard_id: GDPR:2016/679
+must_text: Trigger list (new approved scheme, sectoral pressure)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and details of each trigger event, such as a new approved certification scheme or
+  sectoral pressure, in a central log.
+- Name the person responsible for monitoring and recording trigger events related to certification scope
+  updates.
+- Record the decision to review or update the certification scope in response to each trigger, including
+  the date and names of decision-makers.
+- Attach supporting evidence, such as announcements of new schemes or sectoral communications, to the
+  trigger event entry.
+- Specify the certification scope owner as a named individual, not a team or department.

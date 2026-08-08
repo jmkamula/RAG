@@ -1,0 +1,19 @@
+must_id: item:A.7.2.7:scope_arrangements_list
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: In-scope arrangements enumerated (or 'none' with rationale)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current joint controller arrangements with named organisations, including a brief description
+  of each relationship and its purpose.
+- Document the criteria used to determine whether a relationship qualifies as a joint controller arrangement
+  under applicable privacy laws.
+- State "none" explicitly and provide a dated rationale if no joint controller arrangements exist, referencing
+  your assessment criteria.
+- Name the person responsible for maintaining and updating the list, ensuring this is a specific individual
+  rather than a team or department.
+- Retain dated records of periodic reviews of the scope to demonstrate that the list remains current and
+  accurate.

@@ -1,0 +1,17 @@
+must_id: item:B.8.5.4:scope_change_drivers
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+must_text: Trigger list (new jurisdiction / new regulatory framework)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a trigger list that specifies when to update the legally-binding request scope, including entry
+  into new jurisdictions or regulatory frameworks.
+- Name a specific individual responsible for monitoring changes in jurisdictions or regulations, avoiding
+  generic roles like "the team" or "compliance department."
+- Record each review of the trigger list with the date and the reviewer’s name to show regular assessment
+  of its relevance.
+- Cross-reference the trigger list in your data protection policy or register so auditors can easily verify
+  its existence and use.

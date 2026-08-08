@@ -1,0 +1,19 @@
+must_id: item:A.5.22:rev_continuity
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Supplier continuity capability verified (link to A.5.29 / A.5.30)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and list each supplier whose continuity capabilities must be verified, referencing the relevant
+  contract or service agreement.
+- Document the date, method, and results of each supplier continuity capability review in a dedicated
+  record, such as a supplier risk register.
+- Name the responsible individual who conducted and approved the continuity verification for each supplier,
+  avoiding generic roles like "the team" or "IT."
+- Cross-reference each review record with supporting evidence, such as test results, certifications, or
+  supplier-provided continuity plans.
+- Record any follow-up actions or remediation required, including deadlines and the person assigned to
+  track completion.

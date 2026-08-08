@@ -1,0 +1,17 @@
+must_id: item:Art.34:scope_change_drivers
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: Trigger list (new high-impact processing line, threat-landscape shift)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all activities or processing lines that could trigger Article 34 notification, such as new high-impact
+  data uses or significant threat changes, in a dated document.
+- Document each review of the trigger list, including the date, the reviewer’s name, and any updates made.
+- State the specific criteria used to decide if a processing activity falls within Article 34 scope, with
+  examples relevant to your organisation.
+- Name the person responsible for maintaining and updating the trigger list as a specific individual,
+  not a department or team.
+- Retain records of past trigger list versions to show how scope decisions have changed over time.

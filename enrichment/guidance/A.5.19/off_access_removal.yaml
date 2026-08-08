@@ -1,0 +1,17 @@
+must_id: item:A.5.19:off_access_removal
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Logical and physical access removal evidence (link to A.5.18 / A.7.2)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time when each supplier’s logical and physical access was removed in a dedicated
+  offboarding log.
+- Name the specific individual responsible for confirming access removal for each supplier, not just a
+  team or department.
+- Cross-reference each access removal entry with supporting evidence, such as screenshots of revoked accounts
+  or badge deactivation records.
+- Document the completion of access removal by obtaining a signed confirmation from the responsible individual
+  for each offboarded supplier.

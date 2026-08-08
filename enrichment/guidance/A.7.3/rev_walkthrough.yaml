@@ -1,0 +1,18 @@
+must_id: item:A.7.3:rev_walkthrough
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Physical walkthrough conducted (sample-based) — locking standards verified, signage compliant
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Schedule and record the date of each physical walkthrough in a central log, listing all rooms sampled
+  and the reviewer’s name.
+- Document specific observations for each sampled room, noting whether locking mechanisms and required
+  signage meet defined standards.
+- Capture and retain photographic evidence of compliant and non-compliant areas, referencing each photo
+  to the corresponding room and date.
+- Name the reviewer as a specific individual on each walkthrough record — do not use generic titles or
+  team names.
+- Sign and date the completed walkthrough checklist to confirm findings and accountability for the review.

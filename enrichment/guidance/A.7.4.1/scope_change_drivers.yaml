@@ -1,0 +1,19 @@
+must_id: item:A.7.4.1:scope_change_drivers
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Trigger list (new product surface / new integration)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current data collection contexts, including new product features and integrations, in a dated
+  scope document reviewed at least annually.
+- Name a specific individual responsible for maintaining and updating the collection contexts scope—do
+  not use a team or department name.
+- Record each trigger event, such as a new product launch or integration, with the date and a brief description
+  in a change log.
+- Cross-reference the collection contexts scope with recent product and integration release notes to confirm
+  all relevant triggers are captured.
+- Retain evidence of periodic reviews, such as meeting minutes or sign-offs, showing the scope was assessed
+  for completeness and currency.

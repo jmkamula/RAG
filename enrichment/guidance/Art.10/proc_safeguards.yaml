@@ -1,0 +1,20 @@
+must_id: item:Art.10:proc_safeguards
+control_ref: Art.10
+standard_id: GDPR:2016/679
+must_text: Safeguards required by Art.10 (specific to the Member State authorisation — typically retention
+  limits + access restrictions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for managing criminal convictions data authorisation as a specific individual,
+  not a team or department.
+- Document the Member State legal basis and authorisation reference that permits processing of criminal
+  convictions data in a dated procedure.
+- State the retention period for criminal convictions data, referencing the relevant Member State law
+  or authorisation.
+- Record the access controls in place, listing roles or named individuals permitted to access criminal
+  convictions data.
+- Retain evidence of periodic review of the authorisation procedure, including review dates and names
+  of reviewers.

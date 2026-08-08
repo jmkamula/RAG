@@ -1,0 +1,19 @@
+must_id: item:Art.35:rev_review_cadence
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Review-cadence audit — DPIAs refreshed per Art.35.11 when processing changed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a responsible individual for scheduling and tracking DPIA reviews, listing their full name and
+  role in the DPIA program documentation.
+- Document the review schedule for each DPIA, including last review date and planned next review, in a
+  dated DPIA review log.
+- Record evidence of each DPIA review, such as meeting minutes or a signed review checklist, noting any
+  changes in processing activities.
+- Cross-reference each DPIA review entry with documented changes in processing to show reviews were triggered
+  by relevant updates, not just on a fixed schedule.
+- State the review owner as a specific person, not a generic group or department, to avoid ambiguity in
+  accountability.

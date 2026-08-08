@@ -1,0 +1,18 @@
+must_id: item:A.5.24:exercise_cadence
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Exercise / test cadence stated explicitly (annual minimum, more frequent for high-risk org;
+  promoted from SHOULD because untested plans degrade)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the planned frequency for exercising or testing the incident management framework in a dated policy
+  document, specifying at least annual testing.
+- Name a specific individual responsible for scheduling and overseeing incident management exercises,
+  avoiding generic titles like "the team" or "IT."
+- Record the rationale for any testing frequency greater than annual, referencing a documented risk assessment
+  that justifies the chosen interval.
+- Retain evidence of the most recent exercise or test, such as a signed attendance sheet or test report
+  with completion date.

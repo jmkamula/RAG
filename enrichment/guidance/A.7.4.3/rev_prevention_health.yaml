@@ -1,0 +1,19 @@
+must_id: item:A.7.4.3:rev_prevention_health
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: Prevention controls health (input validation / duplicate detection / reconciliation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedures used to check data accuracy, including input validation, duplicate detection,
+  and reconciliation, in a dated policy or process document.
+- Name the individual responsible for overseeing data accuracy controls, listing their full name and job
+  title in the program documentation.
+- Record the most recent review of prevention controls, including the review date and specific findings,
+  in an auditable log or meeting minutes.
+- Attach evidence of test results or monitoring reports that demonstrate input validation, duplicate detection,
+  and reconciliation controls are functioning as intended.
+- Specify any changes made to controls following the review, including who approved them and when, in
+  a change log or decision record.

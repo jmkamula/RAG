@@ -1,0 +1,19 @@
+must_id: item:A.5.22:metrics
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: KPIs / metrics tracked per supplier (incidents, SLA breaches, time-to-remediate)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define and document at least three measurable metrics for each supplier, such as number of incidents,
+  SLA breaches, and average time-to-remediate.
+- Assign a named individual responsible for updating and maintaining supplier KPI records, listing their
+  name and role in the documentation.
+- Record metric values for each supplier on a regular schedule, including the date of each entry and the
+  data source used.
+- Retain evidence of metric reviews, such as meeting minutes or sign-off sheets, showing that supplier
+  performance data was discussed and assessed.
+- Specify individual supplier names in records—do not use generic labels like "all vendors" or "IT suppliers"
+  when tracking metrics.

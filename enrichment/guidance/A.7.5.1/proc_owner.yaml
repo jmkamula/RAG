@@ -1,0 +1,16 @@
+must_id: item:A.7.5.1:proc_owner
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+must_text: Named owner (DPO + Legal counsel)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the PII Transfer Basis Procedure as a specific individual, listing both the Data Protection
+  Officer and the Legal Counsel by full name.
+- Document the date when the owner assignment was last reviewed or updated in the procedure record.
+- Record the signatures or written acknowledgements from both the Data Protection Officer and Legal Counsel
+  confirming their ownership responsibilities.
+- Avoid listing the owner as a team, department, or generic title; use only named individuals to meet
+  accountability requirements.

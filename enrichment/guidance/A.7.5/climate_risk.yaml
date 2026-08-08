@@ -1,0 +1,20 @@
+must_id: item:A.7.5:climate_risk
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Climate-related risk evolution noted (sea-level, heatwave intensity affecting cooling, wildfire)
+  — periodic re-assessment trigger
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and list specific climate-related risks relevant to your locations, such as sea-level rise,
+  increased heatwaves, or wildfire threats, in your procedure document.
+- Assign a named individual responsible for monitoring climate risk sources and updating the risk assessment
+  at least annually or when major reports are published.
+- Record the date of each climate risk review and clearly state what new information or projections were
+  considered in the assessment log.
+- Specify a trigger event or review frequency for re-assessing climate risks, such as publication of new
+  government climate data or every 12 months, in the procedure.
+- Avoid using vague terms like "periodically" or "as needed" for reassessment; instead, document a concrete
+  schedule or event-based trigger.

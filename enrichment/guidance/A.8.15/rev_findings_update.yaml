@@ -1,0 +1,18 @@
+must_id: item:A.8.15:rev_findings_update
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Findings propagated to procedure / source register / scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each logging program review finding in a dated log, including a clear description of the issue
+  and its potential impact.
+- Cross-reference each finding to the relevant procedure, source register, or scope document by name and
+  section.
+- Assign responsibility for addressing each finding to a named individual, not a group or department.
+- Document the update or corrective action taken in the corresponding procedure, register, or scope, including
+  the date and responsible person.
+- Retain evidence of communication showing that all relevant stakeholders were informed of the changes
+  or updates.

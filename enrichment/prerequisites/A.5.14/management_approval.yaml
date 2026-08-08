@@ -1,0 +1,42 @@
+leaf_id: req:A.5.14:management_approval
+control_ref: A.5.14
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: direct
+  rationale: The information transfer policy must be consistent with and subordinate to the overarching
+    information security policies. Management cannot approve a transfer policy that is not anchored in
+    the broader policy framework.
+  good_enough: A current, approved information security policy exists and explicitly references or allows
+    for the creation of supporting policies like information transfer.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The transfer policy must align with the organization’s overall information security objectives
+    and commitments, which are set out in the main security policy. Approval is only meaningful if the
+    transfer policy supports these objectives.
+  good_enough: The information security policy is documented, approved, and available to management as
+    a reference for policy alignment.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Management needs to understand how information is classified to approve appropriate transfer
+    controls (e.g., what requires encryption or special handling). Without a classification scheme, transfer
+    rules lack context.
+  good_enough: A basic, documented classification scheme exists that identifies at least the main categories
+    of information relevant to transfer decisions.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Management approval must come from someone with the authority to approve policies. Clear
+    assignment of roles and responsibilities ensures the right person signs off.
+  good_enough: Roles for policy approval and enforcement are defined and documented, even if not fully
+    embedded in HR or job descriptions.

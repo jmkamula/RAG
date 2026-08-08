@@ -1,0 +1,16 @@
+must_id: item:B.8.5.7:proc_owner
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+must_text: Named owner (Procurement + Legal + DPO)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual from Procurement, Legal, and the Data Protection Officer as joint owners
+  of the Subcontractor Engagement Procedure in the document header.
+- Record the date each owner accepted responsibility by including their names and acceptance dates in
+  the procedure’s approval section.
+- Document the contact details of each named owner within the procedure to allow direct follow-up if needed.
+- Avoid listing a team, department, or generic title as the owner; always use full names of accountable
+  individuals.

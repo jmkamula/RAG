@@ -1,0 +1,19 @@
+must_id: item:A.6.5:rev_legal_drift
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Employment-law drift check per jurisdiction (legal counsel input on enforceability changes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named legal counsel to review post-employment program requirements for each jurisdiction covered
+  by your workforce.
+- Document the date, jurisdiction, and summary of legal counsel’s input on enforceability or changes in
+  employment law.
+- Retain written confirmation from legal counsel that all post-employment terms remain compliant or highlight
+  required updates.
+- Name the legal counsel as a specific individual, not just "legal team" or "HR department", in the review
+  record.
+- Record any program changes made as a result of legal counsel’s advice, including the date and person
+  responsible for implementation.

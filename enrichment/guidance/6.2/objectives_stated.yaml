@@ -1,0 +1,15 @@
+must_id: item:6.2:objectives_stated
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: Objectives stated at relevant functions and levels
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each information security objective alongside the specific business function or department it applies
+  to in the register.
+- Name the responsible individual for each objective, avoiding generic titles like "IT team" or "Management."
+- Record the date each objective was approved and the approving authority for traceability.
+- Cross-reference each objective with supporting documentation or plans that show how it will be achieved
+  at the stated function or level.

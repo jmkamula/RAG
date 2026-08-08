@@ -1,0 +1,18 @@
+must_id: item:Art.21:response_deadline
+control_ref: Art.21
+standard_id: GDPR:2016/679
+must_text: One-month response deadline
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date each objection request is received in a central log, showing when the one-month response
+  period begins.
+- Assign a named staff member to handle each objection request, recording their name alongside the request
+  entry.
+- Record the date and method of response sent to the individual, ensuring it falls within one month of
+  receipt.
+- Retain copies of all correspondence related to the objection request, including the original request
+  and your response.
+- Name the response deadline as a specific calendar date in each case file, not just "within one month".

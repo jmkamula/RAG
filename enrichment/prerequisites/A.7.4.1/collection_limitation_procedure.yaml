@@ -1,0 +1,49 @@
+leaf_id: req:A.7.4.1:collection_limitation_procedure
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You can't limit PII collection unless you know and have documented the specific purposes
+    for which PII is being collected. This is the anchor for determining what is 'adequate, relevant,
+    and necessary.'
+  good_enough: A clear, up-to-date register or list of all PII processing purposes, covering all relevant
+    business processes and data flows.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Collection limitation must align with a lawful basis for processing. Without this, you can't
+    justify or restrict collection to what is legally permitted.
+  good_enough: Each processing purpose has a documented lawful basis (e.g., consent, contract, legal obligation),
+    even if not yet fully mapped to every data flow.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A data classification scheme is needed to identify what information qualifies as PII, so
+    you can apply collection limitation controls only where relevant.
+  good_enough: A basic classification scheme exists that distinguishes PII from other data types, even
+    if not fully rolled out to all assets.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need to know where PII resides (systems, logs, forms, etc.) to ensure collection limitation
+    procedures are applied comprehensively, including indirect sources.
+  good_enough: A preliminary asset register lists all major systems and repositories where PII might be
+    collected or stored, even if some details are pending.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organization and which information assets
+    are covered by the ISMS and PIMS, ensuring collection limitation procedures are applied to the right
+    areas.
+  good_enough: A documented scope statement exists that includes all business units and systems where
+    PII is collected or processed.

@@ -1,0 +1,39 @@
+leaf_id: req:A.5.7:threat_intelligence_procedure
+control_ref: A.5.7
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The threat intelligence procedure must align with the organisation's defined ISMS scope to
+    ensure relevant threats are identified and monitored for in-scope assets, processes, and locations.
+  good_enough: The ISMS scope statement exists and clearly defines what people, processes, and assets
+    are in-scope for information security management.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: foundational
+  rationale: Understanding current risks and risk assessment methodology is essential to prioritise which
+    threats are most relevant and how threat intelligence should be focused.
+  good_enough: There is a documented risk assessment process and at least one recent risk assessment covering
+    the in-scope environment.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and Responsibilities
+  category: foundational
+  rationale: The procedure must specify who is responsible for collecting, analysing, and acting on threat
+    intelligence, so clear role assignments are needed first.
+  good_enough: Key roles for information security and threat intelligence are assigned and documented,
+    even if not fully detailed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: Knowing which assets exist and their importance helps determine which threats and intelligence
+    sources are relevant to the organisation.
+  good_enough: There is a basic, up-to-date inventory of information assets and systems within the ISMS
+    scope.

@@ -1,0 +1,17 @@
+must_id: item:Art.25:proc_checkpoint
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Design-stage checkpoint stated (when DPbD review happens in the product / system development
+  lifecycle)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact point in your product or system development lifecycle when the Data Protection by Design
+  review must occur, such as during requirements gathering.
+- Document this checkpoint in your written Data Protection by Design Procedure, including the lifecycle
+  phase and responsible role.
+- Name a specific individual or job title responsible for ensuring the review happens at the stated stage—avoid
+  generic labels like "the team".
+- Record the date when this procedure was last reviewed or updated to show it reflects current practice.

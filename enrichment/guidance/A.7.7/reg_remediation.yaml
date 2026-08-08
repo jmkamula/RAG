@@ -1,0 +1,19 @@
+must_id: item:A.7.7:reg_remediation
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Per-audit remediation log (awareness email sent, repeat-violator escalation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each clear desk or clear screen audit finding in the audit register, including date, location,
+  and the specific issue observed.
+- Document the remediation action taken for each finding, such as sending an awareness email or escalating
+  a repeat violation, with responsible person's name and completion date.
+- Attach a copy of any awareness email sent to the individual involved, ensuring the message is dated
+  and addressed to a specific recipient.
+- Name the owner responsible for tracking and closing each remediation action as a specific individual,
+  not as a team or department.
+- Update the audit register with the final resolution status for each finding, including the date the
+  issue was confirmed as resolved.

@@ -1,0 +1,16 @@
+must_id: item:A.5.8:cls_signoff
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Final signoff per record (project sponsor + InfoSec gate-owner + operational owner — three-way)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the project sponsor, InfoSec gate-owner, and operational owner as specific individuals on each
+  closure record, avoiding group or team names.
+- Obtain dated signatures from all three named individuals on the closure record to confirm final project
+  security handover.
+- Attach supporting evidence of completed handover activities, such as checklists or meeting minutes,
+  to each closure record.
+- Retain the fully signed and dated closure record in a central repository linked to the project documentation.

@@ -1,0 +1,17 @@
+must_id: item:A.7.11:reg_next_test
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Per-row next-test date scheduled
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a scheduled next-test date for each utility entry in the register, ensuring the date is specific
+  and not left blank.
+- Name the individual responsible for scheduling and updating each next-test date, avoiding generic roles
+  like "Facilities" or "Team".
+- Document the method used to determine each next-test date, such as referencing manufacturer guidance
+  or regulatory requirements, in the register.
+- Review the register quarterly and update any next-test dates that have passed or are approaching, keeping
+  the schedule current.

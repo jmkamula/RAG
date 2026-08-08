@@ -1,0 +1,19 @@
+must_id: item:6.3:rev_silent_changes
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Silent-change sweep — verify no scope / policy / roles changes happened without a register
+  entry
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all recent changes to ISMS scope, policies, and roles by reviewing meeting minutes, emails,
+  and system logs from the past review period.
+- Cross-reference identified changes with entries in the official change register, noting any changes
+  not formally recorded.
+- Record details of any unregistered changes, including date, description, and responsible person, in
+  a separate findings log.
+- Name the reviewer who conducted the sweep and have them sign and date the findings log.
+- Avoid accepting verbal confirmations or undocumented changes—ensure every change is supported by a dated,
+  written record.

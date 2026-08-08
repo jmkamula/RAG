@@ -1,0 +1,20 @@
+must_id: item:Art.85:proc_jurisdiction_lookup
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: National-law lookup process per Member State of operation (each MS implements Art.85 differently
+  per Art.85.2)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a responsible individual for tracking national law differences for Article 85 in each Member State
+  where your organisation operates.
+- Document the specific legal sources and citations for Article 85 implementation in each relevant Member
+  State, including links or official references.
+- Record the date each national-law lookup was last completed and by whom, keeping this information updated
+  annually or when laws change.
+- Attach evidence of communication with local counsel or regulatory authorities confirming the current
+  Article 85 derogations in each Member State.
+- Avoid listing only generic references to "EU law" or "GDPR"—specify the actual Member State law and
+  its unique requirements.

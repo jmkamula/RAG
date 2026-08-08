@@ -1,0 +1,20 @@
+must_id: item:A.5.7:layers
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: 'Three intelligence layers covered: strategic (sector/long-term), tactical (attacker methodologies/TTPs),
+  operational (specific attack details/IOCs)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- List the three intelligence layers—strategic, tactical, and operational—in the procedure, with a clear
+  description of each layer’s focus.
+- Name a specific individual responsible for maintaining and updating the threat intelligence programme,
+  not a team or department.
+- Document how each intelligence layer is sourced, analyzed, and integrated, referencing dated examples
+  or reports for each.
+- State the review schedule for the procedure, including the date of the last review and the reviewer’s
+  name.
+- Attach or reference at least one recent threat intelligence report that explicitly addresses all three
+  layers.

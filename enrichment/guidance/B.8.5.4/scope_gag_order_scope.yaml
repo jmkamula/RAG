@@ -1,0 +1,19 @@
+must_id: item:B.8.5.4:scope_gag_order_scope
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+must_text: Gag-order-capable jurisdictions (where law can prohibit notification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all jurisdictions where your organisation stores or processes personal data, including cloud and
+  backup locations, in a dated record.
+- Identify which of these jurisdictions have laws that allow authorities to prohibit notifying data subjects
+  or partners about legally binding requests.
+- Document the specific legal references or statutes for each identified jurisdiction that enable gag
+  orders or non-disclosure requirements.
+- Name a responsible individual who reviews and updates this jurisdictional assessment at least annually,
+  not a team or department.
+- Retain copies of legal advice or correspondence used to determine gag-order-capable jurisdictions, with
+  dates and names of legal counsel involved.

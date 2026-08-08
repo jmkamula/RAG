@@ -1,0 +1,17 @@
+must_id: item:Art.6:proc_basis_catalog
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Catalog of the 6 Art.6.1 bases with practical examples to guide selection
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all six lawful bases from Article 6.1 in your procedure, using the exact wording from the regulation
+  for each basis.
+- Provide a practical, organisation-specific example for each lawful basis, showing how it could apply
+  to your actual data processing activities.
+- Name the person or role responsible for updating these examples annually, and record the date of the
+  last update in the procedure document.
+- Avoid using generic or copy-pasted examples that could apply to any organisation; tailor each example
+  to your specific context.

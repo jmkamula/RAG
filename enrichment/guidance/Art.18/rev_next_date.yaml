@@ -1,0 +1,16 @@
+must_id: item:Art.18:rev_next_date
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the restriction program in the official review schedule document.
+- Record the planned review date in meeting minutes or a decision log, including the date and the person
+  responsible.
+- Name the individual responsible for confirming the review date, avoiding generic titles like "the team"
+  or "management".
+- Cross-reference the stated review date in both the restriction program document and the compliance calendar
+  to ensure consistency.

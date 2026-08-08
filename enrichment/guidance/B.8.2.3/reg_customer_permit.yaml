@@ -1,0 +1,19 @@
+must_id: item:B.8.2.3:reg_customer_permit
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: Customer-permit document reference per row (contract clause / signed permit)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact contract clause number or attach a copy of the signed permit for each marketing use
+  exception listed in the register.
+- Cross-reference each exception entry to its corresponding customer-permit document, ensuring the reference
+  is unique and traceable.
+- Name the customer associated with each permit using their full legal entity name, not just a brand or
+  informal identifier.
+- Confirm that every register entry includes a date when the permit was granted or contract clause was
+  agreed.
+- Avoid leaving any register row with a missing or generic document reference, as auditors will flag unverifiable
+  permissions.

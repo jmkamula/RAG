@@ -1,0 +1,19 @@
+must_id: item:5.1:proc_townhall
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Periodic townhall / all-hands InfoSec communication from top management
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Schedule at least one InfoSec-focused townhall or all-hands meeting per year, and record the date and
+  agenda in a central calendar.
+- Name a member of top management as the presenter for each session, listing their full name and title
+  in the meeting invite.
+- Retain a copy of the communication materials used, such as slides or recordings, with the date and presenter
+  clearly identified.
+- Document attendee participation by saving a list of those present, generated from sign-in sheets or
+  virtual meeting logs.
+- Avoid using generic statements like "management presented"—specify the individual leader who delivered
+  the message.

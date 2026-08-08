@@ -1,0 +1,17 @@
+must_id: item:A.7.2.4:rev_date
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Consent Capture Program in a documented log or review register.
+- State the planned review interval for the Consent Capture Program in a policy, schedule, or management
+  plan.
+- Confirm the actual review date matches or falls within the planned interval by cross-referencing the
+  review log and the schedule.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Retain evidence of the completed review, such as a signed review report or meeting minutes, with the
+  review date clearly shown.

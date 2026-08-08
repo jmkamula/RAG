@@ -1,0 +1,48 @@
+leaf_id: req:A.5.32:ipr_audit_review
+control_ref: A.5.32
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The IPR and Licence Audit must reconcile deployed software and content against a current,
+    accurate inventory. Without an up-to-date asset register, it is impossible to verify what is in use
+    or to identify discrepancies.
+  good_enough: There is a maintained list of all software and content assets, including relevant details
+    like version, deployment location, and responsible owner.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The audit must be performed within the defined boundaries of the ISMS. If the scope is unclear,
+    you risk missing assets or licences outside the intended coverage.
+  good_enough: The scope statement clearly defines which business units, systems, and locations are included
+    for IPR and licence management.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Effective audits require clear assignment of responsibility for managing assets, licences,
+    and conducting the audit itself. Without this, accountability and follow-through are weak.
+  good_enough: Named individuals or roles are assigned for asset management, licence tracking, and audit
+    execution, even if processes are still maturing.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Knowing the classification of assets helps prioritise which software/content require stricter
+    licence controls or audit focus, especially for high-risk or sensitive items.
+  good_enough: There is a basic classification scheme applied to assets, distinguishing at least between
+    critical and non-critical software/content.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy should set expectations for compliance with IPR and licence requirements, providing
+    the mandate for periodic audits.
+  good_enough: The policy references IPR and licence obligations, even if detailed procedures are still
+    being developed.

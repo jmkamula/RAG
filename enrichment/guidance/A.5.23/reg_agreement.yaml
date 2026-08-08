@@ -1,0 +1,19 @@
+must_id: item:A.5.23:reg_agreement
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Reference to the agreement / contract in force per service (link to A.5.20 coverage register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each cloud service in the register with its full legal name and a unique identifier matching the
+  provider’s contract.
+- Cross-reference each service entry to the specific agreement or contract in force, including document
+  title, version, and effective date.
+- Link each service entry to the relevant entry in your A.5.20 coverage register, using a unique reference
+  number or hyperlink.
+- Name the contract owner as a specific individual, not a generic role or team, to avoid ambiguity in
+  responsibility.
+- Attach or link a copy of the signed agreement for each service, ensuring the document is current and
+  not expired.

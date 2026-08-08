@@ -1,0 +1,15 @@
+must_id: item:6.2:progress_status
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: Per-objective progress status (on-track / at-risk / off-track / met)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- List each information security objective in the register with a unique identifier and clear description.
+- Assign a specific individual as the owner responsible for updating the progress status of each objective.
+- 'Record the current progress status for every objective using only the approved categories: on-track,
+  at-risk, off-track, or met.'
+- Update the status with the date of the most recent review and the name of the reviewer for each objective.
+- Avoid leaving any objective without a status or with ambiguous terms such as "in progress" or "ongoing".

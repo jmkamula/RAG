@@ -1,0 +1,19 @@
+must_id: item:A.8.7:behavioral_detection
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Behavioural / heuristic detection enabled (modern baseline — signature-only insufficient)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific behavioural or heuristic malware detection features enabled on all endpoint protection
+  tools, including product names and configuration screenshots.
+- Name the individual responsible for maintaining and updating malware detection settings, ensuring a
+  single accountable owner is listed.
+- Record the date and outcome of the most recent test or validation showing behavioural or heuristic detection
+  is active and functioning.
+- Retain vendor documentation or release notes that confirm the product’s behavioural or heuristic detection
+  capabilities, not just signature-based protection.
+- Avoid describing malware protection as "standard antivirus" or "signature-based only"—explicitly state
+  and evidence the use of advanced detection methods.

@@ -1,0 +1,15 @@
+must_id: item:B.8.2.5:rev_next_date
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Customer Support Program in the review documentation, using
+  a clear and specific calendar date.
+- Record the name of the individual responsible for scheduling the next review, not just a role or team.
+- Confirm the review documentation is dated and version-controlled to show when the next review date was
+  set.
+- Avoid leaving the next review date blank or marked as "TBD"—auditors will flag missing or vague dates.

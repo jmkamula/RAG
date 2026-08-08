@@ -1,0 +1,14 @@
+must_id: item:Art.24:reg_status
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Per-row implementation status (implemented / partial / planned / N/A)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the implementation status for each GDPR control row as "implemented", "partial", "planned", or
+  "N/A" in the compliance register.
+- Name the individual responsible for updating and maintaining the status entries in the register.
+- Date each status entry to show when the implementation status was last reviewed or changed.
+- Avoid using vague or blank status fields—do not leave any row without a clear, allowed status selection.

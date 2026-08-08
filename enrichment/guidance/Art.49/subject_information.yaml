@@ -1,0 +1,17 @@
+must_id: item:Art.49:subject_information
+control_ref: Art.49
+standard_id: GDPR:2016/679
+must_text: Subject information — for compelling-legitimate-interests, transfer + grounds informed to subject
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific compelling legitimate interests that justify the data transfer in a dated record
+  approved by a named decision-maker.
+- State in writing to the data subject both the fact of the transfer and the legal grounds relied upon,
+  using clear and accessible language.
+- Retain a copy of the communication sent to the data subject, including the date sent and the recipient’s
+  details.
+- Name the person responsible for informing the data subject as a specific individual, not as a team or
+  department.

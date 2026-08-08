@@ -1,0 +1,20 @@
+must_id: item:A.5.17:rev_compromise_sample
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: 'Compromise-response sample (recent compromise events re-examined: was rotation forced? was
+  scope expansion checked?)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record details of recent authentication-information compromise events in a dated incident log, including
+  the date of detection and affected systems or accounts.
+- Document the actions taken after each compromise, specifically noting if forced rotation of authentication
+  information was performed and when.
+- Confirm that the scope of the compromise was reassessed after detection, with evidence of expanded checks
+  or investigations if new risks were identified.
+- Name the individual responsible for reviewing each compromise response, ensuring a specific person is
+  listed rather than a team or department.
+- Attach supporting evidence, such as screenshots or logs, showing both the rotation action and scope
+  assessment were completed for each incident.

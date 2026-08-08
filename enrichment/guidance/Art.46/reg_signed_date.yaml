@@ -1,0 +1,14 @@
+must_id: item:Art.46:reg_signed_date
+control_ref: Art.46
+standard_id: GDPR:2016/679
+must_text: Per-row safeguard signed / countersigned date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each safeguard entry is signed by the responsible individual in the Safeguards Register.
+- Capture the countersignature date from an authorized reviewer for every safeguard row in the register.
+- Name the signatory and countersignatory as specific individuals, not generic roles or teams.
+- Retain a copy of each signed and countersigned safeguard entry for verification of current approval
+  status.

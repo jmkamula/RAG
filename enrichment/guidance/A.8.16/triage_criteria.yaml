@@ -1,0 +1,18 @@
+must_id: item:A.8.16:triage_criteria
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Triage criteria for separating events from incidents (cross-link to A.5.25)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific criteria used to distinguish between routine events and security incidents in your
+  Monitoring Activities Procedure.
+- Cross-reference the documented triage criteria to your Incident Management Procedure as required by
+  control A.5.25.
+- Name the individual responsible for reviewing and updating the triage criteria, ensuring the owner is
+  a specific person, not a team or department.
+- Record the date of the last review or update of the triage criteria within the procedure document.
+- Attach an example log entry or decision record showing how a recent event was evaluated and classified
+  using the documented criteria.

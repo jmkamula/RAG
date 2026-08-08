@@ -1,0 +1,16 @@
+must_id: item:A.7.4.7:rev_next_date
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the retention program in a clearly visible section of the review
+  document.
+- Record the name of the individual responsible for scheduling and leading the next review, not just their
+  department or team.
+- Sign and date the retention program review document to confirm when the next review date was last set.
+- Cross-reference the stated next review date with your organisation’s compliance calendar or tracking
+  system to show alignment.

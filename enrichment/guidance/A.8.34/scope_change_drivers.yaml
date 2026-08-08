@@ -1,0 +1,17 @@
+must_id: item:A.8.34:scope_change_drivers
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new engagement type, new regulator audit power)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all events that require audit scope review, such as new engagement types or changes in regulator
+  audit powers, in a dated trigger document.
+- Assign a named individual to maintain and update the trigger list, recording their name and the date
+  of each update.
+- Cross-reference the trigger list with recent business changes to confirm all relevant triggers are included,
+  noting the date of each review.
+- Name the owner as a specific person, not a team or department, to avoid ambiguity in responsibility
+  for maintaining the trigger list.

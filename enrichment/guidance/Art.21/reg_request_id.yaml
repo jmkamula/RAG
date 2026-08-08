@@ -1,0 +1,14 @@
+must_id: item:Art.21:reg_request_id
+control_ref: Art.21
+standard_id: GDPR:2016/679
+must_text: Per-row request id (Art.12 cross-ref)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique request ID to each objection entry in the register and record it in a dedicated column.
+- Cross-reference each request ID to the related data subject request in the Article 12 log, ensuring
+  traceability between records.
+- Document the date each objection was received alongside its request ID for clear chronological tracking.
+- Name the individual responsible for maintaining the register as a specific person, not a team or department.

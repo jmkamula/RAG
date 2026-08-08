@@ -1,0 +1,15 @@
+must_id: item:Art.23:reg_invocation_id
+control_ref: Art.23
+standard_id: GDPR:2016/679
+must_text: Unique invocation identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique, sequential identifier to each restriction application entry in the register at the
+  time of creation.
+- Record the identifier in a dedicated column for every row, ensuring no two entries share the same value.
+- Cross-reference the identifier in related documentation or correspondence to maintain traceability between
+  records.
+- Verify that no row in the register is missing an identifier or contains a duplicate value.

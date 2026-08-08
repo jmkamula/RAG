@@ -1,0 +1,16 @@
+must_id: item:A.5.22:rev_corrective
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Corrective actions raised for deficiencies, tracked to closure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each supplier information security deficiency in a dated log entry, including a clear description
+  and the responsible individual.
+- Assign corrective actions for every identified deficiency to a named person, not a group or department.
+- Document the status and progress of each corrective action, updating the log with dates and supporting
+  evidence until closure.
+- Retain evidence of closure, such as a signed confirmation or supporting documentation, for every completed
+  corrective action.

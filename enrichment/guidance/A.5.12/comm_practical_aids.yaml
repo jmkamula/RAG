@@ -1,0 +1,17 @@
+must_id: item:A.5.12:comm_practical_aids
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Practical aids referenced (decision tree, sensitivity-label automation, examples library)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all practical aids referenced in your classification scheme, such as decision trees, automation
+  tools, or example libraries, in a dated document.
+- Name the person responsible for updating and communicating these aids, ensuring a specific individual
+  is identified rather than a generic group.
+- Record the date and method of each communication to staff about these aids, such as email, training
+  session, or intranet post.
+- Attach or link to the actual practical aids within the communication record, so auditors can verify
+  what was shared.

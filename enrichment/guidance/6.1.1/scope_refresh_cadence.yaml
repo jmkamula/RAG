@@ -1,0 +1,16 @@
+must_id: item:6.1.1:scope_refresh_cadence
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Refresh cadence stated (annual planning cycle + significant-change trigger)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the annual planning cycle date in the documented scope, including the month and year when the
+  next review is due.
+- Document a clear trigger for scope review following significant organisational or operational changes,
+  such as mergers, new locations, or major system updates.
+- Name the person responsible for initiating both scheduled and triggered scope reviews, using a specific
+  individual’s name rather than a generic role or team.
+- Record the date of the most recent scope review and the outcome in the planning documentation.

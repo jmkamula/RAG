@@ -1,0 +1,16 @@
+must_id: item:A.7.3.7:reg_ack_received
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Acknowledgement received flag + date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to your Third-Party Notification Register to record the date each third party acknowledges
+  receipt of the notification.
+- Record a clear "Yes/No" acknowledgement flag for each third party in the register, alongside the corresponding
+  notification entry.
+- Enter the full name of the individual at the third party who provided the acknowledgement, not just
+  the company name.
+- Attach or link to the actual acknowledgement message or signed document for each entry in the register.

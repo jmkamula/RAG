@@ -1,0 +1,32 @@
+leaf_id: req:Art.23:restrictions_program_review
+control_ref: Art.23
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify where Art.23 restrictions
+    have been applied and to verify that all relevant processing is covered in the review.
+  good_enough: A current, reasonably complete RoPA that lists all processing activities and flags those
+    subject to Art.23 restrictions.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity is essential to determine if
+    and how Art.23 restrictions are justified and defensible.
+  good_enough: Each processing activity in the RoPA has a documented lawful basis, even if some are still
+    under review for completeness.
+- ref: Art.23
+  standard_id: GDPR:2016/679
+  title: Restrictions on Rights and Principles
+  category: direct
+  rationale: You must have already identified which Member State laws are being relied upon for restrictions
+    and documented the specific rights/principles being limited, to meaningfully review their ongoing
+    validity.
+  good_enough: A list of all current Art.23 restrictions in force, with references to the relevant Member
+    State laws and the rights/principles affected, even if some legal citations need updating.

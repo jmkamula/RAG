@@ -1,0 +1,15 @@
+must_id: item:A.7.14:disp_destination
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Per-record destination (which approved provider OR internal-witness destruction)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the unique identifier of each equipment item being disposed of in the disposal record.
+- State the exact destination for each item, naming the approved external provider or the internal staff
+  member who witnessed destruction.
+- Document the date and method of disposal for each equipment item in the record.
+- Name the responsible person authorizing the disposal as a specific individual, not as a team or department.
+- Retain a signed confirmation from the provider or internal witness for each disposal event.

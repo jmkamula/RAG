@@ -1,0 +1,17 @@
+must_id: item:A.8.24:pq_direction
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Post-quantum cryptography direction (NIST PQC track — modern forward-looking baseline)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the organisation’s direction on post-quantum cryptography in the policy, referencing the NIST
+  PQC track as the baseline for future adoption.
+- Name a specific individual responsible for monitoring cryptographic standards and updating the policy
+  as new NIST PQC algorithms are approved.
+- Document the date of the most recent policy review to confirm the post-quantum cryptography direction
+  is current and forward-looking.
+- Cross-reference any risk assessment or roadmap that addresses migration to post-quantum cryptography,
+  ensuring it aligns with the stated policy direction.

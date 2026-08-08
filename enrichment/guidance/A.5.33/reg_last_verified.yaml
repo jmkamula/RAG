@@ -1,0 +1,18 @@
+must_id: item:A.5.33:reg_last_verified
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Last-verified date per class (proves the entry is current; missing dates surface stale classes
+  at review)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a last-verified date for each record class entry in the schedule, using a standard date format
+  such as YYYY-MM-DD.
+- Name the person who verified each record class, ensuring a specific individual is listed rather than
+  a team or department.
+- Review the schedule for any record class entries missing a last-verified date, and update or flag these
+  as potentially stale.
+- Retain evidence of the verification, such as an email confirmation or signed checklist, linked to the
+  corresponding record class entry.

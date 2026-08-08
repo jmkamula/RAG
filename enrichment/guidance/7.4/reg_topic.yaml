@@ -1,0 +1,17 @@
+must_id: item:7.4:reg_topic
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: Per-row topic (matches procedure 'what' catalog)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each communication event with a clear, specific topic that matches the corresponding 'what' entry
+  in your ISMS communication procedure catalog.
+- Cross-reference the topic in each register row to the exact section or identifier in the procedure catalog
+  for traceability.
+- Name the individual responsible for logging each event, avoiding generic roles like "team" or "staff".
+- Enter the date of each communication event to provide a timeline of ISMS-related communications.
+- Review the register regularly to confirm that all topics align precisely with your documented ISMS communication
+  procedures, not using vague or catch-all descriptions.

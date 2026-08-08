@@ -1,0 +1,17 @@
+must_id: item:5.2:app_role
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: Approving role identified (CEO, board chair, or delegated authority with letter of delegation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the approving individual by full name and job title, ensuring this matches the required authority
+  level such as CEO or board chair.
+- Attach a dated and signed approval record showing the approver’s explicit endorsement of the information
+  security policy.
+- Include a letter of delegation if approval is given by someone other than the CEO or board chair, specifying
+  the scope and duration of delegated authority.
+- Avoid listing a group, department, or generic title as the approver; always specify a single accountable
+  person.

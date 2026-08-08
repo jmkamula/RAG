@@ -1,0 +1,18 @@
+must_id: item:Art.24:rev_charter_currency
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Charter currency check — scope + governance still reflect organisational reality
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Locate the most recent version of the accountability program charter and confirm it is dated within
+  the past 12 months.
+- Review the charter’s scope section and document any changes in business activities, data processing,
+  or organisational structure since the last review.
+- Identify and record the current governance roles and named individuals responsible in the charter, updating
+  any changes in personnel or reporting lines.
+- Sign and date a formal statement by a senior manager confirming the charter’s scope and governance remain
+  accurate and relevant.
+- Name the charter owner as a specific individual, not a team or department, to avoid ambiguity in accountability.

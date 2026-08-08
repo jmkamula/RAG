@@ -1,0 +1,15 @@
+must_id: item:A.7.3.2:reg_field_coverage
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: Field coverage per row (which A.7.3.2 fields the notice covers)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each notice in the register as a separate row, ensuring no notice is combined or grouped with others.
+- Specify for each row which A.7.3.2 fields are covered by that notice, using clear field names from the
+  standard.
+- Record the type of information described in the notice, matching the categories required by A.7.3.2.
+- Name the person responsible for verifying field coverage as a specific individual, not a team or department.
+- Date each entry to show when the field coverage was last reviewed or updated.

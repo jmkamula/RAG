@@ -1,0 +1,18 @@
+must_id: item:Art.48:art49_overlay
+control_ref: Art.48
+standard_id: GDPR:2016/679
+must_text: Art.49 derogation overlay — even with no international agreement, transfer may be lawful under
+  Art.49.1 (e.g. legal claims defence)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for handling foreign authority data requests, including how Art.49.1 derogations
+  are assessed and applied when no international agreement exists.
+- Name the decision-maker responsible for authorising disclosures under Art.49.1, ensuring this is a specific
+  individual rather than a team or department.
+- Record each instance where data is disclosed under Art.49.1, including the legal basis relied upon,
+  the request details, and the justification for the decision.
+- Retain copies of all correspondence with foreign authorities and internal decision records related to
+  each disclosure made under Art.49.1.

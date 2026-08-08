@@ -1,0 +1,16 @@
+must_id: item:6.1.1:reg_owner
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Owner per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner for each action item in the ISMS Planned Action Register, avoiding
+  group or team names.
+- Record the owner's full name and job title in a dedicated column for each row of the register.
+- Confirm that each listed owner has acknowledged their responsibility by capturing a dated signature
+  or written confirmation.
+- Review the register regularly to update ownership if roles or responsibilities change, noting the date
+  of each update.

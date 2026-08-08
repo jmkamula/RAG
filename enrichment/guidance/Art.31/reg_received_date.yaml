@@ -1,0 +1,17 @@
+must_id: item:Art.31:reg_received_date
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Per-row received date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each supervisory authority interaction is received in a dedicated column for every
+  row in the register.
+- Confirm that the received date is entered on the same day the interaction is logged to avoid backdating
+  or missing information.
+- Name the individual responsible for entering received dates, ensuring a specific person is listed rather
+  than a team or department.
+- Review the register regularly to verify that no row is missing a received date and that all entries
+  are complete.

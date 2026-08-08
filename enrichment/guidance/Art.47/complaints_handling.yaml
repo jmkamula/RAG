@@ -1,0 +1,17 @@
+must_id: item:Art.47:complaints_handling
+control_ref: Art.47
+standard_id: GDPR:2016/679
+must_text: Complaints handling per Art.47.2.i (data subjects + SAs)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step complaints handling process that covers both data subjects and supervisory authorities,
+  including contact points and response timelines.
+- Name a specific individual responsible for overseeing complaints handling, not a generic team or department.
+- Record each complaint received, including the date, complainant details, issue summary, and actions
+  taken, in a dedicated log.
+- Retain evidence of all correspondence and decisions related to complaints, including communications
+  with supervisory authorities.
+- Review the procedure annually and sign off on any updates, noting the date and responsible person.

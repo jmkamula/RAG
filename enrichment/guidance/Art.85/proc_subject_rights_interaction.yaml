@@ -1,0 +1,20 @@
+must_id: item:Art.85:proc_subject_rights_interaction
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: Guidance on residual data-subject rights when derogations apply (rights may be limited but
+  rarely fully extinguished)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State clearly in the procedure which data-subject rights remain in place and which are limited when
+  a derogation is applied.
+- Document the legal basis and justification for each right that is restricted, referencing the relevant
+  derogation and supporting laws.
+- Name a specific individual responsible for reviewing and updating the guidance, avoiding generic roles
+  like "the team" or "compliance".
+- Record the date of the most recent review or update to the procedure, ensuring it is not left undated
+  or marked "ongoing".
+- Include an example scenario in the procedure showing how residual rights are handled when a derogation
+  is invoked.

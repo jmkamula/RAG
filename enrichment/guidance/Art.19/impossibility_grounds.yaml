@@ -1,0 +1,17 @@
+must_id: item:Art.19:impossibility_grounds
+control_ref: Art.19
+standard_id: GDPR:2016/679
+must_text: Impossibility / disproportionate-effort assessment criteria documented
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific criteria used to decide when notifying data recipients is impossible or requires
+  disproportionate effort, including examples relevant to your organisation.
+- Name the individual responsible for making and recording impossibility or disproportionate-effort determinations,
+  ensuring this is not a group or department.
+- Record each assessment in a dated log entry, referencing the data subject request and the rationale
+  for invoking the exception.
+- Attach supporting evidence, such as correspondence or resource estimates, to each assessment to demonstrate
+  the basis for the decision.

@@ -1,0 +1,19 @@
+must_id: item:A.5.30:rec_gaps
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Gaps surfaced per record (where recovery fell short; severity per gap)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each recovery event with a unique identifier, date, and the names of all individuals directly
+  involved in the process.
+- Document all gaps where the recovery process did not meet planned objectives, describing each gap clearly
+  and specifically.
+- Assign a severity rating to each identified gap, using a defined scale that is referenced in your incident
+  response documentation.
+- Name the person responsible for reviewing and confirming the accuracy of each gap and severity assessment,
+  ensuring this is a specific individual.
+- Avoid leaving any gap description or severity field blank or marked as "N/A" without justification,
+  as auditors will flag incomplete records.

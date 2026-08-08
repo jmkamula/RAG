@@ -1,0 +1,17 @@
+must_id: item:Art.21:profiling_handling
+control_ref: Art.21
+standard_id: GDPR:2016/679
+must_text: Profiling objection handled explicitly (Art.21.1 covers profiling)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the steps for handling objections specifically related to profiling in your Right to Object
+  Procedure, referencing Article 21.1 of the GDPR.
+- Name a specific individual responsible for reviewing and responding to profiling objections, listing
+  their full name and job title in the procedure.
+- Record each profiling objection received and the corresponding response in a dated log, including the
+  decision and any actions taken.
+- State in the procedure that profiling objections are not processed using generic or automated responses,
+  but are reviewed on a case-by-case basis.

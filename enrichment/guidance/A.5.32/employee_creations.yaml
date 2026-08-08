@@ -1,0 +1,20 @@
+must_id: item:A.5.32:employee_creations
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Employee-creations rule (work-product ownership, open-source contribution policy, prior-IP
+  carve-out)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure that all employee-created work products during employment are owned by the organisation,
+  with reference to relevant employment contracts.
+- Document a clear process for employees to request approval before contributing to open-source projects,
+  including named approvers and required documentation.
+- Record any prior intellectual property exclusions for new hires in a signed and dated agreement, kept
+  in the employee’s personnel file.
+- Name the owner of the procedure as a specific individual, not a team or department, with their contact
+  details listed in the document.
+- Review the procedure text to confirm it does not use generic boilerplate that lacks details specific
+  to your organisation’s rules and processes.

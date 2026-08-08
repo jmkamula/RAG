@@ -1,0 +1,41 @@
+leaf_id: req:Art.25:program_review
+control_ref: Art.25
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify which systems and processes
+    are in-scope for Data Protection by Design (DPbD) review. Without this, you can't verify that all
+    relevant designs have been reviewed.
+  good_enough: A current, reasonably complete RoPA exists, covering all major processing activities and
+    updated within the last year.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity is essential to assess whether DPbD
+    controls are appropriate and effective. This ensures that privacy measures align with the legal grounds
+    for processing.
+  good_enough: Each processing activity in the RoPA has a documented lawful basis, even if some edge cases
+    are flagged for follow-up.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated Data Protection Officer (DPO) is typically responsible for overseeing DPbD reviews
+    and ensuring compliance. Without a DPO (where required), the review process lacks accountability.
+  good_enough: A DPO is formally appointed (if required), with contact details available and basic responsibilities
+    defined.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope statement clarifies which systems, processes, and locations are covered by
+    the information security program, helping to align DPbD reviews with the actual operational environment.
+  good_enough: A documented scope statement exists, identifying the boundaries of the ISMS and its relationship
+    to GDPR-covered processing.

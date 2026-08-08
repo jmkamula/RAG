@@ -1,0 +1,16 @@
+must_id: item:Art.24:charter_review_cadence
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Review cadence stated (annual minimum)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the review frequency in the Privacy Programme Charter, specifying that it will be reviewed at
+  least once every 12 months.
+- Name the individual responsible for initiating the annual review, listing their full name and current
+  job title.
+- Record the date when the review cadence was last updated in the Charter to show it reflects current
+  practice.
+- Avoid vague language such as "regularly" or "as needed"—use a clear, time-bound commitment like "annually."

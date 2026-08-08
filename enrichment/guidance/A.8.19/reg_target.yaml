@@ -1,0 +1,16 @@
+must_id: item:A.8.19:reg_target
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Per-install target system
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each software installation in a register, listing the exact target system by hostname or unique
+  identifier.
+- Name the individual who approved the installation for each entry, including their full name and approval
+  date.
+- Document the software version and installation date for every entry in the register.
+- Cross-reference each register entry with a corresponding change request or ticket number.
+- Name the target system as a specific device or server — not as a generic group or environment.

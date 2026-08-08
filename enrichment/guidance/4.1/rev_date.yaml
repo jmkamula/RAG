@@ -1,0 +1,16 @@
+must_id: item:4.1:rev_date
+control_ref: '4.1'
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent Context Program Review in a central log or register.
+- State the planned review interval in months or years within the Context Program documentation.
+- Confirm that the actual review date falls within the documented planned interval by cross-referencing
+  the log and the program documentation.
+- Name the reviewer as a specific individual in the review record, avoiding generic titles like "the team"
+  or "management."
+- Retain a signed or approved copy of the review outcome, including the date and reviewer’s name.

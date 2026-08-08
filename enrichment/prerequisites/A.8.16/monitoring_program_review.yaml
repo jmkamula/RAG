@@ -1,0 +1,39 @@
+leaf_id: req:A.8.16:monitoring_program_review
+control_ref: A.8.16
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.8.15
+  standard_id: ISO27001:2022
+  title: Logging
+  category: direct
+  rationale: Monitoring relies on the existence of logs; without a robust logging process, there is nothing
+    to review or analyze for coverage gaps or detection efficacy.
+  good_enough: Logging must be enabled and operational for all in-scope systems, with logs accessible
+    for review, even if tuning and retention are still being improved.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which systems, processes, and assets are covered by the ISMS,
+    ensuring the monitoring program review is focused on relevant areas.
+  good_enough: A documented scope exists that clearly lists included assets and processes, even if minor
+    updates are pending.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register is needed to verify that monitoring covers all critical assets
+    and to identify any coverage gaps during the review.
+  good_enough: A current list of key assets is available and accessible, even if some less critical assets
+    are still being catalogued.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding the organization’s risk landscape helps prioritize which monitoring coverage
+    gaps or detection failures are most critical to address.
+  good_enough: The latest risk assessment is available and identifies major threats and risks, even if
+    some risk ratings are still being finalized.

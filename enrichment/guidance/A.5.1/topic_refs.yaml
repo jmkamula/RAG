@@ -1,0 +1,19 @@
+must_id: item:A.5.1:topic_refs
+control_ref: A.5.1
+standard_id: ISO27001:2022
+must_text: References to topic-specific policies that flow from this one (e.g. A.5.10 AUP, A.5.12 classification,
+  A.6.4 disciplinary)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all topic-specific policies by title and version number within the main Information Security Policy
+  document.
+- Cross-reference each listed policy to its relevant ISO27001 control, such as A.5.10 for Acceptable Use
+  or A.5.12 for Classification.
+- State the location or repository where each referenced policy can be accessed, using a direct link or
+  file path.
+- Name the policy owner as a specific individual, not a team or department, for each topic-specific policy
+  referenced.
+- Date the Information Security Policy and all referenced policies to show current and aligned versions.

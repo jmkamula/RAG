@@ -1,0 +1,19 @@
+must_id: item:Art.46:authorisation
+control_ref: Art.46
+standard_id: GDPR:2016/679
+must_text: Art.46.3 SA authorisation tracking where ad-hoc clauses used
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each instance where ad-hoc contractual clauses are used for international data transfers, including
+  the countries and data types involved, in a dated log.
+- Name the specific supervisory authority that granted authorisation for each ad-hoc clause, including
+  the contact details of the official or office.
+- Retain copies of the formal authorisation documents or correspondence from the supervisory authority,
+  ensuring each is clearly dated and linked to the relevant transfer.
+- Avoid referencing "pending" or "verbal" authorisations; only document transfers where written supervisory
+  authority approval is on file.
+- Cross-reference each ad-hoc clause transfer in your data transfer register to the corresponding authorisation
+  record and supporting documentation.

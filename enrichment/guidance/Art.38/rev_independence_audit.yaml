@@ -1,0 +1,17 @@
+must_id: item:Art.38:rev_independence_audit
+control_ref: Art.38
+standard_id: GDPR:2016/679
+must_text: Independence audit — no recorded instructions on tasks; no dismissal pressure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer (DPO) as a specific individual in the appointment record, avoiding
+  generic titles or group ownership.
+- Document a dated statement from senior management confirming the DPO’s independence from instructions
+  regarding data protection tasks.
+- Record any instances of DPO dismissal or disciplinary action with supporting documentation showing these
+  were unrelated to data protection duties.
+- Review internal communications and meeting minutes to confirm there are no directives or pressures recorded
+  that could compromise the DPO’s independence.

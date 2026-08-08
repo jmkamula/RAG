@@ -1,0 +1,18 @@
+must_id: item:A.8.25:rev_gate_attainment
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Gate-attainment trending per project class
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the defined project classes and their criteria in an approved SDLC policy, including the date
+  and name of the approver.
+- Record gate-attainment results for each project, specifying project class, gate name, date achieved,
+  and responsible project manager.
+- Compile and update a summary report at least quarterly showing gate-attainment trends by project class,
+  with clear timeframes and data sources.
+- Name the report owner as a specific individual, not a team or department, to avoid ambiguity in accountability.
+- Retain all supporting evidence, such as meeting minutes and sign-off records, that substantiate gate
+  completion for sampled projects.

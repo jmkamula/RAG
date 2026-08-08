@@ -1,0 +1,17 @@
+must_id: item:A.7.11:scope_change_drivers
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new site, criticality re-tier, BCP scope change)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current sites included in the utility continuity scope, with addresses and a named responsible
+  person for each site.
+- Document a trigger list that specifies events requiring re-scoping, such as opening a new site, changing
+  site criticality, or updating business continuity plans.
+- Record the date of the last review of the applicable sites list and the trigger list, and name the reviewer.
+- Name the owner of the trigger list as a specific individual, not a team or department.
+- Retain evidence of communication to relevant stakeholders when the trigger list is updated or when a
+  re-scoping event occurs.

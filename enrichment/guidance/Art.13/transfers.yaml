@@ -1,0 +1,17 @@
+must_id: item:Art.13:transfers
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: International transfers and safeguards if applicable
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State clearly in the privacy notice whether any personal data is transferred outside the European Economic
+  Area, naming the specific countries involved.
+- Describe the legal safeguards in place for each international transfer, such as standard contractual
+  clauses or adequacy decisions, with references to supporting documents.
+- Name a specific individual responsible for overseeing international data transfers, avoiding generic
+  titles like "the team" or "compliance department".
+- Date and version the privacy notice to show when the information about international transfers and safeguards
+  was last reviewed or updated.

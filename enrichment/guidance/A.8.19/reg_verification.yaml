@@ -1,0 +1,18 @@
+must_id: item:A.8.19:reg_verification
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Per-install verification artefacts (signature check / functional test / vuln-scan result)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the name and version of each software installed, along with the installation date, in the Software
+  Installation Register.
+- Attach evidence of a signature or checksum verification for each software installation, including the
+  verification date and the person who performed it.
+- Upload results of a functional test or vulnerability scan conducted after installation, referencing
+  the specific test or scan report by filename and date.
+- Name the person responsible for each verification step as a specific individual, not as a team or department.
+- Retain all verification artefacts and test results in a central, access-controlled location, cross-referenced
+  by software name and installation date.

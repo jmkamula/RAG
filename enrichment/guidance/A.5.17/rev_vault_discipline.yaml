@@ -1,0 +1,19 @@
+must_id: item:A.5.17:rev_vault_discipline
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: 'Vault-discipline audit (sample of production systems re-checked: are credentials in the vault,
+  or in config files / spreadsheets / chat history?)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner responsible for conducting the periodic authentication-information
+  program review, not a team or department.
+- Document the date, scope, and sample selection criteria for each vault-discipline audit in a review
+  log.
+- Record the findings for each sampled production system, noting whether credentials were found in the
+  vault, configuration files, spreadsheets, or chat history.
+- Assign and document remediation actions for any credentials discovered outside the approved vault, including
+  the responsible person and target completion date.
+- Retain signed evidence of management review and approval of the audit results and remediation plans.

@@ -1,0 +1,15 @@
+must_id: item:6.3:rev_reviewer
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (ISMS Manager + change-management lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the ISMS Manager and the change-management lead as the reviewers in the change program review record,
+  using their full names and job titles.
+- Record the date each reviewer completed their review on the documented change program review form.
+- Sign the review document physically or electronically to confirm each reviewer’s participation and approval.
+- Avoid listing a group, team, or department as the reviewer; always specify individual names for clear
+  accountability.

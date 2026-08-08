@@ -1,0 +1,20 @@
+must_id: item:A.6.5:rev_breach_history
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Breach history review — any post-employment breaches occurred? handled per enforcement approach?
+  lessons captured?
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for conducting the post-employment breach history review, avoiding
+  generic titles like "HR team" or "management."
+- Document all identified post-employment breaches in a dated register, including details of the incident,
+  individuals involved, and discovery date.
+- Record how each breach was handled, referencing the enforcement approach and attaching supporting evidence
+  such as investigation reports or disciplinary records.
+- Capture and summarize lessons learned from each breach in a review report, noting any changes made to
+  policies or procedures as a result.
+- Retain meeting minutes or sign-off from management confirming the review was completed and lessons were
+  formally acknowledged.

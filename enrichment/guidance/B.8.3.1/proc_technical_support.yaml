@@ -1,0 +1,18 @@
+must_id: item:B.8.3.1:proc_technical_support
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+must_text: Technical support paths — APIs / features / configuration to fulfil rectification, erasure,
+  portability, restriction
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the technical methods available for customers to request data rectification, erasure, portability,
+  and restriction, such as APIs, self-service features, or configuration options.
+- Name the specific individual responsible for maintaining and updating these technical support paths,
+  avoiding generic titles like "IT" or "the team."
+- Record the date of the most recent test or validation showing these technical features function as intended
+  for each subject right.
+- Cross-reference user-facing documentation or support materials that instruct customers on how to access
+  and use these technical features.

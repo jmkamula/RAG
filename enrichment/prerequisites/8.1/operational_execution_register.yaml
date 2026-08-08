@@ -1,0 +1,40 @@
+leaf_id: req:8.1:operational_execution_register
+control_ref: '8.1'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which operational processes are in-scope for your ISMS before you can track
+    and evidence their execution. Without a clear scope, you risk missing key processes or including irrelevant
+    ones.
+  good_enough: A documented scope that lists the business units, locations, and processes covered by the
+    ISMS—even if some details are still being refined.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the expectations for how operational processes should be executed and controlled.
+    It provides the baseline against which execution can be measured.
+  good_enough: A formally approved policy that defines high-level security objectives and requirements
+    for operational processes.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: You must know who is responsible for executing and recording each operational process. Without
+    clear roles, you can't reliably attribute or verify execution events.
+  good_enough: A list or matrix showing who is accountable for each key operational process, even if some
+    backups or alternates are still being assigned.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Operational processes often relate to specific assets. Knowing which assets are in play ensures
+    your execution register is complete and relevant.
+  good_enough: A basic inventory of key information assets and systems, with enough detail to link them
+    to operational processes in the register.

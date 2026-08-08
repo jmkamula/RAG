@@ -1,0 +1,15 @@
+must_id: item:A.7.3.9:rev_next_date
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Request Handling Program in the program documentation.
+- Record the date the current review was completed and the name of the reviewer in the review log.
+- Name the owner responsible for scheduling and conducting the next review as a specific individual, not
+  a team or department.
+- Cross-reference the stated next review date with your compliance calendar or tracking tool to confirm
+  alignment.

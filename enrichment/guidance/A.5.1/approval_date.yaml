@@ -1,0 +1,13 @@
+must_id: item:A.5.1:approval_date
+control_ref: A.5.1
+standard_id: ISO27001:2022
+must_text: Approval date recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the approving top management individual by full name and job title on the policy approval page.
+- Record the exact approval date next to the signature or approval statement on the policy document.
+- Sign the policy document physically or electronically to confirm explicit approval by top management.
+- Avoid using undated or pre-signed templates; ensure each policy version shows a unique approval date.

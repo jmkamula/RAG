@@ -1,0 +1,48 @@
+leaf_id: req:B.8.5.8:program_review
+control_ref: B.8.5.8
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which business units, processes, and third parties (including
+    subcontractors) are covered by the ISMS and PIMS. Without clear scope, you cannot reliably determine
+    which subcontractor changes must be reviewed.
+  good_enough: The scope must explicitly mention subcontractor relationships and privacy-relevant activities,
+    even if not fully detailed.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that someone is accountable for managing subcontractor
+    changes, notifications, and objections. Without this, program review lacks ownership and follow-through.
+  good_enough: Documented assignment of responsibility for subcontractor management and privacy program
+    review, even if not yet fully operationalized.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You need to know the purposes for which personal data is processed and which subcontractors
+    are involved, so you can assess whether changes impact privacy obligations or contract alignment.
+  good_enough: A current list of processing purposes and associated subcontractors, even if some details
+    are still being clarified.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for processing is essential to determine if a subcontractor
+    change could affect compliance or trigger objections from data subjects or customers.
+  good_enough: A summary of lawful bases for each processing activity involving subcontractors, sufficient
+    to flag risk areas during review.
+- ref: Art.28
+  standard_id: GDPR:2016/679
+  title: Processor Obligations
+  category: cross_role
+  rationale: GDPR Article 28 requires advance notification and objection rights for changes to subprocessors.
+    This legal yardstick shapes the review process and what must be documented.
+  good_enough: Awareness of Article 28 requirements and a basic mapping of which contracts or customers
+    require notification/objection handling.

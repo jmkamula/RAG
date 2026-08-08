@@ -1,0 +1,39 @@
+leaf_id: req:A.6.2:signed_terms_register
+control_ref: A.6.2
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.6.1
+  standard_id: ISO27001:2022
+  title: Screening
+  category: direct
+  rationale: Screening must be completed before employment terms are issued and signed, as the outcome
+    determines eligibility for employment and may affect contract terms.
+  good_enough: A documented process and record showing that all personnel in scope have completed pre-employment
+    screening checks is sufficient to proceed.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which personnel are covered by the ISMS, ensuring the register
+    only tracks relevant employees.
+  good_enough: A clear, current scope statement identifying which roles and entities are included in the
+    ISMS is enough to identify who should appear in the register.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Defined roles and responsibilities clarify who is responsible for maintaining the register
+    and who must sign employment terms.
+  good_enough: A basic roles and responsibilities matrix or documented assignment for HR and information
+    security functions is sufficient to unblock this step.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register helps identify all personnel as information assets, ensuring completeness
+    of the signed terms register.
+  good_enough: An initial asset register listing all personnel as assets is enough to ensure no one is
+    missed in the employment terms register.

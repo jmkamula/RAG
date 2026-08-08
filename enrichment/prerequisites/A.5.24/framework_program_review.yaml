@@ -1,0 +1,48 @@
+leaf_id: req:A.5.24:framework_program_review
+control_ref: A.5.24
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You can't meaningfully review the incident management framework unless you know what parts
+    of the organization and which information assets are in scope. The scope statement defines the boundaries
+    for the review.
+  good_enough: A current, approved scope statement that clearly identifies the organizational and asset
+    boundaries for the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the expectations and objectives for information security, including incident
+    management. The review must check alignment with these top-level commitments.
+  good_enough: A published, management-approved policy that references incident management as a key ISMS
+    objective.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: A review of the incident management framework requires clarity on who is responsible for
+    incident response, reporting, and review. Without this, team-readiness and coverage can't be assessed.
+  good_enough: A documented list or matrix showing assigned incident management roles and responsibilities,
+    even if not fully detailed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: Incident management depends on knowing which assets are protected and monitored. The review
+    must consider whether all relevant assets are covered by the framework.
+  good_enough: An up-to-date register of key information assets within ISMS scope, with enough detail
+    to identify what needs incident protection.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: The incident management framework should address the organization's actual risks. The review
+    must consider whether the framework matches the current risk landscape.
+  good_enough: A recent risk assessment identifying major incident scenarios and their impact, even if
+    not exhaustive.

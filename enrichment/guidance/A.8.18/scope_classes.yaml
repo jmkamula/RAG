@@ -1,0 +1,19 @@
+must_id: item:A.8.18:scope_classes
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Utility classes enumerated (debuggers / sysinternals / disk tools / DB direct-access / vendor
+  diagnostic / penetration-testing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all utility programs in use, including debuggers, disk tools, database direct-access tools, vendor
+  diagnostics, and penetration-testing utilities, in a dated inventory document.
+- Name the person responsible for maintaining the utility program inventory as a specific individual,
+  not a team or department.
+- Record the business justification for each utility program’s inclusion in the scope, referencing supporting
+  documentation where available.
+- Cross-reference each utility program in the inventory with its relevant access controls or usage restrictions
+  policy.
+- Document the review date and reviewer’s name for the most recent update to the utility program inventory.

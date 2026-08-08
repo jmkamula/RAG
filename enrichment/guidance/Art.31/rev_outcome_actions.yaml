@@ -1,0 +1,18 @@
+must_id: item:Art.31:rev_outcome_actions
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Outcome-action follow-through — any corrective measures imposed by SA reached implementation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each corrective measure imposed by the Supervisory Authority, including the date received and
+  the specific action required.
+- Assign responsibility for each corrective measure to a named individual, not a group or department.
+- Record evidence of implementation for each action, such as updated procedures, completed training logs,
+  or system changes, with completion dates.
+- Retain written confirmation from the responsible individual that the corrective measure has been fully
+  implemented.
+- Cross-reference each corrective action to the original Supervisory Authority communication to show clear
+  linkage between requirement and response.

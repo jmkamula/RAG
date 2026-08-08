@@ -1,0 +1,19 @@
+must_id: item:A.8.22:rev_enforcement_coverage
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Sample-based enforcement-coverage verification (configured rules match register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for maintaining the network segregation rules register, including their
+  full name and job title.
+- Document the most recent sample-based review by listing sampled network segments, the date of review,
+  and the reviewer’s name.
+- Cross-reference each sampled network segment’s configured rules with the register, recording any mismatches
+  and the corrective actions taken.
+- Retain evidence of the review, such as screenshots or exported configurations, showing that sampled
+  rules match the documented register entries.
+- State the review frequency and ensure the review schedule is dated and approved by a named manager,
+  not left undated or unsigned.

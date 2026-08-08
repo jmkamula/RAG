@@ -1,0 +1,19 @@
+must_id: item:A.5.27:ir_plan_update
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Incident management plan / procedure update step where lessons reveal procedural gaps
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each information security incident’s lessons learned in a dated, written summary that clearly
+  identifies the incident and the findings.
+- Name a specific individual responsible for reviewing lessons learned and deciding if updates to the
+  incident management procedure are needed.
+- Document any changes made to the incident management plan or procedure, including the date, the reason
+  for the change, and who approved it.
+- Attach or cross-reference the updated procedure to the incident’s lessons learned record to show the
+  link between the lesson and the procedural change.
+- Avoid using generic statements such as “procedure updated as needed”—instead, specify the exact section
+  and nature of any updates made.

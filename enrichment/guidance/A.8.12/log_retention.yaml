@@ -1,0 +1,18 @@
+must_id: item:A.8.12:log_retention
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Log retention defined and enforced (cross-link to A.8.15)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the retention period for DLP alert logs in a documented policy, referencing both A.8.12 and A.8.15
+  requirements.
+- Assign a named individual responsible for enforcing the DLP alert log retention period, listing their
+  full name and job title.
+- Record the start and end dates of log retention for each DLP alert log file in a central log register.
+- Cross-reference the DLP alert log retention policy with the organisation’s overall log management policy
+  under A.8.15, citing specific policy sections.
+- Avoid using vague retention terms such as "as needed" or "until no longer required" in documentation;
+  specify exact timeframes in months or years.

@@ -1,0 +1,16 @@
+must_id: item:A.7.4.6:reg_last_verified
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+must_text: Verification last-run date per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each temporary files sweep was last performed in a dedicated column for every entry
+  in the register.
+- Name the individual responsible for each sweep, listing their full name rather than a generic role or
+  team.
+- Attach or reference system logs or screenshots that show the sweep occurred on the recorded date for
+  each row.
+- Avoid leaving any last-run date fields blank or marked as "N/A," as auditors will flag incomplete records.

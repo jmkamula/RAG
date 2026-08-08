@@ -1,0 +1,19 @@
+must_id: item:A.8.32:reg_actor
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Per-change actor (person or automated job)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the individual or automated job responsible for each change entry in the change
+  register.
+- Document the date and time each change was initiated and completed, linking this information directly
+  to the responsible actor.
+- Name the actor as a specific person or unique automated job identifier—do not use generic terms like
+  "IT team" or "system".
+- Cross-reference each change entry with supporting evidence, such as approval emails or automated logs,
+  showing the actor’s involvement.
+- Review the register regularly to confirm that every change entry includes a clearly identified actor
+  and timestamp.

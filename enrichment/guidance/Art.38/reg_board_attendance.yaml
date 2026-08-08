@@ -1,0 +1,19 @@
+must_id: item:Art.38:reg_board_attendance
+control_ref: Art.38
+standard_id: GDPR:2016/679
+must_text: Per-row board / management forum attendance evidence
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the board or management forum where the Data Protection Officer (DPO) reports, specifying the exact
+  group and meeting title in the register.
+- Record the date and time of each forum meeting attended by the DPO, linking to official meeting minutes
+  or attendance logs.
+- List the DPO as a named individual attendee for each meeting, avoiding generic titles like "DPO team"
+  or "Compliance department".
+- Attach or reference the relevant section of the meeting minutes that documents the DPO’s report or participation
+  for each entry.
+- Confirm that each attendance record is signed or acknowledged by the meeting chair or secretary, with
+  their name and date included.

@@ -1,0 +1,18 @@
+must_id: item:A.5.9:rev_classification_check
+control_ref: A.5.9
+standard_id: ISO27001:2022
+must_text: Classification sampling check — are A.5.12 classifications still appropriate for the asset's
+  actual use
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a responsible individual to conduct the classification sampling check, avoiding generic roles like
+  "IT team" or "Asset Manager."
+- Document the sample selection method and list of assets reviewed, including asset IDs and last known
+  classification.
+- Record the actual use of each sampled asset and compare it to the assigned classification under A.5.12.
+- Note any discrepancies found and log the date, reviewer, and corrective action taken for each mismatch.
+- Retain evidence of the completed sampling check, such as annotated inventory reports or signed review
+  summaries, for audit reference.

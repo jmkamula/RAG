@@ -1,0 +1,19 @@
+must_id: item:A.7.6:awareness_briefing
+control_ref: A.7.6
+standard_id: ISO27001:2022
+must_text: Pre-entry awareness briefing for first-time entrants
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the pre-entry awareness briefing content, including security protocols and risks, in a dated
+  procedure manual approved by the security manager.
+- Record the name, date, and signature of each first-time entrant who receives the briefing in a secure
+  logbook or digital register.
+- Assign responsibility for delivering the briefing to a named individual, not a generic role or team,
+  in the procedure documentation.
+- Retain copies of briefing attendance records for all first-time entrants for the duration specified
+  in your retention policy.
+- Review the briefing content annually and update the procedure manual with a version number and revision
+  date.

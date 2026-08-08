@@ -1,0 +1,19 @@
+must_id: item:A.7.3.7:proc_ack_receipt
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Acknowledgement of receipt monitored
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each notification sent to third parties in a log, including date, recipient name, and contact
+  details.
+- Collect and save explicit acknowledgements of receipt from each third party, such as signed emails or
+  confirmation letters.
+- Assign responsibility to a named individual to track and follow up on outstanding acknowledgements in
+  the log.
+- Name the responsible person, not a team or department, as the owner of the monitoring process in the
+  procedure document.
+- Review the log monthly and document any missing acknowledgements, along with actions taken to address
+  them.

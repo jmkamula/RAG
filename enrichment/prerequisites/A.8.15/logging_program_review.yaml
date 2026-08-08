@@ -1,0 +1,47 @@
+leaf_id: req:A.8.15:logging_program_review
+control_ref: A.8.15
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You need an up-to-date asset register to know which systems and data sources should be generating
+    logs. Without this, you can't verify if all relevant sources are covered or detect silent sources.
+  good_enough: A current, reasonably complete list of information assets and systems, with clear ownership,
+    is available for reference during the logging review.
+- ref: A.8.17
+  standard_id: ISO27001:2022
+  title: Clock synchronization
+  category: direct
+  rationale: Accurate and synchronized clocks are essential for log integrity, enabling reliable event
+    correlation and detection of anomalies across systems.
+  good_enough: Documented evidence that critical systems' clocks are synchronized to a trusted time source,
+    with periodic checks in place.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that logging responsibilities, including review and escalation,
+    are understood and actionable.
+  good_enough: Logging program roles and responsibilities are assigned and communicated, even if not yet
+    fully embedded in job descriptions.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Knowing the classification of data and systems helps prioritize which logs require stricter
+    controls and retention, supporting effective review.
+  good_enough: A basic classification scheme exists and is applied to key systems and data types relevant
+    to logging.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment informs which logging activities are most critical, guiding the focus and
+    frequency of periodic reviews.
+  good_enough: A recent risk assessment identifies key threats and logging-related risks, even if not
+    exhaustive.

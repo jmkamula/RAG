@@ -1,0 +1,15 @@
+must_id: item:A.5.21:rev_next_date
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact date of the next planned ICT supply chain review in the review schedule document.
+- Record the decision on the next review date in meeting minutes, including who set the date and when.
+- Name the responsible individual for scheduling the next review, avoiding generic titles like "the team"
+  or "IT department".
+- Cross-reference the stated next review date in both the supply chain risk register and the review schedule
+  to ensure consistency.

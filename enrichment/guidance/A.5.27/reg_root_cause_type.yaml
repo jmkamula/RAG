@@ -1,0 +1,17 @@
+must_id: item:A.5.27:reg_root_cause_type
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Root-cause type per row (drives recurring-pattern analysis)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the root cause for each incident or issue in a dedicated column of the Lessons Learned Register,
+  using clear and specific language.
+- Classify each root cause using a consistent set of categories, such as process, technology, human error,
+  or external factors, and note the category per row.
+- Cross-reference each entry’s root cause with supporting investigation notes or incident reports to show
+  how the cause was determined.
+- Name the individual responsible for confirming the accuracy of each root cause entry, ensuring a specific
+  person is listed rather than a team or department.

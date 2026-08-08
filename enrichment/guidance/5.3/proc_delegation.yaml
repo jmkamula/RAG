@@ -1,0 +1,16 @@
+must_id: item:5.3:proc_delegation
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Delegation rules (when role-holder is unavailable)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the delegation process in your ISMS RACI framework, stating clearly how responsibilities are
+  reassigned when a role-holder is unavailable.
+- Name the backup or alternate for each key ISMS role as a specific individual, not as a team or department.
+- Record the date when each delegation rule was last reviewed and updated, and keep this record with your
+  RACI documentation.
+- Obtain written approval of the delegation rules from the ISMS owner or senior management, and retain
+  the signed approval.

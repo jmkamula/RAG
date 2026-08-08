@@ -1,0 +1,15 @@
+must_id: item:A.5.14:approval_target
+control_ref: A.5.14
+standard_id: ISO27001:2022
+must_text: Reference to the specific version of the transfer policy being approved
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific version number and date of the information transfer policy in the approval document.
+- Record the full name and role of the individual granting management approval, not just a department
+  or group.
+- Sign and date the approval document to confirm when the specific policy version was authorized.
+- Attach or cross-reference the approved policy document within the approval record to avoid ambiguity
+  about which version was approved.

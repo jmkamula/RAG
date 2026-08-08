@@ -1,0 +1,16 @@
+must_id: item:4.3:proc_workshop
+control_ref: '4.3'
+standard_id: ISO27001:2022
+must_text: Scoping workshop / interview process documented
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process used during the scoping workshop or interview, including agenda, participants,
+  and key discussion points.
+- Name the facilitator of the workshop or interview as a specific individual, not a generic role or team.
+- Record the date and location of each scoping session in a dedicated log or meeting minutes.
+- Retain signed attendance sheets or participant confirmations for each workshop or interview session.
+- Attach a finalized version of the documented methodology to the ISMS records, clearly marked with a
+  version number and approval date.

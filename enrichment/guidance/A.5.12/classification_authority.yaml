@@ -1,0 +1,16 @@
+must_id: item:A.5.12:classification_authority
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Decision authority for classifying information (owner-led by default)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the decision authority for each information asset as a specific individual, not a group or department,
+  in the classification scheme.
+- Document the date when the classification decision was made for each asset in the classification register.
+- Record the classification level assigned to each information asset, referencing the approved information
+  classification scheme.
+- Retain evidence of the owner’s approval or sign-off for each classification decision, such as an email
+  or signed form.

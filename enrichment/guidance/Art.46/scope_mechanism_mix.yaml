@@ -1,0 +1,19 @@
+must_id: item:Art.46:scope_mechanism_mix
+control_ref: Art.46
+standard_id: GDPR:2016/679
+must_text: Mechanism mix in use (SCCs predominantly / some BCRs / any ad-hoc clauses)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all cross-border data transfers and specify which mechanism applies to each, such as Standard Contractual
+  Clauses, Binding Corporate Rules, or ad-hoc clauses.
+- Document the date each mechanism was implemented and reference the signed agreements or approvals supporting
+  their use.
+- Name the individual responsible for maintaining and updating the register of transfer mechanisms, ensuring
+  this is not a generic team or department.
+- Attach copies of the actual SCCs, BCRs, or ad-hoc clauses used, clearly linking them to the relevant
+  transfers.
+- State the rationale for choosing each mechanism, referencing the specific Article 46 provision that
+  applies.

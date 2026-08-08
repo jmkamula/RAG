@@ -1,0 +1,17 @@
+must_id: item:A.8.25:scope_exclusions
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Exclusion rationale (quick scripts / throwaway automation / outsourced governed via A.8.30)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all software development activities and tools in scope, including quick scripts, automation, and
+  outsourced projects, with named owners and dates.
+- Document specific reasons for excluding each item, referencing "quick scripts," "throwaway automation,"
+  or "outsourced governed via A.8.30" as applicable.
+- Name the owner as a specific individual responsible for approving each exclusion, not a group or department.
+- Record the approval date and retain the signed exclusion rationale for each item excluded from the SDLC
+  scope.
+- Cross-reference excluded outsourced development to the relevant A.8.30 supplier governance documentation.

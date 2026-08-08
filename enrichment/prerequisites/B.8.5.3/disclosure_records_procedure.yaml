@@ -1,0 +1,48 @@
+leaf_id: req:B.8.5.3:disclosure_records_procedure
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the specific purposes for processing PII before you can accurately record and
+    justify any disclosures to third parties. This ensures that each disclosure aligns with a documented,
+    legitimate purpose.
+  good_enough: A clear, up-to-date list of processing purposes for all relevant PII is documented and
+    accessible to those drafting the disclosure recording procedure.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Recording disclosures requires knowing the lawful basis for each processing activity, as
+    this forms the 'source of authority' for sharing PII with third parties.
+  good_enough: Each processing activity involving PII has a mapped lawful basis (e.g., contract, consent)
+    that can be referenced in the disclosure recording procedure.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know which parts of your organization and which PII processing activities are
+    in scope to ensure your disclosure recording procedure covers all relevant areas.
+  good_enough: A documented ISMS scope exists and includes all business units and systems where PII processing
+    and third-party disclosures may occur.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register identifies where PII resides and which assets are involved in
+    disclosures, helping ensure all relevant disclosures are captured.
+  good_enough: A basic asset register lists all systems and data stores containing PII, sufficient to
+    identify where disclosures could originate.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Clear assignment of roles ensures that the right people are responsible for recording and
+    authorizing PII disclosures, preventing gaps or overlaps.
+  good_enough: Key roles for PII processing and disclosure (e.g., data protection officer, system owners)
+    are assigned and documented.

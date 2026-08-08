@@ -1,0 +1,19 @@
+must_id: item:A.8.3:rev_coverage_check
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Coverage check — every in-scope system has an up-to-date matrix in the register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every in-scope system by name in the access control register, including cloud services, applications,
+  and infrastructure components.
+- Cross-reference each system in the register with its most recent access matrix, showing user roles and
+  permissions, with a clear last-updated date.
+- Confirm that every access matrix in the register is reviewed and updated within the defined review cycle,
+  recording the review date and reviewer’s name.
+- Name the system owner for each entry as a specific individual, not a team or department, in the access
+  control register.
+- Flag any missing or outdated matrices in the register with a documented action plan and assigned responsible
+  person for remediation.

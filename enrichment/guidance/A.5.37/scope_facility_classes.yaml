@@ -1,0 +1,20 @@
+must_id: item:A.5.37:scope_facility_classes
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Facility classes / categories (compute, storage, network, security tooling, identity, observability)
+  — drives template variations and operator personas
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all information processing facilities in scope, specifying their class or category such as compute,
+  storage, network, security tooling, identity, or observability.
+- Document the template variations required for each facility class, including any unique security or
+  operational requirements.
+- Assign operator personas to each facility class, naming specific individuals or roles responsible for
+  management and oversight.
+- State the rationale for including each facility class in scope, referencing relevant business or compliance
+  needs.
+- Name the owner for each facility as a specific individual—do not use generic terms like "the team" or
+  "IT department".

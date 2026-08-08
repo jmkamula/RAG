@@ -1,0 +1,18 @@
+must_id: item:B.8.5.5:rev_classification_audit
+control_ref: B.8.5.5
+standard_id: ISO27701:2019
+must_text: Classification audit — sampled decisions reviewed for correctness
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer responsible for auditing disclosure decisions as a specific individual, not a group
+  or department.
+- Select a representative sample of disclosure decisions from the past year and list them in a dated review
+  log.
+- Document the classification assigned to each sampled decision and record the reviewer’s assessment of
+  its correctness.
+- Record any corrections or follow-up actions taken for misclassified decisions, including the date and
+  responsible person.
+- Sign and date the completed review log to confirm the audit was performed and findings were addressed.

@@ -1,0 +1,19 @@
+must_id: item:A.6.4:appeals
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Appeals or review process
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a formal appeals or review process in the disciplinary policy, including clear steps for how
+  an employee can challenge a decision.
+- Name the individual or committee responsible for handling appeals, specifying their role and contact
+  details in the documented process.
+- Record the date the appeals process was last reviewed and approved by senior management, attaching the
+  signed approval.
+- State the maximum timeframe within which appeals must be lodged and resolved, and include this in the
+  written process.
+- Avoid describing the appeals reviewer as "management" or "the team"—identify a specific person or defined
+  panel by name or title.

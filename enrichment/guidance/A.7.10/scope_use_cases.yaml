@@ -1,0 +1,18 @@
+must_id: item:A.7.10:scope_use_cases
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Use cases enumerated (backup transport, courier-of-data, demo loaners, archive)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of media used in your organisation, such as USB drives, backup tapes, laptops, and printed
+  documents, in a dated inventory.
+- Describe specific use cases for each media type, including backup transport, courier-of-data, demo loaners,
+  and archive, in a written scope document.
+- Assign a named individual as the owner responsible for maintaining and updating the media classes scope,
+  not a team or department.
+- Record the date of the most recent review or update of the media classes scope to show it is current.
+- Attach supporting evidence, such as transport logs or loan records, that demonstrate actual use of each
+  listed media class.

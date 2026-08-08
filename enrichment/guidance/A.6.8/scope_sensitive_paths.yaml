@@ -1,0 +1,17 @@
+must_id: item:A.6.8:scope_sensitive_paths
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Sensitive-case escalation paths stated (insider-threat suspicion → InfoSec-only intake bypassing
+  line management; whistleblower-territory → independent intake)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the escalation path for suspected insider threats, showing how reports bypass line management
+  and go directly to the Information Security lead.
+- Document a separate intake channel for whistleblower-type cases, identifying an independent contact
+  outside the normal reporting structure.
+- Name the specific individuals or roles responsible for receiving each type of sensitive report, avoiding
+  generic labels like "management" or "the team".
+- Record the date these escalation paths were last reviewed and approved by senior leadership.

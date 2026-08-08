@@ -1,0 +1,19 @@
+must_id: item:A.5.5:authorities_listed
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Relevant authorities enumerated (DPA, sectoral regulator, law enforcement, CERT/CSIRT)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all relevant authorities, including the data protection authority, sectoral regulators, law enforcement,
+  and national or sectoral incident response teams, in the contact register.
+- Record the official name, contact details, and jurisdiction of each authority, ensuring information
+  is current and specific to your organisation’s operations.
+- Assign a named individual as the register owner, avoiding generic roles like "IT team" or "Compliance
+  department".
+- Date each entry and update, maintaining a clear revision history to show when authorities or details
+  change.
+- Cross-reference the register with incident response and legal compliance procedures to demonstrate alignment
+  with documented processes.

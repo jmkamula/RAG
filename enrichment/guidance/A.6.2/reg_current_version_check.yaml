@@ -1,0 +1,20 @@
+must_id: item:A.6.2:reg_current_version_check
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Current-version check flag per row (yes / no-with-rationale-for-grandfathering) — surfaces
+  personnel on outdated terms
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to the Signed Employment Terms Register labeled "Current Version Check" with options "Yes"
+  or "No—with rationale for grandfathering."
+- Record the date each employment terms document was last signed or acknowledged by the individual listed
+  in each row.
+- State the specific version number or date of the employment terms each person has signed, not just "current"
+  or "outdated."
+- Document a clear, written rationale in the register for any "No" entries, explaining why outdated terms
+  are still in use.
+- Name the responsible HR staff member who reviews and updates the register, ensuring a specific individual
+  is accountable.

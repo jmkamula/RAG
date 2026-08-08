@@ -1,0 +1,17 @@
+must_id: item:A.8.20:zones
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Perimeter + zone definitions (cross-link to A.8.22 segregation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific individual responsible for defining and maintaining network perimeters and zones,
+  avoiding generic titles or teams.
+- Document the boundaries of each network perimeter and zone, including their purpose and any connections
+  to other zones, in the policy.
+- Cross-reference the network segregation controls detailed under A.8.22 within the policy, citing exact
+  section numbers or document locations.
+- Record the date of the most recent review and approval of the network security policy by a named, authorized
+  approver.

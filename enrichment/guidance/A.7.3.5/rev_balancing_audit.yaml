@@ -1,0 +1,18 @@
+must_id: item:A.7.3.5:rev_balancing_audit
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Balancing-test audit — sampled rejections reviewed for defensibility
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of recent objections that were rejected, and record their case numbers and decision
+  dates in a review log.
+- Document the balancing test applied in each sampled case, including the legitimate interest and the
+  individual's objection grounds.
+- Assign a named reviewer, independent from the original decision-maker, to assess whether each rejection
+  was justified and defensible.
+- Record the reviewer's findings and any recommendations for improvement, dated and signed, in the same
+  review log.
+- Name the reviewer as a specific individual—do not use generic roles like "Compliance Team" or "Manager".

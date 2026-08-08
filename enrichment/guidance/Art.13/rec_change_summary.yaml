@@ -1,0 +1,17 @@
+must_id: item:Art.13:rec_change_summary
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Per-row change-summary annotation (what changed vs prior version)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each change to the privacy notice in a dedicated "change summary" column, describing what was
+  updated compared to the previous version.
+- Record the date and version number for every privacy notice entry to clearly show the sequence of changes
+  over time.
+- Name the person responsible for approving each change, listing a specific individual rather than a team
+  or department.
+- Avoid using vague change descriptions like "updated text"—clearly state what content was added, removed,
+  or revised in each summary.

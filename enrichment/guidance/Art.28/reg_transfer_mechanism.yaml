@@ -1,0 +1,17 @@
+must_id: item:Art.28:reg_transfer_mechanism
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Per-row Chap V transfer mechanism where applicable
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific Chapter V transfer mechanism used for each processor in the DPA register, such as
+  Standard Contractual Clauses or adequacy decision.
+- Cross-reference each transfer mechanism entry with supporting documentation, such as signed contracts
+  or adequacy decisions, dated and stored in your records.
+- Name the individual responsible for verifying the accuracy of each transfer mechanism entry, ensuring
+  a specific person is listed, not a team or department.
+- Review the register regularly to confirm that any changes to transfer mechanisms are updated promptly
+  and supported by current documentation.

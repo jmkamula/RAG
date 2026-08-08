@@ -1,0 +1,18 @@
+must_id: item:A.5.3:a52_link
+control_ref: A.5.3
+standard_id: ISO27001:2022
+must_text: Cross-link to A.5.2 responsibility matrix — conflicts identified in A.5.2 inform A.5.3 separation
+  decisions
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each entry in the Segregation of Duties Matrix to the corresponding role or responsibility
+  in the A.5.2 responsibility matrix.
+- Document any conflicts or overlaps identified in the A.5.2 responsibility matrix that require separation
+  in the Segregation of Duties Matrix.
+- State the rationale for each segregation decision by linking it to a specific conflict or risk identified
+  in A.5.2.
+- Name the owner of the Segregation of Duties Matrix as a specific individual, not a team or department.
+- Record the date of the most recent review and update of both matrices to show they are aligned and current.

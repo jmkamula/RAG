@@ -1,0 +1,20 @@
+must_id: item:A.7.3.1:proc_obligation_catalog
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Obligation catalog per applicable jurisdiction (GDPR + UK GDPR + CCPA + LGPD as applicable)
+  with citation for each obligation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each applicable privacy law (GDPR, UK GDPR, CCPA, LGPD) in a table, including the jurisdiction
+  and effective date for your organisation.
+- Document every PII principal obligation from each law, referencing the exact article, section, or clause
+  for each entry.
+- Name a specific individual responsible for maintaining and updating the obligation catalog, not a team
+  or department.
+- Cross-reference each obligation to your internal policies or procedures that address compliance, citing
+  document names and version numbers.
+- Record the date the obligation catalog was last reviewed and updated, and retain evidence of management
+  approval.

@@ -1,0 +1,18 @@
+must_id: item:A.5.34:rev_reviewer
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Reviewer identity and role recorded (DPO or Privacy Officer + InfoSec lead jointly; legal-counsel
+  sign-off where law has shifted materially)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full names and official roles of the Data Protection Officer or Privacy Officer and the Information
+  Security lead on the review document.
+- Include the signature and date from legal counsel on the review document if privacy laws or regulations
+  have changed since the last review.
+- Attach a copy of the meeting minutes or review log showing both required reviewers participated and
+  agreed on the program assessment.
+- Name each reviewer as a specific individual—do not use group titles like "the team" or "management"
+  in the documentation.

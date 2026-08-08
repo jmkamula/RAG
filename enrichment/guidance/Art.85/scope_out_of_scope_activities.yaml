@@ -1,0 +1,20 @@
+must_id: item:Art.85:scope_out_of_scope_activities
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: Adjacent activities explicitly out of scope (e.g. subscriber-management, advertising — these
+  don't qualify as expression)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all organisational activities reviewed for potential inclusion under Article 85, showing both included
+  and excluded activities with clear descriptions.
+- Document the reasoning for excluding each adjacent activity, such as subscriber management or advertising,
+  in a dated record approved by a named decision-maker.
+- Name the individual responsible for defining and maintaining the scope, avoiding generic labels like
+  "the team" or "Compliance Department".
+- Cross-reference excluded activities to relevant business processes or systems, ensuring exclusions are
+  specific and not based on vague or general statements.
+- Retain a signed and dated version of the final scope document, including explicit mention of activities
+  considered but ruled out.

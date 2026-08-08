@@ -1,0 +1,19 @@
+must_id: item:A.7.3.7:rev_recipient_currency
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Recipient inventory currency — reconciled against A.7.5.4 disclosure register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for maintaining the inventory of third-party recipients, avoiding
+  generic titles like "the team" or "IT department".
+- Document the current list of all third-party recipients who receive personal data, including names,
+  contact details, and the nature of data shared.
+- Cross-reference each listed recipient against entries in the A.7.5.4 disclosure register, noting any
+  discrepancies or updates required.
+- Record the date and outcome of the most recent reconciliation review, including any changes made to
+  the inventory or register.
+- Retain evidence of the reconciliation process, such as annotated registers or meeting minutes, showing
+  how alignment between the inventory and disclosure register was achieved.

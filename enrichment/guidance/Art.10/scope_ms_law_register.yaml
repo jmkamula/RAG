@@ -1,0 +1,18 @@
+must_id: item:Art.10:scope_ms_law_register
+control_ref: Art.10
+standard_id: GDPR:2016/679
+must_text: Member State law register — every applicable MS law cited with title, article, scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each Member State law that applies to processing of criminal offence data, including the full official
+  title and publication reference.
+- Cite the specific article or section within each law that authorizes or restricts processing of criminal
+  offence data.
+- Describe the scope of each cited law, stating which processing activities, data types, or data subjects
+  it covers.
+- Record the date each law was last reviewed for relevance and accuracy in your register.
+- Name the owner as a specific individual responsible for maintaining the register — do not use a team
+  or department name.

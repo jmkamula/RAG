@@ -1,0 +1,39 @@
+leaf_id: req:Art.37:dpo_designation_program_review
+control_ref: Art.37
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Designation of the Data Protection Officer
+  category: direct
+  rationale: The initial designation of a DPO is required before any review of its appropriateness can
+    occur. You must have already determined whether a DPO is needed and, if so, formally appointed one.
+  good_enough: There is a documented decision (designation or justified non-designation) regarding the
+    DPO role, with basic evidence of appointment or rationale.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: Up-to-date records of processing are essential to assess whether the organization’s processing
+    activities now meet the criteria for mandatory DPO designation under Art.37.1.
+  good_enough: A current, working RoPA exists that covers all major processing activities, even if some
+    details are still being refined.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: Determining the Scope of the ISMS
+  category: cross_role
+  rationale: The ISMS scope defines the organizational boundaries relevant to DPO responsibilities and
+    ensures the review covers all applicable business units and processing activities.
+  good_enough: There is a documented ISMS scope statement that identifies the organizational and system
+    boundaries relevant to GDPR compliance.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of Processing
+  category: foundational
+  rationale: Understanding the lawful bases for processing helps determine if the nature or scale of processing
+    has changed, which may affect DPO designation requirements.
+  good_enough: Lawful basis for each processing activity is identified and documented, even if some justifications
+    are still being finalized.

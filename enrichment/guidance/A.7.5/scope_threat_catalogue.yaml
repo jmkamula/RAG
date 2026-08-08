@@ -1,0 +1,20 @@
+must_id: item:A.7.5:scope_threat_catalogue
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Threat catalogue considered (natural disasters per geography, intentional acts per threat-intel
+  landscape, unintentional per ops history)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical sites and digital environments within the organisation’s operational scope, naming
+  each location and environment explicitly in a dated record.
+- Document the natural disaster threats relevant to each site’s geography, referencing authoritative sources
+  or historical data for each entry.
+- Record intentional threats for each site and environment, using current threat intelligence reports
+  or advisories specific to your sector and region.
+- Capture unintentional threats by reviewing and summarising past incident logs or operational error reports
+  for each site and environment.
+- Name the individual responsible for maintaining and updating the threat catalogue, avoiding generic
+  titles like “IT” or “the team.”

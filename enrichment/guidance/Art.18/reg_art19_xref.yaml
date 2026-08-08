@@ -1,0 +1,16 @@
+must_id: item:Art.18:reg_art19_xref
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Per-row Art.19 notification reference
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and method of each Article 19 notification sent for every restriction entry in the register.
+- Cross-reference each restriction entry with the specific notification recipient, naming the individual
+  or organisation notified.
+- Attach a copy or unique identifier of the actual notification communication to each relevant row in
+  the register.
+- Name the staff member responsible for sending each notification, avoiding generic roles such as "the
+  team" or "Compliance Department".

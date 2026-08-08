@@ -1,0 +1,17 @@
+must_id: item:A.7.2.3:scope_change_drivers
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: Trigger list (new marketing programme, new sensitive data collection)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all situations where consent is required, such as new marketing programmes or sensitive data collection,
+  in a dated scope document.
+- Document a trigger list that prompts review of consent needs whenever a new data processing activity
+  is proposed.
+- Assign a named individual to review and update the trigger list at least annually, recording the review
+  date and outcome.
+- Name the owner as a specific person, not a generic role or department, to avoid auditor concerns about
+  accountability.

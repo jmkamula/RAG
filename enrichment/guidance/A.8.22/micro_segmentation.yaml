@@ -1,0 +1,19 @@
+must_id: item:A.8.22:micro_segmentation
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Micro-segmentation direction for east-west traffic (modern baseline for high-criticality)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the micro-segmentation strategy for east-west network traffic, including rationale and scope,
+  in a dated and version-controlled Network Segregation Procedure.
+- Name a specific individual as the owner responsible for maintaining and updating the micro-segmentation
+  direction, avoiding generic titles or teams.
+- Record the approved network zones, segmentation criteria, and controls for east-west traffic in a network
+  diagram or register, with clear references to critical assets.
+- State the date and outcome of the most recent review or approval of the micro-segmentation approach,
+  including the approver’s name and role.
+- Attach evidence of technical enforcement, such as firewall or software-defined network rules, showing
+  implementation of the documented micro-segmentation policy.

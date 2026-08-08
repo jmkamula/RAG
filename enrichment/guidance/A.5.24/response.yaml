@@ -1,0 +1,19 @@
+must_id: item:A.5.24:response
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Response and escalation procedures (decision authority per severity tier; out-of-hours handling;
+  cross-team coordination)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document clear response and escalation procedures for each severity tier, including who has decision
+  authority at each level, in the incident management framework.
+- Name a specific individual as the decision authority for each severity tier, avoiding generic roles
+  like "the team" or "IT department".
+- Record procedures for handling incidents outside normal business hours, specifying on-call contacts
+  and escalation paths with names and contact details.
+- List all teams involved in incident response and describe how coordination and communication will occur
+  between them, including named liaisons or points of contact.
+- Approve the framework with a dated signature from a senior manager responsible for incident management.

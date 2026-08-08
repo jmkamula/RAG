@@ -1,0 +1,17 @@
+must_id: item:A.7.2.6:proc_documented_instructions
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Documented-instructions clause (Art.28.3.a) — processor acts only on written controller instructions
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the contracting procedure that processors may only act on written instructions from the controller,
+  referencing GDPR Article 28.3.a.
+- Attach a sample contract clause requiring all processor actions to be based on documented controller
+  instructions.
+- Name the person responsible for reviewing and updating the written instructions clause in each processor
+  contract.
+- Record the date and version of the contracting procedure that includes this requirement.
+- Specify that the owner is a named individual, not a generic role or team.

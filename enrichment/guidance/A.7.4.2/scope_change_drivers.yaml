@@ -1,0 +1,19 @@
+must_id: item:A.7.4.2:scope_change_drivers
+control_ref: A.7.4.2
+standard_id: ISO27701:2019
+must_text: Trigger list (new product feature / new analytics pipeline)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name all new product features and analytics pipelines that process personal data in a dated processing
+  operations register entry.
+- Document the trigger event, such as the launch date or project approval, that initiated the review of
+  processing operations scope.
+- Assign a specific individual responsible for updating the processing operations scope, avoiding generic
+  roles like "the team" or "IT".
+- Cross-reference each new processing operation with the relevant data protection impact assessment or
+  risk review, including the date completed.
+- Record the date the processing operations scope was last reviewed and updated, and retain the previous
+  version for comparison.

@@ -1,0 +1,17 @@
+must_id: item:A.8.26:rev_reviewer
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Engineering + InfoSec + Product)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewers from Engineering, Information Security, and Product as specific individuals in the
+  review record, not as teams or roles.
+- Record the date each reviewer completed their assessment in the periodic application security requirements
+  review log.
+- Document each reviewer’s comments or approval in the review artefact to show their participation and
+  input.
+- Retain a signed or digitally acknowledged version of the final review outcome, showing all required
+  reviewers’ identities.

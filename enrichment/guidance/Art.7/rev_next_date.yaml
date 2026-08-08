@@ -1,0 +1,17 @@
+must_id: item:Art.7:rev_next_date
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Consent Program in the review documentation, using a clear
+  and specific calendar date.
+- Record the name of the individual responsible for scheduling and conducting the next review, not just
+  a team or department.
+- Confirm the review date is visible in the most recent Consent Program Review document, with the document
+  version and date clearly shown.
+- Retain evidence of management acknowledgement or approval of the stated next review date, such as a
+  signed or emailed confirmation.

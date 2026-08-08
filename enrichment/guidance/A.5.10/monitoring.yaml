@@ -1,0 +1,17 @@
+must_id: item:A.5.10:monitoring
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Monitoring expectations stated transparently (what the org may inspect, under what conditions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State clearly in the Acceptable Use Policy what types of user activity may be monitored, such as email,
+  web browsing, or file access.
+- Describe the specific conditions or triggers under which monitoring will occur, such as suspected policy
+  violations or routine security checks.
+- Name the individual or role responsible for authorizing monitoring activities, ensuring this is a specific
+  person and not a generic team or department.
+- Record the policy version and approval date, and include a reference to the meeting minutes or decision
+  log where monitoring transparency was discussed and approved.

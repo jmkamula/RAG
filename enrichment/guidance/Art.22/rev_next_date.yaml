@@ -1,0 +1,16 @@
+must_id: item:Art.22:rev_next_date
+control_ref: Art.22
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the automated decision-making program in a clearly visible section
+  of the review document.
+- Record the date the current review was completed to provide a reference point for the next scheduled
+  review.
+- Name the individual responsible for scheduling and conducting the next review, avoiding generic titles
+  like "the team" or "IT."
+- Retain a copy of the review document with the stated next review date in your compliance records.

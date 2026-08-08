@@ -1,0 +1,19 @@
+must_id: item:B.8.2.3:scope_pii_isolation
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: Customer-PII isolation posture (marketing systems use own-controller data only)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific marketing systems in use and list them in a dated inventory document maintained by
+  the data protection officer.
+- Document which customer data sets are processed by each marketing system, including data source and
+  lawful basis, in a controlled data mapping register.
+- State in a written policy that marketing systems are prohibited from using customer PII collected by
+  or for other controllers.
+- Assign a named individual responsible for verifying that each marketing system only accesses data collected
+  under your organisation’s own controller role.
+- Record the results of periodic access reviews, including reviewer name and date, showing no cross-controller
+  PII use in marketing systems.

@@ -1,0 +1,14 @@
+must_id: item:7.5:rev_currency
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Register currency check — every row reviewed; next-review dates met or rescheduled
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Review every row in the document register and record the review date and reviewer’s name for each entry.
+- Confirm that the next-review date for each document has either been met or formally rescheduled with
+  a new date and justification.
+- Document any overdue reviews with an explanation and a signed action plan for resolution.
+- Name the owner of each document as a specific individual, not a team or department, in the register.

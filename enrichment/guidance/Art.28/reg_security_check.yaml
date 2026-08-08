@@ -1,0 +1,19 @@
+must_id: item:Art.28:reg_security_check
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Per-row Art.32-equivalent security assurance source (certification / audit report / questionnaire)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific security assurance source for each processor row, such as a named certification,
+  audit report, or completed security questionnaire.
+- Attach or link the dated evidence document for each processor, ensuring it is accessible and clearly
+  associated with the correct processor entry.
+- State the type and scope of the security assurance (e.g., ISO 27001 certificate, SOC 2 report, completed
+  questionnaire) in the register for each processor.
+- Name the individual who reviewed and validated the security assurance evidence for each processor, including
+  the review date.
+- Avoid listing generic statements like "security measures in place" without referencing a concrete, verifiable
+  document or certification.

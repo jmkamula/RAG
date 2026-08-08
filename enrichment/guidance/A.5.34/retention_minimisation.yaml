@@ -1,0 +1,19 @@
+must_id: item:A.5.34:retention_minimisation
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Retention and data minimisation requirements (collect only what's necessary; retain only as
+  long as needed; cross-link to A.5.33 records schedule and GDPR Art.5.1.c/e)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy that personal data is collected only for specified, explicit, and legitimate purposes,
+  referencing GDPR Article 5.1.c.
+- Document retention periods for each personal data category, cross-referencing your records retention
+  schedule from control A.5.33.
+- Name a specific individual as the policy owner responsible for enforcing data minimisation and retention,
+  not a team or department.
+- Include a policy statement requiring regular review and deletion of personal data that exceeds retention
+  periods, referencing GDPR Article 5.1.e.
+- Attach the latest approval date and signature of a senior manager to the policy document.

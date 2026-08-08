@@ -1,0 +1,16 @@
+must_id: item:A.8.20:reg_segment_id
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Per-row segment / VPC / VLAN identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the unique segment, VPC, or VLAN identifier for each network entry in the inventory register,
+  ensuring every row has a specific value.
+- Cross-reference each identifier with network diagrams or configuration files to confirm accuracy and
+  traceability.
+- Name the owner of each network segment as a specific individual, not a team or department, in the register.
+- Date each entry or update in the register to provide a clear record of when the information was last
+  verified.

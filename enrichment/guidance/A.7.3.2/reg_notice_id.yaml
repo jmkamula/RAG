@@ -1,0 +1,16 @@
+must_id: item:A.7.3.2:reg_notice_id
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: Unique notice identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each notice entry in the register, ensuring no two notices share the same
+  identifier.
+- Record the assigned identifier in a dedicated column within the Notice Artifact Register alongside each
+  notice’s details.
+- Cross-reference each notice identifier in related documentation, such as privacy notices or data processing
+  records, to confirm traceability.
+- Avoid using generic or repeating identifiers such as “N/A” or “TBD” that could apply to multiple notices.

@@ -1,0 +1,18 @@
+must_id: item:A.7.4.4:scope_full_pii_needed
+control_ref: A.7.4.4
+standard_id: ISO27701:2019
+must_text: Full-PII contexts (operational transactions + notifications + support) with justification
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all operational transactions, notifications, and support activities where full personal data is
+  processed, specifying each context by name.
+- Document the justification for processing full personal data in each listed context, referencing the
+  relevant business or legal need.
+- Name the responsible individual for maintaining and updating the minimization context scope, avoiding
+  group or team ownership.
+- Record the date when each context and justification was last reviewed and confirmed as current.
+- Attach supporting evidence showing that data in these contexts is not de-identified, such as sample
+  records or screenshots with personal data visible.

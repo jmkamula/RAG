@@ -1,0 +1,19 @@
+must_id: item:A.7.3.2:proc_medium_selection
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: Medium selection — which channels (privacy notice URL, layered notices, in-product prompts,
+  contract clauses)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process used to select which communication channels are used to deliver privacy notices,
+  including the rationale for each choice.
+- List all channels currently used to provide privacy notices, such as website URLs, layered notices,
+  in-product prompts, and contract clauses.
+- Name the individual responsible for approving the selection of privacy notice channels, ensuring a specific
+  person is identified rather than a team or department.
+- Record the date on which the most recent review or update of the channel selection procedure was completed.
+- Attach evidence showing that the selected channels are accessible and understandable to the intended
+  audience, such as screenshots or sample communications.

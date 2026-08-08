@@ -1,0 +1,18 @@
+must_id: item:A.8.27:reg_usage_count
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Per-pattern usage-count (how many projects adopted it — drives 'is this pattern actually used'
+  signal)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the number of projects that have adopted each reference architecture pattern in the register,
+  including project names and adoption dates.
+- Update the usage count in the register whenever a new project adopts or retires a pattern, with the
+  responsible person's name and the date.
+- Cross-reference each usage entry with supporting project documentation to confirm actual adoption, not
+  just intent or planned use.
+- Name the owner of the register as a specific individual, not a team or department, to ensure accountability
+  for updates and accuracy.

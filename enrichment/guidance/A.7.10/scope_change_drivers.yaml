@@ -1,0 +1,17 @@
+must_id: item:A.7.10:scope_change_drivers
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new media format, deprecation of media class)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current media classes in use, including physical and digital formats, with a last-reviewed
+  date and the person responsible for the list.
+- Document a trigger list that specifies events requiring re-scoping, such as introduction of new media
+  types or deprecation of existing classes.
+- Assign a named individual to monitor technology changes and industry trends that could affect the scope
+  of applicable media classes.
+- Record each re-scoping decision with the date, reason for change, and approval by a designated authority.
+- Name the owner as a specific individual, not a group or department, to avoid ambiguity in responsibility.

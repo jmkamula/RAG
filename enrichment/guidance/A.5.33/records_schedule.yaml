@@ -1,0 +1,19 @@
+must_id: item:A.5.33:records_schedule
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Records inventory or schedule listing every record class the organisation holds (HR records,
+  financial records, customer records, contract records, security/audit logs, processing-activity records,
+  system records, training records, incident records, etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every type of record your organisation holds, such as HR, financial, customer, contract, audit
+  logs, processing activities, system, training, and incident records.
+- Assign a unique owner to each record class, naming a specific individual rather than a team or department.
+- Document the required retention period and protection measures for each record class in the schedule,
+  including start and end dates.
+- Record the location and format (physical or digital) for each record class entry in the inventory.
+- Review and update the records schedule at least annually, noting the date of each review and the person
+  responsible.

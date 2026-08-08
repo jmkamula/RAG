@@ -1,0 +1,17 @@
+must_id: item:Art.36:reg_consultation_id
+control_ref: Art.36
+standard_id: GDPR:2016/679
+must_text: Per-row consultation id
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique consultation ID to each entry in the Prior Consultation Register, ensuring no two consultations
+  share the same identifier.
+- Record the consultation ID alongside the date and summary of each consultation, creating a clear link
+  between the ID and the consultation details.
+- Cross-reference the consultation ID in all related documentation, such as risk assessments or correspondence
+  with the supervisory authority.
+- Avoid using generic or repeated IDs such as "N/A" or "000"—each consultation must have a distinct, traceable
+  identifier.

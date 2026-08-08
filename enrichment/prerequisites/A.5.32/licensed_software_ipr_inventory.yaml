@@ -1,0 +1,41 @@
+leaf_id: req:A.5.32:licensed_software_ipr_inventory
+control_ref: A.5.32
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of your organization and which systems are in-scope for the
+    ISMS before you can meaningfully inventory licensed software and IPR. Otherwise, the inventory could
+    be incomplete or irrelevant.
+  good_enough: A clear, documented scope that identifies the organizational boundaries and assets covered
+    by the ISMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register is the master list of information assets, which is essential for identifying
+    which software and IPR need to be inventoried. Without it, you risk missing key items or duplicating
+    effort.
+  good_enough: A basic, up-to-date list of information assets, including hardware and software, even if
+    some details are still being refined.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures someone is accountable for maintaining the software and
+    IPR inventory. Without this, the register may not be kept accurate or up to date.
+  good_enough: Documented responsibility for asset and IPR management, even if detailed procedures are
+    still being developed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: A classification scheme helps you categorize software and IPR by sensitivity, licensing,
+    and ownership, which is critical for a meaningful inventory.
+  good_enough: A simple, documented scheme for classifying assets (e.g., by confidentiality or licensing
+    type), even if not all assets are yet classified.

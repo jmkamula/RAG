@@ -1,0 +1,19 @@
+must_id: item:A.7.6:reg_work_permit
+control_ref: A.7.6
+standard_id: ISO27001:2022
+must_text: Per-session work-permit reference where the permit system applies
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the unique work-permit reference number for each secure area work session directly in the session
+  register entry.
+- Cross-reference each work-permit number with the corresponding permit documentation stored in your permit
+  management system.
+- Name the individual who issued or approved the work permit for each session, using their full name rather
+  than a generic title.
+- Confirm the date and time the work permit was granted, and enter these details alongside the session
+  record.
+- Avoid leaving the work-permit reference field blank or using placeholders such as "N/A" when a permit
+  system applies.

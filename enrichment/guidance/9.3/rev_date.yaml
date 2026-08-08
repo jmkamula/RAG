@@ -1,0 +1,17 @@
+must_id: item:9.3:rev_date
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the scheduled review interval for management reviews in a documented schedule, including planned
+  dates and responsible individuals.
+- Document the actual date each management review was conducted in meeting minutes or a review log.
+- Attach the signed attendance list or meeting minutes as evidence that the review took place on the recorded
+  date.
+- Name the review owner as a specific individual, not a group or department, in the review documentation.
+- Cross-reference the review date with the planned interval to confirm the review occurred within the
+  required timeframe.

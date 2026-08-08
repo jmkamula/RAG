@@ -1,0 +1,19 @@
+must_id: item:Art.18:rev_exception_compliance
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Exception compliance — restricted records only used per Art.18.2 exceptions
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each instance where a restricted record was accessed or processed, including the date, purpose,
+  and the specific exception under Art.18.2 applied.
+- Name the individual who approved each exception-based use of restricted records, ensuring this is a
+  specific person and not a group or department.
+- Retain supporting evidence, such as emails or signed forms, that demonstrate the necessity and legal
+  basis for each exception-based use.
+- Review all exception-based uses quarterly and record the outcome, noting any instances where use did
+  not strictly match an Art.18.2 exception.
+- State explicitly in your review log that no restricted records were used outside the listed Art.18.2
+  exceptions; avoid generic statements that could apply to any policy.

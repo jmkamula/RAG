@@ -1,0 +1,18 @@
+must_id: item:8.1:reg_evidence_link
+control_ref: '8.1'
+standard_id: ISO27001:2022
+must_text: Per-row link to documented evidence retained
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each operational activity in the register to a specific, dated document or record that
+  demonstrates the activity was performed.
+- Attach or link the actual evidence file or its storage location directly in the corresponding row of
+  the register.
+- Name the evidence owner as a specific individual responsible for maintaining and updating the linked
+  documentation.
+- Record the date each piece of evidence was last reviewed or updated to show ongoing maintenance.
+- Avoid using generic placeholders like "see folder" or "available on request"—link to concrete, accessible
+  evidence for every row.

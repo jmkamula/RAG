@@ -1,0 +1,52 @@
+leaf_id: req:A.7.7:cd_cs_program_review
+control_ref: A.7.7
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organization and which assets are covered
+    by the ISMS, including the clear desk/clear screen program. Without a clear scope, you cannot meaningfully
+    review whether the program is effective or complete.
+  good_enough: A documented scope that clearly identifies the business units, locations, and information
+    assets included in the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The clear desk/clear screen program must align with the overarching information security
+    policy. The review process needs to check for alignment and policy currency, so the policy must exist
+    and be accessible.
+  good_enough: A current, approved information security policy that references or supports the clear desk/clear
+    screen requirements.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: The review must assess enforcement and accountability, which depends on clear assignment
+    of roles and responsibilities for the clear desk/clear screen program. Without this, you cannot evaluate
+    enforcement consistency.
+  good_enough: Documented roles and responsibilities for those managing and enforcing the clear desk/clear
+    screen program.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The review should consider whether all relevant assets (e.g., workstations, paper records)
+    are covered by the program. An up-to-date asset register is needed to verify program completeness
+    and identify gaps.
+  good_enough: A basic, current list of physical and digital assets in scope for clear desk/clear screen
+    controls.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The program review must consider whether information of different classifications is being
+    handled appropriately. A classification scheme is needed to judge if controls are suitable for the
+    sensitivity of information.
+  good_enough: A documented classification scheme that is referenced by the clear desk/clear screen policy
+    or procedures.

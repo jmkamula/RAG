@@ -1,0 +1,19 @@
+must_id: item:A.5.20:audit_rights
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Audit rights (right to audit; accept attestations like ISO 27001 / SOC 2 in lieu)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the supplier agreement that your organisation has the right to audit the supplier’s security
+  controls at reasonable intervals.
+- Specify in the template that independent security certifications, such as ISO 27001 or SOC 2, may be
+  accepted as alternatives to on-site audits.
+- Name the person or role responsible for reviewing and approving supplier-provided attestations or certifications
+  in each agreement.
+- Record the date and version of the template used for each supplier agreement to show the inclusion of
+  audit rights language.
+- Name the owner as a specific individual — not a team or department — responsible for maintaining and
+  updating the template.

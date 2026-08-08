@@ -1,0 +1,19 @@
+must_id: item:A.6.7:rev_ad_hoc_triggers
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Ad-hoc review triggers (major incident exposing remote-work gap, policy change affecting remote
+  workers, regulatory change for cross-border data, geographic-risk shift)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each ad-hoc review trigger in the Remote Working Programme Review log, including the specific
+  event, date, and a brief description.
+- Assign responsibility for monitoring and initiating ad-hoc reviews to a named individual, not a generic
+  team or department.
+- Record the decision to conduct an ad-hoc review, including who approved it and the date of approval.
+- Retain evidence of the review outcome, such as meeting minutes or an updated risk assessment, with clear
+  references to the triggering event.
+- Cross-reference each ad-hoc review entry with relevant policy, regulatory, or incident documentation
+  to show the direct link to the trigger.

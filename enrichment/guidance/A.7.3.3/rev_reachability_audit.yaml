@@ -1,0 +1,19 @@
+must_id: item:A.7.3.3:rev_reachability_audit
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: Reachability audit — sampled touchpoints verified to serve current notice
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and list all user touchpoints where privacy notices are delivered, including websites, apps,
+  and physical locations, in a dated inventory.
+- Select a sample of these touchpoints and capture screenshots or photographs showing the current privacy
+  notice is accessible at each location.
+- Record the date and method of each verification, naming the individual who performed the check for every
+  sampled touchpoint.
+- Note any touchpoint where the notice is missing or outdated, and document the corrective action taken
+  with a completion date.
+- Name the owner responsible for maintaining the notice inventory as a specific individual, not a team
+  or department.

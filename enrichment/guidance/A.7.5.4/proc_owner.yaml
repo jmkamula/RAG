@@ -1,0 +1,16 @@
+must_id: item:A.7.5.4:proc_owner
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Named owner (DPO + Legal)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the PII Disclosure Recording Procedure as a specific individual, listing both the
+  Data Protection Officer and a named Legal representative.
+- Document the appointment of these owners in the procedure, including their full names, job titles, and
+  the date of assignment.
+- Record the owners’ acceptance of responsibility by obtaining their signatures on the latest version
+  of the procedure.
+- Review the procedure to confirm that ownership is not attributed to a team, department, or generic role.

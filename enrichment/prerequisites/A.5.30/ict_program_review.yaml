@@ -1,0 +1,50 @@
+leaf_id: req:A.5.30:ict_program_review
+control_ref: A.5.30
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ICT readiness program review must be scoped to the relevant assets, processes, and services
+    defined in the ISMS scope. Without a clear scope, the review may miss critical systems or include
+    irrelevant ones.
+  good_enough: A documented and approved ISMS scope statement that clearly identifies the boundaries and
+    applicability of the ISMS, including ICT systems to be reviewed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register is essential to identify which ICT assets are in scope for continuity
+    planning and review. Missing or outdated asset information undermines the effectiveness of the review.
+  good_enough: A current list of ICT assets relevant to continuity, with enough detail to support review
+    activities (e.g., system names, owners, dependencies).
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: The periodic review must consider the latest risk assessment results to ensure that ICT continuity
+    measures address current threats and vulnerabilities. Outdated risk data can lead to ineffective or
+    misaligned reviews.
+  good_enough: A recent risk assessment covering ICT continuity risks, with documented findings and risk
+    owners.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that the review process is owned,
+    executed, and acted upon. Without this, reviews may be incomplete or lack follow-through.
+  good_enough: Documented roles and responsibilities for ICT continuity and review activities, with named
+    individuals or teams.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The review must prioritize ICT assets and services based on their classification to ensure
+    critical systems receive appropriate attention. Without a classification scheme, reviews may not focus
+    on the most important areas.
+  good_enough: A basic classification scheme applied to ICT assets, distinguishing at least between critical
+    and non-critical systems.

@@ -1,0 +1,19 @@
+must_id: item:A.8.3:per_system_matrix
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Access matrix per system / repository row (who, what permissions, on what resource)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner for each system or repository row, avoiding generic labels like
+  "IT team" or "admins".
+- List all users or groups with access to each system or repository, specifying their full names or unique
+  identifiers.
+- State the exact permissions granted to each user or group for every system or repository, such as read,
+  write, or admin.
+- Record the date each access entry was last reviewed or updated, ensuring the register reflects current
+  access rights.
+- Cross-reference each system or repository entry with its corresponding business owner or data classification,
+  if applicable.

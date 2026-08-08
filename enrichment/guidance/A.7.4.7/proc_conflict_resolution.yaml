@@ -1,0 +1,20 @@
+must_id: item:A.7.4.7:proc_conflict_resolution
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Conflict-resolution rule — where legal + regulatory + business requirements conflict, documented
+  risk-based decision
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a written procedure that explains how conflicts between legal, regulatory, and business requirements
+  for PII retention are identified and escalated.
+- Record a dated risk assessment that evaluates the impact of each conflicting requirement on privacy,
+  compliance, and business operations.
+- Name the individual or role responsible for making final conflict-resolution decisions, specifying a
+  person rather than a generic team or department.
+- Sign and date the documented decision that resolves the conflict, clearly stating the rationale based
+  on the risk assessment.
+- Retain evidence of periodic reviews to confirm the conflict-resolution rule remains current with changing
+  laws and business needs.

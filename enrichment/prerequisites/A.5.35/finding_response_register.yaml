@@ -1,0 +1,40 @@
+leaf_id: req:A.5.35:finding_response_register
+control_ref: A.5.35
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The register must only track findings relevant to the defined ISMS scope. Without a clear
+    scope, you can't reliably determine which findings belong in the register or who is responsible for
+    them.
+  good_enough: A documented scope statement exists that clearly defines the organizational and system
+    boundaries for the ISMS.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Each finding in the register needs an assigned owner and responsible party for follow-up.
+    If roles and responsibilities are unclear, you can't assign or track accountability for findings.
+  good_enough: A current list of ISMS roles and their responsibilities is documented and accessible, with
+    named individuals for key roles.
+- ref: A.5.35
+  standard_id: ISO27001:2022
+  title: Independent Review of Information Security
+  category: direct
+  rationale: The register catalogs findings from independent reviews. You need evidence that such reviews
+    have occurred and produced findings to populate the register.
+  good_enough: At least one independent review has been completed and its findings are documented, even
+    if not yet fully tracked or resolved.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: direct
+  rationale: The severity and prioritization of findings often depend on the organization's risk assessment
+    methodology. Without this, you can't consistently rate or treat findings in the register.
+  good_enough: A basic risk assessment process exists and is used to assign severity or priority to findings,
+    even if it's still being refined.

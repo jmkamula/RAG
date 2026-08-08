@@ -1,0 +1,40 @@
+leaf_id: req:A.5.21:eol_replacement_record
+control_ref: A.5.21
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You need an up-to-date asset register to identify which ICT components are in scope for end-of-life
+    (EOL) tracking and replacement. Without this, you can't reliably determine what needs to be replaced
+    or when.
+  good_enough: A current, reasonably complete list of ICT components, including key attributes like model,
+    serial, and support status, is available.
+- ref: A.5.20
+  standard_id: ISO27001:2022
+  title: Addressing information security within supplier agreements
+  category: direct
+  rationale: Supplier agreements often define support periods and EOL notifications for ICT components.
+    Understanding these terms is essential for timely replacement planning and recordkeeping.
+  good_enough: Supplier agreements for relevant ICT components are reviewed and key EOL/support clauses
+    are identified.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessments help determine the impact of running unsupported components and guide compensating
+    controls or risk acceptance if replacement is delayed.
+  good_enough: A recent risk assessment exists that covers the risks of EOL ICT components and outlines
+    mitigation or acceptance.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures accountability for tracking, replacing, and documenting
+    EOL ICT components.
+  good_enough: Named individuals or teams are assigned responsibility for ICT asset lifecycle management,
+    including EOL actions.

@@ -1,0 +1,39 @@
+leaf_id: req:A.6.3:audience_curriculum_scope
+control_ref: A.6.3
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the boundaries of your ISMS—what people, processes, and assets are in-scope—before
+    you can define which audiences require security training and what curriculum applies.
+  good_enough: A clear, documented scope that identifies included business units, roles, and locations
+    is sufficient to start mapping audiences to training needs.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: A current register of roles and responsibilities is essential to identify distinct audience
+    segments for training and to ensure the curriculum is tailored to actual job functions.
+  good_enough: A working list of defined roles and their key responsibilities, even if not fully detailed,
+    is enough to begin audience-curriculum mapping.
+- ref: A.6.2
+  standard_id: ISO27001:2022
+  title: Terms and conditions of employment
+  category: direct
+  rationale: Terms and conditions of employment typically set the expectation for information security
+    training, so these must be established before defining who gets trained and on what.
+  good_enough: Documented terms that reference security responsibilities and training requirements for
+    new hires and existing staff are sufficient to proceed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: Understanding which information assets are handled by different roles helps determine the
+    necessary training content for each audience segment.
+  good_enough: A basic inventory linking key assets to responsible roles is enough to inform curriculum
+    scoping, even if the register is not exhaustive.

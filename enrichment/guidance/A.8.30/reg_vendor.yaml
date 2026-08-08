@@ -1,0 +1,18 @@
+must_id: item:A.8.30:reg_vendor
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Per-engagement vendor (cross-link to A.5.19 supplier register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each outsourced development engagement in a dedicated register, naming the vendor and describing
+  the scope of work for each entry.
+- Cross-reference each vendor in the engagement register to their corresponding entry in the A.5.19 supplier
+  register by unique supplier ID or link.
+- Record the start and end dates for each engagement, ensuring all entries are current and reflect the
+  latest contractual status.
+- Name the engagement owner as a specific individual responsible for oversight, avoiding generic titles
+  or team names.
+- Review the register quarterly and sign off on updates, keeping a dated record of each review cycle.

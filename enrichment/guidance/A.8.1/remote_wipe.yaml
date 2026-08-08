@@ -1,0 +1,18 @@
+must_id: item:A.8.1:remote_wipe
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Remote wipe / lock capability for lost or stolen devices
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the User Endpoint Devices Policy that all portable devices must support remote wipe or lock
+  in case of loss or theft.
+- Document the technical solution used for remote wipe or lock, including product name and configuration
+  details, in a dated appendix to the policy.
+- Assign a named individual or role responsible for initiating remote wipe or lock actions, listing their
+  contact details in the policy.
+- Record a test of the remote wipe or lock capability on a sample device, including date, outcome, and
+  tester’s name.
+- Specify the owner as a named person, not a generic team or department, in the policy’s approval section.

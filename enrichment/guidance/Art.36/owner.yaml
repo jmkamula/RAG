@@ -1,0 +1,17 @@
+must_id: item:Art.36:owner
+control_ref: Art.36
+standard_id: GDPR:2016/679
+must_text: Named owner (DPO + legal counsel)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer (DPO) as a specific individual responsible for the prior consultation
+  procedure in a dated document.
+- Record the legal counsel’s full name and role as co-owner of the prior consultation process in the same
+  document.
+- Sign and date the procedure document by both the DPO and legal counsel to confirm their ownership and
+  accountability.
+- Avoid listing the owner as a team, department, or generic title; use only named individuals for clear
+  accountability.

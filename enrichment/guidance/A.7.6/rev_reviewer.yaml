@@ -1,0 +1,16 @@
+must_id: item:A.7.6:rev_reviewer
+control_ref: A.7.6
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Facilities + InfoSec)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Facilities reviewer as a specific individual with full name and job title on the secure work
+  program review record.
+- Record the Information Security reviewer’s full name and job title on the same review document.
+- Sign and date the review document to confirm both reviewers have participated and approved the periodic
+  secure work program review.
+- Avoid listing a group or department as reviewer; always identify named individuals responsible for the
+  review.

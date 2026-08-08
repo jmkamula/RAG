@@ -1,0 +1,17 @@
+must_id: item:Art.23:owner
+control_ref: Art.23
+standard_id: GDPR:2016/679
+must_text: Named owner (DPO + legal counsel)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the Member State Restrictions Procedure as a specific individual, listing both the
+  Data Protection Officer and the designated legal counsel.
+- Record the full names, job titles, and contact details of the Data Protection Officer and legal counsel
+  in the procedure document.
+- Date the latest version of the procedure and include a revision history showing when the owners were
+  assigned or changed.
+- Sign the procedure document or approval page to confirm acceptance by both the Data Protection Officer
+  and legal counsel.

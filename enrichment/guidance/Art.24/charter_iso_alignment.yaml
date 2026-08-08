@@ -1,0 +1,17 @@
+must_id: item:Art.24:charter_iso_alignment
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Reference to ISO 27001 ISMS as the implementing framework
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Privacy Programme Charter that ISO 27001 is the chosen framework for implementing information
+  security management.
+- Cross-reference the specific version and publication date of ISO 27001 used within the Charter.
+- Name the individual responsible for maintaining alignment between the Privacy Programme and the ISO
+  27001 framework.
+- Attach or link to the organisation’s ISO 27001 certification or statement of applicability as supporting
+  evidence.
+- Avoid using generic language like “industry standards”; explicitly mention ISO 27001 by name and version.

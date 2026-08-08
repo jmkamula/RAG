@@ -1,0 +1,18 @@
+must_id: item:A.7.12:labelling
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Cable and patch-panel labelling for traceability
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a procedure that requires all cables and patch panels to be clearly labelled with unique identifiers
+  matching network diagrams.
+- Record the date and name of the person responsible for applying or updating each label on a central
+  register.
+- Cross-reference each label in the register with its corresponding location and function in your network
+  topology documentation.
+- Name the owner of the cabling security procedure as a specific individual, not a team or department.
+- Retain photographic evidence of labelled cables and patch panels, including dates, to show labels are
+  present and legible.

@@ -1,0 +1,16 @@
+must_id: item:Art.22:reg_decisions_made
+control_ref: Art.22
+standard_id: GDPR:2016/679
+must_text: Decision categories made (loan approval, employment screening, pricing, etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each type of automated decision your organisation makes, such as loan approval, employment screening,
+  or pricing, in the register.
+- Describe the purpose and outcome of each decision category, providing a clear example for each entry.
+- Name the business unit or process owner responsible for each decision category, using a specific individual’s
+  name.
+- Record the date when each decision category was added or last reviewed in the register.
+- Avoid using vague or generic categories like "various" or "N/A"—specify concrete decision types only.

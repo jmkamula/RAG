@@ -1,0 +1,16 @@
+must_id: item:A.5.27:imp_closure_date
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Closure date recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the closure date for each improvement action in the per-lesson improvement action record, using
+  a standard date format.
+- Confirm that each closure date entry is complete and matches the actual date the action was finished.
+- Name the person responsible for verifying and entering the closure date, ensuring a specific individual
+  is listed rather than a team or department.
+- Review past records to check for missing or placeholder closure dates, and update any incomplete entries
+  with accurate information.

@@ -1,0 +1,19 @@
+must_id: item:B.8.2.1:reg_instructions_channel
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+must_text: Documented-instructions channel per row (email log / ticket queue / portal)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the documented instructions channel used for each customer PII agreement row, such as email log,
+  ticket queue, or portal, with a specific reference.
+- Name the staff member responsible for receiving and processing each instruction, listing their full
+  name rather than a generic team or department.
+- Enter the date each instruction was received and the date it was actioned, ensuring both dates are clearly
+  visible in the register.
+- Attach or link to the actual instruction document or message for each entry, so the original communication
+  can be easily retrieved.
+- Avoid using vague descriptors like "various" or "multiple channels"—specify the exact channel for each
+  agreement row.

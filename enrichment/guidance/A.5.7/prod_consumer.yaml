@@ -1,0 +1,19 @@
+must_id: item:A.5.7:prod_consumer
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Named consumer(s) per record (sec ops, IT/network, risk owners, exec briefing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all products with associated intelligence records in a register, including the product name and
+  a unique identifier for each entry.
+- Name the specific individual or role responsible for consuming each product’s intelligence, such as
+  "Jane Smith, Security Operations Lead" or "CIO John Doe."
+- Record the date each consumer was assigned to the product intelligence record, ensuring the assignment
+  is current and not left blank.
+- Avoid using vague group labels like "the team" or "IT department" as consumers; always specify a named
+  person or defined role.
+- Review and update the register at least annually, documenting the date of review and the reviewer’s
+  name.

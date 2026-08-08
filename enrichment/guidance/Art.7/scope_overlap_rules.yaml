@@ -1,0 +1,20 @@
+must_id: item:Art.7:scope_overlap_rules
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Rules for when consent overlaps with another basis (Art.7 still applies if consent is the chosen
+  basis even when another basis would also work)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all processing activities where consent is used as the legal basis, even if another legal basis
+  could apply.
+- Document the rationale for choosing consent over other available legal bases for each activity, including
+  who made the decision and when.
+- State explicitly in your records that Article 7 requirements apply wherever consent is used, regardless
+  of other possible bases.
+- Name the owner responsible for maintaining this consent scope as a specific individual, not a team or
+  department.
+- Attach supporting evidence, such as meeting minutes or decision logs, showing the review and confirmation
+  of this consent scope.

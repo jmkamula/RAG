@@ -1,0 +1,17 @@
+must_id: item:5.1:rea_signed_by
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Signed by current top management (covers turnover)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the current top management by full name and title in the reaffirmation record, ensuring it matches
+  your latest organizational chart.
+- State the reaffirmation of leadership commitment to the information security policy in clear, unambiguous
+  language within the record.
+- Sign and date the reaffirmation record personally by each member of current top management, avoiding
+  use of generic signatures or stamps.
+- Retain previous versions of the reaffirmation record to show continuity and coverage during any management
+  turnover periods.

@@ -1,0 +1,20 @@
+must_id: item:A.6.7:proc_modification_path
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Modification path when worker's situation changes (relocation, role change, equipment swap,
+  extended absence) — drives register update + may trigger re-approval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each change in a worker’s remote working situation, including relocation, role change, equipment
+  swap, or extended absence, in a dated change log.
+- Name the person responsible for assessing and approving modifications for each worker, ensuring this
+  is a specific individual and not a generic role.
+- Update the remote working register immediately after any approved change, recording the date, nature
+  of the change, and the approver’s name.
+- Record any re-approval decisions in writing, signed or acknowledged by the designated approver, and
+  attach to the worker’s file.
+- Cross-reference each change entry with supporting evidence, such as updated equipment lists or HR notifications,
+  in the register.

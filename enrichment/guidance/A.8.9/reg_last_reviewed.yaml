@@ -1,0 +1,16 @@
+must_id: item:A.8.9:reg_last_reviewed
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Per-baseline last review date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the last review date for each configuration baseline entry in the register using a clear date
+  format.
+- Name the individual who performed the most recent review for each baseline, not just a team or department.
+- Retain evidence of the review, such as meeting minutes or a signed checklist, linked to the corresponding
+  baseline entry.
+- Cross-reference each baseline entry with its last review documentation to show the review actually occurred
+  on the stated date.

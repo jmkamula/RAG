@@ -1,0 +1,20 @@
+must_id: item:A.5.24:notification
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Notification process for personal data breaches (supervisory authority < 72h; data subjects
+  when high-risk; notification content per Art.33(3))
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for notifying the supervisory authority and data subjects in the incident
+  management plan, using their full name and job title.
+- Document the notification process with clear steps and required timelines, specifically stating the
+  72-hour deadline for notifying the supervisory authority.
+- Record the required notification content as per GDPR Article 33(3), including breach details, likely
+  consequences, and measures taken or proposed.
+- Retain dated evidence of previous notifications, including copies of communications sent to authorities
+  and data subjects, for each relevant incident.
+- Specify that notifications must not rely on verbal or undocumented communications—written records are
+  required for all breach notifications.

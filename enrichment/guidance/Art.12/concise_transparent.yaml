@@ -1,0 +1,18 @@
+must_id: item:Art.12:concise_transparent
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Communication concise + transparent + intelligible + easily accessible + plain language
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for communicating privacy information, including how messages are made concise,
+  transparent, and easy to understand.
+- Assign a named individual responsible for reviewing and approving all privacy communications for clarity
+  and plain language.
+- Retain dated examples of privacy notices or rights communications as evidence of the language and format
+  used.
+- State the method for making privacy information easily accessible, such as a direct website link or
+  a dedicated contact point.
+- Name the owner as a specific individual—do not list a team or department as responsible for the procedure.

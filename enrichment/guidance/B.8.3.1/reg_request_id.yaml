@@ -1,0 +1,15 @@
+must_id: item:B.8.3.1:reg_request_id
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+must_text: Unique request identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique, sequential identifier to each customer subject-rights request as you enter it into
+  the register.
+- Record the identifier in a dedicated column on the same row as the request details.
+- Cross-reference the identifier in all related correspondence and documentation for that request.
+- Avoid using generic or duplicate identifiers such as "N/A" or "Request 1" that could apply to multiple
+  entries.

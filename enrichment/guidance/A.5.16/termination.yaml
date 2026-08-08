@@ -1,0 +1,18 @@
+must_id: item:A.5.16:termination
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Termination steps with stated deactivation timeline (e.g. within 24h of last day; immediate
+  on involuntary termination)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the maximum allowed time between employment termination and deactivation of all access, such as
+  "within 24 hours of the last working day."
+- Document the step-by-step process for disabling accounts, including who is responsible and how deactivation
+  is confirmed.
+- Name the individual role responsible for access removal decisions, avoiding generic titles like "IT
+  team" or "HR department."
+- Record the date and time when each terminated user's access was actually disabled, and retain these
+  records for auditor review.

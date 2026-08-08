@@ -1,0 +1,21 @@
+must_id: item:Art.46:supplementary_measures
+control_ref: Art.46
+standard_id: GDPR:2016/679
+must_text: 'Supplementary measures applied where TIA reveals gaps (technical: encryption-with-keys-only-in-EU
+  / pseudonymisation; organisational: legal challenge commitments; contractual: notification of access
+  requests)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific supplementary technical, organisational, and contractual measures applied for
+  each data transfer, referencing the corresponding Transfer Impact Assessment results.
+- Name the individual responsible for approving supplementary measures, ensuring this is a specific person,
+  not a team or department.
+- Record the date and outcome of each legal review confirming that supplementary measures address identified
+  gaps in third-country protections.
+- Attach evidence of contractual clauses requiring notification of access requests and legal challenge
+  commitments, signed by both parties.
+- State the method by which encryption keys are kept exclusively within the EU, including the location
+  and custodian’s name.

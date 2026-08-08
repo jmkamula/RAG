@@ -1,0 +1,18 @@
+must_id: item:Art.48:scope_agreements
+control_ref: Art.48
+standard_id: GDPR:2016/679
+must_text: International agreements catalogued (US-EU MLAT, sector-specific agreements)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current international agreements that allow foreign authorities to request personal data, such
+  as the US-EU Mutual Legal Assistance Treaty.
+- Document the full text or official summary of each agreement, including its effective date and the jurisdictions
+  covered.
+- Record the internal legal contact or data protection officer responsible for maintaining and updating
+  the agreements list.
+- Name the owner as a specific individual, not a group or department, to avoid ambiguity in responsibility.
+- Cross-reference each agreement to the relevant data processing activities or systems impacted within
+  your organisation.

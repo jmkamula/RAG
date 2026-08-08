@@ -1,0 +1,20 @@
+must_id: item:A.8.12:bl_block_vs_alert
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Block-vs-alert mode per channel per category documented (block default for highest-classification
+  leaks)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the chosen action mode (block or alert) for each data channel and data category in a dated
+  DLP baseline record.
+- State the default action as "block" for all channels handling the highest classification of information,
+  with supporting rationale in the baseline.
+- Name the person responsible for approving each block-vs-alert decision, listing them as a specific individual,
+  not a team or department.
+- Cross-reference the DLP baseline to the current information classification scheme to show alignment
+  between category and protection level.
+- Retain evidence of management approval for the DLP baseline, such as a signed or digitally acknowledged
+  decision record.

@@ -1,0 +1,19 @@
+must_id: item:A.5.7:prod_sources
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Source feeds aggregated per record (links to feed register entries)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all intelligence sources used for each product in the product's intelligence record, referencing
+  each source by its unique feed register entry.
+- Link each source feed entry directly to its corresponding record in the feed register, using a URL or
+  register ID for traceability.
+- Record the date each source feed was first used for the product, creating a dated entry in the intelligence
+  record.
+- Name the individual responsible for maintaining the product's intelligence record, avoiding generic
+  roles like "the team" or "analyst group".
+- Review each intelligence record to confirm that no source is listed without a corresponding, valid entry
+  in the feed register.

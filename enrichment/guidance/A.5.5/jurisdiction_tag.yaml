@@ -1,0 +1,17 @@
+must_id: item:A.5.5:jurisdiction_tag
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Each authority tagged with the jurisdiction(s) that drove its inclusion (links back to the
+  scope leaf)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each authority in the Authority Contact Register with a clear, unique name and contact details.
+- Tag each authority entry with the specific jurisdiction(s) that required its inclusion, referencing
+  the relevant scope section or document.
+- Cross-reference each jurisdiction tag to the corresponding scope leaf or clause, using document titles
+  and section numbers.
+- Name the person responsible for maintaining the register as a specific individual, not a team or department.
+- Record the date of the last update for each entry to show ongoing accuracy and relevance.

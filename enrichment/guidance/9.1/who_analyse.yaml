@@ -1,0 +1,15 @@
+must_id: item:9.1:who_analyse
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Who shall analyse and evaluate the results
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for analysing and evaluating ISMS monitoring results in the procedure,
+  using their full name and job title.
+- Document the process for how this person receives, reviews, and interprets monitoring data, including
+  any tools or reports used.
+- Record the date when the responsibility was last reviewed or updated to show ongoing relevance and accuracy.
+- Avoid listing a group or department as responsible; specify a single accountable person to prevent ambiguity.

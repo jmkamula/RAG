@@ -1,0 +1,19 @@
+must_id: item:A.5.10:byod
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: BYOD provisions where personal devices are used for work
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Acceptable Use Policy that personal devices may be used for work, listing permitted device
+  types and required security controls.
+- Document specific security requirements for personal devices, such as encryption, password protection,
+  and remote wipe capabilities, in a dated policy section.
+- Name the policy owner as a specific individual responsible for BYOD provisions, not a generic role or
+  team.
+- Record the date and method of communicating the updated BYOD policy to all staff, such as email or intranet
+  announcement.
+- Retain evidence of employee acknowledgment of the BYOD policy, such as signed forms or electronic acceptance
+  records.

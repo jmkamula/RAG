@@ -1,0 +1,19 @@
+must_id: item:A.7.5:reg_residual_risk
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Per-row residual risk after controls (accepted / requires-treatment)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the residual risk rating for each threat row after all current controls have been applied, using
+  a clear scale such as low, medium, or high.
+- State whether the residual risk for each row is accepted or requires further treatment, and document
+  the decision in a dedicated column.
+- Name the individual who made the acceptance or treatment decision for each row, ensuring a specific
+  person is listed, not a group or department.
+- Date each residual risk decision entry to provide a clear timeline of when the assessment and decision
+  were made.
+- Avoid leaving any threat row without a completed residual risk status and decision; auditors will flag
+  incomplete or blank entries.

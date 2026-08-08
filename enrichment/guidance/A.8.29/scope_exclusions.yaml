@@ -1,0 +1,18 @@
+must_id: item:A.8.29:scope_exclusions
+control_ref: A.8.29
+standard_id: ISO27001:2022
+must_text: Exclusion rationale (e.g. throwaway prototypes; internal-tooling micro-services with low blast
+  radius)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems, applications, and components considered for security testing, including those proposed
+  for exclusion, in a dated testing scope document.
+- State the specific rationale for each exclusion, such as "throwaway prototype" or "internal-only micro-service
+  with low blast radius," next to each item.
+- Name the individual who approved each exclusion decision, ensuring it is not left as a group or department.
+- Attach supporting evidence, such as architecture diagrams or risk assessments, that justify why each
+  excluded item poses minimal risk.
+- Sign and date the final scope document, confirming all exclusions and rationales are complete and accurate.

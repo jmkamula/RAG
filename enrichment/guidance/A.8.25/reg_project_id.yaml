@@ -1,0 +1,14 @@
+must_id: item:A.8.25:reg_project_id
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Per-project unique identifier (cross-link to A.5.8 project register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each development project and record it in the Development Project Register.
+- Cross-reference each project's unique identifier with the corresponding entry in the A.5.8 project register.
+- Document the date each project entry is created or updated in the Development Project Register.
+- Name the project owner as a specific individual, not a team or department, in both registers.
+- Verify that no two projects share the same identifier to avoid confusion or mismatched records.

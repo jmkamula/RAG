@@ -1,0 +1,18 @@
+must_id: item:A.5.18:rev_outcome
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Outcome per reviewed subject (no change / amended / revoked) with rationale where amended or
+  revoked
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the outcome for each user or account reviewed, stating clearly if access was unchanged, amended,
+  or revoked.
+- Document the rationale for every access that was amended or revoked, specifying the reason for the change
+  in a dated entry.
+- Name the reviewer responsible for each access decision, ensuring a specific individual is listed rather
+  than a team or department.
+- Retain the review log with all outcomes and rationales in a format that can be traced back to the original
+  review date.

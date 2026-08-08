@@ -1,0 +1,19 @@
+must_id: item:A.5.23:geographic_location
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Geographic-location requirements for sensitive data in transit and at rest
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the geographic locations where sensitive data may be stored or processed in the policy, listing
+  specific countries or regions.
+- Document the legal or contractual reasons for each geographic restriction, referencing relevant laws,
+  regulations, or agreements by name and date.
+- Assign a named individual responsible for monitoring and approving changes to geographic-location requirements,
+  including their job title and contact details.
+- Record the date of the most recent review of geographic-location requirements, attaching evidence of
+  management approval or sign-off.
+- Specify cloud providers and services in use, cross-referencing their documented data residency commitments
+  and confirming alignment with policy requirements.

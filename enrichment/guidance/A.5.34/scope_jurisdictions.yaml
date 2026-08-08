@@ -1,0 +1,20 @@
+must_id: item:A.5.34:scope_jurisdictions
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Jurisdictions covered (HQ + places of business + data subject residency + processing locations
+  + transfer destinations — each may impose distinct privacy obligations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all countries where your organisation has headquarters, branch offices, or conducts business operations
+  in a dated scope document.
+- Record every location where personal data is processed, stored, or accessed, including cloud and third-party
+  providers, with named contacts for each.
+- Identify and document the countries of residence for all data subjects whose personal data your organisation
+  handles.
+- Specify all destinations to which personal data is transferred, whether routinely or occasionally, and
+  include the legal basis for each transfer.
+- Name the scope owner as a specific individual, not a team or department, and include their contact details
+  in the document.

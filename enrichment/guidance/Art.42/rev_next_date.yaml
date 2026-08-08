@@ -1,0 +1,17 @@
+must_id: item:Art.42:rev_next_date
+control_ref: Art.42
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the certification program in a clearly visible section of the
+  review document.
+- Record the decision on the review date with a named individual and the date of their decision in meeting
+  minutes or an approval log.
+- Name the owner responsible for scheduling and conducting the next review as a specific individual, not
+  a team or department.
+- Retain the document or record where the next review date is stated, ensuring it is version-controlled
+  and not left as a draft.

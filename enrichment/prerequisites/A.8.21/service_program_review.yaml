@@ -1,0 +1,37 @@
+leaf_id: req:A.8.21:service_program_review
+control_ref: A.8.21
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which network services and providers are in-scope for your ISMS before you
+    can review their program. This ensures the review covers all relevant services and avoids missing
+    critical suppliers.
+  good_enough: A current, approved scope statement that clearly lists included network services and providers.
+- ref: A.8.20
+  standard_id: ISO27001:2022
+  title: Networks security
+  category: direct
+  rationale: The baseline security requirements and controls for networks must be established before you
+    can meaningfully review the effectiveness and compliance of network service providers.
+  good_enough: Documented network security controls and requirements that apply to all relevant services.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register is needed to identify which network services and related assets
+    are subject to review. Without this, you risk missing key services or reviewing obsolete ones.
+  good_enough: A maintained list of network-related assets and services, with enough detail to identify
+    review targets.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment results help prioritize which network services require more frequent or detailed
+    review, based on their risk profile and business impact.
+  good_enough: A recent risk assessment that covers network services, highlighting key risks and priorities.

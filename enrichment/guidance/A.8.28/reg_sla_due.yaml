@@ -1,0 +1,20 @@
+must_id: item:A.8.28:reg_sla_due
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Per-finding SLA due date (matches A.8.8 vulnerability rubric for runtime-exploitable; relaxed
+  for dev-time-only)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the SLA due date for each secure coding finding, aligning with the risk level and exploitability
+  as defined in your vulnerability management rubric.
+- Cross-reference each finding’s SLA due date with the corresponding risk category in the A.8.8 vulnerability
+  rubric to ensure consistency.
+- Name the responsible individual for each finding’s remediation, avoiding generic entries such as “the
+  team” or “development.”
+- Document the rationale for any relaxed SLA due date assigned to dev-time-only findings, including supporting
+  risk assessment details.
+- Retain dated evidence of periodic reviews confirming that SLA due dates remain appropriate and are being
+  met.

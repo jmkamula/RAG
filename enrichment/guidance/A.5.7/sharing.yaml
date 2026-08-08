@@ -1,0 +1,17 @@
+must_id: item:A.5.7:sharing
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Outbound intelligence sharing path (ISAC contributions, peer briefings)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific process for sharing analysed threat intelligence externally, including which types
+  of information may be shared and with whom.
+- Name the responsible individual who approves outbound intelligence sharing, ensuring this is not listed
+  as a generic team or department.
+- Record each instance of outbound intelligence sharing in a dated log, including recipient, content summary,
+  and approval evidence.
+- Cross-reference your sharing process with any legal or contractual restrictions, attaching relevant
+  guidance or decisions to the procedure.

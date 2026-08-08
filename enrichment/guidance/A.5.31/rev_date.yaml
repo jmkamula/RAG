@@ -1,0 +1,17 @@
+must_id: item:A.5.31:rev_date
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval (within 6 months of last review)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent legal and regulatory register review in a dedicated column within
+  the register.
+- Name the reviewer as a specific individual responsible for the last review, avoiding generic titles
+  like "Compliance Team."
+- Document the planned next review date, ensuring it is no more than six months after the previous review
+  date.
+- Retain a copy of the review sign-off or meeting minutes confirming the review took place on the recorded
+  date.

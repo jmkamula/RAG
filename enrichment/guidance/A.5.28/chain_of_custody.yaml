@@ -1,0 +1,20 @@
+must_id: item:A.5.28:chain_of_custody
+control_ref: A.5.28
+standard_id: ISO27001:2022
+must_text: Chain-of-custody enforcement (who, what, when, where stored, signature/handover record at every
+  transfer)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each evidence item with a unique identifier, description, date and time of collection, and
+  the name of the person collecting it.
+- Record every transfer of evidence by capturing the date, time, names of both parties, location, and
+  signatures on a dedicated chain-of-custody log.
+- State the storage location for each evidence item, including access controls and environmental conditions,
+  in the chain-of-custody record.
+- Name the custodian responsible for each stage of evidence handling as a specific individual, not as
+  a team or department.
+- Retain completed chain-of-custody forms and supporting records for each evidence item, ensuring they
+  are dated and signed at every handover.

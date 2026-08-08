@@ -1,0 +1,17 @@
+must_id: item:A.5.12:review_triggers
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Ad-hoc triggers listed (M&A, new regulator-imposed classes, new business line with novel sensitivities)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all ad-hoc triggers for classification scheme review, such as mergers, acquisitions, regulatory
+  changes, or new business lines, in a dated document.
+- Name a specific individual responsible for monitoring and initiating reviews when any listed trigger
+  occurs.
+- Record each occurrence of a trigger and the resulting review decision in a change log with dates and
+  named approvers.
+- Avoid using generic or boilerplate triggers; tailor each trigger to your organisation’s actual business
+  and regulatory context.

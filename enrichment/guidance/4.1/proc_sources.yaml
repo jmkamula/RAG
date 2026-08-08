@@ -1,0 +1,17 @@
+must_id: item:4.1:proc_sources
+control_ref: '4.1'
+standard_id: ISO27001:2022
+must_text: Information sources catalogued (regulator publications, industry threat intel, customer requirements,
+  internal performance data)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all information sources used for issue identification, including regulator publications, industry
+  threat intelligence, customer requirements, and internal performance data, in a dated register.
+- Name a specific person responsible for maintaining and updating the information sources catalog, avoiding
+  generic roles like "the team" or "IT".
+- Record the date each source was last reviewed or updated to show ongoing relevance and completeness.
+- Cross-reference each catalogued source to the specific issue identification process or framework where
+  it is used.

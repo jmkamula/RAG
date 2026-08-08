@@ -1,0 +1,20 @@
+must_id: item:A.5.11:rec_items_unreturned
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: 'Itemised list of NOT-returned items per record (with reason: lost / damaged / kept-by-agreement
+  / dispute)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each unreturned asset on the leaver’s asset return form, listing the asset type, serial number,
+  and assigned user.
+- State the specific reason for each unreturned item as lost, damaged, kept-by-agreement, or in dispute,
+  avoiding vague descriptions.
+- Name the individual who approved any kept-by-agreement items, ensuring this is a specific person, not
+  a group or department.
+- Date and sign the completed asset return record by both the leaver and the responsible manager to confirm
+  accuracy.
+- Retain supporting evidence for disputed or lost items, such as incident reports or correspondence, attached
+  to the asset return record.

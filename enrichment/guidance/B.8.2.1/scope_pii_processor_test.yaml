@@ -1,0 +1,17 @@
+must_id: item:B.8.2.1:scope_pii_processor_test
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+must_text: PII-processor test per engagement — processing PII on customer's behalf under customer's instructions
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each customer engagement where you process personal data, including the customer name and a brief
+  description of the processing activity.
+- Document for each engagement whether you act as a processor, confirming you process personal data only
+  under the customer’s documented instructions.
+- Attach a copy of the signed data processing agreement or contract for each engagement, showing the customer’s
+  instructions regarding personal data.
+- Name the engagement owner as a specific individual responsible for maintaining the processing status
+  and documentation — do not use a team or department.

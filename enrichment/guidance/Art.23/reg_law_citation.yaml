@@ -1,0 +1,17 @@
+must_id: item:Art.23:reg_law_citation
+control_ref: Art.23
+standard_id: GDPR:2016/679
+must_text: Per-row Member State law cited (article + section)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact Member State law, including article and section, for each restriction entry in the
+  register.
+- Cross-reference each law citation to an official source or government publication to verify its accuracy.
+- Name the individual responsible for verifying the legal citation for each row, avoiding generic roles
+  like "Legal Team."
+- Document the date each law citation was last reviewed to confirm ongoing relevance.
+- Avoid using incomplete references such as "national law applies" without specifying the article and
+  section.

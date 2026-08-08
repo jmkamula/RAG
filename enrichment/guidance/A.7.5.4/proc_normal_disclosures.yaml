@@ -1,0 +1,17 @@
+must_id: item:A.7.5.4:proc_normal_disclosures
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Normal-course disclosures — recurring disclosures documented per relationship
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each recurring disclosure of personal data to external parties in a central log, including
+  recipient name, purpose, and disclosure date.
+- Assign a specific individual as the owner responsible for maintaining and updating the disclosure log.
+- Record the lawful basis or contractual clause authorizing each recurring disclosure, referencing the
+  relevant agreement or policy.
+- Name the recipient organization or individual specifically—do not use generic terms like "partners"
+  or "third parties."
+- Review and update the disclosure log at least annually, noting the date of the most recent review.

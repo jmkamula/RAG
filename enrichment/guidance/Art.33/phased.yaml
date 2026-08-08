@@ -1,0 +1,18 @@
+must_id: item:Art.33:phased
+control_ref: Art.33
+standard_id: GDPR:2016/679
+must_text: If phased, reasons for delay and information provided in phases
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and time when each phase of the breach notification was sent to the supervisory authority.
+- State the specific reasons for any delay or phased approach in a written record, referencing the timeline
+  of the breach response.
+- List the exact information provided in each notification phase, including what was known and what was
+  pending at each stage.
+- Name the responsible individual who approved the phased notification and confirm their approval with
+  a dated signature.
+- Avoid using generic explanations such as "pending investigation" for delays; describe the concrete factors
+  that prevented immediate full disclosure.

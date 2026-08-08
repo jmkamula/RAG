@@ -1,0 +1,32 @@
+leaf_id: req:A.5.1:management_approval
+control_ref: A.5.1
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: Top management cannot meaningfully approve the InfoSec policy unless the scope of the ISMS
+    is clearly defined. The scope determines what the policy covers and ensures alignment with organizational
+    boundaries.
+  good_enough: A documented scope statement that identifies the organizational units, assets, and processes
+    included in the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: direct
+  rationale: The InfoSec policy itself must exist before it can be approved by top management. Approval
+    is only meaningful if there is a concrete policy document to review and endorse.
+  good_enough: A draft or final version of the InfoSec policy that outlines the organization's information
+    security objectives and principles.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that top management understands who
+    is accountable for information security and who should be involved in policy approval.
+  good_enough: A simple documented list or chart showing key information security roles and their responsibilities,
+    especially those relevant to policy creation and approval.

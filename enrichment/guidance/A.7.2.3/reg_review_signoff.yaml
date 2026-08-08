@@ -1,0 +1,17 @@
+must_id: item:A.7.2.3:reg_review_signoff
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: DPO + Legal signoff per artifact version
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer and Legal representative who reviewed each consent mechanism artifact
+  version, listing full names and job titles.
+- Record the date each artifact version was reviewed and approved by both the Data Protection Officer
+  and Legal representative.
+- Obtain and retain signatures from both the Data Protection Officer and Legal representative on each
+  artifact version approval record.
+- Avoid using generic titles or group names; specify individual approvers for each artifact version to
+  prevent audit findings of unclear accountability.

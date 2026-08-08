@@ -1,0 +1,16 @@
+must_id: item:A.6.8:reg_triage_outcome
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Per-row triage outcome (incident-confirmed → A.5.26 register; false-positive-closed; near-miss-filed-for-trend;
+  pending-investigation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'Record the triage outcome for each event in the register using one of the required categories: incident-confirmed,
+  false-positive-closed, near-miss-filed-for-trend, or pending-investigation.'
+- Name the person responsible for making the triage decision for each event, listing their full name rather
+  than a team or department.
+- Date each triage outcome entry to show when the decision was made.
+- Cross-reference any event marked as incident-confirmed to its entry in the A.5.26 incident register.

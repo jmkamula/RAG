@@ -1,0 +1,40 @@
+leaf_id: req:A.8.11:masking_register
+control_ref: A.8.11
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of your organization and which datasets are in scope for your
+    ISMS before you can meaningfully track masking activities. This ensures the register covers all relevant
+    data flows.
+  good_enough: A documented scope that clearly lists included business units, systems, and data types
+    is available and up to date.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: A current asset register is essential to identify which datasets exist and need to be masked.
+    Without it, you can't reliably list or track masking per dataset.
+  good_enough: A basic inventory of datasets and their locations exists, even if some details are pending
+    refinement.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: You must know the classification of each dataset to determine which ones require masking
+    and at what level. The masking register depends on this scheme to prioritize and justify masking controls.
+  good_enough: A documented scheme that assigns sensitivity levels to datasets is in place and applied
+    to the asset register.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment helps identify which datasets, if exposed in non-production environments,
+    could cause harm. This informs which masking activities are critical to document.
+  good_enough: A recent risk assessment exists that highlights key data risks relevant to masking, even
+    if not exhaustive.

@@ -1,0 +1,20 @@
+must_id: item:A.7.9:scope_asset_classes
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Asset classes covered (laptops, phones, tablets, removable media, recording equipment, key
+  safes in transit)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all asset classes that may be in transit, such as laptops, phones, tablets, removable media, recording
+  equipment, and key safes, in a dated document.
+- Name the specific locations or destinations where these assets may be transported, including offices,
+  remote sites, and third-party premises.
+- Assign a named individual responsible for maintaining and updating the asset classes and destinations
+  scope document.
+- Avoid using generic terms like "IT equipment" or "devices"—specify each asset class clearly to prevent
+  ambiguity.
+- Review and update the scope document at least annually, recording the review date and the person who
+  performed it.

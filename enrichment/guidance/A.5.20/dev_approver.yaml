@@ -1,0 +1,15 @@
+must_id: item:A.5.20:dev_approver
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Approver of the deviation, at level proportional to residual risk
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the approver for each supplier agreement deviation as a specific individual, not a group or department.
+- Record the date and outcome of each deviation approval in the register, linking to the relevant risk
+  assessment.
+- State the residual risk level for each deviation and cross-reference the justification for the chosen
+  approver’s authority.
+- Retain evidence of the approver’s formal decision, such as a signed approval or documented email confirmation.

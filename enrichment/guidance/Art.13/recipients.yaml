@@ -1,0 +1,18 @@
+must_id: item:Art.13:recipients
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Recipients or categories of recipients
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all organisations or individuals who will receive the personal data, using their full legal names
+  where possible.
+- Specify categories of recipients only if naming each recipient is not practical, and describe the category
+  clearly and specifically.
+- State in the privacy notice whether data will be transferred to any third countries or international
+  organisations, naming them if applicable.
+- Date and version the privacy notice, and retain a copy of each published version for reference.
+- Name the person responsible for maintaining and updating the privacy notice, not just a department or
+  team.

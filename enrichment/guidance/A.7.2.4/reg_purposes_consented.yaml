@@ -1,0 +1,19 @@
+must_id: item:A.7.2.4:reg_purposes_consented
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Purposes consented to per row (list of A.7.2.1 purpose ids)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each data subject's consent as a separate row in the register, linking it to their unique identifier
+  and date of consent.
+- Reference the specific purpose ID(s) from your A.7.2.1 purpose register for each consent entry, not
+  just a general description.
+- Record the method by which consent was obtained for each subject, such as web form, paper, or verbal
+  (with supporting documentation).
+- Name the staff member responsible for updating and maintaining the register as a specific individual,
+  not a team or department.
+- Attach supporting evidence, such as signed forms or digital consent logs, to each register entry for
+  verification.

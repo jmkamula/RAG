@@ -1,0 +1,20 @@
+must_id: item:A.6.5:role_change_scope
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Coverage of role change within the organisation, not just termination (joiner-mover-leaver
+  — mover is the typically-missed leg)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document specific information security responsibilities for employees changing roles, including access
+  rights, in a signed and dated role change checklist.
+- Record completion of access reviews and updates for each role change, with evidence of removed or modified
+  permissions in system logs.
+- Name the individual responsible for authorising security changes during role transitions — avoid listing
+  only departments or generic titles.
+- Retain a copy of the communication sent to the employee outlining their new or changed security responsibilities,
+  with a timestamp.
+- Confirm that all handover tasks, including return of assets and transfer of sensitive information, are
+  tracked in a completed checklist signed by both old and new role owners.

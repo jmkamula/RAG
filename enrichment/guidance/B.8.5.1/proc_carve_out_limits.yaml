@@ -1,0 +1,20 @@
+must_id: item:B.8.5.1:proc_carve_out_limits
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+must_text: Carve-out limits — where contract permits changes without notification (e.g. supplier swaps
+  within same country), limits explicit
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the procedure the exact scenarios where changes can be made without notification, such as supplier
+  swaps within the same country.
+- Document the legal or contractual basis for each carve-out, referencing the relevant contract clause
+  and jurisdiction.
+- Name the person responsible for approving any carve-out changes, ensuring this is a specific individual,
+  not a team or department.
+- Record the date and version of the procedure where carve-out limits are defined, and update this record
+  with each revision.
+- Attach a sample notification template for cases where notification is required, clearly distinguishing
+  from carve-out scenarios.

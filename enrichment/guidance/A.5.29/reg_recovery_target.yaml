@@ -1,0 +1,15 @@
+must_id: item:A.5.29:reg_recovery_target
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Recovery target per row where applicable (RTO/RPO for ICT scenarios — cross-link to A.5.30)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a recovery time objective (RTO) and recovery point objective (RPO) for each ICT disruption scenario
+  in the register, using specific timeframes.
+- Cross-reference each ICT scenario entry to the corresponding backup and restoration procedure documented
+  under control A.5.30.
+- Name the scenario owner as a specific individual, not a team or department, for each row in the register.
+- Date each entry and update when scenarios or recovery targets change, keeping a clear revision history.

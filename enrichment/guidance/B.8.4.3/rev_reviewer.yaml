@@ -1,0 +1,15 @@
+must_id: item:B.8.4.3:rev_reviewer
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Reviewer identity (Platform Ops + Security Engineering + DPO)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each reviewer involved in the transmission program review as a specific individual from Platform
+  Operations, Security Engineering, and the Data Protection Officer.
+- Record the date each reviewer completed their assessment in the review documentation.
+- Document each reviewer's comments or approval in a signed or digitally acknowledged section of the review
+  record.
+- Avoid listing groups or roles only—ensure named individuals are identified for each required function.

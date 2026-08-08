@@ -1,0 +1,17 @@
+must_id: item:A.7.3.2:reg_url
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: Public URL / distribution channel per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the public URL or specific distribution channel for each notice in the register, ensuring every
+  row has a unique, accessible location.
+- Record the date each notice was made accessible to the public or recipients, providing a clear timeline
+  for auditor review.
+- Name the individual responsible for maintaining each notice’s accessibility, using a specific person’s
+  name rather than a generic role or team.
+- Attach or link a screenshot or copy of each notice as it appears at the listed URL or channel, confirming
+  actual public availability.

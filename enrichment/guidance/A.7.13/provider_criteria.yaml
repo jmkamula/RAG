@@ -1,0 +1,17 @@
+must_id: item:A.7.13:provider_criteria
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Provider selection criteria documented (security competence, background screening, NDA)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific security competence requirements for equipment maintenance providers in your written
+  procedure, including relevant certifications or experience.
+- State the background screening checks required for provider personnel, such as criminal record checks
+  or employment history verification, with clear criteria and dates.
+- Attach a template or example of the non-disclosure agreement (NDA) that all providers must sign before
+  beginning work.
+- Name the individual responsible for approving provider selection decisions, rather than using a generic
+  title or team name.

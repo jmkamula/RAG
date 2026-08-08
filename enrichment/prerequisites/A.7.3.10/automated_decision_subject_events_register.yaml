@@ -1,0 +1,47 @@
+leaf_id: req:A.7.3.10:automated_decision_subject_events_register
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the purposes for which personal data is processed, including where
+    automated decision-making occurs, to accurately record subject events related to those processes.
+  good_enough: A documented list of processing purposes, with automated decision-making flagged, is available
+    and up to date.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity, especially those involving automated
+    decisions, is essential to determine when data subjects have rights to object or request intervention.
+  good_enough: Each automated processing activity has a mapped lawful basis, with notes on subject rights
+    where applicable.
+- ref: Art.22
+  standard_id: GDPR:2016/679
+  title: Automated Individual Decision-Making, Including Profiling
+  category: cross_role
+  rationale: Article 22 defines the rights of data subjects regarding automated decisions, setting the
+    legal context for what events must be tracked in the register.
+  good_enough: A summary of Art.22 requirements is reviewed and referenced, ensuring the register will
+    capture all relevant subject events.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that requests, objections, and interventions related to
+    automated decisions are properly logged and managed.
+  good_enough: Roles for handling and recording subject events are defined and communicated to relevant
+    staff.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: Knowing which systems and assets perform automated decision-making is necessary to link subject
+    events to the correct processing activities.
+  good_enough: The asset register identifies systems involved in automated decisions, even if only at
+    a high level.

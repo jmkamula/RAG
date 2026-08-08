@@ -1,0 +1,19 @@
+must_id: item:Art.28:transfers
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Data transfer mechanisms if applicable
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all countries where personal data will be transferred and list them in the Data Processing
+  Agreement with specific country names.
+- Specify the legal mechanism used for each transfer, such as Standard Contractual Clauses or adequacy
+  decisions, and reference the exact documents or decisions.
+- Attach or cross-reference signed copies of any Standard Contractual Clauses or additional safeguards
+  required for transfers outside the European Economic Area.
+- State whether any onward transfers to third parties will occur, naming those parties and the transfer
+  mechanism used for each.
+- Name the individual responsible for monitoring data transfer compliance, avoiding generic titles like
+  "the team" or "IT department".

@@ -1,0 +1,48 @@
+leaf_id: req:A.5.34:privacy_and_pii_protection_policy
+control_ref: A.5.34
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The Privacy and PII Protection Policy must align with the defined scope of the ISMS, ensuring
+    that all relevant business units, processes, and information types are covered. Without a clear scope,
+    the policy may omit critical areas or overreach.
+  good_enough: A documented ISMS scope that clearly identifies the organizational boundaries and information
+    assets relevant to privacy and PII protection.
+- ref: A.5.31
+  standard_id: ISO27001:2022
+  title: Legal, statutory, regulatory and contractual requirements
+  category: direct
+  rationale: The legal register identifies which privacy laws, regulations, and contractual obligations
+    apply to the organization, forming the basis for the policy’s requirements and commitments.
+  good_enough: A current, working list of applicable privacy and PII-related laws, regulations, and contractual
+    obligations relevant to the organization’s operations.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: A classification scheme ensures that PII is properly identified and handled according to
+    its sensitivity, which is essential for setting appropriate policy controls and communicating expectations.
+  good_enough: A documented scheme that defines how PII and other sensitive data are classified, with
+    enough detail to inform policy statements.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of privacy and PII protection responsibilities is necessary so the policy
+    can specify accountability and operational ownership for compliance and incident response.
+  good_enough: A list or matrix showing who is responsible for privacy and PII protection activities,
+    even if some roles are shared or interim.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register identifies systems and data stores where PII resides, ensuring
+    the policy addresses all relevant assets and processing activities.
+  good_enough: A basic inventory of information assets that includes those containing or processing PII,
+    even if not fully detailed.

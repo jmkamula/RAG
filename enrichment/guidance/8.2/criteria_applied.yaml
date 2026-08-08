@@ -1,0 +1,16 @@
+must_id: item:8.2:criteria_applied
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Criteria from 6.1.2 a) applied during assessment
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific risk assessment criteria from clause 6.1.2 a) at the top of each operational risk
+  assessment record.
+- Document each risk assessment with the date performed and the name of the individual who led the assessment.
+- Cross-reference each risk assessment record to the documented criteria to show how each criterion was
+  applied during the assessment.
+- Retain completed risk assessment records in a central repository, ensuring each record is version-controlled
+  and not left as draft or undated.

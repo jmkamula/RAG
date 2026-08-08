@@ -1,0 +1,20 @@
+must_id: item:Art.15:proc_exceptions
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: 'Exception handling: manifestly unfounded/excessive requests (Art.12.5), and partial response
+  where rights of others apply (Art.15.4)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the criteria and process for identifying manifestly unfounded or excessive data subject access
+  requests in a dated procedure.
+- Name the decision-maker responsible for determining when a request is manifestly unfounded or excessive,
+  listing their full name and job title.
+- Record each instance where a request is refused or limited, including the justification, decision date,
+  and any supporting evidence.
+- State the process for redacting or withholding information that would adversely affect the rights and
+  freedoms of others, referencing relevant legal grounds.
+- Avoid using generic refusal templates—customize each response to reference the specific reasons and
+  circumstances for the decision.

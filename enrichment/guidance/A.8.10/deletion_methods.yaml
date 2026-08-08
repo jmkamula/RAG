@@ -1,0 +1,17 @@
+must_id: item:A.8.10:deletion_methods
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Deletion methods per media class (logical delete / overwrite / crypto-erase / physical destruction)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each media type used in your organisation, such as hard drives, SSDs, tapes, and cloud storage,
+  in the procedure document.
+- Specify the deletion method for each media type, such as logical deletion, overwriting, crypto-erase,
+  or physical destruction, with clear instructions.
+- Name the person or role responsible for approving deletion methods for each media type, ensuring it
+  is a specific individual, not a team or department.
+- Reference the date of the latest procedure review and update, showing that deletion methods are kept
+  current with technology changes.

@@ -1,0 +1,47 @@
+leaf_id: req:A.7.3.7:notification_register
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of your organization and which processing activities are in
+    scope before you can track and register third-party notifications. This ensures the register covers
+    all relevant events.
+  good_enough: A documented scope that clearly defines the organizational boundaries and activities relevant
+    to privacy and third-party data sharing.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the specific purposes for which personal data is processed and shared with
+    third parties to accurately record why each notification was made.
+  good_enough: A list or matrix mapping processing activities to their documented purposes, especially
+    those involving third-party disclosures.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Recording third-party notifications requires clarity on the lawful basis for each disclosure,
+    as this underpins the legitimacy of the notification and is often required in the register.
+  good_enough: A summary or table showing the lawful basis for each processing activity involving third-party
+    data sharing.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that the right people are responsible for issuing notifications
+    and maintaining the register, preventing gaps or duplication.
+  good_enough: A responsibility matrix or documented assignment showing who manages third-party notifications
+    and register upkeep.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need to know what information assets (especially personal data sets) are being shared
+    with third parties to ensure all relevant notification events are captured.
+  good_enough: An up-to-date inventory of information assets, with those shared externally clearly identified.

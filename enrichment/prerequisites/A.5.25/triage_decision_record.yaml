@@ -1,0 +1,40 @@
+leaf_id: req:A.5.25:triage_decision_record
+control_ref: A.5.25
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.24
+  standard_id: ISO27001:2022
+  title: Information security incident management planning and preparation
+  category: direct
+  rationale: You need a documented incident management plan before you can meaningfully triage events
+    or record closure decisions. Without this, there’s no agreed process or criteria for what counts as
+    an incident, a near-miss, or a false positive.
+  good_enough: A current, approved incident management plan exists, outlining triage procedures and escalation
+    paths, even if not fully mature or tested.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You must know which assets, processes, and event types are in-scope for your ISMS to determine
+    which events require triage and closure records. Otherwise, you risk missing or misclassifying events.
+  good_enough: A documented scope statement exists, identifying the boundaries of the ISMS and what is
+    covered for event triage purposes.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles is essential so it’s obvious who is authorized to make triage decisions,
+    record rationales, and escalate incidents. Otherwise, records may lack authority or accountability.
+  good_enough: Roles and responsibilities for incident triage and closure are defined and communicated,
+    even if not yet fully embedded in practice.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: A working classification scheme helps triage teams assess the severity and type of events,
+    supporting consistent decision-making and documentation.
+  good_enough: A basic, documented classification scheme is available and referenced during triage, even
+    if it is still being refined.

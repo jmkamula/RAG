@@ -1,0 +1,18 @@
+must_id: item:A.7.13:reg_equipment
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Per-event equipment (cross-link to A.5.9 asset register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each maintenance event with the specific equipment's unique identifier as listed in your asset
+  register.
+- Cross-reference the maintenance event entry to the corresponding asset record in the asset register,
+  including asset owner and location.
+- Name the person responsible for logging each maintenance event, ensuring a specific individual is identified,
+  not a team or department.
+- Document the date and details of each maintenance action, including any parts replaced or issues found.
+- Confirm that every maintenance event entry includes a reference to the latest version of the asset register
+  to avoid mismatches with outdated asset information.

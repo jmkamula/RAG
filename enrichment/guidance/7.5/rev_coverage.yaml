@@ -1,0 +1,17 @@
+must_id: item:7.5:rev_coverage
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Coverage check — every in-scope document class has at least one register entry
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every in-scope document class in a master inventory, including policies, procedures, standards,
+  and guidelines, with clear titles and descriptions.
+- Cross-reference each document class in the inventory with at least one corresponding entry in the official
+  document control register.
+- Record the date and name of the person who completed the cross-check between the inventory and the register.
+- Identify any document class missing from the register and document the corrective action taken, including
+  responsible person and completion date.
+- Name the owner of the inventory as a specific individual, not a group or department.

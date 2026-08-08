@@ -1,0 +1,18 @@
+must_id: item:Art.24:charter_governance
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Governance forum cadence (privacy steering committee, frequency, attendees)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the privacy steering committee and list all current members by full name and job title in the charter
+  document.
+- Document the required meeting frequency for the committee, specifying exact intervals such as "monthly"
+  or "quarterly" in the charter.
+- Record the date of the most recent committee meeting and attach the official attendee list as meeting
+  evidence.
+- State the decision-making responsibilities and scope of the committee in the charter, referencing specific
+  privacy governance topics.
+- Avoid listing attendees as "the team" or "representatives"; use named individuals to ensure clear accountability.

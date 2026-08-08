@@ -1,0 +1,19 @@
+must_id: item:A.6.1:retention
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Retention rules for screening results (often short retention for negative results to comply
+  with GDPR; longer where law mandates — financial roles)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific retention period for both positive and negative screening results, referencing the
+  relevant law or regulation that applies.
+- Document the legal or regulatory source that requires longer retention for certain roles, such as financial
+  or regulated positions.
+- Assign responsibility for reviewing and updating retention rules to a named individual, not a generic
+  team or department.
+- Record the date when the retention rules were last reviewed and updated, including the reviewer’s name.
+- Retain evidence that screening results are deleted or anonymized after the retention period expires,
+  such as a log or deletion confirmation.

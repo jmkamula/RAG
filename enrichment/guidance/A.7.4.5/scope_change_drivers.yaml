@@ -1,0 +1,17 @@
+must_id: item:A.7.4.5:scope_change_drivers
+control_ref: A.7.4.5
+standard_id: ISO27701:2019
+must_text: Trigger list (retention policy change / new activity)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name all activities that trigger a review of end-of-processing scope, such as changes to retention policies
+  or introduction of new processing activities.
+- Document each trigger event with a dated entry in a central log, referencing the specific change or
+  new activity that initiated the review.
+- Assign responsibility for monitoring and recording trigger events to a named individual, not a team
+  or generic role.
+- Cross-reference each trigger event to the updated end-of-processing scope documentation to show the
+  review was completed in response to the trigger.

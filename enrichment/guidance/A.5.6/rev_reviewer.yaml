@@ -1,0 +1,14 @@
+must_id: item:A.5.6:rev_reviewer
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Reviewer identity and role recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the person who conducted the SIG engagement review in the review log or meeting
+  minutes.
+- State the reviewer’s specific role or job title alongside their name in the same record.
+- Enter the date the review was completed in the review documentation.
+- Name the reviewer as an individual, not as a group, department, or team.

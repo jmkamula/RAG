@@ -1,0 +1,16 @@
+must_id: item:10.1:reg_dimension
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Per-row improvement dimension (suitability / adequacy / effectiveness)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'Add a column to the Improvement Action Register for each dimension: suitability, adequacy, and effectiveness.'
+- Record a clear assessment for each improvement action in all three columns, using specific language
+  rather than generic terms like "OK" or "good".
+- Name the person responsible for each assessment as a specific individual, not a group or department.
+- Date each assessment entry to show when the evaluation was performed.
+- Attach supporting evidence or references for each assessment, such as meeting notes or test results,
+  in the register.

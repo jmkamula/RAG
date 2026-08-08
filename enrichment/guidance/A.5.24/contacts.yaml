@@ -1,0 +1,20 @@
+must_id: item:A.5.24:contacts
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: External contact list maintained (regulator, legal counsel, PR firm, forensic specialists,
+  CSP support) with rotation review
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all external contacts relevant to incident response, including regulator, legal counsel, PR firm,
+  forensic specialists, and cloud service provider support, in a dated document.
+- Assign a named individual as the owner responsible for maintaining and updating the external contact
+  list.
+- Schedule and record a formal review of the contact list at least annually, capturing the review date
+  and reviewer’s name.
+- Update contact details immediately when notified of changes, and keep a log of each update with the
+  date and person making the change.
+- Name each contact as a specific organization or individual — do not use generic labels like "PR firm"
+  or "legal team".

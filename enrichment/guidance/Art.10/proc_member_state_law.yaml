@@ -1,0 +1,16 @@
+must_id: item:Art.10:proc_member_state_law
+control_ref: Art.10
+standard_id: GDPR:2016/679
+must_text: Member State law identified per applicable jurisdiction (where MS authorisation is the route)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify the specific Member State law that authorises processing of criminal convictions data and record
+  its full legal citation in your procedure.
+- Document the jurisdiction(s) where the law applies and name the relevant supervisory authority for each.
+- State the legal basis for processing under the identified Member State law, referencing the exact article
+  or section.
+- Name the individual responsible for verifying the law’s applicability, not a team or department.
+- Attach a dated copy or official link to the Member State law text used as authorisation.

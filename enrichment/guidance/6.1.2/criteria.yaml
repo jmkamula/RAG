@@ -1,0 +1,16 @@
+must_id: item:6.1.2:criteria
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Risk acceptance criteria defined
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the risk acceptance criteria clearly in the Information Security Risk Assessment Procedure, using
+  specific thresholds or examples relevant to your organisation.
+- Document the date when the risk acceptance criteria were last reviewed and updated in the procedure.
+- Name the individual or role responsible for approving the risk acceptance criteria, and record their
+  approval with a signature or email confirmation.
+- Avoid using vague or generic criteria copied from templates; tailor the criteria to your organisation’s
+  actual risk appetite and context.

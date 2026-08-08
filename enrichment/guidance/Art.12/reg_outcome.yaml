@@ -1,0 +1,16 @@
+must_id: item:Art.12:reg_outcome
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Per-row outcome (fulfilled / partial / refused with grounds / extended)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the outcome of each rights request in the register as "fulfilled," "partial," "refused with grounds,"
+  or "extended," using clear, standardized wording.
+- State the specific grounds for any refusal or extension directly in the corresponding row, referencing
+  relevant GDPR articles or internal policy.
+- Enter the date the outcome was decided for each request to provide a clear audit trail.
+- Name the individual who made the outcome decision for each request, avoiding generic labels like "team"
+  or "department."

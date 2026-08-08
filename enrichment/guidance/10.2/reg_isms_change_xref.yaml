@@ -1,0 +1,19 @@
+must_id: item:10.2:reg_isms_change_xref
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Per-row ISMS-change cross-reference (link to 6.3 change record when the NC drove an ISMS amendment)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each nonconformity entry with the related ISMS change record number when the issue resulted
+  in an amendment under clause 6.3.
+- State the date of the ISMS change decision alongside the nonconformity entry to show clear linkage and
+  timeline.
+- Name the individual responsible for updating the register with the ISMS change reference, not just a
+  team or department.
+- Attach or link supporting documentation for the ISMS change, such as meeting minutes or approval records,
+  to the relevant nonconformity row.
+- Avoid leaving the ISMS-change cross-reference field blank or using generic text like "see ISMS" when
+  a change record exists.

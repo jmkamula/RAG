@@ -1,0 +1,19 @@
+must_id: item:A.7.4.3:proc_lifecycle_coverage
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: Lifecycle coverage — applies at collection + processing + storage + sharing + disposal stages
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a written procedure that describes how personal data accuracy and quality are maintained at
+  collection, processing, storage, sharing, and disposal stages.
+- Name a specific individual responsible for overseeing the procedure’s implementation and updates across
+  all lifecycle stages.
+- Record the date of the most recent review or update of the procedure, showing regular attention to lifecycle
+  coverage.
+- Cross-reference each lifecycle stage in the procedure with supporting evidence, such as checklists,
+  logs, or audit trails, to demonstrate active controls.
+- Avoid using generic statements like “applies to all stages” without detailing actions for each stage,
+  as auditors will flag lack of specificity.

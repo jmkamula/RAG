@@ -1,0 +1,19 @@
+must_id: item:10.2:scope_severity_tiers
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Severity tiers (major NC blocks certification; minor NC needs action plan; observation = 10.1
+  territory)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define severity tiers for nonconformities in a written procedure, clearly distinguishing between major,
+  minor, and observation categories.
+- Document the criteria for each severity tier, including examples relevant to your organisation, in an
+  approved and dated policy or guideline.
+- Assign responsibility for classifying nonconformities to a named individual, not a team or generic role.
+- Record each nonconformity’s severity tier and classification decision in the nonconformity register,
+  including the date and the person making the decision.
+- List the sources and scope of nonconformity detection, such as audits or incident reports, in a maintained
+  and version-controlled document.

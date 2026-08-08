@@ -1,0 +1,42 @@
+leaf_id: req:9.3:applicable_inputs_outputs_scope
+control_ref: '9.3'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The management review must be bounded by the defined ISMS scope to ensure that inputs and
+    outputs are relevant to the organisation’s information security objectives and context. Without a
+    clear scope, it is impossible to determine what should be reviewed or escalated.
+  good_enough: The ISMS scope statement exists, is approved, and clearly defines the organisational and
+    system boundaries for the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the direction for information security and frames what management review
+    should consider as mandatory versus organisation-determined inputs and outputs. It ensures alignment
+    between review activities and top-level objectives.
+  good_enough: A current, approved information security policy is available and accessible, outlining
+    the organisation’s security objectives and commitments.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: direct
+  rationale: Management review must consider the results of risk assessments to determine which issues
+    require escalation and what outputs are necessary. Without recent risk assessment results, the review
+    cannot be meaningfully scoped.
+  good_enough: At least one documented risk assessment has been completed within the ISMS scope, identifying
+    key risks and their status.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that management review inputs and outputs are sourced from,
+    and directed to, the correct stakeholders. This is critical for escalation and follow-up actions.
+  good_enough: Roles and responsibilities for information security management and review are documented
+    and communicated to relevant personnel.

@@ -1,0 +1,19 @@
+must_id: item:A.8.28:rev_findings_update
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Findings propagated to language standards / training
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each secure coding program review finding in a dated log, including the programming language
+  and affected standard or guideline.
+- Assign responsibility to a named individual to update relevant language-specific coding standards with
+  each new finding.
+- Document updates to training materials by listing the date, the specific finding addressed, and the
+  person who made the change.
+- Name the recipient teams or individuals who received updated training, and capture attendance records
+  for each session.
+- Avoid referencing changes in generic terms; specify the exact standard section or training module updated
+  for each finding.

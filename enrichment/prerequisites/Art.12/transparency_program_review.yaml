@@ -1,0 +1,32 @@
+leaf_id: req:Art.12:transparency_program_review
+control_ref: Art.12
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to verify that all relevant data subject
+    requests are being tracked and reflected in the register. Without this, you can't meaningfully review
+    transparency or SLA adherence.
+  good_enough: A current, reasonably complete RoPA exists, listing all major processing activities and
+    their purposes, even if some minor updates are pending.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity is essential to determine if
+    requests for access, rectification, or erasure are being handled and refused appropriately.
+  good_enough: Each processing activity in the RoPA has a documented lawful basis, even if some edge cases
+    are still under review.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated DPO or equivalent is needed to oversee and review the transparency program,
+    ensuring independence and expertise in the annual review process.
+  good_enough: A DPO or privacy lead is formally assigned and contactable, even if their role description
+    is still being refined.

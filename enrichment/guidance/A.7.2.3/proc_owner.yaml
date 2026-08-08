@@ -1,0 +1,15 @@
+must_id: item:A.7.2.3:proc_owner
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: Named owner (DPO + Product / UX)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the Consent Determination Procedure as a specific individual, listing both the Data
+  Protection Officer and a Product or UX lead.
+- Record the full names, job titles, and contact details of the named owners in the procedure document.
+- Date the procedure document to show when the ownership was last reviewed or updated.
+- Obtain a signed confirmation from both the DPO and Product/UX lead acknowledging their responsibility
+  for the procedure.

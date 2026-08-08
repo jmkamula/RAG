@@ -1,0 +1,19 @@
+must_id: item:A.5.36:sch_method_planned
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Planned method per item (which items use sampling vs audit vs automated check)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each compliance item in the review schedule, specifying the exact control, policy, or process to
+  be reviewed.
+- State the planned review method for each item, clearly indicating whether you will use sampling, a full
+  audit, or an automated check.
+- Name the responsible individual for each review method, avoiding generic roles like "the team" or "IT
+  department".
+- Record the scheduled review date and frequency for each item, ensuring these are explicit and not left
+  as "TBD" or blank.
+- Attach supporting documentation or tool outputs for automated checks, showing how the method will be
+  applied in practice.

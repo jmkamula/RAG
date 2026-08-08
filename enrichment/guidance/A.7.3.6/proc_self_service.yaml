@@ -1,0 +1,19 @@
+must_id: item:A.7.3.6:proc_self_service
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: Self-service surface where feasible (subject portal for direct access/correction)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Describe the self-service portal’s features that allow individuals to directly access, correct, or erase
+  their personal data.
+- Record the date the self-service portal was made available to data subjects and the current version
+  of the procedure.
+- Name the individual responsible for maintaining and updating the self-service portal, avoiding generic
+  titles like "IT" or "the team."
+- Document one or more test cases showing successful use of the portal by a data subject to access, correct,
+  or erase their data.
+- Retain user feedback or support tickets that demonstrate the portal’s effectiveness and highlight any
+  issues resolved.

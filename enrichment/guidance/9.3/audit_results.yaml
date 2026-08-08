@@ -1,0 +1,19 @@
+must_id: item:9.3:audit_results
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Internal audit results included
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the internal audit results as a dedicated agenda item in the management review meeting minutes,
+  including key findings and any identified issues.
+- Reference the date and scope of the internal audit discussed, so auditors can match the review to a
+  specific audit cycle.
+- Name the individual who presented the internal audit results during the meeting, not just their job
+  title or department.
+- Attach or cross-reference the internal audit report summary within the meeting minutes to provide direct
+  evidence of what was reviewed.
+- Record any management decisions or actions taken in response to the internal audit results, with responsible
+  persons and target dates clearly stated.

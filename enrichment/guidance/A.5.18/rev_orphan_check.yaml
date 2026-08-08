@@ -1,0 +1,18 @@
+must_id: item:A.5.18:rev_orphan_check
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Orphan-access check — every register row reconciled against A.5.16 identity register; any rights
+  attaching to disabled/deleted identities surfaced and revoked
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each entry in the access rights register against the current identity register to confirm
+  all access is linked to an active identity.
+- Record the date and outcome of each reconciliation, including any orphaned access rights identified
+  during the review.
+- Document the removal or revocation of any access rights found to be attached to disabled or deleted
+  identities, noting the responsible individual and completion date.
+- Name the reviewer as a specific individual, not a team or department, to avoid ambiguity in accountability
+  for the reconciliation process.

@@ -1,0 +1,17 @@
+must_id: item:B.8.2.4:reg_notification_date
+control_ref: B.8.2.4
+standard_id: ISO27701:2019
+must_text: Notification issued date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each infringing instruction notification is issued in a dedicated column for every
+  entry in the register.
+- Cross-reference the notification issued date with the corresponding notification document to confirm
+  accuracy and completeness.
+- Name the person responsible for entering and verifying the issued date for each notification in the
+  register.
+- Avoid leaving the notification issued date column blank or using placeholders like "TBD"—enter a specific,
+  actual date for each row.

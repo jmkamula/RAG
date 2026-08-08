@@ -1,0 +1,20 @@
+must_id: item:A.7.1:scope_exclusions
+control_ref: A.7.1
+standard_id: ISO27001:2022
+must_text: Exclusions stated explicitly (home offices → A.6.7 remote-working / A.7.9 off-premises; pure-cloud
+  workloads with no physical footprint)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical sites included in the information security management system scope, specifying each
+  location by address and function.
+- State any excluded locations, such as home offices or pure-cloud environments, and reference the relevant
+  ISO27001 controls covering these exclusions.
+- Document the rationale for each exclusion, linking to supporting policies or risk assessments that justify
+  why the site is out of scope.
+- Name the scope document owner as a specific individual, not a team or department, and record the date
+  of the latest review.
+- Retain previous versions of the scope document to show changes over time and support traceability during
+  audits.

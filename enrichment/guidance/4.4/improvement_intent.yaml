@@ -1,0 +1,17 @@
+must_id: item:4.4:improvement_intent
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: Continual improvement statement and mechanism
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the ISMS Manual that continual improvement of the information security management system is
+  a formal, ongoing commitment.
+- Describe a specific mechanism, such as scheduled management reviews or improvement logs, used to identify
+  and implement improvements.
+- Name the individual responsible for overseeing continual improvement activities, avoiding generic titles
+  like "the team" or "management".
+- Record the date of the most recent update to the continual improvement process within the Manual or
+  Charter.

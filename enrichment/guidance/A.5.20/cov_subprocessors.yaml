@@ -1,0 +1,16 @@
+must_id: item:A.5.20:cov_subprocessors
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Approved sub-processors per supplier tracked (link to A.5.19 supplier register)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all approved sub-processors for each supplier in the Supplier Agreement Coverage Register, including
+  full legal names and approval dates.
+- Cross-reference each supplier entry with the corresponding record in the Supplier Register required
+  by control A.5.19.
+- Record the name and signature of the individual who approved each sub-processor, along with the date
+  of approval.
+- Avoid using generic terms like "various" or "TBD" for sub-processor names; specify each entity clearly.

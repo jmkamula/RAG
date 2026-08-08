@@ -1,0 +1,20 @@
+must_id: item:A.6.5:reg_post_briefing_check
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Per-row post-briefing check (30/90/180-day check that no breach has occurred — proportional
+  to role seniority)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of each post-briefing check for every leaver, specifying the 30, 90, or
+  180-day interval based on role seniority.
+- Assign a named individual to conduct and sign off each check, avoiding generic entries like "HR" or
+  "IT team".
+- Document any incidents or breaches identified during the check, including details of investigation and
+  resolution, even if none occurred.
+- Cross-reference each check entry with supporting evidence, such as access logs or incident reports,
+  to confirm no breach has taken place.
+- Retain all completed check records in the Leaver Briefing Register, ensuring each entry is dated and
+  attributable to a specific person.

@@ -1,0 +1,16 @@
+must_id: item:Art.44:rev_register_currency
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Register currency — every flagged transfer in last-assessment freshness window
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every international data transfer flagged in the last assessment period in the transfer register,
+  including dates and destinations.
+- Record the date of the most recent review for each flagged transfer to confirm it falls within the current
+  assessment window.
+- Cross-reference each transfer entry with supporting evidence, such as contracts or data flow diagrams,
+  dated within the assessment window.
+- Name the reviewer responsible for each transfer entry as a specific individual, not a group or department.

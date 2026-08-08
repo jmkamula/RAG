@@ -1,0 +1,19 @@
+must_id: item:A.5.23:backup_handover
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: CSP backup of data + config and handover obligations on termination
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy that the cloud service provider must perform regular backups of both data and configuration
+  settings, with backup frequency clearly defined.
+- Document the requirement that the cloud service provider must securely transfer all data and configurations
+  to your organisation upon contract termination.
+- Name the responsible individual within your organisation who will oversee backup and handover compliance,
+  listing their full name and job title.
+- Attach a copy of the most recent signed agreement or contract addendum that details the backup and handover
+  obligations with the cloud service provider.
+- Specify in the policy that backup and handover responsibilities cannot be described in vague terms or
+  left as "to be agreed" at a later date.

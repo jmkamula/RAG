@@ -1,0 +1,18 @@
+must_id: item:A.8.12:bl_alert_routing
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Alert routing configured (severity tiering, ticketing destination, incident-team escalation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the alert severity tiers in the DLP baseline, including clear definitions and criteria for
+  each tier, with version and date.
+- Record the ticketing system destination for each alert tier, specifying the system name and responsible
+  team or individual.
+- Assign a named incident response team member as the escalation contact for high-severity alerts, listing
+  their full name and contact details.
+- Name the alert routing configuration owner as a specific individual, not a generic group or department.
+- Retain a screenshot or export of the current alert routing configuration showing severity mapping, ticketing,
+  and escalation paths.

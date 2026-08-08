@@ -1,0 +1,17 @@
+must_id: item:A.6.8:reg_report_timestamp
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Per-row report timestamp (drives timeliness analysis — gap between event time and report time)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time each event report is submitted in a dedicated "report timestamp" column
+  for every row in the register.
+- Cross-reference each report timestamp with the corresponding event occurrence timestamp to enable analysis
+  of reporting timeliness.
+- Confirm that the report timestamp is system-generated or entered by the reporting individual, and is
+  not left blank or filled with placeholders.
+- Name the person responsible for reviewing the register regularly to check for missing or inconsistent
+  report timestamps.

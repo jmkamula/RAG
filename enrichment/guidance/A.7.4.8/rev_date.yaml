@@ -1,0 +1,17 @@
+must_id: item:A.7.4.8:rev_date
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Disposal Program in a dated entry within the program documentation.
+- State the planned review interval for the Disposal Program in months or years, and include this in the
+  program documentation.
+- Confirm the next scheduled review date is calculated and listed, based on the last review date and the
+  stated interval.
+- Name the reviewer as a specific individual responsible for the last review, not as a team or department.
+- Attach evidence of the review, such as meeting minutes or a signed review checklist, dated within the
+  planned interval.

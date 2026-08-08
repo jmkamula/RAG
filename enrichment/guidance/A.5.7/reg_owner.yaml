@@ -1,0 +1,16 @@
+must_id: item:A.5.7:reg_owner
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Internal owner per row accountable for the source (renewal, escalation, value assessment)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the internal owner for each threat intelligence feed entry, avoiding generic
+  labels like "IT" or "Security Team".
+- Record the date each owner was assigned to their respective feed entry in the register.
+- Document the responsibilities of each owner, including renewal, escalation, and value assessment, in
+  a dedicated column for every feed.
+- Cross-reference each feed entry with supporting evidence of the owner's recent review or action, such
+  as a dated email or meeting note.

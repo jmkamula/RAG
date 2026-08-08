@@ -1,0 +1,40 @@
+leaf_id: req:Art.17:applicable_systems_scope
+control_ref: Art.17
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date inventory of all processing activities to identify which systems and
+    data flows contain personal data that could be subject to erasure requests. Without this, you cannot
+    reliably scope where erasure must be supported.
+  good_enough: A current, reasonably complete RoPA listing all major systems and subprocessors handling
+    personal data is available, even if some minor updates are pending.
+- ref: Art.28
+  standard_id: GDPR:2016/679
+  title: Processor Obligations
+  category: direct
+  rationale: To include third-party processors in the erasure scope, you must know which vendors process
+    personal data on your behalf and what contractual mechanisms exist to enforce erasure downstream.
+  good_enough: A list of active processors with basic contract terms covering erasure is documented, even
+    if not all contracts are fully reviewed.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and technical boundaries for information security,
+    which helps clarify which systems are under your control and must be considered for erasure.
+  good_enough: A documented ISMS scope that covers all core business systems and data stores, even if
+    some edge cases are still being mapped.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity is necessary to determine if
+    erasure requests can be honored or if exemptions apply.
+  good_enough: A summary mapping of lawful bases to processing activities exists, even if some entries
+    are provisional or pending legal review.

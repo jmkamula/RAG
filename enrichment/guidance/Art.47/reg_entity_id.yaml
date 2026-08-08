@@ -1,0 +1,18 @@
+must_id: item:Art.47:reg_entity_id
+control_ref: Art.47
+standard_id: GDPR:2016/679
+must_text: Per-row group entity bound by BCRs
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each group entity covered by the Binding Corporate Rules (BCRs) as a separate row in the BCR Coverage
+  Register.
+- Record the full legal name and registered address of each entity to avoid ambiguity or confusion during
+  audit.
+- Attach the date when each entity formally adopted the BCRs, referencing supporting documentation for
+  verification.
+- Name the responsible contact person for each entity, not just a department or team, to provide clear
+  accountability.
+- Cross-reference each entry with the relevant BCR adoption or approval record to confirm binding status.

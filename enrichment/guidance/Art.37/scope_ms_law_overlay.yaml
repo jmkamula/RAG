@@ -1,0 +1,19 @@
+must_id: item:Art.37:scope_ms_law_overlay
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: MS law overlay — Art.37.4 second sentence (MS may require designation in additional cases)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all relevant national laws in each EU country where you operate that may require a Data Protection
+  Officer beyond GDPR Article 37.
+- Document the legal references and specific triggers for DPO designation in each applicable country,
+  including citations and effective dates.
+- Name the appointed DPO for each country where additional designation is required, listing a specific
+  individual and their contact details.
+- Record the decision and date of DPO designation in meeting minutes or an official appointment letter
+  signed by management.
+- Avoid listing the DPO as a generic role or team; always specify a named person to meet legal and auditor
+  expectations.

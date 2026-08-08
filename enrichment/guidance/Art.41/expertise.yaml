@@ -1,0 +1,19 @@
+must_id: item:Art.41:expertise
+control_ref: Art.41
+standard_id: GDPR:2016/679
+must_text: Expertise in code's subject matter (Art.41.2.b)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individuals responsible for monitoring as subject matter experts in the code’s area, listing
+  their qualifications and relevant experience.
+- Document the process used to verify and select these experts, including interview notes, CVs, and decision
+  records with dates.
+- Record ongoing training or professional development activities completed by monitoring personnel, attaching
+  certificates or attendance logs.
+- State the criteria used to assess subject matter expertise, referencing specific requirements from the
+  code and how each individual meets them.
+- Avoid listing generic roles or unnamed groups as experts; specify named individuals with documented
+  expertise.

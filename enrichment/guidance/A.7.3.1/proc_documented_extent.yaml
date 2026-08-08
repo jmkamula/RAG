@@ -1,0 +1,18 @@
+must_id: item:A.7.3.1:proc_documented_extent
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Documented extent — subject-facing description of which obligations are fulfilled + how
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific privacy obligations your organisation fulfills for PII principals, using plain language
+  that a non-expert can understand.
+- Document the methods and processes used to meet each listed obligation, referencing related procedures
+  or systems by name.
+- Name the individual responsible for maintaining and updating this procedure, avoiding generic titles
+  like "the team" or "IT".
+- Record the date of the most recent review or update on the procedure document itself.
+- Publish the procedure in a location accessible to all relevant staff and, where appropriate, to PII
+  principals.

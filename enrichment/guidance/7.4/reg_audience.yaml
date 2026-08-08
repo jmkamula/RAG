@@ -1,0 +1,16 @@
+must_id: item:7.4:reg_audience
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: Per-row audience (which internal group / external party)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the intended audience for each communication event, specifying the exact internal group or external
+  party by name or role.
+- Cross-reference each audience entry with supporting documentation, such as distribution lists or meeting
+  invites, to confirm accuracy.
+- Name the audience as a specific group or entity—do not use vague terms like "staff" or "partners" without
+  further detail.
+- Date each register entry to show when the audience was identified for the communication event.

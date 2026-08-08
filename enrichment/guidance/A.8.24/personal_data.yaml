@@ -1,0 +1,16 @@
+must_id: item:A.8.24:personal_data
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Personal data explicitly scoped for encryption (GDPR Art.32.1a integration)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy that all personal data, as defined by GDPR, is explicitly included in the scope
+  for encryption requirements.
+- Name the specific individual responsible for maintaining and updating the encryption policy, avoiding
+  generic titles like "IT team" or "management".
+- Reference GDPR Article 32.1a directly in the policy text to show clear alignment with regulatory requirements.
+- Document the date of the most recent policy review and approval, including the names and signatures
+  of the approvers.

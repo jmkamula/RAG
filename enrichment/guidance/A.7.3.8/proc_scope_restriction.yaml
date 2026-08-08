@@ -1,0 +1,19 @@
+must_id: item:A.7.3.8:proc_scope_restriction
+control_ref: A.7.3.8
+standard_id: ISO27701:2019
+must_text: Scope restriction — copy relates specifically to that subject; no cross-subject leakage
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for verifying that each PII copy request matches the identity of the
+  requesting subject.
+- Document the process used to confirm that only the requesting subject’s data is included in the provided
+  copy, with a dated checklist.
+- Record each PII copy provision event in a log, including subject name, request date, and confirmation
+  of scope restriction.
+- Attach evidence of cross-checking to each case file, such as screenshots or export logs, showing no
+  unrelated subjects’ data is included.
+- State the subject’s unique identifier in the provision record—avoid using only names or generic labels
+  that could cause confusion.

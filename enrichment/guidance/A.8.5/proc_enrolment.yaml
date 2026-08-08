@@ -1,0 +1,18 @@
+must_id: item:A.8.5:proc_enrolment
+control_ref: A.8.5
+standard_id: ISO27001:2022
+must_text: Factor enrolment procedure (initial MFA setup, with identity-proofing strength matched to tier)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for enrolling users in multi-factor authentication, including how
+  identity is verified before access is granted.
+- State the criteria used to match identity-proofing strength and authentication factors to each user
+  access tier, with examples for each tier.
+- Name the individual responsible for approving initial MFA setup requests, listing their full name and
+  role in the procedure.
+- Record the date and outcome of each user’s identity-proofing and MFA enrolment in an auditable register.
+- Specify that generic or shared accounts are not permitted for MFA enrolment, and require evidence of
+  individual user assignment.

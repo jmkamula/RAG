@@ -1,0 +1,19 @@
+must_id: item:A.7.4.6:rev_sweep_health
+control_ref: A.7.4.6
+standard_id: ISO27701:2019
+must_text: Sweep health — cadence honoured, coverage complete
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the dates of each temporary files program review in a log, showing that reviews occur at the
+  frequency stated in your policy.
+- Record the names of individuals who performed each review, ensuring each entry lists a specific person,
+  not a team or department.
+- List all systems and storage locations checked during each review, demonstrating that the sweep covers
+  all relevant areas.
+- Attach evidence of completed review actions, such as screenshots or deletion logs, to the review record
+  for each cycle.
+- Confirm that no scheduled review was missed or delayed by cross-referencing the review log with your
+  program’s calendar or schedule.

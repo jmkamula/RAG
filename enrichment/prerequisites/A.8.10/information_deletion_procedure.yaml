@@ -1,0 +1,44 @@
+leaf_id: req:A.8.10:information_deletion_procedure
+control_ref: A.8.10
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The deletion procedure must clearly define which information and systems are in-scope for
+    deletion, based on the ISMS scope. Without this, you risk omitting key assets or overreaching.
+  good_enough: A documented scope statement that lists included business units, systems, and information
+    types is available and referenced.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need an up-to-date asset register to know what information exists, where it resides,
+    and on what media, so you can specify deletion methods and triggers.
+  good_enough: A basic asset register exists, listing major information assets and their storage locations/formats.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Deletion requirements and methods often depend on the classification of information (e.g.,
+    confidential vs. public), so you must know how information is classified before defining deletion
+    procedures.
+  good_enough: A simple, documented classification scheme is in place and applied to key information assets.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment identifies threats and impacts related to information retention and deletion,
+    helping prioritize which information requires strict deletion controls.
+  good_enough: A recent risk assessment exists that covers information lifecycle risks, even if not exhaustive.
+- ref: A.8.33
+  standard_id: ISO27001:2022
+  title: Test Information
+  category: direct
+  rationale: Test information must be deleted according to lifecycle rules, so your deletion procedure
+    must account for test data and environments.
+  good_enough: There is at least a draft or outline of how test data is handled and deleted at end-of-life.

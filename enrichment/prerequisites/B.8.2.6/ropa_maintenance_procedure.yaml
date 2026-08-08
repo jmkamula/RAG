@@ -1,0 +1,47 @@
+leaf_id: req:B.8.2.6:ropa_maintenance_procedure
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You need to know the specific purposes for which personal data is processed on behalf of
+    each customer to ensure the RoPA reflects accurate and relevant processing activities.
+  good_enough: A documented list of processing purposes for all current processor activities, even if
+    not fully detailed, is available and up to date.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity is essential for maintaining
+    an accurate RoPA and for responding to customer instructions or changes.
+  good_enough: A summary of lawful bases for each processing activity is documented, even if some are
+    provisional or pending customer confirmation.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: cross_role
+  rationale: The GDPR RoPA requirements set the legal baseline for what must be maintained and updated,
+    so your maintenance procedure must align with these obligations.
+  good_enough: A template or outline of the GDPR-required RoPA exists, showing which fields must be kept
+    accurate, even if not fully populated.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You must know which parts of your organization and which processing activities are in scope
+    for the ISMS and PIMS to ensure your RoPA maintenance covers all relevant areas.
+  good_enough: A current ISMS scope statement exists that clearly identifies which processor activities
+    and systems are included.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that responsibility for maintaining the RoPA is understood
+    and that updates are actioned when triggers occur.
+  good_enough: A basic RACI or list of assigned roles for privacy and data processing tasks is documented,
+    even if not fully formalized.

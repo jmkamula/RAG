@@ -1,0 +1,19 @@
+must_id: item:A.7.2.1:reg_lawful_basis_link
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Lawful basis link (which A.7.2.2 basis row this purpose relies on)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each processing purpose in the PII Processing Purpose Register to the specific lawful
+  basis row in the A.7.2.2 register.
+- Record the unique identifier or row number from the A.7.2.2 register next to each processing purpose
+  entry.
+- Name the lawful basis in plain language for each purpose, matching the terminology used in your A.7.2.2
+  register.
+- Confirm that every processing purpose has a corresponding lawful basis entry; do not leave any purpose
+  without a linked basis.
+- Avoid using generic or placeholder terms like "see above" or "various"—specify the exact lawful basis
+  for each purpose.

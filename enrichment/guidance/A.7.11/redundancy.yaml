@@ -1,0 +1,19 @@
+must_id: item:A.7.11:redundancy
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Redundancy / backup arrangements per utility (UPS, generator, dual-feed, redundant cooling,
+  dual ISP)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each critical utility supporting information systems, such as power, cooling, and internet connectivity,
+  in the continuity procedure.
+- Document the specific redundancy or backup arrangement for each utility, including model numbers and
+  installation dates where applicable.
+- Name the responsible individual for maintaining and testing each backup arrangement, not just a team
+  or department.
+- Attach recent test records or maintenance logs for each backup utility, showing dates and outcomes.
+- State the process for activating backup arrangements during a utility failure, including who authorizes
+  the switch and how it is recorded.

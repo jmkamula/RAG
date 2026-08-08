@@ -1,0 +1,17 @@
+must_id: item:A.7.12:reg_site
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Per-row site
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the physical site location for each cabling run entry in the register, using a unique and descriptive
+  site name or address.
+- Cross-reference each cabling run with its corresponding site entry in any related asset or infrastructure
+  registers.
+- Name the register owner as a specific individual responsible for updates, not as a team or department.
+- Date each new or updated cabling run entry to provide a clear timeline of changes.
+- Retain supporting documentation, such as installation diagrams or site maps, linked to each row for
+  verification.

@@ -1,0 +1,18 @@
+must_id: item:A.5.4:comm_audience
+control_ref: A.5.4
+standard_id: ISO27001:2022
+must_text: Audience reached (all personnel, including contractors and third parties in scope)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all personnel, contractors, and third parties in scope by name or unique identifier in a dated
+  distribution log.
+- Record the date and method each individual received the management directive, such as email, intranet
+  post, or in-person briefing.
+- Obtain confirmation of receipt from each recipient, such as a signed acknowledgement or electronic read
+  receipt.
+- Name the audience as specific individuals or roles; do not use vague groups like "all staff" or "relevant
+  parties."
+- Retain copies of all communications and acknowledgements in a central, access-controlled repository.

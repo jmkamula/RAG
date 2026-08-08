@@ -1,0 +1,17 @@
+must_id: item:A.7.3.10:reg_event_type
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Event type per row (objection / human-intervention request / contest / expression-of-view)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each event in a separate row, clearly stating whether it is an objection, human-intervention
+  request, contest, or expression-of-view.
+- Name the individual who submitted each event, including their contact details, in the corresponding
+  row.
+- Enter the date and time each event was received in its row to provide a complete timeline.
+- Assign a unique reference number to each event to avoid confusion between similar cases.
+- Confirm that no row contains multiple event types or combines several events, as auditors will flag
+  merged or ambiguous entries.

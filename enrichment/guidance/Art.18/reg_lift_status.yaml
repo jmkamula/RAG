@@ -1,0 +1,16 @@
+must_id: item:Art.18:reg_lift_status
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Per-row lift status (active / lifted-on-date with reason)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the restriction status for each entry as either "active" or "lifted" with the exact date the
+  restriction was lifted.
+- State the specific reason for lifting the restriction in the same row as the lifted-on-date.
+- Name the individual who authorized the lifting of each restriction, ensuring a specific person is listed
+  rather than a department or team.
+- Retain a dated record of any supporting documentation or correspondence that explains why the restriction
+  was lifted.

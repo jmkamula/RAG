@@ -1,0 +1,19 @@
+must_id: item:A.8.8:rev_findings_to_program
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Findings propagated to procedure / scope / awareness updates
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each vulnerability review's findings in a dated report, clearly linking them to the relevant
+  procedure, scope, or training material.
+- Assign responsibility to a named individual for updating procedures, scope documents, or awareness materials
+  based on the review findings.
+- Record the date and details of each update made, referencing the specific vulnerability finding that
+  triggered the change.
+- Retain evidence of communication to staff about updated procedures or awareness topics, such as email
+  notifications or training attendance logs.
+- Name the owner of each update as a specific person, not a team or department, to avoid ambiguity in
+  accountability.

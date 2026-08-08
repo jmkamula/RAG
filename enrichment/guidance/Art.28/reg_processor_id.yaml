@@ -1,0 +1,15 @@
+must_id: item:Art.28:reg_processor_id
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Processor identifier per row (entity name, jurisdiction)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each data processor in a separate row, using the full legal entity name as registered in official
+  records.
+- Record the jurisdiction for each processor, specifying the country where the processor is legally established.
+- Cross-reference each processor entry with the corresponding signed Data Processing Agreement, including
+  the agreement’s effective date.
+- Name the processor using a specific legal entity, not a generic group or holding company name.

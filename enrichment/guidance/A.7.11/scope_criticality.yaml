@@ -1,0 +1,19 @@
+must_id: item:A.7.11:scope_criticality
+control_ref: A.7.11
+standard_id: ISO27001:2022
+must_text: Per-site criticality tier (drives redundancy depth)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all organisational sites covered by the utility continuity plan in a dated register, specifying
+  their physical addresses.
+- Assign a criticality tier to each site in the register, based on business impact analysis and documented
+  risk assessment results.
+- State the rationale for each site's criticality tier in the register, referencing supporting evidence
+  such as operational dependency or regulatory requirements.
+- Name the person who approved each site's criticality tier, ensuring the approver is a specific individual,
+  not a group or department.
+- Retain previous versions of the site register to show changes in criticality tiers over time, with dates
+  and reasons for updates.

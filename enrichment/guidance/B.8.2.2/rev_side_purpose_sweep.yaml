@@ -1,0 +1,20 @@
+must_id: item:B.8.2.2:rev_side_purpose_sweep
+control_ref: B.8.2.2
+standard_id: ISO27701:2019
+must_text: Side-purpose drift sweep — cross-tenant analytics + ML training pipelines checked for unauthorised
+  customer-PII use
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all analytics and machine learning pipelines that process customer personal data, listing each
+  pipeline and its data sources in a dated inventory.
+- Cross-reference each pipeline’s data use with documented customer consent and stated purposes, recording
+  any discrepancies in a review log.
+- Document the results of a sweep for unauthorised use of customer personal data in cross-tenant analytics
+  or ML training, including reviewer name and date.
+- Name the reviewer as a specific individual responsible for this check — do not use a team or department
+  as the owner.
+- Retain evidence of corrective actions taken for any identified side-purpose drift, including decision
+  records and implementation dates.

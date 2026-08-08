@@ -1,0 +1,18 @@
+must_id: item:A.5.8:role
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Information security role defined in the project governance (advisor / reviewer / gate-owner
+  with veto authority where warranted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the information security role in each project’s governance documents,
+  avoiding generic titles like "the team" or "IT".
+- Document the responsibilities of the information security role, including advisory, review, and veto
+  authority, in the project management procedure.
+- Record the date and version of the procedure where the information security role and responsibilities
+  are defined.
+- Cross-reference the project governance documents with the procedure to show alignment of assigned information
+  security responsibilities.

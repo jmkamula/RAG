@@ -1,0 +1,18 @@
+must_id: item:A.7.6:clean_entry_exit
+control_ref: A.7.6
+standard_id: ISO27001:2022
+must_text: Clean entry/exit (search procedure if classification warrants, sign-out of materials)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the entry and exit procedures for secure areas, including any search requirements and sign-out
+  process for materials, in a written procedure.
+- Assign a named individual as the owner responsible for maintaining and updating the secure area procedure,
+  not a generic team or department.
+- Record each entry and exit from the secure area in a dated log, including the names of all individuals
+  and items brought in or taken out.
+- Require all personnel to sign the log when removing or returning materials classified as sensitive,
+  ensuring signatures are legible and dated.
+- Review the procedure annually and keep a record of the review date and the name of the reviewer.

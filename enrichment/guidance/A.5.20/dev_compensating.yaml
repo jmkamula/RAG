@@ -1,0 +1,18 @@
+must_id: item:A.5.20:dev_compensating
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Compensating control stated (monitoring, contractual remedy, alternative requirement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each supplier agreement deviation with a unique entry, including the date, supplier name, and
+  the specific requirement not met.
+- State the compensating control applied for each deviation, such as increased monitoring, contractual
+  remedies, or an alternative security requirement.
+- Name the person responsible for approving each compensating control as a specific individual, not a
+  team or department.
+- Attach evidence of risk assessment justifying the compensating control, including the date and the assessor’s
+  name.
+- Review and update the register regularly, documenting the date of each review and the reviewer’s name.

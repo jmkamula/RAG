@@ -1,0 +1,19 @@
+must_id: item:A.8.7:detection_handling
+control_ref: A.8.7
+standard_id: ISO27001:2022
+must_text: Detection handling (quarantine / incident creation / cross-link to A.5.25 triage + A.5.26 register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for detecting malware, including steps for automatic quarantine and manual review,
+  in the Protection Against Malware Procedure.
+- Cross-reference the procedure to your incident triage process as described in control A.5.25, citing
+  the exact document title and section.
+- Record each malware detection event in the incident register required by A.5.26, including date, time,
+  and assigned incident number.
+- Name the individual responsible for reviewing and escalating malware incidents, avoiding generic roles
+  like "IT team" or "security staff."
+- Attach an example of a recent malware incident record showing linkage between detection, quarantine,
+  triage, and registration steps.

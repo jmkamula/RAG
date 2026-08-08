@@ -1,0 +1,18 @@
+must_id: item:A.8.12:proc_exception
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Exception process for time-limited business-justified bypass with InfoSec approval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process for requesting a temporary data loss prevention (DLP) bypass, including
+  required business justification and time limit.
+- Name the specific individual in the Information Security team authorized to approve DLP exceptions,
+  not just "InfoSec" or a group.
+- Record each exception request, including requester, justification, approval, and start/end dates, in
+  a dated exception log.
+- Attach evidence of InfoSec approval, such as a signed email or approval form, to each exception record.
+- Review and update the procedure at least annually, recording the review date and reviewer’s name in
+  the procedure document.

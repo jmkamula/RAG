@@ -1,0 +1,17 @@
+must_id: item:8.2:last_assessment
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Last assessment date recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent operational risk assessment in the official risk register or assessment
+  document.
+- Name the person responsible for conducting and recording the last assessment, using their full name
+  rather than a generic title.
+- Attach or link the completed assessment report to the risk register entry, showing the date and scope
+  of the assessment.
+- Avoid using undated or draft versions of assessment records, as auditors will flag missing or unclear
+  assessment dates.

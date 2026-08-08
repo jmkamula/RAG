@@ -1,0 +1,16 @@
+must_id: item:A.5.17:reg_scope
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Scope per row (which systems/identities use this credential type)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each credential type in the register with a unique row for clear identification.
+- Specify for each row which systems and identities use the credential type, naming systems and identity
+  groups explicitly.
+- Record the date each entry was last updated to show the register is actively maintained.
+- Name the register owner as a specific individual responsible for updates, not just a team or department.
+- Attach supporting documentation that cross-references system access lists or identity inventories for
+  each credential type.

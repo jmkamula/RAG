@@ -1,0 +1,30 @@
+leaf_id: req:Art.27:representative_program_review
+control_ref: Art.27
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.27
+  standard_id: GDPR:2016/679
+  title: EU Representative Designation
+  category: direct
+  rationale: You must have formally designated an EU representative if your organization is subject to
+    Art.27. Without this, there is nothing to review or verify for annual compliance.
+  good_enough: A documented appointment letter or contract naming the representative and their contact
+    details is available and accessible.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities (RoPA)
+  category: foundational
+  rationale: Up-to-date records of processing are essential to determine if your processing triggers the
+    need for a representative and to inform the annual review.
+  good_enough: A current RoPA exists, even if high-level, listing main processing activities and locations.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: Knowing the organizational and geographic scope of your ISMS helps confirm which processing
+    activities are in scope for GDPR and thus for Art.27 obligations.
+  good_enough: A scope statement exists that identifies the parts of the organization and processing activities
+    covered by the ISMS.

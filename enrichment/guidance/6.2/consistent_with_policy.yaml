@@ -1,0 +1,17 @@
+must_id: item:6.2:consistent_with_policy
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: Per-objective consistency with the InfoSec policy (5.2) flagged
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each information security objective in the register with the specific clause or statement
+  in the current Information Security Policy it supports.
+- Document the date and version of the Information Security Policy used for alignment next to each objective
+  entry.
+- Name the individual responsible for verifying policy consistency for each objective, rather than listing
+  a team or department.
+- Record any objectives that do not clearly align with the policy and flag them for review with a dated
+  note.

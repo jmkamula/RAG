@@ -1,0 +1,18 @@
+must_id: item:A.7.2.1:reg_purpose_id
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Unique purpose identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each processing purpose entry in the register, using a consistent format
+  such as "PURP-001", "PURP-002", etc.
+- Record the identifier directly alongside the corresponding processing purpose description in each row
+  of the register.
+- Cross-reference each identifier in related privacy notices or data flow diagrams to show clear linkage
+  between documents.
+- Name the register owner as a specific individual, not a team or department, to avoid ambiguity in responsibility.
+- Review the register to confirm there are no duplicate or missing identifiers, and document the date
+  of your review.

@@ -1,0 +1,18 @@
+must_id: item:A.8.16:reg_threat_mapping
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Per-detection threat mapping (MITRE ATT&CK technique or equivalent)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each detection use-case in the register with a unique identifier, clear description, and the
+  date it was added or last updated.
+- Map every detection use-case to a specific MITRE ATT&CK technique or equivalent framework, citing the
+  exact technique ID and name.
+- Name the individual responsible for maintaining the register and updating threat mappings, avoiding
+  generic roles like "the team" or "Security."
+- Attach supporting evidence, such as screenshots or links to the relevant MITRE ATT&CK technique page,
+  for each mapped detection use-case.
+- Review and update the register at least annually, documenting the review date and the name of the reviewer.

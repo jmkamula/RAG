@@ -1,0 +1,18 @@
+must_id: item:5.3:rev_a52_alignment
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: A.5.2 cross-check — operational role definitions still consistent with management-system roles
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each operational role description with its corresponding management-system role in the
+  ISMS roles register, noting any differences in a dated comparison log.
+- Document the outcome of the cross-check in a review record, listing any changes needed to align operational
+  and management-system roles.
+- Assign a named individual to approve the completed cross-check, capturing their name and the approval
+  date in the review record.
+- Name the owner of each role as a specific person, not a generic title or team, to avoid ambiguity in
+  accountability.
+- Retain the signed and dated review record alongside the current roles register for audit inspection.

@@ -1,0 +1,15 @@
+must_id: item:A.5.5:rev_reviewer
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Reviewer identity and role recorded
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the individual who performed the authority contact review in the review log
+  or tracking document.
+- State the reviewer’s specific job title or role, not just their department or team, alongside their
+  name in the review record.
+- Enter the date the review was completed next to the reviewer’s details to provide a clear timeline.
+- Avoid listing the reviewer as “the team” or “IT”; always specify a single, accountable person.

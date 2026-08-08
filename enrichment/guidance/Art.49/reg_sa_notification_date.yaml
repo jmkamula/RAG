@@ -1,0 +1,17 @@
+must_id: item:Art.49:reg_sa_notification_date
+control_ref: Art.49
+standard_id: GDPR:2016/679
+must_text: Per-row SA notification date where Art.49.1 second-paragraph used
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date you notified the relevant Supervisory Authority for each data transfer where Art.49.1
+  second paragraph was invoked.
+- Name the individual responsible for making the notification to the Supervisory Authority in each register
+  entry.
+- Attach supporting evidence of the notification, such as an email receipt or official acknowledgement,
+  to each corresponding register row.
+- Specify the legal basis used for each transfer, clearly indicating when Art.49.1 second paragraph applies,
+  not just "Art.49" in general.

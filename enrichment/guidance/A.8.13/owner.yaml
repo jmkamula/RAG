@@ -1,0 +1,16 @@
+must_id: item:A.8.13:owner
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Named procedure owner (Backup Operations lead with Infrastructure partner)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the procedure owner as a specific individual, such as "Jane Smith, Backup Operations Lead," in
+  the header of the Information Backup Procedure document.
+- Document the Infrastructure partner’s name and contact details alongside the procedure owner within
+  the procedure.
+- Record the date the procedure owner was assigned responsibility in the document’s revision history table.
+- Avoid listing the owner as "the team" or "IT department"; use only named individuals to ensure clear
+  accountability.

@@ -1,0 +1,16 @@
+must_id: item:A.5.2:approval_target
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: Reference to the specific version of the responsibility matrix being approved
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific version number and date of the responsibility matrix in the approval document.
+- Record the full name and job title of the top management individual granting approval.
+- Sign and date the approval document to confirm when the roles and responsibilities allocation was authorized.
+- Attach or cross-reference the exact responsibility matrix version being approved, not a generic or draft
+  version.
+- Avoid using vague references such as “latest matrix”; always specify the unique identifier of the approved
+  version.

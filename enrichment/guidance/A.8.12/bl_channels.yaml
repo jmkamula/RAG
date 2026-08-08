@@ -1,0 +1,19 @@
+must_id: item:A.8.12:bl_channels
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Channels with DLP controls active (email / web / endpoint / cloud-storage / IM / removable-media
+  / printing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all channels where data loss prevention (DLP) controls are required, including email, web, endpoints,
+  cloud storage, instant messaging, removable media, and printing.
+- Document the specific DLP controls active on each channel, referencing configuration screenshots or
+  policy settings with dates and responsible owners.
+- Name the owner as a specific individual responsible for maintaining DLP controls, not a team or department.
+- Record the most recent test or review date for each DLP control, including the tester’s name and the
+  outcome.
+- Retain evidence of any exceptions or gaps found, along with approved remediation plans signed by a named
+  decision-maker.

@@ -1,0 +1,16 @@
+must_id: item:A.7.3.5:scope_change_drivers
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Trigger list (new legitimate-interests processing / new marketing programme)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current processing activities involving legitimate interests or marketing in a dated register,
+  specifying start dates and responsible owners.
+- Document each new legitimate-interests processing activity or marketing programme in the register within
+  one week of launch.
+- Name the owner as a specific individual for each listed activity—do not use generic terms like "the
+  team" or "marketing department."
+- Review and update the register quarterly, recording the review date and reviewer’s name each time.

@@ -1,0 +1,16 @@
+must_id: item:A.7.4.7:reg_deletion_trigger
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Deletion trigger per row (calendar-based / event-based)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each type of personal data in the retention schedule register with a separate row for clarity.
+- State the specific deletion trigger for each row, indicating whether it is calendar-based (e.g., 5 years
+  from collection) or event-based (e.g., contract end).
+- Cross-reference each deletion trigger to the relevant legal or business requirement that justifies the
+  retention period.
+- Name the owner responsible for each data type as a specific individual, not a team or department.
+- Record the date when each retention rule was last reviewed or updated in the register.

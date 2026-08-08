@@ -1,0 +1,15 @@
+must_id: item:Art.31:reg_outcome
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Per-row outcome (no-action / corrective measures / fine / ongoing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the outcome of each supervisory authority interaction in a dedicated column, clearly stating
+  if it was no-action, corrective measures, fine, or ongoing.
+- Name the individual responsible for updating each row, including their full name and the date of entry.
+- Attach supporting documents or correspondence for each outcome, such as decision letters or emails,
+  and reference their location in the register.
+- Avoid using vague or generic outcome descriptions; specify the exact result using only the allowed categories.

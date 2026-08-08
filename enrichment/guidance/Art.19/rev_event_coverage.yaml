@@ -1,0 +1,18 @@
+must_id: item:Art.19:rev_event_coverage
+control_ref: Art.19
+standard_id: GDPR:2016/679
+must_text: Event coverage check — every Art.16/17/18 event has a register row OR documented exception
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each event in your Art.16, Art.17, and Art.18 logs with a corresponding entry in the
+  notification program register.
+- Document any event that does not require notification with a written exception, including the reason
+  and the decision-maker’s name.
+- Name the reviewer who performed the coverage check and record the date of completion in the review log.
+- Attach supporting evidence, such as emails or meeting notes, for any exceptions or decisions not to
+  notify.
+- Name the owner as a specific individual — not a group or department — responsible for maintaining the
+  register and exceptions.

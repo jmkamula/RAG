@@ -1,0 +1,17 @@
+must_id: item:5.2:available
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: Available to interested parties as appropriate
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Publish the current, approved Information Security Policy on your internal portal or document management
+  system with access permissions set for relevant staff.
+- List all external parties who require access to the policy, such as contractors or partners, and record
+  how and when it was shared with them.
+- Confirm the policy version and approval date are clearly visible on the document so recipients know
+  they have the latest version.
+- Name the policy owner as a specific individual responsible for distribution — not a generic team or
+  department.

@@ -1,0 +1,17 @@
+must_id: item:A.7.3:reg_remediation
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Remediation log per row where locking falls short of required standard
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each room in the register with a unique identifier, location details, and current locking mechanism.
+- Document any instance where a room’s locking does not meet the required standard, including date and
+  a clear description of the shortfall.
+- Assign a named individual responsible for each remediation action, ensuring their full name—not just
+  a role or team—is listed.
+- State the planned remediation steps and target completion date for each non-compliant room entry.
+- Update the log with the actual completion date and evidence of remediation, such as a photo or signed
+  confirmation.

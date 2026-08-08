@@ -1,0 +1,19 @@
+must_id: item:10.2:rev_closure_progress
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Closure-progress check — open NCs aging beyond expected closure time escalated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record all open nonconformities with their assigned closure dates in a dated tracking log reviewed at
+  least monthly.
+- Document each instance where a nonconformity exceeds its expected closure time, including the date and
+  reason for delay.
+- Escalate overdue nonconformities by notifying a named senior manager in writing, attaching evidence
+  of the missed deadline.
+- Name the escalation recipient as a specific individual, not a group or generic title such as "management"
+  or "the team."
+- Retain copies of all escalation communications and subsequent management responses in a central, dated
+  file.

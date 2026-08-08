@@ -1,0 +1,15 @@
+must_id: item:A.7.10:reg_issued_date
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Per-row issue date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the issue date for each storage media entry in the register using the format YYYY-MM-DD.
+- Name the person responsible for entering each issue date, ensuring a specific individual is listed for
+  every row.
+- Cross-reference each issue date with supporting documentation, such as a signed handover form or system
+  log, for verification.
+- Avoid leaving the issue date field blank or using placeholders like "TBD" or "N/A" in any row.

@@ -1,0 +1,19 @@
+must_id: item:A.8.24:rev_rotation_compliance
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Key-rotation compliance per key class (no overdue active keys without exception)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the key rotation schedule for each cryptographic key class, including required rotation intervals
+  and last rotation dates, in a dated register.
+- Record the current status of all active cryptographic keys, noting any keys that have exceeded their
+  scheduled rotation date.
+- Assign a named individual responsible for monitoring key rotation compliance, ensuring their name—not
+  a team or department—is listed in the register.
+- Retain evidence of approved exceptions for any overdue keys, including justification, approver’s name,
+  and approval date.
+- Cross-reference the key register with system logs or key management tool reports to confirm that all
+  overdue keys have documented exceptions or have been rotated.

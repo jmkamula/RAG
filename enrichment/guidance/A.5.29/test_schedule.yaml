@@ -1,0 +1,20 @@
+must_id: item:A.5.29:test_schedule
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Test schedule for the plan (cadence stated; promoted from SHOULD because untested continuity
+  plans fail when actually needed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact frequency for testing the Information Security During Disruption Plan in a dated document,
+  such as "annually" or "every six months."
+- Assign a named individual responsible for coordinating and overseeing each scheduled test, listing their
+  name and role in the plan.
+- Record the scheduled test dates for the next 12 months in a calendar or register accessible to relevant
+  stakeholders.
+- Document management approval of the test schedule with a dated signature or email confirmation from
+  a named decision-maker.
+- Specify the cadence as a clear interval, not vague terms like "regularly" or "as needed," to avoid auditor
+  rejection.

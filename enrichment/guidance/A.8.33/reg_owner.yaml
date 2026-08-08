@@ -1,0 +1,17 @@
+must_id: item:A.8.33:reg_owner
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Per-row named owner
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner for each test dataset row, avoiding generic entries like "the
+  team" or department names.
+- Record the full name and contact details of each dataset owner directly in the register for every dataset
+  entry.
+- Confirm that each dataset owner has acknowledged their responsibility by collecting a dated signature
+  or written confirmation for each row.
+- Review the register regularly to verify that owner assignments remain current and update any changes
+  with a new date and owner name.

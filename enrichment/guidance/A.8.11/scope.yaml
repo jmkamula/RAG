@@ -1,0 +1,20 @@
+must_id: item:A.8.11:scope
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Scope — which systems/environments require masking (cross-link to A.5.12 classification + A.8.31
+  environment separation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems and environments where data masking is required, referencing their names and locations
+  in your asset inventory.
+- Cross-reference each system or environment to its information classification level, citing the relevant
+  records from your A.5.12 classification register.
+- Link each environment to its separation controls, referencing documentation from A.8.31 that describes
+  how environments are segregated.
+- Name the scope owner as a specific individual responsible for maintaining the masking scope—do not use
+  a team or department name.
+- Record the date the masking scope was last reviewed and updated, attaching evidence of the review decision
+  or approval.

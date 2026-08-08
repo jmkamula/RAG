@@ -1,0 +1,17 @@
+must_id: item:Art.39:sa_cooperation
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Cooperate with SA — point of contact for prior consultation (Art.39.1.d-e)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer (DPO) as a specific individual with full contact details in the DPO
+  Tasks Procedure document.
+- Document the process for responding to requests from the Supervisory Authority, including steps for
+  prior consultation and timelines for response.
+- Record each instance of communication with the Supervisory Authority in a dated log, including the topic
+  and outcome of the interaction.
+- State the requirement for the DPO to be the single point of contact for all Supervisory Authority consultations,
+  avoiding generic or group contacts.

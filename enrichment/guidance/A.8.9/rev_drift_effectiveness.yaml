@@ -1,0 +1,17 @@
+must_id: item:A.8.9:rev_drift_effectiveness
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Drift-detection effectiveness review (catch rate, MTTR)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the most recent configuration drift-detection test results, including catch rate and mean time
+  to respond, with test dates and responsible reviewer.
+- Record the specific individual who reviewed and approved the drift-detection effectiveness metrics,
+  not a group or generic title.
+- Retain evidence of any actions taken to address gaps or failures identified during the review, such
+  as meeting notes or ticket references.
+- State the frequency of periodic reviews in a dated schedule or policy, and cross-reference the latest
+  completed review to this schedule.

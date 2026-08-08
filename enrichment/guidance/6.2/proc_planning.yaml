@@ -1,0 +1,16 @@
+must_id: item:6.2:proc_planning
+control_ref: '6.2'
+standard_id: ISO27001:2022
+must_text: Planning per objective produces what/resources/who/when/evaluation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each security objective with a clear description of the intended result and the specific resources
+  required to achieve it.
+- Assign a named individual as the owner responsible for each objective; do not use generic roles or teams.
+- Record the planned timeline for achieving each objective, including start and target completion dates.
+- State the method and criteria that will be used to evaluate whether each objective has been met.
+- Retain dated records of objective planning meetings or approvals to show when and how objectives were
+  set.

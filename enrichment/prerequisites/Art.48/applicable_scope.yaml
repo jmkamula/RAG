@@ -1,0 +1,33 @@
+leaf_id: req:Art.48:applicable_scope
+control_ref: Art.48
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date record of what personal data is processed, where it is stored,
+    and which countries are involved. This is essential to identify which third-country authorities could
+    potentially request disclosure.
+  good_enough: A current, reasonably complete RoPA that covers all processing activities and locations
+    is available, even if minor updates are pending.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity helps determine if and how data
+    can be disclosed to foreign authorities under international agreements or requests.
+  good_enough: Each processing activity in the RoPA has a documented lawful basis, even if some justifications
+    need refinement.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and geographical boundaries for information security,
+    which is necessary to map which parts of the business and data flows may be subject to foreign authority
+    requests.
+  good_enough: A documented ISMS scope that identifies relevant business units, locations, and information
+    assets, even if not yet fully optimized for GDPR alignment.

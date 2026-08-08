@@ -1,0 +1,49 @@
+leaf_id: req:B.8.2.3:program_review
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which business units, systems, and data flows are covered by
+    the ISMS and its privacy extension. You cannot meaningfully review the marketing use program unless
+    you know whether marketing activities and customer PII are in scope.
+  good_enough: A documented scope that explicitly includes (or excludes) marketing and customer PII handling,
+    even if not fully detailed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: A working classification scheme is needed to reliably identify customer PII and distinguish
+    it from other data types. This underpins any review of isolation between marketing and customer PII.
+  good_enough: A basic, documented scheme that marks customer PII distinctly from other data, with evidence
+    that it is being applied in practice.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: The purposes for which customer PII is processed must be clearly documented to assess whether
+    marketing use is isolated and conditionality is respected. This is essential context for any program
+    review.
+  good_enough: A list of documented processing purposes for customer PII, with marketing uses clearly
+    identified.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for processing customer PII (e.g., consent, contract) is critical
+    to determine if marketing use is defensible and exceptions are properly handled.
+  good_enough: A summary table or record showing the lawful basis for each marketing-related processing
+    activity involving customer PII.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures accountability for both the marketing program and the review
+    process itself. Without this, annual verification cannot be reliably performed.
+  good_enough: A documented list of responsible persons or teams for marketing use and privacy review,
+    even if not fully formalized.

@@ -1,0 +1,40 @@
+leaf_id: req:B.8.4.1:applicable_scope
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and technical boundaries for all information security
+    controls, which must be understood before specifying the narrower processor temp-file scope for privacy
+    purposes.
+  good_enough: A clear, documented ISMS scope that covers the relevant infrastructure and services supporting
+    customer processing, even if not fully optimized for privacy yet.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need an up-to-date inventory of assets (application tier, database, cache, queue) to
+    accurately define which infrastructure components are in scope for processor temp-file handling.
+  good_enough: A basic asset register listing all major infrastructure elements involved in customer data
+    processing, even if some details are pending.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: The purposes for processing must be documented to determine which systems and data flows
+    are relevant to the processor temp-file scope.
+  good_enough: A draft or summary of processing purposes that covers the main customer data flows, sufficient
+    to map to infrastructure components.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Knowing the lawful basis for processing helps clarify which processing activities (and thus
+    which infrastructure) are in scope for privacy controls.
+  good_enough: A preliminary mapping of lawful bases to processing activities, covering the core customer-facing
+    systems.

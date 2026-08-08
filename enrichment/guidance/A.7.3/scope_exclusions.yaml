@@ -1,0 +1,20 @@
+must_id: item:A.7.3:scope_exclusions
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Exclusions stated (common areas, lobbies, parking — not in 'rooms' scope but covered by A.7.1
+  perimeter)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all rooms included in the physical security scope, referencing a current floor plan or site map
+  dated within the past year.
+- State explicitly which areas are excluded from the 'rooms' scope, such as common areas, lobbies, and
+  parking, in a documented statement.
+- Cross-reference the exclusions to the relevant perimeter security control documentation under A.7.1
+  to show how these areas are managed.
+- Name the person responsible for defining and updating the scope, ensuring a specific individual is identified
+  rather than a team or department.
+- Retain a dated approval record from management confirming agreement with the defined scope and stated
+  exclusions.

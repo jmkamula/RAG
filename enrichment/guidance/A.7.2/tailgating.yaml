@@ -1,0 +1,18 @@
+must_id: item:A.7.2:tailgating
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Anti-tailgating measures (mantraps, awareness, observed entry, badge-back-in enforcement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific anti-tailgating measures in place, such as mantraps, security awareness training,
+  observed entry, or badge-back-in enforcement, in the procedure.
+- Name the person responsible for monitoring and maintaining anti-tailgating controls, listing their full
+  name and job title.
+- Record the date of the most recent anti-tailgating awareness training session and keep a signed attendance
+  sheet for all participants.
+- State how incidents of tailgating are reported and investigated, including where incident logs are stored
+  and who reviews them.
+- Specify anti-tailgating ownership as a named individual, not as "security team" or a generic department.

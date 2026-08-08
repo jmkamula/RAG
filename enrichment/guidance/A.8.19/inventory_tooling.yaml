@@ -1,0 +1,17 @@
+must_id: item:A.8.19:inventory_tooling
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Software-inventory tooling for ongoing visibility
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the software-inventory tool used for ongoing visibility in the procedure, including its version
+  and vendor.
+- Document the process for updating the software inventory after each installation or removal, with a
+  dated record for each change.
+- Assign responsibility for maintaining the software inventory to a specific individual, not a team or
+  department.
+- Record evidence of regular drift detection checks, such as automated scan logs or review reports, with
+  timestamps and reviewer names.

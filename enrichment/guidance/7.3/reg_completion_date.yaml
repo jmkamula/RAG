@@ -1,0 +1,17 @@
+must_id: item:7.3:reg_completion_date
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Completion date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of each individual who completed ISMS awareness training in a dedicated row of
+  the register.
+- Enter the exact date each person finished the training in the corresponding row, using a consistent
+  date format.
+- Cross-reference each entry with supporting evidence, such as a signed attendance sheet or digital completion
+  certificate.
+- Avoid leaving any completion date fields blank or using placeholders like "ongoing" or "N/A" for completed
+  training.

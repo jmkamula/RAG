@@ -1,0 +1,15 @@
+must_id: item:A.5.36:pgm_next_date
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Next planned meta-review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned date for the meta-review of the compliance review program in the program documentation.
+- Record the date in a version-controlled document or register that tracks all scheduled meta-reviews.
+- Name the individual responsible for scheduling and conducting the next meta-review, listing their full
+  name and role.
+- Avoid leaving the next meta-review date as "TBD" or blank, as auditors will flag missing or unclear
+  scheduling.

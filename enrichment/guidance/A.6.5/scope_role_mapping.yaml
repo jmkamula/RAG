@@ -1,0 +1,20 @@
+must_id: item:A.6.5:scope_role_mapping
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Role-to-obligation mapping (executive level may have extended non-compete; standard staff only
+  confidentiality + IP; sales/CSM commonly have non-poach + non-solicit)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each executive, standard staff member, and sales/CSM role by title in a table alongside their specific
+  post-employment obligations.
+- Document the exact non-compete, confidentiality, intellectual property, non-poach, and non-solicit clauses
+  that apply to each role, referencing contract sections.
+- Name the responsible HR or legal manager who maintains and updates the role-to-obligation mapping, not
+  just "HR" or "the team".
+- Record the date the mapping was last reviewed and updated, attaching a signed approval from an executive
+  or legal counsel.
+- Cross-reference the mapping to actual signed employment agreements to confirm obligations are consistently
+  applied as documented.

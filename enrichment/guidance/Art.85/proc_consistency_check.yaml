@@ -1,0 +1,17 @@
+must_id: item:Art.85:proc_consistency_check
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: Cross-activity consistency check (same activity type → same derogations applied; document divergences)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all activities of the same type where Article 85 derogations are applied, listing them in a
+  dated register.
+- Compare the derogations applied across these activities and record any differences, including the reasons
+  for each divergence.
+- Document the decision-maker's name and date for each derogation application or exception.
+- Attach supporting evidence for each divergence, such as legal opinions or risk assessments, to the application
+  procedure record.
+- Name the owner of the consistency check as a specific individual, not a group or department.

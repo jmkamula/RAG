@@ -1,0 +1,19 @@
+must_id: item:A.8.1:authentication
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Authentication and screen-lock requirements (cross-link to A.5.17 / A.7.7)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the authentication requirements for user endpoint devices, including password complexity and multi-factor
+  authentication, in the policy document with a version date.
+- Specify the maximum screen-lock timeout and auto-lock settings for all user endpoint devices in a clearly
+  labeled policy section.
+- Cross-reference the authentication and screen-lock requirements in this policy to the relevant sections
+  of your Access Control (A.5.17) and Clear Desk/Clear Screen (A.7.7) policies.
+- Name the policy owner as a specific individual, not a department or team, in the policy header or approval
+  section.
+- Record the formal approval of the policy by a named manager, including the approval date, in the policy
+  document.

@@ -1,0 +1,15 @@
+must_id: item:A.8.27:scope_exclusions
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Exclusion rationale (e.g. third-party-managed black-box services)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all architecture principles that are not applied to your environment, referencing each by name
+  and version.
+- Document a clear rationale for each exclusion, such as reliance on third-party-managed black-box services.
+- Name the individual who approved each exclusion, avoiding group or department names.
+- Record the approval date for each exclusion decision in your architecture principles register.
+- Attach supporting evidence, such as third-party service contracts, to substantiate each exclusion rationale.

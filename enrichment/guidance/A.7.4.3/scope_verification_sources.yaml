@@ -1,0 +1,18 @@
+must_id: item:A.7.4.3:scope_verification_sources
+control_ref: A.7.4.3
+standard_id: ISO27701:2019
+must_text: Verification source map (postal address vs national registry vs subject self-serve)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each type of personal data where accuracy matters, such as postal address, and describe the context
+  where it is used.
+- Document the verification source for each data type, specifying whether it is checked against a national
+  registry, subject self-serve, or other source.
+- Cross-reference each verification source to a dated procedure or policy that describes how the accuracy
+  check is performed.
+- Name the individual responsible for maintaining the accuracy context scope, avoiding generic titles
+  like "the team" or "admin staff."
+- Retain evidence of the last review or update to the scope, such as a dated sign-off or change log entry.

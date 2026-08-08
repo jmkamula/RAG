@@ -1,0 +1,16 @@
+must_id: item:A.7.5.3:reg_direction
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+must_text: Direction per row (outbound to third party / inbound from third party)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the direction of each PII transfer in the event log as either "outbound to third party" or "inbound
+  from third party" for every entry.
+- Name the specific third party involved in each transfer, avoiding generic labels like "external partner"
+  or "vendor."
+- Date each PII transfer event to clearly show when the data was sent or received.
+- Assign a responsible individual for each logged transfer, listing their full name rather than a team
+  or department.

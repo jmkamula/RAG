@@ -1,0 +1,18 @@
+must_id: item:8.3:proc_residual_revisit
+control_ref: '8.3'
+standard_id: ISO27001:2022
+must_text: Residual-risk re-acceptance pathway when actual residual diverges from planned residual (back
+  to risk owner per 6.1.3 f))
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for identifying when actual residual risk differs from the planned residual risk
+  in the Treatment Execution Procedure.
+- Assign responsibility to a named risk owner, not a group or department, for reviewing and re-accepting
+  diverging residual risks.
+- Record each instance of residual risk divergence with the date, details, and the specific risk owner
+  notified for re-acceptance.
+- Retain evidence of the risk owner's explicit re-acceptance decision, such as a signed form or dated
+  email, for each divergence event.

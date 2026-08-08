@@ -1,0 +1,19 @@
+must_id: item:A.6.2:rev_register_update
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Changes propagated to the live template and to the signer-recontracting plan
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and details of the most recent employment terms template review in a version-controlled
+  document, including any approved changes.
+- Update the live employment terms template with all approved changes, and save the updated file with
+  a new version number and date.
+- Cross-reference the updated template version in the signer-recontracting plan, ensuring the plan lists
+  the exact version and date to be used.
+- Name the responsible individual who approved and implemented the template changes, avoiding generic
+  titles like "HR" or "the team".
+- Retain evidence of communication to relevant staff about the updated template and recontracting plan,
+  such as an email or meeting record.

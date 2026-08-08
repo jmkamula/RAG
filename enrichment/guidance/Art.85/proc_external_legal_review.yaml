@@ -1,0 +1,19 @@
+must_id: item:Art.85:proc_external_legal_review
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: External legal review trigger (new jurisdiction / novel activity / national-law change)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific events that trigger an external legal review, such as entry into a new country,
+  new data activity, or changes in national law.
+- Name the person responsible for monitoring and identifying these trigger events, ensuring this is an
+  individual and not a team or department.
+- Record the date and outcome of each external legal review request in a central log, including the jurisdiction
+  or activity involved.
+- Retain copies of all legal opinions or advice received, clearly linked to the triggering event and review
+  request.
+- Review the procedure annually and update it to reflect any changes in business operations or legal landscape,
+  noting the date and approver.

@@ -1,0 +1,19 @@
+must_id: item:Art.45:adequacy_decision_check
+control_ref: Art.45
+standard_id: GDPR:2016/679
+must_text: Adequacy-decision check — Art.45.3 Commission decision verified against current EU register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Retrieve the latest EU Commission adequacy decision list from the official EU website and save a dated
+  copy for your records.
+- Cross-reference the country or territory in question against the saved EU adequacy decision list to
+  confirm its current status.
+- Record the specific date and source URL of the adequacy decision check in your Adequacy Reliance Procedure
+  documentation.
+- Name the individual who performed the adequacy check, ensuring a specific person is listed rather than
+  a team or department.
+- Retain evidence of the adequacy check, such as a screenshot or PDF of the relevant EU register entry,
+  with the date clearly visible.

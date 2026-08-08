@@ -1,0 +1,15 @@
+must_id: item:A.8.11:rev_date
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent masking program review in a central log or tracking document.
+- State the planned review interval for the masking program in a documented schedule or policy.
+- Confirm the actual review date falls within the planned interval by cross-referencing the log and the
+  schedule.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Retain a signed or approved record of the review, showing both the date and the reviewer’s name.

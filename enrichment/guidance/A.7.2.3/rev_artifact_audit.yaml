@@ -1,0 +1,18 @@
+must_id: item:A.7.2.3:rev_artifact_audit
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: Artifact audit — sampled consent forms reviewed against quality standard
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of completed consent forms from the past year and record their unique identifiers
+  in a review log.
+- Document the quality standard used for consent forms, including version and approval date, in the review
+  log.
+- Compare each sampled consent form against the documented quality standard and note any deviations or
+  deficiencies in the review log.
+- Name the reviewer as a specific individual, not a group or department, and record the review date for
+  each consent form.
+- Sign and date a summary report of the review findings, including any corrective actions taken or recommended.

@@ -1,0 +1,15 @@
+must_id: item:A.5.27:reg_status
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Status per row (open / in-progress / closed / accepted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the status of each lessons learned entry as "open," "in-progress," "closed," or "accepted" in
+  a dedicated column of the register.
+- Update the status field with the date and initials of the person making the change for each entry.
+- Name the owner responsible for progressing each lesson as a specific individual, not a team or department.
+- Retain previous status changes in a versioned or auditable format to show the history of updates for
+  each lesson.

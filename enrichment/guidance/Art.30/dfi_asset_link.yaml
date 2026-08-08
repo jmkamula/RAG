@@ -1,0 +1,17 @@
+must_id: item:Art.30:dfi_asset_link
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Cross-link to the asset/system inventory (ISO 27001 A.5.9) so the two registers stay aligned
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each personal data flow entry to its corresponding asset or system in your asset inventory,
+  using unique identifiers from both registers.
+- Document the date and name of the person responsible for maintaining the cross-links between the personal
+  data flow inventory and the asset inventory.
+- Review both inventories quarterly and record the outcome, noting any mismatches or missing links between
+  data flows and assets.
+- Name the owner of each cross-linked entry as a specific individual, not a team or department, to avoid
+  ambiguity.

@@ -1,0 +1,19 @@
+must_id: item:A.5.19:reg_supplier_type
+control_ref: A.5.19
+standard_id: ISO27001:2022
+must_text: Supplier type per row (ICT service / ICT infra component / logistics / utilities / etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each supplier in the register with a separate row, including their full legal name and a unique
+  identifier.
+- Assign a supplier type to every row, selecting from defined categories such as ICT service, ICT infrastructure
+  component, logistics, or utilities.
+- Document the criteria used to classify supplier types in a reference column or linked procedure, with
+  the latest review date and approver's name.
+- Name the person responsible for maintaining supplier type accuracy in the register, using a specific
+  individual rather than a team or department.
+- Review the register for any rows with missing or generic supplier type entries, and update them to reflect
+  the correct, specific category.

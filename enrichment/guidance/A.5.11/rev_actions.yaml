@@ -1,0 +1,18 @@
+must_id: item:A.5.11:rev_actions
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Action items captured (e.g. tighten access-revoke automation, expand asset checklist, retrain
+  managers)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each action item from the periodic asset-return program review in a dated meeting summary or
+  action log.
+- Assign a named individual to each action item, avoiding generic owners like "IT" or "management team."
+- Document the specific adjustment or improvement required, such as changes to access-revoke automation
+  or updates to asset checklists.
+- Confirm that each action item includes a target completion date and intended outcome in the action log.
+- Retain evidence of follow-up on previous action items, such as status updates or completion confirmations,
+  in the same record.

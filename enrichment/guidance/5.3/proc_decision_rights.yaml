@@ -1,0 +1,17 @@
+must_id: item:5.3:proc_decision_rights
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Decision-rights principles (when responsibility ≠ authority, who decides what)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the decision-maker for each key ISMS activity as a specific individual, not a group or generic
+  role.
+- Document the distinction between who is responsible for performing each ISMS task and who has the authority
+  to approve or decide outcomes.
+- Record the date and version of your RACI framework to show when decision-rights were last reviewed and
+  updated.
+- Cross-reference each decision-right in the RACI to the relevant ISMS policy or procedure where that
+  authority is exercised.

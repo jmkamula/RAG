@@ -1,0 +1,17 @@
+must_id: item:A.8.10:scope_change_drivers
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new system, new data class, new regulator requirement)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List specific events that require re-scoping, such as onboarding a new system, introducing a new data
+  category, or changes in regulatory obligations.
+- Document the date each trigger was last reviewed and updated, and name the person responsible for maintaining
+  the trigger list.
+- Cross-reference the trigger list with your data inventory and regulatory register to confirm all relevant
+  changes are captured.
+- Name the owner as a specific individual — do not use a team or department as the responsible party for
+  maintaining the trigger list.

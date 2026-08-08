@@ -1,0 +1,50 @@
+leaf_id: req:A.7.3.1:obligations_procedure
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The obligations procedure must align with the defined scope of the ISMS, ensuring all relevant
+    jurisdictions, business units, and processing activities are covered. Without a clear scope, you risk
+    missing key obligations or overcommitting.
+  good_enough: A documented scope that lists in-scope entities, jurisdictions, and processing activities
+    is available and up to date.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purposes for which PII is processed to identify which obligations apply
+    to which processing activities. This mapping is essential for obligation intake and fulfilment.
+  good_enough: A register or list of processing purposes exists, with enough detail to link obligations
+    to specific activities.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity is necessary to determine which
+    obligations (e.g., consent withdrawal, objection) are triggered for PII principals.
+  good_enough: Each processing activity has a documented lawful basis, even if some are provisional or
+    pending legal review.
+- ref: Art.12
+  standard_id: GDPR:2016/679
+  title: Transparent Information, Communication and Modalities
+  category: cross_role
+  rationale: The procedure must ensure that PII principals can exercise their rights via accessible and
+    timely channels, as required by GDPR and similar laws. This article sets the legal expectation for
+    communication and fulfilment.
+  good_enough: A summary of applicable legal requirements for communication with PII principals is available,
+    even if not yet fully operationalized.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles is needed so staff know who is responsible for obligation intake,
+    fulfilment, and communication with PII principals. Without this, the procedure cannot be implemented
+    or maintained.
+  good_enough: A basic RACI or responsibility matrix exists for privacy-related roles, even if not fully
+    detailed.

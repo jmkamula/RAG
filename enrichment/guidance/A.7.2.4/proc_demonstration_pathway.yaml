@@ -1,0 +1,20 @@
+must_id: item:A.7.2.4:proc_demonstration_pathway
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Demonstration pathway — subject requests proof of consent, org retrieves record within stated
+  SLA
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for handling data subject requests for proof of consent, including required response
+  timelines and responsible roles, in a dated procedure.
+- Assign a named individual as the consent record custodian, ensuring their name and contact details appear
+  in the procedure documentation.
+- Record each consent retrieval request and its fulfillment date in a log, cross-referencing the original
+  consent record provided to the requester.
+- State the service level agreement (SLA) for responding to consent proof requests in the procedure, specifying
+  the maximum allowed response time in days.
+- Avoid using generic or template procedures; tailor the process to your organisation and include at least
+  one real example of a fulfilled request.

@@ -1,0 +1,15 @@
+must_id: item:Art.10:proc_approval
+control_ref: Art.10
+standard_id: GDPR:2016/679
+must_text: Approval authority for any criminal-data activity (DPO + executive sponsor + legal counsel)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Name the DPO, executive sponsor, and legal counsel as specific individuals responsible for approving
+  criminal convictions data activities.
+- Document each approval decision with the names, signatures, and dates of all three required authorities
+  on a single record.
+- Retain the signed approval record in a designated compliance folder accessible for audit review.
+- Avoid listing roles or teams instead of named individuals as approvers, as this would not meet the requirement.

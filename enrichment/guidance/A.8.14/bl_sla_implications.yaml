@@ -1,0 +1,18 @@
+must_id: item:A.8.14:bl_sla_implications
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: SLA implications documented (what tenants are promised — honest about redundant vs single-instance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific redundancy level provided for each service, clearly stating whether it is single-instance
+  or has failover capability.
+- State the exact service level commitments regarding redundancy in the SLA, including any limitations
+  or exclusions.
+- Cross-reference the SLA text with technical architecture diagrams or system inventories to confirm the
+  described redundancy matches actual deployment.
+- Name the responsible individual who approved the SLA language, avoiding generic titles like "the team"
+  or "IT department."
+- Retain a dated record of the final, agreed SLA version that was communicated to tenants.

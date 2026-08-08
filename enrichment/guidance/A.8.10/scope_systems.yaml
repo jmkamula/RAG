@@ -1,0 +1,18 @@
+must_id: item:A.8.10:scope_systems
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Scope covers backups + replicas + caches + audit copies (NOT only primary systems — common
+  GDPR pitfall)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of storage media in the procedure, including backups, replicas, caches, and audit copies,
+  not just primary systems.
+- Name a specific individual as the procedure owner, avoiding generic titles like "IT team" or "department."
+- Document the deletion process for each storage type, including steps, responsible persons, and retention
+  timelines, in a dated procedure.
+- Cross-reference the procedure with your data retention schedule and storage inventory to confirm all
+  storage locations are addressed.
+- Record the approval of the procedure by a named manager, including the approval date.

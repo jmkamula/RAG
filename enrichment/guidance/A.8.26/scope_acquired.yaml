@@ -1,0 +1,18 @@
+must_id: item:A.8.26:scope_acquired
+control_ref: A.8.26
+standard_id: ISO27001:2022
+must_text: Acquired-applications path (security-requirement check during procurement; cross-link to A.5.19/A.5.20)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all acquired applications in a dated register, including the procurement date and the person responsible
+  for each entry.
+- Document the specific security requirements checked during procurement for each application, referencing
+  the relevant sections of your security policy.
+- Cross-reference each application's entry with evidence of supplier security due diligence, as required
+  by controls A.5.19 and A.5.20.
+- Name the application security requirements owner as a specific individual, not as a team or department.
+- Retain copies of procurement approval records showing security requirement checks were completed before
+  purchase.

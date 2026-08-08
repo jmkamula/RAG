@@ -1,0 +1,19 @@
+must_id: item:A.8.34:rev_findings_update
+control_ref: A.8.34
+standard_id: ISO27001:2022
+must_text: Findings propagated to policy / scope
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each audit finding in a dated log, clearly linking it to the relevant policy or scope section
+  affected.
+- Assign a named individual to review each finding and determine necessary policy or scope updates, documenting
+  their decision and rationale.
+- Update the policy or scope document with the agreed changes, including a revision date and the name
+  of the person making the update.
+- Attach evidence of communication showing that updated policies or scope have been shared with all relevant
+  stakeholders.
+- Name the policy or scope owner as a specific person, not a team or department, to avoid ambiguity in
+  accountability.

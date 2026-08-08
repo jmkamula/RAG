@@ -1,0 +1,20 @@
+must_id: item:A.7.3.4:proc_propagation
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+must_text: Downstream propagation — withdrawal cascades to systems + authorised users + third parties
+  (see A.7.3.7)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each system, authorised user group, and third party that receives or processes personal data
+  covered by consent, listing them in a dated register.
+- Assign a named individual responsible for updating all affected systems and notifying third parties
+  when consent is modified or withdrawn.
+- Record each instance of consent withdrawal, including the date, affected data, and confirmation that
+  all listed recipients were notified.
+- Retain evidence of third-party notifications, such as dated emails or signed acknowledgements, confirming
+  receipt and action on the withdrawal.
+- Name the owner as a specific individual — do not use roles like "the team" or "IT department" as the
+  responsible party.

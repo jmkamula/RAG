@@ -1,0 +1,17 @@
+must_id: item:A.7.3.1:reg_fulfilment_channel
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Fulfilment channel per row (which A.7.3.2-10 procedure handles it)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each privacy obligation in the register with a unique identifier and a clear, specific description.
+- Cross-reference each obligation to the exact documented procedure (A.7.3.2–A.7.3.10) that fulfils it,
+  using procedure titles and version numbers.
+- Name the responsible individual for maintaining each row’s fulfilment channel, avoiding generic labels
+  like “Compliance Team” or “IT”.
+- Record the date when each obligation-procedure mapping was last reviewed or updated.
+- Attach or link supporting evidence, such as procedure documents or workflow screenshots, to each register
+  entry.

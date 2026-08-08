@@ -1,0 +1,18 @@
+must_id: item:A.7.13:scope_cadence_per_class
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Cadence per class (vendor-recommended + risk-adjusted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all equipment types in scope, specifying make, model, and location, in a dated equipment inventory
+  record.
+- Document the maintenance schedule for each equipment class, referencing both vendor recommendations
+  and any risk-based adjustments.
+- Assign a named individual responsible for overseeing maintenance activities for each equipment class.
+- Attach supporting vendor documentation or risk assessments used to determine maintenance cadence for
+  each equipment class.
+- Name the maintenance owner as a specific person, not a generic title or team, to avoid auditor concerns
+  about accountability.

@@ -1,0 +1,14 @@
+must_id: item:A.7.5.3:proc_owner
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+must_text: Named owner (DPO + Data Ops)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the PII Transfer Recording Procedure as a specific individual, such as the Data Protection
+  Officer or Head of Data Operations.
+- Document the owner's full name, job title, and contact details within the procedure document.
+- Record the date the owner was assigned responsibility for the procedure in the document’s revision history.
+- Avoid listing a team or department as the owner; auditors will flag non-specific ownership as insufficient.

@@ -1,0 +1,19 @@
+must_id: item:A.5.32:owner_per_entry
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Named owner per entry (procurement / legal / engineering lead) responsible for renewal and
+  compliance
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each licensed software or intellectual property entry in a central inventory, including product
+  name, vendor, and license details.
+- Name a specific individual as the owner for each entry—do not use generic roles like "IT team" or "procurement
+  department."
+- Record the owner’s full name, job title, and contact details alongside each inventory entry for clear
+  accountability.
+- Document the date the owner was assigned responsibility for each entry to provide a clear audit trail.
+- Cross-reference each inventory entry with supporting documentation, such as purchase orders or license
+  agreements, to verify ownership and compliance.

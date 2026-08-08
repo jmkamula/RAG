@@ -1,0 +1,16 @@
+must_id: item:7.4:when
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: When communication occurs (planned cadences and event triggers)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all planned communication cadences in the procedure, including frequency and responsible person,
+  with dates of last and next scheduled occurrence.
+- Document specific event triggers that require communication, such as security incidents or policy changes,
+  with clear criteria for each trigger.
+- Name the communication owner as a specific individual, not a team or department, to avoid ambiguity
+  in responsibility.
+- Record the approval date and approver’s name for the current version of the communication procedure.

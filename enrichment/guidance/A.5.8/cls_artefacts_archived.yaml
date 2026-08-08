@@ -1,0 +1,18 @@
+must_id: item:A.5.8:cls_artefacts_archived
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Security artefacts archived per record (threat model, pen-test report, DPIA where applicable,
+  exception register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all required security artefacts for the project, including threat model, penetration test report,
+  DPIA if applicable, and exception register, in the closure record.
+- Attach or link each artefact directly within the closure record, ensuring each file is dated and final.
+- Name the responsible individual who verified the completeness of the artefact archive, not a team or
+  department.
+- Record the date when the closure record and all artefacts were archived, creating a clear audit trail.
+- Confirm that no referenced artefact is missing or marked as "to be provided later" before finalising
+  the closure record.

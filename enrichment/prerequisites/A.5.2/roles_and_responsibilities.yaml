@@ -1,0 +1,31 @@
+leaf_id: req:A.5.2:roles_and_responsibilities
+control_ref: A.5.2
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the boundaries of your ISMS—what people, processes, and assets are in scope—before
+    you can meaningfully assign information security roles and responsibilities.
+  good_enough: A documented scope statement that clearly defines what parts of the organization and which
+    activities are covered by the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the overall direction and expectations for information security, which guides
+    how roles and responsibilities should be structured and allocated.
+  good_enough: A formally approved policy that outlines the organization's commitment to information security
+    and provides high-level direction.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: foundational
+  rationale: Understanding your key risks helps determine which roles are needed and what responsibilities
+    must be assigned to manage those risks.
+  good_enough: A completed risk assessment identifying major information security risks and relevant risk
+    owners, even if mitigation plans are still in progress.

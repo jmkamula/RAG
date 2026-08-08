@@ -1,0 +1,19 @@
+must_id: item:Art.12:refusal_grounds
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Refusal grounds for manifestly unfounded / excessive requests (with proportionate fee OR refusal)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific criteria used to determine when a request is manifestly unfounded or excessive
+  in your Transparency and Rights Modalities Procedure.
+- State the process for notifying individuals in writing when their request is refused or a proportionate
+  fee is charged, including reasons for the decision.
+- Record each refusal or fee decision in a register, including the request details, decision date, named
+  decision-maker, and justification.
+- Name the owner of the refusal process as a specific individual, not a team or department, in the procedure
+  documentation.
+- Retain copies of all refusal or fee communications sent to individuals, along with supporting evidence,
+  for future audit reference.

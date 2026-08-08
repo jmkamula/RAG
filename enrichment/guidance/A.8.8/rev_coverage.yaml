@@ -1,0 +1,18 @@
+must_id: item:A.8.8:rev_coverage
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Scanning coverage check vs applicable scope (new asset classes covered)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all asset classes in scope for vulnerability scanning, referencing your current asset inventory
+  with date and responsible owner.
+- Document which asset classes are included in the most recent vulnerability scans, attaching scan reports
+  with timestamps.
+- Cross-reference the scanned asset classes against the full in-scope asset inventory, noting any new
+  or previously unscanned classes.
+- Record decisions and actions taken to address any gaps in scanning coverage, including responsible individuals
+  and completion dates.
+- Name the scanning program owner as a specific individual, not a generic team or department.

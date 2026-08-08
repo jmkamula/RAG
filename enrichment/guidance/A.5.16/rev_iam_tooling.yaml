@@ -1,0 +1,20 @@
+must_id: item:A.5.16:rev_iam_tooling
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: IAM tooling check (vendor releases, new capabilities like just-in-time access; capability gaps
+  to consider)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the periodic review of your identity and access management (IAM) tooling
+  and record their name and review date.
+- Document the current IAM tool version, recent vendor releases, and any newly available features in a
+  dated review log.
+- List and describe any new IAM capabilities evaluated, such as just-in-time access, and note whether
+  they have been adopted or deferred.
+- Identify and record any gaps between current IAM tool capabilities and your organization’s needs, including
+  planned actions or mitigation steps.
+- Name the reviewer as a specific individual—do not use generic roles like "IT team" or "security group"—to
+  avoid audit findings about unclear accountability.

@@ -1,0 +1,17 @@
+must_id: item:A.7.2.7:reg_contact_point
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Subject-facing contact point per row
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the subject-facing contact point for each joint controller arrangement
+  in the register, including their full name and contact details.
+- Record the date each contact point was last verified or updated in the register to show current and
+  accurate information.
+- Cross-reference the contact point details with published privacy notices to confirm consistency between
+  internal records and external information.
+- Avoid listing generic roles or departments as contact points; always specify a named person to prevent
+  ambiguity.

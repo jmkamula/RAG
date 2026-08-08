@@ -1,0 +1,16 @@
+must_id: item:A.7.4.7:scope_change_drivers
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Trigger list (new regulation / new business requirement)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a list of triggers that require review of data retention, such as new regulations or changes
+  in business requirements, in a dated register.
+- Name a specific individual responsible for monitoring and updating the trigger list, avoiding generic
+  roles like "the team" or "IT".
+- Record each identified trigger with a brief description and the date it was added to the trigger list.
+- Cross-reference each trigger to the relevant retention context or policy section affected, ensuring
+  clear traceability.

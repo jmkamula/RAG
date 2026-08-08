@@ -1,0 +1,19 @@
+must_id: item:A.7.4:retention
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: Retention of footage and access logs (period per regulatory requirement, secure storage)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact retention period for surveillance footage and access logs, referencing the applicable
+  regulatory or contractual requirement in a dated procedure document.
+- Assign a named individual responsible for managing and reviewing retention and secure deletion of footage
+  and logs, listing their full name and role.
+- Document the secure storage location and access controls for both footage and logs, including encryption
+  or physical safeguards, in the procedure.
+- Record the destruction or deletion process for footage and logs at the end of the retention period,
+  including date and responsible person.
+- Name the retention period as a specific duration (e.g., "90 days")—do not use vague terms like "as needed"
+  or "until no longer required."

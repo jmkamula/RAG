@@ -1,0 +1,18 @@
+must_id: item:A.5.7:reg_layer
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Intelligence layer per row (strategic / tactical / operational)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- List each threat intelligence feed in a dedicated row of the register, using a unique identifier and
+  source name.
+- Assign the intelligence layer for each feed as "strategic", "tactical", or "operational" in a separate
+  column for every row.
+- Name the person responsible for classifying each feed’s intelligence layer, using their full name rather
+  than a team or department.
+- Record the date when each feed’s intelligence layer was last reviewed or updated in the register.
+- Check that no row is missing an intelligence layer classification, and update any incomplete entries
+  before finalizing the register.

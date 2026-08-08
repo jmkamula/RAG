@@ -1,0 +1,18 @@
+must_id: item:7.4:scope_audiences
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: Audience classes in scope (internal — board / executives / employees / contractors; external
+  — regulators / customers / suppliers / public)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all audience groups that receive information, including board members, executives, employees, contractors,
+  regulators, customers, suppliers, and the public.
+- Document the communication methods and channels used for each audience group in a dated register or
+  table.
+- Name a specific individual responsible for maintaining and updating the audience list, avoiding generic
+  roles like "the team" or "management".
+- Cross-reference each audience group with the relevant communication policy or procedure to show alignment
+  with documented practices.

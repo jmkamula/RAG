@@ -1,0 +1,15 @@
+must_id: item:B.8.4.1:rev_date
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Processor Temp Files Program in a dated log entry.
+- State the planned review interval in months or years in the program documentation.
+- Confirm the next scheduled review date is not later than the planned interval from the last review.
+- Name the reviewer as a specific individual, not a group or department, in the review record.
+- Attach evidence of the completed review, such as a signed checklist or meeting minutes, to the program
+  documentation.

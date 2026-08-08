@@ -1,0 +1,17 @@
+must_id: item:Art.26:reg_essence_published
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Per-row essence-of-arrangement published location (privacy notice URL)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the privacy notice URL for each joint controller arrangement directly in the corresponding row
+  of the Joint Controller Register.
+- Document the date each privacy notice URL was last verified as active and accurate in the register.
+- Cross-reference the published privacy notice to confirm it describes the joint arrangement and roles
+  as stated in the register.
+- Assign a specific individual responsible for updating privacy notice URLs, avoiding generic entries
+  like "the team" or "department."
+- Record any changes to the privacy notice URL with the date and name of the person making the update.

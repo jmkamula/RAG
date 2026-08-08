@@ -1,0 +1,17 @@
+must_id: item:A.7.2.3:rev_date
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the Consent Determination Program in a dated entry within your
+  compliance tracking system.
+- State the planned review interval for the program in a documented schedule or policy, referencing the
+  specific time frame (e.g., annually).
+- Confirm that the actual review date falls within the documented planned interval by cross-referencing
+  the review date and the schedule.
+- Name the reviewer as a specific individual in the review record, avoiding generic titles like "the team"
+  or "management".

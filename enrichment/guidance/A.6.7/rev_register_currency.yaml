@@ -1,0 +1,18 @@
+must_id: item:A.6.7:rev_register_currency
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Register-currency check (every row's personnel_id is still in A.5.16 active register; expired-approval
+  rows surfaced and revoked or re-approved)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference every personnel_id in the remote working programme register against the current active
+  personnel register from control A.5.16.
+- Record the date and name of the person who completed the cross-check in a dedicated review log.
+- Surface any register entries where personnel_id is no longer active or approval has expired, listing
+  them in a separate exceptions report.
+- Document the decision and action taken for each exception, including whether access was revoked or re-approved,
+  with the responsible person's name and date.
+- Name the reviewer as a specific individual, not a group or department, to avoid ambiguity in accountability.

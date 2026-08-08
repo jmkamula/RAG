@@ -1,0 +1,40 @@
+leaf_id: req:A.7.14:disposal_record
+control_ref: A.7.14
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need an up-to-date asset register to know what equipment exists, its ownership, and its
+    lifecycle status. Without this, you can't reliably create or validate disposal records for each piece
+    of equipment.
+  good_enough: A current, reasonably complete asset register listing all equipment subject to disposal
+    controls, with unique identifiers.
+- ref: A.7.10
+  standard_id: ISO27001:2022
+  title: Storage media
+  category: direct
+  rationale: Media handling rules inform how equipment and its storage media must be treated at end-of-life.
+    Knowing the handling requirements is essential to ensure disposal records reflect proper procedures.
+  good_enough: Documented media handling procedures that specify requirements for secure storage, transfer,
+    and disposal of equipment and media.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The classification scheme determines the sensitivity of information stored on equipment,
+    which affects disposal methods and record-keeping requirements.
+  good_enough: A basic, operational classification scheme that allows you to identify the sensitivity
+    of data on disposed equipment.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You must know which equipment is in-scope for ISMS controls, so you don't miss required disposal
+    records or include irrelevant assets.
+  good_enough: A documented scope statement that clearly defines which locations, business units, and
+    equipment types are covered by the ISMS.

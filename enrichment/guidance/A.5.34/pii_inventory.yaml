@@ -1,0 +1,19 @@
+must_id: item:A.5.34:pii_inventory
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: PII categories enumerated per processing activity (basic identifiers, contact data, financial,
+  health, biometric, special-category — GDPR Art.9 / sectoral equivalents); links to GDPR Art.30 RoPA
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all categories of personal data processed for each activity in the PII Processing Register, using
+  clear terms such as "contact data" or "health information".
+- Cross-reference each processing activity in the PII Processing Register to the corresponding entry in
+  your GDPR Article 30 Record of Processing Activities.
+- Name the owner responsible for maintaining the PII Processing Register as a specific individual, not
+  a team or department.
+- Record the date of the most recent review or update to each processing activity entry in the register.
+- Specify any special-category data processed, such as biometric or health data, and reference the relevant
+  GDPR Article 9 or sectoral law.

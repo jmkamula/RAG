@@ -1,0 +1,18 @@
+must_id: item:Art.7:demonstrability
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: Demonstrability — capture record retained (timestamp, mechanism, scope) per consent event
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each consent event with a timestamp, the method used to obtain consent, and the specific purpose
+  or scope agreed to.
+- Record the identity of the individual giving consent, linking it to a unique user or customer identifier.
+- Store consent records in a searchable system that allows retrieval by date, individual, and consent
+  type.
+- Name the person responsible for maintaining and updating consent records as a specific individual, not
+  a team or department.
+- Review stored consent records regularly to confirm they are complete, accurate, and include all required
+  details for each event.

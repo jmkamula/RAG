@@ -1,0 +1,20 @@
+must_id: item:6.3:rev_boundary_check
+control_ref: '6.3'
+standard_id: ISO27001:2022
+must_text: A.8.32 boundary check — no technical changes mis-routed to 6.3, no ISMS changes mis-routed
+  to A.8.32
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for categorizing each change as either technical or ISMS-related
+  in the change log.
+- Document the rationale for each change classification in the change log, referencing the applicable
+  control (6.3 or A.8.32) and date of review.
+- Cross-reference each logged change to the relevant control section in your ISMS documentation, showing
+  clear alignment with either 6.3 or A.8.32.
+- Record instances where a change was re-categorized after review, including the reviewer’s name, date,
+  and justification for the correction.
+- Avoid using generic categories or unclear descriptions—describe each change specifically so an auditor
+  can verify it was routed to the correct control.

@@ -1,0 +1,17 @@
+must_id: item:4.1:external_issues
+control_ref: '4.1'
+standard_id: ISO27001:2022
+must_text: External issues documented per row (regulatory, market, threat landscape, social, technology
+  trends)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each external issue in a separate row, clearly describing the specific regulatory, market, threat,
+  social, or technology trend.
+- Record the date each external issue was identified and the name of the person who added it to the register.
+- Reference the relevant source or evidence for each external issue, such as a regulation, market report,
+  or news article.
+- Name the owner for each issue as a specific individual, not a team or department.
+- Review and update the register at least annually, recording the review date and reviewer’s name.

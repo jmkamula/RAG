@@ -1,0 +1,17 @@
+must_id: item:A.8.20:network_as_code
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Network-as-code direction (repeatable deployments)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the network security policy to state that network configurations must be managed as code and
+  deployed using automated, repeatable processes.
+- Name the person responsible for approving all network-as-code changes, listing a specific individual
+  rather than a team or department.
+- Record each network deployment with a dated change log entry, including the configuration version and
+  deployment method used.
+- Cross-reference the policy with actual code repositories and deployment pipelines to show alignment
+  between documented direction and operational practice.

@@ -1,0 +1,17 @@
+must_id: item:A.5.29:reg_type
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Scenario type per row (cyber_attack / natural_event / supplier_failure / regulatory_action
+  / personnel_loss / infrastructure_failure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- List each disruption scenario in the register as a separate row with a unique identifier and a clear
+  scenario description.
+- 'Assign one scenario type per row using only the approved categories: cyber_attack, natural_event, supplier_failure,
+  regulatory_action, personnel_loss, or infrastructure_failure.'
+- Record the name of the person responsible for classifying each scenario and the date the classification
+  was made.
+- Avoid leaving the scenario type column blank or using custom categories not listed in the requirement.

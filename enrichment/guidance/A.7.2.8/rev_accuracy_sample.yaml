@@ -1,0 +1,18 @@
+must_id: item:A.7.2.8:rev_accuracy_sample
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Accuracy sample — random rows verified against source systems
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of records from your Records of Processing Activities (RoPA) register and list
+  their unique identifiers in a dated review log.
+- Cross-reference each sampled record against the original source system to check for consistency in key
+  data fields such as purpose, data categories, and retention.
+- Record the name of the individual who performed each verification, along with the date and any discrepancies
+  found, in the review log.
+- Document the resolution steps for any discrepancies, including who resolved them and when, to show follow-through
+  on identified issues.
+- Name the reviewer as a specific individual—do not use generic titles like "Compliance Team" or "IT Department".

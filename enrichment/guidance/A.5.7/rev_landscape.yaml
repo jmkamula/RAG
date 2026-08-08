@@ -1,0 +1,19 @@
+must_id: item:A.5.7:rev_landscape
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: External threat-landscape snapshot considered (industry reports, vendor briefings)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and source of at least one external threat report or vendor briefing reviewed during
+  the last program cycle.
+- Name the individual responsible for collecting and summarizing external threat intelligence, specifying
+  their full name and role.
+- Attach a summary of key findings from the external source, highlighting relevance to your organization’s
+  threat landscape.
+- Retain meeting notes or review records showing discussion of the external threat snapshot in your periodic
+  program review.
+- Avoid referencing only generic or outdated sources—cite current, industry-specific intelligence to demonstrate
+  relevance.

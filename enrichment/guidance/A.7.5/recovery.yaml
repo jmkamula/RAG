@@ -1,0 +1,19 @@
+must_id: item:A.7.5:recovery
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Recovery from environmental incidents (cleanup, salvage, post-incident assessment, lessons
+  → A.5.27)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step recovery process for environmental incidents, including cleanup, salvage, post-incident
+  assessment, and lessons learned, in your procedure.
+- Assign a named individual responsible for coordinating recovery activities and list their contact details
+  in the procedure.
+- Record the date of the most recent test or drill of the recovery process, including participants and
+  outcomes, in a log.
+- Retain evidence of completed post-incident assessments and documented lessons learned from actual incidents
+  or exercises.
+- Name the owner of the procedure as a specific person, not a generic role or department.

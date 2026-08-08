@@ -1,0 +1,19 @@
+must_id: item:A.7.3.9:scope_change_drivers
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Trigger list (new jurisdiction / new SA guidance)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current jurisdictions and relevant supervisory authority guidance in a dated document reviewed
+  at least annually.
+- Record each trigger event, such as entry into a new jurisdiction or release of new supervisory authority
+  guidance, in a change log with the date and responsible person.
+- Assign a specific individual to monitor for changes in jurisdictional scope or supervisory authority
+  guidance, naming them in the monitoring procedure.
+- Update the request scope document promptly after each trigger event, referencing the change log entry
+  and including the date of revision.
+- Avoid using generic descriptions like "various jurisdictions"—specifically name each jurisdiction and
+  supervisory authority in all records.

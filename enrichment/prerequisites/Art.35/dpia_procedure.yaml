@@ -1,0 +1,39 @@
+leaf_id: req:Art.35:dpia_procedure
+control_ref: Art.35
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date inventory of processing activities to identify which ones may trigger
+    a DPIA. Without this, you can't reliably determine when a DPIA is required.
+  good_enough: A basic, current list of processing activities with key details (purpose, data types, data
+    subjects, recipients) is available.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity helps assess risk and necessity, both
+    of which are central to DPIA scoping and justification.
+  good_enough: Each processing activity has a documented lawful basis, even if not yet fully mapped to
+    all data flows.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Designation of the Data Protection Officer (DPO)
+  category: foundational
+  rationale: A DPO (or clear alternative) must be in place to advise on DPIAs and, if needed, to facilitate
+    prior consultation with the supervisory authority.
+  good_enough: A named DPO or designated privacy lead is assigned and contactable, even if their role
+    is still being formalized.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The scope of your ISMS helps define which processing activities and systems are covered by
+    your DPIA procedure, ensuring alignment between security and privacy governance.
+  good_enough: A draft or agreed scope exists, identifying the main business units, systems, and locations
+    covered by your ISMS.

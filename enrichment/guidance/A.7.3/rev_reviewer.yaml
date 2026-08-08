@@ -1,0 +1,16 @@
+must_id: item:A.7.3:rev_reviewer
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Facilities + InfoSec)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Facilities and Information Security reviewers as specific individuals in the review documentation,
+  avoiding generic titles or team names.
+- Record the date each reviewer completed their assessment in the program review log.
+- Collect and retain a signed or digitally acknowledged statement from each reviewer confirming their
+  participation in the periodic review.
+- Cross-reference the review documentation with the most recent organizational chart to verify the reviewers’
+  current roles and responsibilities.

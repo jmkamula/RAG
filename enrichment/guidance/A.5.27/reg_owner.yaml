@@ -1,0 +1,15 @@
+must_id: item:A.5.27:reg_owner
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Named owner accountable for the action per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner for each action in the Lessons Learned Register as a specific individual, not a team
+  or department.
+- Record the date when each owner is assigned responsibility for their action in the register.
+- Document evidence of the owner's acknowledgment, such as a dated email or signed form, for each assigned
+  action.
+- Review the register regularly to confirm that each action still has a current, named owner listed.

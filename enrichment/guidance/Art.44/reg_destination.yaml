@@ -1,0 +1,17 @@
+must_id: item:Art.44:reg_destination
+control_ref: Art.44
+standard_id: GDPR:2016/679
+must_text: Per-row destination country + recipient entity
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the destination country for each data transfer in a dedicated column of the International Transfer
+  Register.
+- Enter the full legal name of the recipient entity for every transfer row, avoiding generic descriptions
+  like "partner" or "vendor".
+- Cross-reference each entry with supporting contracts or agreements that identify the recipient entity
+  and country.
+- Confirm that no row is left blank or marked "various" for country or recipient, as auditors will flag
+  incomplete or vague entries.

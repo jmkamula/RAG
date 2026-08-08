@@ -1,0 +1,17 @@
+must_id: item:A.5.29:activation_authority
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Activation authority defined (who declares the plan active; who declares it stood down; criteria
+  for each)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person with authority to activate the disruption plan, using their full name and job title
+  in the plan document.
+- Specify the individual authorized to declare the disruption plan stood down, ensuring this is not a
+  group or department.
+- Document clear, objective criteria for both activating and standing down the plan, including specific
+  triggers or thresholds.
+- Record the date and version of the disruption plan where these authorities and criteria are defined.

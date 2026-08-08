@@ -1,0 +1,19 @@
+must_id: item:Art.10:rev_retention_audit
+control_ref: Art.10
+standard_id: GDPR:2016/679
+must_text: Retention audit — past-retention-limit records purged
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the retention period for criminal data, including the specific end date, in your data retention
+  policy signed by a named responsible person.
+- Record the date and method of each purge of criminal data that exceeded the retention limit in an auditable
+  log.
+- Name the individual who authorized and executed the data purge, ensuring this is a specific person,
+  not a team or department.
+- Retain evidence of the deletion process, such as system logs or deletion certificates, for each purge
+  event.
+- Review the purge log quarterly and sign off on compliance, noting any exceptions or failures to delete
+  data on time.

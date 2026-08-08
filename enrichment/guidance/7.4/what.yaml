@@ -1,0 +1,18 @@
+must_id: item:7.4:what
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: What is communicated (policy, objectives, performance, incidents, changes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each type of information that must be communicated, such as policies, objectives, performance results,
+  incidents, and changes, in the procedure document.
+- Assign a named individual responsible for approving what information is communicated, and record their
+  name and approval date in the procedure.
+- Specify the format and frequency for communicating each information type, and include these details
+  in a dated communication matrix or table.
+- Attach a sample communication record, such as an email or meeting minutes, showing actual communication
+  of each required information type.
+- Name the owner as a specific individual — not a team or department — in the procedure to avoid ambiguity.

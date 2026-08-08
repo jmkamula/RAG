@@ -1,0 +1,15 @@
+must_id: item:A.8.27:reg_last_reviewed
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Per-pattern last-review date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the last review date for each reference architecture pattern in the register, using a standard
+  date format.
+- Name the reviewer as a specific individual responsible for the last review, not a team or generic role.
+- Cross-reference each pattern entry with supporting review evidence, such as meeting minutes or approval
+  emails, dated accordingly.
+- Update the register immediately after each review to prevent gaps or outdated review dates.

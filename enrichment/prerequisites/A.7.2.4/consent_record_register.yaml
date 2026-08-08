@@ -1,0 +1,40 @@
+leaf_id: req:A.7.2.4:consent_record_register
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the specific purposes for which personal data is processed before
+    you can record valid consent events. Consent must always be tied to a clearly defined purpose.
+  good_enough: A documented list of processing purposes, mapped to relevant data processing activities,
+    is available and up to date.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Consent is only one of several lawful bases for processing personal data. You need to confirm
+    that consent is the appropriate lawful basis for each processing activity before recording consent
+    events.
+  good_enough: A register or mapping showing which processing activities rely on consent as their lawful
+    basis is available.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know which parts of your organization and which data processing activities fall
+    within the scope of your privacy management system to ensure all relevant consent events are captured.
+  good_enough: A documented scope statement exists that clearly defines the organizational and processing
+    boundaries for privacy controls.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A data classification scheme helps identify which data is personal and therefore subject
+    to consent requirements, ensuring only relevant events are recorded.
+  good_enough: A basic data classification scheme is documented and in use, distinguishing personal data
+    from other types.

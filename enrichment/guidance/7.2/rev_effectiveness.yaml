@@ -1,0 +1,19 @@
+must_id: item:7.2:rev_effectiveness
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Effectiveness sample — completed actions actually changed observed competence
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a list of employees who completed the competence program, including names, roles, and completion
+  dates.
+- Record before-and-after assessment results or performance metrics for each participant to show measurable
+  improvement in required skills.
+- Cross-reference updated job performance reviews or supervisor feedback that specifically mention changes
+  in observed competence after training.
+- Name the reviewer who evaluated the effectiveness, ensuring this is a specific individual and not a
+  generic title or group.
+- Retain signed or dated evidence of follow-up actions taken for participants who did not demonstrate
+  improved competence after program completion.

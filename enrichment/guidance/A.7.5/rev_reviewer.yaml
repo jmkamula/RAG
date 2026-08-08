@@ -1,0 +1,17 @@
+must_id: item:A.7.5:rev_reviewer
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Facilities + InfoSec + BCP lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Facilities, Information Security, and Business Continuity leads as individual reviewers in
+  the Environmental Protection Program review record.
+- Record the full names and job titles of all reviewers in the official review meeting minutes or sign-off
+  sheet.
+- Document the review date and obtain physical or electronic signatures from each named reviewer to confirm
+  participation.
+- Avoid listing groups or departments as reviewers; always specify accountable individuals for each required
+  role.

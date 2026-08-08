@@ -1,0 +1,48 @@
+leaf_id: req:A.8.32:applicable_change_scope
+control_ref: A.8.32
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know what parts of your organisation and which systems are covered by your ISMS
+    before you can define what changes are in-scope for change management. This ensures the change scope
+    aligns with your overall ISMS boundaries.
+  good_enough: A documented, approved scope statement that clearly lists included business units, systems,
+    and processes.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You must know what assets exist before you can decide which changes to them require formal
+    change management. The asset register provides this inventory.
+  good_enough: A current, working list of information assets, systems, and components relevant to the
+    ISMS.
+- ref: A.8.19
+  standard_id: ISO27001:2022
+  title: Installation of software on operational systems
+  category: direct
+  rationale: Rules for installing software are a key subset of change management. You need these rules
+    to help define what types of changes are covered or exempt in your change scope.
+  good_enough: Documented procedures or rules for software installation, even if basic, that clarify what
+    is allowed and what requires review.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that responsibilities for identifying, approving, and documenting
+    changes are understood. This is necessary to define who decides what is in-scope for change management.
+  good_enough: A list or matrix showing who is responsible for change management decisions and oversight,
+    even if not fully detailed.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding which changes could introduce unacceptable risk is essential for setting the
+    boundaries of change management. The risk assessment informs which changes must be controlled.
+  good_enough: A recent risk assessment that identifies key risks related to system and process changes,
+    even if high-level.

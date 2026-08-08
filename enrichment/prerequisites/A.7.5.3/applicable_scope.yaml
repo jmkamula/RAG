@@ -1,0 +1,50 @@
+leaf_id: req:A.7.5.3:applicable_scope
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines the organizational and system boundaries for all information security
+    and privacy controls, including which entities and processes are covered. You can't define which transfer
+    events are in-scope for privacy without knowing the overall ISMS scope.
+  good_enough: A documented scope statement that clearly identifies the organizational units, assets,
+    and processes included in the ISMS, even if some details are still being finalized.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is essential to identify which information assets (including
+    personal data) are subject to transfer events. Without this, you can't reliably determine which transfers
+    are recordable.
+  good_enough: A working inventory of information assets, with at least high-level identification of personal
+    data types and their owners.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Knowing the purposes for processing personal data is necessary to judge which transfers are
+    legitimate and must be recorded. This underpins the scoping of applicable transfer events.
+  good_enough: Documented purposes for all major personal data processing activities, even if some are
+    described at a high level.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: The lawful basis for processing determines whether a transfer event is permitted and recordable.
+    You need this to scope which transfers are subject to privacy controls.
+  good_enough: A list or matrix mapping each processing activity to its lawful basis, with enough detail
+    to support transfer event scoping.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A data classification scheme helps distinguish between personal data, anonymized data, and
+    other types, which is critical for excluding non-recordable transfers (like fully-anonymised aggregate
+    sharing).
+  good_enough: A basic classification scheme that at least distinguishes personal data from non-personal
+    and anonymized data, applied to key assets.

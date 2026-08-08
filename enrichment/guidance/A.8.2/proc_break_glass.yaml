@@ -1,0 +1,19 @@
+must_id: item:A.8.2:proc_break_glass
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Break-glass account governance (sealed credentials, post-use review)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the location and method of sealing break-glass account credentials, including physical or digital
+  controls, in a dated procedure record.
+- Name a specific individual responsible for authorizing and monitoring all break-glass account usage,
+  avoiding generic titles like "IT" or "the team."
+- Record each instance of break-glass account use, including date, time, purpose, and the person accessing,
+  in an access log.
+- Review and sign off on each break-glass account usage after the event, confirming appropriateness and
+  resetting credentials if required.
+- Retain evidence of periodic audits of sealed credential integrity and access logs, including auditor
+  name and audit date.

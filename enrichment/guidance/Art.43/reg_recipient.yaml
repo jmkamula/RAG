@@ -1,0 +1,15 @@
+must_id: item:Art.43:reg_recipient
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Per-row certificate recipient
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full legal name of each certificate recipient in a dedicated column for every entry in the
+  certification issuance record.
+- State the unique certificate number or identifier next to each recipient to clearly link the certificate
+  to the individual.
+- Enter the date of issuance for each certificate in a separate, consistently formatted column.
+- Name the certificate recipient as a specific individual, not as a team, department, or generic role.

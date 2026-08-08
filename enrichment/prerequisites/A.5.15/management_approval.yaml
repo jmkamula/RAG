@@ -1,0 +1,42 @@
+leaf_id: req:A.5.15:management_approval
+control_ref: A.5.15
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: direct
+  rationale: The access control policy is a topic-specific policy that must align with and be referenced
+    by the overarching information security policy. Management cannot approve a policy that is not formally
+    recognized within the policy framework.
+  good_enough: There is a documented, current information security policy that explicitly requires and
+    references topic-specific policies like access control.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and responsibilities
+  category: foundational
+  rationale: Management approval must come from an individual with the appropriate authority, which depends
+    on clearly defined roles and responsibilities. Without this, the approval lacks legitimacy.
+  good_enough: Roles and responsibilities for information security, including who is authorized to approve
+    policies, are documented and understood.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification of information
+  category: foundational
+  rationale: The access control policy should reflect the organization’s information classification scheme,
+    as access decisions are based on the sensitivity and criticality of assets. Approval is meaningless
+    if the classification scheme is undefined.
+  good_enough: There is a basic, documented classification scheme that identifies at least the main categories
+    of information requiring access controls.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: Determining the scope of the information security management system
+  category: foundational
+  rationale: The scope statement defines which assets, processes, and locations are covered by the ISMS
+    and, by extension, the access control policy. Management cannot approve a policy without knowing its
+    boundaries.
+  good_enough: There is a documented ISMS scope statement that identifies the organizational and technical
+    boundaries relevant to access control.

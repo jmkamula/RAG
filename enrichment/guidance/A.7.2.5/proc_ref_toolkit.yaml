@@ -1,0 +1,17 @@
+must_id: item:A.7.2.5:proc_ref_toolkit
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: PIA toolkit / template referenced (form + risk-scoring rubric)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference the approved Privacy Impact Assessment (PIA) template and risk-scoring rubric by title and
+  version number within the procedure document.
+- Attach or hyperlink the current PIA form and risk-scoring rubric directly in the procedure to ensure
+  staff use the correct versions.
+- Name the individual responsible for maintaining and updating the PIA toolkit and rubric, not just a
+  team or department.
+- Record the review date and approver of the PIA toolkit and rubric within the procedure to show they
+  are up to date.

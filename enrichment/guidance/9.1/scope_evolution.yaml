@@ -1,0 +1,19 @@
+must_id: item:9.1:scope_evolution
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Scope evolution plan (which un-measured areas are being instrumented next)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current areas within your information security management system that are not yet measured,
+  including a brief description for each.
+- Name a specific individual responsible for overseeing the measurement implementation for each un-measured
+  area.
+- Document a timeline with target dates for when measurement will be established in each area, and update
+  it as milestones are reached.
+- Record the method or metric that will be introduced for each area, ensuring it is tailored to the specific
+  risk or process.
+- Avoid using generic statements like "all remaining areas"—clearly identify each area by name to prevent
+  auditor rejection.

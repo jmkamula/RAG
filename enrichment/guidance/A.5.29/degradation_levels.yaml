@@ -1,0 +1,19 @@
+must_id: item:A.5.29:degradation_levels
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Acceptable degradation levels stated (which controls can drop to compensating, which must hold
+  at full — risk-tiered)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the minimum acceptable performance level for each critical security control during disruption
+  in a dated, approved disruption plan.
+- Document which controls can be temporarily replaced by compensating measures, and specify those that
+  must remain fully operational, with clear risk-based justification.
+- Name the person responsible for approving degradation decisions as a specific individual, not a group
+  or department.
+- Cross-reference each stated degradation level to the relevant business impact analysis or risk assessment
+  record.
+- Record the date of the most recent review and approval of the disruption plan by senior management.

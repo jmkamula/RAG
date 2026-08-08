@@ -1,0 +1,17 @@
+must_id: item:A.8.21:owner
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Named procedure owner (Network Engineering lead with Supplier Management partner)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the procedure owner as a specific individual by full name and job title, such as "Jane Smith, Network
+  Engineering Lead."
+- List the Supplier Management partner by full name and job title alongside the Network Engineering lead
+  in the procedure document.
+- Record the date when the procedure owner and partner were assigned responsibility in the document’s
+  revision history.
+- Avoid using generic terms like "the team" or "IT department"—ensure only named individuals are listed
+  as owners.

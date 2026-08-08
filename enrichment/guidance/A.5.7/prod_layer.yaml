@@ -1,0 +1,18 @@
+must_id: item:A.5.7:prod_layer
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Intelligence layer per record (strategic / tactical / operational)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the intelligence layer for each product record by clearly marking it as strategic, tactical,
+  or operational in a dedicated field.
+- Name the person responsible for classifying the intelligence layer for each product record, listing
+  their full name and role.
+- Record the date the intelligence layer was assigned or last reviewed for each product record.
+- Cross-reference each product record with supporting documentation that explains the criteria used to
+  determine its intelligence layer.
+- Avoid using generic or missing labels such as "N/A" or leaving the intelligence layer field blank; always
+  specify one of the three required layers.

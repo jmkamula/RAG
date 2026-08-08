@@ -1,0 +1,16 @@
+must_id: item:7.4:reg_event_id
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: Unique event identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each communication event entry in the register, using a sequential or
+  timestamp-based numbering system.
+- Record the identifier directly in the first column of each row to prevent confusion or duplication.
+- Cross-reference each event’s identifier in related documentation, such as meeting minutes or email threads,
+  to ensure traceability.
+- Avoid using generic or repeated identifiers like “N/A” or “TBD” that could cause ambiguity during an
+  audit.

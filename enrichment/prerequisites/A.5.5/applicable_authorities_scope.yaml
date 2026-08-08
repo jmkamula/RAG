@@ -1,0 +1,43 @@
+leaf_id: req:A.5.5:applicable_authorities_scope
+control_ref: A.5.5
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know the boundaries of your ISMS—what locations, business units, and activities
+    are in-scope—before you can identify which authorities and jurisdictions are relevant. This ensures
+    you don't miss or overstate applicable obligations.
+  good_enough: A documented scope statement that clearly lists included sites, business functions, and
+    key activities. It should be reviewed and agreed by management, even if not yet externally certified.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Understanding what types of information (including personal data and critical services) you
+    process is essential to determine which authorities and sectoral obligations apply. Without this,
+    you can't accurately map regulatory drivers.
+  good_enough: A basic, documented classification scheme that identifies major categories of data and
+    services handled by the organisation. It should be sufficient to flag regulated data types, even if
+    not fully rolled out.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: A current asset register helps you identify where data resides and which systems or processes
+    are subject to regulatory oversight. This is key for mapping authorities to assets and operations.
+  good_enough: A working list of key information assets, systems, and data repositories. It should cover
+    the main business systems and data stores, even if not exhaustive.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of compliance and regulatory monitoring roles ensures someone is accountable
+    for identifying and tracking applicable authorities. Without this, the register may be incomplete
+    or outdated.
+  good_enough: A documented assignment of responsibility for compliance and regulatory affairs, even if
+    it's a single named person or team.

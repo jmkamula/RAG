@@ -1,0 +1,14 @@
+must_id: item:Art.24:charter_owner
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Named programme owner (typically DPO or Chief Privacy Officer)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the programme owner as a specific individual, such as the DPO or Chief Privacy Officer, in the
+  Privacy Programme Charter.
+- Record the date the owner was assigned responsibility within the Charter document.
+- Sign the Charter to confirm the named owner’s acceptance of the role and accountability.
+- Avoid listing a team, department, or generic title as the owner; use a full name and job title.

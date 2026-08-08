@@ -1,0 +1,16 @@
+must_id: item:9.1:methods
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Methods for monitoring, measurement, analysis, and evaluation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific methods used for monitoring, measurement, analysis, and evaluation within your
+  ISMS procedure, including tools, frequency, and responsible roles.
+- Name the individual responsible for overseeing each method, ensuring a specific person is listed rather
+  than a team or department.
+- Record the date of the latest review or update of the procedure to show it is current and actively maintained.
+- Cross-reference each method to the relevant ISMS objectives or controls it supports, providing clear
+  traceability within the procedure.

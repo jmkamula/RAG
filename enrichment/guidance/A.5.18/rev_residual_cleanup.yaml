@@ -1,0 +1,21 @@
+must_id: item:A.5.18:rev_residual_cleanup
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Residual cleanup status per record (shared mailbox memberships removed or transferred, file-share
+  access reassigned, distribution-list memberships cleared, OAuth tokens revoked, API keys rotated) —
+  full lifecycle closure, not just primary RBAC revocation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and time when each user's primary access is revoked, including the name of the person
+  who performed the action.
+- Document the removal or transfer of shared mailbox memberships, file-share access, and distribution-list
+  memberships for each user in the revocation record.
+- List all OAuth tokens and API keys associated with the user, and confirm their revocation or rotation
+  with supporting evidence for each.
+- Name the responsible individual who verified and signed off on the full closure of access, avoiding
+  generic roles such as "IT" or "the team".
+- Attach a final checklist or closure statement to each record, confirming all residual access points
+  have been addressed and no open items remain.

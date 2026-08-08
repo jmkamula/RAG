@@ -1,0 +1,17 @@
+must_id: item:A.7.4.1:reg_necessity_rationale
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+must_text: Necessity rationale per row (adequate / relevant / necessary explanation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each personal data field collected in a table, with a separate row for every distinct field.
+- State the specific business purpose for collecting each field in the corresponding row, avoiding vague
+  or generic descriptions.
+- Document a clear explanation for why each field is adequate, relevant, and necessary for its stated
+  purpose.
+- Name the person responsible for reviewing and updating the necessity rationale, using a specific individual’s
+  name rather than a role or team.
+- Record the date of the most recent review or update for each field’s necessity rationale in the inventory.

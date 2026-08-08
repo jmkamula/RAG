@@ -1,0 +1,16 @@
+must_id: item:A.5.27:reg_lesson_id
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Each lesson captured with a unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each lesson learned entry in the register, using a sequential number or
+  code that cannot be reused.
+- Record the date each lesson was added and the name of the person submitting it alongside the unique
+  identifier.
+- Cross-reference each lesson’s identifier in related incident, project, or audit records to show traceability.
+- Avoid using generic or duplicate identifiers such as "N/A" or "TBD" that could cause confusion during
+  audits.

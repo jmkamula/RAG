@@ -1,0 +1,19 @@
+must_id: item:A.5.23:rev_geo_compliance
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Geographic-location compliance check (data has not silently drifted to non-approved regions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to be responsible for verifying the geographic location of all cloud-stored
+  data each review period.
+- Document the approved geographic regions for data storage in a dated register that is accessible to
+  reviewers and management.
+- Record the results of each cloud service posture review, including evidence of data residency checks
+  and any detected deviations from approved regions.
+- Attach supporting screenshots or system-generated reports showing the actual data locations at the time
+  of review.
+- Name the reviewer and date on each review record—do not leave the reviewer field blank or use generic
+  roles like "IT team".

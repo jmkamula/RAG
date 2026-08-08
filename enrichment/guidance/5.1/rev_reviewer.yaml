@@ -1,0 +1,15 @@
+must_id: item:5.1:rev_reviewer
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (ISMS Manager + non-executive director if available)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as the ISMS Manager and, if available, a specific non-executive director in the review
+  documentation.
+- Record the date of the Leadership Program Review and include both reviewers' signatures or electronic
+  approvals on the final document.
+- Attach a copy of the reviewers’ roles or titles to confirm their positions at the time of the review.
+- Avoid listing a group or department as the reviewer; always identify individuals by name.

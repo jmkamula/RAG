@@ -1,0 +1,41 @@
+leaf_id: req:B.8.4.3:applicable_scope
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need a clear ISMS scope to ensure the privacy extension’s processor transmission scope
+    aligns with the overall boundaries of your information security management system. This avoids gaps
+    or overlaps in coverage.
+  good_enough: A documented ISMS scope that identifies the organizational and technical boundaries for
+    information security, even if not fully detailed for privacy-specific contexts.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is essential to identify all systems, APIs, and integrations
+    that may transmit customer PII, forming the basis for defining the applicable processor transmission
+    scope.
+  good_enough: A working inventory of information assets, including systems and data flows relevant to
+    PII, even if some minor assets are pending review.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: A data classification scheme ensures you can distinguish PII from other data types, which
+    is critical for accurately scoping processor transmissions involving customer PII.
+  good_enough: A basic classification policy that distinguishes PII from non-PII, applied to key systems
+    and data flows.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the purposes for which PII is processed and transmitted to define
+    the scope of processor transmissions accurately.
+  good_enough: A summary of processing purposes for each major PII transmission context, even if some
+    edge cases are still being clarified.

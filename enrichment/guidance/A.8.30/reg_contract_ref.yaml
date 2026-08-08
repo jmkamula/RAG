@@ -1,0 +1,19 @@
+must_id: item:A.8.30:reg_contract_ref
+control_ref: A.8.30
+standard_id: ISO27001:2022
+must_text: Per-engagement contract reference (cross-link to A.5.20)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each outsourced development engagement in the register, listing the project name, start date,
+  and the external provider involved.
+- Cross-reference the contract for each engagement by including its unique contract number or reference
+  code in the register entry.
+- Link each contract reference to the relevant supplier record required by control A.5.20, ensuring traceability
+  between registers.
+- Name the contract owner as a specific individual responsible for the engagement, not a generic team
+  or department.
+- Review the register quarterly to confirm all active engagements have a valid, current contract reference
+  listed.

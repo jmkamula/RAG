@@ -1,0 +1,20 @@
+must_id: item:A.6.6:jurisdiction_remedies
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Jurisdiction and remedies clauses (governing law, injunctive relief, liquidated damages where
+  lawful)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Insert a governing law clause that clearly states the specific country or state whose laws apply to
+  the agreement.
+- Include a remedies section that explicitly allows for injunctive relief in the event of a breach of
+  confidentiality.
+- State any liquidated damages provisions only if they are enforceable under the chosen jurisdiction’s
+  laws, referencing legal review if applicable.
+- Name the template owner as a specific individual responsible for maintaining legal accuracy, not a generic
+  role or team.
+- Record the latest legal review date and reviewer’s name on the template to show it reflects current
+  enforceability standards.

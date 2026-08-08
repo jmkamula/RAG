@@ -1,0 +1,41 @@
+leaf_id: req:A.7.5.4:disclosure_records_procedure
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the specific purposes for which PII is processed before you can
+    accurately record and justify any disclosures. This ensures that each disclosure aligns with a defined,
+    legitimate purpose.
+  good_enough: A documented list of processing purposes for all PII types in scope, even if not fully
+    mapped to every data flow, is sufficient to proceed.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Recording PII disclosures requires you to cite the legal or contractual authority for each
+    disclosure. Without a mapped lawful basis, you cannot justify or properly record why a disclosure
+    occurred.
+  good_enough: A summary table or register showing the lawful basis for each main category of PII processing
+    is enough to start drafting disclosure procedures.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: You need to know which information assets are classified as PII to ensure that disclosure
+    records are kept for the right data types. This prevents gaps or overreach in your disclosure recording.
+  good_enough: A basic, working classification scheme that flags PII assets, even if not fully rolled
+    out, is sufficient to unblock this step.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An asset register helps you identify what PII you hold and where, so you can track disclosures
+    accurately. Without this, you risk missing disclosures or failing to record them properly.
+  good_enough: A draft or partial asset register listing key PII data stores and flows is enough to proceed
+    with disclosure recording procedures.

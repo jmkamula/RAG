@@ -1,0 +1,20 @@
+must_id: item:A.5.8:reg_stage
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Current stage per row (initiation / requirements / build / pre-go-live / live / closed) updated
+  as gates are passed
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- List each project in the Project Security Register with a unique name and identifier to avoid confusion
+  between similarly named initiatives.
+- 'Record the current lifecycle stage for every project row, selecting only from the defined stages: initiation,
+  requirements, build, pre-go-live, live, or closed.'
+- Update the lifecycle stage in the register immediately after each project gate is formally passed, noting
+  the date of the update.
+- Name the person responsible for updating each project’s stage, avoiding generic entries like "the team"
+  or "IT department".
+- Retain evidence of formal gate approvals, such as signed meeting minutes or approval emails, and cross-reference
+  these in the register.

@@ -1,0 +1,16 @@
+must_id: item:9.2:records
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Record retention requirements (cross-link to 7.5)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the retention period for internal audit records in the audit programme, referencing your documented
+  information retention policy from control 7.5.
+- Cross-reference the specific section or document number of your retention policy within the audit programme
+  for clear traceability.
+- Name the individual responsible for enforcing record retention and disposal, avoiding generic titles
+  like "the team" or "management".
+- Record the date the retention requirement was last reviewed or updated in the audit programme.

@@ -1,0 +1,19 @@
+must_id: item:A.5.13:scheme_alignment
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Alignment with the A.5.12 classification scheme stated explicitly (level names match; level
+  count matches; semantics match)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Information Labelling Procedure that it uses the same classification levels, names, and
+  definitions as documented in the A.5.12 classification scheme.
+- Cross-reference the exact section or document title where the A.5.12 classification scheme is defined,
+  including version or approval date.
+- List all classification levels in the procedure and confirm their names, count, and descriptions match
+  those in the A.5.12 scheme.
+- Name the owner of the Information Labelling Procedure as a specific individual, not a team or department.
+- Attach a dated approval record showing that the procedure was reviewed for alignment with the A.5.12
+  classification scheme.

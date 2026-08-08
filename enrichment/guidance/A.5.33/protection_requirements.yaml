@@ -1,0 +1,21 @@
+must_id: item:A.5.33:protection_requirements
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Protection requirements per record class (access control, encryption at rest, immutability
+  where needed, integrity verification — protects against loss, destruction, falsification, unauthorized
+  access and release)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each record class in the policy, specifying the required protection measures such as access restrictions,
+  encryption, or immutability for each.
+- Document the technical and procedural controls applied to each record class, including how integrity
+  and access are maintained.
+- Name the owner responsible for enforcing protection requirements for each record class as a specific
+  individual, not a team or department.
+- Reference supporting evidence such as system configuration screenshots, access control lists, or encryption
+  settings that demonstrate implementation of the stated protections.
+- State the review schedule for verifying that protection measures remain effective, including the date
+  of the last completed review.

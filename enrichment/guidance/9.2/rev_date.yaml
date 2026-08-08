@@ -1,0 +1,17 @@
+must_id: item:9.2:rev_date
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent audit program review date in the audit program document, ensuring it is clearly
+  visible and unambiguous.
+- Document the planned review interval in months or years within the audit program, referencing the relevant
+  policy or management decision.
+- Cross-reference the actual review date against the planned interval to confirm compliance, noting any
+  missed or overdue reviews with an explanation.
+- Name the reviewer as a specific individual, not a group or department, and include their signature or
+  electronic approval on the review record.

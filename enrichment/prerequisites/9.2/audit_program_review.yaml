@@ -1,0 +1,45 @@
+leaf_id: req:9.2:audit_program_review
+control_ref: '9.2'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know what the ISMS covers before you can review whether the audit program is
+    complete and effective. The scope defines the boundaries for all audit activities.
+  good_enough: A documented, approved scope statement that clearly lists included business units, locations,
+    and processes.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The audit program must align with the organisation’s security policy objectives. Without
+    a current policy, you can't judge if audits are covering the right priorities.
+  good_enough: A published, management-approved policy that sets out the ISMS objectives and direction.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: direct
+  rationale: Audit planning and review depend on understanding the current risk landscape. The risk assessment
+    informs which areas are most critical to audit.
+  good_enough: A recent risk assessment identifying key risks, with enough detail to guide audit focus.
+- ref: A.8.34
+  standard_id: ISO27001:2022
+  title: Protection of information systems during audit testing
+  category: direct
+  rationale: Controls must be in place to ensure audit activities do not disrupt or compromise information
+    systems. This is essential for safe and effective audit execution and review.
+  good_enough: Documented procedures or controls that prevent audit testing from impacting production
+    systems or data integrity.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of audit-related roles is necessary to verify accountability and execution
+    during the audit program review.
+  good_enough: A roles matrix or documented assignments showing who is responsible for audit planning,
+    execution, and review.

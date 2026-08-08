@@ -1,0 +1,17 @@
+must_id: item:A.7.14:software_removal
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Licensed software removal step before disposal or re-use
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step in the disposal procedure that requires all licensed software to be uninstalled from
+  equipment before disposal or re-use.
+- Record the name of the person responsible for verifying software removal on a checklist, with a date
+  and signature for each device processed.
+- Retain evidence of completed software removal, such as screenshots or uninstallation logs, attached
+  to the equipment disposal record.
+- Name the responsible individual for this process specifically—do not list a team or department as the
+  owner.

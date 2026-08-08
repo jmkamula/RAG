@@ -1,0 +1,17 @@
+must_id: item:B.8.4.2:reg_certification_ref
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+must_text: Certification reference issued to customer
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the unique certification reference number issued to each customer in the End-of-Service Action
+  Register with the corresponding customer name and date.
+- Assign responsibility for issuing certification references to a named individual, not a generic role
+  or team.
+- Cross-reference each certification reference entry with supporting documentation confirming the customer's
+  end-of-service status.
+- Retain a copy of the communication sent to the customer that includes the certification reference and
+  date of issuance.

@@ -1,0 +1,17 @@
+must_id: item:6.1.2:identification
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Risks to confidentiality, integrity and availability identified
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for identifying risks to confidentiality, integrity, and availability in
+  your risk assessment procedure.
+- Document a dated risk assessment record listing specific threats to confidentiality, integrity, and
+  availability for each information asset.
+- State the method used to identify risks, such as interviews or checklists, and include a sample completed
+  assessment as evidence.
+- Avoid using generic risk statements; describe risks in terms specific to your organisation’s context
+  and information assets.

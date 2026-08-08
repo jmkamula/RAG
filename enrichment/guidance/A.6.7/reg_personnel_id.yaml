@@ -1,0 +1,18 @@
+must_id: item:A.6.7:reg_personnel_id
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Per-row personnel identifier (links to A.5.16 identity register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each remote worker’s full name and unique personnel ID in the register, matching the identifier
+  used in your A.5.16 identity register.
+- Cross-reference every entry in the remote workers register with the corresponding entry in the A.5.16
+  identity register to confirm linkage.
+- Name the owner of the register as a specific individual, not a team or department, to avoid ambiguity
+  in responsibility.
+- Date each entry when it is added or updated to provide a clear audit trail of changes.
+- Retain evidence of approval for each remote worker’s entry, such as a signed or digitally approved record
+  by an authorized manager.

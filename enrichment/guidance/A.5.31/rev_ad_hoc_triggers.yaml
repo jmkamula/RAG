@@ -1,0 +1,19 @@
+must_id: item:A.5.31:rev_ad_hoc_triggers
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Ad-hoc review triggers listed (major regulator action, court ruling, customer contract restructure)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all events that trigger an unscheduled review of the legal and regulatory register, such as regulator
+  actions, court rulings, or major contract changes.
+- Document each ad-hoc review trigger in the register review procedure, including a clear description
+  and examples for each type of event.
+- Name a specific individual responsible for monitoring and initiating register reviews when a trigger
+  event occurs.
+- Record the date and details of each ad-hoc review, including the triggering event and any resulting
+  changes to the register.
+- Avoid using vague triggers like "as necessary" or "when needed"—specify concrete events that require
+  immediate review.

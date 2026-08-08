@@ -1,0 +1,19 @@
+must_id: item:A.8.18:rev_removal_sweep
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Removal-where-unneeded sweep (utilities found in unauthorised locations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to be responsible for identifying all privileged utility programs across your
+  systems, recording their name and assignment date.
+- Document the locations of all privileged utility programs in a dated inventory, including system names
+  and file paths.
+- Review the inventory and cross-reference each utility’s location with your approved list of authorised
+  locations, noting any discrepancies with dates.
+- Remove any privileged utility programs found in unauthorised locations and record the removal action,
+  including the date and responsible person.
+- Record each review cycle with a dated sign-off by the responsible individual; do not leave the review
+  undated or unsigned.

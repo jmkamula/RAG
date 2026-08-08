@@ -1,0 +1,19 @@
+must_id: item:A.8.12:log_classification_breakdown
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Alert volume broken down by classification (reveals tuning gaps)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each data loss prevention (DLP) alert in a log, including the date, time, and assigned data classification
+  for the incident.
+- Break down and summarize alert counts by each data classification category in a monthly report, such
+  as "Confidential," "Internal," or "Public."
+- Name the person responsible for reviewing DLP alert volumes and trends, listing them as a specific individual
+  in the report.
+- Highlight any classification category with unusually high or low alert volumes, noting possible tuning
+  gaps or misclassifications in the report.
+- Avoid using generic or undefined classification labels such as "Other" or "Unknown" in the breakdown,
+  as auditors will flag this as incomplete evidence.

@@ -1,0 +1,17 @@
+must_id: item:7.5:control
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Control of documented information (distribution, access, retrieval, retention, disposition)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the policy owner, listing their full name and role on the policy document’s
+  cover page.
+- Document the approved methods for distributing, accessing, and retrieving controlled documents in a
+  dated policy section.
+- Record the retention periods and secure disposal procedures for each document type in a maintained retention
+  schedule.
+- List the current version number and approval date on every page footer to avoid confusion with outdated
+  or draft versions.

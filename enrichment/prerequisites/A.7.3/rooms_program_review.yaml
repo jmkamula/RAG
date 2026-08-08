@@ -1,0 +1,44 @@
+leaf_id: req:A.7.3:rooms_program_review
+control_ref: A.7.3
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which physical locations and rooms are covered by the ISMS, ensuring
+    the rooms program review is focused and relevant.
+  good_enough: A clear, documented scope that identifies all sites and rooms subject to ISMS controls.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register is necessary to identify which rooms and physical spaces require
+    classification and review.
+  good_enough: A current list of physical rooms and spaces, with enough detail to support classification
+    and review activities.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The classification scheme provides the criteria for categorizing rooms, which is essential
+    for verifying correct classifications during the review.
+  good_enough: A documented scheme that defines room classification levels and the criteria for each.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The security policy sets the overall expectations for physical security and periodic reviews,
+    guiding the rooms program review process.
+  good_enough: A published policy that references physical security requirements and mandates regular
+    reviews.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures accountability for maintaining room classifications, locking
+    standards, and conducting the annual review.
+  good_enough: Documented roles showing who is responsible for room management and review activities.

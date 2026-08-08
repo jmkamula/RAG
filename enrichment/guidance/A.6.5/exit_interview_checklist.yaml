@@ -1,0 +1,17 @@
+must_id: item:A.6.5:exit_interview_checklist
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Exit interview / role-change checklist with info-security touchpoints
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a checklist that includes information security responsibilities for employees exiting or changing
+  roles, with version and approval date clearly shown.
+- Assign a named individual to conduct and sign off on the checklist for each departing or transferring
+  employee.
+- Record the completion date and outcome of each checklist in the employee’s personnel file.
+- State any outstanding information security items or assets not returned, with actions and deadlines,
+  in a dated record.
+- Name the responsible person for follow-up actions as a specific individual, not a generic team or department.

@@ -1,0 +1,19 @@
+must_id: item:Art.9:reg_condition
+control_ref: Art.9
+standard_id: GDPR:2016/679
+must_text: Art.9.2 condition per row (a-j) with citation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each instance of special category data processing in a register, assigning a unique row for each
+  distinct processing activity.
+- Specify the exact Art.9.2 condition (a-j) relied upon for each processing activity, including the corresponding
+  letter and full legal citation.
+- Name the decision-maker who determined the lawful basis for each processing activity, ensuring this
+  is a specific individual and not a team or department.
+- Record the date when the lawful basis was last reviewed or confirmed for each processing activity in
+  the register.
+- Attach or cross-reference supporting documentation, such as consent forms or policy excerpts, that demonstrate
+  how the chosen Art.9.2 condition is met.

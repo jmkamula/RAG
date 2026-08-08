@@ -1,0 +1,18 @@
+must_id: item:7.3:scope_exclusions
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Exclusions stated explicitly with rationale
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all staff roles and third parties considered for security awareness training, including job titles
+  and departments.
+- State any roles or groups excluded from the awareness program, and provide a clear, specific reason
+  for each exclusion.
+- Name the person responsible for approving exclusions, and record the approval date alongside their decision.
+- Attach supporting evidence, such as risk assessments or business justifications, for each exclusion
+  decision.
+- Specify excluded groups by exact job title or contract type—avoid vague categories like "temporary staff"
+  or "contractors" without further detail.

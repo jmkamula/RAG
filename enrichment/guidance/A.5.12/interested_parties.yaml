@@ -1,0 +1,19 @@
+must_id: item:A.5.12:interested_parties
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Considerations for interested-party requirements (regulator-imposed classifications, contract-imposed)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all interested parties, such as regulators, customers, and partners, who have requirements for
+  information classification in a dated register.
+- Document each interested party’s specific classification requirements, referencing the exact regulation,
+  contract clause, or policy that imposes them.
+- Cross-reference your scheme’s classification levels to each external requirement, showing how your categories
+  meet or exceed those obligations.
+- Name the individual responsible for maintaining and updating the classification scheme, avoiding generic
+  roles like "the team" or "IT department."
+- Retain copies of relevant contracts and regulatory documents cited, with clear links to the classification
+  scheme for auditor review.

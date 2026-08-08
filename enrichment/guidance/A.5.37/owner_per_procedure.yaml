@@ -1,0 +1,18 @@
+must_id: item:A.5.37:owner_per_procedure
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Ownership per procedure (named role or individual responsible for currency — the operator who
+  runs the procedure, not 'IT')
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each operating procedure in a central register, including the full procedure name and a unique
+  identifier for reference.
+- Name the owner for each procedure as a specific individual or named role who actively performs or oversees
+  the procedure.
+- Record the date each procedure was last reviewed or updated, along with the name of the person who conducted
+  the review.
+- Avoid listing generic owners such as "IT" or "the team"; specify a real person or role with clear accountability.
+- Retain a signed or approved version of the register showing current ownership and review dates.

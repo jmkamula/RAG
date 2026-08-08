@@ -1,0 +1,49 @@
+leaf_id: req:A.7.4.8:applicable_scope
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The disposal contexts must align with the overall ISMS scope, ensuring that only relevant
+    assets, processes, and locations are considered. Without a defined ISMS scope, it's unclear what boundaries
+    apply to disposal activities.
+  good_enough: A documented ISMS scope that clearly lists the business units, locations, and information
+    types covered by the management system.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: Identifying which assets exist (hardware, paper, devices) is essential to determine which
+    disposal contexts are relevant. Without an asset register, you cannot reliably scope disposal requirements.
+  good_enough: A current list of information assets, including hardware, devices, and paper records, with
+    enough detail to identify what may require disposal.
+- ref: A.7.4.5
+  standard_id: ISO27701:2019
+  title: End-of-Processing Obligations
+  category: direct
+  rationale: Understanding when processing ends for personal data is necessary to identify disposal triggers.
+    This informs which contexts (e.g., contract end, data subject request) must be included in the disposal
+    scope.
+  good_enough: A summary of scenarios where personal data processing ends, such as contract termination
+    or data subject deletion requests.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: Knowing how information is classified helps determine which records and devices require special
+    disposal handling. This ensures sensitive data is not overlooked in the disposal scope.
+  good_enough: A documented scheme that shows how information and assets are classified, with clear criteria
+    for what is considered sensitive or requires special disposal.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: The purpose for processing personal data impacts when and why disposal is required. Without
+    this, you cannot fully identify all applicable disposal contexts.
+  good_enough: A list of processing purposes for personal data, sufficient to link data lifecycle events
+    to disposal obligations.

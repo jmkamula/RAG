@@ -1,0 +1,17 @@
+must_id: item:A.8.18:rev_user_list
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Authorised-user list re-confirmed per utility
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for maintaining the authorised-user list for each privileged
+  utility program.
+- Document the current authorised-user list for each utility, including full names and access levels,
+  in a dated record.
+- Confirm with each listed user’s manager, in writing, that the user still requires access as of the review
+  date.
+- Record the review date and reviewer’s name for each utility program’s authorised-user list.
+- Avoid using outdated lists or generic user groups; update the list to reflect only current, named individuals.

@@ -1,0 +1,16 @@
+must_id: item:B.8.5.4:reg_response_outcome
+control_ref: B.8.5.4
+standard_id: ISO27701:2019
+must_text: Response outcome per row (data disclosed / request rejected / partial)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the response outcome for each disclosure request in the register, clearly stating if data was
+  disclosed, the request was rejected, or only partial data was provided.
+- Name the individual who made the disclosure decision for each entry, avoiding generic labels like "team"
+  or "department".
+- Enter the date the response was issued for every request, ensuring all register entries are time-stamped.
+- Attach supporting documentation for each outcome, such as copies of correspondence or decision memos,
+  to the relevant register row.

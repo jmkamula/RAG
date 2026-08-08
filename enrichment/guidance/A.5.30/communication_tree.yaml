@@ -1,0 +1,20 @@
+must_id: item:A.5.30:communication_tree
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Communication tree for ICT outages (who is informed, escalation thresholds, status-page update
+  cadence)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a communication tree that lists named individuals and their roles for each stage of ICT outage
+  notification and escalation.
+- State clear escalation thresholds, including specific timeframes or incident severity levels that trigger
+  each communication step.
+- Specify the cadence for status-page updates during outages, including who is responsible and the exact
+  intervals for posting updates.
+- Name the communication tree owner as a specific person, not a generic group or department, to avoid
+  ambiguity in responsibility.
+- Record the last review date and reviewer’s name on the communication tree to show it is current and
+  actively maintained.

@@ -1,0 +1,42 @@
+leaf_id: req:A.5.36:nonconformity_register
+control_ref: A.5.36
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The nonconformity register must clearly relate to the defined scope of the ISMS, ensuring
+    that only relevant nonconformities are tracked and managed. Without a scope statement, it's unclear
+    what incidents or processes should be included.
+  good_enough: A documented scope statement exists that defines the organizational and process boundaries
+    for the ISMS, even if it is high-level or draft.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the expectations for compliance and corrective action, providing the baseline
+    against which nonconformities are identified and managed. Without it, you can't determine what constitutes
+    a nonconformity.
+  good_enough: A current, approved information security policy is available that outlines compliance expectations
+    and responsibilities.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that nonconformities have designated owners and that corrective
+    actions are actionable. Without this, the register cannot reliably assign or track accountability.
+  good_enough: A list or matrix of information security roles and their responsibilities exists, even
+    if not fully detailed for every process.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding risk context helps prioritize nonconformities by severity and impact, which
+    is essential for effective tracking and closure. Without a risk assessment, severity ratings in the
+    register lack context.
+  good_enough: A recent risk assessment has been performed, identifying key risks and their relative severity,
+    even if not exhaustive.

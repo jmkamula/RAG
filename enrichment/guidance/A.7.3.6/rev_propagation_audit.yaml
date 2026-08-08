@@ -1,0 +1,19 @@
+must_id: item:A.7.3.6:rev_propagation_audit
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+must_text: Propagation audit — sampled corrections/erasures verified downstream
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each sampled correction or erasure request, including the data subject, date, and nature of
+  the change, in a central log.
+- Record the names and contact details of all third parties who received the affected personal data prior
+  to the correction or erasure.
+- Obtain and retain written confirmation from each third party that they have actioned the correction
+  or erasure, including the date completed.
+- Name the responsible individual overseeing downstream propagation for each case—do not list a team or
+  department as the owner.
+- Cross-reference each third party confirmation with the original correction or erasure request in your
+  log to show full downstream verification.

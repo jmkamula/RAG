@@ -1,0 +1,16 @@
+must_id: item:Art.49:rev_next_date
+control_ref: Art.49
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Derogations Program in a clearly visible section of the review
+  document.
+- Record the date in a way that is specific and unambiguous, using the full date format (day, month, year).
+- Name the person responsible for scheduling and conducting the next review, ensuring an individual is
+  listed rather than a team or department.
+- Retain a copy of the document showing the stated next review date and responsible person, with the current
+  version and date clearly marked.

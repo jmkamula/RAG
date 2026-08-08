@@ -1,0 +1,13 @@
+must_id: item:A.8.20:reg_owner
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Per-row named owner (network engineer accountable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific network engineer as the owner for each network asset listed in the inventory register.
+- Record the full name and contact details of the owner in a dedicated column for every row in the register.
+- Avoid using group names, job titles, or teams as owners; only list accountable individuals.
+- Date each entry to show when the owner assignment was last confirmed or updated.

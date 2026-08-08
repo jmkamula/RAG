@@ -1,0 +1,18 @@
+must_id: item:A.6.6:reg_signatory_id
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Per-row signatory identifier (links to identity register A.5.16 for employees; supplier register
+  A.5.19 for contractors; visitor-log for visitors)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full legal name of each NDA signatory in the register, matching the name exactly as it appears
+  in the relevant identity source.
+- Cross-reference each signatory’s entry with their unique identifier from the employee, supplier, or
+  visitor register, as appropriate.
+- Document the date and method of signature for each NDA entry, ensuring both are clearly visible and
+  unambiguous.
+- Avoid using generic labels like "contractor" or "visitor" without a specific linked identifier, as auditors
+  will flag missing traceability.

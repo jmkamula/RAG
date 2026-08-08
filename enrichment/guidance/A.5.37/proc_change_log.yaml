@@ -1,0 +1,18 @@
+must_id: item:A.5.37:proc_change_log
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Change-log requirement for procedure edits (so the audit trail is preserved across versions)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document every edit to the procedure in a dedicated change-log, including the date, description of change,
+  and name of the editor.
+- Retain previous versions of the procedure alongside the current version to allow auditors to trace the
+  full history.
+- Assign responsibility for maintaining the change-log to a named individual, not a group or department.
+- Record approvals for each significant change in the change-log, including the approver’s name and approval
+  date.
+- Cross-reference the change-log in the procedure document so auditors can easily locate and verify the
+  audit trail.

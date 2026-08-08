@@ -1,0 +1,17 @@
+must_id: item:A.5.24:reg_tier
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Tier per row (primary / backup / escalation_only) — drives the activation order
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each incident response team member in a separate row, clearly identifying their assigned tier as
+  primary, backup, or escalation only.
+- State the activation order for each tier, so it is clear who is contacted first, second, and for escalation
+  situations.
+- Name the owner of the register as a specific individual, not a group or department, and record the date
+  of last update.
+- Avoid using generic or duplicate names for team members; ensure each row lists a unique, identifiable
+  person with current contact details.

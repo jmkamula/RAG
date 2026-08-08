@@ -1,0 +1,32 @@
+leaf_id: req:Art.32:resilience_test
+control_ref: Art.32
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.24
+  standard_id: GDPR:2016/679
+  title: Responsibility of the controller
+  category: foundational
+  rationale: Art.24 establishes that the controller is responsible for implementing appropriate technical
+    and organisational measures, which is the overarching duty that Art.32's resilience testing helps
+    fulfil.
+  good_enough: There is a clear assignment of responsibility for GDPR compliance and security measures
+    at the organisation, even if detailed procedures are still maturing.
+- ref: Art.25
+  standard_id: GDPR:2016/679
+  title: Data protection by design and by default
+  category: foundational
+  rationale: Art.25 ensures that security and privacy are embedded into processing activities from the
+    outset, which directly impacts what needs to be tested for resilience under Art.32.
+  good_enough: Documented evidence exists that security and privacy have been considered in the design
+    of processing activities, at least at a high level.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of processing activities
+  category: foundational
+  rationale: A current RoPA is needed to identify which processing activities and systems must be included
+    in resilience and restoration testing under Art.32.
+  good_enough: A working inventory of processing activities exists, even if not fully detailed, so that
+    the scope of resilience testing can be defined.

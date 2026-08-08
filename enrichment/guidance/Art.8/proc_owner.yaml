@@ -1,0 +1,15 @@
+must_id: item:Art.8:proc_owner
+control_ref: Art.8
+standard_id: GDPR:2016/679
+must_text: Named owner of the procedure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner of the Child Consent and Age-Verification Procedure, including
+  their full name and job title.
+- Record the date the owner was assigned responsibility for the procedure in the official procedure document.
+- Document the owner's contact details within the procedure to allow direct communication if questions
+  arise.
+- Avoid listing a team, department, or generic role as the owner; use only a named person.

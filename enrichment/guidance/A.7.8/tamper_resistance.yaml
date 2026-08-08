@@ -1,0 +1,20 @@
+must_id: item:A.7.8:tamper_resistance
+control_ref: A.7.8
+standard_id: ISO27001:2022
+must_text: Tamper-resistance / detection measures for sensitive equipment (HSMs, network gear, recording
+  devices)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each piece of sensitive equipment, such as HSMs, network gear, and recording devices, in an inventory
+  with unique asset tags and physical locations.
+- Document the specific tamper-resistance or tamper-detection measures in place for each listed device,
+  including locks, seals, or monitoring systems.
+- Assign a named individual responsible for regularly inspecting tamper-evident controls and recording
+  inspection dates in a log.
+- Record all tamper incidents or alerts in an incident register, including date, device, description,
+  and resolution steps taken.
+- State the owner as a specific person, not a generic role or team, for each device’s physical security
+  and tamper-protection measures.

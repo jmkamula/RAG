@@ -1,0 +1,18 @@
+must_id: item:B.8.4.1:proc_periodic_check
+control_ref: B.8.4.1
+standard_id: ISO27701:2019
+must_text: Periodic check that temp files are deleted
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual responsible for checking deletion of processor temp files, listing their name
+  and role in the procedure document.
+- Document the schedule for periodic checks, including specific dates or frequency, in the disposal procedure.
+- Record the results of each temp file deletion check in a dated log, including any issues found and actions
+  taken.
+- Retain evidence of completed deletion checks, such as screenshots or system logs, attached to each log
+  entry.
+- Name the responsible person as an individual, not a group or generic title, to avoid auditor concerns
+  about accountability.

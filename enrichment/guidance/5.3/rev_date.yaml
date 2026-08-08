@@ -1,0 +1,15 @@
+must_id: item:5.3:rev_date
+control_ref: '5.3'
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of the ISMS Roles Program in a dated log entry maintained by the
+  program owner.
+- Cross-reference the documented review date against the planned review interval stated in your ISMS schedule.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Attach evidence of the review, such as meeting minutes or a signed review summary, to the ISMS Roles
+  Program file.

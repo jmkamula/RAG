@@ -1,0 +1,19 @@
+must_id: item:A.5.20:rev_regulatory
+control_ref: A.5.20
+standard_id: ISO27001:2022
+must_text: Regulatory changes considered (data protection, sector-specific obligations)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to monitor relevant regulatory updates affecting supplier agreements, recording
+  their name and the date responsibility was accepted.
+- Document each regulatory change identified, including the source, date, and a summary of its impact
+  on supplier agreements.
+- Update the supplier agreement template to reflect new or amended regulatory requirements, noting the
+  specific clauses changed and the date of revision.
+- Record the review meeting where regulatory changes were discussed, listing attendees, date, and decisions
+  made regarding template updates.
+- Name the person who approved the revised template, ensuring the approval is signed and dated—do not
+  leave this section blank or unsigned.

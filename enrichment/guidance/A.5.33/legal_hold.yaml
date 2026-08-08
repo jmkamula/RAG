@@ -1,0 +1,18 @@
+must_id: item:A.5.33:legal_hold
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Legal-hold provisions overriding normal retention (litigation hold, regulatory investigation
+  hold, who can invoke, how it's released)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy that legal-hold provisions override normal retention schedules when litigation or
+  regulatory investigations are anticipated or ongoing.
+- Name the specific individual or role authorized to invoke and release a legal hold, avoiding vague terms
+  like "the team" or "management".
+- Document the process for notifying affected staff when a legal hold is enacted, including how and when
+  they are informed.
+- Record the date, reason, and authority for each legal hold invocation and release in a dedicated legal-hold
+  register.

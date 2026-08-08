@@ -1,0 +1,19 @@
+must_id: item:9.1:retained
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Documented information retained as evidence of monitoring and measurement results
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record monitoring and measurement results in a dated log or report, clearly identifying what was measured
+  and when.
+- Name the person responsible for collecting and recording each set of results, using full names rather
+  than job titles or teams.
+- Retain copies of all monitoring and measurement records in a controlled location, such as a designated
+  folder or document management system.
+- Cross-reference each result to the relevant procedure or control being measured, so the link to the
+  ISMS is clear.
+- Avoid summarizing results verbally or in informal notes; keep formal, written evidence for each monitoring
+  activity.

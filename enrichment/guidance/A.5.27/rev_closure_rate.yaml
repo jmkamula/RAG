@@ -1,0 +1,18 @@
+must_id: item:A.5.27:rev_closure_rate
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Action-closure rate analysed (open / aged / closed) against targets
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the number of open, aged, and closed actions from lessons-learned reviews in a dated tracking
+  log or spreadsheet.
+- State the closure rate calculation method and the target rate in a documented procedure or meeting minutes.
+- Analyse and document the actual closure rate against the target in a periodic review report, signed
+  and dated by the responsible reviewer.
+- Name the reviewer as a specific individual in the report—avoid using only a team or department as the
+  responsible party.
+- Retain evidence of follow-up actions for any missed targets, such as emails or meeting notes assigning
+  responsibility and deadlines.

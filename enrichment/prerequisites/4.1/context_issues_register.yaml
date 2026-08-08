@@ -1,0 +1,32 @@
+leaf_id: req:4.1:context_issues_register
+control_ref: '4.1'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: Understanding the boundaries and applicability of the ISMS is essential before identifying
+    which internal and external issues are relevant. The scope statement ensures the issues register is
+    focused and meaningful.
+  good_enough: A draft or approved ISMS scope statement that clearly defines what parts of the organization
+    and which processes are covered by the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The policy sets the direction and priorities for information security, helping to determine
+    which issues are relevant to the ISMS's intended outcomes.
+  good_enough: A current, management-approved information security policy that outlines the organization's
+    information security objectives and commitments.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles and responsibilities ensures that ownership of identified issues
+    can be assigned and managed within the register.
+  good_enough: A documented list or matrix showing who is responsible for ISMS-related activities, including
+    issue ownership.

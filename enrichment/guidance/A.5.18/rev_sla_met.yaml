@@ -1,0 +1,21 @@
+must_id: item:A.5.18:rev_sla_met
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: SLA-met flag per record (yes / no_with_reason) — gap between effective and actual revocation
+  timestamp must be within the procedure's stated SLA, or exception logged; auditor-critical proof of
+  'within 24h of role change' timeliness
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the effective date and time of each user's role change or termination in the access revocation
+  log.
+- Document the actual date and time when access was revoked for each user, referencing system logs or
+  access management tools.
+- State the SLA for access revocation, such as "within 24 hours of role change," in your documented procedure
+  and reference it in each record.
+- Assign a clear SLA-met flag for each revocation record as "yes" or "no_with_reason," including a justification
+  if not met.
+- Name the responsible individual for each access revocation action—avoid using group names or generic
+  titles like "IT team."

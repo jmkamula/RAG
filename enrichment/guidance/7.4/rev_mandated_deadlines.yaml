@@ -1,0 +1,17 @@
+must_id: item:7.4:rev_mandated_deadlines
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: Mandated deadlines check — every regulator-mandated comm met its SLA
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all regulator-mandated communications with their required deadlines in a dated register reviewed
+  by the compliance manager.
+- Cross-reference each communication in the register with evidence of actual send dates, such as email
+  logs or submission receipts.
+- Confirm that every communication met its deadline by marking compliance status and date in the register.
+- Highlight any missed deadlines with documented explanations and corrective actions, ensuring no entries
+  are left blank or marked "N/A".
+- Name the responsible individual for deadline monitoring as a specific person, not a team or department.

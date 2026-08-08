@@ -1,0 +1,15 @@
+must_id: item:Art.6:owner
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Named owner of the register (typically DPO or Privacy Lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual, such as the Data Protection Officer or Privacy Lead, as the owner of the
+  Lawful Basis Register.
+- Record the owner's full name and job title in the register, along with the date they assumed responsibility.
+- Avoid listing a team, department, or generic role as the owner; use a named person only.
+- Document the process for updating the owner's details if responsibilities change, including who is authorized
+  to make updates.

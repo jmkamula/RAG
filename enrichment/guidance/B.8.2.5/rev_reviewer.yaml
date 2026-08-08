@@ -1,0 +1,16 @@
+must_id: item:B.8.2.5:rev_reviewer
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: Reviewer identity (Trust + Compliance + Sales Ops)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer for the Customer Support Program as a specific individual from Trust, Compliance,
+  and Sales Ops, not just by team name.
+- Record the date each reviewer completed their assessment in the program review document.
+- Document each reviewer’s comments or approval decision directly in the review record, with their full
+  name and role.
+- Retain copies of all completed review forms or meeting minutes that show participation from all three
+  required functions.

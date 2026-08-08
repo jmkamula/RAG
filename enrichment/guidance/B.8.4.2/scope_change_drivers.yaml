@@ -1,0 +1,17 @@
+must_id: item:B.8.4.2:scope_change_drivers
+control_ref: B.8.4.2
+standard_id: ISO27701:2019
+must_text: Trigger list (new customer tier / new offboarding flow)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current customer tiers and offboarding flows in a dated document reviewed at least annually.
+- Record each time a new customer tier or offboarding flow is introduced, including the date and the person
+  responsible for the change.
+- Update the end-of-service scope document immediately when a trigger event occurs, and save the updated
+  version with a new date.
+- Name the owner as a specific individual responsible for maintaining the trigger list—do not use a team
+  or department name.
+- Cross-reference the trigger list in your end-of-service policy to show how changes are tracked and incorporated.

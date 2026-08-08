@@ -1,0 +1,18 @@
+must_id: item:A.5.6:rev_ad_hoc_triggers
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Ad-hoc review triggers listed (key representative departure, new threat class, budget cycle)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all ad-hoc review triggers in the SIG Engagement Review procedure, including key representative
+  departure, new threat class, and budget cycle.
+- Document the date each trigger was last reviewed and updated in the procedure to show ongoing relevance.
+- Name a specific individual responsible for monitoring and initiating ad-hoc reviews, not a generic team
+  or department.
+- Attach evidence of the most recent ad-hoc review, including the trigger event and meeting notes, to
+  the review log.
+- Cross-reference the procedure with incident or change logs to confirm that all relevant triggers have
+  been captured and acted upon.

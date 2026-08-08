@@ -1,0 +1,19 @@
+must_id: item:A.8.18:reg_last_use
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Per-row last-use timestamp (drives 'still needed' review)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time each privileged utility program is last used in a dedicated column of
+  the register.
+- Assign responsibility to a named individual for updating the last-use timestamp after each use or access
+  event.
+- Cross-reference each entry with system logs or access records to confirm the accuracy of the last-use
+  timestamp.
+- Name the owner of each program as a specific person, not a team or generic department, to avoid ambiguity
+  in accountability.
+- Review the register monthly and document any programs not used within the defined review period for
+  further investigation.

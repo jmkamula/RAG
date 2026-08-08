@@ -1,0 +1,17 @@
+must_id: item:A.8.31:scope_exclusions
+control_ref: A.8.31
+standard_id: ISO27001:2022
+must_text: Exclusion rationale (e.g. SaaS-only platforms with vendor-managed environments)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State which environments are in scope and which are excluded, listing each by name and function in a
+  dated document.
+- Document the rationale for excluding each environment, referencing whether it is vendor-managed or otherwise
+  outside your control.
+- Name the individual responsible for approving environment exclusions, avoiding generic titles like "IT"
+  or "the team".
+- Retain supporting evidence, such as vendor contracts or service descriptions, that demonstrate why excluded
+  environments are not managed by your organisation.

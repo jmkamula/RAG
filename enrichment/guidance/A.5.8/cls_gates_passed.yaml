@@ -1,0 +1,18 @@
+must_id: item:A.5.8:cls_gates_passed
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: Gates-passed summary per record (which gates closed and when; gaps explicitly noted with risk
+  acceptance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each security gate relevant to the project and record the actual closure date for each in the Security
+  Closure Record.
+- Document any security gates not closed at project end, clearly stating the reason and referencing an
+  approved risk acceptance or mitigation plan.
+- Name the individual who reviewed and signed off on the closure record, including their role and the
+  date of sign-off.
+- Avoid using generic statements like "all gates closed" without specifying which gates and their closure
+  dates.

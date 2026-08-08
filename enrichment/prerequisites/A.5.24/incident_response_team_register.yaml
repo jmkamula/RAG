@@ -1,0 +1,43 @@
+leaf_id: req:A.5.24:incident_response_team_register
+control_ref: A.5.24
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The incident response team must be defined in relation to the scope of the ISMS. If the scope
+    is unclear, you cannot determine which parts of the organization require incident response coverage
+    or who should be included in the register.
+  good_enough: The ISMS scope statement should clearly identify the organizational boundaries and functions
+    covered by the ISMS, so you know which teams and roles to include in the register.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: You need an up-to-date record of who is responsible for information security and incident
+    response before you can build a meaningful incident response team register. Without this, you risk
+    omitting key responders or assigning duties to the wrong people.
+  good_enough: There should be a documented list of security roles and responsibilities, including those
+    related to incident response, even if not fully detailed for every team member.
+- ref: A.5.3
+  standard_id: ISO27001:2022
+  title: Segregation of Duties
+  category: direct
+  rationale: The register must reflect any segregation of duties requirements to prevent conflicts of
+    interest or single points of failure during incident response. This ensures the team structure is
+    robust and compliant.
+  good_enough: Documented evidence that critical incident response duties are not concentrated in one
+    person or role, and that backup arrangements are identified.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Understanding the classification of information assets helps determine the required expertise
+    and clearance levels for incident responders. The register should align team capabilities with the
+    sensitivity of assets they may handle.
+  good_enough: A basic classification scheme exists and is referenced, so you can match incident response
+    team members to the types of incidents and data they may encounter.

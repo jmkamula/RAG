@@ -1,0 +1,40 @@
+leaf_id: req:A.7.7:clear_desk_clear_screen_policy
+control_ref: A.7.7
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The clear desk and clear screen policy must align with the defined ISMS scope to ensure it
+    covers all relevant locations, assets, and personnel. Without a clear scope, the policy may miss critical
+    areas or overreach.
+  good_enough: A documented scope that identifies the physical and logical boundaries of the ISMS, including
+    key office sites and information processing areas.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You need to know what physical and digital assets (e.g., papers, removable media, workstations)
+    exist and where they are located to define effective clear desk and clear screen rules.
+  good_enough: A basic, up-to-date list of key information assets and their locations, especially those
+    that could be left unattended or exposed.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: The policy must reflect how information is classified, since higher sensitivity data may
+    require stricter clear desk/screen controls. Without a scheme, you can't set appropriate rules.
+  good_enough: A simple classification scheme that distinguishes at least between public, internal, and
+    confidential information, with examples.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The clear desk and clear screen policy should be consistent with the overall information
+    security policy, which sets the tone and expectations for security behaviors.
+  good_enough: A published, approved information security policy that outlines general security principles
+    and user responsibilities.

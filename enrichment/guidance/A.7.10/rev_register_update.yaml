@@ -1,0 +1,17 @@
+must_id: item:A.7.10:rev_register_update
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Changes propagated to the register / procedure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and outcome of each periodic storage media program review in a formal review log,
+  including any identified changes.
+- Update the storage media register and associated procedures to reflect all approved changes, citing
+  the review date and decision-maker.
+- Name the individual responsible for implementing and verifying changes in the register or procedure,
+  avoiding generic titles like "IT team."
+- Retain evidence of communication notifying relevant staff of updated procedures, such as an email or
+  meeting minutes with recipients and date.

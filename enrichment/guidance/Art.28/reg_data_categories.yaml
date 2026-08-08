@@ -1,0 +1,17 @@
+must_id: item:Art.28:reg_data_categories
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Per-row data categories processed (cross-link to Art.30 RoPA)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processor in the DPA Register with a separate row, ensuring no processor is omitted or combined.
+- Record the specific data categories processed by each processor in their respective row, avoiding generic
+  terms like "personal data."
+- Cross-reference each data category entry to the corresponding section in your Article 30 Record of Processing
+  Activities (RoPA) by including a clear link or identifier.
+- Name the data category owner as a specific individual responsible for accuracy, not as a team or department.
+- Review the DPA Register for missing or outdated cross-links to the RoPA, updating any that do not match
+  current processing activities.

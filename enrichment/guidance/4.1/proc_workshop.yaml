@@ -1,0 +1,17 @@
+must_id: item:4.1:proc_workshop
+control_ref: '4.1'
+standard_id: ISO27001:2022
+must_text: Workshop / interview process documented (if used)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the step-by-step process used in workshops or interviews for identifying issues, including
+  who participates and what outputs are expected.
+- Record the date each workshop or interview was conducted and list the facilitator by name.
+- Attach sample agendas or question lists used during the sessions to show consistency across events.
+- Name the process owner as a specific individual responsible for maintaining and updating the documented
+  procedure — not a team or department.
+- Retain signed or acknowledged records from participants confirming their involvement in the documented
+  process.

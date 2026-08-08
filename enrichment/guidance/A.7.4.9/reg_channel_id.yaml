@@ -1,0 +1,17 @@
+must_id: item:A.7.4.9:reg_channel_id
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Unique channel identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each PII transmission channel entry in the inventory, using a sequential
+  number or code that does not repeat.
+- Record the assigned unique identifier directly in its own column for every row in the inventory spreadsheet
+  or database.
+- Cross-reference the unique identifier in related documentation, such as risk assessments or incident
+  logs, to maintain traceability.
+- Avoid using generic or duplicate identifiers such as "N/A", "TBD", or leaving the field blank, as auditors
+  will flag these as non-compliant.

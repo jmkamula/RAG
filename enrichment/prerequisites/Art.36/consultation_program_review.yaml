@@ -1,0 +1,40 @@
+leaf_id: req:Art.36:consultation_program_review
+control_ref: Art.36
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a current, accurate RoPA to identify which processing activities may require a DPIA
+    and, in turn, which DPIAs might trigger prior consultation. Without this, you can't reliably scope
+    or review prior consultations.
+  good_enough: A maintained RoPA that covers all relevant processing activities, even if some entries
+    are pending minor updates.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity is essential to assess risk and necessity,
+    both key factors in DPIA outcomes and whether prior consultation is required.
+  good_enough: Each processing activity in the RoPA has a documented lawful basis, even if some justifications
+    are still under legal review.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated DPO is required to advise on DPIAs and prior consultations. Without a DPO, the
+    review process for prior consultations cannot be properly validated or documented.
+  good_enough: A named DPO (internal or external) is in place and contactable, even if onboarding or training
+    is ongoing.
+- ref: Art.35
+  standard_id: GDPR:2016/679
+  title: Data Protection Impact Assessment (DPIA)
+  category: direct
+  rationale: You must have completed DPIAs to identify any that result in residual high risk, which is
+    the trigger for prior consultation under Art.36.
+  good_enough: DPIAs are performed for all high-risk processing activities, with clear documentation of
+    risk outcomes and any escalations.

@@ -1,0 +1,15 @@
+must_id: item:7.4:rev_date
+control_ref: '7.4'
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent review date of your communication program in a dated document or register entry.
+- State the planned review interval for the communication program in a documented schedule or policy.
+- Confirm the actual review date falls within the planned interval by cross-referencing the review schedule
+  and the recorded review date.
+- Name the reviewer as a specific individual in the review record, avoiding generic titles like "the team"
+  or "management."

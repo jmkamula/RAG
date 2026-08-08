@@ -1,0 +1,16 @@
+must_id: item:9.1:rev_flow_check
+control_ref: '9.1'
+standard_id: ISO27001:2022
+must_text: Flow check — every metric in the procedure's catalog has values flowing into the record
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each metric listed in the monitoring procedure catalog with corresponding data entries
+  in the monitoring records for the review period.
+- Record the date and name of the person who performed the flow check for traceability.
+- Document any metrics from the catalog that lack corresponding values in the records, along with explanations
+  or corrective actions taken.
+- Name the monitoring program owner as a specific individual, not a generic team or department, in the
+  review documentation.

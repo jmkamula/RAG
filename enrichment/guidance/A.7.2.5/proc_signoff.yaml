@@ -1,0 +1,18 @@
+must_id: item:A.7.2.5:proc_signoff
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: Signoff — DPO signoff + business-owner signoff before processing commences
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named Data Protection Officer (DPO) and a named business owner to each Privacy Impact Assessment,
+  recording their full names and roles.
+- Document the date and outcome of the DPO’s review and signoff on the final Privacy Impact Assessment
+  report.
+- Record the business owner’s explicit signoff, including their signature and date, before any processing
+  activities begin.
+- Retain copies of all signed Privacy Impact Assessment reports in a central, access-controlled repository.
+- Name both signatories as specific individuals—do not accept generic titles like "the team" or "management"
+  as evidence of approval.

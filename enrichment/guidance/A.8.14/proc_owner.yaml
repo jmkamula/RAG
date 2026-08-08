@@ -1,0 +1,15 @@
+must_id: item:A.8.14:proc_owner
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Named procedure owner (Site Reliability lead with Infrastructure partner)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Site Reliability lead and the Infrastructure partner as the specific owners at the top of the
+  failover procedure document.
+- Record the date when the ownership assignment was last reviewed or updated in the document’s version
+  history.
+- Avoid listing a team or department as the owner; use named individuals to ensure clear accountability.
+- Sign the procedure document by both named owners to confirm their acceptance of responsibility.

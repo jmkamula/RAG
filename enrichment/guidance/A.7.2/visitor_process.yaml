@@ -1,0 +1,19 @@
+must_id: item:A.7.2:visitor_process
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Visitor handling (escort requirement, sign-in log, temporary badge, host accountability)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the procedure for issuing temporary visitor badges, including the steps for badge return and
+  deactivation, in a dated procedure file.
+- Record each visitor’s name, company, purpose of visit, entry and exit times, and host in a physical
+  or electronic sign-in log.
+- Assign a specific staff member as the host responsible for escorting each visitor, and list their name
+  in the sign-in log.
+- State in the procedure that visitors must never be left unescorted in secure areas, and include this
+  requirement in staff training materials.
+- Name the person responsible for reviewing visitor logs monthly, avoiding generic titles like "security
+  team" or "reception."

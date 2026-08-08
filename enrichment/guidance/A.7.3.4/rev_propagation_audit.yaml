@@ -1,0 +1,20 @@
+must_id: item:A.7.3.4:rev_propagation_audit
+control_ref: A.7.3.4
+standard_id: ISO27701:2019
+must_text: Propagation audit — sampled withdrawals verified to have stopped downstream processing + notified
+  third parties
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each sampled withdrawal request with a unique identifier, date of receipt, and the specific
+  data elements to be withdrawn.
+- Record evidence showing downstream processing systems have ceased handling the withdrawn data, such
+  as system logs or screenshots with timestamps.
+- Retain copies of notifications sent to each relevant third party, including recipient names, dates sent,
+  and confirmation of receipt.
+- Name the individual responsible for verifying withdrawal completion for each case, avoiding generic
+  titles like "IT" or "the team."
+- Cross-reference each withdrawal case with follow-up checks or audit trails confirming no further downstream
+  processing occurred after the withdrawal date.

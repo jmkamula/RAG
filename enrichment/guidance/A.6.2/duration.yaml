@@ -1,0 +1,18 @@
+must_id: item:A.6.2:duration
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Duration of obligations stated (during employment AND surviving obligations cross-link to A.6.5
+  post-employment)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the employment contract that information security obligations apply both during employment
+  and after employment ends.
+- Cross-reference the contract’s post-employment confidentiality clause to the organisation’s A.6.5 policy
+  or procedure by name and version.
+- Name the person responsible for updating the contract template as a specific individual, not a team
+  or department.
+- Record the date the contract template was last reviewed and updated to include both during and post-employment
+  obligations.

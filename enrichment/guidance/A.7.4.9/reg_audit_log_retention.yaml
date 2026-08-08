@@ -1,0 +1,16 @@
+must_id: item:A.7.4.9:reg_audit_log_retention
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Audit log retention per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each PII transmission channel in your inventory, assigning a unique identifier and a named owner
+  for every entry.
+- Record the specific retention period for audit logs associated with each transmission channel, including
+  start and end dates.
+- Reference the policy or legal requirement that determines the retention period for each audit log entry.
+- Name the owner as a specific individual for each row—do not use group names, roles, or departments.
+- Document the date when the retention period was last reviewed or updated for each transmission channel.

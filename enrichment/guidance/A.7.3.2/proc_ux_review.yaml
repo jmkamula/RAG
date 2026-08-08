@@ -1,0 +1,17 @@
+must_id: item:A.7.3.2:proc_ux_review
+control_ref: A.7.3.2
+standard_id: ISO27701:2019
+must_text: UX / accessibility review before deploy (icons, plain language, layered notice)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual with UX or accessibility expertise to review the privacy notice content before
+  deployment.
+- Document the date and outcome of the UX/accessibility review, including specific feedback on icons,
+  plain language, and layered notice structure.
+- Attach evidence of changes made to the privacy notice in response to the review, such as marked-up drafts
+  or tracked revisions.
+- Name the reviewer as a specific person—do not list a generic role or team as responsible for the review.
+- Retain a copy of the final reviewed privacy notice and the reviewer's sign-off before public release.

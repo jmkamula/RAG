@@ -1,0 +1,19 @@
+must_id: item:A.6.1:scope_sectoral_drivers
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Sectoral drivers stated (PCI for payment-card roles, HIPAA for healthcare, financial-services
+  PEP/sanctions, government clearance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all roles with access to sensitive data, specifying the sectoral regulations that apply to each
+  role, such as PCI, HIPAA, or financial sanctions.
+- Document the legal and regulatory requirements for each role in a table, including the relevant law
+  or standard and the check-depth required.
+- Name the owner responsible for maintaining this mapping as a specific individual, not a group or department.
+- Attach dated evidence showing when the sectoral requirements were last reviewed and updated for each
+  role.
+- Cross-reference each role’s regulatory obligations to supporting policies or procedures, ensuring the
+  links are current and not generic boilerplate.

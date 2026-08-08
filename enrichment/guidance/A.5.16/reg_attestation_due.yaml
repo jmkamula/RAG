@@ -1,0 +1,15 @@
+must_id: item:A.5.16:reg_attestation_due
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Next attestation date per row (drives the periodic recertification cycle)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a specific next attestation date for each identity listed in the register, using a consistent
+  date format.
+- Assign responsibility for each attestation date to a named individual, not a group or department.
+- Update the register immediately after each attestation, reflecting the new next attestation date and
+  the person who completed the review.
+- Retain a change log showing who set or modified each attestation date, including timestamps.

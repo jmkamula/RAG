@@ -1,0 +1,15 @@
+must_id: item:A.6.6:reg_signature_method
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Per-row signature method (wet / e-signature platform reference — ensures non-repudiation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the signature method for each NDA entry, specifying either "wet signature" or the exact e-signature
+  platform used.
+- Document the date and time each NDA was signed, matching the signature method to the corresponding record.
+- Name the signatory for each NDA row as a specific individual, not a generic role or group.
+- Attach or cross-reference the original signed NDA file or e-signature audit trail for each entry in
+  the register.

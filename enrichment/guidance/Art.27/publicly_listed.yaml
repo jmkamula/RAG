@@ -1,0 +1,17 @@
+must_id: item:Art.27:publicly_listed
+control_ref: Art.27
+standard_id: GDPR:2016/679
+must_text: Representative contact published in privacy notice (Art.13.1.a / Art.14.1.a integration)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the designated GDPR representative as a specific individual or company, not a generic role or department,
+  in your privacy notice.
+- State the representative’s full contact details, including postal address, email, and telephone number,
+  directly within the published privacy notice.
+- Confirm the privacy notice is publicly accessible on your website and includes the representative’s
+  contact information in the section describing data protection contacts.
+- Record the date the privacy notice was last updated to include or amend the representative’s contact
+  details.

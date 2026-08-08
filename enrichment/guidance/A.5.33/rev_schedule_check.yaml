@@ -1,0 +1,20 @@
+must_id: item:A.5.33:rev_schedule_check
+control_ref: A.5.33
+standard_id: ISO27001:2022
+must_text: Per-class outcome (verified / amended / retired / new added) with retention-still-adequate
+  and protection-class-still-adequate confirmation
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for the records protection program review as a specific individual, not
+  a team or department.
+- Document the outcome for each records class as verified, amended, retired, or new added in a dated review
+  log.
+- State for each records class whether the retention period remains adequate, referencing the latest legal
+  or business requirements.
+- Confirm for each records class that the assigned protection level is still appropriate, citing any changes
+  in risk or sensitivity.
+- Sign and date the final review summary, listing all reviewed classes and outcomes, to provide a clear
+  audit trail.

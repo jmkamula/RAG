@@ -1,0 +1,17 @@
+must_id: item:A.5.16:reg_status
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Status per row (active / suspended / disabled / pending_termination) updated as lifecycle events
+  fire
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each identity's current status as a separate column in the register, using clear values like
+  "active", "suspended", "disabled", or "pending_termination".
+- Update the status field immediately when a lifecycle event occurs, and log the date and person making
+  the change in the same row.
+- Name the owner of the register as a specific individual, not a team or department, in a dedicated column.
+- Retain a history of status changes for each identity, including previous status, change date, and reason,
+  as a separate audit log or tab.

@@ -1,0 +1,14 @@
+must_id: item:A.7.4.7:rev_reviewer
+control_ref: A.7.4.7
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Legal + Records Management)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- Name the reviewer for each retention program review as a specific individual from Data Protection, Legal,
+  and Records Management.
+- Record the date each reviewer completed their assessment on the retention program review document.
+- Document each reviewer’s comments or approval in a signed or authenticated section of the review record.
+- Avoid listing groups or roles as reviewers; specify named individuals to meet accountability requirements.

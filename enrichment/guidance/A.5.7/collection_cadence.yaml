@@ -1,0 +1,17 @@
+must_id: item:A.5.7:collection_cadence
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Collection cadence stated per source (continuous, daily, weekly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the collection frequency for each threat intelligence source in the procedure, specifying if it
+  is continuous, daily, weekly, or another defined interval.
+- Name the person or role responsible for reviewing and updating each source’s collection cadence, listing
+  them clearly in the procedure.
+- Record the date when the collection cadence for each source was last reviewed or changed, maintaining
+  a version history in the procedure document.
+- Avoid listing collection cadence as “regular” or “as needed”—use only specific, measurable intervals
+  an auditor can verify.

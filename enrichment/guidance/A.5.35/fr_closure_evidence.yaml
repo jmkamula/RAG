@@ -1,0 +1,18 @@
+must_id: item:A.5.35:fr_closure_evidence
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Closure evidence reference per closed finding (link to the artefact that proves the finding
+  was addressed — control change, policy update, training delivered)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique closure evidence reference for each closed finding in the register, linking directly
+  to the artefact that demonstrates the finding was addressed.
+- Cross-reference the closure evidence to a dated document, such as a revised policy, completed training
+  record, or implemented control change.
+- Name the person who verified the closure evidence, ensuring the individual is identified by full name,
+  not just a role or team.
+- Attach or link the actual closure artefact in the register entry, rather than describing it only in
+  text or relying on verbal confirmation.

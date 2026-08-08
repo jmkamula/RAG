@@ -1,0 +1,39 @@
+leaf_id: req:A.5.4:management_approval
+control_ref: A.5.4
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: Top management cannot meaningfully approve the InfoSec Directive without clarity on the ISMS
+    scope—what parts of the organization and which assets, processes, and risks are covered.
+  good_enough: A documented scope statement exists, is approved at least at a draft level, and clearly
+    defines the ISMS boundaries.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Information security roles and responsibilities
+  category: direct
+  rationale: Roles and responsibilities must be defined before management can approve and commit to enforcing
+    the InfoSec Directive, as their approval signals accountability for those roles.
+  good_enough: A draft or final roles & responsibilities matrix or document exists, identifying key InfoSec
+    roles and their main responsibilities.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: direct
+  rationale: The InfoSec Directive typically references or incorporates the Information Security Policy,
+    so management needs a draft policy to review and approve.
+  good_enough: A draft Information Security Policy is available, even if not yet formally approved, so
+    management can review its contents as part of the directive approval.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: foundational
+  rationale: Management approval should be informed by an understanding of the key risks facing the organization,
+    which are identified in the risk assessment.
+  good_enough: A preliminary risk assessment has been performed, identifying major risks and their potential
+    impact, even if the assessment is not yet finalized.

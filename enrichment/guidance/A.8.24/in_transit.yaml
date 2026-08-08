@@ -1,0 +1,18 @@
+must_id: item:A.8.24:in_transit
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Encryption requirements for data in transit per classification tier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the encryption methods required for each data classification tier in the policy, referencing specific
+  protocols or algorithms by name.
+- Document the minimum acceptable encryption strength for data in transit for each classification tier,
+  including key length and protocol version.
+- Assign a named individual as the policy owner, not a team or department, and include their contact details
+  in the policy document.
+- Record the date of the latest policy approval and the approver’s name or signature on the policy document.
+- Cross-reference the policy with your organisation’s data classification register to show alignment between
+  classification tiers and encryption requirements.

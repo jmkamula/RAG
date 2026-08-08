@@ -1,0 +1,18 @@
+must_id: item:A.5.17:identity_link
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Cross-reference to A.5.16 identity lifecycle (credential issuance follows identity creation;
+  credential revocation follows identity termination; pairing enforced not optional)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the Authentication Information Management Procedure to the Identity Lifecycle Procedure
+  by name and document location, explicitly linking credential issuance and revocation steps.
+- State in the procedure that credentials are only issued after identity creation and are revoked immediately
+  upon identity termination, with process steps mapped to A.5.16.
+- Name the owner of the procedure as a specific individual, not a generic role or team, to avoid ambiguity
+  in responsibility.
+- Record the date of the latest review and approval of both procedures, showing alignment and current
+  cross-referencing.

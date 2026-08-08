@@ -1,0 +1,19 @@
+must_id: item:6.1.3:soa_inclusion_status
+control_ref: 6.1.3
+standard_id: ISO27001:2022
+must_text: Inclusion status per control (Applicable / Not Applicable)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each ISO 27001:2022 control in your Statement of Applicability, showing its unique identifier and
+  title.
+- State for every control whether it is "Applicable" or "Not Applicable" to your organisation’s information
+  security management system.
+- Document a clear justification for each control marked "Not Applicable," referencing specific organisational
+  context or risk assessment outcomes.
+- Name the person who determined the inclusion status for each control, avoiding generic roles like "the
+  team" or "IT department."
+- Date the latest review or approval of the Statement of Applicability to show when inclusion statuses
+  were last confirmed.

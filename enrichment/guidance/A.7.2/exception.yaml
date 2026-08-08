@@ -1,0 +1,19 @@
+must_id: item:A.7.2:exception
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Exception handling process for one-off access needs
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a step-by-step process for requesting and approving one-off physical access, including required
+  information and responsible roles, in the procedure.
+- Assign a named individual to review and approve each exception request, recording their name and decision
+  date in an access log.
+- Record each granted exception in a dedicated log, including requester, purpose, access area, approval
+  details, and expiration date.
+- Retain evidence of exception closure, such as a signed or dated confirmation that access was revoked
+  or expired as planned.
+- Name the exception approver as a specific person, not a generic role or department, to avoid auditor
+  concerns about accountability.

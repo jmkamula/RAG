@@ -1,0 +1,17 @@
+must_id: item:A.5.6:rev_date
+control_ref: A.5.6
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent SIG engagement review date in a central log, including the name of the reviewer
+  and the review outcome.
+- State the planned review interval in months or years in your SIG engagement procedure or schedule.
+- Confirm the next scheduled review date is within the documented interval by cross-referencing the last
+  review date and the interval.
+- Name the reviewer as a specific individual, not a group or department, in the review documentation.
+- Retain a signed or approved record of each completed review, showing the date and confirming the review
+  took place as planned.

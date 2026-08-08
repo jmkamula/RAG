@@ -1,0 +1,14 @@
+must_id: item:Art.15:reg_response_date
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Date the response was issued
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date you issued each response to a data subject access request in your DSAR register.
+- Name the staff member responsible for sending the response alongside the date entry in the register.
+- Retain a copy of the actual response sent, clearly showing the issue date, in your records.
+- Avoid leaving the date field blank or using vague terms like "this week"—enter a specific calendar date
+  for each response.

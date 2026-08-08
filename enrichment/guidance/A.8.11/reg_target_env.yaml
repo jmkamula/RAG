@@ -1,0 +1,19 @@
+must_id: item:A.8.11:reg_target_env
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Per-row target non-production environment
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each dataset that is masked per row before being moved to non-production environments, including
+  dataset name and location, in a dated register.
+- Record the masking method used for each dataset, specifying the technique and tool, in the same register
+  entry.
+- Name the individual responsible for approving dataset masking for each entry, using a full name rather
+  than a team or department.
+- Attach evidence of the most recent masking activity, such as a log file or screenshot, to the corresponding
+  register entry.
+- Confirm the register is reviewed and updated after each new dataset is masked or masking method is changed,
+  with the reviewer's name and date.

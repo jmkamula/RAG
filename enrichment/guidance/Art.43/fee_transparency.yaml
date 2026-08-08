@@ -1,0 +1,19 @@
+must_id: item:Art.43:fee_transparency
+control_ref: Art.43
+standard_id: GDPR:2016/679
+must_text: Fee transparency
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Publish a detailed fee schedule for all certification services on your website, including any additional
+  or optional charges, with a clear effective date.
+- Document the process for updating fees, including who approves changes and the date of each revision,
+  in your internal procedures manual.
+- Name the contact person responsible for fee inquiries, listing their full name and direct contact details
+  in the published materials.
+- Retain copies of all previous fee schedules and related communications to clients, with dates, to show
+  historical transparency.
+- Avoid using vague terms like "fees may vary" without explanation—state all conditions that could affect
+  pricing in writing.

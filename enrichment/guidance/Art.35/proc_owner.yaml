@@ -1,0 +1,15 @@
+must_id: item:Art.35:proc_owner
+control_ref: Art.35
+standard_id: GDPR:2016/679
+must_text: Named owner (DPO)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer (DPO) as the specific owner of the Data Protection Impact Assessment
+  Procedure in the document header.
+- Record the DPO’s full name and contact details in the procedure, avoiding generic titles like "the team"
+  or "compliance department".
+- State the date the DPO was assigned ownership within the procedure to provide a clear timeline.
+- Retain a signed acknowledgement from the DPO confirming their acceptance of responsibility for the procedure.

@@ -1,0 +1,18 @@
+must_id: item:A.5.18:rev_timeliness
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Timeliness target stated explicitly per trigger type (24h for termination, 5 days for role-change,
+  immediate for incident-driven)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the required access revocation timeframes for each trigger type—termination, role-change, and
+  incident—in a dated access control policy document.
+- Cross-reference each access revocation record with the specific trigger type and the corresponding timeliness
+  target stated in the policy.
+- Record the actual revocation date and time for each access removal, alongside the trigger event date
+  and type, in an access log.
+- Name the policy owner as a specific individual responsible for maintaining and updating timeliness targets—not
+  a generic team or department.

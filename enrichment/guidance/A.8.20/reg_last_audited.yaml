@@ -1,0 +1,16 @@
+must_id: item:A.8.20:reg_last_audited
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Per-row last-audited timestamp (drives drift detection)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a last-audited date for each network asset entry in the inventory register, showing when the
+  asset was most recently reviewed.
+- Name the person who performed the last audit for each asset, not just a team or department.
+- Update the last-audited timestamp immediately after each asset review or verification, ensuring the
+  register reflects current status.
+- Cross-reference each last-audited entry with supporting evidence, such as audit logs or review checklists,
+  to confirm the review occurred.

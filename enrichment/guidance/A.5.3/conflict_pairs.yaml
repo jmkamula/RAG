@@ -1,0 +1,19 @@
+must_id: item:A.5.3:conflict_pairs
+control_ref: A.5.3
+standard_id: ISO27001:2022
+must_text: Conflicting duty pairs identified (e.g. requestor vs approver, developer vs production deployer,
+  vendor relationship vs payment authorisation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all sensitive business processes and identify roles involved in each, using a dated document reviewed
+  by process owners.
+- Document specific pairs of conflicting duties for each process, such as requestor versus approver, in
+  a maintained segregation of duties matrix.
+- Name the owner of the matrix as a specific individual, not a team or department, and record their acceptance
+  with a dated signature.
+- Cross-reference each conflicting duty pair to relevant policy or procedure documents, ensuring traceability
+  to organisational controls.
+- Record the date of the last review and update of the matrix, showing regular reassessment of conflicts.

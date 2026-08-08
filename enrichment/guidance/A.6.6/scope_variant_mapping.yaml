@@ -1,0 +1,19 @@
+must_id: item:A.6.6:scope_variant_mapping
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Party-to-variant mapping (employees → light employee NDA; contractors → contractor NDA; suppliers
+  → bilateral; M&A → heavy)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all relevant party types involved with your organisation, such as employees, contractors, suppliers,
+  and M&A partners, in a dated document.
+- Map each party type to its specific confidentiality agreement variant, clearly referencing the actual
+  agreement template or document name.
+- Name the individual responsible for maintaining and updating the party-to-variant mapping, avoiding
+  generic titles like "HR" or "Legal team."
+- Attach or link the current versions of each agreement variant to the mapping record for direct cross-reference.
+- Record the date when the mapping was last reviewed and updated, and retain evidence of the reviewer's
+  name.

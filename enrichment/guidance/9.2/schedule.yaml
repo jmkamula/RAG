@@ -1,0 +1,14 @@
+must_id: item:9.2:schedule
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Audit schedule for current period
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a calendar-based audit schedule that lists all planned audits for the current period, including
+  dates and the areas or processes to be audited.
+- Name a specific individual as the audit schedule owner, avoiding generic titles like "the team" or "management".
+- Record the date the audit schedule was last reviewed or updated to demonstrate it is current and relevant.
+- Assign auditors to each scheduled audit and list them by name on the schedule.

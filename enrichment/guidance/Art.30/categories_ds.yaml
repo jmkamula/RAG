@@ -1,0 +1,15 @@
+must_id: item:Art.30:categories_ds
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Categories of data subjects per activity
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity in your RoPA, assigning a unique identifier or reference for traceability.
+- Specify the categories of data subjects for every activity, using clear terms like "customers," "employees,"
+  or "website visitors."
+- Name the owner responsible for maintaining each activity's data subject categories as a specific individual,
+  not a team or department.
+- Record the date when each data subject category entry was last reviewed or updated in the RoPA.

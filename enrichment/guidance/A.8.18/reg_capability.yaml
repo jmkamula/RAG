@@ -1,0 +1,18 @@
+must_id: item:A.8.18:reg_capability
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Per-row capability description (what controls it can override)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each privileged utility program in the register, using its exact name and version as deployed in
+  your environment.
+- Describe for each entry what controls or restrictions the utility can override, using clear, specific
+  examples relevant to your systems.
+- Name the person responsible for reviewing and updating each program’s entry, avoiding generic labels
+  like "IT" or "the team."
+- Record the date each capability description was last reviewed or updated in the register.
+- Cross-reference each utility program entry with supporting documentation or technical manuals that explain
+  its override capabilities.

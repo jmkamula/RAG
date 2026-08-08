@@ -1,0 +1,17 @@
+must_id: item:A.6.8:reg_closure_date
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Per-row closure date (every report reaches a closed state, no open-forever)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each event report is formally closed in a dedicated "Closure Date" column within the
+  Event Report Register.
+- Confirm that every entry in the register has a populated closure date, showing no event remains open
+  indefinitely.
+- Assign responsibility for closing each event to a named individual, not a group or department, in the
+  register.
+- Review the register monthly to identify and update any reports missing a closure date, documenting actions
+  taken to close them.

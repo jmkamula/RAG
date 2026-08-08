@@ -1,0 +1,18 @@
+must_id: item:A.5.7:rev_products_delivered
+control_ref: A.5.7
+standard_id: ISO27001:2022
+must_text: Products delivered count and distribution evidenced (proves the program ran, not just the procedure
+  existed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the number of threat intelligence reports or products delivered during the review period in a
+  dated summary document.
+- List the recipients or business units that received each threat intelligence product, showing distribution
+  across the organisation.
+- Attach copies or redacted examples of delivered threat intelligence products to the review record as
+  evidence of actual output.
+- Name the person responsible for compiling and submitting the periodic review, ensuring a specific individual
+  is identified rather than a team or department.

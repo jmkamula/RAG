@@ -1,0 +1,18 @@
+must_id: item:A.5.16:authn_link
+control_ref: A.5.16
+standard_id: ISO27001:2022
+must_text: Cross-reference to A.5.17 authentication-information lifecycle (credential issuance and revocation
+  are paired with identity events)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each step in your identity lifecycle management procedure to the matching step in your
+  authentication-information lifecycle procedure, using section numbers and titles.
+- Document how credential issuance and revocation are triggered by identity events such as onboarding,
+  role changes, or termination, with dated examples.
+- Name the person responsible for maintaining both procedures and updating cross-references, listing their
+  full name and current job title.
+- State explicitly in your procedure that credential management actions must not occur without a corresponding
+  identity event, avoiding generic statements like "as needed."

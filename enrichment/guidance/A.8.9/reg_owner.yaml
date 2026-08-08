@@ -1,0 +1,18 @@
+must_id: item:A.8.9:reg_owner
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Per-baseline named owner (technology lead with InfoSec partner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual as the owner for each configuration baseline, listing both the technology
+  lead and their InfoSec partner by full name.
+- Record the date each owner was assigned responsibility for their respective baseline in the Configuration
+  Baseline Register.
+- Document the contact details of both the technology lead and InfoSec partner next to their names in
+  the register.
+- Avoid using group names, roles, or departments as owners; always list named individuals for clear accountability.
+- Review and update the owner assignments in the register whenever there is a change in personnel, noting
+  the date of each update.

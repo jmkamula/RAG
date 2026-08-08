@@ -1,0 +1,20 @@
+must_id: item:A.5.35:scope
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Scope covers people, processes, and technologies (not just one dimension — auditor-defensible
+  reviews must touch all three)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individuals, processes, and technologies reviewed in a dedicated section of the report, listing
+  each element separately and specifically.
+- Document the review methods used for each dimension—such as interviews for people, walkthroughs for
+  processes, and technical assessments for technologies—with corresponding dates.
+- State the evidence examined for each area, such as training records for people, documented procedures
+  for processes, and configuration logs for technologies.
+- Confirm the reviewer is independent by including their name, role, and relationship to the organisation,
+  avoiding vague terms like "external party" or "consultant".
+- Retain a signed and dated approval page from the reviewer, explicitly referencing the full scope covering
+  people, processes, and technologies.

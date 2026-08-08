@@ -1,0 +1,19 @@
+must_id: item:A.5.4:mandate_statement
+control_ref: A.5.4
+standard_id: ISO27001:2022
+must_text: Statement that personnel are required to apply InfoSec policies, topic-specific policies, and
+  procedures
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Draft a management directive that clearly states all personnel must follow information security policies,
+  topic-specific policies, and related procedures.
+- Name the most senior executive who has formally approved and signed the directive, including their full
+  name and job title.
+- Date the directive to show when it was last approved or updated.
+- Publish the directive in a location accessible to all personnel, such as the company intranet or shared
+  policy repository.
+- Specify that the requirement applies to all employees, contractors, and temporary staff—do not use vague
+  terms like "staff" or "users."

@@ -1,0 +1,16 @@
+must_id: item:9.3:rev_reviewer
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Reviewer identity (ISMS Manager)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the ISMS Manager as the reviewer in the Management Review Program documentation, using their full
+  name and job title.
+- Record the date when the ISMS Manager completed each review in the program review log.
+- Sign the review summary or minutes to confirm the ISMS Manager personally conducted and approved the
+  review.
+- Avoid listing the reviewer as "the team" or "management"—use a specific, identifiable individual for
+  clear accountability.

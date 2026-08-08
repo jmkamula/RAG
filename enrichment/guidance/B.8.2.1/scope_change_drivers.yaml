@@ -1,0 +1,18 @@
+must_id: item:B.8.2.1:scope_change_drivers
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+must_text: Trigger list (new product line / new customer segment)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current customer engagements, including new product lines and customer segments, in a dated
+  scope register reviewed within the last 12 months.
+- Document the trigger events, such as launching a new product line or entering a new customer segment,
+  that require scope review.
+- Assign a named individual responsible for monitoring and updating the scope register when a trigger
+  event occurs.
+- Record the most recent scope review date and the reviewer’s name, ensuring this is not left blank or
+  marked as "N/A".
+- Name the owner as a specific individual, not a team or department, to avoid ambiguity in responsibility.

@@ -1,0 +1,40 @@
+leaf_id: req:A.8.12:dlp_alert_log
+control_ref: A.8.12
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, data, and processes are in-scope for DLP monitoring before
+    you can meaningfully log and interpret DLP alerts. This ensures the DLP alert log covers all relevant
+    areas.
+  good_enough: A current, approved scope statement that clearly defines the boundaries of the ISMS and
+    includes the environments where DLP is deployed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: DLP alert logs must be tied to specific information assets. Without an asset register, you
+    can't reliably map alerts to the data or systems they affect.
+  good_enough: A maintained list of key information assets, especially those monitored by DLP, with enough
+    detail to link alerts to assets.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: DLP controls and alerting are typically based on data classification. You need a working
+    classification scheme to interpret the significance of DLP alerts and to configure DLP rules.
+  good_enough: A documented scheme that defines at least the main data sensitivity levels used by DLP
+    policies, even if not fully rolled out.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: DLP alerting should be risk-driven. A risk assessment identifies which data loss scenarios
+    are material and should be monitored, guiding DLP configuration and alert review.
+  good_enough: A recent risk assessment that identifies data loss as a risk and highlights the types of
+    data and channels to be monitored by DLP.

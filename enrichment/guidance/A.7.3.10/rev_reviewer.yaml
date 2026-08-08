@@ -1,0 +1,17 @@
+must_id: item:A.7.3.10:rev_reviewer
+control_ref: A.7.3.10
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + ML/Product lead + Legal)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-06'
+guidance:
+- 'Name the reviewer as a specific individual for each required role: Data Protection Officer, Machine
+  Learning or Product Lead, and Legal representative.'
+- Record the full names and job titles of all reviewers in the program review document, along with the
+  date of their review.
+- Obtain signatures or written confirmation from each reviewer to show their participation in the review
+  process.
+- Avoid listing groups or departments as reviewers; always identify named individuals for each required
+  role.

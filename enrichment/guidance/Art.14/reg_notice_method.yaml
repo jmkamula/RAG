@@ -1,0 +1,16 @@
+must_id: item:Art.14:reg_notice_method
+control_ref: Art.14
+standard_id: GDPR:2016/679
+must_text: Notice delivery method per row (email, in-app on first communication, etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the specific method used to deliver the privacy notice for each data source listed, such as email,
+  postal mail, or in-app notification.
+- State the date the notice was delivered for each entry to provide a clear timeline of communication.
+- Name the individual responsible for sending or overseeing the delivery of each notice, rather than listing
+  only a team or department.
+- Cross-reference each delivery method with supporting evidence, such as email logs, system screenshots,
+  or postal receipts, for every row.

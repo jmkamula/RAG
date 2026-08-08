@@ -1,0 +1,42 @@
+leaf_id: req:7.1:isms_resources_record
+control_ref: '7.1'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organisation and which information assets
+    are covered by the ISMS, directly impacting what resources must be allocated. Without a clear scope,
+    resource allocation cannot be meaningfully targeted or justified.
+  good_enough: A documented, management-approved scope statement that identifies the organisational boundaries
+    and information assets included in the ISMS.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The security policy sets the direction and priorities for information security, guiding what
+    types and levels of resources are required to achieve ISMS objectives. Resource allocation must align
+    with these policy commitments.
+  good_enough: A current, approved policy document that outlines the organisation’s information security
+    objectives and commitments.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: direct
+  rationale: The risk assessment identifies threats, vulnerabilities, and risk levels, which drive decisions
+    on what resources are necessary to mitigate risks and maintain ISMS effectiveness. Resource needs
+    cannot be justified without understanding risk exposure.
+  good_enough: A completed risk assessment covering the ISMS scope, with documented risks and their evaluation.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of ISMS roles and responsibilities is essential to determine human resource
+    requirements and ensure accountability for ISMS activities. Resource allocation records depend on
+    knowing who is responsible for what.
+  good_enough: A documented list or matrix assigning ISMS roles and responsibilities to specific individuals
+    or teams.

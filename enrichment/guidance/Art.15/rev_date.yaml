@@ -1,0 +1,16 @@
+must_id: item:Art.15:rev_date
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Review date within the planned interval (typically within 12 months of last review)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent Data Subject Access Request (DSAR) process review in a central compliance
+  log.
+- Name the reviewer as a specific individual responsible for the DSAR process review, not a generic team
+  or department.
+- Cross-reference the review date with the previous review to confirm the interval does not exceed 12
+  months.
+- Retain a signed or approved record of the review outcome, including any updates or changes made.

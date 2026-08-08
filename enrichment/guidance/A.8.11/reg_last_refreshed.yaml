@@ -1,0 +1,15 @@
+must_id: item:A.8.11:reg_last_refreshed
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Per-row last refresh timestamp (drives stale-mask detection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the last refresh timestamp for each row in the masking register, using a consistent date and
+  time format.
+- Name the individual responsible for updating the refresh timestamp, listing their full name rather than
+  a team or department.
+- Cross-reference each timestamp entry with the corresponding data masking activity log to confirm accuracy.
+- Retain historical versions of the register to show changes in refresh timestamps over time.

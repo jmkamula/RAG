@@ -1,0 +1,40 @@
+leaf_id: req:A.6.4:disciplinary_case_register
+control_ref: A.6.4
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.6.4
+  standard_id: ISO27001:2022
+  title: Disciplinary Process Definition
+  category: direct
+  rationale: The register documents actual disciplinary cases, but you must first have a defined disciplinary
+    process outlining what constitutes a violation, investigation steps, and possible outcomes. Without
+    this, the register has no structure or context.
+  good_enough: A documented, approved disciplinary process exists, even if it is high-level, so cases
+    can be consistently recorded and referenced.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: The register must record who is authorized to investigate, decide, and close disciplinary
+    cases. Clear assignment of responsibilities ensures the register is accurate and actionable.
+  good_enough: Key roles (e.g., investigator, decision authority) are assigned and documented, even if
+    not fully mapped to every staff member.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The register should only include cases relevant to the ISMS scope. Without a defined scope,
+    you risk over- or under-inclusion of disciplinary cases.
+  good_enough: A written scope statement exists that defines which business units, processes, and personnel
+    are covered by the ISMS.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Disciplinary cases may involve sensitive information. A classification scheme ensures that
+    case details are handled and anonymized appropriately to protect privacy.
+  good_enough: A basic classification scheme is in place, and staff know which information requires special
+    handling in the register.

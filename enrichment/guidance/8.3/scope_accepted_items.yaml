@@ -1,0 +1,19 @@
+must_id: item:8.3:scope_accepted_items
+control_ref: '8.3'
+standard_id: ISO27001:2022
+must_text: Accepted-residual items listed (no active treatment but residual signed off per 6.1.3 f))
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all risks with no further planned treatment in the treatment plan, marking them clearly as "accepted
+  residual risks."
+- Record the date and name of the individual who formally accepted each residual risk, referencing their
+  role in the organisation.
+- Attach documented evidence of the acceptance decision, such as a signed statement or approval email,
+  for each listed residual risk.
+- Name the owner of each residual risk as a specific person, not a team or department, to avoid ambiguity
+  in responsibility.
+- Cross-reference each accepted residual risk to the corresponding risk assessment record to show alignment
+  with control 6.1.3 f).

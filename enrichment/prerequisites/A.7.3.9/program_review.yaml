@@ -1,0 +1,46 @@
+leaf_id: req:A.7.3.9:program_review
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.3.2
+  standard_id: ISO27701:2019
+  title: Procedures for Handling Data Subject Requests
+  category: direct
+  rationale: You need documented procedures for handling data subject requests before you can review whether
+    intake channels, SLAs, and complaint routes are effective. The review is meaningless if the underlying
+    process isn't defined.
+  good_enough: A current, approved procedure document exists that describes how requests are received,
+    processed, and tracked.
+- ref: A.7.3.3
+  standard_id: ISO27701:2019
+  title: Communication of Data Subject Rights
+  category: direct
+  rationale: The review must check if data subjects are informed about their rights and how to exercise
+    them. If this communication isn't established, you can't assess its effectiveness.
+  good_enough: Evidence that rights and request channels are communicated to data subjects (e.g., privacy
+    notice, website section).
+- ref: A.7.3.5
+  standard_id: ISO27701:2019
+  title: Timely Response to Data Subject Requests
+  category: direct
+  rationale: You can't review SLA performance or delay notifications unless there is a defined expectation
+    for response times. This control sets the baseline for what 'timely' means.
+  good_enough: A documented SLA or policy exists specifying response timeframes for requests.
+- ref: A.7.3.7
+  standard_id: ISO27701:2019
+  title: Handling of Complaints
+  category: direct
+  rationale: The review must include complaint routes. If there is no defined process for handling complaints,
+    you can't assess whether these routes are surfaced or effective.
+  good_enough: A documented process or contact point for data subject complaints is in place.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The review should only cover request handling activities within the defined ISMS and PIMS
+    scope. Without a scope statement, you can't determine what should be included in the review.
+  good_enough: A current ISMS scope statement exists that includes privacy operations relevant to data
+    subject requests.

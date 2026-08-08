@@ -1,0 +1,16 @@
+must_id: item:A.5.34:reg_purposes
+control_ref: A.5.34
+standard_id: ISO27001:2022
+must_text: Processing purposes stated per activity (specific, explicit, legitimate — not 'business operations';
+  cross-link to GDPR Art.5.1.b purpose limitation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific, explicit, and legitimate purpose for each PII processing activity in the register,
+  avoiding vague terms like "business operations."
+- Cross-reference each stated purpose to GDPR Article 5.1.b in the register to demonstrate compliance
+  with the purpose limitation principle.
+- Record the date each processing purpose was last reviewed or updated, along with the name of the reviewer.
+- Name the owner responsible for each processing activity as a specific individual, not a team or department.

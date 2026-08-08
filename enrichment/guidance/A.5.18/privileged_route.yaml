@@ -1,0 +1,20 @@
+must_id: item:A.5.18:privileged_route
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Privileged access requests route through the A.8.2 privileged-access process (separate intake,
+  separate approval, separate logging)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the privileged access management process as a specific individual, not a generic team
+  or department.
+- Document each privileged access request using the dedicated A.8.2 intake form, including requester,
+  date, and requested access details.
+- Record separate approval for privileged access by a designated approver, distinct from standard access
+  approvals, with date and signature.
+- Log all privileged access grants in a register that is separate from standard access logs, showing user,
+  approver, and activation date.
+- Cross-reference each privileged access entry in the procedure to the A.8.2 process documentation to
+  demonstrate the separation of intake and approval.

@@ -1,0 +1,17 @@
+must_id: item:A.8.14:bl_redundancy_approach
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Redundancy approach per service (active-active / active-passive / cold-standby / multi-region)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each critical service and specify its redundancy approach, such as active-active, active-passive,
+  cold-standby, or multi-region, in a dated baseline document.
+- Name the responsible individual for maintaining and updating the redundancy baseline for each service,
+  not just a team or department.
+- Record the last test date and outcome for each redundancy approach to demonstrate that the configuration
+  is operational and sufficient.
+- Cross-reference the redundancy baseline with current architecture diagrams or system inventories to
+  confirm accuracy and completeness.

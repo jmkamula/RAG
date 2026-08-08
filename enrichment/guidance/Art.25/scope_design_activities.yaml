@@ -1,0 +1,16 @@
+must_id: item:Art.25:scope_design_activities
+control_ref: Art.25
+standard_id: GDPR:2016/679
+must_text: Design activities in scope (new product, new feature, significant change, new processor onboarding)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all new products, features, significant changes, and new processor onboardings in a dated scope
+  register reviewed at least annually.
+- Name the specific individual responsible for maintaining and updating the DPbD scope register, not a
+  team or department.
+- Document the rationale for including or excluding each item in scope, referencing supporting evidence
+  such as project briefs or contracts.
+- Record the date and outcome of the most recent review of the DPbD scope by a named decision-maker.

@@ -1,0 +1,19 @@
+must_id: item:A.7.3.9:proc_delay_notification
+control_ref: A.7.3.9
+standard_id: ISO27701:2019
+must_text: Delay notification — where response takes longer than SLA, subject informed of reason + revised
+  timeline
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the standard response time for subject requests and the process for identifying when a delay
+  has occurred in your procedure.
+- Record each instance where a response will exceed the stated timeline, including the reason for the
+  delay and the new estimated completion date.
+- Send a dated written notification to the subject explaining the delay, the reason, and the revised timeline
+  for response.
+- Retain a copy of the notification and any related correspondence in the subject request case file.
+- Name the individual responsible for issuing delay notifications as a specific person, not a generic
+  role or team.

@@ -1,0 +1,19 @@
+must_id: item:Art.38:reg_independence_signal
+control_ref: Art.38
+standard_id: GDPR:2016/679
+must_text: Per-row independence signals (no overruled DPO opinion; if overruled, formal record + escalation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each DPO opinion in the register with the DPO’s full name, date, and a clear summary of the advice
+  given.
+- Document any instance where a DPO opinion is overruled, including the name and role of the person making
+  the decision and the date.
+- Attach a formal escalation record for each overruled opinion, showing the issue was raised to the appropriate
+  management level.
+- Name the DPO as a specific individual for each entry—do not use generic labels like "the team" or "compliance
+  department".
+- Cross-reference each register entry to supporting correspondence or meeting minutes that confirm the
+  DPO’s independent input.

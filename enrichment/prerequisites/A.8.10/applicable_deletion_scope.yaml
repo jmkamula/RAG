@@ -1,0 +1,39 @@
+leaf_id: req:A.8.10:applicable_deletion_scope
+control_ref: A.8.10
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You need a current asset register to know what information and media classes exist before
+    you can define which ones require deletion and by what method.
+  good_enough: A basic, up-to-date inventory of information assets and media types is available, even
+    if not fully detailed or perfectly categorized.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: You must have a working classification scheme to group information classes, so you can specify
+    retention triggers and deletion methods for each group.
+  good_enough: A draft or working version of the classification scheme exists and covers the main information
+    types in scope.
+- ref: A.5.33
+  standard_id: ISO27001:2022
+  title: Records Retention Schedule
+  category: direct
+  rationale: You need to know the retention triggers and periods for each information class before you
+    can define when and how deletion applies.
+  good_enough: A preliminary retention schedule exists, even if some triggers or durations are still being
+    finalized.
+- ref: A.8.33
+  standard_id: ISO27001:2022
+  title: Test Information
+  category: direct
+  rationale: Test data must be included in deletion scope, so you need to know how test information is
+    handled and what lifecycle rules apply.
+  good_enough: There is a documented approach for handling and deleting test information, even if not
+    all edge cases are covered.

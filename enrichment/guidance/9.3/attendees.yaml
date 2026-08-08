@@ -1,0 +1,14 @@
+must_id: item:9.3:attendees
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Attendees listed
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the full names and job titles of every attendee present at the management review meeting in the
+  official minutes.
+- Record the date and time of the meeting alongside the attendee list to provide clear context for participation.
+- Name the meeting chairperson or facilitator as a specific individual, not as a group or department.
+- Retain a signed or digitally approved copy of the minutes confirming the accuracy of the attendee list.

@@ -1,0 +1,20 @@
+must_id: item:Art.85:rev_scope_coverage
+control_ref: Art.85
+standard_id: GDPR:2016/679
+must_text: Scope coverage — every in-scope activity has a derogation basis (or explicit decision to NOT
+  invoke Art.85 for it)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every in-scope activity in a dated register, including a clear description and reference to relevant
+  processing operations.
+- Record the specific derogation basis invoked under Article 85 for each activity, or explicitly state
+  if Article 85 is not applied.
+- Name the decision-maker for each derogation or non-application, ensuring this is a specific individual,
+  not a team or department.
+- Attach supporting documentation or legal analysis justifying each derogation or non-application decision,
+  with reference to applicable laws or guidance.
+- Review and update the register at least annually, recording the date and names of reviewers for each
+  cycle.

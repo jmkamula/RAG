@@ -1,0 +1,19 @@
+must_id: item:A.8.20:rev_architecture
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Architecture review — zone model still matches threat landscape + business reality
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for network architecture reviews, listing their full name and role in
+  a dated record.
+- Document the current network zone model, including diagrams and descriptions, with a version number
+  and last review date.
+- Record a summary of recent threat landscape changes and business process updates considered during the
+  latest architecture review.
+- Cross-reference review findings with the current zone model, noting any required updates or confirming
+  continued alignment.
+- State the review outcome and approval in a signed and dated decision by a named senior manager, not
+  left unsigned or undated.

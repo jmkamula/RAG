@@ -1,0 +1,18 @@
+must_id: item:A.5.23:rev_incidents
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: Cloud-incidents in the period reviewed (own + CSP-disclosed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all cloud services used during the review period and list them in a dated inventory document.
+- Collect and record all security incidents affecting your cloud services, including those disclosed by
+  your cloud service providers, in a central incident log.
+- Name the person responsible for gathering and validating incident information as a specific individual,
+  not a team or department.
+- Attach supporting evidence for each incident, such as provider notifications, incident reports, or public
+  disclosures, to the incident log.
+- Confirm the review period’s start and end dates are clearly stated in the incident log to demonstrate
+  the scope covered.

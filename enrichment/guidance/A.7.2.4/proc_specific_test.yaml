@@ -1,0 +1,19 @@
+must_id: item:A.7.2.4:proc_specific_test
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Specific test — one consent per purpose (or granular per-purpose selection)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each consent request with a clear description of the specific purpose for which personal data
+  will be processed.
+- Present individuals with separate consent options for each distinct processing purpose, allowing granular
+  selection rather than a single blanket agreement.
+- Record the date, time, and method by which each individual provided consent for each specific purpose
+  in a consent log.
+- Name the person responsible for maintaining and updating the consent records as a specific individual,
+  not a generic team or department.
+- Retain evidence of the consent form or interface as presented to the individual, showing the per-purpose
+  selection options.

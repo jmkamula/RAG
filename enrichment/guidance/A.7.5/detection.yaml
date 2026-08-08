@@ -1,0 +1,20 @@
+must_id: item:A.7.5:detection
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Detection systems (smoke, heat, water leak, temperature, motion, glass-break, seismic where
+  relevant)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all detection systems in use at each location, including type (e.g. smoke, water leak, motion)
+  and installation date, in a dated inventory.
+- Document the responsible individual for monitoring and maintaining each detection system by name and
+  job title in the procedure.
+- Attach the most recent service or test report for each detection system, showing date, outcome, and
+  technician signature.
+- State the criteria used to determine which types of detection systems are relevant for each site, referencing
+  a documented risk assessment.
+- Name the owner as a specific person, not a team or department, for the ongoing review and update of
+  detection system coverage.

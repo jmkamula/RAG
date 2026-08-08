@@ -1,0 +1,17 @@
+must_id: item:A.7.4.9:reg_auth_mechanism
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Authentication mechanism per row (mutual TLS / OAuth / API key + IP allowlist / etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each channel used to transmit personal data, specifying the exact authentication mechanism applied
+  to that channel in a dated inventory.
+- Name the authentication method in clear terms per channel, such as "mutual TLS" or "API key + IP allowlist"—avoid
+  generic labels like "secure" or "protected".
+- Record the individual responsible for approving each authentication method, including their full name
+  and approval date.
+- Attach supporting documentation, such as configuration screenshots or policy excerpts, to each inventory
+  row to show the authentication method is implemented as described.

@@ -1,0 +1,17 @@
+must_id: item:A.5.36:nc_cross_review_link
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Cross-link to A.5.35 independent-review finding register where the two are kept as one artefact
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each compliance nonconformity entry with the corresponding independent-review finding
+  by including the unique identifier from the A.5.35 register.
+- State in the register header or introduction that this document combines both compliance nonconformities
+  and independent-review findings, if the artefacts are merged.
+- Name the owner responsible for maintaining the register as a specific individual, not a team or department.
+- Record the date when the cross-linking between the two registers was last reviewed and updated.
+- Attach or link supporting evidence, such as meeting minutes or emails, confirming agreement to maintain
+  a combined artefact if applicable.

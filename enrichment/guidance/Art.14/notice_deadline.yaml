@@ -1,0 +1,20 @@
+must_id: item:Art.14:notice_deadline
+control_ref: Art.14
+standard_id: GDPR:2016/679
+must_text: Notice provided within reasonable period (max 1 month from obtaining; or first communication;
+  or first disclosure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date when personal data not collected from the subject is first obtained, using a dated
+  log or intake register.
+- Document the date when the privacy notice is provided to the data subject, referencing delivery method
+  and recipient details.
+- Cross-reference the provision date with the data acquisition date to confirm the notice was sent within
+  one month or at the first communication/disclosure.
+- Retain a copy of the actual notice text sent, including any translations, with a version date matching
+  the communication.
+- Name the responsible individual who verifies and signs off on timely notice delivery—do not list only
+  a team or department.

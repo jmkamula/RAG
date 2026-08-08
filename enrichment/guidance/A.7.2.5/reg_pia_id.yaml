@@ -1,0 +1,17 @@
+must_id: item:A.7.2.5:reg_pia_id
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: Unique PIA identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each PIA or DPIA entry in the register, using a consistent numbering or
+  coding format.
+- Record the assigned identifier in a dedicated column for every row of the register, ensuring no duplicates
+  exist.
+- Cross-reference the unique identifier in related documentation, such as PIA reports and approval records,
+  for traceability.
+- Confirm that no register row uses generic or repeated identifiers like "N/A" or "TBD", which auditors
+  would flag as insufficient.

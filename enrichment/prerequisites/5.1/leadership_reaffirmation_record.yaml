@@ -1,0 +1,40 @@
+leaf_id: req:5.1:leadership_reaffirmation_record
+control_ref: '5.1'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: Leadership must reaffirm commitment to the ISMS as it is actually defined, which depends
+    on a clear and current scope statement. Without a defined scope, leadership cannot meaningfully commit
+    to or review the ISMS.
+  good_enough: A documented scope statement exists, is up to date, and has been communicated to leadership
+    for reference during reaffirmation.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: direct
+  rationale: The reaffirmation record is tied to the ongoing endorsement of the information security policy.
+    Leadership must have a current, approved policy to reaffirm their commitment.
+  good_enough: The latest version of the information security policy is finalized and available for leadership
+    review and signature.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Leadership reaffirmation should reference the current allocation of information security
+    roles and responsibilities to ensure accountability and clarity in the ISMS.
+  good_enough: Roles and responsibilities are documented and reflect the current organizational structure,
+    even if minor updates are pending.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Leadership's reaffirmation must be informed by the latest risk assessment results, as these
+    shape the ISMS priorities and demonstrate active management engagement.
+  good_enough: A recent risk assessment has been completed and its summary is available to leadership,
+    even if some risk treatments are still in progress.

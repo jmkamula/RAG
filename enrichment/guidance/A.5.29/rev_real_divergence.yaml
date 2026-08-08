@@ -1,0 +1,19 @@
+must_id: item:A.5.29:rev_real_divergence
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Real-disruption divergence analysis (where actual disruptions diverged from the plan — what
+  was missing? what assumed? what proved unnecessary?)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each real disruption event in the past review period, including date, impact, and how the response
+  compared to the documented plan.
+- Record specific gaps where the continuity or security plan did not match the actual needs or actions
+  taken during the disruption.
+- State any plan elements that were assumed necessary but proved unnecessary or irrelevant during real
+  disruptions, with supporting examples.
+- Name the reviewer as a specific individual responsible for the analysis, not a group or department.
+- Retain meeting minutes or a signed report summarizing findings, lessons learned, and recommended plan
+  updates based on divergence analysis.

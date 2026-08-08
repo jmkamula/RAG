@@ -1,0 +1,19 @@
+must_id: item:A.7.2.1:reg_activity_link
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+must_text: Processing activity link (which §7.2.8 RoPA row(s) implement this purpose)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing purpose in the PII Processing Purpose Register with a unique, descriptive name
+  and a clear, dated entry.
+- Cross-reference each processing purpose to the specific §7.2.8 RoPA row(s) that implement it, using
+  exact row identifiers or numbers.
+- Name the person responsible for maintaining these cross-references as a specific individual, not a team
+  or department.
+- Record any updates to processing purposes or RoPA linkages with the date of change and the person making
+  the update.
+- Avoid using generic or boilerplate links; ensure each cross-reference points to actual, relevant RoPA
+  entries for the stated purpose.

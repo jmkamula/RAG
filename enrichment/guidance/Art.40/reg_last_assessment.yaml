@@ -1,0 +1,15 @@
+must_id: item:Art.40:reg_last_assessment
+control_ref: Art.40
+standard_id: GDPR:2016/679
+must_text: Per-row last monitoring assessment date
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the most recent monitoring assessment for each code entry in the Code Adherence Register.
+- Name the individual who performed each monitoring assessment alongside the assessment date for traceability.
+- Retain evidence of the monitoring assessment, such as a report or checklist, linked to each register
+  entry.
+- Avoid leaving the last monitoring assessment date field blank or marked as "N/A"—enter a specific date
+  for every row.

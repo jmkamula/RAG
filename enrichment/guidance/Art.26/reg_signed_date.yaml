@@ -1,0 +1,16 @@
+must_id: item:Art.26:reg_signed_date
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Per-row arrangement signature date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the signature date for each joint controller arrangement directly in the corresponding row of
+  the register.
+- Name the individual who signed each arrangement, ensuring their full name is listed alongside the signature
+  date.
+- Attach a copy of the signed arrangement to each register entry to provide direct evidence of execution.
+- Avoid leaving any register row undated or unsigned, as missing dates or signatures will be flagged by
+  auditors.

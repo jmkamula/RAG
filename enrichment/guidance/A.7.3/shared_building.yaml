@@ -1,0 +1,19 @@
+must_id: item:A.7.3:shared_building
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Shared-building considerations (other tenants, common corridors, cleaning-staff access)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all shared areas within the building, including corridors and service spaces, in a floor plan
+  dated and signed by the facility manager.
+- List all external parties with access to shared spaces, such as other tenants and cleaning staff, in
+  an access log maintained by security.
+- State the specific security measures in place for shared areas, such as CCTV or access controls, in
+  the procedure with installation dates.
+- Name the individual responsible for managing and reviewing shared-area security, avoiding generic roles
+  like "facilities team" or "security department."
+- Record the dates and outcomes of regular reviews of shared-area access arrangements in a review log
+  signed by the responsible individual.

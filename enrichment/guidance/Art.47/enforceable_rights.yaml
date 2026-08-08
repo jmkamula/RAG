@@ -1,0 +1,19 @@
+must_id: item:Art.47:enforceable_rights
+control_ref: Art.47
+standard_id: GDPR:2016/679
+must_text: Enforceable data subject rights expressly conferred (Art.47.1.b)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Binding Corporate Rules Procedure the specific data subject rights that are enforceable
+  under GDPR Article 47.1.b, using clear language.
+- Document the process by which individuals can exercise these rights, including contact details for submitting
+  requests and expected response timelines.
+- Name a specific individual or role responsible for handling and responding to data subject rights requests,
+  avoiding generic titles like "the team" or "compliance department."
+- Record examples of completed data subject rights requests, including the date received, actions taken,
+  and final resolution, in an auditable log.
+- Retain signed approval of the Binding Corporate Rules Procedure by a senior executive, dated to confirm
+  current enforcement of these rights.

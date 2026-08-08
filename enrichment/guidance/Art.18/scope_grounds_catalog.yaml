@@ -1,0 +1,18 @@
+must_id: item:Art.18:scope_grounds_catalog
+control_ref: Art.18
+standard_id: GDPR:2016/679
+must_text: Art.18.1 grounds catalog (a-d) with practical examples
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each of the four grounds for restricting processing from Article 18.1 (a-d) in a dated document.
+- Provide a practical example from your organisation for each ground, describing a real or plausible scenario
+  where it could apply.
+- Reference the specific data processing activity or dataset to which each example relates, using clear
+  names or identifiers.
+- Name the person responsible for reviewing and updating these examples, ensuring this is a specific individual,
+  not a team or department.
+- Attach supporting documentation or correspondence that demonstrates at least one instance where a restriction
+  was considered or applied under Article 18.1.

@@ -1,0 +1,18 @@
+must_id: item:A.8.27:application
+control_ref: A.8.27
+standard_id: ISO27001:2022
+must_text: Application to development activities defined (per principle, what it means in design / code
+  / deployment)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each secure architecture and engineering principle in the policy, and describe how it applies to
+  system design, code, and deployment activities.
+- Assign a named individual or role responsible for interpreting and applying each principle during development,
+  with names and dates recorded.
+- Document concrete examples or scenarios showing how each principle is implemented in recent or current
+  projects, with project names and dates.
+- Avoid using generic statements like "all principles apply to all activities" without specific mapping;
+  provide tailored explanations for each principle and activity.

@@ -1,0 +1,40 @@
+leaf_id: req:A.7.3.7:applicable_scope
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.5
+  standard_id: ISO27701:2019
+  title: Sharing, Transfer, and Disclosure of PII
+  category: direct
+  rationale: You need a clear record of which PII has been shared, transferred, or disclosed to third
+    parties before you can define the scope of third-party sharing. This is the direct upstream activity
+    that determines who must be notified.
+  good_enough: A current, working list or log of all third-party PII disclosures is available, even if
+    not yet fully formalized or signed off.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines which parts of the organization and which information assets are covered,
+    ensuring you only consider relevant third-party relationships for notification.
+  good_enough: A documented scope statement exists that identifies the organizational boundaries and assets
+    covered by the ISMS and privacy extension.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register helps you identify which PII assets are shared externally, supporting
+    accurate mapping of third-party recipients.
+  good_enough: A basic inventory of PII assets and their custodians exists, even if not fully detailed
+    or automated.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: foundational
+  rationale: Knowing the purpose for which PII is processed and shared is essential to determine if notification
+    to third parties is required for specific subject events.
+  good_enough: Documented purposes for PII processing and sharing are available for all major data flows,
+    even if some minor flows are still being catalogued.

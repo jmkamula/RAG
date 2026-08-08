@@ -1,0 +1,18 @@
+must_id: item:A.8.8:rev_exception_inventory
+control_ref: A.8.8
+standard_id: ISO27001:2022
+must_text: Exception inventory re-confirmed / retired (no stale infinite-expiry exceptions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current vulnerability management exceptions in an inventory, including the original approval
+  date and the name of the approving individual.
+- Review each exception at least annually, recording the review date and the reviewer’s name for each
+  entry in the inventory.
+- Update the inventory to clearly mark exceptions that have been re-confirmed, retired, or remediated,
+  with the corresponding decision date.
+- Remove or update any exceptions that lack a current review date or have no clear expiry, preventing
+  indefinite or stale exceptions from persisting.
+- Name the responsible owner for each exception as a specific individual, not a team or department.

@@ -1,0 +1,19 @@
+must_id: item:A.7.2.8:proc_reconciliation
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Reconciliation cadence — against §7.2.1 purpose register + §7.2.2 basis register + §7.2.5 PIA
+  register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define a fixed schedule for reconciling the RoPA with the purpose, basis, and PIA registers, and record
+  the agreed cadence in the procedure.
+- Assign a named individual responsible for performing each reconciliation, listing their full name and
+  job title in the procedure.
+- Document the reconciliation process, including steps for cross-checking entries and resolving discrepancies,
+  in a dated procedural record.
+- Retain evidence of each completed reconciliation, such as a signed and dated checklist or report referencing
+  all three registers.
+- Specify that the owner must be a named person, not a group or department, to avoid ambiguity in accountability.

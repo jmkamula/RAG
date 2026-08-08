@@ -1,0 +1,17 @@
+must_id: item:A.5.8:reg_infosec_liaison
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: InfoSec liaison per row (named individual reviewing this project's security gates)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the information security liaison for each project as a specific individual, not a team or department,
+  in the Project Security Register.
+- Record the date when the liaison was assigned to each project entry to show when responsibility was
+  established.
+- Document the liaison’s review of each security gate by capturing their signature or written confirmation
+  for every project milestone.
+- Cross-reference the liaison’s name with their current contact details to ensure they can be reached
+  for follow-up or clarification.

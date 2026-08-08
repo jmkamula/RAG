@@ -1,0 +1,41 @@
+leaf_id: req:A.5.15:communication_record
+control_ref: A.5.15
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.1
+  standard_id: ISO27001:2022
+  title: Policies for information security
+  category: direct
+  rationale: The access control policy communication record must reference the actual policy being communicated.
+    Without a formally approved access control policy, there is nothing meaningful to communicate or record.
+  good_enough: The access control policy exists in draft or approved form, with enough detail to inform
+    decision-makers and access-holders of the rules.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and responsibilities
+  category: foundational
+  rationale: You need to know who the decision-makers and access-holders are before you can demonstrate
+    that the policy was communicated to them. This ensures the right people are targeted in the communication
+    record.
+  good_enough: A current list or description of relevant roles (e.g., managers, system owners, IT admins,
+    access-holders) is available, even if not fully formalized.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which parts of the organization and which systems are covered
+    by the ISMS, and therefore, which people and systems should be included in access control policy communications.
+  good_enough: A documented ISMS scope exists that identifies the organizational boundaries and key assets
+    relevant to access control.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification of information
+  category: foundational
+  rationale: Understanding which information is sensitive or critical helps tailor the access control
+    policy communication to the right audiences and emphasizes the importance of compliance for specific
+    data types.
+  good_enough: A basic information classification scheme is documented and referenced in the access control
+    policy, even if not fully operationalized.

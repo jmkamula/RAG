@@ -1,0 +1,18 @@
+must_id: item:A.7.9:rev_register_check
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Stale-loaner check — assets off-premises for unexpectedly long without status update
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a list of all assets currently off-premises, including the assigned user, check-out date, and
+  expected return date.
+- Review the asset register monthly to identify any assets that have exceeded their expected return date
+  without a status update.
+- Record the outcome of each stale-loaner check, including the asset identifier, responsible person, and
+  actions taken, in a dated log.
+- Name the reviewer as a specific individual on each check record, not as a team or department.
+- Retain evidence of follow-up communications with asset holders whose items are overdue, including dates
+  and responses.

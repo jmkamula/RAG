@@ -1,0 +1,17 @@
+must_id: item:10.1:mgmt_review_link
+control_ref: '10.1'
+standard_id: ISO27001:2022
+must_text: Link to management review (9.3) outputs as a primary trigger
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the continual improvement procedure to the latest management review meeting minutes,
+  highlighting specific outputs that trigger improvement actions.
+- Document the date and summary of each management review output used as a trigger within the continual
+  improvement log or register.
+- Name the responsible individual who reviews management review outputs and initiates related continual
+  improvement actions.
+- Avoid referencing management review outputs in general terms; cite specific decisions, findings, or
+  action items from the meeting records.

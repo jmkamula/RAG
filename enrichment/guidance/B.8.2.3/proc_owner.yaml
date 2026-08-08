@@ -1,0 +1,17 @@
+must_id: item:B.8.2.3:proc_owner
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: Named owner (Marketing + Compliance)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual from the Marketing team as the procedure owner, listing their full name and
+  job title in the document.
+- Assign a named individual from the Compliance function as co-owner, ensuring both roles are clearly
+  identified and not just departments.
+- Record the date when both owners formally accepted responsibility, capturing their signatures or written
+  acknowledgements on the procedure.
+- Review the procedure to confirm that ownership is not attributed to vague groups such as "the team"
+  or "Marketing Department".

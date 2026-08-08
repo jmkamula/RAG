@@ -1,0 +1,18 @@
+must_id: item:A.7.2.8:ropa_pii_categories
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Categories of PII per row + categories of subjects (e.g. employees, customers, minors)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity in your Records of Processing Activities (RoPA) with a separate row for
+  clarity.
+- Specify the exact categories of personal data collected or processed for each activity, such as contact
+  details, health data, or financial information.
+- Identify and record the categories of individuals whose data is processed, such as employees, customers,
+  or minors, for each activity.
+- Name the owner of the RoPA as a specific individual, not a team or department, to avoid auditor concerns
+  about accountability.
+- Date and version your RoPA document to provide clear evidence of when it was last updated.

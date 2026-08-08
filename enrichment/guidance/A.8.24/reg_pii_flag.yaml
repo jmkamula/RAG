@@ -1,0 +1,16 @@
+must_id: item:A.8.24:reg_pii_flag
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Per-row PII-key flag (drives stricter custody / GDPR Art.32 traceability)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Add a column to your cryptographic key register that clearly flags whether each key is used to protect
+  personal data.
+- Mark each key entry with a specific "Yes" or "No" in the PII-key column, based on documented data flows
+  or system diagrams.
+- Name the person responsible for verifying the PII-key flag for each entry, ensuring it is not left blank
+  or marked as "unknown".
+- Record the date when the PII-key flag was last reviewed or updated for each key entry.

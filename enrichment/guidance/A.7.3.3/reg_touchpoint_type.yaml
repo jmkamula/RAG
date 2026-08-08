@@ -1,0 +1,20 @@
+must_id: item:A.7.3.3:reg_touchpoint_type
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: Touchpoint type per row (signup / renewal / cookie banner / just-in-time prompt / periodic
+  reminder)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the type of touchpoint for each notice delivered, such as signup, renewal, cookie banner, just-in-time
+  prompt, or periodic reminder, in the log.
+- State the exact date and time when each notice was presented to the individual, matching the touchpoint
+  type.
+- Name the person or automated system responsible for delivering each notice, ensuring a specific individual
+  or system is listed.
+- Cross-reference each log entry with supporting evidence, such as screenshots or system records, showing
+  the notice at the stated touchpoint.
+- Avoid using generic or unclear touchpoint descriptions like "user interaction"—specify the actual event
+  for each row in the log.

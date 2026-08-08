@@ -1,0 +1,16 @@
+must_id: item:A.7.2.5:rev_coverage_check
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: Coverage check — every triggered activity has a completed PIA on file
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all new or changed data processing activities in a dated register, including the responsible owner
+  for each entry.
+- Cross-reference each listed activity with a completed Privacy Impact Assessment (PIA) by attaching or
+  linking the final PIA document.
+- Confirm each PIA is signed and dated by the designated reviewer to show it was formally completed.
+- Name the owner of each PIA as a specific individual, not a team or department, to avoid audit gaps.
+- Record the date of the last review of the register to demonstrate ongoing coverage and updates.

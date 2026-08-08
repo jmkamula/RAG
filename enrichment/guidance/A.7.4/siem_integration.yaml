@@ -1,0 +1,17 @@
+must_id: item:A.7.4:siem_integration
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: Integration with SIEM / A.5.26 incident response (physical events route to the same triage)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document how physical security alerts are automatically forwarded to the central SIEM platform, including
+  system names and integration points, in the procedure.
+- Name the individual responsible for maintaining the integration between physical security systems and
+  SIEM, avoiding generic roles like "IT team".
+- Record the process for triaging physical security events in alignment with the incident response procedure
+  under A.5.26, referencing the relevant workflow or playbook.
+- Retain logs or screenshots showing a recent physical security event routed through SIEM and triaged
+  according to the documented process, with timestamps.

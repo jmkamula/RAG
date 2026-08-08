@@ -1,0 +1,19 @@
+must_id: item:A.7.3.1:reg_citation
+control_ref: A.7.3.1
+standard_id: ISO27701:2019
+must_text: Legal / regulatory / business citation per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each privacy obligation in a separate row, clearly identifying the specific law, regulation, contract,
+  or business requirement it comes from.
+- Cite the exact legal or regulatory source for each obligation, including section or clause numbers where
+  applicable.
+- Record the date each obligation was added or last reviewed, and name the person responsible for maintaining
+  the register.
+- Name the owner as a specific individual, not a team or department, for each obligation row to avoid
+  ambiguity.
+- Cross-reference supporting documents or contracts for each obligation to show the source material is
+  available.

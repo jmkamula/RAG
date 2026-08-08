@@ -1,0 +1,15 @@
+must_id: item:Art.37:owner
+control_ref: Art.37
+standard_id: GDPR:2016/679
+must_text: Named owner (executive sponsor)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the executive sponsor responsible for the DPO Designation Procedure as a specific individual, not
+  a department or group.
+- Document the executive sponsor’s full name, job title, and contact details in the DPO Designation Procedure.
+- Record the date the executive sponsor was assigned responsibility for the procedure in the official
+  document.
+- Obtain a signed acknowledgement from the executive sponsor confirming their acceptance of this responsibility.

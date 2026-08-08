@@ -1,0 +1,20 @@
+must_id: item:B.8.4.3:proc_customer_advice
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Customer-advice path — where contract silent on transmission requirements, customer consulted
+  before transmission
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the process for identifying when a customer contract does not specify transmission requirements,
+  including how this is detected and by whom.
+- Name the designated individual responsible for consulting the customer before any personal data transmission
+  when contract terms are silent.
+- Record each instance of customer consultation before transmission in a dated log, including the customer's
+  advice and the staff member involved.
+- Retain written evidence of customer advice received, such as email correspondence or signed meeting
+  notes, for each relevant transmission decision.
+- Avoid using generic statements like "customer will be consulted as needed" in the procedure; specify
+  the exact steps and responsible person.

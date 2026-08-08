@@ -1,0 +1,49 @@
+leaf_id: req:A.7.3.6:acr_procedure
+control_ref: A.7.3.6
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know the purposes for which personal data is processed before you can determine
+    if access, correction, or erasure requests are valid. This ensures your procedure aligns with the
+    documented reasons for processing.
+  good_enough: A current, working list of processing purposes for all relevant data types is available
+    and referenced in privacy operations.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity is essential to know when access,
+    correction, or erasure rights apply or may be restricted. This underpins the logic in your procedure.
+  good_enough: Each processing activity has a mapped lawful basis, even if some are provisional or pending
+    legal review.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You need to know what personal data assets exist and where they are stored to operationalize
+    access, correction, and erasure requests. Without this, the procedure cannot be actionable.
+  good_enough: A basic inventory of systems and data stores containing personal data exists, even if not
+    fully detailed.
+- ref: Art.15
+  standard_id: GDPR:2016/679
+  title: Right of Access
+  category: cross_role
+  rationale: The GDPR right of access sets the legal expectation for what your procedure must deliver.
+    Your process must be capable of meeting this obligation.
+  good_enough: A summary of Art.15 requirements is available and referenced by the privacy team, even
+    if not fully operationalized.
+- ref: A.7.3.9
+  standard_id: ISO27701:2019
+  title: Request Handling Procedure
+  category: direct
+  rationale: A general request handling procedure must exist so that the specific steps for access, correction,
+    and erasure can be integrated and coordinated. This ensures requests are tracked and responded to
+    appropriately.
+  good_enough: A draft or template request handling procedure exists, covering intake and tracking of
+    data subject requests.

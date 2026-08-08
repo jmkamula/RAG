@@ -1,0 +1,18 @@
+must_id: item:Art.24:reg_implementing_artefact
+control_ref: Art.24
+standard_id: GDPR:2016/679
+must_text: Per-row link to the implementing artefact (procedure / policy / register / DPA / certification)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each GDPR control row to a specific, named document or artefact that implements the
+  requirement, using a working hyperlink or document ID.
+- State the version and date of each linked artefact to show it is current and in force at the time of
+  review.
+- Name the implementing artefact precisely—avoid generic labels like "policy" or "procedure" without a
+  unique title or identifier.
+- Record the responsible owner for updating each artefact, listing a named individual rather than a team
+  or department.
+- Review all links quarterly and document the check date to confirm ongoing accuracy and accessibility.

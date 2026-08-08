@@ -1,0 +1,17 @@
+must_id: item:B.8.5.3:scope_investigation
+control_ref: B.8.5.3
+standard_id: ISO27701:2019
+must_text: Investigation contexts
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify and list all investigation contexts where your organisation may act as a processor, referencing
+  specific types of investigations and legal bases.
+- Document the scope of personal data processing for each investigation context, including categories
+  of data and data subjects involved.
+- Name the individual responsible for maintaining and updating the investigation context register, ensuring
+  a specific person is listed rather than a team or department.
+- Record the date when the investigation context disclosure scope was last reviewed and updated, keeping
+  version history for reference.

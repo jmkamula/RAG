@@ -1,0 +1,17 @@
+must_id: item:Art.6:proc_decision_authority
+control_ref: Art.6
+standard_id: GDPR:2016/679
+must_text: Decision authority stated (DPO / Privacy Lead approves; product owner proposes)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the product owner as the specific individual responsible for proposing the lawful basis for each
+  processing activity.
+- Document the approval of each lawful basis determination with the name and signature of the DPO or Privacy
+  Lead, including the approval date.
+- State the decision authority roles explicitly in the procedure, clearly distinguishing between the proposer
+  and the approver.
+- Avoid listing a group or department as the decision authority; specify named individuals for both proposing
+  and approving roles.

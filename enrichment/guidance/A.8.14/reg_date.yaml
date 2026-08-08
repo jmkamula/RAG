@@ -1,0 +1,14 @@
+must_id: item:A.8.14:reg_date
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Per-test date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each failover test is performed in the Failover Test Register.
+- Name the person responsible for entering the test date to allow traceability.
+- Cross-reference each test entry with supporting evidence, such as test logs or screenshots, that show
+  the test date.
+- Avoid using vague timeframes like "monthly" or "Q1"—enter a specific calendar date for every test.

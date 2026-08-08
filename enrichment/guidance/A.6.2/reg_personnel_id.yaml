@@ -1,0 +1,17 @@
+must_id: item:A.6.2:reg_personnel_id
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Per-row personnel identifier (links to identity register A.5.16)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique personnel identifier for each employee listed in the Signed Employment Terms Register,
+  matching the identifier used in the identity register for A.5.16.
+- Cross-reference each personnel identifier in the register to the corresponding entry in the identity
+  register, ensuring traceability between both records.
+- Name the owner of the Signed Employment Terms Register as a specific individual, not a generic team
+  or department.
+- Confirm that each row in the register contains a completed personnel identifier field; do not leave
+  any identifier blank or marked as "N/A".

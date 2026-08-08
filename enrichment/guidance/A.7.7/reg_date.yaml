@@ -1,0 +1,16 @@
+must_id: item:A.7.7:reg_date
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Per-audit date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each clear desk or clear screen audit is conducted in the audit register entry
+  for that audit.
+- Name the auditor responsible for each entry, using their full name rather than a generic title or team
+  name.
+- Cross-reference each audit entry with supporting evidence, such as photos or checklists, dated to match
+  the audit register.
+- Avoid leaving any audit entry undated, as missing dates will be flagged by auditors as incomplete evidence.

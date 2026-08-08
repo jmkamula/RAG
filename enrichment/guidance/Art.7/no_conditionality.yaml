@@ -1,0 +1,19 @@
+must_id: item:Art.7:no_conditionality
+control_ref: Art.7
+standard_id: GDPR:2016/679
+must_text: No conditionality of service on non-essential consent (consent must be 'freely given')
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each service or feature and clearly state which user consents are essential and which are optional,
+  with supporting rationale.
+- Name the individual responsible for reviewing consent requests to confirm that access to core services
+  is not conditional on optional consent.
+- Retain dated screenshots or records of user consent flows showing that optional consents are not pre-ticked
+  or bundled with essential terms.
+- Record a sample of communications or contracts offered to users, confirming that refusal of non-essential
+  consent does not block access to the main service.
+- Avoid using generic statements like "all consents are required" without justification—explicitly separate
+  essential and non-essential consents in documentation.

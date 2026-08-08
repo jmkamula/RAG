@@ -1,0 +1,18 @@
+must_id: item:6.1.1:scope_4_2_categories
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: 4.2 party categories enumerated as planning inputs
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all relevant interested party categories, including customers, regulators, suppliers, and employees,
+  as required by clause 4.2 of ISO27001:2022.
+- Document the specific needs and expectations of each party category in a dated planning input record.
+- Reference the planning input record in your risk assessment or ISMS planning documentation to show integration
+  of party categories.
+- Name the person responsible for maintaining the party categories list as a specific individual, not
+  a team or department.
+- Retain previous versions of the planning input record to demonstrate changes in party categories over
+  time.

@@ -1,0 +1,18 @@
+must_id: item:4.2:reg_scope_link
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Per-row link to the ISMS scope (4.3) artefacts that address the party
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each interested party in the register to the specific ISMS scope artefact that addresses
+  their requirements.
+- Record the unique identifier or direct link for each referenced ISMS scope artefact in the corresponding
+  row of the register.
+- State the date each cross-reference was last reviewed or updated to show ongoing alignment with the
+  ISMS scope.
+- Name the person responsible for maintaining the register as a specific individual, not a team or department.
+- Avoid using generic or placeholder links—ensure every reference points to a concrete, existing ISMS
+  scope artefact.

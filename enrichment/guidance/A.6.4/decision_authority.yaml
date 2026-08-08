@@ -1,0 +1,18 @@
+must_id: item:A.6.4:decision_authority
+control_ref: A.6.4
+standard_id: ISO27001:2022
+must_text: Decision authority named (HR + line management + Legal as appropriate; escalation to executive
+  for senior personnel)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the decision authority for disciplinary actions as specific individuals from HR, line management,
+  and Legal, not just departments or teams.
+- Document the escalation process for disciplinary decisions involving senior personnel, specifying which
+  executive roles are responsible for final approval.
+- Record the date and signatures of all authorities involved in each disciplinary decision to provide
+  a clear audit trail.
+- Cross-reference the disciplinary process document with your organisational chart to show that named
+  authorities hold appropriate roles.

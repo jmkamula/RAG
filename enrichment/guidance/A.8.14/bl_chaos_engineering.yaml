@@ -1,0 +1,19 @@
+must_id: item:A.8.14:bl_chaos_engineering
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Chaos-engineering / fault-injection practice for high-criticality services
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for planning and overseeing chaos-engineering or fault-injection
+  exercises for high-criticality services.
+- Document the schedule and scope of each chaos-engineering or fault-injection exercise, including the
+  date, systems tested, and scenarios used.
+- Record the outcomes, lessons learned, and any follow-up actions from each exercise in a dated report
+  approved by the responsible individual.
+- Attach evidence of management review or sign-off for each completed exercise, such as a signed meeting
+  note or email confirmation.
+- Avoid using generic or template exercise reports; tailor documentation to reflect the unique risks and
+  architecture of your actual high-criticality services.

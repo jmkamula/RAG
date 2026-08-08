@@ -1,0 +1,14 @@
+must_id: item:A.8.6:rev_reviewer
+control_ref: A.8.6
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Infrastructure + Finance + Engineering leadership)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer from Infrastructure, Finance, and Engineering leadership by full name and job title
+  in the program review record.
+- Record the date each reviewer completed their review in the program review documentation.
+- Obtain a signature or written approval from each named reviewer, attached to the review record.
+- Avoid listing groups or departments as reviewers; specify individual people responsible for each area.

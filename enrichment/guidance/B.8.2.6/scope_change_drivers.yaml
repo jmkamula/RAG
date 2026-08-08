@@ -1,0 +1,17 @@
+must_id: item:B.8.2.6:scope_change_drivers
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: Trigger list (new customer onboarding / customer churn)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all events that trigger updates to the Processor Record of Processing Activities, including new
+  customer onboarding and customer churn, in a dated document.
+- Assign a named individual responsible for monitoring and updating the trigger list, ensuring their name
+  and role appear on the document.
+- Record the most recent review date and reviewer’s name on the trigger list to show regular currency
+  checks.
+- Specify each trigger clearly; avoid vague terms like "business changes" that could be misinterpreted
+  or missed by staff.

@@ -1,0 +1,20 @@
+must_id: item:A.7.3.5:proc_channel_consistency
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Channel consistency with service type (online services offer online objection; §7.3.5 implementation
+  guidance)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the available channels for handling objections, matching each to the corresponding service
+  type offered, such as online forms for online services.
+- Name the individual responsible for maintaining the objection handling procedure, avoiding generic titles
+  like "the team" or "support staff".
+- Record the date when the objection handling procedure was last reviewed and updated to reflect current
+  service offerings and channels.
+- Confirm that objection submission instructions are published in the same medium as the service, such
+  as on the website for online services.
+- Retain evidence of a test submission through each channel, showing that objections can be lodged as
+  described for each service type.

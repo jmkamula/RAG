@@ -1,0 +1,19 @@
+must_id: item:A.8.19:scope_exclusions
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Exclusion rationale (containerised auto-deployed systems with allowlist enforced at image-build
+  time)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the specific systems or environments excluded from installation controls, listing them by name
+  and deployment context.
+- Document the technical controls that enforce allowlisting at image-build time, including references
+  to configuration files or automation scripts.
+- Record the rationale for exclusion, explicitly linking it to the containerised, auto-deployed nature
+  and the effectiveness of the allowlist.
+- Name the individual who approved the exclusion, providing their full name and the approval date.
+- Avoid using generic justifications or boilerplate; tailor the rationale to your organisation’s actual
+  deployment and control mechanisms.

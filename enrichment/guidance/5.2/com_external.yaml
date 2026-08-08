@@ -1,0 +1,19 @@
+must_id: item:5.2:com_external
+control_ref: '5.2'
+standard_id: ISO27001:2022
+must_text: External-party communication (where 5.2g) requires availability to interested parties)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Publish the current, approved information security policy on a publicly accessible webpage or portal,
+  showing the date of publication.
+- Record the method and date of communication to each relevant external party, such as vendors or partners,
+  in a communication log.
+- Name the person responsible for managing external-party access to the policy, listing their full name
+  and job title.
+- Retain copies of any notifications or emails sent to external parties informing them of the policy’s
+  availability.
+- Specify the intended audience for the policy; avoid using vague terms like "all stakeholders" without
+  listing specific external groups.

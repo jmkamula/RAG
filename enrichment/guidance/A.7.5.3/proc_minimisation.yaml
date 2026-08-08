@@ -1,0 +1,17 @@
+must_id: item:A.7.5.3:proc_minimisation
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+must_text: Data minimisation applied to records themselves — only strictly needed information retained
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific data fields required for each PII transfer record, listing only those essential
+  for the transfer’s purpose.
+- Review existing transfer records and remove any data fields or details not strictly necessary for legal
+  or operational reasons.
+- Name the individual responsible for approving which data elements are retained in transfer records,
+  ensuring this is a named person, not a group.
+- Record the date and outcome of each periodic review of transfer records to confirm ongoing compliance
+  with data minimisation requirements.

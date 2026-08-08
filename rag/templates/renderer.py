@@ -51,6 +51,21 @@ _MUST_MARKER_RE = re.compile(
     r"<<MUST\s+(item:[A-Za-z0-9.]+:[a-z0-9_]+)>>",
 )
 
+# Ship 56'.a — <<GUIDANCE>> marker. Placed under a <<MUST item:X>> or
+# <<SHOULD item:X>> marker; at render time we look up per-MUST guidance
+# steps and substitute a "Best practice:" callout. Empty guidance ⇒
+# marker line silently dropped.
+_GUIDANCE_MARKER_RE = re.compile(r"^[ \t]*<<GUIDANCE>>[ \t]*$", re.MULTILINE)
+_ANY_ITEM_MARKER_RE = re.compile(
+    r"<<(?:MUST|SHOULD)\s+(item:[A-Za-z0-9.]+:[a-z0-9_]+)>>",
+)
+
+# Ship 57' — <<PREREQUISITES>> marker. Placed once per template, typically
+# under a "Before you start" heading; at render time we look up the per-leaf
+# prerequisites and substitute a grouped callout (foundational → direct →
+# cross_role). Empty prerequisites ⇒ marker line silently dropped.
+_PREREQUISITES_MARKER_RE = re.compile(r"^[ \t]*<<PREREQUISITES>>[ \t]*$", re.MULTILINE)
+
 # Tabular EDIT-ZONE markers — wrap a markdown table. Captures the leaf_id
 # in group 1 and the zone content (header + separator + data rows) in
 # group 2. Mirrors extractor._TEMPLATED_TABLE_ZONE_RE.
@@ -608,6 +623,106 @@ def _apply_prefills_and_wrap_edit_zones(
     return "".join(out_parts), n_prefilled
 
 
+def _format_guidance_markdown(guidance: tuple[str, ...]) -> str:
+    """Render a per-MUST guidance block as a Markdown callout.
+
+    Ship 56'.a — the block appears between the MUST-section prose and
+    the tenant's <<TEXT>> placeholder. Tenant-facing "Best practice:"
+    label + bulleted imperative steps.
+    """
+    lines = ["**Best practice:**", ""]
+    for g in guidance:
+        lines.append(f"- {g}")
+    return "\n".join(lines) + "\n"
+
+
+def _format_prerequisites_markdown(prereqs: tuple) -> str:
+    """Render the per-leaf prerequisites block as a Markdown callout.
+
+    Ship 57' — placed under the "Before you start" heading. Groups entries
+    by category (foundational → direct → cross_role); each entry shows the
+    control ref + title on one line, then a Why + Good-enough line pair.
+    """
+    order = ("foundational", "direct", "cross_role")
+    by_cat: dict[str, list] = {}
+    for p in prereqs:
+        by_cat.setdefault(p.category, []).append(p)
+    lines = ["**Prerequisites:**", ""]
+    for cat in order:
+        for p in by_cat.get(cat, []):
+            ref_display = _humanize_control_ref(f"{p.standard_id}:{p.ref}")
+            lines.append(f"- **{ref_display} — {p.title}**")
+            lines.append(f"  - Why: {p.rationale}")
+            if p.good_enough:
+                lines.append(f"  - Good enough: {p.good_enough}")
+    return "\n".join(lines) + "\n"
+
+
+def _apply_prerequisites_blocks(body: str, leaf_id: str) -> tuple[str, int]:
+    """Replace every <<PREREQUISITES>> marker with the resolved per-leaf
+    prerequisites callout. Empty prereqs ⇒ marker line silently dropped."""
+    from rag.templates.prerequisites_lookup import get_prerequisites_for_leaf
+
+    matches = list(_PREREQUISITES_MARKER_RE.finditer(body))
+    if not matches:
+        return body, 0
+    prereqs = get_prerequisites_for_leaf(leaf_id)
+
+    parts: list[str] = []
+    cursor = 0
+    rendered = 0
+    for m in matches:
+        parts.append(body[cursor:m.start()])
+        if prereqs:
+            parts.append(_format_prerequisites_markdown(prereqs))
+            rendered += 1
+        end = m.end()
+        if end < len(body) and body[end] == "\n":
+            end += 1
+        cursor = end
+    parts.append(body[cursor:])
+    return "".join(parts), rendered
+
+
+def _apply_guidance_blocks(body: str) -> tuple[str, int]:
+    """Replace every <<GUIDANCE>> marker with the resolved guidance
+    callout for the immediately-preceding MUST or SHOULD item marker.
+
+    - Empty guidance ⇒ marker line silently dropped.
+    - No preceding item marker ⇒ marker line silently dropped
+      (defensive; would indicate a template authoring error).
+
+    Returns (new_body, n_blocks_rendered).
+    """
+    from rag.templates.guidance_lookup import get_guidance_for_item
+
+    g_matches = list(_GUIDANCE_MARKER_RE.finditer(body))
+    if not g_matches:
+        return body, 0
+
+    parts: list[str] = []
+    cursor = 0
+    rendered = 0
+    for gm in g_matches:
+        parts.append(body[cursor:gm.start()])
+        # Find the last MUST/SHOULD marker BEFORE this <<GUIDANCE>>
+        preceding = list(_ANY_ITEM_MARKER_RE.finditer(body[:gm.start()]))
+        if preceding:
+            item_id = preceding[-1].group(1)
+            guidance = get_guidance_for_item(item_id)
+            if guidance:
+                parts.append(_format_guidance_markdown(guidance))
+                rendered += 1
+        # Marker consumed either way — advance cursor past its line
+        end = gm.end()
+        # Also consume the trailing newline for a clean drop when block empty
+        if end < len(body) and body[end] == "\n":
+            end += 1
+        cursor = end
+    parts.append(body[cursor:])
+    return "".join(parts), rendered
+
+
 def render_template(
     pg_conn,
     tenant_id:           str,
@@ -669,6 +784,17 @@ def render_template(
         na_must_ids = {r[0] for r in cur.fetchall()}
 
     body, dropped, kept = _strip_na_sections(body_md, na_must_ids)
+
+    # Ship 56'.a — resolve <<GUIDANCE>> markers to per-MUST guidance
+    # callouts. Runs before edit-zone wrapping so the guidance block
+    # lands OUTSIDE the tenant-authoring edit zone (it's guidance, not
+    # evidence). Empty guidance ⇒ marker line dropped.
+    body, guidance_rendered = _apply_guidance_blocks(body)
+
+    # Ship 57' — resolve the single <<PREREQUISITES>> marker (typically
+    # under "Before you start") to a grouped per-leaf prerequisites
+    # callout. Empty prereqs ⇒ marker line dropped.
+    body, _prereqs_rendered = _apply_prerequisites_blocks(body, leaf_id)
 
     # PREFILL — for each MUST surviving the N/A strip, look up the
     # tenant's prior approved+active evidence and compose it into the

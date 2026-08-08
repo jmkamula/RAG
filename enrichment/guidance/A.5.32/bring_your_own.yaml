@@ -1,0 +1,18 @@
+must_id: item:A.5.32:bring_your_own
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Bring-your-own-licence handling (personal licences brought into a business context, freelancer-supplied
+  software)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a procedure for employees and freelancers to declare any personal software licences or tools
+  they intend to use for business purposes, including licence terms.
+- Name a specific individual responsible for reviewing and approving the use of personal or freelancer-supplied
+  licences before deployment.
+- Record each approval decision with the approver’s name, date, and any licence restrictions in a central
+  register.
+- State in the procedure that verbal or informal approvals are not permitted; require all approvals to
+  be written and retained.

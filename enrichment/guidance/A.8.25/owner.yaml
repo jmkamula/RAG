@@ -1,0 +1,14 @@
+must_id: item:A.8.25:owner
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Named policy authority (Engineering lead with InfoSec partner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Engineering Lead and their InfoSec partner as the policy authorities on the front page of the
+  Secure Development Lifecycle Policy.
+- Document the full names, job titles, and contact details of both authorities within the policy document.
+- Sign and date the policy to confirm formal approval by both the Engineering Lead and the InfoSec partner.
+- Avoid listing the owner as a group, department, or generic role; use only specific, named individuals.

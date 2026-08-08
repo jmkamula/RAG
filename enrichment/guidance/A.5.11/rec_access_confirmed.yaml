@@ -1,0 +1,19 @@
+must_id: item:A.5.11:rec_access_confirmed
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Access-revocation confirmed per record (corp accounts disabled, SSO removed, credentials rotated)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date and time each departing user's corporate account was disabled in a per-leaver
+  asset return record.
+- Document the removal of the user from all single sign-on (SSO) systems, listing each system and the
+  removal date.
+- Confirm that all credentials issued to the leaver, such as passwords or tokens, were rotated or invalidated,
+  and note the responsible person.
+- Name the individual who performed each access revocation action, avoiding generic references like "IT"
+  or "the team".
+- Retain a signed or digitally acknowledged confirmation from the supervisor or HR that all logical access
+  has been revoked for the leaver.

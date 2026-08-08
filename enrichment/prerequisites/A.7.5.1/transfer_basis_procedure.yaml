@@ -1,0 +1,43 @@
+leaf_id: req:A.7.5.1:transfer_basis_procedure
+control_ref: A.7.5.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You must know and document the specific purposes for which PII is processed before you can
+    determine the legal basis for transferring it across jurisdictions. Without this, you cannot justify
+    or select an appropriate transfer mechanism.
+  good_enough: A documented list of PII processing purposes, mapped to relevant data flows, is available
+    and up to date.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: The lawful basis for processing PII underpins the selection of a valid transfer basis. Without
+    clarity on the lawful basis, you cannot ensure that transfers are legally justified or compliant with
+    applicable regulations.
+  good_enough: Each PII processing activity has a recorded lawful basis, even if some are provisional
+    or pending legal review.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: An up-to-date asset register is essential to identify which information assets (including
+    PII) are subject to cross-jurisdictional transfer. This ensures all relevant PII flows are considered
+    in the transfer procedure.
+  good_enough: A current inventory exists listing all information assets, with those containing PII and
+    subject to transfer flagged.
+- ref: Art.45
+  standard_id: GDPR:2016/679
+  title: Transfers on the basis of an adequacy decision
+  category: cross_role
+  rationale: GDPR adequacy decisions are the primary legal yardstick for international PII transfers.
+    You must check for adequacy before considering other transfer mechanisms, as required by both ISO27701
+    and GDPR.
+  good_enough: A reference list of jurisdictions with adequacy decisions is available and checked as part
+    of transfer planning.

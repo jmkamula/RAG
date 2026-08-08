@@ -1,0 +1,20 @@
+must_id: item:Art.15:identity_check
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Identity verification step recorded (proportionate to sensitivity per Art.12.6) — modern baseline
+  treats Art.12.6 as MUST not SHOULD when reasonable doubt is the default posture for unauthenticated
+  channels
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the method used to verify the requestor’s identity, such as photo ID check or knowledge-based
+  questions, in the access request log.
+- Document the date and name of the staff member who completed the identity verification for each data
+  subject access request.
+- State the sensitivity level of the requested data and justify the chosen verification method in the
+  response file.
+- Name the verification owner as a specific individual, not a team or generic role, in the request documentation.
+- Retain copies or references to the verification evidence, such as scanned ID or call logs, alongside
+  the request record.

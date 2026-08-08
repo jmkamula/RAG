@@ -1,0 +1,17 @@
+must_id: item:A.5.23:shared_responsibility
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: 'Shared-responsibility model: which controls are CSP-managed vs customer-managed'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific cloud service provider(s) and the exact cloud services covered in the policy, avoiding
+  generic or boilerplate descriptions.
+- Document a table or matrix that clearly lists each security control and states whether it is managed
+  by the provider or by your organisation.
+- Assign a named individual as the owner responsible for maintaining and updating the shared-responsibility
+  model in the policy.
+- Reference the official provider documentation or contract that defines the division of security responsibilities,
+  including version and date.

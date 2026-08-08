@@ -1,0 +1,48 @@
+leaf_id: req:A.7.4.1:program_review
+control_ref: A.7.4.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: You cannot review whether personal data collection is limited and justified unless you have
+    already documented the specific purposes for which data is collected. This forms the baseline for
+    assessing necessity and privacy-by-default.
+  good_enough: A current, accessible list of processing purposes for each data collection activity, even
+    if not yet fully mapped to every system.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: Reviewing collection limitation requires knowing the lawful basis claimed for each processing
+    activity. Without this, you cannot judge if data fields are necessary or excessive.
+  good_enough: Each processing purpose has a stated lawful basis (e.g. consent, contract), even if some
+    edge cases are still under review.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: A reliable inventory of information assets is essential to verify that all data collection
+    points are covered in the review. Missing assets mean blind spots in the annual assessment.
+  good_enough: A working asset register that lists major systems and data stores, even if some minor assets
+    are pending inclusion.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: cross_role
+  rationale: To assess whether collection is limited to what is necessary, you need to know which data
+    fields are personal or sensitive. A classification scheme enables this mapping.
+  good_enough: A basic classification scheme that distinguishes personal data from non-personal data,
+    even if not all fields are fully tagged yet.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The review must cover all in-scope processes and systems. If the scope is unclear, the review
+    could miss relevant collection activities.
+  good_enough: A documented ISMS scope that at least outlines which business units, systems, and data
+    types are included, even if some boundaries are still being refined.

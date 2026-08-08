@@ -1,0 +1,19 @@
+must_id: item:A.7.4.9:rev_encryption_currency
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Encryption currency — TLS / cipher-suite standards current (deprecated protocols flagged)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the current TLS versions and cipher suites used for all data transmission programs in a dated
+  inventory record.
+- Cross-reference each protocol and cipher suite against the latest industry standards and published lists
+  of deprecated algorithms.
+- Flag and record any use of deprecated or insecure protocols, noting the specific programs and dates
+  identified.
+- Name a specific individual responsible for ongoing monitoring and updates, avoiding generic roles like
+  "IT team" or "Security group."
+- Retain evidence of management approval for any exceptions, including justification and a timeline for
+  remediation.

@@ -1,0 +1,18 @@
+must_id: item:Art.33:proc_drafting
+control_ref: Art.33
+standard_id: GDPR:2016/679
+must_text: Drafting workflow — required-fields template per Art.33.3, DPO/legal sign-off, contact-point
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a breach notification template that includes all required fields from Article 33.3, such as
+  breach nature, categories, consequences, and measures taken.
+- Assign a named Data Protection Officer or legal counsel to review and sign off on each completed notification
+  before submission.
+- State the designated contact point for further information in the template, listing a specific individual
+  with direct contact details.
+- Record the date and version of the notification procedure to show it is current and regularly reviewed.
+- Name the sign-off owner as a specific person, not a generic title or department, to avoid ambiguity
+  in accountability.

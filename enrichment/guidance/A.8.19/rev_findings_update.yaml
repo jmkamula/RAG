@@ -1,0 +1,19 @@
+must_id: item:A.8.19:rev_findings_update
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Findings propagated to procedure / approved list
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record all findings from each periodic installation program review in a dated summary document, listing
+  specific issues and recommendations.
+- Update the relevant installation procedure or approved software list to reflect changes based on documented
+  findings, noting the date and responsible person.
+- Obtain written approval for each update from a named manager, attaching the approval to the updated
+  procedure or list.
+- Cross-reference the review findings in the change log of the procedure or approved list to show direct
+  linkage between findings and updates.
+- Name the responsible individual for implementing changes, avoiding generic titles like "IT team" or
+  "staff".

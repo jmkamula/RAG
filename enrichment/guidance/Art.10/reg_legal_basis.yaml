@@ -1,0 +1,15 @@
+must_id: item:Art.10:reg_legal_basis
+control_ref: Art.10
+standard_id: GDPR:2016/679
+must_text: Per-row legal basis (official authority OR specific Member State law citation)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the legal basis for each criminal data processing activity in the register, specifying either
+  "official authority" or citing the exact Member State law.
+- Name the specific law or regulation by title and article number when citing Member State law, not just
+  a generic reference.
+- Assign responsibility for each register entry to a named individual, not a team or department.
+- Review each register row to confirm the legal basis field is never left blank or marked as "N/A".

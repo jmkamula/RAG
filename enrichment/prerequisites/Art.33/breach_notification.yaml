@@ -1,0 +1,41 @@
+leaf_id: req:Art.33:breach_notification
+control_ref: Art.33
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to quickly identify which data, systems,
+    and processing operations are affected by a breach. This is essential for accurately completing the
+    notification to the supervisory authority.
+  good_enough: A current, accessible RoPA that covers all major processing activities and can be referenced
+    during breach assessment is sufficient to proceed.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer (DPO) Designation
+  category: foundational
+  rationale: If required, a DPO must be in place to coordinate breach notifications and act as the contact
+    point for the supervisory authority. Without this, the notification process may lack an accountable
+    owner.
+  good_enough: A named DPO (internal or external) with contact details and basic responsibilities documented
+    is enough to unblock breach notification drafting.
+- ref: A.5.24
+  standard_id: ISO27001:2022
+  title: Information Security Incident Management
+  category: cross_role
+  rationale: A working incident management process ensures that breaches are detected, assessed, and escalated
+    in a timely manner, which is critical for meeting the 72-hour notification deadline.
+  good_enough: A documented and communicated incident management process that covers breach identification
+    and escalation is sufficient for this step.
+- ref: Art.34
+  standard_id: GDPR:2016/679
+  title: Communication of a Personal Data Breach to the Data Subject
+  category: direct
+  rationale: Understanding the requirements for notifying data subjects helps ensure that the supervisory
+    authority notification includes relevant information about potential impacts and mitigation steps.
+  good_enough: A summary of when and how data subjects will be notified, even if not fully detailed, is
+    enough to inform the authority notification.

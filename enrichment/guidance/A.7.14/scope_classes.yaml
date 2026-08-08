@@ -1,0 +1,17 @@
+must_id: item:A.7.14:scope_classes
+control_ref: A.7.14
+standard_id: ISO27001:2022
+must_text: Equipment classes in scope (anything with storage — explicit list)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all equipment types with storage media, such as laptops, servers, smartphones, USB drives, and
+  printers, in a dated equipment disposal scope document.
+- Name the person responsible for maintaining the equipment list as a specific individual, not a team
+  or department.
+- Cross-reference the disposal scope document with your current asset inventory to confirm all relevant
+  equipment classes are included.
+- Record the review date and approver’s name on the disposal scope document to show it is current and
+  formally approved.

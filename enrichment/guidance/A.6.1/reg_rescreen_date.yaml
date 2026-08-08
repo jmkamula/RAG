@@ -1,0 +1,17 @@
+must_id: item:A.6.1:reg_rescreen_date
+control_ref: A.6.1
+standard_id: ISO27001:2022
+must_text: Last rescreen date per record (for roles with ongoing-check obligations)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the most recent rescreening date for each candidate in the register, using a clear date format
+  such as YYYY-MM-DD.
+- Name the individual responsible for updating each candidate’s rescreening status, listing their full
+  name rather than a generic title.
+- Cross-reference each rescreening entry with supporting documentation, such as a signed rescreening confirmation
+  or background check report.
+- Confirm that all roles requiring ongoing checks have a non-blank, current rescreening date; do not leave
+  fields empty or marked "N/A" for these roles.

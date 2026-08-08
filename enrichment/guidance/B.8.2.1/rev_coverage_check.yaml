@@ -1,0 +1,18 @@
+must_id: item:B.8.2.1:rev_coverage_check
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+must_text: Coverage check — every in-scope customer has an executed agreement on file
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every in-scope customer by name in a dated register maintained by the responsible contract manager.
+- Cross-reference each customer in the register to a specific, executed agreement file, including the
+  agreement date and signatories.
+- Confirm that each agreement is signed by both parties and stored in a designated repository accessible
+  for audit.
+- Name the contract manager responsible for maintaining the register as a specific individual, not a team
+  or department.
+- Record the date of the most recent review of the register and agreements, noting any gaps or exceptions
+  found.

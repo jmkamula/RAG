@@ -1,0 +1,17 @@
+must_id: item:A.7.3.5:scope_marketing_processing
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Marketing processing enumerated (Art.21.2 absolute objection applies)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all processing activities related to marketing, specifying each activity and its purpose, in a
+  dated document reviewed by the privacy team.
+- State explicitly in the scope document that GDPR Article 21.2 absolute objection applies to all identified
+  marketing processing activities.
+- Name the responsible individual for maintaining and updating the marketing processing scope, avoiding
+  generic roles like "the team" or "marketing department."
+- Cross-reference the documented marketing activities with your data processing register to confirm completeness
+  and consistency.

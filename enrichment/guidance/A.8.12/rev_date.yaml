@@ -1,0 +1,16 @@
+must_id: item:A.8.12:rev_date
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval (≤180 days)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of each Data Loss Prevention (DLP) program review in a central log, showing the most
+  recent review occurred within the last 180 days.
+- Name the reviewer as a specific individual responsible for the DLP program review, not a group or department.
+- Retain the signed or approved review summary document, including the date and any follow-up actions
+  identified.
+- Cross-reference the review date against your documented review schedule to confirm the interval does
+  not exceed 180 days.

@@ -1,0 +1,19 @@
+must_id: item:Art.23:rev_law_currency
+control_ref: Art.23
+standard_id: GDPR:2016/679
+must_text: Law currency — every cited MS law still in force; any new restricting law surfaced
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every national law cited as a restriction under Article 23 in your program, including the full
+  legal title and citation.
+- Confirm the current legal status of each cited law by checking the latest official government or legislative
+  website and recording the verification date.
+- Document any new or amended national laws that introduce or change Article 23 restrictions since your
+  last review, including their effective dates.
+- Name the person responsible for monitoring legal changes as a specific individual, not as a team or
+  department.
+- Retain evidence of your review, such as screenshots or downloaded pages from official sources, showing
+  each law’s status at the time of review.

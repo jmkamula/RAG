@@ -1,0 +1,18 @@
+must_id: item:6.1.1:actions_planned
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Actions planned to address risks and opportunities
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each planned action to address identified risks and opportunities in the ISMS Risk and Opportunity
+  Planning Procedure, including a clear description and intended outcome.
+- Assign a specific individual as the owner for each action, rather than using generic terms like "the
+  team" or a department.
+- Record the planned completion date for every action, ensuring each entry is dated and traceable.
+- Cross-reference each action to the corresponding risk or opportunity in the risk register, showing a
+  direct link between the two.
+- Retain evidence of management approval for the planned actions, such as a signed or digitally approved
+  record.

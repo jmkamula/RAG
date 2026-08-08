@@ -1,0 +1,16 @@
+must_id: item:A.7.2.7:rev_next_date
+control_ref: A.7.2.7
+standard_id: ISO27701:2019
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Joint Controller Program in the review document, using a
+  clear and specific calendar date.
+- Record the name of the individual responsible for scheduling and leading the next review within the
+  same document.
+- Sign and date the review document to confirm when the next review date was set and by whom.
+- Avoid using vague terms like "annual" or "TBD" for the next review date; specify an exact date to prevent
+  auditor findings.

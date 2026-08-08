@@ -1,0 +1,17 @@
+must_id: item:A.8.17:rev_scope_completeness
+control_ref: A.8.17
+standard_id: ISO27001:2022
+must_text: Scope-completeness check (new system class covered)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all system classes in scope, including any newly added types, in a dated inventory reviewed during
+  the latest clock sync program assessment.
+- Document the inclusion of each new system class in the periodic clock sync review report, referencing
+  specific systems by name and implementation date.
+- Assign a named individual to confirm, in writing, that all system classes—especially new ones—are covered
+  by the clock sync program.
+- Avoid referencing only generic categories such as "servers" or "devices"; specify each system class
+  explicitly to prevent auditor concerns about incomplete coverage.

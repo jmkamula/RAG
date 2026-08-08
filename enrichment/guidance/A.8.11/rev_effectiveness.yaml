@@ -1,0 +1,19 @@
+must_id: item:A.8.11:rev_effectiveness
+control_ref: A.8.11
+standard_id: ISO27001:2022
+must_text: Re-identification residual-risk sampling outcome (acceptable or technique upgrade required)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the date and scope of the most recent masking program review in a signed meeting record or
+  review log entry.
+- Record the sampling method used to test for re-identification risk, including sample size, data types,
+  and responsible reviewer’s name.
+- State the outcome of the residual-risk sampling, explicitly noting whether risk is acceptable or if
+  a technique upgrade is required, in a dated summary report.
+- Name the individual who approved the outcome decision, avoiding generic roles like "the team" or "IT
+  department".
+- Retain evidence of any actions taken if a technique upgrade was required, such as change requests or
+  updated technical documentation.

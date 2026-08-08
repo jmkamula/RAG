@@ -1,0 +1,20 @@
+must_id: item:A.8.14:bl_monitoring
+control_ref: A.8.14
+standard_id: ISO27001:2022
+must_text: Monitoring of redundant components — failures detected before failover need (no silent single-point
+  loss)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the list of all redundant components in your environment, including their locations and the
+  systems they support, in an inventory record.
+- Assign a named individual responsible for monitoring each redundant component, specifying their name
+  and contact details in the monitoring log.
+- Record the monitoring method and frequency for each component, including automated alerts or manual
+  checks, in a dated monitoring procedure.
+- Capture and retain evidence of regular monitoring activity, such as system logs or monitoring reports,
+  showing detection of failures before failover is required.
+- Name the owner as a specific individual for each redundant component — do not use generic terms like
+  "IT team" or "Operations".

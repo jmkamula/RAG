@@ -1,0 +1,19 @@
+must_id: item:A.8.3:enforcement
+control_ref: A.8.3
+standard_id: ISO27001:2022
+must_text: Enforcement mechanism per system (ACL / RBAC / ABAC / IdP claims)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the enforcement mechanism used for each system, such as access control lists, role-based access,
+  or identity provider claims, in a documented table.
+- Document the person responsible for configuring and maintaining each system’s access restrictions, listing
+  their full name and job title.
+- Record the date when each enforcement mechanism was last reviewed or updated, referencing supporting
+  change logs or configuration audit trails.
+- Attach or cross-reference screenshots or exported configuration files that show the current enforcement
+  settings for each system.
+- Specify the enforcement mechanism for each system individually—do not use generic descriptions that
+  could apply to any system.

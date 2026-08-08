@@ -1,0 +1,32 @@
+leaf_id: req:A.7.11:utility_register
+control_ref: A.7.11
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which sites and locations are in-scope for your ISMS before you can catalogue
+    their critical utilities. This ensures the register covers all relevant facilities and none that are
+    out of scope.
+  good_enough: A clear, up-to-date list of all sites and facilities included in the ISMS scope, even if
+    some details are high-level.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: The asset register identifies all physical assets, including buildings and infrastructure,
+    which is essential for identifying which utilities need to be tracked per site.
+  good_enough: A basic inventory of all sites and major assets, with enough detail to link each site to
+    its utilities.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment highlights which utilities are critical to operations and where redundancy
+    or special controls are needed. This informs what must be included in the utility register.
+  good_enough: A recent risk assessment that identifies key utility-related risks for each site, even
+    if mitigation plans are still in progress.

@@ -1,0 +1,16 @@
+must_id: item:A.8.9:rev_reviewer
+control_ref: A.8.9
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Infrastructure leads + InfoSec)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific Infrastructure Lead and InfoSec representative responsible for each configuration
+  review in the review log.
+- Record the review date and the names of all reviewers in the configuration program review report.
+- Obtain signatures or written confirmation from both the Infrastructure Lead and InfoSec representative
+  on the completed review document.
+- Avoid listing groups or roles such as "IT team" or "Security department" as reviewers; use named individuals
+  only.

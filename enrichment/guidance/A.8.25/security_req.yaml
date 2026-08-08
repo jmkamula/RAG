@@ -1,0 +1,19 @@
+must_id: item:A.8.25:security_req
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Security requirements integration (cross-link to A.8.26 — security requirements at design phase)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the Secure Development Lifecycle Policy that security requirements must be identified and integrated
+  at the design phase of all projects.
+- Cross-reference section A.8.26 in the policy, explicitly linking it to the process for defining security
+  requirements during system design.
+- Name a specific individual, such as the Head of Development or Security Lead, as responsible for ensuring
+  security requirements are addressed at the design phase.
+- Attach a dated record of the most recent policy review showing updates that include the integration
+  of security requirements at the design phase.
+- Avoid using generic statements like "security is considered" without detailing how and when requirements
+  are identified and integrated.

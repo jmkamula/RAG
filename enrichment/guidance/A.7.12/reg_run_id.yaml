@@ -1,0 +1,15 @@
+must_id: item:A.7.12:reg_run_id
+control_ref: A.7.12
+standard_id: ISO27001:2022
+must_text: Per-row run identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each cabling run and record it in a dedicated column of the Cabling Run
+  Register.
+- Document the date each cabling run is added to the register, linking it to its unique identifier.
+- Name the person responsible for entering each cabling run, ensuring their full name—not just initials
+  or a team name—is listed.
+- Cross-reference each run identifier with supporting installation records or diagrams to confirm traceability.

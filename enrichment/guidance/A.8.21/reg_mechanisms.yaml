@@ -1,0 +1,17 @@
+must_id: item:A.8.21:reg_mechanisms
+control_ref: A.8.21
+standard_id: ISO27001:2022
+must_text: Per-row security mechanisms in use (matches procedure's baseline for the class)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List the specific security mechanisms used for each network service row, matching the baseline controls
+  set in your documented procedure.
+- Cross-reference each row’s security mechanisms with the relevant baseline class in your procedure, noting
+  any deviations with a dated explanation.
+- Name the person responsible for maintaining the register and updating security mechanisms, using a full
+  name rather than a job title or team.
+- Record the date each network service entry was last reviewed or updated to show ongoing compliance with
+  baseline requirements.

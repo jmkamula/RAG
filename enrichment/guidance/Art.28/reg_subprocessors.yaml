@@ -1,0 +1,16 @@
+must_id: item:Art.28:reg_subprocessors
+control_ref: Art.28
+standard_id: GDPR:2016/679
+must_text: Per-row authorised sub-processor list (or 'none')
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every authorised sub-processor by full legal name for each processor entry in the register, or
+  state 'none' if there are no sub-processors.
+- Record the date when each sub-processor was authorised, linking to the relevant approval or contract
+  addendum.
+- Name the individual who approved each sub-processor, avoiding generic titles or teams.
+- Attach supporting documentation, such as the sub-processor agreement or notification to the controller,
+  for each listed sub-processor.

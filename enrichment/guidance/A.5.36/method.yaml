@@ -1,0 +1,19 @@
+must_id: item:A.5.36:method
+control_ref: A.5.36
+standard_id: ISO27001:2022
+must_text: Method used per item (control sampling, formal audit, automated check, attestation, walkthrough);
+  rationale for method choice given the item type
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each policy, rule, and standard reviewed, including its unique title and version, in a dated compliance
+  review record.
+- Record the specific review method used for each item, such as control sampling, formal audit, automated
+  check, attestation, or walkthrough.
+- State the rationale for choosing the review method for each item, referencing the item’s type, complexity,
+  or risk level.
+- Name the reviewer as a specific individual, not a group or department, for each entry in the record.
+- Attach supporting evidence, such as checklists, screenshots, or audit logs, to demonstrate that the
+  stated review method was actually performed.

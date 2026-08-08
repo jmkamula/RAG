@@ -1,0 +1,17 @@
+must_id: item:B.8.2.6:rev_reviewer
+control_ref: B.8.2.6
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Trust Ops)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and job title, explicitly identifying both the
+  Data Protection Officer and a Trust Operations representative.
+- Record the date each reviewer completed their assessment of the Processor Record of Processing Activities
+  (RoPA) program in a review log.
+- Sign the review record electronically or physically to confirm each named reviewer’s participation and
+  agreement with the findings.
+- Retain any email or meeting minutes that show both the DPO and Trust Ops were invited and participated
+  in the review process.

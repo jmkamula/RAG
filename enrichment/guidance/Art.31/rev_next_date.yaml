@@ -1,0 +1,15 @@
+must_id: item:Art.31:rev_next_date
+control_ref: Art.31
+standard_id: GDPR:2016/679
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the SA Cooperation Program in the document, using a clear and
+  unambiguous date format.
+- Record the name of the individual responsible for scheduling the next review, not just a team or department.
+- Document the date when the current review was completed to show the timeline between reviews.
+- Cross-reference the review schedule in your compliance calendar or tracking tool to demonstrate ongoing
+  planning.

@@ -1,0 +1,17 @@
+must_id: item:A.8.23:rev_reviewer
+control_ref: A.8.23
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Security Operations + Legal/HR for category boundaries)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer from Security Operations as a specific individual, not as a team or department, in
+  the review record.
+- Record the reviewer from Legal or HR who approved or defined the category boundaries, including their
+  full name and role.
+- Document the date and outcome of the periodic web filtering program review in a signed meeting summary
+  or approval log.
+- Cross-reference the review record with supporting evidence, such as meeting minutes or approval emails,
+  showing participation from both Security Operations and Legal/HR.

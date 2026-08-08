@@ -1,0 +1,19 @@
+must_id: item:Art.22:rev_silent_promotion
+control_ref: Art.22
+standard_id: GDPR:2016/679
+must_text: Silent-promotion sweep — verify no flag-for-review system has been quietly promoted to solely-automated
+  without procedure update
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all systems previously flagged for human review and document their current decision-making
+  mode in a dated inventory.
+- Cross-reference the current inventory against the latest approved procedures to confirm alignment between
+  system operation and documented process.
+- Record any systems that have shifted to fully automated decisions without a corresponding procedure
+  update, noting the date and responsible individual.
+- Name the reviewer who conducted the sweep as a specific individual, not as a team or department.
+- Retain evidence of management sign-off for any detected changes or confirmation that no unauthorized
+  silent promotions occurred.

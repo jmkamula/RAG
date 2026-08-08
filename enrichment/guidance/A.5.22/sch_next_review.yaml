@@ -1,0 +1,17 @@
+must_id: item:A.5.22:sch_next_review
+control_ref: A.5.22
+standard_id: ISO27001:2022
+must_text: Next review date per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the next scheduled review date for each supplier in a dedicated column within the Supplier Review
+  Schedule Register.
+- Name the person responsible for each supplier review, listing their full name rather than a team or
+  department.
+- Update the review date immediately after each completed review, capturing the new planned date in the
+  register.
+- Cross-reference each review entry with supporting documentation, such as meeting notes or review reports,
+  to confirm the review occurred as scheduled.

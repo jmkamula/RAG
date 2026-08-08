@@ -1,0 +1,18 @@
+must_id: item:A.5.15:comm_a518_link
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Tie-in with A.5.18 provisioning training — decision-makers know both the rules and the workflow
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name each decision-maker who receives the access control policy and related workflow training in a dated
+  communication log.
+- Document the specific training session or communication event where the policy and workflow were explained,
+  including date and trainer’s name.
+- Cross-reference the communication record with the access provisioning training attendance list to show
+  decision-makers received both policy and workflow information.
+- State explicitly in the record that the training covered both the access control rules and the steps
+  for provisioning and deprovisioning access.
+- Avoid listing groups or roles as recipients; record only named individuals to show clear accountability.

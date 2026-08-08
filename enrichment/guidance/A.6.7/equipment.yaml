@@ -1,0 +1,16 @@
+must_id: item:A.6.7:equipment
+control_ref: A.6.7
+standard_id: ISO27001:2022
+must_text: Approved equipment for remote working
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all equipment approved for remote working in the Remote Working Policy, including device types,
+  models, and any required security features.
+- Name the individual responsible for maintaining the approved equipment list, ensuring this is not a
+  group or department.
+- Record the date when the approved equipment list was last reviewed and updated in the policy document.
+- Attach evidence of management approval for the equipment list, such as a signed or digitally authorized
+  policy version.

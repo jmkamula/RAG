@@ -1,0 +1,20 @@
+must_id: item:A.5.37:rev_scope_check
+control_ref: A.5.37
+standard_id: ISO27001:2022
+must_text: Cross-check against the applicable-facilities scope — any new system / SaaS environment / facility
+  class that should add procedures
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference the current list of operating procedures with your up-to-date inventory of systems,
+  SaaS environments, and facility types.
+- Identify any new or changed systems, SaaS tools, or facility classes that have been added since the
+  last review date.
+- Name a specific individual responsible for confirming that each new or changed item has appropriate
+  operating procedures in place.
+- Record the review date, findings, and any required procedure updates in a dated review log signed by
+  the reviewer.
+- Avoid listing "all sites" or "IT" as owners—assign each procedure to a named person for each facility
+  or system.

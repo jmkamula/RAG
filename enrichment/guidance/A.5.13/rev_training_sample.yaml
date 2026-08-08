@@ -1,0 +1,18 @@
+must_id: item:A.5.13:rev_training_sample
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Training-effectiveness sample (small sample of newly created items per level — labelled correctly?)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a random sample of newly created information items from each classification level and record
+  their unique identifiers and creation dates.
+- Compare the labels on each sampled item against your current classification policy and document whether
+  each one is correctly labelled.
+- Name the reviewer who performed the check for each item and record the date of the review.
+- Note any items with missing, incorrect, or ambiguous labels and describe the specific issue found for
+  each.
+- Avoid summarising results without item-level evidence — auditors will expect to see detailed records
+  for each sampled item, not just overall statistics.

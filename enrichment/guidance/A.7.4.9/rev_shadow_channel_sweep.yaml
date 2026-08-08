@@ -1,0 +1,19 @@
+must_id: item:A.7.4.9:rev_shadow_channel_sweep
+control_ref: A.7.4.9
+standard_id: ISO27701:2019
+must_text: Shadow-channel sweep — unauthorised transmission paths flagged (e.g. developers using consumer
+  file-sharing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead a quarterly review of all data transmission channels, including informal
+  or unsanctioned methods.
+- Document each identified transmission path in a dated register, noting both authorised and unauthorised
+  channels discovered during the sweep.
+- Record evidence of checks for shadow channels, such as screenshots or logs showing searches for consumer
+  file-sharing or messaging apps.
+- Flag and list any unauthorised transmission paths found, including details of users and actions taken
+  to address each case.
+- Name the reviewer as a specific person, not a group or generic role, in the final review report.

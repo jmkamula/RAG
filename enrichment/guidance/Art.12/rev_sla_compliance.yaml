@@ -1,0 +1,19 @@
+must_id: item:Art.12:rev_sla_compliance
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: SLA compliance check — one-month response rate against in-scope requests
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the dates each in-scope data subject request was received and the date of your response in a
+  central log.
+- Calculate the response time for each request and flag any that exceed the one-month deadline in the
+  log.
+- Name the person responsible for monitoring and reporting response times as a specific individual, not
+  a team or generic role.
+- Document a monthly summary report showing the percentage of requests answered within the required one-month
+  period, signed by the responsible individual.
+- Retain evidence of any extensions granted, including justification and notification to the requester,
+  with dates and supporting documents.

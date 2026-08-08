@@ -1,0 +1,15 @@
+must_id: item:B.8.5.7:rev_reviewer
+control_ref: B.8.5.7
+standard_id: ISO27701:2019
+must_text: Reviewer identity (Procurement + Legal + DPO)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer from Procurement, Legal, and the Data Protection Officer as specific individuals in
+  the Subcontractor Engagement Program Review record.
+- Record the date each reviewer completed their review and input on the program review document.
+- Obtain a signature or written confirmation from each named reviewer, showing their approval or comments
+  on the review outcome.
+- Avoid listing reviewers as "the team" or by department; use full names and job titles for clear accountability.

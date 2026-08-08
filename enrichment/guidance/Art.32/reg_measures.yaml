@@ -1,0 +1,16 @@
+must_id: item:Art.32:reg_measures
+control_ref: Art.32
+standard_id: GDPR:2016/679
+must_text: Per-row T&O measures applied (pseudonymisation / encryption / CIA / resilience / restoration)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity in the register with a unique identifier and a clear description of the
+  data involved.
+- Record the specific technical and organisational measures applied per activity, such as pseudonymisation,
+  encryption, access controls, or backup procedures.
+- State the date each measure was implemented and the name of the responsible individual for that decision.
+- Cross-reference each measure to the relevant GDPR Article 32.1 sub-point (a-d) it addresses in the register.
+- Name the owner of each register entry as a specific person, not a group or department.

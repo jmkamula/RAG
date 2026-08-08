@@ -1,0 +1,20 @@
+must_id: item:A.7.5:threat_assessment
+control_ref: A.7.5
+standard_id: ISO27001:2022
+must_text: Threat assessment per site (fire, flood, earthquake, civil unrest, power, vandalism, climate-related
+  risk)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical sites in scope, including addresses, in a dated inventory reviewed and approved by
+  a named responsible individual.
+- Document a site-specific assessment for each location, covering fire, flood, earthquake, civil unrest,
+  power loss, vandalism, and climate-related risks, with assessment dates.
+- Record the sources of risk information used for each site, such as government data or insurance reports,
+  and cross-reference these in the assessment.
+- Name the person responsible for each site’s threat assessment as a specific individual, not a team or
+  department.
+- Retain evidence of management review and approval of each completed site assessment, including signatures
+  and dates.

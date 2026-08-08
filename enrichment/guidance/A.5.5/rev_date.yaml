@@ -1,0 +1,19 @@
+must_id: item:A.5.5:rev_date
+control_ref: A.5.5
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval (typically within 12 months of last review)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of the last authority contact review in a central register, making sure it is clearly
+  visible and unambiguous.
+- Name the individual responsible for scheduling and conducting the authority contact review, avoiding
+  generic roles like "the team" or "IT".
+- Document the planned review interval, such as "every 12 months," alongside the last review date in the
+  same register.
+- Confirm the most recent review was completed within the planned interval by cross-referencing the last
+  review date and the current date.
+- Retain evidence of the review, such as a signed or dated review checklist or meeting minutes, for auditor
+  inspection.

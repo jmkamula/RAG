@@ -1,0 +1,19 @@
+must_id: item:A.7.5.4:scope_change_drivers
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Trigger list (new integration / new regulator inquiry)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current contexts where personal data disclosures may occur, referencing specific systems, integrations,
+  and regulatory interactions, with dates of last review.
+- Document each new integration or regulator inquiry as a separate entry in the disclosure contexts scope,
+  including the responsible individual and date added.
+- Cross-reference the disclosure contexts scope with recent change logs or project records to confirm
+  all new triggers are captured.
+- Name the owner as a specific individual responsible for maintaining and updating the disclosure contexts
+  scope—do not use a team or department name.
+- Retain evidence of periodic reviews, such as meeting minutes or signed checklists, showing the disclosure
+  contexts scope was updated for currency.

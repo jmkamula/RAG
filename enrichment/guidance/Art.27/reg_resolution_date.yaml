@@ -1,0 +1,16 @@
+must_id: item:Art.27:reg_resolution_date
+control_ref: Art.27
+standard_id: GDPR:2016/679
+must_text: Per-row resolution date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the exact date each representative operations request is fully resolved in a dedicated "Resolution
+  Date" column for every entry.
+- Confirm that every row in the operations record includes a completed resolution date, leaving no cells
+  blank or marked "N/A".
+- Name the person responsible for entering and verifying resolution dates, listing them as a specific
+  individual rather than a team or department.
+- Retain a copy of the operations record showing all resolution dates and the last date it was updated.

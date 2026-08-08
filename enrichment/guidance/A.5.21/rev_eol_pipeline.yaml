@@ -1,0 +1,17 @@
+must_id: item:A.5.21:rev_eol_pipeline
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: EOL pipeline review (which components reach EOL in the next planning horizon, replacement status)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Identify all ICT components in use and record their expected end-of-life (EOL) dates in a dated inventory
+  spreadsheet.
+- Document which components will reach EOL within the next planning horizon and note their current replacement
+  status in the same inventory.
+- Assign a named individual as the owner responsible for tracking EOL status and updating the review record.
+- Record the date and outcome of each periodic supply chain review meeting, including decisions on replacements
+  or mitigations.
+- Name the owner as a specific person, not a team or department, to avoid ambiguity in accountability.

@@ -1,0 +1,39 @@
+leaf_id: req:A.7.8:equipment_siting_procedure
+control_ref: A.7.8
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which locations, equipment types, and business units are in-scope for the
+    ISMS before you can define where and how equipment should be sited and protected.
+  good_enough: A clear, current scope statement that identifies the physical and logical boundaries relevant
+    to equipment management.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: You must know what equipment exists and is covered before you can write a siting and protection
+    procedure. The asset register defines the inventory to which the procedure applies.
+  good_enough: A basic, up-to-date list of equipment assets that are in-scope for siting and protection
+    controls.
+- ref: A.7.12
+  standard_id: ISO27001:2022
+  title: Cabling Security
+  category: direct
+  rationale: Cabling security requirements directly impact how equipment is sited and protected, especially
+    for minimising tampering and accidental damage.
+  good_enough: A summary of cabling security expectations and any known risks, even if the full procedure
+    is still being developed.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Information Security Risk Assessment
+  category: foundational
+  rationale: A risk assessment identifies threats and vulnerabilities relevant to equipment siting, such
+    as theft, tampering, or environmental hazards. This informs the procedure's priorities.
+  good_enough: A recent risk assessment that covers physical and environmental risks to equipment, even
+    if not exhaustive.

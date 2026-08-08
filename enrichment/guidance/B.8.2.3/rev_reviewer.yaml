@@ -1,0 +1,16 @@
+must_id: item:B.8.2.3:rev_reviewer
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Marketing Lead)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and job title, not just "DPO" or "Marketing
+  Lead", in the program review record.
+- Record the date each reviewer completed their review in the program documentation.
+- Obtain and retain each reviewer's signature or documented approval, either electronically or in writing,
+  on the final review outcome.
+- Cross-reference the review record with the current list of designated DPO and Marketing Lead to confirm
+  reviewer legitimacy.

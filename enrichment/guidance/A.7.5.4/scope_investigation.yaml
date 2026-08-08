@@ -1,0 +1,17 @@
+must_id: item:A.7.5.4:scope_investigation
+control_ref: A.7.5.4
+standard_id: ISO27701:2019
+must_text: Investigation contexts (internal + external law enforcement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all internal and external investigation scenarios where personal data may be disclosed, including
+  law enforcement and regulatory requests, in a dated document.
+- Name the specific individual responsible for approving disclosures in each investigation context, avoiding
+  generic roles like “the team” or “management.”
+- Record the legal basis or policy reference that permits disclosure for each scenario, citing relevant
+  laws, contracts, or internal policies.
+- Review and update the disclosure contexts scope at least annually, keeping a dated record of each review
+  and any changes made.

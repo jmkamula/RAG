@@ -1,0 +1,20 @@
+must_id: item:A.6.8:rev_ad_hoc_triggers
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Ad-hoc review triggers (major incident exposing under-reporting, regulator enforcement on whistleblower
+  regime, channel outage)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each ad-hoc review trigger in the reporting program procedure, listing examples such as major
+  incidents, regulator actions, or reporting channel outages.
+- Record the date and description of every event that triggered an ad-hoc review in a central incident
+  log.
+- Name the person responsible for initiating a program review after each trigger, ensuring this is a specific
+  individual, not a group or role.
+- Attach evidence of the completed review, such as meeting notes or a signed summary, to the incident
+  log entry for each trigger.
+- Avoid using generic language like "significant event" without clear examples or criteria, as auditors
+  will flag vague or boilerplate triggers.

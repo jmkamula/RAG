@@ -1,0 +1,20 @@
+must_id: item:A.5.8:rev_capacity
+control_ref: A.5.8
+standard_id: ISO27001:2022
+must_text: InfoSec capacity vs project pipeline reviewed (gates fail silently when reviewer capacity is
+  exhausted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name a specific individual responsible for reviewing information security capacity against the project
+  pipeline, avoiding generic titles like "the team" or "IT department".
+- Document the dates and outcomes of each periodic review in a register, including any identified gaps
+  between capacity and project needs.
+- Record any instances where security review gates were missed or bypassed due to insufficient reviewer
+  capacity, with explanations.
+- Assign follow-up actions to address capacity shortfalls, listing the responsible person and target completion
+  date in meeting minutes or action logs.
+- Retain evidence of management decisions to adjust project timelines or resource allocations in response
+  to review findings, such as signed approvals or updated project plans.

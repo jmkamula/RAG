@@ -1,0 +1,19 @@
+must_id: item:A.5.23:personal_data
+control_ref: A.5.23
+standard_id: ISO27001:2022
+must_text: How personal data in cloud storage is protected (encryption, location/sovereignty, sub-processor
+  controls)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy which encryption methods are used to protect personal data stored in each approved
+  cloud service.
+- Document the physical locations or countries where personal data is stored for each cloud provider,
+  referencing provider documentation or contracts.
+- List all third-party sub-processors with access to personal data in cloud services, including the controls
+  in place for their selection and oversight.
+- Name the policy owner as a specific individual with responsibility for cloud data protection, not a
+  team or generic role.
+- Record the policy approval date and the approver’s name to show the policy is current and formally adopted.

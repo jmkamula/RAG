@@ -1,0 +1,18 @@
+must_id: item:B.8.2.5:rev_sla_audit
+control_ref: B.8.2.5
+standard_id: ISO27701:2019
+must_text: SLA audit — sampled requests measured against response SLA
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for conducting the SLA audit, recording their full name and role in
+  the audit documentation.
+- Document a representative sample of customer support requests, including ticket numbers, dates, and
+  assigned agents, within the audit period.
+- Record the actual response times for each sampled request and compare them to the documented SLA targets.
+- Retain dated evidence of the audit results, such as a signed summary report or spreadsheet, showing
+  compliance or deviations.
+- State the date the audit was completed; avoid undated or draft-only records, as auditors will flag missing
+  or unclear completion dates.

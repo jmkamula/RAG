@@ -1,0 +1,46 @@
+leaf_id: req:A.8.32:change_register
+control_ref: A.8.32
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which systems, processes, and assets are in-scope for your ISMS before you
+    can accurately track and record changes. The Change Register must only cover relevant assets and environments.
+  good_enough: A documented scope statement that clearly lists included systems and boundaries is available
+    and up to date.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You can't record meaningful change events unless you know what assets exist and are managed.
+    The Change Register references assets by ID or name, so the Asset Register must be in place first.
+  good_enough: A basic, current list of information assets (hardware, software, data, etc.) with unique
+    identifiers is available.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Each change in the register should be risk-tiered, which requires a defined risk assessment
+    method and recent results. Without this, you can't assign risk levels to changes.
+  good_enough: A documented risk assessment approach and recent risk ratings for key assets or processes
+    are available.
+- ref: A.8.19
+  standard_id: ISO27001:2022
+  title: Installation of software on operational systems
+  category: direct
+  rationale: Change management processes—including the Change Register—must reflect how software installations
+    are controlled. This control defines the rules and approvals that should be logged for software changes.
+  good_enough: Documented procedures for software installation and approval exist, even if not yet fully
+    mature or automated.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Change approval lineage and accountability in the register require clear assignment of roles
+    and responsibilities. Without this, you can't reliably track who approved or executed a change.
+  good_enough: A simple, documented mapping of key ISMS roles to individuals or teams is available.

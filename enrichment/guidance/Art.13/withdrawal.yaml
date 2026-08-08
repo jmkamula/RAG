@@ -1,0 +1,19 @@
+must_id: item:Art.13:withdrawal
+control_ref: Art.13
+standard_id: GDPR:2016/679
+must_text: Right to withdraw consent where applicable
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the privacy notice that individuals have the right to withdraw their consent at any time, using
+  clear and accessible language.
+- Describe the specific process for withdrawing consent, including contact details or an online mechanism,
+  and include this in the privacy notice.
+- Name a responsible contact person or role for handling consent withdrawal requests, listing their full
+  name or job title in the notice.
+- Record the date the privacy notice was last updated to show when the withdrawal process was most recently
+  reviewed.
+- Avoid using generic statements like "contact us to withdraw consent" without providing a concrete method
+  or contact point.

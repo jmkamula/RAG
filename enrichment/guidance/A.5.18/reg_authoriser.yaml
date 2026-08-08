@@ -1,0 +1,15 @@
+must_id: item:A.5.18:reg_authoriser
+control_ref: A.5.18
+standard_id: ISO27001:2022
+must_text: Authoriser captured per grant (named individual, not generic role; drives accountability)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of the individual who approved each access grant in the Access Rights Register
+  entry for that user.
+- Capture the date when each access grant was authorised, linking it to the named approver for traceability.
+- Name the authoriser as a specific person, not a generic role or group, to avoid ambiguity in accountability.
+- Cross-reference each access grant with the supporting approval request or ticket to provide evidence
+  of the decision process.

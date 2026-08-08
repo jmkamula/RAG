@@ -1,0 +1,17 @@
+must_id: item:Art.21:scope_public_task
+control_ref: Art.21
+standard_id: GDPR:2016/679
+must_text: Public-task activities enumerated where applicable (Art.6.1.e)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each processing activity that relies on the "public task" legal basis, referencing the specific
+  service or statutory function involved.
+- Document the relevant law or regulation that authorizes each public task activity, including title and
+  section number.
+- Name the individual responsible for maintaining the processing basis register, avoiding generic titles
+  like "the team" or "department."
+- Record the date each processing activity was last reviewed to confirm its ongoing alignment with the
+  public task basis.

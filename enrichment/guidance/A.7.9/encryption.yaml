@@ -1,0 +1,17 @@
+must_id: item:A.7.9:encryption
+control_ref: A.7.9
+standard_id: ISO27001:2022
+must_text: Encryption requirements for off-premises information storage
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the encryption standard and algorithm required for all information stored off-premises in the
+  policy document, citing specific technologies or protocols.
+- Name the individual responsible for enforcing encryption requirements for off-premises storage, listing
+  their full name and job title.
+- Document the process for verifying encryption is applied before information leaves premises, including
+  a dated checklist or approval record.
+- Specify that the policy version is dated and uniquely numbered to avoid confusion with undated or draft
+  versions.

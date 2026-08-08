@@ -1,0 +1,17 @@
+must_id: item:Art.30:dfi_systems
+control_ref: Art.30
+standard_id: GDPR:2016/679
+must_text: Systems holding personal data enumerated (production systems, SaaS, backups, analytics, archives)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all systems, applications, and services where personal data is stored or processed, including production,
+  backups, analytics, archives, and SaaS platforms.
+- Record the name and version of each system alongside a specific business owner responsible for the data
+  within that system.
+- Document the date when each system entry was last reviewed or updated to show the inventory is current.
+- Cross-reference each system with the types of personal data it holds, avoiding generic labels like "user
+  data" or "miscellaneous information".
+- Name the owner as a specific individual — not "the team", a department, or a vendor.

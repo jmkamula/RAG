@@ -1,0 +1,17 @@
+must_id: item:Art.39:awareness_program
+control_ref: Art.39
+standard_id: GDPR:2016/679
+must_text: Awareness programme contribution (Art.39.1.b 'awareness-raising and training')
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the Data Protection Officer (DPO) as a specific individual responsible for contributing to privacy
+  awareness and training activities.
+- Document the DPO’s involvement in developing or reviewing the latest privacy awareness and training
+  materials, including dates and version numbers.
+- Record attendance lists or sign-off sheets from recent privacy training sessions where the DPO participated
+  or presented.
+- Retain emails or meeting minutes that show the DPO provided input or feedback on awareness programme
+  content or delivery.

@@ -1,0 +1,20 @@
+must_id: item:A.7.4.8:scope_cloud_dependencies
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Cloud disposal dependencies (provider attestations required, retention windows outside org's
+  control)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all cloud services where personal data is stored or processed, including provider names and service
+  types, in a dated inventory.
+- Obtain and file written attestations from each cloud provider describing their data disposal processes
+  and timelines.
+- Record the retention periods enforced by each cloud provider, noting any that exceed your organisation’s
+  own data retention policy.
+- Name a specific individual responsible for reviewing and updating the cloud disposal dependencies inventory,
+  not a team or department.
+- Cross-reference each cloud service entry with the relevant provider contract section covering data deletion
+  and retention commitments.

@@ -1,0 +1,19 @@
+must_id: item:A.5.17:complexity
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Password / credential complexity and rotation requirements (length, character classes, history,
+  max-age — risk-tiered per scope)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State password and credential complexity requirements, including minimum length, character types, and
+  history, in a dated and version-controlled procedure document.
+- Define maximum password age and rotation frequency for each risk tier or user group, with clear mapping
+  in the procedure.
+- Assign a named individual as the procedure owner—do not use generic titles like "IT" or "the team".
+- Record the date of last procedure review and approval, with the approver's name and signature captured
+  in the document.
+- Cross-reference the procedure to supporting technical controls or system configurations that enforce
+  the stated requirements.

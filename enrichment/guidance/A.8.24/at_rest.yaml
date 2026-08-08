@@ -1,0 +1,18 @@
+must_id: item:A.8.24:at_rest
+control_ref: A.8.24
+standard_id: ISO27001:2022
+must_text: Encryption requirements for data at rest per classification tier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document encryption requirements for each data classification tier in the Use of Cryptography Policy,
+  listing approved algorithms and key lengths.
+- Name the policy owner as a specific individual responsible for maintaining and updating the encryption
+  requirements.
+- Record the date of the most recent policy review and approval, including the approver’s name and signature.
+- Cross-reference each classification tier’s encryption requirements to supporting technical standards
+  or procedures used in your environment.
+- State any exceptions to the encryption requirements, including a named approver and supporting justification
+  for each exception.

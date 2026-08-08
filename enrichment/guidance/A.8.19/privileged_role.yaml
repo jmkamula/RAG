@@ -1,0 +1,18 @@
+must_id: item:A.8.19:privileged_role
+control_ref: A.8.19
+standard_id: ISO27001:2022
+must_text: Installation by privileged role only (cross-link to A.8.2 — uses privileged-access procedure)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific privileged roles authorized to install software, listing individuals or job titles
+  in the procedure document.
+- Cross-reference the privileged-access management procedure from control A.8.2 within the software installation
+  procedure.
+- Document the approval process for software installation, including the approver’s name, date, and decision
+  record.
+- Record each software installation event in a log, capturing the installer’s identity, date, and software
+  details.
+- Specify that only named individuals, not generic accounts or teams, are permitted to perform installations.

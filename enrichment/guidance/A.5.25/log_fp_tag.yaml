@@ -1,0 +1,19 @@
+must_id: item:A.5.25:log_fp_tag
+control_ref: A.5.25
+standard_id: ISO27001:2022
+must_text: False-positive flag tracked separately (drives calibration in the program review)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each security event triaged in a log entry with the date, time, and name of the analyst who performed
+  the triage.
+- Add a separate field in the log to flag events confirmed as false positives, distinct from other event
+  status indicators.
+- Document the rationale for classifying an event as a false positive in a dedicated notes section for
+  each flagged entry.
+- Name the reviewer responsible for periodically checking the false-positive flag data to support calibration
+  activities.
+- Avoid using a single status field for both incident resolution and false-positive tracking—ensure the
+  false-positive flag is a distinct, auditable field.

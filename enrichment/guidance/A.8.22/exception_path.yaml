@@ -1,0 +1,17 @@
+must_id: item:A.8.22:exception_path
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Exception process for cross-zone access (time-bound + InfoSec-approved + logged)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each exception request for cross-zone network access, including requester name, business justification,
+  and specific start and end dates.
+- Obtain written approval for each exception from a named Information Security manager, not a generic
+  group or department.
+- Log all approved exceptions in a central register, including approval date and reference to supporting
+  documentation.
+- Review the exception register at least quarterly to confirm that expired exceptions have been closed
+  or renewed with new approval.

@@ -1,0 +1,16 @@
+must_id: item:A.8.28:rev_reviewer
+control_ref: A.8.28
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Engineering leads + Security Champions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name all reviewers as specific individuals by full name and role, explicitly identifying both Engineering
+  Leads and Security Champions in the review record.
+- Record the date each reviewer completed their assessment in the secure coding program review log.
+- Document each reviewer's comments or approval in a signed or digitally acknowledged section of the review
+  artefact.
+- Avoid listing groups or teams as reviewers; always specify named individuals to meet accountability
+  requirements.

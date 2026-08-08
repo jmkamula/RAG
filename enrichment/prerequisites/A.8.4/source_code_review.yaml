@@ -1,0 +1,39 @@
+leaf_id: req:A.8.4:source_code_review
+control_ref: A.8.4
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know whether source code repositories and related development environments are
+    in-scope for your ISMS before reviewing access or controls. This ensures the review covers all relevant
+    assets.
+  good_enough: A documented scope statement that clearly includes (or excludes) software development and
+    code repositories.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register is required to identify which code repositories and related
+    systems exist, so you know what needs to be reviewed for access and dependency hygiene.
+  good_enough: A current list of code repositories and related assets, even if basic, so nothing critical
+    is missed in the review.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures you know who is responsible for managing repository access
+    and conducting the periodic reviews.
+  good_enough: A simple mapping of who owns code repositories and who is responsible for access reviews.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: Knowing the classification of code repositories helps prioritize which ones require stricter
+    review and controls, especially for sensitive or critical codebases.
+  good_enough: A basic classification applied to repositories (e.g., public, internal, confidential),
+    even if not fully mature.

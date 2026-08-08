@@ -1,0 +1,17 @@
+must_id: item:7.2:documented
+control_ref: '7.2'
+standard_id: ISO27001:2022
+must_text: Documented information retained as evidence of competence
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the names and roles of all staff whose competence is relevant to the ISMS in a dated competence
+  register.
+- Document the specific training, certifications, or experience each person has that demonstrates their
+  competence for their assigned ISMS responsibilities.
+- Attach copies of certificates, training completion records, or other evidence to each individual’s entry
+  in the competence register.
+- Name the owner of the competence record as a specific individual, not a group or department.
+- Review and update the competence record at least annually, recording the date and name of the reviewer.

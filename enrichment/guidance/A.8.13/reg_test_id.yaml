@@ -1,0 +1,15 @@
+must_id: item:A.8.13:reg_test_id
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Per-test unique identifier
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each restore test entry in the register before conducting the test.
+- Record the unique identifier alongside the test date, system restored, and responsible person for each
+  entry.
+- Cross-reference the unique identifier in all related test documentation, such as test results and issue
+  logs.
+- Avoid reusing or leaving identifiers blank—each test must have its own distinct, non-empty identifier.

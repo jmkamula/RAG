@@ -1,0 +1,19 @@
+must_id: item:A.6.6:rev_classification_drift
+control_ref: A.6.6
+standard_id: ISO27001:2022
+must_text: Information-classification drift check — has A.5.12 classification scheme changed in ways affecting
+  NDA info_classes?
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Review the latest approved information classification scheme under A.5.12 and note any changes since
+  the last NDA template review.
+- Cross-reference each NDA template clause with the current classification scheme to identify misalignments
+  or outdated terminology.
+- Document the date and outcome of the classification drift check in the NDA review log, including any
+  required template updates.
+- Name the reviewer as a specific individual responsible for the drift check, not a generic role or team.
+- Attach evidence of communication to stakeholders if NDA templates were updated due to classification
+  changes.

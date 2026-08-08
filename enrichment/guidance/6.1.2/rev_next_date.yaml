@@ -1,0 +1,15 @@
+must_id: item:6.1.2:rev_next_date
+control_ref: 6.1.2
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Risk Assessment Program in the documented review schedule.
+- Record the date in a version-controlled document or register that is accessible to relevant stakeholders.
+- Name the individual responsible for scheduling and conducting the next review, using their full name
+  and job title.
+- Avoid leaving the review date blank or using vague terms like "annually"—specify a calendar date or
+  month and year.

@@ -1,0 +1,20 @@
+must_id: item:A.5.29:rev_test_results
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Test-result analysis (last N tests reviewed; gaps surfaced; remediation per gap; ratio of scenarios
+  tested vs total)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the dates and outcomes of the last N continuity-security program tests in a table, including
+  which scenarios were covered in each test.
+- Record each gap or issue identified during test-result analysis, referencing the specific test and scenario
+  where it was found.
+- Assign a named individual to each remediation action for every gap, and include target and completion
+  dates in the remediation log.
+- Calculate and state the ratio of tested scenarios to the total number of defined scenarios, providing
+  both numbers and the resulting percentage.
+- Name the reviewer of the analysis as a specific person, not a generic group or department, and capture
+  their dated sign-off on the review summary.

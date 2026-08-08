@@ -1,0 +1,16 @@
+must_id: item:Art.26:data_subject_against_either
+control_ref: Art.26
+standard_id: GDPR:2016/679
+must_text: Statement that subject may exercise rights against either controller (Art.26.3)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the joint controller arrangement that individuals can exercise their data rights with either
+  controller, referencing Article 26.3 of GDPR.
+- Name both controllers clearly in the arrangement, using full legal names and contact details for each.
+- Document the date the arrangement was signed by authorized representatives of both controllers.
+- Confirm the arrangement is accessible to data subjects, such as by publishing it on both controllers’
+  websites.
+- Avoid using vague language; specify the rights and the process for exercising them with either controller.

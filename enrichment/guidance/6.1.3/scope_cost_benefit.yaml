@@ -1,0 +1,17 @@
+must_id: item:6.1.3:scope_cost_benefit
+control_ref: 6.1.3
+standard_id: ISO27001:2022
+must_text: Cost-benefit rules for treatment selection (when to mitigate vs accept)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the cost-benefit criteria used to decide between risk mitigation and risk acceptance in a dated,
+  approved risk treatment methodology document.
+- State the financial and non-financial thresholds that trigger mitigation versus acceptance, including
+  any quantitative or qualitative measures.
+- Name the decision-maker responsible for applying these rules as a specific individual, not a group or
+  department.
+- Record one or more past risk treatment decisions with clear reference to the documented cost-benefit
+  rules used for selection.

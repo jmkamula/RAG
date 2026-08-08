@@ -1,0 +1,17 @@
+must_id: item:A.7.3.3:proc_layered_design
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: Layered / progressive design (short summary + expandable detail) where notice is long
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a privacy notice template that includes both a brief summary section and clearly marked links
+  or sections for expanded details.
+- Record the date and method used to deliver the layered privacy notice to users, such as screenshots
+  or URLs showing the notice in context.
+- Assign a named individual responsible for reviewing and updating the layered notice design to keep content
+  concise and accessible.
+- State the specific location where users can access both the summary and the full privacy notice, avoiding
+  vague references like "available on our website."

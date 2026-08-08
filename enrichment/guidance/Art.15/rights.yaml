@@ -1,0 +1,17 @@
+must_id: item:Art.15:rights
+control_ref: Art.15
+standard_id: GDPR:2016/679
+must_text: Existence of rights to rectification, erasure, restriction and objection
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the response letter that the data subject has rights to rectification, erasure, restriction,
+  and objection, using clear and specific language.
+- Reference the relevant GDPR articles in the response, such as Article 16 for rectification and Article
+  17 for erasure.
+- Date the response letter and sign it by a named individual responsible for data protection, not a generic
+  team or department.
+- Attach or link to instructions on how the data subject can exercise each right, including contact details
+  for submitting requests.

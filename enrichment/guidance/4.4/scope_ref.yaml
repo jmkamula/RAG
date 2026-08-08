@@ -1,0 +1,16 @@
+must_id: item:4.4:scope_ref
+control_ref: '4.4'
+standard_id: ISO27001:2022
+must_text: Reference to ISMS scope statement (4.3)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Reference the exact ISMS scope statement by document title, version, and date within the ISMS Manual
+  or Charter.
+- Cross-reference the ISMS Manual section where the scope is described with the corresponding section
+  in the formal scope statement document.
+- Name the individual responsible for maintaining the scope statement, using their full name and job title.
+- Avoid using a generic or outdated scope description—confirm the referenced scope statement matches the
+  latest approved version.

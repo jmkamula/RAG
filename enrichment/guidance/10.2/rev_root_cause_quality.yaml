@@ -1,0 +1,20 @@
+must_id: item:10.2:rev_root_cause_quality
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Root-cause-quality sample — sampled NCs reviewed for blame-free systemic analysis (not 'human
+  error' as the only cause)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Select a sample of recent nonconformities with documented corrective actions from your NC/CA program
+  records, including incident dates and descriptions.
+- Review each sampled nonconformity's root cause analysis to confirm it identifies underlying systemic
+  issues, not just individual mistakes or "human error."
+- Record the names and roles of individuals who participated in each root cause analysis, ensuring a multidisciplinary
+  approach is evident.
+- Document the rationale for each root cause determination, showing how evidence supports the conclusion
+  and referencing any supporting data or investigation notes.
+- Avoid listing "human error" as the sole root cause; explicitly state contributing process, system, or
+  organizational factors in the analysis documentation.

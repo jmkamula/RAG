@@ -1,0 +1,17 @@
+must_id: item:A.7.2.3:reg_purpose_link
+control_ref: A.7.2.3
+standard_id: ISO27701:2019
+must_text: Purpose link (which A.7.2.1 purposes this consent authorises)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each consent entry in the register to the specific, numbered purpose from your A.7.2.1
+  purposes list that it authorises.
+- Record the date and method by which each consent was obtained, linking it to the relevant purpose in
+  your documentation.
+- Name the individual responsible for maintaining the consent register, ensuring this is a specific person
+  rather than a team or department.
+- Review the register to confirm that no consent entry lacks a clear, direct link to an approved purpose
+  from A.7.2.1.

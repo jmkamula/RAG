@@ -1,0 +1,16 @@
+must_id: item:B.8.5.6:scope_subcontractor_list
+control_ref: B.8.5.6
+standard_id: ISO27701:2019
+must_text: In-scope subcontractors enumerated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all subcontractors who process personal data on your behalf in a dated register.
+- Specify the services each subcontractor provides and the types of personal data they handle in the register.
+- Name the owner as a specific individual responsible for maintaining the subcontractor list, not a team
+  or department.
+- Cross-reference each subcontractor entry with the relevant contract or agreement covering personal data
+  processing.
+- Review and update the register at least annually, recording the date of each review.

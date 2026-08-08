@@ -1,0 +1,18 @@
+must_id: item:A.7.2.8:ropa_activity_id
+control_ref: A.7.2.8
+standard_id: ISO27701:2019
+must_text: Unique processing-activity identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each processing activity row in your PII Records of Processing register.
+- Record the assigned identifier in a dedicated column, ensuring it is present for every processing activity
+  entry.
+- Cross-reference the unique identifier in related documentation, such as data sharing agreements or risk
+  assessments, to maintain traceability.
+- Name the identifier using a consistent format, such as "PROC-001", to avoid duplication or confusion
+  with other records.
+- Avoid leaving any processing activity row blank or using generic labels like "N/A" or "TBD" for the
+  identifier.

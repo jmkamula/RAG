@@ -1,0 +1,16 @@
+must_id: item:A.5.12:approval_signatory
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Signatory at appropriate management level (typically CISO or data-protection lead, with top-management
+  endorsement)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the individual responsible for approving the classification scheme, such as the CISO or data-protection
+  lead, in the approval document.
+- Obtain a dated signature from the designated approver on the final version of the classification scheme.
+- Secure written endorsement from top management, such as a signed cover letter or meeting minutes referencing
+  the approval.
+- Avoid using generic titles or groups as approvers; specify a named individual with authority for accountability.

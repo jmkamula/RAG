@@ -1,0 +1,17 @@
+must_id: item:B.8.2.1:reg_customer_id
+control_ref: B.8.2.1
+standard_id: ISO27701:2019
+must_text: Customer identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record a unique customer identifier for each entry in the Customer PII Agreement Register, such as a
+  customer number or contract code.
+- Cross-reference each identifier to the corresponding signed agreement or contract, ensuring traceability
+  between register and documentation.
+- State the date each customer identifier was added to the register, creating a clear timeline of agreement
+  entries.
+- Name the customer identifier specifically — do not use vague labels like "various" or "multiple customers"
+  in any row.

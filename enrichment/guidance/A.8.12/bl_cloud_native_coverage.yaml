@@ -1,0 +1,19 @@
+must_id: item:A.8.12:bl_cloud_native_coverage
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Cloud-native DLP (CASB / cloud storage scanning / SaaS connectors) where applicable
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the person responsible for implementing cloud-native DLP solutions, listing their full name and
+  job title in the DLP Baseline document.
+- Document the specific cloud-native DLP tools in use, including CASB, cloud storage scanning, and SaaS
+  connectors, with product names and deployment dates.
+- State which cloud platforms, storage services, and SaaS applications are covered by the DLP controls,
+  referencing a dated inventory or asset register.
+- Record the date of the last review or update of the DLP Baseline to show regular assessment of coverage
+  and effectiveness.
+- Specify any areas where cloud-native DLP is not applied, providing a brief justification and evidence
+  of risk acceptance signed by a named decision-maker.

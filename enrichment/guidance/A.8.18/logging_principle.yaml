@@ -1,0 +1,19 @@
+must_id: item:A.8.18:logging_principle
+control_ref: A.8.18
+standard_id: ISO27001:2022
+must_text: Logging requirement — every utility-program invocation captured (cross-link to A.8.15)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy that every use of privileged utility programs must be logged, including user, date,
+  time, and program executed.
+- Cross-reference the logging controls detailed in your Logging and Monitoring Policy under ISO 27001:2022
+  control A.8.15.
+- Assign a named individual as the owner responsible for reviewing and maintaining the privileged utility
+  program logs.
+- Retain log records for a defined period, specifying the retention timeframe and storage location in
+  the policy.
+- Name the owner as a specific person, not a generic group or department, to avoid auditor concern over
+  unclear accountability.

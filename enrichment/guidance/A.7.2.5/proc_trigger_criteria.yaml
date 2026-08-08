@@ -1,0 +1,19 @@
+must_id: item:A.7.2.5:proc_trigger_criteria
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: 'Trigger criteria — new processing / material changes / high-risk indicators (Art.35.3 mandatory
+  list: systematic evaluation + large-scale special-category + systematic monitoring of public spaces
+  + others per SA lists)'
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all trigger events that require a Privacy Impact Assessment, including new processing, major changes,
+  and high-risk indicators from Article 35.3.
+- Document the criteria and thresholds for each trigger event in the written Privacy Impact Assessment
+  Procedure, referencing specific Article 35.3 scenarios.
+- Assign a named individual or role responsible for monitoring and identifying when a trigger event occurs,
+  avoiding generic ownership like "the team."
+- Record each instance when a trigger is identified, including the date, the trigger type, and the decision
+  to initiate or not initiate a Privacy Impact Assessment.

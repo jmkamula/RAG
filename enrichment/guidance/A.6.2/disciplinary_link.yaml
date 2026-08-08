@@ -1,0 +1,19 @@
+must_id: item:A.6.2:disciplinary_link
+control_ref: A.6.2
+standard_id: ISO27001:2022
+must_text: Links to disciplinary process (A.6.4) by reference
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the employment contract template that breaches of information security requirements may result
+  in disciplinary action.
+- Reference the organisation’s disciplinary process by name and document title within the information
+  security section of the contract template.
+- Cross-reference the specific section or clause number of the disciplinary process document in the contract
+  template.
+- Name the disciplinary process owner as a specific individual or role, not a generic department or "the
+  team".
+- Retain a dated copy of the contract template showing the latest update to the information security and
+  disciplinary reference sections.

@@ -1,0 +1,17 @@
+must_id: item:A.7.2:scope_areas
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Secure areas enumerated per site (drawn from A.7.1 register)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Cross-reference each secure area listed in your A.7.1 register with its corresponding site, creating
+  a dated scope document for each location.
+- Name the responsible individual for maintaining the secure areas scope per site, avoiding generic titles
+  like "Facilities Team" or "Security Department".
+- Record the physical boundaries and access points for each secure area, using site maps or floor plans
+  where available.
+- Document any changes to secure area designations with the date, reason, and name of the person authorizing
+  the update.

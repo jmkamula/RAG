@@ -1,0 +1,16 @@
+must_id: item:A.8.16:reg_last_tuned
+control_ref: A.8.16
+standard_id: ISO27001:2022
+must_text: Per-detection last-tuning date
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the last date each detection use-case was tuned in a dedicated "Last Tuning Date" column within
+  the Detection Use-Case Register.
+- Name the individual responsible for each tuning entry, listing their full name rather than a generic
+  team or department.
+- Retain evidence of tuning activities, such as change tickets or meeting notes, linked to each corresponding
+  date in the register.
+- Confirm that no detection use-case in the register has a missing or undated last-tuning entry.

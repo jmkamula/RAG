@@ -1,0 +1,19 @@
+must_id: item:A.7.2.4:proc_pre_consent_information
+control_ref: A.7.2.4
+standard_id: ISO27701:2019
+must_text: Pre-consent information delivery per §7.3.3 (linked to A.7.3.3)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all types of personal data collected and the purposes for processing in a written notice provided
+  to individuals before requesting their consent.
+- Document the method and date each individual received the pre-consent information, such as through an
+  email, web page, or printed form.
+- Name the person or role responsible for maintaining and updating the pre-consent information to ensure
+  it aligns with current processing activities.
+- Attach a copy of the actual pre-consent information delivered, showing it covers all points required
+  by section 7.3.3, including data subject rights and contact details.
+- Avoid using generic or template notices that are not tailored to your organisation’s specific data processing
+  activities.

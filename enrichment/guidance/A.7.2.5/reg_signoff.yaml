@@ -1,0 +1,18 @@
+must_id: item:A.7.2.5:reg_signoff
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: Signoff identities per row (DPO + business owner)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name and job title of the Data Protection Officer (DPO) as the signatory for each PIA/DPIA
+  report entry.
+- Enter the full name and job title of the designated business owner as the signatory for each PIA/DPIA
+  report entry.
+- Capture the date of signoff from both the DPO and business owner for each row in the register.
+- Obtain actual signatures or documented electronic approvals from both the DPO and business owner for
+  every PIA/DPIA entry.
+- Name the DPO and business owner as specific individuals—do not use group names, generic titles, or leave
+  fields blank.

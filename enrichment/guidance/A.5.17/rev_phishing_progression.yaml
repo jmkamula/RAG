@@ -1,0 +1,20 @@
+must_id: item:A.5.17:rev_phishing_progression
+control_ref: A.5.17
+standard_id: ISO27001:2022
+must_text: Phishing-resistance progression review (delta in phishing-resistant credential ratio since
+  last review; roadmap to higher coverage)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the current percentage of user accounts protected by phishing-resistant authentication methods
+  in a dated review document.
+- Compare and document the change in phishing-resistant credential coverage since the previous review,
+  referencing both dates and percentages.
+- Name a specific individual responsible for tracking and reporting progress, avoiding generic titles
+  like "IT team" or "security group".
+- Outline and date a clear roadmap with milestones for increasing phishing-resistant authentication coverage,
+  attaching supporting plans or project timelines.
+- Retain evidence of management review or approval of the documented roadmap, such as a signed meeting
+  minute or approval email.

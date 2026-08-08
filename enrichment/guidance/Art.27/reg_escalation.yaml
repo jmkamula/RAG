@@ -1,0 +1,17 @@
+must_id: item:Art.27:reg_escalation
+control_ref: Art.27
+standard_id: GDPR:2016/679
+must_text: Per-row escalation to non-EU principal documented
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each instance where a representative escalates an issue to the non-EU principal, including
+  the date, time, and summary of the matter.
+- Record the name and contact details of the specific individual at the non-EU principal who received
+  the escalation.
+- Attach any written communication or meeting notes that show the escalation was made and acknowledged
+  by the non-EU principal.
+- Name the representative and non-EU principal involved in each escalation row—avoid using generic labels
+  like "team" or "management."

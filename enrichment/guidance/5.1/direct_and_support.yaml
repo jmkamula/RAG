@@ -1,0 +1,19 @@
+must_id: item:5.1:direct_and_support
+control_ref: '5.1'
+standard_id: ISO27001:2022
+must_text: Directing and supporting persons contributing to ISMS effectiveness
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the top management individual who formally directs and supports the information security management
+  system in an official, dated directive.
+- Document a signed statement from top management explicitly committing to support all persons contributing
+  to the ISMS’s effectiveness.
+- Record the communication method and date when top management’s directive was shared with all relevant
+  staff.
+- Attach evidence of a recent meeting or communication where top management discussed ISMS effectiveness
+  and encouraged staff participation.
+- Specify the owner as a named individual, not a group or generic title, to avoid ambiguity in leadership
+  accountability.

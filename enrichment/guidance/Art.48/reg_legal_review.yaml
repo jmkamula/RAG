@@ -1,0 +1,15 @@
+must_id: item:Art.48:reg_legal_review
+control_ref: Art.48
+standard_id: GDPR:2016/679
+must_text: Per-row legal counsel review evidence
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named legal counsel to review each foreign authority request and record their name alongside
+  the entry in the register.
+- Record the date and outcome of the legal counsel's review for each request in a dedicated column in
+  the register.
+- Attach or link a copy of the legal counsel’s written review or opinion to each register entry.
+- Avoid using generic entries like “legal team reviewed”; specify the individual reviewer for each request.

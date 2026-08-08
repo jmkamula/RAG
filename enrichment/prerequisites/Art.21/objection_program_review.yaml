@@ -1,0 +1,40 @@
+leaf_id: req:Art.21:objection_program_review
+control_ref: Art.21
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a current, accurate record of all processing activities to identify where direct
+    marketing and legitimate interests are in play. Without this, you can't reliably review objection
+    handling or verify explicit notices.
+  good_enough: A maintained RoPA that clearly lists processing purposes, including direct marketing and
+    legitimate interests, is available and up-to-date within the last year.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity is essential to determine when objections
+    apply and how to respond. This underpins the legitimacy of marketing and balancing tests.
+  good_enough: Each processing activity in the RoPA has a documented lawful basis, with legitimate interests
+    assessments available where relevant.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If required, a DPO must be involved in reviewing objection handling and ensuring compliance
+    with data subject rights. Their oversight is critical for defensibility.
+  good_enough: A DPO is formally designated (if required) and contactable, or a clear rationale exists
+    for why a DPO is not needed.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope must cover all processing activities relevant to direct marketing and objections
+    to ensure the review is comprehensive and aligned with the organisation's boundaries.
+  good_enough: A current ISMS scope statement exists and includes all business units or systems involved
+    in direct marketing or legitimate interest processing.

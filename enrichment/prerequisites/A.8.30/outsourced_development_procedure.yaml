@@ -1,0 +1,40 @@
+leaf_id: req:A.8.30:outsourced_development_procedure
+control_ref: A.8.30
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The scope statement defines which systems, processes, and third-party relationships fall
+    under the ISMS, ensuring the outsourced development procedure applies to the right activities and
+    vendors.
+  good_enough: A documented scope that clearly identifies all outsourced development activities and relevant
+    third parties is available and up to date.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Risk assessment identifies threats and vulnerabilities related to outsourced development,
+    informing which controls and oversight measures must be addressed in the procedure.
+  good_enough: A recent risk assessment exists that specifically considers risks from outsourced development
+    or third-party software providers.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures accountability for managing, monitoring, and reviewing
+    outsourced development, which is essential for an effective governance procedure.
+  good_enough: Documented roles exist for those responsible for vendor management and outsourced development
+    oversight, even if not fully detailed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register ensures the procedure covers all relevant information assets
+    that may be affected by outsourced development.
+  good_enough: A basic asset register exists listing key information assets involved in outsourced development,
+    even if not exhaustive.

@@ -1,0 +1,39 @@
+leaf_id: req:8.2:assessment_trigger_procedure
+control_ref: '8.2'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know what parts of your organization and which processes are covered by your
+    ISMS before you can define when and where operational risk assessments should be triggered.
+  good_enough: A clear, documented scope statement that identifies the boundaries and applicability of
+    the ISMS, even if not fully detailed.
+- ref: '8.1'
+  standard_id: ISO27001:2022
+  title: Operational planning and control
+  category: direct
+  rationale: Operational planning sets the context for how risk assessment activities are scheduled and
+    managed, ensuring that triggers for reassessment are integrated into day-to-day operations.
+  good_enough: A basic operational planning document or outline that shows how security controls and processes
+    are managed, even if not fully optimized.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: direct
+  rationale: You must have a defined risk assessment methodology and process before you can specify when
+    to trigger new or repeat assessments.
+  good_enough: A documented risk assessment approach that covers method, criteria, and frequency, even
+    if it is still being refined.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that someone is accountable for initiating risk assessments
+    when triggers occur.
+  good_enough: A list or matrix showing who is responsible for risk assessment activities, even if not
+    all roles are finalized.

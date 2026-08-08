@@ -1,0 +1,15 @@
+must_id: item:A.7.6:rev_register_update
+control_ref: A.7.6
+standard_id: ISO27001:2022
+must_text: Changes propagated to the procedure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and outcome of each secure work program review in a central log, including any identified
+  changes to procedures.
+- Assign responsibility for updating the procedure to a named individual, not a group or department.
+- Document the specific changes made to the procedure, referencing the review that triggered each update.
+- Obtain a dated sign-off from management confirming the revised procedure has been approved and communicated
+  to relevant staff.

@@ -272,11 +272,32 @@ def build_per_must_advisory_data(
         # `items_*` arrays kept text-only for backwards compat (chat
         # markdown renderer + existing eval cases). `must_items` is the
         # canonical pair list — UI consumes that for the form.
+        # Ship 56'.a — per-MUST guidance attached so Topics + Dashboard
+        # drill-in can render the "Best practice:" callouts alongside the
+        # MUST state. Empty list ⇒ UI suppresses the block.
+        from rag.templates.guidance_lookup import get_guidance_for_item
         must_items: list[dict] = []
         for _id, _t in zip(rec_ids, rec):
-            must_items.append({"id": _id, "text": _t, "satisfied": True})
+            must_items.append({
+                "id":         _id,
+                "text":       _t,
+                "satisfied":  True,
+                "guidance":   list(get_guidance_for_item(_id)),
+            })
         for _id, _t in zip(unrec_ids, unrec):
-            must_items.append({"id": _id, "text": _t, "satisfied": False})
+            must_items.append({
+                "id":         _id,
+                "text":       _t,
+                "satisfied":  False,
+                "guidance":   list(get_guidance_for_item(_id)),
+            })
+
+        # Ship 57' — per-leaf prerequisites attached so Topics + Dashboard
+        # drill-in can render the "Prerequisites:" callout alongside the
+        # MUST checklist. Empty list ⇒ UI suppresses the block.
+        from rag.templates.prerequisites_lookup import get_prerequisites_for_leaf
+        from dataclasses import asdict as _asdict
+        prerequisites = [_asdict(p) for p in get_prerequisites_for_leaf(leaf.leaf_id)]
 
         if not unrec:
             # Fully satisfied — include in output so UI shows the ✓ row,
@@ -292,6 +313,7 @@ def build_per_must_advisory_data(
                 "items_have":          list(rec),
                 "items_missing":       [],
                 "must_items":          must_items,
+                "prerequisites":       prerequisites,
                 "upload_hint":         "",
             })
             continue
@@ -307,6 +329,7 @@ def build_per_must_advisory_data(
             "items_have":          list(rec),
             "items_missing":       list(unrec),
             "must_items":          must_items,
+            "prerequisites":       prerequisites,
             "upload_hint":         _hint_for(leaf.evidence_type),
         })
 

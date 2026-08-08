@@ -1,0 +1,19 @@
+must_id: item:A.5.35:significant_change_check
+control_ref: A.5.35
+standard_id: ISO27001:2022
+must_text: Significant-change trigger check stated (whether this review was triggered by planned cadence
+  OR by a significant change — M&A, major architectural shift, regulatory upheaval, major breach)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the review report whether the review was conducted as part of the regular schedule or triggered
+  by a significant change.
+- Describe the nature of any significant change that prompted the review, such as mergers, major system
+  redesigns, or regulatory changes.
+- Record the date the review was initiated and reference any related change management or incident documentation.
+- Name the person who authorized the review, ensuring this is a specific individual and not a group or
+  generic title.
+- Attach supporting evidence, such as a change request or incident report, if the review was triggered
+  by a significant event.

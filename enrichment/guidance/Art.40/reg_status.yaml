@@ -1,0 +1,19 @@
+must_id: item:Art.40:reg_status
+control_ref: Art.40
+standard_id: GDPR:2016/679
+must_text: Per-row status (active / suspended / withdrawn-on-date)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the current status for each code entry as "active," "suspended," or "withdrawn," including the
+  exact withdrawal date where applicable.
+- Name the individual responsible for updating each row’s status, listing their full name rather than
+  a generic team or department.
+- Date each status change in the register to provide a clear timeline of lifecycle events for every code
+  entry.
+- Retain historical status changes in the register, rather than overwriting previous entries, to allow
+  for full lifecycle traceability.
+- Review the register for any missing or ambiguous status fields, such as blank statuses or undated withdrawals,
+  and update them with specific details.

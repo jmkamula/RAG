@@ -1,0 +1,18 @@
+must_id: item:A.8.32:reg_approval_lineage
+control_ref: A.8.32
+standard_id: ISO27001:2022
+must_text: Per-change approval lineage (approver(s) + timestamp)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each change request in the Change Register with a unique identifier, a clear description, and
+  the date the request was submitted.
+- Name the approver for each change as a specific individual, not a group or generic title, in the Change
+  Register entry.
+- Document the explicit approval decision for each change, including the approver’s signature or written
+  confirmation.
+- Capture the exact date and time of each approval in the Change Register alongside the approver’s details.
+- Retain all supporting approval communications, such as emails or signed forms, linked to the corresponding
+  Change Register entry.

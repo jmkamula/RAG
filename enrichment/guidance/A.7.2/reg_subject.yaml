@@ -1,0 +1,16 @@
+must_id: item:A.7.2:reg_subject
+control_ref: A.7.2
+standard_id: ISO27001:2022
+must_text: Per-event subject identifier (employee or visitor; for visitors, host also recorded)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name of each person entering the premises in the Physical Entry Event Register at the
+  time of entry.
+- Capture the status of each entrant as either "employee" or "visitor" in a dedicated column for every
+  event.
+- Enter the name of the host responsible for each visitor alongside the visitor’s entry in the register.
+- Include the date and exact time of each entry and exit to create a complete event record.
+- Name the host as a specific individual — do not use generic labels like "Reception" or "the team".

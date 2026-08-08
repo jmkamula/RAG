@@ -1,0 +1,17 @@
+must_id: item:A.5.13:app_system_ref
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Platform identifier per record (links to coverage register entry)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the unique platform identifier for each labelling application entry, matching the exact value
+  used in your coverage register.
+- Cross-reference each platform identifier to its corresponding entry in the coverage register, ensuring
+  the link is clear and unambiguous.
+- Name the platform using its official designation, not a generic label or nickname, to avoid confusion
+  during audits.
+- Document the date and person responsible for assigning each platform identifier within the labelling
+  application record.

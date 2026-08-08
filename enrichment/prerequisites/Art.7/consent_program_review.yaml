@@ -1,0 +1,39 @@
+leaf_id: req:Art.7:consent_program_review
+control_ref: Art.7
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawfulness of Processing
+  category: direct
+  rationale: You must confirm that consent (Art.6.1.a) is your lawful basis for processing before reviewing
+    your consent program. Art.7 only applies if consent is the chosen basis.
+  good_enough: Document which processing activities rely on consent as their lawful basis; this mapping
+    does not need to be exhaustive but must cover all activities in scope for the review.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: A current record of processing activities is needed to identify which processes use consent
+    as a basis and to verify that consent capture and withdrawal are being tracked.
+  good_enough: Maintain a basic RoPA listing processing activities and their lawful bases, with enough
+    detail to identify those relying on consent.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope defines which parts of the organization and which processing activities are
+    included in compliance reviews, ensuring the consent program review covers all relevant areas.
+  good_enough: Have a documented ISMS scope that clearly identifies the organizational boundaries and
+    activities subject to GDPR compliance, even if not fully detailed.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: Data Protection Officer Designation
+  category: foundational
+  rationale: If a DPO is required, they should be involved in the annual consent program review to ensure
+    regulatory oversight and proper handling of withdrawal requests.
+  good_enough: Designate a DPO (or document why one is not required) and ensure their involvement or oversight
+    in the review process.

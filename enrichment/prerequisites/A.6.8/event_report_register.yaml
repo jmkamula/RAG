@@ -1,0 +1,39 @@
+leaf_id: req:A.6.8:event_report_register
+control_ref: A.6.8
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organisation and which information assets are in-scope
+    for event reporting. This ensures the register only tracks relevant events and avoids gaps or overreach.
+  good_enough: A clear, documented scope that identifies the business units, systems, and data types covered
+    by the ISMS.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles ensures that event reporting, register maintenance, and follow-up
+    actions are owned and understood. Without this, reports may be missed or mishandled.
+  good_enough: A documented list or matrix showing who is responsible for receiving, recording, and triaging
+    event reports.
+- ref: A.5.25
+  standard_id: ISO27001:2022
+  title: Assessment and Decision on Information Security Events
+  category: direct
+  rationale: Each event report in the register must link to its triage outcome, as required by A.5.25.
+    Without a working triage process, the register cannot be meaningfully populated or maintained.
+  good_enough: A basic documented process or log showing how events are assessed and what decisions are
+    made, even if not yet fully mature.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: Knowing what assets exist and are in-scope helps ensure that event reports are correctly
+    attributed and relevant incidents are captured.
+  good_enough: A simple inventory of key information assets, even if not exhaustive, to support event
+    attribution in the register.

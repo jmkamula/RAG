@@ -1,0 +1,16 @@
+must_id: item:7.3:delivery_method
+control_ref: '7.3'
+standard_id: ISO27001:2022
+must_text: Delivery method stated (LMS module, induction session, periodic refresher)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the delivery method for the ISMS awareness programme in a written document, such as "LMS module,"
+  "induction session," or "periodic refresher."
+- Name the person responsible for delivering or coordinating the awareness programme, listing a specific
+  individual rather than a team or department.
+- Record the date the delivery method was last reviewed or updated in the awareness programme documentation.
+- Attach evidence of the delivery method in action, such as a screenshot of the LMS module or a dated
+  agenda from an induction session.

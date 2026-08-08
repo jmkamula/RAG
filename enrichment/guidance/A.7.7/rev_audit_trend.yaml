@@ -1,0 +1,18 @@
+must_id: item:A.7.7:rev_audit_trend
+control_ref: A.7.7
+standard_id: ISO27001:2022
+must_text: Audit-finding trend (improving / worsening — drives policy/awareness adjustments)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Collect and summarize audit findings from each clear desk and clear screen review cycle, including dates
+  and responsible auditors.
+- Chart the trend of findings over time, clearly indicating whether compliance is improving, worsening,
+  or unchanged.
+- Record any policy or awareness program adjustments made in response to these trends, including the decision
+  date and approver's name.
+- Name the trend analysis owner as a specific individual, not a group or department.
+- Retain supporting evidence, such as meeting minutes or emails, that link trend analysis to policy or
+  awareness changes.

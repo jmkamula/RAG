@@ -1,0 +1,17 @@
+must_id: item:A.5.21:rev_date
+control_ref: A.5.21
+standard_id: ISO27001:2022
+must_text: Review date within the planned interval
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date of each ICT supply chain review in a central register, showing it falls within the organisation’s
+  planned review interval.
+- Name the individual responsible for scheduling and conducting the review, listing them by full name
+  rather than a team or department.
+- Retain a copy of the review report or meeting minutes, including the date, attendees, and summary of
+  findings.
+- Cross-reference the review date with your documented review schedule to confirm the interval has not
+  been exceeded.

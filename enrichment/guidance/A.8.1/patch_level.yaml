@@ -1,0 +1,19 @@
+must_id: item:A.8.1:patch_level
+control_ref: A.8.1
+standard_id: ISO27001:2022
+must_text: Patch level / OS-version requirements stated (cross-link to A.8.8)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the minimum patch level and supported operating system versions required for all user endpoint
+  devices in the policy document.
+- Cross-reference the section in your User Endpoint Devices Policy that addresses patching and OS requirements
+  with the relevant control in A.8.8.
+- Name a specific individual responsible for maintaining and updating the patch level and OS-version requirements
+  in the policy.
+- Record the date of the most recent policy update that included changes to patch level or OS-version
+  requirements.
+- Avoid using vague terms like "latest version" or "up-to-date" without specifying exact version numbers
+  or update frequency.

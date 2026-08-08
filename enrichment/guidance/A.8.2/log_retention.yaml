@@ -1,0 +1,19 @@
+must_id: item:A.8.2:log_retention
+control_ref: A.8.2
+standard_id: ISO27001:2022
+must_text: Log retention period defined and enforced
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact retention period for privileged activity logs in a documented policy, referencing the
+  relevant ISO27001:2022 control.
+- Name the person responsible for enforcing the log retention period, listing their full name and job
+  title in the policy or procedure.
+- Record the current log retention settings from the logging system, including screenshots or configuration
+  exports with visible dates.
+- Document the process for securely deleting logs after the retention period, including the date and method
+  used for the most recent deletion.
+- Specify the retention period as a concrete timeframe—avoid vague terms like "as needed" or "until no
+  longer required".

@@ -1,0 +1,18 @@
+must_id: item:A.5.15:comm_onboarding
+control_ref: A.5.15
+standard_id: ISO27001:2022
+must_text: Onboarding coverage — new managers and admins receive the policy as part of role induction
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all new managers and administrators by name and start date in an onboarding log maintained by Human
+  Resources.
+- Record the date each individual receives the Access Control Policy during their induction, referencing
+  the specific policy version provided.
+- Obtain a signed or electronically acknowledged receipt from each new manager and administrator confirming
+  they have received and read the policy.
+- Name the person responsible for delivering the policy during onboarding as a specific individual, not
+  a generic role or team.
+- Retain copies of all signed acknowledgements and onboarding logs for audit review.

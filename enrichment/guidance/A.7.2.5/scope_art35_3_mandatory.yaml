@@ -1,0 +1,19 @@
+must_id: item:A.7.2.5:scope_art35_3_mandatory
+control_ref: A.7.2.5
+standard_id: ISO27701:2019
+must_text: Art.35.3 mandatory categories mapped (systematic evaluation + Art.9/10 large-scale + systematic
+  public monitoring)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all processing activities and document which ones involve systematic evaluation, large-scale processing
+  of special categories, or systematic public monitoring, with dates.
+- Map each identified activity to the relevant GDPR Art.35.3 category, referencing the specific article
+  subsection in your record.
+- Name the person responsible for maintaining and updating the PIA triggers scope, ensuring a specific
+  individual is listed, not a team or department.
+- Attach supporting evidence, such as data flow diagrams or risk assessments, that justify the mapping
+  of each activity to a mandatory PIA trigger.
+- Review and update the mapping annually, recording the date of each review and any changes made.

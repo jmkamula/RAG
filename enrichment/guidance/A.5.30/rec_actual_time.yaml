@@ -1,0 +1,19 @@
+must_id: item:A.5.30:rec_actual_time
+control_ref: A.5.30
+standard_id: ISO27001:2022
+must_text: Actual recovery time per record (drives the RTO-met calculation; gap to target if missed)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the actual recovery time for each recovery event in a dated entry, referencing the specific system
+  or service restored.
+- State the target recovery time objective (RTO) for each event alongside the actual recovery time in
+  the same record.
+- Document any gap between actual recovery time and the target RTO, including a brief explanation if the
+  target was missed.
+- Name the individual responsible for verifying and signing off on the recorded recovery times for each
+  event.
+- Avoid leaving the recovery time field blank or using vague entries such as "as soon as possible"—always
+  enter a specific duration.

@@ -1,0 +1,15 @@
+must_id: item:A.5.1:version
+control_ref: A.5.1
+standard_id: ISO27001:2022
+must_text: Version number and effective date
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the current version number clearly on the front page of the Information Security Policy document.
+- Record the effective date of the policy in a visible location, such as the document header or title
+  page.
+- Name the policy owner as a specific individual, not a group or department, to avoid ambiguity in responsibility.
+- Retain previous versions and their effective dates in a version history table within the document or
+  as an appendix.

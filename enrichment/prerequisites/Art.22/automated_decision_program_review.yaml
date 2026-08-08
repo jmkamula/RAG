@@ -1,0 +1,38 @@
+leaf_id: req:Art.22:automated_decision_program_review
+control_ref: Art.22
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date inventory of processing activities to identify which systems and processes
+    involve automated decision-making, ensuring the review covers all relevant areas.
+  good_enough: A current, reasonably complete RoPA that lists all processing activities, with enough detail
+    to flag those involving automated decisions.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity is essential to confirm that automated
+    decisions have a valid legal ground under GDPR, as required by Art.22.2.
+  good_enough: Each processing activity involving automated decisions has a documented lawful basis, even
+    if some are pending final legal review.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated DPO (or clear rationale for not appointing one) ensures there is a responsible
+    party to oversee and advise on automated decision-making compliance.
+  good_enough: A named DPO is in place, or a documented decision exists explaining why a DPO is not required.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope statement helps define which systems and processes are in-scope for GDPR compliance,
+    ensuring the review is neither too narrow nor too broad.
+  good_enough: A current ISMS scope statement exists that covers all business units and systems subject
+    to GDPR obligations.

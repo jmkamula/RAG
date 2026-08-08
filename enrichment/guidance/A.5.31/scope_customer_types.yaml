@@ -1,0 +1,19 @@
+must_id: item:A.5.31:scope_customer_types
+control_ref: A.5.31
+standard_id: ISO27001:2022
+must_text: Customer types driving contractual obligations (regulated industries, government, B2C consumers)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all customer types your organisation serves, specifying regulated industries, government entities,
+  and B2C consumers, in a dated obligations scope document.
+- Document the specific contractual obligations that apply to each customer type, referencing relevant
+  contracts or legal requirements.
+- Name the owner responsible for maintaining the obligations scope as a specific individual, not a team
+  or department.
+- Attach supporting evidence, such as sample contracts or regulatory correspondence, that demonstrate
+  the contractual obligations for each customer type.
+- Review and update the obligations scope at least annually, recording the review date and the reviewer’s
+  name.

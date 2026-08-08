@@ -1,0 +1,19 @@
+must_id: item:A.5.10:social_media
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Social media usage and corporate-information disclosure rules
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document clear rules on how employees may use social media when referencing the organization or its
+  corporate information in a dated policy section.
+- State specific restrictions on disclosing confidential or sensitive information via social media, with
+  examples relevant to your business context.
+- Name the policy owner as a specific individual responsible for maintaining and updating social media
+  usage rules.
+- Record evidence of management approval for the policy, such as a signed or digitally approved document
+  with the approval date.
+- Retain a version history showing when social media rules were added or updated, avoiding undated or
+  generic policy statements.

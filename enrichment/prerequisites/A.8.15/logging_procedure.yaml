@@ -1,0 +1,43 @@
+leaf_id: req:A.8.15:logging_procedure
+control_ref: A.8.15
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The logging procedure must align with the defined ISMS scope to ensure all relevant systems,
+    processes, and assets are covered. Without a clear scope, it's impossible to determine which logs
+    are required or where logging controls should apply.
+  good_enough: A documented scope statement that lists in-scope systems and processes, even if not fully
+    detailed, is sufficient to proceed.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register identifies the systems and data sources that generate logs.
+    This is essential for specifying which assets require logging and for ensuring comprehensive coverage
+    in the procedure.
+  good_enough: A basic inventory of information assets, including key systems and applications, is available
+    and can be referenced for logging requirements.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: Knowing the classification of information helps determine the sensitivity of logs and the
+    level of protection and retention required. The procedure must reference these classifications to
+    set appropriate controls.
+  good_enough: A simple classification scheme that distinguishes at least between public, internal, and
+    confidential data is documented and accessible.
+- ref: A.8.17
+  standard_id: ISO27001:2022
+  title: Clock Synchronization
+  category: direct
+  rationale: Accurate and synchronized timestamps are critical for log integrity, analysis, and incident
+    investigation. The logging procedure must reference clock synchronization to ensure logs can be reliably
+    correlated across systems.
+  good_enough: A statement or evidence that critical systems use a common time source (e.g., NTP) is available,
+    even if not fully enforced across all assets.

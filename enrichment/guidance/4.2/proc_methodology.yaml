@@ -1,0 +1,18 @@
+must_id: item:4.2:proc_methodology
+control_ref: '4.2'
+standard_id: ISO27001:2022
+must_text: Identification methodology stated (stakeholder mapping technique, RACI/power-interest grid,
+  or equivalent)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the chosen stakeholder identification methodology in a written document, such as a stakeholder
+  mapping technique, RACI matrix, or power-interest grid.
+- Name the individual responsible for maintaining the stakeholder identification framework, ensuring a
+  specific person is listed rather than a team or department.
+- Record the date when the methodology was last reviewed or updated, providing a clear timeline for auditor
+  reference.
+- Attach or cross-reference an example output of the methodology, such as a completed stakeholder map
+  or RACI chart, within the framework documentation.

@@ -1,0 +1,17 @@
+must_id: item:A.5.13:rev_reviewer
+control_ref: A.5.13
+standard_id: ISO27001:2022
+must_text: Reviewer identity (InfoSec + Data Protection Officer where PII overlays apply jointly)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer as a specific individual by full name and job title, not just a department or team,
+  in the review record.
+- Record the review date and the names of both the Information Security lead and Data Protection Officer
+  if personal data is involved.
+- Document the method used to confirm both reviewers participated, such as dual signatures or email confirmation
+  attached to the review file.
+- Retain the completed review record in a location accessible for audit, with all reviewer identities
+  clearly visible.

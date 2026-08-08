@@ -1,0 +1,34 @@
+leaf_id: req:Art.85:applicable_activities_scope
+control_ref: Art.85
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a clear, up-to-date inventory of all processing activities before you can determine
+    which ones fall under the special Art.85 categories. Without this, it's impossible to accurately scope
+    or justify which activities are covered.
+  good_enough: A current, reasonably complete list of processing activities that covers all business units
+    and functions, even if some details are still being refined.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis for Processing
+  category: direct
+  rationale: Understanding the lawful basis for each processing activity helps distinguish those that
+    may qualify for Art.85's special regimes (e.g. journalism) from standard commercial or operational
+    processing.
+  good_enough: Each processing activity should have a documented lawful basis, even if some justifications
+    are still under review.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope statement ensures you know which parts of the organisation and which activities
+    are in-scope for compliance, helping to avoid accidental omission or over-inclusion when mapping Art.85
+    applicability.
+  good_enough: A draft or approved ISMS scope statement that identifies the main business units and activity
+    types, even if some boundaries are still being finalised.

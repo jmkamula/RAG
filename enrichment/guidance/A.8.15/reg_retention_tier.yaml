@@ -1,0 +1,16 @@
+must_id: item:A.8.15:reg_retention_tier
+control_ref: A.8.15
+standard_id: ISO27001:2022
+must_text: Per-source retention tier applied
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each log source by unique name and system in the Log Source Register, ensuring no generic or duplicate
+  entries.
+- Assign a specific retention tier to each log source entry, referencing the defined retention policy
+  for clarity.
+- Record the date and name of the individual who approved the retention tier for each log source.
+- Cross-reference each log source entry with the relevant retention policy document version to show alignment.
+- Specify the owner as a named individual for each log source, not as a team or department.

@@ -1,0 +1,32 @@
+leaf_id: req:Art.48:foreign_authority_program_review
+control_ref: Art.48
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need a current, accurate record of processing activities to identify which data, systems,
+    and transfers could be subject to foreign authority requests. Without this, you can't meaningfully
+    review or test your response procedures.
+  good_enough: A maintained RoPA exists, covering all relevant processing activities and international
+    transfers, even if some entries are still being refined.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Understanding the lawful basis for each processing activity is essential to assess whether
+    any disclosure to a foreign authority could be justified and defensible under GDPR.
+  good_enough: Each processing activity in the RoPA has a documented lawful basis, even if some are pending
+    legal review.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: A designated DPO (or clear decision that one is not required) is necessary to ensure there
+    is an accountable person for reviewing and overseeing responses to foreign authority requests.
+  good_enough: A DPO is formally appointed and contactable, or a documented rationale exists for not appointing
+    one.

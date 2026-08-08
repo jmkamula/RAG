@@ -1,0 +1,18 @@
+must_id: item:B.8.4.3:reg_endpoint
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Source + destination endpoints per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each data transmission in a separate row, specifying both the source and destination endpoints
+  for every entry.
+- Record the unique identifier or address for each endpoint, such as server name, IP address, or system
+  name, not just a general location.
+- Name the responsible individual for maintaining the inventory, avoiding generic roles like "IT team"
+  or "department."
+- Date each entry and any subsequent updates to show when the information was last verified or changed.
+- Cross-reference each transmission row with related processing activities or contracts to demonstrate
+  linkage and traceability.

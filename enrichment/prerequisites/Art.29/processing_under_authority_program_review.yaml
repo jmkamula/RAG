@@ -1,0 +1,41 @@
+leaf_id: req:Art.29:processing_under_authority_program_review
+control_ref: Art.29
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.28
+  standard_id: GDPR:2016/679
+  title: Processor
+  category: direct
+  rationale: Before reviewing if processing is performed under proper authority, you must have established
+    controller-processor agreements that define the instructions and authorisations for processing personal
+    data.
+  good_enough: A signed, current agreement or contract exists for each processor, clearly stating the
+    controller’s instructions and obligations.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to verify who is authorised, what
+    data is processed, and under what instructions—otherwise, you cannot meaningfully review compliance
+    with Art.29.
+  good_enough: A maintained RoPA exists, mapping data flows, responsible persons, and processing purposes
+    for all relevant activities.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Reviewing processing under authority requires knowing the lawful basis for each processing
+    activity, to ensure instructions and authorisations align with legal grounds.
+  good_enough: Each processing activity in the RoPA has a documented lawful basis, even if not exhaustively
+    justified.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You must know the organisational and system boundaries for personal data processing to ensure
+    your Art.29 review covers all relevant people and activities.
+  good_enough: A documented ISMS scope exists that identifies which teams, systems, and processes are
+    in-scope for GDPR controls.

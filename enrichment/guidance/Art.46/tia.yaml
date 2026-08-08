@@ -1,0 +1,20 @@
+must_id: item:Art.46:tia
+control_ref: Art.46
+standard_id: GDPR:2016/679
+must_text: Transfer Impact Assessment (TIA) per Schrems II — third-country law evaluated for fundamental
+  rights compatibility
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the specific third country and describe the nature of personal data being transferred in a
+  dated Transfer Impact Assessment report.
+- Name the individual responsible for conducting the legal analysis of third-country surveillance laws
+  and fundamental rights compatibility.
+- Record the sources and dates of legal research used to assess third-country laws, including links to
+  official legislation or expert opinions.
+- State any supplementary safeguards implemented, with a signed decision by a named data protection officer
+  or legal counsel.
+- Avoid using generic or template language—tailor the assessment to the actual country, data type, and
+  transfer context.

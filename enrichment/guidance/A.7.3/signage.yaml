@@ -1,0 +1,20 @@
+must_id: item:A.7.3:signage
+control_ref: A.7.3
+standard_id: ISO27001:2022
+must_text: Signage and visibility minimisation (no advertising of sensitive areas; minimum signage on
+  doors)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the exact wording and placement of all door signs for offices, rooms, and facilities in a dated
+  inventory.
+- Name the person responsible for approving signage content and placement as a specific individual, not
+  a team or department.
+- State in the procedure that sensitive areas are never identified by function or purpose on external
+  signage.
+- Record a walkthrough checklist, signed and dated, confirming that no sensitive information is visible
+  on or near entry points.
+- Retain photographs of all current signage for sensitive areas, showing minimal information and no advertising
+  of their function.

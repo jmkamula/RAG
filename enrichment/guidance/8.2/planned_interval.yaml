@@ -1,0 +1,19 @@
+must_id: item:8.2:planned_interval
+control_ref: '8.2'
+standard_id: ISO27001:2022
+must_text: Planned interval observed (typically annual or more frequent for higher-risk environments)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the planned frequency for operational risk assessments in a documented schedule, specifying annual
+  or more frequent intervals for higher-risk areas.
+- Record the actual dates each operational risk assessment was completed, matching them to the planned
+  schedule in a dated log or calendar.
+- Name the responsible individual for scheduling and conducting each risk assessment, avoiding generic
+  labels like "the team" or "IT department".
+- Retain copies of completed risk assessment reports, ensuring each is dated and clearly identifies the
+  assessment period covered.
+- Cross-reference each risk assessment record with the corresponding entry in the risk assessment schedule
+  to demonstrate adherence to planned intervals.

@@ -1,0 +1,18 @@
+must_id: item:A.7.4:scope_area_mapping
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: Per-site area-to-mechanism mapping (which CCTV cameras cover which areas, which IDS sensors
+  per zone)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Map each monitored site area to its specific surveillance mechanism, listing exact CCTV camera IDs and
+  IDS sensor locations in a dated register.
+- Name the person responsible for maintaining the mapping register, ensuring a specific individual is
+  listed rather than a team or department.
+- Cross-reference each surveillance mechanism in the register with its physical installation record or
+  floor plan, attaching dated copies.
+- Review and update the mapping register at least annually, recording the review date and the name of
+  the reviewer.

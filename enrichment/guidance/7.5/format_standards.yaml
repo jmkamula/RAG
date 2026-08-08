@@ -1,0 +1,17 @@
+must_id: item:7.5:format_standards
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Format standards for ISMS documents (templates, naming)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define a standard template for ISMS documents, including required sections, headers, and footers, and
+  save the template in a shared location.
+- Specify a naming convention for all ISMS documents, including version numbers and dates, in a documented
+  procedure.
+- Assign responsibility for maintaining and updating the template and naming convention to a named individual,
+  not a generic team or department.
+- Record the approval of the format standards by a named manager, including the date of approval, in meeting
+  minutes or a sign-off log.

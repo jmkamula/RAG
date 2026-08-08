@@ -1,0 +1,19 @@
+must_id: item:Art.9:rev_register_currency
+control_ref: Art.9
+standard_id: GDPR:2016/679
+must_text: Register currency check — every active activity has its Art.9.2 condition still appropriate
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List every ongoing processing activity involving special category data in a register, including a unique
+  identifier and last review date for each entry.
+- Document the specific Article 9.2 condition relied upon for each activity, referencing the exact clause
+  and providing a brief justification.
+- Review and confirm that the Article 9.2 condition for each activity remains accurate and appropriate,
+  recording the reviewer's name and the review date.
+- Update the register immediately if any activity's legal basis changes, noting the change date and the
+  individual authorizing the update.
+- Name the responsible owner for each activity as a specific individual, not a team or department, to
+  avoid ambiguity in accountability.

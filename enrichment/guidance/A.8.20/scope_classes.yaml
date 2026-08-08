@@ -1,0 +1,17 @@
+must_id: item:A.8.20:scope_classes
+control_ref: A.8.20
+standard_id: ISO27001:2022
+must_text: Network classes enumerated (corporate LAN / WAN / wireless / cloud VPC / partner connect /
+  OT)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all network types in use, such as corporate LAN, WAN, wireless, cloud VPC, partner connections,
+  and operational technology, in a dated network inventory document.
+- Name the person responsible for maintaining the network inventory as a specific individual, not a team
+  or department.
+- Cross-reference each network class to supporting diagrams or architecture documents that visually confirm
+  its existence and boundaries.
+- Record the date of the last review or update to the network scope inventory to show it is current.

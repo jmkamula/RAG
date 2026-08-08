@@ -1,0 +1,17 @@
+must_id: item:A.8.12:rev_coverage_gaps
+control_ref: A.8.12
+standard_id: ISO27001:2022
+must_text: Channel-coverage gap check (new channel / new platform missing)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all communication channels and platforms currently in use, including any added since the last review,
+  in a dated inventory document.
+- Cross-reference each channel and platform against your Data Loss Prevention (DLP) coverage matrix to
+  identify any missing coverage.
+- Record the results of the gap check in a review log, naming the reviewer and date of completion.
+- Name the reviewer as a specific individual responsible for the gap check, not a group or department.
+- Document any newly identified channels or platforms lacking DLP measures and assign follow-up actions
+  with deadlines.

@@ -1,0 +1,17 @@
+must_id: item:A.6.5:reg_acknowledgment
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Per-row signed acknowledgment evidence (digital signature / signed PDF / recorded receipt of
+  intranet artefact)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each leaver’s name, last working date, and the specific briefing materials provided in a dedicated
+  row of the register.
+- Obtain a digital signature or signed PDF from each leaver confirming receipt and understanding of the
+  briefing.
+- Store the signed acknowledgment alongside the corresponding register entry, ensuring each row links
+  directly to its evidence.
+- Name the leaver as an individual in each row—do not use generic terms like "staff" or "employee".

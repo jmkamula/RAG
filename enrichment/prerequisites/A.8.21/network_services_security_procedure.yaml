@@ -1,0 +1,47 @@
+leaf_id: req:A.8.21:network_services_security_procedure
+control_ref: A.8.21
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of your organization and which network services fall within
+    the ISMS scope before you can define procedures for securing those services. This ensures the procedure
+    is relevant and complete.
+  good_enough: A current, approved scope statement that clearly lists in-scope business units, IT systems,
+    and network services.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: A risk assessment identifies threats and vulnerabilities relevant to network services, informing
+    which security mechanisms and monitoring are necessary. Without this, the procedure may miss key risks.
+  good_enough: A recent risk assessment that covers network services, with documented risks and risk owners.
+- ref: A.8.20
+  standard_id: ISO27001:2022
+  title: Networks security
+  category: direct
+  rationale: The general network security baseline must be established before you can define service-specific
+    security procedures. It provides the overarching controls and context for per-service requirements.
+  good_enough: A documented baseline for network security controls, even if not fully implemented, that
+    outlines minimum expectations.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: An up-to-date asset register ensures you know which network services and components exist,
+    so your procedure covers all relevant services and interfaces.
+  good_enough: A basic inventory of network services and related assets, even if some details are pending
+    validation.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles is needed so the procedure can specify who is responsible for implementing,
+    monitoring, and reviewing network service security.
+  good_enough: A list of key roles and their responsibilities for network security, even if not fully
+    mapped to every service.

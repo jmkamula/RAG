@@ -1,0 +1,17 @@
+must_id: item:6.1.1:integration
+control_ref: 6.1.1
+standard_id: ISO27001:2022
+must_text: Integration of planned actions into ISMS processes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document how planned actions for risks and opportunities are incorporated into existing ISMS processes
+  in a dated procedure or workflow diagram.
+- Name the specific individual responsible for overseeing integration of planned actions, avoiding generic
+  titles like "the team" or "management".
+- Cross-reference each planned action to the relevant ISMS process step within your risk and opportunity
+  planning procedure.
+- Retain meeting minutes or approval records showing when and how planned actions were discussed and assigned
+  for integration.

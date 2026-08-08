@@ -1,0 +1,17 @@
+must_id: item:A.7.2.2:reg_basis_date
+control_ref: A.7.2.2
+standard_id: ISO27701:2019
+must_text: Date basis established / last re-evaluated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date each lawful basis was first established in the Lawful Basis Register, listing the specific
+  processing activity and legal ground.
+- Enter the most recent date each lawful basis was re-evaluated, showing a clear timeline of review for
+  every processing activity.
+- Name the person responsible for each entry’s review, using a specific individual’s name rather than
+  a team or department.
+- Attach supporting documentation, such as meeting minutes or review sign-offs, that confirm the re-evaluation
+  took place on the recorded date.

@@ -1,0 +1,18 @@
+must_id: item:9.2:rev_finding_closure
+control_ref: '9.2'
+standard_id: ISO27001:2022
+must_text: Finding-closure check — last cycle's NCs reached 10.2 closure
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all nonconformities (NCs) identified in the previous audit cycle, including their reference numbers
+  and dates.
+- Record the documented evidence of closure for each NC, such as completed corrective action reports or
+  signed closure statements.
+- Cross-reference each NC to its corresponding closure evidence, ensuring the closure date is after the
+  NC was raised.
+- Confirm that a specific individual, not a group or department, has signed off on each NC closure.
+- Flag any NCs without closure evidence or with only verbal confirmation, as these would be considered
+  incomplete by an auditor.

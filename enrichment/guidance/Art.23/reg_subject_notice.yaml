@@ -1,0 +1,17 @@
+must_id: item:Art.23:reg_subject_notice
+control_ref: Art.23
+standard_id: GDPR:2016/679
+must_text: Per-row subject notice (where required by Art.23.2.h)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record for each restriction entry whether the data subject was notified, including the date and method
+  of notification.
+- Attach a copy of the actual notice sent to the data subject, or document the legal reason if notice
+  was lawfully withheld.
+- Name the individual responsible for sending or withholding the notice for each restriction entry, not
+  just a team or department.
+- Cross-reference each restriction entry with the relevant legal basis under which notice was provided
+  or withheld.

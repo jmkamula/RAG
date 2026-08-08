@@ -1,0 +1,19 @@
+must_id: item:A.7.2.6:proc_written_form
+control_ref: A.7.2.6
+standard_id: ISO27701:2019
+must_text: Written form required — no verbal or informal processor arrangements
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each processor arrangement in a signed, dated written contract that clearly outlines the processing
+  activities and responsibilities.
+- Retain a copy of every executed processor contract in a central, access-controlled repository with version
+  history enabled.
+- Name the contract signatory for both your organisation and the processor as specific individuals, not
+  generic roles or departments.
+- Cross-reference each processor contract in your supplier register, including the contract date and a
+  link to the stored document.
+- State in your contracting procedure that verbal or informal processor arrangements are not permitted
+  under any circumstances.

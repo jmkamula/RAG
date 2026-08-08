@@ -1,0 +1,18 @@
+must_id: item:A.7.4.8:proc_technique_map
+control_ref: A.7.4.8
+standard_id: ISO27701:2019
+must_text: Technique map per media type (electronic — cryptographic erase + overwrite / physical — shredding
+  + degaussing / cloud — provider-attested)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each media type that stores personal data, such as hard drives, paper records, and cloud storage,
+  in the disposal procedure.
+- Specify the approved disposal technique for each media type, such as cryptographic erase for electronic,
+  shredding for physical, and provider-attested deletion for cloud.
+- Name the person responsible for approving disposal methods for each media type, avoiding generic titles
+  like "IT" or "the team."
+- Attach a dated record showing the most recent review and update of the disposal procedure, signed by
+  the responsible individual.

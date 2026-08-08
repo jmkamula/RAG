@@ -1,0 +1,39 @@
+leaf_id: req:B.8.3.1:program_review
+control_ref: B.8.3.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: You need to know which systems, teams, and processes are in-scope for privacy and support
+    before you can review whether support arrangements are current and effective.
+  good_enough: A clear, up-to-date scope statement that identifies the boundaries of the ISMS and includes
+    all relevant support functions.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: cross_role
+  rationale: Support program review depends on knowing who is responsible for technical support, SLA management,
+    and identifying support gaps.
+  good_enough: Documented roles and responsibilities for support and privacy-related functions, even if
+    not fully optimized.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: cross_role
+  rationale: You can't review support coverage or identify gaps unless you have a current list of assets
+    (systems, applications, data) that require support.
+  good_enough: A working asset register that lists key systems and data in scope for support, even if
+    some details are pending.
+- ref: A.7.2.1
+  standard_id: ISO27701:2019
+  title: Identify and Document Purpose
+  category: direct
+  rationale: Understanding the purpose for processing personal data helps ensure support arrangements
+    align with privacy requirements and business needs.
+  good_enough: Documented purposes for personal data processing for all major systems, at least at a summary
+    level.

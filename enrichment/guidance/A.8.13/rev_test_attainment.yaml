@@ -1,0 +1,18 @@
+must_id: item:A.8.13:rev_test_attainment
+control_ref: A.8.13
+standard_id: ISO27001:2022
+must_text: Restore-test attainment per tier (cadence met, RPO met)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the dates and results of each restore test for every backup tier, showing that tests were performed
+  according to the defined schedule.
+- Document the actual restore point achieved in each test and compare it to the required recovery point
+  objective (RPO) for that tier.
+- Name the individual responsible for overseeing restore tests for each backup tier, rather than listing
+  a team or department.
+- Retain evidence of any failed restore tests and the corrective actions taken, including dates and responsible
+  persons.
+- Confirm that restore test records are reviewed and signed off by management after each testing cycle.

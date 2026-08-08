@@ -1,0 +1,20 @@
+must_id: item:A.6.8:scope_change_drivers
+control_ref: A.6.8
+standard_id: ISO27001:2022
+must_text: Trigger list for re-scoping (new audience segment — e.g. open-source contributors, gig workers,
+  new sectoral whistleblower regulation)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current reporting audience segments in a dated document, naming each group specifically rather
+  than using generic terms like "external parties."
+- Document a trigger list that includes events such as new regulations, business expansions, or identification
+  of new audience types, with clear examples.
+- Assign responsibility for monitoring triggers to a named individual, recording their name and the date
+  of assignment in the trigger list document.
+- Review and update the trigger list at least annually, recording the review date and the person who performed
+  the review.
+- Record each re-scoping decision with a summary of the trigger event, the date, and the names of those
+  involved in the decision.

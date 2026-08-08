@@ -1,0 +1,40 @@
+leaf_id: req:A.5.13:labelling_application_record
+control_ref: A.5.13
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification of information
+  category: direct
+  rationale: A clear and operational classification scheme must exist before you can apply meaningful
+    labels to information on any platform. Without this, labelling would be arbitrary and lack business
+    relevance.
+  good_enough: A documented and approved classification scheme exists, with categories and criteria defined,
+    and is accessible to those responsible for labelling.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: You need an up-to-date register of information assets and platforms to know what needs to
+    be labelled. Without this, you risk missing systems or misapplying labels.
+  good_enough: A current list of platforms/systems that store or process information is available, even
+    if some details are pending refinement.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope defines which platforms and information types are covered by your labelling
+    controls. Without a clear scope, you can't be sure you're labelling everything required.
+  good_enough: A documented ISMS scope exists, identifying the business units, locations, and systems
+    in scope for information security controls.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles and responsibilities
+  category: foundational
+  rationale: Roles and responsibilities for labelling must be assigned so that each platform onboarding
+    event has a clear owner. Otherwise, the application record will lack accountability.
+  good_enough: Named individuals or roles are assigned responsibility for labelling and maintaining application
+    records, even if detailed procedures are still being developed.

@@ -1,0 +1,19 @@
+must_id: item:A.7.4:detection_systems
+control_ref: A.7.4
+standard_id: ISO27001:2022
+must_text: Detection systems listed (CCTV, intrusion detection, access control logs, alarms, motion sensors)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all physical security detection systems in the procedure, including CCTV, intrusion detection,
+  access control logs, alarms, and motion sensors.
+- Name the person responsible for monitoring each detection system, using a specific individual’s name
+  rather than a team or department.
+- Record the locations and coverage areas for each detection system, with a dated map or floor plan attached
+  to the procedure.
+- Document the process for reviewing and responding to alerts from each detection system, including required
+  response times and escalation contacts.
+- State the review date of the procedure and obtain a signature from the designated security manager to
+  confirm accuracy and completeness.

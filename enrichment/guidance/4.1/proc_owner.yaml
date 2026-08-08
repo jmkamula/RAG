@@ -1,0 +1,15 @@
+must_id: item:4.1:proc_owner
+control_ref: '4.1'
+standard_id: ISO27001:2022
+must_text: Named owner of the framework (ISMS Manager or equivalent)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the Issue Identification Framework as a specific individual, such as the ISMS Manager,
+  in the framework document.
+- Record the owner's full name, job title, and contact details on the cover page or ownership section
+  of the framework.
+- Date the assignment of ownership and retain a copy of the signed approval by senior management.
+- Review the framework annually and update the named owner if there are changes in responsibility or personnel.

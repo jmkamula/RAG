@@ -1,0 +1,17 @@
+must_id: item:9.3:monitoring
+control_ref: '9.3'
+standard_id: ISO27001:2022
+must_text: Monitoring and measurement results
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the monitoring and measurement results discussed during the management review, including dates,
+  metrics, and any identified trends.
+- Attach supporting data or reports referenced in the meeting, such as audit results, incident statistics,
+  or key performance indicators.
+- Name the individual responsible for presenting the monitoring and measurement results, ensuring a specific
+  person is listed, not a group or department.
+- Record any decisions or actions agreed upon in response to the monitoring and measurement findings,
+  including assigned owners and deadlines.

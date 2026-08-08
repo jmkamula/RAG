@@ -1,0 +1,42 @@
+leaf_id: req:A.7.2.1:program_review
+control_ref: A.7.2.1
+standard_id: ISO27701:2019
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which activities and processing operations are in-scope before you can review
+    whether each has a documented and specific purpose. The scope statement sets the boundaries for what
+    must be reviewed.
+  good_enough: A clear, up-to-date scope statement that lists all business units, processes, and systems
+    included in the ISMS and PIMS.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: foundational
+  rationale: A current asset register ensures you know what information assets and processing activities
+    exist, so you can check that each has a documented purpose and that no new undocumented processing
+    has emerged.
+  good_enough: A maintained list of information assets and processing activities, with enough detail to
+    identify what is being processed and by whom.
+- ref: A.7.2.2
+  standard_id: ISO27701:2019
+  title: Identify Lawful Basis
+  category: direct
+  rationale: You cannot meaningfully review the documented purpose of processing unless you have already
+    identified the lawful basis for each activity. This ensures every purpose is mapped to a legal justification.
+  good_enough: A mapping of each processing activity to its lawful basis, even if some are provisional
+    or pending legal review.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: foundational
+  rationale: A classification scheme helps ensure that all types of personal data and processing activities
+    are identified and categorized, supporting a thorough review of purposes and detection of undocumented
+    processing.
+  good_enough: A basic classification scheme that covers personal data types and processing categories
+    relevant to the scope.

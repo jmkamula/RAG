@@ -1,0 +1,17 @@
+must_id: item:Art.42:scope_schemes_available
+control_ref: Art.42
+standard_id: GDPR:2016/679
+must_text: Available approved schemes enumerated
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all approved data protection certification schemes relevant to your processing activities, including
+  scheme names and official approval references.
+- Document the scope of each scheme, specifying which processing operations or data types are covered,
+  in a dated and version-controlled record.
+- Name the individual responsible for maintaining and updating the list of applicable certification schemes,
+  not a team or department.
+- Attach evidence of scheme approval, such as a link to the official supervisory authority register or
+  a copy of the approval notification.

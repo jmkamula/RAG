@@ -1,0 +1,13 @@
+must_id: item:7.5:reg_version
+control_ref: '7.5'
+standard_id: ISO27001:2022
+must_text: Current version per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List each ISMS document in a separate row, including its unique title and identifier.
+- Record the current approved version number and effective date for each document in its respective row.
+- Name the document owner as a specific individual, not a group or department, in the register.
+- Cross-reference each document row to its latest signed approval record or decision.

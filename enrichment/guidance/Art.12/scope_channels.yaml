@@ -1,0 +1,19 @@
+must_id: item:Art.12:scope_channels
+control_ref: Art.12
+standard_id: GDPR:2016/679
+must_text: Channels enumerated (rights portal, dedicated email, postal address, in-product flow, phone)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all channels through which individuals can exercise their data rights, such as web portal, dedicated
+  email, postal address, phone, or in-product options.
+- Document the specific URL, email address, phone number, and postal address for each channel in a dated
+  register or policy document.
+- Name the person responsible for maintaining and updating the list of rights channels, ensuring a specific
+  individual is identified.
+- Record the date when each channel was last tested or verified as operational, with supporting evidence
+  such as screenshots or test logs.
+- Avoid describing channels in vague terms like "contact us" or "customer service"—specify exact contact
+  points to prevent auditor concerns.

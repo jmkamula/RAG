@@ -1,0 +1,16 @@
+must_id: item:7.1:proc_estimation
+control_ref: '7.1'
+standard_id: ISO27001:2022
+must_text: Estimation method per resource type (FTE-from-hours, budget-from-vendor-quotes, etc.)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the estimation method used for each resource type, such as FTEs from logged hours or budgets
+  from vendor quotes, in the procedure.
+- Name the person responsible for applying each estimation method, listing them as a specific individual
+  rather than a team or department.
+- Record the date when each estimation method was last reviewed or updated in the procedure document.
+- Attach a sample calculation or worked example for at least one resource type to demonstrate how the
+  estimation method is applied.

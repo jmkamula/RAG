@@ -1,0 +1,19 @@
+must_id: item:B.8.2.3:scope_exceptions
+control_ref: B.8.2.3
+standard_id: ISO27701:2019
+must_text: Documented exceptions (empty for most processors) with rationale
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current marketing activities that involve personal data processing, including activity name,
+  purpose, and data types used, in a dated document.
+- Document any exceptions where marketing activities are not in scope, providing a clear rationale for
+  each exception in the same record.
+- Name the individual responsible for approving the documented scope and exceptions, and record their
+  approval with a signature and date.
+- Avoid leaving the owner field blank or using generic terms like "marketing team"—identify a specific
+  person by name and title.
+- Retain previous versions of the scope and exception document to show changes over time, with dates and
+  reasons for updates.

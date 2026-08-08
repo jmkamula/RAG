@@ -1,0 +1,16 @@
+must_id: item:A.5.26:eradication
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: Eradication and recovery steps documented (restore secure state)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document detailed steps for removing threats and restoring systems to a secure state in the incident
+  response procedure, including responsible individuals and timelines.
+- Record the specific tools and methods to be used for eradication and recovery, referencing them by name
+  and version where applicable.
+- Name the owner of the eradication and recovery process as a specific individual, not a team or department.
+- Retain dated records of previous incidents showing completed eradication and recovery actions as evidence
+  of following the documented procedure.

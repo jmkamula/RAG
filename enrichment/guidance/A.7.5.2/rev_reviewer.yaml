@@ -1,0 +1,15 @@
+must_id: item:A.7.5.2:rev_reviewer
+control_ref: A.7.5.2
+standard_id: ISO27701:2019
+must_text: Reviewer identity (DPO + Trust + Legal)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewers for the Destinations Program as specific individuals from Data Protection Officer,
+  Trust, and Legal teams in the review record.
+- Record the date each reviewer completed their assessment in the Destinations Program Review document.
+- Obtain and retain each reviewer's signature or written confirmation of their participation in the review.
+- Avoid listing reviewers as groups or roles only; always identify each reviewer by full name and job
+  title.

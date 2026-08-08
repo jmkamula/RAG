@@ -1,0 +1,18 @@
+must_id: item:10.2:implementation
+control_ref: '10.2'
+standard_id: ISO27001:2022
+must_text: Implement corrective action
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each identified nonconformity with a unique reference number, a clear description, and the
+  date it was found.
+- Assign a named individual to investigate the root cause of each nonconformity and record their findings
+  in the procedure log.
+- Record the corrective action taken, including specific steps, responsible person, and completion date,
+  in a dated corrective action register.
+- Name the owner of each corrective action as a specific individual, not a team or department.
+- Retain evidence of follow-up checks confirming the effectiveness of corrective actions, such as test
+  results or review meeting minutes.

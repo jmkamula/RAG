@@ -1,0 +1,19 @@
+must_id: item:A.5.29:act_gaps
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Gaps surfaced per record (where the plan or controls fell short; severity per gap)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each activation of the plan in a dated entry, including the specific scenario or incident that
+  triggered the activation.
+- List all gaps or failures identified during the activation, describing what did not work as intended
+  and referencing affected controls.
+- Assign a severity rating to each gap using a defined scale, and document the rationale for each rating
+  in the record.
+- Name the individual responsible for reviewing and confirming the accuracy of each gap and severity assessment,
+  with their signature and date.
+- Avoid using generic statements like "no issues found"; provide specific observations or explicitly state
+  "no gaps identified" after thorough review.

@@ -1,0 +1,19 @@
+must_id: item:A.8.33:rev_retention_compliance
+control_ref: A.8.33
+standard_id: ISO27001:2022
+must_text: Retention compliance (no datasets surviving past end-of-need)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the review schedule for all periodic test information programs, including review dates and
+  responsible individuals, in a central register.
+- Record the outcome of each retention review, noting datasets identified for deletion and the date action
+  was taken.
+- Name the owner responsible for authorizing dataset deletion as a specific individual, not a group or
+  department.
+- Retain evidence of dataset deletion, such as system logs or deletion certificates, linked to the corresponding
+  review record.
+- Confirm no datasets remain past their documented end-of-need date by cross-referencing deletion records
+  with retention schedules.

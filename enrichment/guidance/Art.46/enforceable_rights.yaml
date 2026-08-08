@@ -1,0 +1,19 @@
+must_id: item:Art.46:enforceable_rights
+control_ref: Art.46
+standard_id: GDPR:2016/679
+must_text: Enforceable data subject rights and effective legal remedies verification
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the specific individual responsible for verifying enforceable data subject rights and legal remedies
+  in your data transfer documentation.
+- Document the legal basis and mechanism used for data transfers, including references to relevant contracts
+  or binding corporate rules.
+- Record evidence that data subjects are informed of their rights and available remedies, such as a published
+  privacy notice or communication log.
+- Retain copies of signed agreements or contracts that explicitly state enforceable rights and legal remedies
+  for data subjects.
+- Confirm that all references to data subject rights and remedies are up to date and not copied boilerplate
+  that could apply to any organisation.

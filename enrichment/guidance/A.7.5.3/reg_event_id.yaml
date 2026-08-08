@@ -1,0 +1,16 @@
+must_id: item:A.7.5.3:reg_event_id
+control_ref: A.7.5.3
+standard_id: ISO27701:2019
+must_text: Unique transfer event identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each PII transfer event and record it in a dedicated column of the transfer
+  event log.
+- Document the date, time, and method of each PII transfer alongside its unique identifier in the log.
+- Cross-reference each unique identifier with supporting transfer documentation, such as emails or transfer
+  receipts, to verify completeness.
+- Name the log owner as a specific individual responsible for maintaining the uniqueness of identifiers,
+  not as a team or department.

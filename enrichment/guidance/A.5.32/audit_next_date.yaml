@@ -1,0 +1,17 @@
+must_id: item:A.5.32:audit_next_date
+control_ref: A.5.32
+standard_id: ISO27001:2022
+must_text: Next planned audit date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned date for the IPR and licence audit in the audit schedule, including month and
+  year.
+- Record the decision on the next audit date in meeting minutes or an approval email, with the name of
+  the person who set it.
+- Name the responsible individual—not a team or department—who will oversee the next audit date in the
+  audit schedule.
+- Update the audit register to show the last completed audit and the next planned date, with both entries
+  clearly dated.

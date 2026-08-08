@@ -1,0 +1,18 @@
+must_id: item:A.5.24:ex_remediation
+control_ref: A.5.24
+standard_id: ISO27001:2022
+must_text: Remediation actions captured per record (each gap → action item with owner + due date; feeds
+  the program review)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record each identified gap from the exercise in a dated entry, clearly describing the issue and its
+  impact.
+- Assign a specific individual as the owner for each remediation action, avoiding generic labels like
+  "the team" or "IT".
+- State a concrete due date for completion of each action item, not just "ASAP" or "ongoing".
+- Cross-reference each action item to the corresponding gap in the exercise report to show direct linkage.
+- Document the review date and outcome for each action, confirming whether the remediation was completed
+  or requires further follow-up.

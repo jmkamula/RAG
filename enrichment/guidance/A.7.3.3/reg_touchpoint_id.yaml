@@ -1,0 +1,19 @@
+must_id: item:A.7.3.3:reg_touchpoint_id
+control_ref: A.7.3.3
+standard_id: ISO27701:2019
+must_text: Unique touchpoint identifier per row
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a unique identifier to each notice delivery entry, using a sequential number or UUID, and record
+  it in a dedicated column.
+- Cross-reference each unique identifier with the corresponding recipient and delivery timestamp in the
+  same row.
+- Document the method used to generate unique identifiers in a dated procedure, signed by the responsible
+  data manager.
+- Name the log owner as a specific individual, not a generic team or department, in the log header or
+  metadata.
+- Review the log for duplicate or missing identifiers at regular intervals, recording each check with
+  the date and reviewer’s name.

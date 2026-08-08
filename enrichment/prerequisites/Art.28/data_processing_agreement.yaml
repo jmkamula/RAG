@@ -1,0 +1,40 @@
+leaf_id: req:Art.28:data_processing_agreement
+control_ref: Art.28
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: You need an up-to-date record of processing activities to identify which processing operations
+    involve processors, and thus where a DPA is required. Without this, you can't ensure all relevant
+    relationships are covered.
+  good_enough: A basic, current list of processing activities that includes which ones use external processors
+    is sufficient to start drafting DPAs.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Knowing the lawful basis for each processing activity helps define the scope and limits of
+    what a processor can do under the DPA. This ensures the DPA aligns with your legal grounds for processing.
+  good_enough: A mapped lawful basis for each processing activity involving a processor is enough to inform
+    DPA drafting.
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: cross_role
+  rationale: The ISMS scope clarifies which parts of your organization and which data/processes are covered
+    by your security program, helping to identify which processor relationships need a DPA.
+  good_enough: A documented ISMS scope that covers the business units and data flows involving processors
+    is sufficient.
+- ref: Art.37
+  standard_id: GDPR:2016/679
+  title: DPO Designation
+  category: foundational
+  rationale: If a Data Protection Officer is required, they must be involved in reviewing and approving
+    DPAs to ensure compliance. Their input is critical for effective oversight.
+  good_enough: A named DPO (if required) and a defined process for their involvement in DPA review is
+    enough to proceed.

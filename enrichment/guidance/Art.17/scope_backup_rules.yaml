@@ -1,0 +1,20 @@
+must_id: item:Art.17:scope_backup_rules
+control_ref: Art.17
+standard_id: GDPR:2016/679
+must_text: Backup + replica erasure rules (synchronous-on-restore vs delete-cycle vs immutable-record
+  handling)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each system where personal data is backed up or replicated, listing system names and locations
+  in a dated inventory.
+- State the erasure process for each backup type, specifying if erasure is immediate on restore, follows
+  a scheduled delete cycle, or is technically immutable.
+- Name a specific individual responsible for enforcing erasure rules in each system, avoiding generic
+  roles like "IT team" or "admins".
+- Record the date and method of the last test or verification showing erasure rules are correctly applied
+  to backup and replica data.
+- Attach written justification for any system where erasure is not possible due to technical immutability,
+  referencing the relevant GDPR exemption.

@@ -1,0 +1,19 @@
+must_id: item:Art.34:reg_sa_concurrence
+control_ref: Art.34
+standard_id: GDPR:2016/679
+must_text: Per-row SA concurrence where SA consulted (Art.34.4)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the name and contact details of the supervisory authority consulted for each relevant data breach
+  communication entry.
+- Document the date and method of supervisory authority consultation for every incident where consultation
+  occurred.
+- Attach a copy of the supervisory authority’s concurrence or advice, including any reference numbers
+  or correspondence, to the specific communication record.
+- Name the individual at your organisation who obtained the supervisory authority’s concurrence for each
+  case, not just a generic team or department.
+- Confirm that each subject communication record requiring supervisory authority concurrence includes
+  explicit evidence of that concurrence before marking the record as complete.

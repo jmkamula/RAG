@@ -1,0 +1,19 @@
+must_id: item:A.5.26:rev_metrics
+control_ref: A.5.26
+standard_id: ISO27001:2022
+must_text: MTTC / MTTR / containment-success metrics analysed across the period
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Collect and record monthly MTTC (Mean Time to Contain), MTTR (Mean Time to Recover), and incident containment
+  success rates in a dated summary report.
+- Assign a named individual to analyse these metrics for trends and areas needing improvement, documenting
+  findings in a signed review log.
+- Cross-reference each metric analysis to specific incident records from the review period, ensuring data
+  sources are clearly identified.
+- Document any changes made to the incident response program based on metric analysis, including the date
+  and responsible decision-maker.
+- Name the reviewer as a specific person, not a generic group or department, to avoid auditor concerns
+  about unclear accountability.

@@ -1,0 +1,19 @@
+must_id: item:B.8.5.1:scope_subprocessor_transfers
+control_ref: B.8.5.1
+standard_id: ISO27701:2019
+must_text: Subprocessor-driven transfers (data flowing to subprocessor regions)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all subprocessors who receive personal data, including their legal names and the specific countries
+  or regions where data is transferred.
+- Document the types of personal data each subprocessor receives and the business purpose for each transfer
+  in a dated register.
+- Attach signed agreements with each subprocessor that explicitly describe permitted data transfers and
+  reference relevant data protection clauses.
+- Name the responsible individual overseeing subprocessor relationships and data transfer reviews—do not
+  use a team or department as the owner.
+- Record the date of the last review of subprocessor transfer arrangements and note any changes or updates
+  made.

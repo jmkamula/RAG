@@ -1,0 +1,19 @@
+must_id: item:A.5.2:segregation_note
+control_ref: A.5.2
+standard_id: ISO27001:2022
+must_text: Notes conflicts to be resolved via segregation of duties (A.5.3)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all information security roles and their assigned responsibilities in a matrix, including named
+  individuals and their job titles.
+- Identify and document any roles where conflicting duties or potential conflicts of interest exist, referencing
+  specific responsibilities.
+- Record the actions taken to resolve each identified conflict, such as segregating duties or introducing
+  additional oversight, with dates and responsible persons.
+- Name the owner of the matrix as a specific individual, not a group or department, and include their
+  contact details.
+- Review and update the matrix at least annually, recording the date of each review and the reviewer’s
+  name.

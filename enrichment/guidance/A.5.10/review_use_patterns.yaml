@@ -1,0 +1,19 @@
+must_id: item:A.5.10:review_use_patterns
+control_ref: A.5.10
+standard_id: ISO27001:2022
+must_text: Use-pattern check — new technologies or behaviours that need explicit rules added
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual to lead the Acceptable Use Policy review and record their name and date in
+  the policy review log.
+- Document any new technologies or user behaviours introduced since the last review in a dated summary
+  attached to the policy file.
+- Cross-reference the Acceptable Use Policy against the documented new technologies and behaviours to
+  identify any gaps or missing rules.
+- Record specific updates or additions made to the policy, citing the related technology or behaviour
+  and the date of the change.
+- Name the reviewer as a specific person — do not use generic roles like "IT" or "the team" as the responsible
+  party.

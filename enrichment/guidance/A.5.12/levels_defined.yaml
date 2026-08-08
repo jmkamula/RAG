@@ -1,0 +1,15 @@
+must_id: item:A.5.12:levels_defined
+control_ref: A.5.12
+standard_id: ISO27001:2022
+must_text: Classification levels defined (e.g. Public / Internal / Confidential / Restricted)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Define at least three distinct information classification levels, such as Public, Internal, and Confidential,
+  in a dated and version-controlled document.
+- Describe the criteria for each classification level with clear, specific examples relevant to your organisation’s
+  information types.
+- Name the owner of the classification scheme as a specific individual, not a group or department.
+- Record the approval of the classification scheme by a named senior manager, including the approval date.

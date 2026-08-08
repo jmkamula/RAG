@@ -1,0 +1,40 @@
+leaf_id: req:Art.49:invocation_register
+control_ref: Art.49
+standard_id: GDPR:2016/679
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: Art.44
+  standard_id: GDPR:2016/679
+  title: General principle for transfers
+  category: direct
+  rationale: You must confirm that a transfer falls under the GDPR's international transfer regime before
+    invoking any derogation. Art.44 sets the baseline for when transfer rules apply.
+  good_enough: Document the types of data transfers your organization undertakes and confirm which are
+    subject to GDPR Chapter V.
+- ref: Art.46
+  standard_id: GDPR:2016/679
+  title: Transfers subject to appropriate safeguards
+  category: direct
+  rationale: Art.49 derogations are only available if neither an adequacy decision (Art.45) nor appropriate
+    safeguards (Art.46) can be used. You must show that Art.46 options have been considered and ruled
+    out for each transfer.
+  good_enough: Maintain a record showing why Art.46 safeguards (like SCCs or BCRs) are not available or
+    suitable for the specific transfer in question.
+- ref: Art.30
+  standard_id: GDPR:2016/679
+  title: Records of Processing Activities
+  category: foundational
+  rationale: A current ROPA is needed to identify which processing activities involve international transfers,
+    and to link derogation invocations to specific processing operations.
+  good_enough: Have an up-to-date ROPA that includes all relevant processing activities, especially those
+    involving cross-border data transfers.
+- ref: Art.6
+  standard_id: GDPR:2016/679
+  title: Lawful Basis
+  category: foundational
+  rationale: Each transfer invoking an Art.49 derogation must be tied to a valid lawful basis for processing.
+    Without this, the derogation invocation cannot be justified.
+  good_enough: Identify and document the lawful basis for each processing activity that may require a
+    derogation-based transfer.

@@ -1,0 +1,16 @@
+must_id: item:A.8.10:reg_actor
+control_ref: A.8.10
+standard_id: ISO27001:2022
+must_text: Per-deletion actor (person or automated job identifier)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the full name or unique identifier of the person or automated job responsible for each deletion
+  in the disposal register entry.
+- Document the date and time of each deletion event alongside the responsible actor in the register.
+- Name the responsible actor as a specific individual or job identifier—avoid using generic labels like
+  "IT team" or "system admin".
+- Cross-reference each register entry with supporting system logs or deletion confirmation records to
+  verify the actor’s involvement.

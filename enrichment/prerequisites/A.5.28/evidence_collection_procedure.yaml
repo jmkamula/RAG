@@ -1,0 +1,46 @@
+leaf_id: req:A.5.28:evidence_collection_procedure
+control_ref: A.5.28
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: You need to know which parts of the organization, systems, and processes are in-scope for
+    evidence handling. This ensures the procedure covers all relevant assets and events.
+  good_enough: A clear, documented scope that identifies the organizational boundaries and information
+    assets relevant to evidence collection.
+- ref: A.5.9
+  standard_id: ISO27001:2022
+  title: Asset Register
+  category: direct
+  rationale: An up-to-date asset register is essential to identify which assets may generate or contain
+    evidence. This underpins the identification and acquisition steps in the procedure.
+  good_enough: A basic, current list of information assets, including owners and locations, is available
+    for reference.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Clear assignment of roles is needed to define who is authorized and competent to collect,
+    handle, and preserve evidence, as well as to interact with external authorities.
+  good_enough: Documented roles with named individuals or functions responsible for evidence-related activities.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: foundational
+  rationale: Understanding the risks to information assets helps prioritize which events and evidence
+    types are most critical to address in the procedure.
+  good_enough: A recent risk assessment identifying key threats and vulnerabilities relevant to evidence
+    handling, even if not exhaustive.
+- ref: A.5.12
+  standard_id: ISO27001:2022
+  title: Classification Scheme
+  category: direct
+  rationale: A classification scheme ensures evidence is handled according to its sensitivity and legal/regulatory
+    requirements, which affects preservation and handover steps.
+  good_enough: A documented scheme that categorizes information assets and evidence types by sensitivity,
+    with basic handling rules.

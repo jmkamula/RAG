@@ -1,0 +1,18 @@
+must_id: item:A.7.10:scope_exclusions
+control_ref: A.7.10
+standard_id: ISO27001:2022
+must_text: Exclusions (cloud storage handled by A.8.10 information deletion; in-band system storage)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all media types used for information storage, including physical, removable, and electronic forms,
+  with clear descriptions and examples for each class.
+- Document any exclusions, such as cloud storage and in-band system storage, with references to the relevant
+  controls or policies that govern them.
+- State the rationale for each exclusion, citing ISO27001:2022 control mappings or organisational context
+  to show why they are out of scope.
+- Name the person responsible for maintaining and updating the media classes scope, specifying a named
+  individual rather than a team or department.
+- Date and sign the final scope document to show when it was last reviewed and approved.

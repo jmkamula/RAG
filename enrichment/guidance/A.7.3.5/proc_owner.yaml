@@ -1,0 +1,17 @@
+must_id: item:A.7.3.5:proc_owner
+control_ref: A.7.3.5
+standard_id: ISO27701:2019
+must_text: Named owner (DPO + Marketing lead for A.21.2 cases)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the owner of the Objection Handling Procedure as a specific individual, listing both the Data Protection
+  Officer and the Marketing lead for A.21.2 cases.
+- Document the date the owner was assigned in the procedure record, ensuring it is current and not left
+  blank or marked "TBD".
+- Record the owner's acceptance of responsibility with a signed or acknowledged statement, either digitally
+  or in writing.
+- Cross-reference the owner's details in both the procedure document and the central compliance register
+  to confirm consistency.

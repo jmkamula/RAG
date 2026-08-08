@@ -1,0 +1,14 @@
+must_id: item:A.7.13:rev_next_date
+control_ref: A.7.13
+standard_id: ISO27001:2022
+must_text: Next planned review date stated
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the next planned review date for the Periodic Maintenance Program in the review schedule document.
+- Record the name of the individual responsible for scheduling the next review, not just a team or department.
+- Update the review schedule with the date this information was last confirmed or changed.
+- Attach supporting evidence, such as a calendar invite or meeting booking, showing the next planned review
+  date.

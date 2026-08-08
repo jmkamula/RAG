@@ -1,0 +1,19 @@
+must_id: item:B.8.4.3:scope_change_drivers
+control_ref: B.8.4.3
+standard_id: ISO27701:2019
+must_text: Trigger list (new subprocessor / new region)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all current subprocessors and regions involved in personal data transmission in a dated register
+  maintained by the data protection officer.
+- Record each time a new subprocessor or region is added to the transmission scope, including the date
+  and the approving individual.
+- Update the register immediately following any change, ensuring the register version is clearly dated
+  and previous versions are retained.
+- Name the responsible individual for maintaining and updating the register, avoiding generic titles like
+  "IT" or "the team".
+- Review the register quarterly and document the review date and reviewer’s name to demonstrate ongoing
+  accuracy.

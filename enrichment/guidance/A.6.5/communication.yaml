@@ -1,0 +1,20 @@
+must_id: item:A.6.5:communication
+control_ref: A.6.5
+standard_id: ISO27001:2022
+must_text: Communication mechanism to leavers (exit briefing with signed acknowledgment; reminder letter;
+  intranet reference) — drives the leaver-briefing register
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Assign a named individual in HR or Security to deliver the exit briefing to each departing employee
+  and record their name in the leaver-briefing register.
+- Document the date, time, and method of each exit briefing in the leaver-briefing register, linking to
+  the relevant employee.
+- Obtain a signed acknowledgment from the departing employee confirming receipt and understanding of their
+  ongoing information security responsibilities.
+- Cross-reference each signed acknowledgment with the corresponding entry in the leaver-briefing register
+  to ensure completeness.
+- Name the responsible person for maintaining the leaver-briefing register as a specific individual, not
+  a generic team or department.

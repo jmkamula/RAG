@@ -1,0 +1,19 @@
+must_id: item:A.5.27:feedback_loop
+control_ref: A.5.27
+standard_id: ISO27001:2022
+must_text: Feedback loop into risk register, control catalogue, and training programmes
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document each lesson learned from information security incidents in a dated record, including the incident
+  description and the specific lesson identified.
+- Cross-reference each lesson learned to updates made in the risk register, control catalogue, and training
+  programmes, noting the date and responsible individual.
+- Assign responsibility for implementing each lesson to a named individual, not a team or department,
+  and record their name in the incident follow-up log.
+- Retain evidence of completed updates, such as revised risk register entries, updated control documentation,
+  and modified training materials, with clear version dates.
+- Record a management review or sign-off confirming that all relevant feedback loops have been completed
+  for each incident, including the date and name of the approver.

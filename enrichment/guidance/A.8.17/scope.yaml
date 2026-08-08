@@ -1,0 +1,17 @@
+must_id: item:A.8.17:scope
+control_ref: A.8.17
+standard_id: ISO27001:2022
+must_text: Scope (servers / network devices / endpoints / containers / cloud services / OT)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- List all information processing systems in scope, including servers, network devices, endpoints, containers,
+  cloud services, and operational technology, in a dated inventory.
+- Specify each system type and location in the procedure, avoiding vague groupings like "all systems"
+  or "IT assets."
+- Name the individual responsible for maintaining the scope list, including their job title and contact
+  details.
+- Review and update the scope section annually, recording the review date and reviewer’s name in the procedure
+  document.

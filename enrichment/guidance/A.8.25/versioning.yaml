@@ -1,0 +1,18 @@
+must_id: item:A.8.25:versioning
+control_ref: A.8.25
+standard_id: ISO27001:2022
+must_text: Version-control requirements (cross-link to A.8.4 source code access)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State in the policy that all source code must be stored in a version-controlled system with unique user
+  accounts for traceability.
+- Cross-reference the policy section on version control to the policy or procedure covering source code
+  access controls required by A.8.4.
+- Name a specific individual as the policy owner responsible for maintaining and updating the version-control
+  requirements.
+- Record the policy version number and approval date on the document’s cover page.
+- Avoid using generic statements like "source code should be protected" without specifying version-control
+  and access requirements.

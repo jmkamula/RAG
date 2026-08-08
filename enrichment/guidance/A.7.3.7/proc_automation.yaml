@@ -1,0 +1,17 @@
+must_id: item:A.7.3.7:proc_automation
+control_ref: A.7.3.7
+standard_id: ISO27701:2019
+must_text: Automation where feasible — scripted notification to processors + integrations
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document the automated notification process, including scripts or integrations used, in a dated procedure
+  maintained by the privacy or IT lead.
+- Name the specific individual responsible for maintaining and updating the automation, avoiding generic
+  roles like "the team" or "IT department."
+- Record a test log showing successful automated notifications sent to third-party processors, including
+  timestamps and recipient details.
+- Retain evidence of integration configurations, such as screenshots or export files, showing active connections
+  to third-party notification systems.

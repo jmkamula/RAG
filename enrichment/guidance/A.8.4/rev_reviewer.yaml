@@ -1,0 +1,17 @@
+must_id: item:A.8.4:rev_reviewer
+control_ref: A.8.4
+standard_id: ISO27001:2022
+must_text: Reviewer identity (Engineering + InfoSec)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Name the reviewer from Engineering and the reviewer from Information Security as specific individuals
+  in the access review record.
+- Record the date each reviewer completed their assessment in the review documentation.
+- Document each reviewer’s findings and approval or concerns in a signed or digitally acknowledged review
+  log.
+- Attach evidence of the review, such as screenshots or exported access lists, to the review record for
+  reference.
+- Avoid listing groups or teams as reviewers; always identify named individuals responsible for the review.

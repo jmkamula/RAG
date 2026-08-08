@@ -1,0 +1,19 @@
+must_id: item:A.8.22:flow_rules
+control_ref: A.8.22
+standard_id: ISO27001:2022
+must_text: Inter-zone flow rules — default-deny with explicit allowlist; bidirectionally documented
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document all network zones and their boundaries in a dated diagram, naming each zone and its business
+  purpose.
+- Record explicit allowlist rules for traffic between each pair of zones, specifying source, destination,
+  protocol, and justification.
+- State that the default rule for all inter-zone flows is "deny" unless an allowlist entry exists, and
+  reference this in both directions.
+- Name the owner responsible for maintaining inter-zone flow rules as a specific individual, not a team
+  or department.
+- Review and update the documented flow rules at least annually, recording the review date and reviewer’s
+  name.

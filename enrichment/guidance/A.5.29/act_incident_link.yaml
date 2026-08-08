@@ -1,0 +1,18 @@
+must_id: item:A.5.29:act_incident_link
+control_ref: A.5.29
+standard_id: ISO27001:2022
+must_text: Cross-reference to A.5.26 incident register where the activation was incident-driven (real
+  disruptions tied to incidents)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Record the date and reason for each activation in the Per-Activation Plan Record, clearly stating if
+  it was triggered by a real incident.
+- Cross-reference the relevant incident entry from the A.5.26 incident register by including its unique
+  identifier in the Per-Activation Plan Record.
+- Name the individual responsible for linking the activation to the incident register, ensuring a specific
+  person is listed rather than a team or department.
+- Attach or link supporting evidence, such as incident reports or communications, that confirm the activation
+  was incident-driven.

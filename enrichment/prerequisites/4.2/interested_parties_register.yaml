@@ -1,0 +1,43 @@
+leaf_id: req:4.2:interested_parties_register
+control_ref: '4.2'
+standard_id: ISO27001:2022
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-07'
+prerequisites:
+- ref: '4.3'
+  standard_id: ISO27001:2022
+  title: ISMS Scope Statement
+  category: foundational
+  rationale: The ISMS scope statement defines the organizational and operational boundaries for the ISMS,
+    which is essential to identify which interested parties and requirements are relevant. Without a clear
+    scope, the register may miss key parties or include irrelevant ones.
+  good_enough: A documented scope statement that clearly outlines what parts of the organization and which
+    activities are covered by the ISMS. It should be specific enough to guide stakeholder identification.
+- ref: A.5.2
+  standard_id: ISO27001:2022
+  title: Roles & Responsibilities
+  category: foundational
+  rationale: Knowing who is responsible for ISMS activities ensures that the process of identifying interested
+    parties and their requirements is owned and managed. This prevents gaps or confusion in stakeholder
+    engagement.
+  good_enough: A basic roles and responsibilities matrix or list that assigns ISMS-related duties, including
+    stakeholder engagement, to named individuals or teams.
+- ref: '5.2'
+  standard_id: ISO27001:2022
+  title: Information Security Policy
+  category: foundational
+  rationale: The information security policy sets the organization's overall direction and priorities
+    for security, which helps determine which external and internal requirements are relevant when populating
+    the register.
+  good_enough: A published, approved information security policy that defines the organization's commitment
+    to information security and high-level objectives.
+- ref: 6.1.2
+  standard_id: ISO27001:2022
+  title: Risk Assessment
+  category: direct
+  rationale: Understanding the organization's risk context helps prioritize which interested parties and
+    requirements are most critical to the ISMS. This ensures the register focuses on parties that could
+    impact risk.
+  good_enough: A recent or draft risk assessment identifying key risks, even if not fully detailed, to
+    inform which stakeholders and requirements are most relevant.

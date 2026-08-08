@@ -1,0 +1,16 @@
+must_id: item:Art.8:proc_age_threshold
+control_ref: Art.8
+standard_id: GDPR:2016/679
+must_text: Age threshold stated per applicable Member State (16 default; some MS lower it to 13/14/15)
+category: must
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- State the exact age threshold for child consent as set by each relevant Member State in your written
+  procedure.
+- Document the legal source or authority for each Member State’s age threshold with a dated reference
+  or citation.
+- Name the individual responsible for monitoring changes to Member State age thresholds, listing their
+  full name and job title.
+- Avoid using only the default age of 16 without checking and recording each Member State’s specific requirement.

@@ -1,0 +1,20 @@
+must_id: item:A.5.11:contractor_variant
+control_ref: A.5.11
+standard_id: ISO27001:2022
+must_text: Contractor variant documented where standard employee path doesn't apply (third-party offboarding,
+  project closure)
+category: should
+curation_status: draft
+authored_by: llm-4.1
+authored_at: '2026-08-05'
+guidance:
+- Document a separate return of assets procedure specifically for contractors, detailing steps for asset
+  recovery at contract end or project closure.
+- Name the responsible individual who oversees contractor asset returns, avoiding generic titles like
+  "IT" or "the team".
+- Record the date the contractor return procedure was last reviewed and updated, showing it reflects current
+  practices.
+- Cross-reference the contractor return procedure in your main asset management policy, ensuring auditors
+  can easily locate both documents.
+- Retain signed confirmation from contractors acknowledging asset return obligations before access or
+  equipment is issued.
