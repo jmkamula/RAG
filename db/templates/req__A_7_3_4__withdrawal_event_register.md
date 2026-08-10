@@ -13,6 +13,8 @@ table_shape: true
 
 # Consent Modification / Withdrawal Register
 
+<<DOC_CONTROL>>
+
 > Per-withdrawal-event row — audit trail of each consent withdrawal or modification with timestamp + propagation status. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:A.7.3.4:withdrawal_event_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.3.4:reg_timestamp -->
 <!-- column: item:A.7.3.4:reg_propagation_status -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, timestamped record of every time someone changes or withdraws their consent, making it easy to track updates and show compliance with privacy standards.
+
+## When to use it
+
+Use this register whenever someone modifies or withdraws their consent, and review or refresh the record about once a year to ensure it stays up to date.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element for the initial setup, plus a few minutes to log each new consent change as it happens.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit trail_
 
 > _Standard text:_ Unique event identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Subject Id
 
 <<MUST item:A.7.3.4:reg_subject_id>>
 _Why: Traceability_
 
 > _Standard text:_ Subject identifier per row
+
+<<GUIDANCE>>
 
 ### Reg Event Type
 
@@ -58,12 +83,16 @@ _Why: §7.3.4 — modify or withdraw_
 
 > _Standard text:_ Event type per row (modification / partial withdrawal / full withdrawal)
 
+<<GUIDANCE>>
+
 ### Reg Timestamp
 
 <<MUST item:A.7.3.4:reg_timestamp>>
 _Why: Currency_
 
 > _Standard text:_ Timestamp per row
+
+<<GUIDANCE>>
 
 ### Reg Propagation Status
 
@@ -73,6 +102,8 @@ _Why: §7.3.4 — dissemination_
 > _Standard text:_ Propagation status per row (downstream systems notified / third parties informed)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Parity audit_
 
 > _Standard text:_ Withdrawal channel per row
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

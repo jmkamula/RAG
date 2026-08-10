@@ -12,6 +12,8 @@ table_shape: true
 
 # Detection Use-Case Register
 
+<<DOC_CONTROL>>
+
 > Catalogue of active detections — rule / use-case id, asset coverage, last-tuning date, true-positive rate, status
 
 <!-- TABLE-COLUMNS leaf:req:A.8.16:detection_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.8.16:reg_tp_rate -->
 <!-- column: item:A.8.16:reg_last_tuned -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep an organized record of all your active detection rules, including important details like coverage, tuning history, and performance. It's useful for tracking and improving your security monitoring efforts.
+
+## When to use it
+
+Use this register whenever you need to document or review your detection use-cases, as it should always reflect your current environment. Update it as needed whenever new detections are added or existing ones are changed.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element for each detection rule you document. Completing the register from scratch may take a few hours, depending on how many detection rules you have.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: Identification_
 
 > _Standard text:_ Per-detection use-case identifier (rule id / hunt id / playbook id)
 
+<<GUIDANCE>>
+
 ### Reg Coverage
 
 <<MUST item:A.8.16:reg_coverage>>
 _Why: 27002:8.16 — networks, systems, applications_
 
 > _Standard text:_ Per-detection asset coverage (which asset classes / sources feed it)
+
+<<GUIDANCE>>
 
 ### Reg Threat Mapping
 
@@ -57,12 +82,16 @@ _Why: Coverage visibility_
 
 > _Standard text:_ Per-detection threat mapping (MITRE ATT&CK technique or equivalent)
 
+<<GUIDANCE>>
+
 ### Reg Tp Rate
 
 <<MUST item:A.8.16:reg_tp_rate>>
 _Why: Detection effectiveness_
 
 > _Standard text:_ Per-detection true-positive rate (rolling window)
+
+<<GUIDANCE>>
 
 ### Reg Last Tuned
 
@@ -72,6 +101,8 @@ _Why: Drift detection_
 > _Standard text:_ Per-detection last-tuning date
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -83,3 +114,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Accountability_
 
 > _Standard text:_ Per-detection named owner (detection engineer)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

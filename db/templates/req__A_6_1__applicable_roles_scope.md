@@ -11,14 +11,35 @@ should_count: 2
 
 # Applicable Roles and Check-Depth Scope
 
+<<DOC_CONTROL>>
+
 > The upstream that drives the procedure. Documents which role tiers exist, which checks each tier requires, and the legal/regulatory drivers for sectoral check requirements (financial-services PEP + sanctions, healthcare credentialing, government clearance levels)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which roles exist in your organization, what level of background checks each role requires, and the legal or regulatory reasons behind those requirements.
+
+## When to use it
+
+Use this document whenever you need to outline or update the roles in your environment and specify the depth of checks required for each, especially when regulations or business needs change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this from scratch, as you’ll need to describe each required element in detail and gather relevant regulatory information.
 
 ## 1. Role tiers defined (junior office, standard, sensitive [access to special-category PII or financial systems], privileged [admin / production access], executive)
 
 <<MUST item:A.6.1:scope_role_tiers>>
 _Why: 27002:6.1a — proportional_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,6 +48,8 @@ _Why: 27002:6.1a — proportional_
 <<MUST item:A.6.1:scope_check_matrix>>
 _Why: 27002:6.1 — proportional checks_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Jurisdictions covered (where checks happen — local legal constraints apply; some checks unavailable in some jurisdictions)
@@ -34,12 +57,16 @@ _Why: 27002:6.1 — proportional checks_
 <<MUST item:A.6.1:scope_jurisdictions>>
 _Why: 27002:6.1 — applicable laws per jurisdiction_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 4. Sectoral drivers stated (PCI for payment-card roles, HIPAA for healthcare, financial-services PEP/sanctions, government clearance)
 
 <<MUST item:A.6.1:scope_sectoral_drivers>>
 _Why: 27002:6.1 — applicable laws / sectoral_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -54,6 +81,8 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.6.1:scope_a531_link>>
 _Why: Cross-control coherence_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Trigger list for re-scoping (new geography, new sector entry, new regulator action affecting screening)
@@ -61,4 +90,10 @@ _Why: Cross-control coherence_
 <<SHOULD item:A.6.1:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -130,6 +130,16 @@ class LeafVerdict:
     # to specific checklist_item_ids on save.
     item_ids_recognised:   list[str] = field(default_factory=list)
     item_ids_unrecognised: list[str] = field(default_factory=list)
+    # Per-MUST staleness (2026-08-10). MUST ids whose latest recognising
+    # evidence is older than freshness_days. When the leaf has no
+    # freshness_days set, this list is always empty. Additive: leaf-level
+    # `fresh: bool` remains for existing consumers.
+    item_ids_stale:        list[str] = field(default_factory=list)
+    # Per-MUST partial (2026-08-10). MUST ids with document_findings.status
+    # ='partial' bound to them. Not counted toward `satisfied` (strict
+    # present-only semantics preserved), but surfaced so consumers can
+    # render a ◐ half-state instead of a blank.
+    item_ids_partial:      list[str] = field(default_factory=list)
 
     @property
     def counts_as_comply(self) -> bool:

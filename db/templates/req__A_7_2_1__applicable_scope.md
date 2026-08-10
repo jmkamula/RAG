@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Processing Activities Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which business activities involve PII processing (and therefore need documented purposes). Excludes non-PII activities. Sets the denominator for the purpose register.
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly identify which of your business activities involve processing personal data, making it easier to document and manage your privacy obligations.
+
+## When to use it
+
+Use this template whenever your organization starts, changes, or reviews activities that might involve personal data, or when your privacy profile changes. Update it as needed to keep your records accurate.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to describe three key elements related to your processing activities.
 
 ## 1. In-scope processing activities enumerated
 
 <<MUST item:A.7.2.1:scope_activities>>
 _Why: Coverage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Coverage_
 <<MUST item:A.7.2.1:scope_pii_test>>
 _Why: §7.2.1 — PII scope_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Out-of-scope activities (anonymous analytics, aggregate reporting) with rationale
 
 <<MUST item:A.7.2.1:scope_exclusions>>
 _Why: Defensibility_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.2.1:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

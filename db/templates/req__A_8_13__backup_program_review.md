@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Backup Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — restore-test attainment per RPO tier, scope completeness, encryption + immutability posture (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.13:backup_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.8.13:rev_threat_posture -->
 <!-- column: item:A.8.13:rev_procedure_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document and review your backup program, ensuring your backups meet recovery, encryption, and immutability requirements for ISO 27001 compliance. It provides a clear, organized record of your annual backup checks.
+
+## When to use it
+
+Use this template once a year to verify and record that your backup processes are working as intended, including restore tests and security measures. It applies to every environment you manage, regardless of changes.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 2 hours completing this from scratch, depending on how many backup systems you have and how easily you can gather the required information for each section.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:8.13 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.13:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Backup Operations + Infrastructure + InfoSec)
+
+<<GUIDANCE>>
 
 ### Rev Test Attainment
 
@@ -59,6 +84,8 @@ _Why: 27002:8.13 — regularly tested_
 
 > _Standard text:_ Restore-test attainment per tier (cadence met, RPO met)
 
+<<GUIDANCE>>
+
 ### Rev Scope Completeness
 
 <<MUST item:A.8.13:rev_scope_completeness>>
@@ -66,12 +93,16 @@ _Why: 27002:8.13 — maintained_
 
 > _Standard text:_ Scope-completeness check (new in-scope system covered)
 
+<<GUIDANCE>>
+
 ### Rev Threat Posture
 
 <<MUST item:A.8.13:rev_threat_posture>>
 _Why: Modern resilience_
 
 > _Standard text:_ Threat-posture review (ransomware-resilience: immutability / air-gap / 3-2-1 still adequate)
+
+<<GUIDANCE>>
 
 ### Rev Procedure Update
 
@@ -81,6 +112,8 @@ _Why: Closes the loop_
 > _Standard text:_ Findings propagated to procedure / scope
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

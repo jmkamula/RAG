@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Environment Separation Scope
 
+<<DOC_CONTROL>>
+
 > Upstream — which platform domains have separated environments. SDLC platform yes. Internal-tools dev/prod proportional. Vendor SaaS sandboxes governed via A.5.19/A.5.21
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which parts of your technology environment are separated for development, testing, and production, making it easier to show compliance with environment separation requirements.
+
+## When to use it
+
+Use this document whenever your systems or applications need to demonstrate separated environments, especially if your setup or compliance profile changes. Update it as needed to stay accurate.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 20 to 30 minutes completing this from scratch, as you'll need to describe two key elements about your environment separation.
 
 ## 1. Platforms in scope with environment-tiering rules per platform
 
 <<MUST item:A.8.31:scope_platforms>>
 _Why: 27002:8.31 — appropriate_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -26,6 +47,8 @@ _Why: 27002:8.31 — appropriate_
 
 <<MUST item:A.8.31:scope_exclusions>>
 _Why: Boundary clarity_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -40,4 +63,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.31:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

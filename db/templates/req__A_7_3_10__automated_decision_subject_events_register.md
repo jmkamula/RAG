@@ -13,6 +13,8 @@ table_shape: true
 
 # Automated Decision Subject Events Register
 
+<<DOC_CONTROL>>
+
 > Per-subject-event row — objections, requests for human intervention, contests. Distinct from the Art.22 system register (which tracks the systems). Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:A.7.3.10:automated_decision_subject_events_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.3.10:reg_system -->
 <!-- column: item:A.7.3.10:reg_resolution -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of individual objections, requests for human review, and challenges related to automated decisions, making it easier to demonstrate compliance with privacy standards.
+
+## When to use it
+
+Use this register whenever someone objects to, requests human intervention in, or contests an automated decision about them. Review and update the register at least once a year to keep it current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes to set up the required elements for the first subject event, with additional time needed for each new entry as events occur.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit trail_
 
 > _Standard text:_ Unique event identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Subject Id
 
 <<MUST item:A.7.3.10:reg_subject_id>>
 _Why: Traceability_
 
 > _Standard text:_ Subject identifier per row
+
+<<GUIDANCE>>
 
 ### Reg Event Type
 
@@ -58,12 +83,16 @@ _Why: Art.22.3_
 
 > _Standard text:_ Event type per row (objection / human-intervention request / contest / expression-of-view)
 
+<<GUIDANCE>>
+
 ### Reg System
 
 <<MUST item:A.7.3.10:reg_system>>
 _Why: Traceability to Art.22 register_
 
 > _Standard text:_ Automated system involved per row
+
+<<GUIDANCE>>
 
 ### Reg Resolution
 
@@ -73,6 +102,8 @@ _Why: Art.22.3_
 > _Standard text:_ Resolution per row (human-reviewed decision / procedure applied / dismissed with reason)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Effectiveness_
 
 > _Standard text:_ Response time per row
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -11,14 +11,35 @@ should_count: 1
 
 # Capacity Monitoring Baseline
 
+<<DOC_CONTROL>>
+
 > A.8.6 baseline — what resources are monitored, what the current and expected demand is, what alert thresholds apply. The procedure, monitoring log and review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly document which resources are being monitored, how much capacity is currently used, what future demand is expected, and when alerts should be triggered. It's useful for keeping track of your environment's capacity and ensuring you meet compliance requirements.
+
+## When to use it
+
+Use this template whenever you need to establish or update a baseline for monitoring your environment's capacity. Refresh the document as needed to reflect changes in resources, demand, or alert thresholds.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes completing this template from scratch, as each required section takes around 10 to 15 minutes to fill in thoughtfully.
 
 ## 1. Resources monitored (CPU / memory / storage / network / DB connections / licences)
 
 <<MUST item:A.8.6:bl_monitored_resources>>
 _Why: 27002:8.6 — use of resources monitored_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.6 — use of resources monitored_
 <<MUST item:A.8.6:bl_current_vs_expected>>
 _Why: 27002:8.6 — current and expected capacity_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Alert thresholds defined (warning / critical) per resource class
 
 <<MUST item:A.8.6:bl_thresholds>>
 _Why: 27002:8.6 — adjusted in line_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: 27002:8.6 — adjusted in line_
 <<MUST item:A.8.6:bl_forecasting>>
 _Why: 27002:8.6 — expected capacity_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Auto-scaling automation configured for elastic workloads (modern baseline)
 
 <<MUST item:A.8.6:bl_automation>>
 _Why: Modern cloud-native baseline_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.6:bl_dr_integration>>
 _Why: Resilience_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

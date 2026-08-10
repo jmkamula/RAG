@@ -13,6 +13,8 @@ table_shape: true
 
 # Processor Transfer Destinations Register
 
+<<DOC_CONTROL>>
+
 > Per-destination row — countries + international orgs where customer PII may be processed. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:B.8.5.2:destinations_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:B.8.5.2:reg_customer_disclosure -->
 <!-- column: item:B.8.5.2:reg_basis_link -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of all the countries and international organizations where your customers’ personal data may be processed. It’s designed to support privacy compliance and transparency for your data handling practices.
+
+## When to use it
+
+Use this register if your organization processes customer personal data in multiple countries or through international organizations. Update it about once a year, or whenever your data transfer destinations change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element for each destination you need to list. Completing the register from scratch may take 1-2 hours, depending on the number of destinations involved.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Referenceability_
 
 > _Standard text:_ Destination identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Role
 
 <<MUST item:B.8.5.2:reg_role>>
@@ -50,12 +73,16 @@ _Why: Traceability_
 
 > _Standard text:_ Role per row (direct storage / subprocessor / support access)
 
+<<GUIDANCE>>
+
 ### Reg Customer Disclosure
 
 <<MUST item:B.8.5.2:reg_customer_disclosure>>
 _Why: §8.5.2 — available to customers_
 
 > _Standard text:_ Customer disclosure status per row (published in DPA schedule / trust page / on request)
+
+<<GUIDANCE>>
 
 ### Reg Basis Link
 
@@ -65,6 +92,8 @@ _Why: §8.5.2 — 8.5.1 alignment_
 > _Standard text:_ Basis link per row (link to B.8.5.1)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: §8.5.2 — subcontracted_
 
 > _Standard text:_ Subprocessor link per row where destination is via a subprocessor
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

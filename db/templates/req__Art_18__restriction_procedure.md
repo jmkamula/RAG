@@ -11,14 +11,35 @@ should_count: 1
 
 # Restriction of Processing Procedure
 
+<<DOC_CONTROL>>
+
 > Art.18 gives subjects the right to restrict processing in 4 specific grounds (accuracy contested, unlawful but no erasure, no longer needed but subject needs for claims, objection pending). Procedure as primary; restriction register, applicable grounds scope, program review are siblings
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document how your organization handles requests from individuals to restrict the processing of their personal data, ensuring you meet GDPR Article 18 requirements.
+
+## When to use it
+
+Use this whenever you process personal data and need a clear, up-to-date procedure for handling restriction requests, especially as these obligations always apply and should be reviewed whenever your practices change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on the complexity of your data processing and the number of restriction cases you need to record.
 
 ## 1. Intake channel via Art.12 procedure (rights portal)
 
 <<MUST item:Art.18:intake_channel>>
 _Why: Art.12.2_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Art.12.2_
 <<MUST item:Art.18:grounds_assessment>>
 _Why: Art.18.1_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Technical restriction mechanism (flag in data store / move to restricted partition / temporary access lock)
 
 <<MUST item:Art.18:restriction_mechanism>>
 _Why: Art.18.2 — only store, lawful claims, public interest_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,6 +66,8 @@ _Why: Art.18.2 — only store, lawful claims, public interest_
 <<MUST item:Art.18:lift_communication>>
 _Why: Art.18.3_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Notification to recipients per Art.19
@@ -48,12 +75,16 @@ _Why: Art.18.3_
 <<MUST item:Art.18:recipient_notification>>
 _Why: Art.19_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. One-month response deadline
 
 <<MUST item:Art.18:response_deadline>>
 _Why: Art.12.3_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -68,4 +99,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.18:storage_only_audit>>
 _Why: Art.18.2_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

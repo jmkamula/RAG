@@ -13,6 +13,8 @@ table_shape: true
 
 # DPO Designation Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — DPO designation still appropriate (org may have grown into Art.37.1 criteria), qualifications still hold, publication current (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.37:dpo_designation_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.37:rev_qualifications_currency -->
 <!-- column: item:Art.37:rev_publication_current -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your Data Protection Officer (DPO) designation, making sure the appointment is still appropriate, qualifications are up to date, and public information is current.
+
+## When to use it
+
+Use this review each year, especially if your organization has grown or changed and may now meet the GDPR criteria for appointing a DPO. Complete it annually to stay compliant.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes filling out this template from scratch, as each required section takes some time to review and document thoroughly.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.37:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (executive sponsor + legal counsel)
+
+<<GUIDANCE>>
 
 ### Rev Criteria Recheck
 
@@ -58,12 +83,16 @@ _Why: Art.37.1_
 
 > _Standard text:_ Criteria recheck — Art.37.1 applicability re-assessed against current processing scope
 
+<<GUIDANCE>>
+
 ### Rev Qualifications Currency
 
 <<MUST item:Art.37:rev_qualifications_currency>>
 _Why: Art.37.5_
 
 > _Standard text:_ Qualifications currency — DPO continuing-education or certification renewal evidence
+
+<<GUIDANCE>>
 
 ### Rev Publication Current
 
@@ -73,6 +102,8 @@ _Why: Art.37.7_
 > _Standard text:_ Publication currency — privacy notice + SA registration still reflect current DPO contact
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

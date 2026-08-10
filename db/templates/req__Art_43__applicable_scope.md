@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Cert Body Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which schemes the body issues against, accredited jurisdictions
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly outline which certification schemes your body issues, and in which accredited jurisdictions, making it easier to demonstrate compliance with GDPR Article 43.
+
+## When to use it
+
+Use this document whenever your organization's profile matches specific triggers that require you to define your certification body's scope, and update it as needed to stay current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as each required section takes around 10 to 15 minutes to fill in.
 
 ## 1. Schemes the body issues against
 
 <<MUST item:Art.43:scope_schemes_issued>>
 _Why: Art.42.5 + Art.43.5_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Art.42.5 + Art.43.5_
 <<MUST item:Art.43:scope_accreditation>>
 _Why: Art.43.1_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Jurisdictions covered
 
 <<MUST item:Art.43:scope_jurisdictions>>
 _Why: Defining the relationship_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.43:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

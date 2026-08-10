@@ -11,14 +11,35 @@ should_count: 1
 
 # Leadership Engagement Framework
 
+<<DOC_CONTROL>>
+
 > The procedure documenting HOW top management demonstrates commitment in practice — board cadence, executive sponsor touchpoints, integration into business-leadership rhythms. The directive is the promise; this is the operating discipline
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly document how your organization's top management stays actively involved in your information security program, including regular meetings and leadership touchpoints.
+
+## When to use it
+
+Use this whenever you need to show ongoing leadership commitment to information security, and update it whenever your leadership engagement practices change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this from scratch, as you'll need to cover four required elements in detail.
 
 ## 1. Board-level cadence for InfoSec reporting (frequency, topics, format)
 
 <<MUST item:5.1:proc_board_cadence>>
 _Why: Clause 5.1 e) — outcomes achieved_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,6 +48,8 @@ _Why: Clause 5.1 e) — outcomes achieved_
 <<MUST item:5.1:proc_sponsor>>
 _Why: Clause 5.1 f) — directing_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Link to management review (9.3) — top management owns the review, not just attends
@@ -34,12 +57,16 @@ _Why: Clause 5.1 f) — directing_
 <<MUST item:5.1:proc_mgmt_review_link>>
 _Why: Clause 5.1 e)_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 4. Escalation path for ISMS issues that need top-management decision
 
 <<MUST item:5.1:proc_escalation>>
 _Why: Clause 5.1 f) — supporting_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -54,4 +81,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:5.1:proc_townhall>>
 _Why: Clause 5.1 d) — communicated_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -12,6 +12,8 @@ table_shape: true
 
 # Project Security Register
 
+<<DOC_CONTROL>>
+
 > A.5.8 requires every project to be visible to the security function — invisible projects are the ones that miss gates. The register catalogues every in-scope project: id, name, security tier, current stage, owner, InfoSec liaison, planned closure date, status. It is the operational record that proves the gate process is actually applied org-wide, not just on the projects InfoSec happens to hear about
 
 <!-- TABLE-COLUMNS leaf:req:A.5.8:project_security_register -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.5.8:reg_sdlc_link -->
 <!-- column: item:A.5.8:reg_planned_closure -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, up-to-date list of all your projects, showing their security details and making sure none are missed by the security team. It's a practical way to demonstrate that your projects follow the required security checks.
+
+## When to use it
+
+Use this register for every project in your environment, updating it whenever you start a new project or when project details change. Refresh it as often as needed to keep information accurate.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required detail for each project, so the total time depends on how many projects you have and how much information you need to gather.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:5.8 — visibility_
 
 > _Standard text:_ Each in-scope project captured with a unique identifier
 
+<<GUIDANCE>>
+
 ### Reg Tier
 
 <<MUST item:A.5.8:reg_tier>>
 _Why: 27002:5.8 — proportionality_
 
 > _Standard text:_ Security tier per row (drives which gates apply — full / lightweight / waived-with-justification)
+
+<<GUIDANCE>>
 
 ### Reg Stage
 
@@ -59,12 +84,16 @@ _Why: 27002:5.8 — lifecycle tracking_
 
 > _Standard text:_ Current stage per row (initiation / requirements / build / pre-go-live / live / closed) updated as gates are passed
 
+<<GUIDANCE>>
+
 ### Reg Owner
 
 <<MUST item:A.5.8:reg_owner>>
 _Why: Accountability_
 
 > _Standard text:_ Project owner per row (named individual accountable for delivery + security)
+
+<<GUIDANCE>>
 
 ### Reg Infosec Liaison
 
@@ -73,12 +102,16 @@ _Why: 27002:5.8 — defined responsibilities_
 
 > _Standard text:_ InfoSec liaison per row (named individual reviewing this project's security gates)
 
+<<GUIDANCE>>
+
 ### Reg Sdlc Link
 
 <<MUST item:A.5.8:reg_sdlc_link>>
 _Why: 27002:5.8 + cross-link to [[A.8.25]] / [[A.8.26]]_
 
 > _Standard text:_ SDLC link per row where project involves software development (cross-ref to A.8.25 / A.8.26 outputs)
+
+<<GUIDANCE>>
 
 ### Reg Planned Closure
 
@@ -88,6 +121,8 @@ _Why: Operational discipline_
 > _Standard text:_ Planned closure date per row (drives the closure-gate trigger)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -100,9 +135,17 @@ _Why: Closing loop with [[A.5.20]]_
 
 > _Standard text:_ Supplier-agreement link per row where project triggers new third-party contracts (cross-ref to A.5.20)
 
+<<GUIDANCE>>
+
 ### Reg Cloud Link
 
 <<SHOULD item:A.5.8:reg_cloud_link>>
 _Why: Closing loop with [[A.5.23]]_
 
 > _Standard text:_ Cloud-service link per row where project introduces a new cloud service (cross-ref to A.5.23 cloud register)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

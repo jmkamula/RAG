@@ -13,6 +13,8 @@ table_shape: true
 
 # PII Transfer Event Log
 
+<<DOC_CONTROL>>
+
 > Per-transfer-event row — each PII transfer to/from a third party with recipient, timestamp, purpose. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:A.7.5.3:transfer_event_log -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.7.5.3:reg_timestamp -->
 <!-- column: item:A.7.5.3:reg_basis_link -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of every time personal information is transferred to or from a third party, including who received it, when, and why.
+
+## When to use it
+
+Use this log whenever your organization sends or receives personal information involving a third party. Update it each time such a transfer occurs, and review or refresh the register at least once a year.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required detail for each transfer event. Setting up the initial register may take about 1-2 hours, with ongoing entries taking less time per event.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: Audit trail_
 
 > _Standard text:_ Unique transfer event identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Direction
 
 <<MUST item:A.7.5.3:reg_direction>>
 _Why: §7.5.3 — to or from_
 
 > _Standard text:_ Direction per row (outbound to third party / inbound from third party)
+
+<<GUIDANCE>>
 
 ### Reg Third Party
 
@@ -59,6 +84,8 @@ _Why: Traceability_
 
 > _Standard text:_ Third party per row
 
+<<GUIDANCE>>
+
 ### Reg Pii Scope
 
 <<MUST item:A.7.5.3:reg_pii_scope>>
@@ -66,12 +93,16 @@ _Why: Coverage_
 
 > _Standard text:_ PII scope per row (categories + volume)
 
+<<GUIDANCE>>
+
 ### Reg Timestamp
 
 <<MUST item:A.7.5.3:reg_timestamp>>
 _Why: Currency_
 
 > _Standard text:_ Timestamp per row
+
+<<GUIDANCE>>
 
 ### Reg Basis Link
 
@@ -81,6 +112,8 @@ _Why: §7.5.1 traceability_
 > _Standard text:_ Basis link per row (which A.7.5.1 basis authorised this transfer)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: §7.5.3 — managing obligations_
 
 > _Standard text:_ Subject-request trigger flag per row (rectification/erasure propagation)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -11,14 +11,35 @@ should_count: 1
 
 # Software Installation on Operational Systems Procedure
 
+<<DOC_CONTROL>>
+
 > A.8.19 requires procedures + measures to securely manage software installation. Procedure documents approved-software list, approval workflow, integrity verification, post-install verification, role-restriction. Per-installation register, applicable scope, program review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you create a clear procedure for managing software installations securely, including steps for approval, verification, and access restrictions. It's designed to help you meet ISO 27001 requirements for software control.
+
+## When to use it
+
+Use this whenever you need to document or update your process for installing software on operational systems, as it should always be in place and refreshed whenever your procedures or approved software list change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes drafting this from scratch, as you'll need to cover six required elements and tailor the details to your environment.
 
 ## 1. Approved software list maintained (positive list — only approved software permitted)
 
 <<MUST item:A.8.19:approved_list>>
 _Why: 27002:8.19 — securely manage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.19 — securely manage_
 <<MUST item:A.8.19:approval_workflow>>
 _Why: 27002:8.19 — securely manage_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Integrity / signature verification before installation (no unsigned packages on production)
 
 <<MUST item:A.8.19:integrity>>
 _Why: 27002:8.19 — securely_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,6 +66,8 @@ _Why: 27002:8.19 — securely_
 <<MUST item:A.8.19:privileged_role>>
 _Why: 27002:8.19 — securely manage_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Post-install verification (functional test + vulnerability scan + baseline-drift check)
@@ -48,12 +75,16 @@ _Why: 27002:8.19 — securely manage_
 <<MUST item:A.8.19:post_install>>
 _Why: 27002:8.19 — securely manage_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Allowlisting on operational systems where supported (modern baseline)
 
 <<MUST item:A.8.19:allowlisting>>
 _Why: 27002:8.19 — measures (Style v2 promotion)_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -68,4 +99,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.19:inventory_tooling>>
 _Why: Drift detection_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

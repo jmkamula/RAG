@@ -12,6 +12,8 @@ table_shape: true
 
 # Privacy Notice Publication Record
 
+<<DOC_CONTROL>>
+
 > Per-version publication evidence — version number, publication URL / location, effective date, approval. Proves the notice is actually accessible to subjects, not just drafted
 
 <!-- TABLE-COLUMNS leaf:req:Art.13:publication_record -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:Art.13:rec_approval -->
 <!-- column: item:Art.13:rec_prior_archive -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of each version of your privacy notice, including where and when it was published and who approved it. It shows that your privacy notice is actually available to people, not just written and filed away.
+
+## When to use it
+
+Use this template whenever you publish or update your privacy notice, and update it whenever there are changes. It should always be maintained as part of your ongoing compliance responsibilities.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10 to 15 minutes per required element when setting up a new entry, so filling in a single version from scratch will likely take around an hour.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: Audit trail_
 
 > _Standard text:_ Version identifier per row (when notice content changes)
 
+<<GUIDANCE>>
+
 ### Rec Publication Url
 
 <<MUST item:Art.13:rec_publication_url>>
 _Why: Art.13.1 — provided at time of collection_
 
 > _Standard text:_ Per-row publication location (URL, app screen, signup flow)
+
+<<GUIDANCE>>
 
 ### Rec Effective Date
 
@@ -57,12 +82,16 @@ _Why: Currency_
 
 > _Standard text:_ Per-row effective date stated
 
+<<GUIDANCE>>
+
 ### Rec Approval
 
 <<MUST item:Art.13:rec_approval>>
 _Why: Authority_
 
 > _Standard text:_ Per-row approval (DPO / Privacy Lead sign-off)
+
+<<GUIDANCE>>
 
 ### Rec Prior Archive
 
@@ -72,6 +101,8 @@ _Why: Art.5.2 accountability_
 > _Standard text:_ Prior versions retained for audit (proves what subjects saw at the time of collection)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -83,3 +114,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Audit clarity_
 
 > _Standard text:_ Per-row change-summary annotation (what changed vs prior version)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

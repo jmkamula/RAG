@@ -13,6 +13,8 @@ table_shape: true
 
 # ISMS Change Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that change identification triggers are firing, the register reflects all actual changes, the A.8.32 boundary holds (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:6.3:change_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:6.3:rev_silent_changes -->
 <!-- column: item:6.3:rev_boundary_check -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of all significant changes in your information security management system, making sure nothing is missed and your records stay up to date for annual reviews.
+
+## When to use it
+
+Use this template whenever you need to confirm that your change tracking process is working and your register accurately reflects all changes, typically once a year.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on the number of changes you need to review and record.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Clause 6.3 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:6.3:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (ISMS Manager + change-management lead)
+
+<<GUIDANCE>>
 
 ### Rev Register Currency
 
@@ -58,12 +83,16 @@ _Why: Cross-leaf coherence_
 
 > _Standard text:_ Register currency check — every approved change reached implementation OR was withdrawn
 
+<<GUIDANCE>>
+
 ### Rev Silent Changes
 
 <<MUST item:6.3:rev_silent_changes>>
 _Why: Drift detection_
 
 > _Standard text:_ Silent-change sweep — verify no scope / policy / roles changes happened without a register entry
+
+<<GUIDANCE>>
 
 ### Rev Boundary Check
 
@@ -73,6 +102,8 @@ _Why: Cross-control coherence_
 > _Standard text:_ A.8.32 boundary check — no technical changes mis-routed to 6.3, no ISMS changes mis-routed to A.8.32
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

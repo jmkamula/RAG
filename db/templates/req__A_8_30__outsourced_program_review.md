@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Outsourced Development Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — engagement-register currency, delivered-code-test coverage, vendor incident patterns (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.30:outsourced_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.8.30:rev_vendor_incidents -->
 <!-- column: item:A.8.30:rev_findings_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your outsourced development partners, including code testing coverage and any incidents, so you can demonstrate ongoing oversight and compliance with ISO 27001 requirements.
+
+## When to use it
+
+Use this review record if you rely on external vendors for software development and need to check your engagement register, code testing, and vendor incident history about once a year or when your risk profile changes.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 2 hours completing this from scratch, depending on the number of vendors and the detail required for each of the six main sections.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:8.30 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.30:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Engineering + Supplier Management + InfoSec)
+
+<<GUIDANCE>>
 
 ### Rev Register Currency
 
@@ -59,6 +84,8 @@ _Why: Drift prevention_
 
 > _Standard text:_ Engagement-register currency check
 
+<<GUIDANCE>>
+
 ### Rev Test Coverage
 
 <<MUST item:A.8.30:rev_test_coverage>>
@@ -66,12 +93,16 @@ _Why: 27002:8.30 — review_
 
 > _Standard text:_ Delivered-code-test coverage per engagement (was every release tested before merge to production)
 
+<<GUIDANCE>>
+
 ### Rev Vendor Incidents
 
 <<MUST item:A.8.30:rev_vendor_incidents>>
 _Why: Cross-control coherence_
 
 > _Standard text:_ Vendor incident-pattern review (cross-link to A.5.22 supplier review)
+
+<<GUIDANCE>>
 
 ### Rev Findings Update
 
@@ -81,6 +112,8 @@ _Why: Closes the loop_
 > _Standard text:_ Findings propagated to procedure / contract terms
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

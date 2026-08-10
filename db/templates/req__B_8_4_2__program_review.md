@@ -13,6 +13,8 @@ table_shape: true
 
 # End-of-Service Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — return / transfer / disposal working end-to-end, backup propagation reliable, certifications issued (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:B.8.4.2:program_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:B.8.4.2:rev_completion_audit -->
 <!-- column: item:B.8.4.2:rev_backup_propagation -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document and review how your organization handles the return, transfer, or disposal of data and equipment, ensuring backup processes work and certifications are up to date for privacy compliance.
+
+## When to use it
+
+Use this template when your organization’s activities match specific privacy-related triggers and you need to verify these processes annually, typically once every 12 months.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this from scratch, depending on the number of items you need to review and record.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:B.8.4.2:rev_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Trust + DPO + Platform Ops)
 
+<<GUIDANCE>>
+
 ### Rev Completion Audit
 
 <<MUST item:B.8.4.2:rev_completion_audit>>
 _Why: Effectiveness_
 
 > _Standard text:_ Completion audit — sampled terminations verified end-to-end (data returned + disposal certified)
+
+<<GUIDANCE>>
 
 ### Rev Backup Propagation
 
@@ -65,6 +92,8 @@ _Why: §8.4.2 — including backup + BC_
 > _Standard text:_ Backup propagation audit — sampled disposals verified to have propagated to backup tiers
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

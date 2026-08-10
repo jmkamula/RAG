@@ -12,6 +12,8 @@ table_shape: true
 
 # Per-Site Threat Register
 
+<<DOC_CONTROL>>
+
 > The catalogue of identified physical/environmental threats per site with protection measures, last assessment date, residual risk
 
 <!-- TABLE-COLUMNS leaf:req:A.7.5:threat_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.7.5:reg_protection_in_place -->
 <!-- column: item:A.7.5:reg_residual_risk -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of physical and environmental threats at each site, along with your protection measures, assessment dates, and any remaining risks.
+
+## When to use it
+
+Use this register at all times to track threats in your environment, updating it whenever there are changes or new assessments are completed.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes to fill out the required sections for each site, with additional time needed as you add more sites or threats.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: 27002:7.5 — assessment_
 
 > _Standard text:_ Per-row site + threat pair (one row per applicable threat per site)
 
+<<GUIDANCE>>
+
 ### Reg Likelihood
 
 <<MUST item:A.7.5:reg_likelihood>>
 _Why: 27002:7.5 — assessment_
 
 > _Standard text:_ Per-row likelihood rating (informed by geography / historical events / climate projections)
+
+<<GUIDANCE>>
 
 ### Reg Impact
 
@@ -57,12 +82,16 @@ _Why: 27002:7.5 — assessment_
 
 > _Standard text:_ Per-row impact rating (worst-case + most-likely scenarios)
 
+<<GUIDANCE>>
+
 ### Reg Protection In Place
 
 <<MUST item:A.7.5:reg_protection_in_place>>
 _Why: 27002:7.5 — implemented_
 
 > _Standard text:_ Per-row protection measures actually deployed (matches procedure's per-threat list)
+
+<<GUIDANCE>>
 
 ### Reg Residual Risk
 
@@ -72,6 +101,8 @@ _Why: Risk discipline_
 > _Standard text:_ Per-row residual risk after controls (accepted / requires-treatment)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -83,3 +114,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Empirical input_
 
 > _Standard text:_ Per-row last actual event of this threat type (drives re-assessment cadence)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

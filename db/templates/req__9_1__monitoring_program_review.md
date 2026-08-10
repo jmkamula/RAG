@@ -13,6 +13,8 @@ table_shape: true
 
 # Monitoring Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that measurements are flowing per the procedure, thresholds still discriminate, results actually feed 9.3 management review (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:9.1:monitoring_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:9.1:rev_threshold_recalibration -->
 <!-- column: item:9.1:rev_mgmt_review_handoff -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document your annual review of monitoring activities, ensuring your measurements are current, thresholds are effective, and results are included in your management review process.
+
+## When to use it
+
+Use this template once a year to confirm your monitoring program is working as intended and that all results are up-to-date and feeding into your management review.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, as each required section takes around 10 to 15 minutes to fill out.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Clause 9.1 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:9.1:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (ISMS Manager + KPI lead)
+
+<<GUIDANCE>>
 
 ### Rev Flow Check
 
@@ -58,12 +83,16 @@ _Why: Effectiveness_
 
 > _Standard text:_ Flow check — every metric in the procedure's catalog has values flowing into the record
 
+<<GUIDANCE>>
+
 ### Rev Threshold Recalibration
 
 <<MUST item:9.1:rev_threshold_recalibration>>
 _Why: Validity_
 
 > _Standard text:_ Threshold recalibration — targets reviewed for continued relevance and stretch
+
+<<GUIDANCE>>
 
 ### Rev Mgmt Review Handoff
 
@@ -73,6 +102,8 @@ _Why: Clause 9.3.2c_
 > _Standard text:_ Management review handoff — last cycle's measurement results actually surfaced in 9.3 minutes
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

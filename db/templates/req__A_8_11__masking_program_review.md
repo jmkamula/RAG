@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Masking Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — masking effectiveness (re-identification residual-risk samples), register currency, exception inventory reviewed (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.11:masking_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.8.11:rev_exception_inventory -->
 <!-- column: item:A.8.11:rev_procedure_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document your annual review of data masking, including how effective your masking is, whether your register is up to date, and if any exceptions need attention.
+
+## When to use it
+
+Use this template once a year to check and record that your data masking program is working as intended and that all related records are current. It applies to every environment you manage.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours completing this from scratch, depending on the number of entries you need to review and document.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:8.11 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.11:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + Data Engineering + InfoSec)
+
+<<GUIDANCE>>
 
 ### Rev Effectiveness
 
@@ -59,6 +84,8 @@ _Why: 27002:8.11 — effective_
 
 > _Standard text:_ Re-identification residual-risk sampling outcome (acceptable or technique upgrade required)
 
+<<GUIDANCE>>
+
 ### Rev Register Currency
 
 <<MUST item:A.8.11:rev_register_currency>>
@@ -66,12 +93,16 @@ _Why: Drift prevention_
 
 > _Standard text:_ Register currency check (refresh timestamps within tolerance)
 
+<<GUIDANCE>>
+
 ### Rev Exception Inventory
 
 <<MUST item:A.8.11:rev_exception_inventory>>
 _Why: Drift prevention_
 
 > _Standard text:_ Exception inventory re-confirmed / retired
+
+<<GUIDANCE>>
 
 ### Rev Procedure Update
 
@@ -81,6 +112,8 @@ _Why: Closes the loop_
 > _Standard text:_ Findings propagated to procedure / approved-techniques list
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

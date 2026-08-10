@@ -11,14 +11,35 @@ should_count: 1
 
 # Processor Cross-Jurisdiction Transfer Basis Procedure
 
+<<DOC_CONTROL>>
+
 > §8.5.1 requires the processor to inform the customer of transfer basis + any changes in advance so the customer can object or terminate. Covers subprocessor destinations + international transfers.
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document how you inform customers about the legal basis for transferring personal data across borders, including any changes, so they can respond appropriately. It covers both subprocessor and international data transfers.
+
+## When to use it
+
+Use this procedure whenever your organization handles personal data transfers across jurisdictions as a processor, especially when there are changes to transfer arrangements. Update the document whenever there are relevant changes or as needed.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes completing this template from scratch, as it requires thoughtful responses for each of the five required elements.
 
 ## 1. Compliance basis documented per transfer relationship (SCC / BCR / CBPR / adequacy)
 
 <<MUST item:B.8.5.1:proc_basis_documentation>>
 _Why: §8.5.1 — document compliance_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: §8.5.1 — document compliance_
 <<MUST item:B.8.5.1:proc_customer_information>>
 _Why: §8.5.1 — inform the customer_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Advance notification of changes with agreed timeframe (customer can object / terminate)
 
 <<MUST item:B.8.5.1:proc_advance_notification>>
 _Why: §8.5.1 — inform the customer in advance_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: §8.5.1 — inform the customer in advance_
 <<MUST item:B.8.5.1:proc_carve_out_limits>>
 _Why: §8.5.1 — limits of allowance_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. International-transfer agreement types identified (Model Contract Clauses / BCRs / CBPRs) per relevant country pair
 
 <<MUST item:B.8.5.1:proc_international_agreements>>
 _Why: §8.5.1 — Model Contract Clauses, Binding Corporate Rules or Cross Border Privacy Rules_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:B.8.5.1:proc_owner>>
 _Why: Accountability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

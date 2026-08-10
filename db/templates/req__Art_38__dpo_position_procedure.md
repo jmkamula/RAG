@@ -11,14 +11,35 @@ should_count: 1
 
 # DPO Position Safeguards Procedure
 
+<<DOC_CONTROL>>
+
 > Art.38 establishes the DPO's position guarantees: involvement in all data-protection issues, resources, independence, no conflict of interest. The procedure documents how these guarantees are operationally enforced
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly document how your Data Protection Officer’s independence, involvement, and resources are protected, as required by GDPR. It ensures your organization can demonstrate compliance with DPO position safeguards.
+
+## When to use it
+
+Use this procedure whenever your organization appoints a Data Protection Officer or reviews DPO arrangements, especially if your activities trigger GDPR requirements. Update the document whenever there are changes to your DPO’s role or responsibilities.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this template from scratch, as it covers six required elements that each need thoughtful, detailed responses.
 
 ## 1. DPO involvement in 'all issues which relate to the protection of personal data' (Art.38.1) — invitation rights + escalation paths
 
 <<MUST item:Art.38:involvement>>
 _Why: Art.38.1_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Art.38.1_
 <<MUST item:Art.38:resources>>
 _Why: Art.38.2_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. DPO reporting line — directly to highest management level (Art.38.3)
 
 <<MUST item:Art.38:reporting_line>>
 _Why: Art.38.3_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,6 +66,8 @@ _Why: Art.38.3_
 <<MUST item:Art.38:independence>>
 _Why: Art.38.3_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. No conflict of interest with other tasks/duties (Art.38.6) — e.g. DPO not also the CISO if those roles set the rules being audited
@@ -48,12 +75,16 @@ _Why: Art.38.3_
 <<MUST item:Art.38:conflict_of_interest>>
 _Why: Art.38.6_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Data subjects' contact point — DPO accessible (Art.38.4)
 
 <<MUST item:Art.38:subject_contact>>
 _Why: Art.38.4_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -68,4 +99,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.38:secrecy>>
 _Why: Art.38.5_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # Subcontractor Engagement Register
 
+<<DOC_CONTROL>>
+
 > Per-subcontractor row — the audit trail of authorisation + contract + Annex B coverage. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:B.8.5.7:subcontractor_engagement_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:B.8.5.7:reg_annex_b_coverage -->
 <!-- column: item:B.8.5.7:reg_engagement_date -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of each subcontractor’s authorization, contract details, and privacy coverage, making it easier to demonstrate compliance with privacy standards.
+
+## When to use it
+
+Use this register whenever you engage a new subcontractor or update an existing one, and review it about once a year to ensure all information stays current and complete.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element for each subcontractor, so filling it out from scratch may take around an hour for one entry, with more time needed as you add more subcontractors.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Referenceability_
 
 > _Standard text:_ Subcontractor identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Customer Authorisation
 
 <<MUST item:B.8.5.7:reg_customer_authorisation>>
 _Why: §8.5.7 — customer contract_
 
 > _Standard text:_ Customer authorisation reference per row (general or specific)
+
+<<GUIDANCE>>
 
 ### Reg Contract Reference
 
@@ -58,12 +83,16 @@ _Why: §8.5.7 — written contract_
 
 > _Standard text:_ Executed contract reference per row
 
+<<GUIDANCE>>
+
 ### Reg Annex B Coverage
 
 <<MUST item:B.8.5.7:reg_annex_b_coverage>>
 _Why: §8.5.7 — Annex B_
 
 > _Standard text:_ Annex B controls covered per row (all / itemised)
+
+<<GUIDANCE>>
 
 ### Reg Engagement Date
 
@@ -73,6 +102,8 @@ _Why: Currency_
 > _Standard text:_ Engagement effective date per row
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Traceability_
 
 > _Standard text:_ Processing scope per row (what the subcontractor does)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

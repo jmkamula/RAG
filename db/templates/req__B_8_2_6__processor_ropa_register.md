@@ -13,6 +13,8 @@ table_shape: true
 
 # Processor Records of Processing (RoPA)
 
+<<DOC_CONTROL>>
+
 > §8.2.6 requires processor-side records of processing carried out on behalf of each customer. Per-customer processing record. Register-as-primary (records_program spine). Bridges to Art.30.2 — smaller field set than controller RoPA (Art.30.1) but same secure-maintenance discipline.
 
 <!-- TABLE-COLUMNS leaf:req:B.8.2.6:processor_ropa_register -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:B.8.2.6:ropa_subprocessor_list -->
 <!-- column: item:B.8.2.6:ropa_processor_dpo -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of all the processing activities you carry out for each customer as a data processor. It supports compliance with privacy standards and makes audits easier.
+
+## When to use it
+
+Use this template if you process personal data on behalf of customers and need to document those activities. Update it about once a year, or whenever your processing activities change significantly.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 2 hours filling this out from scratch, depending on the number of customers and processing activities you need to record.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: Referenceability_
 
 > _Standard text:_ Customer identifier per row (each controller the org processes for)
 
+<<GUIDANCE>>
+
 ### Ropa Processing Categories
 
 <<MUST item:B.8.2.6:ropa_processing_categories>>
 _Why: §8.2.6 — categories of processing carried out_
 
 > _Standard text:_ Categories of processing carried out per customer per row (Art.30.2.b)
+
+<<GUIDANCE>>
 
 ### Ropa Transfers
 
@@ -59,6 +84,8 @@ _Why: §8.2.6 — transfers to third countries_
 
 > _Standard text:_ Third-country / international-org transfers per row (Art.30.2.c) with cited safeguards
 
+<<GUIDANCE>>
+
 ### Ropa Security Measures
 
 <<MUST item:B.8.2.6:ropa_security_measures>>
@@ -66,12 +93,16 @@ _Why: §8.2.6 — technical and organizational security measures_
 
 > _Standard text:_ General description of technical + organizational measures per row (Art.30.2.d)
 
+<<GUIDANCE>>
+
 ### Ropa Subprocessor List
 
 <<MUST item:B.8.2.6:ropa_subprocessor_list>>
 _Why: Coverage_
 
 > _Standard text:_ Subprocessor list per row (Art.30.2 + Art.28.2)
+
+<<GUIDANCE>>
 
 ### Ropa Processor Dpo
 
@@ -81,6 +112,8 @@ _Why: Art.30.2.a_
 > _Standard text:_ Processor DPO / representative contact if applicable (Art.30.2.a)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Currency_
 
 > _Standard text:_ Last verification date per row (against customer instruction record)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

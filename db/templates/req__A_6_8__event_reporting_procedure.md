@@ -11,14 +11,35 @@ should_count: 3
 
 # Information Security Event Reporting Procedure
 
+<<DOC_CONTROL>>
+
 > A.6.8 requires the organisation to provide a mechanism for personnel to report observed or suspected information security events through appropriate channels in a timely manner. The procedure documents the channels, what to report, timeliness expectation, no-blame culture, and handoff to triage. The event report register, reporting-audience scope and periodic review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you set up a clear and practical process for your team to report information security incidents, ensuring everyone knows how and when to report issues without fear of blame.
+
+## When to use it
+
+Use this procedure whenever you need to establish or update your process for reporting information security events, as it should always be in place and refreshed whenever your reporting practices or team structure change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours completing this template from scratch, depending on how much detail you need to include for your reporting channels and review process.
 
 ## 1. Multiple reporting channels offered (email, hotline, portal, manager, ticket system) — drives discoverability and accessibility under various conditions including when normal tooling is unavailable
 
 <<MUST item:A.6.8:channels>>
 _Why: 27002:6.8 — appropriate channels_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:6.8 — appropriate channels_
 <<MUST item:A.6.8:audience>>
 _Why: 27002:6.8 — mechanism for personnel_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. What to report — observed events, suspected events, near-misses (no judgement required at reporting stage; over-reporting is preferred to under-reporting)
 
 <<MUST item:A.6.8:what_to_report>>
 _Why: 27002:6.8 — observed or suspected_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: 27002:6.8 — observed or suspected_
 <<MUST item:A.6.8:timeliness>>
 _Why: 27002:6.8 — timely manner_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. No-blame / non-retaliation statement encourages honest reporting (drives reporting culture; under-reporting is the #1 risk for incident programs)
 
 <<MUST item:A.6.8:no_blame>>
 _Why: Reporting culture_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -55,12 +84,16 @@ _Why: Reporting culture_
 <<MUST item:A.6.8:handoff_to_triage>>
 _Why: Closes the loop with A.5.25_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Named owner of the procedure (typically InfoSec on-call with HR + Legal partners for sensitive cases)
 
 <<MUST item:A.6.8:owner>>
 _Why: Accountability_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -75,12 +108,16 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.6.8:anonymity_option>>
 _Why: Maximises reporting_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Periodic awareness reminders about the channel (links to A.6.3 training programme; channel discoverability decays without reminder)
 
 <<SHOULD item:A.6.8:awareness_promotion>>
 _Why: Channel discoverability_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -89,4 +126,10 @@ _Why: Channel discoverability_
 <<SHOULD item:A.6.8:acknowledgment>>
 _Why: Reporting culture_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # Processor Disclosure Event Log
 
+<<DOC_CONTROL>>
+
 > Per-disclosure row — processor-side. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:B.8.5.3:disclosure_event_log -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:B.8.5.3:reg_timestamp -->
 <!-- column: item:B.8.5.3:reg_source_of_authority -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of each time you disclose data to a processor, making it easier to track and demonstrate compliance with privacy standards.
+
+## When to use it
+
+Use this register whenever you disclose personal data to a processor and need to document the event. Update it at least once a year, or whenever a new disclosure occurs.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10 to 15 minutes per required detail for each disclosure event, so the total time will depend on how many disclosures you need to log.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit trail_
 
 > _Standard text:_ Unique disclosure identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Customer
 
 <<MUST item:B.8.5.3:reg_customer>>
 _Why: Traceability_
 
 > _Standard text:_ Customer whose PII was disclosed per row
+
+<<GUIDANCE>>
 
 ### Reg Recipient
 
@@ -58,12 +83,16 @@ _Why: §8.5.3 — to whom_
 
 > _Standard text:_ Recipient per row
 
+<<GUIDANCE>>
+
 ### Reg Timestamp
 
 <<MUST item:B.8.5.3:reg_timestamp>>
 _Why: §8.5.3 — when_
 
 > _Standard text:_ Timestamp per row
+
+<<GUIDANCE>>
 
 ### Reg Source Of Authority
 
@@ -73,6 +102,8 @@ _Why: §8.5.3 — source of authority_
 > _Standard text:_ Source of authority per row
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Integration_
 
 > _Standard text:_ Customer notification flag per row (link to B.8.5.4 if legally-binding request)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

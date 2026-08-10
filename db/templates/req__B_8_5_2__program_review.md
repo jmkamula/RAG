@@ -13,6 +13,8 @@ table_shape: true
 
 # Processor Destinations Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — destinations register + customer disclosures + subprocessor destinations aligned (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:B.8.5.2:program_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:B.8.5.2:rev_completeness -->
 <!-- column: item:B.8.5.2:rev_disclosure_sync -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of where your data is sent, making sure your records, customer disclosures, and subprocessor destinations are all up to date and in line with privacy standards.
+
+## When to use it
+
+Use this template if your data processing activities match specific criteria and you need to review your processor destinations about once a year to stay compliant.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing the required sections from scratch, plus extra time for each destination you need to add to the register.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:B.8.5.2:rev_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Trust + DPO)
 
+<<GUIDANCE>>
+
 ### Rev Completeness
 
 <<MUST item:B.8.5.2:rev_completeness>>
 _Why: §8.5.2_
 
 > _Standard text:_ Completeness check — actual customer-PII flows reconciled against register
+
+<<GUIDANCE>>
 
 ### Rev Disclosure Sync
 
@@ -65,6 +92,8 @@ _Why: §8.5.2 — available to customers_
 > _Standard text:_ Customer-facing disclosure sync (DPA schedule / trust page / on-request material matches register)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

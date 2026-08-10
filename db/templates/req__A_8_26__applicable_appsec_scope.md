@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Application Security Requirements Scope
 
+<<DOC_CONTROL>>
+
 > Upstream — which applications get full-depth requirements process. Customer-facing typically yes. Internal admin tools proportional. COTS acquired via A.8.30 outsourced governance
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which of your applications need to follow the full application security requirements, making it easier to prioritize your compliance efforts.
+
+## When to use it
+
+Use this document whenever your application profile matches certain criteria that require a security review, and update it whenever there are changes to your application landscape or compliance needs.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to address three required elements and possibly one recommended section.
 
 ## 1. Application classes enumerated with depth-of-process per class
 
 <<MUST item:A.8.26:scope_classes>>
 _Why: 27002:8.26 — appropriate_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.26 — appropriate_
 <<MUST item:A.8.26:scope_acquired>>
 _Why: 27002:8.26 — acquiring applications_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Exclusion rationale (low-risk internal scripts / experimental prototypes pre-production)
 
 <<MUST item:A.8.26:scope_exclusions>>
 _Why: Boundary clarity_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.26:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

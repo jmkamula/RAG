@@ -50,6 +50,11 @@ REVISION_HISTORY_RE  = re.compile(r"^\s*<<REVISION_HISTORY>>\s*$")
 # based on the target leaf_id. Empty prereqs ⇒ marker silently dropped.
 PREREQUISITES_MARKER_RE = re.compile(r"^\s*<<PREREQUISITES>>\s*$")
 
+# Templates-Pass-1 (2026-08-08) — <<CROSS_REFERENCES>> marker. NO-OP
+# placeholder until Pass 4 wires the Neo4j xfw-bridge resolver. Currently
+# consumed silently so Pass-1-normalized templates render cleanly.
+CROSS_REFERENCES_MARKER_RE = re.compile(r"^\s*<<CROSS_REFERENCES>>\s*$")
+
 # Ship 56'.a — per-MUST guidance marker. Interleaved between the
 # MUST/SHOULD marker and the tenant's <<TEXT>> placeholder; resolves to
 # the guidance array on the preceding ChecklistItem.
@@ -234,6 +239,65 @@ def _render_prerequisites_block(doc, prereqs) -> None:
                 ge.paragraph_format.space_after  = Pt(2)
                 _add_runs_with_formatting(ge, f"Good enough: {p.good_enough}")
                 for run in ge.runs:
+                    if run.font.size is None:
+                        run.font.size = Pt(10)
+
+
+def _render_cross_references_block(doc, bridges) -> None:
+    """Render the outbound xfw-bridge callout: bold "Cross-references:"
+    label, then groups by edge type (IMPLEMENTS/SUPPORTS/ENABLES/GOVERNANCE),
+    each with target ref+title + curator rationale. Templates Pass 4."""
+    if not bridges:
+        return
+    order = ("IMPLEMENTS", "SUPPORTS", "ENABLES", "GOVERNANCE")
+    labels = {
+        "IMPLEMENTS": "Implements:",
+        "SUPPORTS":   "Supports:",
+        "ENABLES":    "Enables:",
+        "GOVERNANCE": "Provides governance for:",
+    }
+    by_type: dict[str, list] = {}
+    for b in bridges:
+        by_type.setdefault(b.edge_type, []).append(b)
+
+    label_p = doc.add_paragraph()
+    label_p.paragraph_format.space_before = Pt(6)
+    label_p.paragraph_format.space_after  = Pt(2)
+    lr = label_p.add_run("Cross-references:")
+    lr.bold = True
+    lr.font.size = Pt(10)
+    lr.font.color.rgb = RGBColor(0x40, 0x40, 0x40)
+
+    for et in order:
+        entries = by_type.get(et, [])
+        if not entries:
+            continue
+        sub_p = doc.add_paragraph()
+        sub_p.paragraph_format.left_indent   = Cm(0.4)
+        sub_p.paragraph_format.space_before  = Pt(4)
+        sub_p.paragraph_format.space_after   = Pt(1)
+        sub_run = sub_p.add_run(labels[et])
+        sub_run.italic = True
+        sub_run.font.size = Pt(10)
+
+        for b in entries:
+            std_ref = _humanize_std_ref(b.dst_std, b.dst_ref)
+            title = f" — {b.dst_title}" if b.dst_title else ""
+            head = doc.add_paragraph(style="List Bullet")
+            head.paragraph_format.left_indent  = Cm(0.8)
+            head.paragraph_format.space_before = Pt(1)
+            head.paragraph_format.space_after  = Pt(0)
+            head_run = head.add_run(f"{std_ref}{title}")
+            head_run.bold = True
+            head_run.font.size = Pt(10)
+
+            if b.rationale:
+                r_p = doc.add_paragraph()
+                r_p.paragraph_format.left_indent  = Cm(1.4)
+                r_p.paragraph_format.space_before = Pt(0)
+                r_p.paragraph_format.space_after  = Pt(2)
+                _add_runs_with_formatting(r_p, b.rationale)
+                for run in r_p.runs:
                     if run.font.size is None:
                         run.font.size = Pt(10)
 
@@ -489,6 +553,14 @@ def render_template_docx(
         if PREREQUISITES_MARKER_RE.match(line):
             from rag.templates.prerequisites_lookup import get_prerequisites_for_leaf
             _render_prerequisites_block(doc, get_prerequisites_for_leaf(leaf_id))
+            continue
+
+        # Templates Pass 4 (2026-08-08) — <<CROSS_REFERENCES>> marker →
+        # outbound xfw-bridge callout for the leaf's control. Empty
+        # bridges ⇒ marker dropped.
+        if CROSS_REFERENCES_MARKER_RE.match(line):
+            from rag.templates.cross_references_lookup import get_cross_references_for_leaf
+            _render_cross_references_block(doc, get_cross_references_for_leaf(leaf_id))
             continue
 
         # EDIT-ZONE markers

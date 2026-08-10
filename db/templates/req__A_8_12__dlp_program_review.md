@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic DLP Program Review
 
+<<DOC_CONTROL>>
+
 > Periodic verification — ruleset currency, channel coverage gaps, true/false-positive trending, exception inventory (freshness=180; data-loss attack patterns evolve fast)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.12:dlp_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.8.12:rev_exception_inventory -->
 <!-- column: item:A.8.12:rev_baseline_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your Data Loss Prevention (DLP) program’s effectiveness, including rule updates, coverage gaps, and exception reviews, so you can stay ahead of evolving data-loss threats.
+
+## When to use it
+
+Use this template to review your DLP program about every six months, or whenever you want to ensure your controls are up-to-date and comprehensive for your environment.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on how many exceptions or changes you need to document.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:8.12 — periodic_
 
 > _Standard text:_ Review date within the planned interval (≤180 days)
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.12:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DLP lead + Data Protection + InfoSec)
+
+<<GUIDANCE>>
 
 ### Rev Coverage Gaps
 
@@ -59,6 +84,8 @@ _Why: 27002:8.12 — measures_
 
 > _Standard text:_ Channel-coverage gap check (new channel / new platform missing)
 
+<<GUIDANCE>>
+
 ### Rev Tp Rate
 
 <<MUST item:A.8.12:rev_tp_rate>>
@@ -66,12 +93,16 @@ _Why: Detection effectiveness_
 
 > _Standard text:_ True-positive rate trending (detection effectiveness)
 
+<<GUIDANCE>>
+
 ### Rev Exception Inventory
 
 <<MUST item:A.8.12:rev_exception_inventory>>
 _Why: Drift prevention_
 
 > _Standard text:_ Exception inventory re-confirmed / retired
+
+<<GUIDANCE>>
 
 ### Rev Baseline Update
 
@@ -81,6 +112,8 @@ _Why: Closes the loop_
 > _Standard text:_ Baseline / ruleset / procedure updates published from findings
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

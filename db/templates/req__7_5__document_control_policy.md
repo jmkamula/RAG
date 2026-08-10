@@ -11,6 +11,8 @@ should_count: 2
 
 # Documented Information Control Policy
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
 The **meta-policy** that governs how every other ISMS policy,
@@ -23,36 +25,25 @@ inconsistent metadata.
 
 ## When to use it
 
-You're producing the policy required by **ISO/IEC 27001:2022 Clause
-7.5**. It covers both ISO-required documented information (Clauses
+You're producing the policy required by **ISO/IEC 27001:2022 Clause 7.5**. It covers both ISO-required documented information (Clauses
 4.3 scope, 5.2 policy, 6.1.2 risk methodology, 6.1.3 SoA + RTP,
 6.2 objectives, 9.1 monitoring, 9.2 audit, 9.3 review, 10.1
 corrective) AND any organisation-determined necessary information
 (typically your A.5 topic-specific policies).
 
-## Before you start
+## Prerequisites
 
-- [ ] **4.3 ISMS Scope** stable (documents apply within scope)
-- [ ] Inventory of existing ISMS documents on hand (you'll need to
-      reference the **7.5 ISMS Document Register** sibling leaf)
+<<PREREQUISITES>>
 
 ## Cross-references
 
-- **7.5 ISMS Document Register** (sibling) — the live list of all
-  documents under this policy's control
-- **A.5.33 Records protection** — for record retention discipline
-- **A.5.34 PII protection** — for personal-data-containing documents
-- **5.2 InfoSec Policy** — itself controlled under this policy
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
 **2-4 hours** for v1; **30 min** for refresh.
 
 ---
-
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
 
 ## 1. List the ISO 27001-required documented information
 
@@ -75,6 +66,8 @@ Audit Programme + results (Clause 9.2); (h) Management Review
 results (Clause 9.3); (i) Corrective Action records (Clause 10.1).
 Storage location + owner for each: see the ISMS Document Register
 (req:7.5:isms_document_register)."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -99,6 +92,8 @@ incident response, A.5.30 ICT readiness, A.8.32 change management).
 (c) Records (A.5.5 contacts, A.5.6 SIGs, A.5.9 asset inventory,
 A.5.11 returns, A.5.16 identity revocation, ...). Full inventory:
 ISMS Document Register."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -125,6 +120,8 @@ matrix (policies → ISMS Owner; procedures → ISMS Manager).
 (5) Approved doc published, prior version archived per retention
 schedule. (6) Document Register updated by ISMS Manager same day."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 4. Control distribution, access, retrieval, retention, disposition
@@ -146,6 +143,8 @@ The five operational verbs. Cover each.
 | Retrieval | Searchable by ID, control ref, and free text; full audit log of access for sensitive records |
 | Retention | Per the retention schedule in A.5.33; ISMS records 6 years minimum; superseded versions retained read-only |
 | Disposition | Secure delete per A.8.10 after retention period; deletion logged in disposal register |
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -170,6 +169,8 @@ versions. (c) Unauthorised use — A.5.15 access control applies;
 RBAC enforced via Okta; sensitive documents (incident records,
 audit results) restricted to need-to-know roles."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Control externally-originated documents
@@ -191,6 +192,8 @@ Customer signed DPAs + MSAs (refreshed at renewal). (d) Regulator
 guidance documents (ICO, EDPB, NCSC). External docs tracked in the
 Document Register with source, version-as-of, owner."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ---
@@ -208,6 +211,8 @@ _Format consistency reduces friction in retrieval and audit._
 State preferred formats per document type (PDF for approved policies,
 markdown for procedures, .xlsx for registers, etc.).
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### Address accessibility
@@ -222,4 +227,10 @@ incident response, disaster recovery)._
 State how the document store is reachable during disruption: e.g.
 cached copies for incident responders, offline kit for major outage.
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

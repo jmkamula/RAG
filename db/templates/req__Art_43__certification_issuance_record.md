@@ -13,6 +13,8 @@ table_shape: true
 
 # Certification Issuance Record
 
+<<DOC_CONTROL>>
+
 > Per-certificate issuance record. Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.43:certification_issuance_record -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.43:reg_grounds -->
 <!-- column: item:Art.43:reg_validity -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of each certificate you issue, making it easier to demonstrate compliance with GDPR requirements for certification processes.
+
+## When to use it
+
+Use this template whenever you issue a new certificate and update it about once a year, or whenever your organization’s activities match specific GDPR-related triggers.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes to complete this register from scratch, depending on the number of certificates you need to record.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit_
 
 > _Standard text:_ Per-row certificate recipient
 
+<<GUIDANCE>>
+
 ### Reg Assessment
 
 <<MUST item:Art.43:reg_assessment>>
 _Why: Art.43.2.c_
 
 > _Standard text:_ Per-row assessment outcome with assessor identity
+
+<<GUIDANCE>>
 
 ### Reg Decision Date
 
@@ -58,12 +83,16 @@ _Why: Currency_
 
 > _Standard text:_ Per-row decision date + decision (issue / renew / withdraw / refuse)
 
+<<GUIDANCE>>
+
 ### Reg Grounds
 
 <<MUST item:Art.43:reg_grounds>>
 _Why: Art.43.5_
 
 > _Standard text:_ Per-row decision grounds (criteria-mapped)
+
+<<GUIDANCE>>
 
 ### Reg Validity
 
@@ -73,6 +102,8 @@ _Why: Art.42.7_
 > _Standard text:_ Per-row validity period (max 3 years per Art.42.7)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Art.43.2.d_
 
 > _Standard text:_ Per-row complaint handling where contested
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

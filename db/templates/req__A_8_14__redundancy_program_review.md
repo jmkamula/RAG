@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Redundancy Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — critical-service list current, redundancy approach matches availability target, test attainment per service (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.14:redundancy_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.8.14:rev_bia_alignment -->
 <!-- column: item:A.8.14:rev_baseline_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep an up-to-date record of your critical services, their redundancy strategies, and how well they meet your availability goals. It provides a clear, organized way to review and document your redundancy program each year.
+
+## When to use it
+
+Use this template whenever you need to review your redundancy program, which should be done at least once every year to ensure your service list and redundancy approach are still effective.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours completing this from scratch, depending on how many critical services you have and how much information is readily available.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:8.14 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.14:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Site Reliability + Infrastructure + business-service owners)
+
+<<GUIDANCE>>
 
 ### Rev Service List
 
@@ -59,6 +84,8 @@ _Why: 27002:8.14 — availability_
 
 > _Standard text:_ Critical-service list re-confirmed (new service in scope; retired service removed)
 
+<<GUIDANCE>>
+
 ### Rev Test Attainment
 
 <<MUST item:A.8.14:rev_test_attainment>>
@@ -66,12 +93,16 @@ _Why: 27002:8.14 — sufficient_
 
 > _Standard text:_ Failover-test attainment per service (cadence met; targets met)
 
+<<GUIDANCE>>
+
 ### Rev Bia Alignment
 
 <<MUST item:A.8.14:rev_bia_alignment>>
 _Why: Cross-control coherence_
 
 > _Standard text:_ Cross-check with A.5.30 BIA (any availability-tier change → redundancy approach re-evaluation)
+
+<<GUIDANCE>>
 
 ### Rev Baseline Update
 
@@ -81,6 +112,8 @@ _Why: Closes the loop_
 > _Standard text:_ Baseline / runbook updates published from findings
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

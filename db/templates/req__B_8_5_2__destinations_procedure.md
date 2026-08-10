@@ -11,14 +11,35 @@ should_count: 1
 
 # Processor Transfer Destinations Procedure
 
+<<DOC_CONTROL>>
+
 > §8.5.2 mirrors §7.5.2 from processor side — list of destinations for customer PII made available to customers.
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly document where customer personal data is sent or transferred, making it easy to share this information with your customers and meet privacy requirements.
+
+## When to use it
+
+Use this procedure whenever your organization acts as a processor and needs to inform customers about the destinations of their personal data. Update it whenever there are changes to your data transfer practices.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this document from scratch, as each required section will take around 10 to 15 minutes to fill out thoughtfully.
 
 ## 1. Destinations publication per customer (customer receives the list of countries + international orgs)
 
 <<MUST item:B.8.5.2:proc_destinations_publication>>
 _Why: §8.5.2 — available to customers_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,6 +48,8 @@ _Why: §8.5.2 — available to customers_
 <<MUST item:B.8.5.2:proc_subprocessor_inclusion>>
 _Why: §8.5.2 — subcontracted PII processing_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Law enforcement exception handled per §8.5.4 + §8.5.5
@@ -34,12 +57,16 @@ _Why: §8.5.2 — subcontracted PII processing_
 <<MUST item:B.8.5.2:proc_law_enforcement_exception>>
 _Why: §8.5.2 — cannot be specified in advance_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 4. Alignment with B.8.5.1 basis register
 
 <<MUST item:B.8.5.2:proc_alignment_8_5_1>>
 _Why: §8.5.2 — considered in relation to 8.5.1_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -54,4 +81,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:B.8.5.2:proc_owner>>
 _Why: Accountability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # ISMS Manual Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that the manual reflects current ISMS reality, the process map is current, and any changes were captured (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:4.4:isms_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:4.4:rev_map_currency -->
 <!-- column: item:4.4:rev_change_log -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document your annual review of the ISMS manual, ensuring it accurately reflects your current information security practices and any recent changes.
+
+## When to use it
+
+Use this template once a year to confirm your ISMS manual and process map are up to date, and to record any updates or changes made over the past 12 months.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this review from scratch, as each required section takes around 10–15 minutes to fill out.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Clause 4.4 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:4.4:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (ISMS Manager + top management sponsor)
+
+<<GUIDANCE>>
 
 ### Rev Currency
 
@@ -58,12 +83,16 @@ _Why: Drift detection_
 
 > _Standard text:_ Currency check — manual still matches how the ISMS actually runs
 
+<<GUIDANCE>>
+
 ### Rev Map Currency
 
 <<MUST item:4.4:rev_map_currency>>
 _Why: Cross-leaf coherence_
 
 > _Standard text:_ Process map currency check (cross-leaf coherence)
+
+<<GUIDANCE>>
 
 ### Rev Change Log
 
@@ -73,6 +102,8 @@ _Why: Cross-leaf coherence_
 > _Standard text:_ Cross-check against change records — every actual change in the year is logged
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

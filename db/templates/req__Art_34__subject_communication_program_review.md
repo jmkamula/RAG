@@ -13,6 +13,8 @@ table_shape: true
 
 # Art.34 Subject Communication Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — high-risk decisions defensible, exceptions applied appropriately, communication content meets Art.34.2 (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.34:subject_communication_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.34:rev_exception_audit -->
 <!-- column: item:Art.34:rev_content_quality -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document and review how you communicate with individuals about high-risk decisions, ensuring your process meets GDPR Article 34 requirements and that any exceptions are properly justified.
+
+## When to use it
+
+Use this template whenever your organization makes high-risk decisions that require communication under GDPR Article 34, and review or update it about once a year to keep your records current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes completing this from scratch, depending on the number of cases you need to document and the detail required for each element.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.34:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + legal + incident-response lead)
+
+<<GUIDANCE>>
 
 ### Rev Decision Defensibility
 
@@ -58,12 +83,16 @@ _Why: Art.34.1_
 
 > _Standard text:_ High-risk decision defensibility — sampled decisions reviewed against criteria
 
+<<GUIDANCE>>
+
 ### Rev Exception Audit
 
 <<MUST item:Art.34:rev_exception_audit>>
 _Why: Art.34.3_
 
 > _Standard text:_ Exception-claim audit — Art.34.3 exception claims reviewed for legitimacy (especially encryption-deemed-appropriate where keys may also have been compromised)
+
+<<GUIDANCE>>
 
 ### Rev Content Quality
 
@@ -73,6 +102,8 @@ _Why: Art.34.2_
 > _Standard text:_ Content-quality audit — communications used plain language, included DPO contact, described concrete measures
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

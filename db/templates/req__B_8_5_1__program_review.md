@@ -13,6 +13,8 @@ table_shape: true
 
 # Processor Transfer Basis Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — customer notifications timely, change-advance notification honoured, basis currency intact (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:B.8.5.1:program_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:B.8.5.1:rev_notification_audit -->
 <!-- column: item:B.8.5.1:rev_basis_currency -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of how you notify customers about data transfers and ensures you’re following the right procedures each year. It’s designed to support privacy compliance and keep your records organized.
+
+## When to use it
+
+Use this review record if your organization handles customer data transfers and needs to confirm, once a year, that notifications are timely and changes are communicated in advance. It’s especially relevant if your activities match certain privacy-related triggers.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this from scratch, as each required section takes around 10-15 minutes. If you have multiple transfers to log, allow extra time for each additional entry.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:B.8.5.1:rev_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + Legal + Trust)
 
+<<GUIDANCE>>
+
 ### Rev Notification Audit
 
 <<MUST item:B.8.5.1:rev_notification_audit>>
 _Why: §8.5.1 — inform in advance_
 
 > _Standard text:_ Notification audit — advance-notification obligations verified for all changes since last review
+
+<<GUIDANCE>>
 
 ### Rev Basis Currency
 
@@ -65,6 +92,8 @@ _Why: Post-Schrems compliance_
 > _Standard text:_ Basis currency — Art.45 adequacy currency + Art.46 SCC version currency
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # Context Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that the issues register reflects current reality, the identification framework is being followed, and the scope still bounds the right domains (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:4.1:context_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:4.1:rev_risk_handoff -->
 <!-- column: item:4.1:rev_scope_check -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you confirm that your issues register is up to date, your identification process is being followed, and your program scope is still accurate. It’s designed to support annual reviews for ISO 27001 compliance.
+
+## When to use it
+
+Use this template once a year to review your program context, ensuring your register and scope are current and correct. It applies to every environment and should be refreshed annually.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, depending on the number of required elements and the amount of information in your register.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Clause 4.1 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:4.1:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (ISMS Manager + executive sponsor)
+
+<<GUIDANCE>>
 
 ### Rev Register Currency
 
@@ -58,12 +83,16 @@ _Why: Cross-leaf coherence_
 
 > _Standard text:_ Register currency check — every row reviewed for continued relevance, new issues added
 
+<<GUIDANCE>>
+
 ### Rev Risk Handoff
 
 <<MUST item:4.1:rev_risk_handoff>>
 _Why: Closes the loop_
 
 > _Standard text:_ Confirmation that handoff to 6.1.2 risk assessment occurred for material issues
+
+<<GUIDANCE>>
 
 ### Rev Scope Check
 
@@ -73,6 +102,8 @@ _Why: Cross-leaf coherence_
 > _Standard text:_ Cross-check against the applicable-domains scope — any new domain that should be covered
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

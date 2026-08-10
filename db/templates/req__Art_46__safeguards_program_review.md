@@ -13,6 +13,8 @@ table_shape: true
 
 # Safeguards Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — SCCs on current version, TIAs current, supplementary measures effective, vendor compliance attested (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.46:safeguards_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.46:rev_tia_currency -->
 <!-- column: item:Art.46:rev_supplementary_audit -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your annual review of data transfer safeguards, including checking that your contracts, assessments, and vendor attestations are all up to date and effective.
+
+## When to use it
+
+Use this template once a year if your organization transfers personal data internationally and needs to verify compliance with GDPR Article 46 requirements.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours completing this from scratch, depending on how many vendors or contracts you need to review and document.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.46:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + legal counsel)
+
+<<GUIDANCE>>
 
 ### Rev Sccs Version
 
@@ -58,12 +83,16 @@ _Why: Commission Decision 2021/914_
 
 > _Standard text:_ SCCs version audit — any old-version SCCs identified for migration
 
+<<GUIDANCE>>
+
 ### Rev Tia Currency
 
 <<MUST item:Art.46:rev_tia_currency>>
 _Why: Schrems II — ongoing duty_
 
 > _Standard text:_ TIA currency — TIAs refreshed where third-country law has changed materially
+
+<<GUIDANCE>>
 
 ### Rev Supplementary Audit
 
@@ -73,6 +102,8 @@ _Why: EDPB 01/2020_
 > _Standard text:_ Supplementary measures audit — applied measures (encryption keys, pseudonymisation, etc.) actually in place at vendor
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

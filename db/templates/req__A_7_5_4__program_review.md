@@ -13,6 +13,8 @@ table_shape: true
 
 # Disclosure Records Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — disclosures captured, source-of-authority documented per row, intake-gate functional (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.7.5.4:program_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.7.5.4:rev_completeness -->
 <!-- column: item:A.7.5.4:rev_authority_audit -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of all your disclosure records, making sure each one has a clear source and that your intake process is working as it should.
+
+## When to use it
+
+Use this template once a year, or whenever your organization meets certain criteria that require a review of disclosure records and processes.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes to complete this from scratch, depending on how many disclosures you need to review and document.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.5.4:rev_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + Legal)
 
+<<GUIDANCE>>
+
 ### Rev Completeness
 
 <<MUST item:A.7.5.4:rev_completeness>>
 _Why: §7.5.4_
 
 > _Standard text:_ Completeness check — investigation + audit disclosures reconciled
+
+<<GUIDANCE>>
 
 ### Rev Authority Audit
 
@@ -65,6 +92,8 @@ _Why: §7.5.4 — source of authority_
 > _Standard text:_ Authority audit — sampled disclosures reviewed for documented authority
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

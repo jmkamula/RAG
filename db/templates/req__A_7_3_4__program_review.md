@@ -13,6 +13,8 @@ table_shape: true
 
 # Withdrawal Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — withdrawal channels functional, propagation reliable, SLA met, no consent-basis activity without a corresponding withdrawal path (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.7.3.4:program_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.7.3.4:rev_channel_test -->
 <!-- column: item:A.7.3.4:rev_propagation_audit -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document and review your withdrawal channels, ensuring they work properly, meet service commitments, and that users can always withdraw consent where required.
+
+## When to use it
+
+Use this template if your organization handles personal data and needs to verify, about once a year, that all withdrawal processes are reliable and compliant with privacy standards.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this from scratch, depending on how many withdrawal channels you need to review and document.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.3.4:rev_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + Engineering)
 
+<<GUIDANCE>>
+
 ### Rev Channel Test
 
 <<MUST item:A.7.3.4:rev_channel_test>>
 _Why: §7.3.4 — mechanism_
 
 > _Standard text:_ Channel test — end-to-end withdrawal test per channel
+
+<<GUIDANCE>>
 
 ### Rev Propagation Audit
 
@@ -65,6 +92,8 @@ _Why: §7.3.4 — dissemination_
 > _Standard text:_ Propagation audit — sampled withdrawals verified to have stopped downstream processing + notified third parties
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

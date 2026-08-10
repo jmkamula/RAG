@@ -12,14 +12,35 @@ should_count: 3
 
 # Independent Information Security Review Report
 
+<<DOC_CONTROL>>
+
 > A.5.35 requires the organisation's approach to information security to be reviewed independently at planned intervals (or on significant change). Each review report evidences the activity for one review cycle: reviewer independence demonstrated, scope covering people/processes/technology, findings recorded with severity, recommendations stated, management response documented. The review schedule register, program meta-review and finding-response register are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document an independent review of your information security approach, including the review’s scope, findings, recommendations, and management’s response. It demonstrates compliance with ISO 27001 requirements for regular, impartial security reviews.
+
+## When to use it
+
+Use this template whenever you conduct an independent information security review, which should happen at least once a year or whenever there’s a significant change in your environment.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours completing this report from scratch, depending on the complexity of your review and the amount of detail required for each section.
 
 ## 1. Independence of the reviewer demonstrated (separate function, external auditor, or rotating internal reviewer with no operational ownership of the reviewed areas)
 
 <<MUST item:A.5.35:independence>>
 _Why: 27002:5.35 — reviewed independently_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -28,12 +49,16 @@ _Why: 27002:5.35 — reviewed independently_
 <<MUST item:A.5.35:scope>>
 _Why: 27002:5.35 — including people, processes and technologies_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Review date and period covered (start/end of the review activity + observation window)
 
 <<MUST item:A.5.35:review_date>>
 _Why: 27002:5.35 — planned intervals_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -42,12 +67,16 @@ _Why: 27002:5.35 — planned intervals_
 <<MUST item:A.5.35:findings>>
 _Why: 27002:5.35 — review_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Recommendations stated (with priority and owner suggestion — actionable, not abstract)
 
 <<MUST item:A.5.35:recommendations>>
 _Why: 27002:5.35 — review_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -56,12 +85,16 @@ _Why: 27002:5.35 — review_
 <<MUST item:A.5.35:management_response>>
 _Why: Closes the loop_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Significant-change trigger check stated (whether this review was triggered by planned cadence OR by a significant change — M&A, major architectural shift, regulatory upheaval, major breach)
 
 <<MUST item:A.5.35:significant_change_check>>
 _Why: 27002:5.35 — planned intervals or on significant change_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -76,12 +109,16 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.5.35:reviewer_credentials>>
 _Why: Reviewer credibility_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Comparison or movement from prior review's findings (open / closed / aged) — proves the program returns value across cycles
 
 <<SHOULD item:A.5.35:prior_review_compare>>
 _Why: Progress tracking_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -90,4 +127,10 @@ _Why: Progress tracking_
 <<SHOULD item:A.5.35:executive_summary>>
 _Why: Stakeholder communication_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

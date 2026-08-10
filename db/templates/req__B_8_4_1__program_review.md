@@ -13,6 +13,8 @@ table_shape: true
 
 # Processor Temp Files Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — sweeps effective, tenant isolation intact, no cross-tenant leakage (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:B.8.4.1:program_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:B.8.4.1:rev_sweep_health -->
 <!-- column: item:B.8.4.1:rev_tenant_isolation_test -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document and review how temporary files are managed, ensuring that tenant data remains isolated and no information leaks between tenants. It's designed to support privacy compliance and annual verification needs.
+
+## When to use it
+
+Use this template if your operations match specific privacy-related triggers and you need to confirm, about once a year, that your temp file sweeps are effective and tenant data is properly isolated.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this template from scratch, depending on the number of required elements and the amount of detail you need to provide for each.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:B.8.4.1:rev_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Platform Ops + DPO)
 
+<<GUIDANCE>>
+
 ### Rev Sweep Health
 
 <<MUST item:B.8.4.1:rev_sweep_health>>
 _Why: §8.4.1_
 
 > _Standard text:_ Sweep health check
+
+<<GUIDANCE>>
 
 ### Rev Tenant Isolation Test
 
@@ -65,6 +92,8 @@ _Why: Multi-tenant discipline_
 > _Standard text:_ Tenant isolation test — sampled sweeps confirmed no cross-tenant temp file spillover
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

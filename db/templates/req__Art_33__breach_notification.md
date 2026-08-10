@@ -11,14 +11,35 @@ should_count: 1
 
 # Personal Data Breach Notification to Supervisory Authority
 
+<<DOC_CONTROL>>
+
 > Art.33 requires notification to supervisory authority within 72 hours of becoming aware of a breach. Per-breach notification record is the canonical artefact. Sibling leaves: notification procedure (the how), applicable triggers scope, program review
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you quickly prepare a formal notification to your data protection authority if you experience a personal data breach, ensuring you meet GDPR requirements and keep a clear record of each incident.
+
+## When to use it
+
+Use this document as soon as you become aware of a personal data breach, and submit it within 72 hours. Update or refresh the notification if new information becomes available.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this notification from scratch, as each required section takes around 10-15 minutes to fill in thoroughly.
 
 ## 1. Nature of the breach including categories and approximate number of data subjects
 
 <<MUST item:Art.33:nature>>
 _Why: Art.33.3a_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Art.33.3a_
 <<MUST item:Art.33:dpo_contact>>
 _Why: Art.33.3b_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Likely consequences of the breach
 
 <<MUST item:Art.33:consequences>>
 _Why: Art.33.3c_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: Art.33.3c_
 <<MUST item:Art.33:measures>>
 _Why: Art.33.3d_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Notified within 72 hours of becoming aware
 
 <<MUST item:Art.33:timing>>
 _Why: Art.33.1_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.33:phased>>
 _Why: Art.33.4_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

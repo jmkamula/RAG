@@ -12,6 +12,8 @@ table_shape: true
 
 # Approved Remote Workers Register
 
+<<DOC_CONTROL>>
+
 > Per-worker authoritative list of who is currently approved for remote working, with what conditions, on what equipment. The audit-defensibility surface for 'show me every active remote worker, when they were approved, and whether the approval is current'. Cross-references the A.5.16 identity register (every remote worker is also a registered identity) and the A.5.9 asset register (corporate equipment issued to them)
 
 <!-- TABLE-COLUMNS leaf:req:A.6.7:remote_workers_register -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.6.7:reg_review_due -->
 <!-- column: item:A.6.7:reg_status -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep an up-to-date list of all employees approved to work remotely, including their approval status, conditions, and the equipment they use. It also links each worker to your identity and asset registers for easy cross-referencing.
+
+## When to use it
+
+Use this register whenever you approve someone for remote work or need to review who is currently working remotely. Update it as needed whenever there are changes to remote work approvals or issued equipment.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required detail for each remote worker. Setting up the register for the first time may take 1-2 hours, depending on the number of remote staff.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: Accountability + A.5.16 link_
 
 > _Standard text:_ Per-row personnel identifier (links to A.5.16 identity register)
 
+<<GUIDANCE>>
+
 ### Reg Approval Date
 
 <<MUST item:A.6.7:reg_approval_date>>
 _Why: 27002:6.7 — controlled approval_
 
 > _Standard text:_ Per-row approval date + approving manager identity (closes 'who said yes')
+
+<<GUIDANCE>>
 
 ### Reg Location Category
 
@@ -59,12 +84,16 @@ _Why: 27002:6.7b + GDPR_
 
 > _Standard text:_ Per-row location category (home / co-working / abroad — drives jurisdictional risk; affects data-residency analysis where the worker handles personal data)
 
+<<GUIDANCE>>
+
 ### Reg Equipment Id
 
 <<MUST item:A.6.7:reg_equipment_id>>
 _Why: 27002:6.7 — equipment + A.5.9 link_
 
 > _Standard text:_ Per-row issued-equipment identifier (links to A.5.9 asset register; if BYOD, MDM-enrolment id)
+
+<<GUIDANCE>>
 
 ### Reg Conditions Summary
 
@@ -73,12 +102,16 @@ _Why: 27002:6.7 — appropriate conditions_
 
 > _Standard text:_ Per-row conditions summary (permitted hours, data-class restrictions, expiry date, supervision requirements)
 
+<<GUIDANCE>>
+
 ### Reg Review Due
 
 <<MUST item:A.6.7:reg_review_due>>
 _Why: 27002:6.7 — periodic re-evaluation_
 
 > _Standard text:_ Per-row next-review-due date (drives the periodic review's expected-set computation; typically 12 months from approval)
+
+<<GUIDANCE>>
 
 ### Reg Status
 
@@ -88,6 +121,8 @@ _Why: Operational discipline_
 > _Standard text:_ Per-row status (active / suspended / expired-pending-revocation / revoked) — drives the leaver pair-check vs A.5.18 access register
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -100,9 +135,17 @@ _Why: A.5.12 link_
 
 > _Standard text:_ Per-row maximum data classification permitted (links to A.5.12 classification scheme — drives 'restricted-class data must not leave the office' enforcement)
 
+<<GUIDANCE>>
+
 ### Reg Orphan Check
 
 <<SHOULD item:A.6.7:reg_orphan_check>>
 _Why: Continual assurance_
 
 > _Standard text:_ Orphan-row check: any row whose personnel_id is no longer in A.5.16 active identity register (caught at periodic review) — surfaces missed leaver-flow revocations
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

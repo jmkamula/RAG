@@ -13,6 +13,8 @@ table_shape: true
 
 # Subcontractor Change Register
 
+<<DOC_CONTROL>>
+
 > Per-change-event row — every subcontractor add / replace with customer notification date + objection status. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:B.8.5.8:subcontractor_change_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:B.8.5.8:reg_effective_date -->
 <!-- column: item:B.8.5.8:reg_objection_status -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, up-to-date record of every time you add or replace a subcontractor, including when you notified your customer and whether they raised any objections.
+
+## When to use it
+
+Use this register whenever you change your subcontractors and need to track customer notifications and responses. Plan to review and update it about once a year to keep it current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required detail for each change event. Completing the register from scratch may take around an hour, depending on the number of subcontractor changes you need to record.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit trail_
 
 > _Standard text:_ Unique change identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Change Type
 
 <<MUST item:B.8.5.8:reg_change_type>>
 _Why: §8.5.8_
 
 > _Standard text:_ Change type per row (add / replace / remove)
+
+<<GUIDANCE>>
 
 ### Reg Notification Date
 
@@ -58,12 +83,16 @@ _Why: §8.5.8 — inform customer_
 
 > _Standard text:_ Customer notification date per row
 
+<<GUIDANCE>>
+
 ### Reg Effective Date
 
 <<MUST item:B.8.5.8:reg_effective_date>>
 _Why: Traceability_
 
 > _Standard text:_ Change effective date per row
+
+<<GUIDANCE>>
 
 ### Reg Objection Status
 
@@ -73,6 +102,8 @@ _Why: §8.5.8 — opportunity to object_
 > _Standard text:_ Objection status per row (none / raised / resolved / termination)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Audit trail_
 
 > _Standard text:_ Resolution per row where objection raised
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

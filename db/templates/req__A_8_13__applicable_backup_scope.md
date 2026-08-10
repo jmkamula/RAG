@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Backup Scope
 
+<<DOC_CONTROL>>
+
 > Upstream — which systems / datasets are in scope with what RPO tier. Drawn from A.5.30 BIA. Documents what's vendor-managed (delegated to A.5.19/A.5.21 supplier)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly identify which systems and datasets are covered by your backup processes, including their recovery point objectives and any parts managed by vendors.
+
+## When to use it
+
+Use this document whenever you need to define or update the scope of your backup coverage for your environment, especially after significant changes to your systems or data landscape.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, depending on how easily you can gather information about your systems and vendor-managed components.
 
 ## 1. Systems / datasets enumerated with RPO tier per row (drawn from A.5.30 BIA)
 
 <<MUST item:A.8.13:scope_systems>>
 _Why: Cross-control coherence_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Cross-control coherence_
 <<MUST item:A.8.13:scope_vendor_managed>>
 _Why: Boundary clarity_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Exclusion rationale where backup not required (ephemeral / reconstructable / public)
 
 <<MUST item:A.8.13:scope_exclusions>>
 _Why: Defensibility_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.13:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

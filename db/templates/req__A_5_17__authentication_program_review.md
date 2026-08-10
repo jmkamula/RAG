@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Authentication-Information Program Review
 
+<<DOC_CONTROL>>
+
 > The credential program creates value only if credentials actually rotate, MFA actually enrols, vault discipline actually holds and compromise responses actually fire. The review captures the planned-interval check: rotation-compliance audit, MFA enrolment coverage, vault-discipline audit (secrets outside the vault), compromise-response sample, and resulting program adjustments. Cadence tightened to 180 days — credential hygiene churns continuously
 
 <!-- TABLE-COLUMNS leaf:req:A.5.17:authentication_program_review -->
@@ -24,6 +26,25 @@ table_shape: true
 <!-- column: item:A.5.17:rev_compromise_sample -->
 <!-- column: item:A.5.17:rev_actions -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you systematically review your credential program, ensuring that password rotations, MFA enrolment, vault usage, and incident responses are happening as planned. It provides a clear record of your compliance and any needed improvements.
+
+## When to use it
+
+Use this template about every six months to check that your authentication and credential management practices are up to date. It applies to all environments and should be completed at least twice a year.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend roughly 1.5 to 2 hours completing this review from scratch, depending on the number of items you need to check and document.
 
 ## Register
 
@@ -46,12 +67,16 @@ _Why: 27002:5.17 — periodic_
 
 > _Standard text:_ Review date within the planned 180-day interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.5.17:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (IT identity-lead + InfoSec lead jointly; vault custodian where vault discipline is in scope)
+
+<<GUIDANCE>>
 
 ### Rev Rotation Compliance
 
@@ -60,12 +85,16 @@ _Why: 27002:5.17 — rotation enforcement_
 
 > _Standard text:_ Rotation-compliance audit (sample of credentials past their rotation cadence; root cause per stale credential)
 
+<<GUIDANCE>>
+
 ### Rev Mfa Coverage
 
 <<MUST item:A.5.17:rev_mfa_coverage>>
 _Why: 27002:5.17 — MFA mandate verification_
 
 > _Standard text:_ MFA enrolment coverage audit (% of in-scope identities with MFA enrolled; gap analysis per uncovered identity type)
+
+<<GUIDANCE>>
 
 ### Rev Vault Discipline
 
@@ -74,12 +103,16 @@ _Why: 27002:5.17 — storage discipline_
 
 > _Standard text:_ Vault-discipline audit (sample of production systems re-checked: are credentials in the vault, or in config files / spreadsheets / chat history?)
 
+<<GUIDANCE>>
+
 ### Rev Compromise Sample
 
 <<MUST item:A.5.17:rev_compromise_sample>>
 _Why: 27002:5.17 — compromise response_
 
 > _Standard text:_ Compromise-response sample (recent compromise events re-examined: was rotation forced? was scope expansion checked?)
+
+<<GUIDANCE>>
 
 ### Rev Actions
 
@@ -89,6 +122,8 @@ _Why: 27002:5.17 — program adjustments_
 > _Standard text:_ Action items captured (e.g. expand MFA to remaining identity types, automate rotation for service tokens, retire phishable factors)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -101,9 +136,17 @@ _Why: Modern direction tracking_
 
 > _Standard text:_ Phishing-resistance progression review (delta in phishing-resistant credential ratio since last review; roadmap to higher coverage)
 
+<<GUIDANCE>>
+
 ### Rev Next Date
 
 <<SHOULD item:A.5.17:rev_next_date>>
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated (within 180d of this review)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

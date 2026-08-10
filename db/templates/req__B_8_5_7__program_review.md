@@ -13,6 +13,8 @@ table_shape: true
 
 # Subcontractor Engagement Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — every engagement has customer authorisation + Annex B flow-down (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:B.8.5.7:program_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:B.8.5.7:rev_authorisation_audit -->
 <!-- column: item:B.8.5.7:rev_flowdown_audit -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of all subcontractor engagements, ensuring each one has proper customer approval and includes the necessary privacy requirements. It's designed to support your compliance with privacy standards like ISO 27701.
+
+## When to use it
+
+Use this template whenever you engage a new subcontractor or review existing ones, especially if your business activities match specific compliance triggers. Plan to update it about once a year to keep your records current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this from scratch, depending on the number of subcontractors you need to review and document.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:B.8.5.7:rev_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Procurement + Legal + DPO)
 
+<<GUIDANCE>>
+
 ### Rev Authorisation Audit
 
 <<MUST item:B.8.5.7:rev_authorisation_audit>>
 _Why: §8.5.7_
 
 > _Standard text:_ Authorisation audit — every engagement traceable to customer authorisation
+
+<<GUIDANCE>>
 
 ### Rev Flowdown Audit
 
@@ -65,6 +92,8 @@ _Why: §8.5.7 — Annex B_
 > _Standard text:_ Flow-down audit — sampled contracts verified against Annex B coverage
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

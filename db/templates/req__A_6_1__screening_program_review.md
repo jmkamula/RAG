@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Screening Program Review
 
+<<DOC_CONTROL>>
+
 > Periodic verification that screening is happening at the right depth for each role tier, that legal/sectoral driver shifts have been incorporated, that re-screening cadence is being met, and that the register has no gaps. Annual cadence (freshness=365) matches the HR-program-review doctrine
 
 <!-- TABLE-COLUMNS leaf:req:A.6.1:screening_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.6.1:rev_rescreen_status -->
 <!-- column: item:A.6.1:rev_register_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your employee screening program, making sure checks are done at the right level for each role and that nothing is missed over time.
+
+## When to use it
+
+Use this template once a year to review your screening processes, confirm you’re meeting legal and industry requirements, and ensure your records are up to date.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 2 hours completing this from scratch, depending on how many roles or entries you need to review and document.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:6.1 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.6.1:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity and role recorded (HR lead + InfoSec lead jointly; legal-counsel sign-off where jurisdictional shifts material)
+
+<<GUIDANCE>>
 
 ### Rev Register Check
 
@@ -59,6 +84,8 @@ _Why: 27002:6.1 — completeness_
 
 > _Standard text:_ Per-tier outcome (did every new hire in this tier get the right checks? gaps flagged and remediated)
 
+<<GUIDANCE>>
+
 ### Rev Scope Check
 
 <<MUST item:A.6.1:rev_scope_check>>
@@ -66,12 +93,16 @@ _Why: Cross-leaf coherence_
 
 > _Standard text:_ Cross-check against the applicable-roles scope — any new role tier, new jurisdiction, new sectoral driver?
 
+<<GUIDANCE>>
+
 ### Rev Rescreen Status
 
 <<MUST item:A.6.1:rev_rescreen_status>>
 _Why: Operational discipline_
 
 > _Standard text:_ Rescreen status — for roles with ongoing-check obligations, what fraction completed on cadence vs aged-overdue
+
+<<GUIDANCE>>
 
 ### Rev Register Update
 
@@ -81,6 +112,8 @@ _Why: Closes the loop_
 > _Standard text:_ Changes propagated back to the procedure / scope with reference to this review
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -93,9 +126,17 @@ _Why: Change-driven review_
 
 > _Standard text:_ Ad-hoc review triggers listed (regulator enforcement action in sector, security incident involving inadequately-screened personnel)
 
+<<GUIDANCE>>
+
 ### Rev Next Date
 
 <<SHOULD item:A.6.1:rev_next_date>>
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

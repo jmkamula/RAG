@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Source Code Access Review
 
+<<DOC_CONTROL>>
+
 > Periodic verification that repository access is current, dependency allowlist is current, and the monitoring log shows expected hygiene (freshness=180; dev landscape changes fast)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.4:source_code_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.8.4:rev_dep_currency -->
 <!-- column: item:A.8.4:rev_findings_closed -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of who can access your source code, ensures your list of approved dependencies is up to date, and checks that your monitoring logs reflect good security practices.
+
+## When to use it
+
+Use this template if your organization needs to regularly review source code repository access and dependencies, especially if your environment changes quickly. Plan to complete this review about every six months or whenever your profile matches specific triggers.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes filling out the required sections from scratch, with additional time if you have many repositories or users to review.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: 27002:8.4 — periodic_
 
 > _Standard text:_ Review date within the planned interval (≤180 days)
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.4:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Engineering + InfoSec)
+
+<<GUIDANCE>>
 
 ### Rev Access Sample
 
@@ -58,12 +83,16 @@ _Why: Drift prevention_
 
 > _Standard text:_ Sample-based repo access verification (per-repo admin and write list re-confirmed)
 
+<<GUIDANCE>>
+
 ### Rev Dep Currency
 
 <<MUST item:A.8.4:rev_dep_currency>>
 _Why: Supply chain hygiene_
 
 > _Standard text:_ Dependency-allowlist currency check (no abandoned libraries; vulnerable versions retired)
+
+<<GUIDANCE>>
 
 ### Rev Findings Closed
 
@@ -73,6 +102,8 @@ _Why: Closes the loop_
 > _Standard text:_ Outstanding scanner findings reviewed (closed / accepted / extended)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

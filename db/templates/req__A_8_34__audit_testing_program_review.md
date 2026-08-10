@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Audit Testing Protection Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — register completeness, rollback-discipline compliance, evidence-preservation hygiene (freshness=365; audit-policy stable as documented in batch header)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.34:audit_testing_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.8.34:rev_evidence_hygiene -->
 <!-- column: item:A.8.34:rev_findings_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document your annual review of audit testing protection, ensuring your register is complete and your evidence is up to date and well maintained.
+
+## When to use it
+
+Use this template once a year to record your periodic audit testing protection program review, as it applies to all environments and supports ISO 27001 compliance.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 2 hours completing this from scratch, depending on the number of required elements and the amount of information you need to gather.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:8.34 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.34:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (InfoSec lead + Internal Audit lead)
+
+<<GUIDANCE>>
 
 ### Rev Register Completeness
 
@@ -59,6 +84,8 @@ _Why: Drift prevention_
 
 > _Standard text:_ Register-completeness check (every recent audit engagement in register)
 
+<<GUIDANCE>>
+
 ### Rev Rollback Compliance
 
 <<MUST item:A.8.34:rev_rollback_compliance>>
@@ -66,12 +93,16 @@ _Why: 27002:8.34 — protection_
 
 > _Standard text:_ Rollback-discipline compliance (no untracked changes introduced during testing)
 
+<<GUIDANCE>>
+
 ### Rev Evidence Hygiene
 
 <<MUST item:A.8.34:rev_evidence_hygiene>>
 _Why: Defensibility_
 
 > _Standard text:_ Evidence-preservation hygiene check (artefacts retained per chain-of-custody)
+
+<<GUIDANCE>>
 
 ### Rev Findings Update
 
@@ -81,6 +112,8 @@ _Why: Closes the loop_
 > _Standard text:_ Findings propagated to policy / scope
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

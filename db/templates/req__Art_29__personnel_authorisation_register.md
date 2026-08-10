@@ -13,6 +13,8 @@ table_shape: true
 
 # Personnel Authorisation Register
 
+<<DOC_CONTROL>>
+
 > Per-person authorisation — every person acting under controller authority on personal data, with scope and source of authority. Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.29:personnel_authorisation_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:Art.29:reg_scope -->
 <!-- column: item:Art.29:reg_status -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of who in your organisation is authorised to handle personal data, including what they can do and where their authority comes from.
+
+## When to use it
+
+Use this register whenever you need to document and review which staff members are allowed to access personal data, and update it about once a year to stay compliant.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per person listed, so the total time will depend on the number of people you need to include.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Audit_
 
 > _Standard text:_ Per-row person identifier (employee / contractor reference)
 
+<<GUIDANCE>>
+
 ### Reg Authority Source
 
 <<MUST item:Art.29:reg_authority_source>>
@@ -50,12 +73,16 @@ _Why: Art.29_
 
 > _Standard text:_ Per-row source of authority (which DPA + which controller instructions)
 
+<<GUIDANCE>>
+
 ### Reg Scope
 
 <<MUST item:Art.29:reg_scope>>
 _Why: Art.29 — only on documented instructions_
 
 > _Standard text:_ Per-row scope of processing the person is authorised to perform
+
+<<GUIDANCE>>
 
 ### Reg Status
 
@@ -65,6 +92,8 @@ _Why: Lifecycle_
 > _Standard text:_ Per-row status (active / suspended / revoked-on-date)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Cross-control_
 
 > _Standard text:_ Per-row training completion cross-reference (A.6.3 / 7.3 records)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

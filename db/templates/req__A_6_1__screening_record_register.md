@@ -12,6 +12,8 @@ table_shape: true
 
 # Per-Candidate Screening Record Register
 
+<<DOC_CONTROL>>
+
 > The operational catalogue of screening events. Every candidate / new hire / re-screened employee has a row: candidate identifier, role tier, checks performed, outcome, decision authority, decision date. Drives the audit-defensibility 'show me you screened this person before they got access' question
 
 <!-- TABLE-COLUMNS leaf:req:A.6.1:screening_record_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.6.1:reg_decision_date -->
 <!-- column: item:A.6.1:reg_authoriser -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of every screening check performed on candidates, new hires, or re-screened employees. It makes it easy to demonstrate that proper screening was done before granting access.
+
+## When to use it
+
+Use this register whenever you screen a candidate, new hire, or re-screen an existing employee. Update it as needed to ensure your records are always current and complete.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes entering information for each person, depending on the number of required details. Adding new entries will take a similar amount of time per person.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Accountability_
 
 > _Standard text:_ Per-record candidate identifier (links to identity register A.5.16 once hired; anonymised pre-hire to comply with data minimisation)
 
+<<GUIDANCE>>
+
 ### Reg Role Tier
 
 <<MUST item:A.6.1:reg_role_tier>>
 _Why: 27002:6.1a — proportional_
 
 > _Standard text:_ Role tier per record (drives the proportional check-depth applied; junior / standard / sensitive / privileged)
+
+<<GUIDANCE>>
 
 ### Reg Checks Performed
 
@@ -58,6 +83,8 @@ _Why: 27002:6.1a — verification_
 
 > _Standard text:_ Checks performed per record (identity / employment-history / education / criminal / financial / sanctions — actual checks run, not just planned)
 
+<<GUIDANCE>>
+
 ### Reg Outcome
 
 <<MUST item:A.6.1:reg_outcome>>
@@ -65,12 +92,16 @@ _Why: 27002:6.1 — decision_
 
 > _Standard text:_ Outcome per record (cleared / cleared-with-conditions / blocked / superseded by waiver)
 
+<<GUIDANCE>>
+
 ### Reg Decision Date
 
 <<MUST item:A.6.1:reg_decision_date>>
 _Why: Audit defensibility_
 
 > _Standard text:_ Decision date per record (proves the screening completed BEFORE access was granted per A.5.18)
+
+<<GUIDANCE>>
 
 ### Reg Authoriser
 
@@ -80,6 +111,8 @@ _Why: Accountability_
 > _Standard text:_ Authoriser per record (named individual making the accept/reject decision)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,9 +125,17 @@ _Why: Operational discipline_
 
 > _Standard text:_ Last rescreen date per record (for roles with ongoing-check obligations)
 
+<<GUIDANCE>>
+
 ### Reg Provider Ref
 
 <<SHOULD item:A.6.1:reg_provider_ref>>
 _Why: Traceability_
 
 > _Standard text:_ Third-party provider reference per record where used
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

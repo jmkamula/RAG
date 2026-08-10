@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Lessons-Learned Program Review
 
+<<DOC_CONTROL>>
+
 > The lessons program creates value only if it closes the loop — actions actually get done, lessons reduce repeat incidents, and the patterns drive systemic improvements. The review captures the planned-interval check: action-closure rate, repeat-incident detection, training-impact evidence, feedback-loop effectiveness and resulting program adjustments
 
 <!-- TABLE-COLUMNS leaf:req:A.5.27:lessons_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.5.27:rev_training_impact -->
 <!-- column: item:A.5.27:rev_actions -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you track and review how well your lessons-learned program is working, including whether actions are completed, incidents are reduced, and improvements are made over time.
+
+## When to use it
+
+Use this review record once a year to check on your lessons-learned program’s effectiveness, as it always applies to your environment and should be refreshed annually.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes filling this out from scratch, depending on the number of lessons and actions you need to review.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:5.27 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.5.27:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (program owner + InfoSec lead jointly)
+
+<<GUIDANCE>>
 
 ### Rev Closure Rate
 
@@ -59,6 +84,8 @@ _Why: 27002:5.27a_
 
 > _Standard text:_ Action-closure rate analysed (open / aged / closed) against targets
 
+<<GUIDANCE>>
+
 ### Rev Repeat
 
 <<MUST item:A.5.27:rev_repeat>>
@@ -66,12 +93,16 @@ _Why: 27002:5.27a,e_
 
 > _Standard text:_ Repeat-incident analysis (lessons that should have prevented later incidents — did they?)
 
+<<GUIDANCE>>
+
 ### Rev Training Impact
 
 <<MUST item:A.5.27:rev_training_impact>>
 _Why: 27002:5.27d_
 
 > _Standard text:_ Training-impact evidence reviewed where lessons drove curriculum changes
+
+<<GUIDANCE>>
 
 ### Rev Actions
 
@@ -81,6 +112,8 @@ _Why: 27002:5.27_
 > _Standard text:_ Action items captured for the program (e.g. tighten root-cause typing, expand pattern scope)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -93,9 +126,17 @@ _Why: Audit defensibility_
 
 > _Standard text:_ External benchmark or industry-practice input considered
 
+<<GUIDANCE>>
+
 ### Rev Next Date
 
 <<SHOULD item:A.5.27:rev_next_date>>
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # BCR Coverage Register
 
+<<DOC_CONTROL>>
+
 > Per-entity record of which group entities are bound by the BCRs + which transfers rely on them. Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.47:bcr_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.47:reg_transfers -->
 <!-- column: item:Art.47:reg_signed_date -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of which group entities are covered by your Binding Corporate Rules (BCRs) and which data transfers depend on them, supporting GDPR compliance.
+
+## When to use it
+
+Use this register when your organization operates under BCRs and needs to track which entities and transfers are covered. Update it about once a year or whenever your group structure or transfers change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours to complete the required sections for a simple group, with more time needed as you add more entities or transfers.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit_
 
 > _Standard text:_ Per-row group entity bound by BCRs
 
+<<GUIDANCE>>
+
 ### Reg Jurisdiction
 
 <<MUST item:Art.47:reg_jurisdiction>>
 _Why: Defining the relationship_
 
 > _Standard text:_ Per-row jurisdiction of entity
+
+<<GUIDANCE>>
 
 ### Reg Bcr Role
 
@@ -58,12 +83,16 @@ _Why: Art.47.1_
 
 > _Standard text:_ Per-row BCR role (BCR-C controller / BCR-P processor)
 
+<<GUIDANCE>>
+
 ### Reg Transfers
 
 <<MUST item:Art.47:reg_transfers>>
 _Why: Cross-leaf_
 
 > _Standard text:_ Per-row transfers covered (link to Art.44 register)
+
+<<GUIDANCE>>
 
 ### Reg Signed Date
 
@@ -73,6 +102,8 @@ _Why: Currency_
 > _Standard text:_ Per-row binding-commitment signed date
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Art.47.2.i_
 
 > _Standard text:_ Per-row complaint-routing target (group privacy team contact)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

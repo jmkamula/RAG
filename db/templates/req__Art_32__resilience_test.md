@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic resilience and restoration test record
 
+<<DOC_CONTROL>>
+
 > Art.32.1.d requires a process for regularly testing, assessing and evaluating the effectiveness of technical and organisational measures for ensuring the security of processing.
 
 <!-- TABLE-COLUMNS leaf:req:Art.32:resilience_test -->
@@ -20,6 +22,25 @@ table_shape: true
 <!-- column: item:Art.32:resilience_test_recent -->
 <!-- column: item:Art.32:resilience_test_findings -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of your regular tests and checks to make sure your security measures are working as intended. It’s useful for tracking compliance with GDPR requirements on data protection.
+
+## When to use it
+
+Use this template whenever you conduct resilience and restoration tests in your environment, and update it about once a year to stay current with your compliance obligations.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend around 30 to 45 minutes filling in the required details for each test from scratch, with more time needed if you have multiple tests to record.
 
 ## Register
 
@@ -42,12 +63,16 @@ _Why: Art.32.1.d_
 
 > _Standard text:_ Test scope covers confidentiality, integrity, availability and resilience
 
+<<GUIDANCE>>
+
 ### Resilience Test Recent
 
 <<MUST item:Art.32:resilience_test_recent>>
 _Why: Art.32.1.d — 'regularly'_
 
 > _Standard text:_ Test executed within the freshness window (last 12 months)
+
+<<GUIDANCE>>
 
 ### Resilience Test Findings
 
@@ -57,6 +82,8 @@ _Why: Art.32.1.d evaluation requirement_
 > _Standard text:_ Findings recorded and remediated or accepted
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -68,3 +95,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Best practice for credibility_
 
 > _Standard text:_ Test conducted or reviewed by an independent party
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

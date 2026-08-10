@@ -13,6 +13,8 @@ table_shape: true
 
 # Derogations Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — invocations defensible against strict construction, frequent-invocation patterns flagged for Art.46 migration (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.49:derogations_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.49:rev_pattern_detection -->
 <!-- column: item:Art.49:rev_sa_notifications -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of when and why you rely on GDPR derogations, making it easier to defend your decisions and spot patterns that may need a different legal basis.
+
+## When to use it
+
+Use this review record if your data transfers sometimes rely on GDPR Article 49 derogations. Plan to update it about once a year, or whenever your activities match certain triggers.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours completing this from scratch, depending on the number of cases you need to document.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.49:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + legal counsel)
+
+<<GUIDANCE>>
 
 ### Rev Strict Construction Audit
 
@@ -58,12 +83,16 @@ _Why: EDPB 2/2018_
 
 > _Standard text:_ Strict-construction audit — sampled invocations reviewed against EDPB 2/2018 narrow interpretation
 
+<<GUIDANCE>>
+
 ### Rev Pattern Detection
 
 <<MUST item:Art.49:rev_pattern_detection>>
 _Why: Art.49 — exceptional use_
 
 > _Standard text:_ Pattern detection — recurring derogation use for same recipient/purpose flagged for Art.46 migration
+
+<<GUIDANCE>>
 
 ### Rev Sa Notifications
 
@@ -73,6 +102,8 @@ _Why: Art.49.1 second paragraph_
 > _Standard text:_ SA notifications audit — Art.49.1 second-paragraph notifications dispatched as required
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

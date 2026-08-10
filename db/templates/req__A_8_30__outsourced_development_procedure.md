@@ -11,14 +11,35 @@ should_count: 1
 
 # Outsourced Development Governance Procedure
 
+<<DOC_CONTROL>>
+
 > A.8.30 requires direction, monitoring, review of outsourced development. Procedure documents contractual-security, code controls, delivered-code testing, incident-notification, oversight rhythm. Per-engagement register, applicable scope, program review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you set up clear rules and routines for managing software development work that you outsource to third parties. It covers contracts, code security, testing, incident reporting, and regular oversight.
+
+## When to use it
+
+Use this document whenever you hire outside vendors to develop software for your organization, and update it whenever your outsourcing arrangements or security requirements change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this template from scratch, plus extra time if you need to fill out a register for each outsourced engagement.
 
 ## 1. Security requirements in development contracts (cross-link to A.5.20 supplier contracts)
 
 <<MUST item:A.8.30:contractual_security>>
 _Why: 27002:8.30 — direct_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.30 — direct_
 <<MUST item:A.8.30:code_ownership>>
 _Why: 27002:8.30 — direct_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Security testing of delivered code (cross-link to A.8.29; vendor cannot be sole tester)
 
 <<MUST item:A.8.30:delivered_code_testing>>
 _Why: 27002:8.30 — review_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,6 +66,8 @@ _Why: 27002:8.30 — review_
 <<MUST item:A.8.30:source_code_controls>>
 _Why: 27002:8.30 — direct_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Incident-notification obligation in contract (vendor must notify within agreed window; cross-link to A.5.25/A.5.26)
@@ -48,12 +75,16 @@ _Why: 27002:8.30 — direct_
 <<MUST item:A.8.30:incident_notification>>
 _Why: 27002:8.30 — monitor_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Vendor security-maturity assessment before engagement (cross-link to A.5.19 supplier risk)
 
 <<MUST item:A.8.30:maturity_assessment>>
 _Why: Risk-based vendor selection (Style v2 promotion)_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -68,4 +99,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.30:review_meetings>>
 _Why: Active monitoring_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

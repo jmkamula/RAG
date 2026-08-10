@@ -13,6 +13,8 @@ table_shape: true
 
 # Communication Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that planned communications happened on cadence, the register is complete, regulator-mandated comms met their deadlines (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:7.4:communication_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:7.4:rev_mandated_deadlines -->
 <!-- column: item:7.4:rev_audience_coverage -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you confirm that all your planned and regulator-required communications were sent on schedule and properly recorded over the past year.
+
+## When to use it
+
+Use this review record once a year to check that your communication activities happened as planned and that your register is up to date, since this applies to every environment.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, depending on the number of communications you need to review and record.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Clause 7.4 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:7.4:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (ISMS Manager + comms lead)
+
+<<GUIDANCE>>
 
 ### Rev Cadence Check
 
@@ -58,12 +83,16 @@ _Why: Effectiveness_
 
 > _Standard text:_ Cadence check — planned communications actually delivered on time
 
+<<GUIDANCE>>
+
 ### Rev Mandated Deadlines
 
 <<MUST item:7.4:rev_mandated_deadlines>>
 _Why: Compliance currency_
 
 > _Standard text:_ Mandated deadlines check — every regulator-mandated comm met its SLA
+
+<<GUIDANCE>>
 
 ### Rev Audience Coverage
 
@@ -73,6 +102,8 @@ _Why: Cross-leaf coherence_
 > _Standard text:_ Audience coverage check — every in-scope audience reached for required topics
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

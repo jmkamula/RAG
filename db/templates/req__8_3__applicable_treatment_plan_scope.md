@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Treatment Plan Scope
 
+<<DOC_CONTROL>>
+
 > The upstream that bounds the records — which 6.1.3 plan items are in active 8.3 execution scope, which are deferred or planned for later cycles, which are accepted-as-residual without active treatment
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly outline which treatment plan items are currently being addressed, which are scheduled for future action, and which are acknowledged but not actively managed. It provides a structured way to communicate your treatment plan's current scope.
+
+## When to use it
+
+Use this document whenever you need to define or update the scope of your treatment plan, as it always applies to your environment. Refresh it as needed, especially when your plan's status or priorities change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this template from scratch, as each required section takes roughly 10 to 15 minutes to fill out thoughtfully.
 
 ## 1. Active treatment items in scope enumerated (current cycle)
 
 <<MUST item:8.3:scope_active_items>>
 _Why: Clause 8.3 — implement_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Clause 8.3 — implement_
 <<MUST item:8.3:scope_deferred_items>>
 _Why: Defensibility_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Accepted-residual items listed (no active treatment but residual signed off per 6.1.3 f))
 
 <<MUST item:8.3:scope_accepted_items>>
 _Why: Audit clarity_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:8.3:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

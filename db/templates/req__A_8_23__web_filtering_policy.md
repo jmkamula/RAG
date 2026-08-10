@@ -11,14 +11,35 @@ should_count: 1
 
 # Web Filtering Policy
 
+<<DOC_CONTROL>>
+
 > A.8.23 requires access to external websites managed to reduce exposure to malicious content. Policy states filtering scope, blocked categories, override workflow, monitoring expectation. Per-event register, applicable scope, program review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you create a clear policy for managing access to external websites, outlining which sites are blocked, how overrides work, and how web activity is monitored and reviewed.
+
+## When to use it
+
+Use this template whenever your organization needs to control and monitor web access to reduce exposure to harmful content. Review and update the policy as needed to keep it current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes drafting this policy from scratch, as each required section takes around 10-15 minutes to complete.
 
 ## 1. Category-based blocking minimum set (malware / phishing / illegal content / anonymisers / known-malicious)
 
 <<MUST item:A.8.23:categories>>
 _Why: 27002:8.23 — reduce exposure to malicious content_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.23 — reduce exposure to malicious content_
 <<MUST item:A.8.23:override_workflow>>
 _Why: 27002:8.23 — managed_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Monitoring requirement for attempted access to blocked sites (cross-link to A.8.16)
 
 <<MUST item:A.8.23:monitoring_req>>
 _Why: 27002:8.23 — managed_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: 27002:8.23 — managed_
 <<MUST item:A.8.23:tls_inspection>>
 _Why: Operational trade-off_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Named policy authority (InfoSec lead with Legal/HR partner for category boundaries)
 
 <<MUST item:A.8.23:authority>>
 _Why: Accountability_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.23:byod_strategy>>
 _Why: Realistic scope_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

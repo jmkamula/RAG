@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Monitoring Scope
 
+<<DOC_CONTROL>>
+
 > Upstream — which asset classes are in scope, what coverage is expected (full / sampled / boundary-only), which are vendor-managed (delegated A.5.19/A.5.21)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which asset classes are covered by your monitoring activities, the level of coverage expected, and which responsibilities are handled by vendors.
+
+## When to use it
+
+Use this document whenever you need to outline or update the scope of your monitoring program, especially when your environment changes or as part of regular compliance reviews.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to address three required elements and possibly one recommended detail.
 
 ## 1. Asset classes enumerated with monitoring coverage expectation per class
 
 <<MUST item:A.8.16:scope_classes>>
 _Why: 27002:8.16 — networks, systems, applications_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.16 — networks, systems, applications_
 <<MUST item:A.8.16:scope_vendor_managed>>
 _Why: Boundary clarity_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Exclusion rationale + compensating controls
 
 <<MUST item:A.8.16:scope_exclusions>>
 _Why: Defensibility_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.16:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Network Segregation Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — zone-register completeness, exception inventory current, flow-rules still appropriate, enforcement coverage verified (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.22:segregation_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.8.22:rev_enforcement_coverage -->
 <!-- column: item:A.8.22:rev_findings_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your network segregation program, making sure your zone register is complete, exceptions are up to date, and enforcement rules are still relevant.
+
+## When to use it
+
+Use this review record once a year to confirm your network zones and controls are current and effective. It applies to any environment where network segregation is in place.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 2 hours completing this from scratch, depending on the number of zones and exceptions you need to review and document.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:8.22 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.22:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Network Engineering + InfoSec + Application Engineering leads)
+
+<<GUIDANCE>>
 
 ### Rev Register Completeness
 
@@ -59,6 +84,8 @@ _Why: Drift prevention_
 
 > _Standard text:_ Register-completeness check (new zones registered)
 
+<<GUIDANCE>>
+
 ### Rev Exception Inventory
 
 <<MUST item:A.8.22:rev_exception_inventory>>
@@ -66,12 +93,16 @@ _Why: Drift prevention_
 
 > _Standard text:_ Exception inventory re-confirmed / retired
 
+<<GUIDANCE>>
+
 ### Rev Enforcement Coverage
 
 <<MUST item:A.8.22:rev_enforcement_coverage>>
 _Why: 27002:8.22 — segregated_
 
 > _Standard text:_ Sample-based enforcement-coverage verification (configured rules match register)
+
+<<GUIDANCE>>
 
 ### Rev Findings Update
 
@@ -81,6 +112,8 @@ _Why: Closes the loop_
 > _Standard text:_ Findings propagated to procedure / register
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

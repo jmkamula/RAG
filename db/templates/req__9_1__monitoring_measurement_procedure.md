@@ -12,14 +12,35 @@ should_count: 1
 
 # ISMS Monitoring, Measurement, Analysis and Evaluation Procedure
 
+<<DOC_CONTROL>>
+
 > Clause 9.1 requires the organisation to determine what is monitored and measured, by what methods, when, who, and how analysed. The procedure is the canonical artefact. Sibling leaves: measurement record (the live data), applicable measurement scope, program review
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document how your organization monitors, measures, analyzes, and evaluates information security performance, as required by ISO 27001. It provides a clear structure for defining what is measured, how, and by whom.
+
+## When to use it
+
+Use this procedure whenever you need to formalize your approach to monitoring and measurement for your information security management system. Plan to review and update it about once a year to stay compliant.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours completing this template from scratch, as it covers seven required elements and one recommended section.
 
 ## 1. What is monitored and measured (ISMS processes and security controls)
 
 <<MUST item:9.1:what_monitored>>
 _Why: Clause 9.1 a)_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -28,12 +49,16 @@ _Why: Clause 9.1 a)_
 <<MUST item:9.1:methods>>
 _Why: Clause 9.1 b)_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. When monitoring and measurement is performed
 
 <<MUST item:9.1:timing_measure>>
 _Why: Clause 9.1 c)_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -42,12 +67,16 @@ _Why: Clause 9.1 c)_
 <<MUST item:9.1:who_measure>>
 _Why: Clause 9.1 d)_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. When results are analysed and evaluated
 
 <<MUST item:9.1:timing_analyse>>
 _Why: Clause 9.1 e)_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -56,12 +85,16 @@ _Why: Clause 9.1 e)_
 <<MUST item:9.1:who_analyse>>
 _Why: Clause 9.1 f)_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Documented information retained as evidence of monitoring and measurement results
 
 <<MUST item:9.1:retained>>
 _Why: Clause 9.1 — retained_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -76,4 +109,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:9.1:dashboard>>
 _Why: Visibility_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

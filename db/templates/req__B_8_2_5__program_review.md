@@ -13,6 +13,8 @@ table_shape: true
 
 # Customer Support Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — support pathways functional, SLAs met, certifications current, audit rights honoured (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:B.8.2.5:program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:B.8.2.5:rev_certification_health -->
 <!-- column: item:B.8.2.5:rev_audit_rights_audit -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document your annual review of customer support programs, ensuring support channels work as intended, service levels are met, certifications are up to date, and audit rights are respected.
+
+## When to use it
+
+Use this template if your organization needs to verify customer support processes under ISO 27701, especially when your business profile matches certain criteria. Plan to complete this review about once a year.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes filling out the required sections from scratch, depending on the number of support programs you need to review.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:B.8.2.5:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Trust + Compliance + Sales Ops)
+
+<<GUIDANCE>>
 
 ### Rev Sla Audit
 
@@ -58,12 +83,16 @@ _Why: §8.2.5 — appropriate information_
 
 > _Standard text:_ SLA audit — sampled requests measured against response SLA
 
+<<GUIDANCE>>
+
 ### Rev Certification Health
 
 <<MUST item:B.8.2.5:rev_certification_health>>
 _Why: Currency_
 
 > _Standard text:_ Certification health — currency + scope of shared certifications reviewed
+
+<<GUIDANCE>>
 
 ### Rev Audit Rights Audit
 
@@ -73,6 +102,8 @@ _Why: §8.2.5 — audits conducted by customer_
 > _Standard text:_ Audit rights audit — customer audits requested + granted per contract tier
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

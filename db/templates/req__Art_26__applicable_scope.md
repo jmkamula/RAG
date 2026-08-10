@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Joint Controllership Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which relationships qualify as joint controllership (vs independent controllers vs controller-processor). EDPB Guidelines 7/2020 test applied
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which of your business relationships qualify as joint controllership under GDPR, using the EDPB Guidelines 7/2020 test. It distinguishes joint controllers from independent controllers and controller-processor setups.
+
+## When to use it
+
+Use this document whenever your organization enters or reviews a relationship where data responsibilities might be shared, and update it whenever those relationships or your data processing activities change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to address three required elements and consider one recommended point.
 
 ## 1. Relationships qualifying as joint controllership enumerated
 
 <<MUST item:Art.26:scope_joint_relationships>>
 _Why: Art.4(7) + Art.26_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Art.4(7) + Art.26_
 <<MUST item:Art.26:scope_test_criteria>>
 _Why: Defensibility_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Excluded relationships (independent-controllers / controller-processor / no joint decision)
 
 <<MUST item:Art.26:scope_excluded>>
 _Why: Defensible bounding_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.26:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

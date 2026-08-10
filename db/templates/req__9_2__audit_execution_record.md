@@ -13,6 +13,8 @@ table_shape: true
 
 # Internal Audit Execution Record
 
+<<DOC_CONTROL>>
+
 > Per-audit record capturing what was audited, by whom, when, with what findings — the lifecycle-end artefact of each audit engagement. Distinct from the programme: the programme is the plan, the execution record is the proof. Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:9.2:audit_execution_record -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:9.2:rec_findings -->
 <!-- column: item:9.2:rec_handoff -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document each internal audit by recording what was reviewed, who performed the audit, when it took place, and what was found. It serves as clear proof that your audits were properly conducted.
+
+## When to use it
+
+Use this template every time you complete an internal audit, regardless of your environment. Update it at least once a year to keep your records current and compliant.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes filling out this record from scratch, as each required section takes around 10–15 minutes to complete.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Unique audit identifier per row
 
+<<GUIDANCE>>
+
 ### Rec Scope
 
 <<MUST item:9.2:rec_scope>>
 _Why: Clause 9.2a_
 
 > _Standard text:_ Per-audit scope (which ISMS process / area was audited)
+
+<<GUIDANCE>>
 
 ### Rec Auditor
 
@@ -59,6 +84,8 @@ _Why: Clause 9.2c_
 
 > _Standard text:_ Per-audit auditor identity + independence assertion
 
+<<GUIDANCE>>
+
 ### Rec Date
 
 <<MUST item:9.2:rec_date>>
@@ -66,12 +93,16 @@ _Why: Currency_
 
 > _Standard text:_ Per-audit execution date
 
+<<GUIDANCE>>
+
 ### Rec Findings
 
 <<MUST item:9.2:rec_findings>>
 _Why: Clause 9.2d_
 
 > _Standard text:_ Per-audit findings list (conformities + nonconformities + observations)
+
+<<GUIDANCE>>
 
 ### Rec Handoff
 
@@ -81,6 +112,8 @@ _Why: Clause 9.2e_
 > _Standard text:_ Per-audit handoff to 10.2 NC/CA procedure where findings include nonconformities
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Clause 9.3.2a_
 
 > _Standard text:_ Per-audit reference number cited in the next 9.3 management review
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

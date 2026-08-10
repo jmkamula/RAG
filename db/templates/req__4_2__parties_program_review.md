@@ -13,6 +13,8 @@ table_shape: true
 
 # Interested Parties Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that the parties register reflects current reality, the framework is being followed, and the scope still bounds the right categories (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:4.2:parties_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:4.2:rev_requirements_currency -->
 <!-- column: item:4.2:rev_scope_check -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep an up-to-date record of all interested parties relevant to your information security program, ensuring your register reflects current relationships and responsibilities.
+
+## When to use it
+
+Use this review record once a year to confirm your list of interested parties is accurate and that your program’s scope and framework still fit your organization’s needs.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours completing this from scratch, depending on how many parties you need to review and update.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Clause 4.2 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:4.2:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (ISMS Manager + executive sponsor)
+
+<<GUIDANCE>>
 
 ### Rev Register Currency
 
@@ -58,12 +83,16 @@ _Why: Cross-leaf coherence_
 
 > _Standard text:_ Register currency check — every party row reviewed for continued relevance, new parties added
 
+<<GUIDANCE>>
+
 ### Rev Requirements Currency
 
 <<MUST item:4.2:rev_requirements_currency>>
 _Why: Critical for compliance currency_
 
 > _Standard text:_ Requirements currency check — regulator updates, contract amendments swept in
+
+<<GUIDANCE>>
 
 ### Rev Scope Check
 
@@ -73,6 +102,8 @@ _Why: Cross-leaf coherence_
 > _Standard text:_ Cross-check against the applicable-domains scope — any new category that should be covered
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

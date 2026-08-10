@@ -11,14 +11,35 @@ should_count: 1
 
 # ISMS Scope Determination Methodology
 
+<<DOC_CONTROL>>
+
 > The methodology behind the scope statement — what inputs were used (context issues 4.1, interested parties 4.2, business strategy), what criteria drove inclusion/exclusion decisions, who approved
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly document how you determined the boundaries of your information security management system, including what was considered, who was involved, and how decisions were made.
+
+## When to use it
+
+Use this whenever you need to define or update the scope of your information security program, especially when there are changes in your business environment or strategy.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this from scratch, as you'll need to address several key areas and gather input from relevant stakeholders.
 
 ## 1. Inputs consumed (4.1 issues, 4.2 parties, business strategy, regulatory obligations)
 
 <<MUST item:4.3:proc_inputs>>
 _Why: Clause 4.3 — taking into account_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,6 +48,8 @@ _Why: Clause 4.3 — taking into account_
 <<MUST item:4.3:proc_criteria>>
 _Why: Defensible bounding_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Approval authority for the scope statement (top management)
@@ -34,12 +57,16 @@ _Why: Defensible bounding_
 <<MUST item:4.3:proc_approval>>
 _Why: Clause 4.3 — determined_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 4. Trigger list for re-evaluation (M&A, new product, new site, regulator change)
 
 <<MUST item:4.3:proc_review_trigger>>
 _Why: Currency by design_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -54,4 +81,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:4.3:proc_workshop>>
 _Why: Repeatability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

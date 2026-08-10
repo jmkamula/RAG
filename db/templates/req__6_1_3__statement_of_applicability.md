@@ -13,10 +13,11 @@ table_shape: hybrid
 
 # Statement of Applicability (SoA)
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
-The **single most important artefact** in your ISMS — and **the first
-thing an external auditor opens**. The SoA is the master ledger: every
+The **single most important artefact** in your ISMS — and **the first thing an external auditor opens**. The SoA is the master ledger: every
 one of the 93 Annex A controls listed, marked Applicable or Not
 Applicable, justified, status-tracked, and cross-referenced to the
 implementing policy. The quality of your SoA signals the maturity of
@@ -24,41 +25,27 @@ the entire ISMS.
 
 ## When to use it
 
-You're producing the SoA mandated by **ISO/IEC 27001:2022 Clause
-6.1.3(c-d)**. The SoA is **annually refreshed at minimum** (freshness
+You're producing the SoA mandated by **ISO/IEC 27001:2022 Clause 6.1.3(c-d)**. The SoA is **annually refreshed at minimum** (freshness
 = 365 days) and on any significant change.
 
-## Before you start
+## Prerequisites
 
-- [ ] **6.1.2 Risk Assessment** done — risks drive control selection
-- [ ] **6.1.3 Risk Treatment Plan** in progress (co-produced with SoA)
-- [ ] **4.3 ISMS Scope** stable — applicability decisions depend on
-      scope (e.g. A.7 physical controls N/A for cloud-only orgs)
-- [ ] **A.5.31 Compliance register** — drives Applicable=Yes for
-      controls tied to legal/contractual obligations
+<<PREREQUISITES>>
 
 ## Cross-references
 
-- **Every Annex A control** — the SoA is the source-of-truth for
-  whether each one is in scope
-- **6.1.3 Risk Treatment Plan** (sibling) — treatment rows resolve to
-  Applicable controls in the SoA
-- **9.2 Internal Audit** — the audit programme covers every
-  Applicable control over its cycle
-- **9.3 Management Review** — SoA changes are a standing input
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
-**8-16 hours** for v1 (one pass through 93 controls + cross-link
-work); **2-4 hours** for annual refresh. Use a spreadsheet — many
+**8-16 hours** for v1 (one pass through 93 controls + cross-link work); **2-4 hours** for annual refresh. Use a spreadsheet — many
 tenants find their SoA outgrows a word-processor.
 
 ---
 
 ## The 93-row control table
 
-This is the **heart of the SoA**. One row per Annex A control (all
-93). The auditor's first check is **count** — if you don't have 93
+This is the **heart of the SoA**. One row per Annex A control (all 93). The auditor's first check is **count** — if you don't have 93
 rows, you've already failed Clause 6.1.3(d).
 
 <!-- TABLE-COLUMNS leaf:req:6.1.3:statement_of_applicability -->
@@ -96,6 +83,8 @@ id. Count check at top: "93/93".
 **✗ Avoid**: Omitting Not-Applicable controls — auditor will catch
 this on first scan.
 
+<<GUIDANCE>>
+
 ### Applicable (Yes/No)
 
 <<MUST item:6.1.3:soa_inclusion_status>>
@@ -103,8 +92,7 @@ this on first scan.
 > _Standard text:_ Inclusion status per control (Applicable / Not
 > Applicable)
 
-Each row: **Applicable** (in scope, you implement it) or **Not
-Applicable** (out of scope, you don't). "Partially applicable" is
+Each row: **Applicable** (in scope, you implement it) or **Not Applicable** (out of scope, you don't). "Partially applicable" is
 not a valid SoA status.
 
 **✓ Good**: Discrete column with Yes/No. Implementation depth lives
@@ -112,6 +100,8 @@ in the "Implementation Status" column, not here.
 
 **✗ Avoid**: Mixing applicability and implementation status — they're
 separate dimensions.
+
+<<GUIDANCE>>
 
 ### Justification
 
@@ -132,6 +122,8 @@ contractual (customer MSAs require RBAC)`
 **✗ Avoid**: "Standard ISO control" — says nothing about why it
 applies to YOU.
 
+<<GUIDANCE>>
+
 ### Implementation Status
 
 <<MUST item:6.1.3:soa_implementation_status>>
@@ -148,6 +140,8 @@ target Q4, owner: <named>`
 
 **✗ Avoid**: All rows "Implemented" on day 1 — be honest. Partial +
 planned is expected and respected.
+
+<<GUIDANCE>>
 
 ### Implementing Policy / Procedure
 
@@ -167,6 +161,8 @@ artefact.
 
 ---
 
+<<GUIDANCE>>
+
 ## Document-level fields
 
 These are properties of the SoA AS A DOCUMENT — not per-row data.
@@ -181,6 +177,9 @@ The ISMS Manager owns the SoA. Significant SoA changes go to top
 management for approval.
 
 <!-- EDIT-ZONE-START item:6.1.3:soa_owner -->
+
+<<GUIDANCE>>
+
 <<TEXT>>
 <!-- EDIT-ZONE-END item:6.1.3:soa_owner -->
 
@@ -203,6 +202,9 @@ Change history: v1.0 initial — v1.1 added A.8.27 — v2.0
 ```
 
 <!-- EDIT-ZONE-START item:6.1.3:soa_version -->
+
+<<GUIDANCE>>
+
 <<TEXT>>
 <!-- EDIT-ZONE-END item:6.1.3:soa_version -->
 
@@ -225,6 +227,8 @@ controls), list them here as additional table rows so the SoA is a
 complete view.
 
 ---
+
+<<GUIDANCE>>
 
 ## PIMS extension — for ISO 27701-enrolled tenants
 
@@ -293,3 +297,7 @@ auditors expect one master ledger.
 | A.7.2.7 | No | Arion has no joint-controller arrangements (role_joint_controller = false) | — | — |
 | A.7.3.10 | No | Automated decision-making = false in data-processing facts | — | — |
 | B.8.2.1 | Yes | Arion holds customer-uploaded PII under DPA; processor role active | Partial — DPA in place, contract-scope register pending | Data Processing Agreement (DOC-052) |
+
+## Revision history
+
+<<REVISION_HISTORY>>

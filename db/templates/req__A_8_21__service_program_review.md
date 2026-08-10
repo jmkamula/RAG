@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Network Services Program Review
 
+<<DOC_CONTROL>>
+
 > Periodic verification — SLA attainment trending, security-mechanism currency, provider obligations re-confirmed (freshness=180; service delivery dynamic + supplier landscape evolves)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.21:service_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.8.21:rev_a522_link -->
 <!-- column: item:A.8.21:rev_findings_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you regularly check that your network service providers are meeting their commitments, keeping security measures up to date, and confirming all obligations are still being met as your environment changes.
+
+## When to use it
+
+Use this review record whenever you need to verify your network services program, ideally about twice a year, to ensure ongoing compliance and adapt to any changes in your service providers or delivery landscape.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this template from scratch, depending on how many providers or services you need to review and document.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:8.21 — periodic_
 
 > _Standard text:_ Review date within the planned interval (≤180 days)
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.21:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Network Engineering + Supplier Management)
+
+<<GUIDANCE>>
 
 ### Rev Sla Attainment
 
@@ -59,6 +84,8 @@ _Why: 27002:8.21 — monitored_
 
 > _Standard text:_ SLA-attainment trending per service
 
+<<GUIDANCE>>
+
 ### Rev Mechanisms Currency
 
 <<MUST item:A.8.21:rev_mechanisms_currency>>
@@ -66,12 +93,16 @@ _Why: 27002:8.21 — security mechanisms_
 
 > _Standard text:_ Security-mechanism currency check (TLS versions / crypto algorithms / authentication strength still acceptable)
 
+<<GUIDANCE>>
+
 ### Rev A522 Link
 
 <<MUST item:A.8.21:rev_a522_link>>
 _Why: Cross-control coherence_
 
 > _Standard text:_ Cross-link to A.5.22 supplier review outcomes for in-scope vendor services
+
+<<GUIDANCE>>
 
 ### Rev Findings Update
 
@@ -81,6 +112,8 @@ _Why: Closes the loop_
 > _Standard text:_ Findings propagated to procedure / register / scope
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

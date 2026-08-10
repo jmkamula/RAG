@@ -13,6 +13,8 @@ table_shape: true
 
 # Art.17 Erasure Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — SLAs met, backup erasure handled, Art.17.3 exception claims defensible, Art.17.2 public-disclosure actions taken where applicable (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.17:program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.17:rev_backup_handling -->
 <!-- column: item:Art.17:rev_exception_defensibility -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document your annual review of how your organization handles data erasure requests under GDPR, including backup deletion, exception claims, and any required public disclosures.
+
+## When to use it
+
+Use this template once a year to confirm your data erasure processes meet GDPR requirements, especially if you regularly receive or process erasure requests in your environment.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours completing this from scratch, depending on how many erasure cases or exceptions you need to document in the register.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.17:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + ops lead)
+
+<<GUIDANCE>>
 
 ### Rev Sla Compliance
 
@@ -58,12 +83,16 @@ _Why: Art.12.3_
 
 > _Standard text:_ SLA compliance (Art.12.3 one-month)
 
+<<GUIDANCE>>
+
 ### Rev Backup Handling
 
 <<MUST item:Art.17:rev_backup_handling>>
 _Why: Art.17.1_
 
 > _Standard text:_ Backup-handling sample — backups actually purged on cycle, immutable records correctly flagged-not-erased
+
+<<GUIDANCE>>
 
 ### Rev Exception Defensibility
 
@@ -73,6 +102,8 @@ _Why: Art.17.3_
 > _Standard text:_ Art.17.3 exception sample — refused requests have defensible exception grounds
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

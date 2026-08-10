@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Maintenance Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification of cadence compliance, provider performance, post-verification effectiveness. Freshness=365
 
 <!-- TABLE-COLUMNS leaf:req:A.7.13:maintenance_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.13:rev_provider_performance -->
 <!-- column: item:A.7.13:rev_register_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your annual maintenance program reviews, making it easier to confirm that schedules are followed, providers are performing well, and improvements are effective.
+
+## When to use it
+
+Use this template once a year to document your review of maintenance activities, as it applies to all environments and should be refreshed annually.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours completing this from scratch, depending on how much detail you include for each required section.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: 27002:7.13 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.13:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Facilities + IT + InfoSec)
+
+<<GUIDANCE>>
 
 ### Rev Cadence Compliance
 
@@ -58,12 +83,16 @@ _Why: 27002:7.13 — maintained_
 
 > _Standard text:_ Cadence compliance per equipment class (% of due-maintenance actually completed in period)
 
+<<GUIDANCE>>
+
 ### Rev Provider Performance
 
 <<MUST item:A.7.13:rev_provider_performance>>
 _Why: Supply chain hygiene_
 
 > _Standard text:_ Provider performance review (SLA met / breaches / incident link)
+
+<<GUIDANCE>>
 
 ### Rev Register Update
 
@@ -73,6 +102,8 @@ _Why: Closes the loop_
 > _Standard text:_ Changes propagated to the procedure / scope
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

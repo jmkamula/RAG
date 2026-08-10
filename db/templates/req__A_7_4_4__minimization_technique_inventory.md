@@ -13,6 +13,8 @@ table_shape: true
 
 # Minimization Technique Inventory
 
+<<DOC_CONTROL>>
+
 > Per-processing-activity row — the applied minimisation technique + degree + rationale. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:A.7.4.4:minimization_technique_inventory -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.7.4.4:reg_technique -->
 <!-- column: item:A.7.4.4:reg_implementation -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of the data minimization techniques you use for each processing activity, along with the reasons and degree of minimization. It provides a clear, organized record for privacy compliance.
+
+## When to use it
+
+Use this register when your activities match certain privacy triggers, and update it about once a year to ensure your information stays current and compliant.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element for each processing activity you document. Completing the register from scratch may take a few hours, depending on the number of activities you need to cover.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Traceability_
 
 > _Standard text:_ Processing activity identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Objective
 
 <<MUST item:A.7.4.4:reg_objective>>
@@ -50,12 +73,16 @@ _Why: §7.4.4_
 
 > _Standard text:_ Minimization objective per row (target identifiability level — identified / pseudonymised / anonymised)
 
+<<GUIDANCE>>
+
 ### Reg Technique
 
 <<MUST item:A.7.4.4:reg_technique>>
 _Why: §7.4.4 — mechanisms_
 
 > _Standard text:_ Technique per row (masking / generalisation / suppression / noise addition / k-anonymity / differential privacy / etc.)
+
+<<GUIDANCE>>
 
 ### Reg Implementation
 
@@ -65,6 +92,8 @@ _Why: §7.4.4 — technical configurations_
 > _Standard text:_ Implementation reference per row (code repo / config file / infrastructure component)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Defensibility_
 
 > _Standard text:_ Effectiveness assessment per row (re-identification risk estimate)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

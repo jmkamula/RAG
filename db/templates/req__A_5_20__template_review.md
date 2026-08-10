@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Supplier Agreement Template Review
 
+<<DOC_CONTROL>>
+
 > The supplier agreement template ages: regulations change, threat landscape shifts, internal control baselines evolve. The periodic review captures who reviewed it, when, what changed, and the re-papering plan for existing supplier agreements that need to catch up
 
 <!-- TABLE-COLUMNS leaf:req:A.5.20:template_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.5.20:rev_outcome -->
 <!-- column: item:A.5.20:rev_repapering -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep your supplier agreement documents up to date by recording who reviewed them, when, what was changed, and how you plan to update existing agreements. It supports compliance with ISO 27001 requirements.
+
+## When to use it
+
+Use this template whenever you review your supplier agreement template, which should happen about once a year or whenever regulations, risks, or internal controls change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on how many details and updates you need to document.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:5.20 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.5.20:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (legal + InfoSec lead jointly)
+
+<<GUIDANCE>>
 
 ### Rev Regulatory
 
@@ -59,6 +84,8 @@ _Why: 27002:5.20c,p_
 
 > _Standard text:_ Regulatory changes considered (data protection, sector-specific obligations)
 
+<<GUIDANCE>>
+
 ### Rev Threat Landscape
 
 <<MUST item:A.5.20:rev_threat_landscape>>
@@ -66,12 +93,16 @@ _Why: 27002:5.20 — keep current_
 
 > _Standard text:_ Threat-landscape changes considered (e.g. emergent incident-notification expectations)
 
+<<GUIDANCE>>
+
 ### Rev Outcome
 
 <<MUST item:A.5.20:rev_outcome>>
 _Why: 27002:5.20_
 
 > _Standard text:_ Outcome (no change / amended; version increment if amended)
+
+<<GUIDANCE>>
 
 ### Rev Repapering
 
@@ -81,6 +112,8 @@ _Why: Operational sufficiency_
 > _Standard text:_ Re-papering plan for existing supplier agreements that need to catch up to a new template version
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -93,9 +126,17 @@ _Why: Audit defensibility_
 
 > _Standard text:_ External counsel or industry-benchmark input considered
 
+<<GUIDANCE>>
+
 ### Rev Next Date
 
 <<SHOULD item:A.5.20:rev_next_date>>
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

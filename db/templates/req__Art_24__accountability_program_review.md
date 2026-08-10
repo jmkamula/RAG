@@ -13,6 +13,8 @@ table_shape: true
 
 # Accountability Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification of the accountability frame — charter current, compliance register reflects all in-scope articles, role decisions still hold, ISO 27001 derivations still aligned (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.24:accountability_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:Art.24:rev_role_currency -->
 <!-- column: item:Art.24:rev_iso_alignment -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you confirm that your accountability program is up-to-date, ensuring your charter, compliance register, and role assignments are still accurate and aligned with GDPR requirements.
+
+## When to use it
+
+Use this review record once a year to check that your accountability framework remains current and compliant, as it always applies to your environment and should be refreshed annually.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours completing this from scratch, as each required section takes roughly 10-15 minutes to fill in.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.24:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + executive sponsor)
+
+<<GUIDANCE>>
 
 ### Rev Charter Currency
 
@@ -59,6 +84,8 @@ _Why: Art.24.1 — reviewed_
 
 > _Standard text:_ Charter currency check — scope + governance still reflect organisational reality
 
+<<GUIDANCE>>
+
 ### Rev Register Completeness
 
 <<MUST item:Art.24:rev_register_completeness>>
@@ -66,12 +93,16 @@ _Why: Demonstrability_
 
 > _Standard text:_ Compliance register completeness — every applicable GDPR article has a row with current status
 
+<<GUIDANCE>>
+
 ### Rev Role Currency
 
 <<MUST item:Art.24:rev_role_currency>>
 _Why: Art.4(7-8) drift_
 
 > _Standard text:_ Role decisions current — no counterparty service-shape change unreflected in role decisions
+
+<<GUIDANCE>>
 
 ### Rev Iso Alignment
 
@@ -81,6 +112,8 @@ _Why: Cross-standard_
 > _Standard text:_ ISO 27001 alignment — derived dependencies (5.1/5.3/9.3/A.5.1/A.5.34/A.5.36) still in compliant state
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

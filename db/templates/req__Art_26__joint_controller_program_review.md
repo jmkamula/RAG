@@ -13,6 +13,8 @@ table_shape: true
 
 # Joint Controller Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — every active joint-controller relationship has current arrangement, essence is published, contact point still functioning (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.26:joint_controller_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.26:rev_essence_published -->
 <!-- column: item:Art.26:rev_contact_point -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your joint controller relationships, making sure all arrangements are up to date and that your published information and contact points are still accurate.
+
+## When to use it
+
+Use this review record when you have joint controller relationships under GDPR, and update it about once a year or whenever your situation changes significantly.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on how many joint controller arrangements you need to review and record.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.26:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + legal counsel)
+
+<<GUIDANCE>>
 
 ### Rev Currency
 
@@ -58,12 +83,16 @@ _Why: Art.26.1_
 
 > _Standard text:_ Arrangement currency — every active relationship has current signed arrangement
 
+<<GUIDANCE>>
+
 ### Rev Essence Published
 
 <<MUST item:Art.26:rev_essence_published>>
 _Why: Art.26.2_
 
 > _Standard text:_ Essence-published audit — privacy notice / equivalent surface reflects each arrangement
+
+<<GUIDANCE>>
 
 ### Rev Contact Point
 
@@ -73,6 +102,8 @@ _Why: Art.26.1_
 > _Standard text:_ Contact-point health check — point still reachable, requests being routed correctly
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

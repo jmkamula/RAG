@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Art.39 Tasks Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which tasks the DPO is formally responsible for + how the risk-based approach is operationalised (where DPO concentrates attention)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly outline which tasks your Data Protection Officer is formally responsible for, and explains how your organization applies a risk-based approach to data protection oversight.
+
+## When to use it
+
+Use this document when your organization’s profile matches specific criteria that require formal DPO responsibilities under GDPR, and update it whenever there are changes to your DPO’s role or risk management approach.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this template from scratch, as it involves providing details for three required elements.
 
 ## 1. Tasks formally assigned to DPO (mapping to Art.39.1 a-e)
 
 <<MUST item:Art.39:scope_tasks_assigned>>
 _Why: Art.39.1_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Art.39.1_
 <<MUST item:Art.39:scope_risk_prioritisation>>
 _Why: Art.39.2_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Additional tasks beyond Art.39.1 (if any) consistent with Art.38.6 no-conflict-of-interest rule
 
 <<MUST item:Art.39:scope_additional_tasks>>
 _Why: Art.38.6 boundary_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.39:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

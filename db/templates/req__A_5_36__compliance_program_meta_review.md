@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Compliance Review Program Meta-Review
 
+<<DOC_CONTROL>>
+
 > The compliance review program itself needs review — is the catalogue current, is the method choice right, are findings being closed, are continuous-compliance signals being used effectively? The meta-review evidences periodic self-assessment and the resulting adjustments
 
 <!-- TABLE-COLUMNS leaf:req:A.5.36:compliance_program_meta_review -->
@@ -24,6 +26,25 @@ table_shape: true
 <!-- column: item:A.5.36:pgm_method_review -->
 <!-- column: item:A.5.36:pgm_outcome -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document a high-level review of your compliance program, ensuring your processes, controls, and catalogues are up to date and effective. It supports ongoing improvement and demonstrates your commitment to regular self-assessment.
+
+## When to use it
+
+Use this template whenever you need to perform a periodic review of your compliance program—typically once a year, or whenever you want to confirm your compliance activities are current and effective.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours completing this from scratch, as each required section takes around 10-15 minutes to fill in thoughtfully.
 
 ## Register
 
@@ -46,12 +67,16 @@ _Why: 27002:5.36 — periodic_
 
 > _Standard text:_ Meta-review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Pgm Reviewer
 
 <<MUST item:A.5.36:pgm_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (compliance program owner + InfoSec lead jointly)
+
+<<GUIDANCE>>
 
 ### Pgm Catalogue Check
 
@@ -60,12 +85,16 @@ _Why: 27002:5.36 — InfoSec policy + topic-specific policies + rules + standard
 
 > _Standard text:_ Catalogue currency check — did new policies / rules / standards land without entering the schedule? are retired items still scheduled?
 
+<<GUIDANCE>>
+
 ### Pgm Coverage
 
 <<MUST item:A.5.36:pgm_coverage>>
 _Why: 27002:5.36 — regularly_
 
 > _Standard text:_ Coverage check — did the schedule actually run? what fraction of catalogue reviewed in period?
+
+<<GUIDANCE>>
 
 ### Pgm Closure
 
@@ -74,12 +103,16 @@ _Why: Operational discipline_
 
 > _Standard text:_ Findings-closure rate across the program (open / aged / closed)
 
+<<GUIDANCE>>
+
 ### Pgm Method Review
 
 <<MUST item:A.5.36:pgm_method_review>>
 _Why: 27002:5.36 — adjustments_
 
 > _Standard text:_ Method effectiveness review — are the chosen methods surfacing real nonconformities, or is the program rubber-stamping?
+
+<<GUIDANCE>>
 
 ### Pgm Outcome
 
@@ -89,6 +122,8 @@ _Why: 27002:5.36 — adjustments_
 > _Standard text:_ Cadence-adjustment or method-adjustment decisions (tighten / loosen / change method per item type)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -101,9 +136,17 @@ _Why: Cross-control coherence_
 
 > _Standard text:_ Alignment check with A.5.35 independent review program (shared reviewer pool? shared finding register? leverage opportunities)
 
+<<GUIDANCE>>
+
 ### Pgm Next Date
 
 <<SHOULD item:A.5.36:pgm_next_date>>
 _Why: Planning_
 
 > _Standard text:_ Next planned meta-review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

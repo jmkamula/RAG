@@ -11,14 +11,35 @@ should_count: 3
 
 # Information Security in Project Management Procedure
 
+<<DOC_CONTROL>>
+
 > A.5.8 requires information security to be integrated into project management across the full lifecycle: initiation, requirements, design/build, pre-go-live assessment, closure handover. The procedure documents gates, deliverables, roles, tiering rules and acceptance criteria. The project register, periodic program review and per-project closure record are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document how information security is built into every stage of your project management process, from planning through closure, ensuring you meet ISO 27001 requirements.
+
+## When to use it
+
+Use this procedure whenever you manage projects in your environment, and update it whenever your project management or security practices change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours completing this from scratch, as each required section takes 10-15 minutes to write.
 
 ## 1. Security gate at project initiation (risk assessment, classification of information, scope of personal data if applicable)
 
 <<MUST item:A.5.8:initiation_gate>>
 _Why: 27002:5.8 — integrated at initiation_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:5.8 — integrated at initiation_
 <<MUST item:A.5.8:requirements>>
 _Why: 27002:5.8 — integrated_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Security assessment before go-live (pen test, control verification, residual-risk acceptance)
 
 <<MUST item:A.5.8:assessment_pre_golive>>
 _Why: 27002:5.8 — throughout lifecycle_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: 27002:5.8 — throughout lifecycle_
 <<MUST item:A.5.8:role>>
 _Why: 27002:5.8 — defined responsibilities_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Project closure security sign-off step (handover to operations; outstanding-risk transfer documented)
 
 <<MUST item:A.5.8:closure_signoff>>
 _Why: 27002:5.8 — closure_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -55,12 +84,16 @@ _Why: 27002:5.8 — closure_
 <<MUST item:A.5.8:acceptance_criteria>>
 _Why: 27002:5.8 — risk acceptance per project_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. In-project change control step (scope/security-impact changes during build trigger re-assessment, not late-detection)
 
 <<MUST item:A.5.8:change_control>>
 _Why: 27002:5.8 — throughout lifecycle_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -75,12 +108,16 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.5.8:tiering>>
 _Why: 27002:5.8 — proportionality_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Standard project templates referenced (security sections in initiation pack, requirements template, closure checklist)
 
 <<SHOULD item:A.5.8:templates>>
 _Why: Consistency_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -89,4 +126,10 @@ _Why: Consistency_
 <<SHOULD item:A.5.8:agile_integration>>
 _Why: Modern delivery practice_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

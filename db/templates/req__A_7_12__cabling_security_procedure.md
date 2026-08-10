@@ -11,14 +11,35 @@ should_count: 1
 
 # Cabling Security Procedure
 
+<<DOC_CONTROL>>
+
 > A.7.12 requires cables carrying power, data, or supporting services to be protected from interception, interference, or damage. The procedure documents routing, separation, labelling, tamper-evidence, patch-panel security. The cabling register, applicable-runs scope and periodic review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document how your organization protects cabling for power, data, and services from interception, interference, or damage. It covers routing, separation, labeling, tamper-evidence, and patch-panel security, supporting compliance with ISO 27001 requirements.
+
+## When to use it
+
+Use this procedure whenever your environment includes cabling that needs protection, and update it whenever there are changes to your cabling or security practices.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this template from scratch, depending on the complexity of your cabling setup and the number of cable runs you need to document.
 
 ## 1. Cable routing principles (conduits, protected paths, away from public areas)
 
 <<MUST item:A.7.12:routing>>
 _Why: 27002:7.12 — protected from damage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:7.12 — protected from damage_
 <<MUST item:A.7.12:separation>>
 _Why: 27002:7.12 — interference_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Cable and patch-panel labelling for traceability
 
 <<MUST item:A.7.12:labelling>>
 _Why: 27002:7.12 — protected_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,6 +66,8 @@ _Why: 27002:7.12 — protected_
 <<MUST item:A.7.12:tamper_evidence>>
 _Why: 27002:7.12 — interception_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Patch panel / IDF / MDF physical security (locked rooms, access logged)
@@ -48,12 +75,16 @@ _Why: 27002:7.12 — interception_
 <<MUST item:A.7.12:patch_panel_security>>
 _Why: 27002:7.12 — protected_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Encrypted backbone or MACsec on segments crossing low-trust zones
 
 <<MUST item:A.7.12:encrypted_backbone>>
 _Why: Defense in depth_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -68,4 +99,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.12:periodic_inspection>>
 _Why: Drift prevention_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

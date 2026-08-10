@@ -66,6 +66,19 @@ _ANY_ITEM_MARKER_RE = re.compile(
 # cross_role). Empty prerequisites ⇒ marker line silently dropped.
 _PREREQUISITES_MARKER_RE = re.compile(r"^[ \t]*<<PREREQUISITES>>[ \t]*$", re.MULTILINE)
 
+# Templates-Pass-1 (2026-08-08) — <<CROSS_REFERENCES>> marker. Placeholder
+# until a later pass wires the Neo4j xfw-bridge resolver. Renderer currently
+# silently drops the marker line so architecture-pass templates render cleanly
+# without literal "<<CROSS_REFERENCES>>" text leaking to tenants.
+_CROSS_REFERENCES_MARKER_RE = re.compile(r"^[ \t]*<<CROSS_REFERENCES>>[ \t]*$", re.MULTILINE)
+
+# Templates-Pass-5 (2026-08-08) — DOC_CONTROL + REVISION_HISTORY markdown
+# equivalents of the Ship 54'.d docx blocks. Emitted as compact markdown
+# tables so tenants downloading .md see the same doc-control + history
+# metadata that the .docx download shows.
+_DOC_CONTROL_MARKER_RE      = re.compile(r"^[ \t]*<<DOC_CONTROL>>[ \t]*$", re.MULTILINE)
+_REVISION_HISTORY_MARKER_RE = re.compile(r"^[ \t]*<<REVISION_HISTORY>>[ \t]*$", re.MULTILINE)
+
 # Tabular EDIT-ZONE markers — wrap a markdown table. Captures the leaf_id
 # in group 1 and the zone content (header + separator + data rows) in
 # group 2. Mirrors extractor._TEMPLATED_TABLE_ZONE_RE.
@@ -178,39 +191,79 @@ class RenderedTemplate:
     prefill_sources:  list[PrefillSource] = field(default_factory=list)
 
 
-def _strip_na_sections(
+def _mark_na_sections(
     body_md:       str,
-    na_must_ids:   set[str],
+    na_reasons:    dict[str, str],
 ) -> tuple[str, int, int]:
-    """Drop section blocks that contain a <<MUST item:X>> marker for any
-    must_id in na_must_ids. Returns (new_body, dropped_count, kept_count).
+    """Mark (rather than drop) MUST sections whose must_id is N/A for this
+    tenant. Preserves original numbering + curator content, but inserts an
+    "N/A" callout at the top of the section, replaces the tenant edit-zone
+    placeholder with an "N/A" line, and removes the <<GUIDANCE>> marker so
+    no "Best practice:" callout renders for a section that doesn't apply.
 
-    A "section" is the run of lines from a `## N. Heading` line up to
-    (but not including) the next `## ` heading or a `---` rule.
-
-    The instruction blockquote at the top of the doc is untouched —
-    only `## N.` numbered sections are candidates for stripping.
+    Returns (new_body, marked_count, applicable_count).
     """
-    if not na_must_ids:
-        # Fast path — also count for telemetry
+    if not na_reasons:
         kept = body_md.count("<<MUST item:")
         return body_md, 0, kept
 
     sections = _MUST_BLOCK_RE.findall(body_md)
-    dropped = 0
-    kept    = 0
+    marked = 0
+    kept   = 0
     for section in sections:
-        # Find the MUST marker in this section
         m = re.search(r"<<MUST\s+(item:[^>\s]+)>>", section)
         if not m:
             continue
         must_id = m.group(1)
-        if must_id in na_must_ids:
-            body_md = body_md.replace(section, "", 1)
-            dropped += 1
-        else:
+        if must_id not in na_reasons:
             kept += 1
-    return body_md, dropped, kept
+            continue
+
+        reason = (na_reasons[must_id] or "").strip()
+        reason_clause = f" {reason}" if reason else ""
+
+        # Split heading line from body content so the H2 stays a heading
+        # (not `> ## ...`); only the body gets the blockquote prefix that
+        # visually distinguishes an N/A section from applicable ones.
+        head_match = re.match(r"(^##\s+\d+\.[^\n]*\n)(.*)$", section, re.DOTALL)
+        if not head_match:
+            kept += 1
+            continue
+        heading_line, body_content = head_match.group(1), head_match.group(2)
+
+        # Drop <<GUIDANCE>> markers (no best-practice callout for N/A).
+        body_content = _GUIDANCE_MARKER_RE.sub("", body_content)
+        # Replace <<TEXT>> / <<NAME>> with an N/A placeholder line.
+        body_content = re.sub(
+            r"^<<(?:TEXT|NAME)>>\s*\n?",
+            "_[Not applicable to your scope — no evidence required.]_\n",
+            body_content,
+            flags=re.MULTILINE,
+        )
+
+        # Compose the callout + body as a single blockquote block —
+        # every line prefixed with "> " gives the whole section a
+        # visually distinct rendering (indented, muted in most viewers).
+        # Strip leading/trailing blank lines from body_content and collapse
+        # any 3+ consecutive newlines within — the source templates have
+        # varying whitespace between the H2 heading and MUST marker which
+        # produces ugly gaps under the blockquote prefix.
+        body_content = body_content.strip()
+        body_content = re.sub(r"\n{3,}", "\n\n", body_content)
+        callout = (
+            f"**Not applicable to your scope.**{reason_clause}\n"
+            "Section retained for auditor visibility; no tenant input required."
+        )
+        combined = callout + "\n\n" + body_content
+        blockquoted = "\n".join(
+            (f"> {line}" if line else ">") for line in combined.split("\n")
+        )
+
+        new_section = heading_line + "\n" + blockquoted + "\n\n"
+        body_md = body_md.replace(section, new_section, 1)
+        marked += 1
+
+    return body_md, marked, kept
 
 
 def _substitute_placeholders(
@@ -623,14 +676,31 @@ def _apply_prefills_and_wrap_edit_zones(
     return "".join(out_parts), n_prefilled
 
 
-def _format_guidance_markdown(guidance: tuple[str, ...]) -> str:
+def _format_guidance_markdown(
+    guidance: tuple[str, ...],
+    verdict:  Optional[dict] = None,
+) -> str:
     """Render a per-MUST guidance block as a Markdown callout.
 
     Ship 56'.a — the block appears between the MUST-section prose and
     the tenant's <<TEXT>> placeholder. Tenant-facing "Best practice:"
     label + bulleted imperative steps.
+
+    2026-08-10 — three-state tick indicator on the header based on the
+    persisted `posture_must_verdicts` verdict for this MUST:
+      ✓ satisfied (present + fresh)
+      ◐ partial or stale
+      (no mark) unrecognised, or no verdict row (e.g. N/A-excluded)
     """
-    lines = ["**Best practice:**", ""]
+    if verdict is None:
+        header = "**Best practice:**"
+    elif verdict.get("satisfied") and not verdict.get("stale"):
+        header = "**Best practice ✓ — covered:**"
+    elif verdict.get("partial") or verdict.get("stale"):
+        header = "**Best practice ◐ — partly covered:**"
+    else:
+        header = "**Best practice — still needed:**"
+    lines = [header, ""]
     for g in guidance:
         lines.append(f"- {g}")
     return "\n".join(lines) + "\n"
@@ -639,22 +709,35 @@ def _format_guidance_markdown(guidance: tuple[str, ...]) -> str:
 def _format_prerequisites_markdown(prereqs: tuple) -> str:
     """Render the per-leaf prerequisites block as a Markdown callout.
 
-    Ship 57' — placed under the "Before you start" heading. Groups entries
-    by category (foundational → direct → cross_role); each entry shows the
-    control ref + title on one line, then a Why + Good-enough line pair.
+    Ship 57' (iterated 2026-08-09) — placed under the "Before you start"
+    heading. Emits an italic intro line + bold category sub-headers
+    (Foundational / Direct upstream / Cross-framework) so grouping is
+    visible in the rendered output. Empty category groups are skipped.
     """
-    order = ("foundational", "direct", "cross_role")
+    order = [
+        ("foundational", "Foundational"),
+        ("direct",       "Direct upstream"),
+        ("cross_role",   "Cross-framework"),
+    ]
     by_cat: dict[str, list] = {}
     for p in prereqs:
         by_cat.setdefault(p.category, []).append(p)
-    lines = ["**Prerequisites:**", ""]
-    for cat in order:
-        for p in by_cat.get(cat, []):
+    lines = [
+        "_Have these in place before drafting:_",
+        "",
+    ]
+    for cat_key, cat_label in order:
+        entries = by_cat.get(cat_key, [])
+        if not entries:
+            continue
+        lines.append(f"**{cat_label}**")
+        for p in entries:
             ref_display = _humanize_control_ref(f"{p.standard_id}:{p.ref}")
             lines.append(f"- **{ref_display} — {p.title}**")
             lines.append(f"  - Why: {p.rationale}")
             if p.good_enough:
                 lines.append(f"  - Good enough: {p.good_enough}")
+        lines.append("")
     return "\n".join(lines) + "\n"
 
 
@@ -684,13 +767,267 @@ def _apply_prerequisites_blocks(body: str, leaf_id: str) -> tuple[str, int]:
     return "".join(parts), rendered
 
 
-def _apply_guidance_blocks(body: str) -> tuple[str, int]:
+def _derive_doc_number_md(leaf_id: str, template_version: int | None) -> str:
+    """Mirror of docx_renderer._derive_doc_number kept in-module to avoid
+    forcing the docx library import on markdown-only render paths.
+    Convention: {TYPE_PREFIX}-{control_ref}-Rev{template_version:02d}."""
+    parts = (leaf_id or "").split(":")
+    if len(parts) < 3:
+        return leaf_id or "DOC"
+    ctrl_ref, leaf_type = parts[1], parts[2]
+    lt = leaf_type.lower()
+    if "policy" in lt:            prefix = "POL"
+    elif "procedure" in lt or "process" in lt: prefix = "PRC"
+    elif "register" in lt:        prefix = "REG"
+    elif "record" in lt or "log" in lt: prefix = "REC"
+    elif "review" in lt:          prefix = "REV"
+    elif "framework" in lt:       prefix = "FRM"
+    elif "manual" in lt:          prefix = "MAN"
+    elif "scope" in lt:           prefix = "SCP"
+    else:                          prefix = "DOC"
+    rev = f"Rev{(template_version or 1):02d}"
+    return f"{prefix}-{ctrl_ref}-{rev}"
+
+
+def _format_doc_control_markdown(leaf_id: str, template_version: int | None) -> str:
+    """Markdown equivalent of docx_renderer._render_doc_control_block.
+    Ship 54'.d shape: 2-column table with doc-control metadata + wet-sign
+    placeholders. Templates Pass 5."""
+    from datetime import date
+    doc_no = _derive_doc_number_md(leaf_id, template_version)
+    today  = date.today().strftime("%d %b %Y")
+    rev    = f"Rev{(template_version or 1):02d}"
+    rows = [
+        ("Document No.",  doc_no),
+        ("Revision",      rev),
+        ("Revision Date", today),
+        ("Prepared By",   "___________________________"),
+        ("Reviewed By",   "___________________________"),
+        ("Approved By",   "___________________________"),
+    ]
+    lines = ["| Field | Value |", "|---|---|"]
+    for label, value in rows:
+        lines.append(f"| **{label}** | {value} |")
+    return "\n".join(lines) + "\n"
+
+
+def _format_revision_history_markdown(template_version: int | None) -> str:
+    """Markdown equivalent of docx_renderer._render_revision_history_block.
+    Ship 54'.d shape: 4-column table seeded with the current version."""
+    from datetime import date
+    today = date.today().strftime("%d %b %Y")
+    rev = f"{(template_version or 1):02d}"
+    lines = [
+        "| Version | Date | Description of Change | Author |",
+        "|---|---|---|---|",
+        f"| {rev} | {today} | Initial issue / current version | |",
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def _apply_doc_control_blocks(body: str, leaf_id: str, template_version: int | None) -> tuple[str, int]:
+    """Replace every <<DOC_CONTROL>> marker with a markdown doc-control table."""
+    matches = list(_DOC_CONTROL_MARKER_RE.finditer(body))
+    if not matches:
+        return body, 0
+    block = _format_doc_control_markdown(leaf_id, template_version)
+    parts, cursor, rendered = [], 0, 0
+    for m in matches:
+        parts.append(body[cursor:m.start()])
+        parts.append(block)
+        rendered += 1
+        end = m.end()
+        if end < len(body) and body[end] == "\n":
+            end += 1
+        cursor = end
+    parts.append(body[cursor:])
+    return "".join(parts), rendered
+
+
+def _apply_revision_history_blocks(body: str, template_version: int | None) -> tuple[str, int]:
+    """Replace every <<REVISION_HISTORY>> marker with a markdown history table."""
+    matches = list(_REVISION_HISTORY_MARKER_RE.finditer(body))
+    if not matches:
+        return body, 0
+    block = _format_revision_history_markdown(template_version)
+    parts, cursor, rendered = [], 0, 0
+    for m in matches:
+        parts.append(body[cursor:m.start()])
+        parts.append(block)
+        rendered += 1
+        end = m.end()
+        if end < len(body) and body[end] == "\n":
+            end += 1
+        cursor = end
+    parts.append(body[cursor:])
+    return "".join(parts), rendered
+
+
+def _humanize_edge_type(edge_type: str) -> str:
+    return {
+        "IMPLEMENTS": "Implements",
+        "SUPPORTS":   "Supports",
+        "ENABLES":    "Enables",
+        "GOVERNANCE": "Provides governance for",
+    }.get(edge_type, edge_type.title())
+
+
+def _format_cross_references_markdown(bridges: tuple) -> str:
+    """Render the outbound xfw-bridge callout as a Markdown block.
+
+    Templates Pass 4 (iterated 2026-08-09) — grouped by edge type
+    (IMPLEMENTS → SUPPORTS → ENABLES → GOVERNANCE). Each entry shows
+    target ref + title + the curator-authored rationale from the graph
+    edge. The section sits inside the template's "## Cross-references"
+    H2, so we skip a duplicative bold label; a short italic intro
+    signals the content is graph-authored cross-framework mappings
+    (distinct from any hand-authored intra-framework bullets above).
+    """
+    order = ("IMPLEMENTS", "SUPPORTS", "ENABLES", "GOVERNANCE")
+    by_type: dict[str, list] = {}
+    for b in bridges:
+        by_type.setdefault(b.edge_type, []).append(b)
+    lines = [
+        "_How this control maps to related requirements in other frameworks:_",
+        "",
+    ]
+    for et in order:
+        entries = by_type.get(et, [])
+        if not entries:
+            continue
+        lines.append(f"**{_humanize_edge_type(et)}**")
+        for b in entries:
+            std_display = _humanize_control_ref(f"{b.dst_std}:{b.dst_ref}")
+            title = f" — {b.dst_title}" if b.dst_title else ""
+            lines.append(f"- **{std_display}{title}**")
+            if b.rationale:
+                lines.append(f"  {b.rationale}")
+        lines.append("")
+    return "\n".join(lines) + "\n"
+
+
+def _humanize_item_slug(mid: str) -> str:
+    """`item:4.3:boundaries` → 'boundaries'.  Mirror of docx_renderer version
+    kept in-module to avoid docx import on md-only render paths."""
+    if not mid:
+        return ""
+    try:
+        from rag.id_types import item_slug
+        slug = item_slug(mid) or mid
+    except Exception:
+        parts = mid.split(":")
+        slug = parts[-1] if parts else mid
+    return slug.replace("_", " ")
+
+
+_INLINE_MARKER_LINE_RE = re.compile(
+    r"^([> \t]*)<<(MUST|SHOULD)\s+(item:[A-Za-z0-9.]+:[a-z0-9_]+)>>[ \t]*$",
+    re.MULTILINE,
+)
+
+
+def _humanize_marker_lines(body: str) -> str:
+    """Transform <<MUST/SHOULD item:X>> marker lines into a
+    tenant-visible bold label plus an HTML-commented raw marker that
+    preserves round-trip binding on re-upload.
+
+    Intake regex matches the raw marker regardless of surrounding HTML
+    comment syntax, so evidence extraction still binds correctly.
+
+    Runs at the end of the render chain — upstream passes (N/A marking,
+    guidance, prereqs, cross-refs) all look for the raw marker, which is
+    unchanged at that point.
+
+    Preserves any leading blockquote prefix (`> `) so N/A sections
+    blockquoted by _mark_na_sections stay visually intact.
+    """
+    def _sub(m: re.Match) -> str:
+        prefix, kind, mid = m.group(1), m.group(2), m.group(3)
+        label = "Required element" if kind == "MUST" else "Recommended addition"
+        slug = _humanize_item_slug(mid)
+        # Visible bold label first, then the raw marker wrapped in inline
+        # code + an explanatory prefix so tenants understand it's a system
+        # identifier they should leave alone. Intake regex still matches
+        # the raw <<MUST item:X>> inside the backticks.
+        return (
+            f"{prefix}**◆ {label} — {slug}**\n"
+            f"{prefix}_Do not edit — system id_: `<<{kind} {mid}>>`"
+        )
+    return _INLINE_MARKER_LINE_RE.sub(_sub, body)
+
+
+def _apply_cross_references_blocks(body: str, leaf_id: str) -> tuple[str, int]:
+    """Replace every <<CROSS_REFERENCES>> marker with the resolved outbound
+    xfw-bridge callout for the leaf's control. Empty bridges ⇒ marker
+    dropped."""
+    from rag.templates.cross_references_lookup import get_cross_references_for_leaf
+
+    matches = list(_CROSS_REFERENCES_MARKER_RE.finditer(body))
+    if not matches:
+        return body, 0
+    bridges = get_cross_references_for_leaf(leaf_id)
+
+    parts: list[str] = []
+    cursor = 0
+    rendered = 0
+    for m in matches:
+        parts.append(body[cursor:m.start()])
+        if bridges:
+            parts.append(_format_cross_references_markdown(bridges))
+            rendered += 1
+        end = m.end()
+        if end < len(body) and body[end] == "\n":
+            end += 1
+        cursor = end
+    parts.append(body[cursor:])
+    return "".join(parts), rendered
+
+
+def _fetch_must_verdicts_for_ids(
+    pg_conn,
+    tenant_id: str,
+    must_ids:  list[str],
+) -> dict[str, dict]:
+    """Query posture_must_verdicts for the given MUST ids.
+    Returns {must_id: {'satisfied': bool, 'partial': bool, 'stale': bool}}.
+    Missing rows (N/A-excluded, or engine hasn't run) → not in dict."""
+    if not must_ids:
+        return {}
+    try:
+        with pg_conn.cursor() as cur:
+            cur.execute(
+                "SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,),
+            )
+            cur.execute("""
+                SELECT must_id, satisfied, partial, stale
+                  FROM posture_must_verdicts
+                 WHERE tenant_id = %s::uuid
+                   AND must_id   = ANY(%s)
+            """, (tenant_id, list(must_ids)))
+            return {
+                mid: {"satisfied": s, "partial": p, "stale": st}
+                for (mid, s, p, st) in cur.fetchall()
+            }
+    except Exception:
+        # Schema not applied or engine hasn't run yet — silent fallback,
+        # ticks will simply not render (label stays "**Best practice:**").
+        return {}
+
+
+def _apply_guidance_blocks(
+    body:      str,
+    verdicts:  Optional[dict[str, dict]] = None,
+) -> tuple[str, int]:
     """Replace every <<GUIDANCE>> marker with the resolved guidance
     callout for the immediately-preceding MUST or SHOULD item marker.
 
     - Empty guidance ⇒ marker line silently dropped.
     - No preceding item marker ⇒ marker line silently dropped
       (defensive; would indicate a template authoring error).
+
+    When `verdicts` is provided, each callout header carries a three-state
+    tick indicator (✓ / ◐ / blank) based on the item's persisted
+    posture_must_verdicts row. Empty dict / None ⇒ header stays neutral.
 
     Returns (new_body, n_blocks_rendered).
     """
@@ -699,6 +1036,8 @@ def _apply_guidance_blocks(body: str) -> tuple[str, int]:
     g_matches = list(_GUIDANCE_MARKER_RE.finditer(body))
     if not g_matches:
         return body, 0
+
+    verdicts = verdicts or {}
 
     parts: list[str] = []
     cursor = 0
@@ -711,7 +1050,8 @@ def _apply_guidance_blocks(body: str) -> tuple[str, int]:
             item_id = preceding[-1].group(1)
             guidance = get_guidance_for_item(item_id)
             if guidance:
-                parts.append(_format_guidance_markdown(guidance))
+                verdict = verdicts.get(item_id)
+                parts.append(_format_guidance_markdown(guidance, verdict))
                 rendered += 1
         # Marker consumed either way — advance cursor past its line
         end = gm.end()
@@ -775,26 +1115,50 @@ def render_template(
         )
         tenant_profile = {k: v for k, v in cur.fetchall()}
 
-        # N/A MUSTs from tenant_must_overrides (applies = FALSE)
+        # N/A MUSTs from tenant_must_overrides (applies = FALSE).
+        # Fetch reason so the render can show the auditor why we're
+        # marking this section N/A (rather than silently dropping it).
         cur.execute(
-            "SELECT must_id FROM tenant_must_overrides "
+            "SELECT must_id, reason FROM tenant_must_overrides "
             " WHERE tenant_id = %s::uuid AND applies = FALSE",
             (tenant_id,),
         )
-        na_must_ids = {r[0] for r in cur.fetchall()}
+        na_reasons = {r[0]: (r[1] or "") for r in cur.fetchall()}
 
-    body, dropped, kept = _strip_na_sections(body_md, na_must_ids)
+    body, dropped, kept = _mark_na_sections(body_md, na_reasons)
 
     # Ship 56'.a — resolve <<GUIDANCE>> markers to per-MUST guidance
     # callouts. Runs before edit-zone wrapping so the guidance block
     # lands OUTSIDE the tenant-authoring edit zone (it's guidance, not
     # evidence). Empty guidance ⇒ marker line dropped.
-    body, guidance_rendered = _apply_guidance_blocks(body)
+    #
+    # 2026-08-10 — three-state tick indicator wiring. Extract MUST ids
+    # from body, query posture_must_verdicts (single source of truth),
+    # pass into applier for per-callout ✓ / ◐ / blank labelling.
+    _must_ids_in_body = list({m.group(1) for m in _ANY_ITEM_MARKER_RE.finditer(body)})
+    _must_verdicts = _fetch_must_verdicts_for_ids(pg_conn, tenant_id, _must_ids_in_body)
+    body, guidance_rendered = _apply_guidance_blocks(body, _must_verdicts)
 
     # Ship 57' — resolve the single <<PREREQUISITES>> marker (typically
     # under "Before you start") to a grouped per-leaf prerequisites
     # callout. Empty prereqs ⇒ marker line dropped.
     body, _prereqs_rendered = _apply_prerequisites_blocks(body, leaf_id)
+
+    # Templates Pass 4 (2026-08-08) — resolve <<CROSS_REFERENCES>> markers
+    # to outbound xfw-bridge callouts from the graph.
+    body, _xref_rendered = _apply_cross_references_blocks(body, leaf_id)
+
+    # Templates Pass 5 (2026-08-08) — markdown equivalents of the Ship 54'.d
+    # docx doc-control + revision-history blocks. Emitted as compact
+    # markdown tables so the .md download matches the .docx metadata.
+    body, _doc_rendered = _apply_doc_control_blocks(body, leaf_id, template_version)
+    body, _rev_rendered = _apply_revision_history_blocks(body, template_version)
+
+    # Iteration 2026-08-09 — final pass converts raw <<MUST/SHOULD item:X>>
+    # marker lines into tenant-visible "◆ Required element — X" bold labels
+    # while preserving the raw marker inside an HTML comment (invisible in
+    # rendered md, still matched by intake's marker regex on re-upload).
+    body = _humanize_marker_lines(body)
 
     # PREFILL — for each MUST surviving the N/A strip, look up the
     # tenant's prior approved+active evidence and compose it into the

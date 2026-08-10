@@ -13,6 +13,8 @@ table_shape: true
 
 # PIA Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — every triggered activity has a completed PIA, PIAs remain current, SA-consultation obligations honoured (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.7.2.5:program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.2.5:rev_currency_audit -->
 <!-- column: item:A.7.2.5:rev_sa_consultation_audit -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your Privacy Impact Assessments (PIAs), making sure each required activity is reviewed and up to date, and that any necessary consultations have been completed.
+
+## When to use it
+
+Use this template whenever your activities meet the criteria for a PIA, and review it about once a year to ensure all information is current and obligations are met.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes completing the required sections from scratch, with additional time needed if you have multiple activities to register.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.2.5:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + risk owner)
+
+<<GUIDANCE>>
 
 ### Rev Coverage Check
 
@@ -58,12 +83,16 @@ _Why: §7.2.5 — every new/changed processing_
 
 > _Standard text:_ Coverage check — every triggered activity has a completed PIA on file
 
+<<GUIDANCE>>
+
 ### Rev Currency Audit
 
 <<MUST item:A.7.2.5:rev_currency_audit>>
 _Why: §7.2.5 — changes to existing processing_
 
 > _Standard text:_ Currency audit — PIAs older than currency threshold reviewed for material change
+
+<<GUIDANCE>>
 
 ### Rev Sa Consultation Audit
 
@@ -73,6 +102,8 @@ _Why: Art.36.1_
 > _Standard text:_ SA-consultation audit — high-residual-risk PIAs verified to have escalated where required
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

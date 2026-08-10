@@ -11,14 +11,35 @@ should_count: 1
 
 # Special Category Processing Authorisation Procedure
 
+<<DOC_CONTROL>>
+
 > Art.9 prohibits special-category processing UNLESS one of the Art.9.2 conditions applies. The procedure is the canonical artefact — how a proposed special-category activity is reviewed, what Art.9.2 condition is documented, who approves. Sibling leaves: processing register, applicable categories scope, program review
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document and manage the approval process for handling sensitive personal data, ensuring you meet GDPR requirements when processing special categories of information.
+
+## When to use it
+
+Use this procedure whenever you plan to process sensitive personal data that falls under special categories, and update it whenever your processing activities or legal justifications change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, as each required section takes around 10-15 minutes to fill in thoughtfully.
 
 ## 1. Intake process for new special-category processing proposals (no quiet onboarding)
 
 <<MUST item:Art.9:proc_proposal_intake>>
 _Why: Art.9.1 — prohibition default_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Art.9.1 — prohibition default_
 <<MUST item:Art.9:proc_condition_selection>>
 _Why: Art.9.2 — lifting the prohibition_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. For Art.9.2.a explicit-consent route — additional capture requirements beyond Art.7 baseline (e.g. specific to each category)
 
 <<MUST item:Art.9:proc_explicit_consent>>
 _Why: Art.9.2.a_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,6 +66,8 @@ _Why: Art.9.2.a_
 <<MUST item:Art.9:proc_safeguards>>
 _Why: Art.9.3 — safeguards_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Approval authority for special-category processing (DPO + executive sponsor + applicable function head)
@@ -48,12 +75,16 @@ _Why: Art.9.3 — safeguards_
 <<MUST item:Art.9:proc_approval_authority>>
 _Why: Risk-proportionate authority_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Named owner of the procedure (DPO)
 
 <<MUST item:Art.9:proc_owner>>
 _Why: Accountability_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -68,4 +99,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.9:proc_dpia_link>>
 _Why: Art.35.3.b_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

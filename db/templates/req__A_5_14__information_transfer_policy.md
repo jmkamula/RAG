@@ -11,14 +11,35 @@ should_count: 3
 
 # Information Transfer Policy
 
+<<DOC_CONTROL>>
+
 > A.5.14 requires rules, procedures or agreements covering all transfer facilities within the organisation and to/from external parties. The policy documents electronic/physical/verbal transfer rules, authorisation thresholds, classification-aware protections, jurisdictional considerations and approved-channel lists. Approval, communication and periodic review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you create a clear policy for managing how information is transferred within your organization and with outside parties, covering electronic, physical, and verbal exchanges. It ensures you address authorizations, protections, and approved channels.
+
+## When to use it
+
+Use this template whenever you need to set or update rules for transferring information in your environment. Review and refresh the policy as needed to keep it current and effective.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 70 to 105 minutes drafting this policy from scratch, as each required section will take roughly 10 to 15 minutes to complete.
 
 ## 1. Rules for electronic transfers (email, file transfer, cloud sharing, APIs) with encryption requirements per classification level
 
 <<MUST item:A.5.14:electronic_transfer>>
 _Why: 27002:5.14 — transfer facilities_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:5.14 — transfer facilities_
 <<MUST item:A.5.14:physical_media>>
 _Why: 27002:5.14 — all transfer facility types_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Rules for verbal and visual transfers (calls, screen-shares, in-person discussions in public spaces, conference talks where sensitive info may appear)
 
 <<MUST item:A.5.14:verbal_visual>>
 _Why: 27002:5.14 — all transfer facility types_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: 27002:5.14 — all transfer facility types_
 <<MUST item:A.5.14:internal_vs_external>>
 _Why: 27002:5.14 — within the organisation and between_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Authorisation requirements for transfers above defined classification levels (who approves, for which level, for which counterparty)
 
 <<MUST item:A.5.14:authorisation>>
 _Why: 27002:5.14 — rules_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -55,12 +84,16 @@ _Why: 27002:5.14 — rules_
 <<MUST item:A.5.14:legal_jurisdiction>>
 _Why: 27002:5.14 + GDPR Chap V_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Alignment with the A.5.12 classification scheme stated explicitly (transfer protections per level — cascade from parent scheme)
 
 <<MUST item:A.5.14:scheme_alignment>>
 _Why: 27002:5.14 + cross-link to [[A.5.12]]_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -75,12 +108,16 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.5.14:transfer_agreements>>
 _Why: Efficiency + cross-link to [[A.5.20]]_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Approved channel list (e.g. encrypted email, sanctioned file-sharing platforms, MFT solutions) per classification level
 
 <<SHOULD item:A.5.14:approved_channels>>
 _Why: User clarity_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -89,4 +126,10 @@ _Why: User clarity_
 <<SHOULD item:A.5.14:emergency_path>>
 _Why: Real-world coverage_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

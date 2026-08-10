@@ -11,6 +11,8 @@ should_count: 3
 
 # Information Security Incident Management Procedure
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
 The **runbook** for handling security incidents — from detection
@@ -21,31 +23,17 @@ breach to become a crisis; a good one keeps it an incident.
 
 ## When to use it
 
-You're producing the procedure required by **ISO/IEC 27001:2022
-A.5.24**. Sits above the operational A.5.25-28 incident family
+You're producing the procedure required by **ISO/IEC 27001:2022 A.5.24**. Sits above the operational A.5.25-28 incident family
 (triage, response, lessons-learned, evidence). Pairs with the GDPR
 Art.33 breach notification process if you handle PII.
 
-## Before you start
+## Prerequisites
 
-- [ ] **A.5.25 Triage Procedure** + **A.5.27 Lessons-Learned
-      Procedure** in place
-- [ ] **A.5.28 Evidence Handling Procedure** in place (chain-of-
-      custody is mandatory from initiation)
-- [ ] **A.5.7 Threat Intel** sources connected — feeds detection
-- [ ] **A.5.5 Authority Contacts** + **A.5.6 SIG Contacts**
-      registers up to date — you need to know who to call
-- [ ] **5.3 RACI** + **A.5.2 Roles** — IR roles named per role
+<<PREREQUISITES>>
 
 ## Cross-references
 
-- **A.5.25 Information Security Event Triage** — operational triage
-- **A.5.26 Incident Response** — operational response
-- **A.5.27 Lessons Learned**
-- **A.5.28 Evidence Handling** — chain-of-custody
-- **A.5.29 ICT during Disruption** + **A.5.30 ICT Readiness** — BCP
-- **GDPR Art.33** — personal-data breach notification < 72h
-- **GDPR Art.34** — data-subject notification when high-risk
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
@@ -53,10 +41,6 @@ Art.33 breach notification process if you handle PII.
 exercise cost (annual tabletop minimum, often quarterly).
 
 ---
-
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
 
 ## 1. Define roles + responsibilities
 
@@ -81,6 +65,8 @@ impact); (7) Subject-matter responders pulled in per scenario
 playbook. Roles documented in IR Roster (live document); incumbents
 rotate — role definitions stable."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 2. Define detection + reporting process
@@ -103,6 +89,8 @@ trigger proactive scans → IR notified of any hits. (e) Customer
 reports → support escalation path to SecOps within 30 min.
 (f) Regulator / law enforcement contacts → routed via legal +
 exec sponsor."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -130,6 +118,8 @@ escalation, regulator-notification triggers.
 Assessment criteria run continuously — events can promote/demote
 between tiers as the investigation evolves.
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 4. Define response + escalation
@@ -153,6 +143,8 @@ on-call IR Manager has Sev 1-2 authority; can spend up to
 £XX,XXX for containment; CEO notified for any over-budget
 decision."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Determine whether a personal-data breach occurred
@@ -174,6 +166,8 @@ Art.4(12) — confidentiality + integrity + availability of personal
 data. If breach: the 72h clock starts at the moment of awareness
 (not the moment of occurrence); decision recorded with timestamps."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Define notification process for personal-data breaches
@@ -188,8 +182,7 @@ when high-risk)._
 State both Art.33 + Art.34 obligations + the content required
 (Art.33(3)).
 
-**✓ Good**: "Personal-data breach notifications: (a) **Art.33 SA
-notification** — within 72h of awareness. Format includes per
+**✓ Good**: "Personal-data breach notifications: (a) **Art.33 SA notification** — within 72h of awareness. Format includes per
 Art.33(3): nature of breach, categories + approx. numbers of data
 subjects, contact details (DPO), likely consequences, measures
 taken/proposed. Approver: DPO + Legal. Submitted via ICO online
@@ -200,6 +193,8 @@ result in high risk to rights/freedoms. Plain-language description,
 DPO contact, mitigations, recommended actions. Approver: DPO +
 Legal + Comms Lead. Channel: direct (email to affected) primary;
 public notice fallback if direct impractical."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -224,6 +219,8 @@ technical capability available + judged proportionate to severity.
 required (Sev 1 ransomware, suspected nation-state). (e) Evidence
 retention: 6 years for Sev 1-2 closure records."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 8. State exercise + test cadence
@@ -246,6 +243,8 @@ least one per year. Exercises produce A.5.24 framework_exercise_
 record outputs; gaps feed A.5.27 lessons-learned and 10.1
 improvement actions."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 9. Define external communication paths
@@ -259,9 +258,7 @@ ad-hoc panic decisions._
 
 State per-recipient: who authorises, who sends, what format.
 
-**✓ Good**: "External communication paths: (a) **Regulator (ICO /
-EU SA)**: DPO authors + Legal approves; submitted via SA portal;
-approver: DPO + Legal. (b) **Affected customers**: Account
+**✓ Good**: "External communication paths: (a) **Regulator (ICO / EU SA)**: DPO authors + Legal approves; submitted via SA portal; approver: DPO + Legal. (b) **Affected customers**: Account
 Manager + Comms Lead author; Legal review; CEO approval for
 Sev 1. (c) **Public statement**: Comms Lead authors; Legal +
 CEO + Board approval for Sev 1; channel: customer trust centre +
@@ -270,6 +267,8 @@ approves; channel: written referral to NCA / NCSC / sector CERT.
 (e) **Sector / peer disclosure (CISO-share)**: ISMS Manager
 authors after immediate response phase; CISO approves; lessons
 shared without specifics 3-6 months post-resolution."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -288,6 +287,8 @@ output._
 
 State the trigger + the artefact location.
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### Authority + sector contact register
@@ -300,6 +301,8 @@ _Cross-link to A.5.5 + A.5.6 — your contacts must be current
 BEFORE you need them._
 
 State that contacts are maintained + reviewed quarterly.
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -314,4 +317,10 @@ _Cross-link to A.5.19 incident_joint_mgmt — bi-directional path._
 State that supplier-side incidents flow through the same procedure
 with vendor as the source.
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

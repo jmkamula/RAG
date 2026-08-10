@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Clear Desk / Clear Screen Program Review
 
+<<DOC_CONTROL>>
+
 > Annual review of policy currency, audit findings trend, enforcement consistency. Freshness=365
 
 <!-- TABLE-COLUMNS leaf:req:A.7.7:cd_cs_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.7:rev_policy_drift -->
 <!-- column: item:A.7.7:rev_register_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your annual reviews for clear desk and clear screen policies, making it easier to demonstrate compliance and spot trends in enforcement or audit findings.
+
+## When to use it
+
+Use this template whenever you need to review your clear desk and clear screen program, which should be done about once a year as part of your ongoing compliance efforts.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, as each required section takes some time to fill out and summarize your findings.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: 27002:7.7 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.7:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Facilities + InfoSec + HR partner)
+
+<<GUIDANCE>>
 
 ### Rev Audit Trend
 
@@ -58,12 +83,16 @@ _Why: Continual improvement_
 
 > _Standard text:_ Audit-finding trend (improving / worsening — drives policy/awareness adjustments)
 
+<<GUIDANCE>>
+
 ### Rev Policy Drift
 
 <<MUST item:A.7.7:rev_policy_drift>>
 _Why: Cross-control coherence_
 
 > _Standard text:_ Policy currency check (referenced policies — A.5.12 classification, A.6.7 remote-work — still aligned)
+
+<<GUIDANCE>>
 
 ### Rev Register Update
 
@@ -73,6 +102,8 @@ _Why: Closes the loop_
 > _Standard text:_ Changes propagated to the policy
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

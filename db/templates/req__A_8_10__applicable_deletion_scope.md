@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Deletion Scope
 
+<<DOC_CONTROL>>
+
 > Upstream — what information classes have what retention triggers (drawn from A.5.33 records retention schedule), which media classes need which deletion method
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which types of information and storage media in your organization require specific retention periods and deletion methods, making it easier to comply with ISO 27001 requirements.
+
+## When to use it
+
+Use this document whenever you need to outline or update the scope of data deletion and retention practices in your environment. Refresh it as needed to reflect changes in your data handling or retention policies.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this template from scratch, as each required section takes roughly 10-15 minutes to fill in thoughtfully.
 
 ## 1. Information classes enumerated with retention trigger source per class (cross-link to A.5.33)
 
 <<MUST item:A.8.10:scope_classes>>
 _Why: Cross-control coherence_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Cross-control coherence_
 <<MUST item:A.8.10:scope_media_methods>>
 _Why: 27002:8.10 — appropriate_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Vendor-managed data delegated to A.5.19/A.5.20 supplier obligations (contractual deletion-on-termination)
 
 <<MUST item:A.8.10:scope_vendor_managed>>
 _Why: Boundary clarity_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.10:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

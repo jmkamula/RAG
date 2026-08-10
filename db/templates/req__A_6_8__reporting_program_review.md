@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Reporting Program Review
 
+<<DOC_CONTROL>>
+
 > Periodic verification that reports are coming in (under-reporting is the major risk), that triage handoff is working (no reports lost between A.6.8 intake and A.5.25 triage), that reporters are getting acknowledgment, and that the audience-channel surfacing is current. Annual cadence (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.6.8:reporting_program_review -->
@@ -24,6 +26,25 @@ table_shape: true
 <!-- column: item:A.6.8:rev_acknowledgment_rate -->
 <!-- column: item:A.6.8:rev_register_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your periodic reporting process, making sure reports are received, properly handed off, acknowledged, and surfaced to the right audience. It supports ongoing compliance with ISO 27001 requirements.
+
+## When to use it
+
+Use this template whenever you need to review your reporting program, typically once a year, to confirm that all steps in your process are working as intended and nothing is falling through the cracks.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours completing this from scratch, as each required section takes around 10-15 minutes to fill out, depending on the amount of detail you have available.
 
 ## Register
 
@@ -46,12 +67,16 @@ _Why: 27002:6.8 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.6.8:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (InfoSec lead + HR partner; Legal for whistleblower-territory cases)
+
+<<GUIDANCE>>
 
 ### Rev Volume Trend
 
@@ -60,12 +85,16 @@ _Why: Reporting culture health_
 
 > _Standard text:_ Volume trend analysis (report rate per segment — sudden drops may indicate under-reporting; sudden spikes may indicate a campaign or a known issue surfacing)
 
+<<GUIDANCE>>
+
 ### Rev Channel Mix
 
 <<MUST item:A.6.8:rev_channel_mix>>
 _Why: 27002:6.8 — channels effectiveness_
 
 > _Standard text:_ Channel-mix analysis (which channels are being used; under-used channels may need awareness promotion or retirement)
+
+<<GUIDANCE>>
 
 ### Rev Triage Handoff
 
@@ -74,12 +103,16 @@ _Why: Cross-control coherence_
 
 > _Standard text:_ Triage handoff check — every report reached A.5.25 triage; no reports lost in the handoff; cycle time from report to triage measured
 
+<<GUIDANCE>>
+
 ### Rev Acknowledgment Rate
 
 <<MUST item:A.6.8:rev_acknowledgment_rate>>
 _Why: Reporting culture_
 
 > _Standard text:_ Acknowledgment rate to reporters (where reporter known) — drives reporter satisfaction and ongoing willingness to report
+
+<<GUIDANCE>>
 
 ### Rev Register Update
 
@@ -89,6 +122,8 @@ _Why: Closes the loop_
 > _Standard text:_ Changes propagated to the procedure / scope with reference to this review
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -101,9 +136,17 @@ _Why: Change-driven review_
 
 > _Standard text:_ Ad-hoc review triggers (major incident exposing under-reporting, regulator enforcement on whistleblower regime, channel outage)
 
+<<GUIDANCE>>
+
 ### Rev Next Date
 
 <<SHOULD item:A.6.8:rev_next_date>>
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

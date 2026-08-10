@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Disclosure Contexts Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — every context where PII is disclosed to a third party (normal course + investigation + audit + subpoena / court order).
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define and document every situation where personal information is shared with third parties, including routine operations, investigations, audits, or legal requests.
+
+## When to use it
+
+Use this document whenever your organization’s activities match specific criteria that require you to disclose personal data externally, and update it whenever those circumstances change or new disclosure scenarios arise.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you’ll need to provide details for three required elements and one recommended element.
 
 ## 1. Normal-course disclosures enumerated (recurring integrations)
 
 <<MUST item:A.7.5.4:scope_normal_disclosures>>
 _Why: Coverage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Coverage_
 <<MUST item:A.7.5.4:scope_investigation>>
 _Why: §7.5.4 — lawful investigations_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. External audit disclosures (regulatory + customer audits)
 
 <<MUST item:A.7.5.4:scope_audit>>
 _Why: §7.5.4 — external audits_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.5.4:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

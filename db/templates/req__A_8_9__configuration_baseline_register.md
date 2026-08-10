@@ -12,6 +12,8 @@ table_shape: true
 
 # Configuration Baseline Register
 
+<<DOC_CONTROL>>
+
 > Catalogue of baselines — per asset class which baseline version is current, last review date, drift-finding count
 
 <!-- TABLE-COLUMNS leaf:req:A.8.9:configuration_baseline_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.8.9:reg_last_reviewed -->
 <!-- column: item:A.8.9:reg_drift_count -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of which configuration baselines are in place for each asset class, including their current versions, review dates, and any issues found. It provides a clear overview for managing and reviewing your baseline configurations.
+
+## When to use it
+
+Use this register at all times to maintain an up-to-date record of your configuration baselines. Update it whenever there are changes to baselines or when you review your configurations.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element for each asset class you include. Completing the register from scratch for a typical environment may take 1-2 hours, depending on the number of asset classes.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: Identification_
 
 > _Standard text:_ Per-baseline asset class (Linux server / Windows endpoint / K8s cluster / cloud account / network device)
 
+<<GUIDANCE>>
+
 ### Reg Version
 
 <<MUST item:A.8.9:reg_version>>
 _Why: Drift detection_
 
 > _Standard text:_ Per-baseline current version (semver or date-stamped)
+
+<<GUIDANCE>>
 
 ### Reg Owner
 
@@ -57,12 +82,16 @@ _Why: Accountability_
 
 > _Standard text:_ Per-baseline named owner (technology lead with InfoSec partner)
 
+<<GUIDANCE>>
+
 ### Reg Last Reviewed
 
 <<MUST item:A.8.9:reg_last_reviewed>>
 _Why: Drift detection_
 
 > _Standard text:_ Per-baseline last review date
+
+<<GUIDANCE>>
 
 ### Reg Drift Count
 
@@ -72,6 +101,8 @@ _Why: Continuous evidence_
 > _Standard text:_ Per-baseline outstanding drift finding count + open SLA breaches
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -83,3 +114,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Defensibility_
 
 > _Standard text:_ External reference (CIS / vendor / NIST) per baseline where applicable
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # Processor Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that every active processor has a current DPA, sub-processor authorisations are tracked, Art.32 assurance sources are still valid (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.28:processor_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.28:rev_subprocessor_audit -->
 <!-- column: item:Art.28:rev_security_currency -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of your data processors, making sure each has a current agreement and that all required GDPR checks are up to date.
+
+## When to use it
+
+Use this template once a year, or whenever you onboard a new processor, to confirm your processor agreements and authorisations are current and compliant with GDPR Article 28.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10 to 15 minutes per required element, plus extra time for each processor you need to review, so a typical review may take 1-2 hours depending on the number of processors.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.28:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + procurement / vendor management lead)
+
+<<GUIDANCE>>
 
 ### Rev Dpa Currency
 
@@ -58,12 +83,16 @@ _Why: Art.28.3 — written contract_
 
 > _Standard text:_ DPA currency check — every active processor has a current DPA (no expired or pre-onboarding processors active)
 
+<<GUIDANCE>>
+
 ### Rev Subprocessor Audit
 
 <<MUST item:Art.28:rev_subprocessor_audit>>
 _Why: Art.28.2_
 
 > _Standard text:_ Sub-processor audit — every active sub-processor authorised; unauthorised additions flagged
+
+<<GUIDANCE>>
 
 ### Rev Security Currency
 
@@ -73,6 +102,8 @@ _Why: Art.28.3c_
 > _Standard text:_ Security assurance currency — Art.32-equivalent evidence (cert, audit) refreshed within validity period
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

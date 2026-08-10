@@ -13,6 +13,8 @@ table_shape: true
 
 # Processing Operation Inventory
 
+<<DOC_CONTROL>>
+
 > Per-operation row — the ways PII is used inside the org (queries + reports + analytics + ML training + exports). Each row cites the necessity rationale + access controls. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:A.7.4.2:processing_operation_inventory -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.4.2:reg_pii_scope -->
 <!-- column: item:A.7.4.2:reg_access_group -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of how personal data is used across your organization, including details about access controls and why each use is necessary. It’s useful for understanding and demonstrating your privacy practices.
+
+## When to use it
+
+Use this template when your organization’s activities match certain privacy-related triggers, and plan to update it about once a year to keep the information current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10 to 15 minutes per required element for each processing activity you document, so the total time will depend on how many different ways you use personal data.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Referenceability_
 
 > _Standard text:_ Unique operation identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Operation Type
 
 <<MUST item:A.7.4.2:reg_operation_type>>
 _Why: Coverage_
 
 > _Standard text:_ Operation type per row (query / report / analytics / ML training / export / integration)
+
+<<GUIDANCE>>
 
 ### Reg Purpose Link
 
@@ -58,12 +83,16 @@ _Why: §7.4.2 — for identified purposes_
 
 > _Standard text:_ Purpose link per row (A.7.2.1)
 
+<<GUIDANCE>>
+
 ### Reg Pii Scope
 
 <<MUST item:A.7.4.2:reg_pii_scope>>
 _Why: Coverage_
 
 > _Standard text:_ PII scope per row (which fields / categories)
+
+<<GUIDANCE>>
 
 ### Reg Access Group
 
@@ -73,6 +102,8 @@ _Why: §7.4.2 — who can access_
 > _Standard text:_ Access group per row (which internal roles can perform this operation)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Currency_
 
 > _Standard text:_ Last necessity-review date per row
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

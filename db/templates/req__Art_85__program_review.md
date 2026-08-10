@@ -13,6 +13,8 @@ table_shape: true
 
 # Art.85 Derogation Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that the national-law register is current per Member State, no in-scope activity is operating without a documented derogation basis, and any GDPR-Chapter changes have been reflected (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.85:program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.85:rev_scope_coverage -->
 <!-- column: item:Art.85:rev_subject_rights_audit -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your national-law register, ensuring all activities that need a derogation under GDPR Article 85 are properly documented and up to date.
+
+## When to use it
+
+Use this template if your organization’s activities might require a derogation under GDPR Article 85, especially when your profile matches certain criteria. Plan to review and update it about once a year.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours completing this from scratch, depending on the number of activities and updates needed for each required section.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic accountability_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.85:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + legal counsel + editorial/academic lead)
+
+<<GUIDANCE>>
 
 ### Rev Law Currency
 
@@ -58,12 +83,16 @@ _Why: Art.85.2 — currency_
 
 > _Standard text:_ Member State law currency check — every cited national-law provision still in force; new MS implementations swept in
 
+<<GUIDANCE>>
+
 ### Rev Scope Coverage
 
 <<MUST item:Art.85:rev_scope_coverage>>
 _Why: Defensibility_
 
 > _Standard text:_ Scope coverage — every in-scope activity has a derogation basis (or explicit decision to NOT invoke Art.85 for it)
+
+<<GUIDANCE>>
 
 ### Rev Subject Rights Audit
 
@@ -73,6 +102,8 @@ _Why: Recital 153_
 > _Standard text:_ Subject-rights audit — confirm derogations are not over-applied (residual rights still honoured where not legitimately derogated)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

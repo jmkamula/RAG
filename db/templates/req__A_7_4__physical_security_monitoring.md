@@ -11,14 +11,35 @@ should_count: 1
 
 # Physical Security Monitoring Procedure
 
+<<DOC_CONTROL>>
+
 > A.7.4 requires premises to be continuously monitored for unauthorized physical access. The procedure documents monitoring scope, detection systems, continuous-monitoring approach, alert response, and retention. The monitoring event register, applicable-monitoring scope and periodic review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you create a clear procedure for monitoring your premises to prevent unauthorized physical access, including details on detection systems, monitoring methods, alert handling, and record-keeping.
+
+## When to use it
+
+Use this whenever your organization needs to document how physical security is continuously monitored, and update it whenever there are changes to your monitoring approach or systems.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 2 hours completing this from scratch, depending on the complexity of your monitoring environment and the amount of detail you need to include.
 
 ## 1. Monitoring scope stated (premises perimeter, secure areas, equipment rooms, entry/exit points)
 
 <<MUST item:A.7.4:monitoring_scope>>
 _Why: 27002:7.4 — premises monitored_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:7.4 — premises monitored_
 <<MUST item:A.7.4:detection_systems>>
 _Why: 27002:7.4 — unauthorized access_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. 24/7 / continuous monitoring approach (manned SOC, automated with SOC review, hybrid)
 
 <<MUST item:A.7.4:continuous_24x7>>
 _Why: 27002:7.4 — continuously monitored_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,6 +66,8 @@ _Why: 27002:7.4 — continuously monitored_
 <<MUST item:A.7.4:alert_response>>
 _Why: 27002:7.4 — monitored_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Retention of footage and access logs (period per regulatory requirement, secure storage)
@@ -48,12 +75,16 @@ _Why: 27002:7.4 — monitored_
 <<MUST item:A.7.4:retention>>
 _Why: 27002:7.4 — retention_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Integration with SIEM / A.5.26 incident response (physical events route to the same triage)
 
 <<MUST item:A.7.4:siem_integration>>
 _Why: Cross-control coherence_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -68,4 +99,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.4:privacy_balance>>
 _Why: Legal balance_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

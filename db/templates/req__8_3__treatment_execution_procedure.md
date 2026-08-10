@@ -11,14 +11,35 @@ should_count: 1
 
 # Treatment Execution Procedure
 
+<<DOC_CONTROL>>
+
 > The procedure governing how treatments move from 6.1.3 plan items to implemented controls — assignment rules, status reporting cadence, escalation when items slip, residual-risk re-acceptance when treatment falls short of plan
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document how your organization moves from planned treatments to actual controls, including who is responsible, how progress is tracked, and what to do if things fall behind schedule.
+
+## When to use it
+
+Use this procedure whenever you need to show how treatment plans are executed and monitored in your environment. Review and update it as needed to keep it accurate and effective.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this template from scratch, as each required section will take around 10-15 minutes to write thoughtfully.
 
 ## 1. Assignment rules (how each plan item lands with an operational owner)
 
 <<MUST item:8.3:proc_assignment>>
 _Why: Clause 8.3 — implement_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,6 +48,8 @@ _Why: Clause 8.3 — implement_
 <<MUST item:8.3:proc_status_cadence>>
 _Why: Operational discipline_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Escalation rule when items slip past target date
@@ -34,12 +57,16 @@ _Why: Operational discipline_
 <<MUST item:8.3:proc_escalation>>
 _Why: Effectiveness_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 4. Residual-risk re-acceptance pathway when actual residual diverges from planned residual (back to risk owner per 6.1.3 f))
 
 <<MUST item:8.3:proc_residual_revisit>>
 _Why: Clause 8.3 — results_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -54,4 +81,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:8.3:proc_owner>>
 _Why: Accountability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

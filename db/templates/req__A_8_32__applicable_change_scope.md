@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Change Scope
 
+<<DOC_CONTROL>>
+
 > Upstream — what counts as a change requiring CM, what gets exempt (read-only operations / break-glass usage already covered elsewhere)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which changes in your environment require formal change management and which are exempt, making it easier to stay compliant and avoid unnecessary documentation.
+
+## When to use it
+
+Use this document whenever you need to clarify the types of changes that always require oversight in your environment. Update it as needed whenever your processes or systems change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to address three required elements and consider one recommended detail.
 
 ## 1. Change classes enumerated with CM path per class (standard / normal / emergency / pre-approved)
 
 <<MUST item:A.8.32:scope_change_classes>>
 _Why: 27002:8.32 — appropriate_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.32 — appropriate_
 <<MUST item:A.8.32:scope_exemptions>>
 _Why: Boundary clarity_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. In-scope systems (cross-link to A.5.9 asset register)
 
 <<MUST item:A.8.32:scope_systems>>
 _Why: Cross-control coherence_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.32:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

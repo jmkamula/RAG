@@ -13,6 +13,8 @@ table_shape: true
 
 # Customer Purpose Adherence Register
 
+<<DOC_CONTROL>>
+
 > Per-customer row — the stated purposes + technical-binding controls + any side-processing carve-outs. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:B.8.2.2:purpose_adherence_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:B.8.2.2:reg_permitted_secondary -->
 <!-- column: item:B.8.2.2:reg_last_verified -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of each customer's stated purposes for data use, the technical controls in place, and any exceptions for additional processing. It's designed to support privacy compliance and transparency.
+
+## When to use it
+
+Use this register when your organization needs to document customer-specific data purposes and controls, especially if your privacy profile requires it. Plan to review and update it about once a year to keep information current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element for each customer row. Completing the register from scratch for one customer typically takes around an hour, with more time needed as you add customers.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Traceability_
 
 > _Standard text:_ Customer identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Stated Purposes
 
 <<MUST item:B.8.2.2:reg_stated_purposes>>
 _Why: §8.2.2 — documented instructions_
 
 > _Standard text:_ Stated customer purposes per row (from B.8.2.1 agreement)
+
+<<GUIDANCE>>
 
 ### Reg Binding Controls
 
@@ -58,12 +83,16 @@ _Why: §8.2.2 — only processed for purposes_
 
 > _Standard text:_ Binding controls per row (tenant isolation config / data-tag enforcement / access scoping)
 
+<<GUIDANCE>>
+
 ### Reg Permitted Secondary
 
 <<MUST item:B.8.2.2:reg_permitted_secondary>>
 _Why: §8.2.2 — express instruction_
 
 > _Standard text:_ Permitted secondary uses per row (where customer has authorised anonymised aggregate use)
+
+<<GUIDANCE>>
 
 ### Reg Last Verified
 
@@ -73,6 +102,8 @@ _Why: Currency_
 > _Standard text:_ Last verification date per row
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: §8.2.2 — allow verification_
 
 > _Standard text:_ Customer audit history — recent customer audits + findings
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

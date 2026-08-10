@@ -11,14 +11,35 @@ should_count: 2
 
 # Operating Procedures Maintenance Procedure
 
+<<DOC_CONTROL>>
+
 > A.5.37 expects procedures to be documented AND kept available — both require maintenance. The procedure documents who keeps the register and procedures current, what triggers an update (system change, control change, finding-driven update, exercise outcome), and the lifecycle from draft → review → publish → retire
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document and maintain your operating procedures, ensuring they are always up to date and clearly outline who is responsible for keeping them current.
+
+## When to use it
+
+Use this whenever your procedures need to be created or updated, such as after a system or control change, an audit finding, or a test exercise. Review and refresh the document as needed to stay compliant.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes to complete this from scratch, depending on how much detail you need for each required section.
 
 ## 1. Named maintainer of the register (typically operations lead with InfoSec partner) accountable for catalogue currency
 
 <<MUST item:A.5.37:proc_maintainer>>
 _Why: Accountability_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Accountability_
 <<MUST item:A.5.37:proc_update_triggers>>
 _Why: 27002:5.37 — documented + current_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Review path before publication (peer review by other operators, InfoSec sign-off for procedures touching security controls)
 
 <<MUST item:A.5.37:proc_review_path>>
 _Why: Operational sufficiency_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: Operational sufficiency_
 <<MUST item:A.5.37:proc_retire_path>>
 _Why: Auditability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Template definition stated (purpose / scope / prerequisites / steps / verification / rollback / contacts) — drives consistent shape
 
 <<MUST item:A.5.37:proc_template>>
 _Why: Reviewability_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,6 +90,8 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.5.37:proc_runbook_drill>>
 _Why: Effectiveness check_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Change-log requirement for procedure edits (so the audit trail is preserved across versions)
@@ -68,4 +99,10 @@ _Why: Effectiveness check_
 <<SHOULD item:A.5.37:proc_change_log>>
 _Why: Auditability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # Foreign Authority Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — procedure tested via tabletop where no real requests occurred, agreements catalogue current, any actual disclosures defensible (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.48:foreign_authority_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.48:rev_tabletop -->
 <!-- column: item:Art.48:rev_agreements_currency -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, up-to-date record of how your organization handles requests from foreign authorities, ensuring your procedures and agreements are current and defensible under GDPR requirements.
+
+## When to use it
+
+Use this template whenever your organization operates in an environment where foreign authority requests could occur, and update it about once a year to maintain compliance.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours completing this template from scratch, as each required section takes roughly 10-15 minutes to fill in.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.48:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + legal counsel + executive sponsor)
+
+<<GUIDANCE>>
 
 ### Rev Register Currency
 
@@ -58,12 +83,16 @@ _Why: Cross-leaf_
 
 > _Standard text:_ Register currency — every actual request handled per procedure
 
+<<GUIDANCE>>
+
 ### Rev Tabletop
 
 <<MUST item:Art.48:rev_tabletop>>
 _Why: Effectiveness_
 
 > _Standard text:_ Tabletop exercise — procedure tested at least annually against a hypothetical foreign authority request (mirrors A.5.24 IR exercises)
+
+<<GUIDANCE>>
 
 ### Rev Agreements Currency
 
@@ -73,6 +102,8 @@ _Why: Currency_
 > _Standard text:_ Agreements currency — international agreements catalogue refreshed
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

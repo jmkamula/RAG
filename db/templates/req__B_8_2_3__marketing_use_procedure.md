@@ -11,14 +11,35 @@ should_count: 1
 
 # Marketing / Advertising Use Prohibition Procedure
 
+<<DOC_CONTROL>>
+
 > §8.2.3 prohibits the processor from using customer PII for marketing/advertising without prior subject consent AND prohibits conditioning service on such consent. Governs how any marketing activity involving customer PII is gated, evidenced, and audited.
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document how your organization ensures customer personal information is never used for marketing or advertising without clear consent, and that services are never made conditional on such consent.
+
+## When to use it
+
+Use this procedure whenever your business activities might involve marketing to customers using their personal information, especially if you collect or process such data. Update the document whenever your marketing practices or consent processes change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes to complete this template from scratch, as you'll need to address each required element in detail.
 
 ## 1. Default prohibition — customer PII not usable for org's marketing/advertising by default
 
 <<MUST item:B.8.2.3:proc_default_prohibition>>
 _Why: §8.2.3 — shall not use_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: §8.2.3 — shall not use_
 <<MUST item:B.8.2.3:proc_consent_evidence_requirement>>
 _Why: §8.2.3 — prior consent obtained_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. No-conditionality rule — service delivery not conditioned on subject accepting marketing
 
 <<MUST item:B.8.2.3:proc_no_conditionality>>
 _Why: §8.2.3 — shall not make such consent a condition_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: §8.2.3 — shall not make such consent a condition_
 <<MUST item:B.8.2.3:proc_customer_marketing_permit>>
 _Why: §8.2.3 implementation — documented_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Alignment with Art.7.4 — freely-given consent test factored into any permit granted
 
 <<MUST item:B.8.2.3:proc_freely_given_alignment>>
 _Why: GDPR Art.7.4_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:B.8.2.3:proc_owner>>
 _Why: Accountability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

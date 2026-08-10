@@ -13,6 +13,8 @@ table_shape: true
 
 # NC/CA Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that NCs are flowing through the procedure, root cause is being done properly (not blamed-on-individual), effectiveness checks actually prevent recurrence (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:10.2:nc_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:10.2:rev_recurrence_check -->
 <!-- column: item:10.2:rev_isms_change_pattern -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document your annual review of how nonconformities are managed, ensuring root causes are properly analyzed and that corrective actions are effective in preventing repeat issues.
+
+## When to use it
+
+Use this template once a year to record your review of nonconformity handling, as required for ISO 27001 compliance. It applies to all environments and should be refreshed every 12 months.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours completing this from scratch, depending on the number of nonconformities reviewed and the detail required for each section.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: Clause 10.2 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:10.2:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (ISMS Manager + lead auditor)
+
+<<GUIDANCE>>
 
 ### Rev Closure Progress
 
@@ -59,6 +84,8 @@ _Why: Effectiveness_
 
 > _Standard text:_ Closure-progress check — open NCs aging beyond expected closure time escalated
 
+<<GUIDANCE>>
+
 ### Rev Root Cause Quality
 
 <<MUST item:10.2:rev_root_cause_quality>>
@@ -66,12 +93,16 @@ _Why: Clause 10.2 b)_
 
 > _Standard text:_ Root-cause-quality sample — sampled NCs reviewed for blame-free systemic analysis (not 'human error' as the only cause)
 
+<<GUIDANCE>>
+
 ### Rev Recurrence Check
 
 <<MUST item:10.2:rev_recurrence_check>>
 _Why: Clause 10.2 d)_
 
 > _Standard text:_ Recurrence check — closed NCs sampled for whether the same nature recurred (effectiveness failure signal)
+
+<<GUIDANCE>>
 
 ### Rev Isms Change Pattern
 
@@ -81,6 +112,8 @@ _Why: Clause 10.2 e)_
 > _Standard text:_ ISMS-change pattern check — high-volume NC areas drove 6.3 ISMS changes where systemic causes warranted it
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # Art.36 Prior Consultation Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — every residual-high-risk DPIA escalated to SA, advice acted on, waiting periods respected (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.36:consultation_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.36:rev_waiting_compliance -->
 <!-- column: item:Art.36:rev_advice_handling -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of annual reviews for high-risk data protection impact assessments that have been escalated to the supervisory authority, including any advice received and actions taken.
+
+## When to use it
+
+Use this template once a year if you have any high-risk DPIAs that required prior consultation with the supervisory authority, especially when you need to show that you followed their advice and respected any waiting periods.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, depending on the number of required details and the complexity of each high-risk DPIA you need to document.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.36:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + legal)
+
+<<GUIDANCE>>
 
 ### Rev Escalation Audit
 
@@ -58,12 +83,16 @@ _Why: Cross-article_
 
 > _Standard text:_ Escalation audit — every Art.35 DPIA flagging residual high risk has a corresponding Art.36 consultation row
 
+<<GUIDANCE>>
+
 ### Rev Waiting Compliance
 
 <<MUST item:Art.36:rev_waiting_compliance>>
 _Why: Art.36.2_
 
 > _Standard text:_ Waiting-period compliance — no processing started before SA waiting period elapsed
+
+<<GUIDANCE>>
 
 ### Rev Advice Handling
 
@@ -73,6 +102,8 @@ _Why: Art.36.2_
 > _Standard text:_ Advice handling sample — SA written advice incorporated or formally rejected with rationale recorded
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

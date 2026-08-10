@@ -13,6 +13,8 @@ table_shape: true
 
 # Third-Party Notification Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — recipient inventory current, notifications issued reliably, acknowledgements tracked, impossibility invocations defensible (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.7.3.7:program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.3.7:rev_dispatch_audit -->
 <!-- column: item:A.7.3.7:rev_impossibility_audit -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of which third parties need to be notified about privacy matters, making sure your records are up to date and all notifications and responses are properly documented.
+
+## When to use it
+
+Use this template if your organization is required to review and confirm its third-party notification process, especially when your activities match certain privacy-related triggers. Plan to update it about once a year.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, depending on the number of third parties you need to document and the availability of your records.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.3.7:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + Vendor Management)
+
+<<GUIDANCE>>
 
 ### Rev Recipient Currency
 
@@ -58,12 +83,16 @@ _Why: §7.3.7 — determine and maintain_
 
 > _Standard text:_ Recipient inventory currency — reconciled against A.7.5.4 disclosure register
 
+<<GUIDANCE>>
+
 ### Rev Dispatch Audit
 
 <<MUST item:A.7.3.7:rev_dispatch_audit>>
 _Why: Coverage_
 
 > _Standard text:_ Dispatch audit — sampled subject events verified to have generated corresponding third-party notifications
+
+<<GUIDANCE>>
 
 ### Rev Impossibility Audit
 
@@ -73,6 +102,8 @@ _Why: Art.19_
 > _Standard text:_ Impossibility-invocation audit — sampled invocations reviewed for defensibility
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

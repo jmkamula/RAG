@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Rooms Scope
 
+<<DOC_CONTROL>>
+
 > The upstream that drives the register. Documents which rooms across all sites are in scope and what drives the classification of each
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly document which rooms across all your sites are included in your compliance scope and explains how each room is classified for security purposes.
+
+## When to use it
+
+Use this whenever you need to define or update the list of rooms that fall under your compliance program, especially when your environment changes or as your business grows.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to identify and describe each required element for your rooms.
 
 ## 1. Inventory of rooms across all sites in scope (from facilities inventory)
 
 <<MUST item:A.7.3:scope_rooms_inventory>>
 _Why: 27002:7.3 — facilities_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:7.3 — facilities_
 <<MUST item:A.7.3:scope_classification_drivers>>
 _Why: 27002:7.3 — designed_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Exclusions stated (common areas, lobbies, parking — not in 'rooms' scope but covered by A.7.1 perimeter)
 
 <<MUST item:A.7.3:scope_exclusions>>
 _Why: 27002:7.3 — applicability_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.3:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

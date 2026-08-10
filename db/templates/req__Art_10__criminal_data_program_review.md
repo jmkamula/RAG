@@ -13,6 +13,8 @@ table_shape: true
 
 # Criminal Data Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that every Art.10 activity still has a current Member State law basis, safeguards remain in force, retention limits are being honoured (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.10:criminal_data_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.10:rev_retention_audit -->
 <!-- column: item:Art.10:rev_access_audit -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document and review your use of criminal data, ensuring you have a lawful basis, proper safeguards, and up-to-date retention practices in line with GDPR Article 10.
+
+## When to use it
+
+Use this template if your organization processes criminal data and your activities match specific legal triggers. It should be completed about once a year to keep your records current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend around 1 to 1.5 hours filling this out from scratch, depending on the number of activities you need to review and record.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic accountability_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.10:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + legal counsel)
+
+<<GUIDANCE>>
 
 ### Rev Law Currency
 
@@ -58,12 +83,16 @@ _Why: Currency_
 
 > _Standard text:_ Member State law currency — every cited law still in force; any new MS authorisations swept in
 
+<<GUIDANCE>>
+
 ### Rev Retention Audit
 
 <<MUST item:Art.10:rev_retention_audit>>
 _Why: Art.10 — appropriate safeguards_
 
 > _Standard text:_ Retention audit — past-retention-limit records purged
+
+<<GUIDANCE>>
 
 ### Rev Access Audit
 
@@ -73,6 +102,8 @@ _Why: Art.10_
 > _Standard text:_ Access audit — restricted-access requirements being enforced (no broad access to criminal-data stores)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

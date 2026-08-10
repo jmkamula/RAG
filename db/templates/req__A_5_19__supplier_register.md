@@ -12,6 +12,8 @@ table_shape: true
 
 # Supplier Register
 
+<<DOC_CONTROL>>
+
 > A.5.19 requires the org to know who its suppliers are, what they provide, the nature of access they hold, and their risk classification. The register is the live source of truth — feeding the periodic review and offboarding leaves
 
 <!-- TABLE-COLUMNS leaf:req:A.5.19:supplier_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.5.19:reg_classification -->
 <!-- column: item:A.5.19:reg_owner -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep an up-to-date list of all your suppliers, what they do for you, what access they have, and how much risk they pose. It serves as a single, reliable source for supplier information.
+
+## When to use it
+
+Use this register at all times to track your suppliers, updating it whenever you add, change, or remove a supplier. Refresh the information as needed to keep it accurate and current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element for each supplier. Setting up the register from scratch may take 1-2 hours, depending on how many suppliers you have.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: 27002:5.19a — types_
 
 > _Standard text:_ Each supplier captured: identity, products/services, criticality
 
+<<GUIDANCE>>
+
 ### Reg Supplier Type
 
 <<MUST item:A.5.19:reg_supplier_type>>
 _Why: 27002:5.19a_
 
 > _Standard text:_ Supplier type per row (ICT service / ICT infra component / logistics / utilities / etc.)
+
+<<GUIDANCE>>
 
 ### Reg Access Type
 
@@ -57,12 +82,16 @@ _Why: 27002:5.19g_
 
 > _Standard text:_ Access type per row (logical / physical / network / application / app-to-app)
 
+<<GUIDANCE>>
+
 ### Reg Classification
 
 <<MUST item:A.5.19:reg_classification>>
 _Why: 27002:5.19b,d_
 
 > _Standard text:_ Risk classification (tier or category) per row
+
+<<GUIDANCE>>
 
 ### Reg Owner
 
@@ -72,6 +101,8 @@ _Why: Accountability_
 > _Standard text:_ Named internal owner accountable per supplier (relationship owner + InfoSec contact)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,9 +115,17 @@ _Why: 27002:5.19j_
 
 > _Standard text:_ Critical-supplier flag (drives audit + continuity scrutiny — link to A.5.29 / A.5.30)
 
+<<GUIDANCE>>
+
 ### Reg Subsupplier
 
 <<SHOULD item:A.5.19:reg_subsupplier>>
 _Why: Supply-chain depth_
 
 > _Standard text:_ Disclosed sub-suppliers / fourth parties tracked per row
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

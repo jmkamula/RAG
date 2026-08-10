@@ -12,6 +12,8 @@ table_shape: true
 
 # Change Register
 
+<<DOC_CONTROL>>
+
 > Per-change record — change id, target, risk tier, approval lineage, outcome, rollback-invoked flag. The continuous evidence stream
 
 <!-- TABLE-COLUMNS leaf:req:A.8.32:change_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.8.32:reg_outcome -->
 <!-- column: item:A.8.32:reg_emergency_flag -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of every change in your environment, including details like risk level, approvals, and outcomes, supporting your ISO 27001 compliance efforts.
+
+## When to use it
+
+Use this register whenever a change occurs in your environment, and update it as needed to ensure all changes are tracked and documented over time.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes entering the initial details for each change, with additional time needed for each new change as it happens.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Auditability_
 
 > _Standard text:_ Per-change unique identifier
 
+<<GUIDANCE>>
+
 ### Reg Target
 
 <<MUST item:A.8.32:reg_target>>
 _Why: Cross-control coherence_
 
 > _Standard text:_ Per-change target (system / config / data; cross-link to A.5.9 asset register)
+
+<<GUIDANCE>>
 
 ### Reg Risk Tier
 
@@ -58,6 +83,8 @@ _Why: 27002:8.32 — change management_
 
 > _Standard text:_ Per-change risk tier (drives approval path applied)
 
+<<GUIDANCE>>
+
 ### Reg Approval Lineage
 
 <<MUST item:A.8.32:reg_approval_lineage>>
@@ -65,12 +92,16 @@ _Why: Accountability_
 
 > _Standard text:_ Per-change approval lineage (approver(s) + timestamp)
 
+<<GUIDANCE>>
+
 ### Reg Outcome
 
 <<MUST item:A.8.32:reg_outcome>>
 _Why: Continuous evidence_
 
 > _Standard text:_ Per-change outcome (success / partial / rolled-back / failed)
+
+<<GUIDANCE>>
 
 ### Reg Emergency Flag
 
@@ -80,6 +111,8 @@ _Why: Operational reality_
 > _Standard text:_ Per-change emergency flag + post-hoc-review reference where emergency
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -91,3 +124,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Accountability_
 
 > _Standard text:_ Per-change actor (person or automated job)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

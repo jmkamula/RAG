@@ -13,6 +13,8 @@ table_shape: true
 
 # Code Monitoring Activity Record
 
+<<DOC_CONTROL>>
+
 > Per-monitoring activity record — assessments, complaint handlings, infringement actions (Art.41.4). Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.41:monitoring_record -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.41:reg_sa_notification -->
 <!-- column: item:Art.41:reg_date -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of all your code monitoring activities, including assessments, complaint handling, and any actions taken for infringements, making it easier to demonstrate compliance with GDPR requirements.
+
+## When to use it
+
+Use this template whenever your organization conducts code monitoring activities that fall under GDPR Article 41, such as handling complaints or performing assessments. Update the register at least once a year to keep your records current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes filling out the required sections for each monitoring activity, with additional time needed as you add more entries to the register.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit_
 
 > _Standard text:_ Per-row adherent monitored
 
+<<GUIDANCE>>
+
 ### Reg Activity Type
 
 <<MUST item:Art.41:reg_activity_type>>
 _Why: Art.41.2-4_
 
 > _Standard text:_ Per-row activity (eligibility check / periodic monitoring / complaint / infringement action)
+
+<<GUIDANCE>>
 
 ### Reg Outcome
 
@@ -58,12 +83,16 @@ _Why: Art.41.4_
 
 > _Standard text:_ Per-row outcome (compliant / non-compliant — corrective / suspension / exclusion per Art.41.4)
 
+<<GUIDANCE>>
+
 ### Reg Sa Notification
 
 <<MUST item:Art.41:reg_sa_notification>>
 _Why: Art.41.4_
 
 > _Standard text:_ Per-row SA notification where Art.41.4 actions taken
+
+<<GUIDANCE>>
 
 ### Reg Date
 
@@ -73,6 +102,8 @@ _Why: Currency_
 > _Standard text:_ Per-row activity date
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Procedural fairness_
 
 > _Standard text:_ Per-row appeal handling where adherent contests the outcome
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Minimization Contexts Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which processing activities are candidates for minimisation (analytics + reporting + ML training + testing / dev environments) vs those needing full PII (operational transactions with the subject).
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which data processing activities can use minimized data and which require full personal information, making it easier to comply with privacy standards like ISO 27701.
+
+## When to use it
+
+Use this document whenever your data processing activities change or when your business profile matches specific privacy triggers. Update it as needed to stay current with your data practices.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as each required section takes roughly 10 to 15 minutes to fill in thoughtfully.
 
 ## 1. Minimisation candidates enumerated (analytics + reporting + ML + test environments + logs)
 
 <<MUST item:A.7.4.4:scope_candidates>>
 _Why: Coverage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Coverage_
 <<MUST item:A.7.4.4:scope_full_pii_needed>>
 _Why: §7.4.4 — non-de-identified processing_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Re-identification risk considerations per context (combinations of attributes / auxiliary data / linkage)
 
 <<MUST item:A.7.4.4:scope_reidentification_risk>>
 _Why: Effectiveness_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.4.4:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

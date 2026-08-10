@@ -11,14 +11,35 @@ should_count: 3
 
 # RoPA Maintenance Procedure
 
+<<DOC_CONTROL>>
+
 > Art.30 implies an ongoing obligation — the register must reflect current reality. The maintenance procedure documents who keeps it current, what changes trigger an update, the path from trigger to register entry, and the link to other GDPR gates (Art.28 DPA on new processor, Art.35 DPIA on high-risk new purpose)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you set up a clear process for keeping your Record of Processing Activities (RoPA) up to date, including who is responsible and how changes are tracked and recorded.
+
+## When to use it
+
+Use this whenever your data processing activities change, such as adding a new processor or starting a new high-risk project, and review it regularly to ensure your records always reflect your current operations.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on the complexity of your data processing and the number of updates needed.
 
 ## 1. Named maintainer (DPO, privacy lead, or controller's designate) with documented responsibility for register accuracy
 
 <<MUST item:Art.30:proc_maintainer>>
 _Why: Accountability — Art.5.2_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Accountability — Art.5.2_
 <<MUST item:Art.30:proc_triggers>>
 _Why: Art.30.1 — must reflect current state_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Path from trigger to register entry stated (who notifies, who reviews, who approves the entry)
 
 <<MUST item:Art.30:proc_update_path>>
 _Why: Operational sufficiency_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: Operational sufficiency_
 <<MUST item:Art.30:proc_dpa_gate>>
 _Why: Art.28 / Art.30.1.d coherence_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Linkage to Art.35 DPIA — high-risk new processing requires DPIA before register entry is finalised
 
 <<MUST item:Art.30:proc_dpia_gate>>
 _Why: Art.35 / Art.30 coherence_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,12 +90,16 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.30:proc_processor_side>>
 _Why: Art.30.2_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Cadence for ad-hoc review when no specific trigger fires (e.g. quarterly sweep)
 
 <<SHOULD item:Art.30:proc_review_cadence>>
 _Why: Preventive maintenance_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -75,4 +108,10 @@ _Why: Preventive maintenance_
 <<SHOULD item:Art.30:proc_escalation>>
 _Why: Continuity_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

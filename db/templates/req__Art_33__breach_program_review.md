@@ -13,6 +13,8 @@ table_shape: true
 
 # Breach Notification Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that the 72h SLA is being met, severity-gate decisions are defensible, exercises are validating the procedure (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.33:breach_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.33:rev_severity_audit -->
 <!-- column: item:Art.33:rev_exercise_link -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you review and document your breach notification process, making sure you meet GDPR requirements and can show your decisions and procedures are up to date and effective.
+
+## When to use it
+
+Use this template every year to confirm your breach notification program is working as intended, especially if your organization is always subject to GDPR obligations.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this review from scratch, as each required section takes around 10-15 minutes to fill in.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.33:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + legal + incident-response lead)
+
+<<GUIDANCE>>
 
 ### Rev 72H Compliance
 
@@ -58,12 +83,16 @@ _Why: Art.33.1_
 
 > _Standard text:_ 72h-compliance audit — every required notification met the SLA (or had documented Art.33.1 delay reason)
 
+<<GUIDANCE>>
+
 ### Rev Severity Audit
 
 <<MUST item:Art.33:rev_severity_audit>>
 _Why: Art.33.1 — risk exception_
 
 > _Standard text:_ Severity-gate audit — sampled 'no-notify' decisions reviewed for defensibility against Art.33.1 risk threshold
+
+<<GUIDANCE>>
 
 ### Rev Exercise Link
 
@@ -73,6 +102,8 @@ _Why: Cross-control coherence_
 > _Standard text:_ A.5.24 exercise integration — Art.33 procedure exercised within the year (table-top or live)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

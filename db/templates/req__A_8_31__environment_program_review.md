@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Environment Separation Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — environment-register currency, no-production-data-in-non-prod sample check, per-env access review (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.31:environment_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.8.31:rev_per_env_access -->
 <!-- column: item:A.8.31:rev_findings_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document your annual review of environment separation, including checks for up-to-date environment registers, ensuring no production data is in non-production environments, and reviewing access for each environment.
+
+## When to use it
+
+Use this template when your organization is required to verify environment separation as part of ISO 27001 compliance, typically once a year or whenever your profile matches specific compliance triggers.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 2 hours completing this from scratch, depending on the number of environments you need to review and the detail required for each element.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:8.31 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.31:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Infrastructure + InfoSec + Engineering leads)
+
+<<GUIDANCE>>
 
 ### Rev Register Currency
 
@@ -59,6 +84,8 @@ _Why: Drift prevention_
 
 > _Standard text:_ Environment-register currency check
 
+<<GUIDANCE>>
+
 ### Rev No Prod Data Sample
 
 <<MUST item:A.8.31:rev_no_prod_data_sample>>
@@ -66,12 +93,16 @@ _Why: 27002:8.31 — secured + GDPR alignment_
 
 > _Standard text:_ Sample-based check — no raw production data found in lower environments (auditor-critical for GDPR)
 
+<<GUIDANCE>>
+
 ### Rev Per Env Access
 
 <<MUST item:A.8.31:rev_per_env_access>>
 _Why: Cross-control coherence_
 
 > _Standard text:_ Per-env access review (cross-link to A.8.3 + A.5.18 outcomes)
+
+<<GUIDANCE>>
 
 ### Rev Findings Update
 
@@ -81,6 +112,8 @@ _Why: Closes the loop_
 > _Standard text:_ Findings propagated to procedure / register
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

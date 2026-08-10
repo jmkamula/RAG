@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Acceptable Use Policy Review
 
+<<DOC_CONTROL>>
+
 > AUPs decay fast — new technologies (AI tools, new collaboration platforms), new regulations (data residency), and new threat patterns (social engineering vectors) all require policy updates. Review captures who reviewed, when, and whether the rules still cover the actual use patterns
 
 <!-- TABLE-COLUMNS leaf:req:A.5.10:periodic_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.5.10:review_outcome -->
 <!-- column: item:A.5.10:review_use_patterns -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep your Acceptable Use Policy up to date by tracking regular reviews, who performed them, and whether your rules still fit how your team actually works.
+
+## When to use it
+
+Use this template whenever you need to review your Acceptable Use Policy, which should happen about once a year or whenever your environment changes significantly.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 45 to 60 minutes completing this from scratch, depending on how many reviewers and usage patterns you need to document.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic review_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Review Reviewer
 
 <<MUST item:A.5.10:review_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity and role (typically CISO with HR and legal input)
 
+<<GUIDANCE>>
+
 ### Review Outcome
 
 <<MUST item:A.5.10:review_outcome>>
 _Why: Periodic review_
 
 > _Standard text:_ Outcome captured (no change / amended / re-issued) with rationale per amendment
+
+<<GUIDANCE>>
 
 ### Review Use Patterns
 
@@ -65,6 +92,8 @@ _Why: Drift catch_
 > _Standard text:_ Use-pattern check — new technologies or behaviours that need explicit rules added
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -77,9 +106,17 @@ _Why: Change-driven review_
 
 > _Standard text:_ Ad-hoc triggers listed (new technology rollout, incident lessons-learned, regulatory change)
 
+<<GUIDANCE>>
+
 ### Review Next Date
 
 <<SHOULD item:A.5.10:review_next_date>>
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

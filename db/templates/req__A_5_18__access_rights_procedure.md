@@ -11,6 +11,8 @@ should_count: 3
 
 # Access Rights Procedure
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
 The **operational runbook** for provisioning, modifying, and
@@ -23,41 +25,21 @@ acknowledgement).
 
 ## When to use it
 
-You're producing the Access Rights Procedure required by **ISO/IEC
-27001:2022 A.5.18**. Operates the A.5.15 policy.
+You're producing the Access Rights Procedure required by **ISO/IEC 27001:2022 A.5.18**. Operates the A.5.15 policy.
 
-## Before you start
+## Prerequisites
 
-- [ ] **A.5.15 Access Control Policy** approved — this procedure
-      implements its rules
-- [ ] **A.5.16 Identity Management Procedure** in place — every
-      access right binds to a managed identity
-- [ ] **A.5.2 Operational Roles** + **5.3 RACI** — authoriser
-      identities resolve to named roles
-- [ ] **A.5.3 Segregation Matrix** — provisioning honours flagged
-      combinations
-- [ ] **A.8.2 Privileged Access** procedure — privileged route
-      handed off here
+<<PREREQUISITES>>
 
 ## Cross-references
 
-- **A.5.15 policy** (the rules)
-- **A.5.16 Identity Management** (the actor side)
-- **A.5.17 Authentication Information** (the credentials side)
-- **A.5.11 Return of Assets** (revocation flow)
-- **A.8.2 Privileged Access** (PAM subset)
-- **A.6.1 Screening** (joiner prerequisite)
-- **A.6.4 Disciplinary** (escalation when access violated)
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
 **4-6 hours** for v1; **1 hour** for refresh.
 
 ---
-
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
 
 ## 1. Require asset-owner authorisation before granting access
 
@@ -85,6 +67,8 @@ notifies requester within SLA per MUST 6."
 **✗ Avoid**: "Provisioning by IT" (generic owner — auditor will
 ask who exactly approved this and you can't say)."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 2. Apply least privilege + segregation checks
@@ -108,6 +92,8 @@ in the 'never combine' set; warns + requires explicit override
 sign-off if in the 'flag for review' set; passes if not in the
 matrix."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Reference the A.5.15 policy
@@ -127,6 +113,8 @@ A.5.15 Access Control Policy (DOC-AC v3.2). Specifically: the
 authoriser table (Section 6 of A.5.15) drives MUST 1 above; the
 RBAC default (Section 3 of A.5.15) drives MUST 2; the segregation
 linkage (Section 7 of A.5.15) drives the conflict-check in MUST 2."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -148,6 +136,8 @@ Three lifecycles + the trigger for each. Mover is missed most often
 | Joiner | HR offer accepted → ID issued | Identity created (A.5.16) → role bundles assigned per documented role-fit → manager approves → access live within SLA |
 | Mover (role change) | HRIS role-change event | Old role bundles revoked → new role bundles requested + approved → segregation re-checked → access reconfigured within SLA — **mover trigger fires within 5 business days of the role-change event** |
 | Leaver | HR last-day notification | Access frozen at COB on last day → all roles + identities revoked within 24h SLA → manager attestation of completion → A.5.11 return of assets follows |
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -173,6 +163,8 @@ there, the resulting identity + role assignment is recorded in
 the A.5.16 identity register; this procedure does NOT independently
 approve privileged requests."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. State SLA targets per operation
@@ -194,6 +186,8 @@ days of role-change event. (c) Leaver revocation: within 24 hours
 of role termination (last day COB + 24h max). (d) Privileged
 request: within 1 business day of A.8.2 approval. SLA performance
 reported at quarterly ISMS Steering Committee."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -219,6 +213,8 @@ identity-management procedure entry + scope-of-use documentation.
 still needed + scope unchanged. (d) Credentials rotated per
 A.5.17 (key rotation policy)."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 8. Link every access right to a registered identity
@@ -236,6 +232,8 @@ a registered identity in the A.5.16 identity register. Provisioning
 system rejects requests targeting unregistered identities. Quarterly
 reconciliation: identities in access systems vs identity register;
 discrepancies trigger A.5.18 program review."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -255,6 +253,8 @@ incident-response elevation, etc.)._
 State the temporary-access mechanism: max duration, auto-expiry,
 extension procedure if longer needed.
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### Approval-record retention
@@ -268,6 +268,8 @@ for the documented period._
 
 Per A.5.33 records retention.
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### Emergency / break-glass
@@ -280,4 +282,10 @@ _Pairs with A.5.15's emergency provision — the procedure side._
 
 State break-glass mechanism + post-hoc review.
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

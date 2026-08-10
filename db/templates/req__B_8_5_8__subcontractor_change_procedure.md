@@ -11,14 +11,35 @@ should_count: 1
 
 # Subcontractor Change Notification Procedure
 
+<<DOC_CONTROL>>
+
 > §8.5.8 requires customer notification of intended subcontractor changes (add or replace) under general written authorisation, with opportunity for customer to object.
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you create a clear process for notifying customers when you plan to add or replace a subcontractor, ensuring customers have a chance to review and object if needed.
+
+## When to use it
+
+Use this procedure whenever you intend to change your subcontractors and need to inform your customers in line with privacy requirements. Update it whenever your subcontractor list changes or as your processes evolve.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes to complete this template from scratch, as each required section will take roughly 10 to 15 minutes to fill in.
 
 ## 1. Change trigger — every subcontractor addition or replacement triggers notification workflow
 
 <<MUST item:B.8.5.8:proc_change_trigger>>
 _Why: §8.5.8 — addition or replacement_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: §8.5.8 — addition or replacement_
 <<MUST item:B.8.5.8:proc_advance_notification>>
 _Why: §8.5.8 — opportunity to object_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Objection handling — customer objection triggers negotiation / termination pathway
 
 <<MUST item:B.8.5.8:proc_objection_handling>>
 _Why: §8.5.8_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: §8.5.8_
 <<MUST item:B.8.5.8:proc_general_auth_scope>>
 _Why: §8.5.8 — general written authorization_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Notification content (new subcontractor identity + countries + Annex B coverage summary)
 
 <<MUST item:B.8.5.8:proc_notification_content>>
 _Why: §8.5.6 alignment_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:B.8.5.8:proc_owner>>
 _Why: Accountability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

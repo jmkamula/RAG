@@ -12,6 +12,8 @@ table_shape: true
 
 # Cabling Run Register
 
+<<DOC_CONTROL>>
+
 > The catalogue of cabling runs (or aggregations) — site, run id, carried traffic class, routing class, last inspection
 
 <!-- TABLE-COLUMNS leaf:req:A.7.12:cabling_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.7.12:reg_routing -->
 <!-- column: item:A.7.12:reg_last_inspected -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep an organized record of all your cabling runs, including key details like location, identification, and inspection history. It's useful for tracking and managing your network infrastructure efficiently.
+
+## When to use it
+
+Use this register whenever you need to document or update information about your site's cabling runs. It should be maintained at all times and updated whenever changes or inspections occur.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per cabling run to fill in the required details from scratch. The total time depends on how many cabling runs you need to document.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Per-row run identifier
 
+<<GUIDANCE>>
+
 ### Reg Site
 
 <<MUST item:A.7.12:reg_site>>
 _Why: Cross-leaf coherence_
 
 > _Standard text:_ Per-row site
+
+<<GUIDANCE>>
 
 ### Reg Traffic Class
 
@@ -57,12 +82,16 @@ _Why: 27002:7.12 — proportional_
 
 > _Standard text:_ Per-row carried traffic class (drives encryption + tamper-evidence requirements)
 
+<<GUIDANCE>>
+
 ### Reg Routing
 
 <<MUST item:A.7.12:reg_routing>>
 _Why: 27002:7.12 — protected_
 
 > _Standard text:_ Per-row routing description (conduit / overhead-tray / under-floor / via-shared-corridor)
+
+<<GUIDANCE>>
 
 ### Reg Last Inspected
 
@@ -72,6 +101,8 @@ _Why: Drift prevention_
 > _Standard text:_ Per-row last-inspected date
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -83,3 +114,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Operational discipline_
 
 > _Standard text:_ Per-row remediation log where protection falls short
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

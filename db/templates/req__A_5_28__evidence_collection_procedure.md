@@ -11,14 +11,35 @@ should_count: 3
 
 # Evidence Identification, Collection, Acquisition, and Preservation Procedure
 
+<<DOC_CONTROL>>
+
 > A.5.28 requires procedures for identification, collection, acquisition, and preservation of evidence related to information security events. The procedure documents the four lifecycle steps (identification → acquisition → preservation → handover/disposal), chain of custody enforcement, integrity verification, competent personnel requirements, and liaison paths with external authorities (law enforcement, regulators). The custody register, periodic program review and per-package disposal record are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you create a clear, step-by-step procedure for handling evidence related to information security incidents, ensuring you meet ISO 27001 requirements and are ready for audits or investigations.
+
+## When to use it
+
+Use this document whenever you need to outline or update your process for identifying, collecting, preserving, and transferring evidence in your organization. Review and refresh it whenever your procedures or team responsibilities change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours drafting this from scratch, plus additional time for each entry in your custody register and disposal records, depending on the number of incidents you handle.
 
 ## 1. Identification step (what counts as evidence — logs, images, physical media, witness statements, network captures)
 
 <<MUST item:A.5.28:identification>>
 _Why: 27002:5.28 — identification_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:5.28 — identification_
 <<MUST item:A.5.28:acquisition>>
 _Why: 27002:5.28 — acquisition_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Integrity verification step (cryptographic hashes recorded at acquisition; verified at each custody handover)
 
 <<MUST item:A.5.28:integrity>>
 _Why: 27002:5.28 — preservation_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: 27002:5.28 — preservation_
 <<MUST item:A.5.28:chain_of_custody>>
 _Why: 27002:5.28 — preservation_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Preservation method (read-only/write-blocked storage, secure vault, environmental controls)
 
 <<MUST item:A.5.28:preservation>>
 _Why: 27002:5.28 — preservation_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -55,6 +84,8 @@ _Why: 27002:5.28 — preservation_
 <<MUST item:A.5.28:competence>>
 _Why: 27002:5.28 — internal procedures + competence_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Liaison path with external authorities (law enforcement, regulators) — who initiates, what is required
@@ -62,12 +93,16 @@ _Why: 27002:5.28 — internal procedures + competence_
 <<MUST item:A.5.28:liaison>>
 _Why: 27002:5.28 — external authorities_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 8. Retention period stated, driven by legal/regulatory obligations and case status (open investigations override default schedule)
 
 <<MUST item:A.5.28:retention>>
 _Why: 27002:5.28 — preservation lifecycle_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -82,12 +117,16 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.5.28:legal_admissibility>>
 _Why: Evidence usable in court / regulatory_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Third-party forensic engagement path (when to engage, sealed-container handover, return-to-custody on completion)
 
 <<SHOULD item:A.5.28:third_party_forensics>>
 _Why: Operational flexibility_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -96,4 +135,10 @@ _Why: Operational flexibility_
 <<SHOULD item:A.5.28:incident_link>>
 _Why: Closing the loop with [[A.5.26]]_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

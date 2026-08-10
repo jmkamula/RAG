@@ -11,14 +11,35 @@ should_count: 1
 
 # Planning of Changes to the ISMS Procedure
 
+<<DOC_CONTROL>>
+
 > Clause 6.3 requires changes to the ISMS to be carried out in a planned manner. The procedure is the canonical artefact — distinct from A.8.32 technical change management. Sibling leaves: change register, applicable change-type scope, program review
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document a clear, step-by-step process for planning and managing changes to your information security management system, ensuring changes are handled consistently and in line with ISO 27001 requirements.
+
+## When to use it
+
+Use this whenever you need to make any changes to your information security management system, and review or update it whenever your processes or requirements change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on how much detail you include and the complexity of your change planning process.
 
 ## 1. Identification trigger for ISMS-level changes (scope, policy, risk criteria, structural)
 
 <<MUST item:6.3:change_identification>>
 _Why: Clause 6.3 — determines the need for changes_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Clause 6.3 — determines the need for changes_
 <<MUST item:6.3:planning_required>>
 _Why: Clause 6.3 — planned manner_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Consideration of impact on ISMS effectiveness
 
 <<MUST item:6.3:impact_consideration>>
 _Why: Clause 6.3 — planned manner_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: Clause 6.3 — planned manner_
 <<MUST item:6.3:approval>>
 _Why: Clause 6.3 — planned_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Communication of the change to affected stakeholders (link to 7.4)
 
 <<MUST item:6.3:comms>>
 _Why: Operational discipline_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:6.3:a832_link>>
 _Why: Cross-control coherence_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

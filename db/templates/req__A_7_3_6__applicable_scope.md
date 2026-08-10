@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable ACR Contexts Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which subjects are covered (all subjects always) and which restrictions apply (research derogations, legal-obligation retention, freedom-of-expression, etc.).
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which subjects are covered by your privacy controls and what exceptions or special rules apply, such as research or legal requirements. It ensures your documentation aligns with privacy standards.
+
+## When to use it
+
+Use this document whenever your privacy profile matches certain triggers that require you to clarify the scope of subject coverage and related restrictions. Update it whenever there are changes to your data handling or compliance requirements.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this template from scratch, as you'll need to address three required elements and possibly add a recommended detail.
 
 ## 1. Subject universe covered (customers / employees / prospects / research participants / etc.)
 
 <<MUST item:A.7.3.6:scope_subject_universe>>
 _Why: Coverage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Coverage_
 <<MUST item:A.7.3.6:scope_erasure_exceptions>>
 _Why: GDPR Art.17.3_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Jurisdiction-specific restrictions on when + how correction/erasure can be requested
 
 <<MUST item:A.7.3.6:scope_jurisdiction_restrictions>>
 _Why: §7.3.6 — some jurisdictions impose restrictions_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.3.6:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Engagement Scope
 
+<<DOC_CONTROL>>
+
 > Every new subcontractor engagement that processes customer PII.
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define the scope of work for any new subcontractor that will handle customer personal information, ensuring you meet privacy requirements under ISO 27701.
+
+## When to use it
+
+Use this document whenever you start working with a new subcontractor who will process customer PII, and update it whenever there are changes to the engagement or scope.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 20 to 30 minutes completing this from scratch, as you'll need to provide details for two required elements.
 
 ## 1. Engagement types enumerated (SaaS subprocessor / infrastructure provider / support-outsourcing / one-off contractor)
 
 <<MUST item:B.8.5.7:scope_engagement_types>>
 _Why: Coverage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -26,6 +47,8 @@ _Why: Coverage_
 
 <<MUST item:B.8.5.7:scope_authorisation_mode>>
 _Why: §8.5.7_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -40,4 +63,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:B.8.5.7:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

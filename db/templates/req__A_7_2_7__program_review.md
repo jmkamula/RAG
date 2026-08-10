@@ -13,6 +13,8 @@ table_shape: true
 
 # Joint Controller Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — every joint arrangement has a current documented arrangement, essence publications reachable, rights-routing functional (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.7.2.7:program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.2.7:rev_essence_publication_audit -->
 <!-- column: item:A.7.2.7:rev_rights_routing_test -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of all your joint controller arrangements, making sure documentation is up to date and contact information is easy to find. It supports privacy compliance and simplifies annual reviews.
+
+## When to use it
+
+Use this template whenever your organization enters into or maintains joint controller relationships, and review it about once a year to ensure all details are current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, depending on the number of arrangements you need to document.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.2.7:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + Legal)
+
+<<GUIDANCE>>
 
 ### Rev Coverage Check
 
@@ -58,12 +83,16 @@ _Why: §7.2.7 — every joint controller_
 
 > _Standard text:_ Coverage check — every joint arrangement identified is documented
 
+<<GUIDANCE>>
+
 ### Rev Essence Publication Audit
 
 <<MUST item:A.7.2.7:rev_essence_publication_audit>>
 _Why: Art.26.2_
 
 > _Standard text:_ Essence-publication audit — sampled arrangements verified to have published essence reachable by subjects
+
+<<GUIDANCE>>
 
 ### Rev Rights Routing Test
 
@@ -73,6 +102,8 @@ _Why: Art.26.3_
 > _Standard text:_ Rights-routing test — sampled subject requests verified to route correctly regardless of party addressed
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

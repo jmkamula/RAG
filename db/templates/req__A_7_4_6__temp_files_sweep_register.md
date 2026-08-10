@@ -13,6 +13,8 @@ table_shape: true
 
 # Temp Files Sweep Register
 
+<<DOC_CONTROL>>
+
 > Per-sweep-run row — records of periodic sweeps + volumes cleaned. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:A.7.4.6:temp_files_sweep_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.4.6:reg_files_cleaned -->
 <!-- column: item:A.7.4.6:reg_anomalies_flagged -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of each time you clean up temporary files, including details about what was cleaned and when. It supports privacy compliance by tracking your regular file sweeps.
+
+## When to use it
+
+Use this register whenever your organization needs to document periodic sweeps of temporary files, especially if your privacy profile requires it. Plan to update it about once a year to keep records current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes entering the required details for each sweep from scratch, with additional time needed for each new sweep you record.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit trail_
 
 > _Standard text:_ Unique sweep run identifier per row
 
+<<GUIDANCE>>
+
 ### Reg System
 
 <<MUST item:A.7.4.6:reg_system>>
 _Why: Coverage_
 
 > _Standard text:_ System / infrastructure component per row
+
+<<GUIDANCE>>
 
 ### Reg Scan Date
 
@@ -58,12 +83,16 @@ _Why: Currency_
 
 > _Standard text:_ Scan date per row
 
+<<GUIDANCE>>
+
 ### Reg Files Cleaned
 
 <<MUST item:A.7.4.6:reg_files_cleaned>>
 _Why: Effectiveness_
 
 > _Standard text:_ Files cleaned + volume per row
+
+<<GUIDANCE>>
 
 ### Reg Anomalies Flagged
 
@@ -73,6 +102,8 @@ _Why: Drift detection_
 > _Standard text:_ Anomalies flagged per row (unusual accumulation / temp files past retention)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Effectiveness_
 
 > _Standard text:_ Verification last-run date per row
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

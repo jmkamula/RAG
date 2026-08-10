@@ -11,14 +11,35 @@ should_count: 1
 
 # Code of Conduct Adherence Procedure
 
+<<DOC_CONTROL>>
+
 > Art.40 encourages associations to draw up codes; controllers/processors choose to adhere (Art.40.3). The procedure governs adherence selection, compliance demonstration, and monitoring body interaction
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document how your organization chooses, follows, and demonstrates compliance with a GDPR-approved code of conduct, including how you interact with the relevant monitoring body.
+
+## When to use it
+
+Use this procedure when your organization decides to adhere to a GDPR code of conduct and needs to show how it meets and maintains those standards. Update the document whenever your adherence process or monitoring arrangements change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes drafting this from scratch, as you'll need to cover each required section in detail.
 
 ## 1. Code selection rationale — which approved Art.40 code is adhered to and why (sector relevance / customer requirement)
 
 <<MUST item:Art.40:code_selection>>
 _Why: Art.40.3_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Art.40.3_
 <<MUST item:Art.40:adherence_decision>>
 _Why: Art.40.3_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Compliance demonstration approach (code-specific evidence requirements)
 
 <<MUST item:Art.40:compliance_demonstration>>
 _Why: Art.40.4_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: Art.40.4_
 <<MUST item:Art.40:monitoring_body_interaction>>
 _Why: Art.40.4 + Art.41_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Non-EU controller/processor overlay (Art.40.3 — codes may provide GDPR-equivalent safeguards)
 
 <<MUST item:Art.40:non_eu_overlay>>
 _Why: Art.40.3_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.40:exit_provisions>>
 _Why: Operational hygiene_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

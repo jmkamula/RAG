@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Environmental Protection Program Review
 
+<<DOC_CONTROL>>
+
 > Annual review of threat assessments, protection currency, detection-system health, exercise outcomes. Freshness=365
 
 <!-- TABLE-COLUMNS leaf:req:A.7.5:environmental_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.5:rev_detection_test -->
 <!-- column: item:A.7.5:rev_register_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your annual environmental protection program review, including threat assessments, system health checks, and exercise results. It ensures your records are organized and meet ISO 27001 requirements.
+
+## When to use it
+
+Use this template whenever you need to document your yearly review of environmental protection measures. It's designed for environments where this review is always required and should be updated about once every 12 months.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes completing this template from scratch, as each required section takes roughly 10 to 15 minutes to fill out.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: 27002:7.5 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.5:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Facilities + InfoSec + BCP lead)
+
+<<GUIDANCE>>
 
 ### Rev Threat Currency
 
@@ -58,12 +83,16 @@ _Why: 27002:7.5 — current_
 
 > _Standard text:_ Threat-currency check — has the threat landscape shifted (new climate data, regional risk changes)?
 
+<<GUIDANCE>>
+
 ### Rev Detection Test
 
 <<MUST item:A.7.5:rev_detection_test>>
 _Why: 27002:7.5 — protection_
 
 > _Standard text:_ Detection-system test outcomes (smoke detectors, water-leak sensors functionally tested in the period)
+
+<<GUIDANCE>>
 
 ### Rev Register Update
 
@@ -73,6 +102,8 @@ _Why: Closes the loop_
 > _Standard text:_ Changes propagated to the threat register and procedure
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

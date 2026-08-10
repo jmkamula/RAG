@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Delivery Contexts Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which delivery contexts are in scope (web, mobile, in-product, kiosk, paper, phone) and where notice-at-collection applies vs after-the-fact indirect collection.
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which delivery channels—like web, mobile, or paper—are covered by your privacy notices and when those notices should be provided to users.
+
+## When to use it
+
+Use this document whenever your service or product matches certain privacy triggers, and update it whenever there are changes to your delivery methods or notice practices.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to address three required elements and consider one recommended detail.
 
 ## 1. Delivery channels enumerated with notice-at-collection status per channel
 
 <<MUST item:A.7.3.3:scope_delivery_channels>>
 _Why: Coverage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Coverage_
 <<MUST item:A.7.3.3:scope_indirect_collection>>
 _Why: GDPR Art.14.3_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Excluded contexts with rationale (e.g. B2B-only channels where notice is contract-embedded)
 
 <<MUST item:A.7.3.3:scope_exclusions>>
 _Why: Defensibility_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.3.3:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

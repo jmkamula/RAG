@@ -12,6 +12,8 @@ table_shape: true
 
 # Network Services Register
 
+<<DOC_CONTROL>>
+
 > Per-service catalogue — service id, provider, security mechanisms in use, SLA performance, last-review date
 
 <!-- TABLE-COLUMNS leaf:req:A.8.21:service_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.8.21:reg_sla_performance -->
 <!-- column: item:A.8.21:reg_last_reviewed -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of all your network services, including details like provider, security measures, and service performance. It’s useful for tracking and reviewing your network services in one place.
+
+## When to use it
+
+Use this register whenever you need to document or update information about your network services, and refresh it whenever there are changes or during regular reviews to keep your records current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required detail for each service you list. Completing the register from scratch for a handful of services may take 1-2 hours, depending on how many you have.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: Identification_
 
 > _Standard text:_ Per-row service identifier (ISP / CDN / DNS / SD-WAN / managed-firewall)
 
+<<GUIDANCE>>
+
 ### Reg Provider
 
 <<MUST item:A.8.21:reg_provider>>
 _Why: Cross-control coherence_
 
 > _Standard text:_ Per-row provider + contract reference (cross-link to A.5.19/A.5.20 supplier register)
+
+<<GUIDANCE>>
 
 ### Reg Mechanisms
 
@@ -57,12 +82,16 @@ _Why: 27002:8.21 — security mechanisms_
 
 > _Standard text:_ Per-row security mechanisms in use (matches procedure's baseline for the class)
 
+<<GUIDANCE>>
+
 ### Reg Sla Performance
 
 <<MUST item:A.8.21:reg_sla_performance>>
 _Why: 27002:8.21 — monitored_
 
 > _Standard text:_ Per-row SLA performance vs baseline
+
+<<GUIDANCE>>
 
 ### Reg Last Reviewed
 
@@ -72,6 +101,8 @@ _Why: Drift detection_
 > _Standard text:_ Per-row last-review timestamp
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -83,3 +114,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Accountability_
 
 > _Standard text:_ Per-row owner (relationship manager + technical owner)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

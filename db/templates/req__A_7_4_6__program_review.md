@@ -13,6 +13,8 @@ table_shape: true
 
 # Temp Files Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — sweep cadence honoured, disposal periods respected, anomalies investigated, no orphan temp files hanging around (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.7.4.6:program_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.7.4.6:rev_sweep_health -->
 <!-- column: item:A.7.4.6:rev_orphan_sample -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document your annual review of temporary files, ensuring that files are regularly cleared, disposal rules are followed, and any unusual findings are addressed. It supports compliance with privacy standards and keeps your records tidy.
+
+## When to use it
+
+Use this template once a year, or whenever your organization’s profile matches certain privacy or data handling triggers, to confirm that your temporary file management practices are up to date.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 45 to 60 minutes completing this template from scratch, depending on the number of temporary file records you need to review and document.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.4.6:rev_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Infrastructure + DPO)
 
+<<GUIDANCE>>
+
 ### Rev Sweep Health
 
 <<MUST item:A.7.4.6:rev_sweep_health>>
 _Why: §7.4.6 — periodic checks_
 
 > _Standard text:_ Sweep health — cadence honoured, coverage complete
+
+<<GUIDANCE>>
 
 ### Rev Orphan Sample
 
@@ -65,6 +92,8 @@ _Why: Effectiveness_
 > _Standard text:_ Orphan-file sample check — random directories checked for temp files past retention
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

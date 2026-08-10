@@ -11,14 +11,35 @@ should_count: 1
 
 # RoPA Maintenance Procedure
 
+<<DOC_CONTROL>>
+
 > The procedure that keeps the RoPA accurate — how new activities are added, changes captured, retired activities removed, cadence for reconciliation against source-of-truth systems.
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you set up a clear process for keeping your Record of Processing Activities (RoPA) up to date, including how to add, change, or remove activities and regularly check accuracy.
+
+## When to use it
+
+Use this procedure whenever your organization needs to maintain an accurate RoPA, especially when certain changes or triggers occur, and update it as needed to stay aligned with your data sources.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes to complete this from scratch, as each required section takes around 10 to 15 minutes to fill in thoughtfully.
 
 ## 1. New-activity intake trigger + workflow (new product launch / new integration / new data source)
 
 <<MUST item:A.7.2.8:proc_add_activity>>
 _Why: §7.2.8 — determine records_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: §7.2.8 — determine records_
 <<MUST item:A.7.2.8:proc_change_capture>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Retirement — activities that stop generate a retirement record (not deletion) for audit history
 
 <<MUST item:A.7.2.8:proc_retire_activity>>
 _Why: Audit trail_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: Audit trail_
 <<MUST item:A.7.2.8:proc_reconciliation>>
 _Why: Cross-register integrity_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Secure maintenance — access control + integrity for the RoPA itself
 
 <<MUST item:A.7.2.8:proc_secure_maintenance>>
 _Why: §7.2.8 — securely maintain_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.2.8:proc_owner>>
 _Why: §7.2.8 owner_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

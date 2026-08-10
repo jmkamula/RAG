@@ -11,14 +11,35 @@ should_count: 1
 
 # Security of Network Services Procedure
 
+<<DOC_CONTROL>>
+
 > A.8.21 requires security mechanisms, service levels, requirements identified, implemented, monitored. Procedure documents the assessment approach, security-mechanism standards, SLA monitoring. Per-service register, applicable scope, program review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document how your organization secures its network services, including how you assess risks, set security standards, and monitor service levels. It provides a clear structure for tracking your approach and compliance.
+
+## When to use it
+
+Use this procedure whenever your environment includes network services that need to be secured and monitored. Update it as needed to reflect changes in your services or security requirements.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on the number of network services you need to register and the detail required for each section.
 
 ## 1. Security-mechanism standards per service class (encryption / authentication / integrity / availability) with minimum baselines
 
 <<MUST item:A.8.21:security_mechanisms>>
 _Why: 27002:8.21 — security mechanisms_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.21 — security mechanisms_
 <<MUST item:A.8.21:sla_baseline>>
 _Why: 27002:8.21 — service levels_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Service-delivery monitoring approach (synthetic checks / passive instrumentation / vendor-reported)
 
 <<MUST item:A.8.21:monitoring_approach>>
 _Why: 27002:8.21 — monitored_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: 27002:8.21 — monitored_
 <<MUST item:A.8.21:vendor_governance>>
 _Why: Cross-control coherence_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Incident path when service degraded / breached (cross-link to A.5.25/A.5.26)
 
 <<MUST item:A.8.21:incident_path>>
 _Why: Operational discipline_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.21:owner>>
 _Why: Accountability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

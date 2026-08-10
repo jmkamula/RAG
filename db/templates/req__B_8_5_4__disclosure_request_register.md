@@ -13,6 +13,8 @@ table_shape: true
 
 # Legally-Binding Disclosure Request Register
 
+<<DOC_CONTROL>>
+
 > Per-request row — every legally-binding disclosure request received. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:B.8.5.4:disclosure_request_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:B.8.5.4:reg_customer_notification -->
 <!-- column: item:B.8.5.4:reg_response_outcome -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of every legally-binding disclosure request your organization receives, supporting privacy compliance and annual reporting needs.
+
+## When to use it
+
+Use this register whenever your organization receives a legally-binding disclosure request. Review and update it at least once a year to ensure your records stay current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required entry, so setting up the initial register with five elements may take around 1 to 1.5 hours, plus additional time for each new request.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit trail_
 
 > _Standard text:_ Unique request identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Requester
 
 <<MUST item:B.8.5.4:reg_requester>>
 _Why: Traceability_
 
 > _Standard text:_ Requesting authority per row (law enforcement / regulator / court)
+
+<<GUIDANCE>>
 
 ### Reg Customer Affected
 
@@ -58,12 +83,16 @@ _Why: Scope_
 
 > _Standard text:_ Customer(s) whose PII was targeted per row
 
+<<GUIDANCE>>
+
 ### Reg Customer Notification
 
 <<MUST item:B.8.5.4:reg_customer_notification>>
 _Why: §8.5.4 — notify customer_
 
 > _Standard text:_ Customer notification date per row (or gag-order flag)
+
+<<GUIDANCE>>
 
 ### Reg Response Outcome
 
@@ -73,6 +102,8 @@ _Why: Audit trail_
 > _Standard text:_ Response outcome per row (data disclosed / request rejected / partial)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Defensibility_
 
 > _Standard text:_ Legal counsel signoff per row
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

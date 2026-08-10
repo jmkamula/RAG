@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Configuration Program Review
 
+<<DOC_CONTROL>>
+
 > Annual review — baseline currency vs vendor/threat updates, deviation inventory, drift-detection effectiveness (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.9:configuration_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.8.9:rev_drift_effectiveness -->
 <!-- column: item:A.8.9:rev_baselines_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document your annual review of your configuration management program, making it easier to track updates, identify deviations, and ensure your controls stay current with vendor and threat changes.
+
+## When to use it
+
+Use this template once a year to review your configuration program, ensuring it aligns with ISO 27001 requirements and remains effective in your environment.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 2 hours completing this template from scratch, depending on the number of configurations and deviations you need to review and record.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:8.9 — reviewed_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.9:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Infrastructure leads + InfoSec)
+
+<<GUIDANCE>>
 
 ### Rev Baseline Currency
 
@@ -59,6 +84,8 @@ _Why: 27002:8.9 — reviewed_
 
 > _Standard text:_ Baseline-vs-vendor-current check (CIS / vendor / NIST version drift)
 
+<<GUIDANCE>>
+
 ### Rev Deviation Inventory
 
 <<MUST item:A.8.9:rev_deviation_inventory>>
@@ -66,12 +93,16 @@ _Why: Drift prevention_
 
 > _Standard text:_ Deviation inventory re-confirmed / retired
 
+<<GUIDANCE>>
+
 ### Rev Drift Effectiveness
 
 <<MUST item:A.8.9:rev_drift_effectiveness>>
 _Why: Detection effectiveness_
 
 > _Standard text:_ Drift-detection effectiveness review (catch rate, MTTR)
+
+<<GUIDANCE>>
 
 ### Rev Baselines Update
 
@@ -81,6 +112,8 @@ _Why: Closes the loop_
 > _Standard text:_ Updated baselines published from findings
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

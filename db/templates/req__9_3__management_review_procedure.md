@@ -11,14 +11,35 @@ should_count: 1
 
 # Management Review Procedure
 
+<<DOC_CONTROL>>
+
 > The methodology behind the minutes — cadence, agenda template, attendees, input-gathering process, output-tracking process. Without a procedure the review tends to drift into a status update with no decision authority
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you set up a clear, repeatable process for management reviews, ensuring meetings are focused, decisions are made, and follow-up actions are tracked effectively.
+
+## When to use it
+
+Use this whenever you need to formalize how management reviews are conducted in your organization. Update the procedure as needed to keep it relevant to your current practices.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes drafting this from scratch, as you'll need to cover several key steps and details for a complete procedure.
 
 ## 1. Cadence stated (annual minimum + trigger-based interim reviews)
 
 <<MUST item:9.3:proc_cadence>>
 _Why: Clause 9.3.1 — planned intervals_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Clause 9.3.1 — planned intervals_
 <<MUST item:9.3:proc_attendees>>
 _Why: Clause 9.3 — top management_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Agenda template covering all 9.3.2 a-g inputs
 
 <<MUST item:9.3:proc_agenda>>
 _Why: Clause 9.3.2_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: Clause 9.3.2_
 <<MUST item:9.3:proc_input_gathering>>
 _Why: Defensibility_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Output-tracking process (decisions land in 10.1 improvement / 10.2 NC actions)
 
 <<MUST item:9.3:proc_output_tracking>>
 _Why: Clause 9.3.3_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:9.3:proc_pre_read>>
 _Why: Quality of review_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

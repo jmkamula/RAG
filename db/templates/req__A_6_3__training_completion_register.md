@@ -12,6 +12,8 @@ table_shape: true
 
 # Training Completion Register
 
+<<DOC_CONTROL>>
+
 > The operational catalogue of who has completed which training, when. Each row: personnel identifier, training module, completion date, quiz score (where applicable), next-due date. Drives the audit-defensibility 'show me every active employee completed mandatory training this year' query
 
 <!-- TABLE-COLUMNS leaf:req:A.6.3:training_completion_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.6.3:reg_status -->
 <!-- column: item:A.6.3:reg_score -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of which employees have completed required training, including dates and scores. It's useful for quickly answering audit questions about staff training compliance.
+
+## When to use it
+
+Use this register whenever you need to track training completion for your team, and update it whenever someone finishes a training module or when new training is assigned.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Setting up the register from scratch may take about 1-2 hours for a small team, with additional time needed as you add more employees or training records.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Accountability_
 
 > _Standard text:_ Per-row personnel identifier (links to identity register A.5.16)
 
+<<GUIDANCE>>
+
 ### Reg Module Id
 
 <<MUST item:A.6.3:reg_module_id>>
 _Why: 27002:6.3 — curriculum_
 
 > _Standard text:_ Per-row training module identifier (links to the curriculum catalogue)
+
+<<GUIDANCE>>
 
 ### Reg Completion Date
 
@@ -58,6 +83,8 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Per-row completion date
 
+<<GUIDANCE>>
+
 ### Reg Next Due
 
 <<MUST item:A.6.3:reg_next_due>>
@@ -65,12 +92,16 @@ _Why: 27002:6.3 — regular updates_
 
 > _Standard text:_ Per-row next-due date (drives reminder/escalation workflow)
 
+<<GUIDANCE>>
+
 ### Reg Status
 
 <<MUST item:A.6.3:reg_status>>
 _Why: Operational discipline_
 
 > _Standard text:_ Per-row status (current / overdue / waived-with-reason / N/A — for role change exemptions)
+
+<<GUIDANCE>>
 
 ### Reg Score
 
@@ -80,6 +111,8 @@ _Why: 27002:6.3 — effectiveness_
 > _Standard text:_ Per-row score where the module includes assessment (drives effectiveness metrics)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,9 +125,17 @@ _Why: Continuous improvement_
 
 > _Standard text:_ Per-row phishing simulation participation log (separate from formal training — drives awareness metrics)
 
+<<GUIDANCE>>
+
 ### Reg Overdue Alerts
 
 <<SHOULD item:A.6.3:reg_overdue_alerts>>
 _Why: Operational discipline_
 
 > _Standard text:_ Overdue-status alerting (notification to line manager when training crosses next-due date)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

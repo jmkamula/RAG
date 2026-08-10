@@ -11,14 +11,35 @@ should_count: 2
 
 # Legal/Regulatory Register Maintenance Procedure
 
+<<DOC_CONTROL>>
+
 > A.5.31 expects the register to be 'kept up to date'. The procedure documents who keeps it current, what triggers an update (new regulation, regulator guidance, customer contract change, jurisdiction expansion), and the intake path from trigger to register entry
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document how your organization keeps its legal and regulatory register up to date, including who is responsible and how updates are managed. It's useful for showing compliance with ISO 27001 requirements.
+
+## When to use it
+
+Use this procedure whenever your legal or regulatory obligations change, such as with new laws, regulator guidance, contract updates, or expanding into new regions. Review and update the document as needed to stay current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes drafting this from scratch, depending on the complexity of your register and the number of required elements you need to cover.
 
 ## 1. Named maintainer (compliance lead, legal counsel, or designate) with documented responsibility for register accuracy
 
 <<MUST item:A.5.31:proc_maintainer>>
 _Why: Accountability — 27002:5.31_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Accountability — 27002:5.31_
 <<MUST item:A.5.31:proc_update_triggers>>
 _Why: 27002:5.31 — kept up to date_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Intake path from trigger to register entry (who flags, who interprets, who classifies, who confirms compliance approach)
 
 <<MUST item:A.5.31:proc_intake_path>>
 _Why: Operational sufficiency_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: Operational sufficiency_
 <<MUST item:A.5.31:proc_change_assessment>>
 _Why: 27002:5.31b — approach to meet_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Authority-contact sync — adding an obligation that introduces a new regulator triggers A.5.5 register update
 
 <<MUST item:A.5.31:proc_authority_sync>>
 _Why: A.5.5 coherence_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,6 +90,8 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.5.31:proc_legal_review>>
 _Why: Interpretation accuracy_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Horizon-scanning cadence for upcoming obligations (proposed legislation, pending regulator decisions)
@@ -68,4 +99,10 @@ _Why: Interpretation accuracy_
 <<SHOULD item:A.5.31:proc_horizon_scan>>
 _Why: Forward-looking compliance_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

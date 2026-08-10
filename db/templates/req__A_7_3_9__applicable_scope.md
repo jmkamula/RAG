@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Request Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which requests are 'legitimate' (from a verifiable subject about their own PII) and which are excluded (from third parties without authorisation, unrelated to org's processing, etc.).
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which data requests your organization will accept and which ones you will exclude, making it easier to handle privacy requests in line with privacy standards.
+
+## When to use it
+
+Use this document whenever your organization needs to clarify which types of personal data requests are valid, especially when your activities match certain privacy triggers. Update it as needed when your processes or regulations change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you’ll need to address three required elements and possibly one recommended element.
 
 ## 1. Legitimate-request test (verifiable subject + about their own PII + relates to org's processing)
 
 <<MUST item:A.7.3.9:scope_legitimate_test>>
 _Why: §7.3.9 — legitimate requests_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: §7.3.9 — legitimate requests_
 <<MUST item:A.7.3.9:scope_response_time_matrix>>
 _Why: GDPR Art.12.3_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Where fees permitted (excessive/repetitive under GDPR; other jurisdictions vary)
 
 <<MUST item:A.7.3.9:scope_fee_scope>>
 _Why: §7.3.9 — some jurisdictions_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.3.9:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

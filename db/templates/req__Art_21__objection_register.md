@@ -13,6 +13,8 @@ table_shape: true
 
 # Objection Register
 
+<<DOC_CONTROL>>
+
 > Per-objection record. Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.21:objection_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.21:reg_grounds -->
 <!-- column: item:Art.21:reg_response_date -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of any objections individuals raise under GDPR Article 21, making it easier to demonstrate compliance if asked.
+
+## When to use it
+
+Use this register whenever someone objects to your data processing activities, and update it at least once a year to ensure the information stays current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours setting up the initial register, plus additional time for each new objection you need to record.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Cross-leaf_
 
 > _Standard text:_ Per-row request id (Art.12 cross-ref)
 
+<<GUIDANCE>>
+
 ### Reg Objection Type
 
 <<MUST item:Art.21:reg_objection_type>>
 _Why: Art.21.1-6_
 
 > _Standard text:_ Per-row objection type (direct marketing absolute / legitimate interests balancing / scientific research)
+
+<<GUIDANCE>>
 
 ### Reg Outcome
 
@@ -58,12 +83,16 @@ _Why: Art.21.1_
 
 > _Standard text:_ Per-row outcome (processing ceased / continued with compelling grounds / partial)
 
+<<GUIDANCE>>
+
 ### Reg Grounds
 
 <<MUST item:Art.21:reg_grounds>>
 _Why: Art.21.1 — defensibility_
 
 > _Standard text:_ Per-row grounds for continuing (for legitimate-interests objections continued)
+
+<<GUIDANCE>>
 
 ### Reg Response Date
 
@@ -73,6 +102,8 @@ _Why: Art.12.3_
 > _Standard text:_ Per-row response date (Art.12.3 SLA tracking)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Art.21.3 operational_
 
 > _Standard text:_ Per-row addition to suppression list (direct marketing)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

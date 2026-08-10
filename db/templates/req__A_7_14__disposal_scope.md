@@ -11,14 +11,35 @@ should_count: 1
 
 # Equipment Disposal Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — equipment classes in scope, disposal triggers, exclusions
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which types of equipment are included in your disposal process, when disposal should happen, and any exclusions. It's useful for ensuring your equipment disposal practices meet ISO 27001 requirements.
+
+## When to use it
+
+Use this document whenever you need to outline or update the scope of your equipment disposal process, as it always applies to your environment. Refresh it whenever there are changes to equipment classes or disposal procedures.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this template from scratch, as you'll need to provide details for three required elements and one recommended element.
 
 ## 1. Equipment classes in scope (anything with storage — explicit list)
 
 <<MUST item:A.7.14:scope_classes>>
 _Why: 27002:7.14 — equipment containing storage media_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:7.14 — equipment containing storage media_
 <<MUST item:A.7.14:scope_triggers>>
 _Why: 27002:7.14 — disposal or re-use_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Destination scenarios (recycler / charity donation / re-sale / internal re-use / certified destruction)
 
 <<MUST item:A.7.14:scope_destinations>>
 _Why: 27002:7.14 — appropriate handling_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.14:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

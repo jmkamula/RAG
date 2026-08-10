@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Asset-Return Program Review
 
+<<DOC_CONTROL>>
+
 > The return process creates value only if it actually closes — unreturned-asset rates, delayed-access-revocation incidents, BYOD-wipe failures all signal the program is leaking. The review captures the planned-interval check: unreturned rate, access-revocation latency, exception/write-off analysis, workforce-model coverage, and resulting program adjustments. Annual cadence — HR methodology stability
 
 <!-- TABLE-COLUMNS leaf:req:A.5.11:return_program_review -->
@@ -24,6 +26,25 @@ table_shape: true
 <!-- column: item:A.5.11:rev_writeoff_audit -->
 <!-- column: item:A.5.11:rev_actions -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you systematically review your asset-return program, highlighting issues like unreturned equipment or delayed access revocation, and guides you in making improvements based on annual performance insights.
+
+## When to use it
+
+Use this review template once a year to check how well your asset-return process is working, especially if you manage devices or access for employees and want to ensure compliance and reduce risk.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours completing this from scratch, depending on the number of assets and exceptions you need to review and document.
 
 ## Register
 
@@ -46,12 +67,16 @@ _Why: 27002:5.11 — periodic_
 
 > _Standard text:_ Review date within the planned annual interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.5.11:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (HR head + IT head + InfoSec lead jointly)
+
+<<GUIDANCE>>
 
 ### Rev Unreturned Rate
 
@@ -60,12 +85,16 @@ _Why: Program effectiveness_
 
 > _Standard text:_ Unreturned-asset rate analysed (count of leavers with status=exception or written_off; root cause per cluster)
 
+<<GUIDANCE>>
+
 ### Rev Revoke Latency
 
 <<MUST item:A.5.11:rev_revoke_latency>>
 _Why: 27002:5.11 — timeliness of logical handling_
 
 > _Standard text:_ Access-revocation latency analysed (gap between effective_date and access_revoke_timestamp; investigate outliers)
+
+<<GUIDANCE>>
 
 ### Rev Byod Health
 
@@ -74,12 +103,16 @@ _Why: Workforce-model coverage_
 
 > _Standard text:_ BYOD-wipe health check (sample of recent BYOD leavers re-verified for selective-wipe success or org-data presence)
 
+<<GUIDANCE>>
+
 ### Rev Writeoff Audit
 
 <<MUST item:A.5.11:rev_writeoff_audit>>
 _Why: Risk discipline_
 
 > _Standard text:_ Write-off audit (any leaver row written off — was risk acceptance appropriately authorised? what value was lost?)
+
+<<GUIDANCE>>
 
 ### Rev Actions
 
@@ -89,6 +122,8 @@ _Why: 27002:5.11 — program adjustments_
 > _Standard text:_ Action items captured (e.g. tighten access-revoke automation, expand asset checklist, retrain managers)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -101,9 +136,17 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Workforce-model shift considered (e.g. step-change in remote-work proportion or contractor mix that changes risk surface)
 
+<<GUIDANCE>>
+
 ### Rev Next Date
 
 <<SHOULD item:A.5.11:rev_next_date>>
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

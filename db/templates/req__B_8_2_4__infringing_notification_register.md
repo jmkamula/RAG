@@ -13,6 +13,8 @@ table_shape: true
 
 # Infringing Instruction Notification Register
 
+<<DOC_CONTROL>>
+
 > Per-notification row — the register of infringing-instruction notices issued. Often near-empty in practice, but every issued notice must be captured. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:B.8.2.4:infringing_notification_register -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:B.8.2.4:reg_notification_date -->
 <!-- column: item:B.8.2.4:reg_customer_response -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of any notices you issue about instructions that may breach privacy requirements. It's useful for tracking compliance and demonstrating your response to potential privacy risks.
+
+## When to use it
+
+Use this register whenever you issue a notice about an instruction that could infringe on privacy, and review or update it at least once a year to ensure it stays current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours to set up the register for the first time, with additional time needed for each new notice you record.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: Traceability_
 
 > _Standard text:_ Unique notification identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Customer Id
 
 <<MUST item:B.8.2.4:reg_customer_id>>
 _Why: Scope_
 
 > _Standard text:_ Customer identifier per row
+
+<<GUIDANCE>>
 
 ### Reg Instruction Summary
 
@@ -59,6 +84,8 @@ _Why: Traceability_
 
 > _Standard text:_ Instruction summary per row (what the customer asked for)
 
+<<GUIDANCE>>
+
 ### Reg Legislation Cited
 
 <<MUST item:B.8.2.4:reg_legislation_cited>>
@@ -66,12 +93,16 @@ _Why: §8.2.4 — applicable legislation_
 
 > _Standard text:_ Legislation cited per row (which provision the instruction appears to infringe)
 
+<<GUIDANCE>>
+
 ### Reg Notification Date
 
 <<MUST item:B.8.2.4:reg_notification_date>>
 _Why: Currency_
 
 > _Standard text:_ Notification issued date per row
+
+<<GUIDANCE>>
 
 ### Reg Customer Response
 
@@ -81,6 +112,8 @@ _Why: Resolution audit trail_
 > _Standard text:_ Customer response per row (withdrew / defended / disputed / no response)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Governance_
 
 > _Standard text:_ Escalation history per row (Legal / DPO / SA notification if unresolved)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

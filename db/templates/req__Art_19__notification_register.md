@@ -13,6 +13,8 @@ table_shape: true
 
 # Recipient Notification Register
 
+<<DOC_CONTROL>>
+
 > Per-notification record proving Art.19 obligations were met for each Art.16/17/18 event. Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.19:notification_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:Art.19:reg_notification_date -->
 <!-- column: item:Art.19:reg_omission_grounds -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record showing that you have notified all relevant parties when personal data is corrected, erased, or restricted, as required by GDPR Article 19.
+
+## When to use it
+
+Use this register whenever you inform recipients about changes to personal data, such as after a correction or deletion. Review and update it at least once a year to keep your records current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element for each notification event you need to record. Completing the register from scratch may take around 1-2 hours, depending on the number of notifications.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Cross-leaf_
 
 > _Standard text:_ Per-row source event id (Art.12 register reference)
 
+<<GUIDANCE>>
+
 ### Reg Recipient List
 
 <<MUST item:Art.19:reg_recipient_list>>
@@ -50,12 +73,16 @@ _Why: Art.19 — recipients_
 
 > _Standard text:_ Per-row recipients notified list
 
+<<GUIDANCE>>
+
 ### Reg Notification Date
 
 <<MUST item:Art.19:reg_notification_date>>
 _Why: Currency_
 
 > _Standard text:_ Per-row notification date
+
+<<GUIDANCE>>
 
 ### Reg Omission Grounds
 
@@ -65,6 +92,8 @@ _Why: Art.19 — exception_
 > _Standard text:_ Per-row omitted recipients with impossibility/disproportionality grounds where applicable
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Closure_
 
 > _Standard text:_ Per-row recipient acknowledgement where available
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

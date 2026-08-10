@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Post-Employment Program Review
 
+<<DOC_CONTROL>>
+
 > Periodic verification that every leaver in the period was briefed, that the obligation scope still matches current law, and that any breach incidents have been handled per the enforcement approach. Annual cadence (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.6.5:post_employment_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.6.5:rev_breach_history -->
 <!-- column: item:A.6.5:rev_register_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of how you handle employees who leave your organization, making sure you brief them, follow current legal requirements, and properly document any issues that arise.
+
+## When to use it
+
+Use this template once a year to review all departures from your organization, ensuring you meet compliance requirements and that your processes are up to date.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 2 hours completing this from scratch, depending on the number of leavers and incidents you need to record.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:6.5 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.6.5:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (HR lead + InfoSec lead + Legal counsel)
+
+<<GUIDANCE>>
 
 ### Rev Briefing Coverage
 
@@ -59,6 +84,8 @@ _Why: 27002:6.5 — completeness_
 
 > _Standard text:_ Briefing coverage check — every leaver in the period received and acknowledged a briefing (the register's completeness gate)
 
+<<GUIDANCE>>
+
 ### Rev Legal Drift
 
 <<MUST item:A.6.5:rev_legal_drift>>
@@ -66,12 +93,16 @@ _Why: 27002:6.5 — applicable laws_
 
 > _Standard text:_ Employment-law drift check per jurisdiction (legal counsel input on enforceability changes)
 
+<<GUIDANCE>>
+
 ### Rev Breach History
 
 <<MUST item:A.6.5:rev_breach_history>>
 _Why: 27002:6.5 — enforced_
 
 > _Standard text:_ Breach history review — any post-employment breaches occurred? handled per enforcement approach? lessons captured?
+
+<<GUIDANCE>>
 
 ### Rev Register Update
 
@@ -81,6 +112,8 @@ _Why: Closes the loop_
 > _Standard text:_ Changes propagated to the procedure / scope with reference to this review
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -93,9 +126,17 @@ _Why: Change-driven review_
 
 > _Standard text:_ Ad-hoc review triggers (high-profile leaver, regulator action affecting post-employment terms, employment-tribunal ruling)
 
+<<GUIDANCE>>
+
 ### Rev Next Date
 
 <<SHOULD item:A.6.5:rev_next_date>>
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -12,6 +12,8 @@ table_shape: true
 
 # Supplier Agreement Deviation Register
 
+<<DOC_CONTROL>>
+
 > Where a supplier successfully negotiates softer terms than the template (or omits a clause entirely), the org needs an auditable record: which clause, which supplier, the reason, the compensating control, the approver. This is the lifecycle-end slot of operational_process applied to agreements: each deviation is the supplier 'exiting' the standard template path
 
 <!-- TABLE-COLUMNS leaf:req:A.5.20:deviation_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.5.20:dev_compensating -->
 <!-- column: item:A.5.20:dev_approver -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, auditable record whenever a supplier negotiates different terms or omits standard clauses in their agreement. It ensures you can track what changed, why, and who approved it.
+
+## When to use it
+
+Use this register every time a supplier agreement deviates from your standard template, no matter when or how often it happens. Update it whenever new deviations occur or existing ones change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes entering a new deviation, as each required detail takes time to document. Adding more suppliers or deviations will increase the effort accordingly.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Clause deviated from per row (identified by template section)
 
+<<GUIDANCE>>
+
 ### Dev Supplier
 
 <<MUST item:A.5.20:dev_supplier>>
 _Why: Accountability_
 
 > _Standard text:_ Supplier identifier per row (link to A.5.19 supplier register)
+
+<<GUIDANCE>>
 
 ### Dev Reason
 
@@ -57,12 +82,16 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Reason for the deviation captured (commercial necessity, market constraint, supplier capability)
 
+<<GUIDANCE>>
+
 ### Dev Compensating
 
 <<MUST item:A.5.20:dev_compensating>>
 _Why: Risk-based_
 
 > _Standard text:_ Compensating control stated (monitoring, contractual remedy, alternative requirement)
+
+<<GUIDANCE>>
 
 ### Dev Approver
 
@@ -72,6 +101,8 @@ _Why: Accountability_
 > _Standard text:_ Approver of the deviation, at level proportional to residual risk
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,9 +115,17 @@ _Why: Drift control_
 
 > _Standard text:_ Expiry / re-papering target date for each deviation (so deviations age out rather than persist indefinitely)
 
+<<GUIDANCE>>
+
 ### Dev Reassessment
 
 <<SHOULD item:A.5.20:dev_reassessment>>
 _Why: Change-driven_
 
 > _Standard text:_ Trigger for reassessment when supplier or risk circumstances change
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

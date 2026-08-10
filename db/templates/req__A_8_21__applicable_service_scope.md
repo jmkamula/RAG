@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Network Services Scope
 
+<<DOC_CONTROL>>
+
 > Upstream — what counts as 'network service' for A.8.21. ISP / CDN / DNS / SD-WAN / cloud connectivity / managed-firewall / VPN-as-service all in scope
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which network services are included in your compliance scope, such as your ISP, CDN, DNS, cloud connectivity, and managed security services.
+
+## When to use it
+
+Use this document whenever you need to outline which network services are covered by your ISO 27001 program. Review and update it whenever your network environment changes.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to describe three required elements in detail.
 
 ## 1. Service classes enumerated with assessment depth per class
 
 <<MUST item:A.8.21:scope_classes>>
 _Why: 27002:8.21 — network services_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.21 — network services_
 <<MUST item:A.8.21:scope_criticality>>
 _Why: Proportionality_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Exclusion rationale (in-house operated services governed under A.8.20)
 
 <<MUST item:A.8.21:scope_exclusions>>
 _Why: Boundary clarity_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.21:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

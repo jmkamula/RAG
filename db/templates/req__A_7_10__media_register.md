@@ -12,6 +12,8 @@ table_shape: true
 
 # Storage Media Register
 
+<<DOC_CONTROL>>
+
 > The catalogue of issued storage media — id, classification, current holder, lifecycle stage. Drives 'where is media X' query and stale-issue detection
 
 <!-- TABLE-COLUMNS leaf:req:A.7.10:media_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.7.10:reg_lifecycle_stage -->
 <!-- column: item:A.7.10:reg_issued_date -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of all issued storage media, including who has them, their classification, and their current status. It makes it easy to answer questions about the location and handling of your storage devices.
+
+## When to use it
+
+Use this register at all times in your environment to maintain an up-to-date record of storage media. Update it whenever new media is issued, returned, or changes status.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes setting up the initial required details, plus additional time for each storage media item you need to record.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: Lifecycle tracking_
 
 > _Standard text:_ Per-row media identifier (serial/asset tag)
 
+<<GUIDANCE>>
+
 ### Reg Class
 
 <<MUST item:A.7.10:reg_class>>
 _Why: Cross-control coherence_
 
 > _Standard text:_ Per-row classification (drives encryption + handling requirements)
+
+<<GUIDANCE>>
 
 ### Reg Holder
 
@@ -57,12 +82,16 @@ _Why: Accountability_
 
 > _Standard text:_ Per-row current holder
 
+<<GUIDANCE>>
+
 ### Reg Lifecycle Stage
 
 <<MUST item:A.7.10:reg_lifecycle_stage>>
 _Why: 27002:7.10 — life cycle_
 
 > _Standard text:_ Per-row lifecycle stage (in-use / in-transit / awaiting-disposal / disposed)
+
+<<GUIDANCE>>
 
 ### Reg Issued Date
 
@@ -72,6 +101,8 @@ _Why: Drift detection_
 > _Standard text:_ Per-row issue date
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -83,3 +114,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Loss detection_
 
 > _Standard text:_ Per-row last-seen timestamp (drives stale-issue detection)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

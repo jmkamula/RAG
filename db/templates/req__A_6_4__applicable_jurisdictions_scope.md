@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Jurisdictions and Worker Categories Scope
 
+<<DOC_CONTROL>>
+
 > The upstream that drives procedure variants. Documents which jurisdictions the procedure operates in (employment-law variations affect what's permissible — required-notice periods, just-cause requirements, statutory remediation steps) and how it extends to non-employee workers (contractors get different process leverage)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which regions and types of workers your procedures cover, making it easier to comply with local employment laws and handle different worker categories appropriately.
+
+## When to use it
+
+Use this document whenever you need to outline the jurisdictions and worker types your procedures apply to, and update it whenever there are changes in your operating regions or workforce structure.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this from scratch, as you'll need to address several required elements related to jurisdictions and worker categories.
 
 ## 1. Jurisdictions covered (employment-law variants — at-will US states vs just-cause EU vs notice-period UK — drive process step variations)
 
 <<MUST item:A.6.4:scope_jurisdictions>>
 _Why: 27002:6.4 — applicable laws_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,6 +48,8 @@ _Why: 27002:6.4 — applicable laws_
 <<MUST item:A.6.4:scope_worker_categories>>
 _Why: 27002:6.4 — interested parties_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Regulator-notification triggers per jurisdiction (financial-services FSA notification for serious misconduct, healthcare professional body notification)
@@ -34,12 +57,16 @@ _Why: 27002:6.4 — interested parties_
 <<MUST item:A.6.4:scope_regulator_notify>>
 _Why: 27002:6.4 — sectoral_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 4. Legal review path stated (when local employment counsel must be engaged before action — typically all dismissal cases + suspension cases over X days)
 
 <<MUST item:A.6.4:scope_legal_review>>
 _Why: 27002:6.4 — applicable laws_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -54,4 +81,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.6.4:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

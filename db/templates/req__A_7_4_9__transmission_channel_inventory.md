@@ -13,6 +13,8 @@ table_shape: true
 
 # PII Transmission Channel Inventory
 
+<<DOC_CONTROL>>
+
 > Per-channel row — the transmission channels the org uses for PII, with security profile + audit logging status. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:A.7.4.9:transmission_channel_inventory -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.4.9:reg_auth_mechanism -->
 <!-- column: item:A.7.4.9:reg_audit_log_retention -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of all the ways your organization sends or receives personal information, including how secure each channel is and whether activity is logged for audits.
+
+## When to use it
+
+Use this document if your organization handles personal data and needs to regularly review and update how information is transmitted, especially when your privacy profile requires it. Plan to refresh it about once a year.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend 10 to 15 minutes per required detail for each transmission channel. Completing the register from scratch may take a few hours, depending on how many channels you use.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Referenceability_
 
 > _Standard text:_ Unique channel identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Endpoint
 
 <<MUST item:A.7.4.9:reg_endpoint>>
 _Why: Traceability_
 
 > _Standard text:_ Source + destination endpoints per row
+
+<<GUIDANCE>>
 
 ### Reg Encryption
 
@@ -58,12 +83,16 @@ _Why: GDPR Art.32.1.a_
 
 > _Standard text:_ Encryption standard per row (TLS 1.2 / TLS 1.3 / VPN / SFTP / etc.)
 
+<<GUIDANCE>>
+
 ### Reg Auth Mechanism
 
 <<MUST item:A.7.4.9:reg_auth_mechanism>>
 _Why: §7.4.9 — authorized_
 
 > _Standard text:_ Authentication mechanism per row (mutual TLS / OAuth / API key + IP allowlist / etc.)
+
+<<GUIDANCE>>
 
 ### Reg Audit Log Retention
 
@@ -73,6 +102,8 @@ _Why: §7.4.9 — retention of audit logs_
 > _Standard text:_ Audit log retention per row
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Assurance_
 
 > _Standard text:_ Last pen-test / security assessment date per row
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

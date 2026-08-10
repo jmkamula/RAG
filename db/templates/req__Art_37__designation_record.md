@@ -13,6 +13,8 @@ table_shape: true
 
 # DPO Designation Record
 
+<<DOC_CONTROL>>
+
 > Per-DPO designation record (most orgs have 1; group designations may have more). Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.37:designation_record -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.37:reg_employment_type -->
 <!-- column: item:Art.37:reg_publication_evidence -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of your Data Protection Officer (DPO) designation, making it easy to show compliance with GDPR requirements.
+
+## When to use it
+
+Use this template if your organization is required to appoint a DPO under GDPR, or if your business profile matches similar triggers. Plan to review and update it about once a year.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on how many DPOs or group designations you need to record.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Authenticity_
 
 > _Standard text:_ DPO identity per row
 
+<<GUIDANCE>>
+
 ### Reg Qualifications Evidence
 
 <<MUST item:Art.37:reg_qualifications_evidence>>
 _Why: Art.37.5_
 
 > _Standard text:_ Per-row qualifications evidence (CV / certifications / professional experience)
+
+<<GUIDANCE>>
 
 ### Reg Designation Date
 
@@ -58,12 +83,16 @@ _Why: Currency_
 
 > _Standard text:_ Per-row designation date
 
+<<GUIDANCE>>
+
 ### Reg Employment Type
 
 <<MUST item:Art.37:reg_employment_type>>
 _Why: Art.37.6_
 
 > _Standard text:_ Per-row employment type (internal staff / external service contract)
+
+<<GUIDANCE>>
 
 ### Reg Publication Evidence
 
@@ -73,6 +102,8 @@ _Why: Art.37.7_
 > _Standard text:_ Per-row publication evidence (privacy notice URL + SA notification confirmation)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Audit defensibility_
 
 > _Standard text:_ Per-row link to employment / service contract document
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

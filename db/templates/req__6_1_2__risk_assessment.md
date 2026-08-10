@@ -11,6 +11,8 @@ should_count: 2
 
 # Information Security Risk Assessment Procedure
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
 The **methodology document** that explains *how* you assess
@@ -22,31 +24,17 @@ register actually follows it.
 
 ## When to use it
 
-You're authoring the risk-assessment procedure required by **ISO/IEC
-27001:2022 Clause 6.1.2**. A weak or absent procedure causes one of
+You're authoring the risk-assessment procedure required by **ISO/IEC 27001:2022 Clause 6.1.2**. A weak or absent procedure causes one of
 the most common audit findings — "your risk register exists but how
 did you decide what's on it?"
 
-## Before you start
+## Prerequisites
 
-- [ ] **4.3 ISMS Scope** — risk assessment runs within scope
-- [ ] **5.2 InfoSec Policy** — risk-acceptance criteria align with
-      objectives stated there
-- [ ] **5.3 Roles** — risk owners must be a defined role with
-      authority to accept residual risk
-- [ ] Have an **A.5.9 asset register** under way — risks attach to
-      assets
+<<PREREQUISITES>>
 
 ## Cross-references
 
-- **6.1.3 Risk Treatment Plan + SoA** — the procedure's output feeds
-  treatment selection
-- **6.1.1 Risks and opportunities** — sets the upstream framing
-- **Art.32 + Art.35 (GDPR)** — personal-data processing requires
-  risk-based T&O measures + DPIA for high-risk processing; the
-  procedure must accommodate both ISO + GDPR contexts
-- **9.1 monitoring + 9.3 management review** — the procedure's
-  outputs are reviewed inputs
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
@@ -54,10 +42,6 @@ did you decide what's on it?"
 for the first full run of the procedure to build the live register.
 
 ---
-
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
 
 ## 1. Define risk acceptance criteria
 
@@ -80,6 +64,8 @@ register with the accepting role, date, and review date."
 
 **✗ Avoid**: "Risks are accepted based on management judgement"
 (non-repeatable; fails consistency MUST 2).
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -106,6 +92,8 @@ review."
 **✗ Avoid**: Numerical scales with no anchor descriptions (different
 assessors will pick different numbers).
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Identify CIA risks
@@ -128,6 +116,8 @@ landscape. (c) Scenario-driven — top-10 scenarios reviewed
 quarterly (data breach, ransomware, vendor compromise, insider, etc.).
 Confidentiality, Integrity and Availability are scored separately on
 each risk."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -154,6 +144,8 @@ TRACKS; owners DECIDE."
 **✗ Avoid**: All risks owned by CISO / ISMS Manager (central
 ownership defeats the point of distributed risk management).
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Analyse potential consequences
@@ -176,6 +168,8 @@ disruption (RTO/RPO breach). (5) Harm to data subjects (rights
 infringement; potential to cause physical, material, or non-material
 damage per GDPR Recital 75)."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Assess realistic likelihood
@@ -196,6 +190,8 @@ sector reports) so it isn't pure gut feel.
 Peer comparison via the CISO-share programme. The likelihood score
 rationale is recorded in the register cell."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Evaluate risks against acceptance criteria
@@ -214,6 +210,8 @@ likelihood), placed in green/yellow/red, the acceptance authority
 runs the criteria check, and the outcome ('accept' or 'treat') is
 recorded in the register with date + decider. Risks that move
 between zones at re-assessment trigger a treatment-plan review."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -239,6 +237,8 @@ yellow-or-red on PII + meeting the Art.35 high-risk criteria
 a DPIA before treatment selection. DPO is the co-owner on all
 personal-data risks."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ---
@@ -257,6 +257,8 @@ recognised methodology._
 Most orgs base their procedure on ISO 31000, NIST SP 800-30, OCTAVE,
 or FAIR. Name yours + cite where your adaptations diverge.
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### State assessment date + next review date
@@ -269,4 +271,10 @@ _Document-control discipline — required by Clause 7.5._
 
 Standard top-of-document metadata.
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Sites and Threat Catalogue Scope
 
+<<DOC_CONTROL>>
+
 > The upstream that drives the register. Documents which sites are in scope and the threat catalogue considered per site type
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly identify which sites are included in your security program and outlines the specific threats relevant to each type of site. It ensures your risk register is based on accurate and current information.
+
+## When to use it
+
+Use this document whenever you need to define or update the scope of your sites and the threats they face. It should always reflect your current environment and be refreshed whenever there are changes.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this from scratch, as each required section takes around 10-15 minutes to fill out thoughtfully.
 
 ## 1. Sites in scope (drawn from A.7.1 applicable-sites scope)
 
 <<MUST item:A.7.5:scope_sites>>
 _Why: Cross-control coherence_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,6 +48,8 @@ _Why: Cross-control coherence_
 <<MUST item:A.7.5:scope_threat_catalogue>>
 _Why: 27002:7.5 — threats_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Geographic risk overlay (seismic zone, floodplain, climate band, civil-stability index per site location)
@@ -34,12 +57,16 @@ _Why: 27002:7.5 — threats_
 <<MUST item:A.7.5:scope_geography>>
 _Why: Site-specific applicability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 4. Sectoral drivers (data-centre industry standards, healthcare facility codes)
 
 <<MUST item:A.7.5:scope_sectoral_drivers>>
 _Why: 27002:7.5 — applicability_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -54,4 +81,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.5:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

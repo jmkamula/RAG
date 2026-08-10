@@ -13,6 +13,8 @@ table_shape: true
 
 # Planning Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that planning inputs are being consumed, the action register is current, effectiveness is being evaluated (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:6.1.1:planning_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:6.1.1:rev_register_currency -->
 <!-- column: item:6.1.1:rev_effectiveness -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your planning activities, making sure your action register is up to date and that your planning process is working as intended.
+
+## When to use it
+
+Use this document once a year to review your planning program, confirm that planning inputs are being used, and check that your action register and evaluations are current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours completing this from scratch, depending on how many items you need to review and update in your register.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Clause 6.1.1 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:6.1.1:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (ISMS Manager + executive sponsor)
+
+<<GUIDANCE>>
 
 ### Rev Inputs Currency
 
@@ -58,12 +83,16 @@ _Why: Cross-clause coherence_
 
 > _Standard text:_ Inputs currency check — 4.1 + 4.2 reviewed before this planning cycle
 
+<<GUIDANCE>>
+
 ### Rev Register Currency
 
 <<MUST item:6.1.1:rev_register_currency>>
 _Why: Cross-leaf coherence_
 
 > _Standard text:_ Action register currency check — every row reviewed for status + relevance
+
+<<GUIDANCE>>
 
 ### Rev Effectiveness
 
@@ -73,6 +102,8 @@ _Why: Clause 6.1.1 — evaluate effectiveness_
 > _Standard text:_ Effectiveness summary across completed actions
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

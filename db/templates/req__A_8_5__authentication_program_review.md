@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Authentication Program Review
 
+<<DOC_CONTROL>>
+
 > Periodic verification that authentication baseline still matches threat landscape, exception inventory is current, and the log shows expected hygiene (freshness=180; auth attack patterns evolve fast)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.5:authentication_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.8.5:rev_anomaly_outcomes -->
 <!-- column: item:A.8.5:rev_baseline_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you regularly check that your authentication methods are still effective, your list of exceptions is up to date, and your logs show healthy activity. It’s designed to keep your security practices aligned with current threats.
+
+## When to use it
+
+Use this template for a thorough review of your authentication program about every six months, or whenever you need to confirm your controls match the latest risks and requirements in your environment.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on how many exceptions or changes you need to document in the register.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:8.5 — periodic_
 
 > _Standard text:_ Review date within the planned interval (≤180 days)
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.5:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (IAM lead + InfoSec lead jointly)
+
+<<GUIDANCE>>
 
 ### Rev Threat Landscape
 
@@ -59,6 +84,8 @@ _Why: 27002:8.5 — secure (currency)_
 
 > _Standard text:_ Threat-landscape review (new attack patterns since last review — feed from threat intel A.5.7)
 
+<<GUIDANCE>>
+
 ### Rev Exception Inventory
 
 <<MUST item:A.8.5:rev_exception_inventory>>
@@ -66,12 +93,16 @@ _Why: Drift prevention_
 
 > _Standard text:_ Exception inventory re-confirmed / retired
 
+<<GUIDANCE>>
+
 ### Rev Anomaly Outcomes
 
 <<MUST item:A.8.5:rev_anomaly_outcomes>>
 _Why: Detection effectiveness_
 
 > _Standard text:_ Anomaly-detection outcomes reviewed (true-positive rate, missed-detection postmortems)
+
+<<GUIDANCE>>
 
 ### Rev Baseline Update
 
@@ -81,6 +112,8 @@ _Why: Closes the loop_
 > _Standard text:_ Baseline / procedure updates published from findings
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

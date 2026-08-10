@@ -13,6 +13,8 @@ table_shape: true
 
 # Art.32 Risk-Appropriate T&O Measures Register
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
 The **per-activity ledger** of technical and organisational
@@ -29,31 +31,17 @@ You're producing the register required by **GDPR Article 32**.
 Annual refresh minimum (freshness 365d). One row per RoPA
 processing activity (cross-references the Art.30 register).
 
-## Before you start
+## Prerequisites
 
-- [ ] **Art.30 RoPA** populated — drives the activity-row list
-- [ ] **6.1.2 Risk Assessment** + register — risk scores per
-      processing activity
-- [ ] **6.1.3 SoA** — ISO 27001 controls per activity to
-      cross-reference
-- [ ] **A.5.7 Threat Intelligence** — informs risk scoring
+<<PREREQUISITES>>
 
 ## Cross-references
 
-- **Art.30 RoPA** — activity-row source
-- **Art.5.1.f** — security-of-processing principle (derives_from
-  Art.32)
-- **6.1.2 / 6.1.3** — risk methodology + treatment
-- **A.5.15-18** — access controls referenced
-- **A.5.24 + A.5.27 + A.5.28** — IR + lessons + evidence
-- **A.5.30 ICT Readiness** — restoration capability
-- **A.8.13 Backup** — backup discipline
-- **A.8.24 Cryptography** — encryption discipline
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
-**8-16 hours** for v1 (per-activity risk scoring + measures
-mapping); **2-4 hours** for annual refresh.
+**8-16 hours** for v1 (per-activity risk scoring + measures mapping); **2-4 hours** for annual refresh.
 
 ---
 
@@ -99,6 +87,8 @@ Every Art.32 row resolves 1:1 to a RoPA row.
 **✗ Avoid**: Inventing new IDs not in the RoPA — the auditor
 cross-checks both registers and any mismatch is a finding.
 
+<<GUIDANCE>>
+
 ### Risk (L × S to subject)
 
 <<MUST item:Art.32:reg_risk_assessment>>
@@ -106,8 +96,7 @@ cross-checks both registers and any mismatch is a finding.
 > _Standard text:_ Per-row risk-to-rights-and-freedoms assessment
 > (likelihood + severity)
 
-Score risk per Art.32 lens: **likelihood × severity of harm to data
-subjects** (distinct from generic ISO risk-to-org). Recital 75 lists
+Score risk per Art.32 lens: **likelihood × severity of harm to data subjects** (distinct from generic ISO risk-to-org). Recital 75 lists
 the harm categories: identity theft, financial loss, reputation,
 loss of confidentiality, restriction of rights, etc.
 
@@ -119,6 +108,8 @@ reputation damage.`
 appropriateness justification depends on which harm type drives the
 score.
 
+<<GUIDANCE>>
+
 ### T&O Measures Applied
 
 <<MUST item:Art.32:reg_measures>>
@@ -126,9 +117,7 @@ score.
 > _Standard text:_ Per-row T&O measures applied (pseudonymisation /
 > encryption / CIA / resilience / restoration)
 
-The specific Art.32.1(a-d) measures: **(a)** pseudonymisation /
-encryption, **(b)** ongoing CIA + resilience, **(c)** restore
-availability after incident, **(d)** regular testing.
+The specific Art.32.1(a-d) measures: **(a)** pseudonymisation / encryption, **(b)** ongoing CIA + resilience, **(c)** restore availability after incident, **(d)** regular testing.
 
 **✓ Good**: `(a) TLS 1.2+, AES-256, pseudonymous user-ID in event
 logs; (b) RBAC + MFA per A.5.15-18, audit log per A.8.15; (c)
@@ -137,6 +126,8 @@ multi-AZ + PIT recovery 35d per A.5.30; (d) IR exercises quarterly
 
 **✗ Avoid**: "Appropriate measures in place" — too vague to audit.
 
+<<GUIDANCE>>
+
 ### Appropriateness Justification
 
 <<MUST item:Art.32:reg_appropriateness>>
@@ -144,10 +135,7 @@ multi-AZ + PIT recovery 35d per A.5.30; (d) IR exercises quarterly
 > _Standard text:_ Per-row appropriateness justification (state of
 > art / cost / nature of processing weighted against risk)
 
-The **hardest column to write** but the one regulators sample.
-Art.32.1 requires you to weigh: **state of the art**, **cost of
-implementation**, **nature/scope/context/purposes**, **risk to
-subjects**. Cover all four.
+The **hardest column to write** but the one regulators sample. Art.32.1 requires you to weigh: **state of the art**, **cost of implementation**, **nature/scope/context/purposes**, **risk to subjects**. Cover all four.
 
 **✓ Good**: "Score 12 (yellow) within accepted tier. Measures
 appropriate because: (a) state of art — TLS 1.3 deployed; AES-256
@@ -159,6 +147,8 @@ change."
 
 **✗ Avoid**: Generic statements like "measures are appropriate to the
 risk" — no auditor will accept that.
+
+<<GUIDANCE>>
 
 ### Owner
 
@@ -175,6 +165,8 @@ appropriate given current risk + current state of the art.
 **✗ Avoid**: "Security team" — un-actionable.
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -194,3 +186,9 @@ Lets the ISO certification work double for GDPR Art.32 evidence.
 **Example**: `Encryption → A.8.24; Access control → A.5.15-18; Audit
 logging → A.8.15; Backup → A.8.13; Resilience + restoration → A.5.30;
 IR → A.5.24-28; Pseudonymisation → A.8.11.`
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

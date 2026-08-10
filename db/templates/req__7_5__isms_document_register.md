@@ -13,6 +13,8 @@ table_shape: true
 
 # ISMS Document Register
 
+<<DOC_CONTROL>>
+
 > Per-document record — every controlled ISMS document with owner, version, approval date, next review date. The live inventory that proves the policy is being applied. Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:7.5:isms_document_register -->
@@ -24,6 +26,25 @@ table_shape: true
 <!-- column: item:7.5:reg_next_review -->
 <!-- column: item:7.5:reg_classification -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, up-to-date list of all your important ISMS documents, showing who owns each one, its version, and key review dates. It’s useful for tracking compliance and demonstrating that your document management policy is being followed.
+
+## When to use it
+
+Use this register whenever you need to maintain oversight of your ISMS documents—it's always relevant for your environment. Plan to review and update it about once a year to keep information current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per document entry for the required details. If you’re starting from scratch, setting up the register for a handful of documents may take 1-2 hours.
 
 ## Register
 
@@ -46,12 +67,16 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Unique document identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Title
 
 <<MUST item:7.5:reg_title>>
 _Why: Discoverability_
 
 > _Standard text:_ Document title per row
+
+<<GUIDANCE>>
 
 ### Reg Owner
 
@@ -60,12 +85,16 @@ _Why: Accountability_
 
 > _Standard text:_ Document owner per row
 
+<<GUIDANCE>>
+
 ### Reg Version
 
 <<MUST item:7.5:reg_version>>
 _Why: Clause 7.5.3 — control_
 
 > _Standard text:_ Current version per row
+
+<<GUIDANCE>>
 
 ### Reg Approval Date
 
@@ -74,12 +103,16 @@ _Why: Currency_
 
 > _Standard text:_ Last approval date per row
 
+<<GUIDANCE>>
+
 ### Reg Next Review
 
 <<MUST item:7.5:reg_next_review>>
 _Why: Currency_
 
 > _Standard text:_ Next review date per row (drives staleness alerts)
+
+<<GUIDANCE>>
 
 ### Reg Classification
 
@@ -89,6 +122,8 @@ _Why: Clause 7.5.3 — protected_
 > _Standard text:_ Information classification per row (cross-link to A.5.12)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -100,3 +135,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Clause 7.5.3 — retention_
 
 > _Standard text:_ Retention period per row (cross-link to A.5.33 / A.5.34)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

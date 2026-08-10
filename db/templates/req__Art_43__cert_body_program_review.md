@@ -13,6 +13,8 @@ table_shape: true
 
 # Cert Body Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — accreditation current, issuances criteria-aligned, complaints handled (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.43:cert_body_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.43:rev_issuance_audit -->
 <!-- column: item:Art.43:rev_complaint_handling -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record showing your accreditation is up to date, your certification decisions follow the right criteria, and any complaints are handled properly.
+
+## When to use it
+
+Use this review record once a year, or whenever your certification body profile changes in a way that requires a fresh compliance check under GDPR Article 43.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, depending on how many entries you need to add to the register.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.43:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (executive sponsor + independent counsel)
+
+<<GUIDANCE>>
 
 ### Rev Accreditation Currency
 
@@ -58,12 +83,16 @@ _Why: Art.43.1_
 
 > _Standard text:_ Accreditation currency — SA / NAB accreditation still in force
 
+<<GUIDANCE>>
+
 ### Rev Issuance Audit
 
 <<MUST item:Art.43:rev_issuance_audit>>
 _Why: Art.43.5_
 
 > _Standard text:_ Issuance audit — sampled decisions reviewed against published criteria (Art.43.5)
+
+<<GUIDANCE>>
 
 ### Rev Complaint Handling
 
@@ -73,6 +102,8 @@ _Why: Art.43.2.d_
 > _Standard text:_ Complaint handling audit — complaints processed within fair procedural standards
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

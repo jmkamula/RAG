@@ -13,6 +13,8 @@ table_shape: true
 
 # Art.14 Privacy Notice Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that every third-party source is captured, notice was delivered per Art.14.3 deadlines, Art.14.5 exception claims still hold (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.14:privacy_notice_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.14:rev_deadline_compliance -->
 <!-- column: item:Art.14:rev_exception_reassessment -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of all third-party data sources and confirm that privacy notices were sent out on time, as required by GDPR Article 14. It also checks if any exceptions you claimed are still valid.
+
+## When to use it
+
+Use this template once a year to review your privacy notice program, especially if you regularly receive personal data from third parties. It’s designed for environments where Article 14 always applies.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours completing this from scratch, depending on the number of third-party sources you need to review and document.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic accountability_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.14:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + procurement / data-acquisition lead)
+
+<<GUIDANCE>>
 
 ### Rev Register Currency
 
@@ -58,12 +83,16 @@ _Why: Cross-leaf coherence_
 
 > _Standard text:_ Register currency check — every active third-party source has a current row
 
+<<GUIDANCE>>
+
 ### Rev Deadline Compliance
 
 <<MUST item:Art.14:rev_deadline_compliance>>
 _Why: Art.14.3_
 
 > _Standard text:_ Deadline compliance audit — notice deadlines met per Art.14.3
+
+<<GUIDANCE>>
 
 ### Rev Exception Reassessment
 
@@ -73,6 +102,8 @@ _Why: Currency_
 > _Standard text:_ Art.14.5 exception re-assessment — exceptions claimed still hold (proportionate-impossibility may change)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

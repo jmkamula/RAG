@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Cross-Jurisdiction Transfers Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — every PII flow that crosses a jurisdictional boundary. Includes internal cross-border transfers within multi-region org.
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define and document every instance where personal data crosses jurisdictional boundaries, including transfers within your organization across different regions. It's designed to support compliance with privacy standards like ISO 27701.
+
+## When to use it
+
+Use this template whenever your organization handles personal data that moves between countries or regions, especially if your operations span multiple jurisdictions. Update it as needed whenever your data flows or organizational structure change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this template from scratch, as each required section takes roughly 10 to 15 minutes to fill out thoughtfully.
 
 ## 1. PII flow inventory — every flow map row (from A.7.5.2) with jurisdiction pair
 
 <<MUST item:A.7.5.1:scope_flow_inventory>>
 _Why: Coverage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Coverage_
 <<MUST item:A.7.5.1:scope_internal_transfers>>
 _Why: Comprehensiveness_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Excluded flows (intra-jurisdiction) with rationale
 
 <<MUST item:A.7.5.1:scope_exclusions>>
 _Why: §7.5.1 NOTE_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.5.1:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

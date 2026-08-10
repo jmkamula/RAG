@@ -11,14 +11,35 @@ should_count: 2
 
 # SIG Engagement Risk-Topic Scope
 
+<<DOC_CONTROL>>
+
 > The upstream that drives the register. Documents the threat categories, technology stack components, sectoral concerns and skill domains that justify each SIG membership. ISO 27002:2022 § 5.6 expects engagement to be relevant — random or legacy memberships fail the test
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly document why your organization participates in each SIG, including relevant risks, technologies, industry concerns, and required skills. It ensures your SIG memberships are justified and aligned with compliance expectations.
+
+## When to use it
+
+Use this whenever you need to define or review the scope of your SIG memberships, especially when joining new groups or updating your risk register. Refresh the document as your environment or memberships change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this from scratch, as you'll need to provide details for four required elements and possibly a bit more time for recommended sections.
 
 ## 1. Threat categories prioritised (ransomware, supply-chain, insider, sector-specific) that justify SIG choices
 
 <<MUST item:A.5.6:scope_threat_categories>>
 _Why: 27002:5.6 — relevant_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,6 +48,8 @@ _Why: 27002:5.6 — relevant_
 <<MUST item:A.5.6:scope_tech_stack>>
 _Why: 27002:5.6b_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Sectoral concerns (finance ISAC, health ISAC, critical infra forum) driving sector-specific memberships
@@ -34,12 +57,16 @@ _Why: 27002:5.6b_
 <<MUST item:A.5.6:scope_sectoral>>
 _Why: 27002:5.6 — relevant_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 4. Professional development / skill domains (CISO peer groups, secure-coding communities) driving professional memberships
 
 <<MUST item:A.5.6:scope_skill_domains>>
 _Why: 27002:5.6_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -54,6 +81,8 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.5.6:scope_threat_intel_link>>
 _Why: Cross-control coherence_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Trigger for re-scoping (new tech adoption, new sector entry, emerging threat class)
@@ -61,4 +90,10 @@ _Why: Cross-control coherence_
 <<SHOULD item:A.5.6:scope_change_trigger>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

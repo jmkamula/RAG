@@ -12,6 +12,8 @@ table_shape: true
 
 # Lessons Learned Register
 
+<<DOC_CONTROL>>
+
 > A.5.27 requires lessons to be captured and acted on — without a register the action items disappear into someone's mailbox. The register tracks per-lesson: the source incident, root-cause type, control or training affected, owner, status, action due date and closure date. It feeds the periodic program review and the per-lesson improvement-action records
 
 <!-- TABLE-COLUMNS leaf:req:A.5.27:lessons_register -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.5.27:reg_status -->
 <!-- column: item:A.5.27:reg_due_closed -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you systematically capture and track lessons learned from incidents, ensuring that action items are followed up and improvements are documented for future reference.
+
+## When to use it
+
+Use this register whenever lessons are identified in your environment, such as after incidents or reviews, and update it as needed to keep your records current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours setting up the initial register, with additional time required for each new lesson or incident you document.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:5.27 — knowledge_
 
 > _Standard text:_ Each lesson captured with a unique identifier
 
+<<GUIDANCE>>
+
 ### Reg Source Incident
 
 <<MUST item:A.5.27:reg_source_incident>>
 _Why: 27002:5.27 — from incidents_
 
 > _Standard text:_ Source incident reference per row (links to A.5.26 incident register)
+
+<<GUIDANCE>>
 
 ### Reg Root Cause Type
 
@@ -59,12 +84,16 @@ _Why: 27002:5.27f_
 
 > _Standard text:_ Root-cause type per row (drives recurring-pattern analysis)
 
+<<GUIDANCE>>
+
 ### Reg Target
 
 <<MUST item:A.5.27:reg_target>>
 _Why: 27002:5.27a_
 
 > _Standard text:_ Target per row (which control / training / procedure is affected)
+
+<<GUIDANCE>>
 
 ### Reg Owner
 
@@ -73,12 +102,16 @@ _Why: Accountability_
 
 > _Standard text:_ Named owner accountable for the action per row
 
+<<GUIDANCE>>
+
 ### Reg Status
 
 <<MUST item:A.5.27:reg_status>>
 _Why: 27002:5.27a — tracking_
 
 > _Standard text:_ Status per row (open / in-progress / closed / accepted)
+
+<<GUIDANCE>>
 
 ### Reg Due Closed
 
@@ -88,6 +121,8 @@ _Why: Operational discipline_
 > _Standard text:_ Action due date + closure date per row
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -100,9 +135,17 @@ _Why: 27002:5.27e_
 
 > _Standard text:_ Pattern link per row where the lesson is part of a recurring cluster
 
+<<GUIDANCE>>
+
 ### Reg Risk Update Ref
 
 <<SHOULD item:A.5.27:reg_risk_update_ref>>
 _Why: 27002:5.27b_
 
 > _Standard text:_ Risk register update reference per row where applicable
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

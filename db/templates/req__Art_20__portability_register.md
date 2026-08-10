@@ -13,6 +13,8 @@ table_shape: true
 
 # Portability Request Register
 
+<<DOC_CONTROL>>
+
 > Per-request record of Art.20 fulfilments. Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.20:portability_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.20:reg_destination -->
 <!-- column: item:Art.20:reg_delivery_date -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of every data portability request your organization receives and fulfills, making it easier to demonstrate compliance with GDPR Article 20.
+
+## When to use it
+
+Use this register whenever someone asks to transfer their personal data, and update it at least once a year to ensure your records stay current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1–1.5 hours setting up the register for the first time, with additional time needed for each new request you log.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Cross-leaf_
 
 > _Standard text:_ Per-row request id (Art.12 register cross-reference)
 
+<<GUIDANCE>>
+
 ### Reg Applicability Decision
 
 <<MUST item:Art.20:reg_applicability_decision>>
 _Why: Art.20.1_
 
 > _Standard text:_ Per-row applicability decision (in-scope / out-of-scope with grounds)
+
+<<GUIDANCE>>
 
 ### Reg Format Delivered
 
@@ -58,12 +83,16 @@ _Why: Art.20.1_
 
 > _Standard text:_ Per-row delivered format
 
+<<GUIDANCE>>
+
 ### Reg Destination
 
 <<MUST item:Art.20:reg_destination>>
 _Why: Art.20.2_
 
 > _Standard text:_ Per-row destination (export to subject / direct controller transmission)
+
+<<GUIDANCE>>
 
 ### Reg Delivery Date
 
@@ -73,6 +102,8 @@ _Why: Art.12.3_
 > _Standard text:_ Per-row delivery date (within Art.12.3 SLA)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Operational_
 
 > _Standard text:_ Per-row data volume metric (records / bytes)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

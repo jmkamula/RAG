@@ -12,6 +12,8 @@ table_shape: true
 
 # Audit Testing Engagement Register
 
+<<DOC_CONTROL>>
+
 > Per-engagement catalogue — engagement id, tester, scope, dates, outcome, evidence-artefact location
 
 <!-- TABLE-COLUMNS leaf:req:A.8.34:audit_engagement_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.8.34:reg_outcome -->
 <!-- column: item:A.8.34:reg_evidence_loc -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of each audit testing engagement, including who was involved, what was tested, key dates, outcomes, and where to find supporting evidence.
+
+## When to use it
+
+Use this register whenever you conduct an audit testing engagement in your environment, and update it as needed to reflect new or changed engagements.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes entering details for a single engagement from scratch, with additional time needed for each new engagement you add.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Identification_
 
 > _Standard text:_ Per-engagement unique identifier
 
+<<GUIDANCE>>
+
 ### Reg Tester
 
 <<MUST item:A.8.34:reg_tester>>
 _Why: Accountability_
 
 > _Standard text:_ Per-engagement tester identity (internal team / external firm)
+
+<<GUIDANCE>>
 
 ### Reg Scope
 
@@ -58,6 +83,8 @@ _Why: 27002:8.34 — agreed_
 
 > _Standard text:_ Per-engagement scope description (systems / data / techniques agreed)
 
+<<GUIDANCE>>
+
 ### Reg Dates
 
 <<MUST item:A.8.34:reg_dates>>
@@ -65,12 +92,16 @@ _Why: 27002:8.34 — planned_
 
 > _Standard text:_ Per-engagement start / end / time-windows
 
+<<GUIDANCE>>
+
 ### Reg Outcome
 
 <<MUST item:A.8.34:reg_outcome>>
 _Why: Continuous evidence_
 
 > _Standard text:_ Per-engagement outcome + findings count
+
+<<GUIDANCE>>
 
 ### Reg Evidence Loc
 
@@ -80,6 +111,8 @@ _Why: 27002:8.34 — assessment_
 > _Standard text:_ Per-engagement evidence-artefact location reference
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -91,3 +124,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Operational defensibility_
 
 > _Standard text:_ Per-engagement rollback-invoked flag where applicable
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

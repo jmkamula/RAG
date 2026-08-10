@@ -11,14 +11,35 @@ should_count: 1
 
 # Protection of Information Systems During Audit Testing Policy
 
+<<DOC_CONTROL>>
+
 > A.8.34 requires audit/assurance activities on operational systems planned + agreed. Policy states pre-authorisation, scope-agreement requirements, time-window discipline, rollback requirement, evidence preservation, stakeholder notification. Per-engagement register, applicable scope, program review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you set clear rules for protecting your information systems during audit or assurance activities, ensuring everyone knows the process for authorisation, scope, timing, and evidence handling.
+
+## When to use it
+
+Use this policy whenever your environment is subject to audit or assurance activities, and review or update it whenever your audit processes or system environments change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2.5 hours drafting this policy from scratch, depending on the complexity of your environment and the number of required details.
 
 ## 1. Pre-authorisation required before any audit testing on operational systems
 
 <<MUST item:A.8.34:pre_authorisation>>
 _Why: 27002:8.34 — planned and agreed_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.34 — planned and agreed_
 <<MUST item:A.8.34:scope_agreement>>
 _Why: 27002:8.34 — agreed_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Time-window discipline (avoid peak business hours / change-freezes / customer events)
 
 <<MUST item:A.8.34:time_windows>>
 _Why: 27002:8.34 — planned_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: 27002:8.34 — planned_
 <<MUST item:A.8.34:rollback>>
 _Why: 27002:8.34 — protection of information systems_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Evidence-preservation requirement (logs / results retained per legal-regulatory chain-of-custody)
 
 <<MUST item:A.8.34:evidence_preservation>>
 _Why: 27002:8.34 — assessment of operational systems_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -55,12 +84,16 @@ _Why: 27002:8.34 — assessment of operational systems_
 <<MUST item:A.8.34:stakeholder_notification>>
 _Why: 27002:8.34 — agreed between the tester and management_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Performance-impact consideration + limit
 
 <<MUST item:A.8.34:performance_impact>>
 _Why: 27002:8.34 — protection_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -69,12 +102,16 @@ _Why: 27002:8.34 — protection_
 <<MUST item:A.8.34:dedicated_accounts>>
 _Why: Attribution clarity_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 9. Named policy authority (InfoSec lead with Internal Audit partner)
 
 <<MUST item:A.8.34:authority>>
 _Why: Accountability_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -89,4 +126,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.34:meta_audit>>
 _Why: Accountability of testers_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

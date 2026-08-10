@@ -13,6 +13,8 @@ table_shape: true
 
 # Adequacy Reliance Register
 
+<<DOC_CONTROL>>
+
 > Per-transfer record proving adequacy reliance is current and recipient is eligible. Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.45:adequacy_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:Art.45:reg_recipient_eligible -->
 <!-- column: item:Art.45:reg_last_verified -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record showing that your international data transfers meet GDPR adequacy requirements and that each recipient remains eligible. It's useful for demonstrating compliance during audits or reviews.
+
+## When to use it
+
+Use this register whenever you transfer personal data to countries or organizations relying on adequacy decisions. Update it about once a year, or whenever there are changes to your transfers or recipients.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40-60 minutes to complete the required sections for each transfer recipient, with additional time needed as you add more entries over time.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Cross-leaf_
 
 > _Standard text:_ Per-row transfer id (Art.44 register cross-ref)
 
+<<GUIDANCE>>
+
 ### Reg Adequacy Decision
 
 <<MUST item:Art.45:reg_adequacy_decision>>
@@ -50,12 +73,16 @@ _Why: Art.45.3_
 
 > _Standard text:_ Per-row adequacy decision cited (Commission decision reference + effective date)
 
+<<GUIDANCE>>
+
 ### Reg Recipient Eligible
 
 <<MUST item:Art.45:reg_recipient_eligible>>
 _Why: Art.45.3 partial_
 
 > _Standard text:_ Per-row recipient-eligibility status (e.g. US-DPF active certification verified)
+
+<<GUIDANCE>>
 
 ### Reg Last Verified
 
@@ -65,6 +92,8 @@ _Why: Currency_
 > _Standard text:_ Per-row last-verified date
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Schrems-style risk_
 
 > _Standard text:_ Per-row invalidation-watch flag (active CJEU challenges / Commission review status)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

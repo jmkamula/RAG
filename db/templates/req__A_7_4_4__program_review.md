@@ -13,6 +13,8 @@ table_shape: true
 
 # Minimization Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — minimisation objectives current, techniques appropriate for risk profile, re-identification risk stable, no drift toward over-collection (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.7.4.4:program_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.7.4.4:rev_technique_currency -->
 <!-- column: item:A.7.4.4:rev_drift_sweep -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document your annual review of data minimization practices, ensuring your objectives are up to date and your techniques match your current privacy risks.
+
+## When to use it
+
+Use this template once a year, or whenever your risk profile changes significantly, to confirm you’re not collecting more data than needed and your re-identification risks remain stable.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 45 to 60 minutes completing this from scratch, depending on how many items you need to review and record.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.4.4:rev_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + Privacy Engineering)
 
+<<GUIDANCE>>
+
 ### Rev Technique Currency
 
 <<MUST item:A.7.4.4:rev_technique_currency>>
 _Why: §7.4.4_
 
 > _Standard text:_ Technique currency — techniques still appropriate for risk profile (advances in re-identification research surfaced)
+
+<<GUIDANCE>>
 
 ### Rev Drift Sweep
 
@@ -65,6 +92,8 @@ _Why: Continuous improvement_
 > _Standard text:_ Drift sweep — new processing activities checked for minimisation opportunity
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # Operational Assessment Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that planned assessments happened, significant-change triggers fired when they should have, results inform the treatment plan (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:8.2:operational_assessment_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:8.2:rev_triggers_fired -->
 <!-- column: item:8.2:rev_treatment_handoff -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your annual operational assessments, making sure all planned reviews happened and any major changes were properly addressed. It also ensures your assessment results are used to update your treatment plans.
+
+## When to use it
+
+Use this template once a year to review your operational assessment program, especially after any significant changes in your environment. It's designed to be relevant for all organizations, every year.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on how many assessments and changes you need to document.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Clause 8.2 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:8.2:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Risk Manager + ISMS Manager)
+
+<<GUIDANCE>>
 
 ### Rev Cadence Met
 
@@ -58,12 +83,16 @@ _Why: Clause 8.2 — planned intervals_
 
 > _Standard text:_ Cadence-met check — every scheduled assessment for each tier happened
 
+<<GUIDANCE>>
+
 ### Rev Triggers Fired
 
 <<MUST item:8.2:rev_triggers_fired>>
 _Why: Clause 8.2 — significant changes_
 
 > _Standard text:_ Trigger-firing sweep — significant changes during the year that should have triggered ad-hoc assessment all did
+
+<<GUIDANCE>>
 
 ### Rev Treatment Handoff
 
@@ -73,6 +102,8 @@ _Why: Cross-clause coherence_
 > _Standard text:_ Treatment handoff — every new risk found flows to 6.1.3 / 8.3 treatment
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

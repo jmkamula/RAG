@@ -12,6 +12,8 @@ table_shape: true
 
 # Cloud Service Exit / Migration Records
 
+<<DOC_CONTROL>>
+
 > A.5.23 requires exit strategies for cloud services and the CSP must support transition + data handover on termination. The exit-migration record evidences the actual execution: trigger captured, migration plan executed, data export and deletion confirmed, transition completed, with authoriser
 
 <!-- TABLE-COLUMNS leaf:req:A.5.23:exit_migration_record -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.5.23:exit_handover -->
 <!-- column: item:A.5.23:exit_authoriser -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document the full process of exiting or migrating from a cloud service, including confirmation of data export, deletion, and completion of the transition, with sign-off from an authoriser.
+
+## When to use it
+
+Use this template whenever you are ending or migrating a cloud service, especially when a specific event or trigger requires you to formally record the transition. Update or refresh the record as needed for each new exit or migration.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes completing this from scratch, as each required section takes 10-15 minutes. If you have multiple exits to record, time will increase per entry.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: 27002:5.23h_
 
 > _Standard text:_ Exit trigger captured (termination / replacement / CSP failure / business change)
 
+<<GUIDANCE>>
+
 ### Exit Migration Plan
 
 <<MUST item:A.5.23:exit_migration_plan>>
 _Why: 27002:5.23h — transition_
 
 > _Standard text:_ Migration plan executed (data export, dependency-rewiring, replacement service stood up)
+
+<<GUIDANCE>>
 
 ### Exit Data Deletion
 
@@ -57,12 +82,16 @@ _Why: 27002:5.23 — handover_
 
 > _Standard text:_ Data deletion confirmation from the CSP (attestation, log, or audit-trail evidence)
 
+<<GUIDANCE>>
+
 ### Exit Handover
 
 <<MUST item:A.5.23:exit_handover>>
 _Why: 27002:5.23 — backup/handover_
 
 > _Standard text:_ Handover of configuration + data evidence (backup downloaded, config preserved)
+
+<<GUIDANCE>>
 
 ### Exit Authoriser
 
@@ -72,6 +101,8 @@ _Why: Accountability_
 > _Standard text:_ Authoriser of the exit (or of the delay + risk acceptance)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,9 +115,17 @@ _Why: Continuity preparedness_
 
 > _Standard text:_ Rolling exit-readiness drill (test exits without actually exiting, for critical services)
 
+<<GUIDANCE>>
+
 ### Exit Plan Freshness
 
 <<SHOULD item:A.5.23:exit_plan_freshness>>
 _Why: Drift control_
 
 > _Standard text:_ Per-service exit plan freshness target (re-test on agreement renewal or major service change)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

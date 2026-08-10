@@ -12,6 +12,8 @@ table_shape: true
 
 # Log Source Register
 
+<<DOC_CONTROL>>
+
 > Per-source register — what's emitting logs, where they land, what retention applies, last-event timestamp (drives 'silent source' detection)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.15:log_source_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.8.15:reg_retention_tier -->
 <!-- column: item:A.8.15:reg_last_event -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of all your log sources, where their logs are stored, how long they're kept, and when they last sent data. It's useful for spotting inactive sources and meeting compliance requirements.
+
+## When to use it
+
+Use this register at all times to maintain an up-to-date overview of your log sources. Update it whenever you add, change, or retire a log source, or as your environment evolves.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per log source to fill in the required details from scratch. The total time depends on how many log sources you have.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: Identification_
 
 > _Standard text:_ Per-source identifier (system / app / network device)
 
+<<GUIDANCE>>
+
 ### Reg Log Class
 
 <<MUST item:A.8.15:reg_log_class>>
 _Why: 27002:8.15 — record_
 
 > _Standard text:_ Per-source log class (auth / access / change / fault / business-event / privacy-relevant)
+
+<<GUIDANCE>>
 
 ### Reg Destination
 
@@ -57,12 +82,16 @@ _Why: 27002:8.15 — stored_
 
 > _Standard text:_ Per-source collection destination (SIEM index / cold-archive bucket / regulator-required path)
 
+<<GUIDANCE>>
+
 ### Reg Retention Tier
 
 <<MUST item:A.8.15:reg_retention_tier>>
 _Why: Cross-leaf coherence_
 
 > _Standard text:_ Per-source retention tier applied
+
+<<GUIDANCE>>
 
 ### Reg Last Event
 
@@ -72,6 +101,8 @@ _Why: Drift detection_
 > _Standard text:_ Per-source last-event timestamp (drives silent-source detection — common detection gap)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -83,3 +114,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Accountability_
 
 > _Standard text:_ Per-source named owner (system / app owner)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

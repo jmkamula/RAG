@@ -12,6 +12,8 @@ table_shape: hybrid
 
 # Records of Processing Activities (RoPA)
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
 The **GDPR Art.30 register** that lists every processing activity
@@ -29,38 +31,17 @@ processing includes special categories. In practice: most
 organisations need one. Maintained as a **live register**, not a
 one-off document.
 
-## Before you start
-
-- [ ] **A.5.9 Asset Register** — assets holding PII drive activity
-      rows (cross-link)
-- [ ] **A.5.31 Compliance Register** — applicable jurisdictions +
-      legal bases reference
-- [ ] **A.5.12 Classification Scheme** — drives data-category
-      labelling
-- [ ] **A.5.20 Supplier Agreements** + **Art.28 DPAs** — drive
-      processor recipients
-- [ ] **Art.44-49 transfer mechanisms** in place where applicable
+## Prerequisites
 
 <<PREREQUISITES>>
 
 ## Cross-references
 
-- **Art.32 Security Measures** — RoPA references the T&O measures
-  applied (Art.32 register has the detail)
-- **Art.5.1.b Purpose Limitation** — purposes column enables
-  enforcement
-- **Art.5.1.e Storage Limitation** — retention column enables
-  enforcement
-- **Art.28 Processor Agreements** — recipients column maps to
-  signed DPAs
-- **Art.44-49 Transfers** — transfer-mechanism column where
-  cross-border
-- **A.5.34 Privacy Programme** — overall stewardship
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
-**2-4 weeks** for v1 (data-flow discovery is the bulk); **ongoing
-operational cost** to maintain.
+**2-4 weeks** for v1 (data-flow discovery is the bulk); **ongoing operational cost** to maintain.
 
 ---
 
@@ -107,6 +88,8 @@ specific, explicit, legitimate (Art.5.1.b).
 **✗ Avoid**: "Various business purposes" — purpose-limitation
 violation by definition.
 
+<<GUIDANCE>>
+
 ### Data Subjects
 
 <<MUST item:Art.30:categories_ds>>
@@ -121,6 +104,8 @@ customers (sales leads); Employees + contractors of <<TENANT_NAME>>;
 Job applicants`
 
 **✗ Avoid**: "Users" alone — too broad.
+
+<<GUIDANCE>>
 
 ### Data Categories
 
@@ -138,6 +123,8 @@ IPs); Service-content (instructed by customer per Art.28).`
 
 **✗ Avoid**: "Personal data" — too vague.
 
+<<GUIDANCE>>
+
 ### Recipients
 
 <<MUST item:Art.30:recipients>>
@@ -152,6 +139,8 @@ Cross-link to A.5.20 supplier register.
 Processors: AWS (DPA + SCC), Okta (identity), Stripe (billing — DPF).`
 
 **✗ Avoid**: "Service providers" without naming them.
+
+<<GUIDANCE>>
 
 ### Transfers + Safeguards
 
@@ -168,6 +157,8 @@ non-adequacy countries without Art.46 + TIA per EDPB 01/2020.`
 
 **✗ Avoid**: "Global processors" without per-vendor breakdown.
 
+<<GUIDANCE>>
+
 ### Retention
 
 <<MUST item:Art.30:retention>>
@@ -182,6 +173,8 @@ When does deletion happen? Cross-link to A.5.33 retention schedule.
 default). Marketing prospect: 24 months from last engagement.`
 
 **✗ Avoid**: "Indefinite" — fails storage-limitation (Art.5.1.e).
+
+<<GUIDANCE>>
 
 ### T&O Measures
 
@@ -200,6 +193,8 @@ per A.5.24 with GDPR Art.33 72h SLA; full register at Art.32.`
 **✗ Avoid**: "Appropriate measures" — vague.
 
 ---
+
+<<GUIDANCE>>
 
 ## Document-level fields
 
@@ -225,6 +220,9 @@ EU representative: N/A (EU-established)
 ```
 
 <!-- EDIT-ZONE-START item:Art.30:controller_name -->
+
+<<GUIDANCE>>
+
 <<TEXT>>
 <!-- EDIT-ZONE-END item:Art.30:controller_name -->
 
@@ -247,6 +245,9 @@ per customer controller. Customer DPAs serve as the authoritative
 cross-reference.`
 
 <!-- EDIT-ZONE-START item:Art.30:processor_records -->
+
+<<GUIDANCE>>
+
 <<TEXT>>
 <!-- EDIT-ZONE-END item:Art.30:processor_records -->
 
@@ -264,6 +265,8 @@ cross-reference.`
 State that the RoPA is maintained per the documented procedure
 (ropa_maintenance_procedure leaf).
 
+<<GUIDANCE>>
+
 ### Availability Commitment
 
 <<SHOULD item:Art.30:availability>>
@@ -274,6 +277,8 @@ State that the RoPA is maintained per the documented procedure
 SLA for making the RoPA available (typically immediate electronic
 transfer).
 
+<<GUIDANCE>>
+
 ### Register Versioning
 
 <<SHOULD item:Art.30:reg_versioning>>
@@ -282,3 +287,9 @@ transfer).
 > evolves with the business
 
 Standard versioning + change-log columns on each row.
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

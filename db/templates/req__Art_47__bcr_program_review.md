@@ -13,6 +13,8 @@ table_shape: true
 
 # BCR Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — every bound entity still in compliance, complaints handled per Art.47.2.i, training delivered, lead SA notified of material changes (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.47:bcr_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.47:rev_complaints_handled -->
 <!-- column: item:Art.47:rev_change_notification -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record that your Binding Corporate Rules (BCR) program is up to date, including compliance checks, complaint handling, staff training, and notifications of important changes.
+
+## When to use it
+
+Use this template if your organization is subject to GDPR and needs to review its BCR program, especially when your compliance profile changes or at least once every year.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, as each required section takes around 10–15 minutes to fill in.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.47:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + group privacy lead)
+
+<<GUIDANCE>>
 
 ### Rev Compliance Audit
 
@@ -58,12 +83,16 @@ _Why: Art.47.2.j_
 
 > _Standard text:_ Compliance audit — bound entities adhering to BCR provisions (sampled audit results)
 
+<<GUIDANCE>>
+
 ### Rev Complaints Handled
 
 <<MUST item:Art.47:rev_complaints_handled>>
 _Why: Art.47.2.i_
 
 > _Standard text:_ Complaints-handling audit — Art.47.2.i path functioning + SAs receiving cooperation
+
+<<GUIDANCE>>
 
 ### Rev Change Notification
 
@@ -73,6 +102,8 @@ _Why: Art.47.2.k_
 > _Standard text:_ Material-change notification — significant changes notified to lead SA per Art.63 consistency
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # Operational Execution Register
 
+<<DOC_CONTROL>>
+
 > Per-execution record of operational processes — proof that planned processes were actually carried out. Distinct from the 6.1.1 action register (which tracks ISMS-level planning actions): this tracks per-process execution evidence. Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:8.1:operational_execution_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:8.1:reg_criteria_met -->
 <!-- column: item:8.1:reg_evidence_link -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record showing that your operational processes were actually carried out as planned, supporting your ISO 27001 compliance efforts.
+
+## When to use it
+
+Use this register whenever you need to document the execution of operational processes in your environment. Plan to review and update it about once a year to keep your records current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes to fill in the required elements for each process from scratch, with additional time needed for each new row you add.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Cross-leaf coherence_
 
 > _Standard text:_ Process identifier per row (matches procedure's process catalog)
 
+<<GUIDANCE>>
+
 ### Reg Execution Date
 
 <<MUST item:8.1:reg_execution_date>>
 _Why: Currency_
 
 > _Standard text:_ Execution / iteration date per row
+
+<<GUIDANCE>>
 
 ### Reg Owner
 
@@ -58,12 +83,16 @@ _Why: Accountability_
 
 > _Standard text:_ Process owner per row
 
+<<GUIDANCE>>
+
 ### Reg Criteria Met
 
 <<MUST item:8.1:reg_criteria_met>>
 _Why: Clause 8.1 — implementing control_
 
 > _Standard text:_ Criteria-met indicator per row (process ran per the established criteria)
+
+<<GUIDANCE>>
 
 ### Reg Evidence Link
 
@@ -73,6 +102,8 @@ _Why: Clause 8.1 — documented information_
 > _Standard text:_ Per-row link to documented evidence retained
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Cross-control coherence_
 
 > _Standard text:_ Per-row flag where the process is outsourced (cross-link to A.5.19/A.5.20 supplier evidence)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

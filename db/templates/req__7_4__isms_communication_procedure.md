@@ -11,14 +11,35 @@ should_count: 1
 
 # ISMS Communication Procedure
 
+<<DOC_CONTROL>>
+
 > Clause 7.4 requires the organisation to determine the need for internal and external ISMS communications. The procedure is the canonical artefact stating what, when, with whom, how, and by whom. Sibling leaves: communication event register, applicable communication scope, program review
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define how your organization communicates about its information security management system, both internally and externally. It ensures you cover what needs to be shared, with whom, when, and how.
+
+## When to use it
+
+Use this document whenever you need to establish or update your process for ISMS-related communications. Review and refresh it whenever your communication needs or stakeholders change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes drafting this from scratch, as each of the five required sections takes around 10 to 15 minutes to complete.
 
 ## 1. What is communicated (policy, objectives, performance, incidents, changes)
 
 <<MUST item:7.4:what>>
 _Why: Clause 7.4 a)_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Clause 7.4 a)_
 <<MUST item:7.4:when>>
 _Why: Clause 7.4 b)_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. With whom (internal audiences and external interested parties)
 
 <<MUST item:7.4:with_whom>>
 _Why: Clause 7.4 c)_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: Clause 7.4 c)_
 <<MUST item:7.4:how>>
 _Why: Clause 7.4 d)_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Who is responsible for each communication
 
 <<MUST item:7.4:responsibility>>
 _Why: Accountability_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:7.4:plan>>
 _Why: Concrete artefact_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

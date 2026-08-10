@@ -12,6 +12,8 @@ table_shape: true
 
 # Outsourced Development Engagement Register
 
+<<DOC_CONTROL>>
+
 > Per-engagement catalogue — vendor id, scope, contract reference, maturity-assessment outcome, delivered-code-test status
 
 <!-- TABLE-COLUMNS leaf:req:A.8.30:engagement_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.8.30:reg_maturity_outcome -->
 <!-- column: item:A.8.30:reg_delivered_test_status -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of each outsourced development engagement, including vendor details, contract references, and the status of delivered code testing. It supports your compliance with ISO 27001 requirements for managing external development partners.
+
+## When to use it
+
+Use this register whenever you engage third-party vendors for software development, especially if your risk profile or compliance obligations require tracking these relationships. Update the register as new engagements begin or existing ones change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes entering details for each new engagement, depending on how readily available the required information is. Ongoing updates for new vendors or changes will take less time per entry.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Identification_
 
 > _Standard text:_ Per-engagement unique identifier
 
+<<GUIDANCE>>
+
 ### Reg Vendor
 
 <<MUST item:A.8.30:reg_vendor>>
 _Why: Cross-control coherence_
 
 > _Standard text:_ Per-engagement vendor (cross-link to A.5.19 supplier register)
+
+<<GUIDANCE>>
 
 ### Reg Scope
 
@@ -58,6 +83,8 @@ _Why: 27002:8.30 — direct_
 
 > _Standard text:_ Per-engagement scope description (what's being developed; data classes touched)
 
+<<GUIDANCE>>
+
 ### Reg Contract Ref
 
 <<MUST item:A.8.30:reg_contract_ref>>
@@ -65,12 +92,16 @@ _Why: Cross-control coherence_
 
 > _Standard text:_ Per-engagement contract reference (cross-link to A.5.20)
 
+<<GUIDANCE>>
+
 ### Reg Maturity Outcome
 
 <<MUST item:A.8.30:reg_maturity_outcome>>
 _Why: Risk-based vendor selection_
 
 > _Standard text:_ Per-engagement maturity-assessment outcome
+
+<<GUIDANCE>>
 
 ### Reg Delivered Test Status
 
@@ -80,6 +111,8 @@ _Why: 27002:8.30 — review_
 > _Standard text:_ Per-engagement delivered-code-test status (latest review outcome)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -91,3 +124,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Accountability_
 
 > _Standard text:_ Per-engagement named owner (Engineering sponsor + Procurement partner)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -12,6 +12,8 @@ table_shape: true
 
 # Per-Project Security Closure Record
 
+<<DOC_CONTROL>>
+
 > A.5.8 expects each project to formally close out security — not just go-live and dissolve the team. The closure record evidences the handover gate: project id, gates passed, outstanding risks transferred to operations with named owner, security artefacts archived, and final signoff. One record per closed project, traceable back to the project register and through to operational ownership
 
 <!-- TABLE-COLUMNS leaf:req:A.5.8:project_security_closure_record -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.5.8:cls_signoff -->
 <!-- column: item:A.5.8:cls_closure_date -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you formally close out the security aspects of each project, ensuring all risks are handed over, documentation is archived, and responsibilities are clearly assigned before the project ends.
+
+## When to use it
+
+Use this record whenever a project is completed and needs to be formally closed from a security perspective. Update or refresh the record as needed if any details change before final signoff.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on how quickly you can gather project details and confirm handover information.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: 27002:5.8 — traceability_
 
 > _Standard text:_ Project identifier per record (links to project register)
 
+<<GUIDANCE>>
+
 ### Cls Gates Passed
 
 <<MUST item:A.5.8:cls_gates_passed>>
 _Why: 27002:5.8 — lifecycle closure_
 
 > _Standard text:_ Gates-passed summary per record (which gates closed and when; gaps explicitly noted with risk acceptance)
+
+<<GUIDANCE>>
 
 ### Cls Residual Risks
 
@@ -58,6 +83,8 @@ _Why: 27002:5.8 — risk acceptance + transfer_
 
 > _Standard text:_ Residual-risk register transfer per record (outstanding risks named, accepted by named operational owner with date)
 
+<<GUIDANCE>>
+
 ### Cls Artefacts Archived
 
 <<MUST item:A.5.8:cls_artefacts_archived>>
@@ -65,12 +92,16 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Security artefacts archived per record (threat model, pen-test report, DPIA where applicable, exception register)
 
+<<GUIDANCE>>
+
 ### Cls Signoff
 
 <<MUST item:A.5.8:cls_signoff>>
 _Why: 27002:5.8 — closure handover_
 
 > _Standard text:_ Final signoff per record (project sponsor + InfoSec gate-owner + operational owner — three-way)
+
+<<GUIDANCE>>
 
 ### Cls Closure Date
 
@@ -80,6 +111,8 @@ _Why: Operational discipline_
 > _Standard text:_ Closure date recorded
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,9 +125,17 @@ _Why: Closing loop with [[A.5.22]]_
 
 > _Standard text:_ Supplier-agreement handover per record where project introduced new third-party contracts (operational owner takes A.5.22 review duty)
 
+<<GUIDANCE>>
+
 ### Cls Lessons Link
 
 <<SHOULD item:A.5.8:cls_lessons_link>>
 _Why: Closing loop with [[A.5.27]]_
 
 > _Standard text:_ Lessons-learned link per record where project surfaced patterns worth feeding into A.5.27 lessons register
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

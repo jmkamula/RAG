@@ -13,6 +13,8 @@ table_shape: true
 
 # Criminal Data Processing Register
 
+<<DOC_CONTROL>>
+
 > Per-activity register for every Art.10 processing operation — which Member State law applies, what safeguards, what retention. Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.10:criminal_data_processing_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.10:reg_safeguards -->
 <!-- column: item:Art.10:reg_approval -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of all activities involving the processing of criminal data, including which laws apply, what safeguards are in place, and how long you keep the data.
+
+## When to use it
+
+Use this register whenever you process criminal data under GDPR Article 10, especially if your activities are covered by specific Member State laws. Update it about once a year to stay compliant.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours to complete the required sections for each processing activity, with additional time needed for each new activity you add.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Activity identifier per row (links to Art.30 RoPA)
 
+<<GUIDANCE>>
+
 ### Reg Legal Basis
 
 <<MUST item:Art.10:reg_legal_basis>>
 _Why: Art.10_
 
 > _Standard text:_ Per-row legal basis (official authority OR specific Member State law citation)
+
+<<GUIDANCE>>
 
 ### Reg Purpose
 
@@ -58,12 +83,16 @@ _Why: Art.10 — appropriate safeguards_
 
 > _Standard text:_ Per-row purpose (must be narrow — pre-employment screening, sanctions check, regulatory KYC, fraud investigation)
 
+<<GUIDANCE>>
+
 ### Reg Safeguards
 
 <<MUST item:Art.10:reg_safeguards>>
 _Why: Art.10_
 
 > _Standard text:_ Per-row safeguards (retention limit, access restrictions, separate-system storage)
+
+<<GUIDANCE>>
 
 ### Reg Approval
 
@@ -73,6 +102,8 @@ _Why: Accountability_
 > _Standard text:_ Per-row approval signature + date
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Cross-article coherence_
 
 > _Standard text:_ Per-row cross-reference to Art.30 RoPA entry
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

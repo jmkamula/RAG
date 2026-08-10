@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Review of the Management Directive
 
+<<DOC_CONTROL>>
+
 > The directive must stay aligned with the policy framework it references — when policies are renamed, retired, or added the directive becomes stale. Review captures who reviewed, when, and whether the policy references and enforcement linkages still hold
 
 <!-- TABLE-COLUMNS leaf:req:A.5.4:periodic_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.5.4:review_outcome -->
 <!-- column: item:A.5.4:review_actions -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of regular reviews of your management directive, ensuring it always matches up with your current policy framework and records who checked it and when.
+
+## When to use it
+
+Use this template whenever you need to review your management directive, which should happen about once a year or whenever your policy framework changes.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend around 45-60 minutes completing this from scratch, depending on how many items you need to review and record.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic review_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Review Reviewer
 
 <<MUST item:A.5.4:review_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity and role (typically CISO or compliance lead, validated by top management)
 
+<<GUIDANCE>>
+
 ### Review Outcome
 
 <<MUST item:A.5.4:review_outcome>>
 _Why: Periodic review_
 
 > _Standard text:_ Outcome captured (no change / amended / re-issued) and policy-reference drift checked
+
+<<GUIDANCE>>
 
 ### Review Actions
 
@@ -65,6 +92,8 @@ _Why: Continual improvement_
 > _Standard text:_ Actions captured where the directive needed amendment (policy reorg, scope change, new personnel categories)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -77,9 +106,17 @@ _Why: Change-driven review_
 
 > _Standard text:_ Ad-hoc triggers listed (major policy reorg, M&A, regulatory change) prompting unscheduled review
 
+<<GUIDANCE>>
+
 ### Review Next Date
 
 <<SHOULD item:A.5.4:review_next_date>>
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

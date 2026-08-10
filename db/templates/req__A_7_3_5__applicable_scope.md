@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Objection Contexts Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which processing activities carry an objection right (direct marketing always; legitimate-interests processing; public-interest processing; research/statistics per Art.21.6).
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly outline which of your data processing activities allow individuals to object, such as direct marketing or processing based on legitimate interests. It ensures you meet privacy requirements and communicate rights transparently.
+
+## When to use it
+
+Use this document whenever your data processing activities match situations where people have the right to object, and update it whenever your processing practices or legal obligations change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this from scratch, as each required section takes roughly 10 to 15 minutes to fill in thoughtfully.
 
 ## 1. Marketing processing enumerated (Art.21.2 absolute objection applies)
 
 <<MUST item:A.7.3.5:scope_marketing_processing>>
 _Why: GDPR Art.21.2_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,6 +48,8 @@ _Why: GDPR Art.21.2_
 <<MUST item:A.7.3.5:scope_legitimate_interests>>
 _Why: GDPR Art.21.1_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Public-task processing enumerated (Art.21.1 applies)
@@ -34,12 +57,16 @@ _Why: GDPR Art.21.1_
 <<MUST item:A.7.3.5:scope_public_task>>
 _Why: GDPR Art.21.1_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 4. Research / statistics processing (Art.21.6 applies)
 
 <<MUST item:A.7.3.5:scope_research_stats>>
 _Why: GDPR Art.21.6_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -54,4 +81,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.3.5:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Identity-Management Program Review
 
+<<DOC_CONTROL>>
+
 > The identity program creates value only if the lifecycle actually closes — orphan accounts, lingering contractor access, stale service credentials, missed termination SLAs all signal the program is leaking. The review captures the planned-interval check: orphan analysis, SLA-miss analysis, service-account hygiene audit, contractor expiry verification, and resulting program adjustments. Cadence tightened to 180 days — identity drift is high-volume
 
 <!-- TABLE-COLUMNS leaf:req:A.5.16:identity_program_review -->
@@ -24,6 +26,25 @@ table_shape: true
 <!-- column: item:A.5.16:rev_contractor_expiry -->
 <!-- column: item:A.5.16:rev_actions -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document regular reviews of your identity management program, ensuring you catch and address issues like unused accounts, expired access, and missed deadlines before they become risks.
+
+## When to use it
+
+Use this template every six months to record your scheduled identity program review, including checks for orphaned accounts, contractor access, and service account hygiene.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours completing this from scratch, depending on the number of accounts and findings you need to document.
 
 ## Register
 
@@ -46,12 +67,16 @@ _Why: 27002:5.16 — periodic_
 
 > _Standard text:_ Review date within the planned 180-day interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.5.16:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (IT identity-lead + HR partner + InfoSec lead jointly)
+
+<<GUIDANCE>>
 
 ### Rev Orphan Analysis
 
@@ -60,12 +85,16 @@ _Why: 27002:5.16 — drift catch_
 
 > _Standard text:_ Orphan analysis (identities without active HR record / business reason; remediation per orphan)
 
+<<GUIDANCE>>
+
 ### Rev Termination Sla
 
 <<MUST item:A.5.16:rev_termination_sla>>
 _Why: 27002:5.16 — timeliness_
 
 > _Standard text:_ Termination-SLA analysis (gap between leaver effective_date and identity_revocation date; outliers investigated)
+
+<<GUIDANCE>>
 
 ### Rev Service Hygiene
 
@@ -74,12 +103,16 @@ _Why: 27002:5.16 — service-account discipline_
 
 > _Standard text:_ Service-account hygiene audit (sample of service accounts re-validated: owner still employed, scope still appropriate, expiry not lapsed)
 
+<<GUIDANCE>>
+
 ### Rev Contractor Expiry
 
 <<MUST item:A.5.16:rev_contractor_expiry>>
 _Why: 27002:5.16 — fixed-expiry enforcement_
 
 > _Standard text:_ Contractor-expiry verification (audit that expired contractor identities are actually disabled, not just flagged)
+
+<<GUIDANCE>>
 
 ### Rev Actions
 
@@ -89,6 +122,8 @@ _Why: 27002:5.16 — program adjustments_
 > _Standard text:_ Action items captured (e.g. tighten auto-suspend threshold, expand HR-cascade automation, retire shared accounts)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -101,9 +136,17 @@ _Why: Audit defensibility_
 
 > _Standard text:_ IAM tooling check (vendor releases, new capabilities like just-in-time access; capability gaps to consider)
 
+<<GUIDANCE>>
+
 ### Rev Next Date
 
 <<SHOULD item:A.5.16:rev_next_date>>
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated (within 180d of this review)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

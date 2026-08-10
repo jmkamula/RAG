@@ -12,6 +12,8 @@ table_shape: true
 
 # Secure Area Work Session Register
 
+<<DOC_CONTROL>>
+
 > The catalogue of non-routine work sessions in secure areas (maintenance visits, audits, deep-cleans, third-party visits). Each entry: session id, area, purpose, personnel, supervision
 
 <!-- TABLE-COLUMNS leaf:req:A.7.6:work_session_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.7.6:reg_personnel -->
 <!-- column: item:A.7.6:reg_timestamps -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of all non-routine work sessions that take place in secure areas, including details about who was involved and why the session occurred.
+
+## When to use it
+
+Use this register whenever any non-routine activity—like maintenance, audits, or third-party visits—happens in a secure area. Update it as these events occur to keep your records current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per entry, as each session requires details like session ID, area, purpose, personnel, and supervision. The total time depends on how many sessions you need to record.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Per-session unique identifier
 
+<<GUIDANCE>>
+
 ### Reg Area
 
 <<MUST item:A.7.6:reg_area>>
 _Why: Cross-control coherence_
 
 > _Standard text:_ Per-session secure area
+
+<<GUIDANCE>>
 
 ### Reg Purpose
 
@@ -57,12 +82,16 @@ _Why: 27002:7.6 — authorised_
 
 > _Standard text:_ Per-session purpose (maintenance / audit / deep-clean / visitor / emergency)
 
+<<GUIDANCE>>
+
 ### Reg Personnel
 
 <<MUST item:A.7.6:reg_personnel>>
 _Why: Accountability_
 
 > _Standard text:_ Per-session personnel (including third parties, escorts, supervisors)
+
+<<GUIDANCE>>
 
 ### Reg Timestamps
 
@@ -72,6 +101,8 @@ _Why: Operational discipline_
 > _Standard text:_ Per-session entry/exit timestamps
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -83,3 +114,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Cross-leaf coherence_
 
 > _Standard text:_ Per-session work-permit reference where the permit system applies
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

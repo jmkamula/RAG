@@ -11,14 +11,35 @@ should_count: 1
 
 # Privacy Programme Charter
 
+<<DOC_CONTROL>>
+
 > The accountability anchor document — Art.24's 'data protection policies' (Art.24.2) operationalised as a privacy programme charter that names the programme owner, scope, governance forum cadence, and explicit Art.24 demonstrability statement. ISO 27001 doesn't require this as a discrete artifact; Art.24 does
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define your privacy programme, including who is responsible, its scope, how it's governed, and how you demonstrate compliance with GDPR requirements.
+
+## When to use it
+
+Use this document whenever you need to establish or update your privacy programme, as it always applies to your environment and should be refreshed whenever there are significant changes.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, as each required section takes around 10 to 15 minutes to fill in thoughtfully.
 
 ## 1. Statement of GDPR compliance objective + accountability commitment
 
 <<MUST item:Art.24:charter_purpose>>
 _Why: Art.24.1 — ensure + demonstrate_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Art.24.1 — ensure + demonstrate_
 <<MUST item:Art.24:charter_scope>>
 _Why: Art.24.1_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Governance forum cadence (privacy steering committee, frequency, attendees)
 
 <<MUST item:Art.24:charter_governance>>
 _Why: Art.24.1 — implementing measures_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,6 +66,8 @@ _Why: Art.24.1 — implementing measures_
 <<MUST item:Art.24:charter_owner>>
 _Why: Accountability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Approved by top management with date
@@ -48,12 +75,16 @@ _Why: Accountability_
 <<MUST item:Art.24:charter_approval>>
 _Why: Art.24.2 — adopted policies_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Review cadence stated (annual minimum)
 
 <<MUST item:Art.24:charter_review_cadence>>
 _Why: Art.24.1 — reviewed and updated_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -68,4 +99,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.24:charter_iso_alignment>>
 _Why: Cross-standard_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

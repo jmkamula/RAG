@@ -13,6 +13,8 @@ table_shape: true
 
 # GDPR Compliance Register
 
+<<DOC_CONTROL>>
+
 > Per-obligation register tracking the org's posture against every GDPR article in scope. Annual refresh (freshness=365). Distinct from the Art.30 RoPA (activities) and the lawful-basis register (Art.6 per-activity): this is the meta-tracker of compliance posture per article
 
 <!-- TABLE-COLUMNS leaf:req:Art.24:gdpr_compliance_register -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:Art.24:reg_owner -->
 <!-- column: item:Art.24:reg_last_assessed -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you track your organization's compliance with each relevant article of the GDPR, giving you a clear overview of your current status and any gaps that need attention.
+
+## When to use it
+
+Use this register if your organization is subject to GDPR and you want to monitor your compliance posture for each article. Update it about once a year to ensure your records stay current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1–2 hours setting up this register from scratch, depending on the number of GDPR articles in scope and the detail required for each entry.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: Coverage_
 
 > _Standard text:_ Per-row GDPR article identifier
 
+<<GUIDANCE>>
+
 ### Reg Applicability
 
 <<MUST item:Art.24:reg_applicability>>
 _Why: Defensibility_
 
 > _Standard text:_ Per-row applicability assessment (in scope / N/A with reason)
+
+<<GUIDANCE>>
 
 ### Reg Implementing Artefact
 
@@ -59,6 +84,8 @@ _Why: Demonstrability_
 
 > _Standard text:_ Per-row link to the implementing artefact (procedure / policy / register / DPA / certification)
 
+<<GUIDANCE>>
+
 ### Reg Status
 
 <<MUST item:Art.24:reg_status>>
@@ -66,12 +93,16 @@ _Why: Status visibility_
 
 > _Standard text:_ Per-row implementation status (implemented / partial / planned / N/A)
 
+<<GUIDANCE>>
+
 ### Reg Owner
 
 <<MUST item:Art.24:reg_owner>>
 _Why: Accountability_
 
 > _Standard text:_ Per-row owner
+
+<<GUIDANCE>>
 
 ### Reg Last Assessed
 
@@ -81,6 +112,8 @@ _Why: Currency_
 > _Standard text:_ Per-row last-assessed date (drives staleness)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Risk visibility_
 
 > _Standard text:_ Per-row residual risk where status is partial
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Asset Inventory Reconciliation
 
+<<DOC_CONTROL>>
+
 > Periodic reconciliation of the register against discovery feeds. The cadence is quarterly (freshness=90) because asset drift is daily and the register's value collapses fast without reconciliation. Annual review is insufficient for this control. Outputs feed back into the register and into procurement / cloud-provisioning hooks
 
 <!-- TABLE-COLUMNS leaf:req:A.5.9:asset_reconciliation_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.5.9:rev_unassigned_owner -->
 <!-- column: item:A.5.9:rev_register_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you regularly check and update your asset inventory, making sure your records match what’s actually in use. It supports compliance with ISO 27001 and keeps your asset register accurate and reliable.
+
+## When to use it
+
+Use this template every quarter to review and reconcile your asset register with discovery feeds. It’s important to complete this process every 90 days to prevent your records from quickly becoming outdated.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours filling out the required sections for a basic review, plus additional time depending on how many assets you need to reconcile in your register.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: 27002:5.9 — maintained_
 
 > _Standard text:_ Reconciliation date within the planned interval (typically within 90 days of last reconciliation)
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.5.9:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity and role recorded
+
+<<GUIDANCE>>
 
 ### Rev Per Source
 
@@ -58,12 +83,16 @@ _Why: 27002:5.9 — develop and maintain_
 
 > _Standard text:_ Per-source delta — what each discovery source surfaced vs what the register held (additions, removals, mismatches)
 
+<<GUIDANCE>>
+
 ### Rev Unassigned Owner
 
 <<MUST item:A.5.9:rev_unassigned_owner>>
 _Why: 27002:5.9d_
 
 > _Standard text:_ Treatment of unassigned-owner rows (owner assignment forced or row retired)
+
+<<GUIDANCE>>
 
 ### Rev Register Update
 
@@ -73,6 +102,8 @@ _Why: Closes the loop_
 > _Standard text:_ Register updated as a result of the reconciliation with reference to this review
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -85,9 +116,17 @@ _Why: A.5.12 / drift catch_
 
 > _Standard text:_ Classification sampling check — are A.5.12 classifications still appropriate for the asset's actual use
 
+<<GUIDANCE>>
+
 ### Rev Next Date
 
 <<SHOULD item:A.5.9:rev_next_date>>
 _Why: Planning_
 
 > _Standard text:_ Next planned reconciliation date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

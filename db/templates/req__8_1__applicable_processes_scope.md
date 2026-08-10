@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Operational Processes Scope
 
+<<DOC_CONTROL>>
+
 > The upstream that bounds the procedure — which processes are 'ISMS-relevant' (clause 8.1 scope), the in-house vs outsourced split, exclusions
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which of your operational processes are covered by your information security management system, including what is handled in-house, what is outsourced, and any exclusions.
+
+## When to use it
+
+Use this document whenever you need to outline or update the scope of your ISMS processes, especially when your environment changes or as part of regular reviews.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as each required section takes around 10 to 15 minutes to fill in thoughtfully.
 
 ## 1. ISMS-relevant processes enumerated (risk-assessment cadence, treatment execution, access reviews, incident response, awareness delivery, audit cycle)
 
 <<MUST item:8.1:scope_in_scope_processes>>
 _Why: Clause 8.1 — processes needed_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Clause 8.1 — processes needed_
 <<MUST item:8.1:scope_in_house_outsourced>>
 _Why: Clause 8.1 — outsourced processes_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Out-of-scope processes stated explicitly (purely operational IT runs that don't bear on ISMS)
 
 <<MUST item:8.1:scope_exclusions>>
 _Why: Defensible bounding_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:8.1:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

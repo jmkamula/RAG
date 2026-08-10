@@ -13,6 +13,8 @@ table_shape: true
 
 # Treatment Execution Program Review
 
+<<DOC_CONTROL>>
+
 > Semi-annual verification that the plan is being executed on schedule, slipping items get escalated, completed items had residual risk re-affirmed (freshness=180 — operational tempo)
 
 <!-- TABLE-COLUMNS leaf:req:8.3:treatment_execution_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:8.3:rev_residual_revisit -->
 <!-- column: item:8.3:rev_soa_currency -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your treatment plan’s progress, making sure scheduled actions are on track, overdue items are escalated, and completed tasks have their risks reviewed.
+
+## When to use it
+
+Use this review record about every six months to confirm your plan is being followed as intended and to address any delays or unresolved risks in your program.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, depending on the number of items you need to review and document.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Clause 8.3 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:8.3:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Risk Manager + ISMS Manager + ops lead)
+
+<<GUIDANCE>>
 
 ### Rev Progress
 
@@ -58,12 +83,16 @@ _Why: Effectiveness_
 
 > _Standard text:_ Progress check — every active plan item status updated; on-track vs slipping called out
 
+<<GUIDANCE>>
+
 ### Rev Residual Revisit
 
 <<MUST item:8.3:rev_residual_revisit>>
 _Why: Clause 8.3 — results_
 
 > _Standard text:_ Residual revisit check — completed items had owner re-affirm residual; divergent residuals escalated
+
+<<GUIDANCE>>
 
 ### Rev Soa Currency
 
@@ -73,6 +102,8 @@ _Why: Cross-clause coherence_
 > _Standard text:_ SoA currency check — newly implemented controls reflected in the SoA (6.1.3 leaf)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

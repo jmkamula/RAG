@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Change Scope
 
+<<DOC_CONTROL>>
+
 > Every subcontractor change under general-authorisation contract clauses. Specific-authorisation cases go via B.8.5.7 fresh engagement.
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define the scope of changes made by subcontractors under general authorisation clauses, ensuring your privacy compliance documentation is complete and up to date.
+
+## When to use it
+
+Use this whenever a subcontractor change falls under general authorisation in your contract, especially if your situation matches specific triggers. Update the document as needed when new changes occur.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to address three required elements in detail.
 
 ## 1. Customers on general-authorisation contract per row
 
 <<MUST item:B.8.5.8:scope_general_auth_customers>>
 _Why: §8.5.8_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: §8.5.8_
 <<MUST item:B.8.5.8:scope_change_types>>
 _Why: Coverage_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Specific-authorisation customers excluded (they get fresh B.8.5.7 engagement each time)
 
 <<MUST item:B.8.5.8:scope_specific_auth_exclusion>>
 _Why: Classification_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:B.8.5.8:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

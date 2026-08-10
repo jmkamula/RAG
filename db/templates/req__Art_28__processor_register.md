@@ -13,6 +13,8 @@ table_shape: true
 
 # Per-Processor DPA Register
 
+<<DOC_CONTROL>>
+
 > Per-processor record proving every active processor has a signed DPA in force. Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.28:processor_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.28:reg_subprocessors -->
 <!-- column: item:Art.28:reg_security_check -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, up-to-date record showing that every processor you work with has a signed Data Processing Agreement (DPA) in place, as required by GDPR Article 28.
+
+## When to use it
+
+Use this register whenever you engage new processors or review existing ones, and update it at least once a year to ensure all agreements are current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element for each processor you list, so the total time will depend on how many processors you have.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Processor identifier per row (entity name, jurisdiction)
 
+<<GUIDANCE>>
+
 ### Reg Data Categories
 
 <<MUST item:Art.28:reg_data_categories>>
 _Why: Cross-article coherence_
 
 > _Standard text:_ Per-row data categories processed (cross-link to Art.30 RoPA)
+
+<<GUIDANCE>>
 
 ### Reg Dpa Version
 
@@ -58,12 +83,16 @@ _Why: Currency_
 
 > _Standard text:_ Per-row DPA version + execution date
 
+<<GUIDANCE>>
+
 ### Reg Subprocessors
 
 <<MUST item:Art.28:reg_subprocessors>>
 _Why: Art.28.2_
 
 > _Standard text:_ Per-row authorised sub-processor list (or 'none')
+
+<<GUIDANCE>>
 
 ### Reg Security Check
 
@@ -73,6 +102,8 @@ _Why: Art.28.3c_
 > _Standard text:_ Per-row Art.32-equivalent security assurance source (certification / audit report / questionnaire)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Cross-chapter coherence_
 
 > _Standard text:_ Per-row Chap V transfer mechanism where applicable
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

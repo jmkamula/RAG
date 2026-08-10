@@ -11,14 +11,35 @@ should_count: 3
 
 # Information Classification Scheme
 
+<<DOC_CONTROL>>
+
 > A.5.12 requires information to be classified per the organisation's security needs across confidentiality, integrity, availability, and interested-party requirements. The scheme defines levels and handling implications. Approval, communication and periodic review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you define how your organization classifies information based on security needs, ensuring you handle sensitive data appropriately and meet ISO 27001 requirements.
+
+## When to use it
+
+Use this document whenever you need to establish or update your information classification scheme, as it should always be in place and refreshed whenever your security needs or requirements change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, as each required section takes roughly 10 to 15 minutes to draft.
 
 ## 1. Classification levels defined (e.g. Public / Internal / Confidential / Restricted)
 
 <<MUST item:A.5.12:levels_defined>>
 _Why: 27002:5.12 — classified_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:5.12 — classified_
 <<MUST item:A.5.12:cia_dimensions>>
 _Why: 27002:5.12 — based on C/I/A_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Definition and indicative examples per level
 
 <<MUST item:A.5.12:level_definitions>>
 _Why: 27002:5.12 — needs of the organisation_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,6 +66,8 @@ _Why: 27002:5.12 — needs of the organisation_
 <<MUST item:A.5.12:handling_per_level>>
 _Why: 27002:5.12 — security needs_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Decision authority for classifying information (owner-led by default)
@@ -48,12 +75,16 @@ _Why: 27002:5.12 — security needs_
 <<MUST item:A.5.12:classification_authority>>
 _Why: 27002:5.12 — classified_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Default classification for unclassified information (typically 'Internal' as fail-safe)
 
 <<MUST item:A.5.12:default_class>>
 _Why: 27002:5.12 — pragmatic adoption_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -68,12 +99,16 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.5.12:interested_parties>>
 _Why: Completeness_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Declassification or reclassification process
 
 <<SHOULD item:A.5.12:declassification>>
 _Why: Lifecycle_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -82,4 +117,10 @@ _Why: Lifecycle_
 <<SHOULD item:A.5.12:aggregation>>
 _Why: Realistic threat model_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

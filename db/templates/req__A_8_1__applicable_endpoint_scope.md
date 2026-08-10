@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Endpoint Scope
 
+<<DOC_CONTROL>>
+
 > Upstream that drives the policy and register. Documents which endpoint classes apply, exclusions (kiosks → A.8.18; servers → A.8.9), and the BYOD authorisation model
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which types of endpoints are covered by your security policies, including any exceptions and how you handle personally owned devices.
+
+## When to use it
+
+Use this document whenever you need to outline or update which endpoint devices are included in your security program. Review and refresh it as your environment or device policies change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, depending on how many endpoint types and exceptions you need to describe.
 
 ## 1. Endpoint classes enumerated (laptop / desktop / mobile / tablet / contractor-owned)
 
 <<MUST item:A.8.1:scope_classes>>
 _Why: 27002:8.1 — applicable_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.1 — applicable_
 <<MUST item:A.8.1:scope_exclusions>>
 _Why: Boundary clarity_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. BYOD authorisation model (allowed / not-allowed / conditional with container)
 
 <<MUST item:A.8.1:scope_byod_model>>
 _Why: Common ambiguity point_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.1:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

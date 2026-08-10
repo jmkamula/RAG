@@ -13,6 +13,8 @@ table_shape: true
 
 # PIA / DPIA Report Register
 
+<<DOC_CONTROL>>
+
 > Per-PIA row — the register of completed PIAs (report link + date + signoff + residual risk + review-due date). Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:A.7.2.5:pia_register -->
@@ -24,6 +26,25 @@ table_shape: true
 <!-- column: item:A.7.2.5:reg_sa_consultation -->
 <!-- column: item:A.7.2.5:reg_review_due -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of all your completed Privacy Impact Assessments, including key details like report links, signoff status, and review dates.
+
+## When to use it
+
+Use this register whenever your organization completes a Privacy Impact Assessment, especially if your activities or data processing meet certain privacy risk triggers. Plan to update it about once a year to keep information current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element for each PIA entry, so filling in the register from scratch could take 1-2 hours for a few assessments, and more as you add additional rows.
 
 ## Register
 
@@ -46,12 +67,16 @@ _Why: Referenceability_
 
 > _Standard text:_ Unique PIA identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Processing Activity
 
 <<MUST item:A.7.2.5:reg_processing_activity>>
 _Why: Traceability_
 
 > _Standard text:_ Processing activity assessed per row
+
+<<GUIDANCE>>
 
 ### Reg Completion Date
 
@@ -60,12 +85,16 @@ _Why: Currency_
 
 > _Standard text:_ PIA completion date per row
 
+<<GUIDANCE>>
+
 ### Reg Signoff
 
 <<MUST item:A.7.2.5:reg_signoff>>
 _Why: §7.2.5 accountability_
 
 > _Standard text:_ Signoff identities per row (DPO + business owner)
+
+<<GUIDANCE>>
 
 ### Reg Residual Risk
 
@@ -74,12 +103,16 @@ _Why: Art.35.7.d_
 
 > _Standard text:_ Residual-risk rating per row (low/medium/high after mitigations)
 
+<<GUIDANCE>>
+
 ### Reg Sa Consultation
 
 <<MUST item:A.7.2.5:reg_sa_consultation>>
 _Why: Art.36.1_
 
 > _Standard text:_ SA consultation flag per row (Art.36 invoked yes/no)
+
+<<GUIDANCE>>
 
 ### Reg Review Due
 
@@ -89,6 +122,8 @@ _Why: §7.2.5 — changes to existing processing_
 > _Standard text:_ Next review due date per row (triggered by change or periodic)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -100,3 +135,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Transparency_
 
 > _Standard text:_ Mitigations summary per row
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

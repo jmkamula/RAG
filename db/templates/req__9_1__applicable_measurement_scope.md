@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Measurement Scope
 
+<<DOC_CONTROL>>
+
 > The upstream that bounds the record — which ISMS processes and controls are being measured, what 'good' looks like (target derivation), what's out of scope (controls without a measurable signal)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which processes and controls are being measured in your ISMS, what successful measurement looks like, and what is outside the scope of measurement.
+
+## When to use it
+
+Use this whenever you need to document or update the boundaries of your ISMS measurement activities, as it always applies to your environment and should be refreshed whenever there are changes.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this from scratch, as each required section takes roughly 10-15 minutes to fill in thoughtfully.
 
 ## 1. ISMS processes in measurement scope (risk-assessment cadence, treatment progress, audit cycle, incident response timeliness, etc.)
 
 <<MUST item:9.1:scope_isms_processes>>
 _Why: Clause 9.1 a)_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,6 +48,8 @@ _Why: Clause 9.1 a)_
 <<MUST item:9.1:scope_controls>>
 _Why: Clause 9.1 a)_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Target derivation rationale per metric (regulatory, contractual, internal-baseline, benchmark)
@@ -34,12 +57,16 @@ _Why: Clause 9.1 a)_
 <<MUST item:9.1:scope_target_derivation>>
 _Why: Defensible targets_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 4. Out-of-scope controls (those without measurable signal — usually 'design' or 'governance' controls)
 
 <<MUST item:9.1:scope_exclusions>>
 _Why: Defensible bounding_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -54,4 +81,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:9.1:scope_evolution>>
 _Why: Maturity trajectory_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

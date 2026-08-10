@@ -13,6 +13,8 @@ table_shape: true
 
 # Customer PII Agreement Register
 
+<<DOC_CONTROL>>
+
 > Per-customer row — the register of executed processing agreements, coverage of assistance obligations, term. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:B.8.2.1:customer_agreement_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:B.8.2.1:reg_instructions_channel -->
 <!-- column: item:B.8.2.1:reg_term -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of all signed customer agreements related to personal data processing, including key details like coverage and term, in one organized place.
+
+## When to use it
+
+Use this register when you need to document each customer’s personal data processing agreement, especially if your organization is required to meet ISO 27701 privacy standards. Plan to update it about once a year.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element for each customer entry, so initial setup may take 1-2 hours, with ongoing updates as new agreements are signed.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Referenceability_
 
 > _Standard text:_ Customer identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Agreement Reference
 
 <<MUST item:B.8.2.1:reg_agreement_reference>>
 _Why: §8.2.1 — contract_
 
 > _Standard text:_ Executed agreement document reference per row
+
+<<GUIDANCE>>
 
 ### Reg Assistance Coverage
 
@@ -58,12 +83,16 @@ _Why: §8.2.1 — assistance obligations_
 
 > _Standard text:_ Assistance coverage per row (which Art.28.3.e-h obligations addressed)
 
+<<GUIDANCE>>
+
 ### Reg Instructions Channel
 
 <<MUST item:B.8.2.1:reg_instructions_channel>>
 _Why: Art.28.3.a_
 
 > _Standard text:_ Documented-instructions channel per row (email log / ticket queue / portal)
+
+<<GUIDANCE>>
 
 ### Reg Term
 
@@ -73,6 +102,8 @@ _Why: Currency_
 > _Standard text:_ Term / expiry / renewal per row
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: §8.2.1 — depending on customer's role_
 
 > _Standard text:_ Customer role per row (controller / processor / joint) to route obligations correctly
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

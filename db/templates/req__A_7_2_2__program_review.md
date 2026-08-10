@@ -13,6 +13,8 @@ table_shape: true
 
 # Lawful Basis Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — every activity has a valid basis, LIA balancing tests remain defensible, special-category dual-basis coverage intact, no basis-slippage (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.7.2.2:program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.2.2:rev_lia_reaffirmation -->
 <!-- column: item:A.7.2.2:rev_special_category_audit -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you confirm that every data processing activity has a valid legal basis and that any balancing tests or special-category data are properly documented and up to date. It keeps your compliance records organized and defensible for audits.
+
+## When to use it
+
+Use this review record when your activities or data types match certain privacy triggers, and plan to update it about once a year to ensure your legal bases remain current and accurate.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes completing this from scratch, depending on the number of activities you need to review and document.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.2.2:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + legal counsel)
+
+<<GUIDANCE>>
 
 ### Rev Basis Currency
 
@@ -58,12 +83,16 @@ _Why: §7.2.2 — comply with basis_
 
 > _Standard text:_ Basis currency — every registered activity still has a valid basis in force
 
+<<GUIDANCE>>
+
 ### Rev Lia Reaffirmation
 
 <<MUST item:A.7.2.2:rev_lia_reaffirmation>>
 _Why: GDPR Art.6.1.f — ongoing balancing_
 
 > _Standard text:_ LIA reaffirmation — sampled legitimate-interests activities reviewed against current subject-rights context
+
+<<GUIDANCE>>
 
 ### Rev Special Category Audit
 
@@ -73,6 +102,8 @@ _Why: GDPR Art.9.2_
 > _Standard text:_ Special-category audit — dual-basis coverage confirmed where Art.9/10 data processed
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable SDLC Scope
 
+<<DOC_CONTROL>>
+
 > Upstream — what counts as in-scope development. In-house product development yes. Major internal tooling typically yes. Quick scripts / one-off automation typically not. Outsourced via A.8.30
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which software development activities are covered by your compliance program, making it easier to know what needs to follow your security requirements.
+
+## When to use it
+
+Use this document whenever you need to clarify what types of development work are included in your compliance scope, especially when your organization’s activities change or new projects begin.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you’ll need to describe three required elements about your development activities.
 
 ## 1. Development classes in scope (in-house product / major internal tooling / API-as-product / customer-facing add-ons)
 
 <<MUST item:A.8.25:scope_classes>>
 _Why: 27002:8.25 — appropriate_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.25 — appropriate_
 <<MUST item:A.8.25:scope_exclusions>>
 _Why: Boundary clarity_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Proportionality rules per project class (lightweight gates for low-risk; full SDLC for customer-facing PII-touching)
 
 <<MUST item:A.8.25:scope_proportionality>>
 _Why: 27002:8.25 — proportionate_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.25:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

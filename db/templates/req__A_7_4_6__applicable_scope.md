@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Temp-File Contexts Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which infrastructure surfaces create PII-touching temp files (application tier + database + cache + log-processing).
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly identify which parts of your infrastructure create temporary files that may contain personal data, making it easier to manage privacy risks and meet compliance requirements.
+
+## When to use it
+
+Use this document whenever your systems or processes change in a way that could affect where temporary files with personal information are created, and update it as needed to stay current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to describe three required areas and optionally add further details.
 
 ## 1. Infrastructure surfaces enumerated (app servers + DB + cache + queue + log processors + backup staging)
 
 <<MUST item:A.7.4.6:scope_infrastructure>>
 _Why: Coverage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Coverage_
 <<MUST item:A.7.4.6:scope_file_types>>
 _Why: Coverage_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Undeletable-file exceptions (circumstances where deletion isn't possible per §7.4.6) with rationale + compensating controls
 
 <<MUST item:A.7.4.6:scope_undeletable_exceptions>>
 _Why: §7.4.6 — circumstances in which they cannot be deleted_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.4.6:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

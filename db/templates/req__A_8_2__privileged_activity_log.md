@@ -12,6 +12,8 @@ table_shape: true
 
 # Privileged Activity Log
 
+<<DOC_CONTROL>>
+
 > A.8.2 requires audit logs of privileged actions. The activity log captures who performed which privileged action, when, on which system — the continuous evidence stream that the procedure was applied (and that anomalies surface for review)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.2:privileged_activity_log -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.8.2:log_anomaly_alert -->
 <!-- column: item:A.8.2:log_tamper_protect -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of who performed privileged actions, what they did, when, and on which system. It supports your ability to spot unusual activity and demonstrate compliance with ISO 27001 requirements.
+
+## When to use it
+
+Use this log whenever privileged actions are performed in your environment, and update it as needed to ensure your records stay current and complete.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes setting up the initial log with all required details, plus additional time for each new privileged action recorded.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: 27002:8.2j_
 
 > _Standard text:_ Identity of the privileged user captured per action
 
+<<GUIDANCE>>
+
 ### Log What
 
 <<MUST item:A.8.2:log_what>>
 _Why: 27002:8.2j_
 
 > _Standard text:_ Action performed captured (command / change / access)
+
+<<GUIDANCE>>
 
 ### Log When
 
@@ -58,6 +83,8 @@ _Why: 27002:8.2j_
 
 > _Standard text:_ Timestamp captured per action
 
+<<GUIDANCE>>
+
 ### Log Retention
 
 <<MUST item:A.8.2:log_retention>>
@@ -65,12 +92,16 @@ _Why: A.8.15 linkage_
 
 > _Standard text:_ Log retention period defined and enforced
 
+<<GUIDANCE>>
+
 ### Log Anomaly Alert
 
 <<MUST item:A.8.2:log_anomaly_alert>>
 _Why: Modern baseline — passive logging without alerting fails detect-respond intent (Style v2 promotion)_
 
 > _Standard text:_ Anomaly alerting configured (unusual hours, unusual scope, unusual command)
+
+<<GUIDANCE>>
 
 ### Log Tamper Protect
 
@@ -80,6 +111,8 @@ _Why: Defensible evidence (Style v2 promotion)_
 > _Standard text:_ Log integrity protection (write-once / SIEM forwarding off-host)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -91,3 +124,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Detection maturity_
 
 > _Standard text:_ SIEM correlation rules tuned for privileged-access misuse patterns
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

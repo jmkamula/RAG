@@ -11,14 +11,35 @@ should_count: 2
 
 # Applicable Authorities Scope
 
+<<DOC_CONTROL>>
+
 > The upstream that drives the register. Documents which authorities are relevant today and on what basis — jurisdictions of operation, sectoral obligations, types of personal data processed, critical-service classifications. ISO 27002:2022 § 5.5 expects the organisation to know which authorities apply before claiming to maintain contact with them
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly identify which laws, regulations, and authorities apply to your organization based on where you operate, your industry, and the types of data you handle.
+
+## When to use it
+
+Use this document whenever you need to define or update the list of authorities and obligations relevant to your business. Review and refresh it whenever your operations, services, or regulatory environment change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 45 to 60 minutes completing this from scratch, as you'll need to gather and describe several key aspects of your organization's regulatory landscape.
 
 ## 1. Jurisdictions covered (HQ, places of business, customer locations) — each maps to one or more authorities
 
 <<MUST item:A.5.5:scope_jurisdictions>>
 _Why: 27002:5.5a — relevant_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,6 +48,8 @@ _Why: 27002:5.5a — relevant_
 <<MUST item:A.5.5:scope_sectoral>>
 _Why: 27002:5.5a — relevant authorities_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Personal-data processing flag → drives DPA inclusion per jurisdiction
@@ -34,12 +57,16 @@ _Why: 27002:5.5a — relevant authorities_
 <<MUST item:A.5.5:scope_personal_data>>
 _Why: GDPR Art.51 / 27002:5.5_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 4. Authority categories mapped — supervisory (DPA), sectoral regulator, law enforcement, national CERT/CSIRT
 
 <<MUST item:A.5.5:scope_authority_categories>>
 _Why: 27002:5.5a_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -54,6 +81,8 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.5.5:scope_legal_register_link>>
 _Why: Cross-control coherence_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Source for change monitoring (legal counsel, regulator alerts) that triggers re-scoping
@@ -61,4 +90,10 @@ _Why: Cross-control coherence_
 <<SHOULD item:A.5.5:scope_change_monitoring>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

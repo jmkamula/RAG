@@ -11,14 +11,35 @@ should_count: 3
 
 # Information Labelling Procedure
 
+<<DOC_CONTROL>>
+
 > A.5.13 requires procedures for information labelling aligned with the classification scheme defined in A.5.12. The procedure documents per-level marking conventions, automated tooling rules, persistence requirements, training links, and legacy-asset handling. The coverage register, periodic program review and per-platform application record are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you create a clear procedure for labelling information according to your organization's classification scheme. It covers marking rules, automation, training, and how to handle both new and legacy information assets.
+
+## When to use it
+
+Use this template whenever you need to document or update your information labelling procedure, as it should always be in place and refreshed whenever your labelling practices or classification scheme change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours drafting this procedure from scratch, depending on the complexity of your labelling requirements and the number of platforms or legacy assets involved.
 
 ## 1. Visual marking conventions per classification level (headers, watermarks, banners, footers)
 
 <<MUST item:A.5.13:visual_marks>>
 _Why: 27002:5.13 — labelling_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:5.13 — labelling_
 <<MUST item:A.5.13:metadata_tags>>
 _Why: 27002:5.13 — labelling_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Physical media labelling rules (paper documents, removable storage, archive boxes; cross-link to A.7.10)
 
 <<MUST item:A.5.13:physical_media>>
 _Why: 27002:5.13 + cross-link to [[A.7.10]]_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: 27002:5.13 + cross-link to [[A.7.10]]_
 <<MUST item:A.5.13:label_persistence>>
 _Why: 27002:5.13 — implemented_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. References training so personnel know how to apply labels (cross-link to A.5.12 classification training)
 
 <<MUST item:A.5.13:training_ref>>
 _Why: 27002:5.13 — implemented_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -55,12 +84,16 @@ _Why: 27002:5.13 — implemented_
 <<MUST item:A.5.13:scheme_alignment>>
 _Why: 27002:5.13 + cross-link to [[A.5.12]]_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. PII / personal-data overlay rule where applicable (additional labelling beyond confidentiality level — e.g. 'Contains PII' footer for GDPR compliance)
 
 <<MUST item:A.5.13:pii_overlay>>
 _Why: 27002:5.13 + GDPR alignment_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -75,12 +108,16 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.5.13:legacy_handling>>
 _Why: Pragmatic adoption_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Automation / tooling references where labelling is auto-applied (DLP, sensitivity-label policies)
 
 <<SHOULD item:A.5.13:automation>>
 _Why: Scalability_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -89,4 +126,10 @@ _Why: Scalability_
 <<SHOULD item:A.5.13:external_handling>>
 _Why: Real-world coverage_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

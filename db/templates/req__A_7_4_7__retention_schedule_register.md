@@ -13,6 +13,8 @@ table_shape: true
 
 # PII Retention Schedule Register
 
+<<DOC_CONTROL>>
+
 > Per-category-and-activity row — the actual retention schedules. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:A.7.4.7:retention_schedule_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.4.7:reg_citation -->
 <!-- column: item:A.7.4.7:reg_deletion_trigger -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you organize and document how long you keep different types of personal information, making it easier to manage data in line with privacy standards.
+
+## When to use it
+
+Use this register when you need to track and review how long you retain personal data for each category and activity, updating it about once a year or whenever your retention practices change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element for each row; completing the register from scratch typically takes 1-2 hours, depending on the number of data categories and activities you need to cover.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Referenceability_
 
 > _Standard text:_ Category / activity combination identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Retention Period
 
 <<MUST item:A.7.4.7:reg_retention_period>>
 _Why: §7.4.7 — schedules_
 
 > _Standard text:_ Retention period per row (with unit — years / months / until event)
+
+<<GUIDANCE>>
 
 ### Reg Rationale Type
 
@@ -58,12 +83,16 @@ _Why: §7.4.7 — legal, regulatory, business_
 
 > _Standard text:_ Rationale type per row (legal / regulatory / business)
 
+<<GUIDANCE>>
+
 ### Reg Citation
 
 <<MUST item:A.7.4.7:reg_citation>>
 _Why: Defensibility_
 
 > _Standard text:_ Citation per row (specific statute / regulation / business rationale document)
+
+<<GUIDANCE>>
 
 ### Reg Deletion Trigger
 
@@ -73,6 +102,8 @@ _Why: Integration with A.7.4.5_
 > _Standard text:_ Deletion trigger per row (calendar-based / event-based)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: §7.4.7 — business decision_
 
 > _Standard text:_ Conflict flag per row if legal + business tension exists
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

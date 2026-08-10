@@ -12,6 +12,8 @@ table_shape: true
 
 # Failover Test Register
 
+<<DOC_CONTROL>>
+
 > Per-test record — drilled failover events, real failover events, outcomes. Proves the baseline + procedure work in practice
 
 <!-- TABLE-COLUMNS leaf:req:A.8.14:failover_test_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.8.14:reg_date -->
 <!-- column: item:A.8.14:reg_outcome -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of both planned and real failover events, including outcomes, so you can show your failover process actually works.
+
+## When to use it
+
+Use this register whenever you conduct a failover test or experience a real failover event. Update it as needed to keep your records current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required entry, so filling out a single row from scratch will likely take around an hour.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: Auditability_
 
 > _Standard text:_ Per-test unique identifier
 
+<<GUIDANCE>>
+
 ### Reg Service
 
 <<MUST item:A.8.14:reg_service>>
 _Why: 27002:8.14 — sufficient to meet_
 
 > _Standard text:_ Per-test service tested
+
+<<GUIDANCE>>
 
 ### Reg Type
 
@@ -57,12 +82,16 @@ _Why: Distinguishing operational vs test signal_
 
 > _Standard text:_ Per-test type (planned drill / unplanned real / fault-injection)
 
+<<GUIDANCE>>
+
 ### Reg Date
 
 <<MUST item:A.8.14:reg_date>>
 _Why: Currency_
 
 > _Standard text:_ Per-test date
+
+<<GUIDANCE>>
 
 ### Reg Outcome
 
@@ -72,6 +101,8 @@ _Why: 27002:8.14 — sufficient_
 > _Standard text:_ Per-test outcome (success / partial / failure) + actual recovery time vs target
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -83,3 +114,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Closes the loop_
 
 > _Standard text:_ Per-test findings + corrective actions where target missed
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

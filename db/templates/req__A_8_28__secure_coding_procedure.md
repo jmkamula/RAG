@@ -11,14 +11,35 @@ should_count: 1
 
 # Secure Coding Procedure
 
+<<DOC_CONTROL>>
+
 > A.8.28 requires secure-coding principles applied. Procedure documents language-specific standards, common-vulnerability prevention, code-review gates, automated analysis, secrets management. Per-finding register, applicable scope, program review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document your secure coding practices, including language-specific standards, vulnerability prevention, code reviews, automated checks, and secrets management. It's designed to support compliance with ISO 27001 requirements for secure software development.
+
+## When to use it
+
+Use this template when your organization needs to demonstrate secure coding procedures, especially if your risk profile or regulatory requirements call for it. Update the document whenever your coding practices or related controls change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes drafting this from scratch, depending on the complexity of your coding environment and the number of findings or registers you need to include.
 
 ## 1. Language-specific coding standards published (Python / Java / JavaScript / Go / C/C++ / Rust as applicable)
 
 <<MUST item:A.8.28:language_standards>>
 _Why: 27002:8.28 — secure coding principles_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.28 — secure coding principles_
 <<MUST item:A.8.28:vulnerability_prevention>>
 _Why: 27002:8.28 — secure coding_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Code-review requirement before merge for production code (cross-link to A.8.4 branch protection)
 
 <<MUST item:A.8.28:code_review>>
 _Why: 27002:8.28 — applied_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,6 +66,8 @@ _Why: 27002:8.28 — applied_
 <<MUST item:A.8.28:sast>>
 _Why: 27002:8.28 — applied_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Secrets management — no secrets in code; vaulting + pre-commit scanning required
@@ -48,12 +75,16 @@ _Why: 27002:8.28 — applied_
 <<MUST item:A.8.28:secrets_in_code>>
 _Why: 27002:8.28 — secure coding_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. SCA / dependency scanning enabled (modern baseline — supply-chain attack vector)
 
 <<MUST item:A.8.28:dependency_scanning>>
 _Why: Supply-chain hygiene (Style v2 promotion)_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -68,4 +99,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.28:training>>
 _Why: People dimension_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

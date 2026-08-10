@@ -11,14 +11,35 @@ should_count: 2
 
 # User Endpoint Devices Policy
 
+<<DOC_CONTROL>>
+
 > A.8.1 requires protection of information stored on, processed by, or accessible via user endpoint devices. The policy defines device classes in scope, baseline protections per class, and the authorisation model for endpoint enrolment. The endpoint register, applicable-classes scope and periodic review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you create a clear policy for managing and protecting information on user endpoint devices, including which devices are covered, required security measures, and how devices are approved for use.
+
+## When to use it
+
+Use this template whenever you need to define or update your approach to securing user endpoint devices, as it should always be in place and refreshed whenever your device landscape or security requirements change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours drafting this policy from scratch, depending on the number of device types and the detail required for your environment.
 
 ## 1. Scope — device classes in scope (corporate-owned, BYOD, contractor)
 
 <<MUST item:A.8.1:scope>>
 _Why: 27002:8.1 — user end point devices_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.1 — user end point devices_
 <<MUST item:A.8.1:encryption>>
 _Why: 27002:8.1 — protected_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Anti-malware / EDR required and current (cross-link to A.8.7)
 
 <<MUST item:A.8.1:malware>>
 _Why: 27002:8.1 — protected_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: 27002:8.1 — protected_
 <<MUST item:A.8.1:patch_level>>
 _Why: 27002:8.1 — protected_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Authentication and screen-lock requirements (cross-link to A.5.17 / A.7.7)
 
 <<MUST item:A.8.1:authentication>>
 _Why: 27002:8.1 — accessible via end point devices_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -55,12 +84,16 @@ _Why: 27002:8.1 — accessible via end point devices_
 <<MUST item:A.8.1:remote_wipe>>
 _Why: 27002:8.1 — protected_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. MDM enrolment required before access to corporate information
 
 <<MUST item:A.8.1:mdm_enrollment>>
 _Why: Modern baseline_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -75,6 +108,8 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.1:jailbreak_detection>>
 _Why: Compromise signal_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Application allowlisting / blocklisting on managed endpoints
@@ -82,4 +117,10 @@ _Why: Compromise signal_
 <<SHOULD item:A.8.1:app_controls>>
 _Why: Reduces attack surface_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

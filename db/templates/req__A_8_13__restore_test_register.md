@@ -12,6 +12,8 @@ table_shape: true
 
 # Restore Test Register
 
+<<DOC_CONTROL>>
+
 > Per-restore-test lifecycle-end record — what was restored, when, integrity-verified, target met. Parallels A.5.30 ICT readiness recovery-test pattern
 
 <!-- TABLE-COLUMNS leaf:req:A.8.13:restore_test_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.8.13:reg_integrity_check -->
 <!-- column: item:A.8.13:reg_rpo_met -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of each restore test, including what was restored, when it happened, and whether the data was checked for integrity. It supports your compliance with ISO 27001 requirements for ICT recovery testing.
+
+## When to use it
+
+Use this register whenever you perform a restore test in your environment, and update it as needed to reflect new tests or changes. It should be maintained regularly to ensure accurate tracking.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes to complete all required sections for each restore test entry, depending on the amount of detail and number of tests you need to record.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Auditability_
 
 > _Standard text:_ Per-test unique identifier
 
+<<GUIDANCE>>
+
 ### Reg Target
 
 <<MUST item:A.8.13:reg_target>>
 _Why: 27002:8.13 — regularly tested_
 
 > _Standard text:_ Per-test backup target tested (system / dataset / configuration)
+
+<<GUIDANCE>>
 
 ### Reg Date
 
@@ -58,6 +83,8 @@ _Why: Currency_
 
 > _Standard text:_ Per-test date
 
+<<GUIDANCE>>
+
 ### Reg Outcome
 
 <<MUST item:A.8.13:reg_outcome>>
@@ -65,12 +92,16 @@ _Why: 27002:8.13 — tested_
 
 > _Standard text:_ Per-test outcome (success / partial / failure)
 
+<<GUIDANCE>>
+
 ### Reg Integrity Check
 
 <<MUST item:A.8.13:reg_integrity_check>>
 _Why: Defensibility_
 
 > _Standard text:_ Per-test integrity-verification artefact (checksum / hash / functional test of restored data)
+
+<<GUIDANCE>>
 
 ### Reg Rpo Met
 
@@ -80,6 +111,8 @@ _Why: 27002:8.13 — sufficient_
 > _Standard text:_ Per-test RPO-met flag (data-recoverable-to-RPO confirmed; auditor-critical proof parallels A.5.30 rec_success_status)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -91,3 +124,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Closes the loop_
 
 > _Standard text:_ Per-test findings + corrective actions where target missed
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

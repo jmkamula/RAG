@@ -11,14 +11,35 @@ should_count: 3
 
 # Security Event Assessment and Triage Procedure
 
+<<DOC_CONTROL>>
+
 > A.5.25 requires the organization to assess information security events and decide whether to categorise them as incidents. The procedure documents detection sources, assessment criteria, decision authority, classification scale and handoff to incident response (A.5.26). The event triage log, periodic triage-program review and per-event triage decision record are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document how your organization assesses and categorizes security events, ensuring you have a clear process for deciding when an event becomes an incident and how to handle it.
+
+## When to use it
+
+Use this procedure whenever you need to evaluate information security events in your environment, and update it whenever your assessment process or decision criteria change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours completing this from scratch, as you'll need to cover several required elements and provide details for each step in your assessment process.
 
 ## 1. Detection sources enumerated (monitoring, user reports, third parties)
 
 <<MUST item:A.5.25:detection_sources>>
 _Why: 27002:5.25 — events_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:5.25 — events_
 <<MUST item:A.5.25:assessment_criteria>>
 _Why: 27002:5.25 — categorising_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Decision authority named (who decides event vs incident vs false positive)
 
 <<MUST item:A.5.25:decision_authority>>
 _Why: 27002:5.25 — decision_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: 27002:5.25 — decision_
 <<MUST item:A.5.25:classification_scale>>
 _Why: 27002:5.25 — agreed classification scheme_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Timeline for triage decision after detection
 
 <<MUST item:A.5.25:triage_timeline>>
 _Why: 27002:5.25 — assess and decide_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -55,6 +84,8 @@ _Why: 27002:5.25 — assess and decide_
 <<MUST item:A.5.25:handoff>>
 _Why: 27002:5.25 — incidents_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Correlation / aggregation of events for trend identification (links to A.8.16 monitoring)
@@ -62,12 +93,16 @@ _Why: 27002:5.25 — incidents_
 <<MUST item:A.5.25:correlation>>
 _Why: 27002:5.25 — correlation_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 8. Competent personnel given access to event/incident/weakness records
 
 <<MUST item:A.5.25:competent_access>>
 _Why: 27002:5.25 — competent personnel_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -82,12 +117,16 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.5.25:severity_matrix>>
 _Why: Consistency across triagers_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Automation or playbook references for common event types
 
 <<SHOULD item:A.5.25:automation>>
 _Why: Scalability_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -96,4 +135,10 @@ _Why: Scalability_
 <<SHOULD item:A.5.25:legal_advisory>>
 _Why: 27002:5.25 — informing_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

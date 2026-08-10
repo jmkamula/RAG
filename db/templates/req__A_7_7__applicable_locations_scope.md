@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Locations Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which locations are covered by clear-desk/clear-screen rules (offices, meeting rooms, lab benches, home offices, shared coworking spaces)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which physical locations are covered by your clear-desk and clear-screen rules, such as offices, meeting rooms, labs, home offices, and shared coworking spaces.
+
+## When to use it
+
+Use this document whenever you need to clarify or update which areas your clear-desk and clear-screen policies apply to, and review it whenever your workspace arrangements change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to describe three required elements about your covered locations.
 
 ## 1. Locations enumerated (offices, meeting rooms, lab benches, home offices, coworking spaces, customer-site visits)
 
 <<MUST item:A.7.7:scope_locations>>
 _Why: 27002:7.7 — relevant_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:7.7 — relevant_
 <<MUST item:A.7.7:scope_classification_overlay>>
 _Why: Cross-control coherence_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Screen-lock baseline per location (auto-lock after N minutes — varies by location risk)
 
 <<MUST item:A.7.7:scope_screen_lock_baseline>>
 _Why: 27002:7.7 — clear screen_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.7:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

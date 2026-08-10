@@ -12,6 +12,8 @@ table_shape: true
 
 # Leadership Reaffirmation Record
 
+<<DOC_CONTROL>>
+
 > Per-reaffirmation record capturing each annual (or trigger-based) re-signature of the commitment directive plus evidence of leadership activity in the period. Lifecycle-end artefact: the directive is signed once, but commitment must be visibly renewed
 
 <!-- TABLE-COLUMNS leaf:req:5.1:leadership_reaffirmation_record -->
@@ -20,6 +22,25 @@ table_shape: true
 <!-- column: item:5.1:rea_activity_evidence -->
 <!-- column: item:5.1:rea_next_due -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document each time your leadership team reaffirms their commitment to your security program, along with evidence of their active involvement over the past year.
+
+## When to use it
+
+Use this record whenever your leadership needs to renew their commitment to your security directive, typically once a year or whenever a significant event requires it. Update the register as needed to stay current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this from scratch, depending on how many leadership activities you need to record and the detail you provide for each required element.
 
 ## Register
 
@@ -42,6 +63,8 @@ _Why: Currency_
 
 > _Standard text:_ Reaffirmation date stated
 
+<<GUIDANCE>>
+
 ### Rea Signed By
 
 <<MUST item:5.1:rea_signed_by>>
@@ -49,12 +72,16 @@ _Why: Authenticity_
 
 > _Standard text:_ Signed by current top management (covers turnover)
 
+<<GUIDANCE>>
+
 ### Rea Activity Evidence
 
 <<MUST item:5.1:rea_activity_evidence>>
 _Why: Clause 5.1 — demonstrate_
 
 > _Standard text:_ Evidence packet for the period (board minutes excerpt, sponsor signoffs, mgmt review attendance)
+
+<<GUIDANCE>>
 
 ### Rea Next Due
 
@@ -64,6 +91,8 @@ _Why: Planning_
 > _Standard text:_ Next reaffirmation due date stated
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -75,3 +104,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Defensible refresh_
 
 > _Standard text:_ Trigger captured if mid-cycle (CEO change, major incident, restructuring)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

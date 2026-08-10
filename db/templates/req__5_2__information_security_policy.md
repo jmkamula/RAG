@@ -23,40 +23,23 @@ top management formally signs. Auditors check that it (a) exists,
 
 ## When to use it
 
-You're producing the **top-level Information Security Policy** required
-by **ISO/IEC 27001:2022 Clause 5.2**. Distinct from A.5.1 (the
+You're producing the **top-level Information Security Policy** required by **ISO/IEC 27001:2022 Clause 5.2**. Distinct from A.5.1 (the
 *policy framework / supporting policies*) — Clause 5.2 is the single
 overarching statement.
 
-## Before you start
+## Prerequisites
 
-- [ ] **4.3 ISMS Scope Statement** must exist — your policy applies
-      "within the ISMS scope" so the scope must be defined first
-- [ ] **5.1 Top management commitment** — you'll need top-management
-      sign-off, so socialise early
-- [ ] **6.1.1 risk-driven objectives** — security objectives in this
-      policy should align with the risk picture
+<<PREREQUISITES>>
 
 ## Cross-references
 
-- **A.5.1 Information Security Policies** — the *operational* policy
-  family; this Clause 5.2 policy sits *above* A.5.1 and is referenced
-  by every A.5.1 sub-policy
-- **9.3 Management Review** — this policy is reviewed at every
-  management review; record version updates there
-- **7.5 Documented Information** — store as a version-controlled,
-  named-owner artefact (not an internal-wiki note)
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
-**3-5 hours** for v1 (drafting + top-management socialisation +
-approval); **30 min** for annual refresh.
+**3-5 hours** for v1 (drafting + top-management socialisation + approval); **30 min** for annual refresh.
 
 ---
-
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
 
 ## 1. State how the policy fits the organisation's purpose
 
@@ -66,8 +49,7 @@ approval); **30 min** for annual refresh.
 
 _Clause 5.2(a) — appropriate to the purpose of the organisation._
 
-Connect the policy to **what your business does** and **why
-information security matters for that mission**. Generic statements
+Connect the policy to **what your business does** and **why information security matters for that mission**. Generic statements
 fail auditors because they could be lifted onto any company's letter.
 
 **✓ Good**: "<<TENANT_NAME>> provides <<PRODUCT_OR_SERVICE>> to
@@ -269,5 +251,7 @@ Note next planned review date + conditions that trigger ad-hoc review
 <<TEXT>>
 
 ---
+
+## Revision history
 
 <<REVISION_HISTORY>>

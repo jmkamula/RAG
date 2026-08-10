@@ -11,14 +11,35 @@ should_count: 1
 
 # Failover Procedure
 
+<<DOC_CONTROL>>
+
 > Operational counterpart — how failover is invoked, who has authority, failback path, cross-control wiring to A.5.30 ICT readiness
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document your organization's process for handling system failovers, including who is responsible, how to switch over and back, and how it connects to ICT readiness requirements.
+
+## When to use it
+
+Use this whenever your environment requires a clear, up-to-date procedure for managing failover events. Review and update the document whenever your processes or systems change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes to complete this from scratch, as each required section takes around 10 to 15 minutes to write.
 
 ## 1. Failover invocation authority per service (automated vs manual; on-call authority)
 
 <<MUST item:A.8.14:proc_failover_authority>>
 _Why: 27002:8.14 — sufficient_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.14 — sufficient_
 <<MUST item:A.8.14:proc_runbook>>
 _Why: Operational maturity_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Failback procedure — return to primary after recovery (often more risky than failover)
 
 <<MUST item:A.8.14:proc_failback>>
 _Why: Often overlooked_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: Often overlooked_
 <<MUST item:A.8.14:proc_a530_link>>
 _Why: Cross-control coherence_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Stakeholder communications during failover (status page, customer notifications)
 
 <<MUST item:A.8.14:proc_communications>>
 _Why: Operational discipline_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.14:proc_owner>>
 _Why: Accountability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

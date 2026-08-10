@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Secure Coding Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — finding-pattern trending, tooling currency, language-standard updates (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.28:coding_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.8.28:rev_tooling_currency -->
 <!-- column: item:A.8.28:rev_findings_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your secure coding practices, including trends in code issues, updates to tools, and changes in programming language standards. It’s designed to support annual reviews for compliance and improvement.
+
+## When to use it
+
+Use this template once a year, or whenever your organization’s profile matches specific compliance triggers, to review and document your secure coding program’s effectiveness and currency.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this review from scratch, depending on the amount of information you need to gather for each required section.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: 27002:8.28 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.28:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Engineering leads + Security Champions)
+
+<<GUIDANCE>>
 
 ### Rev Finding Patterns
 
@@ -58,12 +83,16 @@ _Why: Continuous improvement_
 
 > _Standard text:_ Finding-pattern trending (recurring patterns → training / tooling action)
 
+<<GUIDANCE>>
+
 ### Rev Tooling Currency
 
 <<MUST item:A.8.28:rev_tooling_currency>>
 _Why: 27002:8.28 — applied_
 
 > _Standard text:_ Tooling-stack currency (SAST / SCA rules current; new tooling adopted)
+
+<<GUIDANCE>>
 
 ### Rev Findings Update
 
@@ -73,6 +102,8 @@ _Why: Closes the loop_
 > _Standard text:_ Findings propagated to language standards / training
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

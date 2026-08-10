@@ -11,14 +11,35 @@ should_count: 1
 
 # PII Transfer Basis Procedure
 
+<<DOC_CONTROL>>
+
 > §7.5.1 requires the org to identify + document the legal basis for every cross-jurisdiction PII transfer. Bridges to GDPR Chap V hierarchy (Art.45 adequacy → Art.46 safeguards → Art.47 BCRs → Art.49 derogations).
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly document the legal reasons for transferring personal data across borders, making sure your process aligns with privacy laws like GDPR and ISO 27701.
+
+## When to use it
+
+Use this procedure whenever you need to move personal information between countries or regions, especially if your situation matches specific triggers. Update the document whenever your transfer practices or legal bases change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes completing this from scratch, as each required section takes around 10 to 15 minutes to fill in thoughtfully.
 
 ## 1. Transfer basis hierarchy — adequacy decision (Art.45) → appropriate safeguards (Art.46: SCCs, BCRs, codes, certification) → derogations (Art.49) as last resort
 
 <<MUST item:A.7.5.1:proc_transfer_hierarchy>>
 _Why: GDPR Art.44-49_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: GDPR Art.44-49_
 <<MUST item:A.7.5.1:proc_documented_compliance>>
 _Why: §7.5.1 — document compliance to such requirements_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. SA-review awareness — some jurisdictions require transfer agreements reviewed by supervisory authority
 
 <<MUST item:A.7.5.1:proc_sa_review>>
 _Why: §7.5.1 — designated supervisory authority review_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: §7.5.1 — designated supervisory authority review_
 <<MUST item:A.7.5.1:proc_schrems_tia>>
 _Why: EDPB Recommendations 01/2020_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Intra-jurisdiction exclusion rule (§7.5.1 NOTE — where sender + recipient same jurisdiction, applicable law is the same)
 
 <<MUST item:A.7.5.1:proc_intra_jurisdiction>>
 _Why: §7.5.1 NOTE_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.5.1:proc_owner>>
 _Why: Accountability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

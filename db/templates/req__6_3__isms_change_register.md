@@ -13,6 +13,8 @@ table_shape: true
 
 # ISMS Change Register
 
+<<DOC_CONTROL>>
+
 > Per-change record capturing every ISMS-level change — the integration point between 4.3 scope changes, 4.4 manual changes, 5.3 roles changes (whose own change records flow up here). Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:6.3:isms_change_register -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:6.3:reg_impact_summary -->
 <!-- column: item:6.3:reg_status -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of every significant change made to your Information Security Management System. It ensures you can easily track changes to scope, procedures, and roles in one place.
+
+## When to use it
+
+Use this register whenever you make a change to your ISMS, such as updating scope, procedures, or roles. Review and refresh the register at least once a year to keep it up to date.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes to set up the initial register, plus 10 to 15 minutes for each new change you record throughout the year.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Unique change identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Change Type
 
 <<MUST item:6.3:reg_change_type>>
 _Why: Clause 6.3 — determines the need_
 
 > _Standard text:_ Per-row change type (scope / policy / manual / roles / risk-criteria / structural)
+
+<<GUIDANCE>>
 
 ### Reg Trigger
 
@@ -59,6 +84,8 @@ _Why: Defensibility_
 
 > _Standard text:_ Per-row trigger stated (audit finding, regulator change, org restructure, etc.)
 
+<<GUIDANCE>>
+
 ### Reg Approval
 
 <<MUST item:6.3:reg_approval>>
@@ -66,12 +93,16 @@ _Why: Clause 6.3 — planned_
 
 > _Standard text:_ Per-row approval signature + date
 
+<<GUIDANCE>>
+
 ### Reg Impact Summary
 
 <<MUST item:6.3:reg_impact_summary>>
 _Why: Clause 6.3 — consequences_
 
 > _Standard text:_ Per-row impact summary recorded
+
+<<GUIDANCE>>
 
 ### Reg Status
 
@@ -81,6 +112,8 @@ _Why: Tracking_
 > _Standard text:_ Per-row status (proposed / approved / implemented / withdrawn)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Cross-leaf coherence_
 
 > _Standard text:_ Per-row cross-reference to the source change record (4.3 / 4.4 / 5.3 etc.) where applicable
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

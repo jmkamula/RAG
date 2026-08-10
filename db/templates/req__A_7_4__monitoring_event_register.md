@@ -12,6 +12,8 @@ table_shape: true
 
 # Monitoring Event Register
 
+<<DOC_CONTROL>>
+
 > The catalogue of detection events worth investigating — anomalous access attempts, alarms triggered, CCTV-detected behaviour requiring review. Subset of raw detection signal (after first-pass filtering)
 
 <!-- TABLE-COLUMNS leaf:req:A.7.4:monitoring_event_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.7.4:reg_classification -->
 <!-- column: item:A.7.4:reg_outcome -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of security events that need further investigation, such as unusual access attempts or alarms. It makes it easier to track and review incidents that could impact your security.
+
+## When to use it
+
+Use this register whenever you need to document and monitor detection events in your environment, updating it as new incidents occur or when you review existing records.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes setting up the required elements for the first time, with additional time needed for each new event you add to the register.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Per-event unique identifier
 
+<<GUIDANCE>>
+
 ### Reg Source
 
 <<MUST item:A.7.4:reg_source>>
 _Why: 27002:7.4 — detection_
 
 > _Standard text:_ Per-event source (CCTV / IDS / access-control / alarm)
+
+<<GUIDANCE>>
 
 ### Reg Timestamp
 
@@ -57,12 +82,16 @@ _Why: Operational discipline_
 
 > _Standard text:_ Per-event timestamp
 
+<<GUIDANCE>>
+
 ### Reg Classification
 
 <<MUST item:A.7.4:reg_classification>>
 _Why: 27002:7.4 — alert response_
 
 > _Standard text:_ Per-event classification (true-positive / false-positive / requires-investigation)
+
+<<GUIDANCE>>
 
 ### Reg Outcome
 
@@ -72,6 +101,8 @@ _Why: Closes the loop_
 > _Standard text:_ Per-event outcome (closed-no-action / handed-to-A.5.26-incident / lessons-captured)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -83,3 +114,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Cross-control coherence_
 
 > _Standard text:_ Per-event evidence-package link (CCTV clip reference, log excerpt — for cases handed to A.5.28 evidence handling)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

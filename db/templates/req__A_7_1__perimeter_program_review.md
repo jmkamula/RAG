@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Perimeter Program Review
 
+<<DOC_CONTROL>>
+
 > Periodic verification that perimeters still match the classification needs, the register reflects reality, and any site changes have been incorporated. Annual cadence (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.7.1:perimeter_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.1:rev_scope_check -->
 <!-- column: item:A.7.1:rev_register_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you regularly check that your perimeter records are accurate and up-to-date, ensuring your documentation matches your actual environment and any changes are properly reflected.
+
+## When to use it
+
+Use this template once a year to review and confirm that your perimeter register is current and aligns with your classification needs, especially after any site or environment changes.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this review from scratch, depending on the number of required details and updates needed for your register.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: 27002:7.1 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.1:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Facilities lead + InfoSec lead jointly)
+
+<<GUIDANCE>>
 
 ### Rev Walkthrough
 
@@ -58,12 +83,16 @@ _Why: 27002:7.1 — verified_
 
 > _Standard text:_ Physical walkthrough conducted per site (sample-based for multi-site orgs) — barriers verified present and functional
 
+<<GUIDANCE>>
+
 ### Rev Scope Check
 
 <<MUST item:A.7.1:rev_scope_check>>
 _Why: Cross-leaf coherence_
 
 > _Standard text:_ Cross-check against the applicable-sites scope — any new site or sub-let that should add a register entry
+
+<<GUIDANCE>>
 
 ### Rev Register Update
 
@@ -73,6 +102,8 @@ _Why: Closes the loop_
 > _Standard text:_ Changes propagated to the live register
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

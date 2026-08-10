@@ -12,6 +12,8 @@ should_count: 2
 
 # Management Review (per-execution record)
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
 The **annual checkpoint** where top management formally reviews the
@@ -24,44 +26,23 @@ see what they actually discussed.
 
 ## When to use it
 
-You're producing the per-execution record required by **ISO/IEC
-27001:2022 Clause 9.3**. Annual cadence at minimum (freshness 365d);
+You're producing the per-execution record required by **ISO/IEC 27001:2022 Clause 9.3**. Annual cadence at minimum (freshness 365d);
 many tenants run quarterly with one designated as the formal annual
 review.
 
-## Before you start
+## Prerequisites
 
-Gather the inputs Clause 9.3 mandates **at least 2 weeks before**
-the review meeting:
-
-- [ ] Internal audit results from the last cycle (per 9.2)
-- [ ] Status of open nonconformities and corrective actions (per 10.1
-      register)
-- [ ] Monitoring + measurement results (per 9.1)
-- [ ] Information security objectives status (per 6.2)
-- [ ] Feedback from interested parties (customer trust reviews,
-      regulator interactions, audit-body findings)
-- [ ] Risk assessment + treatment status updates (per 6.1)
-- [ ] Opportunities for improvement identified
+<<PREREQUISITES>>
 
 ## Cross-references
 
-- **9.2 Internal Audit Programme** — feeds Input 1
-- **10.1 Improvement Action Register** — feeds Input 2; decisions
-  from the review create new rows here
-- **6.2 Objectives** — feeds Input 4
-- **5.2 InfoSec Policy** — gets reviewed for continued suitability
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
-**2-3 days** to gather inputs + prepare the pack; **2-3 hours** for
-the meeting itself; **1-2 hours** to write up the record.
+**2-3 days** to gather inputs + prepare the pack; **2-3 hours** for the meeting itself; **1-2 hours** to write up the record.
 
 ---
-
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
 
 ## 1. Record internal audit results
 
@@ -82,6 +63,8 @@ Observations (7 closed, 4 in-progress), 14 Opportunities for
 Improvement. Key themes: access-rights review cadence drift (A.5.18);
 SBOM coverage gaps on legacy components (A.8.9). Full report:
 attachment A."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -104,6 +87,8 @@ slipped due to engineering capacity — re-prioritised vs other work
 this review). Management directed: accept the slip; no further
 escalation."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Record monitoring + measurement results
@@ -125,6 +110,8 @@ high+critical risks: 6 / target <10 — on. (5) Access-review
 freshness (% of accounts reviewed in last 90 days): 87% / target
 >95% — OFF (trigger: 10.1 row AC-203). Full dashboard: attachment B."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 4. Record progress against information security objectives
@@ -144,6 +131,8 @@ zero major NC — on track (annual surveillance audit clean).
 MTTR critical vulns — achieved (41h average). (4) Zero confirmed
 unauthorised data disclosures — achieved (0). All FY26 objectives
 on track at this review."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -167,6 +156,8 @@ discipline. (c) Regulator: 1 ICO information request answered within
 SLA (subject-access related); no enforcement action. (d) Employee
 ISMS feedback (anon survey): security training pace flagged 'too
 frequent' — review recommended (action: AC-220)."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -192,6 +183,8 @@ keep quarterly for engineering. Action: A.6.3 programme owner.
 (4) Refresh the InfoSec Policy v3 to reflect the new objectives.
 Action: ISMS Manager."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Top-management attendance + sign-off
@@ -211,6 +204,8 @@ does not.
 Owner); <<CISO_NAME>> (CISO). Signed: <<CEO_NAME>>, on
 <<APPROVAL_DATE>>."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ---
@@ -227,6 +222,8 @@ _Cadence discipline._
 
 State this review's date + the next planned management review date.
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### Attendee list (beyond top management)
@@ -240,4 +237,10 @@ _Completeness — who else was in the room shapes the conversation._
 ISMS Manager, DPO, key control owners, internal auditor. Listing them
 helps the auditor see the conversation was substantive.
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

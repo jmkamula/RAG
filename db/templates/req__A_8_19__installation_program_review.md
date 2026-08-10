@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Installation Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — approved-list currency, allowlist enforcement effectiveness, unauthorised-install detection trending (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.19:installation_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.8.19:rev_allowlist_effectiveness -->
 <!-- column: item:A.8.19:rev_findings_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your annual review of approved software installations, making sure your allowlist is up to date and that unauthorized installations are being detected and managed.
+
+## When to use it
+
+Use this template once a year to document your review of installation programs in your environment, ensuring ongoing compliance and effective enforcement of your software policies.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on the number of entries you need to review and document.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: 27002:8.19 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.19:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Infrastructure + InfoSec)
+
+<<GUIDANCE>>
 
 ### Rev Approved List Currency
 
@@ -58,12 +83,16 @@ _Why: 27002:8.19 — securely manage_
 
 > _Standard text:_ Approved-list currency check (no abandoned tools; vulnerable versions retired)
 
+<<GUIDANCE>>
+
 ### Rev Allowlist Effectiveness
 
 <<MUST item:A.8.19:rev_allowlist_effectiveness>>
 _Why: Detection effectiveness_
 
 > _Standard text:_ Allowlist-enforcement effectiveness review (unauthorised-install attempt rate)
+
+<<GUIDANCE>>
 
 ### Rev Findings Update
 
@@ -73,6 +102,8 @@ _Why: Closes the loop_
 > _Standard text:_ Findings propagated to procedure / approved list
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -12,6 +12,8 @@ table_shape: true
 
 # ICT Service Continuity Register
 
+<<DOC_CONTROL>>
+
 > A.5.30 requires every in-scope ICT service to have a defined recovery posture — invisible services are the ones that don't come back when the org needs them. The register catalogues every in-scope ICT service: service id, criticality tier, RTO/RPO targets, dependencies, recovery owner, last-tested date. It is the operational record that proves the plan covers the org's ACTUAL service inventory, not just the easy-to-restore subset
 
 <!-- TABLE-COLUMNS leaf:req:A.5.30:ict_service_register -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.5.30:reg_last_tested -->
 <!-- column: item:A.5.30:reg_asset_link -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, up-to-date record of all your important ICT services, including their recovery details and dependencies, so nothing critical is missed during an incident.
+
+## When to use it
+
+Use this register at all times to track every ICT service in your environment, updating it whenever services change or recovery details need refreshing.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per service to complete all required details; the total time depends on how many ICT services you need to document.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:5.30 — visibility_
 
 > _Standard text:_ Each in-scope ICT service captured with a unique identifier
 
+<<GUIDANCE>>
+
 ### Reg Criticality
 
 <<MUST item:A.5.30:reg_criticality>>
 _Why: 27002:5.30 — BIA tiering_
 
 > _Standard text:_ Criticality tier per row (tier_1_mission_critical / tier_2_business_critical / tier_3_supporting) — drives RTO/RPO selection
+
+<<GUIDANCE>>
 
 ### Reg Rto Rpo
 
@@ -59,12 +84,16 @@ _Why: 27002:5.30 — business continuity objectives_
 
 > _Standard text:_ RTO/RPO targets per row (specific numeric values, not 'best effort')
 
+<<GUIDANCE>>
+
 ### Reg Dependencies
 
 <<MUST item:A.5.30:reg_dependencies>>
 _Why: 27002:5.30 — readiness coordination_
 
 > _Standard text:_ Service dependencies per row (upstream + downstream — recovery order matters; recover dependencies first)
+
+<<GUIDANCE>>
 
 ### Reg Recovery Owner
 
@@ -73,12 +102,16 @@ _Why: Accountability_
 
 > _Standard text:_ Named recovery owner per row (technical lead accountable for the service's recovery, not just IT generally)
 
+<<GUIDANCE>>
+
 ### Reg Last Tested
 
 <<MUST item:A.5.30:reg_last_tested>>
 _Why: 27002:5.30 — preparation cadence_
 
 > _Standard text:_ Last-tested date per row (drives stale-test detection — services not tested in N months flag for refresh)
+
+<<GUIDANCE>>
 
 ### Reg Asset Link
 
@@ -88,6 +121,8 @@ _Why: 27002:5.30 + cross-link to [[A.5.9]]_
 > _Standard text:_ Asset-link per row (cross-link to A.5.9 asset register entries that constitute this service)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -100,9 +135,17 @@ _Why: Cross-link to [[A.5.22]]_
 
 > _Standard text:_ Supplier dependency flag per row where recovery depends on supplier action (cross-link to A.5.21 / A.5.22)
 
+<<GUIDANCE>>
+
 ### Reg Data Residency
 
 <<SHOULD item:A.5.30:reg_data_residency>>
 _Why: Cross-link to [[A.5.14]]_
 
 > _Standard text:_ Data residency note per row where backup geographic separation has jurisdictional implications (cross-link to A.5.14 transfer policy)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

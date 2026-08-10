@@ -12,6 +12,8 @@ table_shape: true
 
 # Roles and Responsibilities Communication Record
 
+<<DOC_CONTROL>>
+
 > Clause 5.3 requires roles, responsibilities and authorities to be communicated within the organization. Evidence must show active distribution (date, audience, channel), not mere availability of the matrix on an intranet — affected role-holders need to actually know what they own
 
 <!-- TABLE-COLUMNS leaf:req:A.5.2:communication_record -->
@@ -19,6 +21,25 @@ table_shape: true
 <!-- column: item:A.5.2:comm_audience -->
 <!-- column: item:A.5.2:comm_channel -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you clearly document and track how roles, responsibilities, and authorities are communicated to the right people in your organization, ensuring everyone knows what they are accountable for.
+
+## When to use it
+
+Use this record whenever you assign or update roles and responsibilities, and refresh it whenever there are changes to your team or structure to keep your records current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes to complete the required sections for a small team, with additional time needed as you add more roles or updates.
 
 ## Register
 
@@ -41,12 +62,16 @@ _Why: Clause 5.3_
 
 > _Standard text:_ Date of publication/communication
 
+<<GUIDANCE>>
+
 ### Comm Audience
 
 <<MUST item:A.5.2:comm_audience>>
 _Why: Clause 5.3 — communicated within the organization_
 
 > _Standard text:_ Audience reached (all staff or named role-holders)
+
+<<GUIDANCE>>
 
 ### Comm Channel
 
@@ -56,6 +81,8 @@ _Why: Clause 5.3_
 > _Standard text:_ Channel used (intranet publication, email, training session, onboarding pack)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -68,9 +95,17 @@ _Why: Effectiveness_
 
 > _Standard text:_ Role-specific briefing or acknowledgement from named role-holders (CISO, asset owners, etc.)
 
+<<GUIDANCE>>
+
 ### Comm Onboarding
 
 <<SHOULD item:A.5.2:comm_onboarding>>
 _Why: Sustained communication_
 
 > _Standard text:_ Communication built into joiner onboarding so new role-holders are briefed on appointment
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

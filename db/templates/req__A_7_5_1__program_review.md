@@ -13,6 +13,8 @@ table_shape: true
 
 # Transfer Basis Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — every transfer relationship has valid basis, TIAs current after Schrems II + regulatory updates (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.7.5.1:program_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.7.5.1:rev_basis_currency -->
 <!-- column: item:A.7.5.1:rev_tia_refresh -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of the legal basis for each of your data transfer relationships, ensuring you stay up to date with privacy regulations like Schrems II and ISO 27701.
+
+## When to use it
+
+Use this review record whenever your organization is involved in data transfers that match specific criteria, and plan to update it about once a year to stay compliant with regulatory changes.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend around 40 to 60 minutes completing the required sections for each transfer relationship, with additional time needed if you have multiple transfers to document.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.5.1:rev_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + Legal)
 
+<<GUIDANCE>>
+
 ### Rev Basis Currency
 
 <<MUST item:A.7.5.1:rev_basis_currency>>
 _Why: Post-Schrems_
 
 > _Standard text:_ Basis currency — Art.45 adequacy decisions still in force (Privacy Shield lessons apply)
+
+<<GUIDANCE>>
 
 ### Rev Tia Refresh
 
@@ -65,6 +92,8 @@ _Why: EDPB 01/2020_
 > _Standard text:_ TIA refresh — recent case law + guidance considered
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

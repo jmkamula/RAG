@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Test Information Scope
 
+<<DOC_CONTROL>>
+
 > Upstream — what counts as test information in this org. Includes synthetic / sampled / production-derived. Excludes pure-config (no data values); test fixtures committed to repos go under A.8.4
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define what types of test information are included or excluded in your organization, making it easier to stay compliant with ISO 27001 requirements.
+
+## When to use it
+
+Use this document whenever your team needs to clarify the scope of test information, especially if your profile matches certain compliance triggers. Update it as needed when your test data practices change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to address three required elements in detail.
 
 ## 1. Test-information classes in scope (synthetic-generated / production-derived / vendor-provided / user-contributed)
 
 <<MUST item:A.8.33:scope_classes>>
 _Why: 27002:8.33 — appropriate_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.33 — appropriate_
 <<MUST item:A.8.33:scope_a811_link>>
 _Why: Cross-control boundary_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Exclusion rationale (test fixtures in code governed via A.8.4; one-off load-test data with no real source)
 
 <<MUST item:A.8.33:scope_exclusions>>
 _Why: Boundary clarity_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.33:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

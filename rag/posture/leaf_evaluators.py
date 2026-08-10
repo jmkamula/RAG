@@ -78,12 +78,13 @@ class GenericLeafEvaluator:
             must_item_ids = [i for i in must_item_ids if i not in na_ids]
 
         # 2. Postgres: which items are 'present' for current artifacts of this type?
-        recognised_ids, latest_uploaded_at = self._fetch_recognised_items(
-            evidence_type   = leaf.evidence_type,
-            must_item_ids   = must_item_ids,
-            control_ref     = leaf.control_ref,
-            standard_id     = leaf.standard_id,
-        )
+        recognised_ids, partial_ids, latest_per_must, latest_uploaded_at = \
+            self._fetch_recognised_items(
+                evidence_type   = leaf.evidence_type,
+                must_item_ids   = must_item_ids,
+                control_ref     = leaf.control_ref,
+                standard_id     = leaf.standard_id,
+            )
 
         # 3. Determine satisfied + freshness
         items_recognised   = [must_item_texts[i] for i in must_item_ids if i in recognised_ids]
@@ -93,6 +94,7 @@ class GenericLeafEvaluator:
         # bind tenant inputs to specific checklist_item_ids.
         item_ids_recognised   = [i for i in must_item_ids if i in recognised_ids]
         item_ids_unrecognised = [i for i in must_item_ids if i not in recognised_ids]
+        item_ids_partial      = [i for i in must_item_ids if i in partial_ids]
         satisfied          = len(items_unrecognised) == 0
 
         fresh, freshness_reason = self._check_freshness(
@@ -100,6 +102,19 @@ class GenericLeafEvaluator:
             latest_uploaded_at = latest_uploaded_at,
             have_any_artifact  = latest_uploaded_at is not None,
         )
+
+        # Per-MUST staleness (2026-08-10). Only meaningful when
+        # freshness_days is defined AND the MUST has recognising evidence
+        # with a timestamp. MUSTs without any evidence go in
+        # items_unrecognised, not item_ids_stale — "stale" means "we have
+        # coverage but it's past freshness".
+        item_ids_stale: list[str] = []
+        if leaf.freshness_days is not None:
+            cutoff = datetime.now(timezone.utc) - timedelta(days=leaf.freshness_days)
+            for mid in item_ids_recognised:
+                lat = latest_per_must.get(mid)
+                if lat is not None and lat < cutoff:
+                    item_ids_stale.append(mid)
 
         reason = self._build_reason(satisfied, fresh, items_recognised, items_unrecognised, freshness_reason)
 
@@ -114,6 +129,8 @@ class GenericLeafEvaluator:
             items_unrecognised = items_unrecognised,
             item_ids_recognised   = item_ids_recognised,
             item_ids_unrecognised = item_ids_unrecognised,
+            item_ids_stale        = item_ids_stale,
+            item_ids_partial      = item_ids_partial,
         )
 
     # ── Postgres: fetch tenant N/A overrides for MUSTs (schema_v43) ──────────
@@ -165,17 +182,23 @@ class GenericLeafEvaluator:
         must_item_ids: list[str],
         control_ref:   str,
         standard_id:   str,
-    ) -> tuple[set[str], datetime | None]:
-        """Returns (set of recognised item_ids, latest matching upload datetime).
+    ) -> tuple[set[str], set[str], dict[str, datetime], datetime | None]:
+        """Returns (recognised_ids, partial_ids, latest_per_must_id, overall_latest).
 
-        Per-MUST recognition: a leaf MUST is recognised only when an approved,
-        active finding is bound to its checklist_item_id with status='present'.
-        The earlier Phase-1 fallback — coarse (control_ref, evidence_type)
-        match that called ALL of a leaf's MUSTs satisfied when any doc of the
-        right type existed — was retired 2026-06-13 after it was found to
-        systematically overstate coverage and mask per-MUST gaps that
-        workbook intake / leaf-scan / doc curation later exposed (see
-        [[feedback-phase-1-fallback-masks-gaps]]).
+        Per-MUST recognition: a leaf MUST is `recognised` only when an
+        approved, active finding is bound to its checklist_item_id with
+        status='present'. `partial_ids` (2026-08-10) is the parallel set
+        for status='partial' — approved+active but not fully covering.
+        `latest_per_must_id` maps each recognising or partial-covering
+        MUST id to its most-recent evidence timestamp; used by the caller
+        to compute per-MUST staleness. `overall_latest` is the max across
+        all MUSTs for backward compatibility with leaf-level freshness.
+
+        Earlier Phase-1 fallback — coarse (control_ref, evidence_type)
+        match that called ALL of a leaf's MUSTs satisfied when any doc of
+        the right type existed — was retired 2026-06-13 after it was
+        found to systematically overstate coverage and mask per-MUST gaps
+        (see [[feedback-phase-1-fallback-masks-gaps]]).
 
         Findings without checklist_item_id no longer feed the engine. The
         intake paths (workbook YAML, doc curation, leaf-scan back-binding)
@@ -190,7 +213,7 @@ class GenericLeafEvaluator:
         set app.tenant_id, even though we also filter by tenant_id explicitly.
         """
         if not must_item_ids:
-            return set(), None
+            return set(), set(), {}, None
 
         with self._pg.cursor() as cur:
             cur.execute(
@@ -210,8 +233,15 @@ class GenericLeafEvaluator:
             # different evidence_types (one .xlsm feeds asset_register /
             # register / risk_register / revocation_record leaves
             # simultaneously).
+            # Fetch BOTH present + partial rows. `status='present'` populates
+            # the strict recognised set (backward-compatible semantics);
+            # `status='partial'` populates the partial set for consumers
+            # rendering ◐ half-state indicators. `partial_ids` is
+            # membership-exclusive with `recognised_ids` (a MUST with both
+            # present and partial evidence is treated as recognised).
             cur.execute("""
                 SELECT df.checklist_item_id,
+                       df.status,
                        cd.uploaded_at
                 FROM document_findings df
                 JOIN client_documents cd
@@ -220,18 +250,29 @@ class GenericLeafEvaluator:
                   AND cd.is_active        = TRUE
                   AND cd.is_current       = TRUE
                   AND df.checklist_item_id = ANY(%s)
-                  AND df.status           = 'present'
+                  AND df.status           IN ('present', 'partial')
                   AND df.is_active        = TRUE
                   AND df.review_status    = 'approved'
             """, (self._tenant_id, list(must_item_ids)))
             per_item_rows = cur.fetchall()
 
             recognised: set[str] = set()
+            partial:    set[str] = set()
+            latest_per_must: dict[str, datetime] = {}
             latest: datetime | None = None
-            for item_id, uploaded_at in per_item_rows:
-                recognised.add(item_id)
-                if uploaded_at is not None and (latest is None or uploaded_at > latest):
-                    latest = uploaded_at
+            for item_id, status, uploaded_at in per_item_rows:
+                if status == "present":
+                    recognised.add(item_id)
+                elif status == "partial":
+                    partial.add(item_id)
+                if uploaded_at is not None:
+                    prev = latest_per_must.get(item_id)
+                    if prev is None or uploaded_at > prev:
+                        latest_per_must[item_id] = uploaded_at
+                    if latest is None or uploaded_at > latest:
+                        latest = uploaded_at
+            # A MUST with both present + partial rows: present dominates.
+            partial -= recognised
 
         # NB: we don't early-return when per_item_rows is empty — a leaf
         # with zero stored findings may still be cite-covered. Continue to
@@ -243,18 +284,25 @@ class GenericLeafEvaluator:
         # cites (last_verified_at IS NULL) are NOT considered fresh —
         # tenant must verify at least once before a cite counts toward
         # posture. See [[product-principle-evidence-stored-vs-cited]].
-        cite_recognised, cite_latest = self._fetch_recognised_cites(must_item_ids)
+        cite_recognised, cite_latest_per_must, cite_latest = self._fetch_recognised_cites(must_item_ids)
         recognised.update(cite_recognised)
+        for mid, verified_at in cite_latest_per_must.items():
+            prev = latest_per_must.get(mid)
+            if prev is None or verified_at > prev:
+                latest_per_must[mid] = verified_at
+        # Once cite-mode recognises a MUST, drop it from partial (cite
+        # coverage is a fully-verified recognition, not a partial finding).
+        partial -= recognised
         if cite_latest is not None and (latest is None or cite_latest > latest):
             latest = cite_latest
 
-        return recognised, latest
+        return recognised, partial, latest_per_must, latest
 
     def _fetch_recognised_cites(
         self,
         must_item_ids: list[str],
-    ) -> tuple[set[str], datetime | None]:
-        """Return (set of must_ids covered by fresh cites, latest verified_at).
+    ) -> tuple[set[str], dict[str, datetime], datetime | None]:
+        """Return (must_ids covered by fresh cites, per-must verified_at, overall latest).
 
         A cite is fresh when:
             now <= last_verified_at + (cadence_days + grace_days)
@@ -265,7 +313,7 @@ class GenericLeafEvaluator:
         (silent fallback).
         """
         if not must_item_ids:
-            return set(), None
+            return set(), {}, None
         try:
             with self._pg.cursor() as cur:
                 cur.execute(
@@ -292,15 +340,20 @@ class GenericLeafEvaluator:
                 rows = cur.fetchall()
         except Exception:
             # schema_v50 not applied or table missing — silent fallback
-            return set(), None
+            return set(), {}, None
 
         recognised: set[str] = set()
+        latest_per_must: dict[str, datetime] = {}
         latest: datetime | None = None
         for must_id, verified_at in rows:
             recognised.add(must_id)
-            if verified_at is not None and (latest is None or verified_at > latest):
-                latest = verified_at
-        return recognised, latest
+            if verified_at is not None:
+                prev = latest_per_must.get(must_id)
+                if prev is None or verified_at > prev:
+                    latest_per_must[must_id] = verified_at
+                if latest is None or verified_at > latest:
+                    latest = verified_at
+        return recognised, latest_per_must, latest
 
     # ── Freshness check ──────────────────────────────────────────────────────
 

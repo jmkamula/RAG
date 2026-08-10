@@ -11,14 +11,35 @@ should_count: 1
 
 # Top Management Leadership and Commitment Directive
 
+<<DOC_CONTROL>>
+
 > Clause 5.1 requires top management to demonstrate leadership and commitment to the ISMS. The signed directive is the canonical artefact addressing all of clause 5.1 a-h. Sibling leaves: leadership engagement framework, per-reaffirmation record, program review
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you create a formal statement from top management, showing their leadership and commitment to your information security management system. It's designed to cover all the requirements of ISO 27001 clause 5.1.
+
+## When to use it
+
+Use this document whenever you need to demonstrate ongoing top management support for your ISMS. It should always be in place and updated whenever there are significant changes or as needed.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2.5 hours drafting this from scratch, as you'll need to address nine required elements in detail.
 
 ## 1. Policy and objectives compatible with strategic direction
 
 <<MUST item:5.1:policy_objectives_strategy>>
 _Why: Clause 5.1 a)_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Clause 5.1 a)_
 <<MUST item:5.1:integration>>
 _Why: Clause 5.1 b)_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Resources for the ISMS made available
 
 <<MUST item:5.1:resources>>
 _Why: Clause 5.1 c)_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: Clause 5.1 c)_
 <<MUST item:5.1:importance_communicated>>
 _Why: Clause 5.1 d)_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Ensuring the ISMS achieves its intended outcomes
 
 <<MUST item:5.1:outcomes_achieved>>
 _Why: Clause 5.1 e)_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -55,12 +84,16 @@ _Why: Clause 5.1 e)_
 <<MUST item:5.1:direct_and_support>>
 _Why: Clause 5.1 f)_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Promoting continual improvement
 
 <<MUST item:5.1:continual_improvement>>
 _Why: Clause 5.1 g)_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -69,12 +102,16 @@ _Why: Clause 5.1 g)_
 <<MUST item:5.1:support_other_mgmt>>
 _Why: Clause 5.1 h)_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 9. Signed by top management with date
 
 <<MUST item:5.1:signed_dated>>
 _Why: Authenticity_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -89,4 +126,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:5.1:periodic_reaffirm>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

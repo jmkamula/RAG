@@ -11,14 +11,35 @@ should_count: 3
 
 # ICT Readiness for Business Continuity Plan
 
+<<DOC_CONTROL>>
+
 > A.5.30 requires ICT readiness to be planned, implemented, maintained, and tested per business continuity objectives. The plan documents per-service RTO/RPO targets (BIA-derived), recovery procedures, backup arrangements, failover/redundancy provisions, and test cadence. The service register, periodic program review and per-recovery event record are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you create a clear plan for keeping your information and communication technology (ICT) systems running during disruptions, including recovery targets, backup plans, and regular testing schedules.
+
+## When to use it
+
+Use this template whenever you need to document or update your ICT business continuity plan, especially when your environment changes or after any significant incident that affects your systems.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours completing this from scratch, depending on the number of services you need to cover and the detail required for each section.
 
 ## 1. Recovery Time and Recovery Point Objectives per ICT service (BIA-derived; RTO = how long can it be down; RPO = how much data loss is acceptable)
 
 <<MUST item:A.5.30:rto_rpo>>
 _Why: 27002:5.30 — business continuity objectives_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:5.30 — business continuity objectives_
 <<MUST item:A.5.30:recovery_procedures>>
 _Why: 27002:5.30 — ICT readiness_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Backup arrangements (frequency aligned to RPO, retention, geographic separation, restore tested and verified)
 
 <<MUST item:A.5.30:backup>>
 _Why: 27002:5.30 — implemented_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: 27002:5.30 — implemented_
 <<MUST item:A.5.30:failover>>
 _Why: 27002:5.30 — readiness_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Test cadence and records (last test date per service, outcome, gaps identified, remediation status)
 
 <<MUST item:A.5.30:test_records>>
 _Why: 27002:5.30 — tested_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -55,12 +84,16 @@ _Why: 27002:5.30 — tested_
 <<MUST item:A.5.30:bia_link>>
 _Why: 27002:5.30 — BIA derivation_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Alignment with A.5.29 disruption-security plan stated explicitly (this is the ICT mechanical layer; A.5.29 is the security-annex layer; both must reconcile)
 
 <<MUST item:A.5.30:bcp_alignment>>
 _Why: 27002:5.30 + cross-link to [[A.5.29]]_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -75,12 +108,16 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.5.30:scenario_coverage>>
 _Why: Test realism_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Communication tree for ICT outages (who is informed, escalation thresholds, status-page update cadence)
 
 <<SHOULD item:A.5.30:communication_tree>>
 _Why: Coordination_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -89,4 +126,10 @@ _Why: Coordination_
 <<SHOULD item:A.5.30:third_party_recovery>>
 _Why: Cross-link to [[A.5.22]]_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

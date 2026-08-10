@@ -13,6 +13,8 @@ table_shape: true
 
 # ACR Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — request handling reliable, SLAs met, refusals defensible, propagation working, no ACR gaps in systems (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.7.3.6:program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.3.6:rev_refusal_audit -->
 <!-- column: item:A.7.3.6:rev_propagation_audit -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document your annual review of how access control requests are handled, ensuring processes are reliable, timely, and defensible, with no gaps in your systems.
+
+## When to use it
+
+Use this template once a year, or whenever your organization’s profile changes in a way that triggers a review of your access control request processes.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on the number of required elements and the amount of detail you need to provide.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.3.6:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + Legal + Engineering)
+
+<<GUIDANCE>>
 
 ### Rev Sla Audit
 
@@ -58,12 +83,16 @@ _Why: §7.3.6 — undue delay + Art.12.3_
 
 > _Standard text:_ SLA audit — sampled requests measured against undue-delay standard
 
+<<GUIDANCE>>
+
 ### Rev Refusal Audit
 
 <<MUST item:A.7.3.6:rev_refusal_audit>>
 _Why: §7.3.6 + Art.12.4_
 
 > _Standard text:_ Refusal audit — sampled refusals reviewed for defensibility + subject-notification of reason
+
+<<GUIDANCE>>
 
 ### Rev Propagation Audit
 
@@ -73,6 +102,8 @@ _Why: §7.3.6 — pass to third parties_
 > _Standard text:_ Propagation audit — sampled corrections/erasures verified downstream
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

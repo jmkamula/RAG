@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Classification Scheme Review
 
+<<DOC_CONTROL>>
+
 > Classification schemes are the foundation of handling controls — a stale scheme produces stale handling. Review checks whether the levels still match the actual sensitivity gradient, whether new categories have emerged (e.g. AI training corpora), and whether downstream controls (A.5.13, A.5.10, A.5.14) still align
 
 <!-- TABLE-COLUMNS leaf:req:A.5.12:periodic_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.5.12:review_outcome -->
 <!-- column: item:A.5.12:review_downstream -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you regularly review and update your information classification scheme, ensuring it matches your current data sensitivity and that your handling controls remain effective and up to date.
+
+## When to use it
+
+Use this template whenever you need to check if your classification levels and categories still fit your environment. Plan to complete this review about once a year to stay compliant.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend around 45 to 60 minutes filling out this review from scratch, depending on the number of elements and updates needed for your classification scheme.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic review_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Review Reviewer
 
 <<MUST item:A.5.12:review_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity and role (typically CISO with data-protection and business-line input)
 
+<<GUIDANCE>>
+
 ### Review Outcome
 
 <<MUST item:A.5.12:review_outcome>>
 _Why: Periodic review_
 
 > _Standard text:_ Outcome captured (no change / amended / re-issued) with rationale per amendment
+
+<<GUIDANCE>>
 
 ### Review Downstream
 
@@ -65,6 +92,8 @@ _Why: Cross-control coherence_
 > _Standard text:_ Downstream-control alignment checked (A.5.13 labelling rules, A.5.10 handling rules, A.5.14 transfer still consistent)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -77,9 +106,17 @@ _Why: Change-driven review_
 
 > _Standard text:_ Ad-hoc triggers listed (M&A, new regulator-imposed classes, new business line with novel sensitivities)
 
+<<GUIDANCE>>
+
 ### Review Next Date
 
 <<SHOULD item:A.5.12:review_next_date>>
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

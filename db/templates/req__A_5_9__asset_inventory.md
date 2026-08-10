@@ -13,6 +13,8 @@ table_shape: true
 
 # Inventory of Information and Associated Assets
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
 The **register of everything you protect**. Without it, every other
@@ -24,33 +26,21 @@ common nonconformity.
 
 ## When to use it
 
-Standing artefact required by **ISO/IEC 27001:2022 A.5.9**. The
-register is **continuously maintained** — at least every 90 days
+Standing artefact required by **ISO/IEC 27001:2022 A.5.9**. The register is **continuously maintained** — at least every 90 days
 freshness, plus event-driven updates (new asset onboarded, retired,
 ownership transferred).
 
-## Before you start
+## Prerequisites
 
-- [ ] **4.3 ISMS Scope** clear — only in-scope assets in this register
-- [ ] **A.5.12 Classification Scheme** in place — needed for the
-      Classification column
-- [ ] **5.3 Roles** clear — owners are named individuals/roles
+<<PREREQUISITES>>
 
 ## Cross-references
 
-- **A.5.12 Classification** — every record gets a class
-- **A.5.10 Acceptable Use** — references this register
-- **A.5.11 Return of Assets** — closes register rows on leaver
-- **A.5.16 Identity Management** — identities are also assets
-- **A.5.21 ICT Supply Chain** — supplier-managed assets flagged
-- **A.5.33 Records Protection** — records are a subset
-- **A.8.10 Information Deletion** — disposal feeds back into the
-  register
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
-**1-3 days** for v1 (discovery + classification effort); **ongoing
-operational cost** for maintenance.
+**1-3 days** for v1 (discovery + classification effort); **ongoing operational cost** for maintenance.
 
 ---
 
@@ -97,6 +87,8 @@ historical view.
 Database" → "Cust DB") — the auditor can't trace the same asset across
 quarters.
 
+<<GUIDANCE>>
+
 ### Owner
 
 <<MUST item:A.5.9:owner_per_asset>>
@@ -113,6 +105,8 @@ single accountable owner with documented stakeholders.
 
 **✗ Avoid**: "Owner: IT team" — un-actionable for the auditor.
 
+<<GUIDANCE>>
+
 ### Classification
 
 <<MUST item:A.5.9:classification>>
@@ -128,6 +122,8 @@ significant change to asset content or use.
 
 **✗ Avoid**: "High / Medium / Low" if your scheme uses different terms
 — the value must match A.5.12 exactly.
+
+<<GUIDANCE>>
 
 ### Location
 
@@ -148,6 +144,8 @@ access, and physical-controls applicability.
 **✗ Avoid**: "Cloud" alone — auditor can't sample without region +
 account.
 
+<<GUIDANCE>>
+
 ### Last Updated
 
 <<MUST item:A.5.9:last_updated>>
@@ -163,6 +161,8 @@ unchanged). Either resets the 90-day freshness clock.
 
 **✗ Avoid**: An entire register dated to the same day — auditor
 sees that as a one-time snapshot, not active maintenance.
+
+<<GUIDANCE>>
 
 ### Asset Type
 
@@ -182,6 +182,8 @@ that break grouping queries.
 
 ---
 
+<<GUIDANCE>>
+
 ## Recommended additional columns
 
 _These strengthen the register but aren't strictly required for the
@@ -197,6 +199,8 @@ MUST checks. Add them as extra columns in the table if they apply._
 Track lifecycle so retired assets don't carry stale controls and
 sunset assets get the right compensating controls.
 
+<<GUIDANCE>>
+
 ### Dependencies
 
 <<SHOULD item:A.5.9:dependencies>>
@@ -208,6 +212,8 @@ For each asset, list immediate dependencies (this DB → that service;
 this service → that API key). Enables blast-radius analysis at
 incident time + drives BCP scope.
 
+<<GUIDANCE>>
+
 ### Data Flow Inventory cross-link (PII-bearing assets)
 
 <<SHOULD item:A.5.9:dfi_link>>
@@ -216,3 +222,9 @@ incident time + drives BCP scope.
 
 For any asset holding personal data, cross-link to the Art.30 RoPA
 data-flow inventory row. Closes the ISO ↔ GDPR loop.
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

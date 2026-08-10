@@ -11,14 +11,35 @@ should_count: 3
 
 # Data Processing Agreement (DPA)
 
+<<DOC_CONTROL>>
+
 > Art.28.3 mandates a written contract with every processor covering 8 specific points. The DPA is the canonical artefact. Sibling leaves: per-processor DPA register, applicable processors scope, program review
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you create a clear, GDPR-compliant agreement with any company that processes personal data on your behalf. It ensures all required points are covered and makes it easier to demonstrate compliance.
+
+## When to use it
+
+Use this document whenever you hire or work with a third-party company to process personal data for you. Update or review it whenever you change processors or your data processing activities change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours drafting this agreement from scratch, depending on the complexity of your processing activities and the number of required details.
 
 ## 1. Process only on documented controller instructions
 
 <<MUST item:Art.28:instructions>>
 _Why: Art.28.3a_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Art.28.3a_
 <<MUST item:Art.28:confidentiality>>
 _Why: Art.28.3b_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Security measures per Art.32
 
 <<MUST item:Art.28:security>>
 _Why: Art.28.3c_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: Art.28.3c_
 <<MUST item:Art.28:subprocessors>>
 _Why: Art.28.3d_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Assistance with data subject rights
 
 <<MUST item:Art.28:rights>>
 _Why: Art.28.3e_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -55,6 +84,8 @@ _Why: Art.28.3e_
 <<MUST item:Art.28:assistance>>
 _Why: Art.28.3f_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Deletion or return of data at end of service
@@ -62,12 +93,16 @@ _Why: Art.28.3f_
 <<MUST item:Art.28:deletion>>
 _Why: Art.28.3g_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 8. Audit rights and information to demonstrate compliance
 
 <<MUST item:Art.28:audit>>
 _Why: Art.28.3h_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -82,12 +117,16 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.28:breach_notif>>
 _Why: Best practice_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Data transfer mechanisms if applicable
 
 <<SHOULD item:Art.28:transfers>>
 _Why: Chapter V_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -96,4 +135,10 @@ _Why: Chapter V_
 <<SHOULD item:Art.28:governing>>
 _Why: Contract completeness_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

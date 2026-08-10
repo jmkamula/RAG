@@ -13,6 +13,8 @@ table_shape: true
 
 # ISMS Measurement Record
 
+<<DOC_CONTROL>>
+
 > The live measurement output — per-metric values captured over time, analysed against thresholds, fed into 9.3 management review. Distinct from the procedure: the procedure is the plan, this is the data. Quarterly refresh (freshness=90 — measurement tempo)
 
 <!-- TABLE-COLUMNS leaf:req:9.1:measurement_record -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:9.1:rec_status -->
 <!-- column: item:9.1:rec_owner -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you record and track your information security metrics over time, making it easy to see how your controls are performing and to prepare for management reviews.
+
+## When to use it
+
+Use this register whenever you need to capture and analyse ISMS measurement data in your environment, updating it every quarter to keep your records current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 2 hours to set up the initial register, depending on the number of metrics and data points you need to include.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: Cross-leaf coherence_
 
 > _Standard text:_ Metric identifier per row (matches procedure's metric catalog)
 
+<<GUIDANCE>>
+
 ### Rec Value
 
 <<MUST item:9.1:rec_value>>
 _Why: Clause 9.1 — measurement_
 
 > _Standard text:_ Per-row measured value
+
+<<GUIDANCE>>
 
 ### Rec Date
 
@@ -59,6 +84,8 @@ _Why: Currency_
 
 > _Standard text:_ Per-row measurement date
 
+<<GUIDANCE>>
+
 ### Rec Threshold
 
 <<MUST item:9.1:rec_threshold>>
@@ -66,12 +93,16 @@ _Why: Clause 9.1 — evaluation_
 
 > _Standard text:_ Per-row threshold / target value applied
 
+<<GUIDANCE>>
+
 ### Rec Status
 
 <<MUST item:9.1:rec_status>>
 _Why: Clause 9.1 — analysis_
 
 > _Standard text:_ Per-row status (above-target / on-target / below-target / breach)
+
+<<GUIDANCE>>
 
 ### Rec Owner
 
@@ -81,6 +112,8 @@ _Why: Accountability_
 > _Standard text:_ Per-row metric owner
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Trend visibility_
 
 > _Standard text:_ Per-row trend annotation (rising / stable / falling)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

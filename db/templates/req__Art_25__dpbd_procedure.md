@@ -11,14 +11,35 @@ should_count: 1
 
 # Data Protection by Design Procedure
 
+<<DOC_CONTROL>>
+
 > Art.25.1 requires the controller to implement T&O measures at the time of determining means of processing AND at the time of processing itself. The procedure governs HOW DPbD reviews are integrated into product/system design — design-stage privacy review checkpoints, decision authority, output (defaults + measures register)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document how privacy and data protection are considered and built into your products or systems from the very beginning, ensuring you meet GDPR requirements for Data Protection by Design.
+
+## When to use it
+
+Use this procedure whenever you are designing or updating a product or system that processes personal data, and review it whenever there are significant changes to your processing activities or privacy risks.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this template from scratch, depending on the complexity of your systems and the number of privacy measures you need to document.
 
 ## 1. Design-stage checkpoint stated (when DPbD review happens in the product / system development lifecycle)
 
 <<MUST item:Art.25:proc_checkpoint>>
 _Why: Art.25.1 — at the time of determining means_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Art.25.1 — at the time of determining means_
 <<MUST item:Art.25:proc_inputs>>
 _Why: Art.25.1 — taking into account_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Decision authority for DPbD outcomes (DPO + product lead + engineering lead)
 
 <<MUST item:Art.25:proc_authority>>
 _Why: Defensibility_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: Defensibility_
 <<MUST item:Art.25:proc_dpia_integration>>
 _Why: Art.35.3.b cross-reference_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Per-review record retained (which design, which decisions, which measures)
 
 <<MUST item:Art.25:proc_record>>
 _Why: Art.25.1 — accountability_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.25:proc_certification>>
 _Why: Art.25.3_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

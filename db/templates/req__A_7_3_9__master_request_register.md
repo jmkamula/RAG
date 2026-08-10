@@ -13,6 +13,8 @@ table_shape: true
 
 # Master Subject Request Register
 
+<<DOC_CONTROL>>
+
 > Per-request row — the umbrella register covering all subject-rights requests routed through the intake channel. Sub-registers on A.7.3.4-8 track type-specific detail. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:A.7.3.9:master_request_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.3.9:reg_routing -->
 <!-- column: item:A.7.3.9:reg_sla_met_flag -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of all subject-rights requests received through your main intake channel, making it easier to track and manage privacy-related requests across your organization.
+
+## When to use it
+
+Use this register whenever your organization receives a subject-rights request that matches specific privacy triggers. Plan to review and update the register about once a year to keep it current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes setting up the initial register, plus additional time for each new request you log. Ongoing updates are quick, as you only need to add new requests as they come in.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit trail_
 
 > _Standard text:_ Unique request identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Intake Channel
 
 <<MUST item:A.7.3.9:reg_intake_channel>>
 _Why: Traceability_
 
 > _Standard text:_ Intake channel per row
+
+<<GUIDANCE>>
 
 ### Reg Classified Type
 
@@ -58,12 +83,16 @@ _Why: §7.3.9 — legitimate requests_
 
 > _Standard text:_ Classified type per row (access / correction / erasure / portability / restriction / objection / complaint / other)
 
+<<GUIDANCE>>
+
 ### Reg Routing
 
 <<MUST item:A.7.3.9:reg_routing>>
 _Why: §7.3.9 — handling_
 
 > _Standard text:_ Routing per row (which sub-procedure handled it)
+
+<<GUIDANCE>>
 
 ### Reg Sla Met Flag
 
@@ -73,6 +102,8 @@ _Why: §7.3.9 — response times_
 > _Standard text:_ SLA-met flag per row (auditor-critical timeliness proof)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: §7.3.9 — fee cases_
 
 > _Standard text:_ Fee-charged flag + amount per row where applicable
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

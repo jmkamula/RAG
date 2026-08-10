@@ -11,14 +11,35 @@ should_count: 1
 
 # Processor Temp Files Disposal Procedure
 
+<<DOC_CONTROL>>
+
 > §8.4.1 mirrors §7.4.6 from processor side — temp files created during processing of customer PII must be disposed of within a specified, documented period.
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you create a clear, step-by-step procedure for securely disposing of temporary files that contain customer personal data, ensuring you meet privacy requirements as a data processor.
+
+## When to use it
+
+Use this document whenever your organization processes customer personal data and creates temporary files that need to be deleted within a set timeframe. Update it whenever your procedures or requirements change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes drafting this from scratch, as you'll need to cover five required elements and ensure your process is well-documented.
 
 ## 1. Temp file taxonomy (customer-facing multi-tenant apps + shared infrastructure + integration middleware)
 
 <<MUST item:B.8.4.1:proc_temp_taxonomy>>
 _Why: §8.4.1_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: §8.4.1_
 <<MUST item:B.8.4.1:proc_period>>
 _Why: §8.4.1 — specified, documented period_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Garbage collection procedure identifying unused files + last-use timestamp
 
 <<MUST item:B.8.4.1:proc_gc_procedure>>
 _Why: §8.4.1 — garbage collection_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: §8.4.1 — garbage collection_
 <<MUST item:B.8.4.1:proc_tenant_isolation>>
 _Why: Multi-tenant discipline_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Periodic check that temp files are deleted
 
 <<MUST item:B.8.4.1:proc_periodic_check>>
 _Why: §8.4.1 — periodic verification_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:B.8.4.1:proc_owner>>
 _Why: Accountability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

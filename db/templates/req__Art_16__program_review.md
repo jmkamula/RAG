@@ -13,6 +13,8 @@ table_shape: true
 
 # Art.16 Rectification Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — SLAs met, systems coverage complete, Art.19 notifications fired (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.16:program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.16:rev_systems_completeness -->
 <!-- column: item:Art.16:rev_art19_audit -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your annual review for correcting personal data, making sure your systems meet GDPR requirements and that all necessary notifications have been sent.
+
+## When to use it
+
+Use this template once a year to confirm your data correction processes are working as expected and that your environment is fully covered.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours completing this from scratch, depending on how many systems or records you need to review.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.16:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO)
+
+<<GUIDANCE>>
 
 ### Rev Sla Compliance
 
@@ -58,12 +83,16 @@ _Why: Art.12.3_
 
 > _Standard text:_ SLA compliance (Art.12.3 one-month)
 
+<<GUIDANCE>>
+
 ### Rev Systems Completeness
 
 <<MUST item:Art.16:rev_systems_completeness>>
 _Why: Art.16 — all instances_
 
 > _Standard text:_ Systems-completeness check — sampled requests reached every system in scope
+
+<<GUIDANCE>>
 
 ### Rev Art19 Audit
 
@@ -73,6 +102,8 @@ _Why: Art.19_
 > _Standard text:_ Art.19 audit — recipient notifications fired (or exceptions documented)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

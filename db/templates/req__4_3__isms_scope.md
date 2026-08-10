@@ -11,6 +11,8 @@ should_count: 2
 
 # ISMS Scope Statement
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
 A one-page Scope Statement defining where your ISMS applies. This is
@@ -21,38 +23,17 @@ upfront.
 
 ## When to use it
 
-You're authoring (or refreshing) the Statement of Scope per **ISO/IEC
-27001:2022 Clause 4.3**. Either: (a) this is a new ISMS and you're
+You're authoring (or refreshing) the Statement of Scope per **ISO/IEC 27001:2022 Clause 4.3**. Either: (a) this is a new ISMS and you're
 producing the first version, or (b) you're refreshing because of a
 significant change (new product line, new geography, M&A, divestment).
 
-## Before you start
+## Prerequisites
 
-You'll write a stronger scope statement if you've already done these:
-
-- [ ] **Clause 4.1 issues register** — what internal and external issues
-      affect your information security objectives. The scope flows from
-      these issues.
-- [ ] **Clause 4.2 interested parties register** — who has expectations
-      of your ISMS and what those expectations are. The interfaces in
-      this scope statement should match this list.
-- [ ] **A sponsor at top management** — someone whose signature carries
-      weight (CEO / CISO / ISMS Owner) and who can sign off on
-      exclusions.
+<<PREREQUISITES>>
 
 ## Cross-references
 
-This scope statement feeds and constrains:
-
-- **5.1 / 5.2** — Top management commitment and InfoSec Policy explicitly
-  reference "the ISMS scope as defined in section 4.3"
-- **6.1.2 / 6.1.3** — Risk assessment is performed **within the scope**;
-  the SoA columns include scope-applicability
-- **A.5 / A.7 / A.8 controls** — many controls' "applicable" decision
-  depends on whether the asset/process is in-scope (e.g. A.7 physical
-  controls N/A if you have no premises in scope)
-- **9.2 audit** — the audit programme covers everything *in scope*; an
-  unclear scope causes audit findings
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
@@ -60,10 +41,6 @@ This scope statement feeds and constrains:
 to refresh.
 
 ---
-
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
 
 ## 1. Define the ISMS boundary
 
@@ -88,6 +65,8 @@ end-users processed by these systems."
 audit). "Everything except finance" (defines by exclusion only —
 state inclusion first).
 
+<<GUIDANCE>>
+
 <<NAME>>
 
 ## 2. Document interfaces and dependencies
@@ -110,6 +89,8 @@ relationship)."
 
 **✗ Avoid**: A list of vendor names with no context on what data or
 trust flows across each interface.
+
+<<GUIDANCE>>
 
 <<NAME>>
 
@@ -138,6 +119,8 @@ isolation eliminates information flow into in-scope systems."
 the organisation that DO process in-scope data (the auditor will
 catch this through interfaces).
 
+<<GUIDANCE>>
+
 <<NAME>>
 
 ## 4. Enumerate physical and logical locations
@@ -160,6 +143,8 @@ Cloud (engineering tooling). Cloud-only — no on-prem data centres."
 
 **✗ Avoid**: "Global" or "All offices" without enumeration. The
 auditor cannot sample what you cannot list.
+
+<<GUIDANCE>>
 
 <<NAME>>
 
@@ -185,6 +170,8 @@ data."
 **✗ Avoid**: Vague product names without context on what data flows
 through them.
 
+<<GUIDANCE>>
+
 <<NAME>>
 
 ## 6. Name the document owner
@@ -205,6 +192,8 @@ change."
 
 **✗ Avoid**: "ISMS team" (ownership must be personal). "TBD" (a
 scope statement without an owner is not a controlled document).
+
+<<GUIDANCE>>
 
 <<NAME>>
 
@@ -228,6 +217,8 @@ Listing top stakeholders within the scope statement makes it
 self-contained for an external reader (auditor / customer) who hasn't
 seen your 4.2 register.
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### Add version + review metadata
@@ -250,4 +241,10 @@ Next review:    <<NEXT_REVIEW_DATE>>
 Change history: v1.0 initial — v1.1 added Czech office — v1.2 ...
 ```
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

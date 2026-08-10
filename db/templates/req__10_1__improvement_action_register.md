@@ -13,6 +13,8 @@ table_shape: true
 
 # Improvement Action Register
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
 The **live ledger** where every improvement opportunity — audit
@@ -24,31 +26,20 @@ of a continually-improving ISMS.
 
 ## When to use it
 
-Standing artefact required by **ISO/IEC 27001:2022 Clause 10.1**.
-This is a **register** (spreadsheet, ticketing-system view, or
+Standing artefact required by **ISO/IEC 27001:2022 Clause 10.1**. This is a **register** (spreadsheet, ticketing-system view, or
 table) not a one-off document — it's referenced constantly.
 
-## Before you start
+## Prerequisites
 
-- [ ] **5.3 Roles** clear (every action needs an owner with authority)
-- [ ] **9.2 Audit Programme** + **9.3 Management Review** in place
-      (they're the biggest inflow of register rows)
-- [ ] **A.5.27 Lessons-learned** process running (post-incident
-      learnings feed here)
+<<PREREQUISITES>>
 
 ## Cross-references
 
-- **10.2 Nonconformity Register** — sister artefact for the
-  *negative* findings; some orgs merge 10.1+10.2, others keep
-  separate. Either is fine — be explicit about which approach
-- **9.2 Audit findings** — primary inflow
-- **9.3 Management Review** — decisions become rows here
-- **A.5.27 Lessons learned** — post-incident improvements
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
-**1-2 hours** to design the register structure for v1; **ongoing
-operational cost** of updating per finding.
+**1-2 hours** to design the register structure for v1; **ongoing operational cost** of updating per finding.
 
 ---
 
@@ -92,6 +83,8 @@ Stable prefix + numeric sequence. Avoid recycling IDs after closure
 **✗ Avoid**: Free-text descriptions as IDs ("RBAC slip") — auditor
 needs a stable handle to reference across status changes.
 
+<<GUIDANCE>>
+
 ### Trigger
 
 <<MUST item:10.1:reg_trigger_type>>
@@ -109,6 +102,8 @@ trigger to see flow rate from each source.
 **✗ Avoid**: Mixing the trigger value with the reasoning narrative —
 keep this column to the discrete category.
 
+<<GUIDANCE>>
+
 ### Dimension
 
 <<MUST item:10.1:reg_dimension>>
@@ -116,8 +111,7 @@ keep this column to the discrete category.
 > _Standard text:_ Per-row improvement dimension (suitability /
 > adequacy / effectiveness)
 
-ISO 27001 distinguishes three. **Suitability** (is the control right
-for the situation?). **Adequacy** (is it complete?). **Effectiveness**
+ISO 27001 distinguishes three. **Suitability** (is the control right for the situation?). **Adequacy** (is it complete?). **Effectiveness**
 (does it actually work?). Categorising helps the review process —
 different remedies apply.
 
@@ -126,6 +120,8 @@ different remedies apply.
 
 **✗ Avoid**: "Improvement" or "Fix" — both are not values from the
 ISO triad.
+
+<<GUIDANCE>>
 
 ### Owner
 
@@ -142,6 +138,8 @@ history).
 
 **✗ Avoid**: "TBD" or unassigned — an action without an owner drifts.
 
+<<GUIDANCE>>
+
 ### Target Date
 
 <<MUST item:10.1:reg_target_date>>
@@ -155,6 +153,8 @@ should re-trigger management review approval.
 **✓ Good**: `2026-09-30 (slipped from 2026-06-30: vendor dependency)`
 
 **✗ Avoid**: "When possible" or "Q3" without a specific date.
+
+<<GUIDANCE>>
 
 ### Status
 
@@ -171,6 +171,8 @@ the row history.
 
 **✗ Avoid**: Status that doesn't reset on slip — owner says "still
 in progress" 18 months later without a refreshed target date.
+
+<<GUIDANCE>>
 
 ### Effectiveness
 
@@ -190,6 +192,8 @@ Manager 2026-06-15` — measurable outcome + verifier identity.
 
 ---
 
+<<GUIDANCE>>
+
 ## Recommended additional columns
 
 _These strengthen the register but aren't strictly required for the
@@ -204,3 +208,9 @@ MUST checks. Add them as extra columns in the table if they apply._
 
 Closes the loop: row points back to its originating finding /
 decision / review. Auditor can navigate in either direction.
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

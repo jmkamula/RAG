@@ -13,6 +13,8 @@ table_shape: true
 
 # Leadership Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that leadership commitment is being visibly demonstrated — directive signed and current, framework being followed, reaffirmations on cadence (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:5.1:leadership_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:5.1:rev_framework_adherence -->
 <!-- column: item:5.1:rev_reaffirmation_completeness -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document and review your organization's leadership commitment to information security, ensuring all key actions and directives are up to date and visibly supported by management.
+
+## When to use it
+
+Use this template whenever you need to confirm that leadership involvement in your security program is current and effective, typically once a year as part of your ongoing compliance activities.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, as each required section takes around 10-15 minutes to fill in with relevant details.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Clause 5.1 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:5.1:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (ISMS Manager + non-executive director if available)
+
+<<GUIDANCE>>
 
 ### Rev Directive Currency
 
@@ -58,12 +83,16 @@ _Why: Drift detection_
 
 > _Standard text:_ Directive currency check — signed by current top management
 
+<<GUIDANCE>>
+
 ### Rev Framework Adherence
 
 <<MUST item:5.1:rev_framework_adherence>>
 _Why: Cross-leaf coherence_
 
 > _Standard text:_ Framework adherence check — board cadence happened, sponsor activities completed
+
+<<GUIDANCE>>
 
 ### Rev Reaffirmation Completeness
 
@@ -73,6 +102,8 @@ _Why: Cross-leaf coherence_
 > _Standard text:_ Reaffirmation record completeness — required reaffirmations all present
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

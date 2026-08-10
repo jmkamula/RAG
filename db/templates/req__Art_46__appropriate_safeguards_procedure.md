@@ -11,14 +11,35 @@ should_count: 1
 
 # Appropriate Safeguards Procedure
 
+<<DOC_CONTROL>>
+
 > Art.46 permits transfers without adequacy when the controller/processor has provided appropriate safeguards AND enforceable data subject rights and effective legal remedies are available. The procedure governs safeguard selection (SCCs / BCRs / codes / certification / ad-hoc clauses) + Schrems II TIA + supplementary measures
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document how you select and implement safeguards for transferring personal data outside the EEA, ensuring you meet GDPR requirements for international data transfers.
+
+## When to use it
+
+Use this procedure whenever you plan to transfer personal data to countries without an adequacy decision, and update it whenever your transfer practices or legal requirements change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, as you'll need to address each required element in detail.
 
 ## 1. Safeguard-selection decision tree (Art.46.2 a-f or Art.46.3 a-b after authorisation)
 
 <<MUST item:Art.46:safeguard_selection>>
 _Why: Art.46.2-3_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Art.46.2-3_
 <<MUST item:Art.46:sccs_handling>>
 _Why: Art.46.2.c-d + Commission Decision 2021/914_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Transfer Impact Assessment (TIA) per Schrems II — third-country law evaluated for fundamental rights compatibility
 
 <<MUST item:Art.46:tia>>
 _Why: Schrems II — case C-311/18_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,6 +66,8 @@ _Why: Schrems II — case C-311/18_
 <<MUST item:Art.46:supplementary_measures>>
 _Why: EDPB Recommendations 01/2020_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Enforceable data subject rights and effective legal remedies verification
@@ -48,12 +75,16 @@ _Why: EDPB Recommendations 01/2020_
 <<MUST item:Art.46:enforceable_rights>>
 _Why: Art.46.1_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Named owner (DPO + legal counsel + procurement)
 
 <<MUST item:Art.46:owner>>
 _Why: Accountability_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -68,4 +99,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.46:authorisation>>
 _Why: Art.46.3_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

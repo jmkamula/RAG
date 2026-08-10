@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Collection Contexts Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which collection surfaces are in scope (forms + cookies + APIs + logs + integrations + third-party enrichment).
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which data collection methods and sources are included in your privacy scope, such as forms, cookies, APIs, logs, integrations, and third-party data enrichment.
+
+## When to use it
+
+Use this document whenever your organization’s data collection profile matches certain criteria or triggers, and update it as needed to reflect any changes in your collection practices.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as each required section takes roughly 10-15 minutes to fill out thoughtfully.
 
 ## 1. Collection surfaces enumerated (customer forms / employee onboarding / marketing forms / cookies / weblogs / API webhooks / integrations)
 
 <<MUST item:A.7.4.1:scope_surfaces>>
 _Why: Coverage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Coverage_
 <<MUST item:A.7.4.1:scope_indirect_map>>
 _Why: §7.4.1 — indirect_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Excluded surfaces with rationale (e.g. anonymous analytics)
 
 <<MUST item:A.7.4.1:scope_exclusions>>
 _Why: Defensibility_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.4.1:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

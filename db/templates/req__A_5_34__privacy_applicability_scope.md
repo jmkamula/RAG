@@ -11,14 +11,35 @@ should_count: 2
 
 # Privacy Applicability Scope
 
+<<DOC_CONTROL>>
+
 > The upstream that drives the policy and the register. Documents the privacy laws applicable to the organisation, the jurisdictions where data subjects live and where processing happens, the data subject categories the org touches, and the regulated activities that pull in sectoral privacy regimes. ISO 27002:2022 § 5.34 expects organisations to know which privacy regimes apply before claiming compliance — drift between scope and register is the audit failure mode this leaf catches
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly identify which privacy laws and regulations apply to your organization, where your data subjects are located, and what types of personal data and activities are covered. It's useful for understanding your compliance obligations and avoiding gaps in your privacy program.
+
+## When to use it
+
+Use this document whenever you need to define or update the privacy laws and jurisdictions relevant to your organization. It should be reviewed and refreshed whenever there are changes to your business operations, data processing activities, or applicable regulations.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on how easily you can gather information about your data subjects, processing locations, and applicable privacy laws.
 
 ## 1. Applicable privacy laws enumerated per jurisdiction (GDPR for EU/EEA, UK GDPR for UK, CCPA for California residents, LGPD for Brazil, PIPEDA for Canada, sectoral laws — HIPAA, GLBA, FERPA where relevant)
 
 <<MUST item:A.5.34:scope_privacy_laws>>
 _Why: 27002:5.34 — applicable laws + relevance_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:5.34 — applicable laws + relevance_
 <<MUST item:A.5.34:scope_jurisdictions>>
 _Why: 27002:5.34 — relevance_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Data subject categories the organisation touches (customers, employees, prospects, suppliers' staff, minors, healthcare patients, financial-services clients — drives extra-safeguard rules)
 
 <<MUST item:A.5.34:scope_data_subjects>>
 _Why: 27002:5.34 — protection of PII_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: 27002:5.34 — protection of PII_
 <<MUST item:A.5.34:scope_regulated_activities>>
 _Why: 27002:5.34 — applicable laws_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Controller vs Processor vs Joint Controller status per processing context (drives different obligation sets — Art.24-31 for controllers, Art.28 for processors, Art.26 for joint controllers)
 
 <<MUST item:A.5.34:scope_controller_role>>
 _Why: GDPR Art.24-28_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,6 +90,8 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.5.34:scope_obligations_link>>
 _Why: Cross-control coherence_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Trigger list for re-scoping (new geography, new service line entering a regulated sector, M&A bringing new data subject categories, new transfer destinations)
@@ -68,4 +99,10 @@ _Why: Cross-control coherence_
 <<SHOULD item:A.5.34:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -282,6 +282,20 @@ def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
             except Exception as e:
                 logger.warning("engine proposal persist skipped: %s", e)
 
+            # Persist per-MUST verdicts (schema_v94, 2026-08-10). Single
+            # source of truth for consumers (template renderer, SPA leaf
+            # detail, chat) — reads posture_must_verdicts instead of each
+            # re-running the engine. Best-effort: any failure logged +
+            # swallowed, never blocks the primary read.
+            try:
+                n_must_verdicts = _persist_must_verdicts(pg_conn, tenant_id, verdicts)
+                if n_must_verdicts:
+                    logger.info(
+                        "posture_must_verdicts: wrote %d rows", n_must_verdicts,
+                    )
+            except Exception as e:
+                logger.warning("must-verdict persist skipped: %s", e)
+
         overrides = 0
         for cid, verdict in verdicts.items():
             # Skip non-determinative postures; everything else (single-leaf
@@ -640,6 +654,105 @@ def _apply_demonstrates_overlay(
         overlays += 1
 
     return (overlays, materialised)
+
+
+def _persist_must_verdicts(pg_conn, tenant_id: str, verdicts: dict) -> int:
+    """Write per-MUST engine verdicts to posture_must_verdicts (schema_v94).
+
+    Iterates each ControlVerdict's leaves and emits one row per MUST id
+    in the leaf's item_ids_{recognised, unrecognised, partial, stale}
+    arrays. Upsert by (tenant_id, must_id). Returns rows written.
+
+    Facets:
+      satisfied = must_id in item_ids_recognised (present-status finding
+                  OR fresh cite covers it; also N/A-excluded MUSTs are
+                  NOT emitted at all — see rationale below)
+      stale     = must_id in item_ids_stale (has evidence but past
+                  freshness_days)
+      partial   = must_id in item_ids_partial (partial-status finding,
+                  no present)
+
+    N/A-excluded MUSTs: dropped from the leaf's must_item_ids inside
+    GenericLeafEvaluator._fetch_na_must_ids BEFORE the recognition scan,
+    so they never appear in any of the four arrays. Consumers reading
+    posture_must_verdicts see absence-of-row for N/A MUSTs, which is
+    the correct signal (the tenant has scoped them out).
+
+    Best-effort: writes are wrapped in a transaction. Any failure rolls
+    back this table's writes but does not affect posture_controls or
+    posture_assertions writes that happen earlier in the flow.
+    """
+    if not verdicts:
+        return 0
+
+    # A small number of MUST ids are shared across multiple leaves (e.g.
+    # Ship 12'.a's item:A.5.18:rev_identity_pair which pairs identity +
+    # authentication lifecycles). When one MUST surfaces from two
+    # LeafVerdict arrays with divergent statuses we take the "best"
+    # verdict per MUST — the evidence itself is shared, so the more
+    # positive category is the honest reading. Rank:
+    #   recognised (non-stale) > recognised (stale) > partial > unrecognised
+    _rank = {"recognised": 3, "stale": 2, "partial": 1, "unrecognised": 0}
+    best: dict[str, tuple[str, str, bool, bool, bool, str]] = {}
+    for cid, verdict in verdicts.items():
+        parts = cid.rsplit(":", 1)
+        if len(parts) != 2:
+            continue
+        standard_id, control_ref = parts[0], parts[1]
+
+        for lv in verdict.leaves:
+            rec_ids     = set(lv.item_ids_recognised or ())
+            partial_ids = set(lv.item_ids_partial or ())
+            unrec_ids   = set(lv.item_ids_unrecognised or ())
+            stale_ids   = set(lv.item_ids_stale or ())
+
+            for mid in rec_ids:
+                cat = "stale" if mid in stale_ids else "recognised"
+                row = (control_ref, standard_id, True, mid in stale_ids, False, cat)
+                if mid not in best or _rank[cat] > _rank[best[mid][5]]:
+                    best[mid] = row
+            for mid in partial_ids:
+                row = (control_ref, standard_id, False, False, True, "partial")
+                if mid not in best or _rank["partial"] > _rank[best[mid][5]]:
+                    best[mid] = row
+            for mid in unrec_ids:
+                row = (control_ref, standard_id, False, False, False, "unrecognised")
+                if mid not in best or _rank["unrecognised"] > _rank[best[mid][5]]:
+                    best[mid] = row
+
+    rows: list[tuple[str, str, str, str, bool, bool, bool, str]] = [
+        (tenant_id, mid, cr, std, sat, stl, prt, cat)
+        for mid, (cr, std, sat, stl, prt, cat) in best.items()
+    ]
+
+    if not rows:
+        return 0
+
+    try:
+        with pg_conn.cursor() as cur:
+            cur.execute(
+                "SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,),
+            )
+            # Wipe stale rows for this tenant first (a MUST that was
+            # recognised last run but is now N/A-excluded must NOT keep
+            # its old satisfied=TRUE row). Deleting + re-inserting is
+            # cheaper than tracking supersession per MUST.
+            cur.execute(
+                "DELETE FROM posture_must_verdicts WHERE tenant_id = %s::uuid",
+                (tenant_id,),
+            )
+            cur.executemany("""
+                INSERT INTO posture_must_verdicts
+                    (tenant_id, must_id, control_ref, standard_id,
+                     satisfied, stale, partial, reason, computed_at)
+                VALUES (%s::uuid, %s, %s, %s, %s, %s, %s, %s, now())
+            """, rows)
+        pg_conn.commit()
+    except Exception:
+        pg_conn.rollback()
+        raise
+
+    return len(rows)
 
 
 def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:

@@ -13,6 +13,8 @@ table_shape: true
 
 # Risk Treatment Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that the plan is being executed, the SoA is current, residual risks remain accepted (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:6.1.3:risk_treatment_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:6.1.3:rev_soa_currency -->
 <!-- column: item:6.1.3:rev_residual_reaffirm -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you confirm that your risk treatment plan is being followed, your Statement of Applicability is up to date, and any remaining risks are still acceptable.
+
+## When to use it
+
+Use this review record once a year to check that your risk treatment program is on track and all documentation is current, as part of your ongoing ISO 27001 compliance.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this template from scratch, depending on the number of risks and updates needed for each required section.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Clause 6.1.3 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:6.1.3:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Risk Manager + ISMS Manager + risk owners as needed)
+
+<<GUIDANCE>>
 
 ### Rev Plan Progress
 
@@ -58,12 +83,16 @@ _Why: 8.3 link_
 
 > _Standard text:_ Plan progress check — every treatment item status updated
 
+<<GUIDANCE>>
+
 ### Rev Soa Currency
 
 <<MUST item:6.1.3:rev_soa_currency>>
 _Why: Cross-leaf coherence_
 
 > _Standard text:_ SoA currency check — still matches treatment plan + Annex A version
+
+<<GUIDANCE>>
 
 ### Rev Residual Reaffirm
 
@@ -73,6 +102,8 @@ _Why: Clause 6.1.3f_
 > _Standard text:_ Residual risks re-affirmed by owners (or re-treatment triggered)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

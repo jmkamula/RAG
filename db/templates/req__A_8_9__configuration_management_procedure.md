@@ -11,14 +11,35 @@ should_count: 1
 
 # Configuration Management Procedure
 
+<<DOC_CONTROL>>
+
 > A.8.9 requires configurations established, documented, implemented, monitored, reviewed. Procedure documents baseline ownership, deployment, drift detection, approval flow. Baseline register, applicable scope, program review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you set up and document a clear process for managing and tracking your system configurations, including how changes are approved and monitored. It's designed to support compliance with ISO 27001 requirements for configuration management.
+
+## When to use it
+
+Use this procedure whenever you need to establish or update how your organization manages system configurations. It should always be in place and refreshed whenever there are significant changes to your environment or processes.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on the complexity of your systems and the number of configuration baselines you need to document.
 
 ## 1. Baseline authority defined per asset class (who owns each baseline)
 
 <<MUST item:A.8.9:proc_baseline_authority>>
 _Why: 27002:8.9 — established_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.9 — established_
 <<MUST item:A.8.9:proc_hardening_standards>>
 _Why: 27002:8.9 — security configurations_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Deployment process enforcing baseline (IaC / image / config-mgmt tool)
 
 <<MUST item:A.8.9:proc_deployment>>
 _Why: 27002:8.9 — implemented_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,6 +66,8 @@ _Why: 27002:8.9 — implemented_
 <<MUST item:A.8.9:proc_drift_detection>>
 _Why: 27002:8.9 — monitored_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Cross-link to A.8.32 change management for baseline updates
@@ -48,12 +75,16 @@ _Why: 27002:8.9 — monitored_
 <<MUST item:A.8.9:proc_change_link>>
 _Why: Cross-control coherence_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Approved-deviation register for assets unable to meet baseline (compensating controls + expiry)
 
 <<MUST item:A.8.9:proc_approved_deviations>>
 _Why: 27002:8.9 — appropriate_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -68,4 +99,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.9:proc_iac_pipelines>>
 _Why: Modern practice_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

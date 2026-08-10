@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable ISMS-Affecting Roles Scope
 
+<<DOC_CONTROL>>
+
 > The upstream that bounds the record — which roles actually affect ISMS performance (per clause 7.2 'whose work affects'). Not every role in the org — but more than just InfoSec staff
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly identify which roles in your organization have a direct impact on your information security management system, going beyond just the InfoSec team.
+
+## When to use it
+
+Use this document whenever you need to define or update the list of roles that influence your ISMS, and review it whenever your organizational structure or responsibilities change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes to complete this from scratch, as you'll need to thoughtfully consider and describe each relevant role.
 
 ## 1. ISMS-team roles enumerated (CISO, ISMS Manager, InfoSec analyst, auditor)
 
 <<MUST item:7.2:scope_isms_roles>>
 _Why: Clause 7.2 — affect ISMS performance_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Clause 7.2 — affect ISMS performance_
 <<MUST item:7.2:scope_supporting_roles>>
 _Why: Coverage_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Out-of-scope roles stated explicitly (purely-administrative roles with no ISMS touchpoint)
 
 <<MUST item:7.2:scope_exclusions>>
 _Why: Defensible bounding_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:7.2:scope_contractors>>
 _Why: Common scope edge_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

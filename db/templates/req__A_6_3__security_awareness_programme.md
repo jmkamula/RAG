@@ -11,6 +11,8 @@ should_count: 3
 
 # Security Awareness, Education and Training Programme
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
 The **plan** for how every person who touches your systems learns
@@ -23,39 +25,23 @@ error.
 
 ## When to use it
 
-You're producing the programme required by **ISO/IEC 27001:2022
-A.6.3**. Pairs with the training-completion register sibling
+You're producing the programme required by **ISO/IEC 27001:2022 A.6.3**. Pairs with the training-completion register sibling
 leaf + the audience-curriculum scope.
 
-## Before you start
+## Prerequisites
 
-- [ ] **4.3 ISMS Scope** — drives scope of audience
-- [ ] **A.5.1 InfoSec Policy** — the policy this training conveys
-- [ ] **5.3 Roles** + **A.5.2 Operational Roles** — drives
-      role-specific curriculum
-- [ ] **A.5.10 AUP** + **A.5.12 Classification** + **A.5.15
-      Access Control** policies — content references these
+<<PREREQUISITES>>
 
 ## Cross-references
 
-- **A.6.1 Screening** (joiner prerequisite)
-- **A.6.2 Employment Terms** (training obligation in contract)
-- **A.6.4 Disciplinary Process** (failure-to-train consequences)
-- **A.6.5 Post-Employment** (NDA + obligations communicated at exit)
-- **A.6.6 Confidentiality / NDA**
-- **A.5.18 Access Rights Procedure** (joiner training gates access)
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
-**1-2 weeks** for v1 (curriculum design + content production +
-delivery platform setup); **ongoing operational cost** for
+**1-2 weeks** for v1 (curriculum design + content production + delivery platform setup); **ongoing operational cost** for
 refresh + delivery.
 
 ---
-
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
 
 ## 1. Define scope and audience
 
@@ -79,6 +65,8 @@ State the audiences + which curricula apply.
 | DPO + privacy team | Above + GDPR deep-dive + EDPB updates (4h annually) |
 | Third-party with sustained access | General awareness adapted for non-employees + NDA briefing (1h before access) |
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 2. Align curriculum to job functions
@@ -99,11 +87,12 @@ refresh; 1h. (b) **Privacy basics** — GDPR principles, data-
 subject rights, breach reporting, PII recognition. 30 min.
 (c) **Secure development** (engineers) — OWASP Top 10, secure
 SDLC checkpoints, secret-management, dependency hygiene. 1h.
-(d) **Privileged access** (admins) — least-privilege discipline,
-break-glass, A.8.2 PAM rules. 30 min. (e) **Crisis response**
+(d) **Privileged access** (admins) — least-privilege discipline, break-glass, A.8.2 PAM rules. 30 min. (e) **Crisis response**
 (executives) — IR escalation, communication discipline, regulator
 posture. 30 min. (f) **GDPR deep-dive** (DPO + privacy team) —
 4h annually."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -127,6 +116,8 @@ attestation of completion required to unlock access. Contractor
 joiners follow the same gate with NDA acknowledgement (A.6.6)
 included."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 4. State refresh cadence
@@ -147,6 +138,8 @@ policy change → targeted refresh on the affected topic (e.g. AUP
 revision triggers 15-min focused module). (c) Role-change-
 triggered: A.5.18 mover lifecycle includes verifying the new role's
 modules are current; gaps closed before access change."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -172,6 +165,8 @@ quarterly SecOps slot at company all-hands. (f) Posters /
 intranet banners — physical (where applicable) + digital reminders
 in collaboration tools."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Maintain training records
@@ -191,6 +186,8 @@ Records exported to the A.6.3 training_completion_register sibling
 leaf monthly. Retention: 6 years after employment ends (per A.5.33
 records retention). Access: managers see their own team; ISMS
 Manager + DPO see all; subject access on request per GDPR Art.15."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -212,6 +209,8 @@ LMS / phishing-sim, programme effectiveness metrics. HR Partner
 enrolment, manager prompts, escalation on overdue). Sponsor:
 ISMS Manager + Head of People."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ---
@@ -229,6 +228,8 @@ _For high-risk roles, depth above the standard role module._
 State the deep-dive programmes for engineers (secure SDLC), admins
 (PAM), DPO (GDPR), execs (crisis posture).
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### Effectiveness metrics
@@ -241,6 +242,8 @@ _Measure outcomes, not just completion._
 
 State the metrics: phishing-sim click rate trend, security-question
 results, reporting rate, attestation refresh on-time rate.
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -256,4 +259,10 @@ commitment._
 State the annual budget for content, LMS, phishing-sim,
 lunch-and-learns.
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

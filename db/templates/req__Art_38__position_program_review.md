@@ -13,6 +13,8 @@ table_shape: true
 
 # DPO Position Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — DPO position guarantees actually upheld (involvement, resources, independence, no COI) (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.38:position_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.38:rev_independence_audit -->
 <!-- column: item:Art.38:rev_coi_recheck -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you confirm that your Data Protection Officer (DPO) role is being properly maintained, with clear records of their involvement, resources, independence, and absence of conflicts of interest.
+
+## When to use it
+
+Use this template if your organization is required to have a DPO under GDPR, and complete it about once a year or whenever your DPO situation changes significantly.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes filling this out from scratch, as each required section takes some time to complete thoroughly.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.38:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (executive sponsor + non-executive director / external counsel if available)
+
+<<GUIDANCE>>
 
 ### Rev Involvement Audit
 
@@ -58,12 +83,16 @@ _Why: Art.38.1_
 
 > _Standard text:_ Involvement audit — DPO invited to all in-scope forums; not bypassed on data-protection decisions
 
+<<GUIDANCE>>
+
 ### Rev Independence Audit
 
 <<MUST item:Art.38:rev_independence_audit>>
 _Why: Art.38.3_
 
 > _Standard text:_ Independence audit — no recorded instructions on tasks; no dismissal pressure
+
+<<GUIDANCE>>
 
 ### Rev Coi Recheck
 
@@ -73,6 +102,8 @@ _Why: Art.38.6_
 > _Standard text:_ COI recheck — DPO role assignments still free of conflicts
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

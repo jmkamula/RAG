@@ -11,14 +11,35 @@ should_count: 1
 
 # PII Minimization Procedure
 
+<<DOC_CONTROL>>
+
 > §7.4.4 requires documented data-minimization objectives + mechanisms (de-identification / pseudonymisation / aggregation). Ties to ISO/IEC 20889 de-identification techniques.
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document your approach to minimizing the use of personal data, including how you de-identify, pseudonymize, or aggregate information in line with privacy standards.
+
+## When to use it
+
+Use this procedure whenever your organization handles personal data and needs to demonstrate compliance with privacy requirements, especially when your activities match specific triggers. Update the document as needed when your processes or data handling change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes completing this template from scratch, as each required section takes around 10 to 15 minutes to fill in thoughtfully.
 
 ## 1. Minimization objectives stated per processing activity (target level of identifiability required)
 
 <<MUST item:A.7.4.4:proc_objectives_stated>>
 _Why: §7.4.4 — define and document objectives_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: §7.4.4 — define and document objectives_
 <<MUST item:A.7.4.4:proc_mechanism_map>>
 _Why: §7.4.4 — mechanisms used_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. De-identification technique selection referencing ISO/IEC 20889 taxonomy
 
 <<MUST item:A.7.4.4:proc_deidentification_technique>>
 _Why: §7.4.4 NOTE 1 — ISO/IEC 20889_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: §7.4.4 NOTE 1 — ISO/IEC 20889_
 <<MUST item:A.7.4.4:proc_technical_config>>
 _Why: §7.4.4 — technical system configurations_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Where processing requires non-minimised PII (identified purpose demands it), justification documented
 
 <<MUST item:A.7.4.4:proc_full_pii_justification>>
 _Why: §7.4.4 — describe such processing_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.4.4:proc_owner>>
 _Why: Accountability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Disposal Contexts Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which disposal contexts arise (end-of-processing per A.7.4.5 + failed hardware + decommissioned equipment + returned devices + paper records).
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which situations require proper disposal of information, including end-of-processing, failed hardware, decommissioned equipment, returned devices, and paper records, ensuring you meet privacy compliance requirements.
+
+## When to use it
+
+Use this document whenever your organization encounters any of the listed disposal scenarios or when your operational profile matches relevant triggers. Update it as needed to reflect changes in your disposal processes.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this template from scratch, as each required section takes around 10 to 15 minutes to fill in thoughtfully.
 
 ## 1. Disposal contexts enumerated (end-of-processing / hardware failure / decommission / device return / paper archive)
 
 <<MUST item:A.7.4.8:scope_contexts>>
 _Why: Coverage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Coverage_
 <<MUST item:A.7.4.8:scope_media_types>>
 _Why: Coverage_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Cloud disposal dependencies (provider attestations required, retention windows outside org's control)
 
 <<MUST item:A.7.4.8:scope_cloud_dependencies>>
 _Why: Cloud specifics_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.4.8:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

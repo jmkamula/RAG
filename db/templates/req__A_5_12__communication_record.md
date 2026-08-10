@@ -12,6 +12,8 @@ table_shape: true
 
 # Classification Scheme Communication Record
 
+<<DOC_CONTROL>>
+
 > Every information creator (i.e. every employee) needs to know which level applies and how to classify their output — an unknown scheme produces unclassified information by default, which collapses A.5.13 and A.5.10 downstream. Evidence must show active distribution and ideally individual training completion
 
 <!-- TABLE-COLUMNS leaf:req:A.5.12:communication_record -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.5.12:comm_training -->
 <!-- column: item:A.5.12:comm_onboarding -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of how and when your information classification scheme has been communicated to your team, making it easier to show that everyone knows how to classify their work.
+
+## When to use it
+
+Use this whenever you need to demonstrate that your classification scheme has been shared with all employees, and update it whenever there are changes or new communications about the scheme.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60–90 minutes to complete the required sections for the first time, plus additional time for each communication event or new employee added to the register.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: Operational sufficiency_
 
 > _Standard text:_ Date of publication/communication
 
+<<GUIDANCE>>
+
 ### Comm Audience
 
 <<MUST item:A.5.12:comm_audience>>
 _Why: 27002:5.12 — all relevant personnel_
 
 > _Standard text:_ Audience reached (all information creators, owners, custodians — broader than just data owners)
+
+<<GUIDANCE>>
 
 ### Comm Channel
 
@@ -57,12 +82,16 @@ _Why: Operational sufficiency_
 
 > _Standard text:_ Channel used (mandatory training module, classification guide, role-specific workshops)
 
+<<GUIDANCE>>
+
 ### Comm Training
 
 <<MUST item:A.5.12:comm_training>>
 _Why: Operational fitness_
 
 > _Standard text:_ Classification training completion captured at user level (proves users can apply the scheme)
+
+<<GUIDANCE>>
 
 ### Comm Onboarding
 
@@ -72,6 +101,8 @@ _Why: 27002:5.12 — new joiners_
 > _Standard text:_ Distribution at onboarding for new personnel evidenced (induction pack, mandatory module)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,9 +115,17 @@ _Why: Sustained communication_
 
 > _Standard text:_ Periodic refresher referenced (annual at minimum, especially after scheme amendments)
 
+<<GUIDANCE>>
+
 ### Comm Practical Aids
 
 <<SHOULD item:A.5.12:comm_practical_aids>>
 _Why: Adoption_
 
 > _Standard text:_ Practical aids referenced (decision tree, sensitivity-label automation, examples library)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

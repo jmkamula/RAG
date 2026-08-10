@@ -11,14 +11,35 @@ should_count: 1
 
 # PII Retention Procedure
 
+<<DOC_CONTROL>>
+
 > §7.4.7 requires retention schedules based on necessity, taking into account legal + regulatory + business requirements. Where they conflict, a documented business decision is required.
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you create a clear procedure for how long to keep personal information, making sure you follow legal, regulatory, and business rules. It also guides you on documenting decisions when these rules conflict.
+
+## When to use it
+
+Use this template whenever your organization needs to set or review how long personal information is kept, especially if your situation matches specific triggers. Update it as needed when requirements or business needs change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes completing this from scratch, as each required section will take around 10 to 15 minutes to write thoughtfully.
 
 ## 1. Retention schedules per PII category + activity (with legal + regulatory + business rationale)
 
 <<MUST item:A.7.4.7:proc_retention_schedules>>
 _Why: §7.4.7 — retention schedules_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: §7.4.7 — retention schedules_
 <<MUST item:A.7.4.7:proc_conflict_resolution>>
 _Why: §7.4.7 — business decision based on risk assessment_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Periodic review — schedule refreshed on regulatory change or business shift
 
 <<MUST item:A.7.4.7:proc_periodic_review>>
 _Why: Currency_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: Currency_
 <<MUST item:A.7.4.7:proc_deletion_trigger>>
 _Why: Integration_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Cross-link to A.5.33 records retention (records-programme) — retention schedules coherent across the two frames
 
 <<MUST item:A.7.4.7:proc_cross_link_a533>>
 _Why: Integration_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.4.7:proc_owner>>
 _Why: Accountability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

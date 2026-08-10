@@ -11,6 +11,8 @@ should_count: 2
 
 # Information Security Policy (Annex A.5.1)
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
 The **operational policy** that sits one layer below your Clause 5.2
@@ -23,36 +25,22 @@ the policy framework actually contains.
 ## When to use it
 
 You're producing the Annex A.5.1 Information Security Policy
-referenced by every other A.5 topic-specific policy. **Don't confuse
-with Clause 5.2** — the two co-exist by design (one is
+referenced by every other A.5 topic-specific policy. **Don't confuse with Clause 5.2** — the two co-exist by design (one is
 management-system level, one is operational).
 
-## Before you start
+## Prerequisites
 
-- [ ] **Clause 5.2 InfoSec Policy** approved (this one supports it)
-- [ ] **4.3 ISMS Scope** clear
-- [ ] **5.3 Roles** defined (this policy names them)
-- [ ] **A.5.31 Compliance register** under way
+<<PREREQUISITES>>
 
 ## Cross-references
 
-- **Clause 5.2** — this A.5.1 policy implements + operationalises
-  the Clause 5.2 commitments
-- **A.5.10 Acceptable Use** — flows from this policy
-- **A.5.12 Classification** — flows from this policy
-- **A.5.15 Access Control** — flows from this policy
-- **A.6 People Controls** — references this policy in
-  onboarding/training material
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
 **4-6 hours** for v1; **1 hour** for annual refresh.
 
 ---
-
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
 
 ## 1. Define the policy scope
 
@@ -76,6 +64,8 @@ the ISMS scope (<<TENANT_COUNTRY>> offices + AWS regions per 4.3);
 (d) all third parties processing in-scope information under
 <<TENANT_NAME>> direction, who must accept this policy by reference
 in their agreements (per A.5.20)."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -105,6 +95,8 @@ documented controls, and the residual is consciously accepted.
 and feed lessons into continual improvement. (7) Compliance with
 applicable law and contracts is non-negotiable."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Assign roles + responsibilities
@@ -123,12 +115,11 @@ CISO, DPO, Asset Owners, line managers, employees, contractors.
 (<<ISMS_MANAGER_NAME>>) operates the ISMS day-to-day. **ISMS Owner**
 (<<CEO_NAME>>) carries top-management accountability. **CISO**
 (<<CISO_NAME>>) leads security operations. **DPO**
-(<<DPO_NAME>>) leads privacy. **Asset Owners**: business or
-product role accountable for an asset's security state. **Line
-managers**: enforce policy within their team, complete control
-attestations. **Employees + contractors**: complete training,
+(<<DPO_NAME>>) leads privacy. **Asset Owners**: business or product role accountable for an asset's security state. **Line managers**: enforce policy within their team, complete control attestations. **Employees + contractors**: complete training,
 report incidents, honour access rules. Detailed RACI in Clause 5.3
 matrix + A.5.2 operational roles."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -151,6 +142,8 @@ ISMS Manager, reviewed annually + on regulatory change; (b) A.5.33
 records retention + A.5.34 PII protection programs; (c) periodic
 A.5.36 compliance reviews of each requirement family; (d) explicit
 contract clauses cascaded to suppliers per A.5.20."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -182,6 +175,8 @@ This cross-link list lets readers follow the policy framework.
 **✗ Avoid**: A vague "various topic policies exist" (the auditor
 needs the explicit cross-reference list).
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ---
@@ -198,6 +193,8 @@ _Document control._
 
 Standard header block with version, approval date, next review.
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### Named owner
@@ -210,4 +207,10 @@ _Accountability._
 
 Document owner + approver named explicitly.
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

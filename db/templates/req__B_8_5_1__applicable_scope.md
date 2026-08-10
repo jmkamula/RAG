@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Processor Transfer Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — every cross-jurisdiction customer PII flow (direct + via subprocessors + via support access from other regions).
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define and document the scope of personal data transfers involving processors, including direct transfers, subprocessors, and support access across different regions.
+
+## When to use it
+
+Use this document whenever your organization handles personal data that crosses regional or jurisdictional boundaries, especially if your operations or customer base trigger specific privacy requirements. Update it whenever there are changes to your data flows or processor relationships.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this template from scratch, as you'll need to provide details for each required element.
 
 ## 1. Direct customer-PII transfers (multi-region cloud / backup + DR)
 
 <<MUST item:B.8.5.1:scope_direct_transfers>>
 _Why: Coverage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Coverage_
 <<MUST item:B.8.5.1:scope_subprocessor_transfers>>
 _Why: §8.5.1 — suppliers_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Support-access transfers (support engineers in different regions accessing customer PII)
 
 <<MUST item:B.8.5.1:scope_support_access>>
 _Why: Coverage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:B.8.5.1:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

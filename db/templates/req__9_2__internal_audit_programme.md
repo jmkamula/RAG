@@ -11,6 +11,8 @@ should_count: 2
 
 # Internal Audit Programme
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
 The **plan** for how your ISMS audits itself — over which cycle,
@@ -21,29 +23,17 @@ the most common reasons certifications slip.
 
 ## When to use it
 
-You're producing the audit programme required by **ISO/IEC 27001:2022
-Clause 9.2**. Distinct from individual audit *results* (those are
+You're producing the audit programme required by **ISO/IEC 27001:2022 Clause 9.2**. Distinct from individual audit *results* (those are
 the per-execution records). This template is the standing programme
 document.
 
-## Before you start
+## Prerequisites
 
-- [ ] **4.3 ISMS Scope** stable — the audit programme covers the
-      whole ISMS scope across its cycle
-- [ ] **6.1.3 Statement of Applicability** complete — auditor uses
-      the SoA to know which controls to cover
-- [ ] **5.3 Roles** clear — auditor independence requirement
-      depends on the role structure
+<<PREREQUISITES>>
 
 ## Cross-references
 
-- **9.3 Management Review** — audit results are a standing input
-- **10.1 Improvement Action Register** — audit findings open
-  improvement-action rows; closure tracked there
-- **A.5.35 Independent review** — separate annual independent
-  review (don't conflate)
-- **A.5.36 Compliance review** — programme reviews compliance with
-  policies; pairs with this audit programme
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
@@ -51,10 +41,6 @@ document.
 auditor time depending on scope sample.
 
 ---
-
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
 
 ## 1. Define audit frequency
 
@@ -79,6 +65,8 @@ on areas flagged."
 **✗ Avoid**: "Annually" (the standard expects more rigour for a
 non-trivial ISMS).
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 2. Define audit scope covering all ISMS processes
@@ -99,6 +87,8 @@ least once per 12-month cycle. Per-cycle scope: the Q-plan above
 allocates clauses + controls to quarters. Out-of-cycle scope:
 incidents trigger targeted audits of affected control families;
 significant changes trigger pre-deployment audit of new controls."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -121,6 +111,8 @@ internal policies (the A.5 set + ISMS procedures). (5) Applicable
 regulatory requirements per A.5.31. (6) Customer-specific
 obligations per signed MSAs where they exceed the standard's
 baseline."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -146,6 +138,8 @@ or equivalent) training; 2 years' relevant experience; refresher
 training every 3 years. External auditor used for the annual
 independent review per A.5.35."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Define the reporting process
@@ -165,6 +159,8 @@ Opportunity for Improvement), recommendations. Report distributed
 to: (a) ISMS Manager (always), (b) the audited control owners,
 (c) ISMS Owner / Steering Committee, (d) input to next Management
 Review. Quarterly roll-up published at the ISMS Steering Committee."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -186,6 +182,8 @@ target date; if implemented effectively, finding closes with
 effectiveness assessment recorded. If not closed, escalates to ISMS
 Manager + back into the next audit cycle."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Name the programme owner
@@ -205,6 +203,8 @@ cycle plan, ensures auditor competence and independence. Per-audit
 Lead Auditor named per-audit in the cycle plan; rotates to maintain
 independence."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ---
@@ -222,6 +222,8 @@ _Visibility — auditees know when their area will be audited._
 Publish the per-quarter schedule so audited teams can prepare.
 Avoids the "ambush" feel that triggers political pushback.
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### Record-retention for audit artefacts
@@ -236,4 +238,10 @@ or as required by certification body)._
 State retention period for audit reports, evidence collected, sample
 selections.
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

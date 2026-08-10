@@ -13,6 +13,8 @@ table_shape: true
 
 # End-of-Processing Action Register
 
+<<DOC_CONTROL>>
+
 > Per-batch-action row — the register of delete / de-identify actions taken. Includes verification confirmation. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:A.7.4.5:end_of_processing_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.4.5:reg_scope -->
 <!-- column: item:A.7.4.5:reg_verification -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of every time you delete or de-identify personal data at the end of a processing batch, including confirmation that the action was completed.
+
+## When to use it
+
+Use this register whenever you finish a data processing batch that requires deleting or de-identifying personal information. Plan to review and update it about once a year to keep it current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element for the first entry, with additional time for each batch you record. Completing the initial setup should take around 1 to 1.5 hours.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit trail_
 
 > _Standard text:_ Unique action identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Activity Link
 
 <<MUST item:A.7.4.5:reg_activity_link>>
 _Why: Traceability_
 
 > _Standard text:_ Processing activity per row
+
+<<GUIDANCE>>
 
 ### Reg Action Type
 
@@ -58,12 +83,16 @@ _Why: §7.4.5_
 
 > _Standard text:_ Action type per row (delete / de-identify)
 
+<<GUIDANCE>>
+
 ### Reg Scope
 
 <<MUST item:A.7.4.5:reg_scope>>
 _Why: Coverage_
 
 > _Standard text:_ Scope per row (which records / systems / backup tier)
+
+<<GUIDANCE>>
 
 ### Reg Verification
 
@@ -73,6 +102,8 @@ _Why: Effectiveness_
 > _Standard text:_ Verification result per row (post-action check confirming PII gone)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Traceability_
 
 > _Standard text:_ De-identification technique used per row (link to A.7.4.4 register)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

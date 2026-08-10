@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Utility Programs Scope
 
+<<DOC_CONTROL>>
+
 > Upstream — what counts as a privileged utility program in this org (debuggers / sysinternals / disk-rescue tools / SQL-direct-access / vendor diagnostic tools)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which utility programs are considered privileged in your organization, such as debuggers, disk-rescue tools, and vendor diagnostics. It ensures everyone knows what tools require special handling for compliance.
+
+## When to use it
+
+Use this document whenever you need to clarify or update the list of privileged utility programs in your environment. Review and refresh it whenever your toolset changes or as needed to stay current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to describe three required elements and consider any recommended details.
 
 ## 1. Utility classes enumerated (debuggers / sysinternals / disk tools / DB direct-access / vendor diagnostic / penetration-testing)
 
 <<MUST item:A.8.18:scope_classes>>
 _Why: 27002:8.18 — utility programs_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.18 — utility programs_
 <<MUST item:A.8.18:scope_inclusion_test>>
 _Why: Boundary clarity_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Exclusion rationale (admin tools already governed under A.8.2 PAM)
 
 <<MUST item:A.8.18:scope_exclusions>>
 _Why: Cross-control coherence_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.18:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

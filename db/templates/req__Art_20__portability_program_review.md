@@ -13,6 +13,8 @@ table_shape: true
 
 # Portability Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — applicability decisions consistent, export formats still industry-current, direct-transmission supported where feasible (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.20:portability_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.20:rev_format_currency -->
 <!-- column: item:Art.20:rev_sla_compliance -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your annual review of data portability practices, ensuring your decisions and export methods stay up-to-date and compliant with GDPR requirements.
+
+## When to use it
+
+Use this template every year to check that your data portability processes are still relevant and effective. It’s always needed in your environment, with a refresh recommended every 12 months.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on how many items you need to review and record.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.20:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + product lead)
+
+<<GUIDANCE>>
 
 ### Rev Applicability Consistency
 
@@ -58,12 +83,16 @@ _Why: Defensibility_
 
 > _Standard text:_ Applicability consistency audit — like requests handled like ways across the year
 
+<<GUIDANCE>>
+
 ### Rev Format Currency
 
 <<MUST item:Art.20:rev_format_currency>>
 _Why: Art.20.1_
 
 > _Standard text:_ Export format currency — chosen format still commonly used industry-wide
+
+<<GUIDANCE>>
 
 ### Rev Sla Compliance
 
@@ -73,6 +102,8 @@ _Why: Art.12.3_
 > _Standard text:_ SLA compliance against Art.12.3 (one month)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

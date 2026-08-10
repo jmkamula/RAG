@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Processor Transmission Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — every context transmitting customer PII (customer-facing APIs / partner exchanges / cross-region backups / subprocessor integrations).
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which systems and processes transmit customer personal data, making it easier to demonstrate compliance with privacy standards like ISO 27701.
+
+## When to use it
+
+Use this document whenever your organization handles customer personal data through APIs, partner exchanges, backups, or integrations, and update it whenever there are changes to these data flows.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to describe three required elements about your data transmission practices.
 
 ## 1. Customer-facing transmission (APIs + webhooks)
 
 <<MUST item:B.8.4.3:scope_customer_facing>>
 _Why: Coverage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Coverage_
 <<MUST item:B.8.4.3:scope_subprocessor_flows>>
 _Why: Coverage_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Internal + cross-region flows (backup replication / DR / warehouse)
 
 <<MUST item:B.8.4.3:scope_internal_flows>>
 _Why: Coverage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:B.8.4.3:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

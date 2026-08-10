@@ -11,14 +11,35 @@ should_count: 2
 
 # Incident Response Procedure
 
+<<DOC_CONTROL>>
+
 > A.5.26 requires documented procedures for responding to information security incidents end-to-end. The procedure covers roles, containment, investigation, eradication and recovery, communication, evidence collection, action logging and closure. The incident register, periodic IR-program review and per-incident closure record are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you create a clear, step-by-step process for handling information security incidents, including roles, investigation, communication, and closure. It's designed to meet ISO 27001 requirements and support your incident response program.
+
+## When to use it
+
+Use this whenever you need to document or update your procedures for responding to security incidents. Review and refresh the document as needed to keep it current with your environment and practices.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 2 to 3 hours drafting this from scratch, as each required section takes 10-15 minutes to complete. Additional time may be needed for optional elements or tailoring to your organization.
 
 ## 1. Roles and responsibilities for incident response defined (Incident Manager, security team, comms lead, legal)
 
 <<MUST item:A.5.26:roles>>
 _Why: 27002:5.26 — coordination_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:5.26 — coordination_
 <<MUST item:A.5.26:containment>>
 _Why: 27002:5.26a_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Investigation steps defined (root cause analysis, timeline reconstruction)
 
 <<MUST item:A.5.26:investigation>>
 _Why: 27002:5.26h_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: 27002:5.26h_
 <<MUST item:A.5.26:eradication>>
 _Why: 27002:5.26e_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Internal and external communication criteria specified (who is informed, when, by whom)
 
 <<MUST item:A.5.26:communication>>
 _Why: 27002:5.26c,g_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -55,12 +84,16 @@ _Why: 27002:5.26c,g_
 <<MUST item:A.5.26:evidence_collection>>
 _Why: 27002:5.26b_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. All response decisions and actions logged (for evidence preservation and post-incident review)
 
 <<MUST item:A.5.26:action_logging>>
 _Why: 27002:5.26f_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -69,12 +102,16 @@ _Why: 27002:5.26f_
 <<MUST item:A.5.26:post_review>>
 _Why: 27002:5.26 — closing + § 5.27_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 9. References incident classification used at triage (links to A.5.25)
 
 <<MUST item:A.5.26:classification_link>>
 _Why: 27002:5.25 → 5.26 handoff_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -83,6 +120,8 @@ _Why: 27002:5.25 → 5.26 handoff_
 <<MUST item:A.5.26:severity_tier_matrix>>
 _Why: 27002:5.26 — coordination by severity (was implicit on register; promoted to procedure-level definition)_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 11. Where the incident touches personal data, Art.33 72h notification trigger fires and the breach-notification path activates (links to req:Art.33:breach_notification)
@@ -90,12 +129,16 @@ _Why: 27002:5.26 — coordination by severity (was implicit on register; promote
 <<MUST item:A.5.26:gdpr_72h_trigger_check>>
 _Why: GDPR Art.33.1 / cross-control integration with breach notification_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 12. Authority/regulator contact list referenced (links to A.5.5) — load-bearing for breach-notification path
 
 <<MUST item:A.5.26:authority_contacts>>
 _Why: 27002:5.26 — external notification (promoted SHOULD→MUST Phase C batch 1)_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -110,6 +153,8 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.5.26:exercise_freq>>
 _Why: Validates the procedure works under pressure; cross-link to A.5.24_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Nominated incident-handling contact named (for internal + supplier-side reporting)
@@ -117,4 +162,10 @@ _Why: Validates the procedure works under pressure; cross-link to A.5.24_
 <<SHOULD item:A.5.26:nominated_contact>>
 _Why: 27002:5.26 — coordination_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Secure Areas Scope
 
+<<DOC_CONTROL>>
+
 > The upstream that drives the procedure. Documents which areas require physical entry controls and what classification tier each falls under
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly identify which areas in your organization need physical entry controls and what level of protection each area requires. It's useful for understanding and documenting your secure spaces for compliance purposes.
+
+## When to use it
+
+Use this document whenever you need to define or update the list of secure areas in your environment. Review and revise it as needed, especially when your physical spaces or security requirements change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to describe each secure area and its classification in detail.
 
 ## 1. Secure areas enumerated per site (drawn from A.7.1 register)
 
 <<MUST item:A.7.2:scope_areas>>
 _Why: Cross-control coherence_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Cross-control coherence_
 <<MUST item:A.7.2:scope_tier_controls>>
 _Why: 27002:7.2 — proportional_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Visitor-accessible areas defined (vs strictly-staff areas)
 
 <<MUST item:A.7.2:scope_visitor_areas>>
 _Why: 27002:7.2 — controls_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.2:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

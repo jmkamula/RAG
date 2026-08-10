@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Processing Contexts Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which processor services fall under B.8.2.2 (customer PII processed on their behalf) as opposed to org's own-controller processing.
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which processing activities fall under customer data processing versus your own organization's data use, making it easier to demonstrate compliance with privacy requirements.
+
+## When to use it
+
+Use this document whenever your organization processes customer personal data on their behalf, especially when your data handling profile matches relevant privacy triggers. Update it as needed if your processing activities or customer relationships change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to address three required elements and review your processing activities.
 
 ## 1. In-scope services enumerated (customer-PII processing services)
 
 <<MUST item:B.8.2.2:scope_services>>
 _Why: Coverage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Coverage_
 <<MUST item:B.8.2.2:scope_own_controller>>
 _Why: Classification defensibility_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Data-flow map — customer PII vs own-controller PII boundary documented
 
 <<MUST item:B.8.2.2:scope_data_flows>>
 _Why: §8.2.2 — only processed for purposes_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:B.8.2.2:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

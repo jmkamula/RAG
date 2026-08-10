@@ -12,6 +12,8 @@ table_shape: true
 
 # Leaver Asset Return Register
 
+<<DOC_CONTROL>>
+
 > A.5.11 requires every triggered return event to be tracked — invisible leavers are the ones who walk out with assets. The register catalogues every in-flight return: leaver id, trigger type, departure/effective date, asset list (linked to A.5.9 asset register), current status, owner. It is the operational record that proves the return process is actually applied every time, not just on the leavers HR happens to remember to log
 
 <!-- TABLE-COLUMNS leaf:req:A.5.11:leaver_return_register -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.5.11:reg_owner -->
 <!-- column: item:A.5.11:reg_access_revoke -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, up-to-date record of all company assets that need to be returned when someone leaves, making sure nothing slips through the cracks.
+
+## When to use it
+
+Use this register whenever an employee, contractor, or other user leaves your organization, and update it as needed to track the status of each asset return.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required detail for each leaver; setting up the register for the first time may take around 1-2 hours, with ongoing updates for each new departure.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:5.11 — visibility_
 
 > _Standard text:_ Each leaver/role-changer captured with a unique identifier (employee or contractor id; do not store sensitive PII beyond what HR retains)
 
+<<GUIDANCE>>
+
 ### Reg Trigger Type
 
 <<MUST item:A.5.11:reg_trigger_type>>
 _Why: 27002:5.11 — trigger taxonomy_
 
 > _Standard text:_ Trigger type per row (termination / role_change / contract_end / secondment_end / agreement_change)
+
+<<GUIDANCE>>
 
 ### Reg Effective Date
 
@@ -59,12 +84,16 @@ _Why: Timeline anchor_
 
 > _Standard text:_ Effective date per row (last working day or role-change date — drives return-deadline calculations)
 
+<<GUIDANCE>>
+
 ### Reg Asset List
 
 <<MUST item:A.5.11:reg_asset_list>>
 _Why: 27002:5.11 + cross-link to [[A.5.9]]_
 
 > _Standard text:_ Per-leaver asset list (link to A.5.9 asset register entries assigned to this person)
+
+<<GUIDANCE>>
 
 ### Reg Status
 
@@ -73,12 +102,16 @@ _Why: Operational discipline_
 
 > _Standard text:_ Status per row (pending / in_progress / complete / exception / written_off) updated as items are returned
 
+<<GUIDANCE>>
+
 ### Reg Owner
 
 <<MUST item:A.5.11:reg_owner>>
 _Why: Accountability_
 
 > _Standard text:_ Return owner per row (typically the leaver's line manager + IT custody handler)
+
+<<GUIDANCE>>
 
 ### Reg Access Revoke
 
@@ -88,6 +121,8 @@ _Why: 27002:5.11 — logical asset handling_
 > _Standard text:_ Access-revocation timestamp per row (when corp accounts/SSO/credentials were disabled — should align with effective date)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -100,9 +135,17 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Data-preserved flag per row (org information migrated/captured before wipe)
 
+<<GUIDANCE>>
+
 ### Reg Byod Flag
 
 <<SHOULD item:A.5.11:reg_byod_flag>>
 _Why: Workforce-model coverage_
 
 > _Standard text:_ BYOD flag per row where leaver used personal device (drives different wipe path — selective MDM removal vs full wipe)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

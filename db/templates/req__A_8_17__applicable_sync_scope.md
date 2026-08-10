@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Sync Scope
 
+<<DOC_CONTROL>>
+
 > Upstream — which system classes need sync, what drift tolerance per class (sub-second for forensics-critical; seconds acceptable elsewhere)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which system classes need to be kept in sync and how quickly, ensuring your environment meets compliance requirements for data consistency and integrity.
+
+## When to use it
+
+Use this document whenever you need to specify or update the systems that require synchronization in your environment. Review and refresh it as your systems or requirements change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 20 to 30 minutes completing this from scratch, as you'll need to address two required elements and possibly one recommended element.
 
 ## 1. System classes enumerated with drift tolerance per class
 
 <<MUST item:A.8.17:scope_classes>>
 _Why: 27002:8.17 — appropriate_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -26,6 +47,8 @@ _Why: 27002:8.17 — appropriate_
 
 <<MUST item:A.8.17:scope_exclusions>>
 _Why: Boundary clarity_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -40,4 +63,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.17:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

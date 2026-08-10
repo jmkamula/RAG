@@ -11,14 +11,35 @@ should_count: 2
 
 # Remote Working Policy
 
+<<DOC_CONTROL>>
+
 > A.6.7 requires a policy covering information security for remote working. This is the umbrella policy leaf; the per-worker procedure, the registered-workers register, and the periodic programme review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you create a clear policy for managing information security when employees work remotely. It's designed to support your compliance with ISO 27001 requirements for remote working arrangements.
+
+## When to use it
+
+Use this template if your organization allows remote work and you need to formalize your information security practices. Update the policy whenever your remote working arrangements or security requirements change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes drafting this policy from scratch, depending on how much detail you include for each required section.
 
 ## 1. Approved equipment for remote working
 
 <<MUST item:A.6.7:equipment>>
 _Why: A.6.7a_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: A.6.7a_
 <<MUST item:A.6.7:physical>>
 _Why: A.6.7b_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Network security requirements (VPN etc.)
 
 <<MUST item:A.6.7:network>>
 _Why: A.6.7c_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,6 +66,8 @@ _Why: A.6.7c_
 <<MUST item:A.6.7:access>>
 _Why: A.6.7d_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Handling of personal data when working remotely
@@ -48,12 +75,16 @@ _Why: A.6.7d_
 <<MUST item:A.6.7:personal_data>>
 _Why: GDPR alignment_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Incident reporting when working remotely
 
 <<MUST item:A.6.7:reporting>>
 _Why: A.6.7e_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -68,6 +99,8 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.6.7:family>>
 _Why: Practical guidance_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Security when travelling
@@ -75,4 +108,10 @@ _Why: Practical guidance_
 <<SHOULD item:A.6.7:travel>>
 _Why: A.6.7f_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

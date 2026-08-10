@@ -13,6 +13,8 @@ table_shape: true
 
 # Art.23 Restriction Application Register
 
+<<DOC_CONTROL>>
+
 > Per-invocation record — every time an Art.23 restriction is applied to deny / limit a subject right. Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.23:restriction_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.23:reg_purpose -->
 <!-- column: item:Art.23:reg_subject_notice -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record every time you apply a restriction under Article 23 of the GDPR, making it easier to track and review these decisions for compliance purposes.
+
+## When to use it
+
+Use this register whenever you deny or limit an individual's rights based on Article 23 restrictions. Review and update the register at least once a year to ensure it stays current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes to complete the initial required sections, plus additional time for each restriction event you need to record.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit_
 
 > _Standard text:_ Unique invocation identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Law Citation
 
 <<MUST item:Art.23:reg_law_citation>>
 _Why: Art.23.1_
 
 > _Standard text:_ Per-row Member State law cited (article + section)
+
+<<GUIDANCE>>
 
 ### Reg Right Restricted
 
@@ -58,12 +83,16 @@ _Why: Art.23.1_
 
 > _Standard text:_ Per-row right restricted (Art.12-22 + Art.34)
 
+<<GUIDANCE>>
+
 ### Reg Purpose
 
 <<MUST item:Art.23:reg_purpose>>
 _Why: Art.23.1_
 
 > _Standard text:_ Per-row Art.23.1 a-j purpose
+
+<<GUIDANCE>>
 
 ### Reg Subject Notice
 
@@ -73,6 +102,8 @@ _Why: Art.23.2.h_
 > _Standard text:_ Per-row subject notice (where required by Art.23.2.h)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Defensibility_
 
 > _Standard text:_ Per-row legal counsel sign-off
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

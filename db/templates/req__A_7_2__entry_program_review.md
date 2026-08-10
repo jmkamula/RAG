@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Entry Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that entry controls match area classifications, the register is being maintained, and anomalies are being investigated (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.7.2:entry_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.2:rev_anomalies -->
 <!-- column: item:A.7.2:rev_register_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you confirm that your entry controls are appropriate for each area, your entry register is up to date, and any unusual activity is being followed up.
+
+## When to use it
+
+Use this review record once a year to check that your entry program matches your area's needs and that all entries and investigations are properly documented.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, depending on the number of entries and any anomalies that need to be reviewed.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: 27002:7.2 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.2:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Facilities + InfoSec)
+
+<<GUIDANCE>>
 
 ### Rev Access Lists
 
@@ -58,12 +83,16 @@ _Why: 27002:7.2 — review_
 
 > _Standard text:_ Per-area access-list review outcome (active / amended / revoked) — cross-link to A.5.18 access review
 
+<<GUIDANCE>>
+
 ### Rev Anomalies
 
 <<MUST item:A.7.2:rev_anomalies>>
 _Why: Detection_
 
 > _Standard text:_ Anomaly review (flagged events from the register triaged)
+
+<<GUIDANCE>>
 
 ### Rev Register Update
 
@@ -73,6 +102,8 @@ _Why: Closes the loop_
 > _Standard text:_ Changes propagated to the procedure / authorisation lists
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

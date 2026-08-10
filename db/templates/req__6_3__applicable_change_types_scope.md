@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable ISMS Change Types Scope
 
+<<DOC_CONTROL>>
+
 > The upstream that bounds the procedure — which kinds of changes are 'ISMS-level' (clause 6.3 scope) vs operational (A.8.32 scope). Boundary clarification prevents both gaps and overlaps
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which types of changes are considered significant for your information security management system, making it easier to avoid confusion or missed responsibilities.
+
+## When to use it
+
+Use this document whenever you need to clarify the boundary between ISMS-level changes and day-to-day operational changes. Review and update it whenever your environment or procedures change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to address three required elements and possibly one recommended detail.
 
 ## 1. ISMS-level change types enumerated (scope, policy, manual, risk criteria, organisational, structural)
 
 <<MUST item:6.3:scope_in_scope_types>>
 _Why: Clause 6.3 — ISMS_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Clause 6.3 — ISMS_
 <<MUST item:6.3:scope_a832_boundary>>
 _Why: Cross-control coherence_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Threshold rules (when a change is 'significant' enough to need 6.3 planning)
 
 <<MUST item:6.3:scope_thresholds>>
 _Why: Defensible bounding_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:6.3:scope_grey_areas>>
 _Why: Operational clarity_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # Continual Improvement Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that the procedure is generating actions, the register reflects all triggers, completed actions had effectiveness checks (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:10.1:improvement_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:10.1:rev_dimension_coverage -->
 <!-- column: item:10.1:rev_closure_quality -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your continual improvement activities, making sure actions are being taken, reviewed for effectiveness, and that nothing important is missed. It’s designed to support your ISO 27001 compliance efforts.
+
+## When to use it
+
+Use this review record once a year to confirm your continual improvement program is active and effective. It’s relevant for any environment where ongoing improvement is expected.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, depending on how many actions and triggers you need to document.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Clause 10.1 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:10.1:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (ISMS Manager + executive sponsor)
+
+<<GUIDANCE>>
 
 ### Rev Signal Capture
 
@@ -58,12 +83,16 @@ _Why: Coverage_
 
 > _Standard text:_ Signal-capture check — every in-scope trigger source produced at least one action OR explicit 'no opportunities this cycle' rationale
 
+<<GUIDANCE>>
+
 ### Rev Dimension Coverage
 
 <<MUST item:10.1:rev_dimension_coverage>>
 _Why: Clause 10.1 — three dimensions_
 
 > _Standard text:_ Dimension coverage — improvements span suitability AND adequacy AND effectiveness (not just one)
+
+<<GUIDANCE>>
 
 ### Rev Closure Quality
 
@@ -73,6 +102,8 @@ _Why: Effectiveness_
 > _Standard text:_ Closure-quality check — closed actions have effectiveness assessment, not just 'marked complete'
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

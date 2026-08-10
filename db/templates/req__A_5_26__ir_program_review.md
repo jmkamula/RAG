@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Incident Response Program Review
 
+<<DOC_CONTROL>>
+
 > IR readiness erodes between exercises and between incidents. The review records the planned-interval check of the program: MTTC/MTTR trends, exercise outcomes, procedure currency against threat landscape, and the resulting calibration of roles, runbooks and contact lists
 
 <!-- TABLE-COLUMNS leaf:req:A.5.26:ir_program_review -->
@@ -25,6 +27,25 @@ table_shape: true
 <!-- column: item:A.5.26:rev_72h_feasibility -->
 <!-- column: item:A.5.26:rev_identity_pair_25 -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep your incident response program up to date by recording regular reviews of your procedures, response times, and team readiness. It ensures you can track improvements and adjust to new threats.
+
+## When to use it
+
+Use this template every six months to document your scheduled review of the incident response program, regardless of recent incidents or exercises. It's designed for ongoing, routine checks in any environment.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours completing the template from scratch, as each required section takes around 10-15 minutes to fill out.
 
 ## Register
 
@@ -47,12 +68,16 @@ _Why: 27002:5.26 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.5.26:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Incident Manager + InfoSec lead jointly)
+
+<<GUIDANCE>>
 
 ### Rev Metrics
 
@@ -61,12 +86,16 @@ _Why: 27002:5.26 — improvement_
 
 > _Standard text:_ MTTC / MTTR / containment-success metrics analysed across the period
 
+<<GUIDANCE>>
+
 ### Rev Exercise
 
 <<MUST item:A.5.26:rev_exercise>>
 _Why: 27002:5.26 — exercises_
 
 > _Standard text:_ Tabletop / simulation outcomes reviewed (or scheduled-but-not-yet-run noted)
+
+<<GUIDANCE>>
 
 ### Rev Procedure Currency
 
@@ -75,6 +104,8 @@ _Why: 27002:5.26 — keep current_
 
 > _Standard text:_ Procedure currency assessed against threat landscape + new control changes
 
+<<GUIDANCE>>
+
 ### Rev Actions
 
 <<MUST item:A.5.26:rev_actions>>
@@ -82,12 +113,16 @@ _Why: 27002:5.26_
 
 > _Standard text:_ Action items captured (e.g. revise containment runbook, refresh contact list, schedule exercise)
 
+<<GUIDANCE>>
+
 ### Rev 72H Feasibility
 
 <<MUST item:A.5.26:rev_72h_feasibility>>
 _Why: GDPR Art.33.1 — A.5.24 is planning, A.5.26 is the real-incident proof_
 
 > _Standard text:_ Art.33 72h feasibility audited empirically across the period — count of personal-data incidents, count notified within 72h, root cause of any late notifications (parity with A.5.24:rev_gdpr_72h_feasibility)
+
+<<GUIDANCE>>
 
 ### Rev Identity Pair 25
 
@@ -97,6 +132,8 @@ _Why: Closes the silent A.5.25→A.5.26 handoff gap that 0/1-day reviews can't c
 > _Standard text:_ Bidirectional A.5.25 ↔ A.5.26 lifecycle pair check — every register row traces back to an A.5.25 triage decision (no orphan incidents) and every escalated triage decision opened an incident (no lost escalations)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -109,9 +146,17 @@ _Why: Audit defensibility_
 
 > _Standard text:_ External benchmarking input considered (industry IR-metrics references)
 
+<<GUIDANCE>>
+
 ### Rev Next Date
 
 <<SHOULD item:A.5.26:rev_next_date>>
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

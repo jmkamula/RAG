@@ -13,6 +13,8 @@ table_shape: true
 
 # Cross-Jurisdiction Transfer Basis Register
 
+<<DOC_CONTROL>>
+
 > Per-transfer-relationship row — every cross-jurisdiction PII transfer flow with cited basis + jurisdiction pair. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:A.7.5.1:transfer_basis_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.5.1:reg_basis_cited -->
 <!-- column: item:A.7.5.1:reg_tia_reference -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of every time personal data is transferred between different countries or regions, showing the legal basis for each transfer. It's useful for organizations needing to track and justify cross-border data flows.
+
+## When to use it
+
+Use this register whenever your organization transfers personal data across jurisdictions and needs to document the legal reason for each transfer. Plan to update it about once a year to keep information current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element for each transfer relationship you need to record. Completing the register from scratch may take a few hours, depending on the number of transfers you manage.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Referenceability_
 
 > _Standard text:_ Unique transfer relationship identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Origin Jurisdiction
 
 <<MUST item:A.7.5.1:reg_origin_jurisdiction>>
 _Why: Traceability_
 
 > _Standard text:_ Origin jurisdiction per row
+
+<<GUIDANCE>>
 
 ### Reg Destination Jurisdiction
 
@@ -58,12 +83,16 @@ _Why: Traceability_
 
 > _Standard text:_ Destination jurisdiction per row
 
+<<GUIDANCE>>
+
 ### Reg Basis Cited
 
 <<MUST item:A.7.5.1:reg_basis_cited>>
 _Why: §7.5.1 — basis for transfer_
 
 > _Standard text:_ Basis cited per row (Art.45 adequacy / Art.46 SCC / Art.46 BCR / Art.49 derogation / non-EU equivalent)
+
+<<GUIDANCE>>
 
 ### Reg Tia Reference
 
@@ -73,6 +102,8 @@ _Why: EDPB 01/2020_
 > _Standard text:_ TIA reference per row where Art.46 safeguard invoked
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: EDPB 01/2020_
 
 > _Standard text:_ Supplementary measures per row where TIA identified deficiencies
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

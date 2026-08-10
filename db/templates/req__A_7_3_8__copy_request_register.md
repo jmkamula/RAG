@@ -13,6 +13,8 @@ table_shape: true
 
 # Copy Request Register
 
+<<DOC_CONTROL>>
+
 > Per-request row — audit trail of copy requests with format used, scope covered, and SLA. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:A.7.3.8:copy_request_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.3.8:reg_scope_summary -->
 <!-- column: item:A.7.3.8:reg_response_time -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of every copy request, including the format used, what information was covered, and how quickly you responded. It's designed to support privacy compliance and audit needs.
+
+## When to use it
+
+Use this register whenever you receive a request to provide a copy of personal data, and update it at least once a year to keep your records current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element when setting up the register, and then a few minutes for each new copy request you log.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit trail_
 
 > _Standard text:_ Unique request identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Subject Id
 
 <<MUST item:A.7.3.8:reg_subject_id>>
 _Why: Traceability_
 
 > _Standard text:_ Subject identifier per row
+
+<<GUIDANCE>>
 
 ### Reg Format Delivered
 
@@ -58,12 +83,16 @@ _Why: §7.3.8 — structured format_
 
 > _Standard text:_ Format delivered per row (JSON / CSV / PDF / structured export)
 
+<<GUIDANCE>>
+
 ### Reg Scope Summary
 
 <<MUST item:A.7.3.8:reg_scope_summary>>
 _Why: §7.3.8 — relate specifically_
 
 > _Standard text:_ Scope summary per row (what PII was included)
+
+<<GUIDANCE>>
 
 ### Reg Response Time
 
@@ -73,6 +102,8 @@ _Why: Art.12.3_
 > _Standard text:_ Response time per row (vs SLA)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Art.20.2_
 
 > _Standard text:_ Direct-transfer flag if Art.20.2 invoked
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

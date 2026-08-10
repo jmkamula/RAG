@@ -11,14 +11,35 @@ should_count: 1
 
 # Secure System Architecture and Engineering Principles Policy
 
+<<DOC_CONTROL>>
+
 > A.8.27 requires principles established, documented, maintained, applied. Policy enumerates principles + application context + maintenance approach. Reference-architecture register, applicable scope, program review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define and document the security principles that guide your system architecture and engineering practices. It ensures your approach is consistent, well-maintained, and aligned with ISO 27001 requirements.
+
+## When to use it
+
+Use this template when your organization needs to establish or update its secure system architecture principles, especially if your risk profile or regulatory obligations change. Review and refresh the policy as needed to stay current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes drafting this policy from scratch, depending on how many principles and context details you need to include.
 
 ## 1. Principles enumerated (defence-in-depth / least-privilege / fail-safe-defaults / separation-of-concerns / complete-mediation / zero-trust direction)
 
 <<MUST item:A.8.27:principles>>
 _Why: 27002:8.27 — principles established_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.27 — principles established_
 <<MUST item:A.8.27:application>>
 _Why: 27002:8.27 — applied to development activities_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Principles documented in accessible form for engineers (wiki / handbook / training material)
 
 <<MUST item:A.8.27:documented>>
 _Why: 27002:8.27 — documented_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,6 +66,8 @@ _Why: 27002:8.27 — documented_
 <<MUST item:A.8.27:maintenance>>
 _Why: 27002:8.27 — maintained_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Threat-modelling methodology integration (cross-link to A.8.26 + design-phase practice)
@@ -48,12 +75,16 @@ _Why: 27002:8.27 — maintained_
 <<MUST item:A.8.27:tm_integration>>
 _Why: Closes design loop (Style v2 promotion)_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Named policy authority (Chief Architect / Security Architect with InfoSec lead)
 
 <<MUST item:A.8.27:authority>>
 _Why: Accountability_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -68,4 +99,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.27:reference_arch>>
 _Why: Concrete guidance_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

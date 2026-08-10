@@ -13,6 +13,8 @@ table_shape: true
 
 # ISMS Communication Event Register
 
+<<DOC_CONTROL>>
+
 > Per-communication record — what was communicated, when, to whom, via what channel, with what acknowledgement. The proof communications actually happened, not just planned. Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:7.4:communication_event_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:7.4:reg_channel -->
 <!-- column: item:7.4:reg_date -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of all important communications related to your information security management system, showing what was shared, when, with whom, and how it was acknowledged. It provides proof that these communications actually took place, not just that they were planned.
+
+## When to use it
+
+Use this register whenever you need to track and document communications about your information security program, especially if you need to show evidence for ISO 27001 compliance. Plan to review and update it at least once a year to keep it current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes to fill in the initial required details for each communication event. The total time will increase as you add more rows for each new communication.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Unique event identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Topic
 
 <<MUST item:7.4:reg_topic>>
 _Why: Cross-leaf coherence_
 
 > _Standard text:_ Per-row topic (matches procedure 'what' catalog)
+
+<<GUIDANCE>>
 
 ### Reg Audience
 
@@ -58,12 +83,16 @@ _Why: Clause 7.4 c)_
 
 > _Standard text:_ Per-row audience (which internal group / external party)
 
+<<GUIDANCE>>
+
 ### Reg Channel
 
 <<MUST item:7.4:reg_channel>>
 _Why: Clause 7.4 d)_
 
 > _Standard text:_ Per-row channel used
+
+<<GUIDANCE>>
 
 ### Reg Date
 
@@ -73,6 +102,8 @@ _Why: Currency_
 > _Standard text:_ Per-row date / time of communication
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -85,9 +116,17 @@ _Why: Closure proof_
 
 > _Standard text:_ Per-row acknowledgement evidence where required (read-receipt, attendance log, signed receipt)
 
+<<GUIDANCE>>
+
 ### Reg Sender
 
 <<SHOULD item:7.4:reg_sender>>
 _Why: Accountability — log-shape registers_
 
 > _Standard text:_ Per-row sender / responsible person
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

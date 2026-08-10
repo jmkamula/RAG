@@ -11,14 +11,35 @@ should_count: 1
 
 # Clear Desk and Clear Screen Policy
 
+<<DOC_CONTROL>>
+
 > A.7.7 requires clear-desk rules for papers/removable media plus clear-screen rules for information processing facilities. The policy states both rules and enforcement. The audit register, applicable-locations scope and periodic review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you create a policy that sets out clear desk and clear screen rules, ensuring sensitive information is protected in your workplace and on your devices. It covers both the rules and how they are enforced.
+
+## When to use it
+
+Use this template whenever you need to establish or update your organization's approach to keeping desks and screens clear of sensitive information. Review and refresh the policy as needed to stay compliant.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours drafting this policy from scratch, as each required section takes around 10-15 minutes to complete.
 
 ## 1. Clear-desk rule for papers and removable media when desk unattended
 
 <<MUST item:A.7.7:clear_desk_rule>>
 _Why: 27002:7.7 — clear desk rules_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:7.7 — clear desk rules_
 <<MUST item:A.7.7:clear_screen_rule>>
 _Why: 27002:7.7 — clear screen rules_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Removable media handling rules (locked away when unattended)
 
 <<MUST item:A.7.7:removable_media>>
 _Why: 27002:7.7 — removable storage media_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: 27002:7.7 — removable storage media_
 <<MUST item:A.7.7:locked_storage>>
 _Why: 27002:7.7 — appropriately enforced_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Enforcement approach (spot checks, awareness, sanctions)
 
 <<MUST item:A.7.7:enforcement>>
 _Why: 27002:7.7 — appropriately enforced_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -55,12 +84,16 @@ _Why: 27002:7.7 — appropriately enforced_
 <<MUST item:A.7.7:meeting_rooms>>
 _Why: Common gap_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Printer / multifunction device rules (pull-print, collect immediately, fax-line policy)
 
 <<MUST item:A.7.7:printer_rules>>
 _Why: Often-leaked artefacts_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -75,4 +108,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.7:home_office_overlay>>
 _Why: Hybrid work realism_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -12,6 +12,8 @@ table_shape: true
 
 # Software Installation Register
 
+<<DOC_CONTROL>>
+
 > Per-installation record — what was installed, when, where, by whom, verification artefact
 
 <!-- TABLE-COLUMNS leaf:req:A.8.19:installation_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.8.19:reg_actor -->
 <!-- column: item:A.8.19:reg_verification -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of every software installation, including details like what was installed, when and where it happened, who did it, and proof it was checked.
+
+## When to use it
+
+Use this register whenever software is installed in your environment, and update it as needed to keep your records accurate and up to date.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10–15 minutes per required detail for each installation entry; the total time depends on how many installations you need to record.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: Auditability_
 
 > _Standard text:_ Per-install unique identifier
 
+<<GUIDANCE>>
+
 ### Reg Software
 
 <<MUST item:A.8.19:reg_software>>
 _Why: 27002:8.19 — securely manage_
 
 > _Standard text:_ Per-install software name + version + source (from approved list)
+
+<<GUIDANCE>>
 
 ### Reg Target
 
@@ -57,12 +82,16 @@ _Why: 27002:8.19 — operational systems_
 
 > _Standard text:_ Per-install target system
 
+<<GUIDANCE>>
+
 ### Reg Actor
 
 <<MUST item:A.8.19:reg_actor>>
 _Why: Accountability_
 
 > _Standard text:_ Per-install authorised actor (privileged role assignment)
+
+<<GUIDANCE>>
 
 ### Reg Verification
 
@@ -72,6 +101,8 @@ _Why: 27002:8.19 — securely_
 > _Standard text:_ Per-install verification artefacts (signature check / functional test / vuln-scan result)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -83,3 +114,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Cross-control coherence_
 
 > _Standard text:_ Per-install cross-link to A.8.32 change record where applicable
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

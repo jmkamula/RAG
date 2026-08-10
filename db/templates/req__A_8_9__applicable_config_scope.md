@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Asset Scope for Configuration Management
 
+<<DOC_CONTROL>>
+
 > Upstream — which asset classes have baselines, which are vendor-managed (delegated to supplier per A.5.19), which are exception-managed
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which types of assets in your environment are covered by configuration management, which are managed by vendors, and which are handled as exceptions.
+
+## When to use it
+
+Use this document whenever you need to outline the scope of assets for configuration management in your environment, and update it whenever there are changes to asset classes or management responsibilities.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to address three required elements and optionally add a recommended detail.
 
 ## 1. Asset classes enumerated with baseline approach per class
 
 <<MUST item:A.8.9:scope_classes>>
 _Why: 27002:8.9 — established_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.9 — established_
 <<MUST item:A.8.9:scope_vendor_managed>>
 _Why: Boundary clarity_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Exclusion rationale + compensating controls per excluded class
 
 <<MUST item:A.8.9:scope_exclusions>>
 _Why: Defensibility_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.9:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # Internal and External Issues Register
 
+<<DOC_CONTROL>>
+
 > Clause 4.1 requires the organization to determine external and internal issues relevant to its ISMS purpose and outcomes. The register is the canonical artefact — issue rows with internal/external classification, relevance to ISMS outcomes, owner, last assessment date. Sibling leaves: identification framework, applicable-domains scope, program review
 
 <!-- TABLE-COLUMNS leaf:req:4.1:context_issues_register -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:4.1:reg_last_assessed -->
 <!-- column: item:4.1:reg_risk_handoff -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you track and organize both internal and external issues that could impact your information security management system, making it easier to stay compliant and demonstrate awareness of relevant risks.
+
+## When to use it
+
+Use this register at all times as part of your ongoing compliance activities, and plan to review and update it about once a year to ensure it stays current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes to fill in the required elements for each issue you identify; the total time will depend on how many issues you need to document.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: Clause 4.1 — internal issues_
 
 > _Standard text:_ Internal issues documented per row (organizational culture, governance, contracts, capabilities, technologies)
 
+<<GUIDANCE>>
+
 ### External Issues
 
 <<MUST item:4.1:external_issues>>
 _Why: Clause 4.1 — external issues_
 
 > _Standard text:_ External issues documented per row (regulatory, market, threat landscape, social, technology trends)
+
+<<GUIDANCE>>
 
 ### Relevance To Ismsm
 
@@ -59,6 +84,8 @@ _Why: Clause 4.1 — affect ability to achieve outcomes_
 
 > _Standard text:_ Relevance to ISMS intended outcomes stated per issue
 
+<<GUIDANCE>>
+
 ### Owner
 
 <<MUST item:4.1:owner>>
@@ -66,12 +93,16 @@ _Why: Accountability_
 
 > _Standard text:_ Named owner of the register (typically ISMS Manager)
 
+<<GUIDANCE>>
+
 ### Reg Last Assessed
 
 <<MUST item:4.1:reg_last_assessed>>
 _Why: Currency_
 
 > _Standard text:_ Last assessment date per issue row (drives staleness detection)
+
+<<GUIDANCE>>
 
 ### Reg Risk Handoff
 
@@ -81,6 +112,8 @@ _Why: Cross-clause coherence_
 > _Standard text:_ Per-issue handoff to the risk assessment (6.1.2) where relevance warrants it
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning visibility_
 
 > _Standard text:_ Time-horizon column per issue (near-term vs long-term)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

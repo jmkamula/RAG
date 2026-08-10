@@ -11,6 +11,8 @@ should_count: 3
 
 # Information Security During Disruption Plan
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
 The **plan** for how information security holds (or degrades
@@ -23,39 +25,23 @@ schedule MUST is mandatory.
 
 ## When to use it
 
-You're producing the plan required by **ISO/IEC 27001:2022 A.5.29**.
-Distinct from **A.5.30 ICT Readiness for Business Continuity** —
+You're producing the plan required by **ISO/IEC 27001:2022 A.5.29**. Distinct from **A.5.30 ICT Readiness for Business Continuity** —
 A.5.29 is "how does security hold during disruption"; A.5.30 is
 "can we restore ICT services". Co-produced; cross-referenced.
 
-## Before you start
+## Prerequisites
 
-- [ ] **A.5.7 Threat Intelligence** — informs scenario list (MUST 1)
-- [ ] **A.5.9 Asset Register** + dependencies — drives which
-      controls must continue
-- [ ] **A.5.21 ICT Supply Chain** — supplier-failure scenarios
-- [ ] **A.5.24 IR Procedure** — incident-triggered activation
-- [ ] **A.5.30 ICT Readiness Plan** — pair-control coherence
+<<PREREQUISITES>>
 
 ## Cross-references
 
-- **A.5.30 ICT Readiness** (pair-control)
-- **A.5.7 Threat Intelligence**
-- **A.5.21 ICT Supply Chain Risk**
-- **A.5.24 IR Procedure** (activation path)
-- **A.5.26 Incident Response** (operational coordination)
-- **6.1.2 Risk Assessment** (disruption scenarios in register)
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
-**8-16 hours** for v1 (scenario work is the bulk); **2-3 days
-annual exercise**; **plus** post-exercise refresh.
+**8-16 hours** for v1 (scenario work is the bulk); **2-3 days annual exercise**; **plus** post-exercise refresh.
 
 ---
-
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
 
 ## 1. Document the disruption scenarios considered
 
@@ -82,6 +68,8 @@ State the scenarios. Each has different security implications.
 
 (Scenarios should be cross-linked to risk-register row IDs.)
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 2. Name security controls that must continue operating
@@ -104,6 +92,8 @@ even if processing pipelines fail. (d) MFA on all production
 access (A.5.17). (e) DPA + Art.28 processor protections for
 personal data (Art.32). Any plan or scenario that compromises
 these is escalated to ISMS Owner + DPO."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -129,6 +119,8 @@ compensating measures replace it. Tiered by risk.
 | A.8.7 anti-malware (full pattern updates) | Lag patterns by 24h max | Heuristic + anomaly detection compensates |
 | A.5.7 threat-intel feed full breadth | Reduce to high-priority sources | SecOps daily review until restored |
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 4. Define fallback / compensating security measures
@@ -151,6 +143,8 @@ account, two-person sign-off, time-limited to 4h, full audit);
 residual risk accepted by CISO. (c) DLP / monitoring outage:
 manual review of high-risk operations + enhanced audit; SecOps
 on-call elevated coverage."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -175,6 +169,8 @@ down. (d) Suppliers: primary = supplier portal + procurement
 contact; OOB = phone tree. OOB credentials + channel configs
 stored offline in IR kit."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Plan restoration of normal security controls
@@ -197,6 +193,8 @@ audit-log integrity (no gaps in coverage during disruption).
 declared by Incident Manager + ISMS Manager + (Sev 1) ISMS Owner.
 Each step verified + recorded in stand-down log."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Define activation authority
@@ -217,6 +215,8 @@ Cloud-provider major outage > 30 min, (b) Identity-provider outage
 authority: IR Manager declares (in-progress incidents); ISMS Owner
 declares (proactive / regulator). Stand-down: IR Manager + ISMS
 Manager joint decision; documented criteria met."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -240,6 +240,8 @@ supplier-failure simulation (Tier 3 supplier outage scenario).
 A.5.29 plan_activation_record (type=test). Findings feed A.5.27
 lessons-learned + 10.1 improvement actions."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ---
@@ -257,6 +259,8 @@ business continuity plan._
 
 State the BCP that this is the security-controls overlay on.
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### Residual-risk register
@@ -271,6 +275,8 @@ explicitly._
 Aggregate the residual acceptances from MUSTs 3 + 4 into a single
 register entry for audit.
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### Third-party-service plans
@@ -284,4 +290,10 @@ A.5.21 supply-chain risk procedure._
 
 Cross-link to supplier-specific contingency plans where they exist.
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

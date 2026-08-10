@@ -13,6 +13,8 @@ table_shape: true
 
 # Third-Party Notification Register
 
+<<DOC_CONTROL>>
+
 > Per-notification-event row — audit trail of every third-party notification issued. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:A.7.3.7:notification_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.3.7:reg_dispatch_date -->
 <!-- column: item:A.7.3.7:reg_ack_received -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of every notification you send to third parties, making it easy to demonstrate compliance with privacy requirements.
+
+## When to use it
+
+Use this register whenever you notify a third party about a relevant event, and review or update it at least once a year to ensure it stays current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required entry, so setting up the initial register with five elements may take around 1 to 1.5 hours, plus ongoing time for each new notification.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit trail_
 
 > _Standard text:_ Unique notification identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Recipient
 
 <<MUST item:A.7.3.7:reg_recipient>>
 _Why: Traceability_
 
 > _Standard text:_ Recipient third party per row
+
+<<GUIDANCE>>
 
 ### Reg Trigger Event
 
@@ -58,12 +83,16 @@ _Why: §7.3.7_
 
 > _Standard text:_ Trigger event per row (which subject event caused the notification)
 
+<<GUIDANCE>>
+
 ### Reg Dispatch Date
 
 <<MUST item:A.7.3.7:reg_dispatch_date>>
 _Why: Currency_
 
 > _Standard text:_ Dispatch date per row
+
+<<GUIDANCE>>
 
 ### Reg Ack Received
 
@@ -73,6 +102,8 @@ _Why: §7.3.7 — monitor acknowledgement_
 > _Standard text:_ Acknowledgement received flag + date per row
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Art.19_
 
 > _Standard text:_ Impossibility / disproportionate-effort invocation flag per row where applicable
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -11,14 +11,35 @@ should_count: 1
 
 # Customer PII Processing Agreement Procedure
 
+<<DOC_CONTROL>>
+
 > §8.2.1 requires the processor's contract with each customer to address the processor's role in assisting the customer's controller obligations (breach notification / PIA support / prior-consultation assistance / subject-rights operational support). Companion procedure from the processor side to A.7.2.6.
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document how your organization supports customers with their privacy obligations, including breach notifications, privacy impact assessments, and data subject rights requests.
+
+## When to use it
+
+Use this procedure when you process personal data for customers and need to show how you assist them with their privacy compliance. Update it whenever your processes or customer contracts change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this template from scratch, as it covers five required elements and one recommended section.
 
 ## 1. Intake gate — new customer onboarding blocked until PII processing agreement executed
 
 <<MUST item:B.8.2.1:proc_intake_gate>>
 _Why: §8.2.1 — where relevant_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: §8.2.1 — where relevant_
 <<MUST item:B.8.2.1:proc_assistance_scope>>
 _Why: §8.2.1 — role in providing assistance_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Documented-instructions mechanism (how instructions are recorded, escalated, disputed)
 
 <<MUST item:B.8.2.1:proc_documented_instructions>>
 _Why: Art.28.3.a_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: Art.28.3.a_
 <<MUST item:B.8.2.1:proc_subject_matter_scope>>
 _Why: §8.2.1 implementation — jurisdictions require these terms_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Art.35.1 DPIA support pathway — how customer requests DPIA-input from processor
 
 <<MUST item:B.8.2.1:proc_customer_dpia_support>>
 _Why: Art.35.1_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:B.8.2.1:proc_standard_terms>>
 _Why: Consistency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -11,14 +11,35 @@ should_count: 1
 
 # Change Management Procedure
 
+<<DOC_CONTROL>>
+
 > A.8.32 requires changes to information processing facilities + systems subject to CM procedures. Procedure documents scope, approval workflow, risk-assessment-per-change, rollback, emergency-change path, post-implementation review. Per-change register (lifecycle-end), applicable scope, program review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document how changes to your IT systems are managed, including approvals, risk checks, emergency changes, and reviews. It ensures you meet ISO 27001 requirements for change management.
+
+## When to use it
+
+Use this whenever you need to define or update your process for managing changes to information processing facilities and systems. Review and refresh the document as needed to keep it accurate and effective.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours drafting the main procedure, plus additional time for setting up and maintaining the change register depending on the number of changes you track.
 
 ## 1. Scope — which change classes require formal CM (production / customer-facing / security-relevant / cross-system)
 
 <<MUST item:A.8.32:scope>>
 _Why: 27002:8.32 — changes subject to change management_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.32 — changes subject to change management_
 <<MUST item:A.8.32:approval>>
 _Why: 27002:8.32 — change management procedures_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Per-change risk assessment (impact / blast radius / rollback complexity)
 
 <<MUST item:A.8.32:risk_assessment>>
 _Why: 27002:8.32 — change management_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: 27002:8.32 — change management_
 <<MUST item:A.8.32:rollback>>
 _Why: 27002:8.32 — change management_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Emergency-change provisions with mandatory post-hoc review (no untracked emergencies)
 
 <<MUST item:A.8.32:emergency>>
 _Why: Operational reality_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -55,12 +84,16 @@ _Why: Operational reality_
 <<MUST item:A.8.32:pir>>
 _Why: Continuous improvement_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. CI/CD pipeline integration for low-risk automated changes (modern baseline; CAB-everything bottleneck not acceptable)
 
 <<MUST item:A.8.32:ci_integration>>
 _Why: Modern velocity (Style v2 promotion)_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -75,4 +108,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.32:change_windows>>
 _Why: Predictability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

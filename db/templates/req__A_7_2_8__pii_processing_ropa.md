@@ -13,6 +13,8 @@ table_shape: true
 
 # PII Records of Processing (RoPA)
 
+<<DOC_CONTROL>>
+
 > §7.2.8 requires records of PII processing activities to demonstrate accountability. Register-as-primary (records_program spine): the RoPA is the canonical artefact. Per-activity row — type / purpose / categories of PII + subjects / recipients + international transfers / retention / security measures. Bridges to GDPR Art.30 with the same required fields.
 
 <!-- TABLE-COLUMNS leaf:req:A.7.2.8:pii_processing_ropa -->
@@ -25,6 +27,25 @@ table_shape: true
 <!-- column: item:A.7.2.8:ropa_security_measures -->
 <!-- column: item:A.7.2.8:ropa_owner -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of how your organization handles personal data, making it easier to show compliance with privacy regulations like ISO 27701 and GDPR.
+
+## When to use it
+
+Use this register when your activities involve processing personal information and your compliance profile requires formal documentation. Plan to review and update it about once a year, or whenever your processing activities change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10 to 15 minutes per required section for each processing activity you document. Completing the register from scratch typically takes 1–2 hours for a small set of activities, but more if you have many processes.
 
 ## Register
 
@@ -47,12 +68,16 @@ _Why: Referenceability_
 
 > _Standard text:_ Unique processing-activity identifier per row
 
+<<GUIDANCE>>
+
 ### Ropa Type Purpose
 
 <<MUST item:A.7.2.8:ropa_type_purpose>>
 _Why: §7.2.8 — type + purposes + Art.30.1.b_
 
 > _Standard text:_ Type + purpose of processing per row (link to A.7.2.1 register)
+
+<<GUIDANCE>>
 
 ### Ropa Pii Categories
 
@@ -61,12 +86,16 @@ _Why: §7.2.8 — categories of PII + PII principals + Art.30.1.c_
 
 > _Standard text:_ Categories of PII per row + categories of subjects (e.g. employees, customers, minors)
 
+<<GUIDANCE>>
+
 ### Ropa Recipients
 
 <<MUST item:A.7.2.8:ropa_recipients>>
 _Why: §7.2.8 + Art.30.1.d + Art.30.1.e_
 
 > _Standard text:_ Categories of recipients per row (including third countries + international orgs)
+
+<<GUIDANCE>>
 
 ### Ropa Transfer Safeguards
 
@@ -75,6 +104,8 @@ _Why: Art.30.1.e + Chap V_
 
 > _Standard text:_ Transfer safeguards per row where third-country transfer occurs (Chap V mechanism cited)
 
+<<GUIDANCE>>
+
 ### Ropa Retention
 
 <<MUST item:A.7.2.8:ropa_retention>>
@@ -82,12 +113,16 @@ _Why: Art.30.1.f_
 
 > _Standard text:_ Retention period per row (or criteria)
 
+<<GUIDANCE>>
+
 ### Ropa Security Measures
 
 <<MUST item:A.7.2.8:ropa_security_measures>>
 _Why: §7.2.8 + Art.30.1.g_
 
 > _Standard text:_ General description of technical + organizational security measures per row
+
+<<GUIDANCE>>
 
 ### Ropa Owner
 
@@ -97,6 +132,8 @@ _Why: §7.2.8 — owner responsible_
 > _Standard text:_ Named owner responsible for accuracy + completeness
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -108,3 +145,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: §7.2.8 implementation — PIA report + cross-link_
 
 > _Standard text:_ DPIA report link per row where PIA performed (A.7.2.5)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

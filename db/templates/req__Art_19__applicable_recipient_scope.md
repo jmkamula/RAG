@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Recipients Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which recipient classes are in scope for Art.19 notification (processors, joint controllers, downstream controllers, public disclosure under Art.17.2)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which types of recipients—such as processors, joint controllers, and others—are included when notifying about data rectification, erasure, or restriction under GDPR Article 19.
+
+## When to use it
+
+Use this document whenever you need to clarify who must be notified about changes to personal data in your environment. Review and update it whenever your data sharing practices or recipient relationships change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to address three required elements and possibly one recommended detail.
 
 ## 1. Recipient classes enumerated (processors, joint controllers, third-country recipients, public)
 
 <<MUST item:Art.19:scope_recipient_classes>>
 _Why: Art.19_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Art.19_
 <<MUST item:Art.19:scope_excluded_recipients>>
 _Why: Defensibility_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Art.17.2 public-disclosure overlay (when erased data was made public, additional notification + take-down efforts required)
 
 <<MUST item:Art.19:scope_art17_2_overlay>>
 _Why: Art.17.2_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.19:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

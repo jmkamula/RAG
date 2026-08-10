@@ -11,14 +11,35 @@ should_count: 1
 
 # Processor RoPA Maintenance Procedure
 
+<<DOC_CONTROL>>
+
 > How the processor RoPA is kept accurate — new customer onboarding trigger, customer instruction changes, subprocessor changes, retirement of customers, secure maintenance.
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document how you keep your processor Record of Processing Activities (RoPA) accurate and up to date, covering key events like onboarding new customers, handling changes, and maintaining security.
+
+## When to use it
+
+Use this procedure whenever you onboard a new customer, receive customer instructions, change subprocessors, retire customers, or need to securely maintain your RoPA. Update it as needed whenever these events occur.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes completing this from scratch, as each required section takes around 10 to 15 minutes to fill in with your specific details.
 
 ## 1. New-customer onboarding trigger — RoPA row created per new engagement (link to B.8.2.1)
 
 <<MUST item:B.8.2.6:proc_onboarding_trigger>>
 _Why: §8.2.6 — support of demonstrating compliance_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: §8.2.6 — support of demonstrating compliance_
 <<MUST item:B.8.2.6:proc_instruction_change>>
 _Why: §8.2.6 — as specified in applicable contract_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Subprocessor change — subprocessor additions / removals trigger RoPA update
 
 <<MUST item:B.8.2.6:proc_subprocessor_update>>
 _Why: Art.28.2 currency_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: Art.28.2 currency_
 <<MUST item:B.8.2.6:proc_secure_maintenance>>
 _Why: §8.2.6 — maintain the necessary records_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Customer-availability path — how a customer requests + receives their RoPA row extract
 
 <<MUST item:B.8.2.6:proc_customer_availability>>
 _Why: §8.2.5 audit-support cross-link_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,4 +90,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:B.8.2.6:proc_owner>>
 _Why: Accountability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

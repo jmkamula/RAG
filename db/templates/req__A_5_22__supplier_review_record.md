@@ -13,6 +13,8 @@ table_shape: true
 
 # Supplier Information Security Review Records
 
+<<DOC_CONTROL>>
+
 > A.5.22 requires regular monitoring, review and evaluation of supplier information security practices and service delivery. Each review record evidences the activity for one supplier in one period: performance monitored, reports reviewed, audit conducted, incidents and audit-trails examined, corrective actions tracked. The schedule register, program meta-review and change-response log are sibling leaves
 
 <!-- TABLE-COLUMNS leaf:req:A.5.22:supplier_review_record -->
@@ -29,6 +31,25 @@ table_shape: true
 <!-- column: item:A.5.22:rev_corrective -->
 <!-- column: item:A.5.22:rev_findings -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of how you monitor and review your suppliers’ information security practices, making it easier to demonstrate compliance with ISO 27001 requirements.
+
+## When to use it
+
+Use this template whenever you review a supplier’s information security performance. Plan to complete it for each supplier about once a year, or whenever a scheduled review occurs.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend around 2 to 3 hours filling out this template for each supplier, depending on how much information you need to gather and review.
 
 ## Register
 
@@ -51,12 +72,16 @@ _Why: 27002:5.22a,b_
 
 > _Standard text:_ Scope of review (security practices, service delivery, changes since last review)
 
+<<GUIDANCE>>
+
 ### Rev Performance
 
 <<MUST item:A.5.22:rev_performance>>
 _Why: 27002:5.22a_
 
 > _Standard text:_ Service performance monitored against agreement (SLAs, incidents, breaches)
+
+<<GUIDANCE>>
 
 ### Rev Reports
 
@@ -65,12 +90,16 @@ _Why: 27002:5.22b_
 
 > _Standard text:_ Supplier-provided service reports reviewed + progress meetings held
 
+<<GUIDANCE>>
+
 ### Rev Audit
 
 <<MUST item:A.5.22:rev_audit>>
 _Why: 27002:5.22c_
 
 > _Standard text:_ Audit conducted (own audit or independent attestation accepted) with follow-up on issues
+
+<<GUIDANCE>>
 
 ### Rev Incidents
 
@@ -79,12 +108,16 @@ _Why: 27002:5.22d_
 
 > _Standard text:_ Information exchanged about InfoSec incidents; joint review documented
 
+<<GUIDANCE>>
+
 ### Rev Audit Trails
 
 <<MUST item:A.5.22:rev_audit_trails>>
 _Why: 27002:5.22e_
 
 > _Standard text:_ Supplier audit trails / event records reviewed (operational problems, failures, disruption)
+
+<<GUIDANCE>>
 
 ### Rev Problems
 
@@ -93,12 +126,16 @@ _Why: 27002:5.22f_
 
 > _Standard text:_ Identified problems / incidents managed through to resolution
 
+<<GUIDANCE>>
+
 ### Rev Subsupplier
 
 <<MUST item:A.5.22:rev_subsupplier>>
 _Why: 27002:5.22g_
 
 > _Standard text:_ Supplier's own supplier relationships reviewed (sub-supplier / fourth-party oversight)
+
+<<GUIDANCE>>
 
 ### Rev Continuity
 
@@ -107,6 +144,8 @@ _Why: 27002:5.22h_
 
 > _Standard text:_ Supplier continuity capability verified (link to A.5.29 / A.5.30)
 
+<<GUIDANCE>>
+
 ### Rev Compliance
 
 <<MUST item:A.5.22:rev_compliance>>
@@ -114,12 +153,16 @@ _Why: 27002:5.22i_
 
 > _Standard text:_ Supplier's compliance-review / enforcement responsibilities confirmed
 
+<<GUIDANCE>>
+
 ### Rev Corrective
 
 <<MUST item:A.5.22:rev_corrective>>
 _Why: 27002:5.22j_
 
 > _Standard text:_ Corrective actions raised for deficiencies, tracked to closure
+
+<<GUIDANCE>>
 
 ### Rev Findings
 
@@ -129,6 +172,8 @@ _Why: 27002:5.22 — record_
 > _Standard text:_ Findings recorded per review with severity
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -141,9 +186,17 @@ _Why: Measurable monitoring_
 
 > _Standard text:_ KPIs / metrics tracked per supplier (incidents, SLA breaches, time-to-remediate)
 
+<<GUIDANCE>>
+
 ### Attestations Accepted
 
 <<SHOULD item:A.5.22:attestations_accepted>>
 _Why: Efficiency_
 
 > _Standard text:_ Third-party attestations accepted in lieu of direct audit (with criteria)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

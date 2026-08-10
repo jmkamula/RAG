@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Equipment Siting Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that equipment is sited per its class requirements and the register is current. Freshness=365
 
 <!-- TABLE-COLUMNS leaf:req:A.7.8:siting_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.8:rev_register_check -->
 <!-- column: item:A.7.8:rev_register_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you confirm that all equipment is located where it should be, according to its classification, and that your equipment register is up to date.
+
+## When to use it
+
+Use this template once a year to review and verify your equipment siting and register, as part of your ongoing compliance requirements.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours completing this from scratch, depending on the number of equipment entries you need to review.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: 27002:7.8 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.8:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Facilities + InfoSec)
+
+<<GUIDANCE>>
 
 ### Rev Walkthrough
 
@@ -58,12 +83,16 @@ _Why: 27002:7.8 — implemented_
 
 > _Standard text:_ Physical walkthrough (sample-based) — siting verified, tamper-evidence intact
 
+<<GUIDANCE>>
+
 ### Rev Register Check
 
 <<MUST item:A.7.8:rev_register_check>>
 _Why: 27002:7.8 — current_
 
 > _Standard text:_ Per-equipment outcome (verified / amended / remediated)
+
+<<GUIDANCE>>
 
 ### Rev Register Update
 
@@ -73,6 +102,8 @@ _Why: Closes the loop_
 > _Standard text:_ Changes propagated to the live register
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

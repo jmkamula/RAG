@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable End-of-Processing Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which processing activities have foreseeable end-points (customer churn / consent withdrawal / retention lapse) and which are open-ended (ongoing customer relationships).
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which of your data processing activities have a foreseeable end-point and which continue as long as your customer relationships do. It's useful for understanding and documenting your data retention responsibilities.
+
+## When to use it
+
+Use this document whenever your business activities match situations where you need to clarify the end or continuation of data processing, such as customer churn or consent withdrawal. Update it as needed when your processing activities or customer relationships change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to address three required elements and possibly one recommended element.
 
 ## 1. End-trigger enumeration per activity type
 
 <<MUST item:A.7.4.5:scope_end_triggers>>
 _Why: §7.4.5 — no longer necessary_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: §7.4.5 — no longer necessary_
 <<MUST item:A.7.4.5:scope_backup_coverage>>
 _Why: Comprehensiveness_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Exceptions (legal-hold / active litigation / regulator inspection) with rationale
 
 <<MUST item:A.7.4.5:scope_exceptions>>
 _Why: GDPR Art.17.3_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.7.4.5:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # PII Processor Contract Register
 
+<<DOC_CONTROL>>
+
 > Per-processor row — the register of PII processors engaged, the executed contract, its scope + expiry + Annex B coverage. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:A.7.2.6:processor_contract_register -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.7.2.6:reg_subprocessor_flag -->
 <!-- column: item:A.7.2.6:reg_expiry -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of all third parties processing personal data for your organization, including details about their contracts, scope, and compliance with privacy requirements.
+
+## When to use it
+
+Use this register whenever you engage a new service provider to process personal data, and update it at least once a year to ensure all contract details and coverage remain current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element for each processor you add, so the total time depends on how many processors you work with; for a single entry, plan for about 1-2 hours.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: Referenceability_
 
 > _Standard text:_ Processor identifier per row (legal entity name)
 
+<<GUIDANCE>>
+
 ### Reg Contract Reference
 
 <<MUST item:A.7.2.6:reg_contract_reference>>
 _Why: §7.2.6 — written contract_
 
 > _Standard text:_ Executed contract reference (document + version + signature date)
+
+<<GUIDANCE>>
 
 ### Reg Service Scope
 
@@ -59,6 +84,8 @@ _Why: Art.28.3 subject matter + nature_
 
 > _Standard text:_ Service scope per row (what the processor does + PII categories involved)
 
+<<GUIDANCE>>
+
 ### Reg Annex B Coverage
 
 <<MUST item:A.7.2.6:reg_annex_b_coverage>>
@@ -66,12 +93,16 @@ _Why: §7.2.6 — all controls in Annex B assumed relevant_
 
 > _Standard text:_ Annex B controls covered per row (either 'all' or itemised subset with justification link)
 
+<<GUIDANCE>>
+
 ### Reg Subprocessor Flag
 
 <<MUST item:A.7.2.6:reg_subprocessor_flag>>
 _Why: Art.28.2_
 
 > _Standard text:_ Subprocessors permitted flag + list per row
+
+<<GUIDANCE>>
 
 ### Reg Expiry
 
@@ -81,6 +112,8 @@ _Why: Currency_
 > _Standard text:_ Contract expiry / renewal date per row
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Cross-link A.5.22 supplier review_
 
 > _Standard text:_ Last processor audit / due-diligence date per row
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # DSAR Register
 
+<<DOC_CONTROL>>
+
 > Living log of every access request received and its handling. Distinct from the per-event response leaf: the register is the universal record showing the population of requests, status, and timing compliance — auditor-facing evidence that the procedure operates in practice. Style v2 freshness 180d — high-volume DSAR data, slower than incident-register fast-data (90d) but faster than annual review
 
 <!-- TABLE-COLUMNS leaf:req:Art.15:dsar_register -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:Art.15:reg_timing_flag -->
 <!-- column: item:Art.15:reg_outcome -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, up-to-date record of all data subject access requests (DSARs) your organization receives, including how each one was handled and its current status. It’s designed to show auditors that you’re following GDPR requirements in practice.
+
+## When to use it
+
+Use this register whenever your organization receives a DSAR, and update it regularly—ideally about twice a year—to ensure your records stay current and compliant.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Setting up the register from scratch will take about 1 to 2 hours, depending on the number of requests you need to log. Each new request added will take around 10 to 15 minutes to document.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: Art.12.3 timing_
 
 > _Standard text:_ Request received date (the start of the Art.12.3 clock) per row
 
+<<GUIDANCE>>
+
 ### Reg Requester
 
 <<MUST item:Art.15:reg_requester>>
 _Why: Art.12.6_
 
 > _Standard text:_ Requester identity (verified) or pseudonymous reference where verification used a token
+
+<<GUIDANCE>>
 
 ### Reg Scope
 
@@ -59,6 +84,8 @@ _Why: Operational clarity_
 
 > _Standard text:_ Scope of the request as understood (full Art.15 / specific data set / repeat copy)
 
+<<GUIDANCE>>
+
 ### Reg Response Date
 
 <<MUST item:Art.15:reg_response_date>>
@@ -66,12 +93,16 @@ _Why: Art.12.3_
 
 > _Standard text:_ Date the response was issued
 
+<<GUIDANCE>>
+
 ### Reg Timing Flag
 
 <<MUST item:Art.15:reg_timing_flag>>
 _Why: Art.12.3_
 
 > _Standard text:_ Timing compliance flag (within 1 month / extended per Art.12.3 / late)
+
+<<GUIDANCE>>
 
 ### Reg Outcome
 
@@ -81,6 +112,8 @@ _Why: Art.12.5 / Art.15.4_
 > _Standard text:_ Outcome per row (fulfilled / partial under Art.15.4 / refused under Art.12.5 with reason)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -93,9 +126,17 @@ _Why: Art.12.3_
 
 > _Standard text:_ Extension reason captured when Art.12.3 two-month extension was used
 
+<<GUIDANCE>>
+
 ### Reg Response Link
 
 <<SHOULD item:Art.15:reg_response_link>>
 _Why: Cross-leaf traceability_
 
 > _Standard text:_ Linkage to the per-request response artifact (req:Art.15:dsar_response instance)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

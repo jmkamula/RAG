@@ -12,6 +12,8 @@ table_shape: true
 
 # Compliance Nonconformity Register
 
+<<DOC_CONTROL>>
+
 > A.5.36 requires corrective actions tracked to closure — but the corrective-action promise is theoretical without a per-NC lifecycle tracker. The nonconformity register catalogues every NC raised: severity, owner, agreed corrective action, target date, closure status, root cause. This is the audit-defensibility artefact paired with the review records
 
 <!-- TABLE-COLUMNS leaf:req:A.5.36:nonconformity_register -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.5.36:nc_closure_evidence -->
 <!-- column: item:A.5.36:nc_root_cause -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of every compliance issue identified, including who owns it, what needs to be fixed, and when it’s resolved. It’s designed to show auditors you’re tracking and closing out all nonconformities.
+
+## When to use it
+
+Use this register whenever a compliance nonconformity is found in your environment, and update it as needed to reflect new issues or progress on existing ones. It should be maintained continuously to stay audit-ready.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes entering each required detail for every new nonconformity. The total time depends on how many issues you need to track, but starting from scratch typically takes 1-2 hours for a small set.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:5.36 — review_
 
 > _Standard text:_ Per-NC unique identifier traceable back to the source review record
 
+<<GUIDANCE>>
+
 ### Nc Severity
 
 <<MUST item:A.5.36:nc_severity>>
 _Why: 27002:5.36 — review_
 
 > _Standard text:_ Severity recorded per NC (matches the review record's severity classification)
+
+<<GUIDANCE>>
 
 ### Nc Owner
 
@@ -59,12 +84,16 @@ _Why: Accountability_
 
 > _Standard text:_ Named owner per NC (named individual, not generic team) with target closure date
 
+<<GUIDANCE>>
+
 ### Nc Corrective Action
 
 <<MUST item:A.5.36:nc_corrective_action>>
 _Why: Closes the loop_
 
 > _Standard text:_ Corrective action stated per NC (the specific change committed — policy update, control implementation, training delivery)
+
+<<GUIDANCE>>
 
 ### Nc Status
 
@@ -73,12 +102,16 @@ _Why: Operational discipline_
 
 > _Standard text:_ Current status per NC (open / in-progress / closed / aged-overdue / risk-accepted-with-exception) with last-updated date
 
+<<GUIDANCE>>
+
 ### Nc Closure Evidence
 
 <<MUST item:A.5.36:nc_closure_evidence>>
 _Why: Audit defensibility_
 
 > _Standard text:_ Closure evidence reference per closed NC (link to the artefact that proves the NC was addressed)
+
+<<GUIDANCE>>
 
 ### Nc Root Cause
 
@@ -88,6 +121,8 @@ _Why: Continual improvement_
 > _Standard text:_ Root cause noted per NC where determined (drives systemic improvements vs point fixes)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -100,6 +135,8 @@ _Why: Realistic operations_
 
 > _Standard text:_ Exception register integration — risk-accepted NCs with expiry date (so 'we accept this' doesn't drift into 'we forgot this')
 
+<<GUIDANCE>>
+
 ### Nc Aging Alerts
 
 <<SHOULD item:A.5.36:nc_aging_alerts>>
@@ -107,9 +144,17 @@ _Why: Operational discipline_
 
 > _Standard text:_ Aged-overdue alerting (notification when target date passes without closure)
 
+<<GUIDANCE>>
+
 ### Nc Cross Review Link
 
 <<SHOULD item:A.5.36:nc_cross_review_link>>
 _Why: Cross-control coherence_
 
 > _Standard text:_ Cross-link to A.5.35 independent-review finding register where the two are kept as one artefact
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

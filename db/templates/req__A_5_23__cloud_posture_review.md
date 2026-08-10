@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Cloud Service Posture Review
 
+<<DOC_CONTROL>>
+
 > A.5.23 expects ongoing monitoring, review and evaluation of cloud service use. The posture review captures the planned-interval check: refreshed CSP attestations, configuration-drift assessment against the shared-responsibility split, geographic-location compliance check, incident review, and resulting action items
 
 <!-- TABLE-COLUMNS leaf:req:A.5.23:cloud_posture_review -->
@@ -24,6 +26,25 @@ table_shape: true
 <!-- column: item:A.5.23:rev_incidents -->
 <!-- column: item:A.5.23:rev_actions -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document your regular review of cloud services, including checks on provider assurances, configuration changes, compliance with location requirements, and any incidents or follow-up actions. It's designed to keep your cloud use aligned with ISO 27001 standards.
+
+## When to use it
+
+Use this template whenever your organization’s cloud service profile meets specific review triggers, and plan to complete it about once a year to ensure ongoing compliance and risk management.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 70 to 105 minutes filling out the required sections from scratch, depending on the number of cloud services and the complexity of your environment.
 
 ## Register
 
@@ -46,12 +67,16 @@ _Why: 27002:5.23g — monitoring_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.5.23:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (typically platform lead + InfoSec lead jointly)
+
+<<GUIDANCE>>
 
 ### Rev Attestation
 
@@ -60,12 +85,16 @@ _Why: 27002:5.23 — CSP assurance_
 
 > _Standard text:_ CSP attestation refresh checked per service (current vs stale)
 
+<<GUIDANCE>>
+
 ### Rev Config Drift
 
 <<MUST item:A.5.23:rev_config_drift>>
 _Why: 27002:5.23d,g_
 
 > _Standard text:_ Configuration-drift assessment against the shared-responsibility split (what the org owns is configured correctly)
+
+<<GUIDANCE>>
 
 ### Rev Geo Compliance
 
@@ -74,12 +103,16 @@ _Why: 27002:5.23 — geo_
 
 > _Standard text:_ Geographic-location compliance check (data has not silently drifted to non-approved regions)
 
+<<GUIDANCE>>
+
 ### Rev Incidents
 
 <<MUST item:A.5.23:rev_incidents>>
 _Why: 27002:5.23f_
 
 > _Standard text:_ Cloud-incidents in the period reviewed (own + CSP-disclosed)
+
+<<GUIDANCE>>
 
 ### Rev Actions
 
@@ -89,6 +122,8 @@ _Why: 27002:5.23g_
 > _Standard text:_ Action items captured per service
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -101,9 +136,17 @@ _Why: Audit defensibility_
 
 > _Standard text:_ External threat-intel input considered (link to A.5.7)
 
+<<GUIDANCE>>
+
 ### Rev Next Date
 
 <<SHOULD item:A.5.23:rev_next_date>>
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

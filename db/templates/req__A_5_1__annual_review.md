@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Information Security Policy Review Record
 
+<<DOC_CONTROL>>
+
 > A.5.1 requires the policy to be reviewed at planned intervals (typically annually) and after significant changes. The review record captures who reviewed it, when, and the outcome (unchanged / amended / retired). Annual cadence (365d) — master InfoSec policy is stable; topic-specific policies they reference may move faster
 
 <!-- TABLE-COLUMNS leaf:req:A.5.1:annual_review -->
@@ -20,6 +22,25 @@ table_shape: true
 <!-- column: item:A.5.1:review_outcome -->
 <!-- column: item:A.5.1:review_reviewer -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of who reviewed your main information security policy, when it was reviewed, and what was decided. It's useful for showing that your policy is regularly checked and up to date.
+
+## When to use it
+
+Use this template whenever you review your information security policy, which should happen about once a year or after any major changes to your organization or its systems.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend around 30 to 45 minutes filling this out from scratch, as you'll need to enter details for each required section and ensure the information is accurate.
 
 ## Register
 
@@ -42,12 +63,16 @@ _Why: 27002:5.1 — reviewed at planned intervals_
 
 > _Standard text:_ Review date within the planned review interval (typically within 12 months of last review)
 
+<<GUIDANCE>>
+
 ### Review Outcome
 
 <<MUST item:A.5.1:review_outcome>>
 _Why: 27002:5.1 — reviewed_
 
 > _Standard text:_ Outcome of the review (no change / amended to vN / retired)
+
+<<GUIDANCE>>
 
 ### Review Reviewer
 
@@ -57,6 +82,8 @@ _Why: Accountability_
 > _Standard text:_ Reviewer identity and role
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -69,9 +96,17 @@ _Why: 27002:5.1 — review on significant change_
 
 > _Standard text:_ List of significant-change triggers that should prompt an ad-hoc review
 
+<<GUIDANCE>>
+
 ### Review Next Date
 
 <<SHOULD item:A.5.1:review_next_date>>
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

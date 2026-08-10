@@ -13,6 +13,8 @@ table_shape: true
 
 # DPO Tasks Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — DPO actually performing each Art.39.1 task, risk-based priorities being honoured, awareness contribution effective (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.39:dpo_tasks_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.39:rev_risk_prioritisation_check -->
 <!-- column: item:Art.39:rev_quality_signals -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you confirm that your Data Protection Officer is actively carrying out all required GDPR Article 39.1 tasks, prioritizing risks, and effectively raising awareness across your organization.
+
+## When to use it
+
+Use this review record once a year, or whenever your organization’s profile changes in a way that triggers a DPO program review under GDPR obligations.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, as each required section takes around 10–15 minutes to fill in.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.39:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (executive sponsor)
+
+<<GUIDANCE>>
 
 ### Rev Task Coverage
 
@@ -58,12 +83,16 @@ _Why: Art.39.1_
 
 > _Standard text:_ Task coverage audit — every Art.39.1 task has corresponding activity-register entries
 
+<<GUIDANCE>>
+
 ### Rev Risk Prioritisation Check
 
 <<MUST item:Art.39:rev_risk_prioritisation_check>>
 _Why: Art.39.2_
 
 > _Standard text:_ Risk prioritisation check — DPO attention skewed toward higher-risk processing
+
+<<GUIDANCE>>
 
 ### Rev Quality Signals
 
@@ -73,6 +102,8 @@ _Why: Effectiveness_
 > _Standard text:_ Quality signals — incident-trend reduction, DPIA-handling improvement, SA-interaction outcomes
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

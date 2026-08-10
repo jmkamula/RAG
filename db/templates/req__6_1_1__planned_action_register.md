@@ -12,6 +12,8 @@ table_shape: true
 
 # ISMS Planned Action Register
 
+<<DOC_CONTROL>>
+
 > The live output of the planning procedure — every action targeting a risk or opportunity with owner, due date, integration target. Distinct from the risk register (6.1.2) and the SoA (6.1.3): this tracks ISMS-level planning actions, not control implementations
 
 <!-- TABLE-COLUMNS leaf:req:6.1.1:planned_action_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:6.1.1:reg_integration_target -->
 <!-- column: item:6.1.1:reg_status -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of every planned action related to risks or opportunities in your information security management system, showing who is responsible, due dates, and how each action fits into your wider program.
+
+## When to use it
+
+Use this register whenever you need to plan, assign, and monitor actions for your ISMS, especially when new risks or opportunities are identified. Update it whenever changes occur or new actions are needed.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes setting up the initial required elements, plus additional time for each action you add as your register grows.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Unique action identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Driver
 
 <<MUST item:6.1.1:reg_driver>>
 _Why: Cross-clause traceability_
 
 > _Standard text:_ Per-row driver (4.1 issue id, 4.2 party requirement id, risk id, opportunity id)
+
+<<GUIDANCE>>
 
 ### Reg Type
 
@@ -58,6 +83,8 @@ _Why: Clause 6.1.1 — risks AND opportunities_
 
 > _Standard text:_ Per-row type (risk-addressing / opportunity-enhancing)
 
+<<GUIDANCE>>
+
 ### Reg Owner
 
 <<MUST item:6.1.1:reg_owner>>
@@ -65,12 +92,16 @@ _Why: Accountability_
 
 > _Standard text:_ Owner per row
 
+<<GUIDANCE>>
+
 ### Reg Integration Target
 
 <<MUST item:6.1.1:reg_integration_target>>
 _Why: Clause 6.1.1 — integrated into ISMS processes_
 
 > _Standard text:_ Integration target per row (which ISMS process consumes this action)
+
+<<GUIDANCE>>
 
 ### Reg Status
 
@@ -80,6 +111,8 @@ _Why: Tracking_
 > _Standard text:_ Status per row (planned / in-progress / complete / deferred)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -91,3 +124,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Clause 6.1.1 — evaluate effectiveness_
 
 > _Standard text:_ Per-row effectiveness evaluation captured on completion
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Logging Program Review
 
+<<DOC_CONTROL>>
+
 > Periodic verification — source-register currency, silent-source detection, retention compliance, integrity-verification spot-checks (freshness=180; threat landscape volatile)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.15:logging_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.8.15:rev_integrity_check -->
 <!-- column: item:A.8.15:rev_findings_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you regularly review your logging program, making sure your log sources are up to date, compliant with retention rules, and checked for integrity and silent failures.
+
+## When to use it
+
+Use this review record about every six months, or twice a year, to keep your logging practices aligned with ISO 27001 requirements and to address changes in your environment or threat landscape.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on the number of log sources and the detail required for each element.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:8.15 — periodic_
 
 > _Standard text:_ Review date within the planned interval (≤180 days)
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.15:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Security Operations + Infrastructure)
+
+<<GUIDANCE>>
 
 ### Rev Silent Sources
 
@@ -59,6 +84,8 @@ _Why: Detection gap closure_
 
 > _Standard text:_ Silent-source detection — sources missing recent events triaged
 
+<<GUIDANCE>>
+
 ### Rev Retention Compliance
 
 <<MUST item:A.8.15:rev_retention_compliance>>
@@ -66,12 +93,16 @@ _Why: 27002:8.15 — stored_
 
 > _Standard text:_ Retention compliance check (no premature deletion; no over-retention of personal data)
 
+<<GUIDANCE>>
+
 ### Rev Integrity Check
 
 <<MUST item:A.8.15:rev_integrity_check>>
 _Why: Forensic defensibility_
 
 > _Standard text:_ Integrity-verification spot-check (hash chain or signature validates against retained logs)
+
+<<GUIDANCE>>
 
 ### Rev Findings Update
 
@@ -81,6 +112,8 @@ _Why: Closes the loop_
 > _Standard text:_ Findings propagated to procedure / source register / scope
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

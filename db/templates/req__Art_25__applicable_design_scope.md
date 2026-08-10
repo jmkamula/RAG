@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable DPbD Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which design activities are in Art.25 scope (new product/system/feature design + significant change to existing). Defines the 'at the time of determining means' moment operationally
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which of your design activities fall under GDPR Article 25, making it easier to identify when data protection by design requirements apply to your projects.
+
+## When to use it
+
+Use this document whenever you are starting a new product, system, or feature design, or making significant changes to existing ones. Review and update it as needed to keep your scope current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to address three required elements in detail.
 
 ## 1. Design activities in scope (new product, new feature, significant change, new processor onboarding)
 
 <<MUST item:Art.25:scope_design_activities>>
 _Why: Art.25.1 — determining means_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Art.25.1 — determining means_
 <<MUST item:Art.25:scope_significant_change>>
 _Why: Art.25.1 — at the time of processing_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Out-of-scope changes (bug fixes, performance tuning, internal refactoring without processing change)
 
 <<MUST item:Art.25:scope_exclusions>>
 _Why: Defensible bounding_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.25:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

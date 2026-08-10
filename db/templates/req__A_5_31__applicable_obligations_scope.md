@@ -11,14 +11,35 @@ should_count: 2
 
 # Applicable Obligations Scope
 
+<<DOC_CONTROL>>
+
 > The upstream that drives the register. Documents the business activity surfaces — jurisdictions, services, customer types, data categories, sectoral classifications — that determine which obligations apply. ISO 27002:2022 § 5.31 expects organisations to know their applicability before listing obligations
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which laws, regulations, and standards apply to your business by mapping out your jurisdictions, services, customer types, data categories, and sector classifications. It ensures you understand your compliance landscape before listing specific obligations.
+
+## When to use it
+
+Use this document whenever you need to identify or update the scope of compliance requirements for your organization. Review and refresh it whenever your business activities, services, or customer base change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, as each required section takes roughly 10 to 15 minutes to fill in thoughtfully.
 
 ## 1. Jurisdictions covered (HQ, places of business, customer locations, data residency, transfer destinations)
 
 <<MUST item:A.5.31:scope_jurisdictions>>
 _Why: 27002:5.31a_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:5.31a_
 <<MUST item:A.5.31:scope_services>>
 _Why: 27002:5.31 — relevant_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Customer types driving contractual obligations (regulated industries, government, B2C consumers)
 
 <<MUST item:A.5.31:scope_customer_types>>
 _Why: 27002:5.31c — contractual_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: 27002:5.31c — contractual_
 <<MUST item:A.5.31:scope_data_categories>>
 _Why: GDPR/sectoral linkage_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Sectoral classification (NIS2 essential/important, DORA financial-entity, critical-infrastructure designation, etc.)
 
 <<MUST item:A.5.31:scope_sectoral_class>>
 _Why: 27002:5.31 — applicability_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -61,6 +90,8 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.5.31:scope_authority_link>>
 _Why: Cross-control coherence_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Trigger list for re-scoping (new geography, new service line, M&A, change in customer mix)
@@ -68,4 +99,10 @@ _Why: Cross-control coherence_
 <<SHOULD item:A.5.31:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

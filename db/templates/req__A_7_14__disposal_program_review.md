@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Disposal Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification of disposal-record completeness, certificate retention, provider performance. Freshness=365
 
 <!-- TABLE-COLUMNS leaf:req:A.7.14:disposal_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.14:rev_certificate_audit -->
 <!-- column: item:A.7.14:rev_register_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your annual disposal program review, making sure all records are complete, certificates are retained, and providers are performing as expected. It’s useful for meeting ISO 27001 requirements and staying audit-ready.
+
+## When to use it
+
+Use this template once a year to review your disposal program, regardless of your environment. It’s designed for regular, annual checks to ensure ongoing compliance and up-to-date documentation.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, as each required section takes 10-15 minutes to fill out. More time may be needed if you have many disposal providers to review.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: 27002:7.14 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.14:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (IT + InfoSec + Legal where regulatory disposal applies)
+
+<<GUIDANCE>>
 
 ### Rev Completeness
 
@@ -58,12 +83,16 @@ _Why: Cross-control coherence_
 
 > _Standard text:_ Completeness check — every retired asset (from A.5.9) has a matching disposal_record
 
+<<GUIDANCE>>
+
 ### Rev Certificate Audit
 
 <<MUST item:A.7.14:rev_certificate_audit>>
 _Why: Auditability_
 
 > _Standard text:_ Certificate audit (sample-based verification that retained certificates match register entries)
+
+<<GUIDANCE>>
 
 ### Rev Register Update
 
@@ -73,6 +102,8 @@ _Why: Closes the loop_
 > _Standard text:_ Changes propagated to the procedure / scope
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -11,6 +11,8 @@ should_count: 1
 
 # Risk Treatment Plan
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
 The **action plan** that turns your risk register into a roadmap.
@@ -22,40 +24,23 @@ implemented controls. Gaps anywhere in that chain are findings.
 
 ## When to use it
 
-You're producing the Risk Treatment Plan required by **ISO/IEC
-27001:2022 Clause 6.1.3**. This template covers the *plan itself*;
+You're producing the Risk Treatment Plan required by **ISO/IEC 27001:2022 Clause 6.1.3**. This template covers the *plan itself*;
 the **Statement of Applicability** (a sibling 6.1.3 leaf, mandatory
 under 6.1.3(c-d)) is a separate template.
 
-## Before you start
+## Prerequisites
 
-- [ ] **6.1.2 Risk Assessment Procedure** + a populated **risk
-      register** with treat-or-accept decisions per risk
-- [ ] **6.1.3 Statement of Applicability** under way in parallel
-      (they're co-produced — each control in the SoA gets a
-      treatment-plan row if "treated")
-- [ ] **Resource commitment** from top management (Clause 5.1) —
-      treatment costs money
+<<PREREQUISITES>>
 
 ## Cross-references
 
-- **6.1.3 Statement of Applicability** (sibling leaf) — every plan
-  row references the controls in the SoA; every implemented A.5/A.6/
-  A.7/A.8 control in the SoA derives from a plan row
-- **9.1 monitoring** — treatment completion is measured here
-- **10.1 improvement actions** — treatment slip / failure feeds the
-  Clause 10.1 register
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
-**4-6 hours** for v1 (after the risk register is populated); **1-2
-hours** for refresh on register updates.
+**4-6 hours** for v1 (after the risk register is populated); **1-2 hours** for refresh on register updates.
 
 ---
-
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
 
 ## 1. Select a risk-treatment option per risk
 
@@ -65,8 +50,7 @@ hours** for refresh on register updates.
 
 _Clause 6.1.3(a) — treatment options selected._
 
-For each risk **flagged for treatment** in the register, name the
-option: **Modify** (apply controls), **Avoid** (stop the activity),
+For each risk **flagged for treatment** in the register, name the option: **Modify** (apply controls), **Avoid** (stop the activity),
 **Share** (transfer to insurer / outsource), or **Retain** (formal
 accept). Most rows are "Modify" — apply controls.
 
@@ -80,6 +64,8 @@ PCI-scoped processor + decommission legacy by Q3). Risk R-007
 
 **✗ Avoid**: Implicit treatment ("we'll deploy controls") with no
 named option.
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -102,6 +88,8 @@ principles for build pipeline), A.8.28 (secure coding) + custom
 'signed-build / SBOM' control listed in SoA as an additional
 control beyond Annex A."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Reference the Statement of Applicability
@@ -120,6 +108,8 @@ leaf. Every treatment-plan row should resolve to a control marked
 (req:6.1.3:statement_of_applicability) — the SoA enumerates all 93
 Annex A controls + any additional controls. Each treatment row here
 references the controls by their SoA identifier."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -144,6 +134,8 @@ score 8 (yellow). Both residuals at-or-below acceptance criteria."
 **✗ Avoid**: Treating "treatment selected" as if it equals "risk
 eliminated."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Identify treatment owners
@@ -163,6 +155,8 @@ accepts residual). Be explicit.
 owner (residual acceptance): VP Engineering. R-018 treatment owner:
 Billing Product Manager (migration). Risk owner: CFO."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Capture risk-owner approval + residual acceptance
@@ -173,14 +167,15 @@ Billing Product Manager (migration). Risk owner: CFO."
 
 _Clause 6.1.3(f) — approval + acceptance of residual._
 
-Each risk owner formally **approves the treatment plan** (says yes to
-the controls) AND **accepts the residual risk** (says yes to what's
+Each risk owner formally **approves the treatment plan** (says yes to the controls) AND **accepts the residual risk** (says yes to what's
 left). Both signatures, both dated.
 
 **✓ Good**: "Per-risk approval record: each row in the plan has
 columns 'Treatment Approved by / on' and 'Residual Accepted by /
 on'. Owners sign via the ISMS workflow tool; signatures retained as
 the audit artefact."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -200,4 +195,10 @@ Each treatment row gets a target date (when the control will be
 "implemented" in the SoA). Slippage is visible in 9.1 metrics +
 escalates to 10.1.
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

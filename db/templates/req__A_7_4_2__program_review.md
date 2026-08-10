@@ -13,6 +13,8 @@ table_shape: true
 
 # Processing Limitation Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — processing operations inventoried, necessity rationales defensible, access limits enforced (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.7.4.2:program_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.7.4.2:rev_necessity_audit -->
 <!-- column: item:A.7.4.2:rev_access_audit -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document and review your data processing activities, ensuring you can justify why each type of data is collected and that access is properly limited. It's designed to support privacy compliance under ISO 27701.
+
+## When to use it
+
+Use this template if your organization needs to regularly check that all data processing operations are necessary and access is restricted, especially if your profile matches certain privacy triggers. Plan to complete this review about once a year.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40–60 minutes filling out the required sections from scratch, with additional time if you have many processing activities to list in the register.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.4.2:rev_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + Engineering)
 
+<<GUIDANCE>>
+
 ### Rev Necessity Audit
 
 <<MUST item:A.7.4.2:rev_necessity_audit>>
 _Why: §7.4.2_
 
 > _Standard text:_ Necessity audit — sampled operations reviewed against current purpose register
+
+<<GUIDANCE>>
 
 ### Rev Access Audit
 
@@ -65,6 +92,8 @@ _Why: §7.4.2 — who can access_
 > _Standard text:_ Access-limit audit — sampled access groups reviewed against operation registry
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

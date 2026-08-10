@@ -12,6 +12,8 @@ table_shape: true
 
 # Per-Dataset Masking Register
 
+<<DOC_CONTROL>>
+
 > Per-dataset application of masking — which production datasets feed which non-production environments via what technique, when last refreshed
 
 <!-- TABLE-COLUMNS leaf:req:A.8.11:masking_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.8.11:reg_pii_classes -->
 <!-- column: item:A.8.11:reg_last_refreshed -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you track which production datasets are shared with non-production environments, how they are masked, and when they were last updated. It's useful for maintaining clear records and supporting compliance with data protection standards.
+
+## When to use it
+
+Use this register whenever your environment handles production data that is copied or shared with non-production systems. Update it as needed whenever datasets, masking techniques, or refresh dates change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per dataset entry, with additional time for each required detail. Completing the register from scratch may take 1-2 hours depending on the number of datasets you manage.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: Cross-control coherence_
 
 > _Standard text:_ Per-row source dataset identifier (from A.5.9 + A.5.34 PII inventory)
 
+<<GUIDANCE>>
+
 ### Reg Target Env
 
 <<MUST item:A.8.11:reg_target_env>>
 _Why: Identification_
 
 > _Standard text:_ Per-row target non-production environment
+
+<<GUIDANCE>>
 
 ### Reg Technique
 
@@ -57,12 +82,16 @@ _Why: 27002:8.11 — applicable techniques_
 
 > _Standard text:_ Per-row masking technique applied (from procedure's approved-techniques list)
 
+<<GUIDANCE>>
+
 ### Reg Pii Classes
 
 <<MUST item:A.8.11:reg_pii_classes>>
 _Why: GDPR Art.32 alignment_
 
 > _Standard text:_ Per-row PII classes present (drives technique selection — strong pseudonymisation for special-category PII)
+
+<<GUIDANCE>>
 
 ### Reg Last Refreshed
 
@@ -72,6 +101,8 @@ _Why: Drift detection_
 > _Standard text:_ Per-row last refresh timestamp (drives stale-mask detection)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -83,3 +114,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Audit defensibility_
 
 > _Standard text:_ Per-row verification-sample link (re-identification residual-risk sample retained)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

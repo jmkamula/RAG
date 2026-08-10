@@ -12,6 +12,8 @@ table_shape: true
 
 # Compliance Review Schedule
 
+<<DOC_CONTROL>>
+
 > A.5.36 expects regular review — without a schedule, 'regular' becomes 'when something goes wrong'. The schedule register is the calendar: every in-scope policy/rule/standard, the planned cadence per item (proportional to risk and change rate), the last review date and the next review date
 
 <!-- TABLE-COLUMNS leaf:req:A.5.36:compliance_review_schedule -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.5.36:sch_next_review -->
 <!-- column: item:A.5.36:sch_owner -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you organize and track the review schedule for all your key policies, rules, and standards. It ensures you have a clear calendar for compliance reviews, tailored to your organization's needs.
+
+## When to use it
+
+Use this whenever you need to set up or update your compliance review calendar, especially if you want to make sure reviews happen regularly instead of only after issues arise. Update the register as needed to keep it current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element, plus additional time for each policy or standard you include. For a typical organization, initial setup may take 1-2 hours.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: 27002:5.36 — InfoSec policy + topic-specific policies + rules + standard
 
 > _Standard text:_ Full catalogue of in-scope items enumerated (InfoSec policy + every topic-specific policy + rules + applicable standards — completeness is the integrity check)
 
+<<GUIDANCE>>
+
 ### Sch Cadence
 
 <<MUST item:A.5.36:sch_cadence>>
 _Why: 27002:5.36 — regularly_
 
 > _Standard text:_ Cadence per item (annual baseline; tighter for high-risk or fast-changing items — e.g. acceptable use, access control)
+
+<<GUIDANCE>>
 
 ### Sch Method Planned
 
@@ -58,6 +83,8 @@ _Why: 27002:5.36 — reviewed_
 
 > _Standard text:_ Planned method per item (which items use sampling vs audit vs automated check)
 
+<<GUIDANCE>>
+
 ### Sch Last Review
 
 <<MUST item:A.5.36:sch_last_review>>
@@ -65,12 +92,16 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Last review date per item
 
+<<GUIDANCE>>
+
 ### Sch Next Review
 
 <<MUST item:A.5.36:sch_next_review>>
 _Why: Planning_
 
 > _Standard text:_ Next review date per item
+
+<<GUIDANCE>>
 
 ### Sch Owner
 
@@ -80,6 +111,8 @@ _Why: Accountability_
 > _Standard text:_ Named owner per item (reviewer accountable for the next cycle)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,9 +125,17 @@ _Why: Change-driven review_
 
 > _Standard text:_ Ad-hoc change triggers documented (policy edit, regulator action, incident affecting a policy area) — fires reviews outside the planned cadence
 
+<<GUIDANCE>>
+
 ### Sch Delta
 
 <<SHOULD item:A.5.36:sch_delta>>
 _Why: Operational discipline_
 
 > _Standard text:_ Scheduled-vs-completed delta tracked (so missed reviews surface)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

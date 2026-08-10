@@ -13,6 +13,8 @@ table_shape: true
 
 # Processing Under Authority Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — every person touching personal data has a current authorisation row, training is current, processing stays within documented instructions (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.29:processing_under_authority_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.29:rev_training_currency -->
 <!-- column: item:Art.29:rev_instruction_drift -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of who is authorised to handle personal data, confirms their training is up to date, and ensures everyone follows the documented instructions for data processing.
+
+## When to use it
+
+Use this template when your team or process matches certain criteria that require an annual review—typically once every year—to confirm ongoing compliance with data protection rules.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes completing this from scratch, depending on how many people are involved and how many rows you need to fill in.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.29:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + HR + ops lead)
+
+<<GUIDANCE>>
 
 ### Rev Authorisation Completeness
 
@@ -58,12 +83,16 @@ _Why: Art.29 — under authority_
 
 > _Standard text:_ Authorisation completeness — every person with access has a register row
 
+<<GUIDANCE>>
+
 ### Rev Training Currency
 
 <<MUST item:Art.29:rev_training_currency>>
 _Why: Cross-control_
 
 > _Standard text:_ Training currency — A.6.3 / 7.3 training current for every authorised person
+
+<<GUIDANCE>>
 
 ### Rev Instruction Drift
 
@@ -73,6 +102,8 @@ _Why: Art.29 — only on documented instructions_
 > _Standard text:_ Instruction-drift sweep — sample processing activities to verify they stay within documented controller instructions
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # Infringing Instruction Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — review triggers functional, notifications issued when required, escalation records intact (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:B.8.2.4:program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:B.8.2.4:rev_notification_audit -->
 <!-- column: item:B.8.2.4:rev_legislation_currency -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of how your organization reviews and manages instructions that could violate privacy requirements, ensuring all notifications and escalations are properly documented for ISO 27701 compliance.
+
+## When to use it
+
+Use this template whenever your organization’s activities match certain privacy-related triggers, and make sure to complete it about once a year to stay current with compliance requirements.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on the number of review records you need to enter.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:B.8.2.4:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + Legal)
+
+<<GUIDANCE>>
 
 ### Rev Trigger Health
 
@@ -58,12 +83,16 @@ _Why: Drift detection_
 
 > _Standard text:_ Trigger health — sample of high-risk instruction categories reviewed for missed infringement flags
 
+<<GUIDANCE>>
+
 ### Rev Notification Audit
 
 <<MUST item:B.8.2.4:rev_notification_audit>>
 _Why: §8.2.4 — inform the customer_
 
 > _Standard text:_ Notification audit — sampled notifications reviewed for accuracy + timeliness
+
+<<GUIDANCE>>
 
 ### Rev Legislation Currency
 
@@ -73,6 +102,8 @@ _Why: Currency_
 > _Standard text:_ Legislation currency — cited legislation updated for regulatory changes
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

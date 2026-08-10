@@ -12,6 +12,8 @@ table_shape: true
 
 # Clear Desk / Clear Screen Audit Register
 
+<<DOC_CONTROL>>
+
 > The catalogue of spot-check audits with findings. Each audit row: date, scope, findings, sanctions applied
 
 <!-- TABLE-COLUMNS leaf:req:A.7.7:cd_cs_audit_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.7.7:reg_findings -->
 <!-- column: item:A.7.7:reg_remediation -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of spot-check audits for clear desk and clear screen practices, including details like dates, scope, findings, and any actions taken. It's useful for tracking compliance and identifying areas for improvement.
+
+## When to use it
+
+Use this register whenever you conduct spot-check audits in your environment, and update it as needed whenever new audits are performed or findings arise.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element for each audit entry, so initial setup may take around an hour, with ongoing updates taking 10-15 minutes per new audit row.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Per-audit unique identifier
 
+<<GUIDANCE>>
+
 ### Reg Date
 
 <<MUST item:A.7.7:reg_date>>
 _Why: Operational discipline_
 
 > _Standard text:_ Per-audit date
+
+<<GUIDANCE>>
 
 ### Reg Scope
 
@@ -57,12 +82,16 @@ _Why: 27002:7.7 — appropriately enforced_
 
 > _Standard text:_ Per-audit scope (which floors / areas covered)
 
+<<GUIDANCE>>
+
 ### Reg Findings
 
 <<MUST item:A.7.7:reg_findings>>
 _Why: Operational discipline_
 
 > _Standard text:_ Per-audit findings (count of violations, types observed)
+
+<<GUIDANCE>>
 
 ### Reg Remediation
 
@@ -72,6 +101,8 @@ _Why: Closes the loop_
 > _Standard text:_ Per-audit remediation log (awareness email sent, repeat-violator escalation)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -83,3 +114,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Continual improvement_
 
 > _Standard text:_ Per-audit trend analysis (vs previous audit — improvement / worsening / steady)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

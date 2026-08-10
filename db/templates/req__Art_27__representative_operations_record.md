@@ -13,6 +13,8 @@ table_shape: true
 
 # Representative Operations Record
 
+<<DOC_CONTROL>>
+
 > Per-interaction record of how the representative actually operates — handled queries from SAs and subjects, escalated to non-EU principal. Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.27:representative_operations_record -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.27:reg_escalation -->
 <!-- column: item:Art.27:reg_resolution_date -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of how your representative handles queries and escalations, making it easier to demonstrate compliance with GDPR requirements.
+
+## When to use it
+
+Use this template if your organization needs to document representative activities under GDPR Article 27, especially when your profile involves handling queries from supervisory authorities or data subjects. Update it about once a year.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours filling this out from scratch, depending on the number of required details and the amount of activity to record.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit_
 
 > _Standard text:_ Per-row interaction id
 
+<<GUIDANCE>>
+
 ### Reg Originator
 
 <<MUST item:Art.27:reg_originator>>
 _Why: Art.27.4_
 
 > _Standard text:_ Per-row originator (data subject / SA / other)
+
+<<GUIDANCE>>
 
 ### Reg Topic
 
@@ -58,12 +83,16 @@ _Why: Art.27.4_
 
 > _Standard text:_ Per-row topic (rights request routing, SA inquiry, breach communication)
 
+<<GUIDANCE>>
+
 ### Reg Escalation
 
 <<MUST item:Art.27:reg_escalation>>
 _Why: Defensibility_
 
 > _Standard text:_ Per-row escalation to non-EU principal documented
+
+<<GUIDANCE>>
 
 ### Reg Resolution Date
 
@@ -73,6 +102,8 @@ _Why: SLA tracking_
 > _Standard text:_ Per-row resolution date
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Art.12 cross-link_
 
 > _Standard text:_ Per-row SLA-met flag (response within Art.12.3 cascade)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

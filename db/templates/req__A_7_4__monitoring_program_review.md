@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Monitoring Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that monitoring is effective (alarms responded to within SLA, anomalies investigated, footage retained correctly). Annual cadence (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.7.4:monitoring_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.4:rev_coverage_check -->
 <!-- column: item:A.7.4:rev_register_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document your annual review of monitoring systems, ensuring alarms are handled promptly, anomalies are investigated, and footage is stored correctly. It's designed to support compliance with ISO 27001 requirements.
+
+## When to use it
+
+Use this template once a year to record your review of monitoring program effectiveness. It applies to any environment where monitoring controls are in place and should be refreshed annually.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, as each required section takes around 10-15 minutes to fill out.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: 27002:7.4 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.4:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Facilities + SOC + InfoSec)
+
+<<GUIDANCE>>
 
 ### Rev Response Sla
 
@@ -58,12 +83,16 @@ _Why: 27002:7.4 — alert response_
 
 > _Standard text:_ Response-SLA analysis (alarm-to-on-site arrival times measured against SLA)
 
+<<GUIDANCE>>
+
 ### Rev Coverage Check
 
 <<MUST item:A.7.4:rev_coverage_check>>
 _Why: Cross-leaf coherence_
 
 > _Standard text:_ Coverage check — blind spots remediated? new areas brought into monitoring scope?
+
+<<GUIDANCE>>
 
 ### Rev Register Update
 
@@ -73,6 +102,8 @@ _Why: Closes the loop_
 > _Standard text:_ Changes propagated to the procedure / scope
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -12,6 +12,8 @@ table_shape: true
 
 # Per-Site Utility Register
 
+<<DOC_CONTROL>>
+
 > The catalogue of critical utilities per site — feed type, redundancy in place, last test, provider, owner
 
 <!-- TABLE-COLUMNS leaf:req:A.7.11:utility_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.7.11:reg_last_test -->
 <!-- column: item:A.7.11:reg_next_test -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of all critical utilities at each site, including details like provider, owner, and redundancy. It's useful for managing risks and meeting compliance requirements.
+
+## When to use it
+
+Use this register whenever you need to document or review the utilities supporting your environment, and update it whenever there are changes or as often as necessary to keep information current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10–15 minutes per utility per site to gather and enter the required details, so the total time will depend on the number of sites and utilities you need to document.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: 27002:7.11 — supporting utilities_
 
 > _Standard text:_ Per-row site + utility pair
 
+<<GUIDANCE>>
+
 ### Reg Redundancy In Place
 
 <<MUST item:A.7.11:reg_redundancy_in_place>>
 _Why: 27002:7.11 — protected_
 
 > _Standard text:_ Per-row redundancy in place (matches the policy's required redundancy)
+
+<<GUIDANCE>>
 
 ### Reg Provider
 
@@ -57,12 +82,16 @@ _Why: 27002:7.11 — maintenance_
 
 > _Standard text:_ Per-row provider with SLA reference
 
+<<GUIDANCE>>
+
 ### Reg Last Test
 
 <<MUST item:A.7.11:reg_last_test>>
 _Why: Continuity validation_
 
 > _Standard text:_ Per-row last test date and outcome
+
+<<GUIDANCE>>
 
 ### Reg Next Test
 
@@ -72,6 +101,8 @@ _Why: Planning_
 > _Standard text:_ Per-row next-test date scheduled
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -83,3 +114,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Realism check_
 
 > _Standard text:_ Per-row autonomous-runtime stat (UPS minutes, generator fuel days)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -12,6 +12,8 @@ table_shape: true
 
 # Development Project Register
 
+<<DOC_CONTROL>>
+
 > Per-project SDLC compliance — project id, lifecycle stage, security-checkpoint status, owner
 
 <!-- TABLE-COLUMNS leaf:req:A.8.25:project_register -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.8.25:reg_owner -->
 <!-- column: item:A.8.25:reg_data_classification -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your development projects, including their current stage, security status, and project owner, making it easier to stay compliant with ISO 27001 requirements.
+
+## When to use it
+
+Use this register whenever you start a new development project that falls under compliance requirements, and update it as needed whenever project details or statuses change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required element for each project entry, so setting up a new project in the register will typically take around an hour.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: Cross-control coherence_
 
 > _Standard text:_ Per-project unique identifier (cross-link to A.5.8 project register)
 
+<<GUIDANCE>>
+
 ### Reg Lifecycle Stage
 
 <<MUST item:A.8.25:reg_lifecycle_stage>>
 _Why: 27002:8.25 — secure development_
 
 > _Standard text:_ Per-project current lifecycle stage (initiation / design / build / test / release / operate)
+
+<<GUIDANCE>>
 
 ### Reg Checkpoint Status
 
@@ -57,12 +82,16 @@ _Why: 27002:8.25 — applied_
 
 > _Standard text:_ Per-project security-checkpoint status (which gates passed)
 
+<<GUIDANCE>>
+
 ### Reg Owner
 
 <<MUST item:A.8.25:reg_owner>>
 _Why: Accountability_
 
 > _Standard text:_ Per-project named owner (technical lead with security partner)
+
+<<GUIDANCE>>
 
 ### Reg Data Classification
 
@@ -72,6 +101,8 @@ _Why: GDPR alignment_
 > _Standard text:_ Per-project data classification footprint (drives PII-handling rules)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -83,3 +114,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Defensibility_
 
 > _Standard text:_ Per-project exception log (waived gates with rationale + compensating controls)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

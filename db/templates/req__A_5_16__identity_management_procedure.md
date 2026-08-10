@@ -11,14 +11,35 @@ should_count: 3
 
 # Identity Lifecycle Management Procedure
 
+<<DOC_CONTROL>>
+
 > A.5.16 requires the full lifecycle of identities to be managed — creation, modification, suspension, termination — across human, contractor, service, shared and non-human account types. The procedure documents each lifecycle step, timeliness expectations, ownership chain (HR triggers, IT executes, manager approves), and the connection to authentication-information lifecycle in A.5.17. The identity register, periodic program review and per-identity revocation record are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you document how you manage the full lifecycle of all types of user and system identities, including creation, changes, suspension, and removal, with clear roles and timelines for each step.
+
+## When to use it
+
+Use this whenever you need to describe or update your process for managing identities in your environment, and review or refresh it whenever your procedures or systems change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours drafting this from scratch, depending on the complexity of your environment and the number of identity types you manage.
 
 ## 1. Identity creation steps (verification of person, naming convention, initial entitlements — least-privilege at issuance)
 
 <<MUST item:A.5.16:creation>>
 _Why: 27002:5.16 — lifecycle creation_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:5.16 — lifecycle creation_
 <<MUST item:A.5.16:modification>>
 _Why: 27002:5.16 — lifecycle modification_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Suspension steps for leave of absence, risk events (under investigation), or extended inactivity (auto-suspend at N days idle)
 
 <<MUST item:A.5.16:suspension>>
 _Why: 27002:5.16 — lifecycle suspension_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -41,12 +66,16 @@ _Why: 27002:5.16 — lifecycle suspension_
 <<MUST item:A.5.16:termination>>
 _Why: 27002:5.16 — lifecycle termination_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Unique identity per person (no shared user accounts for individuals; named accountability)
 
 <<MUST item:A.5.16:unique_identity>>
 _Why: 27002:5.16 — managed_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -55,6 +84,8 @@ _Why: 27002:5.16 — managed_
 <<MUST item:A.5.16:ownership>>
 _Why: Accountability + cross-link to [[A.5.11]]_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Service / shared / non-human account governance (named human owner, expiry, scope, monitoring) — promoted from SHOULD because this is the weakest spot in most identity hygiene programs
@@ -62,12 +93,16 @@ _Why: Accountability + cross-link to [[A.5.11]]_
 <<MUST item:A.5.16:service_accounts>>
 _Why: 27002:5.16 — managed (all identity types)_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 8. Cross-reference to A.5.17 authentication-information lifecycle (credential issuance and revocation are paired with identity events)
 
 <<MUST item:A.5.16:authn_link>>
 _Why: 27002:5.16 + cross-link to [[A.5.17]]_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -82,12 +117,16 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.5.16:attestation>>
 _Why: Drift prevention + cross-link to [[A.5.18]]_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Contractor-specific path documented (fixed expiry, automatic disable; no manual extension without re-approval)
 
 <<SHOULD item:A.5.16:contractor_path>>
 _Why: High-risk workforce segment_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -96,4 +135,10 @@ _Why: High-risk workforce segment_
 <<SHOULD item:A.5.16:emergency_disable>>
 _Why: Real-world coverage_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

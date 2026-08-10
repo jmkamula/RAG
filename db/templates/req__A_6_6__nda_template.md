@@ -12,14 +12,35 @@ should_count: 3
 
 # Confidentiality / Non-Disclosure Agreement Template
 
+<<DOC_CONTROL>>
+
 > A.6.6 requires confidentiality or non-disclosure agreements appropriate to the organisation's information protection needs, regularly reviewed, and signed by personnel and relevant interested parties. The template carries the clauses (parties, info classes, duration, return/destruction, signature, last-reviewed date). The signature register, applicable-parties scope and periodic review are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template provides a ready-to-use confidentiality or non-disclosure agreement, ensuring your organization’s sensitive information is protected and that all relevant parties understand their responsibilities regarding information security.
+
+## When to use it
+
+Use this template whenever you need to formalize confidentiality commitments with employees, contractors, or partners. Review and update it about once a year to keep it current with your organization’s needs.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1.5 to 2 hours completing this template from scratch, depending on the number of parties involved and the detail required for each section.
 
 ## 1. Parties covered (employees, contractors, suppliers, visitors with access to sensitive info, M&A counterparties)
 
 <<MUST item:A.6.6:parties_covered>>
 _Why: 27002:6.6 — personnel + interested parties_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -28,12 +49,16 @@ _Why: 27002:6.6 — personnel + interested parties_
 <<MUST item:A.6.6:info_classes>>
 _Why: 27002:6.6 — protection of information_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Duration of confidentiality obligation (indefinite for trade secrets; time-limited for non-trade-secret confidential info — typically 3-5 years post-termination)
 
 <<MUST item:A.6.6:duration>>
 _Why: 27002:6.6 — needs for protection_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -42,12 +67,16 @@ _Why: 27002:6.6 — needs for protection_
 <<MUST item:A.6.6:return_destruction>>
 _Why: 27002:6.6 — protection_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 5. Signature requirement enforced before access granted (no access without signed NDA — gates A.5.18 access grant for non-employees)
 
 <<MUST item:A.6.6:signature_requirement>>
 _Why: 27002:6.6 — signed_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -56,12 +85,16 @@ _Why: 27002:6.6 — signed_
 <<MUST item:A.6.6:last_reviewed>>
 _Why: 27002:6.6 — regularly reviewed_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 7. Named owner of the template (Legal counsel with InfoSec partner)
 
 <<MUST item:A.6.6:owner>>
 _Why: Accountability_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -76,12 +109,16 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.6.6:jurisdiction_remedies>>
 _Why: Enforceability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### 2. Tiered NDA variants (employee NDA — lighter; contractor — full; supplier — bilateral; M&A counterparty — heavy with extended duration)
 
 <<SHOULD item:A.6.6:variant_tiers>>
 _Why: Proportionality_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -90,4 +127,10 @@ _Why: Proportionality_
 <<SHOULD item:A.6.6:a6_2_link>>
 _Why: Cross-control coherence_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

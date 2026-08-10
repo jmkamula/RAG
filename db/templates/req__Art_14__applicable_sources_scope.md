@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Third-Party Sources Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which third-party data sources the org consumes. Documents what counts as 'not from the subject' (public records, affiliates, brokers, analytics enrichment) and where notice can be delayed under Art.14.5 exceptions
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly identify and document all third-party data sources your organization relies on, including public records, affiliates, brokers, and analytics providers, and explains when you can delay notifying individuals under GDPR Article 14.5.
+
+## When to use it
+
+Use this whenever your organization collects data from sources other than the individual, and update it whenever your third-party data sources change or new exceptions to notification apply.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to describe at least three required elements about your third-party sources and any relevant exceptions.
 
 ## 1. Source types enumerated (data brokers, public records, affiliates, enrichment vendors, customer lists)
 
 <<MUST item:Art.14:scope_source_types>>
 _Why: Coverage proof_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Coverage proof_
 <<MUST item:Art.14:scope_exception_cases>>
 _Why: Art.14.5_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Out-of-scope sources (e.g. publicly-aggregated stats with no personal data)
 
 <<MUST item:Art.14:scope_exclusions>>
 _Why: Defensibility_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.14:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

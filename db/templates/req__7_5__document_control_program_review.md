@@ -13,6 +13,8 @@ table_shape: true
 
 # Document Control Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that the policy is being applied, the register is current, stale documents are surfaced and refreshed (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:7.5:document_control_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:7.5:rev_stale_sweep -->
 <!-- column: item:7.5:rev_coverage -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep your document control program up to date by reviewing policies, surfacing outdated documents, and ensuring your register is current. It's designed for organizations following ISO 27001 requirements.
+
+## When to use it
+
+Use this template once a year to review your document control program and confirm that all documents are current and policies are being followed. It applies to all environments, regardless of changes.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this review from scratch, depending on the number of documents in your register and the detail required for each element.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Clause 7.5 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:7.5:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (ISMS Manager + document-control lead)
+
+<<GUIDANCE>>
 
 ### Rev Currency
 
@@ -58,12 +83,16 @@ _Why: Cross-leaf coherence_
 
 > _Standard text:_ Register currency check — every row reviewed; next-review dates met or rescheduled
 
+<<GUIDANCE>>
+
 ### Rev Stale Sweep
 
 <<MUST item:7.5:rev_stale_sweep>>
 _Why: Drift detection_
 
 > _Standard text:_ Stale-document sweep — overdue review dates surfaced; refresh or retire decisions made
+
+<<GUIDANCE>>
 
 ### Rev Coverage
 
@@ -73,6 +102,8 @@ _Why: Cross-leaf coherence_
 > _Standard text:_ Coverage check — every in-scope document class has at least one register entry
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

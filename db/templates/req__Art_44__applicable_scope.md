@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Transfer Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — what counts as a 'transfer' (EDPB Guidelines 05/2021 three cumulative criteria: controller/processor / personal data made available / to a recipient in a third country), boundary with intra-group / EU/EEA flows
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define what counts as a personal data transfer under GDPR, including when data moves outside the EU/EEA or within your group. It clarifies boundaries and ensures you meet legal requirements.
+
+## When to use it
+
+Use this whenever you handle personal data that might be transferred outside the EU/EEA, or to clarify the scope of transfers in your environment. Update it whenever your data flows or business structure change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this template from scratch, as you’ll need to address three required elements and review your data transfer practices.
 
 ## 1. Operational definition of 'transfer' per EDPB 05/2021 three cumulative criteria
 
 <<MUST item:Art.44:scope_transfer_definition>>
 _Why: EDPB 05/2021_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: EDPB 05/2021_
 <<MUST item:Art.44:scope_eu_eea>>
 _Why: Art.3 + Chapter V applicability_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Excluded flows (purely-internal within EU/EEA; transit-only; non-personal data)
 
 <<MUST item:Art.44:scope_excluded_flows>>
 _Why: Defensibility_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.44:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

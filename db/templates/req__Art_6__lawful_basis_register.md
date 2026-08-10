@@ -13,6 +13,8 @@ table_shape: true
 
 # Lawful Basis Register (Art.6)
 
+<<DOC_CONTROL>>
+
 > Art.6 obliges the controller to be able to point to a specific lawful basis per processing activity. The register (or RoPA extension) listing each activity with the chosen basis, justification, and supporting records is the canonical Art.6 artefact. Sibling direct-evidence leaves: determination procedure, applicable activities scope, program review
 
 <!-- TABLE-COLUMNS leaf:req:Art.6:lawful_basis_register -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:Art.6:lia_link -->
 <!-- column: item:Art.6:owner -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you clearly document the legal reasons for processing personal data in your organization, making it easy to show compliance with GDPR Article 6 requirements.
+
+## When to use it
+
+Use this register whenever you process personal data, and plan to review and update it about once a year to ensure your records stay accurate and up to date.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes for each processing activity you need to document, with total time depending on how many activities your organization carries out.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: Art.6.1 — basis applies per activity_
 
 > _Standard text:_ Processing activities enumerated (links to Art.30 RoPA)
 
+<<GUIDANCE>>
+
 ### Basis Per Activity
 
 <<MUST item:Art.6:basis_per_activity>>
 _Why: Art.6.1 — at least one of (a)-(f) applies_
 
 > _Standard text:_ Chosen lawful basis named per activity (one of Art.6.1.a-f)
+
+<<GUIDANCE>>
 
 ### Justification
 
@@ -59,6 +84,8 @@ _Why: Art.5.2 accountability_
 
 > _Standard text:_ Justification recorded for the chosen basis per activity
 
+<<GUIDANCE>>
+
 ### Consent Link
 
 <<MUST item:Art.6:consent_link>>
@@ -66,12 +93,16 @@ _Why: Art.7 — conditions for consent_
 
 > _Standard text:_ For consent-based activities, link to Art.7 consent capture record
 
+<<GUIDANCE>>
+
 ### Lia Link
 
 <<MUST item:Art.6:lia_link>>
 _Why: Art.6.1.f — overriding interests test_
 
 > _Standard text:_ For legitimate-interests activities, link to LIA (necessity + balance test)
+
+<<GUIDANCE>>
 
 ### Owner
 
@@ -81,6 +112,8 @@ _Why: Accountability_
 > _Standard text:_ Named owner of the register (typically DPO or Privacy Lead)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -93,9 +126,17 @@ _Why: Accountability — kept current_
 
 > _Standard text:_ Register reviewed within freshness window when activities or bases change
 
+<<GUIDANCE>>
+
 ### Basis Change Log
 
 <<SHOULD item:Art.6:basis_change_log>>
 _Why: Art.5.2 + Art.13 alignment_
 
 > _Standard text:_ Log of lawful basis changes per activity (drives Art.13 notice amendments)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

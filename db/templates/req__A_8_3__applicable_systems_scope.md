@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Systems Scope
 
+<<DOC_CONTROL>>
+
 > Upstream that drives the register and procedure. Documents which systems fall under A.8.3 governance and how classification tiers map to enforcement strictness
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly identify which systems in your environment are covered by A.8.3 governance and explains how different classification levels affect the rules you need to follow.
+
+## When to use it
+
+Use this document whenever you need to define or update the list of systems under A.8.3, as it should always reflect your current environment and be refreshed whenever changes occur.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, depending on how many systems you need to review and classify.
 
 ## 1. Systems enumerated (drawn from A.5.9 asset register, filtered to access-relevant assets)
 
 <<MUST item:A.8.3:scope_systems>>
 _Why: Cross-control coherence_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Cross-control coherence_
 <<MUST item:A.8.3:scope_tier_map>>
 _Why: 27002:8.3 — appropriate_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Exclusions stated (vendor-managed systems delegated via A.5.19; public-content systems with no restriction)
 
 <<MUST item:A.8.3:scope_exclusions>>
 _Why: Boundary clarity_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.3:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # Management Review Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that reviews happened on cadence, all required inputs were considered, decisions are being tracked to closure (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:9.3:management_review_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:9.3:rev_inputs_completeness -->
 <!-- column: item:9.3:rev_action_closure -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of your annual management reviews, making sure all necessary topics are covered and decisions are tracked until they’re completed.
+
+## When to use it
+
+Use this template every year to document your management review process, ensuring you meet ISO 27001 requirements and maintain a consistent review schedule.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on how many decisions and review topics you need to document.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Clause 9.3 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:9.3:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (ISMS Manager)
+
+<<GUIDANCE>>
 
 ### Rev Cadence Met
 
@@ -58,12 +83,16 @@ _Why: Clause 9.3.1_
 
 > _Standard text:_ Cadence check — every planned review happened (or was rescheduled with rationale)
 
+<<GUIDANCE>>
+
 ### Rev Inputs Completeness
 
 <<MUST item:9.3:rev_inputs_completeness>>
 _Why: Clause 9.3.2_
 
 > _Standard text:_ Inputs-completeness check — every 9.3.2 a-g input was present in each review's minutes
+
+<<GUIDANCE>>
 
 ### Rev Action Closure
 
@@ -73,6 +102,8 @@ _Why: Clause 9.3.3_
 > _Standard text:_ Action-closure check — decisions from prior reviews tracked to 10.1/10.2 closure
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

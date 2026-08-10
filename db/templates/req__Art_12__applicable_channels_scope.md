@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Rights Channels Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which channels accept rights requests (rights portal, email, postal, in-person), how they route into the procedure
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly outline which channels your organization uses to accept rights requests, such as email, web forms, or in-person, and explains how these requests are routed internally.
+
+## When to use it
+
+Use this whenever you need to document or update the ways people can submit rights requests to your organization, and refresh it whenever your channels or procedures change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to describe three required elements in detail.
 
 ## 1. Channels enumerated (rights portal, dedicated email, postal address, in-product flow, phone)
 
 <<MUST item:Art.12:scope_channels>>
 _Why: Art.12.2 — facilitate_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Art.12.2 — facilitate_
 <<MUST item:Art.12:scope_routing>>
 _Why: Operational coherence_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Accessibility provisions (disability, language)
 
 <<MUST item:Art.12:scope_accessibility>>
 _Why: Art.12.1 — accessible_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.12:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

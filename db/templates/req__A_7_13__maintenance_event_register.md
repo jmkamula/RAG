@@ -12,6 +12,8 @@ table_shape: true
 
 # Maintenance Event Register
 
+<<DOC_CONTROL>>
+
 > The catalogue of maintenance events — equipment id, date, provider, supervision, outcome, post-verification
 
 <!-- TABLE-COLUMNS leaf:req:A.7.13:maintenance_event_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.13:reg_supervision_outcome -->
 <!-- column: item:A.7.13:reg_post_verify -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of all maintenance activities for your equipment, including key details like dates, providers, and outcomes. It’s useful for tracking compliance and ensuring maintenance is properly documented.
+
+## When to use it
+
+Use this register whenever maintenance occurs in your environment, and update it as needed to reflect new events or changes. It’s designed to be kept current at all times.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes setting up the initial register, plus 10 to 15 minutes for each new maintenance event you add.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Per-event unique identifier
 
+<<GUIDANCE>>
+
 ### Reg Equipment
 
 <<MUST item:A.7.13:reg_equipment>>
 _Why: Cross-control coherence_
 
 > _Standard text:_ Per-event equipment (cross-link to A.5.9 asset register)
+
+<<GUIDANCE>>
 
 ### Reg Date
 
@@ -58,6 +83,8 @@ _Why: Operational discipline_
 
 > _Standard text:_ Per-event date
 
+<<GUIDANCE>>
+
 ### Reg Provider
 
 <<MUST item:A.7.13:reg_provider>>
@@ -65,12 +92,16 @@ _Why: 27002:7.13 — authorised_
 
 > _Standard text:_ Per-event provider (from authorised list)
 
+<<GUIDANCE>>
+
 ### Reg Supervision Outcome
 
 <<MUST item:A.7.13:reg_supervision_outcome>>
 _Why: 27002:7.13 — confidentiality_
 
 > _Standard text:_ Per-event supervision outcome (in-house supervised / unsupervised-with-justification / pre-cleared provider)
+
+<<GUIDANCE>>
 
 ### Reg Post Verify
 
@@ -80,6 +111,8 @@ _Why: 27002:7.13 — integrity_
 > _Standard text:_ Per-event post-verification result (passed / failed-with-action)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -91,3 +124,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Cross-leaf coherence_
 
 > _Standard text:_ Per-event offsite-maintenance chain-of-custody where applicable
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # Resources Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that resources are commensurate with current ISMS needs, that determined needs were actually provided, that gaps surfaced are being closed (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:7.1:resources_program_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:7.1:rev_adequacy -->
 <!-- column: item:7.1:rev_gap_response -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you confirm that your information security resources match your current needs, that promised resources were delivered, and that any gaps are being addressed.
+
+## When to use it
+
+Use this template once a year to review your resources and ensure they align with your ISMS requirements. It applies to every environment, regardless of changes.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 45 to 60 minutes completing this from scratch, depending on the number of resource gaps and details you need to document.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Clause 7.1 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:7.1:rev_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (ISMS Manager + finance partner + top management)
 
+<<GUIDANCE>>
+
 ### Rev Adequacy
 
 <<MUST item:7.1:rev_adequacy>>
 _Why: Clause 7.1 — provide_
 
 > _Standard text:_ Adequacy check — resources actually provided match the determined need per category
+
+<<GUIDANCE>>
 
 ### Rev Gap Response
 
@@ -65,6 +92,8 @@ _Why: Effectiveness_
 > _Standard text:_ Gap response — any under-resourcing surfaced with remediation plan
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

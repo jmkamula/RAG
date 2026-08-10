@@ -12,6 +12,8 @@ table_shape: true
 
 # Clock Sync Status Register
 
+<<DOC_CONTROL>>
+
 > Per-system sync status — system id, current sync source, current drift, last successful sync timestamp
 
 <!-- TABLE-COLUMNS leaf:req:A.8.17:sync_register -->
@@ -20,6 +22,25 @@ table_shape: true
 <!-- column: item:A.8.17:reg_drift -->
 <!-- column: item:A.8.17:reg_last_sync -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of each system’s clock synchronization status, including which source it uses, any time drift, and when it last synced successfully. It’s useful for maintaining accurate system time records.
+
+## When to use it
+
+Use this register at all times in your environment to monitor clock sync status, updating it whenever there are changes or as needed to ensure your records stay current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per system for each required detail, so the total time will depend on how many systems you need to document.
 
 ## Register
 
@@ -42,6 +63,8 @@ _Why: Identification_
 
 > _Standard text:_ Per-row system identifier
 
+<<GUIDANCE>>
+
 ### Reg Source
 
 <<MUST item:A.8.17:reg_source>>
@@ -49,12 +72,16 @@ _Why: 27002:8.17 — synchronized_
 
 > _Standard text:_ Per-row current sync source
 
+<<GUIDANCE>>
+
 ### Reg Drift
 
 <<MUST item:A.8.17:reg_drift>>
 _Why: Drift detection_
 
 > _Standard text:_ Per-row current drift measurement
+
+<<GUIDANCE>>
 
 ### Reg Last Sync
 
@@ -64,6 +91,8 @@ _Why: Drift detection_
 > _Standard text:_ Per-row last successful sync timestamp
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -75,3 +104,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Operational visibility_
 
 > _Standard text:_ Per-row outstanding alerts (drift exceeded / source lost)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

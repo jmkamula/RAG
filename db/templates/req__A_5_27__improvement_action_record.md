@@ -12,6 +12,8 @@ table_shape: true
 
 # Per-Lesson Improvement Action Records
 
+<<DOC_CONTROL>>
+
 > A.5.27 expects lessons to actually strengthen and improve controls — not just be captured in a register. The improvement-action record evidences the actual loop-closure: which lesson, what was changed (control updated / training added / procedure amended / risk formally accepted), proof of the change, authoriser and closure date. One record per closed lesson, traceable back to the lessons register and through to the source incident
 
 <!-- TABLE-COLUMNS leaf:req:A.5.27:improvement_action_record -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.5.27:imp_authoriser -->
 <!-- column: item:A.5.27:imp_closure_date -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you clearly document how lessons learned from incidents have led to real improvements, showing exactly what was changed, who approved it, and when it was completed.
+
+## When to use it
+
+Use this template every time you close out a lesson learned, so you can track and prove that changes were actually made. Update it whenever a new improvement action is completed.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes filling out a new record from scratch, as each required section takes 10–15 minutes. Adding more records will take additional time per lesson.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: 27002:5.27 — knowledge applied_
 
 > _Standard text:_ Lesson identifier per record (links to lessons register)
 
+<<GUIDANCE>>
+
 ### Imp Action Type
 
 <<MUST item:A.5.27:imp_action_type>>
 _Why: 27002:5.27a,c,d_
 
 > _Standard text:_ Action type captured (control updated / training added / procedure amended / risk accepted)
+
+<<GUIDANCE>>
 
 ### Imp Evidence
 
@@ -57,12 +82,16 @@ _Why: 27002:5.27a — actual improvement_
 
 > _Standard text:_ Evidence of change (control configuration diff, training-record entry, procedure-revision link, risk-register entry)
 
+<<GUIDANCE>>
+
 ### Imp Authoriser
 
 <<MUST item:A.5.27:imp_authoriser>>
 _Why: Accountability_
 
 > _Standard text:_ Authoriser per record (proportional to scope of the change)
+
+<<GUIDANCE>>
 
 ### Imp Closure Date
 
@@ -72,6 +101,8 @@ _Why: 27002:5.27a — tracking_
 > _Standard text:_ Closure date recorded
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,9 +115,17 @@ _Why: Continual improvement_
 
 > _Standard text:_ Effectiveness check planned or done (post-update validation that the change actually addressed the root cause)
 
+<<GUIDANCE>>
+
 ### Imp Regression
 
 <<SHOULD item:A.5.27:imp_regression>>
 _Why: Operational discipline_
 
 > _Standard text:_ Regression-prevention check (where the change replaced a previous control, verify the prior failure mode no longer applies)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

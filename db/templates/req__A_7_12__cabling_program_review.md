@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Cabling Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification of inspection completeness, register currency, remediation closure. Freshness=365
 
 <!-- TABLE-COLUMNS leaf:req:A.7.12:cabling_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.12:rev_remediation_closure -->
 <!-- column: item:A.7.12:rev_register_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your cabling inspections, making sure all checks are complete, records are up to date, and any issues have been resolved. It's designed to support your compliance with ISO 27001 requirements.
+
+## When to use it
+
+Use this template whenever you need to review your cabling program, which should happen about once a year. It's relevant for any environment where cabling inspections and records are required.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes filling this out from scratch, depending on the amount of information you need to enter for each required item.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: 27002:7.12 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.12:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Facilities + Network lead + InfoSec)
+
+<<GUIDANCE>>
 
 ### Rev Inspection Coverage
 
@@ -58,12 +83,16 @@ _Why: Drift prevention_
 
 > _Standard text:_ Per-run inspection coverage in period (all runs inspected per planned cadence)
 
+<<GUIDANCE>>
+
 ### Rev Remediation Closure
 
 <<MUST item:A.7.12:rev_remediation_closure>>
 _Why: Operational discipline_
 
 > _Standard text:_ Remediation closure rate from prior period
+
+<<GUIDANCE>>
 
 ### Rev Register Update
 
@@ -73,6 +102,8 @@ _Why: Closes the loop_
 > _Standard text:_ Changes propagated to the register / procedure
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

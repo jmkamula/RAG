@@ -13,6 +13,8 @@ table_shape: true
 
 # Per-Jurisdiction Art.85 National Law Derogation Register
 
+<<DOC_CONTROL>>
+
 > Per-jurisdiction record of the national-law provisions invoked for Art.85 derogations. One row per (Member State × derogated GDPR provision × activity scope) tuple. Refreshed at the national-law currency cadence — annual review minimum (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.85:national_law_derogation_register -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:Art.85:reg_activity_scope -->
 <!-- column: item:Art.85:reg_currency_date -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of which national laws you rely on for Article 85 GDPR exceptions in each country where you operate. It's useful for tracking compliance across multiple jurisdictions.
+
+## When to use it
+
+Use this register if your activities involve invoking national law exceptions to GDPR Article 85, especially when operating in more than one EU country. Update it at least once a year, or whenever relevant laws change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required detail for each country and activity, so the total time depends on how many jurisdictions and activities you need to record. For a single entry, plan for about 1-2 hours.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: Accountability_
 
 > _Standard text:_ Named owner of the register
 
+<<GUIDANCE>>
+
 ### Reg Member State
 
 <<MUST item:Art.85:reg_member_state>>
 _Why: Art.85.2 — Member State law_
 
 > _Standard text:_ Per-row Member State whose national law is being invoked
+
+<<GUIDANCE>>
 
 ### Reg National Provision
 
@@ -59,6 +84,8 @@ _Why: Demonstrability_
 
 > _Standard text:_ Per-row specific national-law citation (statute + section + as-of date)
 
+<<GUIDANCE>>
+
 ### Reg Derogated Articles
 
 <<MUST item:Art.85:reg_derogated_articles>>
@@ -66,12 +93,16 @@ _Why: Art.85.2 — scope of permissible derogations_
 
 > _Standard text:_ Per-row enumeration of GDPR articles being derogated (must be from Chapter II/III/IV/V/VI/VII/IX)
 
+<<GUIDANCE>>
+
 ### Reg Activity Scope
 
 <<MUST item:Art.85:reg_activity_scope>>
 _Why: Art.85.1_
 
 > _Standard text:_ Per-row activity scope (which processing this derogation covers — journalism / academic / artistic / literary)
+
+<<GUIDANCE>>
 
 ### Reg Currency Date
 
@@ -81,6 +112,8 @@ _Why: Art.85.2 — current state of law_
 > _Standard text:_ Per-row as-of-date of the national-law citation (proves the law cited is still in force)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -93,9 +126,17 @@ _Why: Art.85.3 — Commission notification_
 
 > _Standard text:_ Reference to Member State notification to Commission per Art.85.3 (where available)
 
+<<GUIDANCE>>
+
 ### Reg Review Date
 
 <<SHOULD item:Art.85:reg_review_date>>
 _Why: Currency_
 
 > _Standard text:_ Per-row next planned review date
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

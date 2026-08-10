@@ -12,6 +12,8 @@ table_shape: true
 
 # Threat Intelligence Feed Register
 
+<<DOC_CONTROL>>
+
 > A.5.7 requires a curated set of sources, not an ad-hoc list. The feed register catalogues every active intelligence source with metadata that allows the program review to assess which feeds deliver value: source name, layer, owner inside the org, last received signal, cost, signal/noise rating. Decommissioned feeds are retained with end-date for traceability
 
 <!-- TABLE-COLUMNS leaf:req:A.5.7:threat_intel_feed_register -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.5.7:reg_signal_rating -->
 <!-- column: item:A.5.7:reg_internal_input -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep an organized record of all your threat intelligence sources, making it easy to review which feeds are valuable and ensuring nothing is missed or forgotten over time.
+
+## When to use it
+
+Use this register whenever you need to track and review your threat intelligence feeds, updating it as new sources are added or old ones are retired. It should be refreshed whenever there are changes to your intelligence sources.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required field for each feed you list; setting up the register from scratch for several feeds may take a few hours, but updates are much quicker.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:5.7 — sources_
 
 > _Standard text:_ Each active source captured with a unique identifier
 
+<<GUIDANCE>>
+
 ### Reg Layer
 
 <<MUST item:A.5.7:reg_layer>>
 _Why: 27002:5.7 — three layers_
 
 > _Standard text:_ Intelligence layer per row (strategic / tactical / operational)
+
+<<GUIDANCE>>
 
 ### Reg Owner
 
@@ -59,12 +84,16 @@ _Why: Accountability_
 
 > _Standard text:_ Internal owner per row accountable for the source (renewal, escalation, value assessment)
 
+<<GUIDANCE>>
+
 ### Reg Last Received
 
 <<MUST item:A.5.7:reg_last_received>>
 _Why: 27002:5.7 — collection cadence verified_
 
 > _Standard text:_ Last-received timestamp per row (stale-feed detection)
+
+<<GUIDANCE>>
 
 ### Reg Cost
 
@@ -73,12 +102,16 @@ _Why: Program economics_
 
 > _Standard text:_ Cost per row (paid feeds vs free) — required for value review
 
+<<GUIDANCE>>
+
 ### Reg Signal Rating
 
 <<MUST item:A.5.7:reg_signal_rating>>
 _Why: 27002:5.7 — relevance_
 
 > _Standard text:_ Signal/noise rating per row (high/medium/low) updated at each program review
+
+<<GUIDANCE>>
 
 ### Reg Internal Input
 
@@ -88,6 +121,8 @@ _Why: 27002:5.7 — internal/external balance_
 > _Standard text:_ Internal sources captured alongside external (e.g. A.5.6 SIG-membership outputs, internal IR observations)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -100,9 +135,17 @@ _Why: Operational discipline_
 
 > _Standard text:_ Decommissioned sources retained with end-date and reason (audit trail)
 
+<<GUIDANCE>>
+
 ### Reg Contact
 
 <<SHOULD item:A.5.7:reg_contact>>
 _Why: Operational continuity_
 
 > _Standard text:_ Contact per row (vendor support, ISAC liaison)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

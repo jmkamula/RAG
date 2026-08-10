@@ -13,6 +13,8 @@ table_shape: true
 
 # Objectives Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that objectives reflect current policy + risk reality, owners are tracking, KPIs are reporting (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:6.2:objectives_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:6.2:rev_alignment -->
 <!-- column: item:6.2:rev_kpi_health -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you review and confirm that your program objectives are up to date, properly tracked, and measured with current KPIs, ensuring alignment with ISO 27001 requirements.
+
+## When to use it
+
+Use this template once a year to verify your objectives reflect current policies and risks, and to document that owners and KPIs are actively managed in your environment.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, depending on how many objectives you need to review and document.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Clause 6.2 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:6.2:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (ISMS Manager + function heads)
+
+<<GUIDANCE>>
 
 ### Rev Currency
 
@@ -58,12 +83,16 @@ _Why: Cross-leaf coherence_
 
 > _Standard text:_ Register currency check — every objective reviewed (refreshed / closed / re-targeted)
 
+<<GUIDANCE>>
+
 ### Rev Alignment
 
 <<MUST item:6.2:rev_alignment>>
 _Why: Clause 6.2 a) + c)_
 
 > _Standard text:_ Alignment check — objectives still consistent with current 5.2 policy + 6.1.2 risk results
+
+<<GUIDANCE>>
 
 ### Rev Kpi Health
 
@@ -73,6 +102,8 @@ _Why: Clause 6.2 b)_
 > _Standard text:_ KPI health check — measurements actually flowing for measurable objectives
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

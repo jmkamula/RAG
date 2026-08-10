@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic IPR and Licence Audit
 
+<<DOC_CONTROL>>
+
 > Periodic audit reconciling deployed software / used content against the inventory and licence entitlements. Catches drift the intake and procedure leaves miss — over-deployment of seat-limited licences, expired licences still in use, missing attribution, undeclared open-source components
 
 <!-- TABLE-COLUMNS leaf:req:A.5.32:ipr_audit_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.5.32:audit_expiry -->
 <!-- column: item:A.5.32:audit_inventory_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your software and content licences, making sure everything in use matches your entitlements and nothing is missing or out of date.
+
+## When to use it
+
+Use this template to review your deployed software and content against your licence inventory at least once a year, or whenever you want to check for licence drift or compliance issues.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 2 hours completing this from scratch, depending on the number of licences and software items you need to review and record.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: Drift prevention_
 
 > _Standard text:_ Audit date within the planned interval (typically annual; more frequent if a vendor audit risk is high)
 
+<<GUIDANCE>>
+
 ### Audit Reviewer
 
 <<MUST item:A.5.32:audit_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity and role (procurement / legal / engineering)
+
+<<GUIDANCE>>
 
 ### Audit Entitlement
 
@@ -59,6 +84,8 @@ _Why: 27002:5.32 — protect_
 
 > _Standard text:_ Entitlement check — deployed seats/cores vs licence allowance per commercial entry, exceptions remediated
 
+<<GUIDANCE>>
+
 ### Audit Opensource
 
 <<MUST item:A.5.32:audit_opensource>>
@@ -66,12 +93,16 @@ _Why: 27002:5.32 — third-party IPR_
 
 > _Standard text:_ Open-source attribution and licence-obligation check (NOTICE files, source-availability where required)
 
+<<GUIDANCE>>
+
 ### Audit Expiry
 
 <<MUST item:A.5.32:audit_expiry>>
 _Why: Continuity / drift_
 
 > _Standard text:_ Expired/expiring licences flagged and renewal or removal completed
+
+<<GUIDANCE>>
 
 ### Audit Inventory Update
 
@@ -81,6 +112,8 @@ _Why: Closes the loop_
 > _Standard text:_ Inventory updated as a result of the audit with reference to this review
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -93,9 +126,17 @@ _Why: Adjacent value_
 
 > _Standard text:_ Disposal of unused licences considered (cost optimisation alongside compliance)
 
+<<GUIDANCE>>
+
 ### Audit Next Date
 
 <<SHOULD item:A.5.32:audit_next_date>>
 _Why: Planning_
 
 > _Standard text:_ Next planned audit date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

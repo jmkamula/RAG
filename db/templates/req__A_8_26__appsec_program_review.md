@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Application Security Requirements Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — requirements catalogue currency vs threat landscape, traceability sample, exception inventory (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.26:appsec_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.8.26:rev_exception_inventory -->
 <!-- column: item:A.8.26:rev_findings_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep your application security requirements up to date by reviewing them against current threats, tracking exceptions, and ensuring everything is documented clearly for audits.
+
+## When to use it
+
+Use this template once a year, or whenever your risk profile changes, to review and update your security requirements in line with ISO 27001 standards.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 2 hours completing this from scratch, depending on the number of requirements and exceptions you need to review and document.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:8.26 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.26:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Engineering + InfoSec + Product)
+
+<<GUIDANCE>>
 
 ### Rev Catalogue Currency
 
@@ -59,6 +84,8 @@ _Why: 27002:8.26 — information security requirements_
 
 > _Standard text:_ Requirements-catalogue currency check (new threat patterns → requirement-category updates)
 
+<<GUIDANCE>>
+
 ### Rev Traceability Sample
 
 <<MUST item:A.8.26:rev_traceability_sample>>
@@ -66,12 +93,16 @@ _Why: 27002:8.26 — specified_
 
 > _Standard text:_ Sample-based traceability verification (requirements → test cases mapping intact)
 
+<<GUIDANCE>>
+
 ### Rev Exception Inventory
 
 <<MUST item:A.8.26:rev_exception_inventory>>
 _Why: Drift prevention_
 
 > _Standard text:_ Exception inventory re-confirmed / retired
+
+<<GUIDANCE>>
 
 ### Rev Findings Update
 
@@ -81,6 +112,8 @@ _Why: Closes the loop_
 > _Standard text:_ Findings propagated to procedure / scope
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

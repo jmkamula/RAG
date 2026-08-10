@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Change Management Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — register completeness, emergency-change ratio, rollback-attainment, change-induced-incident trending (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.32:change_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.8.32:rev_change_incidents -->
 <!-- column: item:A.8.32:rev_findings_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your change management program by recording key details like register completeness, emergency changes, and incident trends. It's designed to support annual reviews and demonstrate compliance with ISO 27001 requirements.
+
+## When to use it
+
+Use this template once a year to review and document your change management program, ensuring you have a complete and up-to-date record for your environment. It's relevant for any organization that manages changes to systems or processes.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes filling out the required sections from scratch, depending on how much information you need to gather for each part of the register.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:8.32 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.32:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Change Management lead + Engineering + InfoSec)
+
+<<GUIDANCE>>
 
 ### Rev Register Completeness
 
@@ -59,6 +84,8 @@ _Why: Drift prevention_
 
 > _Standard text:_ Register-completeness sample (sample of production changes traced to register)
 
+<<GUIDANCE>>
+
 ### Rev Emergency Ratio
 
 <<MUST item:A.8.32:rev_emergency_ratio>>
@@ -66,12 +93,16 @@ _Why: Operational signal_
 
 > _Standard text:_ Emergency-change ratio (high ratio signals process bypass)
 
+<<GUIDANCE>>
+
 ### Rev Change Incidents
 
 <<MUST item:A.8.32:rev_change_incidents>>
 _Why: Continuous improvement_
 
 > _Standard text:_ Change-induced incident trending (cross-link to A.5.26 register — change as incident root cause)
+
+<<GUIDANCE>>
 
 ### Rev Findings Update
 
@@ -81,6 +112,8 @@ _Why: Closes the loop_
 > _Standard text:_ Findings propagated to procedure / scope
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

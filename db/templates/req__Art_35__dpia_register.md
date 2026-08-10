@@ -13,6 +13,8 @@ table_shape: true
 
 # DPIA Register
 
+<<DOC_CONTROL>>
+
 > Per-DPIA record — every conducted DPIA with outcome (proceed / mitigate / Art.36 consult / abandon). Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.35:dpia_register -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:Art.35:reg_outcome -->
 <!-- column: item:Art.35:reg_residual_risk -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, organized record of every Data Protection Impact Assessment (DPIA) you conduct, including decisions and outcomes, making it easier to demonstrate GDPR compliance.
+
+## When to use it
+
+Use this register whenever your activities trigger the need for a DPIA, and review or update it at least once a year to ensure your records stay current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes for each new DPIA entry, as each required detail takes 10-15 minutes to document; updating existing entries is usually quicker.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: Audit_
 
 > _Standard text:_ Per-row DPIA identifier
 
+<<GUIDANCE>>
+
 ### Reg Processing Activity
 
 <<MUST item:Art.35:reg_processing_activity>>
 _Why: Cross-article_
 
 > _Standard text:_ Per-row processing activity (Art.30 RoPA cross-reference)
+
+<<GUIDANCE>>
 
 ### Reg Trigger
 
@@ -59,6 +84,8 @@ _Why: Art.35.1+3-4_
 
 > _Standard text:_ Per-row trigger (Art.35.3.a-c / SA list / sectoral / risk-based)
 
+<<GUIDANCE>>
+
 ### Reg Dpo Advice Date
 
 <<MUST item:Art.35:reg_dpo_advice_date>>
@@ -66,12 +93,16 @@ _Why: Art.35.2_
 
 > _Standard text:_ Per-row DPO advice date + summary
 
+<<GUIDANCE>>
+
 ### Reg Outcome
 
 <<MUST item:Art.35:reg_outcome>>
 _Why: Audit clarity_
 
 > _Standard text:_ Per-row outcome (proceed / mitigate-then-proceed / Art.36 consult / abandon)
+
+<<GUIDANCE>>
 
 ### Reg Residual Risk
 
@@ -81,6 +112,8 @@ _Why: Art.36 trigger_
 > _Standard text:_ Per-row residual-risk level after mitigations
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Art.35.11_
 
 > _Standard text:_ Per-row next review date
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Instruction Contexts Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which customer-instruction channels are subject to infringement review. Broad by default (every documented instruction), narrower where technological constraints limit review ability per §8.2.4 implementation.
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which customer instruction channels are included in infringement reviews, making it easier to show compliance with privacy standards.
+
+## When to use it
+
+Use this document whenever your organization’s profile matches certain compliance triggers, and update it whenever there are changes to your instruction channels or review capabilities.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as each required section takes roughly 10-15 minutes to write.
 
 ## 1. Instruction channels enumerated (contract terms + change orders + support tickets + product configuration)
 
 <<MUST item:B.8.2.4:scope_instruction_channels>>
 _Why: Coverage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Coverage_
 <<MUST item:B.8.2.4:scope_review_capability>>
 _Why: §8.2.4 implementation — depend on technological context_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Priority topics — instruction types most likely to raise infringement issues (retention / disclosure / transfers / children / special category)
 
 <<MUST item:B.8.2.4:scope_priority_topics>>
 _Why: Risk targeting_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:B.8.2.4:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

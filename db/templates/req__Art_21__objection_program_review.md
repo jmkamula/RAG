@@ -13,6 +13,8 @@ table_shape: true
 
 # Objection Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — direct-marketing objections honoured immediately, legitimate-interests balancing tests defensible, explicit-notice MUST being delivered at first communication (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.21:objection_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.21:rev_balancing_quality -->
 <!-- column: item:Art.21:rev_explicit_notice_audit -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record showing that you respect direct-marketing objections, have valid reasons for processing data, and provide proper notices to individuals as required by GDPR.
+
+## When to use it
+
+Use this review record once a year to confirm you’re honoring marketing objections, balancing legitimate interests, and giving explicit notices at first contact. It’s relevant for any environment where these GDPR obligations apply.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, depending on the number of cases you need to document and the detail required for each element.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.21:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + marketing/product lead)
+
+<<GUIDANCE>>
 
 ### Rev Direct Marketing Sla
 
@@ -58,12 +83,16 @@ _Why: Art.21.3_
 
 > _Standard text:_ Direct-marketing immediate-cessation SLA met across all objections
 
+<<GUIDANCE>>
+
 ### Rev Balancing Quality
 
 <<MUST item:Art.21:rev_balancing_quality>>
 _Why: Art.21.1_
 
 > _Standard text:_ Balancing-test quality sample — continued-processing decisions have compelling-grounds documentation
+
+<<GUIDANCE>>
 
 ### Rev Explicit Notice Audit
 
@@ -73,6 +102,8 @@ _Why: Art.21.4_
 > _Standard text:_ Explicit-notice audit — Art.21 right is drawn to attention at first communication across surfaces
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

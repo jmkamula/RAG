@@ -12,6 +12,8 @@ table_shape: hybrid
 
 # ISMS Roles, Responsibilities and Authorities Matrix
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
 A **one-page table** that tells anyone — auditor, customer, new hire —
@@ -27,21 +29,13 @@ by **ISO/IEC 27001:2022 Clause 5.3**. This is the *management-system*
 view (ISMS governance) — distinct from **A.5.2** which captures
 operational security roles. Both exist; this one is one layer up.
 
-## Before you start
+## Prerequisites
 
-- [ ] **4.3 ISMS Scope** defined (you're assigning roles within scope)
-- [ ] **5.2 Information Security Policy** approved (this matrix
-      implements the responsibility commitments stated there)
-- [ ] **Current org chart** — for the cross-link
+<<PREREQUISITES>>
 
 ## Cross-references
 
-- **5.1 Top management commitment** — the matrix names the
-  top-management role accountable for the ISMS
-- **A.5.2 Operational security roles** — different document, different
-  altitude; this matrix flags consistency between the two
-- **9.3 Management review** — the matrix is reviewed at every
-  management review (named reviewer per A.5.36)
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
@@ -89,6 +83,8 @@ owners, escalate conformance gaps directly to ISMS Owner.`
 
 **✗ Avoid**: "Information Security Team" — un-named, not auditable.
 
+<<GUIDANCE>>
+
 ### Performance Reporting Role
 
 <<MUST item:5.3:performance_reporting>>
@@ -105,6 +101,8 @@ Committee, annually to the Board via the CEO. Report content per
 the ISMS Performance Reporting standard (link).`
 
 **✗ Avoid**: Unclear cadence or recipient.
+
+<<GUIDANCE>>
 
 ### Decision Authorities
 
@@ -130,6 +128,8 @@ Approve emergency/break-glass access       → Eng Manager + retro DPO review
 
 ---
 
+<<GUIDANCE>>
+
 ## Document-level fields
 
 These are the **single-value** MUSTs — they don't belong in the
@@ -147,6 +147,9 @@ responsibility. Communication is a control, not an
 artefact-property.
 
 <!-- EDIT-ZONE-START item:5.3:communicated -->
+
+<<GUIDANCE>>
+
 <<TEXT>>
 <!-- EDIT-ZONE-END item:5.3:communicated -->
 
@@ -160,6 +163,9 @@ The **ISMS Manager** owns the matrix as an artefact (keeps it
 current). Top management approves it (carries weight).
 
 <!-- EDIT-ZONE-START item:5.3:owner -->
+
+<<GUIDANCE>>
+
 <<TEXT>>
 <!-- EDIT-ZONE-END item:5.3:owner -->
 
@@ -175,6 +181,9 @@ operational roles must not contradict each other. Call out the
 cross-link explicitly.
 
 <!-- EDIT-ZONE-START item:5.3:a52_consistency -->
+
+<<GUIDANCE>>
+
 <<TEXT>>
 <!-- EDIT-ZONE-END item:5.3:a52_consistency -->
 
@@ -191,3 +200,9 @@ cross-link explicitly.
 
 For each role, add a column or line that names the org-chart position
 that currently holds it.
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

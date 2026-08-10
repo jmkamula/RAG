@@ -13,6 +13,8 @@ table_shape: true
 
 # Transparency Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that SLAs are being met, the register reflects all requests, refusal grounds are being applied consistently (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.12:transparency_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.12:rev_refusal_audit -->
 <!-- column: item:Art.12:rev_channel_coverage -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of how well you’re meeting your transparency obligations, including service levels and how you handle requests and refusals. It’s designed to make annual reviews straightforward and consistent.
+
+## When to use it
+
+Use this template once a year to review and document your transparency program, making sure all requests are recorded and handled properly. It’s relevant for any environment where GDPR applies.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 75 minutes completing this from scratch, depending on the number of requests you need to review and record.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic accountability_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.12:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + ops lead)
+
+<<GUIDANCE>>
 
 ### Rev Sla Compliance
 
@@ -58,12 +83,16 @@ _Why: Art.12.3_
 
 > _Standard text:_ SLA compliance check — one-month response rate against in-scope requests
 
+<<GUIDANCE>>
+
 ### Rev Refusal Audit
 
 <<MUST item:Art.12:rev_refusal_audit>>
 _Why: Art.12.5 — defensibility_
 
 > _Standard text:_ Refusal-grounds audit — refused requests sampled for legitimate Art.12.5 grounds
+
+<<GUIDANCE>>
 
 ### Rev Channel Coverage
 
@@ -73,6 +102,8 @@ _Why: Drift detection_
 > _Standard text:_ Channel coverage check — every in-scope channel is reaching the procedure (no orphan requests)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

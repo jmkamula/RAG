@@ -13,6 +13,8 @@ table_shape: true
 
 # Art.14 Source Register
 
+<<DOC_CONTROL>>
+
 > Per-source record — every third-party source from which personal data is obtained, with notice-delivery evidence. Annual refresh (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.14:source_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.14:reg_notice_method -->
 <!-- column: item:Art.14:reg_notice_deadline -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of every third-party source from which you collect personal data, along with proof that you’ve provided the required privacy notice.
+
+## When to use it
+
+Use this register whenever you obtain personal data from external sources, and update it at least once a year to ensure your records stay current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10–15 minutes per required element for each source you list, so the total time depends on how many third-party sources you have.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Audit defensibility_
 
 > _Standard text:_ Source identifier per row (data broker name, public source URL, affiliate)
 
+<<GUIDANCE>>
+
 ### Reg Category
 
 <<MUST item:Art.14:reg_category>>
 _Why: Coverage_
 
 > _Standard text:_ Categories obtained per row (matches Art.14.1d notice item)
+
+<<GUIDANCE>>
 
 ### Reg Lawful Basis
 
@@ -58,12 +83,16 @@ _Why: Cross-article coherence_
 
 > _Standard text:_ Lawful basis per row (Art.6 entry id)
 
+<<GUIDANCE>>
+
 ### Reg Notice Method
 
 <<MUST item:Art.14:reg_notice_method>>
 _Why: Art.14.3_
 
 > _Standard text:_ Notice delivery method per row (email, in-app on first communication, etc.)
+
+<<GUIDANCE>>
 
 ### Reg Notice Deadline
 
@@ -73,6 +102,8 @@ _Why: Art.14.3_
 > _Standard text:_ Notice deadline met per row (within 1 month / first communication / first disclosure)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Art.14.5_
 
 > _Standard text:_ Per-row Art.14.5 exception cited where notice is not provided (proportionate-impossibility / disclosure-by-law / confidentiality)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

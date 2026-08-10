@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Legal Basis Scope (Member State Law)
 
+<<DOC_CONTROL>>
+
 > The upstream — Member State law citations authorising the org's criminal-data processing. Documents which laws have been mapped, what safeguards each law mandates, where the org is the 'official authority' vs operating under specific authorisation
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly document which Member State laws allow your organization to process criminal data, including the safeguards required and whether you act as an official authority or under special authorization.
+
+## When to use it
+
+Use this template whenever your organization processes criminal data and needs to demonstrate the legal basis under Member State law. Update it as needed, especially when your processing activities or legal authorizations change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this template from scratch, as you'll need to identify and describe three key legal elements and any recommended details.
 
 ## 1. Member State law register — every applicable MS law cited with title, article, scope
 
 <<MUST item:Art.10:scope_ms_law_register>>
 _Why: Art.10_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Art.10_
 <<MUST item:Art.10:scope_authority_vs_authorised>>
 _Why: Art.10_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Out-of-scope activities (e.g. journalistic / non-EU jurisdictions)
 
 <<MUST item:Art.10:scope_exclusions>>
 _Why: Defensibility_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.10:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

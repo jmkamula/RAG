@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Processing Activities Scope
 
+<<DOC_CONTROL>>
+
 > The upstream that bounds the register — which processing activities are within Art.6 scope (any processing of personal data), the relationship to Art.30 RoPA (Art.30 catalogs, Art.6 assigns the basis per item), Member State law overlays
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which personal data processing activities fall under GDPR Article 6, including how they relate to your records of processing and any additional requirements from local laws.
+
+## When to use it
+
+Use this document whenever you need to outline the scope of your personal data processing activities, and update it whenever your processing activities or relevant laws change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, depending on the number of processing activities and the complexity of your operations.
 
 ## 1. Link to Art.30 RoPA — every RoPA entry must have a corresponding Art.6 basis assignment
 
 <<MUST item:Art.6:scope_ropa_link>>
 _Why: Art.6.1 + Art.30.1.b — cross-reference_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Art.6.1 + Art.30.1.b — cross-reference_
 <<MUST item:Art.6:scope_special_overlay>>
 _Why: Art.9.2 — additional gate_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Member State law overlay (Art.6.2/Art.6.3 derogations and Member State specifications)
 
 <<MUST item:Art.6:scope_member_state>>
 _Why: Art.6.2-3_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.6:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

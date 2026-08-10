@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable SA Cooperation Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — which SAs the org is subject to (lead + concerned per Art.55-56), what cooperation entails (inquiries + on-site access per Art.58.1)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly outline which supervisory authorities oversee your organization and what cooperation with them involves under GDPR requirements.
+
+## When to use it
+
+Use this document whenever you need to define your organization's supervisory authority relationships and cooperation obligations. Update it whenever there are changes to your regulatory environment or relevant authorities.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as each required section takes around 10 to 15 minutes to fill in thoughtfully.
 
 ## 1. Lead supervisory authority identified
 
 <<MUST item:Art.31:scope_lead_sa>>
 _Why: Art.56_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Art.56_
 <<MUST item:Art.31:scope_concerned_sas>>
 _Why: Art.4(22)_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Art.58 SA powers acknowledged — info access (Art.58.1.a-f), corrective (Art.58.2), authorisation (Art.58.3)
 
 <<MUST item:Art.31:scope_powers>>
 _Why: Art.58_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:Art.31:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

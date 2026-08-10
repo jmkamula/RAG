@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Network Scope
 
+<<DOC_CONTROL>>
+
 > Upstream — which networks are in scope (corporate LAN / WAN / wireless / cloud VPC / partner connection / OT). Exclusions (e.g. cloud-managed networks delegated to A.5.19/A.5.21)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which parts of your network are included in your security program, including any exclusions. It ensures everyone understands the boundaries of your network responsibilities.
+
+## When to use it
+
+Use this document whenever you need to describe the scope of your network for compliance or security purposes. Update it whenever there are changes to your network environment or responsibilities.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to describe three required elements and consider any recommended details.
 
 ## 1. Network classes enumerated (corporate LAN / WAN / wireless / cloud VPC / partner connect / OT)
 
 <<MUST item:A.8.20:scope_classes>>
 _Why: 27002:8.20 — networks_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.20 — networks_
 <<MUST item:A.8.20:scope_vendor_managed>>
 _Why: Boundary clarity_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Exclusion rationale + compensating controls per excluded class
 
 <<MUST item:A.8.20:scope_exclusions>>
 _Why: Defensibility_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.20:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

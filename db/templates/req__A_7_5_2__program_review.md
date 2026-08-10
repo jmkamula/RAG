@@ -13,6 +13,8 @@ table_shape: true
 
 # Destinations Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — destinations list current, public notice reflects register, subcontractor destinations captured (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.7.5.2:program_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.7.5.2:rev_completeness -->
 <!-- column: item:A.7.5.2:rev_public_notice_sync -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep an up-to-date record of all your data destinations, ensuring your public notices and internal registers are accurate and compliant with privacy standards.
+
+## When to use it
+
+Use this template once a year or whenever your organization’s profile changes in a way that affects your data destinations, such as adding new subcontractors or updating public notices.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this from scratch, depending on how many destinations you need to list and review.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.5.2:rev_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + Trust + Legal)
 
+<<GUIDANCE>>
+
 ### Rev Completeness
 
 <<MUST item:A.7.5.2:rev_completeness>>
 _Why: §7.5.2 — countries to which PII can be transferred_
 
 > _Standard text:_ Completeness check — actual PII flows reconciled against register
+
+<<GUIDANCE>>
 
 ### Rev Public Notice Sync
 
@@ -65,6 +92,8 @@ _Why: §7.5.2 — available to customers_
 > _Standard text:_ Public notice sync — subject-facing destinations list matches register
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

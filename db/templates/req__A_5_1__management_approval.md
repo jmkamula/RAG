@@ -11,7 +11,28 @@ should_count: 1
 
 # Top Management Approval of InfoSec Policy
 
+<<DOC_CONTROL>>
+
 > A.5.1 asks top management to formally approve the InfoSec policy. The approval can live inside the policy as a signed cover page, in a board minute, or as a separate signed cover letter — any form that names a top-management signatory, an approval date, and the version being approved.
+
+## What this template gives you
+
+This template helps you document formal approval of your Information Security Policy by top management, ensuring you meet ISO 27001 requirements with a clear record of who approved the policy, when, and which version.
+
+## When to use it
+
+Use this whenever your organization needs to show that top management has officially approved your Information Security Policy. Update it whenever there are changes to the policy or leadership.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes preparing this document from scratch, as you'll need to gather signatures, approval dates, and policy version details.
 
 ## Question 1: Who is the top-management signatory approving this policy?
 
@@ -20,6 +41,8 @@ should_count: 1
 **Examples:** `Jane Doe — CEO` · `Board of Directors (as delegated to Chief Information Officer)` · `John Smith, Managing Partner`.
 
 <<MUST item:A.5.1:approval_signatory>>
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -33,6 +56,8 @@ should_count: 1
 
 <<MUST item:A.5.1:approval_date>>
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 > **Why we ask:** 27002 §5.1 requires the approval to be dated so the ISMS knows when the policy took effect and when it needs reaffirming (typically annually).
@@ -44,6 +69,8 @@ should_count: 1
 **Examples:** `Information Security Policy v1.4 (2026-01-15)` · `ISMS Master Policy Rev 3`.
 
 <<MUST item:A.5.1:approval_target>>
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -63,6 +90,12 @@ _The item below strengthens the artefact but is not strictly required for the MU
 
 <<SHOULD item:A.5.1:approval_authority>>
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 > **Why we ask:** When the signatory isn't CEO, auditors look for the delegation chain that gave them authority to approve on behalf of top management. Missing this doesn't fail the MUST but weakens the artefact.
+
+## Revision history
+
+<<REVISION_HISTORY>>

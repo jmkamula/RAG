@@ -13,6 +13,8 @@ table_shape: true
 
 # Art.19 Notification Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that every Art.16/17/18 event had a corresponding Art.19 notification record (or documented exception) (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.19:notification_program_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:Art.19:rev_event_coverage -->
 <!-- column: item:Art.19:rev_exception_validity -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of whether every relevant data breach or rights request event has a matching notification record or a documented reason for not notifying, supporting your GDPR compliance efforts.
+
+## When to use it
+
+Use this template once a year to review and confirm that all events under Articles 16, 17, and 18 have been properly recorded or justified, as required for ongoing GDPR compliance.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this from scratch, depending on the number of events you need to review and document in the register.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.19:rev_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO)
 
+<<GUIDANCE>>
+
 ### Rev Event Coverage
 
 <<MUST item:Art.19:rev_event_coverage>>
 _Why: Cross-leaf_
 
 > _Standard text:_ Event coverage check — every Art.16/17/18 event has a register row OR documented exception
+
+<<GUIDANCE>>
 
 ### Rev Exception Validity
 
@@ -65,6 +92,8 @@ _Why: Defensibility_
 > _Standard text:_ Exception validity sample — claimed impossibility/disproportionality grounds still hold
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -13,6 +13,8 @@ table_shape: true
 
 # Consent Capture Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — consent records complete + retrievable within SLA, per-event demonstration works, withdrawal flags propagate to processing (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.7.2.4:program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.7.2.4:rev_completeness_audit -->
 <!-- column: item:A.7.2.4:rev_withdrawal_propagation -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your consent records, making sure they are complete, easy to find, and up to date. It also checks that consent withdrawals are handled correctly across your systems.
+
+## When to use it
+
+Use this template once a year, or whenever your organization meets certain privacy-related criteria, to review and confirm your consent management processes are working as required.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours to fill out this review from scratch, depending on how many consent records you need to document.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.2.4:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + Engineering)
+
+<<GUIDANCE>>
 
 ### Rev Retrievability
 
@@ -58,12 +83,16 @@ _Why: §7.2.4 — provide on request_
 
 > _Standard text:_ Retrievability test — sampled consent events retrieved within stated SLA
 
+<<GUIDANCE>>
+
 ### Rev Completeness Audit
 
 <<MUST item:A.7.2.4:rev_completeness_audit>>
 _Why: §7.2.4 — record consent_
 
 > _Standard text:_ Completeness audit — sampled consented users have retrievable records
+
+<<GUIDANCE>>
 
 ### Rev Withdrawal Propagation
 
@@ -73,6 +102,8 @@ _Why: §7.3.4 — modify or withdraw_
 > _Standard text:_ Withdrawal propagation — sampled withdrawals verified to have stopped downstream processing
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

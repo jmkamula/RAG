@@ -12,6 +12,8 @@ table_shape: true
 
 # Personal Data Flow Inventory
 
+<<DOC_CONTROL>>
+
 > The upstream data picture that feeds RoPA accuracy. Where the register is activity-centric (one row per processing activity), the data flow inventory is data-centric — which systems hold personal data, how data moves between them, who receives it, and which transfers cross borders. EDPB guidance treats data mapping as the foundation for accurate Art.30 records
 
 <!-- TABLE-COLUMNS leaf:req:Art.30:data_flow_inventory -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:Art.30:dfi_transfers -->
 <!-- column: item:Art.30:dfi_retention -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you map out where personal data is stored, how it moves between your systems, and who has access to it, supporting accurate and up-to-date GDPR records.
+
+## When to use it
+
+Use this whenever you need to document your personal data flows, especially if you process personal data in your environment. Update it whenever your data systems or flows change.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1–1.5 hours to complete the required sections for a simple environment. More complex organizations with many systems or data flows may need additional time.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: Art.30.1.c-d foundation_
 
 > _Standard text:_ Systems holding personal data enumerated (production systems, SaaS, backups, analytics, archives)
 
+<<GUIDANCE>>
+
 ### Dfi Flows
 
 <<MUST item:Art.30:dfi_flows>>
 _Why: Art.30.1.d foundation_
 
 > _Standard text:_ Data flows between systems documented (sources, destinations, integration mechanism)
+
+<<GUIDANCE>>
 
 ### Dfi Recipients
 
@@ -57,12 +82,16 @@ _Why: Art.30.1.d_
 
 > _Standard text:_ External recipients identified per flow (processors, joint controllers, third parties) — feeds Art.30.1.d
 
+<<GUIDANCE>>
+
 ### Dfi Transfers
 
 <<MUST item:Art.30:dfi_transfers>>
 _Why: Art.30.1.e / Chapter V_
 
 > _Standard text:_ Third-country transfers identified per flow with safeguards (SCCs, adequacy, BCRs) — feeds Art.30.1.e
+
+<<GUIDANCE>>
 
 ### Dfi Retention
 
@@ -72,6 +101,8 @@ _Why: Art.30.1.f_
 > _Standard text:_ Retention period per system or per data category — feeds Art.30.1.f
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,6 +115,8 @@ _Why: Cross-control coherence_
 
 > _Standard text:_ Cross-link to the asset/system inventory (ISO 27001 A.5.9) so the two registers stay aligned
 
+<<GUIDANCE>>
+
 ### Dfi Minimisation
 
 <<SHOULD item:Art.30:dfi_minimisation>>
@@ -91,9 +124,17 @@ _Why: Art.5.1.c linkage_
 
 > _Standard text:_ Notes data minimisation review touchpoints (Art.5.1.c) — flows or fields flagged for reduction
 
+<<GUIDANCE>>
+
 ### Dfi Visual
 
 <<SHOULD item:Art.30:dfi_visual>>
 _Why: Auditor/reviewer clarity_
 
 > _Standard text:_ Visual representation (data flow diagram) accompanies the tabular inventory
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

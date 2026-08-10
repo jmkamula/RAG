@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Deletion Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — retention-triggered deletions completed within window, backup sweeps current, legal holds reviewed, GDPR erasure SLAs met (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.10:deletion_program_review -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.8.10:rev_legal_hold_inventory -->
 <!-- column: item:A.8.10:rev_register_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of your annual data deletion program, ensuring that retention policies, backup sweeps, legal holds, and GDPR erasure timelines are all reviewed and up to date.
+
+## When to use it
+
+Use this template once a year to confirm that your environment is meeting its data deletion and retention requirements, including regular checks on backups and legal holds.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 60 to 90 minutes completing this from scratch, depending on how many records you need to review and document.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:8.10 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.10:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Data Protection + Infrastructure + Legal jointly)
+
+<<GUIDANCE>>
 
 ### Rev Trigger Attainment
 
@@ -59,6 +84,8 @@ _Why: 27002:8.10 — when no longer required_
 
 > _Standard text:_ Retention-trigger attainment check (deletions completed within configured window)
 
+<<GUIDANCE>>
+
 ### Rev Backup Completeness
 
 <<MUST item:A.8.10:rev_backup_completeness>>
@@ -66,12 +93,16 @@ _Why: Auditor-critical GDPR-defensibility_
 
 > _Standard text:_ Backup-sweep completeness sample (no orphan copies surviving)
 
+<<GUIDANCE>>
+
 ### Rev Legal Hold Inventory
 
 <<MUST item:A.8.10:rev_legal_hold_inventory>>
 _Why: Drift prevention_
 
 > _Standard text:_ Legal-hold inventory re-confirmed / retired
+
+<<GUIDANCE>>
 
 ### Rev Register Update
 
@@ -81,6 +112,8 @@ _Why: Closes the loop_
 > _Standard text:_ Findings propagated to procedure / scope
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -92,3 +125,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Communication Scope
 
+<<DOC_CONTROL>>
+
 > The upstream that bounds the procedure — which topic classes are in scope, which audiences (4.2 parties subset), what's regulator-mandated vs voluntary
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which types of communications and audiences are covered by your procedures, and distinguishes between what is required by regulators and what is done voluntarily.
+
+## When to use it
+
+Use this whenever you need to outline the boundaries of your communication procedures, as it always applies to your environment and should be updated whenever there are changes.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as each required section takes roughly 10-15 minutes to fill in.
 
 ## 1. Topic classes in scope (policy comms, objective comms, performance reporting, incident comms, change comms, breach notification)
 
 <<MUST item:7.4:scope_topics>>
 _Why: Clause 7.4 a)_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Clause 7.4 a)_
 <<MUST item:7.4:scope_audiences>>
 _Why: Clause 7.4 c)_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Mandated vs voluntary split (regulatory deadlines vs internal preference)
 
 <<MUST item:7.4:scope_mandated_voluntary>>
 _Why: Risk and priority clarity_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:7.4:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

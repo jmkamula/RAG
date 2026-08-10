@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Segregation Scope
 
+<<DOC_CONTROL>>
+
 > Upstream — which network domains are in scope. Cloud VPCs typically yes. Vendor-managed pass-through ISPs typically delegated. OT typically tighter rules. Multi-tenant systems require per-tenant zones
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which parts of your network are included in your security program, such as cloud environments, vendor-managed connections, and operational technology zones.
+
+## When to use it
+
+Use this document whenever you need to outline or update the boundaries of your network security scope. It should always reflect your current environment and be refreshed whenever changes occur.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as you'll need to address three required areas and possibly one recommended detail.
 
 ## 1. Network domains in scope (corporate / cloud / OT / multi-tenant SaaS) with segregation expectation per domain
 
 <<MUST item:A.8.22:scope_domains>>
 _Why: 27002:8.22 — appropriate_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: 27002:8.22 — appropriate_
 <<MUST item:A.8.22:scope_multi_tenant>>
 _Why: 27002:8.22 — appropriate_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Exclusion rationale + compensating controls per excluded domain
 
 <<MUST item:A.8.22:scope_exclusions>>
 _Why: Defensibility_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:A.8.22:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

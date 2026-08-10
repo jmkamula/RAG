@@ -13,6 +13,8 @@ table_shape: true
 
 # Transfer Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — every active transfer has a current Art.45/46/47/49 mechanism, register reflects current vendor landscape, Schrems II-style TIA considerations applied (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:Art.44:transfer_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:Art.44:rev_mechanism_validity -->
 <!-- column: item:Art.44:rev_silent_transfer_sweep -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of all your active data transfers, making sure each one has the right legal safeguards and is up to date with GDPR requirements.
+
+## When to use it
+
+Use this template whenever you need to review your international data transfers, typically once a year, to ensure your records and risk assessments are current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes filling this out from scratch, depending on how many transfers you need to document and review.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:Art.44:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + legal counsel + procurement)
+
+<<GUIDANCE>>
 
 ### Rev Register Currency
 
@@ -58,12 +83,16 @@ _Why: Cross-leaf coherence_
 
 > _Standard text:_ Register currency — every flagged transfer in last-assessment freshness window
 
+<<GUIDANCE>>
+
 ### Rev Mechanism Validity
 
 <<MUST item:Art.44:rev_mechanism_validity>>
 _Why: Art.44-49_
 
 > _Standard text:_ Mechanism-validity sample — Art.45 adequacy decisions, Art.46 SCCs, Art.47 BCRs all current versions / approvals
+
+<<GUIDANCE>>
 
 ### Rev Silent Transfer Sweep
 
@@ -73,6 +102,8 @@ _Why: Drift detection_
 > _Standard text:_ Silent-transfer sweep — verify no new vendor or service-shape change created an unflagged transfer
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

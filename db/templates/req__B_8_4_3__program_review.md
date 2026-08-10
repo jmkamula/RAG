@@ -13,6 +13,8 @@ table_shape: true
 
 # Processor Transmission Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — encryption current, contract alignment intact, no unauthorised channels, customer consultation invoked when needed (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:B.8.4.3:program_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:B.8.4.3:rev_contract_alignment_audit -->
 <!-- column: item:B.8.4.3:rev_shadow_channel_sweep -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you document your annual review of how data is transmitted to processors, ensuring encryption is up to date, contracts are aligned, and no unauthorized channels are used.
+
+## When to use it
+
+Use this review record if your organization transmits data to external processors and needs to verify compliance with privacy standards, typically once a year or when your data handling profile changes.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 45 to 60 minutes completing this from scratch, as each required element takes 10-15 minutes and the register format may require additional detail for each processor.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:B.8.4.3:rev_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Platform Ops + Security Engineering + DPO)
 
+<<GUIDANCE>>
+
 ### Rev Contract Alignment Audit
 
 <<MUST item:B.8.4.3:rev_contract_alignment_audit>>
 _Why: §8.4.3 — contract requirements_
 
 > _Standard text:_ Contract-alignment audit — sampled channels reviewed against customer B.8.2.1 agreements
+
+<<GUIDANCE>>
 
 ### Rev Shadow Channel Sweep
 
@@ -65,6 +92,8 @@ _Why: Drift detection_
 > _Standard text:_ Shadow-channel sweep — unauthorised channels flagged
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

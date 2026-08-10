@@ -13,6 +13,8 @@ table_shape: true
 
 # ISMS Scope Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that the scope statement reflects current organisational reality and that any scope changes during the year were captured in change records (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:4.3:scope_program_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:4.3:rev_currency -->
 <!-- column: item:4.3:rev_change_log -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you confirm that your ISMS scope statement is up to date and accurately reflects your current organization, including any changes made over the past year.
+
+## When to use it
+
+Use this review record once a year to ensure your ISMS scope is still accurate and that all changes have been properly documented, as this is always relevant to your environment.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this from scratch, depending on the number of changes and details you need to review and record.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Clause 4.3 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:4.3:rev_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (ISMS Manager + top management)
 
+<<GUIDANCE>>
+
 ### Rev Currency
 
 <<MUST item:4.3:rev_currency>>
 _Why: Drift detection_
 
 > _Standard text:_ Currency check — scope still matches organisational reality (sites, products, third parties)
+
+<<GUIDANCE>>
 
 ### Rev Change Log
 
@@ -65,6 +92,8 @@ _Why: Cross-leaf coherence_
 > _Standard text:_ Cross-check against change records — every actual scope change in the year is logged
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

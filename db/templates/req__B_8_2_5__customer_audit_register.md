@@ -13,6 +13,8 @@ table_shape: true
 
 # Customer Audit + Information Support Register
 
+<<DOC_CONTROL>>
+
 > Per-support-request row — the register of customer audits + information requests + responses. Annual refresh (freshness=365).
 
 <!-- TABLE-COLUMNS leaf:req:B.8.2.5:customer_audit_register -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:B.8.2.5:reg_response_date -->
 <!-- column: item:B.8.2.5:reg_response_summary -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of customer audit and information requests, along with your responses, in a clear and organized way. It's designed to support privacy compliance and make annual reviews easier.
+
+## When to use it
+
+Use this register whenever you receive a customer audit or information request that matches certain criteria for your organization. Update it at least once a year to ensure your records stay current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes to complete the required sections for each new entry, with additional time needed as you add more requests over time.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Traceability_
 
 > _Standard text:_ Unique request identifier per row
 
+<<GUIDANCE>>
+
 ### Reg Customer Id
 
 <<MUST item:B.8.2.5:reg_customer_id>>
 _Why: Scope_
 
 > _Standard text:_ Requesting customer identifier per row
+
+<<GUIDANCE>>
 
 ### Reg Request Type
 
@@ -58,12 +83,16 @@ _Why: §8.2.5 — appropriate information_
 
 > _Standard text:_ Request type per row (audit / certification-share / DPIA input / DSAR support / configuration query)
 
+<<GUIDANCE>>
+
 ### Reg Response Date
 
 <<MUST item:B.8.2.5:reg_response_date>>
 _Why: Currency_
 
 > _Standard text:_ Response date per row (vs stated SLA)
+
+<<GUIDANCE>>
 
 ### Reg Response Summary
 
@@ -73,6 +102,8 @@ _Why: Audit trail_
 > _Standard text:_ Response summary per row (what was shared / rationale for redaction if any)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Continuous improvement_
 
 > _Standard text:_ Customer satisfaction / follow-up per row
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

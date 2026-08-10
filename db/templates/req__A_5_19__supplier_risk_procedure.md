@@ -11,6 +11,8 @@ should_count: 3
 
 # Supplier Information Security Risk Management Procedure
 
+<<DOC_CONTROL>>
+
 ## What this template gives you
 
 The **procedure** that governs how you take on, monitor, and exit
@@ -22,37 +24,22 @@ is half the defence.
 
 ## When to use it
 
-You're producing the procedure required by **ISO/IEC 27001:2022
-A.5.19**. Sits at the top of the supplier control family
+You're producing the procedure required by **ISO/IEC 27001:2022 A.5.19**. Sits at the top of the supplier control family
 (A.5.20-23). Pairs with the supplier register sibling leaf.
 
-## Before you start
+## Prerequisites
 
-- [ ] **6.1.2 Risk Assessment Procedure** in place (supplier risk is
-      a category of org risk)
-- [ ] **A.5.31 Compliance Register** — supplier obligations + DPA
-      requirements live there
-- [ ] **A.5.34 PII Protection Policy** — drives DPA + Art.28
-      processor agreements
+<<PREREQUISITES>>
 
 ## Cross-references
 
-- **A.5.20 Supplier Agreements** — agreement content
-- **A.5.21 ICT Supply Chain** — sub-supplier (4th-party) discipline
-- **A.5.22 Supplier Reviews** — ongoing monitoring outputs
-- **A.5.23 Cloud Services** — cloud-specific overlay
-- **Art.28 GDPR** — processor agreement requirements
-- **Art.44-49 GDPR** — cross-border transfer mechanisms
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
 **6-10 hours** for v1; **1-2 hours** per supplier added.
 
 ---
-
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
 
 ## 1. Identify and document supplier types
 
@@ -77,6 +64,8 @@ overlay + processor agreement if PII. (c) Contracted personnel
 provider). Sub-supplier risk (A.5.21) tracked per primary supplier
 where in-scope data flows through chain."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 2. Define selection + evaluation criteria
@@ -99,6 +88,8 @@ intake assessment depth.
 implications. Combined score drives intake tier (Tier 1 light —
 Tier 3 deep). Tier 3 requires SOC2 + ISO 27001 + DPA review;
 Tier 1 acceptable on questionnaire + standard terms."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -123,6 +114,8 @@ State minimum requirements per category. Auditor checks the matrix
 | Professional services (legal, audit) | NDA + scoped engagement letter + secure data exchange channel |
 | Business services (payroll) | DPA (PII) + SOC2 or equivalent + breach < 24h |
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 4. State due-diligence steps before engagement
@@ -146,6 +139,8 @@ high-criticality). (5) Draft DPA exchange (legal + DPO). (6) Risk
 register row created if open items. (7) Sign-off: Tier 3 needs
 ISMS Owner + DPO; Tier 1-2 needs ISMS Manager. Engagement contract
 cannot be signed before all steps complete."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -172,6 +167,8 @@ incident, M&A, sub-processor change, regulator action against
 vendor — each triggers immediate reassessment. (d) A.5.22 review
 records sibling leaf captures the outputs."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 6. Define handoff to supplier agreements (A.5.20)
@@ -193,6 +190,8 @@ right + on-demand attestation refresh; (e) sub-processor disclosure
 + approval. Tier 1 uses the standard terms baseline. Open items
 from intake (e.g. 'vendor doesn't yet have SOC2 — committed by
 date X') become contract conditions with milestones."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -216,6 +215,8 @@ data exchange with suppliers (sales engineers, support engineers,
 data ops) receives data-exchange-security training: classification
 + encryption + secure channels + retention. (c) Renewal: annual
 refresh + immediate on procedure update."
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -241,6 +242,8 @@ supplier fails (insolvency, sustained outage, security incident
 requiring suspension), the A.5.30 ICT-readiness plan covers
 service continuity; supplier exit per the A.5.20 termination clauses."
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ---
@@ -258,6 +261,8 @@ artefact so it can evolve._
 
 The scoring rubric is its own document; this procedure references it.
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ### Standard questionnaire referenced
@@ -269,6 +274,8 @@ The scoring rubric is its own document; this procedure references it.
 _Reuse the industry baseline (SIG, CAIQ, or your own)._
 
 State which questionnaire format you use and where it lives.
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -283,4 +290,10 @@ _Exit-readiness — what's the plan when the supplier exits or you exit?_
 State the disengagement plan reference (typically per-supplier in
 A.5.20 / A.5.23 cloud-exit clauses).
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

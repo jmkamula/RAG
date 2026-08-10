@@ -12,6 +12,8 @@ table_shape: true
 
 # Acceptable Use Policy Communication Record
 
+<<DOC_CONTROL>>
+
 > AUP enforcement requires the user to have been informed of the rules — courts and tribunals routinely hinge on this. Evidence must show active distribution and, ideally, individual acknowledgement (signature, click-through, training completion) — not just availability on an intranet
 
 <!-- TABLE-COLUMNS leaf:req:A.5.10:communication_record -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.5.10:comm_acknowledgement -->
 <!-- column: item:A.5.10:comm_onboarding -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of how and when your Acceptable Use Policy was shared with users, including proof that each person received and acknowledged it.
+
+## When to use it
+
+Use this record whenever you distribute or update your Acceptable Use Policy, and update it as needed to reflect new communications or acknowledgements.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 50 to 75 minutes entering the required details for the first set of users, with additional time needed as you add more entries over time.
 
 ## Register
 
@@ -43,12 +64,16 @@ _Why: Operational sufficiency_
 
 > _Standard text:_ Date of publication/communication
 
+<<GUIDANCE>>
+
 ### Comm Audience
 
 <<MUST item:A.5.10:comm_audience>>
 _Why: 27002:5.10 — all relevant personnel_
 
 > _Standard text:_ Audience reached (all in-scope users, including new joiners and contractors)
+
+<<GUIDANCE>>
 
 ### Comm Channel
 
@@ -57,12 +82,16 @@ _Why: Operational sufficiency_
 
 > _Standard text:_ Channel used (mandatory training module, intranet publication with notification, signature campaign)
 
+<<GUIDANCE>>
+
 ### Comm Acknowledgement
 
 <<MUST item:A.5.10:comm_acknowledgement>>
 _Why: Enforceability — burden of proof_
 
 > _Standard text:_ User-level acknowledgement captured (e-signature, training completion record, click-through)
+
+<<GUIDANCE>>
 
 ### Comm Onboarding
 
@@ -72,6 +101,8 @@ _Why: 27002:5.10 — new joiners_
 > _Standard text:_ Distribution at onboarding for new personnel evidenced (induction pack, mandatory module)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,9 +115,17 @@ _Why: Sustained communication_
 
 > _Standard text:_ Periodic re-acknowledgement (annual at minimum) referenced
 
+<<GUIDANCE>>
+
 ### Comm Translations
 
 <<SHOULD item:A.5.10:comm_translations>>
 _Why: Accessibility_
 
 > _Standard text:_ Translations or language considerations where the workforce is multilingual
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

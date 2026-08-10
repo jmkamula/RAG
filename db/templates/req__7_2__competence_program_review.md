@@ -13,6 +13,8 @@ table_shape: true
 
 # Competence Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification that the record is current per role, every gap has a closure path, effectiveness is being evaluated for completed actions (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:7.2:competence_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:7.2:rev_gap_closure -->
 <!-- column: item:7.2:rev_effectiveness -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep track of staff competence records, ensuring each role’s requirements are up to date and any gaps are being addressed with clear follow-up actions.
+
+## When to use it
+
+Use this review record once a year to confirm all competence records are current and effective, and to document closure plans for any identified gaps in your team’s skills or training.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours completing this from scratch, depending on the number of roles and gaps you need to review and document.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: Clause 7.2 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:7.2:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (HR partner + ISMS Manager + relevant function heads)
+
+<<GUIDANCE>>
 
 ### Rev Currency
 
@@ -58,12 +83,16 @@ _Why: Cross-leaf coherence_
 
 > _Standard text:_ Record currency check — turnover, role changes, new hires reflected
 
+<<GUIDANCE>>
+
 ### Rev Gap Closure
 
 <<MUST item:7.2:rev_gap_closure>>
 _Why: Effectiveness_
 
 > _Standard text:_ Gap-closure progress check — open gaps either closed or on a remediation plan
+
+<<GUIDANCE>>
 
 ### Rev Effectiveness
 
@@ -73,6 +102,8 @@ _Why: Clause 7.2 c)_
 > _Standard text:_ Effectiveness sample — completed actions actually changed observed competence
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

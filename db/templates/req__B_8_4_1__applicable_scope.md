@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Processor Temp-File Scope
 
+<<DOC_CONTROL>>
+
 > The upstream — infrastructure serving customer processing (application tier + database + cache + queue).
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which parts of your infrastructure are included when handling customer data, focusing on application, database, cache, and queue layers.
+
+## When to use it
+
+Use this document whenever your environment matches certain processing triggers, and update it whenever there are changes to your infrastructure or data handling practices.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes completing this from scratch, as each required section takes roughly 10 to 15 minutes to draft.
 
 ## 1. Customer-serving infrastructure enumerated
 
 <<MUST item:B.8.4.1:scope_infrastructure>>
 _Why: Coverage_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Coverage_
 <<MUST item:B.8.4.1:scope_shared_paths>>
 _Why: Multi-tenant discipline_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Undeletable-file circumstances with rationale + compensating controls
 
 <<MUST item:B.8.4.1:scope_undeletable>>
 _Why: §8.4.1 — circumstances in which cannot be deleted_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:B.8.4.1:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

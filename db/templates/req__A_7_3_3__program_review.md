@@ -13,6 +13,8 @@ table_shape: true
 
 # Notice Delivery Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — notices reachable at every touchpoint, plain-language standard maintained, no delivery gaps (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.7.3.3:program_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:A.7.3.3:rev_reachability_audit -->
 <!-- column: item:A.7.3.3:rev_plain_language_audit -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you review and document how your notices are delivered, making sure they reach people at every contact point and use clear, plain language. It supports privacy compliance and helps you spot any delivery gaps.
+
+## When to use it
+
+Use this template when your organization’s profile matches certain privacy triggers, and plan to review and update it about once a year to keep your notice delivery practices current.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this from scratch, depending on the number of touchpoints you need to review and document.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.7.3.3:rev_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (DPO + Product + UX)
 
+<<GUIDANCE>>
+
 ### Rev Reachability Audit
 
 <<MUST item:A.7.3.3:rev_reachability_audit>>
 _Why: §7.3.3 — permanently accessible_
 
 > _Standard text:_ Reachability audit — sampled touchpoints verified to serve current notice
+
+<<GUIDANCE>>
 
 ### Rev Plain Language Audit
 
@@ -65,6 +92,8 @@ _Why: §7.3.3 — clear plain language_
 > _Standard text:_ Plain-language audit — sampled notices reviewed against readability target
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

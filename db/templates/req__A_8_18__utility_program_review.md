@@ -13,6 +13,8 @@ table_shape: true
 
 # Periodic Privileged Utility Programs Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — register currency, authorised-user list current, removal-where-unneeded sweep, JIT-coverage trending (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:A.8.18:utility_program_review -->
@@ -22,6 +24,25 @@ table_shape: true
 <!-- column: item:A.8.18:rev_removal_sweep -->
 <!-- column: item:A.8.18:rev_findings_update -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep an up-to-date record of privileged utility programs, showing who is authorized to use them and confirming that only necessary programs remain active. It supports your compliance with ISO 27001 requirements.
+
+## When to use it
+
+Use this template every year to review and update your list of privileged utility programs, ensuring the register is current and all authorized users are accurately listed. It applies to all environments where these programs are used.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 1 to 1.5 hours completing this from scratch, depending on the number of programs and users you need to review and document.
 
 ## Register
 
@@ -44,12 +65,16 @@ _Why: 27002:8.18 — periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:A.8.18:rev_reviewer>>
 _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (InfoSec + Infrastructure)
+
+<<GUIDANCE>>
 
 ### Rev User List
 
@@ -58,12 +83,16 @@ _Why: Drift prevention_
 
 > _Standard text:_ Authorised-user list re-confirmed per utility
 
+<<GUIDANCE>>
+
 ### Rev Removal Sweep
 
 <<MUST item:A.8.18:rev_removal_sweep>>
 _Why: Attack-surface reduction_
 
 > _Standard text:_ Removal-where-unneeded sweep (utilities found in unauthorised locations)
+
+<<GUIDANCE>>
 
 ### Rev Findings Update
 
@@ -73,6 +102,8 @@ _Why: Closes the loop_
 > _Standard text:_ Findings propagated to register / scope
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -84,3 +115,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

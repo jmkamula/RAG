@@ -13,6 +13,8 @@ table_shape: true
 
 # Subcontractor Change Program Review
 
+<<DOC_CONTROL>>
+
 > Annual verification — every change notified in advance, objections handled defensibly, general-auth scope aligned with contracts (freshness=365)
 
 <!-- TABLE-COLUMNS leaf:req:B.8.5.8:program_review -->
@@ -21,6 +23,25 @@ table_shape: true
 <!-- column: item:B.8.5.8:rev_notification_audit -->
 <!-- column: item:B.8.5.8:rev_objection_audit -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear record of all changes to your subcontractors, ensuring that each change is properly notified, any objections are managed, and your contracts stay up to date.
+
+## When to use it
+
+Use this template whenever your organization experiences changes in subcontractors that match specific criteria, and review or update it about once a year to stay compliant.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes completing this from scratch, depending on the number of changes you need to document and the details required for each entry.
 
 ## Register
 
@@ -43,6 +64,8 @@ _Why: Periodic_
 
 > _Standard text:_ Review date within the planned interval
 
+<<GUIDANCE>>
+
 ### Rev Reviewer
 
 <<MUST item:B.8.5.8:rev_reviewer>>
@@ -50,12 +73,16 @@ _Why: Accountability_
 
 > _Standard text:_ Reviewer identity (Trust + Legal)
 
+<<GUIDANCE>>
+
 ### Rev Notification Audit
 
 <<MUST item:B.8.5.8:rev_notification_audit>>
 _Why: §8.5.8_
 
 > _Standard text:_ Notification audit — sampled changes verified against timeframe
+
+<<GUIDANCE>>
 
 ### Rev Objection Audit
 
@@ -65,6 +92,8 @@ _Why: §8.5.8_
 > _Standard text:_ Objection audit — objection outcomes reviewed for consistency
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -76,3 +105,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Planning_
 
 > _Standard text:_ Next planned review date stated
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

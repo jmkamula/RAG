@@ -11,14 +11,35 @@ should_count: 1
 
 # Applicable Issue-Domain Scope
 
+<<DOC_CONTROL>>
+
 > The upstream that bounds the framework. Documents which domains are in scope for issue identification (regulatory, market, technology, supply chain, geopolitical, environmental) and what is explicitly excluded with rationale
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+## What this template gives you
+
+This template helps you clearly define which areas—like regulatory, market, technology, supply chain, geopolitical, and environmental—are included or excluded in your compliance scope, along with the reasons for these choices.
+
+## When to use it
+
+Use this document whenever you need to outline or update the boundaries of your compliance program, especially when your environment changes or as new issues arise.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 30 to 45 minutes to complete this from scratch, as you'll need to address each required section thoughtfully.
 
 ## 1. Issue domains enumerated (regulatory, threat landscape, market, technology, supply chain, geopolitical, environmental, workforce)
 
 <<MUST item:4.1:scope_domains>>
 _Why: Coverage proof_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -27,12 +48,16 @@ _Why: Coverage proof_
 <<MUST item:4.1:scope_exclusions>>
 _Why: Defensible bounding_
 
+<<GUIDANCE>>
+
 <<TEXT>>
 
 ## 3. Sectoral / regulatory drivers per domain (which laws or rules force coverage of which domain)
 
 <<MUST item:4.1:scope_drivers>>
 _Why: Clause 4.2 link_
+
+<<GUIDANCE>>
 
 <<TEXT>>
 
@@ -47,4 +72,10 @@ _The items below strengthen the artefact but are not strictly required for the M
 <<SHOULD item:4.1:scope_change_drivers>>
 _Why: Currency_
 
+<<GUIDANCE>>
+
 <<TEXT>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

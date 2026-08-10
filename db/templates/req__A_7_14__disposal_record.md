@@ -12,6 +12,8 @@ table_shape: true
 
 # Per-Equipment Disposal Record
 
+<<DOC_CONTROL>>
+
 > Lifecycle-end variant — one record per piece of equipment disposed of. Proves the chain-of-custody from collection through to destruction-or-handover. Parallel to A.5.28 evidence-disposal pattern
 
 <!-- TABLE-COLUMNS leaf:req:A.7.14:disposal_record -->
@@ -23,6 +25,25 @@ table_shape: true
 <!-- column: item:A.7.14:disp_certificate -->
 <!-- column: item:A.7.14:disp_software_step -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, detailed record for every piece of equipment you dispose of, showing exactly what happened from collection to final destruction or handover. It’s useful for proving proper handling and compliance with ISO 27001 requirements.
+
+## When to use it
+
+Use this record whenever you dispose of any equipment in your environment, whether it’s being destroyed or handed over. Update or create a new entry each time equipment reaches the end of its lifecycle.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 10-15 minutes per required detail for each item, so filling out a single record from scratch will likely take around 1.5 to 2 hours per piece of equipment.
 
 ## Register
 
@@ -45,12 +66,16 @@ _Why: 27002:7.14 — traceability_
 
 > _Standard text:_ Per-record equipment identifier (cross-link to A.5.9 asset register, retired entry)
 
+<<GUIDANCE>>
+
 ### Disp Trigger
 
 <<MUST item:A.7.14:disp_trigger>>
 _Why: 27002:7.14 — disposal_
 
 > _Standard text:_ Per-record disposal trigger
+
+<<GUIDANCE>>
 
 ### Disp Method
 
@@ -59,12 +84,16 @@ _Why: 27002:7.14 — secure removal_
 
 > _Standard text:_ Per-record method actually used (overwrite tool + verification, degauss, physical destruction with witness)
 
+<<GUIDANCE>>
+
 ### Disp Authoriser
 
 <<MUST item:A.7.14:disp_authoriser>>
 _Why: Accountability_
 
 > _Standard text:_ Per-record authoriser
+
+<<GUIDANCE>>
 
 ### Disp Destination
 
@@ -73,12 +102,16 @@ _Why: 27002:7.14 — securely_
 
 > _Standard text:_ Per-record destination (which approved provider OR internal-witness destruction)
 
+<<GUIDANCE>>
+
 ### Disp Certificate
 
 <<MUST item:A.7.14:disp_certificate>>
 _Why: Auditability_
 
 > _Standard text:_ Per-record certificate of destruction (where externally destroyed) or witness signature (where internally destroyed)
+
+<<GUIDANCE>>
 
 ### Disp Software Step
 
@@ -88,6 +121,8 @@ _Why: 27002:7.14 — licensed software_
 > _Standard text:_ Per-record software-removal step evidence (license-key handoff or wipe)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -99,3 +134,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Re-use case_
 
 > _Standard text:_ Per-record re-use status where the equipment goes to internal re-use (new owner + re-provisioned configuration link)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>

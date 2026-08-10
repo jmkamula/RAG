@@ -24,40 +24,22 @@ ungoverned.
 
 ## When to use it
 
-You're producing the Access Control Policy required by **ISO/IEC
-27001:2022 A.5.15**. Distinct from A.5.18 access rights procedure
+You're producing the Access Control Policy required by **ISO/IEC 27001:2022 A.5.15**. Distinct from A.5.18 access rights procedure
 — the policy sets the rules; the procedure operates them.
 
-## Before you start
-
-- [ ] **4.3 ISMS Scope** + **A.5.9 Asset Register** — you can't
-      define access rules without knowing what assets exist
-- [ ] **A.5.12 Classification Scheme** — access rules vary by class
-- [ ] **A.5.2 Roles** + **5.3 RACI** — the policy names the
-      authoriser per asset class
-- [ ] **A.5.3 Segregation of Duties analysis** — flagged
-      combinations referenced in the policy
+## Prerequisites
 
 <<PREREQUISITES>>
 
 ## Cross-references
 
-- **A.5.16 Identity Management** — identities the rules apply to
-- **A.5.17 Authentication Info** — credentials granting access
-- **A.5.18 Access Rights Procedure** — operationalises this policy
-- **A.5.3 Segregation of Duties** — rules referenced here
-- **A.8.2 Privileged Access Management** — privileged-access subset
-- **A.8.3-5 Access restrictions** — technical implementations
+<<CROSS_REFERENCES>>
 
 ## Estimated effort
 
 **3-5 hours** for v1; **30 min** for refresh.
 
 ---
-
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
 
 ## 1. State physical access rules
 
@@ -289,5 +271,7 @@ otherwise (matching the A.5.18 procedure).
 <<TEXT>>
 
 ---
+
+## Revision history
 
 <<REVISION_HISTORY>>

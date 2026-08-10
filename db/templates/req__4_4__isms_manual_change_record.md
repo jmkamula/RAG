@@ -12,6 +12,8 @@ table_shape: true
 
 # ISMS Manual Change Record
 
+<<DOC_CONTROL>>
+
 > Per-update record capturing each manual amendment — the lifecycle-end artefact proving the ISMS is being maintained, not stagnating
 
 <!-- TABLE-COLUMNS leaf:req:4.4:isms_manual_change_record -->
@@ -20,6 +22,25 @@ table_shape: true
 <!-- column: item:4.4:chg_impact -->
 <!-- column: item:4.4:chg_approval -->
 <!-- /TABLE-COLUMNS -->
+
+## What this template gives you
+
+This template helps you keep a clear, up-to-date record of every change made to your ISMS manual, showing that your information security management system is actively maintained and not left unchanged over time.
+
+## When to use it
+
+Use this document whenever you make any update to your ISMS manual, no matter how small. It should be refreshed as needed, each time a change occurs in your environment.
+
+## Prerequisites
+<<PREREQUISITES>>
+
+## Cross-references
+
+<<CROSS_REFERENCES>>
+
+## Estimated effort
+
+Expect to spend about 40 to 60 minutes to complete the required sections for each change entry, with additional time needed as you add more updates over time.
 
 ## Register
 
@@ -42,6 +63,8 @@ _Why: Defensible amendment_
 
 > _Standard text:_ Change trigger stated (scope change, audit finding, process redesign, regulator change)
 
+<<GUIDANCE>>
+
 ### Chg Summary
 
 <<MUST item:4.4:chg_summary>>
@@ -49,12 +72,16 @@ _Why: Audit clarity_
 
 > _Standard text:_ Change summary — what sections of the manual changed
 
+<<GUIDANCE>>
+
 ### Chg Impact
 
 <<MUST item:4.4:chg_impact>>
 _Why: Clause 6.3 link_
 
 > _Standard text:_ Impact assessment — which processes / artefacts downstream need updating
+
+<<GUIDANCE>>
 
 ### Chg Approval
 
@@ -64,6 +91,8 @@ _Why: Clause 4.4 — maintained_
 > _Standard text:_ Approval signature with date (ISMS Manager or top management)
 
 ---
+
+<<GUIDANCE>>
 
 ## Recommended additional columns
 
@@ -75,3 +104,9 @@ _These columns strengthen the register but are not strictly required for the MUS
 _Why: Operational discipline_
 
 > _Standard text:_ Communication of the change to affected staff (link to 7.4)
+
+<<GUIDANCE>>
+
+## Revision history
+
+<<REVISION_HISTORY>>
