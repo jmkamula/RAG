@@ -1182,6 +1182,88 @@ class LLMAnswer:
             from rag.risk.queries import fetch_risks_for_casefile
             cf.risks = fetch_risks_for_casefile(_tid, top_n=8)
 
+        # Ship 60'.j — precompute bridge-coverage counts per xfw
+        # obligation ref so the digest's XFW BRIDGES section can
+        # append "(N/M MUSTs bridge-covered)" without a re-query in
+        # the rendering path. Scope bounded to refs that already
+        # appear in cf.xfw_bridges() — no per-obligation SSoT scan
+        # beyond what the digest already surfaces. Best-effort; any
+        # failure leaves bridge_counts empty and the section renders
+        # unchanged.
+        if _tid:
+            try:
+                _bridge_refs = list(cf.xfw_bridges().keys())
+            except Exception:
+                _bridge_refs = []
+            if _bridge_refs:
+                try:
+                    import os as _os_bc, psycopg2 as _pg_bc
+                    _bc_conn = _pg_bc.connect(
+                        host     = _os_bc.getenv("PGHOST",     "127.0.0.1"),
+                        dbname   = _os_bc.getenv("PGDATABASE", "arioncomply_compliance"),
+                        user     = _os_bc.getenv("PGUSER",     "arioncomply_app"),
+                        password = _os_bc.getenv("PGPASSWORD", ""),
+                    )
+                    try:
+                        with _bc_conn.cursor() as _bc_cur:
+                            _bc_cur.execute(
+                                "SELECT set_config('app.tenant_id', %s, TRUE)",
+                                (_tid,),
+                            )
+                            # One aggregated query per section (up to ~5
+                            # refs typically). n_total = distinct MUSTs
+                            # for the ref in SSoT; n_bridged = distinct
+                            # target_must_ids in bridge_coverage for
+                            # unmet MUSTs. Using two aggregates so a
+                            # ref with no direct rows still shows a
+                            # count for its stub coverage.
+                            _bc_cur.execute("""
+                                SELECT control_ref,
+                                       COUNT(*)                       AS n_total,
+                                       COUNT(*) FILTER (WHERE satisfied) AS n_satisfied
+                                  FROM posture_must_verdicts
+                                 WHERE tenant_id = %s::uuid
+                                   AND control_ref = ANY(%s)
+                                 GROUP BY control_ref
+                            """, (_tid, _bridge_refs))
+                            _totals = {r[0]: (int(r[1]), int(r[2]))
+                                       for r in _bc_cur.fetchall()}
+                            _bc_cur.execute("""
+                                SELECT target_control_ref,
+                                       COUNT(DISTINCT target_must_id) AS n_targets_bridged
+                                  FROM posture_must_bridge_coverage
+                                 WHERE tenant_id = %s::uuid
+                                   AND target_control_ref = ANY(%s)
+                                 GROUP BY target_control_ref
+                            """, (_tid, _bridge_refs))
+                            _brg_targets = {r[0]: int(r[1])
+                                            for r in _bc_cur.fetchall()}
+                        cf.bridge_counts = {}
+                        for _ref in _bridge_refs:
+                            n_total, n_sat = _totals.get(_ref, (0, 0))
+                            n_brg_targets  = _brg_targets.get(_ref, 0)
+                            if not n_total:
+                                continue
+                            # "Bridge-covered" = unmet-direct MUSTs
+                            # that have at least one bridge attribution
+                            # row (cap by n_total - n_satisfied so an
+                            # over-counted target set can't exceed the
+                            # unmet population).
+                            n_bridged_unmet = min(
+                                n_brg_targets, n_total - n_sat,
+                            )
+                            cf.bridge_counts[_ref] = (n_bridged_unmet, n_total)
+                        logging.getLogger("rag.llm_answer").info(
+                            "bridge_counts: %d refs populated (of %d xfw refs)",
+                            len(cf.bridge_counts), len(_bridge_refs),
+                        )
+                    finally:
+                        _bc_conn.close()
+                except Exception as _bc_e:
+                    logging.getLogger("rag.llm_answer").warning(
+                        "bridge_counts precompute skipped: %s", _bc_e,
+                    )
+
         # ── Render digest ─────────────────────────────────────────────
         # Ship 18'.b: attempt the structured (JSON) path first; fall
         # back to prose on any parse failure. Both paths share the same

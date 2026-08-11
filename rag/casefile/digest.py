@@ -178,6 +178,9 @@ def _render_xfw_bridges(cf: CaseFile) -> str:
     if not bridges:
         return ""
     posture = cf.posture_by_ref()
+    # Ship 60'.j — bridge-coverage counts precomputed in llm_answer.py.
+    # Empty dict when unavailable → suffix simply omitted per line.
+    counts = getattr(cf, "bridge_counts", None) or {}
     lines: list[str] = []
     for xfw_ref, primary_refs in sorted(bridges.items()):
         parts: list[str] = []
@@ -191,10 +194,24 @@ def _render_xfw_bridges(cf: CaseFile) -> str:
             else:
                 parts.append(pref)
         joined = ", ".join(parts)
-        if any_assessed:
-            lines.append(f"- {xfw_ref} ← {joined}")
+        # Compact bridge-count suffix — only rendered when SSoT has
+        # rows for this ref. Reads "(N/M MUSTs bridge-covered)" —
+        # tells the LLM how much of the obligation's required-element
+        # set is addressed via cross-framework evidence without
+        # inflating the section beyond one short parenthetical.
+        _ct = counts.get(xfw_ref)
+        if _ct is not None:
+            n_bridged, n_total = _ct
+            if n_total:
+                bridge_suffix = f"  ({n_bridged}/{n_total} MUSTs bridge-covered)"
+            else:
+                bridge_suffix = ""
         else:
-            lines.append(f"- {xfw_ref} ← {joined} [not yet assessed]")
+            bridge_suffix = ""
+        if any_assessed:
+            lines.append(f"- {xfw_ref} ← {joined}{bridge_suffix}")
+        else:
+            lines.append(f"- {xfw_ref} ← {joined} [not yet assessed]{bridge_suffix}")
     return "XFW BRIDGES:\n" + "\n".join(lines)
 
 

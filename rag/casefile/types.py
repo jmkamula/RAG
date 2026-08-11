@@ -101,6 +101,15 @@ class CaseFile:
     # digest can render program/extension/obligation refs
     # side-by-side without a second lookup.
     risks:        list = field(default_factory=list)  # list[dict] — compact RiskSummary view
+    # Ship 60'.j — bridge-coverage counts per obligation ref, precomputed
+    # in llm_answer.py before build_structured_prompt_pair. Consumed by
+    # digest's XFW BRIDGES section to append "(N/M MUSTs bridge-covered)"
+    # on each line. Empty dict = no coverage data; digest omits the
+    # suffix (backward-compat with any test path that doesn't populate).
+    # Shape: {control_ref: (n_bridge_covered, n_total_musts)}. Only refs
+    # that are xfw targets get populated; keeps compute + digest cost
+    # bounded to the section already rendered.
+    bridge_counts: dict = field(default_factory=dict)
 
     # ── Basic identity + scope ────────────────────────────────────────
 

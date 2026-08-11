@@ -45,6 +45,7 @@ SSoT doesn't store.
 | 60'.g | SPA bridge chip. New `renderBridgeChip(leaf)` helper in `static/arioncomply.html` builds a green cross-framework nudge from `n_bridged` + unique source `standard_id`s across the leaf's unmet MUSTs. Wired into two surfaces: (1) advisory panel unmet-leaf render (`renderAdvisoryPanel`), (2) dashboard evidence-classes drill-in per-leaf block. Empty on legacy fallback responses. Message shape: "3 elements are already covered by evidence for related ISO 27001:2022 controls." |
 | 60'.h | Chat advisory markdown nudge. New `_bridge_nudge_line(leaf)` helper in `rag/posture/advisory.py` mirrors the SPA chip's message shape as a single markdown line. Appended after `To address:` on each unmet leaf in `_render_advisory_markdown`. Consumed by `build_per_must_advisory` — the chat surface for posture_check queries that identify a single control. Verified on Art.32: all 4 leaves render the nudge with rolled-up ISO 27001:2022 + ISO 27701:2019 attribution. Legacy chat markdown path. |
 | 60'.i | Case-file structured render — `LeafState` gets `n_bridged: int` + `bridge_stds: list[str]` (Pydantic model in `rag/casefile/answer_schema.py`). `_evidence_summary` in `answer_augment.py` rolls up unique source `standard_id`s from advisory data's `must_items[].bridge_sources` on unmet MUSTs (humanized inline — same `_HUMAN_STD` idiom as `advisory.py`). SPA `renderRelatedCard` primary-card checklist adds a `sa-leaf-bridge` nudge under each leaf row when populated, with new CSS class matching the existing `sa-leaf-*` palette. Verified: `is Art.32 compliant?` chat turn returns a `primary` card with all 4 leaves carrying `n_bridged={4,2,1,3}` and `bridge_stds=['ISO 27001:2022', 'ISO 27701:2019']` — SPA renders the green attribution nudge on each. |
+| 60'.j | LLM prompt digest bridge-count suffix. Tight-token addition: `_render_xfw_bridges` in `rag/casefile/digest.py` appends `(N/M MUSTs bridge-covered)` to each XFW BRIDGES line when `cf.bridge_counts[ref]` is populated. New `CaseFile.bridge_counts: dict[str, tuple[int, int]]` field precomputed in `rag/llm_answer.py` via two aggregated queries against `posture_must_verdicts` + `posture_must_bridge_coverage` for the xfw obligation refs the digest is about to render (scope-bounded — no per-obligation SSoT scan beyond what the section already surfaces). Best-effort: any failure leaves `bridge_counts` empty and the section renders as pre-60'.j. Token cost: ~8 tokens per bridge line × typically 1-5 lines = ≤40 tokens total, only fires when the section already renders. Verified render: `XFW BRIDGES:\n- Art.32 ← A.5.15 [OFI], A.5.18 [NC], A.5.23 [NC]  (10/16 MUSTs bridge-covered)` = 23 approx tokens (from 15 pre-60'.j). |
 
 ## Key architectural decisions
 
@@ -171,16 +172,9 @@ opt into the new fields on their own timeline.
   (Ship 60'.f added the logger.info hook). Grep
   `advisory.fallback` / `evidence_class_breakdown.fallback` in prod
   logs; if never fires in steady state, delete the fallback path.
-- **Bridge nudge in case-file LLM prompt digest** — Ship 60'.i
-  plumbed the nudge to the *structured render* (LeafState → SPA
-  primary card checklist). The *LLM prompt digest* itself (the
-  compact system+user input in `rag/casefile/digest.py`) still
-  doesn't carry per-MUST bridge attribution — its existing
-  XFW BRIDGES section is control-level. Enhancing the digest
-  with per-MUST bridge counts would let the LLM narrate coverage
-  naturally ("your ISO evidence covers 10 of 16 required
-  elements") but risks inflating the digest token budget. Deferred
-  pending evaluation of the token cost vs the narration benefit.
+- **Bridge nudge in case-file LLM prompt digest** — DELIVERED in
+  Ship 60'.j as a tight `(N/M MUSTs bridge-covered)` suffix on
+  the existing XFW BRIDGES section rather than a new section.
 - **`evidence_class_breakdown` migration** — DELIVERED in Ship 60'.e
   as a same-arc addendum. source_documents / template_availability /
   cite fields stayed on their existing Postgres helpers (they were
