@@ -8,9 +8,7 @@ SSoT is for).
 
 Ship 58' (2026-08-10) established the writer + refresh cycle;
 Ship 58'.s-u hardened the wiring; this module is the read-side canonical
-API introduced 2026-08-11 to unify the ~9 consumer sites (template
-renderer + journey wizard + chat answer_footer + api_server per-leaf
-state chip; more migrate later).
+API introduced to unify the ~9 consumer sites.
 
 Scope selectors (combinable):
     must_ids       — specific list of MUST ids (template renderer path)
@@ -31,28 +29,61 @@ from typing import Iterable, Optional
 
 
 @dataclass(frozen=True)
+class BridgeSource:
+    """One row of posture_must_bridge_coverage — a direct-satisfied MUST
+    in another framework contributing coverage to the current MUST via
+    a curator-authored xfw bridge edge. Ship 59'.c (2026-08-11)."""
+    source_must_id:     str
+    source_control_ref: str
+    source_standard_id: str
+    source_role:        str    # 'PROGRAM' | 'EXTENSION' | 'OBLIGATION' | 'OTHER'
+    edge_type:          str    # 'IMPLEMENTS' | 'SUPPORTS' | 'ENABLES' | 'GOVERNANCE'
+
+
+@dataclass(frozen=True)
 class MustVerdict:
     """One row of posture_must_verdicts as a Python object."""
-    must_id:     str
-    control_ref: str
-    standard_id: str
-    satisfied:   bool
-    stale:       bool
-    partial:     bool
-    reason:      str
+    must_id:        str
+    control_ref:    str
+    standard_id:    str
+    framework_role: str    # Ship 59'.c — 'PROGRAM' | 'EXTENSION' | 'OBLIGATION' | 'OTHER'
+    satisfied:      bool   # DIRECT satisfaction only (present + fresh cite)
+    stale:          bool
+    partial:        bool
+    reason:         str
+    # Ship 59'.c — attribution: MUSTs in other frameworks that
+    # bridge-cover this MUST via curator-authored xfw edges.
+    # Empty tuple when no bridge coverage exists.
+    bridge_sources: tuple[BridgeSource, ...] = ()
+
+    @property
+    def covered(self) -> bool:
+        """True if this MUST has ANY coverage — direct OR via bridges.
+
+        Distinct from `.satisfied` (which stays strict direct-only for
+        backward compat with engine semantics + existing consumers).
+        Consumers that want the 'covered somehow' view opt into `.covered`
+        explicitly; the default `.satisfied` check reflects engine truth.
+        """
+        return self.satisfied or bool(self.bridge_sources)
 
     @property
     def state(self) -> str:
-        """Convenience one-word category:
-          'present'  — satisfied and fresh
-          'stale'    — satisfied but past freshness_days
-          'partial'  — partial-status finding, no present
-          'missing'  — no evidence recognised
+        """Convenience one-word category (Ship 59'.c adds 'bridged'):
+          'present' — direct-satisfied and fresh
+          'stale'   — direct-satisfied but past freshness_days
+          'partial' — partial-status finding, no present
+          'bridged' — NOT directly satisfied, but has bridge coverage
+                      (auditor attribution — signals "covered via other
+                      framework's evidence, but no framework-native artefact")
+          'missing' — no evidence of any kind
         """
         if self.satisfied:
             return "stale" if self.stale else "present"
         if self.partial:
             return "partial"
+        if self.bridge_sources:
+            return "bridged"
         return "missing"
 
 
@@ -96,6 +127,7 @@ def read_must_verdicts(
 
     q = f"""
         SELECT must_id, control_ref, standard_id,
+               COALESCE(framework_role, 'OTHER'),
                satisfied, stale, partial, COALESCE(reason, '')
           FROM posture_must_verdicts
          WHERE {' AND '.join(where_parts)}
@@ -106,17 +138,45 @@ def read_must_verdicts(
                 "SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,),
             )
             cur.execute(q, params)
+            base_rows = cur.fetchall()
+
+            # Ship 59'.c — fetch bridge sources for the same target MUST
+            # ids in one query. Bridge rows joined into MustVerdict on
+            # the Python side (dataclass tuples) rather than SQL JSON
+            # aggregation — keeps the reader portable and predictable.
+            target_ids = [r[0] for r in base_rows]
+            bridges_by_target: dict[str, list[BridgeSource]] = {}
+            if target_ids:
+                cur.execute("""
+                    SELECT target_must_id,
+                           source_must_id, source_control_ref,
+                           source_standard_id, source_role, edge_type
+                      FROM posture_must_bridge_coverage
+                     WHERE tenant_id = %s::uuid
+                       AND target_must_id = ANY(%s)
+                """, (tenant_id, target_ids))
+                for row in cur.fetchall():
+                    bridges_by_target.setdefault(row[0], []).append(BridgeSource(
+                        source_must_id     = row[1],
+                        source_control_ref = row[2],
+                        source_standard_id = row[3],
+                        source_role        = row[4],
+                        edge_type          = row[5],
+                    ))
+
             return {
                 r[0]: MustVerdict(
-                    must_id     = r[0],
-                    control_ref = r[1],
-                    standard_id = r[2],
-                    satisfied   = r[3],
-                    stale       = r[4],
-                    partial     = r[5],
-                    reason      = r[6],
+                    must_id        = r[0],
+                    control_ref    = r[1],
+                    standard_id    = r[2],
+                    framework_role = r[3],
+                    satisfied      = r[4],
+                    stale          = r[5],
+                    partial        = r[6],
+                    reason         = r[7],
+                    bridge_sources = tuple(bridges_by_target.get(r[0], [])),
                 )
-                for r in cur.fetchall()
+                for r in base_rows
             }
     except Exception:
         # Silent fallback — schema not applied, or transient issue.
@@ -146,3 +206,52 @@ def read_must_verdicts_by_control(
         pg_conn, tenant_id,
         control_ref=control_ref, standard_id=standard_id,
     )
+
+
+def read_bridge_contributions(
+    pg_conn,
+    tenant_id: str,
+    *,
+    source_must_id:     Optional[str] = None,
+    source_control_ref: Optional[str] = None,
+    source_standard_id: Optional[str] = None,
+) -> list[tuple[str, str, str, str, str, str]]:
+    """Reverse-direction query: what does this MUST/control contribute to?
+
+    Ship 59'.c — for auditor UIs that show *"my ISO A.5.15:rbac evidence
+    contributes to GDPR Art.32.1.b (IMPLEMENTS), Art.5.1.f (IMPLEMENTS)"*.
+    Consumers pass either a specific source_must_id or a source_control_ref
+    (+ standard_id) to get all its outbound bridge contributions.
+
+    Returns list of tuples:
+      (target_must_id, target_control_ref, target_standard_id,
+       target_role, edge_type, source_must_id)
+    """
+    where_parts = ["tenant_id = %s::uuid"]
+    params: list = [tenant_id]
+    if source_must_id is not None:
+        where_parts.append("source_must_id = %s")
+        params.append(source_must_id)
+    if source_control_ref is not None:
+        where_parts.append("source_control_ref = %s")
+        params.append(source_control_ref)
+    if source_standard_id is not None:
+        where_parts.append("source_standard_id = %s")
+        params.append(source_standard_id)
+
+    q = f"""
+        SELECT target_must_id, target_control_ref, target_standard_id,
+               target_role, edge_type, source_must_id
+          FROM posture_must_bridge_coverage
+         WHERE {' AND '.join(where_parts)}
+         ORDER BY target_standard_id, target_control_ref, target_must_id
+    """
+    try:
+        with pg_conn.cursor() as cur:
+            cur.execute(
+                "SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,),
+            )
+            cur.execute(q, params)
+            return cur.fetchall()
+    except Exception:
+        return []

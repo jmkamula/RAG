@@ -733,12 +733,21 @@ def _persist_must_verdicts(pg_conn, tenant_id: str, verdicts: dict) -> int:
     # positive category is the honest reading. Rank:
     #   recognised (non-stale) > recognised (stale) > partial > unrecognised
     _rank = {"recognised": 3, "stale": 2, "partial": 1, "unrecognised": 0}
-    best: dict[str, tuple[str, str, bool, bool, bool, str]] = {}
+
+    def _framework_role(standard_id: str) -> str:
+        """Ship 59'.b — denormalize the P/E/O role for fast filtering."""
+        if standard_id == "ISO27001:2022": return "PROGRAM"
+        if standard_id == "ISO27701:2019": return "EXTENSION"
+        if standard_id == "GDPR:2016/679": return "OBLIGATION"
+        return "OTHER"
+
+    best: dict[str, tuple[str, str, str, bool, bool, bool, str]] = {}
     for cid, verdict in verdicts.items():
         parts = cid.rsplit(":", 1)
         if len(parts) != 2:
             continue
         standard_id, control_ref = parts[0], parts[1]
+        role = _framework_role(standard_id)
 
         for lv in verdict.leaves:
             rec_ids     = set(lv.item_ids_recognised or ())
@@ -748,21 +757,21 @@ def _persist_must_verdicts(pg_conn, tenant_id: str, verdicts: dict) -> int:
 
             for mid in rec_ids:
                 cat = "stale" if mid in stale_ids else "recognised"
-                row = (control_ref, standard_id, True, mid in stale_ids, False, cat)
-                if mid not in best or _rank[cat] > _rank[best[mid][5]]:
+                row = (control_ref, standard_id, role, True, mid in stale_ids, False, cat)
+                if mid not in best or _rank[cat] > _rank[best[mid][6]]:
                     best[mid] = row
             for mid in partial_ids:
-                row = (control_ref, standard_id, False, False, True, "partial")
-                if mid not in best or _rank["partial"] > _rank[best[mid][5]]:
+                row = (control_ref, standard_id, role, False, False, True, "partial")
+                if mid not in best or _rank["partial"] > _rank[best[mid][6]]:
                     best[mid] = row
             for mid in unrec_ids:
-                row = (control_ref, standard_id, False, False, False, "unrecognised")
-                if mid not in best or _rank["unrecognised"] > _rank[best[mid][5]]:
+                row = (control_ref, standard_id, role, False, False, False, "unrecognised")
+                if mid not in best or _rank["unrecognised"] > _rank[best[mid][6]]:
                     best[mid] = row
 
-    rows: list[tuple[str, str, str, str, bool, bool, bool, str]] = [
-        (tenant_id, mid, cr, std, sat, stl, prt, cat)
-        for mid, (cr, std, sat, stl, prt, cat) in best.items()
+    rows: list[tuple[str, str, str, str, str, bool, bool, bool, str]] = [
+        (tenant_id, mid, cr, std, role, sat, stl, prt, cat)
+        for mid, (cr, std, role, sat, stl, prt, cat) in best.items()
     ]
 
     if not rows:
@@ -784,8 +793,135 @@ def _persist_must_verdicts(pg_conn, tenant_id: str, verdicts: dict) -> int:
             cur.executemany("""
                 INSERT INTO posture_must_verdicts
                     (tenant_id, must_id, control_ref, standard_id,
-                     satisfied, stale, partial, reason, computed_at)
-                VALUES (%s::uuid, %s, %s, %s, %s, %s, %s, %s, now())
+                     framework_role, satisfied, stale, partial, reason, computed_at)
+                VALUES (%s::uuid, %s, %s, %s, %s, %s, %s, %s, %s, now())
+            """, rows)
+        pg_conn.commit()
+    except Exception:
+        pg_conn.rollback()
+        raise
+
+    # Ship 59'.b — bridge coverage pass. Walk Neo4j IMPLEMENTS/SUPPORTS/
+    # ENABLES/GOVERNANCE edges and emit one bridge_coverage row per
+    # (target_must, source_must, edge_type) triple where source is
+    # direct-satisfied. Best-effort; never blocks the direct pass.
+    try:
+        satisfied_by_control = _index_satisfied_musts(rows)
+        n_bridges = _persist_bridge_coverage(pg_conn, tenant_id, satisfied_by_control, _framework_role)
+        if n_bridges:
+            logger.info(
+                "posture_must_bridge_coverage: wrote %d rows", n_bridges,
+            )
+    except Exception as e:
+        logger.warning("bridge coverage persist skipped: %s", e)
+
+    return len(rows)
+
+
+def _index_satisfied_musts(rows: list[tuple]) -> dict[str, set[str]]:
+    """From the flat row list, build {control_ref -> {satisfied_must_id}}.
+    Used by _persist_bridge_coverage to enumerate source MUSTs per control
+    without re-querying posture_must_verdicts."""
+    out: dict[str, set[str]] = {}
+    for r in rows:
+        # Row shape: (tenant_id, must_id, cr, std, role, satisfied, stale, partial, cat)
+        _, mid, cr, _std, _role, sat, _stl, _prt, _cat = r
+        if sat:
+            out.setdefault(cr, set()).add(mid)
+    return out
+
+
+def _persist_bridge_coverage(
+    pg_conn,
+    tenant_id: str,
+    satisfied_by_control: dict[str, set[str]],
+    framework_role_fn,
+) -> int:
+    """Walk xfw bridges (IMPLEMENTS/SUPPORTS/ENABLES/GOVERNANCE) in Neo4j
+    and emit bridge coverage rows for direct-satisfied source MUSTs.
+
+    One-hop only — matches auditor discipline (Ship 58 audit Gap 1 +
+    2026-08-11 design discussion). Bridge edges lack scope_items in the
+    current graph (audited 2026-08-11), so all target-control MUSTs are
+    considered in-scope per bridge.
+
+    Ship 59'.b. Best-effort — silently no-ops if Neo4j is unavailable.
+    Overwrites the tenant's rows atomically inside a delete+insert.
+    """
+    if not satisfied_by_control:
+        return 0
+
+    # _build_engine_neo4j_driver is defined in this same module.
+    drv = _build_engine_neo4j_driver()
+    if drv is None:
+        return 0
+
+    edge_types = ("IMPLEMENTS", "SUPPORTS", "ENABLES", "GOVERNANCE")
+    bridge_rows: list[tuple] = []
+    try:
+        with drv.session() as s:
+            for et in edge_types:
+                q = f"""
+                    MATCH (src:RequirementNode)-[e:{et}]->(dst:RequirementNode)
+                    OPTIONAL MATCH (dst)-[:SATISFIED_BY]->(:FulfilmentSpec)
+                               -[:REQUIRES_EVIDENCE]->(dst_er:EvidenceRequirement)
+                               -[:MUST_CONTAIN]->(dst_ci:ChecklistItem)
+                    RETURN src.ref AS src_ref, src.id AS src_id,
+                           dst.ref AS dst_ref, dst.id AS dst_id,
+                           collect(DISTINCT dst_ci.id) AS dst_musts
+                """
+                for row in s.run(q).data():
+                    src_ref = row["src_ref"]
+                    if src_ref not in satisfied_by_control:
+                        continue
+                    source_musts_satisfied = satisfied_by_control[src_ref]
+                    if not source_musts_satisfied:
+                        continue
+                    src_std = _extract_std(row["src_id"])
+                    dst_std = _extract_std(row["dst_id"])
+                    dst_ref = row["dst_ref"] or ""
+                    dst_musts = [m for m in (row["dst_musts"] or []) if m]
+                    if not dst_musts:
+                        continue
+                    src_role = framework_role_fn(src_std)
+                    dst_role = framework_role_fn(dst_std)
+                    # Cross-product: each satisfied source MUST bridges to
+                    # each target MUST via this edge.
+                    for src_must in source_musts_satisfied:
+                        for dst_must in dst_musts:
+                            bridge_rows.append((
+                                tenant_id, dst_must, dst_ref, dst_std, dst_role,
+                                src_must, src_ref, src_std, src_role, et,
+                            ))
+    finally:
+        try: drv.close()
+        except Exception: pass
+
+    if not bridge_rows:
+        return 0
+
+    # Dedupe on UNIQUE key (target_must, source_must, edge_type)
+    unique_rows: dict[tuple, tuple] = {}
+    for r in bridge_rows:
+        key = (r[1], r[5], r[9])
+        unique_rows[key] = r
+    rows = list(unique_rows.values())
+
+    try:
+        with pg_conn.cursor() as cur:
+            cur.execute(
+                "SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,),
+            )
+            cur.execute(
+                "DELETE FROM posture_must_bridge_coverage WHERE tenant_id = %s::uuid",
+                (tenant_id,),
+            )
+            cur.executemany("""
+                INSERT INTO posture_must_bridge_coverage
+                    (tenant_id, target_must_id, target_control_ref, target_standard_id, target_role,
+                     source_must_id, source_control_ref, source_standard_id, source_role, edge_type,
+                     computed_at)
+                VALUES (%s::uuid, %s, %s, %s, %s, %s, %s, %s, %s, %s, now())
             """, rows)
         pg_conn.commit()
     except Exception:
@@ -793,6 +929,12 @@ def _persist_must_verdicts(pg_conn, tenant_id: str, verdicts: dict) -> int:
         raise
 
     return len(rows)
+
+
+def _extract_std(node_id: str) -> str:
+    """'GDPR:2016/679:Art.46' → 'GDPR:2016/679'."""
+    parts = (node_id or "").rsplit(":", 1)
+    return parts[0] if len(parts) == 2 else (node_id or "")
 
 
 def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
