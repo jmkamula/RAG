@@ -43,6 +43,7 @@ SSoT doesn't store.
 | 60'.e | `build_evidence_class_breakdown` refactored — same SSoT + leaf-structure compose pattern applied to the dashboard drill-in surface. New `_build_evidence_class_breakdown_from_ssot` helper; source_documents / template_availability / cite fields stay on the same Postgres helpers (never touched engine). Bridge attribution added: per-MUST `bridge_sources` + per-leaf `n_bridged`. Legacy `evaluate_one_control` fallback retained. Verified: A.5.15 breakdown matches per_must advisory numbers (4 leaves, 10/19 = 53% overall on Arion); Art.32 shows 6/16 = 38% with total `n_bridged=10`. |
 | 60'.f | Fallback telemetry. `advisory.fallback` + `evidence_class_breakdown.fallback` `logger.info` lines fire whenever the legacy `evaluate_one_control` path fires (SSoT empty or leaf-structure unavailable). Enables a data-driven retire-by decision on the fallback path in a future arc — no assumptions needed. |
 | 60'.g | SPA bridge chip. New `renderBridgeChip(leaf)` helper in `static/arioncomply.html` builds a green cross-framework nudge from `n_bridged` + unique source `standard_id`s across the leaf's unmet MUSTs. Wired into two surfaces: (1) advisory panel unmet-leaf render (`renderAdvisoryPanel`), (2) dashboard evidence-classes drill-in per-leaf block. Empty on legacy fallback responses. Message shape: "3 elements are already covered by evidence for related ISO 27001:2022 controls." |
+| 60'.h | Chat advisory markdown nudge. New `_bridge_nudge_line(leaf)` helper in `rag/posture/advisory.py` mirrors the SPA chip's message shape as a single markdown line. Appended after `To address:` on each unmet leaf in `_render_advisory_markdown`. Consumed by `build_per_must_advisory` — the chat surface for posture_check queries that identify a single control. Verified on Art.32: all 4 leaves render the nudge with rolled-up ISO 27001:2022 + ISO 27701:2019 attribution. Legacy chat markdown path — the modern case-file digest doesn't feed through this renderer (see below deferral). |
 
 ## Key architectural decisions
 
@@ -169,6 +170,16 @@ opt into the new fields on their own timeline.
   (Ship 60'.f added the logger.info hook). Grep
   `advisory.fallback` / `evidence_class_breakdown.fallback` in prod
   logs; if never fires in steady state, delete the fallback path.
+- **Bridge nudge in case-file digest** — Ship 60'.h added the nudge
+  to the legacy chat markdown surface (`build_per_must_advisory` →
+  `_render_advisory_markdown`). The modern case-file flow (Ship 2')
+  consumes `build_per_must_advisory_data` directly via
+  `rag/casefile/answer_augment.py` and produces its own digest —
+  it does NOT feed through `_render_advisory_markdown`. Propagating
+  the bridge nudge into the case-file digest needs a plumb through
+  `LeafState` → `rag/casefile/digest.py` — small but touches the
+  Ship 2' preservation-check contract. Deferred to product call on
+  where the nudge should surface in the modern flow.
 - **`evidence_class_breakdown` migration** — DELIVERED in Ship 60'.e
   as a same-arc addendum. source_documents / template_availability /
   cite fields stayed on their existing Postgres helpers (they were

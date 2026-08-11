@@ -1090,6 +1090,42 @@ def _build_evidence_class_breakdown_from_ssot(
 
 # ── Markdown renderer (chat surface) ─────────────────────────────────────────
 
+_HUMAN_STD = {
+    "GDPR:2016/679":  "GDPR",
+    "ISO27001:2022":  "ISO 27001:2022",
+    "ISO27701:2019":  "ISO 27701:2019",
+}
+
+
+def _bridge_nudge_line(leaf: dict) -> str:
+    """Ship 60'.h — one-line "N elements already covered by X" nudge.
+
+    Same shape as `renderBridgeChip` on the SPA. Returns '' when the
+    leaf has no bridge attribution on its missing MUSTs (n_bridged is
+    zero or the field is absent on legacy fallback responses).
+    """
+    n_bridged = int(leaf.get("n_bridged") or 0)
+    if not n_bridged:
+        return ""
+    stds: set[str] = set()
+    for m in leaf.get("must_items") or []:
+        if m.get("satisfied"):
+            continue
+        for b in m.get("bridge_sources") or []:
+            sid = b.get("source_standard_id") or ""
+            if sid:
+                stds.add(_HUMAN_STD.get(sid, sid))
+    if not stds:
+        return ""
+    std_list = ", ".join(sorted(stds))
+    noun     = "element is" if n_bridged == 1 else "elements are"
+    ctrl_noun = "control" if len(stds) == 1 else "controls"
+    return (
+        f"↗ Related coverage: {n_bridged} {noun} already covered by "
+        f"evidence for related {std_list} {ctrl_noun}."
+    )
+
+
 def _render_advisory_markdown(data: dict) -> str:
     """Render the data dict as markdown. Same shape as before — chat
     surfaces use this. Returns "" if data is None."""
@@ -1134,6 +1170,11 @@ def _render_advisory_markdown(data: dict) -> str:
         if miss_tail:
             lines.append(f"      - …{miss_tail}")
         lines.append(f"    To address: {leaf['upload_hint']}")
+        # Ship 60'.h — cross-framework coverage nudge (same message
+        # shape as the SPA chip in static/arioncomply.html).
+        nudge = _bridge_nudge_line(leaf)
+        if nudge:
+            lines.append(f"    {nudge}")
         leaf_sections.append("\n".join(lines))
 
     if not leaf_sections:
