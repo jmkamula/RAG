@@ -259,8 +259,13 @@ def build_per_must_advisory_data(
         return data
 
     # Legacy fallback — SSoT unpopulated OR leaf structure fetch failed.
-    # Kept for defence-in-depth during the transition window. Ship 60'.d
-    # retro will assess whether this path can retire.
+    # Kept for defence-in-depth during the transition window.
+    # Ship 60'.f — log every fallback so we can decide when to retire it.
+    logger.info(
+        "advisory.fallback: engine path for %s/%s tenant=%s "
+        "(SSoT empty or leaf-structure unavailable)",
+        standard_id, control_ref, str(tenant_id)[:8],
+    )
     if neo4j_driver is None:
         neo4j_driver = _get_neo_driver()
         if neo4j_driver is None:
@@ -801,6 +806,10 @@ def build_evidence_class_breakdown(
         return data
 
     # Legacy fallback — SSoT unpopulated or leaf structure fetch failed.
+    logger.info(
+        "evidence_class_breakdown.fallback: engine path for %s/%s tenant=%s",
+        standard_id, control_ref, str(tenant_id)[:8],
+    )
     if neo4j_driver is None:
         neo4j_driver = _get_neo_driver()
         if neo4j_driver is None:

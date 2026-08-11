@@ -4064,6 +4064,36 @@ function humanizeStandardId(s) {
   return s;
 }
 
+// Ship 60'.g — bridge attribution chip.
+// Takes a leaf entry (from evidence-classes breakdown or advisory
+// panel) and returns a small HTML chip describing how many unmet
+// MUSTs are cross-framework-covered, and by which frameworks.
+// Returns '' when nothing to say (n_bridged is zero or the field
+// is missing on legacy fallback responses).
+function renderBridgeChip(leaf) {
+  const nBridged = Number(leaf && leaf.n_bridged || 0);
+  if (!nBridged) return '';
+  // Roll up unique source standards from the MUSTs' bridge_sources.
+  const must_items = (leaf && leaf.must_items) || [];
+  const stds = new Set();
+  for (const m of must_items) {
+    if (m.satisfied) continue;
+    for (const b of (m.bridge_sources || [])) {
+      if (b.source_standard_id) stds.add(humanizeStandardId(b.source_standard_id));
+    }
+  }
+  if (!stds.size) return '';
+  const stdList = Array.from(stds).sort().join(', ');
+  const noun = nBridged === 1 ? 'element is' : 'elements are';
+  const stdNoun = stds.size === 1 ? 'control' : 'controls';
+  return `<div style="margin-top:6px;padding:6px 10px;background:#F0F4F0;
+                     border-left:3px solid #4A9059;font-size:11px;color:#3A382E">
+    <span style="color:#4A9059">↗</span>
+    ${nBridged} ${noun} already covered by evidence for related
+    <strong>${stdList}</strong> ${stdNoun}.
+  </div>`;
+}
+
 // tenant_notification.kind -> short tenant-facing label. Keep in sync
 // with the cascade notify() call sites in rag/cascade/*.py.
 const _NOTIF_KIND_LABEL = {
@@ -5021,6 +5051,11 @@ function renderEvidenceClassesPanel(b, opts) {
       const sourcesRow = `<div style="margin-top:4px;display:flex;flex-wrap:wrap;align-items:center;gap:6px">
         <span style="${labelStyle}">Sources</span>${sources}
       </div>`;
+      // Ship 60'.g — cross-framework attribution chip (same helper used
+      // by the advisory panel). Empty string when no bridge_sources on
+      // this leaf's missing MUSTs.
+      const bridgeChip = renderBridgeChip(leaf);
+
       leafLines += `<div class="leaf-block"
                          style="margin-top:10px;padding:8px 10px;background:#FAF8F2;
                                 border:1px solid #F0EDE3;border-radius:4px"
@@ -5029,6 +5064,7 @@ function renderEvidenceClassesPanel(b, opts) {
           ${esc(leaf.leaf_label)} · ${leaf.musts_bound}/${leaf.musts_total} covered
         </div>
         ${sourcesRow}
+        ${bridgeChip}
         ${actionsRow}
       </div>`;
 
@@ -5979,6 +6015,12 @@ function renderAdvisoryPanel(adv) {
         <strong>To address:</strong> ${esc(l.upload_hint)}
       </div>`;
     }
+
+    // Ship 60'.g — cross-framework coverage nudge. When missing MUSTs
+    // are already covered by evidence for related controls in another
+    // framework, surface it so the tenant knows they may not need to
+    // author fresh artefacts.
+    body += renderBridgeChip(l);
 
     body += `</div>`;
   }

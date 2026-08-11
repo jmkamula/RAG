@@ -41,6 +41,8 @@ SSoT doesn't store.
 | 60'.c | Bridge attribution surfaced in the response — `must_items[].bridge_sources` populated from `MustVerdict.bridge_sources` (per-MUST auditor attribution: `source_must_id`, `source_control_ref`, `source_standard_id`, `source_role`, `edge_type`) + leaf-level `n_bridged` count (unmet-direct MUSTs with ≥1 bridge). Fallback path emits empty `bridge_sources` + `n_bridged=0`. Consumer UX opt-in — no envelope change. |
 | 60'.d | Interim retro (initial write). |
 | 60'.e | `build_evidence_class_breakdown` refactored — same SSoT + leaf-structure compose pattern applied to the dashboard drill-in surface. New `_build_evidence_class_breakdown_from_ssot` helper; source_documents / template_availability / cite fields stay on the same Postgres helpers (never touched engine). Bridge attribution added: per-MUST `bridge_sources` + per-leaf `n_bridged`. Legacy `evaluate_one_control` fallback retained. Verified: A.5.15 breakdown matches per_must advisory numbers (4 leaves, 10/19 = 53% overall on Arion); Art.32 shows 6/16 = 38% with total `n_bridged=10`. |
+| 60'.f | Fallback telemetry. `advisory.fallback` + `evidence_class_breakdown.fallback` `logger.info` lines fire whenever the legacy `evaluate_one_control` path fires (SSoT empty or leaf-structure unavailable). Enables a data-driven retire-by decision on the fallback path in a future arc — no assumptions needed. |
+| 60'.g | SPA bridge chip. New `renderBridgeChip(leaf)` helper in `static/arioncomply.html` builds a green cross-framework nudge from `n_bridged` + unique source `standard_id`s across the leaf's unmet MUSTs. Wired into two surfaces: (1) advisory panel unmet-leaf render (`renderAdvisoryPanel`), (2) dashboard evidence-classes drill-in per-leaf block. Empty on legacy fallback responses. Message shape: "3 elements are already covered by evidence for related ISO 27001:2022 controls." |
 
 ## Key architectural decisions
 
@@ -163,12 +165,10 @@ opt into the new fields on their own timeline.
 
 ## Follow-ons deferred
 
-- **Consumer UX for `bridge_sources` + `n_bridged`** — Dashboard
-  advisory panel and SPA leaf-detail could render "covered via ISO"
-  chip on unmet-but-bridged MUSTs. Product call.
 - **Retire legacy engine fallback** — after N weeks of telemetry
-  confirming the fallback never (or rarely) fires. Requires adding a
-  logger.info in the fallback branch first to observe.
+  (Ship 60'.f added the logger.info hook). Grep
+  `advisory.fallback` / `evidence_class_breakdown.fallback` in prod
+  logs; if never fires in steady state, delete the fallback path.
 - **`evidence_class_breakdown` migration** — DELIVERED in Ship 60'.e
   as a same-arc addendum. source_documents / template_availability /
   cite fields stayed on their existing Postgres helpers (they were
@@ -183,11 +183,13 @@ opt into the new fields on their own timeline.
 ## What Ship 60' costs to reproduce
 
 - Schema migrations: 0
-- Wall clock: ~2.5 hours (design + implementation + verify + retro
-  + 60'.e sibling migration)
-- Files touched: 2 (rag/posture/advisory.py, rag/posture/leaf_structure.py NEW)
-- Lines: ~600 (new module + refactor on both advisory builders)
-- Eval regression: 230/232 identical to pre-Ship-60 baseline
-- Deferred: consumer UX for bridge_sources / n_bridged, retire
-  legacy fallback (post-telemetry), Evidence Package hybrid
-  (Ship 61'.a).
+- Wall clock: ~3 hours (design + implementation + verify + retro
+  + 60'.e sibling migration + 60'.f-g consumer UX)
+- Files touched: 3 (rag/posture/advisory.py, rag/posture/leaf_structure.py NEW,
+  static/arioncomply.html)
+- Lines: ~700 (new module + refactor on both advisory builders +
+  chip helper + wiring)
+- Eval regression: 231 PASS + 1 WARN (baseline preserved; #5
+  physical-leak stochastic landed on PASS side this run)
+- Deferred: retire legacy fallback (post-telemetry), Evidence
+  Package hybrid (Ship 61'.a).
