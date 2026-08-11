@@ -3453,25 +3453,24 @@ async def advisory_topic_detail(
             """, [key_info.tenant_id, slug])
             leaves_rows = cur.fetchall()
 
-            # Ship 54'.b addendum 3 — bulk fetch (control_ref, must_id)
-            # combos with at least one active document_findings row.
-            # Combined with the per-leaf MUST-universe cache, this lets us
-            # compute a per-leaf state chip (complete / partial / notstarted
-            # / na) without a per-leaf advisory call. One extra query total.
+            # Per-leaf state chip (complete / partial / notstarted / na)
+            # via the SSoT reader (2026-08-11 — was direct
+            # document_findings query, converged onto shared reader).
+            # Any MUST whose SSoT state != 'missing' counts as bound —
+            # matches the prior 'present OR partial' semantics.
             ctrl_refs = list({_control_ref_from_leaf_id(r[0]) for r in leaves_rows})
             satisfied_musts: dict[str, set[str]] = {}  # control_ref → {must_id}
             if ctrl_refs:
-                cur.execute("""
-                    SELECT DISTINCT control_ref, checklist_item_id
-                      FROM document_findings
-                     WHERE tenant_id = %s::uuid
-                       AND is_active = TRUE
-                       AND status IN ('present', 'partial')
-                       AND control_ref = ANY(%s)
-                """, [key_info.tenant_id, ctrl_refs])
-                for (cref, mid) in cur.fetchall():
-                    if mid:
-                        satisfied_musts.setdefault(cref, set()).add(mid)
+                from rag.posture.must_verdicts import read_must_verdicts
+                # Query per-control; SSoT rows carry both control_ref +
+                # must_id so we group after the pull.
+                for cref in ctrl_refs:
+                    verdicts = read_must_verdicts(
+                        conn, key_info.tenant_id, control_ref=cref,
+                    )
+                    bound = {mid for mid, v in verdicts.items() if v.state != "missing"}
+                    if bound:
+                        satisfied_musts[cref] = bound
 
         # Neo4j lookup for leaf titles + control titles (best-effort)
         leaf_ids   = [r[0] for r in leaves_rows]

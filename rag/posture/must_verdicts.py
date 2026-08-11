@@ -116,6 +116,15 @@ def read_must_verdicts(
             return {}
         where_parts.append("must_id = ANY(%s)")
         params.append(ids_list)
+        # Ship 59'.e — same must_id can appear under multiple
+        # control_refs (canonical owner + stub-context rollup rows).
+        # When scoped by must_ids, consumers want the CANONICAL row
+        # (one per must_id, tied to the MUST's owning control). Every
+        # ChecklistItem id has shape `item:<control_ref>:<slot>`, so
+        # split_part(must_id, ':', 2) yields the owner. This filter
+        # drops stub_rollup rows so the {must_id: MustVerdict} return
+        # shape stays 1:1 without ambiguity.
+        where_parts.append("control_ref = split_part(must_id, ':', 2)")
     if control_ref is not None:
         where_parts.append("control_ref = %s")
         params.append(control_ref)
@@ -144,24 +153,35 @@ def read_must_verdicts(
             # ids in one query. Bridge rows joined into MustVerdict on
             # the Python side (dataclass tuples) rather than SQL JSON
             # aggregation — keeps the reader portable and predictable.
-            target_ids = [r[0] for r in base_rows]
-            bridges_by_target: dict[str, list[BridgeSource]] = {}
-            if target_ids:
+            #
+            # Ship 59'.e — key bridges by (target_must_id, target_control_ref)
+            # instead of just target_must_id. The same MUST can appear
+            # in bridge_coverage under multiple target_control_refs
+            # (canonical + stub attributions). Matching each row's
+            # (must_id, control_ref) preserves self-contained attribution:
+            # a query for Art.32.1.b returns only bridges targeting
+            # Art.32.1.b, not bridges targeting the parent Art.32.
+            pairs = [(r[0], r[1]) for r in base_rows]
+            bridges_by_pair: dict[tuple[str, str], list[BridgeSource]] = {}
+            if pairs:
+                target_ids  = [p[0] for p in pairs]
+                target_crfs = [p[1] for p in pairs]
                 cur.execute("""
-                    SELECT target_must_id,
+                    SELECT target_must_id, target_control_ref,
                            source_must_id, source_control_ref,
                            source_standard_id, source_role, edge_type
                       FROM posture_must_bridge_coverage
                      WHERE tenant_id = %s::uuid
                        AND target_must_id = ANY(%s)
-                """, (tenant_id, target_ids))
+                       AND target_control_ref = ANY(%s)
+                """, (tenant_id, target_ids, target_crfs))
                 for row in cur.fetchall():
-                    bridges_by_target.setdefault(row[0], []).append(BridgeSource(
-                        source_must_id     = row[1],
-                        source_control_ref = row[2],
-                        source_standard_id = row[3],
-                        source_role        = row[4],
-                        edge_type          = row[5],
+                    bridges_by_pair.setdefault((row[0], row[1]), []).append(BridgeSource(
+                        source_must_id     = row[2],
+                        source_control_ref = row[3],
+                        source_standard_id = row[4],
+                        source_role        = row[5],
+                        edge_type          = row[6],
                     ))
 
             return {
@@ -174,7 +194,7 @@ def read_must_verdicts(
                     stale          = r[5],
                     partial        = r[6],
                     reason         = r[7],
-                    bridge_sources = tuple(bridges_by_target.get(r[0], [])),
+                    bridge_sources = tuple(bridges_by_pair.get((r[0], r[1]), [])),
                 )
                 for r in base_rows
             }

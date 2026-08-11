@@ -777,6 +777,50 @@ def _persist_must_verdicts(pg_conn, tenant_id: str, verdicts: dict) -> int:
     if not rows:
         return 0
 
+    # Ship 59'.e — pre-load stub_effective. Re-used below for stub
+    # verdict rows AND handed to _persist_bridge_coverage to avoid a
+    # second Neo4j round-trip. Silent-fail on Neo4j issues: stubs
+    # remain uncovered in SSoT but the direct pass still lands.
+    stub_effective: dict[str, tuple[str, list[str]]] = {}
+    _drv = _build_engine_neo4j_driver()
+    if _drv is not None:
+        try:
+            with _drv.session() as _s:
+                stub_effective = _load_stub_effective_musts(_s)
+        except Exception as e:
+            logger.warning("stub_effective load skipped: %s", e)
+        finally:
+            try: _drv.close()
+            except Exception: pass
+
+    # Ship 59'.e — synthesize stub-context verdict rows. Same must_id
+    # appears twice: once under its canonical owner control (e.g.
+    # item:Art.32:purposes @ control_ref='Art.32') and once per stub
+    # borrowing it (e.g. same MUST @ control_ref='Art.32.1.b'). Both
+    # rows carry identical satisfied/stale/partial facts — the stub
+    # row's `reason` is tagged 'stub_rollup:<stub_ref>' so consumers
+    # (and the reader's must_ids scope filter) can distinguish.
+    stub_rows: list[tuple] = []
+    for stub_ref, (stub_std, must_ids) in stub_effective.items():
+        stub_role = _framework_role(stub_std)
+        for mid in must_ids:
+            if mid in best:
+                _cr, _std, _role, sat, stl, prt, _cat = best[mid]
+                stub_rows.append((
+                    tenant_id, mid, stub_ref, stub_std, stub_role,
+                    sat, stl, prt, f"stub_rollup:{stub_ref}",
+                ))
+            else:
+                # Canonical MUST unsatisfied (or its control had no
+                # engine verdict this run) — emit an unsatisfied stub
+                # row so consumers still see the MUST under the stub.
+                stub_rows.append((
+                    tenant_id, mid, stub_ref, stub_std, stub_role,
+                    False, False, False, f"stub_rollup:{stub_ref}",
+                ))
+
+    all_rows = rows + stub_rows
+
     try:
         with pg_conn.cursor() as cur:
             cur.execute(
@@ -795,7 +839,7 @@ def _persist_must_verdicts(pg_conn, tenant_id: str, verdicts: dict) -> int:
                     (tenant_id, must_id, control_ref, standard_id,
                      framework_role, satisfied, stale, partial, reason, computed_at)
                 VALUES (%s::uuid, %s, %s, %s, %s, %s, %s, %s, %s, now())
-            """, rows)
+            """, all_rows)
         pg_conn.commit()
     except Exception:
         pg_conn.rollback()
@@ -807,7 +851,9 @@ def _persist_must_verdicts(pg_conn, tenant_id: str, verdicts: dict) -> int:
     # direct-satisfied. Best-effort; never blocks the direct pass.
     try:
         satisfied_by_control = _index_satisfied_musts(rows)
-        n_bridges = _persist_bridge_coverage(pg_conn, tenant_id, satisfied_by_control, _framework_role)
+        n_bridges = _persist_bridge_coverage(
+            pg_conn, tenant_id, satisfied_by_control, _framework_role, stub_effective,
+        )
         if n_bridges:
             logger.info(
                 "posture_must_bridge_coverage: wrote %d rows", n_bridges,
@@ -815,7 +861,7 @@ def _persist_must_verdicts(pg_conn, tenant_id: str, verdicts: dict) -> int:
     except Exception as e:
         logger.warning("bridge coverage persist skipped: %s", e)
 
-    return len(rows)
+    return len(all_rows)
 
 
 def _index_satisfied_musts(rows: list[tuple]) -> dict[str, set[str]]:
@@ -836,6 +882,7 @@ def _persist_bridge_coverage(
     tenant_id: str,
     satisfied_by_control: dict[str, set[str]],
     framework_role_fn,
+    stub_effective: dict[str, tuple[str, list[str]]] | None = None,
 ) -> int:
     """Walk xfw bridges (IMPLEMENTS/SUPPORTS/ENABLES/GOVERNANCE) in Neo4j
     and emit bridge coverage rows for direct-satisfied source MUSTs.
@@ -845,11 +892,15 @@ def _persist_bridge_coverage(
     current graph (audited 2026-08-11), so all target-control MUSTs are
     considered in-scope per bridge.
 
-    Ship 59'.b. Best-effort — silently no-ops if Neo4j is unavailable.
-    Overwrites the tenant's rows atomically inside a delete+insert.
+    Ship 59'.b. Ship 59'.e adds stub_effective parameter (pre-loaded by
+    the caller in _persist_must_verdicts) so we don't re-open Neo4j.
+    Best-effort — silently no-ops if Neo4j is unavailable. Overwrites
+    the tenant's rows atomically inside a delete+insert.
     """
     if not satisfied_by_control:
         return 0
+
+    stub_effective = stub_effective or {}
 
     # _build_engine_neo4j_driver is defined in this same module.
     drv = _build_engine_neo4j_driver()
@@ -881,8 +932,15 @@ def _persist_bridge_coverage(
                     dst_std = _extract_std(row["dst_id"])
                     dst_ref = row["dst_ref"] or ""
                     dst_musts = [m for m in (row["dst_musts"] or []) if m]
+                    # Ship 59'.e — if target is a stub (0 direct MUSTs),
+                    # use the pre-computed effective MUSTs (via derivation
+                    # or ref-parsing to parent). Attribution rows still
+                    # tagged with the stub's dst_ref so consumers can
+                    # query the stub directly.
                     if not dst_musts:
-                        continue
+                        _stub_std, dst_musts = stub_effective.get(dst_ref, (None, []))
+                        if not dst_musts:
+                            continue  # legitimately unresolvable (e.g. Art.83)
                     src_role = framework_role_fn(src_std)
                     dst_role = framework_role_fn(dst_std)
                     # Cross-product: each satisfied source MUST bridges to
@@ -900,10 +958,14 @@ def _persist_bridge_coverage(
     if not bridge_rows:
         return 0
 
-    # Dedupe on UNIQUE key (target_must, source_must, edge_type)
+    # Dedupe on UNIQUE key (target_must, target_control_ref, source_must,
+    # edge_type). Ship 59'.e — target_control_ref is part of the key so
+    # stub attribution rows (target_control_ref='Art.32.1.b') coexist
+    # with parent attribution rows (target_control_ref='Art.32') even
+    # when they share target_must_id (both borrow parent's MUSTs).
     unique_rows: dict[tuple, tuple] = {}
     for r in bridge_rows:
-        key = (r[1], r[5], r[9])
+        key = (r[1], r[2], r[5], r[9])
         unique_rows[key] = r
     rows = list(unique_rows.values())
 
@@ -935,6 +997,90 @@ def _extract_std(node_id: str) -> str:
     """'GDPR:2016/679:Art.46' → 'GDPR:2016/679'."""
     parts = (node_id or "").rsplit(":", 1)
     return parts[0] if len(parts) == 2 else (node_id or "")
+
+
+def _load_stub_effective_musts(neo_session) -> dict[str, tuple[str, list[str]]]:
+    """Ship 59'.e (2026-08-11) — resolve effective MUSTs for stub nodes.
+
+    A "stub" RequirementNode has zero MUST_CONTAIN items of its own but
+    is referenced by xfw bridges (auditors + curators need to be able to
+    query "how is Art.32.1.b covered?" directly, not "you have to
+    manually check Art.32's coverage instead"). Ship 59'.e resolves
+    each stub's effective MUSTs so the bridge writer can emit
+    self-contained attribution rows targeting the stub's control_ref.
+
+    Two resolution paths, in order:
+      1. Follow DERIVES_FROM edges from the stub's FulfilmentSpec to
+         source controls, transitively (up to depth 3). If any resolves
+         to a node with MUST items, use those. Graph-native — this is
+         the mechanism curators use to model "Art.5.1.f's compliance IS
+         Art.32's compliance" (definitional derivation).
+      2. Ref-parse fallback: `Art.X.Y.Z` → `Art.X`. Used for stubs like
+         Art.32.1.b that have IMPLEMENTS bridges from curators but no
+         explicit DERIVES_FROM. GDPR-specific pattern; not applicable
+         to ISO controls (their refs don't have this sub-clause shape).
+      3. If neither path resolves (like Art.83 — a penalties article
+         with no compliance MUSTs anywhere), return empty. SSoT
+         legitimately has no attribution to emit for these.
+
+    Returns {stub_ref: (standard_id, [must_id, ...])}. Only stubs with
+    resolvable effective MUSTs appear as keys. The standard_id is the
+    stub's own standard (not the parent's — bridges + verdict rows are
+    scoped by the stub's framework).
+    """
+    # Find all stubs (RequirementNodes with 0 direct MUSTs) + capture
+    # their node id so we can extract the standard_id.
+    stubs = neo_session.run("""
+        MATCH (rn:RequirementNode)
+        OPTIONAL MATCH (rn)-[:SATISFIED_BY]->(:FulfilmentSpec)
+                       -[:REQUIRES_EVIDENCE]->(:EvidenceRequirement)
+                       -[:MUST_CONTAIN]->(ci:ChecklistItem)
+        WITH rn, count(DISTINCT ci) AS n_musts
+        WHERE n_musts = 0
+        RETURN rn.ref AS ref, rn.id AS node_id
+    """).data()
+
+    import re as _re
+    out: dict[str, tuple[str, list[str]]] = {}
+    for stub in stubs:
+        ref = stub["ref"]
+        if not ref:
+            continue
+        stub_std = _extract_std(stub["node_id"] or "")
+
+        # Path 1: transitive DERIVES_FROM (up to depth 3)
+        r = neo_session.run("""
+            MATCH (stub:RequirementNode {ref: $ref})
+                  -[:SATISFIED_BY]->(:FulfilmentSpec)
+                  -[:DERIVES_FROM*1..3]->(dep:RequirementNode)
+                  -[:SATISFIED_BY]->(:FulfilmentSpec)
+                  -[:REQUIRES_EVIDENCE]->(:EvidenceRequirement)
+                  -[:MUST_CONTAIN]->(ci:ChecklistItem)
+            RETURN collect(DISTINCT ci.id) AS musts
+        """, ref=ref).single()
+        if r and r["musts"]:
+            out[ref] = (stub_std, r["musts"])
+            continue
+
+        # Path 2: ref parsing (GDPR Art.X.Y.Z → Art.X)
+        m = _re.match(r"^(Art\.\d+)(\.\d+.*)?$", ref)
+        if m and m.group(2):
+            parent_ref = m.group(1)
+            rp = neo_session.run("""
+                MATCH (parent:RequirementNode {ref: $parent_ref})
+                      -[:SATISFIED_BY]->(:FulfilmentSpec)
+                      -[:REQUIRES_EVIDENCE]->(:EvidenceRequirement)
+                      -[:MUST_CONTAIN]->(ci:ChecklistItem)
+                RETURN collect(DISTINCT ci.id) AS musts
+            """, parent_ref=parent_ref).single()
+            if rp and rp["musts"]:
+                out[ref] = (stub_std, rp["musts"])
+                continue
+
+        # Path 3: no resolution — leave out of map. Consumers get empty
+        # attribution for this stub, which is the honest signal.
+
+    return out
 
 
 def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
