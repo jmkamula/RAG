@@ -789,6 +789,18 @@ def build_evidence_class_breakdown(
     """
     if not control_ref:
         return None
+
+    # Ship 60'.e — SSoT + leaf structure path. Falls back to the legacy
+    # engine walk only if SSoT is empty for this tenant+control (fresh
+    # tenant, sweep lag, etc.). Same fallback discipline as
+    # build_per_must_advisory_data (Ship 60'.b).
+    data = _build_evidence_class_breakdown_from_ssot(
+        pg_conn, tenant_id, control_ref, standard_id,
+    )
+    if data is not None:
+        return data
+
+    # Legacy fallback — SSoT unpopulated or leaf structure fetch failed.
     if neo4j_driver is None:
         neo4j_driver = _get_neo_driver()
         if neo4j_driver is None:
@@ -803,8 +815,6 @@ def build_evidence_class_breakdown(
     if verdict is None or not verdict.leaves:
         return None
 
-    # Build the leaf → bound must_ids map from verdict, plus full must_ids
-    # set per leaf.
     leaf_to_bound_ids: dict[str, list[str]] = {
         leaf.leaf_id: list(leaf.item_ids_recognised or [])
         for leaf in verdict.leaves
@@ -819,7 +829,6 @@ def build_evidence_class_breakdown(
     template_avail = _fetch_template_availability(pg_conn, leaf_ids)
     cites_per_leaf = _fetch_cites_per_leaf(pg_conn, tenant_id, leaf_ids)
 
-    # Group leaves by evidence_type
     by_class: dict[str, list[dict]] = {}
     musts_total_all = 0
     musts_bound_all = 0
@@ -836,15 +845,12 @@ def build_evidence_class_breakdown(
 
         must_items: list[dict] = []
         for _id, _t in zip(rec_ids, rec_texts):
-            must_items.append({"id": _id, "text": _t, "satisfied": True})
+            must_items.append({"id": _id, "text": _t, "satisfied": True,
+                               "bridge_sources": []})
         for _id, _t in zip(unrec_ids, unrec_texts):
-            must_items.append({"id": _id, "text": _t, "satisfied": False})
+            must_items.append({"id": _id, "text": _t, "satisfied": False,
+                               "bridge_sources": []})
 
-        # Cite-acceptable: surface the cite lane on this leaf's UI card.
-        # Engine has already counted fresh cites toward `bound` above
-        # (leaf_evaluators._fetch_recognised_cites); the flag drives the
-        # frontend's render — whether to show "+ Cite source" + grouped
-        # cites + verify buttons for this leaf.
         from rag.posture.cite_mode import is_cite_acceptable
         cite_acceptable = is_cite_acceptable(leaf.evidence_type)
 
@@ -857,6 +863,7 @@ def build_evidence_class_breakdown(
             "items_have":       rec_texts,
             "items_missing":    unrec_texts,
             "must_items":       must_items,
+            "n_bridged":        0,
             "source_documents": source_docs.get(leaf.leaf_id, []),
             "template_available": template_avail.get(leaf.leaf_id, False),
             "cite_acceptable":  cite_acceptable,
@@ -864,7 +871,6 @@ def build_evidence_class_breakdown(
         }
         by_class.setdefault(leaf.evidence_type or "evidence", []).append(leaf_entry)
 
-    # Emit class rollups, ordered by class-total descending (most-MUSTs first)
     classes_out: list[dict] = []
     for et, leaves in by_class.items():
         class_total = sum(l["musts_total"] for l in leaves)
@@ -893,6 +899,183 @@ def build_evidence_class_breakdown(
         "overall_yield_pct": overall_yield,
         "evidence_classes":  classes_out,
         "source":           _source_label(control_ref, standard_id),
+    }
+
+
+def _build_evidence_class_breakdown_from_ssot(
+    pg_conn,
+    tenant_id:   str,
+    control_ref: str,
+    standard_id: str,
+) -> Optional[dict]:
+    """Ship 60'.e — SSoT-sourced evidence-class breakdown.
+
+    Same compose pattern as `_build_advisory_from_ssot`:
+      1. Leaf structure from Neo4j (cached, tenant-agnostic).
+      2. Per-MUST fulfillment from `posture_must_verdicts`.
+      3. Live control-level `finding` from `posture_controls`.
+    + Postgres helpers for `source_documents`, `template_available`,
+      and cite fields (unchanged — they never touched the engine).
+
+    Unlike advisory, this renders regardless of posture (dashboard
+    coverage view; Comply controls show 100% cells). Returns None only
+    when the control has no curated leaf structure OR SSoT is empty.
+
+    Bridge attribution: per-MUST `bridge_sources` populated + per-leaf
+    `n_bridged` count added (matches Ship 60'.c shape on advisory).
+    """
+    from rag.posture.leaf_structure import get_control_leaves
+    from rag.posture.must_verdicts import read_must_verdicts_by_control
+    from rag.posture.cite_mode import is_cite_acceptable
+
+    cl = get_control_leaves(control_ref, standard_id)
+    if cl is None or not cl.leaves:
+        return None
+
+    verdicts = read_must_verdicts_by_control(
+        pg_conn, tenant_id, control_ref, standard_id,
+    )
+    if not verdicts:
+        return None  # SSoT unpopulated — fallback path will try engine
+
+    # Fetch top-level posture (rendered even for Comply / N/A).
+    live_posture = ""
+    try:
+        with pg_conn.cursor() as cur:
+            cur.execute(
+                "SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,),
+            )
+            cur.execute("""
+                SELECT finding
+                  FROM posture_controls
+                 WHERE tenant_id = %s::uuid
+                   AND control_ref = %s
+                   AND standard_id = %s
+                 LIMIT 1
+            """, (tenant_id, control_ref, standard_id))
+            row = cur.fetchone()
+            if row:
+                live_posture = (row[0] or "")
+    except Exception as e:
+        logger.warning("evidence_class_breakdown: posture lookup failed: %s", e)
+        # Non-fatal — proceed with empty posture; UI still gets coverage.
+
+    # Build leaf → bound MUST ids for the source_documents helper.
+    leaf_to_bound_ids: dict[str, list[str]] = {}
+    leaf_ids: list[str] = []
+    for leaf in cl.leaves:
+        applicable = [mid for mid in leaf.must_ids if mid in verdicts]
+        if not applicable:
+            continue  # entire leaf N/A-excluded
+        leaf_to_bound_ids[leaf.leaf_id] = [
+            mid for mid in applicable if verdicts[mid].satisfied
+        ]
+        leaf_ids.append(leaf.leaf_id)
+
+    source_docs    = _fetch_source_documents_per_leaf(pg_conn, tenant_id, leaf_to_bound_ids)
+    template_avail = _fetch_template_availability(pg_conn, leaf_ids)
+    cites_per_leaf = _fetch_cites_per_leaf(pg_conn, tenant_id, leaf_ids)
+
+    by_class: dict[str, list[dict]] = {}
+    musts_total_all = 0
+    musts_bound_all = 0
+
+    for leaf in cl.leaves:
+        applicable_ids = [mid for mid in leaf.must_ids if mid in verdicts]
+        if not applicable_ids:
+            continue
+
+        items_have:    list[str] = []
+        items_missing: list[str] = []
+        must_items:    list[dict] = []
+        n_bridged_leaf = 0
+
+        for mid in applicable_ids:
+            mv    = verdicts[mid]
+            text  = leaf.must_texts.get(mid, "")
+            bridge_sources = [
+                {
+                    "source_must_id":     b.source_must_id,
+                    "source_control_ref": b.source_control_ref,
+                    "source_standard_id": b.source_standard_id,
+                    "source_role":        b.source_role,
+                    "edge_type":          b.edge_type,
+                }
+                for b in mv.bridge_sources
+            ]
+            if mv.satisfied:
+                items_have.append(text)
+            else:
+                items_missing.append(text)
+                if bridge_sources:
+                    n_bridged_leaf += 1
+            must_items.append({
+                "id":             mid,
+                "text":           text,
+                "satisfied":      mv.satisfied,
+                "bridge_sources": bridge_sources,
+            })
+
+        total = len(applicable_ids)
+        bound = len(items_have)
+        musts_total_all += total
+        musts_bound_all += bound
+        yield_pct = int(round(bound / total * 100)) if total else 0
+
+        class _LeafShim:
+            pass
+        _shim = _LeafShim()
+        _shim.title   = leaf.title
+        _shim.leaf_id = leaf.leaf_id
+
+        by_class.setdefault(leaf.evidence_type or "evidence", []).append({
+            "leaf_id":            leaf.leaf_id,
+            "leaf_label":         _humanize_leaf_label(_shim),
+            "musts_total":        total,
+            "musts_bound":        bound,
+            "yield_pct":          yield_pct,
+            "items_have":         items_have,
+            "items_missing":      items_missing,
+            "must_items":         must_items,
+            "n_bridged":          n_bridged_leaf,
+            "source_documents":   source_docs.get(leaf.leaf_id, []),
+            "template_available": template_avail.get(leaf.leaf_id, False),
+            "cite_acceptable":    is_cite_acceptable(leaf.evidence_type),
+            "cites":              cites_per_leaf.get(leaf.leaf_id, []),
+        })
+
+    if not by_class:
+        return None  # every leaf N/A-excluded for this tenant
+
+    classes_out: list[dict] = []
+    for et, leaves in by_class.items():
+        class_total = sum(l["musts_total"] for l in leaves)
+        class_bound = sum(l["musts_bound"] for l in leaves)
+        classes_out.append({
+            "evidence_type":       et,
+            "evidence_type_label": _humanize_evidence_type(et),
+            "class_musts_total":   class_total,
+            "class_musts_bound":   class_bound,
+            "class_yield_pct":     int(round(class_bound / class_total * 100))
+                                   if class_total else 0,
+            "upload_hint":         _hint_for(et),
+            "leaves":              leaves,
+        })
+    classes_out.sort(key=lambda c: -c["class_musts_total"])
+
+    overall_yield = int(round(musts_bound_all / musts_total_all * 100)) \
+                    if musts_total_all else 0
+    n_leaves_out = sum(len(v) for v in by_class.values())
+    return {
+        "control_ref":       control_ref,
+        "standard_id":       standard_id,
+        "posture":           live_posture.upper(),
+        "n_leaves":          n_leaves_out,
+        "musts_total":       musts_total_all,
+        "musts_bound":       musts_bound_all,
+        "overall_yield_pct": overall_yield,
+        "evidence_classes":  classes_out,
+        "source":            _source_label(control_ref, standard_id),
     }
 
 

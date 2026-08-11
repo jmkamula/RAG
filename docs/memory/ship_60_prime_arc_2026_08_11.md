@@ -39,7 +39,8 @@ SSoT doesn't store.
 | 60'.a | New `rag/posture/leaf_structure.py` — `get_control_leaves(control_ref, standard_id)` returning `ControlLeaves(spec_op, leaves=[LeafInfo(leaf_id, title, evidence_type, must_ids, must_texts, ...)])`. Tenant-agnostic (curator-authored data), 30-second TTL LRU cache matching `engine_runner._cached_er_evidence_types`. Silent-fallback on Neo4j failure. Verified: A.5.15 returns 4 leaves matching `evaluate_one_control`'s leaf list. |
 | 60'.b | `build_per_must_advisory_data` refactored — new `_build_advisory_from_ssot` helper reads SSoT via `read_must_verdicts_by_control` + leaf structure via `get_control_leaves` + posture_controls.finding for top-level NC/OFI. Legacy `evaluate_one_control` path retained as fallback when SSoT is empty (fresh tenant / never-loaded control). 5 advisory sites inherit the fix without call-site changes. N/A-excluded MUSTs handled by "MUST-id in catalog + absent from SSoT → drop from advisory" (implicit N/A filter). |
 | 60'.c | Bridge attribution surfaced in the response — `must_items[].bridge_sources` populated from `MustVerdict.bridge_sources` (per-MUST auditor attribution: `source_must_id`, `source_control_ref`, `source_standard_id`, `source_role`, `edge_type`) + leaf-level `n_bridged` count (unmet-direct MUSTs with ≥1 bridge). Fallback path emits empty `bridge_sources` + `n_bridged=0`. Consumer UX opt-in — no envelope change. |
-| 60'.d | This retro. |
+| 60'.d | Interim retro (initial write). |
+| 60'.e | `build_evidence_class_breakdown` refactored — same SSoT + leaf-structure compose pattern applied to the dashboard drill-in surface. New `_build_evidence_class_breakdown_from_ssot` helper; source_documents / template_availability / cite fields stay on the same Postgres helpers (never touched engine). Bridge attribution added: per-MUST `bridge_sources` + per-leaf `n_bridged`. Legacy `evaluate_one_control` fallback retained. Verified: A.5.15 breakdown matches per_must advisory numbers (4 leaves, 10/19 = 53% overall on Arion); Art.32 shows 6/16 = 38% with total `n_bridged=10`. |
 
 ## Key architectural decisions
 
@@ -168,12 +169,10 @@ opt into the new fields on their own timeline.
 - **Retire legacy engine fallback** — after N weeks of telemetry
   confirming the fallback never (or rarely) fires. Requires adding a
   logger.info in the fallback branch first to observe.
-- **`evidence_class_breakdown` migration** — the sibling advisory
-  builder at `rag/posture/advisory.py:585` still calls
-  `evaluate_one_control` directly. Same refactor pattern applies;
-  scoped as its own arc because it also computes source_documents +
-  template_availability + cites_per_leaf which need their own SSoT
-  audits.
+- **`evidence_class_breakdown` migration** — DELIVERED in Ship 60'.e
+  as a same-arc addendum. source_documents / template_availability /
+  cite fields stayed on their existing Postgres helpers (they were
+  never coupled to the engine).
 - **Ship 61'.a Evidence Package hybrid** — unchanged from Ship 59'.d
   retro. EP still reads raw `document_findings` for verbatim
   excerpts; hybrid uses SSoT for coverage summary.
@@ -184,9 +183,11 @@ opt into the new fields on their own timeline.
 ## What Ship 60' costs to reproduce
 
 - Schema migrations: 0
-- Wall clock: ~2 hours (design + implementation + verify + retro)
+- Wall clock: ~2.5 hours (design + implementation + verify + retro
+  + 60'.e sibling migration)
 - Files touched: 2 (rag/posture/advisory.py, rag/posture/leaf_structure.py NEW)
-- Lines: ~350 (new module + refactor)
+- Lines: ~600 (new module + refactor on both advisory builders)
 - Eval regression: 230/232 identical to pre-Ship-60 baseline
-- Deferred: consumer UX, evidence_class_breakdown migration,
-  Evidence Package hybrid (Ship 61'.a).
+- Deferred: consumer UX for bridge_sources / n_bridged, retire
+  legacy fallback (post-telemetry), Evidence Package hybrid
+  (Ship 61'.a).
