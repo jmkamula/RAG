@@ -327,13 +327,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sa-overflow a{color:#534AB7;text-decoration:none;font-weight:500;font-style:normal}
 .sa-overflow a:hover{text-decoration:underline}
 .sa-leaf-checklist{display:flex;flex-direction:column;gap:3px;margin-top:6px;padding:6px 8px;background:#F8F6EF;border-radius:6px}
-.sa-leaf-row{display:flex;align-items:center;gap:8px;font-size:12px;line-height:1.5;padding:2px 0}
+.sa-leaf-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:12px;line-height:1.5;padding:2px 0}
 .sa-leaf-icon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0}
 .sa-leaf-yes .sa-leaf-icon{background:#7FB36F;color:#fff}
 .sa-leaf-no  .sa-leaf-icon{background:#EEECE2;color:#7B7970;border:1px solid #D3D1C7}
 .sa-leaf-yes .sa-leaf-title{color:#3A382E}
 .sa-leaf-no  .sa-leaf-title{color:#3A382E}
 .sa-leaf-count{margin-left:auto;font-size:10px;color:#7B7970;font-weight:500}
+/* Ship 60'.i — per-leaf cross-framework coverage nudge on the case-file
+   primary-card checklist. Full-width block below the row header so it
+   doesn't compete with the icon+title+count layout above. */
+.sa-leaf-bridge{width:100%;margin-left:24px;padding:4px 8px;background:#EEF3EC;
+                border-left:3px solid #7FB36F;border-radius:3px;
+                font-size:11px;color:#3A382E;line-height:1.4}
+.sa-leaf-bridge-arrow{color:#4A9059;margin-right:3px}
 .sa-related-head{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:3px}
 .sa-related-std{font-size:11px;color:#5C5A4F}
 .sa-related-title{font-weight:600;color:#3A382E;font-size:13px;margin-bottom:2px}
@@ -6505,10 +6512,27 @@ function renderStructuredAnswer(s) {
             const count = (lf.n_total > 0)
               ? `<span class="sa-leaf-count">${lf.n_have} of ${lf.n_total} items</span>`
               : '';
+            // Ship 60'.i — cross-framework coverage nudge on the
+            // primary-card leaf checklist. Same message shape as
+            // renderBridgeChip + _bridge_nudge_line. Empty on legacy
+            // fallback responses (n_bridged=0 there).
+            let bridgeNudge = '';
+            const nBr = Number(lf.n_bridged || 0);
+            if (nBr > 0 && Array.isArray(lf.bridge_stds) && lf.bridge_stds.length) {
+              const stdList = lf.bridge_stds.join(', ');
+              const noun = nBr === 1 ? 'element is' : 'elements are';
+              const ctrlNoun = lf.bridge_stds.length === 1 ? 'control' : 'controls';
+              bridgeNudge = `<div class="sa-leaf-bridge">
+                <span class="sa-leaf-bridge-arrow">↗</span>
+                ${nBr} ${noun} already covered by evidence for related
+                <strong>${esc(stdList)}</strong> ${ctrlNoun}.
+              </div>`;
+            }
             return `<div class="${cls}">
               ${icon}
               <span class="sa-leaf-title">${esc(lf.title || '')}</span>
               ${count}
+              ${bridgeNudge}
             </div>`;
           }).join('')
         }</div>`;

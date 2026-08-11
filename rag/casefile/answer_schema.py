@@ -45,6 +45,13 @@ class LeafState(BaseModel):
     Populated from `build_per_must_advisory_data.leaves`. Rendered
     only on the primary card (`relation == "primary"`); other cards
     keep their compact summary shape.
+
+    Ship 60'.i (2026-08-11) — bridge attribution surfaced. `n_bridged`
+    is the count of unmet MUSTs on this leaf that have cross-framework
+    bridge coverage; `bridge_stds` rolls up the unique source
+    standard_ids (already tenant-humanized: "ISO 27001:2022", etc.).
+    SPA renders a green nudge on the primary card when n_bridged > 0.
+    Both default to zero/empty so consumers ignoring them are unaffected.
     """
     leaf_id:              str    # e.g. "req:A.5.15:access_control_policy"
     title:                str    # humanized leaf title (e.g. "Access control policy")
@@ -53,6 +60,8 @@ class LeafState(BaseModel):
     satisfied:            bool   # True → ✓, False → ○
     n_have:               int    # per-MUST count of satisfied items
     n_total:              int    # per-MUST count of total items
+    n_bridged:            int = 0                                # Ship 60'.i
+    bridge_stds:          list[str] = Field(default_factory=list) # Ship 60'.i
 
 
 class RelatedCard(BaseModel):
