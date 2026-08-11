@@ -206,22 +206,28 @@ def build_per_must_advisory_data(
         "control_ref":    "A.5.15",
         "standard_id":    "ISO27001:2022",
         "posture":        "NC" | "OFI",
-        "reason":         "ALL: 0/4 children satisfied (1 with partial evidence)",
+        "reason":         "0/4 leaves satisfied (1 with partial evidence)",
         "n_leaves":       4,
         "n_satisfied":    0,
         "n_partial":      1,
         "leaves": [
           {
             "leaf_id":              "req:A.5.15:access_control_policy",
-            "leaf_label":           "access control policy",
+            "leaf_label":           "Access Control Policy",
             "evidence_type":        "policy",
-            "evidence_type_label":  "policy document",
+            "evidence_type_label":  "Policy Document",
             "satisfied":            false,
             "n_have":               2,
             "n_total":              7,
             "items_have":           [<text>, ...],
             "items_missing":        [<text>, ...],
-            "upload_hint":          "Update the policy document to ..."
+            "must_items":           [{"id":..., "text":..., "satisfied":bool,
+                                     "guidance":[...],
+                                     "bridge_sources":[{...}]}...],
+            "n_bridged":            0,   # count of MUSTs unmet-direct but
+                                         # covered via xfw bridges
+            "prerequisites":        [...],
+            "upload_hint":          "Update your policy document."
           },
           ...
         ],
@@ -230,14 +236,31 @@ def build_per_must_advisory_data(
 
     Returns None when:
       - No control_ref
-      - Neo4j driver unavailable
-      - No verdict (control not curated multi-leaf)
-      - Posture is Comply or N/A (no advisory needed)
+      - No SSoT rows for this tenant+control (fallback path also finds
+        no verdict → treated as "not curated" or "N/A everywhere")
+      - Live posture is Comply or N/A (no advisory needed)
       - All leaves fully satisfied (no MUST gaps)
+
+    Ship 60'.b (2026-08-11) — sources from Ship 58'/59' SSoT
+    (`posture_must_verdicts` + `posture_must_bridge_coverage`) instead
+    of re-running `evaluate_one_control` per request. Falls back to the
+    legacy engine path if SSoT is unpopulated or the leaf structure
+    fetch fails — no big-bang cutover.
     """
     if not control_ref:
         return None
 
+    # Ship 60'.b — SSoT + leaf-structure path. Skip the engine round-trip
+    # when we have per-MUST truth already computed.
+    data = _build_advisory_from_ssot(
+        pg_conn, tenant_id, control_ref, standard_id,
+    )
+    if data is not None:
+        return data
+
+    # Legacy fallback — SSoT unpopulated OR leaf structure fetch failed.
+    # Kept for defence-in-depth during the transition window. Ship 60'.d
+    # retro will assess whether this path can retire.
     if neo4j_driver is None:
         neo4j_driver = _get_neo_driver()
         if neo4j_driver is None:
@@ -261,6 +284,10 @@ def build_per_must_advisory_data(
     if posture not in ("NC", "OFI"):
         return None
 
+    from rag.templates.guidance_lookup import get_guidance_for_item
+    from rag.templates.prerequisites_lookup import get_prerequisites_for_leaf
+    from dataclasses import asdict as _asdict
+
     leaves_out: list[dict] = []
     any_unmet = False
     for leaf in verdict.leaves:
@@ -268,14 +295,6 @@ def build_per_must_advisory_data(
         rec   = list(leaf.items_recognised or [])
         unrec_ids = list(leaf.item_ids_unrecognised or [])
         rec_ids   = list(leaf.item_ids_recognised   or [])
-        # Pair (id, text) so the form surface can bind inputs to MUST IDs.
-        # `items_*` arrays kept text-only for backwards compat (chat
-        # markdown renderer + existing eval cases). `must_items` is the
-        # canonical pair list — UI consumes that for the form.
-        # Ship 56'.a — per-MUST guidance attached so Topics + Dashboard
-        # drill-in can render the "Best practice:" callouts alongside the
-        # MUST state. Empty list ⇒ UI suppresses the block.
-        from rag.templates.guidance_lookup import get_guidance_for_item
         must_items: list[dict] = []
         for _id, _t in zip(rec_ids, rec):
             must_items.append({
@@ -283,6 +302,7 @@ def build_per_must_advisory_data(
                 "text":       _t,
                 "satisfied":  True,
                 "guidance":   list(get_guidance_for_item(_id)),
+                "bridge_sources": [],
             })
         for _id, _t in zip(unrec_ids, unrec):
             must_items.append({
@@ -290,51 +310,30 @@ def build_per_must_advisory_data(
                 "text":       _t,
                 "satisfied":  False,
                 "guidance":   list(get_guidance_for_item(_id)),
+                "bridge_sources": [],
             })
 
-        # Ship 57' — per-leaf prerequisites attached so Topics + Dashboard
-        # drill-in can render the "Prerequisites:" callout alongside the
-        # MUST checklist. Empty list ⇒ UI suppresses the block.
-        from rag.templates.prerequisites_lookup import get_prerequisites_for_leaf
-        from dataclasses import asdict as _asdict
         prerequisites = [_asdict(p) for p in get_prerequisites_for_leaf(leaf.leaf_id)]
-
-        if not unrec:
-            # Fully satisfied — include in output so UI shows the ✓ row,
-            # but no upload hint needed.
-            leaves_out.append({
-                "leaf_id":             leaf.leaf_id,
-                "leaf_label":          _humanize_leaf_label(leaf),
-                "evidence_type":       leaf.evidence_type,
-                "evidence_type_label": _humanize_evidence_type(leaf.evidence_type),
-                "satisfied":           True,
-                "n_have":              len(rec),
-                "n_total":             len(rec),
-                "items_have":          list(rec),
-                "items_missing":       [],
-                "must_items":          must_items,
-                "prerequisites":       prerequisites,
-                "upload_hint":         "",
-            })
-            continue
-        any_unmet = True
+        leaf_satisfied = not unrec
         leaves_out.append({
             "leaf_id":             leaf.leaf_id,
             "leaf_label":          _humanize_leaf_label(leaf),
             "evidence_type":       leaf.evidence_type,
             "evidence_type_label": _humanize_evidence_type(leaf.evidence_type),
-            "satisfied":           False,
+            "satisfied":           leaf_satisfied,
             "n_have":              len(rec),
             "n_total":             len(rec) + len(unrec),
             "items_have":          list(rec),
             "items_missing":       list(unrec),
             "must_items":          must_items,
+            "n_bridged":           0,
             "prerequisites":       prerequisites,
-            "upload_hint":         _hint_for(leaf.evidence_type),
+            "upload_hint":         "" if leaf_satisfied else _hint_for(leaf.evidence_type),
         })
+        if not leaf_satisfied:
+            any_unmet = True
 
     if not any_unmet:
-        # All leaves satisfied — UI doesn't need advisory
         return None
 
     return {
@@ -346,6 +345,184 @@ def build_per_must_advisory_data(
         "n_satisfied": sum(1 for l in leaves_out if l["satisfied"]),
         "n_partial":   sum(1 for l in leaves_out
                             if (not l["satisfied"]) and l["n_have"] > 0),
+        "leaves":      leaves_out,
+        "source":      _source_label(control_ref, standard_id),
+    }
+
+
+def _build_advisory_from_ssot(
+    pg_conn,
+    tenant_id:   str,
+    control_ref: str,
+    standard_id: str,
+) -> Optional[dict]:
+    """Ship 60'.b — SSoT-sourced advisory build.
+
+    Reads three pieces:
+      1. Leaf structure from Neo4j (cached, tenant-agnostic) —
+         which MUSTs belong to which leaf + human text per MUST.
+      2. Per-MUST fulfillment from `posture_must_verdicts` (SSoT).
+         MUST-ids absent from SSoT are N/A-excluded for this tenant
+         (writer drops them per `_fetch_na_must_ids` upstream).
+      3. Live control-level `finding` from `posture_controls`
+         (authoritative for top-level NC/OFI/Comply/N/A).
+
+    Skips advisory when:
+      - Leaf structure unavailable (uncurated / stub / no MUSTs).
+      - SSoT unpopulated for this control (tenant never triggered
+        load_posture yet — fallback path will).
+      - Live posture Comply / N/A.
+      - Every leaf fully satisfied.
+
+    Returns None on any of those (advisory not warranted); returns the
+    dict on success.
+    """
+    from rag.posture.leaf_structure import get_control_leaves
+    from rag.posture.must_verdicts import read_must_verdicts_by_control
+    from rag.templates.guidance_lookup import get_guidance_for_item
+    from rag.templates.prerequisites_lookup import get_prerequisites_for_leaf
+    from dataclasses import asdict as _asdict
+
+    cl = get_control_leaves(control_ref, standard_id)
+    if cl is None or not cl.leaves:
+        return None
+
+    verdicts = read_must_verdicts_by_control(
+        pg_conn, tenant_id, control_ref, standard_id,
+    )
+    if not verdicts:
+        return None  # SSoT unpopulated — fallback path will try engine
+
+    # Top-level posture: consult posture_controls for the live finding.
+    # SSoT stores per-MUST truth; posture_controls stores the tenant-
+    # facing verdict which incorporates cascade overlays + tenant
+    # overrides + confirmation state. Advisory renders only when this
+    # composite says NC or OFI.
+    try:
+        with pg_conn.cursor() as cur:
+            cur.execute(
+                "SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,),
+            )
+            cur.execute("""
+                SELECT finding
+                  FROM posture_controls
+                 WHERE tenant_id = %s::uuid
+                   AND control_ref = %s
+                   AND standard_id = %s
+                 LIMIT 1
+            """, (tenant_id, control_ref, standard_id))
+            row = cur.fetchone()
+    except Exception as e:
+        logger.warning("advisory: posture_controls lookup failed for %s/%s: %s",
+                       standard_id, control_ref, e)
+        return None
+    live_posture = (row[0] if row else "") or ""
+    posture = live_posture.upper()
+    if posture not in ("NC", "OFI"):
+        return None
+
+    leaves_out: list[dict] = []
+    any_unmet = False
+    for leaf in cl.leaves:
+        # Join CATALOG MUSTs with SSoT rows. MUSTs absent from SSoT are
+        # N/A-excluded for this tenant → drop.
+        applicable_ids: list[str] = [
+            mid for mid in leaf.must_ids if mid in verdicts
+        ]
+        if not applicable_ids:
+            # Entire leaf N/A-excluded for this tenant — skip; the leaf
+            # isn't part of the tenant's obligation surface.
+            continue
+
+        items_have:    list[str] = []
+        items_missing: list[str] = []
+        must_items:    list[dict] = []
+        n_bridged_leaf = 0
+
+        for mid in applicable_ids:
+            mv    = verdicts[mid]
+            text  = leaf.must_texts.get(mid, "")
+            is_satisfied = mv.satisfied  # strict direct fulfillment
+            # A MUST is 'bridged' when NOT direct-satisfied but has
+            # bridge attribution. Tenant-facing UX may choose to soften
+            # the "missing" framing when bridged; for now we surface
+            # both `satisfied` (strict) + `bridge_sources` + let the
+            # consumer decide.
+            bridge_sources = [
+                {
+                    "source_must_id":     b.source_must_id,
+                    "source_control_ref": b.source_control_ref,
+                    "source_standard_id": b.source_standard_id,
+                    "source_role":        b.source_role,
+                    "edge_type":          b.edge_type,
+                }
+                for b in mv.bridge_sources
+            ]
+            if is_satisfied:
+                items_have.append(text)
+            else:
+                items_missing.append(text)
+                if bridge_sources:
+                    n_bridged_leaf += 1
+            must_items.append({
+                "id":             mid,
+                "text":           text,
+                "satisfied":      is_satisfied,
+                "guidance":       list(get_guidance_for_item(mid)),
+                "bridge_sources": bridge_sources,
+            })
+
+        n_have  = len(items_have)
+        n_total = len(applicable_ids)
+        leaf_satisfied = (n_have == n_total)
+
+        prerequisites = [_asdict(p) for p in get_prerequisites_for_leaf(leaf.leaf_id)]
+
+        # Build a minimal leaf shim so _humanize_leaf_label can reuse
+        # the existing logic (it reads `.title` + `.leaf_id`).
+        class _LeafShim:
+            pass
+        _shim = _LeafShim()
+        _shim.title   = leaf.title
+        _shim.leaf_id = leaf.leaf_id
+
+        leaves_out.append({
+            "leaf_id":             leaf.leaf_id,
+            "leaf_label":          _humanize_leaf_label(_shim),
+            "evidence_type":       leaf.evidence_type,
+            "evidence_type_label": _humanize_evidence_type(leaf.evidence_type),
+            "satisfied":           leaf_satisfied,
+            "n_have":              n_have,
+            "n_total":             n_total,
+            "items_have":          items_have,
+            "items_missing":       items_missing,
+            "must_items":          must_items,
+            "n_bridged":           n_bridged_leaf,
+            "prerequisites":       prerequisites,
+            "upload_hint":         "" if leaf_satisfied else _hint_for(leaf.evidence_type),
+        })
+        if not leaf_satisfied:
+            any_unmet = True
+
+    if not leaves_out or not any_unmet:
+        return None
+
+    n_leaves_out = len(leaves_out)
+    n_leaves_satisfied = sum(1 for l in leaves_out if l["satisfied"])
+    n_leaves_partial   = sum(1 for l in leaves_out
+                              if (not l["satisfied"]) and l["n_have"] > 0)
+    reason = f"{n_leaves_satisfied}/{n_leaves_out} leaves satisfied"
+    if n_leaves_partial:
+        reason += f" ({n_leaves_partial} with partial evidence)"
+
+    return {
+        "control_ref": control_ref,
+        "standard_id": standard_id,
+        "posture":     posture,
+        "reason":      reason,
+        "n_leaves":    n_leaves_out,
+        "n_satisfied": n_leaves_satisfied,
+        "n_partial":   n_leaves_partial,
         "leaves":      leaves_out,
         "source":      _source_label(control_ref, standard_id),
     }
