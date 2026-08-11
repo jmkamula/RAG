@@ -988,30 +988,21 @@ def _fetch_must_verdicts_for_ids(
     tenant_id: str,
     must_ids:  list[str],
 ) -> dict[str, dict]:
-    """Query posture_must_verdicts for the given MUST ids.
+    """Thin adapter over the canonical SSoT reader (rag.posture.must_verdicts).
     Returns {must_id: {'satisfied': bool, 'partial': bool, 'stale': bool}}.
-    Missing rows (N/A-excluded, or engine hasn't run) → not in dict."""
+    Missing rows (N/A-excluded, or engine hasn't run) → not in dict.
+
+    Kept as an adapter so downstream code in _apply_guidance_blocks stays
+    unchanged. Consolidates onto the shared reader introduced 2026-08-11.
+    """
     if not must_ids:
         return {}
-    try:
-        with pg_conn.cursor() as cur:
-            cur.execute(
-                "SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,),
-            )
-            cur.execute("""
-                SELECT must_id, satisfied, partial, stale
-                  FROM posture_must_verdicts
-                 WHERE tenant_id = %s::uuid
-                   AND must_id   = ANY(%s)
-            """, (tenant_id, list(must_ids)))
-            return {
-                mid: {"satisfied": s, "partial": p, "stale": st}
-                for (mid, s, p, st) in cur.fetchall()
-            }
-    except Exception:
-        # Schema not applied or engine hasn't run yet — silent fallback,
-        # ticks will simply not render (label stays "**Best practice:**").
-        return {}
+    from rag.posture.must_verdicts import read_must_verdicts
+    verdicts = read_must_verdicts(pg_conn, tenant_id, must_ids=must_ids)
+    return {
+        mid: {"satisfied": v.satisfied, "partial": v.partial, "stale": v.stale}
+        for mid, v in verdicts.items()
+    }
 
 
 def _apply_guidance_blocks(

@@ -215,24 +215,16 @@ def _fetch_tenant_na_musts(pg_conn, tenant_id: str) -> set[str]:
 
 
 def _fetch_satisfied_must_ids(pg_conn, tenant_id: str) -> set[str]:
-    """All checklist_item_ids that have at least one active+approved
-    document_finding with status='present' for this tenant.
+    """All checklist_item_ids satisfied for this tenant.
+
+    Reads from posture_must_verdicts (SSoT) via the canonical reader
+    (2026-08-11). Prior implementation was a direct document_findings
+    query. Same semantics — engine's per-MUST recognition considers
+    approved + active + present findings plus fresh cite-mode entries —
+    but consumers converge on one source now.
     """
-    with pg_conn.cursor() as cur:
-        cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
-        cur.execute("""
-            SELECT DISTINCT df.checklist_item_id
-              FROM document_findings df
-              JOIN client_documents cd ON cd.id = df.document_id
-             WHERE cd.tenant_id      = %s::uuid
-               AND cd.is_active      = TRUE
-               AND cd.is_current     = TRUE
-               AND df.is_active      = TRUE
-               AND df.review_status  = 'approved'
-               AND df.status         = 'present'
-               AND df.checklist_item_id IS NOT NULL
-        """, (tenant_id,))
-        return {r[0] for r in cur.fetchall()}
+    from rag.posture.must_verdicts import read_satisfied_must_ids
+    return read_satisfied_must_ids(pg_conn, tenant_id)
 
 
 def _fetch_template_index(pg_conn) -> dict[str, dict]:

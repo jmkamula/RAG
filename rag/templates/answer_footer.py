@@ -285,27 +285,14 @@ def _fetch_leaf_progress(pg_conn, tenant_id: str, leaf_ids: list[str]) -> dict[s
         return {}
 
     # Get bound count per leaf from active+approved findings.
+    # Reads posture_must_verdicts (SSoT) via the canonical reader
+    # (2026-08-11). Any MUST with a row that isn't strictly 'missing'
+    # counts as bound — matches the prior 'present OR partial' semantics.
+    from rag.posture.must_verdicts import read_must_verdicts
     all_must_ids = [mid for musts in leaf_musts.values() for mid in musts]
     bound_by_leaf: dict[str, set[str]] = {lid: set() for lid in leaf_musts}
-    with pg_conn.cursor() as cur:
-        cur.execute(
-            "SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,)
-        )
-        cur.execute(
-            """
-            SELECT DISTINCT df.checklist_item_id
-              FROM document_findings df
-              JOIN client_documents cd ON cd.id = df.document_id
-             WHERE cd.tenant_id      = %s::uuid
-               AND cd.is_active      = TRUE
-               AND df.is_active      = TRUE
-               AND df.review_status  = 'approved'
-               AND df.status         IN ('present', 'partial')
-               AND df.checklist_item_id = ANY(%s)
-            """,
-            (tenant_id, all_must_ids),
-        )
-        bound_item_ids = {r[0] for r in cur.fetchall()}
+    verdicts = read_must_verdicts(pg_conn, tenant_id, must_ids=all_must_ids)
+    bound_item_ids = {mid for mid, v in verdicts.items() if v.state != "missing"}
     for lid, musts in leaf_musts.items():
         bound_by_leaf[lid] = {m for m in musts if m in bound_item_ids}
 
