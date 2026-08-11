@@ -1174,6 +1174,131 @@ def sweep_notification_delivery(pg_conn, tick_id: str, dry_run: bool = False) ->
 
 from rag.risk.notify import sweep_risk_register_notify  # Ship 14'.f
 
+
+# ── posture_refresh sweep (Ship 58'.u) ──────────────────────────────────────
+
+# Refresh tenants whose posture_must_verdicts.computed_at is older than
+# this threshold. Tunable via env; default 24h so daily-uploaders don't
+# get repeat-refreshed but idle tenants don't accumulate too much drift
+# past the freshness_days expiry boundary.
+import os as _os_pmv
+_POSTURE_REFRESH_STALE_HOURS = int(_os_pmv.environ.get("POSTURE_REFRESH_STALE_HOURS", "24"))
+del _os_pmv
+
+
+def sweep_posture_refresh(pg_conn, tick_id: str, dry_run: bool = False) -> dict:
+    """Refresh posture_must_verdicts for tenants whose SSoT rows are
+    older than the staleness threshold, OR who have never been populated.
+
+    Idempotent: calling load_posture on a fresh tenant is a no-op cost
+    (engine walks the graph + writes the same rows); on a stale tenant
+    it re-emits fresh rows with a new computed_at.
+
+    Ship 58'.u (2026-08-11) — closes the P1 loose-end where long-idle
+    tenants accumulate stale SSoT rows past freshness_days boundaries.
+    """
+    row_id  = _log_start(pg_conn, tick_id, "posture_refresh")
+    scanned = acted = errored = 0
+    per_tenant: list[dict] = []
+    error_type   = None
+    error_detail = None
+
+    try:
+        # posture_must_verdicts + tenants both have RLS enabled — a
+        # cross-tenant scan from arioncomply_app (the scheduler's default
+        # role) returns zero rows. Open a superuser connection just for
+        # the enumeration + freshness check; RLS is bypassed for
+        # superuser (arioncomply.rolsuper = true).
+        import psycopg2 as _psy_sup
+        import os as _os_sup
+        sup_conn = _psy_sup.connect(
+            host    = _os_sup.getenv("PGHOST", "127.0.0.1"),
+            dbname  = _os_sup.getenv("PGDATABASE", "arioncomply_compliance"),
+            user    = _os_sup.getenv("PGUSER_SWEEP", "arioncomply"),
+        )
+        try:
+            with sup_conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT t.id::text, t.name,
+                           COALESCE(
+                               (SELECT min(computed_at)
+                                  FROM posture_must_verdicts pmv
+                                 WHERE pmv.tenant_id = t.id),
+                               '1970-01-01'::timestamptz
+                           ) AS oldest,
+                           (SELECT count(*)
+                              FROM posture_must_verdicts pmv
+                             WHERE pmv.tenant_id = t.id) AS n_rows
+                      FROM tenants t
+                     WHERE t.is_active = TRUE
+                     ORDER BY t.name
+                    """
+                )
+                tenant_rows = cur.fetchall()
+        finally:
+            sup_conn.close()
+
+        import datetime as _dt
+        cutoff = _dt.datetime.now(_dt.timezone.utc) - _dt.timedelta(
+            hours=_POSTURE_REFRESH_STALE_HOURS,
+        )
+        due: list[tuple[str, str]] = [
+            (tid, name) for (tid, name, oldest, n_rows) in tenant_rows
+            if n_rows == 0 or oldest < cutoff
+        ]
+
+        from rag.posture_loader import load_posture
+        import psycopg2 as _psy
+        import os as _os2
+        db_url = _os2.getenv(
+            "POSTGRES_URL",
+            "postgresql://arioncomply@127.0.0.1/arioncomply_compliance",
+        )
+
+        for tid, name in due:
+            scanned += 1
+            if dry_run:
+                per_tenant.append({"tenant": name, "action": "would_refresh"})
+                continue
+            eng_conn = _psy.connect(db_url)
+            try:
+                with eng_conn.cursor() as _cur:
+                    _cur.execute(
+                        "SELECT set_config('app.tenant_id', %s, TRUE)", (tid,),
+                    )
+                load_posture(eng_conn, tid)
+                acted += 1
+                per_tenant.append({"tenant": name, "action": "refreshed"})
+            except Exception as e:
+                errored += 1
+                per_tenant.append({
+                    "tenant": name, "action": "failed",
+                    "error":  f"{type(e).__name__}: {str(e)[:120]}",
+                })
+                logger.warning(
+                    "posture_refresh failed for %s / %s: %s", tid, name, e,
+                )
+            finally:
+                eng_conn.close()
+
+    except Exception as e:
+        error_type   = type(e).__name__
+        error_detail = str(e)[:400]
+        logger.error("sweep_posture_refresh failed: %s", e)
+
+    status = "completed" if error_type is None else "failed"
+    detail = {
+        "stale_hours_threshold": _POSTURE_REFRESH_STALE_HOURS,
+        "per_tenant":            per_tenant[:50],  # cap to avoid huge log payloads
+        "dry_run":               dry_run,
+    }
+    _log_complete(pg_conn, row_id, scanned, acted, errored, detail,
+                  status=status, error_type=error_type, error_detail=error_detail)
+    return {"work_type": "posture_refresh", "scanned": scanned,
+            "acted_on": acted, "errored": errored, "detail": detail}
+
+
 _WORK_TYPES = {
     "fact_recompute":              sweep_fact_recompute,
     "overdue_followups":           sweep_overdue_followups,
@@ -1181,6 +1306,7 @@ _WORK_TYPES = {
     "cite_verification_overdue":   sweep_cite_verification_overdue,
     "api_key_expiring":            sweep_api_key_expiring,
     "risk_register_notify":        sweep_risk_register_notify,   # Ship 14'.f
+    "posture_refresh":             sweep_posture_refresh,         # Ship 58'.u
     "notification_delivery":       sweep_notification_delivery,
     "notification_retention":      sweep_notification_retention,
 }

@@ -2582,6 +2582,10 @@ async def stage2_approve(
             cache = request.app.state.tenant_cache
             if cache:
                 cache.invalidate(key_info.tenant_id)
+            # Ship 58'.s — SSoT refresh so posture_must_verdicts reflects
+            # the Stage-2 verdict flip (best-effort, fresh connection).
+            from rag.posture_loader import kick_posture_refresh
+            kick_posture_refresh(key_info.tenant_id, reason="stage2_approve")
             return result
         reason = result.get("reason", "unknown")
         if reason in ("no_posture_row", "no_proposal"):
@@ -6001,6 +6005,11 @@ async def delete_external_system(
             )
             n_cites = cur.rowcount
         conn.commit()
+        # Ship 58'.s — disabled cites were feeding engine recognition;
+        # refresh SSoT so posture_must_verdicts drops them.
+        if n_cites:
+            from rag.posture_loader import kick_posture_refresh
+            kick_posture_refresh(key_info.tenant_id, reason="external_system_delete")
     finally:
         pool.putconn(conn)
     return {"system_id": system_id, "cites_disabled": n_cites}
@@ -6179,6 +6188,12 @@ async def upsert_cites_for_leaf_source(
                 )
                 n_remove += 1
         conn.commit()
+        # Ship 58'.s — cite mutations change what the engine recognises
+        # via cite-mode; refresh SSoT so the tick indicator + downstream
+        # readers see the new state.
+        if n_insert or n_update or n_remove:
+            from rag.posture_loader import kick_posture_refresh
+            kick_posture_refresh(key_info.tenant_id, reason="cites_upsert")
     finally:
         pool.putconn(conn)
 
@@ -6399,6 +6414,10 @@ async def verify_cites_for_leaf_source(
                         try: neo_drv.close()
                         except Exception: pass
         conn.commit()
+        # Ship 58'.s — cite verification refreshes last_verified_at,
+        # which changes engine's cite-mode recognition. Refresh SSoT.
+        from rag.posture_loader import kick_posture_refresh
+        kick_posture_refresh(key_info.tenant_id, reason="cite_verify")
     finally:
         pool.putconn(conn)
     return {

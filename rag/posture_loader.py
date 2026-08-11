@@ -656,6 +656,46 @@ def _apply_demonstrates_overlay(
     return (overlays, materialised)
 
 
+def kick_posture_refresh(tenant_id: str, reason: str = "") -> None:
+    """Best-effort posture refresh for use at write endpoints.
+
+    Ship 58'.s (2026-08-10) — mutations at write endpoints (cite verify,
+    Stage-2 approve/reject, external system delete) change what the
+    engine computes for per-MUST recognition, but only load_posture()
+    writes the refreshed truth into posture_must_verdicts. Every such
+    endpoint should call this after its commit so the SSoT table stays
+    fresh.
+
+    Opens a fresh connection to avoid entangling with the caller's
+    transaction (mirrors the doc_pipeline Stage 4.7 pattern). Best-effort:
+    any failure is logged and swallowed — never blocks the user's write.
+    A later sweep or user action will resync if this fails.
+    """
+    import os
+    try:
+        import psycopg2
+        db_url = os.getenv("POSTGRES_URL",
+                           "postgresql://arioncomply@127.0.0.1/arioncomply_compliance")
+        _eng_conn = psycopg2.connect(db_url)
+        try:
+            with _eng_conn.cursor() as _cur:
+                _cur.execute(
+                    "SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,),
+                )
+            load_posture(_eng_conn, tenant_id)
+        finally:
+            _eng_conn.close()
+        logger.info(
+            "kick_posture_refresh: tenant=%s reason=%s ok",
+            str(tenant_id)[:8], reason,
+        )
+    except Exception as e:
+        logger.warning(
+            "kick_posture_refresh: tenant=%s reason=%s failed — %s: %s",
+            str(tenant_id)[:8], reason, type(e).__name__, e,
+        )
+
+
 def _persist_must_verdicts(pg_conn, tenant_id: str, verdicts: dict) -> int:
     """Write per-MUST engine verdicts to posture_must_verdicts (schema_v94).
 
