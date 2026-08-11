@@ -375,3 +375,118 @@ Cheaper than any equivalent template rewrite from scratch would have
 been. And the per-MUST truth table is a compounding investment — every
 future consumer that needs per-MUST state now costs zero engine walks
 to satisfy.
+
+---
+
+## Addendum — Ship 58'.s-u — SSoT wiring hardening (2026-08-11)
+
+Same-day follow-up in response to *"we have added a single source of
+truth for all posture, i want to make sure that it is properly wired
+and maintained. no loose ends"*. A one-hour wiring audit surfaced six
+loose ends across write triggers, coverage, and freshness discipline;
+three of them (the P0/P1 tier) are closed by this addendum.
+
+### The audit
+
+Systematic walk of the SSoT surface:
+
+1. **Write paths** — enumerate every code site that mutates data the
+   engine consumes, verify each triggers `load_posture()` at commit.
+2. **Read paths** — enumerate every consumer that computes per-MUST
+   truth, flag those bypassing the SSoT.
+3. **Coverage** — how many tenants have SSoT rows.
+4. **Freshness** — `computed_at` distribution.
+
+Findings — six loose ends, triaged into four tiers:
+
+| Tier | Loose end | Impact |
+|---|---|---|
+| P0 | Cite verify / upsert / delete don't refresh SSoT | SSoT can lie — verified cite doesn't show as satisfied until unrelated trigger |
+| P0 | Stage-2 approve doesn't refresh SSoT | Approved verdict flip doesn't propagate to SSoT immediately |
+| P1 | Only 1 of 3 tenants populated | Other tenants get blank ticks until their first load_posture trigger |
+| P1 | No periodic staleness refresh | Long-idle tenants past `freshness_days` boundary don't transition `stale=TRUE` |
+| P2 | `build_per_must_advisory_data` still re-runs engine on every call (5 sites) | Redundant compute + potential inconsistency |
+| P3 | No monitoring signal for silently-failing `load_posture` | Operational blind spot |
+
+### Sub-arcs shipped
+
+| Sub-arc | Deliverable |
+|---|---|
+| 58'.s | New public `posture_loader.kick_posture_refresh(tenant_id, reason)` — best-effort helper (own connection, log-on-failure, never blocks caller). Wired at 4 write sites in `api_server.py`: verify_cites_for_leaf_source, set_cites_for_leaf_source, delete_tenant_external_system, stage2_approve. |
+| 58'.t | `scripts/dev/bootstrap_posture_must_verdicts.py` — one-shot iterating the `tenants` table, calling `load_posture` per tenant. Result on demo VM: 3/3 active tenants populated, ~12,875 SSoT rows total (was ~4,300 for Arion only). |
+| 58'.u | `schema_v95` adds `posture_refresh` to `sweep_log.work_type` CHECK constraint. New `sweep_posture_refresh` in `rag/scheduler/tick.py` — refreshes tenants whose `computed_at` is older than `POSTURE_REFRESH_STALE_HOURS` (default 24h) OR never populated. Verified end-to-end: aged External-API tenant → sweep found + refreshed. |
+
+### The RLS-scheduler gotcha
+
+Testing the sweep surfaced a broader pre-existing issue worth
+capturing. `_connect()` in `tick.py` defaults to
+`PGUSER=arioncomply_app`, which is RLS-scoped. Cross-tenant scans
+(e.g. `SELECT id FROM tenants WHERE is_active`) return **zero rows**
+under RLS because `app.tenant_id` isn't set for a system-wide sweep.
+
+`fact_recompute` and any other cross-tenant sweep would silently
+return 0 tenants in local dev under this connection profile.
+Presumably production sets `PGUSER=arioncomply` (superuser bypasses
+RLS) via `.env` or systemd env-file, but the fallback is fragile.
+
+`sweep_posture_refresh` works around by opening its own superuser
+peer-auth connection (env-tunable `PGUSER_SWEEP`, default
+`arioncomply`) just for tenant enumeration + freshness check, then
+uses `load_posture` per-tenant (which itself opens fresh
+tenant-scoped connections). The broader `_connect()` refactor —
+making cross-tenant work reliably RLS-safe at the scheduler level —
+is deferred as its own arc.
+
+### Codified lessons (addendum)
+
+**8. Persistence isn't done until every mutation path refreshes it.**
+Ship 58' Track B built the SSoT table + writer + reader. Ship 58'.s
+found that the writer only fired via `load_posture`, and several
+mutation endpoints weren't calling it. The audit shape (enumerate
+all mutation sites vs "does this trigger a refresh?") is reusable
+for any persisted-truth table — should be part of the same arc as
+the persistence itself next time, not a hardening follow-up.
+
+**9. Cross-tenant sweeps under RLS need explicit design.**
+Every table with per-tenant RLS silently returns 0 rows to a
+cross-tenant scanner. The scheduler needs a role that bypasses RLS
+(superuser or `BYPASSRLS`), or must iterate tenants and set
+`app.tenant_id` per iteration. The current `_connect()` default of
+`arioncomply_app` is a footgun for any cross-tenant sweep authored
+after the initial fact_recompute pattern. Fixed for
+`posture_refresh` via its own superuser connection; broader fix
+deserves its own arc.
+
+**10. Bootstrap scripts as first-class citizens.**
+New persisted-truth tables need explicit bootstrap for existing
+tenants. Waiting for organic triggers (uploads, Stage-1 approvals)
+to populate the SSoT means demo tenants + already-onboarded
+customers have blank state until they happen to do a triggering
+action. Ship the bootstrap alongside the table.
+
+### Follow-ons still deferred (P2+)
+
+- **Refactor `build_per_must_advisory_data`** to read SSoT +
+  enrich with contextual data (sources, hints, prose), instead of
+  re-running the engine. Removes 5 duplicate engine walks per
+  request. Coupled to the SPA leaf-detail rework (#577).
+- **`tenant_must_overrides` mutation UI** doesn't exist yet;
+  refresh trigger will land with that UI.
+- **Monitoring signal**: e.g. an admin endpoint or SQL view
+  surfacing tenants with `computed_at > 24h old AND recent
+  uploads exist` — alert on drift.
+- **Scheduler `_connect()` refactor** to make cross-tenant sweeps
+  reliably RLS-safe. Same footgun affects any future
+  cross-tenant sweep author.
+
+### Cost of the hardening
+
+- Wall clock: ~1.5 hours (audit + design + implementation + test
+  + debug the RLS gotcha)
+- LLM cost: $0 (all deterministic Python)
+- Files touched: 5 (3 modified: api_server, posture_loader,
+  scheduler/tick; 2 new: schema_v95, bootstrap script)
+- Lines: 292 insertions
+- Schema migrations: 1 (`schema_v95_posture_refresh_sweep_work_type`)
+- Eval regression: 231/232 PASS + 1 WARN + 0 FAIL — identical
+  baseline. Zero regressions.
