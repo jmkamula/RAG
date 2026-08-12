@@ -209,6 +209,55 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
     else:
         applicable_must_ids = [mid for mid in must_ids if mid in ssot_verdicts]
 
+    # Ship 62' — batch-fetch source-MUST excerpts so bridged elements
+    # can render actual ISO evidence text under each `Covered via`
+    # attribution line, not just the ref. Collect every source_must_id
+    # that will feature in the top-3 render below (grouped by
+    # (std, control_ref, edge)), then one Postgres query pulls their
+    # excerpts. Cost: one extra query per package build; scoped to the
+    # bridged MUSTs actually shown (never sprawls with fanout).
+    source_must_ids_needed: set[str] = set()
+    if not ssot_empty:
+        for mid in applicable_must_ids:
+            v = ssot_verdicts.get(mid)
+            if v is None or v.satisfied or not v.bridge_sources:
+                continue
+            for b in v.bridge_sources:
+                if b.source_must_id:
+                    source_must_ids_needed.add(b.source_must_id)
+
+    source_findings_by_id: dict[str, dict] = {}
+    if source_must_ids_needed:
+        try:
+            with pg_conn.cursor() as cur:
+                cur.execute(
+                    "SELECT set_config('app.tenant_id', %s::text, false)",
+                    (tenant_id,),
+                )
+                cur.execute(
+                    """
+                    SELECT DISTINCT ON (df.checklist_item_id)
+                           df.checklist_item_id, df.excerpt,
+                           df.section_number, cd.filename
+                      FROM document_findings df
+                      JOIN client_documents cd ON cd.id = df.document_id
+                     WHERE df.tenant_id = %s::uuid
+                       AND df.is_active = TRUE
+                       AND df.review_status = 'approved'
+                       AND df.checklist_item_id = ANY(%s)
+                     ORDER BY df.checklist_item_id, cd.filename
+                    """,
+                    (tenant_id, list(source_must_ids_needed)),
+                )
+                for mid, excerpt, sec_no, fname in cur.fetchall():
+                    source_findings_by_id[mid] = {
+                        "excerpt":  _clean_excerpt(excerpt),
+                        "section":  sec_no,
+                        "filename": fname,
+                    }
+        except Exception as e:
+            logger.warning("evidence_package: source-excerpt fetch skipped: %s", e)
+
     n_must_total     = len(applicable_must_ids)
     n_must_satisfied = 0   # direct-satisfied per SSoT (or findings fallback)
     n_must_bridged   = 0   # unmet-direct but cross-framework attribution present
@@ -311,6 +360,14 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
         lines.append("")
 
     # ── Required elements ────────────────────────────────────────
+    # Ship 62' — track source-MUST ids we've already quoted in this
+    # package so an ISO excerpt isn't repeated verbatim across 4
+    # different GDPR MUSTs that all bridge to the same A.5.15 evidence.
+    # First bridged MUST that references a source excerpt shows the
+    # quote; subsequent references collapse to a compact
+    # "See _ISO 27001:2022 A.5.15_ above" pointer.
+    quoted_source_ids: set[str] = set()
+    quoted_source_refs: dict[tuple[str, str], bool] = {}
     lines.append(f"## Required elements — {n_must_satisfied} of {n_must_total} covered")
     lines.append("")
     for ci in must_items:
@@ -346,27 +403,61 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
             # Ship 61'.a — unmet-direct but covered via cross-framework
             # bridge attribution. Auditor gets the deterministic
             # source-control ref + edge type without prose invention.
+            # Ship 62' — pulls one representative source excerpt per
+            # displayed group so the auditor sees the actual ISO
+            # evidence text, not just the ref.
             v = ssot_verdicts[ci.id]
             lines.append(f"- ↗ **{ci.text}** (cross-framework coverage)")
             # Group source refs by (standard_id, control_ref, edge_type)
             # to avoid repeating identical bridges — e.g. many source
             # MUSTs on the same source control produce one "via A.5.15"
             # line, not one line per source MUST.
-            grouped: dict[tuple[str, str, str], int] = {}
+            grouped: dict[tuple[str, str, str], list[str]] = {}
             for b in v.bridge_sources:
                 key = (b.source_standard_id, b.source_control_ref, b.edge_type)
-                grouped[key] = grouped.get(key, 0) + 1
+                grouped.setdefault(key, []).append(b.source_must_id)
             # Cap the display to the top 3 groups — auditors can
             # drill in from the SPA if they need the full attribution
             # graph; the package shouldn't sprawl.
             top_groups = sorted(
-                grouped.items(), key=lambda kv: -kv[1],
+                grouped.items(), key=lambda kv: -len(kv[1]),
             )[:3]
-            for (std_id, src_ref, edge), n in top_groups:
+            for (std_id, src_ref, edge), src_ids in top_groups:
                 std_disp = _humanize_standard_id(std_id)
                 lines.append(
                     f"  ↳ Covered via _{std_disp} {src_ref}_ ({edge})"
                 )
+                # Ship 62' — pick the first source_must_id in this
+                # group that has a fetched excerpt. Ship 62' dedup:
+                # if this control's excerpts have already been shown
+                # anywhere earlier in the package, emit a compact
+                # "see above" pointer instead of re-quoting.
+                ref_key = (std_id, src_ref)
+                already_shown_ref = quoted_source_refs.get(ref_key, False)
+                excerpt_row = None
+                excerpt_sid = None
+                for sid in src_ids:
+                    row = source_findings_by_id.get(sid)
+                    if row and row.get("excerpt"):
+                        excerpt_row = row
+                        excerpt_sid = sid
+                        break
+                if excerpt_row is None:
+                    # No source excerpt available for this group —
+                    # nothing to dedup, nothing to render.
+                    pass
+                elif already_shown_ref:
+                    lines.append(
+                        f"     _(source excerpt shown under _{std_disp} {src_ref}_ above)_"
+                    )
+                else:
+                    loc = excerpt_row["filename"]
+                    if excerpt_row.get("section"):
+                        loc += f", §{excerpt_row['section']}"
+                    lines.append(f"     > {excerpt_row['excerpt']}")
+                    lines.append(f"     From _{loc}_")
+                    quoted_source_ids.add(excerpt_sid)
+                    quoted_source_refs[ref_key] = True
             more = len(grouped) - len(top_groups)
             if more > 0:
                 lines.append(f"  ↳ …and {more} more related control{'s' if more != 1 else ''}.")
