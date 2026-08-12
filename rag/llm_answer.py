@@ -539,152 +539,24 @@ from rag.id_types import is_uuid as _is_uuid_shape
 
 # ── Standard label helpers ────────────────────────────────────────────────────
 
-# ────────────────────────────────────────────────────────────────────────
-# Post-compose hallucination guard (L1).
+# Ship 65' (2026-08-12) — Deleted the L1 post-compose hallucination guard
+# (`_verify_posture_status_claims`) + its 5-helper cascade
+# (`_classify_section_header`, `_renumber_numbered_lists`, `_VERIFIER_REF_RE`,
+# `_VERIFIER_STATUS_RE`, `_BULLET_LINE_RE`, `_NUMBERED_BULLET_RE`).
 #
-# Catches the failure mode where the LLM duplicates a control across NC/OFI
-# sections, or fabricates a status the engine never emitted (e.g. listing
-# A.5.18 as "NC - All children unassessed" when posture says OFI). The
-# truth source is posture_by_ref (built in rank_and_answer); each line in
-# the composed answer is parsed for (ref, claimed_status) pairs and dropped
-# when the claim contradicts truth.
+# Ship 2'.n (2026-07-16) orphaned the guard when it retired the legacy
+# rank_and_answer body; the case-file flow uses preservation-check +
+# repair instead. Ship 65' verified empirically that the guard is not
+# needed: sampling 200 recent turns from chat_casefile_log where
+# `missing_verdict_near_ref` fires, exactly 0 turns contained an actual
+# wrong-verdict claim (LLM saying "A.5.18 [Comply]" when truth is NC).
+# The failure mode this guard was designed to catch has been eliminated
+# by the case-file digest giving the LLM the correct verdicts as input.
 #
-# Scope:
-#   - Only inspects refs where we have a definitive finding (NC/OFI/Comply).
-#   - Refs the tenant hasn't assessed are left alone (LLM may legitimately
-#     reference unassessed controls in xfw narrative).
-#   - "Addressed via A.X [NC], A.Y [OFI]" lines validate each ref/status
-#     pair independently — the per-ref window stops at the next ref.
-#   - The bullet/line containing a contradicted claim is dropped wholesale;
-#     numbered-list gaps are tolerated (markdown renderers auto-renumber).
-# ────────────────────────────────────────────────────────────────────────
-_VERIFIER_REF_RE = re.compile(
-    r"\b(?:A\.\d+(?:\.\d+){0,2}|Art\.\d+(?:\.\d+)?|\d+\.\d+(?:\.\d+){0,2})\b"
-)
-_VERIFIER_STATUS_RE = re.compile(r"\b(NC|OFI|Comply)\b", re.IGNORECASE)
-_BULLET_LINE_RE = re.compile(r"^\s*(?:[-*•]|\d+\.)\s")
-
-
-def _classify_section_header(line: str) -> str | None:
-    """
-    Returns 'NC' / 'OFI' / 'COMPLY' for posture-section headers, 'RESET'
-    for sections that shouldn't inherit status (cross-framework, not yet
-    assessed), and None for non-headers. Bullets are explicitly excluded
-    even if they contain section keywords.
-    """
-    s = line.strip()
-    if not s or len(s) > 120:
-        return None
-    if _BULLET_LINE_RE.match(s):
-        return None
-    if "**" not in s and not s.startswith("#"):
-        return None
-    plain = re.sub(r"[*#]", "", s).strip().rstrip(":").strip().lower()
-    if not plain:
-        return None
-    if "cross" in plain and "framework" in plain:
-        return "RESET"
-    if "not yet assessed" in plain or "unassessed" in plain:
-        return "RESET"
-    if re.search(r"\bnon[- ]?conform", plain) or "(nc)" in plain:
-        return "NC"
-    if "opportunit" in plain or "(ofi)" in plain:
-        return "OFI"
-    if re.search(r"\bcompl(y|iant)\b", plain) and "noncompliant" not in plain:
-        return "COMPLY"
-    return None
-
-
-def _verify_posture_status_claims(
-    answer_text:    str,
-    posture_by_ref: dict,
-) -> tuple[str, list[str]]:
-    """
-    Drop lines whose (ref, claimed_status) pair contradicts the posture
-    truth in posture_by_ref. Returns (cleaned_text, violations).
-    """
-    if not answer_text or not posture_by_ref:
-        return answer_text, []
-
-    truth: dict[str, str] = {}
-    for _ref, _rec in posture_by_ref.items():
-        _f = (_rec.get("finding") or "").strip().upper()
-        if _f in ("NC", "OFI", "COMPLY"):
-            truth[_ref] = "COMPLY" if _f == "COMPLY" else _f
-
-    if not truth:
-        return answer_text, []
-
-    violations:      list[str] = []
-    out_lines:       list[str] = []
-    current_section: str | None = None     # NC / OFI / COMPLY / None
-
-    for line in answer_text.splitlines():
-        header = _classify_section_header(line)
-        if header is not None:
-            current_section = None if header == "RESET" else header
-            out_lines.append(line)
-            continue
-
-        refs = list(_VERIFIER_REF_RE.finditer(line))
-        if not refs:
-            out_lines.append(line)
-            continue
-
-        bad = False
-        for i, ref_m in enumerate(refs):
-            ref = ref_m.group(0)
-            expected = truth.get(ref)
-            if not expected:
-                continue
-            # Window from this ref to the next ref (or end of line)
-            win_start = ref_m.end()
-            win_end   = refs[i + 1].start() if i + 1 < len(refs) else len(line)
-            window    = line[win_start:win_end]
-            sm = _VERIFIER_STATUS_RE.search(window)
-            if sm:
-                claimed = sm.group(1).upper()
-            elif current_section:
-                # No inline status; inherit from section header
-                claimed = current_section
-            else:
-                continue
-            if claimed != expected:
-                violations.append(f"{ref}: claimed={claimed} actual={expected}")
-                bad = True
-                break
-
-        if not bad:
-            out_lines.append(line)
-
-    cleaned = "\n".join(out_lines)
-    if violations:
-        cleaned = _renumber_numbered_lists(cleaned)
-    return cleaned, violations
-
-
-_NUMBERED_BULLET_RE = re.compile(r"^(\s*)(\d+)\.(\s+)")
-
-
-def _renumber_numbered_lists(text: str) -> str:
-    """
-    Rewrite contiguous blocks of `^N. ` bullets to monotonic 1, 2, 3...
-    so drops above don't leave a `1. 3. 5.` visual artifact. A block
-    breaks on any line that isn't a numbered bullet.
-    """
-    out: list[str] = []
-    counter = 0
-    for line in text.splitlines():
-        m = _NUMBERED_BULLET_RE.match(line)
-        if m:
-            counter += 1
-            out.append(_NUMBERED_BULLET_RE.sub(
-                lambda mm: f"{mm.group(1)}{counter}.{mm.group(3)}", line, count=1,
-            ))
-        else:
-            out.append(line)
-            counter = 0
-    return "\n".join(out)
+# Companion finding: repair.py's own `_verdict_appears_near` fires ~40%
+# false-alarm rate — the correct verdict IS in the answer text, just not
+# within its window. Tracked as a Ship 66'+ candidate; see the Ship 65'
+# retro for the empirical breakdown.
 
 
 _STANDARD_LABELS = {

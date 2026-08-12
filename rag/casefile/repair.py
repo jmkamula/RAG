@@ -57,8 +57,9 @@ class RepairResult:
 
 # ── Detection primitives ─────────────────────────────────────────────
 
-# Same regex as llm_answer.py's _VERIFIER_REF_RE — matches ISO Annex A,
-# ISO body clauses, and GDPR articles.
+# Matches ISO Annex A, ISO body clauses, and GDPR articles. Ship 65'
+# deleted the original `_VERIFIER_REF_RE` in llm_answer.py this was
+# copied from; this repair-side regex is the surviving copy.
 _REF_RE = re.compile(
     r"\b(?:A\.\d+(?:\.\d+){0,2}|Art\.\d+(?:\.\d+)?|\d+\.\d+(?:\.\d+){0,2})\b"
 )
