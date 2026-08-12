@@ -53,6 +53,87 @@ convention. Sub-arc plan:
 | 66'.d | Stage-2 write-side: approve endpoint refuses engine proposal when `applicability='na'`. Migration: retire `finding='N/A'` as legal value (use `finding='Not assessed'` + `applicability='na'`). |
 | 66'.e | Retro + codified rule (supersedes [[feedback-engine-should-not-clobber-tenant-na]]) + CI grep guard against new consumers treating N/A as a finding value. |
 
+## 66'.e delivered — codified rule + CI grep guard
+
+Two artifacts close the arc:
+
+1. New feedback memory
+   [[feedback-na-dominance-via-applicability-column]] — codified
+   rule: N/A is scoping, not evidence assessment; read
+   `applicability_status`, write via the guarded Stage-2 path,
+   don't check `finding == 'N/A'` in new code. Supersedes the
+   original tactical rule [[feedback-engine-should-not-clobber-
+   tenant-na]] which was documented but not enforced (regressed by
+   the 2026-06-03 Phase B mass-approval).
+
+2. CI grep guard — `scripts/ci/check_forbidden_patterns.sh` gets
+   its third check: `finding == 'N/A'` (or assignment / JSON key
+   shape) outside the Ship 66' allowlist. Fires on any NEW
+   consumer that treats N/A as a finding value. Verified by
+   injection: fires with exact location on regression, exits 0
+   on clean tree. Allowlist:
+   - `rag/scope_filter.py`, `rag/resolver.py`, `rag/arion_graph.py`,
+     `rag/posture_loader.py` — 5 pre-Ship-66' deferred consumer
+     sites; each entry removed as its site migrates.
+   - `db/workbook_importer.py`, `rag/llm_answer.py` — legitimate
+     writer-side / LLM-prompt-content sites (translating external
+     workbook data or telling the LLM about the N/A semantic).
+   - `snapshots/**` — historical baseline files.
+   - `tests/**`, `scripts/**` — test/tooling scope.
+
+## Ship 66' arc closure
+
+The arc that started with Ship 65's Art.32 dogfood surfacing 17
+clobbered N/A controls is now closed:
+
+- **66'.a** — Schema `posture_controls.applicability_status`
+  column + data migration.
+- **66'.b** — Engine overlay + SSoT writer + bridge writer all
+  honor N/A. Visible bug resolved (chat no longer recommends
+  physical controls on cloud-only Arion).
+- **66'.c** — Digest reader honors N/A (obligations filtered;
+  cited N/A refs surface in POSTURE with the tag).
+- **66'.d** — Stage-2 write-side guard refuses engine proposal
+  on N/A controls + first consumer migration from finding to
+  applicability_status.
+- **66'.e** — Codified rule memory + CI grep guard.
+
+**Structural property earned**: N/A dominance now holds by
+schema construction. Any future consumer that reads
+`applicability_status` gets correct N/A handling automatically.
+The remaining 5 deferred consumers can migrate opportunistically
+without changing product behavior (they're currently reading
+finding='N/A' which is equivalent to applicability='na' as of
+Ship 66'.a's 1:1 data migration).
+
+## Codified lessons (arc-level)
+
+### 29. Structural fix beats codified rule
+
+The original codified rule [[feedback-engine-should-not-clobber-
+tenant-na]] existed for weeks before Ship 66' surfaced its
+regression. Documented conventions rot; schema separations
+don't. When a rule involves "consumer X must remember to check
+Y," prefer a schema change that eliminates the need to remember.
+
+Rule: when a codified rule keeps regressing, the fix is
+structural, not more discipline. Split the mixed signal into
+separate columns/types/APIs so the rule holds by construction.
+
+### 30. Dogfood surfaces what unit tests can't
+
+The regression was in production on Arion for weeks. Every
+regression test suite passed. Ship 63's test coverage passed.
+The dogfood walk — reading the actual Art.32 answer as an
+auditor — surfaced it in one query. Test suites verify
+constraints you specified; dogfooding verifies your real
+consumer's experience.
+
+Rule: after a substantial arc (Ship 60-62 shipped bridge
+attribution across five surfaces), walk one real user journey
+end-to-end before the next arc starts. The findings will
+outweigh weeks of tests.
+
 ## 66'.d delivered — write-side guard + deprecate finding='N/A'
 
 Two changes:

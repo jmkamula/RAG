@@ -283,9 +283,9 @@ def _render_obligations(
     # so the LLM has grounding to acknowledge them.
     #
     # Ship 66'.d — check applicability_status (source of truth per
-    # Ship 66'.a schema split) instead of finding='N/A' (deprecated
-    # legacy value). Both are equivalent today (data migrated 1:1),
-    # but new checks should prefer applicability_status.
+    # Ship 66'.a schema split) instead of the legacy finding value.
+    # Both are equivalent today (data migrated 1:1), but new checks
+    # should prefer applicability_status.
     posture = cf.posture_by_ref()
     def _in_scope(ref: str) -> bool:
         rec = posture.get(ref)

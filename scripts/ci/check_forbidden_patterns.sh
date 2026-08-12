@@ -21,6 +21,13 @@
 #      rag.posture.must_verdicts.read_must_verdicts_by_control. New
 #      callers should read SSoT, not re-run the engine.
 #
+#   3. `finding == 'N/A'` scope-check outside the Ship 66' allowlist.
+#      Ship 66'.a split scope from evidence assessment: new consumers
+#      that gate on N/A should read `applicability_status == 'na'`
+#      per [[feedback-na-dominance-via-applicability-column]]. Five
+#      pre-Ship-66' sites are allowlisted; the guard fails on any
+#      NEW addition.
+#
 # Usage:
 #   scripts/ci/check_forbidden_patterns.sh
 #   scripts/ci/check_forbidden_patterns.sh --verbose   # print hit lines
@@ -105,6 +112,27 @@ report \
     ':!api_server.py' \
     ':!scripts/**' \
     ':!tests/**'
+
+# 3 — `finding == 'N/A'` scope-check outside the Ship 66' allowlist.
+#     Ship 66'.a split scope (applicability_status) from evidence
+#     assessment (finding). New consumers should read
+#     applicability_status == 'na' instead. Five pre-Ship-66' sites
+#     are allowlisted; guard fails on new additions.
+#     When a deferred site migrates: remove its allowlist entry.
+report \
+    "finding == 'N/A' scope check outside Ship 66' allowlist" \
+    "Ship 66' — use applicability_status == 'na' (see [[feedback-na-dominance-via-applicability-column]])." \
+    '(finding\s*==\s*.N/A.|finding.*=\s*.N/A.|"finding":\s*"N/A")' \
+    -- '*.py' \
+    ':!rag/scope_filter.py' \
+    ':!rag/resolver.py' \
+    ':!rag/arion_graph.py' \
+    ':!rag/posture_loader.py' \
+    ':!tests/**' \
+    ':!scripts/**' \
+    ':!snapshots/**' \
+    ':!db/workbook_importer.py' \
+    ':!rag/llm_answer.py'
 
 if [[ $FAILED -eq 0 ]]; then
     echo "OK — no forbidden patterns."
