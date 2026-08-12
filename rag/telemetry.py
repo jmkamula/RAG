@@ -79,17 +79,6 @@ def _content_cap() -> int:
     return 500
 
 
-def _truncate(s: Optional[str]) -> Optional[str]:
-    """Apply content_cap + ellipsis marker so downstream systems
-    know the value was truncated."""
-    if s is None:
-        return None
-    cap = _content_cap()
-    if len(s) <= cap:
-        return s
-    return s[:cap] + "…[truncated]"
-
-
 def get_tracer(name: str):
     """Return an OTel Tracer for the given module name. Safe to
     call before bootstrap — returns a no-op tracer until OTel is

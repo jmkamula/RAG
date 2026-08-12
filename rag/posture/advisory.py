@@ -1088,131 +1088,14 @@ def _build_evidence_class_breakdown_from_ssot(
     }
 
 
-# ── Markdown renderer (chat surface) ─────────────────────────────────────────
-
-_HUMAN_STD = {
-    "GDPR:2016/679":  "GDPR",
-    "ISO27001:2022":  "ISO 27001:2022",
-    "ISO27701:2019":  "ISO 27701:2019",
-}
-
-
-def _bridge_nudge_line(leaf: dict) -> str:
-    """Ship 60'.h — one-line "N elements already covered by X" nudge.
-
-    Same shape as `renderBridgeChip` on the SPA. Returns '' when the
-    leaf has no bridge attribution on its missing MUSTs (n_bridged is
-    zero or the field is absent on legacy fallback responses).
-    """
-    n_bridged = int(leaf.get("n_bridged") or 0)
-    if not n_bridged:
-        return ""
-    stds: set[str] = set()
-    for m in leaf.get("must_items") or []:
-        if m.get("satisfied"):
-            continue
-        for b in m.get("bridge_sources") or []:
-            sid = b.get("source_standard_id") or ""
-            if sid:
-                stds.add(_HUMAN_STD.get(sid, sid))
-    if not stds:
-        return ""
-    std_list = ", ".join(sorted(stds))
-    noun     = "element is" if n_bridged == 1 else "elements are"
-    ctrl_noun = "control" if len(stds) == 1 else "controls"
-    return (
-        f"↗ Related coverage: {n_bridged} {noun} already covered by "
-        f"evidence for related {std_list} {ctrl_noun}."
-    )
+# Ship 64' — Deleted `build_per_must_advisory` + `_render_advisory_markdown`
+# + `_bridge_nudge_line` + `_HUMAN_STD`. The markdown-renderer path had
+# no callers anywhere in the tree (audit 2026-08-12). Ship 60'.h's bridge
+# nudge went into this dead function; the modern chat surface goes
+# through the case-file digest + structured render, not this file.
+# `build_per_must_advisory_data` (the structured data builder) remains
+# the module's public entry point — consumed by 5+ live call sites
+# (Dashboard advisory endpoint, SPA leaf-detail, chat casefile augment,
+# batched refs, chat markdown builder).
 
 
-def _render_advisory_markdown(data: dict) -> str:
-    """Render the data dict as markdown. Same shape as before — chat
-    surfaces use this. Returns "" if data is None."""
-    if not data:
-        return ""
-    posture     = data["posture"]
-    control_ref = data["control_ref"]
-    n_leaves    = data["n_leaves"]
-    n_satisfied = data["n_satisfied"]
-    n_partial   = data["n_partial"]
-
-    header_line = (
-        f"↳ **How to strengthen {control_ref}** "
-        f"(currently {posture}; "
-        f"{n_satisfied} of {n_leaves} required artifacts in place, "
-        f"{n_partial} in progress)"
-    )
-
-    leaf_sections: list[str] = []
-    for leaf in data["leaves"]:
-        if leaf["satisfied"]:
-            continue  # advisory is only for unmet leaves
-        leaf_label = leaf["leaf_label"]
-        et_label   = leaf["evidence_type_label"]
-        n_have, n_total = leaf["n_have"], leaf["n_total"]
-
-        lines = [f"  - **{leaf_label}** ({et_label}) — {n_have}/{n_total} elements covered."]
-        rec = leaf["items_have"]
-        if rec:
-            have_str = "; ".join(t[:80] for t in rec[:6])
-            if len(rec) > 6:
-                have_str += f"; (+{len(rec) - 6} more)"
-            lines.append(f"    Have: {have_str}.")
-
-        miss = leaf["items_missing"]
-        miss_show = miss[:10]
-        miss_tail = f" (+{len(miss) - 10} more)" if len(miss) > 10 else ""
-
-        lines.append("    Still needed:")
-        for it in miss_show:
-            lines.append(f"      - {it}")
-        if miss_tail:
-            lines.append(f"      - …{miss_tail}")
-        lines.append(f"    To address: {leaf['upload_hint']}")
-        # Ship 60'.h — cross-framework coverage nudge (same message
-        # shape as the SPA chip in static/arioncomply.html).
-        nudge = _bridge_nudge_line(leaf)
-        if nudge:
-            lines.append(f"    {nudge}")
-        leaf_sections.append("\n".join(lines))
-
-    if not leaf_sections:
-        return ""
-
-    return (
-        "\n\n"
-        + header_line
-        + "\n\n"
-        + "\n\n".join(leaf_sections)
-        + "\n\n"
-        + data["source"]
-    )
-
-
-# ── Main entry point (chat path) ─────────────────────────────────────────────
-
-def build_per_must_advisory(
-    pg_conn,
-    tenant_id:    str,
-    control_ref:  str,
-    standard_id:  str = "ISO27001:2022",
-    neo4j_driver = None,
-) -> str:
-    """Return markdown advisory for the given control, or "" if no advisory
-    is warranted (Comply, N/A, no curated multi-leaf, or all MUSTs satisfied).
-
-    Cost: one evaluate_one_control() call (Neo4j + Postgres). Acceptable on
-    the chat path for posture_check queries that identify a single control.
-
-    If neo4j_driver is None, lazily creates one from env vars. Returns ""
-    on any failure (chat path must never break on advisory issues).
-    """
-    data = build_per_must_advisory_data(
-        pg_conn      = pg_conn,
-        tenant_id    = tenant_id,
-        control_ref  = control_ref,
-        standard_id  = standard_id,
-        neo4j_driver = neo4j_driver,
-    )
-    return _render_advisory_markdown(data) if data else ""

@@ -702,16 +702,6 @@ def _standard_label(standard_id: str) -> str:
     return _STANDARD_LABELS.get(standard_id, standard_id.split(":")[0])
 
 
-def _format_ref(standard_id: str, ref: str) -> str:
-    """Format a full readable citation: ISO27001:2022 + A.8.24 → ISO 27001 A.8.24"""
-    label = _standard_label(standard_id)
-    if label == "GDPR":
-        # Normalise Art.32 → Art. 32
-        import re
-        ref = re.sub(r'Art\.(\d)', r'Art. \1', ref)
-    return f"{label} {ref}"
-
-
 RANK_AND_ANSWER_NODE_TEMPLATE = """NODE {num} — {standard_label} {ref}{posture_tag}
 {posture_line}{source_type}: {standard_label} {ref}: {obligation_text}
 """

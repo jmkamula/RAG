@@ -52,22 +52,6 @@ class _FakeCursor:
         return False
 
 
-class _FakeConn:
-    """Minimal connection stub — .cursor() returns a _FakeCursor."""
-    def __init__(self):
-        self._cursor = _FakeCursor()
-    def cursor(self):
-        # Return a context manager
-        class _CM:
-            def __init__(self, cur):
-                self.cur = cur
-            def __enter__(self):
-                return self.cur
-            def __exit__(self, *a):
-                return False
-        return _CM(self._cursor)
-
-
 def _install_notify_capture():
     """Monkey-patch rag.cascade.notify.notify to append calls to a
     list. Returns (capture_list, restore_fn)."""

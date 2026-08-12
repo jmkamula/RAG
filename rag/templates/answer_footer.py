@@ -57,66 +57,13 @@ _RELEVANT_QUESTION_TYPES = {
 }
 
 
-def build_template_footer(
-    cited_refs:    list[str],
-    question_type: Optional[str],
-    *,
-    pg_conn = None,
-    db_url:  Optional[str] = None,
-) -> str:
-    """Return a "↳ Templates available: ..." footer, or empty string.
-
-    Either `pg_conn` (open connection — caller manages lifecycle) or
-    `db_url` (helper opens + closes ephemerally) must be supplied.
-    Returns "" silently on any DB failure so the answer is never
-    broken by a templates lookup error.
-    """
-    if not cited_refs:
-        return ""
-    qt = (question_type or "").lower()
-    if qt and qt not in _RELEVANT_QUESTION_TYPES:
-        return ""
-
-    # Dedup + canonicalise the refs
-    refs = sorted({r.strip() for r in cited_refs if r and r.strip()})
-    if not refs:
-        return ""
-
-    own_conn = False
-    if pg_conn is None:
-        if not db_url:
-            db_url = os.getenv("DATABASE_URL")
-        if not db_url:
-            return ""
-        try:
-            import psycopg2
-            pg_conn = psycopg2.connect(db_url)
-            own_conn = True
-        except Exception as e:
-            logger.warning(f"template footer: pg connect failed: {e}")
-            return ""
-
-    try:
-        primaries = _fetch_primary_templates(pg_conn, refs)
-    except Exception as e:
-        logger.warning(f"template footer: lookup failed: {e}")
-        return ""
-    finally:
-        if own_conn:
-            try:
-                pg_conn.close()
-            except Exception:
-                pass
-
-    if not primaries:
-        return ""
-
-    lines = ["", "↳ Templates available:"]
-    for p in primaries:
-        lines.append(
-            f"  - {p['control_ref']} {p['title']} → {p['download_url']}"
-        )
-    return "\n".join(lines)
+# Ship 64' — Deleted `build_template_footer`. It emitted the legacy
+# "↳ Templates available: ..." line appended to chat answers; the
+# templates surface is now `build_templates_block` (structured card
+# rendered by the SPA). No callers of the footer variant remained in
+# the tree (audit 2026-08-12). `_fetch_primary_templates` +
+# `_title_from_source_file` + `_RELEVANT_QUESTION_TYPES` remain
+# because `build_templates_block` still uses them.
 
 
 def _fetch_primary_templates(pg_conn, refs: list[str]) -> list[dict]:

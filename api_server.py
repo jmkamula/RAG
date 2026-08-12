@@ -319,18 +319,6 @@ app.add_middleware(
 # DB HELPERS
 # =============================================================================
 
-def get_conn(request: Request):
-    """Get a connection from the pool. Always close after use."""
-    pool = request.app.state.pg_pool
-    if not pool:
-        raise HTTPException(503, "Database unavailable")
-    conn = pool.getconn()
-    try:
-        yield conn
-    finally:
-        pool.putconn(conn)
-
-
 def set_session(conn, tenant_id: str, user_id: Optional[str] = None):
     """Set RLS session variables on connection."""
     with conn.cursor() as cur:
@@ -8419,11 +8407,18 @@ from rag.external import external_router as _external_router
 from rag.external.errors import (
     external_http_exception_handler         as _external_http_exception_handler,
     external_validation_exception_handler   as _external_validation_exception_handler,
+    external_unhandled_exception_handler    as _external_unhandled_exception_handler,
 )
 
 app.include_router(_external_router)
 app.add_exception_handler(HTTPException,             _external_http_exception_handler)
 app.add_exception_handler(_RequestValidationError,   _external_validation_exception_handler)
+# Ship 64' — the last-resort handler was defined in rag/external/errors.py
+# since Ship 4'.a but never registered here. Bug caught by the dead-code
+# audit (`external_unhandled_exception_handler` had 0 references). Wire
+# it so top-level exceptions on external API paths get the structured
+# 500 body instead of FastAPI's default HTML page.
+app.add_exception_handler(Exception,                 _external_unhandled_exception_handler)
 
 
 # =============================================================================

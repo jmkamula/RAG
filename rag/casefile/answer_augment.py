@@ -953,9 +953,8 @@ def _evidence_summary(
             continue
         satisfied = bool(leaf.get("satisfied"))
         # Ship 60'.i — roll up bridge attribution from must_items[]
-        # for the SPA nudge. Same idiom as _bridge_nudge_line in
-        # rag/posture/advisory.py and renderBridgeChip in the SPA;
-        # kept local so LeafState remains self-contained.
+        # for the SPA nudge. Same idiom as renderBridgeChip in the
+        # SPA; kept local so LeafState remains self-contained.
         n_bridged = int(leaf.get("n_bridged") or 0)
         bridge_stds: list[str] = []
         if n_bridged:
@@ -969,8 +968,7 @@ def _evidence_summary(
                         continue
                     _seen.add(sid)
                     # humanize inline (avoid the async output-gateway
-                    # import in this hot path; mirrors _HUMAN_STD in
-                    # rag/posture/advisory.py).
+                    # import in this hot path).
                     if sid.startswith("ISO27001"):
                         bridge_stds.append("ISO 27001" + sid[8:])
                     elif sid.startswith("ISO27701"):
