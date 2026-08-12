@@ -4871,8 +4871,18 @@ def run_case(case: EvalCase, pipeline: EvalPipeline) -> EvalResult:
         else:
             failures.append(f"MISSING required ref: {ref}")
 
+    # Ship 60' feedback root-cause 2026-08-11 — forbidden_refs used naive
+    # substring matching, causing false positives when the LLM cited a
+    # legitimately relevant sub-clause ref that shares a prefix with a
+    # forbidden ref. Example: `forbidden_refs=["A.7.1"]` (physical
+    # security perimeter, ISO 27001) tripped on the LLM's answer citing
+    # `A.7.1.5` (ISO 27701 PII sub-control, legitimate on a 27701-enrolled
+    # tenant answering an access-rights query). Word-boundary + negative
+    # lookahead: match the exact ref boundary, and drop when followed by
+    # a `.digit` continuation (subref).
     for ref in case.forbidden_refs:
-        if ref in answer:
+        pattern = re.escape(ref) + r'(?!\.\d)'
+        if re.search(pattern, answer):
             failures.append(f"FORBIDDEN ref present: {ref}")
         else:
             passed.append(f"ref_absent: {ref}")
