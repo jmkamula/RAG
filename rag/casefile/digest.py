@@ -101,12 +101,15 @@ def _posture_line(ref: str, rec: dict, draft: bool, max_body_chars: int = 120) -
 
 
 # Rank posture refs by relevance to this query:
-#   1. Cited refs from intent
-#   2. Session active refs
+#   1. Cited refs from intent (including N/A — Ship 66'.c)
+#   2. Session active refs (including N/A)
 #   3. NC findings (any not-yet-listed)
 #   4. OFI findings
 #   5. Comply findings
-# N/A + unassessed are dropped.
+# Unassessed dropped. N/A included only when the ref is explicitly
+# cited or in the active session — so the LLM has grounding to say
+# "A.7.7 is Not Applicable per your scope" instead of hallucinating
+# "no assessment shown" (Ship 66' dogfood finding, 2026-08-12).
 def _rank_posture_refs(cf: CaseFile, limit: int) -> list[str]:
     posture = cf.posture_by_ref()
     if not posture:
@@ -114,19 +117,20 @@ def _rank_posture_refs(cf: CaseFile, limit: int) -> list[str]:
     ranked: list[str] = []
     seen: set[str] = set()
 
-    def _add(ref: str):
+    def _add(ref: str, allow_na: bool = False):
         if ref in seen or ref not in posture:
             return
         f = posture[ref].get("finding")
-        if f not in ("NC", "OFI", "Comply"):
+        eligible = ("NC", "OFI", "Comply") + (("N/A",) if allow_na else ())
+        if f not in eligible:
             return
         ranked.append(ref)
         seen.add(ref)
 
     for r in cf.cited_refs:
-        _add(r)
+        _add(r, allow_na=True)
     for r in cf.active_session_refs:
-        _add(r)
+        _add(r, allow_na=True)
     for target in ("NC", "OFI", "Comply"):
         for ref, rec in posture.items():
             if len(ranked) >= limit:
@@ -270,17 +274,29 @@ def _render_obligations(
     if not primary:
         return ""
 
+    # Ship 66'.c — N/A dominance in downstream reader. Skip nodes
+    # whose posture is N/A: the tenant scoped them out, so the "here's
+    # what the standard requires" text is misleading (Ship 66' dogfood
+    # finding — LLM was hallucinating "no assessment shown" when it
+    # saw the obligation text without any scope tag). The POSTURE
+    # section still surfaces cited N/A refs with a [N/A] tag so the
+    # LLM has grounding to acknowledge them.
+    posture = cf.posture_by_ref()
+    def _in_scope(ref: str) -> bool:
+        rec = posture.get(ref)
+        return not rec or rec.get("finding") != "N/A"
+
     cited = set(cf.cited_refs)
     ordered: list = []
     seen_refs: set[str] = set()
     # cited-refs first
     for n in primary:
-        if n.ref in cited and n.ref not in seen_refs:
+        if n.ref in cited and n.ref not in seen_refs and _in_scope(n.ref):
             ordered.append(n)
             seen_refs.add(n.ref)
     # then any remaining
     for n in primary:
-        if n.ref not in seen_refs:
+        if n.ref not in seen_refs and _in_scope(n.ref):
             ordered.append(n)
             seen_refs.add(n.ref)
         if len(ordered) >= max_items:

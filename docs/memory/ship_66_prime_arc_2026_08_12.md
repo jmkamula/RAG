@@ -53,6 +53,33 @@ convention. Sub-arc plan:
 | 66'.d | Stage-2 write-side: approve endpoint refuses engine proposal when `applicability='na'`. Migration: retire `finding='N/A'` as legal value (use `finding='Not assessed'` + `applicability='na'`). |
 | 66'.e | Retro + codified rule (supersedes [[feedback-engine-should-not-clobber-tenant-na]]) + CI grep guard against new consumers treating N/A as a finding value. |
 
+## 66'.c delivered — digest reader honors N/A
+
+Two edits in `rag/casefile/digest.py`:
+
+1. `_rank_posture_refs` — added `allow_na=True` on the cited-refs
+   and active-session paths. N/A refs surface in POSTURE only when
+   explicitly asked about. Body-level NC/OFI/Comply ranking still
+   drops N/A (they aren't gaps to prioritize).
+2. `_render_obligations` — skip nodes where `posture[ref].finding
+   == 'N/A'`. The tenant scoped them out; there is no obligation
+   to render.
+
+Effect on the auditor journey
+- Query `is A.7.7 compliant?` (an N/A control) now returns:
+  *"ISO 27001 A.7.7 is marked as N/A, meaning it is not applicable
+  to Arion's current ISMS scope and is not assessed for
+  compliance."*
+- Pre-Ship-66'.c response was: *"There is no posture assessment
+  shown for ISO 27001 A.7.7... current compliance status cannot
+  be confirmed from the available data."* Hallucinated because
+  the LLM saw the obligation text without any verdict.
+- Art.32 query — no regression, still zero A.7.x leak.
+
+Verification
+- Ship 63 Evidence Package snapshot tests: 5 of 5 PASS.
+- Eval (in flight — will confirm at commit time).
+
 ## 66'.b delivered — visible bug resolved
 
 Three write-side consumers gained the `applicability='na'` guard:
