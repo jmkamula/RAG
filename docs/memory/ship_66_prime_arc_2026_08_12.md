@@ -53,7 +53,42 @@ convention. Sub-arc plan:
 | 66'.d | Stage-2 write-side: approve endpoint refuses engine proposal when `applicability='na'`. Migration: retire `finding='N/A'` as legal value (use `finding='Not assessed'` + `applicability='na'`). |
 | 66'.e | Retro + codified rule (supersedes [[feedback-engine-should-not-clobber-tenant-na]]) + CI grep guard against new consumers treating N/A as a finding value. |
 
-## 66'.a delivered this commit
+## 66'.b delivered — visible bug resolved
+
+Three write-side consumers gained the `applicability='na'` guard:
+
+- `_apply_engine_overlay` (posture_loader.py:314) — early-continue
+  when `row.applicability_status == 'na'`. This is the direct
+  fix for the read path clobber.
+- `_persist_must_verdicts` — pre-fetches `na_node_ids` set from
+  posture_controls, filters the verdicts iteration so N/A
+  controls never produce SSoT rows. Aligns with Ship 58's
+  codified "absence-of-row as valid N/A" discipline.
+- `_persist_bridge_coverage` — accepts `na_node_ids` param;
+  filters target-side (`dst_id in na_node_ids → skip`). Source
+  side is filtered automatically because `satisfied_by_control`
+  is derived from the already-filtered SSoT rows.
+
+Verified on Arion demo (post-load_posture with the guards)
+- A.7.7 / A.7.10 / A.8.26: `finding='N/A'`, `engine_overridden=False`.
+  Overlay correctly skipped.
+- SSoT rows for the 17 clobbered N/A refs: **0** (was ~70).
+- bridge_coverage rows targeting the 17: **0**.
+- Re-fired `is Art.32 compliant?` chat query — physical A.7.x
+  refs no longer leak into prose. Programs card dropped from
+  "8 of 53" to "8 of 51" as the 2 clobbered N/A refs (A.7.13 +
+  A.8.26) fall out of the implementer list correctly.
+- Eval baseline held: 231 PASS + 1 permanent WARN + 0 FAIL.
+- Ship 63 Evidence Package snapshot tests: 5 of 5 PASS.
+
+**The critical dogfood bug (H2) is resolved.** Two other findings
+(H3.a "9 required items" fabrication + H6 "canonical text at
+citation sites") surfaced from the post-fix dogfood second-pass
+paste — recorded in the Art.32 dogfood punchlist but **out of
+Ship 66' scope** (they're intro-prose grounding + UX
+enhancement, not N/A dominance).
+
+## 66'.a delivered
 
 - `db/schema_v97_applicability_status.sql` — new column with
   CHECK constraint + partial index on `(tenant_id,

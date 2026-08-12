@@ -313,6 +313,17 @@ def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
                 # in a later iteration when we have a richer view.
                 continue
 
+            # Ship 66'.b (2026-08-12) — N/A dominance guard.
+            # Tenant's scoping decision (applicability='na') is
+            # authoritative over any engine verdict. The engine can only
+            # answer "how well is my evidence?"; on an out-of-scope
+            # control there is no evidence question to ask.
+            # Codified rule: [[feedback-engine-should-not-clobber-tenant-na]]
+            # + Ship 66'.a schema split. This is the enforcement point
+            # for the read path; Ship 66'.d closes the write path.
+            if row.get("applicability_status") == "na":
+                continue
+
             # Two paths trigger the in-memory overlay:
             #   (a) HITL Stage-2 gate: engine_proposal_status='approved' —
             #       Stage-2 user accepted the engine's proposed verdict
@@ -726,6 +737,33 @@ def _persist_must_verdicts(pg_conn, tenant_id: str, verdicts: dict) -> int:
     if not verdicts:
         return 0
 
+    # Ship 66'.b — N/A dominance. Fetch the set of control node_ids that
+    # the tenant declared out of scope (applicability='na'); skip these
+    # from SSoT persistence entirely. Consumers reading
+    # posture_must_verdicts see absence-of-row for out-of-scope
+    # controls, matching the existing "absence-of-row as valid N/A"
+    # discipline (Ship 58 codified lesson).
+    na_node_ids: set[str] = set()
+    try:
+        with pg_conn.cursor() as _cur_na:
+            _cur_na.execute(
+                "SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,),
+            )
+            _cur_na.execute("""
+                SELECT COALESCE(node_id, standard_id || ':' || control_ref)
+                  FROM posture_controls
+                 WHERE tenant_id = %s::uuid
+                   AND applicability_status = 'na'
+            """, (tenant_id,))
+            na_node_ids = {r[0] for r in _cur_na.fetchall()}
+    except Exception as e:
+        # Fallback: proceed with the full set. The overlay's guard
+        # (Ship 66'.b earlier in this file) still protects the primary
+        # posture dict; SSoT rows for N/A controls will silently
+        # accumulate but readers via read_must_verdicts_by_control get
+        # tenant-consistent data via posture_controls.finding.
+        logger.warning("_persist_must_verdicts: N/A filter fetch failed: %s", e)
+
     # A small number of MUST ids are shared across multiple leaves (e.g.
     # Ship 12'.a's item:A.5.18:rev_identity_pair which pairs identity +
     # authentication lifecycles). When one MUST surfaces from two
@@ -744,6 +782,9 @@ def _persist_must_verdicts(pg_conn, tenant_id: str, verdicts: dict) -> int:
 
     best: dict[str, tuple[str, str, str, bool, bool, bool, str]] = {}
     for cid, verdict in verdicts.items():
+        # Ship 66'.b — N/A dominance. Skip out-of-scope controls.
+        if cid in na_node_ids:
+            continue
         parts = cid.rsplit(":", 1)
         if len(parts) != 2:
             continue
@@ -853,7 +894,8 @@ def _persist_must_verdicts(pg_conn, tenant_id: str, verdicts: dict) -> int:
     try:
         satisfied_by_control = _index_satisfied_musts(rows)
         n_bridges = _persist_bridge_coverage(
-            pg_conn, tenant_id, satisfied_by_control, _framework_role, stub_effective,
+            pg_conn, tenant_id, satisfied_by_control, _framework_role,
+            stub_effective, na_node_ids,
         )
         if n_bridges:
             logger.info(
@@ -884,6 +926,7 @@ def _persist_bridge_coverage(
     satisfied_by_control: dict[str, set[str]],
     framework_role_fn,
     stub_effective: dict[str, tuple[str, list[str]]] | None = None,
+    na_node_ids:    set[str] | None = None,
 ) -> int:
     """Walk xfw bridges (IMPLEMENTS/SUPPORTS/ENABLES/GOVERNANCE) in Neo4j
     and emit bridge coverage rows for direct-satisfied source MUSTs.
@@ -902,6 +945,7 @@ def _persist_bridge_coverage(
         return 0
 
     stub_effective = stub_effective or {}
+    na_node_ids    = na_node_ids or set()
 
     # _build_engine_neo4j_driver is defined in this same module.
     drv = _build_engine_neo4j_driver()
@@ -932,6 +976,15 @@ def _persist_bridge_coverage(
                     src_std = _extract_std(row["src_id"])
                     dst_std = _extract_std(row["dst_id"])
                     dst_ref = row["dst_ref"] or ""
+                    # Ship 66'.b — N/A target dominance. Skip bridges
+                    # pointing to out-of-scope controls so the reader
+                    # can't accidentally surface attribution to N/A
+                    # controls via direct bridge_coverage queries.
+                    # Source side is already filtered by Ship 66'.b's
+                    # SSoT writer (satisfied_by_control doesn't contain
+                    # N/A source controls' MUSTs).
+                    if row["dst_id"] and row["dst_id"] in na_node_ids:
+                        continue
                     dst_musts = [m for m in (row["dst_musts"] or []) if m]
                     # Ship 59'.e — if target is a stub (0 direct MUSTs),
                     # use the pre-computed effective MUSTs (via derivation
