@@ -53,6 +53,51 @@ convention. Sub-arc plan:
 | 66'.d | Stage-2 write-side: approve endpoint refuses engine proposal when `applicability='na'`. Migration: retire `finding='N/A'` as legal value (use `finding='Not assessed'` + `applicability='na'`). |
 | 66'.e | Retro + codified rule (supersedes [[feedback-engine-should-not-clobber-tenant-na]]) + CI grep guard against new consumers treating N/A as a finding value. |
 
+## 66'.d delivered — write-side guard + deprecate finding='N/A'
+
+Two changes:
+
+1. **`approve_engine_proposal` write-side guard.** Extends the SELECT
+   to fetch `applicability_status`; returns `{'ok': False,
+   'reason': 'control_out_of_scope'}` when the tenant declared the
+   control N/A. The API's `stage2_approve` endpoint maps that to
+   an HTTP 409 with a natural-language message:
+
+   > *"{control_ref} is marked Not Applicable for your organization's
+   > scope. To accept an engine verdict on this control, first
+   > change its scoping — approving the proposal directly would
+   > silently override your scope declaration."*
+
+   Had this guard existed on 2026-06-03 (Phase B mass-approval), the
+   Arion regression would never have occurred. This closes the
+   write-path source of the bug.
+
+2. **First consumer migration from `finding='N/A'` → `applicability_status='na'`.** Ship 66'.c's `_in_scope` check in
+   `_render_obligations` migrated to the source-of-truth field.
+   Establishes the pattern: `finding='N/A'` is now
+   **deprecated-legal**; new checks should prefer
+   `applicability_status`. Full retirement of the `'N/A'` value
+   (data migration + CHECK constraints + remaining 5 consumers)
+   deferred to a follow-on arc because the false-positive rate on
+   naive substring migration is high — each site needs individual
+   audit.
+
+Deferred consumer migrations (to future arcs, not Ship 66'.d):
+- `rag/scope_filter.py:93` — SQL filter still uses `finding='N/A'`
+- `rag/resolver.py:718` — resolver telemetry counter
+- `rag/arion_graph.py:2229 + 2249` — structured payload N/A handling
+- `rag/posture_loader.py:198 + 215` — log format + span attribute
+- SQL views + CHECK constraint retirement
+
+Verification
+- Direct call: `approve_engine_proposal(A.7.7, ...)` returns
+  `{'ok': False, 'reason': 'control_out_of_scope'}`. Applicable
+  controls fall through unchanged (A.5.18 returned
+  `already_approved`, its actual pre-existing state).
+- A.7.7 chat query still returns correct N/A answer via 66'.c's
+  digest filter (now applicability-based).
+- Eval: to be confirmed.
+
 ## 66'.c delivered — digest reader honors N/A
 
 Two edits in `rag/casefile/digest.py`:

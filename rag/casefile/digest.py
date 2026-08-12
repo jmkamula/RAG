@@ -275,16 +275,23 @@ def _render_obligations(
         return ""
 
     # Ship 66'.c — N/A dominance in downstream reader. Skip nodes
-    # whose posture is N/A: the tenant scoped them out, so the "here's
-    # what the standard requires" text is misleading (Ship 66' dogfood
-    # finding — LLM was hallucinating "no assessment shown" when it
-    # saw the obligation text without any scope tag). The POSTURE
-    # section still surfaces cited N/A refs with a [N/A] tag so the
-    # LLM has grounding to acknowledge them.
+    # whose posture is scoped out: the tenant declared them N/A, so
+    # the "here's what the standard requires" text is misleading
+    # (Ship 66' dogfood finding — LLM was hallucinating "no assessment
+    # shown" when it saw the obligation text without scope tag). The
+    # POSTURE section still surfaces cited N/A refs with a [N/A] tag
+    # so the LLM has grounding to acknowledge them.
+    #
+    # Ship 66'.d — check applicability_status (source of truth per
+    # Ship 66'.a schema split) instead of finding='N/A' (deprecated
+    # legacy value). Both are equivalent today (data migrated 1:1),
+    # but new checks should prefer applicability_status.
     posture = cf.posture_by_ref()
     def _in_scope(ref: str) -> bool:
         rec = posture.get(ref)
-        return not rec or rec.get("finding") != "N/A"
+        if not rec:
+            return True
+        return rec.get("applicability_status") != "na"
 
     cited = set(cf.cited_refs)
     ordered: list = []

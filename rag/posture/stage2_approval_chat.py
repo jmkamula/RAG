@@ -301,7 +301,7 @@ def approve_engine_proposal(
                 f"""
                 SELECT pc.id, pc.standard_id, pc.finding,
                        pa.finding, pc.engine_proposal_status,
-                       pa.gap_description
+                       pa.gap_description, pc.applicability_status
                   FROM posture_controls pc
                   LEFT JOIN posture_assertions pa
                     ON pa.tenant_id   = pc.tenant_id
@@ -324,7 +324,24 @@ def approve_engine_proposal(
             if row is None:
                 return {"ok": False, "reason": "no_posture_row"}
             (posture_id, standard_id, live_finding,
-             proposed_finding, status, reason_snap) = row
+             proposed_finding, status, reason_snap,
+             applicability_status) = row
+
+            # Ship 66'.d — N/A dominance write-side guard.
+            # Codified rule [[feedback-engine-should-not-clobber-tenant-na]]
+            # + Ship 66'.a schema split. Refuse to accept an engine
+            # verdict on a control the tenant declared out of scope.
+            # The past mass-approval that produced the Arion regression
+            # would have been blocked here. To approve the engine
+            # verdict, the tenant must first change the scoping
+            # (applicability_status → 'applicable') — a separate,
+            # explicit action.
+            if applicability_status == "na":
+                return {
+                    "ok": False, "reason": "control_out_of_scope",
+                    "control_ref": control_ref,
+                    "standard_id": standard_id,
+                }
 
             if status == "approved":
                 return {

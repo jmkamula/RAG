@@ -2588,6 +2588,16 @@ async def stage2_approve(
                 f"The posture proposal for {control_ref} has already "
                 f"been approved."
             )
+        if reason == "control_out_of_scope":
+            # Ship 66'.d — write-side N/A dominance guard fired.
+            raise HTTPException(
+                409,
+                f"{control_ref} is marked Not Applicable for your "
+                f"organization's scope. To accept an engine verdict on "
+                f"this control, first change its scoping — approving the "
+                f"proposal directly would silently override your scope "
+                f"declaration."
+            )
         raise HTTPException(
             500,
             "Something went wrong while approving that proposal. Please try again."
