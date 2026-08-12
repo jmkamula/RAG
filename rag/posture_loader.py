@@ -112,7 +112,8 @@ def load_posture(pg_conn, tenant_id: str) -> dict:
                     linked_policies,
                     last_updated,
                     engine_proposal_status,
-                    confirmation_status
+                    confirmation_status,
+                    applicability_status
                 FROM posture_controls
                 WHERE tenant_id = %s
                   AND finding != 'Not assessed'
