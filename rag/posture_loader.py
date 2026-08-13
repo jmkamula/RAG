@@ -957,6 +957,15 @@ def _persist_bridge_coverage(
     try:
         with drv.session() as s:
             for et in edge_types:
+                # Ship 68'.a — pull the optional scope_items property.
+                # Shape: list of {"sr": source_must_id, "tg": target_must_id}
+                # (short field names to keep the JSON compact). When the
+                # curator has authored specific per-MUST-pair scope, we
+                # emit bridge_coverage rows only for those pairs; when
+                # absent (default on unauthored edges), fall back to the
+                # cross-product model (each satisfied source MUST × each
+                # target MUST) — preserves pre-Ship-68 behavior on
+                # unauthored bridges so migration is opportunistic.
                 q = f"""
                     MATCH (src:RequirementNode)-[e:{et}]->(dst:RequirementNode)
                     OPTIONAL MATCH (dst)-[:SATISFIED_BY]->(:FulfilmentSpec)
@@ -964,7 +973,8 @@ def _persist_bridge_coverage(
                                -[:MUST_CONTAIN]->(dst_ci:ChecklistItem)
                     RETURN src.ref AS src_ref, src.id AS src_id,
                            dst.ref AS dst_ref, dst.id AS dst_id,
-                           collect(DISTINCT dst_ci.id) AS dst_musts
+                           collect(DISTINCT dst_ci.id) AS dst_musts,
+                           e.scope_items AS scope_items
                 """
                 for row in s.run(q).data():
                     src_ref = row["src_ref"]
@@ -997,14 +1007,40 @@ def _persist_bridge_coverage(
                             continue  # legitimately unresolvable (e.g. Art.83)
                     src_role = framework_role_fn(src_std)
                     dst_role = framework_role_fn(dst_std)
-                    # Cross-product: each satisfied source MUST bridges to
-                    # each target MUST via this edge.
-                    for src_must in source_musts_satisfied:
-                        for dst_must in dst_musts:
+
+                    # Ship 68'.a — authored per-pair mode. Neo4j returns
+                    # scope_items as a list of JSON strings (property
+                    # arrays are homogeneous). Parse defensively; any
+                    # malformed entry falls through to cross-product on
+                    # this edge so a bad edge doesn't lose attribution.
+                    scope_pairs = _parse_scope_items(row.get("scope_items"))
+                    if scope_pairs:
+                        # Emit only authored pairs whose source MUST is
+                        # satisfied AND whose target MUST is in scope.
+                        _dst_must_set = set(dst_musts)
+                        for pair in scope_pairs:
+                            sr = pair.get("sr")
+                            tg = pair.get("tg")
+                            if not (sr and tg):
+                                continue
+                            if sr not in source_musts_satisfied:
+                                continue
+                            if tg not in _dst_must_set:
+                                continue
                             bridge_rows.append((
-                                tenant_id, dst_must, dst_ref, dst_std, dst_role,
-                                src_must, src_ref, src_std, src_role, et,
+                                tenant_id, tg, dst_ref, dst_std, dst_role,
+                                sr, src_ref, src_std, src_role, et,
                             ))
+                    else:
+                        # Cross-product fallback (unauthored edges).
+                        # Each satisfied source MUST bridges to each
+                        # target MUST via this edge.
+                        for src_must in source_musts_satisfied:
+                            for dst_must in dst_musts:
+                                bridge_rows.append((
+                                    tenant_id, dst_must, dst_ref, dst_std, dst_role,
+                                    src_must, src_ref, src_std, src_role, et,
+                                ))
     finally:
         try: drv.close()
         except Exception: pass
@@ -1045,6 +1081,50 @@ def _persist_bridge_coverage(
         raise
 
     return len(rows)
+
+
+def _parse_scope_items(raw) -> list[dict]:
+    """Ship 68'.a — normalize the optional scope_items edge property.
+
+    Neo4j homogeneously-typed arrays only allow primitive elements, so
+    curator-authored per-pair scope is stored as a list of JSON strings
+    (each string encoding one {"sr": source_must_id, "tg": target_must_id}
+    object). This helper accepts:
+
+      - list[str]       (Neo4j-native — each element a JSON blob)
+      - list[dict]      (already deserialized — accept as-is)
+      - JSON string     (single-string encoding of the whole list)
+      - None / empty    (returns [])
+
+    Any malformed element is silently skipped so a single bad entry
+    doesn't take down the whole edge's scope — the writer will still
+    emit rows for the valid pairs; if none parse, it falls back to
+    cross-product (Ship 68'.a bridge writer contract).
+    """
+    if not raw:
+        return []
+    import json as _json
+    out: list[dict] = []
+    if isinstance(raw, str):
+        try:
+            parsed = _json.loads(raw)
+        except Exception:
+            return []
+        raw = parsed if isinstance(parsed, list) else []
+    if not isinstance(raw, list):
+        return []
+    for elem in raw:
+        if isinstance(elem, dict):
+            out.append(elem)
+            continue
+        if isinstance(elem, str):
+            try:
+                obj = _json.loads(elem)
+            except Exception:
+                continue
+            if isinstance(obj, dict):
+                out.append(obj)
+    return out
 
 
 def _extract_std(node_id: str) -> str:
