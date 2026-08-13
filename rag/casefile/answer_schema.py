@@ -75,7 +75,7 @@ class RelatedCard(BaseModel):
     draft:            bool = False           # posture unconfirmed
     relation:         str                    # primary / demonstrated_by / cross_framework_bridge / isms_clause / context
     relation_display: str                    # gateway-humanized ("Cross-framework link", etc.)
-    evidence_summary: str = ""               # deterministic — "1 of 4 required items present"
+    evidence_summary: str = ""               # deterministic — "1 of 4 evidence artifacts present" (Ship 67')
     still_needed:     list[str] = Field(default_factory=list)  # item names with no evidence
     leaves:           list[LeafState] = Field(default_factory=list)  # Ship 19'.b — per-leaf checklist
     dashboard_url:    Optional[str] = None   # deep-link to /dashboard drill-in

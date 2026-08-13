@@ -629,8 +629,12 @@ def test_definition_digest_obligation_text_is_400_chars():
 
 
 def test_sanitize_gap_text_children_satisfied():
+    # Ship 67' — engine's "children" count is the composite of leaves +
+    # derived deps, so we say "fulfilment elements met" not "required
+    # items present" (which the RelatedCard evidence_summary uses for
+    # its leaves-only count).
     return _ok(
-        _sanitize_gap_text("0/4 children satisfied") == "0 of 4 required items present",
+        _sanitize_gap_text("0/4 children satisfied") == "0 of 4 fulfilment elements met",
     )
 
 
@@ -658,8 +662,10 @@ def test_sanitize_gap_text_no_change_when_clean():
 def test_posture_line_uses_sanitized_gap():
     rec = {"finding": "NC", "gap_description": "0/4 children satisfied"}
     line = _posture_line("A.5.18", rec, draft=True)
+    # Ship 67' — the engine-jargon phrase is replaced by the composite-
+    # view phrase, not the leaves-only phrase.
     return _ok(
-        "children satisfied" not in line and "required items present" in line,
+        "children satisfied" not in line and "fulfilment elements met" in line,
         line,
     )
 

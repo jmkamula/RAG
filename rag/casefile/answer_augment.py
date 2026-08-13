@@ -935,13 +935,20 @@ def _evidence_summary(
     if not n_leaves:
         return "", [], []
 
+    # Ship 67' (2026-08-13) — the RelatedCard evidence_summary counts
+    # LEAVES (direct-evidence artifacts). The digest's POSTURE section
+    # counts the engine's COMPOSITE (leaves + derived deps). Both are
+    # legitimate views of the same control's coverage but at different
+    # granularity. Use distinct phrases so the LLM can quote either
+    # without stumbling on "N of M required items" meaning two
+    # different things in the same answer.
     if n_partial:
         summary = (
-            f"{n_satisfied} of {n_leaves} required items present "
+            f"{n_satisfied} of {n_leaves} evidence artifacts present "
             f"({n_partial} with partial evidence)"
         )
     else:
-        summary = f"{n_satisfied} of {n_leaves} required items present"
+        summary = f"{n_satisfied} of {n_leaves} evidence artifacts present"
 
     # still_needed — leaves not satisfied whose labels we know
     still: list[str] = []

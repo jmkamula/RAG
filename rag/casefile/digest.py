@@ -59,9 +59,17 @@ def _verdict_tag(finding: str, draft: bool) -> str:
 # strings that should never surface to the tenant — dejargonize them
 # at the digest boundary, same policy as [[dejargonize-ux-pass-2026-07-01]].
 _JARGON_SUBS = [
-    # "0/4 children satisfied" → "0 of 4 required items present"
+    # Ship 67' (2026-08-13) — engine's "children" count is the composite
+    # of direct leaves + derived-dependency verdicts (e.g. GDPR Art.32's
+    # 9 children = 4 direct-evidence leaves + 5 ISO 27001 controls it
+    # derives from). This was rendering as "required items present" —
+    # colliding semantically with the RelatedCard evidence_summary
+    # (leaves-only count) and confusing the LLM. Use a distinct phrase
+    # for the composite view so the two surfaces speak different
+    # languages the LLM can quote without contradiction.
+    # "0/9 children satisfied" → "0 of 9 fulfilment elements met"
     (re.compile(r"\b(\d+)/(\d+)\s+children\s+satisfied\b", re.IGNORECASE),
-     r"\1 of \2 required items present"),
+     r"\1 of \2 fulfilment elements met"),
     # "partial evidence" (harmless but re-word for clarity)
     (re.compile(r"\bwith partial evidence\b", re.IGNORECASE),
      "with partial evidence"),
