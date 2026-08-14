@@ -527,6 +527,19 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
             for b in v.bridge_sources:
                 key = (b.source_standard_id, b.source_control_ref, b.edge_type)
                 grouped.setdefault(key, []).append(b.source_must_id)
+            # Ship 69'.c — dimension summary sentence extracted from the
+            # curator-authored rationales across all bridge sources for
+            # this MUST. Read-time parse via rag/output/dimensions.py;
+            # controlled vocabulary + display normalization. Silent when
+            # no rationale in the group carries a recognized token.
+            from rag.output.dimensions import summary_sentence
+            _rats_all = [
+                mapping_meta.get(k, {}).get("rationale", "")
+                for k in grouped.keys()
+            ]
+            _dim_sentence = summary_sentence(_rats_all)
+            if _dim_sentence:
+                lines.append(f"  _{_dim_sentence}_")
             top_groups = sorted(
                 grouped.items(), key=lambda kv: -len(kv[1]),
             )[:3]

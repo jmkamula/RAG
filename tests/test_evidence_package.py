@@ -79,6 +79,14 @@ def test_bridged_leaf_shows_cross_framework_header(pg):
     assert "↳ Asserted implementation via _" in required
     assert "confidence:" in required, "expected confidence tag on asserted mapping"
     assert "Rationale:" in required, "expected rationale on asserted mapping"
+    # Ship 69'.c — group-level dimension summary sentence extracted
+    # from the collected rationales. Art.32:program_review's ↗ blocks
+    # aggregate rationales that mention CIA + access dimensions, so
+    # the sentence "Related controls address …" must appear at least
+    # once in the Required elements section.
+    assert "_Related controls address " in required, (
+        "expected group-level dimension summary sentence"
+    )
 
 
 def test_bridged_leaf_dedupes_source_excerpts(pg):
