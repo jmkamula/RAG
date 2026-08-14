@@ -522,11 +522,22 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
             # auditor sees WHY the mapping was asserted and how much of
             # the source's work is actually done.
             lines.append(f"- ↗ **{ci.text}** (asserted implementation via related controls)")
-            # Group source refs by (standard_id, control_ref, edge_type)
+            # Group source refs by (standard_id, control_ref, edge_type).
+            # Ship 70'.a — also track the target_control_ref this group
+            # attributes via so we can rank sub-clause targets ahead of
+            # coarser whole-article ones.
             grouped: dict[tuple[str, str, str], list[str]] = {}
+            target_ref_by_group: dict[tuple[str, str, str], str] = {}
             for b in v.bridge_sources:
                 key = (b.source_standard_id, b.source_control_ref, b.edge_type)
                 grouped.setdefault(key, []).append(b.source_must_id)
+                # First-seen wins — within a group all BridgeSources come
+                # from the same Neo4j edge and therefore share the same
+                # target_control_ref (Ship 69'.b invariant). Fall back to
+                # the caller's leaf control_ref when the field is empty
+                # (pre-Ship-69'.b BridgeSource rows lacked the field).
+                if key not in target_ref_by_group:
+                    target_ref_by_group[key] = b.target_control_ref or leaf.control_ref
             # Ship 69'.c — dimension summary sentence extracted from the
             # curator-authored rationales across all bridge sources for
             # this MUST. Read-time parse via rag/output/dimensions.py;
@@ -540,8 +551,18 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
             _dim_sentence = summary_sentence(_rats_all)
             if _dim_sentence:
                 lines.append(f"  _{_dim_sentence}_")
+            # Ship 70'.a — sort by (target granularity DESC, satisfied
+            # source MUSTs DESC). Sub-clause retargets (Ship 69'.b/d)
+            # rank ahead of coarser whole-article edges so the auditor
+            # sees the narrower, more testable attribution first.
+            # Granularity = count of '.' segments in the target ref
+            # (Art.28.3.e = 3, Art.28.3 = 2, Art.28 = 1).
             top_groups = sorted(
-                grouped.items(), key=lambda kv: -len(kv[1]),
+                grouped.items(),
+                key=lambda kv: (
+                    -target_ref_by_group.get(kv[0], "").count("."),
+                    -len(kv[1]),
+                ),
             )[:3]
             for (std_id, src_ref, edge), src_ids in top_groups:
                 std_disp = _humanize_standard_id(std_id)
