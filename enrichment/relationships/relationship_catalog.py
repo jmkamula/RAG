@@ -4367,7 +4367,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.2.2', source_standard_id='ISO27701:2019',
-        target_ref='Art.8', target_standard_id='GDPR:2016/679',
+        target_ref='Art.8.3', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.2.2 covers Art.8.3 — Member State children-consent age variations factor into the basis catalog.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 7.2.2 → (8)(3)',
@@ -4713,7 +4713,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.3.3', source_standard_id='ISO27701:2019',
-        target_ref='Art.13', target_standard_id='GDPR:2016/679',
+        target_ref='Art.13.3', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.3.3 timing of provision — at time of collection per Art.13.3.',
         citation='ISO/IEC 27701:2019 Annex D — 7.3.3 → (13)(3)',
@@ -4809,7 +4809,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.3.10', source_standard_id='ISO27701:2019',
-        target_ref='Art.13', target_standard_id='GDPR:2016/679',
+        target_ref='Art.13.2.f', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.3.10 notification of existence — Art.13.2.f + Art.14.2.g automated-decision disclosure at collection.',
         citation='ISO/IEC 27701:2019 Annex D — 7.3.10 → (13)(2)(f)',
@@ -4867,7 +4867,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.4.5', source_standard_id='ISO27701:2019',
-        target_ref='Art.6', target_standard_id='GDPR:2016/679',
+        target_ref='Art.6.4.e', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.4.5 supports Art.6.4.e — compatibility test via de-identification for further processing.',
         citation='ISO/IEC 27701:2019 Annex D — 7.4.5 → (6)(4)(e)',
@@ -4925,7 +4925,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     # §B.8.3.1 processor obligations support → Art.28 + Art.15 + Art.17
     RelationshipEdge(
         source_ref='B.8.3.1', source_standard_id='ISO27701:2019',
-        target_ref='Art.28', target_standard_id='GDPR:2016/679',
+        target_ref='Art.28.3.e', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.3.1 is the certifiable operationalisation of Art.28.3.e — processor assists controller with subject rights.',
         citation='ISO/IEC 27701:2019 Annex D — 8.3.1 → (28)(3)(e)',
@@ -5121,7 +5121,7 @@ ISO27701_BATCH3_EDGES: list[RelationshipEdge] = [
     # A.7.5.2 destinations → Art.15.2 (subject-facing disclosure) + Art.30.1.e
     RelationshipEdge(
         source_ref='A.7.5.2', source_standard_id='ISO27701:2019',
-        target_ref='Art.15', target_standard_id='GDPR:2016/679',
+        target_ref='Art.15.2', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.5.2 destinations disclosure feeds Art.15.2 — subject-right to know transfer destinations.',
         citation='ISO/IEC 27701:2019 Annex D — 7.5.2 → (15)(2)',
@@ -5129,7 +5129,7 @@ ISO27701_BATCH3_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.5.2', source_standard_id='ISO27701:2019',
-        target_ref='Art.30', target_standard_id='GDPR:2016/679',
+        target_ref='Art.30.1.e', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.5.2 destinations feed Art.30.1.e recipient records.',
         citation='ISO/IEC 27701:2019 Annex D — 7.5.2 → (30)(1)(e)',
@@ -5138,7 +5138,7 @@ ISO27701_BATCH3_EDGES: list[RelationshipEdge] = [
     # A.7.5.3 transfer records → Art.30.1.e
     RelationshipEdge(
         source_ref='A.7.5.3', source_standard_id='ISO27701:2019',
-        target_ref='Art.30', target_standard_id='GDPR:2016/679',
+        target_ref='Art.30.1.e', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.5.3 transfer records support Art.30.1.e transfer-recipient recording.',
         citation='ISO/IEC 27701:2019 Annex D — 7.5.3 → (30)(1)(e)',
@@ -5147,7 +5147,7 @@ ISO27701_BATCH3_EDGES: list[RelationshipEdge] = [
     # A.7.5.4 disclosure records → Art.30.1.d
     RelationshipEdge(
         source_ref='A.7.5.4', source_standard_id='ISO27701:2019',
-        target_ref='Art.30', target_standard_id='GDPR:2016/679',
+        target_ref='Art.30.1.d', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.5.4 disclosure records support Art.30.1.d recipient recording.',
         citation='ISO/IEC 27701:2019 Annex D — 7.5.4 → (30)(1)(d)',
@@ -5189,7 +5189,7 @@ ISO27701_BATCH3_EDGES: list[RelationshipEdge] = [
     # B.8.5.2 destinations → Art.30.2.c
     RelationshipEdge(
         source_ref='B.8.5.2', source_standard_id='ISO27701:2019',
-        target_ref='Art.30', target_standard_id='GDPR:2016/679',
+        target_ref='Art.30.2.c', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.5.2 processor destinations support Art.30.2.c transfer records.',
         citation='ISO/IEC 27701:2019 Annex D — 8.5.2 → (30)(2)(c)',
@@ -5225,7 +5225,7 @@ ISO27701_BATCH3_EDGES: list[RelationshipEdge] = [
     # B.8.5.6/7/8 subcontractor chain → Art.28.2 + Art.28.4
     RelationshipEdge(
         source_ref='B.8.5.6', source_standard_id='ISO27701:2019',
-        target_ref='Art.28', target_standard_id='GDPR:2016/679',
+        target_ref='Art.28.2', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.5.6 pre-use subcontractor disclosure operationalises Art.28.2 general/specific authorisation + Art.28.4 subprocessor obligations.',
         citation='ISO/IEC 27701:2019 Annex D — 8.5.6 → (28)(2), (28)(4)',
@@ -5233,7 +5233,7 @@ ISO27701_BATCH3_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='B.8.5.7', source_standard_id='ISO27701:2019',
-        target_ref='Art.28', target_standard_id='GDPR:2016/679',
+        target_ref='Art.28.2', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.5.7 subcontractor engagement operationalises Art.28.2 + Art.28.3.d flow-down of contract terms.',
         citation='ISO/IEC 27701:2019 Annex D — 8.5.7 → (28)(2), (28)(3)(d)',
@@ -5241,7 +5241,7 @@ ISO27701_BATCH3_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='B.8.5.8', source_standard_id='ISO27701:2019',
-        target_ref='Art.28', target_standard_id='GDPR:2016/679',
+        target_ref='Art.28.2', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.5.8 subcontractor-change notification operationalises Art.28.2 second sentence — inform controller of intended changes + opportunity to object.',
         citation='ISO/IEC 27701:2019 Annex D — 8.5.8 → (28)(2)',
