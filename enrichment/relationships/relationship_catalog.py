@@ -2735,7 +2735,7 @@ XFW_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.5.18', source_standard_id='ISO27001:2022',
-        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        target_ref='Art.32.1.b', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='Access rights management implements Art.32.1.b ongoing confidentiality of processing systems.',
         citation='iso_nodes_phase1.json + gdpr_nodes_phase2.json (cross_framework_summary)',
@@ -2743,7 +2743,7 @@ XFW_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.5.18', source_standard_id='ISO27001:2022',
-        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        target_ref='Art.5.1.f', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='Access rights management directly implements Art.5.1.f integrity and confidentiality principle.',
         citation='iso_nodes_phase1.json + gdpr_nodes_phase2.json (cross_framework_summary)',
@@ -2831,7 +2831,7 @@ XFW_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.5.24', source_standard_id='ISO27001:2022',
-        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        target_ref='Art.32.1.d', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='Incident management planning implements Art.32.1.d ability to restore availability - a named Art.32 requirement.',
         citation='iso_nodes_phase1.json + gdpr_nodes_phase2.json (cross_framework_summary)',
@@ -2855,7 +2855,7 @@ XFW_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.5.26', source_standard_id='ISO27001:2022',
-        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        target_ref='Art.32.1.d', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='Incident response directly implements Art.32.1.d resilience and restoration of processing systems.',
         citation='iso_nodes_phase1.json + gdpr_nodes_phase2.json (cross_framework_summary)',
@@ -3199,7 +3199,7 @@ XFW_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.8.2', source_standard_id='ISO27001:2022',
-        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        target_ref='Art.5.1.f', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='Privileged access rights management implements Art.5.1.f integrity and confidentiality of processing.',
         citation='iso_nodes_phase1.json + gdpr_nodes_phase2.json (cross_framework_summary)',
@@ -3887,7 +3887,7 @@ XFW_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.8.12', source_standard_id='ISO27001:2022',
-        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        target_ref='Art.5.1.c', target_standard_id='GDPR:2016/679',
         edge_type='SUPPORTS',
         rationale='Data masking implements Art.5.1.c data minimisation and Art.5.1.e storage limitation principles.',
         citation='iso_nodes_phase1.json + gdpr_nodes_phase2.json (cross_framework_summary)',
@@ -4334,7 +4334,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     # A.7.2.1 Identify and document purpose → Art.5 (purpose limitation) + Art.32.4 (processor instructions)
     RelationshipEdge(
         source_ref='A.7.2.1', source_standard_id='ISO27701:2019',
-        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        target_ref='Art.5.1.b', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.2.1 operationalises GDPR Art.5.1.b purpose limitation — the specific purposes principle must be documented before processing begins.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 7.2.1 → (5)(1)(b), (32)(4)',
@@ -4342,7 +4342,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.2.1', source_standard_id='ISO27701:2019',
-        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        target_ref='Art.32.4', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.2.1 supports GDPR Art.32.4 — processors act only on documented instructions from the controller including on stated purposes.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 7.2.1 → (32)(4)',
@@ -4351,7 +4351,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     # A.7.2.2 Identify lawful basis → Art.5, Art.6, Art.9, Art.10 (extensive per Annex D)
     RelationshipEdge(
         source_ref='A.7.2.2', source_standard_id='ISO27701:2019',
-        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        target_ref='Art.5.1.a', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.2.2 operationalises GDPR Art.5.1.a lawfulness principle — every processing activity must have a documented lawful basis.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 7.2.2 → (5)(1)(a), (10)',
@@ -4359,7 +4359,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.2.2', source_standard_id='ISO27701:2019',
-        target_ref='Art.6', target_standard_id='GDPR:2016/679',
+        target_ref='Art.6.1.a', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.2.2 is the certifiable operationalisation of GDPR Art.6 lawfulness of processing — determining + documenting the Art.6.1.a-f basis per activity.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 7.2.2 → (6)(1)(a-f), (6)(2), (6)(3), (6)(4)(a-e)',
@@ -4375,7 +4375,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.2.2', source_standard_id='ISO27701:2019',
-        target_ref='Art.9', target_standard_id='GDPR:2016/679',
+        target_ref='Art.9.2.a', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.2.2 covers special-category dual-basis requirement — Art.9.2.a-j basis in addition to Art.6.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 7.2.2 → (9)(1), (9)(2)(a-j), (9)(3), (9)(4)',
@@ -4383,7 +4383,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.2.2', source_standard_id='ISO27701:2019',
-        target_ref='Art.22', target_standard_id='GDPR:2016/679',
+        target_ref='Art.22.2', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.2.2 covers Art.22.2 — automated decision-making requires specific basis (contract necessity / MS law / explicit consent) as part of the lawful basis catalog.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 7.2.2 → (22)(2)(a-c), (22)(4)',
@@ -4409,7 +4409,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.2.4', source_standard_id='ISO27701:2019',
-        target_ref='Art.9', target_standard_id='GDPR:2016/679',
+        target_ref='Art.9.2.a', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.2.4 covers Art.9.2.a explicit consent for special-category data.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 7.2.4 → (9)(2)(a)',
@@ -4435,7 +4435,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     # A.7.2.6 Contracts with PII processors → Art.5 (Art.5.2 accountability) + Art.28 (processor)
     RelationshipEdge(
         source_ref='A.7.2.6', source_standard_id='ISO27701:2019',
-        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        target_ref='Art.5.2', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.2.6 supports GDPR Art.5.2 accountability — the written contract is a demonstration artefact.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 7.2.6 → (5)(2)',
@@ -4443,7 +4443,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.2.6', source_standard_id='ISO27701:2019',
-        target_ref='Art.28', target_standard_id='GDPR:2016/679',
+        target_ref='Art.28.3', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.2.6 is the certifiable operationalisation of GDPR Art.28 processor — mandatory Art.28.3 contract terms + Art.28.9 written form.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 7.2.6 → (28)(3)(e), (28)(9)',
@@ -4461,7 +4461,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     # A.7.2.8 Records of processing → Art.5 (Art.5.2 accountability) + Art.24 (controller responsibility) + Art.30 (records)
     RelationshipEdge(
         source_ref='A.7.2.8', source_standard_id='ISO27701:2019',
-        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        target_ref='Art.5.2', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.2.8 supports GDPR Art.5.2 accountability — RoPA is a core accountability demonstration artefact.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 7.2.8 → (5)(2)',
@@ -4469,7 +4469,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.2.8', source_standard_id='ISO27701:2019',
-        target_ref='Art.24', target_standard_id='GDPR:2016/679',
+        target_ref='Art.24.1', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.2.8 supports GDPR Art.24.1 — RoPA demonstrates controller has implemented appropriate technical + organizational measures.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 7.2.8 → (24)(1)',
@@ -4477,7 +4477,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.2.8', source_standard_id='ISO27701:2019',
-        target_ref='Art.30', target_standard_id='GDPR:2016/679',
+        target_ref='Art.30.1', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.2.8 is the certifiable operationalisation of GDPR Art.30.1 controller Records of Processing Activities.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 7.2.8 → (30)(1)(a-g), (30)(3), (30)(4), (30)(5)',
@@ -4486,7 +4486,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     # B.8.2.1 Customer agreement → Art.28 + Art.35 (customer DPIA support)
     RelationshipEdge(
         source_ref='B.8.2.1', source_standard_id='ISO27701:2019',
-        target_ref='Art.28', target_standard_id='GDPR:2016/679',
+        target_ref='Art.28.3.f', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.2.1 operationalises GDPR Art.28.3.e + Art.28.3.f + Art.28.9 — processor contract addressing assistance with subject rights + security of processing, in writing.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 8.2.1 → (28)(3)(e), (28)(3)(f), (28)(9)',
@@ -4494,7 +4494,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='B.8.2.1', source_standard_id='ISO27701:2019',
-        target_ref='Art.35', target_standard_id='GDPR:2016/679',
+        target_ref='Art.35.1', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.2.1 covers Art.35.1 processor DPIA support obligation.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 8.2.1 → (35)(1)',
@@ -4503,7 +4503,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     # B.8.2.2 Organization's purposes → Art.5 + Art.28 + Art.29 + Art.32
     RelationshipEdge(
         source_ref='B.8.2.2', source_standard_id='ISO27701:2019',
-        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        target_ref='Art.5.1.a', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.2.2 operationalises GDPR Art.5.1.a lawfulness + Art.5.1.b purpose limitation from processor side.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 8.2.2 → (5)(1)(a), (5)(1)(b)',
@@ -4511,7 +4511,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='B.8.2.2', source_standard_id='ISO27701:2019',
-        target_ref='Art.28', target_standard_id='GDPR:2016/679',
+        target_ref='Art.28.3.a', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.2.2 is the certifiable operationalisation of GDPR Art.28.3.a — processor acts only on documented instructions.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 8.2.2 → (28)(3)(a)',
@@ -4527,7 +4527,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='B.8.2.2', source_standard_id='ISO27701:2019',
-        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        target_ref='Art.32.4', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.2.2 supports Art.32.4 — processor + persons acting under its authority only process on instructions.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 8.2.2 → (32)(4)',
@@ -4536,7 +4536,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     # B.8.2.3 Marketing/advertising use → Art.7
     RelationshipEdge(
         source_ref='B.8.2.3', source_standard_id='ISO27701:2019',
-        target_ref='Art.7', target_standard_id='GDPR:2016/679',
+        target_ref='Art.7.4', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.2.3 operationalises GDPR Art.7.4 — consent for processing not freely given if service is conditional on consent for unrelated processing.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 8.2.3 → (7)(4)',
@@ -4545,7 +4545,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     # B.8.2.4 Infringing instruction → Art.28
     RelationshipEdge(
         source_ref='B.8.2.4', source_standard_id='ISO27701:2019',
-        target_ref='Art.28', target_standard_id='GDPR:2016/679',
+        target_ref='Art.28.3.h', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.2.4 operationalises GDPR Art.28.3.h — processor immediately informs controller if an instruction infringes GDPR or applicable law.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 8.2.4 → (28)(3)(h)',
@@ -4554,7 +4554,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     # B.8.2.5 Customer obligations → Art.28
     RelationshipEdge(
         source_ref='B.8.2.5', source_standard_id='ISO27701:2019',
-        target_ref='Art.28', target_standard_id='GDPR:2016/679',
+        target_ref='Art.28.3.h', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.2.5 operationalises GDPR Art.28.3.h — processor makes available information necessary to demonstrate controller compliance + contributes to audits.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 8.2.5 → (28)(3)(h)',
@@ -4563,7 +4563,7 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
     # B.8.2.6 Records related to processing → Art.30 (Art.30.2 processor RoPA)
     RelationshipEdge(
         source_ref='B.8.2.6', source_standard_id='ISO27701:2019',
-        target_ref='Art.30', target_standard_id='GDPR:2016/679',
+        target_ref='Art.30.2', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.2.6 is the certifiable operationalisation of GDPR Art.30.2 processor Records of Processing Activities.',
         citation='ISO/IEC 27701:2019 Annex D Table D.1 — 8.2.6 → (30)(3), (30)(4), (30)(5), (30)(2)(a), (30)(2)(b)',
@@ -4705,7 +4705,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.3.3', source_standard_id='ISO27701:2019',
-        target_ref='Art.12', target_standard_id='GDPR:2016/679',
+        target_ref='Art.12.1', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.3.3 delivery of notice operationalises Art.12.1 concise, transparent, intelligible + easily accessible form.',
         citation='ISO/IEC 27701:2019 Annex D — 7.3.3 → (12)(1), (12)(7)',
@@ -4721,7 +4721,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.3.4', source_standard_id='ISO27701:2019',
-        target_ref='Art.7', target_standard_id='GDPR:2016/679',
+        target_ref='Art.7.3', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.3.4 consent withdrawal mechanism operationalises Art.7.3 — as easy to withdraw as to give consent.',
         citation='ISO/IEC 27701:2019 Annex D — 7.3.4 → (7)(3)',
@@ -4777,7 +4777,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.3.8', source_standard_id='ISO27701:2019',
-        target_ref='Art.15', target_standard_id='GDPR:2016/679',
+        target_ref='Art.15.3', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.3.8 provides copy of PII per Art.15.3.',
         citation='ISO/IEC 27701:2019 Annex D — 7.3.8 → (15)(3), (15)(4)',
@@ -4801,7 +4801,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.3.10', source_standard_id='ISO27701:2019',
-        target_ref='Art.22', target_standard_id='GDPR:2016/679',
+        target_ref='Art.22.1', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.3.10 covers subject-facing obligations for automated decision-making — Art.22.1 + Art.22.3 human intervention + Art.22.4 explicit consent for Art.9 data.',
         citation='ISO/IEC 27701:2019 Annex D — 7.3.10 → (22)(1), (22)(3)',
@@ -4819,7 +4819,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     # §A.7.4.x privacy by design + default → Art.5 + Art.25 + Art.32
     RelationshipEdge(
         source_ref='A.7.4.1', source_standard_id='ISO27701:2019',
-        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        target_ref='Art.5.1.b', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.4.1 collection limitation operationalises Art.5.1.b purpose limitation + Art.5.1.c data minimisation.',
         citation='ISO/IEC 27701:2019 Annex D — 7.4.1 → (5)(1)(b), (5)(1)(c)',
@@ -4827,7 +4827,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.4.2', source_standard_id='ISO27701:2019',
-        target_ref='Art.25', target_standard_id='GDPR:2016/679',
+        target_ref='Art.25.2', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.4.2 processing limitation implements Art.25.2 privacy by default — only PII necessary for each specific purpose processed by default.',
         citation='ISO/IEC 27701:2019 Annex D — 7.4.2 → (25)(2)',
@@ -4835,7 +4835,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.4.3', source_standard_id='ISO27701:2019',
-        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        target_ref='Art.5.1.d', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.4.3 accuracy operationalises Art.5.1.d accuracy principle.',
         citation='ISO/IEC 27701:2019 Annex D — 7.4.3 → (5)(1)(d)',
@@ -4843,7 +4843,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.4.4', source_standard_id='ISO27701:2019',
-        target_ref='Art.25', target_standard_id='GDPR:2016/679',
+        target_ref='Art.25.1', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.4.4 minimisation objectives operationalise Art.25.1 privacy by design — pseudonymisation + data minimisation techniques.',
         citation='ISO/IEC 27701:2019 Annex D — 7.4.4 → (25)(1)',
@@ -4851,7 +4851,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.4.4', source_standard_id='ISO27701:2019',
-        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        target_ref='Art.5.1.c', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.4.4 minimisation operationalises Art.5.1.c data minimisation + Art.5.1.e storage limitation.',
         citation='ISO/IEC 27701:2019 Annex D — 7.4.4 → (5)(1)(c), (5)(1)(e)',
@@ -4859,7 +4859,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.4.5', source_standard_id='ISO27701:2019',
-        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        target_ref='Art.5.1.c', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.4.5 end-of-processing deletion / de-identification operationalises Art.5.1.c minimisation + Art.5.1.e storage limitation.',
         citation='ISO/IEC 27701:2019 Annex D — 7.4.5 → (5)(1)(c), (5)(1)(e)',
@@ -4875,7 +4875,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.4.5', source_standard_id='ISO27701:2019',
-        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        target_ref='Art.32.1.a', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.4.5 de-identification operationalises Art.32.1.a pseudonymisation as a security measure.',
         citation='ISO/IEC 27701:2019 Annex D — 7.4.5 → (32)(1)(a)',
@@ -4883,7 +4883,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.4.6', source_standard_id='ISO27701:2019',
-        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        target_ref='Art.5.1.c', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.4.6 temp file disposal supports Art.5.1.c minimisation applied to transient PII.',
         citation='ISO/IEC 27701:2019 Annex D — 7.4.6 → (5)(1)(c)',
@@ -4891,7 +4891,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.4.7', source_standard_id='ISO27701:2019',
-        target_ref='Art.13', target_standard_id='GDPR:2016/679',
+        target_ref='Art.13.2.a', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.4.7 retention schedules underpin Art.13.2.a storage period disclosure.',
         citation='ISO/IEC 27701:2019 Annex D — 7.4.7 → (13)(2)(a), (14)(2)(a)',
@@ -4899,7 +4899,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.4.8', source_standard_id='ISO27701:2019',
-        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        target_ref='Art.5.1.f', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.4.8 disposal operationalises Art.5.1.f integrity + confidentiality — secure destruction eliminates residual risk.',
         citation='ISO/IEC 27701:2019 Annex D — 7.4.8 → (5)(1)(f)',
@@ -4907,7 +4907,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.4.9', source_standard_id='ISO27701:2019',
-        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        target_ref='Art.5.1.f', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.4.9 transmission controls operationalise Art.5.1.f integrity + confidentiality.',
         citation='ISO/IEC 27701:2019 Annex D — 7.4.9 → (5)(1)(f)',
@@ -4915,7 +4915,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.7.4.9', source_standard_id='ISO27701:2019',
-        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        target_ref='Art.32.1.a', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 A.7.4.9 encryption-in-transit operationalises Art.32.1.a security of processing pseudonymisation + encryption.',
         citation='ISO/IEC 27701:2019 Annex D + Art.32.1.a',
@@ -4951,7 +4951,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     # §B.8.4.x processor PbD → Art.5 + Art.28 + Art.30
     RelationshipEdge(
         source_ref='B.8.4.1', source_standard_id='ISO27701:2019',
-        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        target_ref='Art.5.1.c', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.4.1 processor temp file disposal supports Art.5.1.c minimisation.',
         citation='ISO/IEC 27701:2019 Annex D — 8.4.1 → (5)(1)(c)',
@@ -4959,7 +4959,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='B.8.4.2', source_standard_id='ISO27701:2019',
-        target_ref='Art.28', target_standard_id='GDPR:2016/679',
+        target_ref='Art.28.3.g', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.4.2 is the certifiable operationalisation of Art.28.3.g — processor returns or deletes PII at end of service.',
         citation='ISO/IEC 27701:2019 Annex D — 8.4.2 → (28)(3)(g)',
@@ -4967,7 +4967,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='B.8.4.2', source_standard_id='ISO27701:2019',
-        target_ref='Art.30', target_standard_id='GDPR:2016/679',
+        target_ref='Art.30.1.f', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.4.2 end-of-service records support Art.30.1.f retention records.',
         citation='ISO/IEC 27701:2019 Annex D — 8.4.2 → (30)(1)(f)',
@@ -4975,7 +4975,7 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='B.8.4.3', source_standard_id='ISO27701:2019',
-        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        target_ref='Art.5.1.f', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.4.3 processor transmission controls operationalise Art.5.1.f integrity + confidentiality.',
         citation='ISO/IEC 27701:2019 Annex D — 8.4.3 → (5)(1)(f)',
@@ -5207,7 +5207,7 @@ ISO27701_BATCH3_EDGES: list[RelationshipEdge] = [
     # B.8.5.4 notification → Art.28.3.a documented instructions
     RelationshipEdge(
         source_ref='B.8.5.4', source_standard_id='ISO27701:2019',
-        target_ref='Art.28', target_standard_id='GDPR:2016/679',
+        target_ref='Art.28.3.a', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
         rationale='27701 B.8.5.4 legally-binding request notification operationalises Art.28.3.a documented-instructions principle — processor doesn''t act on non-controller instructions without proper channel.',
         citation='ISO/IEC 27701:2019 Annex D — 8.5.4 → (28)(3)(a)',
@@ -5797,7 +5797,7 @@ A5_A6_ISMS_GDPR_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.5.6', source_standard_id='ISO27001:2022',
-        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        target_ref='Art.32.1.d', target_standard_id='GDPR:2016/679',
         edge_type='SUPPORTS',
         rationale='A.5.6 contact with special interest groups feeds threat intelligence to the Art.32.1.d regular testing + evaluation leg.',
         citation='ISO/IEC 27002:2022 §5.6 + GDPR Art.32.1.d',
@@ -5837,7 +5837,7 @@ A5_A6_ISMS_GDPR_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.5.13', source_standard_id='ISO27001:2022',
-        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        target_ref='Art.32.1', target_standard_id='GDPR:2016/679',
         edge_type='SUPPORTS',
         rationale='Classification labels enable the differentiated technical protection Art.32.1 requires — high-sensitivity PII gets stronger controls.',
         citation='ISO/IEC 27002:2022 §5.13 + GDPR Art.32.1',

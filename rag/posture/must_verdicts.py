@@ -38,6 +38,11 @@ class BridgeSource:
     source_standard_id: str
     source_role:        str    # 'PROGRAM' | 'EXTENSION' | 'OBLIGATION' | 'OTHER'
     edge_type:          str    # 'IMPLEMENTS' | 'SUPPORTS' | 'ENABLES' | 'GOVERNANCE'
+    # Ship 69'.b — the ACTUAL target ref this edge points at in Neo4j.
+    # May be a sub-clause narrower than the caller's control_ref
+    # (e.g. Art.32.1.b when caller queried Art.32). Metadata lookups
+    # (edge rationale / role in Neo4j) must use this narrower id.
+    target_control_ref: str = ""
 
 
 @dataclass(frozen=True)
@@ -165,7 +170,19 @@ def read_must_verdicts(
             bridges_by_pair: dict[tuple[str, str], list[BridgeSource]] = {}
             if pairs:
                 target_ids  = [p[0] for p in pairs]
-                target_crfs = [p[1] for p in pairs]
+                target_crfs = list({p[1] for p in pairs})
+                # Ship 69'.b — union descendant sub-clause bridges into the
+                # parent control's must_verdicts. Ship 69'.b retargets edges
+                # like A.5.18 -[IMPLEMENTS]-> Art.32 to Art.32.1.b (narrower
+                # attribution). Under Ship 59'.e stub roll-down, the same
+                # target_must_id lives under both Art.32 and Art.32.1.b in
+                # bridge_coverage. The Art.32 EP caller passes control_ref
+                # ='Art.32' and expects the sub-clause attributions to
+                # appear. Match either exact ref OR any descendant
+                # `{ref}.%`. Sub-clause callers still match themselves
+                # exactly (their `{ref}.%` matches deeper leaves that
+                # don't yet exist — harmless).
+                like_patterns = [f"{r}.%" for r in target_crfs]
                 cur.execute("""
                     SELECT target_must_id, target_control_ref,
                            source_must_id, source_control_ref,
@@ -173,15 +190,32 @@ def read_must_verdicts(
                       FROM posture_must_bridge_coverage
                      WHERE tenant_id = %s::uuid
                        AND target_must_id = ANY(%s)
-                       AND target_control_ref = ANY(%s)
-                """, (tenant_id, target_ids, target_crfs))
+                       AND (target_control_ref = ANY(%s)
+                            OR target_control_ref LIKE ANY(%s))
+                """, (tenant_id, target_ids, target_crfs, like_patterns))
+                # Ship 69'.b — key bridges by target_must_id ONLY. The
+                # sub-clause target_control_ref is preserved on each
+                # BridgeSource attribution row (edge_type / rationale) but
+                # verdict lookup uses must_id alone so parent + descendant
+                # bridges roll up into the parent MUST's verdict.
                 for row in cur.fetchall():
-                    bridges_by_pair.setdefault((row[0], row[1]), []).append(BridgeSource(
+                    # Use caller's control_ref (from base_rows) as the
+                    # verdict key; sub-clause target_control_ref carried
+                    # only on the BridgeSource row.
+                    caller_crf = None
+                    for pid, pcrf in pairs:
+                        if pid == row[0]:
+                            caller_crf = pcrf
+                            break
+                    bridges_by_pair.setdefault(
+                        (row[0], caller_crf or row[1]), []
+                    ).append(BridgeSource(
                         source_must_id     = row[2],
                         source_control_ref = row[3],
                         source_standard_id = row[4],
                         source_role        = row[5],
                         edge_type          = row[6],
+                        target_control_ref = row[1],
                     ))
 
             return {

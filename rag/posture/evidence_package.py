@@ -268,17 +268,22 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
     # is done — no fake per-target coverage number.
     mapping_meta: dict[tuple[str, str, str], dict] = {}
     if not ssot_empty:
-        triples: set[tuple[str, str, str]] = set()
+        # Ship 69'.b — key metadata by (source_std, source_ref, edge_type,
+        # target_control_ref). Retargeted edges (Ship 69'.a→b) point at
+        # sub-clauses like Art.32.1.b, so the caller's leaf.control_ref
+        # ('Art.32') can't be used as the target node id — the actual
+        # target lives on each bridge_source row.
+        target_by_triple: dict[tuple[str, str, str], set[str]] = {}
         for mid in applicable_must_ids:
             v = ssot_verdicts.get(mid)
             if v is None or v.satisfied or not v.bridge_sources:
                 continue
             for b in v.bridge_sources:
                 if b.source_control_ref and b.edge_type:
-                    triples.add((
-                        b.source_standard_id, b.source_control_ref, b.edge_type,
-                    ))
-        if triples:
+                    key = (b.source_standard_id, b.source_control_ref, b.edge_type)
+                    tgt = b.target_control_ref or leaf.control_ref
+                    target_by_triple.setdefault(key, set()).add(tgt)
+        if target_by_triple:
             # Fetch rationale + confidence from Neo4j.
             try:
                 from rag.posture_loader import _build_engine_neo4j_driver
@@ -286,19 +291,25 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
                 if _neo is not None:
                     try:
                         with _neo.session() as _s:
-                            target_id = f"{leaf.standard_id}:{leaf.control_ref}"
-                            for std_id, src_ref, edge in triples:
+                            for (std_id, src_ref, edge), tgt_refs in target_by_triple.items():
                                 src_node_id = f"{std_id}:{src_ref}"
-                                r = _s.run(f"""
-                                    MATCH (s:RequirementNode {{id: $src}})
-                                          -[e:{edge}]->(t:RequirementNode {{id: $tgt}})
-                                    RETURN e.rationale AS rat, e.role AS role
-                                """, src=src_node_id, tgt=target_id).single()
-                                if r:
-                                    mapping_meta[(std_id, src_ref, edge)] = {
-                                        "rationale":  r["rat"] or "",
-                                        "confidence": (r["role"] or "").upper(),
-                                    }
+                                # Query each concrete target ref this edge
+                                # actually points at; keep the FIRST result
+                                # for the mapping meta (rationale is the
+                                # curator's per-edge statement).
+                                for tgt_ref in sorted(tgt_refs):
+                                    target_id = f"{leaf.standard_id}:{tgt_ref}"
+                                    r = _s.run(f"""
+                                        MATCH (s:RequirementNode {{id: $src}})
+                                              -[e:{edge}]->(t:RequirementNode {{id: $tgt}})
+                                        RETURN e.rationale AS rat, e.role AS role
+                                    """, src=src_node_id, tgt=target_id).single()
+                                    if r:
+                                        mapping_meta[(std_id, src_ref, edge)] = {
+                                            "rationale":  r["rat"] or "",
+                                            "confidence": (r["role"] or "").upper(),
+                                        }
+                                        break
                     finally:
                         try: _neo.close()
                         except Exception: pass
@@ -307,7 +318,7 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
 
         # Fetch source-side posture (finding + satisfied/total MUST counts)
         # for each source control we'll reference. Both live in Postgres.
-        source_ctrl_refs = sorted({sr for (_, sr, _) in triples})
+        source_ctrl_refs = sorted({sr for (_, sr, _) in target_by_triple.keys()})
         if source_ctrl_refs:
             try:
                 with pg_conn.cursor() as cur:
