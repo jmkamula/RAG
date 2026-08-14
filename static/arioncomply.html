@@ -4071,12 +4071,15 @@ function humanizeStandardId(s) {
   return s;
 }
 
-// Ship 60'.g — bridge attribution chip.
-// Takes a leaf entry (from evidence-classes breakdown or advisory
-// panel) and returns a small HTML chip describing how many unmet
-// MUSTs are cross-framework-covered, and by which frameworks.
-// Returns '' when nothing to say (n_bridged is zero or the field
-// is missing on legacy fallback responses).
+// Ship 68'.b (2026-08-13) — asserted-mapping chip.
+// Ship 60'.g / 60'.i shipped this as a "covered by" claim, but the
+// underlying bridge_coverage rows are cross-product attributions from
+// a curator-authored graph edge, not a measured per-MUST fit. The
+// honest framing: N related controls in another framework are
+// asserted (per catalog) to implement this obligation. The auditor
+// decides whether the assertion + the tenant's evidence hold.
+// Returns '' when nothing to say (n_bridged is zero on legacy
+// fallback responses).
 function renderBridgeChip(leaf) {
   const nBridged = Number(leaf && leaf.n_bridged || 0);
   if (!nBridged) return '';
@@ -4091,13 +4094,14 @@ function renderBridgeChip(leaf) {
   }
   if (!stds.size) return '';
   const stdList = Array.from(stds).sort().join(', ');
-  const noun = nBridged === 1 ? 'element is' : 'elements are';
   const stdNoun = stds.size === 1 ? 'control' : 'controls';
   return `<div style="margin-top:6px;padding:6px 10px;background:#F0F4F0;
                      border-left:3px solid #4A9059;font-size:11px;color:#3A382E">
     <span style="color:#4A9059">↗</span>
-    ${nBridged} ${noun} already covered by evidence for related
-    <strong>${stdList}</strong> ${stdNoun}.
+    Related <strong>${stdList}</strong> ${stdNoun} are asserted (per
+    ArionComply catalog) to implement one or more of these missing
+    elements. Auditor-defensibility depends on the specific evidence
+    and mapping acceptance.
   </div>`;
 }
 

@@ -258,6 +258,93 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
         except Exception as e:
             logger.warning("evidence_package: source-excerpt fetch skipped: %s", e)
 
+    # Ship 68'.b — batch-fetch mapping metadata (rationale + confidence
+    # + source posture) for every (target_control, source_control,
+    # edge_type) triple that will render below. Rationale comes from
+    # the curator-authored Neo4j edge; source posture from
+    # posture_controls. Both are essential for the honest
+    # asserted-mapping frame (Ship 68'.b retro): the reader sees WHY
+    # the mapping was asserted and how much of the source's own work
+    # is done — no fake per-target coverage number.
+    mapping_meta: dict[tuple[str, str, str], dict] = {}
+    if not ssot_empty:
+        triples: set[tuple[str, str, str]] = set()
+        for mid in applicable_must_ids:
+            v = ssot_verdicts.get(mid)
+            if v is None or v.satisfied or not v.bridge_sources:
+                continue
+            for b in v.bridge_sources:
+                if b.source_control_ref and b.edge_type:
+                    triples.add((
+                        b.source_standard_id, b.source_control_ref, b.edge_type,
+                    ))
+        if triples:
+            # Fetch rationale + confidence from Neo4j.
+            try:
+                from rag.posture_loader import _build_engine_neo4j_driver
+                _neo = _build_engine_neo4j_driver()
+                if _neo is not None:
+                    try:
+                        with _neo.session() as _s:
+                            target_id = f"{leaf.standard_id}:{leaf.control_ref}"
+                            for std_id, src_ref, edge in triples:
+                                src_node_id = f"{std_id}:{src_ref}"
+                                r = _s.run(f"""
+                                    MATCH (s:RequirementNode {{id: $src}})
+                                          -[e:{edge}]->(t:RequirementNode {{id: $tgt}})
+                                    RETURN e.rationale AS rat, e.role AS role
+                                """, src=src_node_id, tgt=target_id).single()
+                                if r:
+                                    mapping_meta[(std_id, src_ref, edge)] = {
+                                        "rationale":  r["rat"] or "",
+                                        "confidence": (r["role"] or "").upper(),
+                                    }
+                    finally:
+                        try: _neo.close()
+                        except Exception: pass
+            except Exception as e:
+                logger.warning("evidence_package: mapping meta fetch skipped: %s", e)
+
+        # Fetch source-side posture (finding + satisfied/total MUST counts)
+        # for each source control we'll reference. Both live in Postgres.
+        source_ctrl_refs = sorted({sr for (_, sr, _) in triples})
+        if source_ctrl_refs:
+            try:
+                with pg_conn.cursor() as cur:
+                    cur.execute(
+                        "SELECT set_config('app.tenant_id', %s::text, false)",
+                        (tenant_id,),
+                    )
+                    cur.execute("""
+                        SELECT control_ref, finding
+                          FROM posture_controls
+                         WHERE tenant_id = %s::uuid
+                           AND control_ref = ANY(%s)
+                    """, (tenant_id, source_ctrl_refs))
+                    _src_finding: dict[str, str] = dict(cur.fetchall())
+                    cur.execute("""
+                        SELECT control_ref,
+                               COUNT(*),
+                               COUNT(*) FILTER (WHERE satisfied)
+                          FROM posture_must_verdicts
+                         WHERE tenant_id = %s::uuid
+                           AND control_ref = ANY(%s)
+                         GROUP BY control_ref
+                    """, (tenant_id, source_ctrl_refs))
+                    _src_musts: dict[str, tuple[int, int]] = {
+                        r[0]: (int(r[1]), int(r[2])) for r in cur.fetchall()
+                    }
+                # Merge into mapping_meta entries.
+                for k in list(mapping_meta.keys()):
+                    _std, _src, _edge = k
+                    fnd = _src_finding.get(_src, "")
+                    n_total, n_sat = _src_musts.get(_src, (0, 0))
+                    mapping_meta[k]["source_finding"]   = fnd
+                    mapping_meta[k]["source_n_satisfied"] = n_sat
+                    mapping_meta[k]["source_n_total"]     = n_total
+            except Exception as e:
+                logger.warning("evidence_package: source posture fetch skipped: %s", e)
+
     n_must_total     = len(applicable_must_ids)
     n_must_satisfied = 0   # direct-satisfied per SSoT (or findings fallback)
     n_must_bridged   = 0   # unmet-direct but cross-framework attribution present
@@ -315,9 +402,8 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
         # top so auditors see the picture before scanning per-element
         # detail. Silent when zero.
         if n_must_bridged:
-            noun = "element is" if n_must_bridged == 1 else "elements are"
             # Roll up unique source standards across all unmet-bridged
-            # MUSTs — same shape as the SPA/chat/digest nudge.
+            # MUSTs.
             _bridge_stds: set[str] = set()
             for mid in applicable_must_ids:
                 v = ssot_verdicts.get(mid) if not ssot_empty else None
@@ -328,10 +414,20 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
                         _bridge_stds.add(_humanize_standard_id(b.source_standard_id))
             if _bridge_stds:
                 std_list = ", ".join(sorted(_bridge_stds))
+                # Ship 68'.b — reframed from "N elements covered by
+                # evidence" to "asserted implementation via related
+                # controls." Bridge_coverage rows are curator-authored
+                # mapping assertions, not measured per-MUST fit —
+                # honest UX names the mechanism (asserted mapping,
+                # subject to auditor acceptance).
                 lines.append(
-                    f"**Cross-framework coverage:** {n_must_bridged} "
-                    f"{noun} covered by evidence for related "
-                    f"{std_list} controls (see below)."
+                    f"**Related-control implementation paths asserted:** "
+                    f"{n_must_bridged} of the missing elements below have "
+                    f"one or more asserted implementation paths via "
+                    f"{std_list} controls (per ArionComply mapping catalog; "
+                    f"see the ↗ blocks below). Auditor-defensibility "
+                    f"depends on the specific evidence and mapping "
+                    f"acceptance."
                 )
         if n_should_total:
             lines.append(f"**Recommended additions:** "
@@ -407,31 +503,46 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
             # displayed group so the auditor sees the actual ISO
             # evidence text, not just the ref.
             v = ssot_verdicts[ci.id]
-            lines.append(f"- ↗ **{ci.text}** (cross-framework coverage)")
+            # Ship 68'.b — reframed from "cross-framework coverage" to
+            # "asserted implementation via related controls." The bridge
+            # attribution is a curator-authored mapping assertion, not
+            # a measured per-MUST coverage. Rendering surfaces the
+            # rationale + confidence + source's own posture so the
+            # auditor sees WHY the mapping was asserted and how much of
+            # the source's work is actually done.
+            lines.append(f"- ↗ **{ci.text}** (asserted implementation via related controls)")
             # Group source refs by (standard_id, control_ref, edge_type)
-            # to avoid repeating identical bridges — e.g. many source
-            # MUSTs on the same source control produce one "via A.5.15"
-            # line, not one line per source MUST.
             grouped: dict[tuple[str, str, str], list[str]] = {}
             for b in v.bridge_sources:
                 key = (b.source_standard_id, b.source_control_ref, b.edge_type)
                 grouped.setdefault(key, []).append(b.source_must_id)
-            # Cap the display to the top 3 groups — auditors can
-            # drill in from the SPA if they need the full attribution
-            # graph; the package shouldn't sprawl.
             top_groups = sorted(
                 grouped.items(), key=lambda kv: -len(kv[1]),
             )[:3]
             for (std_id, src_ref, edge), src_ids in top_groups:
                 std_disp = _humanize_standard_id(std_id)
+                meta = mapping_meta.get((std_id, src_ref, edge), {})
+                confidence = meta.get("confidence", "")
+                rationale  = meta.get("rationale", "")
+                src_finding = meta.get("source_finding", "")
+                src_sat    = meta.get("source_n_satisfied", 0)
+                src_total  = meta.get("source_n_total", 0)
+                # Header line: which control, edge type, confidence.
+                conf_tag = f", confidence: {confidence}" if confidence else ""
                 lines.append(
-                    f"  ↳ Covered via _{std_disp} {src_ref}_ ({edge})"
+                    f"  ↳ Asserted implementation via _{std_disp} {src_ref}_ "
+                    f"({edge}{conf_tag})"
                 )
-                # Ship 62' — pick the first source_must_id in this
-                # group that has a fetched excerpt. Ship 62' dedup:
-                # if this control's excerpts have already been shown
-                # anywhere earlier in the package, emit a compact
-                # "see above" pointer instead of re-quoting.
+                # Rationale — verbatim from the curator's edge property.
+                if rationale:
+                    lines.append(f"    Rationale: {rationale}")
+                # Source's own posture + progress (independent fact).
+                if src_finding or src_total:
+                    prog = f" ({src_sat} of {src_total} MUSTs satisfied)" if src_total else ""
+                    lines.append(f"    _{std_disp} {src_ref}_ posture: **{src_finding or 'unassessed'}**{prog}")
+                # Ship 62' excerpt dedup preserved — an example of the
+                # source's own evidence, not a claim about this target
+                # MUST's coverage.
                 ref_key = (std_id, src_ref)
                 already_shown_ref = quoted_source_refs.get(ref_key, False)
                 excerpt_row = None
@@ -443,24 +554,29 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
                         excerpt_sid = sid
                         break
                 if excerpt_row is None:
-                    # No source excerpt available for this group —
-                    # nothing to dedup, nothing to render.
                     pass
                 elif already_shown_ref:
                     lines.append(
-                        f"     _(source excerpt shown under _{std_disp} {src_ref}_ above)_"
+                        f"    _(example excerpt shown under _{std_disp} {src_ref}_ above)_"
                     )
                 else:
                     loc = excerpt_row["filename"]
                     if excerpt_row.get("section"):
                         loc += f", §{excerpt_row['section']}"
+                    lines.append(f"    Example evidence available on this source control:")
                     lines.append(f"     > {excerpt_row['excerpt']}")
                     lines.append(f"     From _{loc}_")
                     quoted_source_ids.add(excerpt_sid)
                     quoted_source_refs[ref_key] = True
             more = len(grouped) - len(top_groups)
             if more > 0:
-                lines.append(f"  ↳ …and {more} more related control{'s' if more != 1 else ''}.")
+                lines.append(f"  ↳ …and {more} more asserted mapping{'s' if more != 1 else ''}.")
+            # Epistemic disclaimer — this whole block is asserted, not proven.
+            lines.append(
+                f"  _(Mapping is an ArionComply catalog assertion; "
+                f"auditor-defensibility depends on evidence specificity "
+                f"and mapping acceptance.)_"
+            )
             lines.append("")
         else:
             lines.append(f"- ✗ **{ci.text}**")

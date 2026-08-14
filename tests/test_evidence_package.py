@@ -55,23 +55,30 @@ def _open_pg():
 
 def test_bridged_leaf_shows_cross_framework_header(pg):
     """Art.32:program_review has 1 direct + 4 bridged MUSTs on Arion.
-    Header must expose the cross-framework count and rolled-up source
-    standards; each ↗ element must render `Covered via` + source
-    excerpt from the actual ISO evidence."""
+    Header must expose the asserted-mapping count and rolled-up source
+    standards; each ↗ element must render `Asserted implementation via`
+    + rationale + source posture + example evidence.
+
+    Ship 68'.b reframed the language from "coverage" to "asserted
+    implementation" — the bridge_coverage data is a curator-authored
+    mapping assertion, not a measured per-MUST fit.
+    """
     from rag.posture.evidence_package import build_evidence_package
     md = build_evidence_package(pg, ARION_TENANT, "req:Art.32:program_review")
     assert md is not None, "expected markdown, got None"
 
     assert "**Status:** Partially covered" in md
-    assert "**Cross-framework coverage:**" in md
+    assert "**Related-control implementation paths asserted:**" in md
     assert "ISO 27001:2022" in md
-    assert "controls (see below)." in md
+    assert "ArionComply mapping catalog" in md
 
     required = md.split("## Required elements")[1].split("## ")[0]
     assert required.count("- ✓") >= 1, "expected at least one ✓ MUST"
     assert required.count("- ↗") >= 1, "expected at least one ↗ MUST"
-    assert "(cross-framework coverage)" in required
-    assert "↳ Covered via _" in required
+    assert "(asserted implementation via related controls)" in required
+    assert "↳ Asserted implementation via _" in required
+    assert "confidence:" in required, "expected confidence tag on asserted mapping"
+    assert "Rationale:" in required, "expected rationale on asserted mapping"
 
 
 def test_bridged_leaf_dedupes_source_excerpts(pg):
@@ -84,15 +91,19 @@ def test_bridged_leaf_dedupes_source_excerpts(pg):
     md = build_evidence_package(pg, ARION_TENANT, "req:Art.32:program_review")
     assert md is not None
 
-    a518_covered_via = md.count("Covered via _ISO 27001:2022 A.5.18_")
-    a518_above = md.count("source excerpt shown under _ISO 27001:2022 A.5.18_ above")
-    assert a518_covered_via >= 2, (
+    # Ship 68'.b — the "Asserted implementation via _ISO 27001:2022
+    # A.5.18_" phrase should appear per bridged MUST; the excerpt
+    # dedup pointer text changed to "example excerpt shown under ...
+    # above" (was "source excerpt shown ...").
+    a518_asserted = md.count("Asserted implementation via _ISO 27001:2022 A.5.18_")
+    a518_above = md.count("example excerpt shown under _ISO 27001:2022 A.5.18_ above")
+    assert a518_asserted >= 2, (
         f"A.5.18 should appear under multiple bridged MUSTs "
-        f"(got {a518_covered_via})"
+        f"(got {a518_asserted})"
     )
-    assert a518_above == a518_covered_via - 1, (
-        f"expected {a518_covered_via - 1} 'shown ... above' pointers "
-        f"for A.5.18, got {a518_above}"
+    assert a518_above == a518_asserted - 1, (
+        f"expected {a518_asserted - 1} 'example excerpt shown ... above' "
+        f"pointers for A.5.18, got {a518_above}"
     )
 
 
@@ -105,7 +116,7 @@ def test_fully_satisfied_leaf_renders_no_bridge_header(pg):
 
     assert "**Status:** Fully covered" in md
     assert "3 of 3 required elements covered (100%)" in md
-    assert "**Cross-framework coverage:**" not in md
+    assert "**Related-control implementation paths asserted:**" not in md
 
     required = md.split("## Required elements")[1].split("## ")[0]
     assert required.count("- ✓") == 3
@@ -123,7 +134,7 @@ def test_fresh_tenant_fallback(pg):
 
     assert "**Status:** Not yet covered" in md
     assert "0 of 3 required elements covered (0%)" in md
-    assert "**Cross-framework coverage:**" not in md
+    assert "**Related-control implementation paths asserted:**" not in md
 
     required = md.split("## Required elements")[1].split("## ")[0]
     assert required.count("- ✗") == 3
