@@ -613,9 +613,50 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
                     lines.append(f"     From _{loc}_")
                     quoted_source_ids.add(excerpt_sid)
                     quoted_source_refs[ref_key] = True
-            more = len(grouped) - len(top_groups)
+            # Ship 71'.a — the remaining sources land inside a
+            # <details><summary> block so the auditor can expand and see
+            # every asserted mapping without leaving the EP. Compact
+            # per-source shape (std/edge/confidence/posture/progress +
+            # rationale) — no excerpts inside the collapsed block; the
+            # top-3 already carried an excerpt per unique source ref.
+            top_keys = {kv[0] for kv in top_groups}
+            remaining = sorted(
+                ((k, v_list) for k, v_list in grouped.items() if k not in top_keys),
+                key=lambda kv: (
+                    -target_ref_by_group.get(kv[0], "").count("."),
+                    -len(kv[1]),
+                ),
+            )
+            more = len(remaining)
             if more > 0:
-                lines.append(f"  ↳ …and {more} more asserted mapping{'s' if more != 1 else ''}.")
+                lines.append(
+                    f"  <details>"
+                )
+                lines.append(
+                    f"  <summary>Show {more} more asserted mapping"
+                    f"{'s' if more != 1 else ''}</summary>"
+                )
+                lines.append("")
+                for (std_id, src_ref, edge), _src_ids in remaining:
+                    std_disp = _humanize_standard_id(std_id)
+                    meta = mapping_meta.get((std_id, src_ref, edge), {})
+                    confidence  = meta.get("confidence", "")
+                    rationale   = meta.get("rationale", "")
+                    src_finding = meta.get("source_finding", "")
+                    src_sat     = meta.get("source_n_satisfied", 0)
+                    src_total   = meta.get("source_n_total", 0)
+                    conf_tag = f" · confidence {confidence}" if confidence else ""
+                    prog_tag = ""
+                    if src_finding or src_total:
+                        prog_bit = f" {src_sat}/{src_total} MUSTs satisfied" if src_total else ""
+                        prog_tag = f" · {src_finding or 'unassessed'}{prog_bit}"
+                    lines.append(
+                        f"    ↳ _{std_disp} {src_ref}_ · {edge}{conf_tag}{prog_tag}"
+                    )
+                    if rationale:
+                        lines.append(f"      Rationale: {rationale}")
+                lines.append("")
+                lines.append(f"  </details>")
             # Epistemic disclaimer — this whole block is asserted, not proven.
             lines.append(
                 f"  _(Mapping is an ArionComply catalog assertion; "

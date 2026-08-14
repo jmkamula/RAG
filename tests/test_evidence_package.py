@@ -87,6 +87,12 @@ def test_bridged_leaf_shows_cross_framework_header(pg):
     assert "_Related controls address " in required, (
         "expected group-level dimension summary sentence"
     )
+    # Ship 71'.a — expandable <details> block replaces the "…and N
+    # more" line. Art.32:program_review has enough bridges that at
+    # least one ↗ block spills past the top-3 rendering.
+    assert "<details>" in required, "expected expandable details block"
+    assert "<summary>Show " in required, "expected details summary label"
+    assert "</details>" in required, "expected closing details tag"
 
 
 def test_bridged_leaf_dedupes_source_excerpts(pg):
