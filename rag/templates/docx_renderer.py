@@ -28,6 +28,8 @@ import re
 from docx import Document
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 from docx.shared import Pt, Cm, RGBColor
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
 
 
 # ── Constants ───────────────────────────────────────────────────────────────
@@ -54,6 +56,55 @@ REVISION_HISTORY_RE  = re.compile(r"^\s*<<REVISION_HISTORY>>\s*$")
 # would land in the docx as literal `| Document No. |` text.
 _PIPE_TABLE_ROW_RE       = re.compile(r"^\s*\|.*\|\s*$")
 _PIPE_TABLE_SEPARATOR_RE = re.compile(r"^\s*\|[\s:\-|]+\|\s*$")
+# Task #604 (2026-08-15) — round-trip binding markers that must survive
+# on disk but should not display in Word's normal view. Any paragraph
+# containing one of these gets its runs marked `w:vanish`.
+_BINDING_MARKER_RE       = re.compile(r"<<(?:MUST|SHOULD)\s+item:")
+
+
+def _hide_runs(paragraph) -> None:
+    """Task #604 (2026-08-15) — flag every run in the paragraph as
+    hidden text (OOXML `w:vanish`). The content survives on disk for
+    round-trip extractor binding; Word doesn't display it unless the
+    reader toggles \"Show/hide formatting marks\" or \"Hidden text\"."""
+    for run in paragraph.runs:
+        rpr = run._element.get_or_add_rPr()
+        # If an earlier pass already stamped vanish, don't double-stamp.
+        if rpr.find(qn("w:vanish")) is None:
+            rpr.append(OxmlElement("w:vanish"))
+
+
+def _add_permission_range(paragraph, kind: str, perm_id: int) -> None:
+    """Task #604 (2026-08-15) — insert a `w:permStart` / `w:permEnd`
+    marker into the paragraph. `kind` is 'start' or 'end'. Under
+    document protection (`readOnly` + enforcement=1), the range
+    between a matching start/end pair with `w:edGrp="everyone"`
+    remains editable while the rest of the doc is locked."""
+    tag = "w:permStart" if kind == "start" else "w:permEnd"
+    elem = OxmlElement(tag)
+    elem.set(qn("w:id"), str(perm_id))
+    if kind == "start":
+        elem.set(qn("w:edGrp"), "everyone")
+    # Insert as the first child of the paragraph body — permStart
+    # applies from that point on; permEnd closes it.
+    paragraph._p.insert(0, elem)
+
+
+def _enable_document_protection(doc) -> None:
+    """Task #604 (2026-08-15) — set `w:documentProtection` in
+    settings.xml so the whole document is read-only except for the
+    permission ranges stamped around edit zones. Enforcement is
+    unpasswordded (`w:enforcement=1` alone; no `w:cryptProviderType`)
+    so tenants can save their fills without a password prompt but
+    Word still guards the scaffolding."""
+    settings = doc.settings.element
+    # Remove any prior documentProtection to keep this idempotent
+    for prior in settings.findall(qn("w:documentProtection")):
+        settings.remove(prior)
+    prot = OxmlElement("w:documentProtection")
+    prot.set(qn("w:edit"),        "readOnly")
+    prot.set(qn("w:enforcement"), "1")
+    settings.append(prot)
 # Ship 57' — per-leaf prerequisites marker. Sits once per template
 # (typically under "Before you start"); rendered as a grouped callout
 # based on the target leaf_id. Empty prereqs ⇒ marker silently dropped.
@@ -116,14 +167,17 @@ def _add_runs_with_formatting(paragraph, text: str, base_color: RGBColor | None 
 
 def _add_paragraph(doc, text: str, style: str | None = None,
                    alignment=None, indent_cm: float | None = None,
-                   color: RGBColor | None = None) -> None:
-    """Add a styled paragraph; inline markdown handled."""
+                   color: RGBColor | None = None):
+    """Add a styled paragraph; inline markdown handled.
+    Returns the resulting paragraph so callers (e.g. Task #604's
+    binding-marker hider) can post-process it."""
     p = doc.add_paragraph(style=style) if style else doc.add_paragraph()
     if alignment is not None:
         p.alignment = alignment
     if indent_cm is not None:
         p.paragraph_format.left_indent = Cm(indent_cm)
     _add_runs_with_formatting(p, text, base_color=color)
+    return p
 
 
 # ── Marker-aware line processing ────────────────────────────────────────────
@@ -159,11 +213,21 @@ def _render_marker_line(doc, marker_match: re.Match) -> None:
     run.font.color.rgb = RGBColor(0x9C, 0x6F, 0x1B)
 
 
-def _render_edit_zone_marker(doc, label: str, mid: str) -> None:
+def _render_edit_zone_marker(
+    doc, label: str, mid: str, perm_id: int | None = None,
+) -> None:
     """Render an EDIT-ZONE-START / EDIT-ZONE-END line as a subtle
     guidance cue. The internal `item:X:Y` id is dropped from the
     visible text — the surrounding structural markers keep round-trip
-    binding when we ship Phase B upload extraction."""
+    binding.
+
+    Task #604 (2026-08-15) — when `perm_id` is supplied, stamp a
+    `w:permStart` on the ▽ paragraph and a `w:permEnd` on the △
+    paragraph with matching id + `w:edGrp="everyone"`. Under
+    `w:documentProtection readOnly enforcement=1` (enabled at the
+    end of the walker), the range between them stays editable
+    while the rest of the doc is locked.
+    """
     slug = _humanize_item_slug(mid)
     p = doc.add_paragraph()
     p.paragraph_format.space_before = Pt(2)
@@ -176,6 +240,24 @@ def _render_edit_zone_marker(doc, label: str, mid: str) -> None:
     run.font.size  = Pt(9)
     run.italic = True
     run.font.color.rgb = RGBColor(0xBA, 0xB8, 0xAB)
+    # Task #604 (2026-08-15) — stamp permStart AFTER the ▽ rail
+    # paragraph and permEnd BEFORE the △ rail paragraph, at body level.
+    # This puts BOTH the rails themselves under document protection
+    # while the paragraph(s) strictly between them stay editable —
+    # so the tenant can add multiple lines of evidence with Enter,
+    # and can't accidentally delete the ▽/△ rails (which the
+    # extractor uses to find the edit zone).
+    if perm_id is not None:
+        elem_tag = "w:permStart" if label == "EDIT START" else "w:permEnd"
+        elem = OxmlElement(elem_tag)
+        elem.set(qn("w:id"), str(perm_id))
+        if label == "EDIT START":
+            elem.set(qn("w:edGrp"), "everyone")
+            # Insert AFTER this ▽ paragraph as a body-level sibling.
+            p._p.addnext(elem)
+        else:
+            # Insert BEFORE the △ paragraph as a body-level sibling.
+            p._p.addprevious(elem)
 
 
 def _render_guidance_block(doc, guidance: tuple[str, ...] | list[str]) -> None:
@@ -522,11 +604,24 @@ def _extract_pipe_tables(body: str) -> tuple[str, list[dict]]:
 _TABLE_SENTINEL_RE = re.compile(r"^\s*<<TABLE::(\d+)>>\s*$")
 
 
-def _render_pipe_table(doc, spec: dict) -> None:
+_SIGNATURE_CELL_RE = re.compile(r"^_{3,}$")
+
+
+def _render_pipe_table(doc, spec: dict, perm_counter: list[int] | None = None) -> None:
     """Emit a parsed pipe-table as a native python-docx table. Header
     row bolded; data cells preserve markdown formatting (bold/italic
     runs inside cells) via `_add_runs_with_formatting`. Empty tables
-    still emit the header for auditor-visible structure."""
+    still emit the header for auditor-visible structure.
+
+    Task #605 (2026-08-15) — cells whose value matches the wet-sign
+    pattern (`^_{3,}$` after stripping) get wrapped with matching
+    `w:permStart` + `w:permEnd` at cell-body level. Under document
+    protection those cells stay editable while the rest of the doc
+    is locked. `perm_counter` is a mutable box [int]; if None,
+    signature-cell editability is skipped (i.e. rendered as fixed
+    scaffolding). Closes docx lockdown dogfood friction #2 —
+    Prepared By / Reviewed By / Approved By.
+    """
     headers = spec.get("headers") or []
     rows    = spec.get("rows") or []
     if not headers:
@@ -557,6 +652,27 @@ def _render_pipe_table(doc, spec: dict) -> None:
             for run in p.runs:
                 if run.font.size is None:
                     run.font.size = Pt(10)
+            # Task #605 — wet-sign cell → permStart/permEnd around the
+            # cell body so the wet-sign underscores stay typable under
+            # document protection.
+            if perm_counter is not None and _SIGNATURE_CELL_RE.match(val.strip()):
+                perm_counter[0] += 1
+                perm_id = perm_counter[0]
+                tc = cell._tc  # the underlying w:tc element
+                ps = OxmlElement("w:permStart")
+                ps.set(qn("w:id"),    str(perm_id))
+                ps.set(qn("w:edGrp"), "everyone")
+                pe = OxmlElement("w:permEnd")
+                pe.set(qn("w:id"),    str(perm_id))
+                # Insert permStart as the first cell child (before all
+                # paragraphs) and permEnd as the last cell child. Word
+                # treats the range as covering the whole cell body.
+                first_child = tc[0] if len(tc) else None
+                if first_child is not None:
+                    first_child.addprevious(ps)
+                else:
+                    tc.append(ps)
+                tc.append(pe)
     doc.add_paragraph()  # separator after the table
 
 
@@ -601,6 +717,12 @@ def render_template_docx(
     in_list_block = False
     current_item_id: str | None = None   # Ship 56'.a — set on MUST/SHOULD marker;
                                           # consumed by <<GUIDANCE>> marker.
+    # Task #604 (2026-08-15) — permission-range counter. Each edit zone
+    # (EDIT-ZONE-START / END pair) gets a unique w:permStart/w:permEnd
+    # pair id. After the walk finishes we set w:documentProtection so
+    # the rest of the doc is locked.
+    _perm_counter = [0]
+    _perm_open_id: int | None = None
 
     for raw_line in body.splitlines():
         line = raw_line.rstrip()
@@ -625,10 +747,12 @@ def render_template_docx(
 
         # Task #603 (2026-08-15) — sentinel for a pipe-table lifted by
         # the pre-pass. Dispatch to native Word table renderer.
+        # Task #605 — thread the perm counter so wet-sign cells inside
+        # the doc-control table become editable ranges.
         _t = _TABLE_SENTINEL_RE.match(line)
         if _t:
             _spec = _pipe_tables[int(_t.group(1))]
-            _render_pipe_table(doc, _spec)
+            _render_pipe_table(doc, _spec, perm_counter=_perm_counter)
             continue
 
         # Ship 54'.d — <<DOC_CONTROL>> marker → document-control table
@@ -673,14 +797,22 @@ def render_template_docx(
             _render_cross_references_block(doc, get_cross_references_for_leaf(leaf_id))
             continue
 
-        # EDIT-ZONE markers
+        # EDIT-ZONE markers. Task #604 — stamp matching w:permStart /
+        # w:permEnd around each zone using an id from _perm_counter.
         ez_start = EDIT_ZONE_START.match(line.strip())
         if ez_start:
-            _render_edit_zone_marker(doc, "EDIT START", ez_start.group(1))
+            _perm_counter[0] += 1
+            _perm_open_id = _perm_counter[0]
+            _render_edit_zone_marker(
+                doc, "EDIT START", ez_start.group(1), perm_id=_perm_open_id,
+            )
             continue
         ez_end = EDIT_ZONE_END.match(line.strip())
         if ez_end:
-            _render_edit_zone_marker(doc, "EDIT END",   ez_end.group(1))
+            _render_edit_zone_marker(
+                doc, "EDIT END",   ez_end.group(1), perm_id=_perm_open_id,
+            )
+            _perm_open_id = None
             continue
 
         # <<TEXT>> placeholder
@@ -719,6 +851,11 @@ def render_template_docx(
             p = doc.add_paragraph(style="Intense Quote") if "_Standard text:_" in content \
                 else doc.add_paragraph(style="Quote")
             _add_runs_with_formatting(p, content)
+            # Task #604 (2026-08-15) — the N/A section wraps the
+            # "Do not edit — system id: <<MUST item:X>>" line in a
+            # blockquote; catch it here too so the marker stays hidden.
+            if _BINDING_MARKER_RE.search(content):
+                _hide_runs(p)
             continue
         if line.strip() == ">":
             doc.add_paragraph()
@@ -758,8 +895,23 @@ def render_template_docx(
             in_list_block = True
             continue
 
-        # Default — regular paragraph with inline formatting
-        _add_paragraph(doc, line)
+        # Default — regular paragraph with inline formatting.
+        # Task #604 (2026-08-15) — if the paragraph carries a round-trip
+        # binding marker (`<<MUST item:X>>` or `<<SHOULD item:X>>`),
+        # emit it as hidden text so the extractor still sees it on
+        # re-upload but Word doesn't display it. This is the fix for
+        # the dogfood friction "compliance officer sees `<<...>>`".
+        p = _add_paragraph(doc, line)
+        if _BINDING_MARKER_RE.search(line) and p is not None:
+            _hide_runs(p)
+
+    # Task #604 (2026-08-15) — turn on document protection AFTER all
+    # paragraphs land (permStart/permEnd markers already stamped inline
+    # by the EDIT-ZONE handlers). readOnly + enforcement=1 locks every
+    # non-permitted range; the permission ranges around edit zones stay
+    # typable. No password — tenants can Save-As freely.
+    if _perm_counter[0] > 0:
+        _enable_document_protection(doc)
 
     # Serialize
     buf = io.BytesIO()
