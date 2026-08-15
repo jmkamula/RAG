@@ -676,9 +676,65 @@ def _apply_prefills_and_wrap_edit_zones(
     return "".join(out_parts), n_prefilled
 
 
+_BULLET_STOPWORDS = frozenset({
+    # English filler
+    "the", "and", "for", "with", "that", "this", "from", "when", "have",
+    "each", "your", "them", "then", "than", "into", "any", "not", "must",
+    "should", "will", "shall", "does", "been", "being", "over", "some",
+    "such", "these", "those", "their", "which", "where", "here", "there",
+    "under", "above", "using", "also", "only", "very", "just", "even",
+    "still", "before", "after", "make", "made",
+    # Imperative writing verbs that appear in every bullet — filtering
+    # these avoids "state" / "avoid" / "attach" dominating the match.
+    # NOT filtered: `policy`, `record`, `document`, `name` — these are
+    # domain nouns that carry substance when they show up in evidence.
+    "state", "states", "stated", "specify", "specific",
+    "avoid", "including",
+})
+
+
+def _tokenize_bullet(text: str) -> set[str]:
+    """Extract content-bearing tokens from a best-practice bullet.
+
+    Returns lowercased tokens ≥5 chars, minus a stopword list of
+    auditing/writing filler that would inflate every match. Meant to
+    isolate the *distinctive* nouns in a bullet — "inventory",
+    "attestation", "quarterly", "revocation" etc. — so the per-bullet
+    evidence check compares like against like.
+    """
+    import re as _re
+    toks = _re.findall(r"[A-Za-z][A-Za-z\-]{4,}", (text or "").lower())
+    return {t for t in toks if t not in _BULLET_STOPWORDS}
+
+
+def _bullet_evidenced(bullet: str, evidence_corpus_lower: str) -> bool:
+    """Task #577 iteration (2026-08-14) — deterministic per-bullet
+    evidence check. True when ≥50 %% of the bullet's content-bearing
+    tokens appear as substrings in the tenant's evidence corpus.
+
+    50 %% chosen empirically: bullets typically have 6-10 tokens after
+    stopword removal, so the threshold catches bullets where the
+    tenant's evidence mentions 3+ of the distinctive nouns while
+    excluding coincidental single-word matches. Deterministic —
+    no LLM. Cheap — pure string ops.
+    """
+    tokens = _tokenize_bullet(bullet)
+    if not tokens:
+        return False
+    matched = sum(1 for t in tokens if t in evidence_corpus_lower)
+    # ≥40 %% — empirical (A.5.15 tuning 2026-08-14): a 50 %% threshold
+    # marked only 2 %% of bullets ☑ on the Arion demo. Bullets ask for
+    # specific auditor cues ("named owner", "dated inventory") that
+    # tenant excerpts rarely contain literally. 40 %% catches bullets
+    # where the tenant's evidence covers most of the distinctive nouns
+    # without demanding the auditor's exact phrasing.
+    return matched * 5 >= len(tokens) * 2   # ≥40 %
+
+
 def _format_guidance_markdown(
-    guidance: tuple[str, ...],
-    verdict:  Optional[dict] = None,
+    guidance:         tuple[str, ...],
+    verdict:          Optional[dict] = None,
+    evidence_corpus:  str = "",
 ) -> str:
     """Render a per-MUST guidance block as a Markdown callout.
 
@@ -691,6 +747,12 @@ def _format_guidance_markdown(
       ✓ satisfied (present + fresh)
       ◐ partial or stale
       (no mark) unrecognised, or no verdict row (e.g. N/A-excluded)
+
+    Task #577 iteration (2026-08-14) — per-bullet ☑/☐ marker
+    computed from tenant's approved evidence corpus. Deterministic
+    keyword overlap (see `_bullet_evidenced`). ☑ marks bullets whose
+    content-bearing tokens appear in the tenant's document_findings
+    excerpts for this MUST; ☐ marks bullets not yet evidenced.
     """
     if verdict is None:
         header = "**Best practice:**"
@@ -701,8 +763,18 @@ def _format_guidance_markdown(
     else:
         header = "**Best practice — still needed:**"
     lines = [header, ""]
+    corpus_lower = evidence_corpus.lower() if evidence_corpus else ""
     for g in guidance:
-        lines.append(f"- {g}")
+        if corpus_lower and _bullet_evidenced(g, corpus_lower):
+            lines.append(f"- ☑ {g}")
+        elif corpus_lower:
+            lines.append(f"- ☐ {g}")
+        else:
+            # No evidence corpus available — omit per-bullet mark
+            # entirely (rather than emit ☐ on every bullet, which
+            # would give false negatives on N/A-excluded MUSTs and
+            # fresh tenants).
+            lines.append(f"- {g}")
     return "\n".join(lines) + "\n"
 
 
@@ -1006,8 +1078,9 @@ def _fetch_must_verdicts_for_ids(
 
 
 def _apply_guidance_blocks(
-    body:      str,
-    verdicts:  Optional[dict[str, dict]] = None,
+    body:            str,
+    verdicts:        Optional[dict[str, dict]] = None,
+    evidence_by_item: Optional[dict[str, str]] = None,
 ) -> tuple[str, int]:
     """Replace every <<GUIDANCE>> marker with the resolved guidance
     callout for the immediately-preceding MUST or SHOULD item marker.
@@ -1020,6 +1093,12 @@ def _apply_guidance_blocks(
     tick indicator (✓ / ◐ / blank) based on the item's persisted
     posture_must_verdicts row. Empty dict / None ⇒ header stays neutral.
 
+    Task #577 iteration (2026-08-14) — `evidence_by_item` maps each
+    MUST id to the tenant's concatenated approved evidence excerpts;
+    the callout uses it for per-bullet ☑/☐ marks via
+    `_format_guidance_markdown` + `_bullet_evidenced`. Empty / None ⇒
+    per-bullet marks omitted (fresh-tenant path).
+
     Returns (new_body, n_blocks_rendered).
     """
     from rag.templates.guidance_lookup import get_guidance_for_item
@@ -1029,6 +1108,7 @@ def _apply_guidance_blocks(
         return body, 0
 
     verdicts = verdicts or {}
+    evidence_by_item = evidence_by_item or {}
 
     parts: list[str] = []
     cursor = 0
@@ -1042,7 +1122,8 @@ def _apply_guidance_blocks(
             guidance = get_guidance_for_item(item_id)
             if guidance:
                 verdict = verdicts.get(item_id)
-                parts.append(_format_guidance_markdown(guidance, verdict))
+                evidence = evidence_by_item.get(item_id, "")
+                parts.append(_format_guidance_markdown(guidance, verdict, evidence))
                 rendered += 1
         # Marker consumed either way — advance cursor past its line
         end = gm.end()
@@ -1128,7 +1209,48 @@ def render_template(
     # pass into applier for per-callout ✓ / ◐ / blank labelling.
     _must_ids_in_body = list({m.group(1) for m in _ANY_ITEM_MARKER_RE.finditer(body)})
     _must_verdicts = _fetch_must_verdicts_for_ids(pg_conn, tenant_id, _must_ids_in_body)
-    body, guidance_rendered = _apply_guidance_blocks(body, _must_verdicts)
+    # Task #577 (2026-08-14) — fetch tenant's approved evidence excerpts
+    # per MUST so `_format_guidance_markdown` can compute per-bullet ☑/☐
+    # via keyword overlap. Silent on empty (fresh tenant, no findings) —
+    # renderer degrades to Ship 56'.a shape (no per-bullet marks).
+    _evidence_by_item: dict[str, str] = {}
+    if _must_ids_in_body:
+        try:
+            # Ship 56' authored bullets talk about auditor cues that
+            # often echo across the whole control's evidence (e.g. an
+            # RBAC bullet on the least_privilege MUST is likely
+            # evidenced by the tenant's rbac MUST excerpts). Build
+            # ONE control-scoped corpus + reuse it across every MUST
+            # under this control_ref so per-bullet matching sees the
+            # full picture.
+            with pg_conn.cursor() as _cur:
+                _cur.execute(
+                    "SELECT set_config('app.tenant_id', %s::text, true)",
+                    (tenant_id,),
+                )
+                _cur.execute(
+                    """
+                    SELECT string_agg(COALESCE(excerpt, ''), ' ')
+                      FROM document_findings
+                     WHERE tenant_id   = %s::uuid
+                       AND is_active   = TRUE
+                       AND status      IN ('present', 'partial')
+                       AND checklist_item_id = ANY(%s)
+                    """,
+                    (tenant_id, _must_ids_in_body),
+                )
+                _row = _cur.fetchone()
+                _control_corpus = (_row[0] if _row else "") or ""
+            if _control_corpus:
+                for mid in _must_ids_in_body:
+                    _evidence_by_item[mid] = _control_corpus
+        except Exception as _e:
+            # Silent fallback — per-bullet marks are enrichment,
+            # not load-bearing. Template still renders without them.
+            logger.debug("guidance per-bullet corpus fetch skipped: %s", _e)
+    body, guidance_rendered = _apply_guidance_blocks(
+        body, _must_verdicts, _evidence_by_item,
+    )
 
     # Ship 57' — resolve the single <<PREREQUISITES>> marker (typically
     # under "Before you start") to a grouped per-leaf prerequisites

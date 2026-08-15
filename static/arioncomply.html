@@ -240,6 +240,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .topic-must-text{font-size:12px;color:#3D3B32;line-height:1.5}
 .topic-must-source{font-size:11px;color:#5F5E5A;margin-top:3px;font-style:italic}
 .muststate-missing .topic-must-source{color:#8A887E;font-style:normal}
+/* Task #577 (2026-08-14) — expandable per-MUST guidance under
+   unmet rows. Ship 56' authored 5 bullets per MUST; tenants
+   see them on demand without cluttering the checklist. */
+.topic-must-guidance{margin-top:5px}
+.topic-must-guidance summary{cursor:pointer;font-size:11px;color:#5F5E5A;padding:2px 0;list-style:none;user-select:none}
+.topic-must-guidance summary::-webkit-details-marker{display:none}
+.topic-must-guidance summary::before{content:'▸ ';color:#8A887E;display:inline-block;transition:transform .1s}
+.topic-must-guidance[open] summary::before{content:'▾ '}
+.topic-must-guidance summary:hover{color:#3D3B32}
+.topic-must-guidance-list{margin:6px 0 2px;padding-left:22px;font-size:11px;color:#5F5E5A;line-height:1.5}
+.topic-must-guidance-list li{margin-bottom:3px}
 /* Remediation list */
 .topic-remediation-list{margin:6px 0 0;padding-left:22px;list-style:disc}
 .topic-remediation-list li{font-size:12px;color:#3D3B32;line-height:1.6;margin-bottom:4px}
@@ -3754,12 +3765,30 @@ function _renderTopicLeafDetailBody(d, roleNote) {
         ? m.sources.slice(0, 2).map(s => escapeHtml(s.document_title)).join(', ')
           + (m.sources.length > 2 ? ` (+${m.sources.length - 2} more)` : '')
         : (state === 'missing' ? 'Not documented' : '');
+      // Task #577 (2026-08-14) — per-MUST guidance bullets rendered
+      // when the MUST is not yet satisfied. Ship 56' authored 5-bullet
+      // arrays ("what to write / what auditors flag") on every MUST;
+      // this is where they land in the SPA. Collapsed by default so
+      // leaves with many MUSTs stay scannable.
+      const guidance = Array.isArray(m.guidance) ? m.guidance : [];
+      let guidanceBlock = '';
+      if (state !== 'present' && guidance.length) {
+        const items = guidance.map(g =>
+          `<li>${escapeHtml(g)}</li>`).join('');
+        guidanceBlock = `
+          <details class="topic-must-guidance">
+            <summary>Show writing tips (${guidance.length})</summary>
+            <ul class="topic-must-guidance-list">${items}</ul>
+          </details>
+        `;
+      }
       return `
         <div class="topic-must-row ${cls}">
           <i class="ti ${icon}" aria-hidden="true"></i>
           <div class="topic-must-body">
             <div class="topic-must-text">${escapeHtml(m.text || m.id || '')}</div>
             ${sources ? `<div class="topic-must-source">${sources}</div>` : ''}
+            ${guidanceBlock}
           </div>
         </div>
       `;
@@ -3772,23 +3801,12 @@ function _renderTopicLeafDetailBody(d, roleNote) {
     `;
   }
 
-  // Section 4 — How to close this gap
-  const acts = d.remediation_actions || [];
-  let remediation = '';
-  if (acts.length) {
-    const actRows = acts.map(a => `
-      <li>${escapeHtml(a.action || '')}</li>
-    `).join('');
-    remediation = `
-      <div class="topic-leaf-section">
-        <div class="topic-leaf-section-lbl"><i class="ti ti-target-arrow" aria-hidden="true"></i> How to close this gap</div>
-        <ul class="topic-remediation-list">${actRows}</ul>
-        <div class="topic-leaf-action-hint" style="margin-top:6px">
-          These are the items the fulfilment engine detected as missing. For consultant-grade guidance with authoritative source citations, use "Ask AI" below.
-        </div>
-      </div>
-    `;
-  }
+  // Section 4 — "How to close this gap" retired 2026-08-14 (task #577).
+  // The plain projection of missing MUST text was a duplicate of Section 3
+  // once Ship 56' guidance renders inline on each unmet MUST row. Kept the
+  // variable so ${remediation} in the render template below still resolves
+  // to empty string.
+  const remediation = '';
 
   // Section 5 — Actions
   // Raw href-based download won't attach the X-API-Key header, so route
