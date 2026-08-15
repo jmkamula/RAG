@@ -45,6 +45,15 @@ PROV_COMMENT_RE  = re.compile(r"^<!--.+?-->\n*", re.DOTALL)
 # is a controlled document.
 DOC_CONTROL_RE       = re.compile(r"^\s*<<DOC_CONTROL>>\s*$")
 REVISION_HISTORY_RE  = re.compile(r"^\s*<<REVISION_HISTORY>>\s*$")
+# Task #603 iteration (2026-08-15) — detect GFM pipe-tables in the
+# rendered markdown body and lift them to native Word tables. Header
+# row starts with `|`, ends with `|`; the following line is the
+# separator (only `|`, `-`, `:`, whitespace). Without this pass the
+# doc-control / revision-history tables (which renderer.py already
+# substituted from <<DOC_CONTROL>> markers into markdown pipe-tables)
+# would land in the docx as literal `| Document No. |` text.
+_PIPE_TABLE_ROW_RE       = re.compile(r"^\s*\|.*\|\s*$")
+_PIPE_TABLE_SEPARATOR_RE = re.compile(r"^\s*\|[\s:\-|]+\|\s*$")
 # Ship 57' — per-leaf prerequisites marker. Sits once per template
 # (typically under "Before you start"); rendered as a grouped callout
 # based on the target leaf_id. Empty prereqs ⇒ marker silently dropped.
@@ -463,6 +472,94 @@ def _render_revision_history_block(
     doc.add_paragraph()
 
 
+def _split_pipe_row(line: str) -> list[str]:
+    """Split a GFM pipe-table row into stripped cell values.
+    Leading/trailing pipes discarded; empty cells preserved."""
+    s = line.strip()
+    if s.startswith("|"):
+        s = s[1:]
+    if s.endswith("|"):
+        s = s[:-1]
+    return [c.strip() for c in s.split("|")]
+
+
+def _extract_pipe_tables(body: str) -> tuple[str, list[dict]]:
+    """Task #603 (2026-08-15) — pre-pass over the markdown body: find
+    every GFM pipe-table (header row + separator + zero-or-more data
+    rows) and replace it with a single sentinel line `<<TABLE::N>>`.
+    Returns the rewritten body plus the parsed table specs.
+
+    Each table spec: {"headers": [str, ...], "rows": [[str, ...], ...]}.
+
+    Sentinel dispatching happens in the main line walker below —
+    _render_pipe_table lifts the spec into a native Word table.
+    """
+    lines = body.splitlines(keepends=True)
+    out_parts: list[str] = []
+    tables: list[dict] = []
+    i = 0
+    while i < len(lines):
+        # A pipe-table starts with a header row followed by a separator row.
+        if (i + 1 < len(lines)
+                and _PIPE_TABLE_ROW_RE.match(lines[i])
+                and _PIPE_TABLE_SEPARATOR_RE.match(lines[i + 1])):
+            headers = _split_pipe_row(lines[i])
+            data_rows: list[list[str]] = []
+            j = i + 2
+            while j < len(lines) and _PIPE_TABLE_ROW_RE.match(lines[j]):
+                data_rows.append(_split_pipe_row(lines[j]))
+                j += 1
+            table_idx = len(tables)
+            tables.append({"headers": headers, "rows": data_rows})
+            out_parts.append(f"<<TABLE::{table_idx}>>\n")
+            i = j
+            continue
+        out_parts.append(lines[i])
+        i += 1
+    return "".join(out_parts), tables
+
+
+_TABLE_SENTINEL_RE = re.compile(r"^\s*<<TABLE::(\d+)>>\s*$")
+
+
+def _render_pipe_table(doc, spec: dict) -> None:
+    """Emit a parsed pipe-table as a native python-docx table. Header
+    row bolded; data cells preserve markdown formatting (bold/italic
+    runs inside cells) via `_add_runs_with_formatting`. Empty tables
+    still emit the header for auditor-visible structure."""
+    headers = spec.get("headers") or []
+    rows    = spec.get("rows") or []
+    if not headers:
+        return
+    n_cols = len(headers)
+    n_rows = 1 + len(rows)
+    table = doc.add_table(rows=n_rows, cols=n_cols)
+    table.style = "Light Grid Accent 1"
+    table.autofit = True
+    # Header row — force bold even when the source markdown lacked **…**.
+    for c, h in enumerate(headers):
+        cell = table.cell(0, c)
+        cell.text = ""
+        p = cell.paragraphs[0]
+        _add_runs_with_formatting(p, h)
+        for run in p.runs:
+            run.bold = True
+            if run.font.size is None:
+                run.font.size = Pt(10)
+    # Data rows — respect cell-level markdown (**bold**, _italic_, `code`).
+    for r_idx, row in enumerate(rows, start=1):
+        for c in range(n_cols):
+            cell = table.cell(r_idx, c)
+            cell.text = ""
+            p = cell.paragraphs[0]
+            val = row[c] if c < len(row) else ""
+            _add_runs_with_formatting(p, val)
+            for run in p.runs:
+                if run.font.size is None:
+                    run.font.size = Pt(10)
+    doc.add_paragraph()  # separator after the table
+
+
 def render_template_docx(
     pg_conn,
     tenant_id: str,
@@ -495,6 +592,11 @@ def render_template_docx(
     # `include_header=True` provenance line — it's metadata, not content).
     body = PROV_COMMENT_RE.sub("", template_body, count=1)
 
+    # Task #603 (2026-08-15) — pre-pass extracts GFM pipe-tables and
+    # replaces them with `<<TABLE::N>>` sentinels; the parsed specs
+    # are lifted to native Word tables inside the main walker below.
+    body, _pipe_tables = _extract_pipe_tables(body)
+
     in_code_block = False
     in_list_block = False
     current_item_id: str | None = None   # Ship 56'.a — set on MUST/SHOULD marker;
@@ -519,6 +621,14 @@ def render_template_docx(
         # Empty line — paragraph break
         if not line.strip():
             in_list_block = False
+            continue
+
+        # Task #603 (2026-08-15) — sentinel for a pipe-table lifted by
+        # the pre-pass. Dispatch to native Word table renderer.
+        _t = _TABLE_SENTINEL_RE.match(line)
+        if _t:
+            _spec = _pipe_tables[int(_t.group(1))]
+            _render_pipe_table(doc, _spec)
             continue
 
         # Ship 54'.d — <<DOC_CONTROL>> marker → document-control table

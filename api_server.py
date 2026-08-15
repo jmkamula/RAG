@@ -5120,16 +5120,18 @@ async def download_template(
     leaf_id: LeafIdParam,
     request:  Request,
     key_info: APIKeyInfo = Depends(require_api_key),
-    empty:    bool = False,
+    empty:    bool = True,
     format:   Optional[str] = "md",
 ):
     """Download the rendered template as a file attachment.
 
     Format options (?format=...):
-      - md (default): markdown. Same render pipeline as GET
-        /api/v1/templates/{leaf_id}; tenant identity placeholders
-        substituted, N/A MUSTs stripped, prior evidence prefilled
-        (?empty=true to opt out).
+      - md (default): markdown. Tenant identity placeholders substituted,
+        N/A MUSTs stripped, edit zones start empty (tenant fills them).
+        Prior-evidence prefill is opt-in via ?empty=false — the tenant's
+        existing documents are already visible on the Dashboard, so
+        echoing extracted excerpts inside the template would be
+        redundant clutter (task #603, 2026-08-15).
       - xlsx: Excel workbook. Only valid for TABULAR templates
         (those with a TABLE-COLUMNS metadata block — A.5.9 Asset
         Inventory, 10.1 Improvement Action Register, etc.).
@@ -8015,7 +8017,7 @@ async def get_template(
     leaf_id: LeafIdParam,
     request:  Request,
     key_info: APIKeyInfo = Depends(require_api_key),
-    empty:    bool = False,
+    empty:    bool = True,
 ):
     """Render a leaf's template scaffold scoped to the calling tenant.
 
@@ -8037,10 +8039,12 @@ async def get_template(
     leaf_id format: `req:<control_ref>:<slug>` — colons in URL paths
     are accepted by FastAPI directly or via %3A encoding.
 
-    By default, the rendered template is PREFILLED with the tenant's
-    prior approved evidence per MUST (sources: templated > form >
-    workbook > extracted > leaf_scan; xfw_bridge surfaced as footer).
-    Pass `?empty=true` for a blank scaffold instead.
+    Edit zones start EMPTY by default (task #603, 2026-08-15). The
+    tenant's prior approved evidence is available on the Dashboard
+    surface; echoing it inside the template would be redundant.
+    Pass `?empty=false` to opt in to prefill (sources: templated >
+    form > workbook > extracted > leaf_scan; xfw_bridge surfaced as
+    footer).
     """
     pool = request.app.state.pg_pool
     conn = pool.getconn()
