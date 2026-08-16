@@ -252,6 +252,15 @@ class ExtractedCandidate:
     page_number:     Optional[int] = None
     inference_source: Optional[str] = None
     extraction_path: str = "templated"
+    # Ship 72'.b — LLM-path chunk provenance. Survives round-trip into
+    # DocumentFinding for tenant-facing observability.
+    chunk_id:        Optional[str] = None
+    # Ship 72'.b — control_ref override for extractors that resolved
+    # the ref through a non-item_id path (LLM output, structured rows,
+    # fingerprints). When set, the contract skips the `item_control_ref`
+    # derivation and uses this instead.
+    control_ref:     Optional[str] = None
+    standard_id:     Optional[str] = None
 
 
 @dataclass
@@ -283,32 +292,37 @@ class FindingContract:
             self._log_skip(SkipReason.EMPTY_TEXT, candidate)
             return BindResult(reason=SkipReason.EMPTY_TEXT)
 
-        # 2. Valid item_id? — Task #606's catalog membership check,
-        # promoted from extractor.py to the contract.
-        if not catalog_recognises(candidate.item_id):
+        # 2. Valid item_id? — Task #606's catalog membership check.
+        # LLM path may propose findings with no per-MUST binding; when
+        # item_id is empty the caller passes "" and we skip the check —
+        # such findings are dropped by the LLM path's own gate
+        # (`bound_item_id is None`) BEFORE they reach the contract.
+        if candidate.item_id and not catalog_recognises(candidate.item_id):
             self._log_skip(SkipReason.MANGLED_ITEM_ID, candidate)
             return BindResult(reason=SkipReason.MANGLED_ITEM_ID)
 
         # 3. Non-scaffolding text? — Ship 72'.a's is_scaffolding
-        # predicate replaces the extractor-local _is_pure_scaffolding
-        # + workbook-side empty-cell + xlsx-side non-empty checks.
+        # predicate replaces every extractor's local scaffolding check.
         if is_scaffolding(text):
             self._log_skip(SkipReason.PURE_SCAFFOLDING, candidate)
             return BindResult(reason=SkipReason.PURE_SCAFFOLDING)
 
-        # 4. Resolvable control_ref? — item:A.5.15:X → A.5.15
-        from rag.id_types import item_control_ref
-        control_ref = item_control_ref(candidate.item_id)
+        # 4. Resolvable control_ref? — item:A.5.15:X → A.5.15. When
+        # the caller pre-resolved the ref (LLM path, structured rows),
+        # use that instead of deriving from item_id.
+        control_ref = candidate.control_ref
+        if not control_ref and candidate.item_id:
+            from rag.id_types import item_control_ref
+            control_ref = item_control_ref(candidate.item_id)
         if not control_ref:
             self._log_skip(SkipReason.UNRESOLVABLE_REF, candidate)
             return BindResult(reason=SkipReason.UNRESOLVABLE_REF)
 
         # 5. Resolvable standard_id?
-        # Re-uses extractor.py::_control_ref_to_standard — shared today
-        # between extractor + workbook, not moving until 72'.b/c to
-        # keep this patch minimal.
-        from rag.intake.extractor import _control_ref_to_standard
-        standard_id = _control_ref_to_standard(control_ref)
+        standard_id = candidate.standard_id
+        if not standard_id:
+            from rag.intake.extractor import _control_ref_to_standard
+            standard_id = _control_ref_to_standard(control_ref)
 
         finding = DocumentFinding(
             upload_id         = candidate.upload_id,
@@ -319,11 +333,12 @@ class FindingContract:
             finding           = candidate.finding,
             evidence_text     = text[:500],
             confidence        = candidate.confidence,
-            checklist_item_id = candidate.item_id,
+            checklist_item_id = candidate.item_id or None,
             section           = candidate.section,
             page_number       = candidate.page_number,
             extraction_path   = candidate.extraction_path,
             inference_source  = candidate.inference_source,
+            chunk_id          = candidate.chunk_id,
         )
         return BindResult(reason=SkipReason.OK, finding=finding)
 

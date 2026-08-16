@@ -1198,6 +1198,13 @@ def _extract_templated_via_full_section(
         anchors.append((m.start(), "SHOULD", m.group(1), m.end()))
     anchors.sort(key=lambda a: a[0])
 
+    # Ship 72'.b — legacy full-section templated path now routes through
+    # FindingContract. Empty sections used to emit NC findings with
+    # placeholder evidence text ("(template section left blank by tenant)");
+    # those are dropped as PURE_SCAFFOLDING under the contract because
+    # advisory + SSoT + Evidence Package now surface missing evidence
+    # deterministically without needing an inert NC row.
+    from rag.intake.finding_contract import FINDING_CONTRACT, ExtractedCandidate
     findings: list[DocumentFinding] = []
     for i, (start, kind, item_id, mark_end) in enumerate(anchors):
         slice_end = anchors[i + 1][0] if i + 1 < len(anchors) else len(body)
@@ -1206,37 +1213,22 @@ def _extract_templated_via_full_section(
         if boundary:
             section_body = section_body[:boundary.start()]
         cleaned = _TEMPLATED_WHY_LINE.sub("", section_body)
-        had_placeholder = bool(_TEMPLATED_TEXT_PLACEHOLDER.search(cleaned))
         cleaned_no_ph   = _TEMPLATED_TEXT_PLACEHOLDER.sub("", cleaned).strip()
         cleaned_no_ph   = re.sub(r"^[-=]{3,}\s*$", "", cleaned_no_ph,
                                   flags=re.MULTILINE).strip()
-        if not cleaned_no_ph:
-            finding  = "NC"
-            evidence = "(template section left blank by tenant)" if had_placeholder \
-                       else "(template section empty)"
-        else:
-            finding  = "Comply"
-            evidence = cleaned_no_ph[:500]
 
-        from rag.id_types import item_control_ref
-        control_ref = item_control_ref(item_id)
-        if not control_ref:
-            continue
-        standard_id = _control_ref_to_standard(control_ref)
-
-        findings.append(DocumentFinding(
-            upload_id         = doc.upload_id or "",
-            tenant_id         = "",
-            document_name     = doc.original_name,
-            control_ref       = control_ref,
-            standard_id       = standard_id,
-            finding           = finding,
-            evidence_text     = evidence,
-            confidence        = "high",
-            checklist_item_id = item_id,
-            extraction_path   = "templated",
-            inference_source  = "templated",
-        ))
+        candidate = ExtractedCandidate(
+            item_id          = item_id,
+            excerpt_text     = cleaned_no_ph,
+            document_name    = doc.original_name,
+            upload_id        = doc.upload_id or "",
+            source_context   = {"path": "templated_full_section"},
+            inference_source = "templated",
+            extraction_path  = "templated",
+        )
+        result = FINDING_CONTRACT.bind(candidate)
+        if result.finding is not None:
+            findings.append(result.finding)
 
     return findings
 
@@ -2618,21 +2610,31 @@ def _parse_llm_response(
             dropped_unbound += 1
             continue
 
-        findings.append(DocumentFinding(
-            upload_id         = doc.upload_id or "",
-            tenant_id         = "",   # set by writer
-            document_name     = doc.original_name,
-            control_ref       = ref,
-            standard_id       = standard_id,
-            finding           = finding,
-            evidence_text     = evidence,
-            confidence        = confidence,
-            checklist_item_id = bound_item_id,
-            section           = section,
-            page_number       = page,
-            extraction_path   = doc.extraction_path.value,
-            chunk_id          = chunk_id,
-        ))
+        # Ship 72'.b — LLM output flows through the FindingContract.
+        # Contract's is_scaffolding check catches LLM hallucinations
+        # that pulled text from our own template scaffolding (a bug the
+        # local filters didn't reject). Contract's catalog check acts
+        # as a second gate against LLM-invented MUST ids that slipped
+        # past the per-control valid_items_by_ctrl filter above.
+        from rag.intake.finding_contract import FINDING_CONTRACT, ExtractedCandidate
+        candidate = ExtractedCandidate(
+            item_id          = bound_item_id,
+            excerpt_text     = evidence,
+            document_name    = doc.original_name,
+            upload_id        = doc.upload_id or "",
+            control_ref      = ref,
+            standard_id      = standard_id,
+            finding          = finding,
+            confidence       = confidence,
+            section          = section,
+            page_number      = page,
+            extraction_path  = doc.extraction_path.value,
+            chunk_id         = chunk_id,
+            source_context   = {"path": "llm_parse", "chunk_id": chunk_id},
+        )
+        result = FINDING_CONTRACT.bind(candidate)
+        if result.finding is not None:
+            findings.append(result.finding)
 
     total_dropped = (dropped_low_conf + dropped_short_quote + dropped_hallucinated
                      + dropped_unknown_ref + dropped_questionnaire + dropped_unbound
