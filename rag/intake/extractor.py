@@ -891,58 +891,49 @@ def _extract_templated_xlsx(doc: ParsedDocument) -> Optional[list[DocumentFindin
             })
             n_rows_captured += 1
 
+    # Ship 72'.c — xlsx column bindings flow through FindingContract.
+    # Empty-column check (col_has_data[i]) becomes the contract's
+    # is_scaffolding gate: sample_cell[i] is "" when the column has
+    # no data, which drops as EMPTY_TEXT.
+    from rag.intake.finding_contract import FINDING_CONTRACT, ExtractedCandidate
     for i, item_id in enumerate(columns):
-        if not col_has_data[i]:
-            continue
-        from rag.id_types import item_control_ref
-        control_ref = item_control_ref(item_id)
-        if not control_ref:
-            continue
-        standard_id = _control_ref_to_standard(control_ref)
-        findings.append(DocumentFinding(
-            upload_id         = doc.upload_id or "",
-            tenant_id         = "",
-            document_name     = doc.original_name,
-            control_ref       = control_ref,
-            standard_id       = standard_id,
-            finding           = "Comply",
-            evidence_text     = sample_cell[i][:500],
-            confidence        = "high",
-            checklist_item_id = item_id,
-            extraction_path   = "templated_xlsx",
-            inference_source  = "templated",
-        ))
+        candidate = ExtractedCandidate(
+            item_id          = item_id,
+            excerpt_text     = sample_cell[i] if col_has_data[i] else "",
+            document_name    = doc.original_name,
+            upload_id        = doc.upload_id or "",
+            source_context   = {"path": "templated_xlsx_column"},
+            inference_source = "templated",
+            extraction_path  = "templated_xlsx",
+        )
+        result = FINDING_CONTRACT.bind(candidate)
+        if result.finding is not None:
+            findings.append(result.finding)
 
     # ── Document Fields: one finding per filled "Your content" cell ─────
     # doc_field_rows is in the SAME ORDER as doc_fields (the
     # xlsx_renderer writes them parallel). Bind by ordinal.
+    # Ship 72'.c — routed through the same contract; empty cells drop
+    # as EMPTY_TEXT.
     n_doc_field_bound = 0
     for ix, df_row in enumerate(df_rows):
         if ix >= len(doc_fields):
             break
         content = (df_row.get("your_content") or "").strip()
-        if not content:
-            continue
         item_id = doc_fields[ix]
-        from rag.id_types import item_control_ref
-        control_ref = item_control_ref(item_id)
-        if not control_ref:
-            continue
-        standard_id = _control_ref_to_standard(control_ref)
-        findings.append(DocumentFinding(
-            upload_id         = doc.upload_id or "",
-            tenant_id         = "",
-            document_name     = doc.original_name,
-            control_ref       = control_ref,
-            standard_id       = standard_id,
-            finding           = "Comply",
-            evidence_text     = content[:500],
-            confidence        = "high",
-            checklist_item_id = item_id,
-            extraction_path   = "templated_xlsx",
-            inference_source  = "templated",
-        ))
-        n_doc_field_bound += 1
+        candidate = ExtractedCandidate(
+            item_id          = item_id,
+            excerpt_text     = content,
+            document_name    = doc.original_name,
+            upload_id        = doc.upload_id or "",
+            source_context   = {"path": "templated_xlsx_doc_field", "row_ix": ix},
+            inference_source = "templated",
+            extraction_path  = "templated_xlsx",
+        )
+        result = FINDING_CONTRACT.bind(candidate)
+        if result.finding is not None:
+            findings.append(result.finding)
+            n_doc_field_bound += 1
 
     # Telemetry
     doc.extraction_metrics["templated_xlsx_leaf_id"]           = meta["leaf_id"]

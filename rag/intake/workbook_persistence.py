@@ -67,10 +67,29 @@ def _findings_for_pass(
     """One row per satisfied/partial MUST. Returns tuples ready for execute().
 
     Tuple shape mirrors the INSERT below.
+
+    Ship 72'.c (2026-08-16) — validates each must_id against the
+    canonical catalog (`FindingContract.catalog_recognises`). Mapping
+    YAMLs with a typo in a MUST id used to silently insert a bad
+    `checklist_item_id`; the SSoT reader would then drop the row on
+    lookup, leaving evidence unbound with no trail. Now the workbook
+    path logs + skips, same defensive posture as the templated path.
     """
+    from rag.intake.finding_contract import catalog_recognises
+    import logging as _logging
+    _log = _logging.getLogger(__name__)
+
     rows: list[tuple] = []
 
-    def _row(must_id: str, status: str, confidence: str) -> tuple:
+    def _row(must_id: str, status: str, confidence: str) -> tuple | None:
+        if not catalog_recognises(must_id):
+            _log.warning(
+                "workbook _findings_for_pass: skipping unknown must_id %r "
+                "on sheet %r (not in ALL_EVIDENCE_REQUIREMENTS ∪ DerivedSpec "
+                "direct_evidence — likely a mapping YAML typo)",
+                must_id, sheet_name,
+            )
+            return None
         column = pass_prop.matched_columns.get(must_id, "?")
         excerpt = f"sheet {sheet_name!r} col {column!r}"
         # Cap at 500 like the LLM extractor's policy.
@@ -85,9 +104,13 @@ def _findings_for_pass(
         )
 
     for must_id in pass_prop.satisfied:
-        rows.append(_row(must_id, "present", "high"))
+        row = _row(must_id, "present", "high")
+        if row is not None:
+            rows.append(row)
     for must_id in pass_prop.partial:
-        rows.append(_row(must_id, "partial", "medium"))
+        row = _row(must_id, "partial", "medium")
+        if row is not None:
+            rows.append(row)
 
     return rows
 
