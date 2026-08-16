@@ -543,9 +543,26 @@ _ARION_SHOULD_LABEL_RE = _re.compile(
 _ARION_WHY_LABEL_RE = _re.compile(
     r"^\s*\*?Why:\s.+?\*?\s*$", _re.MULTILINE,
 )
-# "[ Click to enter your evidence here ]" placeholder.
+# "[ Click to enter your evidence here ]" placeholder — mammoth wraps
+# it in italics (`*...*`) and escapes the brackets (`\[...\]`).
 _ARION_CLICK_PLACEHOLDER_RE = _re.compile(
-    r"^\s*\[\s*Click to enter your evidence here\s*\]\s*$", _re.MULTILINE,
+    r"^\s*[*_]?\s*\\?\[\s*Click to enter your evidence here\s*\\?\]\s*[*_]?\s*$",
+    _re.MULTILINE,
+)
+# Ship 72'.a (2026-08-16) — ▽/△ rail glyphs that bracket edit zones in
+# our docx renders (docx_renderer.py::_render_edit_zone_marker). Task
+# #604 locks them under document protection so they're the reliable
+# zone boundary. Mammoth preserves the glyphs. When present, the
+# reader uses them to bound the reconstructed EDIT-ZONE tightly — the
+# reader-emitted zone contains ONLY paragraphs between ▽ and △, not
+# the whole gap between ◆ labels (which was capturing all the
+# scaffolding guidance body as "tenant evidence" — see Ship 72' arc
+# opener).
+_ARION_ZONE_OPEN_RE  = _re.compile(
+    r"^\s*[*_]?\s*[▽]\s*Enter your evidence for", _re.MULTILINE,
+)
+_ARION_ZONE_CLOSE_RE = _re.compile(
+    r"^\s*[*_]?\s*[△]\s*End of", _re.MULTILINE,
 )
 
 
@@ -616,30 +633,66 @@ def _reconstruct_arion_markers(md_text: str, file_name: str) -> str:
     md = _ARION_WHY_LABEL_RE.sub("", md_text)
     md = _ARION_CLICK_PLACEHOLDER_RE.sub("", md)
 
-    # Split into lines and walk. For each ◆ label line: emit a
-    # `<<MUST/SHOULD item:CTRL:slug>>` on its own line + open an edit
-    # zone. Close the zone at the next ◆ label OR the next '## ' heading
-    # OR the end of the section separator line (─── run).
+    # Ship 72'.a (2026-08-16) — TWO reconstruction paths depending on
+    # whether the docx has ▽/△ rails (post-Task #604 renders) or not
+    # (pre-Task #604 or manually-authored docs).
+    #
+    # A. WITH rails: emit `<<MUST item:X>>` at each ◆ label and open
+    #    the EDIT-ZONE-START at the ▽ rail that follows, close at the
+    #    △ rail. The zone body contains ONLY paragraphs between the
+    #    rails, which is where tenant evidence lives. This eliminates
+    #    the "scaffolding-as-tenant-evidence" false-positive bug from
+    #    the Ship 72' arc opener.
+    #
+    # B. WITHOUT rails: fall back to the pre-72' behavior — emit the
+    #    marker at ◆ and open the zone from there to the next ◆
+    #    label / heading / horizontal rule. Preserved for backward
+    #    compat + tenant docs that were authored outside our render.
+    has_rails = bool(_ARION_ZONE_OPEN_RE.search(md))
+
     lines = md.split("\n")
     out: list[str] = []
-    open_zone: str | None = None  # the item_id currently open
+    open_zone: str | None = None
+    pending_zone: str | None = None  # WITH-rails: id waiting for a ▽
+
     for raw in lines:
         line = raw
         must_m = _ARION_MUST_LABEL_RE.match(line)
         should_m = _ARION_SHOULD_LABEL_RE.match(line)
         if must_m or should_m:
-            # Close any prior zone
+            # Close any prior open zone.
             if open_zone:
                 out.append(f"<!-- EDIT-ZONE-END {open_zone} -->")
                 open_zone = None
             slug = _slug_from_humanized((must_m or should_m).group(1))
             kind = "MUST" if must_m else "SHOULD"
             item_id = f"item:{control_ref}:{slug}"
+            # Always emit the marker line for round-trip binding.
             out.append(f"<<{kind} {item_id}>>")
-            out.append(f"<!-- EDIT-ZONE-START {item_id} -->")
-            open_zone = item_id
+            if has_rails:
+                # Delay opening the zone until the ▽ rail line.
+                pending_zone = item_id
+            else:
+                # Pre-72' behavior — open zone right after the marker.
+                out.append(f"<!-- EDIT-ZONE-START {item_id} -->")
+                open_zone = item_id
             continue
-        # Section boundaries close the open zone
+
+        # ▽ rail — open the pending edit zone (WITH-rails path).
+        if has_rails and pending_zone and _ARION_ZONE_OPEN_RE.match(line):
+            out.append(f"<!-- EDIT-ZONE-START {pending_zone} -->")
+            open_zone = pending_zone
+            pending_zone = None
+            # Drop the ▽ line itself — it's a rail marker, not evidence.
+            continue
+
+        # △ rail — close the open edit zone (WITH-rails path).
+        if has_rails and open_zone and _ARION_ZONE_CLOSE_RE.match(line):
+            out.append(f"<!-- EDIT-ZONE-END {open_zone} -->")
+            open_zone = None
+            continue
+
+        # Section boundaries close the open zone (both paths).
         stripped = line.strip()
         is_heading = stripped.startswith("#")
         is_hr      = bool(_re.fullmatch(r"[-─]{3,}", stripped))

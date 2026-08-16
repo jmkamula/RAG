@@ -1098,43 +1098,32 @@ def _extract_templated_via_table(
                     col_has_data[i] = True
                     sample_cell[i]  = cells[i]
 
+        # Ship 72'.a — every column flows through the FindingContract.
+        # Column-cell content check (was col_has_data[i]) is now the
+        # contract's is_scaffolding job — empty cells reject as
+        # PURE_SCAFFOLDING; mangled column ids reject as MANGLED_ITEM_ID.
+        from rag.intake.finding_contract import (
+            FINDING_CONTRACT, ExtractedCandidate, SkipReason,
+        )
         bound_in_zone = 0
-        n_cols_mangled = 0
+        col_skip_counts: dict[str, int] = {r.value: 0 for r in SkipReason}
         for i, item_id in enumerate(columns):
-            if not col_has_data[i]:
-                continue
-            # Task #606 (2026-08-15) — defensive marker validation.
-            # A `<!-- column: item:X:Y -->` metadata entry that's been
-            # mangled by a tenant edit gets logged + skipped instead of
-            # binding evidence to a nonexistent checklist_item_id.
-            if not _catalog_recognises(item_id):
-                n_cols_mangled += 1
-                logger.warning(
-                    "templated_table_zone: skipping unknown column marker %r "
-                    "(not in ALL_EVIDENCE_REQUIREMENTS ∪ DerivedSpec direct_evidence — "
-                    "likely a mangled TABLE-COLUMNS metadata entry)",
-                    item_id,
-                )
-                continue
-            from rag.id_types import item_control_ref
-            control_ref = item_control_ref(item_id)
-            if not control_ref:
-                continue
-            standard_id = _control_ref_to_standard(control_ref)
-            findings.append(DocumentFinding(
-                upload_id         = doc.upload_id or "",
-                tenant_id         = "",
-                document_name     = doc.original_name,
-                control_ref       = control_ref,
-                standard_id       = standard_id,
-                finding           = "Comply",
-                evidence_text     = sample_cell[i][:500],
-                confidence        = "high",
-                checklist_item_id = item_id,
-                extraction_path   = "templated",
-                inference_source  = "templated",
-            ))
-            bound_in_zone += 1
+            candidate = ExtractedCandidate(
+                item_id          = item_id,
+                excerpt_text     = sample_cell[i] if col_has_data[i] else "",
+                document_name    = doc.original_name,
+                upload_id        = doc.upload_id or "",
+                source_context   = {"path": "templated_table_zone",
+                                    "leaf_id": leaf_id, "column_ix": i},
+                inference_source = "templated",
+                extraction_path  = "templated",
+            )
+            result = FINDING_CONTRACT.bind(candidate)
+            col_skip_counts[result.reason.value] += 1
+            if result.finding is not None:
+                findings.append(result.finding)
+                bound_in_zone += 1
+        n_cols_mangled = col_skip_counts["mangled_item_id"]
 
         if bound_in_zone:
             n_zones_bound += 1
@@ -1153,62 +1142,43 @@ def _extract_templated_via_edit_zones(
     doc: ParsedDocument,
     edit_zones: list,
 ) -> list[DocumentFinding]:
-    """Edit-zone-driven extraction. One finding per zone that contains
-    tenant authorship. Zones with only scaffolding (placeholder, pure
-    prefill) are skipped — those contribute no new evidence."""
+    """Edit-zone-driven extraction. Ship 72'.a — every zone flows through
+    the app-wide `FindingContract`, which owns the rules for what counts
+    as a valid tenant finding (non-scaffolding text, catalog-recognised
+    item_id, resolvable control_ref). Local ad-hoc `_is_pure_scaffolding`
+    + `_catalog_recognises` calls retired — the contract subsumes them
+    with a broader scaffolding vocabulary that recognizes the reader-
+    reconstructed patterns from docx uploads."""
+    from rag.intake.finding_contract import (
+        FINDING_CONTRACT, ExtractedCandidate, SkipReason,
+    )
     findings: list[DocumentFinding] = []
-    n_skipped_scaffolding = 0
-    n_skipped_mangled     = 0
+    skip_counts: dict[str, int] = {r.value: 0 for r in SkipReason}
     for m in edit_zones:
-        item_id    = m.group(1)
-        zone_text  = m.group(2)
-
-        if _is_pure_scaffolding(zone_text):
-            n_skipped_scaffolding += 1
-            continue
-
-        # Task #606 (2026-08-15) — defensive marker validation.
-        # If the tenant disabled Word protection and mangled the
-        # hidden `<<MUST item:X:Y>>` marker (typo, split, character
-        # loss), skip + log. Better than binding evidence to a
-        # nonexistent checklist_item_id that the SSoT reader will
-        # silently drop.
-        if not _catalog_recognises(item_id):
-            n_skipped_mangled += 1
-            logger.warning(
-                "templated_edit_zone: skipping unknown marker %r "
-                "(not in ALL_EVIDENCE_REQUIREMENTS ∪ DerivedSpec direct_evidence — "
-                "likely a mangled marker from tenant edit)",
-                item_id,
-            )
-            continue
-
-        # item:A.5.15:physical_rules → control_ref='A.5.15'
-        from rag.id_types import item_control_ref
-        control_ref = item_control_ref(item_id)
-        if not control_ref:
-            continue
-        standard_id = _control_ref_to_standard(control_ref)
-
-        evidence = zone_text.strip()[:500]
-        findings.append(DocumentFinding(
-            upload_id         = doc.upload_id or "",
-            tenant_id         = "",
-            document_name     = doc.original_name,
-            control_ref       = control_ref,
-            standard_id       = standard_id,
-            finding           = "Comply",
-            evidence_text     = evidence,
-            confidence        = "high",
-            checklist_item_id = item_id,
-            extraction_path   = "templated",
-            inference_source  = "templated",
-        ))
+        candidate = ExtractedCandidate(
+            item_id          = m.group(1),
+            excerpt_text     = m.group(2),
+            document_name    = doc.original_name,
+            upload_id        = doc.upload_id or "",
+            source_context   = {"path": "templated_edit_zone"},
+            inference_source = "templated",
+            extraction_path  = "templated",
+        )
+        result = FINDING_CONTRACT.bind(candidate)
+        skip_counts[result.reason.value] += 1
+        if result.finding is not None:
+            findings.append(result.finding)
 
     doc.extraction_metrics["templated_edit_zones_total"]  = len(edit_zones)
     doc.extraction_metrics["templated_edit_zones_bound"]  = len(findings)
-    doc.extraction_metrics["templated_zones_scaffolding"] = n_skipped_scaffolding
-    doc.extraction_metrics["templated_zones_mangled"]     = n_skipped_mangled
+    # Ship 72'.d will consolidate onto a single contract-emitted skip
+    # counter. For now, keep the shape backward-compatible so
+    # dashboards + intake_trace_log don't break. Empty-text rejects
+    # roll up under `scaffolding` — same semantic (no tenant evidence).
+    doc.extraction_metrics["templated_zones_scaffolding"] = (
+        skip_counts["pure_scaffolding"] + skip_counts["empty_text"]
+    )
+    doc.extraction_metrics["templated_zones_mangled"]     = skip_counts["mangled_item_id"]
     return findings
 
 
