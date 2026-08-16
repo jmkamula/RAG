@@ -143,6 +143,28 @@ class IntakeTracer:
             "contract_skip_empty_text", "contract_skip_pure_scaffolding",
             "contract_skip_mangled_item_id", "contract_skip_unresolvable_control_ref",
             "templated_zones_scaffolding", "templated_zones_mangled",
+            # schema_v99 (Ship 74'.b, 2026-08-16) — pre-existing
+            # silent-drop caught by tests/test_intake_tracer_allowlist.py
+            # on its first run. `dup_of_upload_id` was passed at the
+            # duplicate-stage tracer.write but neither the column nor the
+            # allowlist entry existed.
+            "dup_of_upload_id",
+            # schema_v100 (Ship 74'.d, 2026-08-16) — category-B counter
+            # promotion. Ship 74'.c catalogued these as grandfathered
+            # producer keys that had never been given a schema column.
+            # Ship 74'.d promotes 18 of the highest-value ones: critic
+            # telemetry, filter drops, fingerprint yield, classifier gate,
+            # templated fast-path yield. Remainder stays in
+            # _INTENTIONAL_DEBUG_ONLY (templated table + xlsx detail).
+            "critic_priming_size", "critic_pool_size",
+            "critic_confirmed_raw", "critic_extended_raw",
+            "critic_rejected", "critic_flagged_missing", "critic_findings_kept",
+            "dropped_content_shape", "dropped_semantic_fit",
+            "fingerprint_findings", "fingerprint_covered_leaves",
+            "leaves_dropped_by_classifier", "leaves_fingerprint_hit",
+            "leaves_unfingerprinted_kept",
+            "templated_findings", "templated_xlsx_findings",
+            "templated_edit_zones_total", "templated_edit_zones_bound",
         }
         for k, v in metrics.items():
             if k in allowed:
@@ -526,6 +548,28 @@ class DocumentPipeline:
                 contract_skip_unresolvable_control_ref = doc.extraction_metrics.get("contract_skip_unresolvable_control_ref"),
                 templated_zones_scaffolding = doc.extraction_metrics.get("templated_zones_scaffolding"),
                 templated_zones_mangled     = doc.extraction_metrics.get("templated_zones_mangled"),
+                # schema_v100 (Ship 74'.d, 2026-08-16) — category-B
+                # promotion. See _INTENTIONAL_DEBUG_ONLY note in
+                # tests/test_intake_metrics_drift.py for the promotion
+                # decision.
+                critic_priming_size    = doc.extraction_metrics.get("critic_priming_size"),
+                critic_pool_size       = doc.extraction_metrics.get("critic_pool_size"),
+                critic_confirmed_raw   = doc.extraction_metrics.get("critic_confirmed_raw"),
+                critic_extended_raw    = doc.extraction_metrics.get("critic_extended_raw"),
+                critic_rejected        = doc.extraction_metrics.get("critic_rejected"),
+                critic_flagged_missing = doc.extraction_metrics.get("critic_flagged_missing"),
+                critic_findings_kept   = doc.extraction_metrics.get("critic_findings_kept"),
+                dropped_content_shape  = doc.extraction_metrics.get("dropped_content_shape"),
+                dropped_semantic_fit   = doc.extraction_metrics.get("dropped_semantic_fit"),
+                fingerprint_findings         = doc.extraction_metrics.get("fingerprint_findings"),
+                fingerprint_covered_leaves   = doc.extraction_metrics.get("fingerprint_covered_leaves"),
+                leaves_dropped_by_classifier = doc.extraction_metrics.get("leaves_dropped_by_classifier"),
+                leaves_fingerprint_hit       = doc.extraction_metrics.get("leaves_fingerprint_hit"),
+                leaves_unfingerprinted_kept  = doc.extraction_metrics.get("leaves_unfingerprinted_kept"),
+                templated_findings         = doc.extraction_metrics.get("templated_findings"),
+                templated_xlsx_findings    = doc.extraction_metrics.get("templated_xlsx_findings"),
+                templated_edit_zones_total = doc.extraction_metrics.get("templated_edit_zones_total"),
+                templated_edit_zones_bound = doc.extraction_metrics.get("templated_edit_zones_bound"),
             )
 
             logger.info(f"Extracted {len(findings)} findings from {file_name}")
