@@ -277,19 +277,40 @@ class FindingContract:
     Every extractor path is expected to call `.bind(candidate)` instead
     of directly constructing `DocumentFinding`. When the contract rejects
     a candidate, the reason is logged + a metrics counter increments —
-    downstream (Ship 72'.d) intake_trace_log surfaces the counters so
-    silent drops become observable.
+    downstream `intake_trace_log` picks up the counters so silent
+    drops become observable.
 
     Stateless per-instance; the shared singleton `FINDING_CONTRACT`
     below is what most callers should use.
     """
 
-    def bind(self, candidate: ExtractedCandidate) -> BindResult:
+    # Ship 72'.d — counter names surfaced onto `doc.extraction_metrics`
+    # so `intake_trace_log` telemetry catches every skip reason without
+    # each extractor path having to hand-roll its own counter.
+    METRIC_KEY_PREFIX = "contract_skip_"
+
+    def bump_metric(
+        self, metrics: Optional[dict], reason: SkipReason,
+    ) -> None:
+        """Increment the `contract_skip_<reason>` counter on the given
+        metrics dict. Extractor paths pass `doc.extraction_metrics`;
+        the counter surfaces in `intake_trace_log` automatically."""
+        if metrics is None:
+            return
+        key = f"{self.METRIC_KEY_PREFIX}{reason.value}"
+        metrics[key] = metrics.get(key, 0) + 1
+
+    def bind(
+        self,
+        candidate: ExtractedCandidate,
+        metrics: Optional[dict] = None,
+    ) -> BindResult:
         # 1. Trivial empty check — often the extractor's regex captured
         # a marker with no body.
         text = (candidate.excerpt_text or "").strip()
         if not text:
             self._log_skip(SkipReason.EMPTY_TEXT, candidate)
+            self.bump_metric(metrics, SkipReason.EMPTY_TEXT)
             return BindResult(reason=SkipReason.EMPTY_TEXT)
 
         # 2. Valid item_id? — Task #606's catalog membership check.
@@ -299,12 +320,14 @@ class FindingContract:
         # (`bound_item_id is None`) BEFORE they reach the contract.
         if candidate.item_id and not catalog_recognises(candidate.item_id):
             self._log_skip(SkipReason.MANGLED_ITEM_ID, candidate)
+            self.bump_metric(metrics, SkipReason.MANGLED_ITEM_ID)
             return BindResult(reason=SkipReason.MANGLED_ITEM_ID)
 
         # 3. Non-scaffolding text? — Ship 72'.a's is_scaffolding
         # predicate replaces every extractor's local scaffolding check.
         if is_scaffolding(text):
             self._log_skip(SkipReason.PURE_SCAFFOLDING, candidate)
+            self.bump_metric(metrics, SkipReason.PURE_SCAFFOLDING)
             return BindResult(reason=SkipReason.PURE_SCAFFOLDING)
 
         # 4. Resolvable control_ref? — item:A.5.15:X → A.5.15. When
@@ -316,6 +339,7 @@ class FindingContract:
             control_ref = item_control_ref(candidate.item_id)
         if not control_ref:
             self._log_skip(SkipReason.UNRESOLVABLE_REF, candidate)
+            self.bump_metric(metrics, SkipReason.UNRESOLVABLE_REF)
             return BindResult(reason=SkipReason.UNRESOLVABLE_REF)
 
         # 5. Resolvable standard_id?

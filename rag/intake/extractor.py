@@ -906,7 +906,7 @@ def _extract_templated_xlsx(doc: ParsedDocument) -> Optional[list[DocumentFindin
             inference_source = "templated",
             extraction_path  = "templated_xlsx",
         )
-        result = FINDING_CONTRACT.bind(candidate)
+        result = FINDING_CONTRACT.bind(candidate, metrics=doc.extraction_metrics)
         if result.finding is not None:
             findings.append(result.finding)
 
@@ -930,7 +930,7 @@ def _extract_templated_xlsx(doc: ParsedDocument) -> Optional[list[DocumentFindin
             inference_source = "templated",
             extraction_path  = "templated_xlsx",
         )
-        result = FINDING_CONTRACT.bind(candidate)
+        result = FINDING_CONTRACT.bind(candidate, metrics=doc.extraction_metrics)
         if result.finding is not None:
             findings.append(result.finding)
             n_doc_field_bound += 1
@@ -1109,7 +1109,7 @@ def _extract_templated_via_table(
                 inference_source = "templated",
                 extraction_path  = "templated",
             )
-            result = FINDING_CONTRACT.bind(candidate)
+            result = FINDING_CONTRACT.bind(candidate, metrics=doc.extraction_metrics)
             col_skip_counts[result.reason.value] += 1
             if result.finding is not None:
                 findings.append(result.finding)
@@ -1155,7 +1155,7 @@ def _extract_templated_via_edit_zones(
             inference_source = "templated",
             extraction_path  = "templated",
         )
-        result = FINDING_CONTRACT.bind(candidate)
+        result = FINDING_CONTRACT.bind(candidate, metrics=doc.extraction_metrics)
         skip_counts[result.reason.value] += 1
         if result.finding is not None:
             findings.append(result.finding)
@@ -1217,7 +1217,7 @@ def _extract_templated_via_full_section(
             inference_source = "templated",
             extraction_path  = "templated",
         )
-        result = FINDING_CONTRACT.bind(candidate)
+        result = FINDING_CONTRACT.bind(candidate, metrics=doc.extraction_metrics)
         if result.finding is not None:
             findings.append(result.finding)
 
@@ -2623,7 +2623,7 @@ def _parse_llm_response(
             chunk_id         = chunk_id,
             source_context   = {"path": "llm_parse", "chunk_id": chunk_id},
         )
-        result = FINDING_CONTRACT.bind(candidate)
+        result = FINDING_CONTRACT.bind(candidate, metrics=doc.extraction_metrics)
         if result.finding is not None:
             findings.append(result.finding)
 
