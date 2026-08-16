@@ -6298,6 +6298,249 @@ ISO27701_WEAK_TIES_EDGES: list[RelationshipEdge] = [
 ]
 
 
+# Ship 73'.b (2026-08-16) — 19 bridge edges closing Task #595's
+# tenant-facing GDPR coverage gap. Ship 73'.a's audit classified 14
+# GDPR articles as bridgeable to ISO 27001; Ship 73'.b's refinement
+# dropped 3 low-confidence drafts and upgraded 2 (Art.42 A.5.36 and
+# Art.87 A.8.11) to author 19 defensible bridges.
+#
+# Direction contract (mirrors existing edges):
+#   IMPLEMENTS / SUPPORTS  : source=ISO,  target=GDPR (control implements obligation)
+#   GOVERNANCE             : source=GDPR, target=ISO  (obligation governed by control)
+#
+# Deliberately unbridged after 73'.a triage: Art.77-80 (data-subject
+# remedies), Art.81 (procedural), Art.84 (Member State penalties),
+# Art.86 (public documents), Art.91 (church rules). These describe
+# regulatory outcomes / data-subject rights of action / narrow
+# contexts with no organizational-control mapping.
+SHIP_73_PRIME_GDPR_BRIDGE_EDGES: list[RelationshipEdge] = [
+    # ── Art.11 — Processing which does not require identification ──
+    RelationshipEdge(
+        source_ref='A.8.11', source_standard_id='ISO27001:2022',
+        target_ref='Art.11', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='Data masking implements Art.11 — where identification '
+                  'is no longer required for the processing purpose, '
+                  'pseudonymisation / de-identification removes the '
+                  'identifying attributes so re-identification is not possible.',
+        citation='ISO/IEC 27002:2022 §8.11 + GDPR Art.11',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.5.34', source_standard_id='ISO27001:2022',
+        target_ref='Art.11', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='Privacy protection of PII policy defines when identification '
+                  'is needed for a purpose vs when de-identified data suffices — '
+                  'the org-level position that scopes when Art.11 applies.',
+        citation='ISO/IEC 27002:2022 §5.34 + GDPR Art.11',
+        role='medium',
+    ),
+
+    # ── Art.23 — Restrictions ──────────────────────────────
+    RelationshipEdge(
+        source_ref='Art.23', source_standard_id='GDPR:2016/679',
+        target_ref='A.5.31', target_standard_id='ISO27001:2022',
+        edge_type='GOVERNANCE',
+        rationale='Legal, statutory, regulatory and contractual requirements '
+                  'is the ISO control that tracks Member State laws restricting '
+                  'data subject rights per Art.23. The register defines which '
+                  'restrictions apply to which jurisdictions the org operates in.',
+        citation='ISO/IEC 27002:2022 §5.31 + GDPR Art.23',
+        role='high',
+    ),
+
+    # ── Art.27 — Representative of non-EU controllers ──────
+    RelationshipEdge(
+        source_ref='A.5.19', source_standard_id='ISO27001:2022',
+        target_ref='Art.27', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='Information security in supplier relationships covers the '
+                  'org\'s engagement of an Art.27 representative — a contracted '
+                  'third party with defined scope + accountability requirements.',
+        citation='ISO/IEC 27002:2022 §5.19 + GDPR Art.27',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='Art.27', source_standard_id='GDPR:2016/679',
+        target_ref='A.5.31', target_standard_id='ISO27001:2022',
+        edge_type='GOVERNANCE',
+        rationale='Legal requirements register captures the org\'s obligation '
+                  'to designate an Art.27 representative when not established '
+                  'in the EU — jurisdictional applicability determined by the '
+                  'register.',
+        citation='ISO/IEC 27002:2022 §5.31 + GDPR Art.27',
+        role='high',
+    ),
+
+    # ── Art.31 — Cooperation with supervisory authority ────
+    RelationshipEdge(
+        source_ref='A.5.24', source_standard_id='ISO27001:2022',
+        target_ref='Art.31', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='Information security incident management planning explicitly '
+                  'covers cooperation with authorities — SA notification workflow '
+                  '+ evidence provision channels are part of the org\'s IR framework.',
+        citation='ISO/IEC 27002:2022 §5.24 + GDPR Art.31',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.5.26', source_standard_id='ISO27001:2022',
+        target_ref='Art.31', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='Response to information security incidents operationalises '
+                  'Art.31 during breach response — the incident handler produces '
+                  'cooperation-ready evidence + records for the SA in real time.',
+        citation='ISO/IEC 27002:2022 §5.26 + GDPR Art.31',
+        role='medium',
+    ),
+
+    # ── Art.39 — Tasks of the DPO ──────────────────────────
+    RelationshipEdge(
+        source_ref='A.5.2', source_standard_id='ISO27001:2022',
+        target_ref='Art.39', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='Information security roles and responsibilities defines the '
+                  'DPO\'s operational tasks under Art.39 — advising the '
+                  'controller, monitoring compliance, cooperating with the SA. '
+                  'The DPO\'s role definition + reporting lines live here.',
+        citation='ISO/IEC 27002:2022 §5.2 + GDPR Art.39',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.5.4', source_standard_id='ISO27001:2022',
+        target_ref='Art.39', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='Management responsibilities ensures top management supports '
+                  'DPO independence + resource allocation for the Art.39 tasks '
+                  '(monitoring, training, cooperating with SAs).',
+        citation='ISO/IEC 27002:2022 §5.4 + GDPR Art.39',
+        role='medium',
+    ),
+
+    # ── Art.40 — Codes of conduct ─────────────────────────
+    RelationshipEdge(
+        source_ref='A.5.31', source_standard_id='ISO27001:2022',
+        target_ref='Art.40', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='Legal / regulatory requirements register — an approved code '
+                  'of conduct is a documented commitment the org adheres to; '
+                  'the register tracks the org\'s participation.',
+        citation='ISO/IEC 27002:2022 §5.31 + GDPR Art.40',
+        role='medium',
+    ),
+
+    # ── Art.42 — Certification ─────────────────────────────
+    RelationshipEdge(
+        source_ref='A.5.36', source_standard_id='ISO27001:2022',
+        target_ref='Art.42', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='Compliance with policies, rules and standards — GDPR '
+                  'certification is an external attestation of the org\'s '
+                  'compliance posture that runs alongside internal ISMS '
+                  'conformity reviews. Both feed the org\'s overall compliance '
+                  'assurance surface.',
+        citation='ISO/IEC 27002:2022 §5.36 + GDPR Art.42',
+        role='high',
+    ),
+
+    # ── Art.82 — Right to compensation and liability ───────
+    RelationshipEdge(
+        source_ref='A.5.28', source_standard_id='ISO27001:2022',
+        target_ref='Art.82', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='Collection of evidence during incident response — Art.82 '
+                  'compensation claims require the controller/processor to '
+                  'produce evidence of their compliance efforts. Chain-of-'
+                  'custody records defend the org against liability.',
+        citation='ISO/IEC 27002:2022 §5.28 + GDPR Art.82',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.5.33', source_standard_id='ISO27001:2022',
+        target_ref='Art.82', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='Protection of records — legal-hold retention of processing '
+                  'activity records enables the org to demonstrate compliance '
+                  'defence per Art.82.3 (org acted with proper care).',
+        citation='ISO/IEC 27002:2022 §5.33 + GDPR Art.82',
+        role='medium',
+    ),
+
+    # ── Art.87 — National identification number ────────────
+    RelationshipEdge(
+        source_ref='A.8.11', source_standard_id='ISO27001:2022',
+        target_ref='Art.87', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='Data masking is the technical safeguard for national ID '
+                  'numbers Art.87 references — Member State law can require '
+                  'pseudonymisation of identifiers in processing contexts, '
+                  'exactly A.8.11\'s purpose.',
+        citation='ISO/IEC 27002:2022 §8.11 + GDPR Art.87',
+        role='high',
+    ),
+
+    # ── Art.88 — Employment context ────────────────────────
+    RelationshipEdge(
+        source_ref='A.6.6', source_standard_id='ISO27001:2022',
+        target_ref='Art.88', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='Confidentiality or non-disclosure agreements — employment-'
+                  'context processing per Art.88 is governed by NDA + employment '
+                  'contract data protection clauses that specify what the '
+                  'employer can process about employees.',
+        citation='ISO/IEC 27002:2022 §6.6 + GDPR Art.88',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.6.5', source_standard_id='ISO27001:2022',
+        target_ref='Art.88', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='Responsibilities after termination or change of employment — '
+                  'Art.88 covers the whole employment lifecycle including access '
+                  'revocation + data handling on termination.',
+        citation='ISO/IEC 27002:2022 §6.5 + GDPR Art.88',
+        role='medium',
+    ),
+
+    # ── Art.89 — Archiving purposes / research / statistics ──
+    RelationshipEdge(
+        source_ref='A.5.33', source_standard_id='ISO27001:2022',
+        target_ref='Art.89', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='Protection of records — archiving purposes per Art.89 '
+                  'require documented safeguards + retention controls, '
+                  'which is A.5.33\'s core scope. The retention schedule + '
+                  'legal-hold mechanisms directly implement Art.89.1 safeguards.',
+        citation='ISO/IEC 27002:2022 §5.33 + GDPR Art.89',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.11', source_standard_id='ISO27001:2022',
+        target_ref='Art.89', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='Data masking — the technical safeguard Art.89.1 names '
+                  'explicitly (pseudonymisation) for research + statistical + '
+                  'archiving purposes.',
+        citation='ISO/IEC 27002:2022 §8.11 + GDPR Art.89',
+        role='high',
+    ),
+
+    # ── Art.90 — Obligations of secrecy ────────────────────
+    RelationshipEdge(
+        source_ref='A.6.6', source_standard_id='ISO27001:2022',
+        target_ref='Art.90', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='Confidentiality / non-disclosure agreements — professional '
+                  'secrecy per Art.90 is a formalized confidentiality obligation '
+                  'that the org\'s NDA framework covers via role-specific '
+                  'confidentiality clauses (legal, medical, etc).',
+        citation='ISO/IEC 27002:2022 §6.6 + GDPR Art.90',
+        role='medium',
+    ),
+]
+
+
 ALL_EDGES: list[RelationshipEdge] = (
     INTRA_ISO_EDGES
     + INTRA_GDPR_EDGES
@@ -6313,4 +6556,5 @@ ALL_EDGES: list[RelationshipEdge] = (
     + ISMS_CONTEXT_LEADERSHIP_GDPR_EDGES
     + SHIP24_COMPLETENESS_EDGES
     + ISO27701_WEAK_TIES_EDGES
+    + SHIP_73_PRIME_GDPR_BRIDGE_EDGES
 )
