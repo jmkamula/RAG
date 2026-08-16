@@ -1,0 +1,100 @@
+ref,title,n_iso_edges,classification,proposed_iso_ref,edge_type,confidence,rationale
+Art.1,Subject-matter and objectives,0,regulatory_internal,,,,
+Art.2,Material scope,0,regulatory_internal,,,,
+Art.3,Territorial scope,0,regulatory_internal,,,,
+Art.4,Definitions,0,regulatory_internal,,,,
+Art.5,Principles relating to processing of personal data,4,already_bridged,,,,
+Art.6,Lawfulness of processing,3,already_bridged,,,,
+Art.7,Conditions for consent,6,already_bridged,,,,
+Art.8,Conditions applicable to child's consent in relation to information society services,1,already_bridged,,,,
+Art.9,Processing of special categories of personal data,5,already_bridged,,,,
+Art.10,Processing of personal data relating to criminal convictions and offences,4,already_bridged,,,,
+Art.11,Processing which does not require identification,0,tenant_facing_bridgeable,A.8.11,IMPLEMENTS,medium,Data masking implements Art.11's provision that controllers should not maintain identifying data solely for compliance purposes — pseudonymization/masking of PII in analytics/test environments removes the identification requirement.
+Art.11,Processing which does not require identification,0,tenant_facing_bridgeable,A.5.34,SUPPORTS,medium,Privacy protection of PII policy defines when identification is needed vs when de-identified data suffices — the org-level position that scopes Art.11.
+Art.12,"Transparent information, communication and modalities for the exercise of the rights of the data subject",4,already_bridged,,,,
+Art.13,Information to be provided where personal data are collected from the data subject,3,already_bridged,,,,
+Art.14,Information to be provided where personal data have not been obtained from the data subject,3,already_bridged,,,,
+Art.15,Right of access by the data subject,4,already_bridged,,,,
+Art.16,Right to rectification,4,already_bridged,,,,
+Art.17,Right to erasure ('right to be forgotten'),7,already_bridged,,,,
+Art.18,Right to restriction of processing,2,already_bridged,,,,
+Art.19,Notification obligation regarding rectification or erasure of personal data or restriction of processing,3,already_bridged,,,,
+Art.20,Right to data portability,4,already_bridged,,,,
+Art.21,Right to object,2,already_bridged,,,,
+Art.22,"Automated individual decision-making, including profiling",3,already_bridged,,,,
+Art.23,Restrictions,0,tenant_facing_bridgeable,A.5.31,GOVERNANCE,high,"Legal, statutory, regulatory and contractual requirements is the ISO control that identifies when Member State law restricts data subject rights — the org must track those restrictions per jurisdiction."
+Art.24,Responsibility of the controller,7,already_bridged,,,,
+Art.25,Data protection by design and by default,6,already_bridged,,,,
+Art.26,Joint controllers,3,already_bridged,,,,
+Art.27,Representatives of controllers or processors not established in the Union,0,tenant_facing_bridgeable,A.5.19,SUPPORTS,medium,Information security in supplier relationships covers the org's engagement of an Art.27 representative — the representative is a contracted third party with defined scope + accountability requirements.
+Art.27,Representatives of controllers or processors not established in the Union,0,tenant_facing_bridgeable,A.5.31,GOVERNANCE,high,Legal requirements register captures the org's obligation to designate a representative when not established in the EU — jurisdictional applicability determined by the register.
+Art.28,Processor,4,already_bridged,,,,
+Art.29,Processing under the authority of the controller or processor,5,already_bridged,,,,
+Art.30,Records of processing activities,5,already_bridged,,,,
+Art.31,Cooperation with the supervisory authority,0,tenant_facing_bridgeable,A.5.24,SUPPORTS,high,Information security incident management planning explicitly covers cooperation with authorities — SA notification workflow + evidence provision channels are part of the org's IR framework.
+Art.31,Cooperation with the supervisory authority,0,tenant_facing_bridgeable,A.5.26,SUPPORTS,medium,Response to information security incidents operationalizes Art.31 during breach response — the incident handler produces cooperation-ready evidence for the SA.
+Art.32,Security of processing,4,already_bridged,,,,
+Art.33,Notification of a personal data breach to the supervisory authority,6,already_bridged,,,,
+Art.34,Communication of a personal data breach to the data subject,2,already_bridged,,,,
+Art.35,Data protection impact assessment,5,already_bridged,,,,
+Art.36,Prior consultation,1,already_bridged,,,,
+Art.37,Designation of the data protection officer,2,already_bridged,,,,
+Art.38,Position of the data protection officer,2,already_bridged,,,,
+Art.39,Tasks of the data protection officer,0,tenant_facing_bridgeable,A.5.2,IMPLEMENTS,high,"Information security roles and responsibilities defines the DPO's operational tasks — advising the controller on Art.39.1 obligations, monitoring compliance, cooperating with the SA. The DPO's role definition lives here."
+Art.39,Tasks of the data protection officer,0,tenant_facing_bridgeable,A.5.4,SUPPORTS,medium,Management responsibilities ensures top management supports DPO independence + resource allocation for the Art.39 tasks.
+Art.40,Codes of conduct,0,tenant_facing_bridgeable,A.5.31,SUPPORTS,medium,Legal / regulatory requirements — an approved code of conduct is a documented commitment the org adheres to; the register tracks the org's participation.
+Art.41,Monitoring of approved codes of conduct,0,tenant_facing_bridgeable,A.5.35,SUPPORTS,low,Independent review of information security — code-of-conduct monitoring body oversight is an independent review mechanism analogous to A.5.35's audit function.
+Art.42,Certification,0,tenant_facing_bridgeable,A.5.36,SUPPORTS,medium,"Compliance with policies, rules and standards — GDPR certification is an external attestation of the org's compliance posture, tracked alongside internal ISMS conformity."
+Art.42,Certification,0,tenant_facing_bridgeable,A.5.1,GOVERNANCE,low,Information security policies — certification claims must be reflected in the org's policy framework.
+Art.43,Certification bodies,0,tenant_facing_bridgeable,A.5.19,SUPPORTS,low,Supplier relationships — the certification body is a third party engaged with defined scope + independence requirements per Art.43. Bridge via supplier assessment.
+Art.44,General principle for transfers,3,already_bridged,,,,
+Art.45,Transfers on the basis of an adequacy decision,4,already_bridged,,,,
+Art.46,Transfers subject to appropriate safeguards,5,already_bridged,,,,
+Art.47,Binding corporate rules,1,already_bridged,,,,
+Art.48,Transfers or disclosures not authorised by Union law,3,already_bridged,,,,
+Art.49,Derogations for specific situations,2,already_bridged,,,,
+Art.50,International cooperation for the protection of personal data,0,regulatory_internal,,,,
+Art.51,Supervisory authority,0,regulatory_internal,,,,
+Art.52,Independence,0,regulatory_internal,,,,
+Art.53,General conditions for the members of the supervisory authority,0,regulatory_internal,,,,
+Art.54,Rules on the establishment of the supervisory authority,0,regulatory_internal,,,,
+Art.55,Competence,0,regulatory_internal,,,,
+Art.56,Competence of the lead supervisory authority,0,regulatory_internal,,,,
+Art.57,Tasks,0,regulatory_internal,,,,
+Art.58,Powers,0,regulatory_internal,,,,
+Art.59,Activity reports,0,regulatory_internal,,,,
+Art.60,Cooperation between the lead supervisory authority and the other supervisory authorities concerned,0,regulatory_internal,,,,
+Art.61,Mutual assistance,0,regulatory_internal,,,,
+Art.62,Joint operations of supervisory authorities,0,regulatory_internal,,,,
+Art.63,Consistency mechanism,0,regulatory_internal,,,,
+Art.64,Opinion of the Board,0,regulatory_internal,,,,
+Art.65,Dispute resolution by the Board,0,regulatory_internal,,,,
+Art.66,Urgency procedure,0,regulatory_internal,,,,
+Art.67,Exchange of information,0,regulatory_internal,,,,
+Art.68,European Data Protection Board,0,regulatory_internal,,,,
+Art.69,Independence,0,regulatory_internal,,,,
+Art.70,Tasks of the Board,0,regulatory_internal,,,,
+Art.71,Reports,0,regulatory_internal,,,,
+Art.72,Procedure,0,regulatory_internal,,,,
+Art.73,Chair,0,regulatory_internal,,,,
+Art.74,Tasks of the Chair,0,regulatory_internal,,,,
+Art.75,Secretariat,0,regulatory_internal,,,,
+Art.76,Confidentiality,0,regulatory_internal,,,,
+Art.77,Right to lodge a complaint with a supervisory authority,0,tenant_facing_unbridgeable,,,,
+Art.78,Right to an effective judicial remedy against a supervisory authority,0,tenant_facing_unbridgeable,,,,
+Art.79,Right to an effective judicial remedy against a controller or processor,0,tenant_facing_unbridgeable,,,,
+Art.80,Representation of data subjects,0,tenant_facing_unbridgeable,,,,
+Art.81,Suspension of proceedings,0,regulatory_internal,,,,
+Art.82,Right to compensation and liability,0,tenant_facing_bridgeable,A.5.28,SUPPORTS,medium,Collection of evidence during incident response — compensation claims under Art.82 require the controller/processor to produce evidence of their compliance efforts. Chain-of-custody records defend the org.
+Art.82,Right to compensation and liability,0,tenant_facing_bridgeable,A.5.33,SUPPORTS,medium,Protection of records — legal-hold retention of processing activity records enables the org to demonstrate compliance defence per Art.82.3.
+Art.83,General conditions for imposing administrative fines,2,already_bridged,,,,
+Art.84,Penalties,0,tenant_facing_unbridgeable,,,,
+Art.85,Processing and freedom of expression and information,2,already_bridged,,,,
+Art.86,Processing and public access to official documents,0,tenant_facing_unbridgeable,,,,
+Art.87,Processing of the national identification number,0,tenant_facing_bridgeable,A.8.11,IMPLEMENTS,medium,Data masking — national ID numbers are the exact use case for pseudonymization/masking Art.87 references.
+Art.88,Processing in the context of employment,0,tenant_facing_bridgeable,A.6.6,SUPPORTS,medium,Confidentiality or non-disclosure agreements — employment-context processing per Art.88 is governed by NDA + employment contract data protection clauses.
+Art.88,Processing in the context of employment,0,tenant_facing_bridgeable,A.6.5,SUPPORTS,medium,Responsibilities after termination — Art.88 requires specific safeguards including post-employment access revocation.
+Art.89,"Safeguards and derogations relating to processing for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes",0,tenant_facing_bridgeable,A.5.33,IMPLEMENTS,high,"Protection of records — archiving purposes per Art.89 require documented safeguards + retention controls, which is A.5.33's core scope."
+Art.89,"Safeguards and derogations relating to processing for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes",0,tenant_facing_bridgeable,A.8.11,SUPPORTS,high,Data masking — the technical safeguard Art.89.1 names explicitly (pseudonymisation) for research + statistical purposes.
+Art.90,Obligations of secrecy,0,tenant_facing_bridgeable,A.6.6,SUPPORTS,medium,"Confidentiality / non-disclosure agreements — professional secrecy per Art.90 is a formalized confidentiality obligation, the org's NDA framework covers it."
+Art.91,Existing data protection rules of churches and religious associations,0,tenant_facing_unbridgeable,,,,
