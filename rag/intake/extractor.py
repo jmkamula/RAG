@@ -685,6 +685,57 @@ _TEMPLATED_MUST_RE   = re.compile(
 _TEMPLATED_SHOULD_RE = re.compile(
     r"<<SHOULD\s+(item:[A-Za-z0-9.]+:[a-z0-9_]+)>>", re.IGNORECASE,
 )
+
+
+# Task #606 (2026-08-15) — catalog membership predicate for template
+# markers. If a tenant disables Word protection and accidentally
+# mangles a hidden `<<MUST item:X:Y>>` marker (typo, split, delete a
+# character), the raw regex above still matches — but the resulting
+# id doesn't exist in the catalog. Without this predicate the
+# extractor would emit a `document_findings` row with a nonexistent
+# checklist_item_id, which the SSoT reader silently drops (no error,
+# no evidence bound). Validating up front + logging the mangled
+# marker gives us an audit trail and a clean skip.
+#
+# Follows the "catalog membership predicate" convention in CLAUDE.md:
+# canonical union of ALL_EVIDENCE_REQUIREMENTS + every
+# DerivedSpec.direct_evidence, walking must_contain + should_contain
+# per EvidenceRequirement. Built lazily so import-time failures
+# (missing curator data, syntax error in document_requirements.py)
+# surface at first extract() call rather than blocking module load.
+_valid_item_ids_cache: set[str] | None = None
+
+
+def _valid_item_ids() -> set[str]:
+    global _valid_item_ids_cache
+    if _valid_item_ids_cache is not None:
+        return _valid_item_ids_cache
+    try:
+        from enrichment.documents.document_requirements import (
+            ALL_EVIDENCE_REQUIREMENTS, ALL_DERIVED_SPECS,
+        )
+    except Exception:
+        # Catalog import failed — return empty set so marker validation
+        # becomes a no-op fallback. Better than crashing an upload.
+        _valid_item_ids_cache = set()
+        return _valid_item_ids_cache
+    valid: set[str] = set()
+    all_ers = list(ALL_EVIDENCE_REQUIREMENTS)
+    for ds in ALL_DERIVED_SPECS:
+        all_ers.extend(ds.direct_evidence or [])
+    for er in all_ers:
+        for ci in list(er.must_contain) + list(er.should_contain):
+            if ci and getattr(ci, "id", None):
+                valid.add(ci.id)
+    _valid_item_ids_cache = valid
+    return _valid_item_ids_cache
+
+
+def _catalog_recognises(item_id: str) -> bool:
+    """Return True iff `item_id` is a curated ChecklistItem id in the
+    canonical union. Used to defensively skip mangled markers on
+    re-upload."""
+    return item_id in _valid_item_ids()
 _TEMPLATED_TEXT_PLACEHOLDER = re.compile(r"<<\s*TEXT\s*>>", re.IGNORECASE)
 _TEMPLATED_NAME_PLACEHOLDER = re.compile(r"<<\s*NAME\s*>>", re.IGNORECASE)
 _TEMPLATED_WHY_LINE         = re.compile(r"^\s*_Why:\s.*?_\s*$", re.MULTILINE)
@@ -1048,8 +1099,22 @@ def _extract_templated_via_table(
                     sample_cell[i]  = cells[i]
 
         bound_in_zone = 0
+        n_cols_mangled = 0
         for i, item_id in enumerate(columns):
             if not col_has_data[i]:
+                continue
+            # Task #606 (2026-08-15) — defensive marker validation.
+            # A `<!-- column: item:X:Y -->` metadata entry that's been
+            # mangled by a tenant edit gets logged + skipped instead of
+            # binding evidence to a nonexistent checklist_item_id.
+            if not _catalog_recognises(item_id):
+                n_cols_mangled += 1
+                logger.warning(
+                    "templated_table_zone: skipping unknown column marker %r "
+                    "(not in ALL_EVIDENCE_REQUIREMENTS ∪ DerivedSpec direct_evidence — "
+                    "likely a mangled TABLE-COLUMNS metadata entry)",
+                    item_id,
+                )
                 continue
             from rag.id_types import item_control_ref
             control_ref = item_control_ref(item_id)
@@ -1080,6 +1145,7 @@ def _extract_templated_via_table(
     doc.extraction_metrics["templated_table_zones_bound"] = n_zones_bound
     doc.extraction_metrics["templated_table_zones_empty"] = n_zones_empty
     doc.extraction_metrics["templated_tabular_rows_captured"] = n_rows_captured
+    doc.extraction_metrics["templated_table_cols_mangled"] = n_cols_mangled
     return findings
 
 
@@ -1092,12 +1158,29 @@ def _extract_templated_via_edit_zones(
     prefill) are skipped — those contribute no new evidence."""
     findings: list[DocumentFinding] = []
     n_skipped_scaffolding = 0
+    n_skipped_mangled     = 0
     for m in edit_zones:
         item_id    = m.group(1)
         zone_text  = m.group(2)
 
         if _is_pure_scaffolding(zone_text):
             n_skipped_scaffolding += 1
+            continue
+
+        # Task #606 (2026-08-15) — defensive marker validation.
+        # If the tenant disabled Word protection and mangled the
+        # hidden `<<MUST item:X:Y>>` marker (typo, split, character
+        # loss), skip + log. Better than binding evidence to a
+        # nonexistent checklist_item_id that the SSoT reader will
+        # silently drop.
+        if not _catalog_recognises(item_id):
+            n_skipped_mangled += 1
+            logger.warning(
+                "templated_edit_zone: skipping unknown marker %r "
+                "(not in ALL_EVIDENCE_REQUIREMENTS ∪ DerivedSpec direct_evidence — "
+                "likely a mangled marker from tenant edit)",
+                item_id,
+            )
             continue
 
         # item:A.5.15:physical_rules → control_ref='A.5.15'
@@ -1125,6 +1208,7 @@ def _extract_templated_via_edit_zones(
     doc.extraction_metrics["templated_edit_zones_total"]  = len(edit_zones)
     doc.extraction_metrics["templated_edit_zones_bound"]  = len(findings)
     doc.extraction_metrics["templated_zones_scaffolding"] = n_skipped_scaffolding
+    doc.extraction_metrics["templated_zones_mangled"]     = n_skipped_mangled
     return findings
 
 
