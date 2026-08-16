@@ -135,6 +135,14 @@ class IntakeTracer:
             # [[llm-narrative-under-discovery-audit-2026-06-26]])
             "distinct_musts_bound", "leaf_musts_in_scope", "yield_ratio_pct",
             "pass2_leaves_targeted", "pass2_findings",
+            # schema_v98 (Ship 74'.a, 2026-08-16) — FindingContract SSoT
+            # counters + Task #606 backward-compat counters. The
+            # allowlist above silently drops any kwarg it doesn't
+            # recognise; forgetting to add new counters here was the
+            # exact bug Ship 74'.a closes.
+            "contract_skip_empty_text", "contract_skip_pure_scaffolding",
+            "contract_skip_mangled_item_id", "contract_skip_unresolvable_control_ref",
+            "templated_zones_scaffolding", "templated_zones_mangled",
         }
         for k, v in metrics.items():
             if k in allowed:
@@ -508,6 +516,16 @@ class DocumentPipeline:
                 yield_ratio_pct       = doc.extraction_metrics.get("yield_ratio_pct"),
                 pass2_leaves_targeted = doc.extraction_metrics.get("pass2_leaves_targeted"),
                 pass2_findings        = doc.extraction_metrics.get("pass2_findings"),
+                # schema_v98 (Ship 74'.a, 2026-08-16) — FindingContract SSoT
+                # counters + Task #606 backward-compat counters. Silent-drop
+                # invisibility was the observability gap Ship 72'.d retro
+                # falsely claimed already closed. Forwarding them here.
+                contract_skip_empty_text              = doc.extraction_metrics.get("contract_skip_empty_text"),
+                contract_skip_pure_scaffolding        = doc.extraction_metrics.get("contract_skip_pure_scaffolding"),
+                contract_skip_mangled_item_id         = doc.extraction_metrics.get("contract_skip_mangled_item_id"),
+                contract_skip_unresolvable_control_ref = doc.extraction_metrics.get("contract_skip_unresolvable_control_ref"),
+                templated_zones_scaffolding = doc.extraction_metrics.get("templated_zones_scaffolding"),
+                templated_zones_mangled     = doc.extraction_metrics.get("templated_zones_mangled"),
             )
 
             logger.info(f"Extracted {len(findings)} findings from {file_name}")
