@@ -1,0 +1,85 @@
+# Per-MUST fingerprint catalog for req:Art.15:dsar_register
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.15:dsar_register"
+target_control: "Art.15"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.15:reg_outcome"
+    description: "Outcome per row (fulfilled / partial under Art.15.4 / refused under Art.12.5 with reason)"
+    excerpt_keywords:
+      - [outcome, fulfilled, right]
+      - [outcome, fulfilled, partial, right]
+      - [fulfilled, partial, right]
+      - [fulfilled, partial, under, right]
+      - [partial, under, right]
+      - [partial, under, art, right]
+      - [under, art, right]
+      - [under, art, refused, right]
+
+  - must_id: "item:Art.15:reg_timing_flag"
+    description: "Timing compliance flag (within 1 month / extended per Art.12.3 / late)"
+    excerpt_keywords:
+      - [timing, flag, right]
+      - [timing, compliance, right]
+      - [timing, compliance, flag, right]
+      - [compliance, flag, right]
+      - [compliance, flag, within, right]
+      - [flag, within, right]
+      - [flag, within, month, right]
+      - [within, month, right]
+
+  - must_id: "item:Art.15:reg_response_date"
+    description: "Date the response was issued"
+    excerpt_keywords:
+      - [response, date, right]
+      - [date, response, right]
+      - [date, response, issued, right]
+      - [response, issued, right]
+      - [per, row, right]
+      - [each, row, right]
+      - [column, containing, right]
+      - [each, entry, right]
+
+  - must_id: "item:Art.15:reg_scope"
+    description: "Scope of the request as understood (full Art.15 / specific data set / repeat copy)"
+    excerpt_keywords:
+      - [scope, request, right]
+      - [scope, request, understood, right]
+      - [request, understood, right]
+      - [request, understood, full, right]
+      - [understood, full, right]
+      - [understood, full, art, right]
+      - [full, art, right]
+      - [full, art, specific, right]
+
+  - must_id: "item:Art.15:reg_requester"
+    description: "Requester identity (verified) or pseudonymous reference where verification used a token"
+    excerpt_keywords:
+      - [requester, identity, right]
+      - [requester, identity, verified, right]
+      - [identity, verified, right]
+      - [identity, verified, pseudonymous, right]
+      - [verified, pseudonymous, right]
+      - [verified, pseudonymous, reference, right]
+      - [pseudonymous, reference, right]
+      - [pseudonymous, reference, verification, right]
+
+  - must_id: "item:Art.15:reg_received_date"
+    description: "Request received date (the start of the Art.12.3 clock) per row"
+    excerpt_keywords:
+      - [received, date, right]
+      - [request, received, right]
+      - [request, received, date, right]
+      - [received, date, start, right]
+      - [date, start, right]
+      - [date, start, art, right]
+      - [start, art, right]
+      - [start, art, clock, right]
+

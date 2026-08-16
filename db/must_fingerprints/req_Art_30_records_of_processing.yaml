@@ -1,0 +1,108 @@
+# Per-MUST fingerprint catalog for req:Art.30:records_of_processing
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.30:records_of_processing"
+target_control: "Art.30"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.30:processor_records"
+    description: "If the org also acts as processor, processor-side records per Art.30.2.a-d are included or kept as a parallel register"
+    excerpt_keywords:
+      - [processor, records]
+      - [org, also, records]
+      - [org, also, acts, records]
+      - [also, acts, records]
+      - [also, acts, processor, records]
+      - [acts, processor, records]
+      - [acts, processor, processor, records]
+      - [processor, processor, records]
+
+  - must_id: "item:Art.30:security"
+    description: "General description of technical and organisational security measures"
+    excerpt_keywords:
+      - [general, description, records]
+      - [general, description, technical, records]
+      - [description, technical, records]
+      - [description, technical, organisational, records]
+      - [technical, organisational, records]
+      - [technical, organisational, security, records]
+      - [organisational, security, records]
+      - [organisational, security, measures, records]
+
+  - must_id: "item:Art.30:retention"
+    description: "Envisaged time limits for erasure per category"
+    excerpt_keywords:
+      - [envisaged, time, records]
+      - [envisaged, time, limits, records]
+      - [time, limits, records]
+      - [time, limits, erasure, records]
+      - [limits, erasure, records]
+      - [limits, erasure, category, records]
+      - [erasure, category, records]
+
+  - must_id: "item:Art.30:transfers"
+    description: "Transfers to third countries or international organisations with safeguards identified"
+    excerpt_keywords:
+      - [transfers, third, records]
+      - [transfers, third, countries, records]
+      - [third, countries, records]
+      - [third, countries, international, records]
+      - [countries, international, records]
+      - [countries, international, organisations, records]
+      - [international, organisations, records]
+      - [international, organisations, safeguards, records]
+
+  - must_id: "item:Art.30:recipients"
+    description: "Categories of recipients per activity (including processors and third parties)"
+    excerpt_keywords:
+      - [categories, recipients, records]
+      - [categories, recipients, activity, records]
+      - [recipients, activity, records]
+      - [recipients, activity, including, records]
+      - [activity, including, records]
+      - [activity, including, processors, records]
+      - [including, processors, records]
+      - [including, processors, third, records]
+
+  - must_id: "item:Art.30:categories_data"
+    description: "Categories of personal data per activity"
+    excerpt_keywords:
+      - [categories, personal, records]
+      - [categories, personal, activity, records]
+      - [personal, activity, records]
+
+  - must_id: "item:Art.30:categories_ds"
+    description: "Categories of data subjects per activity"
+    excerpt_keywords:
+      - [categories, ds, records]
+      - [categories, subjects, records]
+      - [categories, subjects, activity, records]
+      - [subjects, activity, records]
+
+  - must_id: "item:Art.30:purposes"
+    description: "Purposes of the processing stated per activity"
+    excerpt_keywords:
+      - [purposes, processing, records]
+      - [purposes, processing, stated, records]
+      - [processing, stated, records]
+      - [processing, stated, activity, records]
+      - [stated, activity, records]
+
+  - must_id: "item:Art.30:controller_name"
+    description: "Name and contact details of controller (and DPO/representative where appointed)"
+    excerpt_keywords:
+      - [controller, name, records]
+      - [name, contact, records]
+      - [name, contact, controller, records]
+      - [contact, controller, records]
+      - [contact, controller, dpo, records]
+      - [controller, dpo, records]
+      - [controller, dpo, representative, records]
+      - [dpo, representative, records]
+

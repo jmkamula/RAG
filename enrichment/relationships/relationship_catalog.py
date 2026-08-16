@@ -6458,12 +6458,12 @@ SHIP_73_PRIME_GDPR_BRIDGE_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='A.5.33', source_standard_id='ISO27001:2022',
-        target_ref='Art.82', target_standard_id='GDPR:2016/679',
+        target_ref='Art.82.3', target_standard_id='GDPR:2016/679',
         edge_type='SUPPORTS',
         rationale='Protection of records — legal-hold retention of processing '
                   'activity records enables the org to demonstrate compliance '
                   'defence per Art.82.3 (org acted with proper care).',
-        citation='ISO/IEC 27002:2022 §5.33 + GDPR Art.82',
+        citation='ISO/IEC 27002:2022 §5.33 + GDPR Art.82.3',
         role='medium',
     ),
 
@@ -6506,23 +6506,23 @@ SHIP_73_PRIME_GDPR_BRIDGE_EDGES: list[RelationshipEdge] = [
     # ── Art.89 — Archiving purposes / research / statistics ──
     RelationshipEdge(
         source_ref='A.5.33', source_standard_id='ISO27001:2022',
-        target_ref='Art.89', target_standard_id='GDPR:2016/679',
+        target_ref='Art.89.1', target_standard_id='GDPR:2016/679',
         edge_type='IMPLEMENTS',
-        rationale='Protection of records — archiving purposes per Art.89 '
+        rationale='Protection of records — archiving purposes per Art.89.1 '
                   'require documented safeguards + retention controls, '
                   'which is A.5.33\'s core scope. The retention schedule + '
                   'legal-hold mechanisms directly implement Art.89.1 safeguards.',
-        citation='ISO/IEC 27002:2022 §5.33 + GDPR Art.89',
+        citation='ISO/IEC 27002:2022 §5.33 + GDPR Art.89.1',
         role='high',
     ),
     RelationshipEdge(
         source_ref='A.8.11', source_standard_id='ISO27001:2022',
-        target_ref='Art.89', target_standard_id='GDPR:2016/679',
+        target_ref='Art.89.1', target_standard_id='GDPR:2016/679',
         edge_type='SUPPORTS',
         rationale='Data masking — the technical safeguard Art.89.1 names '
                   'explicitly (pseudonymisation) for research + statistical + '
                   'archiving purposes.',
-        citation='ISO/IEC 27002:2022 §8.11 + GDPR Art.89',
+        citation='ISO/IEC 27002:2022 §8.11 + GDPR Art.89.1',
         role='high',
     ),
 

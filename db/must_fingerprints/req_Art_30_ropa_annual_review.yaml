@@ -1,0 +1,73 @@
+# Per-MUST fingerprint catalog for req:Art.30:ropa_annual_review
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.30:ropa_annual_review"
+target_control: "Art.30"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.30:rev_gaps"
+    description: "Gaps identified (missing activity, outdated retention, undocumented transfer) with remediation owner and target date"
+    excerpt_keywords:
+      - [gaps, identified, records]
+      - [gaps, identified, missing, records]
+      - [identified, missing, records]
+      - [identified, missing, activity, records]
+      - [missing, activity, records]
+      - [missing, activity, outdated, records]
+      - [activity, outdated, records]
+      - [activity, outdated, retention, records]
+
+  - must_id: "item:Art.30:rev_register_update"
+    description: "Changes propagated back to the live register with reference to this review"
+    excerpt_keywords:
+      - [changes, propagated, records]
+      - [changes, propagated, back, records]
+      - [propagated, back, records]
+      - [propagated, back, live, records]
+      - [back, live, records]
+      - [back, live, reference, records]
+      - [live, reference, records]
+      - [live, reference, review, records]
+
+  - must_id: "item:Art.30:rev_outcome"
+    description: "Per-activity outcome (no change / amended / retired) recorded"
+    excerpt_keywords:
+      - [activity, outcome, records]
+      - [activity, outcome, change, records]
+      - [outcome, change, records]
+      - [outcome, change, amended, records]
+      - [change, amended, records]
+      - [change, amended, retired, records]
+      - [amended, retired, records]
+      - [amended, retired, recorded, records]
+
+  - must_id: "item:Art.30:rev_reviewer"
+    description: "Reviewer identity and role (DPO, privacy lead, or delegated equivalent)"
+    excerpt_keywords:
+      - [reviewer, identity, records]
+      - [reviewer, identity, role, records]
+      - [identity, role, records]
+      - [identity, role, dpo, records]
+      - [role, dpo, records]
+      - [role, dpo, privacy, records]
+      - [dpo, privacy, records]
+      - [dpo, privacy, lead, records]
+
+  - must_id: "item:Art.30:rev_date"
+    description: "Review date within the planned interval (typically within 12 months of last review)"
+    excerpt_keywords:
+      - [review, date, records]
+      - [review, date, within, records]
+      - [date, within, records]
+      - [date, within, planned, records]
+      - [within, planned, records]
+      - [within, planned, interval, records]
+      - [planned, interval, records]
+      - [planned, interval, typically, records]
+

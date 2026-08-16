@@ -4599,6 +4599,39 @@ EVAL_CASES = [
             "is respected."
         ),
     ),
+
+    # ── Ship 73' addendum — Art.85 eval coverage (Task #595 close-out)
+    # Wide GDPR curation audit surfaced Art.85 as the last article
+    # without eval coverage. The article is the freedom-of-expression
+    # derogation: Member States shall reconcile privacy with journalism /
+    # academic / artistic / literary expression. Curated as a 4-leaf
+    # spine (derogation_application_procedure + national_law_derogation_
+    # register + applicable_activities_scope + program_review); mirrors
+    # the calibration shape of Art.15 (case #45) and Art.30 (case #44).
+    EvalCase(
+        id=228,
+        query="pending engine verdict for Art.85",
+        tags=["posture", "engine", "stage2", "multi_leaf", "gdpr", "ship73"],
+        expected_refs=["Art.85"],
+        expected_type="posture_check",
+        shape="stage2",
+        must_contain=[],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Ship 73'.c addendum (2026-08-16, Task #595 close-out). "
+            "Locks Art.85 as multi-leaf — freedom of expression / "
+            "journalism / academic / artistic / literary expression "
+            "derogation. 4-leaf spine: derogation_application_procedure "
+            "+ national_law_derogation_register + applicable_activities_"
+            "scope + program_review. Stage-2 list_one surface; '0/4' is "
+            "the multi-leaf signature. Verifies wide-audit close-out "
+            "actually reaches the chat surface."
+        ),
+    ),
 ]
 
 

@@ -1,0 +1,73 @@
+# Per-MUST fingerprint catalog for req:Art.30:data_flow_inventory
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.30:data_flow_inventory"
+target_control: "Art.30"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.30:dfi_retention"
+    description: "Retention period per system or per data category — feeds Art.30.1.f"
+    excerpt_keywords:
+      - [dfi, retention, records]
+      - [retention, period, records]
+      - [retention, period, category, records]
+      - [period, category, records]
+      - [period, category, feeds, records]
+      - [category, feeds, records]
+      - [category, feeds, art, records]
+      - [feeds, art, records]
+
+  - must_id: "item:Art.30:dfi_transfers"
+    description: "Third-country transfers identified per flow with safeguards (SCCs, adequacy, BCRs) — feeds Art.30.1.e"
+    excerpt_keywords:
+      - [dfi, transfers, records]
+      - [third, country, records]
+      - [third, country, transfers, records]
+      - [country, transfers, records]
+      - [country, transfers, identified, records]
+      - [transfers, identified, records]
+      - [transfers, identified, flow, records]
+      - [identified, flow, records]
+
+  - must_id: "item:Art.30:dfi_recipients"
+    description: "External recipients identified per flow (processors, joint controllers, third parties) — feeds Art.30.1.d"
+    excerpt_keywords:
+      - [dfi, recipients, records]
+      - [external, recipients, records]
+      - [external, recipients, identified, records]
+      - [recipients, identified, records]
+      - [recipients, identified, flow, records]
+      - [identified, flow, records]
+      - [identified, flow, processors, records]
+      - [flow, processors, records]
+
+  - must_id: "item:Art.30:dfi_flows"
+    description: "Data flows between systems documented (sources, destinations, integration mechanism)"
+    excerpt_keywords:
+      - [dfi, flows, records]
+      - [flows, between, records]
+      - [flows, between, documented, records]
+      - [between, documented, records]
+      - [between, documented, sources, records]
+      - [documented, sources, records]
+      - [documented, sources, destinations, records]
+      - [sources, destinations, records]
+
+  - must_id: "item:Art.30:dfi_systems"
+    description: "Systems holding personal data enumerated (production systems, SaaS, backups, analytics, archives)"
+    excerpt_keywords:
+      - [holding, personal, records]
+      - [holding, personal, enumerated, records]
+      - [personal, enumerated, records]
+      - [personal, enumerated, production, records]
+      - [enumerated, production, records]
+      - [enumerated, production, saas, records]
+      - [production, saas, records]
+      - [production, saas, backups, records]
+

@@ -1,0 +1,97 @@
+# Per-MUST fingerprint catalog for req:Art.15:dsar_process_review
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.15:dsar_process_review"
+target_control: "Art.15"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.15:rev_identity_pair_30"
+    description: "Bidirectional Art.15 ↔ Art.30 RoPA pair check — every system the review period's DSARs actually queried is captured in the data flow invento"
+    excerpt_keywords:
+      - [identity, pair, 30, right]
+      - [bidirectional, art, right]
+      - [bidirectional, art, art, right]
+      - [art, art, right]
+      - [art, art, ropa, right]
+      - [art, ropa, right]
+      - [art, ropa, pair, right]
+      - [ropa, pair, right]
+
+  - must_id: "item:Art.15:rev_corrective"
+    description: "Corrective actions to the procedure with owner and target date"
+    excerpt_keywords:
+      - [corrective, actions, right]
+      - [corrective, actions, owner, right]
+      - [actions, owner, right]
+      - [actions, owner, target, right]
+      - [owner, target, right]
+      - [owner, target, date, right]
+      - [target, date, right]
+      - [per, revocation, right]
+
+  - must_id: "item:Art.15:rev_defects"
+    description: "Defects identified (late responses, refusals, supervisory-authority complaints) referenced"
+    excerpt_keywords:
+      - [defects, identified, right]
+      - [defects, identified, late, right]
+      - [identified, late, right]
+      - [identified, late, responses, right]
+      - [late, responses, right]
+      - [late, responses, refusals, right]
+      - [responses, refusals, right]
+      - [responses, refusals, supervisory, right]
+
+  - must_id: "item:Art.15:rev_timing"
+    description: "Timing metric — percentage within one month, count of extensions used, count of late responses"
+    excerpt_keywords:
+      - [timing, metric, right]
+      - [timing, metric, percentage, right]
+      - [metric, percentage, right]
+      - [metric, percentage, within, right]
+      - [percentage, within, right]
+      - [percentage, within, one, right]
+      - [within, one, right]
+      - [within, one, month, right]
+
+  - must_id: "item:Art.15:rev_volume"
+    description: "Volume metric — number of DSARs received in the review period"
+    excerpt_keywords:
+      - [volume, metric, right]
+      - [volume, metric, number, right]
+      - [metric, number, right]
+      - [metric, number, dsars, right]
+      - [number, dsars, right]
+      - [number, dsars, received, right]
+      - [dsars, received, right]
+      - [dsars, received, review, right]
+
+  - must_id: "item:Art.15:rev_reviewer"
+    description: "Reviewer identity and role (DPO, privacy lead, or delegated equivalent)"
+    excerpt_keywords:
+      - [reviewer, identity, right]
+      - [reviewer, identity, role, right]
+      - [identity, role, right]
+      - [identity, role, dpo, right]
+      - [role, dpo, right]
+      - [role, dpo, privacy, right]
+      - [dpo, privacy, right]
+      - [dpo, privacy, lead, right]
+
+  - must_id: "item:Art.15:rev_date"
+    description: "Review date within the planned interval (typically within 12 months of last review)"
+    excerpt_keywords:
+      - [review, date, right]
+      - [review, date, within, right]
+      - [date, within, right]
+      - [date, within, planned, right]
+      - [within, planned, right]
+      - [within, planned, interval, right]
+      - [planned, interval, right]
+      - [planned, interval, typically, right]
+

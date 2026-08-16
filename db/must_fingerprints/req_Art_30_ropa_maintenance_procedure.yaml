@@ -1,0 +1,73 @@
+# Per-MUST fingerprint catalog for req:Art.30:ropa_maintenance_procedure
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.30:ropa_maintenance_procedure"
+target_control: "Art.30"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.30:proc_dpia_gate"
+    description: "Linkage to Art.35 DPIA — high-risk new processing requires DPIA before register entry is finalised"
+    excerpt_keywords:
+      - [dpia, gate, records]
+      - [linkage, art, records]
+      - [linkage, art, dpia, records]
+      - [art, dpia, records]
+      - [art, dpia, high, records]
+      - [dpia, high, records]
+      - [dpia, high, risk, records]
+      - [high, risk, records]
+
+  - must_id: "item:Art.30:proc_dpa_gate"
+    description: "Linkage to Art.28 DPA process — adding a new processor cannot complete without DPA and register update"
+    excerpt_keywords:
+      - [dpa, gate, records]
+      - [linkage, art, records]
+      - [linkage, art, dpa, records]
+      - [art, dpa, records]
+      - [art, dpa, adding, records]
+      - [dpa, adding, records]
+      - [dpa, adding, new, records]
+      - [adding, new, records]
+
+  - must_id: "item:Art.30:proc_update_path"
+    description: "Path from trigger to register entry stated (who notifies, who reviews, who approves the entry)"
+    excerpt_keywords:
+      - [update, path, records]
+      - [path, trigger, records]
+      - [path, trigger, stated, records]
+      - [trigger, stated, records]
+      - [trigger, stated, notifies, records]
+      - [stated, notifies, records]
+      - [stated, notifies, reviews, records]
+      - [notifies, reviews, records]
+
+  - must_id: "item:Art.30:proc_triggers"
+    description: "Update triggers enumerated (new system, new purpose, new processor, new third-country transfer, retention change, DPIA outcome)"
+    excerpt_keywords:
+      - [update, triggers, records]
+      - [update, triggers, enumerated, records]
+      - [triggers, enumerated, records]
+      - [triggers, enumerated, new, records]
+      - [enumerated, new, records]
+      - [enumerated, new, new, records]
+      - [new, new, records]
+      - [new, new, purpose, records]
+
+  - must_id: "item:Art.30:proc_maintainer"
+    description: "Named maintainer (DPO, privacy lead, or controller's designate) with documented responsibility for register accuracy"
+    excerpt_keywords:
+      - [named, maintainer, records]
+      - [named, maintainer, dpo, records]
+      - [maintainer, dpo, records]
+      - [maintainer, dpo, privacy, records]
+      - [dpo, privacy, records]
+      - [dpo, privacy, lead, records]
+      - [privacy, lead, records]
+      - [privacy, lead, controller, records]
+
