@@ -353,26 +353,36 @@ def _extract_via_consensus(
     cfg = default_config().with_overrides(llm_arbiter_enabled=True)
     result = run_extraction_consensus(doc, scoped_leaf_ids, cfg)
 
-    # Materialise accepted verdicts as DocumentFindings
+    # Ship 75'.c — route consensus emits through FINDING_CONTRACT.bind()
+    # so the SSoT's skip gates (EMPTY_TEXT / PURE_SCAFFOLDING / MANGLED_ITEM_ID
+    # / UNRESOLVABLE_REF) protect the consensus path. Upstream: verdict
+    # aggregation + no-excerpt-auto-drop invariant + LLM arbiter zone all
+    # still run BEFORE this materialisation loop.
+    from rag.intake.finding_contract import FINDING_CONTRACT, ExtractedCandidate
     findings: list[DocumentFinding] = []
     for v in result.accepted():
         leaf_id, must_id = v.candidate
         if not v.control_ref or not v.standard_id:
             continue   # fingerprint metadata missing — cannot bind
-        findings.append(DocumentFinding(
-            upload_id         = doc.upload_id or "",
-            tenant_id         = "",
-            document_name     = doc.original_name,
-            control_ref       = v.control_ref,
-            standard_id       = v.standard_id,
-            finding           = "Comply",
-            evidence_text     = (v.fingerprint_excerpt or "")[:2000],
-            confidence        = "medium",
-            checklist_item_id = must_id,
-            extraction_path   = "consensus",
-            chunk_id          = f"cons:{v.control_ref}",
-            inference_source  = "fingerprint_match",   # keep compat with writer
-        ))
+        candidate = ExtractedCandidate(
+            item_id          = must_id,
+            excerpt_text     = (v.fingerprint_excerpt or "")[:2000],
+            document_name    = doc.original_name,
+            upload_id        = doc.upload_id or "",
+            control_ref      = v.control_ref,
+            standard_id      = v.standard_id,
+            finding          = "Comply",
+            confidence       = "medium",
+            extraction_path  = "consensus",
+            chunk_id         = f"cons:{v.control_ref}",
+            inference_source = "fingerprint_match",   # keep compat with writer
+            source_context   = {"path": "consensus", "leaf_id": leaf_id},
+        )
+        bind_result = FINDING_CONTRACT.bind(
+            candidate, metrics=doc.extraction_metrics,
+        )
+        if bind_result.finding is not None:
+            findings.append(bind_result.finding)
 
     # Persist telemetry — silent-fail. Writer opens its own connection.
     try:
@@ -543,20 +553,38 @@ def _run_critic_verifier_pass(
             if not std_id and doc.standard_ids:
                 std_id = doc.standard_ids[0]
 
-            results.append(DocumentFinding(
-                upload_id         = doc.upload_id or "",
-                tenant_id         = "",
-                document_name     = doc.original_name,
-                control_ref       = entry["control_ref"],
-                standard_id       = std_id or "ISO27001:2022",
-                finding           = "Comply",
-                evidence_text     = quote,
-                confidence        = entry.get("confidence", "medium"),
-                checklist_item_id = entry.get("checklist_item_id"),
-                extraction_path   = "critic_verifier",
-                chunk_id          = f"cv:{entry['control_ref']}",
-                inference_source  = None,   # DB default 'extracted' — same treatment as LLM pass-1
-            ))
+            # Ship 75'.d — route critic-verifier emits through FINDING_CONTRACT.
+            # Upstream gates (grounding + content-shape + semantic-fit) already
+            # ran above. The contract's skip-reason gates (EMPTY_TEXT /
+            # PURE_SCAFFOLDING / MANGLED_ITEM_ID / UNRESOLVABLE_REF) are
+            # additive safety net protecting the writer from LLM-quirks
+            # (e.g. an LLM output with null checklist_item_id now surfaces
+            # as `contract_skip_mangled_item_id` rather than a bare row).
+            from rag.intake.finding_contract import (
+                FINDING_CONTRACT, ExtractedCandidate,
+            )
+            candidate = ExtractedCandidate(
+                item_id          = entry.get("checklist_item_id") or "",
+                excerpt_text     = quote,
+                document_name    = doc.original_name,
+                upload_id        = doc.upload_id or "",
+                control_ref      = entry["control_ref"],
+                standard_id      = std_id or "ISO27001:2022",
+                finding          = "Comply",
+                confidence       = entry.get("confidence", "medium"),
+                extraction_path  = "critic_verifier",
+                chunk_id         = f"cv:{entry['control_ref']}",
+                inference_source = None,   # DB default 'extracted' — same treatment as LLM pass-1
+                source_context   = {
+                    "path":     "critic_verifier",
+                    "bucket":   entry.get("_source_bucket"),
+                },
+            )
+            bind_result = FINDING_CONTRACT.bind(
+                candidate, metrics=doc.extraction_metrics,
+            )
+            if bind_result.finding is not None:
+                results.append(bind_result.finding)
 
         # Telemetry — findings raw/kept, rejections, extensions
         doc.extraction_metrics["critic_confirmed_raw"] = len(parsed.get("confirmed") or [])
