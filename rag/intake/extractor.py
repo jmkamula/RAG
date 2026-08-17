@@ -44,6 +44,38 @@ MAX_CONTROLS_PER_CALL = 25
 MAX_SECTION_TOKENS = 80_000   # ~320k chars per section call
 
 
+def _extraction_mode() -> str:
+    """Ship 78'.b/e — canonical env-var interpreter for the extraction
+    mode. Returns one of "union" (default), "consensus_only", or
+    "critic_only". Legacy pre-Ship-78 semantics preserved:
+      - "1" / "true" / "yes" / "on"  → union (consensus IS active)
+      - "0" / "false" / "no" / "off" → critic_only (consensus disabled)
+
+    Other callers (rag/intake/doc_pipeline.py etc.) that want to know
+    "is consensus active in this run?" should use is_consensus_active()
+    instead of reading the env directly. Ship 78'.e retired the ==
+    "1"-means-consensus-mode reads that broke under union default.
+    """
+    raw = os.getenv("USE_CONSENSUS_EXTRACTION", "union").lower()
+    if raw in ("union", "1", "true", "yes", "on", ""):
+        return "union"
+    if raw in ("consensus_only", "only"):
+        return "consensus_only"
+    if raw in ("critic_only", "0", "false", "no", "off"):
+        return "critic_only"
+    # Unrecognised value — treat as union (fail-open to the default).
+    return "union"
+
+
+def is_consensus_active() -> bool:
+    """Ship 78'.e — helper for consumers that used to check
+    `USE_CONSENSUS_EXTRACTION == "1"`. Under Ship 78' union mode,
+    consensus is active in both `union` (default) and
+    `consensus_only`. Only `critic_only` disables it.
+    """
+    return _extraction_mode() != "critic_only"
+
+
 def extract(
     doc:       ParsedDocument,
     controls:  list[dict],    # [{ref, title, standard_id}] from Neo4j
@@ -291,9 +323,9 @@ def extract(
     # Serial execution: consensus first (~50s), critic second (~60s).
     # Failure isolation: each path wrapped in try/except so one
     # failure doesn't block the other's findings.
-    _mode = os.getenv("USE_CONSENSUS_EXTRACTION", "union").lower()
-    _run_consensus = _mode not in ("critic_only", "0", "false", "no", "off")
-    _run_critic    = _mode not in ("consensus_only", "only")
+    _mode = _extraction_mode()
+    _run_consensus = _mode != "critic_only"
+    _run_critic    = _mode != "consensus_only"
 
     consensus_findings: list[DocumentFinding] = []
     if _run_consensus:

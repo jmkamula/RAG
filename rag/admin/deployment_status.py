@@ -194,11 +194,17 @@ def _tenant_summary(pool) -> dict[str, Any]:
 
 
 def _feature_flags() -> dict[str, Any]:
-    """Snapshot of runtime feature flags. Booleans only."""
+    """Snapshot of runtime feature flags."""
+    # Ship 78'.e — extraction_mode replaces the pre-Ship-78 boolean
+    # `consensus_extraction`. Under Ship 78' the default is `union`
+    # (both consensus + critic run), so a boolean can't cleanly
+    # represent the 3 modes. Callers that want the pre-Ship-78 signal
+    # can check `extraction_mode != 'critic_only'`.
+    from rag.intake.extractor import _extraction_mode
     return {
-        "consensus_extraction": os.environ.get("USE_CONSENSUS_EXTRACTION") == "1",
-        "otel_enabled":         os.environ.get("OTEL_ENABLED") == "1",
-        "privacy_level":        os.environ.get("OTEL_PRIVACY_LEVEL") or "unknown",
+        "extraction_mode":       _extraction_mode(),
+        "otel_enabled":          os.environ.get("OTEL_ENABLED") == "1",
+        "privacy_level":         os.environ.get("OTEL_PRIVACY_LEVEL") or "unknown",
     }
 
 

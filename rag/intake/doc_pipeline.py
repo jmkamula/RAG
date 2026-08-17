@@ -165,6 +165,12 @@ class IntakeTracer:
             "leaves_unfingerprinted_kept",
             "templated_findings", "templated_xlsx_findings",
             "templated_edit_zones_total", "templated_edit_zones_bound",
+            # schema_v101 (Ship 78'.d, 2026-08-17) — union-extractor
+            # observability. Ship 78'.b introduced these on
+            # doc.extraction_metrics; Ship 78'.d promotes them alongside
+            # eval + external API dogfood work.
+            "union_from_consensus", "union_from_critic",
+            "union_deduped_count",
         }
         for k, v in metrics.items():
             if k in allowed:
@@ -399,8 +405,15 @@ class DocumentPipeline:
             # available for consensus signals. Enricher assigns per-doc
             # standard_ids based on doc content; consensus needs the full
             # framework surface to attribute cross-framework evidence.
+            # Ship 78'.e — replaced env-var check with is_consensus_active()
+            # helper. Under Ship 78' union mode (default), consensus IS
+            # active so the widening should apply. The pre-Ship-78
+            # `== "1"` check assumed consensus was a separate mode; now
+            # it's part of the union by default. See extractor.py
+            # _extraction_mode() for the canonical semantics.
             std_ids_for_load = doc.standard_ids
-            if os.getenv("USE_CONSENSUS_EXTRACTION") == "1":
+            from rag.intake.extractor import is_consensus_active
+            if is_consensus_active():
                 std_ids_for_load = self._all_graph_standards() or doc.standard_ids
                 if std_ids_for_load != doc.standard_ids:
                     logger.info(
@@ -570,6 +583,10 @@ class DocumentPipeline:
                 templated_xlsx_findings    = doc.extraction_metrics.get("templated_xlsx_findings"),
                 templated_edit_zones_total = doc.extraction_metrics.get("templated_edit_zones_total"),
                 templated_edit_zones_bound = doc.extraction_metrics.get("templated_edit_zones_bound"),
+                # schema_v101 (Ship 78'.d) — union-extractor observability.
+                union_from_consensus = doc.extraction_metrics.get("union_from_consensus"),
+                union_from_critic    = doc.extraction_metrics.get("union_from_critic"),
+                union_deduped_count  = doc.extraction_metrics.get("union_deduped_count"),
             )
 
             logger.info(f"Extracted {len(findings)} findings from {file_name}")
@@ -1171,7 +1188,12 @@ class DocumentPipeline:
         # facing feature. DEMONSTRATES overlay in posture_loader remains
         # as belt-and-suspenders backstop when consensus doesn't surface
         # a direct finding.
-        if os.getenv("USE_CONSENSUS_EXTRACTION") == "1":
+        # Ship 78'.e — is_consensus_active() replaces the pre-Ship-78
+        # env-var check. Phase 3 filter still bypasses when consensus
+        # is active (default under Ship 78' union mode); only
+        # critic_only mode falls through to the filter.
+        from rag.intake.extractor import is_consensus_active
+        if is_consensus_active():
             logger.info(
                 f"Phase 3 filter BYPASSED under consensus "
                 f"({len(all_controls)} controls in scope)"
