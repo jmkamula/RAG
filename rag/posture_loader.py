@@ -321,7 +321,9 @@ def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
             # Codified rule: [[feedback-engine-should-not-clobber-tenant-na]]
             # + Ship 66'.a schema split. This is the enforcement point
             # for the read path; Ship 66'.d closes the write path.
-            if row.get("applicability_status") == "na":
+            # Ship 76'.b — migrate to shared SSoT predicate.
+            from rag.posture.scope import row_in_scope
+            if not row_in_scope(row):
                 continue
 
             # Two paths trigger the in-memory overlay:

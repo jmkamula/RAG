@@ -125,20 +125,30 @@ def _rank_posture_refs(cf: CaseFile, limit: int) -> list[str]:
     ranked: list[str] = []
     seen: set[str] = set()
 
-    def _add(ref: str, allow_na: bool = False):
+    def _add(ref: str, allow_scoped_out: bool = False):
+        # Ship 76'.b — migrate scope check from legacy `finding == "N/A"`
+        # to Ship 66'.a's SSoT column `applicability_status`. Zero
+        # behavior change today (data mirrors 1:1) but correct SSoT
+        # going forward. The `allow_scoped_out` gate preserves the
+        # Ship 66'.c grounding rule: refs the tenant scoped OUT surface
+        # here when explicitly cited or in the active session so the
+        # LLM has grounding to acknowledge them.
         if ref in seen or ref not in posture:
             return
         f = posture[ref].get("finding")
-        eligible = ("NC", "OFI", "Comply") + (("N/A",) if allow_na else ())
-        if f not in eligible:
+        substantive = f in ("NC", "OFI", "Comply")
+        if substantive:
+            ranked.append(ref)
+            seen.add(ref)
             return
-        ranked.append(ref)
-        seen.add(ref)
+        if allow_scoped_out and not cf.in_scope(ref):
+            ranked.append(ref)
+            seen.add(ref)
 
     for r in cf.cited_refs:
-        _add(r, allow_na=True)
+        _add(r, allow_scoped_out=True)
     for r in cf.active_session_refs:
-        _add(r, allow_na=True)
+        _add(r, allow_scoped_out=True)
     for target in ("NC", "OFI", "Comply"):
         for ref, rec in posture.items():
             if len(ranked) >= limit:
@@ -278,28 +288,19 @@ def _render_obligations(
     # POSTURE section still surfaces cited N/A refs with a [N/A] tag
     # so the LLM has grounding to acknowledge them.
     #
-    # Ship 66'.d — check applicability_status (source of truth per
-    # Ship 66'.a schema split) instead of the legacy finding value.
-    # Both are equivalent today (data migrated 1:1), but new checks
-    # should prefer applicability_status.
-    posture = cf.posture_by_ref()
-    def _in_scope(ref: str) -> bool:
-        rec = posture.get(ref)
-        if not rec:
-            return True
-        return rec.get("applicability_status") != "na"
-
+    # Ship 76'.b — migrate to CaseFile.in_scope() SSoT predicate
+    # (was inline lambda since Ship 66'.d; consolidated in Ship 76').
     cited = set(cf.cited_refs)
     ordered: list = []
     seen_refs: set[str] = set()
     # cited-refs first
     for n in primary:
-        if n.ref in cited and n.ref not in seen_refs and _in_scope(n.ref):
+        if n.ref in cited and n.ref not in seen_refs and cf.in_scope(n.ref):
             ordered.append(n)
             seen_refs.add(n.ref)
     # then any remaining
     for n in primary:
-        if n.ref not in seen_refs and _in_scope(n.ref):
+        if n.ref not in seen_refs and cf.in_scope(n.ref):
             ordered.append(n)
             seen_refs.add(n.ref)
         if len(ordered) >= max_items:

@@ -336,7 +336,9 @@ def approve_engine_proposal(
             # verdict, the tenant must first change the scoping
             # (applicability_status → 'applicable') — a separate,
             # explicit action.
-            if applicability_status == "na":
+            # Ship 76'.b — migrate to shared SSoT predicate.
+            from rag.posture.scope import status_in_scope
+            if not status_in_scope(applicability_status):
                 return {
                     "ok": False, "reason": "control_out_of_scope",
                     "control_ref": control_ref,

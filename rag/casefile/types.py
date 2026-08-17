@@ -370,6 +370,30 @@ class CaseFile:
             return False
         return rec.get("finding") in _ASSESSED_FINDINGS
 
+    def in_scope(self, ref: str) -> bool:
+        """True iff the ref is in-scope for this tenant.
+
+        Ship 76'.b SSoT predicate — reads Ship 66'.a's scope column
+        `posture_controls.applicability_status`. Only explicit
+        `applicability_status='na'` drops. Missing rows treated as
+        in-scope — a ref not in posture_controls is either unassessed
+        but applicable, or not curated at all.
+
+        Callers without a CaseFile should use
+        `rag.posture.scope.is_ref_in_scope(pg_conn, tenant_id, ref)` —
+        same predicate, read directly from Postgres.
+
+        Use this predicate anywhere a tenant-facing surface renders a
+        ref pulled from graph traversal / demonstrator / cross-role
+        neighbor / bulk posture query. Ship 76'.c/d will migrate the
+        LEAK sites; 76'.b consolidates the 3 existing enforcement
+        points onto this method.
+        """
+        rec = self.posture_for(ref)
+        if not rec:
+            return True
+        return rec.get("applicability_status") != "na"
+
     def needs_draft_tag(self, ref: str) -> bool:
         """True if the ref's posture is assessed but NOT confirmed —
         the [DRAFT] tag on output is required in this case (see
