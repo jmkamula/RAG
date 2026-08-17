@@ -77,14 +77,17 @@ art_30_expected:
     quote: RoPA field "Categories of Data Subjects: Whose data is being processed"
 
   - must_id: item:Art.30:controller_name
-    verdict: not_satisfies
-    confidence: high
-    quote: ""
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 1 line 21: "Arion Networks s.r.o." (controller name
+      identified). Doc-control header: "Owner: DPO" (DPO exists).
+      Neither: DPO contact details + controller contact details.
     notes: |
-      Art.30.1.a requires per-activity controller name + contact
-      details + DPO. RoPA field list (Section 4) doesn't include
-      any of these. Doc-header Owner: DPO is meta-header, not
-      per-activity record.
+      Revised on second pass. Art.30.1.a expects name + contact
+      of controller and (where appointed) DPO. Doc has name +
+      DPO existence but no contact details. Partial reflects
+      the split.
 
   - must_id: item:Art.30:processor_records
     verdict: partial
@@ -470,29 +473,110 @@ b_8_2_6_expected:
       Section 4 has Subprocessors field + Section 5 Step 4
       "significant change" trigger covers subprocessor changes.
 
-# ── A.5.34 bulk not_satisfies ────────────────────────────────────────
-# RoPA procedure is NOT the privacy policy artefact. All 27 A.5.34
-# MUSTs are wrong-artefact false positives. Enumerated for extractor
-# diff usability.
+# ── A.5.34 (ISO 27001 — Privacy and PII Protection) ──────────────────
+# 4 leaves × 27 MUSTs. IMPORTANT SECOND-PASS CORRECTION:
+#
+# A.5.34 has 4 leaves. Only 3 of them are wrong-artefact for a RoPA:
+#   - privacy_and_pii_protection_policy   (8 MUSTs) — wrong (policy)
+#   - privacy_applicability_scope         (5 MUSTs) — wrong (scope stmt)
+#   - privacy_program_review              (9 MUSTs) — wrong (program review)
+#
+# The 4th leaf — pii_processing_register (8 MUSTs) — IS THE SAME
+# ARTEFACT as the RoPA. Its MUSTs directly overlap with Art.30's
+# records_of_processing MUSTs. My first-pass bulk not_satisfies for
+# all 27 was wrong — the register leaf gets per-MUST treatment.
 
 a_5_34_expected:
-  bulk_not_satisfies: all_27_musts
-  rationale: |
-    Same as DPIA: RoPA is a per-activity register procedure, not a
-    Privacy Policy nor a Privacy Applicability Scope statement nor a
-    Privacy Program Review. Any A.5.34 finding on this doc is a
-    false positive for the extractor.
-  # Full enumeration same as dpia_expected.yaml (see for the list).
-  # Not repeated here to keep this file scannable; extractor
-  # comparison scripts will treat all A.5.34 MUSTs as not_satisfies
-  # for this doc by default.
 
-# ── Summary counts ──────────────────────────────────────────────────
+  # req:A.5.34:pii_processing_register — 8 MUSTs
+  # SAME ARTEFACT as RoPA. Per-MUST verdicts mirror Art.30 register
+  # verdicts because MUST text is essentially the same.
+  - must_id: item:A.5.34:pii_inventory
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Categories of PII: Types of personal data involved"
+  - must_id: item:A.5.34:reg_controls_applied
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Technical & Organizational Measures"
+  - must_id: item:A.5.34:reg_data_subjects
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Categories of Data Subjects"
+  - must_id: item:A.5.34:reg_lawful_basis
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Legal Basis: Lawful basis (e.g. consent, contract, legal obligation)"
+  - must_id: item:A.5.34:reg_owner_per_activity
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 5 Step 1: "business owner must notify the Data
+      Protection & Risk Manager". Owner exists but not as a
+      register field per activity.
+  - must_id: item:A.5.34:reg_purposes
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Purpose of Processing"
+  - must_id: item:A.5.34:reg_retention
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Retention Period"
+  - must_id: item:A.5.34:reg_transfers
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "International Transfers"
+
+  # req:A.5.34:privacy_and_pii_protection_policy — 8 MUSTs
+  # Wrong artefact: RoPA procedure ≠ privacy policy.
+  a_5_34_privacy_policy_bulk_not_satisfies:
+    verdict: not_satisfies
+    confidence: high
+    rationale: |
+      RoPA doc is not the privacy policy artefact. Applicable
+      MUSTs: applicable_laws, breach_handling, data_subject_rights,
+      lawful_basis, owner, retention_minimisation,
+      security_controls_ref, transfer_restrictions. All 8 →
+      not_satisfies/high.
+
+  # req:A.5.34:privacy_applicability_scope — 5 MUSTs
+  # Wrong artefact. Note: scope_controller_role is borderline because
+  # the RoPA has "Controller or Processor Role" per activity, which
+  # is register-level not scope-statement-level. Reviewer may argue
+  # it belongs in the register leaf. Left as not_satisfies for
+  # consistency with the artefact classification.
+  a_5_34_scope_bulk_not_satisfies:
+    verdict: not_satisfies
+    confidence: high
+    rationale: |
+      RoPA doc is not a Privacy Applicability Scope statement.
+      Applicable MUSTs: scope_controller_role, scope_data_subjects,
+      scope_jurisdictions, scope_privacy_laws,
+      scope_regulated_activities. All 5 → not_satisfies/high.
+      Reviewer flag: scope_controller_role is arguably captured by
+      the RoPA "Controller or Processor Role" field — depends on
+      whether that's a scope statement or a register annotation.
+
+  # req:A.5.34:privacy_program_review — 9 MUSTs
+  # Wrong artefact. RoPA has its own review (Section 5 Step 4 +
+  # Section 7) but that reviews the RoPA REGISTER, not the whole
+  # privacy program.
+  a_5_34_program_review_bulk_not_satisfies:
+    verdict: not_satisfies
+    confidence: high
+    rationale: |
+      RoPA doc reviews itself, not the whole privacy program.
+      Applicable MUSTs: rev_breach_history, rev_date, rev_dpia_review,
+      rev_dsar_metrics, rev_register_check, rev_register_update,
+      rev_reviewer, rev_scope_check, rev_transfer_validity. All 9 →
+      not_satisfies/high.
+
+# ── Summary counts (revised on second pass) ─────────────────────────
 #
 # Art.30 (24 MUSTs):
 #   satisfies:     12
-#   partial:        7   (mostly data_flow_inventory + processor_records)
-#   not_satisfies:  5
+#   partial:        8   (was 7 — controller_name flipped to partial)
+#   not_satisfies:  4   (was 5)
 #
 # A.7.2.8 (21 MUSTs):
 #   satisfies:     10
@@ -505,46 +589,72 @@ a_5_34_expected:
 #   not_satisfies:  8
 #
 # A.5.34 (27 MUSTs):
-#   satisfies:      0
-#   partial:        0
-#   not_satisfies: 27   (wrong artefact)
+#   pii_processing_register  (8):
+#     satisfies:      7
+#     partial:        1
+#     not_satisfies:  0
+#   other 3 leaves          (19):  bulk not_satisfies
+#   total:
+#     satisfies:      7   (was 0 — register leaf overlap corrected)
+#     partial:        1   (was 0)
+#     not_satisfies: 19   (was 27)
 #
 # TOTAL candidate MUSTs: 91
-# Strict expected findings (satisfies only):  27
-# Lenient expected findings (+ partial):      45
+# Strict expected findings (satisfies only):  34   (was 27)
+# Lenient expected findings (+ partial):      54   (was 45)
 
 # ── Self-review notes ────────────────────────────────────────────────
 #
-# Second-look issues caught:
+# Second-pass revisions applied (2026-08-17):
 #
-#   1. Data flow inventory MUSTs — I called them all partial. The
-#      RoPA fields provide the same raw data (systems, recipients,
-#      transfers, retention). Is that enough to satisfy the
-#      data_flow_inventory MUSTs, or is it "wrong artefact" like
-#      A.5.34? I chose partial as the middle ground. Reviewer
-#      should decide: are per-activity RoPA fields = data-flow
-#      inventory? If NO, flip all 5 to not_satisfies.
+#   1. A.5.34:pii_processing_register (8 MUSTs) flipped from bulk
+#      not_satisfies to per-MUST verdicts. This leaf IS the same
+#      artefact as the RoPA. My first-pass bulk treatment for all
+#      27 A.5.34 MUSTs was wrong — only 3 of the 4 leaves are
+#      wrong-artefact. The register leaf directly overlaps with
+#      Art.30's records_of_processing.
+#      Impact: +7 satisfies, +1 partial, -8 not_satisfies.
 #
-#   2. Doc typo — Section 1 cites "ISO/IEC 27701:2019 A.8.2.1 and
-#      A.8.2.2" which don't exist in the catalog. Correct refs
-#      are A.7.2.1/2.2 (controller side) or B.8.2.1/2.2 (processor
-#      side). I scored against A.7.2.8 + B.8.2.6 (the RoPA record
-#      MUSTs) based on Section 2's dual-role scope claim. This
-#      might be too generous — if the auditor rejects the doc's
-#      typo, we'd only score against Art.30. Reviewer's call.
+#   2. Art.30:controller_name flipped from not_satisfies/high to
+#      partial/medium. Section 1 line 21 identifies "Arion Networks
+#      s.r.o." (controller name) + doc-header shows DPO exists.
+#      Contact details missing → partial reflects the split.
 #
-#   3. proc_dpa_gate on Art.30 — I called not_satisfies (Art.28
-#      DPA gate not mentioned). But the doc has "Data Recipients"
-#      + "Subprocessors" fields which implicitly require DPAs.
-#      Weak — could be partial. Leaving as not_satisfies but flag.
+# Second-look issues NOT changed but flagged:
 #
-#   4. Processor-side MUSTs (B.8.2.6) — the doc CLAIMS processor
-#      scope (Section 2) but doesn't have processor-specific
-#      fields except "Controller or Processor Role" flag. Most
-#      B.8.2.6 MUSTs are correctly not_satisfies BECAUSE the doc's
-#      processor coverage is nominal, not substantive. Consistent
-#      with my A.5.34 wrong-artefact logic — the doc names the
-#      scope but doesn't build the artefact.
+#   3. Data flow inventory MUSTs — I called them all partial. The
+#      RoPA fields provide the raw data (systems, recipients,
+#      transfers, retention) but as per-activity, not per-flow.
+#      Reviewer decides: does per-activity view count as data-flow
+#      inventory? If strict-no, flip all 5 to not_satisfies. Analog
+#      to the A.5.34:pii_processing_register question above but
+#      different resolution — the register leaf IS the same
+#      artefact, the flow inventory leaf arguably isn't.
+#
+#   4. Doc typo — Section 1 cites "ISO/IEC 27701:2019 A.8.2.1 and
+#      A.8.2.2" (don't exist). Correct refs: A.7.2.x or B.8.2.x.
+#      Scored A.7.2.8 + B.8.2.6 (the RoPA record MUSTs) based on
+#      Section 2's dual-role claim + the fact that the doc IS a
+#      RoPA regardless of typo. Consistent with the DPIA principle:
+#      score against the artefact the doc IS, not against what it
+#      references.
+#
+#   5. proc_dpa_gate on Art.30 — not_satisfies stays. Doc has
+#      "Subprocessors" field but that's a register entry, not a
+#      DPA gate mechanism.
+#
+#   6. Processor-side MUSTs (B.8.2.6) — the doc CLAIMS processor
+#      scope (Section 2) but doesn't build processor-specific
+#      structure. B.8.2.6 verdicts reflect substantive coverage,
+#      not nominal claims. Some MUSTs satisfies (fields overlap),
+#      most not_satisfies (processor-specific structure absent).
+#
+#   7. A.5.34:privacy_applicability_scope:scope_controller_role —
+#      the RoPA has "Controller or Processor Role" as a per-activity
+#      field. That's arguably a scope declaration. Currently marked
+#      not_satisfies (wrong artefact — scope statement vs register).
+#      Reviewer may want to flip to partial or move to the register
+#      overlap.
 #
 # Low-confidence rows to review first:
 #   - Art.30 dfi_* (5 MUSTs, partial/medium) — hinges on
