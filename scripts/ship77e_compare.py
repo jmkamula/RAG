@@ -42,6 +42,8 @@ RUN_A = MEASUREMENT_DIR / "run_a_consensus.csv"
 RUN_B = MEASUREMENT_DIR / "run_b_critic.csv"
 # Ship 77'.f — Run C = consensus with LLM verify-all-accepts enabled.
 RUN_C = MEASUREMENT_DIR / "run_c_consensus_verified.csv"
+# Ship 78'.c — Run D = union extractor + tuned LLM gatekeeper.
+RUN_D = MEASUREMENT_DIR / "run_d_union_tuned.csv"
 
 
 # ─── Ground truth flattener ────────────────────────────────────────────
@@ -222,21 +224,27 @@ def main():
     findings_a = _load_findings(RUN_A)
     findings_b = _load_findings(RUN_B)
     findings_c = _load_findings(RUN_C) if RUN_C.exists() else {}
+    findings_d = _load_findings(RUN_D) if RUN_D.exists() else {}
 
-    all_scores = {"consensus": {}, "critic": {}, "consensus_verified": {}}
+    all_scores = {"consensus": {}, "critic": {},
+                  "consensus_verified": {}, "union_tuned": {}}
 
     for key, (yaml_file, doc_name) in DOCS.items():
         gt_musts = _extract_musts_from_yaml(GT_DIR / yaml_file)
         f_a = findings_a.get(doc_name, [])
         f_b = findings_b.get(doc_name, [])
         f_c = findings_c.get(doc_name, [])
+        f_d = findings_d.get(doc_name, [])
         s_a = _score(f_a, gt_musts)
         s_b = _score(f_b, gt_musts)
         s_c = _score(f_c, gt_musts) if f_c else None
+        s_d = _score(f_d, gt_musts) if f_d else None
         all_scores["consensus"][key] = s_a
         all_scores["critic"][key] = s_b
         if s_c:
             all_scores["consensus_verified"][key] = s_c
+        if s_d:
+            all_scores["union_tuned"][key] = s_d
 
         print(f"\n─── {key} ({doc_name[:40]}...) ───")
         print(f"  GT MUSTs: strict-expected={sum(1 for _,v,_ in gt_musts if v=='satisfies')} "
@@ -246,6 +254,8 @@ def main():
         variants = [("consensus (A)", s_a), ("critic (B)", s_b)]
         if s_c:
             variants.append(("cons+verify (C)", s_c))
+        if s_d:
+            variants.append(("union+tuned (D)", s_d))
         for name, s in variants:
             print(f"  {name:15} {s['n_findings']:3} findings, {s['n_distinct_musts']:3} distinct musts")
             for scoring in ("strict", "lenient"):
@@ -258,7 +268,7 @@ def main():
     # Aggregate
     print("\n" + "=" * 68)
     print("AGGREGATE (across 5 docs)")
-    for path in ("consensus", "critic", "consensus_verified"):
+    for path in ("consensus", "critic", "consensus_verified", "union_tuned"):
         if not all_scores[path]:
             continue
         for scoring in ("strict", "lenient"):

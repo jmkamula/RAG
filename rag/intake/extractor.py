@@ -274,57 +274,158 @@ def extract(
     elif scoped_leaf_ids:
         fp_leaf_pool = list(scoped_leaf_ids)
 
-    # Ship 35 — full-replacement cutover for the extraction consensus
-    # module. When USE_CONSENSUS_EXTRACTION=1, consensus REPLACES
-    # _extract_via_fingerprints + _run_critic_verifier_pass + the concat
-    # entirely. Default OFF (existing path unchanged). See
-    # docs/memory/ship_35_prime_a_cutover_design_2026_07_25.md.
+    # Ship 78'.b — union extractor. USE_CONSENSUS_EXTRACTION now
+    # controls path selection with three legal values:
+    #   union / unset / "1": run BOTH consensus + critic, union findings
+    #                        (Ship 78'.a D1 — default post-Ship-78)
+    #   consensus_only / only: consensus only (escape hatch for
+    #                          consensus-regression debugging; Ship
+    #                          77'.d Run A mode)
+    #   critic_only / 0 / false: critic-verifier only (Ship 77'.d
+    #                            Run B mode; pre-Ship-78 default)
     #
-    # Trade-off: full replacement LOSES the LLM discovery pass (finds
-    # candidates in body text with no deterministic signal). Bounded
-    # to opted-in tenants by default-OFF; intake_consensus_log
-    # telemetry drives post-cutover tuning + rollout decisions.
-    _consensus_flag = os.getenv("USE_CONSENSUS_EXTRACTION", "0").lower()
-    if _consensus_flag not in ("0", "false", "no", "off"):
-        findings = _extract_via_consensus(doc, fp_leaf_pool)
-        _finalize_yield_metrics(doc, findings)
-        return findings
+    # Ship 77'.f measured union F1 21.8% (lenient) vs critic-alone
+    # 19.8% vs consensus-alone 15.2% — paths are complementary
+    # discovery mechanisms with 5-22 must-set overlap per doc.
+    #
+    # Serial execution: consensus first (~50s), critic second (~60s).
+    # Failure isolation: each path wrapped in try/except so one
+    # failure doesn't block the other's findings.
+    _mode = os.getenv("USE_CONSENSUS_EXTRACTION", "union").lower()
+    _run_consensus = _mode not in ("critic_only", "0", "false", "no", "off")
+    _run_critic    = _mode not in ("consensus_only", "only")
 
-    fp_findings: list[DocumentFinding] = []
-    fp_covered: set[str] = set()
-    if fp_leaf_pool:
-        fp_findings, fp_covered = _extract_via_fingerprints(doc, fp_leaf_pool)
+    consensus_findings: list[DocumentFinding] = []
+    if _run_consensus:
+        try:
+            consensus_findings = _extract_via_consensus(doc, fp_leaf_pool)
+        except Exception as _cex:
+            logger.warning("consensus extraction failed (union continues with critic): %s", _cex)
 
-    # Narrow the leaf_musts sent to the LLM to leaves NOT covered by
-    # fingerprint extraction. Preserves LLM effort for the actual gaps.
-    if leaf_musts and fp_covered:
-        leaf_musts = {
-            lid: items for lid, items in leaf_musts.items()
-            if lid not in fp_covered
-        }
-        doc.extraction_metrics["llm_leaves_after_fp_coverage"] = len(leaf_musts)
+    # Critic-verifier path also encompasses fingerprint pre-pass + the
+    # critic LLM refiner. Both are needed as they feed each other.
+    critic_findings: list[DocumentFinding] = []
+    if _run_critic:
+        try:
+            fp_findings: list[DocumentFinding] = []
+            fp_covered: set[str] = set()
+            if fp_leaf_pool:
+                fp_findings, fp_covered = _extract_via_fingerprints(doc, fp_leaf_pool)
 
-    # Feature flag — critic-verifier arc, Phase 6 A/B validation
-    # (2026-07-13). Default: ON. The critic-verifier delivered +40%
-    # discovery, +39% auto-approve, at 3.18x cost (still trivial in
-    # absolute terms: $0.24/doc). Old scan-against-candidate-list
-    # pass-1 stays available via USE_CRITIC_VERIFIER_PASS=0 for
-    # rollback if a real-world doc regresses. Follow-up commit will
-    # remove the old paths once ~2 weeks of production evidence
-    # confirms critic-verifier works across all doc types.
-    _critic_flag = os.getenv("USE_CRITIC_VERIFIER_PASS", "1").lower()
-    if _critic_flag not in ("0", "false", "no", "off"):
-        llm_findings = _run_critic_verifier_pass(
-            doc, scoped, fp_findings, fp_covered,
-        )
-    elif doc.extraction_path == ExtractionPath.FULL_DOCUMENT:
-        llm_findings = _extract_full(doc, scoped, api_key, leaf_musts=leaf_musts)
-    else:  # SECTION_BASED
-        llm_findings = _extract_sections(doc, scoped, api_key, leaf_musts=leaf_musts)
+            # Narrow the leaf_musts sent to the LLM to leaves NOT covered
+            # by fingerprint extraction. Preserves LLM effort for actual gaps.
+            _leaf_musts = leaf_musts
+            if _leaf_musts and fp_covered:
+                _leaf_musts = {
+                    lid: items for lid, items in _leaf_musts.items()
+                    if lid not in fp_covered
+                }
+                doc.extraction_metrics["llm_leaves_after_fp_coverage"] = len(_leaf_musts)
 
-    findings = fp_findings + llm_findings
+            # Ship 11'.d critic-verifier arc default. Old scan-against-
+            # candidate-list pass-1 stays reachable via
+            # USE_CRITIC_VERIFIER_PASS=0.
+            _critic_pass_flag = os.getenv("USE_CRITIC_VERIFIER_PASS", "1").lower()
+            if _critic_pass_flag not in ("0", "false", "no", "off"):
+                llm_findings = _run_critic_verifier_pass(
+                    doc, scoped, fp_findings, fp_covered,
+                )
+            elif doc.extraction_path == ExtractionPath.FULL_DOCUMENT:
+                llm_findings = _extract_full(doc, scoped, api_key, leaf_musts=_leaf_musts)
+            else:
+                llm_findings = _extract_sections(doc, scoped, api_key, leaf_musts=_leaf_musts)
+
+            critic_findings = fp_findings + llm_findings
+        except Exception as _cex:
+            logger.warning("critic-path extraction failed (union continues with consensus): %s", _cex)
+
+    # Union + dedup per Ship 78'.a D2/D6. When both paths hit the same
+    # (control_ref, checklist_item_id), pick the higher-confidence
+    # finding (tie-break: prefer critic — its LLM refinement provides
+    # more thorough evidence extraction). Record the count of dropped
+    # alternates in source_context for audit.
+    findings = _union_findings(consensus_findings, critic_findings)
+    doc.extraction_metrics["union_from_consensus"] = len(consensus_findings)
+    doc.extraction_metrics["union_from_critic"]    = len(critic_findings)
+    doc.extraction_metrics["union_deduped_count"]  = (
+        len(consensus_findings) + len(critic_findings) - len(findings)
+    )
     _finalize_yield_metrics(doc, findings)
     return findings
+
+
+# Confidence ranking for dedup tie-breaking (Ship 78'.a D6).
+_CONFIDENCE_RANK = {"high": 3, "medium": 2, "low": 1}
+
+
+def _union_findings(
+    consensus_findings: list[DocumentFinding],
+    critic_findings:    list[DocumentFinding],
+) -> list[DocumentFinding]:
+    """Union consensus + critic findings with dedup on
+    (control_ref, checklist_item_id) per Ship 78'.a D2/D6.
+
+    Winner selection:
+      1. Higher confidence wins (high > medium > low > unknown).
+      2. Tie-break: prefer critic (LLM refinement produces more
+         thorough evidence extraction).
+      3. Winner's source_context records the dropped-alternate
+         count under `union_dedup_dropped` for audit.
+
+    Findings without a checklist_item_id (rare — some LLM emits skip
+    per-MUST binding) are keyed on (control_ref, "") — treating them
+    as one bucket per control. If both paths emit unbound findings
+    for the same control_ref, dedup applies the same policy.
+    """
+    def _rank(f: DocumentFinding) -> int:
+        return _CONFIDENCE_RANK.get((f.confidence or "").lower(), 0)
+
+    def _key(f: DocumentFinding) -> tuple[str, str]:
+        return (f.control_ref or "", f.checklist_item_id or "")
+
+    # Materialise consensus findings first (Ship 78'.a D3 execution
+    # order); critic findings arrive second.
+    winners: dict[tuple[str, str], DocumentFinding] = {}
+    dropped_by_key: dict[tuple[str, str], int] = {}
+
+    for source_findings, source_label in (
+        (consensus_findings, "consensus"),
+        (critic_findings,    "critic"),
+    ):
+        for f in source_findings:
+            k = _key(f)
+            if k not in winners:
+                winners[k] = f
+                continue
+            # Duel: existing vs incoming
+            existing = winners[k]
+            if _rank(f) > _rank(existing):
+                # Incoming wins on confidence
+                dropped_by_key[k] = dropped_by_key.get(k, 0) + 1
+                winners[k] = f
+            elif _rank(f) == _rank(existing) and source_label == "critic":
+                # Tie-break: prefer critic
+                dropped_by_key[k] = dropped_by_key.get(k, 0) + 1
+                winners[k] = f
+            else:
+                # Existing wins; incoming dropped
+                dropped_by_key[k] = dropped_by_key.get(k, 0) + 1
+
+    # Ship 78'.b — per-finding dedup metadata isn't persisted (DocumentFinding
+    # has no source_context field). The AGGREGATE dedup count lives on
+    # doc.extraction_metrics["union_deduped_count"] (see extract()) which
+    # becomes an intake_trace_log column via Ship 78'.d schema promotion.
+    # If per-finding attribution matters later, add a source_context field
+    # to DocumentFinding + wire it through the writer — see Ship 72'/74'
+    # observability arc for the pattern.
+    total_dropped = sum(dropped_by_key.values())
+    if total_dropped:
+        logger.info(
+            "union_findings: %d unique after dedup (%d duplicates dropped)",
+            len(winners), total_dropped,
+        )
+
+    return list(winners.values())
 
 
 def _extract_via_consensus(

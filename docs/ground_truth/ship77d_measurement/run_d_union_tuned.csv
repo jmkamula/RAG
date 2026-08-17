@@ -1,0 +1,623 @@
+filename,control_ref,standard_id,checklist_item_id,status,confidence,excerpt,inference_source,extracted_at
+Data Quality Accuracy Procedure.docx,A.5.31,ISO27001:2022,item:A.5.31:scope_data_categories,present,medium,"To ensure all personal data processed by Arion Networks is accurate, up to date, and relevant, in line with:",fingerprint_match,2026-08-17 21:38:53.711313+00
+Data Quality Accuracy Procedure.docx,A.7.2.5,ISO27701:2019,item:A.7.2.5:proc_29134_alignment,present,medium,"- GDPR Article 5\(1\)\(d\)
+- ISO/IEC 27701:2019 A\.7\.4\.3",fingerprint_match,2026-08-17 21:38:53.711313+00
+Data Quality Accuracy Procedure.docx,A.7.2.8,ISO27701:2019,item:A.7.2.8:rev_accuracy_sample,present,medium,"- Clarify in contracts who is responsible for data accuracy
+- Follow client instructions for updates and corrections
+- Avoid altering source data unless contractually permitted",fingerprint_match,2026-08-17 21:38:53.711313+00
+Data Quality Accuracy Procedure.docx,A.7.4.3,ISO27701:2019,item:A.7.4.3:proc_correction_link,present,medium,"- Clarify in contracts who is responsible for data accuracy
+- Follow client instructions for updates and corrections
+- Avoid altering source data unless contractually permitted",fingerprint_match,2026-08-17 21:38:53.711313+00
+Data Quality Accuracy Procedure.docx,A.7.4.3,ISO27701:2019,item:A.7.4.3:proc_inaccuracy_prevention,present,medium,"- Use structured forms with validation \(e\.g\., date formats, email check\)
+- Collect only verifiable data where possible",fingerprint_match,2026-08-17 21:38:53.711313+00
+Data Quality Accuracy Procedure.docx,A.7.4.3,ISO27701:2019,item:A.7.4.3:proc_inaccuracy_response,present,high,Any identified errors must be: Logged and assessed within 2 business days Corrected within 5 business days,extracted,2026-08-17 21:38:53.711313+00
+Data Quality Accuracy Procedure.docx,A.7.4.3,ISO27701:2019,item:A.7.4.3:proc_lifecycle_coverage,present,medium,"- Data collected directly from individuals
+- Client\-provided data handled under processing contracts
+- Training participants and platform account data",fingerprint_match,2026-08-17 21:38:53.711313+00
+Data Quality Accuracy Procedure.docx,A.7.4.3,ISO27701:2019,item:A.7.4.3:proc_up_to_date_check,present,medium,"To ensure all personal data processed by Arion Networks is accurate, up to date, and relevant, in line with:",fingerprint_match,2026-08-17 21:38:53.711313+00
+Data Quality Accuracy Procedure.docx,A.7.4.3,ISO27701:2019,item:A.7.4.3:rev_date,present,medium,"To ensure all personal data processed by Arion Networks is accurate, up to date, and relevant, in line with:",fingerprint_match,2026-08-17 21:38:53.711313+00
+Data Quality Accuracy Procedure.docx,A.7.4.3,ISO27701:2019,item:A.7.4.3:rev_detection_rate,present,medium,"To ensure all personal data processed by Arion Networks is accurate, up to date, and relevant, in line with:",fingerprint_match,2026-08-17 21:38:53.711313+00
+Data Quality Accuracy Procedure.docx,A.7.4.4,ISO27701:2019,item:A.7.4.4:rev_date,present,medium,Collect only verifiable data where possible,extracted,2026-08-17 21:38:53.711313+00
+Data Quality Accuracy Procedure.docx,Art.15,GDPR:2016/679,item:Art.15:copy,present,medium,"- Data collected directly from individuals
+- Client\-provided data handled under processing contracts
+- Training participants and platform account data",fingerprint_match,2026-08-17 21:38:53.711313+00
+Data Quality Accuracy Procedure.docx,Art.15,GDPR:2016/679,item:Art.15:source,present,medium,"To ensure all personal data processed by Arion Networks is accurate, up to date, and relevant, in line with:",fingerprint_match,2026-08-17 21:38:53.711313+00
+Data Quality Accuracy Procedure.docx,Art.20,GDPR:2016/679,item:Art.20:export_format,present,medium,"- Use structured forms with validation \(e\.g\., date formats, email check\)
+- Collect only verifiable data where possible",fingerprint_match,2026-08-17 21:38:53.711313+00
+Data Quality Accuracy Procedure.docx,Art.20,GDPR:2016/679,item:Art.20:scope_boundary,present,medium,"- Data collected directly from individuals
+- Client\-provided data handled under processing contracts
+- Training participants and platform account data",fingerprint_match,2026-08-17 21:38:53.711313+00
+Data Quality Accuracy Procedure.docx,B.8.2.6,ISO27701:2019,item:B.8.2.6:rev_accuracy_sample,present,medium,"- Clarify in contracts who is responsible for data accuracy
+- Follow client instructions for updates and corrections
+- Avoid altering source data unless contractually permitted",fingerprint_match,2026-08-17 21:38:53.711313+00
+Data Quality Accuracy Procedure.docx,A.7.3.9,ISO27701:2019,,present,medium,Correction efforts are tracked as part of the DSR Register (DOC041B),extracted,2026-08-17 21:38:53.711313+00
+Data Quality Accuracy Procedure.docx,A.7.2.6,ISO27701:2019,,present,medium,Clarify in contracts who is responsible for data accuracy Follow client instructions for updates and corrections Avoid altering source data unless contractually permitted,extracted,2026-08-17 21:38:53.711313+00
+Data Quality Accuracy Procedure.docx,A.5.34,ISO27001:2022,item:A.5.34:owner,present,medium,"[Bridge: 27701 A.7.4.3 accuracy and quality of PII operationalises 27001 A.5.34 data-integrity aspect of privacy protection.] - Clarify in contracts who is responsible for data accuracy
+- Follow clien",xfw_bridge,2026-08-17 21:38:54.099395+00
+Data Quality Accuracy Procedure.docx,A.5.33,ISO27001:2022,item:A.5.33:owner,present,medium,"[Bridge: Records of processing activities (Art.30) provide the structured information required to respond to subject access requests.] - Data collected directly from individuals
+- Client\-provided dat",xfw_bridge,2026-08-17 21:38:54.099395+00
+Data Quality Accuracy Procedure.docx,A.7.3.6,ISO27701:2019,item:A.7.3.6:proc_access_flow,present,medium,"[Bridge: 27701 A.7.3.6 access operationalises Art.15 right of access.] - Data collected directly from individuals
+- Client\-provided data handled under processing contracts
+- Training participants and",xfw_bridge,2026-08-17 21:38:54.099395+00
+Data Quality Accuracy Procedure.docx,B.8.3.1,ISO27701:2019,item:B.8.3.1:proc_contract_scope,present,medium,"[Bridge: 27701 B.8.3.1 supports customer Art.15 fulfilment — processor makes processing information available.] - Data collected directly from individuals
+- Client\-provided data handled under process",xfw_bridge,2026-08-17 21:38:54.099395+00
+Data Quality Accuracy Procedure.docx,A.5.14,ISO27001:2022,item:A.5.14:authorisation,present,medium,"[Bridge: Information transfer controls must cover secure provision of portable personal data — format, encryption, integrity verification.] - Data collected directly from individuals
+- Client\-provide",xfw_bridge,2026-08-17 21:38:54.099395+00
+Data Quality Accuracy Procedure.docx,A.8.24,ISO27001:2022,item:A.8.24:algorithms,present,medium,"[Bridge: Cryptography must protect portable personal data in transit — the exported dataset must be encrypted for transmission.] - Data collected directly from individuals
+- Client\-provided data hand",xfw_bridge,2026-08-17 21:38:54.099395+00
+Data Quality Accuracy Procedure.docx,A.7.3.8,ISO27701:2019,item:A.7.3.8:proc_deleted_notification,present,medium,"[Bridge: 27701 A.7.3.8 structured commonly-used machine-readable format aligns with Art.20 portability.] - Data collected directly from individuals
+- Client\-provided data handled under processing con",xfw_bridge,2026-08-17 21:38:54.099395+00
+Records of Processing Activities.docx,A.5.34,ISO27001:2022,item:A.5.34:reg_owner_per_activity,present,medium,maintains its Records of Processing Activities \(RoPA\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \(Controls A\.8\.2\.1 and A\.8\.2\.2\)\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,A.7.2.8,ISO27701:2019,item:A.7.2.8:scope_exclusions,present,medium,maintains its Records of Processing Activities \(RoPA\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \(Controls A\.8\.2\.1 and A\.8\.2\.2\)\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,A.7.2.8,ISO27701:2019,item:A.7.2.8:ropa_pii_categories,present,medium,maintains its Records of Processing Activities \(RoPA\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \(Controls A\.8\.2\.1 and A\.8\.2\.2\)\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,A.7.2.8,ISO27701:2019,item:A.7.2.8:ropa_security_measures,present,medium,maintains its Records of Processing Activities \(RoPA\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \(Controls A\.8\.2\.1 and A\.8\.2\.2\)\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,A.7.2.8,ISO27701:2019,item:A.7.2.8:proc_add_activity,present,high,"When a new processing activity is planned, the business owner must notify the Data Protection & Risk Manager.",extracted,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,Art.15,GDPR:2016/679,item:Art.15:proc_identity_pair_30,present,medium,maintains its Records of Processing Activities \(RoPA\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \(Controls A\.8\.2\.1 and A\.8\.2\.2\)\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,Art.15,GDPR:2016/679,item:Art.15:complaint,present,medium,"__Audit & Reporting__ – The RoPA is made available for:
+	- Internal audits
+	- Supervisory authority requests \(e\.g\., ÚOOÚ, CNIL\)
+	- Certification and compliance reviews",fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,Art.15,GDPR:2016/679,item:Art.15:confirmation,present,medium,"It ensures that all personal data processing is documented, reviewed, and auditable\.",fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,Art.15,GDPR:2016/679,item:Art.15:source,present,medium,"It ensures that all personal data processing is documented, reviewed, and auditable\.",fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,Art.20,GDPR:2016/679,item:Art.20:scope_in_scope_activities,present,medium,maintains its Records of Processing Activities \(RoPA\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \(Controls A\.8\.2\.1 and A\.8\.2\.2\)\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,Art.24,GDPR:2016/679,item:Art.24:role_chosen,present,medium,in the role of either PII Controller or Processor\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,Art.30,GDPR:2016/679,item:Art.30:categories_data,present,medium,maintains its Records of Processing Activities \(RoPA\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \(Controls A\.8\.2\.1 and A\.8\.2\.2\)\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,Art.30,GDPR:2016/679,item:Art.30:categories_ds,present,medium,maintains its Records of Processing Activities \(RoPA\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \(Controls A\.8\.2\.1 and A\.8\.2\.2\)\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,Art.30,GDPR:2016/679,item:Art.30:purposes,present,medium,maintains its Records of Processing Activities \(RoPA\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \(Controls A\.8\.2\.1 and A\.8\.2\.2\)\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,Art.32,GDPR:2016/679,item:Art.32:scope_authority_compliance,present,medium,"__Audit & Reporting__ – The RoPA is made available for:
+	- Internal audits
+	- Supervisory authority requests \(e\.g\., ÚOOÚ, CNIL\)
+	- Certification and compliance reviews",fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,Art.32,GDPR:2016/679,item:Art.32:scope_processing_activities,present,medium,maintains its Records of Processing Activities \(RoPA\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \(Controls A\.8\.2\.1 and A\.8\.2\.2\)\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,Art.32,GDPR:2016/679,item:Art.32:reg_activity_id,present,medium,"This procedure applies to all business units, systems, processes, and services that involve the collection, use, storage, or transmission of personally identifiable information \(PII\) by Arion Networ",fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,Art.32,GDPR:2016/679,item:Art.32:reg_risk_assessment,present,medium,"__Initiation__ – When a new processing activity is planned, the business owner must notify the Data Protection & Risk Manager\.",fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,Art.35,GDPR:2016/679,item:Art.35:reg_dpia_id,present,medium,__Documentation__ – The activity is entered into the centralized RoPA Register \(Excel workbook stored in SharePoint\)\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,B.8.2.6,ISO27701:2019,item:B.8.2.6:scope_coverage_test,present,medium,maintains its Records of Processing Activities \(RoPA\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \(Controls A\.8\.2\.1 and A\.8\.2\.2\)\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,B.8.2.6,ISO27701:2019,item:B.8.2.6:scope_customer_engagements,present,medium,This procedure defines how Arion Networks s\.r\.o\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,B.8.2.6,ISO27701:2019,item:B.8.2.6:scope_own_controller_exclusion,present,medium,maintains its Records of Processing Activities \(RoPA\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \(Controls A\.8\.2\.1 and A\.8\.2\.2\)\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,B.8.2.6,ISO27701:2019,item:B.8.2.6:ropa_processing_categories,present,medium,maintains its Records of Processing Activities \(RoPA\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \(Controls A\.8\.2\.1 and A\.8\.2\.2\)\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,B.8.2.6,ISO27701:2019,item:B.8.2.6:ropa_security_measures,present,medium,maintains its Records of Processing Activities \(RoPA\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \(Controls A\.8\.2\.1 and A\.8\.2\.2\)\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,B.8.2.6,ISO27701:2019,item:B.8.2.6:ropa_subprocessor_list,present,medium,maintains its Records of Processing Activities \(RoPA\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \(Controls A\.8\.2\.1 and A\.8\.2\.2\)\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,B.8.2.6,ISO27701:2019,item:B.8.2.6:ropa_transfers,present,medium,maintains its Records of Processing Activities \(RoPA\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \(Controls A\.8\.2\.1 and A\.8\.2\.2\)\.,fingerprint_match,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,B.8.2.6,ISO27701:2019,item:B.8.2.6:proc_subprocessor_update,present,high,Subprocessors	Any third parties involved,extracted,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,A.7.2.1,ISO27701:2019,item:A.7.2.1:rev_coverage_check,present,high,Purpose of Processing	Why the data is being processed,extracted,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,A.7.2.2,ISO27701:2019,,present,high,"Legal Basis	Lawful basis (e.g. consent, contract, legal obligation)",extracted,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,A.7.2.5,ISO27701:2019,,present,high,High-risk processing activities identified during RoPA review must undergo DPIA per DOC042H before implementation.,extracted,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,A.7.5.1,ISO27701:2019,,present,high,"International Transfers	Details of transfers outside the EU/EEA, if applicable",extracted,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,A.7.5.2,ISO27701:2019,,present,medium,"International Transfers	Details of transfers outside the EU/EEA, if applicable",extracted,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,A.7.4.7,ISO27701:2019,,present,high,Retention Period	Timeframe for keeping the data,extracted,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,A.7.2.6,ISO27701:2019,,present,medium,Subprocessors	Any third parties involved,extracted,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,B.8.5.7,ISO27701:2019,,present,medium,Subprocessors	Any third parties involved,extracted,2026-08-17 21:38:59.069276+00
+Records of Processing Activities.docx,A.5.9,ISO27001:2022,item:A.5.9:proc_ownership,present,medium,"[Bridge: 27701 A.7.2.8 RoPA is a records-program artefact analogous to 27001 A.5.9 asset register — same records-program spine, differs by scope (PII processing activities vs information/associated as",xfw_bridge,2026-08-17 21:38:59.452223+00
+Records of Processing Activities.docx,A.5.33,ISO27001:2022,item:A.5.33:owner,present,medium,"[Bridge: Records of processing activities (Art.30) provide the structured information required to respond to subject access requests.] __Audit & Reporting__ – The RoPA is made available for:
+	- Intern",xfw_bridge,2026-08-17 21:38:59.452223+00
+Records of Processing Activities.docx,A.5.34,ISO27001:2022,item:A.5.34:owner,present,medium,"[Bridge: PII protection includes subject access request procedures — the primary control for fulfilling DSAR identification, search, and response.] __Audit & Reporting__ – The RoPA is made available f",xfw_bridge,2026-08-17 21:38:59.452223+00
+Records of Processing Activities.docx,A.7.3.6,ISO27701:2019,item:A.7.3.6:proc_access_flow,present,medium,"[Bridge: 27701 A.7.3.6 access operationalises Art.15 right of access.] __Audit & Reporting__ – The RoPA is made available for:
+	- Internal audits
+	- Supervisory authority requests \(e\.g\., ÚOOÚ, CNIL",xfw_bridge,2026-08-17 21:38:59.452223+00
+Records of Processing Activities.docx,B.8.3.1,ISO27701:2019,item:B.8.3.1:proc_contract_scope,present,medium,"[Bridge: 27701 B.8.3.1 supports customer Art.15 fulfilment — processor makes processing information available.] __Audit & Reporting__ – The RoPA is made available for:
+	- Internal audits
+	- Supervisor",xfw_bridge,2026-08-17 21:38:59.452223+00
+Records of Processing Activities.docx,A.5.37,ISO27001:2022,item:A.5.37:owner_per_procedure,present,medium,"[Bridge: Documented operating procedures must include the ROPA maintenance process — how often reviewed, who updates it, change control.] maintains its Records of Processing Activities \(RoPA\) in acc",xfw_bridge,2026-08-17 21:38:59.452223+00
+Records of Processing Activities.docx,A.5.12,ISO27001:2022,item:A.5.12:comm_audience,present,medium,"[Bridge: Information classification identifies categories of personal data, supporting Art.30 records of processing activities.] maintains its Records of Processing Activities \(RoPA\) in accordance w",xfw_bridge,2026-08-17 21:38:59.452223+00
+Records of Processing Activities.docx,B.8.5.3,ISO27701:2019,item:B.8.5.3:proc_authority_source,present,medium,[Bridge: 27701 B.8.5.3 processor disclosure records — same records-programme discipline as Art.30.] maintains its Records of Processing Activities \(RoPA\) in accordance with GDPR Article 30 and ISO/I,xfw_bridge,2026-08-17 21:38:59.452223+00
+Records of Processing Activities.docx,A.5.1,ISO27001:2022,item:A.5.1:legal_compliance,present,medium,"[Bridge: Information security policies provide the documented framework for 'appropriate technical and organisational measures'.] This procedure applies to all business units, systems, processes, and ",xfw_bridge,2026-08-17 21:38:59.452223+00
+Records of Processing Activities.docx,A.5.23,ISO27001:2022,item:A.5.23:controls_method,present,medium,"[Bridge: Cloud service security controls implement Art.32 appropriate technical measures for personal data in cloud environments.] This procedure applies to all business units, systems, processes, and",xfw_bridge,2026-08-17 21:38:59.452223+00
+Records of Processing Activities.docx,A.8.5,ISO27001:2022,item:A.8.5:proc_a517_linkage,present,medium,"[Bridge: Secure authentication is an explicit technical measure for Art.32 security of processing.] This procedure applies to all business units, systems, processes, and services that involve the coll",xfw_bridge,2026-08-17 21:38:59.452223+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,6.1.2,ISO27001:2022,item:6.1.2:personal_data,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,6.1.3,ISO27001:2022,item:6.1.3:approval,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.5.34,ISO27001:2022,item:A.5.34:rev_dpia_review,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.5.8,ISO27001:2022,item:A.5.8:change_control,present,medium,"- GDPR Article 35
+- ISO/IEC 27701:2019 control A\.7\.2\.5
+- Privacy and Information Security and Data Management Policy \(DOC003\)",fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.5.8,ISO27001:2022,item:A.5.8:requirements,present,medium,"- GDPR Article 35
+- ISO/IEC 27701:2019 control A\.7\.2\.5
+- Privacy and Information Security and Data Management Policy \(DOC003\)",fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.2.5,ISO27701:2019,item:A.7.2.5:scope_art35_3_mandatory,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.2.5,ISO27701:2019,item:A.7.2.5:scope_exclusions,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.2.5,ISO27701:2019,item:A.7.2.5:scope_org_indicators,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.2.5,ISO27701:2019,item:A.7.2.5:scope_sa_lists,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.2.5,ISO27701:2019,item:A.7.2.5:proc_29134_alignment,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.2.5,ISO27701:2019,item:A.7.2.5:proc_assessment_scope,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.2.5,ISO27701:2019,item:A.7.2.5:proc_prior_consultation,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.2.5,ISO27701:2019,item:A.7.2.5:proc_trigger_criteria,present,high,DPIA must be conducted when processing: High Risk to Rights and Freedoms: New processing presents significant privacy risks; Significant Changes: Major modifications to existing processing activities ,extracted,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.2.5,ISO27701:2019,item:A.7.2.5:reg_completion_date,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.2.5,ISO27701:2019,item:A.7.2.5:reg_pia_id,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.2.5,ISO27701:2019,item:A.7.2.5:reg_processing_activity,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.2.5,ISO27701:2019,item:A.7.2.5:reg_residual_risk,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.2.5,ISO27701:2019,item:A.7.2.5:rev_date,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.2.5,ISO27701:2019,item:A.7.2.5:rev_reviewer,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.2.5,ISO27701:2019,item:A.7.2.5:rev_sa_consultation_audit,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.5.1,ISO27701:2019,item:A.7.5.1:proc_documented_compliance,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.5.1,ISO27701:2019,item:A.7.5.1:proc_schrems_tia,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,Art.15,GDPR:2016/679,item:Art.15:purposes,present,medium,"Applies to all processing activities that may present high risk to data subject rights and freedoms, including new systems, significant changes to existing processing, or regulatory requirements\.",fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,Art.15,GDPR:2016/679,item:Art.15:source,present,medium,"Applies to all processing activities that may present high risk to data subject rights and freedoms, including new systems, significant changes to existing processing, or regulatory requirements\.",fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,Art.32,GDPR:2016/679,item:Art.32:reg_appropriateness,present,medium,"- GDPR Article 35
+- ISO/IEC 27701:2019 control A\.7\.2\.5
+- Privacy and Information Security and Data Management Policy \(DOC003\)",fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,Art.32,GDPR:2016/679,item:Art.32:reg_risk_assessment,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,Art.35,GDPR:2016/679,item:Art.35:review_trigger,present,medium,This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to identify and mitigate privacy risks in accordance with:,fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,Art.36,GDPR:2016/679,item:Art.36:scope_ms_law,present,medium,"- GDPR Article 35
+- ISO/IEC 27701:2019 control A\.7\.2\.5
+- Privacy and Information Security and Data Management Policy \(DOC003\)",fingerprint_match,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.2.1,ISO27701:2019,item:A.7.2.1:rev_coverage_check,present,medium,Purpose of Processing: Detailed explanation of why the processing is needed and what objectives it serves.,extracted,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.2.2,ISO27701:2019,item:A.7.2.2:rev_basis_currency,present,medium,Legal Basis: Specific GDPR Article 6 legal basis for the processing activity.,extracted,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.2.6,ISO27701:2019,item:A.7.2.6:rev_coverage_check,present,low,Vendor Assessment: DPIAs consider third-party processing risks,extracted,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.4.2,ISO27701:2019,,present,medium,"Technical safeguards (encryption, access controls, data minimization)",extracted,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.4.4,ISO27701:2019,,present,medium,"Technical safeguards (encryption, access controls, data minimization)",extracted,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.4.7,ISO27701:2019,,present,medium,"Data Flow Description (collection, storage, sharing, retention)",extracted,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.4.9,ISO27701:2019,,present,medium,Cryptography Applied: Documentation of whether encryption and other security measures are in place (Yes/No with details).,extracted,2026-08-17 21:39:05.928975+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.5.34,ISO27001:2022,item:A.5.34:owner,present,high,[Bridge: 27701 A.7.2.5 privacy impact assessment operationalises 27001 A.5.34 by identifying + treating PII-specific risks.] DPIA must be conducted when processing: High Risk to Rights and Freedoms: N,xfw_bridge,2026-08-17 21:39:06.441106+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,6.1.2,ISO27001:2022,item:6.1.2:reg_owner,present,high,[Bridge: Privacy impact assessment is a specialised form of 27001 6.1.2 information security risk assessment applied to PII scope.] DPIA must be conducted when processing: High Risk to Rights and Free,xfw_bridge,2026-08-17 21:39:06.441106+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.5.14,ISO27001:2022,item:A.5.14:authorisation,present,medium,[Bridge: 27701 A.7.5.1 cross-jurisdiction transfer basis augments 27001 A.5.14 information transfer with the privacy-specific Chap V + Schrems II TIA overlay.] This procedure defines how Arion Network,xfw_bridge,2026-08-17 21:39:06.441106+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.5.33,ISO27001:2022,item:A.5.33:owner,present,medium,[Bridge: Records of processing activities (Art.30) provide the structured information required to respond to subject access requests.] Applies to all processing activities that may present high risk t,xfw_bridge,2026-08-17 21:39:06.441106+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.7.3.6,ISO27701:2019,item:A.7.3.6:proc_access_flow,present,medium,"[Bridge: 27701 A.7.3.6 access operationalises Art.15 right of access.] Applies to all processing activities that may present high risk to data subject rights and freedoms, including new systems, signi",xfw_bridge,2026-08-17 21:39:06.441106+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,B.8.3.1,ISO27701:2019,item:B.8.3.1:proc_contract_scope,present,medium,[Bridge: 27701 B.8.3.1 supports customer Art.15 fulfilment — processor makes processing information available.] Applies to all processing activities that may present high risk to data subject rights a,xfw_bridge,2026-08-17 21:39:06.441106+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.5.1,ISO27001:2022,item:A.5.1:legal_compliance,present,medium,[Bridge: Information security policies provide the documented framework for 'appropriate technical and organisational measures'.] This procedure defines how Arion Networks conducts Data Protection Imp,xfw_bridge,2026-08-17 21:39:06.441106+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.5.23,ISO27001:2022,item:A.5.23:controls_method,present,medium,[Bridge: Cloud service security controls implement Art.32 appropriate technical measures for personal data in cloud environments.] This procedure defines how Arion Networks conducts Data Protection Im,xfw_bridge,2026-08-17 21:39:06.441106+00
+Data Protection Impact Assessment (DPIA) Procedure.docx,A.8.5,ISO27001:2022,item:A.8.5:proc_a517_linkage,present,medium,[Bridge: Secure authentication is an explicit technical measure for Art.32 security of processing.] This procedure defines how Arion Networks conducts Data Protection Impact Assessments \(DPIAs\) to i,xfw_bridge,2026-08-17 21:39:06.441106+00
+Consent Management Procedure.docx,A.7.2.3,ISO27701:2019,item:A.7.2.3:scope_consent_activities,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.3,ISO27701:2019,item:A.7.2.3:scope_special_category_map,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.3,ISO27701:2019,item:A.7.2.3:proc_special_category_overlay,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.3,ISO27701:2019,item:A.7.2.3:proc_when_consent_required,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.3,ISO27701:2019,item:A.7.2.3:rev_children_audit,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.4,ISO27701:2019,item:A.7.2.4:scope_consent_activities,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.4,ISO27701:2019,item:A.7.2.4:proc_demonstration_pathway,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.4,ISO27701:2019,item:A.7.2.4:proc_pre_consent_information,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.4,ISO27701:2019,item:A.7.2.4:proc_record_fields,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.4,ISO27701:2019,item:A.7.2.4:proc_unambiguous_test,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.4,ISO27701:2019,item:A.7.2.4:reg_timestamp,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.3.9,ISO27701:2019,item:A.7.3.9:proc_response_times,present,medium,"- Freely given: Not tied to unrelated services or terms
+- Specific: Clearly identifies the purpose\(s\) of data processing
+- Informed: Communicates who is processing the data and for what reason
+- Una",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,Art.20,GDPR:2016/679,item:Art.20:scope_in_scope_activities,present,medium,"- GDPR Article 6\(1\)\(a\), Article 7
+- ISO/IEC 27701:2019 control A\.7\.5\.5
+- CCPA/CPRA consumer opt\-out rights",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,Art.20,GDPR:2016/679,item:Art.20:applicability_check,present,medium,"- GDPR Article 6\(1\)\(a\), Article 7
+- ISO/IEC 27701:2019 control A\.7\.5\.5
+- CCPA/CPRA consumer opt\-out rights",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,Art.6,GDPR:2016/679,item:Art.6:activities_enumerated,present,medium,This procedure applies to all processing activities by Arion Networks where consent is used as the legal basis under GDPR Article 6\(1\)\(a\)\.,fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,Art.6,GDPR:2016/679,item:Art.6:owner,present,medium,This procedure applies to all processing activities by Arion Networks where consent is used as the legal basis under GDPR Article 6\(1\)\(a\)\.,fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,Art.7,GDPR:2016/679,item:Art.7:rev_register_currency,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,Art.9,GDPR:2016/679,item:Art.9:proc_explicit_consent,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,B.8.2.3,ISO27701:2019,item:B.8.2.3:proc_consent_evidence_requirement,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.3,ISO27701:2019,item:A.7.2.3:scope_children_thresholds,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.3,ISO27701:2019,item:A.7.2.3:proc_no_bundling,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.4,ISO27701:2019,item:A.7.2.4:rev_date,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.4,ISO27701:2019,item:A.7.2.4:scope_exclusions,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.4,ISO27701:2019,item:A.7.2.4:scope_retention,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.4,ISO27701:2019,item:A.7.2.4:reg_channel,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.4,ISO27701:2019,item:A.7.2.4:reg_subject_id,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.4,ISO27701:2019,item:A.7.2.4:reg_event_id,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.4,ISO27701:2019,item:A.7.2.4:proc_specific_test,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.4,ISO27701:2019,item:A.7.2.4:proc_freely_given_test,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.8,ISO27701:2019,item:A.7.2.8:scope_exclusions,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.8,ISO27701:2019,item:A.7.2.8:scope_covered_activities,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.8,ISO27701:2019,item:A.7.2.8:proc_change_capture,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.8,ISO27701:2019,item:A.7.2.8:ropa_owner,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.8,ISO27701:2019,item:A.7.2.8:ropa_security_measures,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.8,ISO27701:2019,item:A.7.2.8:ropa_recipients,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.2.8,ISO27701:2019,item:A.7.2.8:ropa_activity_id,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,B.8.2.2,ISO27701:2019,item:B.8.2.2:rev_date,present,medium,"This procedure is aligned with the Privacy Policy \(last updated 29 August 2025\) and the Cookie Policy \(last updated 29 August 2025\), which define when consent is required for website and service\-",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,B.8.2.2,ISO27701:2019,item:B.8.2.2:scope_own_controller,present,medium,This procedure outlines how Arion Networks s\.r\.o\.,fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,B.8.2.2,ISO27701:2019,item:B.8.2.2:proc_technical_binding,present,medium,"- GDPR Article 6\(1\)\(a\), Article 7
+- ISO/IEC 27701:2019 control A\.7\.5\.5
+- CCPA/CPRA consumer opt\-out rights",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,B.8.2.3,ISO27701:2019,item:B.8.2.3:rev_isolation_audit,present,medium,"- Consent is the legal basis for processing
+- Individuals have the right to opt out of data use \(e\.g\., for marketing, analytics, or third\-party sharing\)
+- Regulatory or contractual obligations re",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,B.8.2.3,ISO27701:2019,item:B.8.2.3:rev_date,present,medium,"This procedure is aligned with the Privacy Policy \(last updated 29 August 2025\) and the Cookie Policy \(last updated 29 August 2025\), which define when consent is required for website and service\-",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,B.8.2.3,ISO27701:2019,item:B.8.2.3:scope_marketing_channels,present,medium,"- Consent is the legal basis for processing
+- Individuals have the right to opt out of data use \(e\.g\., for marketing, analytics, or third\-party sharing\)
+- Regulatory or contractual obligations re",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,B.8.2.3,ISO27701:2019,item:B.8.2.3:reg_subject_consent,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,B.8.2.3,ISO27701:2019,item:B.8.2.3:reg_customer_permit,present,medium,"- Consent is the legal basis for processing
+- Individuals have the right to opt out of data use \(e\.g\., for marketing, analytics, or third\-party sharing\)
+- Regulatory or contractual obligations re",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,B.8.2.3,ISO27701:2019,item:B.8.2.3:proc_freely_given_alignment,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,B.8.2.3,ISO27701:2019,item:B.8.2.3:proc_no_conditionality,present,medium,"This procedure is aligned with the Privacy Policy \(last updated 29 August 2025\) and the Cookie Policy \(last updated 29 August 2025\), which define when consent is required for website and service\-",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.3.9,ISO27701:2019,item:A.7.3.9:rev_complaint_route_test,present,medium,"- __Other voluntary activities \(e\.g\., surveys, beta testing, recordings, special category data\):__ Consent required \(Art\.",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.3.9,ISO27701:2019,item:A.7.3.9:rev_channel_test,present,medium,"- __Other voluntary activities \(e\.g\., surveys, beta testing, recordings, special category data\):__ Consent required \(Art\.",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.3.9,ISO27701:2019,item:A.7.3.9:rev_date,present,medium,"This procedure is aligned with the Privacy Policy \(last updated 29 August 2025\) and the Cookie Policy \(last updated 29 August 2025\), which define when consent is required for website and service\-",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.3.9,ISO27701:2019,item:A.7.3.9:scope_legitimate_test,present,medium,"- Consent is the legal basis for processing
+- Individuals have the right to opt out of data use \(e\.g\., for marketing, analytics, or third\-party sharing\)
+- Regulatory or contractual obligations re",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.3.9,ISO27701:2019,item:A.7.3.9:reg_sla_met_flag,present,medium,"- Freely given: Not tied to unrelated services or terms
+- Specific: Clearly identifies the purpose\(s\) of data processing
+- Informed: Communicates who is processing the data and for what reason
+- Una",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.3.9,ISO27701:2019,item:A.7.3.9:reg_request_id,present,medium,"- Consent is the legal basis for processing
+- Individuals have the right to opt out of data use \(e\.g\., for marketing, analytics, or third\-party sharing\)
+- Regulatory or contractual obligations re",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.3.9,ISO27701:2019,item:A.7.3.9:proc_complaint_route,present,medium,"- GDPR Article 6\(1\)\(a\), Article 7
+- ISO/IEC 27701:2019 control A\.7\.5\.5
+- CCPA/CPRA consumer opt\-out rights",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.3.9,ISO27701:2019,item:A.7.3.9:proc_intake_channels,present,medium,"This procedure is aligned with the Privacy Policy \(last updated 29 August 2025\) and the Cookie Policy \(last updated 29 August 2025\), which define when consent is required for website and service\-",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.5.3,ISO27701:2019,item:A.7.5.3:rev_cooperation_test,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.5.3,ISO27701:2019,item:A.7.5.3:rev_completeness,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.5.3,ISO27701:2019,item:A.7.5.3:scope_retention_period,present,medium,This procedure outlines how Arion Networks s\.r\.o\.,fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.5.3,ISO27701:2019,item:A.7.5.3:reg_basis_link,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.5.3,ISO27701:2019,item:A.7.5.3:reg_pii_scope,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.5.3,ISO27701:2019,item:A.7.5.3:reg_third_party,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.5.3,ISO27701:2019,item:A.7.5.3:reg_direction,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.5.3,ISO27701:2019,item:A.7.5.3:proc_retention_policy,present,medium,This procedure outlines how Arion Networks s\.r\.o\.,fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.5.3,ISO27701:2019,item:A.7.5.3:proc_cooperation_channel,present,medium,"obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:",fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.7.5.3,ISO27701:2019,item:A.7.5.3:proc_transfer_event_capture,present,medium,This procedure outlines how Arion Networks s\.r\.o\.,fingerprint_match,2026-08-17 21:39:40.774063+00
+Consent Management Procedure.docx,A.5.34,ISO27001:2022,item:A.5.34:owner,present,medium,"[Bridge: 27701 A.7.2.3 determining when consent is required is a scoping decision that implements 27001 A.5.34 privacy protection.] obtains, records, and manages consent for the processing of personal",xfw_bridge,2026-08-17 21:39:41.193918+00
+Consent Management Procedure.docx,A.5.9,ISO27001:2022,item:A.5.9:proc_ownership,present,medium,"[Bridge: Consent records are a class of information whose retention + management falls under 27001 A.5.9 inventory / asset lifecycle controls.] obtains, records, and manages consent for the processing",xfw_bridge,2026-08-17 21:39:41.193918+00
+Consent Management Procedure.docx,A.5.16,ISO27001:2022,item:A.5.16:ownership,present,medium,[Bridge: 27701 A.7.3.9 handling requests requires identity verification of the requestor — 27001 A.5.16 identity management is the general control.] - Freely given: Not tied to unrelated services or t,xfw_bridge,2026-08-17 21:39:41.193918+00
+Consent Management Procedure.docx,A.5.17,ISO27001:2022,item:A.5.17:allocation,present,medium,"[Bridge: Verifying requestor identity for PII principal requests leans on the authentication controls at 27001 A.5.17.] - Freely given: Not tied to unrelated services or terms
+- Specific: Clearly iden",xfw_bridge,2026-08-17 21:39:41.193918+00
+Consent Management Procedure.docx,A.5.27,ISO27001:2022,item:A.5.27:actions,present,medium,[Bridge: Request-handling patterns feed the incident-learning loop at 27001 A.5.27 when patterns emerge (e.g. surge in erasure requests indicates a systemic issue).] - Freely given: Not tied to unrela,xfw_bridge,2026-08-17 21:39:41.193918+00
+Consent Management Procedure.docx,A.5.14,ISO27001:2022,item:A.5.14:authorisation,present,medium,"[Bridge: Information transfer controls must cover secure provision of portable personal data — format, encryption, integrity verification.] - GDPR Article 6\(1\)\(a\), Article 7
+- ISO/IEC 27701:2019 c",xfw_bridge,2026-08-17 21:39:41.193918+00
+Consent Management Procedure.docx,A.8.24,ISO27001:2022,item:A.8.24:algorithms,present,medium,"[Bridge: Cryptography must protect portable personal data in transit — the exported dataset must be encrypted for transmission.] - GDPR Article 6\(1\)\(a\), Article 7
+- ISO/IEC 27701:2019 control A\.7",xfw_bridge,2026-08-17 21:39:41.193918+00
+Consent Management Procedure.docx,A.7.3.8,ISO27701:2019,item:A.7.3.8:proc_deleted_notification,present,medium,"[Bridge: 27701 A.7.3.8 structured commonly-used machine-readable format aligns with Art.20 portability.] - GDPR Article 6\(1\)\(a\), Article 7
+- ISO/IEC 27701:2019 control A\.7\.5\.5
+- CCPA/CPRA consu",xfw_bridge,2026-08-17 21:39:41.193918+00
+Consent Management Procedure.docx,A.5.31,ISO27001:2022,item:A.5.31:owner_per_item,present,medium,[Bridge: Legal requirements control is the direct ISO mechanism for identifying and documenting the lawful basis for each processing activity — a mandatory GDPR requirement.] This procedure applies to,xfw_bridge,2026-08-17 21:39:41.193918+00
+Consent Management Procedure.docx,A.5.20,ISO27001:2022,item:A.5.20:acceptable_use,present,medium,"[Bridge: 27701 B.8.2.3 marketing/advertising use restriction is a supplier-agreement term under 27001 A.5.20.] - Consent is the legal basis for processing
+- Individuals have the right to opt out of da",xfw_bridge,2026-08-17 21:39:41.193918+00
+Consent Management Procedure.docx,Art.30.1.e,GDPR:2016/679,item:Art.30:categories_data,present,medium,"[Bridge: 27701 A.7.5.3 transfer records support Art.30.1.e transfer-recipient recording.] obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal",xfw_bridge,2026-08-17 21:39:41.193918+00
+Processor Operations Procedures.docx,A.7.2.1,ISO27701:2019,item:A.7.2.1:proc_intake_trigger,present,medium,Identify data locations and subprocessors,fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.2.1,ISO27701:2019,item:A.7.2.1:reg_activity_link,present,medium,Identify data locations and subprocessors,fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.3.6,ISO27701:2019,item:A.7.3.6:proc_access_flow,present,medium,Complies with ISO/IEC 27701:2019 and GDPR Article 28\(3\)\.,fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.3.6,ISO27701:2019,item:A.7.3.6:scope_erasure_exceptions,present,medium,Complies with ISO/IEC 27701:2019 and GDPR Article 28\(3\)\.,fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.2,ISO27701:2019,item:A.7.4.2:rev_necessity_audit,present,medium,Logging Processing Operations \(A\.8\.3\.1\),fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.7,ISO27701:2019,item:A.7.4.7:scope_default_period,present,high,Logs must be: Created during onboarding. Reviewed at least annually or upon significant change. Retained for 5 years after end of engagement,extracted,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.5.3,ISO27701:2019,item:A.7.5.3:scope_retention_period,present,medium,"Return , Transfer or Deletion of PII \(A\.8\.3\.2 / B\.8\.4\.2\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.5.3,ISO27701:2019,item:A.7.5.3:proc_retention_policy,present,medium,"Return , Transfer or Deletion of PII \(A\.8\.3\.2 / B\.8\.4\.2\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.5.3,ISO27701:2019,item:A.7.5.3:proc_rights_transfer,present,medium,"Return , Transfer or Deletion of PII \(A\.8\.3\.2 / B\.8\.4\.2\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.1,ISO27701:2019,item:B.8.2.1:scope_pii_processor_test,present,medium,"This procedure defines Arion Networks' operational responsibilities when acting as a data processor, including:",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.1,ISO27701:2019,item:B.8.2.1:proc_assistance_scope,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.1,ISO27701:2019,item:B.8.2.1:proc_customer_dpia_support,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.2,ISO27701:2019,item:B.8.2.2:scope_own_controller,present,medium,Applies to all services where Arion Networks acts as a processor or subprocessor of personal data on behalf of a client \(controller\)\.,fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.2,ISO27701:2019,item:B.8.2.2:proc_technical_justification,present,medium,"This procedure defines Arion Networks' operational responsibilities when acting as a data processor, including:",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.4.2,ISO27701:2019,item:B.8.4.2:proc_lapse_protection,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.4.2,ISO27701:2019,item:B.8.4.2:proc_return_capability,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.5.1,ISO27701:2019,item:B.8.5.1:proc_international_agreements,present,medium,"Return , Transfer or Deletion of PII \(A\.8\.3\.2 / B\.8\.4\.2\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.5.5,ISO27701:2019,item:B.8.5.5:proc_default_reject,present,medium,"- Upon termination of a processing relationship:
+	- The default expectation is __complete and secure deletion__ of PII unless otherwise agreed
+	- Clients may formally request return of data in structu",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.2.1,ISO27701:2019,item:A.7.2.1:rev_undocumented_sweep,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.2.1,ISO27701:2019,item:A.7.2.1:rev_specificity_audit,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.2.1,ISO27701:2019,item:A.7.2.1:rev_date,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.2.1,ISO27701:2019,item:A.7.2.1:scope_pii_test,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.2.1,ISO27701:2019,item:A.7.2.1:scope_activities,present,high,Arion processes customer PII ONLY for purposes specified in the customer's DPA. Processing purposes are documented in the Processor Operations Log for each customer.,extracted,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.2.1,ISO27701:2019,item:A.7.2.1:reg_retention,present,medium,Identify data locations and subprocessors,fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.2.1,ISO27701:2019,item:A.7.2.1:reg_lawful_basis_link,present,medium,Identify data locations and subprocessors,fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.2.1,ISO27701:2019,item:A.7.2.1:reg_categories,present,medium,"Includes consulting services, SaaS tools, custom deployments, subprocessed workstreams and eny other services involving client PII processing\.",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.2.6,ISO27701:2019,item:A.7.2.6:scope_processor_test,present,medium,"Includes consulting services, SaaS tools, custom deployments, subprocessed workstreams and eny other services involving client PII processing\.",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.2.6,ISO27701:2019,item:A.7.2.6:reg_service_scope,present,medium,"This procedure defines Arion Networks' operational responsibilities when acting as a data processor, including:",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.2.7,ISO27701:2019,item:A.7.2.7:reg_processing_scope,present,medium,"Applies to all services where Arion Networks acts as a processor or subprocessor of personal data on behalf of a client (controller). Includes consulting services, SaaS tools, custom deployments, subp",extracted,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.1,ISO27701:2019,item:B.8.2.1:rev_coverage_check,present,high,Defines how Arion Networks assists customers (controllers) in fulfilling their GDPR obligations.,extracted,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.1,ISO27701:2019,item:B.8.2.1:rev_reviewer,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.1,ISO27701:2019,item:B.8.2.1:rev_date,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.1,ISO27701:2019,item:B.8.2.1:scope_exclusions,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.1,ISO27701:2019,item:B.8.2.1:scope_customer_list,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.1,ISO27701:2019,item:B.8.2.1:reg_term,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.1,ISO27701:2019,item:B.8.2.1:reg_instructions_channel,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.1,ISO27701:2019,item:B.8.2.1:reg_assistance_coverage,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.1,ISO27701:2019,item:B.8.2.1:reg_agreement_reference,present,medium,"- PII processed under a client contract \(e\.g\., compliance documents uploaded to ArionComply\) shall NOT be used for Arion Networks' own marketing or advertising purposes
+- This prohibition applies ",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.1,ISO27701:2019,item:B.8.2.1:reg_customer_id,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.1,ISO27701:2019,item:B.8.2.1:proc_subject_matter_scope,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.1,ISO27701:2019,item:B.8.2.1:proc_documented_instructions,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.1,ISO27701:2019,item:B.8.2.1:proc_intake_gate,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.2,ISO27701:2019,item:B.8.2.2:rev_date,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.2,ISO27701:2019,item:B.8.2.2:scope_data_flows,present,high,Arion processes customer PII ONLY for purposes specified in the customer's DPA. Processing purposes are documented in the Processor Operations Log for each customer. Staff with access to customer data,extracted,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.2,ISO27701:2019,item:B.8.2.2:reg_last_verified,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.2,ISO27701:2019,item:B.8.2.2:reg_permitted_secondary,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.2,ISO27701:2019,item:B.8.2.2:reg_stated_purposes,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.2,ISO27701:2019,item:B.8.2.2:reg_customer_id,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.2,ISO27701:2019,item:B.8.2.2:proc_customer_verification,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.2,ISO27701:2019,item:B.8.2.2:proc_no_side_purpose,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.2,ISO27701:2019,item:B.8.2.2:proc_instruction_capture,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.3.6,ISO27701:2019,item:A.7.3.6:rev_sla_audit,present,high,"Arion Networks provides search results, exports, or executes deletion on customer instruction within 10 business days.",extracted,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.3.6,ISO27701:2019,item:A.7.3.6:rev_reviewer,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.3.6,ISO27701:2019,item:A.7.3.6:rev_date,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.3.6,ISO27701:2019,item:A.7.3.6:scope_jurisdiction_restrictions,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.3.6,ISO27701:2019,item:A.7.3.6:scope_subject_universe,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.3.6,ISO27701:2019,item:A.7.3.6:reg_received_date,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.3.6,ISO27701:2019,item:A.7.3.6:reg_request_type,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.3.6,ISO27701:2019,item:A.7.3.6:reg_subject_id,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.3.6,ISO27701:2019,item:A.7.3.6:reg_request_id,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.3.6,ISO27701:2019,item:A.7.3.6:proc_response_sla,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.3.6,ISO27701:2019,item:A.7.3.6:proc_erasure_flow,present,medium,"This procedure defines Arion Networks' operational responsibilities when acting as a data processor, including:",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.3.6,ISO27701:2019,item:A.7.3.6:proc_correction_flow,present,medium,"This procedure defines Arion Networks' operational responsibilities when acting as a data processor, including:",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.2,ISO27701:2019,item:A.7.4.2:rev_access_audit,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.2,ISO27701:2019,item:A.7.4.2:rev_date,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.2,ISO27701:2019,item:A.7.4.2:scope_exclusions,present,medium,"This procedure defines Arion Networks' operational responsibilities when acting as a data processor, including:",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.2,ISO27701:2019,item:A.7.4.2:scope_internal_operations,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.2,ISO27701:2019,item:A.7.4.2:reg_purpose_link,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.2,ISO27701:2019,item:A.7.4.2:reg_operation_id,present,medium,"This procedure defines Arion Networks' operational responsibilities when acting as a data processor, including:",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.2,ISO27701:2019,item:A.7.4.2:proc_policy_link,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.2,ISO27701:2019,item:A.7.4.2:proc_access_limit,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.5,ISO27701:2019,item:A.7.4.5:rev_trigger_health,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.5,ISO27701:2019,item:A.7.4.5:rev_reviewer,present,medium,"Includes consulting services, SaaS tools, custom deployments, subprocessed workstreams and eny other services involving client PII processing\.",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.5,ISO27701:2019,item:A.7.4.5:rev_date,present,medium,"Includes consulting services, SaaS tools, custom deployments, subprocessed workstreams and eny other services involving client PII processing\.",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.5,ISO27701:2019,item:A.7.4.5:scope_exceptions,present,medium,"Includes consulting services, SaaS tools, custom deployments, subprocessed workstreams and eny other services involving client PII processing\.",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.5,ISO27701:2019,item:A.7.4.5:scope_backup_coverage,present,medium,"Includes consulting services, SaaS tools, custom deployments, subprocessed workstreams and eny other services involving client PII processing\.",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.5,ISO27701:2019,item:A.7.4.5:scope_end_triggers,present,medium,"This procedure defines Arion Networks' operational responsibilities when acting as a data processor, including:",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.5,ISO27701:2019,item:A.7.4.5:reg_verification,present,medium,"Includes consulting services, SaaS tools, custom deployments, subprocessed workstreams and eny other services involving client PII processing\.",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.5,ISO27701:2019,item:A.7.4.5:reg_action_type,present,medium,"Includes consulting services, SaaS tools, custom deployments, subprocessed workstreams and eny other services involving client PII processing\.",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.5,ISO27701:2019,item:A.7.4.5:reg_activity_link,present,medium,"Includes consulting services, SaaS tools, custom deployments, subprocessed workstreams and eny other services involving client PII processing\.",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.5,ISO27701:2019,item:A.7.4.5:reg_action_id,present,medium,"Includes consulting services, SaaS tools, custom deployments, subprocessed workstreams and eny other services involving client PII processing\.",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.5,ISO27701:2019,item:A.7.4.5:proc_records,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.5,ISO27701:2019,item:A.7.4.5:proc_verification,present,medium,"Includes consulting services, SaaS tools, custom deployments, subprocessed workstreams and eny other services involving client PII processing\.",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.5,ISO27701:2019,item:A.7.4.5:proc_delete_or_deidentify,present,medium,"Includes consulting services, SaaS tools, custom deployments, subprocessed workstreams and eny other services involving client PII processing\.",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.5,ISO27701:2019,item:A.7.4.5:proc_end_of_processing_trigger,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.7,ISO27701:2019,item:A.7.4.7:rev_deletion_audit,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.7,ISO27701:2019,item:A.7.4.7:rev_date,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.7,ISO27701:2019,item:A.7.4.7:scope_business_data,present,medium,"Includes consulting services, SaaS tools, custom deployments, subprocessed workstreams and eny other services involving client PII processing\.",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.7,ISO27701:2019,item:A.7.4.7:scope_regulated_data,present,medium,"Includes consulting services, SaaS tools, custom deployments, subprocessed workstreams and eny other services involving client PII processing\.",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.7,ISO27701:2019,item:A.7.4.7:reg_retention_period,present,medium,"- Provide: Processing details \(data categories, retention, security measures, subprocessors\)
+- Timeline: Within 10 business days
+- Format: Information from customer's RoPA entry \+ relevant DPA anne",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.4.7,ISO27701:2019,item:A.7.4.7:proc_conflict_resolution,present,medium,"- Provide: Processing details \(data categories, retention, security measures, subprocessors\)
+- Timeline: Within 10 business days
+- Format: Information from customer's RoPA entry \+ relevant DPA anne",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.3.1,ISO27701:2019,item:B.8.3.1:rev_sla_audit,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.3.1,ISO27701:2019,item:B.8.3.1:rev_reviewer,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.3.1,ISO27701:2019,item:B.8.3.1:rev_date,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.3.1,ISO27701:2019,item:B.8.3.1:scope_exclusions,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.3.1,ISO27701:2019,item:B.8.3.1:scope_customer_engagements,present,medium,"This procedure defines Arion Networks' operational responsibilities when acting as a data processor, including:",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.3.1,ISO27701:2019,item:B.8.3.1:reg_sla_met,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.3.1,ISO27701:2019,item:B.8.3.1:reg_response,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.3.1,ISO27701:2019,item:B.8.3.1:reg_customer_id,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.3.1,ISO27701:2019,item:B.8.3.1:reg_request_id,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.3.1,ISO27701:2019,item:B.8.3.1:proc_sla,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.3.1,ISO27701:2019,item:B.8.3.1:proc_contract_scope,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.3.1,ISO27701:2019,item:B.8.3.1:proc_informational_support,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.3.1,ISO27701:2019,item:B.8.3.1:proc_technical_support,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.4.2,ISO27701:2019,item:B.8.4.2:rev_completion_audit,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.4.2,ISO27701:2019,item:B.8.4.2:rev_reviewer,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.4.2,ISO27701:2019,item:B.8.4.2:rev_date,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.4.2,ISO27701:2019,item:B.8.4.2:scope_retention_window,present,high,"Upon termination of a processing relationship: The default expectation is complete and secure deletion of PII unless otherwise agreed. Clients may formally request return of data in structured, common",extracted,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.4.2,ISO27701:2019,item:B.8.4.2:scope_ma_events,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.4.2,ISO27701:2019,item:B.8.4.2:reg_completion_date,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.4.2,ISO27701:2019,item:B.8.4.2:reg_action_type,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.4.2,ISO27701:2019,item:B.8.4.2:reg_termination_date,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.4.2,ISO27701:2019,item:B.8.4.2:reg_customer_id,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.4.2,ISO27701:2019,item:B.8.4.2:proc_certification,present,medium,"This procedure defines Arion Networks' operational responsibilities when acting as a data processor, including:",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.4.2,ISO27701:2019,item:B.8.4.2:proc_customer_visibility,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.4.2,ISO27701:2019,item:B.8.4.2:proc_disposal_capability,present,medium,"This procedure defines Arion Networks' operational responsibilities when acting as a data processor, including:",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.4.2,ISO27701:2019,item:B.8.4.2:proc_transfer_capability,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.3,ISO27701:2019,,present,high,"PII processed under a client contract (e.g., compliance documents uploaded to ArionComply) shall NOT be used for Arion Networks' own marketing or advertising purposes. This prohibition applies to all ",extracted,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.4,ISO27701:2019,,present,high,"If Arion Networks staff identify a customer instruction that may violate applicable data protection legislation (GDPR, Czech Act No. 110/2019), the following process applies: Any staff member who rece",extracted,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.3.1,ISO27701:2019,,present,high,Arion Networks provides customers with means to fulfill data subject requests.,extracted,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.5.1,ISO27701:2019,,present,high,"When Arion Networks plans to change the jurisdictions where customer PII is processed or stored, we must inform customers in accordance with control B.8.5.1 and our Customer DPA terms.",extracted,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.5.6,ISO27701:2019,,present,high,"Arion Networks discloses all sub-processors used to process customer PII before their use commences, in accordance with ISO/IEC 27701:2019 control B.8.5.6 and the Customer DPA (DOC065).",extracted,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.5.8,ISO27701:2019,,present,high,"When Arion Networks plans to add or replace a sub-processor who processes customer PII, we must inform customers in accordance with control B.8.5.8 and Customer DPA Section 8.",extracted,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.4.3,ISO27701:2019,,present,high,All return and transfer operations: Use encryption in transit (TLS 1.2+). Require written authorization from customer. Generate secure download links with password protection and expiration (7 days). ,extracted,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.7.3.9,ISO27701:2019,,present,high,"For complex requests, customers submit support ticket in ArionComply platform with: Data subject identifier. Request type. Specific requirements. Arion Networks provides search results, exports, or ex",extracted,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.2.6,ISO27701:2019,,present,high,Maintain a log for each client engagement where Arion processes PII. Each log entry must include: Processing purpose. Data categories. Processing duration. Subprocessors used. Security measures applie,extracted,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,B.8.5.7,ISO27701:2019,,present,high,"Email notification sent to ALL active ArionComply customers minimum 30 days before the new sub-processor commences processing. Notification must include: sub-processor name, country, service provided,",extracted,2026-08-17 21:40:09.050908+00
+Processor Operations Procedures.docx,A.5.34,ISO27001:2022,item:A.5.34:owner,present,medium,[Bridge: 27701 A.7.2.1 identify and document purpose of PII processing implements 27001 A.5.34 privacy protection through purpose specification — the foundational scoping decision.] - Maintain a log f,xfw_bridge,2026-08-17 21:40:09.537019+00
+Processor Operations Procedures.docx,A.8.10,ISO27001:2022,item:A.8.10:deletion_methods,present,medium,[Bridge: 27701 A.7.3.6 erasure right rides on top of 27001 A.8.10 information deletion — the operational deletion capability is the technical implementation of the privacy right.] - Maintain a log for,xfw_bridge,2026-08-17 21:40:09.537019+00
+Processor Operations Procedures.docx,A.5.33,ISO27001:2022,item:A.5.33:owner,present,medium,[Bridge: 27701 A.7.4.7 PII retention schedules coexist with 27001 A.5.33 records protection retention — cross-frame coherence required.] - Maintain a log for each client engagement where Arion process,xfw_bridge,2026-08-17 21:40:09.537019+00
+Processor Operations Procedures.docx,Art.30.1.e,GDPR:2016/679,item:Art.30:categories_data,present,medium,"[Bridge: 27701 A.7.5.3 transfer records support Art.30.1.e transfer-recipient recording.] Return , Transfer or Deletion of PII \(A\.8\.3\.2 / B\.8\.4\.2\)",xfw_bridge,2026-08-17 21:40:09.537019+00
+Processor Operations Procedures.docx,A.5.9,ISO27001:2022,item:A.5.9:proc_ownership,present,medium,"[Bridge: 27701 A.7.5.3 transfer records are a records-programme artefact — analogous to 27001 A.5.9 asset register discipline for PII transfer events.] Return , Transfer or Deletion of PII \(A\.8\.3\.",xfw_bridge,2026-08-17 21:40:09.537019+00
+Processor Operations Procedures.docx,A.5.19,ISO27001:2022,item:A.5.19:agreement_handoff,present,medium,[Bridge: 27701 B.8.2.1 mirrors 27001 A.5.19 from the processor side — the customer agreement is the supplier-relationship equivalent for the processor.] - PII processed under a client contract \(e\.g\,xfw_bridge,2026-08-17 21:40:09.537019+00
+Processor Operations Procedures.docx,A.5.20,ISO27001:2022,item:A.5.20:acceptable_use,present,medium,[Bridge: 27701 B.8.2.2 processing only for organisation-authorised purposes is a supplier-agreement term covered by 27001 A.5.20.] - Maintain a log for each client engagement where Arion processes PII,xfw_bridge,2026-08-17 21:40:09.537019+00
+Processor Operations Procedures.docx,A.5.22,ISO27001:2022,item:A.5.22:rev_audit,present,medium,"[Bridge: 27701 A.7.2.6 supports 27001 A.5.22 monitoring, review and change management of supplier services — processor contracts are the vehicle for the review + audit rights.] Includes consulting ser",xfw_bridge,2026-08-17 21:40:09.537019+00
+Processor Operations Procedures.docx,A.6.6,ISO27001:2022,item:A.6.6:reg_expiry_or_active,present,medium,"[Bridge: 27701 A.7.2.6 processor contract terms include NDA-like confidentiality obligations, aligning with 27001 A.6.6 confidentiality / NDA controls.] Includes consulting services, SaaS tools, custo",xfw_bridge,2026-08-17 21:40:09.537019+00
+Processor Operations Procedures.docx,Art.6.4.e,GDPR:2016/679,item:Art.6:owner,present,medium,"[Bridge: 27701 A.7.4.5 supports Art.6.4.e — compatibility test via de-identification for further processing.] - Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal dat",xfw_bridge,2026-08-17 21:40:09.537019+00
+Processor Operations Procedures.docx,A.5.11,ISO27001:2022,item:A.5.11:owner,present,medium,[Bridge: 27701 A.7.4.5 PII de-identification / deletion at end of processing is a specific instance of the general end-of-lifecycle asset-return pattern at 27001 A.5.11.] - Logging processing activiti,xfw_bridge,2026-08-17 21:40:09.537019+00
+Processor Operations Procedures.docx,A.6.5,ISO27001:2022,item:A.6.5:reg_acknowledgment,present,medium,"[Bridge: 27701 A.7.4.5 deletion extends to cleanup of PII access held by employees at 27001 A.6.5 post-termination handling.] - Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion",xfw_bridge,2026-08-17 21:40:09.537019+00
+Processor Operations Procedures.docx,Art.28.3.e,GDPR:2016/679,item:Art.28:assistance,present,medium,"[Bridge: 27701 B.8.3.1 is the certifiable operationalisation of Art.28.3.e — processor assists controller with subject rights.] - Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deleti",xfw_bridge,2026-08-17 21:40:09.537019+00

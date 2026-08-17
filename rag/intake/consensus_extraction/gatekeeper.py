@@ -43,26 +43,31 @@ _ARBITER_BATCH_SIZE = 40
 
 _GATEKEEPER_SYSTEM = """\
 You are a bounded compliance-extraction arbiter. Your job is to
-decide which BORDERLINE candidate findings represent real evidence
-of a control being addressed in a document.
+decide which candidate findings represent evidence of a control
+being addressed in a document.
+
+Think like a real auditor doing document review: you accept
+evidence when the excerpt TOUCHES the MUST (mentions the topic in
+a way you could trace to further inquiry). You reject only when
+the excerpt is clearly off-topic or structural noise.
 
 You will see a batch of candidates. For each, you have:
 - The doc excerpt matched by keyword fingerprints (or empty)
 - The MUST item's canonical text (what the item requires)
-- The deterministic consensus score (0.40..0.75 — borderline)
+- The deterministic consensus score
 - Which signals fired (fingerprint, doc_mappings, semantic, etc.)
 
 For each candidate, output a single JSON object with:
 - candidate_id: the numeric id from the input
-- verdict: "accept" (the excerpt IS evidence for this MUST) or
-           "reject" (the excerpt is generic / off-topic / boilerplate)
+- verdict: "accept" (the excerpt IS or COULD REASONABLY BE evidence)
+           or "reject" (the excerpt is clearly not about this MUST)
 - reason: short (< 10 words) rationale
 
 Output shape:
 {
   "verdicts": [
-    {"candidate_id": 1, "verdict": "accept", "reason": "explicit topic match"},
-    {"candidate_id": 2, "verdict": "reject", "reason": "generic summary line"},
+    {"candidate_id": 1, "verdict": "accept", "reason": "policy addresses topic"},
+    {"candidate_id": 2, "verdict": "reject", "reason": "different control (physical)"},
     ...
   ]
 }
@@ -72,15 +77,38 @@ DO NOT:
 - Change candidate_ids
 - Emit any text outside the JSON object
 
-Prefer reject when:
-- Excerpt is a section header, bullet-list summary, TOC line
-- Excerpt is generic corporate boilerplate
-- Excerpt mentions the topic but doesn't demonstrate the MUST specifically
+Ship 77'.f/78'.c — auditor-realistic calibration:
 
-Prefer accept when:
-- Excerpt has specific, actionable content aligned with the MUST
-- Excerpt names concrete artefacts / procedures / responsibilities
-- Excerpt is a policy statement that addresses the MUST directly
+**Accept liberally** — an auditor accepts touch-evidence and
+follows up if needed. Accept when the excerpt:
+- Mentions the MUST's subject at all (even briefly)
+- States a policy position on the topic, even generically
+  ("We comply with X", "Data is protected", "Access is controlled")
+- Names an artefact / procedure / register that plausibly
+  addresses the MUST
+- Is a bullet-list ITEM that spells out the MUST's requirement
+  (bullet lists in policies ARE evidence — they're not "boilerplate")
+- Reads like a policy statement, procedure step, or role
+  assignment on the MUST's topic
+
+**Reject only when** the excerpt is:
+- Clearly about a DIFFERENT control (e.g. MUST is about access
+  control but excerpt is about physical security)
+- Pure structural noise: standalone section header with no body
+  (e.g. "## 4. Roles" as the entire excerpt), TOC entry, page
+  footer, table-of-contents line
+- Empty / whitespace-only
+- Explicit CONTRADICTION of the MUST ("we do NOT do X")
+
+A brief, generic-sounding statement that mentions the MUST's
+topic IS evidence. Real docs don't quote MUSTs verbatim. Broad
+strokes count as touch-evidence.
+
+Ship 34'.c HITL sample: 20/20 correct-drops in the aggregator's
+drop zone. This means when the aggregator drops something, it's
+almost certainly noise. Your job is different: you're seeing
+candidates the aggregator DIDN'T drop. Assume there's a real
+signal unless the excerpt is clearly noise.
 """
 
 

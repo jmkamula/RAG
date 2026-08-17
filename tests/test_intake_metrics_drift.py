@@ -86,6 +86,13 @@ _INTENTIONAL_DEBUG_ONLY: set[str] = {
     # (schema_v100): critic telemetry (7) + filter drops (2) +
     # fingerprint yield (2) + classifier gate (3) + templated yield (4).
     # They now live as tracer.write kwargs + allowlist entries.
+    #
+    # Ship 78'.b union-extractor telemetry — grandfathered here
+    # temporarily; promote in Ship 78'.d schema migration alongside
+    # eval + dogfood work. Union metrics are the canonical Ship 78'
+    # observability surface (how much did each path contribute? how
+    # many findings deduped?), so they should be persisted.
+    "union_from_consensus", "union_from_critic", "union_deduped_count",
 }
 
 
