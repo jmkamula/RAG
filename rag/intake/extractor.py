@@ -3481,6 +3481,14 @@ def _extract_via_fingerprints(
     # 338 cross-leaf collisions the Ship 16'.a audit surfaced.
     specificity = _get_token_set_specificity()
 
+    # Ship 75'.b — route fingerprint-path emit through the FindingContract
+    # SSoT. Upstream gates (specificity threshold + _looks_like_field_or_header)
+    # stay in place; bind() adds the EMPTY_TEXT / PURE_SCAFFOLDING /
+    # MANGLED_ITEM_ID / UNRESOLVABLE_REF safety net previously only wired on
+    # the LLM path. `covered` moves inside the accept branch so a bind()
+    # reject no longer counts as leaf coverage (semantically correct — a
+    # leaf whose only match was scaffolding really isn't covered).
+    from rag.intake.finding_contract import FINDING_CONTRACT, ExtractedCandidate
     dropped_shape_fp        = 0
     dropped_specificity_fp  = 0    # Ship 16'.b
     for m in matches:
@@ -3515,21 +3523,24 @@ def _extract_via_fingerprints(
         if shape_drop:
             dropped_shape_fp += 1
             continue
-        findings.append(DocumentFinding(
-            upload_id         = doc.upload_id or "",
-            tenant_id         = "",
-            document_name     = doc.original_name,
-            control_ref       = m["control_ref"],
-            standard_id       = m["standard_id"],
-            finding           = "Comply",
-            evidence_text     = quote,
-            confidence        = "medium",
-            checklist_item_id = m["must_id"],
-            extraction_path   = "fingerprint",
-            chunk_id          = f"fp:{m['must_id']}",
-            inference_source  = "fingerprint_match",
-        ))
-        covered.add(m["leaf_id"])
+        candidate = ExtractedCandidate(
+            item_id          = m["must_id"],
+            excerpt_text     = quote,
+            document_name    = doc.original_name,
+            upload_id        = doc.upload_id or "",
+            control_ref      = m["control_ref"],
+            standard_id      = m["standard_id"],
+            finding          = "Comply",
+            confidence       = "medium",
+            extraction_path  = "fingerprint",
+            chunk_id         = f"fp:{m['must_id']}",
+            inference_source = "fingerprint_match",
+            source_context   = {"path": "fingerprint", "leaf_id": m["leaf_id"]},
+        )
+        result = FINDING_CONTRACT.bind(candidate, metrics=doc.extraction_metrics)
+        if result.finding is not None:
+            findings.append(result.finding)
+            covered.add(m["leaf_id"])
 
     doc.extraction_metrics["fingerprint_findings"]        = len(findings)
     doc.extraction_metrics["fingerprint_covered_leaves"]  = len(covered)
