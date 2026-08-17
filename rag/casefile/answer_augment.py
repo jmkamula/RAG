@@ -96,6 +96,22 @@ class CaseFileShim:
     def posture_for(self, ref):
         return self._posture_by_ref.get(ref)
 
+    def in_scope(self, ref):
+        """Duck-type CaseFile.in_scope (Ship 76'.b SSoT predicate).
+
+        Ship 76'.c bug fixed here: build_related_cards calls
+        cf.in_scope(ref) which is on CaseFile but was missing on this
+        Shim, causing every short-circuit that used
+        build_short_circuit_structured to throw AttributeError,
+        silently fall through the try/except, and land on case-file
+        flow. All Stage-2 chat cases (~150 evals) failed for this
+        reason in the Ship 76'.c/d full-eval run.
+        """
+        rec = self.posture_for(ref)
+        if not rec:
+            return True
+        return rec.get("applicability_status") != "na"
+
     def needs_draft_tag(self, ref):
         rec = self.posture_for(ref) or {}
         finding = _norm_finding(rec.get("finding"))
@@ -1089,6 +1105,16 @@ def build_related_cards(
         if r and r not in seen:
             seen.add(r)
             all_refs.append(r)
+    # Ship 76'.c — track the "LLM narrative surface" for the soft
+    # scope filter below (Ship 66'.c grounding rule).
+    # cited = refs the LLM actually named in intro + actions;
+    # extras = preservation-check required_refs (session + cited context).
+    # Both count as "LLM has committed to naming this ref" — even if the
+    # ref is scoped-out (applicability_status='na'), we render a card so
+    # the mention has an anchor. Auto-added demonstrators + cross-role
+    # neighbors that are N/A drop (they're context injection, not
+    # narrative commitment).
+    _llm_narrative_refs = set(cited) | set(extras)
 
     # Ship 23'.c — normalize primary_ref before use. The LLM
     # sometimes emits variants like "GDPR Art. 32" instead of the
@@ -1205,6 +1231,16 @@ def build_related_cards(
         verdict = _norm_verdict(posture.get("finding") or "")
         draft   = cf.needs_draft_tag(ref)
         role    = cf.role_of(ref) or "unknown"
+
+        # Ship 76'.c — soft N/A scope filter (SSoT via cf.in_scope).
+        # Drop scoped-out refs UNLESS the LLM cited them or preservation-
+        # check required them (Ship 66'.c grounding rule extended to
+        # RelatedCard). Auto-injected demonstrators + cross-role neighbors
+        # that are scoped out for this tenant no longer surface as cards.
+        # Fixes eval case #5 leak: A.7.2 DEMONSTRATES Art.32 auto-injects
+        # when Art.32 is cited, but A.7.2 is N/A on cloud tenants.
+        if not cf.in_scope(ref) and ref not in _llm_narrative_refs:
+            continue
 
         relation = _classify_relation(cf, ref, primary_ref, demonstrators)
         summary, still, leaves = _evidence_summary(

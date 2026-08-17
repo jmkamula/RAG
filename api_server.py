@@ -2805,6 +2805,12 @@ async def dashboard_posture(
     try:
         set_session(conn, key_info.tenant_id)
         with conn.cursor() as cur:
+            # Ship 76'.d — hard N/A scope filter at SQL level.
+            # Ship 66'.a SSoT rule: applicability_status='na' is the
+            # tenant's scoping decision; scoped-out controls must not
+            # surface on the heatmap. Callers who need scope-out
+            # visibility should read the scope-out summary panel
+            # (Ship 5' dejargonize pass) instead of the heatmap grid.
             cur.execute("""
                 SELECT pc.standard_id, pc.control_ref, pc.finding,
                        pc.confirmation_status,
@@ -2822,6 +2828,7 @@ async def dashboard_posture(
                    AND pa.status      = 'pending'
                  WHERE pc.tenant_id = %s::uuid
                    AND pc.is_active = TRUE
+                   AND pc.applicability_status != 'na'
                  ORDER BY pc.standard_id, pc.control_ref
             """, [key_info.tenant_id])
             rows = cur.fetchall()

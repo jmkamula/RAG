@@ -126,10 +126,15 @@ async def get_posture(
     changed_since: Optional[str] = Query(None, description="ISO8601 timestamp — return only rows updated at or after this."),
     limit:         int = Query(500, ge=1, le=2000, description="Max rows to return."),
     offset:        int = Query(0,   ge=0,          description="Rows to skip (pagination)."),
+    include_na:    bool = Query(False, description="Include controls the tenant scoped out (applicability_status='na'). Default False — auditors reviewing scope decisions set to True."),
 ):
     """Bulk posture snapshot across all enrolled frameworks (or a
     single one via `?standard_id=`). Returns a flat list — external
-    clients iterate directly without walking a nested tree."""
+    clients iterate directly without walking a nested tree.
+
+    Ship 76'.d — by default, controls the tenant scoped OUT
+    (`applicability_status='na'`) are excluded. Set `?include_na=true`
+    to see the full inventory including scope-out decisions."""
     # Validate finding filter values
     if finding:
         bad = [f for f in finding if f not in _ALLOWED_FINDINGS]
@@ -159,6 +164,12 @@ async def get_posture(
             # Build WHERE clause
             where_parts = ["pc.tenant_id = %s::uuid", "pc.is_active = TRUE"]
             params: list = [key.tenant_id]
+            # Ship 76'.d — soft N/A scope filter. Ship 66'.a SSoT rule:
+            # applicability_status='na' is the tenant's scope decision.
+            # Default excludes scoped-out controls; ?include_na=true
+            # opts in for auditors reviewing scope decisions.
+            if not include_na:
+                where_parts.append("pc.applicability_status != 'na'")
             if standard_id:
                 where_parts.append("pc.standard_id = %s")
                 params.append(standard_id)
@@ -269,7 +280,8 @@ async def get_posture_control(
                 """
                 SELECT pc.finding, pc.confirmation_status, pc.confidence,
                        pc.last_updated, pc.gap_description, pc.action_required,
-                       pa.status, pa.finding, pa.gap_description
+                       pa.status, pa.finding, pa.gap_description,
+                       pc.applicability_status
                   FROM posture_controls pc
                   LEFT JOIN posture_assertions pa
                     ON pa.tenant_id   = pc.tenant_id
@@ -302,7 +314,24 @@ async def get_posture_control(
         )
 
     (finding, cnf, conf, lu, gap, action,
-     eng_status, eng_finding, eng_reason) = row
+     eng_status, eng_finding, eng_reason,
+     applicability_status) = row
+
+    # Ship 76'.d — hard N/A scope filter. Ship 66'.a SSoT rule:
+    # controls the tenant scoped OUT are 404 from the partner's
+    # perspective (they aren't in your scope). Delegates to
+    # rag.posture.scope.status_in_scope predicate. The detail-message
+    # "out of scope" trigger phrase maps to `control_out_of_scope`
+    # error code via rag/external/errors.py (Ship 76'.d).
+    from rag.posture.scope import status_in_scope
+    if not status_in_scope(applicability_status):
+        raise HTTPException(
+            status_code = 404,
+            detail      = (
+                f"Control ({standard_id}, {control_ref}) is out of "
+                f"scope for this tenant."
+            ),
+        )
 
     # Ship 7'.c — engine reason composes _humanize_reason (semantic:
     # "0/4 children" → "0 of 4 evidence sources satisfied") with the

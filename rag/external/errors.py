@@ -75,6 +75,14 @@ async def external_http_exception_handler(request: Request, exc: HTTPException):
         detail_l = str(exc.detail).lower()
         if "header required" in detail_l or "missing" in detail_l:
             code = "missing_api_key"
+    # Ship 76'.d — 404 sub-code for scope decisions. When a control
+    # is out of scope for the tenant (applicability_status='na'), the
+    # detail message contains "out of scope" and we emit the more
+    # specific `control_out_of_scope` code so partners can distinguish
+    # "no such control" from "control exists but you scoped it out".
+    if exc.status_code == 404 and exc.detail:
+        if "out of scope" in str(exc.detail).lower():
+            code = "control_out_of_scope"
 
     request_id = getattr(request.state, "trace_id", None)
     body = {

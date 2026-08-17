@@ -205,11 +205,23 @@ def _render_xfw_bridges(cf: CaseFile) -> str:
     # (target.total - target.satisfied) under the cross-product bridge
     # writer model — it looked measured but wasn't. See Ship 68'.b
     # retro for the coverage-language retire arc.
+    # Ship 76'.c — hard N/A scope filter. If the xfw target itself
+    # (e.g. Art.32) is scoped out, drop the entire bridge line. If a
+    # PRIMARY ref (e.g. A.5.15) is scoped out but the target is in
+    # scope, drop that primary from the bridge but keep the line.
+    # Rationale: bridge lines that name N/A controls give the LLM
+    # false grounding for scope claims. Delegates to cf.in_scope()
+    # SSoT predicate (Ship 76'.b).
     lines: list[str] = []
     for xfw_ref, primary_refs in sorted(bridges.items()):
+        if not cf.in_scope(xfw_ref):
+            continue
+        in_scope_primaries = [p for p in primary_refs if cf.in_scope(p)]
+        if not in_scope_primaries:
+            continue
         parts: list[str] = []
         any_assessed = False
-        for pref in primary_refs:
+        for pref in in_scope_primaries:
             rec = posture.get(pref)
             if rec and rec.get("finding") in ("NC", "OFI", "Comply"):
                 any_assessed = True
@@ -222,6 +234,8 @@ def _render_xfw_bridges(cf: CaseFile) -> str:
             lines.append(f"- {xfw_ref} ← {joined}")
         else:
             lines.append(f"- {xfw_ref} ← {joined} [not yet assessed]")
+    if not lines:
+        return ""
     return "XFW BRIDGES:\n" + "\n".join(lines)
 
 
@@ -502,8 +516,17 @@ def _render_demonstrated_by(cf: CaseFile, max_items: int = 8) -> str:
     if not obligation_refs:
         return ""
 
+    # Ship 76'.c — hard N/A scope filter. Drop demonstrator sources
+    # (auto-injected ISO 27001 / 27701 controls that IMPLEMENTS/SUPPORTS
+    # the cited obligation) that are scoped out for this tenant. Also
+    # skip the obligation-ref group entirely if the obligation itself is
+    # scoped out — an out-of-scope obligation has no demonstrators
+    # story to tell.
+    # Delegates to cf.in_scope() SSoT predicate (Ship 76'.b).
     lines: list[str] = []
     for ref in obligation_refs:
+        if not cf.in_scope(ref):
+            continue
         sources = cf.demonstrated_by(ref)
         if not sources:
             continue
@@ -512,6 +535,8 @@ def _render_demonstrated_by(cf: CaseFile, max_items: int = 8) -> str:
         for src in sources[:max_items]:
             src_id  = src.get("src_id", "")
             src_ref = ref_of(src_id) if src_id else ""
+            if src_ref and not cf.in_scope(src_ref):
+                continue
             src_std = src.get("src_std", "")
             std_lbl = ""
             if src_std == "ISO27001:2022":
