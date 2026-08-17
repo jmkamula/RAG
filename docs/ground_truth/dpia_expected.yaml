@@ -500,17 +500,19 @@ art_36_expected:
     confidence: high
     quote: ""
   - must_id: item:Art.36:trigger_detection
-    verdict: partial
-    confidence: low
-    quote: |
-      Step 5: "Consult: Seek external advice or regulatory
-      guidance" — a trigger exists but doesn't specifically detect
-      Art.36 conditions (residual high risk despite mitigations).
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
     notes: |
-      Borderline. Same evidence as Art.35:art36_escalation which I
-      called satisfies. Being inconsistent — needs review. If we
-      accept Consult as Art.36 escalation, we should also accept it
-      as Art.36 trigger_detection.
+      Corrected on review. This MUST is about the Art.36
+      consultation PROCEDURE detecting its own trigger. This doc
+      is the DPIA procedure, not the Art.36 consultation procedure —
+      different artefact. The Art.35:art36_escalation MUST above
+      correctly captures that the DPIA procedure has the escalation
+      mechanism; Art.36:trigger_detection would require a dedicated
+      Art.36 procedure doc to satisfy.
+      (Same logic as A.5.34 bulk not_satisfies: DPIA procedure is
+      not the privacy policy artefact.)
   - must_id: item:Art.36:waiting_period
     verdict: not_satisfies
     confidence: high
@@ -650,8 +652,8 @@ a_5_34_expected:
 #
 # Art.36 (19 MUSTs):
 #   satisfies:     0
-#   partial:       1    (trigger_detection, low confidence)
-#   not_satisfies: 18
+#   partial:       0
+#   not_satisfies: 19   (all — this doc is not the Art.36 procedure)
 #
 # A.7.2.5 (21 MUSTs):
 #   satisfies:     7
@@ -665,7 +667,7 @@ a_5_34_expected:
 #
 # TOTAL candidate MUSTs: 89
 # Strict expected findings (satisfies only):   15
-# Lenient expected findings (+ partial):       28
+# Lenient expected findings (+ partial):       27
 #
 # Any extractor finding beyond this set is a false-positive candidate.
 
@@ -678,16 +680,18 @@ a_5_34_expected:
 #      from Section 5 Roles list; only in doc header as Owner).
 #   3. Enumerated A.5.34 explicitly (was bulk_not_satisfies list-all
 #      placeholder before) so extractor outputs can diff cleanly.
-#   4. Flagged consistency issue — Art.35:art36_escalation called
-#      satisfies but Art.36:trigger_detection called partial on the
-#      SAME evidence. Reviewer should decide: either both satisfies
-#      or both partial. My gut: both partial (loose Consult language
-#      doesn't explicitly name Art.36).
+#   4. Resolved false-inconsistency I initially flagged — Art.35:
+#      art36_escalation (satisfies) and Art.36:trigger_detection
+#      (originally partial) actually ask different questions.
+#      Art.35's MUST is about the DPIA procedure escalating (yes,
+#      this doc has the Consult mechanism). Art.36's MUST is about
+#      the Art.36 procedure detecting its own trigger — this doc is
+#      not the Art.36 procedure. Flipped Art.36:trigger_detection to
+#      not_satisfies/high. Same logic as A.5.34 bulk: wrong artefact.
 #
 # Low-confidence rows to review first:
 #   - Art.35:rev_coverage (partial, confidence low)
 #   - A.7.2.5:rev_coverage_check (partial, confidence low)
-#   - Art.36:trigger_detection (partial, confidence low — see #4)
 #
 # Medium-confidence rows worth a second look:
 #   - Art.35:rev_reviewer (partial — is single reviewer OK?)
@@ -700,7 +704,14 @@ a_5_34_expected:
 # Auditor policy questions:
 #   - Does "high risk to rights and freedoms" language count as
 #     Art.35.3 mandatory case coverage? (I said partial.)
-#   - Does the "Consult" residual-risk option count as Art.36
-#     escalation mechanism? (See consistency issue #4.)
 #   - Does DPO-as-doc-Owner satisfy Art.35.2 DPO consultation?
 #     (I said no. Absent from Section 5 roles.)
+#
+# Key design principle validated during self-review:
+#   Every MUST is a claim about a SPECIFIC ARTEFACT. A DPIA
+#   procedure doc satisfies DPIA-procedure MUSTs. It does not
+#   satisfy Privacy Policy MUSTs (A.5.34) or Art.36 procedure
+#   MUSTs. When measuring extractor precision, any finding from
+#   this doc on a wrong-artefact MUST is a false positive by
+#   construction — same as fingerprint over-firing across
+#   unrelated controls.
