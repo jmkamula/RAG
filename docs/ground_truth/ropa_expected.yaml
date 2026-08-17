@@ -1,0 +1,573 @@
+# Ship 77'.c — RoPA Ground Truth (first pass, awaiting review)
+#
+# Method: same as dpia_expected.yaml. I walk every candidate MUST for
+# Art.30 (main) + A.7.2.8 (27701 controller mirror) + B.8.2.6 (27701
+# processor mirror) + A.5.34 (privacy program — bulk not_satisfies as
+# wrong artefact). Each MUST classified as satisfies / partial /
+# not_satisfies with quote + confidence.
+#
+# Doc-note: doc Section 1 cites "ISO/IEC 27701:2019 A.8.2.1 and A.8.2.2".
+# Those refs don't exist in the catalog. Almost certainly a typo for
+# B.8.2.1 + B.8.2.2 (processor purposes + customer agreement). The
+# doc scope (Section 2) explicitly says "either PII Controller or
+# Processor" so both A.7.2.8 (controller RoPA record) and B.8.2.6
+# (processor RoPA record) are the correct ISO 27701 mirrors. That's
+# what I score against.
+
+document:
+  upload_id: 28d9086c-37a1-4dce-b129-a3afd4e5bb18
+  filename: Records of Processing Activities.docx
+  extracted_by: claude_first_pass
+  extracted_at: 2026-08-17
+  n_sections: 8
+  markdown_chars: 3600
+  doc_type: procedure
+
+# ── Art.30 (GDPR — Records of Processing Activities) ─────────────────
+# 4 leaves × 24 MUSTs
+
+art_30_expected:
+
+  # req:Art.30:data_flow_inventory — 5 MUSTs
+  # These MUSTs are about a data-flow-first inventory (per-flow view).
+  # The RoPA is a per-activity view — different shape but overlapping
+  # data. Section 4 RoPA fields include Systems, Recipients, Transfers,
+  # Retention — those cover the RAW DATA but not the flow-inventory
+  # ARTEFACT. Same logic as A.5.34 vs DPIA: overlapping content ≠
+  # same artefact. I called these partial (not not_satisfies) because
+  # RoPA fields DO contain the information; a lenient auditor might
+  # accept RoPA as satisfying data flow inventory via double-duty.
+  - must_id: item:Art.30:dfi_flows
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 4 lists "Systems Involved" + "Data Recipients" +
+      "International Transfers" fields per activity. Provides the
+      raw flow data but not organized as a flow inventory.
+
+  - must_id: item:Art.30:dfi_recipients
+    verdict: partial
+    confidence: medium
+    quote: RoPA field "Data Recipients: Internal or external recipients"
+
+  - must_id: item:Art.30:dfi_retention
+    verdict: partial
+    confidence: medium
+    quote: RoPA field "Retention Period: Timeframe for keeping the data"
+
+  - must_id: item:Art.30:dfi_systems
+    verdict: partial
+    confidence: medium
+    quote: RoPA field "System(s) Involved: Information systems where the processing occurs"
+
+  - must_id: item:Art.30:dfi_transfers
+    verdict: partial
+    confidence: medium
+    quote: RoPA field "International Transfers: Details of transfers outside the EU/EEA"
+
+  # req:Art.30:records_of_processing — 9 MUSTs (the main register)
+  - must_id: item:Art.30:categories_data
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Categories of PII: Types of personal data involved"
+
+  - must_id: item:Art.30:categories_ds
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Categories of Data Subjects: Whose data is being processed"
+
+  - must_id: item:Art.30:controller_name
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: |
+      Art.30.1.a requires per-activity controller name + contact
+      details + DPO. RoPA field list (Section 4) doesn't include
+      any of these. Doc-header Owner: DPO is meta-header, not
+      per-activity record.
+
+  - must_id: item:Art.30:processor_records
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 2 Scope: "either PII Controller or Processor" +
+      Section 4 field "Controller or Processor Role". Doc claims
+      to cover processor side but processor-specific fields
+      (customer instruction, Art.30.2.a-d requirements) aren't
+      called out separately.
+
+  - must_id: item:Art.30:purposes
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Purpose of Processing: Why the data is being processed"
+
+  - must_id: item:Art.30:recipients
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Data Recipients"
+
+  - must_id: item:Art.30:retention
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Retention Period"
+
+  - must_id: item:Art.30:security
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Technical & Organizational Measures: Description of security and privacy controls"
+
+  - must_id: item:Art.30:transfers
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "International Transfers"
+
+  # req:Art.30:ropa_annual_review — 5 MUSTs
+  - must_id: item:Art.30:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Doc-control header "Next Review Date: 20 Nov 2026" +
+      Section 7 "reviewed annually or upon regulatory change" +
+      Section 5 Step 4 "Annually by default".
+
+  - must_id: item:Art.30:rev_gaps
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No mechanism for capturing gaps during review.
+
+  - must_id: item:Art.30:rev_outcome
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No per-activity review outcome (no change / amended / retired).
+
+  - must_id: item:Art.30:rev_register_update
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No explicit register-update propagation from review.
+
+  - must_id: item:Art.30:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: |
+      Doc-control header "Reviewed by: PIMS Manager" — single
+      reviewer. MUST wants DPO / privacy lead / delegated
+      equivalent. Borderline — PIMS Manager can be that
+      delegated equivalent.
+
+  # req:Art.30:ropa_maintenance_procedure — 5 MUSTs
+  - must_id: item:Art.30:proc_dpa_gate
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: |
+      Art.28 DPA gate not mentioned. Section 5 Step 4 mentions DPIA
+      gate but not DPA (data processing agreement with new processor).
+
+  - must_id: item:Art.30:proc_dpia_gate
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 5 Step 4: "High-risk processing activities identified
+      during RoPA review must undergo DPIA per DOC042H before
+      implementation."
+
+  - must_id: item:Art.30:proc_maintainer
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 5 Step 1-3 "Data Protection & Risk Manager coordinates
+      + notifies" — named maintainer role.
+
+  - must_id: item:Art.30:proc_triggers
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 5 Step 4: "Annually by default. Immediately if
+      significant change occurs in processing, system, or legal
+      basis" — triggers enumerated.
+
+  - must_id: item:Art.30:proc_update_path
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 5 Process (5 steps): Initiation → Data Collection →
+      Documentation → Review → Audit & Reporting. Clear path from
+      trigger to register entry.
+
+# ── A.7.2.8 (ISO 27701 — Controller PII Processing Records) ──────────
+# 4 leaves × 21 MUSTs
+
+a_7_2_8_expected:
+
+  # req:A.7.2.8:applicable_scope — 3 MUSTs
+  - must_id: item:A.7.2.8:scope_coverage_test
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: |
+      No reconciliation against A.7.2.1 purpose register + system
+      inventory. Section 5 Step 5 mentions "Audit & Reporting"
+      but no explicit coverage test.
+
+  - must_id: item:A.7.2.8:scope_covered_activities
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 2 Scope: "all business units, systems, processes,
+      and services that involve...PII". Broad statement, no
+      per-activity enumeration in the doc itself.
+
+  - must_id: item:A.7.2.8:scope_exclusions
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No exclusions (anonymous / aggregate) mentioned.
+
+  # req:A.7.2.8:pii_processing_ropa — 7 MUSTs
+  - must_id: item:A.7.2.8:ropa_activity_id
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Processing Activity ID: Unique identifier"
+
+  - must_id: item:A.7.2.8:ropa_owner
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 5 Step 1: "business owner must notify the Data
+      Protection & Risk Manager". Business Owner is per-activity
+      but not called out as a REGISTER field. Weak.
+
+  - must_id: item:A.7.2.8:ropa_pii_categories
+    verdict: satisfies
+    confidence: high
+    quote: RoPA fields "Categories of PII" + "Categories of Data Subjects"
+
+  - must_id: item:A.7.2.8:ropa_recipients
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Data Recipients"
+
+  - must_id: item:A.7.2.8:ropa_retention
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Retention Period"
+
+  - must_id: item:A.7.2.8:ropa_security_measures
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Technical & Organizational Measures"
+
+  - must_id: item:A.7.2.8:ropa_transfer_safeguards
+    verdict: partial
+    confidence: medium
+    quote: |
+      RoPA field "International Transfers: Details of transfers
+      outside the EU/EEA" — details captured but MUST specifically
+      wants Chap V safeguards (SCCs, adequacy, BCRs). Not called out.
+
+  - must_id: item:A.7.2.8:ropa_type_purpose
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Purpose of Processing"
+
+  # req:A.7.2.8:program_review — 5 MUSTs
+  - must_id: item:A.7.2.8:rev_accuracy_sample
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: |
+      Section 5 Step 5 mentions "Audit & Reporting" for internal
+      audit, but no accuracy sample procedure.
+
+  - must_id: item:A.7.2.8:rev_completeness
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No completeness check against A.7.2.1 register.
+
+  - must_id: item:A.7.2.8:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: Doc-control header + Section 7 annual.
+
+  - must_id: item:A.7.2.8:rev_owner_signoff
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No owner signoff attesting accuracy + completeness.
+
+  - must_id: item:A.7.2.8:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: |
+      Doc-control header "PIMS Manager". MUST wants DPO + Data
+      Protection Council.
+
+  # req:A.7.2.8:ropa_maintenance_procedure — 5 MUSTs
+  - must_id: item:A.7.2.8:proc_add_activity
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 5 Step 1: "When a new processing activity is
+      planned, the business owner must notify the Data Protection
+      & Risk Manager."
+
+  - must_id: item:A.7.2.8:proc_change_capture
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 5 Step 4: "Immediately if significant change occurs
+      in processing, system, or legal basis" — change capture with
+      trigger.
+
+  - must_id: item:A.7.2.8:proc_reconciliation
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No reconciliation cadence against §7.2.1 + §7.2.2 registers.
+
+  - must_id: item:A.7.2.8:proc_retire_activity
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 8 Appendix: "tracked with a status (Draft / Approved /
+      Archived)". "Archived" implies retirement but the MUST wants
+      a retirement RECORD with rationale (Art.5.1.e / Art.30
+      historical evidence).
+
+  - must_id: item:A.7.2.8:proc_secure_maintenance
+    verdict: partial
+    confidence: low
+    quote: |
+      Section 5 Step 3: "centralized RoPA Register (Excel workbook
+      stored in SharePoint)". Storage location named but no
+      explicit access control or integrity statement.
+
+# ── B.8.2.6 (ISO 27701 — Processor PII Processing Records) ───────────
+# 4 leaves × 19 MUSTs. Section 2 explicitly claims processor scope,
+# so this framework is directly in scope for measurement.
+
+b_8_2_6_expected:
+
+  # req:B.8.2.6:applicable_scope — 3 MUSTs
+  - must_id: item:B.8.2.6:scope_coverage_test
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No reconciliation against B.8.2.1 customer register.
+
+  - must_id: item:B.8.2.6:scope_customer_engagements
+    verdict: partial
+    confidence: low
+    quote: |
+      Section 2 mentions processor role but no per-customer
+      engagement register referenced.
+
+  - must_id: item:B.8.2.6:scope_own_controller_exclusion
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: |
+      No mention of separating own-controller processing from
+      processor-on-behalf-of processing (which the MUST requires
+      if the org acts in both roles).
+
+  # req:B.8.2.6:processor_ropa_register — 6 MUSTs
+  - must_id: item:B.8.2.6:ropa_customer_id
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: |
+      RoPA field "Controller or Processor Role" flags the role but
+      no customer identifier per row for processor entries.
+
+  - must_id: item:B.8.2.6:ropa_processing_categories
+    verdict: partial
+    confidence: low
+    quote: |
+      "Purpose of Processing" captured but not organized as per-
+      customer processing categories (Art.30.2.b).
+
+  - must_id: item:B.8.2.6:ropa_processor_dpo
+    verdict: partial
+    confidence: low
+    quote: |
+      DPO in doc-control header but no per-customer processor-DPO
+      contact info in RoPA fields.
+
+  - must_id: item:B.8.2.6:ropa_security_measures
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Technical & Organizational Measures"
+
+  - must_id: item:B.8.2.6:ropa_subprocessor_list
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "Subprocessors: Any third parties involved"
+
+  - must_id: item:B.8.2.6:ropa_transfers
+    verdict: satisfies
+    confidence: high
+    quote: RoPA field "International Transfers"
+
+  # req:B.8.2.6:program_review — 5 MUSTs
+  - must_id: item:B.8.2.6:rev_accuracy_sample
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:B.8.2.6:rev_completeness
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:B.8.2.6:rev_customer_extract_test
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: |
+      No mention of customer-extract test (customer requests +
+      receives their RoPA row within SLA).
+  - must_id: item:B.8.2.6:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: Doc-control header + Section 7 annual.
+  - must_id: item:B.8.2.6:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: PIMS Manager (MUST wants DPO + Trust Ops).
+
+  # req:B.8.2.6:ropa_maintenance_procedure — 5 MUSTs
+  - must_id: item:B.8.2.6:proc_customer_availability
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No path for customer to request + receive their RoPA row.
+  - must_id: item:B.8.2.6:proc_instruction_change
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    notes: |
+      Section 5 Step 4 has generic "significant change" trigger but
+      no explicit customer-instruction-change capture.
+  - must_id: item:B.8.2.6:proc_onboarding_trigger
+    verdict: partial
+    confidence: low
+    quote: |
+      Section 5 Step 1 covers new activity but not new customer
+      engagement specifically. Weak.
+  - must_id: item:B.8.2.6:proc_secure_maintenance
+    verdict: partial
+    confidence: low
+    quote: |
+      SharePoint mentioned as storage. Same weakness as A.7.2.8:
+      proc_secure_maintenance.
+  - must_id: item:B.8.2.6:proc_subprocessor_update
+    verdict: satisfies
+    confidence: medium
+    quote: |
+      Section 4 has Subprocessors field + Section 5 Step 4
+      "significant change" trigger covers subprocessor changes.
+
+# ── A.5.34 bulk not_satisfies ────────────────────────────────────────
+# RoPA procedure is NOT the privacy policy artefact. All 27 A.5.34
+# MUSTs are wrong-artefact false positives. Enumerated for extractor
+# diff usability.
+
+a_5_34_expected:
+  bulk_not_satisfies: all_27_musts
+  rationale: |
+    Same as DPIA: RoPA is a per-activity register procedure, not a
+    Privacy Policy nor a Privacy Applicability Scope statement nor a
+    Privacy Program Review. Any A.5.34 finding on this doc is a
+    false positive for the extractor.
+  # Full enumeration same as dpia_expected.yaml (see for the list).
+  # Not repeated here to keep this file scannable; extractor
+  # comparison scripts will treat all A.5.34 MUSTs as not_satisfies
+  # for this doc by default.
+
+# ── Summary counts ──────────────────────────────────────────────────
+#
+# Art.30 (24 MUSTs):
+#   satisfies:     12
+#   partial:        7   (mostly data_flow_inventory + processor_records)
+#   not_satisfies:  5
+#
+# A.7.2.8 (21 MUSTs):
+#   satisfies:     10
+#   partial:        5
+#   not_satisfies:  6
+#
+# B.8.2.6 (19 MUSTs):
+#   satisfies:      5
+#   partial:        6
+#   not_satisfies:  8
+#
+# A.5.34 (27 MUSTs):
+#   satisfies:      0
+#   partial:        0
+#   not_satisfies: 27   (wrong artefact)
+#
+# TOTAL candidate MUSTs: 91
+# Strict expected findings (satisfies only):  27
+# Lenient expected findings (+ partial):      45
+
+# ── Self-review notes ────────────────────────────────────────────────
+#
+# Second-look issues caught:
+#
+#   1. Data flow inventory MUSTs — I called them all partial. The
+#      RoPA fields provide the same raw data (systems, recipients,
+#      transfers, retention). Is that enough to satisfy the
+#      data_flow_inventory MUSTs, or is it "wrong artefact" like
+#      A.5.34? I chose partial as the middle ground. Reviewer
+#      should decide: are per-activity RoPA fields = data-flow
+#      inventory? If NO, flip all 5 to not_satisfies.
+#
+#   2. Doc typo — Section 1 cites "ISO/IEC 27701:2019 A.8.2.1 and
+#      A.8.2.2" which don't exist in the catalog. Correct refs
+#      are A.7.2.1/2.2 (controller side) or B.8.2.1/2.2 (processor
+#      side). I scored against A.7.2.8 + B.8.2.6 (the RoPA record
+#      MUSTs) based on Section 2's dual-role scope claim. This
+#      might be too generous — if the auditor rejects the doc's
+#      typo, we'd only score against Art.30. Reviewer's call.
+#
+#   3. proc_dpa_gate on Art.30 — I called not_satisfies (Art.28
+#      DPA gate not mentioned). But the doc has "Data Recipients"
+#      + "Subprocessors" fields which implicitly require DPAs.
+#      Weak — could be partial. Leaving as not_satisfies but flag.
+#
+#   4. Processor-side MUSTs (B.8.2.6) — the doc CLAIMS processor
+#      scope (Section 2) but doesn't have processor-specific
+#      fields except "Controller or Processor Role" flag. Most
+#      B.8.2.6 MUSTs are correctly not_satisfies BECAUSE the doc's
+#      processor coverage is nominal, not substantive. Consistent
+#      with my A.5.34 wrong-artefact logic — the doc names the
+#      scope but doesn't build the artefact.
+#
+# Low-confidence rows to review first:
+#   - Art.30 dfi_* (5 MUSTs, partial/medium) — hinges on
+#     policy question #1 above
+#   - A.7.2.8:proc_secure_maintenance (partial/low)
+#   - B.8.2.6:ropa_processing_categories (partial/low)
+#   - B.8.2.6:ropa_processor_dpo (partial/low)
+#   - B.8.2.6:scope_customer_engagements (partial/low)
+#   - B.8.2.6:proc_onboarding_trigger (partial/low)
+#   - B.8.2.6:proc_secure_maintenance (partial/low)
+#
+# Medium-confidence borderline calls:
+#   - Art.30:processor_records (partial — doc claims processor
+#     coverage but doesn't build the artefact)
+#   - Art.30:rev_reviewer (partial — is single PIMS Manager OK?)
+#   - A.7.2.8:ropa_owner + ropa_transfer_safeguards + rev_reviewer +
+#     proc_retire_activity (partials)
+#   - B.8.2.6:rev_reviewer (partial)
+#
+# Auditor policy questions:
+#   - Does RoPA (per-activity view) also count as data flow
+#     inventory (per-flow view)? Affects 5 MUSTs.
+#   - Does a doc that CLAIMS scope but doesn't build the artefact
+#     count as satisfying the scope MUSTs? Affects B.8.2.6.
+#   - Are per-activity RoPA fields = per-activity register entries?
+#     Affects most records_of_processing MUSTs.
