@@ -1,0 +1,706 @@
+# Ship 77'.b — DPIA Ground Truth (first pass, awaiting review)
+#
+# Method: I (Claude) manually walked every candidate MUST for Art.35 +
+# A.7.2.5 + A.5.34 (privacy program) against the doc's 165 lines / 6305
+# chars. Each MUST classified as:
+#
+#   satisfies      — Doc contains substantive text meeting the MUST
+#   partial        — Doc addresses the MUST but incompletely or ambiguously
+#   not_satisfies  — Doc silent or contradicts the MUST
+#
+# `confidence` reflects how sure I am of the verdict (high / medium / low).
+# Low-confidence rows are high-priority review items.
+#
+# Doc path: /data/uploads/00000000-0000-0000-0000-000000000001/5f59f505-....docx
+# 9 sections + doc-control header. Purpose section explicitly cites Art.35 +
+# A.7.2.5. References cite GDPR Art.35-36 + ISO 27701 A.7.2.5.
+#
+# Reviewer instructions: comment on any row (flip verdict, tighten quote,
+# add notes). Aim: consensus verdict for each MUST. This becomes the
+# absolute ground truth that both consensus + critic-verifier will be
+# measured against.
+
+document:
+  upload_id: 5f59f505-45a2-4e7d-ba76-c4c6f4b2e08a
+  filename: Data Protection Impact Assessment (DPIA) Procedure.docx
+  extracted_by: claude_first_pass
+  extracted_at: 2026-08-17
+  n_sections: 16
+  markdown_chars: 6305
+  doc_type: procedure
+
+# ── Art.35 (GDPR — DPIAs) ────────────────────────────────────────────
+# 4 leaves × 22 MUSTs total
+
+art_35_expected:
+
+  # req:Art.35:applicable_scope — 4 MUSTs
+  - must_id: item:Art.35:scope_mandatory
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 3.1 lists "High Risk to Rights and Freedoms",
+      "Large Scale Processing", "New Technology" as triggers —
+      covers Art.35.3.a-c categories in effect but does not cite
+      the Article subclauses explicitly.
+    notes: |
+      Auditor debate — does "systematic evaluation" (Art.35.3.a)
+      count as covered when the doc uses "New Technology"? Weak.
+
+  - must_id: item:Art.35:scope_org_criteria
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: |
+      No mention of EDPB Guidelines 248 nine-criterion or any
+      org-specific "likely high risk" heuristic list. Section 3.2
+      decision tree is generic.
+
+  - must_id: item:Art.35:scope_sa_list
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No mention of Lead SA's Art.35.4 published list.
+
+  - must_id: item:Art.35:scope_white_list
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No mention of Art.35.5 SA white-list.
+
+  # req:Art.35:dpia_procedure — 6 MUSTs
+  - must_id: item:Art.35:art36_escalation
+    verdict: satisfies
+    confidence: medium
+    quote: |
+      Step 5: "Consult: Seek external advice or regulatory guidance"
+      — mechanism for escalation to SA when residual high risk
+      remains.
+    notes: |
+      Word "Art.36" not used but the mechanism is present under the
+      "Consult" residual-risk option.
+
+  - must_id: item:Art.35:content_minimum
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Step 2 covers "Project/Processing Title and Owner, Purpose of
+      Processing and Legal Basis, Categories of Data Subjects and
+      Personal Data Types, Data Flow Description, Technical and
+      Organizational Measures" + Step 3 Risk Assessment + Step 4
+      Mitigation Measures.
+    notes: |
+      Art.35.7 minimum content (systematic description + necessity +
+      risk assessment + mitigation) all mapped to Steps 2-4.
+
+  - must_id: item:Art.35:dpo_advice
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: |
+      DPO not mentioned in Section 5 Roles at all — the operational
+      roles are Data Protection & Risk Manager, Project Owner, PIMS
+      Manager, IT Security. DPO only appears as doc Owner in the
+      header (Section 0). The procedure never mandates DPO advice
+      per DPIA, and there's no DPO role in the process itself.
+      Art.35.2 unambiguously not met.
+
+  - must_id: item:Art.35:review_trigger
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 8: "Individual DPIAs reviewed per schedule or upon
+      significant change."
+    notes: Matches Art.35.11 review trigger.
+
+  - must_id: item:Art.35:subject_consultation
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: |
+      No mention of consulting data subjects or their representatives
+      (Art.35.9).
+
+  - must_id: item:Art.35:trigger_criteria
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 3.1 Mandatory DPIA Triggers: "High Risk to Rights and
+      Freedoms, Significant Changes, Regulatory Requirements, New
+      Technology, Large Scale Processing".
+    notes: |
+      Covers the intent of Art.35.3 mandatory cases but doesn't
+      cite the article. Same class as scope_mandatory.
+
+  # req:Art.35:dpia_program_review — 6 MUSTs
+  - must_id: item:Art.35:rev_advice_quality
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No mention of sampling DPO advice quality.
+
+  - must_id: item:Art.35:rev_art36_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No audit mechanism for verifying Art.36 escalations.
+
+  - must_id: item:Art.35:rev_coverage
+    verdict: partial
+    confidence: low
+    quote: |
+      Section 8: "DPIA Log Sheet reviewed quarterly" — a review
+      cadence exists but no explicit coverage check
+      ("every in-scope activity has a current DPIA").
+    notes: |
+      REVIEW ITEM. Weak evidence — quarterly log review implies
+      coverage tracking but isn't explicit.
+
+  - must_id: item:Art.35:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Doc-control header: "Next Review Date: 20 Nov 2026" — 1-year
+      cycle.
+    notes: This MUST is about the review DATE being planned; met.
+
+  - must_id: item:Art.35:rev_review_cadence
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 8: "DPIA Log Sheet reviewed quarterly, Procedure
+      reviewed annually or upon regulatory changes."
+
+  - must_id: item:Art.35:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: |
+      Doc-control header lists "Reviewed by: PIMS Manager" —
+      one reviewer, not the DPO + executive sponsor + lead privacy
+      engineer trio the MUST expects.
+    notes: |
+      Reviewer named but the specific role set required by the
+      MUST isn't present. Borderline — is single reviewer enough?
+
+  # req:Art.35:dpia_register — 6 MUSTs
+  - must_id: item:Art.35:reg_dpia_id
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 4 Step 1: "Data Protection & Risk Manager assigns
+      DPIA reference ID" + Section 6: "DPIA Reference ID: Unique
+      identifier for tracking and reference purposes."
+
+  - must_id: item:Art.35:reg_dpo_advice_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: |
+      DPIA Log Sheet fields (Section 6) don't include DPO advice
+      date or summary.
+
+  - must_id: item:Art.35:reg_outcome
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Step 5: "Accept / Mitigate Further / Reject / Consult" +
+      Section 6: "Residual Risk Decision: Final decision on risk
+      acceptance (Accept/Mitigate Further/Reject/Consult)."
+
+  - must_id: item:Art.35:reg_processing_activity
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 6: "Project/Processing Title: Clear description of
+      the processing activity being assessed" + "Purpose of
+      Processing".
+    notes: |
+      Processing activity captured but no explicit cross-reference
+      to Art.30 RoPA — MUST expects the join.
+
+  - must_id: item:Art.35:reg_residual_risk
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 6: "Risk Assessment Summary" + Step 5 "Residual
+      Risk Decision".
+
+  - must_id: item:Art.35:reg_trigger
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    notes: |
+      Log sheet fields don't include per-row trigger classification
+      (Art.35.3.a-c vs SA list vs sectoral vs risk-based). Section 3
+      lists triggers at policy level but not per DPIA.
+
+# ── A.7.2.5 (ISO 27701 — PIA Procedure) ──────────────────────────────
+# 4 leaves × 21 MUSTs total. Same mapping shape as Art.35 with 27701-
+# specific idioms (PIA vs DPIA). Doc explicitly cites A.7.2.5 in Purpose.
+
+a_7_2_5_expected:
+
+  # req:A.7.2.5:applicable_scope — 4 MUSTs
+  - must_id: item:A.7.2.5:scope_art35_3_mandatory
+    verdict: partial
+    confidence: medium
+    quote: |
+      Same evidence as Art.35 scope_mandatory — Section 3.1 covers
+      the categories in effect.
+    notes: |
+      Mirror of Art.35:scope_mandatory. Same weakness.
+
+  - must_id: item:A.7.2.5:scope_exclusions
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: |
+      No mention of out-of-scope processing categories (low-risk /
+      legacy) with rationale.
+
+  - must_id: item:A.7.2.5:scope_org_indicators
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: Mirror of Art.35:scope_org_criteria — same NO.
+
+  - must_id: item:A.7.2.5:scope_sa_lists
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: Mirror of Art.35:scope_sa_list — same NO.
+
+  # req:A.7.2.5:pia_procedure — 6 MUSTs
+  - must_id: item:A.7.2.5:proc_29134_alignment
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: |
+      No mention of ISO/IEC 29134. Section 4 process steps are the
+      doc's own methodology, not 29134-aligned.
+
+  - must_id: item:A.7.2.5:proc_assessment_scope
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Step 2 covers PII types + storage + transfers (via Data
+      Flow Description) + retention (implied) + Step 3 Risk
+      Assessment covers risks to subjects.
+
+  - must_id: item:A.7.2.5:proc_consultation
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 5 lists "IT Security Team advises" but no explicit
+      DPO opinion or subject-representative views.
+    notes: |
+      Weak — stakeholder consultation implied by role list but not
+      structured per the MUST's requirement.
+
+  - must_id: item:A.7.2.5:proc_prior_consultation
+    verdict: satisfies
+    confidence: medium
+    quote: |
+      Step 5: "Consult: Seek external advice or regulatory
+      guidance."
+    notes: Mirror of Art.35:art36_escalation.
+
+  - must_id: item:A.7.2.5:proc_signoff
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    notes: |
+      Procedure doesn't specify DPO signoff + business-owner
+      signoff before processing commences. Step 5 has decision
+      types but no explicit signoff step.
+
+  - must_id: item:A.7.2.5:proc_trigger_criteria
+    verdict: partial
+    confidence: medium
+    quote: Section 3.1 Mandatory DPIA Triggers (same as Art.35:trigger_criteria).
+    notes: Mirror.
+
+  # req:A.7.2.5:pia_register — 6 MUSTs
+  - must_id: item:A.7.2.5:reg_completion_date
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    notes: |
+      Section 6 log sheet fields don't include DPIA completion
+      date. "Review Date" is present but that's next-review, not
+      completion.
+
+  - must_id: item:A.7.2.5:reg_pia_id
+    verdict: satisfies
+    confidence: high
+    quote: Mirror of Art.35:reg_dpia_id.
+
+  - must_id: item:A.7.2.5:reg_processing_activity
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 6: "Project/Processing Title" + "Purpose of
+      Processing".
+
+  - must_id: item:A.7.2.5:reg_residual_risk
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 6: "Risk Assessment Summary" + Step 5 "Residual
+      Risk Decision".
+
+  - must_id: item:A.7.2.5:reg_review_due
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 6: "Review Date: Scheduled date for reassessment of
+      the DPIA."
+
+  - must_id: item:A.7.2.5:reg_sa_consultation
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    notes: |
+      Log sheet doesn't have an SA-consultation-invoked flag per
+      row.
+
+  - must_id: item:A.7.2.5:reg_signoff
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    notes: No per-row signoff identity field in log sheet.
+
+  # req:A.7.2.5:program_review — 5 MUSTs
+  - must_id: item:A.7.2.5:rev_coverage_check
+    verdict: partial
+    confidence: low
+    quote: Same as Art.35:rev_coverage — Section 8 quarterly log review.
+    notes: REVIEW ITEM.
+
+  - must_id: item:A.7.2.5:rev_currency_audit
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 8: "Individual DPIAs reviewed per schedule or upon
+      significant change" — currency implied but not audited
+      explicitly against a threshold.
+    notes: Weak — no threshold stated.
+
+  - must_id: item:A.7.2.5:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: Doc-control header + Section 8 review cadence.
+
+  - must_id: item:A.7.2.5:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: |
+      Doc-control header lists PIMS Manager as reviewer. MUST
+      requires DPO + risk owner.
+
+  - must_id: item:A.7.2.5:rev_sa_consultation_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No audit mechanism for verifying SA-consultation.
+
+# ── Art.36 (GDPR — Prior Consultation with SA) ───────────────────────
+# 4 leaves × 19 MUSTs total. Doc explicitly references "GDPR Articles
+# 35-36" in Section 9 (References) and has a one-line "Consult" option
+# in Step 5 residual-risk decision. But Art.36 requires a dedicated
+# prior-consultation procedure with SA submission + waiting period +
+# advice handling — this doc's single-line reference to "Seek external
+# advice or regulatory guidance" doesn't satisfy any of it.
+
+art_36_expected:
+
+  # req:Art.36:applicable_scope — 3 MUSTs (all not_satisfies)
+  - must_id: item:Art.36:scope_excluded
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No out-of-scope processing identification for Art.36.
+  - must_id: item:Art.36:scope_ms_law
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No MS-law consultation triggers.
+  - must_id: item:Art.36:scope_residual_high_risk
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: |
+      "Overall Risk (Low/Medium/High)" exists but no operational
+      interpretation of "residual high risk" for Art.36 purposes.
+
+  # req:Art.36:consultation_program_review — 5 MUSTs (all not_satisfies)
+  - must_id: item:Art.36:rev_advice_handling
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:Art.36:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: |
+      Doc-control header review date is for the DPIA procedure
+      itself; there's no Art.36-consultation-program review.
+  - must_id: item:Art.36:rev_escalation_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:Art.36:rev_reviewer
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:Art.36:rev_waiting_compliance
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+
+  # req:Art.36:consultation_register — 6 MUSTs (all not_satisfies)
+  - must_id: item:Art.36:reg_consultation_id
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: DPIA Log Sheet is not a consultation register.
+  - must_id: item:Art.36:reg_decision_to_proceed
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:Art.36:reg_dpia_xref
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:Art.36:reg_outcome
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:Art.36:reg_sa
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:Art.36:reg_submission_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+
+  # req:Art.36:prior_consultation_procedure — 5 MUSTs
+  - must_id: item:Art.36:owner
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No named owner for Art.36 consultation procedure.
+  - must_id: item:Art.36:sa_advice_handling
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:Art.36:submission_content
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:Art.36:trigger_detection
+    verdict: partial
+    confidence: low
+    quote: |
+      Step 5: "Consult: Seek external advice or regulatory
+      guidance" — a trigger exists but doesn't specifically detect
+      Art.36 conditions (residual high risk despite mitigations).
+    notes: |
+      Borderline. Same evidence as Art.35:art36_escalation which I
+      called satisfies. Being inconsistent — needs review. If we
+      accept Consult as Art.36 escalation, we should also accept it
+      as Art.36 trigger_detection.
+  - must_id: item:Art.36:waiting_period
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+
+# ── A.5.34 (ISO 27001 — Privacy and PII Protection) ──────────────────
+# 4 leaves × 27 MUSTs. This doc is a DPIA procedure, not a privacy
+# policy or PII register. A.5.34 requires a Privacy Policy + PII
+# Processing Register + Applicability Scope + Program Review. Different
+# artefacts. Every A.5.34 MUST claimed satisfied by THIS doc is a
+# false-positive candidate for review.
+#
+# Enumerated below for auditor-usable precision (extractor output can
+# be diffed against this list).
+
+a_5_34_expected:
+
+  # req:A.5.34:pii_processing_register — 8 MUSTs
+  - must_id: item:A.5.34:pii_inventory
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:reg_controls_applied
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:reg_data_subjects
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:reg_lawful_basis
+    verdict: not_satisfies
+    confidence: high
+    notes: |
+      DPIA Log Sheet has "Legal Basis: Specific GDPR Article 6
+      legal basis for the processing activity" — but that's the
+      DPIA register's per-DPIA field, not A.5.34's PII processing
+      register per-activity field. Different artefact.
+  - must_id: item:A.5.34:reg_owner_per_activity
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:reg_purposes
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:reg_retention
+    verdict: not_satisfies
+    confidence: high
+    notes: |
+      Data Flow includes "retention" as a stage but no per-activity
+      retention register.
+  - must_id: item:A.5.34:reg_transfers
+    verdict: not_satisfies
+    confidence: high
+
+  # req:A.5.34:privacy_and_pii_protection_policy — 8 MUSTs
+  - must_id: item:A.5.34:applicable_laws
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:breach_handling
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:data_subject_rights
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:lawful_basis
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:owner
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:retention_minimisation
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:security_controls_ref
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:transfer_restrictions
+    verdict: not_satisfies
+    confidence: high
+
+  # req:A.5.34:privacy_applicability_scope — 5 MUSTs
+  - must_id: item:A.5.34:scope_controller_role
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:scope_data_subjects
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:scope_jurisdictions
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:scope_privacy_laws
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:scope_regulated_activities
+    verdict: not_satisfies
+    confidence: high
+
+  # req:A.5.34:privacy_program_review — 9 MUSTs
+  - must_id: item:A.5.34:rev_breach_history
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:rev_date
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:rev_dpia_review
+    verdict: not_satisfies
+    confidence: medium
+    notes: |
+      Borderline. Section 8 says DPIA Log Sheet reviewed quarterly.
+      A.5.34:rev_dpia_review expects the PRIVACY PROGRAM review to
+      check DPIA completion status — this doc DOES have DPIA review,
+      but that's the DPIA program reviewing itself, not the privacy
+      program checking DPIA completion. Still not_satisfies but a
+      lenient auditor could argue.
+  - must_id: item:A.5.34:rev_dsar_metrics
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:rev_register_check
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:rev_register_update
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:rev_reviewer
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:rev_scope_check
+    verdict: not_satisfies
+    confidence: high
+  - must_id: item:A.5.34:rev_transfer_validity
+    verdict: not_satisfies
+    confidence: high
+
+# ── Summary counts (revised after self-review) ───────────────────────
+#
+# Art.35 (22 MUSTs):
+#   satisfies:     8
+#   partial:       6
+#   not_satisfies: 8    (dpo_advice bumped high after re-check)
+#
+# Art.36 (19 MUSTs):
+#   satisfies:     0
+#   partial:       1    (trigger_detection, low confidence)
+#   not_satisfies: 18
+#
+# A.7.2.5 (21 MUSTs):
+#   satisfies:     7
+#   partial:       6
+#   not_satisfies: 8
+#
+# A.5.34 (27 MUSTs):
+#   satisfies:     0
+#   partial:       0
+#   not_satisfies: 27
+#
+# TOTAL candidate MUSTs: 89
+# Strict expected findings (satisfies only):   15
+# Lenient expected findings (+ partial):       28
+#
+# Any extractor finding beyond this set is a false-positive candidate.
+
+# ── Self-review findings ─────────────────────────────────────────────
+#
+# On second look I found:
+#   1. Missing framework — added Art.36 (doc references it in
+#      References but I had only scored Art.35 in first pass).
+#   2. Confidence bump — Art.35:dpo_advice medium → high (DPO absent
+#      from Section 5 Roles list; only in doc header as Owner).
+#   3. Enumerated A.5.34 explicitly (was bulk_not_satisfies list-all
+#      placeholder before) so extractor outputs can diff cleanly.
+#   4. Flagged consistency issue — Art.35:art36_escalation called
+#      satisfies but Art.36:trigger_detection called partial on the
+#      SAME evidence. Reviewer should decide: either both satisfies
+#      or both partial. My gut: both partial (loose Consult language
+#      doesn't explicitly name Art.36).
+#
+# Low-confidence rows to review first:
+#   - Art.35:rev_coverage (partial, confidence low)
+#   - A.7.2.5:rev_coverage_check (partial, confidence low)
+#   - Art.36:trigger_detection (partial, confidence low — see #4)
+#
+# Medium-confidence rows worth a second look:
+#   - Art.35:rev_reviewer (partial — is single reviewer OK?)
+#   - Art.35:reg_processing_activity (partial — no Art.30 cross-ref)
+#   - A.7.2.5:proc_consultation (partial)
+#   - A.7.2.5:proc_signoff (not_satisfies — is Step 5 decision
+#     implicit signoff?)
+#   - A.5.34:rev_dpia_review (not_satisfies but borderline)
+#
+# Auditor policy questions:
+#   - Does "high risk to rights and freedoms" language count as
+#     Art.35.3 mandatory case coverage? (I said partial.)
+#   - Does the "Consult" residual-risk option count as Art.36
+#     escalation mechanism? (See consistency issue #4.)
+#   - Does DPO-as-doc-Owner satisfy Art.35.2 DPO consultation?
+#     (I said no. Absent from Section 5 roles.)
