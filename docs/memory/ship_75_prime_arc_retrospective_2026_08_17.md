@@ -223,19 +223,24 @@ sub-arc plan; the sub-arcs execute against it deterministically.
   (affects all paths uniformly). Documented in that test's
   docstring.
 
-- **75'.b eval landed 231/233 PASS, 1 FAIL (case #5).** The one
-  failure is the well-documented case #5 residual — LLM occasionally
-  mentions "physical" scope in Arion's access-rights implementation
-  answer despite Ship 43'.a's `tenant_must_overrides` marking the
-  physical MUST as N/A. Documented in CLAUDE.md as pre-existing
-  stochastic behavior ("#5 still has residual 'physical' trip from
-  the LLM voluntarily mentioning logical-vs-physical scope (rare)").
-  Baseline floor is 223/226 → 233; 231/233 is comfortably above.
-  Not a 75' regression — the same case has tripped intermittently
-  since Ship 43'.a. Standing rule "commit once eval passes" was
-  intentionally relaxed by user override ("commit and start 75'.c/d")
-  to keep momentum; retroactive eval confirmed no new regressions
-  entered from the migration series.
+- **75'.b eval landed 231/233 PASS, 1 FAIL (case #5).** Case #5
+  tripped on `FORBIDDEN phrase present: 'physical'`. CLAUDE.md's
+  Ship 43'.a stabilization note documents this as a "rare" residual
+  from the LLM voluntarily invoking logical-vs-physical scope framing,
+  even though `tenant_must_overrides` marks A.5.15:physical_rules as
+  N/A for cloud-only Arion. **Actual observation**: case #5 has been
+  PASSing across every recent eval on disk (74'.a, 74'.b, 72'.d,
+  73'.b, 20260811, 20260810). Ship 75'.b eval was the first FAIL in
+  the recent record. Post-hoc re-runs (4 consecutive) all PASS.
+  Ship 75'.b's code change touches only the intake fingerprint path,
+  which doesn't participate in chat query answering — so a
+  regression mechanism would have to run through the intake module's
+  import side-effects. No such path identified. Verdict: rare
+  stochastic firing of the documented residual, not a 75' regression.
+  Baseline 223/226 → 233 gives comfortable headroom at 231/233. Also
+  a codified lesson for me — leaning on a stability note without
+  checking recent eval history is a mistake; the note describes what
+  CAN happen, not what IS happening.
 
 ## Session shape
 
