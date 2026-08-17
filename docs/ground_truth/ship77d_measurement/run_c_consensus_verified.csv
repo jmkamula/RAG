@@ -1,0 +1,80 @@
+filename,control_ref,standard_id,checklist_item_id,status,confidence,excerpt,inference_source,extracted_at
+Data Quality Accuracy Procedure.docx,A.7.4.3,ISO27701:2019,item:A.7.4.3:proc_inaccuracy_prevention,present,medium,"- Use structured forms with validation \(e\.g\., date formats, email check\)
+- Collect only verifiable data where possible",fingerprint_match,2026-08-17 20:25:02.298694+00
+Data Quality Accuracy Procedure.docx,A.7.4.3,ISO27701:2019,item:A.7.4.3:proc_inaccuracy_response,present,medium,"- Data must be:
+	- Accurate and complete
+	- Kept up to date where necessary
+	- Corrected or deleted if inaccurate",fingerprint_match,2026-08-17 20:25:02.298694+00
+Data Quality Accuracy Procedure.docx,A.5.34,ISO27001:2022,item:A.5.34:owner,present,medium,"[Bridge: 27701 A.7.4.3 accuracy and quality of PII operationalises 27001 A.5.34 data-integrity aspect of privacy protection.] - Use structured forms with validation \(e\.g\., date formats, email check",xfw_bridge,2026-08-17 20:25:02.624722+00
+Consent Management Procedure.docx,A.5.34,ISO27001:2022,item:A.5.34:reg_purposes,present,medium,"- Consent is the legal basis for processing
+- Individuals have the right to opt out of data use \(e\.g\., for marketing, analytics, or third\-party sharing\)
+- Regulatory or contractual obligations re",fingerprint_match,2026-08-17 20:25:07.463989+00
+Consent Management Procedure.docx,A.5.34,ISO27001:2022,item:A.5.34:applicable_laws,present,medium,"- GDPR Article 6\(1\)\(a\), Article 7
+- ISO/IEC 27701:2019 control A\.7\.5\.5
+- CCPA/CPRA consumer opt\-out rights",fingerprint_match,2026-08-17 20:25:07.463989+00
+Consent Management Procedure.docx,A.5.34,ISO27001:2022,item:A.5.34:scope_privacy_laws,present,medium,"- GDPR Article 6\(1\)\(a\), Article 7
+- ISO/IEC 27701:2019 control A\.7\.5\.5
+- CCPA/CPRA consumer opt\-out rights",fingerprint_match,2026-08-17 20:25:07.463989+00
+Consent Management Procedure.docx,Art.6,GDPR:2016/679,item:Art.6:activities_enumerated,present,medium,This procedure applies to all processing activities by Arion Networks where consent is used as the legal basis under GDPR Article 6\(1\)\(a\)\.,fingerprint_match,2026-08-17 20:25:07.463989+00
+Consent Management Procedure.docx,A.7.2.1,ISO27701:2019,item:A.7.2.1:proc_change_control,present,medium,[Bridge: 27701 A.7.2.1 identify and document purpose of PII processing implements 27001 A.5.34 privacy protection through purpose specification — the foundational scoping decision.] - Consent is the l,xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.2.2,ISO27701:2019,item:A.7.2.2:proc_basis_catalog,present,medium,"[Bridge: 27701 A.7.2.2 identifying lawful basis implements 27001 A.5.34 by grounding processing legitimacy in law.] - Consent is the legal basis for processing
+- Individuals have the right to opt out ",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.2.3,ISO27701:2019,item:A.7.2.3:proc_children_overlay,present,medium,"[Bridge: 27701 A.7.2.3 determining when consent is required is a scoping decision that implements 27001 A.5.34 privacy protection.] - Consent is the legal basis for processing
+- Individuals have the r",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.2.4,ISO27701:2019,item:A.7.2.4:proc_demonstration_pathway,present,medium,"[Bridge: 27701 A.7.2.4 obtaining + recording consent operationalises 27001 A.5.34 through evidence of lawful basis.] - Consent is the legal basis for processing
+- Individuals have the right to opt out",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.2.5,ISO27701:2019,item:A.7.2.5:proc_29134_alignment,present,medium,"[Bridge: 27701 A.7.2.5 privacy impact assessment operationalises 27001 A.5.34 by identifying + treating PII-specific risks.] - Consent is the legal basis for processing
+- Individuals have the right to",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.2.7,ISO27701:2019,item:A.7.2.7:proc_arrangement_form,present,medium,"[Bridge: Joint controllership is a PII-specific arrangement type under 27001 A.5.34 privacy protection.] - Consent is the legal basis for processing
+- Individuals have the right to opt out of data use",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.3.1,ISO27701:2019,item:A.7.3.1:proc_accessibility,present,medium,"[Bridge: 27701 A.7.3.1 determining + fulfilling PII principal obligations operationalises 27001 A.5.34 privacy protection.] - Consent is the legal basis for processing
+- Individuals have the right to ",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.3.2,ISO27701:2019,item:A.7.3.2:proc_field_catalog,present,medium,"[Bridge: 27701 A.7.3.2 determining information for PII principals scopes the transparency artefacts required by 27001 A.5.34.] - Consent is the legal basis for processing
+- Individuals have the right ",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.3.3,ISO27701:2019,item:A.7.3.3:proc_at_collection,present,medium,"[Bridge: 27701 A.7.3.3 providing information to PII principals delivers the transparency artefacts required by 27001 A.5.34.] - Consent is the legal basis for processing
+- Individuals have the right t",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.3.4,ISO27701:2019,item:A.7.3.4:proc_channel_parity,present,medium,"[Bridge: 27701 A.7.3.4 providing consent modification / withdrawal mechanisms operationalises 27001 A.5.34 respect for principal choice.] - Consent is the legal basis for processing
+- Individuals have",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.3.5,ISO27701:2019,item:A.7.3.5:proc_absolute_objection,present,medium,"[Bridge: 27701 A.7.3.5 objection-to-processing mechanism operationalises 27001 A.5.34 respect for principal choice.] - Consent is the legal basis for processing
+- Individuals have the right to opt out",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.3.7,ISO27701:2019,item:A.7.3.7:proc_ack_receipt,present,medium,"[Bridge: 27701 A.7.3.7 informing third parties of principal-initiated changes propagates 27001 A.5.34 protection downstream.] - Consent is the legal basis for processing
+- Individuals have the right t",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.3.8,ISO27701:2019,item:A.7.3.8:proc_deleted_notification,present,medium,"[Bridge: 27701 A.7.3.8 providing PII copies to principals operationalises 27001 A.5.34 access-to-own-data protection.] - Consent is the legal basis for processing
+- Individuals have the right to opt o",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.3.9,ISO27701:2019,item:A.7.3.9:proc_complaint_route,present,medium,"[Bridge: 27701 A.7.3.9 handling PII principal requests is the operational surface of 27001 A.5.34 privacy protection.] - Consent is the legal basis for processing
+- Individuals have the right to opt o",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.3.10,ISO27701:2019,item:A.7.3.10:proc_cross_link_art22,present,medium,"[Bridge: 27701 A.7.3.10 automated decision-making controls are a PII-specific application of 27001 A.5.34 protection.] - Consent is the legal basis for processing
+- Individuals have the right to opt o",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.4.1,ISO27701:2019,item:A.7.4.1:proc_default_off,present,medium,"[Bridge: 27701 A.7.4.1 limit collection operationalises 27001 A.5.34 minimisation principle at the collection interface.] - Consent is the legal basis for processing
+- Individuals have the right to op",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.4.2,ISO27701:2019,item:A.7.4.2:proc_access_limit,present,medium,"[Bridge: 27701 A.7.4.2 limit processing operationalises 27001 A.5.34 minimisation principle at the processing layer.] - Consent is the legal basis for processing
+- Individuals have the right to opt ou",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.4.3,ISO27701:2019,item:A.7.4.3:proc_correction_link,present,medium,"[Bridge: 27701 A.7.4.3 accuracy and quality of PII operationalises 27001 A.5.34 data-integrity aspect of privacy protection.] - Consent is the legal basis for processing
+- Individuals have the right t",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.4.4,ISO27701:2019,item:A.7.4.4:proc_deidentification_technique,present,medium,"[Bridge: 27701 A.7.4.4 PII minimisation objectives directly implement 27001 A.5.34 minimisation principle at the policy layer.] - Consent is the legal basis for processing
+- Individuals have the right",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,A.7.4.6,ISO27701:2019,item:A.7.4.6:proc_disposal_period,present,medium,"[Bridge: Temporary-file discipline is a privacy-protection concern under 27001 A.5.34 — transient PII must be cleaned up.] - Consent is the legal basis for processing
+- Individuals have the right to o",xfw_bridge,2026-08-17 20:25:07.770481+00
+Consent Management Procedure.docx,B.8.3.1,ISO27701:2019,item:B.8.3.1:proc_contract_scope,present,medium,"[Bridge: 27701 B.8.3.1 processor obligations to PII principals operationalises 27001 A.5.34 downstream when the processor receives principal requests.] - Consent is the legal basis for processing
+- In",xfw_bridge,2026-08-17 20:25:07.770481+00
+Records of Processing Activities.docx,A.5.34,ISO27001:2022,item:A.5.34:scope_controller_role,present,medium,in the role of either PII Controller or Processor\.,fingerprint_match,2026-08-17 20:25:11.505532+00
+Records of Processing Activities.docx,Art.24,GDPR:2016/679,item:Art.24:role_chosen,present,medium,in the role of either PII Controller or Processor\.,fingerprint_match,2026-08-17 20:25:11.505532+00
+Records of Processing Activities.docx,Art.32,GDPR:2016/679,item:Art.32:reg_activity_id,present,medium,"This procedure applies to all business units, systems, processes, and services that involve the collection, use, storage, or transmission of personally identifiable information \(PII\) by Arion Networ",fingerprint_match,2026-08-17 20:25:11.505532+00
+Records of Processing Activities.docx,Art.32,GDPR:2016/679,item:Art.32:reg_risk_assessment,present,medium,"__Initiation__ – When a new processing activity is planned, the business owner must notify the Data Protection & Risk Manager\.",fingerprint_match,2026-08-17 20:25:11.505532+00
+Records of Processing Activities.docx,Art.35,GDPR:2016/679,item:Art.35:reg_dpia_id,present,medium,__Documentation__ – The activity is entered into the centralized RoPA Register \(Excel workbook stored in SharePoint\)\.,fingerprint_match,2026-08-17 20:25:11.505532+00
+Records of Processing Activities.docx,A.5.1,ISO27001:2022,item:A.5.1:legal_compliance,present,medium,"[Bridge: Information security policies provide the documented framework for 'appropriate technical and organisational measures'.] This procedure applies to all business units, systems, processes, and ",xfw_bridge,2026-08-17 20:25:11.788571+00
+Records of Processing Activities.docx,A.5.23,ISO27001:2022,item:A.5.23:controls_method,present,medium,"[Bridge: Cloud service security controls implement Art.32 appropriate technical measures for personal data in cloud environments.] This procedure applies to all business units, systems, processes, and",xfw_bridge,2026-08-17 20:25:11.788571+00
+Records of Processing Activities.docx,A.8.5,ISO27001:2022,item:A.8.5:proc_a517_linkage,present,medium,"[Bridge: Secure authentication is an explicit technical measure for Art.32 security of processing.] This procedure applies to all business units, systems, processes, and services that involve the coll",xfw_bridge,2026-08-17 20:25:11.788571+00
+Processor Operations Procedures.docx,A.7.4.2,ISO27701:2019,item:A.7.4.2:proc_policy_link,present,medium,"- Maintain a log for each client engagement where Arion processes PII
+- Each log entry must include:
+	- Processing purpose
+	- Data categories
+	- Processing duration
+	- Subprocessors used
+	- Security m",fingerprint_match,2026-08-17 20:25:42.653306+00
+Processor Operations Procedures.docx,B.8.2.1,ISO27701:2019,item:B.8.2.1:scope_pii_processor_test,present,medium,"This procedure defines Arion Networks' operational responsibilities when acting as a data processor, including:",fingerprint_match,2026-08-17 20:25:42.653306+00
+Processor Operations Procedures.docx,B.8.2.1,ISO27701:2019,item:B.8.2.1:proc_assistance_scope,present,medium,"- Logging processing activities \(A\.8\.3\.1\)
+- Secure return or deletion of personal data upon contract termination \(A\.8\.3\.2\)
+- Assisting customers with their GDPR obligations \(B\.8\.2\.1\)",fingerprint_match,2026-08-17 20:25:42.653306+00
+Processor Operations Procedures.docx,A.5.19,ISO27001:2022,item:A.5.19:agreement_handoff,present,medium,"[Bridge: 27701 B.8.2.1 mirrors 27001 A.5.19 from the processor side — the customer agreement is the supplier-relationship equivalent for the processor.] - Logging processing activities \(A\.8\.3\.1\)
+",xfw_bridge,2026-08-17 20:25:42.972984+00

@@ -40,6 +40,8 @@ DOCS = {
 
 RUN_A = MEASUREMENT_DIR / "run_a_consensus.csv"
 RUN_B = MEASUREMENT_DIR / "run_b_critic.csv"
+# Ship 77'.f — Run C = consensus with LLM verify-all-accepts enabled.
+RUN_C = MEASUREMENT_DIR / "run_c_consensus_verified.csv"
 
 
 # ─── Ground truth flattener ────────────────────────────────────────────
@@ -219,25 +221,33 @@ def main():
 
     findings_a = _load_findings(RUN_A)
     findings_b = _load_findings(RUN_B)
+    findings_c = _load_findings(RUN_C) if RUN_C.exists() else {}
 
-    all_scores = {"consensus": {}, "critic": {}}
+    all_scores = {"consensus": {}, "critic": {}, "consensus_verified": {}}
 
     for key, (yaml_file, doc_name) in DOCS.items():
         gt_musts = _extract_musts_from_yaml(GT_DIR / yaml_file)
         f_a = findings_a.get(doc_name, [])
         f_b = findings_b.get(doc_name, [])
+        f_c = findings_c.get(doc_name, [])
         s_a = _score(f_a, gt_musts)
         s_b = _score(f_b, gt_musts)
+        s_c = _score(f_c, gt_musts) if f_c else None
         all_scores["consensus"][key] = s_a
         all_scores["critic"][key] = s_b
+        if s_c:
+            all_scores["consensus_verified"][key] = s_c
 
         print(f"\n─── {key} ({doc_name[:40]}...) ───")
         print(f"  GT MUSTs: strict-expected={sum(1 for _,v,_ in gt_musts if v=='satisfies')} "
               f"partial={sum(1 for _,v,_ in gt_musts if v=='partial')} "
               f"not_satisfies={sum(1 for _,v,_ in gt_musts if v=='not_satisfies')}")
 
-        for name, s in (("consensus", s_a), ("critic", s_b)):
-            print(f"  {name:10} {s['n_findings']:3} findings, {s['n_distinct_musts']:3} distinct musts")
+        variants = [("consensus (A)", s_a), ("critic (B)", s_b)]
+        if s_c:
+            variants.append(("cons+verify (C)", s_c))
+        for name, s in variants:
+            print(f"  {name:15} {s['n_findings']:3} findings, {s['n_distinct_musts']:3} distinct musts")
             for scoring in ("strict", "lenient"):
                 x = s[scoring]
                 print(f"    {scoring:8} P={x['p']:.2%} R={x['r']:.2%} F1={x['f1']:.2%} "
@@ -248,15 +258,17 @@ def main():
     # Aggregate
     print("\n" + "=" * 68)
     print("AGGREGATE (across 5 docs)")
-    for path in ("consensus", "critic"):
+    for path in ("consensus", "critic", "consensus_verified"):
+        if not all_scores[path]:
+            continue
         for scoring in ("strict", "lenient"):
-            tps  = sum(all_scores[path][d][scoring]["tp"] for d in DOCS)
-            fps  = sum(all_scores[path][d][scoring]["fp"] for d in DOCS)
-            fns  = sum(all_scores[path][d][scoring]["fn"] for d in DOCS)
+            tps  = sum(all_scores[path][d][scoring]["tp"] for d in all_scores[path])
+            fps  = sum(all_scores[path][d][scoring]["fp"] for d in all_scores[path])
+            fns  = sum(all_scores[path][d][scoring]["fn"] for d in all_scores[path])
             p = tps / (tps + fps) if (tps + fps) else 0.0
             r = tps / (tps + fns) if (tps + fns) else 0.0
             f = 2*p*r/(p+r) if (p+r) else 0.0
-            print(f"  {path:10} {scoring:8} P={p:.2%} R={r:.2%} F1={f:.2%} "
+            print(f"  {path:20} {scoring:8} P={p:.2%} R={r:.2%} F1={f:.2%} "
                   f"(TP={tps} FP={fps} FN={fns})")
 
 
