@@ -1,0 +1,6 @@
+filename,total_candidates,n_accept,n_arbiter,n_drop,n_arbiter_llm_accept,n_arbiter_llm_reject,latency_ms
+Data Quality Accuracy Procedure.docx,135,16,0,119,0,0,36891
+Consent Management Procedure.docx,135,17,0,118,0,0,41574
+Data Protection Impact Assessment (DPIA) Procedure.docx,163,28,0,135,0,0,43540
+Records of Processing Activities.docx,136,21,0,115,0,0,45985
+Processor Operations Procedures.docx,255,18,0,237,0,0,68232
