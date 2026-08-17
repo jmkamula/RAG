@@ -1,0 +1,579 @@
+# Ship 77'.c — Processor Operations Procedure Ground Truth (first pass)
+#
+# Compact format: 213 candidate MUSTs across 12 refs (Art.28 + 11 B.8.x).
+# Doc explicitly cites each of these controls per section heading, so
+# every one is in scope for measurement. Per-leaf verdicts + per-MUST
+# only where individual verdicts diverge from the leaf-level pattern.
+#
+# The doc is SUBSTANTIALLY MORE DETAILED than DPIA/RoPA/Consent — it
+# describes procedures + registers for 10 processor controls in
+# depth. Coverage is high on procedure MUSTs and register field
+# MUSTs; program-review MUSTs are usually not_satisfies (doc is a
+# procedure, not a program-review artefact).
+#
+# Doc-typo note: Section 3 header says "A.8.3.1" and Section 4 says
+# "A.8.3.2 / B.8.4.2". A.8.3.x doesn't exist; the intended refs are
+# B.8.3.x (processor) mirrors. Scored against the correct B.8.x
+# controls based on section CONTENT.
+
+document:
+  upload_id: 453c55b3-1863-4461-90cb-f7ad058029f2
+  filename: Processor Operations Procedures.docx
+  extracted_by: claude_first_pass
+  extracted_at: 2026-08-17
+  markdown_chars: 15408
+  doc_type: procedure
+
+# ── Art.28 (GDPR — Processor) ────────────────────────────────────────
+# 4 leaves × 21 MUSTs. Doc's overarching GDPR anchor.
+
+art_28_expected:
+
+  # req:Art.28:applicable_processors_scope — 3 MUSTs
+  # The doc IS the processor procedure itself; scope is stated in
+  # Section 2 but doesn't build the processor-inventory artefact.
+  - must_id: item:Art.28:scope_controller_vs_processor
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 2: "Applies to all services where Arion Networks acts
+      as a processor or subprocessor of personal data on behalf of
+      a client (controller). Includes consulting services, SaaS
+      tools, custom deployments, subprocessed workstreams..."
+  - must_id: item:Art.28:scope_exclusions
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:Art.28:scope_processor_types
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 2 gives service types (consulting / SaaS / custom /
+      subprocessed) but not per-processor-type coverage.
+
+  # req:Art.28:data_processing_agreement — 8 MUSTs
+  # DPA reference is in the doc (DOC065 mentioned in multiple places)
+  # but the doc IS the procedure, not the DPA itself. DPA MUSTs are
+  # about what the DPA covers. Doc references but doesn't build DPA.
+  - must_id: item:Art.28:assistance
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 6.2 (DPIA assistance), 8.1 (DSR platform capabilities),
+      8.2 (support assistance). Comprehensive assistance framework.
+  - must_id: item:Art.28:audit
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 6.3 Audit Cooperation: "Customer audit rights per DPA
+      ... Response time: Within 15 business days ... Remote audit:
+      60 days notice, coordinated by DP&RM, max 2 days duration".
+  - must_id: item:Art.28:confidentiality
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 3.1: "Staff with access to customer data are trained
+      that data may only be used for documented purposes." Weak
+      confidentiality reference — no explicit confidentiality
+      obligations statement.
+  - must_id: item:Art.28:deletion
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 4: "complete and secure deletion of PII unless otherwise
+      agreed" + 5-step procedure + 4.3 documentation.
+  - must_id: item:Art.28:instructions
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 6.1: "Documented instructions include DPA and service
+      agreement, Customer's platform configuration and feature
+      usage, Written requests..."
+  - must_id: item:Art.28:rights
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 8: "Obligations to PII Principals — Arion Networks
+      provides customers with means to fulfill data subject requests"
+      + platform capabilities + support assistance.
+  - must_id: item:Art.28:security
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 3 log entries include "Security measures applied" +
+      Section 4.2 return-transfer security measures. Not a
+      comprehensive Art.32-equivalent statement.
+  - must_id: item:Art.28:subprocessors
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 11 (initial disclosure + new subprocessor notification)
+      + Section 12 (change notification with 30-day objection window).
+
+  # req:Art.28:processor_program_review — 5 MUSTs (mostly not_satisfies —
+  # doc is procedure not review)
+  - must_id: item:Art.28:rev_date
+    verdict: partial
+    confidence: low
+    quote: |
+      Doc-control header dates blank ("Reviewed on: [empty]",
+      "Next Review Date: [empty]"). Doc mentions annual review
+      generally but for Arion's OWN log, not for processor program.
+  - must_id: item:Art.28:rev_dpa_currency
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:Art.28:rev_reviewer
+    verdict: partial
+    confidence: low
+    quote: Doc header "Reviewed by: PIMS Manager".
+  - must_id: item:Art.28:rev_security_currency
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:Art.28:rev_subprocessor_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+
+  # req:Art.28:processor_register — 5 MUSTs (matches Section 3 log)
+  - must_id: item:Art.28:reg_data_categories
+    verdict: satisfies
+    confidence: high
+    quote: Section 3 log field "PII Categories: Data types involved".
+  - must_id: item:Art.28:reg_dpa_version
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    notes: Log fields don't include DPA version + execution date per row.
+  - must_id: item:Art.28:reg_processor_id
+    verdict: satisfies
+    confidence: high
+    quote: Section 3 log field "Client ID + Customer Name".
+  - must_id: item:Art.28:reg_security_check
+    verdict: partial
+    confidence: medium
+    quote: |
+      Log field "Security Controls" per row (encryption / segregation
+      / MFA) but no explicit Art.32-equivalent assurance source.
+  - must_id: item:Art.28:reg_subprocessors
+    verdict: satisfies
+    confidence: high
+    quote: Section 3 log field "Subprocessors: Any used in processing chain".
+
+# ── B.8.2.1 (Customer agreement) — 17 MUSTs ──────────────────────────
+# Section 6 directly covers this. Strong coverage.
+
+b_8_2_1_expected:
+
+  scope_leaf:  # applicable_scope (3 MUSTs)
+    scope_customer_list:      { verdict: partial, confidence: medium,
+      quote: "Section 3 log covers per-customer engagements but no explicit customer list enumeration section." }
+    scope_exclusions:         { verdict: not_satisfies, confidence: high, quote: "" }
+    scope_pii_processor_test: { verdict: partial, confidence: medium,
+      quote: "Section 2 scope statement implies the test but doesn't enumerate criteria." }
+
+  procedure_leaf:  # customer_agreement_procedure (5 MUSTs)
+    proc_assistance_scope:      { verdict: satisfies, confidence: high,
+      quote: "Section 6.2 (DPIA) + Section 8 (DSR) + Section 6.3 (audit) — comprehensive assistance scope." }
+    proc_customer_dpia_support: { verdict: satisfies, confidence: high,
+      quote: "Section 6.2: 'Provide: Processing details... Timeline: Within 10 business days. Format: Information from customer's RoPA entry + relevant DPA annexes.'" }
+    proc_documented_instructions:{ verdict: satisfies, confidence: high,
+      quote: "Section 6.1: 'Documented instructions include: DPA, service agreement, platform configuration, written requests. Logging: standard operations via ticket system; significant instructions in Customer Instructions Log.'" }
+    proc_intake_gate:           { verdict: not_satisfies, confidence: high, quote: "" }
+    proc_subject_matter_scope:  { verdict: partial, confidence: medium,
+      quote: "Section 3 log fields include Processing Purpose + Service Type + PII Categories + Processing Duration — captures subject-matter/nature/purpose/duration per activity." }
+
+  register_leaf:  # customer_agreement_register (5 MUSTs)
+    reg_agreement_reference:    { verdict: not_satisfies, confidence: medium,
+      quote: "", notes: "Log has Customer Name but no DPA doc reference per row." }
+    reg_assistance_coverage:    { verdict: not_satisfies, confidence: high, quote: "" }
+    reg_customer_id:            { verdict: satisfies, confidence: high,
+      quote: "Section 3 log field 'Client ID'." }
+    reg_instructions_channel:   { verdict: partial, confidence: medium,
+      quote: "Section 6.1 mentions ticket system + Customer Instructions Log but not as a per-row register field." }
+    reg_term:                   { verdict: partial, confidence: medium,
+      quote: "Section 3 log field 'Processing Duration: Contractual or technical lifespan'." }
+
+  review_leaf:  # program_review (4 MUSTs)
+    rev_coverage_check:  { verdict: not_satisfies, confidence: high, quote: "" }
+    rev_date:            { verdict: not_satisfies, confidence: medium,
+      quote: "", notes: "Doc-control header dates blank." }
+    rev_gaps_audit:      { verdict: not_satisfies, confidence: high, quote: "" }
+    rev_reviewer:        { verdict: partial, confidence: low,
+      quote: "Doc header PIMS Manager — MUST wants Legal + DPO + Sales Ops." }
+
+# ── B.8.2.2 (Purpose limitation) — 18 MUSTs ──────────────────────────
+# Section 3.1 directly covers this. Compact by-leaf summary.
+
+b_8_2_2_expected:
+
+  scope_leaf:  # applicable_scope (3 MUSTs)
+    scope_data_flows:      { verdict: not_satisfies, confidence: medium, quote: "" }
+    scope_own_controller:  { verdict: not_satisfies, confidence: high, quote: "" }
+    scope_services:        { verdict: partial, confidence: medium,
+      quote: "Section 2 enumerates services; not scoped to PII-processing subset explicitly." }
+
+  procedure_leaf:  # purpose_limitation_procedure (5 MUSTs)
+    proc_customer_verification:  { verdict: partial, confidence: medium,
+      quote: "Section 6.3 audit cooperation includes verification pathway." }
+    proc_instruction_capture:    { verdict: satisfies, confidence: high,
+      quote: "Section 3.1: 'Processing purposes are documented in the Processor Operations Log for each customer.'" }
+    proc_no_side_purpose:        { verdict: satisfies, confidence: high,
+      quote: "Section 3.1: 'Arion processes customer PII ONLY for purposes specified in the customer's DPA.' + Section 5 marketing prohibition." }
+    proc_technical_binding:      { verdict: not_satisfies, confidence: medium,
+      quote: "", notes: "No technical binding controls stated." }
+    proc_technical_justification:{ verdict: not_satisfies, confidence: high, quote: "" }
+
+  register_leaf:  # purpose_adherence_register (5 MUSTs)
+    reg_binding_controls:  { verdict: not_satisfies, confidence: high, quote: "" }
+    reg_customer_id:       { verdict: satisfies, confidence: high, quote: "Section 3 log field 'Client ID'." }
+    reg_last_verified:     { verdict: not_satisfies, confidence: high, quote: "" }
+    reg_permitted_secondary:{ verdict: not_satisfies, confidence: high, quote: "" }
+    reg_stated_purposes:   { verdict: satisfies, confidence: high,
+      quote: "Section 3 log field 'Processing Purpose: Purposes documented in customer DPA'." }
+
+  review_leaf:  # program_review (5 MUSTs) — all not_satisfies
+    bulk_not_satisfies: all_5_musts
+    rationale: "Doc is procedure not program review. Applicable MUSTs: customer_verification_health, rev_date (blank), rev_reviewer, side_purpose_sweep, technical_binding_audit."
+
+# ── B.8.2.3 (Marketing prohibition) — 18 MUSTs ──────────────────────
+
+b_8_2_3_expected:
+
+  scope_leaf:  # applicable_scope (3 MUSTs)
+    scope_exceptions:      { verdict: satisfies, confidence: high,
+      quote: "Section 5: 'Exceptions: None. This prohibition is absolute for all processor relationships.'" }
+    scope_marketing_channels: { verdict: not_satisfies, confidence: high, quote: "" }
+    scope_pii_isolation:   { verdict: not_satisfies, confidence: medium, quote: "" }
+
+  procedure_leaf:  # marketing_use_procedure (5 MUSTs)
+    proc_consent_evidence_requirement:  { verdict: not_satisfies, confidence: high,
+      quote: "", notes: "N/A because doc has absolute prohibition — no consent path." }
+    proc_customer_marketing_permit:     { verdict: not_satisfies, confidence: high, quote: "" }
+    proc_default_prohibition:           { verdict: satisfies, confidence: high,
+      quote: "Section 5 Policy Statement + Absolute prohibition." }
+    proc_freely_given_alignment:        { verdict: not_satisfies, confidence: high, quote: "" }
+    proc_no_conditionality:             { verdict: not_satisfies, confidence: high, quote: "" }
+
+  register_leaf:  # marketing_exception_register (5 MUSTs)
+    bulk_not_satisfies: all_5_musts
+    rationale: "Section 5 declares zero exceptions — register would be empty by design. Applicable MUSTs: activity_scope, customer_id, customer_permit, exception_id, subject_consent."
+
+  review_leaf:  # program_review (5 MUSTs)
+    rev_conditionality_check: { verdict: not_satisfies, confidence: high, quote: "" }
+    rev_date:                 { verdict: not_satisfies, confidence: medium, quote: "" }
+    rev_exception_audit:      { verdict: not_satisfies, confidence: high, quote: "" }
+    rev_isolation_audit:      { verdict: not_satisfies, confidence: high, quote: "" }
+    rev_reviewer:             { verdict: partial, confidence: low, quote: "PIMS Manager." }
+
+# ── B.8.2.4 (Unlawful instructions) — 19 MUSTs ───────────────────────
+
+b_8_2_4_expected:
+
+  scope_leaf:  # applicable_scope (3 MUSTs)
+    scope_instruction_channels: { verdict: satisfies, confidence: medium,
+      quote: "Section 6.1 lists channels: DPA + service agreement + platform config + written requests via privacy@ or support tickets." }
+    scope_priority_topics:      { verdict: not_satisfies, confidence: high, quote: "" }
+    scope_review_capability:    { verdict: not_satisfies, confidence: high, quote: "" }
+
+  procedure_leaf:  # infringing_instruction_procedure (5 MUSTs)
+    proc_customer_notification: { verdict: satisfies, confidence: high,
+      quote: "Section 7 Notification Content: description, legal provisions violated, alternative approach, request for clarification." }
+    proc_legal_assessment:      { verdict: satisfies, confidence: high,
+      quote: "Section 7: 'DP&RM assesses whether the instruction would violate applicable law.'" }
+    proc_notification_records:  { verdict: satisfies, confidence: high,
+      quote: "Section 7 Record Keeping: 'documented via email and retained for 3 years'." }
+    proc_processing_pause:      { verdict: not_satisfies, confidence: medium, quote: "",
+      notes: "Section 7 has notification but no explicit processing pause protocol." }
+    proc_review_trigger:        { verdict: partial, confidence: medium,
+      quote: "Section 7: 'Any staff member who receives a potentially unlawful instruction must immediately escalate' — implicit trigger but channels not enumerated." }
+
+  register_leaf:  # infringing_notification_register (6 MUSTs)
+    reg_customer_id:         { verdict: partial, confidence: medium, quote: "Documented via email — no explicit register field structure." }
+    reg_customer_response:   { verdict: not_satisfies, confidence: high, quote: "" }
+    reg_instruction_summary: { verdict: partial, confidence: medium, quote: "Section 7 Notification Content includes description." }
+    reg_legislation_cited:   { verdict: partial, confidence: medium, quote: "Section 7 includes 'Specific legal provision(s) potentially violated'." }
+    reg_notification_date:   { verdict: partial, confidence: medium, quote: "Email retained but not as register field." }
+    reg_notification_id:     { verdict: not_satisfies, confidence: high, quote: "" }
+
+  review_leaf:  # program_review (5 MUSTs) — all not_satisfies
+    bulk_not_satisfies: all_5_musts
+
+# ── B.8.3.1 (DSR assistance) — 17 MUSTs ──────────────────────────────
+
+b_8_3_1_expected:
+
+  scope_leaf:  # applicable_scope (3 MUSTs)
+    scope_customer_engagements: { verdict: partial, confidence: medium, quote: "Section 8 refers to customers using ArionComply platform." }
+    scope_exclusions:           { verdict: not_satisfies, confidence: high, quote: "" }
+    scope_support_matrix:       { verdict: not_satisfies, confidence: high, quote: "" }
+
+  procedure_leaf:  # principal_obligations_support_procedure (5 MUSTs)
+    proc_contract_scope:         { verdict: satisfies, confidence: medium,
+      quote: "Section 8 references customer DPA + support ticket system." }
+    proc_correction_erasure:     { verdict: satisfies, confidence: high,
+      quote: "Section 8.1: 'Edit documents to correct or anonymize PII. Delete documents completely.'" }
+    proc_informational_support:  { verdict: satisfies, confidence: high,
+      quote: "Section 8.3: 'On request, Arion Networks provides documentation of processing activities (data categories, purposes, retention, sub-processors, security, transfers) within 5 business days.'" }
+    proc_sla:                    { verdict: satisfies, confidence: high,
+      quote: "Section 8.1: 'Deletion effective immediately; backups purged within 30 days.' + 8.2: 'within 10 business days' + 8.3: '5 business days'." }
+    proc_technical_support:      { verdict: satisfies, confidence: high,
+      quote: "Section 8.1 platform capabilities: search / export / edit / delete." }
+
+  register_leaf:  # support_request_register (5 MUSTs)
+    reg_customer_id:  { verdict: satisfies, confidence: medium, quote: "Support ticket system implies customer identifier." }
+    reg_request_id:   { verdict: not_satisfies, confidence: medium, quote: "" }
+    reg_request_type: { verdict: satisfies, confidence: medium,
+      quote: "Section 8.2: 'Data subject identifier, Request type, Specific requirements' in ticket." }
+    reg_response:     { verdict: partial, confidence: medium, quote: "Support ticket implies response but not enumerated as register field." }
+    reg_sla_met:      { verdict: not_satisfies, confidence: high, quote: "" }
+
+  review_leaf:  # program_review (4 MUSTs) — all not_satisfies
+    bulk_not_satisfies: all_4_musts
+
+# ── B.8.4.2 (Return/transfer/disposal) — 18 MUSTs ────────────────────
+# Section 4 directly covers this. Strong coverage.
+
+b_8_4_2_expected:
+
+  scope_leaf:  # applicable_scope (3 MUSTs)
+    scope_ma_events:         { verdict: not_satisfies, confidence: high, quote: "" }
+    scope_retention_window:  { verdict: satisfies, confidence: medium,
+      quote: "Section 4.3: 'Proof of deletion... retained for 3 years post-contract'." }
+    scope_termination_triggers:{ verdict: partial, confidence: medium,
+      quote: "Section 4: 'Upon termination of a processing relationship' — trigger stated but not enumerated." }
+
+  procedure_leaf:  # return_transfer_disposal_procedure (6 MUSTs)
+    proc_certification:      { verdict: satisfies, confidence: high,
+      quote: "Section 4.3: 'Proof of deletion: Log, audit hash, screenshot, or signed form'." }
+    proc_customer_visibility:{ verdict: satisfies, confidence: high,
+      quote: "Section 4: 'This policy is made available to customers upon request via privacy@arionetworks.com or through customer audit rights.'" }
+    proc_disposal_capability:{ verdict: satisfies, confidence: high,
+      quote: "Section 4.1 Step 4: 'Delete remaining copies (active + backup)'." }
+    proc_lapse_protection:   { verdict: not_satisfies, confidence: medium, quote: "" }
+    proc_return_capability:  { verdict: satisfies, confidence: high,
+      quote: "Section 4: 'return of data in structured, commonly used, machine-readable format'." }
+    proc_transfer_capability:{ verdict: satisfies, confidence: high,
+      quote: "Section 4: 'Clients may request direct transfer to another processor on written instruction'." }
+
+  register_leaf:  # end_of_service_register (5 MUSTs)
+    reg_action_type:        { verdict: partial, confidence: medium,
+      quote: "Section 4.3 PII Deletion Log implies action type but not per-row field." }
+    reg_certification_ref:  { verdict: satisfies, confidence: medium, quote: "Section 4.3 proof of deletion." }
+    reg_completion_date:    { verdict: satisfies, confidence: medium, quote: "Section 4.3 records retained." }
+    reg_customer_id:        { verdict: satisfies, confidence: high, quote: "PII Deletion Log with Processing Role." }
+    reg_termination_date:   { verdict: not_satisfies, confidence: medium, quote: "" }
+
+  review_leaf:  # program_review (4 MUSTs) — all not_satisfies
+    bulk_not_satisfies: all_4_musts
+
+# ── B.8.5.1 (Jurisdiction change) — 17 MUSTs ─────────────────────────
+# Section 9 directly covers this.
+
+b_8_5_1_expected:
+
+  scope_leaf:  # applicable_scope (3 MUSTs)
+    scope_direct_transfers:      { verdict: partial, confidence: medium,
+      quote: "Section 9 mentions Azure regions (direct transfers)." }
+    scope_subprocessor_transfers:{ verdict: partial, confidence: medium,
+      quote: "Section 9: 'Subprocessors: Microsoft (EU-US DPF certified)'." }
+    scope_support_access:        { verdict: not_satisfies, confidence: high, quote: "" }
+
+  procedure_leaf:  # transfer_basis_procedure (5 MUSTs)
+    proc_advance_notification:   { verdict: satisfies, confidence: high,
+      quote: "Section 9: 'Email notification sent to ALL active customers minimum 30 days before change'." }
+    proc_basis_documentation:    { verdict: partial, confidence: medium,
+      quote: "Section 9 lists 'Subprocessors: Microsoft (EU-US DPF certified)' — basis mentioned but not per-transfer documented." }
+    proc_carve_out_limits:       { verdict: not_satisfies, confidence: high, quote: "" }
+    proc_customer_information:   { verdict: satisfies, confidence: high,
+      quote: "Section 9 lists current jurisdictions (primary storage EU, AI processing EU, subprocessors)." }
+    proc_international_agreements:{ verdict: partial, confidence: medium,
+      quote: "Section 9 mentions EU-US DPF but no full transfer agreement types catalog." }
+
+  register_leaf:  # transfer_basis_register (5 MUSTs)
+    reg_basis:                { verdict: not_satisfies, confidence: medium, quote: "" }
+    reg_change_history:       { verdict: partial, confidence: low,
+      quote: "Section 9 Step 4 mentions 'Customer objections tracked in Customer Jurisdiction Changes Log'." }
+    reg_customer_notification_date:{ verdict: partial, confidence: medium, quote: "Log tracks changes." }
+    reg_jurisdiction_pair:    { verdict: partial, confidence: medium, quote: "Section 9 lists current jurisdictions." }
+    reg_relationship_id:      { verdict: not_satisfies, confidence: high, quote: "" }
+
+  review_leaf:  # program_review (4 MUSTs) — all not_satisfies
+    bulk_not_satisfies: all_4_musts
+
+# ── B.8.5.4 (Notification of disclosure requests) — 17 MUSTs ─────────
+# Section 10 directly covers this.
+
+b_8_5_4_expected:
+
+  scope_leaf:  # applicable_scope (3 MUSTs)
+    scope_gag_order_scope:  { verdict: partial, confidence: medium,
+      quote: "Section 10.3.4: 'If Notification Legally Prohibited: Use all lawful efforts to obtain waiver'." }
+    scope_jurisdictions:    { verdict: not_satisfies, confidence: high, quote: "" }
+    scope_request_types:    { verdict: satisfies, confidence: high,
+      quote: "Section 10.1: 'law enforcement, court, regulator, or other third party' + Section 10.3 details." }
+
+  procedure_leaf:  # notification_procedure (5 MUSTs)
+    proc_gag_order_exception:{ verdict: satisfies, confidence: high,
+      quote: "Section 10.3.4: 'If Notification Legally Prohibited: Use all lawful efforts to obtain waiver, Document efforts, Notify customer as soon as legally permissible'." }
+    proc_legal_review:       { verdict: satisfies, confidence: high,
+      quote: "Section 10.3.1: 'Immediate legal review (consult legal counsel if unclear)'." }
+    proc_notification_format:{ verdict: satisfies, confidence: high,
+      quote: "Section 10.3.2: 'Email including: requesting authority, legal basis, data requested, response deadline, copy of request (if permissible)'." }
+    proc_request_intake:     { verdict: satisfies, confidence: high,
+      quote: "Section 10.1: 'Immediate triage within 24 hours by DP&RM'." }
+    proc_timeframe:          { verdict: satisfies, confidence: high,
+      quote: "Section 10.1: 'within 24 hours' triage." }
+
+  register_leaf:  # disclosure_request_register (5 MUSTs)
+    reg_customer_affected:   { verdict: partial, confidence: medium,
+      quote: "Section 10.5 Legal Requests Log includes customer info implicitly." }
+    reg_customer_notification:{ verdict: partial, confidence: medium, quote: "Section 10.5 logs customer consultation." }
+    reg_request_id:          { verdict: not_satisfies, confidence: medium, quote: "" }
+    reg_requester:           { verdict: partial, confidence: medium, quote: "Log includes request type." }
+    reg_response_outcome:    { verdict: partial, confidence: medium, quote: "Log includes data disclosed field." }
+
+  review_leaf:  # program_review (4 MUSTs) — all not_satisfies
+    bulk_not_satisfies: all_4_musts
+
+# ── B.8.5.5 (Disclosure decision) — 17 MUSTs ─────────────────────────
+# Section 10.2 + 10.3 + 10.4 cover this.
+
+b_8_5_5_expected:
+
+  scope_leaf:  # applicable_scope (3 MUSTs)
+    scope_authorisation_paths: { verdict: partial, confidence: medium,
+      quote: "Section 10.4: 'Customer DPA may authorize specific disclosures'." }
+    scope_default_reject:      { verdict: satisfies, confidence: high,
+      quote: "Section 10.2: 'Default response: REJECT. Politely decline without disclosing any information'." }
+    scope_request_types:       { verdict: satisfies, confidence: high,
+      quote: "Section 10.2 non-binding + 10.3 binding + 10.4 contractually agreed." }
+
+  procedure_leaf:  # disclosure_decision_procedure (5 MUSTs)
+    proc_binding_assessment:   { verdict: satisfies, confidence: high,
+      quote: "Section 10.1: 'Determine legal status: Legally binding vs Non-legally binding'." }
+    proc_contractual_scope:    { verdict: satisfies, confidence: high,
+      quote: "Section 10.4: 'Customer DPA may authorize specific disclosures... Verify authorization in signed DPA'." }
+    proc_customer_consultation:{ verdict: satisfies, confidence: high,
+      quote: "Section 10.3.3: 'Consult Customer BEFORE Disclosure... Wait for customer response unless deadline requires immediate action'." }
+    proc_default_reject:       { verdict: satisfies, confidence: high, quote: "Section 10.2." }
+    proc_source_variety:       { verdict: satisfies, confidence: medium,
+      quote: "Section 10.1: 'law enforcement, court, regulator, or other third party'." }
+
+  register_leaf:  # disclosure_decision_register (5 MUSTs)
+    reg_binding_classification:{ verdict: satisfies, confidence: high,
+      quote: "Section 10.5: 'Request type (legally binding / non-binding / contractually authorized)'." }
+    reg_customer_authorisation:{ verdict: satisfies, confidence: medium, quote: "Log includes customer authorization received Y/N." }
+    reg_decision_id:           { verdict: not_satisfies, confidence: medium, quote: "" }
+    reg_outcome:               { verdict: satisfies, confidence: high, quote: "Log includes data disclosed field." }
+    reg_request_source:        { verdict: partial, confidence: medium, quote: "Log includes request type." }
+
+  review_leaf:  # program_review (4 MUSTs) — all not_satisfies
+    bulk_not_satisfies: all_4_musts
+
+# ── B.8.5.6 (Subprocessor disclosure) — 17 MUSTs ─────────────────────
+# Section 11 directly covers this.
+
+b_8_5_6_expected:
+
+  scope_leaf:  # applicable_scope (3 MUSTs)
+    scope_exclusions:          { verdict: not_satisfies, confidence: high, quote: "" }
+    scope_pii_processing_test: { verdict: partial, confidence: medium,
+      quote: "Section 11 refers to 'sub-processors used to process customer PII'." }
+    scope_subcontractor_list:  { verdict: satisfies, confidence: high,
+      quote: "Section 11.1: 'All sub-processors used at the time of contract signing are listed in Section 8 of the Customer DPA (DOC065)'." }
+
+  procedure_leaf:  # subcontractor_disclosure_procedure (5 MUSTs)
+    proc_countries_always_public:{ verdict: partial, confidence: medium,
+      quote: "Section 11.2 notification includes 'country' but no 'always public' commitment." }
+    proc_customer_contract_link: { verdict: satisfies, confidence: high,
+      quote: "Section 11.1 references Customer DPA + Section 8 disclosure." }
+    proc_disclosure_content:     { verdict: satisfies, confidence: high,
+      quote: "Section 11.2: 'sub-processor name, country, service provided, data categories, and safeguards in place'." }
+    proc_nda_path:               { verdict: not_satisfies, confidence: high, quote: "" }
+    proc_pre_use_disclosure:     { verdict: satisfies, confidence: high,
+      quote: "Section 11.2: 'minimum 30 days before the new sub-processor commences processing'." }
+
+  register_leaf:  # subcontractor_disclosure_register (5 MUSTs)
+    reg_countries:        { verdict: satisfies, confidence: medium, quote: "Section 11.2 notification includes country." }
+    reg_customer_id:      { verdict: satisfies, confidence: high, quote: "'ALL active ArionComply customers' + DPA reference." }
+    reg_disclosure_date:  { verdict: partial, confidence: medium,
+      quote: "Section 11.3 retention for 5 years + Section 12 register with notification date." }
+    reg_disclosure_mode:  { verdict: partial, confidence: medium, quote: "DPA Section 8 disclosure mode." }
+    reg_subcontractor_id: { verdict: satisfies, confidence: high, quote: "Section 11.2 sub-processor name." }
+
+  review_leaf:  # program_review (4 MUSTs) — all not_satisfies
+    bulk_not_satisfies: all_4_musts
+
+# ── B.8.5.8 (Subprocessor change) — 17 MUSTs ─────────────────────────
+# Section 12 directly covers this.
+
+b_8_5_8_expected:
+
+  scope_leaf:  # applicable_scope (3 MUSTs)
+    scope_change_types:            { verdict: satisfies, confidence: high,
+      quote: "Section 12: 'Arion Networks plans to add or replace a sub-processor'." }
+    scope_general_auth_customers:  { verdict: not_satisfies, confidence: high, quote: "" }
+    scope_specific_auth_exclusion: { verdict: not_satisfies, confidence: high, quote: "" }
+
+  procedure_leaf:  # subcontractor_change_procedure (5 MUSTs)
+    proc_advance_notification:  { verdict: satisfies, confidence: high,
+      quote: "Section 12 Step 3: 'Email notification sent to ALL active customers minimum 30 days before change'." }
+    proc_change_trigger:        { verdict: satisfies, confidence: high,
+      quote: "Section 12 Step 1: 'DP&RM identifies planned sub-processor change'." }
+    proc_general_auth_scope:    { verdict: partial, confidence: low,
+      quote: "Section 11.1 DPA-based authorization implies general auth model." }
+    proc_notification_content:  { verdict: satisfies, confidence: high,
+      quote: "Section 12 Step 2: 'name of new/replacement sub-processor, service provided, data categories affected, effective date'." }
+    proc_objection_handling:    { verdict: satisfies, confidence: high,
+      quote: "Section 12 Step 4-5: 'Customers may object within 30 days... DP&RM resolves objections or allows penalty-free termination'." }
+
+  register_leaf:  # subcontractor_change_register (5 MUSTs)
+    reg_change_id:         { verdict: not_satisfies, confidence: medium, quote: "" }
+    reg_change_type:       { verdict: partial, confidence: medium, quote: "Section 12 handles add/replace." }
+    reg_effective_date:    { verdict: satisfies, confidence: medium, quote: "Section 12 Step 2: 'effective date'." }
+    reg_notification_date: { verdict: satisfies, confidence: medium,
+      quote: "Section 12 Step 6: 'Change logged in Subprocessor Register with notification date'." }
+    reg_objection_status:  { verdict: satisfies, confidence: high,
+      quote: "Section 12 Step 6: 'and any objections received'." }
+
+  review_leaf:  # program_review (4 MUSTs) — all not_satisfies
+    bulk_not_satisfies: all_4_musts
+
+# ── A.5.34 (privacy program) — 27 MUSTs, bulk not_satisfies ─────────
+# Processor Ops doc is not a PII processing register (own controller),
+# not a privacy policy, not applicability scope, not program review.
+# All 27 wrong artefact.
+
+a_5_34_expected:
+  bulk_not_satisfies: all_27_musts
+
+# ── Summary counts (approximate) ─────────────────────────────────────
+#
+# Art.28 (21 MUSTs):    9 satisfies + 5 partial + 7 not_satisfies
+# B.8.2.1 (17):         5 satisfies + 6 partial + 6 not_satisfies
+# B.8.2.2 (18):         4 satisfies + 3 partial + 11 not_satisfies
+# B.8.2.3 (18):         2 satisfies + 1 partial + 15 not_satisfies
+# B.8.2.4 (19):         4 satisfies + 6 partial + 9 not_satisfies
+# B.8.3.1 (17):         8 satisfies + 2 partial + 7 not_satisfies
+# B.8.4.2 (18):         8 satisfies + 3 partial + 7 not_satisfies
+# B.8.5.1 (17):         3 satisfies + 6 partial + 8 not_satisfies
+# B.8.5.4 (17):         5 satisfies + 5 partial + 7 not_satisfies
+# B.8.5.5 (17):         9 satisfies + 3 partial + 5 not_satisfies
+# B.8.5.6 (17):         7 satisfies + 3 partial + 7 not_satisfies
+# B.8.5.8 (17):         7 satisfies + 2 partial + 8 not_satisfies
+# A.5.34 (27):          0 satisfies + 0 partial + 27 not_satisfies (bulk)
+#
+# TOTAL: 240 candidate MUSTs (~213 for the doc-referenced set + 27 A.5.34)
+# Strict expected findings (satisfies only):   ~71
+# Lenient (+ partial):                        ~116
+#
+# Note: counts are approximate given the compact per-leaf format.
+# Actual per-MUST enumeration above is authoritative.
+#
+# The Processor Ops doc has THE HIGHEST substantive coverage among
+# the 5 baseline docs — it directly addresses 10+ B.8.x controls per
+# section, with detailed procedures + register field lists + roles.
+# This is the "gold standard" doc for measuring extractor precision:
+# recall should be high, false positives low.

@@ -1,0 +1,547 @@
+# Ship 77'.c — Consent Management Procedure Ground Truth (first pass)
+#
+# Method: same as ropa_expected.yaml. Refined principle applied:
+# enumerate at LEAF level, not control level. A.5.34 bulk treatment
+# for this doc is justified because the consent doc doesn't build
+# a PII processing register (unlike RoPA which does).
+#
+# Doc-note: Section 1 cites "ISO/IEC 27701:2019 control A.7.5.5"
+# which doesn't exist. Correct refs are A.7.2.3 (consent obtaining),
+# A.7.3.4 (withdrawal), A.7.3.5 (objection). Scored against all three.
+#
+# Wrong-mechanism note: A.7.3.5 (objection) is Art.21 mechanism —
+# different from consent withdrawal (Art.7.3). Doc's opt-out language
+# is CCPA/CPRA opt-out ≠ Art.21 objection. Most A.7.3.5 MUSTs are
+# not_satisfies for that reason (wrong mechanism, not wrong artefact).
+
+document:
+  upload_id: 10287fa5-f757-420b-98a4-ee9e34d02d25
+  filename: Consent Management Procedure.docx
+  extracted_by: claude_first_pass
+  extracted_at: 2026-08-17
+  markdown_chars: 5945
+  doc_type: procedure
+
+# ── Art.7 (GDPR — Conditions for consent) ────────────────────────────
+# 4 leaves × 20 MUSTs. This is the doc's PRIMARY target.
+
+art_7_expected:
+
+  # req:Art.7:applicable_activities_scope — 3 MUSTs
+  - must_id: item:Art.7:scope_consent_activities
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 2 enumerates: "Non-essential cookies", "Newsletter",
+      "Other voluntary activities" — consent-required. Also lists
+      non-consent bases (essential cookies + contact forms +
+      legitimate interest).
+  - must_id: item:Art.7:scope_overlap_rules
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 2: "The organization distinguishes between processing
+      that relies on consent and processing that relies on other
+      lawful bases." Distinguishes but no explicit overlap rules.
+  - must_id: item:Art.7:scope_special_overlay
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 2: "special category data (Art. 9(2)(a) GDPR for
+      special categories)". Recognizes but doesn't detail stricter
+      capture requirements.
+
+  # req:Art.7:consent_management_procedure — 6 MUSTs
+  - must_id: item:Art.7:capture_mechanism
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 3 principles (freely given / specific / informed /
+      unambiguous / documented / revocable) + Section 4 Steps 1-3
+      capture lifecycle.
+  - must_id: item:Art.7:demonstrability
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 6 Consent Register Fields: "Date/Time of Consent",
+      "Method of Consent", "version of the consent text and policy".
+  - must_id: item:Art.7:distinguishable
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 3 lists principles but doesn't explicitly say the
+      consent request must be distinguishable from other matters
+      (Art.7.2 requirement for separate, clear-language statement).
+  - must_id: item:Art.7:no_conditionality
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 3: "Freely given: Not tied to unrelated services or terms".
+  - must_id: item:Art.7:owner
+    verdict: satisfies
+    confidence: high
+    quote: Doc header "Owner: DPO".
+  - must_id: item:Art.7:withdrawal_mechanism
+    verdict: satisfies
+    confidence: medium
+    quote: |
+      Section 5 + Withdrawal section: "clear and accessible opt-out
+      link or contact method" + multiple channels. Doesn't
+      explicitly say "as easy as giving consent" (Art.7.3 language).
+
+  # req:Art.7:consent_program_review — 5 MUSTs
+  - must_id: item:Art.7:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: Doc header "Next Review Date: 20 Nov 2026" + Section 8.
+  - must_id: item:Art.7:rev_mechanism_audit
+    verdict: satisfies
+    confidence: medium
+    quote: |
+      Section 8: "Consent text and UI are reviewed annually or with
+      regulatory changes".
+  - must_id: item:Art.7:rev_register_currency
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: |
+      No register-currency check against in-scope activities.
+  - must_id: item:Art.7:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: Doc header "Reviewed by: PIMS Manager".
+    notes: MUST wants DPO or Privacy Lead + product lead. Partial.
+  - must_id: item:Art.7:rev_withdrawal_sla
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 5: "Consent withdrawals must be processed promptly
+      (within 5 business days)".
+
+  # req:Art.7:consent_register — 6 MUSTs
+  - must_id: item:Art.7:reg_basis_link
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No per-row link to Art.6.1.a register entry.
+  - must_id: item:Art.7:reg_mechanism
+    verdict: satisfies
+    confidence: high
+    quote: Section 6 field "Method of Consent: Checkbox, banner, email, etc."
+  - must_id: item:Art.7:reg_scope
+    verdict: satisfies
+    confidence: high
+    quote: Section 6 field "Consent Purpose".
+  - must_id: item:Art.7:reg_subject_id
+    verdict: satisfies
+    confidence: high
+    quote: Section 6 field "Data Subject Identifier".
+  - must_id: item:Art.7:reg_timestamp
+    verdict: satisfies
+    confidence: high
+    quote: Section 6 field "Date/Time of Consent".
+  - must_id: item:Art.7:reg_withdrawal_status
+    verdict: satisfies
+    confidence: high
+    quote: Section 6 fields "Withdrawal Date" + "Processing Status: Active / Withdrawn".
+
+# ── Art.6 (GDPR — Lawfulness of processing) ──────────────────────────
+# 4 leaves × 18 MUSTs. Doc TOUCHES Art.6 (consent as one of the
+# lawful bases) but doesn't build the Art.6-artefact (lawful basis
+# register + determination procedure).
+
+art_6_expected:
+
+  # req:Art.6:applicable_activities_scope — 3 MUSTs
+  - must_id: item:Art.6:scope_member_state
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: |
+      Doc mentions CCPA/CPRA but not GDPR Member State law overlays
+      (Art.6.2/6.3 derogations).
+  - must_id: item:Art.6:scope_ropa_link
+    verdict: partial
+    confidence: low
+    quote: |
+      Doc references "processing activities" broadly but no
+      explicit link to Art.30 RoPA per activity.
+  - must_id: item:Art.6:scope_special_overlay
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 2 mentions Art.9.2.a special category consent
+      overlay. Recognizes but doesn't detail.
+
+  # req:Art.6:lawful_basis_determination_procedure — 4 MUSTs
+  - must_id: item:Art.6:proc_basis_catalog
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 2 mentions Art.6.1.a, 6.1.b, 6.1.f — partial catalog
+      of 3 of 6 bases. Not a comprehensive catalog with practical
+      examples.
+  - must_id: item:Art.6:proc_change_trigger
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:Art.6:proc_decision_authority
+    verdict: partial
+    confidence: medium
+    quote: |
+      DPO in doc header + DP&RM in Section 4 role. No explicit
+      "product owner proposes, DPO approves" authority chain.
+  - must_id: item:Art.6:proc_decision_inputs
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+
+  # req:Art.6:lawful_basis_program_review — 5 MUSTs
+  - must_id: item:Art.6:rev_basis_appropriateness
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:Art.6:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: Doc header + Section 8.
+  - must_id: item:Art.6:rev_register_currency
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:Art.6:rev_regulator_guidance
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:Art.6:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: PIMS Manager — MUST wants DPO or Privacy Lead.
+
+  # req:Art.6:lawful_basis_register — 6 MUSTs
+  # Wrong artefact: consent doc ≠ lawful basis register.
+  art_6_register_bulk:
+    verdict: not_satisfies
+    confidence: high
+    rationale: |
+      All 6 lawful_basis_register MUSTs (activities_enumerated,
+      basis_per_activity, consent_link, justification, lia_link,
+      owner) are wrong-artefact for a consent doc. The lawful basis
+      register would be a separate artefact — even the RoPA doc has
+      "Legal Basis" as a field but doesn't build the register itself.
+
+# ── A.7.2.3 (ISO 27701 — Determine when and how consent is obtained) ─
+# 4 leaves × 19 MUSTs. Direct mirror of consent doc.
+
+a_7_2_3_expected:
+
+  # req:A.7.2.3:applicable_scope — 3 MUSTs
+  - must_id: item:A.7.2.3:scope_children_thresholds
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No age-of-consent thresholds discussed.
+  - must_id: item:A.7.2.3:scope_consent_activities
+    verdict: satisfies
+    confidence: high
+    quote: Section 2 (same as Art.7 scope_consent_activities).
+  - must_id: item:A.7.2.3:scope_special_category_map
+    verdict: partial
+    confidence: medium
+    quote: Section 2 mentions Art.9.2.a. No detailed map.
+
+  # req:A.7.2.3:consent_artifact_register — 5 MUSTs
+  - must_id: item:A.7.2.3:reg_artifact_snapshot
+    verdict: satisfies
+    confidence: medium
+    quote: |
+      Section 6: "the version of the consent text and policy
+      presented to the data subject at the time consent was obtained".
+  - must_id: item:A.7.2.3:reg_channel_id
+    verdict: satisfies
+    confidence: high
+    quote: Section 6 field "Method of Consent".
+  - must_id: item:A.7.2.3:reg_effective_date
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    notes: Timestamp is per capture, not per artifact version.
+  - must_id: item:A.7.2.3:reg_purpose_link
+    verdict: satisfies
+    confidence: high
+    quote: Section 6 field "Consent Purpose".
+  - must_id: item:A.7.2.3:reg_review_signoff
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+
+  # req:A.7.2.3:consent_process_procedure — 6 MUSTs
+  - must_id: item:A.7.2.3:proc_children_overlay
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:A.7.2.3:proc_collection_mechanism
+    verdict: satisfies
+    confidence: high
+    quote: Section 4 lifecycle + Section 6 register mechanism.
+  - must_id: item:A.7.2.3:proc_no_bundling
+    verdict: satisfies
+    confidence: high
+    quote: Section 3 "Freely given: Not tied to unrelated services or terms".
+  - must_id: item:A.7.2.3:proc_quality_standard
+    verdict: satisfies
+    confidence: high
+    quote: Section 3 6-principle list.
+  - must_id: item:A.7.2.3:proc_special_category_overlay
+    verdict: partial
+    confidence: medium
+    quote: Section 2 mentions Art.9.2.a. Recognized not detailed.
+  - must_id: item:A.7.2.3:proc_when_consent_required
+    verdict: satisfies
+    confidence: high
+    quote: Section 2 enumerates all consent-required activities + non-consent bases.
+
+  # req:A.7.2.3:program_review — 5 MUSTs
+  - must_id: item:A.7.2.3:rev_artifact_audit
+    verdict: satisfies
+    confidence: medium
+    quote: |
+      Section 8: "Consent text and UI are reviewed annually or with
+      regulatory changes" — mechanism/artifact audit.
+  - must_id: item:A.7.2.3:rev_children_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:A.7.2.3:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: Doc header + Section 8.
+  - must_id: item:A.7.2.3:rev_no_bundling_check
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    notes: |
+      Section 3 states the no-bundling principle but no explicit
+      regression check in the review procedure.
+  - must_id: item:A.7.2.3:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: PIMS Manager — MUST wants DPO + UX + Legal.
+
+# ── A.7.3.4 (ISO 27701 — Consent withdrawal mechanism) ───────────────
+# 4 leaves × 18 MUSTs. Doc has Section 5 "Withdrawal and Opt-Out" +
+# Section 6 register fields — directly targets this control.
+
+a_7_3_4_expected:
+
+  # req:A.7.3.4:applicable_scope — 3 MUSTs
+  - must_id: item:A.7.3.4:scope_channel_map
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 5 lists withdrawal channels (unsubscribe / cookie
+      banner / direct email). Section 2 mentions collection contexts.
+      Implicit map but not explicit collection→withdrawal mapping.
+  - must_id: item:A.7.3.4:scope_consent_activities
+    verdict: satisfies
+    confidence: high
+    quote: Section 2.
+  - must_id: item:A.7.3.4:scope_jurisdiction_variance
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+
+  # req:A.7.3.4:consent_withdrawal_procedure — 6 MUSTs
+  - must_id: item:A.7.3.4:proc_channel_parity
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 5 provides multiple withdrawal channels but doesn't
+      explicitly enforce parity with collection medium.
+  - must_id: item:A.7.3.4:proc_easy_as_giving
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 3: "Revocable: Can be withdrawn at any time with no
+      penalty" + Section 5 accessible opt-out. Doesn't state "as
+      easy as giving" (Art.7.3 language).
+  - must_id: item:A.7.3.4:proc_modification_paths
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: Only full withdrawal covered, not partial/modification.
+  - must_id: item:A.7.3.4:proc_pre_withdrawal_valid
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 5: "Retain the record of original consent and
+      withdrawal timestamp for audit purposes" — pre-withdrawal
+      processing implicitly remains valid.
+  - must_id: item:A.7.3.4:proc_propagation
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 5: "Update marketing lists, analytics tags, or
+      third-party integrations accordingly" + Step 5 in lifecycle.
+  - must_id: item:A.7.3.4:proc_response_sla
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 5: "processed promptly (within 5 business days)".
+
+  # req:A.7.3.4:program_review — 4 MUSTs
+  - must_id: item:A.7.3.4:rev_channel_test
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No end-to-end withdrawal channel test procedure.
+  - must_id: item:A.7.3.4:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: Doc header + Section 8.
+  - must_id: item:A.7.3.4:rev_propagation_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:A.7.3.4:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: PIMS Manager — MUST wants DPO + Engineering.
+
+  # req:A.7.3.4:withdrawal_event_register — 5 MUSTs
+  - must_id: item:A.7.3.4:reg_event_id
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 6 has "Consent ID" per consent record but no separate
+      withdrawal event register with unique event IDs.
+  - must_id: item:A.7.3.4:reg_event_type
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: |
+      Section 6 has "Processing Status: Active / Withdrawn" — no
+      distinction between modification / partial / full withdrawal.
+  - must_id: item:A.7.3.4:reg_propagation_status
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:A.7.3.4:reg_subject_id
+    verdict: satisfies
+    confidence: high
+    quote: Section 6 field "Data Subject Identifier".
+  - must_id: item:A.7.3.4:reg_timestamp
+    verdict: satisfies
+    confidence: high
+    quote: Section 6 field "Withdrawal Date".
+
+# ── A.7.3.5 (ISO 27701 — Providing mechanism to object) ──────────────
+# 4 leaves × 19 MUSTs.
+# WRONG MECHANISM: A.7.3.5 is about Art.21 objection — different
+# legal mechanism from Art.7.3 consent withdrawal (which A.7.3.4
+# covers). Consent doc's "opt-out" language is CCPA/CPRA, not Art.21.
+# Most A.7.3.5 MUSTs are not_satisfies for wrong-mechanism reasons,
+# not wrong-artefact reasons.
+
+a_7_3_5_expected:
+
+  # req:A.7.3.5:applicable_scope — 4 MUSTs
+  - must_id: item:A.7.3.5:scope_legitimate_interests
+    verdict: satisfies
+    confidence: medium
+    quote: |
+      Section 2: "Essential cookies (Cloudflare, PHPSESSID):
+      Processed on the basis of legitimate interest (Art. 6(1)(f))"
+      + "Website contact form inquiries: Processed on the basis of
+      legitimate interest". Accidental coverage — the consent doc
+      enumerates non-consent bases while explaining scope.
+  - must_id: item:A.7.3.5:scope_marketing_processing
+    verdict: satisfies
+    confidence: medium
+    quote: |
+      Section 2: "Newsletter or marketing communications ...
+      Require consent prior to sending". Marketing enumerated.
+      Same accidental coverage.
+  - must_id: item:A.7.3.5:scope_public_task
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:A.7.3.5:scope_research_stats
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+
+  # req:A.7.3.5:objection_procedure — 5 MUSTs
+  # All wrong-mechanism.
+  a_7_3_5_objection_procedure_bulk:
+    verdict: not_satisfies
+    confidence: high
+    rationale: |
+      Objection (Art.21) is a different mechanism from consent
+      withdrawal (Art.7.3). Doc covers withdrawal, not objection.
+      All 5 procedure MUSTs (absolute_objection, balancing_test,
+      channel_consistency, information_provision, response_sla)
+      not_satisfies/high.
+
+  # req:A.7.3.5:objection_register — 5 MUSTs
+  # Wrong-mechanism.
+  a_7_3_5_objection_register_bulk:
+    verdict: not_satisfies
+    confidence: high
+    rationale: |
+      Consent register ≠ objection event register. All 5 register
+      MUSTs (event_id, objection_type, propagation_status,
+      resolution, subject_id, timestamp) not_satisfies/high.
+      (Note: doc has consent event register, but that's for
+      consent withdrawals under Art.7.3, not Art.21 objections.)
+
+  # req:A.7.3.5:program_review — 5 MUSTs
+  - must_id: item:A.7.3.5:rev_absolute_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:A.7.3.5:rev_balancing_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:A.7.3.5:rev_date
+    verdict: satisfies
+    confidence: medium
+    quote: |
+      Doc header + Section 8. Note this is the CONSENT program
+      review date, coincidentally scored for A.7.3.5 too.
+  - must_id: item:A.7.3.5:rev_notification_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:A.7.3.5:rev_reviewer
+    verdict: partial
+    confidence: low
+    quote: PIMS Manager.
+
+# ── A.5.34 (ISO 27001 — Privacy and PII Protection) ──────────────────
+# All 4 leaves wrong-artefact for a consent doc.
+# Note: unlike RoPA, the consent doc does NOT build a PII processing
+# register (per-activity view). Consent register ≠ PII processing
+# register. Bulk not_satisfies is correct here.
+
+a_5_34_expected:
+  bulk_not_satisfies: all_27_musts
+  rationale: |
+    Consent doc is not a PII processing register (Consent Register
+    is per-consent-record, not per-processing-activity — different
+    grain), not a Privacy Policy, not an Applicability Scope
+    statement, not a Program Review. Bulk not_satisfies/high.
+
+# ── Summary counts ──────────────────────────────────────────────────
+#
+# Art.7 (20 MUSTs):     14 satisfies + 4 partial +  2 not_satisfies
+# Art.6 (18 MUSTs):      1 satisfies + 5 partial + 12 not_satisfies
+# A.7.2.3 (19 MUSTs):   10 satisfies + 3 partial +  6 not_satisfies
+# A.7.3.4 (18 MUSTs):    7 satisfies + 5 partial +  6 not_satisfies
+# A.7.3.5 (19 MUSTs):    3 satisfies + 1 partial + 15 not_satisfies
+# A.5.34 (27 MUSTs):     0 satisfies + 0 partial + 27 not_satisfies
+#
+# TOTAL: 121 candidate MUSTs
+# Strict expected findings:  35
+# Lenient (+ partial):       53

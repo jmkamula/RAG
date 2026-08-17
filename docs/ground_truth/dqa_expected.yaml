@@ -1,0 +1,287 @@
+# Ship 77'.c — Data Quality & Accuracy Ground Truth (first pass)
+#
+# Doc content: accuracy discipline procedure (validation at collection,
+# post-collection updates, quarterly verification, review-and-correction
+# workflow). Directly maps to A.7.4.3 (accuracy). Cites A.7.4.4 in
+# References but doesn't cover minimization content — so A.7.4.4 is
+# largely wrong-artefact (accuracy ≠ minimization). Section 5 correction
+# process touches Art.16 rectification.
+
+document:
+  upload_id: fbb179a2-f565-4947-9d95-d9b3d6375691
+  filename: Data Quality Accuracy Procedure.docx
+  extracted_by: claude_first_pass
+  extracted_at: 2026-08-17
+  markdown_chars: 3075
+  doc_type: procedure
+
+# ── A.7.4.3 (ISO 27701 — Accuracy and quality) ───────────────────────
+# 4 leaves × 18 MUSTs. Direct target.
+
+a_7_4_3_expected:
+
+  # req:A.7.4.3:accuracy_incident_register — 5 MUSTs
+  # Doc's Section 5 correction process implies a register but doesn't
+  # build an explicit accuracy-incident register. Cross-references
+  # DSR Register (DOC041B).
+  - must_id: item:A.7.4.3:reg_detection_source
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 4.4: 'the Office Manager spot-checks data accuracy'
+      + Section 5: 'Any identified errors must be Logged and
+      assessed'. Detection sources implied (spot-check + subject
+      report) but not enumerated as register field.
+  - must_id: item:A.7.4.3:reg_incident_id
+    verdict: partial
+    confidence: low
+    quote: |
+      Section 5: 'Correction efforts are tracked as part of the
+      DSR Register (DOC041B)'. Cross-linked to another register.
+  - must_id: item:A.7.4.3:reg_pii_scope
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:A.7.4.3:reg_resolution
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 5: 'Corrected within 5 business days' — resolution
+      implied. No corrected/cannot-correct/erased/pending
+      taxonomy stated.
+  - must_id: item:A.7.4.3:reg_root_cause
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+
+  # req:A.7.4.3:accuracy_procedure — 5 MUSTs
+  - must_id: item:A.7.4.3:proc_correction_link
+    verdict: satisfies
+    confidence: medium
+    quote: |
+      Section 5: 'Correction efforts are tracked as part of the
+      DSR Register (DOC041B)' — cross-link to correction procedure.
+  - must_id: item:A.7.4.3:proc_inaccuracy_prevention
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 4.1: 'Use structured forms with validation (e.g.,
+      date formats, email check). Collect only verifiable data
+      where possible.'
+  - must_id: item:A.7.4.3:proc_inaccuracy_response
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 5: 'Logged and assessed within 2 business days.
+      Corrected within 5 business days.'
+  - must_id: item:A.7.4.3:proc_lifecycle_coverage
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Sections 4.1-4.4 cover collection + post-collection +
+      processor + quarterly verification stages.
+  - must_id: item:A.7.4.3:proc_up_to_date_check
+    verdict: satisfies
+    confidence: high
+    quote: |
+      Section 4.4: 'quarterly access reviews per Access Management
+      Process, the Office Manager spot-checks data accuracy for
+      minimum 2 random personnel records. Contact details (email,
+      phone, address) are verified as current.'
+
+  # req:A.7.4.3:applicable_scope — 3 MUSTs
+  - must_id: item:A.7.4.3:scope_high_churn_fields
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 4.4 mentions "Contact details (email, phone,
+      address)" verified — high-churn fields but not
+      categorised.
+  - must_id: item:A.7.4.3:scope_low_churn_fields
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:A.7.4.3:scope_verification_sources
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+
+  # req:A.7.4.3:program_review — 5 MUSTs
+  - must_id: item:A.7.4.3:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: Doc header "Next Review Date: 20 Nov 2026" + Section 8.
+  - must_id: item:A.7.4.3:rev_detection_rate
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:A.7.4.3:rev_prevention_health
+    verdict: partial
+    confidence: low
+    quote: |
+      Section 6: 'Accuracy KPI reviewed quarterly during management
+      reviews' — KPI review implies prevention health check.
+  - must_id: item:A.7.4.3:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 7: 'Data Protection & Risk Manager: Reviews data
+      accuracy controls annually.' MUST wants DPO + Data Ops.
+      Partial reflects single-reviewer.
+  - must_id: item:A.7.4.3:rev_root_cause_closure
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+
+# ── A.7.4.4 (ISO 27701 — De-identification / minimization) ───────────
+# 4 leaves × 16 MUSTs. Doc CITES A.7.4.4 in References but doesn't
+# cover minimization content. Wrong artefact — accuracy ≠ minimization.
+
+a_7_4_4_expected:
+  bulk_not_satisfies: all_16_musts
+  rationale: |
+    Doc is about accuracy discipline (A.7.4.3), not minimization/
+    de-identification (A.7.4.4). Doc cites A.7.4.4 in References
+    only. Applicable MUSTs: scope_candidates, scope_full_pii_needed,
+    scope_reidentification_risk, all 5 minimization_procedure MUSTs,
+    all 4 minimization_technique_inventory MUSTs, all 4
+    program_review MUSTs. All 16 → not_satisfies/high.
+  note: |
+    If the extractor infers A.7.4.4 findings from this doc based on
+    the References citation alone, those are false positives per
+    ground truth.
+
+# ── Art.16 (GDPR — Right to rectification) ──────────────────────────
+# 4 leaves × 19 MUSTs. Doc's Section 5 correction process touches
+# Art.16. Doc.References DOC051 (Data Subject Rights Handling) which
+# would be the primary Art.16 artefact.
+
+art_16_expected:
+
+  # req:Art.16:applicable_systems_scope — 3 MUSTs
+  - must_id: item:Art.16:scope_replicas
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:Art.16:scope_systems
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 2 scope: "Data collected directly from individuals,
+      Client-provided data, Training participants and platform
+      account data". Broad list; not enumerated per system.
+  - must_id: item:Art.16:scope_third_parties
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 4.3: "For Processor Data — Follow client instructions
+      for updates and corrections" — touches third-party propagation
+      but not Art.28 DPA flow.
+
+  # req:Art.16:rectification_procedure — 6 MUSTs
+  - must_id: item:Art.16:correction_record
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 5 mentions logging + tracking in DSR Register. Not
+      explicit about "what changed, when, by whom" fields.
+  - must_id: item:Art.16:data_location
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No data-location workflow across systems + replicas.
+  - must_id: item:Art.16:identity_verification
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: Doc doesn't cover subject identity verification.
+  - must_id: item:Art.16:intake_channel
+    verdict: satisfies
+    confidence: medium
+    quote: |
+      Section 4.2: "Allow users to view and update their data via
+      account portal, Provide clear contact for update requests
+      via privacy@arionnetworks.com."
+  - must_id: item:Art.16:recipient_notification
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    notes: No Art.19 recipient notification workflow.
+  - must_id: item:Art.16:response_deadline
+    verdict: partial
+    confidence: medium
+    quote: |
+      Section 5: "Logged and assessed within 2 business days.
+      Corrected within 5 business days." Aggressive SLA but no
+      one-month Art.12.3 anchor.
+
+  # req:Art.16:rectification_register — 5 MUSTs
+  - must_id: item:Art.16:reg_art19_xref
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+  - must_id: item:Art.16:reg_request_id
+    verdict: partial
+    confidence: low
+    quote: Cross-linked to DSR Register (DOC041B).
+  - must_id: item:Art.16:reg_response_date
+    verdict: partial
+    confidence: medium
+    quote: Section 5 has 5-day SLA; DSR Register tracks response dates.
+  - must_id: item:Art.16:reg_subject_id
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+  - must_id: item:Art.16:reg_systems_touched
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+
+  # req:Art.16:program_review — 5 MUSTs — all not_satisfies (doc is
+  # accuracy procedure, not Art.16 review artefact)
+  art_16_review_bulk:
+    verdict: not_satisfies
+    confidence: high
+    rationale: |
+      Doc is accuracy procedure not Art.16 program review. Applicable
+      MUSTs: rev_art19_audit, rev_date (accuracy review date not
+      Art.16 review date), rev_reviewer, rev_sla_compliance,
+      rev_systems_completeness. All 5 → not_satisfies/high.
+
+# ── A.5.34 (ISO 27001 — Privacy and PII Protection) ──────────────────
+# All 27 wrong artefact — DQA is not privacy policy nor register nor
+# scope statement nor program review.
+
+a_5_34_expected:
+  bulk_not_satisfies: all_27_musts
+
+# ── Summary counts ──────────────────────────────────────────────────
+#
+# A.7.4.3 (18 MUSTs):    6 satisfies + 5 partial + 7 not_satisfies
+# A.7.4.4 (16 MUSTs):    0 satisfies + 0 partial + 16 not_satisfies (bulk)
+# Art.16 (19 MUSTs):     1 satisfies + 5 partial + 13 not_satisfies
+# A.5.34 (27 MUSTs):     0 satisfies + 0 partial + 27 not_satisfies (bulk)
+#
+# TOTAL: 80 candidate MUSTs
+# Strict expected findings:   7
+# Lenient (+ partial):        18
+
+# ── Self-review notes ────────────────────────────────────────────────
+#
+# 1. A.7.4.4 bulk not_satisfies is high-confidence. Doc cites the
+#    reference but doesn't cover minimization/de-identification
+#    content. Any A.7.4.4 finding from this doc is a false positive.
+#    This is the strongest wrong-artefact case in the 5-doc set —
+#    the extractor should NOT emit A.7.4.4 findings just because
+#    the doc mentions it.
+#
+# 2. Art.16 partial coverage is intentional. The doc TOUCHES
+#    rectification (correction workflow, intake channel) but the
+#    PRIMARY Art.16 artefact is DOC051 (Data Subject Rights
+#    Handling). This doc contributes to Art.16 coverage but doesn't
+#    replace DOC051.
+#
+# 3. Section 4.4 quarterly verification is unusually concrete for a
+#    procedure doc — it names specific evidence (spot-checks + 2
+#    random records + Contact details fields + Access Register).
+#    Strong satisfies signal for A.7.4.3:proc_up_to_date_check.
