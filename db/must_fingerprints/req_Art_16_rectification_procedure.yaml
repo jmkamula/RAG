@@ -1,0 +1,70 @@
+# Per-MUST fingerprint catalog for req:Art.16:rectification_procedure
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.16:rectification_procedure"
+target_control: "Art.16"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.16:recipient_notification"
+    description: "Notification to recipients per Art.19 unless impossible or disproportionate"
+    excerpt_keywords:
+      - [notification, recipients]
+      - [art19, notification]
+      - [recipient, informed]
+      - [unless, impossible]
+      - [disproportionate, notification]
+
+  - must_id: "item:Art.16:response_deadline"
+    description: "Response to data subject within one month (extendable by two months for complex requests)"
+    excerpt_keywords:
+      - [response, data, subject]
+      - [response, within, one, month]
+      - [extendable, two, months]
+      - [complex, requests, response]
+      - [data, subject, request, response]
+
+  - must_id: "item:Art.16:correction_record"
+    description: "Correction recorded with what was changed, when, by whom"
+    excerpt_keywords:
+      - [correction, recorded]
+      - [what, changed]
+      - [when, corrected]
+      - [corrected, whom]
+      - [rectification, record]
+      - [change, logged]
+
+  - must_id: "item:Art.16:data_location"
+    description: "Data location workflow across all systems including replicas (links to Art.30 RoPA)"
+    excerpt_keywords:
+      - [data, location, workflow]
+      - [data, replicas, systems]
+      - [processing, records, location]
+      - [art30, ropa, record]
+      - [data, storage, location]
+      - [system, data, replication]
+
+  - must_id: "item:Art.16:identity_verification"
+    description: "Identity verification step (proportionate, not over-collecting)"
+    excerpt_keywords:
+      - [identity, verification]
+      - [verify, data, subject]
+      - [proportionate, identity, check]
+      - [identity, proof, document]
+      - [not, overcollect, identity]
+      - [identity, authentication, process]
+
+  - must_id: "item:Art.16:intake_channel"
+    description: "Intake channel published and accessible to data subjects"
+    excerpt_keywords:
+      - [intake, channel]
+      - [published, intake, channel]
+      - [accessible, data, subjects]
+      - [data, subject, access]
+      - [intake, contact, details]
+      - [channel, requests]
+

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.3.5:program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.5:program_review"
@@ -14,60 +13,48 @@ must_fingerprints:
   - must_id: "item:A.7.3.5:rev_notification_audit"
     description: "Notification-of-right audit — first-communication notices reviewed"
     excerpt_keywords:
-      - [notification, audit, providing]
-      - [notification, right, providing]
-      - [notification, right, audit, providing]
-      - [right, audit, providing]
-      - [right, audit, first, providing]
-      - [audit, first, providing]
-      - [audit, first, communication, providing]
-      - [first, communication, providing]
+      - [notification, right, audit]
+      - [first, communication, notice]
+      - [review, notification, process]
+      - [audit, notification, record]
+      - [right, object]
+      - [reviewed, communication, timing]
 
   - must_id: "item:A.7.3.5:rev_balancing_audit"
     description: "Balancing-test audit — sampled rejections reviewed for defensibility"
     excerpt_keywords:
-      - [balancing, audit, providing]
-      - [balancing, test, providing]
-      - [balancing, test, audit, providing]
-      - [test, audit, providing]
-      - [test, audit, sampled, providing]
-      - [audit, sampled, providing]
-      - [audit, sampled, rejections, providing]
-      - [sampled, rejections, providing]
+      - [balancing, test, audit]
+      - [sampled, rejections, reviewed]
+      - [objection, processing, review]
+      - [audit, findings, defensibility]
+      - [reviewed, defensibility]
+      - [balancing, audit, report]
 
   - must_id: "item:A.7.3.5:rev_absolute_audit"
     description: "Absolute-objection audit — sampled marketing objections verified to have halted processing"
     excerpt_keywords:
-      - [absolute, audit, providing]
-      - [absolute, objection, providing]
-      - [absolute, objection, audit, providing]
-      - [objection, audit, providing]
-      - [objection, audit, sampled, providing]
-      - [audit, sampled, providing]
-      - [audit, sampled, marketing, providing]
-      - [sampled, marketing, providing]
+      - [absolute, objection, audit]
+      - [marketing, objections, verified]
+      - [objection, processing, halted]
+      - [sampled, objections, review]
+      - [audit, objection, records]
 
   - must_id: "item:A.7.3.5:rev_reviewer"
     description: "Reviewer identity (DPO + Legal)"
     excerpt_keywords:
-      - [reviewer, identity, providing]
-      - [reviewer, identity, dpo, providing]
-      - [identity, dpo, providing]
-      - [identity, dpo, legal, providing]
-      - [dpo, legal, providing]
-      - [per, revocation, providing]
-      - [per, revoked, identity, providing]
-      - [revocation, record, providing]
+      - [reviewer, identity]
+      - [data, protection, officer]
+      - [dpo, legal]
+      - [review, conducted]
+      - [reviewer, role]
 
   - must_id: "item:A.7.3.5:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, providing]
-      - [review, date, within, providing]
-      - [date, within, providing]
-      - [date, within, planned, providing]
-      - [within, planned, providing]
-      - [within, planned, interval, providing]
-      - [planned, interval, providing]
-      - [per, revocation, providing]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [review, scheduled]
+      - [review, period]
 

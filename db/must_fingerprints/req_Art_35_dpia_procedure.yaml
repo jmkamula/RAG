@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.35:dpia_procedure
-#
-# Reviewed-from-skeleton 2026-06-14. GDPR Art.35 DPIA procedure.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.35:dpia_procedure"
@@ -8,61 +10,71 @@ target_control: "Art.35"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.35:trigger_criteria"
-    description: "Trigger criteria — Art.35.3 mandatory cases"
+  - must_id: "item:Art.35:review_trigger"
+    description: "Review trigger — DPIA reviewed when processing risk changes (Art.35.11)"
     excerpt_keywords:
-      - ["Art.35.3"]
-      - [art, 35, 3, mandatory, cases]
-      - [systematic, monitoring, dpia]
-      - [special, category, large, scale, dpia]
-      - [public, area, dpia]
-      # Ship 38'.b curator additions — verb-driven doc-prose patterns
-      - [mandatory, dpia, trigger]
-      - [dpia, trigger]
-      - [high, risk, trigger]
-      - [trigger, identified]
+      - [dpia, review, trigger]
+      - [processing, risk, change]
+      - [reviewed, when, changes]
+      - [triggered, risk]
+      - [risk, assessment, update]
+
+  - must_id: "item:Art.35:art36_escalation"
+    description: "Art.36 prior-consultation escalation — when residual high risk remains, escalate to SA"
+    excerpt_keywords:
+      - [residual, high, risk]
+      - [prior, consultation, art36]
+      - [escalate, supervisory, authority]
+      - [data, protection, impact, assessment]
+      - [risk, assessment, escalation]
+      - [art36, consultation, procedure]
+
+  - must_id: "item:Art.35:subject_consultation"
+    description: "Subject consultation considered (Art.35.9) — where appropriate, views of subjects/representatives sought"
+    excerpt_keywords:
+      - [subject, consultation]
+      - [data, subject, views]
+      - [subject, representative, consulted]
+      - [consultation, where, appropriate]
+      - [subject, consultation, considered]
 
   - must_id: "item:Art.35:content_minimum"
-    description: "Minimum content per Art.35.7"
+    description: "Minimum content per Art.35.7 (systematic description + necessity/proportionality + risks + measures to address)"
     excerpt_keywords:
-      - ["Art.35.7"]
-      - [art, 35, 7, content]
-      - [systematic, description, dpia]
-      - [necessity, proportionality, dpia]
-      - [dpia, measures, address, risk]
+      - [systematic, description]
+      - [necessity, proportionality]
+      - [risk, assessment]
+      - [measures, address]
+      - [data, protection, impact]
+      - [impact, assessment, procedure]
 
   - must_id: "item:Art.35:dpo_advice"
-    description: "DPO advice mandatory (Art.35.2)"
+    description: "DPO advice mandatory (Art.35.2) — DPO consulted during DPIA, advice recorded"
     excerpt_keywords:
-      - ["Art.35.2"]
-      - [art, 35, 2, dpo, advice]
-      - [dpo, consulted, during, dpia]
-      - [dpia, dpo, advice, recorded]
+      - [dpointerview, dpoadvice]
+      - [dpoadvice, recorded]
+      - [dpoadvice, during, dpia]
+      - [consulted, dpointerview]
+      - [dpoadvice, mandatory]
+      - [dpointerview, recorded]
       # Ship 38'.b curator additions
       - [pims, manager, reviews, dpia]
       - [dpo, dpia, review]
       - [dpia, approved]
       - [dpo, dpia]
 
-  - must_id: "item:Art.35:subject_consultation"
-    description: "Subject consultation considered (Art.35.9)"
+  - must_id: "item:Art.35:trigger_criteria"
+    description: "Trigger criteria — Art.35.3 mandatory cases (systematic monitoring / special-category large-scale / public-area large-scale monitoring) PLUS SA-published list + sectoral guidance"
     excerpt_keywords:
-      - ["Art.35.9"]
-      - [art, 35, 9, subject, consultation]
-      - [dpia, subject, views, sought]
-      - [dpia, representative, consulted]
+      - [trigger, criteria]
+      - [systematic, monitoring]
+      - [specialcategory, largescale]
+      - [publicarea, largescale, monitoring]
+      - [sectoral, guidance]
+      - [sa, published, list]
+      # Ship 38'.b curator additions
+      - [mandatory, dpia, trigger]
+      - [dpia, trigger]
+      - [high, risk, trigger]
+      - [trigger, identified]
 
-  - must_id: "item:Art.35:art36_escalation"
-    description: "Art.36 prior-consultation escalation"
-    excerpt_keywords:
-      - ["Art.36"]
-      - [art, 36, prior, consultation]
-      - [residual, high, risk, escalate, sa]
-
-  - must_id: "item:Art.35:review_trigger"
-    description: "Review trigger — DPIA reviewed when processing risk changes"
-    excerpt_keywords:
-      - ["Art.35.11"]
-      - [art, 35, 11, review, trigger]
-      - [dpia, processing, risk, change]
-      - [dpia, refreshed, when, changes]

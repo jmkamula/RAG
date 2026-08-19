@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.2.8:pii_processing_ropa
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.8:pii_processing_ropa"
@@ -14,92 +13,72 @@ must_fingerprints:
   - must_id: "item:A.7.2.8:ropa_owner"
     description: "Named owner responsible for accuracy + completeness"
     excerpt_keywords:
-      - [ropa, owner, records]
-      - [named, owner, records]
-      - [named, owner, responsible, records]
-      - [owner, responsible, records]
-      - [owner, responsible, accuracy, records]
-      - [responsible, accuracy, records]
-      - [responsible, accuracy, completeness, records]
-      - [accuracy, completeness, records]
+      - [named, owner]
+      - [owner, responsible]
+      - [accuracy, completeness]
+      - [responsible, accuracy]
+      - [records, processing, owner]
 
   - must_id: "item:A.7.2.8:ropa_security_measures"
     description: "General description of technical + organizational security measures per row"
     excerpt_keywords:
-      - [ropa, security, measures, records]
-      - [general, description, records]
-      - [general, description, technical, records]
-      - [description, technical, records]
-      - [description, technical, organizational, records]
-      - [technical, organizational, records]
-      - [technical, organizational, security, records]
-      - [organizational, security, records]
+      - [security, measures]
+      - [technical, organizational, measures]
+      - [processing, pii, records]
+      - [records, security, controls]
+      - [data, protection, measures]
+      - [pii, processing, security]
 
   - must_id: "item:A.7.2.8:ropa_retention"
     description: "Retention period per row (or criteria)"
     excerpt_keywords:
-      - [ropa, retention, records]
-      - [retention, period, records]
-      - [retention, period, criteria, records]
-      - [period, criteria, records]
-      - [per, row, records]
-      - [each, entry, records]
-      - [column, header, records]
+      - [retention, period]
+      - [records, processing, pii]
+      - [data, retention, criteria]
+      - [processing, records, retention]
+      - [retention, per, record]
 
   - must_id: "item:A.7.2.8:ropa_transfer_safeguards"
     description: "Transfer safeguards per row where third-country transfer occurs (Chap V mechanism cited)"
     excerpt_keywords:
-      - [ropa, transfer, safeguards, records]
-      - [transfer, safeguards, records]
-      - [transfer, safeguards, third, records]
-      - [safeguards, third, records]
-      - [safeguards, third, country, records]
-      - [third, country, records]
-      - [third, country, transfer, records]
-      - [country, transfer, records]
+      - [thirdcountry, transfer, safeguard]
+      - [ropa, transfer, mechanism]
+      - [transfer, chapter, v]
+      - [processing, pii, record]
+      - [transfer, legal, basis]
 
   - must_id: "item:A.7.2.8:ropa_recipients"
     description: "Categories of recipients per row (including third countries + international orgs)"
     excerpt_keywords:
-      - [ropa, recipients, records]
-      - [categories, recipients, records]
-      - [categories, recipients, including, records]
-      - [recipients, including, records]
-      - [recipients, including, third, records]
-      - [including, third, records]
-      - [including, third, countries, records]
-      - [third, countries, records]
+      - [categories, recipients]
+      - [third, countries]
+      - [international, organisations]
+      - [recipients, per, row]
+      - [processing, personal, data]
 
   - must_id: "item:A.7.2.8:ropa_pii_categories"
     description: "Categories of PII per row + categories of subjects (e.g"
     excerpt_keywords:
-      - [ropa, pii, categories, records]
-      - [categories, pii, records]
-      - [categories, pii, categories, records]
-      - [pii, categories, records]
-      - [pii, categories, subjects, records]
-      - [categories, subjects, records]
-      - [categories, subjects, employees, records]
-      - [subjects, employees, records]
+      - [categories, pii]
+      - [pii, records, processing]
+      - [categories, data, subjects]
+      - [personal, identifiable, information]
 
   - must_id: "item:A.7.2.8:ropa_type_purpose"
     description: "Type + purpose of processing per row (link to A.7.2.1 register)"
     excerpt_keywords:
-      - [ropa, purpose, records]
-      - [purpose, processing, records]
-      - [per, row, records]
-      - [each, entry, records]
-      - [column, header, records]
+      - [type, purpose, processing]
+      - [processing, purpose, record]
+      - [categories, processing, purpose]
+      - [record, processing, type]
+      - [purpose, processing, register]
 
   - must_id: "item:A.7.2.8:ropa_activity_id"
     description: "Unique processing-activity identifier per row"
     excerpt_keywords:
-      - [ropa, activity, id, records]
-      - [unique, processing, records]
-      - [unique, processing, activity, records]
-      - [processing, activity, records]
-      - [processing, activity, identifier, records]
-      - [activity, identifier, records]
-      - [per, row, records]
-      - [each, entry, records]
+      - [processing, activity, identifier]
+      - [unique, processing, id]
+      - [record, processing, identifier]
+      - [processing, activity, reference]
+      - [activity, id, unique]
 

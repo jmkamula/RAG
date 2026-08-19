@@ -1,0 +1,40 @@
+# Per-MUST fingerprint catalog for req:Art.7:applicable_activities_scope
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.7:applicable_activities_scope"
+target_control: "Art.7"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.7:scope_special_overlay"
+    description: "Special-category overlay rule — Art.9.2.a explicit consent has stricter capture requirements than Art.6.1.a"
+    excerpt_keywords:
+      - [specialcategory, explicit, consent]
+      - [art92a, stricter, requirements]
+      - [consent, capture, requirements]
+      - [specialcategory, consent, overlay]
+      - [art61a, consent, conditions]
+
+  - must_id: "item:Art.7:scope_overlap_rules"
+    description: "Rules for when consent overlaps with another basis (Art.7 still applies if consent is the chosen basis even when another basis would also work)"
+    excerpt_keywords:
+      - [consent, overlap]
+      - [consent, basis, applies]
+      - [legal, basis, consent]
+      - [overlapping, legal, grounds]
+      - [consent, chosen, basis]
+
+  - must_id: "item:Art.7:scope_consent_activities"
+    description: "Activities using consent as the lawful basis enumerated (drawn from the Art.6 lawful basis register)"
+    excerpt_keywords:
+      - [consent, lawful basis]
+      - [activities, consent, basis]
+      - [applies, consent]
+      - [scope, consent, activities]
+      - [lawful basis, processing]
+      - [processing, based, consent]
+

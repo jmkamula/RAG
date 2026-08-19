@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.5.5:disclosure_decision_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.5:disclosure_decision_register"
@@ -14,58 +13,44 @@ must_fingerprints:
   - must_id: "item:B.8.5.5:reg_customer_authorisation"
     description: "Customer authorisation reference per row (contract clause / one-off approval)"
     excerpt_keywords:
-      - [customer, authorisation, legally]
-      - [customer, authorisation, reference, legally]
-      - [authorisation, reference, legally]
-      - [authorisation, reference, contract, legally]
-      - [reference, contract, legally]
-      - [reference, contract, clause, legally]
-      - [contract, clause, legally]
-      - [contract, clause, one, legally]
+      - [customer, authorisation, reference]
+      - [contract, clause, authorisation]
+      - [authorisation, per, row]
+      - [disclosure, decision, register]
+      - [oneoff, approval, reference]
 
   - must_id: "item:B.8.5.5:reg_outcome"
     description: "Outcome per row (rejected / accepted / customer-consulted)"
     excerpt_keywords:
-      - [outcome, rejected, legally]
-      - [outcome, rejected, accepted, legally]
-      - [rejected, accepted, legally]
-      - [rejected, accepted, customer, legally]
-      - [accepted, customer, legally]
-      - [accepted, customer, consulted, legally]
-      - [customer, consulted, legally]
-      - [per, row, legally]
+      - [disclosure, outcome]
+      - [decision, register]
+      - [outcome, per, row]
+      - [rejected, accepted]
+      - [customer, consulted]
 
   - must_id: "item:B.8.5.5:reg_binding_classification"
     description: "Binding classification per row (legally binding / not binding)"
     excerpt_keywords:
       - [binding, classification]
-      - [binding, classification, legally]
-      - [classification, legally]
-      - [classification, legally, binding]
       - [legally, binding]
-      - [legally, binding, not]
-      - [binding, not]
-      - [binding, not, binding]
+      - [disclosure, classification]
+      - [classification, per, row]
+      - [decision, register]
 
   - must_id: "item:B.8.5.5:reg_request_source"
     description: "Request source per row"
     excerpt_keywords:
-      - [request, source, legally]
-      - [per, row, legally]
-      - [each, row, legally]
-      - [column, containing, legally]
-      - [each, entry, legally]
-      - [column, header, legally]
+      - [request, source]
+      - [disclosure, request, source]
+      - [request, origin]
+      - [disclosure, request, record]
 
   - must_id: "item:B.8.5.5:reg_decision_id"
     description: "Unique decision identifier per row"
     excerpt_keywords:
-      - [decision, id, legally]
-      - [unique, decision, legally]
-      - [unique, decision, identifier, legally]
-      - [decision, identifier, legally]
-      - [per, row, legally]
-      - [each, row, legally]
-      - [column, containing, legally]
-      - [each, entry, legally]
+      - [decision, identifier]
+      - [unique, decision, id]
+      - [disclosure, decision, register]
+      - [decision, reference]
+      - [record, decision, id]
 

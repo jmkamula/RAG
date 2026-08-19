@@ -45,9 +45,11 @@ MAX_SECTION_TOKENS = 80_000   # ~320k chars per section call
 
 
 def _extraction_mode() -> str:
-    """Ship 78'.b/e — canonical env-var interpreter for the extraction
-    mode. Returns one of "union" (default), "consensus_only", or
-    "critic_only". Legacy pre-Ship-78 semantics preserved:
+    """Ship 78'.b/e / Ship 80'.d — canonical env-var interpreter for the
+    extraction mode. Returns one of "union" (default), "consensus_only",
+    "critic_only", or "wired" (Ship 80'.d unified pipeline: consensus
+    signals discover, critic LLM verifies contextually). Legacy
+    pre-Ship-78 semantics preserved:
       - "1" / "true" / "yes" / "on"  → union (consensus IS active)
       - "0" / "false" / "no" / "off" → critic_only (consensus disabled)
 
@@ -63,6 +65,8 @@ def _extraction_mode() -> str:
         return "consensus_only"
     if raw in ("critic_only", "0", "false", "no", "off"):
         return "critic_only"
+    if raw in ("wired", "consensus_wired"):
+        return "wired"
     # Unrecognised value — treat as union (fail-open to the default).
     return "union"
 
@@ -325,12 +329,17 @@ def extract(
     # failure doesn't block the other's findings.
     _mode = _extraction_mode()
     _run_consensus = _mode != "critic_only"
-    _run_critic    = _mode != "consensus_only"
+    # Ship 80'.d — wired mode: consensus runs critic internally (wire_critic=True),
+    # so skip the separate critic path. All other modes retain the pre-80'.d shape.
+    _run_critic    = _mode not in ("consensus_only", "wired")
+    _wire_critic   = _mode == "wired"
 
     consensus_findings: list[DocumentFinding] = []
     if _run_consensus:
         try:
-            consensus_findings = _extract_via_consensus(doc, fp_leaf_pool)
+            consensus_findings = _extract_via_consensus(
+                doc, fp_leaf_pool, wire_critic=_wire_critic,
+            )
         except Exception as _cex:
             logger.warning("consensus extraction failed (union continues with critic): %s", _cex)
 
@@ -463,6 +472,7 @@ def _union_findings(
 def _extract_via_consensus(
     doc:             "ParsedDocument",
     scoped_leaf_ids: list[str],
+    wire_critic:     bool = False,
 ) -> list[DocumentFinding]:
     """Ship 35 — cutover entry point for the extraction consensus module.
 
@@ -474,6 +484,16 @@ def _extract_via_consensus(
     Attempts to persist per-doc consensus telemetry to
     intake_consensus_log via a fresh DB connection (writer is
     silent-fail).
+
+    Ship 80'.d — when `wire_critic=True`, consensus's accept-zone
+    findings are handed to the critic-verifier LLM pass for contextual
+    scoring (Option A unified pipeline). Consensus's role becomes rich
+    signal-driven discovery; critic's LLM becomes the contextual
+    verifier. Critic's confirmed + extended set becomes the emit — the
+    consensus's raw accept-zone is not surfaced directly. See Ship 80'.c
+    diagnostic: consensus's LLM arbiter fires 0× on realistic docs (all
+    candidates polarize to accept or drop); critic's per-candidate LLM
+    verify is where compositional precision comes from.
     """
     from rag.intake.consensus_extraction import default_config
     from rag.intake.consensus_extraction.orchestrator import (
@@ -554,6 +574,68 @@ def _extract_via_consensus(
     except Exception as e:
         logger.debug("consensus telemetry write skipped: %s", e)
 
+    # Ship 80'.d — wired mode: hand the accept-zone findings to critic-
+    # verifier as its priming set. Critic's LLM then verifies each
+    # contextually + extends via its own discovery pass. Return critic's
+    # output as consensus's output (union orchestration will skip its
+    # own separate critic call in wired mode).
+    #
+    # Ship 80'.d refinement — pre-seed critic's priming with the raw
+    # fingerprint pre-pass findings too (same as critic-alone mode does).
+    # Otherwise wired mode loses the 100+ fingerprint-only findings that
+    # consensus aggregation drops as low-corroboration but critic-alone
+    # would have kept. Priming cap raised from 10 → 60 controls so all
+    # consensus accepts + fingerprint hits reach the LLM context.
+    if wire_critic:
+        try:
+            fp_pre_findings: list[DocumentFinding] = []
+            fp_covered_from_pre: set[str] = set()
+            if scoped_leaf_ids:
+                try:
+                    fp_pre_findings, fp_covered_from_pre = _extract_via_fingerprints(
+                        doc, scoped_leaf_ids,
+                    )
+                except Exception as _fpe:
+                    logger.warning(
+                        "consensus_wired: fingerprint pre-pass failed for %s: %s",
+                        doc.original_name, _fpe,
+                    )
+            # Union consensus's accepts with the fingerprint pre-pass
+            # findings as critic's priming inputs. Dedup by (control,
+            # must_id) — same-shape objects.
+            seed_key = lambda f: (f.control_ref, f.checklist_item_id)
+            seeds_by_key: dict[tuple, DocumentFinding] = {}
+            for f in fp_pre_findings + findings:
+                seeds_by_key[seed_key(f)] = f
+            all_seeds = list(seeds_by_key.values())
+            fp_covered_union = fp_covered_from_pre | {
+                f.checklist_item_id for f in findings if f.checklist_item_id
+            }
+
+            critic_output = _run_critic_verifier_pass(
+                doc, [], all_seeds, fp_covered_union, priming_max=60,
+            )
+            doc.extraction_metrics["wired_consensus_seed_count"] = len(findings)
+            doc.extraction_metrics["wired_fp_pre_pass_count"]   = len(fp_pre_findings)
+            doc.extraction_metrics["wired_total_seed_count"]    = len(all_seeds)
+            doc.extraction_metrics["wired_critic_output_count"] = len(critic_output)
+            logger.info(
+                "consensus_wired for %s: %d consensus + %d fp = %d unique seeds -> "
+                "%d critic-verified findings",
+                doc.original_name,
+                len(findings), len(fp_pre_findings), len(all_seeds),
+                len(critic_output),
+            )
+            return critic_output
+        except Exception as e:
+            logger.warning(
+                "consensus_wired: critic step failed for %s (%s); "
+                "falling back to raw consensus accepts",
+                doc.original_name, e,
+            )
+            # Fall through to return findings — better degraded output
+            # than none.
+
     return findings
 
 
@@ -562,11 +644,15 @@ def _run_critic_verifier_pass(
     scoped:         list[dict],
     fp_findings:    list[DocumentFinding],
     fp_covered:     set[str],
+    priming_max:    int = 10,
 ) -> list[DocumentFinding]:
     """Adapter — invoke the critic-verifier LLM pass and convert its
     structured output into DocumentFinding objects compatible with
     the existing writer. Silent-fail: returns [] on any error so the
     intake never blocks on this experimental path.
+
+    Ship 80'.d — `priming_max` raised in wired mode (consensus's accept-
+    zone can span 30-50 controls, dwarfing the default 10-cap).
     """
     from rag.intake.critic_verifier import (
         _build_priming_set, _build_extend_pool,
@@ -600,7 +686,7 @@ def _run_critic_verifier_pass(
         except Exception:
             pass
 
-        priming     = _build_priming_set(fingerprint_hits, semantic_top_k, explicit_refs, meta, max_size=10)
+        priming     = _build_priming_set(fingerprint_hits, semantic_top_k, explicit_refs, meta, max_size=priming_max)
         extend_pool = _build_extend_pool(doc.full_text, tenant_stds=doc.standard_ids or None, pool_size=100)
 
         # Telemetry — surface on extraction_metrics so the trace log picks up

@@ -1,0 +1,68 @@
+# Per-MUST fingerprint catalog for req:Art.7:consent_register
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.7:consent_register"
+target_control: "Art.7"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.7:reg_basis_link"
+    description: "Per-row link to Art.6 lawful basis register entry (Art.6.1.a row)"
+    excerpt_keywords:
+      - [consent, lawful, basis]
+      - [art6, lawful, basis]
+      - [lawful, basis, register]
+      - [reference, art6, basis]
+      - [link, art6, entry]
+
+  - must_id: "item:Art.7:reg_withdrawal_status"
+    description: "Per-row withdrawal status (current / withdrawn-on-date)"
+    excerpt_keywords:
+      - [withdrawal, status]
+      - [consent, withdrawn, date]
+      - [current, withdrawal]
+      - [withdrawal, record]
+      - [withdrawn, date]
+
+  - must_id: "item:Art.7:reg_mechanism"
+    description: "Per-row capture mechanism (checkbox UI version, sign-up event id, etc.)"
+    excerpt_keywords:
+      - [consent, mechanism]
+      - [capture, mechanism]
+      - [checkbox, consent]
+      - [signup, event, id]
+      - [consent, record, mechanism]
+      - [mechanism, used, consent]
+
+  - must_id: "item:Art.7:reg_timestamp"
+    description: "Per-row capture timestamp"
+    excerpt_keywords:
+      - [consent, timestamp]
+      - [consent, recorded, date]
+      - [timestamp, capture]
+      - [date, time, recorded]
+      - [consent, given, timestamp]
+
+  - must_id: "item:Art.7:reg_scope"
+    description: "Per-row scope of consent (which activity / purpose)"
+    excerpt_keywords:
+      - [consent, scope]
+      - [purpose, consent]
+      - [activity, consent]
+      - [consent, record, purpose]
+      - [scope, processing]
+      - [processing, purpose, record]
+
+  - must_id: "item:Art.7:reg_subject_id"
+    description: "Subject identifier per row (pseudonymous or direct identifier)"
+    excerpt_keywords:
+      - [subject, identifier]
+      - [data, subject, id]
+      - [pseudonymous, identifier]
+      - [consent, subject, reference]
+      - [subject, id, record]
+

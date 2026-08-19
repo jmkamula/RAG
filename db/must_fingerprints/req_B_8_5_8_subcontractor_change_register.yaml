@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.5.8:subcontractor_change_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.8:subcontractor_change_register"
@@ -14,60 +13,45 @@ must_fingerprints:
   - must_id: "item:B.8.5.8:reg_objection_status"
     description: "Objection status per row (none / raised / resolved / termination)"
     excerpt_keywords:
-      - [objection, status, change]
-      - [objection, status, none, change]
-      - [status, none, change]
-      - [status, none, raised, change]
-      - [none, raised, change]
-      - [none, raised, resolved, change]
-      - [raised, resolved, change]
-      - [raised, resolved, termination, change]
+      - [objection, status]
+      - [status, per, row]
+      - [objection, raised]
+      - [objection, resolved]
+      - [objection, termination]
 
   - must_id: "item:B.8.5.8:reg_effective_date"
     description: "Change effective date per row"
     excerpt_keywords:
-      - [effective, date, change]
-      - [change, effective]
       - [change, effective, date]
-      - [per, row, change]
-      - [each, row, change]
-      - [column, containing, change]
-      - [each, entry, change]
-      - [column, header, change]
+      - [effective, date, record]
+      - [subcontractor, change, date]
+      - [register, change, date]
+      - [change, date, entry]
 
   - must_id: "item:B.8.5.8:reg_notification_date"
     description: "Customer notification date per row"
     excerpt_keywords:
-      - [notification, date, change]
-      - [customer, notification, change]
-      - [customer, notification, date, change]
-      - [per, row, change]
-      - [each, row, change]
-      - [column, containing, change]
-      - [each, entry, change]
-      - [column, header, change]
+      - [customer, notification, date]
+      - [notification, date, record]
+      - [subcontractor, change, date]
+      - [date, notification]
+      - [notification, timestamp, record]
 
   - must_id: "item:B.8.5.8:reg_change_type"
     description: "Change type per row (add / replace / remove)"
     excerpt_keywords:
-      - [change, add]
-      - [change, add, replace]
-      - [add, replace, change]
-      - [add, replace, remove, change]
-      - [replace, remove, change]
-      - [per, row, change]
-      - [each, row, change]
-      - [column, containing, change]
+      - [change, type]
+      - [subcontractor, change]
+      - [register, change]
+      - [add, replace]
+      - [replace, remove]
 
   - must_id: "item:B.8.5.8:reg_change_id"
     description: "Unique change identifier per row"
     excerpt_keywords:
-      - [change, id]
-      - [unique, change]
-      - [unique, change, identifier]
       - [change, identifier]
-      - [per, row, change]
-      - [each, row, change]
-      - [column, containing, change]
-      - [each, entry, change]
+      - [unique, change, id]
+      - [subcontractor, change, record]
+      - [change, reference, number]
+      - [register, change, entry]
 

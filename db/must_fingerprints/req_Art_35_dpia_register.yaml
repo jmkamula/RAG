@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.35:dpia_register
-#
-# Reviewed-from-skeleton 2026-06-14. GDPR Art.35 DPIA register.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.35:dpia_register"
@@ -8,45 +10,61 @@ target_control: "Art.35"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.35:reg_dpia_id"
-    description: "Per-row DPIA identifier"
+  - must_id: "item:Art.35:reg_residual_risk"
+    description: "Per-row residual-risk level after mitigations"
     excerpt_keywords:
-      - [dpia, register]
-      - [dpia, id, column]
-      - [dpia, identifier, per]
+      - [residual, risk, level]
+      - [risk, level, after]
+      - [mitigations, residual, risk]
+      - [risk, assessment, result]
+      - [post, mitigation, risk]
+      - [risk, level, mitigated]
 
-  - must_id: "item:Art.35:reg_processing_activity"
-    description: "Per-row processing activity"
+  - must_id: "item:Art.35:reg_outcome"
+    description: "Per-row outcome (proceed / mitigate-then-proceed / Art.36 consult / abandon)"
     excerpt_keywords:
-      - ["Art.30"]
-      - [dpia, ropa, cross, reference]
-      - [dpia, processing, activity, ref]
-
-  - must_id: "item:Art.35:reg_trigger"
-    description: "Per-row trigger"
-    excerpt_keywords:
-      - ["Art.35.3"]
-      - [dpia, trigger, per, row]
-      - [dpia, sa, list, trigger]
-      - [dpia, risk, based, trigger]
+      - [dpia, outcome]
+      - [assessment, result]
+      - [proceed, mitigate]
+      - [art36, consult]
+      - [mitigate, then, proceed]
+      - [abandon, assessment]
 
   - must_id: "item:Art.35:reg_dpo_advice_date"
     description: "Per-row DPO advice date + summary"
     excerpt_keywords:
-      - [dpia, dpo, advice, date]
-      - [dpo, advice, dpia, summary]
-      - [dpia, dpo, consulted, on]
+      - [dpoadvice, date]
+      - [dpo, advice, summary]
+      - [advice, provided, date]
+      - [date, advice]
+      - [dpo, recommendation, date]
 
-  - must_id: "item:Art.35:reg_residual_risk"
-    description: "Per-row residual-risk level"
+  - must_id: "item:Art.35:reg_trigger"
+    description: "Per-row trigger (Art.35.3.a-c / SA list / sectoral / risk-based)"
     excerpt_keywords:
-      - [dpia, residual, risk, level]
-      - [dpia, residual, after, mitigation]
+      - [risk based, trigger]
+      - [art35, trigger]
+      - [sectoral, trigger]
+      - [special categories, trigger]
+      - [processing activity, risk]
+      - [sa list, trigger]
 
-  - must_id: "item:Art.35:reg_outcome"
-    description: "Per-row outcome (proceed / mitigate / Art.36 consult / abandon)"
+  - must_id: "item:Art.35:reg_processing_activity"
+    description: "Per-row processing activity (Art.30 RoPA cross-reference)"
     excerpt_keywords:
-      - [dpia, proceed, outcome]
-      - [dpia, mitigate, then, proceed]
-      - ["Art.36"]
-      - [dpia, abandon, outcome]
+      - [processing, activity]
+      - [record, processing, activity]
+      - [processing, activity, description]
+      - [activity, purpose]
+      - [processing, activity, categories]
+
+  - must_id: "item:Art.35:reg_dpia_id"
+    description: "Per-row DPIA identifier"
+    excerpt_keywords:
+      - [dpia, identifier]
+      - [impact, assessment, id]
+      - [assessment, reference]
+      - [register, dpia, id]
+      - [data, protection, impact]
+      - [dpia, record]
+

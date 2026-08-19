@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.2.3:marketing_use_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.3:marketing_use_procedure"
@@ -14,60 +13,48 @@ must_fingerprints:
   - must_id: "item:B.8.2.3:proc_freely_given_alignment"
     description: "Alignment with Art.7.4 — freely-given consent test factored into any permit granted"
     excerpt_keywords:
-      - [freely, given, alignment, marketing]
-      - [alignment, art, marketing]
-      - [alignment, art, freely, marketing]
-      - [art, freely, marketing]
-      - [art, freely, given, marketing]
-      - [freely, given, marketing]
-      - [freely, given, consent, marketing]
-      - [given, consent, marketing]
+      - [freely given, consent]
+      - [consent, permit, granted]
+      - [art7, freely given]
+      - [consent, test, alignment]
+      - [freely given, consent, test]
 
   - must_id: "item:B.8.2.3:proc_customer_marketing_permit"
     description: "Customer-marketing permit path — customer explicitly authorises + provides consent evidence"
     excerpt_keywords:
-      - [customer, marketing, permit]
-      - [customer, marketing]
-      - [marketing, permit]
-      - [marketing, permit, path]
-      - [permit, path, marketing]
-      - [permit, path, customer, marketing]
-      - [path, customer, marketing]
-      - [path, customer, explicitly, marketing]
+      - [customer, explicitly, authorises]
+      - [provides, consent, evidence]
+      - [marketing, use, permit]
+      - [customer, marketing, consent]
+      - [permit, customer, authorisation]
 
   - must_id: "item:B.8.2.3:proc_no_conditionality"
     description: "No-conditionality rule — service delivery not conditioned on subject accepting marketing"
     excerpt_keywords:
+      - [service, delivery, conditioned]
+      - [marketing, acceptance, prohibited]
+      - [shall, not, condition]
       - [no, conditionality, marketing]
-      - [conditionality, rule, marketing]
-      - [conditionality, rule, service, marketing]
-      - [rule, service, marketing]
-      - [rule, service, delivery, marketing]
-      - [service, delivery, marketing]
-      - [service, delivery, not, marketing]
-      - [delivery, not, marketing]
+      - [service, provided, without]
+      - [subject, consent, marketing]
 
   - must_id: "item:B.8.2.3:proc_consent_evidence_requirement"
-    description: "Consent evidence requirement — if any marketing/advertising use is permitted, subject-level consent evidence required (from customer or via "
+    description: "Consent evidence requirement — if any marketing/advertising use is permitted, subject-level consent evidence required (from customer or via processor arrangement)"
     excerpt_keywords:
-      - [consent, evidence, requirement, marketing]
-      - [consent, evidence, marketing]
-      - [evidence, requirement, marketing]
-      - [evidence, requirement, marketing]
-      - [requirement, marketing]
-      - [requirement, marketing, advertising]
-      - [marketing, advertising]
-      - [marketing, advertising, use]
+      - [consent, evidence]
+      - [subject, level, consent]
+      - [marketing, use, consent]
+      - [advertising, use, consent]
+      - [processor, arrangement]
+      - [customer, consent, record]
 
   - must_id: "item:B.8.2.3:proc_default_prohibition"
     description: "Default prohibition — customer PII not usable for org's marketing/advertising by default"
     excerpt_keywords:
-      - [default, prohibition, marketing]
-      - [default, prohibition, customer, marketing]
-      - [prohibition, customer, marketing]
-      - [prohibition, customer, pii, marketing]
-      - [customer, pii, marketing]
-      - [customer, pii, not, marketing]
-      - [pii, not, marketing]
-      - [pii, not, usable, marketing]
+      - [prohibition, marketing]
+      - [customer, pii, use]
+      - [advertising, use, prohibited]
+      - [default, prohibition]
+      - [personal, data, marketing]
+      - [shall, not, use]
 

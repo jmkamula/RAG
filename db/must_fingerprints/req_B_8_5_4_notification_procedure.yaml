@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.5.4:notification_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.4:notification_procedure"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:B.8.5.4:proc_legal_review"
     description: "Legal counsel reviews every request before response"
     excerpt_keywords:
-      - [legal, review, notification]
-      - [legal, counsel, notification]
-      - [legal, counsel, reviews, notification]
-      - [counsel, reviews, notification]
-      - [counsel, reviews, every, notification]
-      - [reviews, every, notification]
-      - [reviews, every, request, notification]
-      - [every, request, notification]
+      - [legal, counsel, review]
+      - [request, reviewed, legal]
+      - [shall, review, request]
+      - [prior, legal, review]
+      - [review, counsel]
 
   - must_id: "item:B.8.5.4:proc_gag_order_exception"
-    description: "Gag-order exception — where notification prohibited by law, notification suppressed with legal-hold record retained for post-order disclosur"
+    description: "Gag-order exception — where notification prohibited by law, notification suppressed with legal-hold record retained for post-order disclosure"
     excerpt_keywords:
-      - [gag, order, exception, notification]
-      - [gag, order, notification]
-      - [order, exception, notification]
-      - [order, exception, notification]
-      - [exception, notification]
-      - [exception, notification, prohibited]
-      - [notification, prohibited]
       - [notification, prohibited, law]
+      - [gagorder, exception]
+      - [legalhold, record, retained]
+      - [suppressed, notification]
+      - [postorder, disclosure]
+      - [notification, suppressed, legalhold]
 
   - must_id: "item:B.8.5.4:proc_notification_format"
     description: "Notification format (contract-specified content — request source + PII scope + response deadline)"
     excerpt_keywords:
       - [notification, format]
-      - [notification, format, contract]
-      - [format, contract, notification]
-      - [format, contract, specified, notification]
-      - [contract, specified, notification]
-      - [contract, specified, content, notification]
-      - [specified, content, notification]
-      - [specified, content, request, notification]
+      - [disclosure, request, source]
+      - [pii, scope]
+      - [response, deadline]
+      - [contract, specified, content]
+      - [request, notification]
 
   - must_id: "item:B.8.5.4:proc_timeframe"
     description: "Agreed timeframe per customer contract (typically 24-72h)"
     excerpt_keywords:
-      - [agreed, timeframe, notification]
-      - [agreed, timeframe, customer, notification]
-      - [timeframe, customer, notification]
-      - [timeframe, customer, contract, notification]
-      - [customer, contract, notification]
-      - [customer, contract, typically, notification]
-      - [contract, typically, notification]
-      - [contract, typically, 72h, notification]
+      - [agreed, timeframe]
+      - [customer, contract]
+      - [disclosure, request]
+      - [notification, procedure]
+      - [within, hours]
+      - [response, timeframe]
 
   - must_id: "item:B.8.5.4:proc_request_intake"
     description: "Request intake path — law-enforcement / regulator / court requests routed to Legal"
     excerpt_keywords:
-      - [request, intake, notification]
-      - [request, intake, path, notification]
-      - [intake, path, notification]
-      - [intake, path, law, notification]
-      - [path, law, notification]
-      - [path, law, enforcement, notification]
-      - [law, enforcement, notification]
-      - [law, enforcement, regulator, notification]
+      - [request, intake, legal]
+      - [law enforcement, disclosure, request]
+      - [regulator, request, routed]
+      - [court, request, notification]
+      - [legal, department, receives]
+      - [disclosure, request, procedure]
 

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.3.1:principal_obligations_support_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.3.1:principal_obligations_support_procedure"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:B.8.3.1:proc_correction_erasure"
     description: "Correction + erasure in timely fashion (example given in §8.3.1)"
     excerpt_keywords:
-      - [correction, erasure, obligations]
-      - [correction, erasure, timely, obligations]
-      - [erasure, timely, obligations]
-      - [erasure, timely, fashion, obligations]
-      - [timely, fashion, obligations]
-      - [timely, fashion, example, obligations]
-      - [fashion, example, obligations]
-      - [fashion, example, given, obligations]
+      - [shall, correct, erasure]
+      - [request, correction, erasure]
+      - [timely, response, request]
+      - [data, subject, request]
+      - [process, correction, erasure]
+      - [respond, within, timeframe]
 
   - must_id: "item:B.8.3.1:proc_sla"
     description: "Response-time SLA per support-request type stated + honoured"
     excerpt_keywords:
-      - [response, time, obligations]
-      - [response, time, sla, obligations]
-      - [time, sla, obligations]
-      - [time, sla, support, obligations]
-      - [sla, support, obligations]
-      - [sla, support, request, obligations]
-      - [support, request, obligations]
-      - [support, request, stated, obligations]
+      - [response, time, sla]
+      - [sla, per, request]
+      - [support, request, type]
+      - [response, time, honoured]
+      - [service, level, agreement]
 
   - must_id: "item:B.8.3.1:proc_contract_scope"
     description: "Contract-scope reference — support scope specified in the B.8.2.1 customer agreement"
     excerpt_keywords:
-      - [contract, scope, obligations]
-      - [contract, scope, reference, obligations]
-      - [scope, reference, obligations]
-      - [scope, reference, support, obligations]
-      - [reference, support, obligations]
-      - [reference, support, scope, obligations]
-      - [support, scope, obligations]
-      - [support, scope, specified, obligations]
+      - [contract, scope]
+      - [customer, agreement]
+      - [support, scope]
+      - [scope, specified]
+      - [contract, reference]
+      - [agreement, scope]
 
   - must_id: "item:B.8.3.1:proc_informational_support"
     description: "Informational support — customer can request info about processing (as processor's records permit) to inform Art.15 responses"
     excerpt_keywords:
-      - [informational, support, obligations]
-      - [informational, support, customer, obligations]
-      - [support, customer, obligations]
-      - [support, customer, can, obligations]
-      - [customer, can, obligations]
-      - [customer, can, request, obligations]
-      - [can, request, obligations]
-      - [can, request, info, obligations]
+      - [informational, support]
+      - [customer, request, information]
+      - [processing, records, permit]
+      - [art15, response]
+      - [subject, rights, request]
+      - [provide, information, processing]
 
   - must_id: "item:B.8.3.1:proc_technical_support"
     description: "Technical support paths — APIs / features / configuration to fulfil rectification, erasure, portability, restriction"
     excerpt_keywords:
-      - [technical, support, obligations]
-      - [technical, support, paths, obligations]
-      - [support, paths, obligations]
-      - [support, paths, apis, obligations]
-      - [paths, apis, obligations]
-      - [paths, apis, features, obligations]
-      - [apis, features, obligations]
-      - [apis, features, configuration, obligations]
+      - [technical, support]
+      - [rectification, request]
+      - [data, erasure]
+      - [data, portability]
+      - [restriction, access]
+      - [api, feature, configuration]
 

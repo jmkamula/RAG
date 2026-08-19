@@ -1,8 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.5.34:pii_processing_register
-#
-# Reviewed-from-skeleton 2026-06-14. PII processing register (RoPA-style)
-# column patterns. Arion's privacy policy prose was matching 3 MUSTs in
-# v2 — tightened to require per-activity / column-header shape.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.34:pii_processing_register"
@@ -10,72 +10,79 @@ target_control: "A.5.34"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.5.34:pii_inventory"
-    description: "PII categories enumerated per processing activity"
-    excerpt_keywords:
-      - [pii, categories, per, activity]
-      - [data, categories, processed]
-      - [pii, inventory, column]
-      - [ropa, data, categories]
-      - [special, category, per, activity]
-
-  - must_id: "item:A.5.34:reg_data_subjects"
-    description: "Data subject categories per processing activity"
-    excerpt_keywords:
-      - [data, subjects, per, activity]
-      - [data, subject, column]
-      - [ropa, data, subjects]
-      - [subject, categories, per]
-      - [data, subjects, list, column]
-
-  - must_id: "item:A.5.34:reg_purposes"
-    description: "Processing purposes stated per activity"
-    excerpt_keywords:
-      - [processing, purpose, per, activity]
-      - [purpose, column]
-      - [ropa, purposes]
-      - [specific, explicit, legitimate]
-
-  - must_id: "item:A.5.34:reg_lawful_basis"
-    description: "Lawful basis recorded per activity"
-    excerpt_keywords:
-      - [lawful, basis, per, activity]
-      - [lawful, basis, column]
-      - [legal, basis, per, processing]
-      - [ropa, lawful, basis]
-
-  - must_id: "item:A.5.34:reg_retention"
-    description: "Retention period per activity"
-    excerpt_keywords:
-      - [retention, period, per, activity]
-      - [retention, column]
-      - [retention, schedule, column]
-      - ["A.5.33"]
-      - [data, retention, per, activity]
-
   - must_id: "item:A.5.34:reg_transfers"
-    description: "Cross-border transfers per activity"
+    description: "Cross-border transfers per activity (destination jurisdictions + legal mechanism — SCCs / adequacy / BCRs / derogations; explicit 'none' where applicable)"
     excerpt_keywords:
-      - [cross, border, transfer, per]
-      - [transfer, mechanism, column]
-      - [sccs, per, activity]
-      - [adequacy, per, transfer]
-      - [bcrs, derogations]
-      - [transfer, destinations, column]
-
-  - must_id: "item:A.5.34:reg_owner_per_activity"
-    description: "Owner per processing activity"
-    excerpt_keywords:
-      - [activity, owner, column]
-      - [owner, per, processing, activity]
-      - [ropa, activity, owner]
-      - [processing, owner, per]
+      - [crossborder, transfer]
+      - [destination, jurisdiction]
+      - [legal, mechanism]
+      - [standard, contractual, clauses]
+      - [adequacy, decision]
+      - [binding, corporate, rules]
 
   - must_id: "item:A.5.34:reg_controls_applied"
-    description: "Security controls applied per activity"
+    description: "Security controls applied per activity (encryption at rest/in transit, access control class, pseudonymisation where used — cross-link to A.8.x and GDPR Art.32)"
     excerpt_keywords:
-      - [controls, applied, per, activity]
-      - [security, controls, column]
-      - [encryption, per, activity]
-      - [pseudonymisation, per, activity]
-      - [controls, mapping, per, activity]
+      - [security, controls, applied]
+      - [encryption, rest]
+      - [encryption, transit]
+      - [access, control, class]
+      - [pseudonymisation, used]
+      - [gdpr, art32]
+
+  - must_id: "item:A.5.34:reg_owner_per_activity"
+    description: "Owner per processing activity (named role responsible for the activity — HR for employee processing, Sales for prospect processing, etc.)"
+    excerpt_keywords:
+      - [processing, activity, owner]
+      - [responsible, processing]
+      - [owner, per, activity]
+      - [processing, role, assigned]
+      - [activity, owner, named]
+
+  - must_id: "item:A.5.34:reg_retention"
+    description: "Retention period per activity (concrete duration with start/end triggers; cross-link to A.5.33 records schedule — no arbitrary numbers)"
+    excerpt_keywords:
+      - [retention, period]
+      - [retention, duration]
+      - [start, trigger]
+      - [end, trigger]
+      - [records, schedule]
+      - [activity, retention, period]
+
+  - must_id: "item:A.5.34:reg_lawful_basis"
+    description: "Lawful basis recorded per activity (matches the policy's discipline — consent / contract / legal obligation / vital interests / public task / legitimate interests, with special-category Art.9 basis wh"
+    excerpt_keywords:
+      - [lawful, basis]
+      - [processing, activity, lawful]
+      - [consent, recorded]
+      - [legal, obligation]
+      - [specialcategory, art9]
+      - [legitimate, interests]
+
+  - must_id: "item:A.5.34:reg_purposes"
+    description: "Processing purposes stated per activity (specific, explicit, legitimate — not 'business operations'; cross-link to GDPR Art.5.1.b purpose limitation)"
+    excerpt_keywords:
+      - [processing, purposes]
+      - [specific, processing, purpose]
+      - [legitimate, purpose]
+      - [purpose, limitation]
+      - [processing, activity, purpose]
+
+  - must_id: "item:A.5.34:reg_data_subjects"
+    description: "Data subject categories per processing activity (customers, employees, prospects, minors, vulnerable groups — drives extra-safeguard decisions)"
+    excerpt_keywords:
+      - [data, subject, categories]
+      - [processing, activity, categories]
+      - [pii, processing, register]
+      - [categories, customers, employees]
+      - [vulnerable, groups, minors]
+
+  - must_id: "item:A.5.34:pii_inventory"
+    description: "PII categories enumerated per processing activity (basic identifiers, contact data, financial, health, biometric, special-category — GDPR Art.9 / sectoral equivalents); links to GDPR Art.30 RoPA"
+    excerpt_keywords:
+      - [pii, processing, categories]
+      - [processing, activity, pii]
+      - [gdpr, art30, ropa]
+      - [specialcategory, pii, data]
+      - [pii, category, enumerated]
+

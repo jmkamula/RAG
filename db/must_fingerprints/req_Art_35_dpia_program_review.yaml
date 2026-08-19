@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.35:dpia_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.35:dpia_program_review"
@@ -14,72 +13,58 @@ must_fingerprints:
   - must_id: "item:Art.35:rev_review_cadence"
     description: "Review-cadence audit — DPIAs refreshed per Art.35.11 when processing changed"
     excerpt_keywords:
-      - [review, cadence, protection]
-      - [review, cadence, audit, protection]
-      - [cadence, audit, protection]
-      - [cadence, audit, dpias, protection]
-      - [audit, dpias, protection]
-      - [audit, dpias, refreshed, protection]
-      - [dpias, refreshed, protection]
-      - [dpias, refreshed, art, protection]
+      - [dpia, review]
+      - [review, cadence]
+      - [processing, changed]
+      - [art35, dpia]
+      - [dpia, refreshed]
 
   - must_id: "item:Art.35:rev_art36_audit"
     description: "Art.36 escalation audit — residual-high-risk DPIAs escalated to SA where required"
     excerpt_keywords:
-      - [art36, audit, protection]
-      - [art, escalation, protection]
-      - [art, escalation, audit, protection]
-      - [escalation, audit, protection]
-      - [escalation, audit, residual, protection]
-      - [audit, residual, protection]
-      - [audit, residual, high, protection]
-      - [residual, high, protection]
+      - [art36, escalation, audit]
+      - [residual, high, risk, dpia]
+      - [dpia, escalated, supervisory, authority]
+      - [audit, dpia]
+      - [escalation, sa]
+      - [reviewed, escalation]
 
   - must_id: "item:Art.35:rev_advice_quality"
     description: "DPO-advice quality sample — advice substantive, not rubber-stamp"
     excerpt_keywords:
-      - [advice, quality, protection]
-      - [dpo, advice, protection]
-      - [dpo, advice, quality, protection]
-      - [advice, quality, sample, protection]
-      - [quality, sample, protection]
-      - [quality, sample, advice, protection]
-      - [sample, advice, protection]
-      - [sample, advice, substantive, protection]
+      - [dpo, advice, quality]
+      - [advice, substantive, review]
+      - [review, dpo, feedback]
+      - [advice, rubberstamp, avoid]
+      - [quality, sample, assessment]
 
   - must_id: "item:Art.35:rev_coverage"
     description: "Coverage check — every in-scope activity has a current DPIA OR documented Art.35.5 white-list justification"
     excerpt_keywords:
-      - [coverage, check, protection]
-      - [coverage, check, every, protection]
-      - [check, every, protection]
-      - [check, every, scope, protection]
-      - [every, scope, protection]
-      - [every, scope, activity, protection]
-      - [scope, activity, protection]
-      - [scope, activity, has, protection]
+      - [coverage, dpia]
+      - [inscope, activity, dpia]
+      - [documented, article, 355]
+      - [dpia, current]
+      - [whitelist, justification]
+      - [art35, coverage]
 
   - must_id: "item:Art.35:rev_reviewer"
     description: "Reviewer identity (DPO + executive sponsor + lead privacy engineer)"
     excerpt_keywords:
-      - [reviewer, identity, protection]
-      - [reviewer, identity, dpo, protection]
-      - [identity, dpo, protection]
-      - [identity, dpo, executive, protection]
-      - [dpo, executive, protection]
-      - [dpo, executive, sponsor, protection]
-      - [executive, sponsor, protection]
-      - [executive, sponsor, lead, protection]
+      - [reviewer, identity]
+      - [dpo, reviewer]
+      - [executive, sponsor]
+      - [lead, privacy, engineer]
+      - [review, dpo]
+      - [review, sponsor, identity]
 
   - must_id: "item:Art.35:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, protection]
-      - [review, date, within, protection]
-      - [date, within, protection]
-      - [date, within, planned, protection]
-      - [within, planned, protection]
-      - [within, planned, interval, protection]
-      - [planned, interval, protection]
-      - [per, revocation, protection]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [review, scheduled]
+      - [review, period]
 

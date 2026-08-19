@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.5.5:disclosure_decision_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.5:disclosure_decision_procedure"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:B.8.5.5:proc_source_variety"
     description: "Source variety awareness — courts, tribunals, admin authorities, any jurisdiction"
     excerpt_keywords:
-      - [source, variety, legally]
-      - [source, variety, awareness, legally]
-      - [variety, awareness, legally]
-      - [variety, awareness, courts, legally]
-      - [awareness, courts, legally]
-      - [awareness, courts, tribunals, legally]
-      - [courts, tribunals, legally]
-      - [courts, tribunals, admin, legally]
+      - [source, variety]
+      - [courts, tribunals]
+      - [administrative, authorities]
+      - [any, jurisdiction]
+      - [legally, binding, disclosure]
+      - [disclosure, decision, procedure]
 
   - must_id: "item:B.8.5.5:proc_contractual_scope"
     description: "Contractually-agreed scope — what customer-authorised requests look like (per B.8.2.1 agreement clauses)"
     excerpt_keywords:
-      - [contractual, scope, legally]
-      - [contractually, agreed, legally]
-      - [contractually, agreed, scope, legally]
-      - [agreed, scope, legally]
-      - [agreed, scope, customer, legally]
-      - [scope, customer, legally]
-      - [scope, customer, authorised, legally]
-      - [customer, authorised, legally]
+      - [contractually, agreed, scope]
+      - [customer, authorised, request]
+      - [disclosure, decision, procedure]
+      - [agreement, clause, scope]
+      - [request, within, contract]
+      - [authorised, data, disclosure]
 
   - must_id: "item:B.8.5.5:proc_customer_consultation"
     description: "Customer consultation before disclosure of contractually-agreed requests"
     excerpt_keywords:
-      - [customer, consultation, legally]
-      - [customer, consultation, before, legally]
-      - [consultation, before, legally]
-      - [consultation, before, disclosure, legally]
-      - [before, disclosure, legally]
-      - [before, disclosure, contractually, legally]
-      - [disclosure, contractually, legally]
-      - [disclosure, contractually, agreed, legally]
+      - [customer, consultation]
+      - [disclosure, contractually, agreed]
+      - [prior, customer, approval]
+      - [request, disclosure, procedure]
+      - [consult, customer, before]
+      - [legally, binding, disclosure]
 
   - must_id: "item:B.8.5.5:proc_default_reject"
     description: "Default reject rule — non-binding disclosure requests rejected"
     excerpt_keywords:
-      - [default, reject, legally]
-      - [default, reject, rule, legally]
-      - [reject, rule, legally]
-      - [reject, rule, non, legally]
-      - [rule, non, legally]
-      - [rule, non, binding]
-      - [non, binding]
-      - [non, binding, disclosure]
+      - [default, reject]
+      - [disclosure, request, nonbinding]
+      - [shall, reject]
+      - [procedure, disclosure, decision]
+      - [requests, nonbinding, rejected]
 
   - must_id: "item:B.8.5.5:proc_binding_assessment"
     description: "Binding-vs-not assessment — legal counsel classifies every incoming request"
     excerpt_keywords:
-      - [binding, assessment]
-      - [binding, not]
-      - [binding, not, assessment]
-      - [not, assessment, legally]
-      - [not, assessment, legal, legally]
-      - [assessment, legal, legally]
-      - [assessment, legal, counsel, legally]
-      - [legal, counsel, legally]
+      - [legal, counsel, classify]
+      - [binding, assessment, request]
+      - [incoming, pii, disclosure]
+      - [request, review, procedure]
+      - [shall, assess, binding]
+      - [legal, assessment, disclosure]
 

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.3.4:consent_withdrawal_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.4:consent_withdrawal_procedure"
@@ -14,72 +13,57 @@ must_fingerprints:
   - must_id: "item:A.7.3.4:proc_pre_withdrawal_valid"
     description: "Pre-withdrawal processing remains valid; post-withdrawal processing halts (Art.7.3 — no retroactive effect)"
     excerpt_keywords:
-      - [pre, withdrawal, valid, providing]
-      - [pre, withdrawal, providing]
-      - [pre, withdrawal, processing, providing]
-      - [withdrawal, processing, providing]
-      - [withdrawal, processing, remains, providing]
-      - [processing, remains, providing]
-      - [processing, remains, valid, providing]
-      - [remains, valid, providing]
+      - [prewithdrawal, processing, valid]
+      - [postwithdrawal, processing, halts]
+      - [consent, withdrawal, mechanism]
+      - [shall, stop, processing]
+      - [no, retroactive, effect]
 
   - must_id: "item:A.7.3.4:proc_propagation"
     description: "Downstream propagation — withdrawal cascades to systems + authorised users + third parties (see A.7.3.7)"
     excerpt_keywords:
-      - [downstream, propagation, providing]
-      - [downstream, propagation, withdrawal, providing]
-      - [propagation, withdrawal, providing]
-      - [propagation, withdrawal, cascades, providing]
-      - [withdrawal, cascades, providing]
-      - [withdrawal, cascades, authorised, providing]
-      - [cascades, authorised, providing]
-      - [cascades, authorised, users, providing]
+      - [withdrawal, propagate]
+      - [consent, withdrawal, cascade]
+      - [notify, third, parties]
+      - [update, authorised, users]
+      - [propagation, systems]
+      - [consent, modification, propagate]
 
   - must_id: "item:A.7.3.4:proc_response_sla"
     description: "Response-time SLA stated + honoured"
     excerpt_keywords:
-      - [response, sla, providing]
-      - [response, time, providing]
-      - [response, time, sla, providing]
-      - [time, sla, providing]
-      - [time, sla, stated, providing]
-      - [sla, stated, providing]
-      - [sla, stated, honoured, providing]
-      - [stated, honoured, providing]
+      - [response time, service level]
+      - [sla, response time]
+      - [response time, honoured]
+      - [response time, within]
+      - [shall, respond, time]
+      - [response, time, commitment]
 
   - must_id: "item:A.7.3.4:proc_modification_paths"
     description: "Modification paths (partial withdrawal / opt-in-to-fewer-purposes / restrict processing)"
     excerpt_keywords:
-      - [modification, paths, providing]
-      - [modification, paths, partial, providing]
-      - [paths, partial, providing]
-      - [paths, partial, withdrawal, providing]
-      - [partial, withdrawal, providing]
-      - [partial, withdrawal, opt, providing]
-      - [withdrawal, opt, providing]
-      - [withdrawal, opt, fewer, providing]
+      - [modify, consent]
+      - [withdraw, consent]
+      - [partial, withdrawal]
+      - [restrict, processing]
+      - [optin, fewer, purposes]
+      - [consent, modification, procedure]
 
   - must_id: "item:A.7.3.4:proc_easy_as_giving"
     description: "Withdrawal as easy as giving — no additional hurdles beyond original consent process (Art.7.3)"
     excerpt_keywords:
-      - [easy, giving, providing]
-      - [withdrawal, easy, providing]
-      - [withdrawal, easy, giving, providing]
-      - [easy, giving, additional, providing]
-      - [giving, additional, providing]
-      - [giving, additional, hurdles, providing]
-      - [additional, hurdles, providing]
-      - [additional, hurdles, beyond, providing]
+      - [withdrawal, easy]
+      - [modify, consent, mechanism]
+      - [consent, withdrawal, process]
+      - [no, additional, hurdles]
+      - [withdrawal, giving]
 
   - must_id: "item:A.7.3.4:proc_channel_parity"
     description: "Channel parity — withdrawal via same medium as collection (email if email, web if web; not phone/fax fallback)"
     excerpt_keywords:
-      - [channel, parity, providing]
-      - [channel, parity, withdrawal, providing]
-      - [parity, withdrawal, providing]
-      - [parity, withdrawal, via, providing]
-      - [withdrawal, via, providing]
-      - [withdrawal, via, same, providing]
-      - [via, same, providing]
-      - [via, same, medium, providing]
+      - [withdrawal, same, channel]
+      - [consent, withdrawal, mechanism]
+      - [modify, withdraw, consent]
+      - [via, same, medium]
+      - [channel, parity, withdrawal]
 

@@ -46,6 +46,10 @@ RUN_C = MEASUREMENT_DIR / "run_c_consensus_verified.csv"
 RUN_D = MEASUREMENT_DIR / "run_d_union_tuned.csv"
 # Ship 79'.c — Run E = union + artefact-aware LLM gatekeeper.
 RUN_E = MEASUREMENT_DIR / "run_e_artefact_aware.csv"
+# Ship 80'.c — Run F = Run E extractor + LLM-curated fingerprint YAMLs.
+RUN_F = MEASUREMENT_DIR / "run_f_vocab_curator.csv"
+# Ship 80'.d — Run G = wired mode (consensus signals → critic LLM verify).
+RUN_G = MEASUREMENT_DIR / "run_g_wired.csv"
 
 
 # ─── Ground truth flattener ────────────────────────────────────────────
@@ -228,10 +232,13 @@ def main():
     findings_c = _load_findings(RUN_C) if RUN_C.exists() else {}
     findings_d = _load_findings(RUN_D) if RUN_D.exists() else {}
     findings_e = _load_findings(RUN_E) if RUN_E.exists() else {}
+    findings_f = _load_findings(RUN_F) if RUN_F.exists() else {}
+    findings_g = _load_findings(RUN_G) if RUN_G.exists() else {}
 
     all_scores = {"consensus": {}, "critic": {},
                   "consensus_verified": {}, "union_tuned": {},
-                  "union_artefact": {}}
+                  "union_artefact": {}, "union_vocab_curator": {},
+                  "wired": {}}
 
     for key, (yaml_file, doc_name) in DOCS.items():
         gt_musts = _extract_musts_from_yaml(GT_DIR / yaml_file)
@@ -240,11 +247,15 @@ def main():
         f_c = findings_c.get(doc_name, [])
         f_d = findings_d.get(doc_name, [])
         f_e = findings_e.get(doc_name, [])
+        f_f = findings_f.get(doc_name, [])
+        f_g = findings_g.get(doc_name, [])
         s_a = _score(f_a, gt_musts)
         s_b = _score(f_b, gt_musts)
         s_c = _score(f_c, gt_musts) if f_c else None
         s_d = _score(f_d, gt_musts) if f_d else None
         s_e = _score(f_e, gt_musts) if f_e else None
+        s_f = _score(f_f, gt_musts) if f_f else None
+        s_g = _score(f_g, gt_musts) if f_g else None
         all_scores["consensus"][key] = s_a
         all_scores["critic"][key] = s_b
         if s_c:
@@ -253,6 +264,10 @@ def main():
             all_scores["union_tuned"][key] = s_d
         if s_e:
             all_scores["union_artefact"][key] = s_e
+        if s_f:
+            all_scores["union_vocab_curator"][key] = s_f
+        if s_g:
+            all_scores["wired"][key] = s_g
 
         print(f"\n─── {key} ({doc_name[:40]}...) ───")
         print(f"  GT MUSTs: strict-expected={sum(1 for _,v,_ in gt_musts if v=='satisfies')} "
@@ -266,6 +281,10 @@ def main():
             variants.append(("union+tuned (D)", s_d))
         if s_e:
             variants.append(("union+artefact (E)", s_e))
+        if s_f:
+            variants.append(("union+vocab (F)", s_f))
+        if s_g:
+            variants.append(("wired (G)", s_g))
         for name, s in variants:
             print(f"  {name:15} {s['n_findings']:3} findings, {s['n_distinct_musts']:3} distinct musts")
             for scoring in ("strict", "lenient"):
@@ -279,7 +298,8 @@ def main():
     print("\n" + "=" * 68)
     print("AGGREGATE (across 5 docs)")
     for path in ("consensus", "critic", "consensus_verified",
-                 "union_tuned", "union_artefact"):
+                 "union_tuned", "union_artefact", "union_vocab_curator",
+                 "wired"):
         if not all_scores[path]:
             continue
         for scoring in ("strict", "lenient"):

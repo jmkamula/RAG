@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.2.3:consent_process_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.3:consent_process_procedure"
@@ -14,72 +13,57 @@ must_fingerprints:
   - must_id: "item:A.7.2.3:proc_special_category_overlay"
     description: "Special-category explicit-consent overlay (Art.9.2.a explicit consent for health/biometric)"
     excerpt_keywords:
-      - [special, category, overlay, determine]
-      - [special, category, determine]
-      - [special, category, explicit, determine]
-      - [category, explicit, determine]
-      - [category, explicit, consent]
       - [explicit, consent]
-      - [explicit, consent, overlay]
-      - [consent, overlay]
+      - [specialcategory, consent]
+      - [obtain, consent]
+      - [consent, procedure]
+      - [health, consent]
+      - [biometric, consent]
 
   - must_id: "item:A.7.2.3:proc_children_overlay"
     description: "Children-consent overlay — parental consent thresholds per jurisdiction (age of consent varies GDPR Art.8)"
     excerpt_keywords:
-      - [children, overlay, determine]
-      - [children, consent]
-      - [children, consent, overlay]
-      - [consent, overlay]
-      - [consent, overlay, parental]
-      - [overlay, parental, determine]
-      - [overlay, parental, consent]
-      - [parental, consent]
+      - [parental, consent, threshold]
+      - [age, consent, jurisdiction]
+      - [obtain, consent, children]
+      - [consent, procedure, children]
+      - [gdpr, article, 8]
 
   - must_id: "item:A.7.2.3:proc_no_bundling"
     description: "No-bundling rule — consent not conditioned on service delivery except where genuinely necessary"
     excerpt_keywords:
-      - [no, bundling, determine]
-      - [bundling, rule, determine]
-      - [bundling, rule, consent]
-      - [rule, consent]
-      - [rule, consent, not]
-      - [consent, not]
-      - [consent, not, conditioned]
-      - [not, conditioned, determine]
+      - [consent, obtained]
+      - [consent, conditioned, service]
+      - [no, bundling, consent]
+      - [genuinely, necessary, consent]
+      - [consent, separately, requested]
 
   - must_id: "item:A.7.2.3:proc_quality_standard"
     description: "Consent-quality standard (freely given / specific / unambiguous / clear affirmative act)"
     excerpt_keywords:
-      - [quality, standard, determine]
-      - [consent, quality]
+      - [freely, given]
+      - [specific, consent]
+      - [unambiguous, consent]
+      - [clear, affirmative, act]
       - [consent, quality, standard]
-      - [quality, standard, freely, determine]
-      - [standard, freely, determine]
-      - [standard, freely, given, determine]
-      - [freely, given, determine]
-      - [freely, given, specific, determine]
+      - [obtain, consent, procedure]
 
   - must_id: "item:A.7.2.3:proc_collection_mechanism"
     description: "Collection mechanism per channel (web form / mobile app / physical form / verbal with recording)"
     excerpt_keywords:
-      - [collection, mechanism, determine]
-      - [collection, mechanism, channel, determine]
-      - [mechanism, channel, determine]
-      - [mechanism, channel, web, determine]
-      - [channel, web, determine]
-      - [channel, web, form, determine]
-      - [web, form, determine]
-      - [web, form, mobile, determine]
+      - [collection, mechanism]
+      - [consent, obtained]
+      - [per, channel]
+      - [web, form]
+      - [mobile, app]
+      - [verbal, recording]
 
   - must_id: "item:A.7.2.3:proc_when_consent_required"
     description: "When-consent-required rules per activity (basis catalog references — see A.7.2.2)"
     excerpt_keywords:
       - [consent, required]
-      - [consent, required, rules]
-      - [required, rules, determine]
-      - [required, rules, activity, determine]
-      - [rules, activity, determine]
-      - [rules, activity, basis, determine]
-      - [activity, basis, determine]
-      - [activity, basis, catalog, determine]
+      - [when, consent, obtained]
+      - [consent, basis, catalog]
+      - [determine, consent, required]
+      - [activity, requires, consent]
 

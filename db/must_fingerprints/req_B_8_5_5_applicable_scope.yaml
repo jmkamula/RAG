@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.5.5:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.5:applicable_scope"
@@ -14,36 +13,30 @@ must_fingerprints:
   - must_id: "item:B.8.5.5:scope_default_reject"
     description: "Default reject scope (informal / social-engineering / marketing requests)"
     excerpt_keywords:
-      - [default, reject, legally]
-      - [default, reject, scope, legally]
-      - [reject, scope, legally]
-      - [reject, scope, informal, legally]
-      - [scope, informal, legally]
-      - [scope, informal, social, legally]
-      - [informal, social, legally]
-      - [informal, social, engineering, legally]
+      - [default, reject]
+      - [informal, request]
+      - [socialengineering, request]
+      - [marketing, request]
+      - [disclosure, scope]
+      - [applicable, disclosure]
 
   - must_id: "item:B.8.5.5:scope_authorisation_paths"
     description: "Customer authorisation paths (contract clause / one-off approval / DPA schedule)"
     excerpt_keywords:
-      - [authorisation, paths, legally]
-      - [customer, authorisation, legally]
-      - [customer, authorisation, paths, legally]
-      - [authorisation, paths, contract, legally]
-      - [paths, contract, legally]
-      - [paths, contract, clause, legally]
-      - [contract, clause, legally]
-      - [contract, clause, one, legally]
+      - [customer, authorisation, path]
+      - [contract, clause]
+      - [oneoff, approval]
+      - [dpa, schedule]
+      - [authorisation, process]
+      - [disclosure, approval]
 
   - must_id: "item:B.8.5.5:scope_request_types"
     description: "Request types requiring decision (legal request / third-party request / journalist request / marketing lead-gen request)"
     excerpt_keywords:
-      - [request, types, legally]
-      - [request, types, requiring, legally]
-      - [types, requiring, legally]
-      - [types, requiring, decision, legally]
-      - [requiring, decision, legally]
-      - [requiring, decision, legal, legally]
-      - [decision, legal, legally]
-      - [decision, legal, request, legally]
+      - [legal, request]
+      - [thirdparty, request]
+      - [journalist, request]
+      - [marketing, leadgen]
+      - [disclosure, request]
+      - [request, requiring, decision]
 

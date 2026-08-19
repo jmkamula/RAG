@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.6:lawful_basis_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.6:lawful_basis_program_review"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:Art.6:rev_regulator_guidance"
     description: "Regulator-guidance sweep — EDPB / supervisory authority guidance updates considered for impact"
     excerpt_keywords:
-      - [regulator, guidance, lawfulness]
-      - [regulator, guidance, sweep, lawfulness]
-      - [guidance, sweep, lawfulness]
-      - [guidance, sweep, edpb, lawfulness]
-      - [sweep, edpb, lawfulness]
-      - [sweep, edpb, supervisory, lawfulness]
-      - [edpb, supervisory, lawfulness]
-      - [edpb, supervisory, authority, lawfulness]
+      - [regulator, guidance]
+      - [edpb, guidance]
+      - [supervisory, authority]
+      - [guidance, updates]
+      - [impact, assessment]
+      - [review, date]
 
   - must_id: "item:Art.6:rev_basis_appropriateness"
     description: "Basis-appropriateness sample — high-volume / high-sensitivity activities re-evaluated for whether the chosen basis still fits"
     excerpt_keywords:
-      - [basis, appropriateness, lawfulness]
-      - [basis, appropriateness, sample, lawfulness]
-      - [appropriateness, sample, lawfulness]
-      - [appropriateness, sample, high, lawfulness]
-      - [sample, high, lawfulness]
-      - [sample, high, volume, lawfulness]
-      - [high, volume, lawfulness]
-      - [high, volume, high, lawfulness]
+      - [basis, appropriateness]
+      - [review, lawful, basis]
+      - [re evaluated, processing, basis]
+      - [high volume, processing]
+      - [high sensitivity, data]
+      - [lawful basis, reviewed]
 
   - must_id: "item:Art.6:rev_register_currency"
     description: "Register currency check — every Art.30 RoPA activity has a current Art.6 basis assignment"
     excerpt_keywords:
-      - [currency, check, lawfulness]
-      - [currency, check, every, lawfulness]
-      - [check, every, lawfulness]
-      - [check, every, art, lawfulness]
-      - [every, art, lawfulness]
-      - [every, art, ropa, lawfulness]
-      - [art, ropa, lawfulness]
-      - [art, ropa, activity, lawfulness]
+      - [register, currency]
+      - [ropa, activity, basis]
+      - [art6, lawful, basis]
+      - [current, basis, assignment]
+      - [review, register, currency]
+      - [art30, record, processing]
 
   - must_id: "item:Art.6:rev_reviewer"
     description: "Reviewer identity (DPO or Privacy Lead)"
     excerpt_keywords:
-      - [reviewer, identity, lawfulness]
-      - [reviewer, identity, dpo, lawfulness]
-      - [identity, dpo, lawfulness]
-      - [identity, dpo, privacy, lawfulness]
-      - [dpo, privacy, lawfulness]
-      - [dpo, privacy, lead, lawfulness]
-      - [privacy, lead, lawfulness]
-      - [per, revocation, lawfulness]
+      - [reviewer, identity]
+      - [data, protection, officer]
+      - [privacy, lead]
+      - [reviewed]
+      - [review, conducted, dpo]
 
   - must_id: "item:Art.6:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, lawfulness]
-      - [review, date, within, lawfulness]
-      - [date, within, lawfulness]
-      - [date, within, planned, lawfulness]
-      - [within, planned, lawfulness]
-      - [within, planned, interval, lawfulness]
-      - [planned, interval, lawfulness]
-      - [per, revocation, lawfulness]
+      - [review, date]
+      - [planned, interval]
+      - [review, within, interval]
+      - [scheduled, review, date]
+      - [review, period]
+      - [next, review]
 

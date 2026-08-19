@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.3.5:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.5:applicable_scope"
@@ -14,48 +13,38 @@ must_fingerprints:
   - must_id: "item:A.7.3.5:scope_research_stats"
     description: "Research / statistics processing (Art.21.6 applies)"
     excerpt_keywords:
-      - [research, stats, providing]
-      - [research, statistics, providing]
-      - [research, statistics, processing, providing]
-      - [statistics, processing, providing]
-      - [statistics, processing, art, providing]
-      - [processing, art, providing]
-      - [in, scope, providing]
-      - [scope, includes, providing]
+      - [research, processing]
+      - [statistics, processing]
+      - [art21, objection]
+      - [processing, subject, rights]
+      - [applies, research]
+      - [scope, includes, statistics]
 
   - must_id: "item:A.7.3.5:scope_public_task"
     description: "Public-task processing enumerated (Art.21.1 applies)"
     excerpt_keywords:
-      - [public, task, providing]
-      - [public, task, processing, providing]
-      - [task, processing, providing]
-      - [task, processing, enumerated, providing]
-      - [processing, enumerated, providing]
-      - [processing, enumerated, art, providing]
-      - [enumerated, art, providing]
-      - [in, scope, providing]
+      - [public, task, processing]
+      - [art211, applies]
+      - [processing, lawful, public]
+      - [object, pii, processing]
+      - [scope, public, task]
 
   - must_id: "item:A.7.3.5:scope_legitimate_interests"
     description: "Legitimate-interests processing enumerated (Art.21.1 balancing-test objection applies)"
     excerpt_keywords:
-      - [legitimate, interests, providing]
-      - [legitimate, interests, processing, providing]
-      - [interests, processing, providing]
-      - [interests, processing, enumerated, providing]
-      - [processing, enumerated, providing]
-      - [processing, enumerated, art, providing]
-      - [enumerated, art, providing]
-      - [enumerated, art, balancing, providing]
+      - [legitimate, interests, processing]
+      - [processing, based, legitimate]
+      - [objection, balancing, test]
+      - [art21, balancing, test]
+      - [scope, legitimate, interests]
 
   - must_id: "item:A.7.3.5:scope_marketing_processing"
     description: "Marketing processing enumerated (Art.21.2 absolute objection applies)"
     excerpt_keywords:
-      - [marketing, processing, providing]
-      - [marketing, processing, enumerated, providing]
-      - [processing, enumerated, providing]
-      - [processing, enumerated, art, providing]
-      - [enumerated, art, providing]
-      - [enumerated, art, absolute, providing]
-      - [art, absolute, providing]
-      - [art, absolute, objection, providing]
+      - [marketing, processing]
+      - [object, processing]
+      - [absolute, objection]
+      - [art21, objection]
+      - [processing, pii]
+      - [applicable, objection, contexts]
 

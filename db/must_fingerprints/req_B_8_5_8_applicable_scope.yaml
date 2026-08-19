@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.5.8:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.8:applicable_scope"
@@ -14,36 +13,29 @@ must_fingerprints:
   - must_id: "item:B.8.5.8:scope_specific_auth_exclusion"
     description: "Specific-authorisation customers excluded (they get fresh B.8.5.7 engagement each time)"
     excerpt_keywords:
-      - [specific, auth, exclusion, change]
-      - [specific, authorisation, change]
-      - [specific, authorisation, customers, change]
-      - [authorisation, customers, change]
-      - [authorisation, customers, excluded, change]
-      - [customers, excluded, change]
-      - [customers, excluded, they, change]
-      - [excluded, they, change]
+      - [specific, authorisation, excluded]
+      - [customer, excluded, authorisation]
+      - [excluded, scope]
+      - [fresh, engagement, required]
+      - [change, subcontractor, pii]
 
   - must_id: "item:B.8.5.8:scope_change_types"
     description: "Change types in scope (add / replace / remove)"
     excerpt_keywords:
-      - [change, types]
-      - [change, types, scope]
-      - [types, scope, change]
-      - [types, scope, add, change]
-      - [scope, add, change]
-      - [scope, add, replace, change]
-      - [add, replace, change]
-      - [add, replace, remove, change]
+      - [change, subcontractor]
+      - [add, subcontractor]
+      - [replace, subcontractor]
+      - [remove, subcontractor]
+      - [scope, change, types]
+      - [change, processing, pii]
 
   - must_id: "item:B.8.5.8:scope_general_auth_customers"
     description: "Customers on general-authorisation contract per row"
     excerpt_keywords:
-      - [general, auth, customers, change]
-      - [customers, general, change]
-      - [customers, general, authorisation, change]
-      - [general, authorisation, change]
-      - [general, authorisation, contract, change]
-      - [authorisation, contract, change]
-      - [in, scope, change]
-      - [scope, includes, change]
+      - [customers, general authorisation]
+      - [general authorisation, contract]
+      - [per, row]
+      - [scope, applies]
+      - [authorisation, customer]
+      - [contract, customer]
 

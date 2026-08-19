@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.3.1:support_request_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.3.1:support_request_register"
@@ -14,60 +13,48 @@ must_fingerprints:
   - must_id: "item:B.8.3.1:reg_sla_met"
     description: "SLA-met flag per row"
     excerpt_keywords:
-      - [sla, met, obligations]
-      - [sla, met, flag, obligations]
-      - [met, flag, obligations]
-      - [per, row, obligations]
-      - [each, row, obligations]
-      - [column, containing, obligations]
-      - [each, entry, obligations]
-      - [column, header, obligations]
+      - [sla, met, flag]
+      - [service, level, agreement]
+      - [response, time, record]
+      - [customer, subject, request]
+      - [support, sla, status]
 
   - must_id: "item:B.8.3.1:reg_response"
     description: "Response per row (what was provided / done)"
     excerpt_keywords:
-      - [response, provided, obligations]
-      - [response, provided, done, obligations]
-      - [provided, done, obligations]
-      - [per, row, obligations]
-      - [each, row, obligations]
-      - [column, containing, obligations]
-      - [each, entry, obligations]
-      - [column, header, obligations]
+      - [response, provided]
+      - [action, taken]
+      - [record, response]
+      - [subject, request, response]
+      - [response, per, entry]
+      - [response, logged]
 
   - must_id: "item:B.8.3.1:reg_request_type"
     description: "Request type per row (rectification support / erasure support / portability export / restriction / info-for-Art.15)"
     excerpt_keywords:
-      - [request, rectification, obligations]
-      - [request, rectification, support, obligations]
-      - [rectification, support, obligations]
-      - [rectification, support, erasure, obligations]
-      - [support, erasure, obligations]
-      - [support, erasure, support, obligations]
-      - [erasure, support, obligations]
-      - [erasure, support, portability, obligations]
+      - [request, type]
+      - [subject, rights, request]
+      - [rectification, support]
+      - [erasure, support]
+      - [portability, export]
+      - [restriction, request]
 
   - must_id: "item:B.8.3.1:reg_customer_id"
     description: "Requesting customer identifier per row"
     excerpt_keywords:
-      - [customer, id, obligations]
-      - [requesting, customer, obligations]
-      - [requesting, customer, identifier, obligations]
-      - [customer, identifier, obligations]
-      - [per, row, obligations]
-      - [each, row, obligations]
-      - [column, containing, obligations]
-      - [each, entry, obligations]
+      - [customer, identifier]
+      - [subject, id]
+      - [customer, reference]
+      - [subject, reference]
+      - [customer, record]
+      - [subject, record]
 
   - must_id: "item:B.8.3.1:reg_request_id"
     description: "Unique request identifier per row"
     excerpt_keywords:
-      - [request, id, obligations]
-      - [unique, request, obligations]
-      - [unique, request, identifier, obligations]
-      - [request, identifier, obligations]
-      - [per, row, obligations]
-      - [each, row, obligations]
-      - [column, containing, obligations]
-      - [each, entry, obligations]
+      - [request, identifier]
+      - [unique, request, id]
+      - [subject, request, reference]
+      - [customer, request, id]
+      - [request, record, number]
 

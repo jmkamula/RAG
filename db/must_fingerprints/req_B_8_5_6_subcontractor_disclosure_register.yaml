@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.5.6:subcontractor_disclosure_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.6:subcontractor_disclosure_register"
@@ -15,56 +14,45 @@ must_fingerprints:
     description: "Disclosure mode per row (public trust page / DPA schedule / NDA + on-request)"
     excerpt_keywords:
       - [disclosure, mode]
-      - [disclosure, mode, public]
-      - [mode, public, disclosure]
-      - [mode, public, trust, disclosure]
-      - [public, trust, disclosure]
-      - [public, trust, page, disclosure]
-      - [trust, page, disclosure]
-      - [trust, page, dpa, disclosure]
+      - [subcontractor, disclosure, register]
+      - [public, trust, page]
+      - [dpa, schedule]
+      - [nda, onrequest]
 
   - must_id: "item:B.8.5.6:reg_countries"
     description: "Countries + international orgs disclosed per row"
     excerpt_keywords:
-      - [countries, international, disclosure]
-      - [countries, international, orgs, disclosure]
-      - [international, orgs, disclosure]
-      - [international, orgs, disclosed, disclosure]
-      - [orgs, disclosed, disclosure]
-      - [per, row, disclosure]
-      - [each, row, disclosure]
-      - [column, containing, disclosure]
+      - [country, disclosed]
+      - [international, organization, listed]
+      - [subcontractor, country]
+      - [processing, location]
+      - [disclosure, register]
+      - [country, per, row]
 
   - must_id: "item:B.8.5.6:reg_disclosure_date"
     description: "Disclosure date per row (pre-use)"
     excerpt_keywords:
       - [disclosure, date]
-      - [disclosure, date, pre]
-      - [date, pre, disclosure]
-      - [date, pre, use, disclosure]
-      - [pre, use, disclosure]
-      - [per, row, disclosure]
-      - [each, row, disclosure]
-      - [column, containing, disclosure]
+      - [subcontractor, disclosure, date]
+      - [date, recorded]
+      - [date, disclosed]
+      - [disclosure, timestamp]
 
   - must_id: "item:B.8.5.6:reg_customer_id"
     description: "Customer per row"
     excerpt_keywords:
-      - [customer, id, disclosure]
-      - [per, row, disclosure]
-      - [each, row, disclosure]
-      - [column, containing, disclosure]
-      - [each, entry, disclosure]
-      - [column, header, disclosure]
+      - [subcontractor, disclosure, register]
+      - [customer, id, record]
+      - [pii, processing, subcontractor]
+      - [per, customer, row]
+      - [subprocessor, customer, reference]
 
   - must_id: "item:B.8.5.6:reg_subcontractor_id"
     description: "Subcontractor identifier per row"
     excerpt_keywords:
-      - [subcontractor, id, disclosure]
-      - [subcontractor, identifier, disclosure]
-      - [per, row, disclosure]
-      - [each, row, disclosure]
-      - [column, containing, disclosure]
-      - [each, entry, disclosure]
-      - [column, header, disclosure]
+      - [subcontractor, identifier]
+      - [subcontractor, reference]
+      - [disclosure, subcontractor, id]
+      - [register, subcontractor, id]
+      - [subcontractor, record, id]
 

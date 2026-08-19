@@ -1,0 +1,69 @@
+# Per-MUST fingerprint catalog for req:Art.7:consent_management_procedure
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.7:consent_management_procedure"
+target_control: "Art.7"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.7:owner"
+    description: "Named owner of the procedure (DPO or Privacy Lead)"
+    excerpt_keywords:
+      - [named, owner]
+      - [procedure, owner]
+      - [dpo, responsible]
+      - [privacy, lead]
+      - [owner, contact]
+      - [procedure, responsibility]
+
+  - must_id: "item:Art.7:no_conditionality"
+    description: "No conditionality of service on non-essential consent (consent must be 'freely given')"
+    excerpt_keywords:
+      - [freely, given]
+      - [consent, conditionality]
+      - [no, conditional, consent]
+      - [service, conditional, consent]
+      - [consent, nonessential]
+      - [conditionality, service, consent]
+
+  - must_id: "item:Art.7:demonstrability"
+    description: "Demonstrability — capture record retained (timestamp, mechanism, scope) per consent event"
+    excerpt_keywords:
+      - [consent, record, retained]
+      - [consent, timestamp, captured]
+      - [consent, mechanism, documented]
+      - [consent, scope, record]
+      - [consent, event, logged]
+
+  - must_id: "item:Art.7:withdrawal_mechanism"
+    description: "Withdrawal mechanism documented — must be 'as easy as' giving consent"
+    excerpt_keywords:
+      - [withdrawal, mechanism, documented]
+      - [withdrawal, as easy, consent]
+      - [withdrawal, process, simple]
+      - [withdrawal, procedure, accessible]
+      - [withdrawal, right, exercised]
+      - [withdrawal, method, clear]
+
+  - must_id: "item:Art.7:distinguishable"
+    description: "Consent request distinguishable from other matters (separate, clear-language statement)"
+    excerpt_keywords:
+      - [consent, request]
+      - [clear, language, statement]
+      - [separate, consent]
+      - [distinguishable, consent]
+      - [consent, separate, statement]
+
+  - must_id: "item:Art.7:capture_mechanism"
+    description: "Capture mechanism documented (granular, freely given, unambiguous affirmative action — no pre-ticked boxes)"
+    excerpt_keywords:
+      - [consent, capture, mechanism]
+      - [freely, given, consent]
+      - [unambiguous, affirmative, action]
+      - [no, pre, ticked, boxes]
+      - [granular, consent, options]
+

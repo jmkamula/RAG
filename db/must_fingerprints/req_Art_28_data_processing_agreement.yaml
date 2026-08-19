@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.28:data_processing_agreement
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.28:data_processing_agreement"
@@ -14,66 +13,77 @@ must_fingerprints:
   - must_id: "item:Art.28:audit"
     description: "Audit rights and information to demonstrate compliance"
     excerpt_keywords:
-      - [audit, rights, processor]
-      - [audit, rights, demonstrate, processor]
-      - [rights, demonstrate, processor]
-      - [rights, demonstrate, compliance, processor]
-      - [demonstrate, compliance, processor]
+      - [audit, rights]
+      - [demonstrate, compliance]
+      - [processor, audit, access]
+      - [audit, information]
+      - [compliance, evidence]
+      - [right, audit]
 
   - must_id: "item:Art.28:deletion"
     description: "Deletion or return of data at end of service"
     excerpt_keywords:
-      - [deletion, return, processor]
-      - [deletion, return, end, processor]
-      - [return, end, processor]
-      - [return, end, service, processor]
-      - [end, service, processor]
+      - [deletion, data, end, service]
+      - [return, personal, data]
+      - [data, processed, terminated]
+      - [upon, termination, delete]
+      - [data, erased, completion]
+      - [return, delete, data]
 
   - must_id: "item:Art.28:assistance"
     description: "Assistance with Art.32-36 obligations"
     excerpt_keywords:
-      - [assistance, art, processor]
-      - [assistance, art, obligations, processor]
-      - [art, obligations, processor]
+      - [processor, assist, art32]
+      - [processor, support, security]
+      - [processor, cooperate, data protection]
+      - [processor, help, data breach]
+      - [processor, provide, impact assessment]
+      - [processor, notify, supervisory authority]
 
   - must_id: "item:Art.28:rights"
     description: "Assistance with data subject rights"
     excerpt_keywords:
-      - [assistance, subject, processor]
-      - [assistance, subject, rights, processor]
-      - [subject, rights, processor]
+      - [data subject, rights]
+      - [assist, data subject]
+      - [processor, obligation]
+      - [support, subject request]
+      - [respond, data subject]
+      - [facilitate, rights request]
 
   - must_id: "item:Art.28:subprocessors"
     description: "Sub-processor restrictions and approval process"
     excerpt_keywords:
-      - [sub, processor]
-      - [sub, processor, restrictions]
-      - [processor, restrictions]
-      - [processor, restrictions, approval]
-      - [restrictions, approval, processor]
+      - [subprocessor, approval, process]
+      - [restriction, subprocessor]
+      - [subprocessor, authorization, required]
+      - [approval, subprocessor]
+      - [subprocessor, engagement, criteria]
 
   - must_id: "item:Art.28:security"
     description: "Security measures per Art.32"
     excerpt_keywords:
-      - [security, measures, processor]
-      - [security, measures, art, processor]
-      - [measures, art, processor]
+      - [security measures, art32]
+      - [processor, security, measures]
+      - [data processing, security]
+      - [art32, technical, organizational]
+      - [security, risk assessment]
+      - [processor, security, requirements]
 
   - must_id: "item:Art.28:confidentiality"
     description: "Confidentiality obligations on processor staff"
     excerpt_keywords:
-      - [confidentiality, obligations, processor]
-      - [confidentiality, obligations, processor]
-      - [obligations, processor]
-      - [obligations, processor, staff]
-      - [processor, staff]
+      - [processor, confidentiality, obligations]
+      - [confidentiality, staff, processor]
+      - [confidentiality, undertaking, processor]
+      - [confidentiality, agreement, processor]
+      - [processor, confidentiality, requirements]
 
   - must_id: "item:Art.28:instructions"
     description: "Process only on documented controller instructions"
     excerpt_keywords:
-      - [only, documented, processor]
-      - [only, documented, controller, processor]
-      - [documented, controller, processor]
-      - [documented, controller, instructions, processor]
-      - [controller, instructions, processor]
+      - [documented, controller, instructions]
+      - [process, controller, instructions]
+      - [only, controller, instructions]
+      - [processing, controller, instructions]
+      - [controller, written, instructions]
 
