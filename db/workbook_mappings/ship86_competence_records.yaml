@@ -1,0 +1,54 @@
+# Workbook mapping: Competence Records sheet
+# LLM-authored by Ship 86'.a (curator sweep 2026-08-19).
+# Confidence: high. Rationale: The sheet contains employee IDs, roles, competency areas, evaluation dates, assessment scores, and certification details, matching the ISMS Competence
+
+schema_version: 1
+mapping_id: workbook.llm_curated.competence_records
+
+# ── Sheet identification ─────────────────────────────────────────────
+sheet_name_fingerprints:
+  - tokens: [competence, records]
+  - tokens: [competence, record]
+  - tokens: [employee, competence]
+  - tokens: [training, records]
+  - tokens: [skills, assessment]
+
+header_row_hints: [1, 2, 3]
+min_data_rows: 1
+
+# ── Extraction passes ─────────────────────────────────────────────────
+passes:
+
+  - pass_name: register
+    target_control: 7.2
+    target_evidence_requirement: "req:7.2:competence_record"
+    target_evidence_type: register
+
+    column_bindings:
+      - column_fingerprint: [employees, id]
+        binds_to_must_id: "item:7.2:owner"
+        required: true
+      - column_fingerprint: [role]
+        binds_to_must_id: "item:7.2:required_competence"
+        required: true
+      - column_fingerprint: [competency, area]
+        binds_to_must_id: "item:7.2:basis_of_competence"
+        required: true
+      - column_fingerprint: [assesment, score]
+        binds_to_must_id: "item:7.2:effectiveness"
+        required: true
+      - column_fingerprint: [certification, name]
+        binds_to_must_id: "item:7.2:basis_of_competence"
+        required: false
+      - column_fingerprint: [certification, expiry]
+        binds_to_must_id: "item:7.2:basis_of_competence"
+        required: false
+      - column_fingerprint: [training, required]
+        binds_to_must_id: "item:7.2:basis_of_competence"
+        required: false
+      - column_fingerprint: [evaluation, date]
+        binds_to_must_id: "item:7.2:effectiveness"
+        required: false
+      - column_fingerprint: [next, review, date]
+        binds_to_must_id: "item:7.2:documented"
+        required: false

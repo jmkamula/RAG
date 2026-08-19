@@ -1,0 +1,39 @@
+# Workbook mapping: This Doc Chng Control sheet
+# LLM-authored by Ship 86'.a (curator sweep 2026-08-19).
+# Confidence: high. Rationale: The sheet contains document titles, IDs, owners, versions, and language, consistent with a document register or document change control record as requ
+
+schema_version: 1
+mapping_id: workbook.llm_curated.this_doc_chng_control
+
+# ── Sheet identification ─────────────────────────────────────────────
+sheet_name_fingerprints:
+  - tokens: [document, register]
+  - tokens: [document, control]
+  - tokens: [document, change, control]
+  - tokens: [doc, change, control]
+  - tokens: [document, management]
+
+header_row_hints: [1, 2, 3]
+min_data_rows: 1
+
+# ── Extraction passes ─────────────────────────────────────────────────
+passes:
+
+  - pass_name: register
+    target_control: 7.5
+    target_evidence_requirement: "req:7.5:isms_document_register"
+    target_evidence_type: register
+
+    column_bindings:
+      - column_fingerprint: [title]
+        binds_to_must_id: "item:7.5:reg_title"
+        required: true
+      - column_fingerprint: [document, id]
+        binds_to_must_id: "item:7.5:reg_doc_id"
+        required: true
+      - column_fingerprint: [owner]
+        binds_to_must_id: "item:7.5:reg_owner"
+        required: true
+      - column_fingerprint: [version]
+        binds_to_must_id: "item:7.5:reg_version"
+        required: true

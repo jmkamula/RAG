@@ -1,0 +1,39 @@
+# Workbook mapping: Risk Comms Matrix sheet
+# LLM-authored by Ship 86'.a (curator sweep 2026-08-19).
+# Confidence: high. Rationale: The sheet tracks risk-related communications with interested parties, methods, frequency, and status, matching the ISMS Communication Procedure eviden
+
+schema_version: 1
+mapping_id: workbook.llm_curated.risk_comms_matrix
+
+# ── Sheet identification ─────────────────────────────────────────────
+sheet_name_fingerprints:
+  - tokens: [risk, communications, matrix]
+  - tokens: [risk, comms, matrix]
+  - tokens: [communication, matrix]
+  - tokens: [risk, communication, register]
+  - tokens: [communication, event, register]
+
+header_row_hints: [1, 2, 3]
+min_data_rows: 1
+
+# ── Extraction passes ─────────────────────────────────────────────────
+passes:
+
+  - pass_name: register
+    target_control: 7.4
+    target_evidence_requirement: "req:7.4:isms_communication_procedure"
+    target_evidence_type: communication_event_register
+
+    column_bindings:
+      - column_fingerprint: [risk, id]
+        binds_to_must_id: "item:7.4:what"
+        required: true
+      - column_fingerprint: [interested, party]
+        binds_to_must_id: "item:7.4:with_whom"
+        required: true
+      - column_fingerprint: [comms, method]
+        binds_to_must_id: "item:7.4:how"
+        required: true
+      - column_fingerprint: [frequency]
+        binds_to_must_id: "item:7.4:when"
+        required: true
