@@ -1,0 +1,27 @@
+# LLM-authored ground truth for A_5_1_annual_review.xlsx
+# Model: claude-opus-4-7 — 2-pass structured (Ship 82'.a).
+# Total verdicts: 3
+
+doc: A_5_1_annual_review.xlsx
+annotator: claude-opus-4-7
+generated_at: 2026-08-19T17:02:43Z
+
+musts:
+  - must_id: item:A.5.1:review_date
+    verdict: satisfies
+    confidence: high
+    quote: "2029-07-29 00:00:00"
+    rationale: "A review date is recorded in the register."
+
+  - must_id: item:A.5.1:review_outcome
+    verdict: partial
+    confidence: medium
+    quote: "Approvment as per ArionComply findings"
+    rationale: "An outcome is noted but it does not clearly map to the expected categories (no change / amended to vN / retired)."
+
+  - must_id: item:A.5.1:review_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "Zorko Petrusa"
+    rationale: "Reviewer name is provided but no role/title is stated."
+

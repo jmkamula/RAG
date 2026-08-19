@@ -20,6 +20,8 @@ MEASUREMENT_DIR = Path("/data/arioncomply/docs/ground_truth/ship77d_measurement"
 XLSX_DOCS = {
     "iso_workbook":  "ISO 27001 workbook Arion Networks.xlsm",
     "raci":          "rt_raci_filled.xlsx",
+    "a51_review":    "A_5_1_annual_review.xlsx",
+    "a51_comm":      "A_5_1_communication_record.xlsx",
 }
 
 

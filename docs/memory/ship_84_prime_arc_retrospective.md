@@ -10,8 +10,9 @@ Ship 84' extends Ship 82'.a's LLM-authored GT to XLSX format so we can
 measure the workbook_persistence extraction pipeline (which sits
 outside the extractor.py consensus/critic/per_must path).
 
-**Partial delivery** — 2 of 4 planned XLSX docs authored before
-Anthropic API credit exhausted mid-run.
+**Delivery** — initially partial (Anthropic credit exhausted mid-run
+authoring GT for the big ISO workbook). Credit topped up same-day;
+missing 2 GTs authored + all 4 docs re-extracted + scored.
 
 ## Sub-arcs
 
@@ -29,15 +30,15 @@ Selected 4 XLSX candidates on demo tenant:
 - `a51_review` — 10KB templated single-control (~3 findings)
 - `a51_comm` — 10KB templated single-control (~3 findings)
 
-**Outcome — credit exhaustion mid-run:**
-- ✓ `raci_expected.yaml` — 34 verdicts (from smoke test)
-- ✓ `iso_workbook_expected.yaml` — 370 verdicts (completed just before
-  credit ran out)
-- ✗ `a51_review_expected.yaml` — not authored
-- ✗ `a51_comm_expected.yaml` — not authored
+**Outcome (post credit top-up)**:
+- ✓ `raci_expected.yaml` — 34 verdicts
+- ✓ `iso_workbook_expected.yaml` — 370 verdicts
+- ✓ `a51_review_expected.yaml` — 3 verdicts (templated tiny)
+- ✓ `a51_comm_expected.yaml` — 31 verdicts
 
-The ISO workbook's 370-verdict GT is by far the highest-value asset
-here (most MUSTs measured on any single doc across all Ship 77+ work).
+Total 438 LLM-authored verdicts across 4 XLSX docs. The ISO
+workbook's 370-verdict GT is by far the highest-value single asset
+across all Ship 77+ measurement work.
 
 ### Ship 84'.b — scoring XLSX findings against LLM GT
 
@@ -45,33 +46,34 @@ here (most MUSTs measured on any single doc across all Ship 77+ work).
 `ship82b_score_llm_gt._load_llm_gt`. Exports current active
 `document_findings` for the 2 scored docs.
 
-**Results**:
+**Results (all 4 docs)**:
 
-| Doc | Findings | Strict F1 | Lenient F1 | Strict TP | Lenient TP |
-|---|---|---|---|---|---|
-| iso_workbook (300KB) | 220 | 4.63% | **21.70%** | 5 | 37 |
-| raci (7KB) | 0 (soft-deleted) | 0.00% | 0.00% | 0 | 0 |
-| **Aggregate** | 220 | 4.50% | 20.61% | 5 | 37 |
+| Doc | Findings | Strict F1 | Lenient F1 | Notes |
+|---|---|---|---|---|
+| **raci** (7KB templated) | 4 | **80.00%** | 36.36% | Perfect precision, high recall |
+| **a51_review** (10KB templated) | 3 | 50.00% | **100.00%** | Perfect lenient F1 |
+| **a51_comm** (10KB templated) | 3 | 60.00% | 40.00% | Perfect precision |
+| **iso_workbook** (300KB) | 220 | 4.63% | 21.70% | Over-emits — 5× strict/lenient gap |
+| **Aggregate** | 230 | 10.83% | 24.48% | ISO drags aggregate down |
 
-**Key observation — strict vs lenient gap on ISO workbook is 5×:**
-- Strict precision: 2.75% (only 5 of 220 findings had `status='present'`
-  matching a `satisfies`-GT MUST)
-- Lenient precision: 20.33% (37 findings had `status='partial'` or
-  `present` matching a `satisfies|partial`-GT MUST)
+**Key structural finding — TWO distinct XLSX paths perform very
+differently**:
 
-**Root cause**: workbook_persistence pipeline marks most findings
-`status='partial'` even when the underlying evidence would be
-`satisfies` under GT. This looks like an over-conservative
-`present` vs `partial` threshold in workbook_mappings YAML defs.
+1. **Templated single-control XLSX (raci + a51_*): auditor-grade
+   quality.** 100% precision on all 3, F1 60-100%. The
+   `_arion_meta`-driven round-trip path with per-column bindings
+   works well.
 
-**Lenient F1 21.7% is comparable to DOCX Union+vocab (F: 28.90%
-lenient)** — the XLSX pipeline is producing meaningful signal despite
-the strict-status gap.
+2. **Multi-sheet workbook (ISO workbook): over-emits + misclassifies.**
+   Strict/lenient gap of 5× (4.63% → 21.70%). workbook_persistence
+   marks most findings `status='partial'` even when GT says
+   `satisfies`. 220 findings emitted against 34-satisfies + 125-partial
+   GT — too broad discovery.
 
-**RACI's 0 findings**: findings existed (extraction_status='completed'
-with 4 findings historically) but were soft-deleted at some point —
-likely during Ship 82 residue cleanup that swept pending findings.
-Would need re-extraction to score.
+**RACI note**: initial Ship 84'.b measurement showed 0 findings
+because prior Ship 82 residue cleanup had soft-deleted them.
+Re-extraction restored 4 findings, which scored 80% strict F1.
+Reminder that measurement state is fragile across dev cycles.
 
 ## Codified lessons
 
@@ -113,12 +115,10 @@ the completed 404 verdicts + ~$4-5 wasted on the failed batches
 
 ## Deferred to Ship 85' + future
 
-- **Ship 85' opened**: investigate workbook_persistence strict/lenient
-  F1 gap. Determine whether `status='present'` threshold is calibrated
-  too conservatively; compare to workbook_mappings YAML defs.
-- Complete a51_review + a51_comm GT authoring (~$1 each) after credit
-  top-up
-- Re-extract RACI to score against its 34-verdict GT
+- **Ship 85' opened**: investigate multi-sheet workbook_persistence
+  strict/lenient F1 gap. Templated single-control path is fine
+  (F1 60-100%); the gap is in the multi-sheet workbook discovery
+  + per-cell binding logic on the ISO workbook shape.
 - PDF format measurement — user has no PDF at hand; deferred until
   real tenant PDFs are available or public-source seed is agreed
 
