@@ -1,0 +1,2660 @@
+# LLM-authored ground truth for Processor Operations Procedures.docx
+# Model: claude-opus-4-7 — 2-pass structured (Ship 82'.a).
+# Total verdicts: 416
+
+doc: Processor Operations Procedures.docx
+annotator: claude-opus-4-7
+generated_at: 2026-08-19T11:37:28Z
+
+musts:
+  - must_id: item:A.5.34:pii_inventory
+    verdict: partial
+    confidence: medium
+    quote: "PII Categories
+
+Data types involved"
+    rationale: "Log requires PII categories field but doesn't enumerate specific categories like special-category or link to RoPA."
+
+  - must_id: item:A.5.34:reg_controls_applied
+    verdict: satisfies
+    confidence: high
+    quote: "Security Controls
+
+Summary of encryption, segregation, MFA, etc."
+    rationale: "Processor Operations Log explicitly captures security controls including encryption, segregation and MFA per activity."
+
+  - must_id: item:A.5.34:reg_data_subjects
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Log fields don't include data subject categories per activity."
+
+  - must_id: item:A.5.34:reg_lawful_basis
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "As processor, lawful basis is controller's responsibility; document doesn't record it per activity."
+
+  - must_id: item:A.5.34:reg_owner_per_activity
+    verdict: partial
+    confidence: low
+    quote: "Owner: Data Protection & Risk Manager"
+    rationale: "Document owner is stated but per-activity owner assignment is not clearly defined in the log fields."
+
+  - must_id: item:A.5.34:reg_purposes
+    verdict: satisfies
+    confidence: high
+    quote: "Processing Purpose
+
+Purposes documented in customer DPA"
+    rationale: "Processing purpose is a required log field tied to the customer DPA per activity."
+
+  - must_id: item:A.5.34:reg_retention
+    verdict: partial
+    confidence: medium
+    quote: "Processing Duration
+
+Contractual or technical lifespan"
+    rationale: "Log captures processing duration but without concrete triggers or schedule cross-link."
+
+  - must_id: item:A.5.34:reg_transfers
+    verdict: partial
+    confidence: medium
+    quote: "Primary data storage: EU (specific Azure region TBD at deployment)
+
+- AI processing: EU (Azure OpenAI EU region)
+
+- Subprocessors: Microsoft (EU-US DPF certified)"
+    rationale: "Jurisdictions and DPF mechanism mentioned generally but not recorded per activity."
+
+  - must_id: item:A.5.34:applicable_laws
+    verdict: satisfies
+    confidence: high
+    quote: "applicable data protection legislation (GDPR, Czech Act No. 110/2019)"
+    rationale: "Specific applicable laws named (GDPR and Czech Act No. 110/2019)."
+
+  - must_id: item:A.5.34:breach_handling
+    verdict: partial
+    confidence: low
+    quote: "Unauthorized use is treated as a security incident per DOC003, section 3.13"
+    rationale: "References incident procedure but no explicit GDPR Art.33/34 72-hour notification cross-link."
+
+  - must_id: item:A.5.34:data_subject_rights
+    verdict: partial
+    confidence: medium
+    quote: "Customers can independently handle data subject requests using ArionComply:
+
+- Search documents by name/email/ID
+- Export documents \(original format\)
+- Edit documents to correct or anonymize PII
+- Delete documents completely"
+    rationale: "Document addresses DSR handling as processor assisting controllers with response SLAs (10 business days) but does not enumerate the full set of GDPR rights or link to a DSAR procedure."
+
+  - must_id: item:A.5.34:lawful_basis
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Document is a processor operations procedure; lawful basis identification is a controller obligation not addressed here."
+
+  - must_id: item:A.5.34:owner
+    verdict: satisfies
+    confidence: high
+    quote: "__Owner:__ Data Protection & Risk Manager"
+    rationale: "Named owner (Data Protection & Risk Manager) is identified for the procedure."
+
+  - must_id: item:A.5.34:retention_minimisation
+    verdict: partial
+    confidence: medium
+    quote: "Retained for 5 years after end of engagement"
+    rationale: "Retention periods are stated for logs and deletion evidence, but data minimisation principles are not explicitly addressed."
+
+  - must_id: item:A.5.34:security_controls_ref
+    verdict: partial
+    confidence: medium
+    quote: "Use encryption in transit \(TLS 1\.2\+\)"
+    rationale: "References security measures like encryption, MFA, and access control but does not explicitly cross-link to A.8.x controls or GDPR Art.32."
+
+  - must_id: item:A.5.34:transfer_restrictions
+    verdict: partial
+    confidence: medium
+    quote: "Subprocessors: Microsoft \(EU\-US DPF certified\)"
+    rationale: "Mentions EU processing locations and DPF certification for subprocessors and jurisdiction change management, but does not enumerate SCCs/adequacy/BCRs mechanisms comprehensively."
+
+  - must_id: item:A.5.34:scope_controller_role
+    verdict: satisfies
+    confidence: high
+    quote: "Applies to all services where Arion Networks acts as a processor or subprocessor of personal data on behalf of a client \(controller\)"
+    rationale: "Document clearly establishes Arion's processor/subprocessor role vis-à-vis client controllers."
+
+  - must_id: item:A.5.34:scope_data_subjects
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document does not enumerate categories of data subjects touched by processing."
+
+  - must_id: item:A.5.34:scope_jurisdictions
+    verdict: partial
+    confidence: medium
+    quote: "Primary data storage: EU \(specific Azure region TBD at deployment\)
+
+\- AI processing: EU \(Azure OpenAI EU region\)"
+    rationale: "Processing locations (EU) are identified but HQ, data subject residency, and full jurisdictional scope are not comprehensively documented."
+
+  - must_id: item:A.5.34:scope_privacy_laws
+    verdict: partial
+    confidence: medium
+    quote: "applicable data protection legislation \(GDPR, Czech Act No\. 110/2019\)"
+    rationale: "GDPR and Czech Act 110/2019 are cited but no per-jurisdiction enumeration of other applicable laws is provided."
+
+  - must_id: item:A.5.34:scope_regulated_activities
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Document is a processor operations procedure, not a privacy applicability/scope review under A.5.34."
+
+  - must_id: item:A.5.34:rev_breach_history
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "No periodic privacy review of breach history is within this document's scope."
+
+  - must_id: item:A.5.34:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Review dates are marked TBD, so no actual review date is recorded."
+
+  - must_id: item:A.5.34:rev_dpia_review
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "This procedure covers processor DPIA assistance only, not a periodic DPIA completion review."
+
+  - must_id: item:A.5.34:rev_dsar_metrics
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Document does not concern periodic DSAR metrics review."
+
+  - must_id: item:A.5.34:rev_register_check
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "No per-activity review of a processing register is documented here."
+
+  - must_id: item:A.5.34:rev_register_update
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Document does not perform or reference propagation of review changes to a live register."
+
+  - must_id: item:A.5.34:rev_reviewer
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Reviewer identity/role for a privacy review is not captured; approval fields are blank."
+
+  - must_id: item:A.5.34:rev_scope_check
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "No cross-check of privacy applicability scope is performed in this processor procedure."
+
+  - must_id: item:A.5.34:rev_transfer_validity
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Transfer mechanism validity check is not the purpose of this document."
+
+  - must_id: item:A.8.10:scope_classes
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document does not enumerate information classes with retention triggers per class."
+
+  - must_id: item:A.8.10:scope_media_methods
+    verdict: partial
+    confidence: medium
+    quote: "Delete remaining copies (active + backup)"
+    rationale: "Mentions deletion of active and backup copies but does not enumerate media classes with specific deletion methods per class."
+
+  - must_id: item:A.8.10:scope_vendor_managed
+    verdict: partial
+    confidence: medium
+    quote: "All sub‑processor notifications and customer responses are retained for 5 years and logged in the Third‑Party Processor & Subprocessor Oversight Procedure (DOC058)"
+    rationale: "References subprocessor oversight but does not explicitly delegate vendor-managed deletion obligations to A.5.19/A.5.20 contract terms."
+
+  - must_id: item:A.8.10:rev_backup_completeness
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No backup-sweep completeness sampling evidence present."
+
+  - must_id: item:A.8.10:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: "Last Reviewed: TBD"
+    rationale: "Review date is TBD, not within a planned interval."
+
+  - must_id: item:A.8.10:rev_legal_hold_inventory
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No legal-hold inventory reconfirmation evidence."
+
+  - must_id: item:A.8.10:rev_register_update
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No evidence of findings propagated to procedure or scope."
+
+  - must_id: item:A.8.10:rev_reviewer
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No joint Data Protection + Infrastructure + Legal reviewer identity documented for retention review."
+
+  - must_id: item:A.8.10:rev_trigger_attainment
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No retention-trigger attainment check evidence."
+
+  - must_id: item:A.8.10:reg_backup_sweep
+    verdict: partial
+    confidence: medium
+    quote: "Delete remaining copies (active + backup)"
+    rationale: "Mentions backup deletion in procedure step but no per-deletion backup-sweep confirmation record or deferral rationale specified."
+
+  - must_id: item:A.8.10:reg_event_id
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No requirement for a unique per-deletion event identifier in the deletion log."
+
+  - must_id: item:A.8.10:reg_method
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Deletion procedure does not require logging the specific deletion method per media class."
+
+  - must_id: item:A.8.10:reg_target
+    verdict: partial
+    confidence: medium
+    quote: "All return/deletion actions recorded in PII Deletion Log with Processing Role = 'Processor'"
+    rationale: "A deletion log is maintained but the doc does not explicitly specify recording a target identifier (dataset/asset id)."
+
+  - must_id: item:A.8.10:reg_trigger
+    verdict: partial
+    confidence: low
+    quote: "Upon termination of a processing relationship:"
+    rationale: "Termination trigger implied but no explicit requirement to log the trigger type per deletion event."
+
+  - must_id: item:A.8.10:reg_verification
+    verdict: satisfies
+    confidence: medium
+    quote: "Proof of deletion: Log, audit hash, screenshot, or signed form retained for 3 years post-contract"
+    rationale: "Verification artefacts for each deletion are explicitly required and retained."
+
+  - must_id: item:A.8.10:deletion_methods
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No definition of deletion methods per media class (overwrite, crypto-erase, physical destruction)."
+
+  - must_id: item:A.8.10:gdpr_erasure_path
+    verdict: partial
+    confidence: medium
+    quote: "Delete documents completely"
+    rationale: "Data subject deletion capability described but no explicit GDPR Art.17 erasure path or cross-link to A.5.34."
+
+  - must_id: item:A.8.10:legal_hold
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No legal-hold mechanism overriding deletion is described."
+
+  - must_id: item:A.8.10:retention_trigger
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No cross-link to A.5.33 retention schedule as the deletion trigger source."
+
+  - must_id: item:A.8.10:scope_systems
+    verdict: partial
+    confidence: medium
+    quote: "Delete remaining copies (active + backup)"
+    rationale: "Backups mentioned but replicas, caches, and audit copies are not explicitly covered in deletion scope."
+
+  - must_id: item:A.8.10:verification
+    verdict: satisfies
+    confidence: high
+    quote: "Proof of deletion: Log, audit hash, screenshot, or signed form retained for 3 years post-contract"
+    rationale: "Document requires verification of deletion via audit hash, screenshots, and signed forms."
+
+  - must_id: item:Art.28:scope_controller_vs_processor
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document assumes processor role but does not articulate a means-and-purpose test to distinguish controller vs processor."
+
+  - must_id: item:Art.28:scope_exclusions
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No mention of out-of-scope vendors or exclusions from processor scope."
+
+  - must_id: item:Art.28:scope_processor_types
+    verdict: partial
+    confidence: medium
+    quote: "Includes consulting services, SaaS tools, custom deployments, subprocessed workstreams and eny other services involving client PII processing"
+    rationale: "Scope lists some processor service types but not the broader vendor categories like payroll, analytics, marketing."
+
+  - must_id: item:Art.28:assistance
+    verdict: satisfies
+    confidence: high
+    quote: "Assisting customers with their GDPR obligations (B.8.2.1)"
+    rationale: "Section 6 details DPIA assistance, security assistance, and audit cooperation aligned with Art.32-36."
+
+  - must_id: item:Art.28:audit
+    verdict: satisfies
+    confidence: high
+    quote: "Customer audit rights per DPA:
+
+- Evidence provided: Policy excerpts, ISO certificates, security documentation"
+    rationale: "Section 6.3 explicitly defines audit rights and information provisioning."
+
+  - must_id: item:Art.28:confidentiality
+    verdict: partial
+    confidence: medium
+    quote: "Staff with access to customer data are trained that data may only be used for documented purposes"
+    rationale: "Document references staff training on purpose limitation but does not explicitly impose confidentiality obligations on staff."
+
+  - must_id: item:Art.28:deletion
+    verdict: satisfies
+    confidence: high
+    quote: "The default expectation is complete and secure deletion of PII unless otherwise agreed
+	- Clients may formally request return of data in structured, commonly used, machine-readable format"
+    rationale: "Section 4 covers deletion/return at end of service in detail."
+
+  - must_id: item:Art.28:instructions
+    verdict: satisfies
+    confidence: high
+    quote: "Arion processes customer PII ONLY for purposes specified in the customer's DPA"
+    rationale: "Documented instructions management (Section 6.1) confirms processing only on documented instructions."
+
+  - must_id: item:Art.28:rights
+    verdict: satisfies
+    confidence: high
+    quote: "Arion Networks provides customers with means to fulfill data subject requests"
+    rationale: "Section 8 covers assistance with data subject rights via platform and support."
+
+  - must_id: item:Art.28:security
+    verdict: partial
+    confidence: medium
+    quote: "Security Controls
+
+Summary of encryption, segregation, MFA, etc"
+    rationale: "Document references security measures (encryption, MFA, TLS 1.2+) but does not comprehensively map to Art.32 requirements."
+
+  - must_id: item:Art.28:subprocessors
+    verdict: satisfies
+    confidence: high
+    quote: "Email notification sent to ALL active ArionComply customers minimum __30 days before__ the new sub\-processor commences processing"
+    rationale: "Sections 11 and 12 define sub-processor disclosure, notification, objection, and approval process."
+
+  - must_id: item:Art.28:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Review date fields are blank (TBD) with no evidence of review within a planned interval."
+
+  - must_id: item:Art.28:rev_dpa_currency
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "This document is a processor operations procedure, not a controller-side DPA currency review."
+
+  - must_id: item:Art.28:rev_reviewer
+    verdict: partial
+    confidence: low
+    quote: "__ Reviewed by__: PIMS Manager"
+    rationale: "A reviewer role is named but does not clearly identify DPO plus procurement/vendor management lead."
+
+  - must_id: item:Art.28:rev_security_currency
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence of currency review of Art.32-equivalent security certifications or audits."
+
+  - must_id: item:Art.28:rev_subprocessor_audit
+    verdict: partial
+    confidence: low
+    quote: "Change logged in __Subprocessor Register__ with notification date and any objections received"
+    rationale: "A sub-processor register is referenced but no explicit audit of authorised vs unauthorised sub-processors is documented."
+
+  - must_id: item:Art.28:reg_data_categories
+    verdict: satisfies
+    confidence: high
+    quote: "PII Categories
+
+Data types involved"
+    rationale: "Processor Operations Log includes PII Categories field per client engagement."
+
+  - must_id: item:Art.28:reg_dpa_version
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Log fields do not include DPA version or execution date per row."
+
+  - must_id: item:Art.28:reg_processor_id
+    verdict: partial
+    confidence: medium
+    quote: "Client ID
+
+Unique client identifier
+
+Customer Name
+
+Name of customer organization"
+    rationale: "Log identifies clients but this is a processor-side log; no clear per-row processor entity/jurisdiction identifier as such."
+
+  - must_id: item:Art.28:reg_security_check
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document mentions security measures generically but does not specify per-row Art.32-equivalent security assurance source such as certifications or audit reports for sub-processors."
+
+  - must_id: item:Art.28:reg_subprocessors
+    verdict: partial
+    confidence: medium
+    quote: "All sub-processors used at the time of contract signing are listed in Section 8 of the Customer DPA (DOC065)."
+    rationale: "References that sub-processors are listed in the DPA and a Subprocessor Register, but the document itself does not enumerate them per row."
+
+  - must_id: item:Art.30:categories_data
+    verdict: partial
+    confidence: medium
+    quote: "PII Categories
+
+Data types involved"
+    rationale: "Processor Operations Log includes a PII Categories field but the document does not itself contain populated per-activity categories."
+
+  - must_id: item:Art.30:categories_ds
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No mention of categories of data subjects in the log fields or elsewhere."
+
+  - must_id: item:Art.30:controller_name
+    verdict: partial
+    confidence: medium
+    quote: "Client ID
+
+Unique client identifier
+
+Customer Name
+
+Name of customer organization"
+    rationale: "Log captures customer (controller) name/ID but no DPO or representative contact details required by Art.30."
+
+  - must_id: item:Art.30:processor_records
+    verdict: satisfies
+    confidence: high
+    quote: "Maintain a log for each client engagement where Arion processes PII"
+    rationale: "This procedure establishes processor-side records with fields matching Art.30(2)(a-d): client, purposes, categories, subprocessors, security measures."
+
+  - must_id: item:Art.30:purposes
+    verdict: satisfies
+    confidence: high
+    quote: "Processing Purpose
+
+Purposes documented in customer DPA"
+    rationale: "Log explicitly captures processing purposes per client engagement."
+
+  - must_id: item:Art.30:recipients
+    verdict: partial
+    confidence: medium
+    quote: "Subprocessors
+
+Any used in processing chain"
+    rationale: "Subprocessors captured as recipients but broader categories of recipients/third parties not clearly listed."
+
+  - must_id: item:Art.30:retention
+    verdict: partial
+    confidence: medium
+    quote: "Processing Duration
+
+Contractual or technical lifespan"
+    rationale: "Processing duration is logged but envisaged erasure time limits per data category are not clearly specified."
+
+  - must_id: item:Art.30:security
+    verdict: satisfies
+    confidence: high
+    quote: "Security Controls
+
+Summary of encryption, segregation, MFA, etc."
+    rationale: "Log field captures general description of technical and organisational security measures."
+
+  - must_id: item:Art.30:transfers
+    verdict: partial
+    confidence: medium
+    quote: "Current jurisdictions (as of launch):
+
+- Primary data storage: EU (specific Azure region TBD at deployment)
+
+- AI processing: EU (Azure OpenAI EU region)
+
+- Subprocessors: Microsoft (EU-US DPF certified)"
+    rationale: "Document identifies current jurisdictions and DPF safeguard but does not comprehensively catalog transfer safeguards for each processing activity."
+
+  - must_id: item:Art.30:proc_dpa_gate
+    verdict: partial
+    confidence: medium
+    quote: "All sub-processors used at the time of contract signing are listed in Section 8 of the Customer DPA (DOC065). By accepting the DPA, the customer acknowledges and approves the listed sub-processors"
+    rationale: "Ties sub-processor changes to DPA update but does not explicitly gate register entry completion on DPA execution."
+
+  - must_id: item:Art.30:proc_dpia_gate
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Document mentions DPIA assistance to customers but does not require DPIA completion before register entries for high-risk new processing."
+
+  - must_id: item:Art.30:proc_maintainer
+    verdict: partial
+    confidence: medium
+    quote: "Owner: Data Protection & Risk Manager"
+    rationale: "DP&RM is named as document owner and responsible for various logs, but no explicit designation as register maintainer for Art.30 records."
+
+  - must_id: item:Art.30:proc_triggers
+    verdict: partial
+    confidence: medium
+    quote: "Reviewed at least annually or upon significant change"
+    rationale: "Mentions review upon significant change and covers sub-processor and jurisdiction change triggers, but does not enumerate a complete list of Art.30 update triggers."
+
+  - must_id: item:Art.30:proc_update_path
+    verdict: partial
+    confidence: medium
+    quote: "DP&RM identifies planned sub-processor change (e.g., new cloud provider, replacement AI service)
+2. DP&RM prepares customer notification email"
+    rationale: "Describes update path for sub-processor and jurisdiction changes but not a general trigger-to-register update workflow with notify/review/approve roles."
+
+  - must_id: item:Art.44:scope_eu_eea
+    verdict: partial
+    confidence: medium
+    quote: "Primary data storage: EU (specific Azure region TBD at deployment)
+
+- AI processing: EU (Azure OpenAI EU region)
+
+- Subprocessors: Microsoft (EU-US DPF certified)"
+    rationale: "Identifies EU as primary jurisdiction and DPF for US, but no explicit EU/EEA scope boundary definition."
+
+  - must_id: item:Art.44:scope_excluded_flows
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No discussion of excluded flows such as intra-EU/EEA, transit-only, or non-personal data."
+
+  - must_id: item:Art.44:scope_transfer_definition
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Document does not define 'transfer' per EDPB 05/2021 three cumulative criteria."
+
+  - must_id: item:Art.44:level_of_protection
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No level-of-protection / TIA assessment described per Art.44 final clause."
+
+  - must_id: item:Art.44:mechanism_selection
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Document does not describe a mechanism-selection decision tree between Art.45 adequacy, Art.46 safeguards, Art.47 BCRs, or Art.49 derogations."
+
+  - must_id: item:Art.44:onward_transfer
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No provisions addressing onward transfers from a third country to another third country."
+
+  - must_id: item:Art.44:owner
+    verdict: partial
+    confidence: medium
+    quote: "Owner: Data Protection & Risk Manager"
+    rationale: "A single owner (DP&RM) is named, but legal counsel is not designated as a joint owner for transfer governance."
+
+  - must_id: item:Art.44:transfer_identification
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No intake mechanism to flag cross-border data flows at vendor onboarding or integration design is described."
+
+  - must_id: item:Art.44:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: "Last Reviewed: TBD 
+Next Review Date: TBD"
+    rationale: "Review dates are marked TBD; no confirmed date within a planned interval."
+
+  - must_id: item:Art.44:rev_mechanism_validity
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No procedure to sample/verify current validity of adequacy decisions, SCCs, or BCRs."
+
+  - must_id: item:Art.44:rev_register_currency
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No transfer register with last-assessment freshness tracking is described."
+
+  - must_id: item:Art.44:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No named reviewer combination of DPO, legal counsel, and procurement for transfer reviews."
+
+  - must_id: item:Art.44:rev_silent_transfer_sweep
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No procedure to sweep for unflagged transfers due to new vendors or service changes."
+
+  - must_id: item:Art.44:reg_assessed_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No transfer register with per-row last-assessed date field is defined."
+
+  - must_id: item:Art.44:reg_data_categories
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document mentions PII categories fields in operational logs but does not maintain an international transfer register with per-row data categories."
+
+  - must_id: item:Art.44:reg_destination
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No transfer register with per-row destination country and recipient entity is defined; only general jurisdiction statements exist."
+
+  - must_id: item:Art.44:reg_mechanism
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No per-row citation of Art.45/46/47/49 transfer mechanism is provided in any register."
+
+  - must_id: item:Art.44:reg_owner
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No transfer register with per-row owner assignment exists in the document."
+
+  - must_id: item:Art.44:reg_transfer_id
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No unique transfer identifier scheme or transfer register is defined."
+
+  - must_id: item:Art.48:scope_agreements
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No catalogue of international agreements (MLAT, sector-specific) is included."
+
+  - must_id: item:Art.48:scope_authority_types
+    verdict: partial
+    confidence: low
+    quote: "When ANY disclosure request is received (law enforcement, court, regulator, or other third party):"
+    rationale: "Document lists authority types generally but does not scope them for foreign-authority Art.48 handling specifically."
+
+  - must_id: item:Art.48:scope_excluded
+    verdict: partial
+    confidence: low
+    quote: "Default response: REJECT"
+    rationale: "Non-legally binding requests are rejected, but no explicit exclusion of foreign subpoenas absent MLAT/Art.49 basis is stated."
+
+  - must_id: item:Art.48:agreement_check
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No requirement to verify request is based on an international agreement (MLAT/treaty) is defined."
+
+  - must_id: item:Art.48:art49_overlay
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No Art.49 derogation overlay analysis for disclosure requests is described."
+
+  - must_id: item:Art.48:intake
+    verdict: partial
+    confidence: medium
+    quote: "Immediate triage within 24 hours by DP&RM"
+    rationale: "Intake is via DP&RM with legal counsel consultation, but no explicit executive sponsor role defined."
+
+  - must_id: item:Art.48:refusal_path
+    verdict: partial
+    confidence: medium
+    quote: "Default response: REJECT"
+    rationale: "Refusal path exists for non-legally binding requests but doesn't explicitly reference Art.48 conditions or Art.49 derogations."
+
+  - must_id: item:Art.48:subject_notification
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Procedure covers customer notification but not affected data subject notification of disclosures."
+
+  - must_id: item:Art.48:rev_agreements_currency
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No mention of maintaining an international agreements (MLAT) catalogue."
+
+  - must_id: item:Art.48:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: "Last Reviewed: TBD 
+Next Review Date: TBD"
+    rationale: "Review dates are TBD, not within any planned interval."
+
+  - must_id: item:Art.48:rev_register_currency
+    verdict: partial
+    confidence: low
+    quote: "All disclosure requests logged in Legal Requests Log"
+    rationale: "Log exists but no evidence of periodic currency review of actual requests."
+
+  - must_id: item:Art.48:rev_reviewer
+    verdict: partial
+    confidence: low
+    quote: "Reviewed by: PIMS Manager"
+    rationale: "Reviewer is PIMS Manager only; no DPO + legal counsel + executive sponsor combined review documented."
+
+  - must_id: item:Art.48:rev_tabletop
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No tabletop exercise for foreign authority requests is defined."
+
+  - must_id: item:Art.48:reg_authority
+    verdict: partial
+    confidence: medium
+    quote: "Include: requesting authority, legal basis, data requested, response deadline"
+    rationale: "Requesting authority captured but per-row jurisdiction field not explicitly listed in the Legal Requests Log fields."
+
+  - must_id: item:Art.48:reg_date
+    verdict: partial
+    confidence: low
+    quote: "Retain all correspondence for 5 years"
+    rationale: "Log fields listed do not explicitly include a per-row decision date."
+
+  - must_id: item:Art.48:reg_decision
+    verdict: partial
+    confidence: medium
+    quote: "Data disclosed (if any)"
+    rationale: "Legal Requests Log captures data disclosed but does not explicitly define per-row decision categories (disclosed/partially-disclosed/refused)."
+
+  - must_id: item:Art.48:reg_legal_basis_check
+    verdict: partial
+    confidence: low
+    quote: "Determine legal status: 
+	1. Legally binding = court order, law enforcement with legal authority, regulatory mandate"
+    rationale: "Doc requires legal status determination but doesn't specifically reference international agreement or Art.49 derogation checks."
+
+  - must_id: item:Art.48:reg_request_id
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Legal Requests Log is mentioned but no explicit request-id field or 'no requests this period' affirmation is defined."
+
+  - must_id: item:B.8.2.1:scope_customer_list
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Scope refers generically to client engagements but does not enumerate in-scope customers."
+
+  - must_id: item:B.8.2.1:scope_exclusions
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No explicit exclusions of own-controller or non-PII services with rationale are provided."
+
+  - must_id: item:B.8.2.1:scope_pii_processor_test
+    verdict: partial
+    confidence: medium
+    quote: "Applies to all services where Arion Networks acts as a processor or subprocessor of personal data on behalf of a client (controller)"
+    rationale: "Scope articulates processor test at policy level but not per-engagement determination."
+
+  - must_id: item:B.8.2.1:proc_assistance_scope
+    verdict: partial
+    confidence: medium
+    quote: "Defines how Arion Networks assists customers (controllers) in fulfilling their GDPR obligations"
+    rationale: "Assistance covers DPIA, audit cooperation, subject rights, but breach notification and prior consultation assistance are not explicitly enumerated here."
+
+  - must_id: item:B.8.2.1:proc_customer_dpia_support
+    verdict: satisfies
+    confidence: high
+    quote: "When customer requests DPIA support:
+
+- Provide: Processing details (data categories, retention, security measures, subprocessors)
+- Timeline: Within 10 business days"
+    rationale: "Section 6.2 clearly defines DPIA support pathway with content, timeline, and format."
+
+  - must_id: item:B.8.2.1:proc_documented_instructions
+    verdict: satisfies
+    confidence: high
+    quote: "If instruction unclear or unlawful: DP&RM notifies customer within 3 business days.
+- Logging: 
+	- Standard operations: Documented via support ticket system
+	- Significant instructions: Recorded in Customer Instructions Log"
+    rationale: "Section 6.1 defines instruction sources, logging, and escalation for unclear/unlawful instructions."
+
+  - must_id: item:B.8.2.1:proc_intake_gate
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No explicit intake gate blocking onboarding until a DPA/PII processing agreement is executed is documented."
+
+  - must_id: item:B.8.2.1:proc_subject_matter_scope
+    verdict: partial
+    confidence: medium
+    quote: "Applies to all services where Arion Networks acts as a processor or subprocessor of personal data on behalf of a client (controller). Includes consulting services, SaaS tools, custom deployments, subprocessed workstreams"
+    rationale: "Scope covers nature/purpose partially via log fields but does not fully specify subject-matter, duration per Art.28.3 in the procedure itself."
+
+  - must_id: item:B.8.2.1:reg_agreement_reference
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Procedure references DPA (DOC065) generally but no register field for executed agreement reference per customer row."
+
+  - must_id: item:B.8.2.1:reg_assistance_coverage
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Processor Operations Log fields listed do not include Art.28.3.e-h assistance coverage per row."
+
+  - must_id: item:B.8.2.1:reg_customer_id
+    verdict: satisfies
+    confidence: high
+    quote: "Client ID
+
+Unique client identifier"
+    rationale: "Log includes Client ID and Customer Name fields per row."
+
+  - must_id: item:B.8.2.1:reg_instructions_channel
+    verdict: partial
+    confidence: medium
+    quote: "Standard operations: Documented via support ticket system
+
+Significant instructions: Recorded in Customer Instructions Log (Excel) with date, customer, instruction summary, response"
+    rationale: "Channels are documented generally, but no per-customer row field for instructions channel in a register."
+
+  - must_id: item:B.8.2.1:reg_term
+    verdict: partial
+    confidence: medium
+    quote: "Processing Duration
+
+Contractual or technical lifespan"
+    rationale: "Processing Duration field captures term but not explicitly expiry/renewal."
+
+  - must_id: item:B.8.2.1:rev_coverage_check
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No documented coverage check verifying every in-scope customer has an executed agreement on file."
+
+  - must_id: item:B.8.2.1:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: "Last Reviewed: TBD 
+Next Review Date: TBD"
+    rationale: "Review date not populated; TBD indicates no completed review."
+
+  - must_id: item:B.8.2.1:rev_gaps_audit
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No sampling/gaps audit of agreements for Art.28.3.e-h assistance coverage documented."
+
+  - must_id: item:B.8.2.1:rev_reviewer
+    verdict: partial
+    confidence: low
+    quote: "Reviewed by: PIMS Manager"
+    rationale: "Document has PIMS Manager as reviewer but not the required Legal + DPO + Sales Ops combination."
+
+  - must_id: item:B.8.2.2:scope_data_flows
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No data-flow map distinguishing customer PII from own-controller PII is documented."
+
+  - must_id: item:B.8.2.2:scope_own_controller
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document does not carve out own-controller services (billing/marketing) with rationale."
+
+  - must_id: item:B.8.2.2:scope_services
+    verdict: partial
+    confidence: medium
+    quote: "Includes consulting services, SaaS tools, custom deployments, subprocessed workstreams and eny other services involving client PII processing"
+    rationale: "Scope section lists service categories but does not enumerate specific in-scope services."
+
+  - must_id: item:B.8.2.2:rev_customer_verification_health
+    verdict: partial
+    confidence: low
+    quote: "Response time: Within 15 business days"
+    rationale: "Audit SLA is stated but no evidence of tracking audits requested/supported within SLA."
+
+  - must_id: item:B.8.2.2:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Review date is TBD; no completed review within a planned interval."
+
+  - must_id: item:B.8.2.2:rev_reviewer
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Only PIMS Manager listed as reviewer; no DPO + Engineering Lead + Compliance combination."
+
+  - must_id: item:B.8.2.2:rev_side_purpose_sweep
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No documented sweep of cross-tenant analytics or ML training pipelines for unauthorised PII use."
+
+  - must_id: item:B.8.2.2:rev_technical_binding_audit
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence of sampled tenant boundary verification for purpose limits."
+
+  - must_id: item:B.8.2.2:reg_binding_controls
+    verdict: partial
+    confidence: low
+    quote: "Security Controls	Summary of encryption, segregation, MFA, etc."
+    rationale: "Log includes security controls field but not specific binding controls like tenant isolation config or data-tag enforcement per row."
+
+  - must_id: item:B.8.2.2:reg_customer_id
+    verdict: satisfies
+    confidence: high
+    quote: "Client ID	Unique client identifier"
+    rationale: "Processor Operations Log explicitly includes a Client ID field per row."
+
+  - must_id: item:B.8.2.2:reg_last_verified
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No mention of a last verification date field per row in the Processor Operations Log."
+
+  - must_id: item:B.8.2.2:reg_permitted_secondary
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Log fields do not include permitted secondary uses or anonymised aggregate use authorisations."
+
+  - must_id: item:B.8.2.2:reg_stated_purposes
+    verdict: satisfies
+    confidence: high
+    quote: "Processing Purpose
+
+Purposes documented in customer DPA"
+    rationale: "Log explicitly captures the stated customer purposes per row from the DPA."
+
+  - must_id: item:B.8.2.2:proc_customer_verification
+    verdict: partial
+    confidence: medium
+    quote: "Customer audit rights per DPA:
+
+- Evidence provided: Policy excerpts, ISO certificates, security documentation"
+    rationale: "General audit right exists but purpose-limitation compliance verification is not specifically addressed."
+
+  - must_id: item:B.8.2.2:proc_instruction_capture
+    verdict: satisfies
+    confidence: high
+    quote: "Processing purposes are documented in the Processor Operations Log for each customer"
+    rationale: "Customer purposes recorded per engagement, with instructions management section covering changes."
+
+  - must_id: item:B.8.2.2:proc_no_side_purpose
+    verdict: satisfies
+    confidence: high
+    quote: "PII processed under a client contract (e.g., compliance documents uploaded to ArionComply) shall NOT be used for Arion Networks' own marketing or advertising purposes"
+    rationale: "Document prohibits use of customer PII beyond documented instructions."
+
+  - must_id: item:B.8.2.2:proc_technical_binding
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No description of engineering controls such as tenant isolation, data-tag enforcement, or access scoping to prevent processing beyond purposes."
+
+  - must_id: item:B.8.2.2:proc_technical_justification
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No documented carve-out procedure for technical justifications surfaced to the customer."
+
+  - must_id: item:B.8.2.3:scope_exceptions
+    verdict: satisfies
+    confidence: high
+    quote: "Exceptions:
+
+None. This prohibition is absolute for all processor relationships."
+    rationale: "Document explicitly states no exceptions to the marketing prohibition."
+
+  - must_id: item:B.8.2.3:scope_marketing_channels
+    verdict: partial
+    confidence: medium
+    quote: "PII processed under a client contract (e.g., compliance documents uploaded to ArionComply) shall NOT be used for Arion Networks' own marketing or advertising purposes"
+    rationale: "Marketing/advertising prohibited generally but specific channels (email, retargeting, in-product, ad platforms) are not enumerated."
+
+  - must_id: item:B.8.2.3:scope_pii_isolation
+    verdict: partial
+    confidence: medium
+    quote: "PII processed under a client contract (e.g., compliance documents uploaded to ArionComply) shall NOT be used for Arion Networks' own marketing or advertising purposes"
+    rationale: "Document prohibits use of customer PII for own marketing but does not explicitly describe isolation posture between marketing systems and processor data."
+
+  - must_id: item:B.8.2.3:reg_activity_scope
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Absolute prohibition with no exceptions means no marketing-activity register rows exist."
+
+  - must_id: item:B.8.2.3:reg_customer_id
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "No marketing exceptions register maintained since prohibition is absolute."
+
+  - must_id: item:B.8.2.3:reg_customer_permit
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "No customer-permit rows since no marketing use permitted."
+
+  - must_id: item:B.8.2.3:reg_exception_id
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "No exceptions permitted, so no exception IDs required."
+
+  - must_id: item:B.8.2.3:reg_subject_consent
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "No marketing use permitted, so no subject-consent evidence rows apply."
+
+  - must_id: item:B.8.2.3:proc_consent_evidence_requirement
+    verdict: not_applicable
+    confidence: high
+    quote: "Exceptions: None. This prohibition is absolute for all processor relationships."
+    rationale: "No marketing use is permitted, so consent evidence requirement is not applicable."
+
+  - must_id: item:B.8.2.3:proc_customer_marketing_permit
+    verdict: not_applicable
+    confidence: high
+    quote: "Exceptions: None. This prohibition is absolute for all processor relationships."
+    rationale: "No customer-marketing permit path exists under absolute prohibition."
+
+  - must_id: item:B.8.2.3:proc_default_prohibition
+    verdict: satisfies
+    confidence: high
+    quote: "PII processed under a client contract (e.g., compliance documents uploaded to ArionComply) shall NOT be used for Arion Networks' own marketing or advertising purposes"
+    rationale: "Document explicitly establishes default (and absolute) prohibition on using customer PII for marketing/advertising."
+
+  - must_id: item:B.8.2.3:proc_freely_given_alignment
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "No permits granted, so Art.7(4) freely-given alignment test does not apply."
+
+  - must_id: item:B.8.2.3:proc_no_conditionality
+    verdict: partial
+    confidence: medium
+    quote: "PII processed under a client contract (e.g., compliance documents uploaded to ArionComply) shall NOT be used for Arion Networks' own marketing or advertising purposes"
+    rationale: "Document prohibits marketing use of client PII but does not explicitly state that service delivery is not conditioned on accepting marketing."
+
+  - must_id: item:B.8.2.3:rev_conditionality_check
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No regression check of signup/renewal/support flows for marketing-consent gating is described."
+
+  - must_id: item:B.8.2.3:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Review date and next review date are marked TBD, so no review within a planned interval is evidenced."
+
+  - must_id: item:B.8.2.3:rev_exception_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Document states 'Exceptions: None' but provides no audit of registered exceptions or consent evidence review."
+
+  - must_id: item:B.8.2.3:rev_isolation_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No isolation audit of marketing systems verifying use of own-controller PII only is described."
+
+  - must_id: item:B.8.2.3:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "Reviewed by: PIMS Manager"
+    rationale: "A reviewer role is listed but not the DPO plus Marketing Lead combination required."
+
+  - must_id: item:B.8.2.4:scope_instruction_channels
+    verdict: satisfies
+    confidence: high
+    quote: "Documented instructions include: - DPA and service agreement (ArionComply Terms of Service) - Customer's platform configuration and feature usage - Written requests via privacy@arionetworks.com or support tickets"
+    rationale: "All key instruction channels (contract, configuration, support tickets, written requests) are enumerated."
+
+  - must_id: item:B.8.2.4:scope_priority_topics
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Procedure covers unlawful instructions generically but does not enumerate priority topics like retention, disclosure, transfers, children, or special category."
+
+  - must_id: item:B.8.2.4:scope_review_capability
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No disclosure of technological constraints limiting ability to detect infringing instructions."
+
+  - must_id: item:B.8.2.4:proc_customer_notification
+    verdict: partial
+    confidence: medium
+    quote: "The customer notification must include: - Description of the requested instruction - Specific legal provision(s) potentially violated - Recommendation for compliant alternative approach (if available) - Request for clarification or amended instructio"
+    rationale: "Written notification with cited legislation and request for amended instruction is required, but 'processor's opinion' framing and formal dispute pathway are not explicit."
+
+  - must_id: item:B.8.2.4:proc_legal_assessment
+    verdict: partial
+    confidence: medium
+    quote: "The DP&RM assesses whether the instruction would violate applicable law"
+    rationale: "DP&RM performs the assessment but no explicit involvement of legal counsel is required."
+
+  - must_id: item:B.8.2.4:proc_notification_records
+    verdict: satisfies
+    confidence: high
+    quote: "All potentially unlawful instructions and related communications are documented via email and retained for 3 years per standard retention policy"
+    rationale: "Notifications are documented and retained for audit."
+
+  - must_id: item:B.8.2.4:proc_processing_pause
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No processing-pause protocol is defined for clear/severe infringements pending customer response."
+
+  - must_id: item:B.8.2.4:proc_review_trigger
+    verdict: partial
+    confidence: medium
+    quote: "Any staff member who receives a potentially unlawful instruction must immediately escalate to the Data Protection & Risk Manager"
+    rationale: "General staff escalation is defined but specific channels (support/legal/engineering/compliance) are not enumerated."
+
+  - must_id: item:B.8.2.4:reg_customer_id
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No register schema with customer identifier field is defined for unlawful instructions log."
+
+  - must_id: item:B.8.2.4:reg_customer_response
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No structured field for customer response outcomes is defined."
+
+  - must_id: item:B.8.2.4:reg_instruction_summary
+    verdict: partial
+    confidence: low
+    quote: "Description of the requested instruction"
+    rationale: "Notification content includes instruction description but no explicit register row field is specified."
+
+  - must_id: item:B.8.2.4:reg_legislation_cited
+    verdict: partial
+    confidence: low
+    quote: "Specific legal provision(s) potentially violated"
+    rationale: "Legislation citation required in notification but no explicit register field defined."
+
+  - must_id: item:B.8.2.4:reg_notification_date
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No register field for notification issued date is defined."
+
+  - must_id: item:B.8.2.4:reg_notification_id
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No unique notification identifier field is defined."
+
+  - must_id: item:B.8.2.4:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Document shows 'Last Reviewed: TBD' and 'Next Review Date: TBD' with no actual review date recorded."
+
+  - must_id: item:B.8.2.4:rev_legislation_currency
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No evidence of a review confirming cited legislation (GDPR, Czech Act No. 110/2019) has been checked for currency."
+
+  - must_id: item:B.8.2.4:rev_notification_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No sampled review of unlawful-instruction notifications for accuracy and timeliness is documented."
+
+  - must_id: item:B.8.2.4:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "Reviewed by: PIMS Manager"
+    rationale: "A reviewer is named (PIMS Manager) but not the required DPO + Legal combination."
+
+  - must_id: item:B.8.2.4:rev_trigger_health
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No evidence of sampling high-risk instruction categories to check for missed infringement flags."
+
+  - must_id: item:B.8.2.5:scope_audit_tiers
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No tiered audit-rights mapping by contract type is present; audit cooperation is described generically."
+
+  - must_id: item:B.8.2.5:scope_certifications_current
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Document references 'ISO certificates' generally but does not enumerate current certifications with expiry dates."
+
+  - must_id: item:B.8.2.5:scope_information_types
+    verdict: partial
+    confidence: medium
+    quote: "Evidence provided: Policy excerpts, ISO certificates, security documentation"
+    rationale: "Some information types listed but not the full expected set (SOC 2, ISO 27701, pen test summaries, architecture whitepapers)."
+
+  - must_id: item:B.8.2.5:reg_customer_id
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No audit-request register with per-row customer identifiers is defined."
+
+  - must_id: item:B.8.2.5:reg_request_id
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No audit-request register with unique request identifiers is defined."
+
+  - must_id: item:B.8.2.5:reg_request_type
+    verdict: partial
+    confidence: medium
+    quote: "All disclosure requests logged in __Legal Requests Log__ with:
+
+- Request type (legally binding / non-binding / contractually authorized)"
+    rationale: "Doc references logging request types in Legal Requests Log and Customer Instructions Log but doesn't enumerate the specific categories (audit/certification/DPIA/DSAR/configuration) as row fields."
+
+  - must_id: item:B.8.2.5:reg_response_date
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No log schema captures response date versus stated SLA."
+
+  - must_id: item:B.8.2.5:reg_response_summary
+    verdict: partial
+    confidence: low
+    quote: "Recorded in Customer Instructions Log (Excel) with date, customer, instruction summary, response"
+    rationale: "Customer Instructions Log includes response field but no explicit response summary or redaction rationale requirement."
+
+  - must_id: item:B.8.2.5:proc_audit_support
+    verdict: satisfies
+    confidence: high
+    quote: "Customer audit rights per DPA:
+
+- Evidence provided: Policy excerpts, ISO certificates, security documentation
+- Request via: privacy@arionetworks.com
+- Response time: Within 15 business days"
+    rationale: "Section 6.3 defines the audit support pathway with request channel, evidence provided, and SLA."
+
+  - must_id: item:B.8.2.5:proc_contract_alignment
+    verdict: partial
+    confidence: medium
+    quote: "Customer audit rights per DPA:"
+    rationale: "Audit rights are stated as per DPA but explicit alignment with Art.28(3)(h) and B.8.2.1 is not called out."
+
+  - must_id: item:B.8.2.5:proc_information_catalog
+    verdict: partial
+    confidence: medium
+    quote: "Evidence provided: Policy excerpts, ISO certificates, security documentation"
+    rationale: "Lists some categories but no comprehensive information catalog including DPIA input, data flow map, or security whitepaper."
+
+  - must_id: item:B.8.2.5:proc_information_request
+    verdict: satisfies
+    confidence: high
+    quote: "On request, Arion Networks provides documentation of processing activities (data categories, purposes, retention, sub-processors, security, transfers) within 5 business days via privacy@arionetworks.com"
+    rationale: "Section 8.3 defines ad-hoc information request pathway with contact and SLA."
+
+  - must_id: item:B.8.2.5:proc_third_party_audit
+    verdict: partial
+    confidence: medium
+    quote: "Remote audit (if contractually required):__
+- 60 days notice required
+- Coordinated by DP&RM
+- Max 2 days duration
+- Conducted via video call with screen sharing"
+    rationale: "Remote audit rules exist but no explicit rules for customer-mandated third-party auditor engagement (identity, NDA, scope)."
+
+  - must_id: item:B.8.2.5:rev_audit_rights_audit
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No review process for auditing customer audit requests versus contract tier."
+
+  - must_id: item:B.8.2.5:rev_certification_health
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No review process for currency/scope of shared certifications is defined."
+
+  - must_id: item:B.8.2.5:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Review date and next review date fields are left as TBD, so no review within a planned interval is evidenced."
+
+  - must_id: item:B.8.2.5:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "Reviewed by: PIMS Manager"
+    rationale: "Document lists a single reviewer (PIMS Manager) but not the required Trust + Compliance + Sales Ops reviewer combination."
+
+  - must_id: item:B.8.2.5:rev_sla_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No evidence of sampled requests being audited against response SLAs is present in the document."
+
+  - must_id: item:B.8.2.6:scope_coverage_test
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No reconciliation or coverage test between processor RoPA rowcount and the B.8.2.1 customer register is described."
+
+  - must_id: item:B.8.2.6:scope_customer_engagements
+    verdict: partial
+    confidence: medium
+    quote: "Maintain a log for each client engagement where Arion processes PII"
+    rationale: "Document requires a log per client engagement but does not explicitly tie scope to a B.8.2.1 customer register."
+
+  - must_id: item:B.8.2.6:scope_own_controller_exclusion
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Document does not address exclusion of own-controller processing or separation from a controller RoPA."
+
+  - must_id: item:B.8.2.6:ropa_customer_id
+    verdict: satisfies
+    confidence: high
+    quote: "Client ID
+
+Unique client identifier"
+    rationale: "The Processor Operations Log explicitly includes a Client ID field per customer row."
+
+  - must_id: item:B.8.2.6:ropa_processing_categories
+    verdict: satisfies
+    confidence: high
+    quote: "Processing Purpose
+
+Purposes documented in customer DPA"
+    rationale: "Processing purpose/categories are captured per customer per row in the Processor Operations Log."
+
+  - must_id: item:B.8.2.6:ropa_processor_dpo
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "The log fields do not include a processor DPO or representative contact per row."
+
+  - must_id: item:B.8.2.6:ropa_security_measures
+    verdict: satisfies
+    confidence: high
+    quote: "Security Controls
+
+Summary of encryption, segregation, MFA, etc."
+    rationale: "Log includes a Security Controls field summarizing technical/organizational measures per row."
+
+  - must_id: item:B.8.2.6:ropa_subprocessor_list
+    verdict: partial
+    confidence: medium
+    quote: "Subprocessors	Any used in processing chain"
+    rationale: "Processor Operations Log includes a Subprocessors field per client, but this doc is not the RoPA itself and doesn't confirm subprocessor list per RoPA row."
+
+  - must_id: item:B.8.2.6:ropa_transfers
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No mention of third-country/international-org transfer fields or safeguards per RoPA row."
+
+  - must_id: item:B.8.2.6:rev_accuracy_sample
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No evidence of an accuracy sampling review against customer instruction record and subprocessor list."
+
+  - must_id: item:B.8.2.6:rev_completeness
+    verdict: partial
+    confidence: low
+    quote: "Maintain a log for each client engagement where Arion processes PII"
+    rationale: "Requires one log per engagement but does not describe a completeness review verifying one RoPA row per active customer."
+
+  - must_id: item:B.8.2.6:rev_customer_extract_test
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No customer-extract sampling test described."
+
+  - must_id: item:B.8.2.6:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: "__Last Reviewed:__ TBD 
+__Next Review Date:__ TBD"
+    rationale: "Review dates are TBD; no evidence review occurred within planned interval."
+
+  - must_id: item:B.8.2.6:rev_reviewer
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No named reviewer identity (DPO + Trust Ops) tied to a RoPA review."
+
+  - must_id: item:B.8.2.6:proc_customer_availability
+    verdict: satisfies
+    confidence: medium
+    quote: "On request, Arion Networks provides documentation of processing activities (data categories, purposes, retention, sub-processors, security, transfers) within 5 business days via privacy@arionetworks.com"
+    rationale: "Defines request channel and SLA for customers to receive their processing information extract."
+
+  - must_id: item:B.8.2.6:proc_instruction_change
+    verdict: partial
+    confidence: medium
+    quote: "Reviewed at least annually or upon significant change"
+    rationale: "Logs reviewed upon significant change and instructions logged, but doc doesn't explicitly state that customer purpose changes trigger a RoPA update."
+
+  - must_id: item:B.8.2.6:proc_onboarding_trigger
+    verdict: satisfies
+    confidence: medium
+    quote: "Logs must be:
+	Created during onboarding"
+    rationale: "Explicit onboarding trigger to create the processing log per client engagement."
+
+  - must_id: item:B.8.2.6:proc_secure_maintenance
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "This document covers processor operations, not the RoPA maintenance controls under B.8.2.6."
+
+  - must_id: item:B.8.2.6:proc_subprocessor_update
+    verdict: partial
+    confidence: medium
+    quote: "DP&RM updates Section 8 of DOC065 with the new sub‑processor details"
+    rationale: "Subprocessor changes trigger updates to DPA Section 8 and Subprocessor Register, but not explicitly the processor RoPA."
+
+  - must_id: item:B.8.3.1:scope_customer_engagements
+    verdict: partial
+    confidence: medium
+    quote: "Maintain a log for each client engagement where Arion processes PII"
+    rationale: "Engagements are logged per client but no explicit link to a B.8.2.1 register is stated."
+
+  - must_id: item:B.8.3.1:scope_exclusions
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of excluded own-controller services or rationale for exclusions."
+
+  - must_id: item:B.8.3.1:scope_support_matrix
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No support tier matrix (Enterprise/Business/Startup) is defined in the document."
+
+  - must_id: item:B.8.3.1:proc_contract_scope
+    verdict: partial
+    confidence: medium
+    quote: "DPA and service agreement (ArionComply Terms of Service)"
+    rationale: "Support scope references the DPA/ToS but does not explicitly tie to a B.8.2.1 customer agreement register."
+
+  - must_id: item:B.8.3.1:proc_correction_erasure
+    verdict: satisfies
+    confidence: high
+    quote: "Edit documents to correct or anonymize PII
+- Delete documents completely
+
+Deletion effective immediately; backups purged within 30 days"
+    rationale: "Rectification and erasure capabilities with timely execution are described."
+
+  - must_id: item:B.8.3.1:proc_informational_support
+    verdict: satisfies
+    confidence: high
+    quote: "On request, Arion Networks provides documentation of processing activities (data categories, purposes, retention, sub‑processors, security, transfers) within 5 business days"
+    rationale: "Informational support to inform Article 15 responses is provided."
+
+  - must_id: item:B.8.3.1:proc_sla
+    verdict: satisfies
+    confidence: high
+    quote: "Arion Networks provides search results, exports, or executes deletion on customer instruction within 10 business days"
+    rationale: "Response-time SLAs are stated per request type (5, 10, 15 business days)."
+
+  - must_id: item:B.8.3.1:proc_technical_support
+    verdict: satisfies
+    confidence: high
+    quote: "Search documents by name/email/ID
+- Export documents (original format)
+- Edit documents to correct or anonymize PII
+- Delete documents completely"
+    rationale: "Platform features enabling rectification, erasure, and portability are enumerated."
+
+  - must_id: item:B.8.3.1:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Review dates are marked TBD, not set within a planned interval."
+
+  - must_id: item:B.8.3.1:rev_path_currency
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No mention of verifying that technical support paths remain functional after product changes."
+
+  - must_id: item:B.8.3.1:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "Reviewed by: PIMS Manager"
+    rationale: "Only a single reviewer identified; does not include DPO, Product, and Trust reviewers."
+
+  - must_id: item:B.8.3.1:rev_sla_audit
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No SLA audit process described comparing support responses against contract SLAs."
+
+  - must_id: item:B.8.3.1:reg_customer_id
+    verdict: satisfies
+    confidence: high
+    quote: "Client ID
+
+Unique client identifier"
+    rationale: "Processor Operations Log includes a unique client/customer identifier field."
+
+  - must_id: item:B.8.3.1:reg_request_id
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No unique request identifier field defined in Customer Instructions Log or DSR support logs."
+
+  - must_id: item:B.8.3.1:reg_request_type
+    verdict: partial
+    confidence: medium
+    quote: "For complex requests, customers submit support ticket in ArionComply platform with:
+
+- Data subject identifier
+- Request type
+- Specific requirements"
+    rationale: "Request type is captured in support tickets but not explicitly logged as a row field in a dedicated register."
+
+  - must_id: item:B.8.3.1:reg_response
+    verdict: partial
+    confidence: medium
+    quote: "Recorded in Customer Instructions Log (Excel) with date, customer, instruction summary, response"
+    rationale: "Customer Instructions Log includes response field, but no dedicated DSR register with per-row response documented."
+
+  - must_id: item:B.8.3.1:reg_sla_met
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No SLA-met flag or tracking column defined in the logs."
+
+  - must_id: item:B.8.4.2:scope_ma_events
+    verdict: partial
+    confidence: low
+    quote: "Clients may request direct transfer to another processor on written instruction"
+    rationale: "Transfer to another processor is covered, but M&A events transferring PII to another controller are not explicitly addressed."
+
+  - must_id: item:B.8.4.2:scope_retention_window
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "The doc specifies retention of proof of deletion for 3 years but does not define a post-termination retention window for the PII itself before disposal."
+
+  - must_id: item:B.8.4.2:scope_termination_triggers
+    verdict: partial
+    confidence: medium
+    quote: "Upon termination of a processing relationship:"
+    rationale: "Termination is mentioned generically but specific triggers (contract expiry, offboarding, product discontinuation) are not enumerated."
+
+  - must_id: item:B.8.4.2:reg_action_type
+    verdict: partial
+    confidence: medium
+    quote: "The default expectation is __complete and secure deletion__ of PII unless otherwise agreed
+	Clients may formally request return of data in structured, commonly used, machine\-readable format
+	Clients may request direct transfer to another processor"
+    rationale: "Action types (return/transfer/delete) are described in procedure but not explicitly as a per-row field in a register."
+
+  - must_id: item:B.8.4.2:reg_certification_ref
+    verdict: partial
+    confidence: medium
+    quote: "Proof of deletion:__ Log, audit hash, screenshot, or signed form retained for 3 years post\-contract"
+    rationale: "Proof of deletion is retained but no explicit certification reference issued to the customer as a register field."
+
+  - must_id: item:B.8.4.2:reg_completion_date
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "The PII Deletion Log is referenced but completion date per row is not specified as a required field."
+
+  - must_id: item:B.8.4.2:reg_customer_id
+    verdict: partial
+    confidence: medium
+    quote: "Client ID
+
+Unique client identifier"
+    rationale: "Client ID is a field in Processor Operations Log but not explicitly required in the PII Deletion Log for return/deletion actions."
+
+  - must_id: item:B.8.4.2:reg_termination_date
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No explicit contract termination date field defined for the PII Deletion Log."
+
+  - must_id: item:B.8.4.2:rev_backup_propagation
+    verdict: partial
+    confidence: medium
+    quote: "Delete remaining copies \(active \+ backup\)"
+    rationale: "Backup deletion is included as a procedural step but no audit/sampling to verify backup propagation is defined."
+
+  - must_id: item:B.8.4.2:rev_completion_audit
+    verdict: partial
+    confidence: low
+    quote: "Confirm deletion/return with client and log outcome"
+    rationale: "Client confirmation is required per action but no sampled end-to-end completion audit process is defined."
+
+  - must_id: item:B.8.4.2:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Review date fields (Reviewed on, Next Review Date, Last Reviewed) are all TBD or blank."
+
+  - must_id: item:B.8.4.2:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "Confirm deletion/return with client and log outcome	DP&RM"
+    rationale: "DP&RM is identified as reviewer but there is no Trust/DPO/Platform Ops multi-reviewer structure."
+
+  - must_id: item:B.8.4.2:proc_certification
+    verdict: satisfies
+    confidence: high
+    quote: "Proof of deletion: Log, audit hash, screenshot, or signed form retained for 3 years post-contract
+- Client confirmation: Written acknowledgment of completion"
+    rationale: "Written acknowledgment/proof of deletion is provided to customer as attestation."
+
+  - must_id: item:B.8.4.2:proc_customer_visibility
+    verdict: satisfies
+    confidence: high
+    quote: "This policy is made available to customers upon request via privacy@arionetworks.com or through customer audit rights (see customer DPA Section 7)."
+    rationale: "Policy explicitly made available to customers on request."
+
+  - must_id: item:B.8.4.2:proc_disposal_capability
+    verdict: partial
+    confidence: medium
+    quote: "Delete remaining copies (active + backup)"
+    rationale: "Backups addressed but DR and continuity systems are not explicitly named."
+
+  - must_id: item:B.8.4.2:proc_lapse_protection
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No defined retention/grace period before disposal to protect against accidental lapse of contract."
+
+  - must_id: item:B.8.4.2:proc_return_capability
+    verdict: satisfies
+    confidence: high
+    quote: "Clients may formally request return of data in structured, commonly used, machine-readable format"
+    rationale: "Return in structured machine-readable format is documented."
+
+  - must_id: item:B.8.4.2:proc_transfer_capability
+    verdict: satisfies
+    confidence: high
+    quote: "Clients may request direct transfer to another processor on written instruction"
+    rationale: "Transfer to nominated third party on customer instruction is supported."
+
+  - must_id: item:B.8.4.3:scope_customer_facing
+    verdict: partial
+    confidence: low
+    quote: "Use encryption in transit (TLS 1.2+)"
+    rationale: "Encrypted transmission is stated generally but APIs/webhooks are not explicitly addressed."
+
+  - must_id: item:B.8.4.3:scope_internal_flows
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No coverage of internal/cross-region backup replication, DR, or warehouse data flow protections."
+
+  - must_id: item:B.8.4.3:scope_subprocessor_flows
+    verdict: partial
+    confidence: low
+    quote: "Subprocessors: Microsoft (EU-US DPF certified)"
+    rationale: "Subprocessor use is mentioned with safeguard reference but transmission controls for subprocessor flows are not detailed."
+
+  - must_id: item:B.8.4.3:rev_contract_alignment_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of a contract-alignment audit of transmission channels against customer B.8.2.1 agreements."
+
+  - must_id: item:B.8.4.3:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Document review dates are TBD and no channel review date is present."
+
+  - must_id: item:B.8.4.3:rev_reviewer
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No reviewer identity specified for channel/transmission reviews (Platform Ops + Security Engineering + DPO)."
+
+  - must_id: item:B.8.4.3:rev_shadow_channel_sweep
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No shadow-channel sweep procedure or evidence in the document."
+
+  - must_id: item:B.8.4.3:reg_channel_id
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No transmission channel register with unique channel identifiers is provided."
+
+  - must_id: item:B.8.4.3:reg_contract_alignment
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No per-row contract-alignment status against B.8.2.1 agreements is captured."
+
+  - must_id: item:B.8.4.3:reg_customer
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No channel register with per-row customer attribution exists."
+
+  - must_id: item:B.8.4.3:reg_encryption
+    verdict: partial
+    confidence: low
+    quote: "Use encryption in transit (TLS 1.2+)"
+    rationale: "Encryption standard mentioned generally for return/transfer operations but not recorded per channel row in a register."
+
+  - must_id: item:B.8.4.3:reg_endpoint
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No source/destination endpoints recorded per channel."
+
+  - must_id: item:B.8.4.3:proc_audit_data
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No audit data retention specified per transmission event."
+
+  - must_id: item:B.8.4.3:proc_authz_channels
+    verdict: partial
+    confidence: medium
+    quote: "Transmit data securely (if returning/transferring) via encrypted download link or direct secure transfer to designated recipient"
+    rationale: "Document specifies transmission channels (encrypted download links, direct secure transfer) but does not comprehensively enumerate authorised channels per customer."
+
+  - must_id: item:B.8.4.3:proc_contract_terms
+    verdict: partial
+    confidence: medium
+    quote: "Require written authorization from customer"
+    rationale: "Document references customer authorization for transfers but does not explicitly state that customer-contract transmission requirements are captured."
+
+  - must_id: item:B.8.4.3:proc_customer_advice
+    verdict: partial
+    confidence: low
+    quote: "Require written authorization from customer"
+    rationale: "Requires written authorization for transfers but does not explicitly address consulting customer when contract is silent on transmission requirements."
+
+  - must_id: item:B.8.4.3:proc_encryption
+    verdict: satisfies
+    confidence: high
+    quote: "Use encryption in transit (TLS 1.2+)"
+    rationale: "Document specifies TLS 1.2+ encryption in transit standard for return/transfer operations."
+
+  - must_id: item:B.8.5.1:scope_direct_transfers
+    verdict: partial
+    confidence: medium
+    quote: "Primary data storage: EU (specific Azure region TBD at deployment)"
+    rationale: "Document identifies primary storage jurisdiction and jurisdiction change procedure but does not explicitly detail multi-region/backup/DR direct transfers."
+
+  - must_id: item:B.8.5.1:scope_subprocessor_transfers
+    verdict: satisfies
+    confidence: high
+    quote: "Subprocessors: Microsoft (EU-US DPF certified)"
+    rationale: "Document identifies subprocessor jurisdictions and requires notification of jurisdiction changes affecting subprocessors."
+
+  - must_id: item:B.8.5.1:scope_support_access
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document does not address support-access transfers by staff located in different regions."
+
+  - must_id: item:B.8.5.1:rev_basis_currency
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document does not reference GDPR Art.45 adequacy decisions or Art.46 SCC version currency as review basis."
+
+  - must_id: item:B.8.5.1:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: "Next Review Date: TBD"
+    rationale: "Review date is marked TBD, not set within a planned interval."
+
+  - must_id: item:B.8.5.1:rev_notification_audit
+    verdict: partial
+    confidence: low
+    quote: "Email notification sent to ALL active customers minimum 30 days before change"
+    rationale: "Document requires 30-day advance notification for changes but does not specify a review/audit process verifying past notifications since last review."
+
+  - must_id: item:B.8.5.1:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document only names DP&RM as owner; no evidence of review by DPO + Legal + Trust roles."
+
+  - must_id: item:B.8.5.1:proc_advance_notification
+    verdict: satisfies
+    confidence: high
+    quote: "Email notification sent to ALL active customers minimum 30 days before change"
+    rationale: "Section 9 defines 30-day advance notification and allows customer objection/penalty-free termination."
+
+  - must_id: item:B.8.5.1:proc_basis_documentation
+    verdict: partial
+    confidence: medium
+    quote: "Subprocessors: Microsoft (EU-US DPF certified)"
+    rationale: "DPF certification mentioned for one subprocessor but no per-transfer relationship basis documentation (SCC/BCR/adequacy) framework described."
+
+  - must_id: item:B.8.5.1:proc_carve_out_limits
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No carve-out provisions or limits on notification-free changes are defined."
+
+  - must_id: item:B.8.5.1:proc_customer_information
+    verdict: satisfies
+    confidence: high
+    quote: "Notification must include: sub-processor name, country, service provided, data categories, and safeguards in place"
+    rationale: "Transfer arrangements including suppliers, countries, and safeguards are disclosed to customers."
+
+  - must_id: item:B.8.5.1:proc_international_agreements
+    verdict: partial
+    confidence: medium
+    quote: "Subprocessors: Microsoft (EU-US DPF certified)"
+    rationale: "Only DPF mentioned for one subprocessor; no comprehensive identification of MCC/BCR/CBPR agreement types per country pair."
+
+  - must_id: item:B.8.5.1:reg_basis
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No register with GDPR Art.45/46/47/49 basis cited per row."
+
+  - must_id: item:B.8.5.1:reg_change_history
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No change history register with previous bases and notification dates."
+
+  - must_id: item:B.8.5.1:reg_customer_notification_date
+    verdict: partial
+    confidence: low
+    quote: "Change logged in Subprocessor Register with notification date and any objections received"
+    rationale: "Subprocessor Register captures notification date but a dedicated jurisdiction-change register with customer notification dates isn't explicitly established."
+
+  - must_id: item:B.8.5.1:reg_jurisdiction_pair
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No register documenting origin + destination jurisdiction per row is described."
+
+  - must_id: item:B.8.5.1:reg_relationship_id
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document references jurisdiction changes but does not define a unique transfer relationship identifier per row in a register."
+
+  - must_id: item:B.8.5.2:scope_law_enforcement
+    verdict: partial
+    confidence: medium
+    quote: "When ANY disclosure request is received (law enforcement, court, regulator, or other third party)"
+    rationale: "Law enforcement disclosure handling is documented in section 10 but not explicitly tied to transfer destination scoping under B.8.5.2."
+
+  - must_id: item:B.8.5.2:scope_normal
+    verdict: partial
+    confidence: medium
+    quote: "Current jurisdictions (as of launch):
+
+- Primary data storage: EU (specific Azure region TBD at deployment)
+
+- AI processing: EU (Azure OpenAI EU region)
+
+- Subprocessors: Microsoft (EU-US DPF certified)"
+    rationale: "Normal-operations destinations are listed but jurisdictions are still TBD, so enumeration is incomplete."
+
+  - must_id: item:B.8.5.2:scope_support
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No mention of support-access destinations or support engineer locations accessing customer PII."
+
+  - must_id: item:B.8.5.2:proc_alignment_8_5_1
+    verdict: partial
+    confidence: low
+    quote: "When Arion Networks plans to change the jurisdictions where customer PII is processed or stored, we must inform customers in accordance with control B.8.5.1 and our Customer DPA terms."
+    rationale: "Section 9 aligns jurisdiction changes to B.8.5.1 but no explicit basis register linkage is defined."
+
+  - must_id: item:B.8.5.2:proc_destinations_publication
+    verdict: partial
+    confidence: medium
+    quote: "Email notification sent to ALL active customers minimum 30 days before change"
+    rationale: "Customer notification of jurisdiction changes is defined, but no clear per-customer publication of the current list of countries/international orgs beyond DPA references."
+
+  - must_id: item:B.8.5.2:proc_law_enforcement_exception
+    verdict: satisfies
+    confidence: medium
+    quote: "10.. Disclosure Requests Management (B.8.5.4 & B.8.5.5)"
+    rationale: "Section 10 provides law enforcement disclosure handling aligned with §8.5.4 and §8.5.5."
+
+  - must_id: item:B.8.5.2:proc_subprocessor_inclusion
+    verdict: partial
+    confidence: medium
+    quote: "Notification must include: sub-processor name, country, service provided, data categories, and safeguards in place"
+    rationale: "Subprocessor country disclosures are included in notifications but subprocessor-derived destinations are not consolidated into the transfer destination scope."
+
+  - must_id: item:B.8.5.2:reg_basis_link
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No register with per-row basis linkage to B.8.5.1 is defined in the document."
+
+  - must_id: item:B.8.5.2:reg_customer_disclosure
+    verdict: partial
+    confidence: low
+    quote: "All sub-processors used at the time of contract signing are listed in Section 8 of the Customer DPA (DOC065). By accepting the DPA, the customer acknowledges and approves the listed sub-processors."
+    rationale: "Disclosure via DPA is mentioned for subprocessors but no per-row customer disclosure status field in a transfer register."
+
+  - must_id: item:B.8.5.2:reg_destination_id
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document does not describe a jurisdiction register with destination identifiers per row."
+
+  - must_id: item:B.8.5.2:reg_role
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No register structure with role classifications (storage/subprocessor/support) per row is defined."
+
+  - must_id: item:B.8.5.2:rev_completeness
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No documented periodic completeness reconciliation of PII flows against a jurisdiction register."
+
+  - must_id: item:B.8.5.2:rev_date
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No review interval or dated review process for a jurisdiction register is specified."
+
+  - must_id: item:B.8.5.2:rev_disclosure_sync
+    verdict: partial
+    confidence: low
+    quote: "Current jurisdictions (as of launch):
+
+- Primary data storage: EU (specific Azure region TBD at deployment)
+
+- AI processing: EU (Azure OpenAI EU region)
+
+- Subprocessors: Microsoft (EU-US DPF certified)"
+    rationale: "Jurisdictions are listed and change process defined, but no explicit review to sync customer disclosures with a register."
+
+  - must_id: item:B.8.5.2:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No named reviewers (Trust + DPO) for a jurisdiction register review are identified."
+
+  - must_id: item:B.8.5.3:scope_audit
+    verdict: partial
+    confidence: medium
+    quote: "Customer audit rights per DPA:
+
+- Evidence provided: Policy excerpts, ISO certificates, security documentation"
+    rationale: "External customer audits addressed, but broader external audit disclosure scope not fully enumerated."
+
+  - must_id: item:B.8.5.3:scope_investigation
+    verdict: partial
+    confidence: medium
+    quote: "When ANY disclosure request is received (law enforcement, court, regulator, or other third party):"
+    rationale: "Investigation-related disclosure contexts (law enforcement/regulator) are addressed under Section 10."
+
+  - must_id: item:B.8.5.3:scope_normal_disclosures
+    verdict: partial
+    confidence: medium
+    quote: "Customer DPA may authorize specific disclosures (e.g., to customer's auditor, consultant)."
+    rationale: "Some normal-course disclosure categories are noted but not systematically enumerated."
+
+  - must_id: item:B.8.5.3:reg_customer
+    verdict: partial
+    confidence: low
+    quote: "All disclosure requests logged in __Legal Requests Log__ with:
+
+- Request type (legally binding / non-binding / contractually authorized)
+- Customer consulted (Y/N)"
+    rationale: "Legal Requests Log referenced but does not explicitly list 'customer whose PII was disclosed' as a field."
+
+  - must_id: item:B.8.5.3:reg_disclosure_id
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "The Legal Requests Log is referenced but no unique disclosure identifier field is specified."
+
+  - must_id: item:B.8.5.3:reg_recipient
+    verdict: partial
+    confidence: low
+    quote: "Record in Legal Requests Log"
+    rationale: "Log is referenced but recipient field is not explicitly listed among captured fields."
+
+  - must_id: item:B.8.5.3:reg_source_of_authority
+    verdict: partial
+    confidence: medium
+    quote: "Include: requesting authority, legal basis, data requested, response deadline, copy of request"
+    rationale: "Legal basis and requesting authority are captured for legally binding requests but not defined as explicit log fields."
+
+  - must_id: item:B.8.5.3:reg_timestamp
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No explicit timestamp field is specified in the Legal Requests Log schema."
+
+  - must_id: item:B.8.5.3:proc_authority_source
+    verdict: partial
+    confidence: medium
+    quote: "Determine legal status: Legally binding = court order, law enforcement with legal authority, regulatory mandate"
+    rationale: "Procedure requires identifying legal authority/basis but doesn't explicitly mandate capture in a register field."
+
+  - must_id: item:B.8.5.3:proc_investigation_audit
+    verdict: partial
+    confidence: low
+    quote: "Customer DPA may authorize specific disclosures (e.g., to customer's auditor, consultant)."
+    rationale: "Contractually authorized disclosures to auditors are addressed, but investigation-related disclosures are not explicitly covered."
+
+  - must_id: item:B.8.5.3:proc_normal_disclosures
+    verdict: partial
+    confidence: low
+    quote: "Contractually Agreed Disclosures"
+    rationale: "Contractually agreed disclosures are logged, but 'normal-course' disclosures (e.g., routine operational releases) are not distinctly addressed."
+
+  - must_id: item:B.8.5.3:proc_source_of_disclosure
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No requirement to record the internal team/system that released the data."
+
+  - must_id: item:B.8.5.3:rev_authority_audit
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No sampling/audit review of disclosure authority is described."
+
+  - must_id: item:B.8.5.3:rev_completeness
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No completeness review of the disclosure register is described."
+
+  - must_id: item:B.8.5.3:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Document shows 'Last Reviewed: TBD' and 'Next Review Date: TBD' with no actual review date within a planned interval."
+
+  - must_id: item:B.8.5.3:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "Reviewed by: PIMS Manager"
+    rationale: "A reviewer is named (PIMS Manager) but there is no evidence of DPO plus Legal review as required."
+
+  - must_id: item:B.8.5.4:scope_gag_order_scope
+    verdict: partial
+    confidence: medium
+    quote: "If Notification Legally Prohibited"
+    rationale: "Document acknowledges scenarios where notification is legally prohibited but does not enumerate specific gag-order-capable jurisdictions."
+
+  - must_id: item:B.8.5.4:scope_jurisdictions
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No enumeration of jurisdictions where the organization may receive legally-binding disclosure requests."
+
+  - must_id: item:B.8.5.4:scope_request_types
+    verdict: partial
+    confidence: medium
+    quote: "Legally binding = court order, law enforcement with legal authority, regulatory mandate"
+    rationale: "Some request types mentioned but no explicit enumeration of subpoena, national security letter, or regulator compulsion as distinct categories."
+
+  - must_id: item:B.8.5.4:reg_customer_affected
+    verdict: partial
+    confidence: medium
+    quote: "All disclosure requests logged in Legal Requests Log with:"
+    rationale: "A Legal Requests Log is defined but the required field for affected customer per row is not explicitly listed among logged attributes."
+
+  - must_id: item:B.8.5.4:reg_customer_notification
+    verdict: partial
+    confidence: medium
+    quote: "Customer consulted (Y/N)"
+    rationale: "Log includes customer consultation flag but does not explicitly require a customer notification date or gag-order flag per row."
+
+  - must_id: item:B.8.5.4:reg_request_id
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Legal Requests Log fields listed do not include a unique request identifier."
+
+  - must_id: item:B.8.5.4:reg_requester
+    verdict: satisfies
+    confidence: medium
+    quote: "Request type (legally binding / non-binding / contractually authorized)"
+    rationale: "The log requires recording the requesting authority context via request type and notification includes 'requesting authority' details."
+
+  - must_id: item:B.8.5.4:reg_response_outcome
+    verdict: satisfies
+    confidence: high
+    quote: "Data disclosed (if any)"
+    rationale: "Log explicitly records data disclosed (if any) capturing the response outcome per row."
+
+  - must_id: item:B.8.5.4:proc_gag_order_exception
+    verdict: satisfies
+    confidence: high
+    quote: "If Notification Legally Prohibited 
+	1. Use all lawful efforts to obtain waiver
+	2. Document efforts in Legal Requests Log
+	3. Notify customer as soon as legally permissible"
+    rationale: "Document explicitly handles legally-prohibited notifications with documentation and deferred notification."
+
+  - must_id: item:B.8.5.4:proc_legal_review
+    verdict: satisfies
+    confidence: medium
+    quote: "Immediate legal review (consult legal counsel if unclear)"
+    rationale: "Section 10.3 requires immediate legal review for legally binding requests."
+
+  - must_id: item:B.8.5.4:proc_notification_format
+    verdict: satisfies
+    confidence: high
+    quote: "Include: requesting authority, legal basis, data requested, response deadline, copy of request (if permissible)"
+    rationale: "Notification content specifies source, scope and deadline."
+
+  - must_id: item:B.8.5.4:proc_request_intake
+    verdict: partial
+    confidence: medium
+    quote: "Immediate triage within 24 hours by DP&RM"
+    rationale: "Triage is by DP&RM rather than explicitly routed to Legal, though legal counsel is consulted."
+
+  - must_id: item:B.8.5.4:proc_timeframe
+    verdict: partial
+    confidence: medium
+    quote: "Immediate triage within 24 hours by DP&RM"
+    rationale: "24-hour triage is specified but no explicit agreed customer-contract notification timeframe is stated."
+
+  - must_id: item:B.8.5.4:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Review dates are marked TBD, so no review within a planned interval is evidenced."
+
+  - must_id: item:B.8.5.4:rev_gag_order_audit
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No audit evidence of gag-order invocation defensibility or post-order notifications is present."
+
+  - must_id: item:B.8.5.4:rev_reviewer
+    verdict: partial
+    confidence: low
+    quote: "Owner: Data Protection & Risk Manager 
+ Version: 1.0 
+ Reviewed by: PIMS Manager"
+    rationale: "Reviewer is PIMS Manager; no explicit Legal + DPO joint review is stated."
+
+  - must_id: item:B.8.5.4:rev_timeframe_audit
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No audit records showing notifications were issued within agreed timeframes."
+
+  - must_id: item:B.8.5.5:scope_authorisation_paths
+    verdict: satisfies
+    confidence: high
+    quote: "Customer DPA may authorize specific disclosures (e.g., to customer's auditor, consultant).
+
+Process:
+- Verify authorization in signed DPA or written customer instruction"
+    rationale: "Section 10.4 identifies authorisation via DPA and written customer instruction."
+
+  - must_id: item:B.8.5.5:scope_default_reject
+    verdict: satisfies
+    confidence: high
+    quote: "Non-Legally Binding Requests
+
+__Default response: REJECT__"
+    rationale: "Document explicitly sets default reject for non-legally binding/informal requests."
+
+  - must_id: item:B.8.5.5:scope_request_types
+    verdict: partial
+    confidence: medium
+    quote: "When ANY disclosure request is received (law enforcement, court, regulator, or other third party)"
+    rationale: "Covers law enforcement, court, regulator, third party but does not enumerate journalist or marketing lead-gen requests."
+
+  - must_id: item:B.8.5.5:proc_binding_assessment
+    verdict: partial
+    confidence: medium
+    quote: "__Determine legal status:__ 
+	1. __Legally binding__ = court order, law enforcement with legal authority, regulatory mandate"
+    rationale: "DP&RM triages and classifies binding status; legal counsel consulted only if unclear rather than for every request."
+
+  - must_id: item:B.8.5.5:proc_contractual_scope
+    verdict: satisfies
+    confidence: high
+    quote: "Contractually Agreed Disclosures
+
+Customer DPA may authorize specific disclosures (e.g., to customer's auditor, consultant)."
+    rationale: "Section 10.4 defines contractually-agreed disclosure scope and verification of authorization."
+
+  - must_id: item:B.8.5.5:proc_customer_consultation
+    verdict: satisfies
+    confidence: high
+    quote: "Verify authorization in signed DPA or written customer instruction
+- Confirm identity of authorized recipient"
+    rationale: "Requires verification of customer authorization before disclosing under contractually-agreed disclosures; also broader customer consultation in 10.3."
+
+  - must_id: item:B.8.5.5:proc_default_reject
+    verdict: satisfies
+    confidence: high
+    quote: "__Default response: REJECT__
+
+- Politely decline without disclosing any information"
+    rationale: "Explicit default reject procedure for non-binding requests."
+
+  - must_id: item:B.8.5.5:proc_source_variety
+    verdict: partial
+    confidence: medium
+    quote: "law enforcement, court, regulator, or other third party"
+    rationale: "Acknowledges multiple sources but does not explicitly address tribunals or multi-jurisdiction awareness."
+
+  - must_id: item:B.8.5.5:reg_binding_classification
+    verdict: satisfies
+    confidence: high
+    quote: "Request type (legally binding / non-binding / contractually authorized)"
+    rationale: "Legal Requests Log records binding classification per row."
+
+  - must_id: item:B.8.5.5:reg_customer_authorisation
+    verdict: partial
+    confidence: medium
+    quote: "Customer authorization received (Y/N)"
+    rationale: "Log captures customer authorisation Y/N but not explicit reference to contract clause vs one-off approval."
+
+  - must_id: item:B.8.5.5:reg_decision_id
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Legal Requests Log fields listed do not include a unique decision identifier."
+
+  - must_id: item:B.8.5.5:reg_outcome
+    verdict: partial
+    confidence: medium
+    quote: "All disclosure requests logged in __Legal Requests Log__ with:
+
+- Request type (legally binding / non\-binding / contractually authorized)
+- Customer consulted (Y/N)
+- Customer authorization received (Y/N)
+- Data disclosed (if any)"
+    rationale: "Log fields imply outcome tracking but do not explicitly name an 'outcome' field (rejected/accepted/consulted)."
+
+  - must_id: item:B.8.5.5:reg_request_source
+    verdict: partial
+    confidence: medium
+    quote: "Request type (legally binding / non\-binding / contractually authorized)"
+    rationale: "Log captures request type/classification but does not explicitly require recording the specific request source/requester identity."
+
+  - must_id: item:B.8.5.5:rev_classification_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No documented periodic review or sampling of disclosure classification decisions."
+
+  - must_id: item:B.8.5.5:rev_consultation_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No audit process defined to verify customer consultation occurred before disclosure."
+
+  - must_id: item:B.8.5.5:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No scheduled review interval for disclosure log is specified."
+
+  - must_id: item:B.8.5.5:rev_reviewer
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No reviewer roles (Legal/Trust/DPO) identified for periodic review of disclosure requests."
+
+  - must_id: item:B.8.5.6:scope_exclusions
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No listing of excluded suppliers (non-PII) with rationale in this procedure."
+
+  - must_id: item:B.8.5.6:scope_pii_processing_test
+    verdict: partial
+    confidence: low
+    quote: "DP&RM identifies the new sub\-processor and confirms it requires disclosure"
+    rationale: "Implies a PII-processing determination but does not describe a formal test/criteria applied per supplier."
+
+  - must_id: item:B.8.5.6:scope_subcontractor_list
+    verdict: partial
+    confidence: medium
+    quote: "All sub\-processors used at the time of contract signing are listed in Section 8 of the Customer DPA (DOC065)"
+    rationale: "References an external list in DOC065 rather than enumerating in-scope subcontractors here."
+
+  - must_id: item:B.8.5.6:rev_content_audit
+    verdict: partial
+    confidence: medium
+    quote: "Notification must include: sub\-processor name, country, service provided, data categories, and safeguards in place"
+    rationale: "Required content includes country and safeguards, but no explicit audit/sampling of disclosures for compliance is defined."
+
+  - must_id: item:B.8.5.6:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Review date and next review date are marked TBD, no planned review interval is confirmed."
+
+  - must_id: item:B.8.5.6:rev_pre_use_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of a pre-use audit sampling subcontractor onboardings against disclosure records."
+
+  - must_id: item:B.8.5.6:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "Reviewed by: PIMS Manager"
+    rationale: "Only PIMS Manager is listed as reviewer; Trust, Legal, and DPO are not identified as reviewers."
+
+  - must_id: item:B.8.5.6:proc_countries_always_public
+    verdict: partial
+    confidence: medium
+    quote: "Notification must include: sub-processor name, country, service provided, data categories, and safeguards in place"
+    rationale: "Country is disclosed in new sub-processor notifications, but no explicit statement that the country list is always publicly disclosed."
+
+  - must_id: item:B.8.5.6:proc_customer_contract_link
+    verdict: satisfies
+    confidence: high
+    quote: "All sub-processors used at the time of contract signing are listed in Section 8 of the Customer DPA (DOC065). By accepting the DPA, the customer acknowledges and approves the listed sub-processors."
+    rationale: "Procedure links subcontracting provisions to Customer DPA Section 8."
+
+  - must_id: item:B.8.5.6:proc_disclosure_content
+    verdict: partial
+    confidence: medium
+    quote: "Notification must include: sub-processor name, country, service provided, data categories, and safeguards in place"
+    rationale: "Identity, country, and safeguards are covered but international organisations and specific obligations mechanism are not explicitly addressed."
+
+  - must_id: item:B.8.5.6:proc_nda_path
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No NDA-based disclosure path mentioned for cases where public disclosure poses security risk."
+
+  - must_id: item:B.8.5.6:proc_pre_use_disclosure
+    verdict: satisfies
+    confidence: high
+    quote: "Email notification sent to ALL active ArionComply customers minimum 30 days before the new sub-processor commences processing"
+    rationale: "Customers are informed at least 30 days before a new sub-processor begins processing."
+
+  - must_id: item:B.8.5.6:reg_countries
+    verdict: partial
+    confidence: medium
+    quote: "Notification must include: sub-processor name, country, service provided, data categories, and safeguards in place"
+    rationale: "Countries are captured in notifications and Section 8 of DPA, but no explicit per-row register field for countries and international organisations is defined."
+
+  - must_id: item:B.8.5.6:reg_customer_id
+    verdict: partial
+    confidence: low
+    quote: "Client ID | Unique client identifier"
+    rationale: "Processor Operations Log has Client ID field, but no dedicated Subprocessor Register row-per-customer structure is defined here."
+
+  - must_id: item:B.8.5.6:reg_disclosure_date
+    verdict: partial
+    confidence: medium
+    quote: "Email notification sent to ALL active ArionComply customers minimum __30 days before__ the new sub\-processor commences processing"
+    rationale: "Doc specifies timing rule (30 days before use) but does not define a per-row disclosure date field in a register."
+
+  - must_id: item:B.8.5.6:reg_disclosure_mode
+    verdict: partial
+    confidence: medium
+    quote: "All sub\-processors used at the time of contract signing are listed in Section 8 of the Customer DPA \(DOC065\)"
+    rationale: "Discloses via DPA schedule and email notification, but no explicit per-row 'disclosure mode' field defined."
+
+  - must_id: item:B.8.5.6:reg_subcontractor_id
+    verdict: partial
+    confidence: medium
+    quote: "Notification must include: sub\-processor name, country, service provided, data categories, and safeguards in place"
+    rationale: "Names sub-processors in notifications and DPA Section 8, but no formal register row with subcontractor identifier is defined here."
+
+  - must_id: item:B.8.5.7:scope_authorisation_mode
+    verdict: partial
+    confidence: low
+    quote: "All sub\-processors used at the time of contract signing are listed in Section 8 of the Customer DPA \(DOC065\)\. By accepting the DPA, the customer acknowledges and approves the listed sub\-processors"
+    rationale: "Implies general authorisation via DPA acceptance with notification of new sub-processors, but does not distinguish authorisation modes per engagement type."
+
+  - must_id: item:B.8.5.7:scope_engagement_types
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document does not enumerate distinct engagement types (SaaS subprocessor, infrastructure, support-outsourcing, one-off contractor)."
+
+  - must_id: item:B.8.5.7:rev_authorisation_audit
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No authorisation audit process traceable to customer authorisation is described."
+
+  - must_id: item:B.8.5.7:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Review dates are marked TBD and no planned review interval is confirmed."
+
+  - must_id: item:B.8.5.7:rev_flowdown_audit
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No flow-down audit of sampled contracts against Annex B is described."
+
+  - must_id: item:B.8.5.7:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Reviewer identified only as PIMS Manager/DP&RM; no combined Procurement + Legal + DPO reviewer identity."
+
+  - must_id: item:B.8.5.7:proc_annex_b_flowdown
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No requirement that subcontractor contracts flow down Annex B controls is stated."
+
+  - must_id: item:B.8.5.7:proc_customer_authorisation
+    verdict: partial
+    confidence: medium
+    quote: "All sub-processors used at the time of contract signing are listed in Section 8 of the Customer DPA (DOC065). By accepting the DPA, the customer acknowledges and approves the listed sub-processors."
+    rationale: "General authorisation via DPA acceptance is described, but specific written authorisation prior to processing is not fully detailed."
+
+  - must_id: item:B.8.5.7:proc_exclusion_justification
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of justification for excluded Annex B controls per subcontractor."
+
+  - must_id: item:B.8.5.7:proc_risk_assessment_reflection
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document does not indicate that subcontractor contract scope reflects a risk assessment."
+
+  - must_id: item:B.8.5.7:proc_written_contract
+    verdict: partial
+    confidence: medium
+    quote: "All sub-processor notifications and customer responses are retained for 5 years and logged in the Third-Party Processor & Subprocessor Oversight Procedure (DOC058)."
+    rationale: "Refers to sub-processor oversight procedure but does not explicitly require a written contract with each subcontractor."
+
+  - must_id: item:B.8.5.7:reg_annex_b_coverage
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No register field for Annex B controls coverage per subcontractor is defined."
+
+  - must_id: item:B.8.5.7:reg_contract_reference
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No executed contract reference field described in a subcontractor register."
+
+  - must_id: item:B.8.5.7:reg_customer_authorisation
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No customer authorisation reference per row in subprocessor register described."
+
+  - must_id: item:B.8.5.7:reg_engagement_date
+    verdict: partial
+    confidence: low
+    quote: "Change logged in __Subprocessor Register__ with notification date and any objections received"
+    rationale: "Mentions notification date logged in Subprocessor Register but not explicitly engagement effective date."
+
+  - must_id: item:B.8.5.7:reg_subcontractor_id
+    verdict: partial
+    confidence: low
+    quote: "Change logged in __Subprocessor Register__ with notification date and any objections received"
+    rationale: "A Subprocessor Register is referenced but subcontractor identifier field is not explicitly defined."
+
+  - must_id: item:B.8.5.8:scope_change_types
+    verdict: partial
+    confidence: medium
+    quote: "When Arion Networks plans to add or replace a sub-processor who processes customer PII"
+    rationale: "Add and replace are covered but removal of a sub-processor is not addressed."
+
+  - must_id: item:B.8.5.8:scope_general_auth_customers
+    verdict: partial
+    confidence: medium
+    quote: "Email notification sent to ALL active customers minimum __30 days before change__"
+    rationale: "Notifications go to all active customers but the doc doesn't explicitly distinguish general-authorisation contracts."
+
+  - must_id: item:B.8.5.8:scope_specific_auth_exclusion
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No distinction made between general and specific authorisation customers; specific-authorisation exclusion is not addressed."
+
+  - must_id: item:B.8.5.8:rev_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Review date is marked TBD; no planned interval evidence present."
+
+  - must_id: item:B.8.5.8:rev_notification_audit
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence of a sampling/audit process to verify notification timeframes."
+
+  - must_id: item:B.8.5.8:rev_objection_audit
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No procedure to review objection outcomes for consistency is described."
+
+  - must_id: item:B.8.5.8:rev_reviewer
+    verdict: partial
+    confidence: low
+    quote: "__ Reviewed by__: PIMS Manager"
+    rationale: "A reviewer is named but Trust + Legal roles are not identified."
+
+  - must_id: item:B.8.5.8:proc_advance_notification
+    verdict: satisfies
+    confidence: high
+    quote: "Email notification sent to ALL active customers minimum __30 days before change__"
+    rationale: "Advance notification with 30-day period and objection window is defined."
+
+  - must_id: item:B.8.5.8:proc_change_trigger
+    verdict: satisfies
+    confidence: high
+    quote: "When Arion Networks plans to add or replace a sub‑processor who processes customer PII, we must inform customers"
+    rationale: "Any addition or replacement triggers the notification workflow."
+
+  - must_id: item:B.8.5.8:proc_general_auth_scope
+    verdict: partial
+    confidence: medium
+    quote: "in accordance with control B\.8\.5\.8 and Customer DPA Section 8"
+    rationale: "References DPA Section 8 but does not explicitly identify this as a general-authorisation clause versus specific-authorisation."
+
+  - must_id: item:B.8.5.8:proc_notification_content
+    verdict: partial
+    confidence: medium
+    quote: "name of new/replacement sub‑processor, service provided, data categories affected, effective date"
+    rationale: "Content includes name and data categories but does not explicitly require country/jurisdiction or Annex B coverage summary in Section 12 (though Section 11.2 includes country)."
+
+  - must_id: item:B.8.5.8:proc_objection_handling
+    verdict: satisfies
+    confidence: high
+    quote: "Customers may object within 30 days to privacy@arionetworks.com
+5. DP&RM resolves objections or allows penalty-free termination per DPA Section 9"
+    rationale: "Procedure explicitly defines objection window and negotiation/termination pathway."
+
+  - must_id: item:B.8.5.8:reg_change_id
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Subprocessor Register is referenced but no unique change identifier field is specified."
+
+  - must_id: item:B.8.5.8:reg_change_type
+    verdict: partial
+    confidence: medium
+    quote: "When Arion Networks plans to add or replace a sub-processor"
+    rationale: "Add/replace change types mentioned in narrative but no explicit register field for change type."
+
+  - must_id: item:B.8.5.8:reg_effective_date
+    verdict: partial
+    confidence: medium
+    quote: "name of new/replacement sub-processor, service provided, data categories affected, effective date"
+    rationale: "Effective date is captured in notification but not explicitly required as a register field."
+
+  - must_id: item:B.8.5.8:reg_notification_date
+    verdict: satisfies
+    confidence: medium
+    quote: "Change logged in Subprocessor Register with notification date and any objections received"
+    rationale: "Register explicitly logs notification date per change."
+
+  - must_id: item:B.8.5.8:reg_objection_status
+    verdict: partial
+    confidence: medium
+    quote: "Change logged in Subprocessor Register with notification date and any objections received"
+    rationale: "Objections are logged but no defined status values (none/raised/resolved/termination)."
+

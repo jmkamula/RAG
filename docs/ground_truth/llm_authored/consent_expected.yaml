@@ -1,0 +1,998 @@
+# LLM-authored ground truth for Consent Management Procedure.docx
+# Model: claude-opus-4-7 — 2-pass structured (Ship 82'.a).
+# Total verdicts: 153
+
+doc: Consent Management Procedure.docx
+annotator: claude-opus-4-7
+generated_at: 2026-08-19T11:28:24Z
+
+musts:
+  - must_id: item:A.5.33:classification_scheme
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "This is a consent management procedure, not a records classification scheme."
+
+  - must_id: item:A.5.33:disposal
+    verdict: partial
+    confidence: medium
+    quote: "Consent records are retained for a minimum of 5 years, or longer if required by applicable regulations, and are securely deleted once retention expires."
+    rationale: "Mentions secure deletion but lacks method per media, destruction certificates, or witness requirements."
+
+  - must_id: item:A.5.33:format_guidance
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Document is specific to consent records in Odoo; not a general records procedure requiring format-specific guidance."
+
+  - must_id: item:A.5.33:legal_hold
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No legal hold or litigation hold provisions mentioned."
+
+  - must_id: item:A.5.33:owner
+    verdict: partial
+    confidence: medium
+    quote: "Owner: DPO"
+    rationale: "DPO is named as owner but no joint records manager/legal counsel/InfoSec designation."
+
+  - must_id: item:A.5.33:protection_requirements
+    verdict: partial
+    confidence: medium
+    quote: "Access is restricted to the Data Protection Officer, Privacy Team, and authorized staff only... Odoo data is backed up within Microsoft Azure/M365 infrastructure with encryption in transit and at rest"
+    rationale: "Provides access control and encryption but only for consent records, not per record class; no integrity verification or immutability."
+
+  - must_id: item:A.5.34:pii_inventory
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "This procedure covers consent management, not a PII inventory / RoPA."
+
+  - must_id: item:A.5.34:reg_controls_applied
+    verdict: partial
+    confidence: low
+    quote: "Odoo data is backed up within Microsoft Azure/M365 infrastructure with encryption in transit and at rest."
+    rationale: "Some controls listed for consent records only; not a per-activity control mapping."
+
+  - must_id: item:A.5.34:reg_data_subjects
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Data subject categories per processing activity belongs in RoPA, not consent procedure."
+
+  - must_id: item:A.5.34:reg_lawful_basis
+    verdict: partial
+    confidence: medium
+    quote: "Essential cookies (e.g., Cloudflare, PHPSESSID): Processed on the basis of legitimate interest (Art. 6(1)(f) GDPR)... Non-essential cookies... explicit consent will be required... (Art. 6(1)(a) GDPR)"
+    rationale: "Lawful bases are identified per activity type but only for consent-scope activities, not full RoPA coverage."
+
+  - must_id: item:A.5.34:reg_owner_per_activity
+    verdict: partial
+    confidence: medium
+    quote: "Design consent request (form, checkbox, banner)	Marketing, Legal, Product Owner"
+    rationale: "Roles are assigned to consent lifecycle steps but not to individual processing activities as required by a RoPA."
+
+  - must_id: item:A.5.34:reg_purposes
+    verdict: satisfies
+    confidence: high
+    quote: "Consent Purpose	e.g., newsletter, usage analytics, third-party marketing"
+    rationale: "Purposes are specified per processing activity (newsletter, analytics, cookies, surveys) with explicit legal basis."
+
+  - must_id: item:A.5.34:reg_retention
+    verdict: partial
+    confidence: medium
+    quote: "Consent records are retained for a minimum of 5 years, or longer if required by applicable regulations, and are securely deleted once retention expires"
+    rationale: "Retention specified for consent records but no start/end triggers or cross-link to records schedule."
+
+  - must_id: item:A.5.34:reg_transfers
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of cross-border transfers, destination jurisdictions, or transfer mechanisms."
+
+  - must_id: item:A.5.34:applicable_laws
+    verdict: satisfies
+    confidence: high
+    quote: "GDPR Article 6(1)(a), Article 7
+- ISO/IEC 27701:2019 control A.7.5.5
+- CCPA/CPRA consumer opt-out rights"
+    rationale: "GDPR and CCPA/CPRA are explicitly named as applicable laws."
+
+  - must_id: item:A.5.34:breach_handling
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No reference to breach handling, incident response, or Art.33/34 notification obligations."
+
+  - must_id: item:A.5.34:data_subject_rights
+    verdict: partial
+    confidence: medium
+    quote: "Consent withdrawals must be processed promptly (within 5 business days)"
+    rationale: "Only withdrawal right is addressed with SLA; other DSR rights (access, erasure, portability, etc.) not covered here."
+
+  - must_id: item:A.5.34:lawful_basis
+    verdict: satisfies
+    confidence: high
+    quote: "Essential cookies (e.g., Cloudflare, PHPSESSID): Processed on the basis of legitimate interest (Art. 6(1)(f) GDPR)"
+    rationale: "Lawful basis is explicitly identified per processing activity with GDPR article references."
+
+  - must_id: item:A.5.34:owner
+    verdict: partial
+    confidence: medium
+    quote: "Owner: DPO"
+    rationale: "DPO is named as owner by role but not identified as a specific named individual."
+
+  - must_id: item:A.5.34:retention_minimisation
+    verdict: partial
+    confidence: medium
+    quote: "Consent records are retained for a minimum of 5 years, or longer if required by applicable regulations, and are securely deleted once retention expires"
+    rationale: "Retention duration is stated but no explicit data minimisation principle or cross-link to Art.5.1.c/e or records schedule."
+
+  - must_id: item:A.5.34:security_controls_ref
+    verdict: partial
+    confidence: medium
+    quote: "Odoo data is backed up within Microsoft Azure/M365 infrastructure with encryption in transit and at rest"
+    rationale: "Mentions encryption, access control, and audit trail for consent records but does not cross-reference specific A.8.x controls."
+
+  - must_id: item:A.5.34:transfer_restrictions
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Document does not discuss cross-border transfers, SCCs, adequacy, BCRs, or derogations."
+
+  - must_id: item:A.7.2.2:proc_basis_catalog
+    verdict: partial
+    confidence: medium
+    quote: "Essential cookies (e.g., Cloudflare, PHPSESSID): Processed on the basis of legitimate interest (Art. 6(1)(f) GDPR)"
+    rationale: "Enumerates several GDPR Art.6 bases in context but does not present a complete basis catalog across jurisdictions."
+
+  - must_id: item:A.7.2.2:proc_basis_change
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No procedure described for changing legal basis or notifying subjects of such changes."
+
+  - must_id: item:A.7.2.2:proc_lia_procedure
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No legitimate-interests balancing test procedure is described despite references to LI basis."
+
+  - must_id: item:A.7.2.2:proc_selection_test
+    verdict: partial
+    confidence: medium
+    quote: "Freely given: Not tied to unrelated services or terms
+Specific: Clearly identifies the purpose(s) of data processing
+Informed: Communicates who is processing the data and for what reason
+Unambiguous: Requires a clear affirmative action"
+    rationale: "Selection test elements are provided for consent basis only, not for other bases."
+
+  - must_id: item:A.7.2.2:proc_special_category_overlay
+    verdict: partial
+    confidence: medium
+    quote: "Other voluntary activities (e.g., surveys, beta testing, recordings, special category data): Consent required (Art. 6(1)(a) or Art. 9(2)(a) GDPR for special categories)"
+    rationale: "Special-category overlay is mentioned briefly via Art.9(2)(a) but lacks broader treatment (e.g., Art.10 criminal data)."
+
+  - must_id: item:A.7.2.2:reg_activity_id
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "This is a consent procedure, not a RoPA; activity identifiers per row are not the artifact of this document."
+
+  - must_id: item:A.7.2.2:reg_lia_reference
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "RoPA-style LIA per-row reference is not applicable to a consent management procedure."
+
+  - must_id: item:A.7.2.2:reg_primary_basis
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Per-row primary basis is a RoPA register field, not within scope of this consent procedure."
+
+  - must_id: item:A.7.2.2:reg_purpose_link
+    verdict: partial
+    confidence: medium
+    quote: "Consent Purpose
+
+e.g., newsletter, usage analytics, third-party marketing"
+    rationale: "Consent register captures purpose descriptors but does not explicitly link to A.7.2.1 purpose IDs."
+
+  - must_id: item:A.7.2.2:reg_special_category_basis
+    verdict: partial
+    confidence: medium
+    quote: "Other voluntary activities (e.g., surveys, beta testing, recordings, special category data): Consent required (Art. 6(1)(a) or Art. 9(2)(a) GDPR for special categories)"
+    rationale: "Mentions Art.9(2)(a) as the special-category basis but does not provide a per-record special-category basis field in the register."
+
+  - must_id: item:A.7.2.3:scope_children_thresholds
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No per-jurisdiction age-of-consent thresholds are defined."
+
+  - must_id: item:A.7.2.3:scope_consent_activities
+    verdict: satisfies
+    confidence: high
+    quote: "Non-essential cookies (e.g., analytics, chat, advertising): Currently disabled. If reintroduced, explicit consent will be required before activation (Art. 6(1)(a) GDPR)."
+    rationale: "Document enumerates consent-required activities including non-essential cookies, marketing, surveys, and special category data."
+
+  - must_id: item:A.7.2.3:scope_special_category_map
+    verdict: partial
+    confidence: medium
+    quote: "Other voluntary activities (e.g., surveys, beta testing, recordings, special category data): Consent required (Art. 6(1)(a) or Art. 9(2)(a) GDPR for special categories)"
+    rationale: "References special category consent under Art.9(2)(a) but does not map specific categories (health, biometric, genetic, criminal, children)."
+
+  - must_id: item:A.7.2.3:reg_artifact_snapshot
+    verdict: partial
+    confidence: medium
+    quote: "Each consent record must also include the version of the consent text and policy presented to the data subject at the time consent was obtained."
+    rationale: "Requires versioned consent text but does not require UI screenshot as part of the artifact snapshot."
+
+  - must_id: item:A.7.2.3:reg_channel_id
+    verdict: partial
+    confidence: medium
+    quote: "Method of Consent
+
+Checkbox, banner, email, etc."
+    rationale: "Register captures method of consent but not a distinct channel identifier per row (e.g., web signup / iOS app / call recording)."
+
+  - must_id: item:A.7.2.3:reg_effective_date
+    verdict: partial
+    confidence: low
+    quote: "Date/Time of Consent
+
+Timestamp of affirmative action"
+    rationale: "Timestamp of consent is captured but no explicit effective date per artifact version is specified."
+
+  - must_id: item:A.7.2.3:reg_purpose_link
+    verdict: partial
+    confidence: medium
+    quote: "Consent Purpose
+
+e.g., newsletter, usage analytics, third-party marketing"
+    rationale: "Purpose is recorded per consent but not explicitly linked to A.7.2.1 purpose identifiers."
+
+  - must_id: item:A.7.2.3:reg_review_signoff
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No requirement for DPO + Legal signoff per consent artifact version is specified; only general annual review is mentioned."
+
+  - must_id: item:A.7.2.3:proc_children_overlay
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of children's consent or parental consent thresholds per jurisdiction."
+
+  - must_id: item:A.7.2.3:proc_collection_mechanism
+    verdict: partial
+    confidence: medium
+    quote: "Method of Consent
+
+Checkbox, banner, email, etc."
+    rationale: "Lists collection methods generically but does not define mechanisms per channel (web form, mobile app, physical, verbal)."
+
+  - must_id: item:A.7.2.3:proc_no_bundling
+    verdict: partial
+    confidence: medium
+    quote: "Freely given: Not tied to unrelated services or terms"
+    rationale: "States freely-given principle implying no bundling but lacks explicit no-bundling rule with necessity exception."
+
+  - must_id: item:A.7.2.3:proc_quality_standard
+    verdict: satisfies
+    confidence: high
+    quote: "Freely given: Not tied to unrelated services or terms
+- Specific: Clearly identifies the purpose(s) of data processing
+- Informed
+- Unambiguous: Requires a clear affirmative action (no pre-ticked boxes)"
+    rationale: "Explicitly defines consent quality standard covering freely given, specific, informed, and unambiguous with clear affirmative act."
+
+  - must_id: item:A.7.2.3:proc_special_category_overlay
+    verdict: partial
+    confidence: medium
+    quote: "Other voluntary activities (e.g., surveys, beta testing, recordings, special category data): Consent required (Art. 6(1)(a) or Art. 9(2)(a) GDPR for special categories)"
+    rationale: "References Art. 9(2)(a) explicit consent for special categories but lacks detailed overlay for health/biometric handling."
+
+  - must_id: item:A.7.2.3:proc_when_consent_required
+    verdict: satisfies
+    confidence: high
+    quote: "Essential cookies (e.g., Cloudflare, PHPSESSID): Processed on the basis of legitimate interest (Art. 6(1)(f) GDPR). No consent required."
+    rationale: "Document catalogs when consent is required per activity with lawful-basis references."
+
+  - must_id: item:A.7.2.3:rev_artifact_audit
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No provision for sampled audit of consent forms against the quality standard."
+
+  - must_id: item:A.7.2.3:rev_children_audit
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Document does not address children's data processing; age-gate audit not in scope."
+
+  - must_id: item:A.7.2.3:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: "Last Reviewed: 25OCT2025 
+Next Review Date: 25OCT2026"
+    rationale: "Review dates are documented within an annual planned interval."
+
+  - must_id: item:A.7.2.3:rev_no_bundling_check
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No documented regression check ensuring services are not gated behind unrelated consent."
+
+  - must_id: item:A.7.2.3:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "Reviewed by__: PIMS Manager"
+    rationale: "Reviewer is identified as PIMS Manager but the required DPO + UX + Legal reviewer identities are not all shown."
+
+  - must_id: item:A.7.2.4:scope_consent_activities
+    verdict: satisfies
+    confidence: high
+    quote: "Non-essential cookies (e.g., analytics, chat, advertising):__ Currently disabled. If reintroduced, explicit consent will be required before activation (Art. 6(1)(a) GDPR)."
+    rationale: "The scope section enumerates consent-required activities (non-essential cookies, newsletters, surveys/beta/special categories)."
+
+  - must_id: item:A.7.2.4:scope_exclusions
+    verdict: satisfies
+    confidence: high
+    quote: "Essential cookies (e.g., Cloudflare, PHPSESSID):__ Processed on the basis of legitimate interest (Art. 6(1)(f) GDPR). *No consent required.*"
+    rationale: "Non-consent activities are excluded with explicit legal basis rationale (legitimate interest / contract steps)."
+
+  - must_id: item:A.7.2.4:scope_retention
+    verdict: partial
+    confidence: medium
+    quote: "Consent records are retained for a minimum of 5 years, or longer if required by applicable regulations, and are securely deleted once retention expires"
+    rationale: "A 5-year retention period is stated but the doc does not explicitly frame it as 'until withdrawn + statutory retention for demonstration'."
+
+  - must_id: item:A.7.2.4:proc_demonstration_pathway
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No pathway describing how a subject requests proof of their consent and org retrieves the record within a stated SLA is defined."
+
+  - must_id: item:A.7.2.4:proc_freely_given_test
+    verdict: satisfies
+    confidence: high
+    quote: "Freely given: Not tied to unrelated services or terms"
+    rationale: "The consent principles state consent must be freely given and revocable with no penalty, meeting the freely-given test."
+
+  - must_id: item:A.7.2.4:proc_pre_consent_information
+    verdict: partial
+    confidence: low
+    quote: "Informed: Communicates who is processing the data and for what reason"
+    rationale: "General 'informed' principle is stated but no specific pre-consent information delivery process aligned to §7.3.3 is described."
+
+  - must_id: item:A.7.2.4:proc_record_fields
+    verdict: satisfies
+    confidence: high
+    quote: "Consent ID
+
+Unique reference
+
+Data Subject Identifier
+
+Email, user ID, or session ID (pseudonymized where possible)
+
+Consent Purpose
+
+e.g., newsletter, usage analytics, third-party marketing
+
+Date/Time of Consent"
+    rationale: "Consent Register defines subject identifier, timestamp, purpose, method, and consent text version — covering required fields."
+
+  - must_id: item:A.7.2.4:proc_specific_test
+    verdict: satisfies
+    confidence: high
+    quote: "Specific: Clearly identifies the purpose(s) of data processing"
+    rationale: "The specific test is captured, with purposes clearly identified per consent record."
+
+  - must_id: item:A.7.2.4:proc_unambiguous_test
+    verdict: satisfies
+    confidence: high
+    quote: "Unambiguous: Requires a clear affirmative action (no pre-ticked boxes)"
+    rationale: "The unambiguous test is explicitly stated with no pre-ticked boxes."
+
+  - must_id: item:A.7.2.4:reg_artifact_version
+    verdict: satisfies
+    confidence: high
+    quote: "Each consent record must also include the version of the consent text and policy presented to the data subject at the time consent was obtained"
+    rationale: "Document explicitly requires recording the version of consent text/policy per record."
+
+  - must_id: item:A.7.2.4:reg_channel
+    verdict: satisfies
+    confidence: high
+    quote: "Method of Consent
+
+Checkbox, banner, email, etc."
+    rationale: "The register includes a Method of Consent field capturing collection channel."
+
+  - must_id: item:A.7.2.4:reg_event_id
+    verdict: satisfies
+    confidence: high
+    quote: "Consent ID
+
+Unique reference"
+    rationale: "Register defines a unique Consent ID field per row."
+
+  - must_id: item:A.7.2.4:reg_purposes_consented
+    verdict: partial
+    confidence: medium
+    quote: "Consent Purpose
+
+e.g., newsletter, usage analytics, third-party marketing"
+    rationale: "Register captures purpose but does not link to formal A.7.2.1 purpose ids."
+
+  - must_id: item:A.7.2.4:reg_subject_id
+    verdict: satisfies
+    confidence: high
+    quote: "Data Subject Identifier
+
+Email, user ID, or session ID (pseudonymized where possible)"
+    rationale: "Subject identifier field is explicitly defined in register."
+
+  - must_id: item:A.7.2.4:reg_timestamp
+    verdict: satisfies
+    confidence: high
+    quote: "Date/Time of Consent
+
+Timestamp of affirmative action"
+    rationale: "Register includes timestamp of consent field."
+
+  - must_id: item:A.7.2.4:rev_completeness_audit
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document mentions annual review of consent text/UI but no completeness sampling audit of consent records."
+
+  - must_id: item:A.7.2.4:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: "Last Reviewed: 25OCT2025 
+Next Review Date: 25OCT2026"
+    rationale: "Review date documented within planned annual interval."
+
+  - must_id: item:A.7.2.4:rev_retrievability
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No described retrievability test with SLA sampling for consent events."
+
+  - must_id: item:A.7.2.4:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "Owner: DPO
+
+Version: 1
+
+Reviewed by: PIMS Manager"
+    rationale: "Reviewer identity is stated as PIMS Manager, not DPO plus Engineering as required."
+
+  - must_id: item:A.7.2.4:rev_withdrawal_propagation
+    verdict: partial
+    confidence: medium
+    quote: "Update marketing lists, analytics tags, or third-party integrations accordingly"
+    rationale: "Document requires downstream updates upon withdrawal but provides no evidence of sampled verification that downstream processing actually stopped."
+
+  - must_id: item:A.7.3.4:scope_channel_map
+    verdict: partial
+    confidence: medium
+    quote: "Consent withdrawal may be exercised via the following channels:
+
+- 'Unsubscribe' link in newsletters (if offered)
+- Cookie banner / preference centre (if non-essential cookies are reintroduced)
+- Direct email request"
+    rationale: "Withdrawal channels are listed and roughly correspond to collection contexts, but no explicit per-activity collection→withdrawal channel mapping table is provided."
+
+  - must_id: item:A.7.3.4:scope_consent_activities
+    verdict: partial
+    confidence: medium
+    quote: "Non-essential cookies (e.g., analytics, chat, advertising)... Newsletter or marketing communications (if offered in the future)... Other voluntary activities (e.g., surveys, beta testing, recordings, special category data)"
+    rationale: "Consent-based activities are enumerated with Article references but there is no explicit link to a separate A.7.2.2 lawful basis register."
+
+  - must_id: item:A.7.3.4:scope_jurisdiction_variance
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of jurisdiction-specific variations regarding when withdrawal is possible."
+
+  - must_id: item:A.7.3.4:proc_channel_parity
+    verdict: partial
+    confidence: medium
+    quote: "'Unsubscribe' link in newsletters (if offered)
+- Cookie banner / preference centre (if non-essential cookies are reintroduced)
+- Direct email request to privacy@arionetworks.com"
+    rationale: "Withdrawal channels roughly parallel collection channels but no explicit statement of channel parity principle is made."
+
+  - must_id: item:A.7.3.4:proc_easy_as_giving
+    verdict: partial
+    confidence: medium
+    quote: "Revocable: Can be withdrawn at any time with no penalty"
+    rationale: "Withdrawal is stated as revocable without penalty but the procedure does not explicitly state withdrawal must be as easy as giving consent per Art.7(3)."
+
+  - must_id: item:A.7.3.4:proc_modification_paths
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No mention of partial withdrawal, opting-in to fewer purposes, or restriction of processing paths."
+
+  - must_id: item:A.7.3.4:proc_pre_withdrawal_valid
+    verdict: partial
+    confidence: medium
+    quote: "Retain the record of original consent and withdrawal timestamp for audit purposes"
+    rationale: "Document implies withdrawal stops future processing and retains prior record but does not explicitly state that pre-withdrawal processing remains valid (no retroactive effect)."
+
+  - must_id: item:A.7.3.4:proc_propagation
+    verdict: partial
+    confidence: medium
+    quote: "Update marketing lists, analytics tags, or third-party integrations accordingly"
+    rationale: "Downstream update is required but no detailed cascade to authorized users and third parties per A.7.3.7 is documented."
+
+  - must_id: item:A.7.3.4:proc_response_sla
+    verdict: partial
+    confidence: high
+    quote: "Withdrawal requests shall be processed without undue delay and completed within 5 business days of receipt"
+    rationale: "A clear SLA is stated but there is no evidence in the document that it has been honoured in practice."
+
+  - must_id: item:A.7.3.4:rev_channel_test
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of end-to-end withdrawal testing per channel."
+
+  - must_id: item:A.7.3.4:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: "Last Reviewed:__ 25OCT2025 
+__Next Review Date:__ 25OCT2026"
+    rationale: "Review dates are documented within the planned annual interval."
+
+  - must_id: item:A.7.3.4:rev_propagation_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No sampled audit of downstream propagation or third-party notification is described."
+
+  - must_id: item:A.7.3.4:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "Reviewed by__: PIMS Manager"
+    rationale: "Reviewer is identified as PIMS Manager, but not the required DPO + Engineering combination."
+
+  - must_id: item:A.7.3.4:reg_event_id
+    verdict: partial
+    confidence: medium
+    quote: "Consent ID | Unique reference"
+    rationale: "A unique Consent ID field exists but no explicit event ID for modifications/withdrawals per row."
+
+  - must_id: item:A.7.3.4:reg_event_type
+    verdict: partial
+    confidence: medium
+    quote: "Processing Status | Active / Withdrawn"
+    rationale: "Register captures active/withdrawn status but does not distinguish modification vs partial vs full withdrawal."
+
+  - must_id: item:A.7.3.4:reg_propagation_status
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No propagation status field tracking downstream/third-party notification per row."
+
+  - must_id: item:A.7.3.4:reg_subject_id
+    verdict: satisfies
+    confidence: high
+    quote: "Data Subject Identifier | Email, user ID, or session ID (pseudonymized where possible)"
+    rationale: "Subject identifier field is defined in the register."
+
+  - must_id: item:A.7.3.4:reg_timestamp
+    verdict: satisfies
+    confidence: high
+    quote: "Date/Time of Consent | Timestamp of affirmative action"
+    rationale: "Timestamp field is captured per record."
+
+  - must_id: item:Art.13:complaint
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of the right to lodge a complaint with a supervisory authority."
+
+  - must_id: item:Art.13:dpo
+    verdict: partial
+    confidence: low
+    quote: "Access is restricted to the Data Protection Officer, Privacy Team, and authorized staff only."
+    rationale: "Mentions the DPO role but provides no specific contact details for the DPO as required by Art. 13."
+
+  - must_id: item:Art.13:identity
+    verdict: partial
+    confidence: medium
+    quote: "This procedure outlines how Arion Networks s.r.o. obtains, records, and manages consent for the processing of personal data"
+    rationale: "Identifies the controller by name but does not provide contact details required by Art. 13."
+
+  - must_id: item:Art.13:legitimate
+    verdict: satisfies
+    confidence: high
+    quote: "Essential cookies (e.g., Cloudflare, PHPSESSID): Processed on the basis of legitimate interest (Art. 6(1)(f) GDPR)."
+    rationale: "Legitimate interest basis is explicitly identified for specific processing activities."
+
+  - must_id: item:Art.13:purposes
+    verdict: satisfies
+    confidence: high
+    quote: "Non-essential cookies (e.g., analytics, chat, advertising): Currently disabled. If reintroduced, explicit consent will be required before activation (Art. 6(1)(a) GDPR)."
+    rationale: "Purposes and legal bases are clearly identified for each processing activity."
+
+  - must_id: item:Art.13:recipients
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "The document does not identify recipients or categories of recipients of personal data."
+
+  - must_id: item:Art.13:retention
+    verdict: satisfies
+    confidence: high
+    quote: "Consent records are retained for a minimum of 5 years, or longer if required by applicable regulations, and are securely deleted once retention expires."
+    rationale: "Retention period for consent records is explicitly stated."
+
+  - must_id: item:Art.13:rights
+    verdict: partial
+    confidence: medium
+    quote: "Consent withdrawals must be processed promptly (within 5 business days)"
+    rationale: "Only withdrawal right is addressed; other data subject rights (access, rectification, erasure) are not covered."
+
+  - must_id: item:Art.13:transfers
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "The document does not address international data transfers or safeguards."
+
+  - must_id: item:Art.13:withdrawal
+    verdict: satisfies
+    confidence: high
+    quote: "Consent withdrawal must be possible at any time. Withdrawal requests shall be processed without undue delay and completed within 5 business days of receipt."
+    rationale: "Right to withdraw consent is clearly documented with channels and timelines."
+
+  - must_id: item:Art.21:direct_marketing_absolute
+    verdict: partial
+    confidence: low
+    quote: "All consent communications must include a clear and accessible opt-out link or contact method"
+    rationale: "Opt-out for marketing is mentioned but the absolute right to object under Art. 21(3) and immediate cessation are not explicitly stated."
+
+  - must_id: item:Art.21:explicit_notice
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document does not address the Art.21.4 requirement to explicitly draw the right to object to the data subject's attention at first communication."
+
+  - must_id: item:Art.21:intake_channel
+    verdict: partial
+    confidence: medium
+    quote: "Direct email request to privacy@arionetworks.com"
+    rationale: "An intake channel exists for consent withdrawal but there is no explicit Art.12 procedure link for objection requests."
+
+  - must_id: item:Art.21:legitimate_interests_balance
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No balancing test procedure for legitimate-interests objections is described."
+
+  - must_id: item:Art.21:response_deadline
+    verdict: partial
+    confidence: medium
+    quote: "Consent withdrawals must be processed promptly (within 5 business days)"
+    rationale: "A 5 business day SLA is defined for consent withdrawal, but no one-month deadline for Art.21 objections is specified."
+
+  - must_id: item:Art.21:scientific_research
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No scientific-research or statistical-purposes overlay is addressed."
+
+  - must_id: item:Art.21:reg_grounds
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No objection register with per-row grounds for continuing processing is defined."
+
+  - must_id: item:Art.21:reg_objection_type
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No objection register capturing per-row objection type is defined."
+
+  - must_id: item:Art.21:reg_outcome
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No per-row outcome tracking for Art.21 objections is defined."
+
+  - must_id: item:Art.21:reg_request_id
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No per-row request ID cross-referencing to Art.12 objection handling is defined."
+
+  - must_id: item:Art.21:reg_response_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No per-row response date tracking for Art.21 SLA is defined."
+
+  - must_id: item:Art.6:scope_member_state
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of Member State law overlays or Art.6.2/6.3 derogations."
+
+  - must_id: item:Art.6:scope_ropa_link
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document does not link consent activities to Art.30 RoPA entries."
+
+  - must_id: item:Art.6:scope_special_overlay
+    verdict: partial
+    confidence: medium
+    quote: "Other voluntary activities (e.g., surveys, beta testing, recordings, special category data): Consent required (Art. 6(1)(a) or Art. 9(2)(a) GDPR for special categories)"
+    rationale: "References Art.9(2)(a) alongside Art.6(1)(a) but does not explicitly state Art.6 is in addition to Art.9."
+
+  - must_id: item:Art.6:proc_basis_catalog
+    verdict: partial
+    confidence: medium
+    quote: "Essential cookies (e.g., Cloudflare, PHPSESSID): Processed on the basis of legitimate interest (Art. 6(1)(f) GDPR). No consent required."
+    rationale: "Provides examples for some Art.6.1 bases (a, b, f) but does not catalog all six bases."
+
+  - must_id: item:Art.6:proc_change_trigger
+    verdict: partial
+    confidence: low
+    quote: "Consent text and UI are reviewed annually or with regulatory changes"
+    rationale: "Mentions review on regulatory changes but no explicit trigger list for re-evaluating the basis."
+
+  - must_id: item:Art.6:proc_decision_authority
+    verdict: partial
+    confidence: medium
+    quote: "Design consent request (form, checkbox, banner) | Marketing, Legal, Product Owner"
+    rationale: "Roles assigned per lifecycle step but no explicit DPO/Privacy Lead approval authority for basis selection."
+
+  - must_id: item:Art.6:proc_decision_inputs
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No documented decision inputs for choosing lawful basis (purpose, minimisation alternatives, subject expectations)."
+
+  - must_id: item:Art.6:activities_enumerated
+    verdict: partial
+    confidence: medium
+    quote: "Essential cookies (e.g., Cloudflare, PHPSESSID)... Website contact form inquiries... Non-essential cookies... Newsletter or marketing communications... Other voluntary activities"
+    rationale: "Activities are enumerated but no link to Art.30 RoPA."
+
+  - must_id: item:Art.6:basis_per_activity
+    verdict: satisfies
+    confidence: high
+    quote: "Essential cookies (e.g., Cloudflare, PHPSESSID): Processed on the basis of legitimate interest (Art. 6(1)(f) GDPR)."
+    rationale: "Each enumerated activity has a named Art.6.1 basis."
+
+  - must_id: item:Art.6:consent_link
+    verdict: partial
+    confidence: medium
+    quote: "Each consent record must also include the version of the consent text and policy presented to the data subject at the time consent was obtained."
+    rationale: "Consent register captures records but not explicitly linked to Art.7 capture records."
+
+  - must_id: item:Art.6:justification
+    verdict: partial
+    confidence: medium
+    quote: "Essential cookies (e.g., Cloudflare, PHPSESSID): Processed on the basis of legitimate interest (Art. 6(1)(f) GDPR). No consent required."
+    rationale: "Document lists lawful bases per activity type but is a consent procedure, not a full Art.6 register with justifications for all activities."
+
+  - must_id: item:Art.6:lia_link
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No reference to a Legitimate Interests Assessment or necessity/balance test."
+
+  - must_id: item:Art.6:owner
+    verdict: satisfies
+    confidence: high
+    quote: "Owner: DPO"
+    rationale: "The DPO is named as the document owner."
+
+  - must_id: item:Art.7:scope_consent_activities
+    verdict: satisfies
+    confidence: high
+    quote: "Non-essential cookies (e.g., analytics, chat, advertising): Currently disabled. If reintroduced, explicit consent will be required before activation (Art. 6(1)(a) GDPR)."
+    rationale: "The procedure enumerates activities requiring consent (non-essential cookies, newsletters, surveys, special categories)."
+
+  - must_id: item:Art.7:scope_overlap_rules
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No explicit rule about consent still being subject to Art.7 when another basis could also apply."
+
+  - must_id: item:Art.7:scope_special_overlay
+    verdict: partial
+    confidence: medium
+    quote: "Other voluntary activities (e.g., surveys, beta testing, recordings, special category data): Consent required (Art. 6(1)(a) or Art. 9(2)(a) GDPR for special categories)."
+    rationale: "Special category consent is referenced via Art.9(2)(a) but stricter explicit-consent capture requirements are not detailed."
+
+  - must_id: item:Art.7:capture_mechanism
+    verdict: satisfies
+    confidence: high
+    quote: "Unambiguous: Requires a clear affirmative action (no pre-ticked boxes)"
+    rationale: "Consent principles specify freely given, specific, informed, unambiguous affirmative action without pre-ticked boxes."
+
+  - must_id: item:Art.7:demonstrability
+    verdict: satisfies
+    confidence: high
+    quote: "Documented: Logged and stored with timestamp, purpose, method"
+    rationale: "Consent register fields capture timestamp, method, purpose, and version of consent text presented."
+
+  - must_id: item:Art.7:distinguishable
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No requirement that consent requests be presented separately and in clear language distinguishable from other matters."
+
+  - must_id: item:Art.7:no_conditionality
+    verdict: partial
+    confidence: medium
+    quote: "Freely given: Not tied to unrelated services or terms"
+    rationale: "Principle states consent must be freely given and not tied to unrelated services, though 'conditionality of service' is not addressed explicitly."
+
+  - must_id: item:Art.7:owner
+    verdict: satisfies
+    confidence: high
+    quote: "__Owner__: DPO"
+    rationale: "Document explicitly names DPO as the owner."
+
+  - must_id: item:Art.7:withdrawal_mechanism
+    verdict: partial
+    confidence: medium
+    quote: "Consent withdrawal may be exercised via the following channels:
+
+- 'Unsubscribe' link in newsletters (if offered)
+- Cookie banner / preference centre (if non-essential cookies are reintroduced)
+- Direct email request"
+    rationale: "Withdrawal channels are documented but the doc does not explicitly state withdrawal is 'as easy as' giving consent."
+
+  - must_id: item:Art.7:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: "__Next Review Date:__ 20 Nov 2026"
+    rationale: "Review date is set within an annual interval."
+
+  - must_id: item:Art.7:rev_mechanism_audit
+    verdict: partial
+    confidence: medium
+    quote: "Unambiguous: Requires a clear affirmative action (no pre-ticked boxes)"
+    rationale: "Principles reference affirmative action and no pre-ticked boxes but no explicit periodic UI audit mechanism is defined."
+
+  - must_id: item:Art.7:rev_register_currency
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No documented review step verifying register captures all in-scope consent events."
+
+  - must_id: item:Art.7:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "__Reviewed by__: PIMS Manager"
+    rationale: "A reviewer is named but not the DPO/Privacy Lead plus product lead combination required."
+
+  - must_id: item:Art.7:rev_withdrawal_sla
+    verdict: partial
+    confidence: medium
+    quote: "Withdrawal requests shall be processed without undue delay and completed within __5 business days__ of receipt"
+    rationale: "SLA is defined but no explicit periodic check that withdrawals are actually processed within the timeline is documented."
+
+  - must_id: item:Art.7:reg_basis_link
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Consent Register fields do not include a link/reference to the Art.6 lawful basis register entry."
+
+  - must_id: item:Art.7:reg_mechanism
+    verdict: satisfies
+    confidence: high
+    quote: "Method of Consent
+
+Checkbox, banner, email, etc."
+    rationale: "Register captures per-row method of consent."
+
+  - must_id: item:Art.7:reg_scope
+    verdict: satisfies
+    confidence: high
+    quote: "Consent Purpose
+
+e.g., newsletter, usage analytics, third-party marketing"
+    rationale: "Register includes per-row purpose/scope of consent."
+
+  - must_id: item:Art.7:reg_subject_id
+    verdict: satisfies
+    confidence: high
+    quote: "Data Subject Identifier
+
+Email, user ID, or session ID (pseudonymized where possible)"
+    rationale: "Consent register explicitly includes a subject identifier field, pseudonymized where possible."
+
+  - must_id: item:Art.7:reg_timestamp
+    verdict: satisfies
+    confidence: high
+    quote: "Date/Time of Consent
+
+Timestamp of affirmative action"
+    rationale: "Register schema captures per-row timestamp of consent."
+
+  - must_id: item:Art.7:reg_withdrawal_status
+    verdict: satisfies
+    confidence: high
+    quote: "Withdrawal Date
+
+If applicable
+
+Processing Status
+
+Active / Withdrawn"
+    rationale: "Register captures withdrawal date and processing status per row."
+
+  - must_id: item:Art.9:scope_categories_in_use
+    verdict: partial
+    confidence: medium
+    quote: "Other voluntary activities (e.g., surveys, beta testing, recordings, special category data): Consent required (Art. 6(1)(a) or Art. 9(2)(a) GDPR for special categories)"
+    rationale: "Special category data is mentioned generically but specific Art.9.1 categories actually processed are not enumerated."
+
+  - must_id: item:Art.9:scope_conditions_in_use
+    verdict: partial
+    confidence: medium
+    quote: "Art. 9(2)(a) GDPR for special categories"
+    rationale: "Only Art.9.2(a) explicit consent is referenced; a full enumeration of Art.9.2 conditions in use is not provided."
+
+  - must_id: item:Art.9:scope_exclusions
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document does not explicitly list Art.9 categories that are NOT processed with rationale."
+
+  - must_id: item:Art.9:scope_member_state_overlay
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No mention of Member State derogations under Art.9.4."
+
+  - must_id: item:Art.9:proc_approval_authority
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No named approval authority (DPO + executive sponsor + function head) for special-category processing is defined."
+
+  - must_id: item:Art.9:proc_condition_selection
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Procedure does not require per-activity selection of Art.9.2 condition with rationale."
+
+  - must_id: item:Art.9:proc_explicit_consent
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No additional capture requirements beyond the Art.7 baseline are specified for Art.9.2(a) explicit consent."
+
+  - must_id: item:Art.9:proc_owner
+    verdict: satisfies
+    confidence: high
+    quote: "Owner__: DPO"
+    rationale: "The document explicitly names the DPO as the owner of the procedure."
+
+  - must_id: item:Art.9:proc_proposal_intake
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No formal intake process is described for evaluating new special-category processing proposals before onboarding."
+
+  - must_id: item:Art.9:proc_safeguards
+    verdict: partial
+    confidence: medium
+    quote: "Other voluntary activities (e.g., surveys, beta testing, recordings, special category data): Consent required (Art. 6(1)(a) or Art. 9(2)(a) GDPR for special categories)"
+    rationale: "The procedure references Art.9(2)(a) explicit consent but does not detail the specific safeguards required for the chosen Art.9.2 condition."
+

@@ -1,0 +1,938 @@
+# LLM-authored ground truth for Records of Processing Activities.docx
+# Model: claude-opus-4-7 — 2-pass structured (Ship 82'.a).
+# Total verdicts: 139
+
+doc: Records of Processing Activities.docx
+annotator: claude-opus-4-7
+generated_at: 2026-08-19T11:24:55Z
+
+musts:
+  - must_id: item:A.5.34:pii_inventory
+    verdict: partial
+    confidence: high
+    quote: "Categories of PII
+
+Types of personal data involved"
+    rationale: "RoPA requires a Categories of PII field but does not enumerate specific classes like special-category/Art.9 data."
+
+  - must_id: item:A.5.34:reg_controls_applied
+    verdict: partial
+    confidence: high
+    quote: "Technical & Organizational Measures
+
+Description of security and privacy controls"
+    rationale: "Field exists for TOMs but no specifics on encryption, access control classes, or pseudonymisation are prescribed."
+
+  - must_id: item:A.5.34:reg_data_subjects
+    verdict: satisfies
+    confidence: high
+    quote: "Categories of Data Subjects
+
+Whose data is being processed"
+    rationale: "RoPA explicitly requires categories of data subjects per activity."
+
+  - must_id: item:A.5.34:reg_lawful_basis
+    verdict: satisfies
+    confidence: high
+    quote: "Legal Basis
+
+Lawful basis (e.g. consent, contract, legal obligation)"
+    rationale: "Lawful basis is a required RoPA field with examples matching GDPR Art.6."
+
+  - must_id: item:A.5.34:reg_owner_per_activity
+    verdict: partial
+    confidence: medium
+    quote: "When a new processing activity is planned, the business owner must notify the Data Protection & Risk Manager"
+    rationale: "References a business owner concept but does not list owner as a mandatory RoPA field."
+
+  - must_id: item:A.5.34:reg_purposes
+    verdict: satisfies
+    confidence: high
+    quote: "Purpose of Processing
+
+Why the data is being processed"
+    rationale: "Purpose of processing is a mandatory field per activity."
+
+  - must_id: item:A.5.34:reg_retention
+    verdict: partial
+    confidence: high
+    quote: "Retention Period
+
+Timeframe for keeping the data"
+    rationale: "Retention field exists but no requirement for concrete triggers or cross-link to a records schedule."
+
+  - must_id: item:A.5.34:reg_transfers
+    verdict: satisfies
+    confidence: high
+    quote: "International Transfers
+
+Details of transfers outside the EU/EEA, if applicable"
+    rationale: "Cross-border transfers are captured as a required field."
+
+  - must_id: item:A.5.34:scope_controller_role
+    verdict: satisfies
+    confidence: high
+    quote: "Controller or Processor Role
+
+Whether Arion acts as Controller or Processor"
+    rationale: "Controller vs Processor role is recorded per activity, though Joint Controller not explicit."
+
+  - must_id: item:A.5.34:scope_data_subjects
+    verdict: partial
+    confidence: medium
+    quote: "Categories of Data Subjects
+
+Whose data is being processed"
+    rationale: "Field captures subject categories but the procedure does not enumerate the org-wide subject population."
+
+  - must_id: item:A.5.34:scope_jurisdictions
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document does not enumerate jurisdictions covered by HQ, business locations, or data subject residency."
+
+  - must_id: item:A.5.34:scope_privacy_laws
+    verdict: partial
+    confidence: medium
+    quote: "in accordance with GDPR Article 30 and ISO/IEC 27701:2019"
+    rationale: "Only GDPR is referenced; no enumeration of other privacy laws per jurisdiction."
+
+  - must_id: item:A.5.34:scope_regulated_activities
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of sectoral regulated activities or associated privacy regimes."
+
+  - must_id: item:A.7.2.1:scope_activities
+    verdict: partial
+    confidence: medium
+    quote: "all business units, systems, processes, and services that involve the collection, use, storage, or transmission of personally identifiable information (PII)"
+    rationale: "General scope stated but specific in-scope processing activities are not enumerated in this procedure."
+
+  - must_id: item:A.7.2.1:scope_exclusions
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No out-of-scope activities or rationale are described."
+
+  - must_id: item:A.7.2.1:scope_pii_test
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No operational test for identifiability + processing operation is defined."
+
+  - must_id: item:A.7.2.1:rev_coverage_check
+    verdict: partial
+    confidence: medium
+    quote: "Purpose of Processing	Why the data is being processed"
+    rationale: "RoPA fields include Purpose of Processing but no explicit coverage check ensuring every in-scope activity has a registered purpose."
+
+  - must_id: item:A.7.2.1:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: "Reviewed on: 17 Nov 2025"
+    rationale: "Review date is documented within the annual review interval."
+
+  - must_id: item:A.7.2.1:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "Reviewed by: PIMS Manager"
+    rationale: "Reviewer identified as PIMS Manager, but not explicitly DPO + Privacy Office."
+
+  - must_id: item:A.7.2.1:rev_specificity_audit
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No specificity/sampling audit of purposes for clarity is described."
+
+  - must_id: item:A.7.2.1:rev_undocumented_sweep
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document mentions annual review but does not describe a sweep to detect undocumented processing activities."
+
+  - must_id: item:A.7.2.1:proc_change_control
+    verdict: partial
+    confidence: medium
+    quote: "Immediately if significant change occurs in processing, system, or legal basis"
+    rationale: "Change-triggered review is required, but re-consent implications and purpose extension controls are not addressed."
+
+  - must_id: item:A.7.2.1:proc_documentation_fields
+    verdict: satisfies
+    confidence: high
+    quote: "Purpose of Processing... Legal Basis... Categories of PII... Categories of Data Subjects... Data Recipients... Retention Period"
+    rationale: "Required documentation fields for each processing activity are enumerated."
+
+  - must_id: item:A.7.2.1:proc_downstream_notice
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No description of how purpose changes propagate to notices, consents, or PIAs."
+
+  - must_id: item:A.7.2.1:proc_intake_trigger
+    verdict: partial
+    confidence: medium
+    quote: "When a new processing activity is planned, the business owner must notify the Data Protection & Risk Manager"
+    rationale: "Only new processing activity is listed as a trigger; product launches, data sources, integrations are not enumerated."
+
+  - must_id: item:A.7.2.1:proc_review_signoff
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No explicit DPO + legal counsel signoff step is defined before a purpose enters the register."
+
+  - must_id: item:A.7.2.1:proc_specificity_test
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No specificity/clarity test for purpose statements is defined."
+
+  - must_id: item:A.7.2.1:reg_activity_link
+    verdict: partial
+    confidence: low
+    quote: "Processing Activity ID | Unique identifier"
+    rationale: "Each activity has an ID, but explicit linkage from purpose to RoPA row(s) is not described."
+
+  - must_id: item:A.7.2.1:reg_categories
+    verdict: satisfies
+    confidence: high
+    quote: "Categories of PII... Categories of Data Subjects"
+    rationale: "RoPA fields include categories of PII and categories of data subjects per row."
+
+  - must_id: item:A.7.2.1:reg_lawful_basis_link
+    verdict: partial
+    confidence: medium
+    quote: "Legal Basis | Lawful basis (e.g. consent, contract, legal obligation)"
+    rationale: "Lawful basis is recorded per activity but not explicitly linked as a row reference to a separate A.7.2.2 basis register."
+
+  - must_id: item:A.7.2.1:reg_purpose_id
+    verdict: partial
+    confidence: medium
+    quote: "Processing Activity ID
+
+Unique identifier"
+    rationale: "Document defines a unique Processing Activity ID but not a distinct purpose identifier per row."
+
+  - must_id: item:A.7.2.1:reg_purpose_text
+    verdict: satisfies
+    confidence: high
+    quote: "Purpose of Processing
+
+Why the data is being processed"
+    rationale: "RoPA fields explicitly require a purpose statement per activity."
+
+  - must_id: item:A.7.2.1:reg_retention
+    verdict: satisfies
+    confidence: high
+    quote: "Retention Period
+
+Timeframe for keeping the data"
+    rationale: "Retention period is a mandatory RoPA field per processing activity."
+
+  - must_id: item:A.7.2.8:scope_coverage_test
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No reconciliation/coverage test between RoPA rows and purpose register or system inventory is described."
+
+  - must_id: item:A.7.2.8:scope_covered_activities
+    verdict: partial
+    confidence: medium
+    quote: "This procedure applies to all business units, systems, processes, and services that involve the collection, use, storage, or transmission of personally identifiable information (PII)"
+    rationale: "Scope broadly covers all PII processing but activities are not individually enumerated in this procedure."
+
+  - must_id: item:A.7.2.8:scope_exclusions
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No exclusions for anonymous or aggregate processing with rationale are documented."
+
+  - must_id: item:A.7.2.8:ropa_activity_id
+    verdict: satisfies
+    confidence: high
+    quote: "Processing Activity ID
+
+Unique identifier"
+    rationale: "Each RoPA row must have a unique Processing Activity ID."
+
+  - must_id: item:A.7.2.8:ropa_owner
+    verdict: partial
+    confidence: medium
+    quote: "When a new processing activity is planned, the business owner must notify the Data Protection & Risk Manager"
+    rationale: "Business owner is referenced but no dedicated RoPA field for named owner responsible for accuracy is defined."
+
+  - must_id: item:A.7.2.8:ropa_pii_categories
+    verdict: satisfies
+    confidence: high
+    quote: "Categories of PII
+
+Types of personal data involved
+
+Categories of Data Subjects
+
+Whose data is being processed"
+    rationale: "Both PII categories and data-subject categories are required RoPA fields."
+
+  - must_id: item:A.7.2.8:ropa_recipients
+    verdict: satisfies
+    confidence: high
+    quote: "Data Recipients
+
+Internal or external recipients
+
+International Transfers
+
+Details of transfers outside the EU/EEA, if applicable"
+    rationale: "Recipients and international transfers are captured as required RoPA fields."
+
+  - must_id: item:A.7.2.8:ropa_retention
+    verdict: satisfies
+    confidence: high
+    quote: "Retention Period
+
+Timeframe for keeping the data"
+    rationale: "RoPA field list explicitly includes Retention Period per activity."
+
+  - must_id: item:A.7.2.8:ropa_security_measures
+    verdict: satisfies
+    confidence: high
+    quote: "Technical & Organizational Measures
+
+Description of security and privacy controls"
+    rationale: "RoPA fields include description of technical and organizational measures."
+
+  - must_id: item:A.7.2.8:ropa_transfer_safeguards
+    verdict: partial
+    confidence: medium
+    quote: "International Transfers
+
+Details of transfers outside the EU/EEA, if applicable"
+    rationale: "Transfers field is required but no explicit reference to Chapter V safeguards/mechanisms."
+
+  - must_id: item:A.7.2.8:ropa_type_purpose
+    verdict: partial
+    confidence: medium
+    quote: "Name of Activity
+
+Descriptive title
+
+Purpose of Processing
+
+Why the data is being processed"
+    rationale: "Purpose and activity name captured, but no explicit link to A.7.2.1 asset/processing register."
+
+  - must_id: item:A.7.2.8:rev_accuracy_sample
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of accuracy sampling or verification of rows against source systems."
+
+  - must_id: item:A.7.2.8:rev_completeness
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No completeness check comparing RoPA rowcount to a register or system inventory."
+
+  - must_id: item:A.7.2.8:rev_date
+    verdict: partial
+    confidence: medium
+    quote: "RoPA entries are reviewed:
+	- Annually by default
+	- Immediately if significant change occurs"
+    rationale: "Defines annual review cadence but no evidence of an actual review date within interval."
+
+  - must_id: item:A.7.2.8:rev_owner_signoff
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No owner attestation/signoff for accuracy and completeness described."
+
+  - must_id: item:A.7.2.8:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Procedure names DPO as owner but does not designate DPO + Data Protection Council as reviewers of RoPA entries."
+
+  - must_id: item:A.7.2.8:proc_add_activity
+    verdict: satisfies
+    confidence: high
+    quote: "Initiation – When a new processing activity is planned, the business owner must notify the Data Protection & Risk Manager"
+    rationale: "Intake trigger and workflow for new processing activities is defined."
+
+  - must_id: item:A.7.2.8:proc_change_capture
+    verdict: partial
+    confidence: medium
+    quote: "Immediately if significant change occurs in processing, system, or legal basis"
+    rationale: "Change triggers an update but no specific SLA/timeframe is defined."
+
+  - must_id: item:A.7.2.8:proc_reconciliation
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No reconciliation cadence against purpose, basis, or PIA registers is described."
+
+  - must_id: item:A.7.2.8:proc_retire_activity
+    verdict: partial
+    confidence: low
+    quote: "be tracked with a status (Draft / Approved / Archived)"
+    rationale: "An 'Archived' status exists but no explicit retirement record process for audit history is defined."
+
+  - must_id: item:A.7.2.8:proc_secure_maintenance
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Storage in SharePoint is mentioned but no access control or integrity controls for the RoPA itself are specified."
+
+  - must_id: item:A.7.4.7:reg_category_id
+    verdict: partial
+    confidence: medium
+    quote: "Processing Activity ID	Unique identifier"
+    rationale: "Activity ID exists but not explicitly a category/activity combination identifier."
+
+  - must_id: item:A.7.4.7:reg_citation
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No per-row citation to specific statute/regulation/business rationale document is required."
+
+  - must_id: item:A.7.4.7:reg_deletion_trigger
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Retention period field is defined but no explicit deletion trigger (calendar/event) attribute."
+
+  - must_id: item:A.7.4.7:reg_rationale_type
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No rationale type classification (legal/regulatory/business) per row is captured."
+
+  - must_id: item:A.7.4.7:reg_retention_period
+    verdict: partial
+    confidence: medium
+    quote: "Retention Period	Timeframe for keeping the data"
+    rationale: "Retention period field exists but no requirement for unit format (years/months/until event)."
+
+  - must_id: item:A.7.5.2:reg_basis_link
+    verdict: partial
+    confidence: medium
+    quote: "Legal Basis	Lawful basis (e.g. consent, contract, legal obligation)"
+    rationale: "Legal basis is captured per row but not explicitly linked to a separate basis register."
+
+  - must_id: item:A.7.5.2:reg_destination_id
+    verdict: partial
+    confidence: medium
+    quote: "International Transfers	Details of transfers outside the EU/EEA, if applicable"
+    rationale: "RoPA field references international transfer details but does not specify country ISO code or international organisation name per row."
+
+  - must_id: item:A.7.5.2:reg_effective_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No field for effective date when a destination was added is defined."
+
+  - must_id: item:A.7.5.2:reg_public_disclosure
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No public-disclosure status field is captured in the RoPA fields list."
+
+  - must_id: item:A.7.5.2:reg_transfer_type
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Transfer type categorisation (direct storage/subprocessing/support/M&A) is not defined."
+
+  - must_id: item:Art.24:rev_charter_currency
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "This document is a RoPA procedure, not a management review of charter currency."
+
+  - must_id: item:Art.24:rev_date
+    verdict: partial
+    confidence: medium
+    quote: "Reviewed on: 17 Nov 2025"
+    rationale: "Document has review dates but this MUST pertains to compliance review cadence tracking, not RoPA scope."
+
+  - must_id: item:Art.24:rev_iso_alignment
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "RoPA procedure is not the artefact for tracking ISO 27001 clause alignment reviews."
+
+  - must_id: item:Art.24:rev_register_completeness
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "This procedure covers processing activity records, not a GDPR article compliance register."
+
+  - must_id: item:Art.24:rev_reviewer
+    verdict: partial
+    confidence: low
+    quote: "Reviewed by: PIMS Manager"
+    rationale: "Reviewer identity present but does not name DPO plus executive sponsor as required."
+
+  - must_id: item:Art.24:rev_role_currency
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Out of scope for a RoPA procedure document."
+
+  - must_id: item:Art.24:role_activity_id
+    verdict: satisfies
+    confidence: high
+    quote: "Processing Activity ID
+
+Unique identifier"
+    rationale: "RoPA fields explicitly include a unique Processing Activity ID per row."
+
+  - must_id: item:Art.24:role_basis
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Doc lists 'Controller or Processor Role' but does not require documenting the decision basis for who determines means and purposes."
+
+  - must_id: item:Art.24:role_chosen
+    verdict: partial
+    confidence: high
+    quote: "Controller or Processor Role
+
+Whether Arion acts as Controller or Processor"
+    rationale: "Row captures controller/processor role but does not include joint controller or third party options."
+
+  - must_id: item:Art.24:role_contract_link
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No RoPA field references a link to a DPA, Art.26 arrangement, or Art.46 transfer mechanism."
+
+  - must_id: item:Art.24:role_counterparty
+    verdict: partial
+    confidence: medium
+    quote: "Subprocessors
+
+Any third parties involved"
+    rationale: "Fields capture data recipients and subprocessors but do not clearly identify counterparty type (customer/vendor/partner)."
+
+  - must_id: item:Art.24:reg_applicability
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No per-row applicability assessment (in scope / N/A with reason) is defined for RoPA entries."
+
+  - must_id: item:Art.24:reg_article_id
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "RoPA fields do not include a per-row GDPR article identifier."
+
+  - must_id: item:Art.24:reg_implementing_artefact
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No RoPA field links each row to an implementing artefact such as a procedure, policy, DPA, or certification."
+
+  - must_id: item:Art.24:reg_last_assessed
+    verdict: partial
+    confidence: medium
+    quote: "RoPA entries are reviewed:
+	- Annually by default
+	- Immediately if significant change occurs"
+    rationale: "Doc requires annual review but does not mandate recording a per-row last-assessed date field."
+
+  - must_id: item:Art.24:reg_owner
+    verdict: partial
+    confidence: medium
+    quote: "When a new processing activity is planned, the business owner must notify the Data Protection & Risk Manager"
+    rationale: "A business owner concept exists but the RoPA field list does not explicitly include a per-row owner field."
+
+  - must_id: item:Art.24:reg_status
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No per-row implementation status field (implemented/partial/planned/N/A) is defined for the RoPA register."
+
+  - must_id: item:Art.28:reg_data_categories
+    verdict: satisfies
+    confidence: high
+    quote: "Categories of PII
+
+Types of personal data involved"
+    rationale: "RoPA fields include Categories of PII per activity row."
+
+  - must_id: item:Art.28:reg_dpa_version
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No field for DPA version or execution date is defined."
+
+  - must_id: item:Art.28:reg_processor_id
+    verdict: partial
+    confidence: medium
+    quote: "Subprocessors
+
+Any third parties involved"
+    rationale: "Subprocessors field exists but there is no explicit processor identifier field with entity name and jurisdiction."
+
+  - must_id: item:Art.28:reg_security_check
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No field capturing Art.32-equivalent assurance source (certification/audit/questionnaire) per row."
+
+  - must_id: item:Art.28:reg_subprocessors
+    verdict: satisfies
+    confidence: high
+    quote: "Subprocessors
+
+Any third parties involved"
+    rationale: "Per-row Subprocessors field is defined in the RoPA template."
+
+  - must_id: item:Art.30:dfi_flows
+    verdict: partial
+    confidence: medium
+    quote: "Data Recipients
+
+Internal or external recipients"
+    rationale: "Recipients and systems captured, but integration mechanism between systems (sources/destinations) is not explicitly documented."
+
+  - must_id: item:Art.30:dfi_recipients
+    verdict: satisfies
+    confidence: high
+    quote: "Data Recipients
+
+Internal or external recipients"
+    rationale: "External/internal recipients are recorded per activity."
+
+  - must_id: item:Art.30:dfi_retention
+    verdict: satisfies
+    confidence: high
+    quote: "Retention Period
+
+Timeframe for keeping the data"
+    rationale: "Retention period is a required RoPA field."
+
+  - must_id: item:Art.30:dfi_systems
+    verdict: partial
+    confidence: medium
+    quote: "System(s) Involved
+
+Information systems where the processing occurs"
+    rationale: "Systems involved are captured, but no explicit enumeration of backups, analytics, or archives is required."
+
+  - must_id: item:Art.30:dfi_transfers
+    verdict: partial
+    confidence: medium
+    quote: "International Transfers
+
+Details of transfers outside the EU/EEA, if applicable"
+    rationale: "The template requires transfer details but does not explicitly require identification of safeguards such as SCCs, adequacy, or BCRs."
+
+  - must_id: item:Art.30:categories_data
+    verdict: satisfies
+    confidence: high
+    quote: "Categories of PII
+
+Types of personal data involved"
+    rationale: "RoPA field explicitly captures categories of personal data per activity."
+
+  - must_id: item:Art.30:categories_ds
+    verdict: satisfies
+    confidence: high
+    quote: "Categories of Data Subjects
+
+Whose data is being processed"
+    rationale: "RoPA field explicitly captures categories of data subjects."
+
+  - must_id: item:Art.30:controller_name
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "RoPA fields do not include controller name/contact details or DPO/representative contact information."
+
+  - must_id: item:Art.30:processor_records
+    verdict: partial
+    confidence: medium
+    quote: "This procedure applies to all business units, systems, processes, and services that involve the collection, use, storage, or transmission of personally identifiable information (PII) by Arion Networks s.r.o. in the role of either PII Controller or Pr"
+    rationale: "Scope covers processor role and includes a Controller/Processor role field, but no explicit parallel processor-side register fields per Art.30.2 are defined."
+
+  - must_id: item:Art.30:purposes
+    verdict: satisfies
+    confidence: high
+    quote: "Purpose of Processing
+
+Why the data is being processed"
+    rationale: "Purposes are explicitly recorded per activity."
+
+  - must_id: item:Art.30:recipients
+    verdict: satisfies
+    confidence: high
+    quote: "Data Recipients
+
+Internal or external recipients"
+    rationale: "Recipients are captured as a RoPA field, and subprocessors are also included."
+
+  - must_id: item:Art.30:retention
+    verdict: satisfies
+    confidence: high
+    quote: "Retention Period
+
+Timeframe for keeping the data"
+    rationale: "Retention period per activity is a required RoPA field."
+
+  - must_id: item:Art.30:security
+    verdict: satisfies
+    confidence: high
+    quote: "Technical & Organizational Measures
+
+Description of security and privacy controls"
+    rationale: "TOMs are captured as a required RoPA field."
+
+  - must_id: item:Art.30:transfers
+    verdict: partial
+    confidence: medium
+    quote: "International Transfers
+
+Details of transfers outside the EU/EEA, if applicable"
+    rationale: "Transfers field exists but the procedure does not explicitly require documentation of safeguards for those transfers."
+
+  - must_id: item:Art.30:rev_date
+    verdict: partial
+    confidence: medium
+    quote: "RoPA entries are reviewed:
+	- Annually by default"
+    rationale: "Procedure mandates annual review but no specific review date log or evidence of last completed review of entries is captured."
+
+  - must_id: item:Art.30:rev_gaps
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of gap identification, remediation owner, or target dates during RoPA review."
+
+  - must_id: item:Art.30:rev_outcome
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Only a general status (Draft/Approved/Archived) is tracked; no per-activity review outcome such as amended/retired is defined."
+
+  - must_id: item:Art.30:rev_register_update
+    verdict: partial
+    confidence: low
+    quote: "The activity is entered into the centralized RoPA Register (Excel workbook stored in SharePoint)."
+    rationale: "Register update is described for new activities but no explicit process for propagating review changes back with reference to the review."
+
+  - must_id: item:Art.30:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "The DP&RM coordinates with relevant roles to collect required RoPA fields"
+    rationale: "DP&RM/DPO roles are implied for review but the reviewer identity/role for review activities is not explicitly stated."
+
+  - must_id: item:Art.30:proc_dpa_gate
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No linkage to Art.28 DPA process gating processor addition against register update."
+
+  - must_id: item:Art.30:proc_dpia_gate
+    verdict: satisfies
+    confidence: high
+    quote: "High-risk processing activities identified during RoPA review must undergo DPIA per DOC042H before implementation."
+    rationale: "Explicit DPIA linkage requiring DPIA before implementation of high-risk processing."
+
+  - must_id: item:Art.30:proc_maintainer
+    verdict: partial
+    confidence: medium
+    quote: "the business owner must notify the Data Protection & Risk Manager"
+    rationale: "DP&RM/DPO involvement is described, but no explicit named maintainer with documented responsibility for register accuracy."
+
+  - must_id: item:Art.30:proc_triggers
+    verdict: partial
+    confidence: medium
+    quote: "Immediately if significant change occurs in processing, system, or legal basis"
+    rationale: "Some triggers referenced generically but not fully enumerated (e.g., new processor, third-country transfer, retention change, DPIA outcome)."
+
+  - must_id: item:Art.30:proc_update_path
+    verdict: partial
+    confidence: medium
+    quote: "When a new processing activity is planned, the business owner must notify the Data Protection & Risk Manager"
+    rationale: "Notification and coordination described but approver role for register entry is not explicitly identified."
+
+  - must_id: item:Art.35:scope_mandatory
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "The procedure references DPIA for high-risk processing but does not operationalise Art.35.3 mandatory categories (a-c)."
+
+  - must_id: item:Art.35:scope_org_criteria
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No org-specific 'likely high risk' criteria (e.g., EDPB nine-criteria scoring) are defined in this document."
+
+  - must_id: item:Art.35:scope_sa_list
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No reference to the lead supervisory authority's Art.35.4 published DPIA list."
+
+  - must_id: item:Art.35:scope_white_list
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No reference to Art.35.5 white-list activities that would not require a DPIA."
+
+  - must_id: item:Art.6:activities_enumerated
+    verdict: satisfies
+    confidence: high
+    quote: "The activity is entered into the centralized RoPA Register (Excel workbook stored in SharePoint)"
+    rationale: "Processing activities are enumerated in a centralized RoPA Register per Art.30."
+
+  - must_id: item:Art.6:basis_per_activity
+    verdict: satisfies
+    confidence: high
+    quote: "Legal Basis
+
+Lawful basis (e.g. consent, contract, legal obligation)"
+    rationale: "The RoPA fields require a lawful basis to be named for each activity."
+
+  - must_id: item:Art.6:consent_link
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No linkage from consent-based entries to an Art.7 consent capture record is specified."
+
+  - must_id: item:Art.6:justification
+    verdict: partial
+    confidence: low
+    quote: "Purpose of Processing
+
+Why the data is being processed"
+    rationale: "Purpose is captured but no explicit justification field for the chosen lawful basis is required."
+
+  - must_id: item:Art.6:lia_link
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No reference to a Legitimate Interests Assessment link for LI-based activities."
+
+  - must_id: item:Art.6:owner
+    verdict: satisfies
+    confidence: high
+    quote: "Owner: DPO"
+    rationale: "The DPO is named as owner of the RoPA procedure/register."
+
+  - must_id: item:B.8.2.6:scope_coverage_test
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No mention of reconciling processor RoPA rowcount against a customer register."
+
+  - must_id: item:B.8.2.6:scope_customer_engagements
+    verdict: partial
+    confidence: medium
+    quote: "This procedure applies to all business units, systems, processes, and services that involve the collection, use, storage, or transmission of personally identifiable information (PII) by Arion Networks s.r.o. in the role of either PII Controller or Pr"
+    rationale: "Scope references Processor role but does not tie RoPA to a customer engagement register."
+
+  - must_id: item:B.8.2.6:scope_own_controller_exclusion
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "The document uses a single RoPA covering both Controller and Processor roles without separating own-controller processing."
+
+  - must_id: item:B.8.2.6:ropa_customer_id
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "RoPA field list does not include a customer/controller identifier field."
+
+  - must_id: item:B.8.2.6:ropa_processing_categories
+    verdict: partial
+    confidence: medium
+    quote: "Purpose of Processing | Why the data is being processed"
+    rationale: "Purpose is captured but 'categories of processing carried out on behalf of controller' per Art.30.2.b is not explicitly listed."
+
+  - must_id: item:B.8.2.6:ropa_processor_dpo
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No RoPA field for processor DPO or representative contact information."
+
+  - must_id: item:B.8.2.6:ropa_security_measures
+    verdict: satisfies
+    confidence: high
+    quote: "Technical & Organizational Measures | Description of security and privacy controls"
+    rationale: "RoPA field explicitly captures technical and organizational measures per row."
+
+  - must_id: item:B.8.2.6:ropa_subprocessor_list
+    verdict: satisfies
+    confidence: high
+    quote: "Subprocessors | Any third parties involved"
+    rationale: "Subprocessors field is included in the RoPA structure."
+
+  - must_id: item:B.8.2.6:ropa_transfers
+    verdict: partial
+    confidence: medium
+    quote: "International Transfers | Details of transfers outside the EU/EEA, if applicable"
+    rationale: "International transfers field exists but no explicit requirement to cite safeguards (e.g., SCCs)."
+
+  - must_id: item:B.8.2.6:rev_accuracy_sample
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No accuracy sampling procedure against customer instructions or subprocessor lists is described."
+
+  - must_id: item:B.8.2.6:rev_completeness
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No requirement for one RoPA row per active customer engagement is stated."
+
+  - must_id: item:B.8.2.6:rev_customer_extract_test
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of sampling customers or providing them their RoPA row extract within an SLA."
+
+  - must_id: item:B.8.2.6:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: "Reviewed on: 17 Nov 2025"
+    rationale: "Document shows recent review date within the annual planned interval."
+
+  - must_id: item:B.8.2.6:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "Reviewed by: PIMS Manager"
+    rationale: "A reviewer is identified but not the DPO plus Trust Ops as required."
+
+  - must_id: item:B.8.2.6:proc_customer_availability
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No process describes how a customer can request and receive their RoPA row extract."
+
+  - must_id: item:B.8.2.6:proc_instruction_change
+    verdict: partial
+    confidence: medium
+    quote: "Immediately if significant change occurs in processing, system, or legal basis"
+    rationale: "Generic change trigger exists but customer-instruction/purpose changes are not explicitly named."
+
+  - must_id: item:B.8.2.6:proc_onboarding_trigger
+    verdict: partial
+    confidence: medium
+    quote: "When a new processing activity is planned, the business owner must notify the Data Protection & Risk Manager"
+    rationale: "Trigger is for new processing activities generally, not explicitly per new customer engagement."
+
+  - must_id: item:B.8.2.6:proc_secure_maintenance
+    verdict: partial
+    confidence: low
+    quote: "entered into the centralized RoPA Register (Excel workbook stored in SharePoint)"
+    rationale: "Storage location is specified but no explicit access control or integrity controls are described."
+
+  - must_id: item:B.8.2.6:proc_subprocessor_update
+    verdict: partial
+    confidence: medium
+    quote: "Immediately if significant change occurs in processing, system, or legal basis"
+    rationale: "Subprocessors are a listed RoPA field, but no explicit trigger for subprocessor additions/removals to update RoPA."
+

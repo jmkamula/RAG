@@ -292,9 +292,13 @@ def _call_anthropic(
     payload = {
         "model":       model,
         "max_tokens":  max_tokens,
-        "temperature": temperature,
         "messages":    api_messages,
     }
+    # Claude Opus 4 and newer deprecate the temperature parameter (they
+    # only accept default temperature). Skip the field for models where
+    # it's deprecated; keep it for older Claude models that still use it.
+    if not model.startswith("claude-opus-4"):
+        payload["temperature"] = temperature
     if top_system:
         payload["system"] = top_system
     req = urllib.request.Request(

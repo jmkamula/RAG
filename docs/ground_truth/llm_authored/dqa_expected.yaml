@@ -1,0 +1,376 @@
+# LLM-authored ground truth for Data Quality Accuracy Procedure.docx
+# Model: claude-opus-4-7 — 2-pass structured (Ship 82'.a).
+# Total verdicts: 61
+
+doc: Data Quality Accuracy Procedure.docx
+annotator: claude-opus-4-7
+generated_at: 2026-08-19T11:18:20Z
+
+musts:
+  - must_id: item:A.5.34:applicable_laws
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Only GDPR Article 5(1)(d) is referenced; no other named privacy laws."
+
+  - must_id: item:A.5.34:breach_handling
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No reference to breach handling, incident notification, or GDPR Art.33/34."
+
+  - must_id: item:A.5.34:data_subject_rights
+    verdict: partial
+    confidence: medium
+    quote: "Correction efforts are tracked as part of the DSR Register (DOC041B)"
+    rationale: "References DSR handling and correction SLAs but does not enumerate full rights set or Art.12-22."
+
+  - must_id: item:A.5.34:lawful_basis
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of lawful basis identification per processing activity."
+
+  - must_id: item:A.5.34:owner
+    verdict: partial
+    confidence: medium
+    quote: "Owner: DPO"
+    rationale: "Names DPO as owner but not a specific individual."
+
+  - must_id: item:A.5.34:retention_minimisation
+    verdict: partial
+    confidence: medium
+    quote: "Include review cycles in data retention and DPIA evaluations"
+    rationale: "References retention review cycles but no explicit minimisation principle or Art.5.1.c/e cross-link."
+
+  - must_id: item:A.5.34:security_controls_ref
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No references to A.8.x technical controls or GDPR Art.32."
+
+  - must_id: item:A.5.34:transfer_restrictions
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of cross-border transfers, SCCs, adequacy, or Art.44-49."
+
+  - must_id: item:A.7.4.3:reg_detection_source
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Procedure document, not a register with per-row detection source entries."
+
+  - must_id: item:A.7.4.3:reg_incident_id
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Procedure document, not a register with unique incident identifiers."
+
+  - must_id: item:A.7.4.3:reg_pii_scope
+    verdict: partial
+    confidence: low
+    quote: "Results documented in Access Register - PII Systems"
+    rationale: "References an Access Register for PII Systems but does not specify fields/subject counts recorded per row."
+
+  - must_id: item:A.7.4.3:reg_resolution
+    verdict: partial
+    confidence: low
+    quote: "Correction efforts are tracked as part of the DSR Register (DOC041B)"
+    rationale: "Mentions tracking corrections in a register but does not specify resolution categories per row."
+
+  - must_id: item:A.7.4.3:reg_root_cause
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of root cause capture or systemic remediation linkage in the register."
+
+  - must_id: item:A.7.4.3:proc_correction_link
+    verdict: satisfies
+    confidence: medium
+    quote: "DOC051 – Data Subject Rights Handling"
+    rationale: "Cross-links to the DSR handling procedure where subject-initiated rectifications are handled."
+
+  - must_id: item:A.7.4.3:proc_inaccuracy_prevention
+    verdict: partial
+    confidence: medium
+    quote: "Use structured forms with validation (e.g., date formats, email check)"
+    rationale: "Input validation is covered, but duplicate detection and integration reconciliation controls are not addressed."
+
+  - must_id: item:A.7.4.3:proc_inaccuracy_response
+    verdict: satisfies
+    confidence: medium
+    quote: "Any identified errors must be: Logged and assessed within 2 business days Corrected within 5 business days"
+    rationale: "Defines response process for detected inaccuracies with timelines."
+
+  - must_id: item:A.7.4.3:proc_lifecycle_coverage
+    verdict: partial
+    confidence: low
+    quote: "Include review cycles in data retention and DPIA evaluations"
+    rationale: "Addresses collection, post-collection, and retention review but does not explicitly cover sharing and disposal stages."
+
+  - must_id: item:A.7.4.3:proc_up_to_date_check
+    verdict: partial
+    confidence: medium
+    quote: "During quarterly access reviews per Access Management Process, the Office Manager spot-checks data accuracy for minimum 2 random personnel records"
+    rationale: "Provides quarterly cadence for contact details of personnel but not differentiated cadence per PII category."
+
+  - must_id: item:A.7.4.3:scope_high_churn_fields
+    verdict: partial
+    confidence: low
+    quote: "Contact details (email, phone, address) are verified as current"
+    rationale: "Identifies contact details as verified fields but doesn't categorize them explicitly as high-churn or list other high-churn categories."
+
+  - must_id: item:A.7.4.3:scope_low_churn_fields
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No categorization of low-churn/immutable fields is provided."
+
+  - must_id: item:A.7.4.3:scope_verification_sources
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No mapping of verification sources such as postal address versus national registry or subject self-serve channels is provided."
+
+  - must_id: item:A.7.4.3:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: "Next Review Date: 25OCT2026"
+    rationale: "Document has a defined review cycle and next review date within a planned annual interval."
+
+  - must_id: item:A.7.4.3:rev_detection_rate
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No mechanism to assess under-detection through incident count trends is described."
+
+  - must_id: item:A.7.4.3:rev_prevention_health
+    verdict: partial
+    confidence: medium
+    quote: "Use structured forms with validation (e.g., date formats, email check)"
+    rationale: "Input validation is mentioned but duplicate detection and reconciliation controls are not addressed."
+
+  - must_id: item:A.7.4.3:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "Data Protection & Risk Manager: Reviews data accuracy controls annually."
+    rationale: "A reviewer role is defined but no explicit joint DPO + Data Ops review is specified."
+
+  - must_id: item:A.7.4.3:rev_root_cause_closure
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No process for reviewing completeness of systemic remediations from prior periods is described."
+
+  - must_id: item:Art.16:scope_replicas
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "The document does not address rectification propagation to replicas/backups or use of supplementary statements."
+
+  - must_id: item:Art.16:scope_systems
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Systems containing PII are not enumerated nor cross-referenced to a PII inventory or RoPA."
+
+  - must_id: item:Art.16:scope_third_parties
+    verdict: partial
+    confidence: medium
+    quote: "Follow client instructions for updates and corrections"
+    rationale: "Processor context is mentioned but propagation of rectification requests via DPA flow to third parties is not detailed."
+
+  - must_id: item:Art.16:rev_art19_audit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No Article 19 audit process for recipient notifications or documented exceptions is described."
+
+  - must_id: item:Art.16:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: "Next Review Date: 20 Nov 2026"
+    rationale: "Document specifies next review date within an annual interval."
+
+  - must_id: item:Art.16:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "Owner: DPO"
+    rationale: "DPO is listed as owner but review was performed by PIMS Manager, not explicitly the DPO."
+
+  - must_id: item:Art.16:rev_sla_compliance
+    verdict: partial
+    confidence: medium
+    quote: "Corrected within 5 business days"
+    rationale: "Internal SLA defined but no explicit reference to GDPR Art.12.3 one-month deadline for rectification response."
+
+  - must_id: item:Art.16:rev_systems_completeness
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence of a sampled systems-completeness check verifying requests reached all in-scope systems."
+
+  - must_id: item:Art.16:correction_record
+    verdict: partial
+    confidence: medium
+    quote: "Correction efforts are tracked as part of the DSR Register (DOC041B)"
+    rationale: "Corrections tracked in DSR register but procedure does not detail fields (what changed, when, by whom)."
+
+  - must_id: item:Art.16:data_location
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No workflow describing locating data across all systems and replicas, and no link to Art.30 RoPA."
+
+  - must_id: item:Art.16:identity_verification
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No identity verification step described in this procedure."
+
+  - must_id: item:Art.16:intake_channel
+    verdict: satisfies
+    confidence: high
+    quote: "Provide clear contact for update requests (e.g., privacy@arionnetworks.com)"
+    rationale: "Published intake email channel accessible to data subjects."
+
+  - must_id: item:Art.16:recipient_notification
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No mention of notifying recipients of rectification per Art.19."
+
+  - must_id: item:Art.16:response_deadline
+    verdict: partial
+    confidence: medium
+    quote: "Logged and assessed within 2 business days
+	Corrected within 5 business days"
+    rationale: "Internal deadlines given but no reference to one-month statutory deadline or two-month extension for complex requests."
+
+  - must_id: item:Art.16:reg_art19_xref
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Document is a data accuracy procedure, not an Art.16 rectification register with per-row Art.19 notification cross-references."
+
+  - must_id: item:Art.16:reg_request_id
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "This procedure does not maintain a rectification register with per-row request IDs; DSR Register is referenced but not shown."
+
+  - must_id: item:Art.16:reg_response_date
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Document defines SLAs but is not the register containing per-row response dates."
+
+  - must_id: item:Art.16:reg_subject_id
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "No per-row subject identifier register is included in this procedure."
+
+  - must_id: item:Art.16:reg_systems_touched
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Procedure document, not a register tracking systems where rectification was applied per row."
+
+  - must_id: item:Art.24:rev_charter_currency
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "This is a data accuracy procedure, not a governance charter review artefact."
+
+  - must_id: item:Art.24:rev_date
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Document has its own review dates but is not the Art.24 governance review record."
+
+  - must_id: item:Art.24:rev_iso_alignment
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Not a governance review evidencing ISO 27001 clause alignment."
+
+  - must_id: item:Art.24:rev_register_completeness
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Not a GDPR compliance register review; scope limited to data accuracy."
+
+  - must_id: item:Art.24:rev_reviewer
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Reviewer fields relate to this procedure's own review, not an Art.24 governance review with DPO + executive sponsor."
+
+  - must_id: item:Art.24:rev_role_currency
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Document concerns data accuracy maintenance, not controller/processor role decisions."
+
+  - must_id: item:Art.25:proc_authority
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Document does not address Data Protection by Design authority."
+
+  - must_id: item:Art.25:proc_checkpoint
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "No design-stage DPbD checkpoint is in scope for this accuracy procedure."
+
+  - must_id: item:Art.25:proc_dpia_integration
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Document does not cover DPbD-to-DPIA escalation."
+
+  - must_id: item:Art.25:proc_inputs
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Document scope is data accuracy, not DPbD review inputs."
+
+  - must_id: item:Art.25:proc_record
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "No DPbD review records addressed in this document."
+
+  - must_id: item:B.8.2.2:proc_customer_verification
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Document does not address customer audit of purpose-limitation."
+
+  - must_id: item:B.8.2.2:proc_instruction_capture
+    verdict: partial
+    confidence: low
+    quote: "Clarify in contracts who is responsible for data accuracy"
+    rationale: "Mentions contractual instructions for processor data but does not describe capturing customer purposes per engagement."
+
+  - must_id: item:B.8.2.2:proc_no_side_purpose
+    verdict: partial
+    confidence: low
+    quote: "Avoid altering source data unless contractually permitted"
+    rationale: "Restricts alteration of processor data but does not explicitly prohibit use for own analytics/ML."
+
+  - must_id: item:B.8.2.2:proc_technical_binding
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Document does not describe technical controls binding processing to stated purposes."
+
+  - must_id: item:B.8.2.2:proc_technical_justification
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "This document covers data accuracy maintenance procedures and does not address processor technical-justification carve-outs for capacity-based method choices under ISO 27701 §8.2.2."
+

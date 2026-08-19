@@ -1,0 +1,659 @@
+# LLM-authored ground truth for Data Protection Impact Assessment (DPIA) Procedure.docx
+# Model: claude-opus-4-7 — 2-pass structured (Ship 82'.a).
+# Total verdicts: 105
+
+doc: Data Protection Impact Assessment (DPIA) Procedure.docx
+annotator: claude-opus-4-7
+generated_at: 2026-08-19T11:22:05Z
+
+musts:
+  - must_id: item:A.5.34:applicable_laws
+    verdict: partial
+    confidence: medium
+    quote: "GDPR Article 35"
+    rationale: "GDPR is named but no other jurisdiction-specific privacy laws (UK GDPR, CCPA, LGPD, etc.) are identified."
+
+  - must_id: item:A.5.34:breach_handling
+    verdict: partial
+    confidence: medium
+    quote: "Incident Management: DPIA findings inform incident response priorities"
+    rationale: "Mentions incident management linkage but does not specify Art.33 72h supervisory notification or Art.34 data-subject notification."
+
+  - must_id: item:A.5.34:data_subject_rights
+    verdict: partial
+    confidence: medium
+    quote: "Severity: Impact on data subject rights and freedoms"
+    rationale: "References data subject rights generically but does not enumerate access/rectification/erasure/portability rights, intake path, or SLAs."
+
+  - must_id: item:A.5.34:lawful_basis
+    verdict: satisfies
+    confidence: high
+    quote: "Legal Basis: Specific GDPR Article 6 legal basis for the processing activity."
+    rationale: "DPIA Log Sheet requires documentation of specific GDPR Art.6 lawful basis per processing activity."
+
+  - must_id: item:A.5.34:owner
+    verdict: partial
+    confidence: medium
+    quote: "Owner: DPO"
+    rationale: "DPO is named as document owner but not identified as a named individual person."
+
+  - must_id: item:A.5.34:retention_minimisation
+    verdict: partial
+    confidence: medium
+    quote: "Technical safeguards (encryption, access controls, data minimization)"
+    rationale: "Data minimisation is mentioned as a safeguard and retention is referenced in data flow, but no cross-link to records schedule or GDPR Art.5.1.c/e."
+
+  - must_id: item:A.5.34:security_controls_ref
+    verdict: partial
+    confidence: medium
+    quote: "Technical safeguards (encryption, access controls, data minimization)"
+    rationale: "References encryption and access controls but no explicit cross-link to A.8.x controls or GDPR Art.32."
+
+  - must_id: item:A.5.34:transfer_restrictions
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of cross-border data transfers, SCCs, adequacy, BCRs, or GDPR Art.44-49."
+
+  - must_id: item:A.5.34:scope_controller_role
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Document does not distinguish controller vs processor vs joint-controller roles or associated obligations."
+
+  - must_id: item:A.5.34:scope_data_subjects
+    verdict: partial
+    confidence: medium
+    quote: "Description of individuals whose data is being processed (employees, clients, prospects, etc.)"
+    rationale: "Lists example categories of data subjects but does not address minors or special-category cohorts requiring extra safeguards."
+
+  - must_id: item:A.5.34:scope_jurisdictions
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Document does not enumerate jurisdictions covered by processing activities."
+
+  - must_id: item:A.5.34:scope_privacy_laws
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Only GDPR and ISO 27701 referenced; no per-jurisdiction enumeration of privacy laws like CCPA, LGPD, PIPEDA, HIPAA etc."
+
+  - must_id: item:A.5.34:scope_regulated_activities
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mapping of regulated activities to sectoral privacy regimes."
+
+  - must_id: item:A.5.34:rev_breach_history
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Procedure does not address breach history review or Art.33/34 notification handling."
+
+  - must_id: item:A.5.34:rev_date
+    verdict: partial
+    confidence: medium
+    quote: "Procedure reviewed annually or upon regulatory changes"
+    rationale: "Annual review cadence stated but no evidence of an actual review date within the interval for privacy scope."
+
+  - must_id: item:A.5.34:rev_dpia_review
+    verdict: partial
+    confidence: medium
+    quote: "Set review date (minimum annually or upon significant change)"
+    rationale: "DPIA review cadence specified but no explicit check for high-risk processing lacking DPIA or 24-month refresh requirement."
+
+  - must_id: item:A.5.34:rev_dsar_metrics
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "DSAR volumes, response times, SLA metrics not covered in this DPIA procedure."
+
+  - must_id: item:A.5.34:rev_register_check
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No per-activity register outcome review (verified/amended/retired) with lawful-basis and retention confirmations."
+
+  - must_id: item:A.5.34:rev_register_update
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mechanism described for propagating review outcomes back to a live processing register."
+
+  - must_id: item:A.5.34:rev_reviewer
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No joint DPO/InfoSec reviewer sign-off recorded for a privacy review; document only lists DPIA procedure roles."
+
+  - must_id: item:A.5.34:rev_scope_check
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document does not address periodic review of privacy applicability scope for new jurisdictions or data subject categories."
+
+  - must_id: item:A.5.34:rev_transfer_validity
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of transfer-mechanism validity checks (SCCs, adequacy decisions, BCRs)."
+
+  - must_id: item:A.7.2.5:scope_art35_3_mandatory
+    verdict: partial
+    confidence: medium
+    quote: "High Risk to Rights and Freedoms__: New processing presents significant privacy risks... Large Scale Processing__: Systematic processing of large amounts of personal data"
+    rationale: "Mentions large-scale processing but does not explicitly map all three Art.35.3 mandatory categories (systematic evaluation, Art.9/10 large-scale, systematic public monitoring)."
+
+  - must_id: item:A.7.2.5:scope_exclusions
+    verdict: partial
+    confidence: medium
+    quote: "Does it present high risk to data subject rights? → If NO, document decision"
+    rationale: "Decision tree implies documenting out-of-scope decisions but does not detail low-risk/legacy exclusion rationale."
+
+  - must_id: item:A.7.2.5:scope_org_indicators
+    verdict: partial
+    confidence: medium
+    quote: "New Technology__: Implementation of new technologies that process personal data
+- __Large Scale Processing__: Systematic processing of large amounts of personal data"
+    rationale: "Lists new technology and large-scale processing but omits vulnerable subjects indicator."
+
+  - must_id: item:A.7.2.5:scope_sa_lists
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No reference to supervisory authority-published mandatory DPIA lists under Art.35.4."
+
+  - must_id: item:A.7.2.5:proc_29134_alignment
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No reference to ISO/IEC 29134 methodology alignment."
+
+  - must_id: item:A.7.2.5:proc_assessment_scope
+    verdict: satisfies
+    confidence: high
+    quote: "Categories of Data Subjects and Personal Data Types
+- Data Flow Description (collection, storage, sharing, retention)
+- Technical and Organizational Measures"
+    rationale: "Assessment scope covers PII types, storage, transfers, retention, risks, safeguards and residual risk decision."
+
+  - must_id: item:A.7.2.5:proc_consultation
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No explicit reference to DPO opinion per Art.35.2 or data subject representative consultation per Art.35.9."
+
+  - must_id: item:A.7.2.5:proc_prior_consultation
+    verdict: partial
+    confidence: medium
+    quote: "Consult__: Seek external advice or regulatory guidance"
+    rationale: "Mentions consulting external/regulatory guidance but does not explicitly tie to Art.36 prior consultation for residual high risk."
+
+  - must_id: item:A.7.2.5:proc_signoff
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Procedure mentions PIMS Manager approval for high-risk processing but does not require DPO signoff plus business-owner signoff before processing commences."
+
+  - must_id: item:A.7.2.5:proc_trigger_criteria
+    verdict: partial
+    confidence: high
+    quote: "High Risk to Rights and Freedoms__: New processing presents significant privacy risks
+- __Significant Changes__: Major modifications to existing processing activities or technologies
+- __Regulatory Requirements"
+    rationale: "Triggers are defined generally but do not enumerate the Art.35(3) mandatory list (systematic evaluation, large-scale special-category, systematic monitoring of public areas)."
+
+  - must_id: item:A.7.2.5:reg_completion_date
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "DPIA Log Sheet fields listed do not include a completion date per row."
+
+  - must_id: item:A.7.2.5:reg_pia_id
+    verdict: satisfies
+    confidence: high
+    quote: "DPIA Reference ID:__ Unique identifier for tracking and reference purposes"
+    rationale: "Log sheet requires a unique DPIA Reference ID per entry."
+
+  - must_id: item:A.7.2.5:reg_processing_activity
+    verdict: satisfies
+    confidence: high
+    quote: "Project/Processing Title:__ Clear description of the processing activity being assessed"
+    rationale: "Log sheet captures processing activity per row."
+
+  - must_id: item:A.7.2.5:reg_residual_risk
+    verdict: partial
+    confidence: medium
+    quote: "Residual Risk Decision:__ Final decision on risk acceptance \(Accept/Mitigate Further/Reject/Consult\)"
+    rationale: "Field captures residual risk decision but not an explicit low/medium/high rating after mitigations."
+
+  - must_id: item:A.7.2.5:reg_review_due
+    verdict: satisfies
+    confidence: high
+    quote: "Review Date:__ Scheduled date for reassessment of the DPIA"
+    rationale: "Log sheet includes a scheduled review date per row."
+
+  - must_id: item:A.7.2.5:reg_sa_consultation
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No explicit field in the log sheet to record Art.36 SA consultation flag per row."
+
+  - must_id: item:A.7.2.5:reg_signoff
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Log sheet fields do not include signoff identities (DPO + business owner) per row."
+
+  - must_id: item:A.7.2.5:rev_coverage_check
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Quarterly review of the log is mentioned but there is no defined coverage check ensuring every triggered activity has a completed PIA on file."
+
+  - must_id: item:A.7.2.5:rev_currency_audit
+    verdict: partial
+    confidence: medium
+    quote: "Individual DPIAs reviewed per schedule or upon significant change"
+    rationale: "Doc requires periodic DPIA review upon significant change but does not specify a currency-threshold audit for material change."
+
+  - must_id: item:A.7.2.5:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: "Next Review Date: 20 Nov 2026"
+    rationale: "Explicit next review date is set within a planned annual interval."
+
+  - must_id: item:A.7.2.5:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "Reviewed by: PIMS Manager"
+    rationale: "A reviewer is named but the DPO + risk owner combination for PIA reviews is not explicitly assigned."
+
+  - must_id: item:A.7.2.5:rev_sa_consultation_audit
+    verdict: partial
+    confidence: low
+    quote: "Consult: Seek external advice or regulatory guidance"
+    rationale: "Consultation option exists for high-risk DPIAs but no audit mechanism to verify escalation occurred is described."
+
+  - must_id: item:Art.24:rev_charter_currency
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "This is a DPIA procedure, not a governance charter document."
+
+  - must_id: item:Art.24:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: "Next Review Date: 20 Nov 2026"
+    rationale: "Review date is set within an annual planned interval."
+
+  - must_id: item:Art.24:rev_iso_alignment
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "ISO 27001 clause alignment for governance dependencies is outside the scope of a DPIA procedure."
+
+  - must_id: item:Art.24:rev_register_completeness
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Compliance register of GDPR articles is not maintained in this DPIA procedure."
+
+  - must_id: item:Art.24:rev_reviewer
+    verdict: partial
+    confidence: low
+    quote: "Approved by: PIMS Owner"
+    rationale: "An approver is named but the specific DPO + executive sponsor pairing for Art.24 governance review is not defined."
+
+  - must_id: item:Art.24:rev_role_currency
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Controller/processor role decisions and counterparty service-shape currency are not addressed in this DPIA procedure."
+
+  - must_id: item:Art.24:charter_approval
+    verdict: partial
+    confidence: medium
+    quote: "Approved by PIMS Owner
+
+__Approved on:__ 20 Nov 2025"
+    rationale: "Document is approved with a date, but this is a DPIA procedure approval, not a privacy programme charter approval by top management."
+
+  - must_id: item:Art.24:charter_governance
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No privacy steering committee cadence or attendees are described."
+
+  - must_id: item:Art.24:charter_owner
+    verdict: partial
+    confidence: medium
+    quote: "__Owner__: DPO"
+    rationale: "DPO is named as document owner but not explicitly as programme owner in a charter context."
+
+  - must_id: item:Art.24:charter_purpose
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Document defines DPIA purpose, not an overarching GDPR compliance objective and accountability commitment for a privacy programme."
+
+  - must_id: item:Art.24:charter_review_cadence
+    verdict: partial
+    confidence: medium
+    quote: "Procedure reviewed annually or upon regulatory changes"
+    rationale: "Annual review cadence is stated for this procedure but not for a privacy programme charter."
+
+  - must_id: item:Art.24:charter_scope
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No definition of privacy programme scope across legal entities, activities, or geographies."
+
+  - must_id: item:Art.25:scope_design_activities
+    verdict: partial
+    confidence: medium
+    quote: "New processing presents significant privacy risks__Significant Changes__: Major modifications to existing processing activities or technologies"
+    rationale: "DPIA triggers reference new processing and significant changes but not framed as DPbD design activities scope."
+
+  - must_id: item:Art.25:scope_exclusions
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No out-of-scope changes such as bug fixes or refactoring are defined."
+
+  - must_id: item:Art.25:scope_significant_change
+    verdict: partial
+    confidence: low
+    quote: "__Significant Changes__: Major modifications to existing processing activities or technologies"
+    rationale: "Mentions significant changes but does not precisely define what constitutes one."
+
+  - must_id: item:Art.25:proc_authority
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Document assigns DPIA roles but does not define decision authority for Data Protection by Design outcomes."
+
+  - must_id: item:Art.25:proc_checkpoint
+    verdict: partial
+    confidence: medium
+    quote: "Project Management: DPIA required before implementation of new systems/processes"
+    rationale: "Document mentions DPIA before implementation but does not define a specific design-stage checkpoint within an SDLC for Data Protection by Design reviews."
+
+  - must_id: item:Art.25:proc_dpia_integration
+    verdict: partial
+    confidence: medium
+    quote: "DPIA must be conducted when processing:
+
+- __High Risk to Rights and Freedoms__: New processing presents significant privacy risks"
+    rationale: "Triggers for DPIA are defined, but escalation from a DPbD review to DPIA is not explicitly described."
+
+  - must_id: item:Art.25:proc_inputs
+    verdict: partial
+    confidence: medium
+    quote: "Purpose of Processing and Legal Basis
+- Categories of Data Subjects and Personal Data Types
+- Data Flow Description \(collection, storage, sharing, retention\)
+- Technical and Organizational Measures"
+    rationale: "Inputs to DPIA are listed including purpose and retention, but data minimisation alternatives and special-category overlay are not explicitly covered."
+
+  - must_id: item:Art.25:proc_record
+    verdict: satisfies
+    confidence: high
+    quote: "All DPIAs are documented in the centralized DPIA Log Sheet. Each entry must include the following information"
+    rationale: "Per-DPIA record retention with design, decisions, and measures is defined in the DPIA Log Sheet section."
+
+  - must_id: item:Art.25:rev_certification_validity
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Art.25.3 certification is not referenced or used in this procedure."
+
+  - must_id: item:Art.25:rev_coverage
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No design-coverage check ensuring every in-scope design activity had a DPbD review is described."
+
+  - must_id: item:Art.25:rev_date
+    verdict: partial
+    confidence: medium
+    quote: "Set review date \(minimum annually or upon significant change\)"
+    rationale: "Review date is set but no explicit check that reviews occur within planned intervals is documented."
+
+  - must_id: item:Art.25:rev_defaults_currency
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No defaults register or currency check against deployed system state is described."
+
+  - must_id: item:Art.25:rev_reviewer
+    verdict: partial
+    confidence: medium
+    quote: "IT Security Team:__ Advises on technical safeguards and security measures"
+    rationale: "Roles include Data Protection & Risk Manager, Project/System Owner, PIMS Manager and IT Security Team, but no explicit DPO + product + engineering reviewer triad is defined."
+
+  - must_id: item:Art.35:scope_mandatory
+    verdict: partial
+    confidence: medium
+    quote: "Large Scale Processing__: Systematic processing of large amounts of personal data"
+    rationale: "Large-scale systematic processing is mentioned but Art.35.3(a-c) mandatory categories are not fully operationalised (no explicit systematic evaluation or large-scale public monitoring)."
+
+  - must_id: item:Art.35:scope_org_criteria
+    verdict: partial
+    confidence: medium
+    quote: "High Risk to Rights and Freedoms: New processing presents significant privacy risks
+- Significant Changes: Major modifications to existing processing activities or technologies
+- Regulatory Requirements: Mandated by data protection"
+    rationale: "Lists high-risk trigger categories but does not adopt EDPB WP248 nine-criteria scoring approach."
+
+  - must_id: item:Art.35:scope_sa_list
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No reference to the lead supervisory authority's Art.35.4 published list."
+
+  - must_id: item:Art.35:scope_white_list
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of Art.35.5 SA white-list activities not requiring DPIA."
+
+  - must_id: item:Art.35:art36_escalation
+    verdict: partial
+    confidence: medium
+    quote: "Consult: Seek external advice or regulatory guidance"
+    rationale: "Mentions consultation option but does not explicitly reference Art.36 prior consultation with the SA for residual high risk."
+
+  - must_id: item:Art.35:content_minimum
+    verdict: partial
+    confidence: medium
+    quote: "Purpose of Processing and Legal Basis
+- Categories of Data Subjects and Personal Data Types
+- Data Flow Description (collection, storage, sharing, retention)
+- Technical and Organizational Measures"
+    rationale: "Covers description, risks and measures but does not explicitly require necessity/proportionality assessment per Art.35.7(b)."
+
+  - must_id: item:Art.35:dpo_advice
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No DPO role defined in DPIA process; only Data Protection & Risk Manager and PIMS Manager referenced."
+
+  - must_id: item:Art.35:review_trigger
+    verdict: satisfies
+    confidence: high
+    quote: "Individual DPIAs reviewed per schedule or upon significant change"
+    rationale: "Explicitly requires review upon significant change and annually."
+
+  - must_id: item:Art.35:subject_consultation
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No provision for seeking views of data subjects or their representatives per Art.35.9."
+
+  - must_id: item:Art.35:trigger_criteria
+    verdict: partial
+    confidence: medium
+    quote: "Large Scale Processing: Systematic processing of large amounts of personal data"
+    rationale: "Mentions large-scale/systematic processing generically but does not cite Art.35.3 specific mandatory cases or SA-published list/sectoral guidance."
+
+  - must_id: item:Art.35:rev_advice_quality
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Requires sampling of actual DPO advice records, not assessable from procedure document."
+
+  - must_id: item:Art.35:rev_art36_audit
+    verdict: partial
+    confidence: low
+    quote: "Consult: Seek external advice or regulatory guidance"
+    rationale: "Procedure mentions 'Consult' as a residual risk decision option but does not define an explicit Art.36 escalation audit for high residual-risk DPIAs."
+
+  - must_id: item:Art.35:rev_coverage
+    verdict: partial
+    confidence: low
+    quote: "DPIA must be conducted when processing:"
+    rationale: "Triggers for DPIA are defined but no explicit coverage audit ensuring every in-scope activity has a current DPIA or Art.35.5 white-list justification."
+
+  - must_id: item:Art.35:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: "Next Review Date: 20 Nov 2026"
+    rationale: "Document has an explicit next review date within the annual review interval."
+
+  - must_id: item:Art.35:rev_review_cadence
+    verdict: partial
+    confidence: medium
+    quote: "Individual DPIAs reviewed per schedule or upon significant change"
+    rationale: "Cadence for refreshing DPIAs on change is stated but no audit process to verify refresh compliance is defined."
+
+  - must_id: item:Art.35:rev_reviewer
+    verdict: partial
+    confidence: low
+    quote: "Reviewed by: PIMS Manager"
+    rationale: "Document identifies PIMS Manager as reviewer and DPO as owner but does not specify a reviewer trio of DPO + executive sponsor + lead privacy engineer."
+
+  - must_id: item:Art.35:reg_dpia_id
+    verdict: satisfies
+    confidence: high
+    quote: "DPIA Reference ID: Unique identifier for tracking and reference purposes."
+    rationale: "DPIA Log Sheet requires a unique DPIA Reference ID per row."
+
+  - must_id: item:Art.35:reg_dpo_advice_date
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "DPIA Log Sheet fields do not include a per-row DPO advice date and summary."
+
+  - must_id: item:Art.35:reg_outcome
+    verdict: satisfies
+    confidence: high
+    quote: "Residual Risk Decision: Final decision on risk acceptance (Accept/Mitigate Further/Reject/Consult)"
+    rationale: "Log sheet records a per-row outcome aligned with the required outcome categories."
+
+  - must_id: item:Art.35:reg_processing_activity
+    verdict: partial
+    confidence: medium
+    quote: "Project/Processing Title: Clear description of the processing activity being assessed."
+    rationale: "Log records the processing activity but does not explicitly require a cross-reference to Art.30 RoPA."
+
+  - must_id: item:Art.35:reg_residual_risk
+    verdict: partial
+    confidence: medium
+    quote: "Residual Risk Decision: Final decision on risk acceptance (Accept/Mitigate Further/Reject/Consult)"
+    rationale: "Log captures residual-risk decision but not an explicit residual-risk level (e.g., Low/Medium/High) after mitigations as a distinct field."
+
+  - must_id: item:Art.35:reg_trigger
+    verdict: partial
+    confidence: medium
+    quote: "DPIA must be conducted when processing:
+
+- __High Risk to Rights and Freedoms__: New processing presents significant privacy risks
+- __Significant Changes__: Major modifications to existing processing activities"
+    rationale: "Procedure lists trigger categories but does not implement a per-row trigger field mapped to Art.35.3.a-c/SA list."
+
+  - must_id: item:Art.36:scope_excluded
+    verdict: partial
+    confidence: low
+    quote: "__Accept__: Residual risk acceptable with current mitigations"
+    rationale: "Mentions accepting residual risk but does not explicitly define out-of-scope processing for Art.36 consultation."
+
+  - must_id: item:Art.36:scope_ms_law
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of Member State law Art.36.5 additional consultation triggers."
+
+  - must_id: item:Art.36:scope_residual_high_risk
+    verdict: partial
+    confidence: low
+    quote: "__Consult__: Seek external advice or regulatory guidance"
+    rationale: "Mentions consult option but does not operationally define residual high risk post-mitigation."
+
+  - must_id: item:Art.36:reg_consultation_id
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No consultation register or per-row consultation ID defined."
+
+  - must_id: item:Art.36:reg_decision_to_proceed
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No controller decision field after SA advice is defined."
+
+  - must_id: item:Art.36:reg_dpia_xref
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No Art.36 register or DPIA cross-reference field for consultations is defined."
+
+  - must_id: item:Art.36:reg_outcome
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No per-row SA consultation outcome field defined."
+
+  - must_id: item:Art.36:reg_sa
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No supervisory authority engagement field defined."
+
+  - must_id: item:Art.36:reg_submission_date
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No SA submission date field defined."
+
+  - must_id: item:Art.36:owner
+    verdict: partial
+    confidence: medium
+    quote: "__Data Protection & Risk Manager:__ Determines DPIA necessity, conducts assessments, maintains DPIA log and ensures compliance with regulatory requirements"
+    rationale: "Owner is DPO/Data Protection & Risk Manager but no legal counsel is named for Art.36 consultation."
+
+  - must_id: item:Art.36:sa_advice_handling
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No procedure for handling supervisory authority written advice (incorporation or rejection with rationale)."
+
+  - must_id: item:Art.36:submission_content
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Document does not specify contents required for prior consultation submission under Art.36.3."
+
+  - must_id: item:Art.36:trigger_detection
+    verdict: partial
+    confidence: medium
+    quote: "- __Consult__: Seek external advice or regulatory guidance"
+    rationale: "Residual risk decision includes 'Consult' option but does not explicitly tie high residual risk to Art.36 prior consultation trigger."
+
+  - must_id: item:Art.36:waiting_period
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of the 8-week (extendable +6 weeks) waiting period before processing begins."
+

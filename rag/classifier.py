@@ -594,7 +594,11 @@ CLEAR_INTENT_PHRASES = [
     # Direct 27701 Annex A/B ref queries — "is A.7.2.6 compliant?" etc.
     # These already flow through the posture-by-ref pattern above but this
     # explicit anchor gives short-circuit priority.
-    (re.compile(r'\b(?:is|what\s+is)\s+(?:our\s+)?(?:iso\s*27701\s+)?(A\.7\.[2-5]\.\d+|B\.8\.[2-5]\.\d+)\s+(?:compliant|posture|status|finding|a\s+nc|an?\s+ofi|applicable(?:\s+to\s+us)?|in\s+scope)\b', re.IGNORECASE),
+    # Ship 82'.d — accept optional parenthetical descriptor between ref
+    # and intent word (case #214: "is ISO 27701 B.8.2.6 (processor RoPA)
+    # compliant?" was routing to `unknown`). Users routinely gloss refs
+    # with parentheticals; pattern must skip that without losing anchor.
+    (re.compile(r'\b(?:is|what\s+is)\s+(?:our\s+)?(?:iso\s*27701\s+)?(A\.7\.[2-5]\.\d+|B\.8\.[2-5]\.\d+)(?:\s*\([^)]*\))?\s+(?:compliant|posture|status|finding|a\s+nc|an?\s+ofi|applicable(?:\s+to\s+us)?|in\s+scope)\b', re.IGNORECASE),
      "posture_check", []),
     # Ship 54' addendum — applicability/scope queries route to posture_check.
     # "is X applicable?" / "does X apply to us?" / "are we in scope for X?"
