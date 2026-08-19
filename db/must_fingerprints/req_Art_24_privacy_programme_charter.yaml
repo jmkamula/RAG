@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.24:privacy_programme_charter
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.24:privacy_programme_charter"
@@ -14,70 +13,57 @@ must_fingerprints:
   - must_id: "item:Art.24:charter_review_cadence"
     description: "Review cadence stated (annual minimum)"
     excerpt_keywords:
-      - [charter, review, cadence, responsibility]
-      - [review, cadence, responsibility]
-      - [review, cadence, stated, responsibility]
-      - [cadence, stated, responsibility]
-      - [cadence, stated, annual, responsibility]
-      - [stated, annual, responsibility]
-      - [stated, annual, minimum, responsibility]
-      - [annual, minimum, responsibility]
+      - [review, cadence]
+      - [annual, review]
+      - [review, frequency]
+      - [minimum, annual]
+      - [charter, review]
+      - [review, periodicity]
 
   - must_id: "item:Art.24:charter_approval"
     description: "Approved by top management with date"
     excerpt_keywords:
-      - [charter, approval, responsibility]
-      - [approved, top, responsibility]
-      - [approved, top, management, responsibility]
-      - [top, management, responsibility]
-      - [top, management, date, responsibility]
-      - [management, date, responsibility]
+      - [approved, top management]
+      - [management, approval, date]
+      - [charter, approved, date]
+      - [signed, management]
+      - [approval, date, record]
 
   - must_id: "item:Art.24:charter_owner"
     description: "Named programme owner (typically DPO or Chief Privacy Officer)"
     excerpt_keywords:
-      - [charter, owner, responsibility]
-      - [named, programme, responsibility]
-      - [named, programme, owner, responsibility]
-      - [programme, owner, responsibility]
-      - [programme, owner, typically, responsibility]
-      - [owner, typically, responsibility]
-      - [owner, typically, dpo, responsibility]
-      - [typically, dpo, responsibility]
+      - [programme, owner]
+      - [named, privacy, officer]
+      - [data, protection, officer]
+      - [chief, privacy, officer]
+      - [privacy, programme, charter]
+      - [responsibility, controller]
 
   - must_id: "item:Art.24:charter_governance"
     description: "Governance forum cadence (privacy steering committee, frequency, attendees)"
     excerpt_keywords:
-      - [charter, governance, responsibility]
-      - [governance, forum, responsibility]
-      - [governance, forum, cadence, responsibility]
-      - [forum, cadence, responsibility]
-      - [forum, cadence, privacy, responsibility]
-      - [cadence, privacy, responsibility]
-      - [cadence, privacy, steering, responsibility]
-      - [privacy, steering, responsibility]
+      - [privacy, steering, committee]
+      - [governance, forum, cadence]
+      - [meeting, frequency, attendees]
+      - [steering, committee, meetings]
+      - [governance, meeting, schedule]
 
   - must_id: "item:Art.24:charter_scope"
     description: "Scope of the privacy programme (which legal entities, processing activities, geographies)"
     excerpt_keywords:
-      - [charter, scope, responsibility]
-      - [scope, privacy, responsibility]
-      - [scope, privacy, programme, responsibility]
-      - [privacy, programme, responsibility]
-      - [privacy, programme, legal, responsibility]
-      - [programme, legal, responsibility]
-      - [programme, legal, entities, responsibility]
-      - [legal, entities, responsibility]
+      - [scope, privacy, programme]
+      - [applies, legal, entities]
+      - [processing, activities, covered]
+      - [geographical, scope]
+      - [within, scope, privacy]
+      - [privacy, programme, coverage]
 
   - must_id: "item:Art.24:charter_purpose"
     description: "Statement of GDPR compliance objective + accountability commitment"
     excerpt_keywords:
-      - [charter, purpose, responsibility]
-      - [statement, gdpr, responsibility]
-      - [statement, gdpr, compliance, responsibility]
-      - [gdpr, compliance, responsibility]
-      - [gdpr, compliance, objective, responsibility]
-      - [compliance, objective, responsibility]
-      - [compliance, objective, accountability, responsibility]
-      - [objective, accountability, responsibility]
+      - [gdpr, compliance, objective]
+      - [accountability, commitment]
+      - [privacy, programme, charter]
+      - [controller, responsibility]
+      - [data, protection, commitment]
 

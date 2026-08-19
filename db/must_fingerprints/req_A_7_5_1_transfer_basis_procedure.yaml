@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.5.1:transfer_basis_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.5.1:transfer_basis_procedure"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:A.7.5.1:proc_intra_jurisdiction"
     description: "Intra-jurisdiction exclusion rule (§7.5.1 NOTE — where sender + recipient same jurisdiction, applicable law is the same)"
     excerpt_keywords:
-      - [intra, jurisdiction, identify]
-      - [intra, jurisdiction, exclusion, identify]
-      - [jurisdiction, exclusion, identify]
-      - [jurisdiction, exclusion, rule, identify]
-      - [exclusion, rule, identify]
-      - [exclusion, rule, note, identify]
-      - [rule, note, identify]
-      - [rule, note, sender, identify]
+      - [intra, jurisdiction]
+      - [transfer, between, jurisdictions]
+      - [sender, recipient, same]
+      - [applicable, law]
+      - [exclusion, rule]
+      - [pii, transfer, basis]
 
   - must_id: "item:A.7.5.1:proc_schrems_tia"
-    description: "Schrems II Transfer Impact Assessment — for Art.46 safeguard transfers, assess third-country legal environment + supplementary measures per "
+    description: "Schrems II Transfer Impact Assessment — for Art.46 safeguard transfers, assess third-country legal environment + supplementary measures per EDPB 01/2020"
     excerpt_keywords:
-      - [schrems, tia, identify]
-      - [schrems, transfer, identify]
-      - [schrems, transfer, impact, identify]
-      - [transfer, impact, identify]
-      - [transfer, impact, assessment, identify]
-      - [impact, assessment, identify]
-      - [impact, assessment, art, identify]
-      - [assessment, art, identify]
+      - [transfer impact, assessment]
+      - [thirdcountry, legal, environment]
+      - [supplementary, measures]
+      - [edpb, 012020]
+      - [art46, safeguard, transfers]
+      - [schrems, ii, assessment]
 
   - must_id: "item:A.7.5.1:proc_sa_review"
     description: "SA-review awareness — some jurisdictions require transfer agreements reviewed by supervisory authority"
     excerpt_keywords:
-      - [sa, review, identify]
-      - [review, awareness, identify]
-      - [review, awareness, some, identify]
-      - [awareness, some, identify]
-      - [awareness, some, jurisdictions, identify]
-      - [some, jurisdictions, identify]
-      - [some, jurisdictions, require, identify]
-      - [jurisdictions, require, identify]
+      - [transfer, agreement, review]
+      - [supervisory, authority, approval]
+      - [jurisdiction, require, review]
+      - [shall, submit, supervisory]
+      - [reviewed, authority]
 
   - must_id: "item:A.7.5.1:proc_documented_compliance"
     description: "Documented compliance with legislation/regulation applicable at origin AND destination jurisdiction per transfer"
     excerpt_keywords:
-      - [documented, compliance, identify]
-      - [documented, compliance, legislation, identify]
-      - [compliance, legislation, identify]
-      - [compliance, legislation, regulation, identify]
-      - [legislation, regulation, identify]
-      - [legislation, regulation, origin, identify]
-      - [regulation, origin, identify]
-      - [regulation, origin, destination, identify]
+      - [documented, compliance]
+      - [applicable, legislation]
+      - [origin, jurisdiction]
+      - [destination, jurisdiction]
+      - [transfer, basis]
+      - [regulation, compliance]
 
   - must_id: "item:A.7.5.1:proc_transfer_hierarchy"
-    description: "Transfer basis hierarchy — adequacy decision (Art.45) → appropriate safeguards (Art.46: SCCs, BCRs, codes, certification) → derogations (Art"
+    description: "Transfer basis hierarchy — adequacy decision (Art.45) → appropriate safeguards (Art.46: SCCs, BCRs, codes, certification) → derogations (Art.49) as last resort"
     excerpt_keywords:
-      - [transfer, hierarchy, identify]
       - [transfer, basis]
-      - [transfer, basis, hierarchy]
-      - [basis, hierarchy]
-      - [basis, hierarchy, adequacy]
-      - [hierarchy, adequacy, identify]
-      - [hierarchy, adequacy, decision, identify]
-      - [adequacy, decision, identify]
+      - [adequacy, decision]
+      - [appropriate, safeguards]
+      - [standard, contractual, clauses]
+      - [binding, corporate, rules]
+      - [derogations, last, resort]
 

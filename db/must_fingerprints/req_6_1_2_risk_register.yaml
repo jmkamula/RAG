@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:6.1.2:risk_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:6.1.2:risk_register"
@@ -14,70 +13,57 @@ must_fingerprints:
   - must_id: "item:6.1.2:reg_last_assessed"
     description: "Last assessment date per row (drives staleness)"
     excerpt_keywords:
-      - [last, assessed, risk]
-      - [last, assessment]
       - [last, assessment, date]
-      - [assessment, date]
-      - [assessment, date, staleness]
-      - [date, staleness, risk]
-      - [per, row, risk]
-      - [each, row, risk]
+      - [risk, assessment, date]
+      - [assessment, date, record]
+      - [date, last, assessed]
+      - [risk, register, date]
 
   - must_id: "item:6.1.2:reg_treatment_status"
     description: "Treatment status per row (accept / mitigate / transfer / avoid; link to 6.1.3 plan)"
     excerpt_keywords:
-      - [treatment, status, risk]
-      - [treatment, status, accept, risk]
-      - [status, accept, risk]
-      - [status, accept, mitigate, risk]
-      - [accept, mitigate, risk]
-      - [accept, mitigate, transfer, risk]
-      - [mitigate, transfer, risk]
-      - [mitigate, transfer, avoid, risk]
+      - [treatment, status]
+      - [risk, treatment, plan]
+      - [risk, treatment, status]
+      - [treatment, option]
+      - [treatment, decision]
+      - [treatment, approach]
 
   - must_id: "item:6.1.2:reg_scoring"
     description: "Likelihood + consequence scores per row applied per the procedure's criteria"
     excerpt_keywords:
-      - [likelihood, consequence, risk]
-      - [likelihood, consequence, scores, risk]
-      - [consequence, scores, risk]
-      - [consequence, scores, criteria, risk]
-      - [scores, criteria, risk]
-      - [per, row, risk]
-      - [each, row, risk]
-      - [column, containing, risk]
+      - [likelihood, score]
+      - [consequence, score]
+      - [risk, score]
+      - [scoring, criteria]
+      - [risk, assessment, score]
+      - [score, applied]
 
   - must_id: "item:6.1.2:reg_owner"
     description: "Risk owner per row"
     excerpt_keywords:
       - [risk, owner]
-      - [per, row, risk]
-      - [each, row, risk]
-      - [column, containing, risk]
-      - [each, entry, risk]
-      - [column, header, risk]
+      - [owner, assigned]
+      - [risk, responsible]
+      - [assigned, risk]
+      - [risk, ownership]
+      - [owner, per, record]
 
   - must_id: "item:6.1.2:reg_description"
     description: "Risk description per row (asset, threat, vulnerability)"
     excerpt_keywords:
       - [risk, description]
-      - [risk, description, asset]
-      - [description, asset, risk]
-      - [description, asset, threat, risk]
-      - [asset, threat, risk]
-      - [asset, threat, vulnerability, risk]
-      - [threat, vulnerability, risk]
-      - [per, row, risk]
+      - [asset, threat, vulnerability]
+      - [risk, register]
+      - [identified, risk]
+      - [threat, description]
 
   - must_id: "item:6.1.2:reg_risk_id"
     description: "Unique risk identifier per row"
     excerpt_keywords:
-      - [risk, id]
-      - [unique, risk]
-      - [unique, risk, identifier]
       - [risk, identifier]
-      - [per, row, risk]
-      - [each, row, risk]
-      - [column, containing, risk]
-      - [each, entry, risk]
+      - [unique, risk, id]
+      - [risk, reference]
+      - [risk, record, id]
+      - [risk, entry, id]
 

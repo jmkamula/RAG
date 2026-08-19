@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.5.27:lessons_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.27:lessons_program_review"
@@ -14,72 +13,58 @@ must_fingerprints:
   - must_id: "item:A.5.27:rev_actions"
     description: "Action items captured for the program (e.g"
     excerpt_keywords:
-      - [action, items, learning]
-      - [action, items, captured, learning]
-      - [items, captured, learning]
-      - [items, captured, program, learning]
-      - [captured, program, learning]
-      - [captured, program, tighten, learning]
-      - [program, tighten, learning]
-      - [program, tighten, root, learning]
+      - [action, items]
+      - [lessons, learned, review]
+      - [program, review]
+      - [incident, actions]
+      - [reviewed, actions]
+      - [corrective, actions]
 
   - must_id: "item:A.5.27:rev_training_impact"
     description: "Training-impact evidence reviewed where lessons drove curriculum changes"
     excerpt_keywords:
-      - [training, impact, learning]
-      - [training, impact, evidence, learning]
-      - [impact, evidence, learning]
-      - [impact, evidence, reviewed, learning]
-      - [evidence, reviewed, learning]
-      - [evidence, reviewed, lessons, learning]
-      - [reviewed, lessons, learning]
-      - [reviewed, lessons, drove, learning]
+      - [training impact, reviewed]
+      - [lessons learned, curriculum changes]
+      - [periodic review, training impact]
+      - [reviewed, lesson, changes]
+      - [training, impact, evidence]
+      - [lessons, drive, curriculum]
 
   - must_id: "item:A.5.27:rev_repeat"
     description: "Repeat-incident analysis (lessons that should have prevented later incidents — did they?)"
     excerpt_keywords:
-      - [repeat, incident, learning]
-      - [repeat, incident, analysis, learning]
-      - [incident, analysis, learning]
-      - [incident, analysis, lessons, learning]
-      - [analysis, lessons, learning]
-      - [analysis, lessons, have, learning]
-      - [lessons, have, learning]
-      - [lessons, have, prevented, learning]
+      - [repeat, incident, analysis]
+      - [lessons, learned, review]
+      - [incident, trend, review]
+      - [periodic, lessons, review]
+      - [reviewed, lessons, incidents]
 
   - must_id: "item:A.5.27:rev_closure_rate"
     description: "Action-closure rate analysed (open / aged / closed) against targets"
     excerpt_keywords:
-      - [closure, rate, learning]
-      - [action, closure, learning]
-      - [action, closure, rate, learning]
-      - [closure, rate, analysed, learning]
-      - [rate, analysed, learning]
-      - [rate, analysed, open, learning]
-      - [analysed, open, learning]
-      - [analysed, open, aged, learning]
+      - [closure, rate, analysis]
+      - [incident, closure, target]
+      - [open, aged, closed]
+      - [lessons, learned, review]
+      - [review, closure, rate]
 
   - must_id: "item:A.5.27:rev_reviewer"
     description: "Reviewer identity (program owner + InfoSec lead jointly)"
     excerpt_keywords:
-      - [reviewer, identity, learning]
-      - [reviewer, identity, program, learning]
-      - [identity, program, learning]
-      - [identity, program, owner, learning]
-      - [program, owner, learning]
-      - [program, owner, infosec, learning]
-      - [owner, infosec, learning]
-      - [owner, infosec, lead, learning]
+      - [reviewer, identity]
+      - [program, owner, review]
+      - [information, security, lead]
+      - [jointly, reviewed]
+      - [review, conducted, owner]
+      - [security, incident, reviewer]
 
   - must_id: "item:A.5.27:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, learning]
-      - [review, date, within, learning]
-      - [date, within, learning]
-      - [date, within, planned, learning]
-      - [within, planned, learning]
-      - [within, planned, interval, learning]
-      - [planned, interval, learning]
-      - [per, revocation, learning]
+      - [review, date]
+      - [planned, interval]
+      - [periodic, review]
+      - [lessonslearned, review]
+      - [review, within, interval]
+      - [scheduled, review]
 

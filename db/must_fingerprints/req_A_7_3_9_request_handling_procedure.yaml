@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.3.9:request_handling_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.9:request_handling_procedure"
@@ -14,84 +13,69 @@ must_fingerprints:
   - must_id: "item:A.7.3.9:proc_complaint_route"
     description: "Complaint route — subjects informed of right to complain to SA (Art.77 route)"
     excerpt_keywords:
-      - [complaint, route, handling]
-      - [complaint, route, subjects, handling]
-      - [route, subjects, handling]
-      - [route, subjects, informed, handling]
-      - [subjects, informed, handling]
-      - [subjects, informed, right, handling]
-      - [informed, right, handling]
-      - [informed, right, complain, handling]
+      - [right, complain]
+      - [complaint, route]
+      - [inform, data, subject]
+      - [complain, supervisory, authority]
+      - [art77, complaint]
+      - [subject, right, complaint]
 
   - must_id: "item:A.7.3.9:proc_delay_notification"
     description: "Delay notification — where response takes longer than SLA, subject informed of reason + revised timeline"
     excerpt_keywords:
-      - [delay, notification, handling]
-      - [delay, notification, response, handling]
-      - [notification, response, handling]
-      - [notification, response, takes, handling]
-      - [response, takes, handling]
-      - [response, takes, longer, handling]
-      - [takes, longer, handling]
-      - [takes, longer, than, handling]
+      - [delay, notification]
+      - [response, longer, sla]
+      - [subject, informed, reason]
+      - [revised, timeline]
+      - [notify, delay]
+      - [response, timeframe, exceeded]
 
   - must_id: "item:A.7.3.9:proc_fee_policy"
     description: "Fee policy (jurisdictions permit fees for excessive/repetitive; document rules)"
     excerpt_keywords:
-      - [fee, jurisdictions, handling]
-      - [fee, jurisdictions, permit, handling]
-      - [jurisdictions, permit, handling]
-      - [jurisdictions, permit, fees, handling]
-      - [permit, fees, handling]
-      - [permit, fees, excessive, handling]
-      - [fees, excessive, handling]
-      - [fees, excessive, repetitive, handling]
+      - [fee, policy]
+      - [excessive, request]
+      - [repetitive, request]
+      - [charge, applicable]
+      - [request, handling, fee]
+      - [jurisdiction, permit, fee]
 
   - must_id: "item:A.7.3.9:proc_response_times"
     description: "Response times documented in privacy policy per jurisdiction"
     excerpt_keywords:
-      - [response, times, handling]
-      - [response, times, documented, handling]
-      - [times, documented, handling]
-      - [times, documented, privacy, handling]
-      - [documented, privacy, handling]
-      - [documented, privacy, jurisdiction, handling]
-      - [privacy, jurisdiction, handling]
-      - [procedure, step, handling]
+      - [response times, privacy policy]
+      - [documented, response times]
+      - [response times, per jurisdiction]
+      - [privacy policy, per jurisdiction]
+      - [response times, handling requests]
 
   - must_id: "item:A.7.3.9:proc_triage_routing"
     description: "Triage + routing — request classified + routed to correct A.7.3.x sub-procedure"
     excerpt_keywords:
-      - [triage, routing, handling]
-      - [triage, routing, request, handling]
-      - [routing, request, handling]
-      - [routing, request, classified, handling]
-      - [request, classified, handling]
-      - [request, classified, routed, handling]
-      - [classified, routed, handling]
-      - [classified, routed, correct, handling]
+      - [request, classified]
+      - [request, routed]
+      - [triage, request]
+      - [routing, procedure]
+      - [subprocedure, a.7.3]
+      - [request, subprocedure]
 
   - must_id: "item:A.7.3.9:proc_identity_verification"
     description: "Identity verification (proportionate — not overly onerous)"
     excerpt_keywords:
-      - [identity, verification, handling]
-      - [identity, verification, proportionate, handling]
-      - [verification, proportionate, handling]
-      - [verification, proportionate, not, handling]
-      - [proportionate, not, handling]
-      - [proportionate, not, overly, handling]
-      - [not, overly, handling]
-      - [not, overly, onerous, handling]
+      - [identity, verification]
+      - [verify, identity]
+      - [proportionate, verification]
+      - [identity, check]
+      - [verification, process]
+      - [identity, authentication]
 
   - must_id: "item:A.7.3.9:proc_intake_channels"
     description: "Intake channels enumerated (email, web form, in-product, phone, mail)"
     excerpt_keywords:
-      - [intake, channels, handling]
-      - [intake, channels, enumerated, handling]
-      - [channels, enumerated, handling]
-      - [channels, enumerated, email, handling]
-      - [enumerated, email, handling]
-      - [enumerated, email, web, handling]
-      - [email, web, handling]
-      - [email, web, form, handling]
+      - [intake, channels]
+      - [subject, request, intake]
+      - [email, phone]
+      - [web, form]
+      - [inproduct, request]
+      - [mail, channel]
 

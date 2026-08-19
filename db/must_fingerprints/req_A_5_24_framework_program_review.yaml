@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.5.24:framework_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.24:framework_program_review"
@@ -14,84 +13,68 @@ must_fingerprints:
   - must_id: "item:A.5.24:rev_actions"
     description: "Action items captured (e.g"
     excerpt_keywords:
-      - [action, items, incident]
-      - [action, items, captured, incident]
-      - [items, captured, incident]
-      - [items, captured, add, incident]
-      - [captured, add, incident]
-      - [captured, add, new, incident]
-      - [add, new, incident]
-      - [add, new, role, incident]
+      - [action, items, captured]
+      - [incident, management, actions]
+      - [review, action, plan]
+      - [corrective, actions, tracked]
+      - [actions, identified, review]
+      - [action, item, log]
 
   - must_id: "item:A.5.24:rev_gdpr_72h_feasibility"
     description: "GDPR 72-hour feasibility check (when did the last personal-data incident notify? what was the gap to 72h? is the path actually under 72h?)"
     excerpt_keywords:
-      - [gdpr, 72h, feasibility, incident]
-      - [gdpr, hour, incident]
-      - [gdpr, hour, feasibility, incident]
-      - [hour, feasibility, incident]
-      - [hour, feasibility, check, incident]
-      - [feasibility, check, incident]
-      - [feasibility, check, did, incident]
-      - [check, did, incident]
+      - [gdpr, 72hour, feasibility]
+      - [incident, notification, time]
+      - [personaldata, breach, notification]
+      - [notification, within, 72hours]
+      - [incident, reporting, timeline]
 
   - must_id: "item:A.5.24:rev_real_divergence"
-    description: "Real-incident vs framework divergence (where actual responses deviated from framework — was the framework too prescriptive, missing a path, "
+    description: "Real-incident vs framework divergence (where actual responses deviated from framework — was the framework too prescriptive, missing a path, or just unused?)"
     excerpt_keywords:
-      - [real, divergence, incident]
-      - [real, incident]
-      - [real, incident, framework]
-      - [incident, framework]
-      - [incident, framework, divergence]
-      - [framework, divergence, incident]
-      - [framework, divergence, actual, incident]
-      - [divergence, actual, incident]
+      - [incident, management, review]
+      - [framework, divergence]
+      - [response, deviation]
+      - [periodic, review]
+      - [real, incident, comparison]
+      - [review, findings]
 
   - must_id: "item:A.5.24:rev_team_readiness"
     description: "Team-readiness audit (training currency across responders; coverage gaps where a tier is under-staffed; backup-named compliance)"
     excerpt_keywords:
-      - [team, readiness, incident]
-      - [team, readiness, audit, incident]
-      - [readiness, audit, incident]
-      - [readiness, audit, training, incident]
-      - [audit, training, incident]
-      - [audit, training, currency, incident]
-      - [training, currency, incident]
-      - [training, currency, across, incident]
+      - [team, readiness]
+      - [training, currency]
+      - [coverage, gaps]
+      - [backup, named]
+      - [incident, management, review]
+      - [responder, staffing]
 
   - must_id: "item:A.5.24:rev_exercise_results"
     description: "Exercise-result analysis (last N exercises reviewed; gaps surfaced; remediation per gap; ratio-of-exercises-completed vs planned)"
     excerpt_keywords:
-      - [exercise, results, incident]
-      - [exercise, result, incident]
-      - [exercise, result, analysis, incident]
-      - [result, analysis, incident]
-      - [result, analysis, last, incident]
-      - [analysis, last, incident]
-      - [analysis, last, exercises, incident]
-      - [last, exercises, incident]
+      - [exercise, results]
+      - [incident, exercise, review]
+      - [gap, remediation]
+      - [exercises, completed, planned]
+      - [review, last, exercises]
+      - [analysis, exercise, results]
 
   - must_id: "item:A.5.24:rev_reviewer"
     description: "Reviewer identity (CISO + IR lead + Data Protection Officer where personal data scope; Legal where regulator notification scope)"
     excerpt_keywords:
-      - [reviewer, identity, incident]
-      - [reviewer, identity, ciso, incident]
-      - [identity, ciso, incident]
-      - [identity, ciso, lead, incident]
-      - [ciso, lead, incident]
-      - [ciso, lead, protection, incident]
-      - [lead, protection, incident]
-      - [lead, protection, officer, incident]
+      - [reviewer, identity]
+      - [ciso, reviewer]
+      - [incident, response, lead]
+      - [data, protection, officer]
+      - [legal, reviewer]
+      - [regulator, notification]
 
   - must_id: "item:A.5.24:rev_date"
     description: "Review date within the planned 180-day interval"
     excerpt_keywords:
-      - [review, date, incident]
-      - [review, date, within, incident]
-      - [date, within, incident]
-      - [date, within, planned, incident]
-      - [within, planned, incident]
-      - [within, planned, 180, incident]
-      - [planned, 180, incident]
-      - [planned, 180, day, incident]
+      - [review, date]
+      - [planned, interval]
+      - [periodic, review]
+      - [review, within, days]
+      - [incident, management, review]
 

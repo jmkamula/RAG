@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.8:siting_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.8:siting_program_review"
@@ -14,60 +13,47 @@ must_fingerprints:
   - must_id: "item:A.7.8:rev_register_update"
     description: "Changes propagated to the live register"
     excerpt_keywords:
-      - [changes, propagated, equipment]
-      - [changes, propagated, live, equipment]
-      - [propagated, live, equipment]
-      - [per, revocation, equipment]
-      - [per, revoked, identity, equipment]
-      - [revocation, record, equipment]
-      - [review, findings, equipment]
-      - [audit, outcomes, equipment]
+      - [register, updated]
+      - [periodic, review]
+      - [equipment, siting]
+      - [review, register]
+      - [changes, propagated]
 
   - must_id: "item:A.7.8:rev_register_check"
     description: "Per-equipment outcome (verified / amended / remediated)"
     excerpt_keywords:
-      - [equipment, outcome]
-      - [equipment, outcome, verified]
-      - [outcome, verified, equipment]
-      - [outcome, verified, amended, equipment]
-      - [verified, amended, equipment]
-      - [verified, amended, remediated, equipment]
-      - [amended, remediated, equipment]
-      - [per, revocation, equipment]
+      - [equipment, siting, review]
+      - [periodic, equipment, check]
+      - [reviewed, equipment, status]
+      - [siting, program, review]
+      - [equipment, remediated, outcome]
 
   - must_id: "item:A.7.8:rev_walkthrough"
     description: "Physical walkthrough (sample-based) — siting verified, tamper-evidence intact"
     excerpt_keywords:
-      - [physical, walkthrough, equipment]
-      - [physical, walkthrough, sample, equipment]
-      - [walkthrough, sample, equipment]
-      - [walkthrough, sample, based, equipment]
-      - [sample, based, equipment]
-      - [sample, based, siting]
-      - [based, siting]
-      - [based, siting, verified]
+      - [physical, walkthrough]
+      - [equipment, siting, verified]
+      - [tamper, evidence, intact]
+      - [periodic, equipment, review]
+      - [sample, based, inspection]
 
   - must_id: "item:A.7.8:rev_reviewer"
     description: "Reviewer identity (Facilities + InfoSec)"
     excerpt_keywords:
-      - [reviewer, identity, equipment]
-      - [reviewer, identity, facilities, equipment]
-      - [identity, facilities, equipment]
-      - [identity, facilities, infosec, equipment]
-      - [facilities, infosec, equipment]
-      - [per, revocation, equipment]
-      - [per, revoked, identity, equipment]
-      - [revocation, record, equipment]
+      - [reviewer, identity]
+      - [review, conducted]
+      - [review, performed]
+      - [reviewer, name]
+      - [review, team, members]
+      - [review, responsible, person]
 
   - must_id: "item:A.7.8:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, equipment]
-      - [review, date, within, equipment]
-      - [date, within, equipment]
-      - [date, within, planned, equipment]
-      - [within, planned, equipment]
-      - [within, planned, interval, equipment]
-      - [planned, interval, equipment]
-      - [per, revocation, equipment]
+      - [review, date]
+      - [planned, interval]
+      - [periodic, review]
+      - [next, review]
+      - [review, scheduled]
+      - [review, within, interval]
 

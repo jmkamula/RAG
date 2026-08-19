@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.4.9:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.9:applicable_scope"
@@ -14,48 +13,38 @@ must_fingerprints:
   - must_id: "item:A.7.4.9:scope_email_paths"
     description: "Email + file-sharing paths where PII may be transmitted"
     excerpt_keywords:
-      - [email, paths, pii]
-      - [email, file, pii]
-      - [email, file, sharing, pii]
-      - [file, sharing, pii]
-      - [file, sharing, paths, pii]
-      - [sharing, paths, pii]
-      - [sharing, paths, pii]
-      - [paths, pii]
+      - [email, transmission]
+      - [filesharing, pii]
+      - [pii, transmitted]
+      - [email, paths]
+      - [transmission, channels]
+      - [pii, email, paths]
 
   - must_id: "item:A.7.4.9:scope_internal_transfers"
     description: "Internal transfers (cross-region backup / DR replication / data warehouse loads)"
     excerpt_keywords:
-      - [internal, transfers, pii]
-      - [internal, transfers, cross, pii]
-      - [transfers, cross, pii]
-      - [transfers, cross, region, pii]
-      - [cross, region, pii]
-      - [cross, region, backup, pii]
-      - [region, backup, pii]
-      - [region, backup, replication, pii]
+      - [internal, transfers]
+      - [crossregion, backup]
+      - [dr, replication]
+      - [data, warehouse, loads]
+      - [transfers, within, organization]
 
   - must_id: "item:A.7.4.9:scope_integrations"
     description: "Integration endpoints (partner APIs + processor exchanges + third-party enrichment)"
     excerpt_keywords:
-      - [integration, endpoints, pii]
-      - [integration, endpoints, partner, pii]
-      - [endpoints, partner, pii]
-      - [endpoints, partner, apis, pii]
-      - [partner, apis, pii]
-      - [partner, apis, processor, pii]
-      - [apis, processor, pii]
-      - [apis, processor, exchanges, pii]
+      - [integration, endpoints]
+      - [partner, api]
+      - [processor, exchange]
+      - [thirdparty, enrichment]
+      - [applicable, transmission, contexts]
+      - [scope, integration]
 
   - must_id: "item:A.7.4.9:scope_customer_apis"
     description: "Customer-facing APIs carrying PII"
     excerpt_keywords:
-      - [customer, apis, pii]
-      - [customer, facing, pii]
-      - [customer, facing, apis, pii]
-      - [facing, apis, pii]
-      - [facing, apis, carrying, pii]
+      - [customer facing, apis]
       - [apis, carrying, pii]
-      - [apis, carrying, pii]
-      - [carrying, pii]
+      - [pii, transmission, apis]
+      - [customer, apis, scope]
+      - [apis, handling, pii]
 

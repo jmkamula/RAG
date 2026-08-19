@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.28:processor_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.28:processor_program_review"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:Art.28:rev_security_currency"
     description: "Security assurance currency — Art.32-equivalent evidence (cert, audit) refreshed within validity period"
     excerpt_keywords:
-      - [security, currency, processor]
-      - [security, assurance, processor]
-      - [security, assurance, currency, processor]
-      - [assurance, currency, processor]
-      - [assurance, currency, art, processor]
-      - [currency, art, processor]
-      - [currency, art, equivalent, processor]
-      - [art, equivalent, processor]
+      - [security, assurance, currency]
+      - [art32, equivalent, evidence]
+      - [certificate, validity, period]
+      - [audit, refreshed, period]
+      - [security, review, date]
+      - [evidence, refreshed, validity]
 
   - must_id: "item:Art.28:rev_subprocessor_audit"
     description: "Sub-processor audit — every active sub-processor authorised; unauthorised additions flagged"
     excerpt_keywords:
-      - [subprocessor, audit, processor]
-      - [sub, processor]
-      - [sub, processor, audit]
-      - [processor, audit]
-      - [processor, audit, every]
-      - [audit, every, processor]
-      - [audit, every, active, processor]
-      - [every, active, processor]
+      - [subprocessor, audit]
+      - [active, subprocessor]
+      - [unauthorised, additions]
+      - [audit, frequency]
+      - [authorised, subprocessor]
+      - [flagged, unauthorised]
 
   - must_id: "item:Art.28:rev_dpa_currency"
     description: "DPA currency check — every active processor has a current DPA (no expired or pre-onboarding processors active)"
     excerpt_keywords:
-      - [dpa, currency, processor]
-      - [dpa, currency, check, processor]
-      - [currency, check, processor]
-      - [currency, check, every, processor]
-      - [check, every, processor]
-      - [check, every, active, processor]
-      - [every, active, processor]
-      - [every, active, processor]
+      - [processor, dpa, current]
+      - [dpa, currency, check]
+      - [active, processor, dpa]
+      - [dpa, review, date]
+      - [processor, agreement, valid]
+      - [reviewed, dpa, currency]
 
   - must_id: "item:Art.28:rev_reviewer"
     description: "Reviewer identity (DPO + procurement / vendor management lead)"
     excerpt_keywords:
-      - [reviewer, identity, processor]
-      - [reviewer, identity, dpo, processor]
-      - [identity, dpo, processor]
-      - [identity, dpo, procurement, processor]
-      - [dpo, procurement, processor]
-      - [dpo, procurement, vendor, processor]
-      - [procurement, vendor, processor]
-      - [procurement, vendor, management, processor]
+      - [reviewer, identity]
+      - [dpo, reviewer]
+      - [procurement, lead]
+      - [vendor, management]
+      - [review, conducted]
+      - [reviewer, role]
 
   - must_id: "item:Art.28:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, processor]
-      - [review, date, within, processor]
-      - [date, within, processor]
-      - [date, within, planned, processor]
-      - [within, planned, processor]
-      - [within, planned, interval, processor]
-      - [planned, interval, processor]
-      - [per, revocation, processor]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [scheduled, review, date]
 

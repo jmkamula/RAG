@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.5.11:return_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.11:return_program_review"
@@ -14,84 +13,68 @@ must_fingerprints:
   - must_id: "item:A.5.11:rev_actions"
     description: "Action items captured (e.g"
     excerpt_keywords:
-      - [action, items, return]
-      - [action, items, captured, return]
-      - [items, captured, return]
-      - [items, captured, tighten, return]
-      - [captured, tighten, return]
-      - [captured, tighten, access, return]
-      - [tighten, access, return]
-      - [tighten, access, revoke, return]
+      - [action, items, captured]
+      - [asset, return, review]
+      - [review, action, items]
+      - [corrective, actions, identified]
+      - [actions, tracked, completion]
 
   - must_id: "item:A.5.11:rev_writeoff_audit"
     description: "Write-off audit (any leaver row written off — was risk acceptance appropriately authorised? what value was lost?)"
     excerpt_keywords:
-      - [writeoff, audit, return]
-      - [write, off, return]
-      - [write, off, audit, return]
-      - [off, audit, return]
-      - [off, audit, leaver, return]
-      - [audit, leaver, return]
-      - [audit, leaver, written, return]
-      - [leaver, written, return]
+      - [writeoff, audit]
+      - [leaver, row, writtenoff]
+      - [risk, acceptance, authorised]
+      - [value, lost]
+      - [periodic, assetreturn, review]
+      - [audit, findings]
 
   - must_id: "item:A.5.11:rev_byod_health"
     description: "BYOD-wipe health check (sample of recent BYOD leavers re-verified for selective-wipe success or org-data presence)"
     excerpt_keywords:
-      - [byod, health, return]
-      - [byod, wipe, return]
-      - [byod, wipe, health, return]
-      - [wipe, health, return]
-      - [wipe, health, check, return]
-      - [health, check, return]
-      - [health, check, sample, return]
-      - [check, sample, return]
+      - [byod, wipe, health]
+      - [periodic, assetreturn, review]
+      - [selectivewipe, success]
+      - [recent, byod, leavers]
+      - [reviewed, byod, wipe]
+      - [orgdata, presence]
 
   - must_id: "item:A.5.11:rev_revoke_latency"
     description: "Access-revocation latency analysed (gap between effective_date and access_revoke_timestamp; investigate outliers)"
     excerpt_keywords:
-      - [revoke, latency, return]
-      - [access, revocation, return]
-      - [access, revocation, latency, return]
-      - [revocation, latency, return]
-      - [revocation, latency, analysed, return]
-      - [latency, analysed, return]
-      - [latency, analysed, gap, return]
-      - [analysed, gap, return]
+      - [access, revocation, latency]
+      - [revocation, timestamp, effective_date]
+      - [access, revoke, timestamp]
+      - [latency, analysis, access]
+      - [review, access, revocation]
+      - [investigate, revocation, outliers]
 
   - must_id: "item:A.5.11:rev_unreturned_rate"
     description: "Unreturned-asset rate analysed (count of leavers with status=exception or written_off; root cause per cluster)"
     excerpt_keywords:
-      - [unreturned, rate, return]
-      - [unreturned, asset, return]
-      - [unreturned, asset, rate, return]
-      - [asset, rate, return]
-      - [asset, rate, analysed, return]
-      - [rate, analysed, return]
-      - [rate, analysed, count, return]
-      - [analysed, count, return]
+      - [unreturned, asset, rate]
+      - [periodic, asset, return]
+      - [review, date]
+      - [exception, status]
+      - [root, cause, analysis]
+      - [leavers, writtenoff]
 
   - must_id: "item:A.5.11:rev_reviewer"
     description: "Reviewer identity (HR head + IT head + InfoSec lead jointly)"
     excerpt_keywords:
-      - [reviewer, identity, return]
-      - [reviewer, identity, head, return]
-      - [identity, head, return]
-      - [identity, head, head, return]
-      - [head, head, return]
-      - [head, head, infosec, return]
-      - [head, infosec, return]
-      - [head, infosec, lead, return]
+      - [reviewer, identity]
+      - [hr, head, review]
+      - [it, head, review]
+      - [information, security, lead]
+      - [joint, review, conducted]
+      - [reviewed, committee]
 
   - must_id: "item:A.5.11:rev_date"
     description: "Review date within the planned annual interval"
     excerpt_keywords:
-      - [review, date, return]
-      - [review, date, within, return]
-      - [date, within, return]
-      - [date, within, planned, return]
-      - [within, planned, return]
-      - [within, planned, annual, return]
-      - [planned, annual, return]
-      - [planned, annual, interval, return]
+      - [annual, review, date]
+      - [review, date, planned]
+      - [next, review, date]
+      - [reviewed, annually]
+      - [review, interval]
 

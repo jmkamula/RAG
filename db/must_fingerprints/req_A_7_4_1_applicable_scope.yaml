@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.4.1:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.1:applicable_scope"
@@ -14,36 +13,30 @@ must_fingerprints:
   - must_id: "item:A.7.4.1:scope_exclusions"
     description: "Excluded surfaces with rationale (e.g"
     excerpt_keywords:
-      - [excluded, surfaces, limit]
-      - [excluded, surfaces, rationale, limit]
-      - [surfaces, rationale, limit]
-      - [surfaces, rationale, anonymous, limit]
-      - [rationale, anonymous, limit]
-      - [rationale, anonymous, analytics, limit]
-      - [anonymous, analytics, limit]
-      - [in, scope, limit]
+      - [excluded, scope]
+      - [collection, excluded, contexts]
+      - [exclusions, rationale]
+      - [anonymous, analytics]
+      - [scope, excludes]
+      - [excluded, surfaces]
 
   - must_id: "item:A.7.4.1:scope_indirect_map"
     description: "Indirect-collection map (technical logs + inferred data + third-party enrichment)"
     excerpt_keywords:
-      - [indirect, map, limit]
-      - [indirect, collection]
       - [indirect, collection, map]
-      - [collection, map]
-      - [collection, map, technical]
-      - [map, technical, limit]
-      - [map, technical, logs, limit]
-      - [technical, logs, limit]
+      - [technical, logs]
+      - [inferred, data]
+      - [thirdparty, enrichment]
+      - [collection, contexts]
+      - [scope, applies]
 
   - must_id: "item:A.7.4.1:scope_surfaces"
     description: "Collection surfaces enumerated (customer forms / employee onboarding / marketing forms / cookies / weblogs / API webhooks / integrations)"
     excerpt_keywords:
       - [collection, surfaces]
-      - [collection, surfaces, enumerated]
-      - [surfaces, enumerated, limit]
-      - [surfaces, enumerated, customer, limit]
-      - [enumerated, customer, limit]
-      - [enumerated, customer, forms, limit]
-      - [customer, forms, limit]
-      - [customer, forms, employee, limit]
+      - [customer, forms]
+      - [employee, onboarding]
+      - [marketing, forms]
+      - [api, webhooks]
+      - [web, logs]
 

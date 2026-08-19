@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:7.2:competence_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:7.2:competence_program_review"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:7.2:rev_effectiveness"
     description: "Effectiveness sample — completed actions actually changed observed competence"
     excerpt_keywords:
-      - [effectiveness, sample, competence]
-      - [effectiveness, sample, completed, competence]
-      - [sample, completed, competence]
-      - [sample, completed, actions, competence]
-      - [completed, actions, competence]
-      - [completed, actions, actually, competence]
-      - [actions, actually, competence]
-      - [actions, actually, changed, competence]
+      - [effectiveness, sample]
+      - [completed, actions, changed]
+      - [review, competence]
+      - [competence, effectiveness]
+      - [actions, observed, competence]
 
   - must_id: "item:7.2:rev_gap_closure"
     description: "Gap-closure progress check — open gaps either closed or on a remediation plan"
     excerpt_keywords:
-      - [gap, closure, competence]
-      - [gap, closure, progress, competence]
-      - [closure, progress, competence]
-      - [closure, progress, check, competence]
-      - [progress, check, competence]
-      - [progress, check, open, competence]
-      - [check, open, competence]
-      - [check, open, gaps, competence]
+      - [gap, closure]
+      - [remediation, plan]
+      - [progress, check]
+      - [open, gaps]
+      - [gap, remediation, plan]
+      - [closure, progress]
 
   - must_id: "item:7.2:rev_currency"
     description: "Record currency check — turnover, role changes, new hires reflected"
     excerpt_keywords:
-      - [currency, check, competence]
-      - [currency, check, turnover, competence]
-      - [check, turnover, competence]
-      - [check, turnover, role, competence]
-      - [turnover, role, competence]
-      - [turnover, role, changes, competence]
-      - [role, changes, competence]
-      - [role, changes, new, competence]
+      - [competence, review]
+      - [currency, check]
+      - [role, changes]
+      - [new, hires]
+      - [turnover, recorded]
+      - [reviewed, regularly]
 
   - must_id: "item:7.2:rev_reviewer"
     description: "Reviewer identity (HR partner + ISMS Manager + relevant function heads)"
     excerpt_keywords:
-      - [reviewer, identity, competence]
-      - [reviewer, identity, partner, competence]
-      - [identity, partner, competence]
-      - [identity, partner, isms, competence]
-      - [partner, isms, competence]
-      - [partner, isms, manager, competence]
-      - [isms, manager, competence]
-      - [isms, manager, relevant, competence]
+      - [reviewer, identity]
+      - [hr, partner, reviewer]
+      - [isms, manager, review]
+      - [function, head, reviewer]
+      - [reviewed, manager]
+      - [review, conducted, hr]
 
   - must_id: "item:7.2:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, competence]
-      - [review, date, within, competence]
-      - [date, within, competence]
-      - [date, within, planned, competence]
-      - [within, planned, competence]
-      - [within, planned, interval, competence]
-      - [planned, interval, competence]
-      - [per, revocation, competence]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, scheduled]
+      - [review, period]
+      - [review, frequency]
 

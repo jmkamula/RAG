@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.5.3:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.3:applicable_scope"
@@ -14,32 +13,29 @@ must_fingerprints:
   - must_id: "item:B.8.5.3:scope_audit"
     description: "External audit disclosures"
     excerpt_keywords:
-      - [external, audit, records]
-      - [external, audit, disclosures, records]
-      - [audit, disclosures, records]
-      - [in, scope, records]
-      - [scope, includes, records]
-      - [applicable, to, records]
-      - [excluded, from, records]
+      - [pii, disclosure, third, parties]
+      - [records, pii, disclosure]
+      - [external, audit, disclosures]
+      - [disclosure, third, parties]
+      - [applicable, processor, disclosure]
+      - [third, party, disclosure]
 
   - must_id: "item:B.8.5.3:scope_investigation"
     description: "Investigation contexts"
     excerpt_keywords:
-      - [investigation, contexts, records]
-      - [in, scope, records]
-      - [scope, includes, records]
-      - [applicable, to, records]
-      - [excluded, from, records]
+      - [pii, disclosure, third, parties]
+      - [records, pii, disclosure]
+      - [applicable, processor, disclosure]
+      - [disclosure, third, party, scope]
+      - [investigation, pii, disclosure]
+      - [scope, pii, disclosure]
 
   - must_id: "item:B.8.5.3:scope_normal_disclosures"
     description: "Normal-course disclosures enumerated"
     excerpt_keywords:
-      - [normal, disclosures, records]
-      - [normal, course, records]
-      - [normal, course, disclosures, records]
-      - [course, disclosures, records]
-      - [course, disclosures, enumerated, records]
-      - [disclosures, enumerated, records]
-      - [in, scope, records]
-      - [scope, includes, records]
+      - [disclosures, third parties]
+      - [pii, disclosure, scope]
+      - [normal course, disclosures]
+      - [applicable, processor, disclosures]
+      - [records, pii, disclosure]
 

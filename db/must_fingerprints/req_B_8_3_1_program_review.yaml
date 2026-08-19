@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.3.1:program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.3.1:program_review"
@@ -14,48 +13,39 @@ must_fingerprints:
   - must_id: "item:B.8.3.1:rev_sla_audit"
     description: "SLA audit — support responses measured against contract SLAs"
     excerpt_keywords:
-      - [sla, audit, obligations]
-      - [sla, audit, support, obligations]
-      - [audit, support, obligations]
-      - [audit, support, responses, obligations]
-      - [support, responses, obligations]
-      - [support, responses, measured, obligations]
-      - [responses, measured, obligations]
-      - [responses, measured, against, obligations]
+      - [sla, audit]
+      - [support, responses]
+      - [measured, against, sla]
+      - [contract, sla]
+      - [audit, support, sla]
+      - [sla, performance, review]
 
   - must_id: "item:B.8.3.1:rev_path_currency"
     description: "Support-path currency — technical paths remain functional after product changes"
     excerpt_keywords:
-      - [path, currency, obligations]
-      - [support, path, obligations]
-      - [support, path, currency, obligations]
-      - [path, currency, technical, obligations]
-      - [currency, technical, obligations]
-      - [currency, technical, paths, obligations]
-      - [technical, paths, obligations]
-      - [technical, paths, remain, obligations]
+      - [support, path, currency]
+      - [technical, path, functional]
+      - [product, changes, impact]
+      - [review, support, path]
+      - [path, functionality, reviewed]
 
   - must_id: "item:B.8.3.1:rev_reviewer"
     description: "Reviewer identity (DPO + Product + Trust)"
     excerpt_keywords:
-      - [reviewer, identity, obligations]
-      - [reviewer, identity, dpo, obligations]
-      - [identity, dpo, obligations]
-      - [identity, dpo, product, obligations]
-      - [dpo, product, obligations]
-      - [dpo, product, trust, obligations]
-      - [product, trust, obligations]
-      - [per, revocation, obligations]
+      - [reviewer, identity]
+      - [data, protection, officer]
+      - [product, team, review]
+      - [trust, reviewer]
+      - [review, conducted]
+      - [reviewer, role]
 
   - must_id: "item:B.8.3.1:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, obligations]
-      - [review, date, within, obligations]
-      - [date, within, obligations]
-      - [date, within, planned, obligations]
-      - [within, planned, obligations]
-      - [within, planned, interval, obligations]
-      - [planned, interval, obligations]
-      - [per, revocation, obligations]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [review, scheduled]
+      - [review, period]
 

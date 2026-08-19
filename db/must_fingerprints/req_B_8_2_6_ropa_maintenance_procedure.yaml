@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.2.6:ropa_maintenance_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.6:ropa_maintenance_procedure"
@@ -14,60 +13,48 @@ must_fingerprints:
   - must_id: "item:B.8.2.6:proc_customer_availability"
     description: "Customer-availability path — how a customer requests + receives their RoPA row extract"
     excerpt_keywords:
-      - [customer, availability, records]
-      - [customer, availability, path, records]
-      - [availability, path, records]
-      - [availability, path, customer, records]
-      - [path, customer, records]
-      - [path, customer, requests, records]
-      - [customer, requests, records]
-      - [customer, requests, receives, records]
+      - [customer, request]
+      - [request, process]
+      - [provide, record]
+      - [respond, within]
+      - [extract, data]
+      - [access, record]
 
   - must_id: "item:B.8.2.6:proc_secure_maintenance"
     description: "Secure maintenance — access control + integrity for the processor RoPA"
     excerpt_keywords:
-      - [secure, maintenance, records]
-      - [secure, maintenance, access, records]
-      - [maintenance, access, records]
-      - [maintenance, access, integrity, records]
-      - [access, integrity, records]
-      - [access, integrity, processor, records]
-      - [integrity, processor, records]
-      - [integrity, processor, ropa, records]
+      - [secure, maintenance]
+      - [access, control]
+      - [integrity, checks]
+      - [processor, ropa]
+      - [maintenance, procedure]
+      - [access, restricted]
 
   - must_id: "item:B.8.2.6:proc_subprocessor_update"
     description: "Subprocessor change — subprocessor additions / removals trigger RoPA update"
     excerpt_keywords:
-      - [subprocessor, update, records]
-      - [subprocessor, change, records]
-      - [subprocessor, change, subprocessor, records]
-      - [change, subprocessor, records]
-      - [change, subprocessor, additions, records]
-      - [subprocessor, additions, records]
-      - [subprocessor, additions, removals, records]
-      - [additions, removals, records]
+      - [subprocessor, change]
+      - [triggered, ropa, update]
+      - [addition, removal]
+      - [update, ropa]
+      - [maintain, processor, record]
 
   - must_id: "item:B.8.2.6:proc_instruction_change"
     description: "Instruction-change capture — customer purpose changes trigger RoPA update"
     excerpt_keywords:
-      - [instruction, change, records]
-      - [instruction, change, capture, records]
-      - [change, capture, records]
-      - [change, capture, customer, records]
-      - [capture, customer, records]
-      - [capture, customer, purpose, records]
-      - [customer, purpose, records]
-      - [customer, purpose, changes, records]
+      - [instruction, change]
+      - [purpose, change, trigger]
+      - [ropa, update]
+      - [customer, instruction, change]
+      - [triggered, change]
 
   - must_id: "item:B.8.2.6:proc_onboarding_trigger"
     description: "New-customer onboarding trigger — RoPA row created per new engagement (link to B.8.2.1)"
     excerpt_keywords:
-      - [onboarding, trigger, records]
-      - [new, customer, records]
-      - [new, customer, onboarding, records]
-      - [customer, onboarding, records]
-      - [customer, onboarding, trigger, records]
-      - [onboarding, trigger, ropa, records]
-      - [trigger, ropa, records]
-      - [trigger, ropa, created, records]
+      - [new, customer, onboarding]
+      - [triggered, new, engagement]
+      - [create, ropa, record]
+      - [upon, onboarding, event]
+      - [process, new, engagement]
+      - [ropa, row, created]
 

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.5.3:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.5.3:applicable_scope"
@@ -14,36 +13,30 @@ must_fingerprints:
   - must_id: "item:A.7.5.3:scope_retention_period"
     description: "Retention period for transfer records (per A.7.4.7 schedule)"
     excerpt_keywords:
-      - [retention, period, records]
-      - [retention, period, transfer]
-      - [period, transfer]
-      - [period, transfer, records]
+      - [retention, period]
       - [transfer, records]
-      - [transfer, records, schedule]
-      - [records, schedule]
-      - [in, scope, records]
+      - [records, retention]
+      - [retention, schedule]
+      - [transfer, retention, period]
+      - [records, transfer, period]
 
   - must_id: "item:A.7.5.3:scope_exclusions"
     description: "Excluded events (intra-org + fully-anonymised aggregates) with rationale"
     excerpt_keywords:
-      - [excluded, events, records]
-      - [excluded, events, intra, records]
-      - [events, intra, records]
-      - [events, intra, org, records]
-      - [intra, org, records]
-      - [intra, org, fully, records]
-      - [org, fully, records]
-      - [org, fully, anonymised, records]
+      - [excluded, transfer, events]
+      - [intraorganizational, transfer, excluded]
+      - [fully, anonymised, aggregates]
+      - [scope, excludes, events]
+      - [transfer, events, rationale]
+      - [excluded, scope]
 
   - must_id: "item:A.7.5.3:scope_recordable_events"
     description: "Recordable transfer types (batch export / API push / support-driven / M&A / rights-fulfilment cascade)"
     excerpt_keywords:
-      - [recordable, events, records]
-      - [recordable, transfer]
       - [recordable, transfer, types]
-      - [transfer, types]
-      - [transfer, types, batch]
-      - [types, batch, records]
-      - [types, batch, export, records]
-      - [batch, export, records]
+      - [batch, export]
+      - [api, push]
+      - [support, driven]
+      - [m&a, transfer]
+      - [rights, fulfilment, cascade]
 

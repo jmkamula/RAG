@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.8.8:applicable_vuln_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.8:applicable_vuln_scope"
@@ -14,36 +13,28 @@ must_fingerprints:
   - must_id: "item:A.8.8:scope_exclusions"
     description: "Exclusion rationale (vendor-managed assets covered via supplier obligations A.5.20)"
     excerpt_keywords:
-      - [exclusion, rationale, technical]
-      - [exclusion, rationale, vendor, technical]
-      - [rationale, vendor, technical]
-      - [rationale, vendor, managed, technical]
-      - [vendor, managed, technical]
-      - [vendor, managed, assets, technical]
-      - [managed, assets, technical]
-      - [managed, assets, covered, technical]
+      - [exclusion, rationale]
+      - [vendor, managed, assets]
+      - [supplier, obligations]
+      - [covered, via, supplier]
+      - [excluded, scope]
 
   - must_id: "item:A.8.8:scope_coverage_pct"
     description: "Target coverage percentage per class (with rationale for gaps)"
     excerpt_keywords:
-      - [coverage, pct, technical]
-      - [target, coverage, technical]
-      - [target, coverage, percentage, technical]
-      - [coverage, percentage, technical]
-      - [coverage, percentage, class, technical]
-      - [percentage, class, technical]
-      - [percentage, class, rationale, technical]
-      - [class, rationale, technical]
+      - [coverage, percentage]
+      - [vulnerability, management, scope]
+      - [target, coverage, class]
+      - [applicable, asset, scope]
+      - [coverage, rationale, gaps]
 
   - must_id: "item:A.8.8:scope_asset_classes"
     description: "Asset classes enumerated with scanning approach per class"
     excerpt_keywords:
-      - [asset, classes, technical]
-      - [asset, classes, enumerated, technical]
-      - [classes, enumerated, technical]
-      - [classes, enumerated, scanning, technical]
-      - [enumerated, scanning, technical]
-      - [enumerated, scanning, approach, technical]
-      - [scanning, approach, technical]
-      - [scanning, approach, class, technical]
+      - [asset, class]
+      - [vulnerability, scanning]
+      - [scanning, approach]
+      - [applicable, asset, scope]
+      - [asset, categories]
+      - [vulnerability, management]
 

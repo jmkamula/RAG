@@ -56,6 +56,9 @@ RUN_H = MEASUREMENT_DIR / "run_h_llm_signal_extract_once.csv"
 # Ship 81'.d — Run I = per-MUST batched LLM scoring mode (same overrides
 #                       as Run H, LLM sees every scoped MUST individually).
 RUN_I = MEASUREMENT_DIR / "run_i_llm_signal_per_must.csv"
+# Ship 83'.c — Run J = per_must (production default after Ship 83'.a)
+#                       + full curator sweep (351 total curated YAMLs).
+RUN_J = MEASUREMENT_DIR / "run_j_per_must_full_curator.csv"
 
 
 # ─── Ground truth flattener ────────────────────────────────────────────
@@ -242,11 +245,13 @@ def main():
     findings_g = _load_findings(RUN_G) if RUN_G.exists() else {}
     findings_h = _load_findings(RUN_H) if RUN_H.exists() else {}
     findings_i = _load_findings(RUN_I) if RUN_I.exists() else {}
+    findings_j = _load_findings(RUN_J) if RUN_J.exists() else {}
 
     all_scores = {"consensus": {}, "critic": {},
                   "consensus_verified": {}, "union_tuned": {},
                   "union_artefact": {}, "union_vocab_curator": {},
-                  "wired": {}, "llm_signal": {}, "llm_per_must": {}}
+                  "wired": {}, "llm_signal": {}, "llm_per_must": {},
+                  "per_must_full_curator": {}}
 
     for key, (yaml_file, doc_name) in DOCS.items():
         gt_musts = _extract_musts_from_yaml(GT_DIR / yaml_file)
@@ -259,6 +264,7 @@ def main():
         f_g = findings_g.get(doc_name, [])
         f_h = findings_h.get(doc_name, [])
         f_i = findings_i.get(doc_name, [])
+        f_j = findings_j.get(doc_name, [])
         s_a = _score(f_a, gt_musts)
         s_b = _score(f_b, gt_musts)
         s_c = _score(f_c, gt_musts) if f_c else None
@@ -268,6 +274,7 @@ def main():
         s_g = _score(f_g, gt_musts) if f_g else None
         s_h = _score(f_h, gt_musts) if f_h else None
         s_i = _score(f_i, gt_musts) if f_i else None
+        s_j = _score(f_j, gt_musts) if f_j else None
         all_scores["consensus"][key] = s_a
         all_scores["critic"][key] = s_b
         if s_c:
@@ -284,6 +291,8 @@ def main():
             all_scores["llm_signal"][key] = s_h
         if s_i:
             all_scores["llm_per_must"][key] = s_i
+        if s_j:
+            all_scores["per_must_full_curator"][key] = s_j
 
         print(f"\n─── {key} ({doc_name[:40]}...) ───")
         print(f"  GT MUSTs: strict-expected={sum(1 for _,v,_ in gt_musts if v=='satisfies')} "
@@ -305,6 +314,8 @@ def main():
             variants.append(("llm_signal (H)", s_h))
         if s_i:
             variants.append(("llm_per_must (I)", s_i))
+        if s_j:
+            variants.append(("per_must+full_curator (J)", s_j))
         for name, s in variants:
             print(f"  {name:15} {s['n_findings']:3} findings, {s['n_distinct_musts']:3} distinct musts")
             for scoring in ("strict", "lenient"):
@@ -319,7 +330,8 @@ def main():
     print("AGGREGATE (across 5 docs)")
     for path in ("consensus", "critic", "consensus_verified",
                  "union_tuned", "union_artefact", "union_vocab_curator",
-                 "wired", "llm_signal", "llm_per_must"):
+                 "wired", "llm_signal", "llm_per_must",
+                 "per_must_full_curator"):
         if not all_scores[path]:
             continue
         for scoring in ("strict", "lenient"):

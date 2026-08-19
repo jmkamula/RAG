@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.2.5:program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.5:program_review"
@@ -14,60 +13,47 @@ must_fingerprints:
   - must_id: "item:B.8.2.5:rev_audit_rights_audit"
     description: "Audit rights audit — customer audits requested + granted per contract tier"
     excerpt_keywords:
-      - [audit, rights, audit, customer]
-      - [audit, rights, customer]
-      - [rights, audit, customer]
-      - [rights, audit, customer]
-      - [audit, customer]
-      - [audit, customer, audits]
-      - [customer, audits]
-      - [customer, audits, requested]
+      - [customer, audit, rights]
+      - [audit, requested, granted]
+      - [contract, tier]
+      - [audit, rights, review]
+      - [customer, audit, program]
+      - [audit, frequency, customer]
 
   - must_id: "item:B.8.2.5:rev_certification_health"
     description: "Certification health — currency + scope of shared certifications reviewed"
     excerpt_keywords:
-      - [certification, health, customer]
-      - [certification, health, currency, customer]
-      - [health, currency, customer]
-      - [health, currency, scope, customer]
-      - [currency, scope, customer]
-      - [currency, scope, shared, customer]
-      - [scope, shared, customer]
-      - [scope, shared, certifications, customer]
+      - [certification, review]
+      - [review, certification, scope]
+      - [certification, currency]
+      - [shared, certifications, review]
+      - [reviewed, certification, health]
 
   - must_id: "item:B.8.2.5:rev_sla_audit"
     description: "SLA audit — sampled requests measured against response SLA"
     excerpt_keywords:
-      - [sla, audit, customer]
-      - [sla, audit, sampled, customer]
-      - [audit, sampled, customer]
-      - [audit, sampled, requests, customer]
-      - [sampled, requests, customer]
-      - [sampled, requests, measured, customer]
-      - [requests, measured, customer]
-      - [requests, measured, against, customer]
+      - [sla, audit]
+      - [sampled, requests]
+      - [response, sla]
+      - [audit, review]
+      - [measured, against, sla]
 
   - must_id: "item:B.8.2.5:rev_reviewer"
     description: "Reviewer identity (Trust + Compliance + Sales Ops)"
     excerpt_keywords:
-      - [reviewer, identity, customer]
-      - [reviewer, identity, trust, customer]
-      - [identity, trust, customer]
-      - [identity, trust, compliance, customer]
-      - [trust, compliance, customer]
-      - [trust, compliance, sales, customer]
-      - [compliance, sales, customer]
-      - [compliance, sales, ops, customer]
+      - [reviewer, identity]
+      - [reviewed, sales]
+      - [trust, compliance, review]
+      - [review, conducted]
+      - [sales, operations, reviewer]
 
   - must_id: "item:B.8.2.5:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, customer]
-      - [review, date, within, customer]
-      - [date, within, customer]
-      - [date, within, planned, customer]
-      - [within, planned, customer]
-      - [within, planned, interval, customer]
-      - [planned, interval, customer]
-      - [per, revocation, customer]
+      - [review, date]
+      - [planned, interval]
+      - [review, within, interval]
+      - [next, review]
+      - [review, scheduled]
+      - [review, period]
 

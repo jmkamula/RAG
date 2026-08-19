@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.8.31:environment_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.31:environment_program_review"
@@ -14,72 +13,58 @@ must_fingerprints:
   - must_id: "item:A.8.31:rev_findings_update"
     description: "Findings propagated to procedure / register"
     excerpt_keywords:
-      - [findings, update, separation]
-      - [findings, propagated, separation]
-      - [per, revocation, separation]
-      - [per, revoked, identity, separation]
-      - [revocation, record, separation]
-      - [review, findings, separation]
-      - [audit, outcomes, separation]
-      - [last, reviewed, separation]
+      - [findings, update]
+      - [review, findings]
+      - [findings, propagated]
+      - [periodic, review]
+      - [review, procedure]
+      - [findings, register]
 
   - must_id: "item:A.8.31:rev_per_env_access"
     description: "Per-env access review (cross-link to A.8.3 + A.5.18 outcomes)"
     excerpt_keywords:
-      - [env, access, separation]
-      - [env, access, review, separation]
-      - [access, review, separation]
-      - [access, review, cross, separation]
-      - [review, cross, separation]
-      - [review, cross, outcomes, separation]
-      - [cross, outcomes, separation]
-      - [per, revocation, separation]
+      - [environment, access, review]
+      - [periodic, review, environment]
+      - [reviewed, access, controls]
+      - [separation, development, production]
+      - [access, rights, review]
+      - [crosslink, a831, a518]
 
   - must_id: "item:A.8.31:rev_no_prod_data_sample"
     description: "Sample-based check — no raw production data found in lower environments (auditor-critical for GDPR)"
     excerpt_keywords:
-      - [no, prod, sample, separation]
-      - [sample, based, separation]
-      - [sample, based, check, separation]
-      - [based, check, separation]
-      - [based, check, raw, separation]
-      - [check, raw, separation]
-      - [check, raw, production, separation]
-      - [raw, production, separation]
+      - [sample based, production data]
+      - [no raw, production data]
+      - [environment separation, review]
+      - [periodic, environment, review]
+      - [reviewed, production data]
+      - [audit, production data]
 
   - must_id: "item:A.8.31:rev_register_currency"
     description: "Environment-register currency check"
     excerpt_keywords:
-      - [environment, currency, separation]
-      - [environment, currency, check, separation]
-      - [currency, check, separation]
-      - [per, revocation, separation]
-      - [per, revoked, identity, separation]
-      - [revocation, record, separation]
-      - [review, findings, separation]
-      - [audit, outcomes, separation]
+      - [environment, register, currency]
+      - [periodic, environment, review]
+      - [register, currency, check]
+      - [environment, separation, review]
+      - [review, period, environment]
 
   - must_id: "item:A.8.31:rev_reviewer"
     description: "Reviewer identity (Infrastructure + InfoSec + Engineering leads)"
     excerpt_keywords:
-      - [reviewer, identity, separation]
-      - [reviewer, identity, infrastructure, separation]
-      - [identity, infrastructure, separation]
-      - [identity, infrastructure, infosec, separation]
-      - [infrastructure, infosec, separation]
-      - [infrastructure, infosec, engineering, separation]
-      - [infosec, engineering, separation]
-      - [infosec, engineering, leads, separation]
+      - [reviewer, identity]
+      - [infrastructure, lead]
+      - [infosec, lead]
+      - [engineering, lead]
+      - [review, team]
+      - [periodic, review]
 
   - must_id: "item:A.8.31:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, separation]
-      - [review, date, within, separation]
-      - [date, within, separation]
-      - [date, within, planned, separation]
-      - [within, planned, separation]
-      - [within, planned, interval, separation]
-      - [planned, interval, separation]
-      - [per, revocation, separation]
+      - [review, date]
+      - [planned, interval]
+      - [periodic, review]
+      - [environment, separation, review]
+      - [reviewed, within, interval]
 

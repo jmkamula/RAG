@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.8.23:filtering_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.23:filtering_program_review"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:A.8.23:rev_findings_update"
     description: "Findings propagated to policy / scope"
     excerpt_keywords:
-      - [findings, update, web]
-      - [findings, propagated, web]
-      - [findings, propagated, scope, web]
-      - [propagated, scope, web]
-      - [per, revocation, web]
-      - [per, revoked, identity, web]
-      - [revocation, record, web]
-      - [review, findings, web]
+      - [findings, policy]
+      - [findings, scope]
+      - [review, findings]
+      - [policy, updated]
+      - [scope, updated]
 
   - must_id: "item:A.8.23:rev_override_trending"
     description: "Override-volume trending (spikes may indicate category over-blocking or coverage gap)"
     excerpt_keywords:
-      - [override, trending, web]
-      - [override, volume, web]
-      - [override, volume, trending, web]
-      - [volume, trending, web]
-      - [volume, trending, spikes, web]
-      - [trending, spikes, web]
-      - [trending, spikes, may, web]
-      - [spikes, may, web]
+      - [override, volume, trending]
+      - [web, filtering, review]
+      - [spikes, indicate, overblocking]
+      - [periodic, review, trending]
+      - [coverage, gap, monitor]
+      - [reviewed, periodically, override]
 
   - must_id: "item:A.8.23:rev_category_currency"
     description: "Category-list currency check (new malicious-content categories added; obsolete categories retired)"
     excerpt_keywords:
-      - [category, currency, web]
-      - [category, currency, check, web]
-      - [currency, check, web]
-      - [currency, check, new, web]
-      - [check, new, web]
-      - [check, new, malicious, web]
-      - [new, malicious, web]
-      - [new, malicious, content, web]
+      - [category list, currency check]
+      - [web filtering, periodic review]
+      - [malicious content, category update]
+      - [obsolete categories, retired]
+      - [review, category currency]
+      - [filtering program, category changes]
 
   - must_id: "item:A.8.23:rev_reviewer"
     description: "Reviewer identity (Security Operations + Legal/HR for category boundaries)"
     excerpt_keywords:
-      - [reviewer, identity, web]
-      - [reviewer, identity, security, web]
-      - [identity, security, web]
-      - [identity, security, operations, web]
-      - [security, operations, web]
-      - [security, operations, legal, web]
-      - [operations, legal, web]
-      - [operations, legal, category, web]
+      - [reviewer, identity]
+      - [security, operations, reviewer]
+      - [legal, hr, review]
+      - [review, security]
+      - [review, performed, legal]
+      - [reviewer, role, assigned]
 
   - must_id: "item:A.8.23:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, web]
-      - [review, date, within, web]
-      - [date, within, web]
-      - [date, within, planned, web]
-      - [within, planned, web]
-      - [within, planned, interval, web]
-      - [planned, interval, web]
-      - [per, revocation, web]
+      - [review, date]
+      - [planned, interval]
+      - [periodic, review]
+      - [review, schedule]
+      - [next, review]
+      - [review, frequency]
 

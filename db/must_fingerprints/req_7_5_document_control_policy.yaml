@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:7.5:document_control_policy
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:7.5:document_control_policy"
@@ -14,72 +13,56 @@ must_fingerprints:
   - must_id: "item:7.5:external_docs"
     description: "Control of documented information of external origin determined necessary"
     excerpt_keywords:
-      - [external, docs, documented]
-      - [documented, external]
-      - [documented, external, origin]
-      - [external, origin, documented]
-      - [external, origin, determined, documented]
-      - [origin, determined, documented]
-      - [origin, determined, necessary, documented]
-      - [determined, necessary, documented]
+      - [external, documented, information]
+      - [control, external, documents]
+      - [documents, external, origin]
+      - [documented, information, control]
+      - [external, documented, information, policy]
 
   - must_id: "item:7.5:legibility"
     description: "Protection from loss of legibility, loss of integrity, unauthorised use"
     excerpt_keywords:
-      - [protection, loss, documented]
-      - [protection, loss, legibility, documented]
-      - [loss, legibility, documented]
-      - [loss, legibility, loss, documented]
-      - [legibility, loss, documented]
-      - [legibility, loss, integrity, documented]
-      - [loss, integrity, documented]
-      - [loss, integrity, unauthorised, documented]
+      - [loss, legibility]
+      - [unauthorised, use]
+      - [documented, information, protection]
+      - [integrity, control]
+      - [access, restriction]
+      - [information, preservation]
 
   - must_id: "item:7.5:control"
     description: "Control of documented information (distribution, access, retrieval, retention, disposition)"
     excerpt_keywords:
-      - [documented, distribution]
-      - [documented, distribution, access]
-      - [distribution, access, documented]
-      - [distribution, access, retrieval, documented]
-      - [access, retrieval, documented]
-      - [access, retrieval, retention, documented]
-      - [retrieval, retention, documented]
-      - [retrieval, retention, disposition, documented]
+      - [documented, information, control]
+      - [access, documented, information]
+      - [distribution, documented, information]
+      - [retention, documented, information]
+      - [retrieval, documented, information]
+      - [disposition, documented, information]
 
   - must_id: "item:7.5:creation_update"
     description: "Creation and update process (identification, format, review, approval)"
     excerpt_keywords:
-      - [creation, update, documented]
-      - [creation, update, identification, documented]
-      - [update, identification, documented]
-      - [update, identification, format, documented]
-      - [identification, format, documented]
-      - [identification, format, review, documented]
-      - [format, review, documented]
-      - [format, review, approval, documented]
+      - [documented, information, creation]
+      - [document, review, approval]
+      - [information, identification, format]
+      - [creation, update, process]
+      - [approval, documented, information]
 
   - must_id: "item:7.5:org_defined"
     description: "Organisation-determined necessary documented information identified"
     excerpt_keywords:
-      - [org, defined, documented]
-      - [organisation, determined, documented]
-      - [organisation, determined, necessary, documented]
-      - [determined, necessary, documented]
-      - [determined, necessary, documented]
-      - [necessary, documented]
-      - [necessary, documented, identified]
-      - [documented, identified]
+      - [organisation determined, documented information]
+      - [necessary, documented information]
+      - [identified, documented information]
+      - [organisation, information, identified]
+      - [documented information, control, policy]
 
   - must_id: "item:7.5:iso_required_docs"
     description: "ISO 27001:2022 required documented information enumerated"
     excerpt_keywords:
-      - [iso, required, docs, documented]
-      - [iso, 27001, documented]
-      - [iso, 27001, 2022, documented]
-      - [27001, 2022, documented]
-      - [27001, 2022, required, documented]
-      - [2022, required, documented]
-      - [2022, required, documented]
-      - [required, documented]
+      - [documented, information, required]
+      - [iso, 27001, documented, information]
+      - [documented, information, control, policy]
+      - [information, documented, records]
+      - [maintain, documented, information]
 

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.2.6:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.6:applicable_scope"
@@ -14,36 +13,29 @@ must_fingerprints:
   - must_id: "item:A.7.2.6:scope_exclusions"
     description: "Excluded relationships (independent controllers / joint controllers → A.7.2.7 / non-PII vendors)"
     excerpt_keywords:
-      - [excluded, relationships, contracts]
-      - [excluded, relationships, independent, contracts]
-      - [relationships, independent, contracts]
-      - [relationships, independent, controllers, contracts]
-      - [independent, controllers, contracts]
-      - [independent, controllers, joint, contracts]
-      - [controllers, joint, contracts]
-      - [controllers, joint, controllers, contracts]
+      - [excluded, relationships]
+      - [independent, controllers]
+      - [joint, controllers]
+      - [nonpii, vendors]
+      - [excluded, scope]
+      - [outside, scope]
 
   - must_id: "item:A.7.2.6:scope_processor_list"
     description: "In-scope processors enumerated with classification rationale"
     excerpt_keywords:
-      - [scope, processors, contracts]
-      - [scope, processors, enumerated, contracts]
-      - [processors, enumerated, contracts]
-      - [processors, enumerated, classification, contracts]
-      - [enumerated, classification, contracts]
-      - [enumerated, classification, rationale, contracts]
-      - [classification, rationale, contracts]
-      - [in, scope, contracts]
+      - [in scope, processors]
+      - [processors, classification, rationale]
+      - [applicable, processor, list]
+      - [scope, processor, engagements]
+      - [processors, included, scope]
 
   - must_id: "item:A.7.2.6:scope_processor_test"
     description: "Processor test — supplier processes PII on org's behalf under org's instructions (not for its own purposes)"
     excerpt_keywords:
-      - [processor, test, contracts]
-      - [processor, test, supplier, contracts]
-      - [test, supplier, contracts]
-      - [test, supplier, processes, contracts]
-      - [supplier, processes, contracts]
-      - [supplier, processes, pii]
-      - [processes, pii]
-      - [processes, pii, org]
+      - [processor, pii]
+      - [supplier, processes, instructions]
+      - [pii, behalf]
+      - [not, own, purposes]
+      - [engagements, processor]
+      - [scope, processor, test]
 

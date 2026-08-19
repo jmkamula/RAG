@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.6.8:reporting_audience_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.6.8:reporting_audience_scope"
@@ -14,48 +13,40 @@ must_fingerprints:
   - must_id: "item:A.6.8:scope_jurisdictions"
     description: "Jurisdictions covered (whistleblower-protection law variations — EU Whistleblower Directive, US Sarbanes-Oxley, sectoral protections)"
     excerpt_keywords:
-      - [jurisdictions, covered, event]
-      - [jurisdictions, covered, whistleblower, event]
-      - [covered, whistleblower, event]
-      - [covered, whistleblower, protection, event]
-      - [whistleblower, protection, event]
-      - [whistleblower, protection, law, event]
-      - [protection, law, event]
-      - [protection, law, variations, event]
+      - [covered, jurisdictions]
+      - [whistleblower, protection, law]
+      - [eu, whistleblower, directive]
+      - [us, sarbanesoxley]
+      - [sectoral, protections]
+      - [applicable, jurisdictions]
 
   - must_id: "item:A.6.8:scope_sensitive_paths"
-    description: "Sensitive-case escalation paths stated (insider-threat suspicion → InfoSec-only intake bypassing line management; whistleblower-territory → "
+    description: "Sensitive-case escalation paths stated (insider-threat suspicion → InfoSec-only intake bypassing line management; whistleblower-territory → independent intake)"
     excerpt_keywords:
-      - [sensitive, paths, event]
-      - [sensitive, case, event]
-      - [sensitive, case, escalation, event]
-      - [case, escalation, event]
-      - [case, escalation, paths, event]
-      - [escalation, paths, event]
-      - [escalation, paths, stated, event]
-      - [paths, stated, event]
+      - [escalation, path]
+      - [insiderthreat, intake]
+      - [whistleblower, independent, intake]
+      - [bypassing, line, management]
+      - [sensitivecase, escalation]
+      - [informationsecurity, event, reporting]
 
   - must_id: "item:A.6.8:scope_channel_surfacing"
-    description: "Channel-surfacing per segment (employees see it in onboarding training + intranet; contractors see it at onboarding briefing; visitors see i"
+    description: "Channel-surfacing per segment (employees see it in onboarding training + intranet; contractors see it at onboarding briefing; visitors see it in lobby; customers in T&Cs)"
     excerpt_keywords:
-      - [channel, surfacing, event]
-      - [channel, surfacing, segment, event]
-      - [surfacing, segment, event]
-      - [surfacing, segment, employees, event]
-      - [segment, employees, event]
-      - [segment, employees, see, event]
-      - [employees, see, event]
-      - [employees, see, onboarding, event]
+      - [information, security, event, reporting]
+      - [channel, surfacing, segment]
+      - [employees, onboarding, training]
+      - [contractors, onboarding, briefing]
+      - [visitors, lobby, information]
+      - [customers, terms, conditions]
 
   - must_id: "item:A.6.8:scope_audience_segments"
-    description: "Audience segments enumerated (employees, contractors, suppliers' staff with access, visitors, customers in some sectors — anyone who might o"
+    description: "Audience segments enumerated (employees, contractors, suppliers' staff with access, visitors, customers in some sectors — anyone who might observe an event)"
     excerpt_keywords:
-      - [audience, segments, event]
-      - [audience, segments, enumerated, event]
-      - [segments, enumerated, event]
-      - [segments, enumerated, employees, event]
-      - [enumerated, employees, event]
-      - [enumerated, employees, contractors, event]
-      - [employees, contractors, event]
-      - [employees, contractors, suppliers, event]
+      - [audience, segments]
+      - [employees, contractors]
+      - [suppliers, staff]
+      - [visitors, customers]
+      - [access, observe]
+      - [event, reporting]
 

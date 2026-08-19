@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.8.11:masking_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.11:masking_program_review"
@@ -14,72 +13,59 @@ must_fingerprints:
   - must_id: "item:A.8.11:rev_procedure_update"
     description: "Findings propagated to procedure / approved-techniques list"
     excerpt_keywords:
-      - [findings, propagated, masking]
-      - [findings, propagated, approved, masking]
-      - [propagated, approved, masking]
-      - [propagated, approved, techniques, masking]
-      - [approved, techniques, masking]
-      - [per, revocation, masking]
-      - [per, revoked, identity, masking]
-      - [revocation, record, masking]
+      - [procedure, update]
+      - [approved, techniques]
+      - [findings, propagated]
+      - [periodic, masking, review]
+      - [review, procedure]
+      - [techniques, list]
 
   - must_id: "item:A.8.11:rev_exception_inventory"
     description: "Exception inventory re-confirmed / retired"
     excerpt_keywords:
-      - [exception, inventory, masking]
-      - [exception, inventory, confirmed, masking]
-      - [inventory, confirmed, masking]
-      - [inventory, confirmed, retired, masking]
-      - [confirmed, retired, masking]
-      - [per, revocation, masking]
-      - [per, revoked, identity, masking]
-      - [revocation, record, masking]
+      - [exception, inventory]
+      - [inventory, reconfirmed]
+      - [exception, retired]
+      - [periodic, review]
+      - [review, exception, inventory]
+      - [exception, inventory, updated]
 
   - must_id: "item:A.8.11:rev_register_currency"
     description: "Register currency check (refresh timestamps within tolerance)"
     excerpt_keywords:
-      - [currency, check, masking]
-      - [currency, check, refresh, masking]
-      - [check, refresh, masking]
-      - [check, refresh, timestamps, masking]
-      - [refresh, timestamps, masking]
-      - [refresh, timestamps, within, masking]
-      - [timestamps, within, masking]
-      - [timestamps, within, tolerance, masking]
+      - [register, currency]
+      - [currency, check]
+      - [refresh, timestamps]
+      - [timestamps, within, tolerance]
+      - [periodic, masking, review]
 
   - must_id: "item:A.8.11:rev_effectiveness"
     description: "Re-identification residual-risk sampling outcome (acceptable or technique upgrade required)"
     excerpt_keywords:
-      - [identification, residual, masking]
-      - [identification, residual, risk, masking]
-      - [residual, risk, masking]
-      - [residual, risk, sampling, masking]
-      - [risk, sampling, masking]
-      - [risk, sampling, outcome, masking]
-      - [sampling, outcome, masking]
-      - [sampling, outcome, acceptable, masking]
+      - [residual, risk, sampling]
+      - [reidentification, risk, assessment]
+      - [masking, technique, upgrade]
+      - [periodic, review, effectiveness]
+      - [sampling, outcome, acceptable]
+      - [reviewed, masking, effectiveness]
 
   - must_id: "item:A.8.11:rev_reviewer"
     description: "Reviewer identity (DPO + Data Engineering + InfoSec)"
     excerpt_keywords:
-      - [reviewer, identity, masking]
-      - [reviewer, identity, dpo, masking]
-      - [identity, dpo, masking]
-      - [identity, dpo, engineering, masking]
-      - [dpo, engineering, masking]
-      - [dpo, engineering, infosec, masking]
-      - [engineering, infosec, masking]
-      - [per, revocation, masking]
+      - [reviewer, identity]
+      - [data, protection, officer]
+      - [information, security, team]
+      - [data, engineering, review]
+      - [reviewed, dpo]
+      - [review, conducted, infosec]
 
   - must_id: "item:A.8.11:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, masking]
-      - [review, date, within, masking]
-      - [date, within, masking]
-      - [date, within, planned, masking]
-      - [within, planned, masking]
-      - [within, planned, interval, masking]
-      - [planned, interval, masking]
-      - [per, revocation, masking]
+      - [review, date]
+      - [planned, interval]
+      - [periodic, review]
+      - [review, within, interval]
+      - [scheduled, review]
+      - [review, frequency]
 

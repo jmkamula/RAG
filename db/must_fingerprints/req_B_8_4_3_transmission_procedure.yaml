@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.4.3:transmission_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.4.3:transmission_procedure"
@@ -14,60 +13,47 @@ must_fingerprints:
   - must_id: "item:B.8.4.3:proc_customer_advice"
     description: "Customer-advice path — where contract silent on transmission requirements, customer consulted before transmission"
     excerpt_keywords:
-      - [customer, advice, pii]
-      - [customer, advice, path, pii]
-      - [advice, path, pii]
-      - [advice, path, contract, pii]
-      - [path, contract, pii]
-      - [path, contract, silent, pii]
-      - [contract, silent, pii]
-      - [contract, silent, transmission]
+      - [customer, consulted]
+      - [transmission, requirements]
+      - [contract, silent]
+      - [advise, customer]
+      - [consulted, before, transmission]
+      - [customer, advice, path]
 
   - must_id: "item:B.8.4.3:proc_contract_terms"
     description: "Contract-terms coverage — customer-contract transmission requirements captured (B.8.2.1)"
     excerpt_keywords:
-      - [contract, terms, pii]
-      - [contract, terms, coverage, pii]
-      - [terms, coverage, pii]
-      - [terms, coverage, customer, pii]
-      - [coverage, customer, pii]
-      - [coverage, customer, contract, pii]
-      - [customer, contract, pii]
-      - [customer, contract, transmission]
+      - [contract, transmission, requirements]
+      - [customer, contract, terms]
+      - [shall, comply, contract]
+      - [transmission, controls, procedure]
+      - [contract, terms, coverage]
 
   - must_id: "item:B.8.4.3:proc_audit_data"
     description: "Audit data retention per transmission event"
     excerpt_keywords:
-      - [audit, retention, pii]
-      - [audit, retention, transmission]
-      - [retention, transmission]
-      - [retention, transmission, event]
-      - [transmission, event]
-      - [procedure, step, pii]
-      - [process, step, pii]
-      - [responsibility, of, pii]
+      - [audit, data, retention]
+      - [transmission, event, logged]
+      - [retain, audit, records]
+      - [audit, trail, transmission]
+      - [data, transmission, audit]
+      - [event, audit, record]
 
   - must_id: "item:B.8.4.3:proc_encryption"
     description: "Encryption in transit standard per channel"
     excerpt_keywords:
-      - [encryption, transit, pii]
-      - [encryption, transit, standard, pii]
-      - [transit, standard, pii]
-      - [transit, standard, channel, pii]
-      - [standard, channel, pii]
-      - [procedure, step, pii]
-      - [process, step, pii]
-      - [responsibility, of, pii]
+      - [encryption, in transit]
+      - [transmission, encryption, standard]
+      - [data, encrypted, transit]
+      - [shall, encrypt, transmission]
+      - [secure, transmission, channel]
 
   - must_id: "item:B.8.4.3:proc_authz_channels"
     description: "Authorised transmission channels per customer"
     excerpt_keywords:
-      - [authz, channels, pii]
-      - [authorised, transmission]
       - [authorised, transmission, channels]
-      - [transmission, channels]
       - [transmission, channels, customer]
-      - [channels, customer, pii]
-      - [procedure, step, pii]
-      - [process, step, pii]
+      - [approved, communication, channels]
+      - [authorised, data, transfer]
+      - [customer, approved, channels]
 

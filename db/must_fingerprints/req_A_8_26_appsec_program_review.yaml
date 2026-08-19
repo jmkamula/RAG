@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.8.26:appsec_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.26:appsec_program_review"
@@ -14,72 +13,58 @@ must_fingerprints:
   - must_id: "item:A.8.26:rev_findings_update"
     description: "Findings propagated to procedure / scope"
     excerpt_keywords:
-      - [findings, update, application]
-      - [findings, propagated, application]
-      - [findings, propagated, scope, application]
-      - [propagated, scope, application]
-      - [per, revocation, application]
-      - [per, revoked, identity, application]
-      - [revocation, record, application]
-      - [review, findings, application]
+      - [findings, review]
+      - [security, requirements, review]
+      - [review, findings, update]
+      - [application, security, review]
+      - [findings, propagated]
+      - [periodic, security, review]
 
   - must_id: "item:A.8.26:rev_exception_inventory"
     description: "Exception inventory re-confirmed / retired"
     excerpt_keywords:
-      - [exception, inventory, application]
-      - [exception, inventory, confirmed, application]
-      - [inventory, confirmed, application]
-      - [inventory, confirmed, retired, application]
-      - [confirmed, retired, application]
-      - [per, revocation, application]
-      - [per, revoked, identity, application]
-      - [revocation, record, application]
+      - [exception, inventory, review]
+      - [inventory, reconfirmed]
+      - [exception, retired]
+      - [periodic, review, exceptions]
+      - [review, exception, status]
 
   - must_id: "item:A.8.26:rev_traceability_sample"
     description: "Sample-based traceability verification (requirements → test cases mapping intact)"
     excerpt_keywords:
-      - [traceability, sample, application]
-      - [sample, based, application]
-      - [sample, based, traceability, application]
-      - [based, traceability, application]
-      - [based, traceability, verification, application]
-      - [traceability, verification, application]
-      - [traceability, verification, requirements]
-      - [verification, requirements]
+      - [traceability, verification]
+      - [requirements, test, mapping]
+      - [sample based, traceability]
+      - [test cases, traceability]
+      - [periodic, review]
+      - [requirements, traceability, sample]
 
   - must_id: "item:A.8.26:rev_catalogue_currency"
     description: "Requirements-catalogue currency check (new threat patterns → requirement-category updates)"
     excerpt_keywords:
-      - [catalogue, currency, application]
-      - [requirements, catalogue]
-      - [requirements, catalogue, currency]
-      - [catalogue, currency, check, application]
-      - [currency, check, application]
-      - [currency, check, new, application]
-      - [check, new, application]
-      - [check, new, threat, application]
+      - [requirements, catalogue, review]
+      - [application, security, requirements]
+      - [catalogue, currency, check]
+      - [threat, patterns, update]
+      - [periodic, requirements, review]
 
   - must_id: "item:A.8.26:rev_reviewer"
     description: "Reviewer identity (Engineering + InfoSec + Product)"
     excerpt_keywords:
-      - [reviewer, identity, application]
-      - [reviewer, identity, engineering, application]
-      - [identity, engineering, application]
-      - [identity, engineering, infosec, application]
-      - [engineering, infosec, application]
-      - [engineering, infosec, product, application]
-      - [infosec, product, application]
-      - [per, revocation, application]
+      - [reviewer, identity]
+      - [engineering, reviewer]
+      - [infosec, reviewer]
+      - [product, reviewer]
+      - [review, conducted]
+      - [review, team, members]
 
   - must_id: "item:A.8.26:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, application]
-      - [review, date, within, application]
-      - [date, within, application]
-      - [date, within, planned, application]
-      - [within, planned, application]
-      - [within, planned, interval, application]
-      - [planned, interval, application]
-      - [per, revocation, application]
+      - [review, date]
+      - [planned, interval]
+      - [periodic, review]
+      - [next, review]
+      - [review, scheduled]
+      - [review, frequency]
 

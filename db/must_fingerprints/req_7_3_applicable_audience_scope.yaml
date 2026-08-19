@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:7.3:applicable_audience_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:7.3:applicable_audience_scope"
@@ -14,36 +13,29 @@ must_fingerprints:
   - must_id: "item:7.3:scope_external"
     description: "External-party coverage stated (auditors, embedded vendor staff, visiting researchers as relevant)"
     excerpt_keywords:
-      - [external, party, awareness]
-      - [external, party, coverage, awareness]
-      - [party, coverage, awareness]
-      - [party, coverage, stated, awareness]
-      - [coverage, stated, awareness]
-      - [coverage, stated, auditors, awareness]
-      - [stated, auditors, awareness]
-      - [stated, auditors, embedded, awareness]
+      - [external, party, coverage]
+      - [applicable, external, audience]
+      - [scope, includes, external]
+      - [external, personnel, covered]
+      - [auditors, included, scope]
+      - [vendor, staff, included]
 
   - must_id: "item:7.3:scope_contractors"
     description: "Contractor coverage stated (which contractor classes are in scope; cross-link to A.5.19 supplier)"
     excerpt_keywords:
-      - [contractor, coverage, awareness]
-      - [contractor, coverage, stated, awareness]
-      - [coverage, stated, awareness]
-      - [coverage, stated, contractor, awareness]
-      - [stated, contractor, awareness]
-      - [stated, contractor, classes, awareness]
-      - [contractor, classes, awareness]
-      - [contractor, classes, scope, awareness]
+      - [contractor, in scope]
+      - [scope, contractor, coverage]
+      - [applicable, contractor, classes]
+      - [contractor, categories, scope]
+      - [contractor, included, scope]
 
   - must_id: "item:7.3:scope_employees"
     description: "Employee coverage stated (all employees, all locations)"
     excerpt_keywords:
-      - [employee, coverage, awareness]
-      - [employee, coverage, stated, awareness]
-      - [coverage, stated, awareness]
-      - [coverage, stated, employees, awareness]
-      - [stated, employees, awareness]
-      - [stated, employees, locations, awareness]
-      - [employees, locations, awareness]
-      - [in, scope, awareness]
+      - [employee, coverage]
+      - [all, employees]
+      - [all, locations]
+      - [applicable, employees]
+      - [awareness, audience]
+      - [scope, employees]
 

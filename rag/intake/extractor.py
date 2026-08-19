@@ -510,13 +510,24 @@ def _extract_via_consensus(
     # corroborator (weight 0.20 vs default 0.50) so aggregator's
     # accept_floor is still reachable, but LLM + high-precision signals
     # dominate. bm25 dropped (26% precision, high noise per Ship 81'.a).
-    # Env-flag USE_LLM_SIGNAL_MODE=1|extract_once|per_must enables.
-    _llm_signal_mode = os.getenv("USE_LLM_SIGNAL_MODE", "").lower()
-    if _llm_signal_mode in ("1", "true", "yes", "on", "extract_once", "per_must"):
+    #
+    # Ship 83'.a — per_must promoted to production default. Env-flag
+    # USE_LLM_SIGNAL_MODE now defaults to "per_must" when unset. Set to
+    # "off" / "0" / "false" / "disabled" to opt back to the pre-83'
+    # deterministic-signal-only pipeline. Set to "extract_once" for the
+    # cheaper LLM-signal variant. Ship 81'.d proved per_must reaches
+    # recall parity with Union+vocab (F) and Ship 82'.b showed it wins
+    # on LLM-authored GT (F1 30.19% vs 28.90%).
+    _llm_signal_mode = os.getenv("USE_LLM_SIGNAL_MODE", "per_must").lower()
+    if _llm_signal_mode in ("off", "0", "false", "no", "disabled"):
+        # Legacy pre-83' deterministic-signal-only path — no LLM extractor.
+        pass
+    elif _llm_signal_mode in ("1", "true", "yes", "on", "extract_once", "per_must", ""):
         cfg = cfg.with_overrides(
             llm_extractor_enabled = True,
-            llm_signal_mode       = ("per_must" if _llm_signal_mode == "per_must"
-                                     else "extract_once"),
+            llm_signal_mode       = ("extract_once"
+                                     if _llm_signal_mode == "extract_once"
+                                     else "per_must"),
             fingerprint_weight    = 0.20,  # corroborator, not dominant
             bm25_weight           = 0.0,   # dropped
             # LLM signal vouches for the MUST's presence contextually,

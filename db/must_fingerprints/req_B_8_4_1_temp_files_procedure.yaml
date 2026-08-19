@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.4.1:temp_files_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.4.1:temp_files_procedure"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:B.8.4.1:proc_periodic_check"
     description: "Periodic check that temp files are deleted"
     excerpt_keywords:
-      - [periodic, check, temporary]
-      - [periodic, check, temp, temporary]
-      - [check, temp, temporary]
-      - [check, temp, files]
-      - [temp, files]
-      - [temp, files, deleted]
-      - [files, deleted]
-      - [procedure, step, temporary]
+      - [periodic, check]
+      - [temporary, files, deleted]
+      - [temp, files, disposal]
+      - [shall, delete, files]
+      - [files, checked, periodically]
 
   - must_id: "item:B.8.4.1:proc_tenant_isolation"
     description: "Tenant isolation of temp files — no cross-tenant leakage in shared infrastructure"
     excerpt_keywords:
-      - [tenant, isolation, temporary]
-      - [tenant, isolation, temp, temporary]
-      - [isolation, temp, temporary]
-      - [isolation, temp, files]
-      - [temp, files]
-      - [temp, files, cross]
-      - [files, cross]
-      - [files, cross, tenant]
+      - [tenant, isolation]
+      - [temporary, files, disposal]
+      - [no, crosstenant, leakage]
+      - [shared, infrastructure]
+      - [processor, temporary, files]
+      - [must, prevent, leakage]
 
   - must_id: "item:B.8.4.1:proc_gc_procedure"
     description: "Garbage collection procedure identifying unused files + last-use timestamp"
     excerpt_keywords:
-      - [garbage, collection, temporary]
-      - [garbage, collection, identifying, temporary]
-      - [collection, identifying, temporary]
-      - [collection, identifying, unused, temporary]
-      - [identifying, unused, temporary]
-      - [identifying, unused, files]
-      - [unused, files]
-      - [unused, files, last]
+      - [garbage, collection, procedure]
+      - [identify, unused, files]
+      - [last, use, timestamp]
+      - [temporary, files, disposal]
+      - [processor, shall, dispose]
+      - [files, marked, unused]
 
   - must_id: "item:B.8.4.1:proc_period"
     description: "Disposal period stated per taxonomy category"
     excerpt_keywords:
-      - [disposal, period, temporary]
-      - [disposal, period, stated, temporary]
-      - [period, stated, temporary]
-      - [period, stated, taxonomy, temporary]
-      - [stated, taxonomy, temporary]
-      - [stated, taxonomy, category, temporary]
-      - [taxonomy, category, temporary]
-      - [procedure, step, temporary]
+      - [disposal, period]
+      - [retention, period]
+      - [temporary, files, disposal]
+      - [category, disposal, period]
+      - [processor, temporary, files]
+      - [files, retention, period]
 
   - must_id: "item:B.8.4.1:proc_temp_taxonomy"
     description: "Temp file taxonomy (customer-facing multi-tenant apps + shared infrastructure + integration middleware)"
     excerpt_keywords:
-      - [temp, taxonomy, temporary]
-      - [temp, file, temporary]
-      - [temp, file, taxonomy, temporary]
-      - [file, taxonomy, temporary]
-      - [file, taxonomy, customer, temporary]
-      - [taxonomy, customer, temporary]
-      - [taxonomy, customer, facing, temporary]
-      - [customer, facing, temporary]
+      - [temporary, files]
+      - [temp, file, taxonomy]
+      - [shared, infrastructure]
+      - [multi tenant, customer facing]
+      - [integration, middleware]
+      - [processor, temp, disposal]
 

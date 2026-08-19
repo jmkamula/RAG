@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.6.5:surviving_obligations_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.6.5:surviving_obligations_scope"
@@ -14,48 +13,38 @@ must_fingerprints:
   - must_id: "item:A.6.5:scope_worker_categories"
     description: "Worker categories addressed (employees vs contractors vs interns — different obligation scope)"
     excerpt_keywords:
-      - [worker, categories, responsibilities]
-      - [worker, categories, addressed, responsibilities]
-      - [categories, addressed, responsibilities]
-      - [categories, addressed, employees, responsibilities]
-      - [addressed, employees, responsibilities]
-      - [addressed, employees, contractors, responsibilities]
-      - [employees, contractors, responsibilities]
-      - [employees, contractors, interns, responsibilities]
+      - [worker, categories]
+      - [employees, contractors]
+      - [interns, obligations]
+      - [employment, termination]
+      - [scope, obligations]
 
   - must_id: "item:A.6.5:scope_jurisdictional_limits"
     description: "Jurisdictional limits on enforceability (US California voids non-compete; EU restricts duration; UK courts test reasonableness)"
     excerpt_keywords:
-      - [jurisdictional, limits, responsibilities]
-      - [jurisdictional, limits, enforceability, responsibilities]
-      - [limits, enforceability, responsibilities]
-      - [limits, enforceability, california, responsibilities]
-      - [enforceability, california, responsibilities]
-      - [enforceability, california, voids, responsibilities]
-      - [california, voids, responsibilities]
-      - [california, voids, non, responsibilities]
+      - [jurisdictional, limits]
+      - [noncompete, enforceability]
+      - [california, noncompete]
+      - [eu, duration, restriction]
+      - [uk, reasonableness, test]
+      - [enforceability, restrictions]
 
   - must_id: "item:A.6.5:scope_role_mapping"
-    description: "Role-to-obligation mapping (executive level may have extended non-compete; standard staff only confidentiality + IP; sales/CSM commonly have"
+    description: "Role-to-obligation mapping (executive level may have extended non-compete; standard staff only confidentiality + IP; sales/CSM commonly have non-poach + non-solicit)"
     excerpt_keywords:
-      - [role, mapping, responsibilities]
-      - [role, obligation, responsibilities]
-      - [role, obligation, mapping, responsibilities]
-      - [obligation, mapping, responsibilities]
-      - [obligation, mapping, executive, responsibilities]
-      - [mapping, executive, responsibilities]
-      - [mapping, executive, level, responsibilities]
-      - [executive, level, responsibilities]
+      - [role, obligation, mapping]
+      - [executive, noncompete, extended]
+      - [staff, confidentiality, ip]
+      - [sales, nonpoach, nonsolicit]
+      - [responsibility, termination, employment]
 
   - must_id: "item:A.6.5:scope_obligation_catalogue"
     description: "Obligation catalogue enumerated (confidentiality / IP / non-disparagement / non-poach / non-compete / cooperation-with-investigations)"
     excerpt_keywords:
-      - [obligation, catalogue, responsibilities]
-      - [obligation, catalogue, enumerated, responsibilities]
-      - [catalogue, enumerated, responsibilities]
-      - [catalogue, enumerated, confidentiality, responsibilities]
-      - [enumerated, confidentiality, responsibilities]
-      - [enumerated, confidentiality, non, responsibilities]
-      - [confidentiality, non, responsibilities]
-      - [confidentiality, non, disparagement, responsibilities]
+      - [obligation, catalogue]
+      - [confidentiality, obligation]
+      - [non, compete]
+      - [non, poach]
+      - [cooperation, investigations]
+      - [intellectual, property]
 

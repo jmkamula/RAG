@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.15:dsar_response
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.15:dsar_response"
@@ -12,154 +11,137 @@ target_standard: "GDPR:2016/679"
 
 must_fingerprints:
   - must_id: "item:Art.15:identity_check"
-    description: "Identity verification step recorded (proportionate to sensitivity per Art.12.6) — modern baseline treats Art.12.6 as MUST not SHOULD when re"
+    description: "Identity verification step recorded (proportionate to sensitivity per Art.12.6) — modern baseline treats Art.12.6 as MUST not SHOULD when reasonable doubt is the default posture for unauthenticated ch"
     excerpt_keywords:
-      - [identity, check, right]
-      - [identity, verification, right]
-      - [identity, verification, step, right]
-      - [verification, step, right]
-      - [verification, step, recorded, right]
-      - [step, recorded, right]
-      - [step, recorded, proportionate, right]
-      - [recorded, proportionate, right]
+      - [identity, verification]
+      - [verification, recorded]
+      - [identity, check]
+      - [reasonable, doubt]
+      - [unauthenticated, channels]
+      - [proportionate, verification]
 
   - must_id: "item:Art.15:sla_met"
-    description: "Structured SLA-met flag per response — boolean against the Art.12.3 1-month clock (or extended clock where Art.12.3 extension was formally i"
+    description: "Structured SLA-met flag per response — boolean against the Art.12.3 1-month clock (or extended clock where Art.12.3 extension was formally invoked); analogous to A.5.16:rev_sla_met"
     excerpt_keywords:
-      - [sla, met, right]
-      - [structured, sla, right]
-      - [structured, sla, met, right]
-      - [sla, met, flag, right]
-      - [met, flag, right]
-      - [met, flag, response, right]
-      - [flag, response, right]
-      - [flag, response, boolean, right]
+      - [sla, met]
+      - [response, within, month]
+      - [data, subject, access]
+      - [request, response, time]
+      - [art123, extension, invoked]
+      - [compliance, response, deadline]
 
   - must_id: "item:Art.15:copy"
     description: "Copy of the personal data undergoing processing provided to the data subject"
     excerpt_keywords:
-      - [copy, personal, right]
-      - [copy, personal, undergoing, right]
-      - [personal, undergoing, right]
-      - [personal, undergoing, processing, right]
-      - [undergoing, processing, right]
-      - [undergoing, processing, provided, right]
-      - [processing, provided, right]
-      - [processing, provided, subject, right]
+      - [copy, personal, data]
+      - [data, subject, access]
+      - [provided, data]
+      - [personal, data, processing]
+      - [access, request, response]
 
   - must_id: "item:Art.15:transfer_safeguards"
     description: "Where data is transferred to a third country or international organisation, the appropriate safeguards under Art.46"
     excerpt_keywords:
-      - [transfer, safeguards, right]
-      - [transferred, third, right]
-      - [transferred, third, country, right]
-      - [third, country, right]
-      - [third, country, international, right]
-      - [country, international, right]
-      - [country, international, organisation, right]
-      - [international, organisation, right]
+      - [data, transferred, third, country]
+      - [transfer, appropriate, safeguards]
+      - [international, organisation, transfer]
+      - [art46, transfer, safeguards]
+      - [third, country, safeguards]
+      - [transfer, third, country]
 
   - must_id: "item:Art.15:automated_decision"
     description: "Existence of automated decision-making / profiling, with meaningful information on logic and consequences where applicable"
     excerpt_keywords:
-      - [automated, decision, right]
-      - [existence, automated, right]
-      - [existence, automated, decision, right]
-      - [automated, decision, making, right]
-      - [decision, making, right]
-      - [decision, making, profiling, right]
-      - [making, profiling, right]
-      - [making, profiling, meaningful, right]
+      - [automated, decision, profiling]
+      - [meaningful, information, logic]
+      - [decision, making, process]
+      - [profiling, consequences, explained]
+      - [logic, automated, decision]
+      - [impact, automated, profiling]
 
   - must_id: "item:Art.15:source"
     description: "Source of the personal data where not collected from the data subject (any available information)"
     excerpt_keywords:
-      - [source, personal, right]
-      - [source, personal, not, right]
-      - [personal, not, right]
-      - [personal, not, collected, right]
-      - [not, collected, right]
-      - [not, collected, subject, right]
-      - [collected, subject, right]
-      - [collected, subject, available, right]
+      - [personal, data, source]
+      - [data, not, collected]
+      - [source, provided, thirdparty]
+      - [information, origin, personaldata]
+      - [data, obtained, source]
 
   - must_id: "item:Art.15:timing"
     description: "Responded within one calendar month of receipt OR Art.12.3 two-month extension formally applied with notification"
     excerpt_keywords:
-      - [responded, within, right]
-      - [responded, within, one, right]
-      - [within, one, right]
-      - [within, one, calendar, right]
-      - [one, calendar, right]
-      - [one, calendar, month, right]
-      - [calendar, month, right]
-      - [calendar, month, receipt, right]
+      - [responded, one, month]
+      - [response, within, calendar, month]
+      - [two, month, extension]
+      - [extension, formally, applied]
+      - [notification, extension]
+      - [art123, two, month]
 
   - must_id: "item:Art.15:complaint"
     description: "Right to lodge a complaint with a supervisory authority"
     excerpt_keywords:
-      - [right, lodge]
-      - [right, lodge, complaint]
-      - [lodge, complaint, right]
-      - [lodge, complaint, supervisory, right]
-      - [complaint, supervisory, right]
-      - [complaint, supervisory, authority, right]
-      - [supervisory, authority, right]
+      - [right, complaint]
+      - [lodge, complaint]
+      - [complaint, supervisory, authority]
+      - [data, subject, complaint]
+      - [file, complaint]
+      - [complaint, submitted]
 
   - must_id: "item:Art.15:rights"
     description: "Existence of rights to rectification, erasure, restriction and objection"
     excerpt_keywords:
-      - [existence, rights, right]
-      - [existence, rights, rectification, right]
-      - [rights, rectification, right]
-      - [rights, rectification, erasure, right]
-      - [rectification, erasure, right]
-      - [rectification, erasure, restriction, right]
-      - [erasure, restriction, right]
-      - [erasure, restriction, objection, right]
+      - [right, rectification]
+      - [right, erasure]
+      - [right, restriction]
+      - [right, objection]
+      - [data, subject, rights]
+      - [exercise, rights]
 
   - must_id: "item:Art.15:retention"
     description: "Envisaged storage period or criteria used to determine it"
     excerpt_keywords:
-      - [envisaged, storage, right]
-      - [envisaged, storage, period, right]
-      - [storage, period, right]
-      - [storage, period, criteria, right]
-      - [period, criteria, right]
-      - [period, criteria, used, right]
-      - [criteria, used, right]
-      - [criteria, used, determine, right]
+      - [storage, period]
+      - [retention, period]
+      - [criteria, determine, storage]
+      - [data, retention, policy]
+      - [retention, criteria]
+      - [storage, duration]
 
   - must_id: "item:Art.15:recipients"
     description: "Recipients or categories of recipients (including any in third countries)"
     excerpt_keywords:
-      - [recipients, categories, right]
-      - [recipients, categories, recipients, right]
-      - [categories, recipients, right]
-      - [categories, recipients, including, right]
-      - [recipients, including, right]
-      - [recipients, including, third, right]
-      - [including, third, right]
-      - [including, third, countries, right]
+      - [categories, recipients]
+      - [recipients, third, countries]
+      - [data, subject, access]
+      - [disclosed, recipients]
+      - [transfer, third]
+      - [recipient, categories, included]
 
   - must_id: "item:Art.15:purposes"
     description: "Purposes of the processing"
     excerpt_keywords:
-      - [purposes, processing, right]
+      - [purposes, processing]
+      - [processing, purpose]
+      - [data, processing, purposes]
+      - [lawful, processing, purposes]
+      - [processing, activities, purposes]
 
   - must_id: "item:Art.15:categories"
     description: "Categories of personal data concerned"
     excerpt_keywords:
-      - [categories, personal, right]
-      - [categories, personal, concerned, right]
-      - [personal, concerned, right]
+      - [categories, personal, data]
+      - [types, personal, data]
+      - [data, subject, categories]
+      - [categories, data, concerned]
 
   - must_id: "item:Art.15:confirmation"
     description: "Confirmation that personal data is or is not processed"
     excerpt_keywords:
-      - [confirmation, personal, right]
-      - [confirmation, personal, not, right]
-      - [personal, not, right]
-      - [personal, not, processed, right]
-      - [not, processed, right]
+      - [confirmation, personal data]
+      - [data subject, access request]
+      - [processed, personal data]
+      - [right of access, confirmation]
+      - [response, data subject]
+      - [access request, confirmation]
 

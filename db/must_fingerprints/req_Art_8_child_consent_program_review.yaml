@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.8:child_consent_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.8:child_consent_program_review"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:Art.8:rev_threshold_currency"
     description: "Member State threshold currency — any MS that has changed its age threshold reflected"
     excerpt_keywords:
-      - [threshold, currency, conditions]
-      - [member, state, conditions]
-      - [member, state, threshold, conditions]
-      - [state, threshold, conditions]
-      - [state, threshold, currency, conditions]
-      - [threshold, currency, has, conditions]
-      - [currency, has, conditions]
-      - [currency, has, changed, conditions]
+      - [member state, age threshold]
+      - [threshold, age, changed]
+      - [review, age threshold]
+      - [updated, member state]
+      - [age threshold, currency]
+      - [threshold, reflected]
 
   - must_id: "item:Art.8:rev_register_coverage"
     description: "Register coverage — every in-scope service has consent rows flowing in"
     excerpt_keywords:
-      - [coverage, every, conditions]
-      - [coverage, every, scope, conditions]
-      - [every, scope, conditions]
-      - [every, scope, service, conditions]
-      - [scope, service, conditions]
-      - [scope, service, has, conditions]
-      - [service, has, conditions]
-      - [service, has, consent, conditions]
+      - [register, coverage]
+      - [consent, rows]
+      - [in scope, service]
+      - [service, consent]
+      - [coverage, in scope]
+      - [consent, flowing]
 
   - must_id: "item:Art.8:rev_verification_quality"
     description: "Age-verification sample audit — claimed-age values look plausible vs other signals"
     excerpt_keywords:
-      - [verification, quality, conditions]
-      - [age, verification, conditions]
-      - [age, verification, sample, conditions]
-      - [verification, sample, conditions]
-      - [verification, sample, audit, conditions]
-      - [sample, audit, conditions]
-      - [sample, audit, claimed, conditions]
-      - [audit, claimed, conditions]
+      - [ageverification, sample, audit]
+      - [claimedage, plausible, signals]
+      - [verification, quality, review]
+      - [age, verification, process]
+      - [audit, results, ageverification]
 
   - must_id: "item:Art.8:rev_reviewer"
     description: "Reviewer identity (DPO + product lead)"
     excerpt_keywords:
-      - [reviewer, identity, conditions]
-      - [reviewer, identity, dpo, conditions]
-      - [identity, dpo, conditions]
-      - [identity, dpo, product, conditions]
-      - [dpo, product, conditions]
-      - [dpo, product, lead, conditions]
-      - [product, lead, conditions]
-      - [per, revocation, conditions]
+      - [reviewer, identity]
+      - [data, protection, officer]
+      - [dpo, review]
+      - [product, lead]
+      - [reviewed]
+      - [review, conducted, dpo]
 
   - must_id: "item:Art.8:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, conditions]
-      - [review, date, within, conditions]
-      - [date, within, conditions]
-      - [date, within, planned, conditions]
-      - [within, planned, conditions]
-      - [within, planned, interval, conditions]
-      - [planned, interval, conditions]
-      - [per, revocation, conditions]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [reviewed, period]
+      - [review, scheduled]
 

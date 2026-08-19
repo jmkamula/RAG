@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.2.2:lawful_basis_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.2:lawful_basis_register"
@@ -14,60 +13,46 @@ must_fingerprints:
   - must_id: "item:A.7.2.2:reg_purpose_link"
     description: "Purpose link (which A.7.2.1 purpose(s) this basis authorises)"
     excerpt_keywords:
-      - [purpose, purpose, identify]
-      - [purpose, purpose, basis, identify]
-      - [purpose, basis, identify]
-      - [purpose, basis, authorises, identify]
-      - [basis, authorises, identify]
-      - [per, row, identify]
-      - [each, row, identify]
-      - [column, containing, identify]
+      - [lawful, basis, purpose]
+      - [purpose, linked, basis]
+      - [authorised, purpose, basis]
+      - [basis, authorises, purpose]
+      - [register, lawful, purpose]
 
   - must_id: "item:A.7.2.2:reg_lia_reference"
     description: "LIA reference per row where basis is legitimate interests"
     excerpt_keywords:
-      - [lia, reference, identify]
-      - [lia, reference, basis, identify]
-      - [reference, basis, identify]
-      - [reference, basis, legitimate, identify]
-      - [basis, legitimate, identify]
-      - [basis, legitimate, interests, identify]
-      - [legitimate, interests, identify]
-      - [per, row, identify]
+      - [lawful, basis, register]
+      - [legitimate, interests, reference]
+      - [lia, reference, row]
+      - [basis, legitimate, interests]
+      - [register, lia, reference]
 
   - must_id: "item:A.7.2.2:reg_special_category_basis"
     description: "Special-category basis where applicable (Art.9.2.a-j / Art.10 basis)"
     excerpt_keywords:
-      - [special, category, basis, identify]
-      - [special, category, identify]
-      - [category, basis, identify]
-      - [category, basis, art, identify]
-      - [basis, art, identify]
-      - [basis, art, art, identify]
-      - [art, art, identify]
-      - [art, art, basis, identify]
+      - [specialcategory, lawfulbasis]
+      - [art92a, specialcategory, basis]
+      - [specialcategory, processing, basis]
+      - [lawfulbasis, register]
+      - [art10, lawfulbasis]
+      - [specialcategory, dataprocessing]
 
   - must_id: "item:A.7.2.2:reg_primary_basis"
     description: "Primary basis cited per row (Art.6.1.a-f or equivalent)"
     excerpt_keywords:
-      - [primary, basis, identify]
-      - [primary, basis, cited, identify]
-      - [basis, cited, identify]
-      - [basis, cited, art, identify]
-      - [cited, art, identify]
-      - [cited, art, equivalent, identify]
-      - [art, equivalent, identify]
-      - [per, row, identify]
+      - [lawful, basis]
+      - [primary, basis, cited]
+      - [article, 6, basis]
+      - [basis, reference]
+      - [processing, lawful, basis]
 
   - must_id: "item:A.7.2.2:reg_activity_id"
     description: "Processing activity identifier per row"
     excerpt_keywords:
-      - [activity, id, identify]
-      - [processing, activity, identify]
-      - [processing, activity, identifier, identify]
-      - [activity, identifier, identify]
-      - [per, row, identify]
-      - [each, row, identify]
-      - [column, containing, identify]
-      - [each, entry, identify]
+      - [processing, activity, identifier]
+      - [activity, id, column]
+      - [lawful, basis, register]
+      - [processing, activity, record]
+      - [activity, reference, number]
 

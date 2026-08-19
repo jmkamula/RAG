@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.4.7:program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.7:program_review"
@@ -14,48 +13,38 @@ must_fingerprints:
   - must_id: "item:A.7.4.7:rev_deletion_audit"
     description: "Deletion audit — sampled records past schedule verified deleted per A.7.4.5"
     excerpt_keywords:
-      - [deletion, audit, retention]
-      - [deletion, audit, sampled, retention]
-      - [audit, sampled, retention]
-      - [audit, sampled, records, retention]
-      - [sampled, records, retention]
-      - [sampled, records, past, retention]
-      - [records, past, retention]
-      - [records, past, schedule, retention]
+      - [deletion, audit]
+      - [records, past, schedule]
+      - [verified, deleted]
+      - [audit, sampled, records]
+      - [review, deletion, audit]
 
   - must_id: "item:A.7.4.7:rev_currency_check"
     description: "Schedule currency check — recent regulatory / business changes reflected"
     excerpt_keywords:
-      - [currency, check, retention]
-      - [schedule, currency, retention]
-      - [schedule, currency, check, retention]
-      - [currency, check, recent, retention]
-      - [check, recent, retention]
-      - [check, recent, regulatory, retention]
-      - [recent, regulatory, retention]
-      - [recent, regulatory, business, retention]
+      - [schedule, currency, check]
+      - [regulatory, changes, reflected]
+      - [business, changes, review]
+      - [review, schedule, update]
+      - [currency, check, periodic]
 
   - must_id: "item:A.7.4.7:rev_reviewer"
     description: "Reviewer identity (DPO + Legal + Records Management)"
     excerpt_keywords:
-      - [reviewer, identity, retention]
-      - [reviewer, identity, dpo, retention]
-      - [identity, dpo, retention]
-      - [identity, dpo, legal, retention]
-      - [dpo, legal, retention]
-      - [dpo, legal, records, retention]
-      - [legal, records, retention]
-      - [legal, records, management, retention]
+      - [reviewer, identity]
+      - [data, protection, officer]
+      - [legal, department]
+      - [records, management]
+      - [reviewed]
+      - [reviewer, role]
 
   - must_id: "item:A.7.4.7:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, retention]
-      - [review, date, within, retention]
-      - [date, within, retention]
-      - [date, within, planned, retention]
-      - [within, planned, retention]
-      - [within, planned, interval, retention]
-      - [planned, interval, retention]
-      - [per, revocation, retention]
+      - [review, date]
+      - [planned, interval]
+      - [review, within, interval]
+      - [next, review]
+      - [review, period]
+      - [review, schedule]
 

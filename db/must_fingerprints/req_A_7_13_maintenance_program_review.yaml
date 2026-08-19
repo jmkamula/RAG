@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.13:maintenance_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.13:maintenance_program_review"
@@ -14,60 +13,48 @@ must_fingerprints:
   - must_id: "item:A.7.13:rev_register_update"
     description: "Changes propagated to the procedure / scope"
     excerpt_keywords:
-      - [changes, propagated, equipment]
-      - [changes, propagated, scope, equipment]
-      - [propagated, scope, equipment]
-      - [per, revocation, equipment]
-      - [per, revoked, identity, equipment]
-      - [revocation, record, equipment]
-      - [review, findings, equipment]
-      - [audit, outcomes, equipment]
+      - [periodic, maintenance, review]
+      - [procedure, update]
+      - [scope, change]
+      - [review, date]
+      - [next, review]
+      - [reviewed, annually]
 
   - must_id: "item:A.7.13:rev_provider_performance"
     description: "Provider performance review (SLA met / breaches / incident link)"
     excerpt_keywords:
-      - [provider, performance, equipment]
-      - [provider, performance, review, equipment]
-      - [performance, review, equipment]
-      - [performance, review, sla, equipment]
-      - [review, sla, equipment]
-      - [review, sla, met, equipment]
-      - [sla, met, equipment]
-      - [sla, met, breaches, equipment]
+      - [provider, performance, review]
+      - [sla, met]
+      - [sla, breach]
+      - [incident, link]
+      - [performance, evaluation]
+      - [service, level, agreement]
 
   - must_id: "item:A.7.13:rev_cadence_compliance"
     description: "Cadence compliance per equipment class (% of due-maintenance actually completed in period)"
     excerpt_keywords:
-      - [cadence, compliance, equipment]
-      - [cadence, compliance, equipment]
-      - [compliance, equipment]
-      - [compliance, equipment, class]
-      - [equipment, class]
-      - [equipment, class, due]
-      - [class, due, equipment]
-      - [class, due, maintenance]
+      - [maintenance, cadence]
+      - [periodic, maintenance, review]
+      - [equipment, class, maintenance]
+      - [due, maintenance, completed]
+      - [maintenance, compliance, rate]
 
   - must_id: "item:A.7.13:rev_reviewer"
     description: "Reviewer identity (Facilities + IT + InfoSec)"
     excerpt_keywords:
-      - [reviewer, identity, equipment]
-      - [reviewer, identity, facilities, equipment]
-      - [identity, facilities, equipment]
-      - [identity, facilities, infosec, equipment]
-      - [facilities, infosec, equipment]
-      - [per, revocation, equipment]
-      - [per, revoked, identity, equipment]
-      - [revocation, record, equipment]
+      - [reviewer, identity]
+      - [review, conducted]
+      - [reviewed, facilities]
+      - [it, security, reviewer]
+      - [information, security, reviewer]
 
   - must_id: "item:A.7.13:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, equipment]
-      - [review, date, within, equipment]
-      - [date, within, equipment]
-      - [date, within, planned, equipment]
-      - [within, planned, equipment]
-      - [within, planned, interval, equipment]
-      - [planned, interval, equipment]
-      - [per, revocation, equipment]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, period]
+      - [review, schedule]
+      - [review, frequency]
 

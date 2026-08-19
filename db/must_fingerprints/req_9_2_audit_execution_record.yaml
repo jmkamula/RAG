@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:9.2:audit_execution_record
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:9.2:audit_execution_record"
@@ -15,58 +14,54 @@ must_fingerprints:
     description: "Per-audit handoff to 10.2 NC/CA procedure where findings include nonconformities"
     excerpt_keywords:
       - [audit, handoff]
-      - [audit, handoff, findings]
-      - [handoff, findings, internal]
-      - [handoff, findings, include, internal]
-      - [findings, include, internal]
-      - [findings, include, nonconformities, internal]
-      - [include, nonconformities, internal]
+      - [nonconformity, finding]
+      - [handoff, procedure]
+      - [audit, record, nonconformity]
+      - [findings, nonconformities, procedure]
 
   - must_id: "item:9.2:rec_findings"
     description: "Per-audit findings list (conformities + nonconformities + observations)"
     excerpt_keywords:
       - [audit, findings]
-      - [audit, findings, conformities]
-      - [findings, conformities, internal]
-      - [findings, conformities, nonconformities, internal]
-      - [conformities, nonconformities, internal]
-      - [conformities, nonconformities, observations, internal]
-      - [nonconformities, observations, internal]
+      - [nonconformities, recorded]
+      - [conformities, noted]
+      - [audit, observations]
+      - [findings, list]
+      - [internal, audit, record]
 
   - must_id: "item:9.2:rec_date"
     description: "Per-audit execution date"
     excerpt_keywords:
-      - [audit, execution]
       - [audit, execution, date]
-      - [execution, date, internal]
+      - [internal, audit, record]
+      - [audit, performed, date]
+      - [date, audit]
+      - [audit, completion, date]
 
   - must_id: "item:9.2:rec_auditor"
     description: "Per-audit auditor identity + independence assertion"
     excerpt_keywords:
-      - [audit, auditor]
-      - [audit, auditor, identity]
-      - [auditor, identity, internal]
-      - [auditor, identity, independence, internal]
-      - [identity, independence, internal]
-      - [identity, independence, assertion, internal]
-      - [independence, assertion, internal]
+      - [auditor, identity]
+      - [auditor, independence]
+      - [audit, performed]
+      - [auditor, name, recorded]
+      - [independence, asserted]
+      - [audit, responsible, person]
 
   - must_id: "item:9.2:rec_scope"
     description: "Per-audit scope (which ISMS process / area was audited)"
     excerpt_keywords:
       - [audit, scope]
-      - [audit, scope, isms]
-      - [scope, isms, internal]
-      - [scope, isms, area, internal]
-      - [isms, area, internal]
-      - [isms, area, audited, internal]
-      - [area, audited, internal]
+      - [audited, process]
+      - [audited, area]
+      - [isms, process, audited]
 
   - must_id: "item:9.2:rec_audit_id"
     description: "Unique audit identifier per row"
     excerpt_keywords:
-      - [audit, id]
-      - [unique, audit]
-      - [unique, audit, identifier]
       - [audit, identifier]
+      - [unique, audit, id]
+      - [audit, record, id]
+      - [internal, audit, reference]
+      - [audit, execution, record]
 

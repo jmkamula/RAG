@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.10:media_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.10:media_program_review"
@@ -14,59 +13,48 @@ must_fingerprints:
   - must_id: "item:A.7.10:rev_register_update"
     description: "Changes propagated to the register / procedure"
     excerpt_keywords:
-      - [changes, propagated, storage]
-      - [per, revocation, storage]
-      - [per, revoked, identity, storage]
-      - [revocation, record, storage]
-      - [review, findings, storage]
-      - [audit, outcomes, storage]
-      - [last, reviewed, storage]
+      - [periodic, review]
+      - [register, updated]
+      - [procedure, review]
+      - [review, changes]
+      - [update, register]
+      - [review, frequency]
 
   - must_id: "item:A.7.10:rev_lost_count"
     description: "Lost-media count for period (every loss has an incident link)"
     excerpt_keywords:
-      - [lost, count, storage]
-      - [lost, media]
       - [lost, media, count]
-      - [media, count]
-      - [media, count, period]
-      - [count, period, storage]
-      - [count, period, every, storage]
-      - [period, every, storage]
+      - [media, loss, incident]
+      - [periodic, review, media]
+      - [incident, link, loss]
+      - [review, period, count]
 
   - must_id: "item:A.7.10:rev_inventory_audit"
     description: "Inventory audit — sample-based confirmation of media at stated location"
     excerpt_keywords:
-      - [inventory, audit, storage]
-      - [inventory, audit, sample, storage]
-      - [audit, sample, storage]
-      - [audit, sample, based, storage]
-      - [sample, based, storage]
-      - [sample, based, confirmation, storage]
-      - [based, confirmation, storage]
-      - [based, confirmation, media]
+      - [inventory, audit]
+      - [media, location]
+      - [sample, based, confirmation]
+      - [periodic, review]
+      - [audit, sample]
+      - [stated, location]
 
   - must_id: "item:A.7.10:rev_reviewer"
     description: "Reviewer identity (IT + InfoSec)"
     excerpt_keywords:
-      - [reviewer, identity, storage]
-      - [reviewer, identity, infosec, storage]
-      - [identity, infosec, storage]
-      - [per, revocation, storage]
-      - [per, revoked, identity, storage]
-      - [revocation, record, storage]
-      - [review, findings, storage]
-      - [audit, outcomes, storage]
+      - [reviewer, identity]
+      - [information, security, reviewer]
+      - [it, security, reviewer]
+      - [review, conducted]
+      - [review, performed]
 
   - must_id: "item:A.7.10:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, storage]
-      - [review, date, within, storage]
-      - [date, within, storage]
-      - [date, within, planned, storage]
-      - [within, planned, storage]
-      - [within, planned, interval, storage]
-      - [planned, interval, storage]
-      - [per, revocation, storage]
+      - [review, date]
+      - [planned, interval]
+      - [periodic, review]
+      - [review, scheduled]
+      - [next, review]
+      - [review, frequency]
 

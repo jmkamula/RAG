@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:9.2:audit_cycle_coverage_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:9.2:audit_cycle_coverage_scope"
@@ -14,48 +13,37 @@ must_fingerprints:
   - must_id: "item:9.2:scope_exclusions"
     description: "Any explicit exclusions with rationale (rare — generally all ISMS processes are in scope)"
     excerpt_keywords:
-      - [explicit, exclusions, internal]
-      - [explicit, exclusions, rationale, internal]
-      - [exclusions, rationale, internal]
-      - [exclusions, rationale, rare, internal]
-      - [rationale, rare, internal]
-      - [rationale, rare, generally, internal]
-      - [rare, generally, internal]
-      - [rare, generally, isms, internal]
+      - [explicit, exclusions]
+      - [scope, exclusions]
+      - [excluded, processes]
+      - [scope]
+      - [scope, rationale]
+      - [isms, processes]
 
   - must_id: "item:9.2:scope_high_risk"
     description: "High-risk process audit frequency (annual audit even within longer cycle)"
     excerpt_keywords:
-      - [high, risk, internal]
-      - [high, risk, audit]
-      - [risk, audit]
-      - [risk, audit, frequency]
-      - [audit, frequency]
-      - [audit, frequency, annual]
-      - [frequency, annual, internal]
-      - [frequency, annual, audit]
+      - [highrisk, process, audit]
+      - [annual, audit, frequency]
+      - [audit, cycle, coverage]
+      - [audit, frequency, highrisk]
+      - [process, audit, schedule]
 
   - must_id: "item:9.2:scope_rotation"
     description: "Process-rotation plan (which processes audited each year of the cycle)"
     excerpt_keywords:
-      - [rotation, plan, internal]
-      - [rotation, plan, processes, internal]
-      - [plan, processes, internal]
-      - [plan, processes, audited, internal]
-      - [processes, audited, internal]
-      - [processes, audited, year, internal]
-      - [audited, year, internal]
-      - [audited, year, cycle, internal]
+      - [process rotation, audit cycle]
+      - [processes audited, each year]
+      - [audit coverage, rotation plan]
+      - [internal audit, process rotation]
+      - [audit plan, process rotation]
 
   - must_id: "item:9.2:scope_cycle_length"
     description: "Audit cycle length stated (typically 3 years for full ISMS coverage)"
     excerpt_keywords:
-      - [cycle, length, internal]
-      - [audit, cycle]
       - [audit, cycle, length]
-      - [cycle, length, stated, internal]
-      - [length, stated, internal]
-      - [length, stated, typically, internal]
-      - [stated, typically, internal]
-      - [stated, typically, years, internal]
+      - [internal, audit, cycle]
+      - [audit, coverage, period]
+      - [cycle, duration, stated]
+      - [audit, frequency, defined]
 

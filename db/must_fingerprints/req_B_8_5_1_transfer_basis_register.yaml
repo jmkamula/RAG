@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.5.1:transfer_basis_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.1:transfer_basis_register"
@@ -14,60 +13,48 @@ must_fingerprints:
   - must_id: "item:B.8.5.1:reg_change_history"
     description: "Change history per row (all previous bases + notification dates)"
     excerpt_keywords:
-      - [change, history, basis]
-      - [change, history, previous, basis]
-      - [history, previous, basis]
-      - [history, previous, bases, basis]
-      - [previous, bases, basis]
-      - [previous, bases, notification, basis]
-      - [bases, notification, basis]
-      - [bases, notification, dates, basis]
+      - [transfer, basis, history]
+      - [change, history, record]
+      - [notification, date, logged]
+      - [previous, transfer, basis]
+      - [processor, transfer, basis]
+      - [basis, change, date]
 
   - must_id: "item:B.8.5.1:reg_customer_notification_date"
     description: "Customer notification date per row"
     excerpt_keywords:
-      - [customer, notification, date, basis]
-      - [customer, notification, basis]
-      - [notification, date, basis]
-      - [per, row, basis]
-      - [each, row, basis]
-      - [column, containing, basis]
-      - [each, entry, basis]
-      - [column, header, basis]
+      - [customer, notification, date]
+      - [notification, date, record]
+      - [date, notification]
+      - [customer, transfer, notification]
+      - [notification, timestamp, record]
 
   - must_id: "item:B.8.5.1:reg_basis"
     description: "Basis cited per row (Art.45/46/47/49 or equivalent)"
     excerpt_keywords:
+      - [transfer, basis]
       - [basis, cited]
-      - [basis, cited, art]
-      - [cited, art, basis]
-      - [cited, art, equivalent, basis]
-      - [art, equivalent, basis]
-      - [per, row, basis]
-      - [each, row, basis]
-      - [column, containing, basis]
+      - [art45, transfer]
+      - [art46, transfer]
+      - [art47, transfer]
+      - [processor, transfer, basis]
 
   - must_id: "item:B.8.5.1:reg_jurisdiction_pair"
     description: "Origin + destination jurisdiction per row"
     excerpt_keywords:
-      - [jurisdiction, pair, basis]
-      - [origin, destination, basis]
-      - [origin, destination, jurisdiction, basis]
-      - [destination, jurisdiction, basis]
-      - [per, row, basis]
-      - [each, row, basis]
-      - [column, containing, basis]
-      - [each, entry, basis]
+      - [origin, jurisdiction]
+      - [destination, jurisdiction]
+      - [jurisdiction, pair]
+      - [transfer, between, jurisdictions]
+      - [processor, transfer, basis]
+      - [jurisdiction, origin, destination]
 
   - must_id: "item:B.8.5.1:reg_relationship_id"
     description: "Unique transfer relationship identifier per row"
     excerpt_keywords:
-      - [relationship, id, basis]
-      - [unique, transfer, basis]
-      - [unique, transfer, relationship, basis]
-      - [transfer, relationship, basis]
-      - [transfer, relationship, identifier, basis]
-      - [relationship, identifier, basis]
-      - [per, row, basis]
-      - [each, row, basis]
+      - [transfer, relationship, identifier]
+      - [unique, transfer, id]
+      - [processor, transfer, basis]
+      - [transfer, record, id]
+      - [relationship, reference, number]
 

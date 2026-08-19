@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:4.4:isms_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:4.4:isms_program_review"
@@ -14,60 +13,48 @@ must_fingerprints:
   - must_id: "item:4.4:rev_change_log"
     description: "Cross-check against change records — every actual change in the year is logged"
     excerpt_keywords:
-      - [cross, check]
-      - [cross, check, against]
-      - [check, against]
-      - [check, against, change]
-      - [against, change]
-      - [against, change, records]
-      - [change, records]
-      - [change, records, every]
+      - [change, log]
+      - [change, record]
+      - [logged, change]
+      - [annual, change, review]
+      - [reviewed, change, log]
 
   - must_id: "item:4.4:rev_map_currency"
     description: "Process map currency check (cross-leaf coherence)"
     excerpt_keywords:
-      - [map, currency]
-      - [map, currency, check]
-      - [currency, check]
-      - [currency, check, cross]
-      - [check, cross]
-      - [check, cross, leaf]
-      - [cross, leaf]
-      - [cross, leaf, coherence]
+      - [process map, currency check]
+      - [review, process map]
+      - [process map, updated]
+      - [cross leaf, coherence]
+      - [map currency, reviewed]
+      - [process map, review date]
 
   - must_id: "item:4.4:rev_currency"
     description: "Currency check — manual still matches how the ISMS actually runs"
     excerpt_keywords:
-      - [currency, check]
-      - [currency, check, manual]
-      - [check, manual]
-      - [check, manual, still]
-      - [manual, still]
-      - [manual, still, matches]
-      - [still, matches]
-      - [still, matches, isms]
+      - [isms, manual, review]
+      - [manual, currency, check]
+      - [review, current, isms]
+      - [isms, manual, updated]
+      - [manual, matches, isms]
+      - [review, frequency, manual]
 
   - must_id: "item:4.4:rev_reviewer"
     description: "Reviewer identity (ISMS Manager + top management sponsor)"
     excerpt_keywords:
       - [reviewer, identity]
-      - [reviewer, identity, isms]
-      - [identity, isms]
-      - [identity, isms, manager]
       - [isms, manager]
-      - [isms, manager, top]
-      - [manager, top]
-      - [manager, top, management]
+      - [top, management, sponsor]
+      - [reviewed]
+      - [management, reviewer]
 
   - must_id: "item:4.4:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date]
-      - [review, date, within]
-      - [date, within]
-      - [date, within, planned]
-      - [within, planned]
-      - [within, planned, interval]
-      - [planned, interval]
-      - [per, revocation]
+      - [review date]
+      - [planned interval]
+      - [next review]
+      - [reviewed annually]
+      - [review frequency]
+      - [review schedule]
 

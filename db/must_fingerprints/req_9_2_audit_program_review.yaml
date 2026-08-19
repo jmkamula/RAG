@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:9.2:audit_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:9.2:audit_program_review"
@@ -14,60 +13,47 @@ must_fingerprints:
   - must_id: "item:9.2:rev_finding_closure"
     description: "Finding-closure check — last cycle's NCs reached 10.2 closure"
     excerpt_keywords:
-      - [finding, closure, internal]
-      - [finding, closure, check, internal]
-      - [closure, check, internal]
-      - [closure, check, last, internal]
-      - [check, last, internal]
-      - [check, last, cycle, internal]
-      - [last, cycle, internal]
-      - [last, cycle, ncs, internal]
+      - [finding, closure]
+      - [nonconformity, closure]
+      - [audit, finding, closed]
+      - [closure, within, cycle]
+      - [reviewed, finding, closure]
 
   - must_id: "item:9.2:rev_cycle_progress"
     description: "Cycle progress check — at end-of-cycle every ISMS process audited at least once"
     excerpt_keywords:
-      - [cycle, progress, internal]
-      - [cycle, progress, check, internal]
-      - [progress, check, internal]
-      - [progress, check, end, internal]
-      - [check, end, internal]
-      - [check, end, cycle, internal]
-      - [end, cycle, internal]
-      - [end, cycle, every, internal]
+      - [endofcycle, audit, process]
+      - [isms, process, audited]
+      - [audit, cycle, progress]
+      - [internal, audit, cycle]
+      - [audit, completed, cycle]
 
   - must_id: "item:9.2:rev_completion"
     description: "Completion check — every scheduled audit happened (or deferred with documented reason)"
     excerpt_keywords:
-      - [completion, check, internal]
-      - [completion, check, every, internal]
-      - [check, every, internal]
-      - [check, every, scheduled, internal]
-      - [every, scheduled, internal]
-      - [every, scheduled, audit]
-      - [scheduled, audit]
-      - [scheduled, audit, happened]
+      - [scheduled, audit, completion]
+      - [audit, deferred, reason]
+      - [completion, check, audit]
+      - [audit, occurred, scheduled]
+      - [deferred, audit, documented]
+      - [audit, completion, verified]
 
   - must_id: "item:9.2:rev_reviewer"
     description: "Reviewer identity (ISMS Manager + lead auditor)"
     excerpt_keywords:
-      - [reviewer, identity, internal]
-      - [reviewer, identity, isms, internal]
-      - [identity, isms, internal]
-      - [identity, isms, manager, internal]
-      - [isms, manager, internal]
-      - [isms, manager, lead, internal]
-      - [manager, lead, internal]
-      - [manager, lead, auditor, internal]
+      - [reviewer, identity]
+      - [isms, manager]
+      - [lead, auditor]
+      - [reviewed]
+      - [audit, reviewer]
 
   - must_id: "item:9.2:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, internal]
-      - [review, date, within, internal]
-      - [date, within, internal]
-      - [date, within, planned, internal]
-      - [within, planned, internal]
-      - [within, planned, interval, internal]
-      - [planned, interval, internal]
-      - [per, revocation, internal]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [review, scheduled]
+      - [review, period]
 

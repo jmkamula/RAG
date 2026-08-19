@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.20:portability_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.20:portability_procedure"
@@ -14,71 +13,58 @@ must_fingerprints:
   - must_id: "item:Art.20:third_party_rights"
     description: "Third-party rights protection (Art.20.4 — must not adversely affect others)"
     excerpt_keywords:
-      - [third, party, rights, right]
-      - [third, party, right]
-      - [party, rights, right]
-      - [party, rights, protection, right]
-      - [rights, protection, right]
-      - [rights, protection, art, right]
-      - [protection, art, right]
-      - [protection, art, not, right]
+      - [thirdparty, rights, protection]
+      - [data, portability, thirdparty]
+      - [not, adversely, affect]
+      - [thirdparty, consent, required]
+      - [impact, others]
+      - [thirdparty, access, restrictions]
 
   - must_id: "item:Art.20:scope_boundary"
     description: "Scope boundary — only data 'provided by' the subject (excludes derived data and observed data per EDPB guidance)"
     excerpt_keywords:
-      - [scope, boundary, right]
-      - [scope, boundary, only, right]
-      - [boundary, only, right]
-      - [boundary, only, provided, right]
-      - [only, provided, right]
-      - [only, provided, subject, right]
-      - [provided, subject, right]
-      - [provided, subject, excludes, right]
+      - [scope, applies, provided]
+      - [data, provided, subject]
+      - [excludes, derived, data]
+      - [excludes, observed, data]
+      - [provided, data]
+      - [scope, boundary, data]
 
   - must_id: "item:Art.20:direct_transmission"
     description: "Direct controller-to-controller transmission supported where technically feasible (Art.20.2)"
     excerpt_keywords:
-      - [direct, transmission, right]
-      - [direct, controller, right]
-      - [direct, controller, controller, right]
-      - [controller, controller, right]
-      - [controller, controller, transmission, right]
-      - [controller, transmission, right]
-      - [controller, transmission, supported, right]
-      - [transmission, supported, right]
+      - [direct, transmission]
+      - [controller, controller]
+      - [data, portability]
+      - [technically, feasible]
+      - [supported, direct, transfer]
+      - [article, 20, 2]
 
   - must_id: "item:Art.20:export_format"
     description: "Export format documented (JSON / CSV / XML — machine-readable, structured, commonly used)"
     excerpt_keywords:
-      - [export, format, right]
-      - [export, format, documented, right]
-      - [format, documented, right]
-      - [format, documented, json, right]
-      - [documented, json, right]
-      - [documented, json, csv, right]
-      - [json, csv, right]
-      - [json, csv, xml, right]
+      - [export, format, documented]
+      - [machine, readable, format]
+      - [structured, data, export]
+      - [json, csv, xml]
+      - [commonly, used, format]
 
   - must_id: "item:Art.20:applicability_check"
     description: "Applicability assessment per request (basis = consent/contract AND automated processing)"
     excerpt_keywords:
-      - [applicability, check, right]
-      - [applicability, assessment, right]
-      - [applicability, assessment, request, right]
-      - [assessment, request, right]
-      - [assessment, request, basis, right]
-      - [request, basis, right]
-      - [request, basis, consent, right]
-      - [basis, consent, right]
+      - [applicability, data portability]
+      - [request, basis, consent]
+      - [automated, processing, assessment]
+      - [consent, contract, basis]
+      - [portability, applicable, request]
+      - [assessment, per, request]
 
   - must_id: "item:Art.20:intake_channel"
     description: "Intake channel via Art.12 procedure"
     excerpt_keywords:
-      - [intake, channel, right]
-      - [intake, channel, via, right]
-      - [channel, via, right]
-      - [channel, via, art, right]
-      - [via, art, right]
-      - [procedure, step, right]
-      - [responsibility, of, right]
+      - [intake, channel]
+      - [data, portability, intake]
+      - [art12, procedure]
+      - [intake, via, procedure]
+      - [channel, used, intake]
 

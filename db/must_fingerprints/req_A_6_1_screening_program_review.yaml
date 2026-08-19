@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.6.1:screening_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.6.1:screening_program_review"
@@ -14,72 +13,59 @@ must_fingerprints:
   - must_id: "item:A.6.1:rev_register_update"
     description: "Changes propagated back to the procedure / scope with reference to this review"
     excerpt_keywords:
-      - [changes, propagated, screening]
-      - [changes, propagated, back, screening]
-      - [propagated, back, screening]
-      - [propagated, back, scope, screening]
-      - [back, scope, screening]
-      - [back, scope, reference, screening]
-      - [scope, reference, screening]
-      - [scope, reference, review, screening]
+      - [periodic, screening, review]
+      - [review, update, procedure]
+      - [changes, propagated, scope]
+      - [review, reference, procedure]
+      - [scope, updated, review]
 
   - must_id: "item:A.6.1:rev_rescreen_status"
     description: "Rescreen status — for roles with ongoing-check obligations, what fraction completed on cadence vs aged-overdue"
     excerpt_keywords:
-      - [rescreen, status, screening]
-      - [rescreen, status, roles, screening]
-      - [status, roles, screening]
-      - [status, roles, ongoing, screening]
-      - [roles, ongoing, screening]
-      - [roles, ongoing, check, screening]
-      - [ongoing, check, screening]
-      - [ongoing, check, obligations, screening]
+      - [rescreen, status]
+      - [screening, program, review]
+      - [ongoing, check]
+      - [completed, cadence]
+      - [overdue, rescreen]
+      - [periodic, screening]
 
   - must_id: "item:A.6.1:rev_scope_check"
     description: "Cross-check against the applicable-roles scope — any new role tier, new jurisdiction, new sectoral driver?"
     excerpt_keywords:
-      - [scope, check, screening]
-      - [cross, check, screening]
-      - [cross, check, against, screening]
-      - [check, against, screening]
-      - [check, against, roles, screening]
-      - [against, roles, screening]
-      - [against, roles, scope, screening]
-      - [roles, scope, screening]
+      - [scope, applicable, roles]
+      - [new, role, tier]
+      - [new, jurisdiction]
+      - [new, sectoral, driver]
+      - [scope, crosscheck]
+      - [periodic, screening, review]
 
   - must_id: "item:A.6.1:rev_register_check"
     description: "Per-tier outcome (did every new hire in this tier get the right checks? gaps flagged and remediated)"
     excerpt_keywords:
-      - [tier, outcome, screening]
-      - [tier, outcome, did, screening]
-      - [outcome, did, screening]
-      - [outcome, did, every, screening]
-      - [did, every, screening]
-      - [did, every, new, screening]
-      - [every, new, screening]
-      - [every, new, hire, screening]
+      - [periodic, screening]
+      - [screening, program, review]
+      - [new, hire, checks]
+      - [gaps, flagged]
+      - [remediated, screening]
+      - [reviewed, periodically]
 
   - must_id: "item:A.6.1:rev_reviewer"
     description: "Reviewer identity and role recorded (HR lead + InfoSec lead jointly; legal-counsel sign-off where jurisdictional shifts material)"
     excerpt_keywords:
-      - [reviewer, identity, screening]
-      - [reviewer, identity, role, screening]
-      - [identity, role, screening]
-      - [identity, role, recorded, screening]
-      - [role, recorded, screening]
-      - [role, recorded, lead, screening]
-      - [recorded, lead, screening]
-      - [recorded, lead, infosec, screening]
+      - [reviewer, identity]
+      - [reviewer, role]
+      - [hr, lead]
+      - [infosec, lead]
+      - [legal, counsel, signoff]
+      - [jurisdictional, shifts]
 
   - must_id: "item:A.6.1:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, screening]
-      - [review, date, within, screening]
-      - [date, within, screening]
-      - [date, within, planned, screening]
-      - [within, planned, screening]
-      - [within, planned, interval, screening]
-      - [planned, interval, screening]
-      - [per, revocation, screening]
+      - [review, date]
+      - [planned, interval]
+      - [periodic, review]
+      - [review, within, interval]
+      - [scheduled, review]
+      - [review, frequency]
 

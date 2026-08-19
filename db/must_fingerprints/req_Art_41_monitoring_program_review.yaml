@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.41:monitoring_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.41:monitoring_program_review"
@@ -14,60 +13,47 @@ must_fingerprints:
   - must_id: "item:Art.41:rev_action_quality"
     description: "Action quality — corrective / suspension / exclusion decisions defensible vs procedure"
     excerpt_keywords:
-      - [action, quality, monitoring]
-      - [action, quality, corrective, monitoring]
-      - [quality, corrective, monitoring]
-      - [quality, corrective, suspension, monitoring]
-      - [corrective, suspension, monitoring]
-      - [corrective, suspension, exclusion, monitoring]
-      - [suspension, exclusion, monitoring]
-      - [suspension, exclusion, decisions, monitoring]
+      - [corrective, action, decision]
+      - [suspension, decision, procedure]
+      - [exclusion, decision, defensible]
+      - [decision, quality, review]
+      - [action, taken, procedure]
 
   - must_id: "item:Art.41:rev_monitoring_cadence"
     description: "Monitoring cadence audit — every adherent assessed per procedure"
     excerpt_keywords:
       - [monitoring, cadence]
-      - [monitoring, cadence, audit]
-      - [cadence, audit, monitoring]
-      - [cadence, audit, every, monitoring]
-      - [audit, every, monitoring]
-      - [audit, every, adherent, monitoring]
-      - [every, adherent, monitoring]
-      - [every, adherent, assessed, monitoring]
+      - [adherent, assessment]
+      - [audit, procedure]
+      - [review, frequency]
+      - [assessment, per, procedure]
 
   - must_id: "item:Art.41:rev_accreditation_currency"
     description: "Accreditation currency — SA accreditation still in force"
     excerpt_keywords:
-      - [accreditation, currency, monitoring]
-      - [accreditation, currency, accreditation, monitoring]
-      - [currency, accreditation, monitoring]
-      - [currency, accreditation, still, monitoring]
-      - [accreditation, still, monitoring]
-      - [accreditation, still, force, monitoring]
-      - [still, force, monitoring]
-      - [per, revocation, monitoring]
+      - [accreditation, currency]
+      - [accreditation, still, force]
+      - [review, accreditation, status]
+      - [accreditation, validity, period]
+      - [accreditation, current, review]
+      - [monitoring, accreditation, currency]
 
   - must_id: "item:Art.41:rev_reviewer"
     description: "Reviewer identity (executive sponsor + independent counsel)"
     excerpt_keywords:
-      - [reviewer, identity, monitoring]
-      - [reviewer, identity, executive, monitoring]
-      - [identity, executive, monitoring]
-      - [identity, executive, sponsor, monitoring]
-      - [executive, sponsor, monitoring]
-      - [executive, sponsor, independent, monitoring]
-      - [sponsor, independent, monitoring]
-      - [sponsor, independent, counsel, monitoring]
+      - [reviewer, identity]
+      - [executive, sponsor]
+      - [independent, counsel]
+      - [review, conduct, code]
+      - [monitoring, program, review]
 
   - must_id: "item:Art.41:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, monitoring]
-      - [review, date, within, monitoring]
-      - [date, within, monitoring]
-      - [date, within, planned, monitoring]
-      - [within, planned, monitoring]
-      - [within, planned, interval, monitoring]
-      - [planned, interval, monitoring]
-      - [per, revocation, monitoring]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [reviewed, periodically]
+      - [review, schedule]
 

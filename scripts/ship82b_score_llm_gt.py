@@ -22,7 +22,7 @@ sys.path.insert(0, str(REPO / "scripts"))
 # Reuse the scorer + finding loaders from ship77e
 from ship77e_compare import (
     _load_findings, _score,
-    RUN_A, RUN_B, RUN_C, RUN_D, RUN_E, RUN_F, RUN_G, RUN_H, RUN_I,
+    RUN_A, RUN_B, RUN_C, RUN_D, RUN_E, RUN_F, RUN_G, RUN_H, RUN_I, RUN_J,
     DOCS,
 )
 
@@ -67,6 +67,7 @@ def main():
         "wired (G)":         RUN_G,
         "llm_signal (H)":    RUN_H,
         "llm_per_must (I)":  RUN_I,
+        "per_must+full_curator (J)": RUN_J,
     }
     findings_by_run = {name: _load_findings(path) if path.exists() else {}
                        for name, path in runs.items()}

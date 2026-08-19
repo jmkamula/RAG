@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.4.3:program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.3:program_review"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:A.7.4.3:rev_root_cause_closure"
     description: "Root-cause closure — systemic remediations from prior period reviewed for completeness"
     excerpt_keywords:
-      - [root, cause, closure, accuracy]
-      - [root, cause, accuracy]
-      - [cause, closure, accuracy]
-      - [cause, closure, systemic, accuracy]
-      - [closure, systemic, accuracy]
-      - [closure, systemic, remediations, accuracy]
-      - [systemic, remediations, accuracy]
-      - [systemic, remediations, prior, accuracy]
+      - [rootcause, closure]
+      - [systemic, remediation, review]
+      - [prior, period, review]
+      - [completeness, reviewed]
+      - [remediation, closure]
+      - [review, completeness]
 
   - must_id: "item:A.7.4.3:rev_detection_rate"
     description: "Detection rate check — under-detection surfaces via low incident counts"
     excerpt_keywords:
-      - [detection, rate, accuracy]
-      - [detection, rate, check, accuracy]
-      - [rate, check, accuracy]
-      - [rate, check, under, accuracy]
-      - [check, under, accuracy]
-      - [check, under, detection, accuracy]
-      - [under, detection, accuracy]
-      - [under, detection, surfaces, accuracy]
+      - [detection, rate]
+      - [incident, counts]
+      - [detection, rate, check]
+      - [review, detection]
+      - [under, detection]
+      - [incident, rate]
 
   - must_id: "item:A.7.4.3:rev_prevention_health"
     description: "Prevention controls health (input validation / duplicate detection / reconciliation)"
     excerpt_keywords:
-      - [prevention, health, accuracy]
-      - [prevention, controls, accuracy]
-      - [prevention, controls, health, accuracy]
-      - [controls, health, accuracy]
-      - [controls, health, input, accuracy]
-      - [health, input, accuracy]
-      - [health, input, validation, accuracy]
-      - [input, validation, accuracy]
+      - [prevention, controls]
+      - [input, validation]
+      - [duplicate, detection]
+      - [data, reconciliation]
+      - [review, accuracy]
+      - [quality, assurance]
 
   - must_id: "item:A.7.4.3:rev_reviewer"
     description: "Reviewer identity (DPO + Data Ops)"
     excerpt_keywords:
-      - [reviewer, identity, accuracy]
-      - [reviewer, identity, dpo, accuracy]
-      - [identity, dpo, accuracy]
-      - [identity, dpo, ops, accuracy]
-      - [dpo, ops, accuracy]
-      - [per, revocation, accuracy]
-      - [per, revoked, identity, accuracy]
-      - [revocation, record, accuracy]
+      - [reviewer, identity]
+      - [data, protection, officer]
+      - [dpo, responsible]
+      - [review, conducted]
+      - [data, operations, team]
+      - [reviewer, role]
 
   - must_id: "item:A.7.4.3:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, accuracy]
-      - [review, date, within, accuracy]
-      - [date, within, accuracy]
-      - [date, within, planned, accuracy]
-      - [within, planned, accuracy]
-      - [within, planned, interval, accuracy]
-      - [planned, interval, accuracy]
-      - [per, revocation, accuracy]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [scheduled, review, date]
 

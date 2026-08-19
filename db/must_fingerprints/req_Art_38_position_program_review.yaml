@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.38:position_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.38:position_program_review"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:Art.38:rev_coi_recheck"
     description: "COI recheck — DPO role assignments still free of conflicts"
     excerpt_keywords:
-      - [coi, recheck, position]
-      - [coi, recheck, dpo, position]
-      - [recheck, dpo, position]
-      - [recheck, dpo, role, position]
-      - [dpo, role, position]
-      - [dpo, role, assignments, position]
-      - [role, assignments, position]
-      - [role, assignments, still, position]
+      - [conflict, interest]
+      - [dpo, role, assignment]
+      - [conflicts, still, free]
+      - [coi, recheck]
+      - [reviewed, conflict, assignment]
+      - [dpo, conflict, check]
 
   - must_id: "item:Art.38:rev_independence_audit"
     description: "Independence audit — no recorded instructions on tasks; no dismissal pressure"
     excerpt_keywords:
-      - [independence, audit, position]
-      - [independence, audit, recorded, position]
-      - [audit, recorded, position]
-      - [audit, recorded, instructions, position]
-      - [recorded, instructions, position]
-      - [recorded, instructions, tasks, position]
-      - [instructions, tasks, position]
-      - [instructions, tasks, dismissal, position]
+      - [independence, audit]
+      - [no, dismissal, pressure]
+      - [audit, findings]
+      - [dpo, independent]
+      - [instructions, not, recorded]
 
   - must_id: "item:Art.38:rev_involvement_audit"
     description: "Involvement audit — DPO invited to all in-scope forums; not bypassed on data-protection decisions"
     excerpt_keywords:
-      - [involvement, audit, position]
-      - [involvement, audit, dpo, position]
-      - [audit, dpo, position]
-      - [audit, dpo, invited, position]
-      - [dpo, invited, position]
-      - [dpo, invited, scope, position]
-      - [invited, scope, position]
-      - [invited, scope, forums, position]
+      - [dpo, involved]
+      - [invited, all, forums]
+      - [not, bypassed]
+      - [data, protection, decisions]
+      - [involvement, audit]
+      - [scope, forums]
 
   - must_id: "item:Art.38:rev_reviewer"
     description: "Reviewer identity (executive sponsor + non-executive director / external counsel if available)"
     excerpt_keywords:
-      - [reviewer, identity, position]
-      - [reviewer, identity, executive, position]
-      - [identity, executive, position]
-      - [identity, executive, sponsor, position]
-      - [executive, sponsor, position]
-      - [executive, sponsor, non, position]
-      - [sponsor, non, position]
-      - [sponsor, non, executive, position]
+      - [reviewer, identity]
+      - [executive, sponsor]
+      - [nonexecutive, director]
+      - [external, counsel]
+      - [review, sponsor]
+      - [review, committee, members]
 
   - must_id: "item:Art.38:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, position]
-      - [review, date, within, position]
-      - [date, within, position]
-      - [date, within, planned, position]
-      - [within, planned, position]
-      - [within, planned, interval, position]
-      - [planned, interval, position]
-      - [per, revocation, position]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [review, scheduled]
+      - [review, period]
 

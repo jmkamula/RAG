@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.3.1:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.3.1:applicable_scope"
@@ -14,35 +13,28 @@ must_fingerprints:
   - must_id: "item:B.8.3.1:scope_exclusions"
     description: "Excluded engagements (own-controller services) with rationale"
     excerpt_keywords:
-      - [excluded, engagements, obligations]
-      - [excluded, engagements, own, obligations]
-      - [engagements, own, obligations]
-      - [engagements, own, controller, obligations]
-      - [own, controller, obligations]
-      - [own, controller, services, obligations]
-      - [controller, services, obligations]
-      - [controller, services, rationale, obligations]
+      - [excluded, engagements]
+      - [owncontroller, services]
+      - [scope, exclusions]
+      - [excluded, scope]
+      - [engagements, rationale]
 
   - must_id: "item:B.8.3.1:scope_support_matrix"
     description: "Support matrix per contract tier (Enterprise API access / Business self-service / Startup email support)"
     excerpt_keywords:
-      - [support, matrix, obligations]
-      - [support, matrix, contract, obligations]
-      - [matrix, contract, obligations]
-      - [matrix, contract, tier, obligations]
-      - [contract, tier, obligations]
-      - [contract, tier, enterprise, obligations]
-      - [tier, enterprise, obligations]
-      - [tier, enterprise, api, obligations]
+      - [support, matrix]
+      - [contract, tier]
+      - [enterprise, api, access]
+      - [business, selfservice]
+      - [startup, email, support]
+      - [applicable, support, scope]
 
   - must_id: "item:B.8.3.1:scope_customer_engagements"
     description: "Customer engagements enumerated (link to B.8.2.1 register)"
     excerpt_keywords:
-      - [customer, engagements, obligations]
-      - [customer, engagements, enumerated, obligations]
-      - [engagements, enumerated, obligations]
-      - [in, scope, obligations]
-      - [scope, includes, obligations]
-      - [applicable, to, obligations]
-      - [excluded, from, obligations]
+      - [customer, engagements]
+      - [scope, customer, engagements]
+      - [applies, customer, engagements]
+      - [engagements, enumerated]
+      - [link, b831, register]
 

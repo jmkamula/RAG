@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.4.4:minimization_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.4:minimization_procedure"
@@ -14,60 +13,47 @@ must_fingerprints:
   - must_id: "item:A.7.4.4:proc_full_pii_justification"
     description: "Where processing requires non-minimised PII (identified purpose demands it), justification documented"
     excerpt_keywords:
-      - [full, pii, justification]
-      - [processing, requires, pii]
-      - [processing, requires, non, pii]
-      - [requires, non, pii]
-      - [requires, non, minimised, pii]
-      - [non, minimised, pii]
-      - [non, minimised, pii]
-      - [minimised, pii]
+      - [pii, minimization, procedure]
+      - [processing, requires, justification]
+      - [nonminimised, pii, documented]
+      - [identified, purpose, requires]
+      - [pii, justification, documented]
 
   - must_id: "item:A.7.4.4:proc_technical_config"
     description: "Technical configurations documented (how the minimisation is implemented in code / infrastructure)"
     excerpt_keywords:
-      - [technical, config, pii]
-      - [technical, configurations, pii]
-      - [technical, configurations, documented, pii]
-      - [configurations, documented, pii]
-      - [configurations, documented, minimisation, pii]
-      - [documented, minimisation, pii]
-      - [documented, minimisation, implemented, pii]
-      - [minimisation, implemented, pii]
+      - [technical, configuration]
+      - [documented, implementation]
+      - [minimisation, implemented]
+      - [code, configuration]
+      - [infrastructure, documented]
+      - [technical, implementation]
 
   - must_id: "item:A.7.4.4:proc_deidentification_technique"
     description: "De-identification technique selection referencing ISO/IEC 20889 taxonomy"
     excerpt_keywords:
-      - [deidentification, technique, pii]
-      - [identification, technique, pii]
-      - [identification, technique, selection, pii]
-      - [technique, selection, pii]
-      - [technique, selection, referencing, pii]
-      - [selection, referencing, pii]
-      - [selection, referencing, iso, pii]
-      - [referencing, iso, pii]
+      - [deidentification, technique]
+      - [selection, isoiec, 20889]
+      - [apply, deidentification, method]
+      - [reference, taxonomy, 20889]
+      - [technique, shall, comply]
 
   - must_id: "item:A.7.4.4:proc_mechanism_map"
     description: "Mechanism map — de-identification / pseudonymisation / aggregation / generalisation / suppression per activity"
     excerpt_keywords:
-      - [mechanism, map, pii]
-      - [mechanism, map, identification, pii]
-      - [map, identification, pii]
-      - [map, identification, pseudonymisation, pii]
-      - [identification, pseudonymisation, pii]
-      - [identification, pseudonymisation, aggregation, pii]
-      - [pseudonymisation, aggregation, pii]
-      - [pseudonymisation, aggregation, generalisation, pii]
+      - [mechanism, map]
+      - [deidentification, pseudonymisation]
+      - [pseudonymisation, aggregation]
+      - [aggregation, generalisation]
+      - [generalisation, suppression]
+      - [per, activity]
 
   - must_id: "item:A.7.4.4:proc_objectives_stated"
     description: "Minimization objectives stated per processing activity (target level of identifiability required)"
     excerpt_keywords:
-      - [objectives, stated, pii]
       - [minimization, objectives]
-      - [minimization, objectives, stated]
-      - [objectives, stated, processing, pii]
-      - [stated, processing, pii]
-      - [stated, processing, activity, pii]
-      - [processing, activity, pii]
-      - [processing, activity, target, pii]
+      - [processing, activity, objectives]
+      - [target, level, identifiability]
+      - [shall, state, objectives]
+      - [objectives, per, activity]
 

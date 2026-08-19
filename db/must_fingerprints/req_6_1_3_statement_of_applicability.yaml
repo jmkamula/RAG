@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:6.1.3:statement_of_applicability
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:6.1.3:statement_of_applicability"
@@ -14,70 +13,67 @@ must_fingerprints:
   - must_id: "item:6.1.3:soa_version"
     description: "Version number and approval date stated"
     excerpt_keywords:
-      - [soa, version, risk]
-      - [version, number, risk]
-      - [version, number, approval, risk]
-      - [number, approval, risk]
-      - [number, approval, date, risk]
-      - [approval, date, risk]
-      - [approval, date, stated, risk]
-      - [date, stated, risk]
+      - [version, number]
+      - [approval, date]
+      - [version, approved]
+      - [document, version, date]
+      - [soa, version, date]
 
   - must_id: "item:6.1.3:soa_owner"
     description: "Named owner of the SoA (typically ISMS Manager)"
     excerpt_keywords:
-      - [soa, owner, risk]
-      - [named, owner, risk]
-      - [named, owner, soa, risk]
-      - [owner, soa, risk]
-      - [owner, soa, typically, risk]
-      - [soa, typically, risk]
-      - [soa, typically, isms, risk]
-      - [typically, isms, risk]
+      - [soa, owner]
+      - [statement, applicability, owner]
+      - [isms, manager]
+      - [soa, named, owner]
+      - [information, security, owner]
 
   - must_id: "item:6.1.3:soa_reference"
     description: "Reference to the implementing policy/procedure per included control"
     excerpt_keywords:
-      - [soa, reference, risk]
-      - [reference, implementing, risk]
-      - [reference, implementing, included, risk]
-      - [implementing, included, risk]
+      - [reference, policy]
+      - [implementing, procedure]
+      - [control, policy]
+      - [treatment, procedure]
+      - [applicable, control]
+      - [policy, statement]
 
   - must_id: "item:6.1.3:soa_implementation_status"
     description: "Implementation status per included control (Implemented / Partially / Planned)"
     excerpt_keywords:
-      - [soa, implementation, status, risk]
-      - [implementation, status, risk]
-      - [implementation, status, included, risk]
-      - [status, included, risk]
-      - [status, included, implemented, risk]
-      - [included, implemented, risk]
-      - [included, implemented, partially, risk]
-      - [implemented, partially, risk]
+      - [implementation, status]
+      - [control, implemented]
+      - [partially, implemented]
+      - [planned, implementation]
+      - [included, control]
+      - [treatment, status]
 
   - must_id: "item:6.1.3:soa_justification"
     description: "Justification per control (why included / why excluded)"
     excerpt_keywords:
-      - [soa, justification, risk]
-      - [justification, included, risk]
-      - [justification, included, excluded, risk]
-      - [included, excluded, risk]
+      - [control, justification]
+      - [included, excluded]
+      - [risk, treatment, justification]
+      - [statement, applicability]
+      - [control, inclusion, reason]
+      - [exclusion, reason]
 
   - must_id: "item:6.1.3:soa_inclusion_status"
     description: "Inclusion status per control (Applicable / Not Applicable)"
     excerpt_keywords:
-      - [soa, inclusion, status, risk]
-      - [inclusion, status, risk]
-      - [inclusion, status, not, risk]
-      - [status, not, risk]
+      - [control, applicable]
+      - [control, notapplicable]
+      - [inclusion, status]
+      - [applicability, statement]
+      - [control, inclusion, status]
 
   - must_id: "item:6.1.3:soa_all_annex_a"
     description: "All 93 Annex A controls enumerated (no omissions)"
     excerpt_keywords:
-      - [soa, annex, risk]
-      - [annex, controls, risk]
-      - [annex, controls, enumerated, risk]
-      - [controls, enumerated, risk]
-      - [controls, enumerated, omissions, risk]
-      - [enumerated, omissions, risk]
+      - [annex a, all controls]
+      - [annex a, 93 controls]
+      - [control objectives, annex a]
+      - [statement of applicability, annex a]
+      - [soa includes, annex a]
+      - [annex a, control enumeration]
 

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:9.2:internal_audit_programme
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:9.2:internal_audit_programme"
@@ -14,60 +13,66 @@ must_fingerprints:
   - must_id: "item:9.2:owner"
     description: "Named owner of the programme (typically ISMS Manager + independent auditor)"
     excerpt_keywords:
-      - [named, owner, internal]
-      - [named, owner, programme, internal]
-      - [owner, programme, internal]
-      - [owner, programme, typically, internal]
-      - [programme, typically, internal]
-      - [programme, typically, isms, internal]
-      - [typically, isms, internal]
-      - [typically, isms, manager, internal]
+      - [internal, audit, owner]
+      - [audit, programme, owner]
+      - [isms, manager, owner]
+      - [named, owner, programme]
+      - [independent, auditor, owner]
 
   - must_id: "item:9.2:corrective"
     description: "Corrective action follow-up process"
     excerpt_keywords:
-      - [corrective, action, internal]
-      - [corrective, action, follow, internal]
-      - [action, follow, internal]
+      - [corrective, action, followup]
+      - [audit, finding, correction]
+      - [nonconformity, corrective, action]
+      - [followup, audit, recommendation]
+      - [action, taken, corrective]
+      - [corrective, action, process]
 
   - must_id: "item:9.2:reporting"
     description: "Reporting process to management defined"
     excerpt_keywords:
-      - [reporting, management, internal]
-      - [reporting, management, defined, internal]
-      - [management, defined, internal]
+      - [reporting, process, management]
+      - [internal, audit, report]
+      - [audit, report, management]
+      - [management, review, report]
+      - [audit, findings, reported]
 
   - must_id: "item:9.2:independence"
     description: "Auditor independence and competence requirements"
     excerpt_keywords:
-      - [auditor, independence, internal]
-      - [auditor, independence, competence, internal]
-      - [independence, competence, internal]
-      - [independence, competence, requirements, internal]
-      - [competence, requirements, internal]
+      - [auditor, independence]
+      - [auditor, competence]
+      - [independent, auditor, requirements]
+      - [audit, team, competence]
+      - [maintain, auditor, independence]
+      - [competence, criteria, auditor]
 
   - must_id: "item:9.2:criteria"
     description: "Audit criteria defined"
     excerpt_keywords:
       - [audit, criteria]
-      - [audit, criteria, defined]
-      - [criteria, defined, internal]
+      - [defined, audit, scope]
+      - [audit, objectives, criteria]
+      - [internal, audit, criteria]
+      - [audit, requirements, defined]
 
   - must_id: "item:9.2:scope"
     description: "Audit scope covering all ISMS processes"
     excerpt_keywords:
       - [audit, scope]
-      - [audit, scope, covering]
-      - [scope, covering, internal]
-      - [scope, covering, isms, internal]
-      - [covering, isms, internal]
-      - [covering, isms, processes, internal]
-      - [isms, processes, internal]
+      - [isms, processes]
+      - [internal, audit, programme]
+      - [scope, includes, all]
+      - [audit, covers, processes]
 
   - must_id: "item:9.2:frequency"
     description: "Audit frequency defined"
     excerpt_keywords:
       - [audit, frequency]
-      - [audit, frequency, defined]
-      - [frequency, defined, internal]
+      - [internal, audit, schedule]
+      - [audit, planned, interval]
+      - [audit, conducted, regularly]
+      - [audit, review, period]
+      - [audit, performed, frequency]
 

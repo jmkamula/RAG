@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.6.6:nda_template
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.6.6:nda_template"
@@ -14,84 +13,67 @@ must_fingerprints:
   - must_id: "item:A.6.6:owner"
     description: "Named owner of the template (Legal counsel with InfoSec partner)"
     excerpt_keywords:
-      - [named, owner, confidentiality]
-      - [named, owner, template, confidentiality]
-      - [owner, template, confidentiality]
-      - [owner, template, legal, confidentiality]
-      - [template, legal, confidentiality]
-      - [template, legal, counsel, confidentiality]
-      - [legal, counsel, confidentiality]
-      - [legal, counsel, infosec, confidentiality]
+      - [named, owner]
+      - [template, owner]
+      - [legal, counsel]
+      - [information, security, partner]
+      - [confidentiality, agreement, owner]
 
   - must_id: "item:A.6.6:last_reviewed"
     description: "Last-reviewed date on the template (review evidence — drives the freshness check)"
     excerpt_keywords:
-      - [last, reviewed, confidentiality]
-      - [last, reviewed, date, confidentiality]
-      - [reviewed, date, confidentiality]
-      - [reviewed, date, template, confidentiality]
-      - [date, template, confidentiality]
-      - [date, template, review, confidentiality]
-      - [template, review, confidentiality]
-      - [template, review, evidence, confidentiality]
+      - [last, reviewed, date]
+      - [review, date, template]
+      - [date, review]
+      - [document, last, reviewed]
+      - [template, review, record]
 
   - must_id: "item:A.6.6:signature_requirement"
     description: "Signature requirement enforced before access granted (no access without signed NDA — gates A.5.18 access grant for non-employees)"
     excerpt_keywords:
-      - [signature, requirement, confidentiality]
-      - [signature, requirement, enforced, confidentiality]
-      - [requirement, enforced, confidentiality]
-      - [requirement, enforced, before, confidentiality]
-      - [enforced, before, confidentiality]
-      - [enforced, before, access, confidentiality]
-      - [before, access, confidentiality]
-      - [before, access, granted, confidentiality]
+      - [signed, nda]
+      - [signature, required]
+      - [no, access, without]
+      - [nda, signature, enforced]
+      - [access, granted, signature]
+      - [nonemployee, access, nda]
 
   - must_id: "item:A.6.6:return_destruction"
-    description: "Return or destruction obligation at end of relationship (with certified-destruction option for paper, secure-deletion for digital — links to"
+    description: "Return or destruction obligation at end of relationship (with certified-destruction option for paper, secure-deletion for digital — links to A.8.10)"
     excerpt_keywords:
-      - [return, destruction, confidentiality]
-      - [return, destruction, obligation, confidentiality]
-      - [destruction, obligation, confidentiality]
-      - [destruction, obligation, end, confidentiality]
-      - [obligation, end, confidentiality]
-      - [obligation, end, relationship, confidentiality]
-      - [end, relationship, confidentiality]
-      - [end, relationship, certified, confidentiality]
+      - [return, confidential information]
+      - [destruction, obligation, end]
+      - [secure, deletion, digital]
+      - [certified, destruction, paper]
+      - [return, destruction]
+      - [end, relationship, obligation]
 
   - must_id: "item:A.6.6:duration"
-    description: "Duration of confidentiality obligation (indefinite for trade secrets; time-limited for non-trade-secret confidential info — typically 3-5 ye"
+    description: "Duration of confidentiality obligation (indefinite for trade secrets; time-limited for non-trade-secret confidential info — typically 3-5 years post-termination)"
     excerpt_keywords:
-      - [duration, confidentiality]
-      - [duration, confidentiality, obligation]
-      - [confidentiality, obligation]
-      - [confidentiality, obligation, indefinite]
-      - [obligation, indefinite, confidentiality]
-      - [obligation, indefinite, trade, confidentiality]
-      - [indefinite, trade, confidentiality]
-      - [indefinite, trade, secrets, confidentiality]
+      - [confidentiality, duration]
+      - [non disclosure, time limited]
+      - [trade secret, indefinite]
+      - [post termination, years]
+      - [confidential information, obligation]
+      - [duration, confidentiality, agreement]
 
   - must_id: "item:A.6.6:info_classes"
-    description: "Information classes protected (cross-link to A.5.12 classification — confidential / restricted / trade-secret tiers; PII overlay where appli"
+    description: "Information classes protected (cross-link to A.5.12 classification — confidential / restricted / trade-secret tiers; PII overlay where applicable)"
     excerpt_keywords:
-      - [info, classes, confidentiality]
-      - [classes, protected, confidentiality]
-      - [classes, protected, cross, confidentiality]
-      - [protected, cross, confidentiality]
-      - [protected, cross, classification, confidentiality]
-      - [cross, classification, confidentiality]
-      - [cross, classification, confidential, confidentiality]
-      - [classification, confidential, confidentiality]
+      - [information, classification]
+      - [confidential, restricted]
+      - [trade, secret]
+      - [pii, overlay]
+      - [protected, information, classes]
+      - [classification, tiers]
 
   - must_id: "item:A.6.6:parties_covered"
     description: "Parties covered (employees, contractors, suppliers, visitors with access to sensitive info, M&A counterparties)"
     excerpt_keywords:
-      - [parties, covered, confidentiality]
-      - [parties, covered, employees, confidentiality]
-      - [covered, employees, confidentiality]
-      - [covered, employees, contractors, confidentiality]
-      - [employees, contractors, confidentiality]
-      - [employees, contractors, suppliers, confidentiality]
-      - [contractors, suppliers, confidentiality]
-      - [contractors, suppliers, visitors, confidentiality]
+      - [parties, covered]
+      - [employees, contractors]
+      - [suppliers, visitors]
+      - [access, sensitive, information]
+      - [mergers, acquisitions, counterparties]
 

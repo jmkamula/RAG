@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.43:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.43:applicable_scope"
@@ -14,33 +13,27 @@ must_fingerprints:
   - must_id: "item:Art.43:scope_jurisdictions"
     description: "Jurisdictions covered"
     excerpt_keywords:
-      - [jurisdictions, covered, certification]
-      - [in, scope, certification]
-      - [scope, includes, certification]
-      - [applicable, to, certification]
-      - [excluded, from, certification]
+      - [covered, jurisdictions]
+      - [applicable, jurisdictions]
+      - [scope, jurisdiction]
+      - [jurisdiction, coverage]
+      - [territories, covered]
 
   - must_id: "item:Art.43:scope_accreditation"
     description: "Accreditation scope + source (SA / NAB)"
     excerpt_keywords:
-      - [accreditation, scope, certification]
-      - [accreditation, scope, source, certification]
-      - [scope, source, certification]
-      - [scope, source, nab, certification]
-      - [source, nab, certification]
-      - [in, scope, certification]
-      - [scope, includes, certification]
-      - [applicable, to, certification]
+      - [accreditation, scope]
+      - [scope, source]
+      - [certification, body, accreditation]
+      - [national, accreditation, body]
+      - [scope, defined, accreditation]
+      - [scope, accredited, standard]
 
   - must_id: "item:Art.43:scope_schemes_issued"
     description: "Schemes the body issues against"
     excerpt_keywords:
-      - [schemes, issued, certification]
-      - [schemes, body, certification]
-      - [schemes, body, issues, certification]
-      - [body, issues, certification]
-      - [body, issues, against, certification]
-      - [issues, against, certification]
-      - [in, scope, certification]
-      - [scope, includes, certification]
+      - [certification, schemes, issued]
+      - [scope, schemes, body]
+      - [schemes, issued, against]
+      - [certification, body, scope]
 

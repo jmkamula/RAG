@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.3.5:objection_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.5:objection_procedure"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:A.7.3.5:proc_response_sla"
     description: "Response-time SLA stated + honoured"
     excerpt_keywords:
-      - [response, sla, providing]
-      - [response, time, providing]
-      - [response, time, sla, providing]
-      - [time, sla, providing]
-      - [time, sla, stated, providing]
-      - [sla, stated, providing]
-      - [sla, stated, honoured, providing]
-      - [stated, honoured, providing]
+      - [response time, service level]
+      - [sla, response time]
+      - [response, time, honoured]
+      - [response, time, stated]
+      - [sla, honoured]
+      - [sla, stated]
 
   - must_id: "item:A.7.3.5:proc_information_provision"
     description: "Information provision — subjects informed of objection right at first communication (Art.21.4)"
     excerpt_keywords:
-      - [provision, subjects, providing]
-      - [provision, subjects, informed, providing]
-      - [subjects, informed, providing]
-      - [subjects, informed, objection, providing]
-      - [informed, objection, providing]
-      - [informed, objection, right, providing]
-      - [objection, right, providing]
-      - [objection, right, first, providing]
+      - [inform, objection, right]
+      - [provide, information, subject]
+      - [communicate, objection, right]
+      - [initial, contact, objection]
+      - [notify, data, subject]
+      - [right, object, processing]
 
   - must_id: "item:A.7.3.5:proc_balancing_test"
     description: "Legitimate-interests balancing test — org demonstrates compelling grounds override subject rights or objection prevails"
     excerpt_keywords:
-      - [balancing, test, providing]
-      - [legitimate, interests, providing]
-      - [legitimate, interests, balancing, providing]
-      - [interests, balancing, providing]
-      - [interests, balancing, test, providing]
-      - [balancing, test, org, providing]
-      - [test, org, providing]
-      - [test, org, demonstrates, providing]
+      - [legitimate, interests, balancing]
+      - [compelling, grounds, override]
+      - [object, processing]
+      - [objection, prevails]
+      - [demonstrates, compelling, grounds]
+      - [balancing, test, legitimate]
 
   - must_id: "item:A.7.3.5:proc_absolute_objection"
     description: "Absolute objection handling (Art.21.2 marketing → processing must stop immediately)"
     excerpt_keywords:
-      - [absolute, objection, providing]
-      - [absolute, objection, handling, providing]
-      - [objection, handling, providing]
-      - [objection, handling, art, providing]
-      - [handling, art, providing]
-      - [handling, art, marketing, providing]
-      - [art, marketing, providing]
-      - [art, marketing, processing, providing]
+      - [absolute, objection]
+      - [processing, must, stop]
+      - [object, processing]
+      - [objection, handling, procedure]
+      - [immediately, stop, processing]
 
   - must_id: "item:A.7.3.5:proc_channel_consistency"
     description: "Channel consistency with service type (online services offer online objection; §7.3.5 implementation guidance)"
     excerpt_keywords:
-      - [channel, consistency, providing]
-      - [channel, consistency, service, providing]
-      - [consistency, service, providing]
-      - [consistency, service, online, providing]
-      - [service, online, providing]
-      - [service, online, services, providing]
-      - [online, services, providing]
-      - [online, services, offer, providing]
+      - [channel, consistency]
+      - [service, type]
+      - [online, objection]
+      - [objection, mechanism]
+      - [processing, object]
+      - [offer, online, service]
 

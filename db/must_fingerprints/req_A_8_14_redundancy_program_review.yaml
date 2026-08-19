@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.8.14:redundancy_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.14:redundancy_program_review"
@@ -14,72 +13,59 @@ must_fingerprints:
   - must_id: "item:A.8.14:rev_baseline_update"
     description: "Baseline / runbook updates published from findings"
     excerpt_keywords:
-      - [baseline, update, redundancy]
-      - [baseline, runbook, redundancy]
-      - [baseline, runbook, updates, redundancy]
-      - [runbook, updates, redundancy]
-      - [runbook, updates, published, redundancy]
-      - [updates, published, redundancy]
-      - [updates, published, findings, redundancy]
-      - [published, findings, redundancy]
+      - [baseline, update]
+      - [runbook, update]
+      - [published, findings]
+      - [periodic, review]
+      - [redundancy, program]
+      - [review, findings]
 
   - must_id: "item:A.8.14:rev_bia_alignment"
     description: "Cross-check with A.5.30 BIA (any availability-tier change → redundancy approach re-evaluation)"
     excerpt_keywords:
-      - [bia, alignment, redundancy]
-      - [cross, check, redundancy]
-      - [cross, check, bia, redundancy]
-      - [check, bia, redundancy]
-      - [check, bia, availability, redundancy]
-      - [bia, availability, redundancy]
-      - [bia, availability, tier, redundancy]
-      - [availability, tier, redundancy]
+      - [periodic, review]
+      - [bia, alignment]
+      - [availability, tier, change]
+      - [redundancy, approach, reevaluation]
+      - [crosscheck, bia]
+      - [reviewed, periodically]
 
   - must_id: "item:A.8.14:rev_test_attainment"
     description: "Failover-test attainment per service (cadence met; targets met)"
     excerpt_keywords:
-      - [test, attainment, redundancy]
-      - [failover, test, redundancy]
-      - [failover, test, attainment, redundancy]
-      - [test, attainment, service, redundancy]
-      - [attainment, service, redundancy]
-      - [attainment, service, cadence, redundancy]
-      - [service, cadence, redundancy]
-      - [service, cadence, met, redundancy]
+      - [failover, test, attainment]
+      - [test, frequency, met]
+      - [service, failover, tested]
+      - [review, test, results]
+      - [test, targets, achieved]
 
   - must_id: "item:A.8.14:rev_service_list"
     description: "Critical-service list re-confirmed (new service in scope; retired service removed)"
     excerpt_keywords:
-      - [critical, service, redundancy]
-      - [critical, service, confirmed, redundancy]
-      - [service, confirmed, redundancy]
-      - [service, confirmed, new, redundancy]
-      - [confirmed, new, redundancy]
-      - [confirmed, new, service, redundancy]
-      - [new, service, redundancy]
-      - [new, service, scope, redundancy]
+      - [critical, service, list]
+      - [service, list, review]
+      - [list, reconfirmed]
+      - [service, added, scope]
+      - [retired, service, removed]
+      - [periodic, redundancy, review]
 
   - must_id: "item:A.8.14:rev_reviewer"
     description: "Reviewer identity (Site Reliability + Infrastructure + business-service owners)"
     excerpt_keywords:
-      - [reviewer, identity, redundancy]
-      - [reviewer, identity, site, redundancy]
-      - [identity, site, redundancy]
-      - [identity, site, reliability, redundancy]
-      - [site, reliability, redundancy]
-      - [site, reliability, infrastructure, redundancy]
-      - [reliability, infrastructure, redundancy]
-      - [reliability, infrastructure, business, redundancy]
+      - [reviewer, identity]
+      - [site, reliability, engineer]
+      - [infrastructure, owner]
+      - [business, service, owner]
+      - [review, conducted]
+      - [periodic, redundancy, review]
 
   - must_id: "item:A.8.14:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, redundancy]
-      - [review, date, within, redundancy]
-      - [date, within, redundancy]
-      - [date, within, planned, redundancy]
-      - [within, planned, redundancy]
-      - [within, planned, interval, redundancy]
-      - [planned, interval, redundancy]
-      - [per, revocation, redundancy]
+      - [review, date]
+      - [planned, interval]
+      - [periodic, review]
+      - [next, review]
+      - [review, scheduled]
+      - [review, frequency]
 

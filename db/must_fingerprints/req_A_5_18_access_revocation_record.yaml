@@ -1,4 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.5.18:access_revocation_record
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.18:access_revocation_record"
@@ -6,73 +10,81 @@ target_control: "A.5.18"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.5.18:rev_trigger"
-    description: "Revocation trigger captured (termination / role change / contract end)"
+  - must_id: "item:A.5.18:rev_completeness"
+    description: "Completeness check per record — all access rights for the subject (from the register) accounted for (each row statused 'revoked' with its own evidence), not just the primary identity rights"
     excerpt_keywords:
-      - [trigger]
-      - [reason]
-      - [comments]
-      - [notes]
-      - [stopped, working]
-      - [project, completed]
-
-  - must_id: "item:A.5.18:rev_authoriser"
-    description: "Authoriser of the revocation (named individual)"
-    excerpt_keywords:
-      - [reviewer]
-      - [authoriser]
-      - [authorized, by]
-      - [approver]
-      - [approved, by]
-
-  - must_id: "item:A.5.18:rev_date_recorded"
-    description: "Effective date per record"
-    excerpt_keywords:
-      - [review, date]
-      - [effective, date]
-      - [date, of, revoke]
-      - [revocation, date]
-      - [revoke, date]
-      - [date, revoked]
-      - [disabled, date]
-
-  - must_id: "item:A.5.18:rev_disabled_proof"
-    description: "Evidence access was actually disabled"
-    excerpt_keywords:
-      - [findings]
-      - [proof]
-      - [disabled]
-      - [account, disabled]
-      - [deactivated]
-
-  - must_id: "item:A.5.18:rev_identity_pair"
-    description: "Identity-pair check per record — confirms A.5.16 identity registry was also closed"
-    excerpt_keywords:
-      - [identity, pair]
-      - [user, id]
-      - [identity, id]
-      - [users, reviewed]
+      - [access, rights, revoked]
+      - [completeness, check, record]
+      - [all, access, rights]
+      - [revocation, records, evidence]
+      - [subject, access, rights]
+      - [each, record, statused]
 
   - must_id: "item:A.5.18:rev_residual_cleanup"
-    description: "Residual cleanup status"
+    description: "Residual cleanup status per record (shared mailbox memberships removed or transferred, file-share access reassigned, distribution-list memberships cleared, OAuth tokens revoked, API keys rotated) — fu"
     excerpt_keywords:
-      - [residual]
-      - [cleanup]
-      - [mailbox]
-      - [shared, mailbox]
+      - [residual, cleanup, status]
+      - [access, revocation, record]
+      - [membership, removed]
+      - [tokens, revoked]
+      - [keys, rotated]
+      - [lifecycle, closure]
+
+  - must_id: "item:A.5.18:rev_identity_pair"
+    description: "Identity-pair check per record — confirms A.5.16 identity revocation_record exists for the same identity (where the trigger is termination/contract-end) OR identity remains active (where trigger is ro"
+    excerpt_keywords:
+      - [identitypair, record]
+      - [identity, revocation, record]
+      - [trigger, termination]
+      - [trigger, rolechange]
+      - [review, identity, status]
+      - [bidirectional, lifecycle, loop]
 
   - must_id: "item:A.5.18:rev_sla_met"
-    description: "SLA-met flag per record"
+    description: "SLA-met flag per record (yes / no_with_reason) — gap between effective and actual revocation timestamp must be within the procedure's stated SLA, or exception logged; auditor-critical proof of 'within"
     excerpt_keywords:
-      - [sla]
-      - [within, hours]
-      - [within, days]
-      - [target]
+      - [sla, met, flag]
+      - [revocation, timestamp, record]
+      - [within, 24h, role, change]
+      - [exception, logged]
+      - [actual, revocation, time]
+      - [auditor, critical, proof]
 
-  - must_id: "item:A.5.18:rev_completeness"
-    description: "Completeness check per record — all access rights for the subject covered"
+  - must_id: "item:A.5.18:rev_authoriser"
+    description: "Authoriser of the revocation (named individual; for terminations the dual-signoff pattern of IT + HR/manager applies)"
     excerpt_keywords:
-      - [completeness]
-      - [completeness, check]
-      - [all, access, revoked]
-      - [completeness, scope]
+      - [revocation, authoriser]
+      - [authoriser, named, individual]
+      - [dual, signoff, pattern]
+      - [it, hr, manager]
+      - [termination, revocation, authoriser]
+
+  - must_id: "item:A.5.18:rev_disabled_proof"
+    description: "Evidence access was actually disabled (system log entry, RBAC change attestation, confirmation from each affected system) — not just 'we asked'"
+    excerpt_keywords:
+      - [access, disabled]
+      - [system, log, entry]
+      - [rbac, change, attestation]
+      - [confirmation, affected, system]
+      - [access, revocation, record]
+      - [evidence, access, disabled]
+
+  - must_id: "item:A.5.18:rev_date_recorded"
+    description: "Effective date per record (last working day OR contract expiry OR role-change effective date OR explicit revocation decision time)"
+    excerpt_keywords:
+      - [effective, date]
+      - [revocation, decision, time]
+      - [contract, expiry]
+      - [role, change, effective]
+      - [last, working, day]
+
+  - must_id: "item:A.5.18:rev_trigger"
+    description: "Revocation trigger captured (termination / role change / contract end / explicit revoke / incident-driven / temporary-expiry / orphan-cleanup)"
+    excerpt_keywords:
+      - [revocation, trigger]
+      - [access, revocation, record]
+      - [termination, role, change]
+      - [contract, end]
+      - [explicit, revoke]
+      - [incident, driven]
+

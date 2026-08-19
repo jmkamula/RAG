@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.23:restrictions_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.23:restrictions_program_review"
@@ -14,60 +13,50 @@ must_fingerprints:
   - must_id: "item:Art.23:rev_subject_notice_compliance"
     description: "Subject-notice compliance — where Art.23.2.h applies, notice was delivered"
     excerpt_keywords:
-      - [subject, notice, compliance, restrictions]
-      - [subject, notice, restrictions]
-      - [notice, compliance, restrictions]
-      - [notice, compliance, art, restrictions]
-      - [compliance, art, restrictions]
-      - [compliance, art, notice, restrictions]
-      - [art, notice, restrictions]
-      - [art, notice, delivered, restrictions]
+      - [subject notice, compliance]
+      - [notice, delivered]
+      - [art23, subject notice]
+      - [review, subject notice]
+      - [compliance, reviewed]
+      - [notice, review date]
 
   - must_id: "item:Art.23:rev_invocation_audit"
     description: "Invocation audit — sampled register rows reviewed for proportionality and Art.23.2 safeguard compliance"
     excerpt_keywords:
-      - [invocation, audit, restrictions]
-      - [invocation, audit, sampled, restrictions]
-      - [audit, sampled, restrictions]
-      - [audit, sampled, rows, restrictions]
-      - [sampled, rows, restrictions]
-      - [sampled, rows, reviewed, restrictions]
-      - [rows, reviewed, restrictions]
-      - [rows, reviewed, proportionality, restrictions]
+      - [invocation, audit]
+      - [sampled, register, rows]
+      - [reviewed, proportionality]
+      - [art23, safeguard, compliance]
+      - [audit, review, date]
+      - [review, cadence]
 
   - must_id: "item:Art.23:rev_law_currency"
     description: "Law currency — every cited MS law still in force; any new restricting law surfaced"
     excerpt_keywords:
-      - [law, currency, restrictions]
-      - [law, currency, every, restrictions]
-      - [currency, every, restrictions]
-      - [currency, every, cited, restrictions]
-      - [every, cited, restrictions]
-      - [every, cited, law, restrictions]
-      - [cited, law, restrictions]
-      - [cited, law, still, restrictions]
+      - [law, currency]
+      - [cited, law, inforce]
+      - [restricting, law, surfaced]
+      - [review, law, currency]
+      - [law, still, inforce]
+      - [new, restricting, law]
 
   - must_id: "item:Art.23:rev_reviewer"
     description: "Reviewer identity (DPO + legal counsel)"
     excerpt_keywords:
-      - [reviewer, identity, restrictions]
-      - [reviewer, identity, dpo, restrictions]
-      - [identity, dpo, restrictions]
-      - [identity, dpo, legal, restrictions]
-      - [dpo, legal, restrictions]
-      - [dpo, legal, counsel, restrictions]
-      - [legal, counsel, restrictions]
-      - [per, revocation, restrictions]
+      - [reviewer, identity]
+      - [dpo, review]
+      - [legal, counsel]
+      - [reviewed, dpo]
+      - [reviewed, legal]
+      - [review, conducted]
 
   - must_id: "item:Art.23:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, restrictions]
-      - [review, date, within, restrictions]
-      - [date, within, restrictions]
-      - [date, within, planned, restrictions]
-      - [within, planned, restrictions]
-      - [within, planned, interval, restrictions]
-      - [planned, interval, restrictions]
-      - [per, revocation, restrictions]
+      - [review, date]
+      - [planned, interval]
+      - [review, within, interval]
+      - [next, review]
+      - [reviewed, period]
+      - [review, schedule]
 

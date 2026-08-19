@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.4.7:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.7:applicable_scope"
@@ -14,36 +13,27 @@ must_fingerprints:
   - must_id: "item:A.7.4.7:scope_default_period"
     description: "Default retention period for uncategorised PII"
     excerpt_keywords:
-      - [default, period, retention]
-      - [default, retention]
       - [default, retention, period]
-      - [retention, period]
       - [retention, period, uncategorised]
-      - [period, uncategorised, retention]
-      - [period, uncategorised, pii, retention]
-      - [uncategorised, pii, retention]
+      - [applies, retention, period]
+      - [scope, retention, period]
 
   - must_id: "item:A.7.4.7:scope_business_data"
     description: "Business PII categories with business retention rationale"
     excerpt_keywords:
-      - [business, pii, retention]
-      - [business, pii, categories, retention]
-      - [pii, categories, retention]
-      - [pii, categories, business, retention]
-      - [categories, business, retention]
-      - [categories, business, retention]
       - [business, retention]
-      - [business, retention, rationale]
+      - [pii, categories]
+      - [retention, rationale]
+      - [applicable, retention, contexts]
+      - [business, personal, data]
 
   - must_id: "item:A.7.4.7:scope_regulated_data"
     description: "Regulated PII categories (health / financial / employment / tax / other jurisdiction-specific)"
     excerpt_keywords:
-      - [regulated, pii, retention]
-      - [regulated, pii, categories, retention]
-      - [pii, categories, retention]
-      - [pii, categories, health, retention]
-      - [categories, health, retention]
-      - [categories, health, financial, retention]
-      - [health, financial, retention]
-      - [health, financial, employment, retention]
+      - [regulated, pii]
+      - [personal, data, category]
+      - [health, financial]
+      - [employment, tax]
+      - [jurisdiction, specific]
+      - [sensitive, personal, information]
 

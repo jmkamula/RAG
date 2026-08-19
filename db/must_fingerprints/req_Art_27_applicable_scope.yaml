@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.27:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.27:applicable_scope"
@@ -14,36 +13,30 @@ must_fingerprints:
   - must_id: "item:Art.27:scope_art27_2_exception"
     description: "Art.27.2 exception assessment (occasional processing + no special-category-large-scale + low risk → no representative needed)"
     excerpt_keywords:
-      - [art27, 2, exception, representatives]
-      - [art, exception, representatives]
-      - [art, exception, assessment, representatives]
-      - [exception, assessment, representatives]
-      - [exception, assessment, occasional, representatives]
-      - [assessment, occasional, representatives]
-      - [assessment, occasional, processing, representatives]
-      - [occasional, processing, representatives]
+      - [art27, exception, assessment]
+      - [occasional, processing, exception]
+      - [no, representative, needed]
+      - [specialcategory, large, scale]
+      - [decision, recorded]
+      - [low, risk, processing]
 
   - must_id: "item:Art.27:scope_member_state_target"
     description: "MS targeted (Art.27.3 — representative MUST be in one of these)"
     excerpt_keywords:
-      - [member, state, target, representatives]
-      - [targeted, art, representatives]
-      - [targeted, art, representative, representatives]
-      - [art, representative, representatives]
-      - [art, representative, one, representatives]
-      - [representative, one, representatives]
-      - [in, scope, representatives]
-      - [scope, includes, representatives]
+      - [member, state, target]
+      - [representative, located, member]
+      - [controller, processor, representative]
+      - [not, established, union]
+      - [art27, representative, member]
+      - [targeted, member, state]
 
   - must_id: "item:Art.27:scope_establishment"
-    description: "Establishment analysis — where the controller/processor is established + why Art.3.2 applies (offering goods/services OR monitoring behaviou"
+    description: "Establishment analysis — where the controller/processor is established + why Art.3.2 applies (offering goods/services OR monitoring behaviour in Union)"
     excerpt_keywords:
-      - [establishment, analysis, representatives]
-      - [establishment, analysis, controller, representatives]
-      - [analysis, controller, representatives]
-      - [analysis, controller, processor, representatives]
-      - [controller, processor, representatives]
-      - [controller, processor, established, representatives]
-      - [processor, established, representatives]
-      - [processor, established, art, representatives]
+      - [controller, established]
+      - [processor, established]
+      - [offering, goods, services]
+      - [monitoring, behaviour]
+      - [article, 3.2, applies]
+      - [establishment, union]
 

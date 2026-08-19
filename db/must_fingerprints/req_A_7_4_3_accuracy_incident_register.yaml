@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.4.3:accuracy_incident_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.3:accuracy_incident_register"
@@ -14,60 +13,47 @@ must_fingerprints:
   - must_id: "item:A.7.4.3:reg_root_cause"
     description: "Root cause per row (where a systemic issue emerged, remediation link)"
     excerpt_keywords:
-      - [root, cause, accuracy]
-      - [root, cause, systemic, accuracy]
-      - [cause, systemic, accuracy]
-      - [cause, systemic, issue, accuracy]
-      - [systemic, issue, accuracy]
-      - [systemic, issue, emerged, accuracy]
-      - [issue, emerged, accuracy]
-      - [issue, emerged, remediation, accuracy]
+      - [root, cause]
+      - [systemic, issue]
+      - [remediation, link]
+      - [incident, root, cause]
+      - [accuracy, incident, register]
 
   - must_id: "item:A.7.4.3:reg_resolution"
     description: "Resolution per row (corrected / cannot-correct-with-reason / erased / pending)"
     excerpt_keywords:
-      - [resolution, corrected, accuracy]
-      - [resolution, corrected, cannot, accuracy]
-      - [corrected, cannot, accuracy]
-      - [corrected, cannot, correct, accuracy]
-      - [cannot, correct, accuracy]
-      - [cannot, correct, reason, accuracy]
-      - [correct, reason, accuracy]
-      - [correct, reason, erased, accuracy]
+      - [accuracy, incident, register]
+      - [resolution, per, row]
+      - [corrected, cannotcorrectwithreason]
+      - [cannotcorrectwithreason, reason]
+      - [erased, pending]
+      - [correction, status]
 
   - must_id: "item:A.7.4.3:reg_pii_scope"
     description: "PII scope per row (which fields / how many subjects affected)"
     excerpt_keywords:
-      - [pii, scope, accuracy]
-      - [pii, scope, fields, accuracy]
-      - [scope, fields, accuracy]
-      - [scope, fields, many, accuracy]
-      - [fields, many, accuracy]
-      - [fields, many, subjects, accuracy]
-      - [many, subjects, accuracy]
-      - [many, subjects, affected, accuracy]
+      - [pii, scope]
+      - [affected, data, subjects]
+      - [fields, per, record]
+      - [pii, data, columns]
+      - [subject, data, fields]
 
   - must_id: "item:A.7.4.3:reg_detection_source"
     description: "Detection source per row (internal audit / subject rectification / integration reconciliation / external notification)"
     excerpt_keywords:
-      - [detection, source, accuracy]
-      - [detection, source, internal, accuracy]
-      - [source, internal, accuracy]
-      - [source, internal, audit, accuracy]
-      - [internal, audit, accuracy]
-      - [internal, audit, subject, accuracy]
-      - [audit, subject, accuracy]
-      - [audit, subject, rectification, accuracy]
+      - [detection, source]
+      - [internal, audit]
+      - [subject, rectification]
+      - [integration, reconciliation]
+      - [external, notification]
+      - [accuracy, incident, register]
 
   - must_id: "item:A.7.4.3:reg_incident_id"
     description: "Unique incident identifier per row"
     excerpt_keywords:
-      - [incident, id, accuracy]
-      - [unique, incident, accuracy]
-      - [unique, incident, identifier, accuracy]
-      - [incident, identifier, accuracy]
-      - [per, row, accuracy]
-      - [each, row, accuracy]
-      - [column, containing, accuracy]
-      - [each, entry, accuracy]
+      - [incident, identifier]
+      - [unique, incident, id]
+      - [incident, reference]
+      - [record, incident, id]
+      - [incident, number]
 

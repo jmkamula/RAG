@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.26:joint_controller_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.26:joint_controller_register"
@@ -14,60 +13,46 @@ must_fingerprints:
   - must_id: "item:Art.26:reg_signed_date"
     description: "Per-row arrangement signature date"
     excerpt_keywords:
-      - [signed, date, joint]
-      - [arrangement, signature, joint]
-      - [arrangement, signature, date, joint]
-      - [signature, date, joint]
-      - [per, row, joint]
-      - [each, row, joint]
-      - [column, containing, joint]
-      - [each, entry, joint]
+      - [joint, controller, register]
+      - [signature, date]
+      - [signed, date]
+      - [controller, signature, date]
 
   - must_id: "item:Art.26:reg_essence_published"
     description: "Per-row essence-of-arrangement published location (privacy notice URL)"
     excerpt_keywords:
-      - [essence, published, joint]
-      - [essence, arrangement, joint]
-      - [essence, arrangement, published, joint]
-      - [arrangement, published, joint]
-      - [arrangement, published, location, joint]
-      - [published, location, joint]
-      - [published, location, privacy, joint]
-      - [location, privacy, joint]
+      - [essence, arrangement, published]
+      - [published, location, url]
+      - [privacy, notice, url]
+      - [joint, controller, register]
+      - [arrangement, privacy, notice]
 
   - must_id: "item:Art.26:reg_responsibilities"
     description: "Per-row responsibility split summary"
     excerpt_keywords:
-      - [responsibility, split, joint]
-      - [responsibility, split, summary, joint]
-      - [split, summary, joint]
-      - [per, row, joint]
-      - [each, row, joint]
-      - [column, containing, joint]
-      - [each, entry, joint]
-      - [column, header, joint]
+      - [joint, controller, responsibility]
+      - [responsibility, split, summary]
+      - [controller, roles, responsibilities]
+      - [processing, activities, responsibility]
+      - [data, controller, joint]
+      - [responsibility, allocation, joint]
 
   - must_id: "item:Art.26:reg_activity"
     description: "Per-row processing activity (Art.30 RoPA reference)"
     excerpt_keywords:
-      - [processing, activity, joint]
-      - [processing, activity, art, joint]
-      - [activity, art, joint]
-      - [activity, art, ropa, joint]
-      - [art, ropa, joint]
-      - [art, ropa, reference, joint]
-      - [ropa, reference, joint]
-      - [per, row, joint]
+      - [processing, activity]
+      - [activity, description]
+      - [joint, controller, activity]
+      - [record, processing, activity]
+      - [activity, per, row]
 
   - must_id: "item:Art.26:reg_counterparty"
     description: "Per-row joint-controller counterparty"
     excerpt_keywords:
-      - [joint, controller]
       - [joint, controller, counterparty]
-      - [controller, counterparty, joint]
-      - [per, row, joint]
-      - [each, row, joint]
-      - [column, containing, joint]
-      - [each, entry, joint]
-      - [column, header, joint]
+      - [counterparty, name]
+      - [joint, controller, details]
+      - [controller, contact, information]
+      - [counterparty, address]
+      - [joint, controller, role]
 

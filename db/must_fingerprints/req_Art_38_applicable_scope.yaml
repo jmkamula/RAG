@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.38:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.38:applicable_scope"
@@ -14,36 +13,29 @@ must_fingerprints:
   - must_id: "item:Art.38:scope_coi_matrix"
     description: "COI matrix — which other roles DPO cannot also hold (CISO / security architect / product owner of PII flows / etc.)"
     excerpt_keywords:
-      - [coi, matrix, position]
-      - [coi, matrix, other, position]
-      - [matrix, other, position]
-      - [matrix, other, roles, position]
-      - [other, roles, position]
-      - [other, roles, dpo, position]
-      - [roles, dpo, position]
-      - [roles, dpo, cannot, position]
+      - [data protection officer, cannot hold]
+      - [conflict of interest, matrix]
+      - [dpo role, restrictions]
+      - [excluded roles, dpo]
+      - [dpo, not permitted]
+      - [separation of duties, dpo]
 
   - must_id: "item:Art.38:scope_resource_envelope"
     description: "Resource envelope (budget category + escalation threshold for additional spend)"
     excerpt_keywords:
-      - [resource, envelope, position]
-      - [resource, envelope, budget, position]
-      - [envelope, budget, position]
-      - [envelope, budget, category, position]
-      - [budget, category, position]
-      - [budget, category, escalation, position]
-      - [category, escalation, position]
-      - [category, escalation, threshold, position]
+      - [resource, envelope]
+      - [budget, category]
+      - [escalation, threshold]
+      - [additional, spend]
+      - [spend, limit]
+      - [budget, threshold]
 
   - must_id: "item:Art.38:scope_forums"
     description: "Forums DPO is invited to (board, exec committee, change-management, incident response, vendor onboarding)"
     excerpt_keywords:
-      - [forums, dpo, position]
-      - [forums, dpo, invited, position]
-      - [dpo, invited, position]
-      - [dpo, invited, board, position]
-      - [invited, board, position]
-      - [invited, board, exec, position]
-      - [board, exec, position]
-      - [board, exec, committee, position]
+      - [dpo, invited, forum]
+      - [board, exec, committee]
+      - [change, management, forum]
+      - [incident, response, forum]
+      - [vendor, onboarding, forum]
 

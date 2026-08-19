@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.37:dpo_designation_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.37:dpo_designation_procedure"
@@ -14,71 +13,56 @@ must_fingerprints:
   - must_id: "item:Art.37:owner"
     description: "Named owner (executive sponsor)"
     excerpt_keywords:
-      - [named, owner, designation]
-      - [named, owner, executive, designation]
-      - [owner, executive, designation]
-      - [owner, executive, sponsor, designation]
-      - [executive, sponsor, designation]
-      - [procedure, step, designation]
-      - [responsibility, of, designation]
+      - [data protection, officer, designation]
+      - [named, owner, dpo]
+      - [executive, sponsor, appointed]
+      - [dpo, responsible, person]
+      - [designation, procedure, owner]
 
   - must_id: "item:Art.37:internal_vs_external"
     description: "Internal-vs-external decision (Art.37.6 — staff member OR fulfil tasks under service contract)"
     excerpt_keywords:
-      - [internal, vs, external, designation]
-      - [internal, external, designation]
-      - [internal, external, decision, designation]
-      - [external, decision, designation]
-      - [external, decision, art, designation]
-      - [decision, art, designation]
-      - [decision, art, staff, designation]
-      - [art, staff, designation]
+      - [data protection officer, internal staff]
+      - [fulfil tasks, service contract]
+      - [appointed, internal dpo]
+      - [external dpo, service agreement]
+      - [staff member, dpo role]
 
   - must_id: "item:Art.37:publication"
     description: "DPO contact published (privacy notice + SA communication per Art.37.7)"
     excerpt_keywords:
-      - [dpo, contact, designation]
-      - [dpo, contact, published, designation]
-      - [contact, published, designation]
-      - [contact, published, privacy, designation]
-      - [published, privacy, designation]
-      - [published, privacy, notice, designation]
-      - [privacy, notice, designation]
-      - [privacy, notice, communication, designation]
+      - [dpo, contact, published]
+      - [privacy, notice, dpo]
+      - [data, protection, officer]
+      - [art37, seven, communication]
+      - [dpo, contact, information]
 
   - must_id: "item:Art.37:qualifications"
     description: "DPO qualifications stated (Art.37.5 — expert knowledge of data protection law and practices, ability to fulfil tasks)"
     excerpt_keywords:
-      - [dpo, qualifications, designation]
-      - [dpo, qualifications, stated, designation]
-      - [qualifications, stated, designation]
-      - [qualifications, stated, art, designation]
-      - [stated, art, designation]
-      - [stated, art, expert, designation]
-      - [art, expert, designation]
-      - [art, expert, knowledge, designation]
+      - [data protection, expert knowledge]
+      - [dpo, qualifications, stated]
+      - [ability, fulfil, tasks]
+      - [art37, paragraph 5]
+      - [knowledge, data protection, law]
 
   - must_id: "item:Art.37:voluntary_decision"
     description: "Voluntary designation decision recorded where not mandatory but chosen"
     excerpt_keywords:
-      - [voluntary, decision, designation]
-      - [voluntary, designation]
       - [voluntary, designation, decision]
-      - [designation, decision]
-      - [designation, decision, recorded]
-      - [decision, recorded, designation]
-      - [decision, recorded, not, designation]
-      - [recorded, not, designation]
+      - [data, protection, officer]
+      - [designation, recorded]
+      - [not, mandatory, designation]
+      - [chosen, designation, record]
+      - [dpo, designation, procedure]
 
   - must_id: "item:Art.37:applicability_assessment"
     description: "Applicability assessment per Art.37.1 a-c criteria (public authority / core systematic monitoring / core large-scale special category)"
     excerpt_keywords:
-      - [applicability, assessment, designation]
-      - [applicability, assessment, art, designation]
-      - [assessment, art, designation]
-      - [assessment, art, criteria, designation]
-      - [art, criteria, designation]
-      - [art, criteria, public, designation]
-      - [criteria, public, designation]
-      - [criteria, public, authority, designation]
+      - [applicability, assessment]
+      - [public, authority]
+      - [core, systematic, monitoring]
+      - [core, large scale]
+      - [special, category]
+      - [art37, criteria]
 

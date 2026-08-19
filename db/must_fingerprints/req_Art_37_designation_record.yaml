@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.37:designation_record
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.37:designation_record"
@@ -14,56 +13,46 @@ must_fingerprints:
   - must_id: "item:Art.37:reg_publication_evidence"
     description: "Per-row publication evidence (privacy notice URL + SA notification confirmation)"
     excerpt_keywords:
-      - [publication, evidence, designation]
-      - [publication, evidence, privacy, designation]
-      - [evidence, privacy, designation]
-      - [evidence, privacy, notice, designation]
-      - [privacy, notice, designation]
-      - [privacy, notice, url, designation]
-      - [notice, url, designation]
-      - [notice, url, notification, designation]
+      - [publication, evidence]
+      - [privacy, notice, url]
+      - [notification, confirmation]
+      - [data, protection, officer]
+      - [designation, record]
 
   - must_id: "item:Art.37:reg_employment_type"
     description: "Per-row employment type (internal staff / external service contract)"
     excerpt_keywords:
-      - [employment, internal, designation]
-      - [employment, internal, staff, designation]
-      - [internal, staff, designation]
-      - [internal, staff, external, designation]
-      - [staff, external, designation]
-      - [staff, external, service, designation]
-      - [external, service, designation]
-      - [external, service, contract, designation]
+      - [employment, type]
+      - [internal, staff]
+      - [external, service, contract]
+      - [per, row]
+      - [designation, record]
 
   - must_id: "item:Art.37:reg_designation_date"
     description: "Per-row designation date"
     excerpt_keywords:
       - [designation, date]
-      - [per, row, designation]
-      - [each, row, designation]
-      - [column, containing, designation]
-      - [each, entry, designation]
-      - [column, header, designation]
+      - [dpo, designation, record]
+      - [designation, timestamp]
+      - [appointed, date]
 
   - must_id: "item:Art.37:reg_qualifications_evidence"
     description: "Per-row qualifications evidence (CV / certifications / professional experience)"
     excerpt_keywords:
-      - [qualifications, evidence, designation]
-      - [qualifications, evidence, certifications, designation]
-      - [evidence, certifications, designation]
-      - [evidence, certifications, professional, designation]
-      - [certifications, professional, designation]
-      - [certifications, professional, experience, designation]
-      - [professional, experience, designation]
-      - [per, row, designation]
+      - [qualifications, evidence]
+      - [curriculum, vitae]
+      - [professional, experience]
+      - [certifications, provided]
+      - [dpo, qualifications]
+      - [evidence, record]
 
   - must_id: "item:Art.37:reg_dpo_identity"
     description: "DPO identity per row"
     excerpt_keywords:
-      - [dpo, identity, designation]
-      - [per, row, designation]
-      - [each, row, designation]
-      - [column, containing, designation]
-      - [each, entry, designation]
-      - [column, header, designation]
+      - [dpo, identity]
+      - [data, protection, officer]
+      - [designation, record]
+      - [dpo, contact, details]
+      - [officer, name, record]
+      - [dpo, assigned, per]
 

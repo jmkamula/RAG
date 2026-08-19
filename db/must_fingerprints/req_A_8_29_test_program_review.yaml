@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.8.29:test_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.29:test_program_review"
@@ -14,72 +13,60 @@ must_fingerprints:
   - must_id: "item:A.8.29:rev_findings_update"
     description: "Findings propagated to procedure / scope / tooling"
     excerpt_keywords:
-      - [findings, update, testing]
-      - [findings, propagated, testing]
-      - [findings, propagated, scope, testing]
-      - [propagated, scope, testing]
-      - [propagated, scope, tooling, testing]
-      - [scope, tooling, testing]
-      - [per, revocation, testing]
-      - [per, revoked, identity, testing]
+      - [findings, update]
+      - [security, testing, review]
+      - [review, findings]
+      - [testing, program, review]
+      - [findings, propagated]
+      - [periodic, security, review]
 
   - must_id: "item:A.8.29:rev_pen_test_feedback"
     description: "Pen-test outcomes feeding back into procedure / scope / training"
     excerpt_keywords:
-      - [pen, test, feedback, testing]
-      - [pen, test, testing]
-      - [pen, test, outcomes, testing]
-      - [test, outcomes, testing]
-      - [test, outcomes, feeding, testing]
-      - [outcomes, feeding, testing]
-      - [outcomes, feeding, back, testing]
-      - [feeding, back, testing]
+      - [penetration test, feedback]
+      - [security testing, review]
+      - [test results, incorporated]
+      - [findings, procedure]
+      - [outcomes, training]
+      - [pen test, action plan]
 
   - must_id: "item:A.8.29:rev_pattern_trending"
     description: "Finding-pattern trending (recurring patterns → SDLC / training / tooling action)"
     excerpt_keywords:
-      - [pattern, trending, testing]
-      - [finding, pattern, testing]
-      - [finding, pattern, trending, testing]
-      - [pattern, trending, recurring, testing]
-      - [trending, recurring, testing]
-      - [trending, recurring, patterns, testing]
-      - [recurring, patterns, testing]
-      - [recurring, patterns, sdlc, testing]
+      - [finding pattern, trending]
+      - [recurring, security testing]
+      - [security testing, review]
+      - [testing, trend, analysis]
+      - [pattern, analysis, sdlc]
+      - [training, tooling, action]
 
   - must_id: "item:A.8.29:rev_coverage_gaps"
     description: "Test-coverage gap check vs applicable scope"
     excerpt_keywords:
-      - [coverage, gaps, testing]
-      - [test, coverage, testing]
-      - [test, coverage, gap, testing]
-      - [coverage, gap, testing]
-      - [coverage, gap, check, testing]
-      - [gap, check, testing]
-      - [gap, check, scope, testing]
-      - [check, scope, testing]
+      - [test coverage, gap]
+      - [security testing, coverage]
+      - [coverage, gaps]
+      - [scope, applicable]
+      - [periodic, review]
+      - [testing, scope]
 
   - must_id: "item:A.8.29:rev_reviewer"
     description: "Reviewer identity (Security Engineering + Engineering leads)"
     excerpt_keywords:
-      - [reviewer, identity, testing]
-      - [reviewer, identity, security, testing]
-      - [identity, security, testing]
-      - [identity, security, engineering, testing]
-      - [security, engineering, testing]
-      - [security, engineering, engineering, testing]
-      - [engineering, engineering, testing]
-      - [engineering, engineering, leads, testing]
+      - [reviewer, identity]
+      - [security, engineering, lead]
+      - [engineering, lead, review]
+      - [review, performed]
+      - [reviewer, role]
+      - [review, security, team]
 
   - must_id: "item:A.8.29:rev_date"
     description: "Review date within the planned interval (≤180 days)"
     excerpt_keywords:
-      - [review, date, testing]
-      - [review, date, within, testing]
-      - [date, within, testing]
-      - [date, within, planned, testing]
-      - [within, planned, testing]
-      - [within, planned, interval, testing]
-      - [planned, interval, testing]
-      - [planned, interval, 180, testing]
+      - [review, date]
+      - [periodic, security, testing]
+      - [planned, interval]
+      - [reviewed, within, days]
+      - [security, testing, review]
+      - [review, interval]
 

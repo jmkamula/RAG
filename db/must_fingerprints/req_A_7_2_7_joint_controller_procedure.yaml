@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.2.7:joint_controller_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.7:joint_controller_procedure"
@@ -14,72 +13,58 @@ must_fingerprints:
   - must_id: "item:A.7.2.7:proc_breach_coordination"
     description: "Breach-notification coordination — who notifies SA + subjects"
     excerpt_keywords:
-      - [breach, coordination, joint]
-      - [breach, notification, joint]
-      - [breach, notification, coordination, joint]
-      - [notification, coordination, joint]
-      - [notification, coordination, notifies, joint]
-      - [coordination, notifies, joint]
-      - [coordination, notifies, subjects, joint]
-      - [notifies, subjects, joint]
+      - [breach, notification, coordinate]
+      - [notify, supervisory, authority]
+      - [inform, data, subject]
+      - [joint, controller, responsibility]
+      - [breach, reporting, procedure]
 
   - must_id: "item:A.7.2.7:proc_rights_exercise"
     description: "Single point of contact + subject-rights routing (subjects can exercise against either controller regardless of arrangement)"
     excerpt_keywords:
-      - [rights, exercise, joint]
-      - [single, point, joint]
-      - [single, point, contact, joint]
-      - [point, contact, joint]
-      - [point, contact, subject, joint]
-      - [contact, subject, joint]
-      - [contact, subject, rights, joint]
-      - [subject, rights, joint]
+      - [single, point, contact]
+      - [subject, rights, exercise]
+      - [rights, request, routing]
+      - [controller, responsible, contact]
+      - [exercise, rights, either]
+      - [routing, subject, request]
 
   - must_id: "item:A.7.2.7:proc_essence_publication"
     description: "Essence-of-arrangement publication — subject-facing summary of who does what, per Art.26.2"
     excerpt_keywords:
-      - [essence, publication, joint]
-      - [essence, arrangement, joint]
-      - [essence, arrangement, publication, joint]
-      - [arrangement, publication, joint]
-      - [arrangement, publication, subject, joint]
-      - [publication, subject, joint]
-      - [publication, subject, facing, joint]
-      - [subject, facing, joint]
+      - [joint, controller, arrangement]
+      - [publication, subject, summary]
+      - [who, does, what]
+      - [art26, controller, responsibilities]
+      - [essence, arrangement, published]
 
   - must_id: "item:A.7.2.7:proc_role_allocation"
     description: "Role + responsibility allocation (security / notice / rights fulfilment / breach notification / DPIA)"
     excerpt_keywords:
-      - [role, allocation, joint]
-      - [role, responsibility, joint]
-      - [role, responsibility, allocation, joint]
-      - [responsibility, allocation, joint]
-      - [responsibility, allocation, security, joint]
-      - [allocation, security, joint]
-      - [allocation, security, notice, joint]
-      - [security, notice, joint]
+      - [role, responsibility, allocation]
+      - [joint, controller, responsibility]
+      - [breach, notification, procedure]
+      - [rights, fulfilment, process]
+      - [security, role, assigned]
+      - [dpia, responsibility, defined]
 
   - must_id: "item:A.7.2.7:proc_arrangement_form"
     description: "Documented arrangement form — contract or equivalent binding document"
     excerpt_keywords:
-      - [arrangement, form, joint]
-      - [documented, arrangement, joint]
-      - [documented, arrangement, form, joint]
-      - [arrangement, form, contract, joint]
-      - [form, contract, joint]
-      - [form, contract, equivalent, joint]
-      - [contract, equivalent, joint]
-      - [contract, equivalent, binding, joint]
+      - [documented, arrangement, form]
+      - [joint, pii, controller]
+      - [contract, binding, document]
+      - [agreement, signed, parties]
+      - [arrangement, procedure, document]
+      - [binding, contract, terms]
 
   - must_id: "item:A.7.2.7:proc_classification_test"
-    description: "Classification test — when a relationship is joint control (jointly determine purposes + means) vs controller-processor vs independent contr"
+    description: "Classification test — when a relationship is joint control (jointly determine purposes + means) vs controller-processor vs independent controllers"
     excerpt_keywords:
-      - [classification, test, joint]
-      - [classification, test, relationship, joint]
-      - [test, relationship, joint]
-      - [test, relationship, joint]
-      - [relationship, joint]
-      - [relationship, joint, jointly]
-      - [joint, jointly]
-      - [joint, jointly, determine]
+      - [joint, control]
+      - [jointly, determine, purposes]
+      - [classification, test]
+      - [controller, processor]
+      - [independent, controllers]
+      - [purposes, means]
 

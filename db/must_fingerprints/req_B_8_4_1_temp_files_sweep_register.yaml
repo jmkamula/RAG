@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.4.1:temp_files_sweep_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.4.1:temp_files_sweep_register"
@@ -14,53 +13,47 @@ must_fingerprints:
   - must_id: "item:B.8.4.1:reg_tenant_boundary_check"
     description: "Tenant-boundary integrity check per row"
     excerpt_keywords:
-      - [tenant, boundary, check, temporary]
-      - [tenant, boundary, temporary]
-      - [tenant, boundary, integrity, temporary]
-      - [boundary, integrity, temporary]
-      - [boundary, integrity, check, temporary]
-      - [integrity, check, temporary]
-      - [per, row, temporary]
-      - [each, row, temporary]
+      - [tenant, boundary, check]
+      - [integrity, check, record]
+      - [per, row, entry]
+      - [processor, temp, files]
+      - [sweep, register]
+      - [tenant, data, boundary]
 
   - must_id: "item:B.8.4.1:reg_files_cleaned"
     description: "Files cleaned per row"
     excerpt_keywords:
       - [files, cleaned]
-      - [per, row, temporary]
-      - [each, row, temporary]
-      - [column, containing, temporary]
-      - [each, entry, temporary]
-      - [column, header, temporary]
+      - [temporary, files]
+      - [cleaned, timestamp]
+      - [file, cleanup, record]
+      - [processor, temp, files]
 
   - must_id: "item:B.8.4.1:reg_scan_date"
     description: "Scan date per row"
     excerpt_keywords:
-      - [scan, date, temporary]
-      - [per, row, temporary]
-      - [each, row, temporary]
-      - [column, containing, temporary]
-      - [each, entry, temporary]
-      - [column, header, temporary]
+      - [scan, date]
+      - [date, recorded]
+      - [record, scan, timestamp]
+      - [logged, scan, date]
+      - [per, row, date]
 
   - must_id: "item:B.8.4.1:reg_system"
     description: "System / component per row"
     excerpt_keywords:
-      - [per, row, temporary]
-      - [each, row, temporary]
-      - [column, containing, temporary]
-      - [each, entry, temporary]
-      - [column, header, temporary]
+      - [system, component]
+      - [temporary, files]
+      - [processor, temp, files]
+      - [per, row]
+      - [sweep, register]
 
   - must_id: "item:B.8.4.1:reg_sweep_id"
     description: "Unique sweep run identifier per row"
     excerpt_keywords:
-      - [sweep, id, temporary]
-      - [unique, sweep, temporary]
-      - [unique, sweep, run, temporary]
-      - [sweep, run, temporary]
-      - [sweep, run, identifier, temporary]
-      - [run, identifier, temporary]
-      - [per, row, temporary]
-      - [each, row, temporary]
+      - [sweep, run, identifier]
+      - [unique, sweep, id]
+      - [processor, temp, files]
+      - [sweep, register, entry]
+      - [temp, files, sweep]
+      - [run, id, record]
 

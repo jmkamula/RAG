@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.3.7:notification_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.7:notification_register"
@@ -14,58 +13,44 @@ must_fingerprints:
   - must_id: "item:A.7.3.7:reg_ack_received"
     description: "Acknowledgement received flag + date per row"
     excerpt_keywords:
-      - [ack, received, pii]
-      - [acknowledgement, received, pii]
-      - [acknowledgement, received, flag, pii]
-      - [received, flag, pii]
-      - [received, flag, date, pii]
-      - [flag, date, pii]
-      - [per, row, pii]
-      - [each, row, pii]
+      - [acknowledgement, received]
+      - [notification, date]
+      - [thirdparty, acknowledgement]
+      - [received, flag]
+      - [acknowledgement, timestamp]
 
   - must_id: "item:A.7.3.7:reg_dispatch_date"
     description: "Dispatch date per row"
     excerpt_keywords:
-      - [dispatch, date, pii]
-      - [per, row, pii]
-      - [each, row, pii]
-      - [column, containing, pii]
-      - [each, entry, pii]
-      - [column, header, pii]
+      - [dispatch, date]
+      - [notification, dispatch, date]
+      - [thirdparty, notification, date]
+      - [recorded, dispatch, date]
 
   - must_id: "item:A.7.3.7:reg_trigger_event"
     description: "Trigger event per row (which subject event caused the notification)"
     excerpt_keywords:
-      - [trigger, event, pii]
-      - [trigger, event, subject, pii]
-      - [event, subject, pii]
-      - [event, subject, event, pii]
-      - [subject, event, pii]
-      - [subject, event, caused, pii]
-      - [event, caused, pii]
-      - [event, caused, notification, pii]
+      - [trigger, event]
+      - [notification, triggered]
+      - [event, causing, notification]
+      - [notification, cause]
+      - [trigger, notification, event]
 
   - must_id: "item:A.7.3.7:reg_recipient"
     description: "Recipient third party per row"
     excerpt_keywords:
-      - [recipient, third, pii]
-      - [recipient, third, party, pii]
-      - [third, party, pii]
-      - [per, row, pii]
-      - [each, row, pii]
-      - [column, containing, pii]
-      - [each, entry, pii]
-      - [column, header, pii]
+      - [thirdparty, recipient]
+      - [recipient, contact]
+      - [thirdparty, name]
+      - [notification, recipient]
+      - [recipient, details]
 
   - must_id: "item:A.7.3.7:reg_notification_id"
     description: "Unique notification identifier per row"
     excerpt_keywords:
-      - [notification, id, pii]
-      - [unique, notification, pii]
-      - [unique, notification, identifier, pii]
-      - [notification, identifier, pii]
-      - [per, row, pii]
-      - [each, row, pii]
-      - [column, containing, pii]
-      - [each, entry, pii]
+      - [notification, identifier]
+      - [unique, notification, id]
+      - [thirdparty, notification, register]
+      - [notification, reference]
+      - [notification, record, id]
 

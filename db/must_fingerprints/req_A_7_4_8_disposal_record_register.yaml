@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.4.8:disposal_record_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.8:disposal_record_register"
@@ -15,57 +14,45 @@ must_fingerprints:
     description: "Disposal date per row"
     excerpt_keywords:
       - [disposal, date]
-      - [per, row, disposal]
-      - [each, row, disposal]
-      - [column, containing, disposal]
-      - [each, entry, disposal]
-      - [column, header, disposal]
+      - [record, disposal, date]
+      - [pii, disposal, date]
+      - [disposal, date, logged]
 
   - must_id: "item:A.7.4.8:reg_certificate_ref"
     description: "Disposal certificate / attestation reference per row"
     excerpt_keywords:
-      - [certificate, ref, disposal]
-      - [disposal, certificate]
-      - [disposal, certificate, attestation]
-      - [certificate, attestation, disposal]
-      - [certificate, attestation, reference, disposal]
-      - [attestation, reference, disposal]
-      - [per, row, disposal]
-      - [each, row, disposal]
+      - [disposal, certificate, reference]
+      - [attestation, reference, record]
+      - [pii, disposal, certificate]
+      - [certificate, reference, register]
+      - [disposal, record, reference]
 
   - must_id: "item:A.7.4.8:reg_technique"
     description: "Technique per row (cryptographic erase / overwrite / degaussing / shredding / provider attestation)"
     excerpt_keywords:
-      - [technique, cryptographic, disposal]
-      - [technique, cryptographic, erase, disposal]
-      - [cryptographic, erase, disposal]
-      - [cryptographic, erase, overwrite, disposal]
-      - [erase, overwrite, disposal]
-      - [erase, overwrite, degaussing, disposal]
-      - [overwrite, degaussing, disposal]
-      - [overwrite, degaussing, shredding, disposal]
+      - [disposal, technique]
+      - [pii, disposal, record]
+      - [cryptographic, erase]
+      - [data, overwrite]
+      - [degaussing, method]
+      - [provider, attestation]
 
   - must_id: "item:A.7.4.8:reg_media_type"
     description: "Media type per row (SSD / HDD / paper / tape / cloud volume)"
     excerpt_keywords:
-      - [media, ssd, disposal]
-      - [media, ssd, hdd, disposal]
-      - [ssd, hdd, disposal]
-      - [ssd, hdd, paper, disposal]
-      - [hdd, paper, disposal]
-      - [hdd, paper, tape, disposal]
-      - [paper, tape, disposal]
-      - [paper, tape, cloud, disposal]
+      - [media, type]
+      - [disposal, record]
+      - [pii, disposal]
+      - [ssd, hdd]
+      - [paper, tape]
+      - [cloud, volume]
 
   - must_id: "item:A.7.4.8:reg_action_id"
     description: "Unique disposal action identifier per row"
     excerpt_keywords:
-      - [action, id, disposal]
-      - [unique, disposal]
-      - [unique, disposal, action]
-      - [disposal, action]
       - [disposal, action, identifier]
-      - [action, identifier, disposal]
-      - [per, row, disposal]
-      - [each, row, disposal]
+      - [pii, disposal, record]
+      - [unique, disposal, id]
+      - [disposal, record, register]
+      - [action, id, record]
 

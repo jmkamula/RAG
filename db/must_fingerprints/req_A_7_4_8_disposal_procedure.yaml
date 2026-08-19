@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.4.8:disposal_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.8:disposal_procedure"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:A.7.4.8:proc_cross_link_a528"
     description: "Cross-link to A.5.28 evidence handling — disposal_record shape reused for evidence forensics"
     excerpt_keywords:
-      - [cross, a528, disposal]
-      - [cross, evidence, disposal]
-      - [cross, evidence, handling, disposal]
-      - [evidence, handling, disposal]
-      - [evidence, handling, disposal_record, disposal]
-      - [handling, disposal_record, disposal]
-      - [handling, disposal_record, shape, disposal]
-      - [disposal_record, shape, disposal]
+      - [disposal, procedure]
+      - [evidence, handling]
+      - [disposal, record]
+      - [forensics, evidence]
+      - [crosslink, a528]
+      - [record, disposal, evidence]
 
   - must_id: "item:A.7.4.8:proc_certificate"
     description: "Disposal certificate / attestation captured per action"
     excerpt_keywords:
       - [disposal, certificate]
-      - [disposal, certificate, attestation]
-      - [certificate, attestation, disposal]
-      - [certificate, attestation, captured, disposal]
-      - [attestation, captured, disposal]
-      - [attestation, captured, action, disposal]
-      - [captured, action, disposal]
-      - [procedure, step, disposal]
+      - [attestation, captured]
+      - [certificate, issued]
+      - [disposal, recorded]
+      - [action, attestation]
+      - [procedure, disposal, certificate]
 
   - must_id: "item:A.7.4.8:proc_media_lifecycle"
     description: "Media lifecycle coverage (production + backup + archive + failed hardware + decommissioned equipment)"
     excerpt_keywords:
-      - [media, lifecycle, disposal]
-      - [media, lifecycle, coverage, disposal]
-      - [lifecycle, coverage, disposal]
-      - [lifecycle, coverage, production, disposal]
-      - [coverage, production, disposal]
-      - [coverage, production, backup, disposal]
-      - [production, backup, disposal]
-      - [production, backup, archive, disposal]
+      - [media, lifecycle]
+      - [backup, archive]
+      - [decommissioned, equipment]
+      - [failed, hardware]
+      - [media, disposal]
+      - [production, media]
 
   - must_id: "item:A.7.4.8:proc_technique_selection"
     description: "Technique selection factors (nature + extent of PII + metadata associations + media characteristics)"
     excerpt_keywords:
-      - [technique, selection, disposal]
-      - [technique, selection, factors, disposal]
-      - [selection, factors, disposal]
-      - [selection, factors, nature, disposal]
-      - [factors, nature, disposal]
-      - [factors, nature, extent, disposal]
-      - [nature, extent, disposal]
-      - [nature, extent, pii, disposal]
+      - [technique, selection]
+      - [nature, extent, pii]
+      - [metadata, associations]
+      - [media, characteristics]
+      - [pii, disposal, procedure]
+      - [selection, factors]
 
   - must_id: "item:A.7.4.8:proc_technique_map"
     description: "Technique map per media type (electronic — cryptographic erase + overwrite / physical — shredding + degaussing / cloud — provider-attested)"
     excerpt_keywords:
-      - [technique, map, disposal]
-      - [technique, map, media, disposal]
-      - [map, media, disposal]
-      - [map, media, electronic, disposal]
-      - [media, electronic, disposal]
-      - [media, electronic, cryptographic, disposal]
-      - [electronic, cryptographic, disposal]
-      - [electronic, cryptographic, erase, disposal]
+      - [technique, media, type]
+      - [electronic, cryptographic, erase]
+      - [physical, shredding, degaussing]
+      - [cloud, provider, attested]
+      - [media, disposal, method]
 

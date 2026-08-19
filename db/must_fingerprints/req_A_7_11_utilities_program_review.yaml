@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.11:utilities_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.11:utilities_program_review"
@@ -14,59 +13,49 @@ must_fingerprints:
   - must_id: "item:A.7.11:rev_register_update"
     description: "Changes propagated to the register / procedure"
     excerpt_keywords:
-      - [changes, propagated, supporting]
-      - [per, revocation, supporting]
-      - [per, revoked, identity, supporting]
-      - [revocation, record, supporting]
-      - [review, findings, supporting]
-      - [audit, outcomes, supporting]
-      - [last, reviewed, supporting]
+      - [periodic, review]
+      - [register, update]
+      - [procedure, review]
+      - [changes, propagated]
+      - [review, date]
+      - [update, record]
 
   - must_id: "item:A.7.11:rev_vendor_sla"
     description: "Vendor-SLA review (response times against SLA, breach incidents)"
     excerpt_keywords:
-      - [vendor, sla, supporting]
-      - [vendor, sla, review, supporting]
-      - [sla, review, supporting]
-      - [sla, review, response, supporting]
-      - [review, response, supporting]
-      - [review, response, times, supporting]
-      - [response, times, supporting]
-      - [response, times, against, supporting]
+      - [vendor, sla, review]
+      - [sla, response, times]
+      - [breach, incidents]
+      - [periodic, review]
+      - [reviewed, against, sla]
 
   - must_id: "item:A.7.11:rev_test_outcomes"
     description: "Per-utility test outcomes review (UPS/generator tests in period — pass/fail/remediation)"
     excerpt_keywords:
-      - [test, outcomes, supporting]
-      - [utility, test, supporting]
-      - [utility, test, outcomes, supporting]
-      - [test, outcomes, review, supporting]
-      - [outcomes, review, supporting]
-      - [outcomes, review, ups, supporting]
-      - [review, ups, supporting]
-      - [review, ups, generator, supporting]
+      - [test, outcomes]
+      - [periodic, review]
+      - [ups, generator, tests]
+      - [pass, fail]
+      - [remediation, actions]
+      - [utility, test, results]
 
   - must_id: "item:A.7.11:rev_reviewer"
     description: "Reviewer identity (Facilities + InfoSec + BCP lead)"
     excerpt_keywords:
-      - [reviewer, identity, supporting]
-      - [reviewer, identity, facilities, supporting]
-      - [identity, facilities, supporting]
-      - [identity, facilities, infosec, supporting]
-      - [facilities, infosec, supporting]
-      - [facilities, infosec, bcp, supporting]
-      - [infosec, bcp, supporting]
-      - [infosec, bcp, lead, supporting]
+      - [reviewer, identity]
+      - [facilities, reviewer]
+      - [infosec, reviewer]
+      - [bcp, lead]
+      - [review, lead]
+      - [reviewed, facilities]
 
   - must_id: "item:A.7.11:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, supporting]
-      - [review, date, within, supporting]
-      - [date, within, supporting]
-      - [date, within, planned, supporting]
-      - [within, planned, supporting]
-      - [within, planned, interval, supporting]
-      - [planned, interval, supporting]
-      - [per, revocation, supporting]
+      - [review, date]
+      - [planned, interval]
+      - [periodic, review]
+      - [review, within, interval]
+      - [scheduled, review]
+      - [review, frequency]
 

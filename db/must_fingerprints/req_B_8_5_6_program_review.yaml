@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.5.6:program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.6:program_review"
@@ -14,48 +13,40 @@ must_fingerprints:
   - must_id: "item:B.8.5.6:rev_content_audit"
     description: "Content audit — sampled disclosures include countries + obligations mechanism"
     excerpt_keywords:
-      - [content, audit, disclosure]
-      - [content, audit, sampled, disclosure]
-      - [audit, sampled, disclosure]
-      - [audit, sampled, disclosures, disclosure]
-      - [sampled, disclosures, disclosure]
-      - [sampled, disclosures, include, disclosure]
-      - [disclosures, include, disclosure]
-      - [disclosures, include, countries, disclosure]
+      - [content, audit]
+      - [sampled, disclosures]
+      - [disclosures, include, countries]
+      - [obligations, mechanism]
+      - [review, content]
+      - [audit, sample]
 
   - must_id: "item:B.8.5.6:rev_pre_use_audit"
     description: "Pre-use audit — sampled subcontractor onboardings verified against disclosure record"
     excerpt_keywords:
-      - [pre, use, audit, disclosure]
-      - [pre, use, disclosure]
-      - [use, audit, disclosure]
-      - [use, audit, sampled, disclosure]
-      - [audit, sampled, disclosure]
-      - [audit, sampled, subcontractor, disclosure]
-      - [sampled, subcontractor, disclosure]
-      - [sampled, subcontractor, onboardings, disclosure]
+      - [preuse, audit]
+      - [subcontractor, onboarding]
+      - [disclosure, record]
+      - [sampled, subcontractor]
+      - [audit, verified]
+      - [onboarding, verified]
 
   - must_id: "item:B.8.5.6:rev_reviewer"
     description: "Reviewer identity (Trust + Legal + DPO)"
     excerpt_keywords:
-      - [reviewer, identity, disclosure]
-      - [reviewer, identity, trust, disclosure]
-      - [identity, trust, disclosure]
-      - [identity, trust, legal, disclosure]
-      - [trust, legal, disclosure]
-      - [trust, legal, dpo, disclosure]
-      - [legal, dpo, disclosure]
-      - [per, revocation, disclosure]
+      - [reviewer, identity]
+      - [reviewed, dpo]
+      - [trust, legal, reviewer]
+      - [review, conducted, dpo]
+      - [legal, compliance, review]
+      - [dpo, responsible, review]
 
   - must_id: "item:B.8.5.6:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, disclosure]
-      - [review, date, within, disclosure]
-      - [date, within, disclosure]
-      - [date, within, planned, disclosure]
-      - [within, planned, disclosure]
-      - [within, planned, interval, disclosure]
-      - [planned, interval, disclosure]
-      - [per, revocation, disclosure]
+      - [review, date]
+      - [planned, interval]
+      - [review, interval]
+      - [next, review]
+      - [review, within]
+      - [review, scheduled]
 

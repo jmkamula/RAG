@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:6.1.1:planning_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:6.1.1:planning_program_review"
@@ -14,60 +13,48 @@ must_fingerprints:
   - must_id: "item:6.1.1:rev_effectiveness"
     description: "Effectiveness summary across completed actions"
     excerpt_keywords:
-      - [effectiveness, summary, general]
-      - [effectiveness, summary, across, general]
-      - [summary, across, general]
-      - [summary, across, completed, general]
-      - [across, completed, general]
-      - [across, completed, actions, general]
-      - [completed, actions, general]
-      - [per, revocation, general]
+      - [effectiveness, summary]
+      - [completed, actions]
+      - [review, effectiveness]
+      - [action, completion]
+      - [program, review]
+      - [effectiveness, assessment]
 
   - must_id: "item:6.1.1:rev_register_currency"
     description: "Action register currency check — every row reviewed for status + relevance"
     excerpt_keywords:
-      - [action, currency, general]
-      - [action, currency, check, general]
-      - [currency, check, general]
-      - [currency, check, every, general]
-      - [check, every, general]
-      - [check, every, reviewed, general]
-      - [every, reviewed, general]
-      - [every, reviewed, status, general]
+      - [register, currency]
+      - [reviewed, status]
+      - [action, register]
+      - [currency, check]
+      - [row, reviewed, relevance]
 
   - must_id: "item:6.1.1:rev_inputs_currency"
     description: "Inputs currency check — 4.1 + 4.2 reviewed before this planning cycle"
     excerpt_keywords:
-      - [inputs, currency, general]
-      - [inputs, currency, check, general]
-      - [currency, check, general]
-      - [currency, check, reviewed, general]
-      - [check, reviewed, general]
-      - [check, reviewed, before, general]
-      - [reviewed, before, general]
-      - [reviewed, before, planning, general]
+      - [inputs, currency]
+      - [planning, cycle, review]
+      - [reviewed, before, cycle]
+      - [section, 4.1, 4.2]
+      - [inputs, review, currency]
 
   - must_id: "item:6.1.1:rev_reviewer"
     description: "Reviewer identity (ISMS Manager + executive sponsor)"
     excerpt_keywords:
-      - [reviewer, identity, general]
-      - [reviewer, identity, isms, general]
-      - [identity, isms, general]
-      - [identity, isms, manager, general]
-      - [isms, manager, general]
-      - [isms, manager, executive, general]
-      - [manager, executive, general]
-      - [manager, executive, sponsor, general]
+      - [reviewer, identity]
+      - [isms, manager]
+      - [executive, sponsor]
+      - [review, performed]
+      - [review, manager]
+      - [review, conducted, sponsor]
 
   - must_id: "item:6.1.1:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, general]
-      - [review, date, within, general]
-      - [date, within, general]
-      - [date, within, planned, general]
-      - [within, planned, general]
-      - [within, planned, interval, general]
-      - [planned, interval, general]
-      - [per, revocation, general]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [review, scheduled]
+      - [review, period]
 

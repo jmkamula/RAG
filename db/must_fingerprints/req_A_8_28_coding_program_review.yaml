@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.8.28:coding_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.28:coding_program_review"
@@ -14,60 +13,47 @@ must_fingerprints:
   - must_id: "item:A.8.28:rev_findings_update"
     description: "Findings propagated to language standards / training"
     excerpt_keywords:
-      - [findings, update, secure]
-      - [findings, propagated, secure]
-      - [findings, propagated, language, secure]
-      - [propagated, language, secure]
-      - [propagated, language, standards, secure]
-      - [language, standards, secure]
-      - [language, standards, training, secure]
-      - [standards, training, secure]
+      - [findings, update]
+      - [secure, coding, review]
+      - [training, updated]
+      - [language, standards]
+      - [review, findings]
+      - [program, review]
 
   - must_id: "item:A.8.28:rev_tooling_currency"
     description: "Tooling-stack currency (SAST / SCA rules current; new tooling adopted)"
     excerpt_keywords:
-      - [tooling, currency, secure]
-      - [tooling, stack, secure]
-      - [tooling, stack, currency, secure]
-      - [stack, currency, secure]
-      - [stack, currency, sast, secure]
-      - [currency, sast, secure]
-      - [currency, sast, sca, secure]
-      - [sast, sca, secure]
+      - [tooling, currency]
+      - [sast, sca, rules]
+      - [tooling, adopted]
+      - [periodic, review]
+      - [secure, coding, review]
 
   - must_id: "item:A.8.28:rev_finding_patterns"
     description: "Finding-pattern trending (recurring patterns → training / tooling action)"
     excerpt_keywords:
-      - [finding, patterns, secure]
-      - [finding, pattern, secure]
-      - [finding, pattern, trending, secure]
-      - [pattern, trending, secure]
-      - [pattern, trending, recurring, secure]
-      - [trending, recurring, secure]
-      - [trending, recurring, patterns, secure]
-      - [recurring, patterns, secure]
+      - [finding pattern, trend]
+      - [recurring, finding pattern]
+      - [pattern, analysis, review]
+      - [training, action]
+      - [tooling, improvement]
+      - [periodic, secure coding, review]
 
   - must_id: "item:A.8.28:rev_reviewer"
     description: "Reviewer identity (Engineering leads + Security Champions)"
     excerpt_keywords:
-      - [reviewer, identity, secure]
-      - [reviewer, identity, engineering, secure]
-      - [identity, engineering, secure]
-      - [identity, engineering, leads, secure]
-      - [engineering, leads, secure]
-      - [engineering, leads, security, secure]
-      - [leads, security, secure]
-      - [leads, security, champions, secure]
+      - [reviewer, identity]
+      - [engineering, lead, review]
+      - [security, champion, review]
+      - [review, conducted]
+      - [review, performed]
 
   - must_id: "item:A.8.28:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, secure]
-      - [review, date, within, secure]
-      - [date, within, secure]
-      - [date, within, planned, secure]
-      - [within, planned, secure]
-      - [within, planned, interval, secure]
-      - [planned, interval, secure]
-      - [per, revocation, secure]
+      - [review, date]
+      - [planned, interval]
+      - [periodic, review]
+      - [review, within, interval]
+      - [scheduled, review, date]
 

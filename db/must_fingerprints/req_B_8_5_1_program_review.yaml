@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.5.1:program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.1:program_review"
@@ -14,48 +13,38 @@ must_fingerprints:
   - must_id: "item:B.8.5.1:rev_basis_currency"
     description: "Basis currency — Art.45 adequacy currency + Art.46 SCC version currency"
     excerpt_keywords:
-      - [basis, currency]
-      - [basis, currency, art]
-      - [currency, art, basis]
-      - [currency, art, adequacy, basis]
-      - [art, adequacy, basis]
-      - [art, adequacy, currency, basis]
-      - [adequacy, currency, basis]
-      - [adequacy, currency, art, basis]
+      - [art45, adequacy, currency]
+      - [art46, scc, version]
+      - [transfer, basis, review]
+      - [review, date]
+      - [adequacy, decision]
+      - [standard, contractual, clauses]
 
   - must_id: "item:B.8.5.1:rev_notification_audit"
     description: "Notification audit — advance-notification obligations verified for all changes since last review"
     excerpt_keywords:
-      - [notification, audit, basis]
-      - [notification, audit, advance, basis]
-      - [audit, advance, basis]
-      - [audit, advance, notification, basis]
-      - [advance, notification, basis]
-      - [advance, notification, obligations, basis]
-      - [notification, obligations, basis]
-      - [notification, obligations, verified, basis]
+      - [notification, audit]
+      - [advance, notification, obligations]
+      - [changes, since, last, review]
+      - [review, date]
+      - [audit, verified]
+      - [notification, requirements]
 
   - must_id: "item:B.8.5.1:rev_reviewer"
     description: "Reviewer identity (DPO + Legal + Trust)"
     excerpt_keywords:
-      - [reviewer, identity, basis]
-      - [reviewer, identity, dpo, basis]
-      - [identity, dpo, basis]
-      - [identity, dpo, legal, basis]
-      - [dpo, legal, basis]
-      - [dpo, legal, trust, basis]
-      - [legal, trust, basis]
-      - [per, revocation, basis]
+      - [reviewer, identity]
+      - [dpo, legal, trust]
+      - [review, conducted]
+      - [review, performed]
+      - [review, team, members]
 
   - must_id: "item:B.8.5.1:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, basis]
-      - [review, date, within, basis]
-      - [date, within, basis]
-      - [date, within, planned, basis]
-      - [within, planned, basis]
-      - [within, planned, interval, basis]
-      - [planned, interval, basis]
-      - [per, revocation, basis]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [scheduled, review, date]
 

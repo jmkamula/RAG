@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.2.1:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.1:applicable_scope"
@@ -14,36 +13,28 @@ must_fingerprints:
   - must_id: "item:A.7.2.1:scope_exclusions"
     description: "Out-of-scope activities (anonymous analytics, aggregate reporting) with rationale"
     excerpt_keywords:
-      - [out, scope, identify]
-      - [out, scope, activities, identify]
-      - [scope, activities, identify]
-      - [scope, activities, anonymous, identify]
-      - [activities, anonymous, identify]
-      - [activities, anonymous, analytics, identify]
-      - [anonymous, analytics, identify]
-      - [anonymous, analytics, aggregate, identify]
+      - [outofscope, activities]
+      - [anonymous, analytics]
+      - [aggregate, reporting]
+      - [scope, exclusions]
+      - [excluded, activities]
+      - [rationale, provided]
 
   - must_id: "item:A.7.2.1:scope_pii_test"
     description: "Operational test for 'involves PII processing' (identifiability + processing operation)"
     excerpt_keywords:
-      - [pii, test, identify]
-      - [operational, test, identify]
-      - [operational, test, involves, identify]
-      - [test, involves, identify]
-      - [test, involves, pii, identify]
-      - [involves, pii, identify]
-      - [involves, pii, processing, identify]
-      - [pii, processing, identify]
+      - [involves, pii, processing]
+      - [personal, identifiable, information]
+      - [scope, processing, activities]
+      - [processing, operation, pii]
+      - [applicable, processing, scope]
 
   - must_id: "item:A.7.2.1:scope_activities"
     description: "In-scope processing activities enumerated"
     excerpt_keywords:
-      - [scope, processing, identify]
-      - [scope, processing, activities, identify]
-      - [processing, activities, identify]
-      - [processing, activities, enumerated, identify]
-      - [activities, enumerated, identify]
-      - [in, scope, identify]
-      - [scope, includes, identify]
-      - [applicable, to, identify]
+      - [processing, activities]
+      - [scope]
+      - [scope, activities]
+      - [applicable, processing]
+      - [activities, enumerated]
 

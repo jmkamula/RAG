@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.42:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.42:applicable_scope"
@@ -14,36 +13,28 @@ must_fingerprints:
   - must_id: "item:Art.42:scope_business_case"
     description: "Business case (customer requirement / Art.46.2.f transfer safeguard / market differentiation)"
     excerpt_keywords:
-      - [business, case, certification]
-      - [business, case, customer, certification]
-      - [case, customer, certification]
-      - [case, customer, requirement, certification]
-      - [customer, requirement, certification]
-      - [customer, requirement, art, certification]
-      - [requirement, art, certification]
-      - [requirement, art, transfer, certification]
+      - [business, case]
+      - [customer, requirement]
+      - [transfer, safeguard]
+      - [art46, transfer]
+      - [market, differentiation]
+      - [applicable, certification, scope]
 
   - must_id: "item:Art.42:scope_target_processing"
     description: "Target processing activities for certification"
     excerpt_keywords:
-      - [target, processing, certification]
-      - [target, processing, activities, certification]
-      - [processing, activities, certification]
-      - [processing, activities, certification]
-      - [activities, certification]
-      - [in, scope, certification]
-      - [scope, includes, certification]
-      - [applicable, to, certification]
+      - [certification, scope]
+      - [target, processing, activities]
+      - [processing, activities, covered]
+      - [scope, applies, processing]
+      - [certification, applies, activities]
 
   - must_id: "item:Art.42:scope_schemes_available"
     description: "Available approved schemes enumerated"
     excerpt_keywords:
-      - [schemes, available, certification]
-      - [available, approved, certification]
-      - [available, approved, schemes, certification]
-      - [approved, schemes, certification]
-      - [approved, schemes, enumerated, certification]
-      - [schemes, enumerated, certification]
-      - [in, scope, certification]
-      - [scope, includes, certification]
+      - [approved, certification, schemes]
+      - [available, certification, schemes]
+      - [certification, schemes, enumerated]
+      - [list, approved, schemes]
+      - [scope, certification, schemes]
 

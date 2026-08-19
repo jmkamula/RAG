@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.3.9:master_request_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.9:master_request_register"
@@ -14,58 +13,45 @@ must_fingerprints:
   - must_id: "item:A.7.3.9:reg_sla_met_flag"
     description: "SLA-met flag per row (auditor-critical timeliness proof)"
     excerpt_keywords:
-      - [sla, met, flag, handling]
-      - [sla, met, handling]
-      - [met, flag, handling]
-      - [met, flag, auditor, handling]
-      - [flag, auditor, handling]
-      - [flag, auditor, critical, handling]
-      - [auditor, critical, handling]
-      - [auditor, critical, timeliness, handling]
+      - [sla, flag]
+      - [request, sla, met]
+      - [timeliness, proof]
+      - [subject, request, record]
+      - [sla, met, indicator]
 
   - must_id: "item:A.7.3.9:reg_routing"
     description: "Routing per row (which sub-procedure handled it)"
     excerpt_keywords:
-      - [routing, sub, handling]
-      - [routing, sub, handled, handling]
-      - [sub, handled, handling]
-      - [per, row, handling]
-      - [each, row, handling]
-      - [column, containing, handling]
-      - [each, entry, handling]
-      - [column, header, handling]
+      - [subject, request, register]
+      - [routing, per, row]
+      - [handled, procedure]
+      - [subprocedure, recorded]
+      - [request, routing, details]
 
   - must_id: "item:A.7.3.9:reg_classified_type"
     description: "Classified type per row (access / correction / erasure / portability / restriction / objection / complaint / other)"
     excerpt_keywords:
-      - [classified, access, handling]
-      - [classified, access, correction, handling]
-      - [access, correction, handling]
-      - [access, correction, erasure, handling]
-      - [correction, erasure, handling]
-      - [correction, erasure, portability, handling]
-      - [erasure, portability, handling]
-      - [erasure, portability, restriction, handling]
+      - [subject, request, type]
+      - [request, category, record]
+      - [access, correction, erasure]
+      - [portability, restriction, objection]
+      - [complaint, request, logged]
 
   - must_id: "item:A.7.3.9:reg_intake_channel"
     description: "Intake channel per row"
     excerpt_keywords:
-      - [intake, channel, handling]
-      - [per, row, handling]
-      - [each, row, handling]
-      - [column, containing, handling]
-      - [each, entry, handling]
-      - [column, header, handling]
+      - [intake, channel]
+      - [request, intake, method]
+      - [subject, request, channel]
+      - [recorded, intake, source]
+      - [intake, channel, logged]
 
   - must_id: "item:A.7.3.9:reg_request_id"
     description: "Unique request identifier per row"
     excerpt_keywords:
-      - [request, id, handling]
-      - [unique, request, handling]
-      - [unique, request, identifier, handling]
-      - [request, identifier, handling]
-      - [per, row, handling]
-      - [each, row, handling]
-      - [column, containing, handling]
-      - [each, entry, handling]
+      - [request, identifier]
+      - [unique, request, id]
+      - [subject, request, reference]
+      - [request, id, column]
+      - [master, request, register]
 

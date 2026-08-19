@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.15:dsar_handling_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.15:dsar_handling_procedure"
@@ -12,98 +11,80 @@ target_standard: "GDPR:2016/679"
 
 must_fingerprints:
   - must_id: "item:Art.15:proc_identity_pair_30"
-    description: "Bidirectional Art.15 ↔ Art.30 pair MUST — every system listed in the data flow inventory is reachable by DSAR fulfilment, and every system r"
+    description: "Bidirectional Art.15 ↔ Art.30 pair MUST — every system listed in the data flow inventory is reachable by DSAR fulfilment, and every system reached by fulfilment is captured in the inventory (closes th"
     excerpt_keywords:
-      - [identity, pair, 30, right]
-      - [bidirectional, art, right]
-      - [bidirectional, art, art, right]
-      - [art, art, right]
-      - [art, art, pair, right]
-      - [art, pair, right]
-      - [art, pair, every, right]
-      - [pair, every, right]
+      - [dsar, fulfilment]
+      - [data, flow, inventory]
+      - [system, listed]
+      - [system, reachable]
+      - [fulfilment, captured]
+      - [inventory, updated]
 
   - must_id: "item:Art.15:proc_inventory_link"
-    description: "Linkage to the data flow inventory (req:Art.30:data_flow_inventory) — fulfillment cannot operate without knowing where personal data lives; "
+    description: "Linkage to the data flow inventory (req:Art.30:data_flow_inventory) — fulfillment cannot operate without knowing where personal data lives; the procedure must name the inventory as the authoritative s"
     excerpt_keywords:
-      - [linkage, flow, right]
-      - [linkage, flow, inventory, right]
-      - [flow, inventory, right]
-      - [flow, inventory, req, right]
-      - [inventory, req, right]
-      - [inventory, req, art, right]
-      - [req, art, right]
-      - [req, art, data_flow_inventory, right]
+      - [link, data flow, inventory]
+      - [procedure, name, inventory]
+      - [fulfillment, data, inventory]
+      - [data, flow, authoritative source]
+      - [access, data flow, inventory]
 
   - must_id: "item:Art.15:proc_exceptions"
     description: "Exception handling: manifestly unfounded/excessive requests (Art.12.5), and partial response where rights of others apply (Art.15.4)"
     excerpt_keywords:
-      - [exception, handling, right]
-      - [exception, handling, manifestly, right]
-      - [handling, manifestly, right]
-      - [handling, manifestly, unfounded, right]
-      - [manifestly, unfounded, right]
-      - [manifestly, unfounded, excessive, right]
-      - [unfounded, excessive, right]
-      - [unfounded, excessive, requests, right]
+      - [manifestly, unfounded, request]
+      - [excessive, data, request]
+      - [partial, response, request]
+      - [rights, others]
+      - [exception, handling, request]
+      - [art15, paragraph, four]
 
   - must_id: "item:Art.15:proc_format"
     description: "Default response format (electronic where request was electronic, structured layout for readability)"
     excerpt_keywords:
-      - [default, response, right]
-      - [default, response, format, right]
-      - [response, format, right]
-      - [response, format, electronic, right]
-      - [format, electronic, right]
-      - [format, electronic, request, right]
-      - [electronic, request, right]
-      - [electronic, request, electronic, right]
+      - [response, format]
+      - [electronic, request]
+      - [structured, layout]
+      - [default, response]
+      - [request, format]
 
   - must_id: "item:Art.15:proc_timing"
     description: "One-month timing clock from receipt, with the Art.12.3 two-month extension procedure (when justified, how notified)"
     excerpt_keywords:
-      - [one, month, right]
-      - [one, month, timing, right]
-      - [month, timing, right]
-      - [month, timing, clock, right]
-      - [timing, clock, right]
-      - [timing, clock, receipt, right]
-      - [clock, receipt, right]
-      - [clock, receipt, art, right]
+      - [one month, receipt]
+      - [two month, extension]
+      - [extension, procedure]
+      - [justified, extension]
+      - [notify, data subject]
+      - [art 12 3, extension]
 
   - must_id: "item:Art.15:proc_fulfillment"
     description: "Fulfillment steps — who searches which systems against the data flow inventory to assemble the response"
     excerpt_keywords:
-      - [fulfillment, steps, right]
-      - [fulfillment, steps, searches, right]
-      - [steps, searches, right]
-      - [steps, searches, against, right]
-      - [searches, against, right]
-      - [searches, against, flow, right]
-      - [against, flow, right]
-      - [against, flow, inventory, right]
+      - [fulfill, data, request]
+      - [search, systems, inventory]
+      - [assemble, response, data]
+      - [responsible, search]
+      - [data, flow, inventory]
+      - [request, fulfillment, steps]
 
   - must_id: "item:Art.15:proc_identity"
     description: "Identity verification approach stated, proportionate to data sensitivity (reasonable doubts trigger, Art.12.6)"
     excerpt_keywords:
-      - [identity, verification, right]
-      - [identity, verification, approach, right]
-      - [verification, approach, right]
-      - [verification, approach, stated, right]
-      - [approach, stated, right]
-      - [approach, stated, proportionate, right]
-      - [stated, proportionate, right]
-      - [stated, proportionate, sensitivity, right]
+      - [identity, verification]
+      - [verify, data, subject]
+      - [reasonable, doubts]
+      - [proportionate, verification]
+      - [triggered, doubts]
+      - [identity, check, procedure]
 
   - must_id: "item:Art.15:proc_intake"
     description: "Intake channels for DSARs enumerated (web form, email, post, in-person) and a single point of receipt named"
     excerpt_keywords:
-      - [intake, channels, right]
-      - [intake, channels, dsars, right]
-      - [channels, dsars, right]
-      - [channels, dsars, enumerated, right]
-      - [dsars, enumerated, right]
-      - [dsars, enumerated, web, right]
-      - [enumerated, web, right]
-      - [enumerated, web, form, right]
+      - [intake, channel]
+      - [data, subject, access]
+      - [single, point, receipt]
+      - [dsar, received]
+      - [web, form]
+      - [email, post]
 

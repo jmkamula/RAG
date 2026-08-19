@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.2.5:program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.5:program_review"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:A.7.2.5:rev_sa_consultation_audit"
     description: "SA-consultation audit — high-residual-risk PIAs verified to have escalated where required"
     excerpt_keywords:
-      - [sa, consultation, audit, privacy]
-      - [consultation, audit, privacy]
-      - [consultation, audit, high, privacy]
-      - [audit, high, privacy]
-      - [audit, high, residual, privacy]
-      - [high, residual, privacy]
-      - [high, residual, risk, privacy]
-      - [residual, risk, privacy]
+      - [privacy impact, residual risk]
+      - [pia, escalated, required]
+      - [consultation, audit]
+      - [high residual, risk pia]
+      - [pia, review, audit]
 
   - must_id: "item:A.7.2.5:rev_currency_audit"
     description: "Currency audit — PIAs older than currency threshold reviewed for material change"
     excerpt_keywords:
-      - [currency, audit, privacy]
-      - [currency, audit, pias, privacy]
-      - [audit, pias, privacy]
-      - [audit, pias, older, privacy]
-      - [pias, older, privacy]
-      - [pias, older, than, privacy]
-      - [older, than, privacy]
-      - [older, than, currency, privacy]
+      - [privacy impact, currency audit]
+      - [pia, material change]
+      - [reviewed, currency threshold]
+      - [pia, older, threshold]
+      - [audit, material change]
+      - [review, pia, currency]
 
   - must_id: "item:A.7.2.5:rev_coverage_check"
     description: "Coverage check — every triggered activity has a completed PIA on file"
     excerpt_keywords:
-      - [coverage, check, privacy]
-      - [coverage, check, every, privacy]
-      - [check, every, privacy]
-      - [check, every, triggered, privacy]
-      - [every, triggered, privacy]
-      - [every, triggered, activity, privacy]
-      - [triggered, activity, privacy]
-      - [triggered, activity, has, privacy]
+      - [privacy impact, assessment completed]
+      - [pia, completed, file]
+      - [triggered, activity, pia]
+      - [coverage, check, pia]
+      - [pia, on file]
+      - [completed, pia, record]
 
   - must_id: "item:A.7.2.5:rev_reviewer"
     description: "Reviewer identity (DPO + risk owner)"
     excerpt_keywords:
-      - [reviewer, identity, privacy]
-      - [reviewer, identity, dpo, privacy]
-      - [identity, dpo, privacy]
-      - [identity, dpo, risk, privacy]
-      - [dpo, risk, privacy]
-      - [dpo, risk, owner, privacy]
-      - [risk, owner, privacy]
-      - [per, revocation, privacy]
+      - [reviewer identity]
+      - [data protection officer]
+      - [dpo and risk]
+      - [reviewed by dpo]
+      - [risk owner]
+      - [reviewer and owner]
 
   - must_id: "item:A.7.2.5:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, privacy]
-      - [review, date, within, privacy]
-      - [date, within, privacy]
-      - [date, within, planned, privacy]
-      - [within, planned, privacy]
-      - [within, planned, interval, privacy]
-      - [planned, interval, privacy]
-      - [per, revocation, privacy]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [review, scheduled]
+      - [review, period]
 

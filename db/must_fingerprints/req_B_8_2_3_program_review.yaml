@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.2.3:program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.3:program_review"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:B.8.2.3:rev_exception_audit"
     description: "Exception audit — any registered exceptions still defensible + consent evidence current"
     excerpt_keywords:
-      - [exception, audit, marketing]
-      - [exception, audit, registered, marketing]
-      - [audit, registered, marketing]
-      - [audit, registered, exceptions, marketing]
-      - [registered, exceptions, marketing]
-      - [registered, exceptions, still, marketing]
-      - [exceptions, still, marketing]
-      - [exceptions, still, defensible, marketing]
+      - [exception audit]
+      - [registered exceptions]
+      - [consent evidence]
+      - [audit reviewed]
+      - [exceptions still]
+      - [review date]
 
   - must_id: "item:B.8.2.3:rev_conditionality_check"
     description: "No-conditionality regression check — signup / renewal / support flows not gated on marketing consent"
     excerpt_keywords:
-      - [conditionality, check, marketing]
-      - [conditionality, regression, marketing]
-      - [conditionality, regression, check, marketing]
-      - [regression, check, marketing]
-      - [regression, check, signup, marketing]
-      - [check, signup, marketing]
-      - [check, signup, renewal, marketing]
-      - [signup, renewal, marketing]
+      - [marketing, consent]
+      - [signup, flow]
+      - [renewal, flow]
+      - [support, flow]
+      - [consent, not, gated]
+      - [conditionality, check]
 
   - must_id: "item:B.8.2.3:rev_isolation_audit"
     description: "Isolation audit — marketing systems verified to use own-controller PII only"
     excerpt_keywords:
-      - [isolation, audit, marketing]
-      - [isolation, audit, marketing]
-      - [audit, marketing]
-      - [audit, marketing, verified]
-      - [marketing, verified]
-      - [marketing, verified, use]
-      - [verified, use, marketing]
-      - [verified, use, own, marketing]
+      - [isolation, audit]
+      - [marketing, systems, verified]
+      - [owncontroller, pii]
+      - [audit, marketing, pii]
+      - [verified, use, pii]
 
   - must_id: "item:B.8.2.3:rev_reviewer"
     description: "Reviewer identity (DPO + Marketing Lead)"
     excerpt_keywords:
-      - [reviewer, identity, marketing]
-      - [reviewer, identity, dpo, marketing]
-      - [identity, dpo, marketing]
-      - [identity, dpo, marketing]
-      - [dpo, marketing]
-      - [dpo, marketing, lead]
+      - [reviewer, identity]
+      - [data, protection, officer]
       - [marketing, lead]
-      - [per, revocation, marketing]
+      - [review, conducted]
+      - [review, dpo]
+      - [review, marketing]
 
   - must_id: "item:B.8.2.3:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, marketing]
-      - [review, date, within, marketing]
-      - [date, within, marketing]
-      - [date, within, planned, marketing]
-      - [within, planned, marketing]
-      - [within, planned, interval, marketing]
-      - [planned, interval, marketing]
-      - [per, revocation, marketing]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, period]
+      - [review, schedule]
+      - [review, frequency]
 

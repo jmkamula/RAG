@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.6.4:disciplinary_process
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.6.4:disciplinary_process"
@@ -14,83 +13,67 @@ must_fingerprints:
   - must_id: "item:A.6.4:owner"
     description: "Named owner of the procedure (HR with InfoSec partner)"
     excerpt_keywords:
-      - [named, owner, disciplinary]
-      - [named, owner, infosec, disciplinary]
-      - [owner, infosec, disciplinary]
-      - [owner, infosec, partner, disciplinary]
-      - [infosec, partner, disciplinary]
-      - [procedure, step, disciplinary]
-      - [responsibility, of, disciplinary]
+      - [named, owner]
+      - [procedure, owner]
+      - [hr, partner]
+      - [information, security, owner]
+      - [responsible, procedure]
 
   - must_id: "item:A.6.4:communicated"
     description: "Communicated to personnel and interested parties (in employment contract, code of conduct, intranet, awareness training)"
     excerpt_keywords:
-      - [communicated, personnel, disciplinary]
-      - [communicated, personnel, interested, disciplinary]
-      - [personnel, interested, disciplinary]
-      - [personnel, interested, parties, disciplinary]
-      - [interested, parties, disciplinary]
-      - [interested, parties, employment, disciplinary]
-      - [parties, employment, disciplinary]
-      - [parties, employment, contract, disciplinary]
+      - [communicated, personnel]
+      - [employment, contract]
+      - [code, conduct]
+      - [intranet, access]
+      - [awareness, training]
+      - [interested, parties]
 
   - must_id: "item:A.6.4:action_range"
     description: "Range of actions defined (verbal warning, written warning, suspension, termination, legal referral, regulator notification where mandatory)"
     excerpt_keywords:
-      - [action, range, disciplinary]
-      - [range, actions, disciplinary]
-      - [range, actions, defined, disciplinary]
-      - [actions, defined, disciplinary]
-      - [actions, defined, verbal, disciplinary]
-      - [defined, verbal, disciplinary]
-      - [defined, verbal, warning, disciplinary]
-      - [verbal, warning, disciplinary]
+      - [verbal, warning]
+      - [written, warning]
+      - [suspension, termination]
+      - [legal, referral]
+      - [regulator, notification]
 
   - must_id: "item:A.6.4:decision_authority"
     description: "Decision authority named (HR + line management + Legal as appropriate; escalation to executive for senior personnel)"
     excerpt_keywords:
-      - [decision, authority, disciplinary]
-      - [decision, authority, named, disciplinary]
-      - [authority, named, disciplinary]
-      - [authority, named, line, disciplinary]
-      - [named, line, disciplinary]
-      - [named, line, management, disciplinary]
-      - [line, management, disciplinary]
-      - [line, management, legal, disciplinary]
+      - [decision, authority]
+      - [hr, line, management]
+      - [legal, review]
+      - [escalation, executive]
+      - [senior, personnel, decision]
 
   - must_id: "item:A.6.4:investigation_step"
     description: "Investigation step before action, with right of explanation (procedural fairness — drives employment-tribunal defensibility)"
     excerpt_keywords:
-      - [investigation, step, disciplinary]
-      - [investigation, step, before, disciplinary]
-      - [step, before, disciplinary]
-      - [step, before, action, disciplinary]
-      - [before, action, disciplinary]
-      - [before, action, right, disciplinary]
-      - [action, right, disciplinary]
-      - [action, right, explanation, disciplinary]
+      - [investigation, step]
+      - [right, explanation]
+      - [procedural, fairness]
+      - [disciplinary, process]
+      - [employment, tribunal]
+      - [investigation, before, action]
 
   - must_id: "item:A.6.4:violation_scope"
-    description: "Scope of violations covered (policy breach, negligence, deliberate misuse, repeated non-compliance with awareness training, deliberate circu"
+    description: "Scope of violations covered (policy breach, negligence, deliberate misuse, repeated non-compliance with awareness training, deliberate circumvention of security controls)"
     excerpt_keywords:
-      - [violation, scope, disciplinary]
-      - [scope, violations, disciplinary]
-      - [scope, violations, covered, disciplinary]
-      - [violations, covered, disciplinary]
-      - [violations, covered, breach, disciplinary]
-      - [covered, breach, disciplinary]
-      - [covered, breach, negligence, disciplinary]
-      - [breach, negligence, disciplinary]
+      - [policy, breach]
+      - [deliberate, misuse]
+      - [repeated, noncompliance]
+      - [security, controls, circumvention]
+      - [awareness, training, noncompliance]
+      - [negligence, violation]
 
   - must_id: "item:A.6.4:formalised"
-    description: "Formalised in writing with HR + Legal review (drives consistent application; ad-hoc disciplinary action is a fairness / employment-tribunal "
+    description: "Formalised in writing with HR + Legal review (drives consistent application; ad-hoc disciplinary action is a fairness / employment-tribunal risk)"
     excerpt_keywords:
-      - [formalised, writing, disciplinary]
-      - [formalised, writing, legal, disciplinary]
-      - [writing, legal, disciplinary]
-      - [writing, legal, review, disciplinary]
-      - [legal, review, disciplinary]
-      - [legal, review, consistent, disciplinary]
-      - [review, consistent, disciplinary]
-      - [review, consistent, application, disciplinary]
+      - [disciplinary, process, written]
+      - [hr, legal, review]
+      - [formalised, disciplinary, action]
+      - [consistent, application, disciplinary]
+      - [employment, tribunal, risk]
+      - [fairness, disciplinary, procedure]
 

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.2.2:lawful_basis_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.2:lawful_basis_procedure"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:A.7.2.2:proc_basis_change"
     description: "Basis change procedure — changing basis requires re-assessment and often subject notice (§7.3.3)"
     excerpt_keywords:
-      - [basis, change, identify]
-      - [basis, change, changing, identify]
-      - [change, changing, identify]
-      - [change, changing, basis, identify]
-      - [changing, basis, identify]
-      - [changing, basis, requires, identify]
-      - [basis, requires, identify]
-      - [basis, requires, assessment, identify]
+      - [changing, lawful, basis]
+      - [basis, reassessment, procedure]
+      - [subject, notice, required]
+      - [shall, notify, subject]
+      - [reassess, lawful, basis]
 
   - must_id: "item:A.7.2.2:proc_special_category_overlay"
     description: "Special-category overlay (Art.9/10 basis required in addition to Art.6 for health, biometric, criminal, etc.)"
     excerpt_keywords:
-      - [special, category, overlay, identify]
-      - [special, category, identify]
-      - [category, overlay, identify]
-      - [category, overlay, art, identify]
-      - [overlay, art, identify]
-      - [overlay, art, basis, identify]
-      - [art, basis, identify]
-      - [art, basis, required, identify]
+      - [lawful basis, special category]
+      - [art9 basis, art6 basis]
+      - [special category, processing]
+      - [health data, lawful basis]
+      - [biometric data, lawful basis]
+      - [criminal data, special category]
 
   - must_id: "item:A.7.2.2:proc_lia_procedure"
     description: "Legitimate-interests balancing test procedure (necessity + balancing against subject rights)"
     excerpt_keywords:
-      - [legitimate, interests, identify]
-      - [legitimate, interests, balancing, identify]
-      - [interests, balancing, identify]
-      - [interests, balancing, test, identify]
-      - [balancing, test, identify]
-      - [balancing, test, necessity, identify]
-      - [test, necessity, identify]
-      - [test, necessity, balancing, identify]
+      - [legitimate, interests, balancing]
+      - [balancing, test, procedure]
+      - [necessity, assessment]
+      - [subject, rights]
+      - [conduct, balancing, test]
+      - [assess, lawful, basis]
 
   - must_id: "item:A.7.2.2:proc_selection_test"
-    description: "Selection test per basis (consent — freely given + specific + unambiguous; contract — necessity; legal obligation — cited law; vital interes"
+    description: "Selection test per basis (consent — freely given + specific + unambiguous; contract — necessity; legal obligation — cited law; vital interests — physical safety; public interest — cited task; legitima"
     excerpt_keywords:
-      - [selection, test, identify]
-      - [selection, test, basis, identify]
-      - [test, basis, identify]
-      - [test, basis, consent, identify]
-      - [basis, consent, identify]
-      - [basis, consent, freely, identify]
-      - [consent, freely, identify]
-      - [consent, freely, given, identify]
+      - [selection, test]
+      - [lawful, basis, assessment]
+      - [consent, freely, given]
+      - [legal, obligation, law]
+      - [legitimate, interests, balancing]
+      - [public, interest, task]
 
   - must_id: "item:A.7.2.2:proc_basis_catalog"
     description: "Basis catalog — enumerated permitted bases per applicable jurisdiction (GDPR Art.6.1.a-f; other jurisdictions as applicable)"
     excerpt_keywords:
-      - [basis, catalog, identify]
-      - [basis, catalog, enumerated, identify]
-      - [catalog, enumerated, identify]
-      - [catalog, enumerated, permitted, identify]
-      - [enumerated, permitted, identify]
-      - [enumerated, permitted, bases, identify]
-      - [permitted, bases, identify]
-      - [permitted, bases, jurisdiction, identify]
+      - [lawful, basis]
+      - [permitted, basis]
+      - [basis, catalog]
+      - [gdpr, art61]
+      - [applicable, jurisdiction]
+      - [enumerated, basis]
 

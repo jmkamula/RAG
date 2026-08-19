@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.5.37:procedures_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.37:procedures_program_review"
@@ -14,84 +13,70 @@ must_fingerprints:
   - must_id: "item:A.5.37:rev_register_update"
     description: "Changes propagated back to the live register with reference to this review"
     excerpt_keywords:
-      - [changes, propagated, documented]
-      - [changes, propagated, back, documented]
-      - [propagated, back, documented]
-      - [propagated, back, live, documented]
-      - [back, live, documented]
-      - [back, live, reference, documented]
-      - [live, reference, documented]
-      - [live, reference, review, documented]
+      - [register, update]
+      - [review, reference]
+      - [changes, propagated]
+      - [periodic, review]
+      - [live, register]
+      - [review, date]
 
   - must_id: "item:A.5.37:rev_emergency_review"
-    description: "Emergency-use procedure review — confirmed available and accurate for DR/incident scenarios (these are the procedures where stale = catastro"
+    description: "Emergency-use procedure review — confirmed available and accurate for DR/incident scenarios (these are the procedures where stale = catastrophic)"
     excerpt_keywords:
-      - [emergency, review, documented]
-      - [emergency, use, documented]
-      - [emergency, use, review, documented]
-      - [use, review, documented]
-      - [use, review, confirmed, documented]
-      - [review, confirmed, documented]
-      - [review, confirmed, available, documented]
-      - [confirmed, available, documented]
+      - [emergency, procedure, review]
+      - [disaster, recovery, procedure]
+      - [incident, response, plan]
+      - [reviewed, annually]
+      - [procedure, availability, confirmed]
+      - [accuracy, emergency, procedure]
 
   - must_id: "item:A.5.37:rev_accuracy_sample"
-    description: "Accuracy sampling — operator walked through a sample procedure end-to-end? procedure matches current system reality (UI screenshots current,"
+    description: "Accuracy sampling — operator walked through a sample procedure end-to-end? procedure matches current system reality (UI screenshots current, commands work, dependencies still valid)"
     excerpt_keywords:
-      - [accuracy, sample, documented]
-      - [accuracy, sampling, documented]
-      - [accuracy, sampling, operator, documented]
-      - [sampling, operator, documented]
-      - [sampling, operator, walked, documented]
-      - [operator, walked, documented]
-      - [operator, walked, through, documented]
-      - [walked, through, documented]
+      - [accuracy, sampling]
+      - [procedure, matches, system]
+      - [operator, walked, sample]
+      - [review, procedure, accuracy]
+      - [system, reality, current]
+      - [ui, screenshots, current]
 
   - must_id: "item:A.5.37:rev_scope_check"
     description: "Cross-check against the applicable-facilities scope — any new system / SaaS environment / facility class that should add procedures"
     excerpt_keywords:
-      - [scope, check, documented]
-      - [cross, check, documented]
-      - [cross, check, against, documented]
-      - [check, against, documented]
-      - [check, against, facilities, documented]
-      - [against, facilities, documented]
-      - [against, facilities, scope, documented]
-      - [facilities, scope, documented]
+      - [scope, applicable, facilities]
+      - [new, system, scope]
+      - [saas, environment, scope]
+      - [facility, class, scope]
+      - [procedures, scope, check]
+      - [scope, crosscheck, procedures]
 
   - must_id: "item:A.5.37:rev_register_check"
     description: "Per-procedure outcome (verified / amended / retired / new added) with availability-mechanism-still-works confirmation"
     excerpt_keywords:
-      - [outcome, verified, documented]
-      - [outcome, verified, amended, documented]
-      - [verified, amended, documented]
-      - [verified, amended, retired, documented]
-      - [amended, retired, documented]
-      - [amended, retired, new, documented]
-      - [retired, new, documented]
-      - [retired, new, added, documented]
+      - [periodic, review]
+      - [operating, procedure, review]
+      - [review, outcome]
+      - [procedure, status]
+      - [availability, confirmation]
+      - [review, verified]
 
   - must_id: "item:A.5.37:rev_reviewer"
     description: "Reviewer identity and role recorded (operations lead + InfoSec lead jointly)"
     excerpt_keywords:
-      - [reviewer, identity, documented]
-      - [reviewer, identity, role, documented]
-      - [identity, role, documented]
-      - [identity, role, recorded, documented]
-      - [role, recorded, documented]
-      - [role, recorded, operations, documented]
-      - [recorded, operations, documented]
-      - [recorded, operations, lead, documented]
+      - [reviewer, identity]
+      - [reviewer, role]
+      - [operations, lead]
+      - [infosec, lead]
+      - [review, conducted]
+      - [review, lead]
 
   - must_id: "item:A.5.37:rev_date"
     description: "Review date within the planned interval (typically within 12 months of last review)"
     excerpt_keywords:
-      - [review, date, documented]
-      - [review, date, within, documented]
-      - [date, within, documented]
-      - [date, within, planned, documented]
-      - [within, planned, documented]
-      - [within, planned, interval, documented]
-      - [planned, interval, documented]
-      - [planned, interval, typically, documented]
+      - [review, date]
+      - [next, review]
+      - [reviewed, annually]
+      - [review, interval]
+      - [periodic, review]
+      - [review, within, months]
 

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:5.3:isms_roles_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:5.3:isms_roles_program_review"
@@ -14,60 +13,48 @@ must_fingerprints:
   - must_id: "item:5.3:rev_a52_alignment"
     description: "A.5.2 cross-check — operational role definitions still consistent with management-system roles"
     excerpt_keywords:
-      - [a52, alignment, organizational]
-      - [cross, check, organizational]
-      - [cross, check, operational, organizational]
-      - [check, operational, organizational]
-      - [check, operational, role, organizational]
-      - [operational, role, organizational]
-      - [operational, role, definitions, organizational]
-      - [role, definitions, organizational]
+      - [role, definition, consistent]
+      - [management, system, roles]
+      - [operational, role, alignment]
+      - [review, roles, consistency]
+      - [cross, check, roles]
 
   - must_id: "item:5.3:rev_change_log"
     description: "Cross-check against change records — every org-chart change touching ISMS roles is logged"
     excerpt_keywords:
-      - [cross, check, organizational]
-      - [cross, check, against, organizational]
-      - [check, against, organizational]
-      - [check, against, change, organizational]
-      - [against, change, organizational]
-      - [against, change, records, organizational]
-      - [change, records, organizational]
-      - [change, records, every, organizational]
+      - [orgchart, change, logged]
+      - [roles, change, record]
+      - [isms, roles, update]
+      - [change, log, review]
+      - [organizational, roles, change]
+      - [recorded, isms, roles]
 
   - must_id: "item:5.3:rev_currency"
     description: "Matrix currency check — every role still has an active holder"
     excerpt_keywords:
-      - [matrix, currency, organizational]
-      - [matrix, currency, check, organizational]
-      - [currency, check, organizational]
-      - [currency, check, every, organizational]
-      - [check, every, organizational]
-      - [check, every, role, organizational]
-      - [every, role, organizational]
-      - [every, role, still, organizational]
+      - [role, active, holder]
+      - [matrix, currency, check]
+      - [review, roles, currency]
+      - [current, role, holder]
+      - [roles, periodic, review]
 
   - must_id: "item:5.3:rev_reviewer"
     description: "Reviewer identity (ISMS Manager + HR partner)"
     excerpt_keywords:
-      - [reviewer, identity, organizational]
-      - [reviewer, identity, isms, organizational]
-      - [identity, isms, organizational]
-      - [identity, isms, manager, organizational]
-      - [isms, manager, organizational]
-      - [isms, manager, partner, organizational]
-      - [manager, partner, organizational]
-      - [per, revocation, organizational]
+      - [reviewer, identity]
+      - [isms, manager]
+      - [hr, partner]
+      - [review, conducted]
+      - [review, manager]
+      - [review, partner]
 
   - must_id: "item:5.3:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, organizational]
-      - [review, date, within, organizational]
-      - [date, within, organizational]
-      - [date, within, planned, organizational]
-      - [within, planned, organizational]
-      - [within, planned, interval, organizational]
-      - [planned, interval, organizational]
-      - [per, revocation, organizational]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [reviewed, periodically]
+      - [review, scheduled]
 

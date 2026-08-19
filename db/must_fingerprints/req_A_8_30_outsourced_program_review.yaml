@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.8.30:outsourced_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.30:outsourced_program_review"
@@ -14,72 +13,57 @@ must_fingerprints:
   - must_id: "item:A.8.30:rev_findings_update"
     description: "Findings propagated to procedure / contract terms"
     excerpt_keywords:
-      - [findings, update, outsourced]
-      - [findings, propagated, outsourced]
-      - [findings, propagated, contract, outsourced]
-      - [propagated, contract, outsourced]
-      - [propagated, contract, terms, outsourced]
-      - [contract, terms, outsourced]
-      - [per, revocation, outsourced]
-      - [per, revoked, identity, outsourced]
+      - [findings, procedure]
+      - [findings, contract, terms]
+      - [review, findings, update]
+      - [contract, terms, updated]
+      - [procedure, updated, findings]
 
   - must_id: "item:A.8.30:rev_vendor_incidents"
     description: "Vendor incident-pattern review (cross-link to A.5.22 supplier review)"
     excerpt_keywords:
-      - [vendor, incidents, outsourced]
-      - [vendor, incident, outsourced]
-      - [vendor, incident, pattern, outsourced]
-      - [incident, pattern, outsourced]
-      - [incident, pattern, review, outsourced]
-      - [pattern, review, outsourced]
-      - [pattern, review, cross, outsourced]
-      - [review, cross, outsourced]
+      - [vendor, incident, review]
+      - [periodic, review, vendor]
+      - [supplier, review, incidents]
+      - [incident, pattern, analysis]
+      - [review, date, vendor]
+      - [next, vendor, review]
 
   - must_id: "item:A.8.30:rev_test_coverage"
     description: "Delivered-code-test coverage per engagement (was every release tested before merge to production)"
     excerpt_keywords:
-      - [test, coverage, outsourced]
-      - [delivered, code, outsourced]
-      - [delivered, code, test, outsourced]
-      - [code, test, outsourced]
-      - [code, test, coverage, outsourced]
-      - [test, coverage, engagement, outsourced]
-      - [coverage, engagement, outsourced]
-      - [coverage, engagement, every, outsourced]
+      - [test coverage, release merge]
+      - [code coverage, production merge]
+      - [tested before, production merge]
+      - [periodic review, test coverage]
+      - [release tested, merge production]
 
   - must_id: "item:A.8.30:rev_register_currency"
     description: "Engagement-register currency check"
     excerpt_keywords:
-      - [engagement, currency, outsourced]
-      - [engagement, currency, check, outsourced]
-      - [currency, check, outsourced]
-      - [per, revocation, outsourced]
-      - [per, revoked, identity, outsourced]
-      - [revocation, record, outsourced]
-      - [review, findings, outsourced]
-      - [audit, outcomes, outsourced]
+      - [periodic, review]
+      - [outsourced, development, review]
+      - [review, date]
+      - [engagement, register]
+      - [currency, check]
+      - [reviewed, periodically]
 
   - must_id: "item:A.8.30:rev_reviewer"
     description: "Reviewer identity (Engineering + Supplier Management + InfoSec)"
     excerpt_keywords:
-      - [reviewer, identity, outsourced]
-      - [reviewer, identity, engineering, outsourced]
-      - [identity, engineering, outsourced]
-      - [identity, engineering, supplier, outsourced]
-      - [engineering, supplier, outsourced]
-      - [engineering, supplier, management, outsourced]
-      - [supplier, management, outsourced]
-      - [supplier, management, infosec, outsourced]
+      - [reviewer, identity]
+      - [reviewed, engineering]
+      - [supplier, management, review]
+      - [information, security, reviewer]
+      - [review, conducted]
 
   - must_id: "item:A.8.30:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, outsourced]
-      - [review, date, within, outsourced]
-      - [date, within, outsourced]
-      - [date, within, planned, outsourced]
-      - [within, planned, outsourced]
-      - [within, planned, interval, outsourced]
-      - [planned, interval, outsourced]
-      - [per, revocation, outsourced]
+      - [review, date]
+      - [planned, interval]
+      - [periodic, review]
+      - [review, within, interval]
+      - [scheduled, review]
+      - [review, frequency]
 

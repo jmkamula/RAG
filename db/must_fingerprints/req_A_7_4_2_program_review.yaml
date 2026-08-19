@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.4.2:program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.2:program_review"
@@ -14,48 +13,40 @@ must_fingerprints:
   - must_id: "item:A.7.4.2:rev_access_audit"
     description: "Access-limit audit — sampled access groups reviewed against operation registry"
     excerpt_keywords:
-      - [access, audit, limit]
-      - [access, limit]
-      - [access, limit, audit]
-      - [limit, audit]
-      - [limit, audit, sampled]
-      - [audit, sampled, limit]
-      - [audit, sampled, access, limit]
-      - [sampled, access, limit]
+      - [access, audit]
+      - [reviewed, against, registry]
+      - [sampled, access, groups]
+      - [access, groups, review]
+      - [audit, access, review]
+      - [operation, registry, reviewed]
 
   - must_id: "item:A.7.4.2:rev_necessity_audit"
     description: "Necessity audit — sampled operations reviewed against current purpose register"
     excerpt_keywords:
-      - [necessity, audit, limit]
-      - [necessity, audit, sampled, limit]
-      - [audit, sampled, limit]
-      - [audit, sampled, operations, limit]
-      - [sampled, operations, limit]
-      - [sampled, operations, reviewed, limit]
-      - [operations, reviewed, limit]
-      - [operations, reviewed, against, limit]
+      - [necessity, audit]
+      - [sampled, operations, reviewed]
+      - [reviewed, against, purpose]
+      - [current, purpose, register]
+      - [audit, findings, review]
+      - [review, audit, schedule]
 
   - must_id: "item:A.7.4.2:rev_reviewer"
     description: "Reviewer identity (DPO + Engineering)"
     excerpt_keywords:
-      - [reviewer, identity, limit]
-      - [reviewer, identity, dpo, limit]
-      - [identity, dpo, limit]
-      - [identity, dpo, engineering, limit]
-      - [dpo, engineering, limit]
-      - [per, revocation, limit]
-      - [per, revoked, identity, limit]
-      - [revocation, record, limit]
+      - [reviewer, identity]
+      - [data, protection, officer]
+      - [dpo, engineering]
+      - [review, conducted]
+      - [reviewer, role]
+      - [engineering, team, review]
 
   - must_id: "item:A.7.4.2:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, limit]
-      - [review, date, within, limit]
-      - [date, within, limit]
-      - [date, within, planned, limit]
-      - [within, planned, limit]
-      - [within, planned, interval, limit]
-      - [planned, interval, limit]
-      - [per, revocation, limit]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, scheduled]
+      - [review, period]
+      - [review, frequency]
 

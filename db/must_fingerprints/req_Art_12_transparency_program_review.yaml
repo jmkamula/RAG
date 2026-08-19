@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.12:transparency_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.12:transparency_program_review"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:Art.12:rev_channel_coverage"
     description: "Channel coverage check — every in-scope channel is reaching the procedure (no orphan requests)"
     excerpt_keywords:
-      - [channel, coverage, transparent]
-      - [channel, coverage, check, transparent]
-      - [coverage, check, transparent]
-      - [coverage, check, every, transparent]
-      - [check, every, transparent]
-      - [check, every, scope, transparent]
-      - [every, scope, transparent]
-      - [every, scope, channel, transparent]
+      - [channel, coverage]
+      - [in scope, channel]
+      - [orphan, requests]
+      - [channel, reaching, procedure]
+      - [review, channel, coverage]
 
   - must_id: "item:Art.12:rev_refusal_audit"
     description: "Refusal-grounds audit — refused requests sampled for legitimate Art.12.5 grounds"
     excerpt_keywords:
-      - [refusal, audit, transparent]
-      - [refusal, grounds, transparent]
-      - [refusal, grounds, audit, transparent]
-      - [grounds, audit, transparent]
-      - [grounds, audit, refused, transparent]
-      - [audit, refused, transparent]
-      - [audit, refused, requests, transparent]
-      - [refused, requests, transparent]
+      - [refused, requests]
+      - [refusal, grounds]
+      - [audit, sampled]
+      - [art125, legitimate]
+      - [review, refusal]
+      - [refused, request, audit]
 
   - must_id: "item:Art.12:rev_sla_compliance"
     description: "SLA compliance check — one-month response rate against in-scope requests"
     excerpt_keywords:
-      - [sla, compliance, transparent]
-      - [sla, compliance, check, transparent]
-      - [compliance, check, transparent]
-      - [compliance, check, one, transparent]
-      - [check, one, transparent]
-      - [check, one, month, transparent]
-      - [one, month, transparent]
-      - [one, month, response, transparent]
+      - [sla, compliance]
+      - [response, time, one month]
+      - [review, sla]
+      - [data subject, request, response]
+      - [compliance, check]
+      - [in scope, requests]
 
   - must_id: "item:Art.12:rev_reviewer"
     description: "Reviewer identity (DPO + ops lead)"
     excerpt_keywords:
-      - [reviewer, identity, transparent]
-      - [reviewer, identity, dpo, transparent]
-      - [identity, dpo, transparent]
-      - [identity, dpo, ops, transparent]
-      - [dpo, ops, transparent]
-      - [dpo, ops, lead, transparent]
-      - [ops, lead, transparent]
-      - [per, revocation, transparent]
+      - [reviewer, identity]
+      - [dpo, reviewer]
+      - [operations, lead]
+      - [review, conducted]
+      - [review, dpo]
+      - [review, lead]
 
   - must_id: "item:Art.12:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, transparent]
-      - [review, date, within, transparent]
-      - [date, within, transparent]
-      - [date, within, planned, transparent]
-      - [within, planned, transparent]
-      - [within, planned, interval, transparent]
-      - [planned, interval, transparent]
-      - [per, revocation, transparent]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [review, scheduled]
+      - [review, period]
 

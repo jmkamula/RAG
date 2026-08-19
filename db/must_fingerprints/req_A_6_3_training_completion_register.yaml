@@ -1,10 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.6.3:training_completion_register
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing approved
-# findings to specific MUSTs they semantically satisfy but weren't tagged
-# with at extraction time. The scanner only considers findings already
-# attributed to the parent control (A.6.3) — never cross-control —
-# and surfaces proposals to Stage-1 for HITL review.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.6.3:training_completion_register"
@@ -12,72 +10,59 @@ target_control: "A.6.3"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  # Each MUST has 1+ excerpt_keyword sets. A finding's excerpt matches
-  # if ANY one keyword set is fully present (all tokens in the set
-  # found as substrings in the excerpt, case-insensitive).
-
-  - must_id: "item:A.6.3:reg_personnel_id"
-    description: "Per-row personnel identifier"
+  - must_id: "item:A.6.3:reg_score"
+    description: "Per-row score where the module includes assessment (drives effectiveness metrics)"
     excerpt_keywords:
-      - [employee]
-      - [staff]
-      - [personnel]
-      - [user, name]
-      - [full, name]
-      - [partner, name]
-      - [trainee]
+      - [training, completion, score]
+      - [module, assessment, score]
+      - [assessment, results, recorded]
+      - [completion, register, score]
+      - [training, module, score]
+
+  - must_id: "item:A.6.3:reg_status"
+    description: "Per-row status (current / overdue / waived-with-reason / N/A — for role change exemptions)"
+    excerpt_keywords:
+      - [training, completion, status]
+      - [training, status, record]
+      - [completion, status, register]
+      - [status, current, overdue]
+      - [waived, reason, status]
+
+  - must_id: "item:A.6.3:reg_next_due"
+    description: "Per-row next-due date (drives reminder/escalation workflow)"
+    excerpt_keywords:
+      - [next, due, date]
+      - [training, completion, date]
+      - [due, date, record]
+      - [completion, next, due]
+      - [training, next, due]
+      - [reminder, due, date]
 
   - must_id: "item:A.6.3:reg_completion_date"
     description: "Per-row completion date"
     excerpt_keywords:
       - [completion, date]
-      - [completion, time]
-      - [date, delivered]
-      - [completed, date]
+      - [training, completion, date]
+      - [date, recorded]
+      - [completion, timestamp]
       - [training, completed]
-      - [completed]
 
   - must_id: "item:A.6.3:reg_module_id"
-    description: "Per-row training module / course / programme identifier"
+    description: "Per-row training module identifier (links to the curriculum catalogue)"
     excerpt_keywords:
-      - [training, title]
-      - [course, name]
-      - [course, title]
-      - [module, name]
-      - [module, id]
-      - [module, title]
-      - [training, name]
-      - [course, id]
-      - [training, id]
-      - [training, type]
+      - [training, module, id]
+      - [module, identifier, record]
+      - [training, curriculum, reference]
+      - [module, catalogue, code]
+      - [training, module, reference]
 
-  - must_id: "item:A.6.3:reg_score"
-    description: "Per-row assessment score"
+  - must_id: "item:A.6.3:reg_personnel_id"
+    description: "Per-row personnel identifier (links to identity register A.5.16)"
     excerpt_keywords:
-      - [score]
-      - [grade]
-      - [assessment, result]
-      - [evaluation, result]
-      - [assessment, score]
-      - [test, result]
-      - [pass, fail]
+      - [personnel, identifier]
+      - [employee, id]
+      - [staff, reference]
+      - [training, completion, record]
+      - [identity, register]
+      - [personnel, id, record]
 
-  - must_id: "item:A.6.3:reg_next_due"
-    description: "Per-row next-due date"
-    excerpt_keywords:
-      - [next, due]
-      - [next, review]
-      - [next, training]
-      - [next, date]
-      - [renewal, date]
-      - [refresh, date]
-
-  - must_id: "item:A.6.3:reg_status"
-    description: "Per-row current / overdue / waived status"
-    excerpt_keywords:
-      - [overall, status]
-      - [training, status]
-      - [completion, status]
-      - [status]
-      - [acknowledgment, statement]
-      - [acknowledgement, statement]

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.26:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.26:applicable_scope"
@@ -14,36 +13,28 @@ must_fingerprints:
   - must_id: "item:Art.26:scope_excluded"
     description: "Excluded relationships (independent-controllers / controller-processor / no joint decision)"
     excerpt_keywords:
-      - [excluded, relationships, joint]
-      - [excluded, relationships, independent, joint]
-      - [relationships, independent, joint]
-      - [relationships, independent, controllers]
+      - [excluded, relationships]
       - [independent, controllers]
-      - [independent, controllers, controller]
-      - [controllers, controller]
-      - [controllers, controller, processor]
+      - [controller, processor]
+      - [no, joint, decision]
+      - [not, joint, controller]
 
   - must_id: "item:Art.26:scope_test_criteria"
     description: "Test criteria for joint controllership (joint decision on means + purposes) per EDPB 7/2020"
     excerpt_keywords:
-      - [test, criteria, joint]
-      - [test, criteria, joint]
-      - [criteria, joint]
-      - [criteria, joint, controllership]
       - [joint, controllership]
-      - [joint, controllership, joint]
-      - [controllership, joint]
-      - [controllership, joint, decision]
+      - [decision, means, purposes]
+      - [edpb, 7, 2020]
+      - [joint, controller, responsibility]
+      - [shared, control, processing]
 
   - must_id: "item:Art.26:scope_joint_relationships"
     description: "Relationships qualifying as joint controllership enumerated"
     excerpt_keywords:
-      - [joint, relationships]
-      - [relationships, qualifying, joint]
-      - [relationships, qualifying, joint]
-      - [qualifying, joint]
-      - [qualifying, joint, controllership]
       - [joint, controllership]
-      - [joint, controllership, enumerated]
-      - [controllership, enumerated, joint]
+      - [joint, controller, relationship]
+      - [shared, responsibility]
+      - [joint, data, controller]
+      - [joint, accountability]
+      - [joint, processing, activities]
 

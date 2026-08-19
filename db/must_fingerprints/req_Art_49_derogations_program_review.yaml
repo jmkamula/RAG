@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.49:derogations_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.49:derogations_program_review"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:Art.49:rev_sa_notifications"
     description: "SA notifications audit — Art.49.1 second-paragraph notifications dispatched as required"
     excerpt_keywords:
-      - [sa, notifications, derogations]
-      - [notifications, audit, derogations]
-      - [notifications, audit, art, derogations]
-      - [audit, art, derogations]
-      - [audit, art, second, derogations]
-      - [art, second, derogations]
-      - [art, second, paragraph, derogations]
-      - [second, paragraph, derogations]
+      - [art49, notifications, audit]
+      - [secondparagraph, notifications, dispatched]
+      - [notifications, review, art49]
+      - [audit, sa, notifications]
+      - [reviewed, annually, notifications]
 
   - must_id: "item:Art.49:rev_pattern_detection"
     description: "Pattern detection — recurring derogation use for same recipient/purpose flagged for Art.46 migration"
     excerpt_keywords:
-      - [pattern, detection, derogations]
-      - [pattern, detection, recurring, derogations]
-      - [detection, recurring, derogations]
-      - [detection, recurring, derogation, derogations]
-      - [recurring, derogation, derogations]
-      - [recurring, derogation, use, derogations]
-      - [derogation, use, derogations]
-      - [derogation, use, same, derogations]
+      - [recurring, derogation, use]
+      - [derogation, recipient, purpose]
+      - [flagged, art46, migration]
+      - [pattern, detection, derogation]
+      - [derogation, review, period]
+      - [reviewed, derogation, recurrence]
 
   - must_id: "item:Art.49:rev_strict_construction_audit"
     description: "Strict-construction audit — sampled invocations reviewed against EDPB 2/2018 narrow interpretation"
     excerpt_keywords:
-      - [strict, construction, audit, derogations]
-      - [strict, construction, derogations]
-      - [construction, audit, derogations]
-      - [construction, audit, sampled, derogations]
-      - [audit, sampled, derogations]
-      - [audit, sampled, invocations, derogations]
-      - [sampled, invocations, derogations]
-      - [sampled, invocations, reviewed, derogations]
+      - [strict, construction, audit]
+      - [sampled, invocations, reviewed]
+      - [edpb, 2, 2018]
+      - [narrow, interpretation]
+      - [review, against, edpb]
+      - [audit, sample, review]
 
   - must_id: "item:Art.49:rev_reviewer"
     description: "Reviewer identity (DPO + legal counsel)"
     excerpt_keywords:
-      - [reviewer, identity, derogations]
-      - [reviewer, identity, dpo, derogations]
-      - [identity, dpo, derogations]
-      - [identity, dpo, legal, derogations]
-      - [dpo, legal, derogations]
-      - [dpo, legal, counsel, derogations]
-      - [legal, counsel, derogations]
-      - [per, revocation, derogations]
+      - [reviewer, identity]
+      - [data, protection, officer]
+      - [legal, counsel]
+      - [reviewed, dpo]
+      - [review, conducted, legal]
+      - [dpo, legal]
 
   - must_id: "item:Art.49:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, derogations]
-      - [review, date, within, derogations]
-      - [date, within, derogations]
-      - [date, within, planned, derogations]
-      - [within, planned, derogations]
-      - [within, planned, interval, derogations]
-      - [planned, interval, derogations]
-      - [per, revocation, derogations]
+      - [review, date]
+      - [planned, interval]
+      - [review, within, interval]
+      - [next, review]
+      - [review, scheduled]
+      - [review, period]
 

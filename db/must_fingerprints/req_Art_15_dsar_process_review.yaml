@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.15:dsar_process_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.15:dsar_process_review"
@@ -12,86 +11,70 @@ target_standard: "GDPR:2016/679"
 
 must_fingerprints:
   - must_id: "item:Art.15:rev_identity_pair_30"
-    description: "Bidirectional Art.15 ↔ Art.30 RoPA pair check — every system the review period's DSARs actually queried is captured in the data flow invento"
+    description: "Bidirectional Art.15 ↔ Art.30 RoPA pair check — every system the review period's DSARs actually queried is captured in the data flow inventory; every system the inventory lists was reachable when DSAR"
     excerpt_keywords:
-      - [identity, pair, 30, right]
-      - [bidirectional, art, right]
-      - [bidirectional, art, art, right]
-      - [art, art, right]
-      - [art, art, ropa, right]
-      - [art, ropa, right]
-      - [art, ropa, pair, right]
-      - [ropa, pair, right]
+      - [dsar, review]
+      - [data, flow, inventory]
+      - [system, reachable]
+      - [review, period]
+      - [inventory, drift]
+      - [access, request]
 
   - must_id: "item:Art.15:rev_corrective"
     description: "Corrective actions to the procedure with owner and target date"
     excerpt_keywords:
-      - [corrective, actions, right]
-      - [corrective, actions, owner, right]
-      - [actions, owner, right]
-      - [actions, owner, target, right]
-      - [owner, target, right]
-      - [owner, target, date, right]
-      - [target, date, right]
-      - [per, revocation, right]
+      - [corrective, actions]
+      - [action, owner, date]
+      - [procedure, corrective, review]
+      - [target, date, action]
+      - [review, corrective, actions]
 
   - must_id: "item:Art.15:rev_defects"
     description: "Defects identified (late responses, refusals, supervisory-authority complaints) referenced"
     excerpt_keywords:
-      - [defects, identified, right]
-      - [defects, identified, late, right]
-      - [identified, late, right]
-      - [identified, late, responses, right]
-      - [late, responses, right]
-      - [late, responses, refusals, right]
-      - [responses, refusals, right]
-      - [responses, refusals, supervisory, right]
+      - [defects, identified]
+      - [late, responses]
+      - [supervisory, authority, complaints]
+      - [refusals, recorded]
+      - [review, defects]
+      - [data, subject, access]
 
   - must_id: "item:Art.15:rev_timing"
     description: "Timing metric — percentage within one month, count of extensions used, count of late responses"
     excerpt_keywords:
-      - [timing, metric, right]
-      - [timing, metric, percentage, right]
-      - [metric, percentage, right]
-      - [metric, percentage, within, right]
-      - [percentage, within, right]
-      - [percentage, within, one, right]
-      - [within, one, right]
-      - [within, one, month, right]
+      - [response, within, one, month]
+      - [extensions, used]
+      - [late, responses]
+      - [percentage, responses, timely]
+      - [count, extensions]
+      - [response, time, metric]
 
   - must_id: "item:Art.15:rev_volume"
     description: "Volume metric — number of DSARs received in the review period"
     excerpt_keywords:
-      - [volume, metric, right]
-      - [volume, metric, number, right]
-      - [metric, number, right]
-      - [metric, number, dsars, right]
-      - [number, dsars, right]
-      - [number, dsars, received, right]
-      - [dsars, received, right]
-      - [dsars, received, review, right]
+      - [dsar, volume]
+      - [number, dsars, received]
+      - [review, period, dsar]
+      - [dsar, requests, count]
+      - [volume, dsars]
+      - [dsar, received, during]
 
   - must_id: "item:Art.15:rev_reviewer"
     description: "Reviewer identity and role (DPO, privacy lead, or delegated equivalent)"
     excerpt_keywords:
-      - [reviewer, identity, right]
-      - [reviewer, identity, role, right]
-      - [identity, role, right]
-      - [identity, role, dpo, right]
-      - [role, dpo, right]
-      - [role, dpo, privacy, right]
-      - [dpo, privacy, right]
-      - [dpo, privacy, lead, right]
+      - [reviewer, identity]
+      - [reviewer, role]
+      - [dpo, reviewer]
+      - [privacy, lead]
+      - [delegated, equivalent]
 
   - must_id: "item:Art.15:rev_date"
     description: "Review date within the planned interval (typically within 12 months of last review)"
     excerpt_keywords:
-      - [review, date, right]
-      - [review, date, within, right]
-      - [date, within, right]
-      - [date, within, planned, right]
-      - [within, planned, right]
-      - [within, planned, interval, right]
-      - [planned, interval, right]
-      - [planned, interval, typically, right]
+      - [review, date]
+      - [next, review]
+      - [reviewed, annually]
+      - [review, interval]
+      - [periodic, review]
+      - [within, months]
 

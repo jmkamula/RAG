@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.5.1:program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.5.1:program_review"
@@ -14,48 +13,39 @@ must_fingerprints:
   - must_id: "item:A.7.5.1:rev_tia_refresh"
     description: "TIA refresh — recent case law + guidance considered"
     excerpt_keywords:
-      - [tia, refresh, identify]
-      - [tia, refresh, recent, identify]
-      - [refresh, recent, identify]
-      - [refresh, recent, case, identify]
-      - [recent, case, identify]
-      - [recent, case, law, identify]
-      - [case, law, identify]
-      - [case, law, guidance, identify]
+      - [transfer impact assessment]
+      - [case law, guidance]
+      - [tia, refresh]
+      - [review, date]
+      - [updated, guidance]
+      - [recent, case, law]
 
   - must_id: "item:A.7.5.1:rev_basis_currency"
     description: "Basis currency — Art.45 adequacy decisions still in force (Privacy Shield lessons apply)"
     excerpt_keywords:
+      - [adequacy, decision]
+      - [privacy, shield]
+      - [transfer, basis]
+      - [review, date]
       - [basis, currency]
-      - [basis, currency, art]
-      - [currency, art, identify]
-      - [currency, art, adequacy, identify]
-      - [art, adequacy, identify]
-      - [art, adequacy, decisions, identify]
-      - [adequacy, decisions, identify]
-      - [adequacy, decisions, still, identify]
+      - [art45, adequacy]
 
   - must_id: "item:A.7.5.1:rev_reviewer"
     description: "Reviewer identity (DPO + Legal)"
     excerpt_keywords:
-      - [reviewer, identity, identify]
-      - [reviewer, identity, dpo, identify]
-      - [identity, dpo, identify]
-      - [identity, dpo, legal, identify]
-      - [dpo, legal, identify]
-      - [per, revocation, identify]
-      - [per, revoked, identity, identify]
-      - [revocation, record, identify]
+      - [reviewer, identity]
+      - [dpo, legal]
+      - [review, dpo]
+      - [legal, review, completed]
+      - [reviewed, legal]
 
   - must_id: "item:A.7.5.1:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, identify]
-      - [review, date, within, identify]
-      - [date, within, identify]
-      - [date, within, planned, identify]
-      - [within, planned, identify]
-      - [within, planned, interval, identify]
-      - [planned, interval, identify]
-      - [per, revocation, identify]
+      - [review, date]
+      - [planned, interval]
+      - [review, within, interval]
+      - [scheduled, review]
+      - [next, review]
+      - [review, period]
 

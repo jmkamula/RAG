@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.3.9:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.9:applicable_scope"
@@ -14,36 +13,30 @@ must_fingerprints:
   - must_id: "item:A.7.3.9:scope_fee_scope"
     description: "Where fees permitted (excessive/repetitive under GDPR; other jurisdictions vary)"
     excerpt_keywords:
-      - [fee, scope, handling]
-      - [fees, permitted, handling]
-      - [fees, permitted, excessive, handling]
-      - [permitted, excessive, handling]
-      - [permitted, excessive, repetitive, handling]
-      - [excessive, repetitive, handling]
-      - [excessive, repetitive, under, handling]
-      - [repetitive, under, handling]
+      - [fees, permitted]
+      - [excessive, fees]
+      - [repetitive, requests]
+      - [gdpr, fees]
+      - [fee, scope]
+      - [requests, subject, fees]
 
   - must_id: "item:A.7.3.9:scope_response_time_matrix"
     description: "Per-jurisdiction response-time matrix (Art.12.3 30 days default + extensions)"
     excerpt_keywords:
-      - [response, time, matrix, handling]
-      - [jurisdiction, response, handling]
-      - [jurisdiction, response, time, handling]
-      - [response, time, handling]
-      - [time, matrix, handling]
-      - [time, matrix, art, handling]
-      - [matrix, art, handling]
-      - [matrix, art, days, handling]
+      - [response, time, matrix]
+      - [per, jurisdiction]
+      - [response, period]
+      - [response, deadline]
+      - [response, time, limits]
+      - [response, time, frames]
 
   - must_id: "item:A.7.3.9:scope_legitimate_test"
     description: "Legitimate-request test (verifiable subject + about their own PII + relates to org's processing)"
     excerpt_keywords:
-      - [legitimate, test, handling]
-      - [legitimate, request, handling]
-      - [legitimate, request, test, handling]
-      - [request, test, handling]
-      - [request, test, verifiable, handling]
-      - [test, verifiable, handling]
-      - [test, verifiable, subject, handling]
-      - [verifiable, subject, handling]
+      - [legitimate, request]
+      - [verifiable, subject]
+      - [own, personal, data]
+      - [relates, processing]
+      - [data, subject, request]
+      - [request, scope]
 

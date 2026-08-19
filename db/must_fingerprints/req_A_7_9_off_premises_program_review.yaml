@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.9:off_premises_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.9:off_premises_program_review"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:A.7.9:rev_register_update"
     description: "Changes propagated to the policy / scope"
     excerpt_keywords:
-      - [changes, propagated, assets]
-      - [changes, propagated, scope, assets]
-      - [propagated, scope, assets]
-      - [per, revocation, assets]
-      - [per, revoked, identity, assets]
-      - [revocation, record, assets]
-      - [review, findings, assets]
-      - [audit, outcomes, assets]
+      - [periodic, review]
+      - [policy, update]
+      - [scope, review]
+      - [review, changes]
+      - [offpremises, security]
+      - [program, review]
 
   - must_id: "item:A.7.9:rev_incident_review"
     description: "Theft/loss incidents in period — handled per policy, lessons captured"
     excerpt_keywords:
-      - [incident, review, assets]
-      - [theft, loss, assets]
-      - [theft, loss, incidents, assets]
-      - [loss, incidents, assets]
-      - [loss, incidents, period, assets]
-      - [incidents, period, assets]
-      - [incidents, period, handled, assets]
-      - [period, handled, assets]
+      - [incident, review]
+      - [theft, loss, incident]
+      - [lessons, captured]
+      - [reviewed, periodically]
+      - [incident, handled, policy]
 
   - must_id: "item:A.7.9:rev_register_check"
     description: "Stale-loaner check — assets off-premises for unexpectedly long without status update"
     excerpt_keywords:
-      - [stale, loaner, assets]
-      - [stale, loaner, check, assets]
-      - [loaner, check, assets]
-      - [loaner, check, assets]
-      - [check, assets]
-      - [check, assets, off]
-      - [assets, off]
-      - [assets, off, premises]
+      - [offpremises, status, update]
+      - [periodic, review, assets]
+      - [loaner, check, stale]
+      - [reviewed, offpremises]
+      - [asset, status, check]
+      - [review, loaner, periodic]
 
   - must_id: "item:A.7.9:rev_reviewer"
     description: "Reviewer identity (Facilities + InfoSec + IT lead)"
     excerpt_keywords:
-      - [reviewer, identity, assets]
-      - [reviewer, identity, facilities, assets]
-      - [identity, facilities, assets]
-      - [identity, facilities, infosec, assets]
-      - [facilities, infosec, assets]
-      - [facilities, infosec, lead, assets]
-      - [infosec, lead, assets]
-      - [per, revocation, assets]
+      - [reviewer, identity]
+      - [facilities, reviewer]
+      - [infosec, reviewer]
+      - [it, lead, review]
+      - [review, lead]
+      - [review, team, members]
 
   - must_id: "item:A.7.9:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, assets]
-      - [review, date, within, assets]
-      - [date, within, assets]
-      - [date, within, planned, assets]
-      - [within, planned, assets]
-      - [within, planned, interval, assets]
-      - [planned, interval, assets]
-      - [per, revocation, assets]
+      - [review, date]
+      - [planned, interval]
+      - [periodic, review]
+      - [review, within, interval]
+      - [scheduled, review]
+      - [review, frequency]
 

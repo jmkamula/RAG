@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.37:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.37:applicable_scope"
@@ -14,36 +13,28 @@ must_fingerprints:
   - must_id: "item:Art.37:scope_voluntary_assessment"
     description: "Voluntary-designation assessment — even when not mandatory, did the org choose to designate (rationale recorded)"
     excerpt_keywords:
-      - [voluntary, assessment, designation]
       - [voluntary, designation]
-      - [voluntary, designation, assessment]
+      - [dpo, designation, rationale]
       - [designation, assessment]
-      - [designation, assessment, even]
-      - [assessment, even, designation]
-      - [assessment, even, not, designation]
-      - [even, not, designation]
+      - [organization, choose, designate]
+      - [designation, not, mandatory]
 
   - must_id: "item:Art.37:scope_ms_law_overlay"
     description: "MS law overlay — Art.37.4 second sentence (MS may require designation in additional cases)"
     excerpt_keywords:
-      - [ms, law, overlay, designation]
-      - [law, overlay, designation]
-      - [law, overlay, art, designation]
-      - [overlay, art, designation]
-      - [overlay, art, second, designation]
-      - [art, second, designation]
-      - [art, second, sentence, designation]
-      - [second, sentence, designation]
+      - [memberstate, require, designation]
+      - [additional, cases, designation]
+      - [art37, four, sentence]
+      - [ms, law, overlay]
+      - [designation, data, protection, officer]
 
   - must_id: "item:Art.37:scope_criteria_test"
-    description: "Art.37.1 criteria test operationalised (a public authority / b core activities = systematic monitoring large-scale / c core activities = lar"
+    description: "Art.37.1 criteria test operationalised (a public authority / b core activities = systematic monitoring large-scale / c core activities = large-scale special category)"
     excerpt_keywords:
-      - [criteria, test, designation]
-      - [art, criteria, designation]
-      - [art, criteria, test, designation]
-      - [criteria, test, operationalised, designation]
-      - [test, operationalised, designation]
-      - [test, operationalised, public, designation]
-      - [operationalised, public, designation]
-      - [operationalised, public, authority, designation]
+      - [public, authority]
+      - [core, activities]
+      - [systematic, monitoring]
+      - [large, scale]
+      - [special, category]
+      - [designation, criteria]
 

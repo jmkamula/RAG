@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.2.2:purpose_adherence_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.2:purpose_adherence_register"
@@ -14,59 +13,46 @@ must_fingerprints:
   - must_id: "item:B.8.2.2:reg_last_verified"
     description: "Last verification date per row"
     excerpt_keywords:
-      - [last, verified, organization]
-      - [last, verification, organization]
-      - [last, verification, date, organization]
-      - [verification, date, organization]
-      - [per, row, organization]
-      - [each, row, organization]
-      - [column, containing, organization]
-      - [each, entry, organization]
+      - [last, verification, date]
+      - [verification, date, record]
+      - [date, last, checked]
+      - [verified, date, entry]
+      - [record, verification, timestamp]
 
   - must_id: "item:B.8.2.2:reg_permitted_secondary"
     description: "Permitted secondary uses per row (where customer has authorised anonymised aggregate use)"
     excerpt_keywords:
-      - [permitted, secondary, organization]
-      - [permitted, secondary, uses, organization]
-      - [secondary, uses, organization]
-      - [secondary, uses, customer, organization]
-      - [uses, customer, organization]
-      - [uses, customer, has, organization]
-      - [customer, has, organization]
-      - [customer, has, authorised, organization]
+      - [permitted, secondary, use]
+      - [customer, authorised, use]
+      - [anonymised, aggregate, data]
+      - [use, purpose, register]
+      - [secondary, use, authorisation]
 
   - must_id: "item:B.8.2.2:reg_binding_controls"
     description: "Binding controls per row (tenant isolation config / data-tag enforcement / access scoping)"
     excerpt_keywords:
-      - [binding, controls, organization]
-      - [binding, controls, tenant, organization]
-      - [controls, tenant, organization]
-      - [controls, tenant, isolation, organization]
-      - [tenant, isolation, organization]
-      - [tenant, isolation, config, organization]
-      - [isolation, config, organization]
-      - [isolation, config, tag, organization]
+      - [binding, controls]
+      - [tenant, isolation]
+      - [data, tag, enforcement]
+      - [access, scoping]
+      - [per, row]
+      - [customer, purpose]
 
   - must_id: "item:B.8.2.2:reg_stated_purposes"
     description: "Stated customer purposes per row (from B.8.2.1 agreement)"
     excerpt_keywords:
+      - [customer, purpose]
       - [stated, purposes]
-      - [stated, customer, organization]
-      - [stated, customer, purposes]
-      - [customer, purposes]
-      - [customer, purposes, agreement]
-      - [purposes, agreement]
-      - [per, row, organization]
-      - [each, row, organization]
+      - [purpose, agreement]
+      - [per, row]
+      - [adherence, register]
 
   - must_id: "item:B.8.2.2:reg_customer_id"
     description: "Customer identifier per row"
     excerpt_keywords:
-      - [customer, id, organization]
-      - [customer, identifier, organization]
-      - [per, row, organization]
-      - [each, row, organization]
-      - [column, containing, organization]
-      - [each, entry, organization]
-      - [column, header, organization]
+      - [customer, identifier]
+      - [customer, id]
+      - [purpose, adherence]
+      - [per, row]
+      - [register, entry]
 

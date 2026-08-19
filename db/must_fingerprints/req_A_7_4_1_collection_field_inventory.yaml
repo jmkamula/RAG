@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.4.1:collection_field_inventory
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.1:collection_field_inventory"
@@ -15,59 +14,46 @@ must_fingerprints:
     description: "Collection mode per row (direct form / cookie / weblog / API integration / third-party enrichment)"
     excerpt_keywords:
       - [collection, mode]
-      - [collection, mode, direct]
-      - [mode, direct, limit]
-      - [mode, direct, form, limit]
-      - [direct, form, limit]
-      - [direct, form, cookie, limit]
-      - [form, cookie, limit]
-      - [form, cookie, weblog, limit]
+      - [collection, field, inventory]
+      - [data, collection, method]
+      - [collection, source]
+      - [collection, channel]
+      - [collection, type]
 
   - must_id: "item:A.7.4.1:reg_default_state"
     description: "Default state per row (required / opt-in optional / opt-out optional)"
     excerpt_keywords:
-      - [default, state, limit]
-      - [default, state, required, limit]
-      - [state, required, limit]
-      - [state, required, opt, limit]
-      - [required, opt, limit]
-      - [required, opt, optional, limit]
-      - [opt, optional, limit]
-      - [opt, optional, opt, limit]
+      - [default, state]
+      - [collection, field, inventory]
+      - [required, optional]
+      - [optin, optional]
+      - [optout, optional]
 
   - must_id: "item:A.7.4.1:reg_necessity_rationale"
     description: "Necessity rationale per row (adequate / relevant / necessary explanation)"
     excerpt_keywords:
-      - [necessity, rationale, limit]
-      - [necessity, rationale, adequate, limit]
-      - [rationale, adequate, limit]
-      - [rationale, adequate, relevant, limit]
-      - [adequate, relevant, limit]
-      - [adequate, relevant, necessary, limit]
-      - [relevant, necessary, limit]
-      - [relevant, necessary, explanation, limit]
+      - [necessity, rationale]
+      - [collection, necessity, justification]
+      - [adequate, explanation]
+      - [relevant, reason]
+      - [necessary, basis]
+      - [data, collection, purpose]
 
   - must_id: "item:A.7.4.1:reg_purpose_link"
     description: "Purpose link per row (which A.7.2.1 purpose this field supports)"
     excerpt_keywords:
-      - [purpose, purpose, limit]
-      - [purpose, purpose, supports, limit]
-      - [purpose, supports, limit]
-      - [per, row, limit]
-      - [each, row, limit]
-      - [column, containing, limit]
-      - [each, entry, limit]
-      - [column, header, limit]
+      - [collection, purpose]
+      - [field, purpose, link]
+      - [purpose, supported]
+      - [inventory, collection, field]
+      - [purpose, per, row]
 
   - must_id: "item:A.7.4.1:reg_field_id"
     description: "Unique field identifier per row (form_id + field_name)"
     excerpt_keywords:
-      - [unique, identifier, limit]
-      - [unique, identifier, form_id, limit]
-      - [identifier, form_id, limit]
-      - [identifier, form_id, field_name, limit]
-      - [form_id, field_name, limit]
-      - [per, row, limit]
-      - [each, row, limit]
-      - [column, containing, limit]
+      - [field, identifier]
+      - [unique, field, id]
+      - [form, field, name]
+      - [collection, field, inventory]
+      - [field, name, unique]
 

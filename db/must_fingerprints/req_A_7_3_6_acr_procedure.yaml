@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.3.6:acr_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.6:acr_procedure"
@@ -14,84 +13,69 @@ must_fingerprints:
   - must_id: "item:A.7.3.6:proc_refusal_reasoning"
     description: "Refusal reasoning — where request refused / cannot be met, subject informed of reasons + right to complain"
     excerpt_keywords:
-      - [refusal, reasoning, access]
-      - [refusal, reasoning, request, access]
-      - [reasoning, request, access]
-      - [reasoning, request, refused, access]
-      - [request, refused, access]
-      - [request, refused, cannot, access]
-      - [refused, cannot, access]
-      - [refused, cannot, met, access]
+      - [request, refused]
+      - [refusal, reasoning]
+      - [subject, informed]
+      - [right, complain]
+      - [cannot, met]
+      - [inform, reasons]
 
   - must_id: "item:A.7.3.6:proc_response_sla"
     description: "Response-time SLA stated + honoured (undue delay standard)"
     excerpt_keywords:
-      - [response, sla, access]
-      - [response, time, access]
-      - [response, time, sla, access]
-      - [time, sla, access]
-      - [time, sla, stated, access]
-      - [sla, stated, access]
-      - [sla, stated, honoured, access]
-      - [stated, honoured, access]
+      - [response, time, sla]
+      - [shall, respond, within]
+      - [response, within, days]
+      - [undue, delay, avoided]
+      - [requests, responded, timely]
+      - [response, time, honoured]
 
   - must_id: "item:A.7.3.6:proc_downstream_propagation"
     description: "Downstream propagation — corrections/erasures pushed to systems + third parties (see A.7.3.7)"
     excerpt_keywords:
-      - [downstream, propagation, access]
-      - [downstream, propagation, corrections, access]
-      - [propagation, corrections, access]
-      - [propagation, corrections, erasures, access]
-      - [corrections, erasures, access]
-      - [corrections, erasures, pushed, access]
-      - [erasures, pushed, access]
-      - [erasures, pushed, third, access]
+      - [downstream, propagation]
+      - [correction, erasure, propagated]
+      - [push, correction, third]
+      - [notify, third, party]
+      - [update, systems, correction]
+      - [propagate, erasure, request]
 
   - must_id: "item:A.7.3.6:proc_erasure_flow"
     description: "Erasure flow — including retention-limit + legal-obligation exceptions"
     excerpt_keywords:
-      - [erasure, flow, access]
-      - [erasure, flow, including, access]
-      - [flow, including, access]
-      - [flow, including, retention, access]
-      - [including, retention, access]
-      - [including, retention, limit, access]
-      - [retention, limit, access]
-      - [retention, limit, legal, access]
+      - [erasure, procedure]
+      - [retention, period, exception]
+      - [legal, obligation, exception]
+      - [data, subject, request]
+      - [shall, erase]
+      - [exceptions, erasure]
 
   - must_id: "item:A.7.3.6:proc_correction_flow"
     description: "Correction flow — including subject-dispute path when correction is disputed"
     excerpt_keywords:
+      - [correction, request]
+      - [disputed, correction]
+      - [subject, dispute, process]
+      - [shall, correct, request]
       - [correction, flow]
-      - [correction, flow, including]
-      - [flow, including, access]
-      - [flow, including, subject, access]
-      - [including, subject, access]
-      - [including, subject, dispute, access]
-      - [subject, dispute, access]
-      - [subject, dispute, path, access]
+      - [dispute, resolution]
 
   - must_id: "item:A.7.3.6:proc_access_flow"
     description: "Access flow — Art.15 fields + copy of PII processed (link to A.7.3.8)"
     excerpt_keywords:
-      - [access, flow]
-      - [access, flow, art]
-      - [flow, art, access]
-      - [flow, art, fields, access]
-      - [art, fields, access]
-      - [art, fields, copy, access]
-      - [fields, copy, access]
-      - [fields, copy, pii, access]
+      - [access, request]
+      - [correction, request]
+      - [erasure, request]
+      - [personal, data, copy]
+      - [respond, within, timeframe]
+      - [verify, identity]
 
   - must_id: "item:A.7.3.6:proc_identity_verification"
     description: "Identity verification step (proportionate — avoids granting rights to imposters)"
     excerpt_keywords:
-      - [identity, verification, access]
-      - [identity, verification, step, access]
-      - [verification, step, access]
-      - [verification, step, proportionate, access]
-      - [step, proportionate, access]
-      - [step, proportionate, avoids, access]
-      - [proportionate, avoids, access]
-      - [proportionate, avoids, granting, access]
+      - [identity, verification]
+      - [verify, identity, request]
+      - [authentication, process]
+      - [proportionate, verification]
+      - [prevent, unauthorized, access]
 

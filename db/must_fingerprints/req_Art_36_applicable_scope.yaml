@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.36:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.36:applicable_scope"
@@ -14,36 +13,28 @@ must_fingerprints:
   - must_id: "item:Art.36:scope_excluded"
     description: "Out-of-scope processing (residual low/medium risk; DPIA-mitigated to acceptable level)"
     excerpt_keywords:
-      - [out, scope, prior]
-      - [out, scope, processing, prior]
-      - [scope, processing, prior]
-      - [scope, processing, residual, prior]
-      - [processing, residual, prior]
-      - [processing, residual, low, prior]
-      - [residual, low, prior]
-      - [residual, low, medium, prior]
+      - [outofscope, processing]
+      - [excluded, scope]
+      - [residual, risk]
+      - [dpia, mitigated]
+      - [acceptable, risk, level]
 
   - must_id: "item:Art.36:scope_ms_law"
     description: "MS law Art.36.5 additional consultation triggers identified per applicable jurisdiction"
     excerpt_keywords:
-      - [ms, law, prior]
-      - [law, art, prior]
-      - [law, art, additional, prior]
-      - [art, additional, prior]
-      - [art, additional, consultation]
-      - [additional, consultation]
+      - [applicable, jurisdiction]
       - [additional, consultation, triggers]
-      - [consultation, triggers]
+      - [member, state, law]
+      - [art36, consultation, requirements]
+      - [prior, consultation, scope]
 
   - must_id: "item:Art.36:scope_residual_high_risk"
     description: "Operational interpretation of 'residual high risk' (post-mitigation high likelihood × severity)"
     excerpt_keywords:
-      - [residual, high, risk, prior]
-      - [operational, interpretation, prior]
-      - [operational, interpretation, residual, prior]
-      - [interpretation, residual, prior]
-      - [interpretation, residual, high, prior]
-      - [residual, high, prior]
-      - [high, risk, prior]
-      - [high, risk, post, prior]
+      - [residual, high, risk]
+      - [postmitigation, risk, assessment]
+      - [high, likelihood, severity]
+      - [risk, remains, significant]
+      - [operational, interpretation, risk]
+      - [risk, level, assessment]
 

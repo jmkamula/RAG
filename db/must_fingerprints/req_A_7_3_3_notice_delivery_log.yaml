@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.3.3:notice_delivery_log
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.3:notice_delivery_log"
@@ -14,46 +13,37 @@ must_fingerprints:
   - must_id: "item:A.7.3.3:reg_deployment_date"
     description: "Deployment date per row"
     excerpt_keywords:
-      - [deployment, date, providing]
-      - [per, row, providing]
-      - [each, row, providing]
-      - [column, containing, providing]
-      - [each, entry, providing]
-      - [column, header, providing]
+      - [deployment, date]
+      - [date, recorded]
+      - [date, logged]
+      - [notice, delivery, date]
+      - [per, record, date]
 
   - must_id: "item:A.7.3.3:reg_notice_version"
     description: "Notice version served per row (link to A.7.3.2 artifact register)"
     excerpt_keywords:
-      - [notice, version, providing]
-      - [notice, version, served, providing]
-      - [version, served, providing]
-      - [version, served, artifact, providing]
-      - [served, artifact, providing]
-      - [per, row, providing]
-      - [each, row, providing]
-      - [column, containing, providing]
+      - [notice, version]
+      - [version, served]
+      - [notice, delivered]
+      - [delivery, log]
+      - [record, notice, version]
+      - [per, row, notice]
 
   - must_id: "item:A.7.3.3:reg_touchpoint_type"
     description: "Touchpoint type per row (signup / renewal / cookie banner / just-in-time prompt / periodic reminder)"
     excerpt_keywords:
-      - [touchpoint, signup, providing]
-      - [touchpoint, signup, renewal, providing]
-      - [signup, renewal, providing]
-      - [signup, renewal, cookie, providing]
-      - [renewal, cookie, providing]
-      - [renewal, cookie, banner, providing]
-      - [cookie, banner, providing]
-      - [cookie, banner, just, providing]
+      - [touchpoint, type]
+      - [signup, renewal]
+      - [cookie, banner]
+      - [justinetime, prompt]
+      - [periodic, reminder]
 
   - must_id: "item:A.7.3.3:reg_touchpoint_id"
     description: "Unique touchpoint identifier per row"
     excerpt_keywords:
-      - [touchpoint, id, providing]
-      - [unique, touchpoint, providing]
-      - [unique, touchpoint, identifier, providing]
-      - [touchpoint, identifier, providing]
-      - [per, row, providing]
-      - [each, row, providing]
-      - [column, containing, providing]
-      - [each, entry, providing]
+      - [touchpoint, identifier]
+      - [unique, touchpoint, id]
+      - [record, touchpoint, reference]
+      - [log, touchpoint, id]
+      - [entry, touchpoint, identifier]
 

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:4.3:scope_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:4.3:scope_program_review"
@@ -14,48 +13,38 @@ must_fingerprints:
   - must_id: "item:4.3:rev_change_log"
     description: "Cross-check against change records — every actual scope change in the year is logged"
     excerpt_keywords:
-      - [cross, check, determining]
-      - [cross, check, against, determining]
-      - [check, against, determining]
-      - [check, against, change, determining]
-      - [against, change, determining]
-      - [against, change, records, determining]
-      - [change, records, determining]
-      - [change, records, every, determining]
+      - [scope, change, logged]
+      - [change, records, crosscheck]
+      - [scope, change, record]
+      - [change, log, reviewed]
 
   - must_id: "item:4.3:rev_currency"
     description: "Currency check — scope still matches organisational reality (sites, products, third parties)"
     excerpt_keywords:
-      - [currency, check, determining]
-      - [currency, check, scope]
-      - [check, scope]
-      - [check, scope, still]
-      - [scope, still]
-      - [scope, still, matches]
-      - [still, matches, determining]
-      - [still, matches, organisational, determining]
+      - [scope, review]
+      - [review, currency]
+      - [scope, matches, reality]
+      - [organisational, scope, review]
+      - [sites, products, scope]
+      - [third, parties, scope]
 
   - must_id: "item:4.3:rev_reviewer"
     description: "Reviewer identity (ISMS Manager + top management)"
     excerpt_keywords:
-      - [reviewer, identity, determining]
-      - [reviewer, identity, isms, determining]
-      - [identity, isms, determining]
-      - [identity, isms, manager, determining]
-      - [isms, manager, determining]
-      - [isms, manager, top, determining]
-      - [manager, top, determining]
-      - [manager, top, management, determining]
+      - [reviewer, identity]
+      - [isms, manager]
+      - [top, management]
+      - [review, conducted]
+      - [review, management]
+      - [reviewed, isms]
 
   - must_id: "item:4.3:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, determining]
-      - [review, date, within, determining]
-      - [date, within, determining]
-      - [date, within, planned, determining]
-      - [within, planned, determining]
-      - [within, planned, interval, determining]
-      - [planned, interval, determining]
-      - [per, revocation, determining]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [review, scheduled]
+      - [review, period]
 

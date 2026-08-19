@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.3.2:program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.2:program_review"
@@ -14,48 +13,39 @@ must_fingerprints:
   - must_id: "item:A.7.3.2:rev_field_completeness"
     description: "Field completeness — sampled notices verified against catalog"
     excerpt_keywords:
-      - [completeness, sampled, determining]
-      - [completeness, sampled, notices, determining]
-      - [sampled, notices, determining]
-      - [sampled, notices, verified, determining]
-      - [notices, verified, determining]
-      - [notices, verified, against, determining]
-      - [verified, against, determining]
-      - [verified, against, catalog, determining]
+      - [field, completeness]
+      - [sampled, notices]
+      - [verified, against, catalog]
+      - [notice, content, review]
+      - [review, field, completeness]
 
   - must_id: "item:A.7.3.2:rev_currency_audit"
     description: "Currency audit — sampled notices verified against A.7.2.1 purpose register + A.7.2.8 RoPA"
     excerpt_keywords:
-      - [currency, audit, determining]
-      - [currency, audit, sampled, determining]
-      - [audit, sampled, determining]
-      - [audit, sampled, notices, determining]
-      - [sampled, notices, determining]
-      - [sampled, notices, verified, determining]
-      - [notices, verified, determining]
-      - [notices, verified, against, determining]
+      - [currency, audit]
+      - [sampled, notices]
+      - [verified, against]
+      - [purpose, register]
+      - [ropa, register]
+      - [review, date]
 
   - must_id: "item:A.7.3.2:rev_reviewer"
     description: "Reviewer identity (DPO + Legal + UX)"
     excerpt_keywords:
-      - [reviewer, identity, determining]
-      - [reviewer, identity, dpo, determining]
-      - [identity, dpo, determining]
-      - [identity, dpo, legal, determining]
-      - [dpo, legal, determining]
-      - [per, revocation, determining]
-      - [per, revoked, identity, determining]
-      - [revocation, record, determining]
+      - [reviewer identity]
+      - [data protection officer]
+      - [legal compliance team]
+      - [user experience]
+      - [reviewed by dpo]
+      - [reviewer role]
 
   - must_id: "item:A.7.3.2:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, determining]
-      - [review, date, within, determining]
-      - [date, within, determining]
-      - [date, within, planned, determining]
-      - [within, planned, determining]
-      - [within, planned, interval, determining]
-      - [planned, interval, determining]
-      - [per, revocation, determining]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [review, scheduled]
+      - [review, period]
 

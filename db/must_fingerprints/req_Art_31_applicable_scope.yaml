@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.31:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.31:applicable_scope"
@@ -14,36 +13,26 @@ must_fingerprints:
   - must_id: "item:Art.31:scope_powers"
     description: "Art.58 SA powers acknowledged — info access (Art.58.1.a-f), corrective (Art.58.2), authorisation (Art.58.3)"
     excerpt_keywords:
-      - [art, powers, cooperation]
-      - [art, powers, acknowledged, cooperation]
-      - [powers, acknowledged, cooperation]
-      - [powers, acknowledged, info, cooperation]
-      - [acknowledged, info, cooperation]
-      - [acknowledged, info, access, cooperation]
-      - [info, access, cooperation]
-      - [info, access, art, cooperation]
+      - [supervisory, authority, powers]
+      - [access, information, article58]
+      - [corrective, measures, powers]
+      - [authorisation, supervisory, authority]
+      - [acknowledged, supervisory, powers]
 
   - must_id: "item:Art.31:scope_concerned_sas"
     description: "Concerned SAs enumerated (MS where subjects affected)"
     excerpt_keywords:
-      - [concerned, sas, cooperation]
-      - [concerned, sas, enumerated, cooperation]
-      - [sas, enumerated, cooperation]
-      - [sas, enumerated, subjects, cooperation]
-      - [enumerated, subjects, cooperation]
-      - [enumerated, subjects, affected, cooperation]
-      - [subjects, affected, cooperation]
-      - [in, scope, cooperation]
+      - [concerned, supervisory, authorities]
+      - [member, states, affected]
+      - [applicable, supervisory, authority]
+      - [supervisory, authority, scope]
+      - [affected, data, subjects]
 
   - must_id: "item:Art.31:scope_lead_sa"
     description: "Lead supervisory authority identified"
     excerpt_keywords:
-      - [lead, sa, cooperation]
-      - [lead, supervisory]
       - [lead, supervisory, authority]
-      - [supervisory, authority]
-      - [supervisory, authority, identified]
-      - [authority, identified, cooperation]
-      - [in, scope, cooperation]
-      - [scope, includes, cooperation]
+      - [identified, lead, authority]
+      - [lead, sa, identified]
+      - [lead, supervisory, sa]
 

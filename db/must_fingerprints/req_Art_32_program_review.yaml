@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.32:program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.32:program_review"
@@ -14,60 +13,50 @@ must_fingerprints:
   - must_id: "item:Art.32:rev_iso_alignment"
     description: "ISO 27001 alignment — implementing controls (A.5.24/A.8.x) still in force; any reductions challenged for Art.32 impact"
     excerpt_keywords:
-      - [iso, alignment]
-      - [iso, 27001]
-      - [iso, 27001, alignment]
-      - [27001, alignment]
-      - [27001, alignment, implementing]
-      - [alignment, implementing]
-      - [alignment, implementing, controls]
+      - [iso27001, alignment]
       - [implementing, controls]
+      - [controls, a524]
+      - [controls, a8]
+      - [reductions, challenged]
+      - [art32, impact]
 
   - must_id: "item:Art.32:rev_register_currency"
     description: "Register currency — every Art.30 RoPA activity covered with current measures"
     excerpt_keywords:
-      - [currency, every]
-      - [currency, every, art]
-      - [every, art]
-      - [every, art, ropa]
-      - [art, ropa]
-      - [art, ropa, activity]
-      - [ropa, activity]
-      - [ropa, activity, covered]
+      - [register, currency]
+      - [ropa, activity, current]
+      - [art32, security, measures]
+      - [art30, register, updated]
+      - [processing, activity, current]
+      - [security, measures, reviewed]
 
   - must_id: "item:Art.32:rev_appropriateness"
     description: "Appropriateness re-assessment — measures still proportionate given current threat landscape and tech state-of-art"
     excerpt_keywords:
-      - [appropriateness, assessment]
-      - [appropriateness, assessment, measures]
-      - [assessment, measures]
-      - [assessment, measures, still]
-      - [measures, still]
-      - [measures, still, proportionate]
-      - [still, proportionate]
-      - [still, proportionate, given]
+      - [appropriateness, reassessment]
+      - [security, measures, proportionate]
+      - [threat, landscape, review]
+      - [technology, state, art]
+      - [reviewed, annually]
+      - [risk, assessment]
 
   - must_id: "item:Art.32:rev_reviewer"
     description: "Reviewer identity (DPO + CISO + Risk lead)"
     excerpt_keywords:
       - [reviewer, identity]
-      - [reviewer, identity, dpo]
-      - [identity, dpo]
-      - [identity, dpo, ciso]
-      - [dpo, ciso]
-      - [dpo, ciso, risk]
-      - [ciso, risk]
-      - [ciso, risk, lead]
+      - [dpo, review]
+      - [ciso, reviewer]
+      - [risk, lead, review]
+      - [security, program, review]
+      - [reviewed, dpo]
 
   - must_id: "item:Art.32:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
       - [review, date]
-      - [review, date, within]
-      - [date, within]
-      - [date, within, planned]
-      - [within, planned]
-      - [within, planned, interval]
       - [planned, interval]
-      - [per, revocation]
+      - [next, review]
+      - [review, within, interval]
+      - [review, scheduled]
+      - [review, period]
 

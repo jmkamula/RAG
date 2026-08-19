@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:6.1.2:risk_assessment
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:6.1.2:risk_assessment"
@@ -14,72 +13,73 @@ must_fingerprints:
   - must_id: "item:6.1.2:personal_data"
     description: "Personal data processing risks explicitly addressed"
     excerpt_keywords:
-      - [personal, processing, risk]
-      - [personal, processing, risks, risk]
-      - [processing, risks, risk]
-      - [processing, risks, explicitly, risk]
-      - [risks, explicitly, risk]
-      - [risks, explicitly, addressed, risk]
-      - [explicitly, addressed, risk]
+      - [personal data, risk assessment]
+      - [processing risks, personal data]
+      - [information security, personal data]
+      - [risk treatment, personal data]
+      - [personal data, risk management]
 
   - must_id: "item:6.1.2:evaluation"
     description: "Risks evaluated against acceptance criteria"
     excerpt_keywords:
-      - [risks, evaluated, risk]
-      - [risks, evaluated, against, risk]
-      - [evaluated, against, risk]
-      - [evaluated, against, acceptance, risk]
-      - [against, acceptance, risk]
-      - [against, acceptance, criteria, risk]
-      - [acceptance, criteria, risk]
+      - [risk, acceptance, criteria]
+      - [evaluate, risk, criteria]
+      - [risk, assessment, criteria]
+      - [risk, evaluated, against]
+      - [acceptance, criteria, defined]
 
   - must_id: "item:6.1.2:likelihood"
     description: "Realistic likelihood assessed"
     excerpt_keywords:
-      - [realistic, likelihood, risk]
-      - [realistic, likelihood, assessed, risk]
-      - [likelihood, assessed, risk]
+      - [risk, likelihood, assessment]
+      - [information, security, risk]
+      - [realistic, likelihood, evaluated]
+      - [risk, assessment, criteria]
+      - [likelihood, level, determined]
 
   - must_id: "item:6.1.2:consequences"
     description: "Potential consequences analysed"
     excerpt_keywords:
-      - [potential, consequences, risk]
-      - [potential, consequences, analysed, risk]
-      - [consequences, analysed, risk]
+      - [risk, assessment, consequences]
+      - [potential, impact, analysis]
+      - [information, security, risk]
+      - [consequence, identified, assessment]
+      - [risk, impact, evaluation]
 
   - must_id: "item:6.1.2:owners"
     description: "Risk owners identified"
     excerpt_keywords:
-      - [risk, owners]
-      - [risk, owners, identified]
-      - [owners, identified, risk]
+      - [risk, owner]
+      - [identified, risk, owner]
+      - [risk, ownership, assigned]
+      - [responsible, risk]
+      - [risk, owner, designation]
 
   - must_id: "item:6.1.2:identification"
     description: "Risks to confidentiality, integrity and availability identified"
     excerpt_keywords:
-      - [risks, confidentiality, risk]
-      - [risks, confidentiality, integrity, risk]
-      - [confidentiality, integrity, risk]
-      - [confidentiality, integrity, availability, risk]
-      - [integrity, availability, risk]
-      - [integrity, availability, identified, risk]
-      - [availability, identified, risk]
+      - [information, security, risk, assessment]
+      - [risk, confidentiality, integrity]
+      - [risk, availability, identified]
+      - [identify, security, risk]
+      - [confidentiality, integrity, availability]
+      - [risk, assessment, procedure]
 
   - must_id: "item:6.1.2:consistency"
     description: "Consistent and comparable results produced"
     excerpt_keywords:
-      - [consistent, comparable, risk]
-      - [consistent, comparable, results, risk]
-      - [comparable, results, risk]
-      - [comparable, results, produced, risk]
-      - [results, produced, risk]
+      - [consistent, risk, assessment]
+      - [comparable, assessment, results]
+      - [risk, assessment, procedure]
+      - [assessment, results, documented]
+      - [consistent, methodology, applied]
 
   - must_id: "item:6.1.2:criteria"
     description: "Risk acceptance criteria defined"
     excerpt_keywords:
-      - [risk, acceptance]
       - [risk, acceptance, criteria]
-      - [acceptance, criteria, risk]
-      - [acceptance, criteria, defined, risk]
-      - [criteria, defined, risk]
+      - [defined, risk, criteria]
+      - [acceptance, threshold, risk]
+      - [risk, evaluation, criteria]
+      - [criteria, acceptance]
 

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.4.6:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.6:applicable_scope"
@@ -14,36 +13,29 @@ must_fingerprints:
   - must_id: "item:A.7.4.6:scope_undeletable_exceptions"
     description: "Undeletable-file exceptions (circumstances where deletion isn't possible per §7.4.6) with rationale + compensating controls"
     excerpt_keywords:
-      - [undeletable, exceptions, temporary]
-      - [undeletable, file, temporary]
-      - [undeletable, file, exceptions, temporary]
-      - [file, exceptions, temporary]
-      - [file, exceptions, circumstances, temporary]
-      - [exceptions, circumstances, temporary]
-      - [exceptions, circumstances, deletion, temporary]
-      - [circumstances, deletion, temporary]
+      - [undeletable, temporary, files]
+      - [exceptions, file, deletion]
+      - [compensating, controls, temporary]
+      - [circumstances, undeletable, files]
+      - [rationale, undeletable, exceptions]
 
   - must_id: "item:A.7.4.6:scope_file_types"
     description: "File types per surface (application temp / journal / roll-back / cache spillover)"
     excerpt_keywords:
-      - [file, types, temporary]
-      - [file, types, surface, temporary]
-      - [types, surface, temporary]
-      - [types, surface, application, temporary]
-      - [surface, application, temporary]
-      - [surface, application, temp, temporary]
-      - [application, temp, temporary]
-      - [application, temp, journal, temporary]
+      - [file, types]
+      - [temporary, files]
+      - [application, temp]
+      - [cache, spillover]
+      - [journal, files]
+      - [rollback, files]
 
   - must_id: "item:A.7.4.6:scope_infrastructure"
     description: "Infrastructure surfaces enumerated (app servers + DB + cache + queue + log processors + backup staging)"
     excerpt_keywords:
-      - [infrastructure, surfaces, temporary]
-      - [infrastructure, surfaces, enumerated, temporary]
-      - [surfaces, enumerated, temporary]
-      - [surfaces, enumerated, app, temporary]
-      - [enumerated, app, temporary]
-      - [enumerated, app, servers, temporary]
-      - [app, servers, temporary]
-      - [app, servers, cache, temporary]
+      - [infrastructure, includes, servers]
+      - [temporary, files, storage]
+      - [app, server, environment]
+      - [database, cache, queue]
+      - [backup, staging, area]
+      - [log, processing, components]
 

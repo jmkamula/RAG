@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.3.7:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.7:applicable_scope"
@@ -14,36 +13,28 @@ must_fingerprints:
   - must_id: "item:A.7.3.7:scope_exclusions"
     description: "Excluded recipients with rationale (e.g"
     excerpt_keywords:
-      - [excluded, recipients, pii]
-      - [excluded, recipients, rationale, pii]
-      - [recipients, rationale, pii]
-      - [recipients, rationale, one, pii]
-      - [rationale, one, pii]
-      - [rationale, one, time, pii]
-      - [one, time, pii]
-      - [one, time, disclosures, pii]
+      - [excluded, recipients]
+      - [third, party, excluded]
+      - [one time, disclosure]
+      - [pii, already, destroyed]
+      - [excluded, scope]
 
   - must_id: "item:A.7.3.7:scope_channel_map"
     description: "Per-recipient communication channel (email / API / portal)"
     excerpt_keywords:
-      - [channel, map, pii]
-      - [recipient, communication, pii]
-      - [recipient, communication, channel, pii]
-      - [communication, channel, pii]
-      - [communication, channel, email, pii]
-      - [channel, email, pii]
-      - [channel, email, api, pii]
-      - [email, api, pii]
+      - [thirdparty, sharing]
+      - [communication, channel]
+      - [perrecipient, channel]
+      - [email, api]
+      - [sharing, scope]
+      - [portal, access]
 
   - must_id: "item:A.7.3.7:scope_recipients_list"
     description: "Third-party recipients enumerated (link to A.7.5.4 disclosure register)"
     excerpt_keywords:
-      - [third, party, pii]
-      - [third, party, recipients, pii]
-      - [party, recipients, pii]
-      - [party, recipients, enumerated, pii]
-      - [recipients, enumerated, pii]
-      - [recipients, enumerated, disclosure, pii]
-      - [enumerated, disclosure, pii]
-      - [in, scope, pii]
+      - [thirdparty, recipients]
+      - [applicable, thirdparty, sharing]
+      - [disclosure, register]
+      - [recipients, enumerated]
+      - [thirdparty, sharing, scope]
 

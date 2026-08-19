@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:4.1:context_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:4.1:context_program_review"
@@ -14,60 +13,47 @@ must_fingerprints:
   - must_id: "item:4.1:rev_scope_check"
     description: "Cross-check against the applicable-domains scope — any new domain that should be covered"
     excerpt_keywords:
-      - [scope, check, understanding]
-      - [cross, check, understanding]
-      - [cross, check, against, understanding]
-      - [check, against, understanding]
-      - [check, against, domains, understanding]
-      - [against, domains, understanding]
-      - [against, domains, scope, understanding]
-      - [domains, scope, understanding]
+      - [scope, applicable, domains]
+      - [crosscheck, scope]
+      - [new, domain, covered]
+      - [scope, review, date]
+      - [review, scope, coverage]
 
   - must_id: "item:4.1:rev_risk_handoff"
     description: "Confirmation that handoff to 6.1.2 risk assessment occurred for material issues"
     excerpt_keywords:
-      - [risk, handoff, understanding]
-      - [confirmation, handoff, understanding]
-      - [confirmation, handoff, risk, understanding]
-      - [handoff, risk, understanding]
-      - [handoff, risk, assessment, understanding]
-      - [risk, assessment, understanding]
-      - [risk, assessment, occurred, understanding]
-      - [assessment, occurred, understanding]
+      - [handoff, risk, assessment]
+      - [risk, assessment, 6.1.2]
+      - [confirmation, handoff]
+      - [material, issues, handoff]
+      - [reviewed, risk, handoff]
 
   - must_id: "item:4.1:rev_register_currency"
     description: "Register currency check — every row reviewed for continued relevance, new issues added"
     excerpt_keywords:
-      - [currency, check, understanding]
-      - [currency, check, every, understanding]
-      - [check, every, understanding]
-      - [check, every, reviewed, understanding]
-      - [every, reviewed, understanding]
-      - [every, reviewed, continued, understanding]
-      - [reviewed, continued, understanding]
-      - [reviewed, continued, relevance, understanding]
+      - [register, currency]
+      - [row, reviewed]
+      - [continued, relevance]
+      - [new, issues, added]
+      - [review, date]
+      - [reviewed, periodically]
 
   - must_id: "item:4.1:rev_reviewer"
     description: "Reviewer identity (ISMS Manager + executive sponsor)"
     excerpt_keywords:
-      - [reviewer, identity, understanding]
-      - [reviewer, identity, isms, understanding]
-      - [identity, isms, understanding]
-      - [identity, isms, manager, understanding]
-      - [isms, manager, understanding]
-      - [isms, manager, executive, understanding]
-      - [manager, executive, understanding]
-      - [manager, executive, sponsor, understanding]
+      - [reviewer, identity]
+      - [isms, manager]
+      - [executive, sponsor]
+      - [review, conducted]
+      - [review, manager]
+      - [review, team, members]
 
   - must_id: "item:4.1:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, understanding]
-      - [review, date, within, understanding]
-      - [date, within, understanding]
-      - [date, within, planned, understanding]
-      - [within, planned, understanding]
-      - [within, planned, interval, understanding]
-      - [planned, interval, understanding]
-      - [per, revocation, understanding]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [scheduled, review, date]
 

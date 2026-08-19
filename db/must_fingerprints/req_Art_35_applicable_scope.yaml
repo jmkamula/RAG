@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.35:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.35:applicable_scope"
@@ -14,48 +13,39 @@ must_fingerprints:
   - must_id: "item:Art.35:scope_white_list"
     description: "Art.35.5 SA white-list activities (NOT requiring DPIA) considered"
     excerpt_keywords:
-      - [art, white, protection]
-      - [art, white, activities, protection]
-      - [white, activities, protection]
-      - [white, activities, not, protection]
-      - [activities, not, protection]
-      - [activities, not, requiring, protection]
-      - [not, requiring, protection]
-      - [not, requiring, dpia, protection]
+      - [white list, activities]
+      - [not, requiring, dpia]
+      - [scope, excludes, dpia]
+      - [activities, excluded, dpia]
+      - [dpi, not, applicable]
 
   - must_id: "item:Art.35:scope_org_criteria"
     description: "Org's own 'likely high risk' criteria (typically EDPB Guidelines 248 nine-criteria approach: scoring with ≥2 of 9 = DPIA required)"
     excerpt_keywords:
-      - [org, criteria, protection]
-      - [org, own, protection]
-      - [org, own, likely, protection]
-      - [own, likely, protection]
-      - [own, likely, high, protection]
-      - [likely, high, protection]
-      - [likely, high, risk, protection]
-      - [high, risk, protection]
+      - [likely, high, risk]
+      - [dpia, required]
+      - [edpb, guidelines, 248]
+      - [nine, criteria]
+      - [scoring, criteria]
+      - [risk, assessment]
 
   - must_id: "item:Art.35:scope_sa_list"
     description: "Lead SA Art.35.4 published list integrated"
     excerpt_keywords:
-      - [lead, art, protection]
-      - [lead, art, published, protection]
-      - [art, published, protection]
-      - [art, published, integrated, protection]
-      - [published, integrated, protection]
-      - [in, scope, protection]
-      - [scope, includes, protection]
-      - [applicable, to, protection]
+      - [lead, sa, art35]
+      - [art35, published, list]
+      - [scope, sa, list]
+      - [integrated, art35, list]
+      - [lead, supervisory, authority]
+      - [art35, sa, scope]
 
   - must_id: "item:Art.35:scope_mandatory"
-    description: "Art.35.3 mandatory categories (a-c) operationalised — systematic evaluation / large-scale special category / large-scale systematic public m"
+    description: "Art.35.3 mandatory categories (a-c) operationalised — systematic evaluation / large-scale special category / large-scale systematic public monitoring"
     excerpt_keywords:
-      - [art, mandatory, protection]
-      - [art, mandatory, categories, protection]
-      - [mandatory, categories, protection]
-      - [mandatory, categories, operationalised, protection]
-      - [categories, operationalised, protection]
-      - [categories, operationalised, systematic, protection]
-      - [operationalised, systematic, protection]
-      - [operationalised, systematic, evaluation, protection]
+      - [mandatory, categories]
+      - [systematic, evaluation]
+      - [large scale, special category]
+      - [large scale, systematic, monitoring]
+      - [public, monitoring]
+      - [art35, scope]
 

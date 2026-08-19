@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.19:notification_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.19:notification_program_review"
@@ -14,48 +13,40 @@ must_fingerprints:
   - must_id: "item:Art.19:rev_exception_validity"
     description: "Exception validity sample — claimed impossibility/disproportionality grounds still hold"
     excerpt_keywords:
-      - [exception, validity, notification]
-      - [exception, validity, sample, notification]
-      - [validity, sample, notification]
-      - [validity, sample, claimed, notification]
-      - [sample, claimed, notification]
-      - [sample, claimed, impossibility, notification]
-      - [claimed, impossibility, notification]
-      - [claimed, impossibility, disproportionality, notification]
+      - [exception, validity]
+      - [impossibility, grounds]
+      - [disproportionality, grounds]
+      - [review, exception]
+      - [exception, still, hold]
+      - [exception, validity, review]
 
   - must_id: "item:Art.19:rev_event_coverage"
     description: "Event coverage check — every Art.16/17/18 event has a register row OR documented exception"
     excerpt_keywords:
-      - [event, coverage, notification]
-      - [event, coverage, check, notification]
-      - [coverage, check, notification]
-      - [coverage, check, every, notification]
-      - [check, every, notification]
-      - [check, every, art, notification]
-      - [every, art, notification]
-      - [every, art, event, notification]
+      - [event, coverage]
+      - [register, row]
+      - [documented, exception]
+      - [art16, event]
+      - [art17, event]
+      - [art18, event]
 
   - must_id: "item:Art.19:rev_reviewer"
     description: "Reviewer identity (DPO)"
     excerpt_keywords:
-      - [reviewer, identity, notification]
-      - [reviewer, identity, dpo, notification]
-      - [identity, dpo, notification]
-      - [per, revocation, notification]
-      - [per, revoked, identity, notification]
-      - [revocation, record, notification]
-      - [review, findings, notification]
-      - [audit, outcomes, notification]
+      - [reviewer, identity]
+      - [dpo, reviewer]
+      - [review, conducted]
+      - [review, performed, dpo]
+      - [data, protection, officer]
+      - [review, responsible, person]
 
   - must_id: "item:Art.19:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, notification]
-      - [review, date, within, notification]
-      - [date, within, notification]
-      - [date, within, planned, notification]
-      - [within, planned, notification]
-      - [within, planned, interval, notification]
-      - [planned, interval, notification]
-      - [per, revocation, notification]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [review, scheduled]
+      - [review, period]
 

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.5.30:ict_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.30:ict_program_review"
@@ -14,84 +13,68 @@ must_fingerprints:
   - must_id: "item:A.5.30:rev_actions"
     description: "Action items captured (e.g"
     excerpt_keywords:
-      - [action, items, ict]
-      - [action, items, captured, ict]
-      - [items, captured, ict]
-      - [items, captured, add, ict]
-      - [captured, add, ict]
-      - [captured, add, new, ict]
-      - [add, new, ict]
-      - [add, new, service, ict]
+      - [action, items, captured]
+      - [review, action, items]
+      - [corrective, actions, identified]
+      - [action, plan, updated]
+      - [actions, tracked, progress]
 
   - must_id: "item:A.5.30:rev_scenario_coverage"
-    description: "Scenario-coverage audit (which scenarios from A.5.29 register actually tested via real recovery; which still untested; remediation plan per "
+    description: "Scenario-coverage audit (which scenarios from A.5.29 register actually tested via real recovery; which still untested; remediation plan per gap)"
     excerpt_keywords:
-      - [scenario, coverage, ict]
-      - [scenario, coverage, audit, ict]
-      - [coverage, audit, ict]
-      - [coverage, audit, scenarios, ict]
-      - [audit, scenarios, ict]
-      - [audit, scenarios, actually, ict]
-      - [scenarios, actually, ict]
-      - [scenarios, actually, tested, ict]
+      - [scenario, coverage]
+      - [recovery, tested]
+      - [gap, remediation]
+      - [audit, scenarios]
+      - [periodic, review]
+      - [untested, scenarios]
 
   - must_id: "item:A.5.30:rev_restore_success"
     description: "Restore-success-rate analysis (last N restores attempted; success rate; failed restores investigated)"
     excerpt_keywords:
-      - [restore, success, ict]
-      - [restore, success, rate, ict]
-      - [success, rate, ict]
-      - [success, rate, analysis, ict]
-      - [rate, analysis, ict]
-      - [rate, analysis, last, ict]
-      - [analysis, last, ict]
-      - [analysis, last, restores, ict]
+      - [restore success, rate analysis]
+      - [failed restores, investigated]
+      - [restore attempts, success rate]
+      - [periodic review, restore success]
+      - [restore success, last attempts]
 
   - must_id: "item:A.5.30:rev_dependency_check"
     description: "Dependency-currency check (sample of services where dependency map re-validated against current reality; shifts flagged for plan update)"
     excerpt_keywords:
-      - [dependency, check, ict]
-      - [dependency, currency, ict]
-      - [dependency, currency, check, ict]
-      - [currency, check, ict]
-      - [currency, check, sample, ict]
-      - [check, sample, ict]
-      - [check, sample, services, ict]
-      - [sample, services, ict]
+      - [dependency, check]
+      - [dependency, map, validated]
+      - [periodic, review]
+      - [plan, update]
+      - [service, sample]
+      - [shift, flagged]
 
   - must_id: "item:A.5.30:rev_rto_compliance"
     description: "RTO/RPO compliance audit (sample of services re-tested; gap to target per service; root cause per gap)"
     excerpt_keywords:
-      - [rto, compliance, ict]
-      - [rto, rpo, ict]
-      - [rto, rpo, compliance, ict]
-      - [rpo, compliance, ict]
-      - [rpo, compliance, audit, ict]
-      - [compliance, audit, ict]
-      - [compliance, audit, sample, ict]
-      - [audit, sample, ict]
+      - [rto, compliance]
+      - [rpo, compliance]
+      - [gap, target, service]
+      - [root, cause, gap]
+      - [sample, services, retested]
+      - [periodic, review]
 
   - must_id: "item:A.5.30:rev_reviewer"
     description: "Reviewer identity (CTO/IT-ops head + BCP-program owner + InfoSec lead jointly; CFO sign-off where critical-service RTO has financial impact)"
     excerpt_keywords:
-      - [reviewer, identity, ict]
-      - [reviewer, identity, cto, ict]
-      - [identity, cto, ict]
-      - [identity, cto, ops, ict]
-      - [cto, ops, ict]
-      - [cto, ops, head, ict]
-      - [ops, head, ict]
-      - [ops, head, bcp, ict]
+      - [reviewer, identity]
+      - [cto, itops, head]
+      - [bcp, program, owner]
+      - [infosec, lead]
+      - [cfo, signoff]
+      - [criticalservice, rto, financial, impact]
 
   - must_id: "item:A.5.30:rev_date"
     description: "Review date within the planned 180-day interval"
     excerpt_keywords:
-      - [review, date, ict]
-      - [review, date, within, ict]
-      - [date, within, ict]
-      - [date, within, planned, ict]
-      - [within, planned, ict]
-      - [within, planned, 180, ict]
-      - [planned, 180, ict]
-      - [planned, 180, day, ict]
+      - [review, date]
+      - [planned, interval]
+      - [periodic, review]
+      - [review, within, days]
+      - [scheduled, review]
+      - [review, frequency]
 

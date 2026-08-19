@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.4.1:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.4.1:applicable_scope"
@@ -14,36 +13,29 @@ must_fingerprints:
   - must_id: "item:B.8.4.1:scope_undeletable"
     description: "Undeletable-file circumstances with rationale + compensating controls"
     excerpt_keywords:
-      - [undeletable, file, temporary]
-      - [undeletable, file, circumstances, temporary]
-      - [file, circumstances, temporary]
-      - [file, circumstances, rationale, temporary]
-      - [circumstances, rationale, temporary]
-      - [circumstances, rationale, compensating, temporary]
-      - [rationale, compensating, temporary]
-      - [rationale, compensating, controls, temporary]
+      - [temporary, files]
+      - [undeletable, files]
+      - [compensating, controls]
+      - [file, retention, policy]
+      - [circumstances, undeletable]
+      - [temporary, file, scope]
 
   - must_id: "item:B.8.4.1:scope_shared_paths"
     description: "Shared paths where cross-tenant temp file leakage is possible (with mitigation)"
     excerpt_keywords:
-      - [shared, paths, temporary]
-      - [shared, paths, cross, temporary]
-      - [paths, cross, temporary]
-      - [paths, cross, tenant, temporary]
-      - [cross, tenant, temporary]
-      - [cross, tenant, temp, temporary]
-      - [tenant, temp, temporary]
-      - [tenant, temp, file, temporary]
+      - [shared, paths]
+      - [temporary, files]
+      - [crosstenant, leakage]
+      - [tempfile, scope]
+      - [mitigation, measures]
+      - [access, control]
 
   - must_id: "item:B.8.4.1:scope_infrastructure"
     description: "Customer-serving infrastructure enumerated"
     excerpt_keywords:
-      - [customer, serving, temporary]
-      - [customer, serving, infrastructure, temporary]
-      - [serving, infrastructure, temporary]
-      - [serving, infrastructure, enumerated, temporary]
-      - [infrastructure, enumerated, temporary]
-      - [in, scope, temporary]
-      - [scope, includes, temporary]
-      - [applicable, to, temporary]
+      - [customer, infrastructure]
+      - [applicable, processor]
+      - [temporary, files]
+      - [enumerated, infrastructure]
+      - [scope, infrastructure]
 

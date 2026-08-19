@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.2.5:pia_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.5:pia_procedure"
@@ -14,72 +13,59 @@ must_fingerprints:
   - must_id: "item:A.7.2.5:proc_29134_alignment"
     description: "Alignment with ISO/IEC 29134 methodology (referenced by §7.2.5)"
     excerpt_keywords:
-      - [29134, alignment, privacy]
-      - [alignment, iso, privacy]
-      - [alignment, iso, iec, privacy]
-      - [iso, iec, privacy]
-      - [iso, iec, 29134, privacy]
-      - [iec, 29134, privacy]
-      - [iec, 29134, methodology, privacy]
-      - [29134, methodology, privacy]
+      - [isoiec, 29134, methodology]
+      - [privacy, impact, assessment]
+      - [conduct, pia, procedure]
+      - [aligned, isoiec, 29134]
+      - [pia, shall, follow]
+      - [assessment, process, steps]
 
   - must_id: "item:A.7.2.5:proc_prior_consultation"
     description: "Prior-consultation trigger — where residual high risk remains, SA consulted per Art.36"
     excerpt_keywords:
-      - [prior, consultation, privacy]
-      - [prior, consultation, trigger, privacy]
-      - [consultation, trigger, privacy]
-      - [consultation, trigger, residual, privacy]
-      - [trigger, residual, privacy]
-      - [trigger, residual, high, privacy]
-      - [residual, high, privacy]
-      - [residual, high, risk, privacy]
+      - [prior, consultation]
+      - [residual, high, risk]
+      - [consulted, art, 36]
+      - [privacy, impact, assessment]
+      - [triggered, risk]
+      - [security, assessor, consulted]
 
   - must_id: "item:A.7.2.5:proc_signoff"
     description: "Signoff — DPO signoff + business-owner signoff before processing commences"
     excerpt_keywords:
-      - [signoff, dpo, privacy]
-      - [signoff, dpo, signoff, privacy]
-      - [dpo, signoff, privacy]
-      - [dpo, signoff, business, privacy]
-      - [signoff, business, privacy]
-      - [signoff, business, owner, privacy]
-      - [business, owner, privacy]
-      - [business, owner, signoff, privacy]
+      - [dpo, signoff]
+      - [businessowner, approval]
+      - [signoff, before, processing]
+      - [processing, commences, approval]
+      - [dpo, businessowner, signoff]
 
   - must_id: "item:A.7.2.5:proc_consultation"
     description: "Stakeholder consultation — DPO opinion (Art.35.2) + subject-representative views where appropriate (Art.35.9)"
     excerpt_keywords:
-      - [stakeholder, consultation, privacy]
-      - [stakeholder, consultation, dpo, privacy]
-      - [consultation, dpo, privacy]
-      - [consultation, dpo, opinion, privacy]
-      - [dpo, opinion, privacy]
-      - [dpo, opinion, art, privacy]
-      - [opinion, art, privacy]
-      - [opinion, art, subject, privacy]
+      - [stakeholder, consultation]
+      - [dpo, opinion]
+      - [subject, representative, views]
+      - [privacy, impact, assessment]
+      - [consultation, process]
+      - [involve, stakeholders]
 
   - must_id: "item:A.7.2.5:proc_assessment_scope"
     description: "Assessment scope — PII types + storage + transfers + retention + risks to subjects + safeguards + residual risk"
     excerpt_keywords:
-      - [assessment, scope, privacy]
-      - [assessment, scope, pii, privacy]
-      - [scope, pii, privacy]
-      - [scope, pii, types, privacy]
-      - [pii, types, privacy]
-      - [pii, types, storage, privacy]
-      - [types, storage, privacy]
-      - [types, storage, transfers, privacy]
+      - [assessment, scope]
+      - [pii, types]
+      - [storage, transfers]
+      - [retention, period]
+      - [risks, subjects]
+      - [safeguards, residual, risk]
 
   - must_id: "item:A.7.2.5:proc_trigger_criteria"
-    description: "Trigger criteria — new processing / material changes / high-risk indicators (Art.35.3 mandatory list: systematic evaluation + large-scale sp"
+    description: "Trigger criteria — new processing / material changes / high-risk indicators (Art.35.3 mandatory list: systematic evaluation + large-scale special-category + systematic monitoring of public spaces + ot"
     excerpt_keywords:
-      - [trigger, criteria, privacy]
-      - [trigger, criteria, new, privacy]
-      - [criteria, new, privacy]
-      - [criteria, new, processing, privacy]
-      - [new, processing, privacy]
-      - [new, processing, material, privacy]
-      - [processing, material, privacy]
-      - [processing, material, changes, privacy]
+      - [trigger, criteria]
+      - [new, processing]
+      - [material, changes]
+      - [highrisk, indicators]
+      - [systematic, evaluation]
+      - [largescale, specialcategory]
 

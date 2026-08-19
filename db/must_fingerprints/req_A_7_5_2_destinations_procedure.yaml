@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.5.2:destinations_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.5.2:destinations_procedure"
@@ -14,60 +13,45 @@ must_fingerprints:
   - must_id: "item:A.7.5.2:proc_change_notification"
     description: "Change notification — new destinations added trigger notice update"
     excerpt_keywords:
-      - [change, notification, countries]
-      - [change, notification, new, countries]
-      - [notification, new, countries]
-      - [notification, new, destinations, countries]
-      - [new, destinations, countries]
-      - [new, destinations, added, countries]
-      - [destinations, added, countries]
-      - [destinations, added, trigger, countries]
+      - [change, notification]
+      - [new, destinations, added]
+      - [transfer, destination, update]
+      - [triggered, change]
+      - [must, notify, update]
 
   - must_id: "item:A.7.5.2:proc_alignment_7_5_1"
     description: "Alignment with A.7.5.1 — every destination has a documented basis"
     excerpt_keywords:
-      - [alignment, 7, 5, 1, countries]
-      - [alignment, every, countries]
-      - [alignment, every, destination, countries]
-      - [every, destination, countries]
-      - [every, destination, has, countries]
-      - [destination, has, countries]
-      - [destination, has, documented, countries]
-      - [has, documented, countries]
+      - [transfer, destination, documented]
+      - [documented, basis, transfer]
+      - [shall, document, destination]
+      - [alignment, a752, a751]
+      - [transfer, basis, recorded]
 
   - must_id: "item:A.7.5.2:proc_law_enforcement_exception"
     description: "Law enforcement exception — cases where destinations cannot be specified in advance (§7.5.2 last paragraph)"
     excerpt_keywords:
-      - [law, enforcement, exception, countries]
-      - [law, enforcement, countries]
-      - [enforcement, exception, countries]
-      - [enforcement, exception, cases, countries]
-      - [exception, cases, countries]
-      - [exception, cases, destinations, countries]
-      - [cases, destinations, countries]
-      - [cases, destinations, cannot, countries]
+      - [law enforcement, exception]
+      - [cannot, specified, advance]
+      - [transfer, destination, exception]
+      - [cases, law enforcement]
+      - [exception, pii, transfer]
 
   - must_id: "item:A.7.5.2:proc_subcontractor_inclusion"
     description: "Subcontractor destinations included — countries where subcontracted processing occurs"
     excerpt_keywords:
-      - [subcontractor, inclusion, countries]
-      - [subcontractor, destinations, countries]
-      - [subcontractor, destinations, included, countries]
-      - [destinations, included, countries]
-      - [destinations, included, countries]
-      - [included, countries]
-      - [included, countries, subcontracted]
-      - [countries, subcontracted]
+      - [subcontractor, processing, country]
+      - [transfer, country]
+      - [included, subcontractor, destination]
+      - [processing, occurs, location]
+      - [international, transfer, subcontractor]
 
   - must_id: "item:A.7.5.2:proc_destinations_publication"
     description: "Destinations list publication — countries + international orgs made available to customers/subjects"
     excerpt_keywords:
-      - [destinations, publication, countries]
-      - [destinations, publication, countries]
-      - [publication, countries]
-      - [publication, countries, international]
-      - [countries, international]
-      - [countries, international, orgs]
-      - [international, orgs]
-      - [international, orgs, made]
+      - [destinations, list]
+      - [published, customers]
+      - [transfer, countries]
+      - [international, organizations, published]
+      - [made, available, subjects]
 

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:B.8.2.6:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.6:applicable_scope"
@@ -14,35 +13,28 @@ must_fingerprints:
   - must_id: "item:B.8.2.6:scope_coverage_test"
     description: "Coverage test — processor RoPA rowcount reconciles against B.8.2.1 customer register"
     excerpt_keywords:
-      - [coverage, test, records]
-      - [coverage, test, processor, records]
-      - [test, processor, records]
-      - [test, processor, ropa, records]
-      - [processor, ropa, records]
-      - [processor, ropa, rowcount, records]
-      - [ropa, rowcount, records]
-      - [ropa, rowcount, reconciles, records]
+      - [processor, ropa, coverage]
+      - [customer, register, reconcile]
+      - [ropa, rowcount, test]
+      - [coverage, test, processor]
+      - [reconciles, against, register]
 
   - must_id: "item:B.8.2.6:scope_own_controller_exclusion"
     description: "Own-controller processing excluded (goes to a separate own-controller RoPA if the org also acts as controller — Arion does both)"
     excerpt_keywords:
-      - [own, controller, exclusion, records]
-      - [own, controller, records]
-      - [own, controller, processing, records]
-      - [controller, processing, records]
-      - [controller, processing, excluded, records]
-      - [processing, excluded, records]
-      - [processing, excluded, goes, records]
-      - [excluded, goes, records]
+      - [owncontroller, excluded]
+      - [processing, excluded, owncontroller]
+      - [separate, owncontroller, ropa]
+      - [acts, controller, excluded]
+      - [organization, owncontroller, exclusion]
 
   - must_id: "item:B.8.2.6:scope_customer_engagements"
     description: "In-scope customer engagements (from B.8.2.1 register)"
     excerpt_keywords:
-      - [customer, engagements, records]
-      - [scope, customer, records]
-      - [scope, customer, engagements, records]
-      - [in, scope, records]
-      - [scope, includes, records]
-      - [applicable, to, records]
-      - [excluded, from, records]
+      - [in scope, customer engagements]
+      - [scope, customer data]
+      - [applies, customer engagements]
+      - [covered, customer engagements]
+      - [scope, processing pii]
+      - [engagements, in scope]
 

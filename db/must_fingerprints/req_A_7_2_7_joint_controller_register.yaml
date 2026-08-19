@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.2.7:joint_controller_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.7:joint_controller_register"
@@ -14,72 +13,56 @@ must_fingerprints:
   - must_id: "item:A.7.2.7:reg_effective_dates"
     description: "Effective / termination dates per row"
     excerpt_keywords:
-      - [effective, dates, joint]
-      - [effective, termination, joint]
-      - [effective, termination, dates, joint]
-      - [termination, dates, joint]
-      - [per, row, joint]
-      - [each, row, joint]
-      - [column, containing, joint]
-      - [each, entry, joint]
+      - [effective, date]
+      - [termination, date]
+      - [start, date]
+      - [end, date]
+      - [date, record]
+      - [date, entry]
 
   - must_id: "item:A.7.2.7:reg_essence_url"
     description: "Essence-of-arrangement URL / publication reference per row"
     excerpt_keywords:
-      - [essence, url, joint]
-      - [essence, arrangement, joint]
-      - [essence, arrangement, url, joint]
-      - [arrangement, url, joint]
-      - [arrangement, url, publication, joint]
-      - [url, publication, joint]
-      - [url, publication, reference, joint]
-      - [publication, reference, joint]
+      - [arrangement, url]
+      - [publication, reference]
+      - [joint, controller, arrangement]
+      - [register, url]
+      - [essence, arrangement]
+      - [arrangement, publication, reference]
 
   - must_id: "item:A.7.2.7:reg_processing_scope"
     description: "Processing scope per row (activities + PII categories jointly handled)"
     excerpt_keywords:
-      - [processing, scope, joint]
-      - [processing, scope, activities, joint]
-      - [scope, activities, joint]
-      - [scope, activities, pii]
-      - [activities, pii]
+      - [processing, scope]
+      - [joint, controller, arrangement]
       - [activities, pii, categories]
-      - [pii, categories]
-      - [pii, categories, jointly]
+      - [processing, activities, record]
+      - [pii, categories, handled]
 
   - must_id: "item:A.7.2.7:reg_document_reference"
     description: "Executed arrangement document reference per row"
     excerpt_keywords:
-      - [document, reference, joint]
-      - [executed, arrangement, joint]
-      - [executed, arrangement, document, joint]
-      - [arrangement, document, joint]
-      - [arrangement, document, reference, joint]
-      - [per, row, joint]
-      - [each, row, joint]
-      - [column, containing, joint]
+      - [arrangement, document, reference]
+      - [joint, controller, arrangement]
+      - [executed, arrangement, document]
+      - [register, joint, controller]
+      - [document, reference, per, row]
 
   - must_id: "item:A.7.2.7:reg_co_controller"
     description: "Co-controller identity per row (legal entity)"
     excerpt_keywords:
-      - [co, controller, joint]
-      - [controller, identity, joint]
-      - [controller, identity, legal, joint]
-      - [identity, legal, joint]
-      - [identity, legal, entity, joint]
-      - [legal, entity, joint]
-      - [per, row, joint]
-      - [each, row, joint]
+      - [joint, controller, register]
+      - [co, controller, identity]
+      - [legal, entity, name]
+      - [controller, name, address]
+      - [joint, controller, agreement]
 
   - must_id: "item:A.7.2.7:reg_arrangement_id"
     description: "Unique arrangement identifier per row"
     excerpt_keywords:
-      - [arrangement, id, joint]
-      - [unique, arrangement, joint]
-      - [unique, arrangement, identifier, joint]
-      - [arrangement, identifier, joint]
-      - [per, row, joint]
-      - [each, row, joint]
-      - [column, containing, joint]
-      - [each, entry, joint]
+      - [arrangement, identifier]
+      - [unique, arrangement, id]
+      - [joint, controller, arrangement]
+      - [arrangement, reference]
+      - [register, arrangement, id]
 

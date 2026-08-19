@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.4.8:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.8:applicable_scope"
@@ -14,36 +13,30 @@ must_fingerprints:
   - must_id: "item:A.7.4.8:scope_cloud_dependencies"
     description: "Cloud disposal dependencies (provider attestations required, retention windows outside org's control)"
     excerpt_keywords:
-      - [cloud, dependencies, disposal]
-      - [cloud, disposal]
       - [cloud, disposal, dependencies]
-      - [disposal, dependencies]
-      - [disposal, dependencies, provider]
-      - [dependencies, provider, disposal]
-      - [dependencies, provider, attestations, disposal]
-      - [provider, attestations, disposal]
+      - [provider, attestation, required]
+      - [retention, period, outside]
+      - [outside, organization, control]
+      - [disposal, scope, includes]
+      - [cloud, service, provider]
 
   - must_id: "item:A.7.4.8:scope_media_types"
     description: "Media types in inventory (SSD / HDD / tape / paper / cloud volume / mobile device)"
     excerpt_keywords:
-      - [media, types, disposal]
-      - [media, types, inventory, disposal]
-      - [types, inventory, disposal]
-      - [types, inventory, ssd, disposal]
-      - [inventory, ssd, disposal]
-      - [inventory, ssd, hdd, disposal]
-      - [ssd, hdd, disposal]
-      - [ssd, hdd, tape, disposal]
+      - [media, types]
+      - [inventory, media]
+      - [ssd, hdd]
+      - [tape, paper]
+      - [cloud, volume]
+      - [mobile, device]
 
   - must_id: "item:A.7.4.8:scope_contexts"
     description: "Disposal contexts enumerated (end-of-processing / hardware failure / decommission / device return / paper archive)"
     excerpt_keywords:
       - [disposal, contexts]
-      - [disposal, contexts, enumerated]
-      - [contexts, enumerated, disposal]
-      - [contexts, enumerated, end, disposal]
-      - [enumerated, end, disposal]
-      - [enumerated, end, processing, disposal]
-      - [end, processing, disposal]
-      - [end, processing, hardware, disposal]
+      - [endofprocessing, disposal]
+      - [hardware, failure]
+      - [device, return]
+      - [paper, archive]
+      - [decommission, device]
 

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.40:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.40:applicable_scope"
@@ -14,36 +13,29 @@ must_fingerprints:
   - must_id: "item:Art.40:scope_excluded"
     description: "Codes considered but not adhered to (rationale)"
     excerpt_keywords:
-      - [codes, considered]
-      - [codes, considered, but]
-      - [considered, but, codes]
-      - [considered, but, not, codes]
-      - [but, not, codes]
-      - [but, not, adhered, codes]
-      - [not, adhered, codes]
-      - [not, adhered, rationale, codes]
+      - [codes, not, adhered]
+      - [excluded, code]
+      - [code, conduct, excluded]
+      - [codes, considered, excluded]
+      - [scope, excludes, codes]
 
   - must_id: "item:Art.40:scope_chosen_codes"
     description: "Codes chosen for adherence with rationale"
     excerpt_keywords:
-      - [chosen, codes]
       - [codes, chosen]
-      - [codes, chosen, adherence]
-      - [chosen, adherence, codes]
-      - [chosen, adherence, rationale, codes]
-      - [adherence, rationale, codes]
-      - [in, scope, codes]
-      - [scope, includes, codes]
+      - [adherence, codes]
+      - [codes, rationale]
+      - [chosen, justification]
+      - [scope, codes]
+      - [applicable, codes]
 
   - must_id: "item:Art.40:scope_sector_codes"
     description: "Sector codes available (cloud, healthcare, advertising, etc.)"
     excerpt_keywords:
       - [sector, codes]
-      - [sector, codes, available]
-      - [codes, available]
-      - [codes, available, cloud]
-      - [available, cloud, codes]
-      - [available, cloud, healthcare, codes]
-      - [cloud, healthcare, codes]
-      - [cloud, healthcare, advertising, codes]
+      - [applicable, code, scope]
+      - [codes, conduct]
+      - [industry, codes]
+      - [code, conduct]
+      - [sector, specific, codes]
 

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.4.3:accuracy_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.3:accuracy_procedure"
@@ -14,51 +13,41 @@ must_fingerprints:
   - must_id: "item:A.7.4.3:proc_up_to_date_check"
     description: "Up-to-date check cadence per PII category (e.g"
     excerpt_keywords:
-      - [up, date, check, accuracy]
-      - [date, check, accuracy]
-      - [date, check, cadence, accuracy]
-      - [check, cadence, accuracy]
-      - [check, cadence, pii, accuracy]
-      - [cadence, pii, accuracy]
-      - [cadence, pii, category, accuracy]
-      - [pii, category, accuracy]
+      - [up to date, check cadence]
+      - [pii category, refresh cadence]
+      - [accuracy, quality, procedure]
+      - [data, review, frequency]
+      - [periodic, update, check]
+      - [contact details, refresh]
 
   - must_id: "item:A.7.4.3:proc_correction_link"
     description: "Cross-link to A.7.3.6 correction procedure — subject-initiated rectification handled there"
     excerpt_keywords:
-      - [cross, correction, accuracy]
-      - [cross, correction, subject, accuracy]
-      - [correction, subject, accuracy]
-      - [correction, subject, initiated, accuracy]
-      - [subject, initiated, accuracy]
-      - [subject, initiated, rectification, accuracy]
-      - [initiated, rectification, accuracy]
-      - [initiated, rectification, handled, accuracy]
+      - [correction, procedure]
+      - [subject, initiated, rectification]
+      - [handled, correction, procedure]
+      - [refer, correction, procedure]
+      - [crosslink, correction, procedure]
 
   - must_id: "item:A.7.4.3:proc_lifecycle_coverage"
     description: "Lifecycle coverage — applies at collection + processing + storage + sharing + disposal stages"
     excerpt_keywords:
-      - [lifecycle, coverage, accuracy]
-      - [lifecycle, coverage, collection, accuracy]
-      - [coverage, collection, accuracy]
-      - [coverage, collection, processing, accuracy]
-      - [collection, processing, accuracy]
-      - [collection, processing, storage, accuracy]
-      - [processing, storage, accuracy]
-      - [processing, storage, sharing, accuracy]
+      - [collection, processing, storage]
+      - [data, sharing, disposal]
+      - [lifecycle, data, coverage]
+      - [processing, storage, disposal]
+      - [collection, data, quality]
 
   - must_id: "item:A.7.4.3:proc_inaccuracy_response"
     description: "Inaccuracy response — how the org responds when inaccuracy is detected (internal + subject-flagged)"
     excerpt_keywords:
-      - [inaccuracy, response, accuracy]
-      - [inaccuracy, response, org, accuracy]
-      - [response, org, accuracy]
-      - [response, org, responds, accuracy]
-      - [org, responds, accuracy]
-      - [org, responds, inaccuracy, accuracy]
-      - [responds, inaccuracy, accuracy]
-      - [responds, inaccuracy, detected, accuracy]
-      # Ship 38'.b curator additions — verb-driven doc-prose patterns
+      - [respond, inaccuracy]
+      - [inaccuracy, detected]
+      - [subject, flagged, inaccuracy]
+      - [investigate, data, accuracy]
+      - [correct, inaccurate, information]
+      - [notify, data, subject]
+      # Ship 38'.b curator additions
       - [corrected, inaccurate]
       - [correction, process]
       - [correction, tracked]
@@ -67,14 +56,12 @@ must_fingerprints:
   - must_id: "item:A.7.4.3:proc_inaccuracy_prevention"
     description: "Inaccuracy prevention — technical + procedural controls (input validation + duplicate detection + integration reconciliation)"
     excerpt_keywords:
-      - [inaccuracy, prevention, accuracy]
-      - [inaccuracy, prevention, technical, accuracy]
-      - [prevention, technical, accuracy]
-      - [prevention, technical, procedural, accuracy]
-      - [technical, procedural, accuracy]
-      - [technical, procedural, controls, accuracy]
-      - [procedural, controls, accuracy]
-      - [procedural, controls, input, accuracy]
+      - [input, validation]
+      - [duplicate, detection]
+      - [integration, reconciliation]
+      - [technical, controls]
+      - [procedural, controls]
+      - [prevent, inaccuracy]
       # Ship 38'.b curator additions
       - [structured, validation]
       - [validation, forms]

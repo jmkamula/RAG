@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.44:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.44:applicable_scope"
@@ -14,36 +13,30 @@ must_fingerprints:
   - must_id: "item:Art.44:scope_excluded_flows"
     description: "Excluded flows (purely-internal within EU/EEA; transit-only; non-personal data)"
     excerpt_keywords:
-      - [excluded, flows, general]
-      - [excluded, flows, purely, general]
-      - [flows, purely, general]
-      - [flows, purely, internal, general]
-      - [purely, internal, general]
-      - [purely, internal, within, general]
-      - [internal, within, general]
-      - [internal, within, eea, general]
+      - [excluded, flows]
+      - [purelyinternal, within, eueea]
+      - [transitonly, data]
+      - [nonpersonal, data]
+      - [excluded, scope]
+      - [internal, transfer, excluded]
 
   - must_id: "item:Art.44:scope_eu_eea"
     description: "EU/EEA boundary — which destinations are within / outside the GDPR territorial scope"
     excerpt_keywords:
-      - [eu, eea, general]
-      - [eea, boundary, general]
-      - [eea, boundary, destinations, general]
-      - [boundary, destinations, general]
-      - [boundary, destinations, within, general]
-      - [destinations, within, general]
-      - [destinations, within, outside, general]
-      - [within, outside, general]
+      - [applies, eea]
+      - [within, gdpr, scope]
+      - [outside, eu, territory]
+      - [transfer, third]
+      - [scope, gdpr]
+      - [eu, eea, boundary]
 
   - must_id: "item:Art.44:scope_transfer_definition"
     description: "Operational definition of 'transfer' per EDPB 05/2021 three cumulative criteria"
     excerpt_keywords:
-      - [transfer, definition, general]
-      - [operational, definition, general]
-      - [operational, definition, transfer, general]
-      - [definition, transfer, general]
-      - [definition, transfer, edpb, general]
-      - [transfer, edpb, general]
-      - [transfer, edpb, 2021, general]
-      - [edpb, 2021, general]
+      - [transfer, definition]
+      - [edpb, criteria]
+      - [cumulative, criteria]
+      - [operational, definition]
+      - [personal, data, transfer]
+      - [crossborder, transfer]
 

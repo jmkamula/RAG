@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.8.21:service_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.21:service_program_review"
@@ -14,72 +13,58 @@ must_fingerprints:
   - must_id: "item:A.8.21:rev_findings_update"
     description: "Findings propagated to procedure / register / scope"
     excerpt_keywords:
-      - [findings, update, network]
-      - [findings, propagated, network]
-      - [findings, propagated, scope, network]
-      - [propagated, scope, network]
-      - [per, revocation, network]
-      - [per, revoked, identity, network]
-      - [revocation, record, network]
-      - [review, findings, network]
+      - [findings, update]
+      - [review, findings]
+      - [findings, propagated]
+      - [findings, procedure]
+      - [findings, register]
+      - [findings, scope]
 
   - must_id: "item:A.8.21:rev_a522_link"
     description: "Cross-link to A.5.22 supplier review outcomes for in-scope vendor services"
     excerpt_keywords:
-      - [cross, supplier, network]
-      - [cross, supplier, review, network]
-      - [supplier, review, network]
-      - [supplier, review, outcomes, network]
-      - [review, outcomes, network]
-      - [review, outcomes, scope, network]
-      - [outcomes, scope, network]
-      - [outcomes, scope, vendor, network]
+      - [network, services, review]
+      - [supplier, review, outcomes]
+      - [vendor, services, scope]
+      - [periodic, review, network]
+      - [crosslink, supplier, review]
 
   - must_id: "item:A.8.21:rev_mechanisms_currency"
     description: "Security-mechanism currency check (TLS versions / crypto algorithms / authentication strength still acceptable)"
     excerpt_keywords:
-      - [mechanisms, currency, network]
-      - [security, mechanism, network]
-      - [security, mechanism, currency, network]
-      - [mechanism, currency, network]
-      - [mechanism, currency, check, network]
-      - [currency, check, network]
-      - [currency, check, tls, network]
-      - [check, tls, network]
+      - [security, mechanism, review]
+      - [tls, version, check]
+      - [crypto, algorithm, currency]
+      - [authentication, strength, review]
+      - [periodic, network, review]
+      - [mechanism, currency, check]
 
   - must_id: "item:A.8.21:rev_sla_attainment"
     description: "SLA-attainment trending per service"
     excerpt_keywords:
-      - [sla, attainment, network]
-      - [sla, attainment, trending, network]
-      - [attainment, trending, network]
-      - [attainment, trending, service, network]
-      - [trending, service, network]
-      - [per, revocation, network]
-      - [per, revoked, identity, network]
-      - [revocation, record, network]
+      - [sla, attainment]
+      - [service, level, agreement]
+      - [trend, analysis]
+      - [periodic, review]
+      - [service, performance, metrics]
+      - [sla, performance, trending]
 
   - must_id: "item:A.8.21:rev_reviewer"
     description: "Reviewer identity (Network Engineering + Supplier Management)"
     excerpt_keywords:
-      - [reviewer, identity, network]
-      - [reviewer, identity, network]
-      - [identity, network]
-      - [identity, network, engineering]
-      - [network, engineering]
-      - [network, engineering, supplier]
-      - [engineering, supplier, network]
-      - [engineering, supplier, management, network]
+      - [reviewer, identity]
+      - [network, engineering, reviewer]
+      - [supplier, management, reviewer]
+      - [review, conducted]
+      - [review, performed]
 
   - must_id: "item:A.8.21:rev_date"
     description: "Review date within the planned interval (≤180 days)"
     excerpt_keywords:
-      - [review, date, network]
-      - [review, date, within, network]
-      - [date, within, network]
-      - [date, within, planned, network]
-      - [within, planned, network]
-      - [within, planned, interval, network]
-      - [planned, interval, network]
-      - [planned, interval, 180, network]
+      - [review, date]
+      - [periodic, review]
+      - [review, interval]
+      - [planned, interval]
+      - [review, scheduled]
+      - [review, frequency]
 

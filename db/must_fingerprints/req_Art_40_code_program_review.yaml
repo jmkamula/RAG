@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.40:code_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.40:code_program_review"
@@ -14,48 +13,38 @@ must_fingerprints:
   - must_id: "item:Art.40:rev_monitoring_body_status"
     description: "Monitoring body status — body still accredited (Art.41) and engaged"
     excerpt_keywords:
-      - [monitoring, body, status, codes]
-      - [monitoring, body, codes]
-      - [body, status, codes]
-      - [body, status, body, codes]
-      - [status, body, codes]
-      - [status, body, still, codes]
-      - [body, still, codes]
-      - [body, still, accredited, codes]
+      - [monitoring body, accredited status]
+      - [body, still accredited]
+      - [accreditation, status, review]
+      - [review, monitoring body]
+      - [engaged, monitoring body]
+      - [status, review, accredited]
 
   - must_id: "item:Art.40:rev_adherence_currency"
     description: "Adherence currency — every active adherence has current monitoring body sign-off"
     excerpt_keywords:
-      - [adherence, currency, codes]
-      - [adherence, currency, every, codes]
-      - [currency, every, codes]
-      - [currency, every, active, codes]
-      - [every, active, codes]
-      - [every, active, adherence, codes]
-      - [active, adherence, codes]
-      - [active, adherence, has, codes]
+      - [adherence, currency]
+      - [monitoring, body, signoff]
+      - [active, adherence, review]
+      - [review, adherence, status]
+      - [current, monitoring, review]
+      - [adherence, monitoring, frequency]
 
   - must_id: "item:Art.40:rev_reviewer"
     description: "Reviewer identity (DPO + sector compliance lead)"
     excerpt_keywords:
-      - [reviewer, identity, codes]
-      - [reviewer, identity, dpo, codes]
-      - [identity, dpo, codes]
-      - [identity, dpo, sector, codes]
-      - [dpo, sector, codes]
-      - [dpo, sector, compliance, codes]
-      - [sector, compliance, codes]
-      - [sector, compliance, lead, codes]
+      - [reviewer, identity]
+      - [dpo, reviewer]
+      - [sector, compliance, lead]
+      - [review, conducted]
+      - [review, performed]
 
   - must_id: "item:Art.40:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, codes]
-      - [review, date, within, codes]
-      - [date, within, codes]
-      - [date, within, planned, codes]
-      - [within, planned, codes]
-      - [within, planned, interval, codes]
-      - [planned, interval, codes]
-      - [per, revocation, codes]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [scheduled, review, date]
 

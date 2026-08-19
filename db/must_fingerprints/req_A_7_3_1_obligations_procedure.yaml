@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.3.1:obligations_procedure
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.1:obligations_procedure"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:A.7.3.1:proc_documented_extent"
     description: "Documented extent — subject-facing description of which obligations are fulfilled + how"
     excerpt_keywords:
-      - [documented, extent, determining]
-      - [documented, extent, subject, determining]
-      - [extent, subject, determining]
-      - [extent, subject, facing, determining]
-      - [subject, facing, determining]
-      - [subject, facing, description, determining]
-      - [facing, description, determining]
-      - [facing, description, obligations, determining]
+      - [documented, extent]
+      - [fulfil, obligation]
+      - [pii, principal, obligation]
+      - [subject, facing, description]
+      - [obligations, fulfilled]
+      - [procedure, documented]
 
   - must_id: "item:A.7.3.1:proc_contact_parity"
-    description: "Contact-point parity — contact channel matches PII-collection channel (email if collected by email, web if collected via web; not phone/fax "
+    description: "Contact-point parity — contact channel matches PII-collection channel (email if collected by email, web if collected via web; not phone/fax fallback)"
     excerpt_keywords:
-      - [contact, parity, determining]
-      - [contact, point, determining]
-      - [contact, point, parity, determining]
-      - [point, parity, determining]
-      - [point, parity, contact, determining]
-      - [parity, contact, determining]
-      - [parity, contact, channel, determining]
-      - [contact, channel, determining]
+      - [contact, channel]
+      - [pii, collection, channel]
+      - [email, collected]
+      - [web, collected]
+      - [contact, point, parity]
+      - [phone, fax, fallback]
 
   - must_id: "item:A.7.3.1:proc_accessibility"
     description: "Accessibility standard — accessible + timely means (WCAG-align, language accessibility, response-time SLA)"
     excerpt_keywords:
-      - [accessibility, standard, determining]
-      - [accessibility, standard, accessible, determining]
-      - [standard, accessible, determining]
-      - [standard, accessible, timely, determining]
-      - [accessible, timely, determining]
-      - [accessible, timely, means, determining]
-      - [timely, means, determining]
-      - [timely, means, wcag, determining]
+      - [accessible, timely]
+      - [wcag, compliant]
+      - [response, time, sla]
+      - [language, accessibility]
+      - [shall, provide, accessibility]
 
   - must_id: "item:A.7.3.1:proc_fulfilment_means"
-    description: "Fulfilment means enumerated per obligation (which subject-rights channel handles each right — access / rectification / erasure / portability"
+    description: "Fulfilment means enumerated per obligation (which subject-rights channel handles each right — access / rectification / erasure / portability / objection)"
     excerpt_keywords:
-      - [fulfilment, means, determining]
-      - [fulfilment, means, enumerated, determining]
-      - [means, enumerated, determining]
-      - [means, enumerated, obligation, determining]
-      - [enumerated, obligation, determining]
-      - [enumerated, obligation, subject, determining]
-      - [obligation, subject, determining]
-      - [obligation, subject, rights, determining]
+      - [fulfilment, means]
+      - [obligation, channel]
+      - [subjectrights, access]
+      - [rectification, erasure]
+      - [portability, objection]
+      - [handles, right]
 
   - must_id: "item:A.7.3.1:proc_obligation_catalog"
     description: "Obligation catalog per applicable jurisdiction (GDPR + UK GDPR + CCPA + LGPD as applicable) with citation for each obligation"
     excerpt_keywords:
-      - [obligation, catalog, determining]
-      - [obligation, catalog, jurisdiction, determining]
-      - [catalog, jurisdiction, determining]
-      - [catalog, jurisdiction, gdpr, determining]
-      - [jurisdiction, gdpr, determining]
-      - [jurisdiction, gdpr, gdpr, determining]
-      - [gdpr, gdpr, determining]
-      - [gdpr, gdpr, ccpa, determining]
+      - [obligation, catalog]
+      - [applicable, jurisdiction]
+      - [pii, principal, obligation]
+      - [legal, requirement, citation]
+      - [gdpr, ccpa, lgpd]
+      - [fulfill, obligation, procedure]
 

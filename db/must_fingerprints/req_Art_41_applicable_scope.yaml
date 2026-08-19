@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.41:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.41:applicable_scope"
@@ -14,32 +13,27 @@ must_fingerprints:
   - must_id: "item:Art.41:scope_jurisdictions"
     description: "Jurisdictions covered"
     excerpt_keywords:
-      - [jurisdictions, covered, monitoring]
-      - [in, scope, monitoring]
-      - [scope, includes, monitoring]
-      - [applicable, to, monitoring]
-      - [excluded, from, monitoring]
+      - [applicable, jurisdictions]
+      - [covered, jurisdictions]
+      - [scope, jurisdiction]
+      - [within, jurisdiction]
+      - [jurisdiction, coverage]
 
   - must_id: "item:Art.41:scope_accreditation"
     description: "Accreditation source (SA + scope of accreditation)"
     excerpt_keywords:
-      - [accreditation, source, monitoring]
-      - [accreditation, source, scope, monitoring]
-      - [source, scope, monitoring]
-      - [source, scope, accreditation, monitoring]
-      - [scope, accreditation, monitoring]
-      - [in, scope, monitoring]
-      - [scope, includes, monitoring]
-      - [applicable, to, monitoring]
+      - [accreditation, source]
+      - [scope, accreditation]
+      - [approved, code, conduct]
+      - [monitoring, scope]
+      - [source, accreditation, criteria]
 
   - must_id: "item:Art.41:scope_codes_monitored"
     description: "Codes monitored enumerated"
     excerpt_keywords:
-      - [codes, monitored, monitoring]
-      - [codes, monitored, enumerated, monitoring]
-      - [monitored, enumerated, monitoring]
-      - [in, scope, monitoring]
-      - [scope, includes, monitoring]
-      - [applicable, to, monitoring]
-      - [excluded, from, monitoring]
+      - [codes, monitored]
+      - [approved, codes, conduct]
+      - [scope, codes, monitored]
+      - [monitoring, approved, codes]
+      - [codes, conduct, scope]
 

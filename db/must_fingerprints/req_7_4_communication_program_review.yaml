@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:7.4:communication_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:7.4:communication_program_review"
@@ -14,60 +13,50 @@ must_fingerprints:
   - must_id: "item:7.4:rev_audience_coverage"
     description: "Audience coverage check — every in-scope audience reached for required topics"
     excerpt_keywords:
-      - [audience, coverage, communication]
-      - [audience, coverage, check, communication]
-      - [coverage, check, communication]
-      - [coverage, check, every, communication]
-      - [check, every, communication]
-      - [check, every, scope, communication]
-      - [every, scope, communication]
-      - [every, scope, audience, communication]
+      - [audience, coverage]
+      - [in scope, audience]
+      - [communication, program, review]
+      - [review, audience]
+      - [topics, covered]
+      - [audience, reached]
 
   - must_id: "item:7.4:rev_mandated_deadlines"
     description: "Mandated deadlines check — every regulator-mandated comm met its SLA"
     excerpt_keywords:
-      - [mandated, deadlines, communication]
-      - [mandated, deadlines, check, communication]
-      - [deadlines, check, communication]
-      - [deadlines, check, every, communication]
-      - [check, every, communication]
-      - [check, every, regulator, communication]
-      - [every, regulator, communication]
-      - [every, regulator, mandated, communication]
+      - [mandated, deadline]
+      - [regulator, mandated, deadline]
+      - [communication, sla]
+      - [sla, deadline]
+      - [review, mandated, deadline]
+      - [compliance, deadline, review]
 
   - must_id: "item:7.4:rev_cadence_check"
     description: "Cadence check — planned communications actually delivered on time"
     excerpt_keywords:
-      - [cadence, check, communication]
-      - [cadence, check, planned, communication]
-      - [check, planned, communication]
-      - [check, planned, communications, communication]
-      - [planned, communications, communication]
-      - [planned, communications, actually, communication]
-      - [communications, actually, communication]
-      - [communications, actually, delivered, communication]
+      - [communication, review]
+      - [planned, communications, delivered]
+      - [review, cadence]
+      - [communication, schedule]
+      - [delivery, on time]
+      - [reviewed, periodically]
 
   - must_id: "item:7.4:rev_reviewer"
     description: "Reviewer identity (ISMS Manager + comms lead)"
     excerpt_keywords:
-      - [reviewer, identity, communication]
-      - [reviewer, identity, isms, communication]
-      - [identity, isms, communication]
-      - [identity, isms, manager, communication]
-      - [isms, manager, communication]
-      - [isms, manager, comms, communication]
-      - [manager, comms, communication]
-      - [manager, comms, lead, communication]
+      - [reviewer, identity]
+      - [isms, manager]
+      - [communication, lead]
+      - [reviewed]
+      - [review, team]
+      - [review, responsible]
 
   - must_id: "item:7.4:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, communication]
-      - [review, date, within, communication]
-      - [date, within, communication]
-      - [date, within, planned, communication]
-      - [within, planned, communication]
-      - [within, planned, interval, communication]
-      - [planned, interval, communication]
-      - [per, revocation, communication]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [review, scheduled]
+      - [review, period]
 

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.3.5:objection_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.5:objection_register"
@@ -14,59 +13,46 @@ must_fingerprints:
   - must_id: "item:A.7.3.5:reg_propagation_status"
     description: "Downstream propagation status"
     excerpt_keywords:
-      - [propagation, status, providing]
-      - [downstream, propagation, providing]
-      - [downstream, propagation, status, providing]
-      - [per, row, providing]
-      - [each, row, providing]
-      - [column, containing, providing]
-      - [each, entry, providing]
-      - [column, header, providing]
+      - [propagation, status]
+      - [downstream, propagation]
+      - [objection, event, register]
+      - [processing, status]
+      - [pii, processing, status]
 
   - must_id: "item:A.7.3.5:reg_resolution"
     description: "Resolution per row (processing halted / balancing test rejection with justification)"
     excerpt_keywords:
-      - [resolution, processing, providing]
-      - [resolution, processing, halted, providing]
-      - [processing, halted, providing]
-      - [processing, halted, balancing, providing]
-      - [halted, balancing, providing]
-      - [halted, balancing, test, providing]
-      - [balancing, test, providing]
-      - [balancing, test, rejection, providing]
+      - [resolution, justification]
+      - [processing, halted]
+      - [balancing, test, rejection]
+      - [objection, event, register]
+      - [row, resolution]
 
   - must_id: "item:A.7.3.5:reg_objection_type"
     description: "Objection type per row (absolute — marketing/stats; balancing — legitimate interests / public interest)"
     excerpt_keywords:
-      - [objection, absolute, providing]
-      - [objection, absolute, marketing, providing]
-      - [absolute, marketing, providing]
-      - [absolute, marketing, stats, providing]
-      - [marketing, stats, providing]
-      - [marketing, stats, balancing, providing]
-      - [stats, balancing, providing]
-      - [stats, balancing, legitimate, providing]
+      - [objection, type]
+      - [type, per, row]
+      - [marketing, objection]
+      - [legitimate, interests]
+      - [public, interest]
+      - [balancing, objection]
 
   - must_id: "item:A.7.3.5:reg_subject_id"
     description: "Subject identifier per row"
     excerpt_keywords:
-      - [subject, id, providing]
-      - [subject, identifier, providing]
-      - [per, row, providing]
-      - [each, row, providing]
-      - [column, containing, providing]
-      - [each, entry, providing]
-      - [column, header, providing]
+      - [subject, identifier]
+      - [subject, id]
+      - [data, subject, reference]
+      - [record, subject, id]
+      - [subject, unique, id]
 
   - must_id: "item:A.7.3.5:reg_event_id"
     description: "Unique event identifier per row"
     excerpt_keywords:
-      - [event, id, providing]
-      - [unique, event, providing]
-      - [unique, event, identifier, providing]
-      - [event, identifier, providing]
-      - [per, row, providing]
-      - [each, row, providing]
-      - [column, containing, providing]
-      - [each, entry, providing]
+      - [event, identifier]
+      - [unique, event, id]
+      - [event, reference]
+      - [objection, event, id]
+      - [event, record, id]
 

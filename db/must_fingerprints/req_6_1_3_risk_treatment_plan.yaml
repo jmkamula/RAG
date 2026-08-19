@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:6.1.3:risk_treatment_plan
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:6.1.3:risk_treatment_plan"
@@ -14,69 +13,56 @@ must_fingerprints:
   - must_id: "item:6.1.3:approval"
     description: "Risk owners' approval of the plan AND acceptance of residual risks recorded"
     excerpt_keywords:
-      - [risk, owners]
-      - [risk, owners, approval]
-      - [owners, approval, risk]
-      - [owners, approval, plan, risk]
-      - [approval, plan, risk]
-      - [approval, plan, acceptance, risk]
-      - [plan, acceptance, risk]
-      - [plan, acceptance, residual, risk]
+      - [risk, owner, approval]
+      - [approval, risk, treatment]
+      - [residual, risk, acceptance]
+      - [plan, approval, recorded]
+      - [risk, treatment, plan]
 
   - must_id: "item:6.1.3:owners"
     description: "Risk treatment owners identified per treated risk"
     excerpt_keywords:
-      - [risk, treatment]
-      - [risk, treatment, owners]
-      - [treatment, owners]
-      - [treatment, owners, identified]
-      - [owners, identified, risk]
-      - [owners, identified, treated, risk]
-      - [identified, treated, risk]
-      - [identified, treated, risk]
+      - [risk, treatment, owner]
+      - [treatment, plan, owner]
+      - [identified, risk, owner]
+      - [assigned, risk, owner]
+      - [risk, treatment, responsible]
+      - [owner, per, risk]
 
   - must_id: "item:6.1.3:residual"
     description: "Residual risk identified per treated risk"
     excerpt_keywords:
-      - [residual, risk]
       - [residual, risk, identified]
-      - [risk, identified]
-      - [risk, identified, treated]
-      - [identified, treated, risk]
-      - [identified, treated, risk]
-      - [treated, risk]
+      - [treated, risk, assessment]
+      - [risk, treatment, plan]
+      - [risk, treatment, residual]
 
   - must_id: "item:6.1.3:soa_ref"
     description: "Reference to the live Statement of Applicability (the SoA leaf)"
     excerpt_keywords:
-      - [soa, ref, risk]
-      - [reference, live, risk]
-      - [reference, live, statement, risk]
-      - [live, statement, risk]
-      - [live, statement, applicability, risk]
-      - [statement, applicability, risk]
-      - [statement, applicability, soa, risk]
-      - [applicability, soa, risk]
+      - [statement, applicability]
+      - [live, soa]
+      - [soa, reference]
+      - [reference, statement, applicability]
+      - [current, soa]
+      - [applicability, statement, live]
 
   - must_id: "item:6.1.3:controls"
     description: "Controls determined to implement the chosen options"
     excerpt_keywords:
-      - [controls, determined, risk]
-      - [controls, determined, implement, risk]
-      - [determined, implement, risk]
-      - [determined, implement, chosen, risk]
-      - [implement, chosen, risk]
-      - [implement, chosen, options, risk]
-      - [chosen, options, risk]
+      - [risk, treatment, plan]
+      - [implemented, controls]
+      - [chosen, risk, options]
+      - [control, measures, implemented]
+      - [risk, treatment, controls]
+      - [selected, risk, controls]
 
   - must_id: "item:6.1.3:options"
     description: "Risk treatment options selected for each risk"
     excerpt_keywords:
-      - [risk, treatment]
       - [risk, treatment, options]
-      - [treatment, options]
-      - [treatment, options, selected]
-      - [options, selected, risk]
-      - [options, selected, risk]
-      - [selected, risk]
+      - [selected, risk, treatment]
+      - [risk, treatment, plan]
+      - [treatment, options, documented]
+      - [risk, treatment, measures]
 

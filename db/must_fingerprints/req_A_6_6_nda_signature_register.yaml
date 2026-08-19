@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.6.6:nda_signature_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.6.6:nda_signature_register"
@@ -14,72 +13,57 @@ must_fingerprints:
   - must_id: "item:A.6.6:reg_expiry_or_active"
     description: "Per-row status (active / expired-with-surviving-obligations / superseded-by-new-version)"
     excerpt_keywords:
-      - [expiry, active, confidentiality]
-      - [status, active, confidentiality]
-      - [status, active, expired, confidentiality]
-      - [active, expired, confidentiality]
-      - [active, expired, surviving, confidentiality]
-      - [expired, surviving, confidentiality]
-      - [expired, surviving, obligations, confidentiality]
-      - [surviving, obligations, confidentiality]
+      - [nda, status]
+      - [agreement, expiry, date]
+      - [confidentiality, agreement, active]
+      - [nda, expired, obligations]
+      - [version, superseded, nda]
 
   - must_id: "item:A.6.6:reg_signature_method"
     description: "Per-row signature method (wet / e-signature platform reference — ensures non-repudiation)"
     excerpt_keywords:
-      - [signature, method, confidentiality]
-      - [signature, method, wet, confidentiality]
-      - [method, wet, confidentiality]
-      - [method, wet, signature, confidentiality]
-      - [wet, signature, confidentiality]
-      - [wet, signature, platform, confidentiality]
-      - [signature, platform, confidentiality]
-      - [signature, platform, reference, confidentiality]
+      - [signature, method]
+      - [wet, signature]
+      - [esignature, platform]
+      - [nonrepudiation, ensured]
+      - [signed, date]
+      - [signature, reference]
 
   - must_id: "item:A.6.6:reg_signature_date"
     description: "Per-row signature date (proves signing happened BEFORE access granted per A.5.18)"
     excerpt_keywords:
-      - [signature, date, confidentiality]
-      - [signature, date, proves, confidentiality]
-      - [date, proves, confidentiality]
-      - [date, proves, signing, confidentiality]
-      - [proves, signing, confidentiality]
-      - [proves, signing, happened, confidentiality]
-      - [signing, happened, confidentiality]
-      - [signing, happened, before, confidentiality]
+      - [signature, date]
+      - [nda, signed, date]
+      - [date, access, granted]
+      - [signed, before, access]
+      - [confidentiality, agreement, date]
 
   - must_id: "item:A.6.6:reg_template_version"
     description: "Per-row template version (drives currency check — old-version signers may need re-signing on material template changes)"
     excerpt_keywords:
-      - [template, version, confidentiality]
-      - [template, version, currency, confidentiality]
-      - [version, currency, confidentiality]
-      - [version, currency, check, confidentiality]
-      - [currency, check, confidentiality]
-      - [currency, check, old, confidentiality]
-      - [check, old, confidentiality]
-      - [check, old, version, confidentiality]
+      - [nda, template, version]
+      - [signature, register, version]
+      - [template, version, record]
+      - [nda, version, tracked]
+      - [signed, nda, version]
 
   - must_id: "item:A.6.6:reg_variant"
     description: "Per-row NDA variant (employee / contractor / supplier-bilateral / M&A / visitor — matches the template variant_tiers SHOULD)"
     excerpt_keywords:
-      - [nda, variant, confidentiality]
-      - [nda, variant, employee, confidentiality]
-      - [variant, employee, confidentiality]
-      - [variant, employee, contractor, confidentiality]
-      - [employee, contractor, confidentiality]
-      - [employee, contractor, supplier, confidentiality]
-      - [contractor, supplier, confidentiality]
-      - [contractor, supplier, bilateral, confidentiality]
+      - [nda, variant]
+      - [nda, type]
+      - [agreement, variant]
+      - [nda, template, variant]
+      - [nda, category]
+      - [nda, classification]
 
   - must_id: "item:A.6.6:reg_signatory_id"
-    description: "Per-row signatory identifier (links to identity register A.5.16 for employees; supplier register A.5.19 for contractors; visitor-log for vis"
+    description: "Per-row signatory identifier (links to identity register A.5.16 for employees; supplier register A.5.19 for contractors; visitor-log for visitors)"
     excerpt_keywords:
-      - [signatory, id, confidentiality]
-      - [signatory, identifier, confidentiality]
-      - [signatory, identifier, identity, confidentiality]
-      - [identifier, identity, confidentiality]
-      - [identifier, identity, employees, confidentiality]
-      - [identity, employees, confidentiality]
-      - [identity, employees, supplier, confidentiality]
-      - [employees, supplier, confidentiality]
+      - [signatory, identifier]
+      - [nda, signature, register]
+      - [employee, id]
+      - [supplier, id]
+      - [visitor, log]
+      - [identity, register]
 

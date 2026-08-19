@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.4.4:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.4:applicable_scope"
@@ -14,36 +13,30 @@ must_fingerprints:
   - must_id: "item:A.7.4.4:scope_reidentification_risk"
     description: "Re-identification risk considerations per context (combinations of attributes / auxiliary data / linkage)"
     excerpt_keywords:
-      - [reidentification, risk, pii]
-      - [identification, risk, pii]
-      - [identification, risk, considerations, pii]
-      - [risk, considerations, pii]
-      - [risk, considerations, context, pii]
-      - [considerations, context, pii]
-      - [considerations, context, combinations, pii]
-      - [context, combinations, pii]
+      - [reidentification, risk]
+      - [minimization, objectives]
+      - [context, attributes]
+      - [auxiliary, data]
+      - [linkage, risk]
+      - [combinations, attributes]
 
   - must_id: "item:A.7.4.4:scope_full_pii_needed"
     description: "Full-PII contexts (operational transactions + notifications + support) with justification"
     excerpt_keywords:
-      - [full, pii, needed]
-      - [full, pii]
+      - [pii, minimization, objectives]
       - [full, pii, contexts]
-      - [pii, contexts]
-      - [pii, contexts, operational]
-      - [contexts, operational, pii]
-      - [contexts, operational, transactions, pii]
-      - [operational, transactions, pii]
+      - [operational, transactions]
+      - [notifications, support]
+      - [justification, pii]
+      - [applicable, minimization, scope]
 
   - must_id: "item:A.7.4.4:scope_candidates"
     description: "Minimisation candidates enumerated (analytics + reporting + ML + test environments + logs)"
     excerpt_keywords:
-      - [minimisation, candidates, pii]
-      - [minimisation, candidates, enumerated, pii]
-      - [candidates, enumerated, pii]
-      - [candidates, enumerated, analytics, pii]
-      - [enumerated, analytics, pii]
-      - [enumerated, analytics, reporting, pii]
-      - [analytics, reporting, pii]
-      - [analytics, reporting, test, pii]
+      - [minimisation, candidates]
+      - [analytics, reporting]
+      - [machine, learning]
+      - [test, environments]
+      - [logging, activities]
+      - [scope, applicable]
 

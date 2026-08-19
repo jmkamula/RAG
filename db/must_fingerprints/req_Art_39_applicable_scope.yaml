@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.39:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.39:applicable_scope"
@@ -15,35 +14,28 @@ must_fingerprints:
     description: "Additional tasks beyond Art.39.1 (if any) consistent with Art.38.6 no-conflict-of-interest rule"
     excerpt_keywords:
       - [additional, tasks]
-      - [additional, tasks, beyond]
-      - [tasks, beyond]
-      - [tasks, beyond, art]
-      - [beyond, art, tasks]
-      - [beyond, art, consistent, tasks]
-      - [art, consistent, tasks]
-      - [art, consistent, art, tasks]
+      - [art38, conflict, interest]
+      - [data, protection, officer]
+      - [tasks, beyond, art39]
+      - [no, conflict, interest]
 
   - must_id: "item:Art.39:scope_risk_prioritisation"
     description: "Risk-based prioritisation criteria (per Art.39.2 due regard to risk)"
     excerpt_keywords:
-      - [risk, prioritisation, tasks]
-      - [risk, based, tasks]
-      - [risk, based, prioritisation, tasks]
-      - [based, prioritisation, tasks]
-      - [based, prioritisation, criteria, tasks]
-      - [prioritisation, criteria, tasks]
-      - [prioritisation, criteria, art, tasks]
-      - [criteria, art, tasks]
+      - [risk based, prioritisation criteria]
+      - [due regard, risk]
+      - [art39, tasks, risk]
+      - [risk assessment, prioritisation]
+      - [data protection officer, risk]
+      - [prioritise, tasks, risk]
 
   - must_id: "item:Art.39:scope_tasks_assigned"
     description: "Tasks formally assigned to DPO (mapping to Art.39.1 a-e)"
     excerpt_keywords:
-      - [tasks, assigned]
-      - [tasks, formally]
-      - [tasks, formally, assigned]
-      - [formally, assigned, tasks]
-      - [formally, assigned, dpo, tasks]
-      - [assigned, dpo, tasks]
-      - [assigned, dpo, mapping, tasks]
-      - [dpo, mapping, tasks]
+      - [tasks, assigned, dpo]
+      - [duties, data, protection, officer]
+      - [responsibilities, dpo, defined]
+      - [art39, tasks, assigned]
+      - [data, protection, officer, scope]
+      - [dpo, mandate, tasks]
 

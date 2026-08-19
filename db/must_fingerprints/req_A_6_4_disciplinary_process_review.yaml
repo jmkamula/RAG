@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.6.4:disciplinary_process_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.6.4:disciplinary_process_review"
@@ -14,72 +13,59 @@ must_fingerprints:
   - must_id: "item:A.6.4:rev_register_update"
     description: "Changes propagated to the procedure with reference to this review"
     excerpt_keywords:
-      - [changes, propagated, disciplinary]
-      - [changes, propagated, reference, disciplinary]
-      - [propagated, reference, disciplinary]
-      - [propagated, reference, review, disciplinary]
-      - [reference, review, disciplinary]
-      - [per, revocation, disciplinary]
-      - [per, revoked, identity, disciplinary]
-      - [revocation, record, disciplinary]
+      - [disciplinary, process, review]
+      - [review, update, procedure]
+      - [periodic, review, changes]
+      - [procedure, reference, review]
+      - [review, date, record]
+      - [changes, propagated, procedure]
 
   - must_id: "item:A.6.4:rev_lessons_propagated"
     description: "Lessons-propagation check — did case-driven lessons feed back to awareness curriculum (A.6.3), control updates, or policy amendments?"
     excerpt_keywords:
-      - [lessons, propagated, disciplinary]
-      - [lessons, propagation, disciplinary]
-      - [lessons, propagation, check, disciplinary]
-      - [propagation, check, disciplinary]
-      - [propagation, check, did, disciplinary]
-      - [check, did, disciplinary]
-      - [check, did, case, disciplinary]
-      - [did, case, disciplinary]
+      - [lessons, propagated]
+      - [disciplinary, process, review]
+      - [case, lessons, feedback]
+      - [awareness, curriculum]
+      - [policy, amendments]
+      - [control, updates]
 
   - must_id: "item:A.6.4:rev_legal_drift"
     description: "Employment-law drift check per jurisdiction (legal counsel input)"
     excerpt_keywords:
-      - [legal, drift, disciplinary]
-      - [employment, law, disciplinary]
-      - [employment, law, drift, disciplinary]
-      - [law, drift, disciplinary]
-      - [law, drift, check, disciplinary]
-      - [drift, check, disciplinary]
-      - [drift, check, jurisdiction, disciplinary]
-      - [check, jurisdiction, disciplinary]
+      - [legal, drift]
+      - [employment, law, review]
+      - [jurisdiction, check]
+      - [legal, counsel, input]
+      - [periodic, review]
 
   - must_id: "item:A.6.4:rev_consistency"
-    description: "Consistency analysis — case outcomes reviewed for consistent application across cases / demographics (avoids discriminatory enforcement patt"
+    description: "Consistency analysis — case outcomes reviewed for consistent application across cases / demographics (avoids discriminatory enforcement patterns)"
     excerpt_keywords:
-      - [consistency, analysis, disciplinary]
-      - [consistency, analysis, case, disciplinary]
-      - [analysis, case, disciplinary]
-      - [analysis, case, outcomes, disciplinary]
-      - [case, outcomes, disciplinary]
-      - [case, outcomes, reviewed, disciplinary]
-      - [outcomes, reviewed, disciplinary]
-      - [outcomes, reviewed, consistent, disciplinary]
+      - [case, outcomes, reviewed]
+      - [consistency, analysis]
+      - [reviewed, across, cases]
+      - [discriminatory, enforcement, patterns]
+      - [periodic, disciplinary, review]
+      - [case, outcomes, consistency]
 
   - must_id: "item:A.6.4:rev_reviewer"
     description: "Reviewer identity (HR lead + InfoSec lead + Legal counsel)"
     excerpt_keywords:
-      - [reviewer, identity, disciplinary]
-      - [reviewer, identity, lead, disciplinary]
-      - [identity, lead, disciplinary]
-      - [identity, lead, infosec, disciplinary]
-      - [lead, infosec, disciplinary]
-      - [lead, infosec, lead, disciplinary]
-      - [infosec, lead, disciplinary]
-      - [infosec, lead, legal, disciplinary]
+      - [reviewer, identity]
+      - [hr, lead]
+      - [infosec, lead]
+      - [legal, counsel]
+      - [reviewed]
+      - [review, team]
 
   - must_id: "item:A.6.4:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, disciplinary]
-      - [review, date, within, disciplinary]
-      - [date, within, disciplinary]
-      - [date, within, planned, disciplinary]
-      - [within, planned, disciplinary]
-      - [within, planned, interval, disciplinary]
-      - [planned, interval, disciplinary]
-      - [per, revocation, disciplinary]
+      - [review, date]
+      - [planned, interval]
+      - [periodic, review]
+      - [next, review]
+      - [review, scheduled]
+      - [review, frequency]
 

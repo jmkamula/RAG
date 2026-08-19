@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.8.18:utility_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.18:utility_program_review"
@@ -14,60 +13,49 @@ must_fingerprints:
   - must_id: "item:A.8.18:rev_findings_update"
     description: "Findings propagated to register / scope"
     excerpt_keywords:
-      - [findings, update, use]
-      - [findings, propagated, use]
-      - [findings, propagated, scope, use]
-      - [propagated, scope, use]
-      - [per, revocation, use]
-      - [per, revoked, identity, use]
-      - [revocation, record, use]
-      - [review, findings, use]
+      - [privileged, utility, programs]
+      - [periodic, review, findings]
+      - [findings, updated, register]
+      - [scope, review]
+      - [review, findings, propagated]
 
   - must_id: "item:A.8.18:rev_removal_sweep"
     description: "Removal-where-unneeded sweep (utilities found in unauthorised locations)"
     excerpt_keywords:
-      - [removal, sweep, use]
-      - [removal, unneeded, use]
-      - [removal, unneeded, sweep, use]
-      - [unneeded, sweep, use]
-      - [unneeded, sweep, utilities, use]
-      - [sweep, utilities, use]
-      - [sweep, utilities, found, use]
-      - [utilities, found, use]
+      - [privileged, utility, programs]
+      - [periodic, review]
+      - [unauthorised, locations]
+      - [removal, sweep]
+      - [utilities, found]
+      - [review, removal]
 
   - must_id: "item:A.8.18:rev_user_list"
     description: "Authorised-user list re-confirmed per utility"
     excerpt_keywords:
-      - [authorised, user, use]
-      - [authorised, user, confirmed, use]
-      - [user, confirmed, use]
-      - [user, confirmed, utility, use]
-      - [confirmed, utility, use]
-      - [per, revocation, use]
-      - [per, revoked, identity, use]
-      - [revocation, record, use]
+      - [authorised user, list reconfirmed]
+      - [privileged utility, user list]
+      - [user list, reviewed periodically]
+      - [periodic review, authorised users]
+      - [utility program, user access]
+      - [review date, user list]
 
   - must_id: "item:A.8.18:rev_reviewer"
     description: "Reviewer identity (InfoSec + Infrastructure)"
     excerpt_keywords:
-      - [reviewer, identity, use]
-      - [reviewer, identity, infosec, use]
-      - [identity, infosec, use]
-      - [identity, infosec, infrastructure, use]
-      - [infosec, infrastructure, use]
-      - [per, revocation, use]
-      - [per, revoked, identity, use]
-      - [revocation, record, use]
+      - [reviewer, identity]
+      - [informationsecurity, reviewer]
+      - [infrastructure, reviewer]
+      - [review, performed]
+      - [review, conducted]
+      - [reviewer, role]
 
   - must_id: "item:A.8.18:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, use]
-      - [review, date, within, use]
-      - [date, within, use]
-      - [date, within, planned, use]
-      - [within, planned, use]
-      - [within, planned, interval, use]
-      - [planned, interval, use]
-      - [per, revocation, use]
+      - [review, date]
+      - [planned, interval]
+      - [periodic, review]
+      - [review, within, interval]
+      - [next, review]
+      - [review, scheduled]
 

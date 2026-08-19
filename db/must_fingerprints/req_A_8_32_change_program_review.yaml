@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.8.32:change_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.32:change_program_review"
@@ -14,72 +13,56 @@ must_fingerprints:
   - must_id: "item:A.8.32:rev_findings_update"
     description: "Findings propagated to procedure / scope"
     excerpt_keywords:
-      - [findings, update, change]
-      - [findings, propagated, change]
-      - [findings, propagated, scope, change]
-      - [propagated, scope, change]
-      - [per, revocation, change]
-      - [per, revoked, identity, change]
-      - [revocation, record, change]
-      - [review, findings, change]
+      - [findings, update]
+      - [change, management, review]
+      - [review, findings]
+      - [findings, propagated]
+      - [periodic, review, change]
 
   - must_id: "item:A.8.32:rev_change_incidents"
     description: "Change-induced incident trending (cross-link to A.5.26 register — change as incident root cause)"
     excerpt_keywords:
-      - [change, incidents]
-      - [change, induced]
-      - [change, induced, incident]
-      - [induced, incident, change]
-      - [induced, incident, trending, change]
-      - [incident, trending, change]
-      - [incident, trending, cross, change]
-      - [trending, cross, change]
+      - [change induced, incident trending]
+      - [incident, root cause]
+      - [change, incident, register]
+      - [periodic, change management, review]
+      - [reviewed, change incidents]
 
   - must_id: "item:A.8.32:rev_emergency_ratio"
     description: "Emergency-change ratio (high ratio signals process bypass)"
     excerpt_keywords:
-      - [emergency, ratio, change]
-      - [emergency, change]
       - [emergency, change, ratio]
-      - [change, ratio]
-      - [change, ratio, high]
-      - [ratio, high, change]
-      - [ratio, high, ratio, change]
-      - [high, ratio, change]
+      - [change, management, review]
+      - [review, periodic, change]
+      - [emergency, changes, bypass]
+      - [process, bypass, ratio]
 
   - must_id: "item:A.8.32:rev_register_completeness"
     description: "Register-completeness sample (sample of production changes traced to register)"
     excerpt_keywords:
-      - [completeness, sample, change]
-      - [completeness, sample, sample, change]
-      - [sample, sample, change]
-      - [sample, sample, production, change]
-      - [sample, production, change]
-      - [sample, production, changes, change]
-      - [production, changes, change]
-      - [production, changes, traced, change]
+      - [change, register, completeness]
+      - [periodic, change, review]
+      - [sample, production, changes]
+      - [register, trace, changes]
+      - [review, change, register]
+      - [completeness, sample, review]
 
   - must_id: "item:A.8.32:rev_reviewer"
     description: "Reviewer identity (Change Management lead + Engineering + InfoSec)"
     excerpt_keywords:
-      - [reviewer, identity, change]
-      - [reviewer, identity, change]
-      - [identity, change]
-      - [identity, change, management]
-      - [change, management]
-      - [change, management, lead]
-      - [management, lead, change]
-      - [management, lead, engineering, change]
+      - [change management, reviewer identity]
+      - [periodic, program review]
+      - [reviewed by, change management]
+      - [reviewer, engineering, infosec]
+      - [change management, lead, reviewer]
 
   - must_id: "item:A.8.32:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, change]
-      - [review, date, within, change]
-      - [date, within, change]
-      - [date, within, planned, change]
-      - [within, planned, change]
-      - [within, planned, interval, change]
-      - [planned, interval, change]
-      - [per, revocation, change]
+      - [review, date]
+      - [planned, interval]
+      - [periodic, review]
+      - [review, within, interval]
+      - [scheduled, review]
+      - [review, frequency]
 

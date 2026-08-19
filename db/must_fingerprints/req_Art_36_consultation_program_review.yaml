@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.36:consultation_program_review
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.36:consultation_program_review"
@@ -14,60 +13,48 @@ must_fingerprints:
   - must_id: "item:Art.36:rev_advice_handling"
     description: "Advice handling sample — SA written advice incorporated or formally rejected with rationale recorded"
     excerpt_keywords:
-      - [advice, handling, prior]
-      - [advice, handling, sample, prior]
-      - [handling, sample, prior]
-      - [handling, sample, written, prior]
-      - [sample, written, prior]
-      - [sample, written, advice, prior]
-      - [written, advice, prior]
-      - [written, advice, incorporated, prior]
+      - [written, advice]
+      - [advice, formally, rejected]
+      - [rationale, recorded]
+      - [advice, incorporated]
+      - [sample, advice, handling]
 
   - must_id: "item:Art.36:rev_waiting_compliance"
     description: "Waiting-period compliance — no processing started before SA waiting period elapsed"
     excerpt_keywords:
-      - [waiting, compliance, prior]
-      - [waiting, period, prior]
-      - [waiting, period, compliance, prior]
-      - [period, compliance, prior]
-      - [period, compliance, processing, prior]
-      - [compliance, processing, prior]
-      - [compliance, processing, started, prior]
-      - [processing, started, prior]
+      - [waiting, period]
+      - [prior, consultation]
+      - [processing, started]
+      - [waiting, period, elapsed]
+      - [compliance, waiting]
+      - [consultation, period]
 
   - must_id: "item:Art.36:rev_escalation_audit"
     description: "Escalation audit — every Art.35 DPIA flagging residual high risk has a corresponding Art.36 consultation row"
     excerpt_keywords:
-      - [escalation, audit, prior]
-      - [escalation, audit, every, prior]
-      - [audit, every, prior]
-      - [audit, every, art, prior]
-      - [every, art, prior]
-      - [every, art, dpia, prior]
-      - [art, dpia, prior]
-      - [art, dpia, flagging, prior]
+      - [art36, prior, consultation]
+      - [escalation, audit]
+      - [art35, dpia, residual, risk]
+      - [consultation, record]
+      - [review, escalation]
+      - [high, risk, flag]
 
   - must_id: "item:Art.36:rev_reviewer"
     description: "Reviewer identity (DPO + legal)"
     excerpt_keywords:
-      - [reviewer, identity, prior]
-      - [reviewer, identity, dpo, prior]
-      - [identity, dpo, prior]
-      - [identity, dpo, legal, prior]
-      - [dpo, legal, prior]
-      - [per, revocation, prior]
-      - [per, revoked, identity, prior]
-      - [revocation, record, prior]
+      - [reviewer, identity]
+      - [dpo, legal]
+      - [review, conducted]
+      - [review, performed]
+      - [data, protection, officer]
 
   - must_id: "item:Art.36:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, prior]
-      - [review, date, within, prior]
-      - [date, within, prior]
-      - [date, within, planned, prior]
-      - [within, planned, prior]
-      - [within, planned, interval, prior]
-      - [planned, interval, prior]
-      - [per, revocation, prior]
+      - [review, date]
+      - [planned, interval]
+      - [next, review]
+      - [review, within, interval]
+      - [review, scheduled]
+      - [review, period]
 

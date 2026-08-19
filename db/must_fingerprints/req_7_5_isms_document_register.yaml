@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:7.5:isms_document_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:7.5:isms_document_register"
@@ -14,76 +13,65 @@ must_fingerprints:
   - must_id: "item:7.5:reg_classification"
     description: "Information classification per row (cross-link to A.5.12)"
     excerpt_keywords:
-      - [classification, cross, documented]
-      - [per, row, documented]
-      - [each, row, documented]
-      - [column, containing, documented]
-      - [each, entry, documented]
-      - [column, header, documented]
+      - [document, classification]
+      - [information, classification, level]
+      - [classification, category]
+      - [document, register, classification]
+      - [classification, per, record]
 
   - must_id: "item:7.5:reg_next_review"
     description: "Next review date per row (drives staleness alerts)"
     excerpt_keywords:
-      - [next, review, documented]
-      - [next, review, date, documented]
-      - [review, date, documented]
-      - [review, date, staleness, documented]
-      - [date, staleness, documented]
-      - [date, staleness, alerts, documented]
-      - [staleness, alerts, documented]
-      - [per, row, documented]
+      - [next, review, date]
+      - [document, register, review]
+      - [review, date, record]
+      - [scheduled, next, review]
+      - [review, due, date]
 
   - must_id: "item:7.5:reg_approval_date"
     description: "Last approval date per row"
     excerpt_keywords:
-      - [approval, date, documented]
-      - [last, approval, documented]
-      - [last, approval, date, documented]
-      - [per, row, documented]
-      - [each, row, documented]
-      - [column, containing, documented]
-      - [each, entry, documented]
-      - [column, header, documented]
+      - [approval, date]
+      - [document, approval, date]
+      - [last, approval, date]
+      - [approval, date, recorded]
 
   - must_id: "item:7.5:reg_version"
     description: "Current version per row"
     excerpt_keywords:
-      - [current, version, documented]
-      - [per, row, documented]
-      - [each, row, documented]
-      - [column, containing, documented]
-      - [each, entry, documented]
-      - [column, header, documented]
+      - [document, version]
+      - [current, version]
+      - [version, number]
+      - [version, record]
+      - [document, revision]
+      - [revision, number]
 
   - must_id: "item:7.5:reg_owner"
     description: "Document owner per row"
     excerpt_keywords:
-      - [document, owner, documented]
-      - [per, row, documented]
-      - [each, row, documented]
-      - [column, containing, documented]
-      - [each, entry, documented]
-      - [column, header, documented]
+      - [document, owner]
+      - [owner, per, row]
+      - [responsible, document]
+      - [document, custodian]
+      - [record, owner]
+      - [assigned, document, owner]
 
   - must_id: "item:7.5:reg_title"
     description: "Document title per row"
     excerpt_keywords:
-      - [document, title, documented]
-      - [per, row, documented]
-      - [each, row, documented]
-      - [column, containing, documented]
-      - [each, entry, documented]
-      - [column, header, documented]
+      - [document, title]
+      - [title, per, record]
+      - [record, document, title]
+      - [document, name]
+      - [title, column]
+      - [document, register]
 
   - must_id: "item:7.5:reg_doc_id"
     description: "Unique document identifier per row"
     excerpt_keywords:
-      - [doc, id, documented]
-      - [unique, document, documented]
-      - [unique, document, identifier, documented]
-      - [document, identifier, documented]
-      - [per, row, documented]
-      - [each, row, documented]
-      - [column, containing, documented]
-      - [each, entry, documented]
+      - [document, identifier]
+      - [unique, document, id]
+      - [document, reference]
+      - [document, register]
+      - [record, document, id]
 

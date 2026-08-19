@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.6.6:applicable_parties_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.6.6:applicable_parties_scope"
@@ -14,48 +13,39 @@ must_fingerprints:
   - must_id: "item:A.6.6:scope_jurisdictions"
     description: "Jurisdictions covered (where signatories sign / where info is protected — drives governing-law clause and enforceability)"
     excerpt_keywords:
-      - [jurisdictions, covered, confidentiality]
-      - [jurisdictions, covered, signatories, confidentiality]
-      - [covered, signatories, confidentiality]
-      - [covered, signatories, sign, confidentiality]
-      - [signatories, sign, confidentiality]
-      - [signatories, sign, info, confidentiality]
-      - [sign, info, confidentiality]
-      - [sign, info, protected, confidentiality]
+      - [jurisdictions, covered]
+      - [applicable, jurisdictions]
+      - [governing, law, clause]
+      - [enforceability, agreement]
+      - [signatories, jurisdiction]
+      - [scope, jurisdiction]
 
   - must_id: "item:A.6.6:scope_variant_mapping"
     description: "Party-to-variant mapping (employees → light employee NDA; contractors → contractor NDA; suppliers → bilateral; M&A → heavy)"
     excerpt_keywords:
-      - [variant, mapping, confidentiality]
-      - [party, variant, confidentiality]
-      - [party, variant, mapping, confidentiality]
-      - [variant, mapping, employees, confidentiality]
-      - [mapping, employees, confidentiality]
-      - [mapping, employees, light, confidentiality]
-      - [employees, light, confidentiality]
-      - [employees, light, employee, confidentiality]
+      - [party, nda]
+      - [employee, nda]
+      - [contractor, nda]
+      - [supplier, nda]
+      - [m&a, nda]
+      - [confidentiality, agreement]
 
   - must_id: "item:A.6.6:scope_trigger_threshold"
     description: "Trigger threshold per category (which info-class triggers NDA — typically access to confidential class and above; some orgs all-access)"
     excerpt_keywords:
-      - [trigger, threshold, confidentiality]
-      - [trigger, threshold, category, confidentiality]
-      - [threshold, category, confidentiality]
-      - [threshold, category, info, confidentiality]
-      - [category, info, confidentiality]
-      - [category, info, class, confidentiality]
-      - [info, class, confidentiality]
-      - [info, class, triggers, confidentiality]
+      - [trigger, threshold]
+      - [information, classification]
+      - [confidential, access]
+      - [nda, trigger]
+      - [applicable, parties]
+      - [access, level]
 
   - must_id: "item:A.6.6:scope_party_categories"
     description: "Party categories enumerated (employees, contractors, suppliers, visitors, M&A counterparties, partners with joint-development)"
     excerpt_keywords:
-      - [party, categories, confidentiality]
-      - [party, categories, enumerated, confidentiality]
-      - [categories, enumerated, confidentiality]
-      - [categories, enumerated, employees, confidentiality]
-      - [enumerated, employees, confidentiality]
-      - [enumerated, employees, contractors, confidentiality]
-      - [employees, contractors, confidentiality]
-      - [employees, contractors, suppliers, confidentiality]
+      - [party, categories]
+      - [employees, contractors]
+      - [suppliers, visitors]
+      - [joint, development, partners]
+      - [m&a, counterparties]
 

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.7.4.2:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.2:applicable_scope"
@@ -14,36 +13,30 @@ must_fingerprints:
   - must_id: "item:A.7.4.2:scope_exclusions"
     description: "Excluded operations (anonymised / aggregate) with rationale"
     excerpt_keywords:
-      - [excluded, operations, limit]
-      - [excluded, operations, anonymised, limit]
-      - [operations, anonymised, limit]
-      - [operations, anonymised, aggregate, limit]
-      - [anonymised, aggregate, limit]
-      - [anonymised, aggregate, rationale, limit]
-      - [aggregate, rationale, limit]
-      - [in, scope, limit]
+      - [excluded, processing, operations]
+      - [anonymised, data, processing]
+      - [aggregate, data, processing]
+      - [processing, operations, exclusions]
+      - [scope, exclusions, rationale]
+      - [excluded, operations, rationale]
 
   - must_id: "item:A.7.4.2:scope_integrations"
     description: "Integration processing (webhooks + third-party enrichment + backup + DR)"
     excerpt_keywords:
-      - [integration, processing, limit]
-      - [integration, processing, webhooks, limit]
-      - [processing, webhooks, limit]
-      - [processing, webhooks, third, limit]
-      - [webhooks, third, limit]
-      - [webhooks, third, party, limit]
-      - [third, party, limit]
-      - [third, party, enrichment, limit]
+      - [integration, processing]
+      - [thirdparty, enrichment]
+      - [webhook, integration]
+      - [backup, processing]
+      - [disaster, recovery]
+      - [processing, scope]
 
   - must_id: "item:A.7.4.2:scope_internal_operations"
     description: "Internal processing operations enumerated (application queries / reports / dashboards / ML pipelines / exports)"
     excerpt_keywords:
-      - [internal, operations, limit]
-      - [internal, processing, limit]
-      - [internal, processing, operations, limit]
-      - [processing, operations, limit]
-      - [processing, operations, enumerated, limit]
-      - [operations, enumerated, limit]
-      - [operations, enumerated, application, limit]
-      - [enumerated, application, limit]
+      - [internal, processing, operations]
+      - [processing, operations, scope]
+      - [application, queries]
+      - [reports, dashboards]
+      - [ml, pipelines]
+      - [data, exports]
 

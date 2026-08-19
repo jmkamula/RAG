@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.20:portability_register
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.20:portability_register"
@@ -14,59 +13,45 @@ must_fingerprints:
   - must_id: "item:Art.20:reg_delivery_date"
     description: "Per-row delivery date (within Art.12.3 SLA)"
     excerpt_keywords:
-      - [delivery, date, right]
-      - [delivery, date, within, right]
-      - [date, within, right]
-      - [date, within, art, right]
-      - [within, art, right]
-      - [within, art, sla, right]
-      - [art, sla, right]
-      - [per, row, right]
+      - [delivery, date]
+      - [request, delivery, date]
+      - [portability, request, date]
+      - [recorded, delivery, date]
+      - [sla, delivery, date]
 
   - must_id: "item:Art.20:reg_destination"
     description: "Per-row destination (export to subject / direct controller transmission)"
     excerpt_keywords:
-      - [destination, export, right]
-      - [destination, export, subject, right]
-      - [export, subject, right]
-      - [export, subject, direct, right]
-      - [subject, direct, right]
-      - [subject, direct, controller, right]
-      - [direct, controller, right]
-      - [direct, controller, transmission, right]
+      - [destination, export]
+      - [data, portability, destination]
+      - [subject, data, destination]
+      - [direct, controller, destination]
+      - [export, controller]
 
   - must_id: "item:Art.20:reg_format_delivered"
     description: "Per-row delivered format"
     excerpt_keywords:
-      - [format, delivered, right]
-      - [delivered, format, right]
-      - [per, row, right]
-      - [each, row, right]
-      - [column, containing, right]
-      - [each, entry, right]
-      - [column, header, right]
+      - [delivered, format]
+      - [data, portability, format]
+      - [requested, format]
+      - [format, provided]
+      - [record, delivered, format]
 
   - must_id: "item:Art.20:reg_applicability_decision"
     description: "Per-row applicability decision (in-scope / out-of-scope with grounds)"
     excerpt_keywords:
-      - [applicability, decision, right]
-      - [applicability, decision, scope, right]
-      - [decision, scope, right]
-      - [decision, scope, out, right]
-      - [scope, out, right]
-      - [scope, out, scope, right]
-      - [out, scope, right]
-      - [out, scope, grounds, right]
+      - [applicability, decision]
+      - [in scope, grounds]
+      - [out scope, grounds]
+      - [portability, request, register]
+      - [scope, determination]
 
   - must_id: "item:Art.20:reg_request_id"
     description: "Per-row request id (Art.12 register cross-reference)"
     excerpt_keywords:
-      - [request, id, right]
-      - [request, art, right]
-      - [request, art, cross, right]
-      - [art, cross, right]
-      - [art, cross, reference, right]
-      - [cross, reference, right]
-      - [per, row, right]
-      - [each, row, right]
+      - [request, id]
+      - [portability, request, reference]
+      - [data, portability, id]
+      - [request, identifier]
+      - [register, request, id]
 

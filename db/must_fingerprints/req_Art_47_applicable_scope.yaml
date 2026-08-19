@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.47:applicable_scope
-# Auto-generated skeleton — review and tighten before commit.
-#
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# LLM-authored by Ship 80'.b (curator sweep 2026-08-18).
+# Pure LLM-authored keywords + rescued Ship 38'.b curator
+# additions if present. Skeleton heuristics from
+# gen_leaf_scan_catalog were intentionally discarded.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.47:applicable_scope"
@@ -14,36 +13,30 @@ must_fingerprints:
   - must_id: "item:Art.47:scope_extension"
     description: "New-entity onboarding rule — how a newly-acquired or newly-spun-up entity joins the BCRs (or moves to alternative safeguard)"
     excerpt_keywords:
-      - [new, entity, binding]
-      - [new, entity, onboarding, binding]
-      - [entity, onboarding, binding]
-      - [entity, onboarding, rule, binding]
-      - [onboarding, rule, binding]
-      - [onboarding, rule, newly, binding]
-      - [rule, newly, binding]
-      - [rule, newly, acquired, binding]
+      - [newlyacquired, entity]
+      - [newlyspunup, entity]
+      - [entity, joins, bcr]
+      - [scope, applies, entity]
+      - [alternative, safeguard]
+      - [onboarding, process]
 
   - must_id: "item:Art.47:scope_entities"
     description: "Bound entities enumerated (jurisdictions + roles)"
     excerpt_keywords:
-      - [bound, entities, binding]
-      - [bound, entities, enumerated, binding]
-      - [entities, enumerated, binding]
-      - [entities, enumerated, jurisdictions, binding]
-      - [enumerated, jurisdictions, binding]
-      - [enumerated, jurisdictions, roles, binding]
-      - [jurisdictions, roles, binding]
-      - [in, scope, binding]
+      - [binding, corporate, rules]
+      - [applicable, jurisdictions]
+      - [covered, entities]
+      - [roles, included]
+      - [scope, bound, entities]
+      - [entities, within, scope]
 
   - must_id: "item:Art.47:scope_intra_group_flows"
     description: "Intra-group flows covered (controller-to-controller / controller-to-processor)"
     excerpt_keywords:
-      - [intra, group, flows, binding]
-      - [intra, group, binding]
-      - [group, flows, binding]
-      - [group, flows, covered, binding]
-      - [flows, covered, binding]
-      - [flows, covered, controller, binding]
-      - [covered, controller, binding]
-      - [covered, controller, controller, binding]
+      - [intra group, data flows]
+      - [controller to controller]
+      - [controller to processor]
+      - [covered intra group]
+      - [scope intra group]
+      - [intra group, processing activities]
 
