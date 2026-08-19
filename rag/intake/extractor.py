@@ -116,13 +116,63 @@ def extract(
                     "workbook %s: %d unmapped sheets (need YAMLs): %s",
                     doc.original_name, n_unmapped, ", ".join(unmapped_names),
                 )
-            logger.info(
-                "workbook %s: structured extraction retired; "
-                "workbook_persistence (Stage 4.6) is the canonical path",
-                doc.original_name,
+            # Ship 85'.b — LLM extractor path for xlsx. When Ship 85'.a's
+            # unstructured.io-based structured_sheets are available on
+            # doc.extraction_metrics, we render them to markdown and let
+            # the standard extract() flow run its usual leaf classifier
+            # + consensus + per_must LLM pipeline. Workbook_persistence
+            # (Stage 4.6) STILL runs downstream in doc_pipeline.py —
+            # union at the DB level. Templated xlsx (Ship 84 showed
+            # 100% precision on those) still short-circuits below via
+            # `_extract_templated_xlsx`.
+            #
+            # Ship 85'.c gate — default OFF because measurement on the
+            # ISO workbook showed the extract-time LLM path over-emits
+            # on register-shape MUSTs (LLM can't tell "this table IS
+            # the target register" from "this table is a related
+            # register" from markdown alone). Regression: -4.89pp
+            # aggregate F1 vs Ship 84's workbook_persistence-only path.
+            # Instead of extract-time LLM, Ship 85'.c pivots to
+            # build-time LLM curator authoring workbook_mappings YAMLs
+            # (Ship 80'.b/83'.b pattern). Set USE_XLSX_LLM_PATH=1 to
+            # opt into the extract-time path for experimentation.
+            _xlsx_llm_enabled = os.getenv("USE_XLSX_LLM_PATH", "0").lower() in (
+                "1", "true", "yes", "on"
             )
-            return []
-        return _extract_structured(doc)
+            structured = doc.extraction_metrics.get("structured_sheets") or []
+            if (
+                _xlsx_llm_enabled
+                and structured
+                and not doc.extraction_metrics.get("templated_xlsx_meta")
+            ):
+                rendered_md = _render_structured_sheets_markdown(structured)
+                if rendered_md:
+                    doc.markdown  = rendered_md
+                    doc.full_text = rendered_md
+                    doc.extraction_metrics["xlsx_llm_path_active"] = True
+                    logger.info(
+                        "workbook %s: Ship 85'.b LLM extractor path active "
+                        "(%d chars markdown from %d sheets)",
+                        doc.original_name, len(rendered_md), len(structured),
+                    )
+                    # Fall through to the standard extract() flow below —
+                    # leaf classifier + consensus + per_must LLM signal.
+                else:
+                    logger.info(
+                        "workbook %s: structured_sheets empty — "
+                        "workbook_persistence-only path",
+                        doc.original_name,
+                    )
+                    return []
+            else:
+                logger.info(
+                    "workbook %s: structured extraction retired; "
+                    "workbook_persistence (Stage 4.6) is the canonical path",
+                    doc.original_name,
+                )
+                return []
+        else:
+            return _extract_structured(doc)
 
     # TOC / document-index filter — same shape as the questionnaire filter
     # but at the doc level. TOC docs describe what policies exist; their
@@ -1507,6 +1557,57 @@ def _extract_templated_via_full_section(
 # =============================================================================
 # STRUCTURED PATH — XLSX/CSV workbooks
 # =============================================================================
+
+def _render_structured_sheets_markdown(structured_sheets: list[dict]) -> str:
+    """Ship 85'.b — render unstructured.io-derived structured_sheets
+    (populated by Ship 85'.a's `_partition_xlsx_via_unstructured`) into
+    markdown that the LLM extractor path can consume.
+
+    Structure:
+      ## Sheet: <sheet_name>
+      [titles as bullets]
+      [tables — HTML preserved for LLM to read]
+      [hyperlinks — rendered as [label](url) list]
+      [cross-sheet refs — noted separately]
+      [narrative text]
+
+    Preserves the semantic richness Ship 85'.a captured while giving the
+    LLM a familiar markdown surface. Sheet-level structure is preserved
+    so the LLM knows which table came from which sheet.
+    """
+    if not structured_sheets:
+        return ""
+    parts: list[str] = []
+    for s in structured_sheets:
+        parts.append(f"## Sheet: {s['sheet_name']}")
+        # Titles
+        for t in s.get("titles", []) or []:
+            parts.append(f"- {t}")
+        # Tables (HTML preserved for structure; LLM can read HTML)
+        for tbl in s.get("tables_html", []) or []:
+            html = tbl.get("html") or ""
+            if html:
+                parts.append(html[:8000])
+            elif tbl.get("text"):
+                parts.append(tbl["text"][:2000])
+        # Narrative + text
+        for line in s.get("text_lines", []) or []:
+            parts.append(line[:1000])
+        # Hyperlinks
+        hls = s.get("hyperlinks") or []
+        if hls:
+            parts.append(f"\n**Hyperlinks in {s['sheet_name']}:**")
+            for h in hls[:50]:  # cap to avoid explosion on 250-hyperlink sheets
+                parts.append(f"- [{h.get('label') or h.get('url')}]({h['url']}) (cell {h['cell']})")
+        # Cross-sheet refs (formulas)
+        xrefs = s.get("cross_sheet_refs") or []
+        if xrefs:
+            parts.append(f"\n**Cross-sheet references in {s['sheet_name']}:** {len(xrefs)} formulas")
+        parts.append("")  # separator
+    out = "\n".join(parts)
+    # Cap overall size to prevent runaway prompts on multi-100-sheet workbooks
+    return out[:120000]
+
 
 def _extract_structured(doc: ParsedDocument) -> list[DocumentFinding]:
     """

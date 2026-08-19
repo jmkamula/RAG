@@ -1253,6 +1253,105 @@ def _read_templated_xlsx_meta(wb, filename: str = "") -> Optional[dict]:
     }
 
 
+def _partition_xlsx_via_unstructured(file_path: str) -> list[dict]:
+    """Ship 85'.a — richer xlsx structured representation via
+    unstructured.io. Produces list of dicts:
+      {sheet_name, headers, rows, html_table, n_data_rows, hyperlinks,
+       cross_sheet_refs}
+
+    Uses `unstructured.partition.xlsx.partition_xlsx` for parse + table
+    detection, then walks the returned elements to group by sheet.
+    Hyperlinks + cross-sheet refs are captured separately via openpyxl
+    (unstructured's xlsx partition doesn't expose hyperlink metadata).
+
+    Fail-open: any error yields []. Extractor path stays optional; the
+    fallback openpyxl parse still runs below and populates raw_sections.
+    """
+    try:
+        from unstructured.partition.xlsx import partition_xlsx
+    except Exception as e:
+        logger.warning("_partition_xlsx_via_unstructured: import failed: %s", e)
+        return []
+    try:
+        elements = partition_xlsx(filename=file_path)
+    except Exception as e:
+        logger.warning("_partition_xlsx_via_unstructured: partition failed: %s", e)
+        return []
+
+    # Hyperlink + formula capture via openpyxl (unstructured strips them)
+    hyperlinks_by_sheet: dict[str, list[dict]] = {}
+    cross_refs_by_sheet: dict[str, list[dict]] = {}
+    try:
+        import openpyxl
+        wb2 = openpyxl.load_workbook(file_path, read_only=False, data_only=False)
+        for sheet_name in wb2.sheetnames:
+            if _is_meta_sheet(sheet_name):
+                continue
+            ws = wb2[sheet_name]
+            hls, xrefs = [], []
+            for row in ws.iter_rows():
+                for c in row:
+                    try:
+                        if c.hyperlink is not None:
+                            tgt = getattr(c.hyperlink, "target", None) or ""
+                            disp = getattr(c.hyperlink, "display", None) or str(c.value or "")
+                            if tgt:
+                                hls.append({
+                                    "cell":  c.coordinate,
+                                    "url":   tgt,
+                                    "label": disp,
+                                })
+                    except Exception:
+                        pass
+                    if isinstance(c.value, str) and c.value.startswith("=") and "!" in c.value:
+                        xrefs.append({
+                            "cell":    c.coordinate,
+                            "formula": c.value[:200],
+                        })
+            if hls:
+                hyperlinks_by_sheet[sheet_name] = hls
+            if xrefs:
+                cross_refs_by_sheet[sheet_name] = xrefs
+        wb2.close()
+    except Exception as e:
+        logger.debug("hyperlink/xref capture skipped: %s", e)
+
+    # Group unstructured elements by sheet
+    per_sheet: dict[str, dict] = {}
+    for e in elements:
+        sheet = None
+        try:
+            sheet = getattr(e.metadata, "page_name", None)
+        except Exception:
+            pass
+        sheet = sheet or "Sheet1"
+        s = per_sheet.setdefault(sheet, {
+            "sheet_name":  sheet,
+            "titles":      [],
+            "tables_html": [],
+            "text_lines":  [],
+            "hyperlinks":  hyperlinks_by_sheet.get(sheet, []),
+            "cross_sheet_refs": cross_refs_by_sheet.get(sheet, []),
+        })
+        kind = type(e).__name__
+        content = str(e)[:2000]
+        if kind == "Title":
+            s["titles"].append(content)
+        elif kind == "Table":
+            html = None
+            try:
+                html = getattr(e.metadata, "text_as_html", None)
+            except Exception:
+                pass
+            s["tables_html"].append({"text": content, "html": html or ""})
+        else:  # Text, NarrativeText, ListItem, etc.
+            if content.strip():
+                s["text_lines"].append(content)
+
+    # Emit list ordered by sheet name (deterministic)
+    return [per_sheet[k] for k in sorted(per_sheet.keys())]
+
+
 def _read_xlsx(file_path: str, file_name: str) -> ParsedDocument:
     try:
         import openpyxl
@@ -1364,6 +1463,31 @@ def _read_xlsx(file_path: str, file_name: str) -> ParsedDocument:
         raw_sections  = sections,
         page_count    = 0,
     )
+    # Ship 85'.a — richer structured extraction via unstructured.io.
+    # Stashed on extraction_metrics so downstream consumers (Ship 85'.b
+    # LLM extractor path for xlsx) can access sheet-level HTML tables +
+    # hyperlinks + cross-sheet refs without re-parsing the file.
+    try:
+        structured_sheets = _partition_xlsx_via_unstructured(file_path)
+    except Exception as e:
+        logger.warning("_read_xlsx: unstructured parse failed (%s); "
+                       "structured_sheets unavailable", e)
+        structured_sheets = []
+    if structured_sheets:
+        doc.extraction_metrics["structured_sheets"] = structured_sheets
+        # Summary counters for observability
+        n_hl = sum(len(s.get("hyperlinks") or []) for s in structured_sheets)
+        n_xref = sum(len(s.get("cross_sheet_refs") or []) for s in structured_sheets)
+        n_tables = sum(len(s.get("tables_html") or []) for s in structured_sheets)
+        doc.extraction_metrics["xlsx_n_sheets"]     = len(structured_sheets)
+        doc.extraction_metrics["xlsx_n_tables"]     = n_tables
+        doc.extraction_metrics["xlsx_n_hyperlinks"] = n_hl
+        doc.extraction_metrics["xlsx_n_xrefs"]      = n_xref
+        logger.info(
+            "_read_xlsx: unstructured captured %d sheets, %d tables, "
+            "%d hyperlinks, %d cross-sheet refs",
+            len(structured_sheets), n_tables, n_hl, n_xref,
+        )
     if skipped_meta:
         doc.extraction_metrics["workbook_skipped_meta_sheets"] = ", ".join(skipped_meta)
         logger.info(
