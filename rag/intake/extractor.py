@@ -504,6 +504,28 @@ def _extract_via_consensus(
         return []
 
     cfg = default_config().with_overrides(llm_arbiter_enabled=True)
+
+    # Ship 81'.b — LLM-signal mode: LLM extractor votes as a discovery
+    # signal alongside deterministic signals. Fingerprint kept as
+    # corroborator (weight 0.20 vs default 0.50) so aggregator's
+    # accept_floor is still reachable, but LLM + high-precision signals
+    # dominate. bm25 dropped (26% precision, high noise per Ship 81'.a).
+    # Env-flag USE_LLM_SIGNAL_MODE=1|extract_once|per_must enables.
+    _llm_signal_mode = os.getenv("USE_LLM_SIGNAL_MODE", "").lower()
+    if _llm_signal_mode in ("1", "true", "yes", "on", "extract_once", "per_must"):
+        cfg = cfg.with_overrides(
+            llm_extractor_enabled = True,
+            llm_signal_mode       = ("per_must" if _llm_signal_mode == "per_must"
+                                     else "extract_once"),
+            fingerprint_weight    = 0.20,  # corroborator, not dominant
+            bm25_weight           = 0.0,   # dropped
+            # LLM signal vouches for the MUST's presence contextually,
+            # so the no-excerpt-auto-drop invariant (which was Ship 34'.c
+            # protection against scope-signal-only candidates) becomes
+            # too aggressive — it kills LLM-confirmed candidates that
+            # happen to lack a fingerprint excerpt. Disable in LLM mode.
+            no_excerpt_auto_drop  = False,
+        )
     result = run_extraction_consensus(doc, scoped_leaf_ids, cfg)
 
     # Ship 75'.c — route consensus emits through FINDING_CONTRACT.bind()

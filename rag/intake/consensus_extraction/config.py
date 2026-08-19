@@ -84,6 +84,18 @@ class ExtractionConsensusConfig:
     # when the doc IS a formal artefact.
     structural_maturity_weight: float = 0.15
 
+    # Ship 81'.b — LLM as discovery signal (alongside deterministic
+    # signals). Extract-once mode reuses critic-verifier's extract
+    # pipeline; per-MUST mode is Ship 81'.d work. When enabled, callers
+    # typically also set fingerprint_weight=0 and bm25_weight=0 so
+    # fingerprint becomes enrichment-only (metadata excerpt lookup
+    # without vote) and bm25 (26% precision, high noise) is dropped.
+    llm_extractor_enabled:     bool  = False    # opt-in; env-flag USE_LLM_SIGNAL_MODE
+    llm_extractor_weight:      float = 0.40     # parity with doc_mappings
+    llm_signal_mode:           str   = "extract_once"   # or "per_must"
+    llm_signal_priming_max:    int   = 40
+    llm_signal_pool_size:      int   = 100
+
     # Feature flags
     llm_arbiter_enabled:       bool = False    # False in shadow mode; True post-cutover
     # Ship 37'.b — toggle for the no-excerpt-auto-drop invariant.

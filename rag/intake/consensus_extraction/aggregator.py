@@ -35,6 +35,7 @@ _POSITIVE_SIGNAL_NAMES = {
     "bridge_substantiveness",
     "bm25_topk",             # Ship 43'.b — BM25 lexical corroborator
     "structural_maturity",   # Ship 54'.e Phase 3 — doc-quality corroborator
+    "llm_extractor",         # Ship 81'.b — LLM as discovery signal
 }
 
 

@@ -35,6 +35,7 @@ from rag.intake.consensus_extraction.signals import (
     content_shape_penalty,
     evidence_uniqueness,
     structural_maturity,
+    llm_extractor,
 )
 
 from rag.telemetry import get_tracer, capture_content
@@ -153,6 +154,15 @@ def run_extraction_consensus(
             doc, widened_leaf_ids, cfg,
         )
 
+        # Ship 81'.b — LLM extractor as discovery signal (opt-in via
+        # cfg.llm_extractor_enabled). When enabled, complements the
+        # deterministic signals with LLM's contextual judgement of what
+        # MUSTs the doc actually evidences. See signals/llm_extractor.py.
+        sig_llm_extractor   = _run_signal(
+            "llm_extractor", llm_extractor,
+            doc, widened_leaf_ids, cfg,
+        )
+
         signals = [
             sig_explicit_ref,
             sig_doc_mappings,
@@ -164,6 +174,7 @@ def run_extraction_consensus(
             sig_content_shape,
             sig_evidence_uniq,
             sig_structural,
+            sig_llm_extractor,
         ]
 
         with _tracer.start_as_current_span("arion.consensus.aggregate") as agg_span:
