@@ -1,195 +1,159 @@
 # LLM-authored ground truth for A_5_1_communication_record.xlsx
 # Model: claude-opus-4-7 — 2-pass structured (Ship 82'.a).
-# Total verdicts: 31
+# Total verdicts: 25
 
 doc: A_5_1_communication_record.xlsx
 annotator: claude-opus-4-7
-generated_at: 2026-08-19T17:03:15Z
+generated_at: 2026-08-19T22:20:06Z
 
 musts:
   - must_id: item:5.2:com_acknowledgement
     verdict: not_satisfies
     confidence: high
     quote: ""
-    rationale: "No acknowledgement or signed receipt record is present."
+    rationale: "No acknowledgement or signed receipt column present."
 
   - must_id: item:5.2:com_audience
     verdict: partial
     confidence: medium
     quote: "All interested parties"
-    rationale: "Audience is stated generically but not broken down into employees, contractors, or third parties."
+    rationale: "Audience noted only as generic 'all interested parties' without breakdown of employees/contractors/third parties."
 
   - must_id: item:5.2:com_channels
     verdict: partial
     confidence: medium
     quote: "email and training session"
-    rationale: "Channels are listed but not tied to onboarding pack or signed acknowledgement structure."
+    rationale: "Channels listed but not tied to policy distribution acknowledgement process."
 
   - must_id: item:5.2:com_refresher
     verdict: not_satisfies
     confidence: high
     quote: ""
-    rationale: "No refresher cadence or re-acknowledgement policy referenced."
+    rationale: "No refresher cadence recorded."
 
   - must_id: item:7.4:scope_audiences
     verdict: partial
     confidence: medium
-    quote: "all staff, scoped subset, or named groups"
-    rationale: "Guidance mentions audience categories but no explicit internal/external classification."
+    quote: "All interested parties"
+    rationale: "Only generic audience label; no breakdown of internal/external classes."
 
   - must_id: item:7.4:scope_mandated_voluntary
     verdict: not_satisfies
     confidence: high
     quote: ""
-    rationale: "No mandated vs voluntary distinction present."
+    rationale: "No mandated vs voluntary classification present."
 
   - must_id: item:7.4:scope_topics
     verdict: not_satisfies
     confidence: high
     quote: ""
-    rationale: "No topic classes (policy, incident, breach, etc.) are enumerated."
+    rationale: "No topic classification column."
 
   - must_id: item:7.4:reg_audience
-    verdict: satisfies
-    confidence: high
-    quote: "Comm Audience | All interested parties"
-    rationale: "Register captures per-row audience field."
+    verdict: partial
+    confidence: medium
+    quote: "All interested parties"
+    rationale: "Audience column populated but generic; lacks specific internal group or external party."
 
   - must_id: item:7.4:reg_channel
     verdict: satisfies
-    confidence: high
-    quote: "Comm Channel | email and training session"
-    rationale: "Register captures per-row channel used."
+    confidence: medium
+    quote: "email and training session"
+    rationale: "Row has channel populated with date and audience corroborating."
 
   - must_id: item:7.4:reg_date
     verdict: satisfies
-    confidence: high
-    quote: "Comm Date | 2026-07-29 00:00:00"
-    rationale: "Register captures per-row date of communication."
+    confidence: medium
+    quote: "2026-07-29 00:00:00 | All interested parties | email and training session"
+    rationale: "Date populated with corroborating audience and channel columns."
 
   - must_id: item:7.4:reg_event_id
     verdict: not_satisfies
     confidence: high
     quote: ""
-    rationale: "No unique event identifier column is present in the register."
+    rationale: "No event ID column present in the register."
 
   - must_id: item:7.4:reg_topic
     verdict: not_satisfies
-    confidence: medium
+    confidence: high
     quote: ""
-    rationale: "No per-row topic column tied to a 'what' catalog exists."
+    rationale: "No topic column in the register; only date, audience, channel."
+
+  - must_id: item:7.4:rev_audience_coverage
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "This register is a communication log, not a review artefact."
+
+  - must_id: item:7.4:rev_cadence_check
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Cadence review is out of scope for this communication record."
+
+  - must_id: item:7.4:rev_date
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "No review is documented in this artefact."
+
+  - must_id: item:7.4:rev_mandated_deadlines
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Mandated deadline review is not in scope for this register."
+
+  - must_id: item:7.4:rev_reviewer
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Reviewer identity not applicable to a communication record."
 
   - must_id: item:7.4:how
     verdict: partial
     confidence: medium
-    quote: "Comm Channel | Channel used (intranet publication, email, training session, town hall)"
-    rationale: "Channel is captured but no formats or escalation paths are documented."
+    quote: "email and training session"
+    rationale: "Channel is captured for one row but escalation paths and formats are not defined."
 
   - must_id: item:7.4:responsibility
     verdict: not_satisfies
     confidence: high
     quote: ""
-    rationale: "No column identifies who is responsible for each communication."
+    rationale: "No responsibility/owner column in the register."
 
   - must_id: item:7.4:what
     verdict: not_satisfies
     confidence: high
     quote: ""
-    rationale: "No 'what' column is present in the register."
+    rationale: "No topic/what-communicated column recorded in the register."
 
   - must_id: item:7.4:when
     verdict: partial
     confidence: medium
-    quote: "Comm Date | Date of publication/communication"
-    rationale: "Date is captured but planned cadences and event triggers are not."
+    quote: "2026-07-29 00:00:00 | All interested parties | email and training session"
+    rationale: "A single communication date is recorded but no planned cadence or event triggers are documented."
 
   - must_id: item:7.4:with_whom
     verdict: satisfies
-    confidence: medium
-    quote: "Comm Audience | Audience reached (all staff, scoped subset, or named groups)"
-    rationale: "Audience column captures with whom communication occurs."
-
-  - must_id: item:A.5.1:review_date
-    verdict: not_applicable
     confidence: high
-    quote: ""
-    rationale: "This register tracks communications, not policy reviews."
-
-  - must_id: item:A.5.1:review_outcome
-    verdict: not_applicable
-    confidence: high
-    quote: ""
-    rationale: "Review outcomes are out of scope for a communication record."
-
-  - must_id: item:A.5.1:review_reviewer
-    verdict: not_applicable
-    confidence: high
-    quote: ""
-    rationale: "Reviewer identity is out of scope for a communication record."
+    quote: "All interested parties | email and training session"
+    rationale: "Audience is explicitly identified alongside date and channel, corroborating the row."
 
   - must_id: item:A.5.1:comm_audience
     verdict: satisfies
     confidence: high
-    quote: "All interested parties"
-    rationale: "Audience is recorded in the communication register."
+    quote: "2026-07-29 00:00:00 | All interested parties | email and training session"
+    rationale: "Comm Audience column is populated with corroborating date and channel columns."
 
   - must_id: item:A.5.1:comm_channel
     verdict: satisfies
     confidence: high
-    quote: "email and training session"
-    rationale: "Channels used are explicitly listed."
+    quote: "2026-07-29 00:00:00 | All interested parties | email and training session"
+    rationale: "Channel is specified with corroborating date and audience columns populated."
 
   - must_id: item:A.5.1:comm_date
     verdict: satisfies
     confidence: high
-    quote: "2026-07-29 00:00:00"
-    rationale: "Communication date is recorded."
-
-  - must_id: item:A.5.1:legal_compliance
-    verdict: not_applicable
-    confidence: medium
-    quote: ""
-    rationale: "This is a communication record, not the policy itself; legal compliance statement belongs in the policy document."
-
-  - must_id: item:A.5.1:principles
-    verdict: not_applicable
-    confidence: medium
-    quote: ""
-    rationale: "Principles are stated in the policy document, not the communication register."
-
-  - must_id: item:A.5.1:roles
-    verdict: not_applicable
-    confidence: medium
-    quote: ""
-    rationale: "Roles belong in the policy document, not this communication record."
-
-  - must_id: item:A.5.1:scope
-    verdict: not_applicable
-    confidence: medium
-    quote: ""
-    rationale: "Policy scope is defined in the policy document, not in the communication log."
-
-  - must_id: item:A.5.1:topic_refs
-    verdict: not_applicable
-    confidence: medium
-    quote: ""
-    rationale: "Cross-references to topic-specific policies belong in the policy document."
-
-  - must_id: item:A.5.1:approval_date
-    verdict: not_applicable
-    confidence: medium
-    quote: ""
-    rationale: "Approval metadata belongs in the policy document, not this communication record."
-
-  - must_id: item:A.5.1:approval_signatory
-    verdict: not_applicable
-    confidence: medium
-    quote: ""
-    rationale: "Signatory information belongs in the policy document, not the communication register."
-
-  - must_id: item:A.5.1:approval_target
-    verdict: not_applicable
-    confidence: high
-    quote: ""
-    rationale: "This document is a communication record tracking publication events, not a policy approval record referencing a specific policy version."
+    quote: "2026-07-29 00:00:00 | All interested parties | email and training session"
+    rationale: "Comm Date is populated with corroborating audience and channel columns."
 

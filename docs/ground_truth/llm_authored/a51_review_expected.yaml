@@ -4,24 +4,24 @@
 
 doc: A_5_1_annual_review.xlsx
 annotator: claude-opus-4-7
-generated_at: 2026-08-19T17:02:43Z
+generated_at: 2026-08-19T22:19:42Z
 
 musts:
   - must_id: item:A.5.1:review_date
     verdict: satisfies
     confidence: high
-    quote: "2029-07-29 00:00:00"
-    rationale: "A review date is recorded in the register."
+    quote: "2029-07-29 00:00:00 | Approvment as per ArionComply findings | Zorko Petrusa"
+    rationale: "Review date is populated with corroborating outcome and reviewer columns on the same row."
 
   - must_id: item:A.5.1:review_outcome
-    verdict: partial
+    verdict: satisfies
     confidence: medium
     quote: "Approvment as per ArionComply findings"
-    rationale: "An outcome is noted but it does not clearly map to the expected categories (no change / amended to vN / retired)."
+    rationale: "Outcome is stated with corroborating date and reviewer, though wording is generic rather than the expected no change/amended/retired taxonomy."
 
   - must_id: item:A.5.1:review_reviewer
     verdict: partial
-    confidence: medium
+    confidence: high
     quote: "Zorko Petrusa"
-    rationale: "Reviewer name is provided but no role/title is stated."
+    rationale: "Reviewer name is present but no role/title is recorded as expected."
 

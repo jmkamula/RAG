@@ -1,89 +1,89 @@
 # LLM-authored ground truth for rt_raci_filled.xlsx
 # Model: claude-opus-4-7 — 2-pass structured (Ship 82'.a).
-# Total verdicts: 34
+# Total verdicts: 39
 
 doc: rt_raci_filled.xlsx
 annotator: claude-opus-4-7
-generated_at: 2026-08-19T16:32:23Z
+generated_at: 2026-08-19T22:20:47Z
 
 musts:
   - must_id: item:5.3:proc_conflict_handling
     verdict: not_satisfies
     confidence: high
     quote: ""
-    rationale: "No conflict-of-interest handling procedure is mentioned in the document."
+    rationale: "No mention of conflict-of-interest handling when the same person fills multiple roles."
 
   - must_id: item:5.3:proc_decision_rights
     verdict: partial
     confidence: medium
-    quote: "Authorities assigned for each role (decision rights, sign-off authority)"
-    rationale: "Decision rights are mentioned as an authority attribute but no principles for responsibility vs authority are stated."
+    quote: "Accept residual risk > target → ISMS Owner; Declare incident → IR Manager"
+    rationale: "Specific decision rights are listed but no general decision-rights principles are stated."
 
   - must_id: item:5.3:proc_escalation
     verdict: not_satisfies
     confidence: high
     quote: ""
-    rationale: "No escalation path for unfilled or contested roles is described."
+    rationale: "No escalation path defined for unfilled or contested roles."
 
   - must_id: item:5.3:proc_model
     verdict: partial
     confidence: medium
     quote: "rt_raci_filled.xlsx"
-    rationale: "The filename implies a RACI model but the document does not explicitly state the responsibility model in its content."
+    rationale: "Filename implies RACI model but no explicit statement of the responsibility model is present in the content."
 
   - must_id: item:5.3:a52_consistency
-    verdict: partial
+    verdict: not_satisfies
     confidence: medium
-    quote: "Consistency with A.5.2 operational security roles flagged inline"
-    rationale: "Field is defined as a requirement but no actual content demonstrating A.5.2 consistency flags is provided."
+    quote: ""
+    rationale: "Field is listed as a heading but no content demonstrating inline A.5.2 consistency flagging is provided."
 
   - must_id: item:5.3:authorities_assigned
     verdict: satisfies
     confidence: high
     quote: "Accept residual risk > target → ISMS Owner; Declare incident → IR Manager"
-    rationale: "Specific authorities with decision rights are assigned to named roles."
+    rationale: "Specific decision rights/authorities are assigned to named roles."
 
   - must_id: item:5.3:communicated
     verdict: satisfies
     confidence: high
     quote: "Roles published on Confluence ISMS handbook + announced at monthly all-hands; acknowledged at hire (HR onboarding)."
-    rationale: "Multiple concrete communication channels are documented."
+    rationale: "Multiple communication channels for role dissemination are specified."
 
   - must_id: item:5.3:isms_conformance
     verdict: satisfies
     confidence: high
-    quote: "Mutua John (ISMS Manager)"
-    rationale: "ISMS Manager is named as the role responsible for ISMS conformance."
+    quote: "Mutua John (ISMS Manager) | Quarterly to Steering, annually to Board via CEO"
+    rationale: "Named individual with role assigned for ISMS conformance."
 
   - must_id: item:5.3:owner
-    verdict: partial
+    verdict: not_satisfies
     confidence: medium
-    quote: "Named owner of the matrix (typically ISMS Manager)"
-    rationale: "The field is defined but no explicit named owner content is provided in the response cell."
+    quote: ""
+    rationale: "The Owner field is listed but no value is provided identifying the named owner of the matrix."
 
   - must_id: item:5.3:performance_reporting
     verdict: satisfies
     confidence: high
     quote: "Quarterly to Steering, annually to Board via CEO"
-    rationale: "Performance reporting cadence and recipients to top management are specified."
+    rationale: "Reporting cadence and audience to top management are specified with named role owner."
 
   - must_id: item:5.3:chg_approval
     verdict: not_satisfies
     confidence: high
     quote: ""
-    rationale: "No approval signature or date is present in the document."
+    rationale: "No approval signature or date for changes is present in the document."
 
   - must_id: item:5.3:chg_comms
     verdict: partial
     confidence: medium
     quote: "Roles published on Confluence ISMS handbook + announced at monthly all-hands; acknowledged at hire (HR onboarding)."
-    rationale: "Communication channels are described but not tied to a specific change event."
+    rationale: "General communication of roles is mentioned but not tied to a specific change event."
 
   - must_id: item:5.3:chg_summary
     verdict: not_satisfies
     confidence: high
     quote: ""
-    rationale: "No change summary describing additions, removals, or reassignments is provided."
+    rationale: "No change summary describing additions, removals, or reassignments is present."
 
   - must_id: item:5.3:chg_trigger
     verdict: not_satisfies
@@ -95,7 +95,7 @@ musts:
     verdict: partial
     confidence: medium
     quote: "Consistency with A.5.2 operational security roles flagged inline"
-    rationale: "A.5.2 consistency is referenced as a field but no actual cross-check result is documented."
+    rationale: "A.5.2 consistency is referenced as a field but no actual cross-check evidence or outcome is documented."
 
   - must_id: item:5.3:rev_change_log
     verdict: not_satisfies
@@ -105,9 +105,9 @@ musts:
 
   - must_id: item:5.3:rev_currency
     verdict: partial
-    confidence: low
+    confidence: medium
     quote: "Mutua John (ISMS Manager)"
-    rationale: "Only one named holder appears; no explicit currency check confirming every role has an active holder."
+    rationale: "One active holder named but no explicit currency check confirming every role has an active holder."
 
   - must_id: item:5.3:rev_date
     verdict: not_satisfies
@@ -119,95 +119,125 @@ musts:
     verdict: not_satisfies
     confidence: high
     quote: ""
-    rationale: "No reviewer identity (ISMS Manager + HR partner) is recorded."
+    rationale: "No reviewer identity (ISMS Manager + HR partner) is documented for the review."
 
   - must_id: item:A.5.2:review_date
     verdict: not_satisfies
     confidence: high
     quote: ""
-    rationale: "No review date is present in the document."
+    rationale: "No review date is documented to confirm review within planned interval."
 
   - must_id: item:A.5.2:review_outcome
-    verdict: not_satisfies
+    verdict: not_applicable
     confidence: high
     quote: ""
-    rationale: "No review outcome recorded in the document."
+    rationale: "This document covers ISMS role authorities under clause 5.3, not A.5.2 review records."
 
   - must_id: item:A.5.2:review_reviewer
-    verdict: not_satisfies
+    verdict: not_applicable
     confidence: high
     quote: ""
-    rationale: "No reviewer identity or role is documented."
+    rationale: "No review log fields present in this 5.3 authorities document."
 
   - must_id: item:A.5.2:comm_audience
-    verdict: partial
-    confidence: medium
-    quote: "announced at monthly all-hands; acknowledged at hire (HR onboarding)"
-    rationale: "Mentions all-hands and new hires but does not explicitly name the audience of role-holders."
-
-  - must_id: item:A.5.2:comm_channel
-    verdict: satisfies
-    confidence: high
-    quote: "Roles published on Confluence ISMS handbook + announced at monthly all-hands; acknowledged at hire (HR onboarding)."
-    rationale: "Multiple channels (Confluence, all-hands, onboarding) are named."
-
-  - must_id: item:A.5.2:comm_date
-    verdict: not_satisfies
-    confidence: high
-    quote: ""
-    rationale: "No specific date of communication is recorded."
-
-  - must_id: item:A.5.2:approval_date
-    verdict: not_satisfies
-    confidence: high
-    quote: ""
-    rationale: "No approval date is present in the document."
-
-  - must_id: item:A.5.2:approval_signatory
-    verdict: not_satisfies
-    confidence: high
-    quote: ""
-    rationale: "No top-management signatory is documented."
-
-  - must_id: item:A.5.2:approval_target
-    verdict: not_satisfies
-    confidence: high
-    quote: ""
-    rationale: "No version reference of the approved matrix is provided."
-
-  - must_id: item:A.5.2:allocation
-    verdict: partial
-    confidence: medium
-    quote: "Mutua John (ISMS Manager)"
-    rationale: "One named individual is shown, but other authorities cite only role labels (ISMS Owner, IR Manager)."
-
-  - must_id: item:A.5.2:asset_owner_resp
     verdict: not_applicable
     confidence: medium
     quote: ""
-    rationale: "Document scope is ISMS role authorities, not asset ownership assignment."
+    rationale: "Document scope is 5.3 role authorities, not A.5.2 communication logs, though it mentions communication of roles."
+
+  - must_id: item:A.5.2:comm_channel
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Not an A.5.2 communication record; scope is clause 5.3."
+
+  - must_id: item:A.5.2:comm_date
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "No communication date field; document is 5.3 role authorities."
+
+  - must_id: item:A.5.2:approval_date
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "No approval metadata block in this document."
+
+  - must_id: item:A.5.2:approval_signatory
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "No signatory field present."
+
+  - must_id: item:A.5.2:approval_target
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "No version/approval reference present."
+
+  - must_id: item:A.5.2:allocation
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "This is a 5.3 authorities record, not the A.5.2 allocation matrix, though named individuals appear."
+
+  - must_id: item:A.5.2:asset_owner_resp
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Asset ownership belongs to A.5.9, not addressed in this 5.3 document."
 
   - must_id: item:A.5.2:reporting_lines
-    verdict: partial
+    verdict: not_satisfies
     confidence: medium
-    quote: "Quarterly to Steering, annually to Board via CEO"
-    rationale: "Performance reporting cadence to Steering/Board is stated, but not full reporting/escalation lines for each role."
+    quote: ""
+    rationale: "Document addresses Clause 5.3 ISMS roles/authorities; no reporting/escalation lines per role are stated."
 
   - must_id: item:A.5.2:responsibilities
-    verdict: satisfies
-    confidence: medium
+    verdict: partial
+    confidence: low
     quote: "Accept residual risk > target → ISMS Owner; Declare incident → IR Manager"
-    rationale: "Decision rights and authorities are explicitly assigned per role."
+    rationale: "Some decision rights are noted but not a per-role responsibilities breakdown for A.5.2."
 
   - must_id: item:A.5.2:roles_enumerated
     verdict: partial
-    confidence: medium
-    quote: "Mutua John (ISMS Manager) | Quarterly to Steering, annually to Board via CEO | Accept residual risk > target → ISMS Owner; Declare incident → IR Manager"
-    rationale: "Some roles named (ISMS Manager, ISMS Owner, IR Manager, CEO) but no CISO, Asset Owners, Risk Owners, or DPO enumerated."
+    confidence: low
+    quote: "Mutua John (ISMS Manager)"
+    rationale: "Only ISMS Manager and IR Manager mentioned; no broad enumeration of CISO, Asset/Risk Owners, DPO."
 
   - must_id: item:A.5.2:topic_alignment
-    verdict: partial
+    verdict: not_satisfies
     confidence: medium
-    quote: "Role assigned for ensuring the ISMS conforms to ISO 27001:2022"
-    rationale: "Covers ISMS conformance, performance reporting, and incident authority, but asset ownership, risk management, and audit topics are not clearly allocated."
+    quote: ""
+    rationale: "Document focuses on ISMS conformance/reporting, not on A.5.2 allocation across asset ownership, risk, audits."
+
+  - must_id: item:A.5.3:compensating
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Document is Clause 5.3 roles/authorities matrix, not an A.5.3 segregation of duties matrix."
+
+  - must_id: item:A.5.3:conflict_pairs
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Not an SoD matrix; no conflicting duty pairs in scope."
+
+  - must_id: item:A.5.3:coverage_scope
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Document scope is ISMS role authorities, not A.5.3 SoD coverage."
+
+  - must_id: item:A.5.3:owner
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Owner field pertains to this roles matrix, not to an A.5.3 SoD matrix."
+
+  - must_id: item:A.5.3:separation_method
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Not an SoD matrix; separation mechanisms not in scope."
 
