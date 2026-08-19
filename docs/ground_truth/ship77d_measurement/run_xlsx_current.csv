@@ -1,0 +1,221 @@
+filename,control_ref,standard_id,checklist_item_id,status,confidence,excerpt,inference_source,extracted_at
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:rev_identity_pair,present,medium,[leaf-scan back-bind from finding e75f9fad] sheet 'Access Register PII Systems' col 'User ID',leaf_scan,2026-06-13 08:14:22.664517+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:rev_authoriser,present,medium,[leaf-scan back-bind from finding d45c5e58] sheet 'Access Register PII Systems' col '[group authoriser_source: Authorized By + PII Approver]',leaf_scan,2026-06-13 08:14:22.664517+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:rev_identity_pair,present,medium,[leaf-scan back-bind from finding 370faa13] sheet 'Access Register PII Systems' col 'User ID',leaf_scan,2026-06-13 08:14:22.664517+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:rev_authoriser,present,medium,[leaf-scan back-bind from finding 49adc95a] sheet 'Access Register PII Systems' col '[group authoriser_source: Authorized By + PII Approver]',leaf_scan,2026-06-13 08:14:22.664517+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:rev_coverage,present,medium,[leaf-scan back-bind from finding 64f9f079] sheet 'Access Register PII Systems' col '[group subject_asset_mapping: Name + System/Application]',leaf_scan,2026-06-13 08:14:22.664517+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:rev_date,present,medium,[leaf-scan back-bind from finding ae99c758] sheet 'Access Register PII Systems' col 'PII Review Date Quarterly',leaf_scan,2026-06-13 08:14:22.664517+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:rev_coverage,present,medium,[leaf-scan back-bind from finding f1a77f94] sheet 'Access Rev. Log Non-PII Systems' col '[group subject_asset_mapping: System/Application Name + System/Application Name]',leaf_scan,2026-06-13 08:14:22.664517+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:rev_date,present,medium,[leaf-scan back-bind from finding 8e25c0ac] sheet 'Access Rev. Log Non-PII Systems' col 'Review Date',leaf_scan,2026-06-13 08:14:22.664517+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:rev_coverage,present,medium,[leaf-scan back-bind from finding 152e1ad0] sheet 'Access Register PII Systems' col '[group subject_asset_mapping: Name + System/Application]',leaf_scan,2026-06-13 08:14:22.664517+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:rev_date,present,medium,[leaf-scan back-bind from finding 1a6d4897] sheet 'Access Register PII Systems' col 'PII Review Date Quarterly',leaf_scan,2026-06-13 08:14:22.664517+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rev_reviewer,present,high,sheet 'External Audit Log' col 'Auditor',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.1.3,ISO27001:2022,item:6.1.3:controls,present,high,sheet 'Risk Treatment Plan' col 'ISMS Applicable Controls',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.6.3,ISO27001:2022,item:A.6.3:rev_date,present,high,sheet 'Training & Awarnesse Record' col 'Date Delivered',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.1.3,ISO27001:2022,item:6.1.3:approval,partial,medium,sheet 'Risk Treatment Plan' col 'Status',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.1,ISO27001:2022,item:10.1:rev_closure_quality,partial,medium,sheet 'ISMS Action Tracker' col 'Status',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.1,ISO27001:2022,item:10.1:reg_target_date,partial,medium,sheet 'ISMS Action Tracker' col 'Due Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.9,ISO27001:2022,item:A.5.9:asset_records,present,high,sheet 'BIA Bus. Impact Ass.' col 'Asset ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.9,ISO27001:2022,item:A.5.9:dependencies,present,high,sheet 'BIA Bus. Impact Ass.' col 'Dependencies/Comments',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.30,ISO27001:2022,item:A.5.30:reg_service_id,present,high,sheet 'BIA Bus. Impact Ass.' col 'Asset ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.30,ISO27001:2022,item:A.5.30:reg_recovery_owner,present,high,sheet 'BIA Bus. Impact Ass.' col 'Asset Owner',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.30,ISO27001:2022,item:A.5.30:reg_criticality,partial,medium,sheet 'BIA Bus. Impact Ass.' col 'Criticality',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.29,ISO27001:2022,item:A.5.29:rev_date,present,high,sheet 'Business Cont DR Plan' col 'Date Last Updated',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.26,ISO27001:2022,item:A.5.26:reg_owner,present,high,sheet 'Incident Log' col 'Owner',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.1,ISO27001:2022,item:10.1:reg_status,partial,medium,sheet 'ISMS Action Tracker' col 'Status',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.9,ISO27001:2022,item:A.5.9:owner_per_asset,present,high,sheet 'BIA Bus. Impact Ass.' col 'Asset Owner',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.1,ISO27001:2022,item:9.1:rec_metric_id,present,high,sheet 'Monitoring Log' col 'Monitoring/Measurement ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rec_date,present,high,sheet 'Audit Log' col 'Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rec_findings,partial,medium,sheet 'External Audit Log' col 'Findings',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.1,ISO27001:2022,item:9.1:rec_value,present,high,sheet 'Monitoring Log' col 'Measurement Results',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.1,ISO27001:2022,item:9.1:rec_date,present,high,sheet 'Monitoring Log' col 'Date of Monitoring/Measurement',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.1,ISO27001:2022,item:9.1:rec_owner,present,high,sheet 'Monitoring Log' col 'Owner',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.8.1,ISO27001:2022,item:A.8.1:reg_owner,partial,medium,sheet 'User BYOD Compl. Log' col 'Owner',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.8.1,ISO27001:2022,item:A.8.1:reg_compliance,partial,medium,sheet 'User BYOD Compl. Log' col 'Security Compliance Status',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,7.4,ISO27001:2022,item:7.4:reg_event_id,present,high,sheet 'Risk Comms Matrix' col 'Risk ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,7.4,ISO27001:2022,item:7.4:reg_topic,present,high,sheet 'Risk Comms Matrix' col 'Risk Description',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rec_date,present,high,sheet 'External Audit Log' col 'Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.36,ISO27001:2022,item:A.5.36:schedule,partial,medium,sheet 'Quarterly Security Review' col 'Review Quarter',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,7.2,ISO27001:2022,item:7.2:required_competence,present,high,sheet 'Competence Records' col 'Competency Area',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,7.2,ISO27001:2022,item:7.2:basis_of_competence,present,high,sheet 'Competence Records' col 'Training Required',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.26,ISO27001:2022,item:A.5.26:reg_incident_id,present,high,sheet 'Incident Log' col 'Incident ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,7.2,ISO27001:2022,item:7.2:effectiveness,present,high,sheet 'Competence Records' col 'Assesment Score',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.9,ISO27001:2022,item:A.5.9:location,present,high,sheet 'BIA Bus. Impact Ass.' col 'Asset Location',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,7.2,ISO27001:2022,item:7.2:documented,present,high,sheet 'Competence Records' col 'Evaluation Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,7.2,ISO27001:2022,item:7.2:owner,present,high,sheet 'Competence Records' col 'Employee Name',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rec_findings,partial,medium,sheet 'Audit Log' col 'Findings',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:corrective,present,medium,[leaf-scan back-bind from finding a19767cc] sheet 'External Audit Log' col 'Corrective Action ID',leaf_scan,2026-06-15 19:34:21.880843+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:scope,present,medium,[leaf-scan back-bind from finding 5a5081d1] sheet 'Audit Log' col 'Scope',leaf_scan,2026-06-15 19:34:21.880843+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:independence,present,medium,[leaf-scan back-bind from finding f106cb99] sheet 'Audit Log' col 'Auditor',leaf_scan,2026-06-15 19:34:21.880843+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:independence,present,medium,[leaf-scan back-bind from finding aed0c42a] sheet 'Audit Log' col 'Auditor',leaf_scan,2026-06-15 19:34:21.880843+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:scope,present,medium,[leaf-scan back-bind from finding 608d281a] sheet 'Audit Log' col 'Scope',leaf_scan,2026-06-15 19:34:21.880843+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rev_date,present,high,sheet 'External Audit Log' col 'Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:corrective,present,medium,[leaf-scan back-bind from finding f529bdd4] sheet 'Audit Log' col 'Corrective Action ID',leaf_scan,2026-06-15 19:34:21.880843+00
+ISO 27001 workbook Arion Networks.xlsm,A.6.6,ISO27001:2022,item:A.6.6:reg_variant,present,medium,[leaf-scan back-bind from finding f42b67c7] sheet 'Business Partners Assessment' col 'NDA signed',leaf_scan,2026-06-15 19:34:21.880843+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:independence,present,medium,[leaf-scan back-bind from finding 471eef05] sheet 'External Audit Log' col 'Auditor',leaf_scan,2026-06-15 19:34:21.880843+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:independence,present,medium,[leaf-scan back-bind from finding 7b92a89a] sheet 'External Audit Log' col 'Auditor',leaf_scan,2026-06-15 19:34:21.880843+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:reg_idmgmt_link,present,high,sheet 'Access Register PII Systems' col 'User ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:reg_grant_date,present,high,sheet 'Access Register PII Systems' col 'Date Granted',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:reg_privileged_flag,present,high,sheet 'Access Register PII Systems' col 'PII Role',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.2,ISO27001:2022,item:6.2:rev_date,present,high,sheet 'Info Sec KPI Metrics Tracker' col 'Review Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.9,ISO27001:2022,item:A.5.9:dfi_link,present,high,sheet 'Asset Register' col 'Personal Data Types',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.9,ISO27001:2022,item:A.5.9:classification,present,high,sheet 'Asset Register' col '[group cia_triad_classification: Confidentiality + Integrity + Availability]',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.6.3,ISO27001:2022,item:A.6.3:reg_score,present,medium,[leaf-scan back-bind from finding 8f263f99] sheet 'Training & Awarnesse Record' col 'Evaluation Results',leaf_scan,2026-06-12 17:32:35.534712+00
+ISO 27001 workbook Arion Networks.xlsm,A.6.3,ISO27001:2022,item:A.6.3:reg_module_id,present,medium,[leaf-scan back-bind from finding 4ba6d02f] sheet 'Training & Awarnesse Record' col 'Training Title',leaf_scan,2026-06-12 17:32:35.534712+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:rev_coverage,present,medium,[leaf-scan back-bind from finding de1ea544] sheet 'Access Rev. Log Non-PII Systems' col '[group subject_asset_mapping: System/Application Name + System/Application Name]',leaf_scan,2026-06-13 08:14:22.664517+00
+ISO 27001 workbook Arion Networks.xlsm,6.1.2,ISO27001:2022,item:6.1.2:reg_risk_id,present,high,sheet 'Risk Register' col 'Risk ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.1.2,ISO27001:2022,item:6.1.2:reg_owner,present,high,sheet 'Risk Register' col 'Risk Owner',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.1.2,ISO27001:2022,item:6.1.2:reg_description,present,high,sheet 'Risk Register' col '[group risk_description_components: Threat + Vulnerability]',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.26,ISO27001:2022,item:A.5.26:cls_incident_ref,present,high,sheet 'Incident Log' col 'Incident ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rev_completion,partial,medium,sheet 'External Audit Log' col 'Status',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.1.2,ISO27001:2022,item:6.1.2:reg_scoring,present,high,sheet 'Risk Register' col '[group risk_scoring_components: Likelihood + Impact]',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,4.2,ISO27001:2022,item:4.2:requirements,present,high,sheet 'Interested Parties' col 'Compliance Requirements',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,7.5,ISO27001:2022,item:7.5:rev_reviewer,present,medium,[leaf-scan back-bind from finding 57dad54e] Not per ISMS Scope as no physical assets exist,leaf_scan,2026-06-15 19:34:21.880843+00
+ISO 27001 workbook Arion Networks.xlsm,9.3,ISO27001:2022,item:9.3:rev_date,present,high,sheet 'Management Review Log' col 'Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.1,ISO27001:2022,item:10.1:reg_owner,present,high,sheet 'ISMS Action Tracker' col 'Owner',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.1.3,ISO27001:2022,item:6.1.3:options,present,high,sheet 'Risk Treatment Plan' col 'Treatment Option',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.30,ISO27001:2022,item:A.5.30:reg_rto_rpo,partial,medium,sheet 'BIA Bus. Impact Ass.' col 'RTO',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.2,ISO27001:2022,item:6.2:rev_date,present,high,sheet 'ISMS Objectives' col 'Review Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.1.3,ISO27001:2022,item:6.1.3:owners,present,high,sheet 'Risk Treatment Plan' col 'Risk Owner',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:reg_subject_asset,present,high,sheet 'Access Register PII Systems' col '[group subject_asset_mapping: Name + System/Application]',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.1,ISO27001:2022,item:10.1:reg_status,partial,medium,sheet 'ISMS Schedule' col 'STATUS',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.1,ISO27001:2022,item:10.1:reg_dimension,partial,medium,sheet 'ISMS Schedule' col 'TASK',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.1,ISO27001:2022,item:10.1:reg_trigger_type,partial,medium,sheet 'ISMS Schedule' col 'PRIORITY',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.2,ISO27001:2022,item:6.2:rev_reviewer,present,high,sheet 'ISMS Objectives' col 'Responsible Party',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.2,ISO27001:2022,item:6.2:rev_currency,partial,medium,sheet 'ISMS Objectives' col 'Current Status',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.2,ISO27001:2022,item:6.2:rev_alignment,partial,medium,sheet 'ISMS Objectives' col 'Alignment with ISMS Policy',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.2,ISO27001:2022,item:6.2:rev_kpi_health,partial,medium,sheet 'ISMS Objectives' col 'Key Performance Indicators (KPIs)',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.9,ISO27001:2022,item:A.5.9:location,present,high,sheet 'Asset Register' col 'Asset_Location',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.9,ISO27001:2022,item:A.5.9:asset_type,present,high,sheet 'Asset Register' col 'Asset_Type',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.1.3,ISO27001:2022,item:6.1.3:residual,present,high,sheet 'Risk Treatment Plan' col 'Residual Risk',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.1.3,ISO27001:2022,item:6.1.3:soa_all_annex_a,present,high,sheet 'Statement of Applicability' col 'Control ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.1.3,ISO27001:2022,item:6.1.3:soa_inclusion_status,present,high,sheet 'Statement of Applicability' col 'Applicable',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.30,ISO27001:2022,item:A.5.30:reg_dependencies,partial,medium,sheet 'BIA Bus. Impact Ass.' col 'Dependencies/Comments',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.1.3,ISO27001:2022,item:6.1.3:soa_justification,present,high,sheet 'Statement of Applicability' col 'Justification',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.1.3,ISO27001:2022,item:6.1.3:soa_implementation_status,present,high,sheet 'Statement of Applicability' col 'Status',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.1.3,ISO27001:2022,item:6.1.3:soa_reference,partial,medium,sheet 'Statement of Applicability' col 'Linked Policies/Processes',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.8.32,ISO27001:2022,item:A.8.32:rev_date,present,high,sheet 'Change Mgmt Log' col 'Review Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.8.32,ISO27001:2022,item:A.8.32:rev_reviewer,present,high,sheet 'Change Mgmt Log' col 'Change owner',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.30,ISO27001:2022,item:A.5.30:reg_asset_link,partial,medium,sheet 'BIA Bus. Impact Ass.' col 'Asset Name',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.26,ISO27001:2022,item:A.5.26:reg_evidence_link,present,high,sheet 'Incident Log' col 'Evidence Collected  (Y/N)',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.26,ISO27001:2022,item:A.5.26:reg_lifecycle_dates,partial,medium,sheet 'Incident Log' col 'Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.2,ISO27001:2022,item:10.2:rev_date,present,high,sheet 'NonConf Act. Tracker' col 'Date Identified',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rev_completion,partial,medium,sheet 'Audit Log' col 'Status',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.26,ISO27001:2022,item:A.5.26:reg_severity,partial,medium,"sheet 'Incident Log' col 'Breach Classification (InfoSec inc., PII, both, non breach)'",workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.26,ISO27001:2022,item:A.5.26:cls_authoriser,present,high,sheet 'Incident Log' col 'PII Restoration Authorized By',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.26,ISO27001:2022,item:A.5.26:cls_gdpr_triggered,present,high,sheet 'Incident Log' col 'PII Involved (Y/N)',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.26,ISO27001:2022,item:A.5.26:cls_root_cause,partial,medium,sheet 'Incident Log' col 'Description',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rec_audit_id,present,high,sheet 'Audit Log' col 'Audit ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rec_scope,present,high,sheet 'Audit Log' col 'Scope',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rec_auditor,present,high,sheet 'Audit Log' col 'Auditor',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rec_handoff,partial,medium,sheet 'Audit Log' col 'Status',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rev_cycle_progress,partial,medium,sheet 'Audit Log' col 'Scope',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rev_finding_closure,partial,medium,sheet 'Audit Log' col 'Corrective Action ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.6.3,ISO27001:2022,item:A.6.3:rev_reviewer,present,high,sheet 'Training & Awarnesse Record' col 'Trainer',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.6.3,ISO27001:2022,item:A.6.3:rev_next_date,present,high,sheet 'Training & Awarnesse Record' col 'Next Training Date By',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.6.3,ISO27001:2022,item:A.6.3:rev_completion_rate,partial,medium,sheet 'Training & Awarnesse Record' col 'Completion Status',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.6.3,ISO27001:2022,item:A.6.3:rev_effectiveness,partial,medium,sheet 'Training & Awarnesse Record' col 'Evaluation Results',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.6,ISO27001:2022,item:A.5.6:owner,present,high,sheet 'Spec Int Engagement log' col 'Assigned To',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.6,ISO27001:2022,item:A.5.6:topics_shared,partial,medium,sheet 'Spec Int Engagement log' col 'Focus Area',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.6,ISO27001:2022,item:A.5.6:basis_of_contact,partial,medium,sheet 'Spec Int Engagement log' col 'Engagement Type',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.6,ISO27001:2022,item:A.5.6:last_engaged,partial,medium,sheet 'Spec Int Engagement log' col 'Last Review Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.3,ISO27001:2022,item:9.3:rev_reviewer,present,high,sheet 'Management Review Log' col 'Participants',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.3,ISO27001:2022,item:9.3:rev_inputs_completeness,partial,medium,sheet 'Management Review Log' col 'Topics Discussed',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.3,ISO27001:2022,item:9.3:rev_action_closure,partial,medium,sheet 'Management Review Log' col 'Actions Agreed',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.3,ISO27001:2022,item:9.3:rev_cadence_met,partial,medium,sheet 'Management Review Log' col 'Due Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.8.32,ISO27001:2022,item:A.8.32:rev_register_completeness,partial,medium,sheet 'Change Mgmt Log' col 'Change ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.8.32,ISO27001:2022,item:A.8.32:rev_emergency_ratio,partial,medium,sheet 'Change Mgmt Log' col 'Change Type',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.8.32,ISO27001:2022,item:A.8.32:rev_change_incidents,partial,medium,sheet 'Change Mgmt Log' col 'Impact and Risk Assessment',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.3,ISO27001:2022,item:6.3:reg_change_type,present,high,sheet 'Change Mgmt Log' col 'Change Type',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.3,ISO27001:2022,item:6.3:reg_approval,partial,medium,sheet 'Change Mgmt Log' col 'Approval Status',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.3,ISO27001:2022,item:6.3:reg_status,partial,medium,sheet 'Change Mgmt Log' col 'Status',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.8.32,ISO27001:2022,item:A.8.32:reg_change_id,present,high,sheet 'Change Mgmt Log' col 'Change ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.8.32,ISO27001:2022,item:A.8.32:reg_outcome,partial,medium,sheet 'Change Mgmt Log' col 'Review outcome',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,7.5,ISO27001:2022,item:7.5:reg_title,present,high,sheet 'Document Cont. Reg.' col 'Document Title',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,7.5,ISO27001:2022,item:7.5:reg_owner,partial,medium,sheet 'Document Cont. Reg.' col 'Owner',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,7.5,ISO27001:2022,item:7.5:reg_version,partial,medium,sheet 'Document Cont. Reg.' col 'Major Version No.',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.1,ISO27001:2022,item:10.1:reg_action_id,present,high,sheet 'ISMS Schedule' col 'REF ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,7.5,ISO27001:2022,item:7.5:reg_approval_date,partial,medium,sheet 'Document Cont. Reg.' col 'Approval Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,7.5,ISO27001:2022,item:7.5:reg_next_review,partial,medium,sheet 'Document Cont. Reg.' col 'Next Review Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.1,ISO27001:2022,item:10.1:reg_owner,present,high,sheet 'ISMS Schedule' col 'OWNER',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rec_auditor,present,high,sheet 'External Audit Log' col 'Auditor',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,Art.30,GDPR:2016/679,item:Art.30:dfi_systems,present,high,sheet 'Access Rev. Log Non-PII Systems' col 'System/Application Name',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,7.4,ISO27001:2022,item:7.4:reg_audience,present,high,sheet 'Risk Comms Matrix' col 'Interested Party',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,7.4,ISO27001:2022,item:7.4:reg_channel,present,high,sheet 'Risk Comms Matrix' col 'Comms Method',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,7.4,ISO27001:2022,item:7.4:reg_date,present,high,sheet 'Risk Comms Matrix' col 'Frequency',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.2,ISO27001:2022,item:10.2:rev_reviewer,present,high,sheet 'NonConf Act. Tracker' col 'Responsible Person/Owner',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.9,ISO27001:2022,item:A.5.9:asset_type,present,high,sheet 'BIA Bus. Impact Ass.' col 'Asset Type',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.2,ISO27001:2022,item:10.2:rev_closure_progress,partial,medium,sheet 'NonConf Act. Tracker' col 'Status',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.2,ISO27001:2022,item:10.2:rev_root_cause_quality,partial,medium,sheet 'NonConf Act. Tracker' col 'Root Cause',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.2,ISO27001:2022,item:10.2:rev_recurrence_check,partial,medium,sheet 'NonConf Act. Tracker' col 'Verification/Review Outcome',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.8.29,ISO27001:2022,item:A.8.29:rev_date,present,high,sheet 'PenTest Sec Ass Log' col 'Test Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.8.29,ISO27001:2022,item:A.8.29:rev_reviewer,present,high,sheet 'PenTest Sec Ass Log' col 'Tester',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.8.29,ISO27001:2022,item:A.8.29:rev_coverage_gaps,partial,medium,sheet 'PenTest Sec Ass Log' col 'Scope',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.8.29,ISO27001:2022,item:A.8.29:rev_findings_update,partial,medium,sheet 'PenTest Sec Ass Log' col 'Findings',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.8.29,ISO27001:2022,item:A.8.29:rev_pattern_trending,partial,medium,sheet 'PenTest Sec Ass Log' col 'Risk Level',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.8.29,ISO27001:2022,item:A.8.29:rev_pen_test_feedback,partial,medium,sheet 'PenTest Sec Ass Log' col 'Remediation Actions',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.22,ISO27001:2022,item:A.5.22:rev_scope,partial,medium,sheet 'ThirdParty Vendor Risk ' col 'Last Risk Review Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.22,ISO27001:2022,item:A.5.22:rev_findings,partial,medium,sheet 'ThirdParty Vendor Risk ' col 'Risk level',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.22,ISO27001:2022,item:A.5.22:rev_audit,partial,medium,sheet 'ThirdParty Vendor Risk ' col 'Security Controls in Place',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.22,ISO27001:2022,item:A.5.22:rev_compliance,partial,medium,sheet 'ThirdParty Vendor Risk ' col 'Compliance Certs',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.6.3,ISO27001:2022,item:A.6.3:reg_personnel_id,present,high,sheet 'Business Partners Assessment' col 'Partner Name',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.6.3,ISO27001:2022,item:A.6.3:reg_completion_date,present,high,sheet 'Business Partners Assessment' col 'Training Completed',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.6.3,ISO27001:2022,item:A.6.3:reg_next_due,present,high,sheet 'Business Partners Assessment' col 'Next Review',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.6.3,ISO27001:2022,item:A.6.3:reg_status,present,high,sheet 'Business Partners Assessment' col 'Overall Status',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.1,ISO27001:2022,item:9.1:rec_status,present,high,sheet 'Monitoring Log' col 'Status',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.1,ISO27001:2022,item:9.1:rec_date,present,high,sheet 'Info Sec KPI Metrics Tracker' col 'Review Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.6.6,ISO27001:2022,item:A.6.6:reg_signatory_id,present,high,sheet 'Business Partners Assessment' col 'Partner Name',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.29,ISO27001:2022,item:A.5.29:rev_reviewer,present,high,sheet 'Business Cont DR Plan' col 'Owner',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.29,ISO27001:2022,item:A.5.29:rev_scenario_currency,partial,medium,sheet 'Business Cont DR Plan' col 'Scenario Tested',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.29,ISO27001:2022,item:A.5.29:rev_test_results,partial,medium,sheet 'Business Cont DR Plan' col 'Exercise Type',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.29,ISO27001:2022,item:A.5.29:rev_actions,partial,medium,sheet 'Business Cont DR Plan' col 'Action Items',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.29,ISO27001:2022,item:A.5.29:rev_fallback_validity,partial,medium,sheet 'Business Cont DR Plan' col 'Backup Location',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.36,ISO27001:2022,item:A.5.36:review_date,present,high,sheet 'Quarterly Security Review' col 'Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.36,ISO27001:2022,item:A.5.36:owner,present,high,sheet 'Quarterly Security Review' col 'Reviewer',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.36,ISO27001:2022,item:A.5.36:scope,present,high,sheet 'Quarterly Security Review' col 'Scope',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.36,ISO27001:2022,item:A.5.36:findings,partial,medium,sheet 'Quarterly Security Review' col 'Findings Summary',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.36,ISO27001:2022,item:A.5.36:corrective_actions,partial,medium,sheet 'Quarterly Security Review' col 'Remidiation Actions?',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.36,ISO27001:2022,item:A.5.36:method,partial,medium,sheet 'Quarterly Security Review' col 'Details',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:reg_subject_asset,present,high,sheet 'Access Rev. Log Non-PII Systems' col '[group subject_asset_mapping: System/Application Name + System/Application Name]',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:rev_date_recorded,present,high,sheet 'Access Rev. Log Non-PII Systems' col 'Review Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:reg_authoriser,present,high,sheet 'Access Register PII Systems' col '[group authoriser_source: Authorized By + PII Approver]',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:reg_status,present,high,sheet 'Access Register PII Systems' col '[group status_explicit: Status]',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.18,ISO27001:2022,item:A.5.18:reg_last_verified,partial,medium,sheet 'Access Register PII Systems' col 'PII Review Date Quarterly',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,Art.30,GDPR:2016/679,item:Art.30:dfi_systems,present,high,sheet 'Access Register PII Systems' col 'System/Application',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.1,ISO27001:2022,item:9.1:rec_threshold,present,high,sheet 'Info Sec KPI Metrics Tracker' col 'Target/Goals',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.1,ISO27001:2022,item:9.1:rec_status,present,high,sheet 'Info Sec KPI Metrics Tracker' col 'Status',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,4.2,ISO27001:2022,item:4.2:parties_listed,present,high,sheet 'Internal&External Parties' col 'Nature of the Party',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rev_date,present,high,sheet 'Audit Log' col 'Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.1,ISO27001:2022,item:9.1:rec_threshold,present,high,sheet 'Monitoring Log' col 'Target/Benchmark',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.1,ISO27001:2022,item:10.1:reg_action_id,present,high,sheet 'ISMS Action Tracker' col 'Action ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.9,ISO27001:2022,item:A.5.9:asset_records,present,high,sheet 'Asset Register' col 'Asset ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.9,ISO27001:2022,item:A.5.9:classification,present,high,sheet 'BIA Bus. Impact Ass.' col '[group cia_triad_classification: Confidentiality + Integrity + Availability]',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rev_reviewer,present,high,sheet 'Audit Log' col 'Auditor',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.1.3,ISO27001:2022,item:6.1.3:soa_ref,partial,medium,sheet 'Risk Treatment Plan' col 'Risk ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.1,ISO27001:2022,item:10.1:rev_date,present,high,sheet 'ISMS Action Tracker' col 'Due Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.1,ISO27001:2022,item:10.1:rev_reviewer,present,high,sheet 'ISMS Action Tracker' col 'Owner',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.1,ISO27001:2022,item:10.1:rev_signal_capture,partial,medium,sheet 'ISMS Action Tracker' col 'Related Risk',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.9,ISO27001:2022,item:A.5.9:owner_per_asset,present,high,sheet 'Asset Register' col 'Asset_Owner',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.26,ISO27001:2022,item:A.5.26:cls_external_notif,present,high,sheet 'Incident Log' col 'Supervisory Authority Notified (Y/N)',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.26,ISO27001:2022,item:A.5.26:cls_evidence_archive,present,high,sheet 'Incident Log' col 'Evidence Storage Location',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rec_audit_id,present,high,sheet 'External Audit Log' col 'Ext Audit ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,4.2,ISO27001:2022,item:4.2:requirements,present,high,sheet 'Internal&External Parties' col 'ISMS Requirement',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.6.3,ISO27001:2022,item:A.6.3:rev_curriculum_check,partial,medium,sheet 'Training & Awarnesse Record' col 'Training Title',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.6.3,ISO27001:2022,item:A.6.3:rev_register_update,partial,medium,sheet 'Training & Awarnesse Record' col 'Proof of Completion',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.6,ISO27001:2022,item:A.5.6:sigs_listed,present,high,sheet 'Spec Int Engagement log' col 'Group Name',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.1,ISO27001:2022,item:9.1:rec_value,present,high,sheet 'Info Sec KPI Metrics Tracker' col 'Baseline Value',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.8.32,ISO27001:2022,item:A.8.32:rev_findings_update,partial,medium,sheet 'Change Mgmt Log' col 'Review outcome',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,6.3,ISO27001:2022,item:6.3:reg_change_id,present,high,sheet 'Change Mgmt Log' col 'Change ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rec_handoff,partial,medium,sheet 'External Audit Log' col 'Status',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,10.1,ISO27001:2022,item:10.1:reg_target_date,partial,medium,sheet 'ISMS Schedule' col 'DUE DATE',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,9.2,ISO27001:2022,item:9.2:rev_finding_closure,partial,medium,sheet 'External Audit Log' col 'Corrective Action ID',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.6.6,ISO27001:2022,item:A.6.6:reg_signature_date,present,high,sheet 'Business Partners Assessment' col 'NDA signed',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.6.6,ISO27001:2022,item:A.6.6:reg_expiry_or_active,present,high,sheet 'Business Partners Assessment' col 'Overall Status',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.29,ISO27001:2022,item:A.5.29:rev_real_divergence,partial,medium,sheet 'Business Cont DR Plan' col 'Issues Identified',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,4.2,ISO27001:2022,item:4.2:addressed,present,high,sheet 'Internal&External Parties' col 'ISMS Requirement',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,4.2,ISO27001:2022,item:4.2:reg_scope_link,present,high,sheet 'Internal&External Parties' col 'Category',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.31,ISO27001:2022,item:A.5.31:rev_date,present,high,sheet 'Legal & Regul. Compl. Register' col 'Last Review Date',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.31,ISO27001:2022,item:A.5.31:rev_reviewer,present,high,sheet 'Legal & Regul. Compl. Register' col 'Responsible Owner',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.31,ISO27001:2022,item:A.5.31:rev_per_entry,partial,medium,sheet 'Legal & Regul. Compl. Register' col 'Findings',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.31,ISO27001:2022,item:A.5.31:rev_scope_check,partial,medium,sheet 'Legal & Regul. Compl. Register' col 'Requirement Name',workbook,2026-06-23 18:19:20.732874+00
+ISO 27001 workbook Arion Networks.xlsm,A.5.31,ISO27001:2022,item:A.5.31:rev_horizon,partial,medium,sheet 'Legal & Regul. Compl. Register' col 'Next Review Date',workbook,2026-06-23 18:19:20.732874+00

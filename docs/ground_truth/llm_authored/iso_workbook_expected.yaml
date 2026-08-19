@@ -1,0 +1,2229 @@
+# LLM-authored ground truth for ISO 27001 workbook Arion Networks.xlsm
+# Model: claude-opus-4-7 — 2-pass structured (Ship 82'.a).
+# Total verdicts: 370
+
+doc: ISO 27001 workbook Arion Networks.xlsm
+annotator: claude-opus-4-7
+generated_at: 2026-08-19T16:45:35Z
+
+musts:
+  - must_id: item:10.1:dimensions
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No explicit categorization of improvements against suitability, adequacy, and effectiveness dimensions."
+
+  - must_id: item:10.1:implementation
+    verdict: satisfies
+    confidence: high
+    quote: "REF ID | TASK | OWNER | REFERENCE SHEET | PRIORITY | DUE DATE | STATUS | PROGRESS NOTES | COMPLETION DATE"
+    rationale: "Action tracker records owners, due dates, and progress notes for each improvement task."
+
+  - must_id: item:10.1:tracking
+    verdict: partial
+    confidence: medium
+    quote: "Completed | Access register finalized, unnecessary users removed, Entra Admin Center restricted to admins only, quarterly review cycle implemented | 2025-10-06"
+    rationale: "Actions tracked to completion with progress notes, but no explicit effectiveness verification step for closed items."
+
+  - must_id: item:10.1:triggers
+    verdict: satisfies
+    confidence: high
+    quote: "OFI-Opportunity for improvement:It is advisable to implement a formal review of user access rights."
+    rationale: "Register captures multiple trigger sources: internal audit findings, management review, external audit OFIs."
+
+  - must_id: item:10.1:reg_action_id
+    verdict: partial
+    confidence: medium
+    quote: "AUD001 | Int. Audit: Access register records from Q4 2024"
+    rationale: "REF IDs exist (AUD001, MR002, AC010, EAUD001) but multiple rows share the same ID rather than each having a unique identifier."
+
+  - must_id: item:10.1:reg_dimension
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No column categorizing improvements by suitability, adequacy, or effectiveness."
+
+  - must_id: item:10.1:reg_effectiveness
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Closure entries note completion actions but no dedicated effectiveness assessment field is recorded."
+
+  - must_id: item:10.1:reg_owner
+    verdict: satisfies
+    confidence: high
+    quote: "Int. Audit: Formalize documentation of IR drill in ISMS Workbook | Zorko"
+    rationale: "Every action row identifies a named owner (Petra, Zorko, Libor, etc.)."
+
+  - must_id: item:10.1:reg_status
+    verdict: satisfies
+    confidence: high
+    quote: "STATUS | PROGRESS NOTES | COMPLETION DATE"
+    rationale: "Status column present with values like Completed, in progress."
+
+  - must_id: item:10.1:reg_target_date
+    verdict: satisfies
+    confidence: high
+    quote: "DUE DATE | STATUS | PROGRESS NOTES | COMPLETION DATE"
+    rationale: "Each action row has a due date field populated."
+
+  - must_id: item:10.1:reg_trigger_type
+    verdict: partial
+    confidence: medium
+    quote: "Int. Audit: Conduct review and update of Q4 2024 access register"
+    rationale: "Rows show source prefixes (Int. Audit, OFI, MR) suggesting trigger type but no standardized trigger-type field is applied to every row."
+
+  - must_id: item:10.1:rev_closure_quality
+    verdict: partial
+    confidence: medium
+    quote: "Access register finalized, unnecessary users removed, Entra Admin Center restricted to admins only, quarterly review cycle implemented"
+    rationale: "Some closed items include descriptive progress notes but many show only 'Completed' with a date and no effectiveness assessment."
+
+  - must_id: item:10.1:rev_date
+    verdict: satisfies
+    confidence: medium
+    quote: "Review Date | Review Outcome | Next Review Date"
+    rationale: "ISMS Objectives sheet includes Review Date and Next Review Date columns showing periodic review scheduling."
+
+  - must_id: item:10.1:rev_dimension_coverage
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence that improvements are explicitly evaluated across suitability, adequacy, and effectiveness dimensions."
+
+  - must_id: item:10.1:rev_reviewer
+    verdict: partial
+    confidence: low
+    quote: "Responsible Party | Resources Required"
+    rationale: "Responsible parties (ISMS Manager, Information Security Officer) are named but no explicit executive sponsor co-review is shown."
+
+  - must_id: item:10.1:rev_signal_capture
+    verdict: partial
+    confidence: medium
+    quote: "EAUD001 | OFI-Opportunity for improvement"
+    rationale: "Audit and OFI sources produce tracked actions but no explicit 'no opportunities this cycle' rationale is documented where absent."
+
+  - must_id: item:10.2:scope_10_1_boundary
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document does not distinguish between observations/opportunities routed to 10.1 vs NCs routed to 10.2."
+
+  - must_id: item:10.2:scope_audit_sources
+    verdict: partial
+    confidence: medium
+    quote: "AUD001 | Int. Audit: Access register records from Q4 2024 documentation incomplete"
+    rationale: "Internal audit findings tracked; no evidence of surveillance/re-cert or second-party customer audit NC handling."
+
+  - must_id: item:10.2:scope_external_sources
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No regulator findings, customer complaints, or supplier breach entries are captured in the action tracker."
+
+  - must_id: item:10.2:scope_operational_sources
+    verdict: partial
+    confidence: low
+    quote: "Complete Incident Response drill for Q1 (also document it in non conf action tracker)"
+    rationale: "Incident-related drill actions are referenced but no evidence of incident lessons or measurement breaches formally routed as NCs."
+
+  - must_id: item:10.2:rev_closure_progress
+    verdict: partial
+    confidence: low
+    quote: "AUD001 | Int. Audit:Incident response drill planned but not done or documented for Q1 2025"
+    rationale: "Tracker shows open items with due dates but no explicit escalation process for aging NCs is documented."
+
+  - must_id: item:10.2:rev_date
+    verdict: partial
+    confidence: low
+    quote: "2025-05-30 00:00:00"
+    rationale: "Due dates and completion dates are logged but no explicit review interval or review date for NC log is stated."
+
+  - must_id: item:10.2:rev_isms_change_pattern
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence of analysis linking high-volume NC areas to systemic ISMS changes under 6.3."
+
+  - must_id: item:10.2:rev_recurrence_check
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence that closed NCs were sampled to check for recurrence."
+
+  - must_id: item:10.2:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Owners are listed per action but no designated reviewer (ISMS Manager + lead auditor) for the NC review is identified."
+
+  - must_id: item:10.2:rev_root_cause_quality
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No documented root-cause quality sampling or systemic analysis of NCs is evident."
+
+  - must_id: item:10.2:document
+    verdict: satisfies
+    confidence: high
+    quote: "AUD001 | Int. Audit: Access register records from Q4 2024 documentation incomplete. Signature missing in two entries – remediation needed | Petra | Audit Log | 2025-05-30 00:00:00 | Completed | Signatures added"
+    rationale: "Audit Log records nature of NC, actions taken, owner, status, progress notes, and completion date."
+
+  - must_id: item:10.2:effectiveness
+    verdict: partial
+    confidence: medium
+    quote: "Access register finalized, unnecessary users removed, Entra Admin Center restricted to admins only, quarterly review cycle implemented"
+    rationale: "Progress notes describe outcomes of actions but no explicit effectiveness review step is documented."
+
+  - must_id: item:10.2:implementation
+    verdict: satisfies
+    confidence: high
+    quote: "Signatures added to Security & Incident Response Lead, Vulnerability management | 2025-05-27 00:00:00"
+    rationale: "Multiple corrective actions are marked completed with implementation notes and completion dates."
+
+  - must_id: item:10.2:isms_update
+    verdict: partial
+    confidence: medium
+    quote: "AI tools (ChatGPT, Claude, Gemini) added to Vendor Register as 'IT Service' with usage restrictions. Software Allow/Deny List established in DOC003 section 3.25."
+    rationale: "Some ISMS document updates result from findings but no systematic ISMS-change linkage from NCs is described."
+
+  - must_id: item:10.2:react
+    verdict: partial
+    confidence: medium
+    quote: "Int. Audit: Access register records from Q4 2024 documentation incomplete. Signature missing in two entries – remediation needed"
+    rationale: "Document shows reactions/corrections to findings but lacks explicit containment language for each NC."
+
+  - must_id: item:10.2:root_cause
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence of root cause evaluation methodology or analysis in the tracker."
+
+  - must_id: item:10.2:reg_corrective_action
+    verdict: satisfies
+    confidence: high
+    quote: "Int. Audit: Formalize documentation of IR drill in ISMS Workbook | Zorko | 2025-05-30 00:00:00"
+    rationale: "Each row includes a corrective action, owner, and due date."
+
+  - must_id: item:10.2:reg_effectiveness_check
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No column or entries verifying effectiveness of corrective actions to prevent recurrence."
+
+  - must_id: item:10.2:reg_nature
+    verdict: partial
+    confidence: medium
+    quote: "Int. Audit:Incident response drill planned but not done or documented for Q1 2025 . Drill did not occur but evidence not logged formally"
+    rationale: "Task descriptions imply nature of NC but no explicit field linking to the specific requirement/clause failed."
+
+  - must_id: item:10.2:reg_nc_id
+    verdict: satisfies
+    confidence: high
+    quote: "AUD001 | Int. Audit: Access register records from Q4 2024 documentation incomplete"
+    rationale: "Rows carry NC identifiers such as AUD001, MR002, EAUD001, AC010."
+
+  - must_id: item:10.2:reg_react
+    verdict: partial
+    confidence: medium
+    quote: "Signatures added to Security & Incident Response Lead, Vulnerability management"
+    rationale: "Progress notes describe corrective actions taken, but immediate containment is not distinguished from corrective action."
+
+  - must_id: item:10.2:reg_root_cause
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No root cause analysis (5-whys, fishbone, etc.) is recorded per row."
+
+  - must_id: item:10.2:reg_source
+    verdict: satisfies
+    confidence: high
+    quote: "EAUD001 | OFI-Opportunity for improvement:It is advisable to implement a formal review of user access rights."
+    rationale: "Source of NC is indicated (Int. Audit, External Audit/OFI, Management Review) in each row."
+
+  - must_id: item:10.2:reg_status
+    verdict: satisfies
+    confidence: high
+    quote: "| Completed | Signatures added to Security & Incident Response Lead"
+    rationale: "Status column shows Completed / in progress values per row."
+
+  - must_id: item:4.1:external_issues
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Workbook contains action tracker, objectives, and asset register but no register of external issues (regulatory, market, threat landscape) per row."
+
+  - must_id: item:4.1:internal_issues
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No internal issues register (culture, governance, capabilities) is present in the visible content."
+
+  - must_id: item:4.1:owner
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No 4.1 issues register with a named owner is included; ownership references pertain to assets/actions, not the context register."
+
+  - must_id: item:4.1:reg_last_assessed
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No last-assessed date per issue row exists because no issues register is provided."
+
+  - must_id: item:4.1:reg_risk_handoff
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No linkage from issues to the 6.1.2 risk assessment is documented."
+
+  - must_id: item:4.1:relevance_to_ismsm
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Relevance-to-ISMS-outcomes statements per issue are not present."
+
+  - must_id: item:4.1:rev_date
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "While the workbook lists annual review tasks for various registers, no review date for a 4.1 context/issues register is shown."
+
+  - must_id: item:4.1:rev_register_currency
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No evidence of a currency review of the 4.1 issues register (row-by-row relevance check, new issues added)."
+
+  - must_id: item:4.1:rev_reviewer
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No reviewer identity captured for a 4.1 issues register review."
+
+  - must_id: item:4.1:rev_risk_handoff
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No confirmation of handoff of material issues to 6.1.2 risk assessment is documented."
+
+  - must_id: item:4.1:rev_scope_check
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Workbook lists tasks and assets but does not perform a cross-check of applicable domains for new scope coverage."
+
+  - must_id: item:4.2:legal_voluntary
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "The interested parties register lists compliance requirements but does not distinguish legal/regulatory vs voluntary commitments at scope level."
+
+  - must_id: item:4.2:scope_categories
+    verdict: partial
+    confidence: medium
+    quote: "Clients | External | Contractual: Clauses in agreements with customers, vendors, or partners"
+    rationale: "Categories such as Clients, Vendors, Contractors, Employees, Regulators, IT Department are enumerated but shareholders/communities are not clearly delineated as scope categories."
+
+  - must_id: item:4.2:scope_exclusions
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No explicit exclusions with rationale are stated in the register."
+
+  - must_id: item:4.2:addressed
+    verdict: partial
+    confidence: low
+    quote: "Protection of confidential information (external) | Information Security Officer"
+    rationale: "Requirements per party and responsible owner are listed but the workbook does not explain how the ISMS specifically addresses each requirement."
+
+  - must_id: item:4.2:owner
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No named owner of the interested parties register itself is identified (only per-row responsibilities)."
+
+  - must_id: item:4.2:parties_listed
+    verdict: partial
+    confidence: high
+    quote: "Clients | External ... Vendors | External ... Contractors/Suppliers | External ... Employees | Internal ... Regulators | External"
+    rationale: "Parties are listed (clients, vendors, contractors, employees, regulators, IT) but shareholders and communities are not included in the register (though shareholders appear in asset register)."
+
+  - must_id: item:4.2:reg_last_assessed
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "The interested parties register lacks a last-assessed date column per row."
+
+  - must_id: item:4.2:reg_scope_link
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No per-row link to ISMS scope (4.3) artefacts is provided in the register."
+
+  - must_id: item:4.2:requirements
+    verdict: satisfies
+    confidence: medium
+    quote: "Legal & Regulatory: Data protection laws (e.g., GDPR) (external) | ISMS Manager"
+    rationale: "Requirements per party are documented including contractual, legal/regulatory, certifications, and internal policies."
+
+  - must_id: item:4.2:rev_date
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "This workbook is an action tracker/objectives/asset register; interested parties review dates are not tracked here."
+
+  - must_id: item:4.2:rev_register_currency
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence of a periodic review of the interested parties register for continued relevance or new parties."
+
+  - must_id: item:4.2:rev_requirements_currency
+    verdict: partial
+    confidence: low
+    quote: "Annual Review of GDPR (General Data Protection Regulation) | Zorko | Legal and Regul. Compl. Register | 2026-04-01 00:00:00"
+    rationale: "Annual legal/regulatory reviews are scheduled, but no explicit sweep of contract amendments or interested-party requirement updates."
+
+  - must_id: item:4.2:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No named ISMS Manager + executive sponsor as reviewers of the interested parties register."
+
+  - must_id: item:4.2:rev_scope_check
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No cross-check of the interested parties register against applicable-domains scope is documented."
+
+  - must_id: item:4.3:boundaries
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "ISMS scope boundaries are defined in a scope statement document, not in this action/objectives workbook."
+
+  - must_id: item:4.3:exclusions
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Scope exclusions belong in the scope statement, not this workbook."
+
+  - must_id: item:4.3:interfaces
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Interfaces/dependencies are documented in a scope statement, not this workbook."
+
+  - must_id: item:4.3:locations
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Physical/logical scope locations are defined in the scope statement, not this workbook."
+
+  - must_id: item:4.3:owner
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Ownership of the scope statement is defined in the scope document itself, not this workbook."
+
+  - must_id: item:4.3:products_services
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "This workbook is an action tracker and asset register; scope statement of products/services is not within its purpose."
+
+  - must_id: item:4.3:rev_change_log
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No scope change log entries are present in this document."
+
+  - must_id: item:4.3:rev_currency
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "The workbook does not contain a scope currency review confirming sites, products, third parties."
+
+  - must_id: item:4.3:rev_date
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No explicit scope review date is recorded, though annual ISMS document reviews are listed."
+
+  - must_id: item:4.3:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No named reviewer for scope review (ISMS Manager plus top management) appears."
+
+  - must_id: item:4.4:governance
+    verdict: partial
+    confidence: medium
+    quote: "Responsible Party | Resources Required"
+    rationale: "Owners and responsible parties are named per objective/asset, but overall governance structure and escalation paths are not defined here."
+
+  - must_id: item:4.4:improvement_intent
+    verdict: partial
+    confidence: medium
+    quote: "OFI-Opportunity for improvement"
+    rationale: "Opportunities for improvement are tracked via audit logs but no explicit continual improvement statement/mechanism is defined."
+
+  - must_id: item:4.4:interactions
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "The workbook does not describe process interactions (inputs, outputs, sequence)."
+
+  - must_id: item:4.4:owner
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No named owner of the ISMS manual is identified in this workbook."
+
+  - must_id: item:4.4:processes
+    verdict: partial
+    confidence: low
+    quote: "Annual Risk assessment review (risk register and risk treatment plan)"
+    rationale: "Some ISMS activities (audits, reviews, risk assessment) are tracked, but the full set of ISMS processes is not enumerated."
+
+  - must_id: item:4.4:scope_ref
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Workbook is a task/asset tracker; no reference to ISMS scope statement (4.3) is present."
+
+  - must_id: item:4.4:rev_change_log
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "This workbook tracks actions and assets, not manual change records for cross-check."
+
+  - must_id: item:4.4:rev_currency
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Workbook does not contain a manual currency check against ISMS operation."
+
+  - must_id: item:4.4:rev_date
+    verdict: partial
+    confidence: low
+    quote: "Annual Review ISMS Documents | Li, Zorko, Petra | Document Cont Reg | 2026-03-31"
+    rationale: "An annual ISMS document review task is scheduled, indicating a planned review cadence, but no explicit review-of-manual date recorded."
+
+  - must_id: item:4.4:rev_map_currency
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "No process map currency check is contained in this workbook."
+
+  - must_id: item:4.4:rev_reviewer
+    verdict: partial
+    confidence: low
+    quote: "Annual Review ISMS Documents | Li, Zorko, Petra"
+    rationale: "Reviewers named for annual ISMS document review but no explicit top-management sponsor identified."
+
+  - must_id: item:5.1:continual_improvement
+    verdict: partial
+    confidence: low
+    quote: "OFI-Opportunity for improvement:It is advisable to implement a formal review of user access rights."
+    rationale: "OFIs are tracked and closed showing improvement activity, but no leadership statement on promoting continual improvement."
+
+  - must_id: item:5.1:direct_and_support
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No leadership evidence of directing/supporting persons contributing to ISMS effectiveness in this workbook."
+
+  - must_id: item:5.1:importance_communicated
+    verdict: partial
+    confidence: low
+    quote: "All personnel retrained on Document Content Register procedures including approval timestamps and change log entries."
+    rationale: "Retraining evidence shows communication of procedures, but no explicit communication of importance of ISMS effectiveness/conformance."
+
+  - must_id: item:5.1:integration
+    verdict: partial
+    confidence: low
+    quote: "Sensitivity classification and doument labelling implemented in all sharepoint sites"
+    rationale: "Controls embedded into operational platforms (SharePoint RBAC, vendor register) suggest integration, but no explicit leadership statement of integration into business processes."
+
+  - must_id: item:5.1:outcomes_achieved
+    verdict: partial
+    confidence: low
+    quote: "Review ISMS/PIMS Objectives- annually"
+    rationale: "Workbook tracks ISMS objectives and reviews but does not explicitly demonstrate top management ensuring intended outcomes are achieved."
+
+  - must_id: item:5.1:policy_objectives_strategy
+    verdict: partial
+    confidence: low
+    quote: "Alignment with ISMS Policy | Key Performance Indicators (KPIs)"
+    rationale: "Objectives sheet shows alignment with ISMS policy but strategic direction linkage is not explicitly stated."
+
+  - must_id: item:5.1:resources
+    verdict: partial
+    confidence: medium
+    quote: "Resources Required"
+    rationale: "Objectives list 'Resources Required' (Standard Tools and Storage) indicating resources but no explicit top-management commitment statement."
+
+  - must_id: item:5.1:signed_dated
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Workbook contains no top-management signature or dated approval."
+
+  - must_id: item:5.1:support_other_mgmt
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence of top management supporting other management roles in leadership demonstration."
+
+  - must_id: item:5.1:rev_date
+    verdict: partial
+    confidence: medium
+    quote: "Review ISMS/PIMS Objectives- annually | Zorko | ISMS Objectives | 2026-12-31"
+    rationale: "Annual review scheduling exists but no completed review record of leadership commitment within a defined interval."
+
+  - must_id: item:5.1:rev_directive_currency
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No signed directive from current top management present in the workbook."
+
+  - must_id: item:5.1:rev_framework_adherence
+    verdict: partial
+    confidence: low
+    quote: "MR002 | Update SoA to reflect recently closed controls | Libor | Management Review Log"
+    rationale: "Management review actions are tracked but no explicit evidence of board cadence or sponsor activities completion."
+
+  - must_id: item:5.1:rev_reaffirmation_completeness
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No reaffirmation records for leadership commitment present."
+
+  - must_id: item:5.1:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No reviewer identity such as ISMS Manager or non-executive director recorded for the leadership commitment review."
+
+  - must_id: item:5.2:approved
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "This workbook is an action tracker and asset/objective register, not the information security policy document itself."
+
+  - must_id: item:5.2:commitment_imp
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Policy commitment statements are not within scope of this operational workbook."
+
+  - must_id: item:5.2:commitment_req
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Policy commitment statements are not within scope of this operational workbook."
+
+  - must_id: item:5.2:communicated
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Policy communication evidence belongs in the policy document/training records, not this workbook."
+
+  - must_id: item:5.2:objectives
+    verdict: partial
+    confidence: medium
+    quote: "Objective ID | Objective Description | Alignment with ISMS Policy | Key Performance Indicators (KPIs)"
+    rationale: "The workbook contains an ISMS Objectives register with KPIs and alignment to policy, but this is objectives operationalisation, not the policy statement."
+
+  - must_id: item:5.2:owner
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Policy ownership belongs in the policy document itself, not this workbook."
+
+  - must_id: item:5.2:purpose
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Statement of purpose belongs in the policy document, not this workbook."
+
+  - must_id: item:5.2:rev_approval_currency
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "No approval signatures/currency evidence present; belongs in the policy document."
+
+  - must_id: item:5.2:rev_comms_completeness
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Communication audience coverage is out of scope for this workbook."
+
+  - must_id: item:5.2:rev_date
+    verdict: partial
+    confidence: low
+    quote: "Annual Review ISMS Documents | Li, Zorko, Petra | Document Cont Reg | 2026-03-31"
+    rationale: "Workbook schedules an annual ISMS document review but doesn't evidence the policy's own review date within the planned interval."
+
+  - must_id: item:5.2:rev_policy_currency
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Workbook is an action tracker/asset register, not the ISMS policy document."
+
+  - must_id: item:5.2:rev_reviewer
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "Policy reviewer identity is not within the scope of this workbook."
+
+  - must_id: item:5.3:a52_consistency
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Workbook does not define ISMS role matrix; A.5.2 consistency check not in scope."
+
+  - must_id: item:5.3:authorities_assigned
+    verdict: partial
+    confidence: low
+    quote: "Responsible Party"
+    rationale: "Owners/responsible parties are named per task/asset/objective, but formal decision rights and sign-off authority are not defined."
+
+  - must_id: item:5.3:communicated
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "No evidence of role communication process in this workbook."
+
+  - must_id: item:5.3:isms_conformance
+    verdict: partial
+    confidence: low
+    quote: "ISMS Manager"
+    rationale: "ISMS Manager is referenced as responsible party for certain objectives, but no explicit assignment for ensuring ISO 27001 conformance."
+
+  - must_id: item:5.3:owner
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No named owner of a roles/responsibilities matrix is present in the workbook."
+
+  - must_id: item:5.3:performance_reporting
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Workbook does not assign ISMS performance reporting role to top management."
+
+  - must_id: item:5.3:rev_a52_alignment
+    verdict: not_applicable
+    confidence: high
+    quote: ""
+    rationale: "A.5.2 alignment review not in scope of this workbook."
+
+  - must_id: item:5.3:rev_change_log
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Org-chart change log cross-check is not addressed in this workbook."
+
+  - must_id: item:5.3:rev_currency
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No roles/responsibilities matrix showing active holders per role is present in this workbook extract."
+
+  - must_id: item:5.3:rev_date
+    verdict: partial
+    confidence: low
+    quote: "Competence Review | Zorko | Competence Records | 2026-01-01 00:00:00"
+    rationale: "Some review dates exist but no explicit role-assignment review within a planned interval is documented."
+
+  - must_id: item:5.3:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence identifying ISMS Manager plus HR partner as reviewers of the roles matrix."
+
+  - must_id: item:6.1.1:reg_action_id
+    verdict: partial
+    confidence: medium
+    quote: "AUD001 | Int. Audit: Access register records from Q4 2024 documentation incomplete"
+    rationale: "Some rows carry IDs (AUD001, MR002, AC010, EAUD001, O005) but many action rows lack a unique identifier."
+
+  - must_id: item:6.1.1:reg_driver
+    verdict: partial
+    confidence: medium
+    quote: "EAUD001 | OFI-Opportunity for improvement:It is advisable to implement a formal review of user access rights."
+    rationale: "Drivers are implied via audit/OFI/MR prefixes but no explicit linkage to 4.1 issues, 4.2 parties, or risk IDs per row."
+
+  - must_id: item:6.1.1:reg_integration_target
+    verdict: partial
+    confidence: medium
+    quote: "REFERENCE SHEET"
+    rationale: "A Reference Sheet column indicates target ISMS artifact for many rows but not all rows specify the integrated process."
+
+  - must_id: item:6.1.1:reg_owner
+    verdict: satisfies
+    confidence: high
+    quote: "OWNER"
+    rationale: "Each action row lists an owner (Petra, Zorko, Libor, Data Owners, etc.)."
+
+  - must_id: item:6.1.1:reg_status
+    verdict: partial
+    confidence: high
+    quote: "STATUS | PROGRESS NOTES | COMPLETION DATE"
+    rationale: "Status is provided for many rows (completed, in progress) but numerous rows have no status value populated."
+
+  - must_id: item:6.1.1:reg_type
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No column classifies each action as risk-addressing vs opportunity-enhancing, though OFI prefixes exist for some."
+
+  - must_id: item:6.1.1:rev_date
+    verdict: partial
+    confidence: medium
+    quote: "Review ISMS/PIMS Objectives- annually | Zorko | ISMS Objectives | 2026-12-31 00:00:00"
+    rationale: "Annual review dates exist for objectives but not a defined review interval for the action register itself."
+
+  - must_id: item:6.1.1:rev_effectiveness
+    verdict: partial
+    confidence: low
+    quote: "Review Outcome | Next Review Date"
+    rationale: "Objectives sheet contains review outcome column with some completed entries but no consolidated effectiveness summary across all actions."
+
+  - must_id: item:6.1.1:rev_inputs_currency
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence that clauses 4.1 (issues) and 4.2 (interested parties) were reviewed prior to this planning cycle."
+
+  - must_id: item:6.1.1:rev_register_currency
+    verdict: partial
+    confidence: medium
+    quote: "STATUS | PROGRESS NOTES | COMPLETION DATE"
+    rationale: "Action tracker shows status and progress notes per row but no explicit review-for-relevance attestation."
+
+  - must_id: item:6.1.1:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document does not identify a specific reviewer (ISMS Manager plus executive sponsor) performing the planning review."
+
+  - must_id: item:6.1.1:actions_planned
+    verdict: satisfies
+    confidence: high
+    quote: "AC002 | Conduct mandatory phishing simulations and security awareness training for staff."
+    rationale: "Workbook contains an extensive action tracker with planned actions, owners, and due dates addressing risks/opportunities."
+
+  - must_id: item:6.1.1:evaluation
+    verdict: partial
+    confidence: low
+    quote: "Key Performance Indicators (KPIs) | Responsible Party"
+    rationale: "KPIs and review outcomes are referenced for objectives, but no explicit evaluation of effectiveness of planned actions themselves."
+
+  - must_id: item:6.1.1:integration
+    verdict: partial
+    confidence: low
+    quote: "Int. Audit: Formalize documentation of IR drill in ISMS Workbook"
+    rationale: "Actions are tracked within ISMS workbook and tied to audit/management review processes, suggesting integration, but not explicitly stated."
+
+  - must_id: item:6.1.1:issues_input
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No explicit reference to internal/external issues from clause 4.1 as input to action planning."
+
+  - must_id: item:6.1.1:opportunities
+    verdict: satisfies
+    confidence: high
+    quote: "OFI-Opportunity for improvement:It is advisable to implement a formal review of user access rights."
+    rationale: "External audit log entries explicitly capture opportunities for improvement being tracked and actioned."
+
+  - must_id: item:6.1.1:requirements_input
+    verdict: partial
+    confidence: low
+    quote: "Compliance Requirements | Responsibility"
+    rationale: "Interested parties and compliance requirements are listed, but not explicitly tied to clause 4.2 as input to this planning cycle."
+
+  - must_id: item:6.1.1:risks_identified
+    verdict: partial
+    confidence: low
+    quote: "Annual Risk assessment review (risk register and risk treatment plan)"
+    rationale: "Workbook references risk register and treatment plan reviews but does not itself enumerate identified risks needed for ISMS outcomes."
+
+  - must_id: item:6.1.2:consequences
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No analysis of potential consequences of risks is present in the workbook content shown."
+
+  - must_id: item:6.1.2:consistency
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No documented methodology ensuring consistent, comparable risk assessment results appears in this document."
+
+  - must_id: item:6.1.2:criteria
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Risk acceptance criteria are not defined in the workbook text provided."
+
+  - must_id: item:6.1.2:evaluation
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evaluation of risks against acceptance criteria is documented."
+
+  - must_id: item:6.1.2:identification
+    verdict: partial
+    confidence: low
+    quote: "Confidentiality | Integrity | Availability"
+    rationale: "Asset register includes CIA ratings but does not identify specific risks to confidentiality, integrity, and availability."
+
+  - must_id: item:6.1.2:likelihood
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No likelihood assessment for risks is present in the workbook content."
+
+  - must_id: item:6.1.2:owners
+    verdict: partial
+    confidence: low
+    quote: "Asset_Owner"
+    rationale: "Asset owners are identified but explicit risk owners for identified risks are not shown."
+
+  - must_id: item:6.1.2:personal_data
+    verdict: partial
+    confidence: low
+    quote: "Personal Data Types | Data Subjects | Processing Purposes | Retention Period"
+    rationale: "Personal data attributes are tracked per asset but explicit personal data processing risks are not addressed."
+
+  - must_id: item:6.1.2:rev_date
+    verdict: satisfies
+    confidence: medium
+    quote: "Annual Risk assessment review (risk register and risk treatment plan) | Zorko | 2026-03-31 00:00:00"
+    rationale: "An annual risk assessment review date is planned within a reasonable interval."
+
+  - must_id: item:6.1.2:rev_methodology_fit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Workbook does not discuss methodology fit or scoring scale calibration."
+
+  - must_id: item:6.1.2:rev_register_currency
+    verdict: partial
+    confidence: low
+    quote: "Annual Risk assessment review (risk register and risk treatment plan)"
+    rationale: "An annual risk register review task is scheduled but no evidence rows have been reviewed for currency."
+
+  - must_id: item:6.1.2:rev_reviewer
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No assignment of Risk Manager and ISMS Manager as reviewers of the risk assessment is documented."
+
+  - must_id: item:6.1.2:rev_significant_change
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of significant-change triggered ad-hoc risk assessments."
+
+  - must_id: item:6.1.2:scope_acceptance_bands
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "Risk acceptance bands / treat thresholds are not stated in this workbook extract."
+
+  - must_id: item:6.1.2:scope_asset_classes
+    verdict: partial
+    confidence: medium
+    quote: "Asset_Type"
+    rationale: "Asset register enumerates classes (Information, Technology, Process, People) but not explicitly framed as risk-assessment scope."
+
+  - must_id: item:6.1.2:scope_exclusions
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No explicit exclusions with rationale are stated."
+
+  - must_id: item:6.1.2:scope_scoring_scale
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No scoring scale (e.g. 5x5) is defined; only High/Medium/Low asset values appear without a documented scale."
+
+  - must_id: item:6.1.2:reg_description
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No risk register with asset/threat/vulnerability descriptions is included."
+
+  - must_id: item:6.1.2:reg_last_assessed
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No last-assessed date field for risk register rows is present."
+
+  - must_id: item:6.1.2:reg_owner
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "This workbook excerpt shows action tracker, objectives, assets, and interested parties — the risk register sheet with per-row risk owners is not included in the provided content."
+
+  - must_id: item:6.1.2:reg_risk_id
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "The risk register sheet is not present in the provided excerpt to verify unique risk identifiers per row."
+
+  - must_id: item:6.1.2:reg_scoring
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "No risk register rows with likelihood/consequence scoring are shown in this excerpt."
+
+  - must_id: item:6.1.2:reg_treatment_status
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Risk treatment status per risk row is not visible; only action-tracker task statuses are shown."
+
+  - must_id: item:6.1.3:approval
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence of risk owners' formal approval of a risk treatment plan or acceptance of residual risks appears in the excerpt."
+
+  - must_id: item:6.1.3:controls
+    verdict: partial
+    confidence: low
+    quote: "Annual Risk assessment review (risk register and risk treatment plan)"
+    rationale: "A risk treatment plan is referenced and individual controls (e.g., MFA, RBAC) are mentioned, but no structured mapping of controls to risks is provided in this excerpt."
+
+  - must_id: item:6.1.3:options
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No selection of treatment options (mitigate/accept/transfer/avoid) per risk is shown in the provided content."
+
+  - must_id: item:6.1.3:owners
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Treatment owners per treated risk are not evidenced; owners shown are for action tasks and assets, not risk treatments."
+
+  - must_id: item:6.1.3:residual
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No residual risk identification per treated risk is present in the provided document excerpt."
+
+  - must_id: item:6.1.3:soa_ref
+    verdict: partial
+    confidence: low
+    quote: "Update SoA to reflect recently closed controls"
+    rationale: "The Statement of Applicability is referenced as an action item but no direct link to a live SoA leaf is included."
+
+  - must_id: item:6.1.3:rev_date
+    verdict: partial
+    confidence: low
+    quote: "Annual Risk assessment review (risk register and risk treatment plan) | Zorko | 2026-03-31 00:00:00"
+    rationale: "An annual risk assessment review date is scheduled but no evidence of the actual review interval policy or that it aligns with a defined planned interval."
+
+  - must_id: item:6.1.3:rev_plan_progress
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "The workbook lists action items with statuses but does not evidence a treatment plan progress review where every treatment item's status is systematically updated."
+
+  - must_id: item:6.1.3:rev_residual_reaffirm
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence that residual risks have been re-affirmed by owners or that re-treatment has been triggered."
+
+  - must_id: item:6.1.3:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No identification of the reviewers (Risk Manager, ISMS Manager, risk owners) performing the risk review is present."
+
+  - must_id: item:6.1.3:rev_soa_currency
+    verdict: partial
+    confidence: medium
+    quote: "Update SoA to reflect recently closed controls | Libor | Management Review Log | 2025-05-30 00:00:00 | Completed"
+    rationale: "An SoA update action is recorded as completed, but no formal currency check against the treatment plan and Annex A version is documented."
+
+  - must_id: item:6.1.3:soa_all_annex_a
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "This workbook does not contain the SoA control list itself; enumeration of all 93 Annex A controls belongs to the SoA document."
+
+  - must_id: item:6.1.3:soa_implementation_status
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Implementation status per control is a SoA attribute; this workbook is an action/objective tracker, not the SoA."
+
+  - must_id: item:6.1.3:soa_inclusion_status
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Applicability status per control is a SoA attribute not present in this action tracker workbook."
+
+  - must_id: item:6.1.3:soa_justification
+    verdict: not_applicable
+    confidence: medium
+    quote: ""
+    rationale: "Per-control justifications for inclusion/exclusion belong in the SoA, not in this workbook."
+
+  - must_id: item:6.1.3:soa_owner
+    verdict: not_satisfies
+    confidence: low
+    quote: ""
+    rationale: "No named owner of the SoA is identified in this workbook."
+
+  - must_id: item:6.1.3:soa_reference
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Workbook mentions 'Update SoA to reflect recently closed controls' but does not show SoA control-to-policy references."
+
+  - must_id: item:6.1.3:soa_version
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No SoA version number or approval date is present in the workbook contents."
+
+  - must_id: item:6.1.3:scope_acceptance_authority
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No mention of residual-risk acceptance authority per risk band."
+
+  - must_id: item:6.1.3:scope_cost_benefit
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No cost-benefit rules for treatment selection are stated."
+
+  - must_id: item:6.1.3:scope_options_catalog
+    verdict: not_satisfies
+    confidence: high
+    quote: ""
+    rationale: "No treatment options catalog (modify/share/avoid/retain) is provided."
+
+  - must_id: item:6.2:scope_exclusions
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No explicit scope exclusions with rationale appear in the workbook."
+
+  - must_id: item:6.2:scope_functions
+    verdict: partial
+    confidence: low
+    quote: "Sales Team | Odoo Cloud"
+    rationale: "Various functions (Sales, IT, HR, Training, Consulting, Management) appear as asset owners but not enumerated as an ISMS scope statement."
+
+  - must_id: item:6.2:scope_levels
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No enumeration of scope levels (org/BU/function/team) is provided."
+
+  - must_id: item:6.2:proc_approval
+    verdict: partial
+    confidence: low
+    quote: "Responsible Party | Resources Required"
+    rationale: "Objectives list responsible parties (e.g., ISMS Manager, ISO) but does not specify approval authority per objective level."
+
+  - must_id: item:6.2:proc_communicated
+    verdict: partial
+    confidence: low
+    quote: "Create and deliver first ISMS Workbook usage training"
+    rationale: "Training and awareness activities are planned, but no explicit communication step linking objectives to personnel is documented."
+
+  - must_id: item:6.2:proc_inputs
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Workbook lists objectives but does not document inputs from policy, risk assessment results, or interested-party requirements to the objective-setting process."
+
+  - must_id: item:6.2:proc_planning
+    verdict: partial
+    confidence: medium
+    quote: "Objective Description | Alignment with ISMS Policy | Key Performance Indicators (KPIs) | Responsible Party | Resources Required | Start Date | Target Completion Date"
+    rationale: "Columns cover what/resources/who/when but evaluation method is only 'Periodic review results' generically, lacking specificity."
+
+  - must_id: item:6.2:proc_update_trigger
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No documented trigger for updating objectives upon policy, risk, or party requirement changes."
+
+  - must_id: item:6.2:rev_alignment
+    verdict: partial
+    confidence: low
+    quote: "Alignment with ISMS Policy | ... | yes"
+    rationale: "Each objective is marked aligned to ISMS Policy, but no evidence of alignment to current 6.1.2 risk results."
+
+  - must_id: item:6.2:rev_currency
+    verdict: partial
+    confidence: medium
+    quote: "Review ISMS/PIMS Objectives- annually | Zorko | ISMS Objectives | 2026-12-31"
+    rationale: "Most objectives show review dates/outcomes, but O005 and O006 show 'Not begun' with review date 2025-06-30 not clearly refreshed."
+
+  - must_id: item:6.2:rev_date
+    verdict: partial
+    confidence: medium
+    quote: "Review Date ... 2025-12-25 ... Next Review Date ... 2026-12-01"
+    rationale: "Most objectives have review dates within interval, but O005/O006 review date 2025-06-30 predates target completion and appears stale."
+
+  - must_id: item:6.2:rev_kpi_health
+    verdict: not_satisfies
+    confidence: medium
+    quote: "Key Performance Indicators (KPIs) ... Periodic review results"
+    rationale: "KPI field is generically 'Periodic review results' with no actual measurements flowing per objective."
+
+  - must_id: item:6.2:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No named reviewer (ISMS Manager or function heads) recorded for the objective reviews."
+
+  - must_id: item:6.2:consistent_with_policy
+    verdict: satisfies
+    confidence: medium
+    quote: "Alignment with ISMS Policy | ... | yes"
+    rationale: "Each objective is flagged with an 'Alignment with ISMS Policy = yes' consistency check."
+
+  - must_id: item:6.2:measurable
+    verdict: not_satisfies
+    confidence: high
+    quote: "Key Performance Indicators (KPIs) ... Periodic review results"
+    rationale: "KPIs are identical placeholder text 'Periodic review results' with no measurable targets defined per objective."
+
+  - must_id: item:6.2:objectives_stated
+    verdict: satisfies
+    confidence: high
+    quote: "O001 | Compliance and legal allignment"
+    rationale: "ISMS Objectives sheet lists multiple objectives (O001-O009) with descriptions."
+
+  - must_id: item:6.2:owner
+    verdict: satisfies
+    confidence: high
+    quote: "O002 | Increase Security Awareness Training | yes | Periodic review results | ISMS Manager"
+    rationale: "Each objective has a Responsible Party identified."
+
+  - must_id: item:6.2:progress_status
+    verdict: satisfies
+    confidence: high
+    quote: "O002 | Increase Security Awareness Training | yes | Periodic review results | ISMS Manager | Standard Tools and Storage | 2024-09-30 00:00:00 | 2025-12-31 00:00:00 | in progress"
+    rationale: "Current Status column shows completed/in progress for each objective."
+
+  - must_id: item:6.2:target_date
+    verdict: satisfies
+    confidence: high
+    quote: "Target Completion Date"
+    rationale: "Each objective row includes a Target Completion Date."
+
+  - must_id: item:6.3:rev_boundary_check
+    verdict: not_applicable
+    confidence: low
+    quote: ""
+    rationale: "Workbook does not contain a change-management register distinguishing 6.3 vs A.8.32 items."
+
+  - must_id: item:6.3:rev_date
+    verdict: not_applicable
+    confidence: low
+    quote: ""
+    rationale: "No 6.3 change register or review dates provided in this workbook."
+
+  - must_id: item:6.3:rev_register_currency
+    verdict: not_applicable
+    confidence: low
+    quote: ""
+    rationale: "No change register present to assess implementation/withdrawal status."
+
+  - must_id: item:6.3:rev_reviewer
+    verdict: not_applicable
+    confidence: low
+    quote: ""
+    rationale: "No reviewer identity for change management captured in this workbook."
+
+  - must_id: item:6.3:rev_silent_changes
+    verdict: not_applicable
+    confidence: low
+    quote: ""
+    rationale: "Cannot verify silent-change sweep without a change register in this document."
+
+  - must_id: item:6.3:approval
+    verdict: not_applicable
+    confidence: low
+    quote: ""
+    rationale: "No approval authority for planned ISMS changes documented in this workbook."
+
+  - must_id: item:6.3:change_identification
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Workbook lists action tasks but does not describe a trigger mechanism for identifying ISMS-level changes."
+
+  - must_id: item:6.3:comms
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence of a change communication process to stakeholders in this workbook."
+
+  - must_id: item:6.3:impact_consideration
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Workbook does not document impact-on-ISMS considerations for changes."
+
+  - must_id: item:6.3:planning_required
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No pre-change planning procedure (purpose, consequences, integrity) is documented."
+
+  - must_id: item:6.3:reg_approval
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No change register with per-row approval signatures and dates is present."
+
+  - must_id: item:6.3:reg_change_id
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Action tracker IDs exist but no dedicated change register with unique change IDs."
+
+  - must_id: item:6.3:reg_change_type
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No column categorising change type (scope/policy/roles/etc.)."
+
+  - must_id: item:6.3:reg_impact_summary
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No per-row impact summary field for changes is recorded."
+
+  - must_id: item:6.3:reg_status
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Task status exists but not the required change lifecycle statuses (proposed/approved/implemented/withdrawn)."
+
+  - must_id: item:6.3:reg_trigger
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No per-row trigger field describing origin of change is present."
+
+  - must_id: item:7.2:proc_assessment
+    verdict: partial
+    confidence: low
+    quote: "Competence Review | Zorko | Competence Records | 2026-01-01 00:00:00"
+    rationale: "A competence review is scheduled annually but no explicit cadence for role change or certification expiry is documented."
+
+  - must_id: item:7.2:proc_evidence_types
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Document does not specify accepted evidence types for competence such as certifications, on-job demonstration, or attested experience."
+
+  - must_id: item:7.2:proc_gap_handling
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No gap-handling pathway (training → hiring → mentoring → re-allocation) is defined in this workbook."
+
+  - must_id: item:7.2:proc_role_mapping
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No skills matrix or role-to-competence mapping method is documented in the workbook content shown."
+
+  - must_id: item:7.2:rev_currency
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No record showing that competence records reflect turnover, role changes, or new hires."
+
+  - must_id: item:7.2:rev_date
+    verdict: partial
+    confidence: low
+    quote: "Competence Review | Zorko | Competence Records | 2026-01-01 00:00:00"
+    rationale: "A review is scheduled but there is no evidence of a completed review within the planned interval."
+
+  - must_id: item:7.2:rev_effectiveness
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No effectiveness sampling of competence actions is documented."
+
+  - must_id: item:7.2:rev_gap_closure
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No competence gap register or closure/remediation tracking is present."
+
+  - must_id: item:7.2:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No identification of reviewers (HR partner, ISMS Manager, function heads) for competence review."
+
+  - must_id: item:7.2:basis_of_competence
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No per-person record of education, training, and experience appears in the workbook excerpts."
+
+  - must_id: item:7.2:documented
+    verdict: partial
+    confidence: medium
+    quote: "Internal Trainings | Zorko | Training sheet | 2026-04-01 00:00:00"
+    rationale: "Training sheet and competence records are referenced but no evidence of retained competence records is shown in this excerpt."
+
+  - must_id: item:7.2:effectiveness
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence of evaluating effectiveness of competence actions in the document."
+
+  - must_id: item:7.2:owner
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No named HR partner with ISMS Manager assigned as owner of competence records."
+
+  - must_id: item:7.2:required_competence
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No role-based required competence definitions are provided in the excerpt."
+
+  - must_id: item:7.3:reg_acknowledgement
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No per-row acknowledgement (signed receipt/LMS attestation/quiz) evidence appears."
+
+  - must_id: item:7.3:reg_completion_date
+    verdict: partial
+    confidence: low
+    quote: "Internal Trainings | Zorko | Training sheet | 2026-04-01 00:00:00"
+    rationale: "Action tracker shows dates but the awareness training register with per-row completion dates is not shown."
+
+  - must_id: item:7.3:reg_expiry
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No expiry/next-due per row for awareness training entries."
+
+  - must_id: item:7.3:reg_module
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No module identifiers (policy/contribution/consequences) per training row."
+
+  - must_id: item:7.3:reg_subject_id
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No per-subject (employee/contractor) identifier rows for awareness training."
+
+  - must_id: item:7.3:rev_content_currency
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence of a content currency check against current 5.2 policy."
+
+  - must_id: item:7.3:rev_coverage
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No register completion rate or coverage metric against in-scope audience is provided."
+
+  - must_id: item:7.3:rev_date
+    verdict: partial
+    confidence: low
+    quote: "Review ISMS/PIMS Objectives- annually | Zorko | ISMS Objectives | 2026-12-31"
+    rationale: "Annual review dates are scheduled but no specific awareness programme review date is documented."
+
+  - must_id: item:7.3:rev_refresher
+    verdict: partial
+    confidence: low
+    quote: "O002 | Increase Security Awareness Training | yes | Periodic review results | ISMS Manager"
+    rationale: "Training objective is tracked as in progress but no evidence that annual refreshers have actually been delivered."
+
+  - must_id: item:7.3:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No named reviewer (HR partner + ISMS Manager) for the awareness programme review is stated."
+
+  - must_id: item:7.3:cadence
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Workbook does not specify onboarding plus annual refresher cadence with refresh on policy update."
+
+  - must_id: item:7.3:contribution
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No content describing contribution to ISMS effectiveness or benefits of improved performance."
+
+  - must_id: item:7.3:delivery_method
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No delivery method (LMS, induction, refresher) is specified in the workbook."
+
+  - must_id: item:7.3:nonconformity_consequences
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No mention of consequences of not conforming to ISMS requirements."
+
+  - must_id: item:7.3:owner
+    verdict: partial
+    confidence: medium
+    quote: "O002 | Increase Security Awareness Training | yes | Periodic review results | ISMS Manager"
+    rationale: "ISMS Manager is listed as responsible party for the training objective, implying ownership but not explicitly labelled as programme owner."
+
+  - must_id: item:7.3:policy_awareness
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence that awareness content covers the InfoSec policy."
+
+  - must_id: item:7.4:reg_audience
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "The workbook lists tasks and assets but does not contain a communication register with per-row audience entries."
+
+  - must_id: item:7.4:reg_channel
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No communication register with per-row channel is present in the document."
+
+  - must_id: item:7.4:reg_date
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Dates shown are task due/completion dates, not per-communication event dates in a communications register."
+
+  - must_id: item:7.4:reg_event_id
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No unique communication event identifiers are recorded; IDs shown pertain to audits, actions, and assets."
+
+  - must_id: item:7.4:reg_topic
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "The workbook lacks a communications register with per-row topics tied to a 'what' catalog."
+
+  - must_id: item:7.4:rev_audience_coverage
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence of a review verifying audience coverage of required communications topics."
+
+  - must_id: item:7.4:rev_cadence_check
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No documented review that planned communications were delivered on time."
+
+  - must_id: item:7.4:rev_date
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No communications review date within a planned interval is captured."
+
+  - must_id: item:7.4:rev_mandated_deadlines
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No check of regulator-mandated communication SLAs is documented."
+
+  - must_id: item:7.4:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No identified reviewer (ISMS Manager + comms lead) for a communications review is recorded."
+
+  - must_id: item:7.5:control
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Workbook lists action items but does not define control of documented information (distribution, access, retention, disposition)."
+
+  - must_id: item:7.5:creation_update
+    verdict: partial
+    confidence: low
+    quote: "Document Content Register in Workbook not reflecting final approval timestamps and change log. Recommend automating or enforcing version control"
+    rationale: "References approval timestamps and change log for document control but does not define the creation/update process itself."
+
+  - must_id: item:7.5:external_docs
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No control of external-origin documents is described in this workbook."
+
+  - must_id: item:7.5:iso_required_docs
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Workbook does not enumerate ISO 27001:2022 required documented information."
+
+  - must_id: item:7.5:legibility
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No provisions for protection from loss of legibility/integrity/unauthorised use are specified."
+
+  - must_id: item:7.5:org_defined
+    verdict: partial
+    confidence: low
+    quote: "Annual Review ISMS Documents | Li, Zorko, Petra | Document Cont Reg | 2026-03-31"
+    rationale: "References a Document Content Register implying identification of necessary documents but doesn't enumerate them here."
+
+  - must_id: item:7.5:rev_coverage
+    verdict: partial
+    confidence: low
+    quote: "Annual Review ISMS Documents | Li, Zorko, Petra | Document Cont Reg | 2026-03-31 00:00:00"
+    rationale: "An annual ISMS document review task exists but this workbook does not show per-class register coverage."
+
+  - must_id: item:7.5:rev_currency
+    verdict: partial
+    confidence: medium
+    quote: "Quarterly review of PII Access Register | Petra | Access Register sheet | 2026-01-31 00:00:00 | Completed"
+    rationale: "Some rows show completion and next dates, but many entries lack review outcomes or next-review dates."
+
+  - must_id: item:7.5:rev_date
+    verdict: partial
+    confidence: medium
+    quote: "Review Date | Review Outcome | Next Review Date"
+    rationale: "ISMS Objectives table includes review dates within intervals for some objectives but others lack review outcomes."
+
+  - must_id: item:7.5:rev_reviewer
+    verdict: partial
+    confidence: low
+    quote: "Annual Review ISMS Documents | Li, Zorko, Petra | Document Cont Reg"
+    rationale: "Reviewers named for ISMS document review but roles of ISMS Manager + document-control lead not explicitly designated."
+
+  - must_id: item:7.5:rev_stale_sweep
+    verdict: partial
+    confidence: medium
+    quote: "Annual Review ISMS Documents | Li, Zorko, Petra | Document Cont Reg | 2026-03-31 00:00:00"
+    rationale: "Action tracker shows scheduled annual review of ISMS documents but no explicit overdue-doc sweep with refresh/retire decisions."
+
+  - must_id: item:7.5:reg_approval_date
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "The workbook excerpt does not include a document register with per-row last approval dates; internal audit noted approval timestamps missing."
+
+  - must_id: item:7.5:reg_classification
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No document register with per-row information classification is present in the shown content."
+
+  - must_id: item:7.5:reg_doc_id
+    verdict: partial
+    confidence: low
+    quote: "Draft in DOC003 and DOC016"
+    rationale: "Document IDs like DOC003/DOC016 are referenced but a full register with unique IDs per row is not shown."
+
+  - must_id: item:7.5:reg_next_review
+    verdict: partial
+    confidence: medium
+    quote: "Next Review Date"
+    rationale: "ISMS Objectives sheet has Next Review Date column, but a document register with per-row next review dates is not evidenced."
+
+  - must_id: item:7.5:reg_owner
+    verdict: partial
+    confidence: medium
+    quote: "Annual Review ISMS Documents | Li, Zorko, Petra | Document Cont Reg"
+    rationale: "Owners appear in trackers and asset register but a document register with per-row document owner is not fully shown."
+
+  - must_id: item:7.5:reg_title
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No document register listing document titles per row is included in the excerpt."
+
+  - must_id: item:7.5:reg_version
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Internal audit flagged missing version control and no per-row version column is evidenced."
+
+  - must_id: item:8.1:reg_criteria_met
+    verdict: partial
+    confidence: low
+    quote: "Current Status | Progress Notes"
+    rationale: "Status columns in ISMS Objectives indicate progress but no explicit criteria-met indicator per operational process row."
+
+  - must_id: item:8.1:reg_evidence_link
+    verdict: partial
+    confidence: medium
+    quote: "https://www.enisa.europa.eu/rss-feeds-discontinued-new-subscription-mechanism-coming-soon"
+    rationale: "One row contains an evidence link but most rows lack per-row links to retained evidence."
+
+  - must_id: item:8.1:reg_execution_date
+    verdict: satisfies
+    confidence: high
+    quote: "COMPLETION DATE"
+    rationale: "Workbook contains DUE DATE and COMPLETION DATE columns for each task row, evidencing execution dates."
+
+  - must_id: item:8.1:reg_owner
+    verdict: satisfies
+    confidence: high
+    quote: "OWNER"
+    rationale: "Each row has an owner assigned (e.g., Petra, Zorko, Libor)."
+
+  - must_id: item:8.1:reg_process_id
+    verdict: partial
+    confidence: medium
+    quote: "REF ID"
+    rationale: "REF IDs (AUD001, MR002, AC010) are present but not all rows carry an ID and no formal process catalog reference is shown."
+
+  - must_id: item:8.1:changes_managed
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence in this workbook that changes to planned processes are managed or linked to Clause 6.3."
+
+  - must_id: item:8.1:controls_implemented
+    verdict: partial
+    confidence: medium
+    quote: "Implement document labeling in sharepoint and RBAC"
+    rationale: "Action tracker shows some controls implemented but does not systematically evidence controls against established criteria."
+
+  - must_id: item:8.1:criteria_established
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Workbook lists tasks and objectives but does not define operational criteria for ISMS-relevant processes."
+
+  - must_id: item:8.1:documented_info
+    verdict: satisfies
+    confidence: high
+    quote: "PROGRESS NOTES"
+    rationale: "Progress notes and completion records serve as retained documented information showing processes were carried out."
+
+  - must_id: item:8.1:outsourced_control
+    verdict: partial
+    confidence: medium
+    quote: "Third Party Vendor Risk assessment review"
+    rationale: "Vendor risk review tasks exist implying outsourced control, but no explicit determination/link to A.5.19/A.5.20."
+
+  - must_id: item:8.1:rev_c6_handoff
+    verdict: partial
+    confidence: low
+    quote: "Update SoA to reflect recently closed controls"
+    rationale: "Action tracker shows some Clause 6 planned actions moving to operational status, but no explicit handoff check documented."
+
+  - must_id: item:8.1:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: "Next Review Date"
+    rationale: "ISMS Objectives include Review Date and Next Review Date columns showing reviews within planned intervals."
+
+  - must_id: item:8.1:rev_execution_completeness
+    verdict: partial
+    confidence: low
+    quote: "Quarterly Security Review | Zorko | Quarterly Security Review | 2025-08-01"
+    rationale: "Scheduled iterations are listed in the action tracker but there is no explicit log confirming every iteration executed."
+
+  - must_id: item:8.1:rev_outsourced_oversight
+    verdict: partial
+    confidence: low
+    quote: "Third Party Vendor Risk assessment review | Petra | Third Party Vendor Risk | 2026-09-29"
+    rationale: "Vendor risk reviews are scheduled and business partners assessment completed, but no current supplier-side evidence per outsourced process is shown."
+
+  - must_id: item:8.1:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No entry identifies the ISMS Manager plus operations lead jointly as reviewers of operational execution."
+
+  - must_id: item:8.2:rev_cadence_met
+    verdict: partial
+    confidence: low
+    quote: "Annual Risk assessment review (risk register and risk treatment plan) | Zorko | 2026-03-31"
+    rationale: "Annual risk assessment scheduled but no evidence that all tiered assessments happened on cadence."
+
+  - must_id: item:8.2:rev_date
+    verdict: partial
+    confidence: low
+    quote: "Annual Risk assessment review (risk register and risk treatment plan) | Zorko | 2026-03-31 00:00:00"
+    rationale: "A planned review date exists but no completed date within a planned interval is shown."
+
+  - must_id: item:8.2:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Risk Manager and ISMS Manager are not both identified as reviewers of the risk assessment."
+
+  - must_id: item:8.2:rev_treatment_handoff
+    verdict: not_satisfies
+    confidence: low
+    quote: ""
+    rationale: "No evidence linking newly identified risks to a 6.1.3/8.3 treatment handoff."
+
+  - must_id: item:8.2:rev_triggers_fired
+    verdict: not_satisfies
+    confidence: low
+    quote: ""
+    rationale: "No documentation of significant-change triggers and corresponding ad-hoc assessments."
+
+  - must_id: item:8.2:criteria_applied
+    verdict: not_satisfies
+    confidence: low
+    quote: ""
+    rationale: "Document does not show application of 6.1.2 a) criteria in the assessment."
+
+  - must_id: item:8.2:last_assessment
+    verdict: not_satisfies
+    confidence: low
+    quote: ""
+    rationale: "No recorded last assessment completion date for risk assessment is visible."
+
+  - must_id: item:8.2:owner
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No per-assessment risk owner (Risk Manager) documented for risk assessments in this workbook extract."
+
+  - must_id: item:8.2:planned_interval
+    verdict: satisfies
+    confidence: high
+    quote: "Annual Risk assessment review (risk register and risk treatment plan) | Zorko | 2026-03-31"
+    rationale: "Annual risk assessment review is scheduled, evidencing a planned interval."
+
+  - must_id: item:8.2:results_documented
+    verdict: partial
+    confidence: low
+    quote: "Annual Risk assessment review (risk register and risk treatment plan)"
+    rationale: "Workbook references a risk register but the extract does not show documented assessment results retained."
+
+  - must_id: item:8.2:significant_change
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No significant-change trigger for ad-hoc risk reassessments is documented in the extract."
+
+  - must_id: item:8.3:implementation_status
+    verdict: satisfies
+    confidence: high
+    quote: "STATUS | PROGRESS NOTES | COMPLETION DATE"
+    rationale: "Action tracker shows per-item status (Completed, in progress) with progress notes."
+
+  - must_id: item:8.3:per_item_owner
+    verdict: satisfies
+    confidence: high
+    quote: "AC010 | Implement document labeling in sharepoint and RBAC | Petra | ISMS Action Tracker"
+    rationale: "Each treatment/action item has an assigned owner."
+
+  - must_id: item:8.3:per_item_target_date
+    verdict: satisfies
+    confidence: high
+    quote: "AC002 | Conduct mandatory phishing simulations and security awareness training for staff. | Zorko | ISMS Action Tracker | 2026-03-31"
+    rationale: "Each action item includes a due/target date."
+
+  - must_id: item:8.3:plan_implemented
+    verdict: satisfies
+    confidence: high
+    quote: "AC010 | Implement document labeling in sharepoint and RBAC | Petra | ISMS Action Tracker | 2025-05-31 00:00:00 | completed"
+    rationale: "ISMS Action Tracker shows treatment plan items being implemented with status per item."
+
+  - must_id: item:8.3:residual_risk
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No residual risk values are recorded after treatment in the extract."
+
+  - must_id: item:8.3:retention
+    verdict: partial
+    confidence: low
+    quote: "COMPLETION DATE"
+    rationale: "Completed items with completion dates are retained in the workbook but a formal retention statement is not shown."
+
+  - must_id: item:8.3:rev_date
+    verdict: partial
+    confidence: medium
+    quote: "Annual Risk assessment review (risk register and risk treatment plan) | Zorko | 2026-03-31 00:00:00"
+    rationale: "A planned annual risk assessment review date exists but no evidence of a completed review within a planned interval with review date recorded."
+
+  - must_id: item:8.3:rev_progress
+    verdict: partial
+    confidence: medium
+    quote: "O002 | Increase Security Awareness Training | yes | Periodic review results | ISMS Manager | Standard Tools and Storage | 2024-09-30 00:00:00 | 2025-12-31 00:00:00 | in progress | Trainings have begun"
+    rationale: "Some active items show status/progress notes but there is no explicit on-track vs slipping designation for every active plan item."
+
+  - must_id: item:8.3:rev_residual_revisit
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence that owners re-affirmed residual risk on completed items or that divergent residuals were escalated."
+
+  - must_id: item:8.3:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No identification of a Risk Manager + ISMS Manager + ops lead trio as reviewers of the risk treatment plan."
+
+  - must_id: item:8.3:rev_soa_currency
+    verdict: partial
+    confidence: medium
+    quote: "MR002 | Update SoA to reflect recently closed controls | Libor | Management Review Log | 2025-05-30 00:00:00 | Completed | 2025-04-30 00:00:00"
+    rationale: "There is a completed action to update SoA to reflect closed controls, but no explicit periodic SoA currency check tied to review."
+
+  - must_id: item:9.1:rec_date
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Objectives sheet lists KPIs as 'Periodic review results' but no per-row measurement dates for metric records are present."
+
+  - must_id: item:9.1:rec_metric_id
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No metric identifier per measurement row matching a metric catalog is provided."
+
+  - must_id: item:9.1:rec_owner
+    verdict: partial
+    confidence: low
+    quote: "O002 | Increase Security Awareness Training | yes | Periodic review results | ISMS Manager"
+    rationale: "Objectives list responsible parties but this is not per-row metric measurement records with owners."
+
+  - must_id: item:9.1:rec_status
+    verdict: partial
+    confidence: low
+    quote: "in progress | Trainings have begun"
+    rationale: "Status values are 'in progress/completed' rather than above/on/below-target or breach categories."
+
+  - must_id: item:9.1:rec_threshold
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No numeric thresholds or target values applied per measurement row are documented."
+
+  - must_id: item:9.1:rec_value
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Workbook lists objectives and KPIs generically ('Periodic review results') but no per-row measured values for metrics are recorded."
+
+  - must_id: item:9.1:methods
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No description of monitoring/measurement/analysis methods is provided in the workbook content."
+
+  - must_id: item:9.1:retained
+    verdict: partial
+    confidence: medium
+    quote: "KPI Tracker | Zorko | Info Sec KPI metrics tracker | 2026-01-30 00:00:00"
+    rationale: "A KPI metrics tracker sheet is referenced but no actual retained measurement records are shown."
+
+  - must_id: item:9.1:timing_analyse
+    verdict: partial
+    confidence: medium
+    quote: "Review ISMS/PIMS Objectives- annually | Zorko | ISMS Objectives | 2026-12-31 00:00:00"
+    rationale: "Annual and quarterly review cadences are referenced but analysis timing is not explicitly defined per metric."
+
+  - must_id: item:9.1:timing_measure
+    verdict: partial
+    confidence: medium
+    quote: "Monthly backup monitoring | Zorko | MOnitoring Log | 2025-09-30 00:00:00"
+    rationale: "Some monitoring cadences (monthly/quarterly) are shown but not a comprehensive definition of when each measurement occurs."
+
+  - must_id: item:9.1:what_monitored
+    verdict: partial
+    confidence: medium
+    quote: "O005 | Measure and documentation of Security Incidents | Zorko | ISMS Objectives"
+    rationale: "Some monitored items (incidents, backups, access) appear in objectives but comprehensive list of monitored processes/controls is not defined."
+
+  - must_id: item:9.1:who_analyse
+    verdict: partial
+    confidence: medium
+    quote: "Internal Auditor | Standard Tools and Storage | 2025-10-31"
+    rationale: "Responsible parties are assigned per objective but analysis/evaluator role is not clearly separated."
+
+  - must_id: item:9.1:who_measure
+    verdict: satisfies
+    confidence: medium
+    quote: "Responsible Party | Resources Required | Start Date | Target Completion Date"
+    rationale: "Each objective and monitoring task has an assigned Responsible Party/Owner."
+
+  - must_id: item:9.1:rev_date
+    verdict: satisfies
+    confidence: high
+    quote: "Review Date | Review Outcome | Next Review Date"
+    rationale: "Review dates and next review dates are explicitly captured for each objective."
+
+  - must_id: item:9.1:rev_flow_check
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence that every catalog metric has values flowing into a measurement record; KPI values are not populated per row."
+
+  - must_id: item:9.1:rev_mgmt_review_handoff
+    verdict: partial
+    confidence: low
+    quote: "Update SoA to reflect recently closed controls"
+    rationale: "Management Review Log actions exist (MR002 items) suggesting review outputs, but no explicit link showing prior measurement results surfaced in 9.3 minutes."
+
+  - must_id: item:9.1:rev_reviewer
+    verdict: partial
+    confidence: low
+    quote: "KPI Tracker | Zorko | Info Sec KPI metrics tracker"
+    rationale: "Zorko is identified as owner of KPI Tracker but no explicit ISMS Manager + KPI lead reviewer roles are stated for measurement review."
+
+  - must_id: item:9.1:rev_threshold_recalibration
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence of KPI/target thresholds being recalibrated or reviewed for relevance and stretch."
+
+  - must_id: item:9.2:scope_cycle_length
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No stated internal audit cycle length (e.g., 3-year full ISMS coverage) is documented."
+
+  - must_id: item:9.2:scope_exclusions
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No explicit audit scope exclusions with rationale documented."
+
+  - must_id: item:9.2:scope_high_risk
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No documented annual audit frequency for high-risk processes."
+
+  - must_id: item:9.2:scope_rotation
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No process-rotation plan mapping which processes are audited in each year of the cycle."
+
+  - must_id: item:9.2:rec_audit_id
+    verdict: partial
+    confidence: medium
+    quote: "AUD001 | Int. Audit: Access register records from Q4 2024 documentation incomplete"
+    rationale: "A single audit identifier (AUD001) is used but multiple findings share the same ID rather than unique per row."
+
+  - must_id: item:9.2:rec_auditor
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Auditor identity and independence assertion per audit is not recorded; only remediation owners are listed."
+
+  - must_id: item:9.2:rec_date
+    verdict: partial
+    confidence: low
+    quote: "AUD001 | Int. Audit: Access register records from Q4 2024 documentation incomplete... 2025-05-30 00:00:00"
+    rationale: "Dates present appear to be due/completion dates for remediation actions, not explicit audit execution dates."
+
+  - must_id: item:9.2:rec_findings
+    verdict: partial
+    confidence: medium
+    quote: "Int. Audit: Access register records from Q4 2024 documentation incomplete. Signature missing in two entries – remediation needed"
+    rationale: "Workbook lists individual audit findings (AUD001 items and EAUD001 OFIs) but lacks a consolidated per-audit findings list with conformities."
+
+  - must_id: item:9.2:rec_handoff
+    verdict: partial
+    confidence: medium
+    quote: "Complete Incident Response drill for Q1 (also document it in non conf action tracker)"
+    rationale: "Findings are tracked as actions with owners/due dates referencing a non-conformance action tracker, but formal handoff to a 10.2 NC/CA procedure is not explicitly documented."
+
+  - must_id: item:9.2:rec_scope
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No per-audit scope description of which ISMS process/area was audited is captured in the workbook entries."
+
+  - must_id: item:9.2:rev_completion
+    verdict: partial
+    confidence: low
+    quote: "Int. Audit:Incident response drill planned but not done or documented for Q1 2025 . Drill did not occur but evidence not logged formally"
+    rationale: "Some completion status is tracked but no explicit completion check confirming every scheduled audit occurred or was deferred with reason."
+
+  - must_id: item:9.2:rev_cycle_progress
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence of end-of-cycle check confirming every ISMS process was audited at least once."
+
+  - must_id: item:9.2:rev_date
+    verdict: partial
+    confidence: low
+    quote: "Annual Review ISMS Documents | Li, Zorko, Petra | Document Cont Reg | 2026-03-31"
+    rationale: "Review/due dates are noted per action but no explicit confirmation the audit review occurred within a planned interval."
+
+  - must_id: item:9.2:rev_finding_closure
+    verdict: partial
+    confidence: medium
+    quote: "Signatures added to Security & Incident Response Lead, Vulnerability management"
+    rationale: "Some findings show completion notes and dates suggesting closure, but no formal check that last cycle's NCs reached 10.2 closure."
+
+  - must_id: item:9.2:rev_reviewer
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Owners of tasks are listed but no identification of ISMS Manager plus lead auditor as reviewers of the audit program."
+
+  - must_id: item:9.2:corrective
+    verdict: partial
+    confidence: medium
+    quote: "Int. Audit: Formalize documentation of IR drill in ISMS Workbook"
+    rationale: "Corrective actions are tracked in the ISMS Action Tracker with owners, due dates, and completion notes, but no formal corrective action follow-up procedure is described."
+
+  - must_id: item:9.2:criteria
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No audit criteria are documented in the entries; the external audit OFI even recommends stating ISO 27001 clauses/Annex A as criteria going forward."
+
+  - must_id: item:9.2:frequency
+    verdict: partial
+    confidence: medium
+    quote: "Annual Review of ISO/IEC 27001:2022 (Information Security Management System) | Zorko | Legal and Regul. Compl. Register | 2026-04-28"
+    rationale: "Annual review tasks and quarterly reviews are scheduled but no explicit audit frequency policy statement is present."
+
+  - must_id: item:9.2:independence
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No auditor independence or competence requirements are stated in this workbook."
+
+  - must_id: item:9.2:owner
+    verdict: partial
+    confidence: medium
+    quote: "O005 | Measure and documentation of Security Incidents | yes | Periodic review results | Internal Auditor"
+    rationale: "An Internal Auditor role is referenced but the audit programme owner is not explicitly named."
+
+  - must_id: item:9.2:reporting
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No reporting process from audit to management is defined in this document."
+
+  - must_id: item:9.2:scope
+    verdict: partial
+    confidence: medium
+    quote: "In the next internal audit report, clearly state that all ISO 27001 core sections and Annex A controls were used as audit criteria."
+    rationale: "OFI action references full ISMS audit scope but the workbook does not formally define audit scope."
+
+  - must_id: item:9.3:approved
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No evidence of top management approval of a management review is present."
+
+  - must_id: item:9.3:audit_results
+    verdict: partial
+    confidence: medium
+    quote: "AUD001 | Int. Audit: Access register records from Q4 2024 documentation incomplete."
+    rationale: "Internal audit findings are logged but not shown as inputs to a documented management review."
+
+  - must_id: item:9.3:decisions
+    verdict: partial
+    confidence: medium
+    quote: "MR002 | Update SoA to reflect recently closed controls | Libor | Management Review Log"
+    rationale: "Management Review Log actions are tracked but decisions are not fully recorded in this workbook."
+
+  - must_id: item:9.3:interested
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No feedback from interested parties is documented as an input to management review."
+
+  - must_id: item:9.3:monitoring
+    verdict: partial
+    confidence: low
+    quote: "KPI Tracker | Zorko | Info Sec KPI metrics tracker | 2026-01-30"
+    rationale: "KPI tracker and monitoring logs are referenced but not tied to management review inputs."
+
+  - must_id: item:9.3:nonconf
+    verdict: partial
+    confidence: medium
+    quote: "Int. Audit: Conduct review and update of Q4 2024 access register and complete documentation | Data Owners | 2025-05-30 00:00:00 | completed"
+    rationale: "Audit log tracks nonconformities and corrective actions with status/completion dates but not explicitly framed as MR input."
+
+  - must_id: item:9.3:objectives
+    verdict: satisfies
+    confidence: high
+    quote: "Objective ID | Objective Description | Alignment with ISMS Policy | Key Performance Indicators (KPIs) | Responsible Party | Resources Required | Start Date | Target Completion Date | Current Status | Progress Notes"
+    rationale: "ISMS Objectives sheet shows progress with status and progress notes toward each objective."
+
+  - must_id: item:9.3:proc_agenda
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "Workbook contains logs and trackers but no agenda template covering 9.3.2 a-g inputs."
+
+  - must_id: item:9.3:proc_attendees
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No listing of required management review attendees in this workbook."
+
+  - must_id: item:9.3:proc_cadence
+    verdict: partial
+    confidence: low
+    quote: "Review ISMS/PIMS Objectives- annually | Zorko | ISMS Objectives | 2026-12-31 00:00:00"
+    rationale: "Annual review cadence implied via scheduled reviews but no explicit MR cadence policy stated."
+
+  - must_id: item:9.3:proc_input_gathering
+    verdict: not_satisfies
+    confidence: medium
+    quote: ""
+    rationale: "No documented process describing who collects inputs and pre-meeting deadlines."
+
+  - must_id: item:9.3:proc_output_tracking
+    verdict: partial
+    confidence: medium
+    quote: "MR002 | Complete Incident Response drill for Q1 (also document it in non conf action tracker) | Zorko | Management Review Log"
+    rationale: "MR002-tagged actions flow into the action tracker suggesting output tracking, but process is not formally described."
+
+  - must_id: item:9.3:rev_action_closure
+    verdict: partial
+    confidence: medium
+    quote: "MR002 | Update SoA to reflect recently closed controls | Libor | Management Review Log | 2025-05-30 00:00:00 | Completed | 2025-04-30 00:00:00"
+    rationale: "Some MR002 actions show completion dates but others (IR drill, simulation, training) lack closure evidence."
+
+  - must_id: item:9.3:rev_cadence_met
+    verdict: partial
+    confidence: low
+    quote: "MR002 | Complete Incident Response drill for Q1 (also document it in non conf action tracker) | Zorko | Management Review Log | 2025-05-30 00:00:00"
+    rationale: "Only one MR reference (MR002) is visible; cannot confirm all planned reviews occurred on cadence."
+
+  - must_id: item:9.3:rev_date
+    verdict: partial
+    confidence: low
+    quote: "MR002 | Update SoA to reflect recently closed controls | Libor | Management Review Log | 2025-05-30 00:00:00"
+    rationale: "MR002 actions have a due date but no explicit review meeting date recorded in this workbook."
+
