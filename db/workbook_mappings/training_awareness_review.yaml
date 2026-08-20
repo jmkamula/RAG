@@ -65,6 +65,19 @@ passes:
       - fingerprint: [next, training, date]
         binds_to: "item:A.6.3:rev_next_date"
 
+    # Ship 89'.b — Proof of Completion column carries hyperlinks to
+    # acknowledgement records (typically SharePoint doc list). Cite
+    # emission binds to rev_register_update — the linked record is the
+    # register update captured for this training session.
+    cite_columns:
+      - fingerprint: [proof, completion]
+        binds_to: "item:A.6.3:rev_register_update"
+        alternative_fingerprints:
+          - [acknowledgement, records]
+          - [proof, of, completion]
+        cite_kind: internal_document
+        verification_days: 365
+
 cross_control_links:
   - control: "7.2"
     rationale: "Same log feeds clause 7.2 competence evidence"

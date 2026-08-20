@@ -200,6 +200,8 @@ def persist_proposals(
 
                 for pp in p.passes:
                     standard_id = _standard_for(pp.target_evidence_requirement)
+                    # Track finding_id per MUST so cite emission can attribute back.
+                    finding_id_by_must: dict[str, str] = {}
                     for (
                         control_ref,
                         std_id,
@@ -224,6 +226,7 @@ def persist_proposals(
                                 %s, %s,
                                 TRUE, 'compliance'
                             )
+                            RETURNING id
                             """,
                             (
                                 tenant_str, doc_str,
@@ -232,7 +235,36 @@ def persist_proposals(
                                 inf_source, proposal_id,
                             ),
                         )
+                        finding_id_by_must[checklist_item_id] = cur.fetchone()[0]
                         findings_written += 1
+
+                    # Ship 89'.b — emit cite-mode rows for cite_bindings.
+                    # One external_evidence_source per (tenant, must_id,
+                    # system_id) — the table's UNIQUE constraint collapses
+                    # duplicate cites naturally. Attributed back via
+                    # origin_finding_id when the workbook produced a
+                    # finding for that MUST; otherwise NULL (cite without
+                    # corresponding finding — rare, but legal).
+                    for must_id, cite_meta in pp.cite_bindings.items():
+                        system_id = _ensure_external_system(
+                            cur, tenant_str, cite_meta,
+                        )
+                        origin_finding = finding_id_by_must.get(must_id)
+                        _upsert_cite(
+                            cur,
+                            tenant_id       = tenant_str,
+                            must_id         = must_id,
+                            leaf_id         = pp.target_evidence_requirement,
+                            system_id       = system_id,
+                            cadence_days    = int(
+                                cite_meta.get("verification_days") or 365
+                            ),
+                            origin_finding_id = origin_finding,
+                            per_must_note   = (
+                                f"workbook cite: sheet {p.sheet!r} "
+                                f"column {cite_meta.get('header')!r}"
+                            ),
+                        )
 
         pg.commit()
     except Exception:
@@ -240,3 +272,102 @@ def persist_proposals(
         raise
 
     return run_uuid, findings_written
+
+
+# ── Ship 89'.b — cite-mode helpers ────────────────────────────────────
+
+def _ensure_external_system(cur, tenant_id: str, cite_meta: dict) -> str:
+    """Find-or-create a tenant_external_system row for this cite.
+
+    Maps YAML `cite_kind` to a canonical system_name. Same-name systems
+    are reused (idempotent per tenant). Workbook cites typically live in
+    an "Internal Documents" system (SharePoint / filesystem / etc.);
+    tenant can rename via the profile UI afterward.
+    """
+    kind = (cite_meta.get("cite_kind") or "internal_document").strip()
+    system_name = {
+        "internal_document": cite_meta.get("system_hint") or "Internal Documents",
+        "url":               cite_meta.get("system_hint") or "External URLs",
+        "external_system":   cite_meta.get("system_hint") or "External System",
+    }.get(kind, kind)
+    cadence = int(cite_meta.get("verification_days") or 365)
+    cur.execute(
+        """
+        SELECT id::text FROM tenant_external_system
+         WHERE tenant_id = %s::uuid AND system_name = %s AND is_active = TRUE
+         LIMIT 1
+        """,
+        (tenant_id, system_name),
+    )
+    row = cur.fetchone()
+    if row:
+        return row[0]
+    cur.execute(
+        """
+        INSERT INTO tenant_external_system (
+            tenant_id, system_name, default_cadence_days,
+            covers_evidence_types, is_active
+        ) VALUES (%s::uuid, %s, %s, ARRAY[]::text[], TRUE)
+        RETURNING id::text
+        """,
+        (tenant_id, system_name, cadence),
+    )
+    return cur.fetchone()[0]
+
+
+def _upsert_cite(
+    cur,
+    *,
+    tenant_id:         str,
+    must_id:           str,
+    leaf_id:           str,
+    system_id:         str,
+    cadence_days:      int,
+    origin_finding_id: str | None,
+    per_must_note:     str,
+) -> None:
+    """Insert or reactivate an external_evidence_source row for this cite.
+
+    The table's UNIQUE(tenant_id, must_id, system_id) WHERE is_active
+    means duplicate workbook cites collapse (e.g. all 149 SoA hyperlinks
+    binding item:6.1.3:soa_reference → 1 cite). Existing rows get their
+    origin_finding_id + per_must_note refreshed.
+    """
+    cur.execute(
+        """
+        SELECT id::text FROM external_evidence_source
+         WHERE tenant_id = %s::uuid
+           AND must_id   = %s
+           AND system_id = %s::uuid
+           AND is_active = TRUE
+         LIMIT 1
+        """,
+        (tenant_id, must_id, system_id),
+    )
+    row = cur.fetchone()
+    if row:
+        cur.execute(
+            """
+            UPDATE external_evidence_source
+               SET cadence_days      = %s,
+                   per_must_note     = %s,
+                   origin_finding_id = COALESCE(%s::uuid, origin_finding_id),
+                   updated_at        = now()
+             WHERE id = %s::uuid
+            """,
+            (cadence_days, per_must_note, origin_finding_id, row[0]),
+        )
+        return
+    cur.execute(
+        """
+        INSERT INTO external_evidence_source (
+            tenant_id, must_id, leaf_id, system_id,
+            cadence_days, per_must_note, origin_finding_id
+        ) VALUES (
+            %s::uuid, %s, %s, %s::uuid,
+            %s, %s, %s::uuid
+        )
+        """,
+        (tenant_id, must_id, leaf_id, system_id,
+         cadence_days, per_must_note, origin_finding_id),
+    )

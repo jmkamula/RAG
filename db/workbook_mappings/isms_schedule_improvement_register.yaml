@@ -68,6 +68,19 @@ passes:
           - [trigger]
         coverage: partial
 
+    # Ship 89'.b — REFERENCE SHEET column carries hyperlinks to the
+    # source docs (Audit Log, Management Review Log, etc.) that
+    # triggered each action. Cite emission binds these to the action's
+    # trigger_type MUST.
+    cite_columns:
+      - fingerprint: [reference, sheet]
+        binds_to: "item:10.1:reg_trigger_type"
+        alternative_fingerprints:
+          - [reference]
+          - [source]
+        cite_kind: internal_document
+        verification_days: 365
+
 cross_control_links:
   - control: "9.2"
     rationale: "Audit-shaped tasks (REF ID AUD*) feed the audit programme"

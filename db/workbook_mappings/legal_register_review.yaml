@@ -61,6 +61,19 @@ passes:
         binds_to: "item:A.5.31:rev_horizon"
         coverage: partial
 
+    # Ship 89'.b — Relevant Authority column carries hyperlinks to
+    # regulator/authority websites (Chamber of Deputies, NUKIB, etc.).
+    # Cite emission binds to rev_scope_check (which authority the
+    # obligation cites). mailto: URLs (contact channel emails) are
+    # filtered by the row-level HL guard.
+    cite_columns:
+      - fingerprint: [relevant, authority]
+        binds_to: "item:A.5.31:rev_scope_check"
+        alternative_fingerprints:
+          - [authority]
+        cite_kind: url
+        verification_days: 365
+
 cross_control_links:
   - control: "A.5.34"
     rationale: "PII-related obligations cross-link to PII processing register"

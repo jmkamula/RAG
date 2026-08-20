@@ -907,7 +907,21 @@ class DocumentPipeline:
                         ]
                     _wb.close()
 
-                    _proposals = discover_workbook(_rows_per_sheet)
+                    # Ship 89'.b — thread hyperlinks (captured by Ship 85'.a
+                    # `_partition_xlsx_via_unstructured`) into discovery so
+                    # `cite_columns:` emission can gate on a real cite
+                    # hyperlink existing in a data row (non-mailto).
+                    _hyperlinks_per_sheet: dict[str, list[dict]] = {}
+                    _structured = doc.extraction_metrics.get("structured_sheets") or []
+                    for _s in _structured:
+                        _sn = _s.get("sheet_name")
+                        _hls = _s.get("hyperlinks") or []
+                        if _sn and _hls:
+                            _hyperlinks_per_sheet[_sn] = _hls
+                    _proposals = discover_workbook(
+                        _rows_per_sheet,
+                        hyperlinks_per_sheet=_hyperlinks_per_sheet or None,
+                    )
 
                     if _proposals:
                         _wbd_conn = psycopg2.connect(self.db_url)

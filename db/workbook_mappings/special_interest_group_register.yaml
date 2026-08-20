@@ -64,6 +64,18 @@ passes:
           - [last, contact]
         coverage: partial
 
+    # Ship 89'.b — Link column carries URLs to SIG resources (CSA, OWASP,
+    # ENISA news feeds, etc.). Cite emission binds to sigs_listed — the
+    # linked resource IS the SIG being listed.
+    cite_columns:
+      - fingerprint: [link]
+        binds_to: "item:A.5.6:sigs_listed"
+        alternative_fingerprints:
+          - [url]
+          - [resource]
+        cite_kind: url
+        verification_days: 180
+
 cross_control_links:
   - control: "A.5.7"
     rationale: "Special interest groups feed threat intelligence pipeline"

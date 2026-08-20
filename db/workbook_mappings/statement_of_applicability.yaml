@@ -69,6 +69,24 @@ passes:
         binds_to: "item:6.1.3:soa_all_annex_a"
         coverage: partial
 
+    # Ship 89'.b — declarative cite-mode integration. "Linked Policies /
+    # Processes" names external documents (SharePoint / internal drive).
+    # Emit one external_evidence_source row per (tenant, must_id,
+    # system_id) — the table's UNIQUE constraint collapses the 149 SoA
+    # hyperlinks on this MUST into a single cite. Ship 3' cadence +
+    # verification-log take over the lifecycle. The optional_columns
+    # binding above stays intact — cite emission is auditor-visibility
+    # only, does NOT gate engine posture (stored vs cited separation).
+    cite_columns:
+      - fingerprint: [linked, policies]
+        binds_to: "item:6.1.3:soa_reference"
+        alternative_fingerprints:
+          - [linked, processes]
+          - [reference]
+          - [policy, reference]
+        cite_kind: internal_document
+        verification_days: 365
+
 cross_control_links:
   - control: "6.1.3"
     rationale: "SoA is the authoritative output of clause 6.1.3"

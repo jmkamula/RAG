@@ -416,6 +416,15 @@ class PassProposal:
     warnings: list[str] = field(default_factory=list)
     freshness_column: str | None = None
     freshness_days: int | None = None
+    # Ship 89'.b — cite_columns bindings that matched a header. Keys are
+    # MUST ids, values a dict describing the cite (matched header, cite
+    # kind, verification cadence). workbook_persistence uses this to
+    # emit external_evidence_source rows for cited-mode integration.
+    # Empty when the YAML has no `cite_columns:` block or none matched.
+    # Shape: {must_id: {"header": str, "cite_kind": str,
+    #                    "verification_days": int | None,
+    #                    "system_hint": str | None}}
+    cite_bindings: dict[str, dict] = field(default_factory=dict)
 
 
 @dataclass
@@ -436,11 +445,86 @@ class SheetProposal:
     anchor_decisions: list[dict] = field(default_factory=list)
 
 
+def _cell_column_letter(cell: str) -> str:
+    """'B5' → 'B'. Multi-letter supported ('AA10' → 'AA')."""
+    out = []
+    for ch in cell or "":
+        if ch.isalpha():
+            out.append(ch)
+        else:
+            break
+    return "".join(out).upper()
+
+
+def _cell_row_number(cell: str) -> int | None:
+    """'B5' → 5. None on parse failure."""
+    digits = "".join(ch for ch in (cell or "") if ch.isdigit())
+    if not digits:
+        return None
+    try:
+        return int(digits)
+    except ValueError:
+        return None
+
+
+def _idx_to_column_letter(idx: int) -> str:
+    """0 → 'A', 25 → 'Z', 26 → 'AA'."""
+    result = ""
+    n = idx + 1
+    while n > 0:
+        n, r = divmod(n - 1, 26)
+        result = chr(ord("A") + r) + result
+    return result
+
+
+def _column_has_real_cite_hyperlink(
+    headers: list[str],
+    matched_header: str,
+    header_row: int | None,
+    sheet_hyperlinks: list[dict],
+) -> bool:
+    """True iff any hyperlink cell lives in the matched column on a data
+    row (row > header_row_1based) AND its URL is a real cite (not mailto).
+
+    Ship 89'.b — guards cite_columns emission so an empty column or a
+    mailto-only column (e.g. Access Register PII Systems' owner emails)
+    doesn't produce a spurious external_evidence_source row.
+    """
+    if not sheet_hyperlinks or header_row is None or not matched_header:
+        return False
+    # Find the column INDEX for matched_header (first match wins).
+    try:
+        col_idx = headers.index(matched_header)
+    except ValueError:
+        return False
+    target_letter = _idx_to_column_letter(col_idx)
+    header_row_1based = header_row + 1  # header_row is 0-indexed row number
+    for hl in sheet_hyperlinks:
+        cell = hl.get("cell") or ""
+        col = _cell_column_letter(cell)
+        row = _cell_row_number(cell)
+        if col != target_letter or row is None or row <= header_row_1based:
+            continue
+        url = (hl.get("url") or "").strip()
+        if not url or url.lower().startswith("mailto:"):
+            continue
+        return True
+    return False
+
+
 def evaluate_pass(
     pass_block: dict,
     headers: list[str],
+    *,
+    sheet_hyperlinks: list[dict] | None = None,
+    header_row: int | None = None,
 ) -> PassProposal:
-    """Run a single pass against the detected header row, return proposal."""
+    """Run a single pass against the detected header row, return proposal.
+
+    Ship 89'.b — when sheet_hyperlinks + header_row are provided,
+    cite_columns emission is gated on a real cite hyperlink existing
+    in the matched column on a data row (non-mailto URL).
+    """
     header_tokens = [tokenize(h) for h in headers]
     hits_by_must = _scan_columns(pass_block, headers, header_tokens)
 
@@ -496,6 +580,46 @@ def evaluate_pass(
             prop.warnings.append(
                 "no trigger_columns matched — pass will not extract rows"
             )
+
+    # Ship 89'.b — cite_columns: declarative field binding column
+    # header patterns to MUST ids for cite-mode emission. Cells in
+    # these columns don't gate engine posture; workbook_persistence
+    # reads cite_bindings and INSERTs external_evidence_source rows
+    # tagged with origin_finding_id back to the workbook finding.
+    #
+    # Emission is gated on TWO conditions:
+    #   1. Column header matched (fingerprint)
+    #   2. At least one data-row cell in that column has a real cite
+    #      hyperlink (non-mailto URL). Prevents empty columns or
+    #      mailto-only columns (auditor emails, owner contacts) from
+    #      producing spurious external_evidence_source rows.
+    # When sheet_hyperlinks is not supplied (unit tests, offline
+    # calls), the guard is bypassed — header-match alone emits.
+    for cite in pass_block.get("cite_columns") or []:
+        bt = cite.get("binds_to")
+        if not bt:
+            continue
+        hit = _find_column(
+            cite.get("fingerprint") or [],
+            cite.get("alternative_fingerprints"),
+            header_tokens,
+            headers,
+        )
+        if hit is None:
+            continue
+        _, header = hit
+        # Row-level guard — only when hyperlinks + header_row are known.
+        if sheet_hyperlinks is not None:
+            if not _column_has_real_cite_hyperlink(
+                headers, header, header_row, sheet_hyperlinks,
+            ):
+                continue
+        prop.cite_bindings[bt] = {
+            "header":            header,
+            "cite_kind":         cite.get("cite_kind", "internal_document"),
+            "verification_days": cite.get("verification_days"),
+            "system_hint":       cite.get("system_hint"),
+        }
 
     return prop
 
@@ -597,13 +721,22 @@ def discover_sheet(
     mappings: list[dict],
     *,
     confidence_floor: float = 0.0,
+    sheet_hyperlinks: list[dict] | None = None,
 ) -> list[SheetProposal]:
     """Match a sheet against every mapping; return proposals above the floor.
 
     Most sheets will match 0 or 1 mappings; the loop allows hybrid sheets
     (e.g. a workbook author later adds a second YAML matching the same shape).
+
+    Ship 89'.b — `sheet_hyperlinks` (optional) carries `{cell, url, label}`
+    dicts captured by readers.py::_partition_xlsx_via_unstructured. When
+    supplied, `evaluate_pass` uses them to gate `cite_columns:` emission:
+    a cite is only emitted when the matched column has ≥1 real cite
+    hyperlink (non-mailto) on a data row (row > header_row). Prevents
+    header-only or mailto-only columns from producing cites.
     """
     proposals: list[SheetProposal] = []
+    sheet_hls = sheet_hyperlinks or []
     for mapping in mappings:
         sheet_score = _best_sheet_name_score(sheet_name, mapping)
         if sheet_score <= 0.0:
@@ -657,7 +790,10 @@ def discover_sheet(
         if confidence < confidence_floor:
             continue
 
-        pass_props = [evaluate_pass(p, headers) for p in passes_yaml] if headers else []
+        pass_props = [
+            evaluate_pass(p, headers, sheet_hyperlinks=sheet_hls, header_row=header_row)
+            for p in passes_yaml
+        ] if headers else []
 
         # Sample-row anchor confirmation: only fire in the ambiguous
         # band where fingerprint match alone could be a false positive.
@@ -708,13 +844,25 @@ def discover_workbook(
     *,
     mappings_dir: Path | None = None,
     confidence_floor: float = 0.0,
+    hyperlinks_per_sheet: dict[str, list[dict]] | None = None,
 ) -> list[SheetProposal]:
     """Discover all sheets in a workbook. Caller is responsible for loading rows.
 
     `workbook_rows` is sheet_name → list of rows (each row a list of cell values).
+
+    Ship 89'.b — `hyperlinks_per_sheet` (optional) is a sheet_name →
+    list of `{cell, url, label}` dicts from readers.py. When supplied,
+    `cite_columns:` emission is gated on a real cite hyperlink existing
+    in the matched column on a data row (see
+    `_column_has_real_cite_hyperlink`).
     """
     mappings = load_mappings(mappings_dir)
     all_proposals: list[SheetProposal] = []
+    hl_map = hyperlinks_per_sheet or {}
     for sheet_name, rows in workbook_rows.items():
-        all_proposals.extend(discover_sheet(sheet_name, rows, mappings, confidence_floor=confidence_floor))
+        all_proposals.extend(discover_sheet(
+            sheet_name, rows, mappings,
+            confidence_floor=confidence_floor,
+            sheet_hyperlinks=hl_map.get(sheet_name),
+        ))
     return all_proposals
