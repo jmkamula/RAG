@@ -1,6 +1,6 @@
 # Workbook mapping: Business Partners Assessment sheet
 # LLM-authored by Ship 86'.a (curator sweep 2026-08-19).
-# Confidence: high. Rationale: The sheet lists business partners with assessment details including NDA, access registry, and compliance status, matching the Supplier Register requir
+# Confidence: high. Rationale: The sheet lists business partners with assessment details including NDA, access, training, and compliance status, matching the supplier register requi
 
 schema_version: 1
 mapping_id: workbook.llm_curated.business_partners_assessment
@@ -8,12 +8,12 @@ mapping_id: workbook.llm_curated.business_partners_assessment
 # ── Sheet identification ─────────────────────────────────────────────
 sheet_name_fingerprints:
   - tokens: [business, partners, assessment]
+  - tokens: [partner, assessment, register]
+  - tokens: [supplier, assessment, register]
+  - tokens: [business, partners, register]
   - tokens: [supplier, register]
-  - tokens: [partner, assessment]
-  - tokens: [vendor, assessment]
-  - tokens: [supplier, assessment]
 
-header_row_hints: [1, 2, 3]
+header_row_hints: [1, 2, 3, 4, 5, 6, 7, 8]
 min_data_rows: 1
 
 # ── Extraction passes ─────────────────────────────────────────────────
@@ -24,13 +24,20 @@ passes:
     target_evidence_requirement: "req:A.5.19:supplier_register"
     target_evidence_type: register
 
-    column_bindings:
-      - column_fingerprint: [partner, name]
-        binds_to_must_id: "item:A.5.19:reg_inventory"
-        required: true
-      - column_fingerprint: [access, registry]
-        binds_to_must_id: "item:A.5.19:reg_access_type"
-        required: true
-      - column_fingerprint: [assessed, by]
-        binds_to_must_id: "item:A.5.19:reg_owner"
-        required: true
+    required_columns:
+      - fingerprint: [partner, name]
+        binds_to: "item:A.5.19:reg_inventory"
+
+    optional_columns:
+      - fingerprint: [access, registry]
+        binds_to: "item:A.5.19:reg_access_type"
+        coverage: partial
+      - fingerprint: [overall, status]
+        binds_to: "item:A.5.19:reg_classification"
+        coverage: partial
+      - fingerprint: [assessed, by]
+        binds_to: "item:A.5.19:reg_owner"
+        coverage: partial
+      - fingerprint: [notes]
+        binds_to: "item:A.5.19:reg_supplier_type"
+        coverage: partial

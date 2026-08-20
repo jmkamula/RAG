@@ -1,19 +1,19 @@
 # Workbook mapping: This Doc Chng Control sheet
 # LLM-authored by Ship 86'.a (curator sweep 2026-08-19).
-# Confidence: high. Rationale: The sheet contains document titles, IDs, owners, versions, and language, consistent with a document register or document change control record as requ
+# Confidence: high. Rationale: The sheet contains document titles, IDs, owners, versions, and language, consistent with a document control register required by ISO 27001 clause 7.5.
 
 schema_version: 1
 mapping_id: workbook.llm_curated.this_doc_chng_control
 
 # ── Sheet identification ─────────────────────────────────────────────
 sheet_name_fingerprints:
-  - tokens: [document, register]
   - tokens: [document, control]
+  - tokens: [document, register]
   - tokens: [document, change, control]
   - tokens: [doc, change, control]
   - tokens: [document, management]
 
-header_row_hints: [1, 2, 3]
+header_row_hints: [1, 2, 3, 4, 5, 6, 7, 8]
 min_data_rows: 1
 
 # ── Extraction passes ─────────────────────────────────────────────────
@@ -24,16 +24,19 @@ passes:
     target_evidence_requirement: "req:7.5:isms_document_register"
     target_evidence_type: register
 
-    column_bindings:
-      - column_fingerprint: [title]
-        binds_to_must_id: "item:7.5:reg_title"
-        required: true
-      - column_fingerprint: [document, id]
-        binds_to_must_id: "item:7.5:reg_doc_id"
-        required: true
-      - column_fingerprint: [owner]
-        binds_to_must_id: "item:7.5:reg_owner"
-        required: true
-      - column_fingerprint: [version]
-        binds_to_must_id: "item:7.5:reg_version"
-        required: true
+    required_columns:
+      - fingerprint: [document, id]
+        binds_to: "item:7.5:reg_doc_id"
+      - fingerprint: [title]
+        binds_to: "item:7.5:reg_title"
+
+    optional_columns:
+      - fingerprint: [owner]
+        binds_to: "item:7.5:reg_owner"
+        coverage: partial
+      - fingerprint: [version]
+        binds_to: "item:7.5:reg_version"
+        coverage: partial
+      - fingerprint: [language]
+        binds_to: "item:7.5:reg_classification"
+        coverage: partial

@@ -1,6 +1,6 @@
 # Workbook mapping: Risk Comms Matrix sheet
 # LLM-authored by Ship 86'.a (curator sweep 2026-08-19).
-# Confidence: high. Rationale: The sheet tracks risk-related communications with interested parties, methods, frequency, and status, matching the ISMS Communication Procedure eviden
+# Confidence: high. Rationale: The sheet documents risk-related communication details including parties, methods, frequency, and status, aligning with ISMS Communication Procedure e
 
 schema_version: 1
 mapping_id: workbook.llm_curated.risk_comms_matrix
@@ -10,10 +10,10 @@ sheet_name_fingerprints:
   - tokens: [risk, communications, matrix]
   - tokens: [risk, comms, matrix]
   - tokens: [communication, matrix]
-  - tokens: [risk, communication, register]
-  - tokens: [communication, event, register]
+  - tokens: [risk, communication, plan]
+  - tokens: [communication, plan]
 
-header_row_hints: [1, 2, 3]
+header_row_hints: [1, 2, 3, 4, 5, 6, 7, 8]
 min_data_rows: 1
 
 # ── Extraction passes ─────────────────────────────────────────────────
@@ -24,16 +24,19 @@ passes:
     target_evidence_requirement: "req:7.4:isms_communication_procedure"
     target_evidence_type: communication_event_register
 
-    column_bindings:
-      - column_fingerprint: [risk, id]
-        binds_to_must_id: "item:7.4:what"
-        required: true
-      - column_fingerprint: [interested, party]
-        binds_to_must_id: "item:7.4:with_whom"
-        required: true
-      - column_fingerprint: [comms, method]
-        binds_to_must_id: "item:7.4:how"
-        required: true
-      - column_fingerprint: [frequency]
-        binds_to_must_id: "item:7.4:when"
-        required: true
+    required_columns:
+      - fingerprint: [risk, id]
+        binds_to: "item:7.4:with_whom"
+      - fingerprint: [interested, party]
+        binds_to: "item:7.4:with_whom"
+
+    optional_columns:
+      - fingerprint: [comms, method]
+        binds_to: "item:7.4:how"
+        coverage: partial
+      - fingerprint: [frequency]
+        binds_to: "item:7.4:when"
+        coverage: partial
+      - fingerprint: [status]
+        binds_to: "item:7.4:responsibility"
+        coverage: partial

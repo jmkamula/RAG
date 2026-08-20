@@ -1,6 +1,6 @@
 # Workbook mapping: Competence Records sheet
 # LLM-authored by Ship 86'.a (curator sweep 2026-08-19).
-# Confidence: high. Rationale: The sheet contains employee IDs, roles, competency areas, evaluation dates, assessment scores, and certification details, matching the ISMS Competence
+# Confidence: high. Rationale: The sheet contains employee IDs, roles, competency areas, assessment scores, and certification details matching the ISMS Competence Record requirement
 
 schema_version: 1
 mapping_id: workbook.llm_curated.competence_records
@@ -10,10 +10,12 @@ sheet_name_fingerprints:
   - tokens: [competence, records]
   - tokens: [competence, record]
   - tokens: [employee, competence]
-  - tokens: [training, records]
   - tokens: [skills, assessment]
+  # Removed [training, records] — false-positive overlap with A.6.3
+  # Training & Awareness Record sheet, which has a different column
+  # shape (attendance-based, not competence-based). Ship 89'.a audit.
 
-header_row_hints: [1, 2, 3]
+header_row_hints: [1, 2, 3, 4, 5, 6, 7, 8]
 min_data_rows: 1
 
 # ── Extraction passes ─────────────────────────────────────────────────
@@ -24,31 +26,32 @@ passes:
     target_evidence_requirement: "req:7.2:competence_record"
     target_evidence_type: register
 
-    column_bindings:
-      - column_fingerprint: [employees, id]
-        binds_to_must_id: "item:7.2:owner"
-        required: true
-      - column_fingerprint: [role]
-        binds_to_must_id: "item:7.2:required_competence"
-        required: true
-      - column_fingerprint: [competency, area]
-        binds_to_must_id: "item:7.2:basis_of_competence"
-        required: true
-      - column_fingerprint: [assesment, score]
-        binds_to_must_id: "item:7.2:effectiveness"
-        required: true
-      - column_fingerprint: [certification, name]
-        binds_to_must_id: "item:7.2:basis_of_competence"
-        required: false
-      - column_fingerprint: [certification, expiry]
-        binds_to_must_id: "item:7.2:basis_of_competence"
-        required: false
-      - column_fingerprint: [training, required]
-        binds_to_must_id: "item:7.2:basis_of_competence"
-        required: false
-      - column_fingerprint: [evaluation, date]
-        binds_to_must_id: "item:7.2:effectiveness"
-        required: false
-      - column_fingerprint: [next, review, date]
-        binds_to_must_id: "item:7.2:documented"
-        required: false
+    required_columns:
+      - fingerprint: [employee, id]
+        binds_to: "item:7.2:documented"
+      - fingerprint: [employee, name]
+        binds_to: "item:7.2:owner"
+      - fingerprint: [role]
+        binds_to: "item:7.2:required_competence"
+      - fingerprint: [competency, area]
+        binds_to: "item:7.2:basis_of_competence"
+
+    optional_columns:
+      - fingerprint: [evaluation, date]
+        binds_to: "item:7.2:effectiveness"
+        coverage: partial
+      - fingerprint: [assesment, score]
+        binds_to: "item:7.2:effectiveness"
+        coverage: partial
+      - fingerprint: [training, required]
+        binds_to: "item:7.2:basis_of_competence"
+        coverage: partial
+      - fingerprint: [certification, name]
+        binds_to: "item:7.2:basis_of_competence"
+        coverage: partial
+      - fingerprint: [certification, expiry, date]
+        binds_to: "item:7.2:basis_of_competence"
+        coverage: partial
+      - fingerprint: [next, review, date]
+        binds_to: "item:7.2:effectiveness"
+        coverage: partial

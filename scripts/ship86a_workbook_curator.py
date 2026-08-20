@@ -156,20 +156,50 @@ Rules:
 
 _PASS2_SYSTEM = """You are a compliance auditor binding columns of a workbook sheet to specific MUSTs of one evidence-requirement leaf.
 
-Return strict JSON:
+Return strict JSON with TWO lists — required_columns and optional_columns:
+
 {
-  "column_bindings": [
-    {"column_hint": ["employee", "id"], "must_id": "item:7.2:owner", "required": true},
-    {"column_hint": ["role"],           "must_id": "item:7.2:required_competence", "required": true},
-    ...
+  "required_columns": [
+    {"column_hint": ["received", "date"], "must_id": "item:Art.15:reg_received_date"},
+    {"column_hint": ["requester"],        "must_id": "item:Art.15:reg_requester"}
+  ],
+  "optional_columns": [
+    {"column_hint": ["scope"],        "must_id": "item:Art.15:reg_scope"},
+    {"column_hint": ["response", "date"], "must_id": "item:Art.15:reg_response_date"},
+    {"column_hint": ["outcome"],      "must_id": "item:Art.15:reg_outcome"}
   ]
 }
 
-Rules:
+CORROBORATION DISCIPLINE (this is what real auditors apply):
+
+- required_columns = ANCHOR columns. Without at least one populated,
+  the row does not prove it IS this artefact. These are the columns
+  where "if this is empty, the row shouldn't count." Typical examples:
+    * DSAR register → received_date + requester (row IS a DSAR)
+    * Asset register → asset_id + asset_name (row IS an asset)
+    * Risk register → risk_id + risk_description (row IS a risk)
+  MUSTs bound ONLY via required_columns surface as `status='present'`.
+
+- optional_columns = CORROBORATION columns. Populated → adds
+  auditor-grade completeness (owner, status, dates, downstream refs).
+  Empty → the row exists but lacks depth. These MUSTs surface as
+  `status='partial'` when no other binding fires. Typical examples:
+    * DSAR register → scope, response_date, timing_flag, outcome
+    * Asset register → location, criticality, retention_class
+    * Risk register → treatment_plan, residual_score, review_date
+
+RULES:
 - Use ONLY must_ids from the provided MUSTs list (verbatim; do not invent)
-- column_hint: 1-3 lowercase tokens that would appear in the column header
-- required=true if the column MUST be present for the sheet to count as evidence
-- Skip columns that don't map to any provided MUST (rather than force a bad binding)"""
+- column_hint: 1-3 lowercase tokens that would appear in the header
+- Every MUST should appear in EXACTLY ONE of the two lists (required
+  or optional), matching its auditor role. If unsure, default to
+  optional_columns — partial credit is auditor-safe; falsely marking
+  a corroboration column as required inflates precision.
+- Skip MUSTs with no plausible column mapping — do NOT invent columns
+  to complete the list. It's fine to end with required=1 optional=0
+  if the sheet is a single-topic register.
+- Fingerprint tokens should be lowercase, singular where possible,
+  and stemmed by the tokenizer (asset_id → ["asset","id"])."""
 
 
 def curate_sheet(
@@ -288,17 +318,25 @@ def curate_sheet(
                 p2 = json.loads(resp2.text or "{}")
             except json.JSONDecodeError as e:
                 return {"error": f"Pass 2 JSON parse: {e}", "sheet_name": sheet_name}
-            # Validate bindings against real MUST ids
+            # Validate bindings against real MUST ids — separately for
+            # required + optional lists. Ship 89'.a rewrite of the Pass 2
+            # schema: emits required_columns + optional_columns matching
+            # the canonical workbook_discovery._scan_columns shape.
             real_must_ids = {r["id"] for r in musts_rows}
-            for cb in (p2.get("column_bindings") or []):
-                mid = cb.get("must_id")
-                if mid in real_must_ids:
-                    column_bindings.append(cb)
+            required_cols: list = []
+            optional_cols: list = []
+            for cb in (p2.get("required_columns") or []):
+                if cb.get("must_id") in real_must_ids:
+                    required_cols.append(cb)
+            for cb in (p2.get("optional_columns") or []):
+                if cb.get("must_id") in real_must_ids:
+                    optional_cols.append(cb)
 
     dt = time.time() - t0
     curated = {
         **p1,
-        "column_bindings": column_bindings,
+        "required_columns": required_cols if target_leaf and target_leaf != "not_applicable" else [],
+        "optional_columns": optional_cols if target_leaf and target_leaf != "not_applicable" else [],
     }
 
     # Render YAML in canonical shape
@@ -317,7 +355,10 @@ def curate_sheet(
     for fp in curated.get("sheet_name_fingerprints", []) or []:
         yaml_lines.append(f"  - tokens: [{', '.join(str(t) for t in fp)}]")
     yaml_lines.append("")
-    yaml_lines.append("header_row_hints: [1, 2, 3]")
+    # Wider hints tolerate banner-heavy sheets (title + purpose + scope +
+    # frequency + requirements rows before the actual header) — Ship 89'.a
+    # audit found Business Partners Assessment has its header on row 7.
+    yaml_lines.append("header_row_hints: [1, 2, 3, 4, 5, 6, 7, 8]")
     yaml_lines.append("min_data_rows: 1")
     yaml_lines.append("")
     yaml_lines.append("# ── Extraction passes ─────────────────────────────────────────────────")
@@ -328,15 +369,27 @@ def curate_sheet(
     yaml_lines.append(f"    target_evidence_requirement: \"{curated.get('target_evidence_requirement', '')}\"")
     yaml_lines.append(f"    target_evidence_type: {curated.get('target_evidence_type', 'register')}")
     yaml_lines.append("")
-    yaml_lines.append("    column_bindings:")
-    for cb in curated.get("column_bindings", []) or []:
-        hint = cb.get("column_hint") or []
-        must_id = cb.get("must_id") or ""
-        required = cb.get("required", False)
-        yaml_lines.append(f"      - column_fingerprint: [{', '.join(str(t) for t in hint)}]")
-        yaml_lines.append(f"        binds_to_must_id: \"{must_id}\"")
-        yaml_lines.append(f"        required: {str(required).lower()}")
-    yaml_lines.append("")
+    # Ship 89'.a — canonical shape: required_columns + optional_columns
+    # (coverage:partial on optional per the audit's discipline).
+    req_cols = curated.get("required_columns", []) or []
+    opt_cols = curated.get("optional_columns", []) or []
+    if req_cols:
+        yaml_lines.append("    required_columns:")
+        for cb in req_cols:
+            hint = cb.get("column_hint") or []
+            must_id = cb.get("must_id") or ""
+            yaml_lines.append(f"      - fingerprint: [{', '.join(str(t) for t in hint)}]")
+            yaml_lines.append(f"        binds_to: \"{must_id}\"")
+        yaml_lines.append("")
+    if opt_cols:
+        yaml_lines.append("    optional_columns:")
+        for cb in opt_cols:
+            hint = cb.get("column_hint") or []
+            must_id = cb.get("must_id") or ""
+            yaml_lines.append(f"      - fingerprint: [{', '.join(str(t) for t in hint)}]")
+            yaml_lines.append(f"        binds_to: \"{must_id}\"")
+            yaml_lines.append(f"        coverage: partial")
+        yaml_lines.append("")
 
     yaml_text = "\n".join(yaml_lines)
     stats = {
@@ -345,14 +398,23 @@ def curate_sheet(
         "confidence":      curated.get("confidence"),
         "target_leaf":     curated.get("target_evidence_requirement"),
         "n_fingerprints":  len(curated.get("sheet_name_fingerprints", []) or []),
-        "n_column_bindings": len(curated.get("column_bindings", []) or []),
+        "n_required_cols": len(req_cols),
+        "n_optional_cols": len(opt_cols),
     }
 
     output_path = None
-    if not dry_run:
+    # Ship 89'.a — skip writing not_applicable / empty-target YAMLs.
+    # These would fail scripts/validate_workbook_mappings.py at persist
+    # time (empty target_evidence_requirement) and abort the whole
+    # workbook_persistence batch. Ship 86'.b Lesson 84 codified this,
+    # but the guard belongs in the curator, not in downstream cleanup.
+    is_applicable = bool(target_leaf) and target_leaf != "not_applicable"
+    if not dry_run and is_applicable:
         output_path = WORKBOOK_MAPPINGS_DIR / f"ship86_{slug}.yaml"
         output_path.write_text(yaml_text)
         stats["output_path"] = str(output_path.name)
+    elif not is_applicable:
+        stats["skipped"] = "not_applicable — no compliance target"
 
     return {"stats": stats, "yaml_text": yaml_text, "output_path": output_path}
 
@@ -424,10 +486,13 @@ def main():
             continue
         stats = result["stats"]
         print(f"  target={stats['target_leaf']} conf={stats['confidence']} "
-              f"fps={stats['n_fingerprints']} binds={stats['n_column_bindings']} "
+              f"fps={stats['n_fingerprints']} "
+              f"req={stats.get('n_required_cols', 0)}/opt={stats.get('n_optional_cols', 0)} "
               f"elapsed={stats['elapsed_s']}s")
         if stats.get("output_path"):
             print(f"  wrote → {stats['output_path']}")
+        elif stats.get("skipped"):
+            print(f"  SKIPPED — {stats['skipped']}")
         total_ok += 1
 
     print(f"\n=== DONE ===")
