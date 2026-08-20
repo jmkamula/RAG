@@ -36,6 +36,13 @@ passes:
         binds_to: "item:A.7.5.1:reg_basis_cited"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [basis, cited]
+        binds_to: "item:A.7.5.1:reg_basis_cited"
+        cite_kind: url
+        verification_days: 365
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

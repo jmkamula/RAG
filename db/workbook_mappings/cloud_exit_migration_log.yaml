@@ -50,6 +50,17 @@ passes:
         binds_to: "item:A.5.23:exit_handover"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [migration, plan]
+        binds_to: "item:A.5.23:exit_migration_plan"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [data, deletion]
+        binds_to: "item:A.5.23:exit_data_deletion"
+        cite_kind: internal_document
+        verification_days: 365
+
 cross_control_links:
   - control: "A.5.19"
     rationale: "Cloud-supplier exits trigger supplier offboarding lifecycle"

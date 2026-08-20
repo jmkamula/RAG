@@ -124,6 +124,17 @@ passes:
       - fingerprint: [active]
         binds_to: "item:A.6.6:reg_expiry_or_active"
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [certificate]
+        binds_to: "item:A.6.3:reg_status"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [proof, completion]
+        binds_to: "item:A.6.3:reg_status"
+        cite_kind: internal_document
+        verification_days: 365
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

@@ -39,6 +39,17 @@ passes:
         binds_to: "item:Art.37:reg_employment_type"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [qualifications, evidence]
+        binds_to: "item:Art.37:reg_qualifications_evidence"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [publication, evidence]
+        binds_to: "item:Art.37:reg_publication_evidence"
+        cite_kind: url
+        verification_days: 180
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

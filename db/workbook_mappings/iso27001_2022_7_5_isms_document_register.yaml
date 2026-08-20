@@ -51,6 +51,13 @@ passes:
         binds_to: "item:7.5:reg_classification"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [doc, link]
+        binds_to: "item:7.5:reg_doc_id"
+        cite_kind: internal_document
+        verification_days: 365
+
     # Sample-row anchor: document registers carry approval-date / next-
     # review-date columns that should contain real dates. A title-match
     # without real dates is a false positive.

@@ -156,7 +156,7 @@ Rules:
 
 _PASS2_SYSTEM = """You are a compliance auditor binding columns of a workbook sheet to specific MUSTs of one evidence-requirement leaf.
 
-Return strict JSON with TWO lists — required_columns and optional_columns:
+Return strict JSON with THREE lists — required_columns, optional_columns, cite_columns:
 
 {
   "required_columns": [
@@ -167,6 +167,10 @@ Return strict JSON with TWO lists — required_columns and optional_columns:
     {"column_hint": ["scope"],        "must_id": "item:Art.15:reg_scope"},
     {"column_hint": ["response", "date"], "must_id": "item:Art.15:reg_response_date"},
     {"column_hint": ["outcome"],      "must_id": "item:Art.15:reg_outcome"}
+  ],
+  "cite_columns": [
+    {"column_hint": ["policy", "reference"], "must_id": "item:Art.15:reg_policy_ref",
+     "cite_kind": "internal_document", "verification_days": 365}
   ]
 }
 
@@ -188,16 +192,31 @@ CORROBORATION DISCIPLINE (this is what real auditors apply):
     * Asset register → location, criticality, retention_class
     * Risk register → treatment_plan, residual_score, review_date
 
+- cite_columns = CITATION columns. The cell contains a POINTER to
+  external evidence (SharePoint policy URL, external system, public
+  regulator URL) — the workbook row doesn't hold the evidence itself,
+  it references where the evidence lives. Typical column names:
+  "Policy Reference", "Evidence Link", "Doc URL", "Reference Sheet",
+  "Proof of Completion", "Source", "Supporting Document".
+  Cite emission uses Ship 3' cite-mode (external_evidence_source +
+  Ship 3'.g cite_verification_overdue notification) — separate from
+  engine posture. Fields per entry:
+    * cite_kind: "internal_document" (SharePoint / internal drive) |
+                 "url" (public web) | "external_system" (Okta / Odoo)
+    * verification_days: 90-730 typical (default 365)
+  Skip cite_columns if the register has no citation shape (all
+  in-sheet data). Attestation-only registers, single-topic logs, and
+  matrices typically have no cite column.
+
 RULES:
 - Use ONLY must_ids from the provided MUSTs list (verbatim; do not invent)
 - column_hint: 1-3 lowercase tokens that would appear in the header
-- Every MUST should appear in EXACTLY ONE of the two lists (required
-  or optional), matching its auditor role. If unsure, default to
-  optional_columns — partial credit is auditor-safe; falsely marking
-  a corroboration column as required inflates precision.
+- Each MUST appears in AT MOST ONE list (required XOR optional). A
+  cite_columns entry MAY bind a MUST that also appears in required or
+  optional — cite is auditor provenance, not evidence collision.
 - Skip MUSTs with no plausible column mapping — do NOT invent columns
   to complete the list. It's fine to end with required=1 optional=0
-  if the sheet is a single-topic register.
+  cite=0 if the sheet is a single-topic register.
 - Fingerprint tokens should be lowercase, singular where possible,
   and stemmed by the tokenizer (asset_id → ["asset","id"])."""
 
@@ -319,24 +338,41 @@ def curate_sheet(
             except json.JSONDecodeError as e:
                 return {"error": f"Pass 2 JSON parse: {e}", "sheet_name": sheet_name}
             # Validate bindings against real MUST ids — separately for
-            # required + optional lists. Ship 89'.a rewrite of the Pass 2
-            # schema: emits required_columns + optional_columns matching
-            # the canonical workbook_discovery._scan_columns shape.
+            # required + optional + cite lists. Ship 89'.a rewrite of
+            # the Pass 2 schema: emits required_columns + optional_columns
+            # matching the canonical workbook_discovery._scan_columns
+            # shape. Ship 90'.a extends with cite_columns (Ship 89'.b
+            # cite-mode integration).
             real_must_ids = {r["id"] for r in musts_rows}
             required_cols: list = []
             optional_cols: list = []
+            cite_cols: list     = []
+            _VALID_CITE_KINDS = {"internal_document", "url", "external_system"}
             for cb in (p2.get("required_columns") or []):
                 if cb.get("must_id") in real_must_ids:
                     required_cols.append(cb)
             for cb in (p2.get("optional_columns") or []):
                 if cb.get("must_id") in real_must_ids:
                     optional_cols.append(cb)
+            for cb in (p2.get("cite_columns") or []):
+                if cb.get("must_id") not in real_must_ids:
+                    continue
+                # cite_kind + verification_days validated on emission
+                ck = (cb.get("cite_kind") or "internal_document").strip()
+                if ck not in _VALID_CITE_KINDS:
+                    ck = "internal_document"
+                cb["cite_kind"] = ck
+                vd = cb.get("verification_days")
+                if not isinstance(vd, int) or vd < 30 or vd > 3650:
+                    cb["verification_days"] = 365
+                cite_cols.append(cb)
 
     dt = time.time() - t0
     curated = {
         **p1,
         "required_columns": required_cols if target_leaf and target_leaf != "not_applicable" else [],
         "optional_columns": optional_cols if target_leaf and target_leaf != "not_applicable" else [],
+        "cite_columns":     cite_cols     if target_leaf and target_leaf != "not_applicable" else [],
     }
 
     # Render YAML in canonical shape
@@ -391,6 +427,21 @@ def curate_sheet(
             yaml_lines.append(f"        coverage: partial")
         yaml_lines.append("")
 
+    # Ship 90'.a — cite_columns for Ship 89'.b cite-mode integration.
+    cite_cols_out = curated.get("cite_columns", []) or []
+    if cite_cols_out:
+        yaml_lines.append("    cite_columns:")
+        for cb in cite_cols_out:
+            hint = cb.get("column_hint") or []
+            must_id = cb.get("must_id") or ""
+            ck = cb.get("cite_kind") or "internal_document"
+            vd = cb.get("verification_days") or 365
+            yaml_lines.append(f"      - fingerprint: [{', '.join(str(t) for t in hint)}]")
+            yaml_lines.append(f"        binds_to: \"{must_id}\"")
+            yaml_lines.append(f"        cite_kind: {ck}")
+            yaml_lines.append(f"        verification_days: {vd}")
+        yaml_lines.append("")
+
     yaml_text = "\n".join(yaml_lines)
     stats = {
         "sheet_name":      sheet_name,
@@ -400,6 +451,7 @@ def curate_sheet(
         "n_fingerprints":  len(curated.get("sheet_name_fingerprints", []) or []),
         "n_required_cols": len(req_cols),
         "n_optional_cols": len(opt_cols),
+        "n_cite_cols":     len(cite_cols_out),
     }
 
     output_path = None
@@ -487,7 +539,7 @@ def main():
         stats = result["stats"]
         print(f"  target={stats['target_leaf']} conf={stats['confidence']} "
               f"fps={stats['n_fingerprints']} "
-              f"req={stats.get('n_required_cols', 0)}/opt={stats.get('n_optional_cols', 0)} "
+              f"req={stats.get('n_required_cols', 0)}/opt={stats.get('n_optional_cols', 0)}/cite={stats.get('n_cite_cols', 0)} "
               f"elapsed={stats['elapsed_s']}s")
         if stats.get("output_path"):
             print(f"  wrote → {stats['output_path']}")

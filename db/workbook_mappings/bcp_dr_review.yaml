@@ -75,6 +75,17 @@ passes:
         binds_to: "item:A.5.29:rev_actions"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [review, report]
+        binds_to: "item:A.5.29:rev_actions"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [meeting, minutes]
+        binds_to: "item:A.5.29:rev_reviewer"
+        cite_kind: internal_document
+        verification_days: 365
+
 cross_control_links:
   - control: "A.5.30"
     rationale: "ICT readiness (A.5.30) is the technical sibling of A.5.29"

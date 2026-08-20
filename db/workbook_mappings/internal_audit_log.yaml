@@ -75,6 +75,13 @@ passes:
       - fingerprint: [next, review]
         binds_to: "item:9.2:rev_next_date"
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [review, report]
+        binds_to: "item:9.2:rev_completion"
+        cite_kind: internal_document
+        verification_days: 365
+
 # ── Cross-control links ──────────────────────────────────────────────────
 cross_control_links:
   - control: "10.1"

@@ -37,6 +37,13 @@ passes:
         binds_to: "item:Art.45:reg_last_verified"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [decision, reference]
+        binds_to: "item:Art.45:reg_adequacy_decision"
+        cite_kind: url
+        verification_days: 365
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

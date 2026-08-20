@@ -36,6 +36,17 @@ passes:
         binds_to: "item:A.7.7:reg_remediation"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [audit, report]
+        binds_to: "item:A.7.7:reg_audit_id"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [finding, reference]
+        binds_to: "item:A.7.7:reg_findings"
+        cite_kind: internal_document
+        verification_days: 365
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

@@ -48,6 +48,17 @@ passes:
         binds_to: "item:A.5.21:eol_verification"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [verification]
+        binds_to: "item:A.5.21:eol_verification"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [authoriser]
+        binds_to: "item:A.5.21:eol_authoriser"
+        cite_kind: internal_document
+        verification_days: 365
+
 cross_control_links:
   - control: "A.5.19"
     rationale: "ICT EOL may coincide with supplier offboarding"

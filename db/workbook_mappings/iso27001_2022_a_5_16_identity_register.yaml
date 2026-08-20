@@ -43,6 +43,13 @@ passes:
         binds_to: "item:A.5.16:reg_service_expiry"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [hr, link]
+        binds_to: "item:A.5.16:reg_hr_link"
+        cite_kind: internal_document
+        verification_days: 365
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

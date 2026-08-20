@@ -68,6 +68,17 @@ passes:
           - [next, review, date]
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [review, report]
+        binds_to: "item:A.5.36:findings"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [meeting, minutes]
+        binds_to: "item:A.5.36:corrective_actions"
+        cite_kind: internal_document
+        verification_days: 365
+
 cross_control_links:
   - control: "10.1"
     rationale: "Quarterly review findings feed improvement actions"

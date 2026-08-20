@@ -40,6 +40,13 @@ passes:
         binds_to: "item:Art.28:reg_security_check"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [security, check]
+        binds_to: "item:Art.28:reg_security_check"
+        cite_kind: internal_document
+        verification_days: 365
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

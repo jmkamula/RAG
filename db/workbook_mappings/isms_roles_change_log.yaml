@@ -44,6 +44,17 @@ passes:
         binds_to: "item:5.3:chg_comms"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [approval, doc]
+        binds_to: "item:5.3:chg_approval"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [change, doc, record]
+        binds_to: "item:5.3:chg_comms"
+        cite_kind: internal_document
+        verification_days: 365
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

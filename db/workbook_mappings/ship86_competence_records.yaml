@@ -55,3 +55,10 @@ passes:
       - fingerprint: [next, review, date]
         binds_to: "item:7.2:effectiveness"
         coverage: partial
+
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [certification, name]
+        binds_to: "item:7.2:basis_of_competence"
+        cite_kind: internal_document
+        verification_days: 365

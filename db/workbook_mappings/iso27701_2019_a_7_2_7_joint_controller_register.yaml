@@ -44,6 +44,17 @@ passes:
         binds_to: "item:A.7.2.7:reg_effective_dates"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [document, reference]
+        binds_to: "item:A.7.2.7:reg_document_reference"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [essence, url]
+        binds_to: "item:A.7.2.7:reg_essence_url"
+        cite_kind: url
+        verification_days: 365
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

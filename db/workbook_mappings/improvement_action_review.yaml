@@ -64,6 +64,17 @@ passes:
         binds_to: "item:10.1:rev_closure_quality"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [review, report]
+        binds_to: "item:10.1:rev_closure_quality"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [meeting, minutes]
+        binds_to: "item:10.1:rev_closure_quality"
+        cite_kind: internal_document
+        verification_days: 365
+
 cross_control_links:
   - control: "10.2"
     rationale: "NCs (10.2) are one source of improvement actions"

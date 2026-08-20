@@ -62,6 +62,13 @@ passes:
         binds_to: "item:6.2:rev_currency"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [review, report]
+        binds_to: "item:6.2:rev_date"
+        cite_kind: internal_document
+        verification_days: 365
+
 cross_control_links:
   - control: "5.2"
     rationale: "Objectives derive from the information-security policy (5.2)"

@@ -55,6 +55,17 @@ passes:
         binds_to: "item:9.2:rec_handoff"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [audit, report]
+        binds_to: "item:9.2:rec_audit_id"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [finding, reference]
+        binds_to: "item:9.2:rec_findings"
+        cite_kind: internal_document
+        verification_days: 365
+
 cross_control_links:
   - control: "10.2"
     rationale: "Audit findings populate the nonconformity register"

@@ -42,6 +42,17 @@ passes:
         binds_to: "item:A.5.31:obligation_type"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [requirement, url]
+        binds_to: "item:A.5.31:laws_listed"
+        cite_kind: url
+        verification_days: 180
+      - fingerprint: [linked, policies]
+        binds_to: "item:A.5.31:compliance_approach"
+        cite_kind: internal_document
+        verification_days: 365
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

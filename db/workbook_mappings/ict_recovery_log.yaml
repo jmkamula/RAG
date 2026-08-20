@@ -55,6 +55,13 @@ passes:
         binds_to: "item:A.5.30:rec_signoff"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [signoff]
+        binds_to: "item:A.5.30:rec_signoff"
+        cite_kind: internal_document
+        verification_days: 365
+
 cross_control_links:
   - control: "A.5.29"
     rationale: "ICT recovery pairs with continuity plan activation"

@@ -46,6 +46,13 @@ passes:
         binds_to: "item:Art.24:reg_last_assessed"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [implementing, artefact]
+        binds_to: "item:Art.24:reg_implementing_artefact"
+        cite_kind: internal_document
+        verification_days: 365
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

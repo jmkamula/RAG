@@ -75,6 +75,17 @@ passes:
       - fingerprint: [role]
         binds_to: "item:7.2:owner"
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [certificate]
+        binds_to: "item:7.2:documented"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [training, record]
+        binds_to: "item:7.2:documented"
+        cite_kind: internal_document
+        verification_days: 365
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

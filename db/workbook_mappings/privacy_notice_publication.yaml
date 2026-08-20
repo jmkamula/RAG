@@ -58,6 +58,13 @@ passes:
       - fingerprint: [change, summary]
         binds_to: "item:Art.13:rec_change_summary"
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [url]
+        binds_to: "item:Art.13:rec_publication_url"
+        cite_kind: url
+        verification_days: 365
+
 cross_control_links:
   - control: "Art.14"
     rationale: "Art.14 (data not from subject) shares the same publication discipline"

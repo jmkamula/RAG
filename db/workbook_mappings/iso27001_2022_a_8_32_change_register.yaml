@@ -37,6 +37,13 @@ passes:
         binds_to: "item:A.8.32:reg_emergency_flag"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [approval, lineage]
+        binds_to: "item:A.8.32:reg_approval_lineage"
+        cite_kind: internal_document
+        verification_days: 365
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

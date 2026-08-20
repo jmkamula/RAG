@@ -58,6 +58,17 @@ passes:
         binds_to: "item:A.5.19:off_transition"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [data, return, doc]
+        binds_to: "item:A.5.19:off_data_return"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [access, removal, evidence]
+        binds_to: "item:A.5.19:off_access_removal"
+        cite_kind: internal_document
+        verification_days: 365
+
 cross_control_links:
   - control: "A.5.20"
     rationale: "Offboarding triggered by agreement (A.5.20) termination clauses"

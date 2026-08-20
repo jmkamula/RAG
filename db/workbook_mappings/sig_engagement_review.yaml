@@ -62,6 +62,17 @@ passes:
       - fingerprint: [next, review, date]
         binds_to: "item:A.5.6:rev_next_date"
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [review, report]
+        binds_to: "item:A.5.6:rev_per_entry"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [meeting, minutes]
+        binds_to: "item:A.5.6:rev_per_entry"
+        cite_kind: internal_document
+        verification_days: 365
+
 cross_control_links:
   - control: "A.5.5"
     rationale: "Authority-contact register (A.5.5) often lives alongside SIG register"

@@ -68,6 +68,17 @@ passes:
           - [dpo]
           - [privacy, lead]
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [consent, link]
+        binds_to: "item:Art.6:consent_link"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [lia, link]
+        binds_to: "item:Art.6:lia_link"
+        cite_kind: internal_document
+        verification_days: 365
+
 cross_control_links:
   - control: "Art.7"
     rationale: "Consent-based activities link to Art.7 consent register"

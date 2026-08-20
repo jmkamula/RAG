@@ -40,6 +40,13 @@ passes:
         binds_to: "item:A.7.3.1:reg_sla"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [citation]
+        binds_to: "item:A.7.3.1:reg_citation"
+        cite_kind: url
+        verification_days: 180
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

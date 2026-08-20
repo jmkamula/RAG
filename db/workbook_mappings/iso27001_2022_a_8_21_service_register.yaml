@@ -35,6 +35,17 @@ passes:
         binds_to: "item:A.8.21:reg_last_reviewed"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [sla, performance]
+        binds_to: "item:A.8.21:reg_sla_performance"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [provider, contract]
+        binds_to: "item:A.8.21:reg_provider"
+        cite_kind: internal_document
+        verification_days: 365
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

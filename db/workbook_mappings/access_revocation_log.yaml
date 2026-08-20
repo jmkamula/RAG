@@ -67,6 +67,17 @@ passes:
         binds_to: "item:A.5.18:rev_completeness"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [disabled, proof]
+        binds_to: "item:A.5.18:rev_disabled_proof"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [evidence]
+        binds_to: "item:A.5.18:rev_disabled_proof"
+        cite_kind: internal_document
+        verification_days: 365
+
     # Sample-row anchor: revocation logs have per-row dates. A title-
     # match where the date column holds free-text is a false positive.
     sample_value_anchors:

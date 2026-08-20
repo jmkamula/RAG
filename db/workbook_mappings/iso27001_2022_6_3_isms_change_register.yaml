@@ -44,6 +44,17 @@ passes:
         binds_to: "item:6.3:reg_status"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [approval, ref]
+        binds_to: "item:6.3:reg_approval"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [change, doc, link]
+        binds_to: "item:6.3:reg_change_id"
+        cite_kind: internal_document
+        verification_days: 365
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

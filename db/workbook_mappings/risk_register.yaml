@@ -107,6 +107,13 @@ passes:
       - fingerprint: [issue, ref]
         binds_to: "item:6.1.2:reg_4_1_link"
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [treatment, plan]
+        binds_to: "item:6.1.2:reg_treatment_status"
+        cite_kind: internal_document
+        verification_days: 365
+
 # ── Pointer columns ──────────────────────────────────────────────────────
 pointer_columns: []
 

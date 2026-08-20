@@ -57,6 +57,13 @@ passes:
         binds_to: "item:Art.24:role_review_trigger"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [contract]
+        binds_to: "item:Art.24:role_contract_link"
+        cite_kind: internal_document
+        verification_days: 365
+
 cross_control_links:
   - control: "Art.26"
     rationale: "Joint controller decisions link to Art.26 arrangements"

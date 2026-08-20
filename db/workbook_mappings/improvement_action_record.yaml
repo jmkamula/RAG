@@ -51,6 +51,13 @@ passes:
         binds_to: "item:A.5.27:imp_evidence"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [evidence]
+        binds_to: "item:A.5.27:imp_evidence"
+        cite_kind: internal_document
+        verification_days: 365
+
 cross_control_links:
   - control: "A.5.26"
     rationale: "Lessons-learned register feeds from incident closure (A.5.26)"

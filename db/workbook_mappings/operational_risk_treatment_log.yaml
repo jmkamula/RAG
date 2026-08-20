@@ -60,6 +60,17 @@ passes:
         binds_to: "item:8.3:soa_link"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [soa, link]
+        binds_to: "item:8.3:plan_implemented"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [control, ref]
+        binds_to: "item:8.3:plan_implemented"
+        cite_kind: internal_document
+        verification_days: 365
+
 cross_control_links:
   - control: "6.1.3"
     rationale: "Operational treatment executes the 6.1.3 RTP per item"

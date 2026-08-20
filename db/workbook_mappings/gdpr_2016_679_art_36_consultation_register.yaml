@@ -43,6 +43,13 @@ passes:
         binds_to: "item:Art.36:reg_decision_to_proceed"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [dpia, xref]
+        binds_to: "item:Art.36:reg_dpia_xref"
+        cite_kind: internal_document
+        verification_days: 365
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

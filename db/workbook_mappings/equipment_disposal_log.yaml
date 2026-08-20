@@ -64,6 +64,13 @@ passes:
         binds_to: "item:A.7.14:disp_software_step"
         coverage: partial
 
+    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
+    cite_columns:
+      - fingerprint: [certificate]
+        binds_to: "item:A.7.14:disp_certificate"
+        cite_kind: internal_document
+        verification_days: 365
+
 cross_control_links:
   - control: "A.5.9"
     rationale: "Equipment ID cross-links to A.5.9 asset register"
