@@ -3894,18 +3894,20 @@ async function loadDashboard() {
   const wrap = document.getElementById('dash-wrap');
   wrap.innerHTML = '<div class="dash-empty"><i class="ti ti-loader-2"></i><p>Loading posture…</p></div>';
   try {
-    const [d, freshness, implications, followupsPending, followupsOverdue, kpis] = await Promise.all([
+    const [d, freshness, implications, followupsPending, followupsOverdue, kpis, attestations] = await Promise.all([
       api('/api/v1/dashboard/posture'),
       api('/api/v1/dashboard/cites/needs-verification').catch(() => null),
       api('/api/v1/tenant/triggered-implications?status=pending').catch(() => null),
       api('/api/v1/tenant/expected-followups?status=pending').catch(() => null),
       api('/api/v1/tenant/expected-followups?status=overdue').catch(() => null),
       api('/api/v1/dashboard/cascade-kpis').catch(() => null),
+      // Ship 92'.c — cite attestation prompts pending tenant confirmation
+      api('/api/v1/cite-attestations/pending').catch(() => null),
     ]);
     dashData = d;
     renderDashboard(d, freshness, implications,
                     {pending: followupsPending, overdue: followupsOverdue},
-                    kpis);
+                    kpis, attestations);
   } catch (e) {
     wrap.innerHTML = '<div class="dash-empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load your posture. Please refresh in a moment.</p></div>';
   }
@@ -3916,7 +3918,7 @@ const _FINDING_CLASS = {
   'N/A': 'f-NA', 'Not assessed': 'f-NotAssessed'
 };
 
-function renderDashboard(d, freshness, implications, followups, kpis) {
+function renderDashboard(d, freshness, implications, followups, kpis, attestations) {
   const wrap = document.getElementById('dash-wrap');
   if (!d.frameworks || !d.frameworks.length) {
     wrap.innerHTML = '<div class="dash-empty"><i class="ti ti-circle-check"></i><p>No frameworks in scope yet</p></div>';
@@ -3944,6 +3946,15 @@ function renderDashboard(d, freshness, implications, followups, kpis) {
     freshnessHtml = renderCiteFreshnessCard(freshness);
   }
 
+  // Ship 92'.c — cite attestation prompts card. Only shown when
+  // there are pending prompts (uploaded doc has present findings
+  // on a MUST that also has an active cite; tenant needs to
+  // confirm whether it IS the cite target).
+  let attestationsHtml = '';
+  if (attestations && attestations.count > 0) {
+    attestationsHtml = renderCiteAttestationsCard(attestations);
+  }
+
   // Triggered-implications panel — only shown when any cascade-output
   // implication is pending.
   let implHtml = '';
@@ -3961,7 +3972,7 @@ function renderDashboard(d, freshness, implications, followups, kpis) {
   }
 
   // Heatmap legend once at the top.
-  let html = kpisHtml + freshnessHtml + implHtml + followupHtml + `<div class="heat-legend" style="margin-bottom:14px">
+  let html = kpisHtml + freshnessHtml + attestationsHtml + implHtml + followupHtml + `<div class="heat-legend" style="margin-bottom:14px">
     <span><span class="heat-legend-swatch f-NC"></span>NC</span>
     <span><span class="heat-legend-swatch f-OFI"></span>OFI</span>
     <span><span class="heat-legend-swatch f-Comply"></span>Comply</span>
@@ -5327,6 +5338,125 @@ function renderCiteFreshnessCard(freshness) {
     <div id="cite-freshness-detail" style="margin-top:8px">${rowsHtml}</div>
   </div>`;
 }
+
+// Ship 92'.c — render pending cite attestation prompts.
+//
+// Each prompt: an uploaded document has present findings on the
+// same MUST as an active workbook cite. The system NOTICED the
+// candidate via MUST overlap; the tenant DECIDES whether the
+// upload IS the cite target. One-click confirm writes
+// external_evidence_verification_log; dismiss captures a reason.
+//
+// Scale-invariant across every URL shape — Ship 92'.a auto-verify
+// only fired on clean file-path URLs. This card catches everything
+// else (SharePoint, Drive, OneDrive, Notion, ...).
+function renderCiteAttestationsCard(attestations) {
+  const esc  = s => (s == null ? '' : String(s)).replace(/</g,'&lt;');
+  const attr = s => (s == null ? '' : String(s)).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+
+  const rows = (attestations.attestations || []).map(a => {
+    const url = a.cite_url ? `<div style="font-size:11px;color:#5C5A4F;margin-top:2px;word-break:break-all">↗ ${esc(a.cite_url)}</div>` : '';
+    const note = a.cite_note ? `<div style="font-size:11px;color:#5C5A4F;margin-top:2px;font-style:italic">${esc(a.cite_note)}</div>` : '';
+    return `
+      <div id="cite-attest-row-${attr(a.id)}" style="padding:10px;background:#fff;border:1px solid #F0EDE3;border-radius:4px;margin-bottom:6px;font-size:12px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+          <span style="color:#3A382E;font-weight:600;min-width:70px">${esc(a.control_ref)}</span>
+          <span style="color:#5C5A4F;flex:1">
+            <strong>${esc(a.candidate_filename)}</strong> looks like the cite target on
+            <span style="color:#3A382E">${esc(a.must_id)}</span>
+            (system: ${esc(a.cite_system_name)}).
+          </span>
+        </div>
+        ${url}
+        ${note}
+        <div style="display:flex;gap:6px;margin-top:8px;align-items:center">
+          <button onclick="_confirmCiteAttestation('${attr(a.id)}')"
+                  style="font-size:11px;padding:4px 12px;background:#3A382E;color:#FAF8F2;border:none;border-radius:3px;cursor:pointer;font-family:inherit">
+            <i class="ti ti-check"></i> Confirm match
+          </button>
+          <button onclick="_dismissCiteAttestation('${attr(a.id)}')"
+                  style="font-size:11px;padding:4px 12px;background:#fff;color:#3A382E;border:1px solid #C8C5B8;border-radius:3px;cursor:pointer;font-family:inherit">
+            Not the same
+          </button>
+          <span style="flex:1"></span>
+          <span style="font-size:10px;color:#9A9787">expires ${esc((a.expires_at||'').slice(0,10))}</span>
+        </div>
+      </div>`;
+  }).join('');
+
+  return `<div id="cite-attestations-card" style="background:#FAF8F2;border:1px solid #E8E5DA;border-radius:6px;padding:12px 14px;margin-bottom:14px">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px">
+      <div>
+        <div style="font-size:13px;color:#3A382E;font-weight:600">
+          <i class="ti ti-link"></i> Cite attestations pending
+          <span style="font-size:11px;color:#5C5A4F;font-weight:400">(${attestations.count})</span>
+        </div>
+        <div style="font-size:11px;color:#5C5A4F;margin-top:2px">
+          You uploaded documents that look like they might be the target of a workbook cite.
+          Confirm the match to record verification; dismiss if it's a different document.
+        </div>
+      </div>
+      <button onclick="document.getElementById('cite-attest-detail').style.display = document.getElementById('cite-attest-detail').style.display === 'none' ? '' : 'none'"
+              style="font-size:11px;padding:4px 10px;background:#fff;color:#3A382E;border:1px solid #C8C5B8;border-radius:3px;cursor:pointer;font-family:inherit">
+        Toggle list
+      </button>
+    </div>
+    <div id="cite-attest-detail" style="margin-top:8px">${rows}</div>
+  </div>`;
+}
+
+async function _confirmCiteAttestation(promptId) {
+  try {
+    const r = await fetch(`/api/v1/cite-attestations/${promptId}/confirm`, {
+      method: 'POST',
+      headers: {'X-API-Key': API_KEY, 'Content-Type': 'application/json'},
+    });
+    if (!r.ok) {
+      const body = await r.json().catch(() => ({}));
+      alert('Confirmation failed: ' + (body.detail || r.statusText));
+      return;
+    }
+    // Fade the row out + reload dashboard
+    const row = document.getElementById('cite-attest-row-' + promptId);
+    if (row) {
+      row.style.opacity = '0.4';
+      row.style.pointerEvents = 'none';
+      row.querySelector('div:first-child').innerHTML =
+        '<span style="color:#3D8C4C;font-weight:600"><i class="ti ti-circle-check"></i> Confirmed — verification recorded</span>';
+    }
+    setTimeout(() => loadDashboard(), 800);
+  } catch (e) {
+    alert('Confirmation failed: ' + (e.message || e));
+  }
+}
+
+async function _dismissCiteAttestation(promptId) {
+  const reason = prompt('Optional: why is this not the same document?', 'not the same document');
+  if (reason === null) return;  // cancel
+  try {
+    const r = await fetch(`/api/v1/cite-attestations/${promptId}/dismiss`, {
+      method: 'POST',
+      headers: {'X-API-Key': API_KEY, 'Content-Type': 'application/json'},
+      body: JSON.stringify({reason: reason || 'not the same document'}),
+    });
+    if (!r.ok) {
+      const body = await r.json().catch(() => ({}));
+      alert('Dismissal failed: ' + (body.detail || r.statusText));
+      return;
+    }
+    const row = document.getElementById('cite-attest-row-' + promptId);
+    if (row) {
+      row.style.opacity = '0.4';
+      row.style.pointerEvents = 'none';
+      row.querySelector('div:first-child').innerHTML =
+        '<span style="color:#9C6F1B"><i class="ti ti-x"></i> Dismissed</span>';
+    }
+    setTimeout(() => loadDashboard(), 800);
+  } catch (e) {
+    alert('Dismissal failed: ' + (e.message || e));
+  }
+}
+
 
 async function openCiteVerifyFromCard(controlRef, leafId, systemId, systemName) {
   // Switch to the per-control drill-in so the cite group is visible after
