@@ -264,7 +264,8 @@ def persist_proposals(
                                 f"workbook cite: sheet {p.sheet!r} "
                                 f"column {cite_meta.get('header')!r}"
                             ),
-                            hyperlink_url = cite_meta.get("hyperlink_url"),
+                            hyperlink_url     = cite_meta.get("hyperlink_url"),
+                            hyperlink_display = cite_meta.get("hyperlink_display"),
                         )
 
         pg.commit()
@@ -327,6 +328,7 @@ def _upsert_cite(
     origin_finding_id: str | None,
     per_must_note:     str,
     hyperlink_url:     str | None = None,
+    hyperlink_display: str | None = None,
 ) -> None:
     """Insert or reactivate an external_evidence_source row for this cite.
 
@@ -335,9 +337,10 @@ def _upsert_cite(
     binding item:6.1.3:soa_reference → 1 cite). Existing rows get their
     origin_finding_id + per_must_note refreshed.
 
-    Ship 92'.a.ii — hyperlink_url stored on emission for the auto-verify
-    resolver. Multi-URL columns collapse to one cite; this stores the
-    first non-mailto URL (deterministic on first-cell-in-column order).
+    Ship 92'.a.ii — hyperlink_url stored for the auto-verify resolver.
+    Ship 92'.d — hyperlink_display stored for tenant-facing rendering.
+    Multi-URL columns collapse to one cite; both fields store the first
+    non-mailto entry (deterministic on first-cell-in-column order).
     """
     cur.execute(
         """
@@ -359,22 +362,27 @@ def _upsert_cite(
                    per_must_note     = %s,
                    origin_finding_id = COALESCE(%s::uuid, origin_finding_id),
                    hyperlink_url     = COALESCE(%s, hyperlink_url),
+                   hyperlink_display = COALESCE(%s, hyperlink_display),
                    updated_at        = now()
              WHERE id = %s::uuid
             """,
-            (cadence_days, per_must_note, origin_finding_id, hyperlink_url, row[0]),
+            (cadence_days, per_must_note, origin_finding_id,
+             hyperlink_url, hyperlink_display, row[0]),
         )
         return
     cur.execute(
         """
         INSERT INTO external_evidence_source (
             tenant_id, must_id, leaf_id, system_id,
-            cadence_days, per_must_note, origin_finding_id, hyperlink_url
+            cadence_days, per_must_note, origin_finding_id,
+            hyperlink_url, hyperlink_display
         ) VALUES (
             %s::uuid, %s, %s, %s::uuid,
-            %s, %s, %s::uuid, %s
+            %s, %s, %s::uuid,
+            %s, %s
         )
         """,
         (tenant_id, must_id, leaf_id, system_id,
-         cadence_days, per_must_note, origin_finding_id, hyperlink_url),
+         cadence_days, per_must_note, origin_finding_id,
+         hyperlink_url, hyperlink_display),
     )

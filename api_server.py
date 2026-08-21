@@ -8430,9 +8430,10 @@ def list_pending_cite_attestations(
 ) -> dict:
     """List pending cite attestations for the current tenant.
 
-    Each row groups a cite that needs the tenant to confirm whether
-    an uploaded document IS the target of the cite. Signal: uploaded
-    doc has present findings on the same MUST as the cite.
+    Ship 92'.d — response includes both raw fields (for auditor
+    drill-in) and pre-humanized strings (`leaf_label`, `cite_display`,
+    `primary_prose`) for tenant-facing rendering. Client should NOT
+    manipulate raw ids/URLs beyond escaping.
     """
     pool = request.app.state.pg_pool
     conn = pool.getconn()
@@ -8449,6 +8450,7 @@ def list_pending_cite_attestations(
                        cd.filename          AS candidate_filename,
                        tes.system_name      AS cite_system_name,
                        ees.hyperlink_url    AS cite_url,
+                       ees.hyperlink_display AS cite_display,
                        ees.per_must_note    AS cite_note
                   FROM cite_attestation_prompt cap
                   JOIN client_documents cd ON cd.id = cap.candidate_document_id
@@ -8463,26 +8465,30 @@ def list_pending_cite_attestations(
             rows = cur.fetchall()
     finally:
         pool.putconn(conn)
-    return {
-        "count": len(rows),
-        "attestations": [
-            {
-                "id":                 r[0],
-                "cite_id":            r[1],
-                "candidate_document_id": r[2],
-                "must_id":            r[3],
-                "leaf_id":            r[4],
-                "control_ref":        r[5],
-                "created_at":         r[6].isoformat() if r[6] else None,
-                "expires_at":         r[7].isoformat() if r[7] else None,
-                "candidate_filename": r[8],
-                "cite_system_name":   r[9],
-                "cite_url":           r[10],
-                "cite_note":          r[11],
-            }
-            for r in rows
-        ],
-    }
+
+    # Ship 92'.d — pre-humanize each row.
+    from rag.cascade.cite_resolver import humanize_attestation_row
+    attestations = []
+    for r in rows:
+        raw = {
+            "id":                 r[0],
+            "cite_id":            r[1],
+            "candidate_document_id": r[2],
+            "must_id":            r[3],
+            "leaf_id":            r[4],
+            "control_ref":        r[5],
+            "created_at":         r[6].isoformat() if r[6] else None,
+            "expires_at":         r[7].isoformat() if r[7] else None,
+            "candidate_filename": r[8],
+            "cite_system_name":   r[9],
+            "cite_url":           r[10],
+            "cite_display":       r[11],
+            "cite_note":          r[12],
+        }
+        raw.update(humanize_attestation_row(raw))
+        attestations.append(raw)
+
+    return {"count": len(rows), "attestations": attestations}
 
 
 @app.post("/api/v1/cite-attestations/{prompt_id}/confirm", tags=["cite"])

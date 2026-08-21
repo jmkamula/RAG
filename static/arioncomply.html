@@ -5351,36 +5351,57 @@ function renderCiteFreshnessCard(freshness) {
 // only fired on clean file-path URLs. This card catches everything
 // else (SharePoint, Drive, OneDrive, Notion, ...).
 function renderCiteAttestationsCard(attestations) {
+  // Ship 92'.d — humanized rendering. Server pre-humanizes:
+  //   leaf_label      → 'Statement of Applicability'
+  //   must_label      → 'SoA reference'
+  //   cite_link_label → 'Information Security Policy'
+  //   primary_prose   → tenant-facing sentence (may contain <strong>)
+  // Client renders as-is, escapes only tenant-supplied filenames.
   const esc  = s => (s == null ? '' : String(s)).replace(/</g,'&lt;');
   const attr = s => (s == null ? '' : String(s)).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
 
   const rows = (attestations.attestations || []).map(a => {
-    const url = a.cite_url ? `<div style="font-size:11px;color:#5C5A4F;margin-top:2px;word-break:break-all">↗ ${esc(a.cite_url)}</div>` : '';
-    const note = a.cite_note ? `<div style="font-size:11px;color:#5C5A4F;margin-top:2px;font-style:italic">${esc(a.cite_note)}</div>` : '';
+    // Auditor-details block — collapsed by default. Preserves
+    // provenance without cluttering the primary decision surface.
+    const auditor = `
+      <div id="cite-attest-audit-${attr(a.id)}" style="display:none;margin-top:8px;padding:8px 10px;background:#FAF8F2;border:1px solid #F0EDE3;border-radius:3px;font-size:11px;color:#5C5A4F">
+        <div style="font-weight:600;color:#3A382E;margin-bottom:4px">Auditor details</div>
+        <div><strong>MUST id:</strong> <code>${esc(a.must_id)}</code></div>
+        <div><strong>Leaf id:</strong> <code>${esc(a.leaf_id)}</code></div>
+        ${a.cite_note ? `<div style="margin-top:4px"><strong>Source:</strong> ${esc(a.cite_note)}</div>` : ''}
+        ${a.cite_url ? `<div style="margin-top:4px;word-break:break-all"><strong>Cite URL:</strong> <a href="${attr(a.cite_url)}" target="_blank" rel="noopener" style="color:#534AB7;text-decoration:none">${esc(a.cite_url)}</a></div>` : ''}
+        <div style="margin-top:4px"><strong>System:</strong> ${esc(a.cite_system_name || '')}</div>
+      </div>`;
+
+    // primary_prose contains <strong> tags — trust server.
+    const prose = a.primary_prose || (
+      `<strong>${esc(a.candidate_filename)}</strong> looks like it covers ` +
+      `${esc(a.must_label || '(this requirement)')} in <strong>${esc(a.leaf_label || a.control_ref)}</strong>. ` +
+      `Is this the version your workbook was referring to?`
+    );
+
     return `
-      <div id="cite-attest-row-${attr(a.id)}" style="padding:10px;background:#fff;border:1px solid #F0EDE3;border-radius:4px;margin-bottom:6px;font-size:12px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+      <div id="cite-attest-row-${attr(a.id)}" style="padding:12px;background:#fff;border:1px solid #F0EDE3;border-radius:4px;margin-bottom:6px;font-size:12px">
+        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px">
           <span style="color:#3A382E;font-weight:600;min-width:70px">${esc(a.control_ref)}</span>
-          <span style="color:#5C5A4F;flex:1">
-            <strong>${esc(a.candidate_filename)}</strong> looks like the cite target on
-            <span style="color:#3A382E">${esc(a.must_id)}</span>
-            (system: ${esc(a.cite_system_name)}).
-          </span>
+          <span style="color:#3A382E;font-weight:600;flex:1">${esc(a.leaf_label || '')}</span>
         </div>
-        ${url}
-        ${note}
-        <div style="display:flex;gap:6px;margin-top:8px;align-items:center">
+        <div style="color:#3A382E;line-height:1.45;margin-bottom:10px">${prose}</div>
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
           <button onclick="_confirmCiteAttestation('${attr(a.id)}')"
                   style="font-size:11px;padding:4px 12px;background:#3A382E;color:#FAF8F2;border:none;border-radius:3px;cursor:pointer;font-family:inherit">
-            <i class="ti ti-check"></i> Confirm match
+            <i class="ti ti-check"></i> Confirm — record verification
           </button>
           <button onclick="_dismissCiteAttestation('${attr(a.id)}')"
                   style="font-size:11px;padding:4px 12px;background:#fff;color:#3A382E;border:1px solid #C8C5B8;border-radius:3px;cursor:pointer;font-family:inherit">
             Not the same
           </button>
+          <a href="#" onclick="event.preventDefault();var el=document.getElementById('cite-attest-audit-${attr(a.id)}');el.style.display=(el.style.display==='none'?'':'none')"
+             style="font-size:11px;color:#5C5A4F;text-decoration:none;margin-left:8px">▸ Auditor details</a>
           <span style="flex:1"></span>
           <span style="font-size:10px;color:#9A9787">expires ${esc((a.expires_at||'').slice(0,10))}</span>
         </div>
+        ${auditor}
       </div>`;
   }).join('');
 
@@ -5392,8 +5413,8 @@ function renderCiteAttestationsCard(attestations) {
           <span style="font-size:11px;color:#5C5A4F;font-weight:400">(${attestations.count})</span>
         </div>
         <div style="font-size:11px;color:#5C5A4F;margin-top:2px">
-          You uploaded documents that look like they might be the target of a workbook cite.
-          Confirm the match to record verification; dismiss if it's a different document.
+          You've uploaded documents that look like the ones your workbook references.
+          Confirm the match to record verification, or dismiss if it's a different document.
         </div>
       </div>
       <button onclick="document.getElementById('cite-attest-detail').style.display = document.getElementById('cite-attest-detail').style.display === 'none' ? '' : 'none'"

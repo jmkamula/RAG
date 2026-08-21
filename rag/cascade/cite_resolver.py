@@ -518,3 +518,144 @@ def dismiss_attestation(
         logger.warning("cite_resolver: dismiss_attestation failed: %s", e)
 
     return result
+
+
+# ── Ship 92'.d — humanization helpers ────────────────────────────────
+
+
+def _humanize_cite_url(url: str, display: str | None) -> str:
+    """Pick the auditor-friendly display label for a cite URL.
+
+    Prefer the cell's captured display text (openpyxl `Hyperlink.display`).
+    Fall back to:
+      1. SharePoint `file=` query-param filename (URL-decoded)
+      2. URL basename with extension (if clean path)
+      3. The host portion (e.g. 'nukib.gov.cz')
+      4. '(no display text)' as last resort.
+    """
+    if display and display.strip():
+        return display.strip()
+    if not url:
+        return "(no link)"
+    try:
+        parsed = urlparse(url)
+        # SharePoint / SaaS `file=` query param
+        qs = parsed.query or ""
+        for pair in qs.split("&"):
+            if pair.lower().startswith("file="):
+                try:
+                    return unquote(pair.split("=", 1)[1])
+                except Exception:
+                    pass
+        # Clean basename
+        path = (parsed.path or "").replace("\\", "/")
+        last = path.rstrip("/").split("/")[-1]
+        if last and "." in last:
+            try:
+                return unquote(last)
+            except Exception:
+                return last
+        # Fall back to host
+        if parsed.hostname:
+            return parsed.hostname
+    except Exception:
+        pass
+    return "(external link)"
+
+
+def _humanize_must_label(must_id: str) -> str:
+    """Slug-to-title on the tail of the MUST id.
+
+    'item:6.1.3:soa_reference' → 'Soa Reference' → 'SoA reference'
+    'item:A.5.18:reg_idmgmt_link' → 'Reg Idmgmt Link' → 'Identity management link'
+    Kept small + heuristic. Reuses the same discipline as
+    rag/posture/advisory._humanize_evidence_type.
+    """
+    if not must_id or ":" not in must_id:
+        return must_id or ""
+    tail = must_id.rsplit(":", 1)[-1]
+    parts = tail.split("_")
+    # Cheap acronym preserves + common expansions
+    preserve = {"iso": "ISO", "gdpr": "GDPR", "dpia": "DPIA", "sla": "SLA",
+                "kpi": "KPI", "cia": "CIA", "roi": "ROI",
+                "soa": "SoA", "roi": "ROI", "sig": "SIG", "isms": "ISMS",
+                "id":  "ID", "pii": "PII"}
+    expand = {"reg": "", "rev": "review", "rec": "record", "proc": "procedure",
+              "off": "offboarding", "idmgmt": "identity management",
+              "url": "URL", "ref": "reference"}
+    out: list[str] = []
+    for p in parts:
+        low = p.lower()
+        if low in preserve:
+            out.append(preserve[low])
+        elif low in expand:
+            e = expand[low]
+            if e:
+                out.append(e)
+        else:
+            out.append(p.replace("-", " "))
+    label = " ".join(t for t in out if t).strip()
+    if not label:
+        return tail.replace("_", " ")
+    # Capitalize first letter only
+    return label[0].upper() + label[1:] if label else label
+
+
+def _leaf_label_from_id(leaf_id: str) -> str:
+    """Look up leaf title from the curated catalog; fall back to slug."""
+    if not leaf_id or ":" not in leaf_id:
+        return leaf_id or ""
+    try:
+        from enrichment.documents import document_requirements as DR
+        for r in DR.ALL_EVIDENCE_REQUIREMENTS:
+            if r.id == leaf_id and getattr(r, "title", None):
+                # Strip trailing " (Annex A.X)" style parenthetical
+                import re as _re
+                t = _re.sub(r"\s*\((?:Annex\s+)?[A-Z]?\.?[\d.]+\)\s*$", "", r.title).strip()
+                return t
+        for name in dir(DR):
+            obj = getattr(DR, name, None)
+            if isinstance(obj, DR.DerivedSpec):
+                for r in obj.direct_evidence or []:
+                    if r.id == leaf_id and getattr(r, "title", None):
+                        import re as _re
+                        return _re.sub(r"\s*\((?:Annex\s+)?[A-Z]?\.?[\d.]+\)\s*$", "", r.title).strip()
+    except Exception:
+        pass
+    # Fallback: slug → title
+    tail = leaf_id.rsplit(":", 1)[-1]
+    return tail.replace("_", " ").title()
+
+
+def humanize_attestation_row(row: dict) -> dict:
+    """Ship 92'.d — return the humanized fields for a cite attestation row.
+
+    Merge these into the raw row before returning to the client.
+    Adds:
+      leaf_label:       'Statement of Applicability'
+      must_label:       'SoA reference'
+      cite_link_label:  'Information Security Policy' (from display, or extracted)
+      primary_prose:    tenant-facing sentence
+    """
+    leaf_label = _leaf_label_from_id(row.get("leaf_id") or "")
+    must_label = _humanize_must_label(row.get("must_id") or "")
+    cite_link_label = _humanize_cite_url(
+        row.get("cite_url") or "", row.get("cite_display"),
+    )
+    candidate = row.get("candidate_filename") or "the uploaded document"
+    control_ref = row.get("control_ref") or ""
+    prose_bits = [f"Your workbook cites <strong>{cite_link_label}</strong>"]
+    if leaf_label:
+        prose_bits[-1] += f" in your <strong>{leaf_label}</strong>"
+    prose_bits[-1] += f" ({control_ref})."
+    prose_bits.append(
+        f"You uploaded <strong>{candidate}</strong>, which appears to cover the "
+        f"same requirement ({must_label})."
+    )
+    prose_bits.append("Is this the version your workbook was referring to?")
+    return {
+        "leaf_label":      leaf_label,
+        "must_label":      must_label,
+        "cite_link_label": cite_link_label,
+        "primary_prose":   " ".join(prose_bits),
+    }

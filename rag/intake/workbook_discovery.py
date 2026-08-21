@@ -506,6 +506,30 @@ def _first_real_cite_url_in_column(
 
     Used by workbook_persistence to populate external_evidence_source.
     hyperlink_url on cite emission (Ship 92'.a auto-verify prerequisite).
+
+    Ship 92'.d added `_first_real_cite_hyperlink_in_column` below which
+    returns BOTH url + display. This function is a thin wrapper for
+    backwards-compat callers who only need the URL.
+    """
+    hit = _first_real_cite_hyperlink_in_column(
+        headers, matched_header, header_row, sheet_hyperlinks
+    )
+    return hit["url"] if hit else None
+
+
+def _first_real_cite_hyperlink_in_column(
+    headers: list[str],
+    matched_header: str,
+    header_row: int | None,
+    sheet_hyperlinks: list[dict],
+) -> dict | None:
+    """Ship 92'.d — return {url, display} for the first real cite
+    hyperlink in the matched column, or None.
+
+    The `display` is the cell's user-visible label (openpyxl
+    `Hyperlink.display` or the cell's string value); auditor-friendly
+    text like 'Information Security Policy' rather than a SharePoint
+    tokenized URL.
     """
     if not sheet_hyperlinks or header_row is None or not matched_header:
         return None
@@ -524,7 +548,8 @@ def _first_real_cite_url_in_column(
         url = (hl.get("url") or "").strip()
         if not url or url.lower().startswith("mailto:"):
             continue
-        return url
+        display = (hl.get("label") or hl.get("display") or "").strip()
+        return {"url": url, "display": display}
     return None
 
 
@@ -624,22 +649,26 @@ def evaluate_pass(
         if hit is None:
             continue
         _, header = hit
-        # Row-level guard + URL extraction — only when hyperlinks + header_row
-        # are known. Ship 92'.a.ii: store the first real cite URL so the
-        # auto-verification resolver can compare basenames on doc upload.
-        first_url: str | None = None
+        # Row-level guard + URL/display extraction — only when hyperlinks
+        # + header_row are known. Ship 92'.a.ii stored the URL; Ship 92'.d
+        # also stores the cell's display text (auditor-friendly label).
+        first_url:     str | None = None
+        first_display: str | None = None
         if sheet_hyperlinks is not None:
-            first_url = _first_real_cite_url_in_column(
+            hit = _first_real_cite_hyperlink_in_column(
                 headers, header, header_row, sheet_hyperlinks,
             )
-            if first_url is None:
+            if hit is None:
                 continue
+            first_url = hit["url"]
+            first_display = hit["display"] or None
         prop.cite_bindings[bt] = {
             "header":            header,
             "cite_kind":         cite.get("cite_kind", "internal_document"),
             "verification_days": cite.get("verification_days"),
             "system_hint":       cite.get("system_hint"),
-            "hyperlink_url":     first_url,  # Ship 92'.a.ii
+            "hyperlink_url":     first_url,      # Ship 92'.a.ii
+            "hyperlink_display": first_display,  # Ship 92'.d
         }
 
     return prop
