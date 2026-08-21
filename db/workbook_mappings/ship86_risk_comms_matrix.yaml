@@ -20,7 +20,7 @@ min_data_rows: 1
 passes:
 
   - pass_name: register
-    target_control: 7.4
+    target_control: "7.4"
     target_evidence_requirement: "req:7.4:isms_communication_procedure"
     target_evidence_type: communication_event_register
 

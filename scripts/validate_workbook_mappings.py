@@ -68,10 +68,71 @@ def _iter_binds(pass_block: dict):
         if bt:
             yield bt, f"optional_columns[{col.get('fingerprint')}]"
 
+    for col in pass_block.get("cite_columns") or []:
+        bt = col.get("binds_to")
+        if bt:
+            yield bt, f"cite_columns[{col.get('fingerprint')}]"
+
     for grp in pass_block.get("column_groups") or []:
         bt = grp.get("binds_to")
         if bt:
             yield bt, f"column_groups[{grp.get('group_name')}]"
+
+
+# Ship 91'.i — cite_columns discipline validators.
+# See docs/curation/cite_columns_criterion.md.
+
+_CITE_DISALLOWED_SUFFIXES = ("_date", "_at", "_owner")
+_CITE_DISALLOWED_EXACT = frozenset({"date", "at", "owner"})
+_VALID_CITE_KINDS = frozenset({"internal_document", "url", "external_system"})
+
+
+def _cite_bind_disallowed(must_id: str) -> bool:
+    """True if MUST id ends in _date/_at/_owner (data-shape, not cite-shape)."""
+    tail = (must_id or "").rsplit(":", 1)[-1]
+    if tail in _CITE_DISALLOWED_EXACT:
+        return True
+    return any(tail.endswith(s) for s in _CITE_DISALLOWED_SUFFIXES)
+
+
+def _validate_cite_discipline(pass_block: dict, pname: str) -> list[str]:
+    """Check every cite_columns entry against the Ship 91'.h criterion.
+
+    Rules:
+      - binds_to MUST NOT end in _date / _at / _owner (or be those bare tokens)
+      - cite_kind ∈ {internal_document, url, external_system}
+      - verification_days is an int in [30, 3650]
+      - fingerprint has 1-3 tokens
+    """
+    errs: list[str] = []
+    for i, col in enumerate(pass_block.get("cite_columns") or []):
+        label = f"pass[{pname}].cite_columns[{i}]"
+        fp = col.get("fingerprint") or []
+        bt = col.get("binds_to") or ""
+        ck = col.get("cite_kind", "internal_document")
+        vd = col.get("verification_days", 365)
+
+        if _cite_bind_disallowed(bt):
+            errs.append(
+                f"{label}: binds_to={bt!r} — cite must NOT bind to a "
+                f"MUST ending in _date/_at/_owner (dates + owner-names are "
+                f"data-shape, not cite-shape). See docs/curation/"
+                f"cite_columns_criterion.md § anti-pattern binds."
+            )
+        if ck not in _VALID_CITE_KINDS:
+            errs.append(
+                f"{label}: cite_kind={ck!r} not in {sorted(_VALID_CITE_KINDS)}"
+            )
+        if not isinstance(vd, int) or vd < 30 or vd > 3650:
+            errs.append(
+                f"{label}: verification_days={vd!r} must be int in [30, 3650]"
+            )
+        if not (1 <= len(fp) <= 3):
+            errs.append(
+                f"{label}: fingerprint={fp!r} must be 1-3 tokens "
+                f"(subset match fails on longer)"
+            )
+    return errs
 
 
 def _validate_file(path: Path, reqs, items_by_req) -> list[str]:
@@ -120,6 +181,9 @@ def _validate_file(path: Path, reqs, items_by_req) -> list[str]:
                     f"pass[{pname}].{src}: binds_to={bt!r} is not a ChecklistItem "
                     f"on {target_req} (allowed: {sorted(allowed_items) or '<none>'})"
                 )
+
+        # Ship 91'.i — cite_columns discipline check (per-pass).
+        errs.extend(_validate_cite_discipline(p, pname))
 
     return errs
 

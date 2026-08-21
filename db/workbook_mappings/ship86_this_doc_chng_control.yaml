@@ -20,7 +20,7 @@ min_data_rows: 1
 passes:
 
   - pass_name: register
-    target_control: 7.5
+    target_control: "7.5"
     target_evidence_requirement: "req:7.5:isms_document_register"
     target_evidence_type: register
 

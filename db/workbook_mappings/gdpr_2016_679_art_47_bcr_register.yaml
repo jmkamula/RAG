@@ -42,8 +42,10 @@ passes:
 
     # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
     cite_columns:
+      # Ship 91'.h rebind — signed BCR corroborates the authorized
+      # transfers (rev'd from reg_signed_date, a timestamp MUST).
       - fingerprint: [signed, doc]
-        binds_to: "item:Art.47:reg_signed_date"
+        binds_to: "item:Art.47:reg_transfers"
         cite_kind: internal_document
         verification_days: 365
 

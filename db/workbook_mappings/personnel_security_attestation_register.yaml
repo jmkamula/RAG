@@ -73,6 +73,19 @@ passes:
         binds_to: "item:A.6.3:reg_status"
       - fingerprint: [status]
         binds_to: "item:A.6.3:reg_status"
+    # Ship 91'.i — cite_columns migrated to Pass 1 where the A.6.3
+    # MUST bindings belong. Certificate / proof-of-completion docs
+    # corroborate the completion status (auditor-defensible tier-2 stretch
+    # per docs/curation/cite_columns_criterion.md).
+    cite_columns:
+      - fingerprint: [certificate]
+        binds_to: "item:A.6.3:reg_status"
+        cite_kind: internal_document
+        verification_days: 365
+      - fingerprint: [proof, completion]
+        binds_to: "item:A.6.3:reg_status"
+        cite_kind: internal_document
+        verification_days: 365
     # Sample-row anchor: the personnel-id column should hold PERSON
     # names, not company names. Catches sheets where "Partner"
     # terminology is used for third-party vendors instead of people.
@@ -123,17 +136,10 @@ passes:
         binds_to: "item:A.6.6:reg_expiry_or_active"
       - fingerprint: [active]
         binds_to: "item:A.6.6:reg_expiry_or_active"
-
-    # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
-    cite_columns:
-      - fingerprint: [certificate]
-        binds_to: "item:A.6.3:reg_status"
-        cite_kind: internal_document
-        verification_days: 365
-      - fingerprint: [proof, completion]
-        binds_to: "item:A.6.3:reg_status"
-        cite_kind: internal_document
-        verification_days: 365
+      # Ship 91'.i — moved cite_columns to Pass 1 (training) where the
+      # A.6.3 MUST bindings belong. Ship 90'.a sweep mis-attached them
+      # here (multi-pass insertion bug). See file's Pass 1 for the
+      # correct cite_columns block.
 
 confidence_weights:
   sheet_name: 0.5

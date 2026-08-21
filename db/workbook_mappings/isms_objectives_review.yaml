@@ -64,8 +64,10 @@ passes:
 
     # Ship 90'.a — LLM-proposed cite_columns (curator sweep).
     cite_columns:
+      # Ship 91'.h rebind — review report corroborates the alignment
+      # examined (rev'd from rev_date, a timestamp MUST).
       - fingerprint: [review, report]
-        binds_to: "item:6.2:rev_date"
+        binds_to: "item:6.2:rev_alignment"
         cite_kind: internal_document
         verification_days: 365
 

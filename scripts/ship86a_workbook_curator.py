@@ -64,6 +64,38 @@ def _slugify(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", "_", s.lower()).strip("_")
 
 
+# Ship 91'.h — anti-pattern filter for cite_columns bindings.
+# See docs/curation/cite_columns_criterion.md § "Anti-pattern binds".
+# Never bind cite_columns to a MUST whose name suffix indicates it's
+# data (timestamp/id/owner/status), not evidence. Ship 90'.a produced
+# a weak DSAR case binding cite to `reg_response_date` — this filter
+# prevents that recurring.
+_CITE_DISALLOWED_SUFFIXES = ("_date", "_at", "_owner")
+_CITE_DISALLOWED_EXACT = frozenset({"date", "at", "owner"})
+
+
+def _cite_bind_disallowed(must_id: str) -> bool:
+    """True if this MUST id is a data-shape MUST that shouldn't hold cites.
+
+    Suffixes rejected: `_date`, `_at`, `_owner` (timestamps + owner
+    names are never corroborated by external documents).
+
+    Deliberately ALLOWED: `_id`, `_status`.
+      - `_id` — the row's identity CAN be corroborated by a
+        report/certificate proving the row exists (Ship 90'.a
+        `dpia_report → reg_dpia_id` pattern; ~7 catalog uses).
+      - `_status` — a certificate CAN corroborate a completion
+        status (Ship 90'.a `certificate → reg_status` pattern; ~4
+        catalog uses). Auditor-defensible.
+
+    See docs/curation/cite_columns_criterion.md § "Anti-pattern binds".
+    """
+    tail = (must_id or "").rsplit(":", 1)[-1]
+    if tail in _CITE_DISALLOWED_EXACT:
+        return True
+    return any(tail.endswith(s) for s in _CITE_DISALLOWED_SUFFIXES)
+
+
 def _load_structured_sheets(workbook_path: str, workbook_name: str) -> list[dict]:
     """Reuse Ship 85'.a's `_partition_xlsx_via_unstructured` to get
     per-sheet structure."""
@@ -218,7 +250,13 @@ RULES:
   to complete the list. It's fine to end with required=1 optional=0
   cite=0 if the sheet is a single-topic register.
 - Fingerprint tokens should be lowercase, singular where possible,
-  and stemmed by the tokenizer (asset_id → ["asset","id"])."""
+  and stemmed by the tokenizer (asset_id → ["asset","id"]).
+- ANTI-PATTERN for cite_columns: NEVER bind cite to a MUST whose name
+  ends in `_date`, `_at`, or `_owner`. Timestamps and owner-names are
+  DATA — external documents don't corroborate them. Skip that cite
+  proposal if no valid MUST exists. (Note: binding cite to a MUST
+  ending in `_id` or `_status` IS allowed — reports can prove row
+  identity, certificates can prove completion status.)"""
 
 
 def curate_sheet(
@@ -355,7 +393,13 @@ def curate_sheet(
                 if cb.get("must_id") in real_must_ids:
                     optional_cols.append(cb)
             for cb in (p2.get("cite_columns") or []):
-                if cb.get("must_id") not in real_must_ids:
+                mid = cb.get("must_id")
+                if mid not in real_must_ids:
+                    continue
+                # Ship 91'.h anti-pattern filter — never bind cite to
+                # date/timestamp/id/owner/status MUSTs. See
+                # docs/curation/cite_columns_criterion.md for rationale.
+                if _cite_bind_disallowed(mid):
                     continue
                 # cite_kind + verification_days validated on emission
                 ck = (cb.get("cite_kind") or "internal_document").strip()
@@ -401,7 +445,11 @@ def curate_sheet(
     yaml_lines.append("passes:")
     yaml_lines.append("")
     yaml_lines.append("  - pass_name: register")
-    yaml_lines.append(f"    target_control: {curated.get('target_control', 'UNKNOWN')}")
+    # Ship 91'.i — quote target_control so numeric refs (7.2, 10.1) don't parse
+    # as YAML floats. validate_workbook_mappings.py enforces string equality
+    # against catalog control_ref (which is always a string).
+    _tc = str(curated.get('target_control', 'UNKNOWN'))
+    yaml_lines.append(f'    target_control: "{_tc}"')
     yaml_lines.append(f"    target_evidence_requirement: \"{curated.get('target_evidence_requirement', '')}\"")
     yaml_lines.append(f"    target_evidence_type: {curated.get('target_evidence_type', 'register')}")
     yaml_lines.append("")

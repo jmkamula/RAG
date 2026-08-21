@@ -53,6 +53,26 @@ WORKBOOK_MAPPINGS_DIR = Path("/data/arioncomply/db/workbook_mappings")
 
 _VALID_CITE_KINDS = {"internal_document", "url", "external_system"}
 
+# Ship 91'.h — anti-pattern filter for cite_columns bindings.
+# See docs/curation/cite_columns_criterion.md § "Anti-pattern binds".
+# Never bind cite_columns to a MUST whose name suffix indicates it's
+# data (timestamp/id/owner/status), not evidence.
+_CITE_DISALLOWED_SUFFIXES = ("_date", "_at", "_owner")
+_CITE_DISALLOWED_EXACT = frozenset({"date", "at", "owner"})
+
+
+def _cite_bind_disallowed(must_id: str) -> bool:
+    """True if this MUST id is a data-shape MUST that shouldn't hold cites.
+
+    Suffixes rejected: `_date`, `_at`, `_owner`. Deliberately allowed:
+    `_id` (identity-proving reports) and `_status` (certificate-proves-
+    status). See docs/curation/cite_columns_criterion.md.
+    """
+    tail = (must_id or "").rsplit(":", 1)[-1]
+    if tail in _CITE_DISALLOWED_EXACT:
+        return True
+    return any(tail.endswith(s) for s in _CITE_DISALLOWED_SUFFIXES)
+
 # Skip these evidence_types — no external cite pattern by shape.
 _NO_CITE_EVIDENCE_TYPES = {
     "segregation_matrix",
@@ -149,7 +169,15 @@ RULES:
   because the workbook tokenizer + subset-match require ALL tokens
   to appear in the header. "Treatment Plan" is 2 tokens; "DPIA
   Report Assessment Document Link" is 5 tokens — the latter would
-  never match a real column."""
+  never match a real column.
+- ANTI-PATTERN: NEVER bind cite to a MUST whose name ends in
+  `_date`, `_at`, or `_owner`. Timestamps and owner-names are DATA
+  — external documents don't corroborate them. A `Response Doc`
+  column should bind to `reg_outcome` (what the doc proves), NOT
+  `reg_response_date` (when it landed). Skip the proposal if no
+  valid non-date/non-owner MUST is available. (Binding cite to a
+  MUST ending in `_id` or `_status` IS allowed — reports can prove
+  row identity, certificates can prove completion status.)"""
 
 
 def _fetch_musts_for_leaf(leaf_id: str) -> list[dict]:
@@ -222,7 +250,12 @@ def _sweep_pass(pass_block: dict, target_leaf: str) -> dict:
     real_ids = {r["id"] for r in musts}
     validated: list[dict] = []
     for cb in (p.get("cite_columns") or [])[:3]:  # cap 3
-        if cb.get("must_id") not in real_ids:
+        mid = cb.get("must_id")
+        if mid not in real_ids:
+            continue
+        # Ship 91'.h anti-pattern filter — never bind cite to date/id/owner/
+        # status MUSTs. See docs/curation/cite_columns_criterion.md.
+        if _cite_bind_disallowed(mid):
             continue
         # Fingerprint must be 1-3 tokens (subset match fails on longer)
         hint = cb.get("column_hint") or []
@@ -236,7 +269,7 @@ def _sweep_pass(pass_block: dict, target_leaf: str) -> dict:
             vd = 365
         validated.append({
             "column_hint":       hint,
-            "must_id":           cb.get("must_id"),
+            "must_id":           mid,
             "cite_kind":         ck,
             "verification_days": vd,
         })
