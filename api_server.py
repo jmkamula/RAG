@@ -35,6 +35,7 @@ import psycopg2.pool
 import uvicorn
 from fastapi import (
     BackgroundTasks,
+    Body,
     Depends,
     FastAPI,
     File,
@@ -8411,6 +8412,137 @@ async def api_keys_revoke(
             detail      = f"No key {key_id!r} for this tenant.",
         )
     return {"id": row[0], "is_active": False}
+
+
+# =============================================================================
+# Ship 92'.b: cite attestation prompts (dashboard drill-in surface)
+# =============================================================================
+# Tenant one-click attestation for workbook cites — closes the cite
+# lifecycle without URL parsing. Ship 92'.a delivered the best-effort
+# URL basename resolver (works only on clean file paths). Ship 92'.b
+# is the scale-invariant path: doc upload creates prompts when
+# MUSTs overlap, tenant confirms via dashboard.
+
+@app.get("/api/v1/cite-attestations/pending", tags=["cite"])
+def list_pending_cite_attestations(
+    request: Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+) -> dict:
+    """List pending cite attestations for the current tenant.
+
+    Each row groups a cite that needs the tenant to confirm whether
+    an uploaded document IS the target of the cite. Signal: uploaded
+    doc has present findings on the same MUST as the cite.
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT cap.id::text,
+                       cap.cite_id::text,
+                       cap.candidate_document_id::text,
+                       cap.must_id, cap.leaf_id, cap.control_ref,
+                       cap.created_at, cap.expires_at,
+                       cd.filename          AS candidate_filename,
+                       tes.system_name      AS cite_system_name,
+                       ees.hyperlink_url    AS cite_url,
+                       ees.per_must_note    AS cite_note
+                  FROM cite_attestation_prompt cap
+                  JOIN client_documents cd ON cd.id = cap.candidate_document_id
+                  JOIN external_evidence_source ees ON ees.id = cap.cite_id
+                  JOIN tenant_external_system tes ON tes.id = ees.system_id
+                 WHERE cap.tenant_id = %s::uuid
+                   AND cap.status    = 'pending'
+                 ORDER BY cap.created_at DESC
+                """,
+                (key_info.tenant_id,),
+            )
+            rows = cur.fetchall()
+    finally:
+        pool.putconn(conn)
+    return {
+        "count": len(rows),
+        "attestations": [
+            {
+                "id":                 r[0],
+                "cite_id":            r[1],
+                "candidate_document_id": r[2],
+                "must_id":            r[3],
+                "leaf_id":            r[4],
+                "control_ref":        r[5],
+                "created_at":         r[6].isoformat() if r[6] else None,
+                "expires_at":         r[7].isoformat() if r[7] else None,
+                "candidate_filename": r[8],
+                "cite_system_name":   r[9],
+                "cite_url":           r[10],
+                "cite_note":          r[11],
+            }
+            for r in rows
+        ],
+    }
+
+
+@app.post("/api/v1/cite-attestations/{prompt_id}/confirm", tags=["cite"])
+def confirm_cite_attestation(
+    prompt_id: str,
+    request: Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+) -> dict:
+    """Tenant confirms this document IS the cite target.
+
+    Writes external_evidence_verification_log (auditor trail) +
+    bumps external_evidence_source last_verified_at + next_review_due.
+    """
+    from rag.cascade.cite_resolver import confirm_attestation
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        result = confirm_attestation(
+            conn,
+            tenant_id = key_info.tenant_id,
+            prompt_id = prompt_id,
+            user_id   = key_info.user_id,
+        )
+    finally:
+        pool.putconn(conn)
+    if not result.get("ok"):
+        raise HTTPException(
+            status_code = 400 if "not pending" in (result.get("error") or "") else 404,
+            detail      = result.get("error") or "confirmation failed",
+        )
+    return {"ok": True, "verification_log_id": result.get("verification_log_id")}
+
+
+@app.post("/api/v1/cite-attestations/{prompt_id}/dismiss", tags=["cite"])
+def dismiss_cite_attestation(
+    prompt_id: str,
+    request: Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    reason: str = Body("not the same document", embed=True),
+) -> dict:
+    """Tenant confirms this document is NOT the cite target."""
+    from rag.cascade.cite_resolver import dismiss_attestation
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        result = dismiss_attestation(
+            conn,
+            tenant_id = key_info.tenant_id,
+            prompt_id = prompt_id,
+            user_id   = key_info.user_id,
+            reason    = reason,
+        )
+    finally:
+        pool.putconn(conn)
+    if not result.get("ok"):
+        raise HTTPException(
+            status_code = 400,
+            detail      = result.get("error") or "dismissal failed",
+        )
+    return {"ok": True}
 
 
 # =============================================================================

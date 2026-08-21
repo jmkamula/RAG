@@ -1033,29 +1033,46 @@ class DocumentPipeline:
             # + next_review_due). Best-effort; errors logged and
             # swallowed.
             _cav_summary: Optional[dict] = None
+            _cap_summary: Optional[dict] = None
             _cav_doc_id  = summary.get("doc_id") or _wbd_doc_id
             if _cav_doc_id and not self.dry_run:
                 try:
                     from rag.cascade.cite_resolver import (
                         resolve_cites_on_document_upload,
+                        create_attestation_prompts_on_document_upload,
                     )
                     _cav_conn = psycopg2.connect(self.db_url)
                     try:
+                        # Ship 92'.a — best-effort URL basename auto-verify
                         _cav_summary = resolve_cites_on_document_upload(
                             _cav_conn,
                             tenant_id          = tenant_id,
                             client_document_id = _cav_doc_id,
                             user_id            = user_id,
                         )
+                        # Ship 92'.b — MUST-overlap attestation candidates
+                        _cap_summary = create_attestation_prompts_on_document_upload(
+                            _cav_conn,
+                            tenant_id          = tenant_id,
+                            client_document_id = _cav_doc_id,
+                        )
                     finally:
                         _cav_conn.close()
                     if _cav_summary and _cav_summary.get("cites_scanned", 0) > 0:
                         logger.info(
-                            f"Stage 4.8: cite auto-verify — "
+                            f"Stage 4.8a: cite auto-verify — "
                             f"scanned={_cav_summary.get('cites_scanned')} "
                             f"url_match={_cav_summary.get('url_matches')} "
                             f"must_match={_cav_summary.get('must_matches')} "
                             f"verified={_cav_summary.get('verified')}"
+                        )
+                    if _cap_summary and _cap_summary.get("candidates_found", 0) > 0:
+                        logger.info(
+                            f"Stage 4.8b: cite attestation prompts — "
+                            f"scanned={_cap_summary.get('cites_scanned')} "
+                            f"candidates={_cap_summary.get('candidates_found')} "
+                            f"created={_cap_summary.get('prompts_created')} "
+                            f"existing={_cap_summary.get('prompts_existing')}"
                         )
                 except Exception as _cav_exc:
                     logger.warning(

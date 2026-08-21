@@ -1,34 +1,29 @@
-"""Ship 92'.a.iii — auto-verify workbook cites on document upload.
+"""Ship 92'.a + Ship 92'.b — cite lifecycle close on document upload.
 
-When a client_document is uploaded, this resolver looks up all active
-external_evidence_source rows for the tenant that have a stored
-hyperlink URL, and checks whether the uploaded document matches
-(URL basename ILIKE client_documents.filename). For each match, it
-also requires that the uploaded document has produced a
-document_finding with status='present' on the same MUST as the cite
-— evidence-of-what-was-cited, not just filename-collision. If both
-conditions hold, the cite is auto-verified: `last_verified_at` set,
-`next_review_due` bumped by cadence, and an
-`external_evidence_verification_log` row is written for the audit
-trail.
+TWO paths run in sequence:
 
-Design notes (Ship 92'.a user selections):
-  - URL match alone is not enough — requires linked-doc present
-    findings on same MUST (auditor-defensible; Ship 89'.b Lesson 98
-    stored/cited separation).
-  - `changes_detected` records 'auto-matched by URL basename'.
-  - `verified_by` uses the uploading user's UUID (the person's
-    upload triggered the verification).
-  - `sample_upload_id` links back to client_documents.id.
+  Ship 92'.a — best-effort URL basename auto-verify
+    (works only when cite URLs are clean file paths; misses
+     SharePoint / Google Drive / OneDrive / Confluence / Notion)
 
-Env gate:
-  USE_CITE_AUTO_VERIFY ∈ {"0", "1"} — default "1" (on). Zero blast
-  radius when a tenant has no cites; safe to leave on.
+  Ship 92'.b — MUST-overlap system attestation (SCALE-INVARIANT)
+    For each active cite whose MUST has a `status='present'`
+    finding from the uploaded doc, INSERT a
+    `cite_attestation_prompt` row (status='pending'). Tenant
+    reviews via dashboard drill-in and one-clicks Confirm /
+    Dismiss. Confirm writes `external_evidence_verification_log`;
+    tenant OWNS the match decision.
 
-Hook: called from doc_pipeline as Stage 4.8, immediately after
-workbook_persistence (Stage 4.6) + workbook_arbiter (Stage 4.7, if
-enabled). Best-effort — errors are logged and swallowed; never
-blocks the upload pipeline.
+Ship 92'.a auto-verifies where URLs are clean paths (rare in real
+workbooks). Ship 92'.b creates prompts where MUSTs overlap
+(scale-invariant across every URL shape). Both hook into
+`doc_pipeline` Stage 4.8.
+
+Env gates:
+  USE_CITE_AUTO_VERIFY ∈ {"0", "1"} — default "1" (Ship 92'.a auto-verify)
+  USE_CITE_ATTESTATION ∈ {"0", "1"} — default "1" (Ship 92'.b prompts)
+
+Best-effort — errors are logged and swallowed; never blocks upload.
 """
 from __future__ import annotations
 
@@ -238,5 +233,288 @@ def resolve_cites_on_document_upload(
         pg.rollback()
         result["error"] = f"{type(e).__name__}: {e}"
         logger.warning("cite_resolver: resolve_cites failed: %s", e)
+
+    return result
+
+
+# ── Ship 92'.b — MUST-overlap candidate detection ────────────────────
+
+
+def create_attestation_prompts_on_document_upload(
+    pg,
+    tenant_id:          str | UUID,
+    client_document_id: str | UUID,
+) -> dict:
+    """Ship 92'.b.ii — scan for cite/doc MUST overlaps + insert prompts.
+
+    For each active cite in this tenant whose `must_id` has a
+    `status='present'` finding from the uploaded document, insert a
+    `cite_attestation_prompt` row (status='pending'). Tenant reviews
+    on dashboard drill-in and one-clicks Confirm / Dismiss.
+
+    Dedup: UNIQUE(tenant, cite, candidate_doc) WHERE pending — the
+    same upload against the same cite doesn't spam prompts.
+
+    Scale-invariant: the signal is MUST overlap, not URL parsing.
+    Works across every URL shape (SharePoint, Drive, OneDrive,
+    Notion, bare paths, ...).
+
+    Returns:
+      {
+        "cites_scanned":   int,
+        "candidates_found": int,   # MUST overlap
+        "prompts_created": int,   # after dedup
+        "prompts_existing": int,  # already had pending prompt
+      }
+    """
+    result: dict[str, Any] = {
+        "cites_scanned":    0,
+        "candidates_found": 0,
+        "prompts_created":  0,
+        "prompts_existing": 0,
+        "error":            None,
+    }
+    if (os.getenv("USE_CITE_ATTESTATION") or "1") == "0":
+        result["error"] = "USE_CITE_ATTESTATION=0"
+        return result
+
+    tenant_str = str(tenant_id)
+    doc_str    = str(client_document_id)
+
+    try:
+        with pg.cursor() as cur:
+            cur.execute(
+                "SELECT set_config('app.tenant_id', %s, TRUE)",
+                (tenant_str,),
+            )
+            # Find every (cite, must_id) pair where the uploaded doc
+            # has a present finding on the same must_id.
+            cur.execute(
+                """
+                SELECT ees.id::text, ees.must_id, ees.leaf_id
+                  FROM external_evidence_source ees
+                 WHERE ees.tenant_id = %s::uuid
+                   AND ees.is_active = TRUE
+                   AND EXISTS (
+                     SELECT 1 FROM document_findings df
+                      WHERE df.tenant_id         = %s::uuid
+                        AND df.document_id       = %s::uuid
+                        AND df.checklist_item_id = ees.must_id
+                        AND df.status            = 'present'
+                        AND df.is_active         = TRUE
+                   )
+                """,
+                (tenant_str, tenant_str, doc_str),
+            )
+            candidates = cur.fetchall()
+            result["cites_scanned"] = len(candidates)
+            result["candidates_found"] = len(candidates)
+            if not candidates:
+                return result
+
+            # For control_ref display, map MUST → control_ref via
+            # the checklist_item_id shape 'item:CTRL:name' — CTRL is
+            # the second segment.
+            for cite_id, must_id, leaf_id in candidates:
+                control_ref = must_id.split(":", 2)[1] if ":" in must_id else ""
+
+                # ON CONFLICT DO NOTHING — the UNIQUE index catches
+                # duplicate pending prompts by construction.
+                cur.execute(
+                    """
+                    INSERT INTO cite_attestation_prompt (
+                        tenant_id, cite_id,
+                        candidate_document_id,
+                        must_id, leaf_id, control_ref,
+                        status
+                    ) VALUES (
+                        %s::uuid, %s::uuid,
+                        %s::uuid,
+                        %s, %s, %s,
+                        'pending'
+                    )
+                    ON CONFLICT (tenant_id, cite_id, candidate_document_id)
+                    WHERE status = 'pending'
+                    DO NOTHING
+                    RETURNING id::text
+                    """,
+                    (
+                        tenant_str, cite_id, doc_str,
+                        must_id, leaf_id, control_ref,
+                    ),
+                )
+                if cur.fetchone() is not None:
+                    result["prompts_created"] += 1
+                else:
+                    result["prompts_existing"] += 1
+
+        pg.commit()
+    except Exception as e:
+        pg.rollback()
+        result["error"] = f"{type(e).__name__}: {e}"
+        logger.warning("cite_resolver: create_attestation_prompts failed: %s", e)
+
+    return result
+
+
+def confirm_attestation(
+    pg,
+    tenant_id: str | UUID,
+    prompt_id: str | UUID,
+    user_id:   str | UUID,
+) -> dict:
+    """Ship 92'.b.iii — tenant one-click confirmation.
+
+    Writes `external_evidence_verification_log` + bumps cite +
+    marks prompt as confirmed. Tenant's decision, not URL guess.
+    """
+    result = {"ok": False, "verification_log_id": None, "error": None}
+    tenant_str = str(tenant_id)
+    prompt_str = str(prompt_id)
+    user_str   = str(user_id)
+
+    try:
+        with pg.cursor() as cur:
+            cur.execute(
+                "SELECT set_config('app.tenant_id', %s, TRUE)",
+                (tenant_str,),
+            )
+            # Fetch prompt + cite context
+            cur.execute(
+                """
+                SELECT cap.cite_id::text, cap.candidate_document_id::text,
+                       cap.must_id, cap.leaf_id, cap.status,
+                       ees.system_id::text, ees.cadence_days,
+                       cd.filename
+                  FROM cite_attestation_prompt cap
+                  JOIN external_evidence_source ees ON ees.id = cap.cite_id
+                  JOIN client_documents cd ON cd.id = cap.candidate_document_id
+                 WHERE cap.id = %s::uuid
+                   AND cap.tenant_id = %s::uuid
+                """,
+                (prompt_str, tenant_str),
+            )
+            row = cur.fetchone()
+            if not row:
+                result["error"] = "prompt not found"
+                return result
+            (cite_id, doc_id, must_id, leaf_id, status,
+             system_id, cadence_days, doc_filename) = row
+            if status != "pending":
+                result["error"] = f"prompt is {status!r}, not pending"
+                return result
+
+            # Write verification_log
+            cur.execute(
+                """
+                INSERT INTO external_evidence_verification_log (
+                    tenant_id, system_id, leaf_id,
+                    verified_by, changes_detected,
+                    sample_upload_id, note,
+                    musts_covered_count
+                ) VALUES (
+                    %s::uuid, %s::uuid, %s,
+                    %s::uuid, %s,
+                    %s::uuid, %s,
+                    1
+                )
+                RETURNING id::text
+                """,
+                (
+                    tenant_str, system_id, leaf_id,
+                    user_str,
+                    "tenant-confirmed attestation",
+                    doc_id,
+                    (f"Ship 92'.b tenant attestation — confirmed that "
+                     f"uploaded document '{doc_filename}' is the target "
+                     f"of cite on {must_id}"),
+                ),
+            )
+            log_id = cur.fetchone()[0]
+
+            # Bump cite freshness
+            cur.execute(
+                """
+                UPDATE external_evidence_source
+                   SET last_verified_at = NOW(),
+                       next_review_due  = NOW() + make_interval(days => %s),
+                       updated_at       = NOW(),
+                       updated_by       = %s::uuid
+                 WHERE id = %s::uuid
+                """,
+                (cadence_days, user_str, cite_id),
+            )
+
+            # Mark prompt confirmed
+            cur.execute(
+                """
+                UPDATE cite_attestation_prompt
+                   SET status              = 'confirmed',
+                       resolved_at         = NOW(),
+                       resolved_by         = %s::uuid,
+                       verification_log_id = %s::uuid,
+                       updated_at          = NOW()
+                 WHERE id = %s::uuid
+                """,
+                (user_str, log_id, prompt_str),
+            )
+
+        pg.commit()
+        result["ok"] = True
+        result["verification_log_id"] = log_id
+    except Exception as e:
+        pg.rollback()
+        result["error"] = f"{type(e).__name__}: {e}"
+        logger.warning("cite_resolver: confirm_attestation failed: %s", e)
+
+    return result
+
+
+def dismiss_attestation(
+    pg,
+    tenant_id: str | UUID,
+    prompt_id: str | UUID,
+    user_id:   str | UUID,
+    reason:    str = "not the same document",
+) -> dict:
+    """Tenant dismissal. No verification_log write; audit trail
+    preserved via prompt.status='dismissed' + reason."""
+    result = {"ok": False, "error": None}
+    tenant_str = str(tenant_id)
+    prompt_str = str(prompt_id)
+    user_str   = str(user_id)
+    _reason = (reason or "").strip() or "not the same document"
+
+    try:
+        with pg.cursor() as cur:
+            cur.execute(
+                "SELECT set_config('app.tenant_id', %s, TRUE)",
+                (tenant_str,),
+            )
+            cur.execute(
+                """
+                UPDATE cite_attestation_prompt
+                   SET status           = 'dismissed',
+                       resolved_at      = NOW(),
+                       resolved_by      = %s::uuid,
+                       dismissed_reason = %s,
+                       updated_at       = NOW()
+                 WHERE id = %s::uuid
+                   AND tenant_id = %s::uuid
+                   AND status = 'pending'
+                RETURNING id::text
+                """,
+                (user_str, _reason, prompt_str, tenant_str),
+            )
+            row = cur.fetchone()
+            if row is None:
+                result["error"] = "prompt not found or not pending"
+                return result
+        pg.commit()
+        result["ok"] = True
+    except Exception as e:
+        pg.rollback()
+        result["error"] = f"{type(e).__name__}: {e}"
+        logger.warning("cite_resolver: dismiss_attestation failed: %s", e)
 
     return result
