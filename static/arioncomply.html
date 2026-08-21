@@ -5385,11 +5385,17 @@ function renderCiteAttestationsCard(attestations) {
       `Is this the version your workbook was referring to?`
     );
 
+    // Ship 92'.f — strong-match badge when URL basename also matches.
+    const strongBadge = (a.confidence === 'url_and_must')
+      ? `<span style="font-size:10px;padding:2px 6px;background:#3D8C4C;color:#FAF8F2;border-radius:2px;font-weight:600;letter-spacing:0.3px;text-transform:uppercase" title="URL basename matches the uploaded filename in addition to the MUST overlap.">Strong match</span>`
+      : '';
+
     return `
       <div id="cite-attest-row-${attr(a.id)}" style="padding:12px;background:#fff;border:1px solid #F0EDE3;border-radius:4px;margin-bottom:6px;font-size:12px">
         <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px">
           <span style="color:#3A382E;font-weight:600;min-width:70px">${esc(a.control_ref)}</span>
           <span style="color:#3A382E;font-weight:600;flex:1">${esc(a.leaf_label || '')}</span>
+          ${strongBadge}
         </div>
         <div style="color:#3A382E;line-height:1.45;margin-bottom:10px">${prose}</div>
         <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">

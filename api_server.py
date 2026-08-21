@@ -8447,6 +8447,7 @@ def list_pending_cite_attestations(
                        cap.candidate_document_id::text,
                        cap.must_id, cap.leaf_id, cap.control_ref,
                        cap.created_at, cap.expires_at,
+                       cap.confidence,     -- Ship 92'.f
                        cd.filename          AS candidate_filename,
                        tes.system_name      AS cite_system_name,
                        ees.hyperlink_url    AS cite_url,
@@ -8458,7 +8459,10 @@ def list_pending_cite_attestations(
                   JOIN tenant_external_system tes ON tes.id = ees.system_id
                  WHERE cap.tenant_id = %s::uuid
                    AND cap.status    = 'pending'
-                 ORDER BY cap.created_at DESC
+                 ORDER BY
+                   -- strong-signal prompts first
+                   CASE WHEN cap.confidence = 'url_and_must' THEN 0 ELSE 1 END,
+                   cap.created_at DESC
                 """,
                 (key_info.tenant_id,),
             )
@@ -8479,11 +8483,12 @@ def list_pending_cite_attestations(
             "control_ref":        r[5],
             "created_at":         r[6].isoformat() if r[6] else None,
             "expires_at":         r[7].isoformat() if r[7] else None,
-            "candidate_filename": r[8],
-            "cite_system_name":   r[9],
-            "cite_url":           r[10],
-            "cite_display":       r[11],
-            "cite_note":          r[12],
+            "confidence":         r[8],
+            "candidate_filename": r[9],
+            "cite_system_name":   r[10],
+            "cite_url":           r[11],
+            "cite_display":       r[12],
+            "cite_note":          r[13],
         }
         raw.update(humanize_attestation_row(raw))
         attestations.append(raw)

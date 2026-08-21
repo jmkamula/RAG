@@ -30,6 +30,13 @@ principle + [[product-concept-evidence-cascade-2026-06-27]] for
 the strategic evidence-cascade layer (event-driven implications:
 "new employee" → training/access/NDA artefacts needed).
 
+For cite-mode specifically: **the system exposes + tracks; the
+tenant attests.** No silent machine attestations, no URL parsers
+that auto-write `external_evidence_verification_log`. Every
+`verified_by` is a real user at the moment of a tenant decision.
+See [[product-principle-cite-expose-and-track]] for the full rule
+set + what it rules out + what it allows (candidate generation).
+
 ## Before touching module X, read arc Y
 
 Before starting work in these areas, load the referenced arc doc
@@ -167,6 +174,8 @@ Future sessions should read these before product work:
   Establishes the pattern: emit structured payload → render as UI card, don't
   inject text into answer_text.
 - [[product-principle-evidence-stored-vs-cited]] — the cite/store coexistence model
+- [[product-principle-cite-expose-and-track]] — cite-mode: expose + track,
+  tenant attests. No silent machine attestations. Codified 2026-08-21 in Ship 92'.f.
 - [[templates-v2-anchors-complete-2026-06-25]] — the 20 v2 anchor templates
 - [[template-tenant-profile-2026-06-26]] — placeholder substitution
 - [[evidence-class-breakdown-backend-2026-06-26]] — the dashboard drill-in surface

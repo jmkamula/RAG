@@ -76,37 +76,41 @@ def resolve_cites_on_document_upload(
     pg,
     tenant_id:          str | UUID,
     client_document_id: str | UUID,
-    user_id:            str | UUID | None,
+    user_id:            str | UUID | None = None,  # kept for backwards compat
 ) -> dict:
-    """Ship 92'.a.iii entry point — called after successful doc upload.
+    """Ship 92'.f — URL-basename matcher. NO LONGER writes verification_log.
 
-    Args:
-      pg:                 open psycopg2 connection
-      tenant_id:          tenant UUID
-      client_document_id: the freshly-uploaded client_documents.id
-      user_id:            uploading user's UUID (used as verified_by)
+    Codified in [[product-principle-cite-expose-and-track]]: the system
+    exposes + tracks; the tenant attests. This function used to write
+    external_evidence_verification_log rows automatically on URL-basename
+    match — a silent machine attestation that drifted from the principle.
 
-    Returns a stats dict:
-      {
-        "cites_scanned":       int,   # active cites with hyperlink_url
-        "url_matches":         int,   # basename matched client_documents
-        "must_matches":        int,   # url_matches + linked-doc has present
-        "verified":            int,   # verification_log rows written
-        "target_document":     str,
-        "target_filename":     str,
-      }
+    Ship 92'.f downgrades: on match + MUST overlap, we UPGRADE the
+    existing attestation prompt (created by Ship 92'.b's must-overlap
+    detector) from confidence='must_overlap' to confidence='url_and_must'.
+    The prompt still requires tenant one-click confirmation to record
+    verification.
 
-    Best-effort: on internal error, returns partial stats + logs
-    warning. Never raises to caller.
+    Returns:
+      cites_scanned:     int  active cites with hyperlink_url
+      url_matches:       int  basename matched client_documents.filename
+      must_matches:      int  url_match + linked-doc has present finding
+      prompts_upgraded:  int  attestation prompts bumped to url_and_must
     """
     result: dict[str, Any] = {
-        "cites_scanned": 0, "url_matches": 0,
-        "must_matches": 0, "verified": 0,
-        "target_document": str(client_document_id),
-        "target_filename": None,
-        "error": None,
+        "cites_scanned":    0,
+        "url_matches":      0,
+        "must_matches":     0,
+        "prompts_upgraded": 0,
+        "target_document":  str(client_document_id),
+        "target_filename":  None,
+        "error":            None,
     }
     if (os.getenv("USE_CITE_AUTO_VERIFY") or "1") == "0":
+        # Kept for back-compat env gate; the "auto-verify" name is now
+        # historical — the function no longer verifies. It upgrades
+        # prompts. Rename deferred to a future arc so we don't churn
+        # tenant configs.
         result["error"] = "USE_CITE_AUTO_VERIFY=0"
         return result
 
@@ -119,7 +123,7 @@ def resolve_cites_on_document_upload(
                 "SELECT set_config('app.tenant_id', %s, TRUE)",
                 (tenant_str,),
             )
-            # 1. Get the uploaded document's filename.
+            # 1. Uploaded document filename.
             cur.execute(
                 """
                 SELECT filename FROM client_documents
@@ -138,12 +142,10 @@ def resolve_cites_on_document_upload(
             if not target_filename:
                 return result
 
-            # 2. Fetch active cites with a stored hyperlink_url.
+            # 2. Fetch active cites with stored hyperlink_url.
             cur.execute(
                 """
-                SELECT ees.id::text, ees.must_id, ees.leaf_id,
-                       ees.system_id::text, ees.hyperlink_url,
-                       ees.cadence_days, ees.last_verified_at
+                SELECT ees.id::text, ees.must_id, ees.leaf_id, ees.hyperlink_url
                   FROM external_evidence_source ees
                  WHERE ees.tenant_id     = %s::uuid
                    AND ees.is_active     = TRUE
@@ -158,15 +160,13 @@ def resolve_cites_on_document_upload(
 
             target_lower = target_filename.lower()
 
-            for cite_id, must_id, leaf_id, system_id, url, cadence_days, last_verified in cites:
+            for cite_id, must_id, leaf_id, url in cites:
                 basename = _url_basename(url or "")
-                if not basename:
-                    continue
-                if basename.lower() != target_lower:
+                if not basename or basename.lower() != target_lower:
                     continue
                 result["url_matches"] += 1
 
-                # 3. Require: uploaded doc has present findings on same MUST.
+                # Require: uploaded doc has present findings on same MUST.
                 cur.execute(
                     """
                     SELECT 1 FROM document_findings
@@ -183,50 +183,27 @@ def resolve_cites_on_document_upload(
                     continue
                 result["must_matches"] += 1
 
-                # 4. Write verification_log + update cite.
-                # verified_by is NOT NULL — use uploading user; if
-                # None (rare), fall back to a synthetic sentinel-uuid
-                # constant. The upload path always has a user_id in
-                # practice; this defence-in-depth handles admin CLI.
-                _verified_by = str(user_id) if user_id else "00000000-0000-0000-0000-000000000000"
+                # Ship 92'.f — upgrade the (must_overlap) prompt to
+                # url_and_must. If Ship 92'.b's detector already
+                # created a prompt for this (cite, doc) pair, bump its
+                # confidence; otherwise this is a no-op (Ship 92'.b
+                # runs alongside and will have created the prompt).
                 cur.execute(
                     """
-                    INSERT INTO external_evidence_verification_log (
-                        tenant_id, system_id, leaf_id,
-                        verified_by, changes_detected,
-                        sample_upload_id, note,
-                        musts_covered_count
-                    ) VALUES (
-                        %s::uuid, %s::uuid, %s,
-                        %s::uuid, %s,
-                        %s::uuid, %s,
-                        1
-                    )
+                    UPDATE cite_attestation_prompt
+                       SET confidence = 'url_and_must',
+                           updated_at = NOW()
+                     WHERE tenant_id             = %s::uuid
+                       AND cite_id               = %s::uuid
+                       AND candidate_document_id = %s::uuid
+                       AND status                = 'pending'
+                       AND confidence            = 'must_overlap'
+                    RETURNING id
                     """,
-                    (
-                        tenant_str, system_id, leaf_id,
-                        _verified_by,
-                        "auto-matched by URL basename",
-                        doc_str,
-                        (f"Ship 92'.a auto-verify — cite URL basename "
-                         f"'{basename}' matched uploaded document "
-                         f"'{target_filename}'; document has present "
-                         f"finding on {must_id}"),
-                    ),
+                    (tenant_str, cite_id, doc_str),
                 )
-                # Update the cite row itself.
-                cur.execute(
-                    """
-                    UPDATE external_evidence_source
-                       SET last_verified_at = NOW(),
-                           next_review_due  = NOW() + make_interval(days => %s),
-                           updated_at       = NOW(),
-                           updated_by       = %s::uuid
-                     WHERE id = %s::uuid
-                    """,
-                    (cadence_days, _verified_by, cite_id),
-                )
-                result["verified"] += 1
+                if cur.fetchone() is not None:
+                    result["prompts_upgraded"] += 1
 
         pg.commit()
     except Exception as e:

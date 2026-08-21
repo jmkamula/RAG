@@ -1059,12 +1059,14 @@ class DocumentPipeline:
                     finally:
                         _cav_conn.close()
                     if _cav_summary and _cav_summary.get("cites_scanned", 0) > 0:
+                        # Ship 92'.f — no longer writes verification_log;
+                        # upgrades attestation prompt confidence on URL match.
                         logger.info(
-                            f"Stage 4.8a: cite auto-verify — "
+                            f"Stage 4.8a: cite URL scan — "
                             f"scanned={_cav_summary.get('cites_scanned')} "
                             f"url_match={_cav_summary.get('url_matches')} "
                             f"must_match={_cav_summary.get('must_matches')} "
-                            f"verified={_cav_summary.get('verified')}"
+                            f"prompts_upgraded={_cav_summary.get('prompts_upgraded')}"
                         )
                     if _cap_summary and _cap_summary.get("candidates_found", 0) > 0:
                         logger.info(
