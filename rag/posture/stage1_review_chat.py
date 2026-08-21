@@ -258,6 +258,8 @@ def list_pending_for_control(pg_conn, tenant_id: str, control_ref: str) -> list[
                        df.inferred_from_control_ref,
                        df.inferred_from_standard_id, df.inference_source,
                        df.checklist_item_id, cd.filename, cd.document_title,
+                       df.workbook_proposal_id, wip.mapping_id,
+                       wip.sheet_name AS wip_sheet_name,
                        ROW_NUMBER() OVER (
                            PARTITION BY COALESCE(df.evidence_group_id,
                                                  df.id::text)
@@ -265,6 +267,8 @@ def list_pending_for_control(pg_conn, tenant_id: str, control_ref: str) -> list[
                        ) AS rn
                   FROM document_findings df
                   LEFT JOIN client_documents cd ON cd.id = df.document_id
+                  LEFT JOIN workbook_intake_proposal wip
+                            ON wip.id = df.workbook_proposal_id
                  WHERE df.tenant_id     = %s
                    AND df.control_ref   = %s
                    AND df.review_status = 'pending'
@@ -273,7 +277,7 @@ def list_pending_for_control(pg_conn, tenant_id: str, control_ref: str) -> list[
             SELECT finding_id, status, confidence, excerpt, extracted_at,
                    inferred_from_control_ref, inferred_from_standard_id,
                    inference_source, checklist_item_id, filename,
-                   document_title
+                   document_title, mapping_id, wip_sheet_name
               FROM ranked
              WHERE rn = 1
              ORDER BY extracted_at
@@ -295,7 +299,7 @@ def list_pending_for_control(pg_conn, tenant_id: str, control_ref: str) -> list[
         m = _EXCERPT_RE.match(excerpt)
         sheet_name = m.group(1) if m else None
         column_name = m.group(2) if m else None
-        out.append({
+        row_out = {
             "finding_id":                r[0],
             "status":                    r[1],
             "confidence":                r[2],
@@ -313,7 +317,25 @@ def list_pending_for_control(pg_conn, tenant_id: str, control_ref: str) -> list[
             "column_name":               column_name,
             "filename":                  r[9],
             "document_title":            r[10],
-        })
+        }
+        # Ship 93'.a — attach partial explainability for workbook partials
+        _mapping_id = r[11]
+        _wip_sheet  = r[12]
+        if (row_out["status"] == "partial"
+                and row_out["inference_source"] == "workbook"
+                and _mapping_id and item_id):
+            try:
+                from rag.posture.partial_explainer import explain_partial
+                row_out["completeness"] = explain_partial(
+                    must_id        = item_id,
+                    mapping_id     = _mapping_id,
+                    sheet_name     = _wip_sheet or sheet_name or "",
+                    matched_column = column_name or "",
+                )
+            except Exception as _exc:
+                # Best-effort — never block Stage-1 detail on explainer failure
+                pass
+        out.append(row_out)
     return out
 
 

@@ -4930,6 +4930,31 @@ async function selectStage1(c, ev) {
                  ${esc(f.column_name)}
                </code>`
             : (f.must_text ? esc(scrubDocxNoise(f.excerpt)) : '');
+          // Ship 93'.a — partial explainability panel. Server-side
+          // derivation from the source YAML (rag/posture/partial_explainer.py).
+          // Only rendered on workbook-sourced partial findings that have
+          // a completeness payload attached.
+          let completenessHtml = '';
+          if (f.completeness && f.completeness.primary_prose) {
+            const c = f.completeness;
+            const branchBadge = c.branch === 'anchor_missing'
+              ? '<span style="font-size:9px;padding:1px 5px;background:#9C6F1B;color:#FAF8F2;border-radius:2px;letter-spacing:0.3px">Anchor missing</span>'
+              : c.branch === 'corroboration_only'
+              ? '<span style="font-size:9px;padding:1px 5px;background:#5C5A4F;color:#FAF8F2;border-radius:2px;letter-spacing:0.3px">Corroboration only</span>'
+              : '';
+            const panelId = `completeness-${f.finding_id}`;
+            completenessHtml = `
+              <div style="margin-top:6px;padding:6px 8px;background:#fff;border:1px dashed #D9D5C5;border-radius:4px">
+                <a href="#" onclick="event.preventDefault();var el=document.getElementById('${panelId}');el.style.display=(el.style.display==='none'?'':'none')"
+                   style="font-size:10px;color:#5C5A4F;text-decoration:none;display:flex;align-items:center;gap:6px">
+                  <span>▸ How to make this present</span>
+                  ${branchBadge}
+                </a>
+                <div id="${panelId}" style="display:none;margin-top:6px;font-size:11px;color:#3A382E;line-height:1.45">
+                  ${c.primary_prose || ''}
+                </div>
+              </div>`;
+          }
           h += `<div${mustIdAttr} style="margin:0 0 6px 14px;padding:6px 8px;
                               background:#FAF8F2;border-radius:5px;
                               border:1px solid #E8E5DA">
@@ -4942,6 +4967,7 @@ async function selectStage1(c, ev) {
               ${sourceLine ? `<span style="color:#9C9A8E;margin-left:4px">${sourceLine}</span>` : ''}
             </div>
             ${chain}
+            ${completenessHtml}
           </div>`;
         }
       }
