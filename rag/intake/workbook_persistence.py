@@ -264,6 +264,7 @@ def persist_proposals(
                                 f"workbook cite: sheet {p.sheet!r} "
                                 f"column {cite_meta.get('header')!r}"
                             ),
+                            hyperlink_url = cite_meta.get("hyperlink_url"),
                         )
 
         pg.commit()
@@ -325,6 +326,7 @@ def _upsert_cite(
     cadence_days:      int,
     origin_finding_id: str | None,
     per_must_note:     str,
+    hyperlink_url:     str | None = None,
 ) -> None:
     """Insert or reactivate an external_evidence_source row for this cite.
 
@@ -332,6 +334,10 @@ def _upsert_cite(
     means duplicate workbook cites collapse (e.g. all 149 SoA hyperlinks
     binding item:6.1.3:soa_reference → 1 cite). Existing rows get their
     origin_finding_id + per_must_note refreshed.
+
+    Ship 92'.a.ii — hyperlink_url stored on emission for the auto-verify
+    resolver. Multi-URL columns collapse to one cite; this stores the
+    first non-mailto URL (deterministic on first-cell-in-column order).
     """
     cur.execute(
         """
@@ -352,22 +358,23 @@ def _upsert_cite(
                SET cadence_days      = %s,
                    per_must_note     = %s,
                    origin_finding_id = COALESCE(%s::uuid, origin_finding_id),
+                   hyperlink_url     = COALESCE(%s, hyperlink_url),
                    updated_at        = now()
              WHERE id = %s::uuid
             """,
-            (cadence_days, per_must_note, origin_finding_id, row[0]),
+            (cadence_days, per_must_note, origin_finding_id, hyperlink_url, row[0]),
         )
         return
     cur.execute(
         """
         INSERT INTO external_evidence_source (
             tenant_id, must_id, leaf_id, system_id,
-            cadence_days, per_must_note, origin_finding_id
+            cadence_days, per_must_note, origin_finding_id, hyperlink_url
         ) VALUES (
             %s::uuid, %s, %s, %s::uuid,
-            %s, %s, %s::uuid
+            %s, %s, %s::uuid, %s
         )
         """,
         (tenant_id, must_id, leaf_id, system_id,
-         cadence_days, per_must_note, origin_finding_id),
+         cadence_days, per_must_note, origin_finding_id, hyperlink_url),
     )

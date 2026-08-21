@@ -1024,6 +1024,45 @@ class DocumentPipeline:
                 posture_skipped  = summary.get("posture_skipped", 0),
             )
 
+            # ── Stage 4.8: cite auto-verify — Ship 92'.a ────────────────────
+            # If this upload's filename matches the basename of any
+            # active cite's stored hyperlink URL AND this doc has
+            # `document_findings` with status='present' on the same MUST
+            # as the cite, auto-verify the cite (write
+            # external_evidence_verification_log + bump last_verified_at
+            # + next_review_due). Best-effort; errors logged and
+            # swallowed.
+            _cav_summary: Optional[dict] = None
+            _cav_doc_id  = summary.get("doc_id") or _wbd_doc_id
+            if _cav_doc_id and not self.dry_run:
+                try:
+                    from rag.cascade.cite_resolver import (
+                        resolve_cites_on_document_upload,
+                    )
+                    _cav_conn = psycopg2.connect(self.db_url)
+                    try:
+                        _cav_summary = resolve_cites_on_document_upload(
+                            _cav_conn,
+                            tenant_id          = tenant_id,
+                            client_document_id = _cav_doc_id,
+                            user_id            = user_id,
+                        )
+                    finally:
+                        _cav_conn.close()
+                    if _cav_summary and _cav_summary.get("cites_scanned", 0) > 0:
+                        logger.info(
+                            f"Stage 4.8: cite auto-verify — "
+                            f"scanned={_cav_summary.get('cites_scanned')} "
+                            f"url_match={_cav_summary.get('url_matches')} "
+                            f"must_match={_cav_summary.get('must_matches')} "
+                            f"verified={_cav_summary.get('verified')}"
+                        )
+                except Exception as _cav_exc:
+                    logger.warning(
+                        f"cite_resolver failed (Stage 4 already committed): "
+                        f"{type(_cav_exc).__name__}: {_cav_exc}"
+                    )
+
             # ── Stage 4.7: engine kick — Ship 51'.b ──────────────────────────
             # Auto-approved findings (fingerprint / templated / workbook) never
             # go through Stage-1 approval, so the engine kick that lives in

@@ -490,15 +490,31 @@ def _column_has_real_cite_hyperlink(
     mailto-only column (e.g. Access Register PII Systems' owner emails)
     doesn't produce a spurious external_evidence_source row.
     """
+    return _first_real_cite_url_in_column(
+        headers, matched_header, header_row, sheet_hyperlinks
+    ) is not None
+
+
+def _first_real_cite_url_in_column(
+    headers: list[str],
+    matched_header: str,
+    header_row: int | None,
+    sheet_hyperlinks: list[dict],
+) -> str | None:
+    """Ship 92'.a.ii — return the first non-mailto data-row URL in the
+    matched column, or None if no real cite hyperlink exists.
+
+    Used by workbook_persistence to populate external_evidence_source.
+    hyperlink_url on cite emission (Ship 92'.a auto-verify prerequisite).
+    """
     if not sheet_hyperlinks or header_row is None or not matched_header:
-        return False
-    # Find the column INDEX for matched_header (first match wins).
+        return None
     try:
         col_idx = headers.index(matched_header)
     except ValueError:
-        return False
+        return None
     target_letter = _idx_to_column_letter(col_idx)
-    header_row_1based = header_row + 1  # header_row is 0-indexed row number
+    header_row_1based = header_row + 1
     for hl in sheet_hyperlinks:
         cell = hl.get("cell") or ""
         col = _cell_column_letter(cell)
@@ -508,8 +524,8 @@ def _column_has_real_cite_hyperlink(
         url = (hl.get("url") or "").strip()
         if not url or url.lower().startswith("mailto:"):
             continue
-        return True
-    return False
+        return url
+    return None
 
 
 def evaluate_pass(
@@ -608,17 +624,22 @@ def evaluate_pass(
         if hit is None:
             continue
         _, header = hit
-        # Row-level guard — only when hyperlinks + header_row are known.
+        # Row-level guard + URL extraction — only when hyperlinks + header_row
+        # are known. Ship 92'.a.ii: store the first real cite URL so the
+        # auto-verification resolver can compare basenames on doc upload.
+        first_url: str | None = None
         if sheet_hyperlinks is not None:
-            if not _column_has_real_cite_hyperlink(
+            first_url = _first_real_cite_url_in_column(
                 headers, header, header_row, sheet_hyperlinks,
-            ):
+            )
+            if first_url is None:
                 continue
         prop.cite_bindings[bt] = {
             "header":            header,
             "cite_kind":         cite.get("cite_kind", "internal_document"),
             "verification_days": cite.get("verification_days"),
             "system_hint":       cite.get("system_hint"),
+            "hyperlink_url":     first_url,  # Ship 92'.a.ii
         }
 
     return prop
