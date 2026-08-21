@@ -939,6 +939,48 @@ class DocumentPipeline:
                                 f"{_wbd_proposals} proposals + {_wbd_findings} "
                                 f"findings"
                             )
+
+                            # ── Stage 4.7: workbook LLM row-arbiter ──────
+                            # Ship 91' — env-gated. USE_WORKBOOK_LLM_ARBITER:
+                            #   unset/0 → skip (default)
+                            #   shadow  → run, count would-be-adds, do NOT
+                            #             write to document_findings
+                            #   1       → run + persist
+                            _arb_mode = (os.getenv("USE_WORKBOOK_LLM_ARBITER") or "0").lower()
+                            _arb_written = 0
+                            _arb_proposed = 0
+                            if _arb_mode in ("1", "shadow"):
+                                try:
+                                    from rag.intake.workbook_arbiter import (
+                                        arbitrate_workbook, persist_arbitrated_findings,
+                                    )
+                                    from rag.intake.workbook_discovery import load_mappings
+                                    _all_mappings = load_mappings()
+                                    _pass_lookup = {}
+                                    for _m in _all_mappings:
+                                        _mid = _m.get("mapping_id")
+                                        for _p in _m.get("passes") or []:
+                                            _pass_lookup[(_mid, _p.get("pass_name"))] = _p
+                                    _arb_findings = arbitrate_workbook(
+                                        _proposals, _rows_per_sheet, _pass_lookup,
+                                    )
+                                    _arb_proposed = len(_arb_findings)
+                                    if _arb_mode == "1" and _arb_findings:
+                                        _arb_written = persist_arbitrated_findings(
+                                            _wbd_conn, UUID(tenant_id),
+                                            UUID(_wbd_doc_id), _arb_findings,
+                                        )
+                                    logger.info(
+                                        f"Stage 4.7: workbook LLM arbiter "
+                                        f"mode={_arb_mode} proposed={_arb_proposed} "
+                                        f"written={_arb_written}"
+                                    )
+                                except Exception as _arb_exc:
+                                    logger.warning(
+                                        f"workbook_arbiter failed (Stage 4.6 "
+                                        f"already committed): "
+                                        f"{type(_arb_exc).__name__}: {_arb_exc}"
+                                    )
                         finally:
                             _wbd_conn.close()
                     else:

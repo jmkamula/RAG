@@ -103,16 +103,17 @@ def _map_confidence(raw: str) -> str:
 # `grounding_method` column added in schema_v81. See
 # [[ship-6-prime-b-grounding-provenance-2026-07-18]].
 _INFERENCE_TO_GROUNDING: dict[str, str] = {
-    "extracted":          "extractor_verbatim",   # LLM + verbatim-substring check (extractor.py:_evidence_grounded)
-    "templated":          "template",             # <<MUST item:X>> markers — deterministic
-    "workbook":           "workbook",             # workbook YAML row-matcher
-    "fingerprint_match":  "fingerprint",          # 2-of-N corroboration gate
-    "leaf_scan":          "leaf_scan",            # back-bind to unmet MUSTs (HITL-only)
-    "form":               "form",                 # retired 2026-07-04
-    "xfw_bridge":         "unknown",              # xfw is not evidence itself
+    "extracted":             "extractor_verbatim",   # LLM + verbatim-substring check (extractor.py:_evidence_grounded)
+    "templated":             "template",             # <<MUST item:X>> markers — deterministic
+    "workbook":              "workbook",             # workbook YAML row-matcher
+    "workbook_llm_arbiter":  "workbook_llm_arbiter", # Ship 91'.b — LLM row-arbiter, cell-substring-verified
+    "fingerprint_match":     "fingerprint",          # 2-of-N corroboration gate
+    "leaf_scan":             "leaf_scan",            # back-bind to unmet MUSTs (HITL-only)
+    "form":                  "form",                 # retired 2026-07-04
+    "xfw_bridge":            "unknown",              # xfw is not evidence itself
     # Ship 54'.e Phase 2 — structural pattern detectors
     # (doc-control header, revision history, interested parties, etc.)
-    "structural_pattern": "structural",
+    "structural_pattern":    "structural",
 }
 
 

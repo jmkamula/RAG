@@ -96,6 +96,12 @@ MODEL_CONSENSUS_GK   = _model("GATEKEEPER_MODEL",     "gpt-4.1-mini")  # existin
 MODEL_EXTRACTOR      = _model("MODEL_EXTRACTOR",      "claude-sonnet-4-6")
 MODEL_ENRICHER       = _model("MODEL_ENRICHER",       "claude-haiku-4-5-20251001")
 
+# Ship 91' — workbook LLM row-arbiter. Bounded per-row per-MUST
+# task; behaves more like a classifier than long-form extraction.
+# gpt-4.1-mini per Ship 91' design ("consistent with Ship 89'/90'
+# curators, ~$0.02/sheet"). Overridable for A/B tests.
+MODEL_WORKBOOK_ARBITER = _model("MODEL_WORKBOOK_ARBITER", "gpt-4.1-mini")
+
 # ── Offline enrichment ────────────────────────────────────────────────
 MODEL_ENRICHMENT_T2  = _model("MODEL_ENRICHMENT_T2",  "gpt-4.1-mini")
 
@@ -104,9 +110,10 @@ def all_models() -> dict:
     """Return a snapshot of every model constant + its current value.
     Useful for diagnostics + smoke tests."""
     return {
-        "MODEL_CHAT_ANSWER":    MODEL_CHAT_ANSWER,
-        "MODEL_CHAT_VERIFY":    MODEL_CHAT_VERIFY,
-        "MODEL_CLASSIFIER":     MODEL_CLASSIFIER,
+        "MODEL_CHAT_ANSWER":       MODEL_CHAT_ANSWER,
+        "MODEL_CHAT_VERIFY":       MODEL_CHAT_VERIFY,
+        "MODEL_CLASSIFIER":        MODEL_CLASSIFIER,
+        "MODEL_WORKBOOK_ARBITER":  MODEL_WORKBOOK_ARBITER,
         "MODEL_CONSENSUS_GK":   MODEL_CONSENSUS_GK,
         "MODEL_EXTRACTOR":      MODEL_EXTRACTOR,
         "MODEL_ENRICHER":       MODEL_ENRICHER,
