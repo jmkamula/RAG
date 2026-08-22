@@ -4943,6 +4943,14 @@ async function selectStage1(c, ev) {
               ? '<span style="font-size:9px;padding:1px 5px;background:#5C5A4F;color:#FAF8F2;border-radius:2px;letter-spacing:0.3px">Corroboration only</span>'
               : '';
             const panelId = `completeness-${f.finding_id}`;
+            // Ship 93'.b — pre-tag hints for the "Upload evidence" affordance.
+            // standard_id falls back through: finding.inferred_from_standard_id
+            // → control_summary.standard_id (from the enclosing endpoint)
+            // → empty (tenant picks in docs mode).
+            const standardId = f.inferred_from_standard_id
+                              || (d.control_summary && d.control_summary.standard_id)
+                              || '';
+            const mustLabel = c.must_label || c.must_id || '';
             completenessHtml = `
               <div style="margin-top:6px;padding:6px 8px;background:#fff;border:1px dashed #D9D5C5;border-radius:4px">
                 <a href="#" onclick="event.preventDefault();var el=document.getElementById('${panelId}');el.style.display=(el.style.display==='none'?'':'none')"
@@ -4952,6 +4960,13 @@ async function selectStage1(c, ev) {
                 </a>
                 <div id="${panelId}" style="display:none;margin-top:6px;font-size:11px;color:#3A382E;line-height:1.45">
                   ${c.primary_prose || ''}
+                  <div style="margin-top:8px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+                    <button onclick="_startPartialResolutionUpload('${esc(f.control_ref || '')}','${esc(standardId)}','${esc(mustLabel)}','${esc(f.leaf_title || '')}')"
+                            style="font-size:11px;padding:4px 10px;background:#3A382E;color:#FAF8F2;border:none;border-radius:3px;cursor:pointer;font-family:inherit">
+                      <i class="ti ti-upload"></i> Upload evidence to close this
+                    </button>
+                    <span style="font-size:10px;color:#9A9787">opens upload with these hints pre-set</span>
+                  </div>
                 </div>
               </div>`;
           }
@@ -7161,6 +7176,72 @@ function handleDrop(e) {
   for (const file of e.dataTransfer.files) uploadFile(file);
 }
 
+// Ship 93'.b — start a targeted upload flow from a partial finding's
+// completeness panel. Switches to docs mode, pre-sets the framework +
+// evidence-type dropdowns, installs a one-shot override for the next
+// uploadFile() call, and shows a banner naming the target.
+function _startPartialResolutionUpload(controlRef, standardId, mustLabel, leafTitle) {
+  // Install override for the next uploadFile call
+  window._uploadHintsOverride = {
+    standard_id:   standardId || null,
+    evidence_type: null,  // let tenant pick if they want to; global dropdown fills in
+    _control_ref:  controlRef,
+    _must_label:   mustLabel,
+    _leaf_title:   leafTitle,
+  };
+  // Switch to docs mode
+  setMode('docs');
+  // Pre-set the framework dropdown if we have a standard_id
+  setTimeout(() => {
+    const fwSel = document.getElementById('declare-framework');
+    if (fwSel && standardId) {
+      // dropdown values are the standard_id strings (ISO27001:2022 etc.)
+      for (const opt of fwSel.options) {
+        if (opt.value === standardId) {
+          fwSel.value = standardId;
+          break;
+        }
+      }
+    }
+    _showPartialResolutionBanner(controlRef, mustLabel, leafTitle);
+  }, 100);
+}
+
+function _showPartialResolutionBanner(controlRef, mustLabel, leafTitle) {
+  let banner = document.getElementById('partial-resolution-banner');
+  if (!banner) {
+    banner = document.createElement('div');
+    banner.id = 'partial-resolution-banner';
+    banner.style.cssText = 'margin:10px 0;padding:10px 12px;background:#F0EDE3;border:1px solid #C8C5B8;border-left:4px solid #534AB7;border-radius:4px;font-size:12px;color:#3A382E';
+    const dropZone = document.getElementById('drop-zone');
+    if (dropZone && dropZone.parentElement) {
+      dropZone.parentElement.insertBefore(banner, dropZone);
+    }
+  }
+  const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;');
+  banner.innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px">
+      <i class="ti ti-target" style="font-size:16px;color:#534AB7"></i>
+      <div style="flex:1">
+        <div><strong>Uploading to close a partial finding</strong></div>
+        <div style="font-size:11px;color:#5C5A4F;margin-top:2px">
+          Your next upload will be tagged for <strong>${esc(controlRef)}</strong>
+          ${leafTitle ? '· <strong>' + esc(leafTitle) + '</strong>' : ''}
+          — evidence for <em>${esc(mustLabel)}</em>.
+        </div>
+      </div>
+      <a href="#" onclick="event.preventDefault();_clearPartialResolutionBanner()"
+         style="font-size:11px;color:#534AB7;text-decoration:none">Cancel</a>
+    </div>`;
+}
+
+function _clearPartialResolutionBanner() {
+  const banner = document.getElementById('partial-resolution-banner');
+  if (banner && banner.parentElement) banner.parentElement.removeChild(banner);
+  window._uploadHintsOverride = null;
+}
+
+
 async function uploadFile(file) {
   const uploadId = 'tmp_' + Date.now() + '_' + Math.random().toString(36).slice(2,7);
   const card = addUploadCard(uploadId, file.name, file.size);
@@ -7168,15 +7249,25 @@ async function uploadFile(file) {
   try {
     const fd = new FormData();
     fd.append('file', file);
-    // Declared-intent hints from the dropdowns above the drop zone.
-    // Session-level: whatever's picked when the file is dropped applies.
+    // Declared-intent hints. Ship 93'.b: a per-upload override (set by
+    // "Upload evidence to close this" flow) takes precedence over the
+    // global dropdowns for a single upload.
+    const ovr = window._uploadHintsOverride;
     const fwSel = document.getElementById('declare-framework');
     const tpSel = document.getElementById('declare-type');
-    if (fwSel && fwSel.value && fwSel.value !== 'auto') {
-      fd.append('declared_standard_id', fwSel.value);
+    const fwVal = (ovr && ovr.standard_id) || (fwSel && fwSel.value);
+    const tpVal = (ovr && ovr.evidence_type) || (tpSel && tpSel.value);
+    if (fwVal && fwVal !== 'auto') {
+      fd.append('declared_standard_id', fwVal);
     }
-    if (tpSel && tpSel.value && tpSel.value !== 'auto') {
-      fd.append('declared_evidence_type', tpSel.value);
+    if (tpVal && tpVal !== 'auto') {
+      fd.append('declared_evidence_type', tpVal);
+    }
+    // One-shot override — clear after use so it doesn't leak to
+    // subsequent uploads in the same session.
+    if (window._uploadHintsOverride) {
+      window._uploadHintsOverride = null;
+      _clearPartialResolutionBanner();
     }
     const d = await apiForm('/api/v1/documents/upload', fd);
     card.dataset.uploadId = d.upload_id;
