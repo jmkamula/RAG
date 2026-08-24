@@ -150,9 +150,16 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
             cur.execute(
                 """
                 SELECT df.checklist_item_id, df.excerpt, df.confidence,
-                       df.section_number, cd.filename
+                       df.section_number, cd.filename,
+                       df.resolution_reason, df.resolved_at,
+                       cd_resolver.filename AS resolver_filename
                   FROM document_findings df
                   JOIN client_documents cd ON cd.id = df.document_id
+                  LEFT JOIN document_uploads du_resolver
+                    ON du_resolver.id = df.resolved_by_upload_id
+                  LEFT JOIN client_documents cd_resolver
+                    ON cd_resolver.checksum_sha256 = du_resolver.sha256
+                   AND cd_resolver.tenant_id = df.tenant_id
                  WHERE df.tenant_id = %s::uuid
                    AND df.is_active = TRUE
                    AND df.review_status = 'approved'
@@ -161,13 +168,17 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
                 """,
                 (tenant_id, all_ids),
             )
-            for mid, excerpt, conf, sec_no, fname in cur.fetchall():
+            for mid, excerpt, conf, sec_no, fname, res_reason, res_at, res_fname in cur.fetchall():
                 if mid in findings_by_element:
                     findings_by_element[mid].append({
-                        "excerpt":     _clean_excerpt(excerpt),
-                        "confidence":  conf,
-                        "section":     sec_no,
-                        "filename":    fname,
+                        "excerpt":            _clean_excerpt(excerpt),
+                        "confidence":         conf,
+                        "section":            sec_no,
+                        "filename":           fname,
+                        # Ship 94'.b — closure trail linkage
+                        "resolution_reason":  res_reason,
+                        "resolved_at":        res_at,
+                        "resolver_filename":  res_fname,
                     })
 
     # ── SSoT read for per-MUST verdicts + bridge attribution ─────
@@ -361,7 +372,13 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
     n_must_bridged   = 0   # unmet-direct but cross-framework attribution present
 
     def _must_state(mid: str) -> str:
-        """Return one of 'direct' / 'bridged' / 'missing' for this MUST."""
+        """Return one of 'direct' / 'bridged' / 'partial' / 'missing' for
+        this MUST.
+
+        Ship 94'.b — added 'partial' branch so auditor sees the
+        yellow-item picture (Ship 89'.a required/optional discipline
+        surfaced in the package, not just internally).
+        """
         if ssot_empty:
             return "direct" if findings_by_element.get(mid) else "missing"
         v = ssot_verdicts.get(mid)
@@ -371,14 +388,21 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
             return "direct"
         if v.bridge_sources:
             return "bridged"
+        if v.partial:
+            return "partial"
         return "missing"
 
+    # Ship 94'.b — also count partials so the coverage summary
+    # tells the truth about yellow items on the ledger.
+    n_must_partial = 0
     for mid in applicable_must_ids:
         st = _must_state(mid)
         if st == "direct":
             n_must_satisfied += 1
         elif st == "bridged":
             n_must_bridged += 1
+        elif st == "partial":
+            n_must_partial += 1
 
     n_should_total   = len(should_ids)
     n_should_covered = sum(1 for sid in should_ids if findings_by_element.get(sid))
@@ -440,6 +464,23 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
                     f"depends on the specific evidence and mapping "
                     f"acceptance."
                 )
+        # Ship 94'.b — partial + missing counts. Auditor sees the
+        # yellow-item picture up-front rather than inferring from
+        # "not covered" prose.
+        if n_must_partial:
+            lines.append(
+                f"**Partial evidence on file:** {n_must_partial} of "
+                f"{n_must_total} required elements have partial evidence "
+                f"— see per-element detail below for what's missing to "
+                f"move each to full coverage."
+            )
+        _n_must_missing = n_must_total - n_must_satisfied - n_must_bridged - n_must_partial
+        if _n_must_missing > 0:
+            lines.append(
+                f"**No evidence yet:** {_n_must_missing} of "
+                f"{n_must_total} required elements have no evidence on "
+                f"file. Each has an inline note showing how to add it."
+            )
         if n_should_total:
             lines.append(f"**Recommended additions:** "
                          f"{n_should_covered} of {n_should_total} covered.")
@@ -499,6 +540,23 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
                 excerpt = (r["excerpt"] or "")
                 lines.append(f"  > {excerpt}")
                 lines.append(f"  From _{loc}_{conf_tag}")
+                # Ship 94'.b — closure trail linkage. When this finding
+                # closed a prior partial (Ship 93'.z.iii), surface the
+                # linkage so the auditor sees the follow-through.
+                _res_reason = r.get("resolution_reason")
+                _res_at     = r.get("resolved_at")
+                _res_fname  = r.get("resolver_filename")
+                if _res_reason and _res_at:
+                    _res_date = _res_at.strftime("%Y-%m-%d") if hasattr(_res_at, "strftime") else str(_res_at)[:10]
+                    lines.append(
+                        f"  _Closes an earlier partial finding — "
+                        f"linked to upload on {_res_date}._"
+                    )
+                elif _res_fname and _res_at:
+                    _res_date = _res_at.strftime("%Y-%m-%d") if hasattr(_res_at, "strftime") else str(_res_at)[:10]
+                    lines.append(
+                        f"  _Resolved by upload of `{_res_fname}` on {_res_date}._"
+                    )
                 lines.append("")
             if not rows:
                 # SSoT says satisfied but no excerpts in doc_findings
@@ -664,11 +722,156 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
                 f"and mapping acceptance.)_"
             )
             lines.append("")
-        else:
-            lines.append(f"- ✗ **{ci.text}**")
-            lines.append(f"  No evidence yet. Add or upload a source that "
-                         f"addresses this element.")
+        elif st == "partial":
+            # Ship 94'.b — partial evidence on file. Auditor sees the
+            # data plus a small "how to move to present" note (Ship 93'.a
+            # discipline). Use the excerpt from the partial finding when
+            # available; fall back to the workbook trace if not.
+            lines.append(f"- ◐ **{ci.text}** (partial evidence)")
+            for r in rows:
+                loc = r["filename"]
+                if r.get("section"):
+                    loc += f", §{r['section']}"
+                excerpt = (r.get("excerpt") or "").strip()
+                if excerpt:
+                    lines.append(f"  > {excerpt}")
+                lines.append(f"  From _{loc}_")
+            # Look up completeness prose (server-side, same as
+            # Stage-1 detail path). Best-effort.
+            try:
+                from rag.posture.partial_explainer import explain_partial
+                # Find the partial finding row so we can pass its
+                # mapping_id + column. rows[0] is a good proxy —
+                # it's the earliest workbook_persistence emit.
+                if rows:
+                    # We don't have mapping_id in the findings_by_element
+                    # cache. Do a targeted query for the source pass.
+                    with pg_conn.cursor() as _cur:
+                        _cur.execute(
+                            "SELECT set_config('app.tenant_id', %s::text, false)",
+                            (tenant_id,),
+                        )
+                        _cur.execute(
+                            """
+                            SELECT wip.mapping_id, wip.sheet_name
+                              FROM document_findings df
+                              JOIN workbook_intake_proposal wip
+                                ON wip.id = df.workbook_proposal_id
+                             WHERE df.tenant_id = %s::uuid
+                               AND df.is_active
+                               AND df.checklist_item_id = %s
+                               AND df.status = 'partial'
+                             LIMIT 1
+                            """,
+                            (tenant_id, ci.id),
+                        )
+                        _row = _cur.fetchone()
+                    if _row and _row[0]:
+                        # column_name best-effort from excerpt
+                        _col = ""
+                        try:
+                            import re as _re
+                            _m = _re.search(r"col '([^']*)'", rows[0].get("excerpt") or "")
+                            if _m:
+                                _col = _m.group(1)
+                        except Exception:
+                            pass
+                        _c = explain_partial(
+                            must_id        = ci.id,
+                            mapping_id     = _row[0],
+                            sheet_name     = _row[1] or "",
+                            matched_column = _col,
+                        )
+                        if _c and _c.get("primary_prose"):
+                            # Strip <strong>/<em>/<code> for markdown surface
+                            import re as _re2
+                            _txt = _re2.sub(r"</?(?:strong|em|code)>", "**",
+                                            _c["primary_prose"])
+                            # Collapse double-** noise from strip
+                            _txt = _re2.sub(r"\*\*\*\*", "", _txt)
+                            lines.append(
+                                f"  _To move to full coverage: {_txt}_"
+                            )
+            except Exception:
+                pass
             lines.append("")
+        else:
+            # Ship 94'.b — missing MUST enriched with the same
+            # explain_missing prose Ship 93'.f puts on the advisory
+            # panel. Auditor sees the specific close path (add column X
+            # or upload doc) instead of generic "add a source."
+            lines.append(f"- ✗ **{ci.text}**")
+            _missing_prose = None
+            try:
+                from rag.posture.partial_explainer import explain_missing
+                _m = explain_missing(must_id=ci.id, leaf_id=leaf_id)
+                if _m and _m.get("primary_prose"):
+                    import re as _re3
+                    _txt = _re3.sub(r"</?(?:strong|em|code)>", "**",
+                                    _m["primary_prose"])
+                    _txt = _re3.sub(r"\*\*\*\*", "", _txt)
+                    _missing_prose = _txt
+            except Exception:
+                pass
+            if _missing_prose:
+                # explain_missing() already starts with "No evidence yet for X"
+                lines.append(f"  _{_missing_prose}_")
+            else:
+                lines.append(f"  No evidence yet. Add or upload a source "
+                             f"that addresses this element.")
+            lines.append("")
+
+    # ── Ship 94'.b — cite provenance section (compact) ────────────
+    # Active external_evidence_source rows scoped to this leaf. Auditor
+    # sees WHERE the tenant cites external evidence + verification state
+    # (last verified / stale / attestation pending). Silent when zero.
+    try:
+        with pg_conn.cursor() as _cur:
+            _cur.execute(
+                "SELECT set_config('app.tenant_id', %s::text, false)",
+                (tenant_id,),
+            )
+            _cur.execute(
+                """
+                SELECT ees.must_id, tes.system_name,
+                       ees.hyperlink_url, ees.hyperlink_display,
+                       ees.last_verified_at, ees.next_review_due,
+                       ees.cadence_days
+                  FROM external_evidence_source ees
+                  JOIN tenant_external_system tes ON tes.id = ees.system_id
+                 WHERE ees.tenant_id = %s::uuid
+                   AND ees.is_active
+                   AND ees.leaf_id = %s
+                 ORDER BY ees.must_id
+                """,
+                (tenant_id, leaf_id),
+            )
+            _cite_rows = _cur.fetchall()
+    except Exception:
+        _cite_rows = []
+    if _cite_rows:
+        lines.append("## External evidence cites")
+        lines.append("")
+        lines.append("_Evidence the tenant cites in external systems "
+                     "(SharePoint / drives / regulator sites). Verification "
+                     "is tenant-attested per cadence._")
+        lines.append("")
+        for _r in _cite_rows:
+            must_id, sys_name, url, display, last_verif, next_due, cadence = _r
+            # Human label per Ship 92'.d discipline
+            _label = display or (url.split("?", 1)[0].rsplit("/", 1)[-1] if url else sys_name)
+            _mid_short = must_id.rsplit(":", 1)[-1].replace("_", " ").title() if must_id else ""
+            if last_verif:
+                _verif = f"last attested {last_verif.strftime('%Y-%m-%d')}"
+            else:
+                _verif = "not yet attested"
+            if next_due:
+                _due = f"; next review due {next_due.strftime('%Y-%m-%d')}"
+            else:
+                _due = ""
+            lines.append(f"- **{_mid_short}** — cite in _{sys_name}_: "
+                         f"{_label} ({_verif}{_due}).")
+        lines.append("")
 
     # ── Recommended additions ────────────────────────────────────
     if should_ids:
