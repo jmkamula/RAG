@@ -942,11 +942,19 @@ class DocumentPipeline:
 
                             # ── Stage 4.7: workbook LLM row-arbiter ──────
                             # Ship 91' — env-gated. USE_WORKBOOK_LLM_ARBITER:
-                            #   unset/0 → skip (default)
+                            #   1       → run + persist (default per Ship 94'.a)
                             #   shadow  → run, count would-be-adds, do NOT
                             #             write to document_findings
-                            #   1       → run + persist
-                            _arb_mode = (os.getenv("USE_WORKBOOK_LLM_ARBITER") or "0").lower()
+                            #   0       → skip (opt-out)
+                            #
+                            # Ship 94'.a (2026-08-24) flipped default from
+                            # '0' to '1'. Data supporting cutover (Ship 91'.d
+                            # dogfood): 3.5× recall lift on ISO Arion,
+                            # 95% precision on 20-sample spot-check,
+                            # $0.48/workbook cost, 17 min latency, all
+                            # cell-substring-verified via Ship 6'.b pattern.
+                            # See [[ship-94-prime-a-arbiter-cutover]].
+                            _arb_mode = (os.getenv("USE_WORKBOOK_LLM_ARBITER") or "1").lower()
                             _arb_written = 0
                             _arb_proposed = 0
                             if _arb_mode in ("1", "shadow"):
