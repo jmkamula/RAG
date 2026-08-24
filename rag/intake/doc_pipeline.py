@@ -1082,6 +1082,41 @@ class DocumentPipeline:
                         f"{type(_cav_exc).__name__}: {_cav_exc}"
                     )
 
+            # ── Stage 4.9: closure trail stamp — Ship 93'.z.iii ─────────────
+            # For every new `status='present'` finding from THIS upload,
+            # find prior active `status='partial'` findings on the same
+            # tenant + MUST from OTHER documents → stamp
+            # resolved_by_upload_id + resolved_at + resolution_reason on
+            # them. Explicit auditor closure chain; existing findings
+            # remain active (Ship 93'.b design — two provenance chains
+            # coexist). Best-effort.
+            _closure_summary: Optional[dict] = None
+            _closure_doc_id = summary.get("doc_id") or _wbd_doc_id
+            if _closure_doc_id and not self.dry_run:
+                try:
+                    from rag.posture.finding_closure import stamp_closures_from_upload
+                    _closure_conn = psycopg2.connect(self.db_url)
+                    try:
+                        _closure_summary = stamp_closures_from_upload(
+                            _closure_conn,
+                            tenant_id          = tenant_id,
+                            client_document_id = _closure_doc_id,
+                        )
+                    finally:
+                        _closure_conn.close()
+                    if _closure_summary and _closure_summary.get("closures_stamped", 0) > 0:
+                        logger.info(
+                            f"Stage 4.9: closure trail stamped — "
+                            f"presents={_closure_summary.get('presents_scanned')} "
+                            f"prior_partials={_closure_summary.get('prior_partials')} "
+                            f"closures={_closure_summary.get('closures_stamped')}"
+                        )
+                except Exception as _cls_exc:
+                    logger.warning(
+                        f"finding_closure failed (Stage 4 already committed): "
+                        f"{type(_cls_exc).__name__}: {_cls_exc}"
+                    )
+
             # ── Stage 4.7: engine kick — Ship 51'.b ──────────────────────────
             # Auto-approved findings (fingerprint / templated / workbook) never
             # go through Stage-1 approval, so the engine kick that lives in

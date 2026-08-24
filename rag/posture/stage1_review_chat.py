@@ -260,6 +260,9 @@ def list_pending_for_control(pg_conn, tenant_id: str, control_ref: str) -> list[
                        df.checklist_item_id, cd.filename, cd.document_title,
                        df.workbook_proposal_id, wip.mapping_id,
                        wip.sheet_name AS wip_sheet_name,
+                       df.resolved_by_upload_id::text,
+                       df.resolved_at::text,
+                       df.resolution_reason,
                        ROW_NUMBER() OVER (
                            PARTITION BY COALESCE(df.evidence_group_id,
                                                  df.id::text)
@@ -277,7 +280,8 @@ def list_pending_for_control(pg_conn, tenant_id: str, control_ref: str) -> list[
             SELECT finding_id, status, confidence, excerpt, extracted_at,
                    inferred_from_control_ref, inferred_from_standard_id,
                    inference_source, checklist_item_id, filename,
-                   document_title, mapping_id, wip_sheet_name
+                   document_title, mapping_id, wip_sheet_name,
+                   resolved_by_upload_id, resolved_at, resolution_reason
               FROM ranked
              WHERE rn = 1
              ORDER BY extracted_at
@@ -317,21 +321,42 @@ def list_pending_for_control(pg_conn, tenant_id: str, control_ref: str) -> list[
             "column_name":               column_name,
             "filename":                  r[9],
             "document_title":            r[10],
+            # Ship 93'.z.iii — closure trail (nullable when not resolved)
+            "resolved_by_upload_id":     r[13],
+            "resolved_at":               r[14],
+            "resolution_reason":         r[15],
         }
-        # Ship 93'.a — attach partial explainability for workbook partials
+        # Ship 93'.a — attach partial explainability for workbook partials.
+        # Ship 93'.z.ii extended to LLM arbiter partials (evidence_text
+        # embedded in excerpt after 'col X:').
         _mapping_id = r[11]
         _wip_sheet  = r[12]
-        if (row_out["status"] == "partial"
-                and row_out["inference_source"] == "workbook"
-                and _mapping_id and item_id):
+        if row_out["status"] == "partial" and item_id:
             try:
-                from rag.posture.partial_explainer import explain_partial
-                row_out["completeness"] = explain_partial(
-                    must_id        = item_id,
-                    mapping_id     = _mapping_id,
-                    sheet_name     = _wip_sheet or sheet_name or "",
-                    matched_column = column_name or "",
-                )
+                if row_out["inference_source"] == "workbook" and _mapping_id:
+                    from rag.posture.partial_explainer import explain_partial
+                    row_out["completeness"] = explain_partial(
+                        must_id        = item_id,
+                        mapping_id     = _mapping_id,
+                        sheet_name     = _wip_sheet or sheet_name or "",
+                        matched_column = column_name or "",
+                    )
+                elif row_out["inference_source"] == "workbook_llm_arbiter":
+                    from rag.posture.partial_explainer import explain_arbiter_partial
+                    # Ship 91' arbiter writes excerpt as
+                    # "sheet 'X' row N col 'Y': <evidence text>"
+                    ev_text = ""
+                    if excerpt:
+                        import re as _re
+                        m = _re.search(r"col '[^']*':\s*(.*)$", excerpt)
+                        if m:
+                            ev_text = m.group(1).strip()
+                    row_out["completeness"] = explain_arbiter_partial(
+                        must_id       = item_id,
+                        evidence_text = ev_text,
+                        sheet_name    = sheet_name or "",
+                        source_column = column_name or "",
+                    )
             except Exception as _exc:
                 # Best-effort — never block Stage-1 detail on explainer failure
                 pass

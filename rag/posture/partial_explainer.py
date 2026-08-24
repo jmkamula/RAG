@@ -420,11 +420,78 @@ def explain_missing(
     return result
 
 
+def explain_arbiter_partial(
+    must_id:       str,
+    evidence_text: str,
+    sheet_name:    str,
+    source_column: str,
+) -> dict:
+    """Ship 93'.z.ii — explain a partial emitted by the Ship 91' LLM
+    row-arbiter.
+
+    Arbiter partials are semantically different from workbook partials:
+    they're the LLM's judgment that the cell contains corroborating
+    text but not full evidence. The `evidence_text` was the LLM's
+    verbatim quote from the cell that supports (but doesn't fully
+    prove) the MUST.
+
+    Branch: `arbiter_incomplete` — the LLM found supporting text but
+    judged it insufficient. Close path: tenant reviews and either
+    accepts as partial (Path A in the Stage-1 flow) OR uploads a
+    document that explicitly demonstrates the MUST.
+
+    Args:
+      must_id:       the MUST id the arbiter judged partial
+      evidence_text: LLM's verbatim quote from the cell
+      sheet_name:    workbook sheet the cell was on
+      source_column: header of the cell
+
+    Returns the same shape as explain_partial for consistency.
+    """
+    result = {
+        "must_id":        must_id,
+        "must_label":     _humanize_must_label(must_id),
+        "matched_column": source_column,
+        "sheet_name":     sheet_name,
+        "branch":         "arbiter_incomplete",
+        "why_partial":    "",
+        "how_to_close":   [],
+        "primary_prose":  "",
+    }
+    quote = (evidence_text or "").strip()
+    quote_display = quote[:100] + ("…" if len(quote) > 100 else "")
+
+    steps = [
+        f"Upload a document that explicitly demonstrates "
+        f"<strong>{result['must_label']}</strong>.",
+    ]
+    if source_column:
+        steps.append(
+            f"Or amend the <strong>{source_column}</strong> column of your "
+            f"workbook so it explicitly asserts <strong>{result['must_label']}</strong> "
+            f"(re-upload triggers extraction)."
+        )
+
+    result["why_partial"] = (
+        f"The arbiter found corroborating text in your workbook — "
+        f"<em>“{quote_display}”</em> — but judged it insufficient as "
+        f"full evidence of <strong>{result['must_label']}</strong>."
+    )
+    result["how_to_close"] = steps
+    result["primary_prose"] = (
+        f"{result['why_partial']} "
+        f"To move it to <strong>present</strong>: "
+        + " ".join(f"({i+1}) {s.strip('.')}." for i, s in enumerate(steps))
+    )
+    return result
+
+
 def explain_finding(pg, tenant_id: str, finding_id: str) -> dict | None:
     """Fetch the finding + trace to its source YAML + explain.
 
-    Returns None if the finding isn't a workbook-sourced partial
-    (this explainer only handles that case for Ship 93'.a).
+    Handles workbook-sourced partials (via explain_partial) AND
+    Ship 91' LLM-arbiter-sourced partials (via explain_arbiter_partial).
+    Returns None for other cases.
     """
     with pg.cursor() as cur:
         cur.execute(
@@ -448,21 +515,34 @@ def explain_finding(pg, tenant_id: str, finding_id: str) -> dict | None:
     if not row:
         return None
     must_id, status, inf_src, excerpt, mapping_id, sheet_name = row
-    if status != "partial" or inf_src != "workbook":
+    if status != "partial":
         return None
-    # Excerpt shape: "sheet 'X' col 'Y'" — extract Y for display
+    # Excerpt shape from workbook + arbiter both start with
+    # "sheet 'X' row N col 'Y'..." — parse the pieces we need.
     matched_column = ""
+    evidence_text  = ""
     if excerpt:
         try:
             import re as _re
-            m = _re.search(r"col '([^']*)'", excerpt)
+            m = _re.search(r"sheet '([^']*)'\s*(?:row\s*\d+)?\s*col '([^']*)'\s*(?::\s*(.*))?", excerpt)
             if m:
-                matched_column = m.group(1)
+                sheet_name    = sheet_name or m.group(1)
+                matched_column = m.group(2)
+                evidence_text  = (m.group(3) or "").strip()
         except Exception:
             pass
-    return explain_partial(
-        must_id        = must_id,
-        mapping_id     = mapping_id or "",
-        sheet_name     = sheet_name or "",
-        matched_column = matched_column,
-    )
+    if inf_src == "workbook":
+        return explain_partial(
+            must_id        = must_id,
+            mapping_id     = mapping_id or "",
+            sheet_name     = sheet_name or "",
+            matched_column = matched_column,
+        )
+    if inf_src == "workbook_llm_arbiter":
+        return explain_arbiter_partial(
+            must_id       = must_id,
+            evidence_text = evidence_text or excerpt or "",
+            sheet_name    = sheet_name or "",
+            source_column = matched_column,
+        )
+    return None

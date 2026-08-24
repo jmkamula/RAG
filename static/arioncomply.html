@@ -4941,6 +4941,8 @@ async function selectStage1(c, ev) {
               ? '<span style="font-size:9px;padding:1px 5px;background:#9C6F1B;color:#FAF8F2;border-radius:2px;letter-spacing:0.3px">Anchor missing</span>'
               : c.branch === 'corroboration_only'
               ? '<span style="font-size:9px;padding:1px 5px;background:#5C5A4F;color:#FAF8F2;border-radius:2px;letter-spacing:0.3px">Corroboration only</span>'
+              : c.branch === 'arbiter_incomplete'
+              ? '<span style="font-size:9px;padding:1px 5px;background:#7A5CA0;color:#FAF8F2;border-radius:2px;letter-spacing:0.3px">LLM-judged incomplete</span>'
               : '';
             const panelId = `completeness-${f.finding_id}`;
             // Ship 93'.b — pre-tag hints for the "Upload evidence" affordance.
@@ -4970,6 +4972,19 @@ async function selectStage1(c, ev) {
                 </div>
               </div>`;
           }
+          // Ship 93'.z.iii — closure trail badge. When this partial has
+          // been resolved via a later upload (new present finding on same
+          // MUST), surface the linkage explicitly for auditor visibility.
+          let closureHtml = '';
+          if (f.resolved_by_upload_id && f.resolution_reason) {
+            const dt = (f.resolved_at || '').slice(0, 10);
+            closureHtml = `
+              <div style="margin-top:4px;padding:4px 8px;background:#E8F1E8;border-left:3px solid #3D8C4C;border-radius:3px;font-size:10px;color:#2F5F35">
+                <i class="ti ti-circle-check"></i>
+                <strong>Resolved by upload</strong> — ${esc(f.resolution_reason)}
+                ${dt ? ' <span style="color:#5C7A61;margin-left:6px">on ' + esc(dt) + '</span>' : ''}
+              </div>`;
+          }
           h += `<div${mustIdAttr} style="margin:0 0 6px 14px;padding:6px 8px;
                               background:#FAF8F2;border-radius:5px;
                               border:1px solid #E8E5DA">
@@ -4982,6 +4997,7 @@ async function selectStage1(c, ev) {
               ${sourceLine ? `<span style="color:#9C9A8E;margin-left:4px">${sourceLine}</span>` : ''}
             </div>
             ${chain}
+            ${closureHtml}
             ${completenessHtml}
           </div>`;
         }

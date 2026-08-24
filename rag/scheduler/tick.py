@@ -1299,6 +1299,111 @@ def sweep_posture_refresh(pg_conn, tick_id: str, dry_run: bool = False) -> dict:
             "acted_on": acted, "errored": errored, "detail": detail}
 
 
+def sweep_cite_attestation_retention(pg_conn, tick_id: str, dry_run: bool = False) -> dict:
+    """Ship 93'.z.i — auto-expire pending cite_attestation_prompt rows
+    past their `expires_at` timestamp.
+
+    Rule: pending prompts whose expires_at < NOW() get transitioned to
+    status='auto_expired' with resolved_at=NOW(). Preserves auditor
+    trail (row not deleted; status change captures the auto-close).
+
+    Cross-tenant SELECT via arioncomply_app's cite_attestation_prompt_
+    tenant_iso policy (schema_v105) — that policy uses USING per-tenant,
+    so we need to iterate per tenant. Simpler alternative: use the app_
+    permissive policy pattern from schema_v72. For now, batch by tenant
+    inside a transaction.
+    """
+    row_id = _log_start(pg_conn, tick_id, "cite_attestation_retention")
+    scanned = 0
+    acted   = 0
+    errored = 0
+    per_tenant: dict[str, int] = {}
+    error_type = error_detail = None
+
+    try:
+        with pg_conn.cursor() as _cur_check:
+            if not _table_exists(_cur_check, "cite_attestation_prompt"):
+                _log_complete(
+                    pg_conn, row_id, 0, 0, 0,
+                    {"skipped": "table missing (pre-schema_v105)"},
+                    status="completed",
+                )
+                return {"work_type": "cite_attestation_retention",
+                        "scanned": 0, "acted_on": 0, "errored": 0,
+                        "detail": {"skipped": "table missing"}}
+
+        # Group expired-pending rows by tenant so we can set the
+        # tenant GUC per batch (RLS write scope).
+        from collections import defaultdict
+        expired_by_tenant: dict[str, list[str]] = defaultdict(list)
+        with pg_conn.cursor() as cur:
+            # This works because arioncomply_app has cross-tenant read via
+            # USING (though not cross-tenant write). Alternative: seed a
+            # permissive USING policy for maintenance sweeps.
+            cur.execute("""
+                SELECT tenant_id::text, id::text
+                  FROM cite_attestation_prompt
+                 WHERE status     = 'pending'
+                   AND expires_at < NOW()
+            """)
+            for row in cur.fetchall():
+                expired_by_tenant[row[0]].append(row[1])
+        scanned = sum(len(v) for v in expired_by_tenant.values())
+
+        if dry_run or scanned == 0:
+            _log_complete(
+                pg_conn, row_id, scanned, 0, 0,
+                {"per_tenant": {}, "dry_run": dry_run},
+                status="completed",
+            )
+            return {"work_type": "cite_attestation_retention",
+                    "scanned": scanned, "acted_on": 0, "errored": 0,
+                    "detail": {"per_tenant": {}, "dry_run": dry_run}}
+
+        # Per-tenant update loop.
+        for tid, ids in expired_by_tenant.items():
+            with pg_conn.cursor() as cur:
+                cur.execute(
+                    "SELECT set_config('app.tenant_id', %s, TRUE)",
+                    (tid,),
+                )
+                # Chunk if the list is huge; typical batches are small
+                cur.execute(
+                    """
+                    UPDATE cite_attestation_prompt
+                       SET status      = 'auto_expired',
+                           resolved_at = NOW(),
+                           updated_at  = NOW()
+                     WHERE tenant_id = %s::uuid
+                       AND id = ANY(%s::uuid[])
+                       AND status = 'pending'
+                    RETURNING id
+                    """,
+                    (tid, ids),
+                )
+                bumped = len(cur.fetchall())
+                acted += bumped
+                per_tenant[tid] = bumped
+        pg_conn.commit()
+
+    except Exception as e:
+        pg_conn.rollback()
+        error_type = type(e).__name__
+        error_detail = str(e)[:400]
+        logger.error("sweep_cite_attestation_retention failed: %s", e)
+
+    status = "completed" if error_type is None else "failed"
+    detail = {
+        "per_tenant": per_tenant,
+        "dry_run":    dry_run,
+    }
+    _log_complete(pg_conn, row_id, scanned, acted, errored, detail,
+                  status=status, error_type=error_type, error_detail=error_detail)
+    return {"work_type": "cite_attestation_retention",
+            "scanned": scanned, "acted_on": acted, "errored": errored,
+            "detail": detail}
+
+
 _WORK_TYPES = {
     "fact_recompute":              sweep_fact_recompute,
     "overdue_followups":           sweep_overdue_followups,
@@ -1309,6 +1414,7 @@ _WORK_TYPES = {
     "posture_refresh":             sweep_posture_refresh,         # Ship 58'.u
     "notification_delivery":       sweep_notification_delivery,
     "notification_retention":      sweep_notification_retention,
+    "cite_attestation_retention":  sweep_cite_attestation_retention,  # Ship 93'.z.i
 }
 
 
