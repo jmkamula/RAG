@@ -3099,6 +3099,23 @@ async def dashboard_control_advisory(
             control_ref = control_ref,
             standard_id = standard_id,
         )
+        # Ship 93'.f — enrich each unsatisfied MUST with a `completeness`
+        # payload (what's missing + how to close). Same server-side
+        # discipline as Ship 93'.a's Stage-1 detail.
+        if data and data.get("leaves"):
+            from rag.posture.partial_explainer import explain_missing
+            for leaf in data["leaves"]:
+                for m in leaf.get("must_items") or []:
+                    if m.get("satisfied"):
+                        continue
+                    try:
+                        m["completeness"] = explain_missing(
+                            must_id = m["id"],
+                            leaf_id = leaf.get("leaf_id") or "",
+                        )
+                    except Exception:
+                        # Best-effort — never block advisory on explainer error
+                        pass
         return {
             "control_ref": control_ref,
             "standard_id": standard_id,

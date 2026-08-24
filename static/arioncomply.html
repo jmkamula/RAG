@@ -6226,20 +6226,50 @@ function renderAdvisoryPanel(adv) {
       body += `</ul></div>`;
     }
 
-    // Read-only list of missing MUSTs for this leaf. Fill-in happens by
-    // downloading the template (docx / xlsx / md) from the templates
-    // block above and uploading the completed doc — the platform's
-    // primary storage-mode path since the web-fill lane was retired
-    // 2026-07-04.
+    // Ship 93'.f — missing MUSTs get inline "how to close" prose + upload
+    // affordance (reuses Ship 93'.b). Server-side derivation from source
+    // YAML via partial_explainer.explain_missing.
     const missing_items = must_items.filter(m => !m.satisfied);
     if (missing_items.length) {
+      const controlRefForUpload = (adv.control_ref || l.leaf_id.split(':')[1] || '');
+      const standardIdForUpload = adv.standard_id || '';
       body += `<div style="margin-top:8px">
-        <div style="font-size:11px;font-weight:600;color:#3A382E">Still needed:</div>
-        <ul style="margin:4px 0 0 18px;padding:0">`;
+        <div style="font-size:11px;font-weight:600;color:#3A382E">Still needed (${missing_items.length}):</div>
+        <div style="margin-top:6px">`;
       for (const m of missing_items) {
-        body += `<li style="color:#9C2E2E;font-size:11px" title="${attr(m.id)}">${esc(m.text)}</li>`;
+        const c = m.completeness;
+        const panelId = `missing-${(m.id || '').replace(/[^a-zA-Z0-9]/g, '_')}`;
+        const branchBadge = c && c.branch === 'workbook_or_doc'
+          ? '<span style="font-size:9px;padding:1px 5px;background:#9C6F1B;color:#FAF8F2;border-radius:2px;letter-spacing:0.3px">Workbook or doc</span>'
+          : c && c.branch === 'doc_only'
+          ? '<span style="font-size:9px;padding:1px 5px;background:#5C5A4F;color:#FAF8F2;border-radius:2px;letter-spacing:0.3px">Doc only</span>'
+          : '';
+        const mustLabel = (c && c.must_label) || m.id;
+        body += `<div style="margin-bottom:6px;padding:6px 8px;background:#FAF8F2;border:1px solid #F0EDE3;border-radius:4px">
+          <div style="font-size:11px;color:#9C2E2E;line-height:1.4" title="${attr(m.id)}">
+            <span style="color:#9C2E2E">✗</span> ${esc(m.text || m.id)}
+          </div>`;
+        if (c && c.primary_prose) {
+          body += `<div style="margin-top:4px">
+            <a href="#" onclick="event.preventDefault();var el=document.getElementById('${panelId}');el.style.display=(el.style.display==='none'?'':'none')"
+               style="font-size:10px;color:#5C5A4F;text-decoration:none;display:inline-flex;align-items:center;gap:6px">
+              <span>▸ How to add this</span>
+              ${branchBadge}
+            </a>
+            <div id="${panelId}" style="display:none;margin-top:6px;font-size:11px;color:#3A382E;line-height:1.45">
+              ${c.primary_prose}
+              <div style="margin-top:8px">
+                <button onclick="_startPartialResolutionUpload('${esc(controlRefForUpload)}','${esc(standardIdForUpload)}','${esc(mustLabel)}','${esc(l.leaf_label || '')}')"
+                        style="font-size:11px;padding:4px 10px;background:#3A382E;color:#FAF8F2;border:none;border-radius:3px;cursor:pointer;font-family:inherit">
+                  <i class="ti ti-upload"></i> Upload evidence to add this
+                </button>
+              </div>
+            </div>
+          </div>`;
+        }
+        body += `</div>`;
       }
-      body += `</ul></div>`;
+      body += `</div></div>`;
     }
 
     if (l.upload_hint) {

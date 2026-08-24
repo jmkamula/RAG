@@ -81,6 +81,7 @@ def _humanize_must_label(must_id: str) -> str:
                 "bcp": "BCP", "ict": "ICT", "eol": "EOL"}
     expand = {"reg": "", "rev": "review", "rec": "record",
               "proc": "procedure", "off": "offboarding",
+              "disc": "discovery", "recon": "reconciliation",
               "idmgmt": "identity management",
               "url": "URL", "ref": "reference"}
     out: list[str] = []
@@ -300,6 +301,122 @@ def explain_partial(
         f"To move it to <strong>present</strong>: "
         + " ".join(f"({i+1}) {s.strip('.')}." for i, s in enumerate(steps))
     )
+    return result
+
+
+def explain_missing(
+    must_id:   str,
+    leaf_id:   str,
+) -> dict:
+    """Ship 93'.f — explain a MUST that has no active evidence anywhere.
+
+    Unlike explain_partial (which traces to a specific workbook proposal),
+    explain_missing looks across ALL workbook_mappings to find any pass
+    that binds this MUST — that becomes the "here's how to add it"
+    guidance. If no mapping binds it, the only path is doc upload.
+
+    Args:
+      must_id:  e.g. 'item:A.5.9:owner_per_asset'
+      leaf_id:  e.g. 'req:A.5.9:asset_inventory'
+
+    Returns:
+      {
+        "must_id":        as-passed
+        "must_label":     humanized MUST label
+        "branch":         'workbook_or_doc' | 'doc_only' | 'unknown'
+        "workbook_hint":  optional dict with column-add suggestion
+        "how_to_close":   list of actionable steps
+        "primary_prose":  tenant-facing paragraph (may contain <strong>)
+      }
+    """
+    result = {
+        "must_id":       must_id,
+        "must_label":    _humanize_must_label(must_id),
+        "branch":        "unknown",
+        "workbook_hint": None,
+        "how_to_close":  [],
+        "primary_prose": "",
+    }
+
+    # Search all mappings for a pass that binds this MUST
+    cache = _load_mapping_cache()
+    workbook_hits: list[dict] = []
+    for mid, mapping in cache.items():
+        for p in mapping.get("passes") or []:
+            required = _find_required_binding(p, must_id)
+            optional = None
+            for col in p.get("optional_columns") or []:
+                if col.get("binds_to") == must_id:
+                    optional = col
+                    break
+            if required or optional:
+                workbook_hits.append({
+                    "mapping_id":         mid,
+                    "target_evidence_type": _target_evidence_type(p),
+                    "required":           required,
+                    "optional":           optional,
+                    "cite":               _find_cite_binding(p, must_id),
+                })
+
+    steps: list[str] = []
+
+    if workbook_hits:
+        # Prefer required_columns hits (the definitive "add this column"
+        # answer); fall back to optional_columns hints.
+        preferred = next(
+            (h for h in workbook_hits if h.get("required")), None
+        ) or workbook_hits[0]
+
+        col_spec  = preferred["required"] or preferred["optional"]
+        evidence_type = preferred["target_evidence_type"]
+        variants = _fingerprint_variants(col_spec)
+
+        if variants:
+            var_list = ", ".join(f"<code>{v}</code>" for v in variants[:3])
+            steps.append(
+                f"Add a column named like {var_list} to a "
+                f"<strong>{evidence_type}</strong> in your workbook."
+            )
+
+        cite = preferred.get("cite")
+        if cite:
+            cite_kind = (cite.get("cite_kind") or "internal_document").replace("_", " ")
+            cite_fp = _humanize_fingerprint(cite.get("fingerprint") or [])
+            if cite_fp:
+                steps.append(
+                    f"Or add a hyperlink to the {cite_kind} in a "
+                    f"<strong>{cite_fp}</strong> column of a data row."
+                )
+
+        steps.append(
+            f"Or upload a document that explicitly demonstrates "
+            f"<strong>{result['must_label']}</strong>."
+        )
+
+        result["branch"] = "workbook_or_doc"
+        result["workbook_hint"] = {
+            "evidence_type": evidence_type,
+            "column_variants": variants,
+        }
+        result["primary_prose"] = (
+            f"No evidence yet for <strong>{result['must_label']}</strong>. "
+            f"To add it: " + " ".join(f"({i+1}) {s.strip('.')}." for i, s in enumerate(steps))
+        )
+    else:
+        # No mapping binds this MUST — doc upload is the only path.
+        steps.append(
+            f"Upload a document that explicitly demonstrates "
+            f"<strong>{result['must_label']}</strong>."
+        )
+        result["branch"] = "doc_only"
+        result["primary_prose"] = (
+            f"No evidence yet for <strong>{result['must_label']}</strong>. "
+            f"No workbook mapping in the catalog binds this — the only "
+            f"way to close it is to upload a document that explicitly "
+            f"demonstrates it."
+        )
+
+    result["how_to_close"] = steps
     return result
 
 
