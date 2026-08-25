@@ -7233,6 +7233,7 @@ async def dashboard_coverage(
     key_info:      APIKeyInfo = Depends(require_scope("posture")),
     k_per_bucket:  int = 20,
     max_yellow:    int = 3,
+    summary_only:  int = 0,
 ):
     """Ship 93'.c — Coverage aggregate for the Dashboard "Coverage" tab.
 
@@ -7243,23 +7244,28 @@ async def dashboard_coverage(
     Reuses explain_partial + explain_missing (Ships 93'.a/f) so the
     tenant sees the same narrative here as in the Stage-1 detail
     panel + auditor Evidence Package.
+
+    Ship 95'.a — `summary_only=1` skips per-control enrichment
+    (no close-path prose, no Neo4j titles). Fast path for KPI tiles
+    that only need the bucket counts.
     """
     pool = request.app.state.pg_pool
     conn = pool.getconn()
     neo  = None
     try:
         set_session(conn, key_info.tenant_id)
-        from rag.posture_loader import _build_engine_neo4j_driver
         from rag.posture.coverage import build_coverage
-        try:
-            neo = _build_engine_neo4j_driver()
-        except Exception:
-            neo = None
+        if not int(summary_only):
+            from rag.posture_loader import _build_engine_neo4j_driver
+            try:
+                neo = _build_engine_neo4j_driver()
+            except Exception:
+                neo = None
         payload = build_coverage(
             conn,
             neo,
             key_info.tenant_id,
-            k_per_bucket           = max(1, min(50, int(k_per_bucket))),
+            k_per_bucket           = 0 if int(summary_only) else max(1, min(50, int(k_per_bucket))),
             max_yellow_per_control = max(1, min(10, int(max_yellow))),
         )
     finally:

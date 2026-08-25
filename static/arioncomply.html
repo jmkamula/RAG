@@ -4049,7 +4049,7 @@ async function loadDashboard() {
   const wrap = document.getElementById('dash-wrap');
   wrap.innerHTML = '<div class="dash-empty"><i class="ti ti-loader-2"></i><p>Loading posture…</p></div>';
   try {
-    const [d, freshness, implications, followupsPending, followupsOverdue, kpis, attestations] = await Promise.all([
+    const [d, freshness, implications, followupsPending, followupsOverdue, kpis, attestations, coverageSum] = await Promise.all([
       api('/api/v1/dashboard/posture'),
       api('/api/v1/dashboard/cites/needs-verification').catch(() => null),
       api('/api/v1/tenant/triggered-implications?status=pending').catch(() => null),
@@ -4058,11 +4058,13 @@ async function loadDashboard() {
       api('/api/v1/dashboard/cascade-kpis').catch(() => null),
       // Ship 92'.c — cite attestation prompts pending tenant confirmation
       api('/api/v1/cite-attestations/pending').catch(() => null),
+      // Ship 95'.a — coverage counts for the new Coverage KPI tile
+      api('/api/v1/dashboard/coverage?summary_only=1').catch(() => null),
     ]);
     dashData = d;
     renderDashboard(d, freshness, implications,
                     {pending: followupsPending, overdue: followupsOverdue},
-                    kpis, attestations);
+                    kpis, attestations, coverageSum);
   } catch (e) {
     wrap.innerHTML = '<div class="dash-empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load your posture. Please refresh in a moment.</p></div>';
   }
@@ -4073,26 +4075,41 @@ const _FINDING_CLASS = {
   'N/A': 'f-NA', 'Not assessed': 'f-NotAssessed'
 };
 
-function renderDashboard(d, freshness, implications, followups, kpis, attestations) {
+function renderDashboard(d, freshness, implications, followups, kpis, attestations, coverageSum) {
   const wrap = document.getElementById('dash-wrap');
   if (!d.frameworks || !d.frameworks.length) {
     wrap.innerHTML = '<div class="dash-empty"><i class="ti ti-circle-check"></i><p>No frameworks in scope yet</p></div>';
     return;
   }
 
-  // S3o: cascade KPI tile row — only shown when ANY cascade activity exists.
+  // Ship 95'.a — Dashboard KPI strip (was Ship 3'.o cascade-KPI strip).
+  // Shape: 3 tiles — Follow-ups (cascade actions due) / Coverage (Ship 93'.c
+  // aggregate) / Cite reviews due (freshness). Retrospective tiles retired:
+  // muted_cascades → cascade override list; auto_resolved → Notifications
+  // inbox (kind='auto_resolved'); verifications_7d → tenant activity log.
+  // Only shown when ANY of the 3 tiles has a non-zero value.
   let kpisHtml = '';
-  if (kpis) {
-    const pi = kpis.pending_implications || {};
-    const pf = kpis.pending_followups   || {};
-    const sp = kpis.suppressions_30d    || {};
-    const anyActivity =
-      (pi.total || 0) + (pf.pending || 0) + (pf.overdue || 0) +
-      (sp.total || 0) + (kpis.auto_resolved_7d || 0) +
-      (kpis.verifications_7d && kpis.verifications_7d.total || 0) > 0;
-    if (anyActivity) {
-      kpisHtml = renderCascadeKpis(kpis);
-    }
+  const pi = (kpis && kpis.pending_implications) || {};
+  const pf = (kpis && kpis.pending_followups)   || {};
+  const covSummary = (coverageSum && coverageSum.summary) || {};
+  const freshCounts = (freshness && freshness.counts) || {};
+  const followupsTotal = (pi.total || 0) + (pf.pending || 0) + (pf.overdue || 0);
+  const coverageTotal =
+    (covSummary.controls_ready_to_close || 0) +
+    (covSummary.controls_in_progress || 0) +
+    (covSummary.controls_not_started || 0);
+  const citeTotal =
+    (freshCounts.red || 0) + (freshCounts.yellow || 0) + (freshCounts.upcoming || 0);
+  if (followupsTotal + coverageTotal + citeTotal > 0) {
+    kpisHtml = renderDashboardKpis({
+      followups: {
+        total:                 followupsTotal,
+        overdue:               (pi.overdue || 0) + (pf.overdue || 0),
+        controls_with_pressure: kpis && kpis.controls_with_pressure || 0,
+      },
+      coverage: covSummary,
+      cites:    freshCounts,
+    });
   }
 
   // Cite freshness card — only shown when any cite is past/near due.
@@ -5778,21 +5795,23 @@ function renderTriggeredImplicationsPanel(data) {
   </div>`;
 }
 
-function renderCascadeKpis(k) {
+// Ship 95'.a — Dashboard KPI renderer.
+// 3 tiles instead of 5: Follow-ups / Coverage / Cite reviews due.
+// Retired: Muted cascades (rare-action retro metric) / Auto-closed
+// (already surfaces as Notifications kind='auto_resolved') /
+// Verifications (activity self-log). Each tile is a clickable
+// deep-link to the surface where the tenant acts.
+function renderDashboardKpis({ followups, coverage, cites }) {
   const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
-  const pi = k.pending_implications || {};
-  const pf = k.pending_followups    || {};
-  const sp = k.suppressions_30d     || {};
-  const v7 = k.verifications_7d     || {};
-  const ar = k.auto_resolved_7d     || 0;
-  const cwp = k.controls_with_pressure || 0;
 
-  // Tile factory
-  const tile = (label, value, sub, accent) => {
+  const tile = (label, value, sub, accent, onclick, title) => {
     const accentCss = accent === 'red'   ? 'color:#9C2E2E;' :
                       accent === 'amber' ? 'color:#A87515;' :
                       accent === 'green' ? 'color:#2D5F2D;' : 'color:#3A382E;';
-    return `<div style="flex:1;min-width:130px;padding:10px 12px;background:#fff;border:1px solid #E8E5DA;border-radius:5px">
+    return `<div onclick="${onclick}" title="${esc(title || '')}"
+       style="flex:1;min-width:180px;padding:10px 12px;background:#fff;border:1px solid #E8E5DA;border-radius:5px;cursor:pointer;transition:background .1s"
+       onmouseenter="this.style.background='#F7F5EC'"
+       onmouseleave="this.style.background='#fff'">
       <div style="font-size:10px;color:#9A9785;text-transform:uppercase;letter-spacing:.4px">${esc(label)}</div>
       <div style="font-size:22px;font-weight:600;margin-top:2px;${accentCss}">${esc(value)}</div>
       <div style="font-size:11px;color:#5C5A4F;margin-top:2px">${esc(sub)}</div>
@@ -5800,44 +5819,76 @@ function renderCascadeKpis(k) {
   };
 
   const tiles = [];
-  // Pending follow-ups (with overdue split)
+
+  // Tile 1 — Follow-ups (combined triggered_implications + expected_followups)
+  const fTotal   = followups.total || 0;
+  const fOverdue = followups.overdue || 0;
+  const fCwp     = followups.controls_with_pressure || 0;
+  let fSub;
+  if (fTotal === 0) {
+    fSub = 'nothing waiting';
+  } else if (fOverdue > 0) {
+    fSub = `${fOverdue} overdue${fCwp > 0 ? ` · on ${fCwp} control${fCwp===1?'':'s'}` : ''}`;
+  } else {
+    fSub = `pending${fCwp > 0 ? ` · on ${fCwp} control${fCwp===1?'':'s'}` : ''}`;
+  }
   tiles.push(tile(
     "Follow-ups",
-    pi.total || 0,
-    `${pi.overdue || 0} overdue · on ${cwp} control${cwp===1?'':'s'}`,
-    (pi.overdue || 0) > 0 ? 'red' : ((pi.total || 0) > 0 ? 'amber' : null),
+    fTotal,
+    fSub,
+    fOverdue > 0 ? 'red' : (fTotal > 0 ? 'amber' : null),
+    "setMode('cascade')",
+    fTotal > 0 ? "Follow-up actions the cascade engine surfaced. Click to open the cascade timeline."
+               : "No follow-ups waiting.",
   ));
-  // Expected downstream verifications
+
+  // Tile 2 — Coverage (Ship 93'.c aggregate)
+  const cReady = coverage.controls_ready_to_close || 0;
+  const cProg  = coverage.controls_in_progress    || 0;
+  const cNot   = coverage.controls_not_started    || 0;
+  const cTotal = cReady + cProg + cNot;
+  let cSub;
+  if (cTotal === 0) {
+    cSub = 'every control covered';
+  } else if (cReady > 0) {
+    cSub = `${cReady} ready to close · ${cProg + cNot} more with gaps`;
+  } else {
+    cSub = `${cProg} in progress · ${cNot} not started`;
+  }
   tiles.push(tile(
-    "Expected next steps",
-    `${pf.pending || 0}`,
-    `${pf.overdue || 0} overdue`,
-    (pf.overdue || 0) > 0 ? 'red' : null,
+    "Coverage",
+    cTotal,
+    cSub,
+    cReady > 0 ? 'amber' : (cTotal > 0 ? null : 'green'),
+    "setDashTab('coverage')",
+    cTotal > 0 ? "Controls with at least one partial or missing required element. Click to open the Coverage tab."
+               : "Every enrolled control has full evidence coverage.",
   ));
-  // Muted cascades 30d
-  const supByKind = sp.by_kind || {};
-  const supBits = Object.entries(supByKind)
-    .map(([k,v]) => `${v} ${humanizeSlug(k)}`)
-    .join(' · ') || 'none';
+
+  // Tile 3 — Cite reviews due
+  const cStale    = cites.red || 0;
+  const cSoon     = cites.yellow || 0;
+  const cUpcoming = cites.upcoming || 0;
+  const citeTotal = cStale + cSoon + cUpcoming;
+  let citeValue = citeTotal;
+  let citeSub;
+  if (citeTotal === 0) {
+    citeSub = 'no cites due';
+  } else if (cStale > 0) {
+    citeSub = `${cStale} stale${cSoon ? ` · ${cSoon} due soon` : ''}`;
+  } else if (cSoon > 0) {
+    citeSub = `${cSoon} due soon${cUpcoming ? ` · ${cUpcoming} upcoming` : ''}`;
+  } else {
+    citeSub = `${cUpcoming} upcoming`;
+  }
   tiles.push(tile(
-    "Muted cascades (30d)",
-    sp.total || 0,
-    supBits,
-    null,
-  ));
-  // Auto-resolved 7d
-  tiles.push(tile(
-    "Auto-closed (7d)",
-    ar,
-    (ar > 0 ? 'via cite verification' : 'none yet'),
-    ar > 0 ? 'green' : null,
-  ));
-  // Verifications 7d
-  tiles.push(tile(
-    "Verifications (7d)",
-    v7.total || 0,
-    `${v7.with_structured || 0} with event details`,
-    null,
+    "Cite reviews due",
+    citeValue,
+    citeSub,
+    cStale > 0 ? 'red' : (cSoon > 0 ? 'amber' : null),
+    "document.getElementById('cite-freshness-card') && document.getElementById('cite-freshness-card').scrollIntoView({behavior:'smooth',block:'start'})",
+    citeTotal > 0 ? "External cites that need tenant confirmation. Click to open the review list below."
+                  : "No cites past or approaching their review cycle.",
   ));
 
   return `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">${tiles.join('')}</div>`;
