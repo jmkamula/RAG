@@ -557,11 +557,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
     <!-- Dashboard toolbar -->
     <div class="main-toolbar" id="toolbar-dashboard">
-      <div>
-        <div class="main-title">Compliance posture</div>
-        <div class="main-sub" id="dashboard-sub">Heatmap and per-framework summary across all standards in scope</div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <div>
+          <div class="main-title">Compliance posture</div>
+          <div class="main-sub" id="dashboard-sub">Heatmap and per-framework summary across all standards in scope</div>
+        </div>
+        <div class="tabs" style="margin-left:8px">
+          <button class="tab active" id="dtab-overview" onclick="setDashTab('overview')">Overview</button>
+          <button class="tab" id="dtab-coverage" onclick="setDashTab('coverage')">
+            Coverage
+            <span class="fcount" id="dtab-coverage-count" style="display:none">—</span>
+          </button>
+        </div>
       </div>
-      <button class="btn-sm btn-outline" onclick="loadDashboard()">
+      <button class="btn-sm btn-outline" onclick="refreshDashTab()">
         <i class="ti ti-refresh" aria-hidden="true"></i> Refresh
       </button>
     </div>
@@ -618,10 +627,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
     <!-- Dashboard body -->
     <div class="main-body" id="body-dashboard" style="padding:0">
-      <div class="dash-wrap" id="dash-wrap">
-        <div class="dash-empty">
-          <i class="ti ti-plug-connected-x" aria-hidden="true"></i>
-          <p>Connect to load your compliance posture</p>
+      <div id="dash-tab-overview">
+        <div class="dash-wrap" id="dash-wrap">
+          <div class="dash-empty">
+            <i class="ti ti-plug-connected-x" aria-hidden="true"></i>
+            <p>Connect to load your compliance posture</p>
+          </div>
+        </div>
+      </div>
+      <div id="dash-tab-coverage" style="display:none">
+        <div id="coverage-wrap">
+          <div class="empty"><i class="ti ti-plug-connected-x" aria-hidden="true"></i><p>Connect to load coverage</p></div>
         </div>
       </div>
     </div>
@@ -1039,7 +1055,7 @@ function setMode(m) {
   document.getElementById('queue-filters').style.display = m==='queue' ? '' : 'none';
   closeDetail();
   if (m === 'queue')      loadQueue();
-  if (m === 'dashboard')  loadDashboard();
+  if (m === 'dashboard')  { setDashTab('overview'); loadDashboard(); }
   if (m === 'topics')     loadTopics();
   if (m === 'profile')    loadProfile();
   if (m === 'cascade')    loadCascadeTimeline();
@@ -1064,6 +1080,8 @@ function _applyHashRoute() {
   if (!knownModes.has(modeName)) return;
   setMode(modeName);
   if (modeName === 'dashboard') {
+    const tab = params.get('tab');
+    if (tab === 'coverage') setDashTab('coverage');
     const ref = params.get('control');
     if (ref) _openControlDetail(ref);
   }
@@ -1429,6 +1447,143 @@ async function loadRisks() {
     wrap.innerHTML = '<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load risks. Please refresh in a moment.</p></div>';
     console.error(e);
   }
+}
+
+// ── Ship 93'.c — Coverage tab (Dashboard sub-view) ─────────────────
+// Dashboard-tab state (persisted per-session)
+let dashTab = 'overview';
+
+function setDashTab(t) {
+  dashTab = t;
+  document.getElementById('dtab-overview').classList.toggle('active', t === 'overview');
+  document.getElementById('dtab-coverage').classList.toggle('active', t === 'coverage');
+  document.getElementById('dash-tab-overview').style.display  = t === 'overview' ? '' : 'none';
+  document.getElementById('dash-tab-coverage').style.display  = t === 'coverage' ? '' : 'none';
+  if (t === 'coverage') loadCoverage();
+}
+
+function refreshDashTab() {
+  if (dashTab === 'coverage') loadCoverage();
+  else loadDashboard();
+}
+
+async function loadCoverage() {
+  const wrap = document.getElementById('coverage-wrap');
+  wrap.innerHTML = '<div class="empty"><i class="ti ti-loader-2"></i><p>Loading coverage…</p></div>';
+  try {
+    const data = await api('/api/v1/dashboard/coverage?k_per_bucket=20&max_yellow=3');
+    renderCoverage(data);
+  } catch (e) {
+    wrap.innerHTML = '<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load coverage. Please refresh in a moment.</p></div>';
+    console.error(e);
+  }
+}
+
+function renderCoverage(data) {
+  const wrap = document.getElementById('coverage-wrap');
+  const summary = data.summary || {};
+  const sections = data.sections || [];
+  const totalControls = (summary.controls_ready_to_close || 0)
+                     + (summary.controls_in_progress || 0)
+                     + (summary.controls_not_started || 0);
+  // Update tab pill count
+  const tc = document.getElementById('dtab-coverage-count');
+  if (tc) {
+    if (totalControls > 0) { tc.textContent = String(totalControls); tc.style.display = ''; }
+    else { tc.style.display = 'none'; }
+  }
+  if (totalControls === 0) {
+    wrap.innerHTML = '<div class="empty"><i class="ti ti-checks"></i><p>Every required element on every enrolled control has direct evidence on file.</p></div>';
+    return;
+  }
+
+  const partsHtml = [];
+  partsHtml.push(`
+    <div style="padding:16px 20px 12px;border-bottom:1px solid var(--border-color, #E5E3D6)">
+      <div style="font-size:13px;color:#6E6B5D;line-height:1.5">
+        Every control with at least one partial or missing required element, grouped by how close each is to full coverage.
+      </div>
+      <div style="display:flex;gap:20px;margin-top:12px;font-size:12px;color:#6E6B5D">
+        <div>
+          <span style="font-weight:600;color:#26241A">${summary.controls_ready_to_close || 0}</span> ready to close
+        </div>
+        <div>
+          <span style="font-weight:600;color:#26241A">${summary.controls_in_progress || 0}</span> in progress
+        </div>
+        <div>
+          <span style="font-weight:600;color:#26241A">${summary.controls_not_started || 0}</span> not started
+        </div>
+        <div style="margin-left:auto;font-size:11px;color:#9C9A8E">
+          ${summary.total_partial_musts || 0} partial + ${summary.total_missing_musts || 0} missing elements across all controls
+        </div>
+      </div>
+    </div>
+  `);
+
+  const sectionStyle = {
+    ready_to_close: {icon:'ti-progress-check', color:'#B08A2E', accent:'#F7E9C4'},
+    in_progress:    {icon:'ti-progress',       color:'#4B8BBE', accent:'#DDECF8'},
+    not_started:    {icon:'ti-progress-x',     color:'#7B7B7B', accent:'#EDEDED'},
+  };
+
+  for (const sec of sections) {
+    if ((sec.n_total || 0) === 0) continue;
+    const style = sectionStyle[sec.id] || {icon:'ti-list-check', color:'#7B7B7B', accent:'#EDEDED'};
+    partsHtml.push(`
+      <div style="padding:18px 20px 8px">
+        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px">
+          <i class="ti ${style.icon}" style="color:${style.color};font-size:18px"></i>
+          <div style="font-size:16px;font-weight:600;color:#26241A">${sec.title}</div>
+          <div style="font-size:11px;color:#9C9A8E">
+            ${sec.n_total} control${sec.n_total===1?'':'s'}${sec.n_shown < sec.n_total ? ` — showing top ${sec.n_shown}` : ''}
+          </div>
+        </div>
+        <div style="font-size:12px;color:#6E6B5D;line-height:1.5;margin-bottom:12px">${sec.description}</div>
+      </div>
+    `);
+
+    for (const c of sec.controls) {
+      const yellow = c.yellow_items || [];
+      const yellowHtml = yellow.map(it => {
+        const iconChar = it.state === 'partial' ? '◐' : '✗';
+        const iconColor = it.state === 'partial' ? '#B08A2E' : '#B85450';
+        const label = escapeHtml(it.must_label || '');
+        const prose = escapeHtml(it.close_path || '');
+        return `
+          <li style="margin:8px 0;padding-left:2px">
+            <span style="color:${iconColor};font-weight:600;margin-right:6px">${iconChar}</span>
+            <span style="color:#26241A;font-weight:500">${label}</span>
+            ${prose ? `<div style="font-size:12px;color:#6E6B5D;margin:3px 0 0 20px;line-height:1.5;font-style:italic">${prose}</div>` : ''}
+          </li>
+        `;
+      }).join('');
+      const yellowCount = (c.counts.partial || 0) + (c.counts.missing || 0);
+      const moreCount = yellowCount - yellow.length;
+      partsHtml.push(`
+        <div style="margin:0 20px 12px;padding:14px 16px;background:${style.accent};border-radius:6px;border-left:3px solid ${style.color}">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px">
+            <div>
+              <a href="#dashboard?control=${encodeURIComponent(c.control_ref)}"
+                 onclick="event.preventDefault();setMode('dashboard');_openControlDetail('${escapeHtml(c.control_ref)}');return false;"
+                 style="font-size:14px;font-weight:600;color:#26241A;text-decoration:none">
+                ${escapeHtml(c.standard_display)} ${escapeHtml(c.control_ref)}
+              </a>
+              ${c.title ? `<span style="font-size:12px;color:#6E6B5D;margin-left:6px">— ${escapeHtml(c.title)}</span>` : ''}
+            </div>
+            <div style="font-size:11px;color:#6E6B5D;white-space:nowrap">
+              ${c.counts.partial > 0 ? `<span style="color:#B08A2E;font-weight:600">${c.counts.partial} partial</span> + ` : ''}${c.counts.missing} missing${c.counts.direct > 0 ? ` <span style="color:#9C9A8E">(${c.counts.direct} on file)</span>` : ''}
+            </div>
+          </div>
+          <ul style="margin:8px 0 0;padding:0;list-style:none">
+            ${yellowHtml}
+          </ul>
+          ${moreCount > 0 ? `<div style="margin-top:6px;font-size:11px;color:#6E6B5D;font-style:italic">…and ${moreCount} more — open the control drill-in for the full list</div>` : ''}
+        </div>
+      `);
+    }
+  }
+
+  wrap.innerHTML = partsHtml.join('');
 }
 
 async function downloadRiskTemplate() {
@@ -4527,7 +4682,7 @@ async function _implResolveAndRefresh(implId, status, controlRef) {
 }
 
 function _implDismissPromptAndRefresh(implId, controlRef) {
-  const reason = prompt('Reason for dismissal (auditor-grade):');
+  const reason = prompt('Why are you dismissing this? A specific sentence or two — enough for someone reviewing this later to understand.');
   if (!reason || !reason.trim()) return;
   _implResolve(implId, 'dismissed', reason.trim()).then(() => {
     if (selected && selected.control_ref === controlRef) {
@@ -5763,7 +5918,7 @@ async function _implResolve(implId, newStatus, dismissedReason) {
 }
 
 function _implDismissPrompt(implId) {
-  const reason = prompt('Reason for dismissal (auditor-grade — explain WHY this is not actionable):');
+  const reason = prompt('Why isn\'t this actionable? A specific sentence or two — enough for someone reviewing this later to understand.');
   if (!reason || !reason.trim()) return;
   _implResolve(implId, 'dismissed', reason.trim());
 }
@@ -5795,7 +5950,7 @@ async function _implBulkResolve(verificationId, action, dismissedReason) {
 }
 
 function _implBulkDismissPrompt(verificationId) {
-  const reason = prompt('Shared dismissal reason for all follow-ups from this verification (auditor-grade):');
+  const reason = prompt('Shared reason for dismissing every follow-up from this verification. A specific sentence or two — enough for someone reviewing this later to understand.');
   if (!reason || !reason.trim()) return;
   _implBulkResolve(verificationId, 'dismiss', reason.trim());
 }
@@ -6008,8 +6163,8 @@ async function openCiteVerify(leafId, systemId, systemName) {
   const body = `
     <div style="font-size:12px;color:#5C5A4F;margin-bottom:10px">
       Verifying <strong>${systemName.replace(/</g,'&lt;')}</strong> as the source for this control.
-      Describe what changed since your last check — this is the
-      auditor-grade record, not a rubber-stamp.
+      Describe what changed since your last check — a specific note,
+      not a rubber-stamp.
     </div>
     <div style="margin-bottom:10px">
       <label style="font-size:11px;color:#5C5A4F;display:block;margin-bottom:2px">

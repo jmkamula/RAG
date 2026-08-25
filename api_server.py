@@ -6262,7 +6262,7 @@ async def verify_cites_for_leaf_source(
         ]
       }
 
-    The `changes_detected` field is the audit-grade payload — forces
+    The `changes_detected` field is the specific-reason payload — forces
     real review rather than rubber-stamp verification. `structured_events`
     is the cascade-engine substrate; if present, the cascade engine (S3)
     will walk the event graph from these emissions.
@@ -6604,7 +6604,7 @@ async def update_triggered_implication(
     """Resolve a triggered implication.
 
     Body must include status='satisfied' or status='dismissed'. When
-    dismissing, dismissed_reason is required (audit-grade). Satisfied
+    dismissing, dismissed_reason is required (specific reason).  Satisfied
     rows may optionally carry resolved_evidence_kind + resolved_evidence_id.
     """
     new_status = payload.get("status")
@@ -6618,8 +6618,9 @@ async def update_triggered_implication(
     if new_status == "dismissed" and not dismissed_reason:
         raise HTTPException(
             400,
-            "Please add an auditor-grade explanation of why you're "
-            "dismissing this follow-up."
+            "Please add a specific reason for dismissing this "
+            "follow-up — a sentence or two that would make sense to "
+            "someone reviewing this later."
         )
 
     ev_kind = payload.get("resolved_evidence_kind")
@@ -7226,6 +7227,51 @@ async def dashboard_control_canonical(
     return summary
 
 
+@app.get("/api/v1/dashboard/coverage", tags=["posture"])
+async def dashboard_coverage(
+    request:       Request,
+    key_info:      APIKeyInfo = Depends(require_scope("posture")),
+    k_per_bucket:  int = 20,
+    max_yellow:    int = 3,
+):
+    """Ship 93'.c — Coverage aggregate for the Dashboard "Coverage" tab.
+
+    Yellow items (partial + missing MUSTs) grouped by control and
+    bucketed into "Ready to close" / "In progress" / "Not started"
+    with per-control close-path prose for the top-K per bucket.
+
+    Reuses explain_partial + explain_missing (Ships 93'.a/f) so the
+    tenant sees the same narrative here as in the Stage-1 detail
+    panel + auditor Evidence Package.
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    neo  = None
+    try:
+        set_session(conn, key_info.tenant_id)
+        from rag.posture_loader import _build_engine_neo4j_driver
+        from rag.posture.coverage import build_coverage
+        try:
+            neo = _build_engine_neo4j_driver()
+        except Exception:
+            neo = None
+        payload = build_coverage(
+            conn,
+            neo,
+            key_info.tenant_id,
+            k_per_bucket           = max(1, min(50, int(k_per_bucket))),
+            max_yellow_per_control = max(1, min(10, int(max_yellow))),
+        )
+    finally:
+        pool.putconn(conn)
+        if neo is not None:
+            try:
+                neo.close()
+            except Exception:
+                pass
+    return payload
+
+
 @app.get("/api/v1/dashboard/cascade-kpis", tags=["posture"])
 async def cascade_kpis(
     request: Request,
@@ -7617,7 +7663,7 @@ async def upsert_cascade_override(
       override_kind: 'mute_event' | 'mute_event_target'
       event_type:    e.g. 'phishing_threshold_crossed'
       target_requirement_id: required when kind=mute_event_target
-      reason: auditor-grade explanation (required)
+      reason: specific-reason explanation (required)
     """
     kind     = payload.get("override_kind")
     event_t  = payload.get("event_type") or ""
@@ -7646,8 +7692,9 @@ async def upsert_cascade_override(
     if not reason:
         raise HTTPException(
             400,
-            "Please add an auditor-grade explanation of why this cascade "
-            "doesn't apply to you."
+            "Please add a specific reason for why this cascade "
+            "doesn't apply to you — a sentence or two that would "
+            "make sense to someone reviewing this later."
         )
     # Validate event_type is known
     from enrichment.events.event_nodes import ALL_EVENTS

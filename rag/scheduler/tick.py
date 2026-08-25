@@ -582,7 +582,7 @@ def sweep_freshness_expiry(pg_conn, tick_id: str, dry_run: bool = False) -> dict
                             f"{int(stale_days)} days old — {int(stale_days - fdays)} "
                             f"days past the {fdays}-day freshness window "
                             f"defined for this control. Refresh the evidence "
-                            f"to keep the posture auditor-ready."
+                            f"to keep the posture current."
                         )
 
                         cur.execute("""
