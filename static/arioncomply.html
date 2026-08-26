@@ -523,8 +523,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <button class="nav-item" id="nav-profile" onclick="setMode('profile')">
       <i class="ti ti-id-badge-2" aria-hidden="true"></i> Profile
     </button>
-    <button class="nav-item" id="nav-cascade" onclick="setMode('cascade')">
-      <i class="ti ti-timeline" aria-hidden="true"></i> Cascade timeline
+    <button class="nav-item" id="nav-cascade" onclick="setMode('cascade')"
+            title="Follow-up actions the cascade engine surfaced from your cite verifications + a chronological view of recent cascade activity">
+      <i class="ti ti-timeline" aria-hidden="true"></i> Follow-ups
     </button>
     <button class="nav-item" id="nav-risks" onclick="setMode('risks')">
       <i class="ti ti-alert-triangle" aria-hidden="true"></i> Risk register
@@ -757,8 +758,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <!-- Cascade timeline toolbar -->
     <div class="main-toolbar" id="toolbar-cascade" style="display:none">
       <div>
-        <div class="main-title">Cascade timeline</div>
-        <div class="main-sub">Chronological log of every cascade emission — verifications, implications, followups, suppressions</div>
+        <div class="main-title">Follow-ups &amp; activity</div>
+        <div class="main-sub">Actions due today plus a chronological view of recent cascade activity</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
         <input id="cascade-filter-control" placeholder="Control e.g. A.5.18"
@@ -2408,7 +2409,7 @@ function renderGetStarted(d) {
 // ── Cascade timeline (S3q) ────────────────────────────────────────────
 async function loadCascadeTimeline() {
   const wrap = document.getElementById('cascade-wrap');
-  wrap.innerHTML = '<div class="empty"><i class="ti ti-loader-2"></i><p>Loading cascade timeline…</p></div>';
+  wrap.innerHTML = '<div class="empty"><i class="ti ti-loader-2"></i><p>Loading follow-ups &amp; activity…</p></div>';
   const cref  = (document.getElementById('cascade-filter-control')?.value || '').trim();
   const evt   = (document.getElementById('cascade-filter-event')?.value || '').trim();
   const days  = document.getElementById('cascade-filter-days')?.value || '30';
@@ -2418,35 +2419,83 @@ async function loadCascadeTimeline() {
   qs.set('since_days', days);
   qs.set('limit', '300');
   try {
-    const d = await api('/api/v1/tenant/cascade-timeline?' + qs.toString());
-    renderCascadeTimeline(d);
+    // Ship 96'.b — also fetch the actionable state (pending
+    // implications + expected followups) so the timeline surfaces
+    // "what needs doing" alongside the chronological stream. This
+    // closes the mismatch between the Dashboard Follow-ups tile
+    // (which counts pending actions) and the deep-link destination
+    // (which previously showed only history).
+    const [timeline, implications, fpending, foverdue] = await Promise.all([
+      api('/api/v1/tenant/cascade-timeline?' + qs.toString()),
+      api('/api/v1/tenant/triggered-implications?status=pending').catch(() => null),
+      api('/api/v1/tenant/expected-followups?status=pending').catch(() => null),
+      api('/api/v1/tenant/expected-followups?status=overdue').catch(() => null),
+    ]);
+    renderCascadeTimeline(timeline, implications,
+                          {pending: fpending, overdue: foverdue});
   } catch (e) {
     wrap.innerHTML = '<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load the timeline. Please refresh in a moment.</p></div>';
   }
 }
 
-function renderCascadeTimeline(d) {
+function renderCascadeTimeline(d, implications, followups) {
   const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
   const wrap = document.getElementById('cascade-wrap');
+
+  // Ship 96'.b — Actions section at top. Reuses the exact same
+  // panels the Dashboard renders when there are pending items, so
+  // the tenant lands on identical action affordance (same satisfy /
+  // dismiss / bulk buttons) whether they arrive via the KPI tile or
+  // the sidebar. Panels return silently when their data is empty;
+  // the section header + section itself are hidden entirely when
+  // both panels have nothing to show.
+  let actionsHtml = '';
+  const hasImpl = implications && (implications.count || 0) > 0;
+  const pendingCnt = (followups && followups.pending && followups.pending.count) || 0;
+  const overdueCnt = (followups && followups.overdue && followups.overdue.count) || 0;
+  const hasFup = pendingCnt + overdueCnt > 0;
+  if (hasImpl || hasFup) {
+    let inner = '';
+    if (hasImpl) inner += renderTriggeredImplicationsPanel(implications);
+    if (hasFup)  inner += renderExpectedFollowupsPanel(followups);
+    actionsHtml = `
+      <div style="margin-bottom:20px">
+        <div style="font-size:13px;font-weight:600;color:#3A382E;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #E8E5DA">
+          <i class="ti ti-list-check" aria-hidden="true"></i> Follow-ups due
+        </div>
+        ${inner}
+      </div>
+    `;
+  }
+
+  // Recent activity — chronological stream, unchanged shape but
+  // renamed heading so the two sections read cleanly together.
+  let historyHtml = '';
   if (!d.items || !d.items.length) {
-    wrap.innerHTML = `<div class="empty" style="margin-top:40px"><i class="ti ti-clock"></i><p>No activity in the last ${esc(d.since_days)} days for the chosen filters.</p></div>`;
-    return;
+    historyHtml = `<div class="empty" style="margin-top:${actionsHtml ? '20px' : '40px'}"><i class="ti ti-clock"></i><p>No activity in the last ${esc(d.since_days)} days for the chosen filters.</p></div>`;
+  } else {
+    const counts = {verification:0, implication:0, followup:0, suppression:0};
+    for (const it of d.items) counts[it.kind] = (counts[it.kind]||0) + 1;
+    historyHtml = `
+      <div>
+        <div style="font-size:13px;font-weight:600;color:#3A382E;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #E8E5DA">
+          <i class="ti ti-history" aria-hidden="true"></i> Recent activity
+        </div>
+        <div style="display:flex;gap:14px;margin-bottom:14px;font-size:11px;color:#5C5A4F">
+          <span><strong style="color:#3A382E">${d.count}</strong> events · last ${esc(d.since_days)}d</span>
+          <span>${counts.verification||0} verifications</span>
+          <span>${counts.implication||0} follow-ups</span>
+          <span>${counts.followup||0} next steps</span>
+          <span>${counts.suppression||0} muted</span>
+        </div>
+        <div style="border:1px solid #E8E5DA;border-radius:6px;overflow:hidden;background:#fff">
+          ${d.items.map(renderCascadeTimelineRow).join('')}
+        </div>
+      </div>
+    `;
   }
-  const counts = {verification:0, implication:0, followup:0, suppression:0};
-  for (const it of d.items) counts[it.kind] = (counts[it.kind]||0) + 1;
-  let html = `<div style="display:flex;gap:14px;margin-bottom:14px;font-size:11px;color:#5C5A4F">
-    <span><strong style="color:#3A382E">${d.count}</strong> events · last ${esc(d.since_days)}d</span>
-    <span>${counts.verification||0} verifications</span>
-    <span>${counts.implication||0} implications</span>
-    <span>${counts.followup||0} followups</span>
-    <span>${counts.suppression||0} suppressions</span>
-  </div>`;
-  html += `<div style="border:1px solid #E8E5DA;border-radius:6px;overflow:hidden;background:#fff">`;
-  for (const it of d.items) {
-    html += renderCascadeTimelineRow(it);
-  }
-  html += `</div>`;
-  wrap.innerHTML = html;
+
+  wrap.innerHTML = actionsHtml + historyHtml;
   _applyNotifFocus();
 }
 
@@ -4318,9 +4367,9 @@ const _NOTIF_KIND_LABEL = {
   nc_surfaced:               'gap surfaced',
   upload_processed:          'upload processed',
   upload_failed:             'upload failed',
-  stage2_proposal_ready:     'engine proposal ready',
+  stage2_proposal_ready:     'posture proposal ready',
   cite_verification_overdue: 'cited source needs re-verification',
-  posture_flip_to_comply:    'now compliant',
+  posture_flip_to_comply:    'moved to Comply',
   api_key_expiring:          'API key expiring',
   // Ship 15'.c — risk register kinds
   risk_added:                'new risk added',

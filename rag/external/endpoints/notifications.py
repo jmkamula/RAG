@@ -46,9 +46,14 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
-# The full set of kinds landed in Ship 3'.a-i — used to validate the
-# `kind[]` filter param. Ship 3' arc close (13 kinds total).
+# Used to validate the `kind[]` filter query param. Must stay in
+# sync with `tenant_notification_kind_check` CHECK constraint —
+# otherwise the DB may emit rows the external client can't filter on
+# even though those rows still flow out on unfiltered polls. Ship 96'.a
+# (2026-08-26) added the 4 Ship 14'.f risk register kinds that had
+# been ghost-contract on the external API since schema_v88 (2026-08-01).
 _ALLOWED_KINDS = (
+    # Ship 3'.a-i (schemas v59 / v69 / v70 / v74)
     "implication_overdue",
     "followup_overdue",
     "threshold_crossed",
@@ -62,6 +67,11 @@ _ALLOWED_KINDS = (
     "cite_verification_overdue",
     "posture_flip_to_comply",
     "api_key_expiring",
+    # Ship 14'.f (schema_v88, added retroactively in Ship 96'.a)
+    "risk_added",
+    "risk_treatment_overdue",
+    "residual_above_threshold",
+    "risk_review_due",
 )
 
 _ALLOWED_SEVERITIES = ("critical", "high", "medium", "low", "info")

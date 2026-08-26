@@ -1413,11 +1413,11 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
                                 cur,
                                 tenant_id           = tenant_id,
                                 kind                = "stage2_proposal_ready",
-                                title               = f"Review engine proposal for {control_ref}",
+                                title               = f"Review posture proposal for {control_ref}",
                                 body                = (
-                                    f"Engine proposes {posture} "
+                                    f"The posture proposal is {posture} "
                                     f"(live is {live_finding or 'Not assessed'}). "
-                                    f"Open Stage-2 to accept or reject."
+                                    f"Open your Review queue to accept or reject."
                                 ),
                                 severity            = _sev,
                                 related_entity_kind = "posture_control",

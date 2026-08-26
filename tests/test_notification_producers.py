@@ -736,6 +736,173 @@ TESTS += [
 ]
 
 
+# ── Notification-kind allowlist parity (Ship 96'.a) ────────────────────
+# Regression guard against the ghost-contract class of bug caught in
+# this arc: schema_v88 added 4 risk-register kinds to the DB CHECK
+# constraint but the external API's _ALLOWED_KINDS tuple stayed frozen
+# at 13. Result: external clients got a 400 "Unknown notification
+# kind" when trying to filter for risk_added / risk_review_due /
+# risk_treatment_overdue / residual_above_threshold even though those
+# rows flowed through unfiltered polls just fine. These tests parity-
+# check all 3 downstream consumers against the DB constraint.
+
+def _parse_check_constraint_kinds():
+    """Read the latest schema migration that ALTERs the
+    tenant_notification_kind_check constraint. Returns the sorted set
+    of kinds it allows."""
+    import re
+    from pathlib import Path
+    db_dir = Path(__file__).parent.parent / "db"
+    # Find every schema_*.sql that touches the kind CHECK constraint,
+    # pick the one with the highest schema number.
+    candidates = []
+    for path in db_dir.glob("schema_v*.sql"):
+        src = path.read_text()
+        if "tenant_notification_kind_check" in src and "kind = ANY" in src:
+            # Extract the vN from schema_vN_*.sql
+            m = re.match(r"schema_v(\d+)_", path.name)
+            if m:
+                candidates.append((int(m.group(1)), path))
+    if not candidates:
+        return set()
+    _, latest = max(candidates)
+    src = latest.read_text()
+    # Match the ARRAY[ ... ] body for kind check specifically
+    m = re.search(
+        r"tenant_notification_kind_check.*?CHECK\s*\(kind\s*=\s*ANY\s*\(ARRAY\[(.*?)\]\)\)",
+        src, re.DOTALL,
+    )
+    if not m:
+        return set()
+    body = m.group(1)
+    # Strip SQL line comments
+    body = re.sub(r"--[^\n]*", "", body)
+    kinds = {q for q in re.findall(r"'([^']+)'", body)}
+    return kinds
+
+
+def test_external_api_allowlist_matches_db_constraint():
+    """The DB CHECK constraint is the source of truth for legal
+    notification kinds. Every entry there must also appear in the
+    external API's _ALLOWED_KINDS tuple, else external clients get
+    an artificial 400 when filtering for a kind the system emits."""
+    from rag.external.endpoints.notifications import _ALLOWED_KINDS
+    db_kinds = _parse_check_constraint_kinds()
+    api_kinds = set(_ALLOWED_KINDS)
+    missing_in_api = db_kinds - api_kinds
+    return _ok(
+        not missing_in_api,
+        f"kinds in DB but missing from external API: {sorted(missing_in_api)}",
+    )
+
+
+def test_spa_humanization_covers_db_constraint():
+    """Every DB-legal kind must have a human-readable label in the
+    SPA's _NOTIF_KIND_LABEL map. Without it the inbox row shows the
+    raw snake_case kind slug — jargon leak."""
+    import re
+    from pathlib import Path
+    src = (Path(__file__).parent.parent / "static" / "arioncomply.html").read_text()
+    m = re.search(r"_NOTIF_KIND_LABEL\s*=\s*\{(.*?)\}", src, re.DOTALL)
+    if not m:
+        return _ok(False, "_NOTIF_KIND_LABEL map not found in SPA")
+    body = m.group(1)
+    # Strip JS line comments so risk-kind comment lines don't confuse the parse
+    body = re.sub(r"//[^\n]*", "", body)
+    spa_kinds = set(re.findall(r"^\s*(\w+):", body, re.MULTILINE))
+    db_kinds = _parse_check_constraint_kinds()
+    missing = db_kinds - spa_kinds
+    return _ok(
+        not missing,
+        f"kinds in DB but missing from SPA _NOTIF_KIND_LABEL: {sorted(missing)}",
+    )
+
+
+def test_spa_deep_link_meta_covers_db_constraint():
+    """Every DB-legal kind must have a mode + icon + actionLabel in
+    the SPA's _NOTIF_KIND_META map. Without it the inbox row falls
+    back to a generic bell + 'inbox' — the tenant clicks and lands
+    on the notifications page again."""
+    import re
+    from pathlib import Path
+    src = (Path(__file__).parent.parent / "static" / "arioncomply.html").read_text()
+    m = re.search(r"_NOTIF_KIND_META\s*=\s*\{(.*?)\};", src, re.DOTALL)
+    if not m:
+        return _ok(False, "_NOTIF_KIND_META map not found in SPA")
+    body = m.group(1)
+    body = re.sub(r"//[^\n]*", "", body)
+    spa_kinds = set(re.findall(r"^\s*(\w+):", body, re.MULTILINE))
+    db_kinds = _parse_check_constraint_kinds()
+    missing = db_kinds - spa_kinds
+    return _ok(
+        not missing,
+        f"kinds in DB but missing from SPA _NOTIF_KIND_META: {sorted(missing)}",
+    )
+
+
+TESTS += [
+    test_external_api_allowlist_matches_db_constraint,
+    test_spa_humanization_covers_db_constraint,
+    test_spa_deep_link_meta_covers_db_constraint,
+]
+
+
+# ── Advisory-tone regression guards (Ship 96'.c) ──────────────────────
+# Ship 93'.c codified [[feedback-advisory-tone-not-authoritative]]:
+# tenant-facing prose is advisor voice, not authority voice — no
+# "compliant / certified / verified by ArionComply / audit-ready".
+# Ship 96'.c fixed the two remaining offenders on the notification
+# surface (SPA label + stage2 producer prose). These narrow guards
+# stop the exact fixed strings from drifting back in a future edit.
+
+def test_no_flagged_tone_in_spa_notif_labels():
+    """SPA notification labels shouldn't contain 'compliant' or
+    'engine proposal' — both flagged by the advisory-tone rule.
+    Codified specifically after Ship 96'.c fixed
+    posture_flip_to_comply + stage2_proposal_ready."""
+    from pathlib import Path
+    import re
+    src = (Path(__file__).parent.parent / "static" / "arioncomply.html").read_text()
+    m = re.search(r"_NOTIF_KIND_LABEL\s*=\s*\{(.*?)\}", src, re.DOTALL)
+    if not m:
+        return _ok(False, "_NOTIF_KIND_LABEL map not found in SPA")
+    body_map = m.group(1)
+    # Strip JS line comments so 'compliant' in a comment isn't flagged
+    body_map = re.sub(r"//[^\n]*", "", body_map)
+    forbidden = ["compliant", "engine proposal"]
+    hits = [w for w in forbidden if w in body_map.lower()]
+    return _ok(
+        not hits,
+        f"advisory-tone violations in _NOTIF_KIND_LABEL: {hits}",
+    )
+
+
+def test_stage2_producer_body_uses_posture_proposal_language():
+    """The stage2_proposal_ready producer body must call it a
+    'posture proposal', not an 'engine proposal'. CLAUDE.md
+    dejargonize-ux-pass mandates the rename; Ship 96'.c applied it
+    to this producer's title + body."""
+    from pathlib import Path
+    src = (Path(__file__).parent.parent / "rag" / "posture_loader.py").read_text()
+    # Isolate the stage2_proposal_ready producer block
+    idx = src.find('kind                = "stage2_proposal_ready"')
+    if idx < 0:
+        return _ok(False, "stage2_proposal_ready producer not found")
+    window = src[idx:idx + 600]
+    return _ok(
+        "engine proposal" not in window
+        and "Engine proposes" not in window
+        and "posture proposal" in window,
+        f"stage2 producer prose tone drift; window={window[:400]!r}",
+    )
+
+
+TESTS += [
+    test_no_flagged_tone_in_spa_notif_labels,
+    test_stage2_producer_body_uses_posture_proposal_language,
+]
+
+
 def main():
     print("─" * 70)
     print("  Notification producer tests (Ship 3'.c)")
