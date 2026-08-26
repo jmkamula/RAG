@@ -903,6 +903,61 @@ TESTS += [
 ]
 
 
+# ── SPA drill-in tone regression guards (Ship 97'.a) ──────────────────
+# Ship 97'.a operator feedback: the control drill-in panel + topic
+# detail card still leaked auditor-prep frame ("Auditor-defensibility
+# depends on...", "What auditors expect", "Note for audit trail...").
+# The product principle is that ArionComply helps the tenant stay
+# compliant 24×7 and defend their posture at time of impact —
+# auditor readiness is a downstream consequence, not the framing.
+# Guards below target the specific fixed strings to prevent
+# copy-paste-style regression, per Lesson 133.
+
+def _spa_body_text():
+    from pathlib import Path
+    return (Path(__file__).parent.parent / "static" / "arioncomply.html").read_text()
+
+
+def test_no_auditor_defensibility_string_in_spa():
+    """The drill-in bridge chip was reworded from 'Auditor-defensibility
+    depends on...' to a tenant-frame that leads with 'How strongly
+    they defend this posture'. Guard against the old phrasing
+    reappearing."""
+    src = _spa_body_text()
+    return _ok(
+        "Auditor-defensibility" not in src
+        and "auditor-defensibility" not in src.lower(),
+        "'Auditor-defensibility' phrasing still present in SPA",
+    )
+
+
+def test_no_what_auditors_expect_header_in_spa():
+    """The topic-detail card was reworded from 'What auditors expect'
+    to 'What good coverage looks like'."""
+    src = _spa_body_text()
+    return _ok(
+        "What auditors expect" not in src,
+        "'What auditors expect' header still present in SPA",
+    )
+
+
+def test_no_note_for_audit_trail_placeholder_in_spa():
+    """The two confirm-reason textareas were reworded from
+    'Note for audit trail...' to 'Note for the record...'."""
+    src = _spa_body_text()
+    return _ok(
+        "Note for audit trail" not in src,
+        "'Note for audit trail' placeholder still present in SPA",
+    )
+
+
+TESTS += [
+    test_no_auditor_defensibility_string_in_spa,
+    test_no_what_auditors_expect_header_in_spa,
+    test_no_note_for_audit_trail_placeholder_in_spa,
+]
+
+
 def main():
     print("─" * 70)
     print("  Notification producer tests (Ship 3'.c)")

@@ -586,6 +586,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="tabs" style="margin-left:8px">
           <button class="tab active" id="stab-1" onclick="setStage(1)">Intake approval <span class="fcount" id="sc-1">—</span></button>
           <button class="tab" id="stab-2" onclick="setStage(2)">Posture approval <span class="fcount" id="sc-2">—</span></button>
+          <button class="tab" id="stab-cites" onclick="setStage('cites')">Cites <span class="fcount" id="sc-cites">—</span></button>
         </div>
       </div>
       <button class="btn-sm btn-outline" onclick="loadQueue()">
@@ -924,7 +925,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div id="body-confirm">
           <div class="form-group">
             <label class="form-label">Reason (optional)</label>
-            <textarea class="form-textarea" id="confirm-reason" placeholder="Note for audit trail..."></textarea>
+            <textarea class="form-textarea" id="confirm-reason" placeholder="Note for the record..."></textarea>
           </div>
           <button class="btn-confirm" id="btn-confirm" onclick="doConfirm()">
             <i class="ti ti-check" aria-hidden="true"></i> Confirm finding
@@ -1085,6 +1086,11 @@ function _applyHashRoute() {
     if (tab === 'coverage') setDashTab('coverage');
     const ref = params.get('control');
     if (ref) _openControlDetail(ref);
+  }
+  if (modeName === 'queue') {
+    const tab = params.get('tab');
+    if (tab === 'cites') setStage('cites');
+    else if (tab === '2') setStage(2);
   }
 }
 // Open the drill-in detail panel for a control ref immediately, without
@@ -1349,6 +1355,11 @@ async function _notifOpen(id, kind, ref, entity_id) {
   window._notifTarget = (ref || entity_id) ? {kind, ref, entity_id} : null;
   const meta = _notifKindMeta(kind);
   setMode(meta.mode);
+  // Ship 97'.a — kinds may specify a sub-tab within the destination mode
+  // (e.g. cite_verification_overdue → Review queue > Cites tab).
+  if (meta.extra && meta.extra.stage !== undefined && meta.mode === 'queue') {
+    setStage(meta.extra.stage);
+  }
 }
 
 // Ship 3'.m: called at the end of each mode's render pass. If a
@@ -3811,7 +3822,7 @@ function renderTopicDetail(d) {
 
       ${d.auditor_expects ? `
         <div class="topic-auditor-box">
-          <div class="topic-auditor-title"><i class="ti ti-gavel" aria-hidden="true"></i> What auditors expect</div>
+          <div class="topic-auditor-title"><i class="ti ti-checkbox" aria-hidden="true"></i> What good coverage looks like</div>
           <div class="topic-auditor-body">${escapeHtml(d.auditor_expects)}</div>
         </div>
       ` : ''}
@@ -4114,6 +4125,7 @@ async function loadDashboard() {
     renderDashboard(d, freshness, implications,
                     {pending: followupsPending, overdue: followupsOverdue},
                     kpis, attestations, coverageSum);
+    loadStageCounts();  // Ship 97'.a — keep Review-queue nav badge fresh even on dashboard
   } catch (e) {
     wrap.innerHTML = '<div class="dash-empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load your posture. Please refresh in a moment.</p></div>';
   }
@@ -4149,7 +4161,11 @@ function renderDashboard(d, freshness, implications, followups, kpis, attestatio
     (covSummary.controls_not_started || 0);
   const citeTotal =
     (freshCounts.red || 0) + (freshCounts.yellow || 0) + (freshCounts.upcoming || 0);
-  if (followupsTotal + coverageTotal + citeTotal > 0) {
+  // Ship 97'.a — attestation prompts (match confirmations) live on the
+  // same "Cites" tab now; roll them into the tile so the count matches
+  // the total waiting on the destination.
+  const attestTotal = (attestations && attestations.count) || 0;
+  if (followupsTotal + coverageTotal + citeTotal + attestTotal > 0) {
     kpisHtml = renderDashboardKpis({
       followups: {
         total:                 followupsTotal,
@@ -4158,23 +4174,14 @@ function renderDashboard(d, freshness, implications, followups, kpis, attestatio
       },
       coverage: covSummary,
       cites:    freshCounts,
+      attest:   attestTotal,
     });
   }
 
-  // Cite freshness card — only shown when any cite is past/near due.
-  let freshnessHtml = '';
-  if (freshness && (freshness.counts.red || freshness.counts.yellow || freshness.counts.upcoming)) {
-    freshnessHtml = renderCiteFreshnessCard(freshness);
-  }
-
-  // Ship 92'.c — cite attestation prompts card. Only shown when
-  // there are pending prompts (uploaded doc has present findings
-  // on a MUST that also has an active cite; tenant needs to
-  // confirm whether it IS the cite target).
-  let attestationsHtml = '';
-  if (attestations && attestations.count > 0) {
-    attestationsHtml = renderCiteAttestationsCard(attestations);
-  }
+  // Ship 97'.a — cite freshness + attestation panels moved OFF the
+  // Dashboard into Review Queue > Cites tab. Dashboard becomes
+  // summary-only (KPI tiles surface the counts + link to the tab
+  // for the per-item action affordance).
 
   // Triggered-implications panel — only shown when any cascade-output
   // implication is pending.
@@ -4193,7 +4200,7 @@ function renderDashboard(d, freshness, implications, followups, kpis, attestatio
   }
 
   // Heatmap legend once at the top.
-  let html = kpisHtml + freshnessHtml + attestationsHtml + implHtml + followupHtml + `<div class="heat-legend" style="margin-bottom:14px">
+  let html = kpisHtml + implHtml + followupHtml + `<div class="heat-legend" style="margin-bottom:14px">
     <span><span class="heat-legend-swatch f-NC"></span>NC</span>
     <span><span class="heat-legend-swatch f-OFI"></span>OFI</span>
     <span><span class="heat-legend-swatch f-Comply"></span>Comply</span>
@@ -4321,13 +4328,15 @@ function humanizeStandardId(s) {
   return s;
 }
 
-// Ship 68'.b (2026-08-13) — asserted-mapping chip.
+// Ship 68'.b (2026-08-13) — cross-framework coverage chip.
 // Ship 60'.g / 60'.i shipped this as a "covered by" claim, but the
-// underlying bridge_coverage rows are cross-product attributions from
-// a curator-authored graph edge, not a measured per-MUST fit. The
-// honest framing: N related controls in another framework are
-// asserted (per catalog) to implement this obligation. The auditor
-// decides whether the assertion + the tenant's evidence hold.
+// underlying bridge_coverage rows are cross-product attributions
+// from a curator-authored graph edge, not a measured per-MUST fit.
+// The honest framing: N related controls in another framework can
+// contribute coverage here; whether the coverage holds up in
+// practice depends on the tenant's specific evidence there.
+// Ship 97'.a (2026-08-26) — reworded from auditor frame to tenant
+// posture frame per [[feedback-advisory-tone-not-authoritative]].
 // Returns '' when nothing to say (n_bridged is zero on legacy
 // fallback responses).
 function renderBridgeChip(leaf) {
@@ -4348,10 +4357,11 @@ function renderBridgeChip(leaf) {
   return `<div style="margin-top:6px;padding:6px 10px;background:#F0F4F0;
                      border-left:3px solid #4A9059;font-size:11px;color:#3A382E">
     <span style="color:#4A9059">↗</span>
-    Related <strong>${stdList}</strong> ${stdNoun} are asserted (per
-    ArionComply catalog) to implement one or more of these missing
-    elements. Auditor-defensibility depends on the specific evidence
-    and mapping acceptance.
+    <strong>${stdList}</strong> ${stdNoun} in another framework are
+    mapped (per ArionComply catalog) to contribute coverage for one
+    or more of these elements. How strongly they defend this
+    posture depends on the specific evidence you have in place
+    there.
   </div>`;
 }
 
@@ -4392,7 +4402,7 @@ const _NOTIF_KIND_META = {
   upload_processed:          {icon: 'ti-file-check',       mode: 'docs',       actionLabel: 'Open uploads'},
   upload_failed:             {icon: 'ti-file-alert',       mode: 'docs',       actionLabel: 'Open uploads'},
   stage2_proposal_ready:     {icon: 'ti-square-check',     mode: 'queue',      actionLabel: 'Open review queue'},
-  cite_verification_overdue: {icon: 'ti-link-off',         mode: 'dashboard',  actionLabel: 'Open control'},
+  cite_verification_overdue: {icon: 'ti-link-off',         mode: 'queue',      actionLabel: 'Open Cites tab', extra: {stage: 'cites'}},
   posture_flip_to_comply:    {icon: 'ti-mood-happy',       mode: 'dashboard',  actionLabel: 'Open control'},
   api_key_expiring:          {icon: 'ti-key',              mode: 'profile',    actionLabel: 'Open profile'},
   // Ship 15'.c — risk register kinds. All route to the risks
@@ -4809,6 +4819,7 @@ function setStage(s) {
   stage = s;
   document.getElementById('stab-1').classList.toggle('active', s===1);
   document.getElementById('stab-2').classList.toggle('active', s===2);
+  document.getElementById('stab-cites').classList.toggle('active', s==='cites');
   closeDetail();
   loadQueue();
 }
@@ -4822,11 +4833,13 @@ async function loadQueue() {
       s1Controls = d.controls;
       setStatus(true);
       renderStage1(d.controls, d.total);
-    } else {
+    } else if (stage === 2) {
       const d = await api('/api/v1/stage2/queue');
       s2Proposals = d.proposals;
       setStatus(true);
       renderStage2(d.proposals, d.total);
+    } else if (stage === 'cites') {
+      await loadCitesQueue();
     }
     loadStageCounts();
   } catch(e) {
@@ -4835,13 +4848,56 @@ async function loadQueue() {
   }
 }
 
+// Ship 97'.a — Cites tab renderer. Bundles the two cite-lifecycle
+// panels (reviews due + attestation match confirmations) that used
+// to sit on the Dashboard as queue-shaped work. Same panel renderers
+// reused unchanged — action buttons + humanized copy identical.
+async function loadCitesQueue() {
+  const body = document.getElementById('body-queue');
+  const [freshness, attestations] = await Promise.all([
+    api('/api/v1/dashboard/cites/needs-verification').catch(() => null),
+    api('/api/v1/cite-attestations/pending').catch(() => null),
+  ]);
+  setStatus(true);
+  let html = '';
+  const staleTotal =
+    (freshness && freshness.counts && (freshness.counts.red || 0) + (freshness.counts.yellow || 0) + (freshness.counts.upcoming || 0)) || 0;
+  const attTotal = (attestations && attestations.count) || 0;
+  if (staleTotal + attTotal === 0) {
+    html = `<div class="empty" style="margin-top:40px"><i class="ti ti-checks" aria-hidden="true"></i><p>No cite reviews or match confirmations waiting.</p></div>`;
+  } else {
+    if (staleTotal > 0)  html += renderCiteFreshnessCard(freshness);
+    if (attTotal > 0)    html += renderCiteAttestationsCard(attestations);
+  }
+  body.innerHTML = html;
+  // Update the tab pill count with total waiting items
+  const pill = document.getElementById('sc-cites');
+  if (pill) {
+    const total = staleTotal + attTotal;
+    if (total > 0) { pill.textContent = String(total); pill.style.display = ''; }
+    else { pill.textContent = '0'; }
+  }
+}
+
 async function loadStageCounts() {
   try {
-    const s1 = await api('/api/v1/stage1/queue');
-    const s2 = await api('/api/v1/stage2/queue');
+    const [s1, s2, freshness, attestations] = await Promise.all([
+      api('/api/v1/stage1/queue'),
+      api('/api/v1/stage2/queue'),
+      api('/api/v1/dashboard/cites/needs-verification').catch(() => null),
+      api('/api/v1/cite-attestations/pending').catch(() => null),
+    ]);
     document.getElementById('sc-1').textContent = s1.total;
     document.getElementById('sc-2').textContent = s2.total;
-    document.getElementById('nb-queue').textContent = (s1.total + s2.total);
+    // Ship 97'.a — Cites tab pill count (freshness reviews-due +
+    // attestation match confirmations). Nav badge sums all three tabs.
+    const cStale =
+      (freshness && freshness.counts &&
+       (freshness.counts.red || 0) + (freshness.counts.yellow || 0) + (freshness.counts.upcoming || 0)) || 0;
+    const cAtt   = (attestations && attestations.count) || 0;
+    const cTot   = cStale + cAtt;
+    document.getElementById('sc-cites').textContent = cTot;
+    document.getElementById('nb-queue').textContent = (s1.total + s2.total + cTot);
   } catch(e) {}
 }
 
@@ -5850,7 +5906,7 @@ function renderTriggeredImplicationsPanel(data) {
 // (already surfaces as Notifications kind='auto_resolved') /
 // Verifications (activity self-log). Each tile is a clickable
 // deep-link to the surface where the tenant acts.
-function renderDashboardKpis({ followups, coverage, cites }) {
+function renderDashboardKpis({ followups, coverage, cites, attest }) {
   const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
 
   const tile = (label, value, sub, accent, onclick, title) => {
@@ -5914,29 +5970,30 @@ function renderDashboardKpis({ followups, coverage, cites }) {
                : "Every enrolled control has full evidence coverage.",
   ));
 
-  // Tile 3 — Cite reviews due
+  // Tile 3 — Cites (freshness reviews-due + attestation match confirms)
   const cStale    = cites.red || 0;
   const cSoon     = cites.yellow || 0;
   const cUpcoming = cites.upcoming || 0;
-  const citeTotal = cStale + cSoon + cUpcoming;
-  let citeValue = citeTotal;
+  const cAttest   = attest || 0;
+  const citeTotal = cStale + cSoon + cUpcoming + cAttest;
   let citeSub;
   if (citeTotal === 0) {
-    citeSub = 'no cites due';
-  } else if (cStale > 0) {
-    citeSub = `${cStale} stale${cSoon ? ` · ${cSoon} due soon` : ''}`;
-  } else if (cSoon > 0) {
-    citeSub = `${cSoon} due soon${cUpcoming ? ` · ${cUpcoming} upcoming` : ''}`;
+    citeSub = 'no cites waiting';
   } else {
-    citeSub = `${cUpcoming} upcoming`;
+    const parts = [];
+    if (cStale > 0)    parts.push(`${cStale} stale`);
+    if (cSoon > 0)     parts.push(`${cSoon} due soon`);
+    if (cUpcoming > 0) parts.push(`${cUpcoming} upcoming`);
+    if (cAttest > 0)   parts.push(`${cAttest} to confirm`);
+    citeSub = parts.join(' · ');
   }
   tiles.push(tile(
-    "Cite reviews due",
-    citeValue,
+    "Cites",
+    citeTotal,
     citeSub,
-    cStale > 0 ? 'red' : (cSoon > 0 ? 'amber' : null),
-    "document.getElementById('cite-freshness-card') && document.getElementById('cite-freshness-card').scrollIntoView({behavior:'smooth',block:'start'})",
-    citeTotal > 0 ? "External cites that need tenant confirmation. Click to open the review list below."
+    cStale > 0 ? 'red' : (cSoon + cAttest > 0 ? 'amber' : null),
+    "setMode('queue');setStage('cites')",
+    citeTotal > 0 ? "External cites needing review or match confirmation. Click to open Review queue > Cites."
                   : "No cites past or approaching their review cycle.",
   ));
 
@@ -6418,17 +6475,17 @@ function renderDemonstratedByPanel(dm) {
   // Header: propagated finding pill + intro sentence
   let header = `<div style="font-size:11px;color:#3A382E;font-weight:600;margin-top:14px;margin-bottom:6px">
     <i class="ti ti-git-branch" style="vertical-align:middle"></i>
-    Demonstrated by
+    Coverage from your other frameworks
     ${dm.propagated_finding
-      ? `<span style="margin-left:6px;font-weight:400;color:#5C5A4F">— propagates to ${pillWithLabel(dm.propagated_finding)}</span>`
+      ? `<span style="margin-left:6px;font-weight:400;color:#5C5A4F">— posture here reflects ${pillWithLabel(dm.propagated_finding)}</span>`
       : ''}
     ${dm.materialised
-      ? `<span style="margin-left:6px;font-size:10px;color:#7C7A6E;font-style:italic">(auto-inferred: no direct assessment)</span>`
+      ? `<span style="margin-left:6px;font-size:10px;color:#7C7A6E;font-style:italic">(inferred from below — no direct assessment)</span>`
       : ''}
   </div>
   <div style="font-size:11px;color:#5C5A4F;margin-bottom:8px;line-height:1.5">
-    Cross-framework grounding — implemented by the operational
-    controls below.
+    Coverage from other frameworks — evidence you already have on
+    the operational controls below contributes here.
   </div>`;
 
   // Table of contributing sources with their current findings + rationale
@@ -6773,7 +6830,7 @@ function configureActionPanel(kind) {
   document.getElementById('body-confirm').innerHTML = `
     <div class="form-group">
       <label class="form-label">Reason (optional)</label>
-      <textarea class="form-textarea" id="confirm-reason" placeholder="Note for audit trail..."></textarea>
+      <textarea class="form-textarea" id="confirm-reason" placeholder="Note for the record..."></textarea>
     </div>
     <button class="btn-confirm" id="btn-confirm" onclick="doConfirm()">
       <i class="ti ti-check" aria-hidden="true"></i> Confirm finding
