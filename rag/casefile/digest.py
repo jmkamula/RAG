@@ -1025,6 +1025,23 @@ def _plan_for(cf: CaseFile) -> _DigestPlan:
                                           # opening sentence
             obligations_first   = True,
         )
+    # Ship 97'.b (2026-08-26) — scoped remediation: tenant asked "how
+    # do I remediate X"; the answer should focus on X. Top-N NCs
+    # across the program leak into the digest → related-cards → cluttered
+    # response. Tightening posture_limit to 1 lets the cited ref through
+    # (rank_posture_refs puts cited first); xfw bridges + curated Neo4j
+    # cross-role neighbors still surface via their own paths.
+    # Applies to IMPLEMENTATION ("how do I implement/remediate X") +
+    # GAP_ANALYSIS ("what are my gaps for X") — both scoped questions
+    # with a resolved cited ref.
+    if cf.question_type in ("implementation", "gap_analysis") and cf.cited_refs:
+        return _DigestPlan(
+            posture_limit       = 1,
+            posture_body_chars  = 200,   # generous — this ONE ref matters
+            obligation_limit    = 2,     # tight — only genuine bridges
+            obligation_chars    = 300,
+            obligations_first   = False,
+        )
     # Default: posture-focused (matches Ship 2'.a-h behaviour).
     return _DigestPlan(
         posture_limit       = 10,

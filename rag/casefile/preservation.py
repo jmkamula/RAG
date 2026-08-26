@@ -204,11 +204,26 @@ def _required_refs(cf: CaseFile) -> set[str]:
          where the underlying clause (e.g. 6.1.2) may not appear in
          cited_refs or top-3 posture but IS in the OBLIGATIONS text
          the LLM was shown. Case #222 exposed this drop mode.
+
+    Ship 97'.b (2026-08-26) — scoped remediation exception:
+    for REMEDIATION_GUIDE queries with a cited ref, skip feeders 2+3.
+    "How do I remediate 7.2?" is a narrow question; top-N NCs across
+    the tenant's program + top-N obligations leak into related-cards
+    as noise. Cited refs still surface, plus any legitimately curated
+    cross-role neighbors from Neo4j (via fetch_cross_role_neighbors
+    in build_related_cards). Tenant sees the scoped answer they asked
+    for, not a program-wide NC dump.
     """
     out: set[str] = set()
     for r in cf.cited_refs:
         if r and _has_data_in_casefile(cf, r):
             out.add(r)
+    scoped_remediation = (
+        cf.question_type in ("implementation", "gap_analysis")
+        and bool(cf.cited_refs)
+    )
+    if scoped_remediation:
+        return out
     for r in _rank_posture_refs(cf, limit=_REQUIRED_TOP_N):
         out.add(r)
     for r in _rank_obligation_refs(cf, limit=_REQUIRED_TOP_N + 2):
