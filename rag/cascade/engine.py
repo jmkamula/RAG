@@ -29,9 +29,12 @@ What this v1 engine does NOT do (deferred to S3b/later):
 """
 from __future__ import annotations
 import json
+import logging
 import re
 from dataclasses import dataclass
 from typing import Optional
+
+logger = logging.getLogger(__name__)
 
 
 # Max depth for EMITS_EVENT cascade (P9 from the meditation).
@@ -112,6 +115,77 @@ def _split_requirement_id(req_id: str) -> tuple[str, str]:
     if idx < 0:
         return "", req_id
     return req_id[:idx], req_id[idx + 1:]
+
+
+def _emit_auto_resolved_notifications(
+    pg_cursor,
+    *,
+    tenant_id:  str,
+    req_id:     str,
+    event_type: Optional[str],
+    impl_ids:   list,
+) -> int:
+    """Ship 95'.b — emit tenant_notification kind='auto_resolved' for
+    each implication closed by an incoming cite verification.
+
+    The 'auto_resolved' kind has been in the allowlist since
+    schema_v70 (2026-07-17); no producer was wired until now, so the
+    "Auto-closed" retro tile on the Dashboard was surfacing zeros
+    even when the underlying UPDATE was firing. Ship 95'.a retired
+    that tile; this producer restores reachability via the
+    Notifications inbox.
+
+    Severity 'low' per notify.py convention ("auto-resolved
+    confirmation (FYI)"). Best-effort: exceptions swallowed so the
+    cascade engine's own error path never triggers on inbox-write
+    failures. De-duped by the notify helper's active-row partial
+    unique index (kind + related_entity_id).
+
+    Returns the count of notifications emitted (0 when the impl_ids
+    list is empty or notify() failed for every row).
+    """
+    if not impl_ids:
+        return 0
+    try:
+        from rag.cascade.notify import notify as _notify
+    except Exception as exc:
+        logger.warning("cascade.engine: notify import failed: %s", exc)
+        return 0
+
+    # Prefer the tail control ref for tenant-facing prose
+    # ('ISO27001:2022:A.5.16' → 'A.5.16'), fall back to the full
+    # req_id if the shape differs.
+    ctrl_ref  = req_id.rsplit(":", 1)[-1] if ":" in req_id else req_id
+    et_pretty = (event_type or "verification").replace("_", " ")
+
+    written = 0
+    for impl_id in impl_ids:
+        try:
+            _notify(
+                pg_cursor,
+                tenant_id           = tenant_id,
+                kind                = "auto_resolved",
+                title               = f"Follow-up closed for {ctrl_ref}",
+                body                = (
+                    f"Your latest cite verification recorded "
+                    f"'{et_pretty}' with effectiveness evidence, "
+                    f"which closes a pending follow-up on {ctrl_ref}. "
+                    f"No action needed — this notice is FYI so the "
+                    f"closure stays visible in your inbox."
+                ),
+                severity            = "low",
+                related_entity_kind = "triggered_implication",
+                related_entity_id   = str(impl_id),
+                related_control_ref = ctrl_ref,
+                related_event_type  = event_type,
+            )
+            written += 1
+        except Exception as exc:
+            logger.warning(
+                "cascade.engine: auto_resolved notify failed for impl %s: %s",
+                impl_id, exc,
+            )
+    return written
 
 
 def walk_cascade(
@@ -1048,7 +1122,18 @@ def fire_cascade(
                 (verified_at, verification_log_id,
                  tenant_id, req_id, verification_log_id),
             )
-            auto_resolved += len(pg_cursor.fetchall())
+            resolved_impl_ids = [row[0] for row in pg_cursor.fetchall()]
+            auto_resolved += len(resolved_impl_ids)
+
+            # Ship 95'.b — emit tenant_notification kind='auto_resolved'
+            # per closed implication.
+            _emit_auto_resolved_notifications(
+                pg_cursor,
+                tenant_id  = tenant_id,
+                req_id     = req_id,
+                event_type = et,
+                impl_ids   = resolved_impl_ids,
+            )
 
     return {
         "implications":           impl_count + scope_impl_count,

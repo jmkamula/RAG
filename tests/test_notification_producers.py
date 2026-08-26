@@ -619,6 +619,123 @@ TESTS += [
 ]
 
 
+# ── auto_resolved producer tests (Ship 95'.b) ─────────────────────────
+# Producer sits in rag/cascade/engine.py at the tail of the S3m
+# auto-resolve loop. schema_v70 has had the 'auto_resolved' kind in the
+# allowlist since 2026-07 but no producer wrote it, so the "Auto-closed"
+# retro tile on the Dashboard surfaced zeros even when the underlying
+# UPDATE fired. Ship 95'.a retired the tile; Ship 95'.b restores
+# reachability via the Notifications inbox.
+
+def test_auto_resolved_fires_one_per_impl_id():
+    from rag.cascade.engine import _emit_auto_resolved_notifications
+    captured, restore = _install_notify_capture()
+    try:
+        cur = _FakeCursor()
+        n = _emit_auto_resolved_notifications(
+            cur,
+            tenant_id  = "00000000-0000-0000-0000-000000000001",
+            req_id     = "ISO27001:2022:A.5.16",
+            event_type = "personnel_offboarded",
+            impl_ids   = ["aaaa1111-1111-1111-1111-111111111111",
+                          "bbbb2222-2222-2222-2222-222222222222"],
+        )
+        return _ok(
+            n == 2
+            and len(captured) == 2
+            and captured[0]["kind"] == "auto_resolved"
+            and captured[0]["related_control_ref"] == "A.5.16"
+            and captured[0]["severity"] == "low"
+            and captured[0]["related_entity_kind"] == "triggered_implication"
+            and captured[0]["related_event_type"] == "personnel_offboarded",
+            f"n={n} captured={captured}",
+        )
+    finally:
+        restore()
+
+
+def test_auto_resolved_no_impl_ids_no_call():
+    """Producer must be a no-op when no implications resolved this pass.
+    Otherwise we'd write a spurious FYI notification whenever
+    apply_verification walked TRIGGERS_OBLIGATION but found nothing
+    open to close."""
+    from rag.cascade.engine import _emit_auto_resolved_notifications
+    captured, restore = _install_notify_capture()
+    try:
+        cur = _FakeCursor()
+        n = _emit_auto_resolved_notifications(
+            cur,
+            tenant_id  = "00000000-0000-0000-0000-000000000001",
+            req_id     = "ISO27001:2022:A.5.16",
+            event_type = "personnel_offboarded",
+            impl_ids   = [],
+        )
+        return _ok(n == 0 and captured == [], f"n={n} captured={captured}")
+    finally:
+        restore()
+
+
+def test_auto_resolved_control_ref_split_from_full_req_id():
+    """Body prose + related_control_ref must use the tail control_ref
+    ('A.5.16'), not the full requirement id ('ISO27001:2022:A.5.16').
+    The tenant reads the notification in-inbox; the full req_id is
+    system jargon."""
+    from rag.cascade.engine import _emit_auto_resolved_notifications
+    captured, restore = _install_notify_capture()
+    try:
+        cur = _FakeCursor()
+        _emit_auto_resolved_notifications(
+            cur,
+            tenant_id  = "00000000-0000-0000-0000-000000000001",
+            req_id     = "ISO27001:2022:A.5.16",
+            event_type = "personnel_offboarded",
+            impl_ids   = ["aaaa1111-1111-1111-1111-111111111111"],
+        )
+        row = captured[0]
+        return _ok(
+            row["related_control_ref"] == "A.5.16"
+            and "A.5.16" in row["title"]
+            and "A.5.16" in row["body"]
+            and "ISO27001:2022:A.5.16" not in row["title"]
+            and "ISO27001:2022:A.5.16" not in row["body"],
+            f"captured={row}",
+        )
+    finally:
+        restore()
+
+
+def test_auto_resolved_survives_notify_exception():
+    """Producer must swallow notify() exceptions so cascade engine's
+    own error path never triggers on inbox-write failures. Ship 3'.c
+    notify.py is best-effort by contract."""
+    from rag.cascade import notify as _notify_mod
+    original = _notify_mod.notify
+    def raising(*a, **k):
+        raise RuntimeError("simulated inbox write failure")
+    _notify_mod.notify = raising
+    try:
+        from rag.cascade.engine import _emit_auto_resolved_notifications
+        cur = _FakeCursor()
+        n = _emit_auto_resolved_notifications(
+            cur,
+            tenant_id  = "00000000-0000-0000-0000-000000000001",
+            req_id     = "ISO27001:2022:A.5.16",
+            event_type = "personnel_offboarded",
+            impl_ids   = ["aaaa1111-1111-1111-1111-111111111111"],
+        )
+        return _ok(n == 0, f"n={n} (expected 0 after simulated failure)")
+    finally:
+        _notify_mod.notify = original
+
+
+TESTS += [
+    test_auto_resolved_fires_one_per_impl_id,
+    test_auto_resolved_no_impl_ids_no_call,
+    test_auto_resolved_control_ref_split_from_full_req_id,
+    test_auto_resolved_survives_notify_exception,
+]
+
+
 def main():
     print("─" * 70)
     print("  Notification producer tests (Ship 3'.c)")
