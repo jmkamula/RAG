@@ -675,6 +675,24 @@ CLEAR_INTENT_PHRASES = [
      "posture_check", []),
     (re.compile(r'\bare\s+we\s+(?:compliant|comply|in\s+compliance)\s+with\b', re.IGNORECASE),
      "posture_check", []),
+    # Ship 99'.a — bare compliance queries. Pre-99'.a "am I compliant?"
+    # and "are we compliant?" (no "with X" qualifier) fell through to
+    # LLM classification and routed to cross_framework because
+    # retrieval + graph signals dominated. These are the most direct
+    # posture-check phrasing a tenant uses — hard-anchor to
+    # posture_check per curated_lexicon top-tier weight (1.00).
+    # See [[ship-99-prime-a-classification-drift-fix]] retro.
+    (re.compile(r'\b(?:am\s+i|are\s+we)\s+(?:compliant|in\s+compliance)\b', re.IGNORECASE),
+     "posture_check", []),
+    # Ship 99'.a — "what does X say/mean/require/state" is a definition
+    # query. DEFINITION_VERBS regex existed but was only a helper for
+    # LLM classifier, not a hard-anchor. Pre-99'.a "what does A.5.18
+    # say?" routed to document_content because the retrieval signal
+    # tipped that way (A.5.18 has a lot of document content in the
+    # tenant's corpus). Hard-anchor to definition — a "what does X say"
+    # query is always a definition intent regardless of retrieval mass.
+    (re.compile(r'\bwhat\s+does\s+\S.*\s+(?:say|mean|require|state|contain)\b', re.IGNORECASE),
+     "definition", []),
 
     # Implementation / remediation queries — unambiguous "what should we do" phrases
     (re.compile(r'\bwhat\s+should\s+we\s+do\s+(?:to\s+)?(?:close|address|fix|remediat)\b', re.IGNORECASE),

@@ -4667,6 +4667,62 @@ EVAL_CASES = [
     # None of these have any Neo4j edge to 7.2; they were pure
     # top-N-NC noise.
 
+    # ── Ship 99'.a classification-drift lock ────────────────────────────
+    #
+    # Ship 98'.a diagnostic surfaced 4 misclassified queries:
+    #   "what does A.5.18 say?" → document_content (should be definition)
+    #   "am I compliant?"       → cross_framework  (should be posture_check)
+    #   "are we compliant?"     → cross_framework  (should be posture_check)
+    # Ship 99'.a added CLEAR_INTENT_PHRASES entries:
+    #   /(am i|are we) (compliant|in compliance)/ → posture_check
+    #   /what does .+ (say|mean|require|state|contain)/ → definition
+    # These 3 cases lock the intent routing.
+
+    EvalCase(
+        id=230,
+        query="what does A.5.18 say?",
+        tags=["ship99a", "definition", "clear_intent"],
+        expected_type="definition",
+        expected_refs=["A.5.18"],
+        must_contain=["A.5.18"],
+        notes=(
+            "Ship 99'.a definition-anchor lock. Pre-99'.a: routed to "
+            "document_content because retrieval signal dominated "
+            "(A.5.18 has doc content on Arion's corpus). "
+            "New CLEAR_INTENT_PHRASES: /what does .+ (say|mean|...)/ "
+            "hard-anchors to definition."
+        ),
+    ),
+
+    EvalCase(
+        id=231,
+        query="am I compliant?",
+        tags=["ship99a", "posture_check", "clear_intent"],
+        expected_type="posture_check",
+        must_contain=[],
+        must_not_contain=["I need more information", "could you clarify"],
+        notes=(
+            "Ship 99'.a bare compliance-check lock. Pre-99'.a: routed "
+            "to cross_framework because retrieval + graph signals "
+            "picked cross-standard content. New CLEAR_INTENT_PHRASES: "
+            "/(am i|are we) (compliant|in compliance)/ hard-anchors "
+            "to posture_check regardless of retrieval mass."
+        ),
+    ),
+
+    EvalCase(
+        id=232,
+        query="are we compliant?",
+        tags=["ship99a", "posture_check", "clear_intent"],
+        expected_type="posture_check",
+        must_contain=[],
+        must_not_contain=["I need more information", "could you clarify"],
+        notes=(
+            "Ship 99'.a bare compliance-check lock — 'we' variant of "
+            "case #231 ('I' variant). Same regex covers both subjects."
+        ),
+    ),
+
     EvalCase(
         id=229,
         query="how do I remediate 7.2?",
