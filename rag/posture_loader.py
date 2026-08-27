@@ -1277,7 +1277,7 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
 
                 cur.execute(
                     """
-                    SELECT finding, engine_proposal_status
+                    SELECT finding, engine_proposal_status, applicability_status
                       FROM posture_controls
                      WHERE tenant_id   = %s
                        AND standard_id = %s
@@ -1290,7 +1290,19 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
                 cur_row = cur.fetchone()
                 if cur_row is None:
                     continue
-                live_finding, cur_status = cur_row
+                live_finding, cur_status, applicability_status = cur_row
+
+                # Ship 98'.c (2026-08-27) — Ship 66'.a SSoT: N/A is a
+                # scoping decision that lives in `applicability_status`.
+                # The engine may still compute a verdict for
+                # scoped-out controls (fine for internal calc) but
+                # must NOT emit a Stage-2 proposal — the tenant has
+                # already decided the control is out of scope.
+                # Surfaced on Arion 2026-08-27: 14 A.7 physicals
+                # (cloud-only tenant, all applicability_status='na')
+                # had pending NC proposals.
+                if applicability_status == 'na':
+                    continue
 
                 # PA history is the sole source of prior-proposal truth.
                 # Latest engine-authored assertion (any status) determines

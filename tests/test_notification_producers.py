@@ -958,6 +958,53 @@ TESTS += [
 ]
 
 
+# ── Ship 98'.c: engine-proposal SSoT guard ────────────────────────────
+# Ship 66'.a codified: N/A is a scoping decision that lives in
+# posture_controls.applicability_status. `_persist_engine_proposals`
+# must skip controls where the tenant has scoped out via
+# applicability_status='na' — otherwise Stage-2 queue fills with
+# proposals the tenant already decided are out of scope. Surfaced
+# on Arion 2026-08-27: 18 stale N/A proposals (14 A.7 physicals on
+# cloud-only tenant + 4 more).
+
+def test_persist_engine_proposals_selects_applicability_status():
+    """Guard against reverting Ship 98'.c fix: the SELECT must include
+    applicability_status so the skip check has data to check against."""
+    import rag.posture_loader as pl
+    src = Path(pl.__file__).read_text()
+    idx = src.find("def _persist_engine_proposals")
+    if idx < 0:
+        return _ok(False, "_persist_engine_proposals not found")
+    body = src[idx:idx + 5000]
+    return _ok(
+        "applicability_status" in body,
+        "_persist_engine_proposals doesn't select applicability_status "
+        "— Ship 66'.a SSoT will silently be ignored",
+    )
+
+
+def test_persist_engine_proposals_skips_na_applicability():
+    """Guard against reverting Ship 98'.c fix: the fix must actually
+    branch on applicability_status == 'na' and continue."""
+    import rag.posture_loader as pl
+    src = Path(pl.__file__).read_text()
+    idx = src.find("def _persist_engine_proposals")
+    if idx < 0:
+        return _ok(False, "_persist_engine_proposals not found")
+    body = src[idx:idx + 5000]
+    return _ok(
+        "applicability_status == 'na'" in body and "continue" in body,
+        "_persist_engine_proposals doesn't skip N/A controls — "
+        "Ship 66'.a SSoT ignored",
+    )
+
+
+TESTS += [
+    test_persist_engine_proposals_selects_applicability_status,
+    test_persist_engine_proposals_skips_na_applicability,
+]
+
+
 def main():
     print("─" * 70)
     print("  Notification producer tests (Ship 3'.c)")
