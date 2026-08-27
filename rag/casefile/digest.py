@@ -1025,21 +1025,25 @@ def _plan_for(cf: CaseFile) -> _DigestPlan:
                                           # opening sentence
             obligations_first   = True,
         )
-    # Ship 97'.b (2026-08-26) — scoped remediation: tenant asked "how
-    # do I remediate X"; the answer should focus on X. Top-N NCs
-    # across the program leak into the digest → related-cards → cluttered
-    # response. Tightening posture_limit to 1 lets the cited ref through
-    # (rank_posture_refs puts cited first); xfw bridges + curated Neo4j
-    # cross-role neighbors still surface via their own paths.
-    # Ship 97'.c (2026-08-27) — narrowed gate from
-    # {implementation, gap_analysis} → implementation only. GAP_ANALYSIS
-    # asks a broader question ("what are my gaps for X area?") — even
-    # with a cited ref, the tenant wants adjacent-NC context, not
-    # cited-only. Case #1 ("what are our access rights gaps?") regressed
-    # because with only A.5.18 in the digest, the LLM defaulted to
-    # industry-generic "physical access" language + tripped the
-    # forbidden_refs guard.
-    if cf.question_type == "implementation" and cf.cited_refs:
+    # Ship 98'.b (2026-08-27) — shape-aware scoping generalizes the
+    # Ship 97'.b/c one-intent gate. QuestionShape (SCOPED / TOPIC /
+    # PROGRAM) is orthogonal to QuestionType; the classify node
+    # populates it via `infer_question_shape(query, cited_refs)`:
+    #
+    #   SCOPED  — cited ref appears literally in query text.
+    #             Tenant asked about ONE thing they named. Tighten.
+    #   TOPIC   — cited refs resolved via curated_lexicon; not in
+    #             query text. Adjacent context is wanted.
+    #   PROGRAM — no cited refs. Broad by definition.
+    #
+    # SCOPED tightens across every non-DEFINITION intent — the Ship
+    # 98'.a diagnostic showed the same top-N bloat pattern on
+    # gap_analysis / posture_check / cross_framework / document_content
+    # scoped queries that Ship 97'.b/c fixed for implementation.
+    # Case #1 (which was gap_analysis TOPIC — "access rights gaps"
+    # phrase) is unaffected because it never had a cited ref in the
+    # user's typed text.
+    if cf.question_shape == "scoped" and cf.question_type != "definition":
         return _DigestPlan(
             posture_limit       = 1,
             posture_body_chars  = 200,   # generous — this ONE ref matters

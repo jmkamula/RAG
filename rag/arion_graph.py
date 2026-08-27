@@ -2192,14 +2192,23 @@ def make_classify_node(
                     "clarif_count":   count,
                 }
 
+            # Ship 98'.b — question_shape (SCOPED / TOPIC / PROGRAM)
+            # is inferred from cited_refs + query text. Downstream
+            # (_plan_for, _required_refs) branches on it to tighten
+            # context breadth for scoped queries without hitting the
+            # broader intents (Lesson 141).
+            from rag.classifier import infer_question_shape
+            _shape = infer_question_shape(state.get("query", ""), intent.cited_refs)
+
             return {
-                "intent_type":   intent.question_type.value,
-                "focus_refs":    intent.cited_refs[:3],  # ONLY cited refs — no stale session
-                "needs_posture": intent.needs_posture,
-                "confidence":    intent.confidence,
-                "needs_clarif":  False,
+                "intent_type":     intent.question_type.value,
+                "question_shape":  _shape,
+                "focus_refs":      intent.cited_refs[:3],  # ONLY cited refs — no stale session
+                "needs_posture":   intent.needs_posture,
+                "confidence":      intent.confidence,
+                "needs_clarif":    False,
                 "clarif_question": "",
-                "clarif_count":  0,
+                "clarif_count":    0,
             }
 
     return classify

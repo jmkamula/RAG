@@ -46,6 +46,41 @@ class IntakeState(Enum):
     NO_MATCH  = "no_match"   # nothing found, redirect
     EXPLICIT  = "explicit"   # explicit ref/action detected, skip intake
 
+# Ship 98'.b (2026-08-27) — orthogonal to QuestionType. Codifies how
+# BROAD the tenant's context need is:
+#   SCOPED  — asking about a specific control they named (explicit ref
+#             in query text). Answer stays focused on that one thing.
+#   TOPIC   — asking about a topic area (curated_lexicon matched a topic
+#             phrase → cited_refs populated but no explicit ref typed).
+#             Answer includes adjacent context in the area.
+#   PROGRAM — asking about the whole program (no cited refs). Answer
+#             legitimately surfaces top-N NCs.
+# See Ship 98'.a diagnostic + [[ship-98-prime-b-question-shape]] retro.
+class QuestionShape(Enum):
+    SCOPED  = "scoped"
+    TOPIC   = "topic"
+    PROGRAM = "program"
+
+
+def infer_question_shape(query: str, cited_refs: list) -> str:
+    """Ship 98'.b — pure-function shape inference from what's already
+    on the classify output. Simple + deterministic:
+
+      no cited refs                                → PROGRAM
+      cited ref appears literally in query text    → SCOPED
+      cited ref present but NOT in query text      → TOPIC
+                                                      (resolved via curated_lexicon)
+
+    Returns the enum .value so downstream branches can compare strings.
+    """
+    if not cited_refs:
+        return QuestionShape.PROGRAM.value
+    q = query or ""
+    for ref in cited_refs:
+        if ref and ref in q:
+            return QuestionShape.SCOPED.value
+    return QuestionShape.TOPIC.value
+
 # ── Data classes ───────────────────────────────────────────────────────────────
 
 @dataclass

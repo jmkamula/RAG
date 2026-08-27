@@ -165,6 +165,25 @@ class CaseFile:
             v = it.get("cited_refs") or it.get("focus_refs")
         return [r for r in (v or []) if r]
 
+    @property
+    def question_shape(self) -> str:
+        """Ship 98'.b — SCOPED / TOPIC / PROGRAM.
+
+        Prefer the shape the classify node computed (state field
+        `question_shape`, propagated via `intent["question_shape"]`).
+        Fall back to fresh inference on cited_refs + query text for
+        short-circuit paths and legacy call sites that don't populate
+        it. Returns the enum .value string.
+        """
+        it = self.intent
+        if isinstance(it, dict):
+            s = it.get("question_shape")
+            if s:
+                return s
+        # Fallback — pure-function inference (Ship 98'.b design).
+        from rag.classifier import infer_question_shape
+        return infer_question_shape(self.query or "", self.cited_refs)
+
     # ── Session shortcuts ────────────────────────────────────────────
 
     @property

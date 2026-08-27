@@ -218,12 +218,14 @@ def _required_refs(cf: CaseFile) -> set[str]:
     for r in cf.cited_refs:
         if r and _has_data_in_casefile(cf, r):
             out.add(r)
-    # Ship 97'.c (2026-08-27) — narrowed gate from
-    # {implementation, gap_analysis} → implementation only. GAP_ANALYSIS
-    # is broader by nature; case #1 regressed on
-    # "what are our access rights gaps?" with A.5.18 cited.
+    # Ship 98'.b (2026-08-27) — shape-aware scoping. QuestionShape.SCOPED
+    # (user typed the cited ref literally) → drop top-N feeders.
+    # DEFINITION queries retain the union even when SCOPED because the
+    # digest plan intentionally wants obligations-first context.
+    # See rag/casefile/digest.py::_plan_for for the paired branch +
+    # [[ship-98-prime-b-question-shape]] retro.
     scoped_remediation = (
-        cf.question_type == "implementation" and bool(cf.cited_refs)
+        cf.question_shape == "scoped" and cf.question_type != "definition"
     )
     if scoped_remediation:
         return out
