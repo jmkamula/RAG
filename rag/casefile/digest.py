@@ -126,8 +126,8 @@ def _rank_posture_refs(cf: CaseFile, limit: int) -> list[str]:
     seen: set[str] = set()
 
     def _add(ref: str, allow_scoped_out: bool = False):
-        # Ship 76'.b — migrate scope check from legacy `finding == "N/A"`
-        # to Ship 66'.a's SSoT column `applicability_status`. Zero
+        # Ship 76'.b — migrated the scope check to Ship 66'.a's SSoT
+        # column applicability_status (see the feedback rule). Zero
         # behavior change today (data mirrors 1:1) but correct SSoT
         # going forward. The `allow_scoped_out` gate preserves the
         # Ship 66'.c grounding rule: refs the tenant scoped OUT surface

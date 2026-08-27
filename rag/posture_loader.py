@@ -64,8 +64,9 @@ def load_posture(pg_conn, tenant_id: str) -> dict:
     Only returns rows where finding is not 'Not assessed' —
     unassessed controls have no posture data to provide.
 
-    N/A controls ARE included (source='workbook', finding='N/A')
-    so the pipeline can correctly exclude them from obligation checks.
+    N/A controls (applicability_status='na', mirrored on finding) ARE
+    included so the pipeline can correctly exclude them from
+    obligation checks.
 
     Posture engine overlay (commit 4):
       After loading posture_controls, the fulfilment engine is consulted
@@ -195,7 +196,7 @@ def load_posture(pg_conn, tenant_id: str) -> dict:
         f"({sum(1 for r in posture.values() if r['finding']=='NC')} NC, "
         f"{sum(1 for r in posture.values() if r['finding']=='OFI')} OFI, "
         f"{sum(1 for r in posture.values() if r['finding']=='Comply')} Comply, "
-        f"{sum(1 for r in posture.values() if r['finding']=='N/A')} N/A; "
+        f"{sum(1 for r in posture.values() if r.get('applicability_status')=='na')} N/A; "
         f"engine_overrides={engine_overrides}; "
         f"cascade_proposals={cascade_proposals}; "
         f"demonstrates_overlays={demonstrates_overlays}; "
@@ -212,7 +213,7 @@ def load_posture(pg_conn, tenant_id: str) -> dict:
             _span.set_attribute("arion.posture.n_comply",
                                 sum(1 for r in posture.values() if r['finding']=='Comply'))
             _span.set_attribute("arion.posture.n_na",
-                                sum(1 for r in posture.values() if r['finding']=='N/A'))
+                                sum(1 for r in posture.values() if r.get('applicability_status')=='na'))
             _span.set_attribute("arion.posture.engine_overrides", int(engine_overrides))
             _span.set_attribute("arion.posture.demonstrates_overlays",
                                 int(demonstrates_overlays))

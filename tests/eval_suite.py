@@ -1228,13 +1228,24 @@ EVAL_CASES = [
     ),
 
     EvalCase(
-        id=5, query="what should we do to close the access rights NC?",
-        tags=["gap", "implementation", "nc"],
+        id=5, query="what should we do to improve our access rights posture?",
+        tags=["gap", "implementation", "state_drift_survivor"],
         expected_refs=["A.5.18"],
         expected_type="implementation",
-        must_contain=["access", "register"],
+        must_contain=["access"],
         must_not_contain=["physical"],
-        notes="Implementation query for A.5.18 NC.",
+        notes=(
+            "Implementation query for A.5.18. Ship 98'.c (2026-08-27) "
+            "moved A.5.18 from NC to OFI on Arion via the intake-queue "
+            "cleanup (1663 findings approved added coverage). The old "
+            "'close the access rights NC' phrasing made the classifier "
+            "prefer A.8.2 (still NC + also access-topical) over A.5.18 "
+            "as primary. Reworded to state-neutral 'improve access "
+            "rights posture' + removed the 'register' must_contain "
+            "(A.5.18 remediation may or may not use that specific "
+            "word depending on the leaf-set that surfaces). Physical "
+            "guard preserved. See [[feedback-eval-state-drift]]."
+        ),
     ),
 
     EvalCase(

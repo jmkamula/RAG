@@ -86,12 +86,18 @@ def get_tenant_na_scope(tenant_id: str, pg_conn) -> set[str]:
         with pg_conn.cursor() as cur:
             cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
             cur.execute(
+                # Ship 98'.d (2026-08-27) — migrated to Ship 66'.a's
+                # SSoT column applicability_status. Data has been kept in
+                # sync since Ship 66'.a, so this is a no-op on current
+                # tenants, but future-proofs against writers that touch
+                # only applicability_status without mirroring to
+                # finding. See [[feedback-na-dominance-via-applicability-column]].
                 """
                 SELECT DISTINCT control_ref
                   FROM posture_controls
-                 WHERE tenant_id = %s::uuid
-                   AND finding    = 'N/A'
-                   AND is_active  = TRUE
+                 WHERE tenant_id            = %s::uuid
+                   AND applicability_status = 'na'
+                   AND is_active            = TRUE
                 """,
                 (tenant_id,),
             )

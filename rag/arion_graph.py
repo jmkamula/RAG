@@ -2235,7 +2235,7 @@ def _answer_scope_na(query: str, posture: dict) -> str:
             v.get("control_ref", ref_of(k))
             for k, v in posture.items()
             if (v.get("control_ref","") or ref_of(k)).startswith(("7.","A.7."))
-            and v.get("finding") == "N/A"
+            and v.get("applicability_status") == "na"
         ]
         controls_note = (
             f" ({', '.join(sorted(na_controls)[:5])}{'...' if len(na_controls) > 5 else ''})"
@@ -2255,7 +2255,7 @@ def _answer_scope_na(query: str, posture: dict) -> str:
             v.get("control_ref", ref_of(k))
             for k, v in posture.items()
             if (v.get("control_ref","") or ref_of(k)).startswith(("A.8.2","8.2"))
-            and v.get("finding") == "N/A"
+            and v.get("applicability_status") == "na"
         ]
         controls_note = (
             f" ({', '.join(sorted(na_controls)[:5])}{'...' if len(na_controls) > 5 else ''})"

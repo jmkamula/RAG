@@ -715,7 +715,7 @@ class Resolver:
             posture_total        = len(posture),
             posture_nc           = sum(1 for v in posture.values() if v.get("finding") == "NC"),
             posture_ofi          = sum(1 for v in posture.values() if v.get("finding") == "OFI"),
-            posture_na           = sum(1 for v in posture.values() if v.get("finding") == "N/A"),
+            posture_na           = sum(1 for v in posture.values() if v.get("applicability_status") == "na"),
             # Snapshot the retrieval policy declared in taxonomy
             policy_posture       = entry.use_posture,
             policy_vector        = entry.use_vector,

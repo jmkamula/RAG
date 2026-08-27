@@ -124,10 +124,6 @@ report \
     "Ship 66' — use applicability_status == 'na' (see [[feedback-na-dominance-via-applicability-column]])." \
     '(finding\s*==\s*.N/A.|finding.*=\s*.N/A.|"finding":\s*"N/A")' \
     -- '*.py' \
-    ':!rag/scope_filter.py' \
-    ':!rag/resolver.py' \
-    ':!rag/arion_graph.py' \
-    ':!rag/posture_loader.py' \
     ':!tests/**' \
     ':!scripts/**' \
     ':!snapshots/**' \
