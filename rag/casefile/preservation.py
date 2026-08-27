@@ -218,9 +218,12 @@ def _required_refs(cf: CaseFile) -> set[str]:
     for r in cf.cited_refs:
         if r and _has_data_in_casefile(cf, r):
             out.add(r)
+    # Ship 97'.c (2026-08-27) — narrowed gate from
+    # {implementation, gap_analysis} → implementation only. GAP_ANALYSIS
+    # is broader by nature; case #1 regressed on
+    # "what are our access rights gaps?" with A.5.18 cited.
     scoped_remediation = (
-        cf.question_type in ("implementation", "gap_analysis")
-        and bool(cf.cited_refs)
+        cf.question_type == "implementation" and bool(cf.cited_refs)
     )
     if scoped_remediation:
         return out

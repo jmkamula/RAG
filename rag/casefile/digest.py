@@ -1031,10 +1031,15 @@ def _plan_for(cf: CaseFile) -> _DigestPlan:
     # response. Tightening posture_limit to 1 lets the cited ref through
     # (rank_posture_refs puts cited first); xfw bridges + curated Neo4j
     # cross-role neighbors still surface via their own paths.
-    # Applies to IMPLEMENTATION ("how do I implement/remediate X") +
-    # GAP_ANALYSIS ("what are my gaps for X") — both scoped questions
-    # with a resolved cited ref.
-    if cf.question_type in ("implementation", "gap_analysis") and cf.cited_refs:
+    # Ship 97'.c (2026-08-27) — narrowed gate from
+    # {implementation, gap_analysis} → implementation only. GAP_ANALYSIS
+    # asks a broader question ("what are my gaps for X area?") — even
+    # with a cited ref, the tenant wants adjacent-NC context, not
+    # cited-only. Case #1 ("what are our access rights gaps?") regressed
+    # because with only A.5.18 in the digest, the LLM defaulted to
+    # industry-generic "physical access" language + tripped the
+    # forbidden_refs guard.
+    if cf.question_type == "implementation" and cf.cited_refs:
         return _DigestPlan(
             posture_limit       = 1,
             posture_body_chars  = 200,   # generous — this ONE ref matters

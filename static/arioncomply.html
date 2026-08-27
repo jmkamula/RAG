@@ -4109,12 +4109,13 @@ async function loadDashboard() {
   const wrap = document.getElementById('dash-wrap');
   wrap.innerHTML = '<div class="dash-empty"><i class="ti ti-loader-2"></i><p>Loading posture…</p></div>';
   try {
-    const [d, freshness, implications, followupsPending, followupsOverdue, kpis, attestations, coverageSum] = await Promise.all([
+    // Ship 97'.c — dropped triggered-implications + expected-followups
+    // fetches; those panels no longer render on Dashboard (Follow-ups
+    // KPI tile counts still come from cascade-kpis; per-item action
+    // affordance lives in Cascade timeline's "Follow-ups due" section).
+    const [d, freshness, kpis, attestations, coverageSum] = await Promise.all([
       api('/api/v1/dashboard/posture'),
       api('/api/v1/dashboard/cites/needs-verification').catch(() => null),
-      api('/api/v1/tenant/triggered-implications?status=pending').catch(() => null),
-      api('/api/v1/tenant/expected-followups?status=pending').catch(() => null),
-      api('/api/v1/tenant/expected-followups?status=overdue').catch(() => null),
       api('/api/v1/dashboard/cascade-kpis').catch(() => null),
       // Ship 92'.c — cite attestation prompts pending tenant confirmation
       api('/api/v1/cite-attestations/pending').catch(() => null),
@@ -4122,8 +4123,7 @@ async function loadDashboard() {
       api('/api/v1/dashboard/coverage?summary_only=1').catch(() => null),
     ]);
     dashData = d;
-    renderDashboard(d, freshness, implications,
-                    {pending: followupsPending, overdue: followupsOverdue},
+    renderDashboard(d, freshness, null, null,
                     kpis, attestations, coverageSum);
     loadStageCounts();  // Ship 97'.a — keep Review-queue nav badge fresh even on dashboard
   } catch (e) {
@@ -4179,28 +4179,16 @@ function renderDashboard(d, freshness, implications, followups, kpis, attestatio
   }
 
   // Ship 97'.a — cite freshness + attestation panels moved OFF the
-  // Dashboard into Review Queue > Cites tab. Dashboard becomes
-  // summary-only (KPI tiles surface the counts + link to the tab
-  // for the per-item action affordance).
-
-  // Triggered-implications panel — only shown when any cascade-output
-  // implication is pending.
-  let implHtml = '';
-  if (implications && implications.count > 0) {
-    implHtml = renderTriggeredImplicationsPanel(implications);
-  }
-
-  // Expected-followups panel — only shown when any followup is pending
-  // or overdue (P2 missing-event detection from the cascade meditation).
-  let followupHtml = '';
-  const pendingCount = followups && followups.pending ? followups.pending.count : 0;
-  const overdueCount = followups && followups.overdue ? followups.overdue.count : 0;
-  if (pendingCount + overdueCount > 0) {
-    followupHtml = renderExpectedFollowupsPanel(followups);
-  }
+  // Dashboard into Review Queue > Cites tab.
+  // Ship 97'.c — triggered-implications + expected-followups panels
+  // also moved OFF the Dashboard into Cascade timeline > Follow-ups
+  // due section (Ship 96'.b already renders them there).
+  // Dashboard is now truly summary-only: KPI tiles surface the counts
+  // + link to the destination that owns the per-item action affordance.
+  // Lesson 135 (semantic split: looking / doing / alerting) completed.
 
   // Heatmap legend once at the top.
-  let html = kpisHtml + implHtml + followupHtml + `<div class="heat-legend" style="margin-bottom:14px">
+  let html = kpisHtml + `<div class="heat-legend" style="margin-bottom:14px">
     <span><span class="heat-legend-swatch f-NC"></span>NC</span>
     <span><span class="heat-legend-swatch f-OFI"></span>OFI</span>
     <span><span class="heat-legend-swatch f-Comply"></span>Comply</span>

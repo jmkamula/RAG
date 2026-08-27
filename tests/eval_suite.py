@@ -4632,6 +4632,51 @@ EVAL_CASES = [
             "actually reaches the chat surface."
         ),
     ),
+
+    # ── Ship 97'.b scoped-remediation lock ─────────────────────────────
+    #
+    # "how do I remediate 7.2?" is a scoped question — the tenant asked
+    # about ONE control. Pre-97'.b returned 8 related cards (7.2 +
+    # Art.39 + Art.44 + 10.1 + 10.2 + 7.5 + A.5.22 + A.8.32): top-N
+    # posture from Ship 2' + top-N obligation from Ship 53'.j leaked
+    # into required_refs which flowed through build_related_cards.
+    #
+    # Post-97'.b: 2 cards. 7.2 (cited primary) + Art.39 (legitimate
+    # curated Neo4j DEMONSTRATES neighbor, verified via
+    # `MATCH (a:RequirementNode {ref:'7.2'})-[]-(b) WHERE
+    #  a.standard_id <> b.standard_id`).
+    #
+    # This case locks the scoping via forbidden_refs pointing at
+    # controls that are DEFINITELY unrelated to 7.2 competence but
+    # were showing up as noise in the pre-97'.b response:
+    #   A.5.5  Contact with authorities
+    #   A.5.22 Supplier monitoring/review
+    #   A.8.32 Change management
+    #   A.5.27 Learning from information security incidents
+    # None of these have any Neo4j edge to 7.2; they were pure
+    # top-N-NC noise.
+
+    EvalCase(
+        id=229,
+        query="how do I remediate 7.2?",
+        tags=["ship97b", "scoped_remediation", "control_focused"],
+        expected_type="implementation",
+        expected_refs=["7.2"],
+        forbidden_refs=["A.5.5", "A.5.22", "A.8.32", "A.5.27"],
+        must_contain=["7.2"],
+        notes=(
+            "Ship 97'.b (2026-08-26) scoped-remediation lock. Pre-fix "
+            "the response bolted on ~7 unrelated controls under "
+            "Obligations / Management-system clauses / Related controls "
+            "sections. Root-cause: preservation._required_refs +  "
+            "digest._plan_for both fed top-N NCs into the response. "
+            "Ship 97'.b tightens both when question_type in "
+            "{implementation, gap_analysis} AND cited_refs. "
+            "This case locks the specific noise-refs out. The LLM's "
+            "own 4-step ISO 27003-grounded prose was already clean; "
+            "this test targets the deterministic scaffolding around it."
+        ),
+    ),
 ]
 
 
