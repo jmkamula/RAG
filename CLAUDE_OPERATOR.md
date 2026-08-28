@@ -315,7 +315,7 @@ Neither goes into git. Neither goes into a diagnostic bundle. Both stay on the o
 
 ## 7. Safety guardrails
 
-You are working on a **customer's production system**. All dry-run rules from `CLAUDE_DRYRUN.md §6` apply, plus these:
+You are working on a **customer's production system**. Every rule below is a hard rule — no exceptions without explicit customer OK routed through the operator.
 
 **Hard rules — no exceptions without explicit customer OK (via the operator):**
 
@@ -387,4 +387,4 @@ If red:
 - `CLAUDE_DEPLOY_GUIDE.md` — troubleshooting playbook + diagnostic bundle index
 - `docs/error_catalog.html` — stable ARION-* error codes with fixes
 - `CLAUDE.md` — codebase orientation
-- `CLAUDE_DRYRUN.md` — historical (Ship 48 validation, one-time)
+- `docs/history/CLAUDE_DRYRUN.md` — retired Ship 48 UX validation runbook (kept for reference; do not use for forward engagements)

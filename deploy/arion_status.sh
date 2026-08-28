@@ -24,8 +24,9 @@
 # Exit code: 0 if all critical services healthy, 1 if any critical service
 # down. Docs server is non-critical.
 #
-# Ship 51'.a companion to CLAUDE_DRYRUN.md — Claude Code runs this
-# between phases to confirm state before proceeding.
+# Ship 51'.a — Claude Code (per CLAUDE_OPERATOR.md) runs this between
+# phases to confirm state before proceeding. Also usable from
+# operator laptop via SSH: ssh <target> 'bash /data/arioncomply/deploy/arion_status.sh --json' | jq .
 
 set -o pipefail
 

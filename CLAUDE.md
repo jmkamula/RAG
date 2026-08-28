@@ -383,17 +383,23 @@ playbook: symptom → verify → fix triples, structured pointers to
 every diagnostic surface, common ops queries, and the codebase
 orientation index.
 
-**If you are running the pre-POC dry-run** on a fresh Azure VM (or
-similar fresh install), read [[CLAUDE_DRYRUN.md]] first — it's the
-mission brief with phase-by-phase steps, state file convention,
-report spec, safety guardrails, and escalation criteria. Purpose-built
-for autonomous end-to-end execution. Companion documents:
+**If you are the Claude operator installing ArionComply into a
+customer's Azure VM from your laptop**, read [[CLAUDE_OPERATOR.md]]
+first — it's the runbook with handoff acceptance, phases 1-4
+(connect+install / tenant+smoke / troubleshoot / handback), safety
+guardrails, and the handback template. The customer's side of prep
+(VM, NSG, `arionops` user, secret channel) is in
+`docs/customer_prep_checklist.html`. Companion documents:
 
-- `scripts/ops/diagnose.sh` — one-command diagnostic bundle
+- `scripts/ops/diagnose.sh` — one-command diagnostic bundle (produced on VM)
+- `scripts/ops/remote_diagnose.sh` — operator-laptop wrapper: SSH → diagnose → scp → extract
 - `docs/error_catalog.html` — stable `ARION-*` error codes
 - `GET /api/v1/admin/deployment/status` — live status (admin:status scope)
 
-Shipped in Ship 48'. See [[ship-48-prime-a-deployment-diagnostics-design-2026-07-28]].
+Shipped in Ship 48' + Ship 100'. See
+[[ship-48-prime-a-deployment-diagnostics-design-2026-07-28]] +
+[[ship-100-prime-a-operator-runbook]] +
+[[ship-100-prime-b-remote-diagnose]].
 
 ## Key Files
 
