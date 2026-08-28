@@ -120,6 +120,76 @@ with d.session() as s:
 "
 ```
 
+### 2.6 Remote-driving patterns (Claude on operator laptop)
+
+When you're following `CLAUDE_OPERATOR.md` — Claude Code on
+operator laptop, customer VM as the target — every §2.1-2.5
+pattern above still applies, but you run it via SSH. The
+building blocks:
+
+**Push a one-off inspection command**:
+
+```bash
+ssh arionops@<vm-ip> 'bash /data/arioncomply/deploy/arion_status.sh --json' | jq .
+ssh arionops@<vm-ip> 'sudo systemctl status arioncomply-api --no-pager | head -30'
+ssh arionops@<vm-ip> 'sudo journalctl -u arioncomply-api -n 200 --no-pager'
+```
+
+**Produce + retrieve a diagnostic bundle** — the pattern you'll
+use most often. Three commands:
+
+```bash
+# 1. Produce the bundle on the customer VM
+ssh arionops@<vm-ip> 'bash /data/arioncomply/scripts/ops/diagnose.sh'
+# → prints e.g. /tmp/arion-diag-<host>-<yyyymmdd-hhmmss>.tar.gz
+
+# 2. Copy the tarball to operator laptop scratch dir
+scp arionops@<vm-ip>:/tmp/arion-diag-*.tar.gz ~/arion-ops/<customer>/
+
+# 3. Extract locally + read files by name per §2.1 index
+cd ~/arion-ops/<customer>/
+mkdir -p bundle-<yyyymmdd-hhmmss> && tar xzf arion-diag-*.tar.gz -C bundle-<yyyymmdd-hhmmss>/
+```
+
+Or use the wrapper script that does all three:
+
+```bash
+# From operator laptop, from /data/arioncomply working copy:
+bash scripts/ops/remote_diagnose.sh arionops@<vm-ip> ~/arion-ops/<customer>/
+# → SSHes in, runs diagnose.sh, scps the tarball back, extracts it
+# → prints the local extraction path
+```
+
+**Read a specific file inside a bundle without extracting**:
+
+```bash
+# List files
+tar tzf arion-diag-*.tar.gz
+# Read one file
+tar xzOf arion-diag-*.tar.gz arion-diag-<host>-<ts>/deploy_state.md
+```
+
+**Never SSH back to the VM to look up details you can find in
+the bundle.** The whole point of the bundle is self-contained
+diagnosis. If a bundle is missing information you need, that's
+a `diagnose.sh` bug worth filing; work around it once for the
+current session, note it in `handback.md`.
+
+**Applying a fix from the operator laptop** — after you've
+diagnosed:
+
+```bash
+# Confirm before every destructive-adjacent action per
+# CLAUDE_OPERATOR.md §7. Example: restart the API to pick up
+# a systemd unit change you just applied:
+ssh arionops@<vm-ip> 'sudo systemctl restart arioncomply-api'
+# Then re-verify:
+ssh arionops@<vm-ip> 'bash /data/arioncomply/deploy/arion_status.sh --json' | jq .
+```
+
+Prefer `arion_status.sh --json` for post-fix verification — one
+command, machine-parseable, exit-code-gated.
+
 ## 3. Symptom → verify → fix
 
 For every ARION-* error code in `docs/error_catalog.html`, this is the
