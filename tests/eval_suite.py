@@ -4711,6 +4711,28 @@ EVAL_CASES = [
     ),
 
     EvalCase(
+        id=233,
+        query="what must an incident response policy include?",
+        tags=["ship99b", "document_content", "topic"],
+        expected_type="document_content",
+        expected_refs=["A.5.24"],
+        must_contain=[],
+        # Pre-99'.b this query surfaced 11 related cards (top-N NC
+        # noise: 10.1, 10.2, A.5.25, A.5.26, A.5.28, A.5.5, A.6.8,
+        # A.8.15). Post-99'.b: 1 card (A.5.24). Locking a subset
+        # of the former bloat refs as forbidden — these were top-N
+        # NC injection, not curated Neo4j neighbors of A.5.24.
+        forbidden_refs=["A.6.8", "A.8.15", "A.5.28"],
+        notes=(
+            "Ship 99'.b DOCUMENT_CONTENT TOPIC lock. Pre-99'.b: 11 "
+            "cards including top-N tenant NC leakage. Fix: added "
+            "DOCUMENT_CONTENT branch in _plan_for + extended the "
+            "preservation._required_refs cited-only rule to also "
+            "cover document_content regardless of shape."
+        ),
+    ),
+
+    EvalCase(
         id=232,
         query="are we compliant?",
         tags=["ship99a", "posture_check", "clear_intent"],

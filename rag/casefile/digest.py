@@ -1051,6 +1051,26 @@ def _plan_for(cf: CaseFile) -> _DigestPlan:
             obligation_chars    = 300,
             obligations_first   = False,
         )
+    # Ship 99'.b (2026-08-27) — DOCUMENT_CONTENT wants a document
+    # checklist, not a survey of related controls. On TOPIC-shape queries
+    # ("what must an access control policy contain?") the default plan
+    # was surfacing 11-13 related cards including top-N tenant NCs
+    # unrelated to the doc's content. The tenant asking "what must my
+    # policy contain?" wants the MUSTs for that doc + a small handful of
+    # closely-linked controls for cross-reference — not their whole
+    # program's NC posture.
+    #
+    # SCOPED DOCUMENT_CONTENT (query names an explicit ref) still gets
+    # the tighter Ship 98'.b plan above; this branch handles TOPIC and
+    # PROGRAM shapes.
+    if cf.question_type == "document_content":
+        return _DigestPlan(
+            posture_limit       = 3,
+            posture_body_chars  = 150,
+            obligation_limit    = 3,
+            obligation_chars    = 300,
+            obligations_first   = False,
+        )
     # Default: posture-focused (matches Ship 2'.a-h behaviour).
     return _DigestPlan(
         posture_limit       = 10,

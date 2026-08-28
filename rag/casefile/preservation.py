@@ -224,8 +224,15 @@ def _required_refs(cf: CaseFile) -> set[str]:
     # digest plan intentionally wants obligations-first context.
     # See rag/casefile/digest.py::_plan_for for the paired branch +
     # [[ship-98-prime-b-question-shape]] retro.
+    #
+    # Ship 99'.b (2026-08-27) — DOCUMENT_CONTENT gets cited-only too.
+    # "What must a doc contain?" wants the doc's MUST checklist plus
+    # curated cross-role neighbors from Neo4j — NOT top-N tenant NCs
+    # unrelated to the doc's shape. Pairs with the DOCUMENT_CONTENT
+    # branch in digest._plan_for.
     scoped_remediation = (
-        cf.question_shape == "scoped" and cf.question_type != "definition"
+        (cf.question_shape == "scoped" and cf.question_type != "definition")
+        or cf.question_type == "document_content"
     )
     if scoped_remediation:
         return out
