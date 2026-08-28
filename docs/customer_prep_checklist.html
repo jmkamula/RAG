@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ArionComply — Customer VM Prep Checklist</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root {
+  --fg: #1a1a1a;
+  --muted: #666;
+  --accent: #1c76fc;
+  --accent-soft: #eaf2ff;
+  --border: #e2e2e2;
+  --code-bg: #f5f5f7;
+  --step-fill: #f9fbff;
+  --warn-fill: #fff8e5;
+  --warn-border: #f0c14b;
+  --mono: "SF Mono", Menlo, "Cascadia Code", monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+body { font-family: var(--sans); font-size: 16px; line-height: 1.55; color: var(--fg); max-width: 900px; margin: 40px auto; padding: 0 24px; }
+h1 { font-size: 2.2em; margin: 0 0 8px; letter-spacing: -0.02em; }
+h2 { font-size: 1.4em; margin: 2em 0 0.5em; padding-bottom: 0.3em; border-bottom: 2px solid var(--border); }
+h3 { font-size: 1.08em; margin: 1.4em 0 0.4em; color: var(--fg); }
+.hero { padding: 22px 26px; background: var(--accent-soft); border-radius: 8px; margin: 24px 0 32px; border-left: 4px solid var(--accent); }
+.hero .subtitle { color: var(--muted); font-size: 0.88em; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.06em; }
+.step { background: var(--step-fill); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; padding: 16px 20px; margin: 18px 0; }
+.step .step-head { font-size: 0.82em; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.step h3 { margin-top: 0; }
+.warn { background: var(--warn-fill); border: 1px solid var(--warn-border); border-left: 3px solid var(--warn-border); border-radius: 4px; padding: 12px 16px; margin: 16px 0; font-size: 0.95em; }
+.warn::before { content: "⚠ "; font-weight: bold; }
+code { background: var(--code-bg); border-radius: 3px; padding: 1px 5px; font-family: var(--mono); font-size: 0.9em; }
+pre { background: var(--code-bg); border-radius: 6px; padding: 14px 16px; overflow-x: auto; font-family: var(--mono); font-size: 0.85em; line-height: 1.5; }
+table { border-collapse: collapse; margin: 12px 0; width: 100%; font-size: 0.94em; }
+th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: #fafafa; font-weight: 600; }
+.muted { color: var(--muted); font-size: 0.9em; }
+ul.tight li { margin: 2px 0; }
+.check { list-style: none; padding-left: 0; }
+.check li { padding-left: 26px; position: relative; margin: 6px 0; }
+.check li::before { content: "☐"; position: absolute; left: 0; top: 0; font-size: 1.1em; color: var(--accent); }
+.audience-nav { display: flex; gap: 10px; font-size: 0.9em; margin: 16px 0 24px; }
+.audience-nav a { color: var(--accent); text-decoration: none; padding: 4px 10px; border: 1px solid var(--border); border-radius: 20px; }
+.audience-nav a:hover { background: var(--accent-soft); }
+</style>
+</head>
+<body>
+
+<h1>ArionComply — Customer VM Prep Checklist</h1>
+
+<div class="hero">
+Everything you need to do BEFORE your Claude operator connects to install ArionComply.
+<div class="subtitle">Customer-owned prep · pre-Claude handoff · 2026-08-28</div>
+</div>
+
+<div class="audience-nav">
+<a href="poc_install_guide.html">DIY install (no operator)</a>
+<a href="architecture_brief.html">Architecture brief</a>
+<a href="demo_walkthrough.html">Demo walkthrough</a>
+</div>
+
+<p>This checklist covers <strong>your side</strong> of the deployment: provisioning the Azure VM, opening network paths, creating the operator SSH account, and packaging the handoff. Your ArionComply support engineer (Claude operator on their laptop) picks up from there.</p>
+
+<p>If you'd rather do the install yourself, see <a href="poc_install_guide.html">POC Install Guide</a> — same VM prep, different install path.</p>
+
+<h2>What you're doing</h2>
+
+<table>
+<tr><th style="width:35%">Step</th><th>Owner</th></tr>
+<tr><td>1. Provision Ubuntu VM in Azure</td><td>You</td></tr>
+<tr><td>2. Configure NSG (SSH from operator IP, no other inbound)</td><td>You</td></tr>
+<tr><td>3. Create <code>arionops</code> sudo user with operator's SSH key</td><td>You</td></tr>
+<tr><td>4. Create <code>/data/arioncomply</code> directory owned by <code>arionops</code></td><td>You</td></tr>
+<tr><td>5. Set up secret-delivery channel for post-install credentials</td><td>You + operator</td></tr>
+<tr><td>6. Send handoff details to operator</td><td>You</td></tr>
+<tr><td style="color:var(--muted)">— Handoff —</td><td style="color:var(--muted)">—</td></tr>
+<tr><td>7. Install ArionComply</td><td>Operator</td></tr>
+<tr><td>8. Provision your first tenant</td><td>Operator</td></tr>
+<tr><td>9. Smoke test end-to-end</td><td>Operator</td></tr>
+<tr><td>10. Handback: health report + tenant credentials delivered</td><td>Operator</td></tr>
+</table>
+
+<h2>Step 1 · Provision the VM</h2>
+
+<div class="step">
+<div class="step-head">Azure portal · ~5 min</div>
+
+<h3>VM specification</h3>
+
+<table>
+<tr><th style="width:30%">Field</th><th>Value</th></tr>
+<tr><td>Image</td><td>Ubuntu Server <strong>24.04 LTS – x64 Gen2</strong> (22.04 also works)</td></tr>
+<tr><td>Size</td><td><strong>Standard D4s v3</strong> (4 vCPU / 16 GB) — or D4as v5 (AMD equivalent)</td></tr>
+<tr><td>Authentication type</td><td><strong>SSH public key</strong> — paste your admin key. You'll add the operator's key separately in Step 3.</td></tr>
+<tr><td>Username</td><td>Your choice for the admin user (e.g. <code>customer-admin</code>) — NOT the operator user</td></tr>
+<tr><td>Public inbound ports</td><td><strong>None</strong>. Configure NSG explicitly in Step 2.</td></tr>
+<tr><td>OS disk</td><td>Premium SSD, at least <strong>64 GB</strong></td></tr>
+<tr><td>Region</td><td>Any — pick where your data-processing agreement covers</td></tr>
+<tr><td>Data disk</td><td>Not needed for POC (add later if scaling)</td></tr>
+</table>
+
+<p class="muted">The install root <code>/data/arioncomply</code> uses ~5 GB. Chroma indexes + Neo4j graph land inside that. 64 GB gives comfortable headroom for uploaded evidence.</p>
+</div>
+
+<h2>Step 2 · Configure NSG</h2>
+
+<div class="step">
+<div class="step-head">Azure portal · ~3 min</div>
+
+<p>After VM creation, edit the auto-created NSG (<code>&lt;vmname&gt;-nsg</code>). Inbound rules:</p>
+
+<table>
+<tr><th>Rule</th><th>Priority</th><th>Source</th><th>Port</th><th>Action</th></tr>
+<tr><td>SSH — operator</td><td>1000</td><td>Operator's public IP /32</td><td>22</td><td>Allow</td></tr>
+<tr><td>SSH — you (optional)</td><td>1010</td><td>Your public IP /32</td><td>22</td><td>Allow</td></tr>
+<tr><td>Deny all inbound</td><td>4096</td><td>Any</td><td>Any</td><td>Deny (default)</td></tr>
+</table>
+
+<div class="warn">
+Do <strong>not</strong> open <code>:8080</code>, <code>:8000</code>, <code>:7474</code>, or <code>:7687</code> to the public internet. ArionComply services bind to <code>127.0.0.1</code> and are accessed via SSH tunnel after install. If you want a browser experience, tunnel from your laptop:<br>
+<code>ssh -L 8080:127.0.0.1:8080 &lt;your-user&gt;@&lt;vm-ip&gt;</code> — then open <code>http://127.0.0.1:8080/ui/arioncomply.html</code>.
+</div>
+
+<p>Confirm operator's public IP with them before setting rule 1000. They can find it via <code>curl ifconfig.me</code> on their laptop.</p>
+</div>
+
+<h2>Step 3 · Create the operator user</h2>
+
+<div class="step">
+<div class="step-head">SSH to VM · ~2 min</div>
+
+<p>SSH to your VM as your admin user, then create a dedicated <code>arionops</code> sudo user for the operator:</p>
+
+<pre>
+# Get the operator's SSH public key from them (they'll send it as a file or text block)
+# Example: their key looks like  ssh-ed25519 AAAAC3... arionops@laptop
+
+sudo adduser --gecos "" --disabled-password arionops
+sudo usermod -aG sudo arionops
+
+# Passwordless sudo (recommended for automation)
+echo 'arionops ALL=(ALL) NOPASSWD:ALL' | sudo tee /etc/sudoers.d/arionops
+sudo chmod 440 /etc/sudoers.d/arionops
+
+# Install the operator's SSH pubkey
+sudo mkdir -p /home/arionops/.ssh
+sudo chmod 700 /home/arionops/.ssh
+echo '&lt;paste operator pubkey&gt;' | sudo tee /home/arionops/.ssh/authorized_keys
+sudo chmod 600 /home/arionops/.ssh/authorized_keys
+sudo chown -R arionops:arionops /home/arionops/.ssh
+</pre>
+
+<p class="muted">Passwordless sudo is convenient for automation. If your policy requires interactive sudo, that's OK too — the operator will handle password prompts.</p>
+
+<div class="warn">
+<strong>Never</strong> share your admin user's SSH key with the operator. The operator's key exists only on their laptop; you install their <em>public</em> key on the VM. If you rotate the operator user later, just remove the entry from <code>/home/arionops/.ssh/authorized_keys</code>.
+</div>
+</div>
+
+<h2>Step 4 · Prepare the install directory</h2>
+
+<div class="step">
+<div class="step-head">Still SSH'd as admin · ~1 min</div>
+
+<pre>
+sudo mkdir -p /data/arioncomply
+sudo chown arionops:arionops /data/arioncomply
+ls -ld /data/arioncomply
+# Expected: drwxr-xr-x arionops arionops ... /data/arioncomply
+</pre>
+
+<p>The operator's <code>install.sh</code> will populate this directory — you don't need to pre-clone anything.</p>
+</div>
+
+<h2>Step 5 · Choose a secret-delivery channel</h2>
+
+<div class="step">
+<div class="step-head">Coordination · ~10 min upfront</div>
+
+<p>After install, the operator provisions your first tenant, which produces an API key printed <strong>once</strong>. That key is hashed at rest on the VM — there's no way to retrieve it later. You need a plan for how the operator delivers it to you.</p>
+
+<h3>Acceptable channels</h3>
+<ul class="tight">
+<li>Shared vault in a password manager (1Password, Bitwarden, LastPass, etc.) — <strong>recommended</strong></li>
+<li>Your organization's secret-management platform (HashiCorp Vault, AWS/Azure/GCP secrets managers)</li>
+<li>End-to-end encrypted messaging with disappearing messages (Signal, Wire) — acceptable if company policy allows</li>
+</ul>
+
+<h3>NOT acceptable</h3>
+<ul class="tight">
+<li>Email — plaintext across mail servers, retained forever</li>
+<li>Slack / Teams / Discord — logs retained, not designed for secrets</li>
+<li>SMS / WhatsApp — not audited or E2E-secure for enterprise data</li>
+<li>Any handback report PDF or text file — the operator's runbook explicitly forbids this</li>
+</ul>
+
+<p>Tell the operator upfront which channel you'll use. Give them the specific vault/vault-item address they should write to. They'll confirm receipt with you.</p>
+</div>
+
+<h2>Step 6 · Send handoff to the operator</h2>
+
+<div class="step">
+<div class="step-head">Package · ~2 min</div>
+
+<p>The operator needs these to start:</p>
+
+<ul class="check">
+<li><strong>VM public IP or hostname</strong> (e.g. <code>40.68.12.34</code> or <code>arion-poc.westeurope.cloudapp.azure.com</code>)</li>
+<li><strong>Operator SSH user</strong> (<code>arionops</code>, or whatever you chose in Step 3)</li>
+<li><strong>Confirmation that Step 2 NSG rule 1000 is live</strong> — send them a screenshot or write "SSH from your IP is allowlisted"</li>
+<li><strong>Which OS you installed</strong> (<code>Ubuntu 24.04</code> or <code>Ubuntu 22.04</code>) so they know the expected package set</li>
+<li><strong>Postgres passwords</strong> — either you pick two strong passwords (owner + app roles) and share via the same secret-vault as Step 5, or you tell the operator "you pick, store in vault, and give me the pointer"</li>
+<li><strong>Neo4j password</strong> — same pattern as Postgres</li>
+<li><strong>OpenAI API key</strong> (or the equivalent LLM provider key) — you provide, ideally as a scoped throwaway with a monthly billing cap set BEFORE sending. Share via secret-vault.</li>
+<li><strong>Secret-delivery channel details</strong> from Step 5 — vault name + item address the operator writes to</li>
+</ul>
+
+<div class="warn">
+Send the connection info (IP + user) via any normal channel — email/chat is fine, this isn't secret. Send the passwords + API keys via the <em>secret-vault only</em>. Same rule applies to their handback: tenant API key comes back through the vault, not through email.
+</div>
+</div>
+
+<h2>What happens next (operator's side)</h2>
+
+<p>Once you've handed off, the operator will:</p>
+
+<ol>
+<li>Verify SSH access + VM readiness</li>
+<li>Clone the ArionComply repo into <code>/data/arioncomply</code></li>
+<li>Run <code>install.sh --yes</code> with the credentials you supplied (~15 min)</li>
+<li>Verify all 4 services healthy via <code>arion_status.sh --json</code></li>
+<li>Provision your first tenant + capture the API key</li>
+<li>Smoke-test end-to-end (deployment status, chat, SPA)</li>
+<li>Deliver the tenant API key to your secret-vault</li>
+<li>Send you a <strong>handback document</strong> with health report + next-step instructions</li>
+</ol>
+
+<p>Full runbook they follow: <code>CLAUDE_OPERATOR.md</code> in the repo. You don't need to read it, but it's there if you want to know what they're doing.</p>
+
+<h2>Ongoing support</h2>
+
+<div class="step">
+<div class="step-head">Post-handback · reference</div>
+
+<p>After handback, both you and the operator can produce diagnostic bundles when things break:</p>
+
+<pre>
+ssh arionops@&lt;vm-ip&gt; 'bash /data/arioncomply/scripts/ops/diagnose.sh'
+# → prints path to /tmp/arion-diag-&lt;host&gt;-&lt;timestamp&gt;.tar.gz
+scp arionops@&lt;vm-ip&gt;:/tmp/arion-diag-*.tar.gz ./
+</pre>
+
+<p>Send the bundle to the operator when opening a support ticket. It contains no evidence text, chat prose, LLM content, or raw API keys — safe to share. See <a href="error_catalog.html">Error Catalog</a> for common ARION-* codes and their fixes.</p>
+
+<p>If you want to rotate the operator user (end of engagement, personnel change, etc.):</p>
+
+<pre>
+# Revoke the operator's SSH key
+sudo sed -i '/&lt;operator-key-comment&gt;/d' /home/arionops/.ssh/authorized_keys
+
+# Or fully remove the user
+sudo userdel -r arionops
+sudo rm /etc/sudoers.d/arionops
+</pre>
+</div>
+
+<h2>Uninstall</h2>
+
+<p>Full removal on the customer VM (yours to run when the POC ends):</p>
+
+<pre>
+# Stop + disable services
+sudo systemctl stop arioncomply-{api,chroma,jaeger,phoenix} 2&gt;/dev/null
+sudo systemctl disable arioncomply-{api,chroma,jaeger,phoenix} 2&gt;/dev/null
+sudo systemctl stop arioncomply-sweep.timer 2&gt;/dev/null
+sudo systemctl disable arioncomply-sweep.timer 2&gt;/dev/null
+
+# Remove systemd units
+sudo rm /etc/systemd/system/arioncomply-*.service /etc/systemd/system/arioncomply-*.timer
+sudo systemctl daemon-reload
+
+# Databases
+sudo -u postgres dropdb arioncomply_compliance
+sudo -u postgres dropdb arioncomply_sessions
+sudo -u postgres dropuser arioncomply_app
+sudo -u postgres dropuser arioncomply
+
+# Application files
+sudo rm -rf /data/arioncomply
+
+# Neo4j (optional — leave if reused for other apps)
+sudo apt purge neo4j
+sudo rm -rf /var/lib/neo4j /etc/neo4j
+</pre>
+
+<p>The operator user (<code>arionops</code>) is yours to keep or remove independently — the checklist steps above show how to revoke or delete the account.</p>
+
+</body>
+</html>
