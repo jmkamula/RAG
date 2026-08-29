@@ -1,8 +1,10 @@
 # ArionComply — Claude Code Guide
 
 ## Project
-Compliance RAG platform on Azure VM (172.211.244.144).
-Stack: FastAPI + LangGraph + Neo4j + ChromaDB + PostgreSQL + GPT-4o.
+Compliance RAG platform. Currently deployed on the arioncomplyVM dev host
+(172.211.244.144, Azure). Provider-agnostic install — runs identically on any
+Ubuntu 24.04 host (cloud VM or on-prem). Stack: FastAPI + LangGraph + Neo4j
++ ChromaDB + PostgreSQL + GPT-4o.
 
 ## Product direction (2026-06-27)
 
@@ -384,7 +386,8 @@ every diagnostic surface, common ops queries, and the codebase
 orientation index.
 
 **If you are the Claude operator installing ArionComply into a
-customer's Azure VM from your laptop**, read [[CLAUDE_OPERATOR.md]]
+customer's Ubuntu host from your laptop** (cloud VM or on-prem),
+read [[CLAUDE_OPERATOR.md]]
 first — it's the runbook with handoff acceptance, phases 1-4
 (connect+install / tenant+smoke / troubleshoot / handback), safety
 guardrails, and the handback template. The customer's side of prep

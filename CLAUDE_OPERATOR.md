@@ -1,6 +1,8 @@
 # CLAUDE_OPERATOR.md
 
-**Runbook for Claude Code running on an operator laptop, driving an ArionComply install into a customer's Azure VM via SSH.**
+**Runbook for Claude Code running on an operator laptop, driving an ArionComply install into a customer's Ubuntu 24.04 host via SSH.**
+
+The host is provider-agnostic: cloud VM (Azure / AWS / GCP), on-prem physical box, or a customer-owned hypervisor VM all work identically. `install.sh` doesn't know or care where it's running.
 
 Read this file first. Then read `CLAUDE.md` for codebase orientation and `CLAUDE_DEPLOY_GUIDE.md` for post-install troubleshooting.
 
@@ -10,7 +12,7 @@ This runbook **supersedes** `CLAUDE_DRYRUN.md` — that file was written for a o
 
 ## 1. Mission
 
-You are Claude Code running on an ArionComply support engineer's laptop. The customer has already provisioned an Azure VM per `docs/customer_prep_checklist.html` and handed off SSH access. Your job is to:
+You are Claude Code running on an ArionComply support engineer's laptop. The customer has already provisioned an Ubuntu 24.04 host per `docs/customer_prep_checklist.html` and handed off SSH access. The host may be a cloud VM (Azure / AWS / GCP) or an on-prem box — the runbook is identical either way. Your job is to:
 
 1. **Verify handoff** — confirm the customer sent the minimum information to connect safely.
 2. **Install ArionComply** on the customer VM via `deploy/install.sh --yes`.
@@ -32,7 +34,7 @@ If you go red: write state, write the handback with what was and wasn't achieved
 
 | Item | Format | Example |
 |---|---|---|
-| VM public IP or hostname | IPv4 or DNS name | `40.68.12.34` or `arioncomply-poc.westeurope.cloudapp.azure.com` |
+| Host address | Public IP + hostname (cloud) or LAN IP + reachability method (on-prem) | Cloud: `40.68.12.34` / `arioncomply-poc.example.cloud`. On-prem: `10.0.1.85` reachable via WireGuard peer |
 | SSH user | Named operator account (never `root`) | `arionops` |
 | SSH access | One of: pubkey installed / cert authority signature / bastion tunnel | operator's `~/.ssh/id_ed25519` accepted |
 | NSG allowlist status | Customer confirmed operator IP is allowlisted for :22 | screenshot / written confirmation |
@@ -64,15 +66,16 @@ If this fails: escalation, not troubleshooting. Ask the operator.
 | Local scratch dir | e.g. `~/arion-ops/<customer-name>/` — holds diagnostic bundles + logs; NEVER commit or upload |
 | Secrets manager access | how tenant credentials get to the customer at the end |
 
-### Customer VM (per customer_prep_checklist.html)
+### Customer host (per customer_prep_checklist.html)
 
 | Thing | Location |
 |---|---|
 | OS | Ubuntu 24.04 LTS (22.04 acceptable) |
-| VM SKU | D4s v3 or better (4 vCPU / 16 GB / ≥60 GB disk) |
+| Spec | ≥4 vCPU / ≥16 GB RAM / ≥60 GB disk. Cloud VM SKU examples: Azure D4s v3, AWS t3.xlarge, GCP n2-standard-4. On-prem: 4-core Intel/AMD box with 16 GB RAM. Older CPUs (Haswell/Broadwell) work; expect slower Chroma reindex on the first API start. |
+| Deployment path | Cloud VM (Azure / AWS / GCP) or on-prem — install.sh doesn't differ; the operator only cares that SSH works |
 | Install root | `/data/arioncomply` (customer has directory pre-created, chown to `arionops`) |
 | Sudo user | `arionops` (or whatever the customer named it) |
-| NSG rules | :22 from operator IP only; :8080 initially closed to world, customer will tunnel post-install |
+| Firewall | :22 from operator IP only (NSG / security group / ufw). :8080 initially closed; customer tunnels via SSH post-install |
 | Outbound | HTTPS to `api.openai.com`, `debian.neo4j.com`, `pypi.org`, `github.com` |
 
 ### Local scratch layout (recommended)

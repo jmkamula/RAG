@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>ArionComply — Customer VM Prep Checklist</title>
+<title>ArionComply — Customer Host Prep Checklist</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 :root {
@@ -39,18 +39,21 @@ ul.tight li { margin: 2px 0; }
 .check { list-style: none; padding-left: 0; }
 .check li { padding-left: 26px; position: relative; margin: 6px 0; }
 .check li::before { content: "☐"; position: absolute; left: 0; top: 0; font-size: 1.1em; color: var(--accent); }
-.audience-nav { display: flex; gap: 10px; font-size: 0.9em; margin: 16px 0 24px; }
+.audience-nav { display: flex; gap: 10px; font-size: 0.9em; margin: 16px 0 24px; flex-wrap: wrap; }
 .audience-nav a { color: var(--accent); text-decoration: none; padding: 4px 10px; border: 1px solid var(--border); border-radius: 20px; }
 .audience-nav a:hover { background: var(--accent-soft); }
+.tab-set { display: flex; gap: 8px; margin: 20px 0 8px; border-bottom: 2px solid var(--border); padding-bottom: 6px; }
+.tab-set span { padding: 6px 14px; font-size: 0.9em; background: #f7f7f9; border-radius: 4px 4px 0 0; color: var(--muted); }
+.tab-set span.active { background: var(--accent-soft); color: var(--fg); font-weight: 600; }
 </style>
 </head>
 <body>
 
-<h1>ArionComply — Customer VM Prep Checklist</h1>
+<h1>ArionComply — Customer Host Prep Checklist</h1>
 
 <div class="hero">
 Everything you need to do BEFORE your Claude operator connects to install ArionComply.
-<div class="subtitle">Customer-owned prep · pre-Claude handoff · 2026-08-28</div>
+<div class="subtitle">Customer-owned prep · pre-Claude handoff · 2026-08-29</div>
 </div>
 
 <div class="audience-nav">
@@ -59,16 +62,25 @@ Everything you need to do BEFORE your Claude operator connects to install ArionC
 <a href="demo_walkthrough.html">Demo walkthrough</a>
 </div>
 
-<p>This checklist covers <strong>your side</strong> of the deployment: provisioning the Azure VM, opening network paths, creating the operator SSH account, and packaging the handoff. Your ArionComply support engineer (Claude operator on their laptop) picks up from there.</p>
+<p>This checklist covers <strong>your side</strong> of the deployment: provisioning the host (cloud VM or on-prem box), opening network paths, creating the operator SSH account, and packaging the handoff. Your ArionComply support engineer (Claude operator on their laptop) picks up from there.</p>
 
-<p>If you'd rather do the install yourself, see <a href="poc_install_guide.html">POC Install Guide</a> — same VM prep, different install path.</p>
+<p>The checklist is provider-agnostic. ArionComply installs identically on any Ubuntu 24.04 host — cloud VM, on-prem physical machine, or a VM under your hypervisor of choice. Two paths in this doc:</p>
+
+<div class="tab-set">
+  <span class="active">Path A · Cloud VM (Azure / AWS / GCP)</span>
+  <span class="active">Path B · On-prem / bare-metal</span>
+</div>
+
+<p>Step 1 differs per path; Steps 2-6 are the same for both. Path is called out only where the mechanics differ.</p>
+
+<p>If you'd rather do the install yourself, see <a href="poc_install_guide.html">POC Install Guide</a> — same host prep, different install path.</p>
 
 <h2>What you're doing</h2>
 
 <table>
 <tr><th style="width:35%">Step</th><th>Owner</th></tr>
-<tr><td>1. Provision Ubuntu VM in Azure</td><td>You</td></tr>
-<tr><td>2. Configure NSG (SSH from operator IP, no other inbound)</td><td>You</td></tr>
+<tr><td>1. Provision Ubuntu 24.04 host (Path A cloud VM · Path B on-prem)</td><td>You</td></tr>
+<tr><td>2. Configure firewall (SSH from operator IP, no other inbound)</td><td>You</td></tr>
 <tr><td>3. Create <code>arionops</code> sudo user with operator's SSH key</td><td>You</td></tr>
 <tr><td>4. Create <code>/data/arioncomply</code> directory owned by <code>arionops</code></td><td>You</td></tr>
 <tr><td>5. Set up secret-delivery channel for post-install credentials</td><td>You + operator</td></tr>
@@ -80,34 +92,101 @@ Everything you need to do BEFORE your Claude operator connects to install ArionC
 <tr><td>10. Handback: health report + tenant credentials delivered</td><td>Operator</td></tr>
 </table>
 
-<h2>Step 1 · Provision the VM</h2>
+<h2>Step 1 · Provision the host</h2>
 
-<div class="step">
-<div class="step-head">Azure portal · ~5 min</div>
-
-<h3>VM specification</h3>
+<h3>Host specification (both paths)</h3>
 
 <table>
 <tr><th style="width:30%">Field</th><th>Value</th></tr>
-<tr><td>Image</td><td>Ubuntu Server <strong>24.04 LTS – x64 Gen2</strong> (22.04 also works)</td></tr>
-<tr><td>Size</td><td><strong>Standard D4s v3</strong> (4 vCPU / 16 GB) — or D4as v5 (AMD equivalent)</td></tr>
-<tr><td>Authentication type</td><td><strong>SSH public key</strong> — paste your admin key. You'll add the operator's key separately in Step 3.</td></tr>
-<tr><td>Username</td><td>Your choice for the admin user (e.g. <code>customer-admin</code>) — NOT the operator user</td></tr>
-<tr><td>Public inbound ports</td><td><strong>None</strong>. Configure NSG explicitly in Step 2.</td></tr>
-<tr><td>OS disk</td><td>Premium SSD, at least <strong>64 GB</strong></td></tr>
-<tr><td>Region</td><td>Any — pick where your data-processing agreement covers</td></tr>
-<tr><td>Data disk</td><td>Not needed for POC (add later if scaling)</td></tr>
+<tr><td>OS</td><td>Ubuntu Server <strong>24.04 LTS</strong> (22.04 also works)</td></tr>
+<tr><td>Architecture</td><td><strong>x86_64</strong> (Intel or AMD)</td></tr>
+<tr><td>CPU</td><td>4 cores minimum. Comfortable at 8.</td></tr>
+<tr><td>RAM</td><td>16 GB minimum. Comfortable at 32 GB for larger evidence corpuses.</td></tr>
+<tr><td>Disk</td><td>≥64 GB. Comfortable at 100+ GB for evidence uploads.</td></tr>
+<tr><td>Network</td><td>Outbound HTTPS to <code>api.openai.com</code>, <code>debian.neo4j.com</code>, <code>pypi.org</code>, <code>github.com</code>. Reachable from the operator's laptop on port 22 (SSH).</td></tr>
 </table>
 
-<p class="muted">The install root <code>/data/arioncomply</code> uses ~5 GB. Chroma indexes + Neo4j graph land inside that. 64 GB gives comfortable headroom for uploaded evidence.</p>
-</div>
-
-<h2>Step 2 · Configure NSG</h2>
+<p class="muted">The install root <code>/data/arioncomply</code> uses ~5 GB. Chroma indexes + Neo4j graph land inside that. 64 GB gives comfortable headroom for uploaded evidence; scale up if you plan to upload GB-scale document corpora.</p>
 
 <div class="step">
-<div class="step-head">Azure portal · ~3 min</div>
+<div class="step-head">Path A · Cloud VM · ~5 min</div>
 
-<p>After VM creation, edit the auto-created NSG (<code>&lt;vmname&gt;-nsg</code>). Inbound rules:</p>
+<h3>Azure</h3>
+
+<table>
+<tr><th style="width:28%">Field</th><th>Value</th></tr>
+<tr><td>Image</td><td>Ubuntu Server 24.04 LTS – x64 Gen2</td></tr>
+<tr><td>Size</td><td>Standard D4s v3 (4 vCPU / 16 GB) — or D4as v5 (AMD)</td></tr>
+<tr><td>Authentication</td><td>SSH public key — your admin key. Operator's key added separately in Step 3.</td></tr>
+<tr><td>Username</td><td>Your choice for admin (e.g. <code>customer-admin</code>) — NOT the operator user</td></tr>
+<tr><td>Public inbound ports</td><td>None. Configure NSG in Step 2.</td></tr>
+<tr><td>OS disk</td><td>Premium SSD, ≥64 GB</td></tr>
+<tr><td>Region</td><td>Where your data-processing agreement covers</td></tr>
+</table>
+
+<h3>AWS</h3>
+
+<table>
+<tr><th style="width:28%">Field</th><th>Value</th></tr>
+<tr><td>AMI</td><td>Ubuntu Server 24.04 LTS (canonical/ubuntu-2404-lts)</td></tr>
+<tr><td>Instance type</td><td>t3.xlarge (4 vCPU / 16 GB) or larger</td></tr>
+<tr><td>Key pair</td><td>Your admin SSH key. Operator's key added separately in Step 3.</td></tr>
+<tr><td>Storage</td><td>gp3 EBS, ≥64 GB</td></tr>
+<tr><td>Security group</td><td>No inbound at creation. Configure in Step 2.</td></tr>
+<tr><td>Region</td><td>Where your DPA covers</td></tr>
+</table>
+
+<h3>GCP</h3>
+
+<table>
+<tr><th style="width:28%">Field</th><th>Value</th></tr>
+<tr><td>Image</td><td>Ubuntu 24.04 LTS</td></tr>
+<tr><td>Machine type</td><td>n2-standard-4 (4 vCPU / 16 GB) or larger</td></tr>
+<tr><td>SSH key</td><td>Your admin key added via metadata. Operator's key added separately in Step 3.</td></tr>
+<tr><td>Boot disk</td><td>SSD persistent disk, ≥64 GB</td></tr>
+<tr><td>Firewall</td><td>No inbound at creation. Configure in Step 2.</td></tr>
+</table>
+</div>
+
+<div class="step">
+<div class="step-head">Path B · On-prem / bare-metal · you own the box</div>
+
+<p>Install Ubuntu 24.04 from the ISO if the box isn't already running it. Anything meeting the spec table above works: dedicated server, workstation-class desktop, hypervisor VM (VMware, Proxmox, KVM), NUC-class mini-PC, or a Raspberry Pi–class device (see caveats below).</p>
+
+<h3>Network setup</h3>
+
+<ul class="tight">
+<li>Static IP recommended (either via DHCP reservation or a static config in <code>/etc/netplan/</code>). The operator will use this to SSH; it must not change mid-engagement.</li>
+<li>The box must be reachable from the operator's laptop:
+  <ul>
+    <li>Same LAN: just a route from operator to the box's local IP</li>
+    <li>Different network: VPN (WireGuard, Tailscale, corporate VPN) with the operator as a peer, OR a reverse-SSH tunnel to a jump host</li>
+  </ul>
+</li>
+<li>Outbound internet access for the install (see spec table). Firewalled outbound is OK if the four hosts above are on the allowlist.</li>
+</ul>
+
+<h3>Hardware caveats</h3>
+
+<ul class="tight">
+<li>ARM boxes (Raspberry Pi, Ampere): possible but not tested; Neo4j and Chroma have ARM builds. Expect a slower first-time Chroma reindex.</li>
+<li>Older Intel CPUs (Haswell/Broadwell) work fine — install.sh doesn't require modern CPU features. Chroma reindex + Neo4j load will take longer (~1.5-2× a modern box).</li>
+<li>Low-RAM boxes (&lt;16 GB) will run into OOM during LLM calls under load; not recommended.</li>
+</ul>
+
+<div class="warn">
+For evaluation only. On-prem PoC boxes rarely have the physical security posture (locked rack, audited access, hardware inventory) required for a production ArionComply install. Move to a hardened environment before any real compliance-program data lives on the box.
+</div>
+</div>
+
+<h2>Step 2 · Configure firewall</h2>
+
+<p>Restrict inbound to SSH-from-operator-IP only. No public exposure of ArionComply's application ports (8080 / 8000 / 7474 / 7687) — those bind <code>127.0.0.1</code> and are accessed via SSH tunnel after install.</p>
+
+<div class="step">
+<div class="step-head">Path A · Cloud VM firewall · ~3 min</div>
+
+<p>Add inbound rules in your cloud provider's console:</p>
 
 <table>
 <tr><th>Rule</th><th>Priority</th><th>Source</th><th>Port</th><th>Action</th></tr>
@@ -116,23 +195,50 @@ Everything you need to do BEFORE your Claude operator connects to install ArionC
 <tr><td>Deny all inbound</td><td>4096</td><td>Any</td><td>Any</td><td>Deny (default)</td></tr>
 </table>
 
-<div class="warn">
-Do <strong>not</strong> open <code>:8080</code>, <code>:8000</code>, <code>:7474</code>, or <code>:7687</code> to the public internet. ArionComply services bind to <code>127.0.0.1</code> and are accessed via SSH tunnel after install. If you want a browser experience, tunnel from your laptop:<br>
-<code>ssh -L 8080:127.0.0.1:8080 &lt;your-user&gt;@&lt;vm-ip&gt;</code> — then open <code>http://127.0.0.1:8080/ui/arioncomply.html</code>.
+<p>Provider mechanics:</p>
+
+<ul class="tight">
+<li>Azure — edit the auto-created NSG (<code>&lt;vmname&gt;-nsg</code>)</li>
+<li>AWS — edit the VPC security group attached to the instance</li>
+<li>GCP — add VPC firewall rules with a network tag applied to the instance</li>
+</ul>
+
+<p>Confirm operator's public IP with them before setting the rule. They can find it via <code>curl ifconfig.me</code> on their laptop.</p>
 </div>
 
-<p>Confirm operator's public IP with them before setting rule 1000. They can find it via <code>curl ifconfig.me</code> on their laptop.</p>
+<div class="step">
+<div class="step-head">Path B · On-prem firewall · ~2 min</div>
+
+<p>Configure <code>ufw</code> (Ubuntu's default) on the box itself:</p>
+
+<pre>
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow from &lt;operator-lan-ip&gt; to any port 22 proto tcp
+# Optional: your own admin access
+sudo ufw allow from &lt;your-lan-ip&gt; to any port 22 proto tcp
+sudo ufw enable
+sudo ufw status verbose
+</pre>
+
+<p>If the box sits behind a corporate firewall / router, apply the equivalent rule at that boundary too — the operator connects from OUTSIDE the box; whatever gateway lives between them and the box must forward SSH.</p>
+</div>
+
+<div class="warn">
+Do <strong>not</strong> open <code>:8080</code>, <code>:8000</code>, <code>:7474</code>, or <code>:7687</code> to the network. ArionComply services bind to <code>127.0.0.1</code> and are accessed via SSH tunnel after install. If you want a browser experience, tunnel from your laptop:<br>
+<code>ssh -L 8080:127.0.0.1:8080 &lt;your-user&gt;@&lt;host-ip&gt;</code><br>
+Then open <code>http://127.0.0.1:8080/ui/arioncomply.html</code>.
 </div>
 
 <h2>Step 3 · Create the operator user</h2>
 
 <div class="step">
-<div class="step-head">SSH to VM · ~2 min</div>
+<div class="step-head">SSH to host as your admin user · ~2 min</div>
 
-<p>SSH to your VM as your admin user, then create a dedicated <code>arionops</code> sudo user for the operator:</p>
+<p>Create a dedicated <code>arionops</code> sudo user for the operator:</p>
 
 <pre>
-# Get the operator's SSH public key from them (they'll send it as a file or text block)
+# Get the operator's SSH public key from them (as a file or text block)
 # Example: their key looks like  ssh-ed25519 AAAAC3... arionops@laptop
 
 sudo adduser --gecos "" --disabled-password arionops
@@ -153,7 +259,7 @@ sudo chown -R arionops:arionops /home/arionops/.ssh
 <p class="muted">Passwordless sudo is convenient for automation. If your policy requires interactive sudo, that's OK too — the operator will handle password prompts.</p>
 
 <div class="warn">
-<strong>Never</strong> share your admin user's SSH key with the operator. The operator's key exists only on their laptop; you install their <em>public</em> key on the VM. If you rotate the operator user later, just remove the entry from <code>/home/arionops/.ssh/authorized_keys</code>.
+<strong>Never</strong> share your admin user's SSH key with the operator. The operator's key exists only on their laptop; you install their <em>public</em> key on the host. If you rotate the operator user later, just remove the entry from <code>/home/arionops/.ssh/authorized_keys</code>.
 </div>
 </div>
 
@@ -177,7 +283,7 @@ ls -ld /data/arioncomply
 <div class="step">
 <div class="step-head">Coordination · ~10 min upfront</div>
 
-<p>After install, the operator provisions your first tenant, which produces an API key printed <strong>once</strong>. That key is hashed at rest on the VM — there's no way to retrieve it later. You need a plan for how the operator delivers it to you.</p>
+<p>After install, the operator provisions your first tenant, which produces an API key printed <strong>once</strong>. That key is hashed at rest on the host — there's no way to retrieve it later. You need a plan for how the operator delivers it to you.</p>
 
 <h3>Acceptable channels</h3>
 <ul class="tight">
@@ -205,10 +311,11 @@ ls -ld /data/arioncomply
 <p>The operator needs these to start:</p>
 
 <ul class="check">
-<li><strong>VM public IP or hostname</strong> (e.g. <code>40.68.12.34</code> or <code>arion-poc.westeurope.cloudapp.azure.com</code>)</li>
+<li><strong>Host address</strong> — public IP or hostname for cloud VMs (e.g. <code>40.68.12.34</code>); LAN IP + connection method for on-prem (e.g. <code>10.0.1.85</code> reachable via WireGuard peer)</li>
 <li><strong>Operator SSH user</strong> (<code>arionops</code>, or whatever you chose in Step 3)</li>
-<li><strong>Confirmation that Step 2 NSG rule 1000 is live</strong> — send them a screenshot or write "SSH from your IP is allowlisted"</li>
-<li><strong>Which OS you installed</strong> (<code>Ubuntu 24.04</code> or <code>Ubuntu 22.04</code>) so they know the expected package set</li>
+<li><strong>Confirmation Step 2 firewall rule is live</strong> — screenshot or written "SSH from your IP is allowlisted"</li>
+<li><strong>Which OS you installed</strong> (<code>Ubuntu 24.04</code> or <code>22.04</code>) so they know the expected package set</li>
+<li><strong>Deployment path</strong> (cloud provider name, or "on-prem") — helps the operator anticipate provider-specific gotchas or on-prem gotchas (proxy, DNS, corporate CA)</li>
 <li><strong>Postgres passwords</strong> — either you pick two strong passwords (owner + app roles) and share via the same secret-vault as Step 5, or you tell the operator "you pick, store in vault, and give me the pointer"</li>
 <li><strong>Neo4j password</strong> — same pattern as Postgres</li>
 <li><strong>OpenAI API key</strong> (or the equivalent LLM provider key) — you provide, ideally as a scoped throwaway with a monthly billing cap set BEFORE sending. Share via secret-vault.</li>
@@ -216,7 +323,7 @@ ls -ld /data/arioncomply
 </ul>
 
 <div class="warn">
-Send the connection info (IP + user) via any normal channel — email/chat is fine, this isn't secret. Send the passwords + API keys via the <em>secret-vault only</em>. Same rule applies to their handback: tenant API key comes back through the vault, not through email.
+Send the connection info (host + user + path) via any normal channel — email/chat is fine, this isn't secret. Send passwords + API keys via the <em>secret-vault only</em>. Same rule applies to their handback: tenant API key comes back through the vault, not through email.
 </div>
 </div>
 
@@ -225,9 +332,9 @@ Send the connection info (IP + user) via any normal channel — email/chat is fi
 <p>Once you've handed off, the operator will:</p>
 
 <ol>
-<li>Verify SSH access + VM readiness</li>
+<li>Verify SSH access + host readiness</li>
 <li>Clone the ArionComply repo into <code>/data/arioncomply</code></li>
-<li>Run <code>install.sh --yes</code> with the credentials you supplied (~15 min)</li>
+<li>Run <code>install.sh --yes</code> with the credentials you supplied (~15 min cloud, ~20-25 min older on-prem hardware)</li>
 <li>Verify all 4 services healthy via <code>arion_status.sh --json</code></li>
 <li>Provision your first tenant + capture the API key</li>
 <li>Smoke-test end-to-end (deployment status, chat, SPA)</li>
@@ -245,9 +352,9 @@ Send the connection info (IP + user) via any normal channel — email/chat is fi
 <p>After handback, both you and the operator can produce diagnostic bundles when things break:</p>
 
 <pre>
-ssh arionops@&lt;vm-ip&gt; 'bash /data/arioncomply/scripts/ops/diagnose.sh'
+ssh arionops@&lt;host&gt; 'bash /data/arioncomply/scripts/ops/diagnose.sh'
 # → prints path to /tmp/arion-diag-&lt;host&gt;-&lt;timestamp&gt;.tar.gz
-scp arionops@&lt;vm-ip&gt;:/tmp/arion-diag-*.tar.gz ./
+scp arionops@&lt;host&gt;:/tmp/arion-diag-*.tar.gz ./
 </pre>
 
 <p>Send the bundle to the operator when opening a support ticket. It contains no evidence text, chat prose, LLM content, or raw API keys — safe to share. See <a href="error_catalog.html">Error Catalog</a> for common ARION-* codes and their fixes.</p>
@@ -266,7 +373,7 @@ sudo rm /etc/sudoers.d/arionops
 
 <h2>Uninstall</h2>
 
-<p>Full removal on the customer VM (yours to run when the POC ends):</p>
+<p>Full removal (yours to run when the PoC ends):</p>
 
 <pre>
 # Stop + disable services
