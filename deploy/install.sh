@@ -208,12 +208,69 @@ else
     ok "sessions schema already exists — skipping"
 fi
 
+# ── Post-baseline schema_v*.sql migrations ──
+# schema_baseline.sql is a point-in-time snapshot; migrations added
+# after that live in db/schema_v*.sql. Track applied-migration
+# state in a `schema_migrations` tracker so reruns skip already-
+# applied files (CREATE POLICY has no IF NOT EXISTS guard, so
+# unconditional replay is not safe).
+#
+# Bootstrap logic: if the tracker table is missing but late-schema
+# markers exist (dev-host / customer boxes that ran migrations
+# without the tracker), mark everything as applied to avoid a
+# spurious first-run replay. Marker: document_findings.
+# resolved_by_upload_id (added by schema_v109_finding_closure_trail).
+sudo -u postgres psql -d arioncomply_compliance -v ON_ERROR_STOP=1 -c \
+    "CREATE TABLE IF NOT EXISTS schema_migrations (
+        version TEXT PRIMARY KEY,
+        applied_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );" > /dev/null
+
+# Auto-bootstrap on pre-existing installs.
+tracker_empty=$(sudo -u postgres psql -d arioncomply_compliance -tAc \
+    "SELECT COUNT(*) FROM schema_migrations")
+late_marker=$(sudo -u postgres psql -d arioncomply_compliance -tAc \
+    "SELECT COUNT(*) FROM information_schema.columns
+      WHERE table_name='document_findings' AND column_name='resolved_by_upload_id'")
+if [[ "$tracker_empty" == "0" && "$late_marker" == "1" ]]; then
+    for f in "$ARION_ROOT"/db/schema_v*.sql; do
+        v=$(basename "$f" .sql)
+        sudo -u postgres psql -d arioncomply_compliance -c \
+            "INSERT INTO schema_migrations (version) VALUES ('$v') ON CONFLICT DO NOTHING" >/dev/null
+    done
+    ok "schema_migrations bootstrapped from existing late-schema state"
+fi
+
+# Apply un-applied migrations in numeric order. Fail loud on error.
+applied_count=0
+if compgen -G "$ARION_ROOT/db/schema_v*.sql" > /dev/null; then
+    for f in $(ls "$ARION_ROOT"/db/schema_v*.sql | sort -V); do
+        v=$(basename "$f" .sql)
+        already=$(sudo -u postgres psql -d arioncomply_compliance -tAc \
+            "SELECT 1 FROM schema_migrations WHERE version = '$v'")
+        if [[ "$already" != "1" ]]; then
+            sudo -u postgres psql -d arioncomply_compliance -v ON_ERROR_STOP=1 \
+                -f "$f" > /dev/null 2>&1 \
+                || fail "migration $v failed — inspect: sudo -u postgres psql -d arioncomply_compliance -f $f"
+            sudo -u postgres psql -d arioncomply_compliance -c \
+                "INSERT INTO schema_migrations (version) VALUES ('$v')" > /dev/null
+            applied_count=$((applied_count + 1))
+        fi
+    done
+    if [[ "$applied_count" -gt 0 ]]; then
+        ok "applied $applied_count new schema_v*.sql migrations"
+    else
+        ok "schema_v*.sql migrations all up-to-date"
+    fi
+fi
+
 # ── Ownership + grants reconciliation ──
 # baseline SQL is a pg_dump snapshot with --no-owner --no-privileges,
 # so tables end up owned by `postgres` (whoever runs the SQL) with
 # no privileges to either app role. baseline_grants.sql reassigns
 # ownership to `arioncomply` and grants the app role runtime privs.
-# Idempotent: safe to run every time — no-ops when already correct.
+# Run AFTER migrations so any migrations that create new tables get
+# their ownership + grants set too. Idempotent: no-op when already correct.
 sudo -u postgres psql -d arioncomply_compliance \
     -f "$ARION_ROOT/deploy/baseline_grants.sql" >/dev/null
 sudo -u postgres psql -d arioncomply_sessions \
@@ -276,7 +333,8 @@ if [[ ! -x "/home/$ARION_RUNTIME_USER/.local/bin/chroma" ]]; then
     fail "chroma binary not found at /home/$ARION_RUNTIME_USER/.local/bin/chroma — did step 5 pip install run as this user?"
 fi
 
-for unit in arioncomply-chroma.service arioncomply-api.service; do
+for unit in arioncomply-chroma.service arioncomply-api.service \
+            arioncomply-sweep.service arioncomply-sweep.timer; do
     sed -e "s|__ARION_USER__|$ARION_RUNTIME_USER|g" \
         "$ARION_ROOT/ops/systemd/$unit" \
     | sudo tee "/etc/systemd/system/$unit" >/dev/null
@@ -286,8 +344,10 @@ sudo systemctl daemon-reload
 # Clear any prior failed state before re-enabling (a prior install
 # attempt with the wrong user hits "Start request repeated too quickly"
 # and refuses to try again without reset-failed).
-sudo systemctl reset-failed arioncomply-chroma arioncomply-api 2>/dev/null || true
-sudo systemctl enable arioncomply-chroma arioncomply-api
+sudo systemctl reset-failed arioncomply-chroma arioncomply-api arioncomply-sweep.timer 2>/dev/null || true
+# Enable services (arioncomply-sweep.service is oneshot, started by
+# its timer — enable the timer, not the service itself).
+sudo systemctl enable arioncomply-chroma arioncomply-api arioncomply-sweep.timer
 
 # Start Chroma first, then wait for its port, then API
 if ! lsof -i :8000 -sTCP:LISTEN >/dev/null 2>&1; then
@@ -308,6 +368,11 @@ if ! lsof -i :8000 -sTCP:LISTEN >/dev/null 2>&1; then
 else
     warn "port 8000 already in use — leaving existing Chroma alone"
 fi
+
+# Start the sweep timer (fires the service every 30 min per its OnUnitActiveSec).
+# The service itself is oneshot — no long-running process to health-check here.
+sudo systemctl start arioncomply-sweep.timer
+ok "arioncomply-sweep.timer enabled (fires every 30 min)"
 
 # ── 8. Neo4j graph load ──────────────────────────────────────────────
 # Full graph load runs FOUR loaders in dependency order — the
@@ -333,6 +398,15 @@ log "  · loading RequirementNodes (iso + gdpr JSON)"
 NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
     python3 load_neo4j.py 2>&1 | tail -3
 
+# ISO 27701 has no source JSON (copyrighted standard). Seeder writes
+# RequirementNode shells directly from clause text in Python. Do this
+# before the relationship catalog runs — 505+ cross-framework edges
+# reference 27701 nodes as endpoints and will otherwise report
+# "endpoints missing" for ~161 27701-side edges.
+log "  · seeding ISO 27701 RequirementNodes"
+NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
+    python3 scripts/seed_27701_requirement_nodes.py 2>&1 | tail -3
+
 log "  · loading cross-framework relationship catalog"
 NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
     python3 enrichment/relationships/load_to_neo4j.py 2>&1 | tail -3
@@ -345,7 +419,7 @@ log "  · loading evidence layer (FulfilmentSpec + EvidenceRequirement + Checkli
 NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
     python3 enrichment/documents/load_to_neo4j.py 2>&1 | tail -3
 
-ok "graph loaded (all four layers)"
+ok "graph loaded (all five layers incl. 27701)"
 
 # ── 9. Start the API ─────────────────────────────────────────────────
 step "9. ArionComply API"

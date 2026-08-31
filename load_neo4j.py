@@ -3,14 +3,22 @@ Load ISO and GDPR RequirementNodes from JSON phase files into Neo4j.
 Run once after fresh install to rebuild the graph.
 """
 import json, os, sys
+from pathlib import Path
 from neo4j import GraphDatabase
-from dotenv import load_dotenv
 
-load_dotenv('/data/arioncomply/.env')
+# Portable .env discovery — relative to this file, not a hardcoded
+# /data/arioncomply path. Matches load_to_neo4j.py + load_graph_relationships.py.
+try:
+    from dotenv import load_dotenv
+    load_dotenv(str(Path(__file__).parent / ".env"))
+except ImportError:
+    pass
 
 URI  = os.getenv("NEO4J_URI",      "bolt://127.0.0.1:7687")
 USER = os.getenv("NEO4J_USER",     "neo4j")
-PASS = os.getenv("NEO4J_PASSWORD", "arionneo4j2026")
+PASS = os.getenv("NEO4J_PASSWORD")
+if not PASS:
+    sys.exit("NEO4J_PASSWORD not set — export it or put it in .env at the repo root")
 
 driver = GraphDatabase.driver(URI, auth=(USER, PASS))
 

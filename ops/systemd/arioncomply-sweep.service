@@ -6,8 +6,8 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-User=arionlabs
-Group=arionlabs
+User=__ARION_USER__
+Group=__ARION_USER__
 WorkingDirectory=/data/arioncomply
 EnvironmentFile=-/data/arioncomply/.env
 Environment=PYTHONPATH=/data/arioncomply

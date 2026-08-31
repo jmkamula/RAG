@@ -40,10 +40,22 @@ import os
 import sys
 from collections import defaultdict
 from datetime import datetime
+from pathlib import Path
+
+# Load .env from repo root so standalone invocations pick up
+# NEO4J_PASSWORD without a pre-export step (matches load_to_neo4j.py
+# and load_neo4j.py). No-op if dotenv isn't installed.
+try:
+    from dotenv import load_dotenv
+    load_dotenv(str(Path(__file__).parent / ".env"))
+except ImportError:
+    pass
 
 NEO4J_URI  = os.getenv("NEO4J_URI",      "bolt://127.0.0.1:7687")
 NEO4J_USER = os.getenv("NEO4J_USER",     "neo4j")
-NEO4J_PASS = os.getenv("NEO4J_PASSWORD", "arionneo4j2026")
+NEO4J_PASS = os.getenv("NEO4J_PASSWORD")
+if not NEO4J_PASS:
+    sys.exit("NEO4J_PASSWORD not set — export it or put it in .env at the repo root")
 
 # Allowed relationship types (vocabulary alignment)
 # Maps whatever is in the JSON → canonical Neo4j relationship type
