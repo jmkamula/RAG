@@ -257,7 +257,7 @@ fi
 # ~/.local/bin/chroma. Substitute at copy time so the unit files
 # stay dev-host-agnostic.
 step "7. Chroma dir + systemd units"
-mkdir -p "$ARION_ROOT/chroma_db"
+mkdir -p "$ARION_ROOT/chroma_db" "$ARION_ROOT/uploads"
 
 ARION_RUNTIME_USER="$(id -un)"
 if [[ ! -x "/home/$ARION_RUNTIME_USER/.local/bin/chroma" ]]; then

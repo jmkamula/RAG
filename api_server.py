@@ -86,7 +86,10 @@ logger = logging.getLogger("arioncomply.api")
 
 # ── Config ────────────────────────────────────────────────────────────────────
 DATABASE_URL   = os.getenv("DATABASE_URL", "")
-UPLOAD_DIR     = Path(os.getenv("UPLOAD_DIR", "/data/uploads"))
+# Default to a subdirectory of the code root so a fresh install works
+# without needing anyone to chown /data (which is root-owned on most
+# Ubuntu hosts). Operators can still override via UPLOAD_DIR in .env.
+UPLOAD_DIR     = Path(os.getenv("UPLOAD_DIR", str(_ROOT / "uploads")))
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 API_PORT       = int(os.getenv("API_PORT", "8080"))
 CORS_ORIGINS   = os.getenv("CORS_ORIGINS", "*").split(",")
