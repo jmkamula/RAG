@@ -208,6 +208,18 @@ else
     ok "sessions schema already exists — skipping"
 fi
 
+# ── Ownership + grants reconciliation ──
+# baseline SQL is a pg_dump snapshot with --no-owner --no-privileges,
+# so tables end up owned by `postgres` (whoever runs the SQL) with
+# no privileges to either app role. baseline_grants.sql reassigns
+# ownership to `arioncomply` and grants the app role runtime privs.
+# Idempotent: safe to run every time — no-ops when already correct.
+sudo -u postgres psql -d arioncomply_compliance \
+    -f "$ARION_ROOT/deploy/baseline_grants.sql" >/dev/null
+sudo -u postgres psql -d arioncomply_sessions \
+    -f "$ARION_ROOT/deploy/baseline_grants.sql" >/dev/null
+ok "ownership + grants reconciled on both databases"
+
 # ── 5. Python dependencies ───────────────────────────────────────────
 step "5. Python dependencies"
 pip install --break-system-packages -q -r "$ARION_ROOT/deploy/requirements.txt"
