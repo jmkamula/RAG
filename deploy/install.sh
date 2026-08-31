@@ -276,9 +276,14 @@ else
 fi
 
 # ── 8. Neo4j graph load ──────────────────────────────────────────────
+# The loader reads NEO4J_PASSWORD via os.getenv. Bash keeps the value
+# in $NEO4J_PW throughout install.sh; export it under the name the
+# script expects for this invocation (and any other install-time
+# script that reads NEO4J_PASSWORD).
 step "8. Neo4j graph load (framework role model + all curated content)"
 cd "$ARION_ROOT"
-PYTHONPATH="$ARION_ROOT" python3 enrichment/documents/load_to_neo4j.py 2>&1 | tail -5
+NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
+    python3 enrichment/documents/load_to_neo4j.py 2>&1 | tail -5
 ok "graph loaded"
 
 # ── 9. Start the API ─────────────────────────────────────────────────

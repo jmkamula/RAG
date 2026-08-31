@@ -21,6 +21,16 @@ import os
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 
+# Load .env from the repo root so standalone `python3 load_to_neo4j.py`
+# picks up NEO4J_PASSWORD without having to be pre-exported. install.sh
+# also passes NEO4J_PASSWORD explicitly, so this is a fallback for the
+# post-install standalone-invocation path.
+try:
+    from dotenv import load_dotenv
+    load_dotenv(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
+except ImportError:
+    pass
+
 from enrichment.documents.document_requirements import (
     ALL_DERIVED_SPECS,
     ALL_EVIDENCE_REQUIREMENTS,
