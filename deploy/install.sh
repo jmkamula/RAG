@@ -310,15 +310,42 @@ else
 fi
 
 # ── 8. Neo4j graph load ──────────────────────────────────────────────
-# The loader reads NEO4J_PASSWORD via os.getenv. Bash keeps the value
-# in $NEO4J_PW throughout install.sh; export it under the name the
-# script expects for this invocation (and any other install-time
-# script that reads NEO4J_PASSWORD).
+# Full graph load runs FOUR loaders in dependency order — the
+# evidence-layer loader MATCHes RequirementNodes that upstream
+# loaders create, so ordering matters:
+#
+#   1. load_neo4j.py                     RequirementNodes (126 ISO + 303 GDPR)
+#                                        from iso/gdpr JSON phase files
+#   2. enrichment/relationships/         505 typed cross-framework edges
+#      load_to_neo4j.py                  (IMPLEMENTS/SUPPORTS/ENABLES/...)
+#   3. load_graph_relationships.py       PART_OF hierarchy + BLOCKS_WHEN
+#                                        + ESCALATES_TO etc
+#   4. enrichment/documents/             FulfilmentSpec + EvidenceRequirement
+#      load_to_neo4j.py                  + ChecklistItem; attaches leaves
+#                                        to RequirementNodes via SATISFIED_BY
+#
+# All loaders read NEO4J_PASSWORD via os.getenv. Bash keeps the value
+# in $NEO4J_PW throughout install.sh; export at the boundary.
 step "8. Neo4j graph load (framework role model + all curated content)"
 cd "$ARION_ROOT"
+
+log "  · loading RequirementNodes (iso + gdpr JSON)"
 NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
-    python3 enrichment/documents/load_to_neo4j.py 2>&1 | tail -5
-ok "graph loaded"
+    python3 load_neo4j.py 2>&1 | tail -3
+
+log "  · loading cross-framework relationship catalog"
+NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
+    python3 enrichment/relationships/load_to_neo4j.py 2>&1 | tail -3
+
+log "  · loading PART_OF hierarchy + control edges"
+NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
+    python3 load_graph_relationships.py 2>&1 | tail -3
+
+log "  · loading evidence layer (FulfilmentSpec + EvidenceRequirement + ChecklistItem)"
+NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
+    python3 enrichment/documents/load_to_neo4j.py 2>&1 | tail -3
+
+ok "graph loaded (all four layers)"
 
 # ── 9. Start the API ─────────────────────────────────────────────────
 step "9. ArionComply API"
