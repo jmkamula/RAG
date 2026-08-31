@@ -122,16 +122,23 @@ def provision(args) -> str:
                     f"different --slug."
                 )
             if existing and args.recreate:
-                # Soft-delete AND retire the slug so the UNIQUE constraint
-                # doesn't collide on the next INSERT. Tombstone form:
-                #   <slug>-deleted-<8char-id-suffix>
-                # Keeps the audit trail (row is preserved, `is_active=FALSE`)
-                # while freeing the original slug for reuse.
-                dead_slug = f"{slug}-deleted-{str(existing[0])[:8]}"
+                # Soft-delete AND retire every unique-constrained field
+                # so the fresh INSERTs below don't collide:
+                #   - tenants.slug        (retired to <slug>-deleted-<id>)
+                #   - users.email         (retired to deleted-<id>+<orig>)
+                # Keeps the audit trail (rows preserved, is_active=FALSE)
+                # while freeing the originals for reuse.
+                dead_suffix = str(existing[0])[:8]
+                dead_slug = f"{slug}-deleted-{dead_suffix}"
                 print(f"  · soft-deleting existing tenant {existing[0]} (slug → {dead_slug})")
                 cur.execute(
                     "UPDATE tenants SET is_active = FALSE, slug = %s WHERE id = %s",
                     (dead_slug, existing[0]),
+                )
+                cur.execute(
+                    "UPDATE users SET email = 'deleted-' || %s || '+' || email "
+                    "WHERE tenant_id = %s AND email NOT LIKE 'deleted-%%'",
+                    (dead_suffix, existing[0]),
                 )
 
             # ── 1. tenants row ────────────────────────────────────────
