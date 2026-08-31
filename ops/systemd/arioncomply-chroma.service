@@ -6,8 +6,8 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-User=arionlabs
-Group=arionlabs
+User=__ARION_USER__
+Group=__ARION_USER__
 WorkingDirectory=/data/arioncomply
 Environment=PYTHONUNBUFFERED=1
 
@@ -15,7 +15,7 @@ Environment=PYTHONUNBUFFERED=1
 # from .env; those default to localhost:8000 which matches this bind.
 # Data persists to /data/arioncomply/chroma_db (5 embedding collections
 # on text-embedding-3-large per Ship 5'.b consolidation).
-ExecStart=/home/arionlabs/.local/bin/chroma run \
+ExecStart=/home/__ARION_USER__/.local/bin/chroma run \
     --host 127.0.0.1 \
     --port 8000 \
     --path /data/arioncomply/chroma_db

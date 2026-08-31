@@ -252,25 +252,47 @@ else
 fi
 
 # ── 7. Chroma data dir + systemd units ───────────────────────────────
+# Units carry __ARION_USER__ placeholders — the invoking user (whoever
+# ran install.sh) owns /data/arioncomply and has chroma at
+# ~/.local/bin/chroma. Substitute at copy time so the unit files
+# stay dev-host-agnostic.
 step "7. Chroma dir + systemd units"
 mkdir -p "$ARION_ROOT/chroma_db"
 
+ARION_RUNTIME_USER="$(id -un)"
+if [[ ! -x "/home/$ARION_RUNTIME_USER/.local/bin/chroma" ]]; then
+    fail "chroma binary not found at /home/$ARION_RUNTIME_USER/.local/bin/chroma — did step 5 pip install run as this user?"
+fi
+
 for unit in arioncomply-chroma.service arioncomply-api.service; do
-    sudo install -m 0644 "$ARION_ROOT/ops/systemd/$unit" "/etc/systemd/system/$unit"
+    sed -e "s|__ARION_USER__|$ARION_RUNTIME_USER|g" \
+        "$ARION_ROOT/ops/systemd/$unit" \
+    | sudo tee "/etc/systemd/system/$unit" >/dev/null
+    sudo chmod 0644 "/etc/systemd/system/$unit"
 done
 sudo systemctl daemon-reload
+# Clear any prior failed state before re-enabling (a prior install
+# attempt with the wrong user hits "Start request repeated too quickly"
+# and refuses to try again without reset-failed).
+sudo systemctl reset-failed arioncomply-chroma arioncomply-api 2>/dev/null || true
 sudo systemctl enable arioncomply-chroma arioncomply-api
 
 # Start Chroma first, then wait for its port, then API
 if ! lsof -i :8000 -sTCP:LISTEN >/dev/null 2>&1; then
     sudo systemctl start arioncomply-chroma
+    chroma_up=0
     for i in {1..15}; do
         if curl -sf http://127.0.0.1:8000/api/v2/heartbeat >/dev/null; then
+            chroma_up=1
             break
         fi
         sleep 2
     done
-    ok "Chroma running on :8000"
+    if [[ "$chroma_up" -eq 1 ]]; then
+        ok "Chroma running on :8000"
+    else
+        fail "Chroma didn't come up on :8000 in 30s — check: sudo journalctl -u arioncomply-chroma -n 30"
+    fi
 else
     warn "port 8000 already in use — leaving existing Chroma alone"
 fi
