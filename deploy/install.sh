@@ -52,9 +52,51 @@ prompt_pw() {
     if [[ "$YES_MODE" -eq 1 ]]; then
         fail "$var_name must be set in env when running with --yes"
     fi
-    read -r -s -p "$prompt_msg: " value
-    echo
+    while :; do
+        read -r -s -p "$prompt_msg: " value
+        echo
+        if [[ -n "$value" ]]; then break; fi
+        warn "password cannot be empty — try again"
+    done
     export "$var_name=$value"
+}
+
+# ── Neo4j helpers (used by step 2) ───────────────────────────────────
+# Auth probe: returns 0 iff the given password authenticates against
+# the running Neo4j Bolt endpoint. cypher-shell exits non-zero on
+# either connection failure or auth failure.
+neo4j_auth_ok() {
+    local pw="$1"
+    command -v cypher-shell >/dev/null 2>&1 || return 1
+    printf "RETURN 1;" | \
+        cypher-shell -u neo4j -p "$pw" --format plain >/dev/null 2>&1
+}
+
+# Password reset for Neo4j 5+. `set-initial-password` is bootstrap-
+# only — it silently no-ops once the system database has been
+# initialized. To make it bite again we wipe the entire data dir
+# (databases + transactions + dbms bootstrap flag), then rerun
+# set-initial-password before the first start. Graph content is
+# lost by design here; step 8 rebuilds it from the catalog.
+neo4j_reset_password() {
+    local pw="$1"
+    warn "Neo4j auth doesn't match NEO4J_PW — resetting"
+    warn "  · wiping /var/lib/neo4j/data/{databases,transactions,dbms}"
+    warn "  · graph content will be reloaded from catalog in step 8"
+    sudo systemctl stop neo4j
+    sudo rm -rf /var/lib/neo4j/data/databases \
+                /var/lib/neo4j/data/transactions \
+                /var/lib/neo4j/data/dbms
+    sudo neo4j-admin dbms set-initial-password "$pw" 2>&1 | tail -1
+    sudo systemctl start neo4j
+    # Wait for Bolt (7687) — cypher-shell uses Bolt, not HTTP.
+    for i in {1..30}; do
+        if (timeout 1 bash -c 'cat < /dev/tcp/127.0.0.1/7687' >/dev/null 2>&1); then
+            return 0
+        fi
+        sleep 2
+    done
+    return 1
 }
 
 step "0. Sanity checks"
@@ -90,22 +132,40 @@ if ! command -v neo4j >/dev/null 2>&1; then
         sudo tee /etc/apt/sources.list.d/neo4j.list >/dev/null
     sudo apt-get update -qq
     sudo apt-get install -y -qq neo4j
-    # Initial password bootstrap
+    # Initial password bootstrap (fresh install path)
     sudo systemctl stop neo4j || true
     sudo neo4j-admin dbms set-initial-password "$NEO4J_PW" 2>&1 | tail -1
     sudo systemctl enable --now neo4j
     ok "neo4j installed + running"
 else
+    sudo systemctl enable --now neo4j
     ok "neo4j already installed"
 fi
 
-# Wait for Neo4j to be reachable
+# Wait for Neo4j to be reachable (HTTP is a proxy — Bolt comes up around the same time)
 for i in {1..30}; do
     if curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:7474/ | grep -q 200; then
         break
     fi
     sleep 2
 done
+
+# Verify auth matches NEO4J_PW. Handles the case where Neo4j is
+# already installed but with a different password (e.g. a prior
+# install attempt with a different handoff.env, or a manual reset).
+# `set-initial-password` is one-shot pre-bootstrap; if it's already
+# bit and the current password is wrong, we have to nuke the system
+# DB to redo bootstrap. Safe here because step 8 rebuilds the graph.
+if neo4j_auth_ok "$NEO4J_PW"; then
+    ok "Neo4j auth verified against NEO4J_PW"
+else
+    neo4j_reset_password "$NEO4J_PW" || fail "Neo4j password reset failed"
+    if neo4j_auth_ok "$NEO4J_PW"; then
+        ok "Neo4j auth reset — verified"
+    else
+        fail "Neo4j still not accepting NEO4J_PW after reset — check journalctl -u neo4j -n 50"
+    fi
+fi
 
 # ── 3. Postgres bootstrap ────────────────────────────────────────────
 step "3. Postgres roles + databases + extensions"
@@ -117,10 +177,14 @@ sudo -u postgres psql \
 ok "roles + databases + extensions in place"
 
 # ── 4. Schema + seed ─────────────────────────────────────────────────
+# Detection uses a canonical LATE-created table (posture_controls,
+# line ~1379 of schema_baseline.sql) rather than "any table in
+# public" — the latter falsely-skips baseline on rerun after a
+# partial crash where only a few early tables were created.
 step "4. Schema baseline + curator seed"
-if sudo -u postgres psql -d arioncomply_compliance -tAc \
-    "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE'" \
-    | grep -q "^0$"; then
+if ! sudo -u postgres psql -d arioncomply_compliance -tAc \
+        "SELECT 1 FROM information_schema.tables WHERE table_schema='public' AND table_name='posture_controls'" \
+        | grep -q "^1$"; then
     sudo -u postgres psql -d arioncomply_compliance \
         -f "$ARION_ROOT/db/baseline/schema_baseline.sql" >/dev/null
     sudo -u postgres psql -d arioncomply_compliance \
@@ -130,9 +194,13 @@ else
     ok "compliance schema already exists — skipping"
 fi
 
-if sudo -u postgres psql -d arioncomply_sessions -tAc \
-    "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE'" \
-    | grep -q "^0$"; then
+# Sessions DB — LangGraph checkpointer creates `checkpoints` on
+# its own if we don't; we still bootstrap it here so RLS grants
+# etc land. Marker: the schema_sessions_baseline.sql seeds
+# `checkpoints` (also late-created).
+if ! sudo -u postgres psql -d arioncomply_sessions -tAc \
+        "SELECT 1 FROM information_schema.tables WHERE table_schema='public' AND table_name='checkpoints'" \
+        | grep -q "^1$"; then
     sudo -u postgres psql -d arioncomply_sessions \
         -f "$ARION_ROOT/db/baseline/schema_sessions_baseline.sql" >/dev/null
     ok "sessions schema applied"
@@ -146,18 +214,37 @@ pip install --break-system-packages -q -r "$ARION_ROOT/deploy/requirements.txt"
 ok "pip install complete"
 
 # ── 6. .env from template ────────────────────────────────────────────
+# Secret substitution done in Python — sed would interpret pipe /
+# ampersand / backslash / dollar in passwords, and won't URL-encode
+# passwords that appear inside the postgresql:// connection strings.
 step "6. Environment file"
 if [[ ! -f "$ARION_ROOT/.env" ]]; then
     cp "$ARION_ROOT/deploy/.env.example" "$ARION_ROOT/.env"
-    # Substitute the values we have
-    sed -i "s|DATABASE_URL=.*|DATABASE_URL=postgresql://arioncomply_app:${ARION_APP_PW}@127.0.0.1/arioncomply_compliance|" \
-        "$ARION_ROOT/.env"
-    sed -i "s|SESSIONS_DATABASE_URL=.*|SESSIONS_DATABASE_URL=postgresql://arioncomply_app:${ARION_APP_PW}@127.0.0.1/arioncomply_sessions|" \
-        "$ARION_ROOT/.env"
-    sed -i "s|PGPASSWORD=.*|PGPASSWORD=${ARION_APP_PW}|" "$ARION_ROOT/.env"
-    sed -i "s|NEO4J_PASSWORD=.*|NEO4J_PASSWORD=${NEO4J_PW}|" "$ARION_ROOT/.env"
-    [[ -n "${OPENAI_KEY}" ]] && \
-        sed -i "s|OPENAI_API_KEY=.*|OPENAI_API_KEY=${OPENAI_KEY}|" "$ARION_ROOT/.env"
+    ARION_APP_PW="$ARION_APP_PW" NEO4J_PW="$NEO4J_PW" OPENAI_KEY="${OPENAI_KEY:-}" \
+        ARION_ENV_PATH="$ARION_ROOT/.env" python3 - <<'PYEOF'
+import os, re, urllib.parse
+path      = os.environ["ARION_ENV_PATH"]
+app_pw    = os.environ["ARION_APP_PW"]
+neo4j_pw  = os.environ["NEO4J_PW"]
+openai    = os.environ.get("OPENAI_KEY", "")
+enc       = urllib.parse.quote_plus  # URL-encodes @ : / etc
+
+subs = {
+    "DATABASE_URL":         f"postgresql://arioncomply_app:{enc(app_pw)}@127.0.0.1/arioncomply_compliance",
+    "SESSIONS_DATABASE_URL": f"postgresql://arioncomply_app:{enc(app_pw)}@127.0.0.1/arioncomply_sessions",
+    "PGPASSWORD":           app_pw,
+    "NEO4J_PASSWORD":       neo4j_pw,
+}
+if openai:
+    subs["OPENAI_API_KEY"] = openai
+
+with open(path) as f:
+    text = f.read()
+for k, v in subs.items():
+    text = re.sub(rf"^{re.escape(k)}=.*$", f"{k}={v}", text, count=1, flags=re.M)
+with open(path, "w") as f:
+    f.write(text)
+PYEOF
     chmod 600 "$ARION_ROOT/.env"
     ok ".env written with secrets"
 else
