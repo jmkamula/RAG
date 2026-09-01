@@ -1,11 +1,20 @@
+-- ArionComply — Postgres schema baseline (arioncomply_compliance)
+-- Generated: 2026-09-01T11:52:24Z from HEAD 851f84b5 by scripts/build_pg_baseline.sh
+-- Includes: all public-schema DDL (tables / views / functions /
+--          indexes / constraints / policies). Excludes: OWNER +
+--          GRANT (applied post-hoc by baseline_grants.sql) and
+--          the schema_migrations tracker (created by install.sh).
+--          Zero tenant data — this is DDL-only.
+-- Apply order: schema_baseline.sql → baseline_grants.sql → seed_curator_data.sql
+
 --
 -- PostgreSQL database dump
 --
 
-\restrict s7LYF92E0tErhCV9PpXZ9wjR9EeGQpupdhv5OAkXc3aMIF5XIhZ2JVLKbjLZ7Wa
+\restrict dLS1rfNz8nHgkKg13IHH4G8IRHl6tswi6xg3R2qy4mK0OsL1gtXDxvIXmWJLDW5
 
--- Dumped from database version 16.14 (Ubuntu 16.14-0ubuntu0.24.04.1)
--- Dumped by pg_dump version 16.14 (Ubuntu 16.14-0ubuntu0.24.04.1)
+-- Dumped from database version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
+-- Dumped by pg_dump version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -718,7 +727,7 @@ CREATE TABLE public.ai_call_log (
     retention_class text DEFAULT 'operational'::text NOT NULL,
     purge_after timestamp with time zone,
     CONSTRAINT ai_call_log_provider_check CHECK ((provider = ANY (ARRAY['openai'::text, 'anthropic'::text, 'other'::text]))),
-    CONSTRAINT ai_call_log_purpose_check CHECK ((purpose = ANY (ARRAY['chat'::text, 'classifier'::text, 'polish'::text, 'polish_short_circuit'::text, 'rank_answer'::text, 'compose'::text, 'correct'::text, 'verify'::text, 'extractor'::text, 'extractor_pass2'::text, 'enricher'::text, 'xfw_proposer'::text, 'cascade'::text, 'embedding_query'::text, 'embedding_index'::text, 'consensus_gatekeeper'::text, 'enrichment_tier2'::text, 'other'::text])))
+    CONSTRAINT ai_call_log_purpose_check CHECK ((purpose = ANY (ARRAY['chat'::text, 'classifier'::text, 'polish'::text, 'polish_short_circuit'::text, 'rank_answer'::text, 'compose'::text, 'correct'::text, 'verify'::text, 'extractor'::text, 'extractor_pass2'::text, 'enricher'::text, 'xfw_proposer'::text, 'cascade'::text, 'embedding_query'::text, 'embedding_index'::text, 'consensus_gatekeeper'::text, 'enrichment_tier2'::text, 'guidance_gen'::text, 'other'::text])))
 );
 
 
@@ -1181,6 +1190,49 @@ COMMENT ON VIEW public.chat_llm_decision_trail IS 'Ship 6''.e (2026-07-19): one 
 
 
 --
+-- Name: cite_attestation_prompt; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.cite_attestation_prompt (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    tenant_id uuid NOT NULL,
+    cite_id uuid NOT NULL,
+    candidate_document_id uuid NOT NULL,
+    must_id text NOT NULL,
+    leaf_id text NOT NULL,
+    control_ref text NOT NULL,
+    status text DEFAULT 'pending'::text NOT NULL,
+    resolved_at timestamp with time zone,
+    resolved_by uuid,
+    dismissed_reason text,
+    verification_log_id uuid,
+    expires_at timestamp with time zone DEFAULT (now() + '30 days'::interval) NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    confidence text DEFAULT 'must_overlap'::text NOT NULL,
+    CONSTRAINT cite_attestation_prompt_confidence_chk CHECK ((confidence = ANY (ARRAY['must_overlap'::text, 'url_and_must'::text]))),
+    CONSTRAINT cite_attestation_prompt_leaf_id_format CHECK ((leaf_id ~ '^req:[A-Za-z0-9.]+:[a-z0-9_]+$'::text)),
+    CONSTRAINT cite_attestation_prompt_must_id_format CHECK ((must_id ~ '^item:[A-Za-z0-9.]+:[a-z0-9_]+$'::text)),
+    CONSTRAINT cite_attestation_prompt_resolution_consistent CHECK ((((status = 'pending'::text) AND (resolved_at IS NULL)) OR ((status = 'confirmed'::text) AND (resolved_at IS NOT NULL) AND (verification_log_id IS NOT NULL)) OR ((status = 'dismissed'::text) AND (resolved_at IS NOT NULL) AND (dismissed_reason IS NOT NULL)) OR ((status = 'auto_expired'::text) AND (resolved_at IS NOT NULL)))),
+    CONSTRAINT cite_attestation_prompt_status_chk CHECK ((status = ANY (ARRAY['pending'::text, 'confirmed'::text, 'dismissed'::text, 'auto_expired'::text])))
+);
+
+
+--
+-- Name: TABLE cite_attestation_prompt; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.cite_attestation_prompt IS 'Ship 92''.b — tenant one-click cite attestation. Created on doc upload when a document has present findings on a MUST that has an active cite. Tenant confirms via dashboard; confirmation writes external_evidence_verification_log. Scale-invariant across URL shapes (SharePoint / Drive / OneDrive / Notion) because the signal is MUST overlap, not URL parsing.';
+
+
+--
+-- Name: COLUMN cite_attestation_prompt.confidence; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.cite_attestation_prompt.confidence IS 'Ship 92''.f — signal quality behind the prompt. ''must_overlap'' (default, Ship 92''.b): uploaded doc has present findings on the same MUST as the cite. ''url_and_must'' (Ship 92''.f): the doc''s filename ALSO matches the cite URL basename ILIKE (Ship 92''.a-style URL match) IN ADDITION to MUST overlap. UI can visually escalate url_and_must to "strong match — one-click confirm recommended".';
+
+
+--
 -- Name: client_documents; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1421,6 +1473,8 @@ CREATE TABLE public.posture_controls (
     engine_proposal_status text DEFAULT 'none'::text NOT NULL,
     engine_approved_by uuid,
     engine_approved_at timestamp with time zone,
+    applicability_status text DEFAULT 'applicable'::text NOT NULL,
+    CONSTRAINT posture_controls_applicability_status_check CHECK ((applicability_status = ANY (ARRAY['applicable'::text, 'na'::text]))),
     CONSTRAINT posture_controls_confidence_check CHECK ((confidence = ANY (ARRAY['high'::text, 'medium'::text, 'low'::text]))),
     CONSTRAINT posture_controls_confirmation_status_check CHECK ((confirmation_status = ANY (ARRAY['draft'::text, 'confirmed'::text, 'overridden'::text, 'document_confirmed'::text, 'engine_confirmed'::text]))),
     CONSTRAINT posture_controls_engine_proposal_status_check CHECK ((engine_proposal_status = ANY (ARRAY['none'::text, 'proposed'::text, 'approved'::text, 'rejected'::text]))),
@@ -1539,9 +1593,12 @@ CREATE TABLE public.document_findings (
     corroborating_signals text[] DEFAULT '{}'::text[] NOT NULL,
     grounding_method text,
     evidence_group_id text,
+    resolved_by_upload_id uuid,
+    resolved_at timestamp with time zone,
+    resolution_reason text,
     CONSTRAINT document_findings_confidence_check CHECK ((confidence = ANY (ARRAY['high'::text, 'medium'::text, 'low'::text]))),
-    CONSTRAINT document_findings_grounding_method_check CHECK (((grounding_method IS NULL) OR (grounding_method = ANY (ARRAY['extractor_verbatim'::text, 'workbook'::text, 'template'::text, 'fingerprint'::text, 'leaf_scan'::text, 'manual'::text, 'form'::text, 'unknown'::text])))),
-    CONSTRAINT document_findings_inference_source_check CHECK ((inference_source = ANY (ARRAY['extracted'::text, 'xfw_bridge'::text, 'regex_explicit'::text, 'llm_xfw'::text, 'workbook'::text, 'leaf_scan'::text, 'form'::text, 'templated'::text, 'fingerprint_match'::text]))),
+    CONSTRAINT document_findings_grounding_method_check CHECK (((grounding_method IS NULL) OR (grounding_method = ANY (ARRAY['extractor_verbatim'::text, 'workbook'::text, 'workbook_llm_arbiter'::text, 'template'::text, 'fingerprint'::text, 'leaf_scan'::text, 'manual'::text, 'form'::text, 'unknown'::text, 'structural'::text])))),
+    CONSTRAINT document_findings_inference_source_check CHECK ((inference_source = ANY (ARRAY['extracted'::text, 'xfw_bridge'::text, 'regex_explicit'::text, 'llm_xfw'::text, 'workbook'::text, 'workbook_llm_arbiter'::text, 'leaf_scan'::text, 'form'::text, 'templated'::text, 'fingerprint_match'::text, 'structural_pattern'::text]))),
     CONSTRAINT document_findings_review_inactive_check CHECK (((review_status <> ALL (ARRAY['rejected'::text, 'expired'::text])) OR (is_active = false))),
     CONSTRAINT document_findings_review_status_check CHECK ((review_status = ANY (ARRAY['pending'::text, 'approved'::text, 'rejected'::text, 'expired'::text]))),
     CONSTRAINT document_findings_status_check CHECK ((status = ANY (ARRAY['present'::text, 'missing'::text, 'partial'::text])))
@@ -1566,7 +1623,7 @@ COMMENT ON COLUMN public.document_findings.inferred_from_standard_id IS 'For xfw
 -- Name: COLUMN document_findings.inference_source; Type: COMMENT; Schema: public; Owner: -
 --
 
-COMMENT ON COLUMN public.document_findings.inference_source IS 'How this row was produced: extracted (direct from doc text), xfw_bridge (mirrored via Neo4j IMPLEMENTS edge), regex_explicit (v2: regex-matched ref), llm_xfw (v2: second LLM pass).';
+COMMENT ON COLUMN public.document_findings.inference_source IS 'How the finding was inferred. Ship 91'' added workbook_llm_arbiter — LLM row-arbiter running after workbook_persistence structural pass, reads catalog three-way discipline (required/optional/cite) as scaffolding, emits per-row per-MUST findings the structural pass missed. Verified via substring-match to source cell.';
 
 
 --
@@ -1580,7 +1637,7 @@ COMMENT ON COLUMN public.document_findings.corroborating_signals IS 'Wave 4a: wh
 -- Name: COLUMN document_findings.grounding_method; Type: COMMENT; Schema: public; Owner: -
 --
 
-COMMENT ON COLUMN public.document_findings.grounding_method IS 'Ship 6''.b: how this finding''s evidence was verified. Auditor-facing provenance for the anti-hallucination safeguards described in [[ship-6-prime-a-llm-role-audit-2026-07-18]].';
+COMMENT ON COLUMN public.document_findings.grounding_method IS 'Ship 6''.b — auditor-facing pathway label for how evidence was grounded. Ship 91''.b added workbook_llm_arbiter — LLM output substring-verified against source cell content at claimed (row, column) coordinates.';
 
 
 --
@@ -1588,6 +1645,27 @@ COMMENT ON COLUMN public.document_findings.grounding_method IS 'Ship 6''.b: how 
 --
 
 COMMENT ON COLUMN public.document_findings.evidence_group_id IS 'Ship 42 dedup key: sha1(document_id || control_ref || normalized_excerpt)[:16]. Rows sharing the same evidence_group_id are UI-collapsed to a single auditor-facing citation but preserved individually for engine per-MUST recognition. NULL for legacy rows (pre-Ship-42); backfill script populates.';
+
+
+--
+-- Name: COLUMN document_findings.resolved_by_upload_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.document_findings.resolved_by_upload_id IS 'Ship 93''.z.iii — nullable FK to the upload whose extraction produced a covering present finding on the same MUST. Set by the post-upload closure sweep in rag/posture/finding_closure.py. NULL means the finding hasn''t been resolved via upload (still active-partial, active-missing-tracked-elsewhere, or already closed for another reason like Stage-1 rejection).';
+
+
+--
+-- Name: COLUMN document_findings.resolved_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.document_findings.resolved_at IS 'Ship 93''.z.iii — when the closure linkage was stamped. Distinct from extracted_at (source finding creation) and deleted_at (soft-delete). Populated together with resolved_by_upload_id.';
+
+
+--
+-- Name: COLUMN document_findings.resolution_reason; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.document_findings.resolution_reason IS 'Ship 93''.z.iii — auditor-facing narrative for the closure. Example: "upload of ‘Info Security Policy.docx’ produced present finding on same MUST item:A.5.9:owner_per_asset".';
 
 
 --
@@ -1761,6 +1839,9 @@ CREATE TABLE public.external_evidence_source (
     created_by uuid,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_by uuid,
+    origin_finding_id uuid,
+    hyperlink_url text,
+    hyperlink_display text,
     CONSTRAINT external_evidence_source_cadence_positive CHECK (((cadence_days >= 1) AND (cadence_days <= 3650))),
     CONSTRAINT external_evidence_source_leaf_id_format CHECK ((leaf_id ~ '^req:[A-Za-z0-9.]+:[a-z0-9_]+$'::text)),
     CONSTRAINT external_evidence_source_must_id_format CHECK ((must_id ~ '^item:[A-Za-z0-9.]+:[a-z0-9_]+$'::text))
@@ -1779,6 +1860,27 @@ COMMENT ON TABLE public.external_evidence_source IS 'Per-MUST cite rows. Each bi
 --
 
 COMMENT ON COLUMN public.external_evidence_source.next_review_due IS 'last_verified_at + cadence_days. Application-maintained on each verification.';
+
+
+--
+-- Name: COLUMN external_evidence_source.origin_finding_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.external_evidence_source.origin_finding_id IS 'Ship 89''.b (2026-08-20) — nullable FK to the workbook document_finding that produced this cite via a `cite_columns:` YAML binding. When NULL, the cite was created outside the workbook path (tenant profile UI, manual admin action, etc.). Auditor lens: "which workbook row cited this?" answers via this attribution.';
+
+
+--
+-- Name: COLUMN external_evidence_source.hyperlink_url; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.external_evidence_source.hyperlink_url IS 'Ship 92''.a.i — the actual hyperlink URL captured from the matched workbook cite_columns cell. Used by Ship 92''.a.iii auto-verification resolver to compare against client_documents.filename on document upload. Nullable — pre-Ship-92 rows have no URL; new workbook_persistence emissions populate it. Multiple hyperlinks in the same cite column collapse to one cite via UNIQUE(tenant, must_id, system_id); this column stores the FIRST non-mailto URL discovered on the sheet.';
+
+
+--
+-- Name: COLUMN external_evidence_source.hyperlink_display; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.external_evidence_source.hyperlink_display IS 'Ship 92''.d — the cell display text captured alongside the hyperlink (openpyxl `Hyperlink.display` or the cell''s string value). Preferred for tenant-facing surfaces; the raw URL stays available in hyperlink_url for auditor drill-in. When multiple hyperlinks in the same cite column collapse to one cite row, this stores the FIRST non-empty display text.';
 
 
 --
@@ -2099,6 +2201,34 @@ CREATE TABLE public.intake_trace_log (
     yield_ratio_pct integer,
     pass2_leaves_targeted integer,
     pass2_findings integer,
+    contract_skip_empty_text integer,
+    contract_skip_pure_scaffolding integer,
+    contract_skip_mangled_item_id integer,
+    contract_skip_unresolvable_control_ref integer,
+    templated_zones_scaffolding integer,
+    templated_zones_mangled integer,
+    dup_of_upload_id text,
+    critic_priming_size integer,
+    critic_pool_size integer,
+    critic_confirmed_raw integer,
+    critic_extended_raw integer,
+    critic_rejected integer,
+    critic_flagged_missing integer,
+    critic_findings_kept integer,
+    dropped_content_shape integer,
+    dropped_semantic_fit integer,
+    fingerprint_findings integer,
+    fingerprint_covered_leaves integer,
+    leaves_dropped_by_classifier integer,
+    leaves_fingerprint_hit integer,
+    leaves_unfingerprinted_kept integer,
+    templated_findings integer,
+    templated_xlsx_findings integer,
+    templated_edit_zones_total integer,
+    templated_edit_zones_bound integer,
+    union_from_consensus integer,
+    union_from_critic integer,
+    union_deduped_count integer,
     CONSTRAINT intake_trace_log_extraction_path_check CHECK ((extraction_path = ANY (ARRAY['full'::text, 'sections'::text, 'manual'::text, 'structured'::text, NULL::text]))),
     CONSTRAINT intake_trace_log_stage_check CHECK ((stage = ANY (ARRAY['read'::text, 'enrich'::text, 'extract'::text, 'write'::text, 'xfw'::text, 'workbook_discovery'::text, 'complete'::text, 'failed'::text]))),
     CONSTRAINT intake_trace_log_stage_status_check CHECK ((stage_status = ANY (ARRAY['ok'::text, 'error'::text, 'skipped'::text, 'manual_review'::text]))),
@@ -2132,6 +2262,202 @@ COMMENT ON COLUMN public.intake_trace_log.yield_ratio_pct IS 'distinct_musts_bou
 --
 
 COMMENT ON COLUMN public.intake_trace_log.pass2_leaves_targeted IS 'Count of partially-bound leaves fed to _run_pass2. 0 means pass-1 fully bound (or zero-bound) every targeted leaf.';
+
+
+--
+-- Name: COLUMN intake_trace_log.contract_skip_empty_text; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.contract_skip_empty_text IS 'Ship 74''.a — count of ExtractedCandidate.bind() calls this extract stage rejected as EMPTY_TEXT. NULL for non-extract stages.';
+
+
+--
+-- Name: COLUMN intake_trace_log.contract_skip_pure_scaffolding; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.contract_skip_pure_scaffolding IS 'Ship 74''.a — bind() rejections as PURE_SCAFFOLDING (FindingContract.is_scaffolding predicate matched).';
+
+
+--
+-- Name: COLUMN intake_trace_log.contract_skip_mangled_item_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.contract_skip_mangled_item_id IS 'Ship 74''.a — bind() rejections as MANGLED_ITEM_ID (catalog_recognises returned False for the candidate.item_id). Task #606 defence against tenant-mangled markers.';
+
+
+--
+-- Name: COLUMN intake_trace_log.contract_skip_unresolvable_control_ref; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.contract_skip_unresolvable_control_ref IS 'Ship 74''.a — bind() rejections as UNRESOLVABLE_REF (item_control_ref failed to derive a control_ref).';
+
+
+--
+-- Name: COLUMN intake_trace_log.templated_zones_scaffolding; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.templated_zones_scaffolding IS 'Ship 74''.a — Task #606 pre-existing counter, now persisted. Union of PURE_SCAFFOLDING + EMPTY_TEXT contract rejections in templated edit-zone paths (backward-compat mapping preserved by Ship 72''.a extractor.py wiring).';
+
+
+--
+-- Name: COLUMN intake_trace_log.templated_zones_mangled; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.templated_zones_mangled IS 'Ship 74''.a — Task #606 pre-existing counter, now persisted. Number of edit-zone binding markers (`<<MUST item:X>>` /`<<SHOULD item:X>>`) that failed catalog_recognises on this doc — typically indicates tenant edited the marker directly or a mapping YAML typo.';
+
+
+--
+-- Name: COLUMN intake_trace_log.dup_of_upload_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.dup_of_upload_id IS 'Ship 74''.b — canonical upload_id whose content this upload duplicated. Populated only on duplicate-stage rows (markdown/checksum match).';
+
+
+--
+-- Name: COLUMN intake_trace_log.critic_priming_size; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.critic_priming_size IS 'Ship 74''.d — Ship 11''.d critic priming set size at the pass-1 boundary.';
+
+
+--
+-- Name: COLUMN intake_trace_log.critic_pool_size; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.critic_pool_size IS 'Ship 74''.d — Ship 11''.d critic candidate pool size after prefilter.';
+
+
+--
+-- Name: COLUMN intake_trace_log.critic_confirmed_raw; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.critic_confirmed_raw IS 'Ship 74''.d — critic-verifier ``confirmed`` bucket count (pre-filter).';
+
+
+--
+-- Name: COLUMN intake_trace_log.critic_extended_raw; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.critic_extended_raw IS 'Ship 74''.d — critic-verifier ``extended`` bucket count (pre-filter).';
+
+
+--
+-- Name: COLUMN intake_trace_log.critic_rejected; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.critic_rejected IS 'Ship 74''.d — critic-verifier explicit reject count.';
+
+
+--
+-- Name: COLUMN intake_trace_log.critic_flagged_missing; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.critic_flagged_missing IS 'Ship 74''.d — critic-verifier ``flagged_missing_control`` count.';
+
+
+--
+-- Name: COLUMN intake_trace_log.critic_findings_kept; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.critic_findings_kept IS 'Ship 74''.d — findings retained after critic-verifier applies gates.';
+
+
+--
+-- Name: COLUMN intake_trace_log.dropped_content_shape; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.dropped_content_shape IS 'Ship 74''.d — Ship 11''.c content-shape filter drop count (pruned by looks_like_field_or_header MUST-aware predicate).';
+
+
+--
+-- Name: COLUMN intake_trace_log.dropped_semantic_fit; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.dropped_semantic_fit IS 'Ship 74''.d — Ship 11''.d post-critic embedding-cosine semantic-fit gate drop count.';
+
+
+--
+-- Name: COLUMN intake_trace_log.fingerprint_findings; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.fingerprint_findings IS 'Ship 74''.d — deterministic fingerprint-path findings emitted on this doc (peer to `distinct_musts_bound`).';
+
+
+--
+-- Name: COLUMN intake_trace_log.fingerprint_covered_leaves; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.fingerprint_covered_leaves IS 'Ship 74''.d — distinct leaves the fingerprint path bound at least one MUST for.';
+
+
+--
+-- Name: COLUMN intake_trace_log.leaves_dropped_by_classifier; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.leaves_dropped_by_classifier IS 'Ship 74''.d — Ship 11''.c classifier gate: leaves the classifier ruled out before extraction even attempted them.';
+
+
+--
+-- Name: COLUMN intake_trace_log.leaves_fingerprint_hit; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.leaves_fingerprint_hit IS 'Ship 74''.d — leaves the fingerprint-path already covered (no LLM attempt needed).';
+
+
+--
+-- Name: COLUMN intake_trace_log.leaves_unfingerprinted_kept; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.leaves_unfingerprinted_kept IS 'Ship 74''.d — leaves that survived the classifier but had no fingerprint match — the LLM extraction attempts these.';
+
+
+--
+-- Name: COLUMN intake_trace_log.templated_findings; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.templated_findings IS 'Ship 74''.d — templated markdown fast-path findings on this doc.';
+
+
+--
+-- Name: COLUMN intake_trace_log.templated_xlsx_findings; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.templated_xlsx_findings IS 'Ship 74''.d — templated xlsx (Excel round-trip) fast-path findings.';
+
+
+--
+-- Name: COLUMN intake_trace_log.templated_edit_zones_total; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.templated_edit_zones_total IS 'Ship 74''.d — total ▽/△ edit zones detected across the doc.';
+
+
+--
+-- Name: COLUMN intake_trace_log.templated_edit_zones_bound; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.templated_edit_zones_bound IS 'Ship 74''.d — templated edit zones whose contents bound as findings.';
+
+
+--
+-- Name: COLUMN intake_trace_log.union_from_consensus; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.union_from_consensus IS 'Ship 78''.d — number of findings emitted by consensus path on this extract stage. NULL when consensus was disabled (USE_CONSENSUS_EXTRACTION=critic_only) or the union code path didn''t execute (e.g. templated fast-path).';
+
+
+--
+-- Name: COLUMN intake_trace_log.union_from_critic; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.union_from_critic IS 'Ship 78''.d — number of findings emitted by critic-verifier path on this extract stage. NULL when critic was disabled (USE_CONSENSUS_EXTRACTION=consensus_only) or union code path didn''t execute.';
+
+
+--
+-- Name: COLUMN intake_trace_log.union_deduped_count; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.intake_trace_log.union_deduped_count IS 'Ship 78''.d — findings dropped by (control_ref, checklist_item_id) dedup at union merge time. Formula: union_from_consensus + union_from_critic - final_findings_count. Non-zero means both paths hit the same MUST for at least one finding.';
 
 
 --
@@ -2426,6 +2752,87 @@ CREATE TABLE public.posture_history_2028 (
     retention_class text DEFAULT 'compliance'::text NOT NULL,
     purge_after timestamp with time zone
 );
+
+
+--
+-- Name: posture_must_bridge_coverage; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.posture_must_bridge_coverage (
+    id bigint NOT NULL,
+    tenant_id uuid NOT NULL,
+    target_must_id text NOT NULL,
+    target_control_ref text NOT NULL,
+    target_standard_id text NOT NULL,
+    target_role text NOT NULL,
+    source_must_id text NOT NULL,
+    source_control_ref text NOT NULL,
+    source_standard_id text NOT NULL,
+    source_role text NOT NULL,
+    edge_type text NOT NULL,
+    computed_at timestamp with time zone DEFAULT now() NOT NULL,
+    CONSTRAINT posture_must_bridge_coverage_edge_type_check CHECK ((edge_type = ANY (ARRAY['IMPLEMENTS'::text, 'SUPPORTS'::text, 'ENABLES'::text, 'GOVERNANCE'::text]))),
+    CONSTRAINT posture_must_bridge_coverage_source_role_check CHECK ((source_role = ANY (ARRAY['PROGRAM'::text, 'EXTENSION'::text, 'OBLIGATION'::text, 'OTHER'::text]))),
+    CONSTRAINT posture_must_bridge_coverage_target_role_check CHECK ((target_role = ANY (ARRAY['PROGRAM'::text, 'EXTENSION'::text, 'OBLIGATION'::text, 'OTHER'::text])))
+);
+
+
+--
+-- Name: posture_must_bridge_coverage_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.posture_must_bridge_coverage_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: posture_must_bridge_coverage_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.posture_must_bridge_coverage_id_seq OWNED BY public.posture_must_bridge_coverage.id;
+
+
+--
+-- Name: posture_must_verdicts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.posture_must_verdicts (
+    id bigint NOT NULL,
+    tenant_id uuid NOT NULL,
+    must_id text NOT NULL,
+    control_ref text NOT NULL,
+    standard_id text NOT NULL,
+    satisfied boolean NOT NULL,
+    stale boolean DEFAULT false NOT NULL,
+    partial boolean DEFAULT false NOT NULL,
+    reason text,
+    computed_at timestamp with time zone DEFAULT now() NOT NULL,
+    framework_role text,
+    CONSTRAINT posture_must_verdicts_framework_role_check CHECK (((framework_role IS NULL) OR (framework_role = ANY (ARRAY['PROGRAM'::text, 'EXTENSION'::text, 'OBLIGATION'::text, 'OTHER'::text]))))
+);
+
+
+--
+-- Name: posture_must_verdicts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.posture_must_verdicts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: posture_must_verdicts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.posture_must_verdicts_id_seq OWNED BY public.posture_must_verdicts.id;
 
 
 --
@@ -2841,7 +3248,7 @@ CREATE TABLE public.sweep_log (
     error_type text,
     error_detail text,
     CONSTRAINT sweep_log_status_check CHECK ((status = ANY (ARRAY['running'::text, 'completed'::text, 'failed'::text]))),
-    CONSTRAINT sweep_log_work_type_check CHECK ((work_type = ANY (ARRAY['fact_recompute'::text, 'overdue_followups'::text, 'freshness_expiry'::text, 'notification_delivery'::text, 'engine_kick'::text, 'cite_verification_overdue'::text, 'api_key_expiring'::text, 'notification_retention'::text, 'risk_register_notify'::text, 'other'::text])))
+    CONSTRAINT sweep_log_work_type_check CHECK ((work_type = ANY (ARRAY['fact_recompute'::text, 'overdue_followups'::text, 'freshness_expiry'::text, 'notification_delivery'::text, 'engine_kick'::text, 'cite_verification_overdue'::text, 'api_key_expiring'::text, 'notification_retention'::text, 'risk_register_notify'::text, 'posture_refresh'::text, 'cite_attestation_retention'::text, 'other'::text])))
 );
 
 
@@ -2850,6 +3257,13 @@ CREATE TABLE public.sweep_log (
 --
 
 COMMENT ON TABLE public.sweep_log IS 'Sweep scheduler audit trail — one row per (tick, work_type). Fed by rag.scheduler.tick. Not tenant-scoped: tick runs across all tenants in one call.';
+
+
+--
+-- Name: COLUMN sweep_log.work_type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.sweep_log.work_type IS 'Sweep tick work_type. Added in Ship 88''.a: workbook_link_resolver — walks workbook_hyperlink_followup rows with status=''pending'', resolves URL basename against client_documents.original_filename (strict basename+ext match), promotes to satisfied when target has present findings on same MUST or to linked_doc_missing when basename unmatched.';
 
 
 --
@@ -3177,7 +3591,7 @@ COMMENT ON TABLE public.tenant_notification IS 'Per-tenant in-app notifications.
 -- Name: COLUMN tenant_notification.kind; Type: COMMENT; Schema: public; Owner: -
 --
 
-COMMENT ON COLUMN public.tenant_notification.kind IS 'Notification category. Kinds added in Ship 3''.i (2026-07-17): posture_flip_to_comply (mirror of nc_surfaced — fires when live finding transitions into Comply from non-Comply); api_key_expiring (sweep-driven — buckets at 30d/7d/1d before api_keys.expires_at).';
+COMMENT ON COLUMN public.tenant_notification.kind IS 'Notification category. Kind added in Ship 88''.a (2026-08-20): workbook_link_unresolved — a workbook cell hyperlinks to an external document whose basename does not match any client_documents.original_filename. Producer: Ship 88''.c resolver sweep.';
 
 
 --
@@ -3292,6 +3706,36 @@ CREATE TABLE public.tenants (
     onboarding_status text DEFAULT 'registered'::text,
     CONSTRAINT tenants_onboarding_status_check CHECK ((onboarding_status = ANY (ARRAY['registered'::text, 'assessed'::text, 'active'::text]))),
     CONSTRAINT tenants_subscription_check CHECK ((subscription = ANY (ARRAY['free'::text, 'starter'::text, 'professional'::text, 'enterprise'::text])))
+);
+
+
+--
+-- Name: topic_leaves; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.topic_leaves (
+    topic_slug text NOT NULL,
+    leaf_id text NOT NULL,
+    role text NOT NULL,
+    workflow_order smallint DEFAULT 100 NOT NULL,
+    role_note text
+);
+
+
+--
+-- Name: topics; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.topics (
+    slug text NOT NULL,
+    title text NOT NULL,
+    description text NOT NULL,
+    primary_framework text NOT NULL,
+    auditor_expects text,
+    display_order smallint DEFAULT 100 NOT NULL,
+    source_file text NOT NULL,
+    last_loaded_at timestamp with time zone DEFAULT now() NOT NULL,
+    last_loaded_by text
 );
 
 
@@ -3916,6 +4360,20 @@ ALTER TABLE ONLY public.posture_assertions ALTER COLUMN id SET DEFAULT nextval('
 
 
 --
+-- Name: posture_must_bridge_coverage id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.posture_must_bridge_coverage ALTER COLUMN id SET DEFAULT nextval('public.posture_must_bridge_coverage_id_seq'::regclass);
+
+
+--
+-- Name: posture_must_verdicts id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.posture_must_verdicts ALTER COLUMN id SET DEFAULT nextval('public.posture_must_verdicts_id_seq'::regclass);
+
+
+--
 -- Name: roles id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -4055,6 +4513,14 @@ ALTER TABLE ONLY public.chat_casefile_log
 
 ALTER TABLE ONLY public.chat_consensus_log
     ADD CONSTRAINT chat_consensus_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cite_attestation_prompt cite_attestation_prompt_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cite_attestation_prompt
+    ADD CONSTRAINT cite_attestation_prompt_pkey PRIMARY KEY (id);
 
 
 --
@@ -4386,6 +4852,22 @@ ALTER TABLE ONLY public.posture_history_2028
 
 
 --
+-- Name: posture_must_bridge_coverage posture_must_bridge_coverage_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.posture_must_bridge_coverage
+    ADD CONSTRAINT posture_must_bridge_coverage_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: posture_must_verdicts posture_must_verdicts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.posture_must_verdicts
+    ADD CONSTRAINT posture_must_verdicts_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: posture_pending posture_pending_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4682,11 +5164,43 @@ ALTER TABLE ONLY public.tenants
 
 
 --
+-- Name: topic_leaves topic_leaves_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.topic_leaves
+    ADD CONSTRAINT topic_leaves_pkey PRIMARY KEY (topic_slug, leaf_id);
+
+
+--
+-- Name: topics topics_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.topics
+    ADD CONSTRAINT topics_pkey PRIMARY KEY (slug);
+
+
+--
 -- Name: triggered_implication triggered_implication_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.triggered_implication
     ADD CONSTRAINT triggered_implication_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: posture_must_bridge_coverage uq_pmv_bridge_coverage; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.posture_must_bridge_coverage
+    ADD CONSTRAINT uq_pmv_bridge_coverage UNIQUE (tenant_id, target_must_id, target_control_ref, source_must_id, edge_type);
+
+
+--
+-- Name: posture_must_verdicts uq_pmv_tenant_must; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.posture_must_verdicts
+    ADD CONSTRAINT uq_pmv_tenant_must UNIQUE (tenant_id, must_id, control_ref);
 
 
 --
@@ -4851,6 +5365,13 @@ CREATE INDEX audit_log_2028_user_id_created_at_idx ON public.audit_log_2028 USIN
 
 
 --
+-- Name: cite_attestation_prompt_unique_active; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX cite_attestation_prompt_unique_active ON public.cite_attestation_prompt USING btree (tenant_id, cite_id, candidate_document_id) WHERE (status = 'pending'::text);
+
+
+--
 -- Name: external_evidence_source_unique_active; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5009,6 +5530,27 @@ CREATE INDEX idx_ccl_tenant_time ON public.chat_consensus_log USING btree (tenan
 --
 
 CREATE INDEX idx_ccl_verdict ON public.chat_consensus_log USING btree (verdict, created_at DESC);
+
+
+--
+-- Name: idx_cite_attestation_prompt_expires; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_cite_attestation_prompt_expires ON public.cite_attestation_prompt USING btree (expires_at) WHERE (status = 'pending'::text);
+
+
+--
+-- Name: idx_cite_attestation_prompt_pending; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_cite_attestation_prompt_pending ON public.cite_attestation_prompt USING btree (tenant_id, created_at DESC) WHERE (status = 'pending'::text);
+
+
+--
+-- Name: idx_cite_attestation_prompt_pending_confidence; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_cite_attestation_prompt_pending_confidence ON public.cite_attestation_prompt USING btree (tenant_id, confidence, created_at DESC) WHERE (status = 'pending'::text);
 
 
 --
@@ -5208,6 +5750,13 @@ CREATE INDEX idx_document_findings_precision_lookup ON public.document_findings 
 
 
 --
+-- Name: idx_document_findings_resolved_by_upload; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_document_findings_resolved_by_upload ON public.document_findings USING btree (tenant_id, resolved_by_upload_id) WHERE (resolved_by_upload_id IS NOT NULL);
+
+
+--
 -- Name: idx_document_findings_review_approved; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5285,6 +5834,13 @@ CREATE INDEX idx_expected_followup_tenant_status_expires ON public.expected_foll
 
 
 --
+-- Name: idx_external_evidence_source_origin_finding; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_external_evidence_source_origin_finding ON public.external_evidence_source USING btree (origin_finding_id) WHERE (origin_finding_id IS NOT NULL);
+
+
+--
 -- Name: idx_external_evidence_source_review_due; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5303,6 +5859,13 @@ CREATE INDEX idx_external_evidence_source_tenant_leaf ON public.external_evidenc
 --
 
 CREATE INDEX idx_external_evidence_source_tenant_must ON public.external_evidence_source USING btree (tenant_id, must_id) WHERE (is_active = true);
+
+
+--
+-- Name: idx_external_evidence_source_url_active; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_external_evidence_source_url_active ON public.external_evidence_source USING btree (tenant_id, hyperlink_url) WHERE ((is_active = true) AND (hyperlink_url IS NOT NULL));
 
 
 --
@@ -5576,6 +6139,48 @@ CREATE INDEX idx_pending_control ON public.posture_pending USING btree (control_
 --
 
 CREATE INDEX idx_pending_tenant ON public.posture_pending USING btree (tenant_id, status);
+
+
+--
+-- Name: idx_pmv_bridge_role_cross; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_pmv_bridge_role_cross ON public.posture_must_bridge_coverage USING btree (tenant_id, source_role, target_role);
+
+
+--
+-- Name: idx_pmv_bridge_source; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_pmv_bridge_source ON public.posture_must_bridge_coverage USING btree (tenant_id, source_must_id);
+
+
+--
+-- Name: idx_pmv_bridge_target; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_pmv_bridge_target ON public.posture_must_bridge_coverage USING btree (tenant_id, target_must_id);
+
+
+--
+-- Name: idx_pmv_framework_role; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_pmv_framework_role ON public.posture_must_verdicts USING btree (tenant_id, framework_role) WHERE (framework_role IS NOT NULL);
+
+
+--
+-- Name: idx_pmv_tenant_control; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_pmv_tenant_control ON public.posture_must_verdicts USING btree (tenant_id, control_ref, standard_id);
+
+
+--
+-- Name: idx_pmv_tenant_satisfied; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_pmv_tenant_satisfied ON public.posture_must_verdicts USING btree (tenant_id) WHERE satisfied;
 
 
 --
@@ -5950,6 +6555,20 @@ CREATE INDEX idx_timeline_incident ON public.incident_timeline USING btree (inci
 
 
 --
+-- Name: idx_topic_leaves_leaf_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_topic_leaves_leaf_id ON public.topic_leaves USING btree (leaf_id);
+
+
+--
+-- Name: idx_topics_display_order; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_topics_display_order ON public.topics USING btree (display_order);
+
+
+--
 -- Name: idx_triggered_implication_pending_due; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -6052,6 +6671,13 @@ CREATE INDEX idx_workbook_intake_proposal_run ON public.workbook_intake_proposal
 --
 
 CREATE INDEX idx_workbook_intake_proposal_workbook ON public.workbook_intake_proposal USING btree (tenant_id, workbook_uri, created_at DESC);
+
+
+--
+-- Name: ix_posture_controls_applicability; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX ix_posture_controls_applicability ON public.posture_controls USING btree (tenant_id, applicability_status) WHERE (applicability_status = 'na'::text);
 
 
 --
@@ -6859,6 +7485,38 @@ ALTER TABLE ONLY public.chat_consensus_log
 
 
 --
+-- Name: cite_attestation_prompt cite_attestation_prompt_candidate_document_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cite_attestation_prompt
+    ADD CONSTRAINT cite_attestation_prompt_candidate_document_id_fkey FOREIGN KEY (candidate_document_id) REFERENCES public.client_documents(id) ON DELETE CASCADE;
+
+
+--
+-- Name: cite_attestation_prompt cite_attestation_prompt_cite_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cite_attestation_prompt
+    ADD CONSTRAINT cite_attestation_prompt_cite_id_fkey FOREIGN KEY (cite_id) REFERENCES public.external_evidence_source(id) ON DELETE CASCADE;
+
+
+--
+-- Name: cite_attestation_prompt cite_attestation_prompt_tenant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cite_attestation_prompt
+    ADD CONSTRAINT cite_attestation_prompt_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id);
+
+
+--
+-- Name: cite_attestation_prompt cite_attestation_prompt_verification_log_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cite_attestation_prompt
+    ADD CONSTRAINT cite_attestation_prompt_verification_log_id_fkey FOREIGN KEY (verification_log_id) REFERENCES public.external_evidence_verification_log(id) ON DELETE SET NULL;
+
+
+--
 -- Name: client_documents client_documents_deleted_by_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7027,6 +7685,14 @@ ALTER TABLE ONLY public.document_findings
 
 
 --
+-- Name: document_findings document_findings_resolved_by_upload_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.document_findings
+    ADD CONSTRAINT document_findings_resolved_by_upload_id_fkey FOREIGN KEY (resolved_by_upload_id) REFERENCES public.document_uploads(id) ON DELETE SET NULL;
+
+
+--
 -- Name: document_findings document_findings_workbook_proposal_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7096,6 +7762,14 @@ ALTER TABLE ONLY public.document_uploads
 
 ALTER TABLE ONLY public.expected_followup_event
     ADD CONSTRAINT expected_followup_event_source_verification_id_fkey FOREIGN KEY (source_verification_id) REFERENCES public.external_evidence_verification_log(id) ON DELETE CASCADE;
+
+
+--
+-- Name: external_evidence_source external_evidence_source_origin_finding_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.external_evidence_source
+    ADD CONSTRAINT external_evidence_source_origin_finding_id_fkey FOREIGN KEY (origin_finding_id) REFERENCES public.document_findings(id) ON DELETE SET NULL;
 
 
 --
@@ -7739,6 +8413,14 @@ ALTER TABLE ONLY public.tenant_standards
 
 
 --
+-- Name: topic_leaves topic_leaves_topic_slug_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.topic_leaves
+    ADD CONSTRAINT topic_leaves_topic_slug_fkey FOREIGN KEY (topic_slug) REFERENCES public.topics(slug) ON DELETE CASCADE;
+
+
+--
 -- Name: triggered_implication triggered_implication_source_verification_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7965,6 +8647,13 @@ CREATE POLICY app_chat_consensus_log_all ON public.chat_consensus_log TO arionco
 
 
 --
+-- Name: cite_attestation_prompt app_cite_attestation_prompt_all; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY app_cite_attestation_prompt_all ON public.cite_attestation_prompt TO arioncomply_app USING (true) WITH CHECK (true);
+
+
+--
 -- Name: notification_delivery_attempt app_delivery_attempt_all; Type: POLICY; Schema: public; Owner: -
 --
 
@@ -8082,6 +8771,19 @@ ALTER TABLE public.chat_consensus_log ENABLE ROW LEVEL SECURITY;
 --
 
 CREATE POLICY chat_consensus_log_tenant_isolation ON public.chat_consensus_log USING (((tenant_id)::text = current_setting('app.tenant_id'::text, true)));
+
+
+--
+-- Name: cite_attestation_prompt; Type: ROW SECURITY; Schema: public; Owner: -
+--
+
+ALTER TABLE public.cite_attestation_prompt ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: cite_attestation_prompt cite_attestation_prompt_tenant_iso; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY cite_attestation_prompt_tenant_iso ON public.cite_attestation_prompt TO arioncomply_app USING (((tenant_id)::text = current_setting('app.tenant_id'::text, true))) WITH CHECK (((tenant_id)::text = current_setting('app.tenant_id'::text, true)));
 
 
 --
@@ -8244,6 +8946,20 @@ ALTER TABLE public.isms_audits ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.notifications ENABLE ROW LEVEL SECURITY;
 
 --
+-- Name: posture_must_bridge_coverage pmv_bridge_tenant_isolation; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY pmv_bridge_tenant_isolation ON public.posture_must_bridge_coverage USING (((tenant_id)::text = current_setting('app.tenant_id'::text, true))) WITH CHECK (((tenant_id)::text = current_setting('app.tenant_id'::text, true)));
+
+
+--
+-- Name: posture_must_verdicts pmv_tenant_isolation; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY pmv_tenant_isolation ON public.posture_must_verdicts USING (((tenant_id)::text = current_setting('app.tenant_id'::text, true))) WITH CHECK (((tenant_id)::text = current_setting('app.tenant_id'::text, true)));
+
+
+--
 -- Name: posture_assertions; Type: ROW SECURITY; Schema: public; Owner: -
 --
 
@@ -8260,6 +8976,18 @@ ALTER TABLE public.posture_controls ENABLE ROW LEVEL SECURITY;
 --
 
 ALTER TABLE public.posture_history ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: posture_must_bridge_coverage; Type: ROW SECURITY; Schema: public; Owner: -
+--
+
+ALTER TABLE public.posture_must_bridge_coverage ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: posture_must_verdicts; Type: ROW SECURITY; Schema: public; Owner: -
+--
+
+ALTER TABLE public.posture_must_verdicts ENABLE ROW LEVEL SECURITY;
 
 --
 -- Name: posture_pending; Type: ROW SECURITY; Schema: public; Owner: -
@@ -8717,5 +9445,5 @@ ALTER TABLE public.workbook_intake_proposal ENABLE ROW LEVEL SECURITY;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict s7LYF92E0tErhCV9PpXZ9wjR9EeGQpupdhv5OAkXc3aMIF5XIhZ2JVLKbjLZ7Wa
+\unrestrict dLS1rfNz8nHgkKg13IHH4G8IRHl6tswi6xg3R2qy4mK0OsL1gtXDxvIXmWJLDW5
 

@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# scripts/git-hooks/pre-commit — regenerate golden images before commit.
+#
+# This hook watches the staged diff. When authoring sources change,
+# it regenerates the affected golden image(s) so the commit lands
+# with matching source + golden state.
+#
+# Per-store rebuild triggers are wired incrementally by Ship 102' sub-arcs:
+#   102'.a — Postgres  (build_pg_baseline.sh)      — NOT YET wired
+#   102'.b — Neo4j     (build_neo4j_baseline.sh)   — NOT YET wired
+#   102'.c — Chroma    (build_chroma_baseline.sh)  — NOT YET wired
+#   102'.d — this hook — trigger all three from staged diff
+#
+# For now: this hook is a no-op scaffold. Enable it per-clone with:
+#   git config core.hooksPath scripts/git-hooks
+#
+# Escape hatches (standard git conventions):
+#   git commit --no-verify        # bypass ALL hooks
+#   SKIP_GOLDEN_REBUILD=1 git commit   # bypass ONLY the golden rebuild
+#
+# Ship 102'.a (2026-09-01) — scaffold, no-op.
+
+set -euo pipefail
+
+if [[ "${SKIP_GOLDEN_REBUILD:-0}" -eq 1 ]]; then
+    exit 0
+fi
+
+# TODO(102'.d): wire per-source rebuild triggers.
+# For now this hook does nothing — commit proceeds unimpeded.
+
+exit 0

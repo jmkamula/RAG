@@ -1,11 +1,15 @@
+-- ArionComply — Postgres schema baseline (arioncomply_sessions)
+-- Generated: 2026-09-01T11:52:24Z from HEAD 851f84b5 by scripts/build_pg_baseline.sh
+-- LangGraph checkpointer schema. Zero session data.
+
 --
 -- PostgreSQL database dump
 --
 
-\restrict auyiGgZXoGbYENUa0c688l2fQ9OjBBKj4vcQ3eXJs5qqmvojob79KDUjvYqL3QX
+\restrict O4jiZadTUsBkRX8fqYE8o2G8AUZRcyfBSblMaFepBTnI3SDxAoRcuppocAvwtuF
 
--- Dumped from database version 16.14 (Ubuntu 16.14-0ubuntu0.24.04.1)
--- Dumped by pg_dump version 16.14 (Ubuntu 16.14-0ubuntu0.24.04.1)
+-- Dumped from database version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
+-- Dumped by pg_dump version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -17,6 +21,20 @@ SET check_function_bodies = false;
 SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
+
+--
+-- Name: pgcrypto; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
+
 
 --
 -- Name: fn_checkpoints_updated_at(); Type: FUNCTION; Schema: public; Owner: -
@@ -326,5 +344,5 @@ ALTER TABLE ONLY public.conversation_history
 -- PostgreSQL database dump complete
 --
 
-\unrestrict auyiGgZXoGbYENUa0c688l2fQ9OjBBKj4vcQ3eXJs5qqmvojob79KDUjvYqL3QX
+\unrestrict O4jiZadTUsBkRX8fqYE8o2G8AUZRcyfBSblMaFepBTnI3SDxAoRcuppocAvwtuF
 
