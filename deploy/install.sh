@@ -209,36 +209,45 @@ else
 fi
 
 # ── Post-baseline schema_v*.sql migrations ──
-# schema_baseline.sql is a point-in-time snapshot; migrations added
-# after that live in db/schema_v*.sql. Track applied-migration
-# state in a `schema_migrations` tracker so reruns skip already-
-# applied files (CREATE POLICY has no IF NOT EXISTS guard, so
-# unconditional replay is not safe).
+# schema_baseline.sql is a pg_dump snapshot of the fully-migrated
+# dev DB — it already contains the effects of every schema_v*.sql
+# file existing at the time the dump was taken. Track applied-
+# migration state in a `schema_migrations` tracker so reruns skip
+# already-applied files (CREATE POLICY has no IF NOT EXISTS guard,
+# so unconditional replay is not safe).
 #
-# Bootstrap logic: if the tracker table is missing but late-schema
-# markers exist (dev-host / customer boxes that ran migrations
-# without the tracker), mark everything as applied to avoid a
-# spurious first-run replay. Marker: document_findings.
-# resolved_by_upload_id (added by schema_v109_finding_closure_trail).
+# Bootstrap logic (Ship 102'.e): if the baseline was just applied
+# but the tracker is empty, mark every schema_v*.sql file as
+# already-applied. The baseline is understood to include their
+# effects (that's what "regenerate baseline" means — it captures
+# the current fully-migrated state).
+#
+# For customer boxes that got here via the OLD baseline (pre
+# Ship 102'.a) + the incremental migration loop, the tracker
+# either already has entries or the marker-based bootstrap in
+# Ship 101' already fired. Fresh installs from the new baseline
+# take this path.
 sudo -u postgres psql -d arioncomply_compliance -v ON_ERROR_STOP=1 -c \
     "CREATE TABLE IF NOT EXISTS schema_migrations (
         version TEXT PRIMARY KEY,
         applied_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );" > /dev/null
 
-# Auto-bootstrap on pre-existing installs.
+# Auto-bootstrap on pre-existing installs (baseline applied, no
+# tracker entries yet). Any staged schema_v*.sql files are
+# considered baked into the baseline.
 tracker_empty=$(sudo -u postgres psql -d arioncomply_compliance -tAc \
     "SELECT COUNT(*) FROM schema_migrations")
-late_marker=$(sudo -u postgres psql -d arioncomply_compliance -tAc \
-    "SELECT COUNT(*) FROM information_schema.columns
-      WHERE table_name='document_findings' AND column_name='resolved_by_upload_id'")
-if [[ "$tracker_empty" == "0" && "$late_marker" == "1" ]]; then
+baseline_applied=$(sudo -u postgres psql -d arioncomply_compliance -tAc \
+    "SELECT COUNT(*) FROM information_schema.tables
+      WHERE table_schema='public' AND table_name='posture_controls'")
+if [[ "$tracker_empty" == "0" && "$baseline_applied" == "1" ]]; then
     for f in "$ARION_ROOT"/db/schema_v*.sql; do
         v=$(basename "$f" .sql)
         sudo -u postgres psql -d arioncomply_compliance -c \
             "INSERT INTO schema_migrations (version) VALUES ('$v') ON CONFLICT DO NOTHING" >/dev/null
     done
-    ok "schema_migrations bootstrapped from existing late-schema state"
+    ok "schema_migrations bootstrapped from baseline snapshot ($(ls "$ARION_ROOT"/db/schema_v*.sql 2>/dev/null | wc -l) files marked applied)"
 fi
 
 # Apply un-applied migrations in numeric order. Fail loud on error.
@@ -328,6 +337,33 @@ fi
 step "7. Chroma dir + systemd units"
 mkdir -p "$ARION_ROOT/chroma_db" "$ARION_ROOT/uploads"
 
+# Ship 102'.e — extract prebuilt Chroma golden tar if present.
+# Skips the expensive reindex_all step for the 5 rebuildable
+# collections AND provides the 4 copyrighted collections that
+# can't be rebuilt at customer sites (private/ PDFs are gitignored).
+#
+# The tar is >100 MB so it's not tracked in git — customer receives
+# it out-of-band (secure file transfer) until Ship 103' ships the
+# image repo. If the tar is missing, fall through to reindex_all
+# which will build the 5 rebuildable collections + warn about
+# the 4 missing.
+CHROMA_TAR="$ARION_ROOT/db/baseline/chroma_prebuilt.tar.gz"
+if [[ -f "$CHROMA_TAR" ]]; then
+    if [[ -z "$(ls -A "$ARION_ROOT/chroma_db" 2>/dev/null)" ]]; then
+        log "  · extracting chroma_prebuilt.tar.gz ($(du -h "$CHROMA_TAR" | cut -f1)) into $ARION_ROOT/chroma_db"
+        tar -xzf "$CHROMA_TAR" -C "$ARION_ROOT/chroma_db"
+        ok "  · Chroma prebuilt extracted"
+    else
+        ok "  · Chroma prebuilt available but chroma_db is non-empty — leaving alone"
+    fi
+else
+    warn "  · Chroma prebuilt tar not found at $CHROMA_TAR"
+    warn "    Customer install requires this file for the 4 copyrighted"
+    warn "    collections (edpb_guidelines, iso27003/4/5). Copy it in place"
+    warn "    before running install.sh, OR run reindex_all.py post-install"
+    warn "    for the 5 rebuildable collections + accept the guidance gap."
+fi
+
 ARION_RUNTIME_USER="$(id -un)"
 if [[ ! -x "/home/$ARION_RUNTIME_USER/.local/bin/chroma" ]]; then
     fail "chroma binary not found at /home/$ARION_RUNTIME_USER/.local/bin/chroma — did step 5 pip install run as this user?"
@@ -375,51 +411,51 @@ sudo systemctl start arioncomply-sweep.timer
 ok "arioncomply-sweep.timer enabled (fires every 30 min)"
 
 # ── 8. Neo4j graph load ──────────────────────────────────────────────
-# Full graph load runs FOUR loaders in dependency order — the
-# evidence-layer loader MATCHes RequirementNodes that upstream
-# loaders create, so ordering matters:
+# Ship 102'.e — prefer the consolidated golden loader (single JSON
+# snapshot + single MERGE loader) when present. Falls back to the
+# original 5-loader chain if the JSON baseline is missing.
 #
-#   1. load_neo4j.py                     RequirementNodes (126 ISO + 303 GDPR)
-#                                        from iso/gdpr JSON phase files
-#   2. enrichment/relationships/         505 typed cross-framework edges
-#      load_to_neo4j.py                  (IMPLEMENTS/SUPPORTS/ENABLES/...)
-#   3. load_graph_relationships.py       PART_OF hierarchy + BLOCKS_WHEN
-#                                        + ESCALATES_TO etc
-#   4. enrichment/documents/             FulfilmentSpec + EvidenceRequirement
-#      load_to_neo4j.py                  + ChecklistItem; attaches leaves
-#                                        to RequirementNodes via SATISFIED_BY
+# The consolidated path is verified byte-identical to the 5-loader
+# output (Ship 102'.b: empty-DB load reproduces exact source state,
+# 8148 nodes / 14378 rels, zero property drift).
 #
-# All loaders read NEO4J_PASSWORD via os.getenv. Bash keeps the value
-# in $NEO4J_PW throughout install.sh; export at the boundary.
+# All loaders read NEO4J_PASSWORD via os.getenv. Bash keeps the
+# value in $NEO4J_PW; export at the boundary.
 step "8. Neo4j graph load (framework role model + all curated content)"
 cd "$ARION_ROOT"
 
-log "  · loading RequirementNodes (iso + gdpr JSON)"
-NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
-    python3 load_neo4j.py 2>&1 | tail -3
+NEO4J_JSON="$ARION_ROOT/db/baseline/neo4j_baseline.json"
+if [[ -f "$NEO4J_JSON" ]]; then
+    log "  · loading via consolidated golden ($(du -h "$NEO4J_JSON" | cut -f1) JSON snapshot)"
+    NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
+        python3 db/baseline/load_neo4j_baseline.py 2>&1 | tail -8
+    ok "graph loaded from golden"
+else
+    warn "  · $NEO4J_JSON missing — falling back to 5-loader chain"
+    warn "    (this path retires in Ship 103'; see db/AUTHORING.md)"
 
-# ISO 27701 has no source JSON (copyrighted standard). Seeder writes
-# RequirementNode shells directly from clause text in Python. Do this
-# before the relationship catalog runs — 505+ cross-framework edges
-# reference 27701 nodes as endpoints and will otherwise report
-# "endpoints missing" for ~161 27701-side edges.
-log "  · seeding ISO 27701 RequirementNodes"
-NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
-    python3 scripts/seed_27701_requirement_nodes.py 2>&1 | tail -3
+    log "  · loading RequirementNodes (iso + gdpr JSON)"
+    NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
+        python3 load_neo4j.py 2>&1 | tail -3
 
-log "  · loading cross-framework relationship catalog"
-NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
-    python3 enrichment/relationships/load_to_neo4j.py 2>&1 | tail -3
+    log "  · seeding ISO 27701 RequirementNodes"
+    NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
+        python3 scripts/seed_27701_requirement_nodes.py 2>&1 | tail -3
 
-log "  · loading PART_OF hierarchy + control edges"
-NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
-    python3 load_graph_relationships.py 2>&1 | tail -3
+    log "  · loading cross-framework relationship catalog"
+    NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
+        python3 enrichment/relationships/load_to_neo4j.py 2>&1 | tail -3
 
-log "  · loading evidence layer (FulfilmentSpec + EvidenceRequirement + ChecklistItem)"
-NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
-    python3 enrichment/documents/load_to_neo4j.py 2>&1 | tail -3
+    log "  · loading PART_OF hierarchy + control edges"
+    NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
+        python3 load_graph_relationships.py 2>&1 | tail -3
 
-ok "graph loaded (all five layers incl. 27701)"
+    log "  · loading evidence layer (FulfilmentSpec + EvidenceRequirement + ChecklistItem)"
+    NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
+        python3 enrichment/documents/load_to_neo4j.py 2>&1 | tail -3
+
+    ok "graph loaded via legacy 5-loader chain"
+fi
 
 # ── 9. Start the API ─────────────────────────────────────────────────
 step "9. ArionComply API"
@@ -450,8 +486,15 @@ ArionComply is running. Next steps:
        cd $ARION_ROOT
        PYTHONPATH=. python3 scripts/dev/create_tenant.py --name "Your Corp"
 
-  2. Rebuild Chroma indexes (first install, ~5-10 min):
-       PYTHONPATH=. python3 scripts/reindex_all.py
+  2. Chroma indexes (Ship 102'.e):
+     * If the golden tar was extracted in step 7, embeddings are
+       already in place — no action needed.
+     * Otherwise (missing db/baseline/chroma_prebuilt.tar.gz):
+         PYTHONPATH=. python3 scripts/reindex_all.py
+       Rebuilds 5 of 9 collections from Neo4j (~90s + ~\$2 OpenAI).
+       The 4 copyrighted-source collections (edpb_guidelines +
+       iso27003/4/5) will remain empty; chat over those standards
+       loses advisory grounding until the tar is provided.
 
   3. Verify health:
        curl -s http://127.0.0.1:8080/docs > /dev/null && echo OK
