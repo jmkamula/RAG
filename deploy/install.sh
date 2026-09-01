@@ -168,13 +168,31 @@ else
 fi
 
 # ── 3. Postgres bootstrap ────────────────────────────────────────────
+# Ship 104'.b addendum: verify BOTH role passwords work after the
+# preamble. Earlier customer install had the arioncomply owner role
+# with a stale password (root cause never fully pinned down —
+# possibly a psql-variable pass-through issue or a rerun with a
+# different ARION_OWNER_PW). The Quickstart flow needs the owner
+# connection to bypass RLS on tenants; a broken owner password fails
+# silently and looks like "bootstrap unavailable" from the UI.
 step "3. Postgres roles + databases + extensions"
 sudo systemctl enable --now postgresql
 sudo -u postgres psql \
     -v arion_owner_pass="$ARION_OWNER_PW" \
     -v arion_app_pass="$ARION_APP_PW" \
     -f "$ARION_ROOT/deploy/postgres_preamble.sql" 2>&1 | tail -5
-ok "roles + databases + extensions in place"
+
+# Verify both role logins work.
+if ! PGPASSWORD="$ARION_OWNER_PW" psql -h 127.0.0.1 -U arioncomply \
+        -d arioncomply_compliance -tAc "SELECT 1" >/dev/null 2>&1; then
+    fail "arioncomply (owner) role login failed with ARION_OWNER_PW — check psql -v pass-through in postgres_preamble.sql"
+fi
+if ! PGPASSWORD="$ARION_APP_PW" psql -h 127.0.0.1 -U arioncomply_app \
+        -d arioncomply_compliance -tAc "SELECT 1" >/dev/null 2>&1; then
+    fail "arioncomply_app (runtime) role login failed with ARION_APP_PW — check psql -v pass-through in postgres_preamble.sql"
+fi
+
+ok "roles + databases + extensions in place (both role logins verified)"
 
 # ── 4. Schema + seed ─────────────────────────────────────────────────
 # Detection uses a canonical LATE-created table (posture_controls,
