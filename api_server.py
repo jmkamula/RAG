@@ -518,6 +518,87 @@ async def health(request: Request):
 
 
 # =============================================================================
+# QUICKSTART — first-tenant provisioning via UI (Ship 104'.a)
+# =============================================================================
+# No auth. Bootstrap-only: works when zero active tenants exist, 409s
+# once any tenant is provisioned. Rest of the world routes through
+# `create_tenant.py` or the (future) real signup flow.
+#
+# See rag/onboarding/quickstart.py for the logic + design notes.
+
+class QuickstartRequest(BaseModel):
+    name:         str
+    admin_email:  str
+    admin_name:   str = "Admin"
+    sector:       Optional[str] = None
+    country:      str  = "GB"
+    cloud_only:   bool = False
+
+
+class QuickstartResponse(BaseModel):
+    tenant_id: str
+    api_key:   str
+    slug:      str
+
+
+class QuickstartStatusResponse(BaseModel):
+    bootstrap_available: bool
+
+
+@app.get("/api/v1/quickstart/status", response_model=QuickstartStatusResponse, tags=["onboarding"])
+async def quickstart_status():
+    """No auth. Returns whether the UI Quickstart form should be shown
+    (i.e. whether zero tenants exist and one can be created).
+    """
+    from rag.onboarding.quickstart import bootstrap_available
+    try:
+        return {"bootstrap_available": bootstrap_available()}
+    except Exception as e:
+        logger.error(f"quickstart_status failed: {e}")
+        # Fail-safe: default to False so the UI doesn't show the
+        # Quickstart form if we can't tell (better to prompt for an
+        # existing key than to double-provision).
+        return {"bootstrap_available": False}
+
+
+@app.post("/api/v1/quickstart", response_model=QuickstartResponse, tags=["onboarding"])
+async def quickstart_create(body: QuickstartRequest):
+    """No auth. Creates the first tenant + admin user + API key.
+
+    Returns 409 if a tenant already exists (bootstrap-only design —
+    additional tenants are provisioned via `scripts/dev/create_tenant.py`
+    on the backend, not through the UI).
+
+    The returned api_key is the RAW value — the server stores only its
+    SHA256 hash. Client must persist it (localStorage in the UI).
+    """
+    from rag.onboarding.quickstart import bootstrap_available, create_first_tenant
+
+    if not bootstrap_available():
+        raise HTTPException(
+            status_code = 409,
+            detail      = "Quickstart is bootstrap-only — a tenant already exists on this install",
+        )
+
+    try:
+        result = create_first_tenant(
+            name         = body.name,
+            admin_email  = body.admin_email,
+            admin_name   = body.admin_name,
+            sector       = body.sector,
+            country      = body.country,
+            cloud_only   = body.cloud_only,
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=409, detail=str(e))
+    except Exception as e:
+        logger.error(f"quickstart_create failed: {e}")
+        raise HTTPException(status_code=500, detail=f"Quickstart provisioning failed: {e}")
+
+    return result
+
+
+# =============================================================================
 # CHAT ROUTER
 # =============================================================================
 
