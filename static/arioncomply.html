@@ -486,10 +486,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="topbar-right">
     <input class="topbar-input" id="api-url" type="text"
            placeholder="Server address" title="ArionComply server address"
-           value="http://172.211.244.144:8080">
+           value="">
     <input class="topbar-input" id="api-key" type="password"
            placeholder="Access key" title="Your ArionComply access key"
-           value="arion_dev_key_2026" style="width:160px">
+           value="" style="width:160px">
     <button class="btn-sm btn-primary" onclick="connect()">Connect</button>
   </div>
 </div>
@@ -982,8 +982,11 @@ function connect() {
   API_URL = document.getElementById('api-url').value.trim();
   API_KEY = document.getElementById('api-key').value.trim();
   // Ship 104'.b — persist the key so a page reload restores it via
-  // bootQuickstartCheck() → case 1 (localStorage-hit).
-  if (API_KEY) localStorage.setItem('apiKey', API_KEY);
+  // bootQuickstartCheck() → case 1 (localStorage-hit). Origin-
+  // namespaced so keys don't leak across servers.
+  if (API_KEY && API_URL) {
+    localStorage.setItem('apiKey:' + API_URL, API_KEY);
+  }
   // Load whichever mode is active. Dashboard is the default landing
   // view; users can switch to Review queue / Chat / Documents from the
   // sidebar.
@@ -8175,10 +8178,31 @@ function toastError(fallback, err) {
 // Quickstart form.
 
 async function bootQuickstartCheck() {
-  // Case 1 — restore saved key
-  const stored = localStorage.getItem('apiKey');
-  if (stored) {
-    document.getElementById('api-key').value = stored;
+  // Default the server URL to the origin that served this page —
+  // avoids the "I loaded the UI from customer_box but connected to
+  // dev_host by accident" trap.
+  const urlEl = document.getElementById('api-url');
+  if (!urlEl.value) urlEl.value = window.location.origin;
+
+  // Ship 104'.b — clear stale keys that were saved for a DIFFERENT
+  // origin (i.e. the user had a session on the dev host earlier,
+  // and its key got persisted). We namespace the localStorage key
+  // by origin so each server has its own remembered key.
+  const originKey = 'apiKey:' + window.location.origin;
+  const legacyKey = localStorage.getItem('apiKey');
+  const storedKey = localStorage.getItem(originKey) || legacyKey;
+  // Migrate the legacy un-namespaced key: if we have one and we're
+  // on the same origin it was probably saved for, keep it. Otherwise
+  // drop it so we don't cross-contaminate origins.
+  if (legacyKey && !localStorage.getItem(originKey)) {
+    // We don't KNOW what origin the legacy key was for — safest is
+    // to clear it and force re-entry / Quickstart.
+    localStorage.removeItem('apiKey');
+  }
+
+  // Case 1 — restore saved key for THIS origin
+  if (storedKey && localStorage.getItem(originKey)) {
+    document.getElementById('api-key').value = storedKey;
     connect();
     return;
   }
@@ -8196,8 +8220,8 @@ async function bootQuickstartCheck() {
     console.warn('quickstart status check failed', e);
     // Fall through to case 3 — the tenant knows their key.
   }
-  // Case 3 — fall through to existing behavior
-  connect();
+  // Case 3 — fall through: user must enter their key + click Connect
+  // (topbar is empty; no auto-connect with an empty key)
 }
 
 function showQuickstartOverlay() {
@@ -8325,8 +8349,9 @@ function showQuickstartOverlay() {
       }
       const j = await r.json();
       // Persist the key + populate the topbar so subsequent app
-      // reloads use it via case 1 above.
-      localStorage.setItem('apiKey', j.api_key);
+      // reloads use it via case 1 above. Origin-namespaced.
+      const originKey = 'apiKey:' + window.location.origin;
+      localStorage.setItem(originKey, j.api_key);
       document.getElementById('api-key').value = j.api_key;
       overlay.remove();
 
