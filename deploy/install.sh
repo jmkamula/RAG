@@ -349,6 +349,19 @@ mkdir -p "$ARION_ROOT/chroma_db" "$ARION_ROOT/uploads"
 # the 4 missing.
 CHROMA_TAR="$ARION_ROOT/db/baseline/chroma_prebuilt.tar.gz"
 if [[ -f "$CHROMA_TAR" ]]; then
+    # Ship 103'.a — the tar is stored in Git LFS. If git-lfs isn't
+    # installed / initialized, `git pull` leaves a pointer file
+    # (~130 bytes) instead of the real 141 MiB tar. Detect this
+    # early and fail loud with recovery instructions.
+    tar_size=$(stat -c%s "$CHROMA_TAR")
+    if [[ "$tar_size" -lt 1000000 ]]; then
+        fail "$CHROMA_TAR is $tar_size bytes — this is a Git LFS pointer, not the real tar.
+Install LFS + re-pull:
+    sudo apt install git-lfs
+    git lfs install
+    git -C $ARION_ROOT lfs pull"
+    fi
+
     if [[ -z "$(ls -A "$ARION_ROOT/chroma_db" 2>/dev/null)" ]]; then
         log "  · extracting chroma_prebuilt.tar.gz ($(du -h "$CHROMA_TAR" | cut -f1)) into $ARION_ROOT/chroma_db"
         tar -xzf "$CHROMA_TAR" -C "$ARION_ROOT/chroma_db"
@@ -358,10 +371,13 @@ if [[ -f "$CHROMA_TAR" ]]; then
     fi
 else
     warn "  · Chroma prebuilt tar not found at $CHROMA_TAR"
-    warn "    Customer install requires this file for the 4 copyrighted"
-    warn "    collections (edpb_guidelines, iso27003/4/5). Copy it in place"
-    warn "    before running install.sh, OR run reindex_all.py post-install"
-    warn "    for the 5 rebuildable collections + accept the guidance gap."
+    warn "    This file is stored via Git LFS. Install git-lfs and re-pull:"
+    warn "        sudo apt install git-lfs"
+    warn "        git lfs install"
+    warn "        git -C $ARION_ROOT lfs pull"
+    warn "    Alternatively, run reindex_all.py post-install for the 5"
+    warn "    rebuildable collections + accept the guidance gap for the 4"
+    warn "    copyrighted collections (edpb_guidelines, iso27003/4/5)."
 fi
 
 ARION_RUNTIME_USER="$(id -un)"

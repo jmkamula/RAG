@@ -17,10 +17,10 @@ chroma_db/
 *.db
 *.sqlite
 
-# Ship 102' golden images kept locally until we ship an image-repo
-# (Ship 103'). GitHub's 100 MB per-file limit blocks the Chroma tar.
-db/baseline/chroma_prebuilt.tar.gz
-db/baseline/chroma_prebuilt.meta.json
+# Ship 103'.a moved these into Git LFS. Left as commented reference
+# so we remember why they were briefly gitignored.
+# db/baseline/chroma_prebuilt.tar.gz
+# db/baseline/chroma_prebuilt.meta.json
 
 # Results - keep CSVs but not large outputs
 results/eval_*.csv
